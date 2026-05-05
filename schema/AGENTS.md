@@ -95,7 +95,7 @@ Periodically (when requested), health-check the wiki:
 
 ## Index Maintenance
 
-- Update `wiki/index.md` on every ingest
+- Update `wiki/index.md` and `wiki/*/index.md` on every ingest
 - Organize by category: entities, concepts, sources, synthesis
 - Include: page link, one-line summary, metadata (date, source count)
 
