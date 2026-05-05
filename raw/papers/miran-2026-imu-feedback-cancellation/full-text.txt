@@ -1,0 +1,393 @@
+ICASSP 2026 - 2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) | 979-8-3315-6701-9/26/$31.00 ©2026 IEEE | DOI: 10.1109/ICASSP55912.2026.11462231
+
+
+
+
+                                                                                                                                                                                         ACOUSTIC FEEDBACK CANCELLATION IN HEARING AIDS EXPLOITING AN INERTIAL
+                                                                                                                                                                                                                      SENSOR
+
+                                                                                                                                                                                                                      Sina Miran1 *, Henning Schepker*, Ivo Merks2 , Martin McKinney
+
+                                                                                                                                                                                                                         Starkey Hearing Technologies, Eden Prairie, MN 55344, US,
+                                                                                                                                                                                                                                       henning schepker@starkey.de
+
+
+                                                                                                                                                                                                                       ABSTRACT                                           and subtract an estimate of the feedback component from the micro-
+                                                                                                                                                                                                                                                                          phone. Unfortunately, in practice the adaptive filter typically con-
+                                                                                                                                                                                         Acoustic feedback is a fundamental problem in hearing aids limiting              verges to a biased solution due to the closed-loop system of the
+                                                                                                                                                                                         the maximum applicable gain and causing artifacts such as whistling              hearing aid [3, 4]. Several approaches have been proposed to re-
+                                                                                                                                                                                         and howling. Adaptive feedback cancellation is one solution to in-               duce this bias, including prewhitening filters [4, 6, 10], probe-noise
+                                                                                                                                                                                         crease the maximum applicable gain and reduce artifacts, where dif-              [5, 11] or non-linear modification [2, 6]. The so-called prediction-
+                                                                                                                                                                                         ferent adaptive filtering solutions can be used, e.g., the NLMS algo-            error method (PEM) assumes that the desired signal can be mod-
+                                                                                                                                                                                         rithm. Real-time adjustment of the adaptation speed, i.e., the step              elled using an auto-regressive filter with white noise excitation [4].
+                                                                                                                                                                                         size, in these filters is crucial in obtaining both a small steady-state         The goal of the PEM is then to simultaneously estimate the auto-
+                                                                                                                                                                                         error and rapid convergence under significant feedback path changes.             regressive filter to perform prewhitening and the acoustic feedback
+                                                                                                                                                                                         Existing step-size adjustment methods only operate on the audio sig-             path to perform feedback cancellation.
+                                                                                                                                                                                         nals in the hearing aid, and hence, are heavily susceptible to biases
+                                                                                                                                                                                                                                                                               Assuming that conditions for an unbiased estimate of the acous-
+                                                                                                                                                                                         caused by characteristics of input audio. In this work, we propose to
+                                                                                                                                                                                                                                                                          tic feedback path are fulfilled, the choice of the step-size of the adap-
+                                                                                                                                                                                         modify the adaptation speed based on head movement acceleration
+                                                                                                                                                                                                                                                                          tive filtering algorithm provides a trade-off between quick conver-
+                                                                                                                                                                                         measured by an inertial measurement unit (IMU) in the hearing aid.
+                                                                                                                                                                                                                                                                          gence and a low steady-state error. In order to provide both quick
+                                                                                                                                                                                         Experimental results show that feedback path changes can be de-
+                                                                                                                                                                                                                                                                          convergence and a low steady-state error previously several variable
+                                                                                                                                                                                         tected reliably from inertial measurements, and our approach outper-
+                                                                                                                                                                                                                                                                          step-size algorithms [6, 12, 13, 14] as well as the adaptive combi-
+                                                                                                                                                                                         forms audio-based adjustment methods in particular under steady-
+                                                                                                                                                                                                                                                                          nation of two independent adaptive filters with different step-sizes
+                                                                                                                                                                                         state conditions. Thus, our study encourages a multi-modal approach
+                                                                                                                                                                                                                                                                          [7, 15, 16, 17] have been proposed for AFC. While these algorithms
+                                                                                                                                                                                         to feedback cancellation in hearing aids combining both inertial and
+                                                                                                                                                                                                                                                                          partly alleviate the choice of a fixed step-size, they may not be able
+                                                                                                                                                                                         audio signals.
+                                                                                                                                                                                                                                                                          to react effectively to strong changes of the acoustic feedback path as
+                                                                                                                                                                                              Index Terms— acoustic feedback cancellation, hearing aids, in-              they solely rely on the acoustic information, and hence, are limited
+                                                                                                                                                                                         ertial sensor, AFC, feedback                                                     by the inherent characteristics of the input audio signal.
+                                                                                                                                                                                                                                                                               In this paper we propose to utilize additional information pro-
+                                                                                                                                                                                                                 1. INTRODUCTION                                          vided by an inertial measurement unit (IMU) integrated in the hear-
+                                                                                                                                                                                                                                                                          ing aid to anticipate strong feedback path changes and modify the
+                                                                                                                                                                                         Acoustic feedback occurs in hearing aids due to the acoustic cou-                step-size of the adaptive filter accordingly. More specifically, we
+                                                                                                                                                                                         pling between the hearing aid microphone and the hearing aid re-                 investigate how a strong acceleration as measured by the IMU can
+                                                                                                                                                                                         ceiver. This acoustic coupling may limit both the maximum appli-                 be predictive of strong acoustic feedback path changes, e.g., when a
+                                                                                                                                                                                         cable gain in the hearing aid and the perceived sound quality. Com-              telephone is moved close to the hearing aid user’s ear or when the
+                                                                                                                                                                                         mon audible artifacts of acoustic feedback are so-called howling or              user performs a strong head shake movement. We propose to in-
+                                                                                                                                                                                         whistling artifacts, that are increasingly prevalent when the hearing            crease the step-size of the PEM-based NLMS algorithm when the
+                                                                                                                                                                                         aid is covered by an object. In order to reduce howling and chirping             IMU indicates a strong acceleration to facilitate quick adaptation to
+                                                                                                                                                                                         and increase the maximum applicable gain, robust acoustic feedback               the anticipated feedback path change, and to use a smaller step-size
+                                                                                                                                                                                         cancellation algorithms are required.                                            when the IMU indicates little acceleration to improve estimation ac-
+                                                                                                                                                                                              Different methods for acoustic feedback suppression have been               curacy of the adaptive filter when no feedback path change is antici-
+                                                                                                                                                                                         investigated in the past [1], including non-linear modification of the           pated. Experimental results using measured dynamic acoustic feed-
+                                                                                                                                                                                         loudspeaker signal [2], using adaptive feedback cancellation (AFC)               back paths and IMU signals from a behind-the-ear hearing aid show
+                                                                                                                                                                                         [3, 4, 5, 6, 7], and more recently using multi-microphone feedback               that feedback path changes can be detected reliably using the IMU
+                                                                                                                                                                                         reduction methods [8, 9]. While non-linear modifications of loud-                data and that the proposed IMU-based AFC algorithm is able to in-
+                                                                                                                                                                                         speaker signal may lead to undesired audible distortions, AFC the-               crease the performance of AFC for strong realistic acoustic feedback
+                                                                                                                                                                                         oretically allows for perfect cancellation of the acoustic feedback              path changes.
+                                                                                                                                                                                         without audible distortions [3]. In AFC an adaptive filter, e.g., the
+                                                                                                                                                                                         normalized least-mean squares (NLMS) algorithm, is used to esti-
+                                                                                                                                                                                         mate the acoustic impulse response between the hearing aid receiver                       2. ACOUSTIC SETUP AND FORMULATION
+                                                                                                                                                                                         and the hearing aid microphone. This estimate is used to compute
+                                                                                                                                                                                                                                                                          Consider a single-microphone single-receiver hearing aid including
+                                                                                                                                                                                            * denotes equal contribution. 1 Sina Miran is now with Apple Inc., 2 Ivo      an integrated IMU as depicted in Figure 1. For simplicity, we assume
+                                                                                                                                                                                         Merks is now with Chromatic.                                                     that all acoustic transfer functions are linear and time-invariant. The
+
+
+                                                                                                                                                                                         979-8-3315-6701-9/26/$31.00 ©2026 IEEE                                    15172                                                            ICASSP 2026
+
+                                                                                                                                                                                                      Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 15:38:56 UTC from IEEE Xplore. Restrictions apply.
+                   u[k]                                                              3. PROPOSED IMU-BASED STEP-SIZE CONTROL
+
+                                                                                The choice of the step-size in (4) provides a trade-off between fast
+          z−dP
+                                                                                adaptation to changes of the acoustic feedback path and accurate
+                             ĥ[k]             IMU                    h         modelling during steady-state. In general, strong acoustic feedback
+                                                                                path changes can be caused for two different reasons:
+           G
+                                                                                    1. User Head Movements altering the positioning of the hearing
+                                                                                       aid in ear, e.g., during a strong head shake or chewing move-
+                    e[k]                          y[k]           x[k]                  ment. Such head movements are directly captured by an IMU
+                                                                                       integrated in the hearing aid.
+       Fig. 1. Schematic of hearing aid with IMU and AFC.                           2. External Objects being moved towards or away from the
+                                                                                       user’s ear, e.g., talking to a telephone, putting on a hat, or
+                                                                                       combing hair. Such movements alter the feedback path by
+microphone signal y[k] at discrete time k is the sum of the incoming                   changing the characteristics of the acoustic environment sur-
+signal x[k] and the feedback component f [k], i.e.,                                    rounding the ear. While these movements are not necessarily
+                                                                                       directly observed in an IMU integrated in the hearing aid,
+                 y[k] = x[k] + f [k] = x[k] + h> uLh [k],                 (1)          they are often preceded by head movements that can be de-
+                                                                                       tected using the IMU, e.g., looking at the phone screen before
+                                                                                       taking a call or adjusting the head position for better fitting
+where h ∈ RLh denotes the impulse response of the acoustic feedback
+                                                                                       before putting on a hat.
+path and uLh [k] ∈ RLh includes the most recent Lh samples of the
+receiver signal u[k]. The so-called error signal e[k] is an estimate of              Following the discussion above, in this paper, we propose to ex-
+incoming signal x[k] and computed as                                            ploit an IMU in the hearing aid to detect movements that can be
+                                                                                correlated with acoustic feedback path changes, and subsequently
+                       e[k] = y[k] − ĥ[k]> uLĥ [k],                     (2)   increase the step-size in the adaptive filter to allow for a quick adap-
+                                                                                tation to these changes while using a smaller step-size when no sig-
+                                                                                nificant movement is detected to achieve better modeling accuracy
+where ĥ[k] ∈ RLĥ is an estimate of h at time k. This estimate is              in steady-state. In order to detect these movements, we propose Alg.
+typically obtained using an FIR adaptive filter, e.g., using the NLMS           1 as a simple method for real-time detection of strong acceleration
+algorithm (see below). The loudspeaker signal u[k] is computed by               periods in the IMU signal through bandpass filtering, asymmetric
+amplifying the error signal using the forward path gain G, i.e.,                one-pole smoothing, and thresholding based on steady-state (rest-
+                                                                                ing) values. It is worth noting that in our study, Alg. 1 performed
+                           u[k] = G × e[k − dP ].                         (3)   better or comparable to other explored approaches like monitoring
+                                                                                the variance of IMU signals or encoding models in auditory atten-
+where dP is the processing delay of the hearing aid. The NLMS                   tion decoding context [18].
+update rule to obtain an estimate of the acoustic feedback path is
+given as                                                                        Algorithm 1 Real-Time Step Size Adjustment in AFC Using an
+                                                                                IMU (IMU AFC)
+                                            µ
+               ĥ[k + 1] = ĥ[k] +                 uL [k]e[k],            (4)   Require: IMU Bandpass Filter, Smoothing coefficients κR and κF ,
+                                     Lĥ pu [k] + δ ĥ                              Threshold T0 , large and small step size values µL and µS for
+                                                                                    AFC
+where pu [k] = α pu [k − 1] + (1 − α)u2 [k] is an estimate of the in-           Input: IMU Signal in Real-Time s[k] = [sx [k], sy [k], sz [k]]>
+stantaneous filter input power and µ is the step-size controlling the           Output: AFC Step Size in Real-Time
+adaptation speed of the NLMS algorithm.                                          1: Compute sB [k] by bandpass filtering the IMU axes and set
+     Since the hearing aid is a closed-loop system, the NLMS algo-                  m[k] = |sB [k]|.
+rithm will typically converge to a biased solution [3, 4]. In order              2: Compute asymmetric smoothing of IMU magnitude mS [k] as:
+to reduce this bias, in this paper, we will use the prediction-error             3: if m[k] > mS [k − 1] then
+method [4] and apply a pre-whitening filter to the receiver signal u[k]          4:    mS [k] = mS [k − 1] + κR (m[k] − mS [k − 1])
+and the error signal e[k] before performing the update of the adaptive           5: else
+filter. The NLMS update rule using the pre-whitened receiver signal              6:    mS [k] = mS [k − 1] + κF (m[k] − mS [k − 1])
+uw [k] and the pre-whitened error signal ew [k] is given as                      7: end if
+                                                                                 8: if mS [k] > T0 then
+                                         µ                                       9:    Set µ = µL in (4) for quicker adaption.
+            ĥ[k + 1] = ĥ[k] +                   uw,Lĥ [k]ew [k],       (5)   10: else
+                                  Lĥ puw [k] + δ
+                                                                                11:    Set µ = µS in (4) for better modeling accuracy.
+                                                                                12: end if
+where puw [k] is an estimate of the instantaneous pre-whitened filter
+power defined similarly as pu [k]. Note that this pre-whitening fil-
+ter does not impact the audio signal played through the hearing aid                 The IMU signal in Alg. 1 is defined for the Cartesian coordinate
+receiver. The pre-whitening filter is updated every 10ms from the               system as the vector s[k] = [sx [k], sy [k], sz [k]]> ∈ R3 with sx [k], sy [k],
+most recent 10ms of the microphone signal using Levinson-Durbin                 and sz [k] be the response in each direction. Since motion related to
+recursion.                                                                      head movements is typically observed only in a limited frequency
+
+
+                                                                           15173
+
+            Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 15:38:56 UTC from IEEE Xplore. Restrictions apply.
+                                         Chewing (12.7%)                   Talking to Phone (7.6%)             Put on & Take off Hat (10.1%)            Shaking Head (11.7%)         Stand Up & Sit Down (6.4%)
+                           1
+True Positive Rate (TPR)
+
+
+
+
+                           0.8
+
+
+                           0.6
+
+
+                           0.4
+
+                                                                                   AUC (Overall) = 0.82
+                           0.2                                                     AUC (to Ear) = 0.86
+                                                      AUC = 0.82                   AUC (from Ear) = 0.76                          AUC = 0.85                         AUC = 0.81                        AUC = 0.87
+
+                           0
+                                 0     0.2      0.4   0.6   0.8    1   0     0.2     0.4   0.6    0.8      1   0     0.2   0.4     0.6   0.8   1   0     0.2   0.4   0.6   0.8     1 0     0.2   0.4   0.6   0.8      1
+                                     False Positive Rate (FPR)             False Positive Rate (FPR)               False Positive Rate (FPR)           False Positive Rate (FPR)         False Positive Rate (FPR)
+
+
+
+Fig. 2. ROC curves across all subjects and trials for detecting feedback path changes using Alg. 1. The percentages at the top display the
+average portion of feedback path change instances in a trial for each condition.
+
+
+range of the IMU signal, e.g., between [1, 15] Hz, we apply bandpass                                                             i.e., the ground truth, were marked by thresholding δ [k] above its
+filtering to each dimension of s[k] [19]. Subsequently, we compute                                                               steady-state (resting) level. We observe that the area under the curve
+the magnitude m(t) of the bandpass filtered IMU signal sb [k]. Since                                                             (AUC) for all conditions fall in the [0.8, 0.9] interval confirming that
+the magnitude exhibits large variability (cf. also top row in Figure                                                             natural path changes caused by external objects can also leave ef-
+3) which can impact the detection performance, we apply smoothing                                                                fective traces in IMU signal. The strength and timing of such a trace
+to the magnitude. However, excessive smoothing of the magnitude                                                                  depends on the activity and movement of the external objects. For
+increases can result in detection delays for strong path changes and                                                             instance, in the talking to phone condition in Fig. 2, the overall ROC
+hence increase the risk of chirping or howling artifacts. To remedy                                                              curve (blue) is divided into two ROC curves: one for the first half of
+this issue, we use asymmetric smoothing of the magnitude in lines                                                                trial including movement of phone towards the ear (red), and one for
+3 to 7 of Alg. 1. Finally, we apply a threshold T0 to the smoothed                                                               the second half of trial including movement of phone away from the
+magnitude to choose either a large or small step size in the NLMS                                                                ear (yellow). As shown, the former can be detected more effectively
+algorithm in (4). Note that for simplicity, we have assumed a similar                                                            than the latter as in natural phone conversations, head movement
+sampling rate for IMU and audio signals in Alg. 1 but it can be                                                                  might be delayed with respect to the movement of phone away from
+generalized through a simple zero-order hold if that is not the case.                                                            the ear. Choosing the operating point in Fig. 2, i.e., threshold T0 ,
+                                                                                                                                 should reflect the risk of missing a potential feedback path change.
+                                                                                                                                 To minimize the risks of artifacts like chirping and howling, a high
+                                              4. EXPERIMENTAL EVALUATION
+                                                                                                                                 sensitivity (TPR) and a lower specificity (1 − FPR) in Fig. 2 would
+                                                                                                                                 be prioritized over a more balanced performance. It should be noted
+In this section, we evaluate the proposed IMU-based step-size con-
+                                                                                                                                 that a lower specificity implies a higher risk for an increase in false
+trol of the PEM-NLMS algorithm. Dynamic acoustic feedback paths
+                                                                                                                                 positives, in particular for activities that do not result in any relevant
+and IMU signals were recorded using a behind-the-ear (BTE) hear-
+                                                                                                                                 path change.
+ing aid with open fittings for five different subjects and five exper-
+                                                                                                                                       Fig. 3 displays the performance of the proposed IMU-based
+imental activities each: 1) chewing, 2) moving phone close to and
+                                                                                                                                 step-size control (IMU AFC) under example trials for chewing and
+away from the ear, 3) putting on and taking off a hat, 4) shaking
+                                                                                                                                 talking to phone conditions. Row A shows IMU signal processing
+head, and 5) standing up and sitting down. The activities thus span
+                                                                                                                                 in Alg. 1 for T0 = 150 with shaded regions marking periods where
+the range of activities that are expected to yield strong path changes,
+                                                                                                                                 significant motion is detected, i.e., µ = µL for AFC in Eq. (4). We
+e.g., 1)-4), and none to very mild path changes, e.g., 5). Subjects
+                                                                                                                                 compare IMU AFC with four different time-domain baseline algo-
+were asked to perform each activity in their natural way for two tri-
+                                                                                                                                 rithms: PEM-NLMS with either µL (Fast Filter) or µS (Slow Filter)
+als of length T = 32 s. The impulse responses h[k] of the acous-
+                                                                                                                                 as a fixed step-size, a shadow-filter approach (Shadow) with step-
+tic feedback paths were measured at 20kHz and truncated to length
+                                                                                                                                 sizes of µL and µS similarly as proposed in [17], and a variable
+Lh = 90, and the IMU signals were sampled at 104 Hz. To simulate
+                                                                                                                                 step-size method (VSS) as proposed in [14]. We use the normalized
+the hearing aid processing in Fig. 1, we used a forward path gain
+                                                                                                                                 misalignment (MIS) as a performance metric defined as
+of G = 25 dB with a processing delay of dP = 4 ms. The adaptive
+filter length was set to Lĥ = 60, the large and small step-sizes were                                                                                                      kh[k] − ĥ[k]k22
+chosen as µL = 0.04 and µS = 0.004, and the pre-whitening filter                                                                                       MIS[k] = 10 log10                     ,                      (6)
+                                                                                                                                                                               kh[k]k22
+was of order 16. As input signal, we considered a classical music
+signal, which is generally considered a challenging signal for AFC                                                               Row B includes the comparisons to the first two baseline algorithms,
+in hearing aids. In Alg. 1, we used a 10th -order Butterworth filter                                                             where the red arrows mark large MIS increases for Slow Filter in-
+with passband of [1, 15] Hz and set κR = 1 (no smoothing for rising                                                              dicative of feedback path changes. These instances can be heard as
+levels) and κF = 0.0096 (smoothing time constant of 1 s for falling                                                              whistling artifacts in the Slow Filter output. As shown, IMU AFC
+levels) following the discussion in Section 3.                                                                                   mostly follows the performance of Fast Filter when path changes are
+     Fig. 2 displays the ROC curves across all subjects and trials                                                               occurring while following that of Slow Filter otherwise. Row C dis-
+for detecting feedback path changes from IMU signals using differ-                                                               plays the comparison to VSS and Shadow methods. As observed,
+ent threshold values T0 in Alg. 1. Define δ [k] = kh[k] − h[k − k0 ]k2                                                           these methods are mostly biased towards the larger step size and fail
+with k0 be a delay of 20 ms. Actual feedback path change instances,                                                              to achieve small MIS in steady-state conditions. The yellow arrow
+
+
+                                                                                                                       15174
+
+                                             Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 15:38:56 UTC from IEEE Xplore. Restrictions apply.
+                                            Chewing                                                                        Talking to Phone
+A)
+                                                                        IMU Mag.
+                                                                                             300
+IMU Proc.
+
+
+
+            400                                                         Smoothed Mag.
+                                                                        Threshold
+                                                                                             200
+            200
+                                                                                             100
+
+             0                                                                                0
+
+B) -5                                                                   Fast Filter
+                                                                        Slow Filter          -14
+                                                                        IMU FBC
+MIS (dB)
+
+
+
+
+            -10
+                                                                                             -18
+
+            -15
+                                                                                             -22
+            -20
+
+C) -5                                                                       IMU FBC          -14
+                                                                            Shadow
+MIS (dB)
+
+
+
+
+            -10                                                             VSS
+                                                                                             -18
+
+            -15
+                                                                                             -22
+            -20
+                  0       5          10         15          20         25               30         0         5        10         15        20        25        30
+
+                                               time (s)                                                                         time (s)
+
+
+Fig. 3. Performance of proposed method under example trials for chewing and talking to phone: (A) IMU processing in Alg. 1 (IMU AFC)
+with shaded regions showing instances where significant motion is detected, (B) MIS metric for IMU AFC and constant small and large step
+sizes, (C) MIS metric for IMU AFC compared to a variable step size (VSS) and shadow filter (Shadow) approach in the literature.
+
+
+in row C shows an example instance of moving the phone away from                                       for hearing-aids,” IEEE Transactions on Speech and Audio
+ear where the path change precedes head movement. This limitation                                      Processing, vol. 8, no. 4, pp. 443–453, 2000.
+results in a delay for IMU AFC to switch to the large step size and,
+                                                                                                [4] Ann Spriet, Ian Proudler, Marc Moonen, and Jan Wouters,
+hence, a larger MIS.
+                                                                                                    “Adaptive feedback cancellation in hearing aids with linear
+                                                                                                    prediction of the desired signal,” IEEE Transactions on sig-
+                                   5. CONCLUSION                                                    nal processing, vol. 53, no. 10, pp. 3749–3763, 2005.
+                                                                                                [5] Meng Guo, Søren Holdt Jensen, and Jesper Jensen, “Novel
+In this paper, we propose to adjust the AFC step size in hearing aids                               acoustic feedback cancellation approaches in hearing aid appli-
+in response to path changes based on head motion acceleration cap-                                  cations using probe noise and probe noise enhancement,” IEEE
+tured by an integrated IMU sensor. The proposed algorithm can de-                                   Transactions on Audio, Speech, and Language Processing, vol.
+tect natural feedback path changes reliably and outperforms audio-                                  20, no. 9, pp. 2549–2563, 2012.
+based step size adjustment methods due to reduced audio-induced
+biases, in particular under steady-state conditions. Nevertheless,                              [6] Falco Strasser and Henning Puder, “Adaptive feedback cancel-
+our results show that audio-based solutions are still required since                                lation for realistic hearing aid applications,” IEEE/ACM Trans-
+motion-based methods might experience adjustment delays under                                       actions on Audio, Speech, and Language Processing, vol. 23,
+path changes caused by external objects, and step-size adjustment                                   no. 12, pp. 2322–2333, 2015.
+may be required also during steady-state to counteract biased adap-                             [7] Sven Nordholm, Henning Schepker, Linh TT Tran, and Simon
+tations. Hence, a future investigations can consider a multi-modal                                  Doclo, “Stability-controlled hybrid adaptive feedback cancel-
+approach to AFC in hearing aids where audio and motion informa-                                     lation scheme for hearing aids,” The Journal of the Acoustical
+tion are combined for an optimal adjustment of the step size.                                       Society of America, vol. 143, no. 1, pp. 150–166, 2018.
+                                                                                                [8] C Renato C Nakagawa, Sven Nordholm, and Wei-Yong Yan,
+                                   6. REFERENCES                                                    “Analysis of two microphone method for feedback cancella-
+                                                                                                    tion,” IEEE Signal Processing Letters, vol. 22, no. 1, pp. 35–
+ [1] Toon Van Waterschoot and Marc Moonen, “Fifty years of                                          39, 2014.
+     acoustic feedback control: State of the art and future chal-
+                                                                                                [9] Henning Schepker, Sven Erik Nordholm, Linh Thi Thuc Tran,
+     lenges,” Proceedings of the IEEE, vol. 99, no. 2, pp. 288–327,
+                                                                                                    and Simon Doclo, “Null-steering beamformer-based feedback
+     2010.
+                                                                                                    cancellation for multi-microphone hearing aids with incom-
+ [2] Meng Guo, Søren Holdt Jensen, Jesper Jensen, and Steven L                                      ing signal preservation,” IEEE/ACM Transactions on Audio,
+     Grant, “On the use of a phase modulation method for decor-                                     Speech, and Language Processing, vol. 27, no. 4, pp. 679–691,
+     relation in acoustic feedback cancellation,” in 2012 Proceed-                                  2019.
+     ings of the 20th European Signal Processing Conference (EU-
+                                                                                             [10] Kim Ngo, Toon Van Waterschoot, Mads Græsbøll Christensen,
+     SIPCO). IEEE, 2012, pp. 2000–2004.
+                                                                                                  Marc Moonen, and Søren Holdt Jensen, “Improved prediction
+ [3] Marcio G Siqueira and Abeer Alwan, “Steady-state analysis of                                 error filters for adaptive feedback cancellation in hearing aids,”
+     continuous adaptation in acoustic feedback reduction systems                                 Signal Processing, vol. 93, no. 11, pp. 3062–3075, 2013.
+
+
+                                                                                        15175
+
+                      Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 15:38:56 UTC from IEEE Xplore. Restrictions apply.
+[11] C Renato C Nakagawa, Sven Nordholm, and Wei-Yong Yan,
+     “Feedback cancellation with probe shaping compensation,”
+     IEEE Signal Processing Letters, vol. 21, no. 3, pp. 365–369,
+     2014.
+[12] Jose M Gil-Cacho, Toon Van Waterschoot, Marc Moonen, and
+     Søren Holdt Jensen, “Wiener variable step size and gradi-
+     ent spectral variance smoothing for double-talk-robust acoustic
+     echo cancellation and acoustic feedback cancellation,” Signal
+     processing, vol. 104, pp. 1–14, 2014.
+[13] Marius Rotaru, Felix Albu, and Henri Coanda, “A variable
+     step size modified decorrelated nlms algorithm for adaptive
+     feedback cancellation in hearing aids,” in 2012 10th Inter-
+     national Symposium on Electronics and Telecommunications.
+     IEEE, 2012, pp. 263–266.
+[14] Linh TT Tran, Henning Schepker, Simon Doclo, Hai H Dam,
+     and Sven Nordholm, “Improved practical variable step-size
+     algorithm for adaptive feedback control in hearing aids,” in
+     2016 10th International Conference on Signal Processing and
+     Communication Systems (ICSPCS). IEEE, 2016, pp. 1–8.
+[15] Jeronimo Arenas-Garcia, Luis A Azpicueta-Ruiz, Magno TM
+     Silva, Vitor H Nascimento, and Ali H Sayed, “Combinations
+     of adaptive filters: performance and convergence properties,”
+     IEEE Signal Processing Magazine, vol. 33, no. 1, pp. 120–140,
+     2015.
+[16] Henning Schepker, Linh TT Tran, Sven Nordholm, and Simon
+     Doclo, “Improving adaptive feedback cancellation in hearing
+     aids using an affine combination of filters,” in 2016 IEEE In-
+     ternational Conference on Acoustics, speech and Signal Pro-
+     cessing (ICASSP). IEEE, 2016, pp. 231–235.
+[17] Ann Spriet, Geert Rombouts, Marc Moonen, and Jan Wouters,
+     “Adaptive feedback cancellation in hearing aids,” Journal of
+     the Franklin Institute, vol. 343, no. 6, pp. 545–573, 2006.
+[18] Sina Miran, Sahar Akram, Alireza Sheikhattar, Jonathan Z Si-
+     mon, Tao Zhang, and Behtash Babadi, “Real-time tracking of
+     selective auditory attention from m/eeg: A bayesian filtering
+     approach,” Frontiers in neuroscience, vol. 12, pp. 262, 2018.
+[19] Edgar Charry, Daniel TH Lai, Rezaul K Begg, and Marimuthu
+     Palaniswami, “A study on band-pass filtering for calculat-
+     ing foot displacements from accelerometer and gyroscope sen-
+     sors,” IMU, vol. 1, pp. 0, 2009.
+
+
+
+
+                                                                         15176
+
+            Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 15:38:56 UTC from IEEE Xplore. Restrictions apply.
+

@@ -1,0 +1,43 @@
+---
+type: entity
+created: 2026-04-10
+updated: 2026-05-05
+sources:
+tags:
+- acoustics
+- researcher
+---
+
+# Xiaojun Qiu
+
+## Overview
+
+Researcher in acoustics. Corresponding author for [[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] and [[../sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]]. Affiliated with:
+- **Key Laboratory of Modern Acoustics and Institute of Acoustics**, Nanjing University, Nanjing, China
+- **School of Electrical and Computer Engineering**, RMIT University, Melbourne, Australia
+
+## Research Areas
+
+- [[../concepts/active-noise-control|Active Noise Control]]
+- Modern acoustics
+- Sound and vibration control
+
+## Notable Work
+
+- [[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Co-author, corresponding author
+- [[../sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — Co-author
+
+## Contact
+
+- Email: xjqiu@nju.edu.cn
+- Tel: +86 25 83592919
+
+## Related Entities
+
+- [[../entities/limin-zhang|Limin Zhang]] — co-author on Zhang 2014
+- [[../entities/lifu-wu|Lifu Wu]] — co-author on Wu 2014
+
+## Related Sources
+
+- [[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]]
+- [[../sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]]

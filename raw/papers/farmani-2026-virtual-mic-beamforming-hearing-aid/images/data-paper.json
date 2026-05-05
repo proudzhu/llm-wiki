@@ -1,0 +1,81 @@
+[{
+  "renderDpi": 900,
+  "name": "3",
+  "page": 2,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 314.96,
+    "y1": 228.0,
+    "x2": 559.04,
+    "y2": 342.0
+  },
+  "caption": "Fig. 3: Effect of the relative distance of the VM to the reference microphone on MVDR beamforming performance.",
+  "imageText": [],
+  "renderURL": "D:\\Projects\\llm-wiki\\raw\\papers\\farmani-2026-virtual-mic-beamforming-hearing-aid\\images\\fig-paper-paper-Figure3-1.png",
+  "captionBoundary": {
+    "x1": 315.2130126953125,
+    "y1": 352.42034912109375,
+    "x2": 558.991455078125,
+    "y2": 368.66400146484375
+  }
+}, {
+  "renderDpi": 900,
+  "name": "2",
+  "page": 2,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 314.96,
+    "y1": 72.0,
+    "x2": 559.04,
+    "y2": 186.0
+  },
+  "caption": "Fig. 2: Effect of VM relative location on MVDR SNR improvement as a function of target azimuth.",
+  "imageText": [],
+  "renderURL": "D:\\Projects\\llm-wiki\\raw\\papers\\farmani-2026-virtual-mic-beamforming-hearing-aid\\images\\fig-paper-paper-Figure2-1.png",
+  "captionBoundary": {
+    "x1": 315.2130126953125,
+    "y1": 196.62835693359375,
+    "x2": 558.9915771484375,
+    "y2": 212.87200927734375
+  }
+}, {
+  "renderDpi": 900,
+  "name": "1",
+  "page": 1,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 94.96000000000001,
+    "y1": 70.96000000000001,
+    "x2": 257.04,
+    "y2": 169.04
+  },
+  "caption": "Fig. 1: Illustration of VM locations for different values of λ: Front (λ = −0.5), Middle (λ = 0.5), and Behind (λ = 1.5). Diamonds: physical microphones. Filled squares: VMs.",
+  "imageText": [],
+  "renderURL": "D:\\Projects\\llm-wiki\\raw\\papers\\farmani-2026-virtual-mic-beamforming-hearing-aid\\images\\fig-paper-paper-Figure1-1.png",
+  "captionBoundary": {
+    "x1": 54.42499923706055,
+    "y1": 179.5123291015625,
+    "x2": 298.20794677734375,
+    "y2": 206.16595458984375
+  }
+}, {
+  "renderDpi": 900,
+  "name": "4",
+  "page": 3,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 314.96,
+    "y1": 78.0,
+    "x2": 559.04,
+    "y2": 672.16
+  },
+  "caption": "Fig. 4: Comparison of MVDR beamformer performance across different configuration as a function of input SNR (Fig. 4a), noise type (Fig. 4b), and reverberation level (Fig. 4c).",
+  "imageText": ["(c)", "Function", "of", "reverberation", "level.", "(b)", "Function", "of", "noise", "type.", "(a)", "Function", "of", "input", "SNR."],
+  "renderURL": "D:\\Projects\\llm-wiki\\raw\\papers\\farmani-2026-virtual-mic-beamforming-hearing-aid\\images\\fig-paper-paper-Figure4-1.png",
+  "captionBoundary": {
+    "x1": 315.2130126953125,
+    "y1": 684.8673706054688,
+    "x2": 558.9915771484375,
+    "y2": 711.52197265625
+  }
+}]

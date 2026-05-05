@@ -1,0 +1,679 @@
+ICASSP 2026 - 2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) | 979-8-3315-6701-9/26/$31.00 ©2026 IEEE | DOI: 10.1109/ICASSP55912.2026.11464002
+
+NEURAL VARIABLE SPAN FILTERS FOR INTERPRETABLE
+MULTI-CHANNEL SPEECH ENHANCEMENT
+Tom Oviste1,2
+
+Pejman Mowlaee1
+
+Javier Badajoz-Davila1 Jesper Rindom Jensen2 Mads Græsbøll Christensen2
+1
+GN Group, Ballerup, Denmark
+2
+Audio Analysis Lab, Electronic Systems, Aalborg University, Aalborg, Denmark
+
+Abstract—Leveraging the predictive capabilities of neural networks to
+estimate intermediate parameters to derive a linear filter has proven to be
+an effective and robust approach to multi-channel speech enhancement.
+Here, we adopt the parameterized Variable Span Linear Filter (VSLF)
+framework, which provides a generalization of classical beamformer
+designs like the Multi-Channel Wiener Filter or Minimum Variance
+Distortionless Response. We propose an architecture that uses a deep
+neural network (DNN) to predict three intermediate quantities – both
+the clean-speech and overall-noise spatial covariance matrices, and an
+optimal speech-distortion tradeoff parameter – to compute the complex
+VSLF weights. Experiments show that our method improves speech intelligibility and quality over end-to-end baselines, while enabling explicit
+control of the tradeoff between speech distortion and noise reduction.
+Index Terms—multi-channel speech enhancement, spatial covariance
+matrix, optimal linear filter, supervised learning.
+
+I. I NTRODUCTION
+Multi-channel speech enhancement is an essential task for a
+wide variety of downstream applications, including distant speech
+recognition, hearing aids, teleconferences and own-voice enhancement. The task consists in extracting a clean speech signal from a
+noisy environment contaminated with background noise, interfering
+speakers and reverberation in the room. Typically, a user could be
+located in a call center or an open office, in an online meeting, have
+their voice captured by true-wireless earbuds, and wish to transmit
+only their speech, free of the surrounding noise.
+Existing methods of multi-channel speech enhancement can generally be grouped into three categories [1], [2]: i) linear filtering
+methods driven by probabilistic models, such as the Multi-Channel
+Wiener Filter (MWF) [3], the Minimum Variance Distortionless
+Response (MVDR) [4], [5] or the Generalized Eigenvalue (GEV)
+beamformer [6], with optional post-filtering [7]; ii) end-to-end datadriven approaches [8]–[11]; and iii) hybrid methods [12]–[14], in
+which a generally smaller neural network is leveraged to guide
+a multi-channel filter by estimating the second order statistics of
+speech and noise. Recently, hybrid methods have gained interest
+thanks to their explainability [14], [15], their ability to allow control
+over the intermediate parameters [16], and their robustness due to
+incorporating physical assumptions that regularize the components
+estimated by the DNN [1].
+A central objective in speech enhancement is managing the tradeoff
+between noise reduction and speech distortion. While this tradeoff can
+be explicitly formulated and controlled in traditional linear filtering,
+for instance with the speech-distortion weighted MWF [17]–[19], it
+is implicitly learned and generally uncontrollable in end-to-end datadriven approaches, resulting in undesirable, hard-to-quantify artifacts.
+Consequently, recent hybrid methods aim to mitigate these artifacts
+by using a DNN to guide a linear filter, thereby re-introducing explicit
+control. Such approaches include combining a DNN with a multiframe MWF [20], dynamically parameterizing the MWF to control
+the tradeoff [16], refining the filter output with a second DNN [21],
+or learning the multi-channel speech presence probability to guide
+the filtering process [13].
+
+979-8-3315-6701-9/26/$31.00 ©2026 IEEE
+
+Despite these advances, hybrid methods rarely employ filter formulations other than MWF or MVDR. We believe this limits the
+potential of the approach, and argue that it can be broadened to
+other linear filter designs, and that alternative analyses of the digital
+signal processing (DSP)-related quantities estimated by the DNN can
+be investigated. To this end, we adopt the Variable Span Linear
+Filter (VSLF) framework developed in [22], [23]. This framework
+derives optimal linear filters with a controllable tradeoff between
+speech distortion and noise reduction. Notably, it also generalizes
+the MWF, MVDR, and GEV beamformers, treating them as special
+cases, providing a parameterized filter that adapts to the objective
+of the system and the characteristics of the input signal. Because
+computing this filter requires spatial covariance matrices (SCMs) and
+an optimal speech-distortion tradeoff parameter whose true values are
+generally unknown, we employ a DNN to estimate these quantities
+through supervised training with clean-noisy speech signal pairs.
+The novelty of this work is twofold: 1) the integration, for the
+first time, of the VSLF framework into a DNN-guided architecture,
+dubbed Hybrid Variable Span Filter (HVSF); and 2) the study of
+the parameters estimated by the trained HVSF, showing how it offers
+interpretability of the rank of the clean-speech SCM and control over
+the filter’s performance in noise attenuation and speech preservation.
+II. VARIABLE S PAN L INEAR F ILTER (VSLF)
+A. Signal Model and Problem Definition
+We consider a multi-microphone scenario where a target speech
+source is corrupted by room reverberation, interfering speech and
+background noise. The noisy mixture is recorded by M microphones,
+where the m-th microphone captures the discrete-time signal ym [n],
+with n denoting the sample index. We represent the mixture in
+the time-frequency (TF) domain using the short-time Fourier transform (STFT), yielding a multi-channel complex spectrogram:
+
+T
+y[t, f ] = Y1 [t, f ] · · · YM [t, f ] .
+(1)
+Here, Ym [t, f ] represents the STFT coefficients of ym [n] at time
+frame t and frequency bin f . The mixture decomposes as:
+y[t, f ] = x[t, f ] + r[t, f ] + d[t, f ] + v[t, f ] ∈ CM ,
+
+(2)
+
+where x[t, f ], r[t, f ], d[t, f ] and v[t, f ] represent the target dry
+speech, the speech reverberation, the interfering speech and the
+ambient noise, respectively. To simplify the model, we define the
+overall-noise term n[t, f ] = r[t, f ] + d[t, f ] + v[t, f ], such that:
+y[t, f ] = x[t, f ] + n[t, f ].
+
+(3)
+
+Our goal is to recover the reference-channel clean-speech signal,
+chosen as the first channel, X1 [t, f ], in this paper. To achieve this,
+we seek to design a complex-valued filter vector h[t, f ] ∈ CM that
+estimates it via:
+X̂1 [t, f ] = h[t, f ]H y[t, f ].
+
+(4)
+
+In other words, the filter h[t, f ] performs joint denoising and dereverberation. Moreover, we aim to design h[t, f ] in such a way that
+
+20996
+
+ICASSP 2026
+
+Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 15:14:36 UTC from IEEE Xplore. Restrictions apply.
+
+it provides an explicit tradeoff between speech distortion and noise
+reduction. Lastly, the reference-channel clean-speech signal can be
+reconstructed in the time domain via inverse STFT.
+
+beamformer and, if P is the true rank of the clean-speech SCM, then
+(µ=0)
+hQ=P is equivalent to the MVDR beamformer.
+III. H YBRID VARIABLE S PAN F ILTER (HVSF)
+
+B. Variable Span Linear Filtering Framework
+In the remainder of this article, we discard the TF indexing for
+conciseness and clarity. To derive the expression of a filter h as
+desired, we rely on the above-mentioned VSLF framework. Firstly,
+we define the clean-speech and overall-noise SCMs, which are given
+using the mathematical expectancy E(·):
+
+
+
+
+Φx = E xxH , Φn = E nnH ∈ CM ×M .
+(5)
+If Φn is assumed to be full rank, then the SCMs can be jointly
+×M
+diagonalized [24] using the diagonal matrix Λ ∈ RM
+, whose
+≥0
+elements are the generalized eigenvalues of the matrix pair (Φx , Φn ),
+and the transition matrix B ∈ CM ×M , whose columns are the
+corresponding normalized generalized eigenvectors. In other words:
+BH Φx B = Λ,
+
+BH Φn B = IM .
+
+(6)
+
+By definition, the generalized eigenvectors form a basis of CM .
+Therefore, using k ∈ CM , the coordinates of the desired filter h
+in that basis, we have: h = Bk. Furthermore, we assume that the
+eigenvalues in Λ are ordered in decreasing order of magnitude. Thus,
+we define the integer Q ∈ {1, . . . , M } and partition the columns of
+the matrix Λ using programming-inspired slicing notation:
+
+
+M ×(M −Q)
+×Q
+Λ = Λ:Q ΛQ: , Λ:Q ∈ RM
+.
+(7)
+, ΛQ: ∈ R≥0
+≥0
+Here, Λ:Q and ΛQ: are diagonal matrices that contain the Q
+largest and the M − Q smallest generalized eigenvalues, respectively.
+Similarly, we also define the ordered and partitioned quantities B:Q ,
+BQ: , k:Q and kQ: . Thus, we can rewrite the desired filter weights as:
+h = B:Q k:Q + BQ: kQ: .
+
+(8)
+
+Using these notations, we now focus on the variable span linear filter
+defined by hQ = B:Q k:Q . By definition, this filter only relies on
+the first Q principal generalized eigenvectors to retrieve the target
+speech; implicitly, this assumes that the M − Q smallest generalized
+eigenvalues are null, i.e., that the rank of Φx is equal to Q.
+Thus, we define the error eQ as the difference between the estimate
+X̂1 = hH
+Q y and the target X1 . This error can be expressed as the
+(rn)
+sum of a distorted-speech term e(ds)
+Q and a residual-noise term eQ :
+(rn)
+eQ = X̂1 − X1 = e(ds)
+Q + eQ ,
+H
+H
+e(ds)
+Q = k:Q B:Q x − X1 ,
+
+H
+H
+e(rn)
+Q = k:Q B:Q n.
+
+k:Q
+
+2
+
+s.t.
+
+e(rn)
+Q
+
+2
+
+= β |N1 |2 .
+
+(11)
+
+Finally, the minimization of Eq. (11) yields the formula for k:Q , and
+thus for the optimal variable span linear filter weights:
+hQ = B:Q (Λ:Q + µIQ )−1 BH
+:Q Φx i1 .
+(µ)
+
+These elements are rearranged and constrained using various activation functions to construct three quantities: from zx we get a cleanspeech SCM estimate Φ̂x (see III-B); from zn we get an overallnoise SCM estimate Φ̂n (see III-C); and from zµ we get an optimal
+tradeoff estimate µ̂ (see III-E). Subsequently, we compute the full
+GEVD (Λ̂, B̂) and apply a threshold to the eigenvalues Λ̂, effectively
+providing a value for Q and adjusting the span of the filter at every TF
+bin, yielding the variable span GEVD (Λ̂:Q , B̂:Q ) – see III-D. Lastly,
+we compute the VSLF weights ĥQ as per Eq. (12) to ultimately obtain
+the reference-channel clean-speech estimate spectrogram X̂1 , which
+is transformed back to a time-domain signal via inverse STFT.
+A. Extracting Input Spectrogram Features
+We construct a stack of spectrogram features ỹ ∈ R6M , which is
+later fed to the DNN. The features are computed as follows:
+
+T
+ỹ = l(y) c(y) s(y) δl(y) δc(y) δs(y) ,
+(14)
+l(y) = log(|y|2 + ε), c(y) = cos(∠y), s(y) = sin(∠y),
+
+(15)
+
+δl(y)[t] = l(y)[t] − l(y)[t − 1].
+
+(16)
+
+Using log-spectral with cosine and sine features help to normalize the
+input to a more stable range [25] for the DNN. Moreover, time-delta
+features are an inexpensive way to extract valuable information about
+the rate of change of the spectral content and improve performance.
+
+(9)
+(10)
+
+As such, we define the objective of the filter design as the minimization of speech distortion while still achieving a certain degree
+of noise reduction. In other words, defining a noise-reduction level
+β ∈ [0, 1] and the overall-noise at the reference channel N1 ∈ C, we
+seek to solve the following optimization problem:
+argmin e(ds)
+Q
+
+The computation of optimal VSLF weights hQ hinges on determining several key quantities at every TF bin: the clean-speech
+SCM Φx , the span dimension Q, the variable span generalized
+eigenvalue decomposition (GEVD) matrices (Λ:Q , B:Q ), and the
+tradeoff parameter µ. To address this challenge, we introduce the
+Hybrid Variable Span Filter (HVSF) architecture, depicted in Fig. 1,
+which leverages a DNN to estimate the necessary quantities directly
+from the observed noisy spectrogram y. Firstly, we extract spectral
+features from the input (see III-A). Secondly, we use a DNN to predict
+a real-valued array z of latent values. Its elements are then split:
+
+
+2
+2
+z = zx zn zµ ∈ RM +M +1 .
+(13)
+
+B. Constructing the Clean-Speech SCM Estimate
+Here, we rely on a Cholesky decomposition: we rearrange zx
+to obtain a lower triangular matrix Lx ∈ CM ×M . More precisely,
+we follow a protocol similar to [26]: the first M entries of zx are
+constrained to be positive with a SoftPlus activation function to define
+the diagonal entries of Lx , and the remaining M (M − 1) entries are
+rearranged to define the real and imaginary parts of the strictly lowertriangular entries. Finally, we construct the SCM as Φ̂x = Lx LH
+x .
+This yields a full-rank Hermitian matrix – alternatively, we can also
+construct a rank-one Hermitian matrix using a smaller zx array,
+corresponding to a scenario with an idealized point source1 .
+
+(12)
+
+In this solution, i1 is the unit vector for the reference channel,
+parameter µ ∈ R≥0 is a Lagrange multiplier that controls the tradeoff
+between speech distortion and noise reduction, and parameter Q
+controls the span of the subspace used to derive the filter – hence the
+name of the method.
+Lastly, as detailed in [22], [23], it can be shown that Eq. (12)
+reduces to well-known optimal filters for specific choices of µ
+(µ=1)
+and Q. In particular, hQ=M is equivalent to the traditional MWF
+
+C. Computing the full GEVD
+Here, we rearrange zn similarly to III-B to obtain a lower triangular
+matrix Ln ∈ CM ×M . Now, the overall-noise SCM Φ̂n = Ln LH
+n
+itself is not constructed explicitly. Instead, we compute the interme−H
+diate matrix Ψ = L−1
+n Φ̂x Ln , whose standard eigendecomposition
+1 This alternative approach results in fewer parameters for the DNN and
+faster computations, but is out of the scope of this article.
+
+20997
+Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 15:14:36 UTC from IEEE Xplore. Restrictions apply.
+
+Fig. 1. Block diagram of the proposed Hybrid Variable Span Filter (HVSF) method, detailed in section III.
+
+yields the generalized eigenvalues and eigenvectors (Λ̂, B̂). Alternatively, we can also rearrange zn to construct the inverse Cholesky
+2
+matrix L−1
+n or directly the GEVD matrices .
+D. Estimating the Span Dimension
+Now, we define a threshold τ ∈ R>0 , fixed across all TF bins.
+We compute the span dimension Q as the number of generalized
+eigenvalues above the threshold:
+Q = {Λm,m | m ∈ {1, . . . , M }, Λm,m > τ } ,
+
+(17)
+
+with |·| the mathematical cardinality. This effectively assumes that
+the remaining eigenvalues are insignificant and provides an estimate
+of the rank of Φ̂x . Finally, we get the desired variable span GEVD
+matrices (Λ̂:Q , B̂:Q ) following Eq. (7).
+
+noise to the mixed-speech signals to obtain the final mixture. Signalto-noise (SNR) and signal-to-interference ratios (SIR) are sampled
+uniformly in [0, 30] dB and [−5, 15] dB, respectively. For the groundtruth, we generate multi-channel clean-speech signals using the image
+method without reverberation, interfering speaker nor ambient noise.
+We assign 80%, 10% and 10% of the speakers from VCTK [28] and
+LibriSpeech [29], as well as channel numbers 1–14, 15 and 16 of
+DEMAND [31] recordings, to training, validation and testing subsets,
+respectively. The distribution of SNR, SIR, and all other attributes
+is the same across the three subsets. The input speech signals are
+delayed at random to vary the beginning time of utterances. Sample
+rate is 16 kHz and all output signals are sliced down to a duration of
+4 seconds. We generate 60k signal pairs for training, 6k for validation
+and 6k for testing, corresponding to 80 hours of audio data.
+
+E. Estimating the Speech-Distortion Tradeoff Parameter
+The DNN output zµ is constrained via exponentiation to provide
+a positive tradeoff parameter: µ̂ = 10zµ ∈ R>0 . This formulation
+allows µ̂ to span a wide dynamic range, including very small values
+effectively near zero. Indeed, experiments with oracle VSLFs revealed
+that the generalized eigenvalues can exhibit a large dynamic range.
+As their value is modulated by addition with µ̂ (see Eq. (12)) to
+control the noise reduction, µ̂ must be similarly flexible.
+IV. E XPERIMENTS
+A. Dataset
+We create synthetic pairs of multi-channel clean and noisy speech
+signals, relying on the pyroomacoustics [27] library. We design
+acoustic scenes as follows: a room of length 4–10 meters, of width
+4–10 meters, of height 3–5 meters, of reverberation time 0–1 second,
+is simulated. We place a target speech source randomly in the room,
+at least 1 meter away from the walls, at height 1–2 meters, to emit
+a signal taken from the CSTR VCTK corpus [28]. We also place an
+interfering speech source randomly in the room, at least 1 meter away
+from the walls, at height 1–2 meters, at least 1 meter away from the
+target speech source, to emit a signal taken from the LibriSpeech
+corpus [29]. We position an array of M = 4 microphones a
+few centimeters above and behind the target speech source, and
+rotate it at random. This simulates true-wireless earbuds applications,
+where the target speaker is wearing the device. We generate multichannel mixed-speech signals using the image method [30] from
+pyroomacoustics, with order and absorption coefficient defined
+by the inverse Sabine equation. Additionally, we construct multichannel ambient noise signals by sampling random clips from singlechannel noise recordings of the DEMAND corpus [31], treating these
+clips as M = 4 uncorrelated channels, thereby generating a diverse
+set of multi-channel realizations. We force spatial coherence among
+channels using the generator defined in [32], and add the ambient
+2 These alternative approaches showed no significant improvement in performance and tend to reduce the interpretability of the system.
+
+B. Experimental Setup
+1) Training Framework: For fairness, we rely on the same framework, implemented in PyTorch [33], to train all models. For the
+STFT, we use a Hamming window of size 512 and hop size 256. For
+the loss function, we combine errors between time-domain waveforms
+and TF-domain magnitude spectrograms, as seen similarly in [34]:
+L = α ∥x̂1 − x1 ∥1 +
+
+X̂1 − X1
+
+.
+
+(18)
+
+1
+
+Parameter α is set to 4 to approximately even out the contribution of
+the two terms, based on loss magnitude at the beginning of training.
+Training runs last for 100 epochs, using the Adam optimizer [35]
+with AMSGrad [36], a batch size of 12 and an initial learning rate
+of 0.0001, halving it when the validation loss does not decrease for
+4 epochs, and clipping gradient norms at 0.13 . For the eigenvalue
+threshold, in practice, we found τ = 1.0 to provide better results;
+a higher value tends to prevent the model from converging, as the
+initialization of weights thus causes all eigenvalues to remain below
+the threshold and nullifies the output in the first epoch. Finally,
+the model that displays the best validation loss across all epochs
+is selected. Hardware used is a 24GB VRAM Asus GeForce RTX
+4090 GPU.
+2) DNN Architectures: We implement two end-to-end speechenhancement DNNs from the literature, namely FT-JNF [34] and
+DeFTAN-II [10]. First, we train the models individually: here, FT-JNF
+learns to estimate a single-channel complex mask and DeFTAN-II
+learns to estimate a spectral mapping to single-channel clean speech.
+Secondly, we train the models after integration into the larger HVSF
+architecture: there, they learn to estimate the intermediate HVSF
+quantities to ultimately enhance the input speech. To integrate them
+as such, we only need to adjust the hyperparameters that regulate
+2
+the shape of the output tensor, from R2 initially to R2M +1 – see
+Eq. (13) – as is detailed in the following.
+3 We apply such stabilization measures because torch.linalg.eigh,
+used to compute GEVDs, can introduce gradient instability during training.
+
+20998
+Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 15:14:36 UTC from IEEE Xplore. Restrictions apply.
+
+Fig. 2. Proof of concept showing the output of HVSF on a test audio sample. The clean speech corresponds to a female speaker saying “He could face a jail
+sentence”. The noisy mixture contains living-room ambient noise with SNR = 8 dB and an interfering male speaker with SIR = 5 dB.
+Method
+ESTOI
+Noisy
+62.6
+FT-JNF (E2E)
+84.9
+FT-JNF (HVSF)
+85.8
+DeFTAN-II (E2E)
+84.3
+DeFTAN-II (HVSF)
+86.2
+
+SIG
+3.58
+3.36
+3.49
+3.55
+3.59
+
+BAK #MAC/s #Params RTF
+1.89
+4.15
+3.2 G
+198 k
+0.06
+4.21
+3.3 G
+200 k
+0.08
+4.23
+2.9 G
+184 k
+0.27
+4.25
+3.7 G
+200 k
+0.30
+
+TABLE I: Evaluation of the performance of models trained individually (E2E) and trained within the proposed HVSF architecture.
+
+FT-JNF [34]: We re-implemented this architecture with a few
+refinements: we stack alternating F-LSTM and T-LSTM cells that
+respectively process the frequency and the time dimension as a
+sequence, to create successive FT-LSTM blocks. Moreover, layer
+normalization is added after every cell, and a dropout layer is added
+after all but the very last cell. In this study, we stack two FT-LSTM
+blocks, using bidirectional LSTMs with a hidden size of 48, and
+fixing the dropout value at 0.125. The shape of the output tensor is
+controlled by adjusting the last linear layer.
+DeFTAN-II [10]: For this architecture, we rely on the original
+implementation from GitHub4 . To fit with our hardware constraints,
+we reduce the initial value of several hyperparameters: the number of
+output channels of Up-Conv layers C from 256 to 64, the number of
+input channels of DeFTAN2 blocks D from 64 to 32, the kernel size
+of Conv-Transpose layers I from 4 to 2, the number of successive
+DeFTAN2 blocks Nb from 6 to 2, and the number of heads in selfattention of CEA blocks h from 4 to 2. Other hyperparameters are
+left unchanged. Finally, the shape of the output tensor is controlled
+by adjusting the Down-Conv and Split Dense Blocks in the decoder.
+3) Evaluation Criteria: We measure the speech-enhancement performance of the different methods using three objective metrics: the
+Extended Short-Time Objective Intelligibility (ESTOI) [37], and the
+speech quality (SIG) and background noise quality (BAK) variants of
+the Deep Noise Suppression Mean Opinion Score (DNSMOS) [38].
+For the computational complexity of models, we report the number of
+parameters, the number of multiply-accumulate operations per second
+(MAC/s), and the real-time factor (RTF) as defined as the 5th DNS
+Challenge [39], computed on our GPU. Furthermore, we measure
+speech distortion (SD) and noise reduction (NR) by normalizing the
+errors defined in Eq. (10), reported in dB, as seen similarly in [23]:
+2
+2
+
+SD = e(ds)
+|X1 |2 , NR = |N1 |2 e(rn)
+.
+(19)
+Q
+Q
+V. R ESULTS AND D ISCUSSIONS
+The first experiment is a proof of concept where we visualize
+intermediate quantities of the system to get insight into how the
+HVSF operates. Looking at Fig. 2.d., we see that the method tends
+to assign a larger span dimension Q – corresponding to the number
+
+Fig. 3. Impact of scaling the tradeoff parameter µ̂ on the speech-distortion
+and noise-reduction performance of the trained FT-JNF (HVSF) model.
+
+of generalized eigenvalues above the fixed threshold τ = 1.0 – to
+TF bins where speech is present. Additionally, looking at Fig. 2.e.,
+we see that the method tends to assign a larger tradeoff parameter µ̂
+– corresponding to more noise reduction at the cost of more speech
+distortion – to TF bins where speech is absent.
+We also report the performance obtained by the models trained
+both individually and within the HVSF framework, averaged over
+our test set, in Table I. Results show that the integration into the
+HVSF framework improves performance across all metrics for the
+two studied architectures, demonstrating the benefit of our hybrid
+method for speech enhancement. We also measure the computational
+cost of the framework, due to the addition of DSP blocks and the
+modification of the original DNN architecture. Notably, for FT-JNF,
+only the output size of one final linear layer needs to be increased,
+keeping the added complexity to a minimum.
+Our last experiment demonstrates that the proposed method allows
+to manually control the tradeoff between speech distortion and noise
+reduction. Here, various multipliers are applied to the DNN-estimated
+parameter µ̂ before computing the filter weights. Results are displayed
+in Fig. 3. It shows that as we scale the tradeoff parameter up, the
+method’s noise-reduction performance increases, at the cost of more
+distorted speech. Audio examples can be found on the webpage that
+accompanies this paper5 .
+VI. C ONCLUSION
+We proposed HVSF, a multi-channel speech-enhancement method
+that leverages a low-parameter DNN to guide a variable span linear
+filter. The DNN learns to estimate three quantities, namely the cleanspeech SCM, the overall-noise SCM, and a speech-distortion tradeoff
+parameter, to determine the filter weights. Our method proved to be
+model-agnostic, systematically improving the performance of models
+from the literature compared to their end-to-end original counterpart,
+and demonstrated its potential in interpretability and control over the
+intermediate quantities estimated by the DNN.
+
+4 https://github.com/donghoney0416/DeFTAN-II
+
+5 https://ovistetom.github.io/icassp-2026
+
+20999
+Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 15:14:36 UTC from IEEE Xplore. Restrictions apply.
+
+R EFERENCES
+[1] R. Haeb-Umbach et al., “Microphone Array Signal Processing and Deep
+Learning for Speech Enhancement: Combining model-based and datadriven approaches to parameter estimation and filtering,” IEEE Signal
+Process. Mag., vol. 41, no. 6, pp. 12–23, 2024.
+[2] X. Chang et al., “Module-Based End-to-End Distant Speech Processing:
+A case study of far-field automatic speech recognition,” IEEE Signal
+Process. Mag., vol. 41, no. 6, pp. 39–50, 2024.
+[3] Y. Huang, J. Benesty, and J. Chen, “Analysis and Comparison of
+Multichannel Noise Reduction Methods in a Common Framework,”
+IEEE Trans. Audio., Speech, Lang. Process., vol. 16, no. 5, pp. 957–
+968, 2008.
+[4] J. Capon, “High-Resolution Frequency-Wavenumber Spectrum Analysis,” Proc. IEEE, vol. 57, no. 8, pp. 1408–1418, 1969.
+[5] M. Souden, J. Benesty, and S. Affes, “A Study of the LCMV and MVDR
+Noise Reduction Filters,” IEEE Trans. Audio., Speech, Lang. Process.,
+vol. 58, no. 9, pp. 4925–4935, 2010.
+[6] E. Warsitz and R. Haeb-Umbach, “Blind Acoustic Beamforming Based
+on Generalized Eigenvalue Decomposition,” IEEE Trans. Audio., Speech,
+Lang. Process., vol. 15, no. 5, pp. 1529–1539, 2007.
+[7] S. Gannot, E. Vincent, S. Markovich-Golan, and A. Ozerov, “A Consolidated Perspective on Multimicrophone Speech Enhancement and Source
+Separation,” IEEE/ACM Trans. Audio., Speech, Lang. Process., vol. 25,
+no. 4, pp. 692–730, 2017.
+[8] K. Tesch and T. Gerkmann, “Insights Into Deep Non-Linear Filters
+for Improved Multi-Channel Speech Enhancement,” IEEE/ACM Trans.
+Audio., Speech, Lang. Process., vol. 31, pp. 563–575, 2023.
+[9] D. Lee and J.-W. Choi, “DeFT-AN: Dense Frequency-Time Attentive
+Network for Multichannel Speech Enhancement,” IEEE Signal Process.
+Lett., vol. 30, pp. 155–159, 2023.
+[10] ——, “DeFTAN-II: Efficient Multichannel Speech Enhancement With
+Subgroup Processing,” IEEE/ACM Trans. Audio., Speech, Lang. Process., vol. 32, pp. 4850–4866, 2024.
+[11] Y. Yang, B. Yang, and X. Li, “Mel-McNet: A Mel-Scale Framework for
+Online Multichannel Speech Enhancement,” in Proc. Interspeech, 2025,
+pp. 1173–1177.
+[12] J. Heymann, L. Drude, and R. Haeb-Umbach, “Neural Network Based
+Spectral Mask Estimation for Acoustic Beamforming,” in Proc. IEEE
+Int. Conf. Acoust., Speech, Signal Process., 2016, pp. 196–200.
+[13] S. Tao, P. Mowlaee, J. R. Jensen, and M. G. Christensen, “LearningBased Multi-Channel Speech Presence Probability Estimation using A
+Low-Parameter Model and Integration with MVDR Beamforming for
+Multi-Channel Speech Enhancement,” in Proc. Int. Workshop Acoust.
+Signal Enhancement, 2024, pp. 100–104.
+[14] ——, “Multi-Channel Speech Enhancement Guided by Learning-based
+A Posteriori Speech Presence Probability Estimation,” IEEE Trans.
+Audio., Speech, Lang. Process., pp. 1–12, 2025.
+[15] A. Cohen, D. Wong, J.-S. Lee, and S. Gannot, “Explainable DNNBased Beamformer with Postfilter,” IEEE Trans. Audio., Speech, Lang.
+Process., vol. 33, pp. 3070–3084, 2025.
+[16] E. Grinstein et al., “Controlling the Parameterized Multi-channel Wiener
+Filter using a Tiny Neural Network,” arXiv, 07 2025.
+[17] K. Ngo, M. Moonen, S. H. Jensen, and J. Wouters, “A Flexible Speech
+Distortion Weighted Multi-Channel Wiener Filter for Noise Reduction in
+Hearing Aids,” in Proc. IEEE Int. Conf. Acoust., Speech, Signal Process.,
+2011, pp. 2528–2531.
+[18] B. Defraene et al., “A Psychoacoustically Motivated Speech Distortion
+Weighted Multi-Channel Wiener Filter for Noise Reduction,” in Proc.
+IEEE Int. Conf. Acoust., Speech, Signal Process., 2012, pp. 4637–4640.
+[19] R. Serizel, M. Moonen, B. Van Dijk, and J. Wouters, “Low-rank
+Approximation Based Multichannel Wiener Filter Algorithms for Noise
+
+Reduction with Application in Cochlear Implants,” IEEE/ACM Trans.
+Audio., Speech, Lang. Process., vol. 22, no. 4, pp. 785–799, 2014.
+[20] Y. Luo, “A Time-Domain Real-Valued Generalized Wiener Filter for
+Multi-Channel Neural Separation Systems,” IEEE/ACM Trans. Audio.,
+Speech, Lang. Process., vol. 30, pp. 3008–3019, 2022.
+[21] A. Pandey and J. Azcarreta, “Ultra Low-Compute Complex Spectral
+Masking for Multichannel Speech Enhancement,” in Proc. IEEE Int.
+Conf. Acoust., Speech, Signal Process., 2025, pp. 1–5.
+[22] J. R. Jensen, J. Benesty, and M. G. Christensen, “Noise Reduction with
+Optimal Variable Span Linear Filters,” IEEE/ACM Trans. Audio., Speech,
+Lang. Process., vol. 24, no. 4, pp. 631–644, 2016.
+[23] J. Benesty, M. G. Christensen, and J. R. Jensen, Signal Enhancement
+with Variable Span Linear Filters. Singapore: Springer, 2016.
+[24] J. N. Franklin, Matrix Theory. Englewood Cliffs, NJ: Prentice-Hall,
+1968.
+[25] M. Tammen and S. Doclo, “Deep Multi-Frame MVDR Filtering for
+Binaural Noise Reduction,” in Proc. Int. Workshop Acoust. Signal
+Enhancement. IEEE, 09 2022, pp. 1–5.
+[26] ——, “Parameter Estimation Procedures for Deep Multi-Frame MVDR
+Filtering for Single-Microphone Speech Enhancement,” IEEE/ACM
+Trans. Audio., Speech, Lang. Process., vol. 31, pp. 3237–3248, 2023.
+[27] R. Scheibler, E. Bezzam, and I. Dokmanić, “Pyroomacoustics: A Python
+Package for Audio Room Simulation and Array Processing Algorithms,”
+in Proc. IEEE Int. Conf. Acoust., Speech, Signal Process., 2018, pp.
+351–355.
+[28] J. Yamagishi, C. Veaux, and K. MacDonald, “CSTR VCTK Corpus:
+English Multi-speaker Corpus for CSTR Voice Cloning Toolkit (version
+0.92),” [sound], 2019.
+[29] V. Panayotov, G. Chen, D. Povey, and S. Khudanpur, “Librispeech: An
+ASR Corpus Based on Public Domain Audio Books,” in Proc. IEEE Int.
+Conf. Acoust., Speech, Signal Process., 2015, pp. 5206–5210.
+[30] J. B. Allen and D. A. Berkley, “Image Method for Efficiently Simulating
+Small-Room Acoustics,” J. Acoust. Soc. Am., vol. 65, no. 4, pp. 943–950,
+04 1979.
+[31] J. Thiemann, N. Ito, and E. Vincent, “The Diverse Environments
+Multi-channel Acoustic Noise Database (DEMAND): A Database of
+Multichannel Environmental Noise Recordings,” in Proc. Int. Congr.
+Acoust., 06 2013.
+[32] D. Mirabilii, S. J. Schlecht, and E. A. P. Habets, “Generating coherenceconstrained multisensor signals using balanced mixing and spectrally
+smooth filters,” J. Acoust. Soc. Am., vol. 149, no. 3, pp. 1425–1433, 03
+2021.
+[33] A. Paszke et al., PyTorch: An Imperative Style, High-Performance Deep
+Learning Library. Red Hook, NY, USA: Curran Associates Inc., 2019.
+[34] K. Tesch and T. Gerkmann, “Spatially Selective Deep Non-Linear Filters
+For Speaker Extraction,” in Proc. IEEE Int. Conf. Acoust., Speech, Signal
+Process., 2023, pp. 1–5.
+[35] D. P. Kingma and J. Ba, “Adam: A Method for Stochastic Optimization,”
+in Proc. Int. Conf. Learn. Represent., Y. Bengio and Y. LeCun, Eds.,
+2015.
+[36] S. J. Reddi, S. Kale, and S. Kumar, “On the Convergence of Adam
+and Beyond,” in International Conference on Learning Representations,
+2018.
+[37] J. Jensen and C. H. Taal, “An Algorithm for Predicting the Intelligibility
+of Speech Masked by Modulated Noise Maskers,” IEEE/ACM Trans.
+Audio., Speech, Lang. Process., vol. 24, no. 11, pp. 2009–2022, 2016.
+[38] C. K. A. Reddy, V. Gopal, and R. Cutler, “DNSMOS P.835: A NonIntrusive Perceptual Objective Speech Quality Metric to Evaluate Noise
+Suppressors,” in Proc. IEEE Int. Conf. Acoust., Speech, Signal Process.,
+2022, pp. 886–890.
+[39] H. Dubey et al., “ICASSP 2023 Deep Noise Suppression Challenge,”
+IEEE Open J. Signal Process., vol. 5, pp. 725–737, 2024.
+
+21000
+Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 15:14:36 UTC from IEEE Xplore. Restrictions apply.
+
+

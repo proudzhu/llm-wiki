@@ -1,0 +1,573 @@
+arXiv:2405.14158v1 [eess.SP] 23 May 2024
+
+Computation-efficient Virtual Sensing Approach with Multichannel
+Adjoint Least Mean Square Algorithm
+
+Boxiang Wang1 , Junwei Ji2 , Xiaoyi Shen3 , Dongyuan Shi4 , Woon-Seng Gan5
+Digital Signal Processing Lab, Nanyang Technological University
+50 Nanyang Avenue, Singapore 639798
+ABSTRACT
+Multichannel active noise control (ANC) systems are designed to create a large zone of quietness
+(ZoQ) around the error microphones, however, the placement of these microphones often presents
+challenges due to physical limitations. Virtual sensing technique that effectively suppresses
+the noise far from the physical error microphones is one of the most promising solutions.
+Nevertheless, the conventional multichannel virtual sensing ANC (MVANC) system based on
+the multichannel filtered reference least mean square (MCFxLMS) algorithm often suffers from high
+computational complexity. This paper proposes a feedforward MVANC system that incorporates
+the multichannel adjoint least mean square (MCALMS) algorithm to overcome these limitations
+effectively. Computational analysis demonstrates the improvement of computational efficiency
+and numerical simulations exhibit comparable noise reduction performance at virtual locations
+compared to the conventional MCFxLMS algorithm. Additionally, the effects of varied tuning noises
+on system performance are also investigated, providing insightful findings on optimizing MVANC
+systems.
+1. INTRODUCTION
+Active noise control (ANC) is an advanced technique that can effectively suppress the unwanted
+sound by the anti-noise, which has the same amplitude and opposite phase of the original
+noise [1–4]. To react to the noise and environment changes, the filtered reference least mean
+square (FxLMS) algorithm is one of the most practical algorithms that is widely used in common
+adaptive ANC systems [5–7]. Its extension has been proposed in these years to address some
+practical problems [8–13]. Due to its efficiency in reducing low-frequency noise and compact size,
+ANC is widely utilized in many applications, such as headphones [14–17], headrests [18–21], and
+windows [22–28].
+The placement of error microphones is critical to the effectiveness of an ANC system.
+Generally, the error microphones are placed in the desired zone of quietness (ZoQ) to monitor
+the residual error signal, leading to a gradual reduction in the combined acoustic power of the
+1
+
+boxiang001@e.ntu.edu.sg
+
+2
+
+junwei002@e.ntu.edu.sg
+
+3
+
+xiaoyi.shen@ntu.edu.sg
+
+4
+
+dongyuan.shi@ntu.edu.sg
+
+5
+
+ewsgan@ntu.edu.sg
+
+Proceedings of INTER-NOISE 2024
+
+anti-noise and the undesirable noise to its lowest level. For example, within an ANC headrest,
+it is ideal for the ZoQ to encompass the area around the user’s eardrum. However, positioning
+the error microphone near the user’s eardrum to capture signals is impractical, preventing the
+formation of a quiet zone around the ears. Consequently, in situations where it is not feasible
+to position error microphones within the ZoQ, obtaining precise estimations of error signals
+becomes indispensable for maintaining the ANC system’s performance. A promising solution
+to this challenge is the virtual sensing technique [29–32], which effectively generates the quiet
+zone at desired ‘virtual’ locations far from the physical error sensor. To date, a variety of virtual
+sensing ANC techniques have been developed, which broadly fall into two main categories [33].
+Class I techniques employ direct estimation of sound characteristics at the virtual location
+using the physical error microphone, based on either acoustical models [34] or extrapolating
+polynomials [35]. However, the efficacy of these approaches in attenuating noise is considerably
+dependent on the accuracy of the models used [34], limiting their applicability primarily to
+low-frequency tonal sound environments [36]. Class II virtual sensing techniques necessitate
+a preliminary training phase to effectively manage noise. Within this category, the remote
+microphone technique computes an ’observation filter’ that maps the sound from the physical
+microphone to the targeted location [37, 38]. This method, however, demands careful placement
+of the physical error microphones. Alternatively, the auxiliary-filter-based approach implicitly
+captures the relationship between physical and virtual microphones, thus avoiding the causality
+constraint [39–41].
+Extensive research efforts have been invested in applying the auxiliary-filter-based virtual
+sensing technique across a wide range of ANC applications. Pawelczyk introduced this technique
+for ANC headrests through both single and multichannel configurations, employing adaptive
+feedback systems [42]. The efficacy of Pawelczyk’s system was further validated by Hasegawa
+et al. in tonal noise control [43], and by Hirose et al. in factory noise control [44] using ANC
+headrests, while Miyazaki et al. implemented the virtual sensing technique on a head-mounted
+ANC system [45]. Additionally, Deng et al. expanded upon this work by developing a 1 × 2 × 2
+feedforward structure using the virtual sensing technique for ANC headrests [46]. These studies
+demonstrate that a multichannel virtual sensing ANC (MVANC) structure is crucial for establishing
+a broad ZoQ and enhancing the system’s adaptability to complex acoustic environments,
+especially in open spaces. Nevertheless, employing the traditional FxLMS algorithm for adaptive
+control filter updates significantly escalates computational complexity as the number of channels
+rises [6]. Additionally, the virtual sensing technique incurs extra computational demands during
+the auxiliary filter’s training and execution phases [41]. These shortcomings pose significant
+challenges to the feasibility of MVANC systems in real-world ANC applications.
+This paper explores a feedforward MVANC system that employs the multichannel adjoint
+least mean square (MCALMS) algorithm [47, 48] instead of the standard multichannel filtered-x
+least mean square (MCFxLMS) algorithm to adaptively update the control filters, which enhances
+the computation efficiency significantly while maintaining the same level of noise reduction as the
+MCFxLMS algorithm. This paper is organized as follows: Section 2 outlines the development of the
+feedforward MVANC system with the MCALMS algorithm. Section 3 provides a comprehensive
+computational analysis of the proposed algorithm. Simulations of a 4 × 2 × 4 feedforward MVANC
+system are conducted in Section 4 to evaluate the algorithm’s effectiveness and the impacts of
+various tuning noises. Finally, a conclusion is given in Section 5.
+2. FEEDFORWARD MVANC SYSTEM WITH MCALMS ALGORITHM
+In this section, the feedforward MVANC system employing the MCALMS algorithm is derived to
+work with error microphones placed far from the desired zone of quietness. The virtual sensing
+technique includes two stages: the tuning stage and the control stage. In the tuning stage, the
+auxiliary filters are trained to record the information between physical microphones and virtual
+
+Proceedings of INTER-NOISE 2024
+
+Figure 1: Tuning stage: block diagram of training the optimal control filters.
+microphones indirectly. These trained auxiliary filters then play a crucial role in the control
+stage, facilitating noise suppression at the designated virtual locations. Specifically, the MCALMS
+algorithm is combined with the virtual sensing technique to update the control filters, which
+reduces the system’s computation complexity. In this paper, we focused on a feedforward MVANC
+system with J reference microphones, K secondary sources, M physical microphones and Q
+virtual microphones.
+2.1. The tuning stage
+The auxiliary filters, which implicitly make up the difference between physical and virtual
+microphones, are crucial to the MVANC system. Before estimating it, the optimal control filters
+for the virtual error microphones at the desired noise reduction area should be first obtained as
+shown in Fig. 1. The kth control signal is given by:
+y k (n) =
+
+J
+X
+j =1
+
+wTk j (n)x j (n), k = 1, 2, · · · , K ,
+
+(1)
+
+where wk j (n) = [w k j ,0 (n) w k j ,1 (n) . . . w k j ,Nx −1 (n)]T is the control filter from the j th input to the
+kth output with the length of N x and x j (n) = [x j (n) x j (n − 1) . . . x j (n − N x + 1)]T denotes the j th
+reference vector at time index n. Then, these control signals will be played by the secondary
+sources to suppress the disturbance at virtual microphones, resulting in:
+e v,q (n) = d v,q (n) −
+
+K
+X
+
+y k (n) ∗ s v,qk , q = 1, 2, · · · ,Q,
+
+(2)
+
+k=1
+
+where d v,q (n) is the disturbance signal captured by the qth virtual error sensor and s v,qk denotes
+the virtual secondary path from the kth secondary source to the qth virtual error sensor.
+The control filters keep updating their coefficients until the error signal is minimized
+to obtain the optimum value. However, the conventional MCFxLMS places a high cost on
+the computation. To improve the efficiency of the system, the MCALMS algorithm [47, 48] is
+introduced to reduce the computational burden. In contrast to the MCFxLMS algorithm where
+the reference signals are filtered by the estimated secondary paths, the MCALMS algorithm filters
+the error signal instead. Assuming that the length of the estimated secondary path is L. To ensure
+causality, the past L − 1 samples should be taken into account. As a result, the control filter is
+updated as:
+Q
+X
+′
+wk j (n + 1) = wk j (n) − µ1 x j (n − L + 1)
+e v,kq
+(n),
+(3)
+q=1
+
+Proceedings of INTER-NOISE 2024
+
+Figure 2: Tuning stage: Block diagram of training the optimal auxiliary filters.
+′
+where µ1 denotes the stepsize of the MCALMS algorithm and e v,kq
+(n) represents the time-reversed
+filtered error signal, which is obtained by:
+
+′
+e v,kq
+(n) =
+
+L−1
+X
+
+e v,q (n − L + 1 + i )ŝ v,qk,i ,
+
+(4)
+
+i =0
+
+where ŝ v,qk,i represents the i th coefficient of the impulse response of the estimated virtual
+secondary path from the kth secondary source to the qth virtual error sensor.
+Once the optimal control filters are obtained, the auxiliary filters will be trained using the
+least mean square (LMS) algorithm as shown in Fig. 2. In this case, the virtual microphones are
+replaced by the physical microphones. Hence, the auxiliary filter vector is updated by:
+hm j (n + 1) = hm j (n) + µ2 e h,m (n)x̄ j (n),
+
+(5)
+
+where µ2 denotes the stepsize of the LMS algorithm. hm j (n) represents the auxiliary filter from the
+j th reference sensor to the mth physical error sensor of tap length Nh and the j th reference vector
+x̄ j (n) is expressed as:
+£
+¤T
+x̄ j (n) = x j (n) x j (n − 1) . . . x j (n − Nh + 1) .
+(6)
+The inner error signal e h,m (n) shown in Equation 5 is stated as:
+e h,m (n) = e p,m −
+
+J
+X
+j =1
+
+hTm j (n)x̄ j (n),
+
+(7)
+
+where e p,m represents the residual signal captured at the mth physical error sensor.
+In the tuning stage, the optimal control filters for the virtual error microphone are obtained
+first, and subsequently, these optimal controllers will be used to estimate the auxiliary filter as a
+way of compensating for the difference in sound field between the virtual error microphones and
+the physical error microphones. The auxiliary filters will then help the MVANC system to provide
+effective noise cancellation of various noises at the virtual error microphone positions during the
+control stage.
+2.2. The control stage
+During the control stage, the physical microphones remain while the virtual microphones are
+removed. The pre-trained optimal auxiliary filters are introduced into the conventional MCALMS
+
+Proceedings of INTER-NOISE 2024
+
+Figure 3: Control stage: Block diagram of training the control filters.
+algorithm as shown in Fig. 3. Therefore, the update equation for the control filter at the control
+stage becomes:
+M
+X
+′
+wk j (n + 1) = wk j (n) − µ3 x j (n − L + 1)
+e h,km
+(n),
+(8)
+
+m=1
+′
+where µ3 is the stepsize of the MCALMS algorithm and e h,km (n) represents the time-reversed
+
+filtered inner error signal, which is obtained by:
+′
+e h,km
+(n) =
+
+L−1
+X
+
+e h,m (n − L + 1 + i )ŝ p,mk,i ,
+
+(9)
+
+i =0
+
+where ŝ p,mk,i represents the i th coefficient of the impulse response of the estimated physical
+secondary path between the kth secondary source and mth physical error microphone. The inner
+error signal e h,km is deduced as:
+e h,m (n) = e p,m (n) −
+
+J
+X
+j =1
+
+hTo,m j x̄ j (n),
+
+(10)
+
+where ho,m j denotes the optimal auxiliary filter from the j th input to the mth physical
+microphone.
+The MVANC system leverages auxiliary filters to create noise reduction areas where physical
+error microphones are difficult to place. MCALMS dramatically reduces the computational effort
+and storage space compared to the traditional algorithms, which in turn facilitates real-time
+implementations. Following the tuning stage and control stage stated above, the proposed
+feedforward MVANC system can realize noise cancellation at Q virtual positions.
+3. COMPUTATIONAL ANALYSIS OF MVANC SYSTEM WITH MALMS ALGORITHM
+This section examines the computational complexity of the MVANC system employing the
+MCALMS algorithm, contrasting it with the computational demands of the MVANC system that
+uses the MCFxLMS algorithm. Considering the tuning phase is conducted offline, this analysis
+focuses solely on the computational demands during the control stage. Each algorithm requires
+five operations at this stage. Utilizing these operations, we quantify the necessary additions
+and multiplications for both algorithms within a single cycle of the control stage, as detailed in
+Table 1. It can be seen from Table 1 that, compared to the conventional MCFxLMS, the MCALMS
+algorithm requires less multiplication and addition. This reduction is attributed to the efficiency
+of the filtered error mechanism in updating the control filters.
+
+Proceedings of INTER-NOISE 2024
+
+Table 1: The number of multiplications and additions used in the MVANC system with MCFxLMS
+and MCALMS algorithms for one period.
+Algorithm
+
+Multiplications
+
+Additions
+
+MVANC + MCFxLMS
+
+J K M (L + N x + 1) + M J Nh
+
+J K M (L+N x −1)+M (J +Nh −1)
+
+MVANC + MCALMS
+
+K (LM + J N x + 1) + M J Nh
+
+K [(L − 1)M + J (N x + M − 1)] +
+M (J + Nh − 1)
+
+Figure 4: Multiplications and additions of the MVANC system with MCFxLMS and MCALMS
+algorithms.
+To underscore the computational efficiency of the MVANC system using the MCALMS
+algorithm, parameters N x , Nh , and L are set to 512, 128, and 256 respectively, with J , K , and
+M representing the number of channels, which varies from 1 to 10. The computational load
+of both algorithms, in relation to the increasing channel count, is graphically illustrated in
+Fig. 4. This visual representation clearly demonstrates that the MCALMS algorithm achieves
+considerable computational savings compared to the MCFxLMS algorithm as the number of
+channels increases. Specifically, when the number of channels reaches 10, the computational
+load of the MCFxLMS algorithm is almost 10 times that of the MCALMS algorithm.
+4. SIMULATION RESULTS
+To verify the effectiveness of the proposed MVANC system utilizing the MCALMS algorithm, as
+well as to explore the impact of different tuning noises on the noise reduction performance in the
+control stage. Two simulations are conducted on a fully connected ANC system, where there are
+four reference microphones (J = 4), two secondary sources (K = 2), four physical microphones
+(M = 4) and four virtual microphones (Q = 4), as shown in Fig. 5. The physical and virtual primary
+and secondary paths are bandpass filters with a frequency range of 500 to 5000 Hz. The control
+filters, auxiliary filters, primary path, and secondary path models are configured with 512, 256,
+128, and 32 taps, respectively. The system’s sampling rate is established at 16 kHz. To mimic a
+realistic environment, white noises are introduced to the primary noises detected by the reference
+microphones with a signal-to-noise ratio of 40 dB.
+
+Proceedings of INTER-NOISE 2024
+
+Figure 5: Schematic diagram of the 4 × 2 × 4 MVANC system.
+
+Figure 6: Error signal at virtual microphone 1 of the MVANC system with MCFxLMS and MCALMS
+algorithms.
+4.1. Comparison of MVANC system utilizing MCFxLMS versus MCALMS algorithm
+To evaluate the noise reduction capabilities of the MVANC system employing the MCALMS
+algorithm in comparison with the system using the MCFxLMS algorithm, broadband noises
+spanning a frequency range of 800 − 1800 Hz are selected as the primary noise sources for both
+the tuning and control stages. The error signal measured at virtual microphone 1 with these
+algorithms is illustrated in Fig. 6. This comparison reveals both algorithms achieve similar noise
+reduction efficiencies, with around 35 dB of noise attenuation observed at steady-state. This
+similarity in noise reduction is attributable to the similar control filters developed by the two
+algorithms, as demonstrated in Fig. 7, which presents the frequency spectrum for control filters
+w11 (n), w12 (n), w13 (n) and w14 (n). Moreover, the remaining four control filters produced by
+these algorithms are almost identical. Consequently, these simulation outcomes verify that both
+the MCALMS and the MCFxLMS algorithms are capable of achieving equivalent optimal noise
+cancellation performance.
+
+Proceedings of INTER-NOISE 2024
+
+Figure 7: Frequency spectrum of the control filter w11 (n), w12 (n), w13 (n) and w14 (n) in the
+MVANC system with MCFxLMS and MCALMS algorithms.
+4.2. Impacts of various tuning noises on noise reduction performance in the control stage
+In the real-world application of the MVANC system, the primary noise encountered during
+the control stage is inherently unknown and unpredictable. This unpredictability underscores
+the importance of exploring how various tuning noises influence the system’s noise reduction
+capabilities within the control stage. To this end, this simulation investigates three distinct
+scenarios: (1) controlling uniformly distributed noise with Gaussian tuning noise, (2) controlling
+narrowband noise with broadband tuning noise and (3) controlling broadband noise with
+narrowband tuning noise.
+The initial scenario utilises Gaussian white noise as the tuning stage’s primary noise source
+and uniformly distributed random noise for the control stage. Both noise types were processed
+through a bandpass filter spanning 800 − 1800 Hz. Analysis of the control filter w11 (n) in both
+stages is depicted in Fig. 8(a) and Fig. 8(b). It can be seen that the control filter w11 (n) obtained
+from the tuning stage and the control stage are very similar and both have a passband with a
+frequency range of about 800-1800 Hz. Furthermore, the analysis of the other seven control filters
+reveals a performance analogous to that of w11 (n). Error signal picked up by virtual microphone
+1, shown in Fig. 9, demonstrates a steady-state noise reduction of approximately 38 dB when using
+Gaussian tuning noise against uniformly distributed noise.
+In the second scenario, both the tuning and control stages employ Gaussian white noise
+filtered through a bandpass filter; however, the frequency ranges differed: 800−1800 Hz for tuning
+and 800 − 1000 Hz for control. Fig. 8(c) and Fig. 8(d) showcase the control filter w11 (n) for each
+stage, highlighting the adaptation to the respective noise bandwidths. Observations reveal that
+control filter w11 (n), derived from the tuning stage, exhibits a passband within the 800 − 1800 Hz
+frequency range. Conversely, control filter w11 (n) from the control stage demonstrates a passband
+within the narrower 800−1000 Hz range. Despite the variance in passband ranges, the subsequent
+seven control filters closely resembled the control filter w11 (n). As Fig. 9 illustrates, employing
+broadband tuning noise to mitigate narrowband noise resulted in a noise reduction performance
+of about 40 dB.
+The final scenario reversed the conditions of the second, with the tuning stage’s noise filtered
+
+Proceedings of INTER-NOISE 2024
+
+Figure 8: Impulse response (left) and frequency spectrum (right) of the steady-state control
+filter w11 (n) in three scenarios: (a-b) controlling uniformly distributed noise with Gaussian
+tuning noise; (c-d) controlling narrowband noise with broadband tuning noise; (e-f) controlling
+broadband noise with narrowband tuning noise.
+
+Figure 9: Error signal at virtual microphone 1 of the MVANC system with MCALMS algorithm in
+three scenarios.
+to 800 − 1000 Hz and the control stage’s to 800 − 1800 Hz. Control filter w11 (n) for both the tuning
+and control stages is depicted in Fig. 8(e) and Fig. 8(f ). Analysis shows that Control filter w11 (n)
+from the tuning stage encompasses a passband frequency range of approximately 800 − 1000 Hz.
+In contrast, control filter w11 (n) from the control stage covers a broader range of about 800 − 1800
+Hz, though the passband experiences attenuation in the 1000 − 1800 Hz range. Similarly, the
+
+Proceedings of INTER-NOISE 2024
+
+alignment with control filter w11 (n) is again observed in the remaining filters. As depicted in Fig. 9,
+employing narrowband tuning noise to counteract broadband noise results in a steady-state noise
+reduction of approximately 22 dB. This diminished noise reduction performance may be due to
+the attenuation observed in the passband of the control filter.
+This simulation confirms the effectiveness of the proposed MVANC system employing the
+MCALMS algorithm in achieving optimal noise suppression at virtual locations. Furthermore,
+it is evident that the noise reduction performance of the system is significantly enhanced when
+the tuning stage’s primary noise frequency range encompasses that of the control stage’s primary
+noise sources. Thus, utilizing broadband noise for auxiliary filter training is advantageous.
+Additionally, as demonstrated in Fig. 9, the algorithm’s convergence speed improves when the
+noise distributions in the tuning and control stages match.
+5. CONCLUSION
+The MVANC system presented in this paper leverages the MCALMS algorithm to establish an
+expansive quiet zone at virtual locations innovatively, addressing the practical limitations of
+positioning actual error microphones. Our findings reveal that with the MCALMS algorithm, the
+MVANC system not only achieves a significant reduction in computational complexity—up to
+nearly tenfold when operating with 10 channels—but also maintains an optimal noise reduction
+level, equivalent to that of systems using the MCFxLMS algorithm. This demonstrates the system’s
+ability to significantly lower computational complexity without compromising noise reduction
+performance. Furthermore, a series of simulations employing a variety of tuning noises have
+been conducted to explore the influence of the tuning noise’s frequency spectrum on the noise
+reduction performance during the control stage. Specifically, utilizing broadband tuning noise to
+mitigate narrowband noise results in an impressive noise reduction level of approximately 40 dB.
+Conversely, when a narrowband noise is employed to cancel broadband noise, the achieved noise
+reduction level diminishes to around 22 dB. These insights serve as crucial guidelines for selecting
+appropriate tuning noises within the MVANC system, enhancing its noise reduction capabilities
+and operational efficiency.
+ACKNOWLEDGEMENTS
+This research is supported by the Singapore Ministry of Education Academic Research Fund Tier
+2 (Award No. MOE-T2EP50122-0018).
+REFERENCES
+1. Philip Arthur Nelson and Stephen J Elliott. Active control of sound. Academic press, 1991.
+2. Stephen J Elliott and Philip Arthur Nelson. Active noise control. IEEE signal processing
+magazine, 10(4):12–35, 1993.
+3. Colin H Hansen. Understanding active noise cancellation. CRC Press, 1999.
+4. Xiaojun Qiu. An introduction to virtual sound barriers. CRC Press, 2019.
+5. D Morgan. An analysis of multiple correlation cancellation loops with a filter in the auxiliary
+path. IEEE Transactions on Acoustics, Speech, and Signal Processing, 28(4):454–467, 1980.
+6. Sen M Kuo and Dennis R Morgan. Active noise control systems, volume 4. Wiley, New York,
+1996.
+7. Yoshinobu Kajikawa, Woon-Seng Gan, and Sen M Kuo. Recent advances on active noise
+control: open issues and innovative applications. APSIPA Transactions on Signal and
+Information Processing, 1:e3, 2012.
+8. Dongyuan Shi, Woon-seng Gan, Xiaoyi Shen, Zhengding Luo, and Junwei Ji. What is behind the
+meta-learning initialization of adaptive filter?—a naive method for accelerating convergence
+
+Proceedings of INTER-NOISE 2024
+
+of adaptive multichannel active noise control. Neural Networks, 172:106145, 2024.
+9. Junwei Ji, Dongyuan Shi, Zhengding Luo, Xiaoyi Shen, and Woon-Seng Gan. A practical
+distributed active noise control algorithm overcoming communication restrictions. In ICASSP
+2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP),
+pages 1–5. IEEE, 2023.
+10. Zhengding Luo, Dongyuan Shi, Woon-Seng Gan, and Qirui Huang. Delayless generative fixedfilter active noise control based on deep learning and bayesian filter. IEEE/ACM Transactions
+on Audio, Speech, and Language Processing, 2023.
+11. Chung Kwan Lai, Dongyuan Shi, Bhan Lam, and Woon-Seng Gan. Mov-modified-fxlms
+algorithm with variable penalty factor in a practical power output constrained active control
+system. IEEE Signal Processing Letters, 2023.
+12. Ryosuke Okajima, Yoshinobu Kajikawa, and Kohei Oto. Dual active noise control with
+common sensors. In ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech
+and Signal Processing (ICASSP), pages 8697–8701. IEEE, 2022.
+13. Huiyuan Sun, Thushara D Abhayapala, and Prasanga N Samarasinghe. A realistic multiple
+circular array system for active noise control over 3d space. IEEE/ACM Transactions on Audio,
+Speech, and Language Processing, 28:3041–3052, 2020.
+14. Xiaoyi Shen, Dongyuan Shi, and Woon-Seng Gan.
+A wireless reference active noise
+control headphone using coherence based selection technique. In ICASSP 2021-2021 IEEE
+International Conference on Acoustics, Speech and Signal Processing (ICASSP), pages 7983–
+7987. IEEE, 2021.
+15. Xiaoyi Shen, Dongyuan Shi, Santi Peksi, and Woon-Seng Gan. A multi-channel wireless active
+noise control headphone with coherence-based weight determination algorithm. Journal of
+Signal Processing Systems, 94(8):811–819, 2022.
+16. Xiaoyi Shen, Dongyuan Shi, and Woon-Seng Gan. A hybrid approach to combine wireless
+and earcup microphones for anc headphones with error separation module. In ICASSP 20222022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), pages
+8702–8706. IEEE, 2022.
+17. Xiaoyi Shen, Dongyuan Shi, Woon-Seng Gan, and Santi Peksi. Adaptive-gain algorithm on
+the fixed filters applied for active noise control headphone. Mechanical Systems and Signal
+Processing, 169:108641, 2022.
+18. B Rafaely, SJ Elliott, and J Garcia-Bonito. Broadband performance of an active headrest. The
+journal of the Acoustical Society of America, 106(2):787–793, 1999.
+19. Cheng-Yuan Chang, Chia-Tseng Chuang, Sen M Kuo, and Chia-Hao Lin. Multi-functional
+active noise control system on headrest of airplane seat. Mechanical Systems and Signal
+Processing, 167:108552, 2022.
+20. Zeqiang Zhang, Ming Wu, Lan Yin, Chen Gong, Jun Yang, Yin Cao, and Lihua Yang. Robust
+parallel virtual sensing method for feedback active noise control in a headrest. Mechanical
+Systems and Signal Processing, 178:109293, 2022.
+21. Xiaoyi Shen, Dongyuan Shi, Santi Peksi, and Woon-Seng Gan. Implementations of wireless
+active noise control in the headrest. In INTER-NOISE and NOISE-CON Congress and
+Conference Proceedings, volume 265, pages 3445–3455. Institute of Noise Control Engineering,
+2023.
+22. Chuang Shi, Tatsuya Murao, Dongyuan Shi, Bhan Lam, and Woon-Seng Gan. Open loop active
+control of noise through open windows. In Proceedings of Meetings on Acoustics, volume 29.
+AIP Publishing, 2016.
+23. Chuang Shi, Nan Jiang, Huiyong Li, Dongyuan Shi, and Woon-Seng Gan. On algorithms
+and implementations of a 4-channel active noise canceling window. In 2017 International
+
+Proceedings of INTER-NOISE 2024
+
+Symposium on Intelligent Signal Processing and Communication Systems (ISPACS), pages 217–
+221. IEEE, 2017.
+24. Bhan Lam, Chuang Shi, Dongyuan Shi, and Woon-Seng Gan. Active control of sound through
+full-sized open windows. Building and Environment, 141:16–27, 2018.
+25. Bhan Lam, Dongyuan Shi, Woon-Seng Gan, Stephen J Elliott, and Masaharu Nishimura. Active
+control of broadband sound through the open aperture of a full-sized domestic window.
+Scientific reports, 10(1):1–7, 2020.
+26. Bhan Lam, Dongyuan Shi, Valiantsin Belyi, Shulin Wen, Woon-Seng Gan, Kelvin Li, and Irene
+Lee. Active control of low-frequency noise through a single top-hung window in a full-sized
+room. Applied Sciences, 10(19):6817, 2020.
+27. Bhan Lam, Kelvin Chee Quan Lim, Kenneth Ooi, Zhen-Ting Ong, Dongyuan Shi, and WoonSeng Gan. Anti-noise window: Subjective perception of active noise reduction and effect of
+informational masking. Sustainable Cities and Society, 97:104763, 2023.
+28. Zhengding Luo, Dongyuan Shi, Junwei Ji, Xiaoyi Shen, and Woon-Seng Gan. Real-time
+implementation and explainable ai analysis of delayless cnn-based selective fixed-filter active
+noise control. Mechanical Systems and Signal Processing, 214:111364, 2024.
+29. Shota Toyooka and Yoshinobu Kajikawa. An online identification method for virtual sensing
+in anc system. The Journal of the Acoustical Society of America, 152(4):A98–A98, 2022.
+30. Shota TOYOOKA and Yoshinobu KAJIKAWA. Hybrid active noise control with auxiliary filterbased virtual sensing. In INTER-NOISE and NOISE-CON Congress and Conference Proceedings,
+volume 268, pages 6488–6495. Institute of Noise Control Engineering, 2023.
+31. Danielle Moreau, Ben Cazzolato, Anthony Zander, and Cornelis Petersen. A review of virtual
+sensing algorithms for active noise control. Algorithms, 1(2):69–99, 2008.
+32. Jin Zhang, Stephen J Elliott, and Jordan Cheer. Robust performance of virtual sensing methods
+for active noise control. Mechanical Systems and Signal Processing, 152:107453, 2021.
+33. Lichuan Liu, Sen M Kuo, and MengChu Zhou. Virtual sensing techniques and their
+applications. In 2009 International Conference on Networking, Sensing and Control, pages
+31–36. IEEE, 2009.
+34. J Garcia-Bonito, SJ Elliott, and CC Boucher. Generation of zones of quiet using a virtual
+microphone arrangement. The journal of the Acoustical Society of America, 101(6):3498–3516,
+1997.
+35. Colin D Kestell, Ben S Cazzolato, and Colin H Hansen. Active noise control in a free field with
+virtual sensors. The Journal of the Acoustical Society of America, 109(1):232–243, 2001.
+36. Danielle J Moreau, Justin Ghan, BS Cazzolato, and AC Zander. Active noise control in a pure
+tone diffuse sound field using virtual sensing. The Journal of the acoustical Society of america,
+125(6):3742–3755, 2009.
+37. Woomin Jung, Stephen Elliott, and Jordan Cheer. Local active sound control using the remote
+microphone technique and head-tracking for tonal and broadband noise sources. 2017.
+38. Woomin Jung, Stephen J Elliott, and Jordan Cheer. Local active control of road noise inside a
+vehicle. Mechanical Systems and Signal Processing, 121:144–157, 2019.
+39. Rina Hasegawa, Dongyuan Shi, Yoshinobu Kajikawa, and Woon-Seng Gan. Window active
+noise control system with virtual sensing technique. In INTER-NOISE and NOISE-CON
+Congress and Conference Proceedings, volume 258, pages 6004–6012. Institute of Noise Control
+Engineering, 2018.
+40. Dongyuan Shi, Bhan Lam, and Woon-seng Gan. Analysis of multichannel virtual sensing
+active noise control to overcome spatial correlation and causality constraints. In ICASSP 20192019 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), pages
+8499–8503. IEEE, 2019.
+
+Proceedings of INTER-NOISE 2024
+
+41. Dongyuan Shi, Woon-Seng Gan, Bhan Lam, Rina Hasegawa, and Yoshinobu Kajikawa.
+Feedforward multichannel virtual-sensing active control of noise through an aperture:
+Analysis on causality and sensor-actuator constraints. The Journal of the Acoustical Society
+of America, 147(1):32–48, 2020.
+42. Marek Pawelczyk. Adaptive noise control algorithms for active headrest system. Control
+engineering practice, 12(9):1101–1112, 2004.
+43. Rina Hasegawa, Yoshinobu Kajikawa, Cheng-Yuan Chang, and Sen M Kuo. Headrest
+application of multi-channel feedback active noise control with virtual sensing technique.
+In INTER-NOISE and NOISE-CON Congress and Conference Proceedings, volume 255, pages
+3513–3524. Institute of Noise Control Engineering, 2017.
+44. Shun Hirose and Yoshinobu Kajikawa. Effectiveness of headrest anc system with virtual
+sensing technique for factory noise. In 2017 Asia-Pacific Signal and Information Processing
+Association Annual Summit and Conference (APSIPA ASC), pages 464–468. IEEE, 2017.
+45. Nobuhiro Miyazaki and Yoshinobu Kajikawa. Head-mounted active noise control system with
+virtual sensing technique. Journal of Sound and Vibration, 339:65–83, 2015.
+46. He-Siang Deng, Cheng-Yuan Chang, and Sen M Kuo. Active noise control with virtual sensing
+technology for headrest. In 2018 Asia-Pacific Signal and Information Processing Association
+Annual Summit and Conference (APSIPA ASC), pages 1272–1275. Ieee, 2018.
+47. Eric A Wan. Adjoint lms: An efficient alternative to the filtered-x lms and multiple error lms
+algorithms. In 1996 IEEE International Conference on Acoustics, Speech, and Signal Processing
+Conference Proceedings, volume 3, pages 1842–1845. IEEE, 1996.
+48. Dongyuan Shi, Bhan Lam, Junwei Ji, Xiaoyi Shen, Chung Kwan Lai, and Woon-Seng Gan.
+Computation-efficient solution for fully-connected active noise control window: Analysis and
+implementation of multichannel adjoint least mean square algorithm. Mechanical Systems
+and Signal Processing, 199:110444, 2023.
+
+

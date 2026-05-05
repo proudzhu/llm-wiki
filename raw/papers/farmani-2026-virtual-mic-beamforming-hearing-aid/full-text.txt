@@ -1,0 +1,345 @@
+ICASSP 2026 - 2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) | 979-8-3315-6701-9/26/$31.00 ©2026 IEEE | DOI: 10.1109/ICASSP55912.2026.11462612
+
+
+
+
+                                                                                                                                                                                          BEAMFORMING USING VIRTUAL MICROPHONES FOR HEARING AID APPLICATIONS
+
+                                                                                                                                                                                                                                   Mojtaba Farmani1,2 , Svend Feldt1 , Jesper Jensen1
+                                                                                                                                                                                                                               1
+                                                                                                                                                                                                                           Eriksholm Research Centre, Snekkersten, Denmark
+                                                                                                                                                                                                             2
+                                                                                                                                                                                                                 Department of Electronic Systems, Aalborg University, Aalborg, Denmark
+
+
+                                                                                                                                                                                                                      ABSTRACT                                           inadequate for HA applications where both phase and amplitude are
+                                                                                                                                                                                                                                                                         critical due to head shadowing effects. Recently, neural network-
+                                                                                                                                                                                         This paper presents a novel, low-complexity method for synthesiz-
+                                                                                                                                                                                                                                                                         based estimators have shown enhanced performance but at the cost
+                                                                                                                                                                                         ing virtual microphone (VM) signals to enhance beamforming in
+                                                                                                                                                                                                                                                                         of significantly higher computational demands, making them less
+                                                                                                                                                                                         hearing aid (HA) applications. Leveraging the W-disjoint orthog-
+                                                                                                                                                                                                                                                                         suitable for resource-constrained devices such as HAs [4, 7, 8].
+                                                                                                                                                                                         onality (WDO) assumption, the proposed approach generates addi-
+                                                                                                                                                                                                                                                                              The proposed method leverages the W-disjoint orthogonality
+                                                                                                                                                                                         tional VM channels from a typical two-microphone setup, poten-
+                                                                                                                                                                                                                                                                         (WDO) assumption [1, 9, 10, 11], which assumes that only one
+                                                                                                                                                                                         tially eliminating the need for extra hardware for physical micro-
+                                                                                                                                                                                                                                                                         sound source is dominant at any given time-frequency point due to
+                                                                                                                                                                                         phone channels. The VM signals are estimated by modeling their
+                                                                                                                                                                                                                                                                         the sparsity and non-overlap of sound signals, particularly speech.
+                                                                                                                                                                                         relative transfer functions (RTFs) as a power function of the RTF
+                                                                                                                                                                                                                                                                         This property simplifies the signal model in the short-time Fourier
+                                                                                                                                                                                         between the physical microphones, enabling both interpolation and
+                                                                                                                                                                                                                                                                         transform (STFT) domain and allows for the direct estimation of
+                                                                                                                                                                                         extrapolation of VM positions. We demonstrate the integration of
+                                                                                                                                                                                                                                                                         the relative transfer function (RTF) between microphones [12]. We
+                                                                                                                                                                                         the synthesized VM signals into a minimum variance distortionless
+                                                                                                                                                                                                                                                                         model the VM RTF as a power of the physical inter-microphones
+                                                                                                                                                                                         response (MVDR) beamformer using realistic HA recordings across
+                                                                                                                                                                                                                                                                         RTF, which enables low-complexity interpolation and extrapolation
+                                                                                                                                                                                         diverse acoustic scenarios. Experimental results show substantial
+                                                                                                                                                                                                                                                                         of the VM positions. We show that the resulting VM signals im-
+                                                                                                                                                                                         improvements in signal-to-noise ratio (SNR) and objective speech
+                                                                                                                                                                                                                                                                         prove beamforming-based noise reduction and integrate efficiently
+                                                                                                                                                                                         intelligibility, with further gains achieved by optimizing VM posi-
+                                                                                                                                                                                                                                                                         with typical two-microphone HA pipelines. Although reverberation
+                                                                                                                                                                                         tion(s). Compared to existing VM methods, the proposed technique
+                                                                                                                                                                                                                                                                         and stationary noises may weaken the WDO assumption, our results
+                                                                                                                                                                                         offers superior performance and scalability while maintaining low
+                                                                                                                                                                                                                                                                         indicate that the approximation is sufficiently accurate for noise re-
+                                                                                                                                                                                         computational complexity, making it highly suitable for resource-
+                                                                                                                                                                                                                                                                         duction in practical acoustic situations for hearing aid applications.
+                                                                                                                                                                                         constrained devices such as HAs.
+                                                                                                                                                                                             Index Terms— hearing aid, beamforming, virtual microphone
+                                                                                                                                                                                                                                                                                                  2. SIGNAL MODEL
+
+                                                                                                                                                                                                                 1. INTRODUCTION                                         Under the WDO assumption, the signal model in the STFT domain
+                                                                                                                                                                                                                                                                         can be expressed as:
+                                                                                                                                                                                         Modern hearing aids (HAs) rely on microphone arrays to enable ad-
+                                                                                                                                                                                         vanced speech enhancement algorithms like beamforming. The per-                                      Yi (k, l) = X(k, l) · Di (k, l),                  (1)
+                                                                                                                                                                                         formance of these algorithms generally improves with the number
+                                                                                                                                                                                         of microphones, but practical constraints such as device size, power            where k and l denote the frequency and time-frame indices, respec-
+                                                                                                                                                                                         consumption, and hardware complexity limit the number that can be               tively. Here, Yi (k, l) is the signal received at microphone i, X(k, l)
+                                                                                                                                                                                         integrated. To overcome this limitation, virtual microphones (VMs)              is the dominant source signal in the (k, l) STFT tile at a predefined
+                                                                                                                                                                                         can synthesize acoustic signals at locations where no physical mi-              reference microphone, and Di (k, l) is the RTF between microphone
+                                                                                                                                                                                         crophones exist, effectively increasing the array size without addi-            i and the reference microphone.
+                                                                                                                                                                                         tional hardware [1, 2, 3, 4, 5]. This paper introduces a novel, low-                 For an array of M microphones, the received signals can be
+                                                                                                                                                                                         complexity method for estimating VM signals, specifically designed              stacked into a vector form:
+                                                                                                                                                                                         to enhance beamforming performance in HA applications.
+                                                                                                                                                                                              Existing methods for generating VM signals vary in complex-                                      Y (k, l) = X(k, l) · D(k, l),                    (2)
+                                                                                                                                                                                         ity and application focus. Some approaches synthesize the VM
+                                                                                                                                                                                         signal based on a propagation model using geometric informa-                    where Y (k, l) = [Y1 (k, l), Y2 (k, l), . . . , YM (k, l)]⊤ and D(k, l) =
+                                                                                                                                                                                         tion, such as the estimated source direction of arrival (DOA) [3].              [1, D2 (k, l), . . . , DM (k, l)]⊤ , where, without loss of generality, the
+                                                                                                                                                                                         These methods, often targeting spatial perception, can be adapted               first microphone is chosen as the reference.
+                                                                                                                                                                                         for noisy and reverberant conditions [6]. Other techniques, such
+                                                                                                                                                                                         as generalized amplitude interpolation (GAI) [2, 5], focus on noise                       3. VIRTUAL MICROPHONE ESTIMATION
+                                                                                                                                                                                         reduction by interpolating the phase and amplitude of physical mi-
+                                                                                                                                                                                         crophone signals. Although effective to a degree, GAI methods                   This section details the proposed method for synthesizing a VM sig-
+                                                                                                                                                                                         require separate manipulation of phase and amplitude, increasing                nal from a M = 2 array. Based on Eq. (1), the signal at the VM,
+                                                                                                                                                                                         computational complexity. The work in [1] extends GAI by in-                    Y3 (k, l), can be estimated from the reference microphone signal,
+                                                                                                                                                                                         troducing wavelength-proportional arrangements of VMs, enabling                 Y1 (k, l), if D3 (k, l) is known:
+                                                                                                                                                                                         both interpolation and extrapolation of VM positions. However,
+                                                                                                                                                                                         its extrapolation relies solely on phase information, which may be                                   Y3 (k, l) = Y1 (k, l) · D3 (k, l).                (3)
+
+
+                                                                                                                                                                                         979-8-3315-6701-9/26/$31.00 ©2026 IEEE                                   15552                                                            ICASSP 2026
+
+                                                                                                                                                                                                     Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 15:37:22 UTC from IEEE Xplore. Restrictions apply.
+                                                                                                           4. BEAMFORMER
+
+                                                                                 To demonstrate the applicability and the performance of the pro-
+                                                                                 posed VM estimation method, we employ a minimum variance dis-
+                                                                                 tortionless response (MVDR) beamformer [15]. The beamformer
+                                                                                 weights are computed as
+
+                                                                                                                 C−1v (k, l) d(k, l)
+                                                                                                 w(k, l) =                               ,            (6)
+                                                                                                              d (k, l) C−1
+                                                                                                               H
+                                                                                                                        v (k, l) d(k, l)
+
+
+Fig. 1: Illustration of VM locations for different values of λ: Front            where Cv (k, l) is the inter-microphone noise covariance matrix,
+(λ = −0.5), Middle (λ = 0.5), and Behind (λ = 1.5). Diamonds:                    d(k, l) is the steering vector, and (·)H represents the Hermitian
+physical microphones. Filled squares: VMs.                                       transpose.
+                                                                                     The noise covariance matrix Cv (k, l) is estimated using a voice
+                                                                                 activity detector (VAD) over frames classified as noise:
+The core of the proposed method is to estimate D3 (k, l). Assum-                                          h                    i
+ing a free-field and far-field situation, Di (k, l) can be modeled as                        Cv (k, l) = E Y (k, l) Y H (k, l)            .       (7)
+                                                                                                                                   VAD=Noise
+Di (k, l) = αi (k, l) · e−jωτi (k,l) , where the relative attenuation
+αi (k, l) with respect to the reference microphone and the relative                   To compute d(k, l), we first estimate the speech covariance ma-
+delay τi (k, l) from the reference microphone to microphone i are                trix Cs (k, l) over frames where speech is detected:
+functions of the inter-microphone distance di [13]. To be precise,                                         h                  i
+under free-field and far-field assumptions, τi (k, l) is linearly related                   Cs (k, l) = E Y (k, l) Y H (k, l)             .       (8)
+                                                                                                                                  VAD=Speech
+to di , while αi (k, l) follows the inverse-square law [14]. Assuming
+that the VM is located on the straight line between the two physi-               Assuming that at each time and frequency, only one speaker is active,
+cal microphones, D3 (k, l) can be modeled as a power function of                 Cs (k, l) will be rank one, and the (un-normalized) steering vector is
+D2 (k, l):                                                                       given by any column of Cs (k, l) [16].
+                         D3 (k, l) = (D2 (k, l))λ ,                   (4)
+where λ ∈ R is a parameter that controls the VM’s distance relative                                         5. EVALUATION
+to the reference microphone. Parameter λ is a scaling factor that
+allows for both interpolation (0 < λ < 1) and extrapolation (λ > 1               This section evaluates the performance of the MVDR beamformer
+or λ < 0) of the VM position along the line connecting the two                   using VMs in realistic acoustic environments.
+physical microphones. Generally, by raising D2 (k, l) to the power of
+λ, we properly scale both the attenuation and the phase delay, which             5.1. Input signals
+provides a computationally efficient way to approximate the RTF at
+a new virtual position. Fig. 1 illustrates the relative positions of the         Realistic HA recordings were used as input signals. Target speech
+VM with different λ values. It is worth noting that to avoid negative            and noise signals were recorded separately using HA shells equipped
+exponents when placing the VM in front of the front microphone (as               with two microphones mounted on a head-and-torso simulator
+shown in Fig. 1), one can simply select the rear microphone (Mic.                (HATS). Both female and male voices served as target signals,
+2) as the reference and derive the VM equations accordingly. This                played back through loudspeakers positioned at various azimuth
+approach simplifies implementation and ensures numerical stability.              angles relative to the HATS. Target signals were recorded in three
+    While this model is based on simplified assumptions and does                 environments: an anechoic room, a low-reverberant sound studio
+not explicitly account for complex phenomena like head-shadowing,                (6 m×8 m×4 m) with acoustic treatment to reduce reverberation,
+our experimental results confirm its effectiveness for enhancing                 and a typical reverberant meeting room (5 m×7 m×3 m) with hard
+beamforming performance in realistic HA applications. Further-                   walls, windows, and standard meeting furniture. The considered
+more, the proposed framework is easily scalable, allowing for the                azimuth angles were 0◦ , 45◦ , 67◦ , 180◦ , and 330◦ , where 0◦ corre-
+synthesis of multiple VMs at different locations by selecting differ-            sponds to the front of the user, and angles increase counterclockwise.
+ent values for λ.                                                                In addition to single-target-talker scenarios, a multi-target-talker sce-
+    To estimate Y3 (k, l) using Eqs. (3) and (4), we require D2 (k, l),          nario was also recorded, where two talkers positioned at 45◦ and
+which can be computed from Y1 (k, l) and Y2 (k, l). Making the                   −45◦ engaged in a dialogue.
+standard assumption that Y1 (k, l) and Y2 (k, l) are zero-mean [12],                  Noise signals were recorded separately with the same HA shells
+D2 (k, l) is estimated as follows [12]:                                          in four real-world environments: a canteen, an intercity train, near
+                                                                                 coffee machines in an office where people gather and engage in con-
+                                E [Y1∗ (k, l)Y2 (k, l)]                          versation, and on a street with traffic noise.
+                  D2 (k, l) =                           ,               (5)           Recordings were sampled at 20 kHz. To create the noisy input
+                                E [Y1∗ (k, l)Y1 (k, l)]
+                                                                                 signals for beamformer evaluation, 30-second segments were ran-
+where E[·] denotes expectation operator, and ∗ represents the com-               domly selected from longer recordings of both target speech and
+plex conjugate. In practice, the expectation operator E[·] can be esti-          noise. All combinations of target gender, azimuth angle, recording
+mated using an exponential moving average. This approach relies on               environment, and noise type were included, resulting in a compre-
+the WDO assumption that within short time intervals (e.g., 20 ms),               hensive dataset. In total, 420 distinct binaural acoustic scenes (840
+only a single dominant source is active at each frequency, which is              monaural scenes) were generated, corresponding to 420 minutes of
+approximately true for speech signals [11]. Accordingly, the averag-             noisy signals with SNRs ranging from -5 dB to 15 dB. This diverse
+ing is performed over such durations to enhance estimation accuracy.             set of acoustic scenarios was used for performance assessment.
+
+
+                                                                          15553
+
+             Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 15:37:22 UTC from IEEE Xplore. Restrictions apply.
+5.2. Algorithm Setup
+All signals are processed in the STFT domain using 128-sample
+frames (6.4 ms) with a 108-sample overlap and a 128-point fast
+Fourier transform (FFT) to ensure low latency processing, which is
+important for HA applications. A square-root Hann window is em-
+ployed for both analysis and synthesis.
+     The RTF D2 (k, l) is estimated according to Eq. (5), where the
+expectation operator E[·] is implemented as an exponential moving
+average with a 20 ms time constant. This estimation is based solely
+on the noisy microphone signals.
+     For the MVDR beamformer, Cv and Cs , are estimated using an
+ideal VAD. The VAD classifies a time-frequency tile as speech if its            Fig. 2: Effect of VM relative location on MVDR SNR improvement
+instantaneous SNR is positive, and as noise otherwise. The expec-               as a function of target azimuth.
+tation operators in Eqs. (7) and (8) are implemented as exponential
+moving averages with a 159 ms time constant. This estimation pro-
+cedure for Cv and Cs is applied consistently across the proposed
+method and all benchmark methods to ensure a fair comparison.
+
+5.3. Performance Measures
+To measure the beamformer performance, we use the improvement
+in segmental signal-to-noise ratio (ISNR). In addition, we use the
+Extended Short-Time Objective Intelligibility (ESTOI) metric [17]
+to objectively estimate the intelligibility of speech signals.
+
+5.4. Benchmarks
+                                                                                Fig. 3: Effect of the relative distance of the VM to the reference
+To benchmark the proposed VM estimation method for noise reduc-                 microphone on MVDR beamforming performance.
+tion, we compare it with three alternatives. The first is a baseline
+MVDR beamformer using only the two physical microphones sig-
+nals, without any VM. The second is the GAI method [2], which                   5.5.2. Virtual microphone distance
+estimates the VM signal by separately interpolating the phase and
+amplitude of the physical microphones, resulting in a more complex              Here, we analyze how the VM’s distance from the reference micro-
+solution than the proposed approach. For the GAI method, we set                 phone, controlled by λ, affects beamformer performance. We focus
+α = 0.5 and β = −20, as recommended in [5] for optimal per-                     on frontal VM placement and vary λ to expand the effective array
+formance. In fact, this setup corresponds to the specific case of our           aperture. Figure 3 shows the ISNR as a function of λ, averaged over
+method with λ = 0.5. The third benchmark is the method pro-                     all conditions. While increasing |λ| generally improves ISNR by en-
+posed in [1], which extends GAI to allow extrapolation and employs              hancing spatial resolution, excessive distances can introduce spatial
+wavelength-proportional arrangements of VMs. We set k = 1 as                    aliasing and degrade performance. ISNR increases with |λ| up to a
+recommended in [1].                                                             point (λ = −4), after which performance drops. This demonstrates
+                                                                                a trade-off: larger VM distances improve beamforming performance
+                                                                                up to a point, but too large a distance is detrimental. While we em-
+5.5. Simulation Results
+                                                                                ploy the same λ for all frequency bins in this analysis, the optimal λ
+For evaluation, first we investigate the effect of the relative location        may vary with frequency, and the method can be adapted to estimate
+of the VM. Next, we analyze the impact of the VM distance from the              λ per frequency bin if needed.
+reference microphone. Finally, we compare the proposed method
+with benchmark approaches.                                                      5.5.3. Comparison with benchmarks
+                                                                                In this section, we compare the proposed VM method with the
+5.5.1. Relative VM location
+                                                                                benchmark approaches outlined in Section 5.4. Five configurations
+Here, we investigate how the relative placement of the VM affects               are evaluated:
+beamformer performance. We evaluate three candidate positions, as                    • 2mic: MVDR beamformer with the two physical mics.
+illustrated in Fig. 1: Front (λ = −0.5), Middle (λ = 0.5) and
+Behind (λ = 1.5).                                                                    • GAI (2mic + vm): MVDR beamformer augmented with a
+     Fig. 2 shows the ISNR of the three-channel (two physical and                      VM generated using the GAI method [2].
+one virtual) MVDR beamformer versus target azimuth, averaged                         • Ext. GAI (2mic + vm): MVDR beamformer augmented with
+over all noise types and environments. Placing the VM in front                         a VM generated using the extended GAI method [1].
+yields the best performance for frontal targets, while rear placement
+is optimal for targets behind the user. This is because SNR at the                   • Proposed (2mic + vm): MVDR beamformer augmented with
+VM is highest when it is closest to the target. For HA applications,                   the proposed VM (λ = −4).
+where the target is usually in front, the Front configuration is rec-                • Proposed (2mic + 2vm): MVDR beamformer augmented
+ommended and used in subsequent sections.                                              with two proposed VMs (λ = −3 and −4).
+
+
+                                                                         15554
+
+            Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 15:37:22 UTC from IEEE Xplore. Restrictions apply.
+Fig. 4 presents a comprehensive performance comparison across var-
+ious conditions, with results broken down by input SNR (Fig. 4a),
+noise type (Fig. 4b), and reverberation level (Fig. 4c).
+     As shown in Fig. 4a, the proposed method consistently outper-
+forms both the baseline and the GAI-based approaches. It achieves
+substantial gains across all input SNR levels, with an ISNR improve-
+ment of up to 3 dB over the baseline two-microphone configuration.
+Furthermore, Fig. 4b and Fig. 4c demonstrate that the method main-
+tains robust performance across all tested noise types and reverbera-
+tion levels. This robustness is evident even in challenging conditions
+that can weaken the WDO assumption, such as multi-talker environ-
+ments (canteen, coffee machine), reverberant rooms, and scenes with
+stationary noise (train, street traffic).
+     Overall, the proposed VM approach delivers superior perfor-
+mance compared to the benchmark methods. Adding a single VM
+enhances both SNR and estimated intelligibility across a wide range
+of conditions, and adding a second VM yields further performance
+gains. This highlights the scalability and practical benefits of our
+method for hearing aid applications.                                                                     (a) Function of input SNR.
+
+                         6. CONCLUSION
+
+This paper presented a novel, low-complexity method for synthe-
+sizing virtual microphone (VM) signals to enhance beamforming in
+hearing aid applications. By leveraging the W-disjoint orthogonal-
+ity assumption, the proposed approach enables the creation of ad-
+ditional VM channels from a standard two-microphone setup, po-
+tentially eliminating the need for extra hardware. Experimental re-
+sults demonstrate that integrating the synthesized VM signals into
+an MVDR beamformer yields substantial improvements in signal-to-
+noise ratio and objective speech intelligibility across diverse acoustic
+scenarios. The method also allows flexible VM placement, further
+improving performance. Compared to existing techniques, the pro-
+posed solution offers superior noise reduction and scalability, while
+maintaining low computational complexity, making it highly suit-
+able for practical hearing aid devices.
+
+                                                                                                         (b) Function of noise type.
+
+
+
+
+                                                                                                     (c) Function of reverberation level.
+
+                                                                                Fig. 4: Comparison of MVDR beamformer performance across dif-
+                                                                                ferent configuration as a function of input SNR (Fig. 4a), noise type
+                                                                                (Fig. 4b), and reverberation level (Fig. 4c).
+
+
+
+                                                                         15555
+
+            Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 15:37:22 UTC from IEEE Xplore. Restrictions apply.
+                         7. REFERENCES                                          [14] P. Zahorik, D. S. Brungart, and A. W. Bronkhorst, “Auditory
+                                                                                     distance perception in humans: A summary of past and present
+ [1] R. Jinzai, K. Yamaoka, M. Matsumoto, S. Makino, and T. Ya-                      research,” Acta Acustica united with Acustica, vol. 91, no. 3,
+     mada, “Wavelength proportional arrangement of virtual mi-                       pp. 409–420, 2005.
+     crophones based on interpolation/extrapolation for underdeter-             [15] E. A. Habets, J. Benesty, S. Gannot, and I. Cohen, “The MVDR
+     mined speech enhancement,” in 27th European Signal Process-                     beamformer for speech enhancement,” in Speech Processing in
+     ing Conference (EUSIPCO), A Coruña, Spain, 2019, pp. 1–5.                      Modern Communication. Berlin, Germany: Springer, 2010,
+ [2] H. Katahira, N. Ono, S. Miyabe, T. Yamada, and S. Makino,                       pp. 225–254.
+     “Nonlinear speech enhancement by virtual increase of chan-                 [16] B. Cornelis, S. Doclo, T. V. den Bogaert, M. Moonen, and
+     nels and maximum SNR beamformer,” EURASIP Journal on                            J. Wouters, “Theoretical analysis of binaural multimicrophone
+     Advances in Signal Processing, vol. 2016, no. 1, pp. 1–8, Dec.                  noise reduction techniques,” IEEE Transactions on Audio,
+     2016.                                                                           Speech, and Language Processing, vol. 18, no. 2, pp. 342–355,
+ [3] G. D. Galdo, O. Thiergart, T. Weller, and E. A. P. Habets, “Gen-                Feb. 2010.
+     erating virtual microphone signals using geometrical informa-              [17] J. Jensen and C. H. Taal, “An algorithm for predicting the in-
+     tion gathered by distributed arrays,” in Proc. Joint Workshop                   telligibility of speech masked by modulated noise maskers,”
+     Hands-Free Speech Communication and Microphone Arrays                           IEEE/ACM Transactions on Audio, Speech, and Language
+     (HSCMA), Edinburgh, Scotland, May 2011, pp. 185–190.                            Processing, vol. 24, no. 11, pp. 2009–2022, Nov. 2016.
+ [4] T. Ochiai, M. Delcroix, T. Nakatani, R. Ikeshita, K. Kinoshita,
+     and S. Araki, “Neural network-based virtual microphone esti-
+     mator,” in Proc. IEEE Int. Conf. Acoustics, Speech and Signal
+     Processing (ICASSP), 2021, pp. 6114–6118.
+ [5] H. Katahira, N. Ono, S. Miyabe, T. Yamada, and S. Makino,
+     “Generalized amplitude interpolation by
+     lambda-divergence for virtual microphone array,” in 14th
+     International Workshop on Acoustic Signal Enhancement
+     (IWAENC), Juan-les-Pins, France, 2014, pp. 149–153.
+ [6] K. Kowalczyk, A. Craciun, and E. A. P. Habets, “Generating
+     virtual microphone signals in noisy environments,” in Proc.
+     European Signal Processing Conference (EUSIPCO), 2013.
+ [7] H. Segawa, T. Ochiai, M. Delcroix, T. Nakatani, R. Ikeshita,
+     S. Araki, T. Yamada, and S. Makino, “Neural network-based
+     virtual microphone estimation with virtual microphone and
+     beamformer-level multi-task loss,” in Proc. IEEE Int. Conf.
+     Acoustics, Speech and Signal Processing (ICASSP), 2024, pp.
+     11 021–11 025.
+ [8] ——, “Neural virtual microphone estimator: Application to
+     multi-talker reverberant mixtures,” in Asia-Pacific Signal and
+     Information Processing Association (APSIPA), 2022, pp. 293–
+     299.
+ [9] O. Yilmaz and S. Rickard, “Blind separation of speech mix-
+     tures via time-frequency masking,” IEEE Transactions on Sig-
+     nal Processing, vol. 52, no. 7, pp. 1830–1847, Jul. 2004.
+[10] S. Rickard, “The DUET blind source separation algorithm,”
+     in Blind Speech Separation, ser. Signals and Communication
+     Technology. Dordrecht, The Netherlands: Springer, 2007.
+[11] S. Rickard and O. Yilmaz, “On the approximate w-disjoint
+     orthogonality of speech,” in Proc. IEEE Int. Conf. Acoustics,
+     Speech and Signal Processing (ICASSP), 2002, pp. I–529–I–
+     532.
+[12] O. Shalvi and E. Weinstein, “System identification using non-
+     stationary signals,” IEEE Transactions on Signal Processing,
+     vol. 44, no. 8, pp. 2055–2063, Aug. 1996.
+[13] M. Farmani, M. S. Pedersen, Z.-H. Tan, and J. Jensen, “In-
+     formed sound source localization using relative transfer func-
+     tions for hearing aid applications,” IEEE/ACM Transactions on
+     Audio, Speech, and Language Processing, vol. 25, no. 3, pp.
+     611–623, 2017.
+
+
+                                                                         15556
+
+            Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 15:37:22 UTC from IEEE Xplore. Restrictions apply.
+

@@ -1,0 +1,110 @@
+# Entities
+
+> Pages about people, organizations, places, and other concrete "things".
+
+| Page | Summary | Created |
+|------|---------|---------|
+| [[entities/john-d-cook\|John D. Cook]] | Mathematician, blogger, consultant — writes about math, stats, and computation | 2026-04-10 |
+| [[entities/lifu-wu\|Lifu Wu]] | Researcher in acoustics and signal processing, Nanjing University of Information Science and Technology | 2026-04-10 |
+| [[entities/xiaojun-qiu\|Xiaojun Qiu]] | Acoustics researcher, Nanjing University & RMIT University; corresponding author on ANC papers | 2026-04-10 |
+| [[entities/yecai-guo\|Yecai Guo]] | Researcher, Nanjing University of Information Science and Technology | 2026-04-10 |
+| [[entities/sen-m-kuo\|Sen M. Kuo]] | ANC authority, Northern Illinois University — author of the definitive ANC textbook | 2026-04-10 |
+| [[entities/dennis-r-morgan\|Dennis R. Morgan]] | Bell Labs, Lucent Technologies — foundational FXLMS stability analysis | 2026-04-10 |
+| [[entities/judy-hanwen-shen\|Judy Hanwen Shen]] | Anthropic researcher — RCT on AI assistance and skill formation | 2026-04-11 |
+| [[entities/alex-tamkin\|Alex Tamkin]] | Anthropic researcher — RCT on AI assistance and skill formation | 2026-04-11 |
+| [[entities/badong-chen\|Badong Chen]] | Xi'an Jiaotong University — introduced generalized correntropy with GGD kernel | 2026-04-12 |
+| [[entities/jose-c-principe\|José C. Príncipe]] | University of Florida — pioneer of correntropy theory and Information Theoretic Learning | 2026-04-12 |
+| [[entities/lei-xing\|Lei Xing]] | Xi'an Jiaotong University — co-author on generalized correntropy | 2026-04-12 |
+| [[entities/haiquan-zhao\|Haiquan Zhao]] | Southwest Jiaotong University — co-author on generalized correntropy, ANC researcher | 2026-04-12 |
+| [[entities/nanning-zheng\|Nanning Zheng]] | Xi'an Jiaotong University — co-author on generalized correntropy | 2026-04-12 |
+| [[entities/masaaki-fukumoto\|Masaaki Fukumoto]] | Microsoft — Whisphone: whisper input earbuds using bone conduction + ANC | 2026-04-12 |
+| [[entities/chao-liang\|Chao Liang]] | Politecnico di Milano — delayed MPC for ANC with real-time validation | 2026-04-12 |
+| [[entities/francesco-ripamonti\|Francesco Ripamonti]] | Politecnico di Milano — active noise/vibration control, MPC | 2026-04-12 |
+| [[entities/marek-pawelczyk\|Marek Pawełczyk]] | Silesian University of Technology — ANC, sound and vibration control | 2026-04-12 |
+| [[entities/rajesh-masilamani\|Rajesh Masilamani]] | Inventor — Headphone Conversation Detect patent | 2026-04-12 |
+| [[entities/rakesh-murgai\|Rakesh Murgai]] | Inventor — Headphone Conversation Detect patent | 2026-04-12 |
+| [[entities/justin-woodruff\|Justin Woodruff]] | Inventor — Headphone Conversation Detect patent | 2026-04-12 |
+| [[entities/yingying-zhu\|Yingying Zhu]] | Southwest Jiaotong University — FxGMCC/IFxGMCC/C-IFxGMCC algorithms | 2026-04-12 |
+| [[entities/adrian-g-wills\|Adrian G. Wills]] | University of Newcastle — MPC for constraint handling in active structures on DSP | 2026-04-12 |
+| [[entities/piero-iared-rivera-benois\|Piero Iared Rivera Benois]] | Helmut-Schmidt-Universität — Hybrid FF+MVC+IMC ANC structures, FPGA implementation | 2026-04-13 |
+| [[entities/stephen-j-elliott\|Stephen J. Elliott]] | ISVR, University of Southampton — pioneer of feedback ANC and optimal control | 2026-04-12 |
+| [[entities/boaz-rafaely\|Boaz Rafaely]] | ISVR — feedback ANC researcher, spherical microphone arrays | 2026-04-12 |
+| [[entities/andrew-j-fleming\|Andrew J. Fleming]] | Active control systems researcher, co-author with Wills on MPC for ANC/AVC | 2026-04-12 |
+| [[entities/udo-zolzer\|Udo Zölzer]] | Helmut-Schmidt-Universität — signal processing, Benois PhD supervisor | 2026-04-12 |
+| [[entities/delf-sachau\|Delf Sachau]] | Helmut-Schmidt-Universität — active noise control, Benois co-supervisor | 2026-04-12 |
+| [[entities/nicolas-zucchet\|Nicolas Zucchet]] | Recurrent neural networks researcher — forward propagation of errors through time | 2026-04-12 |
+| [[entities/yaqi-zhu\|Yaqi Zhu]] | Researcher specializing in sound field control and robust PSZ optimization | 2026-04-19 |
+| [[entities/lisyarus\|lisyarus]] | Software engineer and graphics/math blogger | 2026-04-18 |
+| [[entities/andreas-schwarz\|Andreas Schwarz]] | FAU — spatial coherence models for dereverberation and robust ASR | 2026-04-25 |
+| [[entities/kashu-yamazaki\|Kashu Yamazaki]] | U. Arkansas at Little Rock — SNN review, computer vision, robotics | 2026-04-25 |
+| [[entities/viet-khoa-vo-ho\|Viet-Khoa Vo-Ho]] | U. Arkansas at Little Rock — co-author on SNN review | 2026-04-25 |
+| [[entities/darshan-bulsara\|Darshan Bulsara]] | U. Arkansas at Little Rock — co-author on SNN review | 2026-04-25 |
+| [[entities/ngan-le\|Ngan Le]] | U. Arkansas at Little Rock — SNN review corresponding author, computer vision | 2026-04-25 |
+| [[entities/shuning-dai\|Shuning Dai]] | NTU — speech-preserving Deep ANC with CRN in reverberant environments | 2026-04-25 |
+| [[entities/greg-welch\|Greg Welch]] | UNC-Chapel Hill — co-author of the standard Kalman filter tutorial | 2026-04-25 |
+| [[entities/gary-bishop\|Gary Bishop]] | UNC-Chapel Hill — co-author of the standard Kalman filter tutorial | 2026-04-25 |
+| [[entities/florian-hilgemann\|Florian Hilgemann]] | RWTH Aachen — data-driven uncertainty models for robust feedback ANC | 2026-04-26 |
+| [[entities/egke-chatzimoustafa\|Egke Chatzimoustafa]] | RWTH Aachen — co-author on data-driven uncertainty modeling for ANC | 2026-04-26 |
+| [[entities/peter-jax\|Peter Jax]] | RWTH Aachen — professor, robust ANC controller design | 2026-04-26 |
+| [[entities/fareedha\|Fareedha]] | NIT Warangal — deep learning for joint SPE and adaptive ANC control | 2026-04-27 |
+| [[entities/vasundhara\|Vasundhara]] | NIT Warangal — co-author on joint deep SPE and adaptive ANC | 2026-04-27 |
+| [[entities/asutosh-kar\|Asutosh Kar]] | Birmingham City University — adaptive filtering and deep learning for ANC | 2026-04-27 |
+| [[entities/mads-graesboell-christensen\|Mads Græsbøll Christensen]] | Aalborg University — audio signal processing, deep ANC | 2026-04-27 |
+| [[entities/muhammad-tahir-akhtar\|Muhammad Tahir Akhtar]] | Tohoku University / PIEAS — VSS LMS for online secondary path modeling | 2006 |
+| [[entities/masahide-abe\|Masahide Abe]] | Tohoku University — adaptive filtering, evolutionary computation | 2006 |
+| [[entities/masayuki-kawamata\|Masayuki Kawamata]] | Tohoku University — multidimensional DSP, linear system theory | 2006 |
+| [[entities/sina-miran\|Sina Miran]] | Starkey / Apple — IMU-based AFC in hearing aids | 2026-04-27 |
+| [[entities/henning-schepker\|Henning Schepker]] | Starkey — AFC, beamformer-based feedback cancellation | 2026-04-27 |
+| [[entities/ivo-merks\|Ivo Merks]] | Starkey / Chromatic — hearing aid signal processing | 2026-04-27 |
+| [[entities/martin-mckinney\|Martin McKinney]] | Starkey — hearing aid signal processing, multi-modal sensors | 2026-04-27 |
+| [[entities/ariel-frank\|Ariel Frank]] | Technion — time-domain ROI beamforming for smart glasses | 2026-04-28 |
+| [[entities/israel-cohen\|Israel Cohen]] | Technion — speech processing, beamforming, spatial filtering | 2026-04-28 |
+| [[entities/shiming-zhang\|Shiming Zhang]] | Saitama University — BC speech analysis/synthesis, WACF-CEP pitch extraction, LS-IIR synthesis | 2026-04-28 |
+| [[entities/boxiang-wang\|Boxiang Wang]] | NTU — MCALMS-based MVANC, directional SFANC, PD-SFANC | 2026-04-30 |
+| [[entities/junwei-ji\|Junwei Ji]] | NTU — multichannel ANC, distributed ANC, virtual sensing | 2026-04-28 |
+| [[entities/xiaoyi-shen\|Xiaoyi Shen]] | NTU — wireless ANC headphones, coherence-based selection, hybrid ANC | 2026-04-28 |
+| [[entities/dongyuan-shi\|Dongyuan Shi]] | NTU — meta-learning for ANC, generative fixed-filter ANC, open window ANC | 2026-04-28 |
+| [[entities/woon-seng-gan\|Woon-Seng Gan]] | NTU DSP Lab — ANC, adaptive filtering, audio signal processing | 2026-04-28 |
+| [[entities/zhengding-luo\|Zhengding Luo]] | NTU — directional SFANC, hybrid GFANC-FxNLMS | 2026-04-30 |
+| [[entities/haowen-li\|Haowen Li]] | NTU — active noise control, audio signal processing | 2026-04-30 |
+| [[entities/ziyi-yang\|Ziyi Yang]] | NTU — directional SFANC, deep learning for ANC | 2026-04-30 |
+| [[entities/felix-holzmueller\|Felix Holzmüller]] | Graz UT — Obs-TasNet, virtual sensing for ANC | 2026-04-30 |
+| [[entities/alois-sontacchi\|Alois Sontacchi]] | Graz UT — audio signal processing, virtual sensing | 2026-04-30 |
+| [[entities/shota-toyooka\|Shota Toyooka]] | Waseda — hybrid ANC, virtual sensing | 2026-04-30 |
+| [[entities/yoshinobu-kajikawa\|Yoshinobu Kajikawa]] | Kansai U — ANC, adaptive signal processing | 2026-04-30 |
+| [[entities/danielle-moreau\|Danielle Moreau]] | U Adelaide — virtual sensing review, stochastically optimal tonal diffuse field VS | 2026-04-28 |
+| [[entities/ben-cazzolato\|Ben Cazzolato]] | U Adelaide — forward difference prediction, adaptive LMS virtual microphone | 2026-04-28 |
+| [[entities/anthony-zander\|Anthony Zander]] | U Adelaide — moving virtual sensing, Kalman filtering for ANC | 2026-04-28 |
+| [[entities/cornelis-petersen\|Cornelis Petersen]] | Bassett / U Adelaide — Kalman filtering VS, optimal spatial sensing | 2026-04-28 |
+| [[entities/tom-oviste\|Tom Oviste]] | GN Group / Aalborg U — HVSF, neural VSLF for speech enhancement | 2026-04-29 |
+| [[entities/pejman-mowlaee\|Pejman Mowlaee]] | GN Group — multi-channel speech enhancement, hybrid DNN-DSP | 2026-04-29 |
+| [[entities/javier-badajoz-davila\|Javier Badajoz-Davila]] | GN Group — spatial covariance matrix estimation, speech enhancement | 2026-04-29 |
+| [[entities/jesper-rindom-jensen\|Jesper Rindom Jensen]] | Aalborg U — VSLF framework, audio analysis, optimal filtering | 2026-04-29 |
+| [[entities/mojtaba-farmani\|Mojtaba Farmani]] | Eriksholm / Aalborg U — VM beamforming for hearing aids, RTF-based localization | 2026-04-29 |
+| [[entities/svend-feldt\|Svend Feldt]] | Eriksholm — hearing aid signal processing, virtual microphone techniques | 2026-04-29 |
+| [[entities/jesper-jensen\|Jesper Jensen]] | Eriksholm / Aalborg U — hearing aid DSP, speech intelligibility, VM beamforming | 2026-04-29 |
+| [[entities/wei-liu\|Wei Liu]] | Wuhan University / Waseda University — SCM reconstruction, STFT-domain beamforming | 2026-04-30 |
+| [[entities/gongping-huang\|Gongping Huang]] | Wuhan University — differential beamforming, microphone array processing | 2026-04-30 |
+| [[entities/jingdong-chen\|Jingdong Chen]] | NWPU — microphone arrays, speech enhancement, beamforming | 2026-04-30 |
+| [[entities/jacob-benesty\|Jacob Benesty]] | INRS-EMT, U. Quebec — microphone arrays, MWF theory, adaptive filtering | 2026-04-30 |
+| [[entities/shoji-makino\|Shoji Makino]] | Waseda University — blind source separation, speech enhancement | 2026-04-30 |
+| [[entities/zhengding-luo\|Zhengding Luo]] | NTU Singapore — SFANC, DoA-based ANC, deep learning for ANC | 2026-04-30 |
+| [[entities/xiruo-su\|Xiruo Su]] | NTU Singapore — spatial ANC, sound source localization, DFG-SFANC | 2026-04-30 |
+| [[entities/lan-yin\|Lan Yin]] | Institute of Acoustics, CAS — FRM-SFANC algorithm for selective fixed-filter ANC in headphones | 2026-05-01 |
+| [[entities/zeqiang-zhang\|Zeqiang Zhang]] | Institute of Acoustics, CAS — co-author on FRM-SFANC | 2026-05-01 |
+| [[entities/ming-wu\|Ming Wu]] | Institute of Acoustics, CAS — co-author on FRM-SFANC | 2026-05-01 |
+| [[entities/shuang-zhou\|Shuang Zhou]] | Institute of Acoustics, CAS — co-author on FRM-SFANC | 2026-05-01 |
+| [[entities/jianfeng-guo\|Jianfeng Guo]] | Institute of Acoustics, CAS — co-author on FRM-SFANC | 2026-05-01 |
+| [[entities/jun-yang\|Jun Yang]] | Institute of Acoustics, CAS — co-author on FRM-SFANC | 2026-05-01 |
+| [[entities/jianing-zhang\|Jianing Zhang]] | Institute of Acoustics, CAS — co-author on FRM-SFANC | 2026-05-01 |
+| [[entities/eli-bendersky\|Eli Bendersky]] | Independent blogger and software engineer — numerical methods, linear algebra, programming | 2026-05-02 |
+| [[entities/yixuan-zhang\|Yixuan Zhang]] | Ohio State University — neural-augmented Kalman filter for acoustic howling suppression | 2026-05-02 |
+| [[entities/hao-zhang\|Hao Zhang]] | Tencent AI Lab — acoustic howling suppression, speech processing | 2026-05-02 |
+| [[entities/meng-yu\|Meng Yu]] | Tencent AI Lab — acoustic howling suppression, speech enhancement | 2026-05-02 |
+| [[entities/dong-yu\|Dong Yu]] | Tencent AI Lab — speech processing, acoustic signal processing | 2026-05-02 |
+| [[entities/rajesh-sharma|Rajesh Sharma]] | ERIM International — asymptotic analysis of momentum adaptive filtering | 2026-05-03 |
+| [[entities/william-sethares|William A. Sethares]] | University of Wisconsin–Madison — adaptive signal processing, convergence analysis | 2026-05-03 |
+| [[entities/james-bucklew|James A. Bucklew]] | University of Wisconsin–Madison — probability theory, weak convergence, large deviations | 2026-05-03 |
+| [[entities/yisong-zou|Yisong Zou]] | NTU — Transformer-based E2E-CFG for ANC | 2026-05-04 |
+| [[entities/qirui-huang|Qirui Huang]] | NTU — generative fixed-filter ANC, deep learning for ANC | 2026-05-04 |
+| [[entities/limin-zhang|Limin Zhang]] | Nanjing University — causality analysis of feedforward ANC headsets | 2026-05-05 |

@@ -1,0 +1,353 @@
+Interspeech 2024
+1-5 September 2024, Kos, Greece
+
+
+
+     Neural Network Augmented Kalman Filter for Robust Acoustic Howling
+                               Suppression
+
+                                   Yixuan Zhang1 , Hao Zhang2 , Meng Yu2 , Dong Yu2
+                                       1
+                                           Ohio State University, Columbus, OH, USA
+                                             2
+                                               Tencent AI Lab, Bellevue, WA, USA
+      zhang.7388@osu.edu, aaronhzhang@global.tencent.com, raymondmyu@global.tencent.com,
+                                   dyu@global.tencent.com
+
+                          Abstract                                           streaming inference, as AHS processing is continuously inte-
+                                                                             grated, influencing its input stream. To improve the mismatch
+Acoustic howling suppression (AHS) is a critical challenge in                issue and ease training, DeepAHS [14] leverages the teacher-
+audio communication systems. In this paper, we propose a                     forcing strategy and demonstrates superior performance com-
+novel approach that leverages the power of neural networks                   pared to other approaches. HybridAHS [15] enhances the per-
+(NN) to enhance the performance of traditional Kalman filter                 formance by integrating the Kalman filter. The integration is
+algorithms for AHS. Specifically, our method involves the inte-              achieved by augmenting network’s input with the output from
+gration of NN modules into the Kalman filter, enabling refining              the Kalman filter. Nevertheless, although both methods address
+reference signal, a key factor in effective adaptive filtering, and          the training concern and exhibit superiority, the discrepancy be-
+estimating covariance metrics for the filter which are crucial for           tween training and real-time streaming inference still exists.
+adaptability in dynamic conditions, thereby obtaining improved
+                                                                                  NN-augmented adaptive filtering approaches which poten-
+AHS performance. As a result, the proposed method achieves
+                                                                             tially introduce less distortion have been explored in the con-
+improved AHS performance compared to both standalone NN
+                                                                             text of AEC. Deep Adaptive AEC [16] employs NN modules
+and Kalman filter methods. Experimental evaluations validate
+                                                                             to estimate the nonlinear reference and the step size in the nor-
+the effectiveness of our approach.
+                                                                             malized least mean square (NLMS) algorithm, which shows im-
+Index Terms: AHS, adaptive feedback cancellation, Kalman
+                                                                             proved performance compared to fully DNN-based baselines in
+filter, neural network
+                                                                             time-varying acoustic environments. In [17], NN modules are
+                                                                             integrated into a frequency-domain Kalman filter (FDKF) for
+                     1. Introduction                                         estimating the nonlinear reference signal and a nonlinear transi-
+Acoustic howling is a phenomenon that frequently arises in au-               tion function, which improves the performance of FDKF signif-
+dio systems such as karaoke systems, and public address sys-                 icantly and outperforms the NLMS-based Deep Adaptive AEC
+tems where the amplified sound from the loudspeaker is cap-                  model. It is worth noting that existing studies show that ex-
+tured by the microphone and subsequently re-amplified recur-                 clusively employing NNs to estimate Kalman filter components
+sively. This creates an internal positive feedback loop within               does not necessarily yield performance improvements. How-
+audio systems, leading to an unpleasant howling sound that re-               ever, leveraging NNs to estimate absent or approximated com-
+inforces specific frequency components [1, 2, 3] which not only              ponents within the Kalman filter algorithm has demonstrated
+jeopardizes the proper functioning of equipment but also poses               considerable improvements, which further motivates our con-
+potential risks to human auditory health. Various techniques                 tinued explorations in the field of AHS.
+have been explored to suppress howling including gain control                     In this study, we introduce an NN augmented Kalman filter
+[4], notch filter [5, 6], and adaptive feedback control (AFC)                NeuralKalmanAHS, which incorporates NN modules to opti-
+[6, 7, 8]. Notably, AFC methods leverage adaptive filters like               mize reference signal refinement and covariance matrix estima-
+the Kalman filter to suppress howling through continuous ad-                 tion in a frequency-domain Kalman filter for AHS. We train the
+justments of filter coefficients driven by iterative feedback. The           model in a streaming mode that aligns with the streaming infer-
+real-time adaptation of AFC methods breaks the positive feed-                ence framework detailed in [14] which evaluates AHS models
+back loop and results in better AHS performance. However,                    in recurrent and real-world settings, thus eliminating potential
+such methods have shown sensitivity to control parameters and                mismatch issues. Furthermore, we employ a howling detection
+cannot effectively manage the nonlinearity introduced by am-                 strategy during training to ensure model convergence, allowing
+plifiers and loudspeakers.                                                   successful model training even in challenging acoustic howling
+     In recent years, inspired by acoustic echo cancellation                 scenarios.
+(AEC) studies [9, 10], deep-learning-based approaches have                        Ablation studies indicate that streaming training ensures ro-
+been explored to solve the AHS problem. Gan et al. [11] trained              bustness of NeuralKalmanAHS against acoustic howling, even
+a deep neural network (DNN) in the time-frequency domain to                  with lightweight models focused solely on covariance estima-
+suppress howling noise from speech signals. In [12], a model                 tion, while reference signal refinement substantially boosts per-
+based on a convolutional recurrent neural network is introduced              formance. Experimental results show that the proposed Neural-
+for howling detection for real-time communication scenarios.                 KalmanAHS effectively suppresses howling noise with less dis-
+In [13], a deep learning framework, called DeepMFC, is in-                   tortion, demonstrating remarkable stability in challenging sce-
+troduced to address marginal stability issues of acoustic feed-              narios, and outperforming strong baseline methods. 1
+back systems. While existing approaches seem promising, the
+data used for training is generated offline in a closed-loop sys-              1 Demos are available in https://yixuanz.github.io/
+tem without AHS processing. This leads to a mismatch during                  NeuralKalmanAHS.
+
+
+
+
+                                                                      1715                             10.21437/Interspeech.2024-166
+     The remainder of this paper is organized as follows. Section            AHS system, Y(k) corresponds to the frequency-domain mi-
+2 introduces the problem formulation of acoustic howling and                 crophone signal. Ŵ(k) denotes the estimated acoustic path in
+the frequency-domain Kalman filter. Section 3 presents the pro-              the frequency domain.
+posed NeuralKalmanAHS. Section 4 and Section 5 describe the                       In the update step, the state equation for updating echo path
+experimental setup and evaluation results, respectively. Section             Ŵ(k) is defined as,
+6 concludes the paper.
+                                                                                         Ŵ(k + 1) = A[Ŵ(k) + K(k)Ŝ(k)],                 (5)
+        2. Acoustic Howling Suppression
+                                                                             where A is the transition factor, and K(k) denotes the Kalman
+2.1. Problem formulation                                                     gain. As shown in Fig. 1, the update of K(k) is related to
+Fig. 1 shows a typical single-channel acoustic amplification                 the reference signal, acoustic path, and the estimated near-end
+system with the proposed NeuralKalmanAHS model. The sys-                     signal. The dashed line in Fig. 1 indicates the relations not
+tem consists of a microphone and a loudspeaker, both of which                expressed directly in the equations. The calculation of K(k) is
+are in the same space. The microphone receives a mixture of the              defined as,
+near-end speech signal s(t) as well as the playback signal d(t)
+and sends the mixed signal y(t) to an AHS system for howling                  K(k) = P(k)XH (k)[X(k)P(k)XH (k) + Ψvv (k)]−1 , (6)
+suppression. The output from the AHS system is then amplified                   P(k + 1) = A2 [I − αK(k)X(k)]P(k) + Ψ∆∆ (k),               (7)
+based on the designated loudspeaker gain and the amplified out-
+put x(t) is played out by the loudspeaker. The playback signal               where Ψvv (k) and Ψ∆∆ (k) are observation noise covariance
+d(t) originated from x(t) can be formulated as,                              and process noise covariance respectively, P(k) is the state es-
+                                                                             timation error covariance. In FDKF, Ψvv (k) and Ψ∆∆ (k) are
+                       d(t) = x(t) ∗ h(t),                     (1)           approximated by the covariance of the estimated near-end sig-
+                                                                             nal Ψŝŝ (k) and the acoustic-path ΨŴ Ŵ (k), respectively. More
+where ∗ and h(t) denote convolution and the acoustic path from               details can be found in [18, 19].
+the loudspeaker to the microphone respectively.
+     Without AHS system, the microphone signal can be formu-
+lated as,
+                                                                                              3. Proposed Method
+                                                                             3.1. Overall approach
+             y(t) = s(t) + [G · y(t − ∆t)] ∗ h(t),             (2)
+                                                                             The overall structure of the proposed NeuralKalmanAHS
+where G is the loudspeaker gain and ∆t denotes the delay be-                 method is depicted in Fig. 1, where the frequency-domain
+tween the microphone and the loudspeaker introduced by the                   Kalman filter (described in Section 2.2) is enhanced by inte-
+system. The recursive relation in Eq.2 leads to a re-amplifying              grating NN components to refine the reference signal X(k) and
+of the playback signal which results in acoustic howling - a                 covariance matrices Ψvv (k) and Ψ∆∆ (k).
+high-pitched jarring sound.
+    With AHS system, the formulation becomes,                                3.1.1. Modeling reference signal R
+
+             y(t) = s(t) + [G · ŝ(t − ∆t)] ∗ h(t),            (3)           As a promising strategy to enhance performance, refining the
+                                                                             original reference signal by incorporating a learned reference
+where ŝ(t) is the output from the AHS system. Ideally, the                  signal has been established in prior acoustic echo cancellation
+estimated ŝ(t) will be as close as s(t). Since acoustic howling is          research [15, 17] to enhance adaptive algorithm capabilities.
+a recursive process, the robustness of the AHS system is decided             To further develop this idea in AHS, we propose to integrate
+by how thoroughly the howling sound can be removed in each                   a learned reference signal R(k) into the Kalman filter frame-
+iteration.                                                                   work, with the original reference signal X(k − 1) and micro-
+     While acoustic howling and acoustic echo share origins in               phone recording Y(k) as inputs:
+feedback within communication systems, it is worth noting that
+they represent distinct issues for two reasons. First, while both                            R(k) = Hr (Y(k), X(k − 1)),                   (8)
+stem from playback signals, howling involves recursively accu-
+mulated and re-amplified playback signals. Second, in acoustic               where Hr represents the network parameters for reference sig-
+howling scenarios, the playback signal originates from the same              nal estimation. Hr is designed as a two-layer long short-term
+near-end speaker, thereby making AHS more challenging.                       memory (LSTM) network with 300 units per layer followed by
+                                                                             a linear layer with Sigmoid activation function, which takes the
+2.2. Frequency-domain Kalman filter                                          concatenation of the log power spectrums of the original refer-
+                                                                             ence signal and microphone recording as input and estimates a
+Frequency-domain Kalman filter (FDKF) estimates the feed-                    ratio mask which is then applied on the microphone signal to
+back signal by modeling the acoustic path with an adaptive filter            get the refined reference signal R(k). By integrating this re-
+W(k) (k denotes the frame index). FDKF can be understood                     fined reference signal, the operational load on the Kalman filter,
+as a two-step process, where the iterative feedback from these               particularly in attenuating severe acoustic howling, is reduced,
+steps drives the update of filter weights.                                   enhancing its efficiency.
+    In the prediction phase, the frequency-domain near-end sig-
+nal S(k) is estimated by,                                                    3.1.2. Modeling covariance matrices Ψvv and Ψ∆∆
+
+                 Ŝ(k) = Y(k) − X(k)Ŵ(k),                     (4)           In the Kalman filter, covariance matrices Ψvv (k) and Ψ∆∆ (k)
+                                                                             represent uncertainties associated with measurement and state
+where X(k) is the frequency-domain reference signal which                    variables. The accuracy of covariance matrices estimation sig-
+corresponds to the amplified and delayed estimates from the                  nificantly influences Kalman filter performance, affecting state
+
+
+
+
+                                                                      1716
+                  Figure 1: Diagram of an acoustic amplification system and the proposed NeuralKalmanAHS model.
+
+
+estimation accuracy, adaptation to dynamic conditions, and con-             Table 1: Ablation study on NeuralKalmanAHS components for
+vergence rate, which is especially crucial for dependable acous-            acoustic howling suppression. Mean and standard deviation are
+tic howling suppression. Conventional methods for covariance                included for all evaluation metrics.
+matrix estimation in the Kalman filter often assume linearity
+and stationary conditions, neglecting variable interdependen-                         G=2                 SDR (dB)           PESQ
+cies and being sensitive to noise and outliers, limiting adapt-                 NeuralKalmanAHS          2.32 ± 1.92      2.27 ± 0.46
+ability and prediction accuracy. We propose employing NN                            without R            1.28 ± 1.42      1.72 ± 0.38
+modules to learn covariance matrices. Original estimations in                   without Ψvv , Ψ∆∆        2.17 ± 1.85      2.21 ± 0.47
+equations (9) and (10) are transformed to:                                         Kalman filter       -11.92 ± 15.62     1.62 ± 0.80
+                    Ψvv (k) = HΨ1 (Ŝ(k)),                    (9)
+                  Ψ∆∆ (k) = HΨ2 (Ŵ(k)),                  (10)
+where the estimation of Ψvv (k) and Ψ∆∆ (k) both involve
+training an LSTM cell with 65 hidden states. The inputs to the
+RNNs for estimating Ψvv (k) and Ψ∆∆ (k) are the magnitude
+of estimated near-end speech Ŝ(k) and Ŵ(k), respectively.
+
+3.2. Loss function and training strategy
+The loss function in Eq. 11 relies on the L1 norm to quantify the
+difference in magnitude spectrum between the enhanced signal
+Ŝ and the target signal S. By utilizing the L1 loss on the magni-
+tude spectrum, the model benefits from effective regularization
+of the scale of the output signal.                                          Figure 2: Spectrograms of (a) target near-end signal and out-
+                                                                            puts of (b) NeuralKalmanAHS, (c) NeuralKalmanAHS without
+                       Loss = l1(S, Ŝ)                      (11)           Ψvv (k), Ψ∆∆ (k), (d) NeuralKalmanAHS without R(k), (e)
+     We observe that training the NeuralKalmanAHS model can                 Kalman filter.
+be difficult and severe acoustic howling is prone to occur with
+an initially randomized model. The recursive nature of stream-
+ing training often results in an energy explosion, leading to a                            4. Experimental Setup
+‘not a number’ (NAN) issue and halting gradient updates. In the
+                                                                            4.1. Data preparation
+process of training NeuralKalmanAHS, we incorporate howling
+detection as a key measure. During each training iteration, we              During streaming training and inference, for each sample, a pair
+monitor the NeuralKalmanAHS output that utilizes a normal-                  of RIRs and speech signals are randomly selected and recur-
+ized scale of about -1.0 to +1.0 to interpret the 16-bit WAV file           sively used to generate the playback and microphone signal.
+amplitudes. If the amplitude surpasses the upper limit for over             The near-end speech audios are obtained from the AISHELL-
+100 consecutive samples—a threshold set from experimental                   2 dataset [20]. In addition, 10,000 pairs of room impulse re-
+observations—training is halted to prevent howling. This strat-             sponses (RIRs) are generated using the image method [21].
+egy prevents the recursive training from triggering NAN issues,             The RIRs are characterized by random room properties and re-
+consequently preventing gradient update failures and enhancing              verberation times (RT60) selected within the 0 to 0.6 seconds
+the convergence of the model. The proposed model is trained                 range. Each RIR pair represents near-end speaker and loud-
+for 60 epochs with a batch size of 128.                                     speaker positions. The system delay (∆t) of the simulated
+
+
+
+
+                                                                     1717
+Table 2: Howling suppression performance of different methods. Mean and standard deviation are included for all evaluation metrics.
+
+        Models                                      SDR (dB)                                                          PESQ
+           G                1.5               2                 2.5                 3            1.5             2           2.5            3
+        no AHS        -30.51 ± 7.23    -31.86 ± 5.66      -33.10 ± 3.96      -33.21 ± 3.94        -              -            -             -
+        Kalman        -5.11 ± 13.20   -10.33 ± 14.84     -14.88 ± 15.14     -18.25 ± 14.77   1.94 ± 0.72    1.65 ± 0.73  1.44 ± 0.70   1.30 ± 0.64
+    DeepMFC [13]       -0.09 ± 6.50     -2.78 ± 9.44      -5.59 ± 11.40      -7.69 ± 12.26   2.11 ± 0.51    1.88 ± 0.59  1.70 ± 0.62   1.56 ± 0.59
+    HybridAHS [15]      2.96 ± 3.04      1.25 ± 5.79       -1.45 ± 9.60      -3.49 ± 10.90   2.57 ± 0.47    2.33 ± 0.53  2.22 ± 0.59   1.95 ± 0.62
+      Neural-KG         2.50 ± 2.78      1.63 ± 3.34       -0.46 ± 7.46       -2.50 ± 9.94   2.35 ± 0.46    2.14 ± 0.44  1.95 ± 0.48   1.80 ± 0.53
+   NeuralKalmanAHS      3.65 ± 2.01      2.65 ± 1.70       1.98 ± 1.49         1.45 ± 1.31   2.55 ± 0.44    2.33 ± 0.41  2.17 ± 0.39   2.04 ± 0.37
+
+
+
+acoustic amplification system ranges randomly from 0.15 to
+0.25 seconds, and the amplification gain is randomly chosen be-
+tween 1 and 3. Overall, the training, validation, and testing sets
+comprised 38,000, 1,000, and 200 utterances, respectively. The
+testing data contained distinct utterances and RIRs compared to
+the training and validation data. All input audios are sampled at
+16 kHz. STFT is computed with an 8 ms frame length and 50%
+frame shift.
+
+4.2. Evaluation metrics
+In this study, we evaluate the acoustic howling suppression
+(AHS) techniques using two metrics: signal-to-distortion ratio
+(SDR) [22] and perceptual evaluation of speech quality (PESQ)
+[23]. While we rely on PESQ to evaluate speech quality preser-
+vation, we emphasize SDR results to show the effectiveness of
+AHS methods in howling suppression, considering the insensi-
+tivity of PESQ to scale.
+                                                                                 Figure 3: Spectrograms of (a) target signal, (b) no AHS, (c)
+                                                                                 Kalman filter, (d) DeepMFC, (e) HybridAHS, (f) Neural-KG,
+              5. Experimental Results                                            and (g) Proposed NeuralKalmanAHS.
+5.1. Ablation study
+We perform an ablation study on NeuralKalmanAHS, evaluat-                        tings aligned with NeuralKalmanAHS. We evaluate the mod-
+ing the role of modeling reference signal and covariance ma-                     els at loudspeaker gains (G) of {1.5, 2, 2.5, 3}, where lower
+trices. Using 50 utterances randomly selected from the test                      gains imply less challenging scenarios. Results show that DNN-
+set and evaluating with a fixed loudspeaker gain of 2, we                        based methods consistently outperform the frequency-domain
+train and compare various model versions: complete Neural-                       Kalman filter in all cases. While DeepMFC and HybridAHS
+KalmanAHS, NeuralKalmanAHS without modeling covariance                           perform well at low G, their efficacy diminishes as G rises. On
+matrices, NeuralKalmanAHS without modeling reference sig-                        the other hand, NeuralKalmanAHS remains robust in challeng-
+nal, and original Kalman filter. Table 1 demonstrates the sig-                   ing situations with high loudspeaker gain values. Compared
+nificance of modeling both R(k) and Ψvv (k), Ψ∆∆ (k) com-                        to the best-performed HybridAHS, NeuralKalmanAHS demon-
+ponents. We can observe that although not modeling R(k) re-                      strates robust howling suppression performance with reduced
+sults in a model only estimating covariance matrices for having                  distortion, especially in challenging cases. When G = 3, it
+just 0.08 M parameters and inadequate performance in terms                       enhances SDR by 4.94 dB and PESQ by 0.09. Spectrograms
+of speech quality, with streaming training, the model still shows                of the estimates from all benchmark methods are illustrated in
+robustness in preventing severe howling, achieving significantly                 Fig. 3. We can observe that the proposed NeuralKalmanAHS
+higher mean and lower standard deviation of SDR compared to                      consistently achieves the best results across both moderate and
+the Kalman filter. In addition, we observe that only estimating                  severe howling scenarios.
+R(k) shows strong howling suppression performance, SDR and
+PESQ are slightly worse compared to the complete NeuralKa-
+lmanAHS. Spectrograms in Fig. 2 which visualize differences                                                6. Conclusion
+among evaluated models in howling suppression also validate                      In this study, we have introduced NeuralKalmanAHS, an NN-
+these observations.                                                              augmented Kalman filter for acoustic howling suppression. Our
+                                                                                 approach employs NN to help refine reference signal and esti-
+5.2. Comparison with other methods                                               mate covariance matrices in the frequency-domain Kalman fil-
+                                                                                 ter. Through an ablation study, we have demonstrated the signif-
+Table 2 compares NeuralKalmanAHS to several benchmarks:
+                                                                                 icance of modeling the covariance matrices and reference sig-
+the frequency-domain Kalman filter, two offline-trained meth-
+                                                                                 nal, and the efficacy of streaming training, even when focus-
+ods including DeepMFC [13] and HybridAHS [15], and an
+                                                                                 ing solely on modeling covariance with a compact model. The
+online-trained model Neural-KG. The Neural-KG, inspired by
+                                                                                 proposed NeuralKalmanAHS outperforms strong DNN-based
+[24], modeling Kalman gain in the Kalman filter, is built upon
+                                                                                 benchmarks and exhibits less distortion. Future work will ex-
+[25] and uses streaming training. For a fair comparison, all
+                                                                                 plore lightweight model designs and extend the approach to
+NN-based methods, unless explicitly mentioned, utilize a two-
+                                                                                 multi-channel acoustic howling suppression.
+layer LSTM network with a model size and experimental set-
+
+
+
+
+                                                                          1718
+                        7. References                                             [20] J. Du, X. Na, X. Liu, and H. Bu, “AISHELL-2: Transform-
+                                                                                       ing mandarin asr research into industrial scale,” arXiv preprint
+ [1] R. V. Waterhouse, “Theory of howlback in reverberant rooms,”                      arXiv:1808.10583, 2018.
+     The Journal of the Acoustical Society of America, vol. 37, pp.
+     921–923, 1965.                                                               [21] J. B. Allen and D. A. Berkley, “Image method for efficiently sim-
+                                                                                       ulating small-room acoustics,” The Journal of the Acoustical So-
+ [2] T. Van Waterschoot and M. Moonen, “Fifty years of acoustic feed-                  ciety of America, vol. 65, pp. 943–950, 1979.
+     back control: State of the art and future challenges,” Proceedings
+     of the IEEE, vol. 99, pp. 288–327, 2010.                                     [22] E. Vincent, R. Gribonval, and C. Févotte, “Performance measure-
+                                                                                       ment in blind audio source separation,” IEEE transactions on au-
+ [3] W. Loetwassana, R. Punchalard, A. Lorsawatsiri, J. Koseeyaporn,                   dio, speech, and language processing, vol. 14, pp. 1462–1469,
+     and P. Wardkein, “Adaptive howling suppressor in an audio am-                     2006.
+     plifier system,” in Asia-Pacific Conference on Communications,
+     2007, pp. 445–448.                                                           [23] A. W. Rix, J. G. Beerends, M. P. Hollier, and A. P. Hekstra, “Per-
+                                                                                       ceptual evaluation of speech quality (PESQ)-a new method for
+ [4] M. R. Schroeder, “Improvement of acoustic-feedback stability                      speech quality assessment of telephone networks and codecs,” in
+     by frequency shifting,” The Journal of the Acoustical Society of                  Proc. ICASSP, vol. 2, 2001, pp. 749–752.
+     America, vol. 36, pp. 1718–1724, 1964.
+                                                                                  [24] B. Soleimani, H. Schepker, and M. Mirbagheri, “Neural-afc:
+ [5] P. Gil-Cacho, T. Van Waterschoot, M. Moonen, and S. H. Jensen,                    Learning-based step-size control for adaptive feedback cancella-
+     “Regularized adaptive notch filters for acoustic howling suppres-                 tion with closed-loop model training,” in Proc. ICASSP, 2023, pp.
+     sion,” in Proc. European Signal Processing Conference, 2009, pp.                  1–5.
+     2574–2578.
+                                                                                  [25] D. Yang, F. Jiang, W. Wu, X. Fang, and M. Cao, “Low-complexity
+ [6] T. v. Waterschoot and M. Moonen, “Comparative evaluation of                       acoustic echo cancellation with neural kalman filtering,” in Proc.
+     howling detection criteria in notch-filter-based howling suppres-                 ICASSP, 2023, pp. 1–5.
+     sion,” Journal of the Audio Engineering Society, vol. 58, pp. 923–
+     940, 2010.
+ [7] H. A. L. Joson, F. Asano, Y. Suzuki, and T. Sone, “Adaptive feed-
+     back cancellation with frequency compression for hearing aids,”
+     The Journal of the Acoustical Society of America, vol. 94, pp.
+     3248–3254, 1993.
+ [8] F. Albu, L. T. Tran, and S. Nordholm, “The hybrid simplified
+     kalman filter for adaptive feedback cancellation,” in Proc. Inter-
+     national Conference on Communications, 2018, pp. 45–50.
+ [9] H. Zhang and D. Wang, “Deep learning for acoustic echo cancel-
+     lation in noisy and double-talk scenarios,” Proc. Interspeech, vol.
+     161, p. 322, 2018.
+[10] ——, “Neural cascade architecture for multi-channel acoustic
+     echo suppression,” IEEE/ACM Transactions on Audio, Speech,
+     and Language Processing, vol. 30, pp. 2326–2336, 2022.
+[11] H. Gan, G. Luo, Y. Luo, and W. Luo, “Howling noise cancella-
+     tion in time–frequency domain by deep neural networks,” in Proc.
+     ICICT, 2022, pp. 319–332.
+[12] Z. Chen, Y. Hao, Y. Chen, G. Chen, and L. Ruan, “A neural
+     network-based howling detection method for real-time commu-
+     nication applications,” in Proc. ICASSP, 2022, pp. 206–210.
+[13] C. Zheng, M. Wang, X. Li, and B. C. Moore, “A deep learning
+     solution to the marginal stability problems of acoustic feedback
+     systems for hearing aids,” The Journal of the Acoustical Society
+     of America, vol. 152, pp. 3616–3634, 2022.
+[14] H. Zhang, M. Yu, and D. Yu, “Deep AHS: A deep learning ap-
+     proach to acoustic howling suppression,” in Proc. ICASSP, 2023,
+     pp. 1–5.
+[15] H. Zhang, M. Yu, Y. Wu, T. Yu, and D. Yu, “Hybrid AHS: A
+     hybrid of kalman filter and deep learning for acoustic howling
+     suppression,” arXiv preprint arXiv:2305.02583, 2023.
+[16] H. Zhang, S. Kandadai, H. Rao, M. Kim, T. Pruthi, and T. Krist-
+     jansson, “Deep adaptive AEC: Hybrid of deep learning and adap-
+     tive acoustic echo cancellation,” in Proc. ICASSP, 2022, pp. 756–
+     760.
+[17] Y. Zhang, M. Yu, H. Zhang, D. Yu, and D. Wang, “NeuralKalman:
+     A learnable kalman filter for acoustic echo cancellation,” arXiv
+     preprint arXiv:2301.12363, 2023.
+[18] F. Yang, G. Enzner, and J. Yang, “Frequency-domain adaptive
+     Kalman filter with fast recovery of abrupt echo-path changes,”
+     IEEE Signal Processing Letters, vol. 24, pp. 1778–1782, 2017.
+[19] G. Enzner and P. Vary, “Frequency-domain adaptive Kalman filter
+     for acoustic echo control in hands-free telephones,” Signal Pro-
+     cessing, vol. 86, pp. 1140–1156, 2006.
+
+
+
+
+                                                                           1719
+

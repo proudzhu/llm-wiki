@@ -1,0 +1,844 @@
+Prepri nt not peer review ed
+
+Graphical Abstract
+
+Hybrid Active Noise Control System for Remote Microphone Based Virtual Sensing with Two Compensation Filters
+Shota Toyooka, Yoshinobu Kajikawa
+
+Hybrid Active Noise Control System Based on Remote Microphone Based
+
+Virtual Sensing with Two Compensation Filters
+
+S.Toyooka, Y.kajikawa from Kansai University, Japan.
+
+An additional adaptive filter separates the signals at the Err. mic. Accurately estimates the noise
+
+Two compensatio filters are used for each signal.
+
+at the desired location.
+
+Conv. system
+
+Err.m ic
+
+Prop. system
+
+Err.m ic
+
+Sec. source
+
+Ref. mic
+Con trol
+filter
+
+Compensation filter1
+
+Sec. source
+
+Adaptive
+
+filter
+
+Ref. mic
+Con trol
+
+Compensation filter1
+
+filter
+
+Compensation
+
+filter2
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+Prepri nt not peer review ed
+
+Highlights
+Hybrid Active Noise Control System for Remote Microphone Based Virtual Sensing with Two Compensation Filters Shota Toyooka, Yoshinobu Kajikawa
+· This study introduces a pair of dedicated compensation filters for each noise source, enabling Remote Microphone-based Virtual Sensing (RMVS) to reconstruct the target signal at locations without microphones.
+· An additional adaptive filter decomposes the error microphone signal into individual source components applied to corresponding compensation filters for both feedforward and feedback control.
+· Simulation results using measured impulse responses demonstrate an additional noise reduction of approximately 20 dB compared to conventional hybrid active noise control (ANC) systems.
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+Prepri nt not peer review ed
+
+Hybrid Active Noise Control System for Remote Microphone Based Virtual Sensing with Two Compensation Filters
+Shota Toyooka, Yoshinobu Kajikawa
+Faculty of Engineering Science, Kansai University, 3-3-35 Yamate-cho, Suita-shi, 564-8680, Osaka, Japan
+
+Abstract
+This paper proposes a hybrid active noise control system (ANC) for remote microphone-based virtual sensing with two compensation filters. The proposed system can accurately estimate the desired signal at the desired location by creating compensation filters for multiple noise sources. Two compensation filters are created for each primary path from the noise source to the error microphone and the desired point in feed-forward and feedback ANC. An additional adaptive filter decomposes the mixed signal captured by the error microphone into individual source components. Each component is then processed using its corresponding compensation filter in both feedforward and feedback control, allowing the system to reconstruct the desired signal with high accuracy. Simulation results using measured impulse responses demonstrate that the proposed system improves noise reduction by approximately 20 dB compared to the conventional hybrid ANC system.
+Keywords: Active noise control, Hybrid ANC system, Virtual sensing, Remote microphone-based virtual sensing
+
+1. Intorduction
+In recent years, noise emissions from factories and industrial facilities have become a serious social concern in urban and densely populated industrial areas. Such noise not only degrades the working environment but also adversely affects the health and quality of life of nearby residents. As a result, there is an increasing demand for effective noise control strategies.
+
+Preprint submitted to Nuclear Physics B
+
+May 28, 2025
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+Prepri nt not peer review ed
+
+Conventional noise mitigation approaches have largely relied on passive noise control techniques such as sound-insulation barriers and absorptive materials. However, these methods are often ineffective for low-frequency noise and in large, reverberant spaces with spatially distributed noise sources. To overcome these limitations, active noise control (ANC) [? ? ? ? ? ] has gained considerable attention, especially in industrial settings characterized by the simultaneous operation of multiple machinery-based noise sources.
+ANC systems attenuate unwanted noise by generating anti-noise signals that are equal in amplitude and opposite in phase, effectively canceling the noise through destructive interference. Three primary ANC architectures have been developed: feedforward (FF [? ? ]), feedback (FB [? ? ]), and hybrid (H) systems. A typical FFANC configuration uses a reference microphone to capture the unwanted noise, a secondary source to emit antinoise, and an error microphone placed at the control point. This configuration allows broadband noise reduction, but only for components that are detectable by the reference microphone. In contrast, FBANC uses only an error microphone, limiting their effectiveness to narrowband or periodic noise signals that exhibit predictable characteristics. HANC systems combine the strengths of both FF and FB configurations to enhance noise reduction performance across a broader frequency range. A common limitation of these ANC systems is that they create a "zone of quiet" (ZoQ) centered around the error microphone, with noise attenuation constrained to that localized region. Moreover, the size of the ZoQ is frequency-dependent, meaning that certain frequency bands may remain unaffected by ANC [? ? ? ].
+To address this spatial limitation, virtual sensing techniques have been proposed [? ? ? ? ? ? ? ? ? ? ? ? ? ]. These methods estimate the noise signal at a desired location without physically placing a microphone there. This can be achieved by estimating the signal at the desired location by using the signal at an error microphone location far from the desired location. Several methods have been proposed for virtual sensing, however, this paper focuses on the remote microphone-based virtual sensing (RMVS) that uses a compensation filter to model the relationship between the error microphone and the desired location.
+Previous work has incorporated RMVS into HANC systems [? ], allowing effective noise reduction in environments with multiple sources, such as factories, without requiring microphones near human operators. In such scenarios, broadband mechanical noise is typically suppressed via FF control, while narrowband or tonal noise is managed through FB control. However,
+2
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+Prepri nt not peer review ed
+
+conventional RMVS-based HANC systems apply a single correction filter associated with the signal from the reference microphone. In the presence of multiple noise sources, this approach becomes inadequate: a single filter cannot capture the distinct paths and contributions from each source. Furthermore, the error microphone receives a composite signal that blends all source components, preventing the system from isolating individual noise contributions--resulting in suboptimal control performance.
+To overcome these limitations, this paper proposes a novel active noise control system for RMVS with two dedicated compensation filters per noise source. The proposed system can accurately estimate the desired signals at the desired location by creating compensation filters for each of multiple noise sources. Two compensation filters are created for each primary path from the noise source to the error microphone and the desired location in feed-forward and feedback ANC. By using an additional adaptive filter, the desired signals for each noise source are separated from the mixed signal from multiple noise sources acquired microphone. By applying the appropriate compensation filters to each separated component, the system reconstructs the target signal at the desired location with high accuracy.
+The paper is organized as follows: Section 2 reviews the FFANC system using RMVS, followed by a description of the conventional HANC system using RMVS. Section 3 presents the proposed dual-compensation filter architecture. Section 4 provides a performance evaluation based on simulations using measured impulse responses. Section 5 concludes the paper and outlines directions for future work.
+2. Conventional system
+Virtual sensing aims to reduce unwanted noise at a specified target position without physically placing a microphone at that point. Existing techniques can be broadly categorized into two approaches: (i) array-based extrapolation methods [? ] that do not require pre-estimation, and (ii) methods that rely on pre-estimated transfer functions. While the former approach leverages dense microphone arrays to estimate spatial sound fields, it is often cost-prohibitive and impractical in real-world applications due to the large number of sensors required. Therefore, this study adopts the latter approach based on pre-estimated transfer functions.
+Three microphones are mainly used for virtual sensing: (1) a reference microphone to acquire the primary noise signal, (2) a microphone placed at
+3
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+Prepri nt not peer review ed
+
+the target location--referred to as the virtual microphone--used only during the tuning stage, and (3) an error microphone positioned at a distance from the desired (virtual microphone) location. The virtual sensing process consists of two stages: a tuning stage for estimating system characteristics and a control stage for real-time noise reduction. The purpose of RMVS is to estimate the signal at the virtual microphone position using the signal measured at the error microphone. During the tuning stage, a microphone is temporarily placed at the desired location of noise reduction, and a compensation filter is estimated to model the relationship between the virtual microphone and the error microphone. In the subsequent control stage, the compensation filter is applied to the error microphone signal to estimate the desired signal at the desired location, enabling noise reduction without the need for a physical microphone at that point.
+
+2.1. FFANC system with RMVS
+Fig. 1(a) shows a block diagram of the tuning stage for FFANC with RMVS. In Fig. 1(a), Pmx and Pvx are the primary paths from the noise source near the reference microphone to the error microphone and virtual microphone, and Cmx is the compensation filter for that noise source. In the tuning stage of RMVS, the virtual microphone is placed at the desired position and the transfer function of the ratio of Pmx and Pvx is estimated. The error signal e(n) is given by
+
+E(z) = Dvx(z) - Yc(z)
+
+= X(z){Pvx(z) - Cmx(z)Pmx(z)},
+
+(1)
+
+where X(z) is the unwanted noise from the noise source near the reference microphone, and Pvx(z), Pmx(z), and Cmx(z) are z-transforms of Pvx, Pmx, and Cmx, respectively. The Cmx(z) is estimated using an adaptive filter to minimize the squared error in Eq. (1). Therefore, Cmx(z) converges to the following transfer function,
+
+Cmx(z) = Pvx(z) . (2) Pmx(z)
+
+Also, Cmx(z) is updated using the Normalized Least Mean Square (NLMS) algorithm defined by
+
+
+
+cmx(n + 1) = cmx(n) +
+
+2 e(n)dmx(n),
+
+(3)
+
+ + dmx(n)
+
+4
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+Prepri nt not peer review ed
+
+!!""
+
+%!"!""
+
+#!"
+
+##" '()*+,-./(0)123145 6))1)./(0)123145
+
+%#"!""
+
+'$!"" $#"
+
+&!""
+!!
+
+!!"" $
+&'!""
+
+#$%&
+
+(a) Tuning stage
+
+'()*+,-./(0)123145 (!"!""
+#!" ,!!""
+($"!"" *! #$" 6575)5405
+
+/(0)123145
+
+,$!"" *$
+
+&50149,):.;1+)05
+
+,!""
+
+,$!""
+
+%#
+
+*$
+
+&!!"" *! #$%&
+
+,!!"" *!
+
+(b) Control stage
+
+)!!"" 8))1)./(0)123145
+)$!""
+!!
+($!"" +!"
+(!!"" !
+)!!""
+
+Figure 1: Block diagram of the FFANC system with RMVS.
+
+where  is the step size parameter and  is the regularization factor. cmx(n) and dmx(n) are the vectors of the compensation filter and the desired signal at the error microphone as shown in
+
+cmx(n) =[cmx,0(n), cmx,1(n), · · · cmx,Lc-1(n)],
+
+(4)
+
+dmx(n) =[dmx(n), dmx(n - 1), · · · dmx(n - Lc + 1)],
+
+(5)
+
+where Lc is the order of the compensation filter. Fig. 1(b) shows a block diagram of the control stage for FFANC with
+RMVS. In Fig. 1(b), Sv and Sm are the secondary paths from the secondary source to the virtual microphone and error microphone, and R is the reference
+
+5
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+Prepri nt not peer review ed
+
+path from noise source to reference microphone. Likewise, S^v and S^m are the secondary path models which are pre-estimated before ANC operation. WF is the noise control filter for feedforward control.
+During the control stage, the virtual microphone is removed, and the error signal at the desired position is no longer directly measurable. Therefore, by convolving Cmx(z) identified in the tuning stage with the signal captured by the error microphone, the error signal at the virtual microphone position is reconstructed. This estimated error signal e^v(n) is used to update WF, enabling effective noise reduction at the desired position without installing a physical microphone at that position.
+e^v(n) in the control stage is given by
+E^v(z) = D^v(z) + Y^v(z)
+= Cmx(z){Em(z) - Y^m(z)} + S^v(z)Y (z)
+= Cmx(z){Pmx(z)X(z) + Y (z){Sm(z) - S^m(z)}} + S^v(z)WF(z)R(z)X(z), (6)
+
+where Pmx(z), Sm(z), S^m(z), S^v(z), WF(z), and R(z) are z-transforms of Pmx, Sm, S^m, S^v, WF, and R, respectively. Assuming that Sm = S^m, Eq. (6) equals to
+
+E^v(z) = Cmx(z)Pmx(z)X(z) + S^v(z)WF(z)R(z)X(z)
+
+= Pvx(z)X(z) + S^v(z)WF(z)R(z)X(z).
+
+(7)
+
+From Eq. (7), the optimal noise control filter WFo(z) for FFANC with RMVS converges to
+
+WFo(z) = - Sv(z) . (8) Pvx(z)R(z)
+
+The updated formula for WF(z) is given by
+
+
+
+wF(n + 1) = wF(n) -
+
+2 e(n)rv(n),
+
+(9)
+
+ + rv(n)
+
+where wF(n) and rv(n) are the vectors of the noise control filter for FF control and the filtered reference signal as shown in
+
+rv(n) =[rv,0(n), rv,1(n), · · · rv,Lw-1(n)],
+
+(10)
+
+wF(n) =[wF(n), wF(n - 1), · · · wF(n - Lw + 1)],
+
+(11)
+
+6
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+Prepri nt not peer review ed
+
+!!""
+
+(!"!""
+
+#!"
+
+($"!"" #$" $ '()(*(+,( &(,/+23*45 -.,*/01/+( 6/7*,(
+
+*#!""
+
+*!""
+
+&'!"" %# !
+
+&!#!"" )! #$%&
+
+!%!""
+
+*%!""
+
+%%
+
+&!%!""
+
+)! #$%&
+
+,!""
+
+#$! ($!!""
+
+#!! (!!!"" +!!""
+
+*!!"" )!
+
+8.*973:5-.,*/01/+( +$!""
+
+*$!"" )$
+
+;**/*5 -.,*/01/+(
+
+*$!"" )$
+
+!!
+($!""
+-!"
+
+*!!"" )!
+
+(!!""
+! +!!""
+
+Figure 2: Block diagram of the control stage of the HANC system using conventional RMVS.
+where Lw is the order of the noise control filter. Eq. (8) is known as the optimal form of noise control filter in FFANC.
+FF control can reduce broadband noise detected by the reference microphone, however, noise that is not detected by the reference microphone and is only observed by the error microphone cannot be reduced.
+2.2. Conventional HANC with RMVS A previous study proposed a HANC system incorporating RMVS [? ],
+in which a genetic algorithm was employed to optimize the placement of the error microphone. This system utilized multiple control channels to improve performance in complex acoustic environments. In this study, however, we focus on a single-channel ANC configuration based on the same system hereafter referred to as the conventional system.
+A block diagram illustrating the control stage of the HANC system using
+
+7
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+Prepri nt not peer review ed
+
+conventional RMVS is shown in Fig. 2. In Fig. 2, Pmv and Pvv represent the primary paths from the noise source to the error microphone and to the virtual microphone, respectively, particularly in cases where the noise is not captured by the reference microphone. The noise control filter, denoted as WB, corresponds to a feedback (FB) control. "Noise source 1" denotes a noise source 1 refers to the source located near the reference microphone, while "noise source 2" is positioned such that its signal is not acquired by the reference microphone.
+As in the conventional system, the compensation filter Cmx(z) is estimated during the tuning stage shown in Fig. 1(a). In the control stage, this filter is applied to estimate the signal at the virtual microphone location from the signal at the error microphone. The estimated error signal at the virtual microphone position is given by
+
+E^v(z) = Cmx(z){Em(z) - Y^m(z)} + S^v(z)Y (z)
+
+= Cmx(z){Pmx(z)X(z) + Pmv(z)V (z) + Y (z){Sm(z) - S^m(z)}} + S^v(z)Y (z)
+
+= Cmx(z){Pmx(z)X(z) + Pmv(z)V (z)} + S^v(z)Y (z)  Sm(z) = S^m
+
+Pvx(z)
+
+^
+
+= Pvx(z)X(z) +
+
+Pmv(z)V (z) + Sv(z)Y (z),
+
+(12)
+
+Pmx(z)
+
+where Pvv(z) is z-transform of Pvv and V (z) is the noise from noise source 2. As evident from the second term in Eq. (12), the signal originating from
+noise source 2 is not accurately estimated. This limitation stems from the absence of a dedicated compensation filter for noise source 2 , which prevents the system from effectively addressing noise originating from this source. To achieve accurate signal estimation at the virtual microphone location, it is essential to apply individual compensation filters tailored to each noise source--i.e., the compensation filter corresponding to noise source 1 must be applied to the component of the desired signal originating from noise source 1, and similarly for noise source 2. However, the signal observed at the error microphone is a composite of contributions from both noise sources. Consequently, a single compensation filter cannot be directly applied to this mixed signal without introducing estimation errors. Instead, the error microphone signal must first be decomposed into its constituent components, each associated with a specific noise source. Only then can the appropriate compensation filters be applied to accurately reconstruct the desired signal at the virtual microphone position.
+
+8
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+Prepri nt not peer review ed
+
+!!""
+
+(!"!""
+
+#!"
+
+($"!"" #$" $ 6575)5405 &50149,):. /(0)123145 ;1+)05
+
++#!""
+
++!""
+
+&'!"" %# !
+
+&!#!"" *! #$%&
+
+!%!""
+
++%!""
+
+%%
+
+&!%!""
+
+*! #$%&
+
+.!""
+
+#$! ($!!""
+
+#!!
+(!!!"" )!!""
+
++!!"" *!
+
+'()*+,-./(0)123145 )$!""
+
++$!"" *$
+
+8))1). /(0)123145
+
++$!"" *$
++!!"" *!
+
+!!
+($!"" !
+
++%!""
+
+*!
+
+!
+
+)!!""
+
+! ! ('$!!"" -$! ($!!"" !
+
+($"!""
+
++&!"" ! -$"
+
+,
+
+!
+
+#$%& )&!""
+
+('!!""
+
+Figure 3: Block diagram of the control stage of the proposed system
+
+3. Proposed system
+To address the limitations described above, this paper proposes a HANC system based on RMVS that incorporates two dedicated compensation filters. The primary objective of the proposed system is to enable accurate estimation of the desired signal at the virtual microphone location, even in the presence of multiple noise sources. However, direct application of compensation filters to the signal observed at the error microphone is problematic, as this signal is a mixture of noise originating from both noise source 1 and
+
+9
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+Prepri nt not peer review ed
+
+noise source 2. To overcome this challenge, the proposed system introduces an additional adaptive filter H(z) to decompose the mixed signal into its constituent components corresponding to each individual noise source. Once separated, the appropriate compensation filters are applied to each component, allowing precise reconstruction of the desired signal at the virtual microphone position.
+The proposed system has two tuning stages. In the first stage, the compensation filter Cmx(z) for noise source 1 is estimated using the procedure shown in Fig. 1(a). In the second stage, the compensation filter Cmv(z) for noise source 2 is estimated by modifying the configuration in Fig. 1(a), replacing Pmx(z) and Pvx(z) with Pmv(z) and Pvv(z). The transfer function of Cmv(z) converges to
+
+Cmv(z) = Pvv(z) . (13) Pmv(z)
+
+Fig. 3 shows a block diagram of the control stage of the proposed system. The proposed system estimates the desired signal at the virtual microphone position by first separating the individual source contributions using an additional adaptive filter H(z), followed by the application of compensation filters to each separated signal. This process enables accurate reconstruction of the desired signal, even in the presence of multiple noise sources.
+The error signal eh(n) used to adaptively update the additional filter H(z) is defined as follows
+
+Eh(z) = D^m(z) - Yh(z)
+
+= Pmx(z)X(z) + Pmv(z)V (z) - H(z)R(z)X(z).
+
+(14)
+
+To analyze the transfer function of H(z), we consider the cost function JH(n) in time domain. Assuming that X(z) and V (z) are independent, JH(n) is as follows
+
+JH(n) = E{eh(n)} = E{pmx(n)  x(n) + pmv(n)  v(n) - h(z)  r(n)  x(n)} = E{pmx(n)  x(n) - h(z)  r(n)  x(n)} + E{pmv(n)  v(n)}, (15)
+
+where pmx(n), pmv(n), h(n), and r(n) are the impulse responses of Pmx, Pmv, H, and R, respectively. Likewise, x(n) and v(n) are the noise from noise sources
+
+10
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+Prepri nt not peer review ed
+
+1 and 2, respectively. E and  denote the expectation and convolution operators, respectively. The additional adaptive filter H(z) converges to the component that is statistically correlated with the input signal. Therefore, based on the first term of Eq. (15), H(z) converges to the following equation
+
+H(z) = Pmx(z) . (16) R(z)
+
+The updated formula for H(z) is given by h(n + 1) = h(n) +  + r(n)2  e(n)r(n), (17)
+
+where h(n) and r(n) are the vectors of the adaptive filter H(z) and the reference signal as shown in
+
+r(n) =[r0(n), r1(n), · · · rLh-1  (n)],
+
+(18)
+
+h(n) =[h(n), h(n - 1), · · · h(n - Lh + 1)],
+
+(19)
+
+where Lh is the order of H(z). H(z) encapsulates the primary path characteristics associated with noise
+source 1. By leveraging H(z), the proposed system separates the composite
+signal captured by the error microphone into components related to noise sources 1 and 2. Thus, the desired signal dv(n) at the virtual microphone location, as estimated by the system, is given by
+
+Dv (z) =D^ mv(z) + D^ mx(z)
+
+=Cmv(z){Pmv(z)V (z) + Pmx(z)X(z) - H(z)R(z)X(z)}
+
++ Cmx(z)H(z)R(z)X(z).
+
+(20)
+
+Substituting Eqs. (2), (13), and (16) into Eq. (20), we obtain the following equation
+
+Dv (z) = Pvv(z)V (z) + Pvx(z)X(z).
+
+(21)
+
+Eq. (21) shows that the signal at the virtual microphone position is accurately estimated by the proposed system.
+Next, the error signal used to update the noise control filter is given by
+
+E^v(z) = Dv (z) + Y^v(z)
+= Pvv(z)V (z) + Pvx(z)X(z) + S^v(z){WF(z)R(z)X(z) + WB(z)V (z)}, (22)
+
+11
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+Prepri nt not peer review ed
+
+where XB(z) is a reference signal for FB control generated inside the system, which is given by
+XB(z) = E^v(z) + Y^B(z) = Pvv(z)V (z) + Pvx(z)X(z) + S^v(z)WF(z)R(z)X(z). (23)
+
+To derive the optimal noise control filter coefficients for both FF and FB control, we consider the cost function J(n) in the time domain. Assuming that x(n) and v(n) are statistically independent, the cost function J(n) is expressed as follows
+
+J(n) =E{e^v(n)}
+
+=E{dv(n) + y^v(n)}
+
+=E{pvv(n)  v(v) + s^v(n)  wB(n)  xB(n)  v(n)}
+
++ E{pvx(n)  x(z) + s^v(n)  wF(n)  r(n)  x(n)},
+
+(24)
+
+where pvv(n), pvx(n), wF(n), and wB(n) are the impulse responses of Pvv, Pvx, WF, and WB, respectively. xB(n) denotes the reference signal for FB control in the time domain. In the ideal situation where the cost function is minimized, both the first and second terms of Eq. (24) become zero. By applying the z-transform to the second term of (24), the following relationships can be derived:
+WF(z) = - Sv(z) . (25) Pvx(z)R(z)
+WF(z) is updated using Eq. (9). It can be seen that the noise control filter for the FF part, WF(z), in the proposed system is equivalent to the optimal noise control filter employed in a conventional FFANC system.
+Now, assuming that WF(z) has converged to the optimal filter defined in Eq. (8), the signals in Eq. (23) is equal to
+
+XB(z) = Pvv(z)V (z).
+
+(26)
+
+By using z-transform to the first term of Eqs. (24) and (26), we can derive the following relationships
+WB(z) = - 1 . (27) Sv(z)
+
+12
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+Prepri nt not peer review ed
+
+Table 1: Simulation condition.
+
+Case1 Target noise 1 [Hz] Target noise 2 [Hz] Case2 Target noise 1 Target noise 2 [Hz] Sampling frequency Tap length of control filter WF, WB Tap length of compensation filter Cmx, Cmv Tap length of adaptive filter H Tap length of R, Pmv, Pmx, Pvx, Pvv Tap length of Sm, Sv, S^m, S^v Step size parameter  Regularization parameter 
+
+White noise (50-4000) Multiple sinusoids (200, 300, 400)
+Factory noise Narrow-band white noise (200 to 400)
+16000 Hz 500 500 500 500 200 0.01
+1.0×10-6
+
+The updated formula for WB(z) is given by
+
+
+
+wB(n + 1) = wB(n) -
+
+2 e(n)rvB(n),
+
+(28)
+
+ + rvB(n)
+
+where wB(n) and rvB(n) are the vectors of the noise control filter for FB control and the filtered reference signal as shown in
+
+rvB(n) =[rvB,0(n), rvB,1(n), · · · rvB,Lw-1(n)],
+
+(29)
+
+wB(n) =[wB(n), wB(n - 1), · · · wB(n - Lw + 1)].
+
+(30)
+
+Eq. (27) is known as the optimal filter form of FB control. From Eqs. (25) and (27), the proposed system can estimate the optimal filters for FF and FB control without installing microphones at the desired positions.
+
+4. Evaluations
+System performance was evaluated through computer simulations using impulse responses measured in a real acoustic environment. The simulation conditions are summarized in Table 1, and the experimental setup is illustrated in Fig. 4. Both the proposed system and the conventional system were evaluated in terms of noise reduction and frequency spectrum characteristics. The noise reduction is defined by
+
+13
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+Prepri nt not peer review ed
+
+!"#$%& +%,%(%-)%& 86). $"'()%* .#)("/0"-%
+
+!"#$%&$"'()%9
+
+!"!
+
+1(("(&
+
+:#(;'4<&
+
+.#)("/0"-% .#)("/0"-%
+
+*6).
+
+2%)"-34(5&
+$"'()% 76).
+
+*6). 96).
+
+Figure 4: Experimental setup.
+
+Reduction(k) = 10 log10
+
+n=M(k-1)+1 Mk dvv 2 (n) + dvx 2 (n)
+
+Mk
+
+2
+
+,
+
+n=M(k-1)+1 ev(n)
+
+(31)
+
+where M is the number of samples used for averaging and, k denotes the block index for calculating noise reduction. In this evaluation, M = 1000 was used.
+In this section, simulations are conducted for two distinct cases to evaluate system performance. Case 1 considers Noise 1 as white noise and Noise 2 as a combination of multiple sinusoidal signals. Case 2 uses actual factory noise [? ] as Noise 1, while Noise 2 is modeled as narrowband white noise. Following these scenarios, additional simulations are carried out to assess the signal separation capability of the additional adaptive filter H(z).
+
+4.1. Performance evaluation with white noise and multiple sinusoids
+Fig. 5 illustrates the performance comparison between the conventional and the proposed systems when Noise 1 is white noise and Noise 2 consists of multiple sinusoidal components. In Fig. 5(a), the blue and red lines represent the amount of noise reduction at the virtual microphone location for the conventional and proposed systems, respectively. Fig. 5(b) presents the corresponding power spectra: the black line indicates the power spectrum of the signal without ANC (i.e., the sum dvx(n) + dvv(n)), while the blue and red lines represent the frequency spectra of the error signals observed at the virtual microphone location for the conventional and proposed systems, respectively.
+Fig. 5(a) demonstrates that the proposed system attains a noise reduction of at least 20 dB at the virtual microphone location, whereas the conventional
+
+14
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+d
+
+we
+
+Reduction [dB]
+
+vie
+
+40 Conv. Prop. 20
+
+0
+
+-20
+
+-40
+
+0
+
+20
+
+40
+
+60
+
+Time [s]
+
+(a) Noise Reduction at the virtual microphone.
+
+r re
+
+-20 ANC off ANC on (Conv.) ANC on (Prop.) -40
+
+-60
+
+-80
+
+ee
+
+-100
+
+-120 0
+
+1000 2000 3000 4000
+
+Frequency [Hz]
+
+(b) Power spectra at the virtual microphone.
+
+Amplitude [dB]
+
+Figure 5: Performance comparison of the conventional and proposed systems with white noise and multiple sinusoids.
+
+tp
+
+no
+
+system exhibits instability. The instability arises from the conventional system's reliance on a compensation filter designed solely for noise source 1, which renders it incapable of accurately estimating the desired signal at the virtual microphone. In contrast, the proposed system first separates the contributions of noise sources 1 and 2 using the additional filter H(z), and then applies the appropriate compensation filters to each separated signal. This sequential processing enables significantly improved performance. This interpretation is further supported by the results shown in Fig. 5(b). The blue line, corresponding to the conventional system, reveals a failure to attenuate spectral components originating from noise source 2--particularly those associated with the multiple sinusoidal signals--resulting in negligible reduction of that noise. The proposed system, indicated by the red line, successfully suppresses these components, validating the effectiveness of the dual-filter
+
+15
+
+rint
+
+Prep
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+d
+
+we
+
+vie
+
+Reduction [dB]
+
+20 Conv. Prop. 0
+
+Amplitude [dB]
+
+r re
+
+-20
+
+0
+
+20
+
+40
+
+60
+
+Time [s]
+
+(a) Noise Reduction at the virtual microphone.
+
+0 ANC off ANC on (Conv.) ANC on (Prop.) -20
+
+-40
+
+ee
+
+-60
+
+-80
+
+-100
+
+0
+
+1000 2000 3000 4000
+
+Frequency [Hz]
+
+(b) Power spectra at the virtual microphone.
+
+tp
+
+Figure 6: Performance comparison of the conventional and proposed systems with factory noise and narrow-band white noise.
+
+no
+
+and signal-separation approach.
+4.2. Performance evaluation with factory noise and narrow-band white noise
+Fig. 6 illustrates the performance of the conventional and proposed systems when Noise 1 is factory noise and Noise 2 is narrow-band white noise. The figure uses the same color scheme as in Fig. 6 for consistency: blue line represents the conventional system and red line represents the proposed system. As shown by the blue line in Fig. 6(a), the conventional system remains unstable, consistent with the behavior observed in Fig. 5(a). In contrast, the proposed system demonstrates stable operation and effective noise reduction. Figs. 5 and 6 collectively indicate that the proposed system is capable of attenuating noise from source 2, whether it consists of multiple sinusoidal
+
+16
+
+rint
+
+Prep
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+Prepri nt not peer review ed
+
+components or narrowband white noise. This confirms the robustness and versatility of the proposed system in handling different types of interfering signals.
+4.3. Evaluation of the signal separation performance of the additional adaptive filter H(z)
+Fig. 7 presents an evaluation of the proposed system in terms of the separation performance of the additional adaptive filter H(z). In Fig. 7(a), the red line corresponds to the same condition as those in Fig. 5(a), while the the green line represents the ideal noise reduction performance that would be achieved if the additional adaptive filter H(z) could perfectly separate the mixed signal into components associated with noise sources 1 and 2. This ground-truth scenario is simulated by replacing dmv(n) in Fig. 3 with the true desired signal dmv(n) from noise source 2, and by substituting yh(n) with the true contribution dmv(n) from noise source 1. The corresponding compensation filters are then applied to these isolated.
+Under this ground truth scenario, Fig. 7(a) shows that the proposed system achieves approximately 30 dB of noise reduction. Moreover, Fig. 7(b) highlights that the green line outperforms the red line by approximately 5-10 dB in the frequency range around 500, 600, and 700 Hz--regions dominated by energy from noise source 2. The performance gap arises because, in the practical case (red line), the second term in Eq. (15), which represents the residual component from noise source 2, persists as a disturbance in the signal separation process performed by H(z). Improving the separation performance of H(z) thus requires minimizing the contribution of noise source 2 to the error microphone signal eh(n). Despite this limitation, the proposed system demonstrates substantial noise reduction capabilities, as evidenced by the red line in Fig. 5. This highlights the robustness of the proposed system even under imperfect separation conditions.
+5. Conclusion
+This paper proposed a hybrid active noise control (HANC) system incorporating remote microphone-based virtual sensing with two dedicated compensation filters. The proposed system can enables accurate estimation of the desired signal at a desired location by introducing compensation filters for multiple noise sources. Specifically, two compensation filters are designed for each primary path from the noise source to both the error microphone
+17
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+d
+
+we
+
+vie
+
+Reduction [dB]
+
+40 Prop. Prop.-Gt 20
+
+Amplitude [dB]
+
+r re
+
+0
+
+0
+
+20
+
+40
+
+60
+
+Time [s]
+
+(a) Noise Reduction at the virtual microphone.
+
+0 ANC off ANC on (Prop.-Gt)
+
+-20
+
+ANC on (Prop.)
+
+-40
+
+ee
+
+-60
+
+-80
+
+-100
+
+0
+
+1000 2000 3000 4000
+
+Frequency [Hz]
+
+(b) Power spectra at the virtual microphone.
+
+tp
+
+Figure 7: Performance of the proposed system by the separation performance of the additional adaptive filter H(z).
+
+no
+
+and the virtual microphone within feed-forward and feedback ANC. To address the challenge of signal mixing at the error microphone, the proposed system integrates an additional adaptive filter that decomposes the mixed signal into source-specific components. Appropriate compensation filters are then superimposed on each component, allowing for accurate reconstruction of the desired signal at the virtual microphone location.
+Simulation results across various acoustic scenarios, including broadband (white noise and multiple sinusoids) and complex industrial (factory noise and narrowband white noise) environments, demonstrate that the proposed system achieves approximately 20 dB of noise reduction--substantially outperforming the conventional single-filter approach, which suffers from instability. Additionally, ideal-separation simulations suggest that, with perfect
+18
+
+rint
+
+Prep
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+Prepri nt not peer review ed
+
+source decomposition, noise reductions approaching 30 dB are achievable, indicating the potential for further performance gains with improved separation techniques. Acknowledgements
+This work was supported by JST SPRING, Grant Number JPMJSP2150.
+19
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5271898
+
+

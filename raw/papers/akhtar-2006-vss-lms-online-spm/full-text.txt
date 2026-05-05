@@ -1,0 +1,389 @@
+720                                                      IEEE TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 14, NO. 2, MARCH 2006
+
+
+
+
+      A New Variable Step Size LMS Algorithm-Based
+       Method for Improved Online Secondary Path
+         Modeling in Active Noise Control Systems
+                   Muhammad Tahir Akhtar, Student Member, IEEE, Masahide Abe, Member, IEEE, and
+                                    Masayuki Kawamata, Senior Member, IEEE
+
+
+
+   Abstract—This paper proposes a new method for online sec-
+ondary path modeling in active noise control systems. The existing
+methods for active noise control systems with online secondary
+path modeling consist of three adaptive filters. The main feature
+of the proposed method is that it uses only two adaptive filters. In
+the proposed method, the modified-FxLMS (MFxLMS) algorithm
+is used in adapting the noise control filter and a new variable
+step size (VSS) least mean square (LMS) algorithm is proposed
+for adaptation of the secondary path modeling filter. This VSS
+LMS algorithm is different from the normalized-LMS (NLMS)
+algorithm, where the step size is varied in accordance with the
+power of the reference signal. Here, on the other hand, the step size
+is varied in accordance with the power of the disturbance signal
+in the desired response of the modeling filter. The basic idea of the
+proposed VSS algorithm stems from the fact that the disturbance                          Fig. 1. FxLMS algorithm-based feedforward ANC system.
+signal in the desired response of the modeling filter is decreasing
+in nature, (ideally) converging to zero. Hence, a small step size is              inferior to that under ideal conditions. Accordingly, we should
+used initially and later its value is increased accordingly. The dis-
+turbance signal, however, is not available directly, and we propose               use online identification of the secondary path characteristics
+an indirect method to track its variations. Computer simulations                  to ensure the stability and to maintain the noise reduction
+show that the proposed method gives better performance than the                   performance when the secondary path is time varying [3].
+existing methods. This improved performance is achieved at the                       In ANC systems, there are two different approaches for
+cost of a slightly increased computational complexity.                            online secondary path modeling. The first approach, involving
+   Index Terms—Active noise control, FxLMS algorithm, modified                    the injection of additional random noise into the ANC system,
+FxLMS algorithm, online secondary path modeling, variable step                    utilizes a system identification method to model the secondary
+size least mean square (VSS LMS) algorithm.                                       path. The second approach attempts to model it from the output
+                                                                                  of the ANC controller, thus avoiding the injection of additional
+                            I. INTRODUCTION                                       random noise into the ANC system. A detailed comparison
+                                                                                  of these two online modeling approaches can be found in [4],
+       FEEDFORWARD active noise control (ANC) system
+A      using FxLMS algorithm [1], [2] comprises two filters; a
+noise control filter, and a secondary path modeling filter. As
+                                                                                  which concludes that the first approach is superior to the second
+                                                                                  approach on convergence rate, speed of response to changes of
+                                                                                  primary noise, updating duration, computational complexities,
+shown in Fig. 1, the control filter      is adaptive. It generates                etc. Consequently, only the design of the first approach is
+signal       , to drive the secondary source to produce the                       examined further.
+secondary canceling signal          . The objective of the mod-                      The basic additive random noise technique for online sec-
+eling filter      is to compensate for the secondary path                         ondary path modeling in ANC systems is proposed by Eriksson
+present between the output of the control filter and that of the                  et al. [5]. As shown in Fig. 2, this ANC system comprises two
+error microphone. The FxLMS algorithm is fairly robust to the                     adaptive filters: FxLMS algorithm-based noise control filter
+modeling errors between the secondary path and the modeling                              , and the least mean square (LMS) algorithm-based sec-
+filter; however, in general, the noise reduction performance is                   ondary path modeling filter         . The main problem with this
+                                                                                  system is that the white random noise,          , injected into the
+   Manuscript received April 12, 2004; revised December 9, 2004. This work        ANC system for the modeling process, appears in the residual
+was supported by the Monbokagakusho Government of Japan. The associate            error signal      . This constraints      to be a low-level signal,
+editor coordinating the review of this manuscript and approving it for publica-
+tion was Dr. Futoshi Asano.                                                       which results in slow convergence of the modeling filter. Fur-
+   The authors are with the Graduate School of Engineering, Tohoku Uni-           thermore, now         comprises two parts, a part required for the
+versity, Sendai 980-8579, Japan (e-mail: akhtar@mk.ecei.tohoku.ac.jp;             control process and a part required for the modeling process.
+mtahirakhtar@yahoo.com; masahide@mk.ecei.tohoku.ac.jp; kawamata@
+mk.ecei.tohoku.ac.jp).                                                            Since        is used in both the control process and modeling
+   Digital Object Identifier 10.1109/TSA.2005.855829                              process, the part required for one acts as a disturbance for the
+                                                                1558-7916/$20.00 © 2006 IEEE
+AKHTAR et al.: NEW VARIABLE STEP SIZE LMS ALGORITHM-BASED METHOD                                                                               721
+
+
+
+
+                                                                              Fig. 3. Modified-FxLMS algorithm-based feedforward ANC system.
+
+Fig. 2. FxLMS algorithm-based ANC system of Fig. 1 with online secondary         is different from the normalized-LMS (NLMS) algorithm,
+path modeling (Eriksson’s method).
+                                                                                 where the step size is varied with the power of reference
+                                                                                 signal power. It is also different from the other VSS algo-
+other. Due to this intrusion between the control process and                     rithms [10]–[14] where initially a large step size is selected
+modeling process, the overall performance of the ANC system                      for fast convergence and finally a small value is used for
+is further degraded. Improvements in the Eriksson’s method                       small misadjustment. The proposed VSS LMS algorithm
+have been proposed in [6]–[8]. These improved methods in-                        stems from the fact that the desired response for the mod-
+troduce another adaptive filter into the ANC system of Fig. 2.                   eling filter is corrupted by a disturbance signal which is
+Simulation results presented in [8] show that their proposed                     decreasing in nature, (ideally) converging to zero. Infact,
+method, in which the control filter, the modeling filter, and the                initially this interference may be so large that the online
+third filter are cross-updated, gives the best performance for                   secondary path modeling is much slower as compared with
+ANC systems with online secondary path modeling.                                 offline modeling. The proposed VSS LMS algorithm, in
+   The main drawback of the existing improved methods is the                     contrast to the existing VSS algorithms, uses a small step
+introduction of the third adaptive filter, which increases the de-               size initially and later its value is increased accordingly.
+sign complexity. In this paper we propose a new method for                    The organization of this paper is as follows. Section II de-
+active noise control system with online secondary path mod-                scribes the proposed method. Section III presents computational
+eling. The main features of the proposed method are summa-                 complexity analysis, Section IV details the computer simula-
+rized below.                                                               tions, and Section V gives some concluding remarks.
+   • In contrast to existing improved methods, it comprises two               A short version of this paper was presented at a conference
+     adaptive filters.                                                     [15].
+   • Adaptation of            using MFxLMS algorithm: In FxLMS
+     algorithm, one cause of the slow convergence speed is                       II. PROPOSED METHOD FOR ANC SYSTEMS WITH
+     the delay introduced by the secondary path. Due to this                           ONLINE SECONDARY PATH MODELING
+     delay the upper bound for the step size is reduced from
+                  to                     [9], where is the order of        A. Proposed Method
+     the control filter          , is the delay introduced by the             Consider Fig. 4 which shows the block diagram of the
+     secondary path and            is the power of the filtered refer-     proposed method. Assuming that        is an FIR filter of
+     ence signal          . In modified-FxLMS (MFxLMS) algo-               tap-weight length , the output signal  is computed as
+     rithm two extra (fixed) filters are used for the secondary
+                                                                                                                                               (1)
+     path modeling filter and the control filter [9]. As shown
+     in Fig. 3, the extra secondary-path-modeling filter is used           where                                              is the tap-weight
+     to generate modified error signal for the control filter. The         vector, and                                                         is
+     extra control filter is used to avoid adaptation using FxLMS          the sample reference signal vector. An internally generated
+     algorithm. The control filter is adapted using simple LMS             zero mean white Gaussian noise signal,           , uncorrelated with
+     algorithm and hence upper bound for the step size param-              the reference signal        , is injected at the output        of the
+     eter is larger than that for FxLMS algorithm. Since larger            control filter. Thus, the residual error signal        is given as
+     step size can be selected, fast convergence can be achieved.
+                                                                                                                                               (2)
+     In the proposed method, therefore, we use MFxLMS algo-
+     rithm in adapting            .                                        where                         is the primary disturbance signal,
+   • New variable step size algorithm for           : In the modeling                             is the canceling signal,
+     filter, the step size is varied in accordance with the power of            is the modeling signal, denotes linear convolution, and
+     the disturbance signal in the desired response of the mod-                 and      are the impulse responses of the        and      ,
+     eling filter. This variable step size (VSS) LMS algorithm             respectively.
+722                                               IEEE TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 14, NO. 2, MARCH 2006
+
+
+
+                                                                           filtered reference signal vector. After updating, the tap weights
+                                                                           are copied to the (actual) control filter         .
+                                                                               Consider the structure of the MFxLMS algorithm in the pro-
+                                                                           posed method, as shown by dashed box in Fig. 4. In the upper
+                                                                           path, the reference signal         is first filtered through
+                                                                           and then through         . In the lower path this situation is ex-
+                                                                           actly reversed. Thus, the adder generating the error signal         ,
+                                                                           is taking two similar inputs with opposite signs. The third input
+                                                                           being driven from the modeling error signal            , we find that
+                                                                           both the modeling filter and the control filter are effectively
+                                                                           updated by using a same error signal, i.e.,
+                                                                                                  (say). Taking the -transform and making
+                                                                           necessary substitutions, we get the following expression for this
+                                                                           error signal:
+                                                                                                                                              (9)
+
+Fig. 4. Proposed method for ANC systems with online secondary path         By convergence of         , we mean that the error signal is min-
+modeling.                                                                  imized to (ideally) zero. This requires       to adapt to the fol-
+                                                                           lowing transfer function:
+   Assuming that the modeling filter       is an FIR filter of
+tap-weight length , its output       is given as                                                                                             (10)
+
+                                                                     (3)
+                                                                              This equation shows that          will converge to the optimal
+where                                           is the impulse re-         solution              , if and only if, modeling error reduces to
+sponse of       , and                                                      zero, i.e.,                 . Converse is also true, that modeling
+     .                                                                     error reduces to zero, if and only if,        converges to the op-
+   The output of      ,      , is subtracted from        to get the        timal solution. Thus, in the proposed method the convergence of
+error signal for the modeling filter                                       the control filter and the modeling filter is mutually dependent.
+
+                                                                     (4)   B. New Variable Step Size LMS Algorithm
+ The tap-weights of the modeling filter           are updated using            Equation (4) shows that          , the error signal for modeling
+LMS algorithm                                                              filter, comprises two parts;                     and                  .
+                                                                           Here                   acts as disturbance to the modeling process.
+                                                                     (5)   We observe the following.
+where         is the step size parameter. Note the time depen-                 • Due to large disturbance (note that initially canceling
+dence of the step size, it will be explained later.                               signal       is zero) the convergence of the modeling filter
+   Here output of the (actual) control filter         is filtered                 is degraded, and in worst case it may be unstable.
+through another modeling filter           to get the desired re-               • As          ,          would converge to           and thus (ide-
+sponse for the (dummy) control filter                                             ally)                  would converge to zero.
+                                                                               These observations show that initially we should use a small
+                                                                     (6)   value for the step size parameter , and later, when the dis-
+                                                                           turbance signal                     is reduced, the step size can be
+where                                                       is a vector    increased accordingly. This disturbance signal, however, is not
+containing      samples of the controller output          .                available directly. We have access to residual error signal
+    The input to the (dummy) control filter            is derived by       [as given in (2)] being picked up by the error microphone. The
+filtering the reference signal through                                     error signal for        ,       [as given in (4)], also contains this
+                                                                     (7)   disturbance signal. On the basis of            and        , we propose
+                                                                           an indirect procedure to vary the step size             .
+where                                                        is an             Define                          where          is the power of the
+sample reference signal vector.                                            residual error signal         and          is the power of the mod-
+   The noise control filter               is updated using LMS             eling error signal        . These powers can be estimated from the
+algorithm                                                                  following low-pass estimators, respectively:
+                                                                     (8)                                                                     (11)
+                                                                                                                                             (12)
+where      is the step size parameters for the control filter,      is
+the error signal for         given as                                ,     where is the forgetting factor                     . From (2)
+and                                                            is the      can be written as                                        . Similarly
+AKHTAR et al.: NEW VARIABLE STEP SIZE LMS ALGORITHM-BASED METHOD                                                                                 723
+
+
+
+                                                                TABLE I
+                                    COMPUTATIONAL COMPLEXITY (NUMBER OF COMPUTATIONS PER ITERATION)
+                                      COMPARISON OF THE PROPOSED METHOD WITH THE EXISTING METHODS
+
+
+
+
+                        Fig. 5.   Frequency response of the acoustic paths. (a) Primary path P (z ) and (b) secondary path S (z ).
+
+
+from (4)         can be expressed as                                                                       TABLE II
+                                                                                         SIMULATION PARAMETERS FOR COMPUTER EXPERIMENTS
+              . Thus,     can be expressed as
+
+                                                                      (13)
+
+As stated in Section I, the injected random noise           is a low-
+level constant excitation signal as compared with the reference
+noise signal      . Initially at      , there is no canceling signal,
+i.e.,              ,                            and
+              , and hence             . In steady state, as         ,
+                 and                   , thus the expression in the
+numerator in (13) converges to zero, whereas the denominator
+is nonzero due to           , and hence                        . This
+observation leads to the following mechanism for the step size
+selection in the modeling process:
+                                                                               in Table I. Here and , are tap-weight lengths of the control
+                                                                      (14)     filter       , and modeling filter        , respectively. The      is
+                                                                               the tap-weight length of the third filter       in Zhang’s method
+where          and         are the experimentally determined
+                                                                               [8]. In the proposed method, although we have avoided using the
+values for lower and upper bounds of the step size. These
+                                                                               third adaptive filter, however, it adds two extra (fixed FIR) filters
+values are selected so that neither adaptation is too slow nor it
+                                                                               for         and        . Furthermore, it uses VSS LMS algorithm
+becomes unstable. To make sure that initially                   ,
+                                                                               in adapting the modeling filter. The computational complexity
+the estimators (11), (12) are initialized by the same value,
+                                                                               of the proposed method, therefore, is comparable to Zhang’s
+preferably unity, i.e.,                      . Also it is recom-
+                                                                               method.
+mended that the same is used for the two estimators.
+
+       III. COMPUTATIONAL COMPLEXITY COMPARISON                                                            IV. SIMULATIONS
+   The computationally complexity is normally determined by                       This section presents the simulation experiments performed
+the number of computations required per iteration of the algo-                 to verify the effectiveness of the proposed method. The per-
+rithm [16]. The computational complexity analysis of the pro-                  formance of the proposed method is compared with Zhang’s
+posed method, in comparison with the existing methods, is given                method [8] which is known to be the best existing method for
+724                                                      IEEE TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 14, NO. 2, MARCH 2006
+
+
+
+
+Fig. 6. Simulation results in Case 1. (a) Relative modeling error   1S (decibels) versus iteration time n, (b) residual error signal e(n) versus iteration time n, and
+                            ()
+(c) variation of step size  n in the proposed method.
+
+
+
+
+Fig. 7. Simulation results in Case 2. (a) Relative modeling error   1S (decibels) versus iteration time n, (b) residual error signal e(n) versus iteration time n, and
+                            ()
+(c) variation of step size  n in the proposed method.
+
+
+ANC systems with online secondary path modeling.1 The per-                           algorithm uses a smaller step size at the beginning of the ANC
+formance comparison is done on the basis of two performance                          operation and a larger step size when the residual noise is rela-
+measures; 1) the residual error signal     , and 2) the relative                     tively small. With this kind of treatment, if     is initialized by
+modeling error,      dB , being defined as                                           a null vector, then ANC system may be unstable. To avoid this,
+                                                                                     offline secondary path modeling is performed which is stopped
+           dB                                                               (15)     when the modeling error [as defined in (15)] has been reduced
+                                                                                     to 5 dB. The resulting weights are used for              when the
+    The primary path          and the secondary path           are FIR               ANC system is started. It should be noted that this is not a se-
+filters of tap-weight length 48 and 16, respectively (the data is                    rious problem as offline measurements are first step in any ANC
+taken from disk included with [1]). The frequency response of                        system design [20].
+       and       are shown (by solid curves) in Fig. 5. The control                     A sampling frequency of 2 kHz is used and simulations are
+filter        and modeling filter        are FIR filters of tap-weight               carried out with the signals having frequency below 500 Hz. The
+length           , and            , respectively. The third adaptive                 step size parameters are adjusted, by trial-and-error, for fast and
+filter in Zhang’s method [8],           , is selected as an FIR filter               stable convergence and are summarized in Table II. Extensive
+of tap-weight length             . The delay in Zhang’s method                       simulations are performed to show the effectiveness of the pro-
+is 16. The control filter is initialized by a null vector        . The               posed method. All the results shown below are averaged over
+third filter         in the Zhang’s method is also initialized by a                  ten experiments.
+null vector        .
+    We have seen in Section II, that: 1) the convergence of                          A. Case 1
+and         is mutually dependent and 2) the proposed VSS LMS                          Here the reference signal       is a tonal of 300 Hz. The vari-
+  1The authors have proposed another two adaptive filter-based method [17] for       ance of this signal is adjusted to 2.0 and a zero-mean white
+                                                             ()
+ANC systems with online secondary path modeling. Here W z is adapted by              Gaussian noise is added with SNR of 30 dB. In order to en-
+adaptive filtering with averaging (AFA) [18] based filtered-x, FxAFA, algorithm      sure low residual noise in the steady state, a zero-mean white
+[19]. It gives better noise reduction and secondary path modeling performance
+than the Zhang’s method, but has poor tracking properties, and hence not in-         Gaussian noise of variance 0.05 is used in the modeling process.
+cluded in the simulations presented here.                                            Fig. 6(a) shows the curves of the relative modeling error,      ,
+AKHTAR et al.: NEW VARIABLE STEP SIZE LMS ALGORITHM-BASED METHOD                                                                                                  725
+
+
+
+
+Fig. 8. Simulation results in Case 3. (a) Relative modeling error   1S (decibels) versus iteration time n, (b) residual error signal e(n) versus iteration time n, and
+                            ()
+(c) variation of step size  n in the proposed method.
+
+
+
+
+Fig. 9. Simulation results in Case 4. (a) Relative modeling error   1S (decibels) versus iteration time n, (b) residual error signal e(n) versus iteration time n, and
+                            ()
+(c) variation of step size  n in the proposed method.
+
+
+as defined in (15). We see that the proposed method can re-                          D. Case 4
+duce the modeling error at a faster convergence rate as com-                            Here we consider a situation of varying acoustic paths. The
+pared with Zhang’s method. The corresponding curves for the                          reference signal is same as described in Case 2. The system is
+residual error signal are shown in Fig. 6(b). The variation of                       started with the same conditions as described for Case 2. At
+step size          in the proposed method is shown in Fig. 6(c).                                   the acoustic path change to as shown by dotted
+Initially it selects small step size    , and converges toward                       curves in Fig. 5. The simulation results for two methods are
+the maximum value            .                                                       shown in Fig. 9. We see that the proposed methods gives better
+                                                                                     performance before and after the change. Fig. 9(c) shows that
+B. Case 2                                                                            step size        varies in accordance with the disturbance in the
+   In this case the reference signal is a narrow-band signal com-                    error signal. At              , when       and       change, the
+prising frequencies of 100, 200, 300, and 400 Hz. The variance                       step size reduces to the minimum value. Later, it reconvenes
+of the resulting signal is adjusted to 2.0 and a zero-mean white                     toward the maximum value in accordance with the decrease in
+Gaussian noise is added with SNR of 30 dB. As in Case 1, the                         the disturbance signal.
+modeling excitation signal        , is a zero-mean white Gaussian
+noise of variance 0.05. The simulation results are shown in                                                V. CONCLUDING REMARKS
+Fig. 7. We observe similar performance as in Case 1.                                    In this paper we have proposed a new method for ANC sys-
+                                                                                     tems with online secondary path modeling. This method uses
+C. Case 3                                                                            MFxLMS algorithm in adapting the control filter        and pro-
+   Here we consider a broad-band reference noise signal. A zero                      poses a new VSS LMS algorithm for the modeling filter          .
+mean white Gaussian noise of unit variance is filtered through                       The proposed method comprises two adaptive filters only and
+a bandpass filter with the passand 100–400 Hz. The variance of                       yet can give better performance than the existing methods which
+the filtered signal is adjusted to 2, and is used as reference signal                comprise of three adaptive filters. This improved performance
+      . As in the previous cases, zero-mean white Gaussian noise                     is achieved without any degradation in the noise control perfor-
+of variance 0.05 is used in the modeling process. The simulation                     mance, which is the ultimate goal of ANC.
+results are given in Fig. 8. The performance of the proposed                            The proposed method avoids using the third adaptive filter,
+method is comparable to that of the Zhang’s method.                                  however, its computational complexity is slightly higher than
+726                                                       IEEE TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 14, NO. 2, MARCH 2006
+
+
+
+the three adaptive filter-based methods. The increased computa-                      [20] W. S. Gan and S. M. Kuo, “An integrated audio and active noise control
+tional complexity is due to the structure of MFxLMS algorithm                             headsets,” IEEE Trans. Consumer Electron., vol. 48, no. 2, pp. 242–247,
+                                                                                          May 2002.
+[9]. To realize the improved performance at a reduced compu-
+tational cost is a task of future work.
+
+                               REFERENCES                                                                     Muhammad Tahir Akhtar (S’02) received the B.S.
+                                                                                                              degree in electrical engineering from University
+  [1] S. M. Kuo and D. R. Morgan, Active Noise Control Systems-Algorithms                                     of Engineering and Technology Taxila, Pakistan,
+      and DSP Implementation. New York: Wiley, 1996.                                                          in 1997. He competed in a nationwide contest and
+  [2]       , “Active noise control: A tutorial review,” Proc. IEEE, vol. 87, no.                             was awarded a fellowship from Pakistan Institute
+      6, pp. 943–973, Jun. 1999.                                                                              of Engineering and Applied Sciences (PIEAS),
+  [3] N. Saito and T. Sone, “Influence of modeling error on noise reduction                                   Islamabad, Pakistan. Under this fellowship, he
+      performance of active noise control systems using filtered-x LMS algo-                                  completed the M.S. degree in systems engineering
+      rithm,” J. Acoust. Soc. Jpn. E, vol. 17, no. 4, pp. 195–202, Apr. 1996.                                 from Quaid-i-Azam University, Islamabad, in 1999.
+  [4] C. Bao, P. Sas, and H. V. Brussel, “Comparison of two online identifi-                                  Since October 2001, he has been pursuing the Doctor
+      cation algorithms for active noise control,” in Proc. Recent Advances in                                of Engineering degree at the Graduate School of
+      Active Control of Sound Vibration, 1993, pp. 38–51.                           Engineering, Tohoku University, Sendai, Japan.
+  [5] L. J. Eriksson and M. C. Allie, “Use of random noise for on-line trans-          In 1999, he joined PIEAS as a Faculty Member in the Electrical Engineering
+      ducer modeling in an adaptive active attenuation system,” J. Acoust. Soc.     Department. His research interests include active noise control and adaptive
+      Amer., vol. 85, no. 2, pp. 797–802, Feb. 1989.                                signal processing.
+  [6] C. Bao, P. Sas, and H. V. Brussel, “Adaptive active control of noise in          Mr. Akhtar won the First Place Award in the student paper contest at the IEEE
+      3-D reverberant enclosure,” J. Sound Vibr., vol. 161, no. 3, pp. 501–514,     2004 Midwest Symposium on Circuits and Systems, Hiroshima, Japan.
+      Mar. 1993.
+  [7] S. M. Kuo and D. Vijayan, “A secondary path modeling technique for
+      active noise control systems,” IEEE Trans. Speech Audio Process., vol.
+      5, no. 4, pp. 374–377, Jul. 1997.
+  [8] M. Zhang, H. Lan, and W. Ser, “Cross-updated active noise control                                      Masahide Abe (M’99) received the Bachelor
+      system with online secondary path modeling,” IEEE Trans. Speech                                        of Engineering, Master of Information Sciences,
+      Audio Process., vol. 9, no. 5, pp. 598–602, Jul. 2001.                                                 and Doctor of Engineering degrees from Tohoku
+  [9] S. J. Elliot, Signal Processing for Active Control. London, U.K.: Aca-                                 University, Sendai, Japan in 1994, 1996, and 1999
+      demic, 2001.                                                                                           respectively.
+ [10] R. H. Kwong and E. W. Johnston, “A variable step size LMS algorithm,”                                     He is currently a Lecturer in the Graduate School
+      IEEE Trans. Signal Process., vol. 40, no. 7, pp. 1633–1642, Jul. 1992.                                 of Engineering at Tohoku University. His main inter-
+ [11] T. Aboulnasr and K. Mayyas, “A robust variable step-size LMS-type                                      ests and activities are in adaptive digital filtering and
+      algorithm: Analysis and simulations,” IEEE Trans. Signal Process., vol.                                evolutionary computation.
+      45, no. 3, pp. 631–639, Mar. 1997.                                                                        Dr. Abe received the Young Engineer Award from
+ [12] D. I. Pazaitis and A. G. Constantinides, “A novel kurtosis driven variable                             the Institute of Electronics, Information and Commu-
+      step-size adaptive algorithm,” IEEE Trans. Signal Process., vol. 47, no.      nication Engineers (IEICE) of Japan in 1997. He is a member of the Society of
+      3, pp. 864–872, Mar. 1999.                                                    Instrument and Control Engineers of Japan.
+ [13] W. P. Ang and F. Boroujeny, “A new class of gradient adaptive step-
+      size LMS algorithms,” IEEE Trans. Signal Process., vol. 49, no. 4, pp.
+      805–810, Apr. 2001.
+ [14] S. Koike, “A class of adaptive step-size control algorithms for adaptive
+      filters,” IEEE Trans. Signal Process., vol. 50, no. 6, pp. 1315–1326, Jun.                               Masayuki Kawamata (M’82–SM’92) received
+      2002.                                                                                                    the B.E., M.E., and D.E. degrees in electronic
+ [15] M. T. Akhtar, M. Abe, and M. Kawamata, “Modified-filtered-x LMS                                          engineering from Tohoku University, Sendai, Japan,
+      algorithm based active noise control system with improved online                                         in 1977, 1979, and 1982, respectively.
+      secondary-path modeling,” in Proc. IEEE 2004 Int. Mid. Symp. Circuits                                       He was an Associate Professor in the Graduate
+      Systems (MWSCAS2004), Hiroshima, Japan, Jul. 25–28, 2004, pp.                                            School of Information Sciences at Tohoku University
+      I-13–I-16.                                                                                               and is currently a Professor in the Graduate School
+ [16] S. Haykin, Adative Filter Theory, 4th ed. Englewood Cliffs, NJ: Pren-                                    of Engineering at Tohoku University. His research
+      tice-Hall, 2002.                                                                                         interests include 1-D and multidimensional digital
+ [17] M. T. Akhtar, M. Abe, and M. Kawamata, “A New structure for feed-                                        signal processing, intelligent signal processing, and
+      forward active noise control systems with improved online secondary                                      linear system theory.
+      path modeling,” IEEE Trans. Speech Audio Process., vol. 13, no. 5, pp.            Dr. Kawamata received the Outstanding Transaction Award from the Society
+      1082–1088, Sep. 2005.                                                         of Instrument and Control Engineers of Japan in 1984 (with T. Higuchi), the
+ [18] G. Yin, “Adaptive filtering with averaging,” in Adaptive Control, Fil-        Outstanding Literary Work Award from the Society of Instrument and Control
+      tering, and Signal Processing, K. J. Astrom, G. C. Goodwin, and P. R.         Engineering of Japan in 1996 (with T. Higuchi), and the 11th IBM-Japan Scien-
+      Kumar, Eds. New York: Springer-Verlag, 1995.                                  tific Award in Electronics in 1997. He is member of the Institute of Electronics,
+ [19] M. T. Akhtar, M. Abe, and M. Kawamata, “Adaptive filtering with av-           Information and Communication Engineers (IEICE) of Japan, the Society of
+      eraging-based algorithm for feedforward active noise control systems,”        Instrument and Control Engineers of Japan, and the Information Processing So-
+      IEEE Signal Process. Lett., vol. 11, no. 6, pp. 557–560, Jun. 2004.           ciety of Japan.
+

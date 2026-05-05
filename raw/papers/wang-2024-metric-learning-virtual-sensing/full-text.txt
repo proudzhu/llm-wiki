@@ -1,0 +1,305 @@
+Transferable Selective Virtual Sensing Active Noise Control Technique Based on Metric Learning
+
+1st Boxiang Wang Nanyang Technological University
+Singapore boxiang001@e.ntu.edu.sg
+4th Xiaoyi Shen Nanyang Technological University
+Singapore xiaoyi.shen@ntu.edu.sg
+
+2nd Dongyuan Shi Nanyang Technological University
+Singapore dongyuan.shi@ntu.edu.sg
+5th Junwei Ji Nanyang Technological University
+Singapore junwei002@e.ntu.edu.sg
+
+3rd Zhengding Luo Nanyang Technological University
+Singapore luoz0021@e.ntu.edu.sg
+6th Woon-Seng Gan Nanyang Technological University
+Singapore ewsgan@ntu.edu.sg
+
+arXiv:2409.05470v1 [eess.SP] 9 Sep 2024
+
+Abstract--Virtual sensing (VS) technology enables active noise control (ANC) systems to attenuate noise at virtual locations distant from the physical error microphones. Appropriate auxiliary filters (AF) can significantly enhance the effectiveness of VS approaches. The selection of appropriate AF for various types of noise can be automatically achieved using convolutional neural networks (CNNs). However, training the CNN model for different ANC systems is often labour-intensive and timeconsuming. To tackle this problem, we propose a novel method, Transferable Selective VS, by integrating metric-learning technology into CNN-based VS approaches. The Transferable Selective VS method allows a pre-trained CNN to be applied directly to new ANC systems without requiring retraining, and it can handle unseen noise types. Numerical simulations demonstrate the effectiveness of the proposed method in attenuating suddenvarying broadband noises and real-world noises.
+Index Terms--active noise control, virtual sensing, metric learning, convolutional neural network
+I. INTRODUCTION Active noise control (ANC) is an advanced approach to attenuating unwanted noise based on the principle of sounddestructive superposition [1]-[3]. In an ANC system, the control filter derives the secondary source to generate the anti-noise with the same amplitude and opposite phase to the disturbance, so the noise pressure at the location of the error microphone can be minimized [4]. To react to the noise and environment change, the filtered reference least mean square (FxLMS) algorithm is often used to adaptively update the control filter coefficients [5]-[9]. Compared to the passive approaches, the ANC technique is particularly efficient in tackling low-frequency noises [10]. Therefore, ANC is widely applied in various areas, such as headphones [11], [12], headrests [13], [14] and windows [15]-[17]. However, as the noise frequency increases, the zone of quietness (ZoQ) created by the ANC system significantly diminishes, becoming confined to the area surrounding the error microphone. As a result, noise reduction performance at the target area can be compromised when the error microphone cannot be placed due to physical constraints. For instance, in an ANC headrest, it is impractical to place the error
+The code will be available at https://github.com/WangBoxiang/Transferable-Selective-Virtual-Sensing-Active-Noise-Control
+
+microphone near the user's eardrum, which limits the formation of a ZoQ within the ear. To address this issue, several virtual sensing (VS) techniques have been proposed [18]- [27]. VS techniques enable the creation of a ZoQ at desired virtual locations distant from the physical error microphone. Among these techniques, the auxiliary-filter-based VS (AFVS) approach embeds the optimal noise control filter information into the auxiliary filter (AF) during the tuning stage and then uses this information to estimate the virtual error signal during the control stage [18], [20], [24], [26]. Nevertheless, conventional AF-VS techniques perform noticeably worse when noise characteristics differ between the tuning and control stages. To address this issue, Shi et al. introduced the selective VS technique, inspired by selective fixed-filter active noise control (SFANC) systems [28]-[31], to accommodate variations in noise characteristics between these stages using a signal processing approach [32]. Building on this concept, Xie et al. developed the cognitive VS technique, which utilizes a convolutional neural network (CNN) to account for changes in noise characteristics and primary paths [33].
+Despite these advancements, various VS systems often encounter differing acoustic paths and noise types, necessitating distinct pre-trained AFs and CNN models. Deploying the CNN model across different systems requires collecting different noise datasets and retraining, which is both challenging and time-intensive. Moreover, the CNN model is prone to overfitting if the dataset is not sufficiently large. These practical challenges limit the widespread adoption of CNN-based VS techniques. A study on SFANC systems, excluding the VS technique, has shown that metric learning can enhance the generality of pre-trained CNN models [34]. Building on insights from this study, this paper proposes a transferable selective VS technique designed to address the challenges posed by varying noise characteristics across different VS systems. To classify noise in different acoustic environments, we retain the convolutional layers of the pre-trained CNN model and utilize a similarity-matching method based on metric learning. The proposed method can handle noise classes not present in the training set, allowing the pre-trained convolutional layers to
+
+be applied in new ANC platforms without retraining. The applied CNN model features a simple structure while achieving satisfactory noise classification accuracy with few parameters and computational requirements. Numerical simulations of the proposed transferable selective VS technique applied to cancel sudden-varying broadband and real-world noise validate its effectiveness in practical applications.
+
+II. CNN-BASED SELECTIVE VIRTUAL SENSING TECHNIQUE
+The conventional AF-VS technique consists of two stages: the tuning stage and the control stage. In the tuning stage, the error microphone is temporarily placed at the desired noise reduction area, and the z domain representation of the virtual error signal Ev(z) can be expressed as
+
+Ev(z) = Pv(z)X(z) - Wopt(z)Sv(z)X(z),
+
+(1)
+
+where X(z) and Wopt(z) represent the reference signal and control filter in the tuning stage; Pv(z) and Sv(z) represent the virtual primary path and virtual secondary path, respectively.
+To minimize the virtual error signal, the optimal control filter can be derived as
+Wopt o (z) = Pv(z) . (2) Sv (z )
+
+At this moment, the error signal at the physical error microphone Ep(z) is given by
+
+Ep(z) = Pp(z)X(z) - Woopt(z)Sp(z)X(z),
+
+(3)
+
+where Pp(z) represents the physical primary path, and Sp(z) represents the physical secondary path.
+The optimal AF Ho(z) can be derived as
+
+Ho(z) = Pp(z)- Sp(z)Pv(z) = Pp(z)-Sp(z)Wopt o (z). (4) Sv (z )
+In the control stage, the virtual error microphone is removed, leaving only the physical error microphone. The trained AF then aids in training the new control filter W (z) by minimizing the difference between the physical error signal and the AF output, represented by Eh(z) as
+Eh(z) = Ep(z) - Ho(z)X(z) = Sp(z)[Wopt o (z) - W (z)]X(z), (5)
+where X(z) and Ep(z) denote the reference signal and physical error signal in the control stage, respectively. The FxLMS algorithm converges as Eh(z) approaches zero, resulting in a control filter nearly identical to the optimal one.
+It is noteworthy that the primary noise in the tuning stage differs from that in the control stage. Equation (5) indicates that the frequency band of the reference signal affects the training of the new control filter. Ideally, when the reference signal's frequency band in the tuning stage is wider than that in the control stage, the training of the new control filter remains unaffected. However, in real-world scenarios, additional noise captured by the reference microphone and acoustic paths can degrade the effectiveness of the AF-VS technique, particularly when the AF is trained for full-band. Therefore, the AF must be retrained when the primary noise's frequency band changes.
+
+Fig. 1. Block diagram of the CNN-based selective virtual sensing technique.
+To overcome the limitations of the conventional AF-VS technique, the CNN-based selective VS technique is proposed, which dynamically switches the AF based on the characteristics of the primary noise encountered in the control stage. During the tuning stage, K different AFs are independently trained using primary noises with various frequency bands and stored in a library. As illustrated in Fig. 1, in the control stage, a lightweight one-dimensional (1D) CNN classifier is employed to select the most suitable AF based on the reference signal. Notably, the classification process can be executed on a co-processor (e.g., a mobile phone), thereby reducing the computational load on the real-time controller. The real-time controller operates at the sample rate, while the co-processor functions at the frame rate, allowing both to collaborate effectively to reduce noise at the virtual microphone location.
+III. TRANSFERABLE SELECTIVE VIRTUAL SENSING TECHNIQUE
+Although the CNN-based selective VS technique offers superior noise reduction performance when dealing with various primary noises compared to conventional VS techniques, it relies on noise samples from the same VS system in both the training and testing datasets. However, in practice, VS systems may differ from the one used to train the CNN model, and the pre-trained CNN model is likely to perform poorly in a new VS system. Training a separate CNN model for each system could resolve this, but it requires considerable time for data collection and model training. Moreover, this approach is impractical for systems with few or no primary noise samples.
+To address this problem, a metric-learning technology [35], [36] is employed to enhance the transferability of the CNNbased selective VS technique. The first step involves training a 1D CNN network to classify AFs corresponding to noises with different frequency characteristics in the training environment. Fig. 2 (a) illustrates the detailed architecture of the proposed 1D CNN, which features a simple yet effective structure. The input is a 1-second noise waveform, rescaled to the range of (-1, 1) using min-max normalization. The preprocessed
+
+Fig. 2. Block diagram of (a) the proposed 1D CNN and (b) the classifier based on cosine similarity calculation, with each convolutional layer configured as (input channels, output channels, kernel size, and stride).
+
+data are then passed through the feature extraction module, which consists of a convolutional layer, a residual block, and a max-pooling layer. The convolutional layers are followed by batch normalization (BN) to accelerate training and a rectified linear unit (ReLU) function to maintain positive gradients. A shortcut connection is used to add the input to the output of the residual block, simplifying the optimization process [37]. Before reaching the first fully connected (FC) layer, the maxpooling layer reduces the computational load. Finally, the output of the second FC layer is fed into the softmax layer, which calculates the probabilities for the K AF classes.
+Subsequently, the pre-trained 1D CNN model is employed for noise classification in the new VS system. As illustrated in Fig. 2 (b), the new VS system is assumed to have Q different AFs, each trained with distinct noise types. The feature extraction module of the pre-trained 1D CNN model, denoted as CN N (·), is used to generate the embedding code for the normalized reference signal x^(n) as
+
+Ex = CN N (x^(n)).
+
+(6)
+
+Similarly, the embedding code of the qth normalized AF training noise q of the new system is derived as
+
+Eq = CN N (q) q  [1, Q].
+
+(7)
+
+The cosine similarity between the embedding code of the incoming primary noise Ex and that of the qth AF training noise Eq can be calculated to estimate the distance distribution between the noises in the feature space as
+
+Sq =
+
+ET
+x
+
+·
+
+Eq
+
+q  [1, Q], (8)
+
+max(||Ex||2 · ||Eq||2, )
+
+where  denotes a small positive number that ensures the denominator is not zero, max(·) outputs the maximum value from the given set of inputs, and || · ||2 refers to the L2 norm.
+Finally, the selected AF is the one whose training noise
+
+TABLE I
+
+THE LAYERS AND PARAMETERS OF THE 1D CNN MODELS USED FOR
+
+SELECTIVE VS AND TRANSFERABLE SELECTIVE VS, RESPECTIVELY.
+
+Selective VS
+
+Transferable Selective VS
+
+Layer
+
+Output
+
+Param
+
+Output
+
+Param
+
+Conv1
+
+[10,15998]
+
+40
+
+[10,15998]
+
+40
+
+Conv2+BN [20,15998]
+
+640
+
+[20,15998]
+
+640
+
+Conv3+BN [20,15998]
+
+1240
+
+[20,15998]
+
+1240
+
+Downsample [20,15998]
+
+240
+
+[20,15998]
+
+240
+
+BN
+
+[1,620]
+
+1240
+
+*
+
+*
+
+FC1
+
+[1,15]
+
+9315
+
+*
+
+*
+
+FC2
+
+[1,15]
+
+240
+
+*
+
+*
+
+Total Num
+
+12955
+
+2160
+
+shows the highest similarity to the incoming primary noise, and its index j is given by
+
+j = arg max{Sq}.
+
+(9)
+
+q[1,Q]
+
+The proposed transferable selective VS technique leverages the feature extraction module of the pre-trained 1D CNN model as the classifier for the new VS system, eliminating the need for retraining. Table I compares the parameter counts between the pre-trained 1D CNN model and its feature extraction module, showing that the latter's computational complexity is about one-sixth that of the entire model. This significant reduction in computational demands enables the classifier to run efficiently on co-processors [38]. Additionally, the embedding codes for the Q AF training noises can be precomputed to further reduce computational load. Consequently, the proposed technique can perform AF selection on the co-processor while seamlessly interfacing with the real-time controller, providing a practical solution for VS systems.
+
+IV. SIMULATION RESULTS The effectiveness of the proposed approach is evaluated in two VS systems, the VS system I and VS system II, which differ in terms of noise types and acoustic paths. In VS system I, both the primary and secondary paths are modelled as bandpass filters with a frequency range of 20 to 7980 Hz. To simulate environmental variations, the paths in VS system II are similarly modelled but include white noise (SNR = 30dB). The AFs and control filters are configured with 1024 taps, and the systems operate at a sampling rate of 16 kHz.
+
+A. Comparision of Different Networks As illustrated in Fig. 3 (a), 15 broadband noises spanning
+different frequency bands are used in VS system I to pretrain the AFs. These broadband noise bands encompass the 20 - 2020 Hz spectrum, focusing on the low-frequency range that ANC primarily aims to cancel. For training the 1D CNN model, 80, 000 1-second noise waveforms with various frequency bands are synthesized for the training set, while 1, 000 1-second waveforms are generated for both the validation and test sets. To streamline the labelling process, a frequencyband similarity ratio method is employed [29] to automatically label the datasets by quantifying the correlation between the synthesized noise bands and those used in AF training.
+Unlike in VS system I, five broadband noises with frequency ranges of 20-160 Hz, 150-340 Hz, 330-770 Hz, 765-1275 Hz, and 1270 - 2020 Hz are synthesized to pre-train the AFs for VS system II, as shown in Fig. 3(b). To assess the
+
+Fig. 3. The frequency spectrum of the broadband noises used to pre-train the auxiliary filters for (a) VS system I and (b) VS system II.
+
+TABLE II
+
+PERFORMANCE COMPARISON OF DIFFERENT 1D CNN MODELS.
+
+Network
+
+Testing Acc in I Testing Acc in II Param
+
+Proposed Network
+
+95.6%
+
+92.6%
+
+13K
+
+M3 Network
+
+96.9%
+
+79.9%
+
+222K
+
+M5 Network
+
+97.5%
+
+63.8%
+
+562K
+
+M6-res Network
+
+98.0%
+
+65.5%
+
+211K
+
+M34-res Network
+
+97.5%
+
+36.6%
+
+3986K
+
+performance of noise classification on classes not included in the prior training set, the pre-trained feature extraction module is utilized to classify 1, 000 synthesized noise samples in VS system II. Table 2 compares the noise classification accuracy of our proposed model with several 1D CNN models: M3, M5, M6-res, and M34-res [30], [39]. Our proposed network achieves higher noise classification accuracy in VS system II with significantly fewer parameters, indicating that a simpler network is more effective for this task and less prone to overfitting compared to more complex models.
+B. Varying Broadband Noise Cancellation In this simulation, the performance of the transferable
+selective VS technique in system II is evaluated under varying broadband noise conditions. The varying primary noise is generated by combining two 15-second broadband noises, one spanning 300 - 700 Hz and the other 1300 - 2000 Hz. During the simulation, the proposed method adapts the AF every second, with the selected AF index sent to the real-time controller for noise reduction. Fig. 4 illustrates the time history of the error signal and the normalized residual noise [40] at the virtual microphone. The noise reduction performance of the transferable selective VS technique is compared to that of the VS technique using a full-band AF (20 - 2020 Hz), the selective VS technique, and the optimal control where the FxLMS algorithm directly cancels the error signal captured by the virtual error microphone. The results demonstrate that the proposed transferable selective VS technique achieves superior noise reduction performance, closely matching the optimal control at the virtual position and outperforming both the full-band AF and the selective VS technique. This simulation confirms that the proposed algorithm can effectively operate under varying broadband noise conditions.
+C. Real-world Noise Cancellation In this simulation, the proposed transferable selective VS
+technique is applied to attenuate real-world noises. The varying noise is generated by concatenating 15-second recordings of genset noise and compressor noise, neither of which are included in the training set. The time history of the virtual error
+
+Fig. 4. (a) Magnitude and (b) the normalized residual noise of varying broadband noise attenuated by different algorithms at the virtual microphone.
+Fig. 5. (a) Magnitude and (b) the normalized residual noise of varying realworld noise attenuated by different algorithms at the virtual microphone.
+signal in Fig. 5 shows that the AFs selected by the pre-trained feature extraction module effectively reduce disturbances at the desired virtual location. Furthermore, the proposed transferable selective VS technique outperforms both the VS with the full-band AF and the selective VS technique in noise reduction, achieving performance nearly on par with optimal control. The results validate the effectiveness of the proposed method in handling varying real-world noises that cannot be effectively managed by conventional selective VS techniques lacking transferability.
+V. CONCLUSION In this paper, we proposed the transferable selective VS technique to enhance the transferability of CNN-based selective VS methods. Using metric-learning technology, the proposed approach leverages a pre-trained feature extraction module to achieve noise classification in new VS systems. This technique allows the CNN classifier to be trained on one VS system and then applied to another without requiring retraining, with its low parameter count ensuring efficient operation on co-processors. Despite requiring significantly fewer parameters than more complex networks, the proposed 1D CNN network achieves higher accuracy in distinguishing various noise classes. The simulation results demonstrate the effectiveness of our method in reducing both sudden-varying broadband noises and real-world noises.
+
+REFERENCES
+[1] Philip Arthur Nelson and Stephen J Elliott, Active control of sound, Academic press, 1991.
+[2] Stephen J Elliott and Philip Arthur Nelson, "Active noise control," IEEE signal processing magazine, vol. 10, no. 4, pp. 12-35, 1993.
+[3] Colin H Hansen, Understanding active noise cancellation, CRC Press, 1999.
+[4] Zhengding Luo, Haozhe Ma, Dongyuan Shi, and Woon-Seng Gan, "Gfanc-rl: Reinforcement learning-based generative fixed-filter active noise control," Neural Networks, p. 106687, 2024.
+[5] Xiaojun Qiu and Colin H Hansen, "A study of time-domain fxlms algorithms with control output constraint," The Journal of the Acoustical Society of America, vol. 109, no. 6, pp. 2815-2823, 2001.
+[6] Dennis R Morgan, "History, applications, and subsequent development of the fxlms algorithm [dsp history]," IEEE Signal Processing Magazine, vol. 30, no. 3, pp. 172-176, 2013.
+[7] Feiran Yang, Jianfeng Guo, and Jun Yang, "Stochastic analysis of the filtered-x lms algorithm for active noise control," IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 28, pp. 2252-2266, 2020.
+[8] Abhishek Deb, Asutosh Kar, and Mahesh Chandra, "Advanced linear adaptive filtering methods for active noise control: A technical survey," in 2015 International Conference on Advanced Computing and Communication Systems, 2015, pp. 1-5.
+[9] Junwei Ji, Dongyuan Shi, Zhengding Luo, Xiaoyi Shen, and WoonSeng Gan, "A practical distributed active noise control algorithm overcoming communication restrictions," in ICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP). IEEE, 2023, pp. 1-5.
+[10] Sen M Kuo and Dennis R Morgan, "Active noise control: a tutorial review," Proceedings of the IEEE, vol. 87, no. 6, pp. 943-973, 1999.
+[11] Xiaoyi Shen, Dongyuan Shi, Woon-Seng Gan, and Santi Peksi, "Adaptive-gain algorithm on the fixed filters applied for active noise control headphone," Mechanical Systems and Signal Processing, vol. 169, pp. 108641, 2022.
+[12] Xiaoyi Shen, Dongyuan Shi, Santi Peksi, and Woon-Seng Gan, "A multichannel wireless active noise control headphone with coherence-based weight determination algorithm," Journal of Signal Processing Systems, vol. 94, no. 8, pp. 811-819, 2022.
+[13] Woomin Jung, Stephen J Elliott, and Jordan Cheer, "Local active control of road noise inside a vehicle," Mechanical Systems and Signal Processing, vol. 121, pp. 144-157, 2019.
+[14] Xiaoyi Shen, Dongyuan Shi, Santi Peksi, and Woon-Seng Gan, "Implementations of wireless active noise control in the headrest," in INTER-NOISE and NOISE-CON Congress and Conference Proceedings. Institute of Noise Control Engineering, 2023, vol. 265, pp. 3445-3455.
+[15] Bhan Lam, Chuang Shi, Dongyuan Shi, and Woon-Seng Gan, "Active control of sound through full-sized open windows," Building and Environment, vol. 141, pp. 16-27, 2018.
+[16] Bhan Lam, Dongyuan Shi, Woon-Seng Gan, Stephen J Elliott, and Masaharu Nishimura, "Active control of broadband sound through the open aperture of a full-sized domestic window," Scientific reports, vol. 10, no. 1, pp. 1-7, 2020.
+[17] Dongyuan Shi, Woon-seng Gan, Xiaoyi Shen, Zhengding Luo, and Junwei Ji, "What is behind the meta-learning initialization of adaptive filter?--a naive method for accelerating convergence of adaptive multichannel active noise control," Neural Networks, vol. 172, pp. 106145, 2024.
+[18] Marek Pawelczyk, "Adaptive noise control algorithms for active headrest system," Control engineering practice, vol. 12, no. 9, pp. 1101-1112, 2004.
+[19] Danielle Moreau, Ben Cazzolato, Anthony Zander, and Cornelis Petersen, "A review of virtual sensing algorithms for active noise control," Algorithms, vol. 1, no. 2, pp. 69-99, 2008.
+[20] Nobuhiro Miyazaki and Yoshinobu Kajikawa, "Head-mounted active noise control system with virtual sensing technique," Journal of Sound and Vibration, vol. 339, pp. 65-83, 2015.
+[21] Woomin Jung, Stephen J Elliott, and Jordan Cheer, "Combining the remote microphone technique with head-tracking for local active sound control," The Journal of the Acoustical Society of America, vol. 142, no. 1, pp. 298-307, 2017.
+
+[22] Chuang Shi, Zhuoying Jia, Rong Xie, and Huiyong Li, "An active noise control casing using the multi-channel feedforward control system and the relative path based virtual sensing method," Mechanical Systems and Signal Processing, vol. 144, pp. 106878, 2020.
+[23] Malte Misol, "Active sidewall panels with virtual microphones for aircraft interior noise reduction," Applied Sciences, vol. 10, no. 19, pp. 6828, 2020.
+[24] Dongyuan Shi, Woon-Seng Gan, Bhan Lam, Rina Hasegawa, and Yoshinobu Kajikawa, "Feedforward multichannel virtual-sensing active control of noise through an aperture: Analysis on causality and sensoractuator constraints," The Journal of the Acoustical Society of America, vol. 147, no. 1, pp. 32-48, 2020.
+[25] Huiyuan Sun, Jihui Zhang, Thushara Abhayapala, and Prasanga Samarasinghe, "Spatial active noise control with the remote microphone technique: An approach with a moving higher order microphone," in ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP). IEEE, 2022, pp. 8707-8711.
+[26] Boxiang Wang, Junwei Ji, Xiaoyi Shen, Dongyuan Shi, and Woon-Seng Gan, "Computation-efficient virtual sensing approach with multichannel adjoint least mean square algorithm," arXiv preprint arXiv:2405.14158, 2024.
+[27] Li Shi, Kangkang Wang, Kai Chen, Jing Lu, Haishan Zou, and Xiaojun Qiu, "Virtual feedback control of interior road noise based on headrest loudspeakers," Applied Acoustics, vol. 227, pp. 110234, 2025.
+[28] Dongyuan Shi, Woon-Seng Gan, Bhan Lam, and Shulin Wen, "Feedforward selective fixed-filter active noise control: Algorithm and implementation," IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 28, pp. 1479-1492, 2020.
+[29] Dongyuan Shi, Bhan Lam, Kenneth Ooi, Xiaoyi Shen, and Woon-Seng Gan, "Selective fixed-filter active noise control based on convolutional neural network," Signal Processing, vol. 190, pp. 108317, 2022.
+[30] Zhengding Luo, Dongyuan Shi, and Woon-Seng Gan, "A hybrid sfancfxnlms algorithm for active noise control based on deep learning," IEEE Signal Processing Letters, vol. 29, pp. 1102-1106, 2022.
+[31] Zhengding Luo, Dongyuan Shi, Junwei Ji, Xiaoyi Shen, and Woon-Seng Gan, "Real-time implementation and explainable ai analysis of delayless cnn-based selective fixed-filter active noise control," Mechanical Systems and Signal Processing, vol. 214, pp. 111364, 2024.
+[32] Chuang Shi, Rong Xie, Nan Jiang, Huiyong Li, and Yoshinobu Kajikawa, "Selective virtual sensing technique for multi-channel feedforward active noise control systems," in ICASSP 2019-2019 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP). IEEE, 2019, pp. 8489-8493.
+[33] Rong Xie, Anqi Tu, Chuang Shi, Stephen Elliott, Huiyong Li, and Le Zhang, "Cognitive virtual sensing technique for feedforward active noise control," in ICASSP 2024-2024 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP). IEEE, 2024, pp. 981-985.
+[34] Dongyuan Shi, Woon-Seng Gan, Bhan Lam, Zhengding Luo, and Xiaoyi Shen, "Transferable latent of cnn-based selective fixed-filter active noise control," IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 31, pp. 2910-2921, 2023.
+[35] Liu Yang and Rong Jin, "Distance metric learning: A comprehensive survey," Michigan State Universiy, vol. 2, no. 2, pp. 4, 2006.
+[36] Brian Kulis et al., "Metric learning: A survey," Foundations and Trends® in Machine Learning, vol. 5, no. 4, pp. 287-364, 2013.
+[37] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun, "Deep residual learning for image recognition," in Proceedings of the IEEE conference on computer vision and pattern recognition, 2016, pp. 770- 778.
+[38] Mark Sandler, Andrew Howard, Menglong Zhu, Andrey Zhmoginov, and Liang-Chieh Chen, "Mobilenetv2: Inverted residuals and linear bottlenecks," in Proceedings of the IEEE conference on computer vision and pattern recognition, 2018, pp. 4510-4520.
+[39] Wei Dai, Chia Dai, Shuhui Qu, Juncheng Li, and Samarjit Das, "Very deep convolutional neural networks for raw waveforms," in 2017 IEEE international conference on acoustics, speech and signal processing (ICASSP). IEEE, 2017, pp. 421-425.
+[40] Tianyou Li, Siyuan Lian, Sipei Zhao, Jing Lu, and Ian S Burnett, "Distributed active noise control based on an augmented diffusion fxlms algorithm," IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 31, pp. 1449-1463, 2023.
+
+

@@ -1,0 +1,1501 @@
+Statistical Signal Processing Approaches to Analysis and Synthesis of Bone-Conducted Speech
+ 
+Shiming Zhang
+A Dissertation Submitted to the Graduate School of Science and Engineering in Partial Fulfillment of the Requirements for the Degree of
+DOCTOR OF ENGINEERING in
+Mathematics, Electronics and Informatics
+Supervisor: Professor Tetsuya Shimamura
+Saitama University, Japan
+March 2022
+
+© Copyright by Shiming Zhang, 2022. All Rights Reserved
+
+To my beloved father and mother
+3
+
+Contents
+
+Acknowledgements . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12 Abstract . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+
+1 Introduction
+
+15
+
+1.1 Production of Speech . . . . . . . . . . . . . . . . . . . . . . . . . 15
+
+1.2 Speech Pyramid and Applications of Speech Processing . . . . . . . 16
+
+1.3 Different Types of Speech and Microphone . . . . . . . . . . . . . . 18
+
+1.4 Bone-Conducted Speech . . . . . . . . . . . . . . . . . . . . . . . . 19
+
+1.5 Motivations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+
+1.6 Organization of the Thesis . . . . . . . . . . . . . . . . . . . . . . . 20
+
+2 Pitch Extraction Approaches for BC Speech
+
+21
+
+2.1 Background of Pitch Extraction . . . . . . . . . . . . . . . . . . . . 21
+
+2.2 Conventional Pitch Extraction Methods . . . . . . . . . . . . . . . . 21
+
+2.3 Methods in the Time Domain . . . . . . . . . . . . . . . . . . . . . 23
+
+2.3.1 Auto-correlation Function (ACF) . . . . . . . . . . . . . . . 23
+
+2.3.2 Average Magnitude Difference Function (AMDF) . . . . . . 24
+
+2.3.3 Weighted Auto-correlation Function (WACF) . . . . . . . . 24
+
+2.4 Methods in the Frequency Domain . . . . . . . . . . . . . . . . . . 26
+
+2.4.1 Cepstrum (CEP) . . . . . . . . . . . . . . . . . . . . . . . . 26
+
+2.5 Proposed Method (WACF-CEP) Combining AC and BC Speeches . 26
+
+2.5.1 Properties of Proposed Method (WACF-CEP) . . . . . . . . 28
+
+2.6 Proposed Method (WACF-WACF) Combining AC and BC Speeches 30
+
+2.6.1 Properties of Proposed Method (WACF-WACF) . . . . . . . 33
+
+2.7 Experiments for Pitch Extraction . . . . . . . . . . . . . . . . . . . 33
+
+2.7.1 Noise Recording . . . . . . . . . . . . . . . . . . . . . . . . . 33
+
+4
+
+2.7.2 Speech Recording . . . . . . . . . . . . . . . . . . . . . . . . 34 2.7.3 SNR Calculation and Analysis . . . . . . . . . . . . . . . . . 35 2.7.4 Experiments of Proposed Method (WACF-CEP) . . . . . . . 36 2.7.5 Experiments of Proposed Method (WACF-WACF) . . . . . 41 2.7.6 Discussion . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+
+3 BC Speech Synthesis Based on Least Squares Method
+
+55
+
+3.1 Background of BC Speech Synthesis . . . . . . . . . . . . . . . . . . 55
+
+3.2 Methodology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+
+3.3 LS Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
+
+3.4 Speech Recording . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60
+
+3.5 Filter Design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61
+
+3.6 Synthesizing BC Speech . . . . . . . . . . . . . . . . . . . . . . . . 65
+
+3.7 Evaluation of the Synthesized BC Speech . . . . . . . . . . . . . . . 66
+
+3.7.1 Listening Test . . . . . . . . . . . . . . . . . . . . . . . . . . 68
+
+3.8 Discussion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
+
+3.9 Noise-Robustness Investigation . . . . . . . . . . . . . . . . . . . . 73
+
+3.10 Pitch Extraction for Synthesized BC Speech . . . . . . . . . . . . . 75
+
+4 Conclusion and Future Work
+
+86
+
+5
+
+List of Figures
+1.1 Source-filter model for speech production . . . . . . . . . . . . . . . 16 1.2 Speech stack-from fundamentals to applications . . . . . . . . . . . 17 2.1 Framework of pitch extraction . . . . . . . . . . . . . . . . . . . . . 22 2.2 WACF method: (a) clean speech signal, (b) ACF of speech signal
+of (a) with white Gaussian noise (SNR=0), (c) AMDF of speech signal with white Gaussian noise (SNR=0), (d) WACF of speech signal with white Gaussian noise (SNR=0) . . . . . . . . . . . . . . 24 2.3 Cepstrum method: (a) clean speech signal, (b) cepstrum of clean speech signal in (a), (c) noisy speech signal (SNR=0), (d) cepstrum of noisy speech signal in (c) . . . . . . . . . . . . . . . . . . . . . . 25 2.4 Block diagram of proposed method (WACF-CEP) . . . . . . . . . . 27 2.5 An example of waveforms for WACF-CEP: (a) recorded AC speech signal corrupted by white Gaussian noise (SNR=0 dB), (b) corresponding recorded BC speech signal corrupted by white Gaussian noise (SNR=11.06 dB), (c) peak detection by WACF method from the red lines part in (a), (d) peak detection by CEP method from the red lines part in (b), (e) peak detection by proposed method from (c) and (d) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29 2.6 Block diagram of proposed method (WACF-WACF) . . . . . . . . . 31
+6
+
+2.7 An example of waveforms for WACF-WACF: (a) recorded AC speech signal corrupted by white Gaussian noise (SNR=0 dB), (b) corresponding recorded BC speech signal corrupted by white Gaussian noise (SNR=11.06 dB), (c) peak detection by WACF method from the red lines part in (a), (d) peak detection by WACF method from the red lines part in (b), (e) peak detection by proposed method from (c) and (d) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+2.8 Speech recording situation from top . . . . . . . . . . . . . . . . . . 35 2.9 Speech recording situation from lateral . . . . . . . . . . . . . . . . 36 2.10 Reference pitch for each method from male Speaker D . . . . . . . 43 2.11 Reference pitch for each method from female Speaker E . . . . . . 44 2.12 Average GPE for four male speakers in white Gaussian noise (WACF-
+CEP) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45 2.13 Average GPE for four female speakers in white Gaussian noise (WACF-
+CEP) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45 2.14 Average GPE for four male speakers in babble noise (WACF-CEP) 46 2.15 Average GPE for four female speakers in babble noise (WACF-CEP) 46 2.16 Average GPE for four male speakers in train noise (WACF-CEP) . 47 2.17 Average GPE for four female speakers in train noise (WACF-CEP) 47 2.18 Average GPE for four male speakers in factory noise (WACF-CEP) 48 2.19 Average GPE for four female speakers in factory noise (WACF-CEP) 48 2.20 Average GPE for four male speakers in car interior noise (WACF-
+CEP) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49 2.21 Average GPE for four female speakers in car interior noise (WACF-
+CEP) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49 2.22 Average GPE for four female speakers in white Gaussian noise (WACF-
+WACF) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50 2.23 Average GPE for four female speakers in white Gaussian noise (WACF-
+WACF) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50 2.24 Average GPE for four male speakers in babble noise (WACF-WACF) 51 2.25 Average GPE for four female speakers in babble noise (WACF-WACF) 51 2.26 Average GPE for four male speakers in train noise (WACF-WACF) 52 2.27 Average GPE for four female speakers in train noise (WACF-WACF) 52 2.28 Average GPE for four male speakers in factory noise (WACF-WACF) 53 2.29 Average GPE for four female speakers in factory noise (WACF-WACF) 53 2.30 Average GPE for four male speakers in car noise (WACF-WACF) . 54
+7
+
+2.31 Average GPE for four female speakers in car noise (WACF-WACF) 54
+3.1 Model of BC speech synthesis. . . . . . . . . . . . . . . . . . . . . . 56 3.2 System model. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57 3.3 Sound recording situation from top. . . . . . . . . . . . . . . . . . . 59 3.4 Sound recording situation from lateral. . . . . . . . . . . . . . . . . 60 3.5 Waveforms of speeches recorded through AC and BC microphones
+from a male speaker (Speaker B), (a) AC speech, (b) BC speech. . 61 3.6 Waveforms of speeches recorded through AC and BC microphones
+from a female speaker (Speaker D), (a) AC speech, (b) BC speech. 62 3.7 Vowel positions used in sentence. . . . . . . . . . . . . . . . . . . . 63 3.8 An extracted waveform example of vowel /a/. . . . . . . . . . . . . 63 3.9 Minimum error amplitude response of IIR filter for vowel /a/. . . . 67 3.10 Minimum error amplitude response of IIR filter for vowel /i/. . . . 68 3.11 Minimum error amplitude response of IIR filter for vowel /u/. . . . 69 3.12 Minimum error amplitude response of IIR filter for vowel /e/. . . . 70 3.13 Minimum error amplitude response of IIR filter for vowel /o/. . . . 71 3.14 Maximum error amplitude response of IIR filter for vowel /a/. . . 72 3.15 Maximum error amplitude response of IIR filter for vowel /i/. . . . 73 3.16 Maximum error amplitude response of IIR filter for vowel /u/. . . 74 3.17 Maximum error amplitude response of IIR filter for vowel /e/. . . . 75 3.18 Maximum error amplitude response of IIR filter for vowel /o/. . . 76 3.19 Amplitude response of IIR filter. . . . . . . . . . . . . . . . . . . . 77 3.20 Speech waveform of AC speech, filtered AC speech (best pair) and
+BC speech (top), and power spectrum of AC speech, filtered AC speech (best pair) and BC speech (bottom) . . . . . . . . . . . . . 78 3.21 Speech waveform of AC speech, filtered AC (worst pair) speech and BC speech (top), and power spectrum of AC speech, filtered AC speech (worst pair) and BC speech (bottom) . . . . . . . . . . . . . 79 3.22 Group delay characteristics of the IIR filter with the minimum error coefficient pairs in Table 3.4. . . . . . . . . . . . . . . . . . . . . . 80 3.23 Spectrogram of recorded AC speech for Speaker B. . . . . . . . . . 80 3.24 Spectrogram of recorded BC speech for Speaker B. . . . . . . . . . 81 3.25 Spectrogram of filtered AC speech for Speaker B. . . . . . . . . . . 81 3.26 LAR distance. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 82
+8
+
+3.27 White noise, babble noise and train noise and their powers for the AC, BC and filtered AC. . . . . . . . . . . . . . . . . . . . . . . . 82
+3.28 Frame length dependency for different methods. . . . . . . . . . . . 83 3.29 Schematic of different methods for pitch extraction . . . . . . . . . 84 3.30 GPE rate from S-BC speech, BC speech and AC speech (S-BC
+speech denotes the synthetic BC speech) . . . . . . . . . . . . . . . 84 3.31 Error in pitch detection due to strong first formant in case of AC
+speech (Top) and accurate pitch detection in case of BC speech (Bottom). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 85 3.32 Peak detection from recorded AC and BC speeches by using CEP method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 85
+9
+
+List of Tables
+2.1 Experimental conditions for recording . . . . . . . . . . . . . . . . 36 2.2 AC and BC noise powers . . . . . . . . . . . . . . . . . . . . . . . . 37 2.3 Power of AC and BC speeches . . . . . . . . . . . . . . . . . . . . . 38 2.4 SNR of AC and BC Speeches for each speaker . . . . . . . . . . . . 39 2.5 Experimental conditions for WACF-CEP . . . . . . . . . . . . . . 40 2.6 Processing time per second of speech . . . . . . . . . . . . . . . . . 40 2.7 Experimental conditions for WACF-WACF . . . . . . . . . . . . . 42 3.1 Experimental equipments for sound recording . . . . . . . . . . . . 62 3.2 The best coefficient pairs . . . . . . . . . . . . . . . . . . . . . . . 64 3.3 The worst coefficient pairs . . . . . . . . . . . . . . . . . . . . . . . 65 3.4 Averaged coefficient pairs . . . . . . . . . . . . . . . . . . . . . . . 66 3.5 Average LAR distance . . . . . . . . . . . . . . . . . . . . . . . . . 71 3.6 Results of listening test . . . . . . . . . . . . . . . . . . . . . . . . . 72 3.7 Experimental conditions for pitch extraction . . . . . . . . . . . . . 83 3.8 Comparison of pitch extraction from recorded BC and AC speeches 84
+10
+
+List of Symbols
+
+xa(n) xb(n) sa(n) sb(n) va(n) vb(n) N T0 Ra( ) Da( ) Qa( ) Cb(n) Wab( ) W^ ab( ) Cb,s(n) Cb,v (n) Sb(k) Vb(k) Fe A(z) B(z) H (z )   w
+
+AC speech signal BC speech signal Clean AC speech signal Clean BC speech signal AC noise signal BC noise signal Frame length Fundamental frequency ACF of AC speech AMDF of AC speech WACF of AC speech CEP of BC speech signal WACF-CEP WACF-WACF Cepstra of sb(n) Cepstra of vb(n) FFT of sb(n) FFT of vb(n) Extraction range z transforms of AC speech z transforms of BC speech Filter transfer function Filter coefficient Filter coefficient Angular frequency
+
+11
+
+Acknowledgements
+First and foremost, I appreciate my parents for their encouragement and uncountable blessing on me throughout my life, especially for the spiritual and financial support to me throughout my Master's and Ph.D. study in Japan until successful accomplishment. I want to especially thank my dad for suggesting that I study abroad and showing me the way forward. I love you, dad. I am determined to continue on my future path.
+Special heartfelt thanks to Professor Tetsuya Shimamura his patience, kindness, encouragement, invaluable guidance, and continuous support during my research work on Master's and Ph.D. academic years not only to accomplish my Ph.D. but also to get my future career.
+Special thanks also go to Dr. Yosuke Sugiura for his valuable guidance, suggestions, and help throughout my research work.
+It is no doubt that my Ph.D. study would not have been accomplished without funds supported by different scholarship foundations. I also would like to thank JASSO scholarship foundation for their financial support in my Ph.D. first year. Special thanks to Rotary Yoneyama Scholarship Foundation for letting me become a Yoneyama scholarship student for my Ph.D. second and third years. I also would like to express my gratitude to my scholarship counselor and Ageo West Rotary Club for their financial support and warmly host to me as a Yoneyama Scholarship student.
+Special heartfelt thanks to my parents and family for their love and great support for my study. I couldn't refuse that their care and love are my strength to overcome any difficulties during my study. I also thank my ex-girlfriends, they are no longer entangled prompted me to concentrate on research. I also would like to thank all lab members for giving me unforgettable happy precious memories during my Ph.D. academic years. Finally, I would like to thank everyone who has supported me to accomplish my Ph.D. directly or indirectly by all means.
+12
+
+Abstract
+In recent years, much attention has been paid to bone-conducted (BC) speech for its superior noise-robustness and other potential features, the use of BC speech is explored for speech processing. However, many properties of BC speech are still unclear in various regions in speech processing such as pitch extraction, speech synthesis, noise reduction, speech enhancement, and so on.
+In pitch extraction, some published papers indicate that BC speech can be used for its noise-robustness, however, these researches are not enough to clarify the properties and performance of BC speech for pitch extraction. In BC speech synthesis, there are very few works of BC speech synthesis as far as we know up to now. In the BC speech enhancement, there is still not a satisfactory approach to improve the quality of BC speech. Overall, many potential properties applications of BC speech are still unclear. In this paper, we propose several approaches to explore and analyze the performance, properties, and application of BC speech in pitch extraction and BC speech synthesis.
+Pitch (fundamental period) or fundamental frequency is one of the most important and needful parameters to represent a speech signal. The pitch extraction is conducted from a speech signal through an air-conducted (AC) microphone. AC speech is often used for pitch extraction in noisy environments, however, it is corrupted by noise. Therefore, it is difficult to extract the pitch information accurately from such noisy AC speech. We propose two noise-robust pitch extraction methods combining AC speech with BC speech in noise environments. For the first proposed method (WACF-CEP), the WACF method is implemented for the AC speech input, while the CEP method is done for the BC speech input, and then a multiplication of the processed AC speech and the processed BC speech is implemented in several types of noise environments. For the second proposed method (WACF-WACF), WACF is utilized to process the AC and BC speech signals, respectively, and then a multiplication of the processed AC speech and the processed BC speech is implemented in noisy environments. In both two proposed methods, multiplication from two functions and the use of BC speech accelerate the true peak enhancement, resulting in a decrease in pitch extraction errors. Experimental results show superior performances of both proposed methods relative to the state-of-the-art method in all the types of noise.
+Speech synthesis is an important region in speech processing. Many researchers explore the AC speech synthesis from the BC speech for the BC speech enhance-
+13
+
+ment. However, there are very few works for BC speech synthesis. Experience indicates that BC speech is more suitable to be used in many regions for its clarified and potential properties than that of AC speech. For this reason, we propose a simple approach for BC speech synthesis from the corresponding AC speech in real-time. However, when we synthesize BC speech, we have no promising ways to do so. Although some speech synthesis techniques are well known, we cannot optimistically rely on them due to the lack of knowledge about the inherent properties of BC speech. Therefore, we investigate speech synthesis for BC speech. We propose a BC speech synthesis approach based on least squares method and conduct a pitch extraction experiment using the synthesized BC speech. From the identification results, a synthesis filter is designed in which AC speech is utilized as the input signal. BC speech is generated from the synthesis filter as the output signal. The synthesis method to be considered for BC speech is simple and straightforward and applicable to AC speech we usually use. Therefore, we can utilize the BC speech synthesis as a preprocessing part of AC speech processing, thereby an advanced implementation by BC speech could be exhibited. By experiments, it is shown that the BC speech synthesis method is satisfactory. Filter model, order selection, and stability in the methodology are discussed and noise-robustness gained by the BC speech synthesis is also investigated. A pitch extraction experiment is also implemented using the synthetic BC speech. The experimental results show that pitch extraction from the synthetic BC speech provides more accurate performance than that from the corresponding AC speech.
+14
+
+Chapter 1
+Introduction
+1.1 Production of Speech
+Speech is the most common means of human communication. In daily life, humans usually use speech for the transmission of messages from a speaker to a listener. The brain of speaker sends messages through the nerves and transmit them to the listener through speech waves, then listener accepts the speech waves trough auditory system and transmit them to the brain of listener. Speech is a sound wave of air, which is generated random air fluctuations from the lungs through the vocal cords and vocal tract. According to the vibration of vocal track or not, the speech is defined as the voiced or unvoiced speech. The main components of human speech production system are: the lungs, trachea, vocal cords, larynx, pharynx, vocal track, oral cavity and nasal cavity. The components can be described as follows, the lungs generate the air by using the muscle force, and then the air is streaming through the vocal cords of larynx, where it can be modulated and transferred to the vocal tract. Depending on the activities of vocal folds, the air produces a quasi-periodic wave. On the other hand, vocal tract can be modeled as an acoustic tube with variable resonator. For both voiced and unvoiced generation, the vocal tract behaves as a filter, which provides the pressure wave from the vocal cords and then amplifies to lips or the nostrils. Speech is simply as an acoustic wave that is radiated from the system, when air is expelled from the lungs and the resulting flow of air is perturbed by a constriction in the vocal tract [50].
+The production of speech can also be viewed as a filtering operation. In this operation, an excitation source excites a vocal tract filter, this is known as sourcefilter model which is shown in Fig. 1.1. In Fig. 1.1 the excitation source is the
+15
+
+1.2 Speech Pyramid and Applications of Speech Processing
+
+16
+
+Figure 1.1: Source-filter model for speech production
+combination of the impulse train generator with the period according with the vibration of the vocal cords or a randomly distributed noise generator. Thus, speech signals can be computed as the convolution of time-varying vocal-track systems with time-varying excitation source.
+1.2 Speech Pyramid and Applications of Speech Processing
+With the previous brief introduction to speech signals and human speech communication models, we can use a technology pyramid of digital speech processing (DSP) to introduce the details for speech processing. Fig. 1.2 shows that we term the "speech pyramid" which presents a layered view of the basic DSP concepts. The bottom (first layer) of the pyramid includes the basic science, technology, and theory of DSP, speech generation (acoustic), linguistics (the sound code of speech), and the perception of sounds, syllables, words, sentences, and ultimately meaning. These basic areas of knowledge form the basis of speech signal processing, which is performed to convert speech signals into a form that is more conducive to obtaining the information contained therein.
+The second and third layers of the pyramid we called the concept layer. The second layer in the speech pyramid includes a set of basic representations of speech signals. These representations include temporal representations (including the speech waveform itself), spectral representations (Fourier magnitudes and phases)
+
+1.2 Speech Pyramid and Applications of Speech Processing
+
+17
+
+Figure 1.2: Speech stack-from fundamentals to applications
+homomorphic representations (cepstral domain), and model representations such as linear predictive coding (LPC). These concepts are used widely and extensively in speech processing.
+The third layer in the pyramid is concerned with integrating the various speech representations into algorithms that estimate the basic properties of speech signals. The algorithms in this layer are used for extracting speech features through the speech representations which are described in the second layer, various speech algorithms (known collectively as pitch extraction methods) facilitate the determination of pitch period (or pitch frequency), and a different set of algorithms (known collectively as formant estimation methods) can be used to estimate the set of vocal track resonances or formants for the speech section of interest. Pitch is an important parameter and accurate pitch extraction is a research goal in speech processing. Many applications of speech processing are based on accurate pitch information. This will be mentioned in the fourth layer of the pyramid.
+The fourth or top layer in the pyramid is the set of end-user applications of speech processing. The top layer represents the payoff for the technology and consists of a range of applications including speech coding, speech synthesis, speech recognition and understanding, speaker verification and recognition, language translation, speech enhancement systems, speech speed-up, and slow-down
+
+1.3 Different Types of Speech and Microphone
+
+18
+
+systems. Speech coding is perhaps the most widespread application of digital speech processing technology, it is used in the areas of digital transmission and storage of speech signals. In these areas, the centrality of the digital representation is obvious, since the goal is to compress the digital waveform representation of speech into a lower bit rate representation. It is common to refer to this activity as "speech coding" or "speech compression." In general, this compression is achieved by combining DSP techniques with fundamental knowledge of the speech production, perception processes of speech [51]. Another large class of speech processing applications is concerned with the automatic extraction of information from the speech signal. Most such systems involve some sort of pattern matching. The pattern match problems include the following: speech recognition, where the object is to extract the message from the speech signal; speaker recognition, where the goal is to identify who is speaking; speaker verification, where the goal is to verify a speaker's claimed to identify from analysis of their speech signal. Another important application area is speech enhancement [29], where the goal is to remove or suppress noise or echo or reverberation pick up by a microphone along with the desired speech signal. Speech synthesis is the artificial production of human speech. It includes the text-to-speech (TTS) system which converts normal language text into speech and converts other forms of speech into the desired speech. Speech synthesis is widely used in speech processing. The implementation of such applications is based on the information of speech which is described in the third layer in the pyramid such as pitch extraction [1-22], voiced/unvoiced speech detection [36], and so on.
+1.3 Different Types of Speech and Microphone
+In a natural hearing, sound waves are carried through the air (air conduction). Air conduction relies on the outer ear, middle ear, and inner ear. Cartilage conduction is a pathway in which sound signals are transmitted to the inner ear. This pathway is distinct from conventional sound pathways such as air or bone. Therefore, cartilage conduction is referred to as the third auditory pathway. Bone conduction is the conduction of sound to the inner ear primarily through the bones of the skull, allowing the hearer to perceive audio content without blocking the ear canal. Bone conduction transmission occurs constantly as sound waves through bone, specifically through the skull. For the microphones, some new microphones, such as bone-conductive microphones, throat microphones, and non-audible mur-
+
+1.4 Bone-Conducted Speech
+
+19
+
+mur (NAM) microphones, besides conventional condenser microphones have been developed for collecting speech data. Accordingly, some researchers began to utilize these microphones in speech processing.
+1.4 Bone-Conducted Speech
+Last decade, a lot of attention has been paid to bone-conducted (BC) speech, one of those picked up from the human body. The head or in-ear is often chosen for the location on the human body where a BC microphone is equipped, although BC speech is affected by the equipped locations. This is because the comparatively high quality of BC speech is obtained and it is easy to set up such types of BC microphones. Research about BC speech has a long history. In the 1950s, intensities of the voices to be picked up were exclusively discussed and some types of microphones were developed. After several decades, it was unveiled that BC speech is less sensitive to ambient noise than air-conducted (AC) speech measured by a standard microphone. This was timely matched to the requirement from the real world. Then, motivated by early works in the 2000s, where some techniques for quality improvement of BC speech were developed, BC speech has been often utilized for the purpose of speech enhancement in recent years. The intelligibility of BC speech is, in many cases, lower than that of AC speech, since the high-frequency components of BC speech are attenuated due to the transmission of voices on bones and skulls in the human body. However, state-of-the-art techniques would achieve quality improvement and noise reduction simultaneously for BC speech.
+1.5 Motivations
+Some researches indicate that BC speech has the potential to be inherently and effectively utilized in speech processing. However, the properties of BC speech are still unclear in some regions such as pitch extraction, speech synthesis, speech enhancement, and so on. In order to clarify the properties of BC speech, researchers are exploring how BC speech can be applied in speech processing systems like speech enhancement [29][30], pitch extraction [31][32], and so on. Pitch (fundamental period) or fundamental frequency is one of the most important parameters in speech processing. Pitch information is effectively embedded and utilized in speech-related processing systems. Therefore, the extraction of pitch informa-
+
+1.6 Organization of the Thesis
+
+20
+
+tion from the speech signal is important for speech-related processing systems and applications, and numerous methods have been addressed [1]-[32]. In a noiseless environment, pitch extraction from BC speech leads to better performance as compared to the corresponding AC speech case [31]. However, the pitch extraction performance from BC speech in noisy environments is not known well except for a preliminary experimental result in [32]. For this reason, two pitch extraction approaches WACF-CEP and WACF-WACF are proposed and conducted in different types of noise environments. Proposed methods WACF-CEP and WACF-WACF utilize both AC and BC speeches as the input signals. On the other hand, some papers report that the use of BC speech leads to more accurate rates of speaker verification in noiseless environments, where AC speech is utilized together [52][53]. BC speech behaves so as to compensate for that of AC speech, leading to balanced equal error rates. The above reports [31][52][53] indicate that BC speech is more advantageous in speech processing. However, when we synthesize such BC speech, we have no promising ways to do so. There are very few works of BC speech synthesis. Designing a BC synthesis filter for synthesizing the BC speech from AC speech in real-time should be needed in speech processing. For these reasons, we investigate speech synthesis for BC speech and propose a BC speech synthesis approach based on least squares method, and then conduct a pitch extraction experiment using the synthesized BC speech. From these researches, we clarify that BC speech can be utilized in pitch extraction and the synthesized speech can be utilized as a processing in speech processing such as noise reduction and pitch extraction.
+1.6 Organization of the Thesis
+The research background has been described in this chapter. The rest of the thesis is organized as follows. In Chapter 2, two methods combining AC speech with BC speech as the input signal are proposed, and pitch extraction experiments for proposed methods are conducted. In Chapter 3, a BC speech synthesis approach based on least squares method is proposed. Evaluation and pitch extraction experiments for the synthesized BC speech are implemented there. Chapter 4 presents a conclusion and future work of the thesis.
+
+Chapter 2
+Pitch Extraction Approaches for BC Speech
+2.1 Background of Pitch Extraction
+Pitch (fundamental period) or fundamental frequency is one of the most important and needful parameters to represent a speech signal. Pitch information is effectively embedded and utilized in speech-related processing systems such as speech enhancement, speech coding, speech analysis, speaker identification, and so on. Therefore, the extraction of pitch information from the speech signal is crucial, and numerous methods have been addressed [1]-[32]. The extraction is conducted from a speech signal through an air-conducted (AC) microphone, which is referred to as the AC speech signal in this paper. However, AC speech is often used in noisy environments. In this case, AC speech is corrupted by noise. It is very difficult to extract the pitch information accurately from such noisy AC speech. One of the most important features of BC speech is its excellent noise-robustness. In this section, we analyze and explore the performance of BC speech in pitch extraction.
+2.2 Conventional Pitch Extraction Methods
+The auto-correlation function (ACF) method [1] is known to provide noise robustness in a wide band noise. For this reason, there exist several modified versions of the ACF method [2]-[9]. However, the ACF based methods are often affected by the formant characteristics in the AC speech signal, resulting in performance degradation.
+21
+
+2.2 Conventional Pitch Extraction Methods
+
+22
+
+Figure 2.1: Framework of pitch extraction
+While the ACF-based methods are calculated in the time domain, the cepstrum (CEP) method [10] is done in the frequency domain. The CEP method is less affected by the formant characteristics. In a noiseless environment, the CEP method becomes an accurate pitch extractor. However, the CEP method is severely affected by a wide band noise, while it behaves as a good pitch extractor in a periodical noise such as car noise. Some variations of the CEP method also exist [11][12]. Extending the frequency domain methods, two state-of-the-art methods, PEFAC [13] and BaNa [14], have been derived recently. PEFAC estimates pitch by convolving its power spectral density in the log-frequency domain with a filter that sums the energy of the pitch harmonics while rejecting additive noise that has a smoothly varying power spectrum. Also, amplitude compression is applied before filtering to attenuate narrow-band noise components. BaNa is a noise resilient pitch detection method that has good performance in noisy environments. Speech harmonics are regularly spaced at integer multiples of the fundamental frequency. BaNa uses the Viterbi algorithm to search for harmonic peaks and determines the pitch from the candidates by calculating the ratios of harmonics. In [14][15], it is reported that BaNa provides the best performance in competitive methods that include PEFAC. However, the performance degrades in highly noisy environments even for BaNa. Current research work includes a deep learning approach for pitch extraction [16]-[18]. However, an extremely long length of speech data is required to learn the corresponding network architecture in implementing such approaches in practice. Although particle filters [19] are applicable for pitch extraction, they are utilized only in white Gaussian noise case. The instantaneous fundamental frequency estimation approach [20] and its extended version [21] are also applicable to white Gaussian noise case. Although the signal frequency filtering approach [22] is applicable to a variety of noise characteristics, it may not be tolerant of situations at a signal-to-noise ratio (SNR) less than 0 dB.
+Figure 2.1 shows a framework for pitch extraction to be considered in this paper. For the methods as mentioned above, pre-processing such as a low-pass filter
+
+2.3 Methods in the Time Domain
+
+23
+
+or pre-whitening is sometimes used. Actually, low-pass filtering is recommended in the ACF method [1][2][7][8]. Pre-whitening accelerates the performance for the SIFT [8], average magnitude difference function (AMDF) [9], and instantaneous fundamental frequency estimation [19]. Obviously, the core part in Fig.1 is that of pitch extraction. The ACF or CEP, for example, is used here in the pitch extraction, and pitch information is extracted. Post-processing corresponds to nonlinear filtering [23] and dynamic programming [24] as the early version. Recent versions include a deep learning approach [25]. As suggested in [26], however, a mixture of pitch extraction and post-processing is proposed and then sometimes compared with the pitch extraction method that does not involve the post-processing part in the literature. This kind of performance comparison is not fair. Therefore, in this paper, we consider only the core part for pitch extraction where the pre-processing part as well as pre-processing, is not included for fair performance comparison.
+
+2.3 Methods in the Time Domain
+
+2.3.1 Auto-correlation Function (ACF)
+
+The ACF method is a conventional method for pitch determination. It is used for its simplicity. In speech processing, voiced speech, s(n), is expressed as a periodic signal. n is a discrete time. The ACF method can be expressed as
+
+1 N- -1
+
+R ( ) =
+
+s (n) s (n +  )
+
+N n=0
+
+(2.1)
+
+where s(n) is the speech signal,  is the lag number, N corresponds to the data number in frame.
+The ACF method is implemented by inverse Fourier transform of the power spectrum of the signal. It is less affected by random noise such as white Gaussian noise. However, it is not satisfactory in a periodically noisy environment such as babble noise. The peak detection of the white noise speech signal (SNR=0) is shown in Fig.2.2 (b) and we can see the periodic peak distinctly.
+
+2.3 Methods in the Time Domain
+
+24
+
+Figure 2.2: WACF method: (a) clean speech signal, (b) ACF of speech signal of (a) with white Gaussian noise (SNR=0), (c) AMDF of speech signal with white Gaussian noise (SNR=0), (d) WACF of speech signal with white Gaussian noise (SNR=0)
+
+2.3.2 Average Magnitude Difference Function (AMDF)
+
+The AMDF method is also useful for its simplicity. The AMDF method is simpler than the ACF method in calculation. The AMDF method can be expressed as
+
+1 N- -1
+
+D ( ) =
+
+|s (n +  ) - s (n)|
+
+N n=0
+
+(2.2)
+
+If s(n) is a periodic speech signal whose period is p, D ( ) becomes 0 for  = p, 2p, ..., np. Thus, the AMDF method can be used in pitch estimation. The result of peak determination is shown in Fig. 2.2 (c).
+
+2.3.3 Weighted Auto-correlation Function (WACF)
+
+The WACF method can be expressed as
+
+R ( ) Q ( ) =
+D ( )
+
+(2.3)
+
+2.3 Methods in the Time Domain
+
+25
+
+Figure 2.3: Cepstrum method: (a) clean speech signal, (b) cepstrum of clean speech signal in (a), (c) noisy speech signal (SNR=0), (d) cepstrum of noisy speech signal in (c)
+where R ( ) is the ACF, and D ( ) is the AMDF. The WACF method utilizes the periodicity property of ACF and AMDF. In
+Fig.2.2 (b) and (c), we can see clearly that the amplitude of peak and valley are decreased with the increase of time. The points of peaks and notches are the points of the period, respectively. Thus, using the peak of the ACF divided by the notch of the AMDF, the true peak will be emphasized, and as a result, the errors of pitch extraction will be decreased. The emphasized peak is shown in Fig.2.2 (d). The WACF method has superior performance against random noise such as white noise.
+
+2.4 Methods in the Frequency Domain
+
+26
+
+2.4 Methods in the Frequency Domain
+
+2.4.1 Cepstrum (CEP)
+The CEP method provides good performance of pitch extraction in noiseless environments. The CEP method can be expressed as
+
+1 M-1
+
+j2kn/M
+
+C (n) =
+
+log |S (k)| e
+
+M k=0
+
+(2.4)
+
+where S (k) is the discrete Fourier transform (DFT) of s(n) with M frequency
+
+points.
+
+The logarithm operation of the CEP method compresses the spectral diversity
+
+of |S (k)|, which yields a reliable periodic peak [27]. However, the nonlinear oper-
+
+ation of the logarithm is difficult to estimate the true peak in noisy environments.
+
+A comparison of the peak detection from the clean speech signal and speech signal
+
+corrupted by white noise is shown in Fig.2.3.
+
+2.5 Proposed Method (WACF-CEP) Combining AC and BC Speeches
+
+Figure 2.4 shows a block diagram of an AC · BC combination method for pitch
+
+detection of noisy speech signals, where AC and BC speeches are used as the input
+
+signals simultaneously. The AC and BC speech signals are assumed to be measured
+
+through an AC and BC microphone, respectively, in noisy environments. Let us
+
+assume that both the speech signals are expressed after common windowing, for
+
+simplicity, by
+
+xa (n) = sa (n) + va (n) , 0  n  N - 1
+
+(2.5)
+
+xb (n) = sb (n) + vb (n) , 0  n  N - 1,
+
+(2.6)
+
+respectively, where xa(n) and xb(n) are the measured AC and BC speech signals for a frame the length of which is N . In (1), sa(n) and va(n) correspond to the clean AC speech signal and the noise measured through the AC microphone, respectively. In (2.6), sb(n) and vb(n) correspond to the clean BC speech signal and the noise measured through the BC microphone, respectively. For pitch extraction, only the voiced parts of both the speech signals are used. In this scenario, we can assume that sa(n) and sb(n) are excited and generated by a common source signal, which
+
+2.5 Proposed Method (WACF-CEP) Combining AC and BC Speeches
+
+27
+
+Figure 2.4: Block diagram of proposed method (WACF-CEP)
+
+means to have the common fundamental frequency [31]. To implement pitch extraction, we can select a suitable function for the input
+speech signal. Although there are many types of functions for pitch extraction as mentioned in the Introduction, we select the WACF for the AC speech signal xa(n) and does the CEP for the BC speech signal xb(n) in Fig.2 as one example. The selection of the WACF for the AC speech signal is due to the fact that the WACF is comparatively simple for implementation, but effective in noisy environments [3]. On the other hand, the selection of the CEP for the BC speech signal is due to the fact that the amount of noise included in the BC speech signal is significantly reduced. It is known that the CEP keeps accurate pitch extraction in a noiseless environment without complicated computation [10].
+Here let us express the WACF of a framed AC speech signal as
+
+Qa ( ) = Ra ( ) Da ( )
+
+(2.7)
+
+2.5 Proposed Method (WACF-CEP) Combining AC and BC Speeches
+
+28
+
+where Ra ( ) and Da ( ) correspond to the ACF and AMDF, respectively, and
+
+ denotes lag. Exactly speaking, Da ( ) includes + (a small positive value) in
+
+practice (according to the original paper [3] to avoid division by zeros, but omits it
+
+here for simpler expression). The CEP of a framed BC speech signal is expressed
+
+by
+
+Cb(n) = IFFT[log10|Xb(k)|]
+
+(2.8)
+
+where IFFT [·] means the inverse fast Fourier transform (IFFT) and Xb(k) corresponds to the FFT of xb(n).
+The AC · BC combination method calculates a multiplication of both functions in (2.7) and (2.8) as
+
+Wab ( ) = Qa ( ) · Cb ( )
+
+(2.9)
+
+Note that the variable n in (2.8) is replaced by  in (2.9). Detecting the peak in the new function Wab ( ) in a range of period where the fundamental period (the inverse of fundamental frequency) exists, we can find the fundamental frequency.
+
+2.5.1 Properties of Proposed Method (WACF-CEP)
+For the weighted ACF, the noise components included in Ra( ) are independent on those included in Da( ) as shown in [3]. For this reason, the pitch peak created in Ra( ), which corresponds to the peak located at  = T0 (fundamental period), is emphasized by the pitch peak created in 1/Da( ), which is also located at  = T0 even in noisy environments. For the proposed method shown in Fig.2.4, the effect of such noise independency is utilized in the following step once again.
+Equ.(2.8) may be further approximated as
+
+Cb(n)  Cb,s(n)  Cb,v(n)
+
+(2.10)
+
+where Cb,s(n) and Cb,v(n) are the cepstra of sb(n) and vb(n), respectively, and  denotes convolution. This is because
+
+|Xb(k)| = |Sb(k) + Vb(k)|
+
+(2.11)
+
+where Sb(k)=FFT[sb(n)] and Vb(k)=FFT[vb(n)]. In this case, the log calculation may be expressed as
+
+2.5 Proposed Method (WACF-CEP) Combining AC and BC Speeches
+
+29
+
+Figure 2.5: An example of waveforms for WACF-CEP: (a) recorded AC speech signal corrupted by white Gaussian noise (SNR=0 dB), (b) corresponding recorded BC speech signal corrupted by white Gaussian noise (SNR=11.06 dB), (c) peak detection by WACF method from the red lines part in (a), (d) peak detection by CEP method from the red lines part in (b), (e) peak detection by proposed method from (c) and (d)
+
+2.6 Proposed Method (WACF-WACF) Combining AC and BC Speeches
+
+30
+
+log10|Xb(k)| = log10|Sb(k) + Vb(k)|  log10(|Sb(k)| + |Vb(k)|) = log10|Sb(k)| · log10|Vb(k)|
+and the right hand side in (4) results in
+
+(2.12)
+
+IFFT[log10|Sb(k)| · log10|Vb(k)|] = Cb,s(n)  Cb,v(n)
+
+(2.13)
+
+where Cb,s(n)=IFFT[log10|Sb(k)|] and Cb,v(n)=IFFT[log10|Vb(k)|]. The noise components in Cb(n), Cb,v(n), is independent on those in Qa( ). Therefore, it is expected that the pitch peak created in Qa( ) is multiplied by the pitch peak created in Cb(n) and emphasized.
+Fig.2.5 illustrates a pitch extraction example of the WACF, CEP and proposed method in white Gaussian noise environment. One of the recorded AC speech data (which corresponds to Speaker A) is given in (a) where one of the recorded AC noise data (white noise) is added, resulting in an SNR of 0 dB. Its BC version is (b) where the BC speech recorded from the same speaker is in the recorded BC noise (corresponding version of the AC noise in (a)). Its SNR is 11.06 dB. From the same location being red lines in (a) and (b), frames are selected. After Hamming windowing on the noisy AC speech signal, (c) is obtained by the WACF calculation. After Hamming windowing on the noisy BC speech signal, (d) is obtained by the CEP calculation. A multiplication of the waveform in (c) with that in (d) results in (e). In (c) (d) (e), the location of the true peak that gives the position of the true pitch is indicated by an arrow. From (e), we can see that the true peak is emphasized more clearly by suppressing the spurious peak.
+
+2.6 Proposed Method (WACF-WACF) Combining AC and BC Speeches
+In Section 2.5, we proposed a method using WACF and CEP to process the AC speech and BC speech, respectively. Since the WACF method gives superior performance in white noise environment, we propose another method using WACF to the AC speech and BC speech, respectively, in white noise environment. Figure 2.6 shows the block diagram of the proposed method WACF-WACF for pitch detection in white noise environment, where AC and BC speeches are used as the input
+
+2.6 Proposed Method (WACF-WACF) Combining AC and BC Speeches
+
+31
+
+Figure 2.6: Block diagram of proposed method (WACF-WACF)
+
+signals simultaneously. The left part of AC speech processing in Fig.2.6 is common with that in Fig.2.4. For the right part, we use the common WACF function to process the BC speech.
+The WACF of a framed BC speech signal can be expressed as
+
+Qb ( ) = Rb ( ) Db ( )
+
+(2.14)
+
+where Rb ( ) and Db ( ) correspond to the ACF and AMDF for BC speech, respectively, and  denotes lag.
+
+The AC · BC combination method calculates a multiplication of both functions
+
+in (2.7) and (2.14) as
+
+W^ ab ( ) = Qa ( ) · Qb ( )
+
+(2.15)
+
+Detecting the peak in the new function W^ ab ( ) in a range of period where the fundamental period (the inverse of fundamental frequency) exists, we can find the fundamental frequency.
+
+2.6 Proposed Method (WACF-WACF) Combining AC and BC Speeches
+
+32
+
+Figure 2.7: An example of waveforms for WACF-WACF: (a) recorded AC speech signal corrupted by white Gaussian noise (SNR=0 dB), (b) corresponding recorded BC speech signal corrupted by white Gaussian noise (SNR=11.06 dB), (c) peak detection by WACF method from the red lines part in (a), (d) peak detection by WACF method from the red lines part in (b), (e) peak detection by proposed method from (c) and (d)
+
+2.7 Experiments for Pitch Extraction
+
+33
+
+2.6.1 Properties of Proposed Method (WACF-WACF)
+Fig.2.7 illustrates a pitch extraction example of the WACF and proposed method WACF-WACF in white Gaussian noise environment. One of the recorded AC speech data (which corresponds to Speaker A) is given in (a) where one of the recorded AC noise data (white noise) is added, resulting in an SNR of 0 dB. Its BC version is (b) where the BC speech recorded from the same speaker is in the recorded BC noise (corresponding version of the AC noise in (a)). Its SNR is 11.06 dB. From the same location being red lines in (a) and (b), frames are selected. After Hamming windowing on the noisy AC speech signal, (c) is obtained by the WACF calculation. After Hamming windowing on the noisy BC speech signal, (d) is also obtained by the WACF calculation. A multiplication of the waveform in (c) with that in (d) results in (e). In (c) (d) (e), the location of the true peak that gives the position of the true pitch is indicated by an arrow. From (e), we can see that the true peak is emphasized more clearly by suppressing the spurious peak.
+
+2.7 Experiments for Pitch Extraction
+In this section, the noise included in xa(n) and that included in xb(n) are compared and each power is experimentally investigated through recording. A setup of the recording system is shown in Figs.2.8 and 2.9. The types of equipment utilized are summarized in Table 2.1.
+2.7.1 Noise Recording
+Noise data was recorded in five types of noisy environments (white, babble, train factory, and car interior) through four male (A, B, C, and D) and four female (E, F, G, and H) listeners. The eight listeners are around 22 years old. The white noise with zero mean and unit variance was generated by a computer. The babble, factory, and car interior noises were taken from the NOISEX-92 database [34], and the train noise was taken from the Japanese Electronic Industry Development Association (JEIDA) noise database [35]. The noise recording process can be described as follows:
+1. The first listener, Listener A, who is one of the eight listeners was wearing a BC microphone (Temco HG-17) and sitting in front of a table.
+
+2.7 Experiments for Pitch Extraction
+
+34
+
+2. Two loudspeakers (SONY SRS-A91), an AC microphone (SONY ECM-J3M), an audio interface (Roland EDIROL UA-20), a computer (PC), and a sound level meter (ONOSOKKI LA1440) were set on the table. The location of equipment is fixed. Specific distance is illustrated in Figs.2.8 and 2.9.
+3. Five different noises (white noise, babble noise, train noise, factory noise, and car interior noise) were separately emitted toward the listener from two loud-speakers.
+4. Each noise length was about 4 s and measured by means of the AC and BC microphones, simultaneously. The noise was recorded in the computer as AC and BC noise data of WAV format (16 bits, 44.1 KHz) through an audio interface (Roland EDIROL UA-20).
+5. After recording the five noise data, we repeated Step (4) individually where the listener took his/her BC microphone off once and wore it again. For increasing the accuracy of measurement, each type of noise was re-emitted and recorded as AC and BC noise data in the computer again.
+6. The second Listener B to the eighth Listener H repeated Steps (3), (4), and (5).
+
+2.7.2 Speech Recording
+After the noise data recording, the speech recording was conducted. Common eight persons who joined in the above noise recording joined again. For this case, they are speakers. The speech recording process can be described as follows:
+1. The equipment setting is the same as those in noise recording case.
+2. The first Speaker A who was wearing the BC microphone uttered a 4 s length Japanese sentence (Arayurugenjitsuwo, subete, jibunnohoue, nejimagetanoda). When Speaker A uttered, he kept a 60 dB level of the sound level meter.
+3. The sentence was recorded through AC and BC microphones as AC and BC speech data of WAV format (16 bits, 44.1 KHz) simultaneously.
+4. The second Speaker B to the eighth Speaker H repeated Steps (2) and (3).
+
+2.7 Experiments for Pitch Extraction
+
+35
+
+Figure 2.8: Speech recording situation from top
+2.7.3 SNR Calculation and Analysis
+The recorded noise and speech data are downsampled from 44.1 kHz to 1.6 KHz, and they are used in the experiments for pitch extraction in Sections 2.7.4 and 2.7.5.
+Here, we investigate the relationship between the SNR of the recorded AC speech and the SNR of the recorded BC speech in different noise environments. For the SNR calculation, each noise and speech power from each listener or speaker is used, respectively. In the noise power calculation case, the power of each noise (white, babble, train, factory, and car) is calculated twice for the AC and BC noises, respectively, and an averaged noise power of AC noise and BC noise is found, respectively. The resulting AC and BC noise power are shown in Table 2.2, respectively. In the speech power calculation case, we calculated each speech power of the recorded AC and BC speeches from each speaker, respectively. The results of speech power are shown in Table 2.3. From Tables 2.2 and 2.3, we can calculate SNR for each noise type in each speaker case, respectively. The results are summarized in Table 2.4. From Table 2.4, we can see that BC speech keeps about 10 dB gain relative to AC speech in noisy environments. The AC and BC
+
+2.7 Experiments for Pitch Extraction
+
+36
+
+Figure 2.9: Speech recording situation from lateral
+
+Table 2.1: Experimental conditions for recording
+
+Speaker Loudspeaker Sound level meter AC microphone BC microphone Audio interface Noise type
+
+Male 4, Female 4 SONY SRS-A9 ONOSOKKI LA1440 SONY ECM-J3M Temco HG-17 Roland EDIROL UA-20 White, Babble, Train, Factory, Car interior
+
+speech signals in white noise case from Speaker A were used in Figs.2.5 and 2.7. Now we have eight speaker data for sa(n) and sb(n) and five noise types for
+va(n) and vb(n). For the pitch extraction experiment in Sections 2.7.4 and 2.7.5, va(n) and vb(n) are used as a noise data set, in which the amplitude of va(n) and vb(n) is adjusted by multiplying a common factor, , like va(n) and vb(n), when we set the SNR of AC speech. We assume that sa(n) + va(n) and sb(n) + vb(n) are observed as the noisy AC speech signal and noisy BC speech signal, respectively.
+2.7.4 Experiments of Proposed Method (WACF-CEP)
+To validate the excellent performance of the proposed method, we implemented the combination method (in Fig.2.4) in a comparative fashion with the state-ofthe-art method, BaNa, in noisy environments. Although the proposed method
+
+2.7 Experiments for Pitch Extraction
+
+37
+
+Table 2.2: AC and BC noise powers
+
+MIC Noise Type White Babble Train Factory Car
+
+Listener A AC BC
+
+653.9 49.2
+
+723.8 742.1 79.3 72.3
+
+719.2 744.1 73.8 79.6
+
+Listener B AC BC
+
+684.0 50.5
+
+714.6 732.7 78.4 71.1
+
+694.5 705.5 70.5 72.8
+
+Listener C AC BC
+
+671.5 50.4
+
+733.5 728.0 79.6 70.7
+
+720.3 717.4 79.4 75.1
+
+Listener D AC BC
+
+649.8 48.6
+
+723.6 731.5 78.7 71.0
+
+735.8 720.0 80.1 73.2
+
+Listener E AC BC
+
+664.5 49.6
+
+719.7 722.6 78.6 72.3
+
+686.6 736.5 70.7 75.4
+
+Listener F AC BC
+
+639.1 50.1
+
+712.3 739.5 77.2 70.2
+
+707.1 709.3 75.2 77.1
+
+Listener G AC BC
+
+629.1 48.8
+
+706.1 714.9 77.5 71.8
+
+724.9 708.4 77.8 72.3
+
+Listener H AC BC
+
+654.2 48.9
+
+710.1 751.2 78.3 72.5
+
+712.3 721.5 75.3 77.8
+
+uses both AC and BC speeches as the input signals, BaNa does only the AC speech. Therefore, to make a fair performance comparison, the SNR is set as the SNR of AC speech. For comparison, the ACF, WACF, and CEP methods are added since the proposed method uses them as a part. Only the AC speech is inputted for the ACF, WACF, and CEP as well. However, in order to show that the multiplication in the proposed method, (2.9), effectively works, we add the performance of the CEP method for the BC speech input (which is denoted as CEP-BC) in comparison. This corresponds to the only use of Cb(n) for pitch extraction. For the experiments, the recorded AC speech, BC speech (four males and four females), and noise (white, babble, train, factory, and car interior) are used.
+The experimental conditions are summarized in Table 2.5. The length of each speech is about 4 s. We picked up the voiced parts from the recorded speeches based on listening and inspection and implemented pitch extraction for only their frames. Basically, the frame and the FFT (IFFT) lengths were set to 50 ms and 1024, respectively. However, for BaNa, the frame and the FFT (IFFT) lengths of BaNa were set to 60 ms and 216, respectively, which correspond to the setting in the original BaNa paper [14]. Since there is no true pitch information in the recorded speeches for pitch extraction, we implemented each pitch extraction method in a noiseless case and used the extracted pitch as the pitch reference data for each
+
+2.7 Experiments for Pitch Extraction
+
+38
+
+Table 2.3: Power of AC and BC speeches
+
+MIC Speech Power
+
+Speaker A AC BC
+Speaker B AC BC
+Speaker C AC BC
+Speaker D AC BC
+Speaker E AC BC
+Speaker F AC BC
+Speaker G AC BC
+Speaker H AC BC
+
+550.3 530.2 525.4 530.5 504.8 510.5 518.3 503.9 573.6 522.1 538.5 498.5 544.7 510.1 523.2 460.7
+
+method. For the pitch reference data construction, we detected the endpoint of the clean speech using the spectral entropy method in [36] and extracted the pitch data from the detected voiced parts. However, since some pitch detection errors were yielded, we corrected the errors for accurate pitch reference construction. Figs.2.10 and 2.11 show the two examples in which the original (red) and corrected (black) pitch detection from Speaker D and Speaker E are included, respectively. The corrected version of pitch detection was used as the reference true pitch for the pitch extraction evaluation. In the pitch extraction, the extraction range, Fe, is set as 60 Hz  Fe  500 Hz, which corresponds to the fundamental frequency range of human voice. When the estimated fundamental frequency for a frame deviates from the reference fundamental frequency by more than 10%, we recognized the estimation as a gross pitch error (GPE).
+Average GPEs for each method are shown in Fig.2.12 to Fig.2.21. For BaNa, in the female case (Figs.2.13, 2.15, 2.17, 2.19, and 2.21), it can detect the peak more accurately than that of males in noisy environments by comparing the least number of harmonics in the first formant range (first five spectral peaks) where the energy of the speech concentrates on and the speech harmonics are less affected by noise. Among the CEP, ACF, WACF, and BaNa methods, BaNa provides the lowest error rate in all types of noisy environments. However, the single input AC speech signal limits the effectiveness of noise-robustness of BaNa in highly noisy
+
+2.7 Experiments for Pitch Extraction
+
+39
+
+Table 2.4: SNR of AC and BC Speeches for each speaker
+
+Speaker A Speaker B Speaker C Speaker D Speaker E Speaker F Speaker G Speaker H
+
+Noise
+White Babble Train Factory
+Car White Babble Train Factory
+Car White Babble Train Factory
+Car White Babble Train Factory
+Car White Babble Train Factory
+Car White Babble Train Factory
+Car White Babble Train Factory
+Car White Babble Train Factory
+Car
+
+AC SNR [dB] -0.74 -1.19 -1.29 -1.16 -1.31 -1.14 -1.33 -1.44 -1.21 -1.28 -1.23 -1.62 -1.59 -1.54 -1.53 -0.98 -1.44 -1.49 -1.52 -1.43 -0.63 -0.98 -1.00 -0.79 -1.09 -0.74 -1.21 -1.37 -1.18 -1.19 -0.62 -1.12 -1.18 -1.24 -1.14 -0.97 -1.32 -1.57 -1.34 -1.40
+
+BC SNR [dB] 10.32 8.25 8.65 8.56 8.25 10.21 8.30 8.72 8.77 8.63 10.05 8.07 8.58 8.08 8.32 10.15 8.06 8.51 7.99 8.38 10.22 8.22 8.58 8.68 8.40 9.97 8.10 8.51 8.21 8.10 10.19 8.18 8.51 8.17 8.49 9.74 7.69 8.03 7.87 7.72
+
+BC SNR Gain [dB]
+11.06 9.44 9.94 9.72 9.55 11.35 9.63 10.16 9.98 9.91 11.28 9.69 10.17 9.62 9.85 11.13 9.50 10.00 9.51 9.81 10.85 9.20 9.58 9.47 9.49 10.71 9.31 9.88 9.39 9.30 10.81 9.30 9.69 9.41 9.63 10.71 9.01 9.60 9.21 9.12
+
+2.7 Experiments for Pitch Extraction
+
+40
+
+Table 2.5: Experimental conditions for WACF-CEP
+
+Speaker Frame length (except for BaNa) Frame length of BaNa Frame shift FFT (IFFT) length (except for BaNa) FFT (IFFT) length of BaNa Sampling frequency Window function Noise type
+
+male 4, female 4 50ms 60ms 10ms 1024 216 16kHz
+Hamming White, Babble, Train, Factory and Car interior
+
+Table 2.6: Processing time per second of speech
+CEP ACF WACF BANA CEP-BC PROP 0.071 0.127 0.232 21.637 0.070 0.724
+
+environments and results in a higher error rate compared to that of the CEP-BC and proposed method which uses the BC speech and both the AC and BC speeches as the input signals, respectively. In all cases, the proposed method gives a much better performance than that of BaNa. The CEP-BC also provides a lower GPE rate than those of CEP, ACF, WACF, and BaNa in highly noisy environments, since the noise is suppressed in the input BC speech signal. For the proposed method, the multiplication from two different functions can correct the detected error for each other, while the use of BC speech refines the accuracy for pitch extraction as the CEP-BC behaves. For these reasons, the proposed method can give a lower GPE rate than those of CEP-BC and BaBa. In all types of noisy environments, the proposed method provides the best performance regardless of male or female of the speaker.
+We measured the processing time per one-second data for each method. We tested all methods on the computer with 2.9 GHz Intel Core i7, 16 GB 2133 MHz DDR3 memory, and Intel HD Graphics 630 1536 MB. For the evaluation, we used five trials for each method, then calculated the average processing time to obtain reliable data. The resulting processing time is summarized in Table 6. The CEP and ACF methods take a shorter time than other methods due to their simple calculation of logarithm or correlation function. On the other hand, BaNa faces the longest processing time due to the large FFT size used for keeping highfrequency resolution. Although the proposed method uses two input signals (AC and BC speeches), its processing time is quite shorter than that of BaNa.
+
+2.7 Experiments for Pitch Extraction
+
+41
+
+2.7.5 Experiments of Proposed Method (WACF-WACF)
+To validate the excellent performance of the proposed method, we also implemented the proposed method (in Fig.2.6) in a comparative fashion with the state-of-theart method, BaNa, in white, babble, train, factory, and car noise environments. The environmental condition is common with that of the WACF-CEP proposed method which is shown in Table 2.5. The GPE is also set as 10%.
+Average GPEs for each method are shown in Fig.2.22 to Fig.2.31. From Fig.2.22 to Fig.2.31, we can see that the CEP method gives the highest failure rate in white, babble, train, factory, and car noise environments. BANA gives better performance compared to the other methods since it can detect the peak accurately by comparing the least number of harmonics in the first formant range (first five spectral peaks) where the energy of the speech at these harmonics are less affected by noise. Using two different input signals and the multiplication of WACFs, the proposed method provides the best performance among all the methods.
+2.7.6 Discussion
+For the WACF-CEP proposed method, the use of two different functions WACF and CEP leads to a superior accuracy for pitch extraction in almost all types of noise environments (Fig.2.12-Fig.2.21). CEP method can correct the error caused by WACF in periodic noise environment and the use of BC speech further refines the accuracy of pitch extraction. For the WACF-WACF proposed method, it gives a better performance than that of the WACF-CEP method in white noise environment, since the WACF function is very resistant to random noise. The WACFWACF proposed method provides the best performance in white noise environment (Fig.2.22 and Fig.2.23), however, it can not give a better performance than that of WACF-CEP method in periodic noise environments (Fig.2.24-Fig.2.31).
+
+2.7 Experiments for Pitch Extraction
+
+42
+
+Table 2.7: Experimental conditions for WACF-WACF
+
+Speaker Frame length (except for BaNa) Frame length of BaNa Frame shift FFT (IFFT) length (except for BaNa) FFT (IFFT) length of BaNa Sampling frequency Window function Noise type
+
+male 4, female 4 50ms 60ms 10ms 1024 216 16kHz
+Hamming White noise
+
+2.7 Experiments for Pitch Extraction
+
+43
+
+Figure 2.10: Reference pitch for each method from male Speaker D
+
+2.7 Experiments for Pitch Extraction
+
+44
+
+Figure 2.11: Reference pitch for each method from female Speaker E
+
+2.7 Experiments for Pitch Extraction
+
+45
+
+Figure 2.12: Average GPE for four male speakers in white Gaussian noise (WACFCEP)
+
+Figure 2.13: Average GPE for four female speakers in white Gaussian noise (WACF-CEP)
+
+2.7 Experiments for Pitch Extraction
+
+46
+
+Figure 2.14: Average GPE for four male speakers in babble noise (WACF-CEP)
+
+Figure 2.15: Average GPE for four female speakers in babble noise (WACF-CEP)
+
+2.7 Experiments for Pitch Extraction
+
+47
+
+Figure 2.16: Average GPE for four male speakers in train noise (WACF-CEP)
+
+Figure 2.17: Average GPE for four female speakers in train noise (WACF-CEP)
+
+2.7 Experiments for Pitch Extraction
+
+48
+
+Figure 2.18: Average GPE for four male speakers in factory noise (WACF-CEP)
+
+Figure 2.19: Average GPE for four female speakers in factory noise (WACF-CEP)
+
+2.7 Experiments for Pitch Extraction
+
+49
+
+Figure 2.20: Average GPE for four male speakers in car interior noise (WACFCEP)
+
+Figure 2.21: Average GPE for four female speakers in car interior noise (WACFCEP)
+
+2.7 Experiments for Pitch Extraction
+
+50
+
+Figure 2.22: Average GPE for four female speakers in white Gaussian noise (WACF-WACF)
+
+Figure 2.23: Average GPE for four female speakers in white Gaussian noise (WACF-WACF)
+
+2.7 Experiments for Pitch Extraction
+
+51
+
+Figure 2.24: Average GPE for four male speakers in babble noise (WACF-WACF)
+
+Figure 2.25: Average GPE for four female speakers in babble noise (WACF-WACF)
+
+2.7 Experiments for Pitch Extraction
+
+52
+
+Figure 2.26: Average GPE for four male speakers in train noise (WACF-WACF)
+
+Figure 2.27: Average GPE for four female speakers in train noise (WACF-WACF)
+
+2.7 Experiments for Pitch Extraction
+
+53
+
+Figure 2.28: Average GPE for four male speakers in factory noise (WACF-WACF)
+
+Figure 2.29: Average GPE for four female speakers in factory noise (WACFWACF)
+
+2.7 Experiments for Pitch Extraction
+
+54
+
+Figure 2.30: Average GPE for four male speakers in car noise (WACF-WACF)
+
+Figure 2.31: Average GPE for four female speakers in car noise (WACF-WACF)
+
+Chapter 3
+BC Speech Synthesis Based on Least Squares Method
+3.1 Background of BC Speech Synthesis
+Speech synthesis is an important research task in speech processing. Most researchers explore the AC speech synthesis from the BC speech for the BC speech enhancement. However, there are very few works for BC speech synthesis. Experience indicates that BC speech is more suitable to be used in many regions for its clarified and potential properties than that of AC speech. Some papers report that the use of BC speech leads to more accurate rates of speaker verification in noiseless environments, where AC speech is utilized together [52][53]. BC speech behaves so as to compensate for that of AC speech, leading to balanced equal error rates. For this reason, we propose a simple approach for BC speech synthesis from the corresponding AC speech in real-time. However, when we synthesize BC speech, we have no promising ways to do so. Although some speech synthesis techniques are well known, we cannot optimistically rely on them due to the lack of knowledge about the inherent properties of BC speech. Therefore, we investigate speech synthesis for BC speech.
+3.2 Methodology
+Historically, a BC speech to AC speech conversion model was considered to improve the quality of BC speech as shown in [37][38]. In [39], a type of self-organizing map was developed to convert BC speech to AC speech. In this paper, we consider an
+55
+
+3.2 Methodology
+
+56
+
+Figure 3.1: Model of BC speech synthesis.
+
+inverse model of AC speech to BC speech. This is because it is easy to obtain AC speech by means of a standard microphone, and there are various databases to include AC speech. However, it is not straightforward to find the solutions directly from the results such as [37][38][39]. Instead of that, we consider generating BC speech from AC speech through a simple model and synthesized BC speech.
+An infinite impulse response (IIR) filter can represent a low-pass nature efficiently with a few parameters. Let us assume the z transform expression of the input-output relation in Fig.3.1 as
+
+B^(z) = H(z)A(z)
+
+(3.1)
+
+where A(z) and B(z) are z transforms of a(n) (AC speech) and b(n) (BC speech), respectively, and (^·) means a synthesis version. H(z) corresponds to the transfer function of the filter. If the filter is restricted to a first-order IIR filter, the transfer function may be represented in the simplest case by
+
+ H(z) = 1 - z-1
+
+(3.2)
+
+where  and  are filter coefficients.
+
+To characterize a low-pass nature in the amplitude response of H(z), in |H(w)|
+
+(w is angular frequency), the filter coefficients should be in a range of 0 <  < 1,
+
+0 < . Although  is often set to =1- to normalize the amplitude level for w = 0
+
+in the case of first-order low-pass filtering [40], the value of  does not always be
+
+set to 1 - . In practice, however, the value of  may be around that of 1- so
+
+that the IIR filter does not amplify too much and does not attenuate too much.
+
+In this paper, we set out to find the coefficients  and  to synthesize BC speech
+
+from the corresponding AC speech. This task is equivalent to designing the IIR
+
+filter for synthesis. The details are described in the next section.
+
+3.3 LS Method
+
+57
+
+Figure 3.2: System model.
+
+3.3 LS Method
+
+For the purpose of designing the IIR filter in Fig.3.1, we utilize an LS approach in the time domain. Specifically, we consider the system model in Fig.3.2 to obtain the IIR filter in Fig.3.1.
+In Fig.3.2, we assume that we can observe AC speech a(n) and BC speech b(n) simultaneously. We aim at minimizing a squared error criterion
+
+N -1
+E = e2(n)
+n=0
+
+(3.3)
+
+e(n) = b(n) - ^b(n)
+
+(3.4)
+
+with respect to the filter parameters  and  in H(z), the transfer function of the IIR filter. In (3.3), N is the number of the observed data. This task is recognized as system identification [41] from AC speech input and BC speech output. When (3.1) is represented in the time domain, the synthesis version of b(n), ^b(n), is given by
+
+^b(n) = ^b(n - 1) + a(n)
+
+(3.5)
+
+When (3.5) is inserted in (3.4) and the resulting e(n) is considered in (3.3), we see that direct finding  and  to minimize the criterion E reduces to a nonlinear optimization problem. In such a case, we often need to rely on iterative optimization algorithms. Since such algorithms are complicated and sometimes time-consuming [42], therefore, instead we employ an equation error approach, which is used as a simplified version of system identification when the unknown system is assumed to be represented by an IIR filter. We assume the following equation:
+
+3.3 LS Method
+
+58
+
+b(n) = b(n - 1) + a(n) where b(n) is used instead of ^b(n). Equation (3.6) is rewritten as
+
+(3.6)
+
+b(n) - b(n - 1) = a(n)
+
+(3.7)
+
+Replacing with
+
+1
+
+
+
+b(n) - b(n - 1) = a(n)
+
+
+
+
+
+(3.8) reduces to
+
+1
+
+
+
+= p, - = q
+
+
+
+
+
+pb(n) + qb(n - 1) = a(n)
+
+Here, we redefine the error criterion as
+
+N -1
+E = (n)2
+n=0
+
+(3.8) (3.9) (3.10) (3.11)
+
+(n) = pb(n) + qb(n - 1) - a(n)
+
+(3.12)
+
+We consider to minimize E with respect to the parameters p and q. Let us assume the observed data matrix and vector as follows:
+
+ b(n)
+
+ b(n - 1)
+
+  R= 
+
+
+b(n - 1) ...
+
+b(n - 2) 
+
+..
+
+ 
+
+.
+
+
+
+b(n - N - 1)b(n - N - 2)
+
+
+
+
+
+a(n)
+
+ a(n - 1) 
+
+V= 
+
+.
+
+ 
+
+
+
+..
+
+
+
+a(n - N - 1)
+
+And let us assume the parameter vector as
+
+(3.13) (3.14)
+
+p =
+q
+
+(3.15)
+
+3.3 LS Method
+
+59
+
+Figure 3.3: Sound recording situation from top.
+
+Using (3.13), (3.14) and (3.15), (3.11) is represented by
+
+E = [R - V]T[R - V]
+
+where T means transpose.
+
+Considering
+
+E =0
+
+
+the LS method would lead to a solution from (3.16) as follows.
+
+RTR = RTV
+
+(3.16) (3.17) (3.18)
+
+ = (RTR)-1RTV
+
+(3.19)
+
+In this paper, we determine the parameters q and p and find  and  through (3.9). The LS method (3.19) is implemented for each frame, and after filtering by (3.5), the error criterion E in (3.3) is evaluated with (3.4) for each frame.
+In system identification, a wide-band signal such as white noise is often used as the input signal [41]. This is because to identify accurately an unknown system, the
+
+3.4 Speech Recording
+
+60
+
+Figure 3.4: Sound recording situation from lateral.
+full frequency range should be excited equivalently. When such input signal is used in Fig.3.2, the task of system identification gives the identification of transmission path in our body for bone-conduction. This is not our target in this paper. In this paper, we set out to find the system which transforms the AC speech signal to the BC speech signal. Therefore, the AC speech is used as the input signal, although it is not of spectrum-flat-like white noise.
+3.4 Speech Recording
+We recorded AC and BC speeches simultaneously when the speaker pronounced a sentence in a sound isolation room. Three male and three female speakers, who are around 22 years old, joined for the recording as the speaker. A setup of the recording system is shown in Figs.3.3 and 3.4. The types of equipment used are summarized in Table 3.1. The speaker was wearing a BC microphone (Temco HG-17) and sitting in front of a table. An AC microphone (SONY ECM-J3M), a computer (PC), an audio interface (Roland EDIROL UA-20), and a sound level meter (ONOSOKKI LA1440) were set on the table as shown in Figs.3.3 and 3.4 The locations of the equipment were fixed. Each specific distance is illustrated in both Figs.3.3 and 3.4. The speaker who was wearing the BC microphone uttered a Japanese sentence (Arayurugenjitsuwo, subete, jibunnohoue, nejimagetanoda) being of about 4-5 [s] length. When the speaker uttered, he/she kept a 60 [dB]
+
+3.5 Filter Design
+
+61
+
+Figure 3.5: Waveforms of speeches recorded through AC and BC microphones from a male speaker (Speaker B), (a) AC speech, (b) BC speech.
+level of the sound level meter. The sentence was recorded through AC and BC microphones as AC and BC speech data in WAV format (16bits, 44.1KHz) simultaneously. The recorded speeches were downsampled from 44.1kHz to 8KHz. An example of the waveforms of speeches recorded from a male speaker (Speaker B) is shown in Fig.3.5. Another example from a female speaker (Speaker D) is shown in Fig.3.6.
+3.5 Filter Design
+The calculation of the coefficient pair is accomplished for the frames of five vowel sounds, /a/, /i/, /u/, /e/, /o/, in the recorded sentences. To obtain accurate coefficient pairs, the parts of vowels /a/, /i/, /u/, /e/, /o/ were extracted from the recorded sentences. The extracted positions of five vowels are illustrated in Fig.3.7. In each sentence, the common positions were used for the calculation of the LS method.
+The process of filter design for BC speech synthesis is described as follows:
+1) For each vowel sound location (each arrow location in Fig.3.7), several frames can be extracted. For one vowel such as /a/ in one sentence, total of fifteen
+
+3.5 Filter Design
+
+62
+
+Figure 3.6: Waveforms of speeches recorded through AC and BC microphones from a female speaker (Speaker D), (a) AC speech, (b) BC speech.
+
+Table 3.1: Experimental equipments for sound recording
+
+Sound level meter Audio interface AC microphone BC microphone
+
+ONOSOKKI LA1440 Roland EDIROL UA-20
+SONY ECM-J3M Temco HG-17
+
+frames were extracted based on listening and visual inspection.
+2) We further picked up ten frames which are located in the center of each vowel sound position from the extracted total fifteen frames for each vowel from the AC and corresponding BC speeches, and considered them as the observed data R and V in (13) and (14). Commonly, the length of each frame was 25ms and the overlap was 10 ms. Fig.3.8 is an extracted speech waveform example of vowel /a/.
+3) The coefficient pair  and  were found by (19) for each frame. This means that the LS method was calculated ten times for each vowel.
+4) We also found the coefficient pairs with the minimum and maximum cases of E in (3.3) from ten frames for each vowel and recognized them as the best and
+
+3.5 Filter Design
+
+63
+
+Figure 3.7: Vowel positions used in sentence.
+
+Figure 3.8: An extracted waveform example of vowel /a/.
+worst coefficient pair in the corresponding vowel, respectively. Here, when we found the worst coefficient pair, we did not include those which do not satisfy the condition of 0 <  < 1 , 0 < . This is because we need to stabilize the resulting IIR filter.
+5) BC speech synthesis was accomplished through (3.5) using both the best and worst coefficient pairs for each vowel.
+The best coefficients pairs and the corresponding errors for five vowels by six speakers are shown in Table 3.2. Observing all the results in Table 3.2, we can see that the coefficient  was variated in a range from 0.68 to 0.81, and the coefficient  was in a range from 0.17 to 0.27. As shown in Table 3.2, the E values of the closed vowels /i/ and /u/ were larger than those of the open vowels /a/, /e/, /o/ in BC speech. This is matched to the fact that the amplitudes of closed vowels are larger than those of open vowels in BC speech [43].
+On the other hand, the worst coefficients pairs and errors for five vowels by six
+
+3.5 Filter Design
+
+64
+
+Table 3.2: The best coefficient pairs
+
+Speakers
+
+Vowel &
+
+Male
+
+Female
+
+Coefficients A B
+
+C
+
+D EF
+
+ 0.71 0.68 0.73 0.75 0.74 0.75
+
+/a/  0.20 0.21 0.19 0.19 0.22 0.21
+
+E 0.09 0.11 0.078 0.12 0.14 0.11
+
+ 0.78 0.75 0.78 0.79 0.78 0.81
+
+/i/  0.24 0.22 0.23 0.21 0.22 0.24
+
+E 0.18 0.26 0.20 0.26 0.24 0.28
+
+ 0.79 0.78 0.81 0.80 0.79 0.78
+
+/u/  0.21 0.20 0.17 0.23 0.27 0.23
+
+E 0.11 0.091 0.22 0.16 0.18 0.26
+
+ 0.74 0.77 0.75 0.73 0.79 0.78
+
+/e/  0.21 0.19 0.18 0.19 0.20 0.20
+
+E 0.13 0.08 0.10 0.072 0.12 0.13
+
+ 0.76 0.73 0.72 0.75 0.73 0.77
+
+/o/  0.18 0.21 0.22 0.20 0.19 0.24
+
+E 0.11 0.086 0.062 0.092 0.12 0.14
+
+speakers are shown in Table 3.3. From Table 3.3, we can see that the range of coefficient  was from 0.52 to 0.74 and the coefficient  was in a range from 0.27 to 0.45.
+The IIR filter amplitude responses of vowels /a/, /i/, /u/, /e/ and /o/ by the best coefficients pairs are shown in Figs.3.9 to 3.13, respectively. The resulting filters commonly indicate a clear low pass type, which provides about 15-20 dB attenuation in the high-frequency region relative to the amplitude at the zero frequency. The curves are comparatively concentrated, although the maximum difference in amplitude range is about 5dB in Fig.3.9.
+The IIR filter amplitude responses of vowels with the worst coefficient pairs are shown in Figs.3.11 to 3.18, respectively. In these cases, the ranges of amplitude attenuation are decreased, and the curves are dispersive where the maximum difference in amplitude range is about 7 dB in Fig.3.12.
+To implement the BC speech synthesis, we averaged the coefficient pairs for five vowels of male and female speakers in minimum and maximum error cases, respectively. The results are shown in Table 3.4. The amplitude responses of the IIR filter with the averaged coefficient pairs in Table 3.4 are shown in Fig.3.19. We can see that the slope of amplitude response in the minimum error case is
+
+3.6 Synthesizing BC Speech
+
+65
+
+Table 3.3: The worst coefficient pairs
+
+Speakers
+
+Vowel &
+
+Male
+
+Female
+
+Coefficients A B C D E F
+
+ 0.66 0.59 0.58 0.64 0.66 0.60
+
+/a/  0.30 0.28 0.36 0.36 0.34 0.34
+
+E 0.36 0.33 0.21 0.28 0.33 0.41
+
+ 0.66 0.64 0.73 0.68 0.69 0.62
+
+/i/  0.29 0.27 0.31 0.28 0.29 0.31
+
+E 0.40 0.45 0.42 0.48 0.43 0.52
+
+ 0.67 0.69 0.63 0.65 0.70 0.68
+
+/u/  0.30 0.33 0.29 0.45 0.38 0.38
+
+E 0.46 0.44 0.42 0.42 0.54 0.54
+
+ 0.52 0.62 0.66 0.66 0.59 0.68
+
+/e/  0.27 0.36 0.37 0.31 0.29 0.42
+
+E 0.38 0.30 0.24 0.34 0.44 0.32
+
+ 0.65 0.68 0.74 0.56 0.64 0.61
+
+/o/  0.29 0.35 0.33 0.35 0.31 0.31
+
+E 0.33 0.42 0.32 0.25 0.28 0.32
+
+sharper than that in the maximum error case. In the minimum error case, the filter provides about 17 dB attenuation in the high-frequency region relative to the amplitude at the zero frequency. In the maximum error case, the filter provides about 13 dB attenuation in the high-frequency region.
+3.6 Synthesizing BC Speech
+Figs.3.20 and 3.21 are synthetic examples of speech waveform and power spectrum of the AC speech, filtered AC speech, and BC speech for speaker A (male) with the best coefficient pair and worst coefficient pair shown in Table 3.4, respectively. Comparing the speech waveforms (top figures) in Figs.3.20 and 3.21, we can see that the waveform of filtered AC speech with the best coefficient pair is closer and even overlapped with the recorded BC speech waveform than that with the worst one. On the other hand, comparing the power spectra (bottoms in Figs.3.20 and 3.21), the amplitude response with the best pair provides a lower level in amplitude than that with the worst pair. The power spectrum of filtered AC speech in Fig.3.20 is closer to that of the recorded BC speech. Especially even in the low-frequency region, the filtered AC speech power spectrum in Fig.3.20 is
+
+3.7 Evaluation of the Synthesized BC Speech
+
+66
+
+Table 3.4: Averaged coefficient pairs
+
+Male Female
+
+Coefficients
+  E   E
+
+Average data of six speakers
+
+Minimum error Maximum error
+
+0.75
+
+0.66
+
+0.20
+
+0.31
+
+0.14
+
+0.36
+
+0.76
+
+0.65
+
+0.21
+
+0.34
+
+0.16
+
+0.41
+
+closer to the recorded BC speech power spectrum than that in Fig.3.21. Fig.3.22 shows the group delay characteristics of the IIR filter with the best
+coefficient pair for male and female cases, respectively. The group delay characteristics indicate that the low-frequency components of the input signal are delayed by about three samples at most, while the high frequency components are slightly progressed by less than one sample. Therefore, the designed IIR filter induces a phase mismatch, but the shift to be induced in the waveform is a few samples, which is observed in top figures in Figs.3.20 and 3.21.
+Figs.3.23, 3.24, and 3.25 are the spectrogram of AC speech, BC speech, and the filtered AC speech with the best coefficient pair for Speaker B. From these figures we can see that the high-frequency components in Fig.3.25 are significantly filtered out when compared to that in Fig.3.23, resulting in similar characteristics in Fig.3.23 with those in Fig.3.24.
+3.7 Evaluation of the Synthesized BC Speech
+Log-area ratio (LAR) distance is an objective quality measure that has the highest correlation with subjective quality among linear prediction (LP) based measures and needs less computation than other spectral distance measures [44]. LAR distance is calculated based on the dissimilarity between sets of LP parameters from two speech signals. It is widely used to evaluate the difference between the reference and processed speech signals in the frequency domain. Low values of LAR mean that the processed speech is similar to the reference speech.
+We used the LAR distance to judge how the synthesized BC speech is closer to the real BC speech. In this case, the real BC and synthesized BC speeches should be the reference and processed speech signals, respectively. The LP parameters were
+
+3.7 Evaluation of the Synthesized BC Speech
+
+67
+
+Figure 3.9: Minimum error amplitude response of IIR filter for vowel /a/.
+found by implementing the Levinson-Durbin algorithm [44] with the prediction order of 16 and the frame length of 50ms. Fig.3.26 shows the LAR distance of AC speech to BC speech and that of filtered AC speech to BC speech, respectively. The recorded AC and BC speeches in Fig.3.26 are from Speaker B. We picked up the voiced part based on listening and visual inspection and marked it as red line on the horizontal axis in the bottom figure in Fig.3.26. The bottom figure in Fig.3.26 indicates that the LAR values of the filtered AC to BC in the voiced parts are lower than those of AC to BC. This means that the synthesized BC speech is more similar to the real BC speech. In the unvoiced parts, we can also see some values of the LAR distance, since the recorded speeches are not noiseless completely. Table 3.5 presents the average LAR distance for male speakers and female speakers in the voiced parts, respectively. Table 3.5 quantitatively shows that the synthesized BC speech is more similar to the recorded BC speech than the recorded AC speech both in male and female cases.
+
+3.7 Evaluation of the Synthesized BC Speech
+
+68
+
+Figure 3.10: Minimum error amplitude response of IIR filter for vowel /i/.
+3.7.1 Listening Test
+In order to verify the similarity of the synthetic BC speech to the real BC speech, we conducted a listening test. Twenty listeners (14 males and 6 females, 22 years old around) joined this experiment. The process of the listening test is described as follows:
+1) We synthesized four BC speeches BCBM, BCWM, BCBF, and BCWF using the coefficient pairs in Table 3.4, respectively. BCBM and BCWM were synthesized from the recorded AC speech of male speaker A in Section 3 by using the best and worst coefficient pairs in Table 3.4, respectively. BCBF and BCWF were synthesized from the recorded AC speech of female speaker D in Section 3.4 by using the best and worst coefficient pairs in Table 3.4, respectively.
+2) A note PC and two loudspeakers (SONY SRS-A91) were set on a table in the lab the authors belong to. The listener sits in front of the table.
+3) In order to give the listener an intuitive sense of AC and BC speeches, the original recorded AC and BC speeches of Speaker A and Speaker D were
+
+3.7 Evaluation of the Synthesized BC Speech
+
+69
+
+Figure 3.11: Minimum error amplitude response of IIR filter for vowel /u/.
+separately emitted toward the listener from two loud speakers.
+4) After these emissions, the synthetic BC speeches BCBM, BCWM, BCBF, and BCWF were separately emitted toward the listener from two loudspeakers. After each synthetic BC speech emission, one question, do you feel this speech is closer to AC or BC speech? was asked. The listener had to answer AC or BC speech.
+The results of the listening test are shown in Table 3.6. The number in each cell in Table 3.6 corresponds to the number of persons (to each speech, a total of twenty persons answered). From Table 3.6, in the male case (BCBM and BCWM), all of the twenty listeners judged that the synthetic speech with the best coefficient pairs is closer to the recorded BC speech, and all of the twenty listeners judged that the one with the worst coefficient pairs is closer to the recorded AC speech. In the female case (BCBF and BCWF), sixteen listeners judged that the synthetic speech with the best coefficient pairs is closer to the recorded BC speech, and all of the twenty listeners judged that the one with the worst coefficient pairs is closer to the recorded AC speech. This result could indicate that the synthetic BC speech with the best coefficient pairs is very close to the real recorded BC speech.
+
+3.8 Discussion
+
+70
+
+Figure 3.12: Minimum error amplitude response of IIR filter for vowel /e/.
+In Table 3.6, a perfect score was not obtained in the case of BCBF. This could be because low-pass filtering did not work effectively for female cases for the purpose of generating BC speech. Female speakers have high pitches. This feature may lead to comparatively indistinct sounds between AC and BC speeches. By listening to the resulting synthetic female BC speech, the authors sometimes did not perceive a kind of stuffed nose effects for BC speech. This could be the cause of not-perfect scores in the female case in Table 3.6.
+3.8 Discussion
+To synthesize the BC speech in Section 3.2, we considered only an IIR filter for H(z) in (3.1) and utilized only the first order in the denominator in (3.2). However, there is a possibility to utilize (i) an FIR filter instead of an IIR filter, and (ii) a high order even in the IIR filter.
+In case (i), a low order model is not suitable for compensating for the spectrum gap between the AC and BC speeches. An FIR filter typically makes a notch characteristic in the frequency domain. However, the difference between the AC and BC speech spectra is represented by a degree of amplitude attenuation in the
+
+3.8 Discussion
+
+71
+
+Figure 3.13: Minimum error amplitude response of IIR filter for vowel /o/.
+
+Table 3.5: Average LAR distance
+
+Speakers Male Female
+
+AC to BC 0.37 0.41
+
+Filtered AC to BC 0.18 0.21
+
+frequency domain. For the purpose of accomplishing this, an IIR filter may be more suitable. The IIR filter has poles which inherently create spectral peaks, whose spectral skirts represent modestly the attenuation curves.
+In case (ii), a second order or higher order model may be utilized in the denominator in (3.2). In the second order case, the transfer function is given as
+
+ H(z) = 1 - 1z-1 - 2z-2
+
+(3.20)
+
+where 1 and 2 are filter coefficients. The LS method is applicable even in this
+
+case. However, the resulting transfer function is not guaranteed as a stable filter,
+
+and furthermore judging the stability becomes more complicated than the case
+
+of the first-order model, in which the so-called "stability triangle" [45] must be
+
+satisfied and simultaneously a low-pass nature is restricted. When a further higher
+
+3.8 Discussion
+
+72
+
+Figure 3.14: Maximum error amplitude response of IIR filter for vowel /a/.
+
+Table 3.6: Results of listening test
+
+Speeches BCBM BCWM BCBF BCWF
+
+AC speech 0 20 4 20
+
+BC speech 20 0 16 0
+
+order is utilized, judging the stability becomes more severely complicated. Therefore, in this paper, we did not employ a higher order model than the first order one.
+In 3.6, we discarded the coefficient pairs of  and  when the condition of 0 <  < 1 , 0 <  is not satisfied. We observed this case in Step 4) in filter design in 3.6. When we implemented totally fifty times the LS method in one sentence, there was only a couple of such cases. Therefore, even if the stability of the resulting IIR filter is not guaranteed in 3.6, the cases we have to pay attention to such problems are few. However, if we employ a second-order model instead of a first-order one, then we more often would face to the case where the stability condition of the resulting IIR filter is not satisfied. This intuitively suggests that
+
+3.9 Noise-Robustness Investigation
+
+73
+
+Figure 3.15: Maximum error amplitude response of IIR filter for vowel /i/.
+a simple model such as the first order one is more convenient and straightforward to utilize.
+3.9 Noise-Robustness Investigation
+BC speech has much better noise-robustness than that of AC speech (giving about 10dB SNR gain) [46] 1 . BC speech is generated from the vibration of glottis through the bone and some muscle tissue and picked up by a BC microphone. The BC speech generation is basically assumed to be conducted inside the human body. The IIR filter designed generates noiseless BC speech from noiseless AC speech. However, when the environmental noise (AC noise) is picked up by a BC microphone together, the noise-induced in the BC speech (BC noise) should be discussed. The process of BC noise generation is outside the human body, which may be different from that of BC speech generation. However, we investigated the designed IIR filter for BC speech generation from the aspect of noise-robustness.
+1In [46], the amount of noise measured through a BC microphone is discussed in a comparative fashion with that through an AC microphone, in which noise-robustness of BC speech is investigated.
+
+3.9 Noise-Robustness Investigation
+
+74
+
+Figure 3.16: Maximum error amplitude response of IIR filter for vowel /u/.
+This is because it is known that BC speech has noise-robustness in noisy environments. Assuming that a certain type of noise is included in the AC speech (resulting in noisy AC speech), we considered generating the BC speech through the designed IIR filter. For simplicity to know only noise-robustness, we did not include any AC speech signals in the noisy AC speech and employed only the environmental noise. We used three different types (white, babble, and train) of recorded noise. The AC noises and BC noises were recorded through an AC and BC microphone, simultaneously, following the same manner in [46]. Each noise length is 4.3 [s]. The obtained noise waveforms are shown in Fig.3.27. The real number that appeared above each waveform in Fig.3.27 shows the power of each noise. In the babble and train cases in Fig.3.27, we can see that the power of filtered AC (F-AC) noise is decreased by about 70%-80% compared with that of AC noise. This means that the amount of noise to be included is significantly decreased by the BC speech synthesis. Fig.3.27 indicates that especially in the white noise case, the IIR filter extremely reduces the amount of noise. The designed IIR filters give a strong noise-robustness feature overall.
+
+3.10 Pitch Extraction for Synthesized BC Speech
+
+75
+
+Figure 3.17: Maximum error amplitude response of IIR filter for vowel /e/.
+3.10 Pitch Extraction for Synthesized BC Speech
+The synthetic BC speech was obtained through the IIR filter with the coefficients  and  shown in Table 3.4 from the recorded AC and BC speeches. The male and female BC speeches were generated from the male and female AC speeches, respectively. We compared the pitch extraction performance on the synthetic BC speech, recorded AC speech and recorded BC speech, respectively. We implemented ACF [1], WACF [3], YIN [4], PEFAC [13], CEP [10], and MCEP [47] methods. Since the performance of each method is affected by frame length, we investigated the relationship between the gross pitch error (GPE) and frame length on KEELE database [48] at first where the true pitch information is included. In order to select the optimal frame length for each method, we changed frame length and evaluated each method. If the estimated pitch for a frame deviates from the true pitch by more than 10%, we recognized the error as GPE. The experimental condition is given in Table 3.7. The result is shown in Fig.3.28. In Fig.3.28, for frame length of 40 to 60 ms cases, we can see that the GPE of ACF, WACF, and YIN keeps the least error rate, and CEP and MCEP have a relatively good performance. For these five methods, the frame length was set to 50 ms from the result
+
+3.10 Pitch Extraction for Synthesized BC Speech
+
+76
+
+Figure 3.18: Maximum error amplitude response of IIR filter for vowel /o/.
+in Fig.3.28. For the BaNa and PEFAC in Fig.3.28, they keep almost the same GPE rate for frame length of 40 to 60 ms and for frame length of 70 to 90 ms, respectively. Thus, the frame length of BaNa and PEFAC was set to 60 and 90 ms which correspond to those in the original papers [14][13], respectively.
+There is no true pitch information of BC speech in any speech databases for pitch extraction. Since BaNa provides the best performance in Fig.3.22 and many published papers indicated that BaNa has an excellent performance in pitch extraction [14] [49], the reference pitch data would be constructed by extracting the pitch from the recorded AC speech through BaNa method in our case. Since the frame lengths of BaNa (60ms) and PEFAC (90ms) are different from those of other methods (50ms), for comparison, we take the center of 50ms frames as the reference, and then make the center of BaNa and PEFAC's frames consistent with the reference. The schematic is shown in Fig.3.29. We picked up the voiced part based on inspection for the experiment. We evaluated pitch extraction on synthetic BC, AC, and BC speeches using the compared methods in a noiseless environment. The experimental conditions and evaluation are common with those in Table 3.7. The result is presented in Table 3.8. Fig.3.30 is a GPE rate histogram expression of the result in Table 3.8. In Table 3.8, the number in the
+
+3.10 Pitch Extraction for Synthesized BC Speech
+
+77
+
+Figure 3.19: Amplitude response of IIR filter.
+second column shows the number of voiced frames (V (n)), In the third column, the numbers represent the GPEs frames obtained from synthetic BC, BC speech, and AC speech (GP ES-BC(n)/GP EBC(n)/GP EAC(n)), respectively, in implementing ACF, WACF, YIN, PEFAC, CEP, and MCEP methods.
+In the methods based on the time domain case (ACF, WACF, YIN) in Fig.3.30, the results showed that the synthetic BC speeches produce much fewer errors compared to original AC speeches. YIN has better performance than ACF and WACF. Fig.3.31 shows a pitch extraction example from the recorded AC and BC speeches of vowel sound /a/ from speaker A by implementing the ACF method. Since /a/ is an open vowel with a strong first formant, a spurious peak is observed to cause GPE in the AC speech case. In contrast, such effect is mostly absent in the case of BC speech which is thus very much suitable for pitch extraction. Results in Fig.3.30 indicate that the performance on the synthetic BC speech is close to the real BC speech. The synthetic BC speech can effectively suppress the interference of formant and interference in the high-frequency region like real BC speech, and yield higher accuracy than that from normal AC speech by using the methods based on the time domain.
+In the frequency domain case (PEFAC, CEP, MCEP) in Table 3.8 and Fig.3.30,
+
+3.10 Pitch Extraction for Synthesized BC Speech
+
+78
+
+Figure 3.20: Speech waveform of AC speech, filtered AC speech (best pair) and BC speech (top), and power spectrum of AC speech, filtered AC speech (best pair) and BC speech (bottom) .
+the interference of the formants and unnecessary components in the high-frequency region is also suppressed due to the nature of the BC speech. PEFAC can detect the periodic peaks of synthetic BC speeches, accurately. Fig.3.32 is a pitch extraction example of the recorded AC and BC speeches using CEP method. From (a) and (b) in Fig.3.32, we can see that BC speech has a more regular harmonic structure than that of AC speech. This can lead to a more distinct period peak of BC speech in (c) than that of AC speech in (d). In Fig.3.30, CEP for BC speech provides more accurate performance than that of AC speech. The logarithm operation of the MCEP can also separate the formant structure like CEP effectively from the spectrum to yield clear pitch harmonic components and lead to a distinct periodic peak of BC speech. However, for the CEP and MCEP, the synthetic BC speech obtained through the low-pass filter cannot give a more regular harmonic structure like real BC speech, and the performance of synthetic BC speech is closer to the AC speech as shown in Fig.3.30.
+In this chapter, we designed an IIR filter to synthesize BC speech from AC speech. Experimental results show that the feature of the synthesized BC speech
+
+3.10 Pitch Extraction for Synthesized BC Speech
+
+79
+
+Figure 3.21: Speech waveform of AC speech, filtered AC (worst pair) speech and BC speech (top), and power spectrum of AC speech, filtered AC speech (worst pair) and BC speech (bottom) .
+is similar to the real BC speech. A pitch extraction experiment is also conducted using the synthesized BC speech and the pitch extraction results indicate that the synthesized BC speech can be utilized for pitch extraction.
+
+3.10 Pitch Extraction for Synthesized BC Speech
+
+80
+
+Figure 3.22: Group delay characteristics of the IIR filter with the minimum error coefficient pairs in Table 3.4.
+Figure 3.23: Spectrogram of recorded AC speech for Speaker B.
+
+3.10 Pitch Extraction for Synthesized BC Speech
+
+81
+
+Figure 3.24: Spectrogram of recorded BC speech for Speaker B. Figure 3.25: Spectrogram of filtered AC speech for Speaker B.
+
+3.10 Pitch Extraction for Synthesized BC Speech
+
+82
+
+Figure 3.26: LAR distance.
+Figure 3.27: White noise, babble noise and train noise and their powers for the AC, BC and filtered AC.
+
+3.10 Pitch Extraction for Synthesized BC Speech
+
+83
+
+Figure 3.28: Frame length dependency for different methods.
+
+Table 3.7: Experimental conditions for pitch extraction
+
+Speaker Frame length (except for PEFAC and BaNa) Frame length of PEFAC Frame length of BaNa Frame shift DFT (IDFT) length (except for PEFAC and BaNa) DFT (IDFT) length of PEFAC DFT (IDFT) length of BaNa Sampling frequency Window function C, F of MCEP
+
+male 5, female 5 50ms 90ms 60ms 10ms 1024 213 216 16kHz
+Hamming 0.8, 1500Hz
+
+3.10 Pitch Extraction for Synthesized BC Speech
+
+84
+
+Figure 3.29: Schematic of different methods for pitch extraction
+
+Table 3.8: Comparison of pitch extraction from recorded BC and AC speeches
+
+Speaker Speaker A Speaker B Speaker C Speaker D Speaker E Speaker F
+
+V (n) 470 382 451 440 420 461
+
+ACF 33/34/38 22/21/27 34/33/43 29/30/37 31/29/34 31/35/40
+
+WACF 32/30/35 21/20/26 35/32/40 30/30/36 26/25/31 34/33/38
+
+YIN 27/26/33 19/17/23 30/31/37 26/25/30 22/20/27 26/26/34
+
+PEFAC 25/23/29 14/14/18 22/23/30 19/18/21 17/16/20 22/19/25
+
+CEP 39/31/38 32/30/36 44/33/43 39/33/40 37/30/38 48/42/51
+
+MCEP 31/28/32 30/26/31 35/29/35 44/39/45 32/23/33 42/37/44
+
+Figure 3.30: GPE rate from S-BC speech, BC speech and AC speech (S-BC speech denotes the synthetic BC speech)
+
+3.10 Pitch Extraction for Synthesized BC Speech
+
+85
+
+Figure 3.31: Error in pitch detection due to strong first formant in case of AC speech (Top) and accurate pitch detection in case of BC speech (Bottom).
+
+Figure 3.32: Peak detection from recorded AC and BC speeches by using CEP method
+
+Chapter 4
+Conclusion and Future Work
+In this paper, we propose several approaches to explore and analyze the performance and properties of BC speech in pitch extraction and BC speech synthesis, respectively.
+In the pitch extraction part, we have presented two frameworks for noise-robust pitch extraction in which AC and BC speeches are utilized simultaneously. Two combination example is that the WACF is calculated for the AC speech signal, while the CEP is done for the BC speech signal and another one is WACF is calculated for the AC and BC speeches, respectively. The two functions are multiplied to create a peak characteristic for pitch extraction. From some analytical discussions and noise suppression effect in BC speech, it has been shown that the proposed method leads to accurate pitch extraction even in highly noisy environments without increasing computational complexity. Experiments have supported to validate a superior performance of two proposed methods relative to the state-of-the-art method.
+In the BC speech synthesis part, we have set out to generate BC speech from AC speech through a low-order IIR filter model. This is recognized as a synthesis method for BC speech from AC speech. This idea was motivated by the importance of BC speech in the field of speech processing where the use of BC speech is more beneficial and effective than that of AC speech. We considered designing the synthesis filter through the least squares method in the time domain, and successfully obtained it from the recorded AC and BC speeches. Experimental results showed that the BC speech synthesized by the resulting filter is close to the original BC speech from both points of view in the time and frequency domains. LAR distance evaluation and listening test validated that the synthesized BC speech is similar
+86
+
+87
+to the original BC speech and that the synthesis methodology is satisfactory. In addition, noise-robustness gained by the BC speech synthesis was investigated. A pitch extraction experiment is conducted for investigating the application of the synthetic BC speech. Experimental results show that pitch extraction from the synthetic BC speech provides more accurate performance than that from the corresponding AC speech. Overall, the results indicate that BC speech and synthetic BC speech which have similar features with real BC speech can be utilized in speech processing.
+In this paper, we proposed two methods to improve pitch extraction accuracy. We hope that the proposed methods can be utilized widely in the application based on accurate pitch information. In the other region for speech analysis, we consider exploring applications that used BC speech such as voiced and unvoiced part detection. In the speech synthesis, the designed filter synthesizes the BC speech from AC speech, successfully. We consider that this synthesis filter can be widely used to synthesize BC speech simply through a smartphone or computer and the synthesized BC speech can be useful for pitch extraction, speaker verification, and so on.
+
+Bibliography
+[1] L. R. Rabiner, "On the use of autocorrelation analysis for pitch detection", IEEE Trans. Acoust, Speech and Singnal Process, vol. ASSP-25, no. 1, pp. 24-33, 1977.
+[2] T. Takagi, N. Seiyama and E. Miyasaka, "A method for pitch extraction of speech signals using autocorrelation functions through multiple window lengths", Electronics and Communications in Japan, vol. 83, no. 2, pp. 67-79, 2000.
+[3] T. Shimamura and H. Kobayashi, "Weighted autocorrelation for pitch extraction of noisy speech", IEEE Trans. Speech and Audio Processing, vol. 9, no. 7, pp. 727-730, 2001.
+[4] A. Cheveigne and H. Kawahara , "YIN, a fundamental frequency estimator for speech and music", J. Acoust. Soc.Am, vol. 111, no. 4, pp. 1912-1930, 2002.
+[5] M. K.Hasan, S. Hssain, M. T. Hossain and M. N. Nazrul, "Signal reshaping using dominant harmonic for pitch estimation of noisy speech", Signal Processing, vol. 86, pp. 1010-1018, 2006.
+[6] M. J. Ross, H . L. Shaffer, A. Cohen, R. Freudberg and H. J. Manley, "Average magnitude difference function pitch extractor", IEEE Tran. Acoust, Speech Signal Process, vol. ASSP-2, no. 5, pp. 353-362, 1974.
+[7] D. Talkin, A robust algorithm for pitch tracking (RAPT), In Speech Coding and Synthesis. Kleijn WB, Paliwal KK (eds), Elsevier, Amsterdam. pp. 496-518, 1995.
+88
+
+BIBLIOGRAPHY
+
+89
+
+[8] J. Markel, "The SIFT algorithm for fundamental frequency estimation", IEEE Trans. on Audio and Electroacoustics, vol. 20, no. 5, pp. 367-377, 1972.
+[9] C. K. Un and S. Yang, "A pitch extraction algorithm based on LPC inverse filtering and AMDF", IEEE Trans. Acoustics, Speech and Signal Processing, vol. ASSP-25, no. 6, pp. 565-572, 1977.
+[10] A. M. Noll, "Cepstrum pitch determination", J. Acoust. Soc. Am, vol. 41, no. 2, pp. 293-309, 1967.
+[11] H. Kobayashi and T. Shimamura, "A modified cepstrum method for pitch extraction", Proc. IEEE Asia-Pacific International Conference on Circuits and Systems Microelectronics and Integrating Systems (APCCAS), 1998.
+[12] M. R. Hasan, M. S. Rahman and T. Shimamura, "Windowlessautocorrelation-based cepstrum method for pitch extraction of noisy speech", Journal of Signal Processing, vol. 16, no. 3, pp. 231-239, 2012.
+[13] S. Gonzalez and M. Brookes, "PEFAC - A pitch estimation algorithm robust to high levels of noise", IEEE Trans. on Audio, Speech, and Language Processing, vol. 22, no. 2, pp. 518-530, 2014.
+[14] N. Yang, H. Ba, W. Cai, I. Demirkol and W. Heinzelman, "BaNa: a noise resilient fundamental frequency detection algorithm for speech and music", IEEE Trans. on Audio, Speech, and Language Processing, vol. 22, no. 12, pp. 1833-1848, 2014.
+[15] L. Sukhostat and Y. Imamverdiyer, "A comparative analysis of pitch detection methods under the influence of different noise conditions", Journal of Voice, vol. 29, no. 4, pp. 410-417, 2015.
+[16] K. Han, and D. Wang, "Neural network based pitch tracking in very noisy speech", IEEE/ACM Trans. on Audio, Speech, and Language Processing, vol. 22, no. 12, pp. 2158-2168, 2014.
+[17] D. Wang, C. Yu and J. H. L. Hansen, "Robust harmonic features for classification-based pitch estimation", IEEE Trans. on Audio, Speech, and Language Processing, vol. 25, no. 5, pp. 952-964, 2017.
+[18] J. W. Kim, J. Salamon, P. Li and J. P. Bello, "Crepe: a convolutional representation for pitch estimation", Proc. IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), pp. 161-165, 2018.
+
+BIBLIOGRAPHY
+
+90
+
+[19] G. Zhang and S. Godsill, "Fundamental frequency estimation in speech signals with variable rate particle filters", IEEE Tran. on Audio, Speech, and Language Processing, vol. 4, no. 5, pp. 890-900, 2016.
+[20] S. M. Nørholm, J. R. Jensen and M. G. Christensen, "Instantaneous fundamental frequency estimation with optimal segmentation for nonstationary voiced speech", IEEE Trans. on Audio, Speech and Language Processing, vol. 24, no. 12, pp. 2354-2367, 2016.
+[21] L. Shi, J. K. Nielsen, J. R. Jensen, M. A. Little and M. G. Christensen, "Robust Bayesian pitch tracking based on the harmonic model", IEEE Trans. on Audio, Speech and Language Processing, vol. 27, no. 11, pp. 1737-1751, 2019.
+[22] G. Aneeja and B. Yegnanarayana, "Extraction of fundamental frequency from degraded speech using temporal envelopes at high SNR frequencies", IEEE/ACM Trans. Audio, Speech and Language Processing, vol. 25, no. 4, pp. 829-838, 2017.
+[23] L. R. Rabiner, M. R. Sambur and C. E. Schmidt, "Applications of a nonlinear smoothing algorithm to speech prcessing ", IEEE Trans. Acoustics, Speech and Signal Processing, vol. ASSP-23, no. 6, pp. 552-557, 1957.
+[24] H. Ney, "Dynamic programming algorithm for optimal estimation of speech parameter contours", IEEE Trans. Systems, Man and Cybernetics, vol. SMC13, no. 3, pp. 208-214, 1983.
+[25] M. Khadem-hosseini et.al, "Error correction in pitch detection using a deep learning based classification", IEEE/ACM Trans. Audio, Speech and Language Processing, vol. 28, pp. 990-999, 2020.
+[26] M. Cooke, S. Beet and M. Crawford. Visual Representations of Speech Signals, Wiley, 1993.
+[27] Z. Liu, Z. Zhang, A. Acero, J. Droppo, and X. Huang, "Direct filtering for air- and bone-conductive microphones", Proc. IEEE International Workshop on Multimedia Signal Processing, pp. 363-336, 2004.
+[28] T. Tamiya, and T. Shimamura, "A reconstruction filter for bone-conducted speech ", Proc. IEEE Midwest Symposium of Circuits and Systems, pp. 18471850, 2005.
+
+BIBLIOGRAPHY
+
+91
+
+[29] D. Tomas and V. Werner, "Body conducted speech enhancement by equalization and signal fusion", IEEE Trans. Audio, Speech and Language Processing, vol. 21, no. 12, pp. 2481-2492, 2013.
+[30] C. Yu, K. Hung, S. Wang and Y. Tsao, "Time-domain multi-modal bone/air conducted speech enhancement", IEEE Signal Processing Letters, vol. 27, pp. 1035-1039, 2020.
+[31] M. S. Rahman and T. Shimamura, "Pitch determination from bone-conducted speech", IEICE Trans. Inf. & Syst., vol. E99-D, no. 1. pp. 283-287, 2016.
+[32] S. Zhang, Y. Sugiura and T. Shimamura, "Fundamental frequency estimation combining air-conducted speech with bone-conducted speech in noisy environment", Proc. IEEE on Electrical, Computer and Communication Engineering (ECCE), DOI. 10.1109, pp. 244-247, 2017.
+[33] S. Zhang, Y. Sugiura, N. Yasui and T. Shimamura, "Quantifying noise robustness of bone-conducted speech", Proc. IEEE International Midwest Symposium on Circuits and Systems (MWSCAS), pp. 582-585, 2020.
+[34] A. Varga and H. J. M. Steeneken, "Assessment for automatic speech recognition: II. NOISEX-92: A database and an experiment to study the effect of additive noise on speech recognition systems", Speech Commun, vol. 12, no. 3, pp. 247-251, 1993.
+[35] S. Itahashi, "Creating speech copora for speech science and technology", IEICE Transactions on Fundamentals of Electronics, Communications and Computer Sciences vol. 74, no. 7, pp. 1906-1910, 1991.
+[36] Y. Liu, D. Zhang and M. Ji, "Speech endpoint detection based on EMD and spectral entropy in noisy environments ", Applied Mechanics and Materials, vol. 229-231, pp. 1296-1299, 2012.
+[37] T. Toya, P. Birkholz and M. Unoki, "Measurements of transmission characteristics related to bone-conducted speech using excitation signals in the oral cavity", Journal of Speech, Language, and Hearing Research, vol. 63, no. 12, pp. 4252-4264, 2020.
+[38] T. Tamiya and T. Shimamura, "A reconstruction filter for bone-conducted speech", Proc. International Conference on Spoken Language Processing, pp. 1085-1088, 2004.
+
+BIBLIOGRAPHY
+
+92
+
+[39] E. Uchino, K. Yano and T. Azetsu, "A self-organizing map with twin units capable of describing a nonlinear input-output relation applied to speech code vector mapping", Information Sciences, vol. 177, no. 21, pp. 4634-4644, 2007.
+[40] B. Farhang-Boroujeny, Adaptive Filters: Theory and Applications, Wiley, 1998.
+[41] T. Soderstrom and P. Stoica, System Identification, Prentice Hall, 1989.
+[42] P. A. Regalia, Adaptive IIR Filtering in Signal Processing and Control, Marcel Dekker, 1995.
+[43] M. S. Rahman and T. Shimamura, "A study on amplitude variation of bone conducted speech compared to air conducted speech", Proc. Signal and Information Processing Association Annual Summit and Conference (APSIPA), 5 pages, 2014.
+[44] J. R. Deller, J. H. L. Hansen and J. G. Proakis, Discrete-Time Processing of Speech Signals, Wiley, 2000.
+[45] W. Lu and T. Hinamoto, "Optimal design of IIR digital filters with robust stability using conic-quadratic-programming updates", IEEE Trans. Signal Processing, vol. 51, no. 6, pp. 1581-1592, 2003.
+[46] S. Zhang, Y. Sugiura, N. Yasui and T. Shimamura, "Quantifying noise robustness of bone-conducted speech", Proc. IEEE International Midwest Symposium on Circuits and Systems (MWSCAS), pp. 582-585, 2020.
+[47] H. Kobayashi, T. Shimamura, "A modified cepstrum method for pitch extraction," Proc. IEEE Asia-Pacific International Conference on Circuits and Systems Microelectronics and Integrating Systems (APCCAS), 1998.
+[48] F. Plante, G. Meyer and W. A. Ainsworth, "A pitch extraction reference database", Proc. European Conference on Speech Communication and Technology (EUROSPEECH), pp. 837-840, 1995.
+[49] M. S. Rahman, Y. Sugiura, T. Shimamura, "A multiple functions multiplication approach for pitch extraction of noisy speech," International Conference on Speech Technology and Human-Computer Dialogue (SpeD), 2019.
+[50] L. R. Rabiner and R. W. Schafer, Digital Processing of Speech Signals, Prentice Hall, New York, 1978.
+
+BIBLIOGRAPHY
+
+93
+
+[51] L. R. Rabiner and R. W. Schafer, Theory and Applications of Digital Speech Processing, Prentice Hall, New York, 2010.
+[52] S. Tsuge, D. Koizumi, M, Fukumi and S. Kuroiwa, "Speaker verification method using bone-conduction and air-conduction speech", Proc. International Symposium on Intelligent Signal Processing and Communication Systems (ISPACS), pp. 449-452, 2009.
+[53] S. Tsuge and S. Kuroiwa, "Combination method air and bone conducted speech for speaker recognition in i-vector space", Journal of Acoustical Society of America, vol. 140, no. 4, pp. 2965, 2016.
+
+BIBLIOGRAPHY
+
+94
+
+LIST OF PUBLICATIONS
+Journal Articles
+1. S. Zhang, Y. Sugiura and T. Shimamura, "Bone-conducted speech synthesis based on least squares method", IEEJ Trans. Electrical and Electronic Engineering, vol. 17, no. 3, pp. 425-435, 2022.
+2. S. Zhang, Y. Sugiura, N. Yasui and T. Shimamura, "Air-conducted and boneconducted combination for noise-robust pitch extraction of speech signals", IEEJ Trans. Electrical and Electronic Engineering, 9-pages, 2022. (accepted)
+International Conferences
+1. S. Zhang, Y. Sugiura and T. Shimamura, "Fundamental frequency estimation combining air-conducted speech with bone-conducted speech in noisy environment", Proc. IEEE on Electrical, Computer and Communication Engineering (ECCE), DOI. 10.1109, pp. 244-247, 2017.
+2. S. Zhang, Y. Sugiura, N. Yasui and T. Shimamura, "Quantifying noise robustness of bone-conducted speech", Proc. IEEE International Midwest Symposium on Circuits and Systems (MWSCAS), pp. 582-585, 2020.
+3. S. Zhang, Y. Sugiura and T. Shimamura, "Pitch extraction from synthetic boneconducted speech", 2021 International Workshop on Smart Info-Media Systems in Asia (SISA 2021), no. SS1-3, pp.9-12, 2021.
+4. S. Zhang and T. Shimamura, "Noise-robust pitch extraction combining airconducted speech with bone-conducted speech in white Gaussian noise environment", 28th International Congress on Sound and Vibration (ICSV28), 8-pages, 2022. (under review)
+
+

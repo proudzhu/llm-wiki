@@ -1,0 +1,801 @@
+                                           This draft was submitted to the Journal of the Audio Engineering Society on Aug. 8, 2024. The
+arXiv:2509.15864v1 [eess.SY] 19 Sep 2025
+
+
+
+
+                                                            bibliographic information of the current published version is:
+
+
+
+
+                                                    Authors:    Florian Hilgemann, Egke Chatzimoustafa, and Peter Jax
+                                                                Data-Driven Uncertainty Modeling for Robust Feedback Active
+                                                       Title:
+                                                                Noise Control in Headphones
+                                                    Journal:    Journal of the Audio Engineering Society
+                                                    Volume:     72
+                                                    Number:     12
+                                                      Pages:    873-883
+                                                       Year:    2024
+                                                       DOI:     http://dx.doi.org/10.17743/jaes.2022.0185
+
+
+
+
+                                                                         Please cite the article as follows:
+                                           F. Hilgemann, E. Chatzimoustafa, and P. Jax - “Data-Driven Uncertainty Modeling for Robust
+                                               Feedback Active Noise Control”, J. Audio Eng. Soc., vol. 72, no. 12, 2024, pp. 873-883
+    Data-Driven Uncertainty Modeling for Robust Feedback Active Noise
+                         Control in Headphones
+                           Florian Hilgemann, Egke Chatzimoustafa, and Peter Jax
+
+
+Abstract                                                           plane. State-of-the-art controller design methods that
+                                                                   guarantee robust stability are based on H∞ -synthesis [12]
+Active noise control (ANC) has become popular for reduc-           or constrained least-squares optimization [13, 14].
+ing noise and thus enhancing user comfort in headphones.              Studies have shown that variations in ANC systems
+While feedback control offers an effective way to imple-           occur with frequency-dependent shapes that are often not
+ment ANC, it is restricted by uncertainty of the controlled        modeled accurately by means of disks [13, 15, 16]. In these
+system that arises, e.g., from differing wearing situations.       situations, disk-based models overestimate the uncertainty,
+Widely used unstructured models which capture these                which implies suboptimal ANC performance due to overly
+variations tend to overestimate the uncertainty and thus           conservative design constraints. Uncertainty models that
+restrict ANC performance. As a remedy, this work ex-               better reflect the variations have been described in [17, 18]
+plores uncertainty models that provide a more accurate fit         as part of a computer-aided manual controller tuning
+to the observed variations in order to improve ANC per-            process, but were deemed too complicated for controller
+formance for over-ear and in-ear headphones. We describe           design [19], and not considered in ANC applications for a
+the controller optimization based on these models and im-          long time. Recent works that aim to reduce the modeling
+plement an ANC prototype to compare the performances               conservatism to improve ANC performance include our
+associated with conventional and proposed modeling ap-             previous work that uses multiple, smaller disks [15], or
+proaches. Extensive measurements with human wearers                another approach based on rectangular shapes [16].
+confirm the robustness and indicate a performance im-                 This work proposes uncertainty models for the improved
+provement over conventional methods. The results allow             design of feedback ANC controllers. The main difference
+to safely increase the active attenuation of ANC head-             to other approaches is a more accurate uncertainty de-
+phones by several decibels.                                        scription that we use for the optimization. After a brief
+                                                                   technical overview in Sec. 2, we analyze frequency response
+                                                                   variations in ANC headphones to motivate the use of such
+1    Introduction                                                  models in Sec. 3. We define the proposed uncertainty mod-
+                                                                   els in Sec. 4, and integrate them into an existing controller
+Since the initial patent by Lueg [1] and early works by            design method in Sec. 5. Finally, Sec. 6 details the design
+Olson and May [2], ANC has become a ubiquitous feature             and implementation of a real-time ANC prototype based
+in hearing devices such as headphones or hearables [3]. It         on the conventional and the proposed models. It compares
+was implemented using analog circuitry in the past, but is         their robustness and performance based on measurements
+nowadays based on fixed or adaptive digital filters [4, 5].        with human wearers and a dummy head.
+Its popularity has risen due to the provided cost-efficient
+reduction of ambient noise, especially for low frequencies.
+   A widely-used variant to implement ANC is feedback              2     Feedback Control in Headphones
+control. It bears a hazard of instability, which requires
+proper consideration in the design. In contrast to feedfor-        In this section, we revisit the mode of operation for ANC
+ward control, feedback control does not require an external        headphones using standard notation: we write digital
+microphone to measure the noise source. Feedback ANC               signals as a function of the discrete time index n with
+is applied beyond noise reduction purposes to improve the          sampling rate fs . Upper-case letters indicate frequency
+speech perception of headphone wearers by mitigating the           domain variables, e.g., E(z) and E(ejΩ ) refer to the z-
+occlusion effect [6, 7].                                           transform and Fourier transform of e(n), respectively, and
+   This work focuses on the design of feedback controllers         Ω = 2πf
+                                                                         fs denotes the normalized angular frequency.
+for ANC headphones. A fundamental challenge is that
+the controlled system changes, e.g., with the headphone            2.1    System Overview
+fit on or in the wearer’s ears. Classical measures to ensure
+closed-loop stability, such as gain or phase margins, have         Fig. 1 shows the considered ANC headphones, which fea-
+been adopted in [8, 9]. However, such margins cannot               ture a microphone and a loudspeaker that face inside
+model simultaneous gain and phase variations in the con-           the ear canal, a digital signal processor (DSP) that imple-
+trolled system [10]. This work focuses on methods that             ments the feedback controller K(z), analog-digital convert-
+employ the more rigorous robust stability specification, as        ers (ADCs) and digital-analog converters (DACs). The
+studied by Zames [11]. These methods rely on a model of            ANC system aims to attenuate the primary disturbance
+the controlled system’s variations. This so-called uncer-          d(n) at the microphone, which corresponds approximately
+tainty is commonly modeled using disks in the complex              to sounds at the wearer’s ear drum for low frequencies.
+
+
+                                                               1
+                                                                                                   c(n)
+                                                                          +      Q(z)         ×           G(z)       +          d(n)
+                         ADC                                                                  −1
+
+                                                                                 b
+                                                                                 G(z)                                    e(n)
+
+
+                         DAC
+                                                                    Figure 2: System-theoretic block diagram of a feedback
+                                                                    ANC system using the IMC configuration
+
+
+Figure 1: Schematic layout of a digitally implemented                  The target S(z) depends on frequency and on the appli-
+feedback ANC system (illustration is not to scale)                  cation. A common goal is the minimization of |S(z)| for
+                                                                    low to middle frequencies in normal fit wearing situations,
+                                                                    so that ANC supplements the passive attenuation, which
+   Passive and active attenuation combined make up the              is typically more effective to higher frequencies [5].
+total attenuation, where our focus is on the latter. The               A frequent requirement is robust stability, which is given
+active part uses a feedback loop based on the digital error         if the closed-loop remains stable despite variations in G(z).
+signal e(n), which is captured by the microphone, filtered          State-of-the-art designs therefore use, e.g., least-squares
+with the impulse response of the controller K(z), and               or infinity-norm objective functions in combination with
+inverted to yield the digital control signal c(n). The anti-        hard constraints for robust stability [12, 13].
+noise signal to suppress the primary disturbance results
+from playing back c(n) over the loudspeaker, and ideally
+has the same amplitude as d(n) but inverted phase.                  2.4       Internal Model Control
+                                                                    The internal model control (IMC) configuration is a
+2.2    The Controlled System                                        commonly-used concept in designing K(z), which has first
+                                                                    been proposed in [22], and applied to ANC in [13]. Fig. 2
+The controlled system G(z), also referred to as discrete-           shows a system-theoretic block diagram of the considered
+time secondary path, is assumed to be a linear time-                IMC-based feedback system. It consists of the controlled
+invariant (LTI) model. It describes the electro-acoustic            system G(z) and the controller K(z), which features a
+system, which includes loudspeaker, microphone, ADC
+                                                                    feed-forward filter Q(z) and a fixed internal model G(z)b
+and DAC, as well as the acoustic sound transmission. In
+                                                                    which is connected to Q(z) in a feedback loop. If Q(z) is a
+general, G(z) is stable, non-minimum-phase, and can be
+                                                                    finite impulse response (FIR) filter, this concept is widely
+estimated from measurements.
+                                                                    regarded as FIR-Q-parameterization [23]. The transfer
+   Knowledge about G(z) is crucial for ANC applications.
+                                                                    function K(z) is then given by
+The variability of G(z) depends on multiple factors and
+is well-studied [20, 21]. The shape of the wearer’s head                                             Q(z)
+and ears are known to cause variations, but manufacturing                               K(z) =                .                   (2)
+                                                                                                 1 − G(z)Q(z)
+                                                                                                     b
+tolerances, wear and tear, or temperature differences may
+also impact G(z). For a single wearer, the fit of the device           The purpose of IMC is to simplify the optimization. It
+on or in the ears causes further variations that potentially        guarantees nominal stability, i.e., the feedback loop re-
+change over time, e.g., with movements of the jaw or head.          mains stable for any Q(z) if G(z) = G(z)
+                                                                                                         b    holds. Moreover,
+   We divide fits into “normal”, “loose” and “tight”, and           the feedback cancels out the denominator of the nominal
+consider a fit to be normal when the device is mounted as           sensitivity S(z),
+                                                                                b     as can be seen when inserting (2) into
+the manufacturer intends. If the effective air volume that          (1):
+the headphones enclose is large compared to the normal
+fit, e.g., due to a leakage, we consider the fit to be loose.                           S(z)
+                                                                                        b    = 1 − Q(z)G(z).
+                                                                                                       b                          (3)
+Conversely, a tight fit is characterized by a smaller-than-
+usual volume. These fits can occur, e.g., when mounting,            Further measures for the more rigorous robust stability
+handling, or adjusting the headphones.                              requirement that exceeds G(z)
+                                                                                             b    will be discussed in Sec. 5.
+
+
+2.3    Design Specifications                                        3     Headphone Measurements
+The active attenuation which the system achieves is quanti-
+                                                                    We studied the acoustic behavior of G(z) for exemplary
+fied by the closed-loop response, also denoted “sensitivity”
+                                                                    ANC headphones through extensive measurements with
+or “disturbance rejection”. It is defined as
+                                                                    human test subjects and a dummy head. The aim was
+                E(z)         1           1                          to analyze the uncertainty which the headphones face in
+       S(z) =        =              =          ,         (1)        different operating conditions. Besides normal fits, which
+                D(z)   1 + G(z)K(z)   1 + L(z)
+                                                                    are relevant for optimizing ANC performance, we also
+where L(z) = G(z)K(z) denotes the open-loop response.               consider loose or tight fits, which substantially increase the
+Note that S(z) is subject to Bode’s sensitivity integral,           amount of variations and make the guarantee for stability
+which states that attenuation of sound in one frequency             challenging in practice. The study focuses on over-ear
+range causes amplifications in another [12, 19].                    headphones, but we applied the same procedure to a pair
+
+
+                                                                2
+                 −10
+Gi (ejΩ ) (dB)
+                                                                                     0
+
+
+
+
+                                                                      ℑ (Gi,µ )
+                 −20
+                                                                            −0.05
+                 −30
+                                                                                  −0.1
+                 −40
+                                                                                     −0.05 0 0.05 0.1    −0.05 0 0.05 0.1    −0.05 0 0.05 0.1
+                 −50                                 Persons
+                                                                                          ℜ (Gi,µ )           ℜ (Gi,µ )           ℜ (Gi,µ )
+
+                 −10                                                      (a) f = 200 Hz                (b) f = 2.8 kHz     (c) f = 4.6 kHz
+Gi (ejΩ ) (dB)
+
+
+
+
+                 −20
+                                                                    Figure 4: Observations Gi,µ at different frequencies. Marks
+                 −30
+                                                                    ( /×/ ) indicate loose, normal and tight fits, respectively.
+                 −40
+                 −50                             Dummy Head
+                                                                    ations of the normal fit response for 35 different human
+                 −10
+Gi (ejΩ ) (dB)
+
+
+
+
+                                                                    test subjects aged between 18 and 61 years. We instructed
+                 −20                                                the subjects to adjust the headphones according to their
+                 −30                                                subjective wearing comfort. For the over-ear headphones,
+                 −40                                                this included adjustments of the headband and cushions,
+                                                                    whereas for the in-ear headphones, subjects could select
+                 −50                              Other Cases
+                                                                    one of three differently-sized silicone ear tips. People that
+                          100            1k            10 k         use glasses regularly were instructed to keep them on.
+                                Frequency (Hz)
+                                                                       Part two of the measurements involved to induce loose
+Figure 3: Measured responses for QC45 headphones: hu-               fits and tight fits of different severity in a reproducible
+man wearer normal fits (top), different fits on a dummy             way using a Head Acoustics HMS II.3 dummy head. We
+head (middle), and other cases (bottom). The colors                 induced leakages with different sizes, e.g., by using a spec-
+(   /     /  ) indicate loose, normal and tight fits, re-           tacle frame or by pulling the headphones away from the
+spectively.                                                         head using straps. Conversely, we used a strap to press
+                                                                    the headphones against the dummy head with varying
+                                                                    amounts of force to obtain different tight fits.
+of in-ear headphones as well. This is not detailed here                The final part considers cases that are mostly agnostic
+in order to avoid a lengthy discussion, and we refer the            to the wearer, including the “open” case (headphone cans
+interested reader to [15] for further details.                      lie face-up on a table) and several “closed” fits (e.g., head-
+                                                                    phone cans lie face-down, or cushions manually blocked).
+                                                                    We paid special attention to the tight fits as they produced
+3.1                Measurement Setup                                the largest magnitude responses.
+We consider two devices suited to implement ANC: a
+pair of Bose QC45 over-ear headphones, and a pair of                3.2             Analysis of Variations
+Bose QC20 in-ear headphones. We removed the manufac-
+turer’s ANC electronics, and connected a live-system with           Fig. 3 shows that the gain varies between individuals
+a sound card to the built-in microphones and loudspeakers.          by about 3 dB to 5 dB between 300 Hz and 1 kHz, and
+Specifically, an Analog Devices ADAU1787 audio codec                more than 10 dB at lower frequencies. These variations
+which runs at a sampling rate fs = 192 kHz was used. The            are similar to what is reported in the literature [21, 26,
+effect of this codec had to be considered explicitly in the         27]. The dummy head measurements show a drop of
+measurements because it is part of the controlled system            the main resonance below 200 Hz and a shift towards
+G(z).                                                               higher frequencies for loose fits. This increased with the
+   We used a log-sweep of 10 seconds duration as excita-            leak size: the observation with smallest magnitude at
+tion [24]. The parameters were chosen to yield a good               200 Hz corresponds to the greatest leakage. Conversely,
+signal-to-noise ratio (SNR) without causing discomfort              the tight fit magnitude response increased by more than
+to the subjects. We performed all measurements in a                 6 dB compared to the normal fit, which is visible from
+measurement room whose reverberation time, noise rating             the dummy head and handling case measurements. The
+and operational room response curve complied with the               magnitude response variance depends on frequency and
+recommendation ITU-R BS.1116-2 [25].                                exceeds 30 dB at low frequencies.
+   The measurement series consisted of three parts, with               To gain further insight into the variation of G(ejΩ ),
+222 and 166 measurements for over-ear and in-ear head-              we consider the observed responses Gi (ejΩ ) in the com-
+phones, respectively. In the following, we consider spe-            plex plane. We therefore evaluate Gi (z) at specific fre-
+cific observations of G(z), that we denote as Gi (z) for            quency bins z = ejΩµ , denoted using subscript notation,
+1 ≤ i ≤ NG , and NG refers to the number of measure-                i.e., Gi,µ := Gi (ejΩµ ), where µ is the bin index. Fig. 4
+ments. We used spectral division to obtain the Gi (z) as            shows the real and imaginary parts ℜ (Gi,µ ) and ℑ (Gi,µ )
+FIR filters as described in [24]. Fig. 3 shows the left chan-       of the 222 frequency responses that we measured for the
+nel of the measured magnitude responses Gi (ejΩ ) for the           QC45 headphones for exemplary frequency bins. We chose
+over-ear headphones.                                                f ∈ {200 Hz, 2.8 kHz, 4.6 kHz} as prominent examples
+   The first part of the measurement series analyzed vari-          where the measured data shows different distributions.
+
+
+                                                                3
+                                                                        (0)                          (0)
+   The figure shows that the observations Gi,µ occur with             Gµ and radius Rµ = Gµ · WM,µ , with WM,µ denoting
+different shapes. At 2.8 kHz, the points have similar dis-            the multiplicative uncertainty bound. The corresponding
+tances to the origin (i.e., magnitudes), and most variations          set Πµ is defined as
+occur along a line with about 30◦ angle from the real axis.                              n                        o
+In contrast, the variations show a quasi-circular shape at                      Π(NB)
+                                                                                 µ    =    G ∈ C    G (0)
+                                                                                                      µ   − G ≤ Rµ ,       (4)
+4.6 kHz. For 200 Hz, the Gi,µ are more widely dispersed
+and show greater variations along the imaginary axis com-                                      (0)
+                                                                      and its parameters Gµ and WM,µ can be obtained from
+pared to the real axis. Similar findings have been reported           the well-known smallest circle problem [29].
+in our previous work on in-ear headphones [15], and in [13]              The main advantage of the norm-bounded model is its
+for a car headrest system.                                            simplicity, which offers straightforward means for control
+                                                                      systems analysis and synthesis. A disadvantage is that
+                                                                      the uncertainty is overestimated when the observations
+4     Uncertainty Modeling                                            Gi,µ are not distributed in a circular shape. We see this
+                                                                      in Fig. 5a, where we did not observe any responses with a
+The design of feedback controllers for ANC headphones                 negative real part, yet this part is covered by the model.
+is typically based on a model of the uncertainty that the
+controlled system is afflicted with. The uncertainty is
+often described as a set Π of frequency responses that                4.3     Multi-Disk Model
+the controlled system assumes [19, 28, 10]. This section              In order to reduce the conservatism of the norm-bounded
+discusses the abstraction of observations into a model Π              model, we proposed a conceptually similar model in a
+which serves as basis for the design of robust controllers.           previous work [15]. More precisely, we proposed to define
+In the following, we consider individual frequency bins µ.            Πµ as the union ∪ of pµ smaller disks:
+   This section is organized as follows: we discuss general                              pµ n
+requirements on uncertainty models in Sec. 4.1. We revisit                               [                  (0)
+                                                                                                                        o
+                                                                              Π(MD)
+                                                                               µ    =        G∈C           Glµ − G ≤ Rlµ .     (5)
+conventional models in Sec. 4.2 and Sec. 4.3, and propose
+                                                                                         l=1
+two alternatives that aim to reduce the conservatism in
+                                                                                   (0)
+Sec. 4.4 and Sec. 4.5. As an example, Fig. 5 shows all                As before, Glµ and Rlµ refer to the disk centers and radii.
+considered models for 200 Hz as shaded areas. Their details           The model parameters can be obtained using the algorithm
+will become clear as the section progresses. Finally, we              from [15], which uses a shared point across circles to obtain
+compare the models in Sec. 4.6.                                       a contiguous model area.
+                                                                         Fig. 5b shows the structure of the multi-disk model
+4.1    Model Requirements                                             with pµ = 6 disks. We observe that the use of smaller
+                                                                      disks allows to define Πµ in a more fine-grained manner.
+An important aspect of uncertainty models is the intro-               Compared to the norm-bounded model, the area is reduced
+duced conservatism: Πµ typically covers parts of the com-             by omitting those areas with few or no observations. The
+plex plane where no Gi,µ were observed [19]. This is                  area which covers a negative real part was reduced, but
+intended to some extent, because the finite number of                 it could evidently be reduced further. A disadvantage is
+observations only reflect a part of the true variation. How-          the greater number of constraints needed to design the
+ever, this also restricts the solution set when optimizing            controller.
+the controller, which limits the performance that can be
+achieved.                                                             4.4     Elliptic Model
+   The approaches studied in this work assume that the
+observed Gi,µ reliably reflect variations that occur in prac-         Since the variation of Gi,µ in Fig. 5 is more pronounced
+tice. Since the set Πµ ideally consists only of Gi,µ that             along the imaginary axis compared to the real axis, we
+the controlled system can actually assume, we strive for a            feel that it is natural to define Πµ as an ellipse
+model with minimal area that retains these Gi,µ .                                    (                2         2     )
+                                                                             (E)                  Xµ           Yµ
+   We assume that the headphone fit can change, e.g., from                  Πµ = G ∈ C                   +             ≤ 1 , (6)
+a normal fit to a tight fit. We therefore require a contiguous                                    Rx,µ        Ry,µ
+model area to also cover stability when the fit changes.              where we introduced auxiliary terms
+As an example, the tri-rectangle model [16] guarantees
+stability for the normal, loose or tight fits individually, but               Xµ = cos(θµ )ℜ (∆Gµ ) + sin(θµ )ℑ (∆Gµ ) ,
+                                                                                                                               (7)
+its area may not be contiguous. We do not consider the                        Yµ = sin(θµ )ℜ (∆Gµ ) − cos(θµ )ℑ (∆Gµ ) ,
+tri-rectangle model in the following because it does not
+                                                                                               (0)
+cover stability between fits: the feedback loop can become            and ∆Gµ = G − Gµ . These equations are based on
+                                                                                                                       (0)
+unstable as the fit changes. In contrast, we require that             the geometric form of an ellipse with center Gµ , semi-
+the model is able to guarantee stability also between fits.           major axis Rx,µ , semi-minor axis Ry,µ , and the angle
+                                                                      θµ between Rx,µ and the real axis. The parameters can
+4.2    Norm-Bounded Model                                             be determined from the smallest enclosing ellipse (the
+                                                                      Löwner-John ellipsoid) that is found, e.g., using Welzl’s
+The norm-bounded model is the most common uncertainty                 algorithm [30] or convex optimization [31]. The norm-
+model that, e.g., IMC-based controller designs or H∞                  bounded model is included as a special case for Rx,µ =
+synthesis use [12, 13]. The set Πµ is a disk with center              Ry,µ .
+
+
+                                                                  4
+               ℑ (Gµ )      0
+
+
+                     −0.05
+
+
+                         −0.1
+
+
+                                    0      0.05   0.1           0      0.05     0.1               0      0.05    0.1                 0      0.05   0.1
+                                        ℜ (Gµ )                     ℜ (Gµ )                           ℜ (Gµ )                            ℜ (Gµ )
+
+                    (a) Norm-bounded model              (b) Multi-disk model                (c) Elliptic model          (d) Convex hull model
+
+Figure 5: Models of frequency response uncertainty at f = 200 Hz for QC45 over-ear headphones. Colored marks
+( /×/ ) indicate loose, normal and tight fit observations Gi,µ , respectively. Different models Πµ are shown as shaded
+areas.
+
+
+                                           Norm-Bounded        Multi-Disk               pattern, e.g., at 4.6 kHz, where the area of the convex hull
+             10−1                          Elliptic            Convex Hull              model is 81 % as large as the area of the norm-bounded
+Model Area
+
+
+
+
+                                                                                        model. However, the disk overestimates the uncertainty
+                                                                                        at 2.8 kHz since it is possible to find a convex hull that
+             10−2
+                                                                                        covers only a third of the area. The multi-disk and elliptic
+                                                                                        models generally lie in between the norm-bounded and
+                                                                                        convex hull models, but show minor frequency-dependent
+             10−3
+                                                                                        differences.
+                                  100              1k                 10 k
+                                          Frequency (Hz)
+
+Figure 6: Area over frequency of different uncertainty                                  5      Controller Optimization
+models for the Bose QC45 over-ear headphones
+                                                                                        In this section, we describe the optimization of K(z) for
+                                                                                        ANC headphones based on the IMC configuration. To
+4.5             Convex Hull Model                                                       guarantee robustness against model uncertainty, we derive
+                                                                                        constraint functions based on the models outlined in Sec. 4.
+The model area can be further reduced by using the small-
+                                                                                        These models are fine-tuned to the observed variations,
+est convex area to contain all observations. This polyhedral
+                                                                                        which distinguishes our work from previous works.
+shape, commonly referred to as convex hull, is defined as
+the intersection ∩ of mµ half-space sets:
+                            mµ n
+                                                                                        5.1     Optimization Problem
+                            \
+               Π(CH)
+                µ    =            G∈C        A0l,µ ℜ (G) +                              We describe an optimization framework similar to [13]
+                            l=1                                               (8)       which accommodates frequency-dependent design spec-
+                                                                   o
+                                             A1l,µ ℑ (G) + Bl,µ ≤ 0 .                   ifications. Therefore, we use a dense grid of NΩ bins
+                                                                                        (1 ≤ µ ≤ NΩ ) and assume that NΩ is chosen large enough
+The model parameters are the number of half-spaces mµ ,                                 to accurately model the dynamics. We optimize K(z)
+the weights A0l,µ and A1l,µ , and the offsets Bl,µ , which                              indirectly through Q(z) using IMC as laid out in Sec. 2.4,
+can be determined using the quickhull algorithm [32]. An                                and define the length Nq vector q to hold the impulse
+advantage of using a convex shape is that transitions                                   response q(n) as optimization variable:
+between observations are captured inherently.                                                                                                         T
+                                                                                                q = q(0)        q(1)    q(2)   ···       q(Nq − 1)          .    (9)
+4.6             Model Comparison                                                        We define the frequency domain objective function J(q)
+To analyze variations in Gi , we derived the parameters                                 to evaluate the average frequency-weighted nominal sensi-
+for all previously discussed models using our measurement                               tivity over NΩ frequency bins:
+data. Fig. 6 compares the resulting areas over frequency
+                                                                                                              NΩ
+for all models, where lower areas indicate less modeled                                                     1 X                           2
+uncertainty. The areas generally show the same trend: the                                         J(q) =          |W1,µ · [1 − Gµ Qµ (q)]| .                    (10)
+                                                                                                           NΩ µ=1
+highest variations occur at low frequencies, as can also be
+seen in Fig. 3.
+                                                                                        Here, Qµ (q) corresponds to bin µ of the discrete Fourier
+   The norm-bounded model generally yields the largest
+                                                                                        transform (DFT) of q(n), evaluated by the inner product
+areas while the convex hull model consistently yields the
+                                                                                        zT
+                                                                                         µ q, where
+smallest area. On average, this area covers about 60 % of
+the area for the norm-bounded model. The conventional                                                                                                  T
+                                                                                                            ejΩµ       e2jΩµ             e(Nq −1)jΩµ
+                                                                                                     
+model is accurate when the variations show a circle-like                                         zµ = 1                        ···                          .   (11)
+
+
+                                                                                    5
+                                                                                           5.2.1     Elliptic Constraint
+                                                             Model of Lµ
+                                                                                                                                   (E)
+                           0.1                                                             If we multiply all points within Πµ by Kµ , we obtain a
+         Imaginary Part
+                                                                                           new ellipse with different model parameters
+                                                                  Multiply Kµ
+                                                                                                       ′                        ′
+                               0                                                                      Rx,µ = |Kµ | Rx,µ ,      Ry,µ = |Kµ | Ry,µ ,
+                                                                                                                                   ′                   (14)
+                                                                                                         θµ′ = θµ + ∠Kµ ,     G(0)
+                                                                                                                               µ   = Kµ G(0)
+                                                                                                                                         µ .
+                                                           Model of Gµ
+                          −0.1                                                                           (E)
+                                                                                           To derive Cµ (q), we use the inequality that defines the
+                                   −0.1          0          0.1         0.2                ellipse in (6), but using the parameters given by (14). In
+                                                     Real Part                             the resulting equation, we replace the “≤” by a “>” to
+                                                                                           test if a given test point is on the outside rather than
+Figure 7: Relationship between controlled system and                                       on the inside. Finally, we use the critical point as test
+open-loop uncertainty models for f = 200 Hz                                                point and substitute Kµ according to (2) to get an expres-
+                                                                                           sion that depends on q. Elementary rearrangements and
+A common choice for W1,µ is the square-root of the A-                                      simplifications lead to the constraint function
+weighted power spectral density (PSD) of d(n), in which                                                                        Xµ′2 (q) Yµ′2 (q)
+                                                                                                                          4
+case the controller minimizes the variance of e(n) [13].                                              Cµ(E) (q) = |Qµ (q)| −      2
+                                                                                                                                       −   2
+                                                                                                                                                 ,     (15)
+                                                                                                                                Rx,µ     Ry,µ
+   An unconstrained minimization of (10) is generally not
+feasible as it might cause instability if G(z) and G(z) b
+                                                                                           where we defined
+differ. Robust stability is achieved if the set of open-loop
+responses excludes the critical point for all Ω [19]. To                                      Xµ′ (q) = cos(θµ )ℜ (Uµ (q)) − sin(θµ )ℑ (Uµ (q)) ,
+                                                                                                                                                       (16)
+achieve this, we impose NΩ hard constraints Cµ (q) on q.                                         Yµ′ (q) = sin(θµ )ℜ (Uµ (q)) + cos(θµ )ℑ (Uµ (q)) ,
+Each Cµ (q) is a scalar function which evaluates to Cµ (q) <
+0 if the candidate filter q satisfies the robust stability                                 and
+criterion at frequency bin µ, and Cµ (q) ≥ 0 otherwise.                                                                            2  b ∗
+The resulting problem is a nonlinear optimization problem                                            Uµ (q) = Qµ (q) + |Qµ (q)| (G(0)
+                                                                                                                                  µ − Gµ ) .           (17)
+with nonlinear constraints                                                                 Here, an asterisk (∗ ) denotes the conjugate of a complex
+             minimize                     J(q)                                             number. Note that (15) is generally a non-convex function
+                           q
+                                                                                (12)       of q since Xµ′ (q) and Yµ′ (q) are subtracted.
+             subject to                   Cµ (q) < 0,       1 ≤ µ ≤ NΩ ,
+Note that (12) is a convex optimization problem with                                       5.2.2     Convex Hull Constraint
+a guaranteed global optimum when Cµ (q) is based on                                        The multiplication of all elements in Πµ
+                                                                                                                                         (CH)
+                                                                                                                                      by Kµ yields
+the norm-bounded or multi-disk models. For its specific                                    a different convex hull with modified parameters
+definition, we refer to [13] and [15]. In the following, we
+develop Cµ (q) for the elliptic and convex hull models.                                                           ′
+                                                                                                                 αl,µ = αl,µ + ∠Kµ ,
+                                                                                                                  ′
+                                                                                                                                                       (18)
+                                                                                                                 Bl,µ = |Kµ | Bl,µ ,
+5.2    Novel Constraints
+                                                                                           where αl,µ denotes the counterclockwise angle between the
+For robust stability, the critical point needs to be excluded                              l-th half-space and the real axis, and Bl,µ is the offset as
+from the set of open-loop responses. It is therefore instruc-                              before. Fig. 7 visualizes this for an exemplary frequency
+tive to understand how this set is “generated”: for all bins                               bin µ which corresponds to f = 200 Hz.
+µ, the Lµ result from the multiplication Kµ · Gµ . This                                       Equation (8) shows that a test point is inside the convex
+linear operation corresponds to a multiplication of their                                  hull if mµ inequalities hold true. Conversely, at least one
+absolute values and the summation of their angles:                                         of the inequalities must be violated if a point is to lie
+                                     |Lµ | = |Kµ | · |Gµ | ,                               outside. We therefore replace the “≤” of the inequality in
+                                                                                (13)       (8) by a “>”, and compute the minimum of the resulting
+                                     ∠Lµ = ∠Kµ + ∠Gµ .
+                                                                                           mµ expressions. As before, we use −1 as test point and
+The resulting set of open-loop responses at bin µ thus cor-                                substitute Kµ to obtain a constraint function that depends
+responds to Πµ with scaling and rotation. Fig. 7 visualizes                                on q:
+this for f = 200 Hz using Kµ = −1+2j and the convex hull
+                                                                                                    Cµ(CH) (q) = min V1,µ (q), . . . , Vmµ ,µ (q)
+                                                                                                                                                 
+model from Fig. 5d as an example. The robust stability                                                                                              (19)
+criterion is satisfied for the chosen µ because the critical
+point is not in the set of open-loop responses. However, a                                 with auxiliary variables
+significant increase in |Kµ | would expand the area to also                                      Vl,µ (q) = cos(αl,µ )ℜ (Wµ (q))
+cover the critical point.                                                                                                                   2
+   The key is to formalize the effect of Kµ on the model                                                − sin(αl,µ )ℑ (Wµ (q)) − |Qµ (q)| Bl,µ ,       (20)
+parameters, which allows to write explicit constraint func-                                                                 2 b∗
+                                                                                                 Wµ (q) = Qµ (q) − |Qµ (q)| G  µ.
+tions that are suitable for controller optimization. In the
+following, we show how the robust stability constraints can                                Equation (19) uses the non-smooth min-function. To
+be formalized as a function of the optimization variable q.                                circumvent problems that this non-smoothness might
+
+
+                                                                                       6
+                                      Pmµ the approxima-
+cause in a gradient-based optimization,                               21 and 60. We instructed the subjects to adjust the head-
+tion min(x1 , . . . , xmµ ) ≈ − ρ1 log l=1 exp(−ρxl ) can be          phones as for the measurements in Sec. 3.1 and to keep
+used. This smooth function approaches the min-function                their heads still during the measurements. We played
+for ρ → ∞ [33]. Note that (19) is a non-convex function               back diffuse pink noise over eight Neumann KH120D loud-
+of q.                                                                 speakers with a semi-circular, lateral placement around
+                                                                      the listener, and one Velodyne DD-12 subwoofer to syn-
+                                                                      thesize the primary noise field. The noise sound level was
+6     Case Study                                                      calibrated using a Brüel & Kjær sound level meter 2240
+                                                                      to obtain noise with roughly 80 dBA at the listener’s head
+We implemented real-time prototype feedback ANC sys-                  position.
+tems based on the four uncertainty models presented in                   We focus on the effect of active cancellation by compar-
+Sec. 4 in order to compare their implications for a realistic         ing the measured signals recorded by the built-in micro-
+use-case using the hardware described in Sec. 3. The goal             phones with ANC switched off and on, respectively. For
+was to maximize the active attenuation at lower frequen-              each test subject, we performed one calibration measure-
+cies while guaranteeing robust stability. The widely-used             ment with no controller active, and one with either of the
+norm-bounded model and the recently proposed multi-disk               controllers active, with a measurement duration of 10 s.
+model [15] have been parametrized to get the best possible            For this, we reconfigured the DSP to use one of four con-
+performance, and served as baseline methods.                          trollers on the fly in a randomized order. The headphones
+                                                                      were not re-fitted between these measurements to capture
+6.1    System Design                                                  the same variations across different models. To estimate
+                                                                      only the active part of the measured total attenuation, we
+We used the following optimization parameters: we set                 spectrally divided these measurements by the calibration
+Nq = 8192 and used a frequency discretization with NΩ =               data, which removes the effect of passive attenuation.
+8192 linearly spaced bins in the frequency range 0 Hz <                  Although not relevant for the user’s perception of ANC
+f < 24 kHz. The average of 35 normal fits for different               performance, we also measured the performance with loose
+wearers served as internal model G(z).
+                                     b      To put emphasis           and tight fits to confirm the stability in challenging wearing
+on the attenuation at lower frequencies, we specified the             situations. We used the dummy head for these measure-
+design goal W1 (z) as an eight-order Butterworth bandpass             ments, which allowed to induce different fits as in Sec. 3
+filter with a peak gain of 31 dB, and 0 dB-crossovers at              in a reproducible manner.
+about 40 Hz and 1 kHz. This unusually high peak gain
+was selected to push the limits of achievable attenuation
+with a robustly stable system.
+                                                                      6.3    Measurement Results
+   We solved (12) with these parameters to optimize the               Fig. 8 shows the measured closed-loop magnitude responses
+controllers subject to the uncertainty models from Sec. 4              Si (ejΩ ) for the left channel of 21 human wearers (thin
+using an interior-point algorithm [34]. Since (12) is a con-          lines) and for the dummy head (thick lines). First, we
+vex problem for the norm-bounded and multi-disk models,               focus on the ANC performance for the human subjects.
+we obtained their global optima. In contrast, the proposed               The norm-bounded model results in 10 dB to 20 dB at-
+elliptic and convex hull constraints are non-convex, so we            tenuation between 100 Hz and 800 Hz, with a narrow-band
+could only find local optima. While the controller based              peak of about 22 dB at 150 Hz and at 700 Hz. A lower
+on the norm-bounded model achieved J (NB) (q) = 1.11,                 peak attenuation is obtained compared to other models,
+we obtained J (MD) (q) = 0.66 for the multi-disk model,               but there is also less waterbed overshoot. In comparison,
+J (E) (q) = 0.56 for the elliptic model, and J (CH) (q) = 0.54        the multi-disk model results in a slightly higher attenu-
+for the convex hull model. This shows that the added                  ation below 800 Hz, with a peak of 29 dB at 140 Hz for
+flexibility was utilized to improve the performance.                  one subject. Both results deviate from the design goal
+   Finally, we implemented the controllers on the DSP                 between 200 Hz and 500 Hz due to the restrictiveness of
+hardware, which required to approximate K(z) by low-                  the respective constraints. At these frequencies, the pro-
+order infinite impulse response (IIR) filters. We obtained            posed elliptic and convex hull models lead to a significant
+50-th order IIR filters using the balanced truncation algo-           improvement, with a peak attenuation of 29 dB at 280 Hz,
+rithm described in [35]. These filters deviated minimally             and 31 dB at 240 Hz, respectively. Below 200 Hz, the slope
+from the high-order ones, and maintained all specifications.          of the curves is comparable for the elliptic and convex hull
+                                                                      models, and less steep compared to the design goal.
+6.2    Measurement Procedure                                             Fig. 8 also indicates variations of the ANC performance
+                                                                      across wearers. Comparing Fig. 8 to Fig. 3 shows that
+Prior to the study, we tested all controllers thoroughly for          variations occurred in a similar fashion: for most persons,
+stability, e.g., by inducing different amounts of leakage on          they have the same shape with a minor gain difference of
+the dummy head, or by manually blocking the ear cushions              about 3 dB to 5 dB in between 200 Hz and 1 kHz, but the
+or ear molds, respectively. We were not able to induce                main resonances in G(z) below 200 Hz caused variations
+instabilities, neither with fixed loose or tight fits, nor when       of more than 10 dB. Since G(z) varied from person to
+transitioning from one fit to another. We observed the                person but K(z) was fixed, the performance has been very
+same stability in practice for all four uncertainty models.           similar between 200 Hz and 1 kHz, and mostly similar for
+  We proceeded to measure the ANC performance for a                   frequencies below 200 Hz across the uncertainty models.
+total of 21 different human subjects with ages in between                Additionally, Fig. 8 shows the performance with loose,
+
+
+                                                                  7
+                10
+|Si (ejΩ )| (dB)
+
+                 0
+               −10
+               −20
+               −30                                   Norm-Bounded                                                     Multi-Disk
+
+                10
+|Si (ejΩ )| (dB)
+
+
+
+
+                 0
+               −10
+               −20
+               −30                                            Elliptic                                              Convex Hull
+                           100              1k                  10 k                 100               1k                 10 k
+                                   Frequency (Hz)                                             Frequency (Hz)
+
+Figure 8: Left channel closed-loop response measured for the QC45 headphones with 1/6-th octave band smoothing.
+Colored lines (   /    /     /    ) indicate normal fits of 21 persons for the norm-bounded, multi-disk, elliptic, and
+convex-hull models, respectively. Black lines (  /     /     ) indicate loose, normal and tight fits, respectively, using a
+dummy head.
+
+
+                   10                                                  overall deviation from the desired behavior, followed by
+|S(ejΩ )| (dB)
+
+
+
+
+                   0
+                                                                       the elliptic, multi-disk and norm-bounded models, respec-
+                                                                       tively. For the over-ear headphones, the improvement is
+               −10                                                     most notable at 300 Hz. There, the norm-bounded model
+               −20                                                     yields about 11 dB, and the convex hull model about 29 dB
+               −30                                                     on average, which corresponds to an improvement of 18 dB.
+                                          Over-Ear Headphones
+                                                                       In contrast, the norm-bounded and multi-disk models more
+                   10                                                  closely reflect the design target for 30 Hz to 70 Hz. The
+|S(ejΩ )| (dB)
+
+
+
+
+                   0
+                                                                       figure also indicates unwanted amplifications due to the
+                                                                       waterbed effect. With all uncertainty models, this over-
+               −10                                                     shoot is distributed evenly for frequencies greater than
+               −20                                                     1 kHz, but for both proposed models, the improved atten-
+               −30                                                     uation at lower frequencies comes at the cost of a more
+                                            In-Ear Headphones
+                                                                       severe waterbed amplification at higher frequencies.
+                          100             1k           10 k               Using the convex hull model, the design goal is achieved
+                                 Frequency (Hz)
+                                                                       more closely below 100 Hz for the QC20 in-ear headphones
+Figure 9: Uncertainty model-dependent ANC performance,                 compared to the QC45 over-ear headphones, but the op-
+decibel-averaged for 21 persons with 1/6-th octave band                posite holds true in between 300 Hz and 500 Hz. Notably,
+smoothing. Dashed lines (       ) refer to the design target           the elliptic model did not yield an improvement for the
+and solid lines (     /   /    /     ) to the norm-bounded,            in-ears, as opposed to the over-ears. Instead, the obtained
+multi-disk, elliptic, and convex-hull models, respectively.            performance is between the norm-bounded and multi-disk
+                                                                       models. Both observations are due to a different mani-
+                                                                       festation of the uncertainty between in-ear and over-ear
+normal and tight fits using the dummy-head. This shows                 headphones, and can be explained by different model areas
+that the system remained stable, even in situations that               over frequency, as exemplified for the over-ear headphones
+are more challenging than the intended wearing situation.              in Sec. 4.6.
+We observe that the attenuation with a normal fit is overall
+quite similar for dummy head and human subjects. Below
+200 Hz, the performance with human wearers roughly lies                7    Conclusion
+in between the loose and tight fit performances with the
+                                                                       This work discussed the optimization of feedback con-
+dummy head.
+                                                                       trollers for over-ear and in-ear ANC headphones. A robust
+                                                                       design requires a model of the inherent uncertainty, which
+6.4                Comparison of Average Performance                   we derived from frequency response measurements in dif-
+                                                                       ferent wearing situations. We showed that conventional
+In the following, we consider the average closed-loop re-              uncertainty models are more conservative than necessary
+sponses S(ejΩ ) for different models, which result from av-            to guarantee stability in practice. This limits ANC perfor-
+eraging the decibel-values of the 21 measurements Si (ejΩ ).           mance since a too restrictive design constraint is implied.
+Fig. 9 shows the resulting closed-loop responses at the                This work introduced uncertainty models with elliptic and
+left channel, together with the design goal |W1 (ejΩ )|−1 for          polyhedral geometry to better reflect the measurements.
+both headphones.                                                       We showed how to use these models in the IMC-based
+   We observe that the convex hull model leads to the least            optimization of feedback controllers.
+
+
+                                                                   8
+   We demonstrated the applicability of the presented mod-          [9] P. R. Benois, R. Roden, M. Blau, and S. Doclo, “Op-
+els in a case study involving real-time feedback ANC sys-               timization of a fixed virtual sensing feedback ANC
+tems for two headphone types. The study compared the                    controller for in-ear headphones with multiple loud-
+uncertainty models using ANC performance measurements                   speakers,” in Proceedings of the International Con-
+for an artificial dummy head and human wearers. All mod-                ference on Acoustics, Speech and Signal Processing,
+els showed the same robustness in practice, i.e., we did                pp. 8717–8721, May 2022.
+not observe any instability for either of the models. This
+                                                                   [10] P. Seiler, A. Packard, and P. Gahinet, “An in-
+confirms that the theoretical considerations yield a degree
+                                                                        troduction to disk margins [lecture notes],” IEEE
+of stability that is sufficient in practice. Depending on
+                                                                        Control Syst., vol. 40, pp. 78–95, Oct. 2020.
+frequency, the reduced conservatism allowed to increase
+                                                                        https://doi.org/10.1109/MCS.2020.3005277.
+the active attenuation below 1 kHz by 10 dB to 18 dB over
+the conventional norm-bounded uncertainty modeling ap-             [11] G. Zames, “Feedback and optimal sensitivity:
+proach.                                                                 Model reference transformations, multiplicative semi-
+                                                                        norms, and approximate inverses,” IEEE Trans.
+                                                                        Autom. Control, vol. 26, pp. 301–320, Apr. 1981.
+8    Acknowledgement                                                    https://doi.org/10.1109/TAC.1981.1102603.
+
+The authors wish to thank students, colleagues, and friends        [12] M. Bai and D. Lee, “Implementation of an active
+for participating in the measurements.                                  headset by using the H∞ robust control theory,” J.
+                                                                        Acoust. Soc. Am., vol. 102, pp. 2184–2190, Oct. 1997.
+                                                                        https://doi.org/10.1121/1.419594.
+References                                                         [13] B. Rafaely and S. J. Elliott, “H2 /H∞ active control
+                                                                        of sound in a headrest: Design and implementation,”
+ [1] P. Lueg, “Process of silencing sound oscillations,” US             IEEE Trans. Control Syst. Technol., vol. 7, pp. 79–84,
+     patent 2043416, 1936.                                              Jan. 1999. https://doi.org/10.1109/87.736757.
+ [2] H. F. Olson and E. G. May, “Electronic sound ab-              [14] J. Wang, J. Zhang, J. Xu, C. Zheng, and
+     sorber,” J. Acoust. Soc. Am., vol. 25, no. 6, pp. 1130–            X. Li, “An optimization framework for de-
+     1136, 1953. https://doi.org/10.1121/1.1907249.                     signing robust cascade biquad feedback con-
+                                                                        trollers on active noise cancellation head-
+ [3] R. Gupta, J. He, R. Ranjan, W.-S. Gan, F. Klein,                   phones,” Appl. Acoust., vol. 179, p. 108081, 2021.
+     C. Schneiderwind, A. Neidhardt, K. Brandenburg,                    https://doi.org/10.1016/j.apacoust.2021.108081.
+     and V. Välimäki, “Augmented/mixed reality audio
+     for hearables: Sensing, control, and rendering,” IEEE         [15] F. Hilgemann and P. Jax, “Robust feedback active
+     Sig. Proc. Mag., vol. 39, no. 3, pp. 63–89, 2022.                  noise control in headphones based on a data-driven
+     https://doi.org/10.1109/MSP.2021.3110108.                          uncertainty model,” in Proceedings of the Interna-
+                                                                        tional Workshop on Acoustic Signal Enhancement,
+ [4] S. J. Elliott and P. A. Nelson, “Active noise control,”            (Bamberg, Germany), pp. 1–5, Sep. 2022.
+     IEEE Signal Process. Mag., vol. 10, no. 4, pp. 12–35,         [16] J. Guo, Z. Xun, Z. Ren, L. Yin, and H. Wang, “An
+     1993. https://doi.org/10.1109/79.248551.                           improved estimation method of secondary path uncer-
+                                                                        tainties for feedback active noise control earphones,”
+ [5] C. H. Hansen, S. D. Snyder, X. Qiu, L. A. Brooks, and
+                                                                        Noise Control Engineering Journal, vol. 72, no. 3,
+     D. J. Moreau, Active Control of Noise and Vibration.
+                                                                        pp. 166–174, 2024. https://doi.org/10.3397/1/377216.
+     Boca Raton, Florida, USA: CRC Press, second ed.,
+     2012.                                                         [17] D. East, “On the determination of plant vari-
+                                                                        ation bounds for optimum loop synthesis,” Int.
+ [6] J. Mejia, H. Dillon, and M. Fisher, “Active can-                   J. Control, vol. 35, no. 5, pp. 891–908, 1982.
+     cellation of occlusion: An electronic vent for                     https://doi.org/10.1080/00207178208922660.
+     hearing aids and hearing protectors,” J. Acoust.
+     Soc. Am., vol. 124, no. 1, pp. 235–240, 2008.                 [18] D. L. Laughlin, K. G. Jordan, and M. Morari, “In-
+     https://doi.org/10.1121/1.2908279.                                 ternal model control and process uncertainty: Map-
+                                                                        ping uncertainty regions for SISO controller design,”
+ [7] F. Denk, L. Jürgensen, and H. Husstedt, “Evaluation               Int. J. Control, vol. 44, pp. 1675–1698, Feb. 1986.
+     of active occlusion effect cancellation in earphones               https://doi.org/10.1080/00207178608933693.
+     by subjective, real-ear and coupler measurements,” J.         [19] S. Skogestad and I. Postlethwaite, Multivariable Feed-
+     Audio Eng. Soc., vol. 72, no. 3, pp. 145–160, 2024.                back Control: Analysis and Design. Hoboken, New
+     https://doi.org/10.17743/jaes.2022.0124.                           Jersey, USA: John Wiley & Sons, 2005.
+ [8] S.-H. Yu and J.-S. Hu, “Controller design                     [20] M. Guldenschuh and R. De Callafon, “Detection of
+     for active noise cancellation headphones using                     secondary-path irregularities in active noise control
+     experimental raw data,” IEEE/ASME Trans.                           headphones,” IEEE/ACM Trans. Audio, Speech, Lan-
+     Mechatronics, vol. 6, pp. 483–490, Dec. 2001.                      guage Process., vol. 22, pp. 1148–1157, May 2014.
+     https://doi.org/10.1109/3516.974862.                               https://doi.org/10.1109/TASLP.2014.2321475.
+
+
+                                                               9
+[21] H. Møller, D. Hammershøi, C. B. Jensen, and M. F.
+     Sørensen, “Transfer characteristics of headphones
+     measured on human ears,” J. Audio Eng. Soc., vol. 43,
+     pp. 203–217, Apr. 1995.
+[22] B. Francis and W. Wonham, “The internal model
+     principle of control theory,” Automatica, vol. 12,
+     pp. 457–465, Sep. 1976. https://doi.org/10.1016/0005-
+     1098(76)90006-6.
+[23] S. J. Elliott, Signal Processing for Active Control,
+     vol. 1. London, UK: Academic Press, 2000.
+
+[24] S. Müller and P. Massarani, “Transfer-function mea-
+     surement with sweeps,” J. Audio Eng. Soc., vol. 49,
+     pp. 443–471, Jun. 2001.
+[25] Radiocommunication Sector of International Telecom-
+     munication Union (ITU-R), Methods for the subjective
+     assessment of small impairments in audio systems,
+     Recommendation ITU-R BS.1116-2, June 2014.
+[26] B. Masiero and J. Fels, “Perceptually robust head-
+     phone equalization for binaural reproduction,” May
+     2011. paper 8388.
+
+[27] M. Hiipakka, M. Tikander, and M. Karjalainen, “Mod-
+     eling the external ear acoustics for insert headphone
+     usage,” J. Audio Eng. Soc., vol. 58, pp. 269–281, May
+     2010.
+[28] K. Zhou, Robust and Optimal Control. Upper Saddle
+     River, New Jersey, USA: Prentice Hall, 1996.
+[29] G. Chrystal, “On the problem to construct the mini-
+     mum circle enclosing n given points in the plane,” in
+     Proceedings of the Edinburgh Mathematical Society,
+     vol. 3, pp. 30–33, 1885.
+
+[30] E. Welzl, “Smallest enclosing disks (balls and ellip-
+     soids),” in New Results and New Trends in Computer
+     Science, vol. 555, (Berlin, Germany), pp. 359–370,
+     Springer, 1991.
+[31] P. Kumar and E. A. Yildirim, “Minimum-volume
+     enclosing ellipsoids and core sets,” J. Optimiz.
+     Theory App., vol. 126, pp. 1–21, Jul. 2005.
+     https://doi.org/10.1007/s10957-005-2653-6.
+[32] C. B. Barber, D. P. Dobkin, and H. Huhdanpaa,
+    “The quickhull algorithm for convex hulls,” ACM
+     Trans. Math. Software, vol. 22, pp. 469–483, Dec.
+     1996. https://doi.org/10.1145/235815.235821.
+[33] P. S. Bullen, Handbook of Means and their Inequalities.
+     New York City, New York, USA: Springer, 2003.
+[34] J. Nocedal and S. J. Wright, Numerical Optimization.
+     New York City, New York, USA: Springer, 2006.
+[35] K. Zhou, “Frequency-weighted L∞ norm and opti-
+     mal hankel norm model reduction,” IEEE Trans.
+     Autom. Control, vol. 40, pp. 1687–1699, Oct. 1995.
+     https://doi.org/10.1109/9.467681.
+
+
+
+
+                                                               10
+

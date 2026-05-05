@@ -1,0 +1,421 @@
+[{
+  "renderDpi": 900,
+  "name": "5",
+  "page": 5,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 204.0,
+    "y1": 52.64,
+    "x2": 341.04,
+    "y2": 128.72
+  },
+  "caption": "Fig. 5. Frequency ranges of 7 white noises (𝑏0 to 𝑏6) used to pre-train control filters.",
+  "imageText": [],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Figure5-1.png",
+  "captionBoundary": {
+    "x1": 146.5,
+    "y1": 141.1517333984375,
+    "x2": 397.75372314453125,
+    "y2": 147.260009765625
+  }
+}, {
+  "renderDpi": 900,
+  "name": "11",
+  "page": 10,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 126.0,
+    "y1": 348.64,
+    "x2": 418.0,
+    "y2": 575.6800000000001
+  },
+  "caption": "Fig. 11. The (a)–(b) error signal, (c) averaged noise reduction level in each second, and (d) power spectral density obtained by the CNN-based SFANC method and the FxLMS algorithm, on the compressor noise.",
+  "imageText": [],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Figure11-1.png",
+  "captionBoundary": {
+    "x1": 39.005001068115234,
+    "y1": 587.5357055664062,
+    "x2": 505.2458190917969,
+    "y2": 600.6179809570312
+  }
+}, {
+  "renderDpi": 900,
+  "name": "10",
+  "page": 10,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 116.0,
+    "y1": 52.64,
+    "x2": 429.04,
+    "y2": 295.68
+  },
+  "caption": "Fig. 10. The (a)–(b) error signal, (c) averaged noise reduction level in each second, and (d) power spectral density obtained by the CNN-based SFANC method and the FxLMS algorithm, on the aircraft noise.",
+  "imageText": [],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Figure10-1.png",
+  "captionBoundary": {
+    "x1": 39.005001068115234,
+    "y1": 307.8907165527344,
+    "x2": 505.2458190917969,
+    "y2": 320.9729919433594
+  }
+}, {
+  "renderDpi": 900,
+  "name": "17",
+  "page": 14,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 116.0,
+    "y1": 193.52,
+    "x2": 428.0,
+    "y2": 365.68
+  },
+  "caption": "Fig. 17. Power spectrum of real noises picked up by the monitoring microphone, when the CNN-based SFANC algorithm is turned off and on.",
+  "imageText": ["Aircraft", "noise", "72.36", "dBA", "60.07", "dBA", "12.29", "dB", "Compressor", "noise", "73.90", "dBA", "61.47", "dBA", "12.43", "dB", "Real", "noise", "ANC", "off", "ANC", "on", "NR"],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Figure17-1.png",
+  "captionBoundary": {
+    "x1": 62.4630012512207,
+    "y1": 377.6837158203125,
+    "x2": 481.7875671386719,
+    "y2": 382.197998046875
+  }
+}, {
+  "renderDpi": 900,
+  "name": "1",
+  "page": 1,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 152.0,
+    "y1": 52.64,
+    "x2": 392.0,
+    "y2": 129.68
+  },
+  "caption": "Fig. 1. Block diagram of a traditional feedforward ANC system using the FxLMS algorithm, where ∑ refers to the acoustic suppression.",
+  "imageText": [],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Figure1-1.png",
+  "captionBoundary": {
+    "x1": 72.5999984741211,
+    "y1": 141.7457275390625,
+    "x2": 471.64971923828125,
+    "y2": 146.260009765625
+  }
+}, {
+  "renderDpi": 900,
+  "name": "2",
+  "page": 1,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 118.0,
+    "y1": 163.6,
+    "x2": 427.04,
+    "y2": 259.68
+  },
+  "caption": "Fig. 2. Linear dynamic model of an acoustic environment.",
+  "imageText": [],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Figure2-1.png",
+  "captionBoundary": {
+    "x1": 186.06700134277344,
+    "y1": 271.4377136230469,
+    "x2": 358.18328857421875,
+    "y2": 275.9519958496094
+  }
+}, {
+  "renderDpi": 900,
+  "name": "3",
+  "page": 6,
+  "figType": "Table",
+  "regionBoundary": {
+    "x1": 130.0,
+    "y1": 219.6,
+    "x2": 411.04,
+    "y2": 269.76
+  },
+  "caption": "Table 3 Performance comparison of different 2D networks.",
+  "imageText": ["The", "proposed", "2D", "CNN", "98.55%", "0.25M", "Mobilenet", "v2", "[48]", "94.20%", "2.88M", "ResNet", "[49]", "98.55%", "4.91M", "DenseNet", "[50]", "99.00%", "6.96M", "Network", "Classification", "accuracy", "#Parameters"],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Table3-1.png",
+  "captionBoundary": {
+    "x1": 132.2519989013672,
+    "y1": 204.15472412109375,
+    "x2": 279.3600158691406,
+    "y2": 217.23699951171875
+  }
+}, {
+  "renderDpi": 900,
+  "name": "6",
+  "page": 6,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 62.0,
+    "y1": 52.64,
+    "x2": 482.0,
+    "y2": 169.68
+  },
+  "caption": "Fig. 6. Frequency spectrum of 7 pre-trained control filters (𝐵0 to 𝐵6).",
+  "imageText": [],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Figure6-1.png",
+  "captionBoundary": {
+    "x1": 169.0489959716797,
+    "y1": 181.96173095703125,
+    "x2": 375.2023620605469,
+    "y2": 188.07000732421875
+  }
+}, {
+  "renderDpi": 900,
+  "name": "9",
+  "page": 9,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 154.96,
+    "y1": 52.64,
+    "x2": 389.04,
+    "y2": 435.68
+  },
+  "caption": "Fig. 9. LayerCAM results of the noise with a predicted class of 𝐵0. (a): The input mel-spectrogram of the 2D CNN; (b): The fused map of LayerCAM, which is the fusion of different stages’ LayerCAMs shown in (c).",
+  "imageText": [],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Figure9-1.png",
+  "captionBoundary": {
+    "x1": 39.005001068115234,
+    "y1": 447.7457275390625,
+    "x2": 505.24542236328125,
+    "y2": 460.8280029296875
+  }
+}, {
+  "renderDpi": 900,
+  "name": "16",
+  "page": 13,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 122.0,
+    "y1": 52.64,
+    "x2": 423.04,
+    "y2": 586.72
+  },
+  "caption": "Fig. 16. Noise reduction performance on the broadband noises with predicted classes of ‘3’-’6’, in terms of power spectrums and 1/3 octave band of noise reduction.",
+  "imageText": [],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Figure16-1.png",
+  "captionBoundary": {
+    "x1": 39.005001068115234,
+    "y1": 598.2687377929688,
+    "x2": 505.24920654296875,
+    "y2": 611.3510131835938
+  }
+}, {
+  "renderDpi": 900,
+  "name": "3",
+  "page": 2,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 150.96,
+    "y1": 52.64,
+    "x2": 393.04,
+    "y2": 151.68
+  },
+  "caption": "Fig. 3. Hidden Markov model of feedforward active noise control.",
+  "imageText": [],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Figure3-1.png",
+  "captionBoundary": {
+    "x1": 174.55999755859375,
+    "y1": 163.1317138671875,
+    "x2": 369.6923828125,
+    "y2": 167.64599609375
+  }
+}, {
+  "renderDpi": 900,
+  "name": "14",
+  "page": 12,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 116.0,
+    "y1": 52.64,
+    "x2": 429.04,
+    "y2": 191.68
+  },
+  "caption": "Fig. 14. Detailed view of the ANC hardware system, which includes the PXI processing unit, the pre-amplifier, the I/O unit, and the output amplifier.",
+  "imageText": [],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Figure14-1.png",
+  "captionBoundary": {
+    "x1": 50.882999420166016,
+    "y1": 203.90472412109375,
+    "x2": 493.36834716796875,
+    "y2": 208.41900634765625
+  }
+}, {
+  "renderDpi": 900,
+  "name": "15",
+  "page": 12,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 122.0,
+    "y1": 225.6,
+    "x2": 423.04,
+    "y2": 624.72
+  },
+  "caption": "Fig. 15. Noise reduction performance on the broadband noises with predicted classes of 𝐵0-𝐵2, in terms of power spectrums and 1/3 octave band of noise reduction.",
+  "imageText": [],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Figure15-1.png",
+  "captionBoundary": {
+    "x1": 39.005001068115234,
+    "y1": 636.3257446289062,
+    "x2": 505.2461853027344,
+    "y2": 649.4080200195312
+  }
+}, {
+  "renderDpi": 900,
+  "name": "7",
+  "page": 7,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 118.96000000000001,
+    "y1": 52.64,
+    "x2": 425.04,
+    "y2": 233.68
+  },
+  "caption": "Fig. 7. Visualizing features of different noise classes in the testing dataset. There are 7 noise classes with 100 instances per class. The points with different colors denote noise features from different classes.",
+  "imageText": [],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Figure7-1.png",
+  "captionBoundary": {
+    "x1": 39.005001068115234,
+    "y1": 245.64370727539062,
+    "x2": 505.2469482421875,
+    "y2": 258.72601318359375
+  }
+}, {
+  "renderDpi": 900,
+  "name": "4",
+  "page": 3,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 152.0,
+    "y1": 52.64,
+    "x2": 393.04,
+    "y2": 170.72
+  },
+  "caption": "Fig. 4. Block diagram of the delayless CNN-based SFANC method, where the most suitable pre-trained control filter is selected in the co-processor and used for real-time noise control.",
+  "imageText": [],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Figure4-1.png",
+  "captionBoundary": {
+    "x1": 39.005001068115234,
+    "y1": 182.49969482421875,
+    "x2": 505.247802734375,
+    "y2": 195.58203125
+  }
+}, {
+  "renderDpi": 900,
+  "name": "12",
+  "page": 11,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 102.0,
+    "y1": 52.64,
+    "x2": 442.0,
+    "y2": 248.72
+  },
+  "caption": "Fig. 12. The CNN-based SFANC method implemented in the ANC window, where the co-processor coordinates with the real-time controller through UDP protocol.",
+  "imageText": [],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Figure12-1.png",
+  "captionBoundary": {
+    "x1": 39.005001068115234,
+    "y1": 260.1847229003906,
+    "x2": 505.24993896484375,
+    "y2": 264.6990051269531
+  }
+}, {
+  "renderDpi": 900,
+  "name": "13",
+  "page": 11,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 102.96000000000001,
+    "y1": 281.6,
+    "x2": 441.04,
+    "y2": 430.72
+  },
+  "caption": "Fig. 13. Experimental setup of the ANC window observed from the internal and external views. Note that there is no error microphone during noise control.",
+  "imageText": [],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Figure13-1.png",
+  "captionBoundary": {
+    "x1": 40.64400100708008,
+    "y1": 442.3097229003906,
+    "x2": 503.60784912109375,
+    "y2": 446.8240051269531
+  }
+}, {
+  "renderDpi": 900,
+  "name": "4",
+  "page": 8,
+  "figType": "Table",
+  "regionBoundary": {
+    "x1": 130.0,
+    "y1": 490.64,
+    "x2": 411.04,
+    "y2": 523.6800000000001
+  },
+  "caption": "Table 4 Noise reduction levels achieved by the CNN-based SFANC and FxLMS algorithms.",
+  "imageText": ["CNN-based", "SFANC", "16.82", "dB", "15.39", "dB", "FxLMS", "4.15", "dB", "7.29", "dB", "ANC", "algorithms", "Aircraft", "noise", "Compressor", "noise"],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Table4-1.png",
+  "captionBoundary": {
+    "x1": 132.2519989013672,
+    "y1": 474.81573486328125,
+    "x2": 370.6581726074219,
+    "y2": 487.89801025390625
+  }
+}, {
+  "renderDpi": 900,
+  "name": "8",
+  "page": 8,
+  "figType": "Figure",
+  "regionBoundary": {
+    "x1": 154.0,
+    "y1": 52.64,
+    "x2": 390.0,
+    "y2": 432.72
+  },
+  "caption": "Fig. 8. LayerCAM results of the noise with a predicted class of 𝐵3. (a): The input mel-spectrogram of the 2D CNN; (b): The fused map of LayerCAM, which is the fusion of different stages’ LayerCAMs shown in (c).",
+  "imageText": [],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Figure8-1.png",
+  "captionBoundary": {
+    "x1": 39.005001068115234,
+    "y1": 444.2417297363281,
+    "x2": 505.24542236328125,
+    "y2": 457.3240051269531
+  }
+}, {
+  "renderDpi": 900,
+  "name": "1",
+  "page": 4,
+  "figType": "Table",
+  "regionBoundary": {
+    "x1": 154.0,
+    "y1": 68.64,
+    "x2": 388.0,
+    "y2": 170.72
+  },
+  "caption": "Table 1 Overall architecture of the 2D CNN model.",
+  "imageText": ["Input", "64", "×", "32", "1", "Conv0", "64", "×", "32", "3", "Conv1", "32", "×", "16", "24", "MaxPool", "16", "×", "8", "24", "Stage2", "8", "×", "4", "48", "Stage3", "4", "×", "2", "96", "Stage4", "2", "×", "1", "192", "Conv5", "2", "×", "1", "512", "GlobalPool", "1", "×", "1", "512", "FC", "–", "M", "Layer", "Output", "size", "Output", "channels"],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Table1-1.png",
+  "captionBoundary": {
+    "x1": 155.56500244140625,
+    "y1": 53.080753326416016,
+    "x2": 281.17352294921875,
+    "y2": 66.16302490234375
+  }
+}, {
+  "renderDpi": 900,
+  "name": "2",
+  "page": 4,
+  "figType": "Table",
+  "regionBoundary": {
+    "x1": 156.0,
+    "y1": 201.6,
+    "x2": 386.0,
+    "y2": 370.72
+  },
+  "caption": "Table 2 Pseudo-code of real-time noise cancellation in the CNN-based SFANC method.",
+  "imageText": ["for", "𝑖", "in", "{1,…", ",", "𝐿}", "do", "#", "Online", "noise", "reduction", "in", "the", "real-time", "controller:", "𝑦𝑖(𝑛)", "=", "𝐱T𝑖", "(𝑛)𝐰(𝑛)", "⊳", "Generate", "the", "control", "signal.", "𝑒𝑖(𝑛)", "=", "𝑑𝑖(𝑛)", "−", "𝑦𝑖(𝑛)", "∗", "𝑠(𝑛)", "⊳", "Compute", "the", "error", "signal.", "#", "Control", "filter", "selection", "in", "the", "co-processor:", "𝑋𝑖", "←", "𝑀𝑒𝑙(𝐱𝑖)", "⊳", "Obtain", "the", "mel-spectrogram", "as", "network", "input.", "𝐰′", "←", "𝐶𝑁𝑁(𝑋𝑖;𝛩∗),𝐰′", "∈", "{𝐰𝑗}𝑀𝑗=1", "⊳", "Select", "a", "pre-trained", "control", "filter.", "#", "Updating", "the", "control", "filter:", "if", "𝐰′", "!", "=", "𝐰", "do", "⊳", "If", "𝐰′", "is", "different", "from", "the", "current", "one.", "𝐰", "←", "𝐰′", "⊳", "Update", "𝐰", "for", "subsequent", "noise", "reduction.", "end", "for", "Input:", "The", "reference", "signal", "has", "𝐿", "seconds,", "and", "the", "𝑖th", "frame", "is", "𝐱𝑖.", "The", "number", "of", "pre-trained", "control", "filters", "is", "𝑀", ".", "The", "initial", "coefficients", "of", "control", "filter", "𝐰", "are", "set", "to", "zero,", "𝐰", "=", "𝟎.", "𝑀𝑒𝑙(⋅)", "represents", "obtaining", "the", "mel-spectrogram", "of", "the", "input", "noise.", "𝐶𝑁𝑁(⋅)", "denotes", "the", "2D", "CNN", "and", "𝛩∗", "refers", "to", "its", "parameters", "after", "training.", "while", "the", "real-time", "controller", "performs", "at", "the", "sampling", "rate", "in", "parallel.", "Algorithm", "Description:", "The", "co-processor", "operates", "at", "the", "frame", "rate,"],
+  "renderURL": "d:\\Projects\\llm-wiki\\raw\\papers\\yin-2023-selective-fixed-filter-anc-headphones\\images\\fig-paper-paper-Table2-1.png",
+  "captionBoundary": {
+    "x1": 157.89500427246094,
+    "y1": 186.23974609375,
+    "x2": 385.5242614746094,
+    "y2": 199.322021484375
+  }
+}]

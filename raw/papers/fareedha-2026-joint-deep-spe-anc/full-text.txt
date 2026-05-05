@@ -1,0 +1,374 @@
+ICASSP 2026 - 2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) | 979-8-3315-6701-9/26/$31.00 ©2026 IEEE | DOI: 10.1109/ICASSP55912.2026.11461474
+
+
+
+
+                                                                                                                                                                                          JOINT DEEP SECONDARY PATH ESTIMATION AND ADAPTIVE CONTROL FOR ACTIVE
+                                                                                                                                                                                                                   NOISE CANCELLATION
+
+                                                                                                                                                                                                         Fareedha1              Vasundhara1                Asutosh Kar2                Mads Græsbøll Christensen3
+                                                                                                                                                                                                1
+                                                                                                                                                                                               Department of Electronics and Communication Engineering, National Institute of Technology,
+                                                                                                                                                                                                   Warangal, Telangana, India. ff23ecr2r02@student.nitw.ac.in; vasundhara@nitw.ac.in
+                                                                                                                                                                                          2
+                                                                                                                                                                                            School of Architecture, Built Environment, Computing and Engineering, Birmingham City University,
+                                                                                                                                                                                                                     Birmingham B47BD, UK. asutosh.kar@bcu.ac.in
+                                                                                                                                                                                                   3
+                                                                                                                                                                                                     Department of Electronics Systems, Aalborg University, Denmark, mgc@es.aau.dk
+
+
+                                                                                                                                                                                                                    ABSTRACT                                            classical adaptive filters and depend on iterative adaptation
+                                                                                                                                                                                                                                                                        rather than data-driven modeling.
+                                                                                                                                                                                         Accurate secondary path estimation (SPE) is crucial for the                        Recent research has explored deep learning-based ANC
+                                                                                                                                                                                         stability and performance of active noise cancellation (ANC)                   frameworks, such as selective fixed filter ANC (SFANC) vari-
+                                                                                                                                                                                         systems, especially under time-varying acoustic conditions.                    ants [12, 13] and generative fixed filter ANC (GFANC) vari-
+                                                                                                                                                                                         Classical adaptive algorithms converge slowly and degrade                      ants [14, 15, 16, 17]. These methods improve anti-noise gen-
+                                                                                                                                                                                         in dynamic environments. This paper proposes an end-to-                        eration by leveraging data-driven modelling. However, they
+                                                                                                                                                                                         end deep learning framework that jointly performs secondary                    assume a fixed secondary path during both training and in-
+                                                                                                                                                                                         path estimation and adaptive control. A Deep Secondary Path                    ference, which prevents adaptation to non-stationary acoustic
+                                                                                                                                                                                         Estimator (DeepSPE) leverages convolutional, recurrent, and                    environments and limits real-world applicability.
+                                                                                                                                                                                         attention layers to predict the secondary path in real time.                       To overcome these limitations, this work introduces a
+                                                                                                                                                                                         The estimated path conditions an ANC-Net controller, which                     fully data-driven framework that jointly estimates the sec-
+                                                                                                                                                                                         generates anti-noise signals through dynamic filter selection                  ondary path and generates adaptive control signals in real
+                                                                                                                                                                                         without iterative adaptation. Experiments on real and simu-                    time. The key contributions are:
+                                                                                                                                                                                         lated impulse responses demonstrate that the proposed system
+                                                                                                                                                                                         achieves superior noise attenuation, reduced latency, and im-                       • Deep Secondary Path Estimator: A convolutional, re-
+                                                                                                                                                                                         proved robustness compared to both traditional adaptive fil-                          current, and attention network that captures local pat-
+                                                                                                                                                                                         ters and recent deep ANC approaches.                                                  terns, temporal dependencies, and highlights important
+                                                                                                                                                                                                                                                                               regions to predict secondary path changes in real time.
+                                                                                                                                                                                            Index Terms— Active noise control, secondary path es-
+                                                                                                                                                                                         timation, deep learning, real-time systems.                                         • ANC-Net Controller: squeeze-and-excitation(SE) blocks
+                                                                                                                                                                                                                                                                               compress and reweight features to emphasize dominant
+                                                                                                                                                                                                                                                                               noise components, while temporal attention focuses
+                                                                                                                                                                                                              1. INTRODUCTION                                                  on noisy time intervals for more effective anti-noise
+                                                                                                                                                                                                                                                                               generation via adaptive filter selection.
+                                                                                                                                                                                         Active noise cancellation (ANC) is widely deployed to sup-
+                                                                                                                                                                                                                                                                             • Dual-Stream End-to-End Design: Two parallel streams
+                                                                                                                                                                                         press low-frequency noise where passive methods are inef-
+                                                                                                                                                                                                                                                                               for path estimation and noise cancellation enable
+                                                                                                                                                                                         fective [1]. A critical factor in ANC design is the accurate
+                                                                                                                                                                                                                                                                               frame-level prediction and low-latency sample-level
+                                                                                                                                                                                         modeling of the secondary path, the transfer function between
+                                                                                                                                                                                                                                                                               control without iterative adaptation.
+                                                                                                                                                                                         the control filter output and the error microphone, which di-
+                                                                                                                                                                                         rectly influences stability and achievable attenuation [2]. Tra-                    • Comprehensive Evaluation: Tests on real and simulated
+                                                                                                                                                                                         ditional methods for secondary path modelling rely on either                          impulse responses under diverse noise scenarios show
+                                                                                                                                                                                         offline identification [3, 4, 5] or online adaptive filtering [6].                    improved accuracy, robustness, and latency over classi-
+                                                                                                                                                                                         While effective in stationary conditions, these approaches re-                        cal and recent deep ANC methods.
+                                                                                                                                                                                         quire iterative adaptation and manual tuning, making them
+                                                                                                                                                                                         unsuitable for rapidly changing environments.                                                  2. PROPOSED FRAMEWORK
+                                                                                                                                                                                             Classical ANC approaches [7, 8, 9, 10, 11] employ adap-
+                                                                                                                                                                                         tive filtering with secondary-path estimation (either offline                  This section presents the proposed end-to-end ANC frame-
+                                                                                                                                                                                         or online) to improve robustness under time-varying acous-                     work, comprising two deep learning modules. The DeepSPE
+                                                                                                                                                                                         tic conditions. However, these approaches are still based on                   module predicts the secondary path from ANC input–output
+
+                                                                                                                                                                                         979-8-3315-6701-9/26/$31.00 ©2026 IEEE                                  15177                                                            ICASSP 2026
+
+                                                                                                                                                                                                    Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 14:46:02 UTC from IEEE Xplore. Restrictions apply.
+                                                                                                                Squeeze        Excitation     Recalibration
+
+
+
+
+                                                                                                                                         id
+                                                                                                                  P
+
+
+                                                                                                                        Lu
+                                                                                                                GA
+
+
+
+
+                                                                                                                                       mo
+                                                                                                                      FC
+
+
+                                                                                                                      FC
+                                                                                                                      Re
+                                                                                     Estimated
+
+
+
+
+                                                                                                                                    Sig
+                                                                                   secondary path
+                                                                                                          32 × H × W                32 × H × W
+                                                                                                                                                  Scale
+                                                                                                       ReLU
+                                                                                 Reference signal      BN
+                                                                                                     Convolution layer
+
+
+
+
+                                                                                                                                                          LSTM
+                                                                                                                                      Backward                   Forward
+                                                                                                                                        layer                     layer
+ Fig. 1. Dataset preparation for secondary-path estimation.
+
+                                                                                     Binary weight
+       Table 1. DeepSPE model architecture for SPE.                                      vector       Sigmoid              Concatenate
+   Layer Type          Parameters                       Output Shape                                                      128                       128 × T
+                                                                                                      K Sub-filters
+   Conv1D              64 filters, kernel=3, stride=1   [64 × T ]
+                                                                                                                FC Layer             Multi-head attention
+   Conv1D              128 filters, kernel=3            [128 × T ]
+   BiLSTM              128 units (bidirectional)        [256 × T ]
+   Attention           Dot-product, 1 head              [256]
+   Fully Connected     Output size = L (IR length)      [L]
+                                                                                Fig. 2. Block diagram of the proposed ANC-Net controller.
+
+pairs, while the ANC-Net module generates anti-noise sig-
+nals by producing binary weights to select pre-trained sub-                                          h2 = ReLU(Conv1D2 (h1 )),                                         (1)
+control filters dynamically [18, 19]. Together, these modules                  A bidirectional LSTM layer capture long-range dependencies
+enable low-latency and robust noise cancellation under vary-                   and prioritize informative frames, h3 = BiLSTM(h2 ). An
+ing acoustic conditions.                                                       attention layer weights the LSTM outputs to focus on relevant
+                                                                               time steps:
+2.1. Dataset Generation for SPE
+                                                                                                                 exp(w⊤ h3,t )
+A supervised dataset is constructed using real and simulated                                            αt = P            ⊤
+                                                                                                                                 ,
+                                                                                                                 k exp(w h3,i )
+Room Impulse Responses (RIR) sourced from publicly avail-
+able databases [20]. Multi-channel RIRs are converted to
+                                                                                                                   X
+                                                                                                           hattn =     αt h3,t ,                                       (2)
+mono to ensure consistency, and each impulse response serves                                                               t
+as the ground truth for a distinct secondary path. Synthetic in-
+                                                                               A fully connected layer (FC) maps the attended features to
+put noise, denoted by x(n), is processed through a classical
+                                                                               the estimated path:
+FxLMS-based ANC controller to generate the controller out-
+put y(n). The desired signal, d(n), is obtained by convolv-
+ing x(n) with a simulated primary path P (Z). The FxLMS                                                      Ŝ(z) = FC(hattn ),                                       (3)
+controller emulates realistic ANC behavior under a fixed sec-                  The model is trained using the mean squared error (MSE) be-
+ondary path S(z). The training tuples {x(n), y(n), S(z)}                       tween the true and estimated secondary paths:
+are then constructed, where the model learns to predict the
+estimated secondary path Ŝ(z) from x(n) and y(n). The                                                          L              2
+                                                                                                             1 X
+dataset generation pipeline is illustrated in Fig. 1, and the                                        L=            S(z) − Ŝ(z) .                                      (4)
+                                                                                                             L i=1
+same procedure is applied to generate the test set using un-
+seen RIRs, ensuring generalization across varying acoustic                     This architecture learns complex ANC input–output map-
+environments.                                                                  pings with secondary path characteristics, enabling real-time
+2.2. DeepSPE Architecture                                                      estimation under varying acoustic conditions.
+                                                                               2.3. ANC-Net Controller
+As shown in Table 1, the DeepSPE model takes the signal pair
+(x(n), y(n)) ∈ RT , where T is the frame length, and outputs                   As shown in Fig. 2, the ANC-Net module generates dynamic
+the estimated secondary path Ŝ(z) ∈ RL , with L denoting                      frame-wise binary weights for selecting sub-control filters,
+the impulse response length. The two signals are concate-                      using the primary signal x(n) and the predicted Ŝ(z) from
+nated along the channel dimension to form the input tensor                     DeepSPE. These inputs are concatenated to form a joint repre-
+z(n) = Concat[x(n), y(n)], z ∈ R2×T . A series of 1D                           sentation, zANC (n) = Concat[x(n), Ŝ(z)], zANC ∈ R2×T .
+convolutional layers captures local temporal dependencies:                     Local temporal features are extracted using stacked 2D
+                                                                               convolutional layers. To enhance feature discrimination,
+                     h1 = ReLU(Conv1D1 (z)),                                   channel-wise squeeze-and-excitation (SE) blocks are applied,
+
+                                                                        15178
+
+           Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 14:46:02 UTC from IEEE Xplore. Restrictions apply.
+                                                                                                          Table 2. Performance comparison and ablation study for sec-
+         So ise
+               e
+           u rc                                                                                           ondary path estimation.
+           No
+
+
+
+                           Primary path
+                                                                                                               Method / Variant           NMSE (dB)    Correlation. (R)
+                   x(n)        P(z)           d(n)                                                             Eriksson’s method             -7.63         0.9297
+  Reference
+  Microphone
+                                                                                                               Kuo’s method                 -10.17         0.9555
+                x(n)                                                                                           Akhtar’s method              -12.35         0.9721
+                                        DeepSPE
+                                          S(z)                    Error                                        Proposed DeepSPE (Full)      -16.27         0.9887
+                          y(n)                                 Microphone                                      w/o Attention                -13.10         0.9420
+                          DeepANC                    e(n)                                                      w/o BiLSTM                   -10.90         0.9330
+                            W(z)                                                                               Conv1D Only                   -8.30         0.9060
+                                                            1st sub control
+                                                                   2nd sub control
+                                                                          k-th sub control
+                                                                                 K-th sub control
+        Serial-Parallel                                                                                   2.4. End-to-End System Integration
+         Conversion               Dynamic
+                                 Control Filter                                                           The proposed framework, Fig.3, integrates DeepSPE and
+                                                                                                          ANC-Net into a unified real-time ANC system under sub-
+         Min-Max
+        Normalization
+                                 ANC-Net                                                                  band processing. DeepSPE estimates the secondary path
+                                                  Binary Weight Vector                                    Ŝ(z), while ANC-Net processes the normalized, serial-to-
+                                                                                                          parallel input with Ŝ(z) to generate binary weights w(n)
+                                                                                                          for selecting K sub-control filters from a pre-trained bank
+Fig. 3. Proposed end-to-end ANC framework with DeepSPE-                                                   {f1 , . . . , fK } to form a composite control filter:
+                                                                                                                                           K
+based secondary path estimation, subband processing, and                                                                                   X
+ANC-Net control for broadband noise attenuation.                                                                                   F (z) =   wk (n) · fk ,
+                                                                                                                                         k=1
+
+                                                                                                                               y(n) = x(n) ∗ F (z),                       (7)
+i1 = SE(Conv2D(zANC )). These features are passed through
+a bidirectional LSTM to capture long-term dependencies,
+i2 = BiLSTM(i1 ). A multi-head attention module aggregates                                                   Finally, the anti-noise signal ŷ(n) is generated by con-
+contextual information across multiple subspaces:                                                         volving the y(n) with the estimated secondary path:
+                                                                                                                               ŷ(n) = Ŝ(z) ∗ y(n),                      (8)
+                          iattn = MultiHeadAttn(i2 ),                                               (5)
+                                                                                                          The residual error signal is computed as:
+The attended features are then passed through a fully con-                                                                     e(n) = d(n) − ŷ(n).                       (9)
+nected layer followed by a binary activation function, such as
+sigmoid thresholding , to produce binary weights:                                                         The residual error is then fed back for adaptive control.
+                                                                                                          The overall process is summarized in Algorithm 1, where
+               w(n) = Threshold(Sigmoid(FC(iattn ))),                                               (6)   secondary path estimation and control signal generation
+                                                                                                          are performed jointly, enabling frame-level inference and
+Where w(n) ∈ {0, 1}K , which is then used to select sub-                                                  sample-level noise cancellation without fixed-path assump-
+control filters dynamically from a pre-trained filter bank.                                               tions. This dual-stream design enhances robustness under
+                                                                                                          dynamic acoustic conditions compared to conventional ANC
+Algorithm 1 DeepSPE + ANC-Net based End-to-End ANC                                                        methods.
+Require: Reference x(n), Primary path P (z)
+Ensure: Anti-noise ŷ(n), Residual error e(n)                                                                        3. SIMULATIONS AND RESULTS
+ 1: procedure ANC-S YSTEM
+                                                                                                          The ANC system was implemented at 16 kHz with bandpass
+ 2:    for each frame f = 1 to F do
+                                                                                                          filtering (20–7980 Hz). DeepSPE was trained on 9000 im-
+ 3:        x(n) ← Preprocessing(x(n))
+                                                                                                          pulse responses (500 for testing) from the AIR and RWCP
+ 4:        Ŝ(z) ← DeepSPE(x(n))
+                                                                                                          databases using 512-sample frames (32 ms, 50% overlap) and
+ 5:        F (z) ← ANC-Net(x(n), Ŝ(z))
+                                                                                                          optimized with Adam (1×10−4 ) to minimize MSE. ANC-Net
+ 6:        y(n) ← x(n) ∗ F (z)
+                                                                                                          was trained on 80,000 synthetic samples, with 2000 each for
+ 7:        ŷ(n) ← Ŝ(z) ∗ y(n)
+                                                                                                          validation and testing [21]. During inference, it generates bi-
+ 8:        d(n) ← P (z) ∗ x(n)
+                                                                                                          nary weights to select from 15 pre-trained sub-control filters.
+ 9:        e(n) ← d(n) − ŷ(n)
+                                                                                                          Performance was assessed using normalized mean square er-
+10:        Update ANC-Net using e(n)
+                                                                                                          ror (NMSE), correlation coefficient, residual error power, and
+11:    end for
+                                                                                                          per-frame inference latency. All models were implemented in
+12: end procedure
+                                                                                                          PyTorch and trained on an NVIDIA RTX 3090 GPU.
+
+                                                                                                     15179
+
+               Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 14:46:02 UTC from IEEE Xplore. Restrictions apply.
+Fig. 4. Comparison of measured and estimated secondary
+path impulse responses using classical methods and proposed
+DeepSPE.
+
+
+   Table 3. Performance Comparison and Ablation Study
+ Method / Variant      NMSE (dB) Parameters (M) Latency (ms)
+ FxLMS (fixed S(z))       -5.42          –          0.10
+ FxLMS (adaptive S(z))    -7.15          –          0.15
+ 1D CNN                   -8.64         0.42        0.30
+ ResNet18 [22]           -10.82        11.20        1.85                       Fig. 5. Performance comparison of residual noise levels for
+ ResNet50 [22]           -11.25        23.50        2.60                       different ANC algorithms under aircraft noise.
+ DenseNet121 [23]        -11.68         7.98        2.20
+                        Ablation Study
+ ANC-Net (full)          -12.38         1.05        0.43
+ w/o SE Block            -10.92         0.94        0.49                       3.3. End-to-End ANC Framework Performance
+ w/o BiLSTM               -9.87         0.78        0.47
+ w/o Attention            -8.72         0.83        0.46                       As shown in Fig. 5, the residual noise plots show that the
+ Conv2D Only              -8.15         0.63        0.44                       proposed system achieves the lowest residual levels with fast
+                                                                               convergence, outperforming classical approaches (Eriksson,
+                                                                               Kuo, Akhtar) and deep ANC baselines (SFANC, GFANC,
+3.1. Performance of DeepSPE for SPE                                            GFANC-Kalman). Methods lacking accurate secondary path
+                                                                               modeling exhibit higher steady-state noise, confirming that
+As summarized in Table 2, DeepSPE achieves the highest ac-
+                                                                               precise real-time Ŝ(z) estimation, integrated with a deep
+curacy (NMSE = –16.27 dB, R = 0.9887), outperforming
+                                                                               learning controller, is key to ANC performance. The results
+Eriksson’s, Kuo’s, and Akhtar’s methods by 8.64 dB, 6.10 dB,
+                                                                               were consistent in five random trials, with less than 0.3 dB
+and 3.92 dB, respectively. The ablation study further shows
+                                                                               variance, demonstrating robustness and reproducibility.
+that removing the attention block reduces NMSE to –13.10
+dB, excluding BiLSTM lowers it to –10.90 dB, and using
+only Conv1D degrades performance to –8.30 dB, confirming                                                4. CONCLUSION
+the importance of temporal modeling and attention-driven re-
+finement. Fig. 4 compares the estimated and true secondary                     This paper presented an end-to-end deep learning framework
+path impulse responses, where DeepSPE closely matches the                      for ANC that unifies secondary path estimation and adaptive
+ground truth across the time domain, while classical methods                   control. The proposed DeepSPE module enables accurate,
+exhibit main-lobe deviations and side-lobe oscillations.                       real-time prediction of the secondary path, while ANC-Net
+3.2. Performance of ANC-Net                                                    leverages these predictions to generate anti-noise signals dy-
+                                                                               namically. Unlike classical adaptive filters or fixed-path deep
+Table 3 shows that ANC-Net achieves the best accuracy                          ANC approaches, the joint design eliminates iterative adapta-
+(NMSE = –12.38 dB) with low complexity (1.05 M params)                         tion and improves robustness to changing acoustic conditions.
+and fast inference (0.43 ms). It outperforms larger models                     Extensive experiments with real and simulated impulse re-
+like ResNet50 and DenseNet121 by 1.1–1.6 dB while using                        sponses confirm that the system delivers superior noise atten-
+5–20× fewer parameters and up to 6× lower latency. Ablation                    uation, reduced latency, and better generalization compared
+results indicate that removing SE, BiLSTM, or attention re-                    to state-of-the-art baselines. These results highlight the po-
+duces parameters but worsens NMSE by 1.46–3.66 dB, while                       tential of data-driven ANC to support next-generation appli-
+still yielding higher latency than the full model, highlighting                cations in wearables, automotive cabins, and immersive audio
+the efficiency of the integrated architecture.                                 systems, where robustness and low latency are essential.
+
+                                                                        15180
+
+           Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 14:46:02 UTC from IEEE Xplore. Restrictions apply.
+                       5. REFERENCES                                           [13] D. Shi, B. Lam, K. Ooi, X. Shen, and W.-S. Gan, “Se-
+                                                                                   lective fixed-filter active noise control based on convo-
+[1] Y. Kajikawa, W.-S. Gan, and S. M. Kuo, “Recent ad-                             lutional neural network,” Signal Processing, vol. 190, p.
+    vances on active noise control: open issues and innovative                     108317, Jan. 2022.
+    applications,” APSIPA Transactions on Signal and Infor-
+    mation Processing, vol. 1, no. 1, 2012.                                    [14] Z. Luo, D. Shi, X. Shen, J. Ji, and W.-S. Gan,
+                                                                                   “Deep Generative Fixed-Filter Active Noise Control,”
+[2] Ming Zhang, Hui Lan, and Wee Ser, “An improved sec-                            in ICASSP 2023 - 2023 IEEE International Conference
+    ondary path modeling method for active noise control                           on Acoustics, Speech and Signal Processing (ICASSP),
+    systems,” IEEE Signal Processing Letters, vol. 7, no. 4,                       IEEE, Jun. 2023, pp. 1–5.
+    pp. 73–75, Apr. 2000.
+                                                                               [15] Z. Luo, D. Shi, W.-S. Gan, and Q. Huang, “Delayless
+[3] S. M. Kuo and D. R. Morgan, ”Active Noise Control Sys-                         Generative Fixed-Filter Active Noise Control Based on
+    tems: Algorithms and DSP Implementations” New York,                            Deep Learning and Bayesian Filter,” IEEE/ACM Trans-
+    NY, USA: John Wiley & Sons, 1996.                                              actions on Audio, Speech, and Language Processing, vol.
+[4] S. M. Kuo and D. Vijayan, “Optimized secondary path                            32, pp. 1048–1060, 2024.
+    modeling technique for active noise control systems,” in                   [16] Z. Luo, D. Shi, X. Shen, J. Ji, and W.-S. Gan, “GFANC-
+    Proceedings of APCCAS’94 - 1994 Asia Pacific Confer-                           Kalman: Generative Fixed-Filter Active Noise Control
+    ence on Circuits and Systems, IEEE, pp. 370–375.                               With CNN-Kalman Filtering,” IEEE Signal Processing
+[5] S. M. Kuo and D. R. Morgan, “Active noise control: a                           Letters, vol. 31, pp. 276–280, 2024.
+    tutorial review,” Proceedings of the IEEE, vol. 87, no. 6,                 [17] Z. Luo, H. Ma, D. Shi, and W.-S. Gan, “GFANC-
+    pp. 943–975, Jun. 1999.                                                        RL: Reinforcement Learning-based Generative Fixed-
+[6] L. J. Eriksson and M. C. Allie, “On-line Identification of                     filter Active Noise Control,” Neural Networks, vol. 180,
+    Secondary Paths in Active Noise Control Systems.” Pro-                         p. 106687, Dec. 2024.
+    ceedings of the IEEE International Conference on Acous-
+                                                                               [18] H. H. Dam, S. Nordholm, A. Cantoni, and J. M. deHaan,
+    tics, Speech, and Signal Processing (ICASSP), 1989, pp.
+                                                                                   “Iterative Method for the Design of DFT Filter Bank,”
+    1988–1991.
+                                                                                   IEEE Transactions on Circuits and Systems II: Express
+[7] P. A. Nelson and S. J. Elliott, ”Active Control of Sound”.                     Briefs, vol. 51, no. 11, pp. 581–586, Nov. 2004.
+    1993.
+                                                                               [19] M. Vetterli and D. Le Gall, “Perfect reconstruction FIR
+[8] L. J. Eriksson and M. C. Allie, “Use of random noise for                       filter banks: some properties and factorizations,” IEEE
+    on-line transducer modeling in an adaptive active atten-                       Transactions on Acoustics, Speech, and Signal Process-
+    uation system,” The Journal of the Acoustical Society of                       ing, vol. 37, no. 7, pp. 1057–1071, Jul. 1989.
+    America, vol. 85, no. 2, pp. 797–802, Feb. 1989.
+                                                                               [20] OpenSLR, Room Impulse Response and Noise
+[9] M. T. Akhtar, M. Abe, and M. Kawamata, “A new vari-                            Database (SLR28). [Online]. Available: https:
+    able step size LMS algorithm-based method for improved                         //www.openslr.org/28. Accessed: Aug. 11, 2025.
+    online secondary path modeling in active noise control
+    systems,” IEEE Transactions on Audio, Speech and Lan-                      [21] Z. Luo, D. Shi and W.-S. Gan, ”A Hybrid SFANC-
+    guage Processing, vol. 14, no. 2, pp. 720–726, Mar. 2006.                      FxNLMS Algorithm for Active Noise Control Based on
+                                                                                   Deep Learning,” in IEEE Signal Processing Letters, vol.
+[10] Y. Ma, Y. Xiao, L. Ma, and K. Khorasani, “A robust                            29, pp. 1102-1106, 2022.
+    feedforward hybrid active noise control system with on-
+    line secondary-path modelling,” IET Signal Processing,                     [22] K. He, X. Zhang, S. Ren, and J. Sun, “Deep Residual
+    vol. 17, no. 1, Jan.                                                           Learning for Image Recognition,” in 2016 IEEE Con-
+                                                                                   ference on Computer Vision and Pattern Recognition
+[11] T. Padhi, M. Chandra, and A. Kar, “Performance eval-                          (CVPR), Jun. 2016. Accessed: Sep. 08, 2024.
+    uation of hybrid active noise control system with online
+    secondary path modeling,” Applied Acoustics, vol. 133,                     [23] G. Huang, Z. Liu, L. Van Der Maaten, and K. Q. Wein-
+    pp. 215–226, Apr. 2018.                                                        berger, “Densely Connected Convolutional Networks,” in
+                                                                                   2017 IEEE Conference on Computer Vision and Pattern
+[12] D. Shi, W.-S. Gan, B. Lam, and S. Wen, “Feedforward                           Recognition (CVPR), IEEE, Jul. 2017.
+    Selective Fixed-filter Active Noise Control: Algorithm
+    and Implementation,” IEEE/ACM Transactions on Audio,
+    Speech, and Language Processing, pp. 1–1, 2020.
+
+                                                                        15181
+
+           Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 14:46:02 UTC from IEEE Xplore. Restrictions apply.
+

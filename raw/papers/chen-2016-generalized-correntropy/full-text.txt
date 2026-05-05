@@ -1,0 +1,1713 @@
+1
+Generalized Correntropy for Robust Adaptive Filtering
+Badong Chen1, Lei Xing1, Haiquan Zhao2, Nanning Zheng1, JoséC. Príncipe1,3
+1. Institute of Artificial Intelligence and Robotics, Xi'an Jiaotong University, Xi'an, 710049, China 2. School of Electrical Engineering, Southwest Jiaotong University, Chengdu, China 3. Department of Electrical and Computer Engineering, University of Florida, Gainesville, FL 32611 USA
+Abstract--As a robust nonlinear similarity measure in kernel space, correntropy has received increasing attention in domains of machine learning and signal processing. In particular, the maximum correntropy criterion (MCC) has recently been successfully applied in robust regression and filtering. The default kernel function in correntropy is the Gaussian kernel, which is, of course, not always the best choice. In this work, we propose a generalized correntropy that adopts the generalized Gaussian density (GGD) function as the kernel (not necessarily a Mercer kernel), and present some important properties. We further propose the generalized maximum correntropy criterion (GMCC), and apply it to adaptive filtering. An adaptive algorithm, called the GMCC algorithm, is derived, and the mean square convergence performance is studied. We show that the proposed algorithm is very stable and can achieve zero probability of divergence (POD). Simulation results confirm the theoretical expectations and demonstrate the desirable performance of the new algorithm.
+Key Words: Correntropy; generalized correntropy; adaptive filtering, GMCC algorithm.
+I. INTRODUCTION
+Selecting a proper cost function (usually a statistical measure of the error signals) is a key issue in adaptive filtering theory and applications [1-3]. The mean square error (MSE) is widely used as a cost function since it has attractive features, such as smoothness, convexity, mathematical tractability, low computational burden and optimality under Gaussian assumption. The well-known least mean square (LMS) algorithm and its variants, such as normalized LMS (NLMS) and variable step-size LMS (VSSLMS), were developed under this criterion [1, 2]. The MSE is desirable if the signals are Gaussian distributed. In
+
+2
+non-Gaussian situations, however, its performance may degrade considerably and in these cases, a non-quadratic cost will be, in general, better than MSE [3].
+Generally speaking, there are two types of non-Gaussian distributions: light-tailed (e.g. uniform, binary,
+etc.) and heavy-tailed (e.g. Laplace,  -stable, etc.) distributions. When the desired signals are disturbed by
+light-tailed non-Gaussian noises, a higher-order statistical (HOS) measure of the error is usually more desirable. A typical example is the least mean fourth (LMF) family algorithms, which use the mean even power of the error as the cost function [4]. Compared with the LMS algorithm, the LMF may achieve a faster convergence speed and a lower steady-state mean square deviation (MSD) especially in light-tailed noises. One drawback of the LMF algorithm however is that the stability is not guaranteed, which depends on the input and noise powers, and the initial values of the weights. A more general class of algorithms are the least mean p -power (LMP) family algorithms, which adopt the p -order absolute moment of the error as the adaptation cost [5].
+When the desired signals are disturbed by heavy-tailed impulsive noises (which may cause large outliers), a lower-order statistical (LOS) measure of the error is usually more robust (i.e. less sensitive to impulsive interferences). For example, the sign algorithm (SA), which employs the mean absolute value of the error as the cost function, is rather robust to the presence of large noises [6-8]. The convergence speed and steady-state performance of the SA algorithm is however not so good in general. In the literature many other robust cost functions have been proposed to develop robust adaptive filtering algorithms. Typical examples include mixed-norm [9, 10], M-estimation cost [11,12], and error entropy [13-18]. Particularly in recent years, the maximum correntropy criterion (MCC) has been successfully used in robust adaptive filtering, wherein the filter weights are adapted such that the correntropy between the desired signal and filter output is maximized [19-24]. The correntropy is a nonlinear and local similarity measure directly related to the probability of how similar two random variables are in a neighborhood of the joint space controlled by the kernel bandwidth, which also has its root in Renyi's entropy (hence the name
+
+3
+"correntropy") [13, 19]. Since correntropy is insensitive to outliers especially with a small kernel bandwidth, it is naturally a robust adaptation cost in presence of heavy-tailed impulsive noises.
+The kernel function in correntropy is usually a Gaussian kernel, which is desirable due to its smoothness and strict positive-definiteness. With a Gaussian kernel, the correntropy induces a nonlinear metric called the correntropy induced metric (CIM) which behaves like an L2 norm when data are relatively small compared with the kernel bandwidth, an L1 norm as data get larger, and an L0 norm when data are far away from the origin [19, 25]. However, Gaussian kernel is, of course, not always the best choice. In the present work, we propose to use the generalized Gaussian density (GGD) [26, 27] function (which is not necessarily a Mercer kernel) as a kernel function in correntropy, and the new correntropy is called the generalized correntropy. Some important properties of the generalized correntropy are presented. In
+particular, we show that the order- generalized correntropy induced metric (GCIM) or generalized correntropic loss (GC-loss) function behaves like different norms (from L to L0 ) of the data in different
+regions. Similar to the original correntropy with Gaussian kernel, the generalized correntropy can also be used as
+an optimization cost in estimation-related problems. It can be proven that in essence the generalized maximum correntropy criterion (GMCC) based estimation is a smoothed maximum a posteriori probability (MAP) estimation, including the MAP and the least mean p -power (LMP) estimation as the extreme cases. In this work, we focus mainly on applying the GMCC criterion to adaptive filtering. We show that the optimal solution of GMCC filtering is in form similar to the well-known Wiener solution, except that the autocorrelation matrix and cross-correlation vector are weighted by an error nonlinearity. If the signals involved are zero-mean Gaussian, the optimal solution will equal to the Wiener solution. Under the GMCC criterion, a stochastic gradient based adaptive filtering algorithm, called the GMCC algorithm, is developed. The mean-square convergence performance of the GMCC algorithm is analyzed. In particular, we present a simple example to show that the GMCC will have a zero probability of divergence (POD). A theoretical
+
+4
+
+value of the steady-state excess mean square error (EMSE) of the GMCC algorithm is also derived. Simulation results confirm the theoretical expectations and the desirable performance of the GMCC.
+
+The rest of the paper is organized as follows. In section II, we define the generalized correntropy, and present some important properties. In section III, we propose the generalized maximum correntropy criterion (GMCC). In section IV, we apply the GMCC criterion to adaptive filtering and develop the GMCC algorithm. In section V, we analyze the mean square convergence of the GMCC algorithm. In section VI, we present Monte Carlo simulation results to verify the theoretical results and demonstrate the performance of the new algorithm. Finally in section VII, we give the conclusion.
+
+II. GENERALIZED CORRENTROPY
+
+A. Definition
+
+Given two random variables X and Y , the correntropy is defined by [19, 28]
+
+V(X ,Y )  E[(X ,Y )]  (x, y)dFXY (x, y)
+
+(1)
+
+where E denotes the expectation operator,  (,) is a shift-invariant Mercer kernel, and FXY (x, y) denotes the joint distribution function of (X ,Y) . Without mentioned otherwise, the kernel function of correntropy is
+the Gaussian kernel:
+
+ (x, y)  G (e)  1 exp   2 e   exp 2  1 e2  (2)
+2  2  2
+
+where e  x  y ,   0 is the kernel bandwidth, and   1 2 2 is the kernel parameter. The correntropy
+
+V(X ,Y ) can also be expressed as
+
+V(X ,Y )  E (X )T (Y )  traceR(X )(Y ) 
+
+(3)
+
+5
+
+where R(X )(Y )  E ( X )(Y )T  , and (.) denotes a nonlinear mapping induced by  , which transforms its argument into a high-dimensional (infinite for Gaussian kernels) Hilbert space F , satisfying (X )T (Y )   (X ,Y ) [19]. The correntropy is therefore essentially a second-order statistic of the
+mapped feature space data. There is a well-known generalization of Gaussian density function called the generalized Gaussian
+density (GGD) function, which with zero-mean is given by [26, 27]
+
+
+
+ e
+
+
+
+G , (e) 
+
+exp    , exp  e 
+
+(4)
+
+2(1  )   
+
+
+
+
+
+where (.) is the gamma function,  0 is the shape parameter,   0 is the scale (bandwidth) parameter,
+  1   is the kernel parameter, and ,   2(1 ) is the normalization constant. This
+parametric family of symmetric distributions include the Gaussian (   2 ) and Laplace (   1 ) distributions as the special cases. Further, as   , the GGD density converges point-wise to a uniform density on ( ,  ) .
+
+In this work, we use the GGD density function as the kernel function of correntropy, and define
+
+V, ( X ,Y )  E[G, (EX Y )]  E[G, ( X Y )]
+
+(5)
+
+where EX Y  X Y .To make a distinction between (5) and the correntropy with Gaussian kernel, we call it the generalized correntropy. Clearly, the correntropy with Gaussian kernel corresponds to the generalized correntropy with  2 .
+Remark 1: It is worth noting that in the generalized correntropy, the kernel function does not necessarily
+satisfy the Mercer's condition. Actually, the kernel function  (x, y)  G, (x  y) is positive definite if and only if 0    2 (see [29] page 434).
+
+6
+
+In practice, the joint distribution of X and Y is usually unknown, and only a finite number of samples
+(xi , yi )i1 N are available. In this case, the sample estimator of the generalized correntropy is
+V^, ( X ,Y )  1  G, (xi  yi ) (6) N
+N i1 B. Properties
+Below we present several basic properties of the generalized correntropy. Some of them are simple extensions of the properties presented in [19], and will not be proved here.
+
+Property 1: V, ( X ,Y ) is symmetric, that is V, ( X ,Y )  V, (Y , X ) .
+
+Property 2: V, ( X ,Y ) is positive and bounded: 0  V, ( X ,Y )  G, (0)  , , and it reaches its maximum if and only if X  Y .
+
+Property 3: The generalized correntropy involves higher-order absolute moments of the error variable
+
+ ()n n
+
+EX Y  X Y : V, ( X ,Y )  , 
+
+E X Y .
+
+n0 n! 
+
+
+
+  Remark 2: When the kernel parameter  is small enough, we have V, (X ,Y )  , 1 E  X Y   .
+
+
+
+
+
+In this case, the generalized correntropy is, approximately, an affine linear function of the  -order absolute
+
+moment of the error EX Y .
+
+Property 4: Assume that the samples (xi , yi )i1 N are drawn from the joint PDF pXY (x, y) . Let p^E (e) be the Parzen estimate of the error PDF from samplesei  xi  yii1 N , with the GGD density function G, as the
+Parzen window kernel. Then V^, ( X ,Y ) is the value of p^E (e) evaluated at the point e  0 , that is
+
+V^, ( X ,Y )  p^E (0)
+
+(7)
+
+7
+
+1N
+where p^E (e)  G, (e  ei ) .
+N i1 Property 5: For the case 0    2 , the generalized correntropy is a second-order statistic of the mapped feature space data.
+
+Proof: When 0    2 , the kernel function  (x, y)  G, (x  y) is a Mercer kernel, and hence we have V, ( X ,Y )  E , ( X )T , (Y ) , where, (.) is a nonlinear mapping induced by G , .
+
+In data analysis such as regression and classification, a measure called the correntropic loss (C-loss) is usually used instead of using the correntropy [30, 31]. A generalized C-loss (GC-loss) function between
+X and Y can be defined as
+
+JGCloss ( X ,Y )  G, (0)  V, ( X ,Y )
+
+(8)
+
+The GC-loss satisfies JGCloss ( X ,Y )  0 , and when 0    2 , it can be expressed as
+
+1
+
+2
+
+JGCloss ( X ,Y )  E   , ( X )  , (Y ) 
+
+(9)
+
+2
+
+
+
+which is a mean-square loss in the feature space F induced by Mercer kernel  (x, y)  G, (x  y) .
+Clearly, minimizing the GC-loss will be equivalent to maximizing the generalized correntropy.
+Let(xi , yi )i1 N be the samples drawn from pXY . Then an estimator of the GC-loss is
+
+J^GCloss ( X ,Y )  G , (0)  V^ , ( X ,Y )
+
+1 N
+
+  ,   G , (xi  yi )
+
+(10)
+
+N i1
+
+1 N
+  ,   G , (ei )
+N i1
+
+8
+
+T
+
+T
+
+^
+
+Property 6: Let X  x1, , xN  ,Y   y1, , yN  . Then the function GCIM  X ,Y   JGCloss (X ,Y ) ,
+
+called the generalized correntropy induced metric (GCIM), defines a metric in the N -dimensional sample vector space when 0    2 .
+
+Proof: See Appendix A.
+
+T
+
+T
+
+For the case in which X  x1, x2  , Y  0,0 ,  4 , and   1, the surface of the GCIM  X ,Y  with
+
+respect to x1 and x2 is shown in Fig. 1. As one can see, the GCIM behaves like different norms
+
+(from L to L0 ) of the data in different regions. This observation, which is similar to that obtained with Gaussian kernel [19], is confirmed by Properties 7 and 8.
+
+1
+0.9
+0.8
+0.7
+0.6 2 0 -2 x2
+
+2 0 -2 x1
+
+Fig.1 Surface of the GCIM in 3D space (  4 ,   1 ).
+
+Property 7: As   0  (or xi  0,i  1,
+
+1/
+
+N
+
+
+
+, N ), the function L,  X   
+
+J^GCloss ( X , 0)  will
+
+ 
+
+
+
+
+
+,
+
+
+
+ 
+
+approach the l -norm of X , that is
+
+9
+
+ N 1/  
+
+L,  X   X    xi  , as   0
+
+(11)
+
+  i1 
+
+Proof: See Appendix B.
+
+Property 8: Assume that xi   , i : xi  0 , where is a small positive number. As    (or   0  ),
+minimizing the function L,  X  will be, approximately, equivalent to minimizing the l0 -norm of X , that is
+
+min L,  X  min X , as   
+
+(12)
+
+X 
+
+X 
+
+0
+
+where  denotes a feasible set of X . Proof: Similar to the one presented in [32]. See Appendix C for the detailed derivation.
+Below we present some optimization properties of the GC-loss. Similar results for the C-loss can be found in [31].
+T
+Property 9: Let e  e1, , eN  . Then the following statements hold:
+
+1) if 0   1, then the GC-loss J^GCloss is concave at any e with ei  0 ( i  1, , N ) ;
+
+2) if
+
+
+
+1, then the GC-loss
+
+J^GCloss is convex at any e
+
+with 0 
+
+ei
+
+ ( 1)
+
+1
+
+
+( i  1,
+
+, N );
+
+3) if   0  , then for any e with ei  0 ( i  1, , N ), the GC-loss J^GCloss is concave at e for 0   1, and convex at e for 1.
+
+Proof: See Appendix D.
+
+Property 10: For   1 , the GC-loss J^GCloss is a differentiable invex function of e  e1,
+
+T
+,eN 
+
+with ei  M ( i  1, , N ), where M is an arbitrary positive number.
+
+Proof: See Appendix E.
+
+10
+
+III. GENERALIZED MAXIMUM CORRENTROPY CRITERION
+
+Similar to the correntropy, the generalized correntropy can also be used as an optimization cost in
+
+estimation-related problems. Given two random variables: X  , an unknown real-valued parameter to be
+
+estimated, Y  m , a vector of observations (measurements), an estimator of X can be defined as a function of Y : X^  g(Y ) , where g is solved by optimizing a certain cost function. Under the generalized
+
+maximum correntropy criterion (GMCC), the estimator g will be solved by maximizing the generalized
+
+correntropy between X and X^ , that is
+
+gGMCC  arg maxV, ( X , X^ )  arg max E[G, ( X  g(Y ))]
+
+(13)
+
+gG
+
+gG
+
+where G stands for the collection of all measurable functions of Y . If y  m , X has a conditional
+
+PDF pX Y (x y) , then the estimation error EX X^  X  X^ has PDF
+
+pE (e)   m pX Y (e  g( y) | y)dFY ( y)
+
+(14)
+
+where FY ( y) is the distribution function of Y . It follows that
+
+gGMCC  arg max  G, (e) m pX Y (e  g( y) | y)dFY ( y)de
+
+(15)
+
+gG
+
+In [28], it has been proven that the MCC estimate is a smoothed maximum a posteriori probability (MAP) estimate, which equals the mode (at which the PDF attains its maximum value) of a smoothed a posteriori distribution. A similar result holds for the GMCC estimation. Theorem 1: The GMCC estimator can be expressed as
+gGMCC ( y)  arg max , (x | y) , y  m (16)
+x
+where , (x | y)  G, (x)  pX Y (x | y) ("  "denotes the convolution operator with respect to x ).
+
+Proof: See Appendix F.
+
+11
+
+Remark 3: Considering the conditional PDF pX Y (x y) as an a posteriori PDF given the observation y , the function , (x | y) will be a smoothed (by convolution) a posteriori PDF. Therefore, the GMCC estimate is a smoothed MAP estimate. Corollary 1: When   0  (or    ), the GMCC estimation becomes the MAP estimation.
+
+Proof: As   0  , the GGD function G, (.) will approach the Dirac delta function, and the smoothed
+conditional PDF , (x | y) will reduce to the original conditional PDF pX Y (x y) . In this case, the GMCC
+estimation will be equivalent to the MAP estimation.
+Theorem 2: The GMCC estimator can also be expressed as gGMCC  arg max pE, (0) (17)
+gG
+where pE, (x)  pE (x) G, (x) is the smoothed error PDF.
+Proof: It is easy to derive
+E G , (EX X^ )   G , (e) pE (e)de
+x0    G, (x  e) pE (e)de (18)
+  pE (x)  G, (x)x0
+ pE , (0)
+
+And hence
+
+gGMCC  arg max E G, (EX X^ )  arg max pE, (0)
+
+(19)
+
+gG
+
+gG
+
+Remark 4: Theorem 2 implies that the GMCC estimator will make the error distribution concentrated around zero with a high peak.
+Theorem 3: When    (or   0  ), the GMCC estimation will be equivalent to the least mean p -power (LMP) estimation with p   .
+
+12
+
+Proof: Under the LMP criterion, the optimal estimator is solved by minimizing the mean p -power of the error:
+
+
+
+p
+
+
+
+^ p
+
+gLMP  arg min E  EX X^   arg min E X  X
+
+(20)
+
+gG
+
+
+
+ gG 
+
+
+
+On the other hand, as   0  , we have V, ( X , X^ )  , 1 E  X  X^     . It follows that maxV, ( X , X^ ) min E  X  X^   (21)
+That is, as   0  , the GMCC estimation will be, approximately, equivalent to the LMP estimation with p   .
+
+IV. ADAPTIVE FILTERING UNDER GMCC CRITERION
+
+A.Cost function
+
+In the context of linear adaptive filtering, under the GMCC criterion the optimal weight vector of the
+
+filter can be solved by maximizing
+
+  JGMCC  E G, (e(i))  , E exp  e(i)  
+
+(22)
+
+
+
+
+
+where the error
+
+e(i)  d(i)  y(i)  d(i) W T X (i)
+
+(23)
+
+with d(i)  being the desired value at time i , y(i)  W T X (i) the output of the filter,
+
+T
+
+m
+
+m
+
+W  w1, w2, , wm   the weight vector, and X (i)  the input vector, generally given by
+
+X (i)  x(i), x(i 1), , x(i  m 1)T (24)
+
+where x(i) is the input signal.
+
+13
+
+B.Optimal solution On the optimal weight vector of GMCC adaptive filtering, we summarize the main result as the
+following theorem.
+
+Theorem 4: The optimal weight vector that maximizes JGMCC can be expressed as
+
+Wopt  R XX h 1 PdXh (25)
+
+where RXX h  E he(i) X (i)X (i)T  is a weighted autocorrelation matrix of the input signal, in which the
+weighting is a function of the error h(e(i))  exp e(i)   e(i) 2 , and PdXh  E he(i) d(i)X (i) is a
+weighted cross-correlation vector between the desired and the input vector.
+
+Proof: Let  JGMCC  0 , we have W
+
+E exp  e(i)   e(i) 1 sign e(i) X (i)  0
+
+
+
+
+
+ E h e(i)d (i) W T X (i) X (i)  0 (26)
+ E h e(i) X (i)X (i)T W  E h e(i) d (i)X (i)
+
+ W  R XX h 1 PdXh
+
+Remark 5: For the case   2 , we have h(e(i))  expe2(i) . In this case, as   0  , we
+have h(e(i)) 1 , and Wopt  RXX 1 PdX with RXX  E  X (i)X (i)T  , PdX  Ed(i)X (i) , which
+corresponds to the well-known Wiener solution.
+
+Theorem 5: If x(i) and d (i) are both zero-mean Gaussian processes, then the optimal solution under GMCC criterion is equal to the Wiener solution.
+
+Proof: First, we derive
+
+14
+
+E G , e(i)   G , (e) pe(i) (e)de
+
+    pe(i)(e) 0,   G, (e) d de
+
+   ,  pe(i)(e)   G, (e) de d (27)
+
+0
+
+
+
+ , 
+
+
+
+ 
+
+pe(i) (e)de  d
+
+0  e:G , (e)
+
+
+
+  , 
+   pe(i)(e)de d
+
+0
+
+
+
+where (.) denotes an indicator function, and  is a certain positive number satisfying G, ( )  G, ( )   .Since x(i) and d (i) are both zero-mean Gaussian processes, then the error e(i) is
+also a zero-mean Gaussian process, with PDF
+
+1
+
+ e2 
+
+pe(i) (e) 
+
+exp   2 
+
+(28)
+
+2  e(i)
+
+ 
+
+2 e(i)
+
+ 
+
+wheree(i) 2  E e2 (i) is the error variance. Hence
+
+
+
+ 
+
+ pe(i) (e)de  erf 
+
+
+
+(29)
+
+
+
+ 2 
+
+
+
+e(i) 
+
+with erf (x)  1  x exp(t2 )dt being the error function, which is a monotonically increasing function
+ x
+of x . Therefore,  pe(i) (e)de is a monotonically decreasing function of e(i) 2 . It follows that 
+
+max E G, e(i)  max  pe(i) (e)de  mine(i) 2 (30) 
+
+That is, the maximization of the generalized correntropy E G, e(i) will be equivalent to the
+minimization of the mean square error e(i) 2  E e2 (i) . Clearly, in this case, the optimal solution under GMCC criterion will be equal to the Wiener solution R XX 1 PdX .
+
+15
+
+C.Adaptive algorithm Based on the cost function of (22), a stochastic gradient based adaptive algorithm, called in this work the
+GMCC algorithm, can be simply derived as
+W (i 1)  W (i)    W (i) exp  e(i)    W (i)   exp  e(i)   e(i) 1 sign(e(i)) e(i) W (i) (31)  W (i)  exp  e(i)   e(i) 1 sign(e(i)) X (i)
+where   is the step-size parameter.
+
+We have the following observations:
+
+1) When  2 , the GMCC algorithm becomes
+
+W (i 1)  W (i)  expe2(i)e(i)X (i)
+
+(32)
+
+which is the original MCC algorithm [20]. 2) The weight update equation of (31) can be rewritten as
+W (i 1)  W (i) (i) e(i) 1 sign(e(i))X (i) (33)
+
+  where(i)  exp  e(i)  . Therefore, the GMCC algorithm can be viewed as an LMP algorithm with
+p   and a variable step-size(i) . The LMP algorithm is derived under the LMP (least mean p -power) criterion, which includes SA ( p  1), LMS ( p  2 ), and LMF ( p  4 ) as special cases (see [5] for the
+details).
+3) When   0+ , we have(i)  . In this case, the GMCC algorithm reduces to the traditional LMP algorithm with p   :
+
+16
+
+W (i)  W (i 1)  e(i) 1 sign(e(i))X (i) (34)
+
+In particular, when  2 , (34) becomes the well-known LMS algorithm:
+
+W (i)  W (i 1) e(i)X (i)
+
+(35)
+
+4) When e(i)   , we have(i)  0 . Thus, a large error will have little influence on the filter weights.
+This implies that the GMCC algorithm will be robust to large outliers (or impulsive noises), which often cause large errors.
+
+Remark 6: One can further derive various variants of the GMCC algorithm, such as the variable step-size GMCC and normalized GMCC, where the step-size is changed across iterations or divided by the squared norm of the input vector.
+
+The computational complexity of the GMCC algorithm is almost the same as the LMP algorithm, and the
+  only extra computational effort needed is to calculate the term exp  e(i)  , which is obviously not
+expensive.
+
+V. MEAN-SQUARE CONVERGENCE ANALYSIS
+
+In this section, we analyze the mean-square convergence performance of the proposed GMCC algorithm. The algorithm (31) can be written in a general form:
+
+W (i)  W (i 1)  f e(i) X (i)
+
+(36)
+
+where f e(i) is a nonlinear function of e(i) ,
+
+f e(i)  exp e(i)   e(i) 1 sign(e(i)) (37)
+
+Assume that the desired signal d (i) can be expressed as
+
+d(i)  W0T X (i)  v(i)
+
+(38)
+
+17
+
+whereW0 denotes an unknown weight vector that needs to be estimated, and v(i) stands for the disturbance
+
+noise,
+
+with
+
+variance
+
+
+
+2 v
+
+.
+
+Then,
+
+we
+
+have
+
+e(i)  W (i 1)T X (i)  v(i)  ea (i)  v(i)
+
+(39)
+
+where W (i 1)  W0 W (i 1) is the weigh error vector at iteration i 1, and ea (i)  W (i 1)T X (i) is referred to as the a priori error. After some simple algebra, one can obtain [33]:
+
+E  W (i) 2   E  W (i 1) 2   2Eea (i) f (e(i)) 2E  X (i) 2 f 2(e(i))
+
+(40)
+
+
+
+ 
+
+
+
+
+
+
+
+A.Mean Square Stability
+From (40), if the step-size is chosen such that for all i
+
+  E  X (i) 2 f 2 2Eea (i) f (e(i)) (e(i))
+
+
+
+
+
+2E ea (i) exp  e(i)   e(i) 1 sign(e(i)) (41)
+
+
+
+
+
+  E  X (i) 2 exp 2 e(i)  e(i) 2(1) 
+
+
+
+
+
+then the sequence of weight error power E  W (i) 2  will be decreasing and converging. According to the
+
+
+
+
+
+analysis results presented in [33], the following theorem holds. Theorem 6: Assume that the noise sequence {v(i)} is i.i.d. and independent of X (i) , and the filter is long
+
+enough such that ea (i) is Gaussian. Then, for the GMCC algorithm (31), the weight error power
+
+E  W (i) 2  will be monotonically decreasing if the step-size satisfies
+
+
+
+
+
+  2  E ea (i) exp  e(i)  e(i) 1 sign(e(i)) 
+
+
+
+
+
+ 4   E   1/2  ea in2   f
+
+
+
+(42)
+
+ 4( 1)  
+
+    E X (i)
+
+
+
+E exp 4 e(i) e(i)
+
+
+
+
+
+
+
+
+
+
+
+18
+
+where
+
+
+
+
+
+ E
+
+e2 a
+
+
+
+:
+
+
+
+
+
+E
+
+e2 a
+
+
+
+
+
+1
+
+Tr
+
+R
+
+XX
+
+
+
+E
+
+
+
+W
+
+(0)
+
+2  , in
+
+which
+
+
+
+is
+
+a
+
+Cramer-Rao
+
+lower
+
+bound
+
+
+
+4
+
+
+
+
+
+defined in [33].
+
+To better understand the mean-square stability of the GMCC, it's more important to investigate the
+
+2
+probability of divergence (POD) [34]. Here the divergence means lim W (i)   in a realization of an
+i
+
+adaptive algorithm. For the LMF algorithm, the POD is nonzero when the input distribution has infinite
+
+support, no matter how small the step-size is chosen [34]. Below we present a simple example to show that
+
+the GMCC is rather stable and may have zero POD, no matter what input distribution. Let's consider the
+
+scalar filtering case [34], in which the desired signal is d(i)  W0 X (i) , whereW0 and X (i) are both
+
+scalars, and the noise v(i) is assumed to be zero for simplicity. Then, we have
+
+W (i)  W (i 1)  f e(i) X (i)
+
+= 1 exp e(i)   e(i) 2 X 2 (i)W (i 1)
+
+(43)
+
+
+
+
+
+
+
+
+
+
+
+2 
+
+=
+
+1 
+
+exp  
+
+e(i)
+
+ e(i)
+
+W (i 1)
+
+W (i 1)
+
+
+
+
+
+It is easy to show
+
+0  exp e(i)   e(i)   1 exp(1) (44)
+
+So it holds that if W (i 1) 2   exp1 , then
+2
+
+0  exp e(i)   e(i)  W (i 1) 2  2 (45)
+
+In this case, we have 1 exp e(i)   e(i)  W (i 1) 2 1, and
+
+W (i) 2  1 exp  e(i)   e(i)  W (i 1) 2  W (i 1) 2 2 (46) 2  W (i 1)
+
+19
+
+Therefore, the limit (if exists) of W (i) always satisfies lim W (i)   , which implies that in this simple
+i
+example the GMCC will never diverge (or its POD is zero). WhenW (i) is a vector and there is a noise v(i) , the analysis of the POD of GMCC is very complicated
+and is left open in this work. However, our simulation results suggest that in most situations the POD of GMCC is zero, even when the noise signal contains large outliers.
+
+B.Steady-State Mean Square Performance
+
+With a similar derivation presented in [35], one can analyze the mean square transient behaviors of the
+
+algorithm (31). This is a trivial but quite tedious task since we have to evaluate the expectations
+
+E ea (i)exp e(i)   e(i) 1 sign(e(i)) and E  X (i) 2 exp2 e(i)   e(i) 2(1)  . In the following, we
+
+
+
+
+
+
+
+
+
+only analyze the steady-state mean square performance by using the Taylor expansion method [23].
+
+As the filter reaches the steady-state, we have E  W (i) 2   E  W (i 1) 2  . By (40), it holds that
+
+
+
+ 
+
+
+
+2Eea (i) f (e(i)) E  X (i) 2 f 2(e(i))
+
+(47)
+
+
+
+
+
+Assume that X (i) 2 is asymptotically uncorrelated with f 2 (e(i)) ( the rationality of this assumption has been discussed in [33]). Then (47) becomes
+
+2Eea (i) f (e(i)) Tr RXX E  f 2(e(i))
+
+(48)
+
+In the steady-state, the distributions of ea (i) and e(i) are independent of i , thus one can omit the time index and simply write (48) as
+
+2Eea f (e) Tr RXX E  f 2 (e)
+
+(49)
+
+20
+
+Let S  lim E ea2 (i)  E ea2  be the steady-state excess mean square error (EMSE). An approximate
+i
+analytical expression of S can be derived . Before proceeding we give two common assumptions: A1: The noise v(i) is zero-mean, independent, identically distributed, and is independent of the input.
+
+A2: The a priori error ea (i) is zero-mean and independent of the noise.
+
+Taking the Taylor expansion of f (e) with respect to ea around v , we obtain
+
+f (e)  f (ea  v)  f (v)  f (v)ea  1 f (v)ea2  o(ea2)
+
+(50)
+
+2
+
+where o(ea2 ) denotes the third and higher-order terms, and
+
+f v  exp v   v 2 ( 1)   v   (51)
+
+  f v  exp v   sign(v)  ( 1) v 23   v 33   ( 1)(  2) v 3  (2  2) v 23  (52)
+
+If E o(ea2 ) is small enough, then based on the assumptions A1 and A2 we can derive
+
+Eea f (e)  E ea f (v)  f (v)ea2  o(ea2)  E f (v)S
+
+(53)
+
+E  f 2 (e)  E  f 2 (v)  E  f (v) f (v)  f (v) 2  S
+
+(54)
+
+
+
+
+
+Substituting (53) and (54) into (49), we obtain
+
+Tr(R XX )E  f 2 (v)
+
+S
+
+2
+
+(55)
+
+2E f (v) Tr(RXX )E  f (v) f (v)  f (v) 
+
+
+
+
+
+Further, substituting (51) and (52) into (55) yields
+
+Tr(R XX )E exp 2 v   v 22 
+
+S
+
+
+
+
+
+(56)
+
+2E exp v   v 2 ( 1)   v   Tr(RXX )E (v)
+
+
+
+
+
+21
+
+where
+
+ (v)   f (v) f (v)  f (v) 2 
+
+
+
+
+
+(57)
+
+ exp 2 v   v 24 ( 1)(2  3)  5 ( 1) v   2 2 2 v 2 
+
+
+
+
+
+When the step-size is small enough, (57) can be simplified to
+
+Tr(R XX )E exp 2 v   v 22 
+
+S
+
+
+
+
+
+(58)
+
+2E exp v   v 2 ( 1)   v  
+
+
+
+
+
+Remark 7: Given a noise distribution, one can evaluate the expectations in (56) and obtain a theoretical value of the steady-state EMSE. It is, however, worth noting that the steady-state EMSE of (56) is derived
+
+under the assumption that the steady-state a priori error ea is small such that its third and higher-order terms
+
+are negligible. When the step-size or noise power is too large, the a priori error will also be large. In this case, the derived EMSE value will not accurately enough characterize the performance.
+
+VI. SIMULATION RESULTS
+
+Now we present simulation results to confirm the theoretical predictions and demonstrate the desirable performance of the proposed GMCC algorithm.
+First, we investigate the stability problem of the GMCC algorithm. Note that the steady-state performance is valid only when the algorithm does not diverge. In many cases, however, an adaptive algorithm may diverge especially at the initial convergence stage. Below we present some simulation results about the probability of divergence (POD) of the GMCC (with   4.0 ), compared with that of the LMF algorithm, whose probability of divergence has been studied in [34]. The weight vector of the unknown system is assumed to be W0 =[0.1,0.2,0.3,0.4,0.5,0.4,0.3,0.2,0.1], and the initial weight vector of the adaptive filter is a null vector. The input signal and the disturbance noise are both zero-mean Gaussian with variance 1.0. The PODs with different step-sizes are illustrated in Fig. 2. To evaluate the PODs, 1000 independent Monte Carlo simulations were performed and in each simulation, 1000 iterations were run. We
+
+22
+
+2
+labeled a learning curve as "diverging" if at the last iteration the weight error power W0 W (i) is larger than 100. As one can see clearly, compared with the LMF, the GMCC is rather stable and does not diverge at all, and this coincides with our theoretical expectation.
+
+POD
+
+0.12 LMF
+GMCC(=4)
+0.1
+
+0.08
+
+0.06
+
+0.04
+
+0.02
+
+0
+
+0
+
+0.05 0.1 0.15 0.2 0.25 0.3
+
+step-size
+
+Fig.2 PODs with different step-sizes
+
+Second, we show the theoretical and simulated steady-state performance of the GMCC. In the
+simulation, we set   4 , and   0.03. The filter length is 20, the input signal is a zero-mean white
+
+Gaussian process with variance 1.0, and the disturbance noise is assumed to be zero-mean and uniform
+
+distributed over  3, 3 . Fig. 3 shows the steady-state EMSEs with different step-sizes and the noise
+
+
+
+
+
+variances, where the simulated EMSEs are computed as an average over 100 independent Monte Carlo
+
+simulations, and in each simulation, 50000 iterations were run to ensure the algorithm to reach the steady
+
+state, and the steady-state EMSE was obtained as an average over the last 1000 iterations. One can observe:
+
+i) the steady-state EMSEs are increasing with step-size and noise variance; ii) when the step-size and noise
+
+variance are small, the steady-state EMSEs computed by simulations match very well the theoretical values
+
+23
+
+computed by (56) ; iii) when the step-size and noise variance become large, the experimental results will, however, gradually differ from the theoretical values, and this also coincides with the theoretical prediction.
+
+EMSE
+
+0.35 theory
+0.3 simulation
+
+0.25
+
+0.2
+
+0.15
+
+0.1
+
+0.05
+
+0
+
+0
+
+0.002
+
+0.004
+
+0.006
+
+0.008
+
+0.01
+
+0.012
+
+step-size
+
+(a)
+
+EMSE
+
+0.12 theory
+0.1 simulation
+
+0.08
+
+0.06
+
+0.04
+
+0.02
+
+0
+
+0
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1
+
+1.2
+
+noise variance
+
+(b)
+
+Fig.3 Theoretical and simulated EMSEs: (a) with different step-sizes; (b) with different noise variances
+
+Third, we compare the performance of the GMCC and the LMP family algorithms with different p values, namely SA ( p  1) , LMS ( p  2 ), and the LMF ( p  4 ). The unknown system is assumed to be the same as that in the first simulation. In particular, we consider a noise model with form v(i)  (1 a(i))A(i)  a(i)B(i) , where a(i) is a binary independent and identically distributed process
+
+24
+
+with Pra(i)  1  c , Pra(i)  0  1 c , and 0  c  1 is an occurrence probability; whereas A(i) is a noise
+
+process with smaller variance, and B(i) is another noise process with substantially much larger variance to
+
+represent large outliers (or impulsive disturbances). The noise processes A(i) and B(i) are mutually
+
+independent and they are both independent of a(i) . In the simulation, c is set at 0.06, and B(i) is a white
+
+Gaussian process with zero-mean and variance 15. For the noise A(i) , we consider four distributions: a)
+
+Gaussian distribution with zero-mean and unit variance; b) Binary distribution over {-1,1} with probability mass Pr{x=-1}=Pr{x=1}=0.5; c) Laplace distribution with zero-mean and unit variance; d) Uniform
+
+2
+distribution over  3, 3 . The convergence curves in terms of the weight error power W0 W (i)
+
+
+
+
+
+averaged over 100 independent Monte Carlo runs are shown in Fig. 4. In the simulation, the step-sizes are
+chosen such that all the algorithms have almost the same initial convergence speed. The parameter  in
+GMCC is experimentally chosen such that the algorithm achieves desirable results. From the simulation results we can observe: 1) the GMCC family algorithms are much more stable (robust) than the LMP family
+algorithms (In this example, when p  4 , the LMP will not converge); 2) the GMCC with  2 may
+
+outperform significantly the original MCC (   2 ) algorithm. In particular, the GMCC with   6
+achieves the best performance when A(i) is of Binary or Uniform distribution. In order to further
+
+demonstrate the robustness of the GMCC against large outliers, we increase the variance of the outlier noise B(i) from 15 to 100. In this case, the LMP family algorithms, except SA and LMS, will diverge, while the
+
+GMCC family algorithms can still work well. We show in Fig. 5 the simulation results when A(i) is Uniform
+
+distributed.
+
+25
+
+weight error power
+
+100 100
+
+SA
+
+weight error power
+
+LMS
+
+LMF 10-1
+
+GMCC ( = 1) SA
+
+-1
+
+LMS
+
+10
+
+GMCC ( = 2)
+
+LMF
+
+GMCC ( = 4)
+
+GMCC ( = 1)
+
+GMCC ( = 6) 10-2
+
+GMCC ( = 2) GMCC ( = 4)
+
+GMCC ( = 6)
+
+10-2 0
+
+2000
+
+4000 6000 iteration
+
+8000 10000
+
+(a)
+
+10-3 0
+
+2000
+
+4000 6000 iteration
+
+8000 10000
+
+(b)
+
+weight error power
+
+0
+
+10
+
+0
+
+10
+
+SA
+
+SA
+
+LMS
+
+LMS
+
+LMF LMF
+
+GMCC ( = 1)
+
+-1
+
+GMCC ( = 1)
+
+10-1 GMCC ( = 2) 10 GMCC ( = 2) GMCC ( = 4)
+
+GMCC ( = 4)
+
+GMCC ( = 6)
+
+GMCC ( = 6)
+
+10-2 0
+
+2000
+
+4000 6000 iteration
+
+8000 10000
+
+10-2 0
+
+2000
+
+4000 6000 iteration
+
+8000 10000
+
+(c)
+
+(d)
+
+Fig.4 Convergence curves with different distributions of A(i) : (a) Gaussian; (b) Binary; (c) Laplace; (d) Uniform
+
+weight error power
+
+26
+100 SA LMS GMCC ( = 1) GMCC ( = 2) GMCC ( = 4) GMCC ( = 6)
+10-1
+
+weight error power
+
+10-2
+
+0
+
+2000 4000 6000 8000 10000
+
+iteration
+
+Fig.5 Convergence curves with larger outliers
+
+VII. CONCLUSION
+Correntropy is a novel nonlinear similarity measure in kernel space, and the maximum correntropy criterion (MCC) has recently been widely applied in domains of machine learning and signal processing. In previous studies, the kernel function in correntropy is however limited to the Gaussian kernel without mentioned otherwise. Gaussian kernel is desirable in many cases but obviously, it is not always the best choice. In this work, we proposed a generalized correntropy, using the generalized Gaussian density (GGD) function as the kernel (not necessarily a Mercer kernel). The new definition is very general and flexible, which includes the original correntropy with Gaussian kernel as a special case. Some important properties of the generalized correntropy were presented. The generalized maximum correntropy criterion (GMCC) was also proposed as an optimality criterion in estimation related problems. In particular, we applied the GMCC criterion to adaptive filtering. The optimal solution under GMCC and an adaptive algorithm, called the GMCC algorithm, were derived. Further, we investigated the mean square convergence behaviors of the
+
+27
+developed algorithm. A simple example was presented to show that the GMCC algorithm is very stable and will have a zero probability of divergence (POD). A theoretical value of the steady-state excess mean square error (EMSE) was also derived. Theoretical results and excellent performance of the GMCC were confirmed by Monte Carlo simulation results.
+
+APPENDIX A PROOF OF PROPERTY 6
+Proof: When 0    2 , we can construct a nonlinear mapping: ,  X   , (x1)T , ,, (xN )T T .
+It follows that
+
+,  X   , Y 
+
+T
+
+
+
+ 
+
+,
+
+
+
+X
+
+
+
+
+
+
+
+,
+
+Y
+
+
+
+ 
+
+,
+
+
+
+X
+
+
+
+
+
+
+
+,
+
+Y
+
+
+
+ 2N G, (0)  V^, ( X ,Y )
+ 2N GCIM  X ,Y 
+
+(A. 1)
+
+which implies that the GCIM function GCIM  X ,Y  defines a "Euclidean distance" in the Hilbert space F N . Hence, GCIM  X ,Y  is a metric in the sample vector space since it satisfies: i) GCIM  X ,Y   0 ; ii) GCIM  X ,Y   GCIM Y, X  ; iii) GCIM  X , Z   GCIM  X ,Y   GCIM Y , Z  .
+
+APPENDIX B PROOF OF PROPERTY 7
+
+Proof: As   0  (or xi  0,i  1, , N ), we have
+
+28
+
+1/
+
+N
+
+
+
+L ,  X    J^GCloss ( X , 0)    , 
+
+N 
+
+1 N
+
+1/
+
+
+
+
+ G , (0)   G , (xi ) 
+
+  , 
+
+N i1
+
+
+
+   N 
+
+1 N
+
+1/
+ 
+
+
+
+ ,   , 1  xi 
+
+  , 
+
+N i1
+
+
+
+ N  1/
+  xi 
+ i1 
+
+APPENDIX C
+
+PROOF OF PROPERTY 8
+
+(B. 1)
+
+Proof: Let X0 be the solution obtained by minimizing X 0 over  and Xl the solution achieved by
+minimizing L,  X  . Then L,  Xl   L,  X0  , and hence
+
+N
+
+N
+
+G, (Xl )i   G, (X0)i 
+
+i1
+
+i1
+
+(C. 1)
+
+where ( Xl )i denotes the i th component of Xl . It follows that
+
+N 
+
+   N
+
+
+
+Xl 0   exp  ( Xl )i
+
+i1,( Xl )i 0
+
+    N
+
+
+
+ N  X 0 0   exp  (X 0 )i
+
+i1,( X0 )i 0
+
+Thus we have
+
+    N
+
+
+
+Xl 0  X0 0   exp  ( Xl )i
+
+i1,( Xl )i 0
+
+N
+
+
+
+  exp  (X0 )i
+
+i1,( X0 )i 0
+
+(C. 2) (C. 3)
+
+Since xi   , i : xi  0 , as    the right hand side of (C. 3) will approach zero. Therefore, if  is large
+enough, it holds that
+
+29
+
+X0 0  Xl 0  X0 0  where  is a small positive number arbitrarily close to zero.
+APPENDIX D PROOF OF PROPERTY 9 Proof: The Hessian (if exists) of J^GCloss with respect to e is
+
+(C. 4)
+
+T (e1) e1   ( 1)
+
+
+
+, 
+
+0
+
+GCloss HJ^ e    N 
+
+
+
+
+
+
+
+0
+
+
+
+0
+T (e2) e2   ( 1)
+0
+
+0
+
+
+
+
+
+
+
+0
+
+
+
+
+
+
+
+
+
+
+
+T (eN ) eN  ( 1)
+
+
+
+(D. 1)
+
+  whereT (x)  exp  x  x 2 . From (D. 1) one can see:
+
+i) if 0   1, then HJ^ e   0 for any e with ei  0 ( i  1, , N ) ; GCloss
+
+1
+ii) if  1, then HJ^ e   0 for any e with 0  ei  ( 1)  ( i  1, , N ); GCloss
+
+iii) if   0  , then for any e with ei  0 ( i  1, , N ), we have HJ^ e   0 for 0   1 , and GCloss
+HJ^ e   0 for 1. GCloss
+
+APPENDIX E
+
+PROOF OF PROPERTY 10
+
+Proof: A differentiable function f : S
+
+( S  N ) is said to be invex, if and only if []
+
+f (x2 )  f (x1)  q(x1, x2)T f (x1) , x1, x2  S
+
+(E. 1)
+
+30
+
+where f (x) denotes the gradient of f with respect to x , and q(x1, x2) is some vector valued function. For  1, the GC-loss J^GCloss is a differentiable function of e , and the gradient J^GCloss (e) is
+
+  ^
+
+, 
+
+
+
+ 1
+
+JGCloss (e) 
+
+exp  e1 e1 sign(e1)
+
+N
+
+  exp  e  1 N eN sign(eN )T
+
+
+(E. 2)
+
+where sign(.) is the sign function. Since ei  M , we have J^GCloss (e)  0 if and only if e  0 . On the other hand, we have J^GCloss (e)  J^GCloss (0)  0 . So we can construct the following function
+
+ J^GCloss (e2 )  J^GCloss (e1) ^
+
+
+
+T
+
+JGCloss (e1)
+
+q(e1, e2 )  J^GCloss (e1) J^GCloss (e1)
+
+
+
+0
+
+if e  0 if e  0
+
+(E. 3)
+
+such that it holds
+
+J^GCloss (e2 )  J^GCloss (e1)  q(e1, e2 )T J^GCloss (e1)
+
+(E. 4)
+
+APPENDIX F
+
+PROOF OF THEOREM 1
+
+It is easy to derive
+
+V, ( X , X^ )   G , (e) m pX Y (e  g( y) | y)dFY ( y)de
+
+  
+  m  G , (e) pX Y (e  g( y) | y)de dFY ( y)
+
+  
+  m  G , (e  g( y)) pX Y (e | y)de dFY ( y)
+
+  (a)
+
+
+
+  m  G , (g( y)  e) pX Y (e | y)de dFY ( y)
+
+  m G, (.)  pX Y (. | y)(g( y))dFY ( y)
+
+  m  , (g( y) | y)dFY ( y)
+
+where e  e  g( y) , and (a) comes from the symmetry of G, (.) . Thus
+
+(F. 1)
+
+which completes the proof.
+
+gGMCC  arg max  m , (g( y) | y)dFY ( y) gG
+ gGMCC ( y)  arg max , (x | y), y  m
+x
+
+31
+(F. 2)
+
+ACKNOWLEDGEMENTS
+This work was supported by 973 Program (No. 2015CB351703) and National NSF of China (No. 61372152).
+REFERENCES [1]S. Haykin, Adaptive Filtering Theory, 3rd ed., NY: Prentice Hall, 1996. [2]A. H. Sayed, Fundamentals of Adaptive Filtering, Wiley, NJ, 2003. [3]B. Chen, Y. Zhu, J. Hu, J. C. Principe, System Parameter Identification: Information Criteria and
+Algorithms. Newnes, 2013. [4]E. Walach, B. Widrow, The least mean fourth (LMF) adaptive algorithm and its family, IEEE Trans.
+Inform. Theory, vol. IT-30, no. 2, 1984, pp. 275-283. [5] S. C. Pei, C. C. Tseng, Least mean p-power error criterion for adaptive FIR filter, IEEE Journal on
+Selected Areas in Communications, vol. 12, no. 9, 1994, pp. 1540-1547. [6]V.J. Mathews, S.H. Cho, Improved convergence analysis of stochastic gradient adaptive filters using the
+sign algorithm, IEEE Trans. Acoust., Speech, Signal Process. ASSP-35 (4) (Apr. 1987) 450-454. [7] T. Shao, Y.R. Zheng, J. Benesty, An affine projection sign algorithm robust against impulsive
+interferences, IEEE Signal Process. Lett. 17 (4) (Feb. 2010) 173-176. [8]M. Shao, C. L. Nikias, Signal processing with fractional lower order moments: Stable processes and
+their applications, Proc. of the IEEE, vol.81, no.7, pp.986-1009, 1993. [9]J. A. Chambers, O. Tanrikulu, A. G. Constantinides , Least mean mixed-norm adaptive filtering,
+Electronics Letters, vol. 30, no. 19, 1994, pp. 1574-1575.
+
+32
+[10] J. Chambers, A. Avlonitis. A robust mixed-norm adaptive filter algorithm, IEEE Signal Process. Lett., 4 (2): 46-48, 1997.
+[11] Y. Zou, S. C. Chan, T. S. Ng, Least mean M-estimate algorithms for robust adaptive filtering in impulse noise, IEEE Transactions on Circuits and Systems II: Analog and Digital Signal Processing, 47(12) : 1564-1569, 2000.
+[12] S. C. Chan, Y. Zou, A recursive least M-estimate algorithm for robust adaptive filtering in impulsive noise: fast algorithm and convergence performance analysis, IEEE Transactions on Signal Processing, 2004, 52(4): 975-991.
+[13] J. C. Principe, Information Theoretic Learning: Renyi's Entropy and Kernel Perspectives. New York: Springer, 2010.
+[14] D. Erdogmus, J.C. Principe, From linear adaptive filtering to nonlinear information processing, IEEE Signal Processing Magazine, vol. 23, no. 6, 2006, pp. 15-33.
+[15] D. Erdogmus, J. C. Principe, An error-entropy minimization algorithm for supervised training of nonlinear adaptive systems, IEEE Transactions on Signal Processing, vol. 50, no.7, pp. 1780-1786, 2002.
+[16] B. Chen, J. Hu, L. Pu, Z. Sun, Stochastic gradient algorithm under (h, )-entropy criterion, Circuits
+Syst. Signal Process, vol. 26, 2007, pp. 941-960. [17] Chen, B., Zhu, Y., & Hu, J. (2010). Mean-square convergence analysis of ADALINE training with
+minimum error entropy criterion. Neural Networks, IEEE Transactions on, 21(7), 1168-1179. [18] Chen, B., Zhu, P., & Principe, J. C. (2012). Survival information potential: a new criterion for adaptive
+system training. Signal Processing, IEEE Transactions on, 60(3), 1184-1194. [19] W. Liu, P. P. Pokharel, J. C. Principe, Correntropy: properties and applications in non-Gaussian signal
+processing, IEEE Transactions on Signal Processing, vol. 55, no. 11, 2007, pp. 5286-5298. [20] A. Singh, J. C. Principe, Using correntropy as a cost function in linear adaptive filters, Proceedings of
+International Joint Conference on Neural Networks (IJCNN), pp. 2950-2955, 2009.
+
+33
+[21] S. Zhao, B. Chen, J. C. Principe, Kernel adaptive filtering with maximum correntropy criterion, Proceedings of International Joint Conference on Neural Networks (IJCNN), pp. 2012-2017, 2011.
+[22] A. Singh, J. C. Principe, A loss function for classification based on a robust similarity metric, Proceedings of International Joint Conference on Neural Networks (IJCNN), pp. 1-6, 2010.
+[23] B. Chen, L. Xing, J. Liang, N. Zheng, J. C. Principe, Steady-state Mean-square Error Analysis for Adaptive Filtering under the Maximum Correntropy Criterion, IEEE Signal Processing Letters, vol. 21, no. 7, 2014, pp. 880-884.
+[24] L. Shi, Y. Lin, Convex Combination of Adaptive Filters under the Maximum Correntropy Criterion in Impulsive Interference, IEEE Signal Processing Letters, vol. 21, no. 11, 2014, pp. 1385-1388.
+[25] S. Seth, J. C. Principe, Compressed signal reconstruction using the correntropy induced metric, IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), (2008) 3845-3848.
+[26] M. K. Varanasi, B. Aazhang, Parametric generalized Gaussian density estimation, J. Acoust. Soc. Amer. 1989, 86 (4): 1404-1415.
+[27] B. Chen, J. C. Principe, J. Hu, Y. Zhu, STOCHASTIC INFORMATION GRADIENT ALGORITHM WITH GENERALIZED GAUSSIAN DISTRIBUTION MODEL. Journal of Circuits, Systems, and Computers, 2012, 21(01).
+[28] B. Chen, J. C. Principe, Maximum correntropy estimation is a smoothed MAP estimation, IEEE Signal Processing Letters, vol. 19, 2012, pp. 491-494.
+[29] V. N. Vapnik, Statistical Learning Theory, NY: Wiley, 1998. [30] Syed, M. N., Principe, J. C., & Pardalos, P. M. (2012). Correntropy in data classification. In Dynamics
+of Information Systems: Mathematical Foundations (pp. 81-117). Springer New York. [31] M. N. Syed, P. M. Pardalos, J. C. Principe, On the optimization properties of the correntropic loss
+function in data analysis. Optimization Letters, 2014, 8(3): 823-839. [32] J. Weston, A. Elisseeff, B. Schölkopf, M. Tipping, Use of the zero norm with linear models and kernel
+methods. The Journal of Machine Learning Research, 3, 1439-1461, 2003.
+
+34
+[33] T. Y. Al-Naffouri, A. H. Sayed, Adaptive filters with error nonlinearities: mean-square analysis and optimum design, EURASIP Journal on Applied Signal Processing, vol. 4, 2001, 192-205.
+[34] Nascimento, V. H., & Bermudez, J. C. M. (2006). Probability of divergence for the least-mean fourth algorithm. Signal Processing, IEEE Transactions on, 54(4), 1376-1385.
+[35] T. Y. Al-Naffouri, A. H. Sayed, Transient analysis of adaptive filters with error nonlinearities, IEEE Trans. Signal Processing, vol. 51, 2003, pp. 653-663.
+
+

@@ -1,0 +1,64 @@
+site_name: LLM Wiki
+docs_dir: wiki
+site_dir: site
+use_directory_urls: false
+exclude_docs: |
+  raw/**/*.md
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+plugins:
+  - search
+  - fix_obsidian_escapes
+
+hooks:
+  - hooks.py
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - footnotes
+  - meta
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.snippets
+  - tables
+  - toc:
+      permalink: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - Home: index.md
+  - Concepts: concepts/index.md
+  - Entities: entities/index.md
+  - Queries: queries/index.md
+  - Sources: sources/index.md
+  - Synthesis: synthesis/index.md
+  - Log: log.md

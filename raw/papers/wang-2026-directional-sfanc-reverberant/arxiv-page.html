@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments</title>
+<!--Generated on Sun Jan 11 16:29:15 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/browse/0.3.4/css/arxiv-html-papers-20250916.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2601.06981v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1" title="In Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S2" title="In Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Preliminaries of DNN-based Directional ANC</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S2.SS1" title="In 2 Preliminaries of DNN-based Directional ANC ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.1 </span>General Principle of DNN-based DoA Estimation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S2.SS2" title="In 2 Preliminaries of DNN-based Directional ANC ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.2 </span>Multi-Reference Active Noise Control System</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S3" title="In Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Proposed Directional SFANC Method</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S3.SS1" title="In 3 Proposed Directional SFANC Method ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Pre-trained Control Filter Library</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S3.SS2" title="In 3 Proposed Directional SFANC Method ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>CNN Trained Using a Multi-Task Learning Strategy</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S4" title="In Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Numerical Simulations</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S4.SS1" title="In 4 Numerical Simulations ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>DoA Estimation with CNN</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S4.SS1.SSS1" title="In 4.1 DoA Estimation with CNN ‣ 4 Numerical Simulations ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1.1 </span>Dataset generation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S4.SS1.SSS2" title="In 4.1 DoA Estimation with CNN ‣ 4 Numerical Simulations ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1.2 </span>Classification accuracy under unseen acoustic environments and noise types</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S4.SS2" title="In 4 Numerical Simulations ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2 </span>Noise Cancellation based on DoA Estimation</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S4.SS2.SSS1" title="In 4.2 Noise Cancellation based on DoA Estimation ‣ 4 Numerical Simulations ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2.1 </span>Broadband Noise Cancellation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S4.SS2.SSS2" title="In 4.2 Noise Cancellation based on DoA Estimation ‣ 4 Numerical Simulations ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2.2 </span>Real-world Noise Cancellation</span></a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S5" title="In Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Conclusions</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">
+<span class="ltx_ERROR undefined" id="id1.1.id1">\authorblockN</span>
+Boxiang Wang<span class="ltx_ERROR undefined" id="id2.2.id2">\authorrefmark</span>1, Zhengding Luo<span class="ltx_ERROR undefined" id="id3.3.id3">\authorrefmark</span>1, Haowen Li<span class="ltx_ERROR undefined" id="id4.4.id4">\authorrefmark</span>1, Dongyuan Shi<span class="ltx_ERROR undefined" id="id5.5.id5">\authorrefmark</span>2, Junwei Ji<span class="ltx_ERROR undefined" id="id6.6.id6">\authorrefmark</span>1, Ziyi Yang<span class="ltx_ERROR undefined" id="id7.7.id7">\authorrefmark</span>1, Woon-Seng Gan<span class="ltx_ERROR undefined" id="id8.8.id8">\authorrefmark</span>1
+
+<span class="ltx_ERROR undefined" id="id9.9.id9">\authorblockA</span>
+<span class="ltx_ERROR undefined" id="id10.10.id10">\authorrefmark</span>1
+School of Electrical and Electronic Engineering, Nanyang Technological University, Singapore 
+<br class="ltx_break"/>Email: {boxiang001, luoz0021, junwei002, ziyi016}@e.ntu.edu.sg, {haowen.li, ewsgan}@ntu.edu.sg
+<span class="ltx_ERROR undefined" id="id11.11.id11">\authorblockA</span>
+<span class="ltx_ERROR undefined" id="id12.12.id12">\authorrefmark</span>2
+Center of Intelligent Acoustics and Immersive Communications, Northwestern Polytechnical University, China 
+<br class="ltx_break"/>E-mail: dongyuan.shi@nwpu.edu.cn
+</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id13.id1">Selective fixed-filter active noise control (SFANC) is a novel approach capable of mitigating noise with varying frequency characteristics. It offers faster response and greater computational efficiency compared to traditional adaptive algorithms. However, spatial factors, particularly the influence of the noise source location, are often overlooked. Some existing studies have explored the impact of the direction-of-arrival (DoA) of the noise source on ANC performance, but they are mostly limited to free-field conditions and do not consider the more complex indoor reverberant environments. To address this gap, this paper proposes a learning-based directional SFANC method that incorporates the DoA of the noise source in reverberant environments. In this framework, multiple reference signals are processed by a convolutional neural network (CNN) to estimate the azimuth and elevation angles of the noise source, as well as to identify the most appropriate control filter for effective noise cancellation. Compared to traditional adaptive algorithms, the proposed approach achieves superior noise reduction with shorter response times, even in the presence of reverberations.</p>
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">Active noise control (ANC) is an advanced technique that effectively attenuates low-frequency noise, offering a more compact and lightweight alternative to traditional passive noise control methods <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib2" title="Active noise control">3</a>]</cite>. In an ANC system, a secondary source is driven by the control signal to generate anti-noise with equal amplitude but opposite phase as the unwanted noise, thereby reducing the disturbance through the sound destructive interference principle <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib3" title="Active noise control: a tutorial review">8</a>]</cite>. Owing to its compact size and effective noise reduction capabilities, ANC has been widely applied in various applications <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib6" title="Adaptive-gain algorithm on the fixed filters applied for active noise control headphone">18</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib7" title="Local active control of road noise inside a vehicle">7</a>]</cite>. To address time-varying noise and dynamic acoustic environments, adaptive algorithms such as the filtered-x least mean squared (FxLMS) algorithm are commonly employed to update the control filter in real time <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib4" title="An analysis of multiple correlation cancellation loops with a filter in the auxiliary path">15</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib37" title="Self-boosted weight-constrained fxlms: a robustness distributed active noise control algorithm without internode communication">5</a>]</cite>. However, these algorithms often involve high computational complexity, slow convergence speed, and are at risk of divergence <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib34" title="Computation-efficient virtual sensing approach with multichannel adjoint least mean square algorithm">24</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib14" title="Preventing output saturation in active noise control: an output-constrained kalman filter approach">6</a>]</cite>. To ensure simplicity and stability, many commercial ANC systems utilize pre-trained control filters with fixed coefficients <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib6" title="Adaptive-gain algorithm on the fixed filters applied for active noise control headphone">18</a>]</cite>. Nevertheless, the performance of such fixed-filter approaches is highly sensitive to variations in noise source type and direction-of-arrival (DoA), leading to suboptimal results when either of these factors changes.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">To address these limitations, the selective fixed-filter ANC (SFANC) method has been proposed to select the most appropriate control filter for various incoming noise types, utilizing either traditional signal processing techniques <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib10" title="Feedforward selective fixed-filter active noise control: algorithm and implementation">20</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib15" title="Selective virtual sensing technique for multi-channel feedforward active noise control systems">19</a>]</cite> or deep learning-based approaches <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib27" title="A hybrid sfanc-fxnlms algorithm for active noise control based on deep learning">13</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib35" title="DEEP learning-based active trim panels for enhanced aircraft interior noise control">25</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib13" title="Transferable selective virtual sensing active noise control technique based on metric learning">26</a>]</cite>. This method provides a more robust solution for noise sources with diverse frequency characteristics, while maintaining low computational cost and fast response time. However, SFANC methods mainly focus on the frequency content of the noise and overlook spatial information, such as DoA, which has also been proven to be critical for the performance of ANC systems <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib20" title="Direction-of-arrival dependency of active noise cancellation headphones">11</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">To date, several researchers have developed methods to incorporate the influence of DoA into ANC systems. Some studies have aimed to enhance noise cancellation from various directions by improving the causality of the ANC system <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib22" title="Causality study on a feedforward active noise control headset with different noise coming directions in free field">29</a>]</cite>. Others have focused on achieving spatial selectivity, in which unwanted noise is suppressed while the desired sound is preserved. This has been accomplished either by initially canceling both the noise and the desired sound and subsequently reproducing the desired sound <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib23" title="Design and implementation of an active noise control headphone with directional hear-through capability">16</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib17" title="A directional spatial active noise control system with a sound field separation algorithm">28</a>]</cite>, or by selectively controlling the unwanted noise while leaving the desired sound unaffected <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib1" title="Spatially selective active noise control systems">27</a>]</cite>. However, these techniques rely on adaptive algorithms for real-time control filter updates. Toyooka et al. proposed a method that selects fixed filters corresponding to different noise source locations <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib24" title="Active noise control systems with sound source localization robust to noise source movement">23</a>]</cite>. Su et al. proposed an alternative approach that considers both the frequency and directional information of the noise source for control filter selection in a multichannel ANC system <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib19" title="Spatial-frequency-based selective fixed-filter algorithm for multichannel active noise control">22</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib18" title="Co-forecasting of time-varying spatial-frequency map for selective fixed-filter multichannel anc based on dynamic factor graph">21</a>]</cite>. However, these methods are limited to free-field environments and rely on traditional signal processing techniques for DoA estimation, which are ineffective in handling noise sources under complex reverberant environments. In contrast, deep neural networks (DNNs) are powerful models for accurate source locations without requiring specific modeling assumptions, making them well-suited for such challenging acoustic conditions <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib26" title="DoA estimation of room reflections using nn-based music algorithm">10</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p" id="S1.p4.1">To address this limitation, this paper proposes a convolutional neural network (CNN)-based directional SFANC method that incorporates DoA information of the noise source in reverberant environments. To achieve this, a CNN trained using multi-task learning is deployed on a co-processor to estimate the elevation and azimuth angles of the noise source based on multiple reference signals, and to select the most appropriate control filter at the frame level. The selected control filter is then applied on a sample-by-sample basis to enable delayless noise control.</p>
+</div>
+<div class="ltx_para" id="S1.p5">
+<p class="ltx_p" id="S1.p5.1">The remainder of this paper is organized as follows. Section II introduces the fundamentals of DNN-based DoA estimation and the multi-reference ANC system. Section III describes the overall framework and details of the proposed directional SFANC method. Section IV evaluates the performance of the proposed algorithm through numerical simulations. Finally, Section V concludes the paper with future research directions.</p>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Preliminaries of DNN-based Directional ANC</h2>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.1 </span>General Principle of DNN-based DoA Estimation</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p" id="S2.SS1.p1.2">DNN-based DoA estimation depends on the multichannel signals recorded with an array of <math alttext="J" class="ltx_Math" display="inline" id="S2.SS1.p1.1.m1" intent=":literal"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math> microphones spatially distributed in the environment, which collectively capture the directional information of the sound source. In reverberant environments, the signal received at the <math alttext="j" class="ltx_Math" display="inline" id="S2.SS1.p1.2.m2" intent=":literal"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>-th microphone can be modeled as</p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E1">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="{r_{j}}(n)={q_{j}}(n)*x(n)," class="ltx_Math" display="block" id="S2.E1.m1" intent=":literal"><semantics><mrow><mrow><mrow><msub><mi>r</mi><mi>j</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mrow><msub><mi>q</mi><mi>j</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo rspace="0.055em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.222em">∗</mo><mi>x</mi></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">{r_{j}}(n)={q_{j}}(n)*x(n),</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S2.SS1.p1.8">where <math alttext="{r_{j}}(n)" class="ltx_Math" display="inline" id="S2.SS1.p1.3.m1" intent=":literal"><semantics><mrow><msub><mi>r</mi><mi>j</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">{r_{j}}(n)</annotation></semantics></math> denotes the signal received at the
+<math alttext="j" class="ltx_Math" display="inline" id="S2.SS1.p1.4.m2" intent=":literal"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>-th microphone, <math alttext="x(n)" class="ltx_Math" display="inline" id="S2.SS1.p1.5.m3" intent=":literal"><semantics><mrow><mi>x</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">x(n)</annotation></semantics></math> is the source signal, <math alttext="{q_{j}}(n)" class="ltx_Math" display="inline" id="S2.SS1.p1.6.m4" intent=":literal"><semantics><mrow><msub><mi>q</mi><mi>j</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">{q_{j}}(n)</annotation></semantics></math> represents the room impulse responses (RIRs) between the source and the <math alttext="j" class="ltx_Math" display="inline" id="S2.SS1.p1.7.m5" intent=":literal"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>-th microphone and <math alttext="*" class="ltx_Math" display="inline" id="S2.SS1.p1.8.m6" intent=":literal"><semantics><mo>∗</mo><annotation encoding="application/x-tex">*</annotation></semantics></math> denotes the linear convolution operator.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p2">
+<p class="ltx_p" id="S2.SS1.p2.2">Due to differences in source location, microphone location, and room acoustics, each microphone captures a version of the source signal convolved with a distinct RIR. These variations result in interchannel differences in delay and amplitude, which encode spatial information about the DoA of the sound source relative to the microphone array. DNNs can automatically identify the relationship between the multichannel signal features and the sound source location. This offers a significant advantage over traditional DoA estimation techniques, which often rely on specific modeling assumptions and tend to perform poorly in complex indoor environments. Accordingly, the proposed directional SFANC framework employs a CNN to estimate the DoA, specifically the azimuth angle <math alttext="\theta" class="ltx_Math" display="inline" id="S2.SS1.p2.1.m1" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math> and elevation angle <math alttext="\phi" class="ltx_Math" display="inline" id="S2.SS1.p2.2.m2" intent=":literal"><semantics><mi>ϕ</mi><annotation encoding="application/x-tex">\phi</annotation></semantics></math> of the noise source.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.2 </span>Multi-Reference Active Noise Control System</h3>
+<div class="ltx_para" id="S2.SS2.p1">
+<p class="ltx_p" id="S2.SS2.p1.3">In addition to DoA estimation, the multichannel signals can also serve as reference inputs for the ANC system. Figure 1 illustrates the block diagram of the multi-reference ANC system that consists of <math alttext="J" class="ltx_Math" display="inline" id="S2.SS2.p1.1.m1" intent=":literal"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math> reference microphones, <math alttext="1" class="ltx_Math" display="inline" id="S2.SS2.p1.2.m2" intent=":literal"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math> secondary source and <math alttext="1" class="ltx_Math" display="inline" id="S2.SS2.p1.3.m3" intent=":literal"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math> error microphone. The control signal utilized to drive the secondary source is expressed as</p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E2">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="y(n)=\sum\limits_{j=1}^{J}{{\mathbf{r}}_{j}^{\rm T}(n)}{{\mathbf{w}}_{j}}(n)," class="ltx_Math" display="block" id="S2.E2.m1" intent=":literal"><semantics><mrow><mrow><mrow><mi>y</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>J</mi></munderover><mrow><msubsup><mi>𝐫</mi><mi>j</mi><mi mathvariant="normal">T</mi></msubsup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><msub><mi>𝐰</mi><mi>j</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">y(n)=\sum\limits_{j=1}^{J}{{\mathbf{r}}_{j}^{\rm T}(n)}{{\mathbf{w}}_{j}}(n),</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S2.SS2.p1.9">where <math alttext="{{\mathbf{r}}_{j}}(n)={[{r_{j}}(n),{r_{j}}(n-1),\cdots,{r_{j}}(n-L+1)]^{\rm{T}}}" class="ltx_Math" display="inline" id="S2.SS2.p1.4.m1" intent=":literal"><semantics><mrow><mrow><msub><mi>𝐫</mi><mi>j</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msup><mrow><mo stretchy="false">[</mo><mrow><msub><mi>r</mi><mi>j</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><msub><mi>r</mi><mi>j</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mi mathvariant="normal">⋯</mi><mo>,</mo><mrow><msub><mi>r</mi><mi>j</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>n</mi><mo>−</mo><mi>L</mi></mrow><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">]</mo></mrow><mi mathvariant="normal">T</mi></msup></mrow><annotation encoding="application/x-tex">{{\mathbf{r}}_{j}}(n)={[{r_{j}}(n),{r_{j}}(n-1),\cdots,{r_{j}}(n-L+1)]^{\rm{T}}}</annotation></semantics></math> is the <math alttext="j" class="ltx_Math" display="inline" id="S2.SS2.p1.5.m2" intent=":literal"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>-th reference signal vector, <math alttext="{{\mathbf{w}}_{j}}(n)={[{w_{j,1}}(n),{w_{j,2}}(n),\cdots,{w_{j,L}}(n)]^{\rm{T}}}" class="ltx_Math" display="inline" id="S2.SS2.p1.6.m3" intent=":literal"><semantics><mrow><mrow><msub><mi>𝐰</mi><mi>j</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msup><mrow><mo stretchy="false">[</mo><mrow><msub><mi>w</mi><mrow><mi>j</mi><mo>,</mo><mn>1</mn></mrow></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><msub><mi>w</mi><mrow><mi>j</mi><mo>,</mo><mn>2</mn></mrow></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mi mathvariant="normal">⋯</mi><mo>,</mo><mrow><msub><mi>w</mi><mrow><mi>j</mi><mo>,</mo><mi>L</mi></mrow></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">]</mo></mrow><mi mathvariant="normal">T</mi></msup></mrow><annotation encoding="application/x-tex">{{\mathbf{w}}_{j}}(n)={[{w_{j,1}}(n),{w_{j,2}}(n),\cdots,{w_{j,L}}(n)]^{\rm{T}}}</annotation></semantics></math> is the <math alttext="j" class="ltx_Math" display="inline" id="S2.SS2.p1.7.m4" intent=":literal"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>-th control filter vector, <math alttext="L" class="ltx_Math" display="inline" id="S2.SS2.p1.8.m5" intent=":literal"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math> is the control filter length and <math alttext="\rm T" class="ltx_Math" display="inline" id="S2.SS2.p1.9.m6" intent=":literal"><semantics><mi mathvariant="normal">T</mi><annotation encoding="application/x-tex">\rm T</annotation></semantics></math> denotes the matrix transpose operator.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p2">
+<p class="ltx_p" id="S2.SS2.p2.5">The error signal picked up by the error microphone is stated as</p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E3">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="e(n)=d(n)-{{\mathbf{y}}^{\rm T}}(n){\mathbf{s}}(n)," class="ltx_Math" display="block" id="S2.E3.m1" intent=":literal"><semantics><mrow><mrow><mrow><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>d</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><msup><mi>𝐲</mi><mi mathvariant="normal">T</mi></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mi>𝐬</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">e(n)=d(n)-{{\mathbf{y}}^{\rm T}}(n){\mathbf{s}}(n),</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S2.SS2.p2.4">where <math alttext="d(n)" class="ltx_Math" display="inline" id="S2.SS2.p2.1.m1" intent=":literal"><semantics><mrow><mi>d</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">d(n)</annotation></semantics></math> is the disturbance at the error microphone, <math alttext="{\mathbf{y}}(n)={[y(n),y(n-1),\cdots,y(n-{L_{s}}+1)]^{\rm{T}}}" class="ltx_Math" display="inline" id="S2.SS2.p2.2.m2" intent=":literal"><semantics><mrow><mrow><mi>𝐲</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msup><mrow><mo stretchy="false">[</mo><mrow><mi>y</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><mi>y</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mi mathvariant="normal">⋯</mi><mo>,</mo><mrow><mi>y</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>n</mi><mo>−</mo><msub><mi>L</mi><mi>s</mi></msub></mrow><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">]</mo></mrow><mi mathvariant="normal">T</mi></msup></mrow><annotation encoding="application/x-tex">{\mathbf{y}}(n)={[y(n),y(n-1),\cdots,y(n-{L_{s}}+1)]^{\rm{T}}}</annotation></semantics></math> is the control signal vector, <math alttext="{\mathbf{s}}(n)={[{s_{1}}(n),{s_{2}}(n),\cdots,{s_{{L_{s}}}}(n)]^{\rm{T}}}" class="ltx_Math" display="inline" id="S2.SS2.p2.3.m3" intent=":literal"><semantics><mrow><mrow><mi>𝐬</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><msup><mrow><mo stretchy="false">[</mo><mrow><msub><mi>s</mi><mn>1</mn></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><msub><mi>s</mi><mn>2</mn></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mi mathvariant="normal">⋯</mi><mo>,</mo><mrow><msub><mi>s</mi><msub><mi>L</mi><mi>s</mi></msub></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">]</mo></mrow><mi mathvariant="normal">T</mi></msup></mrow><annotation encoding="application/x-tex">{\mathbf{s}}(n)={[{s_{1}}(n),{s_{2}}(n),\cdots,{s_{{L_{s}}}}(n)]^{\rm{T}}}</annotation></semantics></math> is the secondary path impulse response and <math alttext="L_{s}" class="ltx_Math" display="inline" id="S2.SS2.p2.4.m4" intent=":literal"><semantics><msub><mi>L</mi><mi>s</mi></msub><annotation encoding="application/x-tex">L_{s}</annotation></semantics></math> is the secondary path length.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p3">
+<p class="ltx_p" id="S2.SS2.p3.1">According to the FxLMS algorithm, the <math alttext="j" class="ltx_Math" display="inline" id="S2.SS2.p3.1.m1" intent=":literal"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>-th control filter coefficient is updated by</p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E4">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="{{\mathbf{w}}_{j}}(n+1)={{\mathbf{w}}_{j}}(n)+\mu{{{\mathbf{r}}}_{j}^{\prime}}(n)e(n)," class="ltx_Math" display="block" id="S2.E4.m1" intent=":literal"><semantics><mrow><mrow><mrow><msub><mi>𝐰</mi><mi>j</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><msub><mi>𝐰</mi><mi>j</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><msubsup><mi>𝐫</mi><mi>j</mi><mo>′</mo></msubsup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">{{\mathbf{w}}_{j}}(n+1)={{\mathbf{w}}_{j}}(n)+\mu{{{\mathbf{r}}}_{j}^{\prime}}(n)e(n),</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(4)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S2.SS2.p3.3">where <math alttext="\mu" class="ltx_Math" display="inline" id="S2.SS2.p3.2.m1" intent=":literal"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math> is the stepsize, <math alttext="{{{\mathbf{r}}}_{j}^{\prime}}(n)" class="ltx_Math" display="inline" id="S2.SS2.p3.3.m2" intent=":literal"><semantics><mrow><msubsup><mi>𝐫</mi><mi>j</mi><mo>′</mo></msubsup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">{{{\mathbf{r}}}_{j}^{\prime}}(n)</annotation></semantics></math> is the filtered reference signal generated by passing the reference signal through the estimated secondary path as</p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E5">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="{{{\mathbf{r}}}_{j}^{\prime}}(n)=\hat{s}(n)*{{\mathbf{r}}_{j}}(n)" class="ltx_Math" display="block" id="S2.E5.m1" intent=":literal"><semantics><mrow><mrow><msubsup><mi>𝐫</mi><mi>j</mi><mo>′</mo></msubsup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mrow><mover accent="true"><mi>s</mi><mo>^</mo></mover><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo rspace="0.055em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.222em">∗</mo><msub><mi>𝐫</mi><mi>j</mi></msub></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">{{{\mathbf{r}}}_{j}^{\prime}}(n)=\hat{s}(n)*{{\mathbf{r}}_{j}}(n)</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(5)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div class="ltx_para" id="S2.SS2.p4">
+<p class="ltx_p" id="S2.SS2.p4.1">However, the adaptive FxLMS algorithm requires time to converge and an inappropriate step size may even lead to noise amplification. To improve response time and enhance system stability, the proposed directional SFANC method selects a pre-trained fixed-filter based on the DoA of the noise source.</p>
+</div>
+<figure class="ltx_figure" id="S2.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="116" id="S2.F1.1.g1" src="multirefernec.png" width="354"/>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>Block diagram of the multi-reference active noise control system.</figcaption>
+</figure>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Proposed Directional SFANC Method</h2>
+<div class="ltx_para" id="S3.p1">
+<p class="ltx_p" id="S3.p1.8">The block diagram of the proposed directional SFANC technique is shown in Fig. 2. The system consists of two main components: a real-time controller for noise cancellation and a co-processor for control filter selection. As illustrated in Fig. 2, the controller operates at the sampling rate to generate the control signal. Meanwhile, reference signals are collected at each frame and transmitted to the co-processor. The objective is to estimate the azimuth and elevation angles of the noise source relative to the reference microphone array, using information embedded in the reference signals. Based on these inputs, the CNN outputs the predicted probabilities for each azimuth and elevation class as</p>
+<table class="ltx_equation ltx_eqn_table" id="S3.E6">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="({{{\mathbf{\hat{p}}}}}_{\rm{azim}},{{{\mathbf{\hat{p}}}}}_{\rm{elev}})=CNN({{\mathbf{R}}};{\Theta^{*}})" class="ltx_Math" display="block" id="S3.E6.m1" intent=":literal"><semantics><mrow><mrow><mo stretchy="false">(</mo><msub><mover accent="true"><mi>𝐩</mi><mo>^</mo></mover><mi>azim</mi></msub><mo>,</mo><msub><mover accent="true"><mi>𝐩</mi><mo>^</mo></mover><mi>elev</mi></msub><mo stretchy="false">)</mo></mrow><mo>=</mo><mrow><mi>C</mi><mo lspace="0em" rspace="0em">​</mo><mi>N</mi><mo lspace="0em" rspace="0em">​</mo><mi>N</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>𝐑</mi><mo>;</mo><msup><mi mathvariant="normal">Θ</mi><mo>∗</mo></msup><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">({{{\mathbf{\hat{p}}}}}_{\rm{azim}},{{{\mathbf{\hat{p}}}}}_{\rm{elev}})=CNN({{\mathbf{R}}};{\Theta^{*}})</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(6)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S3.p1.7">where <math alttext="{{\mathbf{R}}}" class="ltx_Math" display="inline" id="S3.p1.1.m1" intent=":literal"><semantics><mi>𝐑</mi><annotation encoding="application/x-tex">{{\mathbf{R}}}</annotation></semantics></math> is the short-term fourier transform (STFT) spectrograms of <math alttext="J" class="ltx_Math" display="inline" id="S3.p1.2.m2" intent=":literal"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math>-channel reference signals at one frame, <math alttext="{\Theta^{*}}" class="ltx_Math" display="inline" id="S3.p1.3.m3" intent=":literal"><semantics><msup><mi mathvariant="normal">Θ</mi><mo>∗</mo></msup><annotation encoding="application/x-tex">{\Theta^{*}}</annotation></semantics></math> is the trained CNN parameters, <math alttext="{{{\mathbf{\hat{p}}}}}_{\rm{azim}}=[{{\hat{p}}}_{\rm{azim},1},{{\hat{p}}}_{\rm{azim},2},...,{{\hat{p}}}_{\rm{azim},A}]" class="ltx_Math" display="inline" id="S3.p1.4.m4" intent=":literal"><semantics><mrow><msub><mover accent="true"><mi>𝐩</mi><mo>^</mo></mover><mi>azim</mi></msub><mo>=</mo><mrow><mo stretchy="false">[</mo><msub><mover accent="true"><mi>p</mi><mo>^</mo></mover><mrow><mi>azim</mi><mo>,</mo><mn>1</mn></mrow></msub><mo>,</mo><msub><mover accent="true"><mi>p</mi><mo>^</mo></mover><mrow><mi>azim</mi><mo>,</mo><mn>2</mn></mrow></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mover accent="true"><mi>p</mi><mo>^</mo></mover><mrow><mi>azim</mi><mo>,</mo><mi mathvariant="normal">A</mi></mrow></msub><mo stretchy="false">]</mo></mrow></mrow><annotation encoding="application/x-tex">{{{\mathbf{\hat{p}}}}}_{\rm{azim}}=[{{\hat{p}}}_{\rm{azim},1},{{\hat{p}}}_{\rm{azim},2},...,{{\hat{p}}}_{\rm{azim},A}]</annotation></semantics></math> is the predicted probability distribution over the <math alttext="A" class="ltx_Math" display="inline" id="S3.p1.5.m5" intent=":literal"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> azimuth angle classes, <math alttext="{{{\mathbf{\hat{p}}}}}_{\rm{elev}}=[{{\hat{p}}}_{\rm{elev},1},{{\hat{p}}}_{\rm{elev},2},...,{{\hat{p}}}_{\rm{elev},B}]" class="ltx_Math" display="inline" id="S3.p1.6.m6" intent=":literal"><semantics><mrow><msub><mover accent="true"><mi>𝐩</mi><mo>^</mo></mover><mi>elev</mi></msub><mo>=</mo><mrow><mo stretchy="false">[</mo><msub><mover accent="true"><mi>p</mi><mo>^</mo></mover><mrow><mi>elev</mi><mo>,</mo><mn>1</mn></mrow></msub><mo>,</mo><msub><mover accent="true"><mi>p</mi><mo>^</mo></mover><mrow><mi>elev</mi><mo>,</mo><mn>2</mn></mrow></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mover accent="true"><mi>p</mi><mo>^</mo></mover><mrow><mi>elev</mi><mo>,</mo><mi mathvariant="normal">B</mi></mrow></msub><mo stretchy="false">]</mo></mrow></mrow><annotation encoding="application/x-tex">{{{\mathbf{\hat{p}}}}}_{\rm{elev}}=[{{\hat{p}}}_{\rm{elev},1},{{\hat{p}}}_{\rm{elev},2},...,{{\hat{p}}}_{\rm{elev},B}]</annotation></semantics></math> is the predicted probability distribution over the <math alttext="B" class="ltx_Math" display="inline" id="S3.p1.7.m7" intent=":literal"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math> elevation angle classes.</p>
+</div>
+<div class="ltx_para" id="S3.p2">
+<p class="ltx_p" id="S3.p2.1">Then, the estimated azimuth index <math alttext="\hat{a}" class="ltx_Math" display="inline" id="S3.p2.1.m1" intent=":literal"><semantics><mover accent="true"><mi>a</mi><mo>^</mo></mover><annotation encoding="application/x-tex">\hat{a}</annotation></semantics></math> can be obtained as</p>
+<table class="ltx_equation ltx_eqn_table" id="S3.E7">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\hat{a}=\mathop{\arg\max}\limits_{i\in\{1,2,...,A\}}{{\hat{p}}_{\rm{azim},i}}." class="ltx_Math" display="block" id="S3.E7.m1" intent=":literal"><semantics><mrow><mrow><mover accent="true"><mi>a</mi><mo>^</mo></mover><mo>=</mo><mrow><munder><mrow><mi>arg</mi><mo lspace="0.167em">⁡</mo><mi>max</mi></mrow><mrow><mi>i</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>A</mi><mo stretchy="false">}</mo></mrow></mrow></munder><msub><mover accent="true"><mi>p</mi><mo>^</mo></mover><mrow><mi>azim</mi><mo>,</mo><mi mathvariant="normal">i</mi></mrow></msub></mrow></mrow><mo lspace="0em">.</mo></mrow><annotation encoding="application/x-tex">\hat{a}=\mathop{\arg\max}\limits_{i\in\{1,2,...,A\}}{{\hat{p}}_{\rm{azim},i}}.</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(7)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S3.p2.3">where <math alttext="{{\hat{p}}_{\rm{azim},i}}" class="ltx_Math" display="inline" id="S3.p2.2.m1" intent=":literal"><semantics><msub><mover accent="true"><mi>p</mi><mo>^</mo></mover><mrow><mi>azim</mi><mo>,</mo><mi mathvariant="normal">i</mi></mrow></msub><annotation encoding="application/x-tex">{{\hat{p}}_{\rm{azim},i}}</annotation></semantics></math> denotes the predicted probability of the <math alttext="i" class="ltx_Math" display="inline" id="S3.p2.3.m2" intent=":literal"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>-th azimuth class.</p>
+</div>
+<div class="ltx_para" id="S3.p3">
+<p class="ltx_p" id="S3.p3.1">And the estimated elevation index <math alttext="\hat{b}" class="ltx_Math" display="inline" id="S3.p3.1.m1" intent=":literal"><semantics><mover accent="true"><mi>b</mi><mo>^</mo></mover><annotation encoding="application/x-tex">\hat{b}</annotation></semantics></math> can be obtained as</p>
+<table class="ltx_equation ltx_eqn_table" id="S3.E8">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\hat{b}=\mathop{\arg\max}\limits_{k\in\{1,2,...,B\}}{{\hat{p}}_{\rm{elev},k}}." class="ltx_Math" display="block" id="S3.E8.m1" intent=":literal"><semantics><mrow><mrow><mover accent="true"><mi>b</mi><mo>^</mo></mover><mo>=</mo><mrow><munder><mrow><mi>arg</mi><mo lspace="0.167em">⁡</mo><mi>max</mi></mrow><mrow><mi>k</mi><mo>∈</mo><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>B</mi><mo stretchy="false">}</mo></mrow></mrow></munder><msub><mover accent="true"><mi>p</mi><mo>^</mo></mover><mrow><mi>elev</mi><mo>,</mo><mi mathvariant="normal">k</mi></mrow></msub></mrow></mrow><mo lspace="0em">.</mo></mrow><annotation encoding="application/x-tex">\hat{b}=\mathop{\arg\max}\limits_{k\in\{1,2,...,B\}}{{\hat{p}}_{\rm{elev},k}}.</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(8)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S3.p3.3">where <math alttext="{{\hat{p}}_{\rm{elev},k}}" class="ltx_Math" display="inline" id="S3.p3.2.m1" intent=":literal"><semantics><msub><mover accent="true"><mi>p</mi><mo>^</mo></mover><mrow><mi>elev</mi><mo>,</mo><mi mathvariant="normal">k</mi></mrow></msub><annotation encoding="application/x-tex">{{\hat{p}}_{\rm{elev},k}}</annotation></semantics></math> denotes the predicted probability of the <math alttext="k" class="ltx_Math" display="inline" id="S3.p3.3.m2" intent=":literal"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>-th elevation class.</p>
+</div>
+<div class="ltx_para" id="S3.p4">
+<p class="ltx_p" id="S3.p4.1">Finally, based on the predicted azimuth index and elevation index, the coefficients of the selected control filter are updated at the frame rate. By facilitating cooperation between the real-time noise controller and the co-processor, the proposed directional SFANC method enables delayless noise control.</p>
+</div>
+<figure class="ltx_figure" id="S3.F2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="199" id="S3.F2.1.g1" src="control.png" width="354"/>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>Block diagram of the proposed directional SFANC method.</figcaption>
+</figure>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Pre-trained Control Filter Library</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.2">Prior to the online execution of the directional SFANC method, a control filter library must be pre-trained to account for various combinations of azimuth and elevation angles of the noise source. Specifically, the horizontal plane of the reference microphone array is divided into <math alttext="A" class="ltx_Math" display="inline" id="S3.SS1.p1.1.m1" intent=":literal"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> azimuth classes, and the vertical plane is divided into <math alttext="B" class="ltx_Math" display="inline" id="S3.SS1.p1.2.m2" intent=":literal"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math> elevation classes. At each discrete direction defined by this grid, the FxLMS algorithm is used to pre-train a control filter for broadband noise. These control filters are then stored in a library for deployment.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>CNN Trained Using a Multi-Task Learning Strategy</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.5">In this work, a CNN is employed for DoA estimation, which has been found to be effective for this task <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib25" title="A survey of sound source localization with deep learning methods">4</a>]</cite>. The architecture of the proposed CNN is illustrated in Fig. 3. The input consists of a one-frame, <math alttext="J" class="ltx_Math" display="inline" id="S3.SS2.p1.1.m1" intent=":literal"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math>-channel reference signal, which is transformed into <math alttext="J" class="ltx_Math" display="inline" id="S3.SS2.p1.2.m2" intent=":literal"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math> magnitude spectrograms and <math alttext="J" class="ltx_Math" display="inline" id="S3.SS2.p1.3.m3" intent=":literal"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math> phase spectrograms using the STFT for feature extraction. The pre-processed data is passed through three convolutional modules, each comprising a convolutional layer followed by group normalization, ReLU activation, and max-pooling. Adaptive average pooling is then applied to reduce the feature maps by averaging over both frequency and time. These pooled features are subsequently fed into two fully connected (FC) layers to estimate the class probabilities for <math alttext="A" class="ltx_Math" display="inline" id="S3.SS2.p1.4.m4" intent=":literal"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> azimuth and <math alttext="B" class="ltx_Math" display="inline" id="S3.SS2.p1.5.m5" intent=":literal"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math> elevation angles. Final predictions are obtained through softmax layers.</p>
+</div>
+<figure class="ltx_figure" id="S3.F3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_portrait" height="258" id="S3.F3.1.g1" src="cnn.png" width="118"/>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 3: </span>Architecture of the proposed CNN.</figcaption>
+</figure>
+<div class="ltx_para" id="S3.SS2.p2">
+<p class="ltx_p" id="S3.SS2.p2.2">As previously discussed, the selected control filter is determined by the azimuth and elevation angle indices predicted by the CNN. To enable this, the CNN is trained using a multi-task learning strategy that simultaneously performs azimuth and elevation classification. The loss functions for both tasks are cross-entropy loss functions, denoted as <math alttext="Loss{{}_{\rm{azim}}}" class="ltx_math_unparsed" display="inline" id="S3.SS2.p2.1.m1" intent=":literal"><semantics><mrow><mi>L</mi><mi>o</mi><mi>s</mi><mi>s</mi><msub><mi></mi><mi>azim</mi></msub></mrow><annotation encoding="application/x-tex">Loss{{}_{\rm{azim}}}</annotation></semantics></math> and <math alttext="Loss{{}_{\rm{elev}}}" class="ltx_math_unparsed" display="inline" id="S3.SS2.p2.2.m2" intent=":literal"><semantics><mrow><mi>L</mi><mi>o</mi><mi>s</mi><mi>s</mi><msub><mi></mi><mi>elev</mi></msub></mrow><annotation encoding="application/x-tex">Loss{{}_{\rm{elev}}}</annotation></semantics></math> respectively. The joint loss function used to train the CNN is formulated as</p>
+<table class="ltx_equation ltx_eqn_table" id="S3.E9">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="Loss=Loss{{}_{\rm{azim}}}+Loss{{}_{\rm{elev}}}" class="ltx_math_unparsed" display="block" id="S3.E9.m1" intent=":literal"><semantics><mrow><mi>L</mi><mi>o</mi><mi>s</mi><mi>s</mi><mo>=</mo><mi>L</mi><mi>o</mi><mi>s</mi><mi>s</mi><mmultiscripts><mo>+</mo><mprescripts></mprescripts><mi>azim</mi><mrow></mrow></mmultiscripts><mi>L</mi><mi>o</mi><mi>s</mi><mi>s</mi><msub><mi></mi><mi>elev</mi></msub></mrow><annotation encoding="application/x-tex">Loss=Loss{{}_{\rm{azim}}}+Loss{{}_{\rm{elev}}}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(9)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div class="ltx_para" id="S3.SS2.p3">
+<p class="ltx_p" id="S3.SS2.p3.1">This joint loss allows the network to learn shared representations while balancing the learning of both tasks, offering a more efficient alternative to training separate models <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib30" title="A survey on multi-task learning">30</a>]</cite>.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Numerical Simulations</h2>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p" id="S4.p1.1">The effectiveness of the proposed directional SFANC method is evaluated in a 4×1×1 multi-reference ANC system in reverberant environments, where a four-channel tetrahedral microphone array with a diameter of 2.5 cm is employed as the reference microphone array to effectively capture the spatial characteristics of the noise source <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib31" title="Sound source distance estimation in diverse and dynamic acoustic conditions">9</a>]</cite>. For the construction of the pre-trained control filter library, as illustrated in Fig. 4, the horizontal plane of the microphone array is divided into six azimuth classes: 0°, 60°, 120°, 180°, 240°, and 300°, while the vertical plane is divided into three elevation classes: 90°, 30°, and -30°. The distance between the noise source and the microphone array is fixed at 0.2 m. At each discrete direction defined by this spatial grid, a control filter is pre-trained using the FxLMS algorithm with broadband noise in the 20–2020 Hz range, targeting the low-frequency band typically addressed by ANC systems. A total of 13 control filters are trained and stored in the library. The STFT is computed using a Hann window of 1024 samples, a hop size of 64 samples, and the system operates at a sampling frequency of 16 kHz.</p>
+</div>
+<figure class="ltx_figure" id="S4.F4"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="157" id="S4.F4.1.g1" src="cflibrary.png" width="334"/>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 4: </span>Illustration of the pre-trained control filter library: (a) azimuth angle classes defined in the horizontal plane, and (b) elevation angle classes defined in the vertical plane.</figcaption>
+</figure>
+<figure class="ltx_table" id="S4.T1">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 1: </span>Configurations for training, validation and testing datasets.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S4.T1.4">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S4.T1.4.5.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_th_row ltx_border_l ltx_border_r ltx_border_t" colspan="2" id="S4.T1.4.5.1.1"><span class="ltx_text ltx_font_bold" id="S4.T1.4.5.1.1.1">Training and Validation Datasets</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S4.T1.1.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" id="S4.T1.1.1.2">Noise signal</th>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T1.1.1.1">Synthesized noises <math alttext="\&amp;" class="ltx_Math" display="inline" id="S4.T1.1.1.1.m1" intent=":literal"><semantics><mo>&amp;</mo><annotation encoding="application/x-tex">\&amp;</annotation></semantics></math> real noises</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.4.6.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" id="S4.T1.4.6.1.1">Room size (m)</th>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T1.4.6.1.2">R1: (6x4x3); R2: (12x8x3.5); R3: (16x14x4)</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.4.7.2">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" id="S4.T1.4.7.2.1">Array positions</th>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T1.4.7.2.2">8 arbitrary positions in each room</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.2">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" id="S4.T1.2.2.1">RT<sub class="ltx_sub" id="S4.T1.2.2.1.1"><span class="ltx_text ltx_font_italic" id="S4.T1.2.2.1.1.1">60</span></sub> (s)</th>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T1.2.2.2">R1: 0.1, 0.2, 0.3; R2: 0.4, 0.5, 0.6; R3: 0.7, 0.8, 0.9</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.4.8.3">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" id="S4.T1.4.8.3.1">SNR (dB)</th>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T1.4.8.3.2">Uniformly sampled from 30 to 50</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.4.9.4">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" colspan="2" id="S4.T1.4.9.4.1"><span class="ltx_text ltx_font_bold" id="S4.T1.4.9.4.1.1">Testing Dataset</span></th>
+</tr>
+<tr class="ltx_tr" id="S4.T1.3.3">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" id="S4.T1.3.3.2">Noise signal</th>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T1.3.3.1">Synthesized noises <math alttext="\&amp;" class="ltx_Math" display="inline" id="S4.T1.3.3.1.m1" intent=":literal"><semantics><mo>&amp;</mo><annotation encoding="application/x-tex">\&amp;</annotation></semantics></math> real noises</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.4.10.5">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" id="S4.T1.4.10.5.1">Room size (m)</th>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T1.4.10.5.2">(11x9x3.2)</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.4.11.6">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" id="S4.T1.4.11.6.1">Array positions</th>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T1.4.11.6.2">4 arbitrary positions in each room</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.4.4">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" id="S4.T1.4.4.1">RT<sub class="ltx_sub" id="S4.T1.4.4.1.1"><span class="ltx_text ltx_font_italic" id="S4.T1.4.4.1.1.1">60</span></sub> (s)</th>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T1.4.4.2">0.48</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.4.12.7">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_b ltx_border_l ltx_border_r ltx_border_t" id="S4.T1.4.12.7.1">SNR (dB)</th>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t" id="S4.T1.4.12.7.2">30, 40, 50</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure class="ltx_table" id="S4.T2">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 2: </span>The classification accuracy of the CNN with different SNRs.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S4.T2.1">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S4.T2.1.1.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_l ltx_border_r ltx_border_t" id="S4.T2.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S4.T2.1.1.1.1.1">Metrics</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S4.T2.1.1.1.2"><span class="ltx_text ltx_font_bold" id="S4.T2.1.1.1.2.1">SNR = 30 dB</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S4.T2.1.1.1.3"><span class="ltx_text ltx_font_bold" id="S4.T2.1.1.1.3.1">SNR = 40 dB</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S4.T2.1.1.1.4"><span class="ltx_text ltx_font_bold" id="S4.T2.1.1.1.4.1">SNR = 50 dB</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S4.T2.1.2.1">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t" id="S4.T2.1.2.1.1">Azimuth angle Acc.</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T2.1.2.1.2">96.4%</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T2.1.2.1.3">96.4%</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T2.1.2.1.4">96.4%</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.1.3.2">
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_l ltx_border_r ltx_border_t" id="S4.T2.1.3.2.1">Elevation angle Acc.</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t" id="S4.T2.1.3.2.2">90.7%</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t" id="S4.T2.1.3.2.3">90.8%</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t" id="S4.T2.1.3.2.4">91.0%</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1 </span>DoA Estimation with CNN</h3>
+<section class="ltx_subsubsection" id="S4.SS1.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">4.1.1 </span>Dataset generation</h4>
+<div class="ltx_para" id="S4.SS1.SSS1.p1">
+<p class="ltx_p" id="S4.SS1.SSS1.p1.1">A noise dataset consisting of both synthetic and real noise signals is first constructed. The synthetic noises are generated as bandlimited white noise with varying bandwidths, while the real noises are sourced from the UrbanSound8K dataset <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib32" title="A dataset and taxonomy for urban sound research">17</a>]</cite>. The generated noise signals are then convolved with a variety of RIRs to produce reference signals captured by the tetrahedral microphone array, with additive noise included. The azimuth angle of the noise source relative to the microphone array is randomly selected from the range [0°, 360°], the elevation angle from [-60°, 90°], and the source-to-array distance from [0.1 m, 0.6 m], with the array-to-surface distance maintained at over 1 m. The nearest azimuth and elevation angle classes, as defined in Fig. 4, are assigned as the corresponding labels. To enhance the system’s robustness under adverse acoustic conditions, the training and validation datasets incorporate variations of the RIRs made with different room sizes, array positions, reverberation time (RT<sub class="ltx_sub" id="S4.SS1.SSS1.p1.1.1"><span class="ltx_text ltx_font_italic" id="S4.SS1.SSS1.p1.1.1.1">60</span></sub>), and signal-to-noise ratio (SNR) levels. For the testing dataset, both the noise types and acoustic environments are distinct from those used during training, ensuring a fair evaluation of generalization performance. A summary of the dataset configuration is provided in Table I. The RIRs are generated using the <span class="ltx_text ltx_font_italic" id="S4.SS1.SSS1.p1.1.2">gpuRIR</span> library <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib28" title="GpuRIR: a python library for room impulse response simulation with gpu acceleration">2</a>]</cite> based on the image method <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib29" title="Image method for efficiently simulating small-room acoustics">1</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.SSS1.p2">
+<p class="ltx_p" id="S4.SS1.SSS1.p2.1">In total, the dataset includes 46080 training samples (38400 synthetic, 7680 real), 5760 validation samples (4800 synthetic, 960 real), and 4800 test samples (4000 synthetic, 800 real). Each sample is a four-channel, 0.5-second frame.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S4.SS1.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">4.1.2 </span>Classification accuracy under unseen acoustic environments and noise types</h4>
+<div class="ltx_para" id="S4.SS1.SSS2.p1">
+<p class="ltx_p" id="S4.SS1.SSS2.p1.1">As shown in Table II, the proposed CNN achieves a classification accuracy of approximately 96% for azimuth angle and 91% for elevation angle under varying SNR levels. Notably, these results are obtained using unseen noise types and acoustic environments during testing, highlighting the model’s strong generalization capability and robustness to real-world variability. In addition, the CNN is computationally efficient, with only 0.03 million parameters, a CPU runtime of 7.83 ms, and 119.86 million multiply-accumulate operations (MACs), making it suitable for deployment on embedded devices. These findings demonstrate the effectiveness of the proposed method in selecting appropriate control filters for noise sources with different DoAs, thereby enabling efficient noise control in reverberant environments.</p>
+</div>
+</section>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2 </span>Noise Cancellation based on DoA Estimation</h3>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p" id="S4.SS2.p1.1">Noise cancellation simulations are conducted in the testing environments summarized in Table 1 with the arrangement of the 4x1x1 multi-reference ANC system shown in Fig. 5. The proposed directional SFANC method is compared with several baseline methods, including the conventional FxLMS algorithm, standard SFANC <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib12" title="Real-time implementation and explainable ai analysis of delayless cnn-based selective fixed-filter active noise control">14</a>]</cite>, and generative fixed-filter ANC (GFANC) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#bib.bib36" title="Deep learning-based generative fixed-filter active noise control: transferability and implementation">12</a>]</cite>. For both the standard SFANC and GFANC methods, the pre-trained control filters are trained using a noise source located at <math alttext="(\theta=0^{\circ},\phi=30^{\circ})" class="ltx_Math" display="inline" id="S4.SS2.p1.1.m1" intent=":literal"><semantics><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>θ</mi><mo>=</mo><msup><mn>0</mn><mo>∘</mo></msup></mrow><mo>,</mo><mrow><mi>ϕ</mi><mo>=</mo><msup><mn>30</mn><mo>∘</mo></msup></mrow></mrow><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\theta=0^{\circ},\phi=30^{\circ})</annotation></semantics></math>, corresponding to the center of the reference microphone array.</p>
+</div>
+<figure class="ltx_figure" id="S4.F5"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="141" id="S4.F5.1.g1" src="simulationdia2.png" width="334"/>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 5: </span>Simulation arrangement of the 4x1x1 multi-reference ANC system.</figcaption>
+</figure>
+<section class="ltx_subsubsection" id="S4.SS2.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">4.2.1 </span>Broadband Noise Cancellation</h4>
+<div class="ltx_para" id="S4.SS2.SSS1.p1">
+<p class="ltx_p" id="S4.SS2.SSS1.p1.3">To evaluate the noise reduction performance of the proposed directional SFANC method for broadband noise, a primary noise signal in the 100–700 Hz range is first positioned at <math alttext="(\theta=120^{\circ},\phi=30^{\circ})" class="ltx_Math" display="inline" id="S4.SS2.SSS1.p1.1.m1" intent=":literal"><semantics><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>θ</mi><mo>=</mo><msup><mn>120</mn><mo>∘</mo></msup></mrow><mo>,</mo><mrow><mi>ϕ</mi><mo>=</mo><msup><mn>30</mn><mo>∘</mo></msup></mrow></mrow><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\theta=120^{\circ},\phi=30^{\circ})</annotation></semantics></math> corresponding to the reference microphone array. The power spectral density (PSD) of the residual noise after applying the FxLMS, SFANC, GFANC, and directional SFANC methods is shown in Fig. 6(a). The PSD is computed by averaging across the entire duration of the signal and the step size of the FxLMS algorithm is set to <math alttext="1\times{10^{-4}}" class="ltx_Math" display="inline" id="S4.SS2.SSS1.p1.2.m2" intent=":literal"><semantics><mrow><mn>1</mn><mo lspace="0.222em" rspace="0.222em">×</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>4</mn></mrow></msup></mrow><annotation encoding="application/x-tex">1\times{10^{-4}}</annotation></semantics></math>. Additionally, the averaged noise reduction levels per 0.5 second achieved by the four methods are presented in Fig. 6(b). A similar evaluation is conducted for a noise source located at <math alttext="(\theta=0^{\circ},\phi=-30^{\circ})" class="ltx_Math" display="inline" id="S4.SS2.SSS1.p1.3.m3" intent=":literal"><semantics><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>θ</mi><mo>=</mo><msup><mn>0</mn><mo>∘</mo></msup></mrow><mo>,</mo><mrow><mi>ϕ</mi><mo>=</mo><mrow><mo>−</mo><msup><mn>30</mn><mo>∘</mo></msup></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\theta=0^{\circ},\phi=-30^{\circ})</annotation></semantics></math> corresponding to the reference microphone array, with the results shown in Fig. 7. As shown in Fig. 6 and Fig. 7, the proposed directional SFANC method outperforms the conventional FxLMS algorithm in terms of both response time and noise reduction performance. Furthermore, when the azimuth or elevation angle of the noise source deviates from the pre-trained filter location used in the SFANC and GFANC methods, these approaches exhibit limited noise reduction capability or may even amplify the noise. This degradation is attributed to their inability to track changes in the DoA of the noise source.</p>
+</div>
+<figure class="ltx_figure" id="S4.F6"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="116" id="S4.F6.1.g1" src="sim1.png" width="354"/>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 6: </span>(a) PSD and (b) averaged noise reduction level per 0.5 second attenuated by different ANC algorithms for 100–700 Hz broadband noise located at <math alttext="(\theta=120^{\circ},\phi=30^{\circ})" class="ltx_Math" display="inline" id="S4.F6.3.m1" intent=":literal"><semantics><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>θ</mi><mo>=</mo><msup><mn>120</mn><mo>∘</mo></msup></mrow><mo>,</mo><mrow><mi>ϕ</mi><mo>=</mo><msup><mn>30</mn><mo>∘</mo></msup></mrow></mrow><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\theta=120^{\circ},\phi=30^{\circ})</annotation></semantics></math> relative to the reference microphone array.</figcaption>
+</figure>
+<figure class="ltx_figure" id="S4.F7"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="116" id="S4.F7.1.g1" src="sim2.png" width="354"/>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 7: </span>(a) PSD and (b) averaged noise reduction level per 0.5 second attenuated by different ANC algorithms for 100–700 Hz broadband noise located at <math alttext="(\theta=0^{\circ},\phi=-30^{\circ})" class="ltx_Math" display="inline" id="S4.F7.3.m1" intent=":literal"><semantics><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>θ</mi><mo>=</mo><msup><mn>0</mn><mo>∘</mo></msup></mrow><mo>,</mo><mrow><mi>ϕ</mi><mo>=</mo><mrow><mo>−</mo><msup><mn>30</mn><mo>∘</mo></msup></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\theta=0^{\circ},\phi=-30^{\circ})</annotation></semantics></math> relative to the reference microphone array.</figcaption>
+</figure>
+</section>
+<section class="ltx_subsubsection" id="S4.SS2.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">4.2.2 </span>Real-world Noise Cancellation</h4>
+<div class="ltx_para" id="S4.SS2.SSS2.p1">
+<p class="ltx_p" id="S4.SS2.SSS2.p1.1">To evaluate the noise reduction performance of the proposed directional SFANC method on real-world noise, a washing machine noise source is positioned at <math alttext="(\theta=110^{\circ},\phi=-15^{\circ})" class="ltx_Math" display="inline" id="S4.SS2.SSS2.p1.1.m1" intent=":literal"><semantics><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>θ</mi><mo>=</mo><msup><mn>110</mn><mo>∘</mo></msup></mrow><mo>,</mo><mrow><mi>ϕ</mi><mo>=</mo><mrow><mo>−</mo><msup><mn>15</mn><mo>∘</mo></msup></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\theta=110^{\circ},\phi=-15^{\circ})</annotation></semantics></math> corresponding to the reference microphone array. The PSD of the residual noise after applying the FxLMS, SFANC, GFANC, and directional SFANC methods is shown in Fig. 8(a). In addition, the average noise reduction levels per 0.5-second interval achieved by the four methods are presented in Fig. 8(b). It can be observed that the proposed directional SFANC method continues to achieve superior noise reduction performance and faster response time compared to the FxLMS algorithm, even when the noise source is located at a position not included in the pre-trained control filter library. In contrast, the SFANC and GFANC methods tend to amplify the noise due to their inability to adapt to variations in the DoA of the noise source.</p>
+</div>
+<figure class="ltx_figure" id="S4.F8"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="116" id="S4.F8.1.g1" src="sim3.png" width="354"/>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 8: </span>(a) PSD and (b) averaged noise reduction level per 0.5 second attenuated by different ANC algorithms for washing machine noise located at <math alttext="(\theta=110^{\circ},\phi=-15^{\circ})" class="ltx_Math" display="inline" id="S4.F8.3.m1" intent=":literal"><semantics><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>θ</mi><mo>=</mo><msup><mn>110</mn><mo>∘</mo></msup></mrow><mo>,</mo><mrow><mi>ϕ</mi><mo>=</mo><mrow><mo>−</mo><msup><mn>15</mn><mo>∘</mo></msup></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\theta=110^{\circ},\phi=-15^{\circ})</annotation></semantics></math> relative to the reference microphone array.</figcaption>
+</figure>
+</section>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Conclusions</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">This paper proposes a novel directional SFANC method to tackle noise sources with varying DoA in complex reverberant environments. A lightweight CNN, trained via multi-task learning, is employed to dynamically select the optimal control filter based on the reference signals. Simulation results show that the proposed method significantly outperforms the conventional FxLMS algorithm for both broadband and real-world noises across various DoAs, offering faster response and superior noise reduction under reverberant conditions. In contrast, many existing learning-based ANC approaches struggle to adapt to directional variations in the noise source.</p>
+</div>
+<div class="ltx_para" id="S5.p2">
+<p class="ltx_p" id="S5.p2.1">Despite its advantages, the current method does not consider the source-to-array distance, which may also affect ANC performance. Future work will address this by integrating distance estimation into the control framework.</p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist" id="bib.L1">
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib29">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. B. Allen and D. A. Berkley</span><span class="ltx_text ltx_bib_year"> (1979)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Image method for efficiently simulating small-room acoustics</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">The Journal of the Acoustical Society of America</span> <span class="ltx_text ltx_bib_volume">65</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 943–950</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S4.SS1.SSS1.p1.1" title="4.1.1 Dataset generation ‣ 4.1 DoA Estimation with CNN ‣ 4 Numerical Simulations ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§4.1.1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib28">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">D. Diaz-Guerra, A. Miguel, and J. R. Beltran</span><span class="ltx_text ltx_bib_year"> (2021)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">GpuRIR: a python library for room impulse response simulation with gpu acceleration</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Multimedia Tools and Applications</span> <span class="ltx_text ltx_bib_volume">80</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 5653–5671</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S4.SS1.SSS1.p1.1" title="4.1.1 Dataset generation ‣ 4.1 DoA Estimation with CNN ‣ 4 Numerical Simulations ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§4.1.1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib2">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">S. J. Elliott and P. A. Nelson</span><span class="ltx_text ltx_bib_year"> (1993)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Active noise control</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">IEEE signal processing magazine</span> <span class="ltx_text ltx_bib_volume">10</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 12–35</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p1.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib25">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">P. Grumiaux, S. Kitić, L. Girin, and A. Guérin</span><span class="ltx_text ltx_bib_year"> (2022)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A survey of sound source localization with deep learning methods</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">The Journal of the Acoustical Society of America</span> <span class="ltx_text ltx_bib_volume">152</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 107–151</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S3.SS2.p1.5" title="3.2 CNN Trained Using a Multi-Task Learning Strategy ‣ 3 Proposed Directional SFANC Method ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§3.2</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib37">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. Ji, D. Shi, Z. Luo, B. Wang, and W. Gan</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Self-boosted weight-constrained fxlms: a robustness distributed active noise control algorithm without internode communication</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">IEEE Signal Processing Letters</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p1.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_inproceedings" id="bib.bib14">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. Ji, D. Shi, B. Wang, X. Shen, Z. Luo, and W. Gan</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Preventing output saturation in active noise control: an output-constrained kalman filter approach</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">ICASSP 2025-2025 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 1–5</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p1.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib7">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">W. Jung, S. J. Elliott, and J. Cheer</span><span class="ltx_text ltx_bib_year"> (2019)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Local active control of road noise inside a vehicle</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Mechanical Systems and Signal Processing</span> <span class="ltx_text ltx_bib_volume">121</span>, <span class="ltx_text ltx_bib_pages"> pp. 144–157</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p1.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib3">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">S. M. Kuo and D. R. Morgan</span><span class="ltx_text ltx_bib_year"> (1999)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Active noise control: a tutorial review</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proceedings of the IEEE</span> <span class="ltx_text ltx_bib_volume">87</span> (<span class="ltx_text ltx_bib_number">6</span>), <span class="ltx_text ltx_bib_pages"> pp. 943–973</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p1.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_inproceedings" id="bib.bib31">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">S. S. Kushwaha, I. R. Roman, M. Fuentes, and J. P. Bello</span><span class="ltx_text ltx_bib_year"> (2023)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Sound source distance estimation in diverse and dynamic acoustic conditions</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">2023 IEEE Workshop on Applications of Signal Processing to Audio and Acoustics (WASPAA)</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 1–5</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S4.p1.1" title="4 Numerical Simulations ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§4</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_inproceedings" id="bib.bib26">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">H. Li, W. Zhang, and L. Zhang</span><span class="ltx_text ltx_bib_year"> (2023)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">DoA estimation of room reflections using nn-based music algorithm</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">2023 Asia Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA ASC)</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 1960–1965</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p3.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_inproceedings" id="bib.bib20">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">S. Liebich, J. Richter, J. Fabry, C. Durand, J. Fels, and P. Jax</span><span class="ltx_text ltx_bib_year"> (2018)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Direction-of-arrival dependency of active noise cancellation headphones</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Noise Control and Acoustics Division Conference</span>,
+</span>
+<span class="ltx_bibblock">Vol. <span class="ltx_text ltx_bib_volume">51425</span>, <span class="ltx_text ltx_bib_pages"> pp. V001T08A003</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p2.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib36">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Z. Luo, J. Ji, B. Wang, D. Shi, H. Ma, and W. Gan</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Deep learning-based generative fixed-filter active noise control: transferability and implementation</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Mechanical Systems and Signal Processing</span> <span class="ltx_text ltx_bib_volume">238</span>, <span class="ltx_text ltx_bib_pages"> pp. 113207</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S4.SS2.p1.1" title="4.2 Noise Cancellation based on DoA Estimation ‣ 4 Numerical Simulations ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§4.2</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib27">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Z. Luo, D. Shi, and W. Gan</span><span class="ltx_text ltx_bib_year"> (2022)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A hybrid sfanc-fxnlms algorithm for active noise control based on deep learning</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">IEEE Signal Processing Letters</span> <span class="ltx_text ltx_bib_volume">29</span>, <span class="ltx_text ltx_bib_pages"> pp. 1102–1106</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p2.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib12">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Z. Luo, D. Shi, J. Ji, X. Shen, and W. Gan</span><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Real-time implementation and explainable ai analysis of delayless cnn-based selective fixed-filter active noise control</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Mechanical Systems and Signal Processing</span> <span class="ltx_text ltx_bib_volume">214</span>, <span class="ltx_text ltx_bib_pages"> pp. 111364</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S4.SS2.p1.1" title="4.2 Noise Cancellation based on DoA Estimation ‣ 4 Numerical Simulations ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§4.2</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib4">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">D. Morgan</span><span class="ltx_text ltx_bib_year"> (1980)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">An analysis of multiple correlation cancellation loops with a filter in the auxiliary path</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">IEEE Transactions on Acoustics, Speech, and Signal Processing</span> <span class="ltx_text ltx_bib_volume">28</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 454–467</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p1.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib23">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[16]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">V. Patel, J. Cheer, and S. Fontana</span><span class="ltx_text ltx_bib_year"> (2019)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Design and implementation of an active noise control headphone with directional hear-through capability</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">IEEE Transactions on Consumer Electronics</span> <span class="ltx_text ltx_bib_volume">66</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 32–40</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p3.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_inproceedings" id="bib.bib32">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[17]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. Salamon, C. Jacoby, and J. P. Bello</span><span class="ltx_text ltx_bib_year"> (2014)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A dataset and taxonomy for urban sound research</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the 22nd ACM international conference on Multimedia</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 1041–1044</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S4.SS1.SSS1.p1.1" title="4.1.1 Dataset generation ‣ 4.1 DoA Estimation with CNN ‣ 4 Numerical Simulations ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§4.1.1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib6">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[18]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">X. Shen, D. Shi, W. Gan, and S. Peksi</span><span class="ltx_text ltx_bib_year"> (2022)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Adaptive-gain algorithm on the fixed filters applied for active noise control headphone</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Mechanical Systems and Signal Processing</span> <span class="ltx_text ltx_bib_volume">169</span>, <span class="ltx_text ltx_bib_pages"> pp. 108641</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p1.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_inproceedings" id="bib.bib15">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[19]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">C. Shi, R. Xie, N. Jiang, H. Li, and Y. Kajikawa</span><span class="ltx_text ltx_bib_year"> (2019)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Selective virtual sensing technique for multi-channel feedforward active noise control systems</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">ICASSP 2019-2019 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 8489–8493</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p2.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib10">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[20]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">D. Shi, W. Gan, B. Lam, and S. Wen</span><span class="ltx_text ltx_bib_year"> (2020)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Feedforward selective fixed-filter active noise control: algorithm and implementation</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">IEEE/ACM Transactions on Audio, Speech, and Language Processing</span> <span class="ltx_text ltx_bib_volume">28</span>, <span class="ltx_text ltx_bib_pages"> pp. 1479–1492</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p2.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib18">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[21]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">X. Su, D. Shi, B. Wu, L. Ye, and W. Gan</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Co-forecasting of time-varying spatial-frequency map for selective fixed-filter multichannel anc based on dynamic factor graph</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">IEEE Transactions on Audio, Speech and Language Processing</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p3.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib19">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[22]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">X. Su, D. Shi, Z. Zhu, W. Gan, and L. Ye</span><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Spatial-frequency-based selective fixed-filter algorithm for multichannel active noise control</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">IEEE Signal Processing Letters</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p3.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib24">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[23]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">S. Toyooka and Y. Kajikawa</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Active noise control systems with sound source localization robust to noise source movement</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">IEICE Transactions on Fundamentals of Electronics, Communications and Computer Sciences</span> <span class="ltx_text ltx_bib_volume">108</span> (<span class="ltx_text ltx_bib_number">2</span>), <span class="ltx_text ltx_bib_pages"> pp. 160–164</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p3.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_inproceedings" id="bib.bib34">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[24]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">B. Wang, J. Ji, X. Shen, D. Shi, and W. Gan</span><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Computation-efficient virtual sensing approach with multichannel adjoint least mean square algorithm</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">INTER-NOISE and NOISE-CON Congress and Conference Proceedings</span>,
+</span>
+<span class="ltx_bibblock">Vol. <span class="ltx_text ltx_bib_volume">270</span>, <span class="ltx_text ltx_bib_pages"> pp. 1638–1650</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p1.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_inproceedings" id="bib.bib35">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[25]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">B. Wang, M. Misol, Z. Luo, J. Ji, X. Shen, D. Shi, and W. Gan</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">DEEP learning-based active trim panels for enhanced aircraft interior noise control</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the 31st International Congress on Sound and Vibration</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p2.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_inproceedings" id="bib.bib13">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[26]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">B. Wang, D. Shi, Z. Luo, X. Shen, J. Ji, and W. Gan</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Transferable selective virtual sensing active noise control technique based on metric learning</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">ICASSP 2025-2025 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 1–5</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p2.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib1">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[27]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">T. Xiao, B. Xu, and C. Zhao</span><span class="ltx_text ltx_bib_year"> (2023)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Spatially selective active noise control systems</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">The Journal of the Acoustical Society of America</span> <span class="ltx_text ltx_bib_volume">153</span> (<span class="ltx_text ltx_bib_number">5</span>), <span class="ltx_text ltx_bib_pages"> pp. 2733–2733</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p3.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib17">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[28]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">H. Zhang, J. Zhang, F. Ma, H. Sun, and P. N. Samarasinghe</span><span class="ltx_text ltx_bib_year"> (2023)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A directional spatial active noise control system with a sound field separation algorithm</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">The Journal of the Acoustical Society of America</span> <span class="ltx_text ltx_bib_volume">154</span> (<span class="ltx_text ltx_bib_number">4_supplement</span>), <span class="ltx_text ltx_bib_pages"> pp. A162–A162</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p3.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib22">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[29]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">L. Zhang and X. Qiu</span><span class="ltx_text ltx_bib_year"> (2014)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Causality study on a feedforward active noise control headset with different noise coming directions in free field</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Applied Acoustics</span> <span class="ltx_text ltx_bib_volume">80</span>, <span class="ltx_text ltx_bib_pages"> pp. 36–44</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S1.p3.1" title="1 Introduction ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib30">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[30]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Y. Zhang and Q. Yang</span><span class="ltx_text ltx_bib_year"> (2021)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A survey on multi-task learning</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">IEEE transactions on knowledge and data engineering</span> <span class="ltx_text ltx_bib_volume">34</span> (<span class="ltx_text ltx_bib_number">12</span>), <span class="ltx_text ltx_bib_pages"> pp. 5586–5609</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.06981v1#S3.SS2.p3.1" title="3.2 CNN Trained Using a Multi-Task Learning Strategy ‣ 3 Proposed Directional SFANC Method ‣ Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments"><span class="ltx_text ltx_ref_tag">§3.2</span></a>.
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jan 11 16:29:15 2026 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

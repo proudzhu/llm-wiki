@@ -1,0 +1,86 @@
+---
+type: synthesis
+created: 2026-04-22
+updated: 2026-04-28
+sources:
+  - wiki/sources/zhang-2022-bone-conducted-speech-dissertation.md
+  - wiki/sources/dai-2026-speech-preserving-deep-anc.md
+  - zotero://select/items/0_K592VRRE (Wang 2022: Complex Fusion)
+  - zotero://select/items/0_B92ER5KS (Khanagha 2026: Conditional Diffusion)
+  - zotero://select/items/0_NIIDMA7J (Contrastive Learning for BC)
+tags:
+  - bone-conduction
+  - multimodal-fusion
+  - speech-enhancement
+  - deep-learning
+  - diffusion-models
+  - smart-hearables
+---
+
+# Multimodal Smart Hearables: Bone-Conduction Aided Speech Enhancement
+
+This synthesis tracks the evolution of Bone-Conducted (BC) speech integration in smart hearables (headphones, AR glasses), moving from traditional statistical analysis to state-of-the-art generative diffusion models.
+
+## 1. The Multimodal Imperative: AC vs. BC
+Traditional Air-Conducted (AC) microphones capture full-band audio but are highly susceptible to background noise. BC sensors (accelerometers) capture vibrations directly from the skull, providing **noise-immune** signals that are intrinsically limited in bandwidth (usually <2 kHz).
+
+| Modality | Bandwidth | Noise Immunity | Limitation |
+| :--- | :--- | :--- | :--- |
+| **AC (Air)** | Full-band | Low | Unusable at very low SNRs (-10 dB) |
+| **BC (Bone)**| Low-pass | **High** | Muffled quality; missing high frequencies |
+
+---
+
+## 2. Technical Evolution of Fusion Strategies
+
+### 2.1 Statistical and Mapping Era (2020-2022)
+Focuses on "restoring" BC speech or using it as a reference for AC denoising.
+- **Pitch Extraction (Zhang, 2022)**: Combines AC weighted auto-correlation with BC cepstrum (WACF-CEP) to detect pitch in 0 dB SNR environments.
+- **Complex Spectral Mapping (Wang, 2022)**: Uses Deep Complex CRNs (DC-CRN) to fuse AC and BC signals in the complex domain, preserving phase information.
+- **Attention-based Fusion**: Replaces simple concatenation with attention masks to "selectively" weigh AC and BC features based on instantaneous SNR.
+
+### 2.2 Generative and Diffusion Era (2025-2026)
+Shifts from predicting clean speech to **generating** it using BC signals as guidance.
+- **Conditioned Diffusion (Khanagha, 2026)**: The **BCDM** (Bone-Conduction Conditional Diffusion Model) treats clean speech recovery as a stochastic process.
+- **Conditioning Strategies**:
+    - **Input Concatenation (IC)**: Simple but effective at low computational cost.
+    - **Decoder Conditioning (DC)**: Injects BC features directly into the decoder's upsampling layers, providing superior speech naturalness (POLQA/PESQ) at the cost of higher latency.
+- **Contrastive Learning (Li, 2025)**: Uses twin-tower networks to minimize the embedding distance between AC and BC modalities, improving cross-modal feature alignment.
+
+---
+
+## 3. Core Technical Challenges
+
+### 3.1 The Bandwidth Gap (Super-Resolution)
+Because BC speech is missing frequencies above 2 kHz, multimodal systems must perform **Guided Super-Resolution**. Generative models (GANs and Diffusion) excel here by hallucinating plausible high-frequency details that match the low-frequency "skeleton" provided by the BC sensor.
+
+### 3.2 Real-time Implementation & Latency
+- **STFT vs. Time-Domain**: Frequency-domain methods (STFT) introduce frame-level latency (~32-64ms).
+- **Embedded Constraints**: Diffusion models require multiple reverse steps (e.g., $N=60$), making them challenging for low-power DSPs. Recent work (Liang, 2026) emphasizes **Analytic/Closed-form** solutions to minimize these overheads.
+
+### 3.3 Data Scarcity
+Parallel AC-BC data is difficult to collect. **Semi-supervised frameworks** (using CycleGANs) allow models to learn from non-parallel AC and BC datasets, significantly lowering the barrier for training robust production models.
+
+---
+
+## 4. Key Performance Benchmarks
+
+| Method | NR (dB) | PESQ Gain | Best For |
+| :--- | :--- | :--- | :--- |
+| **Standard FxLMS** | 2-5 | Low | Steady-state noise only |
+| **DC-CRN (Wang)** | 10-15 | Moderate | General mobile communication |
+| **BCDM (Khanagha)**| **18+** | **High** | Extreme noise environments (-10 dB SNR) |
+
+## References
+- [[wiki/sources/zhang-2022-bone-conducted-speech-dissertation|Zhang 2022: BC Statistical Analysis]]
+- [[wiki/sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
+- *Wang et al. (2022) Fusing BC and AC Sensors for Complex-Domain SE*
+- *Khanagha et al. (2026) BC Guided Multimodal SE with Conditional Diffusion*
+- [[wiki/synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]]
+
+## Related Concepts
+
+## Related Sources
+
+- [[wiki/sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
+- [[wiki/sources/zhang-2022-bone-conducted-speech-dissertation|Zhang 2022: BC Statistical Analysis]]

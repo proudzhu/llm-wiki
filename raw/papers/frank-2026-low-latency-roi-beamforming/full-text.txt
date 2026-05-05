@@ -1,0 +1,504 @@
+ICASSP 2026 - 2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) | 979-8-3315-6701-9/26/$31.00 ©2026 IEEE | DOI: 10.1109/ICASSP55912.2026.11462987
+
+LOW-LATENCY AUDIO FRONT-END REGION-OF-INTEREST BEAMFORMING FOR SMART GLASSES
+Ariel Frank and Israel Cohen
+Andrew and Erna Viterbi Faculty of Electrical and Computer Engineering Technion - Israel Institute of Technology, Haifa 3200003, Israel
+
+ABSTRACT
+In wearable audio capture, region-of-interest (ROI) beamforming improves robustness to direction-of-arrival uncertainty while aligning acquisition with the wearer's field of view. Least-distortion maximum-gain (LDMG) ROI beamformers have been proposed in both the time domain and the short-time Fourier transform (STFT) domain, but their trade-offs for smart-glasses front ends remain unclear. We develop a unified formulation that subsumes both implementations, makes their approximations explicit, and enables a fair, streaming-aware comparison. Using real multichannel recordings from a smart-glasses platform, we quantify algorithmic latency and real-time complexity and benchmark speech enhancement and spatial selectivity. Across all tested conditions, the time-domain implementation delivers higher performance with 2× lower algorithmic latency, at the cost of increased computation. These results indicate that, when low latency is critical and modest additional on-device computing power is available, time-domain ROI beamforming is the preferred choice for smart-glasses front ends.
+Index Terms-- wearable audio, smart glasses, region-ofinterest beamforming, low latency, on-device compute.
+1. INTRODUCTION
+The rapid emergence of smart glasses with integrated microphone arrays sharpens the need for low-latency, low-power spatial filtering on resource-constrained hardware. Spatial filtering, also known as beamforming, can align audio capture with the wearer's field of view. In these wearables, even tens of milliseconds of algorithmic latency can disrupt lip-sync and conversational turn-taking, while compute and memory budgets are tightly bounded by thermal and battery limits. Region-of-interest (ROI) beamforming is well-suited to this application: rather than preserving a single direction of arrival (DOA), it preserves signals from a spatial region while suppressing sounds from elsewhere, accommodating DOA uncertainty due to head motion, moving or switching sources, background noise, and reverberation, thereby mitigating distortion. This paper asks: which domain--time or short-time Fourier transform (STFT)--better serves ROI beamforming for smart-glasses audio front ends?
+Beamformers are often designed to focus on specific DOAs [1- 6]. When the precise direction is unknown, frequency-invariant [7], constant-beamwidth [8, 9], and ROI [10-15] beamformers reduce distortion. Other methods enhance the signal without explicitly specifying an ROI [16-19]. While neural networks can achieve strong performance [10-13, 16-19], classical options are less memory- and
+This research was supported by the Israel Science Foundation (grant no. 1449/23) and the Pazy Research Foundation.
+
+compute-demanding [7-9,14,15,20]. Implementations split roughly into two camps: time-domain processing of the waveform [7-11, 15, 20] and STFT processing [12-14, 16-19]. Which implementation is preferable -- time or STFT -- remains unsettled. Latency favors the time domain [7, 21]. However, computational complexity is application-dependent [22]: some report lower complexity for time-domain processing [23], others find the advantage holds only for small arrays [22, 24], and still others report higher complexity for the time domain [2, 25]. In terms of performance, [21] shows equivalence of time- and frequency-domain weights when no analysis/synthesis windows are used. In practice, windows are used to reduce STFT aliasing at the cost of degrading the signal-to-noise ratio (SNR) [26], and the window length imposes a trade-off between time and frequency resolution [25]. Several studies favor time-domain implementations--slightly better signal quality [23], slightly better speech separation [27], better localization [20], greater robustness to range errors [22], and improved low-frequency behavior [24], or in general better [25]--whereas [2] found the STFT implementation more robust to filter perturbations. The literature thus suggests the choice is application-specific.
+We conduct a head-to-head comparison of two state-of-theart ROI least-distortion maximum-gain (LDMG) beamformers, the time-domain implementation [15] and the STFT-domain implementation [14], quantifying latency, real-time complexity, and performance on real smart-glasses recordings. Our contributions are: (i) a unified ROI formulation spanning time- and STFT-domain implementations, highlighting each domain's modeling approximations, latency, and real-time complexity; (ii) an evaluation on real multichannel smart-glasses recordings; and (iii) guidance on the latency-complexity-performance trade-offs most relevant to wearable deployment.
+
+2. SIGNAL MODEL AND PROBLEM FORMULATION
+
+2.1. Signal Model
+Consider a desired source signal x(t) recorded by smart glasses equipped with M microphones. The audio measured by each microphone ym(t), 1  m  M , contains the desired source signal filtered by gm(t)--the acoustic response, from the source to that microphone, including reflections from the wearer--and additional noises, vm(t):
+
+ym(t) = gm(t)  x(t) + vm(t)
+
+(1)
+
+= dm(t)  x1(t) + vm(t)
+
+= xm(t) + vm(t), m = 1, 2, . . . , M,
+
+where t is the discrete time index and  denotes linear convolution. The desired source signal measured at each microphone, xm(t) =
+
+979-8-3315-6701-9/26/$31.00 ©2026 IEEE
+
+14727
+
+ICASSP 2026
+
+Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 15:39:10 UTC from IEEE Xplore. Restrictions apply.
+
+gm(t)x(t), can equivalently be expressed using a noncausal infinite impulse response filter relative to Microphone 1, dm(t), as xm(t) = dm(t)  x1(t).
+The objective is to estimate the desired source signal at the reference microphone, x1(t), from the multichannel measurements {ym(t)}M m=1. Two robust ROI beamforming approaches were proposed in 2025: a time-domain implementation [15] and an STFTdomain implementation [14]. Each approach starts from (1) but adopts a different approximation to derive beamformer weights. The time-domain method approximates each dm(t) by a noncausal finite impulse response filter. The STFT-domain method assumes the analysis window is sufficiently longer than the effective support of dm(t) so that they can use the multiplicative transfer function (MTF) approximation. Below, we develop both signal models under these respective assumptions, beginning with the STFT domain.
+Applying the STFT with frame length Ly on Equation (1) yields
+
+ym(k, r) = xm(k, r) + vm(k, r),
+
+(2)
+
+where k is the frequency bin index, r is the time frame index, and ym(k, r), xm(k, r), and vm(k, r) are respectively the STFTs of ym(t), xm(t), and vm(t). Under the MTF approximation [28], xm(k, r) = dm(k)x1(k, r), where dm(k) is a complex scalar. Without the MTF approximation, xm(k, r) depends on neighboring frequency and time frame bins of x1(k, r) [29]. Neglecting these terms can lead to a suboptimal estimate of x1(t).
+The STFT-domain implementation estimates x1(k, r) from {ym(k, r)}m=1 M and then applies an inverse STFT. In vector notation, the observation vector of length M is:
+
+y(k, r) = y1(k, r) y2(k, r) · · · yM (k, r) T
+
+= d(k)x1(k, r) + v(k, r)
+
+= x(k, r) + v(k, r),
+
+(3)
+
+where T denotes transpose, x(k, r) and v(k, r) are defined similarily to y(k, r), and
+
+d(k) = d1(k) d2(k) · · · dM (k) T (4)
+
+is known as the steering vector of length M . For the time-domain implementation, Equation (1) is approxi-
+mated as:
+
+Ld -1-
+
+ym(t) =
+
+dm(t) x1(t - t) + vm(t), (5)
+
+t =-
+
+where Ld is the noncausal finite impulse response length and   0 is the number of noncausal coefficients. Approximating with too small values for  and Ld can lead to a suboptimal estimate of x1(t). The time-domain implementation estimates x1(t) from Ly samples per channel. In vector notation, the observation vector of length M Ly is:
+
+y(t) =
+
+y
+
+T 1
+
+(t
+
+)
+
+y2T (t)
+
+···
+
+yM T (t) T
+
+(6)
+
+= Dx¯1 (t + ) + v(t)
+
+= x(t) + v(t),
+
+where ym(t) = ym(t) ym(t - 1) · · · ym(t - Ly + 1) T , (7)
+
+x(t) and v(t) are defined similarily to y(t),
+
+x¯1 (t + )
+
+(8)
+
+= [x1 (t + ) x1 (t +  - 1) · · · x1 (t +  - L + 1)]T
+
+is a vector of length L = Ld + Ly - 1, and D is an M Ly × L real matrix called the time-domain steering matrix.
+
+2.2. Problem Formulation
+
+In the following, we omit the notations t, k, and r in expressions valid for both implementations. The noisy signal is filtered by applying h--a real linear spatiotemporal filter of length M Ly for the time implementation or a complex linear spatial filter of length M per frequency bin for the STFT implementation--to the observation vector y:
+z = hH y = xfd + vrn, (9)
+
+where H denotes conjugate transpose (reducing to T in the real timedomain case), vrn = hH v is the residual noise, and
+xfd(k, r) = hH (k)d(k)x1(k, r), (10) xfd(t) = hT Dx¯1 (t + ) (11)
+
+is the filtered desired signal for the STFT (10) and time (11) implementations.
+A distortionless response is achieved when xfd = x1. In the STFT implementation, this directly leads to the distortionless constraint for a specific look direction: hH (k)d(k) = 1. In the time implementation, any element of x¯1 (t + ) may be considered the desired element, leading to the distortionless constraint hT D = ilT , where il is a vector of zeros of length L except for the lth element which equals 1. A practical choice is l =  + Ly/2 + 1, where · denotes the floor operation, since the center sample of the frame is typically most correlated with the rest, improving estimation accuracy. This choice yields a latency of Ly/2 samples, and is used throughout this paper. This is less than the latency of the STFT implementation, which equals Ly, the frame length, because the STFT accumulates Ly samples to compute the spectrum of a frame. Selecting a smaller l can further reduce the time implementation's latency, but may degrade performance.
+In ROI beamforming, the source may lie anywhere in the ROI, so the beamformer should minimize the average distortion across the ROI. The ROI, denoted by , is the set of all directional angles (, ) from which the source may originate, where   [0, ] and   [-, ] are the polar and azimuthal angles, respectively, in a spherical coordinate system. The average distortion is given by
+
+1 Jd, (h(k)) =
+||
+
+hH 2 (k)d(k) - 1 sin dd, (12)
+
+(,)
+
+1 Jd, (h) =
+||
+(,)
+
+TT
+D h - il
+
+DT h - il
+
+sin dd (13)
+
+for the STFT (12) and time (13) implementations, where || = (,) sin dd. Notice that in (12) the steering vector d(k)
+and in (13) the steering matrix D have a functional dependence on (, ), which is omitted for notational compactness. The average distortion can have a unified expression for both implementations as
+Jd, = hH h - hH d - dH h + 1, (14)
+
+14728
+Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 15:39:10 UTC from IEEE Xplore. Restrictions apply.
+
+where
+
+d(k) = 1
+
+d(k) sin dd,
+
+(15)
+
+|| (,)
+
+(k) = 1
+
+d(k)dH (k) sin dd (16)
+
+|| (,)
+
+for the STFT implementation, and
+
+1
+
+d =
+
+D il sin dd,
+
+(17)
+
+|| (,)
+
+ = 1
+
+D DT sin dd
+
+(18)
+
+|| (,)
+
+for the time implementation. The average distortion is minimized by taking the derivative of (14) with respect to h and then equating to zero, leading to the minimum-distortion constraint:
+
+h = d.
+
+(19)
+
+The average array gain over the ROI is given by
+
+hH h G = hH v h , (20)
+
+where v
+
+=
+
+Rv 2
+
+,
+
+Rv
+
+is the covariance matrix of v,
+
+and v1 2
+
+is the
+
+v1
+
+variance of v1.
+
+2.3. Optimal Beamforming
+
+Both implementations derive the beamformer h by maximizing the average array gain subject to the minimum-distortion constraint:
+
+hH h
+
+max H
+
+subject to h = d.
+
+(21)
+
+h h v h
+
+Assuming v is full rank (M or M Ly for the STFT and time implementations, respectively), and denoting the rank of  by P , the optimization problem in (21) can be solved via generalized eigenvalue decomposition [30], attaining the following solution:
+
+P tptpH hP = p d, (22)
+p=1
+
+where tp are the eigenvectors of v-1 and p are the respective positive eigenvalues sorted in descending order: 1  2  · · ·  P > 0. The beamformer is made more robust by limiting the number of eigenvectors in the sum to K, 1  K  P , and adding a regularization constant µ  0:
+
+K tptpH hK,µ = p + µ d. (23)
+p=1
+
+Decreasing K and increasing µ improve the average array gain, but degrade the average distortion.
+Because of the modifications in (23), we suggest a final normalization so that the average desired signal reduction factor,
+
+1
+
+d, = H
+
+,
+
+(24)
+
+h h
+
+equals 1. This results in the following beamformer:
+
+h = hK,µ . (25) hHK,µ  hK,µ
+
+3. METHODS
+
+3.1. Experimental Setup and Parameter Estimation
+
+A manikin was placed on a rotating podium in an anechoic chamber. The manikin wore a pair of smart glasses equipped with M = 6 mi-
+crophones. A loudspeaker situated across from the manikin played
+stationary broadband white noise to estimate the spatial statistics. The podium rotated azimuthally at a fixed elevation  = 0, completing one full 360 revolution in 10.4 minutes. Throughout the
+rotation, the smart glasses' microphones recorded the excitation signal, producing signals {xm(t)}m=1 M sampled at 16 kHz.
+To derive the beamformers, we first need to estimate the expres-
+sions appearing in (15)-(18). For the STFT implementation, we first
+compute the STFT of the recordings, and then we can estimate the
+expressions by:
+
+r x(k, r, )xH1 (k, r, )
+
+d(k, ) =
+
+2,
+
+(26)
+
+r |x1(k, r, )|
+
+H
+
+r x(k, r, )xH (k, r, )
+
+dd (k, ) =
+
+2,
+
+(27)
+
+r |x1(k, r, )|
+
+where the summation is over the time frames that the loudspeaker was within  ± 0.5 relative to the smart glasses, i.e., the recording spatial resolution was 1. In this paper, the STFT is computed with
+a Hamming synthesis window of length Ly and the analysis window
+is the corresponding biorthogonal window [31] with 75% overlap.
+For the time implementation,
+
+t x(t, )x¯T1 (t + , ) il
+
+D il() =
+
+2
+
+,
+
+(28)
+
+t x1(t, )
+
+T
+
+t x(t, )xT (t, )
+
+D D () =
+
+2
+
+,
+
+(29)
+
+t x1(t, )
+
+where the summation is over time indices with hops of 0.25Ly to use the same amount of data as the STFT implementation. We configure L = 2Ly - 1 and  = Ly/2 - 1 as suggested in [15].
+The ROI expressions in (15)-(18) are then obtained by averaging the corresponding per-direction estimates from (26)-(29) over the ROI,  = { :   [-5, 5]}, which represents directions in front of the smart glasses. We computed each quantity per azimuth and only then averaged over , since the empirical variance of x1 changed with the direction of the loudspeaker. Finally, the beamformers can be derived for a specified noise distribution.
+
+3.2. Performance Evaluation
+To assess performance, we filter the recordings with the designed beamformers. The STFT implementation first computes the STFT of the recordings, then applies a beamformer per frequency bin, and finally computes the inverse STFT.
+Focusing on the time intervals when the loudspeaker was positioned within the ROI, we calculate the empirical average desired signal reduction factor as
+d, = var [x1(t)] , (30) var [xfd(t)]
+where var(·) is the empirical variance, and is computed over the times when the loudspeaker was within the ROI. Next, desired signal distortion is quantified by the scale-invariant signal-to-distortion ratio (SI-SDR) [32], again computed over the times when the loudspeaker was within the ROI.
+
+14729
+Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 15:39:10 UTC from IEEE Xplore. Restrictions apply.
+
+Table 1. Comparison of Time and STFT Implementations
+
+Time
+
+STFT
+
+Latency Complexity
+
+Ly /2 M Ly2
+
+Ly O(M Lylog2Ly)
+
+The directivity factor (DF) characterizes the attenuation of diffuse noise. The empirical diffuse noise reduction factor is given by (30) where the variance is computed over the entire 360 recording. Finally, the average DF over the ROI, D, is given by the ratio of the empirical diffuse noise reduction factor to the empirical average desired signal reduction factor.
+The white noise gain (WNG) characterizes the attenuation of thermal noise. It is evaluated by passing white noise through the beamformer. Denoting the white noise at the microphones by {vm(t)}m=1 M and the filtered white noise by vrn(t), the empirical white noise reduction factor is
+n = var [v1(t)] . (31) var [vrn(t)]
+Finally, the average WNG over the ROI, W, is given by the ratio of the empirical white noise reduction factor to the empirical average desired signal reduction factor.
+In addition to diffuse and thermal noise, the beamformer should suppress the wearer's own voice. To measure this, a loudspeaker at the manikin's mouth plays white noise, which is recorded by the array. The own-voice reduction factor, OV, is given by equation (31) where the white noise is replaced with the own-voice recordings. Larger OV indicates better own-voice suppression.
+
+3.3. Computational Complexity
+
+In this section, we analyze the real-time computational complexity
+
+of each implementation, with beamformer weights precomputed of-
+
+fline. For the time-domain implementation, computing a sample at
+
+the output of the beamformer requires M Ly real multiplications according to (9). Thus, producing Ly output samples costs M Ly2 real
+
+multiplications. For the STFT-domain implementation, processing
+
+is done in frames of length Ly per microphone. Per frame: (i) anal-
+
+ysis windowing costs M Ly real multiplications, (ii) M FFTs cost
+
+M { 2 Ly [log2(Ly) - 3] + 2} real multiplications [33], (iii) beam-
+
+forming on the nonnegative frequency bins costs 4M ( 2 Ly  + 1)
+
+real
+
+multiplications,
+
+(iv)
+
+the
+
+inverse
+
+FFT
+
+costs
+
+Ly 2
+
+[log2(Ly) - 3] + 2
+
+real multiplications, and (v) synthesis windowing costs Ly real mul-
+
+tiplications.
+
+With R% overlap,
+
+this is repeated
+
+R 100-R
+
+times every
+
+Ly samples. Table 1 highlights the superiority of the time-domain
+
+implementation in terms of latency at the cost of additional compu-
+
+tations compared with the STFT-domain implementation.
+
+4. EXPERIMENTAL RESULTS AND DISCUSSION
+We derived three ROI beamformers that differ in the assumed noise field. Each beamformer was derived with the time and STFT implementations for frame lengths of Ly  {16, 32, 64, 128}, corresponding to latencies of {0.5, 1, 2, 4} ms for the time implementation and {1, 2, 4, 8} ms for the STFT implementation. We first derived the maximum DF beamformer, where v was obtained by averaging the expression in (27) or (29) over the 360 azimuthal angles. Second, we derived the maximum WNG beamformer, where v was set to the identity matrix. Last, we derived the maximum
+
+6
+
+5
+
+4
+
+3
+
+2
+
+1
+
+0
+
+-1
+
+16 32 64
+
+128
+
+8
+
+35
+
+6
+
+30
+
+4
+
+25
+
+2
+
+20
+
+0
+
+15
+
+-2
+
+10
+
+-4
+
+5
+
+-6
+
+16 32 64
+
+128
+
+0
+
+16 32 64
+
+128
+
+Fig. 1. (a) Directivity factor, (b) white noise gain, and (c) own-voice reduction factor versus frame length for ROI beamformers optimized for maximum DF (triangles), maximum WNG (squares), and maximum own-voice reduction (circles). Results are shown for the timedomain (solid line) and STFT-domain (dotted line) implementations.
+own-voice reduction beamformer, where v was empirically estimated with the own-voice recordings as in (27) or (29). Additionally, we applied diagonal loading to ensure v is well conditioned, setting v  0.99v + 0.01I, where I denotes the identity matrix.
+To enable a fair comparison, we tuned K and µ such that the SISDR of each beamformer equaled 14.9 dB. We coarsely attained the specified SI-SDR by choosing the smallest K for which the SI-SDR exceeded 14.9 dB. Then we slightly increased µ until the SI-SDR reached 14.9 dB.
+Figure 1 displays the performance of the beamformers as a function of the frame length. As expected, the maximum DF beamformers have the highest DF among the beamformers, and their DF increases monotonically with the frame length. Additionally, the time implementation has a better DF than the STFT implementation. The same trends occur for the maximum WNG beamformers when observing the WNG, and for the maximum own-voice reduction beamformers when observing the own-voice reduction factor.
+We attribute the advantage of the time implementation to its direct spatiotemporal filtering of the waveform. In contrast, the STFT implementation relies on the MTF approximation, which is inaccurate when the frame length is shorter than the effective support of the relative impulse responses.
+5. CONCLUSIONS
+We compared time-domain and STFT-domain implementations of ROI LDMG beamformers for smart glasses. By enforcing a regionof-interest (ROI) distortion constraint, our approach preserves signals within the wearer's field of view while suppressing noise and interference from outside the ROI. Under all evaluated conditions, the time-domain implementation consistently outperformed the STFTdomain alternative, achieving superior performance with half the latency. This improvement is achieved at the cost of increased computational complexity. These findings suggest that time-domain implementations are particularly suitable for on-device listening on smart glasses, especially when low latency and minimal in-ROI distortion are crucial and sufficient computational resources are available.
+
+14730
+Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 15:39:10 UTC from IEEE Xplore. Restrictions apply.
+
+6. REFERENCES
+[1] Wei Xue, Alastair H Moore, Mike Brookes, and Patrick A Naylor, "Modulation-domain multichannel Kalman filtering for speech enhancement," IEEE/ACM Trans. Audio, Speech, Language Process., vol. 26, no. 10, pp. 1833-1847, 2018.
+[2] Xiaofei Li, Laurent Girin, Sharon Gannot, and Radu Horaud, "Multichannel speech separation and enhancement using the convolutive transfer function," IEEE/ACM Trans. Audio, Speech, Language Process., vol. 27, no. 3, pp. 645-659, 2019.
+[3] Ju Lin, Niko Moritz, Yiteng Huang, Ruiming Xie, Ming Sun, Christian Fuegen, and Frank Seide, "AGADIR: Towards arraygeometry agnostic directional speech recognition," in Proc. IEEE Int. Conf. Acoust. Speech Signal Process., 2024, pp. 11951-11955.
+[4] Tiantian Feng, Ju Lin, Yiteng Huang, Weipeng He, Kaustubh Kalgaonkar, Niko Moritz, Li Wan, Xin Lei, Ming Sun, and Frank Seide, "Directional source separation for robust speech recognition on smart glasses," in Proc. IEEE Int. Conf. Acoust. Speech Signal Process., 2025, pp. 1-5.
+[5] Ya Jiang, Hongbo Lan, Qing Wang, and Shutong Niu, "Multimodal streaming ASR in cross-talk scenario for smart glasses," in Proc. IEEE Int. Conf. Acoust. Speech Signal Process., 2025, pp. 1-5.
+[6] Yufeng Yang, Desh Raj, Ju Lin, Niko Moritz, Junteng Jia, Gil Keren, Egor Lakomkin, Yiteng Huang, Jacob Donley, Jay Mahadeokar, et al., "M-BEST-RQ: A multi-channel speech foundation model for smart glasses," in Proc. IEEE Int. Conf. Acoust. Speech Signal Process., 2025, pp. 1-5.
+[7] Shefeng Yan, "Robust time-domain broadband modal beamforming for circular arrays," IEEE Trans. Aerosp. Electron. Syst., vol. 56, no. 3, pp. 1783-1794, 2020.
+[8] Avital Kleiman, Israel Cohen, and Baruch Berdugo, "Constant-beamwidth beamforming with nonuniform concentric ring arrays," IEEE/ACM Trans. Audio, Speech, Language Process., vol. 30, pp. 1952-1962, 2022.
+[9] Orel Peretz and Israel Cohen, "Constant elevation-beamwidth beamforming with concentric ring arrays," IEEE/ACM Trans. Audio, Speech, Language Process., vol. 32, pp. 1662-1672, 2024.
+[10] Anton Kovalyov, Kashyap Patel, and Issa Panahi, "DSENet: Directional signal extraction network for hearing improvement on edge devices," IEEE Access, vol. 11, pp. 4350-4358, 2023.
+[11] Teerapat Jenrungrot, Vivek Jayaram, Steve Seitz, and Ira Kemelmacher-Shlizerman, "The cone of silence: Speech separation by localization," in Proc. Advances in Neural Information Process. Systems, 2020, vol. 33, pp. 20925-20938.
+[12] Rongzhi Gu and Yi Luo, "ReZero: Region-customizable sound extraction," IEEE/ACM Trans. Audio, Speech, Language Process., vol. 32, pp. 2576-2589, 2024.
+[13] Zhongweiyang Xu, Ali Aroudi, Ke Tan, Ashutosh Pandey, Jung-Suk Lee, Buye Xu, and Francesco Nesta, "FoVNet: Configurable field-of-view speech enhancement with low computation and distortion for smart glasses," in Proc. Interspeech, 2024, pp. 3350-3354.
+[14] Gal Itzhak and Israel Cohen, "STFT-domain least-distortion region-of-interest beamforming," IEEE Trans. Audio, Speech, Language Process., vol. 33, pp. 2803-2816, 2025.
+[15] Ariel Frank and Israel Cohen, "Least-distortion maximum gain beamformer for time-domain region-of-interest beamforming," IEEE Trans. Audio, Speech, Language Process., vol. 33, pp. 2286-2301, 2025.
+[16] Kristina Tesch and Timo Gerkmann, "Insights into deep nonlinear filters for improved multi-channel speech enhancement,"
+
+IEEE/ACM Trans. Audio, Speech, Language Process., vol. 31, pp. 563-575, 2023. [17] Changsheng Quan and Xiaofei Li, "SpatialNet: Extensively learning spatial information for multichannel joint speech separation, denoising and dereverberation," IEEE/ACM Trans. Audio, Speech, Language Process., vol. 32, pp. 1310-1323, 2024. [18] Zhong-Qiu Wang, Peidong Wang, and DeLiang Wang, "Complex spectral mapping for single-and multi-channel speech enhancement and robust ASR," IEEE/ACM Trans. Audio, Speech, Language Process., vol. 28, pp. 1778-1787, 2020. [19] Mhd Modar Halimeh and Walter Kellermann, "Complexvalued spatial autoencoders for multichannel speech enhancement," in Proc. IEEE Int. Conf. Acoust. Speech Signal Process., 2022, pp. 261-265. [20] Tatiana Gelvez-Barrera, Quentin Leclere, Barbara Nicolas, Je´ro^me Antoni, and Adrian Basarab, "Time-domain beamforming for room acoustics analysis based on reverberant field estimation," in Proc. IEEE Int. Conf. Acoust. Speech Signal Process., 2025, pp. 1-5. [21] Lal C Godara, "Application of the fast Fourier transform to broadband beamforming," J. Acoust. Soc. Am., vol. 98, no. 1, pp. 230-240, 1995. [22] Zvi Aharon Herscovici and Israel Cohen, "Feedback beamforming in the time domain," Sensors, vol. 24, no. 7, 2024, Art. no. 2179. [23] Mimisha M Menakath, Mahesh Raveendranatha Panicker, and G Hareesh, "A comparison of time domain vs frequency domain delay and sum beamforming for underwater 3D acoustical imaging," in Proc. OCEANS 2022 Hampton Roads, 2022, pp. 1-5. [24] Thomas Padois, Jeoffrey Fischer, Con Doolan, and Olivier Doutres, "Acoustic imaging with conventional frequency domain beamforming and generalized cross correlation: A comparison study," Appl. Acoust., vol. 177, 2021, Art. no. 107914. [25] Rongzhi Gu, Shi-Xiong Zhang, Yuexian Zou, and Dong Yu, "Towards unified all-neural beamforming for time and frequency domain speech separation," IEEE/ACM Trans. Audio, Speech, Language Process., vol. 31, pp. 849-862, 2023. [26] Olaf Jaeckel, "Strengths and weaknesses of calculating beamforming in the time domain," Proc. 1st Berlin Beamform. Conf., 2006. [27] Fahimeh Bahmaninezhad, Jian Wu, Rongzhi Gu, Shi-Xiong Zhang, Yong Xu, Meng Yu, and Dong Yu, "A comprehensive study of speech separation: Spectrogram vs waveform separation," in Proc. Interspeech, 2019, pp. 4574-4578. [28] Yekutiel Avargel and Israel Cohen, "On multiplicative transfer function approximation in the short-time Fourier transform domain," IEEE Signal Process. Lett., vol. 14, no. 5, pp. 337-340, 2007. [29] Yekutiel Avargel and Israel Cohen, "System identification in the short-time Fourier transform domain with crossband filtering," IEEE Trans. Audio, Speech, Language Process., vol. 15, no. 4, pp. 1305-1319, 2007. [30] Joel N. Franklin, Matrix Theory, Prentice-Hall, Englewood Cliffs, NJ, USA, 1968. [31] Shie Qian and Dapang Chen, "Optimal biorthogonal analysis window function for discrete Gabor transform," IEEE Trans. Signal Process., vol. 42, no. 3, pp. 694-697, 1994. [32] Jonathan Le Roux, Scott Wisdom, Hakan Erdogan, and John R Hershey, "SDR-half-baked or well done?," in Proc. IEEE Int. Conf. Acoust. Speech Signal Process., 2019, pp. 626-630. [33] Martin Vetterli and Henri J Nussbaumer, "Simple FFT and DCT algorithms with reduced number of operations," Signal Process., vol. 6, no. 4, pp. 267-278, 1984.
+
+14731
+Authorized licensed use limited to: IEEE Xplore. Downloaded on April 27,2026 at 15:39:10 UTC from IEEE Xplore. Restrictions apply.
+
+

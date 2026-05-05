@@ -1,0 +1,786 @@
+Submitted to Acta Acustica Template provided by EDP Sciences
+
+Technical paper
+
+Obs-TasNet: Online Estimation of Virtual Sensing Observation
+Filters for Active Noise Control
+Felix Holzmu¨ller1 and Alois Sontacchi1
+1 Institute of Electronic Music and Acoustics, University of Music and Performing Arts Graz, Austria
+Abstract - Local active noise control (ANC) with adaptive processing requires an accurate residual error signal at the point of cancellation, which is often obtained via virtual sensing. We propose Obs-TasNet, a neural approach that estimates observation filter coefficients for the remote microphone technique (RMT) in time-variant settings. By estimating coefficients during operation, the method eliminates the need for pre-optimizing filters for selected scenarios and subsequent interpolation. Obs-TasNet builds on a modified inter-channel Conv-TasNet. The raw waveform signals from remote microphones, as well as the coordinates of the virtual microphone, are embedded as latent representation using a learnable encoding. A temporal convolutional network (TCN), employing dilated depthwise separable convolutions and an output transformation, predicts the observation filter coefficients. Following a brief hyperparameter search, an ablation study demonstrates that the proposed architectural modifications lead to reduced estimation error while substantially reducing both the number of model parameters and computational cost. In simulation, the proposed ANC system with RMT and Obs-TasNet achieves superior noise reduction over a substantially wider frequency range than a multi-point ANC baseline, validating the effectiveness of observation filter estimation.
+Keywords. Active noise control, ANC, virtual sensing, remote microphone technique, RMT, sound field estimation, deep learning, neural networks, Conv-TasNet
+
+1. Introduction
+Over the last decades, active noise control (ANC) has been widely established as a method to reduce unwanted acoustic disturbances. The underlying principle is fairly simple - so-called secondary sources emit control signals that resemble the primary disturbances, but with inverse phase [1, 2]. When executed properly, noise is reduced through destructive interference. A special form are local ANC systems. These systems are designed to achieve noise reduction at specific points of cancellation (PoC), rather than across the entire space. As secondary sources in local ANC systems are usually located relatively close to the PoC, the comparably small plant delay and tight coupling allows control of a broader frequency range while not increasing the overall sound energy across the room significantly [3, 1]. A typical use case of local ANC systems is the application in vehicles such as aircraft or cars [4, 5, 6, 7], where the performance of passive noise reduction measures is limited by constraints of weight and size.
+An inherent property of local ANC systems is the limited extent of the zone of quiet (ZoQ), which describes the area where at least 10 dB attenuation is achieved [8].
+ Corresponding author: holzmueller@iem.at
+
+Several authors have investigated the shape and extent of the ZoQ for different primary disturbances and secondary source configurations. Most notably, the ZoQ is spherically shaped with a diameter of 1/10-th of the disturbance's wavelength in a pure tone diffuse sound field with a secondary source in the acoustic far field [8]. This finding has been extended towards multiple PoCs [9], secondary sources in the acoustic near field [10, 11, 12], and broadband disturbances [13, 14].
+A large number of local ANC approaches are implemented as adaptive filters [1, 15, 16, 17, 18]. These usually require the residual error signals at the PoC for adaptation. However, the limited extent of the ZoQ often prevents recording the residual error with physical sensors without disturbing the listener. Instead, virtual sensing techniques are used to estimate the sound field with a virtual microphone at the PoC, relying on nearby (physical) remote microphones and knowledge about the system and disturbances [19]. Usually, virtual sensing techniques are optimized for a single scenario based on pre-recorded data. However, if a mismatch occurs between the trained and the actual scene - for example when the real and expected PoCs differ or the primary disturbances change - the estimation accuracy may deteriorate, leading to reduced performance and stability of the ANC system [20].
+
+1 This provisional PDF is the accepted version. The article should be cited as: Acta Acustica, https://doi.org/10.1051/aacus/2026027
+
+F. Holzmu¨ller and A. Sontacchi: Obs-TasNet for virtual sensing
+
+To handle time-variant situations, multiple virtual sensing models can be trained for different pre-defined scenarios. During operation, the model for the most similar state is used and switched in a nearest-neighbour fashion if the scene changes [21]. This approach has been shown to increase noise control performance for head movements significantly; however, the virtual sensing models have to be optimized for a dense grid of positions and states to avoid a large mismatch. In more elaborate approaches, such as the moving remote microphone technique, the error signal is calculated for several states in parallel and then interpolated towards the desired target state [22]. While in theory error signal estimation can be improved, this approach requires substantially more computational resources during operation due to the parallel computation for several states. Furthermore, signal estimation accuracy depends on the chosen interpolation algorithm as well [23]. Recently, kernel-based interpolation techniques have been used for ANC tasks [24, 25]. While these techniques perform well in estimating the sound field inside a remote microphone arrangement, prior assumptions about wave propagation and source direction have to be made [24].
+To handle and process time-variant scenes with conventional virtual sensing strategies, usually multiple models are optimized for different states and interpolated by some processing logic [23, 21, 22, 19]. This requires the development of a scene-detection algorithm, a pre-selection of representative states, and a distinct optimization of virtual sensing models for each state. In contrast, (deep) neural networks are well known to be capable of identifying patterns and classifying acoustic scenes [26, 27]. Neural network-based classification models have been successfully adapted for selecting filters in virtual sensing approaches in active control [28, 29]. However, interpolation and manual filter coefficient calculation for selected scenes and positions may still be necessary. Recently, neural networks have been employed for sound field reconstruction and interpolation [30, 31, 32, 33]. While these approaches perform well in estimating sound fields, the networks' architectures, complexity, and processing latency often prohibit their use in real-world ANC systems. Different tasks that show some resemblance to virtual sensing are acoustic beamforming and multichannel speech enhancement [34], all of which aim to extract a certain target signal by processing signals of a microphone array. However, neural beamformers and speech enhancement algorithms traditionally often operate by applying masks on the spectrograms of the input signals [35, 36, 37]. While mask-based approaches provide good performance for speech enhancement, the inherent latency caused by the block processing may exceed requirements for some ANC systems. However, a neural beamformer can be modified to estimate the required filter coefficients for conventional virtual sensing algorithms [38]. The obtained coefficients can then either be applied in time-domain filtering to achieve low processing delay, or in fast algorithms with block processing to minimize computational load.
+
+In this article, we propose the Obs-TasNet to estimate filter coefficients of the observation filter for the remote microphone technique (RMT) [39] with an asynchronously operating neural network. In the proposed estimation approach, recorded signals of the remote microphones are processed in conjunction with the position of the virtual microphone. During operation, no additional information about the disturbances such as the location of the primary source is provided. By using an end-toend architecture, explicit calculation of virtual sensing weights for a limited number of selected states, scene detection, and interpolation is mitigated. With the neural estimation of the observation filter coefficients outsourced to an external co-processor or a neural processing unit, the proposed method allows for efficient real-time estimation of the error signal. Section 2 explains the filteredreference least mean squares (FxLMS) algorithm and the RMT as fundamental signal processing techniques for local ANC with virtual sensing. The architecture of the Obs-TasNet is described in section 3. In section 4, the generated dataset, training setup, and evaluation metrics are described. The model is evaluated in section 5, before concluding in section 6. This article is based on previously published pilot studies with simpler architectures in timeinvariant scenarios [40, 41]. A PyTorch-implementation of the model is openly accessible1 [42].
+
+2. Signal processing for local ANC
+This section summarises the FxLMS algorithm and the RMT as commonly used signal processing methods for ANC in time-discrete systems.
+
+2.1. FxLMS
+A large number of ANC systems are based on the FxLMS algorithm [1]. In a simple single-input-singleoutput system, the control signal for a secondary source
+
+u[n] = wT x[n]
+
+(1)
+
+with discrete time index n is generated by processing a reference signal x[n] = [x[n] x[n - 1] . . . x[n - H + 1]]T
+with a control filter w = [w0 w1 . . . wH-1]T of order H - 1. The reference signal must be closely related to the primary disturbances for sufficient noise reduction performance. The adaptive control filter is updated with
+
+w  w - µe[n]xf [n] ,
+
+(2)
+
+where e[n] refers to the error signal at the PoC, µ to the step-size for adaptation, and xf [n] = [xf [n] xf [n - 1] . . . xf [n - H + 1]]T to the filtered reference signal. The latter is generated by convolving the reference signal with the secondary plant response ge, corresponding to the transfer path between secondary source and the PoC. Usually, only an estimate g^e =
+
+1 https://github.com/fholzm/Obs-TasNet
+
+2
+
+F. Holzmu¨ller and A. Sontacchi: Obs-TasNet for virtual sensing
+
+[g^e,0 g^e,1 . . . g^e,I-1]T with order I - 1 is available, which defines the filtered reference signal to
+
+xf [n] = g^eT x[n] .
+
+(3)
+
+In many cases, the error signal e[n] cannot be recorded directly with a physical microphone at the desired PoC. Instead, the signal can be estimated by virtual sensing techniques such as the RMT.
+
+2.2. Remote microphone technique
+
+The RMT [39] is an extensively used state-of-the-art
+
+method [21, 6, 43, 44] for estimating the residual error
+
+signal at a virtual microphone. A block diagram of the
+
+RMT is shown in Figure 1a. For simplicity, only a single
+
+virtual microphone is considered in the following.
+
+The error signal at the virtual microphone is defined
+
+as
+
+e[n] = ye[n] + de[n] ,
+
+(4)
+
+where de[n] refers to the primary disturbances and ye[n] to the contributions of the secondary source. The latter can be estimated and decomposed to
+
+y^e[n] = g^eT u[n]
+
+(5)
+
+with the control signal vector for the secondary source
+
+u[n] = [u[n] u[n - 1] . . . u[n - I + 1]]T .
+
+To estimate the signal at the virtual error microphone,
+
+Nm nearby remote microphones are used. The signal at
+
+the r-th remote microphone is, similar to equation (4),
+
+given as
+
+mr[n] = ym,r[n] + dm,r[n] ,
+
+(6)
+
+which is composed of the primary disturbance dm,r[n] and the contributions of the secondary sources ym,r[n] at the respective remote microphone. Similar to equation (5),
+they are calculated as
+
+y^m,r[n] = g^mT ,ru[n]
+
+(7)
+
+with the estimated (J - 1)-th order secondary plant response g^m,r = [g^m,r,0 g^m,r,1 . . . g^m,r,J-1]T .
+As the remote microphone signals mr[n] and the control signals u[n] are typically known, the primary disturbances at the remote microphones can be extracted as
+
+d^m,r[n] = mr[n] - y^m,r[n] =
+
+(8)
+
+= mr[n] - g^mT ,ru[n] .
+
+(9)
+
+With the estimate of the primary disturbances at the remote microphones d^m,r[n], an observation filter
+o^ = [o^0 o^1 . . . o^r . . . o^Nm-1]  RK×Nm with o^r = [o^r,0 o^r,1 . . . o^r,K-1]T of order K - 1 can be applied to calculate the estimated primary disturbances at the virtual microphone as
+
+Nm -1
+
+d^e[n] =
+
+o^Tr d^m,r[n] ,
+
+r=0
+
+(10)
+
+where d^m,r[n] = d^m,r[n] d^m,r[n - 1] . . . d^m,r[n - K + 1] T .
+
+By inserting equation (10) in equation (4), the error signal at the virtual microphone is estimated as
+
+e^[n] = y^e[n] + d^e[n]
+
+(11)
+
+Nm -1
+
+= y^e[n] +
+
+o^
+
+T r
+
+d^ m,r
+
+[
+
+n
+
+]
+
+.
+
+r=0
+
+(12)
+
+To ensure causality of the observation filter, the delayed RMT [45] can be used. Instead of estimating the current value of e^[n], a  samples delayed version
+
+e^[n - ] = y^e[n - ] + d^e[n - ] =
+
+(13)
+
+Nm -1
+
+= y^e[n - ] +
+
+o^ T,r d^ m,r [n]
+
+r=0
+
+(14)
+
+is calculated. By applying this delay, substantial parts of the observation filter can be shifted into a causal range [5]. Typically, the delay  should exceed the maximum time difference of arrival of primary disturbances between the remote microphone arrangement and the virtual microphone.
+The secondary plant responses g^e and g^m,r can be measured for various PoCs and interpolated afterwards [23, 7] as they only depend on the position of the virtual microphone. However, the observation filter o^ is influenced by the (virtual) error microphone position, primary source position, and spectral properties of the primary sources [21]. Estimating primary disturbances at the virtual error microphone using an observation filter forms an inverse problem that is sensitive to uncertainties and mismatches between pre-calculated filter sets and observed scenes [20, 21].
+To mitigate these problems and provide an end-toend solution to cover several scenarios, we propose an extension of the RMT by a neural network that estimates observation filter coefficients during operation as indicated in Figure 1b. By estimating the filter coefficients asynchronously on a separate thread or co-processor, no additional computational resources are required in the real-time branch of the ANC system compared to conventional processing. The following section details the proposed model architecture.
+
+3. Model architecture
+To estimate the coefficients of the observation filter, we propose Obs-TasNet, a modified version of the interchannel fully-convolutional time-domain audio separation network (IC Conv-TasNet) [37]. Initially, it was proposed for multichannel speech enhancement, e.g. for processing speech recorded with a microphone array in a noisy environment. The IC Conv-TasNet itself is based on the original Conv-TasNet [46] and its multichannel extension [36], but provides higher performance with a significantly
+
+3
+
+F. Holzmu¨ller and A. Sontacchi: Obs-TasNet for virtual sensing
+
+Param
+W K F C L Fb Cb Lb S D CTCN
+
+Description
+Window length for the input signal Number of output FIR coefficients Number of encoder features Number of input channels with C = Nm + 1 Number of input signal blocks Feature dimension after bottleneck layer Channel dimension after bottleneck layer Temporal dimension after bottleneck layer Number of TCN stacks Number of TCN convolution blocks per stack Channels in the TCN convolution blocks
+
+RMT
+(a) Conventional remote microphone technique.
+
+Table 1: Hyperparameters of the Obs-TasNet and their description.
+network, the encoder and the actual filter estimation network, are described in the following in detail.
+
+Virtual microphone
+position
+NN
+RMT
+(b) Remote microphone technique with neural network (NN) to estimate filter coefficients during operation.
+Figure 1: Block diagram of the remote microphone technique and the proposed modification for online observation filter coefficient estimation. The discrete time index n of signals is omitted for easier readability.
+reduced number of parameters [37]. Key components of the (IC) Conv-TasNet are latent representations of the input data learned from the waveform domain and temporal convolutional network (TCN) stacks [47] with dilated depthwise separable convolutions [48].
+In its original form, the IC Conv-TasNet estimates a real-valued mask for application on one transformed input channel. Therefore, it cannot be used for virtual sensing, as important phase information is discarded [49] and operation with tight real-time constraints is not possible due to the block processing. However, we modified the architecture to ensure suitability for virtual sensing tasks. A network overview is shown in Figure 2. For easier readability, the most important hyperparameters are described in Table 1. The two main components of the
+
+3.1. Encoder
+
+The encoder transforms the input signals, namely the estimated primary disturbances d^m[n] at the remote microphones, into a latent feature space. A commonly used transform for many signal processing tasks is the shorttime Fourier transform (STFT). While the STFT is a versatile method suitable for many problems, it is necessarily not the optimal transform for each task [50, 46, 51].
+Therefore, TasNet-style networks use a learnable input encoding [52, 46, 37]. The time domain input signals are buffered and split into L overlapping segments of length W , where d~m,r  RW ×L refers to the blocked
+signal of the r-th input channel d^m,r[n]. The audio data is then transformed to feature space as F -dimensional latent representation by applying a linear transform
+
+Dm,r = Ud d~m,r ,
+
+(15)
+
+where Dm,r  RF ×L is the transformed input data of channel r, and Ud  RF ×W a matrix containing the F encoder basis vectors. The encoder matrix Ud is trained end-to-end with the filter estimation network and shared across all input audio data channels.
+For the proposed virtual sensing application, coordinates of the virtual microphone are processed as well. For each of the L input data blocks, Cartesian coordinates of the virtual microphone position are provided. In the same fashion as in equation (15), the matrix p  R3×L of coordinates for the L segments is transformed
+
+P = Up p
+
+(16)
+
+with an encoder matrix Up  RF ×3 to the encoded position P  RF ×L.
+After encoding, all audio and position encoder outputs are stacked [37], forming a tensor of dimension (C × F × L), where C = Nm + 1.
+The input encoding in equations (15) and (16) is described as separate blocking and matrix multiplication. However, in practice these operations are implemented
+
+4
+
+1D Conv
+
+1D Conv
+
+Stack
+
+1D Conv (F x L)
+(C x F x L)
+
+(F x L) 1D Conv
+Encoder
+
+Virtual Microphone Position
+
+F. Holzmu¨ller and A. Sontacchi: Obs-TasNet for virtual sensing
+
+(Cb x Fb x Lb)
+
+(Cb x Fb x Lb)
+
+(Cb x Fb x Lb)
+
+1x1 Conv (L  Lb)
+(Cb x Fb x L) 1x1 Conv (C  Cb)
+(C x Fb x L) 1x1 Conv (F  Fb)
+(C x F x L)
+LayerNorm
+
+TCN Stack
+
+TCN Conv
+TCN Conv
+TCN Conv
+
+Bottleneck Filter estimation network
+
+TCN Conv
+TCN Conv
+TCN Conv
+(Cb x Fb x Lb)
+
+d=2D-1
+d=21
+d=20
+Residual Skip
+
+TCN Conv
+TCN Conv
+TCN Conv
+
+(Cb x Fb x Lb)
+PReLU
+1x1 Conv (Cb  Nm)
+(Nm x Fb x Lb) Flatten
+(Nm x FbLb) Linear Layer (FbLb  K)
+Output (Nm x K)
+
+Figure 2: Architecture of the Obs-TasNet to estimate observation filter coefficients. Additional layers compared to the original IC Conv-TasNet [37] are displayed red. Expressions in parentheses at signal lines indicate tensor size, parentheses in layers correspond to a transform of dimensions. 1D Conv refers to a standard 1D convolutional layer, TCN Conv to a TCN convolution block with varying colours for different dilation factors d, 1 x 1 Conv to a pointwise 2D convolution, and PReLU to a parametric rectified linear unit activation function.
+
+as a single convolutional layer with output channel size F , directly applied on the time-domain signal. This reformulation improves training speed and convergence [46].
+3.2. Filter estimation network
+The main part of this network is the filter estimation network, consisting of multiple TCN stacks [47, 46, 37] with dilated depthwise convolutions [48]. This way, temporal dependencies are captured similar to networks based on recurrent architectures, but with a smaller number of parameters and less influence of long-term dependencies [46]. Before processing in the actual TCN stacks, data is passed through bottleneck layers; the output of the TCN is transformed subsequently to provide the results in the correct shape of individual filter coefficients.
+3.2.1. Bottleneck layers
+To reduce complexity, the encoded inputs are first passed through three bottleneck layers, transforming each of the input tensor's dimensions. The bottleneck layers are implemented as pointwise convolutions with kernel size 1, also referred to as 1 × 1 convolutions. As proposed in the original Conv-TasNet [46], the first bottleneck layer maps the F encoder outputs to Fb features. The IC-Conv-TasNet introduces a second bottleneck to map the C = Nm + 1 input channels onto Cb shared channels. For speech enhancement, an individual mask is estimated for each of the encoded input data blocks. However, several blocks are processed jointly in the ObsTasNet to calculate filter coefficients asynchronously. This allows the introduction of a third bottleneck layer along the temporal dimension to map the L input blocks to Lb
+
+temporal features. Before passing the signal to the bottleneck, layer normalization [53] is applied.2
+3.2.2. TCN Stacks
+Subsequently, data is processed by S identical TCN stacks, each consisting of D TCN convolution blocks with increasing dilation to capture different temporal dependencies. The TCN convolution blocks return two tensors - a residual output passed to the next TCN block, as well as a skip output. The summed skip outputs of all blocks are used to compute the observation filter coefficients.
+The structure of a TCN convolution block is shown in Figure 3. At first, the input is processed by a pointwise convolution, mapping the Cb channel features to CTCN > Cb internal features [37]. A parametric rectified linear unit (PReLU) [55] is used as activation function, defined as
+PReLU(x) = x , if x > 0 , (17) ax , otherwise ,
+with a learnable parameter a  R. After layer normalization [53], a depthwise separable
+convolution (S-Conv ) [48] is performed. The S-Conv is used in image and audio processing as an alternative to conventional convolution with less parameters. To that end, the convolution is split into a 2D depthwise convolution (D-Conv ) and dedicated pointwise convolutions for residual and skip output. A D-Conv performs the convolution for each of the CTCN channels separately, while the pointwise convolution is applied over CTCN to map the internally used channels to Cb outputs. Between the DConv and the pointwise convolutions, layer normalization
+2 For a more straight-forward implementation, group normalization [54] with just one group is used to act as layer normalization.
+
+5
+
+F. Holzmu¨ller and A. Sontacchi: Obs-TasNet for virtual sensing
+
+Residual
+
+(Cb x Fb x Lb)
+
+(Cb x Fb x Lb) Skip
+
+4. Experimental setup
+
+1 x 1 Conv (CTCN  Cb)
+
+1 x 1 Conv (CTCN  Cb)
+
+LayerNorm
+PReLU (CTCN x Fb x Lb)
+D-Conv (CTCN)
+LayerNorm
+PReLU (CTCN x Fb x Lb)
+1 x 1 Conv (Cb  CTCN)
+(Cb x Fb x Lb) TCN Conv Input
+Figure 3: Block diagram of a TCN convolution block. Expressions in parentheses at signal lines denote tensor size, parentheses in layers correspond to a transform of dimensions. 1 x 1 Conv refers to a pointwise 2D convolution, D-Conv to a depthwise convolution, and PReLU to a parametric rectified linear unit activation function.
+
+and a PReLU activation function is applied. The D-Convs are dilated along their temporal dimension. In each TCN stack, the D-Conv in the first TCN convolution block uses a dilation of d = 20, the second TCN convolution block d = 21, until the D-th block is dilated by d = 2D-1. Zero-padding is applied to keep tensor dimensions consistent. While the skip connections are returned right after the pointwise convolution, the residual output is summed with the input of the TCN convolution block.
+3.2.3. Output transform
+The summed skip output of the TCN network is further processed to return the matrix of observation filter coefficients o^. After applying a PReLU activation function, the channel dimension Cb is mapped to the actually required Nm microphone channels by a pointwise convolution. The remaining two dimensions corresponding to temporal and feature information are then flattened and processed by a linear layer, mapping the FbLb features to K observation filter coefficients.
+
+4.1. Dataset
+The network is trained, validated, and tested with synthetic datasets, generated in TASCAR3 [56, 57]. In all scenarios, a single primary source with random azimuth and elevation and a distance of 1.5 m to 3 m to the centre of the coordinate system is created. Gaussian distributed noise with a spectral density proportional to 1/f  with frequency f and   [0; 2] is used as innovation signal, driving the primary source. Four remote microphones are positioned at the Cartesian coordinates (0.1, 0.1, 0.1), (0.1, -0.1, -0.1), (-0.1, 0.1, -0.1), (-0.1, -0.1, 0.1) m, forming a tetrahedral arrangement around the coordinate system's centre. It should be noted, that sound propagation delay in TASCAR is by default rounded to integer samples, introducing a bias of up to ±31.25 µs with the selected sample rate.
+Two different datasets are created: one with timeinvariant (static dataset), the other with time invariant and time-variant virtual microphone position (mixed dataset). In the former, the microphone position within a sphere with 10 cm diameter around the coordinate system's centre is drawn from a uniform distribution. For the second dataset, the virtual microphone position is moved up to two times in each scene, where each movement follows a linear trajectory with a duration of 0.5 s to 2 s and a pause of 2 s to 6 s between movements.
+In total, each dataset consists of 80 000 scenes with 20 s duration, sampled at a rate of 16 kHz. Training and validation data are split with a 80/20 % ratio. Additionally, two test sets with 1000 scenes are created, containing either just static or just time-variant virtual microphone positions. A uniformly randomized gain is applied to all scenes, so that a root mean square (RMS) level of -40 dB to -16 dB is achieved at the virtual error microphone to avoid clipping.
+4.2. Training
+If not specified otherwise, observation filters coefficients for a delayed RMT [45] with K = 257 taps and a delay of  = 64 samples are predicted. Obs-TasNet is inferred every 512 ms, corresponding to 32 frames of input data with W = 512. The models are trained by minimizing the mean squared error (MSE) between estimated primary disturbances d^e[n] at the virtual microphone and a ground truth de[n]. For a level invariant loss [58], the signals are normalized using the ground truth's RMS value. By calculating the loss on the time domain signals and for example not on magnitude spectra, phase distortions are penalized as well. The estimated primary disturbances d^e[n] are calculated by convolving the obtained observation filter coefficients o^ with the primary disturbances dm,r[n] as described in equation (10). For faster training and evaluation, filtering is performed using the overlap-save method [59, section 8.7.3].
+3 https://www.tascar.org
+
+6
+
+F. Holzmu¨ller and A. Sontacchi: Obs-TasNet for virtual sensing
+
+The models are trained in two stages - at first 50 epochs with the static dataset, followed by 50 epochs with the mixed set. The initial training with the static dataset is carried out to properly initialize model weights before training with the mixed dataset. The Adam optimiser [60] is used in all cases - for the static dataset with a fixed learning rate of 1 × 10-4, for the mixed dataset with exponentially decaying learning rate starting at 1 × 10-4 until reaching 1 × 10-5 after 50 epochs. Learning rate, scheduling, and the training duration of 50 epochs have been determined in preliminary trainings to optimal convergence while avoiding overfitting. All trainings are performed using PyTorch with a batch size of 100 on either a NVIDIA RTX Pro 6000 Blackwell Max-Q or a NVIDIA RTX 3080 GPU.
+
+4.3. Metrics
+
+A central validation metric is the normalized MSE (NMSE)
+
+NMSE = 10 log10
+
+n=0  [n]2
+
+ n=0
+
+de[n]2
+
+(18)
+
+with
+
+[n] = de[n] - d^e[n] ,
+
+(19)
+
+providing a single scalar for the broadband performance. Closely related to the NMSE is the estimation error [21]
+
+E(f ) = 10 log10 S , ^(f ) (20) S^dede (f )
+
+where S^(f ) and S^dede (f ) with frequency f refer to an estimate of the power spectral density (PSD) of [n] and
+de[n], respectively, calculated using Welch's method [61]. The estimation error E(f ) can be interpreted as the
+NMSE in frequency domain.
+A metric for the evaluation of the overall performance
+of an ANC system is the noise reduction
+
+NR(f ) = 10 log10 S , ^dede (f ) (21) S^ee(f )
+
+where the estimated PSD S^ee(f ) of the error signal e[n] is compared to the estimated PSD of primary disturbances de[n].
+
+5. Experiments
+
+Several experiments are conducted to assess the proposed Obs-TasNet. They can be grouped into four tasks, namely
+1. a hyperparameter search to find suitable combinations,
+2. an ablation study regarding the additional bottleneck along the temporal dimension
+3. an assessment of the estimation performance based on the virtual microphone position, and
+4. an evaluation as part of an ANC system, compared to a multi-point ANC system using the error signals at the remote microphones.
+
+5.1. Hyperparameter search
+A brief search for a suitable combination of the hyperparameters listed in Table 1 has been conducted. While an extensive grid search is not feasible, selected hyperparameters are varied sequentially. The tested combinations, corresponding model parameter count, computational complexity, and resulting mean validation NMSE are shown in Table 2.
+Similar hyperparameters as in the original IC ConvTasNet [37] are used as initial configuration. A selection of S = 3 TCN stacks with D = 6 blocks show best performance for the selected dataset and parameter configuration. Increasing the number of input signal blocks from L = 32 to L = 64 does increase complexity slightly, but does not influence the mean NMSE. Similarly, increasing or decreasing the number of encoded features F has little influence, presumably due to the used Gaussian primary disturbances. Changes in the output dimensions of the bottleneck layers have larger impact on the complexity and number of parameters, yet the initial selection of Lb = 8, Fb = 128, and Cb = 64 yields in lowest mean NMSE. However, increasing the number of channels in the TCN convolution blocks to CTCN = 512 can further reduce mean NMSE by 0.27 dB, but almost doubles computational complexity. A reduction of the number of coefficients to K = 129 affects only the linear layer at the output, hence mainly the number of parameters is influenced while computational complexity barely changes. As the filter order still exceeds the sound propagation delay of the microphone aperture, only a minor decrease of mean NMSE can be observed.
+In general, the mean NMSE values in Table 2 differ only slightly across most hyperparameter configurations. This is expected because the broadband metric evaluates the entire frequency range of signals sampled at 16 kHz. As shown in Figure 4, even for the best-performing model the estimation error tends toward 0 dB at higher frequencies, which disproportionately increases the overall error relative to lower frequencies where ANC systems are primarily applied.
+5.2. Ablation study - temporal bottleneck layer
+In order to reduce computational load and jointly process temporal dependencies, the Obs-TasNet features compared to the IC Conv-TasNet an additional bottleneck, mapping the L input data blocks to Lb latent representations. To demonstrate the effectiveness, a version of the Obs-TasNet based on hyperparameter configuration 2 in Table 2, but without the temporal bottleneck layer, is trained. The performance is evaluated and compared for the two test sets, consisting exclusively of either time-invariant and time-variant scenes, respectively.
+Results of this brief ablation study are shown in Table 3 and Figure 4. Most obviously, the proposed architecture uses about 40 % fewer parameters, and reduces computational complexity by factor 4. At the same time, NMSE is decreased by approximately 0.5 dB for scenes with static and 0.4 dB for scenes with moving virtual microphone.
+
+7
+
+F. Holzmu¨ller and A. Sontacchi: Obs-TasNet for virtual sensing
+
+ID D S L Lb F Fb Cb CTCN K Params Complexity mean NMSE
+
+1 4 3 32 8 256 128 64 2 6 3 32 8 256 128 64 3 8 3 32 8 256 128 64
+
+256 257 1.07 M 0.69 GMACs 256 257 1.39 M 1.03 GMACs 256 257 1.70 M 1.36 GMACs
+
+-14.56 dB -15.32 dB -14.73 dB
+
+4 6 2 32 8 256 128 64 5 6 4 32 8 256 128 64
+
+256 257 1.07 M 0.69 GMACs 256 257 1.70 M 1.36 GMACs
+
+-14.53 dB -15.13 dB
+
+6 6 3 64 8 256 128 64 256 257 1.39 M 1.05 GMACs -15.32 dB
+
+7 6 3 32 8 128 128 64 8 6 3 32 8 512 128 64
+
+256 257 1.30 M 1.01 GMACs 256 257 1.55 M 1.05 GMACs
+
+-14.72 dB -15.01 dB
+
+9 6 3 32 4 256 128 64 10 6 3 32 16 256 128 64
+
+256 257 1.25 M 0.52 GMACs 256 257 1.65 M 1.63 GMACs
+
+-14.64 dB -14.95 dB
+
+11 6 3 32 8 256 64 64 12 6 3 32 8 256 256 64
+
+256 257 1.24 M 0.52 GMACs -14.41 dB 256 257 1.68 M 2.03 GMACs -15.16 dB
+
+13 6 3 32 8 256 128 32 256 257 0.94 M 0.57 GMACs 14 6 3 32 8 256 128 128 256 257 1.94 M 2.27 GMACs
+
+-14.14 dB -15.09 dB
+
+15 6 3 32 8 256 128 64 16 6 3 32 8 256 128 64
+
+128 257 0.91 M 0.53 GMACs -15.05 dB 512 257 2.34 M 2.02 GMACs -15.59 dB
+
+17 6 3 32 8 256 128 64 256 129 1.25 M 1.02 GMACs -15.11 dB
+
+Table 2: Mean validation NMSE for different hyperparameter combinations from Table 1. Varied parameters are highlighted. The number of model parameters is shown in millions, the computational complexity as 109 multiply-
+accumulate operations (GMACs).
+
+Model
+Obs-TasNet Obs-TasNet (w/o L-BN)
+
+Params
+1.39 M 2.18 M
+
+Complexity
+1.03 GMACs 4.02 GMACs
+
+mean NMSE
+
+static
+
+moving
+
+-16.58 dB -15.37 dB -16.04 dB -14.95 dB
+
+Table 3: Mean test NMSE for the proposed architecture (Obs-TasNet) and a modified version without the temporal
+bottleneck layer (Obs-TasNet (w/o L-BN)). The number of model parameters is shown in millions, the computational complexity as 109 multiply-accumulate operations (GMACs).
+
+The reduction of the estimation error with additional bottleneck layer is mainly visible towards low frequencies.
+5.3. Position-dependent performance
+Using hyperparameter combination 16 in Table 2, we briefly evaluated the static test set regarding the distance a of the virtual microphone from the centre of the arrangement. In line with [41], the mean NMSE reported in Table 4 tends to increase with a, though not strictly monotonic. Figure 5 further shows that the estimation error increases steadily with a in the lower-frequency region.
+5.4. ANC simulation
+The proposed approach for error signal estimation is tested as part of a conventional ANC system as described in section 2. As primarily the performance of the observation filter estimation is of interest, only the test set with static scenes is used here. This way, the secondary plant responses are time-invariant and can be modelled accurately without artefacts of secondary path interpolation.
+
+Position
+a  [0; 1) cm a  [1; 2) cm a  [2; 3) cm a  [3; 4) cm a  [4; 5) cm
+
+mean NMSE
+-20.54 dB -16.53 dB -14.58 dB -16.91 dB -15.21 dB
+
+Table 4: Mean test NMSE for different distance a of the virtual microphone from the centre of the arrangement.
+
+However, each scene uses randomized primary sources and virtual microphone positions as described in section 4.1. A comparison to the conventional RMT or other commonly utilized techniques such as the additional filter method [62] is not viable. In these techniques, filters are optimized separately for each scenario with different virtual microphone position and primary disturbance direction and must be selected during operation, requiring additional metadata about the primary disturbances [21]. Instead, we used a multi-point ANC system [63] as benchmark. This approach does not process the error signal at the PoC for adaptation, but the signals of several
+
+8
+
+F. Holzmu¨ller and A. Sontacchi: Obs-TasNet for virtual sensing
+
+0
+
+placed at Cartesian coordinates (1, 0, 0) m and modelled
+
+with I = 64 taps.
+
+-10
+
+E / dB
+
+-20
+-30 Obs-TasNet
+-40 Obs-TasNet (w/o L-BN)
+
+102
+
+103
+
+104
+
+Frequency / Hz
+
+E / dB
+
+(a) Static
+0 -10 -20 -30
+Obs-TasNet -40 Obs-TasNet (w/o L-BN)
+
+102
+
+103
+
+104
+
+Frequency / Hz
+
+(b) Moving
+
+Figure 4: Estimation error E of the Obs-TasNet and a modified version without the temporal bottleneck layer (Obs-TasNet (w/o L-BN)) in scenes with (a) static and (b) moving virtual microphone.
+
+a  [0; 1) cm a  [1; 2) cm a  [2; 3) cm
+
+a  [3; 4) cm a  [4; 5) cm
+
+0
+
+E / dB
+
+-20
+
+-40
+
+102
+
+103
+
+104
+
+Frequency / Hz
+
+Figure 5: Estimation error E for different regions a of the virtual microphone from the centre of the arrangement.
+
+nearby physical microphones - in our case the signals of the four remote microphones that are also processed by Obs-TasNet.
+In each of the 1000 test-scenarios, a control filter with H = 256 taps is adapted with a step-size of µ = 0.1. The innovation signal driving the primary sources is used as reference signal x[n] as well. The secondary source is
+
+NR / dB
+
+0
+
+10
+
+20
+
+Obs-TasNet
+
+30
+
+Multi-point ANC
+
+102
+
+103
+
+104
+
+Frequency / Hz
+
+Figure 6: Averaged steady-state noise reduction (NR) after 15 s adaptation over 1000 realizations of an ANC system with the proposed Obs-TasNet for error signal estimation and a multi-point ANC system using the four (physical) remote microphones.
+
+Figure 6 shows the average steady-state noise reduction of an ANC system with error signal estimation using the proposed Obs-TasNet compared to a multipoint ANC system after 15 s adaptation. Only realizations where convergence with the actual error signal e[n] is possible are taken into account. The proposed algorithm outperforms the multi-point ANC over the whole assessed frequency range. Major differences in performance are visible especially towards higher frequencies. While the multi-point ANC system reaches 10 dB noise reduction only up to 200 Hz, the system with Obs-TasNet expands this frequency range up to 700 Hz.
+
+6. Conclusion
+We presented Obs-TasNet, a neural network for online estimation of observation filter coefficients in the RMT. Built on the IC Conv-TasNet, the model processes raw waveforms from remote microphones together with the virtual microphone's coordinates, while not requiring additional metadata about the acoustic scene. A learnable encoder maps the inputs into a shared latent space; crosschannel processing in bottleneck layers is followed by a TCN with subsequent output layers to predict the observation filter coefficients. Because the network outputs only filter coefficients - without end-to-end audio processing - the error signal computation in the real-time processing branch is unchanged compared to the conventional RMT, incurring no additional runtime load. The asynchronous design further allows model inference to be offloaded to a co-processor or neural processing unit.
+We conducted a brief hyperparameter search to find a performant yet efficient configuration. An ablation study demonstrated the effectiveness of the added temporal bottleneck layer, reducing number of parameters by 40 % and the computational complexity by a factor of 4, while simultaneously lowering the NMSE. In simulation, an ANC
+
+9
+
+F. Holzmu¨ller and A. Sontacchi: Obs-TasNet for virtual sensing
+
+system using Obs-TasNet for error-signal estimation substantially improved noise reduction: whereas on average a multi-point ANC baseline achieved about 10 dB only up to 200 Hz, the RMT-based system with Obs-TasNet extended effective attenuation up to 700 Hz in the tested scenarios.
+This work demonstrates Obs-TasNet as a proof of concept for online estimation of observation filter coefficients. Future developments may incorporate additional scene metadata, extensions for multiple points of cancellation with greater degrees of freedom of motion, and a validation of robustness in complex, real-world acoustic environments.
+Acknowledgments
+We thank the anonymous reviewers for their insightful comments and constructive critiques, which helped improve this paper. We are also grateful to Paul Armin Bereuter and Christian Blo¨cher for their valuable feedback during manuscript preparation.
+Funding
+Parts of the computing infrastructure are funded by the (digital) research infrastructure project "Interactive audiovisual digital twins of performance venues" by the Austrian Federal Ministry of Women, Science and Research.
+Conflicts of interest
+The authors declare no conflict of interest.
+Data availability statement
+Code and model weights associated with this article are available in Zenodo, under the reference [42].
+Author contribution statement
+Felix Holzmu¨ller: Conceptualization, methodology, software, data curation, visualization, investigation, writing; Alois Sontacchi: Conceptualization, supervision, resources, writing - review & editing
+References
+1. S. J. Elliott, Signal Processing for Active Control, 1st ed., ser. Signal Processing and Its Applications. Academic Press, 2001, https://doi.org/10.1016/ B978-0-12-237085-4.X5000-5.
+2. H. F. Olson and E. G. May, "Electronic Sound Absorber," J. Acoust. Soc. Am., vol. 25, no. 6, pp. 1130-1136, Nov. 1953, http://asa.scitation.org/doi/10.1121/1.1907249.
+
+3. C. Boucher, S. J. Elliott, and P. A. Nelson, "Effect of errors in the plant model on the performance of algorithms for adaptive feedforward control," IEE Proceedings F (Radar and Signal Processing), vol. 138, no. 4, p. 313, 1991, https://digital-library.theiet.org/content/journals/ 10.1049/ip-f-2.1991.0042.
+4. T. J. Sutton, S. J. Elliott, A. M. McDonald, and T. J. Saunders, "Active control of road noise inside vehicles," Noise Control Eng. J., vol. 42, no. 4, pp. 137-147, Jul. 1994, https://www.ingentaconnect.com/ content/ince/ncej/1994/00000042/00000004/art00002.
+5. W. Jung, S. J. Elliott, and J. Cheer, "Local active control of road noise inside a vehicle," Mech. Syst. Signal Process., vol. 121, pp. 144-157, Apr. 2019, https://linkinghub. elsevier.com/retrieve/pii/S0888327018307234.
+6. J. Buck and D. Sachau, "Active headrests with selective delayless subband adaptive filters in an aircraft cabin," Mech. Syst. Signal Process., vol. 148, p. 107164, Feb. 2021, https://linkinghub.elsevier.com/retrieve/pii/ S0888327020305501.
+7. J. Y. Oh, H. W. Jung, M. H. Lee, K. H. Lee, and Y. J. Kang, "Enhancing active noise control of road noise using deep neural network to update secondary path estimate in real time," Mech. Syst. Signal Process., vol. 206, p. 110940, Jan. 2024, https://www.sciencedirect. com/science/article/pii/S0888327023008488.
+8. S. J. Elliott, P. Joseph, A. Bullmore, and P. A. Nelson, "Active cancellation at a point in a pure tone diffuse sound field," J. Sound Vib., vol. 120, no. 1, pp. 183- 189, Jan. 1988, https://linkinghub.elsevier.com/retrieve/ pii/0022460X88903434.
+9. S. J. Elliott and J. Garcia-Bonito, "Active cancellation of pressure and pressure gradient in a diffuse sound field," J. Sound Vib., vol. 186, no. 4, pp. 696-704, Oct. 1995, https://linkinghub.elsevier.com/retrieve/pii/ S0022460X85704828.
+10. P. Joseph, S. J. Elliott, and P. A. Nelson, "Near Field Zones of Quiet," J. Sound Vib., vol. 172, no. 5, pp. 605- 627, May 1994, https://linkinghub.elsevier.com/retrieve/ pii/S0022460X84712028.
+11. J. Garcia-Bonito, S. J. Elliott, and C. C. Boucher, "Generation of zones of quiet using a virtual microphone arrangement," J. Acoust. Soc. Am., vol. 101, no. 6, pp. 3498-3516, Jun. 1997, https://pubs.aip.org/jasa/article/101/6/3498/480236/ Generation-of-zones-of-quiet-using-a-virtual.
+12. S. J. Elliott and J. Cheer, "Modeling local active sound control with remote sensors in spatially random pressure fields," J. Acoust. Soc. Am., vol. 137, no. 4, pp. 1936- 1946, Apr. 2015, http://asa.scitation.org/doi/10.1121/1. 4916274.
+13. B. Rafaely, S. J. Elliott, and J. Garcia-Bonito, "Broadband performance of an active headrest," J. Acoust. Soc. Am., vol. 106, no. 2, pp. 787-793, Aug. 1999, https://doi.org/ 10.1121/1.427134.
+14. B. Rafaely, "Zones of quiet in a broadband diffuse sound field," J. Acoust. Soc. Am., vol. 110, no. 1, pp. 296-302, Jul. 2001.
+15. F. Jiang, H. Tsuji, H. Ohmori, and A. Sano, "Adaptation for active noise control," IEEE Control Syst., vol. 17, no. 6, pp. 36-47, Dec. 1997, https://ieeexplore.ieee.org/ abstract/document/642973.
+16. A. Wang and W. Ren, "Convergence analysis of the multivariable filtered-X LMS algorithm with application to active noise control," IEEE Trans. Signal Process., vol. 47, no. 4, pp. 1166-1169, Apr. 1999.
+
+10
+
+F. Holzmu¨ller and A. Sontacchi: Obs-TasNet for virtual sensing
+
+17. J. Cheer and S. Daley, "An Investigation of Delayless Subband Adaptive Filtering for Multi-Input MultiOutput Active Noise Control Applications," IEEE Trans. Audio Speech Lang. Process., vol. 25, no. 2, pp. 359-373, Feb. 2017.
+18. L. Yin, Z. Zhang, M. Wu, Z. Wang, C. Ma, S. Zhou, and J. Yang, "Adaptive parallel filter method for active cancellation of road noise inside vehicles," Mech. Syst. Signal Process., vol. 193, p. 110274, Jun. 2023, https:// linkinghub.elsevier.com/retrieve/pii/S0888327023001814.
+19. D. Moreau, B. Cazzolato, A. Zander, and C. Petersen, "A Review of Virtual Sensing Algorithms for Active Noise Control," Algorithms, vol. 1, no. 2, pp. 69-99, Nov. 2008, http://www.mdpi.com/1999-4893/1/2/69.
+20. S. J. Elliott, W. Jung, and J. Cheer, "Causality and Robustness in the Remote Sensing of Acoustic Pressure, with Application to Local Active Sound Control," in IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP). Brighton, United Kingdom: IEEE, May 2019, pp. 8484-8488, https://ieeexplore.ieee. org/document/8682474/.
+21. W. Jung, S. J. Elliott, and J. Cheer, "Combining the remote microphone technique with head-tracking for local active sound control," J. Acoust. Soc. Am., vol. 142, no. 1, pp. 298-307, Jul. 2017, http://asa.scitation.org/doi/10. 1121/1.4994292.
+22. C. D. Petersen, B. S. Cazzolato, A. C. Zander, and C. H. Hansen, "Active noise control at a moving location using virtual sensing," in Proceedings of the 13th International Congress of Sound and Vibration (ICSV13), ser. ICSV, vol. 13, Vienna, Austria, Jun. 2006.
+23. F. Veronesi, C. K. Lai, and J. Cheer, "Interpolation between plant responses in a head-tracked local active noise control headrest system," Mech. Syst. Signal Process., vol. 240, p. 113401, Nov. 2025, https://www.sciencedirect. com/science/article/pii/S0888327025011021.
+24. S. Koyama, J. Brunnstro¨m, H. Ito, N. Ueno, and H. Saruwatari, "Spatial Active Noise Control Based on Kernel Interpolation of Sound Field," IEEE Trans. Audio Speech Lang. Process., vol. 29, pp. 3052-3063, 2021, https: //ieeexplore.ieee.org/document/9523774/.
+25. C. K. Lai and J. Cheer, "A Comparison Between Spatial Interpolation Approaches in a Head-Tracked Active Headrest System," in Proceedings of the 11th Convention of the European Acoustics Association Forum Acusticum / EuroNoise 2025. Ma´laga, Spain: European Acoustics Association, Jun. 2025, pp. 23-30, https://dael. euracoustics.org/confs/fa2025/data/articles/000008.pdf .
+26. Q. Kong, Y. Cao, T. Iqbal, Y. Wang, W. Wang, and M. D. Plumbley, "PANNs: Large-Scale Pretrained Audio Neural Networks for Audio Pattern Recognition," IEEE Trans. Audio Speech Lang. Process., vol. 28, pp. 2880-2894, 2020, https://ieeexplore.ieee.org/document/9229505.
+27. DCASE, "DCASE2025 Challenge - DCASE," https:// dcase.community/challenge2025/index.
+28. R. Xie, A. Tu, C. Shi, S. Elliott, H. Li, and L. Zhang, "Cognitive Virtual Sensing Technique for Feedforward Active Noise Control," in IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), Seoul, Korea, Apr. 2024, pp. 981-985, https://ieeexplore. ieee.org/abstract/document/10446463.
+29. B. Wang, D. Shi, Z. Luo, X. Shen, J. Ji, and W.-S. Gan, "Transferable Selective Virtual Sensing Active Noise Control Technique Based on Metric Learning," in IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), Hyderabad, India, Apr. 2025, pp.
+
+1-5, https://ieeexplore.ieee.org/document/10887958/.
+
+30. E. Fernandez-Grande, X. Karakonstantis, D. Caviedes-
+
+Nozal, and P. Gerstoft, "Generative models for sound
+
+field reconstruction," J. Acoust. Soc. Am., vol. 153, no. 2,
+
+pp. 1179-1190, Feb. 2023, https://doi.org/10.1121/10.
+
+0016896.
+
+31. V. S. Paul, N. Hahn, and P. A. Nelson, "Learning from
+
+data-driven sound field estimation using complex-valued
+
+neural networks," in Proceedings of the 11th Convention
+
+of the European Acoustics Association Forum Acusticum
+
+/ EuroNoise 2025. Ma´laga, Spain: European Acoustics
+
+Association, Jun. 2025, pp. 4343-4350, https://dael.
+
+euracoustics.org/confs/fa2025/data/articles/000516.pdf .
+
+32. S. Koyama, J. G. C. Ribeiro, T. Nakamura, N. Ueno,
+
+and M. Pezzoli, "Physics-Informed Machine Learning for
+
+Sound Field Estimation: Fundamentals, state of the art,
+
+and challenges," IEEE Signal Process. Mag., vol. 41,
+
+no. 6, pp. 60-71, Nov. 2024, https://ieeexplore.ieee.org/
+
+abstract/document/10819673.
+
+33. Y. A. Zhang, F. Ma, T. D. Abhayapala, P. N.
+
+Samarasinghe, and A. Bastine, "An Active Noise Control
+
+System Based On Soundfield Interpolation Using A
+
+Physics-Informed Neural Network," in IEEE International
+
+Conference on Acoustics, Speech and Signal Processing
+
+(ICASSP), Seoul, Korea, Apr. 2024, pp. 506-510, https:
+
+//ieeexplore.ieee.org/document/10447208.
+
+34. S.-C. Huang, C.-H. Ma, Y.-C. Hsu, and M. R. Bai,
+
+"Feedforward active noise global control using a linearly
+
+constrained beamforming approach," J. Sound Vib., vol.
+
+537, p. 117190, Oct. 2022, https://www.sciencedirect.
+
+com/science/article/pii/S0022460X22003868.
+
+35. X. Xiao, S. Watanabe, H. Erdogan, L. Lu, J. Hershey,
+
+M. L. Seltzer, G. Chen, Y. Zhang, M. Mandel, and
+
+D. Yu, "Deep beamforming networks for multi-channel
+
+speech recognition," in IEEE International Conference
+
+on Acoustics, Speech and Signal Processing (ICASSP),
+
+Shanghai, China, Mar. 2016, pp. 5745-5749, https://
+
+ieeexplore.ieee.org/abstract/document/7472778.
+
+36. R. Gu, J. Wu, S.-X. Zhang, L. Chen, Y. Xu, M. Yu, D. Su,
+
+Y. Zou, and D. Yu, "End-to-End Multi-Channel Speech
+
+Separation," http://arxiv.org/abs/1905.06286, May 2019.
+
+37. D. Lee, S. Kim, and J.-W. Choi, "Inter-channel Conv-
+
+TasNet for multichannel speech enhancement," http://
+
+arxiv.org/abs/2111.04312, Nov. 2021.
+
+38. J. Kim, "Remote Microphone Sound-Field Virtual Sensing
+
+Method Using Neural Network for Active Noise Control
+
+System," Master's thesis, Purdue University, West
+
+Lafayette, IN, USA, Dec. 2024, doi.org/10.25394/PGS.
+
+27964044.
+
+39. A. Roure and A. Albarrazin, "The remote microphone
+
+technique for active noise control," in INTER-NOISE
+
+and NOISE-CON Congress and Conference Proceedings,
+
+Fort Lauderdale, FL, USA, Dec. 1999, pp. 1233-1244,
+
+https://www.ingentaconnect.com/contentone/ince/
+
+incecp/1999/00001999/00000005/art00105.
+
+40. F. Holzmu¨ller and A. Sontacchi, "Pilot study on vir-
+
+tual sensing for active noise control," in Proceedings
+
+of DAS|DAGA 2025, vol. 51.
+
+Copenhagen,
+
+Denmark: DAGA e.V., Mar. 2025, pp. 744-747,
+
+https://pub.dega-akustik.de/DAS-DAGA_2025/
+
+konferenz-1777.html?article=48.
+
+41. ----, "Deep Observation Filter for Virtual Sensing in
+
+Local Active Noise Control," in Proceedings of the
+
+11th Convention of the European Acoustics Association
+
+Forum Acusticum / EuroNoise 2025.
+
+Ma´laga,
+
+Spain: European Acoustics Association, Jun. 2025,
+
+11
+
+F. Holzmu¨ller and A. Sontacchi: Obs-TasNet for virtual sensing
+
+pp. 105-112, https://dael.euracoustics.org/confs/fa2025/ data/articles/000263.pdf . 42. ----, "Obs-TasNet: Code, Checkpoints, and Results," Zenodo, Mar. 2026, https://zenodo.org/records/ 18872900. 43. C. Anton~anzas, M. Ferrer, M. de Diego, and A. Gonzalez, "Remote Microphone Technique for Active Noise Control Over Distributed Networks," IEEE Trans. Audio Speech Lang. Process., vol. 31, pp. 1522-1535, 2023, https:// ieeexplore.ieee.org/document/10098215/. 44. S. Kim and M. E. Altinsoy, "A Complementary Effect in Active Control of Powertrain and Road Noise in the Vehicle Interior," IEEE Access, vol. 10, pp. 27 121-27 135, 2022, https://ieeexplore.ieee.org/document/9729696/. 45. D. Treyer, S. Gaulocher, S. Germann, and E. Curiger, "Towards the implementation of the noise-cancelling office chair: Algorithms and practical aspects," in Proceedings of the 23rd International Congress on Sound and Vibration (ICSV23), Athens, Greece, Jul. 2016. 46. Y. Luo and N. Mesgarani, "Conv-TasNet: Surpassing Ideal Time-Frequency Magnitude Masking for Speech Separation," IEEE Trans. Audio Speech Lang. Process., vol. 27, no. 8, pp. 1256-1266, Aug. 2019, https:// ieeexplore.ieee.org/document/8707065/. 47. C. Lea, R. Vidal, A. Reiter, and G. D. Hager, "Temporal Convolutional Networks: A Unified Approach to Action Segmentation," in Proceedings of the European Conference on Computer Vision (ECCV), G. Hua and H. J´egou, Eds., vol. 14. Amsterdam, The Netherlands: Springer, 2016, pp. 47-54. 48. F. Chollet, "Xception: Deep Learning with Depthwise Separable Convolutions," in Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR). Honolulu, HI, USA: IEEE, Jul. 2017, pp. 1800-1807, https://ieeexplore.ieee. org/document/8099678. 49. D. S. Williamson, Y. Wang, and D. Wang, "Complex Ratio Masking for Monaural Speech Separation," IEEE Trans. Audio Speech Lang. Process., vol. 24, no. 3, pp. 483- 492, Mar. 2016, https://ieeexplore.ieee.org/document/ 7364200. 50. T. N. Sainath, R. J. Weiss, K. W. Wilson, A. Narayanan, M. Bacchiani, and A. Senior, "Speaker location and microphone spacing invariant acoustic modeling from raw multichannel waveforms," in IEEE Workshop on Automatic Speech Recognition and Understanding (ASRU). Scottsdale, AZ, USA: IEEE, Dec. 2015, pp. 30-36, https://ieeexplore.ieee.org/document/7404770. 51. D. Haider, F. Perfler, V. Lostanlen, M. Ehler, and P. Balazs, "Hold Me Tight: Stable Encoder-Decoder Design for Speech Enhancement," in Interspeech 2024. Kos Island, Greece: ISCA, Sep. 2024, pp. 5013- 5017, https://www.isca-archive.org/interspeech_2024/ haider24_interspeech.html. 52. Y. Luo and N. Mesgarani, "TaSNet: Time-Domain Audio Separation Network for Real-Time, Single-Channel Speech Separation," in IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), Calgary, AL, Canada, Apr. 2018, pp. 696-700, https: //ieeexplore.ieee.org/abstract/document/8462116. 53. J. L. Ba, J. R. Kiros, and G. E. Hinton, "Layer Normalization," http://arxiv.org/abs/1607.06450, Jul. 2016. 54. Y. Wu and K. He, "Group Normalization," in Proceedings of the European Conference on Computer Vision (ECCV), vol. 15. Munich, Germany: Springer, Jun. 2018, https://openaccess.thecvf.com/content_ECCV_
+
+2018/html/Yuxin_Wu_Group_Normalization_ECCV_ 2018_paper.html. 55. K. He, X. Zhang, S. Ren, and J. Sun, "Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification," in IEEE International Conference on Computer Vision (ICCV). Santiago, Chile: IEEE, Dec. 2015, pp. 1026-1034, https:// ieeexplore.ieee.org/document/7410480. 56. G. Grimm, J. Luberadzka, and V. Hohmann, "A Toolbox for Rendering Virtual Acoustic Environments in the Context of Audiology," Acta Acustica united with Acustica, vol. 105, no. 3, pp. 566-578, May 2019, https:// www.ingentaconnect.com/content/10.3813/AAA.919337. 57. P. Guiraud, S. Hafezi, P. A. Naylor, A. H. Moore, J. Donley, V. Tourbabin, and T. Lunner, "An Introduction to the Speech Enhancement for Augmented Reality (Spear) Challenge," in IEEE International Workshop on Acoustic Signal Enhancement (IWAENC), vol. 17. Bamberg, Germany: IEEE, Sep. 2022, https://ieeexplore. ieee.org/abstract/document/9914721. 58. S. Braun and I. Tashev, "Data Augmentation and Loss Normalization for Deep Noise Suppression," in Speech and Computer, A. Karpov and R. Potapova, Eds. St. Petersburg, Russia: Springer International Publishing, 2020, pp. 79-86, https://link.springer.com/chapter/10. 1007/978-3-030-60276-5_8. 59. A. V. Oppenheim and R. W. Schafer, Discrete-Time Signal Processing, 3rd ed. Upper Saddle River, NJ; USA: Pearson, 2010. 60. D. P. Kingma and J. Ba, "Adam: A Method for Stochastic Optimization," in International Conference on Learning Representation (ICLR), vol. 3, San Diega, CA, USA, 2015, http://arxiv.org/abs/1412.6980. 61. P. D. Welch, "The use of fast Fourier transform for the estimation of power spectra: A method based on time averaging over short, modified periodograms," IEEE Trans. Audio and Electroacoust., vol. 15, no. 2, pp. 70-73, 1967, https://ieeexplore.ieee.org/document/1161901/. 62. J. Zhang, S. J. Elliott, and J. Cheer, "Robust performance of virtual sensing methods for active noise control," Mech. Syst. Signal Process., vol. 152, p. 107453, May 2021, https://linkinghub.elsevier.com/retrieve/pii/ S0888327020308396. 63. S. Elliott, I. Stothers, and P. Nelson, "A multiple error LMS algorithm and its application to the active control of sound and vibration," IEEE Trans. Acoust., Speech, Signal Process., vol. 35, no. 10, pp. 1423-1434, Oct. 1987, https://ieeexplore.ieee.org/abstract/document/1165044.
+
+12
+
+
