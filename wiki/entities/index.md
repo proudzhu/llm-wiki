@@ -112,4 +112,10 @@
 | [[entities/jan-gerrit-richter|Jan-Gerrit Richter]] | RWTH Aachen (ITA) — HRTF measurement, DHRTF for ANC | 2026-05-05 |
 | [[entities/johannes-fabry|Johannes Fabry]] | RWTH Aachen (IKS) — signal processing, ANC | 2026-05-05 |
 | [[entities/christopher-durand|Christopher Durand]] | RWTH Aachen (IKS) — signal processing, ANC | 2026-05-05 |
-| [[entities/janina-fels|Janina Fels]] | RWTH Aachen (ITA) — professor, HRTF, spatial hearing, psychoacoustics | 2026-05-05 |
+| [[entities/janina-fels\|Janina Fels]] | RWTH Aachen (ITA) — professor, HRTF, spatial hearing, psychoacoustics | 2026-05-05 |
+| [[entities/philipp-goetz\|Philipp Görtz]] | FAU Erlangen-Nuremberg — blind DDAP estimation using smart glasses | 2026-05-05 |
+| [[entities/sebastia-amengual\|Sebastià V. Amengual]] | Meta Reality Labs — acoustic signal processing for smart glasses | 2026-05-05 |
+| [[entities/paul-calamia\|Paul Calamia]] | Meta Reality Labs — acoustic signal processing, spatial audio | 2026-05-05 |
+| [[entities/andrew-francl\|Andrew Francl]] | Meta Reality Labs — acoustic signal processing for smart glasses | 2026-05-05 |
+| [[entities/carl-schissler\|Carl Schissler]] | Meta Reality Labs — acoustic simulation, spatial audio rendering | 2026-05-05 |
+| [[entities/emanuele-habets\|Emanuele A. P. Habets]] | FAU Erlangen-Nuremberg — spatial audio, acoustic signal processing, microphone arrays | 2026-05-05 |

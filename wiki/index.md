@@ -118,7 +118,13 @@
 | [[entities/jan-gerrit-richter|Jan-Gerrit Richter]] | RWTH Aachen (ITA) — HRTF measurement, DHRTF for ANC | 2026-05-05 |
 | [[entities/johannes-fabry|Johannes Fabry]] | RWTH Aachen (IKS) — signal processing, ANC | 2026-05-05 |
 | [[entities/christopher-durand|Christopher Durand]] | RWTH Aachen (IKS) — signal processing, ANC | 2026-05-05 |
-| [[entities/janina-fels|Janina Fels]] | RWTH Aachen (ITA) — professor, HRTF, spatial hearing, psychoacoustics | 2026-05-05 |
+| [[entities/janina-fels\|Janina Fels]] | RWTH Aachen (ITA) — professor, HRTF, spatial hearing, psychoacoustics | 2026-05-05 |
+| [[entities/philipp-goetz\|Philipp Görtz]] | FAU Erlangen-Nuremberg — blind DDAP estimation using smart glasses | 2026-05-05 |
+| [[entities/sebastia-amengual\|Sebastià V. Amengual]] | Meta Reality Labs — acoustic signal processing for smart glasses | 2026-05-05 |
+| [[entities/paul-calamia\|Paul Calamia]] | Meta Reality Labs — acoustic signal processing, spatial audio | 2026-05-05 |
+| [[entities/andrew-francl\|Andrew Francl]] | Meta Reality Labs — acoustic signal processing for smart glasses | 2026-05-05 |
+| [[entities/carl-schissler\|Carl Schissler]] | Meta Reality Labs — acoustic simulation, spatial audio rendering | 2026-05-05 |
+| [[entities/emanuele-habets\|Emanuele A. P. Habets]] | FAU Erlangen-Nuremberg — spatial audio, acoustic signal processing, microphone arrays | 2026-05-05 |
 
 ---
 
@@ -230,6 +236,9 @@
 | [[concepts/asymptotic-analysis-adaptive-algorithms\|Asymptotic Analysis of Adaptive Algorithms]] | Weak convergence and ODE method for characterizing almost sure behavior and limiting distribution of adaptive filter estimates | 2026-05-03 |
 | [[concepts/generative-fixed-filter-anc\|Generative Fixed-Filter ANC]] | Neural co-processor generates custom ANC filters via sub-filter recombination (GFANC) or direct coefficient regression (E2E-CFG) | 2026-05-04 |
 | [[concepts/end-to-end-differentiable-anc\|End-to-End Differentiable ANC]] | Training paradigm integrating co-processor and ANC path in one differentiable graph; unsupervised via residual error | 2026-05-04 |
+| [[concepts/direction-dependent-acoustic-parameters\|Direction-Dependent Acoustic Parameters]] | Acoustic quantities varying with observation direction; essential for realistic AAR rendering | 2026-05-05 |
+| [[concepts/spherical-harmonic-transform\|Spherical Harmonic Transform]] | Decomposition of spherical functions into SH coefficients; compact spatial representation for acoustics | 2026-05-05 |
+| [[concepts/auditory-augmented-reality\|Auditory Augmented Reality]] | Rendering virtual sound sources in real acoustic environments; requires directional acoustic parameter knowledge | 2026-05-05 |
 
 ---
 
@@ -297,6 +306,7 @@
 | [[sources/yang-2026-transformer-e2e-cfg-anc\|Yang, Luo, Zou, Wang, Huang & Gan 2026: Transformer-based E2E-CFG for ANC]] | Transformer co-processor directly generates ANC control filters in differentiable system; 18.36 dB avg NR on unseen real noises | 2026 |
 | [[sources/zhang-2014-causality-feedforward-anc-headset\|Zhang & Qiu 2014: Causality Study on Feedforward ANC Headset]] | Direction-dependent causality in feedforward ANC headsets; causal at 0° but non-causal at 90°; Wiener-filter prediction validated in anechoic and reverberant chambers | 2014 |
 | [[sources/liebich-2018-doa-dependency-anc-headphones\|Liebich et al. 2018: DOA Dependency of ANC Headphones]] | DHRTF measurements show primary path DOA-dependent above 200 Hz; FF ANC DOA-dependent, FB ANC DOA-independent; 20 dB attenuation requires <0.83 dB amplitude and <5.76° phase accuracy | 2018 |
+| [[sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation\|Görtz et al. 2026: Blind DDAP Estimation Using Smart Glasses]] | First multimodal blind DDAP estimation using smart glasses; encoder + FiLM-conditioned transformer aggregation across head rotations; PCC 0.82 for T₂₀, 0.92 for E at 0.5 kHz | 2026 |
 
 ---
 
@@ -348,10 +358,10 @@
 
 ## Statistics
 
-- **Total pages**: 276
-- **Entities**: 98
-- **Concepts**: 97
-- **Sources**: 57
+- **Total pages**: 286
+- **Entities**: 105
+- **Concepts**: 100
+- **Sources**: 58
 - **Synthesis**: 18
 - **Queries**: 6
 - **Last updated**: 2026-05-05

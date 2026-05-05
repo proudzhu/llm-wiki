@@ -68,3 +68,4 @@ The CRNN achieves >90% DoA classification accuracy at SNR ≥ 20 dB with only 0.
 - [[../sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]] — CRNN-based next-frame DoA prediction for ANC
 - [[../sources/wang-2026-directional-sfanc-reverberant|Wang 2026: Directional SFANC in Reverberant Environments]] — CNN-based multi-task DoA estimation for reverberant conditions
 - [[../sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — foundational work showing direction-dependent causality in feedforward ANC
+- [[../sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation|Görtz et al. 2026: Blind DDAP Estimation Using Smart Glasses]] — head rotation exploited for direction-dependent parameter estimation

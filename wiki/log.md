@@ -1265,3 +1265,32 @@ aw/papers/wang-2026-directional-sfanc-reverberant/full-text.md\ — extracted fr
   - `wiki/concepts/hybrid-anc.md` — added DOA robustness section
   - `wiki/concepts/active-noise-control.md` — added DOA dependency as key challenge
   - `wiki/index.md` — added 5 entities, 3 concepts, 1 source
+
+---
+
+## [2026-05-05] ingest | Blind Direction-Dependent Acoustic Parameter Estimation Using Smart Glasses (Görtz et al. 2026)
+
+- **Source**: `raw/papers/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation/full-text.md` (Zotero: H3HVNSBS)
+- **Authors**: Philipp Görtz, Sebastià V. Amengual, Paul Calamia, Ishwarya Ananthabhotla, Andrew Francl, Carl Schissler, Emanuele A. P. Habets
+- **Published**: ICASSP 2026, pp. 22187–22191
+- **DOI**: 10.1109/ICASSP55912.2026.11460445
+- **Summary**: First multimodal method for blind direction-dependent acoustic parameter estimation using smart glasses; dual-network architecture (conv encoder + FiLM-conditioned transformer) exploits head rotations to overcome compact array spatial resolution limits; PCC 0.82 for T₂₀ and 0.92 for E at 0.5 kHz
+- **Extraction**: MinerU extract (VLM model, --formula --table), images renamed to figures
+- **Pages created**:
+  - `raw/papers/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation/full-text.md` — extracted via MinerU extract
+  - `wiki/sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation.md` — source page
+  - `wiki/entities/philipp-goetz.md` — first author (FAU Erlangen-Nuremberg)
+  - `wiki/entities/sebastia-amengual.md` — co-author (Meta Reality Labs)
+  - `wiki/entities/paul-calamia.md` — co-author (Meta Reality Labs)
+  - `wiki/entities/andrew-francl.md` — co-author (Meta Reality Labs)
+  - `wiki/entities/carl-schissler.md` — co-author (Meta Reality Labs)
+  - `wiki/entities/emanuele-habets.md` — co-author (FAU Erlangen-Nuremberg)
+  - `wiki/concepts/direction-dependent-acoustic-parameters.md` — DDAP concept
+  - `wiki/concepts/spherical-harmonic-transform.md` — SHT concept
+  - `wiki/concepts/auditory-augmented-reality.md` — AAR concept
+- **Pages updated**:
+  - `wiki/entities/ishwarya-ananthabhotla.md` — added Görtz 2026 co-authorship
+  - `wiki/concepts/beamforming.md` — added max-rE beamformer section, DDAP cross-reference
+  - `wiki/concepts/head-orientation-from-imu.md` — added DDAP estimation application, source reference
+  - `wiki/concepts/direction-of-arrival-estimation.md` — added DDAP cross-reference, source reference
+  - `wiki/index.md` — added 6 entities, 3 concepts, 1 source; updated statistics (98→105 entities, 97→100 concepts, 57→58 sources, 276→286 total)

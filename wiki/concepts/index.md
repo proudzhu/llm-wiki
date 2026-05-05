@@ -106,3 +106,6 @@
 | [[concepts/device-specific-hrtf\|Device-Specific HRTF (DHRTF)]] | HRTF measured through headphone microphones; captures DOA-dependent primary path for ANC | 2026-05-05 |
 | [[concepts/primary-path-variability\|Primary Path Variability]] | DOA-induced changes in the primary path P(z) that degrade feedforward ANC performance | 2026-05-05 |
 | [[concepts/anc-attenuation-bounds\|ANC Attenuation Bounds]] | Analytical limits on achievable attenuation given magnitude/phase deviation; 20 dB requires <0.83 dB and <5.76° | 2026-05-05 |
+| [[concepts/direction-dependent-acoustic-parameters\|Direction-Dependent Acoustic Parameters]] | Acoustic quantities varying with observation direction; essential for realistic AAR rendering | 2026-05-05 |
+| [[concepts/spherical-harmonic-transform\|Spherical Harmonic Transform]] | Decomposition of spherical functions into SH coefficients; compact spatial representation for acoustics | 2026-05-05 |
+| [[concepts/auditory-augmented-reality\|Auditory Augmented Reality]] | Rendering virtual sound sources in real acoustic environments; requires directional acoustic parameter knowledge | 2026-05-05 |

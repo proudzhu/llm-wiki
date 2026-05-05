@@ -53,7 +53,10 @@ The resulting rotation matrix is then transformed to spherical coordinates (azim
 - [[../concepts/voice-activity-detection|Voice Activity Detection]]
 - [[../concepts/beamforming|Beamforming]]
 
+- [[../concepts/direction-dependent-acoustic-parameters|Direction-Dependent Acoustic Parameters]]
+
 ## Related Sources
 
 - [[../sources/mohapatra-2026-localizing-conversation-partners-head-motion|Mohapatra et al. 2026: Localizing Conversation Partners Using Head Motion]]
 - [[../sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
+- [[../sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation|Görtz et al. 2026: Blind DDAP Estimation Using Smart Glasses]]

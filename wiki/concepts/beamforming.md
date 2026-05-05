@@ -49,6 +49,14 @@ Frank & Cohen (2026) developed a unified formulation for **least-distortion maxi
 
 See [[roi-beamforming|Region-of-Interest Beamforming]] for details.
 
+## Maximum Radial Energy (max-rE) Beamformer
+
+The $\max\text{-}\mathbf{r}_E$ beamformer maximizes the radial energy efficiency of a spherical microphone array by applying optimized modal weights $w_l$ to spherical harmonic coefficients. Used by Görtz et al. (2026) for computing directional RIRs in [[direction-dependent-acoustic-parameters|DDAP]] ground truth generation:
+
+$$h_{\boldsymbol{\theta}_j}[n] = \sum_{l=0}^{L} \sum_{m=-l}^{l} w_l Y_{lm}(\boldsymbol{\theta}_j) \mathbf{h}_{lm}^{(\circ)}[n]$$
+
+The beamformer's directivity increases with SH order $L$, but higher orders require more microphones and are susceptible to spatial aliasing at high frequencies.
+
 ## Related Concepts
 
 - [[transparency-mode|Transparency Mode]]
