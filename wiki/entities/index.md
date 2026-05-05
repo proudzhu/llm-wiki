@@ -108,3 +108,8 @@
 | [[entities/yisong-zou|Yisong Zou]] | NTU — Transformer-based E2E-CFG for ANC | 2026-05-04 |
 | [[entities/qirui-huang|Qirui Huang]] | NTU — generative fixed-filter ANC, deep learning for ANC | 2026-05-04 |
 | [[entities/limin-zhang|Limin Zhang]] | Nanjing University — causality analysis of feedforward ANC headsets | 2026-05-05 |
+| [[entities/stefan-liebich|Stefan Liebich]] | RWTH Aachen — DOA dependency of ANC headphones, attenuation bounds | 2026-05-05 |
+| [[entities/jan-gerrit-richter|Jan-Gerrit Richter]] | RWTH Aachen (ITA) — HRTF measurement, DHRTF for ANC | 2026-05-05 |
+| [[entities/johannes-fabry|Johannes Fabry]] | RWTH Aachen (IKS) — signal processing, ANC | 2026-05-05 |
+| [[entities/christopher-durand|Christopher Durand]] | RWTH Aachen (IKS) — signal processing, ANC | 2026-05-05 |
+| [[entities/janina-fels|Janina Fels]] | RWTH Aachen (ITA) — professor, HRTF, spatial hearing, psychoacoustics | 2026-05-05 |

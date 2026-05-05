@@ -103,3 +103,6 @@
 | [[concepts/asymptotic-analysis-adaptive-algorithms\|Asymptotic Analysis of Adaptive Algorithms]] | Weak convergence and ODE method for characterizing almost sure behavior and limiting distribution of adaptive filter estimates | 2026-05-03 |
 | [[concepts/generative-fixed-filter-anc\|Generative Fixed-Filter ANC]] | Neural co-processor generates custom ANC filters via sub-filter recombination (GFANC) or direct coefficient regression (E2E-CFG) | 2026-05-04 |
 | [[concepts/end-to-end-differentiable-anc\|End-to-End Differentiable ANC]] | Training paradigm integrating co-processor and ANC path in one differentiable graph; unsupervised via residual error | 2026-05-04 |
+| [[concepts/device-specific-hrtf\|Device-Specific HRTF (DHRTF)]] | HRTF measured through headphone microphones; captures DOA-dependent primary path for ANC | 2026-05-05 |
+| [[concepts/primary-path-variability\|Primary Path Variability]] | DOA-induced changes in the primary path P(z) that degrade feedforward ANC performance | 2026-05-05 |
+| [[concepts/anc-attenuation-bounds\|ANC Attenuation Bounds]] | Analytical limits on achievable attenuation given magnitude/phase deviation; 20 dB requires <0.83 dB and <5.76° | 2026-05-05 |
