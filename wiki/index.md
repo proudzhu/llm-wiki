@@ -114,6 +114,11 @@
 | [[entities/yisong-zou|Yisong Zou]] | NTU — Transformer-based E2E-CFG for ANC | 2026-05-04 |
 | [[entities/qirui-huang|Qirui Huang]] | NTU — generative fixed-filter ANC, deep learning for ANC | 2026-05-04 |
 | [[entities/limin-zhang|Limin Zhang]] | Nanjing University — causality analysis of feedforward ANC headsets | 2026-05-05 |
+| [[entities/stefan-liebich|Stefan Liebich]] | RWTH Aachen — DOA dependency of ANC headphones, attenuation bounds | 2026-05-05 |
+| [[entities/jan-gerrit-richter|Jan-Gerrit Richter]] | RWTH Aachen (ITA) — HRTF measurement, DHRTF for ANC | 2026-05-05 |
+| [[entities/johannes-fabry|Johannes Fabry]] | RWTH Aachen (IKS) — signal processing, ANC | 2026-05-05 |
+| [[entities/christopher-durand|Christopher Durand]] | RWTH Aachen (IKS) — signal processing, ANC | 2026-05-05 |
+| [[entities/janina-fels|Janina Fels]] | RWTH Aachen (ITA) — professor, HRTF, spatial hearing, psychoacoustics | 2026-05-05 |
 
 ---
 
@@ -178,6 +183,9 @@
 | [[concepts/backpropagation-through-time\|Backpropagation Through Time]] | Standard RNN training algorithm; unrolls through time for gradient computation | 2026-04-12 |
 | [[concepts/real-time-recurrent-learning\|Real-Time Recurrent Learning]] | Online RNN training without unrolling; exact gradients at each step | 2026-04-12 |
 | [[concepts/linear-recurrent-unit\|Linear Recurrent Unit]] | Efficient RNN cell with linear recurrence; avoids vanishing/exploding gradients | 2026-04-12 |
+| [[concepts/device-specific-hrtf\|Device-Specific HRTF (DHRTF)]] | HRTF measured through headphone microphones; captures DOA-dependent primary path for ANC | 2026-05-05 |
+| [[concepts/primary-path-variability\|Primary Path Variability]] | DOA-induced changes in the primary path P(z) that degrade feedforward ANC performance | 2026-05-05 |
+| [[concepts/anc-attenuation-bounds\|ANC Attenuation Bounds]] | Analytical limits on achievable attenuation given magnitude/phase deviation; 20 dB requires <0.83 dB and <5.76° | 2026-05-05 |
 | [[concepts/secondary-path-modeling\|Secondary Path Modeling]] | Identifying S(z) transfer function; essential for FXLMS stability | 2026-04-17 |
 | [[concepts/socp-optimization\|SOCP Optimization]] | Convex optimization for robust control under norm-bounded uncertainties | 2026-04-19 |
 | [[concepts/floating-point-comparison\|Floating-point Comparison]] | When and how to compare floats; pitfalls of universal epsilons | 2026-04-18 |
@@ -288,6 +296,7 @@
 | [[sources/sharma-1998-momentum-adaptive-filtering\|Sharma, Sethares & Bucklew 1998: Analysis of Momentum Adaptive Filtering Algorithms]] | Asymptotic analysis of MLMS: ODE convergence w.p.1, Gaussian asymptotic distribution, $\beta = 1/(1-\alpha)$ rate-misadjustment tradeoff, no input distribution assumptions | 1998 |
 | [[sources/yang-2026-transformer-e2e-cfg-anc\|Yang, Luo, Zou, Wang, Huang & Gan 2026: Transformer-based E2E-CFG for ANC]] | Transformer co-processor directly generates ANC control filters in differentiable system; 18.36 dB avg NR on unseen real noises | 2026 |
 | [[sources/zhang-2014-causality-feedforward-anc-headset\|Zhang & Qiu 2014: Causality Study on Feedforward ANC Headset]] | Direction-dependent causality in feedforward ANC headsets; causal at 0° but non-causal at 90°; Wiener-filter prediction validated in anechoic and reverberant chambers | 2014 |
+| [[sources/liebich-2018-doa-dependency-anc-headphones\|Liebich et al. 2018: DOA Dependency of ANC Headphones]] | DHRTF measurements show primary path DOA-dependent above 200 Hz; FF ANC DOA-dependent, FB ANC DOA-independent; 20 dB attenuation requires <0.83 dB amplitude and <5.76° phase accuracy | 2018 |
 
 ---
 
@@ -339,10 +348,10 @@
 
 ## Statistics
 
-- **Total pages**: 267
-- **Entities**: 93
-- **Concepts**: 94
-- **Sources**: 56
+- **Total pages**: 276
+- **Entities**: 98
+- **Concepts**: 97
+- **Sources**: 57
 - **Synthesis**: 18
 - **Queries**: 6
 - **Last updated**: 2026-05-05

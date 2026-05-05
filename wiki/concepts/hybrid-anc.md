@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-04-17
+updated: 2026-05-05
 sources:
   to Headphones.md
 tags:
@@ -34,6 +34,15 @@ A more integrated approach proposed by Benois (2020) for headphones, where FF, M
 - Low memory and computational overhead.
 - Compensation of the secondary path for both FF and FB components.
 
+## DOA Robustness
+
+A key advantage of hybrid ANC is its robustness to direction-of-arrival (DOA) variations. Liebich et al. (2018) showed experimentally that:
+
+- The [[feedforward-anc|Feedforward ANC]] component is DOA-dependent (varies with primary path $P(z)$)
+- The [[feedback-anc|Feedback ANC]] component is DOA-independent (depends only on secondary path $G(z)$)
+
+In a hybrid system, the feedback component compensates for the feedforward component's degradation at non-nominal DOAs. This was confirmed by comparing FF-only, FB-only, and FFFB configurations: the combined system maintained more consistent attenuation across azimuth angles than feedforward alone.
+
 ## Application: Active Headphones
 
 Most modern high-end ANC headphones use a hybrid approach:
@@ -53,3 +62,4 @@ Most modern high-end ANC headphones use a hybrid approach:
 
 - [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
 - [[../sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
+- [[../sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]

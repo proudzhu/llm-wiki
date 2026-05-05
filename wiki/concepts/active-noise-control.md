@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-04-26
+updated: 2026-05-05
 sources:
 aliases:
 - Active Noise Control
@@ -65,6 +65,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - **Predictability**: Performance depends on how predictable the primary noise is; narrow-band noise works better than broadband noise
 - **Nonlinear distortion**: Low-cost speakers and high-SPL scenarios introduce nonlinearities that linear algorithms cannot model
 - **Speech cancellation**: Traditional "cancel everything" approach damages useful speech signals in mixed sound fields
+- **DOA dependency**: The primary path $P(z)$ varies with sound direction, degrading feedforward ANC at non-nominal DOAs (Liebich 2018)
 
 ## Related Concepts
 - [[adaptive-algorithm-tradeoffs]]
@@ -107,3 +108,4 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - [[../entities/lifu-wu|Lifu Wu]] — Proposed the simplified adaptive feedback architecture
 - [[../entities/xiaojun-qiu|Xiaojun Qiu]] — Corresponding author on the SimpAFB paper
 - [[../entities/shuning-dai|Shuning Dai]] — Speech-preserving Deep ANC in reverberant environments
+- [[../entities/stefan-liebich|Stefan Liebich]] — DOA dependency of ANC headphones

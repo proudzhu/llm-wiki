@@ -1236,3 +1236,32 @@ aw/papers/wang-2026-directional-sfanc-reverberant/full-text.md\ — extracted fr
   - `wiki/concepts/selective-fixed-filter-anc.md` — added Zhang 2014 as foundational work for D-SFANC
   - `wiki/concepts/direction-of-arrival-estimation.md` — added Zhang 2014 as motivation for direction-aware ANC
   - `wiki/index.md` — added 1 entity, 1 source
+
+---
+
+## [2026-05-05] ingest | Direction-of-Arrival Dependency of ANC Headphones (Liebich et al. 2018)
+
+- **Source**: `raw/papers/liebich-2018-doa-dependency-anc-headphones/full-text.md` (Zotero: T9JAV2ND)
+- **Authors**: Stefan Liebich, Jan-Gerrit Richter, Johannes Fabry, Christopher Durand, Janina Fels, Peter Jax
+- **Published**: ASME 2018 Noise Control and Acoustics Division Session at INTERNOISE 2018
+- **DOI**: 10.1115/NCAD2018-6120
+- **Summary**: DHRTF measurements on in-ear headphones across 4608 directions show primary path DOA-dependent above 200 Hz; feedforward ANC is DOA-dependent, feedback ANC is DOA-independent; novel analytical bound shows 20 dB attenuation requires <0.83 dB amplitude and <5.76° phase accuracy
+- **Extraction**: MinerU extract (VLM model, --formula --table), images renamed to figures
+- **Pages created**:
+  - `raw/papers/liebich-2018-doa-dependency-anc-headphones/full-text.md` — extracted via MinerU extract
+  - `wiki/sources/liebich-2018-doa-dependency-anc-headphones.md` — source page
+  - `wiki/entities/stefan-liebich.md` — first author
+  - `wiki/entities/jan-gerrit-richter.md` — co-author (ITA RWTH Aachen)
+  - `wiki/entities/johannes-fabry.md` — co-author (IKS RWTH Aachen)
+  - `wiki/entities/christopher-durand.md` — co-author (IKS RWTH Aachen)
+  - `wiki/entities/janina-fels.md` — co-author, professor at ITA RWTH Aachen
+  - `wiki/concepts/device-specific-hrtf.md` — DHRTF concept
+  - `wiki/concepts/primary-path-variability.md` — DOA-induced primary path changes
+  - `wiki/concepts/anc-attenuation-bounds.md` — analytical attenuation limits
+- **Pages updated**:
+  - `wiki/entities/peter-jax.md` — added Liebich 2018 as co-author, added Stefan Liebich as related entity
+  - `wiki/concepts/feedforward-anc.md` — added DOA dependency section
+  - `wiki/concepts/feedback-anc.md` — added DOA independence section
+  - `wiki/concepts/hybrid-anc.md` — added DOA robustness section
+  - `wiki/concepts/active-noise-control.md` — added DOA dependency as key challenge
+  - `wiki/index.md` — added 5 entities, 3 concepts, 1 source

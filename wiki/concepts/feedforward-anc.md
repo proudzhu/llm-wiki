@@ -42,6 +42,16 @@ Used for periodic noise from rotating machinery (e.g., engines, fans).
 - **[[acoustic-feedback|Acoustic Feedback]]**: Antinoise from the speaker can travel back to the reference microphone, creating a feedback loop that may lead to instability. Solutions include neutralization filters or adaptive IIR filters.
 - **Secondary Path Effects**: The transfer function of the electronics and transducers (the "secondary path") must be compensated for, typically using the [[filtered-x-lms-algorithm|Filtered-x LMS Algorithm]].
 
+## DOA Dependency
+
+Feedforward ANC is inherently dependent on the direction of arrival (DOA) of the noise because the optimal filter $\hat{W}_{\text{opt}}(z) = P(z)/G(z)$ depends on the primary path $P(z)$, which varies with DOA. Liebich et al. (2018) showed using [[device-specific-hrtf|DHRTF]] measurements on in-ear headphones:
+
+- **Below 200 Hz**: Primary path is approximately DOA-independent → feedforward ANC robust
+- **200 Hz – 1 kHz**: Moderate variability (1–2 dB magnitude, 10–20° phase for 50% of directions)
+- **Above 1 kHz**: Severe variability with resonance effects → feedforward ANC highly DOA-dependent
+
+This motivates [[hybrid-anc|Hybrid ANC]] architectures where the [[feedback-anc|Feedback ANC]] component (DOA-independent) compensates for feedforward degradation at non-nominal DOAs. It also motivates direction-selective approaches such as SFANC/GFANC.
+
 ## Comparison with Feedback ANC
 
 | Feature | Feedforward | Feedback |
@@ -63,3 +73,4 @@ Used for periodic noise from rotating machinery (e.g., engines, fans).
 
 - [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
 - [[../sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
+- [[../sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]

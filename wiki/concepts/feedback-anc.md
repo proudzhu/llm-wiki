@@ -11,7 +11,7 @@ tags:
   - control-theory
   - feedback
   - stability
-updated: 2026-04-26
+updated: 2026-05-05
 ---
 
 # Feedback ANC
@@ -63,7 +63,13 @@ Proposed by **Wu et al. (2014)**, this method uses the error signal $e(n)$ **dir
 ### Minimum Variance Control (MVC)
 An optimal fixed-controller approach (Pawelczyk 1997) that minimizes the variance of the error signal. It provides the mathematical benchmark for feedback performance.
 
-## 4. Comparisons
+## 4. DOA Independence
+
+A key advantage of feedback ANC is that it is independent of the direction of arrival (DOA) of the noise. The sensitivity function $S_{\text{FB}}(z) = 1/(1 + G(z)K(z))$ depends only on the secondary path $G(z)$ and the controller $K(z)$, not on the primary path $P(z)$. Since the loudspeaker and inner microphone have fixed positions in close proximity, $G(z)$ does not vary with DOA.
+
+Liebich et al. (2018) confirmed this experimentally: feedback ANC showed consistent attenuation across all azimuth angles on the horizontal plane, while [[feedforward-anc|Feedforward ANC]] showed significant DOA-dependent degradation. This makes feedback ANC particularly valuable in [[hybrid-anc|Hybrid ANC]] systems, where it compensates for the feedforward component's DOA sensitivity.
+
+## 5. Comparisons
 
 | Feature | Feedforward | Feedback |
 | :--- | :--- | :--- |
@@ -89,6 +95,7 @@ An optimal fixed-controller approach (Pawelczyk 1997) that minimizes the varianc
 - [[../sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]]
 - [[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]]
 - [[../sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
+- [[../sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
 
 ## Related Concepts
 
