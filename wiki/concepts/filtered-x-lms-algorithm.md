@@ -50,6 +50,12 @@ For stability, the phase difference between the true secondary path and its esti
 |∠S(e^jω) - ∠Ŝ(e^jω)| < π/2,  ∀ω
 ```
 
+For MIMO systems, a sufficient stability criterion is:
+
+$$\Re\left\{\text{eig}\left[\hat{\mathbf{G}}^H(\omega)\mathbf{G}(\omega)\right]\right\} > 0 \quad \forall\omega$$
+
+where $\mathbf{G}(\omega)$ and $\hat{\mathbf{G}}(\omega)$ are the Fourier transforms of the actual and estimated secondary paths. This underlines the need for accurate secondary path estimates — approaches like [[secondary-path-interpolation|Secondary Path Interpolation]] via [[dynamic-time-warping|DTW]] can extend the stable frequency range by improving phase accuracy of interpolated paths.
+
 ## Variants
 
 - [[leaky-fxlms-algorithm|Leaky FxLMS Algorithm]] — Adds a leakage coefficient to limit filter gain, improving stability

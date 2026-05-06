@@ -68,6 +68,8 @@ The state-of-the-art is shifting toward data-driven, time-variant observation fi
 | **Complexity** | $O(L)$ | $O(M \cdot L)$ | $O(N^3)$ | $O(\text{Network})$ |
 | **Environment** | Static | Diffuse | Stochastic | Dynamic |
 
+Note: Secondary path interpolation (DTW-based) addresses the moving-listener problem from a different angle — updating the secondary path model rather than the virtual sensing filter — and can be combined with any of the above techniques.
+
 ---
 
 ## References
@@ -102,3 +104,4 @@ The state-of-the-art is shifting toward data-driven, time-variant observation fi
 - [[../sources/petersen-2008-kalman-filter-virtual-sensing-anc|A Kalman filter approach to virtual sensing for active noise control]]
 - [[../sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026: Hybrid ANC with Dual Compensation]]
 - [[../sources/wang-2024-metric-learning-virtual-sensing|Wang 2024: Transferable Selective Virtual Sensing]]
+- [[../sources/holzmuller-2026-dtw-secondary-path-anc|Holzmüller & Sontacchi 2026: DTW for Secondary Path Interpolation in ANC]]

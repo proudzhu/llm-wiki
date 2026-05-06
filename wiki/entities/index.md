@@ -68,8 +68,8 @@
 | [[entities/zhengding-luo\|Zhengding Luo]] | NTU — directional SFANC, hybrid GFANC-FxNLMS | 2026-04-30 |
 | [[entities/haowen-li\|Haowen Li]] | NTU — active noise control, audio signal processing | 2026-04-30 |
 | [[entities/ziyi-yang\|Ziyi Yang]] | NTU — directional SFANC, deep learning for ANC | 2026-04-30 |
-| [[entities/felix-holzmueller\|Felix Holzmüller]] | Graz UT — Obs-TasNet, virtual sensing for ANC | 2026-04-30 |
-| [[entities/alois-sontacchi\|Alois Sontacchi]] | Graz UT — audio signal processing, virtual sensing | 2026-04-30 |
+| [[entities/felix-holzmueller\|Felix Holzmüller]] | Graz UT — Obs-TasNet, virtual sensing, DTW-based secondary path interpolation for ANC | 2026-04-30 |
+| [[entities/alois-sontacchi\|Alois Sontacchi]] | Graz UT — audio signal processing, virtual sensing, DTW-based secondary path interpolation | 2026-04-30 |
 | [[entities/shota-toyooka\|Shota Toyooka]] | Waseda — hybrid ANC, virtual sensing | 2026-04-30 |
 | [[entities/yoshinobu-kajikawa\|Yoshinobu Kajikawa]] | Kansai U — ANC, adaptive signal processing | 2026-04-30 |
 | [[entities/danielle-moreau\|Danielle Moreau]] | U Adelaide — virtual sensing review, stochastically optimal tonal diffuse field VS | 2026-04-28 |

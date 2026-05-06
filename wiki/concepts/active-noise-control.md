@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-05-05
+updated: 2026-05-06
 sources:
 aliases:
 - Active Noise Control
@@ -100,6 +100,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - [[../sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]] — CRN-based Deep ANC with speech preservation in reverberant environments
 - [[../sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]] — Elliptic and convex hull uncertainty models for robust feedback ANC
 - [[../sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]] — CRNN predicts next-frame DoA for proactive filter selection in moving source ANC
+- [[../sources/holzmuller-2026-dtw-secondary-path-anc|Holzmüller & Sontacchi 2026: DTW for Secondary Path Interpolation in ANC]] — DTW-based interpolation extends stable frequency range for moving listeners
 
 ## Related Entities
 

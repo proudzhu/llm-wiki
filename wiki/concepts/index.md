@@ -109,3 +109,5 @@
 | [[concepts/direction-dependent-acoustic-parameters\|Direction-Dependent Acoustic Parameters]] | Acoustic quantities varying with observation direction; essential for realistic AAR rendering | 2026-05-05 |
 | [[concepts/spherical-harmonic-transform\|Spherical Harmonic Transform]] | Decomposition of spherical functions into SH coefficients; compact spatial representation for acoustics | 2026-05-05 |
 | [[concepts/auditory-augmented-reality\|Auditory Augmented Reality]] | Rendering virtual sound sources in real acoustic environments; requires directional acoustic parameter knowledge | 2026-05-05 |
+| [[concepts/dynamic-time-warping\|Dynamic Time Warping]] | Optimal nonlinear alignment of temporal sequences; applied to impulse response interpolation and ANC secondary path alignment | 2026-05-06 |
+| [[concepts/secondary-path-interpolation\|Secondary Path Interpolation]] | Estimating secondary paths at unmeasured positions via interpolation; DTW-based method extends stable frequency range for moving listeners | 2026-05-06 |

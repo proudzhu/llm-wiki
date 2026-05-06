@@ -74,8 +74,8 @@
 | [[entities/zhengding-luo\|Zhengding Luo]] | NTU — directional SFANC, hybrid GFANC-FxNLMS | 2026-04-30 |
 | [[entities/haowen-li\|Haowen Li]] | NTU — active noise control, audio signal processing | 2026-04-30 |
 | [[entities/ziyi-yang\|Ziyi Yang]] | NTU — directional SFANC, deep learning for ANC | 2026-04-30 |
-| [[entities/felix-holzmueller\|Felix Holzmüller]] | Graz UT — Obs-TasNet, virtual sensing for ANC | 2026-04-30 |
-| [[entities/alois-sontacchi\|Alois Sontacchi]] | Graz UT — audio signal processing, virtual sensing | 2026-04-30 |
+| [[entities/felix-holzmueller\|Felix Holzmüller]] | Graz UT — Obs-TasNet, virtual sensing for ANC, DTW secondary path interpolation | 2026-04-30 |
+| [[entities/alois-sontacchi\|Alois Sontacchi]] | Graz UT — audio signal processing, virtual sensing, DTW secondary path interpolation | 2026-04-30 |
 | [[entities/shota-toyooka\|Shota Toyooka]] | Waseda — hybrid ANC, virtual sensing | 2026-04-30 |
 | [[entities/yoshinobu-kajikawa\|Yoshinobu Kajikawa]] | Kansai U — ANC, adaptive signal processing | 2026-04-30 |
 | [[entities/danielle-moreau\|Danielle Moreau]] | U Adelaide — virtual sensing review, stochastically optimal tonal diffuse field VS | 2026-04-28 |
@@ -304,6 +304,7 @@
 | [[sources/yin-2023-selective-fixed-filter-anc-headphones\|Yin et al. 2023: Selective Fixed-Filter ANC Based on Frequency Response Matching in Headphones]] | FRM-SFANC: online frequency response matching for filter selection in headphone ANC; HMM framework; 12-21 dB NR; LayerCAM explainability | 2023 |
 | [[sources/sharma-1998-momentum-adaptive-filtering\|Sharma, Sethares & Bucklew 1998: Analysis of Momentum Adaptive Filtering Algorithms]] | Asymptotic analysis of MLMS: ODE convergence w.p.1, Gaussian asymptotic distribution, $\beta = 1/(1-\alpha)$ rate-misadjustment tradeoff, no input distribution assumptions | 1998 |
 | [[sources/yang-2026-transformer-e2e-cfg-anc\|Yang, Luo, Zou, Wang, Huang & Gan 2026: Transformer-based E2E-CFG for ANC]] | Transformer co-processor directly generates ANC control filters in differentiable system; 18.36 dB avg NR on unseen real noises | 2026 |
+| [[sources/holzmuller-2026-dtw-secondary-path-anc\|Holzmüller & Sontacchi 2026: DTW for Secondary Path Interpolation in ANC]] | DTW-based interpolation of secondary path filter coefficients; −17.65 dB SM vs 2.49 dB NN at 15 cm spacing; extends stable bandwidth to ~7.7 kHz | 2026 |
 | [[sources/zhang-2014-causality-feedforward-anc-headset\|Zhang & Qiu 2014: Causality Study on Feedforward ANC Headset]] | Direction-dependent causality in feedforward ANC headsets; causal at 0° but non-causal at 90°; Wiener-filter prediction validated in anechoic and reverberant chambers | 2014 |
 | [[sources/liebich-2018-doa-dependency-anc-headphones\|Liebich et al. 2018: DOA Dependency of ANC Headphones]] | DHRTF measurements show primary path DOA-dependent above 200 Hz; FF ANC DOA-dependent, FB ANC DOA-independent; 20 dB attenuation requires <0.83 dB amplitude and <5.76° phase accuracy | 2018 |
 | [[sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation\|Görtz et al. 2026: Blind DDAP Estimation Using Smart Glasses]] | First multimodal blind DDAP estimation using smart glasses; encoder + FiLM-conditioned transformer aggregation across head rotations; PCC 0.82 for T₂₀, 0.92 for E at 0.5 kHz | 2026 |

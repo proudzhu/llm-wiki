@@ -1041,6 +1041,29 @@
 
 ---
 
+## [2026-05-06] ingest | Dynamic Time Warping for Secondary Path Interpolation in Local ANC (Holzmüller & Sontacchi 2026)
+
+- **Source**: `raw/papers/holzmuller-2026-dtw-secondary-path-anc/full-text.md` (Zotero: ZV3BCM38)
+- **Authors**: Felix Holzmüller, Alois Sontacchi
+- **Published**: IEEE Open Journal of Signal Processing, 2026, pp. 1–10
+- **DOI**: 10.1109/OJSP.2026.3689448
+- **Summary**: DTW-based interpolation of secondary path filter coefficients for local ANC with moving listeners; achieves −17.65 dB system mismatch vs 2.49 dB for nearest-neighbor at 15 cm spacing, extending stable bandwidth to ~7.7 kHz
+- **Extraction**: MinerU (VLM backend) for PDF text, formulas, tables, and figures
+- **Pages created**:
+  - `raw/papers/holzmuller-2026-dtw-secondary-path-anc/full-text.md` — extracted text from Zotero PDF
+  - `wiki/sources/holzmuller-2026-dtw-secondary-path-anc.md` — source page
+  - `wiki/concepts/dynamic-time-warping.md` — new concept: Dynamic Time Warping
+  - `wiki/concepts/secondary-path-interpolation.md` — new concept: Secondary Path Interpolation
+- **Pages updated**:
+  - `wiki/entities/felix-holzmueller.md` — added DTW paper contribution, updated affiliation
+  - `wiki/entities/alois-sontacchi.md` — added DTW paper contribution, updated affiliation
+  - `wiki/concepts/secondary-path-modeling.md` — added secondary path interpolation section and cross-references
+  - `wiki/concepts/active-noise-control.md` — added moving listeners challenge and cross-references
+  - `wiki/concepts/filtered-x-lms-algorithm.md` — added MIMO stability criterion and cross-references
+  - `wiki/index.md` — added 2 concepts, 1 source; updated entity summaries
+
+---
+
 ## [2026-04-30] ingest | Predictive Directional SFANC via CRNN (Wang et al. 2026)
 
 - **Source**: `raw/papers/wang-2026-predictive-dsfanc-crnn/full-text.md` (Zotero: I6FHS99P, arXiv: 2604.23144)
