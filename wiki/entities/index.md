@@ -119,3 +119,8 @@
 | [[entities/andrew-francl\|Andrew Francl]] | Meta Reality Labs — acoustic signal processing for smart glasses | 2026-05-05 |
 | [[entities/carl-schissler\|Carl Schissler]] | Meta Reality Labs — acoustic simulation, spatial audio rendering | 2026-05-05 |
 | [[entities/emanuele-habets\|Emanuele A. P. Habets]] | FAU Erlangen-Nuremberg — spatial audio, acoustic signal processing, microphone arrays | 2026-05-05 |
+| [[entities/jens-heitkaemper\|Jens Heitkaemper]] | Google LLC — BCS-guided speech enhancement for earbud voice assistants | 2026-05-06 |
+| [[entities/joseph-caroselli-jr\|Joseph Peter Caroselli Jr.]] | Google LLC — BCS-guided speech enhancement for earbuds | 2026-05-06 |
+| [[entities/max-mckinnon\|Max McKinnon]] | Google LLC — BCS-guided speech enhancement for earbuds | 2026-05-06 |
+| [[entities/arun-narayanan\|Arun Narayanan]] | Google LLC — BCS-guided speech enhancement for earbuds | 2026-05-06 |
+| [[entities/nathan-howard\|Nathan David Howard]] | Google LLC — BCS-guided speech enhancement for earbuds | 2026-05-06 |

@@ -1,0 +1,79 @@
+---
+type: concept
+created: 2026-05-06
+updated: 2026-05-06
+sources:
+  - raw/patents/us20260073929a1/full-text.md
+tags:
+  - speech-enhancement
+  - bone-conduction
+  - multi-modal
+  - asr
+  - earbuds
+---
+
+# BCS-Guided Speech Enhancement
+
+**BCS-Guided Speech Enhancement** is a multi-modal approach that fuses [[../concepts/bone-conduction|bone conducted signals]] (BCS) from accelerometers with air-conducted microphone signals to improve speech enhancement performance, particularly for earbud-based voice assistants in noisy environments.
+
+## Overview
+
+Air-conducted microphones capture both target speech and ambient noise, while BCS accelerometers capture primarily the user's own voice but are band-limited (typically < 1–2 kHz). BCS-guided speech enhancement exploits the complementary strengths of both modalities: the noise immunity of BCS and the broadband spectral information of air-conducted signals.
+
+## Architecture Pattern
+
+The general pipeline for BCS-guided speech enhancement (Heitkaemper et al. 2026):
+
+1. **BCS preprocessing**: Down-sample band-limited BCS STFT, then upscale via learned projection to match air-conducted signal dimensionality
+2. **Feature fusion**: Concatenate upscaled BCS STFT coefficients with air-conducted STFT coefficients
+3. **Mask estimation**: Process fused features through a stack of self-attention (Conformer) blocks to estimate an ideal ratio mask
+4. **Signal reconstruction**: Apply mask to original STFT and reconstruct via inverse STFT
+
+```
+BCS → STFT → Down-sample → FF Upscale ──┐
+                                          ├→ Conformer Stack → Mask → iSTFT → Enhanced Speech
+Air mic → STFT ──────────────────────────┘
+```
+
+## Key Design Considerations
+
+| Aspect | Design Choice | Rationale |
+|--------|--------------|-----------|
+| BCS bandwidth | Down-sample then upscale | BCS is band-limited; upscaling via learned projection avoids zero-padding artifacts |
+| Fusion strategy | Concatenation in STFT domain | Preserves full spectral information from both modalities |
+| Mask type | Ideal ratio mask | Preserves original phase; avoids phase estimation errors |
+| Architecture | Conformer (self-attention) | Captures long-range temporal dependencies in speech |
+| Mic count | Single-channel air input | Model is agnostic to earbud microphone array size |
+
+## Training Strategy
+
+Two-stage training stabilizes learning:
+
+1. **Pre-training**: Train Conformer stack + masking layer on spectral loss (L1 + L2 on ratio mask) + ASR loss, without BCS upscaling pathway
+2. **Fine-tuning**: Add BCS upscaling projection layer and train end-to-end with same losses
+
+The ASR loss compares encoder outputs for enhanced vs. target speech, directly optimizing for recognition accuracy rather than just signal quality.
+
+## VAD Gating
+
+BCS-based [[../concepts/voice-activity-detection|VAD]] provides noise-robust speech detection. When VAD detects no speech, the ASR system bypasses enhancement and processes the raw noisy signal directly, avoiding enhancement artifacts during silence.
+
+## Comparison with Related Approaches
+
+| Approach | BCS Usage | Architecture | Output |
+|----------|-----------|-------------|--------|
+| **BCS-guided SE** (Heitkaemper 2026) | Upscaled + concatenated with air STFT | Conformer | Ratio mask → iSTFT |
+| **Whisphone** (Fukumoto 2025) | In-ear MEMS captures occlusion BC | Separate channel | Direct voice input |
+| **OVAD** (Masilamani 2024) | Accelerometer for speech detection | VAD only | Binary speech flag |
+
+## Related Concepts
+
+- [[../concepts/bone-conduction|Bone Conduction]]
+- [[../concepts/voice-activity-detection|Voice Activity Detection]]
+- [[../concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[../concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
+- [[../concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
+
+## Related Sources
+
+- [[../sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Earbuds]]

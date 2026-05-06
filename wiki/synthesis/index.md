@@ -6,7 +6,7 @@
 |------|---------|---------|
 | [[synthesis/impulsive-noise-control\|Robust ANC for Impulsive Noise]] | FxLMS/F, clipped FxRLS, correntropy→MCC→GMCC, MVC, VSS, AI-driven robustness: 5 approaches + design tree | Chen 2016, Zhu 2020, Liu 2024, Huang 2017, Tian 2026 |
 | [[synthesis/feedback-anc-filter-design\|Feedback ANC: Design, Stability, Adaptation]] | Fixed MVC → IMC+FxLMS → H∞ → Constrained LMS → FLNN + AFC comparison + step-size hierarchy + neural gain | Pawelczyk 1997, Vaudrey 2003, Hilgemann 2024, Zhang 2024 |
-| [[synthesis/multimodal-bc-speech-enhancement\|Multimodal BC Speech Enhancement]] | Evolution of BC integration from pitch extraction to generative diffusion models | Zhang 2022, Wang 2022, Khanagha 2026 |
+| [[synthesis/multimodal-bc-speech-enhancement\|Multimodal BC Speech Enhancement]] | Evolution of BC integration from pitch extraction to generative diffusion models and Conformer-based ASR fusion | Zhang 2022, Wang 2022, Khanagha 2026, Heitkaemper 2026 |
 | [[synthesis/multichannel-anc-efficiency-and-robustness\|Multichannel ANC: Efficiency and Robustness]] | Strategies for managing O(M·L·N) complexity via decomposition, distributed nodes, and meta-learning | Kronic, GLPRCTIK, S2TMLSUP, HTIMHJJW |
 | [[synthesis/personal-sound-zones-evolution-and-optimization\|Personal Sound Zones: Evolution and Optimization]] | Tracks PSZ evolution from classical optimization to modern robust control and neural rendering | 2026-04-19 |
 | [[synthesis/anc-architecture-evolution\|ANC Architecture Evolution]] | FF → FB → Hybrid: how reference signal availability drives ANC design, from Kuo 1999 to Benois 2020 | Kuo 1999, Pawelczyk 1997, Wu 2014, Benois 2020 |

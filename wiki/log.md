@@ -1064,6 +1064,36 @@
 
 ---
 
+## [2026-05-06] ingest | BCS-Guided Speech Enhancement for Voice Assistant on Earbuds (Heitkaemper et al. 2026)
+
+- **Source**: `raw/patents/us20260073929a1/full-text.md` (Zotero: Q833LYDX)
+- **Inventors**: Jens Heitkaemper, Joseph Peter Caroselli Jr., Max McKinnon, Arun Narayanan, Nathan David Howard
+- **Assignee**: Google LLC
+- **Published**: US Patent Application US20260073929A1, 2026-03-12
+- **URL**: https://patents.google.com/patent/US20260073929A1/en
+- **Summary**: Conformer-based fusion of upscaled BCS + air-conducted STFT for earbud speech enhancement; ratio mask estimation; VAD-gated ASR; mic-agnostic design
+- **Extraction**: WebFetch from Google Patents
+- **Pages created**:
+  - `raw/patents/us20260073929a1/full-text.md` — extracted patent text
+  - `wiki/sources/heitkaemper-2026-bcs-speech-enhancement-earbuds.md` — source page
+  - `wiki/entities/jens-heitkaemper.md` — entity: Jens Heitkaemper
+  - `wiki/entities/joseph-caroselli-jr.md` — entity: Joseph Peter Caroselli Jr.
+  - `wiki/entities/max-mckinnon.md` — entity: Max McKinnon
+  - `wiki/entities/arun-narayanan.md` — entity: Arun Narayanan
+  - `wiki/entities/nathan-howard.md` — entity: Nathan David Howard
+  - `wiki/concepts/bcs-guided-speech-enhancement.md` — new concept: BCS-Guided Speech Enhancement
+- **Pages updated**:
+  - `wiki/concepts/bone-conduction.md` — added BCS-guided speech enhancement section and cross-references
+  - `wiki/concepts/voice-activity-detection.md` — added BCS-gated speech enhancement application and cross-references
+  - `wiki/synthesis/multimodal-bc-speech-enhancement.md` — added Conformer-based fusion era section and cross-references
+  - `wiki/index.md` — added 5 entities, 1 concept, 1 source; updated synthesis summary
+  - `wiki/entities/index.md` — added 5 entity entries
+  - `wiki/concepts/index.md` — added 1 concept entry
+  - `wiki/sources/index.md` — added 1 source entry
+  - `wiki/synthesis/index.md` — updated multimodal BC summary
+
+---
+
 ## [2026-04-30] ingest | Predictive Directional SFANC via CRNN (Wang et al. 2026)
 
 - **Source**: `raw/papers/wang-2026-predictive-dsfanc-crnn/full-text.md` (Zotero: I6FHS99P, arXiv: 2604.23144)

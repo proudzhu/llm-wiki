@@ -37,6 +37,7 @@ Bone conduction sensors (accelerometers) in headphones can reliably detect when 
 
 - [[ear-canal-occlusion-effect|Ear Canal Occlusion Effect]]
 - [[voice-activity-detection|Voice Activity Detection]]
+- [[bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
 - [[transparency-mode|Transparency Mode]]
 - [[../sources/fukumoto-2025-whisphone-paper-reading-note|Whisphone]]
 

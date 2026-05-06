@@ -125,6 +125,11 @@
 | [[entities/andrew-francl\|Andrew Francl]] | Meta Reality Labs — acoustic signal processing for smart glasses | 2026-05-05 |
 | [[entities/carl-schissler\|Carl Schissler]] | Meta Reality Labs — acoustic simulation, spatial audio rendering | 2026-05-05 |
 | [[entities/emanuele-habets\|Emanuele A. P. Habets]] | FAU Erlangen-Nuremberg — spatial audio, acoustic signal processing, microphone arrays | 2026-05-05 |
+| [[entities/jens-heitkaemper\|Jens Heitkaemper]] | Google LLC — BCS-guided speech enhancement for earbud voice assistants | 2026-05-06 |
+| [[entities/joseph-caroselli-jr\|Joseph Peter Caroselli Jr.]] | Google LLC — BCS-guided speech enhancement for earbuds | 2026-05-06 |
+| [[entities/max-mckinnon\|Max McKinnon]] | Google LLC — BCS-guided speech enhancement for earbuds | 2026-05-06 |
+| [[entities/arun-narayanan\|Arun Narayanan]] | Google LLC — BCS-guided speech enhancement for earbuds | 2026-05-06 |
+| [[entities/nathan-howard\|Nathan David Howard]] | Google LLC — BCS-guided speech enhancement for earbuds | 2026-05-06 |
 
 ---
 
@@ -239,6 +244,7 @@
 | [[concepts/direction-dependent-acoustic-parameters\|Direction-Dependent Acoustic Parameters]] | Acoustic quantities varying with observation direction; essential for realistic AAR rendering | 2026-05-05 |
 | [[concepts/spherical-harmonic-transform\|Spherical Harmonic Transform]] | Decomposition of spherical functions into SH coefficients; compact spatial representation for acoustics | 2026-05-05 |
 | [[concepts/auditory-augmented-reality\|Auditory Augmented Reality]] | Rendering virtual sound sources in real acoustic environments; requires directional acoustic parameter knowledge | 2026-05-05 |
+| [[concepts/bcs-guided-speech-enhancement\|BCS-Guided Speech Enhancement]] | Multi-modal fusion of bone-conducted and air-conducted signals for speech enhancement; Conformer-based architecture with VAD gating | 2026-05-06 |
 
 ---
 
@@ -308,6 +314,7 @@
 | [[sources/zhang-2014-causality-feedforward-anc-headset\|Zhang & Qiu 2014: Causality Study on Feedforward ANC Headset]] | Direction-dependent causality in feedforward ANC headsets; causal at 0° but non-causal at 90°; Wiener-filter prediction validated in anechoic and reverberant chambers | 2014 |
 | [[sources/liebich-2018-doa-dependency-anc-headphones\|Liebich et al. 2018: DOA Dependency of ANC Headphones]] | DHRTF measurements show primary path DOA-dependent above 200 Hz; FF ANC DOA-dependent, FB ANC DOA-independent; 20 dB attenuation requires <0.83 dB amplitude and <5.76° phase accuracy | 2018 |
 | [[sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation\|Görtz et al. 2026: Blind DDAP Estimation Using Smart Glasses]] | First multimodal blind DDAP estimation using smart glasses; encoder + FiLM-conditioned transformer aggregation across head rotations; PCC 0.82 for T₂₀, 0.92 for E at 0.5 kHz | 2026 |
+| [[sources/heitkaemper-2026-bcs-speech-enhancement-earbuds\|Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Earbuds]] | Conformer-based fusion of upscaled BCS + air-conducted STFT; ratio mask estimation; VAD-gated ASR; mic-agnostic | 2026 |
 
 ---
 
@@ -319,7 +326,7 @@
 |------|---------|---------|
 | [[synthesis/impulsive-noise-control\|Robust ANC for Impulsive Noise]] | FxLMS/F, clipped FxRLS, correntropy→MCC→GMCC, MVC, VSS, AI-driven robustness: 5 approaches + design tree | Chen 2016, Zhu 2020, Liu 2024, Huang 2017, Tian 2026 |
 | [[synthesis/feedback-anc-filter-design\|Feedback ANC: Design, Stability, Adaptation]] | Fixed MVC → IMC+FxLMS → H∞ → Constrained LMS → FLNN + AFC comparison + step-size hierarchy + neural gain | Pawelczyk 1997, Vaudrey 2003, Hilgemann 2024, Zhang 2024 |
-| [[synthesis/multimodal-bc-speech-enhancement\|Multimodal BC Speech Enhancement]] | Evolution of BC integration from pitch extraction to generative diffusion models | Zhang 2022, Wang 2022, Khanagha 2026 |
+| [[synthesis/multimodal-bc-speech-enhancement\|Multimodal BC Speech Enhancement]] | Evolution of BC integration from pitch extraction to generative diffusion models and Conformer-based ASR fusion | Zhang 2022, Wang 2022, Khanagha 2026, Heitkaemper 2026 |
 | [[synthesis/multichannel-anc-efficiency-and-robustness\|Multichannel ANC: Efficiency and Robustness]] | Strategies for managing O(M·L·N) complexity via decomposition, distributed nodes, and meta-learning | Kronic, GLPRCTIK, S2TMLSUP, HTIMHJJW |
 | [[synthesis/personal-sound-zones-evolution-and-optimization\|Personal Sound Zones: Evolution and Optimization]] | Tracks PSZ evolution from classical optimization to modern robust control and neural rendering | 2026-04-19 |
 | [[synthesis/anc-architecture-evolution\|ANC Architecture Evolution]] | FF → FB → Hybrid: how reference signal availability drives ANC design, from Kuo 1999 to Benois 2020 | Kuo 1999, Pawelczyk 1997, Wu 2014, Benois 2020 |
@@ -359,10 +366,10 @@
 
 ## Statistics
 
-- **Total pages**: 286
-- **Entities**: 105
-- **Concepts**: 100
-- **Sources**: 58
+- **Total pages**: 293
+- **Entities**: 110
+- **Concepts**: 101
+- **Sources**: 59
 - **Synthesis**: 18
 - **Queries**: 6
-- **Last updated**: 2026-05-05
+- **Last updated**: 2026-05-06

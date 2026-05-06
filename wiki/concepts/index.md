@@ -111,3 +111,4 @@
 | [[concepts/auditory-augmented-reality\|Auditory Augmented Reality]] | Rendering virtual sound sources in real acoustic environments; requires directional acoustic parameter knowledge | 2026-05-05 |
 | [[concepts/dynamic-time-warping\|Dynamic Time Warping]] | Optimal nonlinear alignment of temporal sequences; applied to impulse response interpolation and ANC secondary path alignment | 2026-05-06 |
 | [[concepts/secondary-path-interpolation\|Secondary Path Interpolation]] | Estimating secondary paths at unmeasured positions via interpolation; DTW-based method extends stable frequency range for moving listeners | 2026-05-06 |
+| [[concepts/bcs-guided-speech-enhancement\|BCS-Guided Speech Enhancement]] | Multi-modal fusion of bone-conducted and air-conducted signals for speech enhancement; Conformer-based architecture with VAD gating | 2026-05-06 |

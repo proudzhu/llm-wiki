@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-04-17
+updated: 2026-05-06
 sources:
 tags:
 - audio-processing
@@ -56,3 +56,4 @@ Sophisticated VAD systems use multi-modal data to avoid false positives from:
 
 - [[../sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]]
 - [[../sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
+- [[../sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Earbuds]]

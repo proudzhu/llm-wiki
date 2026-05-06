@@ -80,6 +80,9 @@ Parallel AC-BC data is difficult to collect. **Semi-supervised frameworks** (usi
 
 ## Related Concepts
 
+- [[../concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
+- [[../concepts/bone-conduction|Bone Conduction]]
+
 ## Related Sources
 
 - [[wiki/sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
