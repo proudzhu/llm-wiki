@@ -25,11 +25,16 @@ The MVDR is a special case of the [[../concepts/variable-span-linear-filter|Vari
 ## Related Concepts
 
 - [[../concepts/beamforming|Beamforming]]
+- [[../concepts/mpdr-beamformer|MPDR Beamformer]]
+- [[../concepts/gsc-beamformer|Generalized Sidelobe Canceller]]
 - [[../concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
 - [[../concepts/variable-span-linear-filter|Variable Span Linear Filter]]
 - [[../concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
 - [[../concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
+- [[../concepts/diagonal-loading|Diagonal Loading]]
+- [[../concepts/white-noise-gain|White Noise Gain]]
 
 ## Related Sources
 
 - [[../sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
+- [[../sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]

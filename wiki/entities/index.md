@@ -124,3 +124,7 @@
 | [[entities/max-mckinnon\|Max McKinnon]] | Google LLC — BCS-guided speech enhancement for earbuds | 2026-05-06 |
 | [[entities/arun-narayanan\|Arun Narayanan]] | Google LLC — BCS-guided speech enhancement for earbuds | 2026-05-06 |
 | [[entities/nathan-howard\|Nathan David Howard]] | Google LLC — BCS-guided speech enhancement for earbuds | 2026-05-06 |
+| [[entities/manan-mittal\|Manan Mittal]] | UIUC — adaptive diagonal loading for beamforming via Kantorovich inequality | 2026-05-07 |
+| [[entities/ryan-corey\|Ryan M. Corey]] | UIUC — adaptive beamforming, microphone array processing | 2026-05-07 |
+| [[entities/john-buck\|John R. Buck]] | UIUC — adaptive beamforming, statistical signal processing | 2026-05-07 |
+| [[entities/andrew-singer\|Andrew C. Singer]] | UIUC — adaptive beamforming, Bayesian methods, DOA uncertainty | 2026-05-07 |

@@ -112,3 +112,10 @@
 | [[concepts/dynamic-time-warping\|Dynamic Time Warping]] | Optimal nonlinear alignment of temporal sequences; applied to impulse response interpolation and ANC secondary path alignment | 2026-05-06 |
 | [[concepts/secondary-path-interpolation\|Secondary Path Interpolation]] | Estimating secondary paths at unmeasured positions via interpolation; DTW-based method extends stable frequency range for moving listeners | 2026-05-06 |
 | [[concepts/bcs-guided-speech-enhancement\|BCS-Guided Speech Enhancement]] | Multi-modal fusion of bone-conducted and air-conducted signals for speech enhancement; Conformer-based architecture with VAD gating | 2026-05-06 |
+| [[concepts/diagonal-loading\|Diagonal Loading]] | Regularization for adaptive beamforming: adds μI to SCM before inversion to bound condition number | 2026-05-07 |
+| [[concepts/kantorovich-inequality\|Kantorovich Inequality]] | Bounds Rayleigh quotient ratio by condition number; maps WNG to κ_max in beamforming | 2026-05-07 |
+| [[concepts/white-noise-gain\|White Noise Gain (WNG)]] | Beamformer robustness metric: W = 1/‖w‖²; collapses under snapshot deficiency | 2026-05-07 |
+| [[concepts/mpdr-beamformer\|MPDR Beamformer]] | Minimizes total output power with distortionless constraint; sensitive to snapshot deficiency | 2026-05-07 |
+| [[concepts/gsc-beamformer\|Generalized Sidelobe Canceller (GSC)]] | Orthogonalized LCMV beamformer: fixed quiescent path + adaptive noise cancellation path | 2026-05-07 |
+| [[concepts/condition-number\|Condition Number]] | Matrix sensitivity metric κ = λ_max/λ_min; controls WNG via Kantorovich inequality | 2026-05-07 |
+| [[concepts/gershgorin-circle-theorem\|Gershgorin Circle Theorem]] | Eigenvalue bounds via diagonal dominance; O(M²) alternative to exact EVD for DL | 2026-05-07 |

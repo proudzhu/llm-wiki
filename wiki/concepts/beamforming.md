@@ -28,9 +28,16 @@ Modern ANC headphones use beamforming for several critical tasks:
 ## Common Beamforming Techniques
 
 - **Delay-and-Sum**: The simplest form, where signals are shifted in time and added.
-- **MVDR (Minimum Variance Distortionless Response)**: An adaptive beamformer that minimizes total output power while maintaining a constant gain in the target direction.
-- **GSC (Generalized Sidelobe Canceller)**: A structure that splits the beamformer into a fixed path and an adaptive interference-cancellation path.
+- **[[mpdr-beamformer|MPDR (Minimum Power Distortionless Response)]]**: Minimizes total output power while maintaining a constant gain in the target direction.
+- **[[mvdr-beamformer|MVDR (Minimum Variance Distortionless Response)]]**: Minimizes interference-plus-noise power while maintaining a constant gain in the target direction.
+- **[[gsc-beamformer|GSC (Generalized Sidelobe Canceller)]]**: A structure that splits the beamformer into a fixed path and an adaptive interference-cancellation path.
 - **Neural Beamforming**: Using deep learning models (e.g., U-Nets or LSTMs) to perform spatial filtering in complex, multi-path environments.
+
+## Robustness and Diagonal Loading
+
+Adaptive beamformers are vulnerable to snapshot deficiency — when the number of available frames $L$ is less than or comparable to the number of microphones $M$, the sample [[spatial-covariance-matrix|spatial correlation matrix]] becomes ill-conditioned. This causes the [[white-noise-gain|White Noise Gain]] (WNG) to collapse and leads to severe target signal cancellation.
+
+**[[diagonal-loading|Diagonal Loading]]** is the classical remedy: adding a scaled identity matrix $\mu\mathbf{I}$ to the SCM before inversion bounds the [[condition-number|condition number]] and stabilizes the weight vector. Mittal et al. (2026) propose an adaptive diagonal loading method using the [[kantorovich-inequality|Kantorovich inequality]] to deterministically guarantee WNG stays within specified bounds, with three scalable estimation modes (Trace, Gershgorin, Exact EVD).
 
 ## Dynamic Aperture Adjustment (Patent US20240363094A1)
 
@@ -63,8 +70,16 @@ The beamformer's directivity increases with SH order $L$, but higher orders requ
 - [[voice-activity-detection|Voice Activity Detection]]
 - [[active-noise-control|Active Noise Control]]
 - [[roi-beamforming|Region-of-Interest Beamforming]]
+- [[mpdr-beamformer|MPDR Beamformer]]
+- [[mvdr-beamformer|MVDR Beamformer]]
+- [[gsc-beamformer|Generalized Sidelobe Canceller]]
+- [[diagonal-loading|Diagonal Loading]]
+- [[white-noise-gain|White Noise Gain]]
+- [[kantorovich-inequality|Kantorovich Inequality]]
+- [[condition-number|Condition Number]]
 
 ## Related Sources
 
 - [[../sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]]
 - [[../sources/frank-2026-low-latency-roi-beamforming|Frank & Cohen 2026: Low-latency Audio Front-end ROI Beamforming for Smart Glasses]]
+- [[../sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]

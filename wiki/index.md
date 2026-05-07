@@ -130,6 +130,10 @@
 | [[entities/max-mckinnon\|Max McKinnon]] | Google LLC — BCS-guided speech enhancement for earbuds | 2026-05-06 |
 | [[entities/arun-narayanan\|Arun Narayanan]] | Google LLC — BCS-guided speech enhancement for earbuds | 2026-05-06 |
 | [[entities/nathan-howard\|Nathan David Howard]] | Google LLC — BCS-guided speech enhancement for earbuds | 2026-05-06 |
+| [[entities/manan-mittal\|Manan Mittal]] | UIUC — adaptive diagonal loading for beamforming via Kantorovich inequality | 2026-05-07 |
+| [[entities/ryan-corey\|Ryan M. Corey]] | UIUC — adaptive beamforming, microphone array processing | 2026-05-07 |
+| [[entities/john-buck\|John R. Buck]] | UIUC — adaptive beamforming, statistical signal processing | 2026-05-07 |
+| [[entities/andrew-singer\|Andrew C. Singer]] | UIUC — adaptive beamforming, Bayesian methods, DOA uncertainty | 2026-05-07 |
 
 ---
 
@@ -245,6 +249,13 @@
 | [[concepts/spherical-harmonic-transform\|Spherical Harmonic Transform]] | Decomposition of spherical functions into SH coefficients; compact spatial representation for acoustics | 2026-05-05 |
 | [[concepts/auditory-augmented-reality\|Auditory Augmented Reality]] | Rendering virtual sound sources in real acoustic environments; requires directional acoustic parameter knowledge | 2026-05-05 |
 | [[concepts/bcs-guided-speech-enhancement\|BCS-Guided Speech Enhancement]] | Multi-modal fusion of bone-conducted and air-conducted signals for speech enhancement; Conformer-based architecture with VAD gating | 2026-05-06 |
+| [[concepts/diagonal-loading\|Diagonal Loading]] | Regularization for adaptive beamforming: adds μI to SCM before inversion to bound condition number | 2026-05-07 |
+| [[concepts/kantorovich-inequality\|Kantorovich Inequality]] | Bounds Rayleigh quotient ratio by condition number; maps WNG to κ_max in beamforming | 2026-05-07 |
+| [[concepts/white-noise-gain\|White Noise Gain (WNG)]] | Beamformer robustness metric: W = 1/‖w‖²; collapses under snapshot deficiency | 2026-05-07 |
+| [[concepts/mpdr-beamformer\|MPDR Beamformer]] | Minimizes total output power with distortionless constraint; sensitive to snapshot deficiency | 2026-05-07 |
+| [[concepts/gsc-beamformer\|Generalized Sidelobe Canceller (GSC)]] | Orthogonalized LCMV beamformer: fixed quiescent path + adaptive noise cancellation path | 2026-05-07 |
+| [[concepts/condition-number\|Condition Number]] | Matrix sensitivity metric κ = λ_max/λ_min; controls WNG via Kantorovich inequality | 2026-05-07 |
+| [[concepts/gershgorin-circle-theorem\|Gershgorin Circle Theorem]] | Eigenvalue bounds via diagonal dominance; O(M²) alternative to exact EVD for DL | 2026-05-07 |
 
 ---
 
@@ -315,6 +326,7 @@
 | [[sources/liebich-2018-doa-dependency-anc-headphones\|Liebich et al. 2018: DOA Dependency of ANC Headphones]] | DHRTF measurements show primary path DOA-dependent above 200 Hz; FF ANC DOA-dependent, FB ANC DOA-independent; 20 dB attenuation requires <0.83 dB amplitude and <5.76° phase accuracy | 2018 |
 | [[sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation\|Görtz et al. 2026: Blind DDAP Estimation Using Smart Glasses]] | First multimodal blind DDAP estimation using smart glasses; encoder + FiLM-conditioned transformer aggregation across head rotations; PCC 0.82 for T₂₀, 0.92 for E at 0.5 kHz | 2026 |
 | [[sources/heitkaemper-2026-bcs-speech-enhancement-earbuds\|Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Earbuds]] | Conformer-based fusion of upscaled BCS + air-conducted STFT; ratio mask estimation; VAD-gated ASR; mic-agnostic | 2026 |
+| [[sources/mittal-2026-adaptive-diagonal-loading-beamforming\|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]] | WNG-constrained adaptive DL via Kantorovich inequality; 3 scalable modes (Trace/Gershgorin/EVD); outperforms Cox post-hoc scaling | 2026 |
 
 ---
 
@@ -366,10 +378,10 @@
 
 ## Statistics
 
-- **Total pages**: 293
-- **Entities**: 110
-- **Concepts**: 101
-- **Sources**: 59
+- **Total pages**: 305
+- **Entities**: 114
+- **Concepts**: 108
+- **Sources**: 60
 - **Synthesis**: 18
 - **Queries**: 6
-- **Last updated**: 2026-05-06
+- **Last updated**: 2026-05-07

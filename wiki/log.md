@@ -1347,3 +1347,35 @@ aw/papers/wang-2026-directional-sfanc-reverberant/full-text.md\ — extracted fr
   - `wiki/concepts/head-orientation-from-imu.md` — added DDAP estimation application, source reference
   - `wiki/concepts/direction-of-arrival-estimation.md` — added DDAP cross-reference, source reference
   - `wiki/index.md` — added 6 entities, 3 concepts, 1 source; updated statistics (98→105 entities, 97→100 concepts, 57→58 sources, 276→286 total)
+
+---
+
+## [2026-05-07] ingest | Adaptive Diagonal Loading for Norm Constrained Beamforming (Mittal et al. 2026)
+
+- **Source**: `raw/papers/mittal-2026-adaptive-diagonal-loading-beamforming/full-text.md` (Zotero: KQQNX9WS)
+- **Authors**: Manan Mittal, Ryan M. Corey, John R. Buck, Andrew C. Singer
+- **Published**: arXiv preprint arXiv:2605.04342, 2026-05-05
+- **URL**: https://arxiv.org/abs/2605.04342
+- **Summary**: WNG-constrained adaptive diagonal loading for MPDR/MVDR beamformers using the Kantorovich inequality to map desired WNG to a strict condition number bound. Three scalable estimation modes: Trace O(M), Gershgorin O(M²), Exact EVD O(M³). Outperforms Cox post-hoc scaling in SINR across all snapshot regimes.
+- **Pages created**:
+  - `wiki/sources/mittal-2026-adaptive-diagonal-loading-beamforming.md` — source page with full methodology, results, and contributions
+  - `wiki/entities/manan-mittal.md` — entity: Manan Mittal (UIUC)
+  - `wiki/entities/ryan-corey.md` — entity: Ryan M. Corey (UIUC)
+  - `wiki/entities/john-buck.md` — entity: John R. Buck (UIUC)
+  - `wiki/entities/andrew-singer.md` — entity: Andrew C. Singer (UIUC)
+  - `wiki/concepts/diagonal-loading.md` — new concept: classical and adaptive diagonal loading
+  - `wiki/concepts/kantorovich-inequality.md` — new concept: Kantorovich inequality and its beamforming application
+  - `wiki/concepts/white-noise-gain.md` — new concept: WNG as beamformer robustness metric
+  - `wiki/concepts/mpdr-beamformer.md` — new concept: MPDR beamformer formulation and properties
+  - `wiki/concepts/gsc-beamformer.md` — new concept: GSC structure and orthogonality
+  - `wiki/concepts/condition-number.md` — new concept: condition number and its role in WNG bounding
+  - `wiki/concepts/gershgorin-circle-theorem.md` — new concept: Gershgorin disc bounds for eigenvalue estimation
+- **Pages updated**:
+  - `wiki/concepts/beamforming.md` — added MPDR beamformer, robustness and diagonal loading section with Kantorovich-based method
+  - `wiki/concepts/mvdr-beamformer.md` — added diagonal loading robustness section, cross-references to new concepts
+  - `wiki/concepts/spatial-covariance-matrix.md` — added condition number and snapshot deficiency discussion, diagonal loading cross-reference
+  - `wiki/concepts/generalized-eigenvalue-decomposition.md` — added EVD-based diagonal loading mode, complexity comparison
+  - `wiki/index.md` — added 4 entities, 7 concepts, 1 source; updated statistics
+  - `wiki/entities/index.md` — added 4 entity entries
+  - `wiki/concepts/index.md` — added 7 concept entries
+  - `wiki/sources/index.md` — added 1 source entry
