@@ -1090,6 +1090,35 @@
   - `wiki/entities/index.md` — added 5 entity entries
   - `wiki/concepts/index.md` — added 1 concept entry
   - `wiki/sources/index.md` — added 1 source entry
+
+---
+
+## [2026-05-12] ingest | Spatial-Magnifier: Spatial Upsampling for Multichannel Speech Enhancement (Lee et al. 2026)
+
+- **Source**: `raw/papers/lee-2026-spatial-magnifier-spatial-upsampling/full-text.md` (Zotero: KC7HJ7T3)
+- **Authors**: Dongheon Lee, Ashutosh Pandey, Sanjeel Parekh, Daniel Wong, Jacob Donley, Buye Xu, Juan Azcarreta
+- **Published**: arXiv preprint, 2026-05-06
+- **DOI**: 10.48550/arXiv.2605.04749
+- **Summary**: GAN-based Spatial-Magnifier network generates virtual microphone signals from limited real microphones; SARL framework conditions downstream MC-SE on VM signals/features; nearly recovers oracle 6ch performance from 2ch with ~10× fewer params than baselines
+- **Pages created**:
+  - `raw/papers/lee-2026-spatial-magnifier-spatial-upsampling/full-text.md` — extracted text from arXiv HTML via Defuddle
+  - `raw/papers/lee-2026-spatial-magnifier-spatial-upsampling/figures/fig1-spatial-magnifier.png` — generator architecture
+  - `raw/papers/lee-2026-spatial-magnifier-spatial-upsampling/figures/fig2-sarl-framework.png` — SARL framework
+  - `wiki/sources/lee-2026-spatial-magnifier-spatial-upsampling.md` — source page
+  - `wiki/entities/dongheon-lee.md` — first author (Meta Reality Labs / KAIST)
+  - `wiki/entities/ashutosh-pandey.md` — co-author (Meta Reality Labs)
+  - `wiki/entities/sanjeel-parekh.md` — co-author (Meta Reality Labs)
+  - `wiki/entities/daniel-wong.md` — co-author (Meta Reality Labs)
+  - `wiki/entities/jacob-donley.md` — co-author (Meta Reality Labs)
+  - `wiki/entities/juan-azcarreta.md` — co-author (Meta Reality Labs)
+  - `wiki/concepts/virtual-microphone-estimation.md` — Neural-VME concept
+  - `wiki/concepts/spatial-audio-representation-learning.md` — SARL concept
+- **Pages updated**:
+  - `wiki/entities/buye-xu.md` — added Spatial-Magnifier contribution
+  - `wiki/concepts/multi-channel-speech-enhancement.md` — added Neural-VME and SARL techniques, cross-references
+  - `wiki/concepts/spatial-covariance-matrix.md` — added VME cross-reference, source
+  - `wiki/concepts/mvdr-beamformer.md` — added source reference
+  - `wiki/index.md` — added 6 entities, 2 concepts, 1 source
   - `wiki/synthesis/index.md` — updated multimodal BC summary
 
 ---

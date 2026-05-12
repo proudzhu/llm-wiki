@@ -128,3 +128,9 @@
 | [[entities/ryan-corey\|Ryan M. Corey]] | UIUC — adaptive beamforming, microphone array processing | 2026-05-07 |
 | [[entities/john-buck\|John R. Buck]] | UIUC — adaptive beamforming, statistical signal processing | 2026-05-07 |
 | [[entities/andrew-singer\|Andrew C. Singer]] | UIUC — adaptive beamforming, Bayesian methods, DOA uncertainty | 2026-05-07 |
+| [[entities/dongheon-lee\|Dongheon Lee]] | Meta Reality Labs / KAIST — Spatial-Magnifier for spatial upsampling | 2026-05-12 |
+| [[entities/ashutosh-pandey\|Ashutosh Pandey]] | Meta Reality Labs — multichannel speech enhancement, neural beamforming | 2026-05-12 |
+| [[entities/sanjeel-parekh\|Sanjeel Parekh]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
+| [[entities/daniel-wong\|Daniel Wong]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
+| [[entities/jacob-donley\|Jacob Donley]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
+| [[entities/juan-azcarreta\|Juan Azcarreta]] | Meta Reality Labs — virtual microphone estimation, spatial audio | 2026-05-12 |

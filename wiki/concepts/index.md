@@ -119,3 +119,5 @@
 | [[concepts/gsc-beamformer\|Generalized Sidelobe Canceller (GSC)]] | Orthogonalized LCMV beamformer: fixed quiescent path + adaptive noise cancellation path | 2026-05-07 |
 | [[concepts/condition-number\|Condition Number]] | Matrix sensitivity metric κ = λ_max/λ_min; controls WNG via Kantorovich inequality | 2026-05-07 |
 | [[concepts/gershgorin-circle-theorem\|Gershgorin Circle Theorem]] | Eigenvalue bounds via diagonal dominance; O(M²) alternative to exact EVD for DL | 2026-05-07 |
+| [[concepts/virtual-microphone-estimation\|Virtual Microphone Estimation]] | Estimating signals at absent microphone positions from real measurements; decouples spatial from spectral enhancement | 2026-05-12 |
+| [[concepts/spatial-audio-representation-learning\|Spatial Audio Representation Learning]] | SARL framework: conditions MC-SE on VM signals (SARL-S) or features (SARL-F) for improved spatial diversity | 2026-05-12 |

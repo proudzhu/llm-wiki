@@ -56,9 +56,11 @@ Normalization by trace transforms the SCM estimation problem from estimating abs
 - [[../concepts/diagonal-loading|Diagonal Loading]]
 - [[../concepts/condition-number|Condition Number]]
 - [[../concepts/white-noise-gain|White Noise Gain]]
+- [[../concepts/virtual-microphone-estimation|Virtual Microphone Estimation]]
 
 ## Related Sources
 
 - [[../sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
 - [[../sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
 - [[../sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
+- [[../sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026: Spatial-Magnifier]]

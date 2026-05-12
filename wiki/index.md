@@ -134,6 +134,12 @@
 | [[entities/ryan-corey\|Ryan M. Corey]] | UIUC — adaptive beamforming, microphone array processing | 2026-05-07 |
 | [[entities/john-buck\|John R. Buck]] | UIUC — adaptive beamforming, statistical signal processing | 2026-05-07 |
 | [[entities/andrew-singer\|Andrew C. Singer]] | UIUC — adaptive beamforming, Bayesian methods, DOA uncertainty | 2026-05-07 |
+| [[entities/dongheon-lee\|Dongheon Lee]] | Meta Reality Labs / KAIST — Spatial-Magnifier for spatial upsampling | 2026-05-12 |
+| [[entities/ashutosh-pandey\|Ashutosh Pandey]] | Meta Reality Labs — multichannel speech enhancement, neural beamforming | 2026-05-12 |
+| [[entities/sanjeel-parekh\|Sanjeel Parekh]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
+| [[entities/daniel-wong\|Daniel Wong]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
+| [[entities/jacob-donley\|Jacob Donley]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
+| [[entities/juan-azcarreta\|Juan Azcarreta]] | Meta Reality Labs — virtual microphone estimation, spatial audio | 2026-05-12 |
 
 ---
 
@@ -256,6 +262,8 @@
 | [[concepts/gsc-beamformer\|Generalized Sidelobe Canceller (GSC)]] | Orthogonalized LCMV beamformer: fixed quiescent path + adaptive noise cancellation path | 2026-05-07 |
 | [[concepts/condition-number\|Condition Number]] | Matrix sensitivity metric κ = λ_max/λ_min; controls WNG via Kantorovich inequality | 2026-05-07 |
 | [[concepts/gershgorin-circle-theorem\|Gershgorin Circle Theorem]] | Eigenvalue bounds via diagonal dominance; O(M²) alternative to exact EVD for DL | 2026-05-07 |
+| [[concepts/virtual-microphone-estimation\|Virtual Microphone Estimation]] | Estimating signals at absent microphone positions from real measurements; decouples spatial from spectral enhancement | 2026-05-12 |
+| [[concepts/spatial-audio-representation-learning\|Spatial Audio Representation Learning]] | SARL framework: conditions MC-SE on VM signals (SARL-S) or features (SARL-F) for improved spatial diversity | 2026-05-12 |
 
 ---
 
@@ -327,6 +335,7 @@
 | [[sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation\|Görtz et al. 2026: Blind DDAP Estimation Using Smart Glasses]] | First multimodal blind DDAP estimation using smart glasses; encoder + FiLM-conditioned transformer aggregation across head rotations; PCC 0.82 for T₂₀, 0.92 for E at 0.5 kHz | 2026 |
 | [[sources/heitkaemper-2026-bcs-speech-enhancement-earbuds\|Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Earbuds]] | Conformer-based fusion of upscaled BCS + air-conducted STFT; ratio mask estimation; VAD-gated ASR; mic-agnostic | 2026 |
 | [[sources/mittal-2026-adaptive-diagonal-loading-beamforming\|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]] | WNG-constrained adaptive DL via Kantorovich inequality; 3 scalable modes (Trace/Gershgorin/EVD); outperforms Cox post-hoc scaling | 2026 |
+| [[sources/lee-2026-spatial-magnifier-spatial-upsampling\|Lee et al. 2026: Spatial-Magnifier]] | GAN-based spatial upsampling generating VM signals from RM measurements; SARL framework for VM-BF and VM-SE; nearly recovers oracle 6ch performance from 2ch | 2026 |
 
 ---
 
@@ -378,10 +387,10 @@
 
 ## Statistics
 
-- **Total pages**: 305
-- **Entities**: 114
-- **Concepts**: 108
-- **Sources**: 60
+- **Total pages**: 314
+- **Entities**: 120
+- **Concepts**: 110
+- **Sources**: 61
 - **Synthesis**: 18
 - **Queries**: 6
-- **Last updated**: 2026-05-07
+- **Last updated**: 2026-05-12
