@@ -69,7 +69,8 @@ When a new source is added to `raw/`:
 7. Update relevant concept pages in `wiki/concepts/`
 8. Create/update synthesis pages if cross-source analysis is needed
 9. Append entry to `wiki/log.md` with format: `## [YYYY-MM-DD] ingest | Source Title`
-10. **Verify**: Check that all new concepts/entities mentioned in the source page have corresponding wiki pages; create any missing ones
+10. **Update subdirectory index files**: Add new entries to `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md`, and `wiki/synthesis/index.md` (as applicable) — each subdirectory maintains its own index table mirroring the corresponding section of `wiki/index.md`
+11. **Verify**: Check that all new concepts/entities mentioned in the source page have corresponding wiki pages; create any missing ones
 
 ### 2. Query Wiki
 
@@ -96,6 +97,8 @@ Periodically (when requested), health-check the wiki:
 ## Index Maintenance
 
 - Update `wiki/index.md` and `wiki/*/index.md` on every ingest
+- **Subdirectory index files** (`wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md`, `wiki/synthesis/index.md`) must be updated whenever pages are added or modified in their respective directories
+- Each subdirectory index mirrors the corresponding section of `wiki/index.md` with the same table format (page link, summary, date)
 - Organize by category: entities, concepts, sources, synthesis
 - Include: page link, one-line summary, metadata (date, source count)
 
