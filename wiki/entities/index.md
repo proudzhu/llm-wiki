@@ -134,3 +134,6 @@
 | [[entities/daniel-wong\|Daniel Wong]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
 | [[entities/jacob-donley\|Jacob Donley]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
 | [[entities/juan-azcarreta\|Juan Azcarreta]] | Meta Reality Labs — virtual microphone estimation, spatial audio | 2026-05-12 |
+| [[entities/weilong-huang\|Weilong Huang]] | FAU Erlangen-Nuremberg — NDF+ for joint neural directional filtering and diffuse sound extraction | 2026-05-13 |
+| [[entities/le-nhat-tam-huynh\|Le Nhat Tam Huynh]] | FAU Erlangen-Nuremberg — neural directional filtering, spatial audio | 2026-05-13 |
+| [[entities/oliver-thiergart\|Oliver Thiergart]] | FAU Erlangen-Nuremberg — spatial audio, directional audio coding | 2026-05-13 |

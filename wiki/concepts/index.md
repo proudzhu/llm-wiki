@@ -121,3 +121,12 @@
 | [[concepts/gershgorin-circle-theorem\|Gershgorin Circle Theorem]] | Eigenvalue bounds via diagonal dominance; O(M²) alternative to exact EVD for DL | 2026-05-07 |
 | [[concepts/virtual-microphone-estimation\|Virtual Microphone Estimation]] | Estimating signals at absent microphone positions from real measurements; decouples spatial from spectral enhancement | 2026-05-12 |
 | [[concepts/spatial-audio-representation-learning\|Spatial Audio Representation Learning]] | SARL framework: conditions MC-SE on VM signals (SARL-S) or features (SARL-F) for improved spatial diversity | 2026-05-12 |
+| [[concepts/neural-directional-filtering\|Neural Directional Filtering]] | Data-driven VDM reconstruction using DNNs to learn ideal directional microphone behavior on compact arrays | 2026-05-13 |
+| [[concepts/virtual-directional-microphone\|Virtual Directional Microphone]] | Computationally synthesized microphone with specified directivity pattern reconstructed from array recordings | 2026-05-13 |
+| [[concepts/diffuse-sound-extraction\|Diffuse Sound Extraction]] | Isolating late reverberant diffuse component for spatial audio control and immersive quality | 2026-05-13 |
+| [[concepts/directivity-pattern\|Directivity Pattern]] | Directional sensitivity characterization of beamformers/microphones; Cardioid, hypercardioid, etc. | 2026-05-13 |
+| [[concepts/fixed-beamformer\|Fixed Beamformer]] | Time-invariant spatial filtering; DMA, superdirective, delay-and-sum | 2026-05-13 |
+| [[concepts/differential-microphone-array\|Differential Microphone Array]] | Spatial difference-based beamforming with frequency-invariant patterns; limited by array size | 2026-05-13 |
+| [[concepts/room-transfer-function\|Room Transfer Function]] | Acoustic propagation characteristics between source and receiver in enclosed space | 2026-05-13 |
+| [[concepts/room-impulse-response\|Room Impulse Response]] | Time-domain characterization of room acoustics; direct path, early reflections, late reverberation | 2026-05-13 |
+| [[concepts/joint-nonlinear-filtering\|Joint Nonlinear Filtering]] | Neural architectures jointly processing spatial and temporal-spectral information; FT-JNF framework | 2026-05-13 |

@@ -140,6 +140,9 @@
 | [[entities/daniel-wong\|Daniel Wong]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
 | [[entities/jacob-donley\|Jacob Donley]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
 | [[entities/juan-azcarreta\|Juan Azcarreta]] | Meta Reality Labs — virtual microphone estimation, spatial audio | 2026-05-12 |
+| [[entities/weilong-huang\|Weilong Huang]] | FAU Erlangen-Nuremberg — NDF+ for joint neural directional filtering and diffuse sound extraction | 2026-05-13 |
+| [[entities/le-nhat-tam-huynh\|Le Nhat Tam Huynh]] | FAU Erlangen-Nuremberg — neural directional filtering, spatial audio | 2026-05-13 |
+| [[entities/oliver-thiergart\|Oliver Thiergart]] | FAU Erlangen-Nuremberg — spatial audio, directional audio coding | 2026-05-13 |
 
 ---
 
@@ -264,6 +267,15 @@
 | [[concepts/gershgorin-circle-theorem\|Gershgorin Circle Theorem]] | Eigenvalue bounds via diagonal dominance; O(M²) alternative to exact EVD for DL | 2026-05-07 |
 | [[concepts/virtual-microphone-estimation\|Virtual Microphone Estimation]] | Estimating signals at absent microphone positions from real measurements; decouples spatial from spectral enhancement | 2026-05-12 |
 | [[concepts/spatial-audio-representation-learning\|Spatial Audio Representation Learning]] | SARL framework: conditions MC-SE on VM signals (SARL-S) or features (SARL-F) for improved spatial diversity | 2026-05-12 |
+| [[concepts/neural-directional-filtering\|Neural Directional Filtering]] | Data-driven VDM reconstruction using DNNs to learn ideal directional microphone behavior on compact arrays | 2026-05-13 |
+| [[concepts/virtual-directional-microphone\|Virtual Directional Microphone]] | Computationally synthesized microphone with specified directivity pattern reconstructed from array recordings | 2026-05-13 |
+| [[concepts/diffuse-sound-extraction\|Diffuse Sound Extraction]] | Isolating late reverberant diffuse component for spatial audio control and immersive quality | 2026-05-13 |
+| [[concepts/directivity-pattern\|Directivity Pattern]] | Directional sensitivity characterization of beamformers/microphones; Cardioid, hypercardioid, etc. | 2026-05-13 |
+| [[concepts/fixed-beamformer\|Fixed Beamformer]] | Time-invariant spatial filtering; DMA, superdirective, delay-and-sum | 2026-05-13 |
+| [[concepts/differential-microphone-array\|Differential Microphone Array]] | Spatial difference-based beamforming with frequency-invariant patterns; limited by array size | 2026-05-13 |
+| [[concepts/room-transfer-function\|Room Transfer Function]] | Acoustic propagation characteristics between source and receiver in enclosed space | 2026-05-13 |
+| [[concepts/room-impulse-response\|Room Impulse Response]] | Time-domain characterization of room acoustics; direct path, early reflections, late reverberation | 2026-05-13 |
+| [[concepts/joint-nonlinear-filtering\|Joint Nonlinear Filtering]] | Neural architectures jointly processing spatial and temporal-spectral information; FT-JNF framework | 2026-05-13 |
 
 ---
 
@@ -336,6 +348,7 @@
 | [[sources/heitkaemper-2026-bcs-speech-enhancement-earbuds\|Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Earbuds]] | Conformer-based fusion of upscaled BCS + air-conducted STFT; ratio mask estimation; VAD-gated ASR; mic-agnostic | 2026 |
 | [[sources/mittal-2026-adaptive-diagonal-loading-beamforming\|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]] | WNG-constrained adaptive DL via Kantorovich inequality; 3 scalable modes (Trace/Gershgorin/EVD); outperforms Cox post-hoc scaling | 2026 |
 | [[sources/lee-2026-spatial-magnifier-spatial-upsampling\|Lee et al. 2026: Spatial-Magnifier]] | GAN-based spatial upsampling generating VM signals from RM measurements; SARL framework for VM-BF and VM-SE; nearly recovers oracle 6ch performance from 2ch | 2026 |
+| [[sources/huang-2026-ndf-joint-neural-directional-filtering\|Huang et al. 2026: NDF+]] | Joint neural directional filtering and diffuse sound extraction via dual-mask architecture; controllable stereo recording | 2026 |
 
 ---
 
@@ -387,10 +400,10 @@
 
 ## Statistics
 
-- **Total pages**: 314
-- **Entities**: 120
-- **Concepts**: 110
-- **Sources**: 61
+- **Total pages**: 324
+- **Entities**: 123
+- **Concepts**: 119
+- **Sources**: 62
 - **Synthesis**: 18
 - **Queries**: 6
-- **Last updated**: 2026-05-12
+- **Last updated**: 2026-05-13

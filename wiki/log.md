@@ -1093,6 +1093,36 @@
 
 ---
 
+## [2026-05-13] ingest | NDF+: joint neural directional filtering and diffuse sound extraction (Huang et al. 2026)
+
+- **Source**: `raw/papers/huang-2026-ndf-joint-neural-directional-filtering/full-text.md` (Zotero: BVBAGBIJ)
+- **Authors**: Weilong Huang, Le Nhat Tam Huynh, Oliver Thiergart, Emanuël A. P. Habets
+- **Published**: arXiv preprint arXiv:2605.06108v1, 2026-05-07
+- **URL**: https://arxiv.org/abs/2605.06108v1
+- **Summary**: NDF+ extends neural directional filtering to jointly perform dereverberated VDM reconstruction and diffuse sound extraction via a dual-mask architecture, enabling explicit control over diffuse components for applications like controllable stereo recording.
+- **Pages created**:
+  - `wiki/sources/huang-2026-ndf-joint-neural-directional-filtering.md` — source page with full methodology, results, and contributions
+  - `wiki/entities/weilong-huang.md` — entity: Weilong Huang (FAU)
+  - `wiki/entities/le-nhat-tam-huynh.md` — entity: Le Nhat Tam Huynh (FAU)
+  - `wiki/entities/oliver-thiergart.md` — entity: Oliver Thiergart (FAU)
+  - `wiki/concepts/neural-directional-filtering.md` — NDF concept: data-driven VDM reconstruction
+  - `wiki/concepts/virtual-directional-microphone.md` — VDM concept: synthesized directional microphone
+  - `wiki/concepts/diffuse-sound-extraction.md` — diffuse sound extraction concept
+  - `wiki/concepts/directivity-pattern.md` — directivity pattern concept
+  - `wiki/concepts/fixed-beamformer.md` — fixed beamformer concept
+  - `wiki/concepts/differential-microphone-array.md` — DMA concept
+  - `wiki/concepts/room-transfer-function.md` — RTF concept
+  - `wiki/concepts/room-impulse-response.md` — RIR concept
+  - `wiki/concepts/joint-nonlinear-filtering.md` — JNF/FT-JNF concept
+- **Pages updated**:
+  - `wiki/entities/emanuele-habets.md` — added NDF+ contribution and source reference
+  - `wiki/index.md` — added 3 entities, 9 concepts, 1 source; updated statistics (120→123 entities, 110→119 concepts, 61→62 sources, 314→324 total)
+  - `wiki/entities/index.md` — added 3 entity entries
+  - `wiki/concepts/index.md` — added 9 concept entries
+  - `wiki/sources/index.md` — added 1 source entry
+
+---
+
 ## [2026-05-12] ingest | Spatial-Magnifier: Spatial Upsampling for Multichannel Speech Enhancement (Lee et al. 2026)
 
 - **Source**: `raw/papers/lee-2026-spatial-magnifier-spatial-upsampling/full-text.md` (Zotero: KC7HJ7T3)
