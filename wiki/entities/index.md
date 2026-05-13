@@ -65,7 +65,7 @@
 | [[entities/xiaoyi-shen\|Xiaoyi Shen]] | NTU — wireless ANC headphones, coherence-based selection, hybrid ANC | 2026-04-28 |
 | [[entities/dongyuan-shi\|Dongyuan Shi]] | NTU — meta-learning for ANC, generative fixed-filter ANC, open window ANC | 2026-04-28 |
 | [[entities/woon-seng-gan\|Woon-Seng Gan]] | NTU DSP Lab — ANC, adaptive filtering, audio signal processing | 2026-04-28 |
-| [[entities/zhengding-luo\|Zhengding Luo]] | NTU — directional SFANC, hybrid GFANC-FxNLMS | 2026-04-30 |
+| [[entities/zhengding-luo\|Zhengding Luo]] | NTU Singapore — SFANC, DoA-based ANC, deep learning for ANC | 2026-04-30 |
 | [[entities/haowen-li\|Haowen Li]] | NTU — active noise control, audio signal processing | 2026-04-30 |
 | [[entities/ziyi-yang\|Ziyi Yang]] | NTU — directional SFANC, deep learning for ANC | 2026-04-30 |
 | [[entities/felix-holzmueller\|Felix Holzmüller]] | Graz UT — Obs-TasNet, virtual sensing, DTW-based secondary path interpolation for ANC | 2026-04-30 |
@@ -88,7 +88,6 @@
 | [[entities/jingdong-chen\|Jingdong Chen]] | NWPU — microphone arrays, speech enhancement, beamforming | 2026-04-30 |
 | [[entities/jacob-benesty\|Jacob Benesty]] | INRS-EMT, U. Quebec — microphone arrays, MWF theory, adaptive filtering | 2026-04-30 |
 | [[entities/shoji-makino\|Shoji Makino]] | Waseda University — blind source separation, speech enhancement | 2026-04-30 |
-| [[entities/zhengding-luo\|Zhengding Luo]] | NTU Singapore — SFANC, DoA-based ANC, deep learning for ANC | 2026-04-30 |
 | [[entities/xiruo-su\|Xiruo Su]] | NTU Singapore — spatial ANC, sound source localization, DFG-SFANC | 2026-04-30 |
 | [[entities/lan-yin\|Lan Yin]] | Institute of Acoustics, CAS — FRM-SFANC algorithm for selective fixed-filter ANC in headphones | 2026-05-01 |
 | [[entities/zeqiang-zhang\|Zeqiang Zhang]] | Institute of Acoustics, CAS — co-author on FRM-SFANC | 2026-05-01 |
@@ -137,3 +136,18 @@
 | [[entities/weilong-huang\|Weilong Huang]] | FAU Erlangen-Nuremberg — NDF+ for joint neural directional filtering and diffuse sound extraction | 2026-05-13 |
 | [[entities/le-nhat-tam-huynh\|Le Nhat Tam Huynh]] | FAU Erlangen-Nuremberg — neural directional filtering, spatial audio | 2026-05-13 |
 | [[entities/oliver-thiergart\|Oliver Thiergart]] | FAU Erlangen-Nuremberg — spatial audio, directional audio coding | 2026-05-13 |
+| [[entities/ali-aroudi\|Ali Aroudi]] | Meta Reality Labs — smartglasses, acoustic signal processing, conversation enhancement | 2026-05-03 |
+| [[entities/anjali-menon\|Anjali Menon]] | Meta Reality Labs — smartglasses, acoustic signal processing | 2026-05-03 |
+| [[entities/bastiaan-kleijn\|Bastiaan Kleijn]] | Victoria University of Wellington — spatial audio, speech enhancement | 2026-05-03 |
+| [[entities/buye-xu\|Buye Xu]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
+| [[entities/calvin-murdock\|Calvin Murdock]] | Meta Reality Labs — smartglasses, acoustic signal processing | 2026-05-03 |
+| [[entities/diego-caviedes-nozal\|Diego Caviedes Nozal]] | GN Audio — hearing aid signal processing | 2026-05-03 |
+| [[entities/ishwarya-ananthabhotla\|Ishwarya Ananthabhotla]] | Meta Reality Labs — spatial audio, smartglasses | 2026-05-05 |
+| [[entities/lei-guo\|Lei Guo]] | Chinese Academy of Sciences — adaptive filtering, convergence analysis | 2026-05-03 |
+| [[entities/liang-xu\|Liang Xu]] | Victoria University of Wellington — spatial audio, speech enhancement | 2026-05-03 |
+| [[entities/longfei-yan\|Longfei Yan]] | Victoria University of Wellington — spatial audio, speech enhancement | 2026-05-03 |
+| [[entities/morteza-khaleghimeybodi\|Morteza Khaleghimeybodi]] | Meta Reality Labs — smartglasses, acoustic signal processing | 2026-05-03 |
+| [[entities/payal-mohapatra\|Payal Mohapatra]] | Northwestern University — head orientation, conversation partner localization | 2026-05-03 |
+| [[entities/rasmus-kongsgaard-olsson\|Rasmus Kongsgaard Olsson]] | GN Audio — hearing aid signal processing | 2026-05-03 |
+| [[entities/xin-zheng\|Xin Zheng]] | Chinese Academy of Sciences — adaptive filtering, convergence analysis | 2026-05-03 |
+| [[entities/yifei-jin\|Yifei Jin]] | Chinese Academy of Sciences — adaptive filtering, convergence analysis | 2026-05-03 |

@@ -130,3 +130,12 @@
 | [[concepts/room-transfer-function\|Room Transfer Function]] | Acoustic propagation characteristics between source and receiver in enclosed space | 2026-05-13 |
 | [[concepts/room-impulse-response\|Room Impulse Response]] | Time-domain characterization of room acoustics; direct path, early reflections, late reverberation | 2026-05-13 |
 | [[concepts/joint-nonlinear-filtering\|Joint Nonlinear Filtering]] | Neural architectures jointly processing spatial and temporal-spectral information; FT-JNF framework | 2026-05-13 |
+| [[concepts/acoustic-zones-of-interest\|Acoustic Zones of Interest]] | Discretized spatial regions corresponding to conversation partner locations for smartglasses audio | 2026-05-03 |
+| [[concepts/diffusion-models-for-speech\|Diffusion Models for Speech]] | Score-based generative modeling applied to speech enhancement via forward noise process | 2026-05-03 |
+| [[concepts/drifting-models\|Drifting Models]] | Generative modeling as distributional equilibrium; native one-step generation without distillation | 2026-05-03 |
+| [[concepts/head-orientation-from-imu\|Head Orientation from IMU]] | Estimating head pose (azimuth/elevation) using IMU sensors for conversation partner localization | 2026-05-03 |
+| [[concepts/inertial-measurement-unit\|Inertial Measurement Unit]] | Sensor measuring specific force, angular velocity, and magnetic field orientation | 2026-05-03 |
+| [[concepts/momentum-lms\|Momentum LMS]] | LMS with momentum term for faster convergence without sacrificing steady-state performance | 2026-05-03 |
+| [[concepts/one-step-generative-models\|One-Step Generative Models]] | Single-function-evaluation generation eliminating iterative sampling of diffusion models | 2026-05-03 |
+| [[concepts/online-learning\|Online Learning]] | Incremental model updates as data arrives; no need to store or revisit past data | 2026-05-03 |
+| [[concepts/self-supervised-speech-representation\|Self-Supervised Speech Representation]] | Features learned from unlabeled speech corpora via self-supervised pre-training | 2026-05-03 |

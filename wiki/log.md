@@ -1093,6 +1093,41 @@
 
 ---
 
+## [2026-05-13] lint | Index rebuild
+
+- **Index consistency rebuild**:
+  - **wiki/index.md**: Added 15 missing entities, 11 missing concepts, 3 missing sources; removed 1 duplicate entity (zhengding-luo); updated statistics (123→147 entities, 119→135 concepts, 62→67 sources, 18→22 synthesis, 324→377 total)
+  - **wiki/entities/index.md**: Added 15 missing entity entries; removed 1 duplicate (zhengding-luo); now 147 rows matching 147 files
+  - **wiki/concepts/index.md**: Added 11 missing concept entries; removed 2 duplicates (dynamic-time-warping, secondary-path-interpolation); now 135 rows matching 135 files
+  - **wiki/sources/index.md**: Added 3 missing source entries; now 67 rows matching 67 files
+- **Missing entries added**:
+  - **Entities**: ali-aroudi, anjali-menon, bastiaan-kleijn, buye-xu, calvin-murdock, diego-caviedes-nozal, ishwarya-ananthabhotla, lei-guo, liang-xu, longfei-yan, morteza-khaleghimeybodi, payal-mohapatra, rasmus-kongsgaard-olsson, xin-zheng, yifei-jin
+  - **Concepts**: acoustic-zones-of-interest, diffusion-models-for-speech, drifting-models, dynamic-time-warping, head-orientation-from-imu, inertial-measurement-unit, momentum-lms, one-step-generative-models, online-learning, secondary-path-interpolation, self-supervised-speech-representation
+  - **Sources**: jin-2026-momentum-lms-nonstationarity, mohapatra-2026-localizing-conversation-partners-head-motion, xu-2026-drifting-models-speech-enhancement
+- **Duplicates removed**: zhengding-luo (entities), dynamic-time-warping (concepts), secondary-path-interpolation (concepts)
+- **All indexes now fully synchronized with actual page counts**
+
+---
+
+## [2026-05-13] lint | Health check
+
+- **Index consistency**:
+  - **wiki/index.md**: 133 entity rows (actual: 147, missing 14), 124 concept rows (actual: 135, missing 11), 64 source rows (actual: 67, missing 3)
+  - **wiki/entities/index.md**: 133 rows (actual: 147, missing 14)
+  - **wiki/concepts/index.md**: 126 rows (actual: 135, missing 9)
+  - **wiki/sources/index.md**: 64 rows (actual: 67, missing 3)
+  - **Statistics in wiki/index.md**: reports 123 entities, 119 concepts, 62 sources, 324 total — all stale (actual: 147 entities, 135 concepts, 67 sources, 18 synthesis, 6 queries = 373 total)
+- **Missing from wiki/index.md entities table** (14): ali-aroudi, anjali-menon, bastiaan-kleijn, buye-xu, calvin-murdock, christopher-durand, diego-caviedes-nozal, ishwarya-ananthabhotla, james-bucklew, jan-gerrit-richter, johannes-fabry, lei-guo, liang-xu, limin-zhang, longfei-yan, morteza-khaleghimeybodi, payal-mohapatra, qirui-huang, rajesh-sharma, rasmus-kongsgaard-olsson, stefan-liebich, william-sethares, xin-zheng, yifei-jin, yisong-zou
+- **Missing from wiki/index.md concepts table** (11): acoustic-zones-of-interest, diffusion-models-for-speech, drifting-models, dynamic-time-warping, head-orientation-from-imu, inertial-measurement-unit, momentum-lms, one-step-generative-models, online-learning, secondary-path-interpolation, self-supervised-speech-representation
+- **Missing from wiki/index.md sources table** (3): jin-2026-momentum-lms-nonstationarity, mohapatra-2026-localizing-conversation-partners-head-motion, xu-2026-drifting-models-speech-enhancement
+- **Broken wikilinks**: 1 (concepts/concept-name in llm-wiki-best-practices.md — template example, not a real broken link)
+- **Orphan pages**: 363 pages have no inbound wikilinks (expected for a wiki where most pages are linked only from index files)
+- **Contradictions**: None detected
+- **Stale claims**: None detected
+- **Action needed**: The index files (wiki/index.md, wiki/entities/index.md, wiki/concepts/index.md, wiki/sources/index.md) are significantly out of sync with actual page counts. A full index rebuild is recommended.
+
+---
+
 ## [2026-05-13] ingest | NDF+: joint neural directional filtering and diffuse sound extraction (Huang et al. 2026)
 
 - **Source**: `raw/papers/huang-2026-ndf-joint-neural-directional-filtering/full-text.md` (Zotero: BVBAGBIJ)

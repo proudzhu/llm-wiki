@@ -71,7 +71,6 @@
 | [[entities/xiaoyi-shen\|Xiaoyi Shen]] | NTU — wireless ANC headphones, coherence-based selection, hybrid ANC | 2026-04-28 |
 | [[entities/dongyuan-shi\|Dongyuan Shi]] | NTU — meta-learning for ANC, generative fixed-filter ANC, open window ANC | 2026-04-28 |
 | [[entities/woon-seng-gan\|Woon-Seng Gan]] | NTU DSP Lab — ANC, adaptive filtering, audio signal processing | 2026-04-28 |
-| [[entities/zhengding-luo\|Zhengding Luo]] | NTU — directional SFANC, hybrid GFANC-FxNLMS | 2026-04-30 |
 | [[entities/haowen-li\|Haowen Li]] | NTU — active noise control, audio signal processing | 2026-04-30 |
 | [[entities/ziyi-yang\|Ziyi Yang]] | NTU — directional SFANC, deep learning for ANC | 2026-04-30 |
 | [[entities/felix-holzmueller\|Felix Holzmüller]] | Graz UT — Obs-TasNet, virtual sensing for ANC, DTW secondary path interpolation | 2026-04-30 |
@@ -143,6 +142,21 @@
 | [[entities/weilong-huang\|Weilong Huang]] | FAU Erlangen-Nuremberg — NDF+ for joint neural directional filtering and diffuse sound extraction | 2026-05-13 |
 | [[entities/le-nhat-tam-huynh\|Le Nhat Tam Huynh]] | FAU Erlangen-Nuremberg — neural directional filtering, spatial audio | 2026-05-13 |
 | [[entities/oliver-thiergart\|Oliver Thiergart]] | FAU Erlangen-Nuremberg — spatial audio, directional audio coding | 2026-05-13 |
+| [[entities/ali-aroudi\|Ali Aroudi]] | Meta Reality Labs — smartglasses, acoustic signal processing, conversation enhancement | 2026-05-03 |
+| [[entities/anjali-menon\|Anjali Menon]] | Meta Reality Labs — smartglasses, acoustic signal processing | 2026-05-03 |
+| [[entities/bastiaan-kleijn\|Bastiaan Kleijn]] | Victoria University of Wellington — spatial audio, speech enhancement | 2026-05-03 |
+| [[entities/buye-xu\|Buye Xu]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
+| [[entities/calvin-murdock\|Calvin Murdock]] | Meta Reality Labs — smartglasses, acoustic signal processing | 2026-05-03 |
+| [[entities/diego-caviedes-nozal\|Diego Caviedes Nozal]] | GN Audio — hearing aid signal processing | 2026-05-03 |
+| [[entities/ishwarya-ananthabhotla\|Ishwarya Ananthabhotla]] | Meta Reality Labs — spatial audio, smartglasses | 2026-05-05 |
+| [[entities/lei-guo\|Lei Guo]] | Chinese Academy of Sciences — adaptive filtering, convergence analysis | 2026-05-03 |
+| [[entities/liang-xu\|Liang Xu]] | Victoria University of Wellington — spatial audio, speech enhancement | 2026-05-03 |
+| [[entities/longfei-yan\|Longfei Yan]] | Victoria University of Wellington — spatial audio, speech enhancement | 2026-05-03 |
+| [[entities/morteza-khaleghimeybodi\|Morteza Khaleghimeybodi]] | Meta Reality Labs — smartglasses, acoustic signal processing | 2026-05-03 |
+| [[entities/payal-mohapatra\|Payal Mohapatra]] | Northwestern University — head orientation, conversation partner localization | 2026-05-03 |
+| [[entities/rasmus-kongsgaard-olsson\|Rasmus Kongsgaard Olsson]] | GN Audio — hearing aid signal processing | 2026-05-03 |
+| [[entities/xin-zheng\|Xin Zheng]] | Chinese Academy of Sciences — adaptive filtering, convergence analysis | 2026-05-03 |
+| [[entities/yifei-jin\|Yifei Jin]] | Chinese Academy of Sciences — adaptive filtering, convergence analysis | 2026-05-03 |
 
 ---
 
@@ -276,6 +290,17 @@
 | [[concepts/room-transfer-function\|Room Transfer Function]] | Acoustic propagation characteristics between source and receiver in enclosed space | 2026-05-13 |
 | [[concepts/room-impulse-response\|Room Impulse Response]] | Time-domain characterization of room acoustics; direct path, early reflections, late reverberation | 2026-05-13 |
 | [[concepts/joint-nonlinear-filtering\|Joint Nonlinear Filtering]] | Neural architectures jointly processing spatial and temporal-spectral information; FT-JNF framework | 2026-05-13 |
+| [[concepts/acoustic-zones-of-interest\|Acoustic Zones of Interest]] | Discretized spatial regions corresponding to conversation partner locations for smartglasses audio | 2026-05-03 |
+| [[concepts/diffusion-models-for-speech\|Diffusion Models for Speech]] | Score-based generative modeling applied to speech enhancement via forward noise process | 2026-05-03 |
+| [[concepts/drifting-models\|Drifting Models]] | Generative modeling as distributional equilibrium; native one-step generation without distillation | 2026-05-03 |
+| [[concepts/dynamic-time-warping\|Dynamic Time Warping]] | Optimal alignment algorithm for temporal sequences varying in speed; used for secondary path interpolation | 2026-05-06 |
+| [[concepts/head-orientation-from-imu\|Head Orientation from IMU]] | Estimating head pose (azimuth/elevation) using IMU sensors for conversation partner localization | 2026-05-03 |
+| [[concepts/inertial-measurement-unit\|Inertial Measurement Unit]] | Sensor measuring specific force, angular velocity, and magnetic field orientation | 2026-05-03 |
+| [[concepts/momentum-lms\|Momentum LMS]] | LMS with momentum term for faster convergence without sacrificing steady-state performance | 2026-05-03 |
+| [[concepts/one-step-generative-models\|One-Step Generative Models]] | Single-function-evaluation generation eliminating iterative sampling of diffusion models | 2026-05-03 |
+| [[concepts/online-learning\|Online Learning]] | Incremental model updates as data arrives; no need to store or revisit past data | 2026-05-03 |
+| [[concepts/secondary-path-interpolation\|Secondary Path Interpolation]] | Estimating secondary path at unmeasured positions via interpolation of filter coefficients | 2026-05-06 |
+| [[concepts/self-supervised-speech-representation\|Self-Supervised Speech Representation]] | Features learned from unlabeled speech corpora via self-supervised pre-training | 2026-05-03 |
 
 ---
 
@@ -349,6 +374,9 @@
 | [[sources/mittal-2026-adaptive-diagonal-loading-beamforming\|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]] | WNG-constrained adaptive DL via Kantorovich inequality; 3 scalable modes (Trace/Gershgorin/EVD); outperforms Cox post-hoc scaling | 2026 |
 | [[sources/lee-2026-spatial-magnifier-spatial-upsampling\|Lee et al. 2026: Spatial-Magnifier]] | GAN-based spatial upsampling generating VM signals from RM measurements; SARL framework for VM-BF and VM-SE; nearly recovers oracle 6ch performance from 2ch | 2026 |
 | [[sources/huang-2026-ndf-joint-neural-directional-filtering\|Huang et al. 2026: NDF+]] | Joint neural directional filtering and diffuse sound extraction via dual-mask architecture; controllable stereo recording | 2026 |
+| [[sources/jin-2026-momentum-lms-nonstationarity\|Jin, Zheng & Guo 2026: Momentum LMS Theory beyond Stationarity]] | Nonstationary convergence analysis of MLMS; tracking error bounds, regret analysis, optimal step-size/momentum tradeoff | 2026 |
+| [[sources/mohapatra-2026-localizing-conversation-partners-head-motion\|Mohapatra et al. 2026: Localizing Conversation Partners Using Head Motion]] | HALo and CoCo networks for conversation partner localization via IMU head orientation on smartglasses | 2026 |
+| [[sources/xu-2026-drifting-models-speech-enhancement\|Xu et al. 2026: Speech Enhancement Based on Drifting Models]] | Drifting models reformulate generation as distributional equilibrium; one-step SE with self-supervised representations | 2026 |
 
 ---
 
@@ -400,10 +428,10 @@
 
 ## Statistics
 
-- **Total pages**: 324
-- **Entities**: 123
-- **Concepts**: 119
-- **Sources**: 62
-- **Synthesis**: 18
+- **Total pages**: 377
+- **Entities**: 147
+- **Concepts**: 135
+- **Sources**: 67
+- **Synthesis**: 22
 - **Queries**: 6
 - **Last updated**: 2026-05-13
