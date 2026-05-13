@@ -151,3 +151,6 @@
 | [[entities/rasmus-kongsgaard-olsson\|Rasmus Kongsgaard Olsson]] | GN Audio — hearing aid signal processing | 2026-05-03 |
 | [[entities/xin-zheng\|Xin Zheng]] | Chinese Academy of Sciences — adaptive filtering, convergence analysis | 2026-05-03 |
 | [[entities/yifei-jin\|Yifei Jin]] | Chinese Academy of Sciences — adaptive filtering, convergence analysis | 2026-05-03 |
+| [[entities/ji-ho-seo\|Ji-ho Seo]] | Yonsei University — feedback ANC, constrained optimization, frequency warping | 2026-05-13 |
+| [[entities/young-cheol-park\|Young-cheol Park]] | Yonsei University — active noise control, signal processing | 2026-05-13 |
+| [[entities/dae-hee-youn\|Dae Hee Youn]] | Yonsei University — active noise control, signal processing, audio engineering | 2026-05-13 |

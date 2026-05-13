@@ -157,6 +157,9 @@
 | [[entities/rasmus-kongsgaard-olsson\|Rasmus Kongsgaard Olsson]] | GN Audio — hearing aid signal processing | 2026-05-03 |
 | [[entities/xin-zheng\|Xin Zheng]] | Chinese Academy of Sciences — adaptive filtering, convergence analysis | 2026-05-03 |
 | [[entities/yifei-jin\|Yifei Jin]] | Chinese Academy of Sciences — adaptive filtering, convergence analysis | 2026-05-03 |
+| [[entities/ji-ho-seo\|Ji-ho Seo]] | Yonsei University — feedback ANC, constrained optimization, frequency warping | 2026-05-13 |
+| [[entities/young-cheol-park\|Young-cheol Park]] | Yonsei University — active noise control, signal processing | 2026-05-13 |
+| [[entities/dae-hee-youn\|Dae Hee Youn]] | Yonsei University — active noise control, signal processing, audio engineering | 2026-05-13 |
 
 ---
 
@@ -301,6 +304,10 @@
 | [[concepts/online-learning\|Online Learning]] | Incremental model updates as data arrives; no need to store or revisit past data | 2026-05-03 |
 | [[concepts/secondary-path-interpolation\|Secondary Path Interpolation]] | Estimating secondary path at unmeasured positions via interpolation of filter coefficients | 2026-05-06 |
 | [[concepts/self-supervised-speech-representation\|Self-Supervised Speech Representation]] | Features learned from unlabeled speech corpora via self-supervised pre-training | 2026-05-03 |
+| [[concepts/frequency-warping\|Frequency Warping]] | Non-uniform frequency resolution via all-pass delay substitution; enables low-order WFIR filters | 2026-05-13 |
+| [[concepts/warped-fir-filter\|Warped FIR Filter]] | FIR filter in warped frequency domain; 16th order matches 128th FIR at low frequencies | 2026-05-13 |
+| [[concepts/q-parameterization\|Q-Parameterization]] | Youla parameterization for stabilizing controller design; optimization over free Q parameter | 2026-05-13 |
+| [[concepts/sensitivity-function\|Sensitivity Function]] | Closed-loop transfer function $S = 1/(1+CP)$; characterizes noise attenuation and waterbed effect | 2026-05-13 |
 
 ---
 
@@ -377,6 +384,7 @@
 | [[sources/jin-2026-momentum-lms-nonstationarity\|Jin, Zheng & Guo 2026: Momentum LMS Theory beyond Stationarity]] | Nonstationary convergence analysis of MLMS; tracking error bounds, regret analysis, optimal step-size/momentum tradeoff | 2026 |
 | [[sources/mohapatra-2026-localizing-conversation-partners-head-motion\|Mohapatra et al. 2026: Localizing Conversation Partners Using Head Motion]] | HALo and CoCo networks for conversation partner localization via IMU head orientation on smartglasses | 2026 |
 | [[sources/xu-2026-drifting-models-speech-enhancement\|Xu et al. 2026: Speech Enhancement Based on Drifting Models]] | Drifting models reformulate generation as distributional equilibrium; one-step SE with self-supervised representations | 2026 |
+| [[sources/seo-2016-feedback-anc-constrained-optimization\|Seo, Park & Youn 2016: Feedback ANC via Constrained Optimization]] | Low-order WFIR filter design via Q-parameterization + frequency warping; 16th order matches 128th FIR at <1kHz | 2016 |
 
 ---
 
@@ -428,10 +436,10 @@
 
 ## Statistics
 
-- **Total pages**: 377
-- **Entities**: 147
-- **Concepts**: 135
-- **Sources**: 67
+- **Total pages**: 385
+- **Entities**: 150
+- **Concepts**: 139
+- **Sources**: 68
 - **Synthesis**: 22
 - **Queries**: 6
 - **Last updated**: 2026-05-13

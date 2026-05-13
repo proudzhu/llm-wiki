@@ -1109,6 +1109,32 @@
 
 ---
 
+## [2026-05-13] ingest | Feedback ANC via Constrained Optimization for Headphones (Seo 2016)
+
+- **Source**: `raw/papers/seo-2016-feedback-anc-constrained-optimization/full-text.md` (Zotero: 926LI9YV)
+- **Authors**: Ji-ho Seo, Young-cheol Park, Dae Hee Youn
+- **Published**: 2016 IEEE ICCE-Asia, pp. 1–4
+- **DOI**: 10.1109/ICCE-Asia.2016.7804751
+- **Summary**: Low-order WFIR filter design via Q-parameterization + frequency warping; 16th order matches 128th FIR at <1kHz
+- **Pages created**:
+  - `raw/papers/seo-2016-feedback-anc-constrained-optimization/full-text.md` — extracted text from Zotero PDF via MinerU
+  - `wiki/sources/seo-2016-feedback-anc-constrained-optimization.md`
+  - `wiki/entities/ji-ho-seo.md`
+  - `wiki/entities/young-cheol-park.md`
+  - `wiki/entities/dae-hee-youn.md`
+  - `wiki/concepts/frequency-warping.md`
+  - `wiki/concepts/warped-fir-filter.md`
+  - `wiki/concepts/q-parameterization.md`
+  - `wiki/concepts/sensitivity-function.md`
+- **Pages updated**:
+  - `wiki/concepts/feedback-anc.md` — added Seo 2016 section, source reference
+  - `wiki/index.md` — added 3 entities, 4 concepts, 1 source; updated statistics (147→150 entities, 135→139 concepts, 67→68 sources, 377→385 total)
+  - `wiki/entities/index.md` — added 3 entity entries
+  - `wiki/concepts/index.md` — added 4 concept entries
+  - `wiki/sources/index.md` — added 1 source entry
+
+---
+
 ## [2026-05-13] lint | Health check
 
 - **Index consistency**:

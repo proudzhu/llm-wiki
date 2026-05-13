@@ -139,3 +139,7 @@
 | [[concepts/one-step-generative-models\|One-Step Generative Models]] | Single-function-evaluation generation eliminating iterative sampling of diffusion models | 2026-05-03 |
 | [[concepts/online-learning\|Online Learning]] | Incremental model updates as data arrives; no need to store or revisit past data | 2026-05-03 |
 | [[concepts/self-supervised-speech-representation\|Self-Supervised Speech Representation]] | Features learned from unlabeled speech corpora via self-supervised pre-training | 2026-05-03 |
+| [[concepts/frequency-warping\|Frequency Warping]] | Non-uniform frequency resolution via all-pass delay substitution; enables low-order WFIR filters | 2026-05-13 |
+| [[concepts/warped-fir-filter\|Warped FIR Filter]] | FIR filter in warped frequency domain; 16th order matches 128th FIR at low frequencies | 2026-05-13 |
+| [[concepts/q-parameterization\|Q-Parameterization]] | Youla parameterization for stabilizing controller design; optimization over free Q parameter | 2026-05-13 |
+| [[concepts/sensitivity-function\|Sensitivity Function]] | Closed-loop transfer function $S = 1/(1+CP)$; characterizes noise attenuation and waterbed effect | 2026-05-13 |
