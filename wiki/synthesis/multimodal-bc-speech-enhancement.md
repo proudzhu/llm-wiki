@@ -1,8 +1,9 @@
 ---
 type: synthesis
 created: 2026-04-22
-updated: 2026-04-28
+updated: 2026-05-16
 sources:
+  - wiki/sources/he-2025-vibomni.md
   - wiki/sources/zhang-2022-bone-conducted-speech-dissertation.md
   - wiki/sources/dai-2026-speech-preserving-deep-anc.md
   - zotero://select/items/0_K592VRRE (Wang 2022: Complex Fusion)
@@ -39,7 +40,16 @@ Focuses on "restoring" BC speech or using it as a reference for AC denoising.
 - **Complex Spectral Mapping (Wang, 2022)**: Uses Deep Complex CRNs (DC-CRN) to fuse AC and BC signals in the complex domain, preserving phase information.
 - **Attention-based Fusion**: Replaces simple concatenation with attention masks to "selectively" weigh AC and BC features based on instantaneous SNR.
 
-### 2.2 Generative and Diffusion Era (2025-2026)
+### 2.2 Lightweight Multi-Modal Fusion (2023-2025)
+Parallel to the generative trend, a line of work focuses on practical, lightweight multi-modal fusion using commodity IMU sensors already available in earables.
+
+- **He et al. (MobiSys 2023 / arXiv 2025) — VibOmni**: Demonstrates that the IMU (accelerometer + gyroscope) already present in commercial earables for head-tracking can capture bone-conducted vibration at ~1.6 kHz sampling rate. The system uses a dual-encoder DPRNN architecture with:
+  - **Auxiliary decoder** on the vibration branch to prevent modality collapse (audio dominating training).
+  - **Bone Conduction Function (BCF) data augmentation**: Models the audio→vibration transfer function as a Gaussian in the frequency domain, enabling synthetic vibration generation from LibriSpeech with only 4.5% spectrogram error.
+  - **Multi-modal SNR estimator** for continual self-supervised learning and adaptive inference.
+  - **Key result**: 31× lower latency than FullSubNet on mobile devices, 21% PESQ improvement, ~40% WER reduction — all using existing IMU sensors without additional hardware.
+
+### 2.3 Generative and Diffusion Era (2025-2026)
 Shifts from predicting clean speech to **generating** it using BC signals as guidance.
 - **Conditioned Diffusion (Khanagha, 2026)**: The **BCDM** (Bone-Conduction Conditional Diffusion Model) treats clean speech recovery as a stochastic process.
 - **Conditioning Strategies**:

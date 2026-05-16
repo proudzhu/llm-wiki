@@ -30,7 +30,10 @@ When the ear canal is blocked (occluded) by a finger or an earplug, bone-conduct
 ### 2. Private Voice Input (Whisphone)
 The **Whisphone** project leverages the occlusion effect + bone conduction to capture whispering sounds from within the ear canal using an internal MEMS microphone. This allows for private AI interaction in noisy environments (Fukumoto 2025).
 
-### 3. Voice Activity Detection (OVAD)
+### 3. Multi-Modal Speech Enhancement (VibOmni)
+The **VibOmni** system (He et al. 2025) leverages IMU-captured bone-conducted vibrations as a noise-robust auxiliary modality for earable speech enhancement. It uses a two-branch encoder-decoder DPRNN to fuse audio and vibration features, with a novel Bone Conduction Function (BCF) data augmentation technique that reduces paired data requirements by >72×. The system achieves up to 21% PESQ improvement and ~40% WER reduction on real-world data.
+
+### 4. Voice Activity Detection (OVAD)
 Bone conduction sensors (accelerometers) in headphones can reliably detect when the wearer is speaking (Own Voice Activity Detection) because they are immune to external airborne noise. This is used to automatically switch to [[transparency-mode|Transparency Mode]] (Masilamani 2024).
 
 ## Related Concepts

@@ -1550,3 +1550,28 @@ aw/papers/wang-2026-directional-sfanc-reverberant/full-text.md\ — extracted fr
   - `wiki/index.md` — added 4 entities, 4 concepts, 1 source
 
 
+
+
+## [2026-05-16] ingest | He et al. (2025) VibOmni
+
+- **Source**: `raw/papers/he-2025-vibomni/full-text.md` (Zotero: M9GHH9GT)
+- **Authors**: Lixing He, Yunqi Guo, Haozheng Hou, Zhenyu Yan
+- **Published**: arXiv preprint, 2025-12-02 (submitted to IEEE TMC)
+- **DOI**: 10.48550/arXiv.2512.02515
+- **Summary**: Multi-modal speech enhancement for earables using IMU bone-conducted vibration. Two-branch DPRNN fuses audio + vibration. BCF data augmentation reduces paired data need by >72x. Multi-modal SNR estimator enables continual learning and adaptive inference. 21% PESQ, 26% SNR improvement, ~40% WER reduction, 31x lower latency than baselines.
+- **Pages created**:
+  - `raw/papers/he-2025-vibomni/full-text.md` — extracted via Defuddle from arXiv HTML
+  - `raw/papers/he-2025-vibomni/figures/` — 24 figures downloaded from arXiv HTML
+  - `wiki/sources/he-2025-vibomni.md` — source page
+  - `wiki/entities/lixing-he.md` — first author
+  - `wiki/entities/yunqi-guo.md` — co-author
+  - `wiki/entities/haozheng-hou.md` — co-author
+  - `wiki/entities/zhenyu-yan.md` — corresponding author
+  - `wiki/concepts/bone-conduction-function.md` — BCF concept
+  - `wiki/concepts/dprnn.md` — Dual-Path RNN concept
+- **Pages updated**:
+  - `wiki/concepts/bone-conduction.md` — added multi-modal SE (VibOmni) section
+  - `wiki/concepts/bcs-guided-speech-enhancement.md` — added BCF, DPRNN cross-refs, source link
+  - `wiki/concepts/inertial-measurement-unit.md` — added IMU for bone-conduction vibration sensing section
+  - `wiki/synthesis/multimodal-bc-speech-enhancement.md` — added Lightweight Multi-Modal Fusion era, VibOmni details
+  - `wiki/index.md` — added 4 entities, 2 concepts, 1 source; updated statistics

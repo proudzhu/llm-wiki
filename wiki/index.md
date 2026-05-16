@@ -160,6 +160,10 @@
 | [[entities/ji-ho-seo\|Ji-ho Seo]] | Yonsei University — feedback ANC, constrained optimization, frequency warping | 2026-05-13 |
 | [[entities/young-cheol-park\|Young-cheol Park]] | Yonsei University — active noise control, signal processing | 2026-05-13 |
 | [[entities/dae-hee-youn\|Dae Hee Youn]] | Yonsei University — active noise control, signal processing, audio engineering | 2026-05-13 |
+| [[entities/haozheng-hou\|Haozheng Hou]] | CUHK — multi-modal speech enhancement, bone-conduction vibration sensing | 2026-05-16 |
+| [[entities/lixing-he\|Lixing He]] | CUHK — multi-modal speech enhancement, earable computing | 2026-05-16 |
+| [[entities/yunqi-guo\|Yunqi Guo]] | CUHK — multi-modal speech enhancement, bone-conduction sensing | 2026-05-16 |
+| [[entities/zhenyu-yan\|Zhenyu Yan]] | CUHK — mobile/wearable systems, multi-modal sensing, speech enhancement | 2026-05-16 |
 
 ---
 
@@ -299,6 +303,8 @@
 | [[concepts/dynamic-time-warping\|Dynamic Time Warping]] | Optimal alignment algorithm for temporal sequences varying in speed; used for secondary path interpolation | 2026-05-06 |
 | [[concepts/head-orientation-from-imu\|Head Orientation from IMU]] | Estimating head pose (azimuth/elevation) using IMU sensors for conversation partner localization | 2026-05-03 |
 | [[concepts/inertial-measurement-unit\|Inertial Measurement Unit]] | Sensor measuring specific force, angular velocity, and magnetic field orientation | 2026-05-03 |
+| [[concepts/bone-conduction-function\|Bone Conduction Function (BCF)]] | Transfer function from audio to bone-conducted vibration; enables synthetic vibration data augmentation | 2026-05-16 |
+| [[concepts/dprnn\|Dual-Path RNN (DPRNN)]] | Lightweight sequence modeling with intra/inter-block RNNs for speech separation | 2026-05-16 |
 | [[concepts/momentum-lms\|Momentum LMS]] | LMS with momentum term for faster convergence without sacrificing steady-state performance | 2026-05-03 |
 | [[concepts/one-step-generative-models\|One-Step Generative Models]] | Single-function-evaluation generation eliminating iterative sampling of diffusion models | 2026-05-03 |
 | [[concepts/online-learning\|Online Learning]] | Incremental model updates as data arrives; no need to store or revisit past data | 2026-05-03 |
@@ -356,6 +362,7 @@
 | [[sources/petersen-2008-kalman-filter-virtual-sensing-anc\|Petersen 2008: Kalman Filter for Virtual Sensing]] | State-space observer approach for robust virtual sensing in ANC | 2026-04-18 |
 | [[sources/wang-2024-computation-efficient-virtual-sensing\|Wang 2024: Computation-Efficient Virtual Sensing with MCALMS]] | MCALMS-based MVANC: 10× computational savings over MCFxLMS, ~35 dB NR at virtual locations; broadband tuning noise should encompass control stage range | 2026-04-28 |
 | [[sources/oviste-2026-neural-vslf-speech-enhancement\|Oviste 2026: Neural VSLF for Speech Enhancement]] | HVSF architecture: DNN predicts clean-speech SCM, noise SCM, and tradeoff parameter for VSLF weights; generalizes MWF/MVDR; explicit distortion-noise control | 2026-04-29 |
+| [[sources/he-2025-vibomni\|He, Guo, Hou & Yan 2025: VibOmni]] | Multi-modal speech enhancement for earables using IMU bone-conducted vibration; 21% PESQ improvement, BCF data augmentation | 2026-05-16 |
 | [[sources/farmani-2026-virtual-mic-beamforming-hearing-aid\|Farmani 2026: VM Beamforming for Hearing Aids]] | Low-complexity VM synthesis via WDO-based RTF power model; λ parameter for interpolation/extrapolation; +3 dB ISNR over 2-mic baseline | 2026-04-29 |
 | [[sources/toyooka-2026-hybrid-anc-remote-sensing\|Toyooka 2026: Hybrid ANC with Dual Compensation]] | Dual compensation filters + adaptive decomposition filter for RMVS in multi-source environments; ~20 dB improvement over conventional HANC | 2026-04-18 |
 | [[sources/wang-2024-metric-learning-virtual-sensing\|Wang 2024: Transferable Selective Virtual Sensing]] | Metric learning + 13K-param 1D CNN for cross-environment VS; 92.6% accuracy on unseen classes, 6x less complex than full CNN | 2026-04-18 |
@@ -436,10 +443,10 @@
 
 ## Statistics
 
-- **Total pages**: 385
-- **Entities**: 150
-- **Concepts**: 139
-- **Sources**: 68
+- **Total pages**: 392
+- **Entities**: 154
+- **Concepts**: 141
+- **Sources**: 69
 - **Synthesis**: 22
 - **Queries**: 6
-- **Last updated**: 2026-05-13
+- **Last updated**: 2026-05-16

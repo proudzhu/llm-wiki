@@ -73,7 +73,10 @@ BCS-based [[../concepts/voice-activity-detection|VAD]] provides noise-robust spe
 - [[../concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
 - [[../concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
 - [[../concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
+- [[../concepts/bone-conduction-function|Bone Conduction Function (BCF)]]
+- [[../concepts/dprnn|Dual-Path RNN (DPRNN)]]
 
 ## Related Sources
 
+- [[../sources/he-2025-vibomni|He, Guo, Hou & Yan 2025: VibOmni]]
 - [[../sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Earbuds]]

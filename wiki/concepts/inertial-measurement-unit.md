@@ -31,6 +31,16 @@ In smartglasses and hearing aids, IMUs serve as non-intrusive behavioral sensors
 | Aria smartglasses | Right leg | 1000 Hz | Head orientation for conversation localization (Mohapatra et al. 2026) |
 | BTE hearing aid | Behind-the-ear | — | Head movement detection for AFC step-size control (Miran et al. 2026) |
 
+## IMU for Bone-Conduction Vibration Sensing
+
+Beyond head motion tracking, IMU accelerometers in earables can capture subtle bone-conducted vibrations from the user's vocal tract (He et al. 2025). At typical IMU sampling rates (~1.6 kHz), the ~800 Hz bandwidth overlaps with the lower frequency range of human speech. This enables multi-modal speech enhancement where:
+
+- The accelerometer provides noise-immune vibration signals dominated by the user's own voice.
+- The microphone captures full-band but noisy audio.
+- A fusion network combines both modalities for robust speech enhancement.
+
+VibOmni (He et al. 2025) demonstrates this approach, achieving 21% PESQ improvement and 40% WER reduction across 32 volunteers. The system also models the transfer function from audio to vibration as a [[../concepts/bone-conduction-function|Bone Conduction Function (BCF)]] for synthetic data augmentation.
+
 ## Advantages for Audio Applications
 
 1. **Non-intrusive**: Does not require cameras or external tracking systems
