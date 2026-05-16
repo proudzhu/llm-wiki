@@ -1239,6 +1239,16 @@
   - `wiki/synthesis/ai-driven-anc.md` — added PD-SFANC to SFANC section
   - `wiki/index.md` — added 2 entities, 3 concepts, 1 source; updated statistics
 
+
+
+## [2026-05-16] lint | Health check
+
+- **Index consistency**: Found 6 entities, 6 concepts, 2 sources missing from main index; 4 synthesis pages over-counted in statistics (had 22 indexed, 18 actual). All gaps fixed.
+- **Broken links**: None detected
+- **Orphan pages**: N/A (all pages linked from index)
+- **Statistics**: Updated from 398/156/144/70/22 to 408/162/150/72/18
+- **Actions taken**: Added 14 missing index rows (6 entities, 6 concepts, 2 sources); corrected synthesis count; updated statistics.
+
 ---
 
 ## [2026-04-30] ingest | Directional SFANC in Reverberant Environments (Wang 2026)

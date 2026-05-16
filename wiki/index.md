@@ -166,6 +166,12 @@
 | [[entities/zhenyu-yan\|Zhenyu Yan]] | CUHK — mobile/wearable systems, multi-modal sensing, speech enhancement | 2026-05-16 |
 | [[entities/kelan-kuang\|Kelan Kuang]] | Institute of Acoustics, CAS — DenGCAN, speech enhancement, BC fusion | 2026-05-16 |
 | [[entities/feiran-yang\|Feiran Yang]] | Institute of Acoustics, CAS — speech enhancement, BC/AC fusion | 2026-05-16 |
+| [[entities/chengshi-zheng\|Chengshi Zheng]] | Institute of Acoustics, CAS — hearing aids, acoustic signal processing, deep learning | 2026-05-15 |
+| [[entities/fengyuan-hao\|Fengyuan Hao]] | Institute of Acoustics, CAS — hearing aids, adaptive feedback cancellation | 2026-05-15 |
+| [[entities/tao-yu\|Tao Yu]] | Tencent AI Lab / Ethereal Audio Lab — acoustic howling suppression, speech processing | 2026-05-15 |
+| [[entities/xiaodong-li\|Xiaodong Li]] | Institute of Acoustics, CAS — hearing aids, acoustic signal processing | 2026-05-15 |
+| [[entities/xiaofan-zhan\|Xiaofan Zhan]] | Institute of Acoustics, CAS — hearing aids, adaptive feedback cancellation, deep learning | 2026-05-15 |
+| [[entities/yuzhong-wu\|Yuzhong Wu]] | Tencent Ethereal Audio Lab — acoustic howling suppression, speech processing | 2026-05-15 |
 
 ---
 
@@ -319,6 +325,12 @@
 | [[concepts/densely-gated-convolutional-attention-network\|DenGCAN]] | Lightweight encoder-decoder with dense blocks, gated conv, sConformer bottleneck, AG skip-connections | 2026-05-16 |
 | [[concepts/iterative-attentional-feature-fusion\|Iterative Attentional Feature Fusion (iAFF)]] | Coarse-then-refined multi-modal fusion using channel attention modules | 2026-05-16 |
 | [[concepts/attention-gate\|Attention Gate (AG)]] | Selective skip-connection mechanism using local + global feature attention | 2026-05-16 |
+| [[concepts/frequency-shift-feedback-cancellation\|Frequency Shift Feedback Cancellation]] | De-correlation method for hearing aid AFC by shifting frequency to reduce bias | 2026-05-15 |
+| [[concepts/hearing-aid-feedback-cancellation\|Hearing Aid Feedback Cancellation (AFC)]] | Suppression of acoustic feedback in hearing aids via adaptive filtering and PEM | 2026-05-15 |
+| [[concepts/maximum-stable-gain\|Maximum Stable Gain (MSG)]] | The maximum gain a hearing aid can provide before feedback oscillation, used as AFC evaluation metric | 2026-05-15 |
+| [[concepts/prediction-error-method\|Prediction Error Method (PEM)]] | De-correlation technique for hearing aid AFC that models speech as an AR process | 2026-05-15 |
+| [[concepts/self-attentive-recurrent-neural-network\|Self-Attentive RNN (SARNN)]] | RNN variant combining self-attention with recurrent connections for sequence modeling | 2026-05-15 |
+| [[concepts/teacher-forcing\|Teacher Forcing]] | Training technique feeding ground-truth output as next-step input instead of model prediction | 2026-05-15 |
 
 ---
 
@@ -398,6 +410,8 @@
 | [[sources/xu-2026-drifting-models-speech-enhancement\|Xu et al. 2026: Speech Enhancement Based on Drifting Models]] | Drifting models reformulate generation as distributional equilibrium; one-step SE with self-supervised representations | 2026 |
 | [[sources/seo-2016-feedback-anc-constrained-optimization\|Seo, Park & Youn 2016: Feedback ANC via Constrained Optimization]] | Low-order WFIR filter design via Q-parameterization + frequency warping; 16th order matches 128th FIR at <1kHz | 2016 |
 | [[sources/kuang-2024-lightweight-speech-enhancement-bone-air\|Kuang, Yang & Yang 2024: Lightweight SE Fusing BC/AC]] | DenGCAN: 1.03M params, 0.859 GMACs, 1.870 wb-PESQ improvement on A4BS dataset | 2024 |
+| [[sources/zhan-2025-deeppem-afc\|Zhan et al. 2025: DeepPEM-AFC]] | Deep learning prediction error method for hearing aid adaptive feedback cancellation | 2025 |
+| [[sources/zhang-2023-hybrid-ahs\|Zhang et al. 2023: Hybrid AHS]] | Hybrid acoustic howling suppression combining Kalman filter and deep learning | 2023 |
 
 ---
 
@@ -449,10 +463,10 @@
 
 ## Statistics
 
-- **Total pages**: 398
-- **Entities**: 156
-- **Concepts**: 144
-- **Sources**: 70
-- **Synthesis**: 22
+- **Total pages**: 408
+- **Entities**: 162
+- **Concepts**: 150
+- **Sources**: 72
+- **Synthesis**: 18
 - **Queries**: 6
 - **Last updated**: 2026-05-16
