@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-02
-updated: 2026-05-02
+updated: 2026-05-15
 tags:
   - researcher
   - acoustic-howling
@@ -16,4 +16,5 @@ tags:
 
 ## Key Contributions
 
+- Hybrid AHS: Kalman filter and self-attentive recurrent neural network cascade for robust acoustic howling suppression (arXiv 2023)
 - NeuralKalmanAHS: NN-augmented Kalman filter for robust AHS (Interspeech 2024)

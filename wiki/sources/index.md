@@ -72,3 +72,5 @@
 | [[sources/mohapatra-2026-localizing-conversation-partners-head-motion\|Mohapatra et al. 2026: Localizing Conversation Partners Using Head Motion]] | HALo and CoCo networks for conversation partner localization via IMU head orientation on smartglasses | 2026 |
 | [[sources/xu-2026-drifting-models-speech-enhancement\|Xu et al. 2026: Speech Enhancement Based on Drifting Models]] | Drifting models reformulate generation as distributional equilibrium; one-step SE with self-supervised representations | 2026 |
 | [[sources/seo-2016-feedback-anc-constrained-optimization\|Seo, Park & Youn 2016: Feedback ANC via Constrained Optimization]] | Low-order WFIR filter design via Q-parameterization + frequency warping; 16th order matches 128th FIR at <1kHz | 2016 |
+| [[sources/zhang-2023-hybrid-ahs\|Zhang 2023: Hybrid AHS]] | Hybrid FDKF + SARNN acoustic howling suppression with teacher-forced training and strong streaming robustness | 2026-05-15 |
+| [[sources/zhan-2025-deeppem-afc\|Zhan 2025: DeepPEM-AFC]] | GRU-based step-size prediction for PEM-AFC with frequency-domain implementation and simulated path generation | 2026-05-15 |

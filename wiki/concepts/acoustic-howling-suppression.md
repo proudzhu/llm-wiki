@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-02
-updated: 2026-05-02
+updated: 2026-05-15
 sources:
   - raw/papers/zhang-2024-neural-kalman-howling/full-text.txt
+  - raw/papers/zhang-2023-hybrid-ahs/full-text.txt
 tags:
   - acoustic-howling
   - feedback-cancellation
@@ -43,12 +44,12 @@ Use adaptive filters (e.g., Kalman filter, FxLMS) to estimate and subtract the f
 
 ### Deep Learning Approaches
 - **DeepAHS**: Teacher-forcing strategy with streaming inference
-- **HybridAHS**: Augments NN input with Kalman filter output
+- **HybridAHS**: Cascades FDKF and SARNN, using Kalman-preprocessed signals as auxiliary neural inputs
 - **NeuralKalmanAHS**: NN modules integrated into FDKF for reference refinement and covariance estimation
 
 ## Key Challenge
 
-Training-inference mismatch: offline training without AHS processing differs from real-time streaming inference where AHS output recursively influences input. Streaming training strategies address this.
+Training-inference mismatch: offline training without AHS processing differs from real-time streaming inference where AHS output recursively influences input. Streaming training strategies and hybrid adaptive-neural designs address this.
 
 ## Related Concepts
 
@@ -56,7 +57,10 @@ Training-inference mismatch: offline training without AHS processing differs fro
 - [[../concepts/frequency-domain-kalman-filter|Frequency-Domain Kalman Filter]] — FDKF for AHS
 - [[../concepts/acoustic-feedback|Acoustic Feedback]] — the feedback phenomenon that causes howling
 - [[../concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]] — NN-based AHS methods
+- [[../concepts/teacher-forcing|Teacher Forcing]] — training strategy for recursive AHS models
+- [[../concepts/self-attentive-recurrent-neural-network|Self-Attentive Recurrent Neural Network]] — Hybrid AHS neural backbone
 
 ## Related Sources
 
+- [[../sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]
 - [[../sources/zhang-2024-neural-kalman-howling|Zhang 2024: Neural Network Augmented Kalman Filter for AHS]]

@@ -1,0 +1,363 @@
+                                         Hybrid AHS: A Hybrid of Kalman Filter and Deep Learning for Acoustic
+                                                                           Howling Suppression
+
+                                                                Hao Zhang1, Meng Yu1, Yuzhong Wu2, Tao Yu2, Dong Yu1
+
+                                                                           1Tencent AI Lab, Bellevue, WA, USA
+                                                              1Tencent Ethereal Audio Lab, Shenzhen, Guangdong, China
+
+                                         {aaronhzhang@global., raymondmyu@global., yvzhongwu@, taoyuty@, dyu@global.}tencent.com
+
+arXiv:2305.02583v1 [eess.AS] 4 May 2023                         Abstract                                       ference, leading to reduced speech quality performance.
+
+                                         Deep learning has been recently introduced for efficient acous-            Despite significant progress in the development of AHS
+                                         tic howling suppression (AHS). However, the recurrent nature          methods, current methods still face many challenges, especially
+                                         of howling creates a mismatch between offline training and            the trade-off between suppression performance and signal dis-
+                                         streaming inference, limiting the quality of enhanced speech.         tortion. Inspired by the success of combining traditional adap-
+                                         To address this limitation, we propose a hybrid method that           tive methods with deep learning to solve acoustic echo cancel-
+                                         combines a Kalman filter with a self-attentive recurrent neural       lation problems [15, 16, 17, 18], we present a hybrid method for
+                                         network (SARNN) to leverage their respective advantages for           AHS in this paper.
+                                         robust AHS. During offline training, a pre-processed signal ob-
+                                         tained from the Kalman filter and an ideal microphone signal               The proposed method, called Hybrid AHS, combines two
+                                         generated via teacher-forced training strategy are used to train      approaches to address acoustic howling: a traditional method
+                                         the deep neural network (DNN). During streaming inference,            called frequency domain Kalman filter (FDKF) and a deep
+                                         the DNN's parameters are fixed while its output serves as a ref-      neural network (DNN) module based on self-attentive recur-
+                                         erence signal for updating the Kalman filter. Evaluation in both      rent neural network (SARNN) [19]. Specifically, the FDKF
+                                         offline and streaming inference scenarios using simulated and         and SARNN are combined in a cascade manner with the pre-
+                                         real-recorded data shows that the proposed method efficiently         processed output from FDKF serving as an additional input for
+                                         suppresses howling and consistently outperforms baselines.            training the SARNN module. The pre-trained SARNN is then
+                                         Index Terms: acoustic howling suppression, Kalman filter,             used during streaming inference, and its output is used as a ref-
+                                         teacher forcing, Deep AHS, hybrid method                              erence signal for updating the FDKF parameters. During offline
+                                                                                                               training, the Hybrid AHS model is trained in a teacher-forced
+                                                           1. Introduction                                     manner [20, 21] that assumes only the target speech in the mi-
+                                                                                                               crophone signal is sent to the loudspeaker. This helps convert
+                                         Acoustic howling is a phenomenon that arises in sound rein-           a recursive howling suppression process to a speech separation
+                                         forcement systems where the sound emitted from speakers is            problem and shows effective performance for howling suppres-
+                                         picked up by a microphone and re-amplified recursively in a           sion during streaming inference. The proposed method lever-
+                                         feedback loop, resulting in an unpleasant high-pitched sound          ages the advantages of both traditional adaptive filtering and
+                                         [1, 2]. This can occur in different settings such as concerts, pre-   deep learning based methods. The benefits of Hybrid AHS are
+                                         sentations, public address systems, and hearing aids. Acoustic        twofold: 1) using the signal pre-processed by traditional method
+                                         howling suppression (AHS) refers to the process of reducing or        provides more information for model training and helps reduce
+                                         eliminating the occurrence of acoustic howling. Several meth-         the mismatch between offline training and streaming inference,
+                                         ods have been proposed, including passive methods like physi-         and 2) integrating deep learning to further enhance the output
+                                         cal isolation of microphones and speakers, and active methods         of traditional methods resolves the leakages produced due to
+                                         such as gain reduction [3, 4], notch filters [5, 6, 7], and adaptive  nonlinear distortion, resulting in a robust solution.
+                                         filtering [8]. Among these methods, adaptive filtering, such as
+                                         the Kalman filter [9, 10], dynamically adjusts the signal in real-         The remainder of this paper is organized as follows. Section
+                                         time to prevent the feedback loop and leads to relatively better      2 introduces acoustic howling problem. The proposed Hybrid
+                                         speech quality. However, the Kalman filter can be sensitive to        AHS method is introduced in Section 3. Section 4 and Section 5
+                                         control parameters and interferences and fails to address non-        describes the experimental setup and results, respectively. Sec-
+                                         linear distortions introduced by amplifiers and loudspeakers.         tion 6 concludes the paper.
+
+                                              Recently, deep learning has been utilized to tackle AHS-                2. Acoustic howling suppression
+                                         related tasks due to its ability to model complex nonlinear re-
+                                         lationships. Chen et al. [11] introduced a deep learning based        2.1. Acoustic howling
+                                         method for howling detection. A deep learning based howl-
+                                         ing noise cancellation method was introduced in [12]. Zheng           A typical single-channel acoustic amplification system is shown
+                                         et al. [13] employed deep learning to address the marginal sta-       in Figure 1(a). It consists of a microphone and a loudspeaker
+                                         bility problems of acoustic feedback systems, and this method         where the target speech is picked up by the microphone as s(t),
+                                         was named as DeepMFC. More recently, a purely deep learning           which is then sent to the loudspeaker for acoustic amplification.
+                                         based method (Deep AHS) was proposed for acoustic howling             The loudspeaker signal x(t) is played out and arrives at the mi-
+                                         suppression [14]. However, deep learning based methods are            crophone as an acoustic feedback denoted as d(t):
+                                         prone to a mismatch between offline training and streaming in-
+                                                                                                               d(t) = N L[x(t)]  h(t)  (1)
+ LoudspeakerAmplifier                    ()                 ()                      3. Proposed method: Hybrid AHS
+      ()           Acoustic feedback  DNN     
+                                                                              To address the disadvantages of the above mentioned AHS
+              ()                                                ($)           methods and leverage their advantages, a hybrid solution, called
+                                                                              Hybrid AHS, is proposed in this paper. Figure 1 (b) illustrates
+       ()                                     Kalman                   ()     a schematic of the proposed method, which comprises of two
+                     Speech                     filter                        modules: Kalman and DNN.
+                                                                   ()
+Microphone noise ()                                 ,()                   ()
+    (a) System ()                            () -
+                                                              () ()
+                                                 +
+                                                                              3.1. Problem formulation
+                                              (b) Hybrid AHS
+                                                                              Suppressing howling is best achieved by incorporating the AHS
+Figure 1: Diagram of (a) an acoustic amplification system, and                method within the acoustic loop considering the recursive na-
+(b) the proposed Hybrid AHS method.                                           ture of howling. However, this can be computationally demand-
+                                                                              ing and inefficient for deep learning based methods. To address
+where N L(·) denotes the nonlinear distortion introduced by the               this challenge, we follow the approach of Deep AHS [14] and
+loudspeaker, h(t) represents the acoustic path from loudspeaker               adopt the teacher-forcing training strategy to formulate AHS
+to microphone, and  denotes linear convolution.                               as a speech separation problem during model training. This
+                                                                              proposed approach is based on the assumption that the Hybrid
+     If without any processing, the playback signal d(t) will re-             AHS model, once properly trained, can attenuate interferences
+enter the pickup repeatedly, the corresponding microphone sig-                and transmit only the target speech to the loudspeaker. Conse-
+nal can then be represented as:                                               quently, the actual output s^(t) in Figure 1(b) can be replaced
+                                                                              with the ideal target (teacher signal) s(t) during model training,
+        y(t) = s(t) + n(t) + N L [y(t - t) · G]  h(t) (2)                     and the recursively defined microphone signal in equation (2) is
+                                                                              converted into a mixture of target signal, background noise, and
+where n(t) represents the background noise, t denotes the                     an one-time playback signal determined by s(t):
+system delay from microphone to loudspeaker, G is the gain
+of amplifier. The recursive relationship between y(t) and                     y(t) = s(t) + n(t) + h(t)  N L[s(t - t) · G] (3)
+y(t - t) causes re-amplifying of playback signal and leads to
+a feedback loop that results in an annoying, high-pitched sound,              The overall task of AHS is then transformed into a speech sep-
+which is known as acoustic howling.                                           aration problem during offline training. The object is to extract
+                                                                              the target signal s(t) from the ideal microphone signal, defined
+     It is worth acknowledging that acoustic howling and acous-               in equation (3) and exclusively employed for model training,
+tic echo are two distinct phenomena, although inappropriate                   using the Kalman filter output e(t) as an additional input, thus
+handling of acoustic echo can result in howling. The primary                  jointly suppressing howling and noise.
+differences between these two phenomena are: 1. While both
+of them are fundamentally playback signals, howling is char-                  3.2. Kalman filter
+acterized by a gradual buildup of signal energy in a recursive
+manner. 2. The signal that leads to howling is generated by                   The Kalman module utilizes microphone signal y(t) and the en-
+the same source as the target signal, making the suppression of               hanced signal s^(t) as a reference (denoted as r(t)) to obtain an
+howling more challenging.                                                     estimate of the acoustic path h^(t) and the corresponding feed-
+                                                                              back d^(t). The estimated feedback is then subtracted from the
+2.2. Existing AHS methods                                                     microphone signal, and the resulting error signal e(t) is em-
+                                                                              ployed for weight updating. The overall process can be viewed
+In general, the goal of an AHS is to reduce or eliminate the                  as a two-step procedure (prediction and updating) with Kalman
+howling, while preserving the desired signal as much as possi-                filter weights updated through the iterative feedback from the
+ble. However, this goal is not always easy to achieve, because                two steps.
+the suppression of the howling can often result in some level
+of signal distortion. Kalman filter based methods have a long                      In the prediction step, the near-end signal is estimated as
+history of success in a variety of signal processing applications,
+and they can be effective in suppressing acoustic howling in                  E(k) = Y(k) - R(k)H^ (k),           (4)
+certain environments [10]. However, they are limited by their
+reliance on a statistical model of the system, which can be dif-              where E, Y, and R are the short-time Fourier transform (STFT)
+ficult to estimate accurately in scenarios with nonlinearities and
+leads to noticeable leakage and/or signal distortion. Deep learn-             of e(t), y(t), and r(t) respectively, and k denotes the frame in-
+ing based methods, on the other hand, can learn complex rela-                 dex. H^ (k) denotes the frequency-domain estimated echo path.
+tionships and be effective in suppressing acoustic howling in
+environments where the howling can not be well modeled by a                        The echo path H^ (k) is updated in the updating step:
+Kalman filter [14]. While the mismatch between offline training
+and streaming inference leads to unavoidable signal distortions.              H^ (k + 1) = A[H^ (k) + K(k)E(k)],  (5)
+
+     The challenge is to find a balance between suppression per-              where A is the transition factor. K(k) denotes the Kalman gain,
+formance and signal distortion that is acceptable for a particu-              which is obtained using covariances calculated from state esti-
+lar application. Therefore, we consider combine traditional and               mation error, observation and process noises [9].
+deep learning based methods to achieve improved performance,
+improved robustness, and the ability to leverage the strengths of             3.3. Inputs and feature extraction
+both methods to achieve a more effective solution.
+                                                                              The DNN module, illustrated in Figure 2, accepts a pre-
+                                                                              processed signal using the Kalman fitler e and an ideal micro-
+                                                                              phone signal generated via teacher forcing learning y as inputs
+                                                                                                                  '
+
+         !                                                                                            Conv-1D . ' '
+                     Concat.                                                                                   .     3-ch "!!                                                                           .
+ "                        Linear layer projection            .  '       Linear layer projection       Conv-1D
+                                                                   LPS                                                                                                      MHSA
+         #                         GRU                                                                         .                                   Linear layer                    Linear layer            '
+                                            Conv-1D Conv-1D
+                                                                                                      Conv-1D                  concat.  LayerNorm                MHSA                     3-ch filters        sum
+         
+                                                                                                 GRU              '                                                    GRU                              .          (
+
+                                                                                                      Conv-1D  .  '  3-ch """
+
+                                                             .     LPS                                         .
+
+                                                                '                                     Conv-1D                                                                                           .
+
+                                                                                                               .  
+
+                                                                                                      Conv-1D                                      Self-attentive RNN                                      
+
+Figure 2: Architecture of the DNN module for AHS. Each "Conv-1D" block outputs a complex-valued ratio filter, which is then applied
+upon a specific signal through deep filtering, denoted as .
+
+for model training. The input signals, which are sampled at 16                                                               4. Experimental setup
+kHz, are split into frames of 32 ms and a frame shift of 16 ms.
+A 512-point STFT is then performed on each frame, resulting                                                    4.1. Data preparation
+in the frequency domain inputs, Y and E. Besides the normal-
+ized log-power spectra (LPS), we extract the correlation matrix                                                The AISHELL-2 dataset [24] is used for carrying out experi-
+across time frames and frequency bins of the input signals to                                                  ments in situations with playback, background noise, and non-
+capture the signals' temporal and frequency dependency. These                                                  linear distortions. During data simulation, we generate 10,000
+features help in differentiating between howling and tonal com-                                                room impulse response (RIR) sets using the image method
+ponents. Channel covariance of input signals (Y and E) is cal-                                                 [25] with random room characteristics and reverberation times
+culated as another input feature to account for cross-correlation                                              (RT60) range of 0 to 0.6 seconds. Each RIR set consisting
+between them. A concatenation of these features is used for                                                    of RIRs for the near-end speaker, loudspeaker and background
+model training with a linear layer for feature fusion. More de-                                                noise locations. A randomly selected RIR set is utilized to gen-
+tails regarding feature design can be found in [19]                                                            erate target speech s(t) and its corresponding one-time play-
+                                                                                                               back signal d(t) using system delay t randomly generated
+3.4. Network structure                                                                                         within the range of [0.1, 0.3] seconds, and amplification gain
+                                                                                                               randomly selected within the range of [1, 3.2]. The nonlinear
+The DNN module is implemented using a self-attentive recur-                                                    distortions introduced by the amplifier and loudspeaker are sim-
+rent neural network (SARNN). The neural network is composed                                                    ulated as a saturation type of nonlinearity using hard clipping
+of three main parts. The first part comprises a gated recurrent                                                and Sigmoidal function [26, 27]. The microphone signal for
+unit (GRU) layer with 257 hidden units and two 1D convolu-                                                     offline training is created as a mixture with signal-to-playback-
+tion layers. These layers estimate two complex-valued filters                                                  ratio (SPR) randomly selected from [-10, 10] dB and signal-to-
+which are applied on the input signals using deep filtering [22]                                               noise ratio (SNR) ranging from -10 dB to 30 dB. Kalman filter
+to obtain intermediate outputs, denoted as Y~ and E~. The moti-                                                is employed in an initial stage to preprocess the training signals
+vation behind obtaining these intermediate outputs is that they                                                and obtain the corresponding outputs. A total number of 10k,
+can be used as learnt nonlinear reference signals [16, 17] and                                                 0.3k, and 0.5k signals are generated for training, validation and
+provide more information for howling suppression. Later, the                                                   testing, respectively. The testing data are generated using dif-
+LPS of these intermediate signals are concatenated with the                                                    ferent utterances and RIRs from that of training and validation
+fused feature and then used as inputs for another GRU layer.                                                   data. The model is trained for 60 epochs with a batch size of
+We regard Y , Y~ , and E~ as three-channel inputs and employ                                                   32.
+two 1D convolution layers for each input channel to estimate
+the playback/noise and target speech components in it. The                                                     4.2. Evaluation metrics
+corresponding covariance matrices of playback/noise ^ NN and
+target speech ^ SS are calculated and concatenated as the in-                                                  The performance of the proposed method is evaluated in two
+put to the third part, SARNN. The SARNN part employs two                                                       different manners: offline evaluation and streaming inference
+linear layers, two multi-head self-attention (MHSA), a GRU,                                                    [14]. The offline evaluation uses signals generated in Eq. (3) as
+and residual connections to estimate a three-channel enhance-                                                  input to evaluate playback attenuation performance. SI-SDR
+ment filter. The enhanced signal S^ is then obtained through                                                   and perceptual evaluation of speech quality (PESQ) [28] are
+multi-channel deep filtering. Finally, an inverse STFT (iSTFT)                                                 used to evaluate the extent of playback attenuation and qual-
+is used to get waveform s^. Details of the network structure can                                               ity of target speech. And a higher value denotes better perfor-
+be found in [19].                                                                                              mance.
+
+3.5. Loss functions                                                                                                 In streaming inference, we insert the deep learning mod-
+                                                                                                               ule into the acoustic loop and generate the enhanced signal
+We utilize a combination of scale-invariance signal-to-                                                        recursively. This manner of evaluation considers the poten-
+distortion ratio (SI-SDR) [23] in the time domain and mean                                                     tial re-entry of leakage/distortion in the close acoustic loop and
+absolute error (MAE) of spectrum magnitude in the frequency                                                    evaluates the proposed method's real-time howling suppression
+domain for model training:                                                                                     performance [14]. The spectrograms of recursively processed
+                                                                                                               signal are presented to show the effectiveness of the proposed
+Loss = -SI-SDR(s^, s) + MAE(|S^|, |S|)                                                                (6)      method.
+
+ is set to 10000 to balance the value range of these two losses.
+Severe Moderate Light                                                                      (a)
+
+                                                                                           (b)
+
+                       No AHS        Target          Kalman       Deep AHS  Deep MFC                           (c)
+                                                                                      Hybrid AHS
+
+Figure 3: Spectrograms of streaming results for scenarios with (a) light, (b) moderate, and (c) severe howling. The signals with no
+AHS, target, Kalman, Deep AHS, Deep MFC, and the proposed Hybrid AHS are shown in each panel.
+
+Table 1: Offline evaluation of models for playback attenuation.
+
+                                                                            (a)       (a)
+
+                                  SI-SDR (dB)        PESQ
+
+G                              1  2            3  1  2       3
+Unprocessed
+Kalman                         8.59 2.82 -0.66    2.83 2.41 2.18            (b)       (b)
+Deep AHS [14]
+Deep MFC [13]                  7.66 -1.42 -10.56  2.88 2.44 2.07
+Hybrid AHS
+                               16.32 13.32 11.46  3.60 3.41 3.27
+
+                               14.82 8.60 2.61    3.46 3.13 2.81            (c)       (c)
+
+                               20.16 17.11 14.43  3.76 3.60 3.43
+
+                                                                  Figure 4: Spectrograms of two test results using real recordings
+                                                                  and a small model when (a) turn off both Kalman and DNN
+                                                                  modules, (b) turn on only Kalman module, and (c) turn on both
+                                                                  Kalman and DNN modules (proposed Hybrid AHS).
+
+             5. Experimental results                              5.3. Performance using real-recorded signals and a deploy-
+                                                                  able model
+5.1. Offline evaluation
+                                                                  We further evaluate the performance of the proposed method
+We first evaluate the performance of our proposed method for      for howling suppression with real-recorded signals and a de-
+playback attenuation and compare it with two recently proposed    ployable model. For this purpose, we set up a simple acoustic
+deep learning based AHS methods [13, 14] and a Kalman filter      amplification system and trained the Hybrid AHS method us-
+based approach [10]. The comparison results are presented in      ing real recordings and a small, deployable model. The model
+Table 1, with G representing the amplification gain. Note that    is a long short-term memory (LSTM) network that consists of
+the Kalman results shown here could be even worse than the        a single hidden layer with 100 units, resulting in 0.13 M train-
+"Unprocessed" signals since the former is obtained in a stream-   able parameters. To make the model feasible for deployment
+ing manner, whereas the latter is an ideal microphone mixture     on real devices, we reduced the frame size and frame shift to 8
+generated using the teacher-forced training strategy described    ms and 4 ms, respectively, and used only LPS features as inputs
+in Eq. (3). To ensure a fair comparison, we trained the Deep      for model training. The processed results are presented in Fig-
+AHS, Deep MFC, and Hybrid AHS using the same network and          ure 4, demonstrating the effectiveness of the proposed method
+training data. The comparison results indicate that the Hybrid    in howling suppression and its ability to further enhance the
+AHS approach outperforms all baseline methods consistently.       output of the Kalman filter.
+We have also experimented with using a delayed microphone
+signal as another reference signal, as suggested in [14]. How-                       6. Conclusion
+ever, our findings indicate that incorporating a delayed micro-
+phone does not lead to performance improvement for Hybrid         In this study, we have introduced a Hybrid AHS approach that
+AHS, since the output of Kalman provides sufficient reference     integrates traditional Kalman filtering with deep learning to sup-
+information and outperforms the benefits of having a delayed      press acoustic howling. The proposed method involves offline
+microphone as additional input.                                   training of a SARNN using signals that have been pre-processed
+                                                                  by Kalman filtering, as well as a microphone signal generated
+5.2. Streaming inference                                          using teacher forcing training strategy. During streaming infer-
+                                                                  ence, the pre-trained model is inserted into the closed acous-
+This section assesses the effectiveness of the proposed method    tic loop to recursively process the input signals. By leveraging
+using streaming inference. Three testing scenarios, comprising    both Kalman filtering and deep learning, the proposed method
+soft, moderate, and severe howling, are generated by gradually    achieves enhanced suppression performance and speech quality
+increasing the amplification gain G during streaming inference.   for nonlinear AHS in comparison to baseline techniques in both
+The spectrograms of processed signals are shown in Figure 3.      offline and streaming scenarios. Future work includes exploring
+It can be observed that all deep learning based AHS approaches    practical issues such as on-device implementation and extend-
+successfully prevent the occurrence of howling, with the Hybrid   ing the proposed method for handling multi-channel scenarios.
+AHS method delivering the best overall performance.
+                   7. References                                          [18] H. Zhang and D. Wang, "Neural cascade architecture for multi-
+                                                                                channel acoustic echo suppression," IEEE/ACM Transactions on
+ [1] R. V. Waterhouse, "Theory of howlback in reverberant rooms,"               Audio, Speech, and Language Processing, vol. 30, pp. 2326-2336,
+      The Journal of the Acoustical Society of America, vol. 37, no. 5,         2022.
+      pp. 921-923, 1965.
+                                                                          [19] M. Yu, Y. Xu, C. Zhang, S.-X. Zhang, and D. Yu, "NeuralE-
+ [2] T. Van Waterschoot and M. Moonen, "Fifty years of acoustic feed-           cho: A self-attentive recurrent neural network for unified acous-
+      back control: State of the art and future challenges," Proceedings        tic echo suppression and speech enhancement," arXiv preprint
+      of the IEEE, vol. 99, no. 2, pp. 288-327, 2010.                           arXiv:2205.10401, 2022.
+
+ [3] M. R. Schroeder, "Improvement of acoustic-feedback stability         [20] R. J. Williams and D. Zipser, "A learning algorithm for contin-
+      by frequency shifting," The Journal of the Acoustical Society of          ually running fully recurrent neural networks," Neural computa-
+      America, vol. 36, no. 9, pp. 1718-1724, 1964.                             tion, vol. 1, no. 2, pp. 270-280, 1989.
+
+ [4] E. Berdahl and D. Harris, "Frequency shifting for acoustic howl-     [21] A. M. Lamb, A. G. Alias Parth Goyal, Y. Zhang, S. Zhang, A. C.
+      ing suppression," in Proceedings of the 13th International Con-           Courville, and Y. Bengio, "Professor forcing: A new algorithm
+      ference on Digital Audio Effects, Graz, Austria, vol. 610, 2010.          for training recurrent networks," Advances in neural information
+                                                                                processing systems, vol. 29, 2016.
+ [5] W. Loetwassana, R. Punchalard, A. Lorsawatsiri, J. Koseeyaporn,
+      and P. Wardkein, "Adaptive howling suppressor in an audio am-       [22] W. Mack and E. A. Habets, "Deep filtering: Signal extraction and
+      plifier system," in 2007 Asia-Pacific Conference on Communica-            reconstruction using complex time-frequency filters," IEEE Sig-
+      tions. IEEE, 2007, pp. 445-448.                                           nal Processing Letters, vol. 27, pp. 61-65, 2019.
+
+ [6] P. Gil-Cacho, T. Van Waterschoot, M. Moonen, and S. H. Jensen,       [23] J. Le Roux, S. Wisdom, H. Erdogan, and J. R. Hershey, "SDR-
+      "Regularized adaptive notch filters for acoustic howling suppres-         half-baked or well done?" in 2019 IEEE International Conference
+      sion," in 2009 17th European Signal Processing Conference.                on Acoustics, Speech and Signal Processing (ICASSP). IEEE,
+      IEEE, 2009, pp. 2574-2578.                                                2019, pp. 626-630.
+
+ [7] T. v. Waterschoot and M. Moonen, "Comparative evaluation of          [24] J. Du, X. Na, X. Liu, and H. Bu, "Aishell-2: Transform-
+      howling detection criteria in notch-filter-based howling suppres-         ing mandarin asr research into industrial scale," arXiv preprint
+      sion," Journal of the audio engineering society, vol. 58, no. 11,         arXiv:1808.10583, 2018.
+      pp. 923-940, 2010.
+                                                                          [25] J. B. Allen and D. A. Berkley, "Image method for efficiently sim-
+ [8] H. A. L. Joson, F. Asano, Y. Suzuki, and T. Sone, "Adaptive feed-          ulating small-room acoustics," The Journal of the Acoustical So-
+      back cancellation with frequency compression for hearing aids,"           ciety of America, vol. 65, no. 4, pp. 943-950, 1979.
+      The Journal of the Acoustical Society of America, vol. 94, no. 6,
+      pp. 3248-3254, 1993.                                                [26] A. Birkett and R. Goubran, "Nonlinear loudspeaker compensa-
+                                                                                tion for hands free acoustic echo cancellation," Electronics Let-
+ [9] G. Enzner and P. Vary, "Frequency-domain adaptive Kalman filter            ters, vol. 32, no. 12, pp. 1063-1064, 1996.
+      for acoustic echo control in hands-free telephones," Signal Pro-
+      cessing, vol. 86, no. 6, pp. 1140-1156, 2006.                       [27] H. Zhang and D. Wang, "Deep learning for acoustic echo can-
+                                                                                cellation in noisy and double-talk scenarios," Proc. Interspeech
+[10] F. Albu, L. T. Tran, and S. Nordholm, "The hybrid simplified               2018, pp. 3239-3243, 2018.
+      kalman filter for adaptive feedback cancellation," in 2018 Inter-
+      national Conference on Communications (COMM). IEEE, 2018,           [28] A. W. Rix, J. G. Beerends, M. P. Hollier, and A. P. Hekstra, "Per-
+      pp. 45-50.                                                                ceptual evaluation of speech quality (PESQ)-a new method for
+                                                                                speech quality assessment of telephone networks and codecs," in
+[11] Z. Chen, Y. Hao, Y. Chen, G. Chen, and L. Ruan, "A neural                  2001 IEEE International Conference on Acoustics, Speech, and
+      network-based howling detection method for real-time commu-               Signal Processing (ICASSP)., vol. 2. IEEE, 2001, pp. 749-752.
+      nication applications," in 2022 IEEE International Conference on
+      Acoustics, Speech and Signal Processing (ICASSP). IEEE, 2022,
+      pp. 206-210.
+
+[12] H. Gan, G. Luo, Y. Luo, and W. Luo, "Howling noise cancellation
+      in time-frequency domain by deep neural networks," in Proceed-
+      ings of Sixth International Congress on Information and Commu-
+      nication Technology. Springer, 2022, pp. 319-332.
+
+[13] C. Zheng, M. Wang, X. Li, and B. C. Moore, "A deep learning
+      solution to the marginal stability problems of acoustic feedback
+      systems for hearing aids," The Journal of the Acoustical Society
+      of America, vol. 152, no. 6, pp. 3616-3634, 2022.
+
+[14] H. Zhang, M. Yu, and D. Yu, "Deep AHS: A deep learn-
+      ing approach to acoustic howling suppression," arXiv preprint
+      arXiv:2302.09252, 2023.
+
+[15] S. Zhang, Z. Wang, J. Sun, Y. Fu, B. Tian, Q. Fu, and L. Xie,
+      "Multi-task deep residual echo suppression with echo-aware loss,"
+      in ICASSP 2022-2022 IEEE International Conference on Acous-
+      tics, Speech and Signal Processing (ICASSP). IEEE, 2022, pp.
+      9127-9131.
+
+[16] H. Zhang, S. Kandadai, H. Rao, M. Kim, T. Pruthi, and T. Krist-
+      jansson, "Deep adaptive AEC: Hybrid of deep learning and adap-
+      tive acoustic echo cancellation," in ICASSP 2022-2022 IEEE In-
+      ternational Conference on Acoustics, Speech and Signal Process-
+      ing (ICASSP). IEEE, 2022, pp. 756-760.
+
+[17] Y. Zhang, M. Yu, H. Zhang, D. Yu, and D. Wang, "KalmanNet:
+      A learnable kalman filter for acoustic echo cancellation," arXiv
+      preprint arXiv:2301.12363, 2023.
+

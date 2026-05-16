@@ -34,6 +34,7 @@ In traditional signal processing (TSP), algorithms like the **[[wiener-filter]]*
 - **[[speech-preserving-anc]]**: Selective noise cancellation that preserves speech via modified loss functions.
 - **[[voice-activity-detection]]**: Classifying speech vs. noise.
 - **[[beamforming]]**: Neural spatial filtering for directional sound capture.
+- **[[../concepts/hearing-aid-feedback-cancellation|Hearing Aid Feedback Cancellation]]**: GRU-based step-size prediction for PEM-AFC (DeepPEM-AFC)
 
 ## Related Concepts
 - [[active-noise-control|Active Noise Control]]
@@ -51,3 +52,4 @@ In traditional signal processing (TSP), algorithms like the **[[wiener-filter]]*
 
 - [[../sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 - [[../sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]]
+- [[../sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — GRU-based step-size prediction for adaptive feedback cancellation

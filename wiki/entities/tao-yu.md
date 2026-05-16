@@ -1,6 +1,6 @@
 ---
 type: entity
-created: 2026-05-02
+created: 2026-05-15
 updated: 2026-05-15
 tags:
   - researcher
@@ -8,13 +8,12 @@ tags:
   - speech-processing
 ---
 
-# Dong Yu
+# Tao Yu
 
-**Affiliation**: Tencent AI Lab, Bellevue, WA, USA
+**Affiliation**: Tencent Ethereal Audio Lab, Shenzhen, Guangdong, China
 **Role**: Researcher
-**Research Focus**: Speech processing, acoustic signal processing
+**Research Focus**: Acoustic howling suppression, speech enhancement, deep audio processing
 
 ## Key Contributions
 
 - Hybrid AHS: Kalman filter and self-attentive recurrent neural network cascade for robust acoustic howling suppression (arXiv 2023)
-- NeuralKalmanAHS: NN-augmented Kalman filter for robust AHS (Interspeech 2024)

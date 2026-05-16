@@ -143,3 +143,9 @@
 | [[concepts/warped-fir-filter\|Warped FIR Filter]] | FIR filter in warped frequency domain; 16th order matches 128th FIR at low frequencies | 2026-05-13 |
 | [[concepts/q-parameterization\|Q-Parameterization]] | Youla parameterization for stabilizing controller design; optimization over free Q parameter | 2026-05-13 |
 | [[concepts/sensitivity-function\|Sensitivity Function]] | Closed-loop transfer function $S = 1/(1+CP)$; characterizes noise attenuation and waterbed effect | 2026-05-13 |
+| [[concepts/teacher-forcing\|Teacher Forcing]] | Training strategy that feeds ground-truth previous outputs during recurrent learning; used to reformulate recursive AHS training | 2026-05-15 |
+| [[concepts/self-attentive-recurrent-neural-network\|Self-Attentive Recurrent Neural Network]] | Recurrent + self-attention architecture used in Hybrid AHS for recursive speech enhancement | 2026-05-15 |
+| [[concepts/prediction-error-method\|Prediction Error Method]] | De-correlation technique using whitening pre-filters to solve bias in closed-loop AFC | 2026-05-15 |
+| [[concepts/hearing-aid-feedback-cancellation\|Hearing Aid Feedback Cancellation]] | AFC methods specific to hearing aids: PEM, FS, probe noise, and deep learning approaches | 2026-05-15 |
+| [[concepts/frequency-shift-feedback-cancellation\|Frequency Shift Feedback Cancellation]] | De-correlation via small frequency offset; limited for HA but effective when combined with PEM | 2026-05-15 |
+| [[concepts/maximum-stable-gain\|Maximum Stable Gain]] | Maximum amplification before feedback instability; key metric for hearing aid performance | 2026-05-15 |

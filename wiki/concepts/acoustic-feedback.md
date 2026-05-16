@@ -88,6 +88,8 @@ In hearing aids, AFC uses an adaptive filter (typically PEM-NLMS) to estimate an
 | Narrow-band feedforward | None — reference signals internally generated |
 | Feedback ANC | N/A — no reference sensor exists |
 
+**DeepPEM-AFC** (Zhan et al. 2025): Combines PEM de-correlation with GRU-based step-size prediction. Uses frequency-domain PEM for reduced complexity and a simulated path generation scheme for generalization. FS+DeepPEM-AFC achieves optimal performance across all speech quality metrics.
+
 ## Related Concepts
 
 - [[broad-band-feedforward-anc|Broad-Band Feedforward ANC]]
@@ -95,13 +97,20 @@ In hearing aids, AFC uses an adaptive filter (typically PEM-NLMS) to estimate an
 - [[internal-model-control|Internal Model Control]]
 - [[simplified-adaptive-feedback-anc|Simplified Adaptive Feedback ANC]]
 - [[variable-step-size-lms|Variable Step Size LMS]]
+- [[prediction-error-method|Prediction Error Method]]
+- [[hearing-aid-feedback-cancellation|Hearing Aid Feedback Cancellation]]
+- [[frequency-shift-feedback-cancellation|Frequency Shift Feedback Cancellation]]
+- [[maximum-stable-gain|Maximum Stable Gain]]
 
 ## Related Sources
 
 - [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section II-D: Feedback Effects and Solutions
 - [[../sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
+- [[../sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC with GRU step-size prediction
 
 ## Related Entities
 
 - [[../entities/sen-m-kuo|Sen M. Kuo]] — Comprehensive treatment of feedback neutralization techniques
 - [[../entities/henning-schepker|Henning Schepker]] — AFC in hearing aids, shadow filter and beamformer approaches
+- [[../entities/chengshi-zheng|Chengshi Zheng]] — DeepPEM-AFC, frequency shift analysis for hearing aids
+- [[../entities/xiaofan-zhan|Xiaofan Zhan]] — DeepPEM-AFC

@@ -154,3 +154,9 @@
 | [[entities/ji-ho-seo\|Ji-ho Seo]] | Yonsei University — feedback ANC, constrained optimization, frequency warping | 2026-05-13 |
 | [[entities/young-cheol-park\|Young-cheol Park]] | Yonsei University — active noise control, signal processing | 2026-05-13 |
 | [[entities/dae-hee-youn\|Dae Hee Youn]] | Yonsei University — active noise control, signal processing, audio engineering | 2026-05-13 |
+| [[entities/yuzhong-wu\|Yuzhong Wu]] | Tencent Ethereal Audio Lab — Hybrid AHS for acoustic howling suppression | 2026-05-15 |
+| [[entities/tao-yu\|Tao Yu]] | Tencent Ethereal Audio Lab — Hybrid AHS for acoustic howling suppression | 2026-05-15 |
+| [[entities/xiaofan-zhan\|Xiaofan Zhan]] | Institute of Acoustics, CAS — DeepPEM-AFC for hearing aid feedback cancellation | 2026-05-15 |
+| [[entities/fengyuan-hao\|Fengyuan Hao]] | Institute of Acoustics, CAS — DeepPEM-AFC for hearing aid feedback cancellation | 2026-05-15 |
+| [[entities/xiaodong-li\|Xiaodong Li]] | Institute of Acoustics, CAS — acoustic signal processing, hearing aids | 2026-05-15 |
+| [[entities/chengshi-zheng\|Chengshi Zheng]] | Institute of Acoustics, CAS — DeepPEM-AFC, frequency shift analysis for hearing aids | 2026-05-15 |

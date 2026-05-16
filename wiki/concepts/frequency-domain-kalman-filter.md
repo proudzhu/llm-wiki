@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-02
-updated: 2026-05-02
+updated: 2026-05-15
 sources:
   - raw/papers/zhang-2024-neural-kalman-howling/full-text.txt
+  - raw/papers/zhang-2023-hybrid-ahs/full-text.txt
 tags:
   - kalman-filter
   - frequency-domain
@@ -48,14 +49,15 @@ where:
 - **Acoustic Howling Suppression (AHS)**: Breaking the positive feedback loop
 - **Secondary Path Modeling**: Online identification of the secondary transfer function in ANC
 
-## NN-Augmented Variants
+## Hybrid and NN-Augmented Variants
 
-Recent work integrates neural networks into FDKF for:
+Recent work extends FDKF in two complementary directions:
+- **Hybrid AHS**: cascades FDKF with a self-attentive recurrent neural network, using Kalman-preprocessed signals as auxiliary neural inputs and feeding the DNN output back as the Kalman reference during streaming inference
 - **Reference signal refinement**: LSTM-based ratio mask to improve reference quality
-- **Covariance matrix estimation**: Replacing static approximations with learned dynamic estimates
-- **Nonlinear transition modeling**: Capturing hardware nonlinearities
+- **Covariance matrix estimation**: replacing static approximations with learned dynamic estimates
+- **Nonlinear transition modeling**: capturing hardware nonlinearities and residual leakage
 
-Key insight: exclusively using NNs to estimate all Kalman filter components doesn't necessarily improve performance; leveraging NNs for absent or approximated components (covariances, refined references) yields the most benefit.
+Key insight: FDKF remains a strong adaptive backbone, while neural components are most useful when they compensate for nonlinear distortion, reference mismatch, or poorly modeled covariance terms.
 
 ## Related Concepts
 
@@ -63,7 +65,9 @@ Key insight: exclusively using NNs to estimate all Kalman filter components does
 - [[../concepts/acoustic-howling-suppression|Acoustic Howling Suppression]] — primary application
 - [[../concepts/adaptive-filtering|Adaptive Filtering]] — broader adaptive filtering context
 - [[../concepts/frequency-domain-anc|Frequency-Domain ANC]] — frequency-domain processing in ANC
+- [[../concepts/self-attentive-recurrent-neural-network|Self-Attentive Recurrent Neural Network]] — Hybrid AHS neural module
 
 ## Related Sources
 
+- [[../sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]
 - [[../sources/zhang-2024-neural-kalman-howling|Zhang 2024: Neural Network Augmented Kalman Filter for AHS]]

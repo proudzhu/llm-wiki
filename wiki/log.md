@@ -1499,3 +1499,54 @@ aw/papers/wang-2026-directional-sfanc-reverberant/full-text.md\ — extracted fr
   - `wiki/entities/index.md` — added 4 entity entries
   - `wiki/concepts/index.md` — added 7 concept entries
   - `wiki/sources/index.md` — added 1 source entry
+
+---
+
+## [2026-05-15] ingest | Hybrid AHS: A Hybrid of Kalman Filter and Deep Learning for Acoustic Howling Suppression (Zhang et al. 2023)
+
+- **Source**: aw/papers/zhang-2023-hybrid-ahs/full-text.txt (Zotero: ILJW385X)
+- **Authors**: Hao Zhang, Meng Yu, Yuzhong Wu, Tao Yu, Dong Yu
+- **Published**: arXiv preprint arXiv:2305.02583, 2023-05-04
+- **DOI**: 10.48550/arXiv.2305.02583
+- **Summary**: Hybrid AHS cascades a frequency-domain Kalman filter with a self-attentive recurrent neural network, using teacher-forced training plus Kalman-preprocessed inputs to reduce training-inference mismatch and outperform Kalman, Deep AHS, and Deep MFC in both offline and streaming AHS.
+- **Pages created**:
+  - aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Zotero PDF
+  - wiki/sources/zhang-2023-hybrid-ahs.md — source page
+  - wiki/entities/yuzhong-wu.md — co-author
+  - wiki/entities/tao-yu.md — co-author
+  - wiki/concepts/teacher-forcing.md — training strategy for recursive AHS models
+  - wiki/concepts/self-attentive-recurrent-neural-network.md — Hybrid AHS neural backbone
+- **Pages updated**:
+  - wiki/entities/hao-zhang.md — added Hybrid AHS contribution
+  - wiki/entities/meng-yu.md — added Hybrid AHS contribution
+  - wiki/entities/dong-yu.md — added Hybrid AHS contribution
+  - wiki/concepts/acoustic-howling-suppression.md — added HybridAHS method and source links
+  - wiki/concepts/frequency-domain-kalman-filter.md — added hybrid FDKF usage
+  - wiki/concepts/kalman-filter.md — added source reference
+  - wiki/index.md — added 2 entities, 2 concepts, 1 source
+
+---
+
+## [2026-05-15] ingest | Zhan et al. (2025) DeepPEM-AFC
+
+- **Source**: Zotero key BPH79CM5
+- **DOI**: 10.1109/ICASSP49660.2025.10890348
+- **Summary**: DeepPEM-AFC combines PEM de-correlation with GRU-based step-size prediction for hearing aid AFC. Frequency-domain PEM reduces complexity. Simulated path generation improves generalization. FS+DeepPEM-AFC achieves optimal performance across all speech quality metrics.
+- **Pages created**:
+  - `raw/papers/zhan-2025-deeppem-afc/full-text.txt` — extracted via pdftotext from Zotero PDF
+  - `wiki/sources/zhan-2025-deeppem-afc.md` — source page
+  - `wiki/entities/xiaofan-zhan.md` — first author
+  - `wiki/entities/fengyuan-hao.md` — co-author
+  - `wiki/entities/xiaodong-li.md` — co-author
+  - `wiki/entities/chengshi-zheng.md` — corresponding author
+  - `wiki/concepts/prediction-error-method.md` — PEM de-correlation technique
+  - `wiki/concepts/hearing-aid-feedback-cancellation.md` — hearing aid AFC overview
+  - `wiki/concepts/frequency-shift-feedback-cancellation.md` — FS de-correlation method
+  - `wiki/concepts/maximum-stable-gain.md` — MSG metric for hearing aids
+- **Pages updated**:
+  - `wiki/concepts/acoustic-feedback.md` — added DeepPEM-AFC, cross-links, entities
+  - `wiki/concepts/adaptive-feedback-control.md` — added hearing aid AFC cross-links
+  - `wiki/concepts/deep-learning-for-signal-processing.md` — added DeepPEM-AFC application
+  - `wiki/index.md` — added 4 entities, 4 concepts, 1 source
+
+

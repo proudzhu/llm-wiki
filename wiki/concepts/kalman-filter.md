@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-05-02
+updated: 2026-05-15
 sources:
   in active noise and vibration control.md
   - raw/papers/zhang-2024-neural-kalman-howling/full-text.txt
+  - raw/papers/zhang-2023-hybrid-ahs/full-text.txt
 tags:
 - control-theory
 - mathematics
@@ -98,4 +99,5 @@ For ANC, a Kalman filter can be used to:
 
 - [[../sources/welch-2006-kalman-filter-intro|Welch & Bishop 2006: Introduction to the Kalman Filter]]
 - [[../sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]
+- [[../sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]
 - [[../sources/zhang-2024-neural-kalman-howling|Zhang 2024: Neural Network Augmented Kalman Filter for AHS]]
