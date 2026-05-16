@@ -49,14 +49,17 @@ Extract: title, authors, year, type, abstract, DOI, URL, tags, and **PDF attachm
 
 #### 3a. Copy PDF and Create Directory
 
-```bash
-mkdir -p raw/papers/{slug}/
+```powershell
+# Create directory (use `mkdir` without -p on Windows; New-Item for full control)
+New-Item -ItemType Directory -Force -Path "raw/papers/{slug}" | Out-Null
+
 # Zotero storage path varies by user — check the PDF attachment key from Step 2
 # Common paths: C:\Users\{username}\Zotero\storage\{PDF_KEY}\
 # IMPORTANT: Do NOT use wildcard (*.pdf) to copy — Zotero filenames may contain
 # Chinese characters (e.g., "Sharma 等 - 1998 - ...pdf") which cause silent copy failures.
 # Instead, list the directory first and copy using the exact filename:
-Get-ChildItem "C:\Users\{username}\Zotero\storage\{PDF_KEY}\" -Filter "*.pdf" | Copy-Item -Destination "raw/papers/{slug}/paper.pdf"
+$pdf = Get-ChildItem "C:\Users\{username}\Zotero\storage\{PDF_KEY}\" -Filter "*.pdf" | Select-Object -First 1
+Copy-Item $pdf.FullName "raw/papers/{slug}/paper.pdf"
 ```
 
 **Verify the PDF copy** is valid by checking the file header starts with `%` (PDF magic bytes):
@@ -66,6 +69,8 @@ $bytes = [System.IO.File]::ReadAllBytes("raw/papers/{slug}/paper.pdf"); [System.
 ```
 
 If the header is empty or the file size is 0, the copy failed — re-copy using the exact filename from `Get-ChildItem`.
+
+> ⚠️ **Windows cmd compatibility**: All PowerShell commands above (including `Get-ChildItem`, `Copy-Item`, `New-Item`, `Remove-Item`) must be run inside a PowerShell session. Wrap them as: `pwsh -NoProfile -Command "..."`. The `$` in `$bytes[0..4]` inside a double-quoted wrapper needs backtick-escape: ``$bytes` ``.
 
 Slug format: `author-year-short-title` (lowercase, hyphenated, meaningful abbreviation).
 
@@ -120,7 +125,8 @@ mineru-open-api extract "raw/papers/{slug}/paper.pdf" -o "raw/papers/{slug}/full
 
 **Post-processing**: MinerU saves images in an `images/` subdirectory. Rename it to `figures/` and update the markdown references:
 ```powershell
-Rename-Item "raw/papers/{slug}/images" "figures"
+# Rename 'images' to 'figures' (use Move-Item -Force; Rename-Item may fail on Windows with 'images' as a reserved name)
+Move-Item "raw/papers/{slug}/images" "raw/papers/{slug}/figures" -Force
 (Get-Content "raw/papers/{slug}/full-text.md") -replace 'images/', 'figures/' | Set-Content "raw/papers/{slug}/full-text.md"
 ```
 
@@ -162,7 +168,7 @@ pdfimages -all "raw/papers/{slug}/paper.pdf" "raw/papers/{slug}/img"
 
 ### Step 4: Read and Analyze the Full Paper Content
 
-Read the extracted text from `raw/papers/{slug}/full-text.md` (or `.txt` if from pdftotext fallback).
+Read the extracted text from `raw/papers/{slug}/full-text.md` (or `.txt` if from pdftotext fallback). The extracted file is typically 400–1000+ lines — read in chunks (head 200 + tail 100 + targeted range reads for methodology/experiments/results) rather than pulling the whole file at once.
 
 Extract:
 
@@ -329,8 +335,13 @@ Append to the **end** of `wiki/log.md` (entries are sorted by date ascending, ne
   - `wiki/sources/{slug}.md`
   - `wiki/entities/author1.md`
   - `wiki/entities/author2.md`
+  - `wiki/concepts/concept1.md`
+  - `wiki/concepts/concept2.md`
 - **Pages updated**:
-  - `wiki/index.md` — added N entities, 1 source
+  - `wiki/entities/existing-author.md` — added this paper
+  - `wiki/concepts/existing-concept.md` — added cross-refs and source link
+  - `wiki/synthesis/synthesis-page.md` — added paper to relevant synthesis
+  - `wiki/index.md` — added N entities, N concepts, 1 source; updated statistics
 ```
 
 For re-ingestion, use `ingest (re)` as the operation.
