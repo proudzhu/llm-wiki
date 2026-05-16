@@ -1,39 +1,47 @@
-import os
-import subprocess
-import sys
+"""MkDocs build hooks.
+
+Exposes the sibling `raw/` tree (figures, images, data files) inside the MkDocs
+virtual file system so wiki pages can reference them with a single `../raw/...`
+relative path under `--strict`.
+
+Implementation: the `on_files` hook registers every non-markdown file under
+`raw/` as a `File` object whose served URL is `raw/<relative path>`. No
+filesystem mutation occurs — there is no symlink or junction, and no cleanup
+is required, so interrupted builds never leave the repository in a dirty state.
+"""
+
+from pathlib import Path
+
+from mkdocs.structure.files import File
 
 
-def on_pre_build(config, **kwargs):
-    docs_dir = config["docs_dir"]
-    raw_link = os.path.join(docs_dir, "raw")
-    raw_target = os.path.join(os.path.dirname(docs_dir), "raw")
+SKIP_SUFFIXES = {".md", ".markdown", ".txt"}
 
-    if os.path.exists(raw_link):
-        return
 
-    if not os.path.isdir(raw_target):
-        return
+def on_files(files, config, **kwargs):
+    docs_dir = Path(config["docs_dir"]).resolve()
+    raw_root = (docs_dir.parent / "raw").resolve()
 
-    if sys.platform == "win32":
-        subprocess.run(
-            ["cmd", "/c", "mklink", "/J", os.path.abspath(raw_link), os.path.abspath(raw_target)],
-            check=True, capture_output=True,
+    if not raw_root.is_dir():
+        return files
+
+    project_root = docs_dir.parent
+
+    for path in raw_root.rglob("*"):
+        if not path.is_file():
+            continue
+        if path.suffix.lower() in SKIP_SUFFIXES:
+            continue
+
+        src_path = path.relative_to(project_root).as_posix()
+
+        files.append(
+            File(
+                path=src_path,
+                src_dir=str(project_root),
+                dest_dir=config["site_dir"],
+                use_directory_urls=config["use_directory_urls"],
+            )
         )
-    else:
-        os.symlink(os.path.abspath(raw_target), raw_link)
 
-
-def on_post_build(config, **kwargs):
-    docs_dir = config["docs_dir"]
-    raw_link = os.path.join(docs_dir, "raw")
-
-    if not os.path.exists(raw_link):
-        return
-
-    if sys.platform == "win32":
-        subprocess.run(
-            ["cmd", "/c", "rmdir", os.path.abspath(raw_link)],
-            check=True, capture_output=True,
-        )
-    else:
-        os.unlink(raw_link)
+    return files
