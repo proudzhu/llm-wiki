@@ -164,6 +164,8 @@
 | [[entities/lixing-he\|Lixing He]] | CUHK — multi-modal speech enhancement, earable computing | 2026-05-16 |
 | [[entities/yunqi-guo\|Yunqi Guo]] | CUHK — multi-modal speech enhancement, bone-conduction sensing | 2026-05-16 |
 | [[entities/zhenyu-yan\|Zhenyu Yan]] | CUHK — mobile/wearable systems, multi-modal sensing, speech enhancement | 2026-05-16 |
+| [[entities/kelan-kuang\|Kelan Kuang]] | Institute of Acoustics, CAS — DenGCAN, speech enhancement, BC fusion | 2026-05-16 |
+| [[entities/feiran-yang\|Feiran Yang]] | Institute of Acoustics, CAS — speech enhancement, BC/AC fusion | 2026-05-16 |
 
 ---
 
@@ -314,6 +316,9 @@
 | [[concepts/warped-fir-filter\|Warped FIR Filter]] | FIR filter in warped frequency domain; 16th order matches 128th FIR at low frequencies | 2026-05-13 |
 | [[concepts/q-parameterization\|Q-Parameterization]] | Youla parameterization for stabilizing controller design; optimization over free Q parameter | 2026-05-13 |
 | [[concepts/sensitivity-function\|Sensitivity Function]] | Closed-loop transfer function $S = 1/(1+CP)$; characterizes noise attenuation and waterbed effect | 2026-05-13 |
+| [[concepts/densely-gated-convolutional-attention-network\|DenGCAN]] | Lightweight encoder-decoder with dense blocks, gated conv, sConformer bottleneck, AG skip-connections | 2026-05-16 |
+| [[concepts/iterative-attentional-feature-fusion\|Iterative Attentional Feature Fusion (iAFF)]] | Coarse-then-refined multi-modal fusion using channel attention modules | 2026-05-16 |
+| [[concepts/attention-gate\|Attention Gate (AG)]] | Selective skip-connection mechanism using local + global feature attention | 2026-05-16 |
 
 ---
 
@@ -392,6 +397,7 @@
 | [[sources/mohapatra-2026-localizing-conversation-partners-head-motion\|Mohapatra et al. 2026: Localizing Conversation Partners Using Head Motion]] | HALo and CoCo networks for conversation partner localization via IMU head orientation on smartglasses | 2026 |
 | [[sources/xu-2026-drifting-models-speech-enhancement\|Xu et al. 2026: Speech Enhancement Based on Drifting Models]] | Drifting models reformulate generation as distributional equilibrium; one-step SE with self-supervised representations | 2026 |
 | [[sources/seo-2016-feedback-anc-constrained-optimization\|Seo, Park & Youn 2016: Feedback ANC via Constrained Optimization]] | Low-order WFIR filter design via Q-parameterization + frequency warping; 16th order matches 128th FIR at <1kHz | 2016 |
+| [[sources/kuang-2024-lightweight-speech-enhancement-bone-air\|Kuang, Yang & Yang 2024: Lightweight SE Fusing BC/AC]] | DenGCAN: 1.03M params, 0.859 GMACs, 1.870 wb-PESQ improvement on A4BS dataset | 2024 |
 
 ---
 
@@ -443,10 +449,10 @@
 
 ## Statistics
 
-- **Total pages**: 392
-- **Entities**: 154
-- **Concepts**: 141
-- **Sources**: 69
+- **Total pages**: 398
+- **Entities**: 156
+- **Concepts**: 144
+- **Sources**: 70
 - **Synthesis**: 22
 - **Queries**: 6
 - **Last updated**: 2026-05-16

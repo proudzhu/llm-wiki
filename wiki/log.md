@@ -1575,3 +1575,27 @@ aw/papers/wang-2026-directional-sfanc-reverberant/full-text.md\ — extracted fr
   - `wiki/concepts/inertial-measurement-unit.md` — added IMU for bone-conduction vibration sensing section
   - `wiki/synthesis/multimodal-bc-speech-enhancement.md` — added Lightweight Multi-Modal Fusion era, VibOmni details
   - `wiki/index.md` — added 4 entities, 2 concepts, 1 source; updated statistics
+
+
+
+## [2026-05-16] ingest | Kuang, Yang & Yang (2024) Lightweight SE Fusing BC/AC
+
+- **Source**: `raw/papers/kuang-2024-lightweight-speech-enhancement-bone-air/full-text.md` (Zotero: VBVTU72Z)
+- **Authors**: Kelan Kuang, Feiran Yang, Jun Yang
+- **Published**: JASA 2024, Vol. 156(2), pp. 1355–1366
+- **DOI**: 10.1121/10.0028339
+- **Summary**: Lightweight DenGCAN model fusing BC and AC speech via iAFF, dense blocks, AG skip-connections, and sConformer bottleneck. 1.03M params, 0.859 GMACs, 1.870 wb-PESQ improvement on A4BS dataset (109 speakers, 4 BC positions). Lowest RTF (0.649 ARM, 0.068 x86) among competitive models.
+- **Pages created**:
+  - `raw/papers/kuang-2024-lightweight-speech-enhancement-bone-air/full-text.md` — extracted via MinerU from Zotero PDF
+  - `wiki/sources/kuang-2024-lightweight-speech-enhancement-bone-air.md`
+  - `wiki/entities/kelan-kuang.md`
+  - `wiki/entities/feiran-yang.md`
+  - `wiki/concepts/densely-gated-convolutional-attention-network.md`
+  - `wiki/concepts/iterative-attentional-feature-fusion.md`
+  - `wiki/concepts/attention-gate.md`
+- **Pages updated**:
+  - `wiki/entities/jun-yang.md` — added this paper to contributions
+  - `wiki/concepts/bone-conduction.md` — added source reference
+  - `wiki/concepts/bcs-guided-speech-enhancement.md` — added cross-refs and source link
+  - `wiki/synthesis/multimodal-bc-speech-enhancement.md` — added Lightweight T-F Domain Fusion (2024) section
+  - `wiki/index.md` — added 2 entities, 3 concepts, 1 source; updated statistics

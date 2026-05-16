@@ -3,6 +3,7 @@ type: concept
 created: 2026-04-12
 updated: 2026-04-17
 sources:
+  - wiki/sources/kuang-2024-lightweight-speech-enhancement-bone-air.md
 tags:
 - acoustics
 - audio-processing

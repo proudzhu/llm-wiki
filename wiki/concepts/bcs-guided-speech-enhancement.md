@@ -75,8 +75,12 @@ BCS-based [[../concepts/voice-activity-detection|VAD]] provides noise-robust spe
 - [[../concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
 - [[../concepts/bone-conduction-function|Bone Conduction Function (BCF)]]
 - [[../concepts/dprnn|Dual-Path RNN (DPRNN)]]
+- [[../concepts/densely-gated-convolutional-attention-network|DenGCAN]]
+- [[../concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
+- [[../concepts/attention-gate|Attention Gate (AG)]]
 
 ## Related Sources
 
 - [[../sources/he-2025-vibomni|He, Guo, Hou & Yan 2025: VibOmni]]
 - [[../sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Earbuds]]
+- [[../sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]

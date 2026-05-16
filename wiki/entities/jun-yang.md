@@ -17,7 +17,9 @@ tags:
 ## Contributions
 
 - Co-authored FRM-SFANC algorithm for selective fixed-filter ANC in headphones based on frequency response matching
+- Co-authored lightweight DenGCAN speech enhancement network fusing bone- and air-conducted speech (JASA 2024)
 
 ## Related Sources
 
 - [[../sources/yin-2023-selective-fixed-filter-anc-headphones|Yin 2023: Selective Fixed-Filter ANC Based on Frequency Response Matching in Headphones]] — co-author
+- [[../sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]] — co-corresponding author

@@ -88,12 +88,26 @@ Parallel AC-BC data is difficult to collect. **Semi-supervised frameworks** (usi
 - *Khanagha et al. (2026) BC Guided Multimodal SE with Conditional Diffusion*
 - [[wiki/synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]]
 
+### 2.4 Lightweight T-F Domain Fusion (2024)
+Parallel to the IMU-based approach, a line of work focuses on lightweight time-frequency domain fusion using dedicated BC microphones.
+
+- **Kuang, Yang & Yang (JASA 2024) — DenGCAN**: A lightweight fused BC/AC speech enhancement model using:
+  - **Iterative Attentional Feature Fusion (iAFF)** for coarse-then-refined multi-modal fusion
+  - **DenGCAN backbone** with dense blocks (feature reuse), gated convolutions, and sConformer bottleneck
+  - **Attention Gate (AG) skip-connections** that consider local + global features
+  - **Key result**: 1.03M params, 0.859 GMACs, 1.870 wb-PESQ improvement, RTF 0.649 on ARM — lowest compute among all compared models
+  - **A4BS dataset**: 4-position BC recordings from 109 speakers (~107 h)
+
 ## Related Concepts
 
 - [[../concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
 - [[../concepts/bone-conduction|Bone Conduction]]
+- [[../concepts/densely-gated-convolutional-attention-network|DenGCAN]]
+- [[../concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
+- [[../concepts/attention-gate|Attention Gate (AG)]]
 
 ## Related Sources
 
 - [[wiki/sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 - [[wiki/sources/zhang-2022-bone-conducted-speech-dissertation|Zhang 2022: BC Statistical Analysis]]
+- [[wiki/sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]
