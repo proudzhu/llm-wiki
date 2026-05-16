@@ -1,0 +1,1 @@
+[28] C. H. Taal, R. C. Hendriks, R. Heusdens, and J. Jensen, "An algorithm for intelligibility prediction of time—frequency weighted noisy speech," IEEE Trans. Audio, Speech, and Language Processing, vol. 19, no. 7, pp. 21252136, Feb. 2011.

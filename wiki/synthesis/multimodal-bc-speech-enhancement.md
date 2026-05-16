@@ -6,6 +6,8 @@ sources:
   - wiki/sources/he-2025-vibomni.md
   - wiki/sources/zhang-2022-bone-conducted-speech-dissertation.md
   - wiki/sources/dai-2026-speech-preserving-deep-anc.md
+  - wiki/sources/kuang-2024-lightweight-speech-enhancement-bone-air.md
+  - wiki/sources/liu-2025-robust-fusion-bc-ac-attention.md
   - zotero://select/items/0_K592VRRE (Wang 2022: Complex Fusion)
   - zotero://select/items/0_B92ER5KS (Khanagha 2026: Conditional Diffusion)
   - zotero://select/items/0_NIIDMA7J (Contrastive Learning for BC)
@@ -16,6 +18,8 @@ tags:
   - deep-learning
   - diffusion-models
   - smart-hearables
+  - attention-mechanism
+  - sensor-failure-robustness
 ---
 
 # Multimodal Smart Hearables: Bone-Conduction Aided Speech Enhancement
@@ -98,6 +102,15 @@ Parallel to the IMU-based approach, a line of work focuses on lightweight time-f
   - **Key result**: 1.03M params, 0.859 GMACs, 1.870 wb-PESQ improvement, RTF 0.649 on ARM — lowest compute among all compared models
   - **A4BS dataset**: 4-position BC recordings from 109 speakers (~107 h)
 
+### 2.5 Attention-Driven Robust Fusion (2025)
+
+- **Liu, Chen & Yin (ICASSP 2025) — ATFA Dual-Mask**: Reframes BC/AC fusion around two architectural ideas and one training innovation:
+  - **Pre-fusion via shared convolution** — extracts common spectral patterns across modalities before encoding (multi-view input).
+  - **[[../concepts/adaptive-time-frequency-attention|Adaptive Temporal-Frequency Attention (ATFA)]]** — three cascaded blocks of dual-axis MHSA (time + frequency) with adaptive hierarchical fusion (AHA), replacing recurrent middle layers.
+  - **Dual-channel mask** — four real masks (RI for AC + RI for BC), applied to the original two complex spectra and summed (beamforming-inspired). Validated to also improve a DCCRN backbone.
+  - **Special Training (ST)** — random modality dropout (p = 0.2 per channel) during training. Transforms the model from catastrophically failing under sensor invalidity to **gracefully recovering** (PESQ 1.18 → 2.54 when AC fails). See [[../concepts/sensor-failure-robust-fusion|Sensor-Failure Robust Multi-Modal Fusion]].
+  - **Key result**: 1.6M params (~5% of Aff-Fusion), +0.2 PESQ / +0.03 STOI over Aff-Fusion across all SNRs from −5 to 15 dB, on the Elevoc ESMB BC corpus.
+
 ## Related Concepts
 
 - [[../concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
@@ -105,9 +118,12 @@ Parallel to the IMU-based approach, a line of work focuses on lightweight time-f
 - [[../concepts/densely-gated-convolutional-attention-network|DenGCAN]]
 - [[../concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
 - [[../concepts/attention-gate|Attention Gate (AG)]]
+- [[../concepts/adaptive-time-frequency-attention|Adaptive Temporal-Frequency Attention (ATFA)]]
+- [[../concepts/sensor-failure-robust-fusion|Sensor-Failure Robust Multi-Modal Fusion]]
 
 ## Related Sources
 
 - [[wiki/sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 - [[wiki/sources/zhang-2022-bone-conducted-speech-dissertation|Zhang 2022: BC Statistical Analysis]]
 - [[wiki/sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]
+- [[wiki/sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]]

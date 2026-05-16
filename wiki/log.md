@@ -1609,3 +1609,33 @@ aw/papers/wang-2026-directional-sfanc-reverberant/full-text.md\ — extracted fr
   - `wiki/concepts/bcs-guided-speech-enhancement.md` — added cross-refs and source link
   - `wiki/synthesis/multimodal-bc-speech-enhancement.md` — added Lightweight T-F Domain Fusion (2024) section
   - `wiki/index.md` — added 2 entities, 3 concepts, 1 source; updated statistics
+
+---
+
+## [2026-05-16] ingest | Liu, Chen & Yin 2025 ATFA Robust BC/AC Fusion
+
+- **Source**: `raw/papers/liu-2025-robust-fusion-bc-ac-attention/full-text.md`  (ICASSP 2025, DOI 10.1109/ICASSP49660.2025.10888094)
+- **Pages created**:
+  - `wiki/sources/liu-2025-robust-fusion-bc-ac-attention.md` -- full source page
+  - `wiki/entities/zhenglong-liu.md` (lead author, Dalian Univ. of Technology)
+  - `wiki/entities/zhe-chen.md` (corresponding author)
+  - `wiki/entities/fuliang-yin.md` (co-author)
+  - `wiki/concepts/adaptive-time-frequency-attention.md` -- dual-axis MHSA over T and F + AHA module
+  - `wiki/concepts/sensor-failure-robust-fusion.md` -- random modality dropout + dual-mask architecture
+- **Pages updated**:
+  - `wiki/concepts/bcs-guided-speech-enhancement.md` -- comparison table now lists DenGCAN, ATFA Dual-Mask, VibOmni; new robustness section; Liu 2025 added to Related Sources
+  - `wiki/concepts/bone-conduction.md` -- new `Sensor-Failure Robustness` subsection; Liu 2025 added to sources
+  - `wiki/synthesis/multimodal-bc-speech-enhancement.md` -- new `2.5 Attention-Driven Robust Fusion (2025)` subsection; ATFA + sensor-failure-robust-fusion in Related Concepts; Liu 2025 in frontmatter sources
+  - `wiki/index.md` -- entries added (3 entities, 2 concepts, 1 source); statistics updated to 414 / 165 / 152 / 73
+  - `wiki/concepts/index.md` -- added DenGCAN, iAFF, AG, ATFA, sensor-failure-robust-fusion
+  - `wiki/entities/index.md` -- added Liu, Chen, Yin (and back-filled Kelan Kuang, Feiran Yang)
+  - `wiki/sources/index.md` -- added Kuang 2024 and Liu 2025
+- **Key insights**:
+  - **Pre-fusion via shared convolution** -- a single conv kernel is applied to *both* BC and AC inputs to extract common spectral patterns before encoding (multi-view input).
+  - **ATFA = MHSA along time + MHSA along frequency, in parallel**, combined with learnable α/β. Three cascaded ATFA blocks + an Adaptive Hierarchical Attention (AHA) for multi-scale fusion.
+  - **Dual-channel mask** -- four real masks (RI for AC, RI for BC) applied to the original two complex spectra and summed. A learned beamforming-style filter that generalizes to other backbones (validated +0.2 PESQ on a DCCRN).
+  - **Special Training (ST) for sensor-failure robustness**: with p = 0.2 each, replace AC or BC with low-amplitude noise during training. This transforms catastrophic failure (PESQ 1.18 when AC fails) into recovery (PESQ 2.54). Existing baselines (FCN, MMINet, AffFusion) actually *worsen* the signal when one sensor fails -- they amplify the dead channel.
+  - **Architectural robustness without ST**: the dual-mask + ATFA model already outperforms baselines under sensor failure, suggesting attention + per-modality output heads provide an inductive bias for graceful degradation.
+  - **Parameter efficiency**: 1.6M params (~5% of AffFusion's 31.4M) while beating it across all SNRs on ESMB BC corpus.
+  - **Practical positioning**: bridges the academic ATFA literature (Yu 2022, Liu 2025) with the BC/AC wearables space and surfaces a previously ignored failure mode (intermittent BC sensor invalidity due to wearing position/jaw motion).
+

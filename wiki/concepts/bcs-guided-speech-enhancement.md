@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-05-16
 sources:
   - raw/patents/us20260073929a1/full-text.md
+  - wiki/sources/liu-2025-robust-fusion-bc-ac-attention.md
 tags:
   - speech-enhancement
   - bone-conduction
@@ -63,8 +64,19 @@ BCS-based [[../concepts/voice-activity-detection|VAD]] provides noise-robust spe
 | Approach | BCS Usage | Architecture | Output |
 |----------|-----------|-------------|--------|
 | **BCS-guided SE** (Heitkaemper 2026) | Upscaled + concatenated with air STFT | Conformer | Ratio mask → iSTFT |
+| **DenGCAN** (Kuang 2024) | iAFF coarse-then-refined fusion of STFTs | Densely gated conv + sConformer | Complex ratio mask → iSTFT |
+| **ATFA Dual-Mask** (Liu 2025) | Shared-conv pre-fusion + concat | Dilated DenseNet + ATFA + AHA | Dual real masks (AC + BC) summed |
+| **VibOmni** (He 2025) | IMU vibration upscaled (BCF aug.) | Dual-encoder DPRNN | Spectrogram |
 | **Whisphone** (Fukumoto 2025) | In-ear MEMS captures occlusion BC | Separate channel | Direct voice input |
 | **OVAD** (Masilamani 2024) | Accelerometer for speech detection | VAD only | Binary speech flag |
+
+## Robustness to Sensor Failure
+
+Practical wearables suffer intermittent BC sensor invalidity (loose contact, jaw motion). Most fusion models trained only on valid-channel data degrade *worse than the surviving channel alone* when one sensor fails — they amplify the dead channel's noise into the output. The [[../concepts/sensor-failure-robust-fusion|sensor-failure robust fusion]] discipline addresses this through:
+
+- **Random modality dropout during training** (Liu 2025 "Special Training" — p=0.2 per channel)
+- **Per-modality output heads** (dual-mask) that allow the network to suppress a dead channel
+- **Multi-axis attention** ([[../concepts/adaptive-time-frequency-attention|ATFA]]) providing architectural robustness even without dropout training
 
 ## Related Concepts
 
@@ -78,9 +90,12 @@ BCS-based [[../concepts/voice-activity-detection|VAD]] provides noise-robust spe
 - [[../concepts/densely-gated-convolutional-attention-network|DenGCAN]]
 - [[../concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
 - [[../concepts/attention-gate|Attention Gate (AG)]]
+- [[../concepts/adaptive-time-frequency-attention|Adaptive Temporal-Frequency Attention (ATFA)]]
+- [[../concepts/sensor-failure-robust-fusion|Sensor-Failure Robust Multi-Modal Fusion]]
 
 ## Related Sources
 
 - [[../sources/he-2025-vibomni|He, Guo, Hou & Yan 2025: VibOmni]]
 - [[../sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Earbuds]]
 - [[../sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]
+- [[../sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]]

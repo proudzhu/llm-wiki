@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-04-17
+updated: 2026-05-16
 sources:
   - wiki/sources/kuang-2024-lightweight-speech-enhancement-bone-air.md
+  - wiki/sources/liu-2025-robust-fusion-bc-ac-attention.md
 tags:
 - acoustics
 - audio-processing
@@ -37,6 +38,9 @@ The **VibOmni** system (He et al. 2025) leverages IMU-captured bone-conducted vi
 ### 4. Voice Activity Detection (OVAD)
 Bone conduction sensors (accelerometers) in headphones can reliably detect when the wearer is speaking (Own Voice Activity Detection) because they are immune to external airborne noise. This is used to automatically switch to [[transparency-mode|Transparency Mode]] (Masilamani 2024).
 
+### 5. Sensor-Failure Robustness
+A practical concern with wearable BC sensors is intermittent invalidity (loose contact, jaw movement, body motion). Liu, Chen & Yin (2025) introduce a **Special Training** strategy — randomly disabling either the BC or AC channel during training (p = 0.2) — combined with a dual-channel mask architecture, achieving graceful degradation when one sensor fails. See [[sensor-failure-robust-fusion|Sensor-Failure Robust Multi-Modal Fusion]].
+
 ## Related Concepts
 
 - [[ear-canal-occlusion-effect|Ear Canal Occlusion Effect]]
@@ -48,6 +52,6 @@ Bone conduction sensors (accelerometers) in headphones can reliably detect when 
 ## Related Sources
 
 - [[../sources/zhang-2022-bone-conducted-speech-dissertation|Zhang 2022: Bone-Conducted Speech Dissertation]]
-
+- [[../sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]]
 - [[../sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
 - [[../sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]]

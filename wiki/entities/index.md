@@ -158,5 +158,10 @@
 | [[entities/tao-yu\|Tao Yu]] | Tencent Ethereal Audio Lab — Hybrid AHS for acoustic howling suppression | 2026-05-15 |
 | [[entities/xiaofan-zhan\|Xiaofan Zhan]] | Institute of Acoustics, CAS — DeepPEM-AFC for hearing aid feedback cancellation | 2026-05-15 |
 | [[entities/fengyuan-hao\|Fengyuan Hao]] | Institute of Acoustics, CAS — DeepPEM-AFC for hearing aid feedback cancellation | 2026-05-15 |
+| [[entities/kelan-kuang\|Kelan Kuang]] | Institute of Acoustics, CAS — DenGCAN, speech enhancement, BC fusion | 2026-05-16 |
+| [[entities/feiran-yang\|Feiran Yang]] | Institute of Acoustics, CAS — speech enhancement, BC/AC fusion | 2026-05-16 |
+| [[entities/zhenglong-liu\|Zhenglong Liu]] | Dalian Univ. of Technology — ATFA-based BC/AC fusion with sensor-failure robustness | 2026-05-16 |
+| [[entities/zhe-chen\|Zhe Chen]] | Dalian Univ. of Technology — multi-modal BC/AC speech enhancement, ATFA dual-mask | 2026-05-16 |
+| [[entities/fuliang-yin\|Fuliang Yin]] | Dalian Univ. of Technology — speech and audio processing, multi-modal fusion | 2026-05-16 |
 | [[entities/xiaodong-li\|Xiaodong Li]] | Institute of Acoustics, CAS — acoustic signal processing, hearing aids | 2026-05-15 |
 | [[entities/chengshi-zheng\|Chengshi Zheng]] | Institute of Acoustics, CAS — DeepPEM-AFC, frequency shift analysis for hearing aids | 2026-05-15 |

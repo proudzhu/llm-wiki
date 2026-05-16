@@ -147,5 +147,10 @@
 | [[concepts/self-attentive-recurrent-neural-network\|Self-Attentive Recurrent Neural Network]] | Recurrent + self-attention architecture used in Hybrid AHS for recursive speech enhancement | 2026-05-15 |
 | [[concepts/prediction-error-method\|Prediction Error Method]] | De-correlation technique using whitening pre-filters to solve bias in closed-loop AFC | 2026-05-15 |
 | [[concepts/hearing-aid-feedback-cancellation\|Hearing Aid Feedback Cancellation]] | AFC methods specific to hearing aids: PEM, FS, probe noise, and deep learning approaches | 2026-05-15 |
+| [[concepts/densely-gated-convolutional-attention-network\|DenGCAN]] | Lightweight encoder-decoder with dense blocks, gated conv, sConformer bottleneck, AG skip-connections | 2026-05-16 |
+| [[concepts/iterative-attentional-feature-fusion\|Iterative Attentional Feature Fusion (iAFF)]] | Coarse-then-refined multi-modal fusion using channel attention modules | 2026-05-16 |
+| [[concepts/attention-gate\|Attention Gate (AG)]] | Selective skip-connection mechanism using local + global feature attention | 2026-05-16 |
+| [[concepts/adaptive-time-frequency-attention\|Adaptive Temporal-Frequency Attention (ATFA)]] | Dual-axis MHSA over time and frequency with adaptive hierarchical fusion (AHA) for speech enhancement | 2026-05-16 |
+| [[concepts/sensor-failure-robust-fusion\|Sensor-Failure Robust Multi-Modal Fusion]] | Random modality dropout training + dual-mask architecture for graceful degradation when one sensor is invalid | 2026-05-16 |
 | [[concepts/frequency-shift-feedback-cancellation\|Frequency Shift Feedback Cancellation]] | De-correlation via small frequency offset; limited for HA but effective when combined with PEM | 2026-05-15 |
 | [[concepts/maximum-stable-gain\|Maximum Stable Gain]] | Maximum amplification before feedback instability; key metric for hearing aid performance | 2026-05-15 |
