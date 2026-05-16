@@ -34,10 +34,10 @@ A room impulse response (RIR) characterizes the acoustic response of an enclosed
 
 ## Related Concepts
 
-- [[../concepts/room-transfer-function|Room Transfer Function]]
-- [[../concepts/image-source-method|Image Source Method]]
-- [[../concepts/diffuse-sound-extraction|Diffuse Sound Extraction]]
+- [[concepts/room-transfer-function|Room Transfer Function]]
+- [[concepts/image-source-method|Image Source Method]]
+- [[concepts/diffuse-sound-extraction|Diffuse Sound Extraction]]
 
 ## Related Sources
 
-- [[../sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
+- [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]

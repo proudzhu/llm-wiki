@@ -39,7 +39,7 @@ Beyond head motion tracking, IMU accelerometers in earables can capture subtle b
 - The microphone captures full-band but noisy audio.
 - A fusion network combines both modalities for robust speech enhancement.
 
-VibOmni (He et al. 2025) demonstrates this approach, achieving 21% PESQ improvement and 40% WER reduction across 32 volunteers. The system also models the transfer function from audio to vibration as a [[../concepts/bone-conduction-function|Bone Conduction Function (BCF)]] for synthetic data augmentation.
+VibOmni (He et al. 2025) demonstrates this approach, achieving 21% PESQ improvement and 40% WER reduction across 32 volunteers. The system also models the transfer function from audio to vibration as a [[concepts/bone-conduction-function|Bone Conduction Function (BCF)]] for synthetic data augmentation.
 
 ## Advantages for Audio Applications
 
@@ -57,10 +57,10 @@ VibOmni (He et al. 2025) demonstrates this approach, achieving 21% PESQ improvem
 
 ## Related Concepts
 
-- [[../concepts/head-orientation-from-imu|Head Orientation from IMUs]]
-- [[../concepts/acoustic-zones-of-interest|Acoustic Zones of Interest]]
+- [[concepts/head-orientation-from-imu|Head Orientation from IMUs]]
+- [[concepts/acoustic-zones-of-interest|Acoustic Zones of Interest]]
 
 ## Related Sources
 
-- [[../sources/mohapatra-2026-localizing-conversation-partners-head-motion|Mohapatra et al. 2026: Localizing Conversation Partners Using Head Motion]]
-- [[../sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
+- [[sources/mohapatra-2026-localizing-conversation-partners-head-motion|Mohapatra et al. 2026: Localizing Conversation Partners Using Head Motion]]
+- [[sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]

@@ -21,16 +21,16 @@ tags:
 
 ## Related Sources
 
-- [[../sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]]
+- [[sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]]
 
 ## Related Concepts
 
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
-- [[../concepts/secondary-path-modeling|Secondary Path Modeling]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
+- [[concepts/secondary-path-modeling|Secondary Path Modeling]]
 
 ## Related Entities
 
-- [[../entities/fareedha|Fareedha]] — Co-author
-- [[../entities/vasundhara|Vasundhara]] — Co-author
-- [[../entities/asutosh-kar|Asutosh Kar]] — Co-author
+- [[entities/fareedha|Fareedha]] — Co-author
+- [[entities/vasundhara|Vasundhara]] — Co-author
+- [[entities/asutosh-kar|Asutosh Kar]] — Co-author

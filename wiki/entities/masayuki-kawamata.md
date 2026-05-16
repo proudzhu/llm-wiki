@@ -20,9 +20,9 @@ tags:
 
 ## Related Sources
 
-- [[../sources/akhtar-2006-vss-lms-online-spm|Akhtar 2006: VSS LMS for Online Secondary Path Modeling]]
+- [[sources/akhtar-2006-vss-lms-online-spm|Akhtar 2006: VSS LMS for Online Secondary Path Modeling]]
 
 ## Related Entities
 
-- [[../entities/muhammad-tahir-akhtar|Muhammad Tahir Akhtar]] — Doctoral student
-- [[../entities/masahide-abe|Masahide Abe]] — Colleague
+- [[entities/muhammad-tahir-akhtar|Muhammad Tahir Akhtar]] — Doctoral student
+- [[entities/masahide-abe|Masahide Abe]] — Colleague

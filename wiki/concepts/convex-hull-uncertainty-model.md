@@ -62,7 +62,7 @@ In Hilgemann et al. (2024), the convex hull model achieved:
 
 ## Comparison with Other Models
 
-| Property | Convex Hull | [[../concepts/elliptic-uncertainty-model|Elliptic]] | Multi-Disk | Disk |
+| Property | Convex Hull | [[concepts/elliptic-uncertainty-model|Elliptic]] | Multi-Disk | Disk |
 |:---------|:-----------|:---------|:-----------|:-----|
 | Area | Smallest | Small | Medium | Largest |
 | Contiguity | Yes | Yes | Yes | Yes |
@@ -72,12 +72,12 @@ In Hilgemann et al. (2024), the convex hull model achieved:
 
 ## Related Concepts
 
-- [[../concepts/uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
-- [[../concepts/elliptic-uncertainty-model|Elliptic Uncertainty Model]]
-- [[../concepts/robust-stability-constraint|Robust Stability Constraint]]
-- [[../concepts/feedback-anc|Feedback ANC]]
-- [[../concepts/internal-model-control|Internal Model Control]]
+- [[concepts/uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
+- [[concepts/elliptic-uncertainty-model|Elliptic Uncertainty Model]]
+- [[concepts/robust-stability-constraint|Robust Stability Constraint]]
+- [[concepts/feedback-anc|Feedback ANC]]
+- [[concepts/internal-model-control|Internal Model Control]]
 
 ## Related Sources
 
-- [[../sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
+- [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]

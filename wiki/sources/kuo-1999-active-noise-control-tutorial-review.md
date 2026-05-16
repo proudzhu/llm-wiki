@@ -15,7 +15,7 @@ aliases:
 
 # Active Noise Control: A Tutorial Review
 
-**Authors**: [[../entities/sen-m-kuo|Sen M. Kuo]], [[../entities/dennis-r-morgan|Dennis R. Morgan]]
+**Authors**: [[entities/sen-m-kuo|Sen M. Kuo]], [[entities/dennis-r-morgan|Dennis R. Morgan]]
 **Published**: Proceedings of the IEEE, Vol. 87, No. 6, June 1999, pp. 943–973
 **DOI**: [10.1109/5.763310](https://doi.org/10.1109/5.763310)
 **📎 Zotero**: [zotero://select/items/0_99AD6FSU](zotero://select/items/0_99AD6FSU) |
@@ -128,16 +128,16 @@ The paper highlights real-world applications in:
 
 ## Related Concepts
 
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]]
-- [[../concepts/internal-model-control|Internal Model Control]]
-- [[../concepts/adaptive-feedback-control|Adaptive Feedback Control]]
-- [[../concepts/broad-band-feedforward-anc|Broad-Band Feedforward ANC]]
-- [[../concepts/narrow-band-feedforward-anc|Narrow-Band Feedforward ANC]]
-- [[../concepts/multi-channel-anc|Multi-Channel ANC]]
-- [[../concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]]
-- [[../concepts/acoustic-feedback|Acoustic Feedback]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]]
+- [[concepts/internal-model-control|Internal Model Control]]
+- [[concepts/adaptive-feedback-control|Adaptive Feedback Control]]
+- [[concepts/broad-band-feedforward-anc|Broad-Band Feedforward ANC]]
+- [[concepts/narrow-band-feedforward-anc|Narrow-Band Feedforward ANC]]
+- [[concepts/multi-channel-anc|Multi-Channel ANC]]
+- [[concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]]
+- [[concepts/acoustic-feedback|Acoustic Feedback]]
 
 ## Related Sources
 

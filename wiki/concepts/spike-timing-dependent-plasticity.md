@@ -60,4 +60,4 @@ $$\frac{dw}{dt} = A_+ x_{pre} · δ_{post} - A_- x_{post} · δ_{pre}$$
 
 ## Related Sources
 
-- [[../sources/yamazaki-2022-spiking-nn-review|Yamazaki 2022: Spiking Neural Networks Review]]
+- [[sources/yamazaki-2022-spiking-nn-review|Yamazaki 2022: Spiking Neural Networks Review]]

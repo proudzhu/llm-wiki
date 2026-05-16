@@ -20,9 +20,9 @@ tags:
 
 ## Related Sources
 
-- [[../sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
+- [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
 
 ## Related Entities
 
-- [[../entities/stefan-liebich|Stefan Liebich]] — Co-author
-- [[../entities/peter-jax|Peter Jax]] — Supervisor, co-author
+- [[entities/stefan-liebich|Stefan Liebich]] — Co-author
+- [[entities/peter-jax|Peter Jax]] — Supervisor, co-author

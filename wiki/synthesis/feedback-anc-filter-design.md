@@ -385,20 +385,20 @@ Every feedback ANC design faces the same trade-off:
 
 ## Related Concepts
 
-- [[../concepts/feedback-anc|Feedback ANC]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/acoustic-feedback|Acoustic Feedback]]
-- [[../concepts/internal-model-control|Internal Model Control]]
-- [[../concepts/adaptive-feedback-control|Adaptive Feedback Control]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/model-predictive-control|Model Predictive Control]]
-- [[../concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
-- [[../concepts/minimum-variance-control|Minimum Variance Control]]
-- [[../concepts/variable-step-size-lms|Variable Step Size LMS]]
-- [[../concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]]
-- [[../concepts/uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
-- [[../concepts/robust-stability-constraint|Robust Stability Constraint]]
-- [[../concepts/online-secondary-path-modeling|Online Secondary Path Modeling]]
+- [[concepts/feedback-anc|Feedback ANC]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/acoustic-feedback|Acoustic Feedback]]
+- [[concepts/internal-model-control|Internal Model Control]]
+- [[concepts/adaptive-feedback-control|Adaptive Feedback Control]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/model-predictive-control|Model Predictive Control]]
+- [[concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
+- [[concepts/minimum-variance-control|Minimum Variance Control]]
+- [[concepts/variable-step-size-lms|Variable Step Size LMS]]
+- [[concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]]
+- [[concepts/uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
+- [[concepts/robust-stability-constraint|Robust Stability Constraint]]
+- [[concepts/online-secondary-path-modeling|Online Secondary Path Modeling]]
 
 ## Related Synthesis
 

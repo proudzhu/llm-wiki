@@ -41,7 +41,7 @@ Unlike SFANC which is limited by its pre-trained library, **GFANC** ([UCJR5KDZ](
 **Deep ANC** ([EPKYEGUP](zotero://select/items/EPKYEGUP)) employs a **Convolutional Recurrent Network (CRN)** to estimate the complex spectrograms (real and imaginary parts) of the anti-noise signal.
 - **Nonlinear Handling**: Successfully attenuates noise in the presence of nonlinear distortions where linear FxLMS diverges.
 - **Delay Compensation**: Uses specialized training strategies to handle the causality constraints and latency of real-time audio buffers.
-- **Speech Preservation**: Dai 2026 extends Deep ANC with a [[../concepts/speech-preserving-anc|speech-preserving loss function]] that algebraically cancels speech components, training the network to selectively cancel noise while leaving speech transparent. Validated in reverberant environments (RT60=0.3s) with 10-15 dB improvement over FxLMS at harmonic frequencies.
+- **Speech Preservation**: Dai 2026 extends Deep ANC with a [[concepts/speech-preserving-anc|speech-preserving loss function]] that algebraically cancels speech components, training the network to selectively cancel noise while leaving speech transparent. Validated in reverberant environments (RT60=0.3s) with 10-15 dB improvement over FxLMS at harmonic frequencies.
 
 ### 2.4 Joint Deep SPE + Adaptive Control
 Fareedha et al. (2026) propose an end-to-end framework that jointly estimates the secondary path and generates adaptive control signals. Unlike SFANC/GFANC which assume a fixed secondary path, **DeepSPE** (Conv1D + BiLSTM + Attention) predicts $\hat{S}(z)$ in real time at frame level (32 ms), achieving −16.27 dB NMSE — 3.92 dB better than the best classical method. The estimated path conditions an **ANC-Net** controller that uses SE blocks and temporal attention to generate binary weights for selecting sub-control filters from a pre-trained bank. The dual-stream design achieves −12.38 dB NMSE with only 1.05 M parameters and 0.43 ms latency, outperforming ResNet50 (23.5 M params, 2.6 ms) and DenseNet121 (7.98 M params, 2.2 ms).
@@ -72,15 +72,15 @@ Recent research focuses on using RNNs as "stability observers." By predicting th
 
 ## Related Concepts
 
-- [[../concepts/active-noise-control]]
-- [[../concepts/filtered-x-lms-algorithm]]
-- [[../concepts/deep-learning-for-signal-processing]]
-- [[../concepts/secondary-path-modeling]]
-- [[../concepts/deep-secondary-path-estimation]]
+- [[concepts/active-noise-control]]
+- [[concepts/filtered-x-lms-algorithm]]
+- [[concepts/deep-learning-for-signal-processing]]
+- [[concepts/secondary-path-modeling]]
+- [[concepts/deep-secondary-path-estimation]]
 
 ## Related Sources
 
-- [[../sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
-- [[../sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]]
-- [[../sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]]
-- [[../sources/yin-2023-selective-fixed-filter-anc-headphones|Yin 2023: Selective Fixed-Filter ANC Based on Frequency Response Matching in Headphones]]
+- [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
+- [[sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]]
+- [[sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]]
+- [[sources/yin-2023-selective-fixed-filter-anc-headphones|Yin 2023: Selective Fixed-Filter ANC Based on Frequency Response Matching in Headphones]]

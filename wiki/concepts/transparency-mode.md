@@ -46,11 +46,11 @@ During transparency mode, background media (music, podcasts) may be lowered in v
 - [[voice-activity-detection|Voice Activity Detection]]
 - [[beamforming|Beamforming]]
 - [[ear-canal-occlusion-effect|Ear Canal Occlusion Effect]]
-- [[../sources/fukumoto-2025-whisphone-paper-reading-note|Whisphone]]
+- [[sources/fukumoto-2025-whisphone-paper-reading-note|Whisphone]]
 
 ## Related Sources
 
-- [[../sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]]
-- [[../sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
-- [[../sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
-- [[../sources/lu-2024-headphone-speech-listening-ambient-noise|Lu 2024: Headphone Speech Listening]]
+- [[sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]]
+- [[sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
+- [[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
+- [[sources/lu-2024-headphone-speech-listening-ambient-noise|Lu 2024: Headphone Speech Listening]]

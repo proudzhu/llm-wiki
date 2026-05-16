@@ -97,7 +97,7 @@ For ANC, a Kalman filter can be used to:
 
 ## Related Sources
 
-- [[../sources/welch-2006-kalman-filter-intro|Welch & Bishop 2006: Introduction to the Kalman Filter]]
-- [[../sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]
-- [[../sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]
-- [[../sources/zhang-2024-neural-kalman-howling|Zhang 2024: Neural Network Augmented Kalman Filter for AHS]]
+- [[sources/welch-2006-kalman-filter-intro|Welch & Bishop 2006: Introduction to the Kalman Filter]]
+- [[sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]
+- [[sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]
+- [[sources/zhang-2024-neural-kalman-howling|Zhang 2024: Neural Network Augmented Kalman Filter for AHS]]

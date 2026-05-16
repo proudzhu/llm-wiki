@@ -60,4 +60,4 @@ The CRN follows an **encoder-decoder** structure with a recurrent bottleneck:
 
 ## Related Sources
 
-- [[../sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
+- [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]

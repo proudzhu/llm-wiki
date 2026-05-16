@@ -41,4 +41,4 @@ BPTT treats the RNN as a deep feedforward network with one layer per time step, 
 
 ## Related Sources
 
-- [[../sources/zucchet-2026-forward-propagation-errors-through-time|Zucchet 2026: Forward Propagation of Errors Through Time]]
+- [[sources/zucchet-2026-forward-propagation-errors-through-time|Zucchet 2026: Forward Propagation of Errors Through Time]]

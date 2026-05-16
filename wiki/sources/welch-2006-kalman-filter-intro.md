@@ -13,7 +13,7 @@ tags:
 
 # Welch & Bishop 2006: Introduction to the Kalman Filter
 
-**Authors**: [[../entities/greg-welch|Greg Welch]], [[../entities/gary-bishop|Gary Bishop]]
+**Authors**: [[entities/greg-welch|Greg Welch]], [[entities/gary-bishop|Gary Bishop]]
 **Institution**: University of North Carolina at Chapel Hill, Department of Computer Science
 **Year**: 2006 (original TR 95-041, first published 1995, updated 2006)
 **Type**: Technical Report / Tutorial
@@ -164,7 +164,7 @@ The error covariance $P_k$ converges from initial $P_0 = 1$ to approximately $0.
 
 ## Related Entities
 
-- [[../entities/greg-welch|Greg Welch]]
-- [[../entities/gary-bishop|Gary Bishop]]
+- [[entities/greg-welch|Greg Welch]]
+- [[entities/gary-bishop|Gary Bishop]]
 
 ## Related Sources

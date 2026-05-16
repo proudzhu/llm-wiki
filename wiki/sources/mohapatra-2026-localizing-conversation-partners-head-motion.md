@@ -17,7 +17,7 @@ tags:
 
 # Mohapatra, Murdock, Aroudi, Ananthabhotla, Menon, Xu & Khaleghimeybodi 2026: Localizing Conversation Partners Using Head Motion
 
-**Authors**: [[../entities/payal-mohapatra|Payal Mohapatra]]¹, [[../entities/calvin-murdock|Calvin Murdock]]², [[../entities/ali-aroudi|Ali Aroudi]]², [[../entities/ishwarya-ananthabhotla|Ishwarya Ananthabhotla]]², [[../entities/anjali-menon|Anjali Menon]]², [[../entities/buye-xu|Buye Xu]]², [[../entities/morteza-khaleghimeybodi|Morteza Khaleghimeybodi]]²
+**Authors**: [[entities/payal-mohapatra|Payal Mohapatra]]¹, [[entities/calvin-murdock|Calvin Murdock]]², [[entities/ali-aroudi|Ali Aroudi]]², [[entities/ishwarya-ananthabhotla|Ishwarya Ananthabhotla]]², [[entities/anjali-menon|Anjali Menon]]², [[entities/buye-xu|Buye Xu]]², [[entities/morteza-khaleghimeybodi|Morteza Khaleghimeybodi]]²
 
 **Affiliations**: ¹ Northwestern University, Evanston, IL, USA · ² Meta Reality Labs, Redmond, WA, USA
 
@@ -31,7 +31,7 @@ tags:
 
 ## Summary
 
-Proposes HALo (Head-orientation-based Acoustic zone Localization), a network that uses IMU-derived head orientation from smartglasses to infer a user's [[../concepts/acoustic-zones-of-interest|acoustic zones of interest]] in seated conversations. By integrating an *a priori* estimate of the number of conversation partners, HALo achieves 0.78 accuracy and 0.62 macro-F1 for localization—a 24% average improvement over baselines. Complemented by CoCo (Classifying the number of Conversation partners), which achieves 0.74 accuracy for partner count estimation (35% gain over baselines), the combined HALo-CoCo system demonstrates a minimal end-to-end speech enhancement pipeline with clear advantages in noisy multiparty settings.
+Proposes HALo (Head-orientation-based Acoustic zone Localization), a network that uses IMU-derived head orientation from smartglasses to infer a user's [[concepts/acoustic-zones-of-interest|acoustic zones of interest]] in seated conversations. By integrating an *a priori* estimate of the number of conversation partners, HALo achieves 0.78 accuracy and 0.62 macro-F1 for localization—a 24% average improvement over baselines. Complemented by CoCo (Classifying the number of Conversation partners), which achieves 0.74 accuracy for partner count estimation (35% gain over baselines), the combined HALo-CoCo system demonstrates a minimal end-to-end speech enhancement pipeline with clear advantages in noisy multiparty settings.
 
 ## Problem Formulation
 
@@ -163,14 +163,14 @@ HALo-based steering provides **+1.4 dB SNR improvement** over frontal steering i
 
 ## Related Concepts
 
-- [[../concepts/acoustic-zones-of-interest|Acoustic Zones of Interest]]
-- [[../concepts/head-orientation-from-imu|Head Orientation from IMUs]]
-- [[../concepts/beamforming|Beamforming]]
-- [[../concepts/voice-activity-detection|Voice Activity Detection]]
-- [[../concepts/inertial-measurement-unit|Inertial Measurement Unit]]
+- [[concepts/acoustic-zones-of-interest|Acoustic Zones of Interest]]
+- [[concepts/head-orientation-from-imu|Head Orientation from IMUs]]
+- [[concepts/beamforming|Beamforming]]
+- [[concepts/voice-activity-detection|Voice Activity Detection]]
+- [[concepts/inertial-measurement-unit|Inertial Measurement Unit]]
 
 ## Related Sources
 
-- [[../sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
-- [[../sources/frank-2026-low-latency-roi-beamforming|Frank & Cohen 2026: Low-latency ROI Beamforming for Smart Glasses]]
-- [[../sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]]
+- [[sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
+- [[sources/frank-2026-low-latency-roi-beamforming|Frank & Cohen 2026: Low-latency ROI Beamforming for Smart Glasses]]
+- [[sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]]

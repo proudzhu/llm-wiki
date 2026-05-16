@@ -25,7 +25,7 @@ PhD researcher at the **Department of Signal Processing and Communications**, He
 
 ## Notable Work
 
-- [[../sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]] — PhD dissertation on combining FF + MVC + IMC into novel ANC control structures
+- [[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]] — PhD dissertation on combining FF + MVC + IMC into novel ANC control structures
 
 ## Contact
 
@@ -38,4 +38,4 @@ PhD researcher at the **Department of Signal Processing and Communications**, He
 
 ## Related Sources
 
-- [[../sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
+- [[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]

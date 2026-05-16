@@ -57,9 +57,9 @@ $$
 
 ## Related Concepts
 
-- [[../concepts/densely-gated-convolutional-attention-network|DenGCAN]]
-- [[../concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
+- [[concepts/densely-gated-convolutional-attention-network|DenGCAN]]
+- [[concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
 
 ## Related Sources
 
-- [[../sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]
+- [[sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]

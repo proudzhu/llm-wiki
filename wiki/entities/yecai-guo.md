@@ -16,12 +16,12 @@ Researcher affiliated with **Jiangsu Key Laboratory of Meteorological Observatio
 
 ## Research Areas
 
-- [[../concepts/active-noise-control|Active Noise Control]]
+- [[concepts/active-noise-control|Active Noise Control]]
 - Signal processing
 
 ## Notable Work
 
-- [[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Co-author
+- [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Co-author
 
 ## Contact
 
@@ -31,4 +31,4 @@ Researcher affiliated with **Jiangsu Key Laboratory of Meteorological Observatio
 
 ## Related Sources
 
-- [[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]]
+- [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]]

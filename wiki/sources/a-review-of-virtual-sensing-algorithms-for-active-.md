@@ -19,7 +19,7 @@ tags:
 
 # Moreau, Cazzolato, Zander & Petersen 2008: A Review of Virtual Sensing Algorithms for Active Noise Control
 
-**Authors**: [[../entities/danielle-moreau|Danielle Moreau]], [[../entities/ben-cazzolato|Ben Cazzolato]], [[../entities/anthony-zander|Anthony Zander]], [[../entities/cornelis-petersen|Cornelis Petersen]]
+**Authors**: [[entities/danielle-moreau|Danielle Moreau]], [[entities/ben-cazzolato|Ben Cazzolato]], [[entities/anthony-zander|Anthony Zander]], [[entities/cornelis-petersen|Cornelis Petersen]]
 **Institution**: School of Mechanical Engineering, The University of Adelaide, Australia
 **Published**: Algorithms, Vol. 1, No. 2, pp. 69–99, 2008
 **Type**: Review Article
@@ -164,13 +164,13 @@ The paper validates all methods on various setups:
 
 ## Related Concepts
 
-- [[../concepts/virtual-sensing|Virtual Sensing]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/remote-microphone-technique|Remote Microphone Technique]]
-- [[../concepts/kalman-filter|Kalman Filter]]
+- [[concepts/virtual-sensing|Virtual Sensing]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/remote-microphone-technique|Remote Microphone Technique]]
+- [[concepts/kalman-filter|Kalman Filter]]
 
 ## Related Synthesis
 
-- [[../synthesis/virtual-sensing-evolution|Evolution of Virtual Sensing in ANC]]
-- [[../synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]]
-- [[../synthesis/kalman-filter-theory-and-application|Kalman Filter Theory and Application]]
+- [[synthesis/virtual-sensing-evolution|Evolution of Virtual Sensing in ANC]]
+- [[synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]]
+- [[synthesis/kalman-filter-theory-and-application|Kalman Filter Theory and Application]]

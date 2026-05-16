@@ -64,4 +64,4 @@ where $\Gamma_{lm}$ are the spherical harmonic coefficients and $L$ controls the
 
 ## Related Sources
 
-- [[../sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation|Görtz et al. 2026: Blind DDAP Estimation Using Smart Glasses]]
+- [[sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation|Görtz et al. 2026: Blind DDAP Estimation Using Smart Glasses]]

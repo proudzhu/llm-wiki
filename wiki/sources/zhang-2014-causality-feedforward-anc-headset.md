@@ -16,7 +16,7 @@ tags:
 
 # Zhang & Qiu 2014: Causality Study on Feedforward ANC Headset with Different Noise Directions
 
-**Authors**: [[../entities/limin-zhang|Limin Zhang]]\*, [[../entities/xiaojun-qiu|Xiaojun Qiu]]
+**Authors**: [[entities/limin-zhang|Limin Zhang]]\*, [[entities/xiaojun-qiu|Xiaojun Qiu]]
 **Institution**: Key Laboratory of Modern Acoustics, Institute of Acoustics, Nanjing University, Nanjing 210093, China
 **Venue**: Applied Acoustics, Vol. 80, pp. 36–44
 **Year**: 2014
@@ -127,14 +127,14 @@ where $l_1$ is the source-to-reference-microphone distance, $l_2$ is the source-
 
 ## Related Concepts
 
-- [[../concepts/causality|Causality in ANC]] — the core topic of this paper
-- [[../concepts/feedforward-anc|Feedforward ANC]] — the ANC architecture studied
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — the adaptive algorithm used
-- [[../concepts/wiener-filter|Wiener Filter]] — the optimal filter framework for the analysis
-- [[../concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — direction-dependent ANC performance motivates D-SFANC
-- [[../concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]] — DoA determines causality condition
-- [[../concepts/active-noise-control|Active Noise Control]]
+- [[concepts/causality|Causality in ANC]] — the core topic of this paper
+- [[concepts/feedforward-anc|Feedforward ANC]] — the ANC architecture studied
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — the adaptive algorithm used
+- [[concepts/wiener-filter|Wiener Filter]] — the optimal filter framework for the analysis
+- [[concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — direction-dependent ANC performance motivates D-SFANC
+- [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]] — DoA determines causality condition
+- [[concepts/active-noise-control|Active Noise Control]]
 
 ## Related Synthesis
 
-- [[../synthesis/anc-architecture-evolution|ANC Architecture Evolution]]
+- [[synthesis/anc-architecture-evolution|ANC Architecture Evolution]]

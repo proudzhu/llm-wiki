@@ -14,7 +14,7 @@ tags:
 
 # Bendersky 2026: Notes on Lagrange Interpolating Polynomials
 
-**Author**: [[../entities/eli-bendersky|Eli Bendersky]]
+**Author**: [[entities/eli-bendersky|Eli Bendersky]]
 **Published**: 2026
 **Type**: Blog post
 **URL**: [eli.thegreenplace.net](https://eli.thegreenplace.net/2026/notes-on-lagrange-interpolating-polynomials/)
@@ -92,7 +92,7 @@ Proof by induction: subtract $x_0$ times the previous column from each column, f
 
 ## Related Concepts
 
-- [[../concepts/lagrange-interpolation|Lagrange Interpolation]]
-- [[../concepts/vandermonde-matrix|Vandermonde Matrix]]
-- [[../concepts/numerical-stability|Numerical Stability]]
-- [[../concepts/symbolic-computation|Symbolic Computation]]
+- [[concepts/lagrange-interpolation|Lagrange Interpolation]]
+- [[concepts/vandermonde-matrix|Vandermonde Matrix]]
+- [[concepts/numerical-stability|Numerical Stability]]
+- [[concepts/symbolic-computation|Symbolic Computation]]

@@ -14,7 +14,7 @@ tags:
 
 # ANC Architecture Evolution: Feedforward → Feedback → Hybrid
 
-> Cross-source synthesis connecting [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]], [[../sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]], [[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]], and [[../sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]].
+> Cross-source synthesis connecting [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]], [[sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]], [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]], and [[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]].
 
 ---
 
@@ -34,7 +34,7 @@ This fundamental constraint drives all subsequent design decisions.
 
 ## 1. Feedforward ANC (Kuo 1999)
 
-The standard architecture described in [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]:
+The standard architecture described in [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]:
 
 ```
 Primary noise ──→ Reference mic ──→ FxLMS controller ──→ Secondary speaker
@@ -75,11 +75,11 @@ This transforms the feedback system into an equivalent feedforward configuration
 
 ### 2.2 MVC (Minimum Variance Control)
 
-[[../sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]] also describes MVC-based feedback: the controller minimizes the variance of the error signal directly, without IMC's reference synthesis. This requires solving optimization problems and is vulnerable to changing conditions.
+[[sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]] also describes MVC-based feedback: the controller minimizes the variance of the error signal directly, without IMC's reference synthesis. This requires solving optimization problems and is vulnerable to changing conditions.
 
 ### 2.3 Simplified Adaptive Feedback (Wu 2014)
 
-[[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] eliminates IMC's convolution by using the error signal **directly** as the reference:
+[[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] eliminates IMC's convolution by using the error signal **directly** as the reference:
 $$x_{sa}(n) = e(n)$$
 
 This trades noise reduction performance (3-5 dB less than IMC-based systems) for:
@@ -93,7 +93,7 @@ This trades noise reduction performance (3-5 dB less than IMC-based systems) for
 
 ## 3. Hybrid ANC (Benois 2020)
 
-[[../sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]] demonstrates that **neither feedforward nor feedback alone is optimal** for headphones:
+[[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]] demonstrates that **neither feedforward nor feedback alone is optimal** for headphones:
 
 | Scenario | Feedforward alone | Feedback alone | Hybrid |
 |----------|------------------|----------------|--------|
@@ -119,9 +119,9 @@ The **pseudo-cascaded** implementation processes them sequentially rather than i
 
 | Architecture | Primary Algorithm | Adaptive? | Computational Cost | Performance |
 |-------------|-------------------|-----------|-------------------|-------------|
-| Feedforward | [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] | Yes | $O(L_x + L_{\hat{S}})$ | 10-25 dB |
-| Feedback (IMC) | IMC + [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] | Yes | $O(L_x + 2L_{\hat{S}})$ | 8-20 dB |
-| Feedback (Simplified) | [[../concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]] (error as reference) | Yes | $O(L_x)$ | 5-15 dB |
+| Feedforward | [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] | Yes | $O(L_x + L_{\hat{S}})$ | 10-25 dB |
+| Feedback (IMC) | IMC + [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] | Yes | $O(L_x + 2L_{\hat{S}})$ | 8-20 dB |
+| Feedback (Simplified) | [[concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]] (error as reference) | Yes | $O(L_x)$ | 5-15 dB |
 | Feedback (MVC) | RLS / Optimal control | Yes (offline) | $O(N_{state}^2)$ | 8-18 dB |
 | Hybrid (FF+IMC+MVC) | Modified N-FxLMS | Yes | $O(L_x + 3L_{\hat{S}} + N_{state}^2)$ | 15-30 dB |
 
@@ -137,7 +137,7 @@ The **pseudo-cascaded** implementation processes them sequentially rather than i
 
 ### 5.2 The Computational Bottleneck
 
-The convolution with $\hat{S}(z)$ dominates computation in IMC-based systems. [[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] shows this can be eliminated entirely. [[../sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]] shows it can be managed through pseudo-cascaded processing.
+The convolution with $\hat{S}(z)$ dominates computation in IMC-based systems. [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] shows this can be eliminated entirely. [[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]] shows it can be managed through pseudo-cascaded processing.
 
 ### 5.3 The Stability Trade-off
 
@@ -147,24 +147,24 @@ All adaptive ANC systems face the same stability constraint: the phase error in 
 
 ## Related Concepts
 
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]]
-- [[../concepts/internal-model-control|Internal Model Control]]
-- [[../concepts/adaptive-feedback-control|Adaptive Feedback Control]]
-- [[../concepts/broad-band-feedforward-anc|Broad-Band Feedforward ANC]]
-- [[../concepts/narrow-band-feedforward-anc|Narrow-Band Feedforward ANC]]
-- [[../concepts/multi-channel-anc|Multi-Channel ANC]]
-- [[../concepts/acoustic-feedback|Acoustic Feedback]]
-- [[../concepts/frequency-domain-anc|Frequency-Domain ANC]]
-- [[../concepts/subband-anc|Subband ANC]]
-- [[../concepts/model-predictive-control|Model Predictive Control]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]]
+- [[concepts/internal-model-control|Internal Model Control]]
+- [[concepts/adaptive-feedback-control|Adaptive Feedback Control]]
+- [[concepts/broad-band-feedforward-anc|Broad-Band Feedforward ANC]]
+- [[concepts/narrow-band-feedforward-anc|Narrow-Band Feedforward ANC]]
+- [[concepts/multi-channel-anc|Multi-Channel ANC]]
+- [[concepts/acoustic-feedback|Acoustic Feedback]]
+- [[concepts/frequency-domain-anc|Frequency-Domain ANC]]
+- [[concepts/subband-anc|Subband ANC]]
+- [[concepts/model-predictive-control|Model Predictive Control]]
 
 ## Related Sources
 
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
-- [[../sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]]
-- [[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]]
-- [[../sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
-- [[../sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]]
-- [[../sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
+- [[sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]]
+- [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]]
+- [[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
+- [[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]]
+- [[sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]

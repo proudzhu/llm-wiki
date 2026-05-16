@@ -21,13 +21,13 @@ tags:
 
 ## Related Sources
 
-- [[../sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
+- [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
 
 ## Related Concepts
 
-- [[../concepts/device-specific-hrtf|Device-Specific HRTF]]
+- [[concepts/device-specific-hrtf|Device-Specific HRTF]]
 
 ## Related Entities
 
-- [[../entities/stefan-liebich|Stefan Liebich]] — Co-author
-- [[../entities/janina-fels|Janina Fels]] — Supervisor, co-author
+- [[entities/stefan-liebich|Stefan Liebich]] — Co-author
+- [[entities/janina-fels|Janina Fels]] — Supervisor, co-author

@@ -106,20 +106,20 @@ Parallel to the IMU-based approach, a line of work focuses on lightweight time-f
 
 - **Liu, Chen & Yin (ICASSP 2025) — ATFA Dual-Mask**: Reframes BC/AC fusion around two architectural ideas and one training innovation:
   - **Pre-fusion via shared convolution** — extracts common spectral patterns across modalities before encoding (multi-view input).
-  - **[[../concepts/adaptive-time-frequency-attention|Adaptive Temporal-Frequency Attention (ATFA)]]** — three cascaded blocks of dual-axis MHSA (time + frequency) with adaptive hierarchical fusion (AHA), replacing recurrent middle layers.
+  - **[[concepts/adaptive-time-frequency-attention|Adaptive Temporal-Frequency Attention (ATFA)]]** — three cascaded blocks of dual-axis MHSA (time + frequency) with adaptive hierarchical fusion (AHA), replacing recurrent middle layers.
   - **Dual-channel mask** — four real masks (RI for AC + RI for BC), applied to the original two complex spectra and summed (beamforming-inspired). Validated to also improve a DCCRN backbone.
-  - **Special Training (ST)** — random modality dropout (p = 0.2 per channel) during training. Transforms the model from catastrophically failing under sensor invalidity to **gracefully recovering** (PESQ 1.18 → 2.54 when AC fails). See [[../concepts/sensor-failure-robust-fusion|Sensor-Failure Robust Multi-Modal Fusion]].
+  - **Special Training (ST)** — random modality dropout (p = 0.2 per channel) during training. Transforms the model from catastrophically failing under sensor invalidity to **gracefully recovering** (PESQ 1.18 → 2.54 when AC fails). See [[concepts/sensor-failure-robust-fusion|Sensor-Failure Robust Multi-Modal Fusion]].
   - **Key result**: 1.6M params (~5% of Aff-Fusion), +0.2 PESQ / +0.03 STOI over Aff-Fusion across all SNRs from −5 to 15 dB, on the Elevoc ESMB BC corpus.
 
 ## Related Concepts
 
-- [[../concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
-- [[../concepts/bone-conduction|Bone Conduction]]
-- [[../concepts/densely-gated-convolutional-attention-network|DenGCAN]]
-- [[../concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
-- [[../concepts/attention-gate|Attention Gate (AG)]]
-- [[../concepts/adaptive-time-frequency-attention|Adaptive Temporal-Frequency Attention (ATFA)]]
-- [[../concepts/sensor-failure-robust-fusion|Sensor-Failure Robust Multi-Modal Fusion]]
+- [[concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
+- [[concepts/bone-conduction|Bone Conduction]]
+- [[concepts/densely-gated-convolutional-attention-network|DenGCAN]]
+- [[concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
+- [[concepts/attention-gate|Attention Gate (AG)]]
+- [[concepts/adaptive-time-frequency-attention|Adaptive Temporal-Frequency Attention (ATFA)]]
+- [[concepts/sensor-failure-robust-fusion|Sensor-Failure Robust Multi-Modal Fusion]]
 
 ## Related Sources
 

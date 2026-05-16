@@ -44,13 +44,13 @@ FS can be combined with other AFC methods for improved performance:
 
 ## Related Concepts
 
-- [[../concepts/acoustic-feedback|Acoustic Feedback]]
-- [[../concepts/prediction-error-method|Prediction Error Method]]
-- [[../concepts/hearing-aid-feedback-cancellation|Hearing Aid Feedback Cancellation]]
-- [[../concepts/adaptive-feedback-control|Adaptive Feedback Control]]
+- [[concepts/acoustic-feedback|Acoustic Feedback]]
+- [[concepts/prediction-error-method|Prediction Error Method]]
+- [[concepts/hearing-aid-feedback-cancellation|Hearing Aid Feedback Cancellation]]
+- [[concepts/adaptive-feedback-control|Adaptive Feedback Control]]
 
 ## Related Sources
 
-- [[../sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — FS+DeepPEM-AFC achieves optimal performance
+- [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — FS+DeepPEM-AFC achieves optimal performance
 - Schroeder 1964: Improvement of acoustic-feedback stability by frequency shifting
 - Zheng et al. 2016: Analysis of additional stable gain by frequency shifting

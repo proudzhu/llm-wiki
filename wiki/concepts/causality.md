@@ -30,7 +30,7 @@ where:
 
 - **Broadband ANC is delay-limited**: The maximum cancellation bandwidth is inversely proportional to the total loop delay. Typical headphone ANC systems have ~0.5 ms loop delay, limiting effective broadband cancellation to ~1 kHz
 - **Narrowband ANC is not delay-limited**: Periodic noise can be predicted from past samples, so causality is not a constraint for narrow-band feedforward ANC
-- **Feedback ANC bypasses causality**: Since feedback ANC uses only the error signal, it does not require a time-advanced reference — but it is subject to the [[../concepts/feedback-anc|waterbed effect]] instead
+- **Feedback ANC bypasses causality**: Since feedback ANC uses only the error signal, it does not require a time-advanced reference — but it is subject to the [[concepts/feedback-anc|waterbed effect]] instead
 
 ## Direction-Dependent Causality (Zhang & Qiu 2014)
 
@@ -67,15 +67,15 @@ Zhang & Qiu developed a Wiener-filter-based method (Eqs. 9–14 in their paper) 
 
 ## Related Concepts
 
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/feedforward-anc|Feedforward ANC]]
-- [[../concepts/feedback-anc|Feedback ANC]]
-- [[../concepts/hybrid-anc|Hybrid ANC]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/wiener-filter|Wiener Filter]]
-- [[../concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — direction-dependent causality motivates D-SFANC
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/feedforward-anc|Feedforward ANC]]
+- [[concepts/feedback-anc|Feedback ANC]]
+- [[concepts/hybrid-anc|Hybrid ANC]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/wiener-filter|Wiener Filter]]
+- [[concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — direction-dependent causality motivates D-SFANC
 
 ## Related Sources
 
-- [[../sources/shen-2023-advanced-anc|Shen 2023: Advanced ANC Headphone]] — Wireless Reference ANC to overcome causality constraints
-- [[../sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — systematic analysis of direction-dependent causality
+- [[sources/shen-2023-advanced-anc|Shen 2023: Advanced ANC Headphone]] — Wireless Reference ANC to overcome causality constraints
+- [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — systematic analysis of direction-dependent causality

@@ -16,4 +16,4 @@ tags:
 
 ## Key Contributions
 
-- Proposed Spatial-Magnifier, a GAN-based network for spatial upsampling in multichannel speech enhancement ([[../sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026]])
+- Proposed Spatial-Magnifier, a GAN-based network for spatial upsampling in multichannel speech enhancement ([[sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026]])

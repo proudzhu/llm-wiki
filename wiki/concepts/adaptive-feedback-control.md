@@ -65,6 +65,6 @@ Typical applications: headsets, headrests, headphones, double-glazed windows, du
 
 ## Related Sources
 
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section IV: Adaptive Feedback ANC
-- [[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Proposes simplified adaptive feedback architecture
-- [[../sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC for hearing aids
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section IV: Adaptive Feedback ANC
+- [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Proposes simplified adaptive feedback architecture
+- [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC for hearing aids

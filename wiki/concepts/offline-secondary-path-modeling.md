@@ -62,8 +62,8 @@ The [[filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] tolerates moderate mod
 
 ## Sources
 
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section VI: Online Secondary-Path Modeling (describes offline as baseline)
-- [[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Uses offline secondary path modeling
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section VI: Online Secondary-Path Modeling (describes offline as baseline)
+- [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Uses offline secondary path modeling
 
 ## Related Concepts
 
@@ -75,5 +75,5 @@ The [[filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] tolerates moderate mod
 
 ## Related Sources
 
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
-- [[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]]
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
+- [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]]

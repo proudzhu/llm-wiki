@@ -17,7 +17,7 @@ tags:
 
 # Akhtar, Abe & Kawamata 2006: VSS LMS for Online Secondary Path Modeling
 
-**Authors**: [[../entities/muhammad-tahir-akhtar|Muhammad Tahir Akhtar]], [[../entities/masahide-abe|Masahide Abe]], [[../entities/masayuki-kawamata|Masayuki Kawamata]]
+**Authors**: [[entities/muhammad-tahir-akhtar|Muhammad Tahir Akhtar]], [[entities/masahide-abe|Masahide Abe]], [[entities/masayuki-kawamata|Masayuki Kawamata]]
 **Institutions**: Graduate School of Engineering, Tohoku University, Sendai, Japan
 **Published**: IEEE Transactions on Audio, Speech, and Language Processing, vol. 14, no. 2, pp. 720–726, March 2006
 **Type**: Journal Article
@@ -162,18 +162,18 @@ Where $L$, $M$, $J$ are tap-weight lengths of $W(z)$, $\hat{S}(z)$, and the thir
 
 ## Related Concepts
 
-- [[../concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/variable-step-size-lms|Variable Step Size LMS]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/secondary-path-modeling|Secondary Path Modeling]]
+- [[concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/variable-step-size-lms|Variable Step Size LMS]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/secondary-path-modeling|Secondary Path Modeling]]
 
 ## Related Sources
 
-- [[../sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]] — DeepSPE outperforms Akhtar's VSS-LMS by 3.92 dB NMSE
+- [[sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]] — DeepSPE outperforms Akhtar's VSS-LMS by 3.92 dB NMSE
 
 ## Related Entities
 
-- [[../entities/muhammad-tahir-akhtar|Muhammad Tahir Akhtar]]
-- [[../entities/masahide-abe|Masahide Abe]]
-- [[../entities/masayuki-kawamata|Masayuki Kawamata]]
+- [[entities/muhammad-tahir-akhtar|Muhammad Tahir Akhtar]]
+- [[entities/masahide-abe|Masahide Abe]]
+- [[entities/masayuki-kawamata|Masayuki Kawamata]]

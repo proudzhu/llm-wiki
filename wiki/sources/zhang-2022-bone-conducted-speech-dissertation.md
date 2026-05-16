@@ -229,14 +229,14 @@ Pitch extraction from synthesized BC speech outperforms extraction from both rec
 
 ## Related Concepts
 
-- [[../concepts/bone-conduction|Bone Conduction]]
-- [[../concepts/signal-processing|Signal Processing]]
-- [[../concepts/adaptive-filtering|Adaptive Filtering]]
+- [[concepts/bone-conduction|Bone Conduction]]
+- [[concepts/signal-processing|Signal Processing]]
+- [[concepts/adaptive-filtering|Adaptive Filtering]]
 
 ## Related Synthesis
 
-- [[../synthesis/multimodal-bc-speech-enhancement|Multimodal BC Speech Enhancement]]
+- [[synthesis/multimodal-bc-speech-enhancement|Multimodal BC Speech Enhancement]]
 
 ## Related Entities
 
-- [[../entities/shiming-zhang|Shiming Zhang]]
+- [[entities/shiming-zhang|Shiming Zhang]]

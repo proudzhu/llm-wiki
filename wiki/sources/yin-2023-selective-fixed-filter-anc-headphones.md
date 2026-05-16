@@ -16,7 +16,7 @@ tags:
 
 # Yin, Zhang, Wu, Zhou, Guo, Yang & Zhang 2023: Selective Fixed-Filter ANC Based on Frequency Response Matching in Headphones
 
-**Authors**: [[../entities/lan-yin|Lan Yin]], [[../entities/zeqiang-zhang|Zeqiang Zhang]], [[../entities/ming-wu|Ming Wu]], [[../entities/shuang-zhou|Shuang Zhou]], [[../entities/jianfeng-guo|Jianfeng Guo]], [[../entities/jun-yang|Jun Yang]], [[../entities/jianing-zhang|Jianing Zhang]]
+**Authors**: [[entities/lan-yin|Lan Yin]], [[entities/zeqiang-zhang|Zeqiang Zhang]], [[entities/ming-wu|Ming Wu]], [[entities/shuang-zhou|Shuang Zhou]], [[entities/jianfeng-guo|Jianfeng Guo]], [[entities/jun-yang|Jun Yang]], [[entities/jianing-zhang|Jianing Zhang]]
 
 **Institution**: Key Laboratory of Noise and Vibration Research, Institute of Acoustics, Chinese Academy of Sciences; University of Chinese Academy of Sciences
 
@@ -122,14 +122,14 @@ The 2D CNN model trained on **synthetic acoustic paths** was directly applied to
 
 ## Related Concepts
 
-- [[../concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — the broader framework this paper contributes to
-- [[../concepts/active-noise-control|Active Noise Control]] — parent domain
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — used to pre-train control filters
-- [[../concepts/feedforward-anc|Feedforward ANC]] — system architecture used
-- [[../concepts/frequency-response-matching|Frequency Response Matching]] — core mechanism of FRM-SFANC
+- [[concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — the broader framework this paper contributes to
+- [[concepts/active-noise-control|Active Noise Control]] — parent domain
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — used to pre-train control filters
+- [[concepts/feedforward-anc|Feedforward ANC]] — system architecture used
+- [[concepts/frequency-response-matching|Frequency Response Matching]] — core mechanism of FRM-SFANC
 
 ## Related Sources
 
-- [[../sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]] — extends SFANC with DoA prediction
-- [[../sources/wang-2026-directional-sfanc-reverberant|Wang 2026: Directional SFANC in Reverberant Environments]] — CNN-based directional SFANC
-- [[../sources/luo-2026-hybrid-gfanc-fxnlms|Luo 2026: Hybrid GFANC-FxNLMS]] — generative filter selection with adaptive refinement
+- [[sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]] — extends SFANC with DoA prediction
+- [[sources/wang-2026-directional-sfanc-reverberant|Wang 2026: Directional SFANC in Reverberant Environments]] — CNN-based directional SFANC
+- [[sources/luo-2026-hybrid-gfanc-fxnlms|Luo 2026: Hybrid GFANC-FxNLMS]] — generative filter selection with adaptive refinement

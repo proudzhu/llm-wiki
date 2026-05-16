@@ -15,7 +15,7 @@ tags:
 
 # Huang, Huynh, Thiergart & Habets 2026: NDF+
 
-**Authors**: [[../entities/weilong-huang|Weilong Huang]], [[../entities/le-nhat-tam-huynh|Le Nhat Tam Huynh]], [[../entities/oliver-thiergart|Oliver Thiergart]], [[../entities/emanuele-habets|Emanuël A. P. Habets]]
+**Authors**: [[entities/weilong-huang|Weilong Huang]], [[entities/le-nhat-tam-huynh|Le Nhat Tam Huynh]], [[entities/oliver-thiergart|Oliver Thiergart]], [[entities/emanuele-habets|Emanuël A. P. Habets]]
 **Institution**: International Audio Laboratories Erlangen, Friedrich-Alexander University Erlangen-Nuremberg (FAU), Germany
 **Venue**: arXiv preprint, 2026
 **Year**: 2026
@@ -157,14 +157,14 @@ NDF+ was applied to stereo recording using two coincident 1st-order Cardioids at
 
 ## Related Concepts
 
-- [[../concepts/neural-directional-filtering|Neural Directional Filtering]]
-- [[../concepts/virtual-directional-microphone|Virtual Directional Microphone]]
-- [[../concepts/diffuse-sound-extraction|Diffuse Sound Extraction]]
-- [[../concepts/directivity-pattern|Directivity Pattern]]
-- [[../concepts/fixed-beamformer|Fixed Beamformer]]
-- [[../concepts/differential-microphone-array|Differential Microphone Array]]
-- [[../concepts/room-transfer-function|Room Transfer Function]]
-- [[../concepts/joint-nonlinear-filtering|Joint Nonlinear Filtering]]
-- [[../concepts/white-noise-gain|White Noise Gain]]
+- [[concepts/neural-directional-filtering|Neural Directional Filtering]]
+- [[concepts/virtual-directional-microphone|Virtual Directional Microphone]]
+- [[concepts/diffuse-sound-extraction|Diffuse Sound Extraction]]
+- [[concepts/directivity-pattern|Directivity Pattern]]
+- [[concepts/fixed-beamformer|Fixed Beamformer]]
+- [[concepts/differential-microphone-array|Differential Microphone Array]]
+- [[concepts/room-transfer-function|Room Transfer Function]]
+- [[concepts/joint-nonlinear-filtering|Joint Nonlinear Filtering]]
+- [[concepts/white-noise-gain|White Noise Gain]]
 
 ## Related Synthesis

@@ -18,6 +18,6 @@ Key concepts include:
 
 ## Related Concepts
 
-- [[../concepts/sensitivity-function|Sensitivity Function]]
-- [[../concepts/waterbed-effect|Waterbed Effect]]
-- [[../concepts/q-parameterization|Q-Parameterization]]
+- [[concepts/sensitivity-function|Sensitivity Function]]
+- [[concepts/waterbed-effect|Waterbed Effect]]
+- [[concepts/q-parameterization|Q-Parameterization]]

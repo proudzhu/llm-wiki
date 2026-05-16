@@ -47,11 +47,11 @@ A practical concern with wearable BC sensors is intermittent invalidity (loose c
 - [[voice-activity-detection|Voice Activity Detection]]
 - [[bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
 - [[transparency-mode|Transparency Mode]]
-- [[../sources/fukumoto-2025-whisphone-paper-reading-note|Whisphone]]
+- [[sources/fukumoto-2025-whisphone-paper-reading-note|Whisphone]]
 
 ## Related Sources
 
-- [[../sources/zhang-2022-bone-conducted-speech-dissertation|Zhang 2022: Bone-Conducted Speech Dissertation]]
-- [[../sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]]
-- [[../sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
-- [[../sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]]
+- [[sources/zhang-2022-bone-conducted-speech-dissertation|Zhang 2022: Bone-Conducted Speech Dissertation]]
+- [[sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]]
+- [[sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
+- [[sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]]

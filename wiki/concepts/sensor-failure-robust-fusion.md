@@ -53,11 +53,11 @@ ST training transforms a 0.31 PESQ degradation (under AC failure) into a +1.30 P
 Surprisingly, the Liu 2025 model — even *without* ST training — already outperforms baselines under sensor failure (PESQ 2.62 vs. 1.98 best baseline when BC fails; 1.53 vs. 1.45 best baseline when AC fails). The authors attribute this to:
 
 - **Dual-channel mask architecture**: Each surviving channel has its own learnable mask, so the model can attenuate the dead channel's mask toward zero rather than blindly summing both.
-- **[[../concepts/adaptive-time-frequency-attention|ATFA]]**: Self-attention along time and frequency axes provides global context that can detect that one channel is uninformative.
+- **[[concepts/adaptive-time-frequency-attention|ATFA]]**: Self-attention along time and frequency axes provides global context that can detect that one channel is uninformative.
 
 ### 3. Voice Activity Gating
 
-Where applicable (e.g., [[../concepts/bcs-guided-speech-enhancement|BCS-guided SE]] in Heitkaemper 2026), a [[../concepts/voice-activity-detection|VAD]] derived from BC can gate the enhancement pathway, falling back to raw AC when no BC speech is detected.
+Where applicable (e.g., [[concepts/bcs-guided-speech-enhancement|BCS-guided SE]] in Heitkaemper 2026), a [[concepts/voice-activity-detection|VAD]] derived from BC can gate the enhancement pathway, falling back to raw AC when no BC speech is detected.
 
 ## Comparison with Conventional Robustness
 
@@ -79,15 +79,15 @@ This problem is distinct from standard noise robustness:
 
 ## Related Concepts
 
-- [[../concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
-- [[../concepts/bone-conduction|Bone Conduction]]
-- [[../concepts/adaptive-time-frequency-attention|Adaptive Temporal-Frequency Attention (ATFA)]]
-- [[../concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
-- [[../concepts/voice-activity-detection|Voice Activity Detection]]
-- [[../concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
+- [[concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
+- [[concepts/bone-conduction|Bone Conduction]]
+- [[concepts/adaptive-time-frequency-attention|Adaptive Temporal-Frequency Attention (ATFA)]]
+- [[concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
+- [[concepts/voice-activity-detection|Voice Activity Detection]]
+- [[concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
 
 ## Related Sources
 
-- [[../sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]]
-- [[../sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: Lightweight BC/AC Speech Enhancement]]
-- [[../sources/he-2025-vibomni|He et al. 2025: VibOmni]]
+- [[sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]]
+- [[sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: Lightweight BC/AC Speech Enhancement]]
+- [[sources/he-2025-vibomni|He et al. 2025: VibOmni]]

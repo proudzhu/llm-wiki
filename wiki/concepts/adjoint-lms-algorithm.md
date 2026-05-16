@@ -13,7 +13,7 @@ tags:
 
 # Adjoint LMS Algorithm
 
-The **Adjoint LMS (ALMS)** algorithm is a variant of the [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] that filters the **error signal** instead of the reference signal, achieving significant computational savings in multichannel ANC systems.
+The **Adjoint LMS (ALMS)** algorithm is a variant of the [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] that filters the **error signal** instead of the reference signal, achieving significant computational savings in multichannel ANC systems.
 
 ## Core Idea
 
@@ -54,10 +54,10 @@ where $\hat{S}^*$ is the adjoint (time-reversed) operator of $\hat{S}$.
 
 ## Related Concepts
 
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/multi-channel-anc|Multi-Channel ANC]]
-- [[../concepts/virtual-sensing|Virtual Sensing]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/multi-channel-anc|Multi-Channel ANC]]
+- [[concepts/virtual-sensing|Virtual Sensing]]
 
 ## Related Sources
 
-- [[../sources/wang-2024-computation-efficient-virtual-sensing|Wang 2024: Computation-Efficient Virtual Sensing with MCALMS]]
+- [[sources/wang-2024-computation-efficient-virtual-sensing|Wang 2024: Computation-Efficient Virtual Sensing with MCALMS]]

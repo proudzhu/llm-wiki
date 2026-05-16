@@ -14,6 +14,6 @@ The **Complex Ratio Mask (cRM)** is a mask-based speech enhancement target that 
 
 ## Related Concepts
 
-- [[../concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
-- [[../concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
-- [[../concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
+- [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
+- [[concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
+- [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]

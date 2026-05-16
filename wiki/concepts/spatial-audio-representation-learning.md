@@ -49,11 +49,11 @@ Operates in latent space as a high-level spatial regularizer, effective even whe
 
 ## Related Concepts
 
-- [[../concepts/virtual-microphone-estimation|Virtual Microphone Estimation]]
-- [[../concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
-- [[../concepts/beamforming|Beamforming]]
-- [[../concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
+- [[concepts/virtual-microphone-estimation|Virtual Microphone Estimation]]
+- [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[concepts/beamforming|Beamforming]]
+- [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
 
 ## Related Sources
 
-- [[../sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026: Spatial-Magnifier]]
+- [[sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026: Spatial-Magnifier]]

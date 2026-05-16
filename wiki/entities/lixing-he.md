@@ -22,4 +22,4 @@ tags:
 
 ## Related Sources
 
-- [[../sources/he-2025-vibomni|He, Guo, Hou & Yan 2025: VibOmni]]
+- [[sources/he-2025-vibomni|He, Guo, Hou & Yan 2025: VibOmni]]

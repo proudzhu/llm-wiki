@@ -228,17 +228,17 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 
 ## Related Concepts
 
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/frequency-domain-anc|Frequency-Domain ANC]]
-- [[../concepts/subband-anc|Subband ANC]]
-- [[../concepts/multi-channel-anc|Multi-Channel ANC]]
-- [[../concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
-- [[../concepts/generalized-maximum-correntropy-criterion|Generalized Maximum Correntropy Criterion]]
-- [[../concepts/model-predictive-control|Model Predictive Control]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/state-space-model|State-Space Model]]
-- [[../concepts/backpropagation-through-time|Backpropagation Through Time]]
-- [[../concepts/real-time-recurrent-learning|Real-Time Recurrent Learning]]
-- [[../concepts/linear-recurrent-unit|Linear Recurrent Unit]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/frequency-domain-anc|Frequency-Domain ANC]]
+- [[concepts/subband-anc|Subband ANC]]
+- [[concepts/multi-channel-anc|Multi-Channel ANC]]
+- [[concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
+- [[concepts/generalized-maximum-correntropy-criterion|Generalized Maximum Correntropy Criterion]]
+- [[concepts/model-predictive-control|Model Predictive Control]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/state-space-model|State-Space Model]]
+- [[concepts/backpropagation-through-time|Backpropagation Through Time]]
+- [[concepts/real-time-recurrent-learning|Real-Time Recurrent Learning]]
+- [[concepts/linear-recurrent-unit|Linear Recurrent Unit]]
 
 ## Related Sources

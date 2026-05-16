@@ -33,17 +33,17 @@ Professor Elliott has supervised numerous PhD students who have gone on to becom
 
 ## Related Concepts
 
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/feedback-anc|Feedback ANC]]
-- [[../concepts/internal-model-control|Internal Model Control]]
-- [[../concepts/minimum-variance-control|Minimum Variance Control]]
-- [[../concepts/multi-channel-anc|Multi-Channel ANC]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/feedback-anc|Feedback ANC]]
+- [[concepts/internal-model-control|Internal Model Control]]
+- [[concepts/minimum-variance-control|Minimum Variance Control]]
+- [[concepts/multi-channel-anc|Multi-Channel ANC]]
 
 ## Related Sources
 
-- [[../sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]]
-- [[../sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] (References his work extensively)
+- [[sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]]
+- [[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] (References his work extensively)
 
 ## Related Entities
 

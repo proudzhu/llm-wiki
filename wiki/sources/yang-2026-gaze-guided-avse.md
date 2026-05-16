@@ -117,17 +117,17 @@ $$Score(i) = \gamma \cdot D(i) + (1-\gamma) \cdot IoU(i)$$
 ---
 
 ## 相关概念
-- [[../concepts/transparency-mode|Transparency Mode]]
-- [[../concepts/voice-activity-detection|Voice Activity Detection]]
-- [[../concepts/beamforming|Beamforming]]
+- [[concepts/transparency-mode|Transparency Mode]]
+- [[concepts/voice-activity-detection|Voice Activity Detection]]
+- [[concepts/beamforming|Beamforming]]
 - [[wiki/concepts/state-space-model|State-Space Model]]
 - [[wiki/concepts/neural-networks|Neural Networks]]
 
 ## Related Concepts
 
-- [[../concepts/beamforming|Beamforming]]
-- [[../concepts/transparency-mode|Transparency Mode]]
-- [[../concepts/voice-activity-detection|Voice Activity Detection]]
+- [[concepts/beamforming|Beamforming]]
+- [[concepts/transparency-mode|Transparency Mode]]
+- [[concepts/voice-activity-detection|Voice Activity Detection]]
 - [[wiki/concepts/neural-networks|Neural Networks]]
 - [[wiki/concepts/state-space-model|State-Space Model]]
 

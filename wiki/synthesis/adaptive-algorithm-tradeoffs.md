@@ -50,7 +50,7 @@ No algorithm dominates on all three dimensions simultaneously.
 
 ## 1. Algorithm Catalog
 
-### 1.1 FxLMS ([[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]])
+### 1.1 FxLMS ([[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]])
 
 | Dimension | Rating | Notes |
 |-----------|--------|-------|
@@ -62,7 +62,7 @@ No algorithm dominates on all three dimensions simultaneously.
 
 **Worst for**: Impulsive noise environments, actuator-constrained systems.
 
-### 1.2 Leaky FxLMS ([[../concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]])
+### 1.2 Leaky FxLMS ([[concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]])
 
 | Dimension | Rating | Notes |
 |-----------|--------|-------|
@@ -74,7 +74,7 @@ No algorithm dominates on all three dimensions simultaneously.
 
 **Trade-off**: Leakage coefficient $\gamma \approx 0.9998$ slightly reduces steady-state NR (1-2 dB loss).
 
-### 1.3 Simplified Adaptive Feedback ([[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]])
+### 1.3 Simplified Adaptive Feedback ([[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]])
 
 | Dimension | Rating | Notes |
 |-----------|--------|-------|
@@ -98,7 +98,7 @@ No algorithm dominates on all three dimensions simultaneously.
 
 **Trade-off**: Extra computation for kernel evaluation; requires tuning $\alpha$ and $\beta$ parameters.
 
-### 1.5 MPC ([[../concepts/model-predictive-control|Model Predictive Control]])
+### 1.5 MPC ([[concepts/model-predictive-control|Model Predictive Control]])
 
 | Dimension | Rating | Notes |
 |-----------|--------|-------|
@@ -204,22 +204,22 @@ Where $L$ = filter length, $L_{\hat{S}}$ = secondary path length, $N_{state}$ = 
 
 ## Related Concepts
 
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]]
-- [[../concepts/simplified-adaptive-feedback-anc|Simplified Adaptive Feedback ANC]]
-- [[../concepts/generalized-maximum-correntropy-criterion|Generalized Maximum Correntropy Criterion]]
-- [[../concepts/model-predictive-control|Model Predictive Control]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/internal-model-control|Internal Model Control]]
-- [[../concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
-- [[../concepts/impulsive-noise|Impulsive Noise]]
-- [[../concepts/information-theoretic-learning|Information Theoretic Learning]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]]
+- [[concepts/simplified-adaptive-feedback-anc|Simplified Adaptive Feedback ANC]]
+- [[concepts/generalized-maximum-correntropy-criterion|Generalized Maximum Correntropy Criterion]]
+- [[concepts/model-predictive-control|Model Predictive Control]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/internal-model-control|Internal Model Control]]
+- [[concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
+- [[concepts/impulsive-noise|Impulsive Noise]]
+- [[concepts/information-theoretic-learning|Information Theoretic Learning]]
 
 ## Related Sources
 
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
-- [[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]]
-- [[../sources/chen-2016-generalized-correntropy-robust-adaptive-filtering|Chen 2016: Generalized Correntropy for Robust Adaptive Filtering]]
-- [[../sources/zhu-2020-robust-gmcc-anc-paper-reading-note|Zhu 2020: Robust GMCC for ANC Paper Reading Note]]
-- [[../sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]
-- [[../sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]]
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
+- [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]]
+- [[sources/chen-2016-generalized-correntropy-robust-adaptive-filtering|Chen 2016: Generalized Correntropy for Robust Adaptive Filtering]]
+- [[sources/zhu-2020-robust-gmcc-anc-paper-reading-note|Zhu 2020: Robust GMCC for ANC Paper Reading Note]]
+- [[sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]
+- [[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]]

@@ -78,9 +78,9 @@ The system conservatively reduces noise for Babble (5.30 dB) to protect speech, 
 
 ## Related Sources
 
-- [[../sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
+- [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 
 ## Related Synthesis
 
-- [[../synthesis/ai-driven-anc|AI-Driven ANC]]
-- [[../synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]]
+- [[synthesis/ai-driven-anc|AI-Driven ANC]]
+- [[synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]]

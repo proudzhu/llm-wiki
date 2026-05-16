@@ -77,10 +77,10 @@ tags:
 
 ## 与 Wiki 内容的关联
 
-- **去混响**：与 [[../sources/dietzen-2020-isclp-kalman|Dietzen 2020: ISCLP Kalman]] 的 MCLP 方法互补——Schwarz 用空间相干性，Dietzen 用线性预测
-- **多通道语音增强**：与 [[../queries/far-field-multichannel-speech-enhancement-algorithms|远场多麦克风语音增强综述]] 中的谱增强和波束形成章节直接相关
+- **去混响**：与 [[sources/dietzen-2020-isclp-kalman|Dietzen 2020: ISCLP Kalman]] 的 MCLP 方法互补——Schwarz 用空间相干性，Dietzen 用线性预测
+- **多通道语音增强**：与 [[queries/far-field-multichannel-speech-enhancement-algorithms|远场多麦克风语音增强综述]] 中的谱增强和波束形成章节直接相关
 - **空间相干性**：扩散声场相干性模型是 MVDR/MWF 等多通道方法的理论基础
-- **鲁棒 ASR**：空间特征向量作为 DNN 输入的思路，与 [[../sources/yang-2026-gaze-guided-avse|Yang 2026: Gaze-Guided AVSE]] 的多模态特征融合有方法论上的相似性
+- **鲁棒 ASR**：空间特征向量作为 DNN 输入的思路，与 [[sources/yang-2026-gaze-guided-avse|Yang 2026: Gaze-Guided AVSE]] 的多模态特征融合有方法论上的相似性
 
 ## 引用信息
 

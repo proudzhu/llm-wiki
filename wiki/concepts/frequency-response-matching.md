@@ -42,10 +42,10 @@ $$i^* = \underset{i \in \{1, \ldots, M\}}{\arg\min} \sum_\omega \left| |\hat{P}(
 
 ## Related Concepts
 
-- [[../concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — the ANC framework using FRM
-- [[../concepts/active-noise-control|Active Noise Control]] — parent domain
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — used for online modelling and pre-training
+- [[concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — the ANC framework using FRM
+- [[concepts/active-noise-control|Active Noise Control]] — parent domain
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — used for online modelling and pre-training
 
 ## Related Sources
 
-- [[../sources/yin-2023-selective-fixed-filter-anc-headphones|Yin 2023: Selective Fixed-Filter ANC Based on Frequency Response Matching in Headphones]] — introduces FRM-SFANC
+- [[sources/yin-2023-selective-fixed-filter-anc-headphones|Yin 2023: Selective Fixed-Filter ANC Based on Frequency Response Matching in Headphones]] — introduces FRM-SFANC

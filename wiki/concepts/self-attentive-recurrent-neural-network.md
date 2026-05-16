@@ -47,4 +47,4 @@ This architecture estimates a three-channel enhancement filter that is applied t
 
 ## Related Sources
 
-- [[../sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]
+- [[sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]

@@ -40,4 +40,4 @@ Research by Zucchet (2026) suggests that for stable linear systems like the LRU 
 
 ## Related Sources
 
-- [[../sources/zucchet-2026-forward-propagation-errors-through-time|Zucchet 2026: Forward Propagation of Errors Through Time]]
+- [[sources/zucchet-2026-forward-propagation-errors-through-time|Zucchet 2026: Forward Propagation of Errors Through Time]]

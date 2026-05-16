@@ -61,10 +61,10 @@ This contrasts with the **Vandermonde matrix** obtained when using the monomial 
 
 ## Related Concepts
 
-- [[../concepts/vandermonde-matrix|Vandermonde Matrix]] — alternative basis for polynomial interpolation
-- [[../concepts/numerical-stability|Numerical Stability]] — Vandermonde matrix ill-conditioning motivates Lagrange/Newton methods
-- [[../concepts/symbolic-computation|Symbolic Computation]] — CAS manipulation of polynomial expressions
+- [[concepts/vandermonde-matrix|Vandermonde Matrix]] — alternative basis for polynomial interpolation
+- [[concepts/numerical-stability|Numerical Stability]] — Vandermonde matrix ill-conditioning motivates Lagrange/Newton methods
+- [[concepts/symbolic-computation|Symbolic Computation]] — CAS manipulation of polynomial expressions
 
 ## Related Sources
 
-- [[../sources/eli-2026-lagrange-interpolation|Bendersky 2026: Notes on Lagrange Interpolating Polynomials]]
+- [[sources/eli-2026-lagrange-interpolation|Bendersky 2026: Notes on Lagrange Interpolating Polynomials]]

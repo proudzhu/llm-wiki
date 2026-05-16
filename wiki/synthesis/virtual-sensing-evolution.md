@@ -74,22 +74,22 @@ Note: Secondary path interpolation (DTW-based) addresses the moving-listener pro
 
 ## References
 
-[^1]: [[../sources/a-review-of-virtual-sensing-algorithms-for-active-|A Review of Virtual Sensing Algorithms for Active Noise Control]] (Zotero: [items/0_LJDPCZ9G](zotero://select/items/0_LJDPCZ9G))
-[^2]: [[../sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026: Hybrid ANC with Dual Compensation]] (Zotero: [items/0_AMKNDVMJ](zotero://select/items/0_AMKNDVMJ))
-[^3]: [[../sources/petersen-2008-kalman-filter-virtual-sensing-anc|A Kalman filter approach to virtual sensing for active noise control]] (Zotero: [items/0_WX2XSXDA](zotero://select/items/0_WX2XSXDA))
-[^4]: [[../sources/wang-2024-computation-efficient-virtual-sensing|Wang 2024: Computation-Efficient Virtual Sensing with MCALMS]] (Zotero: [items/0_YHFLXFQH](zotero://select/items/0_YHFLXFQH))
-[^5]: [[../sources/holzmueller-2026-obs-tasnet-virtual-sensing|Holzmüller 2026: Obs-TasNet for Virtual Sensing]] (Zotero: [items/0_WY4S7C6Z](zotero://select/items/0_WY4S7C6Z))
-[^6]: [[../sources/wang-2024-metric-learning-virtual-sensing|Wang 2024: Transferable Selective Virtual Sensing]] (Zotero: [items/0_NBYTXNH4](zotero://select/items/0_NBYTXNH4))
+[^1]: [[sources/a-review-of-virtual-sensing-algorithms-for-active-|A Review of Virtual Sensing Algorithms for Active Noise Control]] (Zotero: [items/0_LJDPCZ9G](zotero://select/items/0_LJDPCZ9G))
+[^2]: [[sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026: Hybrid ANC with Dual Compensation]] (Zotero: [items/0_AMKNDVMJ](zotero://select/items/0_AMKNDVMJ))
+[^3]: [[sources/petersen-2008-kalman-filter-virtual-sensing-anc|A Kalman filter approach to virtual sensing for active noise control]] (Zotero: [items/0_WX2XSXDA](zotero://select/items/0_WX2XSXDA))
+[^4]: [[sources/wang-2024-computation-efficient-virtual-sensing|Wang 2024: Computation-Efficient Virtual Sensing with MCALMS]] (Zotero: [items/0_YHFLXFQH](zotero://select/items/0_YHFLXFQH))
+[^5]: [[sources/holzmueller-2026-obs-tasnet-virtual-sensing|Holzmüller 2026: Obs-TasNet for Virtual Sensing]] (Zotero: [items/0_WY4S7C6Z](zotero://select/items/0_WY4S7C6Z))
+[^6]: [[sources/wang-2024-metric-learning-virtual-sensing|Wang 2024: Transferable Selective Virtual Sensing]] (Zotero: [items/0_NBYTXNH4](zotero://select/items/0_NBYTXNH4))
 
 ---
 
 ## Related Concepts
 
-- [[../concepts/virtual-sensing|Virtual Sensing Concept]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/kalman-filter|Kalman Filter]]
-- [[../concepts/state-space-model|State-Space Model]]
-- [[../concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
+- [[concepts/virtual-sensing|Virtual Sensing Concept]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/kalman-filter|Kalman Filter]]
+- [[concepts/state-space-model|State-Space Model]]
+- [[concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
 
 ## Related Synthesis
 
@@ -98,10 +98,10 @@ Note: Secondary path interpolation (DTW-based) addresses the moving-listener pro
 
 ## Related Sources
 
-- [[../sources/a-review-of-virtual-sensing-algorithms-for-active-|A Review of Virtual Sensing Algorithms for Active Noise Control]]
-- [[../sources/wang-2024-computation-efficient-virtual-sensing|Wang 2024: Computation-Efficient Virtual Sensing with MCALMS]]
-- [[../sources/holzmueller-2026-obs-tasnet-virtual-sensing|Holzmüller 2026: Obs-TasNet for Virtual Sensing]]
-- [[../sources/petersen-2008-kalman-filter-virtual-sensing-anc|A Kalman filter approach to virtual sensing for active noise control]]
-- [[../sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026: Hybrid ANC with Dual Compensation]]
-- [[../sources/wang-2024-metric-learning-virtual-sensing|Wang 2024: Transferable Selective Virtual Sensing]]
-- [[../sources/holzmuller-2026-dtw-secondary-path-anc|Holzmüller & Sontacchi 2026: DTW for Secondary Path Interpolation in ANC]]
+- [[sources/a-review-of-virtual-sensing-algorithms-for-active-|A Review of Virtual Sensing Algorithms for Active Noise Control]]
+- [[sources/wang-2024-computation-efficient-virtual-sensing|Wang 2024: Computation-Efficient Virtual Sensing with MCALMS]]
+- [[sources/holzmueller-2026-obs-tasnet-virtual-sensing|Holzmüller 2026: Obs-TasNet for Virtual Sensing]]
+- [[sources/petersen-2008-kalman-filter-virtual-sensing-anc|A Kalman filter approach to virtual sensing for active noise control]]
+- [[sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026: Hybrid ANC with Dual Compensation]]
+- [[sources/wang-2024-metric-learning-virtual-sensing|Wang 2024: Transferable Selective Virtual Sensing]]
+- [[sources/holzmuller-2026-dtw-secondary-path-anc|Holzmüller & Sontacchi 2026: DTW for Secondary Path Interpolation in ANC]]

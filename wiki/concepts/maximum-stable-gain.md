@@ -44,10 +44,10 @@ where F̂(k,l) is the estimated feedback path.
 
 ## Related Concepts
 
-- [[../concepts/hearing-aid-feedback-cancellation|Hearing Aid Feedback Cancellation]]
-- [[../concepts/acoustic-feedback|Acoustic Feedback]]
-- [[../concepts/adaptive-feedback-control|Adaptive Feedback Control]]
+- [[concepts/hearing-aid-feedback-cancellation|Hearing Aid Feedback Cancellation]]
+- [[concepts/acoustic-feedback|Acoustic Feedback]]
+- [[concepts/adaptive-feedback-control|Adaptive Feedback Control]]
 
 ## Related Sources
 
-- [[../sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — ASG and tracking time evaluation
+- [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — ASG and tracking time evaluation

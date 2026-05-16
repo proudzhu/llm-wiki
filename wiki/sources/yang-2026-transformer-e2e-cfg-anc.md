@@ -16,7 +16,7 @@ tags:
 
 # Yang, Luo, Zou, Wang, Huang & Gan 2026: Transformer-based E2E-CFG for ANC
 
-**Authors**: [[../entities/ziyi-yang|Ziyi Yang]], [[../entities/zhengding-luo|Zhengding Luo]], [[../entities/yisong-zou|Yisong Zou]], [[../entities/boxiang-wang|Boxiang Wang]], [[../entities/qirui-huang|Qirui Huang]], [[../entities/woon-seng-gan|Woon-Seng Gan]]
+**Authors**: [[entities/ziyi-yang|Ziyi Yang]], [[entities/zhengding-luo|Zhengding Luo]], [[entities/yisong-zou|Yisong Zou]], [[entities/boxiang-wang|Boxiang Wang]], [[entities/qirui-huang|Qirui Huang]], [[entities/woon-seng-gan|Woon-Seng Gan]]
 
 **Affiliation**: School of Electrical and Electronic Engineering, Nanyang Technological University, Singapore
 
@@ -140,12 +140,12 @@ where $\alpha_n$ follows a forgetting-factor scheme with $\lambda = 0.999$. The 
 
 ## Related Concepts
 
-- [[../concepts/active-noise-control|Active Noise Control]] — parent domain
-- [[../concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — SFANC/GFANC family of methods
-- [[../concepts/generative-fixed-filter-anc|Generative Fixed-Filter ANC]] — GFANC framework that E2E-CFG extends
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — adaptive baseline (FxNLMS)
-- [[../concepts/end-to-end-differentiable-anc|End-to-End Differentiable ANC]] — differentiable training paradigm
+- [[concepts/active-noise-control|Active Noise Control]] — parent domain
+- [[concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — SFANC/GFANC family of methods
+- [[concepts/generative-fixed-filter-anc|Generative Fixed-Filter ANC]] — GFANC framework that E2E-CFG extends
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — adaptive baseline (FxNLMS)
+- [[concepts/end-to-end-differentiable-anc|End-to-End Differentiable ANC]] — differentiable training paradigm
 
 ## Related Sources
 
-- [[../sources/luo-2026-hybrid-gfanc-fxnlms|Luo 2026: Hybrid GFANC-FxNLMS]] — unsupervised GFANC baseline with CNN co-processor
+- [[sources/luo-2026-hybrid-gfanc-fxnlms|Luo 2026: Hybrid GFANC-FxNLMS]] — unsupervised GFANC baseline with CNN co-processor

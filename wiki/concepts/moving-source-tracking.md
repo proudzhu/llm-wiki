@@ -55,11 +55,11 @@ Su et al. (2025) use a factor graph for filter pre-selection. Requires manual pa
 
 ## Related Concepts
 
-- [[../concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]] — spatial information for tracking
-- [[../concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — filter selection strategies for moving sources
-- [[../concepts/active-noise-control|Active Noise Control]] — application domain
-- [[../concepts/convolutional-recurrent-network|Convolutional Recurrent Network]] — neural architecture for trajectory prediction
+- [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]] — spatial information for tracking
+- [[concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — filter selection strategies for moving sources
+- [[concepts/active-noise-control|Active Noise Control]] — application domain
+- [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]] — neural architecture for trajectory prediction
 
 ## Related Sources
 
-- [[../sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]] — CRNN-based predictive tracking for ANC
+- [[sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]] — CRNN-based predictive tracking for ANC

@@ -37,4 +37,4 @@ The Kalman filter can be viewed as an adaptive filter with an optimal (minimum M
 
 ## Related Sources
 
-- [[../sources/welch-2006-kalman-filter-intro|Welch & Bishop 2006: Introduction to the Kalman Filter]]
+- [[sources/welch-2006-kalman-filter-intro|Welch & Bishop 2006: Introduction to the Kalman Filter]]

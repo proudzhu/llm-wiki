@@ -16,7 +16,7 @@ tags:
 
 # He, Guo, Hou & Yan 2025: VibOmni — Towards Scalable Bone-Conduction Speech Enhancement on Earables
 
-**Authors**: [[../entities/lixing-he|Lixing He]], [[../entities/yunqi-guo|Yunqi Guo]], [[../entities/haozheng-hou|Haozheng Hou]], [[../entities/zhenyu-yan|Zhenyu Yan]]
+**Authors**: [[entities/lixing-he|Lixing He]], [[entities/yunqi-guo|Yunqi Guo]], [[entities/haozheng-hou|Haozheng Hou]], [[entities/zhenyu-yan|Zhenyu Yan]]
 **Affiliation**: Department of Information Engineering, The Chinese University of Hong Kong (CUHK)
 **Venue**: arXiv preprint (submitted to IEEE Transactions on Mobile Computing)
 **Year**: 2025
@@ -136,17 +136,17 @@ VibOmni achieves **31× less latency** than FSN and **12× less** than SN on mob
 
 ## Related Concepts
 
-- [[../concepts/bone-conduction|Bone Conduction]]
-- [[../concepts/bone-conduction-function|Bone Conduction Function (BCF)]]
-- [[../concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
-- [[../concepts/inertial-measurement-unit|Inertial Measurement Unit (IMU)]]
-- [[../concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
-- [[../concepts/dprnn|Dual-Path RNN (DPRNN)]]
-- [[../concepts/spectrogram-analysis|Spectrogram Analysis]]
-- [[../concepts/voice-activity-detection|Voice Activity Detection]]
-- [[../concepts/self-supervised-speech-representation|Self-Supervised Speech Representation]]
-- [[../concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
+- [[concepts/bone-conduction|Bone Conduction]]
+- [[concepts/bone-conduction-function|Bone Conduction Function (BCF)]]
+- [[concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
+- [[concepts/inertial-measurement-unit|Inertial Measurement Unit (IMU)]]
+- [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[concepts/dprnn|Dual-Path RNN (DPRNN)]]
+- [[concepts/spectrogram-analysis|Spectrogram Analysis]]
+- [[concepts/voice-activity-detection|Voice Activity Detection]]
+- [[concepts/self-supervised-speech-representation|Self-Supervised Speech Representation]]
+- [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
 
 ## Related Synthesis
 
-- [[../synthesis/multi-modal-speech-enhancement|Multi-Modal Speech Enhancement]]
+- [[synthesis/multi-modal-speech-enhancement|Multi-Modal Speech Enhancement]]

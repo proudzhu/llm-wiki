@@ -22,7 +22,7 @@ where $\Phi_x$ is the clean-speech spatial covariance matrix and $\Phi_n$ is the
 
 ## Relationship to VSLF
 
-The MWF is a special case of the [[../concepts/variable-span-linear-filter|Variable Span Linear Filter]] with $\mu=1$ and $Q=M$ (full span).
+The MWF is a special case of the [[concepts/variable-span-linear-filter|Variable Span Linear Filter]] with $\mu=1$ and $Q=M$ (full span).
 
 ## SCM Reconstruction-Based MWF (R-MWF)
 
@@ -34,13 +34,13 @@ where $\Gamma_y(n)$ is the normalized observation SCM reconstructed from varianc
 
 ## Related Concepts
 
-- [[../concepts/wiener-filter|Wiener Filter]]
-- [[../concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
-- [[../concepts/variable-span-linear-filter|Variable Span Linear Filter]]
-- [[../concepts/mvdr-beamformer|MVDR Beamformer]]
-- [[../concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
+- [[concepts/wiener-filter|Wiener Filter]]
+- [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[concepts/variable-span-linear-filter|Variable Span Linear Filter]]
+- [[concepts/mvdr-beamformer|MVDR Beamformer]]
+- [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
 
 ## Related Sources
 
-- [[../sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
-- [[../sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
+- [[sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
+- [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]

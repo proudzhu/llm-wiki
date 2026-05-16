@@ -39,10 +39,10 @@ The **Whisphone** project (Fukumoto 2025) uses bone conduction and the [[ear-can
 
 ## Related Concepts
 
-- [[../sources/fukumoto-2025-whisphone-paper-reading-note|Whisphone]]
+- [[sources/fukumoto-2025-whisphone-paper-reading-note|Whisphone]]
 - [[bone-conduction|Bone Conduction]]
 - [[ear-canal-occlusion-effect|Ear Canal Occlusion Effect]]
 
 ## Related Sources
 
-- [[../sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
+- [[sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]

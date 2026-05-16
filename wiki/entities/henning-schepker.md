@@ -24,14 +24,14 @@ tags:
 
 ## Related Sources
 
-- [[../sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
+- [[sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
 
 ## Related Concepts
 
-- [[../concepts/acoustic-feedback|Acoustic Feedback]]
+- [[concepts/acoustic-feedback|Acoustic Feedback]]
 
 ## Related Entities
 
-- [[../entities/sina-miran|Sina Miran]] — Co-author
-- [[../entities/ivo-merks|Ivo Merks]] — Co-author
-- [[../entities/martin-mckinney|Martin McKinney]] — Co-author
+- [[entities/sina-miran|Sina Miran]] — Co-author
+- [[entities/ivo-merks|Ivo Merks]] — Co-author
+- [[entities/martin-mckinney|Martin McKinney]] — Co-author

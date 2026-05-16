@@ -33,7 +33,7 @@ This paper proposes a **Transferable Selective Virtual Sensing** method that uti
 
 ### The Scalability Gap in Neural Virtual Sensing
 
-[[../concepts/virtual-sensing|Virtual Sensing]] (VS) using Auxiliary Filters (AF-VS) is sensitive to changes in noise characteristics. While **Cognitive Virtual Sensing (CVS)** uses CNNs to select appropriate AFs, it suffers from:
+[[concepts/virtual-sensing|Virtual Sensing]] (VS) using Auxiliary Filters (AF-VS) is sensitive to changes in noise characteristics. While **Cognitive Virtual Sensing (CVS)** uses CNNs to select appropriate AFs, it suffers from:
 - **High Labeling Effort**: Requires retraining for every new ANC platform or noise environment
 - **Generalization Failure**: Conventional classifiers cannot handle noise types or acoustic paths not seen during training
 - **Resource Constraints**: Retraining deep models on embedded controllers is impractical
@@ -111,17 +111,17 @@ E_h(z) = E_p(z) - H_o(z) · X(z) = S_p(z)[W_opt(z) - W(z)]X(z)
 
 ## Related Concepts
 
-- [[../concepts/virtual-sensing|Virtual Sensing]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
+- [[concepts/virtual-sensing|Virtual Sensing]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
 
 ## Related Synthesis
 
-- [[../synthesis/virtual-sensing-evolution|Evolution of Virtual Sensing in ANC]]
-- [[../synthesis/ai-driven-anc|AI-Driven ANC]]
+- [[synthesis/virtual-sensing-evolution|Evolution of Virtual Sensing in ANC]]
+- [[synthesis/ai-driven-anc|AI-Driven ANC]]
 
 ## Related Entities
 
-- [[../entities/boxiang-wang|Boxiang Wang]]
-- [[../entities/dongyuan-shi|Dongyuan Shi]]
-- [[../entities/woon-seng-gan|Woon-Seng Gan]]
+- [[entities/boxiang-wang|Boxiang Wang]]
+- [[entities/dongyuan-shi|Dongyuan Shi]]
+- [[entities/woon-seng-gan|Woon-Seng Gan]]

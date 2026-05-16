@@ -182,10 +182,10 @@ A practical challenge: **how do you know if your ANC system has nonlinear distor
 
 ## Related Concepts
 
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
-- [[../concepts/generalized-maximum-correntropy-criterion|Generalized Maximum Correntropy Criterion]]
-- [[../concepts/information-theoretic-learning|Information Theoretic Learning]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
+- [[concepts/generalized-maximum-correntropy-criterion|Generalized Maximum Correntropy Criterion]]
+- [[concepts/information-theoretic-learning|Information Theoretic Learning]]
 
 ## Related Sources

@@ -25,7 +25,7 @@ Gary Bishop is a computer science researcher at UNC-Chapel Hill working on compu
 
 ## Related Sources
 
-- [[../sources/welch-2006-kalman-filter-intro|Welch & Bishop 2006: Introduction to the Kalman Filter]]
+- [[sources/welch-2006-kalman-filter-intro|Welch & Bishop 2006: Introduction to the Kalman Filter]]
 
 ## Related Concepts
 

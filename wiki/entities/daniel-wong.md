@@ -16,4 +16,4 @@ tags:
 
 ## Key Contributions
 
-- Co-authored Spatial-Magnifier for spatial upsampling in multichannel speech enhancement ([[../sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026]])
+- Co-authored Spatial-Magnifier for spatial upsampling in multichannel speech enhancement ([[sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026]])

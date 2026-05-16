@@ -48,16 +48,16 @@ NLMS varies the step size with the **power of the reference signal**. Akhtar's V
 
 In ANC online secondary path modeling:
 - Achieves −12.35 dB NMSE (cited in Fareedha 2026)
-- Outperformed by [[../concepts/deep-secondary-path-estimation|DeepSPE]] which achieves −16.27 dB NMSE
+- Outperformed by [[concepts/deep-secondary-path-estimation|DeepSPE]] which achieves −16.27 dB NMSE
 
 ## Related Concepts
 
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]]
-- [[../concepts/deep-secondary-path-estimation|Deep Secondary Path Estimation]]
-- [[../concepts/active-noise-control|Active Noise Control]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]]
+- [[concepts/deep-secondary-path-estimation|Deep Secondary Path Estimation]]
+- [[concepts/active-noise-control|Active Noise Control]]
 
 ## Related Sources
 
-- [[../sources/akhtar-2006-vss-lms-online-spm|Akhtar 2006: VSS LMS for Online Secondary Path Modeling]]
-- [[../sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]]
+- [[sources/akhtar-2006-vss-lms-online-spm|Akhtar 2006: VSS LMS for Online Secondary Path Modeling]]
+- [[sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]]

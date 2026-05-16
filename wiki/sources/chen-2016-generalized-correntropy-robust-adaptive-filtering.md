@@ -15,7 +15,7 @@ aliases:
 
 # Chen 2016: Generalized Correntropy for Robust Adaptive Filtering
 
-**Authors**: [[../entities/badong-chen|Badong Chen]], [[../entities/lei-xing|Lei Xing]], [[../entities/haiquan-zhao|Haiquan Zhao]], [[../entities/nanning-zheng|Nanning Zheng]], [[../entities/jose-c-principe|José C. Príncipe]]
+**Authors**: [[entities/badong-chen|Badong Chen]], [[entities/lei-xing|Lei Xing]], [[entities/haiquan-zhao|Haiquan Zhao]], [[entities/nanning-zheng|Nanning Zheng]], [[entities/jose-c-principe|José C. Príncipe]]
 **Published**: IEEE Transactions on Signal Processing, Vol. 64, No. 13, pp. 3376–3387, July 2016
 **DOI**: [10.1109/TSP.2016.2539127](https://doi.org/10.1109/TSP.2016.2539127)
 **📎 Zotero**: [zotero://select/items/0_HEYN2NCY](zotero://select/items/0_HEYN2NCY)
@@ -219,18 +219,18 @@ FXLMS degrades severely under impulsive noise (large error × fixed step size �
 
 ## Related Concepts
 
-- [[../concepts/correntropy|Correntropy]]
-- [[../concepts/generalized-correntropy|Generalized Correntropy]]
-- [[../concepts/maximum-correntropy-criterion|Maximum Correntropy Criterion]]
-- [[../concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
-- [[../concepts/generalized-gaussian-distribution|Generalized Gaussian Distribution]]
-- [[../concepts/active-noise-control|Active Noise Control]] — GMCC can be applied to ANC in impulsive noise environments
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — GMCC as a robust alternative to FXLMS
+- [[concepts/correntropy|Correntropy]]
+- [[concepts/generalized-correntropy|Generalized Correntropy]]
+- [[concepts/maximum-correntropy-criterion|Maximum Correntropy Criterion]]
+- [[concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
+- [[concepts/generalized-gaussian-distribution|Generalized Gaussian Distribution]]
+- [[concepts/active-noise-control|Active Noise Control]] — GMCC can be applied to ANC in impulsive noise environments
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — GMCC as a robust alternative to FXLMS
 
 ## Related Entities
 
-- [[../entities/badong-chen|Badong Chen]] — First author, Xi'an Jiaotong University
-- [[../entities/haiquan-zhao|Haiquan Zhao]] — Co-author, Southwest Jiaotong University (also appears in ANC literature)
-- [[../entities/jose-c-principe|José C. Príncipe]] — Co-author, University of Florida, pioneer of correntropy theory
+- [[entities/badong-chen|Badong Chen]] — First author, Xi'an Jiaotong University
+- [[entities/haiquan-zhao|Haiquan Zhao]] — Co-author, Southwest Jiaotong University (also appears in ANC literature)
+- [[entities/jose-c-principe|José C. Príncipe]] — Co-author, University of Florida, pioneer of correntropy theory
 
 ## Related Synthesis

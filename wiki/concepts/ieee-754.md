@@ -33,8 +33,8 @@ Understanding IEEE 754 is essential for:
 ## Related Concepts
 - [[floating-point-comparison|Floating-point Comparison]]
 - [[numerical-stability|Numerical Stability]]
-- [[../sources/its-ok-to-compare-floating-points|It's ok to compare floating points for equality]]
+- [[sources/its-ok-to-compare-floating-points|It's ok to compare floating points for equality]]
 
 ## Related Sources
 
-- [[../sources/its-ok-to-compare-floating-points|It's ok to compare floating points for equality]]
+- [[sources/its-ok-to-compare-floating-points|It's ok to compare floating points for equality]]

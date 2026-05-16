@@ -12,7 +12,7 @@ tags:
 
 # Frequency-Domain ANC
 
-**Frequency-Domain ANC** implements the adaptive filtering algorithm in the frequency domain using FFT-based block processing, rather than sample-by-sample time-domain processing. It is one of the "special algorithms" described in [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]].
+**Frequency-Domain ANC** implements the adaptive filtering algorithm in the frequency domain using FFT-based block processing, rather than sample-by-sample time-domain processing. It is one of the "special algorithms" described in [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]].
 
 ## Motivation
 
@@ -64,11 +64,11 @@ Each partition has its own delay line, and the outputs are summed. This trades a
 - [[filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — The time-domain baseline
 - [[subband-anc|Subband ANC]] — Alternative efficiency approach: decompose into subbands instead of full-block FFT
 - [[multi-channel-anc|Multi-Channel ANC]] — Frequency-domain processing is even more critical in multi-channel (complexity scales as $O(M \cdot L \cdot N)$)
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section VII-C: Frequency-Domain ANC
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section VII-C: Frequency-Domain ANC
 
 ## Sources
 
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section VII-C
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section VII-C
 ## Related Concepts
 
 - [[active-noise-control|Active Noise Control]]
@@ -78,4 +78,4 @@ Each partition has its own delay line, and the outputs are summed. This trades a
 
 ## Related Sources
 
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]

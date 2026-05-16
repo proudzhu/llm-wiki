@@ -30,13 +30,13 @@ The generalized eigenvalues $\Lambda$ (ordered decreasingly) determine the span 
 
 ## Related Concepts
 
-- [[../concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
-- [[../concepts/variable-span-linear-filter|Variable Span Linear Filter]]
-- [[../concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
-- [[../concepts/condition-number|Condition Number]]
-- [[../concepts/diagonal-loading|Diagonal Loading]]
+- [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
+- [[concepts/variable-span-linear-filter|Variable Span Linear Filter]]
+- [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[concepts/condition-number|Condition Number]]
+- [[concepts/diagonal-loading|Diagonal Loading]]
 
 ## Related Sources
 
-- [[../sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
-- [[../sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
+- [[sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
+- [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]

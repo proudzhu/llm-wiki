@@ -79,4 +79,4 @@ with final normalization so the average desired signal reduction factor equals 1
 
 ## Related Sources
 
-- [[../sources/frank-2026-low-latency-roi-beamforming|Frank & Cohen 2026: Low-latency Audio Front-end ROI Beamforming for Smart Glasses]]
+- [[sources/frank-2026-low-latency-roi-beamforming|Frank & Cohen 2026: Low-latency Audio Front-end ROI Beamforming for Smart Glasses]]

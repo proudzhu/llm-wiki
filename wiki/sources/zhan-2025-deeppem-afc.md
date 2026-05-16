@@ -16,7 +16,7 @@ tags:
 
 # Zhan, Hao, Li & Zheng 2025: DeepPEM-AFC
 
-**Authors**: [[../entities/xiaofan-zhan|Xiaofan Zhan]], [[../entities/fengyuan-hao|Fengyuan Hao]], [[../entities/xiaodong-li|Xiaodong Li]], [[../entities/chengshi-zheng|Chengshi Zheng]]
+**Authors**: [[entities/xiaofan-zhan|Xiaofan Zhan]], [[entities/fengyuan-hao|Fengyuan Hao]], [[entities/xiaodong-li|Xiaodong Li]], [[entities/chengshi-zheng|Chengshi Zheng]]
 **Institutions**: Key Laboratory of Noise and Vibration Research, Institute of Acoustics, Chinese Academy of Sciences; University of Chinese Academy of Sciences
 **Published**: ICASSP 2025, pp. 1-5
 **Type**: Conference Paper
@@ -105,12 +105,12 @@ Key findings:
 
 ## Related Concepts
 
-- [[../concepts/acoustic-feedback|Acoustic Feedback]]
-- [[../concepts/adaptive-feedback-control|Adaptive Feedback Control]]
-- [[../concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
-- [[../concepts/variable-step-size-lms|Variable Step-Size LMS]]
-- [[../concepts/prediction-error-method|Prediction Error Method]]
-- [[../concepts/hearing-aid-feedback-cancellation|Hearing Aid Feedback Cancellation]]
-- [[../concepts/frequency-shift-feedback-cancellation|Frequency Shift Feedback Cancellation]]
+- [[concepts/acoustic-feedback|Acoustic Feedback]]
+- [[concepts/adaptive-feedback-control|Adaptive Feedback Control]]
+- [[concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
+- [[concepts/variable-step-size-lms|Variable Step-Size LMS]]
+- [[concepts/prediction-error-method|Prediction Error Method]]
+- [[concepts/hearing-aid-feedback-cancellation|Hearing Aid Feedback Cancellation]]
+- [[concepts/frequency-shift-feedback-cancellation|Frequency Shift Feedback Cancellation]]
 
 ## Related Synthesis

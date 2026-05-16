@@ -42,13 +42,13 @@ The primary advantage of Neural-VME lies in **decoupling spatial representation 
 
 ## Related Concepts
 
-- [[../concepts/spatial-audio-representation-learning|Spatial Audio Representation Learning]]
-- [[../concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
-- [[../concepts/beamforming|Beamforming]]
-- [[../concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
-- [[../concepts/remote-microphone-technique|Remote Microphone Technique]]
+- [[concepts/spatial-audio-representation-learning|Spatial Audio Representation Learning]]
+- [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[concepts/beamforming|Beamforming]]
+- [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
+- [[concepts/remote-microphone-technique|Remote Microphone Technique]]
 
 ## Related Sources
 
-- [[../sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026: Spatial-Magnifier]]
-- [[../sources/farmani-2026-virtual-mic-beamforming-hearing-aid|Farmani 2026: VM Beamforming for Hearing Aids]]
+- [[sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026: Spatial-Magnifier]]
+- [[sources/farmani-2026-virtual-mic-beamforming-hearing-aid|Farmani 2026: VM Beamforming for Hearing Aids]]

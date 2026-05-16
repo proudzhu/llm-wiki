@@ -21,6 +21,6 @@ Researcher at **Anthropic**. Co-author of research on how AI assistance impacts 
 ## Related Entities
 
 - [[alex-tamkin|Alex Tamkin]] — Co-author
-- [[../concepts/ai-skill-formation|AI Skill Formation]] — Concept page
+- [[concepts/ai-skill-formation|AI Skill Formation]] — Concept page
 
 ## Related Sources

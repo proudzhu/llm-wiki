@@ -40,10 +40,10 @@ Head-orienting behavior serves as a proxy for inferring acoustic zones of intere
 
 ## Related Concepts
 
-- [[../concepts/head-orientation-from-imu|Head Orientation from IMUs]]
-- [[../concepts/beamforming|Beamforming]]
-- [[../concepts/voice-activity-detection|Voice Activity Detection]]
+- [[concepts/head-orientation-from-imu|Head Orientation from IMUs]]
+- [[concepts/beamforming|Beamforming]]
+- [[concepts/voice-activity-detection|Voice Activity Detection]]
 
 ## Related Sources
 
-- [[../sources/mohapatra-2026-localizing-conversation-partners-head-motion|Mohapatra et al. 2026: Localizing Conversation Partners Using Head Motion]]
+- [[sources/mohapatra-2026-localizing-conversation-partners-head-motion|Mohapatra et al. 2026: Localizing Conversation Partners Using Head Motion]]

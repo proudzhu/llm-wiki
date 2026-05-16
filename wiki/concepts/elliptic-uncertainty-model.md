@@ -64,16 +64,16 @@ The elliptic model is most beneficial when:
 
 It is less beneficial when:
 - Variations are quasi-circular (high frequencies ~4.6 kHz) — the disk model is already adequate
-- The distribution is irregular and non-elliptical — the [[../concepts/convex-hull-uncertainty-model|Convex Hull Uncertainty Model]] is better
+- The distribution is irregular and non-elliptical — the [[concepts/convex-hull-uncertainty-model|Convex Hull Uncertainty Model]] is better
 
 ## Related Concepts
 
-- [[../concepts/uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
-- [[../concepts/convex-hull-uncertainty-model|Convex Hull Uncertainty Model]]
-- [[../concepts/robust-stability-constraint|Robust Stability Constraint]]
-- [[../concepts/feedback-anc|Feedback ANC]]
-- [[../concepts/internal-model-control|Internal Model Control]]
+- [[concepts/uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
+- [[concepts/convex-hull-uncertainty-model|Convex Hull Uncertainty Model]]
+- [[concepts/robust-stability-constraint|Robust Stability Constraint]]
+- [[concepts/feedback-anc|Feedback ANC]]
+- [[concepts/internal-model-control|Internal Model Control]]
 
 ## Related Sources
 
-- [[../sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
+- [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]

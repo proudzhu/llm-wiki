@@ -58,7 +58,7 @@ $$S(z) = 1 - Q(z) \hat{G}(z)$$
 Fixed feedback controllers can be optimized via constrained least-squares over $Q(z)$, with robust stability constraints derived from [[wiki/concepts/uncertainty-modeling-for-anc|uncertainty models]]. Data-driven models (elliptic, convex hull) that more accurately capture plant variations enable 10–18 dB more attenuation than conventional disk models while maintaining robust stability.
 
 ### Constrained Optimization with Frequency Warping (Seo 2016)
-**Seo et al. (2016)** designed low-order feedback ANC filters using constrained optimization in the warped frequency domain. By combining [[../concepts/q-parameterization|Q-parameterization]] with [[../concepts/frequency-warping|frequency warping]], a 16th-order WFIR filter achieves ~19dB attenuation matching a 128th-order FIR at low frequencies. The warping parameter $\lambda$ provides a tunable trade-off between low-frequency resolution and noise boosting.
+**Seo et al. (2016)** designed low-order feedback ANC filters using constrained optimization in the warped frequency domain. By combining [[concepts/q-parameterization|Q-parameterization]] with [[concepts/frequency-warping|frequency warping]], a 16th-order WFIR filter achieves ~19dB attenuation matching a 128th-order FIR at low frequencies. The warping parameter $\lambda$ provides a tunable trade-off between low-frequency resolution and noise boosting.
 
 ### Simplified Adaptive Feedback ANC (SimpAFB)
 Proposed by **Wu et al. (2014)**, this method uses the error signal $e(n)$ **directly** as the reference signal. It eliminates the expensive IMC convolution, but relies heavily on the [[wiki/concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]] for stability.
@@ -95,11 +95,11 @@ Liebich et al. (2018) confirmed this experimentally: feedback ANC showed consist
 
 ## Related Sources
 
-- [[../sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]]
-- [[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]]
-- [[../sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
-- [[../sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
-- [[../sources/seo-2016-feedback-anc-constrained-optimization|Seo et al. 2016: Feedback ANC via Constrained Optimization]]
+- [[sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]]
+- [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]]
+- [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
+- [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
+- [[sources/seo-2016-feedback-anc-constrained-optimization|Seo et al. 2016: Feedback ANC via Constrained Optimization]]
 
 ## Related Concepts
 

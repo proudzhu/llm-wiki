@@ -69,10 +69,10 @@ where $\phi(\cdot)$ is a feature extractor and $\text{sg}(\cdot)$ is stop-gradie
 
 ## Related Concepts
 
-- [[../concepts/diffusion-models-for-speech|Diffusion Models for Speech Enhancement]]
-- [[../concepts/one-step-generative-models|One-Step Generative Models]]
-- [[../concepts/self-supervised-speech-representation|Self-Supervised Speech Representation]]
+- [[concepts/diffusion-models-for-speech|Diffusion Models for Speech Enhancement]]
+- [[concepts/one-step-generative-models|One-Step Generative Models]]
+- [[concepts/self-supervised-speech-representation|Self-Supervised Speech Representation]]
 
 ## Related Sources
 
-- [[../sources/xu-2026-drifting-models-speech-enhancement|Xu et al. 2026: Speech Enhancement Based on Drifting Models]]
+- [[sources/xu-2026-drifting-models-speech-enhancement|Xu et al. 2026: Speech Enhancement Based on Drifting Models]]

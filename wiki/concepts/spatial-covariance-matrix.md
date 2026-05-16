@@ -45,22 +45,22 @@ Normalization by trace transforms the SCM estimation problem from estimating abs
 
 ## Related Concepts
 
-- [[../concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
-- [[../concepts/beamforming|Beamforming]]
-- [[../concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
-- [[../concepts/mvdr-beamformer|MVDR Beamformer]]
-- [[../concepts/mpdr-beamformer|MPDR Beamformer]]
-- [[../concepts/variable-span-linear-filter|Variable Span Linear Filter]]
-- [[../concepts/spatial-coherence|Spatial Coherence]]
-- [[../concepts/variance-ratio-estimation|Variance Ratio Estimation]]
-- [[../concepts/diagonal-loading|Diagonal Loading]]
-- [[../concepts/condition-number|Condition Number]]
-- [[../concepts/white-noise-gain|White Noise Gain]]
-- [[../concepts/virtual-microphone-estimation|Virtual Microphone Estimation]]
+- [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[concepts/beamforming|Beamforming]]
+- [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
+- [[concepts/mvdr-beamformer|MVDR Beamformer]]
+- [[concepts/mpdr-beamformer|MPDR Beamformer]]
+- [[concepts/variable-span-linear-filter|Variable Span Linear Filter]]
+- [[concepts/spatial-coherence|Spatial Coherence]]
+- [[concepts/variance-ratio-estimation|Variance Ratio Estimation]]
+- [[concepts/diagonal-loading|Diagonal Loading]]
+- [[concepts/condition-number|Condition Number]]
+- [[concepts/white-noise-gain|White Noise Gain]]
+- [[concepts/virtual-microphone-estimation|Virtual Microphone Estimation]]
 
 ## Related Sources
 
-- [[../sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
-- [[../sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
-- [[../sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
-- [[../sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026: Spatial-Magnifier]]
+- [[sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
+- [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
+- [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
+- [[sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026: Spatial-Magnifier]]

@@ -72,9 +72,9 @@ The anti-noise radiates **upstream** to the reference microphone, corrupting the
 
 ## Related Sources
 
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section II: Broad-Band Feedforward ANC, FXLMS derivation
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section II: Broad-Band Feedforward ANC, FXLMS derivation
 
 ## Related Entities
 
-- [[../entities/sen-m-kuo|Sen M. Kuo]] — Author of the definitive FXLMS derivation
-- [[../entities/dennis-r-morgan|Dennis R. Morgan]] — Derived the FXLMS algorithm independently
+- [[entities/sen-m-kuo|Sen M. Kuo]] — Author of the definitive FXLMS derivation
+- [[entities/dennis-r-morgan|Dennis R. Morgan]] — Derived the FXLMS algorithm independently

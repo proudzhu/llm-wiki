@@ -26,15 +26,15 @@ His research also extends to the creation of personal sound zones using loudspea
 
 ## Related Concepts
 
-- [[../concepts/feedback-anc|Feedback ANC]]
-- [[../concepts/internal-model-control|Internal Model Control]]
-- [[../concepts/beamforming|Beamforming]]
-- [[../concepts/active-noise-control|Active Noise Control]]
+- [[concepts/feedback-anc|Feedback ANC]]
+- [[concepts/internal-model-control|Internal Model Control]]
+- [[concepts/beamforming|Beamforming]]
+- [[concepts/active-noise-control|Active Noise Control]]
 
 ## Related Sources
 
-- [[../sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]]
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] (References his work on feedback systems)
+- [[sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]]
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] (References his work on feedback systems)
 
 ## Related Entities
 

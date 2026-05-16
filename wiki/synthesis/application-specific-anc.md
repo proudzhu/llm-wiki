@@ -199,13 +199,13 @@ The specific implementation of each step differs, but the **sense-act-adapt loop
 
 ## Related Concepts
 
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/broad-band-feedforward-anc|Broad-Band Feedforward ANC]]
-- [[../concepts/narrow-band-feedforward-anc|Narrow-Band Feedforward ANC]]
-- [[../concepts/multi-channel-anc|Multi-Channel ANC]]
-- [[../concepts/beamforming|Beamforming]]
-- [[../concepts/feedback-anc|Feedback ANC]]
-- [[../concepts/hybrid-anc|Hybrid ANC]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/broad-band-feedforward-anc|Broad-Band Feedforward ANC]]
+- [[concepts/narrow-band-feedforward-anc|Narrow-Band Feedforward ANC]]
+- [[concepts/multi-channel-anc|Multi-Channel ANC]]
+- [[concepts/beamforming|Beamforming]]
+- [[concepts/feedback-anc|Feedback ANC]]
+- [[concepts/hybrid-anc|Hybrid ANC]]
 
 ## Related Sources

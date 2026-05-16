@@ -411,22 +411,22 @@ MPC 的计算复杂度为 $O(N_{state}^2) = O(225)$ 每控制步。
 
 ## 相关概念
 
-- [[../concepts/system-identification|System Identification]]
-- [[../concepts/state-space-model|State-Space Model]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/model-predictive-control|Model Predictive Control]]
-- [[../concepts/feedback-anc|Feedback ANC]]
-- [[../concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]]
-- [[../concepts/kalman-filter|Kalman Filter]]
+- [[concepts/system-identification|System Identification]]
+- [[concepts/state-space-model|State-Space Model]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/model-predictive-control|Model Predictive Control]]
+- [[concepts/feedback-anc|Feedback ANC]]
+- [[concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]]
+- [[concepts/kalman-filter|Kalman Filter]]
 
 ## Related Concepts
 
-- [[../concepts/feedback-anc|Feedback ANC]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/kalman-filter|Kalman Filter]]
-- [[../concepts/model-predictive-control|Model Predictive Control]]
-- [[../concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]]
-- [[../concepts/state-space-model|State-Space Model]]
-- [[../concepts/system-identification|System Identification]]
+- [[concepts/feedback-anc|Feedback ANC]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/kalman-filter|Kalman Filter]]
+- [[concepts/model-predictive-control|Model Predictive Control]]
+- [[concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]]
+- [[concepts/state-space-model|State-Space Model]]
+- [[concepts/system-identification|System Identification]]
 
 ## Related Sources

@@ -17,7 +17,7 @@ tags:
 
 # Oviste, Mowlaee, Badajoz-Davila, Jensen & Christensen 2026: Neural Variable Span Filters for Interpretable Multi-Channel Speech Enhancement
 
-**Authors**: [[../entities/tom-oviste|Tom Oviste]], [[../entities/pejman-mowlaee|Pejman Mowlaee]], [[../entities/javier-badajoz-davila|Javier Badajoz-Davila]], [[../entities/jesper-rindom-jensen|Jesper Rindom Jensen]], [[../entities/mads-graesboell-christensen|Mads Græsbøll Christensen]]
+**Authors**: [[entities/tom-oviste|Tom Oviste]], [[entities/pejman-mowlaee|Pejman Mowlaee]], [[entities/javier-badajoz-davila|Javier Badajoz-Davila]], [[entities/jesper-rindom-jensen|Jesper Rindom Jensen]], [[entities/mads-graesboell-christensen|Mads Græsbøll Christensen]]
 **Institutions**: GN Group, Ballerup, Denmark; Audio Analysis Lab, Aalborg University, Denmark
 **Published**: ICASSP 2026, pp. 20996–21000
 **Type**: Conference Paper
@@ -140,13 +140,13 @@ HVSF improves speech intelligibility and quality over end-to-end baselines while
 
 ## Related Concepts
 
-- [[../concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
-- [[../concepts/variable-span-linear-filter|Variable Span Linear Filter]]
-- [[../concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
-- [[../concepts/mvdr-beamformer|MVDR Beamformer]]
-- [[../concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
-- [[../concepts/generalized-eigenvalue-decomposition|Generalized Eigenvalue Decomposition]]
+- [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[concepts/variable-span-linear-filter|Variable Span Linear Filter]]
+- [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
+- [[concepts/mvdr-beamformer|MVDR Beamformer]]
+- [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
+- [[concepts/generalized-eigenvalue-decomposition|Generalized Eigenvalue Decomposition]]
 
 ## Related Synthesis
 
-- [[../synthesis/multimodal-bc-speech-enhancement|Multimodal BC Speech Enhancement]]
+- [[synthesis/multimodal-bc-speech-enhancement|Multimodal BC Speech Enhancement]]

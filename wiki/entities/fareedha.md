@@ -22,17 +22,17 @@ tags:
 
 ## Related Sources
 
-- [[../sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]]
-- [[../sources/fareedha-2025-dfanc-ekf|Fareedha 2025: DFANC-EKF]]
+- [[sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]]
+- [[sources/fareedha-2025-dfanc-ekf|Fareedha 2025: DFANC-EKF]]
 
 ## Related Concepts
 
-- [[../concepts/secondary-path-modeling|Secondary Path Modeling]]
-- [[../concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
-- [[../concepts/active-noise-control|Active Noise Control]]
+- [[concepts/secondary-path-modeling|Secondary Path Modeling]]
+- [[concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
+- [[concepts/active-noise-control|Active Noise Control]]
 
 ## Related Entities
 
-- [[../entities/vasundhara|Vasundhara]] — Co-author, NIT Warangal
-- [[../entities/asutosh-kar|Asutosh Kar]] — Co-author, Birmingham City University
-- [[../entities/mads-graesboell-christensen|Mads Græsbøll Christensen]] — Co-author, Aalborg University
+- [[entities/vasundhara|Vasundhara]] — Co-author, NIT Warangal
+- [[entities/asutosh-kar|Asutosh Kar]] — Co-author, Birmingham City University
+- [[entities/mads-graesboell-christensen|Mads Græsbøll Christensen]] — Co-author, Aalborg University

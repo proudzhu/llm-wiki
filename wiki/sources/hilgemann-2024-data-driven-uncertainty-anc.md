@@ -17,7 +17,7 @@ tags:
 
 # Hilgemann, Chatzimoustafa & Jax 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC
 
-**Authors**: [[../entities/florian-hilgemann|Florian Hilgemann]], [[../entities/egke-chatzimoustafa|Egke Chatzimoustafa]], [[../entities/peter-jax|Peter Jax]]
+**Authors**: [[entities/florian-hilgemann|Florian Hilgemann]], [[entities/egke-chatzimoustafa|Egke Chatzimoustafa]], [[entities/peter-jax|Peter Jax]]
 **Institution**: RWTH Aachen University
 **Published**: J. Audio Eng. Soc., vol. 72, no. 12, pp. 873-883, 2024
 **Type**: Journal Article
@@ -53,7 +53,7 @@ The norm-bounded (disk) model $\Pi_\mu^{(NB)}$ covers the entire circle of radiu
 
 ### IMC-Based Controller Optimization
 
-Uses the [[../concepts/internal-model-control|Internal Model Control]] (IMC) structure with feedforward filter $Q(z)$ and internal model $\hat{G}(z)$:
+Uses the [[concepts/internal-model-control|Internal Model Control]] (IMC) structure with feedforward filter $Q(z)$ and internal model $\hat{G}(z)$:
 
 $$K(z) = \frac{Q(z)}{1 - \hat{G}(z) Q(z)}$$
 
@@ -171,24 +171,24 @@ This allows writing explicit constraint functions that depend on $q$ through $K_
 
 ## Related Concepts
 
-- [[../concepts/feedback-anc|Feedback ANC]]
-- [[../concepts/internal-model-control|Internal Model Control]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
-- [[../concepts/robust-stability-constraint|Robust Stability Constraint]]
-- [[../concepts/convex-hull-uncertainty-model|Convex Hull Uncertainty Model]]
-- [[../concepts/elliptic-uncertainty-model|Elliptic Uncertainty Model]]
+- [[concepts/feedback-anc|Feedback ANC]]
+- [[concepts/internal-model-control|Internal Model Control]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
+- [[concepts/robust-stability-constraint|Robust Stability Constraint]]
+- [[concepts/convex-hull-uncertainty-model|Convex Hull Uncertainty Model]]
+- [[concepts/elliptic-uncertainty-model|Elliptic Uncertainty Model]]
 
 ## Related Sources
 
-- [[../sources/cha-2023-dnoisenet-feedback-anc|Cha 2023: DNoiseNet Feedback ANC]] — Deep learning approach to feedback ANC
-- [[../sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]] — MVC for feedback ANC
-- [[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Simplified IMC structure
+- [[sources/cha-2023-dnoisenet-feedback-anc|Cha 2023: DNoiseNet Feedback ANC]] — Deep learning approach to feedback ANC
+- [[sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]] — MVC for feedback ANC
+- [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Simplified IMC structure
 
 ## Related Entities
 
-- [[../entities/florian-hilgemann|Florian Hilgemann]]
-- [[../entities/egke-chatzimoustafa|Egke Chatzimoustafa]]
-- [[../entities/peter-jax|Peter Jax]]
-- [[../entities/stephen-j-elliott|Stephen J. Elliott]] — Pioneer of feedback ANC and optimal control
-- [[../entities/boaz-rafaely|Boaz Rafaely]] — H₂/H∞ feedback ANC for headrest
+- [[entities/florian-hilgemann|Florian Hilgemann]]
+- [[entities/egke-chatzimoustafa|Egke Chatzimoustafa]]
+- [[entities/peter-jax|Peter Jax]]
+- [[entities/stephen-j-elliott|Stephen J. Elliott]] — Pioneer of feedback ANC and optimal control
+- [[entities/boaz-rafaely|Boaz Rafaely]] — H₂/H∞ feedback ANC for headrest

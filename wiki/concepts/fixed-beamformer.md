@@ -29,11 +29,11 @@ Conventional FBFs are fundamentally limited by:
 
 ## Related Concepts
 
-- [[../concepts/differential-microphone-array|Differential Microphone Array]]
-- [[../concepts/white-noise-gain|White Noise Gain]]
-- [[../concepts/neural-directional-filtering|Neural Directional Filtering]]
-- [[../concepts/beamforming|Beamforming]]
+- [[concepts/differential-microphone-array|Differential Microphone Array]]
+- [[concepts/white-noise-gain|White Noise Gain]]
+- [[concepts/neural-directional-filtering|Neural Directional Filtering]]
+- [[concepts/beamforming|Beamforming]]
 
 ## Related Sources
 
-- [[../sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
+- [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]

@@ -35,8 +35,8 @@ Contrary to the view that AI will make software tools obsolete, Huang argues the
 - Consequently, the demand for enterprise tools (like Cadence, Synopsys, or even Excel) will grow exponentially as each tool-using agent generates increased volume.
 
 ## Related Concepts
-- [[../synthesis/ai-driven-anc|AI-Driven ANC]] (as a specific application of edge AI hardware/software stacks)
+- [[synthesis/ai-driven-anc|AI-Driven ANC]] (as a specific application of edge AI hardware/software stacks)
 
 ## Related Synthesis
-- [[../synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]] (the shift to multi-modal acoustic computing platforms)
-- [[../synthesis/ai-driven-anc|AI-Driven ANC]]
+- [[synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]] (the shift to multi-modal acoustic computing platforms)
+- [[synthesis/ai-driven-anc|AI-Driven ANC]]

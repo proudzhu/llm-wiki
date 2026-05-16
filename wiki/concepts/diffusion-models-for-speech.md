@@ -47,10 +47,10 @@ However, their inference is inherently iterative — numerically integrating the
 
 ## Related Concepts
 
-- [[../concepts/drifting-models|Drifting Models]]
-- [[../concepts/one-step-generative-models|One-Step Generative Models]]
-- [[../concepts/self-supervised-speech-representation|Self-Supervised Speech Representation]]
+- [[concepts/drifting-models|Drifting Models]]
+- [[concepts/one-step-generative-models|One-Step Generative Models]]
+- [[concepts/self-supervised-speech-representation|Self-Supervised Speech Representation]]
 
 ## Related Sources
 
-- [[../sources/xu-2026-drifting-models-speech-enhancement|Xu et al. 2026: Speech Enhancement Based on Drifting Models]]
+- [[sources/xu-2026-drifting-models-speech-enhancement|Xu et al. 2026: Speech Enhancement Based on Drifting Models]]

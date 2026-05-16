@@ -34,7 +34,7 @@ Input: (T, F) → Chunking: (S, L, F) → Intra-RNN: (S, L, D) → Inter-RNN: (S
 
 ## Applications in VibOmni
 
-In [[../sources/he-2025-vibomni|VibOmni]], DPRNN is used as the core separator module in the multi-modal speech enhancement network:
+In [[sources/he-2025-vibomni|VibOmni]], DPRNN is used as the core separator module in the multi-modal speech enhancement network:
 
 - Receives concatenated audio and vibration features from dual encoders.
 - Separates speech from noise at the feature level using inter/intra-block RNN modeling.
@@ -47,11 +47,11 @@ In [[../sources/he-2025-vibomni|VibOmni]], DPRNN is used as the core separator m
 
 ## Related Concepts
 
-- [[../concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
-- [[../concepts/self-attentive-recurrent-neural-network|Self-Attentive Recurrent Neural Network]]
-- [[../concepts/neural-networks|Neural Networks]]
-- [[../concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
+- [[concepts/self-attentive-recurrent-neural-network|Self-Attentive Recurrent Neural Network]]
+- [[concepts/neural-networks|Neural Networks]]
+- [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
 
 ## Related Sources
 
-- [[../sources/he-2025-vibomni|He, Guo, Hou & Yan 2025: VibOmni]]
+- [[sources/he-2025-vibomni|He, Guo, Hou & Yan 2025: VibOmni]]

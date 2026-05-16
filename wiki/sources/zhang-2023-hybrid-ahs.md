@@ -15,7 +15,7 @@ tags:
 
 # Zhang, Yu, Wu, Yu & Yu 2023: Hybrid AHS
 
-**Authors**: [[../entities/hao-zhang|Hao Zhang]], [[../entities/meng-yu|Meng Yu]], [[../entities/yuzhong-wu|Yuzhong Wu]], [[../entities/tao-yu|Tao Yu]], [[../entities/dong-yu|Dong Yu]]
+**Authors**: [[entities/hao-zhang|Hao Zhang]], [[entities/meng-yu|Meng Yu]], [[entities/yuzhong-wu|Yuzhong Wu]], [[entities/tao-yu|Tao Yu]], [[entities/dong-yu|Dong Yu]]
 **Institutions**: Tencent AI Lab, Bellevue, WA, USA; Tencent Ethereal Audio Lab, Shenzhen, Guangdong, China
 **Published**: arXiv preprint arXiv:2305.02583, 2023-05-04
 **Type**: Preprint
@@ -173,15 +173,15 @@ The small deployable model also improves over Kalman-only processing on real rec
 
 ## Related Concepts
 
-- [[../concepts/acoustic-howling-suppression|Acoustic Howling Suppression]]
-- [[../concepts/frequency-domain-kalman-filter|Frequency-Domain Kalman Filter]]
-- [[../concepts/kalman-filter|Kalman Filter]]
-- [[../concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
-- [[../concepts/neural-networks|Neural Networks]]
-- [[../concepts/acoustic-feedback|Acoustic Feedback]]
-- [[../concepts/adaptive-filtering|Adaptive Filtering]]
+- [[concepts/acoustic-howling-suppression|Acoustic Howling Suppression]]
+- [[concepts/frequency-domain-kalman-filter|Frequency-Domain Kalman Filter]]
+- [[concepts/kalman-filter|Kalman Filter]]
+- [[concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
+- [[concepts/neural-networks|Neural Networks]]
+- [[concepts/acoustic-feedback|Acoustic Feedback]]
+- [[concepts/adaptive-filtering|Adaptive Filtering]]
 
 ## Related Synthesis
 
-- [[../synthesis/kalman-filter-theory-and-application|Kalman Filter Theory and Application]]
-- [[../synthesis/ai-driven-anc|AI-Driven ANC]]
+- [[synthesis/kalman-filter-theory-and-application|Kalman Filter Theory and Application]]
+- [[synthesis/ai-driven-anc|AI-Driven ANC]]

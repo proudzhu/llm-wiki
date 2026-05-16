@@ -67,16 +67,16 @@ Modern PSZ research leverages deep learning to enable dynamic, listener-aware re
 | **Neural** | SANN / Deep Learning | Dynamic head-tracking | Data intensive; black-box |
 
 ## References
-- [[../sources/zhu-2025-robust-hybrid-acc-pm-psz|Zhu 2025: Robust Hybrid ACC-PM Approach]]
-- [[../concepts/socp-optimization|SOCP Optimization]]
+- [[sources/zhu-2025-robust-hybrid-acc-pm-psz|Zhu 2025: Robust Hybrid ACC-PM Approach]]
+- [[concepts/socp-optimization|SOCP Optimization]]
 - *Personal sound zones: delivering interface-free audio to multiple listeners* (Systematic Overview)
 - *SANN-PSZ: Spatially Adaptive Neural Network for Head-tracked Personal Sound Zones*
 - *Stereo audio rendering for personal sound zones using a binaural spatially adaptive neural network (BSANN)*
 
 ## Related Concepts
 
-- [[../concepts/socp-optimization|SOCP Optimization]]
+- [[concepts/socp-optimization|SOCP Optimization]]
 
 ## Related Sources
 
-- [[../sources/zhu-2025-robust-hybrid-acc-pm-psz|Zhu 2025: Robust Hybrid ACC-PM Approach]]
+- [[sources/zhu-2025-robust-hybrid-acc-pm-psz|Zhu 2025: Robust Hybrid ACC-PM Approach]]

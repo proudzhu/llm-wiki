@@ -68,13 +68,13 @@ where Q is the overlap-save matrix. This reduces complexity significantly, makin
 
 ## Related Concepts
 
-- [[../concepts/acoustic-feedback|Acoustic Feedback]]
-- [[../concepts/adaptive-feedback-control|Adaptive Feedback Control]]
-- [[../concepts/hearing-aid-feedback-cancellation|Hearing Aid Feedback Cancellation]]
-- [[../concepts/frequency-shift-feedback-cancellation|Frequency Shift Feedback Cancellation]]
-- [[../concepts/variable-step-size-lms|Variable Step-Size LMS]]
+- [[concepts/acoustic-feedback|Acoustic Feedback]]
+- [[concepts/adaptive-feedback-control|Adaptive Feedback Control]]
+- [[concepts/hearing-aid-feedback-cancellation|Hearing Aid Feedback Cancellation]]
+- [[concepts/frequency-shift-feedback-cancellation|Frequency Shift Feedback Cancellation]]
+- [[concepts/variable-step-size-lms|Variable Step-Size LMS]]
 
 ## Related Sources
 
-- [[../sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC with GRU step-size prediction
+- [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC with GRU step-size prediction
 - Spriet et al. 2005: Adaptive feedback cancellation in hearing aids with linear prediction of the desired signal

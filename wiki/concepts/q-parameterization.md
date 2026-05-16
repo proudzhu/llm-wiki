@@ -27,10 +27,10 @@ where $Q$ is the optimization variable and $P_0$ is the nominal plant model. The
 
 ## Related Concepts
 
-- [[../concepts/feedback-anc|Feedback ANC]]
-- [[../concepts/sensitivity-function|Sensitivity Function]]
-- [[../concepts/robust-control|Robust Control]]
+- [[concepts/feedback-anc|Feedback ANC]]
+- [[concepts/sensitivity-function|Sensitivity Function]]
+- [[concepts/robust-control|Robust Control]]
 
 ## Related Sources
 
-- [[../sources/seo-2016-feedback-anc-constrained-optimization|Seo et al. 2016: Feedback ANC via Constrained Optimization]]
+- [[sources/seo-2016-feedback-anc-constrained-optimization|Seo et al. 2016: Feedback ANC via Constrained Optimization]]

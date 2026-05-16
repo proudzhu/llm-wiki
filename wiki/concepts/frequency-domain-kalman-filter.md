@@ -61,13 +61,13 @@ Key insight: FDKF remains a strong adaptive backbone, while neural components ar
 
 ## Related Concepts
 
-- [[../concepts/kalman-filter|Kalman Filter]] — time-domain general framework
-- [[../concepts/acoustic-howling-suppression|Acoustic Howling Suppression]] — primary application
-- [[../concepts/adaptive-filtering|Adaptive Filtering]] — broader adaptive filtering context
-- [[../concepts/frequency-domain-anc|Frequency-Domain ANC]] — frequency-domain processing in ANC
-- [[../concepts/self-attentive-recurrent-neural-network|Self-Attentive Recurrent Neural Network]] — Hybrid AHS neural module
+- [[concepts/kalman-filter|Kalman Filter]] — time-domain general framework
+- [[concepts/acoustic-howling-suppression|Acoustic Howling Suppression]] — primary application
+- [[concepts/adaptive-filtering|Adaptive Filtering]] — broader adaptive filtering context
+- [[concepts/frequency-domain-anc|Frequency-Domain ANC]] — frequency-domain processing in ANC
+- [[concepts/self-attentive-recurrent-neural-network|Self-Attentive Recurrent Neural Network]] — Hybrid AHS neural module
 
 ## Related Sources
 
-- [[../sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]
-- [[../sources/zhang-2024-neural-kalman-howling|Zhang 2024: Neural Network Augmented Kalman Filter for AHS]]
+- [[sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]
+- [[sources/zhang-2024-neural-kalman-howling|Zhang 2024: Neural Network Augmented Kalman Filter for AHS]]

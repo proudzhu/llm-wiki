@@ -38,10 +38,10 @@ This paper introduces the **Dynamic Fixed-filter Active Noise Control with Exten
 
 ## Related Entities
 
-- [[../entities/fareedha|Fareedha]]
-- [[../entities/asutosh-kar|Asutosh Kar]]
-- [[../entities/mads-graesboell-christensen|Mads Græsbøll Christensen]]
+- [[entities/fareedha|Fareedha]]
+- [[entities/asutosh-kar|Asutosh Kar]]
+- [[entities/mads-graesboell-christensen|Mads Græsbøll Christensen]]
 
 ## Later Work
 
-- [[../sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]] — Extended to end-to-end joint SPE + control with DeepSPE + ANC-Net
+- [[sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]] — Extended to end-to-end joint SPE + control with DeepSPE + ANC-Net

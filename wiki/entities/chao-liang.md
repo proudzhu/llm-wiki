@@ -23,7 +23,7 @@ Researcher at the **Department of Mechanical Engineering**, Politecnico di Milan
 
 ## Notable Work
 
-- [[../sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]] — First author, delayed MPC for ANC with real-time validation
+- [[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]] — First author, delayed MPC for ANC with real-time validation
 
 ## Contact
 
@@ -33,4 +33,4 @@ Researcher at the **Department of Mechanical Engineering**, Politecnico di Milan
 
 ## Related Sources
 
-- [[../sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]]
+- [[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]]

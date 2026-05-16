@@ -18,7 +18,7 @@ tags:
 
 # Miran, Schepker, Merks & McKinney 2026: IMU-Based Acoustic Feedback Cancellation
 
-**Authors**: [[../entities/sina-miran|Sina Miran]], [[../entities/henning-schepker|Henning Schepker]], [[../entities/ivo-merks|Ivo Merks]], [[../entities/martin-mckinney|Martin McKinney]]
+**Authors**: [[entities/sina-miran|Sina Miran]], [[entities/henning-schepker|Henning Schepker]], [[entities/ivo-merks|Ivo Merks]], [[entities/martin-mckinney|Martin McKinney]]
 **Institutions**: Starkey Hearing Technologies, Eden Prairie, MN, USA
 **Published**: ICASSP 2026, pp. 15172–15176
 **Type**: Conference Paper
@@ -138,17 +138,17 @@ $$\text{MIS}[k] = 10\log_{10}\frac{\|\mathbf{h}[k] - \hat{\mathbf{h}}[k]\|_2^2}{
 
 ## Related Concepts
 
-- [[../concepts/acoustic-feedback|Acoustic Feedback]]
-- [[../concepts/variable-step-size-lms|Variable Step Size LMS]]
-- [[../concepts/active-noise-control|Active Noise Control]]
+- [[concepts/acoustic-feedback|Acoustic Feedback]]
+- [[concepts/variable-step-size-lms|Variable Step Size LMS]]
+- [[concepts/active-noise-control|Active Noise Control]]
 
 ## Related Sources
 
-- [[../sources/akhtar-2006-vss-lms-online-spm|Akhtar 2006: VSS LMS for Online Secondary Path Modeling]] — Classical VSS approach for ANC (different domain, same step-size dilemma)
+- [[sources/akhtar-2006-vss-lms-online-spm|Akhtar 2006: VSS LMS for Online Secondary Path Modeling]] — Classical VSS approach for ANC (different domain, same step-size dilemma)
 
 ## Related Entities
 
-- [[../entities/sina-miran|Sina Miran]]
-- [[../entities/henning-schepker|Henning Schepker]]
-- [[../entities/ivo-merks|Ivo Merks]]
-- [[../entities/martin-mckinney|Martin McKinney]]
+- [[entities/sina-miran|Sina Miran]]
+- [[entities/henning-schepker|Henning Schepker]]
+- [[entities/ivo-merks|Ivo Merks]]
+- [[entities/martin-mckinney|Martin McKinney]]

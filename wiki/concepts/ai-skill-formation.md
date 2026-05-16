@@ -18,7 +18,7 @@ tags:
 
 ## Key Research
 
-[[../entities/judy-hanwen-shen|Judy Hanwen Shen]] and [[../entities/alex-tamkin|Alex Tamkin]] conducted a randomized controlled trial with 52 software developers learning a new Python library (Trio). They found:
+[[entities/judy-hanwen-shen|Judy Hanwen Shen]] and [[entities/alex-tamkin|Alex Tamkin]] conducted a randomized controlled trial with 52 software developers learning a new Python library (Trio). They found:
 
 - AI assistance led to a **17% decrease in mastery** (50% vs 67% on comprehension quiz)
 - The gap was largest on **debugging questions**
@@ -55,7 +55,7 @@ Cognitive effort — and even getting "painfully stuck" — is likely important 
 
 ## Relationship to Productivity Research
 
-Shen & Tamkin's earlier observational research (referenced in [[../sources/ai-assistance-coding-skills|AI Assistance and Coding Skills]]) found AI can reduce task completion time by **80%** on tasks where participants **already had skills**. This study examines **new skill acquisition**. It's possible that AI both accelerates productivity on well-developed skills and hinders acquisition of new ones.
+Shen & Tamkin's earlier observational research (referenced in [[sources/ai-assistance-coding-skills|AI Assistance and Coding Skills]]) found AI can reduce task completion time by **80%** on tasks where participants **already had skills**. This study examines **new skill acquisition**. It's possible that AI both accelerates productivity on well-developed skills and hinders acquisition of new ones.
 
 ## Related Concepts
 
@@ -64,13 +64,13 @@ Shen & Tamkin's earlier observational research (referenced in [[../sources/ai-as
 
 ## Related Entities
 
-- [[../entities/judy-hanwen-shen|Judy Hanwen Shen]] — Co-author of the skill formation study
-- [[../entities/alex-tamkin|Alex Tamkin]] — Co-author of the skill formation study
+- [[entities/judy-hanwen-shen|Judy Hanwen Shen]] — Co-author of the skill formation study
+- [[entities/alex-tamkin|Alex Tamkin]] — Co-author of the skill formation study
 
 ## Sources
 
-- [[../sources/ai-assistance-coding-skills|AI Assistance and Coding Skills]] — Full source summary
+- [[sources/ai-assistance-coding-skills|AI Assistance and Coding Skills]] — Full source summary
 
 ## Related Sources
 
-- [[../sources/ai-assistance-coding-skills|AI Assistance and Coding Skills]]
+- [[sources/ai-assistance-coding-skills|AI Assistance and Coding Skills]]

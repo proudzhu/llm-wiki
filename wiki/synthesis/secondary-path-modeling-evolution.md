@@ -41,7 +41,7 @@ ANC 运行时注入低功率辅助噪声 $v(n)$，同时辨识 $\hat{S}(z)$。
 **改进方向**：
 - **Eriksson (1989)**：基本两滤波器加性噪声结构，$v(n)$ 出现在残余误差中，约束其功率
 - **Zhang (2001)**：三滤波器交叉更新法，在经典方法中性能最佳
-- **Akhtar (2006)**：两滤波器 + MFxLMS + [[../concepts/variable-step-size-lms|VSS LMS]]（逆步长策略），以更少滤波器达到更好性能，−12.35 dB NMSE
+- **Akhtar (2006)**：两滤波器 + MFxLMS + [[concepts/variable-step-size-lms|VSS LMS]]（逆步长策略），以更少滤波器达到更好性能，−12.35 dB NMSE
 - **自适应噪声消除**：用辅助滤波器消除 $d(n)$ 对辨识的干扰，加速 ~30 倍
 - **RMFxLMS**（Yang 2026）：鲁棒多通道变体，处理多通道场景下的交叉耦合
 
@@ -96,7 +96,7 @@ Kuo (1999) 的经典结论：慢自适应条件下 FXLMS 可容忍 ~90° 相位�
 2. **从显式到隐式**：MPC、元学习等方法将 $S(z)$ 内嵌到模型中，避免每样本滤波
 3. **从单一到混合**：Luo (2026) 的 GFANC-FxNLMS 用生成模型提供初始滤波器，FxNLMS 在线微调——$\hat{S}(z)$ 的精度要求被降低
 4. **从辨识到绕过**：终极目标是完全消除对 $\hat{S}(z)$ 的依赖，但目前只有 MPC 在特定条件下接近这一目标
-5. **从迭代到深度学习**：Fareedha (2026) 的 [[../concepts/deep-secondary-path-estimation|DeepSPE]] 用 Conv1D + BiLSTM + Attention 替代迭代自适应，帧级推理达到 −16.27 dB NMSE，比 Akhtar VSS-LMS 提升 3.92 dB
+5. **从迭代到深度学习**：Fareedha (2026) 的 [[concepts/deep-secondary-path-estimation|DeepSPE]] 用 Conv1D + BiLSTM + Attention 替代迭代自适应，帧级推理达到 −16.27 dB NMSE，比 Akhtar VSS-LMS 提升 3.92 dB
 
 ## 相关页面
 

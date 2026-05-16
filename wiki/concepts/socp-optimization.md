@@ -22,7 +22,7 @@ In Personal Sound Zone (PSZ) and Active Noise Control (ANC) systems, SOCP is use
 - **Robustness**: Provides a framework to explicitly include uncertainty ellipsoids in the control design.
 
 ## Related Sources
-- [[../sources/zhu-2025-robust-hybrid-acc-pm-psz|Zhu 2025]]: Uses SOCP to reformulate robust hybrid ACC-PM optimization for Personal Sound Zones.
+- [[sources/zhu-2025-robust-hybrid-acc-pm-psz|Zhu 2025]]: Uses SOCP to reformulate robust hybrid ACC-PM optimization for Personal Sound Zones.
 
 ## Related Concepts
 - [[active-noise-control|Active Noise Control]]

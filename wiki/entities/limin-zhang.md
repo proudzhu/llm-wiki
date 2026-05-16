@@ -12,7 +12,7 @@ tags:
 
 ## Overview
 
-Researcher in acoustics at the Key Laboratory of Modern Acoustics, Institute of Acoustics, Nanjing University. First author of [[../sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]].
+Researcher in acoustics at the Key Laboratory of Modern Acoustics, Institute of Acoustics, Nanjing University. First author of [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]].
 
 ## Affiliation
 
@@ -20,19 +20,19 @@ Researcher in acoustics at the Key Laboratory of Modern Acoustics, Institute of 
 
 ## Research Areas
 
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/causality|Causality in ANC]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/causality|Causality in ANC]]
 - Feedforward ANC systems
 - Acoustics
 
 ## Notable Work
 
-- [[../sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — First author, corresponding author
+- [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — First author, corresponding author
 
 ## Related Entities
 
-- [[../entities/xiaojun-qiu|Xiaojun Qiu]] — co-author and supervisor
+- [[entities/xiaojun-qiu|Xiaojun Qiu]] — co-author and supervisor
 
 ## Related Sources
 
-- [[../sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]]
+- [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]]

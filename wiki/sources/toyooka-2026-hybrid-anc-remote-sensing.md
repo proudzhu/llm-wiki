@@ -27,13 +27,13 @@ aliases:
 
 ## Summary
 
-This paper proposes an advanced **Hybrid Active Noise Control (ANC)** system designed for **[[../concepts/virtual-sensing|virtual sensing]]** using the remote microphone technique. The core innovation is the use of **two compensation filters** per noise source to improve the accuracy of the estimated error signal at the target (virtual) location.
+This paper proposes an advanced **Hybrid Active Noise Control (ANC)** system designed for **[[concepts/virtual-sensing|virtual sensing]]** using the remote microphone technique. The core innovation is the use of **two compensation filters** per noise source to improve the accuracy of the estimated error signal at the target (virtual) location.
 
 ## Problem Formulation
 
 ### The Multi-Source Bottleneck in Virtual Sensing
 
-[[../concepts/virtual-sensing|Virtual Sensing]] (RMVS) using the **Remote Microphone Technique (RMT)** typically relies on a fixed compensation filter ($C(z)$) derived from the transfer functions between the physical error microphone and the virtual target point.
+[[concepts/virtual-sensing|Virtual Sensing]] (RMVS) using the **Remote Microphone Technique (RMT)** typically relies on a fixed compensation filter ($C(z)$) derived from the transfer functions between the physical error microphone and the virtual target point.
 
 In environments with **multiple independent noise sources**, a single fixed compensation filter fails because:
 1. The error microphone captures a **mixed signal** from all sources
@@ -44,7 +44,7 @@ In environments with **multiple independent noise sources**, a single fixed comp
 
 ### 1. Dual Compensation and Signal Decomposition
 
-The core innovation is the **signal decomposition** layer added to a [[../concepts/hybrid-anc|Hybrid ANC]] structure.
+The core innovation is the **signal decomposition** layer added to a [[concepts/hybrid-anc|Hybrid ANC]] structure.
 
 #### 1.1 The Decomposition Filter $H(z)$
 
@@ -107,17 +107,17 @@ c_{mx}(n+1) = c_{mx}(n) + μ·e(n)·d_{mx}(n) / (δ + ||d_{mx}(n)||²)
 
 ## Related Concepts
 
-- [[../concepts/virtual-sensing|Virtual Sensing]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/hybrid-anc|Hybrid ANC]]
-- [[../concepts/secondary-path-modeling|Secondary Path Modeling]]
+- [[concepts/virtual-sensing|Virtual Sensing]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/hybrid-anc|Hybrid ANC]]
+- [[concepts/secondary-path-modeling|Secondary Path Modeling]]
 
 ## Related Synthesis
 
-- [[../synthesis/virtual-sensing-evolution|Evolution of Virtual Sensing in ANC]]
-- [[../synthesis/anc-architecture-evolution|ANC Architecture Evolution]]
+- [[synthesis/virtual-sensing-evolution|Evolution of Virtual Sensing in ANC]]
+- [[synthesis/anc-architecture-evolution|ANC Architecture Evolution]]
 
 ## Related Entities
 
-- [[../entities/shota-toyooka|Shota Toyooka]]
-- [[../entities/yoshinobu-kajikawa|Yoshinobu Kajikawa]]
+- [[entities/shota-toyooka|Shota Toyooka]]
+- [[entities/yoshinobu-kajikawa|Yoshinobu Kajikawa]]

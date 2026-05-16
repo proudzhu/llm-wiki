@@ -16,7 +16,7 @@ tags:
 
 ## Why Uncertainty Modeling Matters
 
-In [[../concepts/feedback-anc|Feedback ANC]], the secondary path varies due to:
+In [[concepts/feedback-anc|Feedback ANC]], the secondary path varies due to:
 - Different wearers (head/ear shape)
 - Fit changes (normal → loose → tight)
 - Manufacturing tolerances, wear, temperature
@@ -33,8 +33,8 @@ A robust controller must guarantee stability for **all** possible plant variatio
 
 | Model | Area (relative to disk) | Constraint Type | Key Parameters |
 |:------|:------------------------|:----------------|:---------------|
-| [[../concepts/convex-hull-uncertainty-model|Convex Hull]] | ~60% | Non-convex | Half-space weights & offsets |
-| [[../concepts/elliptic-uncertainty-model|Elliptic]] | ~60–70% | Non-convex | Semi-axes, rotation angle |
+| [[concepts/convex-hull-uncertainty-model|Convex Hull]] | ~60% | Non-convex | Half-space weights & offsets |
+| [[concepts/elliptic-uncertainty-model|Elliptic]] | ~60–70% | Non-convex | Semi-axes, rotation angle |
 | Multi-Disk | ~70–80% | Convex | Multiple disk centers & radii |
 | Norm-Bounded (Disk) | 100% (baseline) | Convex | Single center & radius |
 
@@ -60,13 +60,13 @@ The convex hull model achieves **18 dB more attenuation** at 300 Hz than the con
 
 ## Related Concepts
 
-- [[../concepts/feedback-anc|Feedback ANC]]
-- [[../concepts/internal-model-control|Internal Model Control]]
-- [[../concepts/convex-hull-uncertainty-model|Convex Hull Uncertainty Model]]
-- [[../concepts/elliptic-uncertainty-model|Elliptic Uncertainty Model]]
-- [[../concepts/robust-stability-constraint|Robust Stability Constraint]]
-- [[../concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
+- [[concepts/feedback-anc|Feedback ANC]]
+- [[concepts/internal-model-control|Internal Model Control]]
+- [[concepts/convex-hull-uncertainty-model|Convex Hull Uncertainty Model]]
+- [[concepts/elliptic-uncertainty-model|Elliptic Uncertainty Model]]
+- [[concepts/robust-stability-constraint|Robust Stability Constraint]]
+- [[concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
 
 ## Related Sources
 
-- [[../sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
+- [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]

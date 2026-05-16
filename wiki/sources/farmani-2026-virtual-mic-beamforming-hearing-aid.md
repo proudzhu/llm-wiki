@@ -17,7 +17,7 @@ tags:
 
 # Farmani, Feldt & Jensen 2026: Beamforming Using Virtual Microphones for Hearing Aid Applications
 
-**Authors**: [[../entities/mojtaba-farmani|Mojtaba Farmani]], [[../entities/svend-feldt|Svend Feldt]], [[../entities/jesper-jensen|Jesper Jensen]]
+**Authors**: [[entities/mojtaba-farmani|Mojtaba Farmani]], [[entities/svend-feldt|Svend Feldt]], [[entities/jesper-jensen|Jesper Jensen]]
 **Institutions**: Eriksholm Research Centre, Snekkersten, Denmark; Department of Electronic Systems, Aalborg University, Aalborg, Denmark
 **Published**: ICASSP 2026, pp. 15552–15556
 **Type**: Conference Paper
@@ -141,13 +141,13 @@ The proposed method consistently outperforms GAI-based approaches across all inp
 
 ## Related Concepts
 
-- [[../concepts/remote-microphone-technique|Remote Microphone Technique]]
-- [[../concepts/beamforming|Beamforming]]
-- [[../concepts/mvdr-beamformer|MVDR Beamformer]]
-- [[../concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
-- [[../concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
+- [[concepts/remote-microphone-technique|Remote Microphone Technique]]
+- [[concepts/beamforming|Beamforming]]
+- [[concepts/mvdr-beamformer|MVDR Beamformer]]
+- [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
 
 ## Related Synthesis
 
-- [[../synthesis/virtual-sensing-evolution|Evolution of Virtual Sensing in ANC]]
-- [[../synthesis/virtual-sensing-evolution|Evolution of Virtual Sensing in ANC]]
+- [[synthesis/virtual-sensing-evolution|Evolution of Virtual Sensing in ANC]]
+- [[synthesis/virtual-sensing-evolution|Evolution of Virtual Sensing in ANC]]

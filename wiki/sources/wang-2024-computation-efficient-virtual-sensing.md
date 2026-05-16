@@ -17,7 +17,7 @@ tags:
 
 # Wang, Ji, Shen, Shi & Gan 2024: Computation-Efficient Virtual Sensing with MCALMS
 
-**Authors**: [[../entities/boxiang-wang|Boxiang Wang]], [[../entities/junwei-ji|Junwei Ji]], [[../entities/xiaoyi-shen|Xiaoyi Shen]], [[../entities/dongyuan-shi|Dongyuan Shi]], [[../entities/woon-seng-gan|Woon-Seng Gan]]
+**Authors**: [[entities/boxiang-wang|Boxiang Wang]], [[entities/junwei-ji|Junwei Ji]], [[entities/xiaoyi-shen|Xiaoyi Shen]], [[entities/dongyuan-shi|Dongyuan Shi]], [[entities/woon-seng-gan|Woon-Seng Gan]]
 **Institution**: Digital Signal Processing Lab, Nanyang Technological University, Singapore
 **Published**: INTER-NOISE 2024, Vol. 270, No. 10, pp. 1638–1650
 **Type**: Conference Paper
@@ -37,7 +37,7 @@ This paper proposes a feedforward multichannel virtual sensing ANC (MVANC) syste
 
 ### Virtual Sensing Challenge
 
-In multichannel ANC, error microphones must be placed in the desired zone of quietness (ZoQ), but physical constraints often prevent this (e.g., near the user's eardrum in ANC headrests). [[../concepts/virtual-sensing|Virtual sensing]] techniques create quiet zones at desired 'virtual' locations far from physical error sensors.
+In multichannel ANC, error microphones must be placed in the desired zone of quietness (ZoQ), but physical constraints often prevent this (e.g., near the user's eardrum in ANC headrests). [[concepts/virtual-sensing|Virtual sensing]] techniques create quiet zones at desired 'virtual' locations far from physical error sensors.
 
 ### Computational Bottleneck
 
@@ -126,13 +126,13 @@ At 10 channels: MCALMS requires ~1/10 the computation of MCFxLMS.
 
 ## Related Concepts
 
-- [[../concepts/virtual-sensing|Virtual Sensing]]
-- [[../concepts/multi-channel-anc|Multi-Channel ANC]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/adjoint-lms-algorithm|Adjoint LMS Algorithm]]
+- [[concepts/virtual-sensing|Virtual Sensing]]
+- [[concepts/multi-channel-anc|Multi-Channel ANC]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/adjoint-lms-algorithm|Adjoint LMS Algorithm]]
 
 ## Related Synthesis
 
-- [[../synthesis/virtual-sensing-evolution|Evolution of Virtual Sensing in ANC]]
-- [[../synthesis/computational-efficiency-evolution|Computational Efficiency Evolution]]
-- [[../synthesis/multichannel-anc-efficiency-and-robustness|Multichannel ANC Efficiency and Robustness]]
+- [[synthesis/virtual-sensing-evolution|Evolution of Virtual Sensing in ANC]]
+- [[synthesis/computational-efficiency-evolution|Computational Efficiency Evolution]]
+- [[synthesis/multichannel-anc-efficiency-and-robustness|Multichannel ANC Efficiency and Robustness]]

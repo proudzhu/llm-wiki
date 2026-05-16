@@ -17,7 +17,7 @@ tags:
 
 # Görtz, Amengual, Calamia, Ananthabhotla, Francl, Schissler & Habets 2026: Blind Direction-Dependent Acoustic Parameter Estimation Using Smart Glasses
 
-**Authors**: [[../entities/philipp-goetz|Philipp Görtz]]¹, [[../entities/sebastia-amengual|Sebastià V. Amengual]]², [[../entities/paul-calamia|Paul Calamia]]², [[../entities/ishwarya-ananthabhotla|Ishwarya Ananthabhotla]]², [[../entities/andrew-francl|Andrew Francl]]², [[../entities/carl-schissler|Carl Schissler]]², [[../entities/emanuele-habets|Emanuele A. P. Habets]]¹
+**Authors**: [[entities/philipp-goetz|Philipp Görtz]]¹, [[entities/sebastia-amengual|Sebastià V. Amengual]]², [[entities/paul-calamia|Paul Calamia]]², [[entities/ishwarya-ananthabhotla|Ishwarya Ananthabhotla]]², [[entities/andrew-francl|Andrew Francl]]², [[entities/carl-schissler|Carl Schissler]]², [[entities/emanuele-habets|Emanuele A. P. Habets]]¹
 
 **Affiliations**: ¹ Friedrich-Alexander University Erlangen-Nuremberg, Germany · ² Meta Reality Labs, Redmond, WA, USA
 
@@ -31,11 +31,11 @@ tags:
 
 ## Summary
 
-Proposes the first multimodal method for blind [[../concepts/direction-dependent-acoustic-parameters|direction-dependent acoustic parameter]] (DDAP) estimation using smart glasses. A dual-network architecture — convolutional encoder + transformer aggregation with FiLM conditioning — exploits natural head rotations to overcome the limited spatial resolution of compact microphone arrays. Validated on direction-dependent decay time T₂₀ and directional acoustic energy E across four octave bands, achieving PCC of 0.82 at 0.5 kHz for T₂₀ and 0.92 for E.
+Proposes the first multimodal method for blind [[concepts/direction-dependent-acoustic-parameters|direction-dependent acoustic parameter]] (DDAP) estimation using smart glasses. A dual-network architecture — convolutional encoder + transformer aggregation with FiLM conditioning — exploits natural head rotations to overcome the limited spatial resolution of compact microphone arrays. Validated on direction-dependent decay time T₂₀ and directional acoustic energy E across four octave bands, achieving PCC of 0.82 at 0.5 kHz for T₂₀ and 0.92 for E.
 
 ## Problem Formulation
 
-The core challenge: existing blind acoustic parameter estimation methods neglect the **spatial or directional dependency** of parameters like reverberation time and energy. This dependency is essential for realistic spatial audio rendering of virtual sources in [[../concepts/auditory-augmented-reality|auditory augmented reality]] (AAR), particularly in domestic environments with non-uniform absorption and anisotropic energy decay.
+The core challenge: existing blind acoustic parameter estimation methods neglect the **spatial or directional dependency** of parameters like reverberation time and energy. This dependency is essential for realistic spatial audio rendering of virtual sources in [[concepts/auditory-augmented-reality|auditory augmented reality]] (AAR), particularly in domestic environments with non-uniform absorption and anisotropic energy decay.
 
 Wearable devices with compact microphone arrays suffer from **limited spatial resolution and directional ambiguities**, making DDAP estimation from reverberant signals challenging. The key insight: natural head rotations during AAR use can be exploited to aggregate spatial information across multiple viewing orientations.
 
@@ -45,13 +45,13 @@ $$\mathbf{x}[n] = \sum_{n'=0}^{N_h-1} \mathbf{h}[n'] s[n-n'] \in \mathbb{R}^K$$
 
 where $\mathbf{h}[n]$ is the array room impulse response (RIR) and $s[n]$ is the anechoic source signal.
 
-**Target parameters**: Direction-dependent decay time $\mathrm{T}_{20}(\boldsymbol{\theta})$ and directional acoustic energy $E(\boldsymbol{\theta})$, estimated in the [[../concepts/spherical-harmonic-transform|spherical harmonic]] domain up to order $L$.
+**Target parameters**: Direction-dependent decay time $\mathrm{T}_{20}(\boldsymbol{\theta})$ and directional acoustic energy $E(\boldsymbol{\theta})$, estimated in the [[concepts/spherical-harmonic-transform|spherical harmonic]] domain up to order $L$.
 
 ## Methodology
 
 ### Ground Truth Computation
 
-DDAPs are computed in four octave bands with center frequencies [0.5, 1, 2, 4] kHz. A maximum radial energy ($\max\text{-}\mathbf{r}_E$) [[../concepts/beamforming|beamformer]] is oriented towards each control direction $\boldsymbol{\theta}_j$ in a spherical 15th-order $t$-design to obtain the directional RIR:
+DDAPs are computed in four octave bands with center frequencies [0.5, 1, 2, 4] kHz. A maximum radial energy ($\max\text{-}\mathbf{r}_E$) [[concepts/beamforming|beamformer]] is oriented towards each control direction $\boldsymbol{\theta}_j$ in a spherical 15th-order $t$-design to obtain the directional RIR:
 
 $$h_{\boldsymbol{\theta}_j}[n] = \sum_{l=0}^{L} \sum_{m=-l}^{l} w_l Y_{lm}(\boldsymbol{\theta}_j) \mathbf{h}_{lm}^{(\circ)}[n]$$
 
@@ -142,14 +142,14 @@ Estimating DDAPs in the SH domain yields a compact, continuous representation ev
 
 ## Related Concepts
 
-- [[../concepts/direction-dependent-acoustic-parameters|Direction-Dependent Acoustic Parameters]] — the core estimation target
-- [[../concepts/spherical-harmonic-transform|Spherical Harmonic Transform]] — mathematical framework for spatial representation
-- [[../concepts/auditory-augmented-reality|Auditory Augmented Reality]] — application domain motivating DDAP estimation
-- [[../concepts/beamforming|Beamforming]] — max-rE beamformer used for ground truth computation
-- [[../concepts/head-orientation-from-imu|Head Orientation from IMU]] — orientation information exploited by the aggregation module
-- [[../concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]] — related spatial estimation task
-- [[../concepts/inertial-measurement-unit|Inertial Measurement Unit]] — source of head orientation data
+- [[concepts/direction-dependent-acoustic-parameters|Direction-Dependent Acoustic Parameters]] — the core estimation target
+- [[concepts/spherical-harmonic-transform|Spherical Harmonic Transform]] — mathematical framework for spatial representation
+- [[concepts/auditory-augmented-reality|Auditory Augmented Reality]] — application domain motivating DDAP estimation
+- [[concepts/beamforming|Beamforming]] — max-rE beamformer used for ground truth computation
+- [[concepts/head-orientation-from-imu|Head Orientation from IMU]] — orientation information exploited by the aggregation module
+- [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]] — related spatial estimation task
+- [[concepts/inertial-measurement-unit|Inertial Measurement Unit]] — source of head orientation data
 
 ## Related Synthesis
 
-- [[../synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]] — smart glasses as wearable audio platform
+- [[synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]] — smart glasses as wearable audio platform

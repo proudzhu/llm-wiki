@@ -14,6 +14,6 @@ tags:
 
 ## Related Synthesis
 
-- [[../synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]]
-- [[../synthesis/multimodal-bc-speech-enhancement|Multimodal BC Speech Enhancement]]
-- [[../synthesis/ai-driven-anc|AI-Driven ANC]]
+- [[synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]]
+- [[synthesis/multimodal-bc-speech-enhancement|Multimodal BC Speech Enhancement]]
+- [[synthesis/ai-driven-anc|AI-Driven ANC]]

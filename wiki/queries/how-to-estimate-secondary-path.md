@@ -286,16 +286,16 @@ e₂(n) = d(n) + s · y₂(n)
 
 ## Related Concepts
 
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/broad-band-feedforward-anc|Broad-Band Feedforward ANC]]
-- [[../concepts/multi-channel-anc|Multi-Channel ANC]]
-- [[../concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/broad-band-feedforward-anc|Broad-Band Feedforward ANC]]
+- [[concepts/multi-channel-anc|Multi-Channel ANC]]
+- [[concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]]
 
 ## Related Sources
 
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section II-C (FXLMS), Section VI (Online Secondary-Path Modeling)
-- [[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Uses leaky FxLMS with offline secondary path modeling
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section II-C (FXLMS), Section VI (Online Secondary-Path Modeling)
+- [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Uses leaky FxLMS with offline secondary path modeling
 
 ---
 

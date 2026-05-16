@@ -36,11 +36,11 @@ where $w_{\mathrm{coh}}[k]$ is the coherent component window that preserves dire
 
 ## Related Concepts
 
-- [[../concepts/virtual-directional-microphone|Virtual Directional Microphone]]
-- [[../concepts/neural-directional-filtering|Neural Directional Filtering]]
-- [[../concepts/room-transfer-function|Room Transfer Function]]
-- [[../concepts/room-impulse-response|Room Impulse Response]]
+- [[concepts/virtual-directional-microphone|Virtual Directional Microphone]]
+- [[concepts/neural-directional-filtering|Neural Directional Filtering]]
+- [[concepts/room-transfer-function|Room Transfer Function]]
+- [[concepts/room-impulse-response|Room Impulse Response]]
 
 ## Related Sources
 
-- [[../sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
+- [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]

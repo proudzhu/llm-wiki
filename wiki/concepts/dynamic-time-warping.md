@@ -12,7 +12,7 @@ tags:
 
 # Dynamic Time Warping
 
-**Dynamic Time Warping (DTW)** is an algorithm for finding an optimal alignment between two temporal sequences that may vary in speed or timing. Originally developed for spoken word recognition (Sakoe & Chiba 1978), it has been applied to impulse response interpolation, acoustic event detection, and [[../concepts/secondary-path-interpolation|Secondary Path Interpolation]] in [[../concepts/active-noise-control|ANC]].
+**Dynamic Time Warping (DTW)** is an algorithm for finding an optimal alignment between two temporal sequences that may vary in speed or timing. Originally developed for spoken word recognition (Sakoe & Chiba 1978), it has been applied to impulse response interpolation, acoustic event detection, and [[concepts/secondary-path-interpolation|Secondary Path Interpolation]] in [[concepts/active-noise-control|ANC]].
 
 ## Overview
 
@@ -83,11 +83,11 @@ Different continuity conditions and local weightings produce different alignment
 
 ## Related Concepts
 
-- [[../concepts/secondary-path-interpolation|Secondary Path Interpolation]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/secondary-path-modeling|Secondary Path Modeling]]
-- [[../concepts/offline-secondary-path-modeling|Offline Secondary-Path Modeling]]
+- [[concepts/secondary-path-interpolation|Secondary Path Interpolation]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/secondary-path-modeling|Secondary Path Modeling]]
+- [[concepts/offline-secondary-path-modeling|Offline Secondary-Path Modeling]]
 
 ## Related Sources
 
-- [[../sources/holzmuller-2026-dtw-secondary-path-anc|Holzmüller & Sontacchi 2026: DTW for Secondary Path Interpolation in ANC]]
+- [[sources/holzmuller-2026-dtw-secondary-path-anc|Holzmüller & Sontacchi 2026: DTW for Secondary Path Interpolation in ANC]]

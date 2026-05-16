@@ -16,7 +16,7 @@ aliases:
 # Why Mathematica does not simplify Sinh[ArcCosh[x]]
 
 **Original Source**: [John D. Cook Blog](https://www.johndcook.com/blog/2026/03/10/sinh-arccosh/)
-**Author**: [[../entities/john-d-cook|John D. Cook]]
+**Author**: [[entities/john-d-cook|John D. Cook]]
 **Published**: 2026-03-10
 
 ## Summary
@@ -51,12 +51,12 @@ Mathematica reproduces most of these, **except** when applying sinh or cosh to a
 
 ## Related Concepts
 
-- [[../concepts/branch-cuts|Branch Cuts]] — How CASs define functions via branch cuts and analytic continuation
-- [[../concepts/symbolic-computation|Symbolic Computation]] — How computer algebra systems handle simplification with implicit domain assumptions
-- [[../concepts/complex-analysis|Complex Analysis]] — The mathematical foundation underlying these behaviors
+- [[concepts/branch-cuts|Branch Cuts]] — How CASs define functions via branch cuts and analytic continuation
+- [[concepts/symbolic-computation|Symbolic Computation]] — How computer algebra systems handle simplification with implicit domain assumptions
+- [[concepts/complex-analysis|Complex Analysis]] — The mathematical foundation underlying these behaviors
 
 ## Related Entities
 
-- [[../entities/john-d-cook|John D. Cook]] — Author, mathematician and blogger
+- [[entities/john-d-cook|John D. Cook]] — Author, mathematician and blogger
 
 ## Related Synthesis

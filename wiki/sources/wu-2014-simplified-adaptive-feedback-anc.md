@@ -14,7 +14,7 @@ aliases:
 
 # A Simplified Adaptive Feedback Active Noise Control System
 
-**Authors**: [[../entities/lifu-wu|Lifu Wu]], [[../entities/xiaojun-qiu|Xiaojun Qiu]], [[../entities/yecai-guo|Yecai Guo]]
+**Authors**: [[entities/lifu-wu|Lifu Wu]], [[entities/xiaojun-qiu|Xiaojun Qiu]], [[entities/yecai-guo|Yecai Guo]]
 **Published**: 2014, Applied Acoustics, Vol. 81, pp. 40–46
 **DOI**: [10.1016/j.apacoust.2014.02.006](http://dx.doi.org/10.1016/j.apacoust.2014.02.006)
 **📎 Zotero**: [zotero://select/items/0_IUCZFYQX](zotero://select/items/0_IUCZFYQX) |
@@ -61,16 +61,16 @@ Proposes a **Simplified Adaptive Feedback (SimpAFB)** ANC system that uses the e
 
 ## Related Concepts
 
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/adaptive-feedback-control|Adaptive Feedback Control]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/internal-model-control|Internal Model Control]]
-- [[../concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/adaptive-feedback-control|Adaptive Feedback Control]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/internal-model-control|Internal Model Control]]
+- [[concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]]
 
 ## Related Entities
 
-- [[../entities/lifu-wu|Lifu Wu]] — First author, Nanjing University of Information Science and Technology
-- [[../entities/xiaojun-qiu|Xiaojun Qiu]] — Corresponding author, Nanjing University
-- [[../entities/yecai-guo|Yecai Guo]] — Co-author, Nanjing University of Information Science and Technology
+- [[entities/lifu-wu|Lifu Wu]] — First author, Nanjing University of Information Science and Technology
+- [[entities/xiaojun-qiu|Xiaojun Qiu]] — Corresponding author, Nanjing University
+- [[entities/yecai-guo|Yecai Guo]] — Co-author, Nanjing University of Information Science and Technology
 
 ## Related Synthesis

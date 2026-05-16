@@ -10,7 +10,11 @@ log = logging.getLogger(f"mkdocs.plugins.{__name__}")
 
 AUTOLINK_RE = r'\[([^\]]+)\]\((([^)/]+\.(md|png|jpg))(#.*)*)\)'
 
-ROAMLINK_RE = r"""\[\[(.*?)(\#.*?)?(?:(?:\\\||\|)([\D][^\|\]\\]+[\d]*))?(?:(?:\\\||\|)(\d+)(?:x(\d+))?)?\]\]"""
+ROAMLINK_RE = r"""(?<!\!)\[\[(.*?)(\#.*?)?(?:(?:\\\||\|)([\D][^\|\]\\]+[\d]*))?(?:(?:\\\||\|)(\d+)(?:x(\d+))?)?\]\]"""
+
+EMBED_ROAMLINK_RE = r"""\!\[\[(.*?)(?:(?:\\\||\|)([^\|\]\\]+))?(?:(?:\\\||\|)(\d+)(?:x(\d+))?)?\]\]"""
+
+IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp", ".bmp"}
 
 
 def _to_page_relative(path_from_docs_root, page_src_path):
@@ -52,6 +56,53 @@ class AutoLinkReplacer:
         else:
             link = match.group(0).replace(match.group(2),
                                           rel_link_url + match.group(5))
+        return link
+
+
+class EmbedRoamLinkReplacer:
+    """Resolve Obsidian embed wikilinks `![[path|alt|WxH]]` into markdown images.
+
+    The path is treated as **vault-absolute** (relative to the project root,
+    which is the Obsidian vault root). For paths under `raw/`, the file lives
+    one level above `docs_dir`, so the substitution rewrites the URL to be
+    relative to the page's source directory.
+    """
+
+    def __init__(self, base_docs_url, page_url):
+        self.base_docs_url = base_docs_url
+        self.page_url = page_url
+
+    def __call__(self, match):
+        whole = match.group(0)
+        target = (match.group(1) or "").strip().rstrip("\\")
+        alt = (match.group(2) or "").strip()
+        width = match.group(3) or ""
+        height = match.group(4) or ""
+
+        if not target:
+            return whole
+
+        ext = os.path.splitext(target)[1].lower()
+        if ext not in IMAGE_EXTENSIONS:
+            return whole
+
+        if target.startswith("wiki/"):
+            url_from_docs = target[len("wiki/"):]
+        else:
+            url_from_docs = target
+
+        rel_url = _to_page_relative(url_from_docs, self.page_url)
+
+        if not alt:
+            alt = os.path.basename(target)
+
+        link = f"![{alt}]({rel_url})"
+        if width and not height:
+            link += f'{{ width="{width}" }}'
+        elif height and not width:
+            link += f'{{ height="{height}" }}'
+        elif width and height:
+            link += f'{{ width="{width}"; height="{height}" }}'
         return link
 
 
@@ -186,6 +237,8 @@ class FixObsidianEscapesPlugin(BasePlugin):
 
         markdown = re.sub(AUTOLINK_RE,
                           AutoLinkReplacer(base_docs_url, page_url), markdown)
+        markdown = re.sub(EMBED_ROAMLINK_RE,
+                          EmbedRoamLinkReplacer(base_docs_url, page_url), markdown)
         markdown = re.sub(ROAMLINK_RE,
                           RoamLinkReplacer(base_docs_url, page_url), markdown)
 

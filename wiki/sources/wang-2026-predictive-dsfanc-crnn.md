@@ -25,7 +25,7 @@ tags:
 
 | | |
 |---|---|
-| **Authors** | [[../entities/boxiang-wang\|Boxiang Wang]], [[../entities/zhengding-luo\|Zhengding Luo]], [[../entities/dongyuan-shi\|Dongyuan Shi]], [[../entities/junwei-ji\|Junwei Ji]], [[../entities/xiruo-su\|Xiruo Su]], [[../entities/woon-seng-gan\|Woon-Seng Gan]] |
+| **Authors** | [[entities/boxiang-wang\|Boxiang Wang]], [[entities/zhengding-luo\|Zhengding Luo]], [[entities/dongyuan-shi\|Dongyuan Shi]], [[entities/junwei-ji\|Junwei Ji]], [[entities/xiruo-su\|Xiruo Su]], [[entities/woon-seng-gan\|Woon-Seng Gan]] |
 | **Institutions** | Nanyang Technological University, Singapore; Northwestern Polytechnical University, China |
 | **Venue** | Preprint (arXiv:2604.23144) |
 | **Year** | 2026 |
@@ -155,13 +155,13 @@ Motion modes: **static**, **constant-rate** (±12°/frame), **time-varying-rate*
 
 ## Related Concepts
 
-- [[../concepts/active-noise-control|Active Noise Control]] — core domain; this paper extends SFANC with predictive capability
-- [[../concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — foundation; PD-SFANC adds DoA prediction to directional SFANC
-- [[../concepts/convolutional-recurrent-network|Convolutional Recurrent Network]] — CRNN architecture used for DoA prediction (note: different from CRN encoder-decoder; this is CNN+GRU for classification)
-- [[../concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]] — CRNN predicts next-frame DoA for proactive filter selection
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — used to pre-train the control filter library
-- [[../concepts/moving-source-tracking|Moving Source Tracking]] — core problem addressed by this paper
+- [[concepts/active-noise-control|Active Noise Control]] — core domain; this paper extends SFANC with predictive capability
+- [[concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — foundation; PD-SFANC adds DoA prediction to directional SFANC
+- [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]] — CRNN architecture used for DoA prediction (note: different from CRN encoder-decoder; this is CNN+GRU for classification)
+- [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]] — CRNN predicts next-frame DoA for proactive filter selection
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — used to pre-train the control filter library
+- [[concepts/moving-source-tracking|Moving Source Tracking]] — core problem addressed by this paper
 
 ## Related Synthesis
 
-- [[../synthesis/ai-driven-anc|AI-Driven Active Noise Control]] — PD-SFANC is a neural selection method extending the SFANC paradigm
+- [[synthesis/ai-driven-anc|AI-Driven Active Noise Control]] — PD-SFANC is a neural selection method extending the SFANC paradigm

@@ -104,13 +104,13 @@ In hearing aids, AFC uses an adaptive filter (typically PEM-NLMS) to estimate an
 
 ## Related Sources
 
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section II-D: Feedback Effects and Solutions
-- [[../sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
-- [[../sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC with GRU step-size prediction
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section II-D: Feedback Effects and Solutions
+- [[sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
+- [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC with GRU step-size prediction
 
 ## Related Entities
 
-- [[../entities/sen-m-kuo|Sen M. Kuo]] — Comprehensive treatment of feedback neutralization techniques
-- [[../entities/henning-schepker|Henning Schepker]] — AFC in hearing aids, shadow filter and beamformer approaches
-- [[../entities/chengshi-zheng|Chengshi Zheng]] — DeepPEM-AFC, frequency shift analysis for hearing aids
-- [[../entities/xiaofan-zhan|Xiaofan Zhan]] — DeepPEM-AFC
+- [[entities/sen-m-kuo|Sen M. Kuo]] — Comprehensive treatment of feedback neutralization techniques
+- [[entities/henning-schepker|Henning Schepker]] — AFC in hearing aids, shadow filter and beamformer approaches
+- [[entities/chengshi-zheng|Chengshi Zheng]] — DeepPEM-AFC, frequency shift analysis for hearing aids
+- [[entities/xiaofan-zhan|Xiaofan Zhan]] — DeepPEM-AFC

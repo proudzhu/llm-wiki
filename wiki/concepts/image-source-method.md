@@ -54,4 +54,4 @@ From Dai 2026's configuration:
 
 ## Related Sources
 
-- [[../sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
+- [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]

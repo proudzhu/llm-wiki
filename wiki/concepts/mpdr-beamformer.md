@@ -59,4 +59,4 @@ where $\mu[i]$ is computed at each frame to guarantee $W \geq W_{\min}$.
 
 ## Related Sources
 
-- [[../sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
+- [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]

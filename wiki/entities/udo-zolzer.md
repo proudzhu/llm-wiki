@@ -20,13 +20,13 @@ Professor Zölzer is well-known for his textbook *"Digital Audio Effects" (DAFX)
 
 ## Related Concepts
 
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/feedback-anc|Feedback ANC]]
-- [[../concepts/hybrid-anc|Hybrid ANC]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/feedback-anc|Feedback ANC]]
+- [[concepts/hybrid-anc|Hybrid ANC]]
 
 ## Related Sources
 
-- [[../sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
+- [[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
 
 ## Related Entities
 

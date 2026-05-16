@@ -22,10 +22,10 @@ tags:
 
 ## Related Sources
 
-- [[../sources/zhang-2022-bone-conducted-speech-dissertation|Zhang 2022: Statistical Signal Processing of Bone-Conducted Speech]]
+- [[sources/zhang-2022-bone-conducted-speech-dissertation|Zhang 2022: Statistical Signal Processing of Bone-Conducted Speech]]
 
 ## Related Concepts
 
-- [[../concepts/bone-conduction|Bone Conduction]]
-- [[../concepts/signal-processing|Signal Processing]]
-- [[../concepts/adaptive-filtering|Adaptive Filtering]]
+- [[concepts/bone-conduction|Bone Conduction]]
+- [[concepts/signal-processing|Signal Processing]]
+- [[concepts/adaptive-filtering|Adaptive Filtering]]

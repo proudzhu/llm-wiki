@@ -22,7 +22,7 @@ Where $\epsilon$ is a small threshold. This approach aims to catch cases where $
 
 ## Problems with Universal Epsilons
 
-As argued by [[../entities/lisyarus|lisyarus]], the widespread and uncritical use of epsilons leads to several failure modes:
+As argued by [[entities/lisyarus|lisyarus]], the widespread and uncritical use of epsilons leads to several failure modes:
 
 1.  **Non-transitivity**: $a \approx b$ and $b \approx c$ does not mean $a \approx c$. This can cause non-deterministic behavior in algorithms that require transitive relations (e.g., sorting, convex hulls).
 2.  **Inconsistent Invariants**: When different parts of a large system use different epsilons (or some use none), the resulting logic can become contradictory, making it impossible to debug.
@@ -38,8 +38,8 @@ As argued by [[../entities/lisyarus|lisyarus]], the widespread and uncritical us
 ## Related Concepts
 - [[ieee-754|IEEE 754]]
 - [[numerical-stability|Numerical Stability]]
-- [[../sources/its-ok-to-compare-floating-points|It's ok to compare floating points for equality]]
+- [[sources/its-ok-to-compare-floating-points|It's ok to compare floating points for equality]]
 
 ## Related Sources
 
-- [[../sources/its-ok-to-compare-floating-points|It's ok to compare floating points for equality]]
+- [[sources/its-ok-to-compare-floating-points|It's ok to compare floating points for equality]]

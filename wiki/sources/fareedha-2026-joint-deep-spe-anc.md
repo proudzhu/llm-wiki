@@ -18,7 +18,7 @@ tags:
 
 # Fareedha, Vasundhara, Kar & Christensen 2026: Joint Deep SPE and Adaptive Control for ANC
 
-**Authors**: Fareedha, Vasundhara, [[../entities/asutosh-kar|Asutosh Kar]], [[../entities/mads-graesboell-christensen|Mads Græsbøll Christensen]]
+**Authors**: Fareedha, Vasundhara, [[entities/asutosh-kar|Asutosh Kar]], [[entities/mads-graesboell-christensen|Mads Græsbøll Christensen]]
 **Institutions**: NIT Warangal, Birmingham City University, Aalborg University
 **Published**: ICASSP 2026, pp. 15177–15181
 **Type**: Conference Paper
@@ -151,21 +151,21 @@ Methods lacking accurate secondary path modeling exhibit higher steady-state noi
 
 ## Related Concepts
 
-- [[../concepts/secondary-path-modeling|Secondary Path Modeling]]
-- [[../concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]]
-- [[../concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
-- [[../concepts/neural-networks|Neural Networks]]
+- [[concepts/secondary-path-modeling|Secondary Path Modeling]]
+- [[concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]]
+- [[concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
+- [[concepts/neural-networks|Neural Networks]]
 
 ## Related Sources
 
-- [[../sources/fareedha-2025-dfanc-ekf|Fareedha 2025: DFANC-EKF]] — Previous work by same authors: EKF + CNN for dynamic fixed-filter ANC
-- [[../sources/akhtar-2006-vss-lms-online-spm|Akhtar 2006: VSS LMS for Online Secondary Path Modeling]] — Classical VSS-LMS baseline that DeepSPE outperforms by 3.92 dB
+- [[sources/fareedha-2025-dfanc-ekf|Fareedha 2025: DFANC-EKF]] — Previous work by same authors: EKF + CNN for dynamic fixed-filter ANC
+- [[sources/akhtar-2006-vss-lms-online-spm|Akhtar 2006: VSS LMS for Online Secondary Path Modeling]] — Classical VSS-LMS baseline that DeepSPE outperforms by 3.92 dB
 
 ## Related Entities
 
-- [[../entities/fareedha|Fareedha]]
-- [[../entities/vasundhara|Vasundhara]]
-- [[../entities/asutosh-kar|Asutosh Kar]]
-- [[../entities/mads-graesboell-christensen|Mads Græsbøll Christensen]]
+- [[entities/fareedha|Fareedha]]
+- [[entities/vasundhara|Vasundhara]]
+- [[entities/asutosh-kar|Asutosh Kar]]
+- [[entities/mads-graesboell-christensen|Mads Græsbøll Christensen]]

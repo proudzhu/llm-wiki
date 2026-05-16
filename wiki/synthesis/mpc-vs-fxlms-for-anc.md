@@ -13,13 +13,13 @@ tags:
 
 # MPC vs Traditional ANC: Two Paths to Optimal Control
 
-> Cross-source synthesis connecting [[../sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]] (DSP implementation) and [[../sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]] (closed-form solution).
+> Cross-source synthesis connecting [[sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]] (DSP implementation) and [[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]] (closed-form solution).
 
 ---
 
 ## The Fundamental Difference
 
-Traditional ANC ([[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]) and [[../concepts/model-predictive-control|Model Predictive Control]] (MPC) solve the same problem — generate anti-noise to cancel unwanted sound — but with **fundamentally different philosophies**:
+Traditional ANC ([[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]) and [[concepts/model-predictive-control|Model Predictive Control]] (MPC) solve the same problem — generate anti-noise to cancel unwanted sound — but with **fundamentally different philosophies**:
 
 | Aspect | FxLMS | MPC |
 |--------|-------|-----|
@@ -34,7 +34,7 @@ Traditional ANC ([[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm
 
 ## MPC for ANC: The Control Problem
 
-Both [[../sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]] and [[../sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]] formulate ANC as:
+Both [[sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]] and [[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]] formulate ANC as:
 
 $$\min_u \sum_{k=0}^{N_p-1} \left( x(k)^T Q x(k) + u(k)^T R u(k) \right)$$
 
@@ -51,7 +51,7 @@ Where $d$ is the system delay (typically 1-5 samples in ANC).
 
 ### Approach
 
-[[../sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]] uses a **numerical QP solver** running online at each control step:
+[[sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]] uses a **numerical QP solver** running online at each control step:
 
 1. At each sample, formulate the MPC problem as a Quadratic Program
 2. Solve the QP using an active-set method
@@ -81,7 +81,7 @@ Where $d$ is the system delay (typically 1-5 samples in ANC).
 
 ### Approach
 
-[[../sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]] derives an **analytical closed-form solution** for MPC with input delay:
+[[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]] derives an **analytical closed-form solution** for MPC with input delay:
 
 $$u^* = -(R + B^T P B)^{-1} B^T P A x$$
 
@@ -148,17 +148,17 @@ Unlike FxLMS which implicitly handles delay through the filtered reference signa
 
 ## Related Concepts
 
-- [[../concepts/model-predictive-control|Model Predictive Control]]
-- [[../concepts/quadratic-programming|Quadratic Programming]]
-- [[../concepts/state-space-model|State-Space Model]]
-- [[../concepts/system-identification|System Identification]]
-- [[../concepts/kalman-filter|Kalman Filter]]
-- [[../concepts/active-vibration-control|Active Vibration Control]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/active-noise-control|Active Noise Control]]
+- [[concepts/model-predictive-control|Model Predictive Control]]
+- [[concepts/quadratic-programming|Quadratic Programming]]
+- [[concepts/state-space-model|State-Space Model]]
+- [[concepts/system-identification|System Identification]]
+- [[concepts/kalman-filter|Kalman Filter]]
+- [[concepts/active-vibration-control|Active Vibration Control]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/active-noise-control|Active Noise Control]]
 
 ## Related Sources
 
-- [[../sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]
-- [[../sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]]
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
+- [[sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]
+- [[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]]
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]

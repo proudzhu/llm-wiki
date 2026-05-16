@@ -109,16 +109,16 @@ To ensure causality, the delayed RMT estimates $ê[n-Δ]$ instead of $ê[n]$, sh
 
 ## Related Concepts
 
-- [[../concepts/virtual-sensing|Virtual Sensing]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
+- [[concepts/virtual-sensing|Virtual Sensing]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
 
 ## Related Synthesis
 
-- [[../synthesis/virtual-sensing-evolution|Evolution of Virtual Sensing in ANC]]
-- [[../synthesis/ai-driven-anc|AI-Driven ANC]]
+- [[synthesis/virtual-sensing-evolution|Evolution of Virtual Sensing in ANC]]
+- [[synthesis/ai-driven-anc|AI-Driven ANC]]
 
 ## Related Entities
 
-- [[../entities/felix-holzmueller|Felix Holzmüller]]
-- [[../entities/alois-sontacchi|Alois Sontacchi]]
+- [[entities/felix-holzmueller|Felix Holzmüller]]
+- [[entities/alois-sontacchi|Alois Sontacchi]]

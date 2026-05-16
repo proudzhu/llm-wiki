@@ -13,7 +13,7 @@ Nicolas Zucchet is a researcher specializing in Recurrent Neural Networks (RNNs)
 
 ## Research Focus
 
-His work focuses on finding efficient alternatives to **[[../concepts/backpropagation-through-time|Backpropagation Through Time]] (BPTT)** for training recurrent systems. He explores algorithms that can compute gradients forward in time, which are more memory-efficient and biologically plausible than standard backpropagation.
+His work focuses on finding efficient alternatives to **[[concepts/backpropagation-through-time|Backpropagation Through Time]] (BPTT)** for training recurrent systems. He explores algorithms that can compute gradients forward in time, which are more memory-efficient and biologically plausible than standard backpropagation.
 
 ### Forward Propagation of Errors Through Time (FPTT)
 Zucchet (2026) derived an exact forward-propagation algorithm for RNN gradients. His key contribution was identifying a fundamental limitation of such forward-error methods: they are numerically unstable for stable linear systems (systems that "forget"). This result suggests that BPTT remains the most numerically sound method for training standard RNNs and State-Space Models.
@@ -25,12 +25,12 @@ Zucchet (2026) derived an exact forward-propagation algorithm for RNN gradients.
 
 ## Related Concepts
 
-- [[../concepts/backpropagation-through-time|Backpropagation Through Time]]
-- [[../concepts/real-time-recurrent-learning|Real-Time Recurrent Learning]]
-- [[../concepts/linear-recurrent-unit|Linear Recurrent Unit]]
+- [[concepts/backpropagation-through-time|Backpropagation Through Time]]
+- [[concepts/real-time-recurrent-learning|Real-Time Recurrent Learning]]
+- [[concepts/linear-recurrent-unit|Linear Recurrent Unit]]
 
 ## Related Sources
 
-- [[../sources/zucchet-2026-forward-propagation-errors-through-time|Zucchet 2026: Forward Propagation of Errors Through Time]]
+- [[sources/zucchet-2026-forward-propagation-errors-through-time|Zucchet 2026: Forward Propagation of Errors Through Time]]
 
 ## Related Entities

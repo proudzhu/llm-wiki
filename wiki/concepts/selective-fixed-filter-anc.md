@@ -69,19 +69,19 @@ Instead of selecting from a discrete library, GFANC uses a generative model to s
 
 ## Related Concepts
 
-- [[../concepts/active-noise-control|Active Noise Control]] — parent domain
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — adaptive alternative; used to pre-train SFANC filters
-- [[../concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]] — spatial information for D-SFANC and PD-SFANC
-- [[../concepts/convolutional-recurrent-network|Convolutional Recurrent Network]] — neural architecture for filter selection and DoA prediction
-- [[../concepts/moving-source-tracking|Moving Source Tracking]] — core challenge addressed by PD-SFANC
-- [[../concepts/generative-fixed-filter-anc|Generative Fixed-Filter ANC]] — GFANC and E2E-CFG: generative approaches beyond discrete selection
-- [[../concepts/end-to-end-differentiable-anc|End-to-End Differentiable ANC]] — differentiable training paradigm for unsupervised GFANC and E2E-CFG
-- [[../concepts/frequency-response-matching|Frequency Response Matching]] — non-neural selection mechanism used in FRM-SFANC
+- [[concepts/active-noise-control|Active Noise Control]] — parent domain
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — adaptive alternative; used to pre-train SFANC filters
+- [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]] — spatial information for D-SFANC and PD-SFANC
+- [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]] — neural architecture for filter selection and DoA prediction
+- [[concepts/moving-source-tracking|Moving Source Tracking]] — core challenge addressed by PD-SFANC
+- [[concepts/generative-fixed-filter-anc|Generative Fixed-Filter ANC]] — GFANC and E2E-CFG: generative approaches beyond discrete selection
+- [[concepts/end-to-end-differentiable-anc|End-to-End Differentiable ANC]] — differentiable training paradigm for unsupervised GFANC and E2E-CFG
+- [[concepts/frequency-response-matching|Frequency Response Matching]] — non-neural selection mechanism used in FRM-SFANC
 
 ## Related Sources
 
-- [[../sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]] — PD-SFANC with CRNN-based DoA prediction
-- [[../sources/wang-2026-directional-sfanc-reverberant|Wang 2026: Directional SFANC in Reverberant Environments]] — CNN-based DoA estimation for reverberant conditions
-- [[../sources/luo-2026-hybrid-gfanc-fxnlms|Luo 2026: Hybrid GFANC-FxNLMS]] — generative filter selection with adaptive refinement
-- [[../sources/yin-2023-selective-fixed-filter-anc-headphones|Yin 2023: Selective Fixed-Filter ANC Based on Frequency Response Matching in Headphones]] — FRM-SFANC algorithm
-- [[../sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — foundational work establishing direction-dependent causality in feedforward ANC headsets
+- [[sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]] — PD-SFANC with CRNN-based DoA prediction
+- [[sources/wang-2026-directional-sfanc-reverberant|Wang 2026: Directional SFANC in Reverberant Environments]] — CNN-based DoA estimation for reverberant conditions
+- [[sources/luo-2026-hybrid-gfanc-fxnlms|Luo 2026: Hybrid GFANC-FxNLMS]] — generative filter selection with adaptive refinement
+- [[sources/yin-2023-selective-fixed-filter-anc-headphones|Yin 2023: Selective Fixed-Filter ANC Based on Frequency Response Matching in Headphones]] — FRM-SFANC algorithm
+- [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — foundational work establishing direction-dependent causality in feedforward ANC headsets

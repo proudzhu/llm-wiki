@@ -17,7 +17,7 @@ tags:
 
 # Jin, Zheng & Guo 2026: Momentum LMS Theory beyond Stationarity
 
-**Authors**: [[../entities/yifei-jin|Yifei Jin]], [[../entities/xin-zheng|Xin Zheng]], [[../entities/lei-guo|Lei Guo]]
+**Authors**: [[entities/yifei-jin|Yifei Jin]], [[entities/xin-zheng|Xin Zheng]], [[entities/lei-guo|Lei Guo]]
 
 **Affiliation**: Academy of Mathematics and Systems Science, Chinese Academy of Sciences; University of Chinese Academy of Sciences, Beijing, China
 
@@ -153,14 +153,14 @@ MLMS consistently achieves the highest SNR improvement across all noise conditio
 
 ## Related Concepts
 
-- [[../concepts/momentum-lms|Moment LMS]]
-- [[../concepts/adaptive-filtering|Adaptive Filtering]]
-- [[../concepts/variable-step-size-lms|Variable Step Size LMS]]
-- [[../concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
-- [[../concepts/online-learning|Online Learning]]
-- [[../concepts/kalman-filter|Kalman Filter]]
+- [[concepts/momentum-lms|Moment LMS]]
+- [[concepts/adaptive-filtering|Adaptive Filtering]]
+- [[concepts/variable-step-size-lms|Variable Step Size LMS]]
+- [[concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
+- [[concepts/online-learning|Online Learning]]
+- [[concepts/kalman-filter|Kalman Filter]]
 
 ## Related Sources
 
-- [[../sources/akhtar-2006-vss-lms-online-spm|Akhtar 2006: VSS LMS for Online SPM]]
-- [[../sources/chen-2016-generalized-correntropy-robust-adaptive-filtering|Chen 2016: Generalized Correntropy for Robust Adaptive Filtering]]
+- [[sources/akhtar-2006-vss-lms-online-spm|Akhtar 2006: VSS LMS for Online SPM]]
+- [[sources/chen-2016-generalized-correntropy-robust-adaptive-filtering|Chen 2016: Generalized Correntropy for Robust Adaptive Filtering]]

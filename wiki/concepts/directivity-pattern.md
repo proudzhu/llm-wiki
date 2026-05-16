@@ -36,11 +36,11 @@ where $(\theta_s,\phi_s)$ specifies the target look direction.
 
 ## Related Concepts
 
-- [[../concepts/virtual-directional-microphone|Virtual Directional Microphone]]
-- [[../concepts/neural-directional-filtering|Neural Directional Filtering]]
-- [[../concepts/white-noise-gain|White Noise Gain]]
-- [[../concepts/beamforming|Beamforming]]
+- [[concepts/virtual-directional-microphone|Virtual Directional Microphone]]
+- [[concepts/neural-directional-filtering|Neural Directional Filtering]]
+- [[concepts/white-noise-gain|White Noise Gain]]
+- [[concepts/beamforming|Beamforming]]
 
 ## Related Sources
 
-- [[../sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
+- [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]

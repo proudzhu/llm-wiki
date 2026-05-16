@@ -149,17 +149,17 @@ This ensures joint cost function $J = E[e_w²] + E[e_{fb}²]$ has unique global 
 
 ## Related Concepts
 
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/hybrid-anc|Hybrid ANC]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/causality|Causality in ANC]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/hybrid-anc|Hybrid ANC]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/causality|Causality in ANC]]
 
 ## Related Synthesis
 
-- [[../synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]]
-- [[../synthesis/adaptive-algorithm-tradeoffs|Adaptive Algorithm Trade-offs]]
+- [[synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]]
+- [[synthesis/adaptive-algorithm-tradeoffs|Adaptive Algorithm Trade-offs]]
 
 ## Related Entities
 
-- [[../entities/xiaoyi-shen|Xiaoyi Shen]]
-- [[../entities/woon-seng-gan|Woon-Seng Gan]]
+- [[entities/xiaoyi-shen|Xiaoyi Shen]]
+- [[entities/woon-seng-gan|Woon-Seng Gan]]

@@ -53,14 +53,14 @@ Training-inference mismatch: offline training without AHS processing differs fro
 
 ## Related Concepts
 
-- [[../concepts/kalman-filter|Kalman Filter]] — adaptive filter used in AFC-based AHS
-- [[../concepts/frequency-domain-kalman-filter|Frequency-Domain Kalman Filter]] — FDKF for AHS
-- [[../concepts/acoustic-feedback|Acoustic Feedback]] — the feedback phenomenon that causes howling
-- [[../concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]] — NN-based AHS methods
-- [[../concepts/teacher-forcing|Teacher Forcing]] — training strategy for recursive AHS models
-- [[../concepts/self-attentive-recurrent-neural-network|Self-Attentive Recurrent Neural Network]] — Hybrid AHS neural backbone
+- [[concepts/kalman-filter|Kalman Filter]] — adaptive filter used in AFC-based AHS
+- [[concepts/frequency-domain-kalman-filter|Frequency-Domain Kalman Filter]] — FDKF for AHS
+- [[concepts/acoustic-feedback|Acoustic Feedback]] — the feedback phenomenon that causes howling
+- [[concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]] — NN-based AHS methods
+- [[concepts/teacher-forcing|Teacher Forcing]] — training strategy for recursive AHS models
+- [[concepts/self-attentive-recurrent-neural-network|Self-Attentive Recurrent Neural Network]] — Hybrid AHS neural backbone
 
 ## Related Sources
 
-- [[../sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]
-- [[../sources/zhang-2024-neural-kalman-howling|Zhang 2024: Neural Network Augmented Kalman Filter for AHS]]
+- [[sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]
+- [[sources/zhang-2024-neural-kalman-howling|Zhang 2024: Neural Network Augmented Kalman Filter for AHS]]

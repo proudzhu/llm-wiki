@@ -17,7 +17,7 @@ tags:
 
 # Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech
 
-- **Authors**: [[../entities/kelan-kuang|Kelan Kuang]], [[../entities/feiran-yang|Feiran Yang]], [[../entities/jun-yang|Jun Yang]]
+- **Authors**: [[entities/kelan-kuang|Kelan Kuang]], [[entities/feiran-yang|Feiran Yang]], [[entities/jun-yang|Jun Yang]]
 - **Affiliations**: Key Laboratory of Noise and Vibration Research, Institute of Acoustics, Chinese Academy of Sciences; University of Chinese Academy of Sciences; State Key Laboratory of Acoustics
 - **Venue**: The Journal of the Acoustical Society of America (JASA), Vol. 156, Issue 2, pp. 1355–1366
 - **Year**: 2024
@@ -71,7 +71,7 @@ The fused signal $\mathbf{y}_{AF}$ is concatenated with original $\mathbf{y}_{AC
 
 ### DenGCAN Backbone
 
-The [[../concepts/densely-gated-convolutional-attention-network|DenGCAN]] backbone uses a convolutional encoder-decoder structure with:
+The [[concepts/densely-gated-convolutional-attention-network|DenGCAN]] backbone uses a convolutional encoder-decoder structure with:
 
 - **5 dense blocks** in encoder (channel progression: 6→16→32→48→64→64) and 5 in decoder
 - **2-layer grouped sConformer** as bottleneck for temporal dependency modeling
@@ -160,15 +160,15 @@ Absolute Category Rating with 30 listeners: the proposed model achieves the high
 
 ## Related Concepts
 
-- [[../concepts/densely-gated-convolutional-attention-network|DenGCAN (Densely Gated Convolutional Attention Network)]]
-- [[../concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
-- [[../concepts/attention-gate|Attention Gate (AG)]]
-- [[../concepts/bone-conduction|Bone Conduction]]
-- [[../concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
-- [[../concepts/complex-ratio-mask|Complex Ratio Mask (cRM)]]
-- [[../concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
-- [[../concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
+- [[concepts/densely-gated-convolutional-attention-network|DenGCAN (Densely Gated Convolutional Attention Network)]]
+- [[concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
+- [[concepts/attention-gate|Attention Gate (AG)]]
+- [[concepts/bone-conduction|Bone Conduction]]
+- [[concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
+- [[concepts/complex-ratio-mask|Complex Ratio Mask (cRM)]]
+- [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
+- [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
 
 ## Related Synthesis
 
-- [[../synthesis/multimodal-bc-speech-enhancement|Multimodal Smart Hearables: Bone-Conduction Aided Speech Enhancement]]
+- [[synthesis/multimodal-bc-speech-enhancement|Multimodal Smart Hearables: Bone-Conduction Aided Speech Enhancement]]

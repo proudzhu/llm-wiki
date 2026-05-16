@@ -48,9 +48,9 @@ Reduce steps by straightening the generative trajectory:
 
 ## Related Concepts
 
-- [[../concepts/drifting-models|Drifting Models]]
-- [[../concepts/diffusion-models-for-speech|Diffusion Models for Speech Enhancement]]
+- [[concepts/drifting-models|Drifting Models]]
+- [[concepts/diffusion-models-for-speech|Diffusion Models for Speech Enhancement]]
 
 ## Related Sources
 
-- [[../sources/xu-2026-drifting-models-speech-enhancement|Xu et al. 2026: Speech Enhancement Based on Drifting Models]]
+- [[sources/xu-2026-drifting-models-speech-enhancement|Xu et al. 2026: Speech Enhancement Based on Drifting Models]]

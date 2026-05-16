@@ -16,7 +16,7 @@ tags:
 
 # Dai 2026: Speech-Preserving Deep ANC in Reverberant Environments
 
-**Author**: [[../entities/shuning-dai|Shuning Dai]]
+**Author**: [[entities/shuning-dai|Shuning Dai]]
 **Supervisor**: Gan Woon Seng
 **Institution**: Nanyang Technological University (School of EEE)
 **Year**: 2026
@@ -173,22 +173,22 @@ The paper clearly distinguishes speech-preserving ANC from traditional Speech En
 
 ## Related Concepts
 
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
-- [[../concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
-- [[../concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
-- [[../concepts/speech-preserving-anc|Speech-Preserving ANC]]
-- [[../concepts/image-source-method|Image Source Method]]
-- [[../concepts/transparency-mode|Transparency Mode]]
-- [[../concepts/voice-activity-detection|Voice Activity Detection]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
+- [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
+- [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
+- [[concepts/speech-preserving-anc|Speech-Preserving ANC]]
+- [[concepts/image-source-method|Image Source Method]]
+- [[concepts/transparency-mode|Transparency Mode]]
+- [[concepts/voice-activity-detection|Voice Activity Detection]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
 
 ## Related Synthesis
 
-- [[../synthesis/ai-driven-anc|AI-Driven ANC]]
-- [[../synthesis/nonlinear-anc-approaches|Nonlinear ANC Approaches]]
-- [[../synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]]
+- [[synthesis/ai-driven-anc|AI-Driven ANC]]
+- [[synthesis/nonlinear-anc-approaches|Nonlinear ANC Approaches]]
+- [[synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]]
 
 ## Related Entities
 
-- [[../entities/shuning-dai|Shuning Dai]] — Author
+- [[entities/shuning-dai|Shuning Dai]] — Author

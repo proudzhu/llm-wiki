@@ -64,10 +64,10 @@ For MLMS with momentum factor $\alpha$, the ODE becomes $\dot{w} = \beta(P - Rw)
 
 ## Related Concepts
 
-- [[../concepts/momentum-lms|Momentum LMS]]
-- [[../concepts/adaptive-filtering|Adaptive Filtering]]
-- [[../concepts/kalman-filter|Kalman Filter]]
+- [[concepts/momentum-lms|Momentum LMS]]
+- [[concepts/adaptive-filtering|Adaptive Filtering]]
+- [[concepts/kalman-filter|Kalman Filter]]
 
 ## Related Sources
 
-- [[../sources/sharma-1998-momentum-adaptive-filtering|Sharma, Sethares & Bucklew 1998: Analysis of Momentum Adaptive Filtering Algorithms]]
+- [[sources/sharma-1998-momentum-adaptive-filtering|Sharma, Sethares & Bucklew 1998: Analysis of Momentum Adaptive Filtering Algorithms]]

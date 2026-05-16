@@ -50,7 +50,7 @@ This is a **dynamic, sample-dependent multi-scale fusion** — analogous to feat
 
 ## Use in BC/AC Fusion (Liu 2025)
 
-In [[../sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025]], ATFA replaces the recurrent middle layer of an encoder-decoder fusion network. Ablation showed:
+In [[sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025]], ATFA replaces the recurrent middle layer of an encoder-decoder fusion network. Ablation showed:
 
 - Replacing ATFA with LSTM: −0.49 PESQ at 5 dB SNR.
 - Three cascaded ATFAs + AHA at the encoder bottleneck.
@@ -59,12 +59,12 @@ The dual-axis attention is partly responsible for the observed **architectural r
 
 ## Related Concepts
 
-- [[../concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]] — channel-wise attention for cross-modal fusion (complementary).
-- [[../concepts/self-attentive-recurrent-neural-network|Self-Attentive RNN]] — earlier hybrid of attention + recurrence.
-- [[../concepts/dprnn|Dual-Path RNN]] — analogous dual-axis idea using RNNs instead of attention.
-- [[../concepts/attention-gate|Attention Gate (AG)]] — gating-style attention for skip connections.
-- [[../concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
+- [[concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]] — channel-wise attention for cross-modal fusion (complementary).
+- [[concepts/self-attentive-recurrent-neural-network|Self-Attentive RNN]] — earlier hybrid of attention + recurrence.
+- [[concepts/dprnn|Dual-Path RNN]] — analogous dual-axis idea using RNNs instead of attention.
+- [[concepts/attention-gate|Attention Gate (AG)]] — gating-style attention for skip connections.
+- [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
 
 ## Related Sources
 
-- [[../sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]]
+- [[sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]]

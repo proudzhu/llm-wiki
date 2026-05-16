@@ -28,9 +28,9 @@ where $D(z) = \frac{z^{-1} - \lambda}{1 - \lambda z^{-1}}$ is the all-pass delay
 
 ## Related Concepts
 
-- [[../concepts/frequency-warping|Frequency Warping]]
-- [[../concepts/all-pass-filter|All-Pass Filter]]
+- [[concepts/frequency-warping|Frequency Warping]]
+- [[concepts/all-pass-filter|All-Pass Filter]]
 
 ## Related Sources
 
-- [[../sources/seo-2016-feedback-anc-constrained-optimization|Seo et al. 2016: Feedback ANC via Constrained Optimization]]
+- [[sources/seo-2016-feedback-anc-constrained-optimization|Seo et al. 2016: Feedback ANC via Constrained Optimization]]

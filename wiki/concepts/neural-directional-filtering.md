@@ -40,12 +40,12 @@ The FT-JNF-based NDF architecture processes concatenated real/imaginary STFT coe
 
 ## Related Concepts
 
-- [[../concepts/virtual-directional-microphone|Virtual Directional Microphone]]
-- [[../concepts/directivity-pattern|Directivity Pattern]]
-- [[../concepts/fixed-beamformer|Fixed Beamformer]]
-- [[../concepts/differential-microphone-array|Differential Microphone Array]]
-- [[../concepts/joint-nonlinear-filtering|Joint Nonlinear Filtering]]
+- [[concepts/virtual-directional-microphone|Virtual Directional Microphone]]
+- [[concepts/directivity-pattern|Directivity Pattern]]
+- [[concepts/fixed-beamformer|Fixed Beamformer]]
+- [[concepts/differential-microphone-array|Differential Microphone Array]]
+- [[concepts/joint-nonlinear-filtering|Joint Nonlinear Filtering]]
 
 ## Related Sources
 
-- [[../sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
+- [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]

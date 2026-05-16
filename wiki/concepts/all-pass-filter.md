@@ -17,5 +17,5 @@ where $\lambda \in (-1, 1)$ is the warping parameter.
 
 ## Related Concepts
 
-- [[../concepts/frequency-warping|Frequency Warping]]
-- [[../concepts/warped-fir-filter|Warped FIR Filter]]
+- [[concepts/frequency-warping|Frequency Warping]]
+- [[concepts/warped-fir-filter|Warped FIR Filter]]

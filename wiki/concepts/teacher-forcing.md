@@ -45,4 +45,4 @@ Teacher forcing introduces a mismatch between offline training and streaming inf
 
 ## Related Sources
 
-- [[../sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]
+- [[sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]

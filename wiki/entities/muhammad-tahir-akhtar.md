@@ -23,16 +23,16 @@ tags:
 
 ## Related Sources
 
-- [[../sources/akhtar-2006-vss-lms-online-spm|Akhtar 2006: VSS LMS for Online Secondary Path Modeling]]
+- [[sources/akhtar-2006-vss-lms-online-spm|Akhtar 2006: VSS LMS for Online Secondary Path Modeling]]
 
 ## Related Concepts
 
-- [[../concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]]
-- [[../concepts/variable-step-size-lms|Variable Step Size LMS]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/secondary-path-modeling|Secondary Path Modeling]]
+- [[concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]]
+- [[concepts/variable-step-size-lms|Variable Step Size LMS]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/secondary-path-modeling|Secondary Path Modeling]]
 
 ## Related Entities
 
-- [[../entities/masahide-abe|Masahide Abe]] — Co-author, Tohoku University
-- [[../entities/masayuki-kawamata|Masayuki Kawamata]] — Co-author, Tohoku University
+- [[entities/masahide-abe|Masahide Abe]] — Co-author, Tohoku University
+- [[entities/masayuki-kawamata|Masayuki Kawamata]] — Co-author, Tohoku University

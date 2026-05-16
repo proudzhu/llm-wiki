@@ -20,7 +20,7 @@ aliases:
 
 # Active Noise Control Using Feedback. Fixed and Adaptive Controllers
 
-**Authors**: [[../entities/marek-pawelczyk|Marek Pawełczyk]], [[../entities/stephen-j-elliott|Stephen J. Elliott]], [[../entities/boaz-rafaely|Boaz Rafaely]]
+**Authors**: [[entities/marek-pawelczyk|Marek Pawełczyk]], [[entities/stephen-j-elliott|Stephen J. Elliott]], [[entities/boaz-rafaely|Boaz Rafaely]]
 **Published**: ISVR Technical Memorandum No. 822, December 1997
 **Institution**: Institute of Sound and Vibration Research, University of Southampton
 **Pages**: 74 (scanned document with OCR)
@@ -293,17 +293,17 @@ $$
 
 ## Related Concepts
 
-- [[../concepts/feedback-anc|Feedback ANC]]
-- [[../concepts/internal-model-control|Internal Model Control]]
-- [[../concepts/minimum-variance-control|Minimum Variance Control]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/wiener-filter|Wiener Filter]]
-- [[../concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
+- [[concepts/feedback-anc|Feedback ANC]]
+- [[concepts/internal-model-control|Internal Model Control]]
+- [[concepts/minimum-variance-control|Minimum Variance Control]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/wiener-filter|Wiener Filter]]
+- [[concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
 
 ## Related Entities
 
-- [[../entities/marek-pawelczyk|Marek Pawełczyk]] — 第一作者，ISVR/Silesian Technical University
-- [[../entities/stephen-j-elliott|Stephen J. Elliott]] — ANC 理论先驱，ISVR
-- [[../entities/boaz-rafaely|Boaz Rafaely]] — 反馈 ANC 研究者，ISVR
+- [[entities/marek-pawelczyk|Marek Pawełczyk]] — 第一作者，ISVR/Silesian Technical University
+- [[entities/stephen-j-elliott|Stephen J. Elliott]] — ANC 理论先驱，ISVR
+- [[entities/boaz-rafaely|Boaz Rafaely]] — 反馈 ANC 研究者，ISVR
 
 ## Related Synthesis

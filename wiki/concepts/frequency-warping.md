@@ -35,9 +35,9 @@ where $D(z)$ is the all-pass element and $W$ is the final filter order.
 
 ## Related Concepts
 
-- [[../concepts/warped-fir-filter|Warped FIR Filter]]
-- [[../concepts/all-pass-filter|All-Pass Filter]]
+- [[concepts/warped-fir-filter|Warped FIR Filter]]
+- [[concepts/all-pass-filter|All-Pass Filter]]
 
 ## Related Sources
 
-- [[../sources/seo-2016-feedback-anc-constrained-optimization|Seo et al. 2016: Feedback ANC via Constrained Optimization]]
+- [[sources/seo-2016-feedback-anc-constrained-optimization|Seo et al. 2016: Feedback ANC via Constrained Optimization]]

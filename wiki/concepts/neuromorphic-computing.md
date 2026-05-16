@@ -42,4 +42,4 @@ Computing paradigm inspired by the brain's architecture, using spiking neurons a
 
 ## Related Sources
 
-- [[../sources/yamazaki-2022-spiking-nn-review|Yamazaki 2022: Spiking Neural Networks Review]]
+- [[sources/yamazaki-2022-spiking-nn-review|Yamazaki 2022: Spiking Neural Networks Review]]

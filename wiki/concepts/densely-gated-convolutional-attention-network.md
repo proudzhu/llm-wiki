@@ -56,7 +56,7 @@ Channel progression in encoder: 6 → 16 → 32 → 48 → 64 → 64
 Channel regression in decoder (from 64 → 48 → 32 → 16 → 2 output channels)
 
 #### Attention Gate (AG) Skip-Connections
-Instead of simple concatenation or PWConv-based skip-connections, DenGCAN uses [[../concepts/attention-gate|attention gates]] that consider both local and global features. The AG takes the encoder feature map $\mathbf{X}_l$ and the decoder feature map $\mathbf{G}_{l+1}$, computes attention coefficients, and selectively scales the encoder features.
+Instead of simple concatenation or PWConv-based skip-connections, DenGCAN uses [[concepts/attention-gate|attention gates]] that consider both local and global features. The AG takes the encoder feature map $\mathbf{X}_l$ and the decoder feature map $\mathbf{G}_{l+1}$, computes attention coefficients, and selectively scales the encoder features.
 
 #### Squeezed Conformer (sConformer) Bottleneck
 A lightweight variant of Conformer that uses self-attention to model long-term temporal dependencies. The sConformer can flexibly use future context frames, offering a trade-off between latency and performance. Removing sConformer (replacing with LSTM) causes a 0.114 average wb-PESQ drop.
@@ -72,11 +72,11 @@ A lightweight variant of Conformer that uses self-attention to model long-term t
 
 ## Related Concepts
 
-- [[../concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
-- [[../concepts/attention-gate|Attention Gate (AG)]]
-- [[../concepts/complex-ratio-mask|Complex Ratio Mask (cRM)]]
-- [[../concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
+- [[concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
+- [[concepts/attention-gate|Attention Gate (AG)]]
+- [[concepts/complex-ratio-mask|Complex Ratio Mask (cRM)]]
+- [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
 
 ## Related Sources
 
-- [[../sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]
+- [[sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]

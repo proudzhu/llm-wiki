@@ -17,8 +17,8 @@ tags:
 
 ## Key Contributions
 
-- Proposed HALo (Head-orientation-based Acoustic zone Localization) network for inferring acoustic zones of interest from IMU data on smartglasses ([[../sources/mohapatra-2026-localizing-conversation-partners-head-motion|Mohapatra et al. 2026]])
+- Proposed HALo (Head-orientation-based Acoustic zone Localization) network for inferring acoustic zones of interest from IMU data on smartglasses ([[sources/mohapatra-2026-localizing-conversation-partners-head-motion|Mohapatra et al. 2026]])
 
 ## Related Sources
 
-- [[../sources/mohapatra-2026-localizing-conversation-partners-head-motion|Mohapatra et al. 2026: Localizing Conversation Partners Using Head Motion]]
+- [[sources/mohapatra-2026-localizing-conversation-partners-head-motion|Mohapatra et al. 2026: Localizing Conversation Partners Using Head Motion]]

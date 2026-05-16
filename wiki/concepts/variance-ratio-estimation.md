@@ -66,12 +66,12 @@ where $r(n) = \exp\{\eta \Re[\Upsilon^H(n)\varepsilon(n)]\}$ is the multiplicati
 
 ## Related Concepts
 
-- [[../concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
-- [[../concepts/spatial-coherence|Spatial Coherence]]
-- [[../concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
-- [[../concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
-- [[../concepts/adaptive-filtering|Adaptive Filtering]]
+- [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
+- [[concepts/spatial-coherence|Spatial Coherence]]
+- [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
+- [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[concepts/adaptive-filtering|Adaptive Filtering]]
 
 ## Related Sources
 
-- [[../sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
+- [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]

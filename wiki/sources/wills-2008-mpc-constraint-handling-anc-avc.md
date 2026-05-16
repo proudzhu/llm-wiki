@@ -240,11 +240,11 @@ $N$ 太小 → 约束下不保证稳定性；$N$ 太大 → 计算超时。实�
 
 ## Related Concepts
 
-- [[../concepts/model-predictive-control|Model Predictive Control]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/active-vibration-control|Active Vibration Control]]
-- [[../concepts/quadratic-programming|Quadratic Programming]]
-- [[../concepts/kalman-filter|Kalman Filter]]
+- [[concepts/model-predictive-control|Model Predictive Control]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/active-vibration-control|Active Vibration Control]]
+- [[concepts/quadratic-programming|Quadratic Programming]]
+- [[concepts/kalman-filter|Kalman Filter]]
 
 ## Related Sources
 
@@ -252,7 +252,7 @@ $N$ 太小 → 约束下不保证稳定性；$N$ 太大 → 计算超时。实�
 
 ## Related Entities
 
-- [[../entities/adrian-g-wills|Adrian G. Wills]] — 第一作者，University of Newcastle
-- [[../entities/andrew-j-fleming|Andrew J. Fleming]] — 共同作者，主动振动控制专家
+- [[entities/adrian-g-wills|Adrian G. Wills]] — 第一作者，University of Newcastle
+- [[entities/andrew-j-fleming|Andrew J. Fleming]] — 共同作者，主动振动控制专家
 
 ## Related Synthesis

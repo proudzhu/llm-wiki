@@ -106,16 +106,16 @@ Image classification (MNIST, N-MNIST, ImageNet), object detection, object tracki
 
 ## Related Concepts
 
-- [[../concepts/spiking-neural-networks|Spiking Neural Networks]]
-- [[../concepts/neuromorphic-computing|Neuromorphic Computing]]
-- [[../concepts/spike-timing-dependent-plasticity|Spike-Timing-Dependent Plasticity]]
-- [[../concepts/neural-networks|Neural Networks]]
-- [[../concepts/backpropagation-through-time|Backpropagation Through Time]]
-- [[../concepts/real-time-recurrent-learning|Real-Time Recurrent Learning]]
+- [[concepts/spiking-neural-networks|Spiking Neural Networks]]
+- [[concepts/neuromorphic-computing|Neuromorphic Computing]]
+- [[concepts/spike-timing-dependent-plasticity|Spike-Timing-Dependent Plasticity]]
+- [[concepts/neural-networks|Neural Networks]]
+- [[concepts/backpropagation-through-time|Backpropagation Through Time]]
+- [[concepts/real-time-recurrent-learning|Real-Time Recurrent Learning]]
 
 ## Related Entities
 
-- [[../entities/kashu-yamazaki|Kashu Yamazaki]]
-- [[../entities/viet-khoa-vo-ho|Viet-Khoa Vo-Ho]]
-- [[../entities/darshan-bulsara|Darshan Bulsara]]
-- [[../entities/ngan-le|Ngan Le]]
+- [[entities/kashu-yamazaki|Kashu Yamazaki]]
+- [[entities/viet-khoa-vo-ho|Viet-Khoa Vo-Ho]]
+- [[entities/darshan-bulsara|Darshan Bulsara]]
+- [[entities/ngan-le|Ngan Le]]

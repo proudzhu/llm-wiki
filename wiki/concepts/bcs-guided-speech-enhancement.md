@@ -15,7 +15,7 @@ tags:
 
 # BCS-Guided Speech Enhancement
 
-**BCS-Guided Speech Enhancement** is a multi-modal approach that fuses [[../concepts/bone-conduction|bone conducted signals]] (BCS) from accelerometers with air-conducted microphone signals to improve speech enhancement performance, particularly for earbud-based voice assistants in noisy environments.
+**BCS-Guided Speech Enhancement** is a multi-modal approach that fuses [[concepts/bone-conduction|bone conducted signals]] (BCS) from accelerometers with air-conducted microphone signals to improve speech enhancement performance, particularly for earbud-based voice assistants in noisy environments.
 
 ## Overview
 
@@ -57,7 +57,7 @@ The ASR loss compares encoder outputs for enhanced vs. target speech, directly o
 
 ## VAD Gating
 
-BCS-based [[../concepts/voice-activity-detection|VAD]] provides noise-robust speech detection. When VAD detects no speech, the ASR system bypasses enhancement and processes the raw noisy signal directly, avoiding enhancement artifacts during silence.
+BCS-based [[concepts/voice-activity-detection|VAD]] provides noise-robust speech detection. When VAD detects no speech, the ASR system bypasses enhancement and processes the raw noisy signal directly, avoiding enhancement artifacts during silence.
 
 ## Comparison with Related Approaches
 
@@ -72,30 +72,30 @@ BCS-based [[../concepts/voice-activity-detection|VAD]] provides noise-robust spe
 
 ## Robustness to Sensor Failure
 
-Practical wearables suffer intermittent BC sensor invalidity (loose contact, jaw motion). Most fusion models trained only on valid-channel data degrade *worse than the surviving channel alone* when one sensor fails — they amplify the dead channel's noise into the output. The [[../concepts/sensor-failure-robust-fusion|sensor-failure robust fusion]] discipline addresses this through:
+Practical wearables suffer intermittent BC sensor invalidity (loose contact, jaw motion). Most fusion models trained only on valid-channel data degrade *worse than the surviving channel alone* when one sensor fails — they amplify the dead channel's noise into the output. The [[concepts/sensor-failure-robust-fusion|sensor-failure robust fusion]] discipline addresses this through:
 
 - **Random modality dropout during training** (Liu 2025 "Special Training" — p=0.2 per channel)
 - **Per-modality output heads** (dual-mask) that allow the network to suppress a dead channel
-- **Multi-axis attention** ([[../concepts/adaptive-time-frequency-attention|ATFA]]) providing architectural robustness even without dropout training
+- **Multi-axis attention** ([[concepts/adaptive-time-frequency-attention|ATFA]]) providing architectural robustness even without dropout training
 
 ## Related Concepts
 
-- [[../concepts/bone-conduction|Bone Conduction]]
-- [[../concepts/voice-activity-detection|Voice Activity Detection]]
-- [[../concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
-- [[../concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
-- [[../concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
-- [[../concepts/bone-conduction-function|Bone Conduction Function (BCF)]]
-- [[../concepts/dprnn|Dual-Path RNN (DPRNN)]]
-- [[../concepts/densely-gated-convolutional-attention-network|DenGCAN]]
-- [[../concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
-- [[../concepts/attention-gate|Attention Gate (AG)]]
-- [[../concepts/adaptive-time-frequency-attention|Adaptive Temporal-Frequency Attention (ATFA)]]
-- [[../concepts/sensor-failure-robust-fusion|Sensor-Failure Robust Multi-Modal Fusion]]
+- [[concepts/bone-conduction|Bone Conduction]]
+- [[concepts/voice-activity-detection|Voice Activity Detection]]
+- [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
+- [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
+- [[concepts/bone-conduction-function|Bone Conduction Function (BCF)]]
+- [[concepts/dprnn|Dual-Path RNN (DPRNN)]]
+- [[concepts/densely-gated-convolutional-attention-network|DenGCAN]]
+- [[concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
+- [[concepts/attention-gate|Attention Gate (AG)]]
+- [[concepts/adaptive-time-frequency-attention|Adaptive Temporal-Frequency Attention (ATFA)]]
+- [[concepts/sensor-failure-robust-fusion|Sensor-Failure Robust Multi-Modal Fusion]]
 
 ## Related Sources
 
-- [[../sources/he-2025-vibomni|He, Guo, Hou & Yan 2025: VibOmni]]
-- [[../sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Earbuds]]
-- [[../sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]
-- [[../sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]]
+- [[sources/he-2025-vibomni|He, Guo, Hou & Yan 2025: VibOmni]]
+- [[sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Earbuds]]
+- [[sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]
+- [[sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]]

@@ -49,4 +49,4 @@ Because of this $O(N^4)$ scaling, exact RTRL is only feasible for very small net
 
 ## Related Sources
 
-- [[../sources/zucchet-2026-forward-propagation-errors-through-time|Zucchet 2026: Forward Propagation of Errors Through Time]]
+- [[sources/zucchet-2026-forward-propagation-errors-through-time|Zucchet 2026: Forward Propagation of Errors Through Time]]

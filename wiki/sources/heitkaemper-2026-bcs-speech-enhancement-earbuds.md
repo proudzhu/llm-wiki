@@ -18,7 +18,7 @@ tags:
 
 # Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Voice Assistant on Earbuds
 
-**Inventors**: [[../entities/jens-heitkaemper|Jens Heitkaemper]], [[../entities/joseph-caroselli-jr|Joseph Peter Caroselli Jr.]], [[../entities/max-mckinnon|Max McKinnon]], [[../entities/arun-narayanan|Arun Narayanan]], [[../entities/nathan-howard|Nathan David Howard]]
+**Inventors**: [[entities/jens-heitkaemper|Jens Heitkaemper]], [[entities/joseph-caroselli-jr|Joseph Peter Caroselli Jr.]], [[entities/max-mckinnon|Max McKinnon]], [[entities/arun-narayanan|Arun Narayanan]], [[entities/nathan-howard|Nathan David Howard]]
 **Assignee**: Google LLC
 **Type**: US Patent Application
 **Patent Number**: US20260073929A1
@@ -29,11 +29,11 @@ tags:
 
 ## Summary
 
-Proposes a [[../concepts/bcs-guided-speech-enhancement|BCS-guided speech enhancement]] model for earbud voice assistants that fuses a single-channel noisy air-conducted signal with an upscaled [[../concepts/bone-conduction|bone conducted signal]] (BCS) from an accelerometer in a Conformer-based architecture. The model estimates an ideal ratio mask via a stack of self-attention blocks, reconstructs enhanced speech via inverse STFT, and uses a BCS-based [[../concepts/voice-activity-detection|VAD]] to gate ASR processing. Training uses a two-stage approach: pre-training on spectral + ASR loss, then fine-tuning with the BCS upscaling pathway.
+Proposes a [[concepts/bcs-guided-speech-enhancement|BCS-guided speech enhancement]] model for earbud voice assistants that fuses a single-channel noisy air-conducted signal with an upscaled [[concepts/bone-conduction|bone conducted signal]] (BCS) from an accelerometer in a Conformer-based architecture. The model estimates an ideal ratio mask via a stack of self-attention blocks, reconstructs enhanced speech via inverse STFT, and uses a BCS-based [[concepts/voice-activity-detection|VAD]] to gate ASR processing. Training uses a two-stage approach: pre-training on spectral + ASR loss, then fine-tuning with the BCS upscaling pathway.
 
 ## Problem Formulation
 
-Earbud-based ASR systems degrade severely in low-SNR and overlapping-speech environments. Air-conducted microphones capture both target speech and ambient noise, while [[../concepts/bone-conduction|BCS]] accelerometers capture primarily the user's own voice but are band-limited (typically < 1–2 kHz). The challenge is to effectively fuse these complementary modalities for robust speech enhancement.
+Earbud-based ASR systems degrade severely in low-SNR and overlapping-speech environments. Air-conducted microphones capture both target speech and ambient noise, while [[concepts/bone-conduction|BCS]] accelerometers capture primarily the user's own voice but are band-limited (typically < 1–2 kHz). The challenge is to effectively fuse these complementary modalities for robust speech enhancement.
 
 **Input signals**:
 - $x_{\text{air}}[n]$: single-channel noisy air-conducted signal (microphone)
@@ -82,7 +82,7 @@ Air-conducted STFT ────────────────────�
 
 ### VAD Gating
 
-A pre-trained [[../concepts/voice-activity-detection|VAD]] processes the BCS to determine if the user is speaking:
+A pre-trained [[concepts/voice-activity-detection|VAD]] processes the BCS to determine if the user is speaking:
 - **VAD active** (speech detected): ASR processes enhanced speech features
 - **VAD inactive** (no speech): ASR processes raw single-channel noisy signal directly (bypassing enhancement)
 
@@ -99,13 +99,13 @@ This prevents the enhancement model from introducing artifacts during non-speech
 
 ## Related Concepts
 
-- [[../concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
-- [[../concepts/bone-conduction|Bone Conduction]]
-- [[../concepts/voice-activity-detection|Voice Activity Detection]]
-- [[../concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
-- [[../concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
-- [[../concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
+- [[concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
+- [[concepts/bone-conduction|Bone Conduction]]
+- [[concepts/voice-activity-detection|Voice Activity Detection]]
+- [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
+- [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
 
 ## Related Synthesis
 
-- [[../synthesis/multimodal-bc-speech-enhancement|Multimodal BC Speech Enhancement]]
+- [[synthesis/multimodal-bc-speech-enhancement|Multimodal BC Speech Enhancement]]

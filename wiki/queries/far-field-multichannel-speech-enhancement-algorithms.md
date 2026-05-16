@@ -1367,11 +1367,11 @@ DNS Challenge 定义了 SE 领域的标准 benchmark。2021 年 Track 1（实时
 
 ## 相关 Wiki 页面
 
-- [[../concepts/active-noise-control|Active Noise Control]] — 主动噪声控制概述（语音增强的互补技术）
-- [[../concepts/multi-channel-anc|Multi-Channel ANC]] — 多通道 ANC，涉及多传感器/多执行器的 FxLMS 扩展
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — ANC 标准自适应算法
-- [[../concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]] — 在线次级路径建模
-- [[../concepts/offline-secondary-path-modeling|Offline Secondary-Path Modeling]] — 离线次级路径建模
-- [[../concepts/frequency-domain-anc|Frequency-Domain ANC]] — 频域 ANC 算法
-- [[../concepts/subband-anc|Subband ANC]] — 子带 ANC 算法
-- [[../concepts/simplified-adaptive-feedback-anc|Simplified Adaptive Feedback ANC]] — 简化自适应反馈 ANC
+- [[concepts/active-noise-control|Active Noise Control]] — 主动噪声控制概述（语音增强的互补技术）
+- [[concepts/multi-channel-anc|Multi-Channel ANC]] — 多通道 ANC，涉及多传感器/多执行器的 FxLMS 扩展
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — ANC 标准自适应算法
+- [[concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]] — 在线次级路径建模
+- [[concepts/offline-secondary-path-modeling|Offline Secondary-Path Modeling]] — 离线次级路径建模
+- [[concepts/frequency-domain-anc|Frequency-Domain ANC]] — 频域 ANC 算法
+- [[concepts/subband-anc|Subband ANC]] — 子带 ANC 算法
+- [[concepts/simplified-adaptive-feedback-anc|Simplified Adaptive Feedback ANC]] — 简化自适应反馈 ANC

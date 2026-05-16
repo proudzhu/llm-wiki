@@ -14,6 +14,6 @@ The **waterbed effect** (also known as the Bode sensitivity integral) is a funda
 
 ## Related Concepts
 
-- [[../concepts/sensitivity-function|Sensitivity Function]]
-- [[../concepts/robust-control|Robust Control]]
-- [[../concepts/feedback-anc|Feedback ANC]]
+- [[concepts/sensitivity-function|Sensitivity Function]]
+- [[concepts/robust-control|Robust Control]]
+- [[concepts/feedback-anc|Feedback ANC]]

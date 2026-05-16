@@ -15,7 +15,7 @@ tags:
 
 # Zhang, Zhang, Yu & Yu 2024: Neural Network Augmented Kalman Filter for AHS
 
-**Authors**: [[../entities/yixuan-zhang|Yixuan Zhang]], [[../entities/hao-zhang|Hao Zhang]], [[../entities/meng-yu|Meng Yu]], [[../entities/dong-yu|Dong Yu]]
+**Authors**: [[entities/yixuan-zhang|Yixuan Zhang]], [[entities/hao-zhang|Hao Zhang]], [[entities/meng-yu|Meng Yu]], [[entities/dong-yu|Dong Yu]]
 **Institutions**: Ohio State University, Columbus, OH, USA; Tencent AI Lab, Bellevue, WA, USA
 **Published**: Interspeech 2024, pp. 1715–1719
 **Type**: Conference Paper
@@ -158,13 +158,13 @@ NeuralKalmanAHS outperforms standalone NN and Kalman filter methods across all g
 
 ## Related Concepts
 
-- [[../concepts/kalman-filter|Kalman Filter]]
-- [[../concepts/acoustic-howling-suppression|Acoustic Howling Suppression]]
-- [[../concepts/frequency-domain-kalman-filter|Frequency-Domain Kalman Filter]]
-- [[../concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
-- [[../concepts/active-noise-control|Active Noise Control]]
+- [[concepts/kalman-filter|Kalman Filter]]
+- [[concepts/acoustic-howling-suppression|Acoustic Howling Suppression]]
+- [[concepts/frequency-domain-kalman-filter|Frequency-Domain Kalman Filter]]
+- [[concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
+- [[concepts/active-noise-control|Active Noise Control]]
 
 ## Related Synthesis
 
-- [[../synthesis/kalman-filter-theory-and-application|Kalman Filter Theory and Application]]
-- [[../synthesis/ai-driven-anc|AI-Driven ANC]]
+- [[synthesis/kalman-filter-theory-and-application|Kalman Filter Theory and Application]]
+- [[synthesis/ai-driven-anc|AI-Driven ANC]]

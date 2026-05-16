@@ -25,7 +25,7 @@ Greg Welch is a computer science researcher at UNC-Chapel Hill whose work spans 
 
 ## Related Sources
 
-- [[../sources/welch-2006-kalman-filter-intro|Welch & Bishop 2006: Introduction to the Kalman Filter]]
+- [[sources/welch-2006-kalman-filter-intro|Welch & Bishop 2006: Introduction to the Kalman Filter]]
 
 ## Related Concepts
 

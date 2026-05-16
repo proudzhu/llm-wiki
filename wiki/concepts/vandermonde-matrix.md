@@ -39,9 +39,9 @@ Despite being theoretically invertible, the Vandermonde matrix is often **numeri
 
 ## Related Concepts
 
-- [[../concepts/lagrange-interpolation|Lagrange Interpolation]] — alternative basis yielding identity matrix instead of Vandermonde
-- [[../concepts/numerical-stability|Numerical Stability]] — Vandermonde ill-conditioning as a practical concern
+- [[concepts/lagrange-interpolation|Lagrange Interpolation]] — alternative basis yielding identity matrix instead of Vandermonde
+- [[concepts/numerical-stability|Numerical Stability]] — Vandermonde ill-conditioning as a practical concern
 
 ## Related Sources
 
-- [[../sources/eli-2026-lagrange-interpolation|Bendersky 2026: Notes on Lagrange Interpolating Polynomials]]
+- [[sources/eli-2026-lagrange-interpolation|Bendersky 2026: Notes on Lagrange Interpolating Polynomials]]

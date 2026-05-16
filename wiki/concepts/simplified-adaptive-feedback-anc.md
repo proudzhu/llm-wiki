@@ -72,4 +72,4 @@ This condition is **worse** than the IMC system's stability because the `∠[1 -
 
 ## Related Sources
 
-- [[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Original paper
+- [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Original paper

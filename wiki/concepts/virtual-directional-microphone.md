@@ -51,12 +51,12 @@ where $\beta=10^{-\frac{\mathrm{DI}}{20}}$ is determined by the directivity inde
 
 ## Related Concepts
 
-- [[../concepts/neural-directional-filtering|Neural Directional Filtering]]
-- [[../concepts/directivity-pattern|Directivity Pattern]]
-- [[../concepts/diffuse-sound-extraction|Diffuse Sound Extraction]]
-- [[../concepts/differential-microphone-array|Differential Microphone Array]]
-- [[../concepts/white-noise-gain|White Noise Gain]]
+- [[concepts/neural-directional-filtering|Neural Directional Filtering]]
+- [[concepts/directivity-pattern|Directivity Pattern]]
+- [[concepts/diffuse-sound-extraction|Diffuse Sound Extraction]]
+- [[concepts/differential-microphone-array|Differential Microphone Array]]
+- [[concepts/white-noise-gain|White Noise Gain]]
 
 ## Related Sources
 
-- [[../sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
+- [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]

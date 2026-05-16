@@ -44,4 +44,4 @@ Solving a QP at every sampling period (e.g., every 200 $\mu$s for a 5 kHz ANC sy
 
 ## Related Sources
 
-- [[../sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]
+- [[sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]

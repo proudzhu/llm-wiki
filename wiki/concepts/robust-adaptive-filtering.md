@@ -53,11 +53,11 @@ A key goal in robust filtering is achieving **Zero POD**. This means that no mat
 - [[impulsive-noise|Impulsive Noise]]
 - [[maximum-correntropy-criterion|Maximum Correntropy Criterion]]
 - [[generalized-maximum-correntropy-criterion|Generalized Maximum Correntropy Criterion]]
-- [[../synthesis/impulsive-noise-control|Robust ANC for Impulsive and Non-Gaussian Noise]]
+- [[synthesis/impulsive-noise-control|Robust ANC for Impulsive and Non-Gaussian Noise]]
 - [[correntropy|Correntropy]]
 - [[information-theoretic-learning|Information Theoretic Learning]]
 
 ## Related Sources
 
-- [[../sources/chen-2016-generalized-correntropy-robust-adaptive-filtering|Chen 2016: Generalized Correntropy for Robust Adaptive Filtering]]
-- [[../sources/zhu-2020-robust-gmcc-anc-paper-reading-note|Zhu 2020: Robust GMCC for ANC Paper Reading Note]]
+- [[sources/chen-2016-generalized-correntropy-robust-adaptive-filtering|Chen 2016: Generalized Correntropy for Robust Adaptive Filtering]]
+- [[sources/zhu-2020-robust-gmcc-anc-paper-reading-note|Zhu 2020: Robust GMCC for ANC Paper Reading Note]]

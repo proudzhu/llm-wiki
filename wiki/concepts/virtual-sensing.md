@@ -15,7 +15,7 @@ updated: 2026-04-18
 
 **Virtual Sensing** (or Virtual Microphone technology) is a method in **[[active-noise-control|Active Noise Control]]** and structural monitoring where the acoustic or vibration signal is estimated at a physical location where it is impossible or impractical to place a physical sensor.
 
-For a detailed analysis of the algorithmic development, see **[[../synthesis/virtual-sensing-evolution|Evolution of Virtual Sensing in ANC]]**.
+For a detailed analysis of the algorithmic development, see **[[synthesis/virtual-sensing-evolution|Evolution of Virtual Sensing in ANC]]**.
 
 ## Motivation in ANC
 In many applications (e.g., headphones, vehicle headrests), the "quiet zone" needs to be at the listener's ear, but the physical error microphone must be placed elsewhere for comfort or design reasons. Virtual sensing allows the system to project the silence zone to the actual ear canal.
@@ -40,12 +40,12 @@ In many applications (e.g., headphones, vehicle headrests), the "quiet zone" nee
 - [[deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
 
 ## Related Synthesis
-- [[../synthesis/virtual-sensing-evolution|Evolution of Virtual Sensing in ANC]]
-- [[../synthesis/anc-architecture-evolution|ANC Architecture Evolution]]
+- [[synthesis/virtual-sensing-evolution|Evolution of Virtual Sensing in ANC]]
+- [[synthesis/anc-architecture-evolution|ANC Architecture Evolution]]
 
 ## Related Sources
-- [[../sources/a-review-of-virtual-sensing-algorithms-for-active-|A Review of Virtual Sensing Algorithms for ANC]]: Systematic overview and comparison of VS algorithms.
-- [[../sources/holzmueller-2026-obs-tasnet-virtual-sensing|Holzmüller 2026: Obs-TasNet for Virtual Sensing]]: Deep learning approach to VS.
-- [[../sources/petersen-2008-kalman-filter-virtual-sensing-anc|Petersen 2008: Kalman Filter for Virtual Sensing]]: State-space observer approach.
-- [[../sources/wang-2024-computation-efficient-virtual-sensing|Wang 2024: Computation-Efficient Virtual Sensing with MCALMS]]: Multi-channel VS optimization using MCALMS algorithm.
+- [[sources/a-review-of-virtual-sensing-algorithms-for-active-|A Review of Virtual Sensing Algorithms for ANC]]: Systematic overview and comparison of VS algorithms.
+- [[sources/holzmueller-2026-obs-tasnet-virtual-sensing|Holzmüller 2026: Obs-TasNet for Virtual Sensing]]: Deep learning approach to VS.
+- [[sources/petersen-2008-kalman-filter-virtual-sensing-anc|Petersen 2008: Kalman Filter for Virtual Sensing]]: State-space observer approach.
+- [[sources/wang-2024-computation-efficient-virtual-sensing|Wang 2024: Computation-Efficient Virtual Sensing with MCALMS]]: Multi-channel VS optimization using MCALMS algorithm.
 

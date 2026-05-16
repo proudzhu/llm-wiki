@@ -65,4 +65,4 @@ where $A_G = M/W_{\min}$. This enables principled selection of the diagonal load
 
 ## Related Sources
 
-- [[../sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
+- [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]

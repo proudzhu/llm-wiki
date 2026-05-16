@@ -18,7 +18,7 @@ Mathematician, blogger, and consultant. Runs [John D. Cook Blog](https://www.joh
 ## Known Work
 
 - Posts on trigonometric and hyperbolic function identities
-- Explorations of [[../concepts/symbolic-computation|Symbolic Computation]] behavior in CAS tools
+- Explorations of [[concepts/symbolic-computation|Symbolic Computation]] behavior in CAS tools
 - Applied mathematics and statistics consulting
 
 ## Links

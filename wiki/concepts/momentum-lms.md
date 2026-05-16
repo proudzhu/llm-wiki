@@ -82,14 +82,14 @@ For constant parameters ($\xi = 0$), this approaches $\sigma_v^2$ as $\mu \to 0$
 
 ## Related Concepts
 
-- [[../concepts/adaptive-filtering|Adaptive Filtering]]
-- [[../concepts/variable-step-size-lms|Variable Step Size LMS]]
-- [[../concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
-- [[../concepts/online-learning|Online Learning]]
-- [[../concepts/kalman-filter|Kalman Filter]]
-- [[../concepts/asymptotic-analysis-adaptive-algorithms|Asymptotic Analysis of Adaptive Algorithms]]
+- [[concepts/adaptive-filtering|Adaptive Filtering]]
+- [[concepts/variable-step-size-lms|Variable Step Size LMS]]
+- [[concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
+- [[concepts/online-learning|Online Learning]]
+- [[concepts/kalman-filter|Kalman Filter]]
+- [[concepts/asymptotic-analysis-adaptive-algorithms|Asymptotic Analysis of Adaptive Algorithms]]
 
 ## Related Sources
 
-- [[../sources/sharma-1998-momentum-adaptive-filtering|Sharma, Sethares & Bucklew 1998: Analysis of Momentum Adaptive Filtering Algorithms]]
-- [[../sources/jin-2026-momentum-lms-nonstationarity|Jin, Zheng & Guo 2026: Momentum LMS Theory beyond Stationarity]]
+- [[sources/sharma-1998-momentum-adaptive-filtering|Sharma, Sethares & Bucklew 1998: Analysis of Momentum Adaptive Filtering Algorithms]]
+- [[sources/jin-2026-momentum-lms-nonstationarity|Jin, Zheng & Guo 2026: Momentum LMS Theory beyond Stationarity]]

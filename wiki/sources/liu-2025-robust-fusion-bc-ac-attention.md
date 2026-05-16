@@ -17,7 +17,7 @@ tags:
 
 # Liu, Chen & Yin 2025: Robust Fusion of Bone and Air-Conducted Sensors with Adaptive Temporal-Frequency Attention
 
-- **Authors**: [[../entities/zhenglong-liu|Zhenglong Liu]], [[../entities/zhe-chen|Zhe Chen]] (corresponding), [[../entities/fuliang-yin|Fuliang Yin]]
+- **Authors**: [[entities/zhenglong-liu|Zhenglong Liu]], [[entities/zhe-chen|Zhe Chen]] (corresponding), [[entities/fuliang-yin|Fuliang Yin]]
 - **Affiliation**: School of Information and Communication Engineering, Dalian University of Technology, China
 - **Venue**: ICASSP 2025 — IEEE International Conference on Acoustics, Speech and Signal Processing, pp. 1–5
 - **Year**: 2025
@@ -46,7 +46,7 @@ where $\otimes$ denotes element-wise multiplication. The final time-domain signa
 
 ## Methodology
 
-![Proposed architecture overview](../raw/papers/liu-2025-robust-fusion-bc-ac-attention/figures/b2b952e80b62ac570e5c8a756a61c07d43f8ef549674cd0874800236d94a9994.jpg)
+![[raw/papers/liu-2025-robust-fusion-bc-ac-attention/figures/b2b952e80b62ac570e5c8a756a61c07d43f8ef549674cd0874800236d94a9994.jpg|Proposed architecture overview]]
 
 *Figure 1: Overall fusion architecture — pre-fusion → DenseNet encoder → three cascaded ATFA modules → AHA → four decoders producing dual-channel masks.*
 
@@ -64,7 +64,7 @@ Four parallel decoders (one per output mask channel) consist of a dilated DenseN
 
 ### C. Adaptive Temporal-Frequency Attention (ATFA)
 
-![ATFA module](../raw/papers/liu-2025-robust-fusion-bc-ac-attention/figures/57540c10e6535b71c541c626aed7059d67caacc1b5c617df8fb69bdd95ffd46e.jpg)
+![[raw/papers/liu-2025-robust-fusion-bc-ac-attention/figures/57540c10e6535b71c541c626aed7059d67caacc1b5c617df8fb69bdd95ffd46e.jpg|ATFA module]]
 
 *Figure 2: ATFA — two parallel branches apply MHSA along the temporal and frequency axes, then GRU-based feed-forward, residual connections, and learnable weighting α/β.*
 
@@ -176,25 +176,25 @@ The dominant contribution is the ATFA self-attention block (replacing it with LS
 
 ## Related Concepts
 
-- [[../concepts/adaptive-time-frequency-attention|Adaptive Temporal-Frequency Attention (ATFA)]]
-- [[../concepts/sensor-failure-robust-fusion|Sensor-Failure Robust Multi-Modal Fusion]]
-- [[../concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
-- [[../concepts/bone-conduction|Bone Conduction]]
-- [[../concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
-- [[../concepts/complex-ratio-mask|Complex Ratio Mask]]
-- [[../concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
-- [[../concepts/mvdr-beamformer|MVDR Beamformer]]
-- [[../concepts/mpdr-beamformer|MPDR Beamformer]]
-- [[../concepts/dprnn|Dual-Path RNN (DPRNN)]]
+- [[concepts/adaptive-time-frequency-attention|Adaptive Temporal-Frequency Attention (ATFA)]]
+- [[concepts/sensor-failure-robust-fusion|Sensor-Failure Robust Multi-Modal Fusion]]
+- [[concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
+- [[concepts/bone-conduction|Bone Conduction]]
+- [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
+- [[concepts/complex-ratio-mask|Complex Ratio Mask]]
+- [[concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
+- [[concepts/mvdr-beamformer|MVDR Beamformer]]
+- [[concepts/mpdr-beamformer|MPDR Beamformer]]
+- [[concepts/dprnn|Dual-Path RNN (DPRNN)]]
 
 ## Related Sources
 
-- [[../sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: Lightweight BC/AC Speech Enhancement]]
-- [[../sources/he-2025-vibomni|He et al. 2025: VibOmni — IMU-based BC speech enhancement]]
-- [[../sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Earbuds]]
-- [[../sources/zhang-2022-bone-conducted-speech-dissertation|Zhang 2022: Bone-Conducted Speech Dissertation]]
+- [[sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: Lightweight BC/AC Speech Enhancement]]
+- [[sources/he-2025-vibomni|He et al. 2025: VibOmni — IMU-based BC speech enhancement]]
+- [[sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Earbuds]]
+- [[sources/zhang-2022-bone-conducted-speech-dissertation|Zhang 2022: Bone-Conducted Speech Dissertation]]
 
 ## Related Synthesis
 
-- [[../synthesis/multimodal-bc-speech-enhancement|Multimodal Smart Hearables: BC-Aided Speech Enhancement]]
-- [[../synthesis/multi-modal-speech-enhancement|Multi-Modal Speech Enhancement]]
+- [[synthesis/multimodal-bc-speech-enhancement|Multimodal Smart Hearables: BC-Aided Speech Enhancement]]
+- [[synthesis/multi-modal-speech-enhancement|Multi-Modal Speech Enhancement]]

@@ -18,7 +18,7 @@ tags:
 
 # Liebich, Richter, Fabry, Durand, Fels & Jax 2018: Direction-of-Arrival Dependency of ANC Headphones
 
-**Authors**: [[../entities/stefan-liebich|Stefan Liebich]], [[../entities/jan-gerrit-richter|Jan-Gerrit Richter]], [[../entities/johannes-fabry|Johannes Fabry]], [[../entities/christopher-durand|Christopher Durand]], [[../entities/janina-fels|Janina Fels]], [[../entities/peter-jax|Peter Jax]]
+**Authors**: [[entities/stefan-liebich|Stefan Liebich]], [[entities/jan-gerrit-richter|Jan-Gerrit Richter]], [[entities/johannes-fabry|Johannes Fabry]], [[entities/christopher-durand|Christopher Durand]], [[entities/janina-fels|Janina Fels]], [[entities/peter-jax|Peter Jax]]
 
 **Institutions**: Institute of Communication Systems & Institute of Technical Acoustics, RWTH Aachen University
 
@@ -156,16 +156,16 @@ Key findings:
 
 ## Related Concepts
 
-- [[../concepts/feedforward-anc|Feedforward ANC]] — DOA-dependent through primary path
-- [[../concepts/feedback-anc|Feedback ANC]] — DOA-independent (only depends on secondary path)
-- [[../concepts/hybrid-anc|Hybrid ANC]] — FB component compensates FF DOA weakness
-- [[../concepts/device-specific-hrtf|Device-Specific HRTF (DHRTF)]] — HRTF measured with headphone microphones
-- [[../concepts/primary-path-variability|Primary Path Variability]] — DOA-induced changes in $P(z)$
-- [[../concepts/anc-attenuation-bounds|ANC Attenuation Bounds]] — Analytical limits on achievable attenuation
-- [[../concepts/active-noise-control|Active Noise Control]] — General ANC framework
-- [[../concepts/wiener-filter|Wiener Filter]] — Optimal FIR filter via Wiener-Hopf equation
+- [[concepts/feedforward-anc|Feedforward ANC]] — DOA-dependent through primary path
+- [[concepts/feedback-anc|Feedback ANC]] — DOA-independent (only depends on secondary path)
+- [[concepts/hybrid-anc|Hybrid ANC]] — FB component compensates FF DOA weakness
+- [[concepts/device-specific-hrtf|Device-Specific HRTF (DHRTF)]] — HRTF measured with headphone microphones
+- [[concepts/primary-path-variability|Primary Path Variability]] — DOA-induced changes in $P(z)$
+- [[concepts/anc-attenuation-bounds|ANC Attenuation Bounds]] — Analytical limits on achievable attenuation
+- [[concepts/active-noise-control|Active Noise Control]] — General ANC framework
+- [[concepts/wiener-filter|Wiener Filter]] — Optimal FIR filter via Wiener-Hopf equation
 
 ## Related Synthesis
 
-- [[../synthesis/anc-architecture-evolution|ANC Architecture Evolution]]
-- [[../synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]]
+- [[synthesis/anc-architecture-evolution|ANC Architecture Evolution]]
+- [[synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]]

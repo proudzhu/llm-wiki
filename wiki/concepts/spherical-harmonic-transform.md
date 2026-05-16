@@ -65,4 +65,4 @@ $$\mathrm{iSHT}_L(f_{lm}) = \sum_{l=0}^{L}\sum_{m=-l}^{l} f_{lm} Y_{lm}(\varthet
 
 ## Related Sources
 
-- [[../sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation|Görtz et al. 2026: Blind DDAP Estimation Using Smart Glasses]]
+- [[sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation|Görtz et al. 2026: Blind DDAP Estimation Using Smart Glasses]]

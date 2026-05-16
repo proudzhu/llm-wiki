@@ -22,16 +22,16 @@ tags:
 
 ## Related Sources
 
-- [[../sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]]
+- [[sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]]
 
 ## Related Concepts
 
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/secondary-path-modeling|Secondary Path Modeling]]
-- [[../concepts/hybrid-anc|Hybrid ANC]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/secondary-path-modeling|Secondary Path Modeling]]
+- [[concepts/hybrid-anc|Hybrid ANC]]
 
 ## Related Entities
 
-- [[../entities/fareedha|Fareedha]] — Co-author
-- [[../entities/vasundhara|Vasundhara]] — Co-author
-- [[../entities/mads-graesboell-christensen|Mads Græsbøll Christensen]] — Co-author
+- [[entities/fareedha|Fareedha]] — Co-author
+- [[entities/vasundhara|Vasundhara]] — Co-author
+- [[entities/mads-graesboell-christensen|Mads Græsbøll Christensen]] — Co-author

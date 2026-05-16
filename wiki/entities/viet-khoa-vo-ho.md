@@ -9,7 +9,7 @@ tags:
 
 # Viet-Khoa Vo-Ho
 
-Researcher in spiking neural networks. Co-author of [[../sources/yamazaki-2022-spiking-nn-review|Yamazaki 2022: Spiking Neural Networks Review]].
+Researcher in spiking neural networks. Co-author of [[sources/yamazaki-2022-spiking-nn-review|Yamazaki 2022: Spiking Neural Networks Review]].
 
 ## Affiliations
 
@@ -17,4 +17,4 @@ Researcher in spiking neural networks. Co-author of [[../sources/yamazaki-2022-s
 
 ## Related Sources
 
-- [[../sources/yamazaki-2022-spiking-nn-review|Yamazaki 2022: Spiking Neural Networks Review]]
+- [[sources/yamazaki-2022-spiking-nn-review|Yamazaki 2022: Spiking Neural Networks Review]]

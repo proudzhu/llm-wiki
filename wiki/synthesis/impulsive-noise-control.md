@@ -223,7 +223,7 @@ $$w(n+1) = w(n) + \mu \cdot \frac{2\gamma^2 e(n)}{(e^2(n) + \gamma^2)^2} \cdot x
 
 ### MVC vs GMCC: Two Paths to Robustness
 
-Both MVC and [[../concepts/generalized-maximum-correntropy-criterion|Generalized Maximum Correntropy Criterion]] provide robustness to impulsive noise, but through different mechanisms:
+Both MVC and [[concepts/generalized-maximum-correntropy-criterion|Generalized Maximum Correntropy Criterion]] provide robustness to impulsive noise, but through different mechanisms:
 
 | Aspect | MVC | GMCC |
 |--------|-----|------|
@@ -320,16 +320,16 @@ Is your noise impulsive?
 
 ## Related Concepts
 
-- [[../concepts/impulsive-noise|Impulsive Noise]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
-- [[../concepts/generalized-maximum-correntropy-criterion|Generalized Maximum Correntropy Criterion]]
-- [[../concepts/maximum-correntropy-criterion|Maximum Correntropy Criterion]]
-- [[../concepts/correntropy|Correntropy]]
-- [[../concepts/generalized-correntropy|Generalized Correntropy]]
-- [[../concepts/generalized-gaussian-distribution|Generalized Gaussian Distribution]]
-- [[../concepts/information-theoretic-learning|Information Theoretic Learning]]
-- [[../concepts/virtual-sensing|Virtual Sensing]]
-- [[../concepts/active-noise-control|Active Noise Control]]
+- [[concepts/impulsive-noise|Impulsive Noise]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
+- [[concepts/generalized-maximum-correntropy-criterion|Generalized Maximum Correntropy Criterion]]
+- [[concepts/maximum-correntropy-criterion|Maximum Correntropy Criterion]]
+- [[concepts/correntropy|Correntropy]]
+- [[concepts/generalized-correntropy|Generalized Correntropy]]
+- [[concepts/generalized-gaussian-distribution|Generalized Gaussian Distribution]]
+- [[concepts/information-theoretic-learning|Information Theoretic Learning]]
+- [[concepts/virtual-sensing|Virtual Sensing]]
+- [[concepts/active-noise-control|Active Noise Control]]
 
 ## Related Sources

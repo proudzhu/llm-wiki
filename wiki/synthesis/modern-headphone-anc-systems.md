@@ -17,7 +17,7 @@ sources:
 
 # Modern Headphone ANC Systems: Beyond Noise Cancellation
 
-> Cross-source synthesis connecting [[../sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]], [[../sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]], and [[../sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]].
+> Cross-source synthesis connecting [[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]], [[sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]], and [[sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]].
 
 ---
 
@@ -44,7 +44,7 @@ Traditional headphone ANC uses either feedforward or feedback alone, each with l
 
 ### Solution: Hybrid FF + MVC + IMC
 
-[[../sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]] proposes combining all three ANC architectures:
+[[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]] proposes combining all three ANC architectures:
 
 ```
 External noise ──→ FF mic ──→ FF controller ──→ Σ ──→ Speaker
@@ -70,7 +70,7 @@ ANC headphones create an **isolation problem**: when someone tries to talk to th
 
 ### Solution: Dual VAD Architecture
 
-[[../sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]] (US Patent) introduces automated conversation detection using two Voice Activity Detection (VAD) streams:
+[[sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]] (US Patent) introduces automated conversation detection using two Voice Activity Detection (VAD) streams:
 
 1. **Own-Voice Activity Detection (OVAD)**: Detects when the wearer is speaking
    - Uses bone conduction sensor for reliable detection (not fooled by external speech)
@@ -104,7 +104,7 @@ Voice input on earbuds is limited: the user must speak at normal volume, which i
 
 ### Solution: Whisphone
 
-[[../sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]] (Microsoft) introduces whisper input detection using:
+[[sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]] (Microsoft) introduces whisper input detection using:
 
 1. **Bone conduction microphone**: Captures skull vibrations during whispering
    - Unaffected by ambient noise (only responds to bone-conducted sound)
@@ -182,7 +182,7 @@ The industry is moving beyond basic "on/off" transparency toward **context-aware
 
 The rise of Open-Ear (OWS) devices creates a new ANC challenge: the primary noise path is never fully attenuated.
 
-- **Hybrid ANC with Dual Compensation**: As analyzed by [[../sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026]], open-ear systems require dual compensation filters to reconstruct target signals accurately in dynamic environments where multiple noise sources (external vs. internal) compete.
+- **Hybrid ANC with Dual Compensation**: As analyzed by [[sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026]], open-ear systems require dual compensation filters to reconstruct target signals accurately in dynamic environments where multiple noise sources (external vs. internal) compete.
 - **SoC Convergence**: Hardware platforms (e.g., BES6100) are now integrating dedicated NPUs and ISP pipelines to manage multi-modal sensing in real-time, moving computation from the cloud to the device edge.
 
 ### 5.2 The Future: Multi-Modal Acoustic Computing
@@ -225,27 +225,27 @@ This requires a dedicated DSP (e.g., Qualcomm QCC5141, ~200 MIPS capability).
 
 ## Related Concepts
 
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/hybrid-anc|Hybrid ANC]]
-- [[../concepts/broad-band-feedforward-anc|Broad-Band Feedforward ANC]]
-- [[../concepts/feedback-anc|Feedback ANC]]
-- [[../concepts/transparency-mode|Transparency Mode]]
-- [[../concepts/voice-activity-detection|Voice Activity Detection]]
-- [[../concepts/beamforming|Beamforming]]
-- [[../concepts/bone-conduction|Bone Conduction]]
-- [[../concepts/ear-canal-occlusion-effect|Ear Canal Occlusion Effect]]
-- [[../concepts/whispering-speech-recognition|Whispering Speech Recognition]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/minimum-variance-control|Minimum Variance Control]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/hybrid-anc|Hybrid ANC]]
+- [[concepts/broad-band-feedforward-anc|Broad-Band Feedforward ANC]]
+- [[concepts/feedback-anc|Feedback ANC]]
+- [[concepts/transparency-mode|Transparency Mode]]
+- [[concepts/voice-activity-detection|Voice Activity Detection]]
+- [[concepts/beamforming|Beamforming]]
+- [[concepts/bone-conduction|Bone Conduction]]
+- [[concepts/ear-canal-occlusion-effect|Ear Canal Occlusion Effect]]
+- [[concepts/whispering-speech-recognition|Whispering Speech Recognition]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/minimum-variance-control|Minimum Variance Control]]
 
 ## Related Sources
 
-- [[../sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
-- [[../sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]]
-- [[../sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
-- [[../sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026: Hybrid ANC with Dual Compensation]]
-- [[../sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
+- [[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
+- [[sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]]
+- [[sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
+- [[sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026: Hybrid ANC with Dual Compensation]]
+- [[sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
 
 ## Related Synthesis
 

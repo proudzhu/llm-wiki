@@ -17,7 +17,7 @@ tags:
 
 # Xu, Caviedes-Nozal, Kleijn, Yan & Olsson 2026: Speech Enhancement Based on Drifting Models
 
-**Authors**: [[../entities/liang-xu|Liang Xu]]¹, [[../entities/diego-caviedes-nozal|Diego Caviedes-Nozal]]², [[../entities/bastiaan-kleijn|Bastiaan Kleijn]]¹, [[../entities/longfei-yan|Longfei Felix Yan]]¹, [[../entities/rasmus-kongsgaard-olsson|Rasmus Kongsgaard Olsson]]²
+**Authors**: [[entities/liang-xu|Liang Xu]]¹, [[entities/diego-caviedes-nozal|Diego Caviedes-Nozal]]², [[entities/bastiaan-kleijn|Bastiaan Kleijn]]¹, [[entities/longfei-yan|Longfei Felix Yan]]¹, [[entities/rasmus-kongsgaard-olsson|Rasmus Kongsgaard Olsson]]²
 
 **Affiliations**: ¹ Victoria University of Wellington, New Zealand · ² GN Audio A/S, Denmark
 
@@ -150,11 +150,11 @@ DriftSE achieves **state-of-the-art WV-MOS 2.65 and SCOREQ 2.97** on real-world 
 
 ## Related Concepts
 
-- [[../concepts/drifting-models|Drifting Models]]
-- [[../concepts/diffusion-models-for-speech|Diffusion Models for Speech Enhancement]]
-- [[../concepts/self-supervised-speech-representation|Self-Supervised Speech Representation]]
-- [[../concepts/one-step-generative-models|One-Step Generative Models]]
+- [[concepts/drifting-models|Drifting Models]]
+- [[concepts/diffusion-models-for-speech|Diffusion Models for Speech Enhancement]]
+- [[concepts/self-supervised-speech-representation|Self-Supervised Speech Representation]]
+- [[concepts/one-step-generative-models|One-Step Generative Models]]
 
 ## Related Sources
 
-- [[../sources/mohapatra-2026-localizing-conversation-partners-head-motion|Mohapatra et al. 2026: Localizing Conversation Partners Using Head Motion]]
+- [[sources/mohapatra-2026-localizing-conversation-partners-head-motion|Mohapatra et al. 2026: Localizing Conversation Partners Using Head Motion]]

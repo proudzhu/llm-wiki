@@ -418,6 +418,6 @@ Step 3: VSS-FxLMS 更新
 
 ## 相关 Wiki 页面
 
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — FxLMS 标准算法
-- [[../concepts/active-noise-control|Active Noise Control]] — ANC 概述
-- [[../concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]] — 在线次级路径建模（VSS 在 ANC 中的前提）
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — FxLMS 标准算法
+- [[concepts/active-noise-control|Active Noise Control]] — ANC 概述
+- [[concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]] — 在线次级路径建模（VSS 在 ANC 中的前提）

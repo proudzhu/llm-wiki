@@ -58,14 +58,14 @@ Recent work integrates deep learning for automatic step-size control:
 
 ## Related Concepts
 
-- [[../concepts/acoustic-feedback|Acoustic Feedback]]
-- [[../concepts/adaptive-feedback-control|Adaptive Feedback Control]]
-- [[../concepts/prediction-error-method|Prediction Error Method]]
-- [[../concepts/frequency-shift-feedback-cancellation|Frequency Shift Feedback Cancellation]]
-- [[../concepts/maximum-stable-gain|Maximum Stable Gain]]
+- [[concepts/acoustic-feedback|Acoustic Feedback]]
+- [[concepts/adaptive-feedback-control|Adaptive Feedback Control]]
+- [[concepts/prediction-error-method|Prediction Error Method]]
+- [[concepts/frequency-shift-feedback-cancellation|Frequency Shift Feedback Cancellation]]
+- [[concepts/maximum-stable-gain|Maximum Stable Gain]]
 
 ## Related Sources
 
-- [[../sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC
+- [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC
 - Waterschoot & Moonen 2011: Fifty years of acoustic feedback control
 - Spriet et al. 2008: Feedback control in hearing aids

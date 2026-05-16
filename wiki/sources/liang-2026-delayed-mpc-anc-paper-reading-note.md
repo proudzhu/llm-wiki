@@ -302,16 +302,16 @@ MPC 的优化目标是最小化整个预测视界上的误差平方和，对单�
 
 ## Related Concepts
 
-- [[../concepts/model-predictive-control|Model Predictive Control]] — 滚动时域优化框架
-- [[../concepts/active-noise-control|Active Noise Control]] — 应用场景
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — 对比基线算法
-- [[../concepts/state-space-model|State-Space Model]] — 系统建模方法
-- [[../concepts/system-identification|System Identification]] — 向量拟合获取状态空间模型
+- [[concepts/model-predictive-control|Model Predictive Control]] — 滚动时域优化框架
+- [[concepts/active-noise-control|Active Noise Control]] — 应用场景
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — 对比基线算法
+- [[concepts/state-space-model|State-Space Model]] — 系统建模方法
+- [[concepts/system-identification|System Identification]] — 向量拟合获取状态空间模型
 
 ## Related Entities
 
-- [[../entities/chao-liang|Chao Liang]] — 第一作者，Politecnico di Milano
-- [[../entities/francesco-ripamonti|Francesco Ripamonti]] — 共同作者，Politecnico di Milano
-- [[../entities/marek-pawelczyk|Marek Pawełczyk]] — 共同作者，Silesian University of Technology，ANC 研究者
+- [[entities/chao-liang|Chao Liang]] — 第一作者，Politecnico di Milano
+- [[entities/francesco-ripamonti|Francesco Ripamonti]] — 共同作者，Politecnico di Milano
+- [[entities/marek-pawelczyk|Marek Pawełczyk]] — 共同作者，Silesian University of Technology，ANC 研究者
 
 ## Related Synthesis

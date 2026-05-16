@@ -280,17 +280,17 @@ $$
 
 ## Related Concepts
 
-- [[../concepts/feedforward-anc|Feedforward ANC]]
-- [[../concepts/minimum-variance-control|Minimum Variance Control]]
-- [[../concepts/internal-model-control|Internal Model Control]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/hybrid-anc|Hybrid ANC]]
+- [[concepts/feedforward-anc|Feedforward ANC]]
+- [[concepts/minimum-variance-control|Minimum Variance Control]]
+- [[concepts/internal-model-control|Internal Model Control]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/hybrid-anc|Hybrid ANC]]
 
 ## Related Entities
 
-- [[../entities/piero-iared-rivera-benois|Piero Iared Rivera Benois]] — 作者，Helmut-Schmidt-Universität
-- [[../entities/udo-zolzer|Udo Zölzer]] — 导师，信号处理与通信
-- [[../entities/delf-sachau|Delf Sachau]] — 联合导师，主动噪声控制
+- [[entities/piero-iared-rivera-benois|Piero Iared Rivera Benois]] — 作者，Helmut-Schmidt-Universität
+- [[entities/udo-zolzer|Udo Zölzer]] — 导师，信号处理与通信
+- [[entities/delf-sachau|Delf Sachau]] — 联合导师，主动噪声控制
 
 ## Related Synthesis

@@ -41,4 +41,4 @@ In [[information-theoretic-learning|Information Theoretic Learning]], **[[corren
 
 ## Related Sources
 
-- [[../sources/chen-2016-generalized-correntropy-robust-adaptive-filtering|Chen 2016: Generalized Correntropy for Robust Adaptive Filtering]]
+- [[sources/chen-2016-generalized-correntropy-robust-adaptive-filtering|Chen 2016: Generalized Correntropy for Robust Adaptive Filtering]]

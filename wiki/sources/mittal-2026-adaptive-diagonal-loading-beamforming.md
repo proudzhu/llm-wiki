@@ -16,7 +16,7 @@ tags:
 
 # Mittal, Corey, Buck & Singer 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming
 
-**Authors**: [[../entities/manan-mittal|Manan Mittal]], [[../entities/ryan-corey|Ryan M. Corey]], [[../entities/john-buck|John R. Buck]], [[../entities/andrew-singer|Andrew C. Singer]]
+**Authors**: [[entities/manan-mittal|Manan Mittal]], [[entities/ryan-corey|Ryan M. Corey]], [[entities/john-buck|John R. Buck]], [[entities/andrew-singer|Andrew C. Singer]]
 **Type**: arXiv Preprint (5 pages, 5 figures)
 **arXiv**: [2605.04342](https://arxiv.org/abs/2605.04342)
 **DOI**: [10.48550/arXiv.2605.04342](https://doi.org/10.48550/arXiv.2605.04342)
@@ -25,7 +25,7 @@ tags:
 
 ## Summary
 
-Proposes a novel adaptive [[../concepts/diagonal-loading|diagonal loading]] method for [[../concepts/mpdr-beamformer|MPDR]]/[[../concepts/mvdr-beamformer|MVDR]] beamformers that deterministically guarantees the [[../concepts/white-noise-gain|White Noise Gain]] (WNG) stays within specified bounds. By leveraging the [[../concepts/kantorovich-inequality|Kantorovich inequality]], the authors map the desired WNG to a strict upper bound on the [[../concepts/condition-number|condition number]] of the [[../concepts/spatial-covariance-matrix|spatial correlation matrix]]. Three scalable estimation modes (Trace, Gershgorin, Exact EVD) provide O(M) to O(M³) complexity trade-offs.
+Proposes a novel adaptive [[concepts/diagonal-loading|diagonal loading]] method for [[concepts/mpdr-beamformer|MPDR]]/[[concepts/mvdr-beamformer|MVDR]] beamformers that deterministically guarantees the [[concepts/white-noise-gain|White Noise Gain]] (WNG) stays within specified bounds. By leveraging the [[concepts/kantorovich-inequality|Kantorovich inequality]], the authors map the desired WNG to a strict upper bound on the [[concepts/condition-number|condition number]] of the [[concepts/spatial-covariance-matrix|spatial correlation matrix]]. Three scalable estimation modes (Trace, Gershgorin, Exact EVD) provide O(M) to O(M³) complexity trade-offs.
 
 ## Problem Formulation
 
@@ -75,7 +75,7 @@ $$\mu[i] = \max\left(0, \frac{\lambda_{\max} - \kappa_{\max}\lambda_{\min}}{\kap
 
 ### GSC Formulation
 
-The method is also applicable within the [[../concepts/gsc-beamformer|Generalized Sidelobe Canceller]] (GSC) framework. The transformed matrix $\tilde{\mathbf{R}} = \mathbf{T}^H \hat{\mathbf{R}}_y \mathbf{T}$ (where $\mathbf{T} = [\sqrt{M}\mathbf{w}_q, \mathbf{B}]$) shares the same eigenvalues as $\hat{\mathbf{R}}_y$. The loading is applied to the noise correlation matrix:
+The method is also applicable within the [[concepts/gsc-beamformer|Generalized Sidelobe Canceller]] (GSC) framework. The transformed matrix $\tilde{\mathbf{R}} = \mathbf{T}^H \hat{\mathbf{R}}_y \mathbf{T}$ (where $\mathbf{T} = [\sqrt{M}\mathbf{w}_q, \mathbf{B}]$) shares the same eigenvalues as $\hat{\mathbf{R}}_y$. The loading is applied to the noise correlation matrix:
 
 $$\mathbf{w}_a = (\mathbf{R}_n + \mu[i]\mathbf{I})^{-1}\mathbf{r}_{qn}$$
 
@@ -121,17 +121,17 @@ EVD and Trace modes are invariant under this transformation; Gershgorin is basis
 
 ## Related Concepts
 
-- [[../concepts/diagonal-loading|Diagonal Loading]]
-- [[../concepts/kantorovich-inequality|Kantorovich Inequality]]
-- [[../concepts/white-noise-gain|White Noise Gain]]
-- [[../concepts/mpdr-beamformer|MPDR Beamformer]]
-- [[../concepts/gsc-beamformer|Generalized Sidelobe Canceller]]
-- [[../concepts/gershgorin-circle-theorem|Gershgorin Circle Theorem]]
-- [[../concepts/condition-number|Condition Number]]
-- [[../concepts/beamforming|Beamforming]]
-- [[../concepts/mvdr-beamformer|MVDR Beamformer]]
-- [[../concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
+- [[concepts/diagonal-loading|Diagonal Loading]]
+- [[concepts/kantorovich-inequality|Kantorovich Inequality]]
+- [[concepts/white-noise-gain|White Noise Gain]]
+- [[concepts/mpdr-beamformer|MPDR Beamformer]]
+- [[concepts/gsc-beamformer|Generalized Sidelobe Canceller]]
+- [[concepts/gershgorin-circle-theorem|Gershgorin Circle Theorem]]
+- [[concepts/condition-number|Condition Number]]
+- [[concepts/beamforming|Beamforming]]
+- [[concepts/mvdr-beamformer|MVDR Beamformer]]
+- [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
 
 ## Related Synthesis
 
-- [[../synthesis/adaptive-algorithm-tradeoffs|Adaptive Algorithm Trade-offs]]
+- [[synthesis/adaptive-algorithm-tradeoffs|Adaptive Algorithm Trade-offs]]

@@ -95,18 +95,18 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 
 ## Related Sources
 
-- [[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Proposes a simplified adaptive feedback system using error signal directly as reference
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Comprehensive ANC tutorial covering all major algorithms
-- [[../sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]] — CRN-based Deep ANC with speech preservation in reverberant environments
-- [[../sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]] — Elliptic and convex hull uncertainty models for robust feedback ANC
-- [[../sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]] — CRNN predicts next-frame DoA for proactive filter selection in moving source ANC
-- [[../sources/holzmuller-2026-dtw-secondary-path-anc|Holzmüller & Sontacchi 2026: DTW for Secondary Path Interpolation in ANC]] — DTW-based interpolation extends stable frequency range for moving listeners
+- [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Proposes a simplified adaptive feedback system using error signal directly as reference
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Comprehensive ANC tutorial covering all major algorithms
+- [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]] — CRN-based Deep ANC with speech preservation in reverberant environments
+- [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]] — Elliptic and convex hull uncertainty models for robust feedback ANC
+- [[sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]] — CRNN predicts next-frame DoA for proactive filter selection in moving source ANC
+- [[sources/holzmuller-2026-dtw-secondary-path-anc|Holzmüller & Sontacchi 2026: DTW for Secondary Path Interpolation in ANC]] — DTW-based interpolation extends stable frequency range for moving listeners
 
 ## Related Entities
 
-- [[../entities/sen-m-kuo|Sen M. Kuo]] — ANC authority, author of the definitive tutorial review
-- [[../entities/dennis-r-morgan|Dennis R. Morgan]] — Co-author of the tutorial review, foundational FXLMS analysis
-- [[../entities/lifu-wu|Lifu Wu]] — Proposed the simplified adaptive feedback architecture
-- [[../entities/xiaojun-qiu|Xiaojun Qiu]] — Corresponding author on the SimpAFB paper
-- [[../entities/shuning-dai|Shuning Dai]] — Speech-preserving Deep ANC in reverberant environments
-- [[../entities/stefan-liebich|Stefan Liebich]] — DOA dependency of ANC headphones
+- [[entities/sen-m-kuo|Sen M. Kuo]] — ANC authority, author of the definitive tutorial review
+- [[entities/dennis-r-morgan|Dennis R. Morgan]] — Co-author of the tutorial review, foundational FXLMS analysis
+- [[entities/lifu-wu|Lifu Wu]] — Proposed the simplified adaptive feedback architecture
+- [[entities/xiaojun-qiu|Xiaojun Qiu]] — Corresponding author on the SimpAFB paper
+- [[entities/shuning-dai|Shuning Dai]] — Speech-preserving Deep ANC in reverberant environments
+- [[entities/stefan-liebich|Stefan Liebich]] — DOA dependency of ANC headphones

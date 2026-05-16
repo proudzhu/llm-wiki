@@ -272,16 +272,16 @@ For each time window (>100ms, <300ms 重叠窗口):
 
 ## Related Concepts
 
-- [[../concepts/active-noise-control|Active Noise Control]] — 非对话模式下的降噪
-- [[../concepts/transparency-mode|Transparency Mode]] — 对话时允许外界声音进入
-- [[../concepts/voice-activity-detection|Voice Activity Detection]] — OVAD/TVAD 的核心技术
-- [[../concepts/beamforming|Beamforming]] — 对话聚焦的麦克风阵列处理
+- [[concepts/active-noise-control|Active Noise Control]] — 非对话模式下的降噪
+- [[concepts/transparency-mode|Transparency Mode]] — 对话时允许外界声音进入
+- [[concepts/voice-activity-detection|Voice Activity Detection]] — OVAD/TVAD 的核心技术
+- [[concepts/beamforming|Beamforming]] — 对话聚焦的麦克风阵列处理
 - [[fukumoto-2025-whisphone-paper-reading-note|Whisphone]] — 互补技术：耳语私密输入
 
 ## Related Entities
 
-- [[../entities/rajesh-masilamani|Rajesh Masilamani]] — 发明人
-- [[../entities/rakesh-murgai|Rakesh Murgai]] — 发明人
-- [[../entities/justin-woodruff|Justin Woodruff]] — 发明人
+- [[entities/rajesh-masilamani|Rajesh Masilamani]] — 发明人
+- [[entities/rakesh-murgai|Rakesh Murgai]] — 发明人
+- [[entities/justin-woodruff|Justin Woodruff]] — 发明人
 
 ## Related Synthesis

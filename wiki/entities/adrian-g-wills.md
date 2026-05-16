@@ -25,7 +25,7 @@ Researcher at the **School of Electrical Engineering and Computer Science**, Uni
 
 ## Notable Work
 
-- [[../sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]] — First author, MPC for constraint handling in active structures on DSP
+- [[sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]] — First author, MPC for constraint handling in active structures on DSP
 
 ## Contact
 
@@ -35,4 +35,4 @@ Researcher at the **School of Electrical Engineering and Computer Science**, Uni
 
 ## Related Sources
 
-- [[../sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]
+- [[sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]

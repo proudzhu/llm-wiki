@@ -46,7 +46,7 @@ H_sa(z) = E(z)/D(z) = 1 / [1 - S(z)·W_sa(z)]
 
 比 IMC 系统更严格，多出的 `∠[1 - S(e^jω)·W_sa(e^jω)]` 项意味着滤波器本身影响稳定性。
 
-**解决方案**：使用 [[../concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]] 限制滤波器增益增长，防止发散。
+**解决方案**：使用 [[concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]] 限制滤波器增益增长，防止发散。
 
 ## Performance
 
@@ -78,12 +78,12 @@ H_sa(z) = E(z)/D(z) = 1 / [1 - S(z)·W_sa(z)]
 
 ## Related Concepts
 
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/internal-model-control|Internal Model Control]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]]
-- [[../concepts/simplified-adaptive-feedback-anc|Simplified Adaptive Feedback ANC]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/internal-model-control|Internal Model Control]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]]
+- [[concepts/simplified-adaptive-feedback-anc|Simplified Adaptive Feedback ANC]]
 
 ## Related Sources
 
-- [[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Original paper
+- [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Original paper

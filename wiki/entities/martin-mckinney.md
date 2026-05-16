@@ -20,10 +20,10 @@ tags:
 
 ## Related Sources
 
-- [[../sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
+- [[sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
 
 ## Related Entities
 
-- [[../entities/sina-miran|Sina Miran]] — Co-author
-- [[../entities/henning-schepker|Henning Schepker]] — Co-author
-- [[../entities/ivo-merks|Ivo Merks]] — Co-author
+- [[entities/sina-miran|Sina Miran]] — Co-author
+- [[entities/henning-schepker|Henning Schepker]] — Co-author
+- [[entities/ivo-merks|Ivo Merks]] — Co-author

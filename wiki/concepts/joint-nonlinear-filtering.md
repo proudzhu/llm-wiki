@@ -29,10 +29,10 @@ NDF+ extends FT-JNF with:
 
 ## Related Concepts
 
-- [[../concepts/neural-directional-filtering|Neural Directional Filtering]]
-- [[../concepts/virtual-directional-microphone|Virtual Directional Microphone]]
-- [[../concepts/diffuse-sound-extraction|Diffuse Sound Extraction]]
+- [[concepts/neural-directional-filtering|Neural Directional Filtering]]
+- [[concepts/virtual-directional-microphone|Virtual Directional Microphone]]
+- [[concepts/diffuse-sound-extraction|Diffuse Sound Extraction]]
 
 ## Related Sources
 
-- [[../sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
+- [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]

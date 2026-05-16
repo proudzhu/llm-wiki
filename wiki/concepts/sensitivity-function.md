@@ -29,10 +29,10 @@ where $C$ is the controller and $P$ is the plant (secondary path).
 
 ## Related Concepts
 
-- [[../concepts/feedback-anc|Feedback ANC]]
-- [[../concepts/waterbed-effect|Waterbed Effect]]
-- [[../concepts/robust-control|Robust Control]]
+- [[concepts/feedback-anc|Feedback ANC]]
+- [[concepts/waterbed-effect|Waterbed Effect]]
+- [[concepts/robust-control|Robust Control]]
 
 ## Related Sources
 
-- [[../sources/seo-2016-feedback-anc-constrained-optimization|Seo et al. 2016: Feedback ANC via Constrained Optimization]]
+- [[sources/seo-2016-feedback-anc-constrained-optimization|Seo et al. 2016: Feedback ANC via Constrained Optimization]]

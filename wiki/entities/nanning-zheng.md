@@ -22,7 +22,7 @@ Researcher at the **Institute of Artificial Intelligence and Robotics**, Xi'an J
 
 ## Notable Work
 
-- [[../sources/chen-2016-generalized-correntropy-robust-adaptive-filtering|Chen 2016: Generalized Correntropy for Robust Adaptive Filtering]] — Co-author
+- [[sources/chen-2016-generalized-correntropy-robust-adaptive-filtering|Chen 2016: Generalized Correntropy for Robust Adaptive Filtering]] — Co-author
 
 ## Related Entities
 
@@ -32,4 +32,4 @@ Researcher at the **Institute of Artificial Intelligence and Robotics**, Xi'an J
 
 ## Related Sources
 
-- [[../sources/chen-2016-generalized-correntropy-robust-adaptive-filtering|Chen 2016: Generalized Correntropy for Robust Adaptive Filtering]]
+- [[sources/chen-2016-generalized-correntropy-robust-adaptive-filtering|Chen 2016: Generalized Correntropy for Robust Adaptive Filtering]]

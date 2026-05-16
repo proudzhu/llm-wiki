@@ -146,12 +146,12 @@ FBPTT 测试损失甚至略优于 BPTT。
 
 ## Related Concepts
 
-- [[../concepts/backpropagation-through-time|Backpropagation Through Time]]
-- [[../concepts/real-time-recurrent-learning|Real-Time Recurrent Learning]]
-- [[../concepts/linear-recurrent-unit|Linear Recurrent Unit]]
+- [[concepts/backpropagation-through-time|Backpropagation Through Time]]
+- [[concepts/real-time-recurrent-learning|Real-Time Recurrent Learning]]
+- [[concepts/linear-recurrent-unit|Linear Recurrent Unit]]
 
 ## Related Entities
 
-- [[../entities/nicolas-zucchet|Nicolas Zucchet]]
+- [[entities/nicolas-zucchet|Nicolas Zucchet]]
 
 ## Related Synthesis

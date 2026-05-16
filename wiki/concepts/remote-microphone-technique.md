@@ -28,11 +28,11 @@ where $G_{ev}(z)$ is the transfer function from control source to virtual locati
 
 ## Related Concepts
 
-- [[../concepts/virtual-sensing|Virtual Sensing]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/secondary-path-modeling|Secondary Path Modeling]]
+- [[concepts/virtual-sensing|Virtual Sensing]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/secondary-path-modeling|Secondary Path Modeling]]
 
 ## Related Sources
 
-- [[../sources/a-review-of-virtual-sensing-algorithms-for-active-|Moreau 2008: Review of Virtual Sensing Algorithms for ANC]]
-- [[../sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026: Hybrid ANC with Dual Compensation]]
+- [[sources/a-review-of-virtual-sensing-algorithms-for-active-|Moreau 2008: Review of Virtual Sensing Algorithms for ANC]]
+- [[sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026: Hybrid ANC with Dual Compensation]]

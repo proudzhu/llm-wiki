@@ -23,18 +23,18 @@ tags:
 
 ## Related Sources
 
-- [[../sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
-- [[../sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
+- [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
+- [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
 
 ## Related Concepts
 
-- [[../concepts/feedback-anc|Feedback ANC]]
-- [[../concepts/internal-model-control|Internal Model Control]]
-- [[../concepts/uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
-- [[../concepts/robust-stability-constraint|Robust Stability Constraint]]
+- [[concepts/feedback-anc|Feedback ANC]]
+- [[concepts/internal-model-control|Internal Model Control]]
+- [[concepts/uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
+- [[concepts/robust-stability-constraint|Robust Stability Constraint]]
 
 ## Related Entities
 
-- [[../entities/florian-hilgemann|Florian Hilgemann]] — Supervised researcher, co-author
-- [[../entities/egke-chatzimoustafa|Egke Chatzimoustafa]] — Co-author
-- [[../entities/stefan-liebich|Stefan Liebich]] — Co-author on DOA dependency paper
+- [[entities/florian-hilgemann|Florian Hilgemann]] — Supervised researcher, co-author
+- [[entities/egke-chatzimoustafa|Egke Chatzimoustafa]] — Co-author
+- [[entities/stefan-liebich|Stefan Liebich]] — Co-author on DOA dependency paper

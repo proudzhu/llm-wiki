@@ -23,4 +23,4 @@ MCLP models the late reverberation as a linear combination of previous multi-cha
 - [[beamforming|Beamforming]]
 
 ## Related Sources
-- [[../sources/dietzen-2020-isclp-kalman|Dietzen 2020: ISCLP Kalman Filter]]
+- [[sources/dietzen-2020-isclp-kalman|Dietzen 2020: ISCLP Kalman Filter]]

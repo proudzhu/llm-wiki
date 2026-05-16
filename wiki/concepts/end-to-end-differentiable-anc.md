@@ -52,11 +52,11 @@ Transformer co-processor directly generates full control-filter coefficients wit
 
 ## Related Concepts
 
-- [[../concepts/generative-fixed-filter-anc|Generative Fixed-Filter ANC]] — GFANC methods using this training paradigm
-- [[../concepts/active-noise-control|Active Noise Control]] — parent domain
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — traditional adaptive alternative
+- [[concepts/generative-fixed-filter-anc|Generative Fixed-Filter ANC]] — GFANC methods using this training paradigm
+- [[concepts/active-noise-control|Active Noise Control]] — parent domain
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — traditional adaptive alternative
 
 ## Related Sources
 
-- [[../sources/yang-2026-transformer-e2e-cfg-anc|Yang 2026: Transformer-based E2E-CFG for ANC]] — direct filter generation in differentiable ANC
-- [[../sources/luo-2026-hybrid-gfanc-fxnlms|Luo 2026: Hybrid GFANC-FxNLMS]] — unsupervised GFANC with differentiable training
+- [[sources/yang-2026-transformer-e2e-cfg-anc|Yang 2026: Transformer-based E2E-CFG for ANC]] — direct filter generation in differentiable ANC
+- [[sources/luo-2026-hybrid-gfanc-fxnlms|Luo 2026: Hybrid GFANC-FxNLMS]] — unsupervised GFANC with differentiable training

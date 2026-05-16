@@ -22,17 +22,17 @@ tags:
 
 ## Related Sources
 
-- [[../sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
+- [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
 
 ## Related Concepts
 
-- [[../concepts/feedback-anc|Feedback ANC]]
-- [[../concepts/internal-model-control|Internal Model Control]]
-- [[../concepts/uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
-- [[../concepts/convex-hull-uncertainty-model|Convex Hull Uncertainty Model]]
-- [[../concepts/elliptic-uncertainty-model|Elliptic Uncertainty Model]]
+- [[concepts/feedback-anc|Feedback ANC]]
+- [[concepts/internal-model-control|Internal Model Control]]
+- [[concepts/uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
+- [[concepts/convex-hull-uncertainty-model|Convex Hull Uncertainty Model]]
+- [[concepts/elliptic-uncertainty-model|Elliptic Uncertainty Model]]
 
 ## Related Entities
 
-- [[../entities/peter-jax|Peter Jax]] — Supervisor/co-author
-- [[../entities/egke-chatzimoustafa|Egke Chatzimoustafa]] — Co-author
+- [[entities/peter-jax|Peter Jax]] — Supervisor/co-author
+- [[entities/egke-chatzimoustafa|Egke Chatzimoustafa]] — Co-author

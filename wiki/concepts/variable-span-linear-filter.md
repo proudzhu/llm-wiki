@@ -42,12 +42,12 @@ The HVSF architecture uses a DNN to estimate $\Phi_x$, $\Phi_n$, and $\mu$ from 
 
 ## Related Concepts
 
-- [[../concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
-- [[../concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
-- [[../concepts/mvdr-beamformer|MVDR Beamformer]]
-- [[../concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
-- [[../concepts/generalized-eigenvalue-decomposition|Generalized Eigenvalue Decomposition]]
+- [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
+- [[concepts/mvdr-beamformer|MVDR Beamformer]]
+- [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
+- [[concepts/generalized-eigenvalue-decomposition|Generalized Eigenvalue Decomposition]]
 
 ## Related Sources
 
-- [[../sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
+- [[sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]

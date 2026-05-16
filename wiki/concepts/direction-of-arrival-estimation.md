@@ -58,14 +58,14 @@ The CRNN achieves >90% DoA classification accuracy at SNR ≥ 20 dB with only 0.
 
 ## Related Concepts
 
-- [[../concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — DoA drives filter selection in D-SFANC/PD-SFANC
-- [[../concepts/moving-source-tracking|Moving Source Tracking]] — temporal DoA evolution for moving sources
-- [[../concepts/convolutional-recurrent-network|Convolutional Recurrent Network]] — neural architecture for data-driven DoA estimation
-- [[../concepts/active-noise-control|Active Noise Control]] — application domain
+- [[concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — DoA drives filter selection in D-SFANC/PD-SFANC
+- [[concepts/moving-source-tracking|Moving Source Tracking]] — temporal DoA evolution for moving sources
+- [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]] — neural architecture for data-driven DoA estimation
+- [[concepts/active-noise-control|Active Noise Control]] — application domain
 
 ## Related Sources
 
-- [[../sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]] — CRNN-based next-frame DoA prediction for ANC
-- [[../sources/wang-2026-directional-sfanc-reverberant|Wang 2026: Directional SFANC in Reverberant Environments]] — CNN-based multi-task DoA estimation for reverberant conditions
-- [[../sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — foundational work showing direction-dependent causality in feedforward ANC
-- [[../sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation|Görtz et al. 2026: Blind DDAP Estimation Using Smart Glasses]] — head rotation exploited for direction-dependent parameter estimation
+- [[sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]] — CRNN-based next-frame DoA prediction for ANC
+- [[sources/wang-2026-directional-sfanc-reverberant|Wang 2026: Directional SFANC in Reverberant Environments]] — CNN-based multi-task DoA estimation for reverberant conditions
+- [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — foundational work showing direction-dependent causality in feedforward ANC
+- [[sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation|Görtz et al. 2026: Blind DDAP Estimation Using Smart Glasses]] — head rotation exploited for direction-dependent parameter estimation

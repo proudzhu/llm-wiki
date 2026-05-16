@@ -22,12 +22,12 @@ tags:
 
 ## Related Sources
 
-- [[../sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
+- [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
 
 ## Related Concepts
 
-- [[../concepts/device-specific-hrtf|Device-Specific HRTF]]
+- [[concepts/device-specific-hrtf|Device-Specific HRTF]]
 
 ## Related Entities
 
-- [[../entities/jan-gerrit-richter|Jan-Gerrit Richter]] — Co-author, researcher at ITA
+- [[entities/jan-gerrit-richter|Jan-Gerrit Richter]] — Co-author, researcher at ITA

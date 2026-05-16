@@ -56,4 +56,4 @@ When the secondary path is approximately a **pure delay** (common in narrow-band
 
 ## Related Sources
 
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section III: Narrow-Band Feedforward ANC
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section III: Narrow-Band Feedforward ANC

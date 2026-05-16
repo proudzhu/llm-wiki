@@ -18,7 +18,7 @@ tags:
 
 # Frank & Cohen 2026: Low-latency Audio Front-end ROI Beamforming for Smart Glasses
 
-**Authors**: [[../entities/ariel-frank|Ariel Frank]], [[../entities/israel-cohen|Israel Cohen]]
+**Authors**: [[entities/ariel-frank|Ariel Frank]], [[entities/israel-cohen|Israel Cohen]]
 **Institution**: Technion — Israel Institute of Technology
 **Year**: 2026
 **Type**: Conference Paper
@@ -126,11 +126,11 @@ All beamformers were tuned to SI-SDR = 14.9 dB for fair comparison.
 
 ## Related Concepts
 
-- [[../concepts/beamforming|Beamforming]]
-- [[../concepts/signal-processing|Signal Processing]]
-- [[../concepts/active-noise-control|Active Noise Control]]
+- [[concepts/beamforming|Beamforming]]
+- [[concepts/signal-processing|Signal Processing]]
+- [[concepts/active-noise-control|Active Noise Control]]
 
 ## Related Entities
 
-- [[../entities/ariel-frank|Ariel Frank]]
-- [[../entities/israel-cohen|Israel Cohen]]
+- [[entities/ariel-frank|Ariel Frank]]
+- [[entities/israel-cohen|Israel Cohen]]

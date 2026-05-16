@@ -21,16 +21,16 @@ tags:
 
 ## Related Sources
 
-- [[../sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
+- [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
 
 ## Related Concepts
 
-- [[../concepts/feedforward-anc|Feedforward ANC]]
-- [[../concepts/device-specific-hrtf|Device-Specific HRTF]]
-- [[../concepts/anc-attenuation-bounds|ANC Attenuation Bounds]]
+- [[concepts/feedforward-anc|Feedforward ANC]]
+- [[concepts/device-specific-hrtf|Device-Specific HRTF]]
+- [[concepts/anc-attenuation-bounds|ANC Attenuation Bounds]]
 
 ## Related Entities
 
-- [[../entities/peter-jax|Peter Jax]] — Supervisor, co-author
-- [[../entities/jan-gerrit-richter|Jan-Gerrit Richter]] — Co-author
-- [[../entities/janina-fels|Janina Fels]] — Co-author
+- [[entities/peter-jax|Peter Jax]] — Supervisor, co-author
+- [[entities/jan-gerrit-richter|Jan-Gerrit Richter]] — Co-author
+- [[entities/janina-fels|Janina Fels]] — Co-author

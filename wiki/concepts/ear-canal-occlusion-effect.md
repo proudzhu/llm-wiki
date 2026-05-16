@@ -36,9 +36,9 @@ In high-end ANC headphones, the occlusion effect can be unpleasant for users dur
 ## Related Concepts
 
 - [[bone-conduction|Bone Conduction]]
-- [[../sources/fukumoto-2025-whisphone-paper-reading-note|Whisphone]]
+- [[sources/fukumoto-2025-whisphone-paper-reading-note|Whisphone]]
 - [[transparency-mode|Transparency Mode]]
 
 ## Related Sources
 
-- [[../sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
+- [[sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]

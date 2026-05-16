@@ -48,4 +48,4 @@ Smart glasses equipped with microphone arrays and IMUs are a natural AAR platfor
 
 ## Related Sources
 
-- [[../sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation|Görtz et al. 2026: Blind DDAP Estimation Using Smart Glasses]]
+- [[sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation|Görtz et al. 2026: Blind DDAP Estimation Using Smart Glasses]]

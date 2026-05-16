@@ -32,6 +32,26 @@ llm-wiki/
 - Internal links use relative paths: `[[entities/person-name]]` or `[Person Name](../entities/person-name.md)`
 - Headings: H1 for title, H2 for major sections, H3 for subsections
 
+### Link Conventions (apply when creating/editing pages)
+
+These rules ensure pages render correctly in **both Obsidian and MkDocs** at write time, so the build never has anything to fix later. The rule of thumb: **all internal references use vault-absolute paths from the project root** — Obsidian (vault root = project root) and MkDocs (via the `fix_obsidian_escapes` plugin) both resolve them identically.
+
+| Reference type | Form to write | Example |
+| --- | --- | --- |
+| Wiki page link | `[[<subdir>/<page>\|<text>]]` | `[[concepts/atfa\|ATFA]]` |
+| Section link in another page | `[[<subdir>/<page>#Heading\|<text>]]` | `[[sources/liu-2025#Methodology\|Methods]]` |
+| Image / figure (from `raw/`) | `![[raw/<path>\|<alt>]]` (embed wikilink) | `![[raw/papers/foo/figures/x.jpg\|Figure 1]]` |
+| External URL | Standard markdown | `[ICASSP](https://...)` |
+
+**Rules to follow while writing:**
+
+1. **Never use `../` prefixes inside wikilinks.** Write `[[entities/foo\|Foo]]`, not `[[../entities/foo\|Foo]]`. The leading `../` is not vault-absolute and breaks Obsidian.
+2. **Use embed wikilinks `![[…]]` for figures**, not markdown image syntax `![alt](../raw/…)`. Markdown images with `../` paths break in Obsidian (vault root mismatch). Embed wikilinks are vault-absolute and work in both tools.
+3. **Never link to a page that does not exist.** Before writing `[[concepts/foo]]`, confirm the target file exists; otherwise either create it or use plain text.
+4. **No stray `[text](...)` placeholders** in `log.md` or anywhere else.
+
+See [BUILD.md](BUILD.md) for the build mechanics that make these conventions work, and `plugins/fix_obsidian_escapes.py` for the resolver implementation.
+
 ### Page Naming
 - **Entities**: `wiki/entities/{name}.md` (lowercase, hyphenated)
 - **Concepts**: `wiki/concepts/{concept-name}.md` (lowercase, hyphenated)
@@ -71,6 +91,7 @@ When a new source is added to `raw/`:
 9. Append entry to `wiki/log.md` with format: `## [YYYY-MM-DD] ingest | Source Title`
 10. **Update subdirectory index files**: Add new entries to `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md`, and `wiki/synthesis/index.md` (as applicable) — each subdirectory maintains its own index table mirroring the corresponding section of `wiki/index.md`
 11. **Verify**: Check that all new concepts/entities mentioned in the source page have corresponding wiki pages; create any missing ones
+12. **Build sanity check (final step)**: Run `uv run mkdocs build --strict` to confirm no WARNINGs slipped through. The page-creation rules in *Link Conventions* above are designed so this step should always pass; if it does not, the offending page violated a convention and must be fixed before the ingest is complete.
 
 ### 2. Query Wiki
 
@@ -118,3 +139,9 @@ Periodically (when requested), health-check the wiki:
 - Keep cross-references current and consistent
 - Flag contradictions for user review rather than silently resolving them
 - Use `micromamba activate llm-wiki` when running python scripts
+
+## Build Verification (MkDocs)
+
+After any ingest or significant edit, verify the build is clean with `uv run mkdocs build --strict`.
+
+See [BUILD.md](BUILD.md) for full details on build mechanics, link conventions, and common pitfalls that fail strict mode.

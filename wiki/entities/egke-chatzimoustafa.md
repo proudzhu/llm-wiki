@@ -20,14 +20,14 @@ tags:
 
 ## Related Sources
 
-- [[../sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
+- [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
 
 ## Related Concepts
 
-- [[../concepts/feedback-anc|Feedback ANC]]
-- [[../concepts/uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
+- [[concepts/feedback-anc|Feedback ANC]]
+- [[concepts/uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
 
 ## Related Entities
 
-- [[../entities/florian-hilgemann|Florian Hilgemann]] — Co-author
-- [[../entities/peter-jax|Peter Jax]] — Co-author
+- [[entities/florian-hilgemann|Florian Hilgemann]] — Co-author
+- [[entities/peter-jax|Peter Jax]] — Co-author

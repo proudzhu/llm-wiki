@@ -17,8 +17,8 @@ tags:
 
 ## Key Contributions
 
-- Co-authored DriftSE, a drifting-models-based speech enhancement framework ([[../sources/xu-2026-drifting-models-speech-enhancement|Xu et al. 2026]])
+- Co-authored DriftSE, a drifting-models-based speech enhancement framework ([[sources/xu-2026-drifting-models-speech-enhancement|Xu et al. 2026]])
 
 ## Related Sources
 
-- [[../sources/xu-2026-drifting-models-speech-enhancement|Xu et al. 2026: Speech Enhancement Based on Drifting Models]]
+- [[sources/xu-2026-drifting-models-speech-enhancement|Xu et al. 2026: Speech Enhancement Based on Drifting Models]]

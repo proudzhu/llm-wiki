@@ -24,10 +24,10 @@ Researcher at **Microsoft Corporation**. Works on human-computer interaction, we
 
 ## Notable Work
 
-- [[../sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]] — Whisphone: earbud-based whisper input using bone conduction and ANC
+- [[sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]] — Whisphone: earbud-based whisper input using bone conduction and ANC
 
 ## Related Entities
 
 ## Related Sources
 
-- [[../sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
+- [[sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]

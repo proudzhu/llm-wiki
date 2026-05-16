@@ -27,7 +27,7 @@ aliases:
 
 ## 一、问题定义：FxMCC 的局限性
 
-[[../concepts/maximum-correntropy-criterion|Maximum Correntropy Criterion]] (MCC) 已成功应用于脉冲噪声环境下的 ANC。但默认的**高斯核**并非总是最优选择。
+[[concepts/maximum-correntropy-criterion|Maximum Correntropy Criterion]] (MCC) 已成功应用于脉冲噪声环境下的 ANC。但默认的**高斯核**并非总是最优选择。
 
 **FxMCC 算法**（使用高斯核）的更新规则：
 
@@ -352,12 +352,12 @@ Chen 2016 提出了广义 correntropy 和 GMCC 算法的**一般理论**（不�
 
 ## Related Concepts
 
-- [[../concepts/correntropy|Correntropy]] — 非线性相似度度量
-- [[../concepts/generalized-correntropy|Generalized Correntropy]] — GGD 核 correntropy，$p$ 参数控制尾行为
-- [[../concepts/maximum-correntropy-criterion|Maximum Correntropy Criterion]] — 基于 correntropy 的优化准则
-- [[../concepts/active-noise-control|Active Noise Control]] — 应用场景
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — 对比基线
-- [[../concepts/robust-adaptive-filtering|Robust Adaptive Filtering]] — 脉冲噪声下的鲁棒自适应滤波
+- [[concepts/correntropy|Correntropy]] — 非线性相似度度量
+- [[concepts/generalized-correntropy|Generalized Correntropy]] — GGD 核 correntropy，$p$ 参数控制尾行为
+- [[concepts/maximum-correntropy-criterion|Maximum Correntropy Criterion]] — 基于 correntropy 的优化准则
+- [[concepts/active-noise-control|Active Noise Control]] — 应用场景
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — 对比基线
+- [[concepts/robust-adaptive-filtering|Robust Adaptive Filtering]] — 脉冲噪声下的鲁棒自适应滤波
 
 ## Related Sources
 
@@ -365,7 +365,7 @@ Chen 2016 提出了广义 correntropy 和 GMCC 算法的**一般理论**（不�
 
 ## Related Entities
 
-- [[../entities/haiquan-zhao|Haiquan Zhao]] — 通讯作者，Southwest Jiaotong University
-- [[../entities/badong-chen|Badong Chen]] — 共同作者，Xi'an Jiaotong University，广义 correntropy 的提出者
+- [[entities/haiquan-zhao|Haiquan Zhao]] — 通讯作者，Southwest Jiaotong University
+- [[entities/badong-chen|Badong Chen]] — 共同作者，Xi'an Jiaotong University，广义 correntropy 的提出者
 
 ## Related Synthesis

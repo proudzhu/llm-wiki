@@ -138,11 +138,11 @@ tags:
 ---
 
 ## Related Concepts
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/active-vibration-control|Active Vibration Control]]
-- [[../concepts/maximum-correntropy-criterion|Maximum Correntropy Criterion]]
-- [[../concepts/model-predictive-control|Model Predictive Control]]
-- [[../concepts/system-identification|System Identification]]
-- [[../concepts/transparency-mode|Transparency Mode]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/active-vibration-control|Active Vibration Control]]
+- [[concepts/maximum-correntropy-criterion|Maximum Correntropy Criterion]]
+- [[concepts/model-predictive-control|Model Predictive Control]]
+- [[concepts/system-identification|System Identification]]
+- [[concepts/transparency-mode|Transparency Mode]]
 
 ## Related Synthesis

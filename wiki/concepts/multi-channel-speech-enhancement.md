@@ -31,16 +31,16 @@ tags:
 
 ## Related Concepts
 
-- [[../concepts/beamforming|Beamforming]]
-- [[../concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
-- [[../concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
-- [[../concepts/mvdr-beamformer|MVDR Beamformer]]
-- [[../concepts/variable-span-linear-filter|Variable Span Linear Filter]]
-- [[../concepts/virtual-microphone-estimation|Virtual Microphone Estimation]]
-- [[../concepts/spatial-audio-representation-learning|Spatial Audio Representation Learning]]
+- [[concepts/beamforming|Beamforming]]
+- [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
+- [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
+- [[concepts/mvdr-beamformer|MVDR Beamformer]]
+- [[concepts/variable-span-linear-filter|Variable Span Linear Filter]]
+- [[concepts/virtual-microphone-estimation|Virtual Microphone Estimation]]
+- [[concepts/spatial-audio-representation-learning|Spatial Audio Representation Learning]]
 
 ## Related Sources
 
-- [[../sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
-- [[../sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
-- [[../sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026: Spatial-Magnifier]]
+- [[sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
+- [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
+- [[sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026: Spatial-Magnifier]]

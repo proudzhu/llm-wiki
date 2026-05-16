@@ -16,7 +16,7 @@ tags:
 
 # Lee, Pandey, Parekh, Wong, Donley, Xu & Azcarreta 2026: Spatial-Magnifier
 
-**Authors**: [[../entities/dongheon-lee|Dongheon Lee]]¹², [[../entities/ashutosh-pandey|Ashutosh Pandey]]¹, [[../entities/sanjeel-parekh|Sanjeel Parekh]]¹, [[../entities/daniel-wong|Daniel Wong]]¹, [[../entities/jacob-donley|Jacob Donley]]¹, [[../entities/buye-xu|Buye Xu]]¹, [[../entities/juan-azcarreta|Juan Azcarreta]]¹
+**Authors**: [[entities/dongheon-lee|Dongheon Lee]]¹², [[entities/ashutosh-pandey|Ashutosh Pandey]]¹, [[entities/sanjeel-parekh|Sanjeel Parekh]]¹, [[entities/daniel-wong|Daniel Wong]]¹, [[entities/jacob-donley|Jacob Donley]]¹, [[entities/buye-xu|Buye Xu]]¹, [[entities/juan-azcarreta|Juan Azcarreta]]¹
 
 **Affiliations**: ¹Meta Reality Labs Research, ²KAIST
 
@@ -173,17 +173,17 @@ Spatial-Magnifier achieves superior VM-BF with **~10× fewer parameters** than C
 
 ## Related Concepts
 
-- [[../concepts/virtual-microphone-estimation|Virtual Microphone Estimation]]
-- [[../concepts/spatial-audio-representation-learning|Spatial Audio Representation Learning]]
-- [[../concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
-- [[../concepts/beamforming|Beamforming]]
-- [[../concepts/mvdr-beamformer|MVDR Beamformer]]
-- [[../concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
-- [[../concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
+- [[concepts/virtual-microphone-estimation|Virtual Microphone Estimation]]
+- [[concepts/spatial-audio-representation-learning|Spatial Audio Representation Learning]]
+- [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[concepts/beamforming|Beamforming]]
+- [[concepts/mvdr-beamformer|MVDR Beamformer]]
+- [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
+- [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
 
 ## Related Sources
 
-- [[../sources/farmani-2026-virtual-mic-beamforming-hearing-aid|Farmani 2026: VM Beamforming for Hearing Aids]]
-- [[../sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
-- [[../sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
-- [[../sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal 2026: Adaptive Diagonal Loading for Beamforming]]
+- [[sources/farmani-2026-virtual-mic-beamforming-hearing-aid|Farmani 2026: VM Beamforming for Hearing Aids]]
+- [[sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
+- [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
+- [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal 2026: Adaptive Diagonal Loading for Beamforming]]

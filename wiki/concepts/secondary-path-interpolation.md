@@ -13,7 +13,7 @@ tags:
 
 # Secondary Path Interpolation
 
-**Secondary Path Interpolation** is the process of estimating the [[../concepts/secondary-path-modeling|secondary path]] at unmeasured positions by interpolating between pre-recorded impulse responses at known measurement positions. This is essential for local [[../concepts/active-noise-control|ANC]] systems with moving listeners, where the secondary path changes as the point of cancellation moves.
+**Secondary Path Interpolation** is the process of estimating the [[concepts/secondary-path-modeling|secondary path]] at unmeasured positions by interpolating between pre-recorded impulse responses at known measurement positions. This is essential for local [[concepts/active-noise-control|ANC]] systems with moving listeners, where the secondary path changes as the point of cancellation moves.
 
 ## Problem Statement
 
@@ -43,7 +43,7 @@ Estimate a global time offset via cross-correlation before linear interpolation.
 
 ### DTW-Based Interpolation
 
-Uses [[../concepts/dynamic-time-warping|Dynamic Time Warping]] to align impulse responses sample-by-sample before interpolation, then de-warps the result via cubic spline interpolation. Achieves the lowest system mismatch, especially for coarse measurement grids.
+Uses [[concepts/dynamic-time-warping|Dynamic Time Warping]] to align impulse responses sample-by-sample before interpolation, then de-warps the result via cubic spline interpolation. Achieves the lowest system mismatch, especially for coarse measurement grids.
 
 ## Performance Comparison
 
@@ -64,12 +64,12 @@ The interpolation problem is analogous to HRIR/BRIR interpolation in spatial aud
 
 ## Related Concepts
 
-- [[../concepts/dynamic-time-warping|Dynamic Time Warping]]
-- [[../concepts/secondary-path-modeling|Secondary Path Modeling]]
-- [[../concepts/offline-secondary-path-modeling|Offline Secondary-Path Modeling]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/dynamic-time-warping|Dynamic Time Warping]]
+- [[concepts/secondary-path-modeling|Secondary Path Modeling]]
+- [[concepts/offline-secondary-path-modeling|Offline Secondary-Path Modeling]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
 
 ## Related Sources
 
-- [[../sources/holzmuller-2026-dtw-secondary-path-anc|Holzmüller & Sontacchi 2026: DTW for Secondary Path Interpolation in ANC]]
+- [[sources/holzmuller-2026-dtw-secondary-path-anc|Holzmüller & Sontacchi 2026: DTW for Secondary Path Interpolation in ANC]]

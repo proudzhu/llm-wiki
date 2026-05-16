@@ -17,7 +17,7 @@ tags:
 
 # Wang, Luo, Li, Shi, Ji, Yang & Gan 2026: Directional Selective Fixed-Filter ANC Based on CNN in Reverberant Environments
 
-**Authors**: [[../entities/boxiang-wang|Boxiang Wang]], [[../entities/zhengding-luo|Zhengding Luo]], [[../entities/haowen-li|Haowen Li]], [[../entities/dongyuan-shi|Dongyuan Shi]], [[../entities/junwei-ji|Junwei Ji]], [[../entities/ziyi-yang|Ziyi Yang]], [[../entities/woon-seng-gan|Woon-Seng Gan]]
+**Authors**: [[entities/boxiang-wang|Boxiang Wang]], [[entities/zhengding-luo|Zhengding Luo]], [[entities/haowen-li|Haowen Li]], [[entities/dongyuan-shi|Dongyuan Shi]], [[entities/junwei-ji|Junwei Ji]], [[entities/ziyi-yang|Ziyi Yang]], [[entities/woon-seng-gan|Woon-Seng Gan]]
 **Institutions**: School of Electrical and Electronic Engineering, Nanyang Technological University, Singapore; Center of Intelligent Acoustics and Immersive Communications, Northwestern Polytechnical University, China
 **Published**: arXiv preprint, 2026-01-11
 **Type**: Preprint
@@ -170,13 +170,13 @@ Results obtained on unseen noise types and acoustic environments, demonstrating 
 
 ## Related Concepts
 
-- [[../concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]]
-- [[../concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/multi-channel-anc|Multi-Channel ANC]]
+- [[concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]]
+- [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/multi-channel-anc|Multi-Channel ANC]]
 
 ## Related Synthesis
 
-- [[../synthesis/ai-driven-anc|AI-Driven ANC]]
-- [[../synthesis/secondary-path-modeling-evolution|Secondary Path Modeling Evolution]]
+- [[synthesis/ai-driven-anc|AI-Driven ANC]]
+- [[synthesis/secondary-path-modeling-evolution|Secondary Path Modeling Evolution]]

@@ -24,7 +24,7 @@ Andrej Karpathy proposes a paradigm shift: viewing Large Language Models (LLMs) 
 
 - **CPU (Kernel)**: The LLM itself, which processes natural language "instructions" (prompts) and manages reasoning, planning, and task orchestration.
 - **RAM (Context Window)**: The volatile, fast-access memory for the current state of a task.
-- **Storage (Vector Databases)**: Persistent long-term storage where relevant information is retrieved via [[../concepts/information-theoretic-learning|Information Retrieval]] (RAG).
+- **Storage (Vector Databases)**: Persistent long-term storage where relevant information is retrieved via [[concepts/information-theoretic-learning|Information Retrieval]] (RAG).
 - **Peripherals (Tools)**: External resources the LLM can invoke, such as calculators, web search, or code interpreters.
 - **I/O (Multimodal)**: Ability to process and generate various media (audio, vision, text).
 
@@ -37,9 +37,9 @@ Andrej Karpathy proposes a paradigm shift: viewing Large Language Models (LLMs) 
 This transition moves software development from rigid procedural code to fluid, prompt-based orchestration. The developer's role evolves into an architect of these "LLM Programs," defining the ecosystem of available tools and the logic that guides the LLM kernel.
 
 ## Related Concepts
-- [[../concepts/llm-wiki-pattern|LLM Wiki Pattern]]
-- [[../concepts/ai-skill-formation|AI Skill Formation]]
-- [[../concepts/information-theoretic-learning|Information Retrieval]]
+- [[concepts/llm-wiki-pattern|LLM Wiki Pattern]]
+- [[concepts/ai-skill-formation|AI Skill Formation]]
+- [[concepts/information-theoretic-learning|Information Retrieval]]
 
 ## Related Synthesis
-- [[../synthesis/ai-driven-anc|AI-Driven ANC]]
+- [[synthesis/ai-driven-anc|AI-Driven ANC]]

@@ -261,8 +261,8 @@ FiLM 只注入 128 维仿射参数 $(\gamma, \beta)$ ≈ 512 字节/用户。全
 
 ## 相关 Wiki 页面
 
-- [[../concepts/active-noise-control|Active Noise Control]] — ANC 概述
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — 传统 ANC 标准算法
-- [[../concepts/multi-channel-anc|Multi-Channel ANC]] — 多通道 ANC
-- [[../concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]] — 在线二次路径建模
-- [[../concepts/offline-secondary-path-modeling|Offline Secondary-Path Modeling]] — 离线二次路径建模
+- [[concepts/active-noise-control|Active Noise Control]] — ANC 概述
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — 传统 ANC 标准算法
+- [[concepts/multi-channel-anc|Multi-Channel ANC]] — 多通道 ANC
+- [[concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]] — 在线二次路径建模
+- [[concepts/offline-secondary-path-modeling|Offline Secondary-Path Modeling]] — 离线二次路径建模

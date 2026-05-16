@@ -263,13 +263,13 @@ ANC 在两种噪声水平下均提供约 30dB 降噪。
 
 ## Related Concepts
 
-- [[../concepts/active-noise-control|Active Noise Control]] — Whisphone 利用 ANC 降噪来改善麦克风端信噪比
-- [[../concepts/bone-conduction|Bone Conduction]] — 耳道辐射路径是 Whisphone 拾音的物理基础
-- [[../concepts/ear-canal-occlusion-effect|Ear Canal Occlusion Effect]] — 闭塞效应放大耳语音号 ~10dB
-- [[../concepts/whispering-speech-recognition|Whispering Speech Recognition]] — OpenAI Whisper、Google Voice Search 均支持耳语识别
+- [[concepts/active-noise-control|Active Noise Control]] — Whisphone 利用 ANC 降噪来改善麦克风端信噪比
+- [[concepts/bone-conduction|Bone Conduction]] — 耳道辐射路径是 Whisphone 拾音的物理基础
+- [[concepts/ear-canal-occlusion-effect|Ear Canal Occlusion Effect]] — 闭塞效应放大耳语音号 ~10dB
+- [[concepts/whispering-speech-recognition|Whispering Speech Recognition]] — OpenAI Whisper、Google Voice Search 均支持耳语识别
 
 ## Related Entities
 
-- [[../entities/masaaki-fukumoto|Masaaki Fukumoto]] — 作者，Microsoft Corporation，WISS2024 日文原版
+- [[entities/masaaki-fukumoto|Masaaki Fukumoto]] — 作者，Microsoft Corporation，WISS2024 日文原版
 
 ## Related Synthesis

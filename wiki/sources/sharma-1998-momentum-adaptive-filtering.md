@@ -16,7 +16,7 @@ tags:
 
 # Sharma, Sethares & Bucklew 1998: Analysis of Momentum Adaptive Filtering Algorithms
 
-**Authors**: [[../entities/rajesh-sharma|Rajesh Sharma]], [[../entities/william-sethares|William A. Sethares]], [[../entities/james-bucklew|James A. Bucklew]]
+**Authors**: [[entities/rajesh-sharma|Rajesh Sharma]], [[entities/william-sethares|William A. Sethares]], [[entities/james-bucklew|James A. Bucklew]]
 
 **Institution**: ERIM International (Sharma); University of Wisconsin–Madison (Sethares, Bucklew)
 
@@ -145,10 +145,10 @@ $$\frac{\beta\mu}{4 f_u(0)\sigma} I_{d \times d}$$
 
 ## Related Concepts
 
-- [[../concepts/momentum-lms|Momentum LMS]]
-- [[../concepts/adaptive-filtering|Adaptive Filtering]]
-- [[../concepts/asymptotic-analysis-adaptive-algorithms|Asymptotic Analysis of Adaptive Algorithms]]
+- [[concepts/momentum-lms|Momentum LMS]]
+- [[concepts/adaptive-filtering|Adaptive Filtering]]
+- [[concepts/asymptotic-analysis-adaptive-algorithms|Asymptotic Analysis of Adaptive Algorithms]]
 
 ## Related Synthesis
 
-- [[../synthesis/adaptive-algorithm-tradeoffs|Adaptive Algorithm Trade-offs]]
+- [[synthesis/adaptive-algorithm-tradeoffs|Adaptive Algorithm Trade-offs]]

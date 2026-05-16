@@ -49,10 +49,10 @@ For [[momentum-lms|MLMS]] in time-varying linear systems, the averaged predictio
 
 ## Related Concepts
 
-- [[../concepts/momentum-lms|Momentum LMS]]
-- [[../concepts/adaptive-filtering|Adaptive Filtering]]
-- [[../concepts/variable-step-size-lms|Variable Step Size LMS]]
+- [[concepts/momentum-lms|Momentum LMS]]
+- [[concepts/adaptive-filtering|Adaptive Filtering]]
+- [[concepts/variable-step-size-lms|Variable Step Size LMS]]
 
 ## Related Sources
 
-- [[../sources/jin-2026-momentum-lms-nonstationarity|Jin, Zheng & Guo 2026: Momentum LMS Theory beyond Stationarity]]
+- [[sources/jin-2026-momentum-lms-nonstationarity|Jin, Zheng & Guo 2026: Momentum LMS Theory beyond Stationarity]]

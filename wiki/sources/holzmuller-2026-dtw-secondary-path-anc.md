@@ -16,7 +16,7 @@ tags:
 
 # Holzmüller & Sontacchi 2026: DTW for Secondary Path Interpolation in ANC
 
-**Authors**: [[../entities/felix-holzmueller|Felix Holzmüller]], [[../entities/alois-sontacchi|Alois Sontacchi]]
+**Authors**: [[entities/felix-holzmueller|Felix Holzmüller]], [[entities/alois-sontacchi|Alois Sontacchi]]
 **Institution**: Institute of Electronic Music and Acoustics, University of Music and Performing Arts Graz, Austria
 **Venue**: IEEE Open Journal of Signal Processing
 **Year**: 2026
@@ -26,17 +26,17 @@ tags:
 
 ## Summary
 
-Proposes a [[../concepts/dynamic-time-warping|Dynamic Time Warping]]-based interpolation method for secondary path filter coefficients in local [[../concepts/active-noise-control|ANC]] systems with moving listeners. By aligning impulse responses via DTW in an offline analysis before interpolation and de-warping during operation, the technique achieves substantially lower system mismatch and extends the stable frequency range compared to nearest-neighbor and linear interpolation, especially for coarse measurement grids and lateral translation.
+Proposes a [[concepts/dynamic-time-warping|Dynamic Time Warping]]-based interpolation method for secondary path filter coefficients in local [[concepts/active-noise-control|ANC]] systems with moving listeners. By aligning impulse responses via DTW in an offline analysis before interpolation and de-warping during operation, the technique achieves substantially lower system mismatch and extends the stable frequency range compared to nearest-neighbor and linear interpolation, especially for coarse measurement grids and lateral translation.
 
 ## Problem Formulation
 
-In local ANC with moving points of cancellation (PoC), the [[../concepts/secondary-path-modeling|secondary path]] $\hat{\mathbf{g}}(\Psi)$ must be updated as the listener moves to position $\Psi_{\text{int}}[n]$. When paths are pre-recorded at $N_\Psi$ discrete positions $\underline{\Psi} := \{\Psi_f\}_{f=1}^{N_\Psi}$, interpolation is required for intermediate positions. Direct time-domain interpolation of impulse responses produces pre-echo effects and temporal smearing because adjacent responses exhibit different propagation delays and reflection patterns.
+In local ANC with moving points of cancellation (PoC), the [[concepts/secondary-path-modeling|secondary path]] $\hat{\mathbf{g}}(\Psi)$ must be updated as the listener moves to position $\Psi_{\text{int}}[n]$. When paths are pre-recorded at $N_\Psi$ discrete positions $\underline{\Psi} := \{\Psi_f\}_{f=1}^{N_\Psi}$, interpolation is required for intermediate positions. Direct time-domain interpolation of impulse responses produces pre-echo effects and temporal smearing because adjacent responses exhibit different propagation delays and reflection patterns.
 
 The **system mismatch** quantifies interpolation accuracy:
 
 $$\text{SM}(\Psi) = 20\log_{10}\left(\frac{\|\mathbf{g}(\Psi) - \tilde{\mathbf{g}}(\Psi)\|_2}{\|\mathbf{g}(\Psi)\|_2}\right)$$
 
-Stability of the [[../concepts/filtered-x-lms-algorithm|FxLMS]] algorithm requires:
+Stability of the [[concepts/filtered-x-lms-algorithm|FxLMS]] algorithm requires:
 
 $$\Re\left\{\text{eig}\left[\hat{\mathbf{G}}^H(\omega)\mathbf{G}(\omega)\right]\right\} > 0 \quad \forall\omega$$
 
@@ -149,13 +149,13 @@ DTW and GA both maintain stable operation up to ~7.5 kHz even for 25 cm spacing,
 
 ## Related Concepts
 
-- [[../concepts/dynamic-time-warping|Dynamic Time Warping]]
-- [[../concepts/secondary-path-interpolation|Secondary Path Interpolation]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[../concepts/secondary-path-modeling|Secondary Path Modeling]]
-- [[../concepts/offline-secondary-path-modeling|Offline Secondary-Path Modeling]]
+- [[concepts/dynamic-time-warping|Dynamic Time Warping]]
+- [[concepts/secondary-path-interpolation|Secondary Path Interpolation]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/secondary-path-modeling|Secondary Path Modeling]]
+- [[concepts/offline-secondary-path-modeling|Offline Secondary-Path Modeling]]
 
 ## Related Synthesis
 
-- [[../synthesis/virtual-sensing-evolution|Virtual Sensing Evolution]]
+- [[synthesis/virtual-sensing-evolution|Virtual Sensing Evolution]]

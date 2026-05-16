@@ -63,12 +63,12 @@ where $\alpha_n$ follows a forgetting-factor scheme ($\lambda = 0.999$).
 
 ## Related Concepts
 
-- [[../concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — predecessor: discrete filter selection
-- [[../concepts/active-noise-control|Active Noise Control]] — parent domain
-- [[../concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — adaptive alternative
-- [[../concepts/end-to-end-differentiable-anc|End-to-End Differentiable ANC]] — training paradigm for unsupervised GFANC and E2E-CFG
+- [[concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — predecessor: discrete filter selection
+- [[concepts/active-noise-control|Active Noise Control]] — parent domain
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — adaptive alternative
+- [[concepts/end-to-end-differentiable-anc|End-to-End Differentiable ANC]] — training paradigm for unsupervised GFANC and E2E-CFG
 
 ## Related Sources
 
-- [[../sources/yang-2026-transformer-e2e-cfg-anc|Yang 2026: Transformer-based E2E-CFG for ANC]] — direct filter generation with Transformer co-processor
-- [[../sources/luo-2026-hybrid-gfanc-fxnlms|Luo 2026: Hybrid GFANC-FxNLMS]] — unsupervised GFANC with CNN co-processor and hybrid stabilization
+- [[sources/yang-2026-transformer-e2e-cfg-anc|Yang 2026: Transformer-based E2E-CFG for ANC]] — direct filter generation with Transformer co-processor
+- [[sources/luo-2026-hybrid-gfanc-fxnlms|Luo 2026: Hybrid GFANC-FxNLMS]] — unsupervised GFANC with CNN co-processor and hybrid stabilization

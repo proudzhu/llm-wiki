@@ -25,7 +25,7 @@ tags:
 
 | | |
 |---|---|
-| **Authors** | [[../entities/wei-liu\|Wei Liu]], Xueqin Luo, Jilu Jin, [[../entities/gongping-huang\|Gongping Huang]], [[../entities/jingdong-chen\|Jingdong Chen]], [[../entities/jacob-benesty\|Jacob Benesty]], [[../entities/shoji-makino\|Shoji Makino]] |
+| **Authors** | [[entities/wei-liu\|Wei Liu]], Xueqin Luo, Jilu Jin, [[entities/gongping-huang\|Gongping Huang]], [[entities/jingdong-chen\|Jingdong Chen]], [[entities/jacob-benesty\|Jacob Benesty]], [[entities/shoji-makino\|Shoji Makino]] |
 | **Institutions** | Wuhan University; Northwestern Polytechnical University; INRS-EMT, University of Quebec; Waseda University |
 | **Venue** | ICASSP 2026 |
 | **Pages** | 15867–15871 |
@@ -141,19 +141,19 @@ R-MWF achieves best or near-best results across all metrics and reverberation co
 
 ## Related Concepts
 
-- [[../concepts/spatial-covariance-matrix|Spatial Covariance Matrix]] — core concept; this paper introduces normalized decomposition and variance ratio estimation
-- [[../concepts/variance-ratio-estimation|Variance Ratio Estimation]] — new concept introduced by this paper
-- [[../concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]] — R-MWF is an MWF variant using reconstructed SCMs
-- [[../concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]] — application domain
-- [[../concepts/spatial-coherence|Spatial Coherence]] — diffuse-field coherence matrix $\Gamma_d$ is a key component
-- [[../concepts/beamforming|Beamforming]] — SCM reconstruction can also serve MVDR beamforming
-- [[../concepts/mvdr-beamformer|MVDR Beamformer]] — alternative spatial filter that also requires SCM estimation
+- [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]] — core concept; this paper introduces normalized decomposition and variance ratio estimation
+- [[concepts/variance-ratio-estimation|Variance Ratio Estimation]] — new concept introduced by this paper
+- [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]] — R-MWF is an MWF variant using reconstructed SCMs
+- [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]] — application domain
+- [[concepts/spatial-coherence|Spatial Coherence]] — diffuse-field coherence matrix $\Gamma_d$ is a key component
+- [[concepts/beamforming|Beamforming]] — SCM reconstruction can also serve MVDR beamforming
+- [[concepts/mvdr-beamformer|MVDR Beamformer]] — alternative spatial filter that also requires SCM estimation
 
 ## Related Synthesis
 
-- [[../sources/schwarz-2019-dereverberation-spatial-coherence|Schwarz 2019]] — complementary: Schwarz uses CDR for spectral enhancement, Liu 2026 uses SCM reconstruction for MWF
-- [[../sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026]] — contrast: Oviste uses DNN to predict SCM, Liu 2026 uses analytical reconstruction
-- [[../sources/farmani-2026-virtual-mic-beamforming-hearing-aid|Farmani 2026]] — related: VM beamforming also relies on RTF models
+- [[sources/schwarz-2019-dereverberation-spatial-coherence|Schwarz 2019]] — complementary: Schwarz uses CDR for spectral enhancement, Liu 2026 uses SCM reconstruction for MWF
+- [[sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026]] — contrast: Oviste uses DNN to predict SCM, Liu 2026 uses analytical reconstruction
+- [[sources/farmani-2026-virtual-mic-beamforming-hearing-aid|Farmani 2026]] — related: VM beamforming also relies on RTF models
 
 ## Citation
 

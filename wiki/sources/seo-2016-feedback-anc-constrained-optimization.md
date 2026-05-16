@@ -18,7 +18,7 @@ tags:
 
 # Seo, Park & Youn 2016: Feedback ANC via Constrained Optimization for Headphones
 
-**Authors**: [[../entities/ji-ho-seo|Ji-ho Seo]]¹, [[../entities/young-cheol-park|Young-cheol Park]]², [[../entities/dae-hee-youn|Dae Hee Youn]]¹
+**Authors**: [[entities/ji-ho-seo|Ji-ho Seo]]¹, [[entities/young-cheol-park|Young-cheol Park]]², [[entities/dae-hee-youn|Dae Hee Youn]]¹
 
 **Affiliations**: ¹ Department of Electrical and Electronic Engineering, Yonsei University, Seoul, Korea; ² Computer & Telecommunication Engineering Division, Yonsei University, Wonju, Korea
 
@@ -113,15 +113,15 @@ The nominal plant $p_0(n)$ is obtained via ARMA modeling (15 AR + 15 MA coeffici
 
 ## Related Concepts
 
-- [[../concepts/feedback-anc|Feedback ANC]]
-- [[../concepts/frequency-warping|Frequency Warping]]
-- [[../concepts/warped-fir-filter|Warped FIR Filter]]
-- [[../concepts/q-parameterization|Q-Parameterization]]
-- [[../concepts/sensitivity-function|Sensitivity Function]]
-- [[../concepts/waterbed-effect|Waterbed Effect]]
-- [[../concepts/robust-control|Robust Control]]
+- [[concepts/feedback-anc|Feedback ANC]]
+- [[concepts/frequency-warping|Frequency Warping]]
+- [[concepts/warped-fir-filter|Warped FIR Filter]]
+- [[concepts/q-parameterization|Q-Parameterization]]
+- [[concepts/sensitivity-function|Sensitivity Function]]
+- [[concepts/waterbed-effect|Waterbed Effect]]
+- [[concepts/robust-control|Robust Control]]
 
 ## Related Sources
 
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial]]
-- [[../sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]]
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial]]
+- [[sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]]

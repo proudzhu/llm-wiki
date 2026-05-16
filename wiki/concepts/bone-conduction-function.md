@@ -66,12 +66,12 @@ This approach reduces the required paired audio-vibration data by >72×, making 
 
 ## Related Concepts
 
-- [[../concepts/bone-conduction|Bone Conduction]]
-- [[../concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
-- [[../concepts/inertial-measurement-unit|Inertial Measurement Unit (IMU)]]
-- [[../concepts/spectrogram-analysis|Spectrogram Analysis]]
-- [[../concepts/wiener-filter|Wiener Filter]]
+- [[concepts/bone-conduction|Bone Conduction]]
+- [[concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
+- [[concepts/inertial-measurement-unit|Inertial Measurement Unit (IMU)]]
+- [[concepts/spectrogram-analysis|Spectrogram Analysis]]
+- [[concepts/wiener-filter|Wiener Filter]]
 
 ## Related Sources
 
-- [[../sources/he-2025-vibomni|He, Guo, Hou & Yan 2025: VibOmni]]
+- [[sources/he-2025-vibomni|He, Guo, Hou & Yan 2025: VibOmni]]

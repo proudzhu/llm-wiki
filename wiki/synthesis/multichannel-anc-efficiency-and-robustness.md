@@ -73,15 +73,15 @@ N7HG3TSP introduces a **Frequency-Direction Aware** mechanism:
 2. **Hybrid Physics-Neural Models**: Using neural networks to predict time-varying secondary paths (as seen in recent Virtual Sensing papers) and using traditional FxLMS to perform the final cancellation, combining robustness with adaptivity.
 
 ## References
-- [[../sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC]]
-- [[../concepts/multi-channel-anc|Multi-Channel ANC]]
+- [[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC]]
+- [[concepts/multi-channel-anc|Multi-Channel ANC]]
 - *Wang et al. (2026) Distributed Multichannel ANC*
 - *Xiao et al. (2025) Spatial-Correlation-Based Weighting*
 
 ## Related Concepts
 
-- [[../concepts/multi-channel-anc|Multi-Channel ANC]]
+- [[concepts/multi-channel-anc|Multi-Channel ANC]]
 
 ## Related Sources
 
-- [[../sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC]]
+- [[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC]]

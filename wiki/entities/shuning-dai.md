@@ -26,11 +26,11 @@ Shuning Dai's master's dissertation addresses the intersection of deep learning 
 
 ## Related Sources
 
-- [[../sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]] — Master's dissertation
+- [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]] — Master's dissertation
 
 ## Related Concepts
 
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
-- [[../concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
-- [[../concepts/speech-preserving-anc|Speech-Preserving ANC]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
+- [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
+- [[concepts/speech-preserving-anc|Speech-Preserving ANC]]

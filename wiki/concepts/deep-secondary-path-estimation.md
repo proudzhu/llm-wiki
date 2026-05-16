@@ -18,7 +18,7 @@ tags:
 
 ## Why Deep SPE?
 
-Classical [[../concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]] methods rely on iterative adaptation:
+Classical [[concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]] methods rely on iterative adaptation:
 - **Slow convergence**: LMS-based methods require many iterations, especially under dynamic conditions
 - **Manual tuning**: Step-size parameters must be carefully chosen
 - **Degradation in non-stationary environments**: Tracking lag when the secondary path changes rapidly
@@ -58,14 +58,14 @@ This contrasts with fixed-path deep ANC methods (SFANC, GFANC) that assume a sta
 
 ## Related Concepts
 
-- [[../concepts/secondary-path-modeling|Secondary Path Modeling]]
-- [[../concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]]
-- [[../concepts/variable-step-size-lms|Variable Step Size LMS]]
-- [[../concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
-- [[../concepts/active-noise-control|Active Noise Control]]
-- [[../concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
+- [[concepts/secondary-path-modeling|Secondary Path Modeling]]
+- [[concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]]
+- [[concepts/variable-step-size-lms|Variable Step Size LMS]]
+- [[concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
 
 ## Related Sources
 
-- [[../sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]]
-- [[../sources/akhtar-2006-vss-lms-online-spm|Akhtar 2006: VSS LMS for Online Secondary Path Modeling]]
+- [[sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]]
+- [[sources/akhtar-2006-vss-lms-online-spm|Akhtar 2006: VSS LMS for Online Secondary Path Modeling]]

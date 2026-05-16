@@ -59,10 +59,10 @@ iAFF alleviates the "bottleneck of low-quality initial fusion" that can occur in
 
 ## Related Concepts
 
-- [[../concepts/densely-gated-convolutional-attention-network|DenGCAN]]
-- [[../concepts/attention-gate|Attention Gate (AG)]]
-- [[../concepts/complex-ratio-mask|Complex Ratio Mask (cRM)]]
+- [[concepts/densely-gated-convolutional-attention-network|DenGCAN]]
+- [[concepts/attention-gate|Attention Gate (AG)]]
+- [[concepts/complex-ratio-mask|Complex Ratio Mask (cRM)]]
 
 ## Related Sources
 
-- [[../sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]
+- [[sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]

@@ -12,7 +12,7 @@ tags:
 
 # Subband ANC
 
-**Subband ANC** decomposes the reference and error signals into multiple frequency subbands using a filter bank, processes each subband independently with its own adaptive filter, and then recombines the outputs. It is described in [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] as one of the "special algorithms" for ANC.
+**Subband ANC** decomposes the reference and error signals into multiple frequency subbands using a filter bank, processes each subband independently with its own adaptive filter, and then recombines the outputs. It is described in [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] as one of the "special algorithms" for ANC.
 
 ## Motivation
 
@@ -74,11 +74,11 @@ where $P_k$ is the power in subband $k$, $\alpha$ is a global scaling factor, an
 - [[filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — The time-domain baseline
 - [[frequency-domain-anc|Frequency-Domain ANC]] — Alternative efficiency approach: FFT-based block processing
 - [[multi-channel-anc|Multi-Channel ANC]] — Subband processing is even more valuable in multi-channel (complexity reduction compounds)
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section VII-D: Subband ANC
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section VII-D: Subband ANC
 
 ## Sources
 
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section VII-D
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section VII-D
 ## Related Concepts
 
 - [[active-noise-control|Active Noise Control]]
@@ -88,4 +88,4 @@ where $P_k$ is the power in subband $k$, $\alpha$ is a global scaling factor, an
 
 ## Related Sources
 
-- [[../sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
+- [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]

@@ -69,5 +69,5 @@ The SimpAFB system eliminates the IMC's convolution step by using the error sign
 
 ## Related Sources
 
-- [[../sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Compares IMC-based system with the proposed simplified approach
-- [[../sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]] — IMC-based fixed controller optimization with data-driven uncertainty models
+- [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Compares IMC-based system with the proposed simplified approach
+- [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]] — IMC-based fixed controller optimization with data-driven uncertainty models

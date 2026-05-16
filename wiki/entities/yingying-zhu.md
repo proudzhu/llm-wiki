@@ -23,7 +23,7 @@ Researcher at the **School of Electrical Engineering**, Southwest Jiaotong Unive
 
 ## Notable Work
 
-- [[../sources/zhu-2020-robust-gmcc-anc-paper-reading-note|Zhu 2020: Robust GMCC for ANC Paper Reading Note]] — First author, FxGMCC/IFxGMCC/C-IFxGMCC algorithms for impulsive noise ANC
+- [[sources/zhu-2020-robust-gmcc-anc-paper-reading-note|Zhu 2020: Robust GMCC for ANC Paper Reading Note]] — First author, FxGMCC/IFxGMCC/C-IFxGMCC algorithms for impulsive noise ANC
 
 ## Contact
 
@@ -33,4 +33,4 @@ Researcher at the **School of Electrical Engineering**, Southwest Jiaotong Unive
 
 ## Related Sources
 
-- [[../sources/zhu-2020-robust-gmcc-anc-paper-reading-note|Zhu 2020: Robust GMCC for ANC Paper Reading Note]]
+- [[sources/zhu-2020-robust-gmcc-anc-paper-reading-note|Zhu 2020: Robust GMCC for ANC Paper Reading Note]]

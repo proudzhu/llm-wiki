@@ -17,11 +17,11 @@ tags:
 # It's ok to compare floating points for equality
 
 > **Source**: [lisyarus.github.io](https://lisyarus.github.io/blog/posts/its-ok-to-compare-floating-points-for-equality.html)
-> **Author**: [[../entities/lisyarus|lisyarus]] (Alexey)
+> **Author**: [[entities/lisyarus|lisyarus]] (Alexey)
 
 ## Summary
 
-This article argues against the widespread "mantra" that floating-point numbers should never be compared for exact equality. The author, a graphics and physics programmer with 15+ years of experience, posits that "epsilon comparisons" (`abs(x - y) < epsilon`) are often a lazy hack that introduces more bugs than it solves. Instead, developers should understand the deterministic nature of [[../concepts/ieee-754|IEEE 754]] and use exact equality or structural changes to their algorithms.
+This article argues against the widespread "mantra" that floating-point numbers should never be compared for exact equality. The author, a graphics and physics programmer with 15+ years of experience, posits that "epsilon comparisons" (`abs(x - y) < epsilon`) are often a lazy hack that introduces more bugs than it solves. Instead, developers should understand the deterministic nature of [[concepts/ieee-754|IEEE 754]] and use exact equality or structural changes to their algorithms.
 
 ## Key Arguments
 
@@ -48,9 +48,9 @@ Floating-point numbers are not a "black box" of randomness. They follow highly s
 - **Structural Solutions**: In UI/UX (like grid movement), separate the "presentation" (interpolated position) from the "data model" (discrete cell position) to avoid needing any float comparisons at all.
 
 ## Related Concepts
-- [[../concepts/floating-point-comparison|Floating-point Comparison]]
-- [[../concepts/ieee-754|IEEE 754]]
-- [[../concepts/numerical-stability|Numerical Stability]]
-- [[../concepts/active-noise-control|Active Noise Control]] (for algorithm comparisons)
+- [[concepts/floating-point-comparison|Floating-point Comparison]]
+- [[concepts/ieee-754|IEEE 754]]
+- [[concepts/numerical-stability|Numerical Stability]]
+- [[concepts/active-noise-control|Active Noise Control]] (for algorithm comparisons)
 
 ## Related Synthesis

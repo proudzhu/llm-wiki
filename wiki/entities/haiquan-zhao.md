@@ -18,12 +18,12 @@ Researcher at the **School of Electrical Engineering**, Southwest Jiaotong Unive
 ## Research Areas
 
 - Adaptive filtering algorithms
-- [[../concepts/active-noise-control|Active Noise Control]]
+- [[concepts/active-noise-control|Active Noise Control]]
 - Echo cancellation
 
 ## Notable Work
 
-- [[../sources/chen-2016-generalized-correntropy-robust-adaptive-filtering|Chen 2016: Generalized Correntropy for Robust Adaptive Filtering]] — Co-author
+- [[sources/chen-2016-generalized-correntropy-robust-adaptive-filtering|Chen 2016: Generalized Correntropy for Robust Adaptive Filtering]] — Co-author
 
 ## Related Entities
 
@@ -32,4 +32,4 @@ Researcher at the **School of Electrical Engineering**, Southwest Jiaotong Unive
 
 ## Related Sources
 
-- [[../sources/chen-2016-generalized-correntropy-robust-adaptive-filtering|Chen 2016: Generalized Correntropy for Robust Adaptive Filtering]]
+- [[sources/chen-2016-generalized-correntropy-robust-adaptive-filtering|Chen 2016: Generalized Correntropy for Robust Adaptive Filtering]]

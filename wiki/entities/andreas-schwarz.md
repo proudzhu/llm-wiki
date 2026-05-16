@@ -33,4 +33,4 @@ Researcher in dereverberation and robust speech recognition using spatial cohere
 
 ## Related Pages
 
-- [[../sources/schwarz-2019-dereverberation-spatial-coherence|Schwarz 2019: Dereverberation and Robust Speech Recognition]]
+- [[sources/schwarz-2019-dereverberation-spatial-coherence|Schwarz 2019: Dereverberation and Robust Speech Recognition]]
