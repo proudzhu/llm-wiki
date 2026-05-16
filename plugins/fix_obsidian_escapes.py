@@ -5,10 +5,8 @@ import urllib.parse
 
 from mkdocs.plugins import BasePlugin
 from mkdocs.utils import get_relative_url
-import mkdocs.utils
 
 log = logging.getLogger(f"mkdocs.plugins.{__name__}")
-log.addFilter(mkdocs.utils.warning_filter)
 
 AUTOLINK_RE = r'\[([^\]]+)\]\((([^)/]+\.(md|png|jpg))(#.*)*)\)'
 
