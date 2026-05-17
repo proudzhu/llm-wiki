@@ -1,13 +1,14 @@
 ---
 type: synthesis
 created: 2026-04-22
-updated: 2026-05-16
+updated: 2026-05-17
 sources:
   - wiki/sources/he-2025-vibomni.md
   - wiki/sources/zhang-2022-bone-conducted-speech-dissertation.md
   - wiki/sources/dai-2026-speech-preserving-deep-anc.md
   - wiki/sources/kuang-2024-lightweight-speech-enhancement-bone-air.md
   - wiki/sources/liu-2025-robust-fusion-bc-ac-attention.md
+  - wiki/sources/tagliasacchi-2020-seanet.md
   - zotero://select/items/0_K592VRRE (Wang 2022: Complex Fusion)
   - zotero://select/items/0_B92ER5KS (Khanagha 2026: Conditional Diffusion)
   - zotero://select/items/0_NIIDMA7J (Contrastive Learning for BC)
@@ -38,13 +39,18 @@ Traditional Air-Conducted (AC) microphones capture full-band audio but are highl
 
 ## 2. Technical Evolution of Fusion Strategies
 
-### 2.1 Statistical and Mapping Era (2020-2022)
+### 2.1 Foundational Era: Multi-modal Waveform Learning (2020)
+Early work establishes the feasibility of leveraging non-audio sensor modalities for speech enhancement.
+
+- **SEANet (Tagliasacchi, INTERSPEECH 2020)**: First work to use **accelerometer data** from earbud-mounted bone-conductance sensors for speech enhancement. The model is a fully convolutional **wave-to-wave UNet** that fuses microphone audio and accelerometer waveforms at the input level, trained with MelGAN-style adversarial + feature losses. Key insight: accelerometer signals are immune to environmental noise because they capture skull vibrations. Achieves **9.6 dB SI-SDRi** in overlapping-speaker scenarios where audio-only models fail (−0.9 dB). Demonstrates that accelerometer bandwidth >400 Hz is needed for speaker separation, while noise suppression remains robust at much lower rates.
+
+### 2.2 Statistical and Mapping Era (2022)
 Focuses on "restoring" BC speech or using it as a reference for AC denoising.
 - **Pitch Extraction (Zhang, 2022)**: Combines AC weighted auto-correlation with BC cepstrum (WACF-CEP) to detect pitch in 0 dB SNR environments.
 - **Complex Spectral Mapping (Wang, 2022)**: Uses Deep Complex CRNs (DC-CRN) to fuse AC and BC signals in the complex domain, preserving phase information.
 - **Attention-based Fusion**: Replaces simple concatenation with attention masks to "selectively" weigh AC and BC features based on instantaneous SNR.
 
-### 2.2 Lightweight Multi-Modal Fusion (2023-2025)
+### 2.3 Lightweight Multi-Modal Fusion (2023-2025)
 Parallel to the generative trend, a line of work focuses on practical, lightweight multi-modal fusion using commodity IMU sensors already available in earables.
 
 - **He et al. (MobiSys 2023 / arXiv 2025) — VibOmni**: Demonstrates that the IMU (accelerometer + gyroscope) already present in commercial earables for head-tracking can capture bone-conducted vibration at ~1.6 kHz sampling rate. The system uses a dual-encoder DPRNN architecture with:
@@ -53,7 +59,7 @@ Parallel to the generative trend, a line of work focuses on practical, lightweig
   - **Multi-modal SNR estimator** for continual self-supervised learning and adaptive inference.
   - **Key result**: 31× lower latency than FullSubNet on mobile devices, 21% PESQ improvement, ~40% WER reduction — all using existing IMU sensors without additional hardware.
 
-### 2.3 Generative and Diffusion Era (2025-2026)
+### 2.4 Generative and Diffusion Era (2025-2026)
 Shifts from predicting clean speech to **generating** it using BC signals as guidance.
 - **Conditioned Diffusion (Khanagha, 2026)**: The **BCDM** (Bone-Conduction Conditional Diffusion Model) treats clean speech recovery as a stochastic process.
 - **Conditioning Strategies**:
@@ -92,7 +98,7 @@ Parallel AC-BC data is difficult to collect. **Semi-supervised frameworks** (usi
 - *Khanagha et al. (2026) BC Guided Multimodal SE with Conditional Diffusion*
 - [[wiki/synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]]
 
-### 2.4 Lightweight T-F Domain Fusion (2024)
+### 2.5 Lightweight T-F Domain Fusion (2024)
 Parallel to the IMU-based approach, a line of work focuses on lightweight time-frequency domain fusion using dedicated BC microphones.
 
 - **Kuang, Yang & Yang (JASA 2024) — DenGCAN**: A lightweight fused BC/AC speech enhancement model using:
@@ -102,7 +108,7 @@ Parallel to the IMU-based approach, a line of work focuses on lightweight time-f
   - **Key result**: 1.03M params, 0.859 GMACs, 1.870 wb-PESQ improvement, RTF 0.649 on ARM — lowest compute among all compared models
   - **A4BS dataset**: 4-position BC recordings from 109 speakers (~107 h)
 
-### 2.5 Attention-Driven Robust Fusion (2025)
+### 2.6 Attention-Driven Robust Fusion (2025)
 
 - **Liu, Chen & Yin (ICASSP 2025) — ATFA Dual-Mask**: Reframes BC/AC fusion around two architectural ideas and one training innovation:
   - **Pre-fusion via shared convolution** — extracts common spectral patterns across modalities before encoding (multi-view input).
@@ -126,4 +132,5 @@ Parallel to the IMU-based approach, a line of work focuses on lightweight time-f
 - [[wiki/sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 - [[wiki/sources/zhang-2022-bone-conducted-speech-dissertation|Zhang 2022: BC Statistical Analysis]]
 - [[wiki/sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]
+- [[wiki/sources/tagliasacchi-2020-seanet|Tagliasacchi, Li, Misiunas & Roblek 2020: SEANet]]
 - [[wiki/sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]]

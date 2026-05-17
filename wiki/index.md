@@ -175,6 +175,10 @@
 | [[entities/xiaodong-li\|Xiaodong Li]] | Institute of Acoustics, CAS — hearing aids, acoustic signal processing | 2026-05-15 |
 | [[entities/xiaofan-zhan\|Xiaofan Zhan]] | Institute of Acoustics, CAS — hearing aids, adaptive feedback cancellation, deep learning | 2026-05-15 |
 | [[entities/yuzhong-wu\|Yuzhong Wu]] | Tencent Ethereal Audio Lab — acoustic howling suppression, speech processing | 2026-05-15 |
+| [[entities/marco-tagliasacchi\|Marco Tagliasacchi]] | Google Research — SEANet: multi-modal speech enhancement using accelerometer data | 2026-05-17 |
+| [[entities/yunpeng-li\|Yunpeng Li]] | Google Research — co-author on SEANet multi-modal speech enhancement | 2026-05-17 |
+| [[entities/karolis-misiunas\|Karolis Misiunas]] | Google Research — co-author on SEANet multi-modal speech enhancement | 2026-05-17 |
+| [[entities/dominik-roblek\|Dominik Roblek]] | Google Research — co-author on SEANet multi-modal speech enhancement | 2026-05-17 |
 
 ---
 
@@ -418,6 +422,7 @@
 | [[sources/liu-2025-robust-fusion-bc-ac-attention\|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]] | ATFA dual-axis attention + dual-channel mask + Special Training (random modality dropout); 1.6M params; recovers PESQ 1.18→2.54 under AC sensor failure | 2025 |
 | [[sources/zhan-2025-deeppem-afc\|Zhan et al. 2025: DeepPEM-AFC]] | Deep learning prediction error method for hearing aid adaptive feedback cancellation | 2025 |
 | [[sources/zhang-2023-hybrid-ahs\|Zhang et al. 2023: Hybrid AHS]] | Hybrid acoustic howling suppression combining Kalman filter and deep learning | 2023 |
+| [[sources/tagliasacchi-2020-seanet\|Tagliasacchi, Li, Misiunas & Roblek 2020: SEANet]] | Multi-modal speech enhancement using accelerometer data; wave-to-wave UNet with adversarial training; 9.6 dB SI-SDRi in mixed-speech scenarios | 2020 |
 
 ---
 
@@ -469,10 +474,10 @@
 
 ## Statistics
 
-- **Total pages**: 414
-- **Entities**: 165
+- **Total pages**: 419
+- **Entities**: 169
 - **Concepts**: 152
-- **Sources**: 73
+- **Sources**: 74
 - **Synthesis**: 18
 - **Queries**: 6
-- **Last updated**: 2026-05-16
+- **Last updated**: 2026-05-17

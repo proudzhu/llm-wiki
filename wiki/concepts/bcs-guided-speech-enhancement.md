@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-06
-updated: 2026-05-16
+updated: 2026-05-17
 sources:
   - raw/patents/us20260073929a1/full-text.md
   - wiki/sources/liu-2025-robust-fusion-bc-ac-attention.md
+  - wiki/sources/tagliasacchi-2020-seanet.md
 tags:
   - speech-enhancement
   - bone-conduction
@@ -63,6 +64,7 @@ BCS-based [[concepts/voice-activity-detection|VAD]] provides noise-robust speech
 
 | Approach | BCS Usage | Architecture | Output |
 |----------|-----------|-------------|--------|
+| **SEANet** (Tagliasacchi 2020) | Raw waveform concatenation with audio | Wave-to-wave UNet (1D conv) | Waveform (via GAN) |
 | **BCS-guided SE** (Heitkaemper 2026) | Upscaled + concatenated with air STFT | Conformer | Ratio mask → iSTFT |
 | **DenGCAN** (Kuang 2024) | iAFF coarse-then-refined fusion of STFTs | Densely gated conv + sConformer | Complex ratio mask → iSTFT |
 | **ATFA Dual-Mask** (Liu 2025) | Shared-conv pre-fusion + concat | Dilated DenseNet + ATFA + AHA | Dual real masks (AC + BC) summed |
@@ -95,6 +97,7 @@ Practical wearables suffer intermittent BC sensor invalidity (loose contact, jaw
 
 ## Related Sources
 
+- [[sources/tagliasacchi-2020-seanet|Tagliasacchi, Li, Misiunas & Roblek 2020: SEANet]]
 - [[sources/he-2025-vibomni|He, Guo, Hou & Yan 2025: VibOmni]]
 - [[sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Earbuds]]
 - [[sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]

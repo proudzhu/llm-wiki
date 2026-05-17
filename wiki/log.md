@@ -1639,3 +1639,24 @@ aw/papers/wang-2026-directional-sfanc-reverberant/full-text.md\ — extracted fr
   - **Parameter efficiency**: 1.6M params (~5% of AffFusion's 31.4M) while beating it across all SNRs on ESMB BC corpus.
   - **Practical positioning**: bridges the academic ATFA literature (Yu 2022, Liu 2025) with the BC/AC wearables space and surfaces a previously ignored failure mode (intermittent BC sensor invalidity due to wearing position/jaw motion).
 
+---
+
+## [2026-05-17] ingest | SEANet (Tagliasacchi, Li, Misiunas & Roblek 2020)
+
+- **Source**: `raw/papers/tagliasacchi-2020-seanet/full-text.md` (Zotero: BW784N4C)
+- **Authors**: Marco Tagliasacchi, Yunpeng Li, Karolis Misiunas, Dominik Roblek
+- **Published**: INTERSPEECH 2020
+- **Summary**: First multi-modal speech enhancement using accelerometer data from earbud bone-conductance sensors; wave-to-wave UNet with MelGAN adversarial + feature losses; 9.6 dB SI-SDRi in overlapping-speaker scenarios
+- **Pages created**:
+  - `raw/papers/tagliasacchi-2020-seanet/full-text.md` — MinerU extraction from Zotero PDF
+  - `wiki/sources/tagliasacchi-2020-seanet.md`
+  - `wiki/entities/marco-tagliasacchi.md`
+  - `wiki/entities/yunpeng-li.md`
+  - `wiki/entities/karolis-misiunas.md`
+  - `wiki/entities/dominik-roblek.md`
+- **Pages updated**:
+  - `wiki/concepts/bcs-guided-speech-enhancement.md` — added SEANet entry to comparison table; added to sources and Related Sources
+  - `wiki/synthesis/multimodal-bc-speech-enhancement.md` — new `2.1 Foundational Era` subsection with SEANet; renumbered sections 2.2–2.6; added to sources and Related Sources
+  - `wiki/index.md` — added 4 entities, 1 source; updated statistics
+
+
