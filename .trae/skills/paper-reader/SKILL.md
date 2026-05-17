@@ -35,14 +35,22 @@ Parse the JSON response to identify the correct paper. Note the **Zotero key** (
 ### Step 2: Fetch Paper Details and Find PDF Attachment
 
 ```bash
-# Full metadata
-curl -s "http://localhost:23119/api/users/0/items/KEY"
+# Save full metadata to temp file (avoids PowerShell encoding issues with JSON)
+curl -s "http://localhost:23119/api/users/0/items/KEY" > .tmp_zotero.json
 
-# Find PDF attachment (search children or look in the item's links)
-curl -s "http://localhost:23119/api/users/0/items/KEY/children"
+# Read the temp file with the Read tool to extract metadata fields
+
+# Find PDF attachment (search children)
+curl -s "http://localhost:23119/api/users/0/items/KEY/children" > .tmp_children.json
+# Read the temp file to find the PDF attachment key (contentType: "application/pdf")
 ```
 
 Extract: title, authors, year, type, abstract, DOI, URL, tags, and **PDF attachment key**.
+
+**Clean up** temp files after extraction:
+```powershell
+Remove-Item .tmp_zotero.json, .tmp_children.json -ErrorAction SilentlyContinue
+```
 
 ### Step 3: Extract Paper Content from PDF
 
@@ -52,12 +60,8 @@ Extract: title, authors, year, type, abstract, DOI, URL, tags, and **PDF attachm
 # Create directory (use `mkdir` without -p on Windows; New-Item for full control)
 New-Item -ItemType Directory -Force -Path "raw/papers/{slug}" | Out-Null
 
-# Zotero storage path varies by user — check the PDF attachment key from Step 2
-# Common paths: C:\Users\{username}\Zotero\storage\{PDF_KEY}\
-# IMPORTANT: Do NOT use wildcard (*.pdf) to copy — Zotero filenames may contain
-# Chinese characters (e.g., "Sharma 等 - 1998 - ...pdf") which cause silent copy failures.
-# Instead, list the directory first and copy using the exact filename:
-$pdf = Get-ChildItem "C:\Users\{username}\Zotero\storage\{PDF_KEY}\" -Filter "*.pdf" | Select-Object -First 1
+# Zotero storage path: C:\Users\proud\Zotero\storage\{PDF_KEY}\
+$pdf = Get-ChildItem "C:\Users\proud\Zotero\storage\{PDF_KEY}\" -Filter "*.pdf" | Select-Object -First 1
 Copy-Item $pdf.FullName "raw/papers/{slug}/paper.pdf"
 ```
 
@@ -68,8 +72,6 @@ $bytes = [System.IO.File]::ReadAllBytes("raw/papers/{slug}/paper.pdf"); [System.
 ```
 
 If the header is empty or the file size is 0, the copy failed — re-copy using the exact filename from `Get-ChildItem`.
-
-> ⚠️ **Windows cmd compatibility**: All PowerShell commands above (including `Get-ChildItem`, `Copy-Item`, `New-Item`, `Remove-Item`) must be run inside a PowerShell session. Wrap them as: `pwsh -NoProfile -Command "..."`. The `$` in `$bytes[0..4]` inside a double-quoted wrapper needs backtick-escape: ``$bytes` ``.
 
 Slug format: `author-year-short-title` (lowercase, hyphenated, meaningful abbreviation).
 
@@ -130,6 +132,8 @@ Move-Item "raw/papers/{slug}/images" "raw/papers/{slug}/figures" -Force
 **Note**: After renaming, image paths in the markdown reference `figures/...` relative to the `full-text.md` file location.
 
 **Verify extraction quality**: Read the first 200 lines and last 100 lines of `full-text.md` to check for completeness.
+
+**Note**: MinerU VLM may produce mermaid code blocks for diagrams/flowcharts — these are normal VLM behavior and can be left as-is (they won't render in MkDocs but the actual figure images are preserved separately in `figures/`).
 
 **Delete the PDF** after successful extraction:
 ```powershell
@@ -304,13 +308,20 @@ Check if any existing synthesis pages should reference this paper:
 - Update `updated:` date
 - Add to `## Related Sources`
 
-### Step 10: Update Index
+### Step 10: Update Indexes
 
-Update `wiki/index.md`:
+Update **all relevant index files**:
+
+**Main index** (`wiki/index.md`):
 - Add new entity rows to the Entities table
 - Add new concept rows to the Concepts table
 - Add new source row to the Sources table
 - Update Statistics section (increment counts)
+
+**Subdirectory indexes** (append new rows to each):
+- `wiki/sources/index.md` — add new source row
+- `wiki/entities/index.md` — add new entity rows
+- `wiki/concepts/index.md` — add new concept rows
 
 ### Step 11: Update Log
 
@@ -338,6 +349,9 @@ Append to the **end** of `wiki/log.md` (entries are sorted by date ascending, ne
   - `wiki/concepts/existing-concept.md` — added cross-refs and source link
   - `wiki/synthesis/synthesis-page.md` — added paper to relevant synthesis
   - `wiki/index.md` — added N entities, N concepts, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added N entity rows
+  - `wiki/concepts/index.md` — added N concept rows
 ```
 
 For re-ingestion, use `ingest (re)` as the operation.
