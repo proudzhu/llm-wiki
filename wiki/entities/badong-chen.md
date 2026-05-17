@@ -36,3 +36,4 @@ Researcher at the **Institute of Artificial Intelligence and Robotics**, Xi'an J
 ## Related Sources
 
 - [[sources/chen-2016-generalized-correntropy-robust-adaptive-filtering|Chen 2016: Generalized Correntropy for Robust Adaptive Filtering]]
+- [[sources/lu-2021-survey-active-noise-control-linear|Lu et al. 2021: Survey on ANC — Part I: Linear Systems]]

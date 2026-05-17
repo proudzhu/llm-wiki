@@ -67,6 +67,10 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - **Speech cancellation**: Traditional "cancel everything" approach damages useful speech signals in mixed sound fields
 - **DOA dependency**: The primary path $P(z)$ varies with sound direction, degrading feedforward ANC at non-nominal DOAs (Liebich 2018)
 
+## Related Sources
+
+- [[sources/lu-2021-survey-active-noise-control-linear|Lu et al. 2021: Survey on ANC — Part I: Linear Systems]]
+
 ## Related Concepts
 - [[adaptive-algorithm-tradeoffs]]
 - [[cha-2023-dnoisenet-feedback-anc]]

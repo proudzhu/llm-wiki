@@ -333,3 +333,5 @@ Is your noise impulsive?
 - [[concepts/active-noise-control|Active Noise Control]]
 
 ## Related Sources
+
+- [[sources/lu-2021-survey-active-noise-control-linear|Lu et al. 2021: Survey on ANC — Part I: Linear Systems]]

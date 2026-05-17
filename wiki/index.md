@@ -103,6 +103,12 @@
 | [[entities/jun-yang\|Jun Yang]] | Institute of Acoustics, CAS — co-author on FRM-SFANC | 2026-05-01 |
 | [[entities/jianing-zhang\|Jianing Zhang]] | Institute of Acoustics, CAS — co-author on FRM-SFANC | 2026-05-01 |
 | [[entities/eli-bendersky\|Eli Bendersky]] | Independent blogger and software engineer — numerical methods, linear algebra, programming | 2026-05-02 |
+| [[entities/lu-lu\|Lu Lu]] | Sichuan University — lead author of comprehensive ANC survey (Part I: Linear Systems) | 2026-05-17 |
+| [[entities/kai-li-yin\|Kai-Li Yin]] | Sichuan University — co-author of comprehensive ANC survey (Part I: Linear Systems) | 2026-05-17 |
+| [[entities/rodrigo-de-lamare\|Rodrigo C. de Lamare]] | PUC-Rio — co-author of ANC survey, sparse adaptive algorithms | 2026-05-17 |
+| [[entities/zongsheng-zheng\|Zongsheng Zheng]] | Sichuan University — co-author of comprehensive ANC survey | 2026-05-17 |
+| [[entities/yi-yu\|Yi Yu]] | SWUST — co-author of comprehensive ANC survey | 2026-05-17 |
+| [[entities/xiaomin-yang\|Xiaomin Yang]] | Sichuan University — corresponding author of comprehensive ANC survey | 2026-05-17 |
 | [[entities/yixuan-zhang\|Yixuan Zhang]] | Ohio State University — neural-augmented Kalman filter for acoustic howling suppression | 2026-05-02 |
 | [[entities/hao-zhang\|Hao Zhang]] | Tencent AI Lab — acoustic howling suppression, speech processing | 2026-05-02 |
 | [[entities/meng-yu\|Meng Yu]] | Tencent AI Lab — acoustic howling suppression, speech enhancement | 2026-05-02 |
@@ -344,6 +350,14 @@
 | [[concepts/prediction-error-method\|Prediction Error Method (PEM)]] | De-correlation technique for hearing aid AFC that models speech as an AR process | 2026-05-15 |
 | [[concepts/self-attentive-recurrent-neural-network\|Self-Attentive RNN (SARNN)]] | RNN variant combining self-attention with recurrent connections for sequence modeling | 2026-05-15 |
 | [[concepts/teacher-forcing\|Teacher Forcing]] | Training technique feeding ground-truth output as next-step input instead of model prediction | 2026-05-15 |
+| [[concepts/online-secondary-path-estimation\|Online Secondary Path Estimation]] | Continuous adaptation of the secondary path model during ANC operation | 2026-05-17 |
+| [[concepts/distributed-anc\|Distributed ANC]] | Cooperative ANC over wireless acoustic sensor networks; incremental and diffusion strategies | 2026-05-17 |
+| [[concepts/psychoacoustic-anc\|Psychoacoustic ANC]] | ANC weighted by human hearing perception; loudness-based optimization | 2026-05-17 |
+| [[concepts/selective-anc\|Selective ANC]] | Pre-tuned filter selection based on audio features instead of real-time adaptation | 2026-05-17 |
+| [[concepts/active-structural-acoustic-control\|Active Structural Acoustic Control (ASAC)]] | Vibration control of casings/panels to reduce radiated noise at the source | 2026-05-17 |
+| [[concepts/convex-combination-anc\|Convex Combination ANC]] | Two filters (fast+slow) blended via mixing parameter to avoid convergence/residue tradeoff | 2026-05-17 |
+| [[concepts/sparse-anc\|Sparse ANC]] | Exploiting path or source sparsity via proportionate NLMS and zero-attracting strategies | 2026-05-17 |
+| [[concepts/subband-adaptive-filter\|Subband Adaptive Filter]] | Per-subband adaptive filtering for fast convergence with long channel responses | 2026-05-17 |
 
 ---
 
@@ -428,6 +442,7 @@
 | [[sources/zhang-2023-hybrid-ahs\|Zhang et al. 2023: Hybrid AHS]] | Hybrid acoustic howling suppression combining Kalman filter and deep learning | 2023 |
 | [[sources/tagliasacchi-2020-seanet\|Tagliasacchi, Li, Misiunas & Roblek 2020: SEANet]] | Multi-modal speech enhancement using accelerometer data; wave-to-wave UNet with adversarial training; 9.6 dB SI-SDRi in mixed-speech scenarios | 2020 |
 | [[sources/wang-2022-fusing-bc-ac-complex-domain-se\|Wang, Zhang & Wang 2022: Fusing BC and AC for Complex-Domain SE]] | Attention-based AC-BC fusion with DC-CRN; CycleGAN semi-supervised framework matching full supervision with 50% data; +21.1% STOI at −5 dB | 2022 |
+| [[sources/lu-2021-survey-active-noise-control-linear\|Lu et al. 2021: Survey on ANC — Part I: Linear Systems]] | Comprehensive survey of linear ANC: FxLMS, FeLMS, FuLMS, FxAP, FxRLS, subband, distributed ANC, sparse ANC, and practical considerations | 2021 |
 
 ---
 
@@ -479,10 +494,10 @@
 
 ## Statistics
 
-- **Total pages**: 424
-- **Entities**: 172
-- **Concepts**: 153
-- **Sources**: 75
+- **Total pages**: 439
+- **Entities**: 178
+- **Concepts**: 161
+- **Sources**: 76
 - **Synthesis**: 18
 - **Queries**: 6
-- **Last updated**: 2026-05-16
+- **Last updated**: 2026-05-17

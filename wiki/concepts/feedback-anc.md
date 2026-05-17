@@ -7,6 +7,7 @@ sources:
   - wiki/sources/pawelczyk-1997-anc-feedback-fixed-adaptive.md
   - wiki/sources/wu-2014-simplified-adaptive-feedback-anc.md
   - wiki/sources/seo-2016-feedback-anc-constrained-optimization.md
+  - wiki/sources/lu-2021-survey-active-noise-control-linear.md
 tags:
   - active-noise-control
   - control-theory

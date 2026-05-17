@@ -408,3 +408,5 @@ Every feedback ANC design faces the same trade-off:
 - [[anc-architecture-evolution|ANC Architecture Evolution]]
 
 ## Related Sources
+
+- [[sources/lu-2021-survey-active-noise-control-linear|Lu et al. 2021: Survey on ANC — Part I: Linear Systems]]

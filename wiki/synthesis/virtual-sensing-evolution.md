@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-18
-updated: 2026-04-28
+updated: 2026-05-17
 tags:
 - active-noise-control
 - deep-learning

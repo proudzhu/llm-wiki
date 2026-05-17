@@ -1683,4 +1683,47 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/synthesis/multimodal-bc-speech-enhancement.md` — expanded §2.2 with Wang 2022 details, updated benchmarks table, added to Related Sources/Concepts
   - `wiki/index.md` — added 3 entities, 1 concept, 1 source; updated statistics
 
+---
 
+## [2026-05-17] ingest | Lu et al. 2021: Survey on ANC — Part I: Linear Systems
+
+- **Source**: `raw/papers/lu-2021-survey-active-noise-control-linear/full-text.md` (Zotero: QVJMFTWC)
+- **Authors**: Lu Lu, Kai-Li Yin, Rodrigo C. de Lamare, Zongsheng Zheng, Yi Yu, Xiaomin Yang, Badong Chen
+- **Published**: arXiv preprint, 2021
+- **DOI**: 10.48550/arXiv.2110.00531
+- **Summary**: Comprehensive survey of linear ANC techniques (2009–2020) covering filtered-x, filtered-e, filtered-u families, practical considerations, and novel methods
+- **Pages created**:
+  - `raw/papers/lu-2021-survey-active-noise-control-linear/full-text.md` — extracted text from Zotero PDF
+  - `raw/papers/lu-2021-survey-active-noise-control-linear/figures/` — 58 extracted figure images (MinerU VLM, includes 17 main paper figures plus headers/footers/equations rasterized)
+  - `wiki/sources/lu-2021-survey-active-noise-control-linear.md`
+  - `wiki/entities/lu-lu.md`
+  - `wiki/entities/kai-li-yin.md`
+  - `wiki/entities/rodrigo-de-lamare.md`
+  - `wiki/entities/zongsheng-zheng.md`
+  - `wiki/entities/yi-yu.md`
+  - `wiki/entities/xiaomin-yang.md`
+  - `wiki/concepts/online-secondary-path-estimation.md`
+  - `wiki/concepts/distributed-anc.md`
+  - `wiki/concepts/psychoacoustic-anc.md`
+  - `wiki/concepts/selective-anc.md`
+  - `wiki/concepts/active-structural-acoustic-control.md`
+  - `wiki/concepts/convex-combination-anc.md`
+  - `wiki/concepts/sparse-anc.md`
+  - `wiki/concepts/subband-adaptive-filter.md`
+- **Pages updated**:
+  - `wiki/entities/badong-chen.md` — added this paper
+  - `wiki/concepts/active-noise-control.md` — added related source
+  - `wiki/concepts/filtered-x-lms-algorithm.md` — added related sources and concept cross-refs
+  - `wiki/concepts/feedback-anc.md` — added related source
+  - `wiki/concepts/impulsive-noise.md` — added related source
+  - `wiki/synthesis/adaptive-algorithm-tradeoffs.md` — added source
+  - `wiki/synthesis/anc-architecture-evolution.md` — added source
+  - `wiki/synthesis/secondary-path-modeling-evolution.md` — added source
+  - `wiki/synthesis/multichannel-anc-efficiency-and-robustness.md` — added source
+  - `wiki/synthesis/feedback-anc-filter-design.md` — added source
+  - `wiki/synthesis/impulsive-noise-control.md` — added source
+  - `wiki/synthesis/nonlinear-anc-approaches.md` — added source
+  - `wiki/index.md` — added 6 entities, 8 concepts, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 6 entity rows
+  - `wiki/concepts/index.md` — added 8 concept rows

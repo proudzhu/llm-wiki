@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-22
-updated: 2026-04-22
+updated: 2026-05-17
 sources:
   - zotero://select/items/0_GUY9IXKN (Kronecker Decomposition)
   - zotero://select/items/0_GLPRCTIK (Distributed ANC)
@@ -9,6 +9,7 @@ sources:
   - zotero://select/items/0_HTIMHJJW (Adjoint LMS)
   - zotero://select/items/0_WXFYBPPC (Meta-learning Initialization)
   - zotero://select/items/0_N7HG3TSP (Multi-task Learning)
+  - zotero://select/items/0_QVJMFTWC (ANC Survey Part I)
 tags:
   - active-noise-control
   - multichannel-anc

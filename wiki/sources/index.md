@@ -78,3 +78,4 @@
 | [[sources/zhan-2025-deeppem-afc\|Zhan 2025: DeepPEM-AFC]] | GRU-based step-size prediction for PEM-AFC with frequency-domain implementation and simulated path generation | 2026-05-15 |
 | [[sources/tagliasacchi-2020-seanet\|Tagliasacchi, Li, Misiunas & Roblek 2020: SEANet]] | Multi-modal speech enhancement using accelerometer data; wave-to-wave UNet with adversarial training; 9.6 dB SI-SDRi in mixed-speech scenarios | 2020 |
 | [[sources/wang-2022-fusing-bc-ac-complex-domain-se\|Wang, Zhang & Wang 2022: Fusing BC and AC for Complex-Domain SE]] | Attention-based AC-BC fusion with DC-CRN; CycleGAN semi-supervised framework matching full supervision with 50% data; +21.1% STOI at −5 dB | 2022 |
+| [[sources/lu-2021-survey-active-noise-control-linear\|Lu et al. 2021: Survey on ANC — Part I: Linear Systems]] | Comprehensive survey of linear ANC: FxLMS, FeLMS, FuLMS, FxAP, FxRLS, subband, distributed ANC, sparse ANC, and practical considerations | 2021 |

@@ -155,3 +155,11 @@
 | [[concepts/frequency-shift-feedback-cancellation\|Frequency Shift Feedback Cancellation]] | De-correlation via small frequency offset; limited for HA but effective when combined with PEM | 2026-05-15 |
 | [[concepts/maximum-stable-gain\|Maximum Stable Gain]] | Maximum amplification before feedback instability; key metric for hearing aid performance | 2026-05-15 |
 | [[concepts/complex-spectral-mapping\|Complex Spectral Mapping]] | Predicting RI components of clean speech STFT directly; preserves phase for superior enhancement | 2026-05-16 |
+| [[concepts/online-secondary-path-estimation\|Online Secondary Path Estimation]] | Continuous adaptation of the secondary path model during ANC operation | 2026-05-17 |
+| [[concepts/distributed-anc\|Distributed ANC]] | Cooperative ANC over wireless acoustic sensor networks; incremental and diffusion strategies | 2026-05-17 |
+| [[concepts/psychoacoustic-anc\|Psychoacoustic ANC]] | ANC weighted by human hearing perception; loudness-based optimization | 2026-05-17 |
+| [[concepts/selective-anc\|Selective ANC]] | Pre-tuned filter selection based on audio features instead of real-time adaptation | 2026-05-17 |
+| [[concepts/active-structural-acoustic-control\|Active Structural Acoustic Control (ASAC)]] | Vibration control of casings/panels to reduce radiated noise at the source | 2026-05-17 |
+| [[concepts/convex-combination-anc\|Convex Combination ANC]] | Two filters (fast+slow) blended via mixing parameter to avoid convergence/residue tradeoff | 2026-05-17 |
+| [[concepts/sparse-anc\|Sparse ANC]] | Exploiting path or source sparsity via proportionate NLMS and zero-attracting strategies | 2026-05-17 |
+| [[concepts/subband-adaptive-filter\|Subband Adaptive Filter]] | Per-subband adaptive filtering for fast convergence with long channel responses | 2026-05-17 |

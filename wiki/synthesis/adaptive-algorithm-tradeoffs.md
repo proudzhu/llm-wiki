@@ -1,12 +1,13 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-04-12
+updated: 2026-05-17
 sources:
 - zotero://select/items/0_IZATI7ZF
 - zotero://select/items/0_9KNF4YUC
 - zotero://select/items/0_FERIFUEJ
 - zotero://select/items/0_NEWLEZ9B
+- zotero://select/items/0_QVJMFTWC
 tags:
 - adaptive-algorithms
 - algorithm-selection

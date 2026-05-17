@@ -97,6 +97,12 @@
 | [[entities/jun-yang\|Jun Yang]] | Institute of Acoustics, CAS — co-author on FRM-SFANC | 2026-05-01 |
 | [[entities/jianing-zhang\|Jianing Zhang]] | Institute of Acoustics, CAS — co-author on FRM-SFANC | 2026-05-01 |
 | [[entities/eli-bendersky\|Eli Bendersky]] | Independent blogger and software engineer — numerical methods, linear algebra, programming | 2026-05-02 |
+| [[entities/lu-lu\|Lu Lu]] | Sichuan University — lead author of comprehensive ANC survey (Part I: Linear Systems) | 2026-05-17 |
+| [[entities/kai-li-yin\|Kai-Li Yin]] | Sichuan University — co-author of comprehensive ANC survey (Part I: Linear Systems) | 2026-05-17 |
+| [[entities/rodrigo-de-lamare\|Rodrigo C. de Lamare]] | PUC-Rio — co-author of ANC survey, sparse adaptive algorithms | 2026-05-17 |
+| [[entities/zongsheng-zheng\|Zongsheng Zheng]] | Sichuan University — co-author of comprehensive ANC survey | 2026-05-17 |
+| [[entities/yi-yu\|Yi Yu]] | SWUST — co-author of comprehensive ANC survey | 2026-05-17 |
+| [[entities/xiaomin-yang\|Xiaomin Yang]] | Sichuan University — corresponding author of comprehensive ANC survey | 2026-05-17 |
 | [[entities/yixuan-zhang\|Yixuan Zhang]] | Ohio State University — neural-augmented Kalman filter for acoustic howling suppression | 2026-05-02 |
 | [[entities/hao-zhang\|Hao Zhang]] | Tencent AI Lab — acoustic howling suppression, speech processing | 2026-05-02 |
 | [[entities/meng-yu\|Meng Yu]] | Tencent AI Lab — acoustic howling suppression, speech enhancement | 2026-05-02 |

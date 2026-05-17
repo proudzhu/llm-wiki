@@ -63,8 +63,15 @@ where $\mathbf{G}(\omega)$ and $\hat{\mathbf{G}}(\omega)$ are the Fourier transf
 
 ## Related Concepts
 
-- [[active-noise-control|Active Noise Control]]
-- [[leaky-fxlms-algorithm|Leaky FxLMS Algorithm]]
-- [[simplified-adaptive-feedback-anc|Simplified Adaptive Feedback ANC]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]]
+- [[concepts/simplified-adaptive-feedback-anc|Simplified Adaptive Feedback ANC]]
+- [[concepts/online-secondary-path-estimation|Online Secondary Path Estimation]]
+- [[concepts/subband-adaptive-filter|Subband Adaptive Filter]]
+- [[concepts/distributed-anc|Distributed ANC]]
+- [[concepts/sparse-anc|Sparse ANC]]
+- [[concepts/convex-combination-anc|Convex Combination ANC]]
 
 ## Related Sources
+
+- [[sources/lu-2021-survey-active-noise-control-linear|Lu et al. 2021: Survey on ANC — Part I: Linear Systems]]
