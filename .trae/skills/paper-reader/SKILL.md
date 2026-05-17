@@ -21,7 +21,6 @@ Invoke this skill when the user asks to:
 - Verify with: `curl -s http://localhost:23119/connector/ping`
 - `mineru-open-api` CLI available for MinerU extraction (`npm install -g mineru-open-api`)
 - `defuddle` CLI available for arXiv HTML extraction (`npm install -g defuddle`)
-- Micromamba env activation: `$env:PATH = "D:\micromamba-envs\llm-wiki;" + $env:PATH`
 
 ## Workflow Steps
 
@@ -80,7 +79,6 @@ If the paper has an arXiv ID, **always prefer the HTML version** — it provides
 
 1. **Extract markdown with Defuddle**:
 ```bash
-$env:PATH = "D:\micromamba-envs\llm-wiki;" + $env:PATH
 defuddle parse "https://arxiv.org/html/ARXIV_ID" --md -o "raw/papers/{slug}/full-text.md"
 ```
 
@@ -107,7 +105,6 @@ Remove-Item "raw/papers/{slug}/paper.pdf"
 For papers without an arXiv HTML version, or if Defuddle extraction fails, use MinerU `extract` with VLM model for high accuracy on formulas, tables, and complex layouts.
 
 ```bash
-$env:PATH = "D:\micromamba-envs\llm-wiki;" + $env:PATH
 mineru-open-api extract "raw/papers/{slug}/paper.pdf" -o "raw/papers/{slug}/full-text.md" --language en --model vlm --formula --table --timeout 600
 ```
 
@@ -142,12 +139,11 @@ Remove-Item "raw/papers/{slug}/paper.pdf"
 **Troubleshooting**:
 - If extract returns `parsing failed`, the PDF may be corrupted — verify with the PDF header check in 3a
 - If server errors persist after retry, fall back to pdftotext (3d)
-- If MinerU is not installed: `$env:PATH = "D:\micromamba-envs\llm-wiki;" + $env:PATH; npm install -g mineru-open-api`
+- If MinerU is not installed: `npm install -g mineru-open-api`
 
 #### 3d. Fallback: pdftotext (If MinerU Fails)
 
 ```bash
-$env:PATH = "D:\micromamba-envs\llm-wiki;" + $env:PATH
 pdftotext -layout "raw/papers/{slug}/paper.pdf" "raw/papers/{slug}/full-text.txt"
 ```
 
@@ -224,8 +220,8 @@ Figures should be included selectively — only when they convey information tha
 
 Guidelines:
 - Place figures immediately after the section they illustrate (not in a separate figures section)
-- Use relative paths from the wiki root: `![caption](raw/papers/{slug}/figures/fig-name.png)`
-- For arXiv papers extracted via Defuddle, figures are also in `figures/` subdirectory: `![caption](raw/papers/{slug}/figures/fig-name.png)`
+- Use relative paths from the wiki root: `![[raw/papers/{slug}/figures/fig-name.png|caption]]`
+- For arXiv papers extracted via Defuddle, figures are also in `figures/` subdirectory: `![[raw/papers/{slug}/figures/fig-name.png|caption]]`
 - Add an italicized caption below each figure: `*Figure N: description.*`
 - Maximum 3 figures per source page — prefer the most informative ones
 - If figures are available in `raw/papers/{slug}/figures/`, reference them; do not embed or duplicate
@@ -283,11 +279,11 @@ Math and equations.
 
 ## Related Concepts
 
-- [[../concepts/related|Related Concept]]
+- [[concepts/related|Related Concept]]
 
 ## Related Sources
 
-- [[../sources/{slug}|Source Title]]
+- [[sources/{slug}|Source Title]]
 ```
 
 **Check first**: Use Glob to see if concept already exists. If so, update it with new information from this paper.
@@ -359,7 +355,7 @@ For re-ingestion, use `ingest (re)` as the operation.
 - **Never modify** files in `raw/` after creation (immutability rule) — **exception**: replacing remote image URLs with local paths in `full-text.md` is allowed
 - **Always check** if a page already exists before creating (use Glob)
 - **Always read** existing pages before updating them (use Read)
-- **Wikilinks** use relative paths: `[[../entities/name|Display Name]]` from sources
+- **Wikilinks** use vault-absolute paths: `[[entities/name|Display Name]]` from any page
 - **Cross-references** are bidirectional — when adding a link from A to B, also add a link from B to A
 - **Frontmatter dates**: Use today's date for `created` on new pages, update `updated` on modified pages
 - **No comments** in code/markdown unless explicitly requested

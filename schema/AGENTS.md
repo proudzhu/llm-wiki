@@ -138,7 +138,7 @@ Periodically (when requested), health-check the wiki:
 - Suggest new questions and sources to investigate
 - Keep cross-references current and consistent
 - Flag contradictions for user review rather than silently resolving them
-- Use `micromamba activate llm-wiki` when running python scripts
+- Use `uv run` when running Python scripts (e.g. `uv run mkdocs build --strict`)
 
 ## Build Verification (MkDocs)
 
