@@ -1514,13 +1514,15 @@ aw/papers/wang-2026-directional-sfanc-reverberant/full-text.md\ — extracted fr
 
 ## [2026-05-15] ingest | Hybrid AHS: A Hybrid of Kalman Filter and Deep Learning for Acoustic Howling Suppression (Zhang et al. 2023)
 
-- **Source**: aw/papers/zhang-2023-hybrid-ahs/full-text.txt (Zotero: ILJW385X)
+- **Source**: 
+aw/papers/zhang-2023-hybrid-ahs/full-text.txt (Zotero: ILJW385X)
 - **Authors**: Hao Zhang, Meng Yu, Yuzhong Wu, Tao Yu, Dong Yu
 - **Published**: arXiv preprint arXiv:2305.02583, 2023-05-04
 - **DOI**: 10.48550/arXiv.2305.02583
 - **Summary**: Hybrid AHS cascades a frequency-domain Kalman filter with a self-attentive recurrent neural network, using teacher-forced training plus Kalman-preprocessed inputs to reduce training-inference mismatch and outperform Kalman, Deep AHS, and Deep MFC in both offline and streaming AHS.
 - **Pages created**:
-  - aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Zotero PDF
+  - 
+aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Zotero PDF
   - wiki/sources/zhang-2023-hybrid-ahs.md — source page
   - wiki/entities/yuzhong-wu.md — co-author
   - wiki/entities/tao-yu.md — co-author
@@ -1658,5 +1660,27 @@ aw/papers/wang-2026-directional-sfanc-reverberant/full-text.md\ — extracted fr
   - `wiki/concepts/bcs-guided-speech-enhancement.md` — added SEANet entry to comparison table; added to sources and Related Sources
   - `wiki/synthesis/multimodal-bc-speech-enhancement.md` — new `2.1 Foundational Era` subsection with SEANet; renumbered sections 2.2–2.6; added to sources and Related Sources
   - `wiki/index.md` — added 4 entities, 1 source; updated statistics
+
+---
+
+## [2026-05-16] ingest | Fusing Bone-Conduction and Air-Conduction Sensors for Complex-Domain Speech Enhancement (Wang, Zhang & Wang 2022)
+
+- **Source**: `raw/papers/wang-2022-fusing-bc-ac-complex-domain-se/full-text.md` (Zotero: K592VRRE)
+- **Authors**: Heming Wang, Xueliang Zhang, DeLiang Wang
+- **Published**: IEEE/ACM Trans. Audio, Speech, Language Process., Vol. 30, pp. 3134–3143, 2022
+- **DOI**: 10.1109/TASLP.2022.3209943
+- **Summary**: Attention-based AC-BC fusion with Densely-Connected CRN (DC-CRN) in complex domain; attention mask soft-selects between modalities; CycleGAN-based semi-supervised framework leverages unpaired AC data, matching full supervision with only 50% parallel data; +21.1% STOI at −5 dB on ESMB corpus
+- **Extraction**: MinerU precision extract (VLM model, --formula --table)
+- **Pages created**:
+  - `raw/papers/wang-2022-fusing-bc-ac-complex-domain-se/full-text.md` — extracted via MinerU
+  - `wiki/sources/wang-2022-fusing-bc-ac-complex-domain-se.md` — source page
+  - `wiki/entities/heming-wang.md` — lead author
+  - `wiki/entities/xueliang-zhang.md` — co-author
+  - `wiki/entities/deliang-wang.md` — co-author
+  - `wiki/concepts/complex-spectral-mapping.md` — RI-domain speech enhancement paradigm
+- **Pages updated**:
+  - `wiki/concepts/bone-conduction.md` — added source, complex-spectral-mapping concept link
+  - `wiki/synthesis/multimodal-bc-speech-enhancement.md` — expanded §2.2 with Wang 2022 details, updated benchmarks table, added to Related Sources/Concepts
+  - `wiki/index.md` — added 3 entities, 1 concept, 1 source; updated statistics
 
 

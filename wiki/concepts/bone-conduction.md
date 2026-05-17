@@ -5,6 +5,7 @@ updated: 2026-05-16
 sources:
   - wiki/sources/kuang-2024-lightweight-speech-enhancement-bone-air.md
   - wiki/sources/liu-2025-robust-fusion-bc-ac-attention.md
+  - wiki/sources/wang-2022-fusing-bc-ac-complex-domain-se.md
 tags:
 - acoustics
 - audio-processing
@@ -36,22 +37,24 @@ The **Whisphone** project leverages the occlusion effect + bone conduction to ca
 The **VibOmni** system (He et al. 2025) leverages IMU-captured bone-conducted vibrations as a noise-robust auxiliary modality for earable speech enhancement. It uses a two-branch encoder-decoder DPRNN to fuse audio and vibration features, with a novel Bone Conduction Function (BCF) data augmentation technique that reduces paired data requirements by >72×. The system achieves up to 21% PESQ improvement and ~40% WER reduction on real-world data.
 
 ### 4. Voice Activity Detection (OVAD)
-Bone conduction sensors (accelerometers) in headphones can reliably detect when the wearer is speaking (Own Voice Activity Detection) because they are immune to external airborne noise. This is used to automatically switch to [[transparency-mode|Transparency Mode]] (Masilamani 2024).
+Bone conduction sensors (accelerometers) in headphones can reliably detect when the wearer is speaking (Own Voice Activity Detection) because they are immune to external airborne noise. This is used to automatically switch to [[concepts/transparency-mode|Transparency Mode]] (Masilamani 2024).
 
 ### 5. Sensor-Failure Robustness
-A practical concern with wearable BC sensors is intermittent invalidity (loose contact, jaw movement, body motion). Liu, Chen & Yin (2025) introduce a **Special Training** strategy — randomly disabling either the BC or AC channel during training (p = 0.2) — combined with a dual-channel mask architecture, achieving graceful degradation when one sensor fails. See [[sensor-failure-robust-fusion|Sensor-Failure Robust Multi-Modal Fusion]].
+A practical concern with wearable BC sensors is intermittent invalidity (loose contact, jaw movement, body motion). Liu, Chen & Yin (2025) introduce a **Special Training** strategy — randomly disabling either the BC or AC channel during training (p = 0.2) — combined with a dual-channel mask architecture, achieving graceful degradation when one sensor fails. See [[concepts/sensor-failure-robust-fusion|Sensor-Failure Robust Multi-Modal Fusion]].
 
 ## Related Concepts
 
-- [[ear-canal-occlusion-effect|Ear Canal Occlusion Effect]]
-- [[voice-activity-detection|Voice Activity Detection]]
-- [[bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
-- [[transparency-mode|Transparency Mode]]
+- [[concepts/ear-canal-occlusion-effect|Ear Canal Occlusion Effect]]
+- [[concepts/voice-activity-detection|Voice Activity Detection]]
+- [[concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
+- [[concepts/transparency-mode|Transparency Mode]]
+- [[concepts/complex-spectral-mapping|Complex Spectral Mapping]]
 - [[sources/fukumoto-2025-whisphone-paper-reading-note|Whisphone]]
 
 ## Related Sources
 
 - [[sources/zhang-2022-bone-conducted-speech-dissertation|Zhang 2022: Bone-Conducted Speech Dissertation]]
+- [[sources/wang-2022-fusing-bc-ac-complex-domain-se|Wang, Zhang & Wang 2022: Fusing BC and AC for Complex-Domain SE]]
 - [[sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]]
 - [[sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
 - [[sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]]

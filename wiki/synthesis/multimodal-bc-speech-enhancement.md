@@ -5,12 +5,12 @@ updated: 2026-05-16
 sources:
   - wiki/sources/tagliasacchi-2020-seanet.md
   - wiki/sources/zhang-2022-bone-conducted-speech-dissertation.md
+  - wiki/sources/wang-2022-fusing-bc-ac-complex-domain-se.md
   - wiki/sources/he-2025-vibomni.md
   - wiki/sources/kuang-2024-lightweight-speech-enhancement-bone-air.md
   - wiki/sources/liu-2025-robust-fusion-bc-ac-attention.md
   - wiki/sources/dai-2026-speech-preserving-deep-anc.md
   - wiki/sources/heitkaemper-2026-bcs-speech-enhancement-earbuds.md
-  - zotero://select/items/0_K592VRRE (Wang 2022: Complex Fusion)
   - zotero://select/items/0_B92ER5KS (Khanagha 2026: Conditional Diffusion)
   - zotero://select/items/0_NIIDMA7J (Contrastive Learning for BC)
 tags:
@@ -52,8 +52,7 @@ Early work establishes the feasibility of leveraging non-audio sensor modalities
 Focuses on "restoring" BC speech or using it as a reference for AC denoising.
 
 - **Pitch Extraction ([[sources/zhang-2022-bone-conducted-speech-dissertation|Zhang, 2022]])**: Combines AC weighted auto-correlation with BC cepstrum (WACF-CEP) to detect pitch in 0 dB SNR environments.
-- **Complex Spectral Mapping (Wang, 2022)**: Uses Deep Complex CRNs (DC-CRN) to fuse AC and BC signals in the complex domain, preserving phase information.
-- **Attention-based Fusion**: Replaces simple concatenation with attention masks to "selectively" weigh AC and BC features based on instantaneous SNR.
+- **[[sources/wang-2022-fusing-bc-ac-complex-domain-se|Complex Spectral Mapping (Wang, Zhang & Wang 2022)]]**: Uses Densely-Connected CRNs (DC-CRN) to fuse AC and BC signals in the [[concepts/complex-spectral-mapping|complex domain]], preserving phase information. Introduces attention-based fusion (AFF) that computes a soft modality-selection mask from local+global features — outperforming early/late fusion by +21.1% STOI at −5 dB. Additionally proposes a CycleGAN-based semi-supervised framework that leverages unpaired AC data, matching fully-supervised performance with only 50% parallel BC data.
 
 ### 2.3 Lightweight IMU-Based Fusion (2023–2025)
 
@@ -127,7 +126,7 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 | Method | Year | Params | PESQ Gain | Best For |
 | :--- | :--- | :--- | :--- | :--- |
 | **SEANet** | 2020 | — | 9.6 dB SI-SDRi | Speaker separation with IMU |
-| **DC-CRN (Wang)** | 2022 | — | Moderate | General mobile communication |
+| **DC-CRN + AFF (Wang)** | 2022 | — | +21.1% STOI | Complex-domain fusion; semi-supervised |
 | **VibOmni** | 2023 | — | +21% PESQ | Low-latency on-device (IMU) |
 | **DenGCAN (Kuang)** | 2024 | 1.03M | +1.870 wb-PESQ | Minimum compute on ARM |
 | **ATFA (Liu)** | 2025 | 1.6M | +0.2 PESQ | Robust to sensor failure |
@@ -139,6 +138,7 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 
 - [[concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
 - [[concepts/bone-conduction|Bone Conduction]]
+- [[concepts/complex-spectral-mapping|Complex Spectral Mapping]]
 - [[concepts/densely-gated-convolutional-attention-network|DenGCAN]]
 - [[concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
 - [[concepts/attention-gate|Attention Gate (AG)]]
@@ -150,6 +150,7 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 
 - [[sources/tagliasacchi-2020-seanet|Tagliasacchi et al. 2020: SEANet]]
 - [[sources/zhang-2022-bone-conducted-speech-dissertation|Zhang 2022: BC Statistical Analysis]]
+- [[sources/wang-2022-fusing-bc-ac-complex-domain-se|Wang, Zhang & Wang 2022: Fusing BC and AC for Complex-Domain SE]]
 - [[sources/he-2025-vibomni|He et al. 2025: VibOmni]]
 - [[sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: DenGCAN]]
 - [[sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]]

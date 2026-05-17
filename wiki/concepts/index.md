@@ -154,3 +154,4 @@
 | [[concepts/sensor-failure-robust-fusion\|Sensor-Failure Robust Multi-Modal Fusion]] | Random modality dropout training + dual-mask architecture for graceful degradation when one sensor is invalid | 2026-05-16 |
 | [[concepts/frequency-shift-feedback-cancellation\|Frequency Shift Feedback Cancellation]] | De-correlation via small frequency offset; limited for HA but effective when combined with PEM | 2026-05-15 |
 | [[concepts/maximum-stable-gain\|Maximum Stable Gain]] | Maximum amplification before feedback instability; key metric for hearing aid performance | 2026-05-15 |
+| [[concepts/complex-spectral-mapping\|Complex Spectral Mapping]] | Predicting RI components of clean speech STFT directly; preserves phase for superior enhancement | 2026-05-16 |

@@ -165,3 +165,10 @@
 | [[entities/fuliang-yin\|Fuliang Yin]] | Dalian Univ. of Technology — speech and audio processing, multi-modal fusion | 2026-05-16 |
 | [[entities/xiaodong-li\|Xiaodong Li]] | Institute of Acoustics, CAS — acoustic signal processing, hearing aids | 2026-05-15 |
 | [[entities/chengshi-zheng\|Chengshi Zheng]] | Institute of Acoustics, CAS — DeepPEM-AFC, frequency shift analysis for hearing aids | 2026-05-15 |
+| [[entities/marco-tagliasacchi\|Marco Tagliasacchi]] | Google Research — SEANet: multi-modal speech enhancement using accelerometer data | 2026-05-17 |
+| [[entities/yunpeng-li\|Yunpeng Li]] | Google Research — co-author on SEANet multi-modal speech enhancement | 2026-05-17 |
+| [[entities/karolis-misiunas\|Karolis Misiunas]] | Google Research — co-author on SEANet multi-modal speech enhancement | 2026-05-17 |
+| [[entities/dominik-roblek\|Dominik Roblek]] | Google Research — co-author on SEANet multi-modal speech enhancement | 2026-05-17 |
+| [[entities/heming-wang\|Heming Wang]] | Ohio State University — attention-based AC-BC complex-domain fusion for speech enhancement | 2026-05-16 |
+| [[entities/xueliang-zhang\|Xueliang Zhang]] | Inner Mongolia University — bone-conduction speech processing, multi-modal fusion | 2026-05-16 |
+| [[entities/deliang-wang\|DeLiang Wang]] | Ohio State University — computational auditory scene analysis, speech enhancement | 2026-05-16 |

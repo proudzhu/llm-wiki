@@ -179,6 +179,9 @@
 | [[entities/yunpeng-li\|Yunpeng Li]] | Google Research — co-author on SEANet multi-modal speech enhancement | 2026-05-17 |
 | [[entities/karolis-misiunas\|Karolis Misiunas]] | Google Research — co-author on SEANet multi-modal speech enhancement | 2026-05-17 |
 | [[entities/dominik-roblek\|Dominik Roblek]] | Google Research — co-author on SEANet multi-modal speech enhancement | 2026-05-17 |
+| [[entities/heming-wang\|Heming Wang]] | Ohio State University — attention-based AC-BC complex-domain fusion for speech enhancement | 2026-05-16 |
+| [[entities/xueliang-zhang\|Xueliang Zhang]] | Inner Mongolia University — bone-conduction speech processing, multi-modal fusion | 2026-05-16 |
+| [[entities/deliang-wang\|DeLiang Wang]] | Ohio State University — computational auditory scene analysis, speech enhancement | 2026-05-16 |
 
 ---
 
@@ -334,6 +337,7 @@
 | [[concepts/attention-gate\|Attention Gate (AG)]] | Selective skip-connection mechanism using local + global feature attention | 2026-05-16 |
 | [[concepts/adaptive-time-frequency-attention\|Adaptive Temporal-Frequency Attention (ATFA)]] | Dual-axis MHSA over time and frequency with adaptive hierarchical fusion (AHA) for speech enhancement | 2026-05-16 |
 | [[concepts/sensor-failure-robust-fusion\|Sensor-Failure Robust Multi-Modal Fusion]] | Random modality dropout training + dual-mask architecture for graceful degradation when one sensor is invalid | 2026-05-16 |
+| [[concepts/complex-spectral-mapping\|Complex Spectral Mapping]] | Predicting RI components of clean speech STFT directly; preserves phase for superior enhancement | 2026-05-16 |
 | [[concepts/frequency-shift-feedback-cancellation\|Frequency Shift Feedback Cancellation]] | De-correlation method for hearing aid AFC by shifting frequency to reduce bias | 2026-05-15 |
 | [[concepts/hearing-aid-feedback-cancellation\|Hearing Aid Feedback Cancellation (AFC)]] | Suppression of acoustic feedback in hearing aids via adaptive filtering and PEM | 2026-05-15 |
 | [[concepts/maximum-stable-gain\|Maximum Stable Gain (MSG)]] | The maximum gain a hearing aid can provide before feedback oscillation, used as AFC evaluation metric | 2026-05-15 |
@@ -423,6 +427,7 @@
 | [[sources/zhan-2025-deeppem-afc\|Zhan et al. 2025: DeepPEM-AFC]] | Deep learning prediction error method for hearing aid adaptive feedback cancellation | 2025 |
 | [[sources/zhang-2023-hybrid-ahs\|Zhang et al. 2023: Hybrid AHS]] | Hybrid acoustic howling suppression combining Kalman filter and deep learning | 2023 |
 | [[sources/tagliasacchi-2020-seanet\|Tagliasacchi, Li, Misiunas & Roblek 2020: SEANet]] | Multi-modal speech enhancement using accelerometer data; wave-to-wave UNet with adversarial training; 9.6 dB SI-SDRi in mixed-speech scenarios | 2020 |
+| [[sources/wang-2022-fusing-bc-ac-complex-domain-se\|Wang, Zhang & Wang 2022: Fusing BC and AC for Complex-Domain SE]] | Attention-based AC-BC fusion with DC-CRN; CycleGAN semi-supervised framework matching full supervision with 50% data; +21.1% STOI at −5 dB | 2022 |
 
 ---
 
@@ -474,10 +479,10 @@
 
 ## Statistics
 
-- **Total pages**: 419
-- **Entities**: 169
-- **Concepts**: 152
-- **Sources**: 74
+- **Total pages**: 424
+- **Entities**: 172
+- **Concepts**: 153
+- **Sources**: 75
 - **Synthesis**: 18
 - **Queries**: 6
-- **Last updated**: 2026-05-17
+- **Last updated**: 2026-05-16
