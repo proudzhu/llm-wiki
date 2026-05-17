@@ -28,6 +28,11 @@ Traditional ANC systems create a "zone of silence" centered at the physical erro
 According to the comprehensive review[^1], classical virtual sensing falls into three main categories:
 
 ### 2.1 Remote Microphone Technique (RMT)
+
+The RMT uses an **observation filter** $\mathbf{O}(z)$ to map primary disturbances from physical remote microphones to the virtual error position. Conventionally, these filters are pre-computed via cross-correlations or cross-spectral densities during a training phase and stored in a database indexed by acoustic scenario. During operation, a selection mechanism picks the appropriate filter set. This approach requires [^5]:
+- A large pre-computed database encompassing all anticipated scenarios
+- A filter-selection or interpolation mechanism for time-varying conditions
+- Fixed virtual microphone positions per filter
 The most common approach. It uses a preliminary "training phase" where a physical microphone is temporarily placed at the virtual location to identify the transfer function between the permanent physical error mic and the target.
 - **Limitation**: Highly sensitive to changes in the acoustic path (e.g., the user moving their head).
 
@@ -54,19 +59,22 @@ Moving beyond fixed transfer functions, researchers have applied optimal control
 
 The state-of-the-art is shifting toward data-driven, time-variant observation filters:
 
-- **Obs-TasNet[^5]**: A neural network architecture designed to estimate virtual sensing observation filters online. Unlike RMT, which assumes a static path, Obs-TasNet adapts to time-variant settings (e.g., a moving listener) by estimating filter coefficients in real-time.
+- **CNN Neural Observation Filter[^7]**: First demonstration of online observation filter estimation using an encoder-decoder CNN (367k params). Takes GCC-PHAT features between remote microphones plus virtual microphone coordinates as input. Enables asynchronous computation (2 Hz inference on co-processor, real-time filtering on DSP). Achieves −33.53 dB NMSE with accurate position data; position information alone accounts for ~20 dB improvement.
+- **Obs-TasNet[^5]**: Follow-up work replacing the CNN encoder-decoder with a modified Conv-TasNet, reducing parameters by ~40% while improving accuracy. Demonstrates adaptation to time-variant environments with moving listeners.
 - **Metric Learning[^6]**: Recent preprints suggest using metric learning to make virtual sensing transferable across different environments, reducing the need for site-specific training.
 
 ---
 
 ## 5. Comparative Analysis of Techniques
 
-| Feature | RMT | VMA | Kalman Filter | Neural (Obs-TasNet) |
-|---------|-----|-----|---------------|-------------------|
-| **Requires Training** | Yes | No | Partial | Yes (Pre-training) |
-| **Robustness** | Low | Moderate | High | Very High |
-| **Complexity** | $O(L)$ | $O(M \cdot L)$ | $O(N^3)$ | $O(\text{Network})$ |
-| **Environment** | Static | Diffuse | Stochastic | Dynamic |
+| Feature | RMT | VMA | Kalman Filter | Neural (CNN) | Neural (Obs-TasNet) |
+|---------|-----|-----|---------------|------------------|-------------------|
+| **Requires Training** | Yes | No | Partial | Yes (Pre-training) | Yes (Pre-training) |
+| **Robustness** | Low | Moderate | High | High | Very High |
+| **Complexity** | $O(L)$ | $O(M \cdot L)$ | $O(N^3)$ | $O(367\text{k})$ | $O(220\text{k})$ |
+| **Environment** | Static | Diffuse | Stochastic | Dynamic | Dynamic |
+| **Position Info** | Fixed per filter | Fixed | Fixed | Variable (input) | Variable (input) |
+| **Async. Update** | No | No | No | Yes (500ms) | Yes (500ms) |
 
 Note: Secondary path interpolation (DTW-based) addresses the moving-listener problem from a different angle — updating the secondary path model rather than the virtual sensing filter — and can be combined with any of the above techniques.
 
@@ -80,6 +88,7 @@ Note: Secondary path interpolation (DTW-based) addresses the moving-listener pro
 [^4]: [[sources/wang-2024-computation-efficient-virtual-sensing|Wang 2024: Computation-Efficient Virtual Sensing with MCALMS]] (Zotero: [items/0_YHFLXFQH](zotero://select/items/0_YHFLXFQH))
 [^5]: [[sources/holzmueller-2026-obs-tasnet-virtual-sensing|Holzmüller 2026: Obs-TasNet for Virtual Sensing]] (Zotero: [items/0_WY4S7C6Z](zotero://select/items/0_WY4S7C6Z))
 [^6]: [[sources/wang-2024-metric-learning-virtual-sensing|Wang 2024: Transferable Selective Virtual Sensing]] (Zotero: [items/0_NBYTXNH4](zotero://select/items/0_NBYTXNH4))
+[^7]: [[sources/holzmuller-2025-deep-observation-filter-virtual-sensing-active-noise-control|Holzmuller & Sontacchi 2025: Deep Observation Filter for Virtual Sensing ANC]] (Zotero: [items/0_5KW3SUYE](zotero://select/items/0_5KW3SUYE))
 
 ---
 
@@ -100,6 +109,7 @@ Note: Secondary path interpolation (DTW-based) addresses the moving-listener pro
 
 - [[sources/a-review-of-virtual-sensing-algorithms-for-active-|A Review of Virtual Sensing Algorithms for Active Noise Control]]
 - [[sources/wang-2024-computation-efficient-virtual-sensing|Wang 2024: Computation-Efficient Virtual Sensing with MCALMS]]
+- [[sources/holzmuller-2025-deep-observation-filter-virtual-sensing-active-noise-control|Holzmuller & Sontacchi 2025: Deep Observation Filter for Virtual Sensing ANC]]
 - [[sources/holzmueller-2026-obs-tasnet-virtual-sensing|Holzmüller 2026: Obs-TasNet for Virtual Sensing]]
 - [[sources/petersen-2008-kalman-filter-virtual-sensing-anc|A Kalman filter approach to virtual sensing for active noise control]]
 - [[sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026: Hybrid ANC with Dual Compensation]]

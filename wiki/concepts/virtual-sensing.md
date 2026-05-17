@@ -45,7 +45,8 @@ In many applications (e.g., headphones, vehicle headrests), the "quiet zone" nee
 
 ## Related Sources
 - [[sources/a-review-of-virtual-sensing-algorithms-for-active-|A Review of Virtual Sensing Algorithms for ANC]]: Systematic overview and comparison of VS algorithms.
-- [[sources/holzmueller-2026-obs-tasnet-virtual-sensing|Holzmüller 2026: Obs-TasNet for Virtual Sensing]]: Deep learning approach to VS.
+- [[sources/holzmuller-2025-deep-observation-filter-virtual-sensing-active-noise-control|Holzmuller & Sontacchi 2025: Deep Observation Filter for Virtual Sensing ANC]]: CNN-based neural observation filter for online RMT estimation.
+- [[sources/holzmueller-2026-obs-tasnet-virtual-sensing|Holzmüller 2026: Obs-TasNet for Virtual Sensing]]: Deep learning approach to VS using Conv-TasNet.
 - [[sources/petersen-2008-kalman-filter-virtual-sensing-anc|Petersen 2008: Kalman Filter for Virtual Sensing]]: State-space observer approach.
 - [[sources/wang-2024-computation-efficient-virtual-sensing|Wang 2024: Computation-Efficient Virtual Sensing with MCALMS]]: Multi-channel VS optimization using MCALMS algorithm.
 

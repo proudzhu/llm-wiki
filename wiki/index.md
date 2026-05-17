@@ -313,6 +313,7 @@
 | [[concepts/virtual-microphone-estimation\|Virtual Microphone Estimation]] | Estimating signals at absent microphone positions from real measurements; decouples spatial from spectral enhancement | 2026-05-12 |
 | [[concepts/spatial-audio-representation-learning\|Spatial Audio Representation Learning]] | SARL framework: conditions MC-SE on VM signals (SARL-S) or features (SARL-F) for improved spatial diversity | 2026-05-12 |
 | [[concepts/neural-directional-filtering\|Neural Directional Filtering]] | Data-driven VDM reconstruction using DNNs to learn ideal directional microphone behavior on compact arrays | 2026-05-13 |
+| [[concepts/neural-observation-filter\|Neural Observation Filter]] | Neural network estimation of RMT observation filter coefficients online; CNN (367k params) or Conv-TasNet; GCC-PHAT + position inputs; async dual-loop | 2026-05-17 |
 | [[concepts/virtual-directional-microphone\|Virtual Directional Microphone]] | Computationally synthesized microphone with specified directivity pattern reconstructed from array recordings | 2026-05-13 |
 | [[concepts/diffuse-sound-extraction\|Diffuse Sound Extraction]] | Isolating late reverberant diffuse component for spatial audio control and immersive quality | 2026-05-13 |
 | [[concepts/directivity-pattern\|Directivity Pattern]] | Directional sensitivity characterization of beamformers/microphones; Cardioid, hypercardioid, etc. | 2026-05-13 |
@@ -402,6 +403,7 @@
 | [[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones\|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]] | 博士论文：FF+MVC+IMC 三种方案同时组合，两阶段优化，Modified N-FxLMS 自适应，FPGA 原型验证 | 2020 |
 | [[sources/its-ok-to-compare-floating-points\|It's ok to compare floating points for equality]] | Critique of universal epsilon-comparisons in geometry and physics | 2026-04-18 |
 | [[sources/jiang-2025-ai-driven-avnc-review\|Jiang 2025: AI-Driven AVNC Review]] | Systematic review of 4 technical paths (IS, Modeling, Tuning, Controller) and engineering applications | 2025-10-13 |
+| [[sources/holzmuller-2025-deep-observation-filter-virtual-sensing-active-noise-control\|Holzmuller & Sontacchi 2025: Deep Observation Filter for Virtual Sensing ANC]] | CNN-based neural observation filter for online RMT; GCC-PHAT + position inputs; −33.53 dB NMSE; 367k params; async dual-loop | 2025-06 |
 | [[sources/holzmueller-2026-obs-tasnet-virtual-sensing\|Holzmüller 2026: Obs-TasNet for Virtual Sensing]] | Neural RMT observation filter estimation via modified Conv-TasNet; temporal bottleneck cuts params 40%, complexity 4x; asynchronous dual-loop operation | 2026-04-18 |
 | [[sources/petersen-2008-kalman-filter-virtual-sensing-anc\|Petersen 2008: Kalman Filter for Virtual Sensing]] | State-space observer approach for robust virtual sensing in ANC | 2026-04-18 |
 | [[sources/wang-2024-computation-efficient-virtual-sensing\|Wang 2024: Computation-Efficient Virtual Sensing with MCALMS]] | MCALMS-based MVANC: 10× computational savings over MCFxLMS, ~35 dB NR at virtual locations; broadband tuning noise should encompass control stage range | 2026-04-28 |
@@ -494,10 +496,10 @@
 
 ## Statistics
 
-- **Total pages**: 439
+- **Total pages**: 441
 - **Entities**: 178
-- **Concepts**: 161
-- **Sources**: 76
+- **Concepts**: 162
+- **Sources**: 77
 - **Synthesis**: 18
 - **Queries**: 6
 - **Last updated**: 2026-05-17

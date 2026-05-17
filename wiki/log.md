@@ -1727,3 +1727,26 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 6 entity rows
   - `wiki/concepts/index.md` — added 8 concept rows
+
+---
+
+## [2026-05-17] ingest | Deep Observation Filter for Virtual Sensing in Local ANC (Holzmuller & Sontacchi 2025)
+
+- **Source**: `raw/papers/holzmuller-2025-deep-observation-filter-virtual-sensing-active-noise-control/full-text.md` (Zotero: 5KW3SUYE)
+- **Authors**: Felix Holzmuller, Alois Sontacchi
+- **Published**: Forum Acusticum / Euronoise, June 2025
+- **Summary**: CNN-based online estimation of RMT observation filter using GCC-PHAT features + virtual microphone coordinates; 367k params, −33.53 dB NMSE, async dual-loop operation
+- **Pages created**:
+  - `raw/papers/holzmuller-2025-deep-observation-filter-virtual-sensing-active-noise-control/full-text.md` — extracted text from Zotero PDF (MinerU VLM)
+  - `raw/papers/holzmuller-2025-deep-observation-filter-virtual-sensing-active-noise-control/figures/` — 26 extracted figure images
+  - `wiki/sources/holzmuller-2025-deep-observation-filter-virtual-sensing-active-noise-control.md`
+  - `wiki/concepts/neural-observation-filter.md`
+- **Pages updated**:
+  - `wiki/entities/felix-holzmueller.md` — added this paper
+  - `wiki/entities/alois-sontacchi.md` — added this paper
+  - `wiki/concepts/remote-microphone-technique.md` — added full RMT formulation, neural observation filter section
+  - `wiki/concepts/virtual-sensing.md` — added related source
+  - `wiki/synthesis/virtual-sensing-evolution.md` — added CNN approach as precursor to Obs-TasNet, updated comparison table
+  - `wiki/index.md` — added 1 concept, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/concepts/index.md` — added 1 concept row

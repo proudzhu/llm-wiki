@@ -163,3 +163,4 @@
 | [[concepts/convex-combination-anc\|Convex Combination ANC]] | Two filters (fast+slow) blended via mixing parameter to avoid convergence/residue tradeoff | 2026-05-17 |
 | [[concepts/sparse-anc\|Sparse ANC]] | Exploiting path or source sparsity via proportionate NLMS and zero-attracting strategies | 2026-05-17 |
 | [[concepts/subband-adaptive-filter\|Subband Adaptive Filter]] | Per-subband adaptive filtering for fast convergence with long channel responses | 2026-05-17 |
+| [[concepts/neural-observation-filter\|Neural Observation Filter]] | Neural network estimation of RMT observation filter coefficients online; CNN (367k params) or Conv-TasNet; GCC-PHAT + position inputs; async dual-loop | 2026-05-17 |
