@@ -1,0 +1,1247 @@
+                                                                                                 Signal Processing 181 (2021) 107929
+
+                                                                       Contents lists available at ScienceDirect
+
+                                            Signal Processing
+
+                                                              journal homepage: www.elsevier.com/locate/sigpro
+
+Review
+
+A survey on active noise control in the past decade-Part II: Nonlinear
+systems R
+
+Lu Lu a, Kai-Li Yin b, Rodrigo C. de Lamare c, Zongsheng Zheng d, Yi Yu e, Xiaomin Yang a,,
+Badong Chen f
+
+a School of Electronics and Information Engineering, Sichuan University, Chengdu, Sichuan 610065, China
+b School of Computer Science, Sichuan University, Chengdu, Sichuan 610065, China
+c CETUC, PUC-Rio, Rio de Janeiro 22451-900, Brazil
+d School of Electrical Engineering, Sichuan University, Chengdu, 610065, China
+e School of Information Engineering, Robot Technology Used for Special Environment Key Laboratory of Sichuan Province, Southwest University of Science
+and Technology, Mianyang 621010, China
+f School of Electronic and Information Engineering, Xi'an Jiaotong University, Xi'an 710049, China
+
+article info                                         a b s t r a c t
+
+Article history:                                     Part I of this paper reviewed the development of the linear active noise control (ANC) technique in the
+Received 17 May 2020                                 past decade. However, ANC systems might have to deal with some nonlinear components and the perfor-
+Revised 27 November 2020                             mance of linear ANC techniques may degrade in this scenario. To overcome this limitation, nonlinear ANC
+Accepted 1 December 2020                             (NLANC) algorithms were developed. In Part II, we review the development of NLANC algorithms during
+Available online 5 December 2020                     the last decade. The contributions of heuristic ANC algorithms are outlined. Moreover, we emphasize re-
+                                                     cent advances of NLANC algorithms, such as spline ANC algorithms, kernel adaptive filters, and nonlinear
+Keywords:                                            distributed ANC algorithms. Then, we present recent applications of ANC technique including linear and
+Nonlinear active noise control                       nonlinear perspectives. Future research challenges regarding ANC techniques are also discussed.
+Volterra algorithms
+Artificial neural networks                                                                                                                        © 2020 Elsevier B.V. All rights reserved.
+Kernel adaptive filters
+
+1. Introduction                                                                 NLANC methods mentioned in this paper first appeared before
+                                                                                2009. The research on NLANC dates back to 1995, 59 years after
+    The celebrated filtered-x least mean square (FxLMS) algorithm               the concept of ANC was proposed by Lueg [22]. In this year, Snyder
+and its variants have been successfully applied in active noise con-            and Tanaka developed ANN for NLANC problem, and so far a large
+trol (ANC) systems. However, in practical situations, the primary               number of NLANC algorithms have been proposed. The milestones
+                                                                                in the progress of NLANC before 2009 are presented in Table 1.
+path P(z) and secondary path S(z) may be nonlinear [1]. Moreover,               Survey papers on NLANC techniques have been reported [2]. How-
+the reference noise d(n) arises from dynamic systems and as such,               ever, these surveys do not cover the literature since 2013. To com-
+                                                                                plete the review of NLANC techniques and include the advances,
+the noise may be a nonlinear and deterministic or stochastic, col-              in this paper we review the research progress of NLANC models in
+ored, and non-Gaussian signal [2]. In these cases, linear ANC tech-             recent years.
+niques cannot fully utilize the coherence in the noise and achieve
+suboptimal performance.                                                             The Volterra filter is gaining importance in NLANC. According
+                                                                                to the Stone-Weierstrass approximation theorem, the Volterra fil-
+    To address these limitations, several nonlinear ANC (NLANC) al-             ter is a `universal approximator', i.e., the filter can arbitrarily ap-
+gorithms were proposed, yielding a more stable performance and                  proximate discrete-time with fading memory, time-invariant, con-
+lower noise level [3,12,21]. It should be emphasized that some                  tinuous, finite-memory, nonlinear system [23]. The Volterra fil-
+                                                                                ter belongs to linear-in-the-parameters (LIP) filters, where the
+ R The work is supported by the National Science Foundation of P.R. China un-   output depends linearly on the parameters of the filter itself.
+der Grant 61901285, 61901400, and 61701327, Sichuan Science and Technology      Note that this type of filter becomes computationally expen-
+Fund under Grant 20YYJC3709, China Postdoctoral Science Foundation under Grant  sive when a large number of coefficients are required [23]. To
+2020T130453, and Sichuan University Postdoctoral Interdisciplinary Fund.        solve this problem, the second-order Volterra (SOV) series and
+                                                                                the third-order Volterra (TOV) series are often used. For exam-
+   Corresponding author.                                                        ple, in [24,25], the Volterra filtered-x-based algorithms that use
+     E-mail addresses: lulu19900303@126.com (L. Lu), kl_yin@hotmail.com (K.-
+
+L. Yin), delamare@cetuc.puc-rio.br (R.C. de Lamare), zongsheng56@126.com
+(Z. Zheng), yuyi_xyuan@163.com (Y. Yu), arielyang@scu.edu.cn (X. Yang),
+chenbd@mail.xjtu.edu.cn (B. Chen).
+
+https://doi.org/10.1016/j.sigpro.2020.107929
+0165-1684/© 2020 Elsevier B.V. All rights reserved.
+L. Lu, K.-L. Yin, R.C. de Lamare et al.                                                 Signal Processing 181 (2021) 107929
+
+Table 1
+Time line of NLANC.
+
+Years        Authors                           Contributions                                                                                     References
+
+1994         Wangler and Hansen          Dinh  Genetic algorithm for nonlinear active noise and vibration control                                [3]
+1995         Snyder and Tanaka                 ANN for NLANC                                                                                     [4]
+1996   2001  Tang et al.                       Genetic algorithm for ANC                                                                         [5]
+1997         Tokhi and Wood                    Radial basis function networks for NLANC                                                          [6]
+1998         Strauch and Mulgrew               A combined linear and nonlinear controller to compensate for the nonlinear effects        filter  [7]
+1999         Bouchard, Paillard, and           Five new algorithms for the learning of a multilayer perceptron neural network for NLANC          [8]
+1997,        Tan and Jiang                     VFxLMS algorithm                                                                                  [9,10]
+2001         Bouchard                          Filtered-neuron-level extended Kalman algorithm (FxNEKA) and filtered-x extended Kalman           [11]
+                                               (FxEKF) for NLANC
+2004         Das and Panda                     FsLMS algorithm                                                                                   [1]
+2004         Sicuranza and Carini              Volterra filtered-x affine projection (VFxAP) algorithm                                           [12]
+2005         Sicuranza and Carini              Implementation of the VFxAP algorithm based on V-vector algebra                                   [13]
+2005         Kuo and Wu                        Bilinear FxLMS algorithm                                                                          [14]
+2006         Modares, Ahmadyfard,and           PSO for NLANC                                                                                     [15]
+             Hadadzarif
+2004, 2006   Zhang et al.                      Fuzzy neural networks for NLANC                                                                   [16,17]
+2006         Sicuranza and Carini              Generalized Hammerstein model for NLANC                                                           [18]
+2007         Chang and Luoh                    Neural-based FxLMS algorithm                                                                      [19]
+2008         Bambang                           Recurrent neural networks for NLANC                                                               [20]
+2008         Reddy, Das, and Prabhu            Fast FsLMS algorithm                                                                              [21]
+
+of SOV were developed for active impulsive noise control (AINC)           noise without online estimation of the secondary path [40,41]. In
+problem.                                                                  addition, other heuristic ANC algorithms were also developed, see
+                                                                          [42] and references therein.
+    The NLANC based on an artificial neural network (ANN) method
+was first studied, which provides the capacity to maintain causality          Since 2009, several attractive methods were proposed for
+within the control scheme. From 1997 to 2008, many papers dis-            NLANC. For performance improvement, the kernel adaptive filter
+cussed the usage of radial basis function (RBF) networks, recurrent       (KAF) algorithm and spline adaptive filter were introduced [43,44].
+neural networks (RNNs), and fuzzy neural networks for NLANC (see          The KAF recasts the input data into a high-dimensional feature
+Table 1). In the last decade, some attempts were made by using an         space via a reproducing kernel Hilbert space (RKHS) and as such,
+ANN as the controller [26-28]. A neural controller equipped with          the linear adaptive filter is applied in the feature space [43]. In
+the filtered-u least mean square (FuLMS) algorithm with correc-           contrast, the spline adaptive filter establishes a nonlinear mathe-
+tion terms momentum was proposed in [29]. The correction terms            matics model by an adaptive look-up table (LUT) in which the con-
+momentum can efficiently prevent the system from unstable poles           trol points are interpolated by a local low-order polynomial spline
+and can enhance the performance as compared with the conven-              curve [44]. An important merit of the spline adaptive filter is that
+tional leaky FuLMS algorithm. Regrettably, the above mentioned            its computational complexity is much lower as compared to other
+ANNs have heavy computational complexity which may hinder                 traditional NLANC algorithms [45]. Motivated by distributed algo-
+their practical applications [2].                                         rithms, some nonlinear distributed algorithms were proposed by
+                                                                          integrating FLANN into distributed ANC algorithms, which is im-
+    The functional link ANN (FLANN) exploits the single layer of          portant for ensuring that the wireless acoustic sensor networks
+ANN to obtain reliable estimation performance with acceptable er-         (WASNs) can combat nonlinear distortions [46].
+ror level [30]. The FLANN filter is also a type of LIP filter, which
+shares a unified implementation with the Volterra filter. Moreover,           Initial studies have shown that the KAF is limited by high com-
+the linear adaptive filtering algorithms can easily extend to this        putational complexity. Specifically, the input data of KAF must be
+framework with favorable implications on the algorithm stability          a dictionary, where every new data input that arrives is used to
+and computational complexity [31]. Over the past decade, a num-           calculate the filter output [47]. To overcome this limitation, the
+ber of filtered-s least mean square (FsLMS) algorithms were pro-          quantized scheme [48] and the set-membership scheme [49] can
+posed by employing FLANN, such as fast FsLMS [30], robust FsLMS           be taken into account to start new research on the field of NLANC.
+(RFsLMS) [32]. Most of these algorithms use trigonometric func-           For example, the adaptive step size scheme and data-selective up-
+tional expansion as the basis function, and a small number of al-         date strategy proposed in [49] can be directly combined with the
+gorithms that consider using Chebyshev [33], Fourier [34], and Leg-       KAF in NLANC. On the other front, Internet of Things (IoT) has been
+endre expansions [35] were also developed.                                shown to be compatible with communication and signal process-
+                                                                          ing techniques for creating a smart world. In [50], the concept of
+    To compensate for the strong nonlinearity of the system with          ANC was introduced to IoT, generating MUTE leverages, for environ-
+saturated signals, several bilinear algorithms with reduced compu-        mental noise cancellation. In [51], the concept system of ANC-IoT is
+tational complexity were proposed, which employ the cross-terms           tested. All these works have demonstrated the feasibility and great
+based on both feedback and feedforward polynomials and they can           potential of the combination of the IoT and ANC.
+model NLANC systems with shorter filter length [36,37]. In [38], a
+new bilinear filter was proposed, which uses FLANN to expand the              The goal of this survey is to provide a comprehensive overview
+input vector and then adapts coefficients via bilinear filter to ob-      of the latest NLANC research results and innovations. We also dis-
+tain excellent nonlinear modeling capability.                             cuss the applications of ANC techniques that have been introduced
+                                                                          in many fields, such as functional magnetic resonance imaging
+    In this context, the particle swarm optimization (PSO) algorithm      (fMRI) acoustic noise control [52] and transformer noise control
+is an effective biologically inspired meta-heuristic algorithm, which     [53]. Moreover, we present some remarks on future research di-
+performs by a competition and cooperation mechanism between               rections for ANC. The papers that have been published since 2009
+the particle swarm and thus it retains the global search strategy         are considered in this survey. In particular, the main problems that
+of population [39]. Such algorithm has been extensively studied in        the NLANC algorithms should address are presented in Section 2.
+ANC technique, especially for nonlinear system [40]. The most ob-         The modeling method of NLANC is discussed in Section 3, where
+vious advantage of the PSO-ANC algorithm is that it can reduce
+
+                                                                       2
+L. Lu, K.-L. Yin, R.C. de Lamare et al.                                                                                                                  Signal Processing 181 (2021) 107929
+
+Table 2
+The type and examples of nonlinearities present in ANC systems.
+
+Type of nonlinearities                                           Examples
+
+Nonlinearities in the                                            The primary noise propagates in a duct with very high sound pressure.
+primary path
+Nonlinearities in the                                            (1) Overdriving the electronics or the speakers/transducers in the secondary path. (2) The amplifier
+secondary path                                                   may be in saturation.
+Nonlinearities in the                                            (1) Actuator excites the frequency of interest and its related harmonics at the same time. (2)
+components of the ANC                                            Actuator operates with the input signal whose amplitude is close to or higher than the nominal
+systems                                                          input signal value. (3) The working frequency of the actuator is beyond the normal frequency range
+                                                                 (or close to the limit). (4) Noise from the blowers, grinders, airfoils, and fans is shown to be chaotic.
+
+Volterra ANC algorithms, FLANN-based algorithms, and bilinear                 3.1. Volterra ANC algorithms
+ANC algorithms are used as examples. Section 4 focuses on
+evolutionary-computing-based ANC algorithms. In Section 5, some                   Nonlinear autoregressive with exogenous variables (NARX)
+novel NLANC methods emerging in the past decade are investi-                  models have been preliminarily considered for NLANC techniques.
+gated. Some important implementation issues and future research               Such methods are flexible and satisfy the representation capability
+challenges of ANC are discussed in Sections 6 and 7, respectively.            of nonlinear systems. In addition, the truncated Volterra filter and
+Finally, conclusions are provided in Section 8. All the brackets fol-         bilinear filter can be subsumed into the NARX model. The potential
+                                                                              superiority of the narrowband ANC (NANC) model for NLANC ap-
+low the order {[(·)]}.                                                        plications has been emphasized in [55] and the improved version
+                                                                              that considers the commutation of the control filter block and the
+2. Problem formulation                                                        secondary path dynamics was proposed in [59].
+
+    In practical situations, three types of nonlinearities may exist              The Volterra ANC algorithms have been studied by several re-
+in ANC systems. First of all, the primary noise at the cancellation           searchers. The preeminent merit of this modeling approaches is
+                                                                              that they are `universal approximators' that models diverse sys-
+point d(n) may exhibit nonlinear effects. For instance, when the              tems with satisfied performance. The block diagram of the NLANC
+
+primary noise propagates in a duct with very high sound pressure,             system is shown in Fig. 1, where e(n) denotes the residual noise,
+                                                                              S^(z) is the estimate of S(z), x(n) stands for the reference signal,
+the transfer function of P(z) can be well modeled by nonlinear                d(n) denotes the undesired signal, and xe(n) denotes the expanded
+
+function [33,54].                                                             input vector. The Volterra ANC system utilizes truncated Volterra
+
+   On the other hand, the secondary plant S(z) models the sig-                series as a nonlinear expansion. The filter output y(n) of these al-
+
+nal converters (A/D and D/A), power amplifiers, and transducers               gorithms can be represented by
+(actuators or speakers). The nonlinear effect may be caused by
+overdriving the electronics or the speakers/transducers in the sec-                    Q M-1                M-1                                          q
+ondary path [55], and the amplifier may be in saturation [56]. In
+these cases, the nonlinear characteristics should be considered in            y(n) =                  · · · hq(m1, . . . , mq) x(n - mi)                                                (1)
+the mathematical model for enhanced performance. In research ex-
+periments, the transfer function between the speaker and the error                     q=1 m1=0 mq=0                                                     i =1
+microphone is often modeled by minimum or non-minimum phase
+response.                                                                     where Q denotes the order of nonlinearity, M is the memory
+
+    Apart from the above two cases, some nonlinear distortions                length, and hq(·) is the qth-order Volterra kernel. The filter output
+may come from the components of the control system. The most
+common source of nonlinearity in ANC systems is the actuator. The             of (1) can be compactly rewritten as
+control actuator has typically nonlinear response characteristics,
+when it excites the frequency of interest and its related harmonics           y(n) = hT   x  T  (  n  )  ,  x2T  (  n  )  ,  .  .  .  ,  x  T  (  n  )                                  (2)
+at the same time, and it is hoped that the ANC system will com-                              1                                              Q
+pensate and overcome such adverse effect. Furthermore, the noise
+arises from dynamic systems and as such, the noise may be a non-              where h denotes the filter coefficient vector, (·)T is the transposi-
+linear and deterministic signal [24]. For example, it is known that           tion, x1(n) = [x(n), x(n - 1), . . . , x(n - M + 1)]T, and the th j-order
+the noise from blowers, grinders, airfoils, and fans is shown to be           input vector x j (n) can be gained recursively by
+chaotic [57,58]. The type and examples of nonlinearities present in
+ANC systems are summarized in Table 2.                                        x j (n) = x1(n) x j-1(n), j = 2, 3, . . . , Q                                                             (3)
+
+    In these cases, the linear ANC techniques cannot fully utilize            where represents the Kronecker product.
+the coherence in the noise and achieve suboptimal performance.
+To tackle these limitations, both the models and the algorithms                   In the general case with memory size M and nonlinearity order
+utilized in ANC must be properly re-designed, resulting in NLANC.                                                                                                              (M+Q )!
+There are two problems which should be addressed in NLANC:                    Q,  the  number      of       coefficients                 can         be  computed  by  N c  =   M!Q !   - 1.
+what are the practical performance characteristics of nonlinear
+model in this implementation, and what are the details of an al-              We can observe that the number of model coefficients grows in
+gorithm which can be used to adapt a nonlinear architecture for
+NLANC implementation.                                                         MQ , causing an exponential dimension increase. Therefore, using a
+
+3. NLANC algorithms                                                           truncation strategy to limit the value of Q is indispensable in prac-
+
+    The modeling accuracy of NLANC systems is crucial for meeting             tice. For Q = 2, the SOV-ANC algorithm is obtained, whose filter
+the performance requirements of noise reduction level. This sec-
+tion presents different approaches for the design of NLANC.                   output can be expressed as follows [24]:
+
+                                                                                                                  M-1
+
+                                                                              y(n) = hTxe(n) = h1(m1 )x(n - m1 )
+
+                                                                                                                  m1 =0
+
+                                                                                          M-1 M-1
+
+                                                                                       +                         h2(m1, m2)x(n - m2)x(n - m1)                                           (4)
+
+                                                                                          m1=0 m2=m1
+
+                                                                              where the expanded input vector and filter coefficient vector can
+                                                                              be defined by
+
+                                                                           3
+L. Lu, K.-L. Yin, R.C. de Lamare et al.                                                                 Signal Processing 181 (2021) 107929
+
+                                           Fig. 1. Diagram of feedforward NLANC system.
+
+Fig. 2. Structure of the nonlinear model, where N denotes the nonlinear part and L denotes the linear system. (a) Hammerstein model; (b) Hammerstein-Wiener model; (c)
+Wiener-Hammerstein model.
+
+xe(n) x1T (n), x2T (n) T                                                   in Fig. 2 (b). Although Hammerstein-Wiener type nonlinear sys-
+                                                                           tem has one more nonlinear link than Hammerstein and Wiener
+= [x(n), . . . , x(n - M + 1),                                             models, its essential feature is still a series of static nonlin-
+                                                                           ear link and dynamic linear link. Changing the cascading order
+x2(n), x(n)x(n - 1), . . . , x2(n - M + 1)]T,            (5)               of the static nonlinear part and the dynamic linear part, the
+                                                                           Wiener-Hammerstein model (L-N-L) can be obtained, as shown
+h [h1(0), h1(1), . . . , h1(M - 1),                                        in Fig. 2 (c). The above mentioned models have been applied to
+                                                                           NLANC system, see [60].
+h2(0, 0), h2(0, 1), . . . , h2(M - 1, . . . , M - 1)]T.  (6)
+
+    To obtain a stable performance in a high impulsive process, for        3.3. FLANN-based algorithms
+
+example,  =1.1 or 1.2, two novel algorithms, termed as VFxlogLMP               1) FsLMS-based algorithms: Since the classical FsLMS algorithm
+                                                                           was proposed in 2004, many FsLMS-type algorithms integrated
+and VFxlogCLMP, were proposed [24]. These algorithms are derived           with the FLANN controller were presented in the past decade, of
+from the lp-norm of logarithmic cost and outperform than the con-          which the trigonometric expansion is the most commonly used in
+ventional Volterra FxLMS (VFxLMS) and Volterra filtered-x least
+mean lp-norm (VFxLMP) algorithms. Furthermore, it is shown in              FLANN. Fig. 3 shows the structure of the FLANN, where hi(n) is the
+[25] that, by using the maximum correntropy criterion (MCC), the
+Volterra filtered-x recursive maximum correntropy (VFxRMC) algo-           coefficient of the weight vector at time instant n. The reference sig-
+rithm can obtain good nonlinear capability with normalized and             nal and weight vector can be defined as follows [30]:
+adaptive kernel size schemes.
+
+3.2. Hammerstein ANC algorithms                                            xe(n) {x(n), sin[ x(n)], cos[ x(n)], . . . ,
+
+                                                                           sin[b x(n)], cos[b x(n)], . . . , x(n - M + 1),
+
+    As the type of point-wise nonlinear expansions, the Hammer-            sin[ x(n - M + 1)], cos[ x(n - M + 1)], . . .
+stein system model is regarded as the class of truncated Volterra
+filters. The basic Hammerstein system (N-L) model is comprised of          sin[b x(n - M + 1)], cos[b x(n - M + 1)]}T,      (8)
+a cascade connection of a memoryless nonlinearity in series with
+a linear system (see Fig. 2 (a)). The input-output mapping of the          h(n) [h1(n), h2(n), . . . , hM(2b+1)(n)]T        (9)
+memoryless nonlinearity can be expressed in the form of polyno-
+mial expansion                                                             where b is the order of the FLANN filter. The number of coefficients
+
+g(n) = p1x(n) + p2x2(n) + . . . + pMxM(n)                (7)               of the FLANN filter can be calculated by Nc = M(2b + 1). From this
+
+where p j, j = 1, 2, . . . , M denotes the jth order coefficient. Com-     result, we can see that the main advantage of FLANN-based algo-
+bining the Wiener model (L-N), Hammerstein-Wiener model (N-                rithms is that it owns less computational burden than the Volterra
+L-N) is closer to the actual nonlinear system than Hammerstein             ANC algorithm.
+model. The structure of Hammerstein-Wiener model is shown
+                                                                               In [30], the FsLMS algorithm was devised for multi-channel
+                                                                           NLANC. To achieve moderate computational complexity, the data
+
+                                                                        4
+L. Lu, K.-L. Yin, R.C. de Lamare et al.                                                                      Signal Processing 181 (2021) 107929
+
+Fig. 3. Structure of the FLANN.
+
+block processing is usually preferred. In [61], a fast Fourier trans-     Fig. 4. Structure of the RFLANN, where , , and  are the parameter vector and
+form (FFT)-based block FsLMS algorithm was developed. A RFsLMS
+algorithm was proposed in [32], which minimizes a new logarith-           Ny is the recent samples of the output signal.
+mic cost to obtain enhanced performance in both Gaussian and
+impulsive noise environments. Moreover, it extended the estima-           vergence of gradient descent algorithms, thereby improving perfor-
+tion in [62] to online update parameter. To further enhance perfor-       mance over non-orthogonal LIP filters. In what follows, we review
+mance, two novel NLANC algorithms were proposed based on the              the advances of some orthogonal basis function-based algorithms
+q-gradient method [63]. One of the algorithms was designed for            since 2009.
+Gaussian noise with time-varying q scheme; the other algorithm
+was intentionally designed for AINC.                                          1) Chebyshev ANC algorithms: The Chebyshev nonlinear (CN) fil-
+                                                                          ter based on Chebyshev polynomials, which hold two-fold charac-
+    2) Generalized FLANN: Most of the works focus on develop-             teristics as follows. I) Chebyshev polynomials are a family of or-
+ing new FLANN algorithms, and little attention is paid for im-            thogonal polynomials. II) Chebyshev polynomials converge faster
+proving FLANN itself. In [31], an interesting trial was conducted         than expansions in other sets of polynomials. The Chebyshev poly-
+                                                                          nomials are given by the generating function [33]
+by adding suitable cross-terms between the input signal x(n) and
+sin(b x(n)) cos(b x(n)) with different time shifts, resulting in          Tq+1(x) = 2xTq(x) - Tq-1(x),       (10)
+
+generalized FLANN (GFLANN). Following this main idea, other im-           where x  [-1, 1], T0(x) = 1, and q is the order of Chebyshev
+proved GFLANNs were also developed in [64,65].
+                                                                          polynomials expansion. The closed-form expression for Chebyshev
+    3) Exponential FLANN: Inspired by Taylor series expansion that
+contains all odd powers of sine signal and includes all even powers       polynomials of any order is expressed as
+for cosine signal, an exponential FLANN (EFLANN) filter was pro-
+posed for NLANC, which adds the exponential factor in trigonomet-         [ 2q ]  q q-2i
+ric functional expansion to accelerate convergence speed [66]. Af-
+ter that, some algorithms were developed for further enhancement                                        2 i
+of the EFLANN, such as generalized EFLANN [67] and approximated           Tq(x) = (-1)i 2i x (1 - x )        (11)
+EFLANN [68].
+                                                                          i =0
+    4) Recursive FLANN: Recalling linear ANC systems, the filtered-
+u LMS (FuLMS) algorithm is capable of updating coefficients of            where [q/2] denotes the integer part of (q/2). The corresponding
+the infinite impulse response (IIR) filter. In [69], the IIR filter
+with FuLMS algorithm was convexly combined with an FsLMS fil-             function expansion using Chebyshev polynomials (increased from
+ter, resulting in the FsuLMS algorithm and allowing performance           1 to Q) is expressed as (12).
+enhancement with respect to its component filters. Based on a
+bounded-input bounded-output (BIBO) stability condition, the re-              The novel CN filter was proposed in [33], whose input of CN
+lated work [70] has confirmed that the FuLMS algorithm can also           filter is derived from correlated empirical mode decomposition
+apply for NLANC. In this case, the recursive FLANN (RFLANN) fil-          (CEMD) method. As shown in [33], such Chebyshev ANC algorithm
+ter was proposed that uses past output as part of the input signal.       outperforms the known FsLMS and VFxLMS algorithm in noise re-
+The block diagram of the RFLANN is shown in Fig. 4, where hT =            duction and convergence rate.
+
+[T, T, . . . , T]. As a flexible extension of LIP filters, the RFLANN         2) Fourier ANC algorithms: Despite the FLANN and GFLANN fil-
+                                                                          ter significantly reduce the computational complexity, they do not
+has become another important method. An application of the even           satisfy the condition of the Stone-Weierstrass theorem. Therefore,
+mirror Fourier nonlinear (EMFN) filter to RFLANN has been consid-         they cannot be universal approximators of Volterra filters, i.e.,
+ered for NLANC [71].                                                      these types of filters are unable to model arbitrary systems. In [34],
+                                                                          a Fourier nonlinear (FN) filter was investigated for NLANC, where
+3.4. Orthogonal basis function-based algorithms                           trigonometric basis functions are designed to avoid repetition or
+                                                                          cancellation terms. However, as discussed in [72], the discontinu-
+    The above Volterra ANC algorithms are derived by Volterra se-         ities on the borders of the unit hypercube cause relevant oscilla-
+ries that do not satisfy orthogonal properties. In a comparison,          tions in the Fourier expansion of continuous function.
+the orthogonal property of these LIP filters can ensure fast con-
+                                                                              To tackle this challenge, the EMFN filter was proposed for
+                                                                          approximation, by formulating the truncation of a multidimen-
+                                                                          sional even symmetric generalized Fourier series [72]. For the
+
+                                                                          second-order EMFN filter, the input signal xe(n) is expanded to
+
+                                                                       5
+L. Lu, K.-L. Yin, R.C. de Lamare et al.                                                                                                                    Signal Processing 181 (2021) 107929
+
+Nc = M(M+3) 2 coefficients as (13)1
+
+xe(n) = {1, T1[x(n)], T1[x(n - 1)], . . . , T1[x(n - M + 1)],
+          T1[x(n)]T1[x(n - 1)],
+          . . . , T1[x(n - M + 2)]T1[x(n - M + 1)], T2[x(n)],
+          T2[x(n - 1)], . . . , T2[x(n - M + 1)],
+
+                                                                                                                 T
+
+         . . . , TQ [x(n)], TQ [x(n - 1)], . . . , TQ [x(n - M + 1)]} (12)
+
+xe(n) = sin  x(n) , sin  x(n - 1) , . . . ,
+   2                            2
+
+sin  x(n - M + 1) , cos [ x(n)],
+
+       2
+
+. . . , cos [ x(n - M + 1)], sin  x(n) sin  x(n - 1) ,
+                                       2                      2
+
+. . . , sin  x(n - M + 1) sin  x(n - M + 1) , . . . ,
+      2                                2
+
+sin  x(n - M + 3) sin  x(n - M + 1) , . . . ,                                                                          Fig. 5. Averaged noise reductions (ANRs) of the representative NLANC algorithms,
+2                                   2                                                                                  where the filter length of all algorithms is set to 77 and simulation settings are the
+                                                                                                                       same as Example 1 in [63].
+sin  x(n) sin  T x(n - M + 1) (13)
+2                            2
+
+                                                                                                                       3.5. Bilinear ANC algorithms
+
+xe(n) = {L0[x(n)], L1[x(n)], . . . , LQ [x(n)], . . . ,                                                                    The deteriorated performance of the SOV filter is achieved
+                                                                                                                       when strong nonlinear distortions occurred in the ANC system
+L1[x(n - M + 1)], L2[x(n - M + 1)],                                                                                    [36]. The bilinear filter is developed to address this problem with
+                                                                                                                       shorter filter length. The input-output relationship of the bilinear
+. . . , LQ [x(n - M + 1)]}T                                      (14)                                                  filter is given by
+
+    The EMFN filter was successfully employed to solve NLANC                                                           N 1                           N 1
+problems. The work [73] embedded the EMFN filter inside of the
+RFLANN structure under the BIBO stability condition. Numerical                                                         y(n) = ai(n)x(n - i) + bt (n)y(n - t )
+simulation results indicated that above modified EMFN filters are
+feasible and effective for solving NLANC problems. The work in                                                         i =0                          t =1
+[74] developed two novel EMFN and CN filters with sparse mod-
+eling of nonlinear secondary path, which can significantly reduce                                                      N1 N1
+computational load without sacrificing the control performance.
+Moreover, it showed that the EMFN filter outperforms the CN filter                                                              ci,t (n)x(n - i)y(n - t )      (15)
+with sparse modeling.
+                                                                                                                       i=0 t=1
+    3) Legendre ANC algorithms: The Legendre nonlinear (LN) filter
+is also an orthogonal universal approximators, which shares closed                                                     where ai(n), bt (n), and ci,t (n) are the coefficients with N1, N1 + 1
+properties with FN and EMFN filters. The Legendre polynomial can                                                       and N1(N1 + 1) elements, respectively. The block diagram of the
+be obtained by the following formula [35]:
+                                                                                                                       convention bilinear filter for ANC problem is shown in Fig. 6.
+Lq+1(x) = 1 (2q + 1)xLq(x) - qLq-1(x) q > 2,
+                                                                                                                          As can be seen, the bilinear filter has x(n), y(n), and x(n -
+              q + 1                                                                                                    i)y(n - t ) with different time shifts. An update method, namely
+
+                                                                                                                       diagonal-channel structure, was proposed in [75]. This structure
+
+                                                                                                                       updates the weights of these terms independently to acquire
+
+                                                                                                                       improved performance. By using this structure, the FxLMS and
+
+where Lq(x) denotes the qth order Legendre polynomial derived                                                          filtered-x recursive least square (FxRLS) algorithms were proposed
+                                                                                                                       and a counterpart with sequential channel update was developed
+
+                                                                                                                       [75]. Using the properties of the diagonal-channel can also reduce
+
+from the solution of the differential equation           d    (1 - x2 ) dy dx  +                                       the computational complexity of the bilinear filter [76,77]. In [78],
+                                                         d x                                                           two diagonal strategies were devised for the bilinear filter in the
+                                                                                                                       context of NLANC system, which omits some diagonal elements
+q(q + 1)y = 0 and L0(x) = 1. The expanded input vector of the LN
+                                                                                                                       to significantly reduce the computational complexity by sacrificing
+filter is shown in (14). In 2013, a new algorithm was suggested in                                                     performance of the algorithm.
+
+[35], which uses a cascade structure of FLANN and LN filters. Since                                                        In recent years, the FLANN-inspired bilinear filters [36-
+
+the LN filter requires x  [-1, 1] for stability, a function tanh(·) is
+
+used to link the output of FLANN and the input of the LN filter.                                                       38,79,80] received much attention owing to their good modeling
+                                                                                                                       capability. For the ANC system with saturation nonlinearity, a gen-
+Simulation results demonstrated improved performance as com-                                                           eral function expansion bilinear filter with a 3-D diagonal-channel
+
+pared to the FsLMS algorithm [35].
+
+We compare representative NLANC algorithms in Fig. 5 for a                                                             structure was proposed, where a trigonometric-based FLANN ex-
+
+scenario described in [63], where the LMS algorithm is utilized to                                                     pansion diagonal-channel structure bilinear filter is presented [37].
+
+update weight vector, and  = 2 is used as the reference signal.                                                        Aimed at improving the performance of a control system with a
+                                                                                                                       nonlinear secondary path, a FxLMS algorithm using reweighted bi-
+The results show that the SOV filter has the best performance, fol-
+
+lowed by the LN filter and the CN filter, which have comparable                                                        linear filters was proposed and a generalized filter to model dif-
+                                                                                                                       ferent nonlinear secondary paths was explored in [79]. In [38],
+noise residual performance.                                                                                            the FLANN was introduced to the bilinear filter for NLANC, which
+
+  1 The length of SOV filter has the same calculation as the second-order EMFN                                         adapts the coefficients by diagonal-channel structure and achieves
+filter.                                                                                                                refined performance than the FLANN and GFLANN. Then, the leaky
+
+                                                                                                                    6
+L. Lu, K.-L. Yin, R.C. de Lamare et al.                                                                                                              Signal Processing 181 (2021) 107929
+
+                                                                        Fig. 6. Structure of the bilinear filter.
+
+Table 3
+Number of coefficients for the algorithms.
+
+Nonlinear model     Number of coefficients                              Special instruction
+
+Volterra filter     Nc = M!Q! (M+Q )! - 1                               SOV filter: Nc = 2 M(M+3)
+Hammerstein filter                                                      The nonlinear part of Hammerstein filter does not require historical input and output information
+FLANN filter        Nc = M + LF                                         Based on trigonometric expansions
+GFLANN filter                                                           Generally, b = 1 in the GFLANN filter
+EFLANN filter       Nc = M(2b + 1)                                      Require exponential operation
+CN filter                                                               Generally, Q  3 in the CN filter
+                    Nc = 2M + 1
+FN filter
+                    Nc = M(2b + 1) + 1
+LN filter
+Biliner filter      Nc = 1 + Q (M + 1) + M
+
+                            Q -1         j Q Q-1 M+ j (for Q th order)                                      M(M+3)
+                                                                                                                 2
+                    Nc = 2                                              Second-order  ENFN   filter:  Nc =          ENFN  filter  is  suitable  for  modeling  strong  nonlinearities
+
+                            j=0
+
+                    Nc = QM + 1                                         Suitable for modeling mild and medium nonlinearities
+                                                                        Suitable for modeling strong nonlinearities with saturated signals
+                    Nc = N21 + 3N1 + 1
+
+bilinear filter with filtered-error LMS (FeLMS) and PU scheme was                                The chaotic noise commonly exists in NLANC system, and some
+subsequently developed to enhance stability and reduce computa-                              researchers developed various algorithms to control such type of
+tional complexity [36]. The number of coefficients for the NLANC                             noise. The work in [85] considers ANC of a mixture of tonal and
+algorithms based on nonlinear expansion is outlined in Table 3,                              chaotic noise via the hybrid FLANN method. The effort in [58] first
+where LF denotes the FIR memory size and Nc denotes the number                               explored the characteristic of logistic chaotic noise and applied
+of coefficients of the order Q.                                                              FLANN for active chaotic noise control. It was observed that the
+                                                                                             logistic chaotic noise 1 is highly broadband, while the logistic
+3.6. Discussion                                                                              chaotic noises 26 are mostly broadband with some frequency
+                                                                                             notches [58]. To enhance readability, we summarize these schemes
+    In this subsection, we discuss some existing strategies in NLANC                         in Table 4.
+systems. Most of these schemes have been reviewed in Part I of
+this work, and can be extended to solve the ANC problem under                                4. Heuristic-based ANC algorithms
+nonlinear distortions.
+                                                                                                 Both linear and nonlinear ANC tasks can be solved by trans-
+    The remote microphone technique (RMT) has been used for                                  forming into a global optimization problem. Especially for NLANC
+NLANC in the past decade. In [81], the RMT is incorporated into                              systems, such problems are well-suitable for considering global op-
+the empirical weight update (EWU) algorithm to circumvent the                                timization problems, because the nonlinear secondary path may
+slow convergence problem of stochastic approximation methods                                 cause the conventional adaptive filter to suffer from the local
+and PSO algorithms. Based on FLANN controller, a novel FeLMS al-                             minima trapping phenomenon in non-convex or non-deterministic
+gorithm with RMT was proposed in [82], which exhibits its com-                               polynomial (NP)-hard problems, and it turns out the degraded re-
+putational advantages and reliable performance for the sinusoidal                            duction performance. The first heuristic algorithm used to optimize
+signal. Its FsLMS counterpart also has been proposed in [57].                                ANC was the genetic algorithm (GA) in 1994 [3]. Afterward, the
+                                                                                             PSO algorithm was applied to the NLANC problem in 2006. The
+    As stated in Part I, the convex combination scheme can sub-                              relevant time line can be referred to Table 1.
+stantially improve the performance of linear ANC. Such a strategy
+is also applicable to NLANC systems. The first attempt of convex                                 1) Genetic algorithms: The GAs are inspired by Darwin's evo-
+combination for NLANC can be found in [83]. In this work, two dif-                           lution theory, which seeks the optimal solution by studying the
+ferent nonlinear modeling methods, FLANN and Volterra, were per-                             evolutionary process of simulation. In [88], the adaptive GA (AGA)-
+formed by convex combination to obtain enhanced performance.                                 based ANC system was designed for various environments. Besides,
+                                                                                             this work confirmed that the AGA can suppress the nonlinear noise
+    The MCC not only has been used to the Volterra FxRLS al-                                 interference without estimating the secondary path. The use of the
+gorithm [25], but also has been applied to normalized versions                               interior-point method (IPM) for GA-ANC has also been proved to
+of the FsLMS algorithm [84]. As a generalization of the min-                                 be an effective technique [89]. The IPM searches for the optimal
+imum error entropy (MEE) criterion, Rényi's entropy has been                                 solution by traversing the internal feasible region, and it shows ex-
+applied to NLANC. A generalized filtered-x integrated-evaluation-                            cellent performance for solving linear or quadratic constraint opti-
+criterion-based gradient descent (GFx-IECGD) algorithm was pre-
+sented, whose update equation is mixed by the mean square error
+(MSE) criterion and Rényi's entropy [27].
+
+                                                                                      7
+L. Lu, K.-L. Yin, R.C. de Lamare et al.                                                                                      Signal Processing 181 (2021) 107929
+
+                                         Table 4
+                                         Contributions of the algorithms in Section 3.
+
+                                         RMT                     Convex Combination algorithms     Entropy-based algorithms
+                                         [57,81,82]              [69,83,86]                        [25,27,84]
+                                         Chaotic signal control  Leaky algorithms                  PU-based algorithms
+                                         [36,38,57,58,80,85-87]  [36,80]                           [36]
+
+mization problems. Benefiting from this, GA-ANC systems can fur-                           in [97]. The schematic of the NLANC system with a spline adap-
+ther enhance reduction performance for various noises.
+                                                                                           tive filter is shown in Fig. 7, where U (n) is the filtered signal of
+    2) Backtracking search algorithms: Closer to the GA is the back-                       u(n) = [u3(n), u2(n), u(n), 1]T, and  denotes the span index, and
+tracking search algorithms (BSA), which are a population-based it-                         u(n) is the local parameter, which can be computed by
+erative evolutionary algorithm (EA) designed to prevent the algo-
+rithm from falling into a local optimum. In [90], the BSA integrated                        = ys(n) + C - 1                  (16a)
+with sequential quadratic programming (SQP) was proposed for                               x               2
+ANC systems with sinusoidal signal and complex random signal,
+                                                                                           u(n) = ys(n) - ys(n)              (16b)
+which can obtain improved performance without modeling S(z).                                    x             x
+
+    3) PSO algorithms: Based on the competition and cooperation                            where ys(n) denotes the output of the finite impulse response (FIR)
+mechanism between the particle swarm, the PSO can produce a
+swarm intelligence to guide the optimization search. By exploiting                         filter, x denotes the gap between the control points, C denotes
+                                                                                           the total number of control points in the activation function, and
+the soft bound tanh{·} as the saturation nonlinearity module of the
+                                                                                            · stands for the floor operation. Then, the generated parameters
+secondary path, the PSO has been applied to ANC in [39]. Specifi-                          pass through the adaptive look-up table (LUT) and are interpolated
+cally, it can tackle the cases with varying saturation grades of both                      by a local low order polynomial spline curve. Hence, the output of
+reference and secondary paths. Similar to the GA, the PSO-ANC can                          the spline adaptive filter is
+also reduce noise without exact estimation of the secondary path,
+see [40,41,91]. As a nonlinear FLANN extension of [40], the algo-                          y(n) = uT(n) q                    (17)
+rithm in [92] was trained by PSO for multi-channel NLANC sys-
+tems, which is subsequently developed into a decentralized ver-                            where is the pre-computed spline basis matrix and q is the con-
+sion. In the PSO-literature, a less common exploration strategy is                         trol point vector.
+the Wilcoxon norm [93], which has been proved to have effective-
+ness for data contaminated by outliers. It has been shown through                              As an initial step towards multi-channel spline adaptive filters,
+simulation experiments in [93] that considerable reduction can be                          the algorithm proposed in [98] has obvious advantages in terms
+obtained as compared with the MSE criterion.                                               of computational complexity and final MSE level when compared
+                                                                                           to the multi-channel VFxLMS and FsLMS algorithms. Furthermore,
+    4) Bacterial foraging optimization algorithms: The bacterial for-                      the advantages of the FIR spline adaptive filter can also refer to
+aging optimization (BFO) is based on the foraging behavior of Es-                          [99]. In 2016, a novel infinite impulse response (IIR) spline adap-
+cherichia coli bacteria in human intestine. Bacteria look for nu-                          tive filter was proposed [45], which corresponds to the use of a
+trients to maximize the energy gained in a unit of time. They                              feedback scheme and the FuLMS algorithm. Compared with the FIR
+go through different stages of chemotaxis, swarming, reproduction                          filters, the main merit of using IIR filters is their implementation
+and elimination-and-dispersal. Such BFO algorithms have been suc-                          efficiency.
+cessfully employed to adapt the coefficients of the NLANC con-
+troller, which outperforms the standard GA-ANC by nearly 5dB in                            5.2. KAF-ANC algorithms
+steady-state [94,95].
+                                                                                               The kernel trick has become rather popular and has been suc-
+    In addition to the above mentioned heuristic algorithms, other                         cessfully applied to adaptive filtering. The key idea of the KAF is to
+heuristic algorithms have been studied in the ANC system. The                              recast the input data from input space U into a high-dimensional
+firefly (FF) algorithm was a classical optimization and has been                           feature space F via a reproducing kernel Hilbert space (RKHS). As
+used to NLANC. The new algorithm cascades the FLANN and FIR                                a result, the inner product operations in linear adaptive filters are
+filter, and adopts the FF algorithm to obtain coefficients [96]. The
+fireworks algorithm (FWA) is also a swarm intelligence algorithm                           translated to the calculation of a kernel function  (·) in the feature
+inspired by the fireworks explosion. The research in [42] reveals
+the profound optimization capacity of the three variants of FWA                            space without knowing the exact nonlinear mapping.
+for NLANC.                                                                                     The KAF was first applied to NLANC system in 2009 [43]. The
+
+5. Novel NLANC methods emerging in past decade                                             basic block diagram of the ANC with KAF is shown in Fig. 8, where
+
+    In this section, we present some novel NLANC approaches, such                           : U  F denotes feature vector. By using Mercer theorem, the in-
+as spline ANC algorithms, KAF ANC algorithms, and nonlinear dis-
+tributed ANC algorithms, proposed in the last ten years.                                   ner products in RKHS can be calculated as
+
+5.1. Spline ANC algorithms                                                                  (X, X ) = (X )T(X ) (18)
+
+    In 2013, the spline adaptive filter was originally proposed for                        where X, X  U and the kernel function  (·) often uses Gaus-
+nonlinear system identification, whose adaptation is based on a                            sian kernel, which is expressed as  (X, X ) = exp - X - X 2 ,
+spline function [44]. As shown in [44] and references therein, the                         where  is the kernel size and · denotes the l2-norm. Finally,
+spline adaptive filter enjoys good nonlinear modeling performance
+in diverse applications and owns low computational cost. Such                              the filter output can be expressed as
+spline adaptive filter was extended to address NLANC problem
+                                                                                           n
+
+                                                                                           y(n) = a j (X ),(X j )            (19)
+
+                                                                                           j=1
+
+                                                                                           where a j denotes the coefficient and · denotes the inner product
+                                                                                           operation. The work in [43] considered the scenario that chaotic
+
+                                                                                        8
+L. Lu, K.-L. Yin, R.C. de Lamare et al.                                                                      Signal Processing 181 (2021) 107929
+
+                                         Fig. 7. Structure of the NLANC system with spline adaptive filter.
+
+                                         Fig. 8. Structure of the NLANC system with KAF.
+
+noise and only the primary path P(z) is nonlinear, which has cer-          ror sensors. Very recently, a new nonlinear distributed ANC system
+                                                                           was presented by using incremental implementation and adaptive
+tain limitations. The reference [100] made up for this shortcom-           EFLANN expansion, which exhibits lower computational cost than
+ing, which took the nonlinear secondary path into account. More-           the distributed ANC system with the FsLMS, VFxLMS, and conven-
+over, some multi-tonal and sinusoidal noise sources are simulated.         tional EFLANN controller [102].
+The choice of the kernel function is crucial to the performance
+of the kernel algorithm, and most works employed Gaussian ker-             6. Recent implementations and applications of ANC
+nel as a default choice due to its universal approximating capa-
+bility, numerical stability, and desirable smoothness. The work in             In this section, the application development of ANC in the past
+[101] specifically discussed the selection of different kernel func-       decade is discussed. Before we start, it should be highlighted that
+tions. Three novel kernel functions, namely logistic kernel, tan-          many applications have been developed before last decade (see
+sigmoid kernel, and inverse-tan kernel, were proposed and subse-           time line of ANC applications in Table 5). These works have laid
+quently applied to KAF for NLANC. Its simulation results demon-            the foundation for the implementations and applications of ANC in
+strated the improved performance by using new kernel functions.            the past ten years.
+
+    It should be noted that the above mentioned KAF and spline             6.1. ANC implementation
+adaptive filters have been exhibited improved performance as
+compared to the conventional FsLMS and VFxLMS algorithms                       1) DSP implementation: ANC techniques have been implemented
+[97,100]. Hence, we can conclude that the KAF and spline adaptive          in real-time systems such as digital signal processor (DSP), field
+filters are good candidates for NLANC.                                     programmable gate array (FPGA), and very large scale integration
+                                                                           (VLSI). Several hardware implementations dedicated to studying
+5.3. Nonlinear distributed ANC algorithms                                  lower-power consumption and small area realization have been re-
+                                                                           ported. The compensated-FxLMS algorithm implemented by fixed-
+    The idea of a nonlinear distributed ANC system is basically de-        point DSP was presented in [113]. However, such method requires
+rived from a linear distributed ANC network. The difference lies           a specialized measurement of the devices in the control system.
+in the use of function expansion strategies. In [46], a nonlinear          In addition, the round-off and quantization errors will change
+distributed multi-channel ANC algorithm was proposed followed              with the programmer's code implementation, and the correct val-
+by the diffusion strategy, where the LN filter is employed and             ues of the phase and amplitude compensation factors need to
+both primary and secondary paths are considered to be nonlin-              be determined [114]. An improvement of fixed-point DSP method
+ear. Fig. 9 shows the structure of the nonlinear distributed multi-        was proposed in [114], which added feedback and communication
+channel ANC algorithm, where i = 1, 2, . . . , I, I denotes the number
+of loudspeaker, k = 1, 2, . . . , K, and K denotes the number of er-
+
+                                                                        9
+L. Lu, K.-L. Yin, R.C. de Lamare et al.                                                                                           Signal Processing 181 (2021) 107929
+
+                                         Fig. 9. Structure of the nonlinear distributed multi-channel ANC system.
+
+Table 5
+Time line of ANC applications.
+
+Years Authors                                                    Contributions                                                    References
+
+1993                                     Craig and Angevine      Active transformer noise control                        control  [103]
+1994                                     Sutton et al.           ANC for road noise                                               [104]
+1997                                     McJury et al.           ANC for fMRI                                                     [105]
+2002                                     Gan and Kuo             Integrated feedback ANC for headset                              [106]
+2002                                     Qiu et al.              Waveform synthesis method for active transformer noise           [107]
+2003                                     Jakob and Möser         ANC with double-glazed windows                                   [108,109]
+2003                                     Pinte, Desmet, and Sas  Iterative learning control algorithm for ANC systems             [110]
+2005                                     Zhou et al.             Back-propagation (BP)-FeLMS algorithm                            [111]
+2006                                     Kuo, Mitra, and Gan     Feedback ANC for headphone                                       [112]
+
+error2 Considering the implementation of different structures in                        rithm, the intentionally proposed delay FsLMS algorithm becomes
+fixed-point DSP, a detailed performance comparison of FxLMS,                            easy to use in practice.
+FxNLMS, IIR, and subband ANC algorithms was presented in [115].
+The research results showed that the FxLMS and its variant are                          6.2. ANC through open window
+more suitable for ANC implementation and the fixed-point DSP has
+about 2dB degradation as compared with its floating-point coun-                             ANC through open windows technique can attenuate noise
+terpart.                                                                                while maintaining natural ventilation in dwellings [120-124]. The
+                                                                                        finite-element-based ANC methods have been used to establish the
+    2) FPGA implementation: The DSP owns limited processing ca-                         control performance and the passive attenuation offered by the
+pability and it is intended for low sampling rate applications. In                      open window [125,126]. In [125], an ANC system with 16-channel
+contrast, the performance of the FPGA implementation largely de-                        and secondary sources distributed evenly across the opening was
+pends on the selection of FPGA device. Several algorithms and                           implemented with a full-sized window, yielding more than 5dB be-
+architectures were proposed for performance enhancement with                            low 2000Hz overall attenuation. However, the size of an opening
+high-speed computational architecture [116-118]. The novel al-                          influences the control performance and the opening windows may
+gorithm, called filtered-weight FxLMS (FwFxLMS), was proposed                           also introduce noise at the same time [127]. To avoid this issue,
+[116]. The FwFxLMS algorithm can efficiently increase the upper-                        a scheme of small opening in the wall was implemented in [128].
+bound of the step size and as such, accelerating the convergence                        To design an ANC system with reduced computational complexity
+rate of algorithm without affecting the stability. Devoted to reduc-                    of DSP implementation and acceptable level of noise reduction, a
+ing computational load of multi-channel ANC system, a novel ar-                         novel multi-channel ANC method was proposed for opening win-
+chitecture of FPGA was proposed to solve the conflicted require-                        dow. By preprocessing the error signals, the number of inputs to
+ment between throughput and hardware resource consumption by                            the controller can be decreased and a good performance can be
+using parallel execution and folding [117].                                             achieved when it employs 4-channel ANC system with 0.2 × 0.2m
+                                                                                        opening window [129].
+    3) VLSI implementation: The VLSI provides a large amount of cal-
+culation in a small area, and the resource assumptions is signifi-                      6.3. Headphone application
+cantly reduced compared to FPGA and DSP. The effort in [119] fo-
+cused on VLSI implementation on the FxLMS and FsLMS algo-                                   Many headphone applications of ANC were developed based on
+rithms. Prior to this, few literature considered the implementation                     DSP, FPGA and VLSI implementations [130]. Some algorithms fo-
+of NLANC algorithms. By devising folded structures of the algo-                         cus on implementing ANC headphones with less resources, head-
+                                                                                        tracking problems, multi-channel, and multi-reference [131-133].
+  2 The definition of communication error can be found in Eq. (12), Part I of this
+work.
+
+                                                                                    10
+L. Lu, K.-L. Yin, R.C. de Lamare et al.                                   Signal Processing 181 (2021) 107929
+
+The most popular algorithm used in ANC headphone is the feed-             achieve spatial ANC is to employ the multi-channel FxLMS al-
+back FxLMS algorithm. A number of (in-ear) headphones based on            gorithm. However, such method cannot guarantee that the spa-
+the feedback ANC system were implemented [134,135]. Their per-            tial noise is also reduced, and the calculation cost is high. To
+formance comparison of feedback ANC system with different cir-            address this drawback, several mode-domain methods were pro-
+cuit implementations can be seen in [136]. In [137], a hybrid feed-       posed in [156-159]. Such methods can significantly reduce com-
+back ANC scheme was presented by making use of the combina-               putational complexity since the mode-domain conversions can re-
+tion of classical and adaptive feedback ANC techniques. Consider-         duce the cross-correlations between transducers. In addition, the
+ing that system delay will limit implementation performance in            filter update can be computed by a mode-independent manner.
+practice, this work also proposed a mixed analog-digital realization      Very recently, a new spatial ANC method was developed, where
+to maintain very low system delay in the classic part and enable          the higher-order source (HOS) scheme is used to improve control-
+adaptive ANC components to adapt to the digital domain.                   lability of efficiency and error [160].
+
+    In comparison, a feedforward structure was adopted for bin-           6.6. fMRI acoustic noise control
+aural ANC system in [138]. It is worth pointing out that the per-
+formance improvement of [138] also benefits from the use of the               The problem of fMRI acoustic noise control is a research focus
+parametric array loudspeakers (PAL) as the secondary sources. Sim-        in the application of ANC technology. Studies showed that when
+ilar techniques have been applied to ANC problems such as steer-          magnetic resonance imaging (MRI) scans, it can generate acoustic
+able PAL [139] and curved-type PAL [140]. Also considering the use        noise up to 130dB [52]. So far, a large number of ANC algorithms
+of a binaural ANC system, a combined bilateral-binaural ANC (CB-          were proposed for fMRI problem, see [161,162] and references
+BANC) system was proposed for closed-back headphones [141]. By            therein. The followed articles implemented by head-mounted ANC
+switching between the binaural and bilateral implementation, the          system with piezoelectric loudspeakers and optical microphones
+improved performance can be obtained as compared to the con-              [163] or RMT [164]. The effectiveness of the FxRLS-FxNLMS algo-
+ventional bilateral ANC headphones.                                       rithms on fMRI noise control was validated that the hybrid al-
+                                                                          gorithm can gain a very fast convergence [52]. This group then
+    The ANC headphone application has also embedded some tech-            proposed an improved parallel feedback ANC system [165], which
+niques discussed above. For example, in [142], the virtual sens-          parallels two FxNLMS algorithms with the NLMS decomposition to
+ing method was adopted. Particularly, in [142], the FsLMS algo-           achieve exceeding 40dB noise attenuation level.
+rithm with nonlinear virtual microphone was developed for active
+headrest application, which considers the nonlinear distortion in             The adaptive comb filters (ACFs) that perform a coordinated
+the presence of primary noise. The prediction filter was another          search, have been applied to fMRI noise control. Based on the pre-
+method applied in feedback ANC headphones, which does not need            vious works, i.e., SONIC (self-optimizing narrowband interference
+any real-time coefficient updates and is therefore very economical        canceller) [166-168], the ACF incorporated SONIC algorithm was
+[143] .                                                                   suggested for active fMRI noise control [169]. This algorithm can
+                                                                          track the fundamental frequency and the amplitude of different
+6.4. Zone-of-quiet based approach                                         frequency components of non-stationary harmonic signals embed-
+                                                                          ded in white measurement noise. However, its reduction level is
+    The traditional ANC technique can only minimize the noise             limited to 20dB. For performance improvement, a discrete Fourier
+level at the location where the error microphone is placed. Cor-          transformation (DFT)-based frequency-domain ANC algorithm for
+respondingly, a zone-of-quiet (ZoQ) is created around this error          fMRI noise control was proposed in [170], which can achieve ap-
+microphone. However, unless multiple sensors are used, it is not          proximately 35dB overall reduction in the frequency range of in-
+technically possible to control or monitor noise levels in ZoQ. The       terest.
+applications of spherical loudspeakers arrays for ANC has been pre-
+sented to extend ZoQ [144]. Following the idea of [144,145], sev-         6.7. Periodic noise control
+eral improvements were proposed including linear array [146], and
+RMT-based methods [147]. To design larger ZoQ, a method was                   Based on different characteristic distributions with time, the ex-
+proposed by introducing one and two secondary sources, which              haust noise can be divided into three types: steady, periodic, and
+aimed at maximizing the area of the 10dB quiet zones [148]. By            intermittent [171]. Among the three types, the periodic noise is the
+introducing feedforward adaptive ANC structure to control shape           most widely encountered and has great research significance. The
+and extension of ZoQ, a new avenue was proposed in [149], which           repetitive impulsive noise belongs to a category of periodic noise
+has capability of creating a controllable spherical quiet zone via a      and has many practical backgrounds. For example, when com-
+compensation factor. Moreover, in [150], a ZoQ method equipped            pressed air escapes regularly through the exhaust pipe, it generates
+with memetic algorithm (MA) and distributed adaptation has been           repetitive impulsive noise, up to 120dB. In the past decade, many
+proposed, which holds high potential for practical applications.          studies have focused on and analyzed this kind of noise. Similarly,
+                                                                          the FxLMS algorithm and its variants can also be used to attenuate
+    The ZoQ based methods have been integrated into ANC for               this noise [172].
+speech enhancement in hearing aids. In [151], the ANC with noise
+reduction strategy was proposed for a specific ZoQ. Following a dif-          The iterative learning control (ILC) algorithm is another method
+ferent direction, the method in [152] developed two schemes. The          that can effectively control repetitive impulsive noise, which can be
+former method is based on the MSE criterion at a remote point,            regarded as the adaptive feedforward algorithm. In ILC controllers,
+and the latter method is based on an average MSE criterion over a         the control signal is adapted to the specific repetitive of transient
+desired ZoQ. Moreover, several approaches on integrated ANC and           noise. It runs repetitively in an open-loop over a finite time inter-
+noise reduction for hearing aids have been proposed, such as those        val to reduce the same discrete interference at each time instant.
+proposed in [153-155] and references therein.                             Related to the ILC method is the well-known repetitive control (RC)
+                                                                          algorithm, which can also be interpreted as the adaptive feedfor-
+6.5. Spatial ANC approach                                                 ward algorithm. The ILC and RC algorithms share the same core
+                                                                          idea, that is, it should be possible to improve the performance of a
+    Spatial ANC is designed to attenuate noise within a specific          system that repeatedly performs the same repetitive task. The dif-
+space. Since there is not only one space point but the space must         ference is that the RC algorithm has continuously active property.
+be controlled, many transducers are needed. A direct method to
+
+                                                                      11
+L. Lu, K.-L. Yin, R.C. de Lamare et al.                                    Signal Processing 181 (2021) 107929
+
+Table 6
+Implementations and applications of NLANC in Section 6.
+
+Contributions                            Benefits                                                                              References
+                                                                                                                               [119]
+FsLMS implementation                     The proposed delayed block FsLMS (DBFsLMS) structure involves 58% less area-delay     [196]
+                                         product and 41% less energy per sample than the FxLMS structure.                      [57,82,142]
+Generalized filter bank based nonlinear  The new algorithm is suitable for a headrest application with head movement, and the
+ANC algorithm                            effective area of active headrest is achieved as high as 45 cm × 45 cm.
+NLANC with virtual microphone control    These methods can control noise at a remote location when the system is nonlinear.
+
+    It demonstrated in [173,174] that the drawbacks of conventional        rooms [194], electroencephalogram (EEG) signal analysis [195] have
+ILC and RC methods are high computational complexity and low               also been studied. These applications show the great application
+robustness of the controllers. To solve these problems, a novel            potential of ANC.
+strategy to design non-causal ILC and RC filters was described, with
+emphasis on the application of ANC. It can achieve 4dB noise re-               We note that a number of papers on NLANC assume the pres-
+duction with the frequency-domain ILC filter. Owing to the fact            ence of nonlinearities that are difficult to encounter in real-world
+that the ILC and RC algorithms are closely related, many design            applications. Therefore, most of above mentioned works are based
+methods can be used in both algorithms. For example, in [175],             on linear assumptions and do not consider nonlinear characteris-
+a non-causal transversal FIR filter was combined with the optimal          tics. To clearly show the benefits offered by a nonlinear approach
+ILC algorithm for active repetitive impulsive noise control, and then      with respect to the linear one, the implementations and applica-
+it was applied to the optimal RC algorithm [171].                          tions of NLANC are summarized in Table 6.
+
+6.8. Transformer noise control                                             7. Future research challenges
+
+    Transformer noise is typically characterized by even and mul-              Some future challenges of ANC have been discussed in [56,197].
+tiples of the line frequency of the fundamental and harmonic               In this section, we present a number of promising directions for
+frequencies. Generally, the fundamental frequency does not vary            future ANC research from other perspectives.
+by more than ±0.5% [53]. Therefore, using the internally syn-
+thesized preset frequency signal as a reference signal for trans-          7.1. Theoretical analysis of algorithms
+former noise control may be a reasonable way. In [53], the classical
+FxLMS algorithm with an internally synthesized reference signal                As we discussed in Part I of this work, the fractional lower or-
+was proposed, which can obtain a maximum of 15dB noise reduc-              der moment (FLOM)-based algorithms can be effectively used for
+tion. Motivated by the online and offline secondary path model-            AINC. The problem of interest is to analyze the theoretical perfor-
+ing strategy, a novel FxLMS algorithm was presented for 50000KVA
+transformer noise control [176]. Simulations demonstrated that an          mance of the FLOM-based algorithms in the presence of -stable
+84.1096.86% decrease in average sound energy density can be ob-
+tained in a certain area.                                                  noise. However, such a topic is extremely difficult since the vari-
+
+6.9. ANC in vehicles                                                       ance of -stable noise is infinite, leading to some assumptions
+
+    ANC in vehicles requires a good spatial and temporal match-            does not satisfy the conditions. As far as we know, researchers did
+ing between the fields of the actuator or secondary sources [177].
+Spatial matching requires that the wavelength of the acoustic wave         not consider the case in which the error in -stable noise environ-
+for active noise control must be small, whereas time matching de-
+mands the system can adapt to changes in vehicle speed and load            ment is changing across iterations. Moreover, the steady-state and
+[178]. Owing to the fact that ANC has a significant improvement,           transient performance of conventional least mean pth power (LMP)
+particularly at low-frequency and on vehicles with specific prob-
+lems, such technique has been widely used in vehicles [179]. In            algorithm has not been investigated in the presence of -stable
+the past ten years, many prominent companies and corporations
+have proposed effective solutions to this problem, see references          noise. The lack of these analysis foundations causes the analysis
+in [177]. In [180], three feedback ANC systems were investigated           of the FLOM-based algorithms exactly difficult.
+based on internal model control (IMC) architecture and frequency
+discretization method. Moreover, the multi-channel algorithm has               The similar problem also exists in the analysis of LIP algorithms,
+addressed ANC of road noise in vehicles [181,182]. In [182], eight         such as the FN and EMFN. Moreover, since the input vectors of
+reference sensors located around the four wheels were devised to           these algorithms are expanded by different basis functions, the be-
+obtain a broadband reduction of 4dB up to 1kHz. In [183], a vari-          havior of algorithms is more complicated.
+able step-size (VSS) median-least mean square algorithm was pre-
+sented for active rail vehicle interior noise control. In [184] and        7.2. Sparsification for KAF-ANC
+[185], the leaky FxLMS and multi-channel FxLMS algorithms have
+been respectively applied to ANC for yacht.                                    Despite the above KAF algorithms are well applied in NLANC,
+                                                                           there are still problems to be solved. For system identification
+    The ANC technique is quite general and its application is              problem, several KAF algorithms with curb of network size were
+not limited to the above mentioned works. The ANC principle                proposed. Since the network size of the KAF linearly increases with
+has already been used for mobile phones [186], earmuff systems             the number of training data, which means that the filter length is
+[187,188], high-speed elevators [189], mufflers [190], and washing         very high during adaptation. The problem of NLANC is the same
+machines [191]. In [192,193], the single and multi-channel ANC sys-        as that of KAF for system identification. This increase in complex-
+tems have been employed for ventilation duct. Furthermore, new             ity can be harnessed through the application of some sparsification
+problems in the ANC system, such as broadband noise fields in              techniques, for example, the quantized scheme in [48] and the set-
+                                                                           membership scheme in [49]. These strategies can curb the number
+                                                                           of input data into the kernel function at each iteration. If it is de-
+                                                                           tected that not enough new information is carried in the input sig-
+                                                                           nal, it will be abandoned as the redundant data.
+
+                                                                           7.3. The application of internet of things to ANC
+
+                                                                               IoT attracts significant attention in the fields of location, smart
+                                                                           transportation, and signal processing. Based on the concept of IoT,
+
+                                                                       12
+L. Lu, K.-L. Yin, R.C. de Lamare et al.                                        Signal Processing 181 (2021) 107929
+
+the ANC technique has been applied to IoT. By utilizing wireless               Acknowledgment
+communication with acoustics, IoT was brought into the ANC con-
+text, which provided a potential solution to urban noise pollution                 The authors would like to thank the associate editor and the
+[50]. Through DSP implementation verification, the proof of con-               anonymous referees for their valuable comments.
+cept (PoC) system was stated, which allows the concept of IoT to
+be applied in the field of ANC [51]. In this work, the analog cables           References
+were replaced by digital ethernet transmission, resulting in a more
+flexible system that is easier to be rearranged and modified.                     [1] D.P. Das, G. Panda, Active mitigation of nonlinear noise processes using a
+                                                                                       novel filtered-s LMS algorithm, IEEE Trans. Speech, Audio Process. 12 (3)
+    It is noted that existing ANC-IoT schemes rely on the single-                       (2004) 313-322.
+node device, and the impact of practical constraints, such as im-
+pulsive noise, the nonlinear distortions, and distributed implemen-               [2] N.V. George, G. Panda, Advances in active noise control: a survey, with em-
+tation, on the performance of ANC-IoT has not been investigated                        phasis on recent nonlinear techniques, Signal Process. 93 (2) (2013) 363-377.
+yet. Furthermore, as discussed before, ANC can effectively suppress
+the noise in vehicles. Hence, ANC may be specifically applied to                  [3] C.T. Wangler, C.H. Hansen, Genetic algorithm adaptation of non-linear filter
+the Internet of Vehicles (IoV).                                                         structures for active sound and vibration control, in: Proc. IEEE Int. Conf.
+                                                                                        Acoust., Speech, Signal Process., 3, 1994, pp. 505-508.
+7.4. Discussion
+                                                                                  [4] S.D. Snyder, N. Tanaka, Active control of vibration using a neural network,
+    Currently, NLANC has made much progress. In the following,                         IEEE Trans. Neural Netw. 6 (4) (1995) 819-828.
+some future directions that are peculiar to NLANC are presented.
+                                                                                  [5] K.-S. Tang, K.-F. Man, S. Kwong, C.-Y. Chan, C. Chu, Application of the ge-
+   (1) For NLANC algorithms, most of the algorithms are still at                        netic algorithm to real-time active noise control, Real-Time Syst. 11 (3) (1996)
+         the theoretical and laboratory stage, and they are not fully                  289-302 .
+         utilized in practical applications. For the future directions of
+         nonlinear algorithms in NLANC, it needs to curb its compu-               [6] M.O. Tokhi, R. Wood, Active noise control using radial basis function net-
+         tational complexity. Since the nonlinear filtering problem is                 works, Control Eng. Pract. 5 (9) (1997) 1311-1322.
+         inherently infinite dimensional, the substantial increase of
+         data samples can prohibit practical applications of NLANC                [7] P. Strauch, B. Mulgrew, Active control of nonlinear noise processes in a linear
+         algorithms. Therefore, low complexity NLANC algorithms are                    duct, IEEE Trans. Signal Process. 46 (9) (1998) 2404-2412.
+         an important research direction in the future.
+                                                                                  [8] M. Bouchard, B. Paillard, C.T. Le Dinh, Improved training of neural networks
+   (2) Selecting the optimal memory length of the NLANC algo-                           for the nonlinear active control of sound and vibration, IEEE Trans. Neural
+         rithm for the corresponding nonlinear systems is also a re-                    Netw. 10 (2) (1999) 391-401.
+         search direction. In the field of echo cancellation, the mem-
+         ory control scheme of Volterra filter has been studied [198].            [9] L. Tan, J. Jiang, Filtered-X second-order Volterra adaptive algorithms, Electron.
+         However, it has not been investigated in the NLANC adap-                       Lett. 33 (8) (1997) 671-672.
+         tive filtering algorithms. Such a problem is also applicable
+         to the heuristic-based algorithms in NLANC. The optimal size           [10] L. Tan, J. Jiang, Adaptive Volterra filters for active control of nonlinear noise
+         of populations for heuristic-based algorithms is of great sig-                 processes, IEEE Trans. Signal Process. 49 (8) (2001) 1667-1676.
+         nificance to the reduced computational complexity and im-
+         proved performance.                                                    [11] M. Bouchard, New recursive-least-squares algorithms for nonlinear active
+                                                                                        control of sound and vibration using neural networks, IEEE Trans. Neural
+   (3) Further exploration of NLANC technology in specific practi-                      Netw. 12 (1) (2001) 135-147.
+         cal scenarios are required. Currently, NLANC does not seem
+         to find its most suitable breakthrough point for large-scale           [12] G.L. Sicuranza, A. Carini, Filtered-X affine projection algorithm for multichan-
+         commercial applications. Thus, finding a cost-effective appli-                nel active noise control using second-order Volterra filters, IEEE Signal Pro-
+         cation scenario is also an important future research direction                cess. Lett. 11 (11) (2004) 853-857.
+         of NLANC.
+                                                                                [13] G.L. Sicuranza, A. Carini, A multichannel hierarchical approach to adaptive
+8. Conclusion                                                                          Volterra filters employing filtered-X affine projection algorithms, IEEE Trans
+                                                                                       Signal Process. 53 (4) (2005) 1463-1473.
+    In this survey paper, we have discussed state-of-the-art meth-
+ods related to NLANC technique, including FsLMS-based algo-                     [14] S.M. Kuo, H.-T. Wu, Nonlinear adaptive bilinear filters for active noise control
+rithms, distributed extension and selected applications. We have                        systems, IEEE Trans. Circuits Syst. I 52 (3) (2005) 617-624.
+also summarized FLANN approaches as well as the Chebyshev,
+EMFN, and LN filters. The spline adaptive filter, kernel adaptive fil-          [15] H. Modares, A. Ahmadyfard, M. Hadadzarif, A PSO approach for non-linear
+ter, and nonlinear distributed ANC algorithms are the new nonlin-                       active noise cancellation, in: Proc. the 6th WSEAS Int. Conf. Simul., Modell.,
+ear modeling approaches considered for NLANC. Due to technical                         Optim., 2006, pp. 492-497.
+limitations, these open areas need further investigations of sophis-
+ticated NLANC techniques. The review of implementations for both                [16] Q. Zhang, W.-S. Gan, Active noise control using a simplified fuzzy neural net-
+linear and nonlinear ANC are merged together. We have also dis-                         work, J. Sound Vib. 1 (272) (2004) 437-449.
+cussed the main challenges for future ANC techniques.
+                                                                                [17] Q. Zhang, W.-S. Gan, Y. Zhou, Adaptive recurrent fuzzy neural networks for
+Declaration of Competing Interest                                                      active noise control, J. Sound Vib. 296 (4-5) (2006) 935-948.
+
+    The authors declare no conflict of interest.                                [18] G.L. Sicuranza, A. Carini, On the accuracy of generalized Hammerstein mod-
+                                                                                       els for nonlinear active noise control, in: Proc. IEEE Instrum. Meas. Technol.,
+                                                                                       2006, pp. 1411-1416.
+
+                                                                                [19] C.-Y. Chang, F.-B. Luoh, Enhancement of active noise control using neu-
+                                                                                       ral-based filtered-X algorithm, J. Sound Vib. 305 (1-2) (2007) 348-356.
+
+                                                                                [20] R.T. Bambang, Adjoint EKF learning in recurrent neural networks for nonlin-
+                                                                                       ear active noise control, Appl. Soft Comput. 8 (4) (2008) 1498-1504.
+
+                                                                                [21] E.P. Reddy, D.P. Das, K.M.M. Prabhu, Fast adaptive algorithms for active con-
+                                                                                       trol of nonlinear noise processes, IEEE Trans. Signal Process. 56 (9) (2008)
+                                                                                       4530-4536 .
+
+                                                                                [22] L. Paul, Process of silencing sound oscillations, 1936. US Patent 2043416.
+                                                                                [23] P.M.S. Burt, J.H.D.M. Goulart, Efficient computation of bilinear approximations
+
+                                                                                       and Volterra models of nonlinear systems, IEEE Trans. Signal Process. 66 (3)
+                                                                                       (2018) 804-816.
+                                                                                [24] L. Lu, H. Zhao, Adaptive Volterra filter with continuous lp-norm using a log-
+                                                                                       arithmic cost for nonlinear active noise control, J. Sound Vib. 364 (2016)
+                                                                                       14-29 .
+                                                                                [25] Z.C. He, H.H. Ye, E. Li, An efficient algorithm for nonlinear active noise control
+                                                                                       of impulsive noise, Appl. Acoust. 148 (2019) 366-374.
+                                                                                [26] N.L. Thai, X. Wu, J. Na, Y. Guo, N.T.T. Tin, P.X. Le, Adaptive variable step-size
+                                                                                       neural controller for nonlinear feedback active noise control systems, Appl.
+                                                                                       Acoust. 116 (2017) 337-347.
+                                                                                [27] X. Zhang, X. Ren, J. Na, B. Zhang, H. Huang, Adaptive nonlinear neuro-con-
+                                                                                       troller with an integrated evaluation algorithm for nonlinear active noise sys-
+                                                                                       tems, J. Sound Vib. 329 (24) (2010) 5005-5016.
+                                                                                [28] N. Azadi, A. Ohadi, Filtered gradient active fuzzy neural network noise con-
+                                                                                       trol in an enclosure backed by a clamped plate, Int. J. Adapt. Control Signal
+                                                                                       Process. 26 (5) (2012) 451-468.
+                                                                                [29] C.-Y. Chang, Neural filtered-U algorithm for the application of active noise
+                                                                                       control system with correction terms momentum, Digit. Signal Process. 20
+                                                                                       (4) (2010) 1019-1026.
+                                                                                [30] E.P. Reddy, D.P. Das, K.M.M. Prabhu, Fast exact multichannel FsLMS algorithm
+                                                                                       for active noise control, Signal Process. 89 (5) (2009) 952-956.
+                                                                                [31] G.L. Sicuranza, A. Carini, A generalized FLANN filter for nonlinear active noise
+                                                                                       control, IEEE Trans. Audio, Speech Lang. Process. 19 (8) (2011) 2412-2417.
+
+                                                                           13
+L. Lu, K.-L. Yin, R.C. de Lamare et al.                                                                                                                            Signal Processing 181 (2021) 107929
+
+ [32] N.V. George, G. Panda, A robust filtered-s LMS algorithm for nonlinear active             [64] L. Luo, Z. Bai, W. Zhu, J. Sun, Improved functional link artificial neural
+         noise control, Appl. Acoust. 73 (8) (2012) 836-841.                                           network filters for nonlinear active noise control, Appl. Acoust. 135 (2018)
+                                                                                                       111-123 .
+ [33] B. Chen, S. Yu, Y. Yu, R. Guo, Nonlinear active noise control system based on
+         correlated EMD and Chebyshev filter, Mech. Syst. Signal Process. 130 (2019)            [65] D.C. Le, J. Zhang, D. Li, Hierarchical partial update generalized functional link
+         74-86 .                                                                                       artificial neural network filter for nonlinear active noise control, Digit. Signal
+                                                                                                       Process. 93 (2019) 160-171.
+ [34] A. Carini, G.L. Sicuranza, A new class of FLANN filters with application to non-
+         linear active noise control, in: European Signal Processing Conference, 2012,          [66] V. Patel, V. Gandhi, S. Heda, N.V. George, Design of adaptive exponential func-
+         pp. 1950-1954.                                                                                tional link network-based nonlinear filters, IEEE Trans. Circuits Syst. I 63 (9)
+                                                                                                       (2016) 1434-1442.
+ [35] N.V. George, G. Panda, Active control of nonlinear noise processes using cas-
+         caded adaptive nonlinear filter, Appl. Acoust. 74 (1) (2013) 217-222.                  [67] D.C. Le, J. Zhang, D. Li, S. Zhang, A generalized exponential functional link
+                                                                                                       artificial neural networks filter with channel-reduced diagonal structure for
+ [36] D.C. Le, D. Li, J. Zhang, M-max partial update leaky bilinear filter-error least                 nonlinear active noise control, Appl. Acoust. 139 (2018) 174-181.
+         mean square algorithm for nonlinear active noise control, Appl. Acoust. 156
+         (2019) 158-165.                                                                        [68] T. Deb, D. Ray, N.V. George, Design of nonlinear filters using affine
+                                                                                                       projection algorithm based exact and approximate adaptive exponential func-
+ [37] X. Guo, Y. Li, J. Jiang, C. Dong, S. Du, L. Tan, Adaptive function expansion 3-D                 tional link networks, IEEE Trans. Circuits Syst. II, 10.1109/TCSII.2019.2962916
+         diagonal-structure bilinear filter for active noise control of saturation nonlin-             (2019) .
+         earity, IEEE Access 6 (2018) 65139-65150.
+                                                                                                [69] N.V. George, G. Panda, On the development of adaptive hybrid active noise
+ [38] D.C. Le, J. Zhang, Y. Pang, A bilinear functional link artificial neural net-                    control system for effective mitigation of nonlinear noise, Signal Process. 92
+         work filter for nonlinear active noise control and its stability condition, Appl.             (2) (2012) 509-516.
+         Acoust. 132 (2018) 19-25.
+                                                                                                [70] G.L. Sicuranza, A. Carini, On the BIBO stability condition of adaptive recursive
+ [39] N.K. Rout, D.P. Das, G. Panda, Particle swarm optimization based nonlinear ac-                   FLANN filters with application to nonlinear active noise control, IEEE Trans.
+         tive noise control under saturation nonlinearity, Appl. Soft Comput. 41 (2016)                Audio Speech Lang. Process. 20 (1) (2012) 234-245.
+         275-289 .
+                                                                                                [71] G.L. Sicuranza, A. Carini, A new recursive controller for nonlinear active noise
+ [40] N.K. Rout, D.P. Das, G. Panda, Particle swarm optimization based active noise                    control, in: Proc. Int. Symp. Image Signal Process. Anal., 2013, pp. 633-638.
+         control algorithm without secondary path identification, IEEE Trans. Instrum.
+         Meas. 61 (2) (2012) 554-563.                                                           [72] A. Carini, G.L. Sicuranza, Fourier nonlinear filters, Signal Process. 94 (2014)
+                                                                                                       183-194.
+ [41] N.K. Rout, D.P. Das, G. Panda, PSO based adaptive narrowband ANC algo-
+         rithm without the use of synchronization signal and secondary path estimate,           [73] X. Guo, J. Jiang, L. Tan, S. Du, Improved adaptive recursive even mirror Fourier
+         Mech. Syst. Signal Process. 114 (2019) 378-398.                                               nonlinear filter for nonlinear active noise control, Appl. Acoust. 146 (2019)
+                                                                                                       310-319 .
+ [42] W.U. Khan, Z. Ye, F. Altaf, N.I. Chaudhary, M.A.Z. Raja, A novel application of
+         fireworks heuristic paradigms for reliable treatment of nonlinear active noise         [74] X. Guo, Y. Li, J. Jiang, C. Dong, S. Du, L. Tan, Sparse modeling of nonlinear
+         control, Appl. Acoust. 146 (2019) 246-260.                                                    secondary path for nonlinear active noise control, IEEE Trans. Instrum. Meas.
+                                                                                                       67 (3) (2018) 482-496.
+ [43] H. Bao, I.M. Panahi, Active noise control based on kernel least-mean-square
+         algorithm, in: Proc. 43th Asilomar Conf. Signals Syst. Comput., 2009,                  [75] L. Tan, J. Jiang, Nonlinear active noise control using diagonal-channel LMS
+         pp. 642-644.                                                                                  and RLS bilinear filters, in: Proc. IEEE Int. Midwest Symp. Circuits Syst., 2014,
+                                                                                                       pp. 789-792.
+ [44] M. Scarpiniti, D. Comminiello, R. Parisi, A. Uncini, Nonlinear spline adaptive
+         filtering, Signal Process. 93 (4) (2013) 772-783.                                      [76] X. Guo, J. Jiang, J. Chen, S. Du, L. Tan, BIBO-stable implementation of adap-
+                                                                                                       tive function expansion bilinear filter for nonlinear active noise control, Appl.
+ [45] V. Patel, N.V. George, Compensating acoustic feedback in feed-forward active                     Acoust. 168 (2020) 107407.
+         noise control systems using spline adaptive filters, Signal Process. 120 (2016)
+         448-455.                                                                               [77] C. Dong, Y. Ding, L. Tan, S. Du, X. Guo, Diagonal-structure adaptive bilin-
+                                                                                                       ear filters for multichannel active noise control of nonlinear noise processes,
+ [46] R. Kukde, G. Panda, M.S. Manikandan, On distributed non-linear active noise                      Mechan. Syst. Signal Process. 143 (2020) 106703.
+         control using diffusion collaborative learning strategy, IET Signal Process. 12
+         (4) (2018) 410-421.                                                                    [78] L. Tan, C. Dong, S. Du, On implementation of adaptive bilinear filters for non-
+                                                                                                       linear active noise control, Appl. Acoust. 106 (2016) 122-128.
+ [47] W. Liu, J.C. Príncipe, S. Haykin, Kernel adaptive filtering: A comprehensive in-
+         troduction, John Wiley & Sons, 2011.                                                   [79] L. Zhu, T. Yang, J. Pan, M. Zhu, X. Li, Reweighted adaptive bilinear filters for
+                                                                                                       an active noise control system with a nonlinear secondary path, Appl. Acoust.
+ [48] B. Chen, S. Zhao, P. Zhu, J.C. Príncipe, Quantized kernel least mean square                      155 (2019) 123-129.
+         algorithm, IEEE Trans. Neural Netw. Learn. Syst. 23 (1) (2012) 22-32.
+                                                                                                [80] L. Luo, J. Sun, A novel bilinear functional link neural network filter for non-
+ [49] A. Flores, R.C. de Lamare, Set-membership adaptive kernel NLMS algorithms:                       linear active noise control, Appl. Soft Comput. 68 (2018) 636-650.
+         design and analysis, Signal Process. 154 (2019) 1-14.
+                                                                                                [81] E. Spiriti, S. Morici, L. Piroddi, A gradient-free adaptation method for nonlin-
+ [50] S. Shen, N. Roy, J. Guan, H. Hassanieh, R.R. Choudhury, MUTE: bringing IoT to                    ear active noise control, J. Sound Vib. 333 (1) (2014) 13-30.
+         noise cancellation, in: Proc. Conf. of the ACM Special Interest Group on Data
+         Commun., 2018, pp. 282-296.                                                            [82] D.P. Das, D.J. Moreau, B.S. Cazzolato, Adjoint nonlinear active noise con-
+                                                                                                       trol algorithm for virtual microphone, Mech. Syst. Signal Process. 27 (2012)
+ [51] R. Galambos, L. Sujbert, Active noise control in the concept of IoT, in: Proc.                   743-754 .
+         16th Int. Carpathian Control Conf., 2015, pp. 133-137.
+                                                                                                [83] N.V. George, A. Gonzalez, Convex combination of nonlinear adaptive filters for
+ [52] R.M. Reddy, I.M.S. Panahi, R.W. Briggs, Hybrid FxRLS-FxNLMS adaptive algo-                       active noise control, Appl. Acoust. 76 (2014) 157-161.
+         rithm for active noise control in fMRI application, IEEE Trans. Control Syst.
+         Technol. 19 (2) (2011) 474-480.                                                        [84] N.C. Kurian, K. Patel, N.V. George, Robust active noise control: an information
+                                                                                                       theoretic learning approach, Appl. Acoust. 117 (2017) 180-184.
+ [53] L. Zhang, J. Tao, X. Qiu, Active control of transformer noise with an internally
+         synthesized reference signal, J. Sound Vib. 331 (15) (2012) 3466-3475.                 [85] S.K. Behera, D.P. Das, B. Subudhi, Functional link artificial neural network ap-
+                                                                                                       plied to active noise control of a mixture of tonal and chaotic noise, Appl.
+ [54] L. Luo, J. Sun, B. Huang, D.D. Quoc, Efficient combination of feedforward and                    Soft Comput. 23 (2014) 51-60.
+         feedback structures for nonlinear narrowband active noise control, Signal Pro-
+         cess. 128 (2016) 494-503.                                                              [86] X. Guo, J. Jiang, J. Chen, S. Du, L. Tan, Convex combination recursive even
+                                                                                                       mirror Fourier nonlinear filter for nonlinear active noise control, in: Proc. Int.
+ [55] R. Napoli, L. Piroddi, Nonlinear active noise control with NARX models, IEEE                     Conf. Electr. Mach. Syst., 2019, pp. 1-6.
+         Trans. Audio Speech Lang. Process. 18 (2) (2010) 286-295.
+                                                                                                [87] L. Luo, J. Sun, B. Huang, A novel feedback active noise control for broadband
+ [56] S.M. Kuo, K. Kuo, W.-S. Gan, Active noise control: Open problems and chal-                       chaotic noise and random noise, Appl. Acoust. 116 (2017) 229-237.
+         lenges, in: Int. Conf. Green Circuits Syst., 2010, pp. 164-169.
+                                                                                                [88] C.-Y. Chang, D.-R. Chen, Active noise cancellation without secondary path
+ [57] D.P. Das, D.J. Moreau, B.S. Cazzolato, A nonlinear active noise control algo-                    identification by using an adaptive genetic algorithm, IEEE Trans. Instrum.
+         rithm for virtual microphones controlling chaotic noise, J. Acoust. Soc. Amer.                Meas. 59 (9) (2010) 2315-2327.
+         132 (2) (2012) 779-788.
+                                                                                                [89] M.A.Z. Raja, M.S. Aslam, N.I. Chaudhary, W.U. Khan, Bio-inspired heuristics
+ [58] S.B. Behera, D.P. Das, N.K. Rout, Nonlinear feedback active noise control for                    hybrid with interior-point method for active noise control systems without
+         broadband chaotic noise, Appl. Soft Comput. 15 (2014) 80-87.                                  identification of secondary path, Front. Inform. Technol. Electron. Eng. 19 (2)
+                                                                                                       (2018) 246-259.
+ [59] D. Delvecchio, L. Piroddi, A dual filtering scheme for nonlinear active noise
+         control, Int. J. Adapt. Control Signal Process. 28 (12) (2014) 1422-1439.              [90] W.U. Khan, Z. Ye, N.I. Chaudhary, M.A.Z. Raja, Backtracking search integrated
+                                                                                                       with sequential quadratic programming for nonlinear active noise control
+ [60] R. Srazhidinov, R. Kamil, S.B.M. Noor, NLFxLMS and Thf-NLFxLMS algorithms                        systems, Appl. Soft Comput. 73 (2018) 666-683.
+         for Wiener-Hammerstein nonlinear active noise control, Asian J. Control 19
+         (5) (2017) 1791-1801.                                                                  [91] M.A.Z. Raja, M.S. Aslam, N.I. Chaudhary, M. Nawaz, S.M. Shah, Design of hy-
+                                                                                                       brid nature-inspired heuristics with application to active noise control sys-
+ [61] P.V. Kumar, K.M.M. Prabhu, D.P. Das, Block filtered-s least mean square algo-                    tems, Neural Comput. Applic. 31 (7) (2019) 2563-2591.
+         rithm for active control of non-linear noise systems, IET Signal Process. 4 (2)
+         (2010) 168-180.                                                                        [92] N.V. George, G. Panda, A particle-swarm-optimization-based decentralized
+                                                                                                       nonlinear active noise control system, IEEE Trans. Instrum. Meas. 61 (12)
+ [62] M. Bergamasco, F. Della Rossa, L. Piroddi, Active noise control with on-line                     (2012) 3378-3386.
+         estimation of non-Gaussian noise characteristics, J. Sound Vib. 331 (1) (2012)
+         27-40 .                                                                                [93] N.V. George, G. Panda, A robust evolutionary feedforward active noise con-
+                                                                                                       trol system using Wilcoxon norm and particle swarm optimization algorithm,
+ [63] K.-L. Yin, H. Zhao, L. Lu, Functional link artificial neural network filter based                Expert Syst. Appl. 39 (8) (2012) 7574-7580.
+         on the q-gradient for nonlinear active noise control, J. Sound and Vib. 435
+         (2018) 205-217.
+
+                                                                                            14
+L. Lu, K.-L. Yin, R.C. de Lamare et al.                                                              Signal Processing 181 (2021) 107929
+
+ [94]  S. Gholami-Boroujeny, M. Eshghi, Non-linear active noise cancellation using            [128]  C. Zhang, M. Qin, H. Zou, X. Qiu, Secondary source and error sensing strate-
+       a bacterial foraging optimisation algorithm, IET Signal Process. 6 (4) (2012)          [129]  gies for the active control of sound transmission through a small opening, J.
+ [95]  364-373.                                                                               [130]  Sound Vib. 464 (2020) 114973.
+       S. Gholami-Boroujeny, M. Eshghi, Active noise control using an adaptive bac-           [131]  T. Murao, C. Shi, W.-S. Gan, M. Nishimura, Mixed-error approach for mul-
+ [96]  terial foraging optimization algorithm, Signal, Image Video Process. 8 (8)             [132]  ti-channel active noise control of open windows, Appl. Acoust. 127 (2017)
+       (2014) 1507-1516.                                                                      [133]  305-315 .
+ [97]  R. Walia, S. Ghosh, Design of active noise control system using hybrid func-           [134]  H.-S. Vu, K.-H. Chen, A low-power broad-bandwidth noise cancellation VLSI
+ [98]  tional link artificial neural network and finite impulse response filters, Neural      [135]  circuit design for in-ear headphones, IEEE Trans. VLSI Syst. 24 (6) (2016)
+ [99]  Comput. Appl. (2018) 1-10.                                                             [136]  2013-2025 .
+       V. Patel, N.V. George, Nonlinear active noise control using spline adaptive fil-       [137]  W. Jung, S.J. Elliott, J. Cheer, Combining the remote microphone technique
+[100]  ters, Appl. Acoust. 93 (2015) 38-43.                                                   [138]  with head-tracking for local active sound control, J. Acoust. Soc. Amer. 142
+       V. Patel, N.V. George, Multi-channel spline adaptive filters for non-linear ac-        [139]  (1) (2017) 298-307.
+[101]  tive noise control, Appl. Acoust. 161 (2020) 107142.                                   [140]  S.K. Behera, D.P. Das, B. Subudhi, Head movement immune active noise con-
+       V. Patel, D. Comminiello, M. Scarpiniti, N.V. George, A. Uncini, Design of hy-         [141]  trol with head mounted moving microphones, J. Acoust. Soc. Amer. 142 (2)
+[102]  brid nonlinear spline adaptive filters for active noise control, in: Proc. Int.        [142]  (2017) 573-587.
+       Joint Conf. Neural Netw., 2016, pp. 3420-3425.                                         [143]  J. Cheer, V. Patel, S. Fontana, The application of a multi-reference control
+[103]  Y. Liu, C. Sun, S. Jiang, Kernel filtered-x LMS algorithm for active noise con-        [144]  strategy to noise cancelling headphones, J. Acoust. Soc. Amer. 145 (5) (2019)
+       trol system with nonlinear primary path, Circuits Syst., Signal Process. 37 (12)       [145]  3095-3103 .
+[104]  (2018) 5576-5594.                                                                      [146]  C.-Y. Chang, S.-T. Li, Active noise control in headsets by using a low-cost mi-
+[105]  M.A.Z. Raja, N.I. Chaudhary, Z. Ahmed, A.U. Rehman, M.S. Aslam, A novel ap-            [147]  crocontroller, IEEE Trans. Ind. Electron. 58 (5) (2011) 1936-1942.
+       plication of kernel adaptive filtering algorithms for attenuation of noise inter-      [148]  L. Zhang, L. Wu, X. Qiu, An intuitive approach for feedback active noise con-
+[106]  ferences, Neural Comput. Appl. 31 (12) (2019) 9221-9240.                               [149]  troller design, Appl. Acoust. 74 (1) (2013) 160-168.
+[107]  R. Kukde, M.S. Manikandan, G. Panda, Incremental learning based adaptive fil-          [150]  H.-S. Vu, K.-H. Chen, A high-performance feedback FxLMS active noise cancel-
+       ter for non-linear distributed active noise control system, IEEE Open J. Signal        [151]  lation VLSI circuit design for in-ear headphones, Circuits, Syst., Signal Process.
+[108]  Process. 1 (2020) 1-13.                                                                [152]  36 (7) (2017) 2767-2785.
+[109]  S.E. Craig, O.L. Angevine, Active control of hum from large power transform-                  T. Schumacher, H. Krüger, M. Jeub, P. Vary, C. Beaugeant, Active noise control
+[110]  ers-the real world, in: Proc. Recent Advances in Active Control of Sound Vi-           [153]  in headsets: A new approach for broadband feedback ANC, in: Proc. IEEE Int.
+[111]  bration, 1993, pp. 279-290.                                                            [154]  Conf. Acoust., Speech Signal Process., 2011, pp. 417-420.
+       T.J. Sutton, S.J. Elliott, A.M. McDonald, T.J. Saunders, Active control of road        [155]  K. Tanaka, C. Shi, Y. Kajikawa, Binaural active noise control using parametric
+[112]  noise inside vehicles, Noise Control Eng. J. 42 (4) (1994) 137-147.                    [156]  array loudspeakers, Appl. Acoust. 116 (2017) 170-176.
+[113]  M. McJury, R. Stewart, D. Crawford, E. Toma, The use of active noise control           [157]  N. Tanaka, M. Tanaka, Active noise control using a steerable parametric array
+[114]  (ANC) to reduce acoustic noise generated during MRI scanning: some initial             [158]  loudspeaker, J. Acoust. Soc. Amer. 127 (6) (2010) 3526-3537.
+       results, Magn. Reson. Imaging 15 (3) (1997) 319-322.                                          N. Tanaka, M. Tanaka, Mathematically trivial control of sound using a
+[115]  W.S. Gan, S.M. Kuo, An integrated audio and active noise control headset, IEEE         [159]  parametric beam focusing source, J. Acoust. Soc. Amer. 129 (1) (2011)
+       Trans. Consum. Electron. 48 (2) (2002) 242-247.                                               165-172 .
+[116]  X. Qiu, X. Li, Y. Ai, C.H. Hansen, A waveform synthesis algorithm for active                  V. Belyi, W.-S. Gan, A combined bilateral and binaural active noise control
+       control of transformer noise: implementation, Appl. Acoust. 63 (5) (2002)                     algorithm for closed-back headphones, Appl. Acoust. 160 (2020) 107129.
+[117]  467-479 .                                                                                     D.P. Das, D.J. Moreau, B.S. Cazzolato, Nonlinear active noise control for head-
+       A. Jakob, M. Möser, Active control of double-glazed windows part I: feedfor-                  rest using virtual microphone control, Control Eng. Pract. 21 (4) (2013)
+[118]  ward control, Appl. Acoust. 64 (2) (2003) 163-182.                                            544-555.
+[119]  A. Jakob, M. Möser, Active control of double-glazed windows part II: feedback                 M. Guldenschuh, R. Höldrich, Prediction filter design for active noise cancel-
+       control, Appl. Acoust. 64 (2) (2003) 183-196.                                                 lation headphones, IET Signal Process. 7 (6) (2013) 497-504.
+[120]  G. Pinte, W. Desmet, P. Sas, Active control of impact noise in a duct, in: Proc.              B. Rafaely, Spherical loudspeaker array for local active control of sound, J.
+[121]  Int. Conf. Sound Vib., 2003, pp. 3727-3734.                                                   Acoust. Soc. Amer. 125 (5) (2009) 3006-3017.
+[122]  Y.-L. Zhou, Q.-Z. Zhang, X.-D. Li, W.-S. Gan, Analysis and DSP implementation                 T. Peleg, B. Rafaely, Investigation of spherical loudspeaker arrays for local ac-
+       of an ANC system using a filtered-error neural network, J. Sound Vib. 285                     tive control of sound, J. Acoust. Soc. Amer. 130 (4) (2011) 1926-1935.
+[123]  (1-2) (2005) 1-25.                                                                            C.R. Hart, S.-K. Lau, Active noise control with linear control source and sensor
+[124]  S.M. Kuo, S. Mitra, W.-S. Gan, Active noise control system for headphone ap-                  arrays for a noise barrier, J. Sound Vib. 331 (1) (2012) 15-26.
+[125]  plications, IEEE Trans. Control Syst. Technol. 14 (2) (2006) 331-335.                         S.J. Elliott, J. Cheer, Modeling local active sound control with remote sen-
+[126]  C.-Y. Chang, Efficient active noise controller using a fixed-point DSP, Signal                sors in spatially random pressure fields, J. Acoust. Soc. Amer. 137 (4) (2015)
+[127]  Process. 89 (5) (2009) 843-850.                                                               1936-1946.
+       C. Kim, C. Jong, X. Zhang, P. Wang, J. Kim, Enhancement of noise reduction                    W.-K. Tseng, Local active noise control using a novel method of designing
+       efficiency based on compensation in the ANC headset using fixed-point DSP,                    quiet zones, Control Eng. Pract. 19 (12) (2011) 1450-1458.
+       Appl. Acoust. 116 (2017) 271-282.                                                             I.T. Ardekani, W.H. Abdulla, Adaptive signal processing algorithms for creating
+       B. Siravara, M. Mansour, R. Cole, N. Magotra, Comparative study of wideband                   spatial zones of quiet, Digit. Signal Process. 27 (2014) 129-139.
+       single reference active noise cancellation algorithms on a fixed-point DSP, in:               S. Wrona, M. de Diego, M. Pawelczyk, Shaping zones of quiet in a large en-
+       Proc. IEEE Int. Conf. Acoust., Speech, Signal Process., 2, 2003, pp. 473-476.                 closure generated by an active noise control system, Control Eng. Pract. 80
+       I.T. Ardekani, W.H. Abdulla, Filtered weight FxLMS adaptation algorithm: anal-                (2018) 1-16.
+       ysis, design and implementation, Int. J. Adapt. Control Signal Process. 25 (11)               R. Serizel, M. Moonen, J. Wouters, S.H. Jensen, A zone of quiet based approach
+       (2011) 1023-1037.                                                                             to integrated active noise control and noise reduction in hearing aids, in:
+       D. Shi, J. He, C. Shi, T. Murao, W.-S. Gan, Multiple parallel branch with folding             Proc. IEEE Int. Conf. Acoust., Speech Signal Process., 2009, pp. 229-232.
+       architecture for multichannel filtered-x least mean square algorithm, in: Proc.               R. Serizel, M. Moonen, J. Wouters, S.H. Jensen, A zone-of-quiet based ap-
+       IEEE Int. Conf. Acoust., Speech Signal Process., 2017, pp. 1188-1192.                         proach to integrated active noise control and noise reduction for speech en-
+       A. Leva, L. Piroddi, FPGA-Based implementation of high-speed active noise                     hancement in hearing aids, IEEE Trans. Audio, Speech, Lang. Process. 20 (6)
+       and vibration controllers, Control Eng. Pract. 19 (8) (2011) 798-808.                         (2012) 1685-1697.
+       B.K. Mohanty, G. Singh, G. Panda, Hardware design for VLSI implementation                     R. Serizel, M. Moonen, J. Wouters, S.H. Jensen, Integrated active noise control
+       of FxLMS-and FsLMS-based active noise controllers, Circuits, Syst., Signal Pro-               and noise reduction in hearing aids, IEEE Trans. Audio, Speech, Lang. Process.
+       cess. 36 (2) (2017) 447-473.                                                                  18 (6) (2009) 1137-1146.
+       B. Kwon, Y. Park, Interior noise control with an active window system, Appl.                  S. Pradhan, S.S. Bhattacharjee, V. Patel, N.V. George, Speech enhancement in
+       Acoust. 74 (5) (2013) 647-652.                                                                digital hearing aids: an active noise control approach, in: Proc. ICSV, 2017,
+       H. Huang, X. Qiu, J. Kang, Active noise attenuation in ventilation windows, J.                pp. 1-8.
+       Acoust. Soc. Amer. 130 (1) (2011) 176-188.                                                    F. Albu, An efficient combined active noise control and noise reduction
+       S. Wang, J. Tao, X. Qiu, J. Pan, A boundary error sensing arrangement for vir-                method for hearing aids, in: Proc. Euronoise, 2018, pp. 915-919.
+       tual sound barriers to reduce noise radiation through openings, J. Acoust. Soc.               J. Zhang, T.D. Abhayapala, P.N. Samarasinghe, W. Zhang, S. Jiang, Sparse com-
+       Amer. 145 (6) (2019) 3695-3702.                                                               plex FxLMS for active noise cancellation over spatial regions, in: Proc. IEEE
+       K. Wang, J. Tao, X. Qiu, Boundary control of sound transmission into a cavity                 Int. Conf. Acoust. Speech Signal Process., 2016, pp. 524-528.
+       through its opening, J.Sound Vib. 442 (2019) 350-365.                                         J. Zhang, T.D. Abhayapala, W. Zhang, P.N. Samarasinghe, S. Jiang, Active noise
+       T. Murao, M. Nishimura, W.-S. Gan, A hybrid approach to active and passive                    control over space: a wave domain approach, IEEE/ACM Trans. Audio, Speech,
+       noise control for open windows, Appl. Acoust. 155 (2019) 338-345.                             Lang. Process. 26 (4) (2018) 774-786.
+       B. Lam, C. Shi, D. Shi, W.-S. Gan, Active control of sound through full-sized                 W. Zhang, C. Hofmann, M. Buerger, T.D. Abhayapala, W. Kellermann, Spa-
+       open windows, Build. Environ. 141 (2018) 16-27.                                               tial noise-field control with online secondary path modeling: a wave-do-
+       B. Lam, S. Elliott, J. Cheer, W.-S. Gan, Physical limits on the performance of                main approach, IEEE/ACM Trans. Audio, Speech, Lang. Process. 26 (12) (2018)
+       active noise control through open windows, Appl. Acoust. 137 (2018) 9-17.                     2355-2370 .
+       S.J. Elliott, J. Cheer, L. Bhan, C. Shi, W.-S. Gan, A wavenumber approach to                  Y. Maeno, Y. Mitsufuji, T.D. Abhayapala, Mode domain spatial active noise
+       analysing the active control of plane waves with arrays of secondary sources,                 control using sparse signal representation, in: Proc. IEEE Int. Conf. Acoust.
+       J. Sound Vib. 419 (2018) 405-419.                                                             Speech Signal Process., 2018, pp. 211-215.
+
+                                                                                          15
+L. Lu, K.-L. Yin, R.C. de Lamare et al.                                                             Signal Processing 181 (2021) 107929
+
+[160]  N. Murata, J. Zhang, Y. Maeno, Y. Mitsufuji, Global and local mode-do-                [179]  J. Cheer, Active control of the acoustic environment in an automobile cabin,
+       main adaptive algorithms for spatial active noise control using higher-order          [180]  University of Southampton, 2012 Ph.D. thesis.
+[161]  sources, in: Proc. IEEE Int. Conf. Acoust. Speech Signal Process., 2019,              [181]  J. Cheer, S.J. Elliott, The design and performance of feedback controllers for
+[162]  pp. 526-530.                                                                          [182]  the attenuation of road noise in vehicles, Int. J. Acoust. Vib. 19 (3) (2014)
+[163]  M. Kumamoto, M. Kida, R. Hirayama, Y. Kajikawa, T. Tani, Y. Kurumi, Active            [183]  155-164.
+[164]  noise control system for reducing MR noise, IEICE Trans. Fundamentals 94              [184]  J. Cheer, S.J. Elliott, Multichannel control systems for the attenuation of inte-
+[165]  (7) (2011) 1479-1486.                                                                 [185]  rior road noise in vehicles, Mech. Syst. Signal Process. 60 (2015) 753-769.
+[166]  G. Kannan, A.A. Milani, I.M. Panahi, R.W. Briggs, An efficient feedback active        [186]  W. Jung, S.J. Elliott, J. Cheer, Local active control of road noise inside a vehicle,
+[167]  noise control algorithm based on reduced-order linear predictive modeling of          [187]  Mech. Syst. Signal Process. 121 (2019) 144-157.
+[168]  fMRI acoustic noise, IEEE Trans. Biomed. Eng. 58 (12) (2011) 3303-3309.               [188]  H. Guo, Y. Wang, N.N. Liu, R.P. Yu, H. Chen, X.T. Liu, Active interior noise con-
+[169]  M. Kida, R. Hirayama, Y. Kajikawa, T. Tani, Y. Kurumi, Head-mounted active            [189]  trol for rail vehicle using a variable step-size median-LMS algorithm, Mechan.
+[170]  noise control system for MR noise, in: Proc. IEEE Int. Conf. Acoust. Speech           [190]  Syst. Signal Process. 109 (2018) 15-26.
+[171]  Signal Process., 2009, pp. 245-248.                                                   [191]  J. Cheer, S.J. Elliott, Active noise control of a diesel generator in a luxury
+[172]  N. Miyazaki, Y. Kajikawa, Head-mounted active noise control system with vir-          [192]  yacht, Applied Acoustics 105 (2016) 209-214.
+[173]  tual sensing technique, J. Sound Vib. 339 (2015) 65-83.                               [193]  P. Peretti, S. Cecchi, L. Romoli, F. Piazza, Adaptive feedback active noise con-
+       A. Ganguly, C.K. Reddy, I. Panahi, Improved parallel feedback active noise con-       [194]  trol for yacht environments, IEEE Trans. Control Syst. Technol. 22 (2) (2013)
+[174]  trol using linear prediction for adaptive noise decomposition, in: Proc. IEEE         [195]  737-744.
+       Int. Conf. Acoust. Speech Signal Process., 2015, pp. 664-668.                         [196]  J. Cheer, S.J. Elliott, E. Oh, J. Jeong, Application of the remote microphone
+[175]  M. Niedz´ wiecki, M. Meller, A new approach to active noise and vibration             [197]  method to active noise control in a mobile phone, J. Acoust. Soc. Amer. 143
+[176]  control-part I: the known frequency case, IEEE Trans. Signal Process. 57 (9)          [198]  (4) (2018) 2142-2151.
+[177]  (2009) 3373-3386.                                                                            S.-P. Moon, J.W. Lee, T.-G. Chang, Performance analysis of an adaptive feed-
+[178]  M. Niedz´ wiecki, M. Meller, A new approach to active noise and vibration con-               back active noise control based earmuffs system, Appl. Acoust. 96 (2015)
+       trol-part II: the unknown frequency case, IEEE Trans. Signal Process. 57 (9)                 53-60 .
+       (2009) 3387-3398.                                                                            L. Zhu, T. Yang, J. Pan, Design of nonlinear active noise control earmuffs for
+       M. Niedz´ wiecki, M. Meller, Self-optimizing adaptive vibration controller, IEEE             excessively high noise level, J. Acoust. Soc. Amer. 146 (3) (2019) 1547-1555.
+       Trans. Automat. Contr. 54 (9) (2009) 2087-2099.                                              I.-H. Yang, J.-E. Jeong, U.-C. Jeong, J.-S. Kim, J.-E. Oh, Improvement of noise
+       M. Niedz´ wiecki, M. Meller, Y. Kajikawa, D. Lukwin´ ski, Estimation of nonsta-              reduction performance for a high-speed elevator using modified active noise
+       tionary harmonic signals and its application to active control of MRI noise,                 control, Appl. Acoust. 79 (2014) 58-68.
+       in: Proc. IEEE Int. Conf. Acoust. Speech Signal Process., 2013, pp. 5661-5665.               S.R. Chen, G.J. Too, Simulations and experiments for hybrid noise control sys-
+       N. Lee, Y. Park, G.W. Lee, Frequency-domain active noise control for magnetic                tems, Appl. Acoust. 70 (2) (2009) 247-255.
+       resonance imaging acoustic noise, Appl. Acoust. 118 (2017) 30-38.                            K. Mazur, S. Wrona, M. Pawelczyk, Active noise control for a washing ma-
+       Y. Zhou, Y. Yin, Q. Zhang, An optimal repetitive control algorithm for peri-                 chine, Appl. Acoust. 146 (2019) 89-95.
+       odic impulsive noise attenuation in a non-minimum phase ANC system, Appl.                    J. Rohlfing, P. Gardonio, Ventilation duct with concurrent acoustic feed-for-
+       Acoust. 74 (10) (2013) 1175-1181.                                                            ward and decentralised structural feedback active control, J. Sound Vib. 333
+       G. Sun, T. Feng, M. Li, T.C. Lim, Convergence analysis of FxLMS-based active                 (3) (2014) 630-645.
+       noise control for repetitive impulses, Appl. Acoust. 89 (2015) 178-187.                      P. Gardonio, J. Rohlfing, Modular feed-forward active noise control units for
+       G. Pinte, B. Stallaert, P. Sas, W. Desmet, J. Swevers, A novel design strategy               ventilation ducts, J. Acoust. Soc. Amer. 136 (6) (2014) 3051-3062.
+       for iterative learning and repetitive controllers of systems with a high modal               F. Ma, W. Zhang, T.D. Abhayapala, Active control of outgoing broadband noise
+       density: theoretical background, Mech. Syst. Signal Process. 24 (2) (2010)                   fields in rooms, IEEE/ACM Trans, Audio, Speech, and Lang. Process. 28 (2020)
+       432-443.                                                                                     529-539 .
+       B. Stallaert, G. Pinte, P. Sas, W. Desmet, J. Swevers, A novel design strategy               S. Bagha, R. Tripathy, P. Nanda, C. Preetam, D.P. Das, Understanding percep-
+       for iterative learning and repetitive controllers of systems with a high modal               tion of active noise control system through multichannel EEG analysis, IET
+       density: application to active noise control, Mech. Syst. Signal Process. 24 (2)             Healthcare Technol. Lett. 5 (3) (2018) 101-106.
+       (2010) 444-454.                                                                              S.K. Behera, D.P. Das, B. Subudhi, Adaptive nonlinear active noise control algo-
+       Y. Zhou, Y. Yin, Q. Zhang, Active control of repetitive impulsive noise in a                 rithm for active headrest with moving error microphones, Appl. Acoust. 123
+       non-minimum phase system using an optimal iterative learning control algo-                   (2017) 9-19.
+       rithm, J. Sound Vib. 332 (18) (2013) 4089-4102.                                              N. Krishnamurthy, M. Mansour, R. Cole, Implementation challenges for feed-
+       T. Zhao, J. Liang, L. Zou, L. Zhang, A new FxLMS algorithm with offline and on-              back active noise cancellation, in: Proc. IEEE Int. Conf. Acoust., Speech Signal
+       line secondary-path modeling scheme for active noise control of power trans-                 Process., 2012, pp. 1649-1652.
+       formers, IEEE Trans. Ind. Electron. 64 (8) (2017) 6432-6442.                                 M. Zeller, L.A. Azpicueta-Ruiz, J.A. García, W. Kellermann, Adaptive Volterra
+       P.N. Samarasinghe, W. Zhang, T.D. Abhayapala, Recent advances in active noise                filters with evolutionary quadratic kernels using a combination scheme for
+       control inside automobile cabins: toward quieter cars, IEEE Signal Process.                  memory control, IEEE Trans. Signal Process. 59 (4) (2010) 1449-1464.
+       Mag. 33 (6) (2016) 61-73.
+       S.J. Elliott, Active Noise and Vibration Control in Vehicles, in: Vehicle Noise
+       and Vibration Refinement, Elsevier, 2010, pp. 235-251.
+
+                                                                                         16
+
