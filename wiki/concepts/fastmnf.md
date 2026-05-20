@@ -15,19 +15,19 @@ tags:
 
 ## Formulation
 
-The observed STFT coefficients $\bm{x}_{ij} \in \mathbb{C}^M$ follow:
+The observed STFT coefficients $\\mathbf{x}_{ij} \in \mathbb{C}^M$ follow:
 
-$$p(\bm{x}_{ij}) = \mathcal{N}_{\mathbb{C}}\left(\bm{x}_{ij}; \bm{0}, \sum_n h_{ijn}\bm{R}_{in}\right)$$
+$$p(\\mathbf{x}_{ij}) = \mathcal{N}_{\mathbb{C}}\left(\\mathbf{x}_{ij}; \\mathbf{0}, \sum_n h_{ijn}\\mathbf{R}_{in}\right)$$
 
-where $h_{ijn} = \sum_k t_{ikn}v_{kjn}$ (NMF model for source spectrograms) and $\bm{R}_{in}$ is the source SCM.
+where $h_{ijn} = \sum_k t_{ikn}v_{kjn}$ (NMF model for source spectrograms) and $\\mathbf{R}_{in}$ is the source SCM.
 
 ## Joint Diagonalization Assumption
 
-FastMNMF assumes that all source SCMs can be simultaneously diagonalized by a single transformation matrix $\bm{W}_i$:
+FastMNMF assumes that all source SCMs can be simultaneously diagonalized by a single transformation matrix $\\mathbf{W}_i$:
 
-$$\bm{W}_i^{\mathsf{H}}\bm{R}_{in}\bm{W}_i = \bm{\Lambda}_{in}, \quad \forall n=1,\dots,N$$
+$$\\mathbf{W}_i^{\mathsf{H}}\\mathbf{R}_{in}\\mathbf{W}_i = \\mathbf{\Lambda}_{in}, \quad \forall n=1,\dots,N$$
 
-where $\bm{\Lambda}_{in}$ is diagonal. The decorrelated signals $\bm{y}_{ij} = \bm{W}_i^{\mathsf{H}}\bm{x}_{ij}$ then have covariance $\sum_n h_{ijn}\bm{\Lambda}_{in}$.
+where $\\mathbf{\Lambda}_{in}$ is diagonal. The decorrelated signals $\\mathbf{y}_{ij} = \\mathbf{W}_i^{\mathsf{H}}\\mathbf{x}_{ij}$ then have covariance $\sum_n h_{ijn}\\mathbf{\Lambda}_{in}$.
 
 ## Computational Advantage
 
@@ -40,9 +40,9 @@ FastMNMF avoids the $\mathcal{O}(M^3)$ per time-frequency-point inversions by di
 
 ## Update Rules
 
-- **$\bm{W}_i$** (transformation matrix): Iterative Projection (IP), Eqs. (5)-(7)
+- **$\\mathbf{W}_i$** (transformation matrix): Iterative Projection (IP), Eqs. (5)-(7)
 - **$t_{ikn}, v_{kjn}$** (NMF variables): MM algorithm, Eqs. (8)-(9)
-- **$\bm{\Lambda}_{in}$** (diagonalized SCMs): MM algorithm, Eq. (10)
+- **$\\mathbf{\Lambda}_{in}$** (diagonalized SCMs): MM algorithm, Eq. (10)
 
 Parameters are estimated by alternating the above updates. Source images are reconstructed via the multichannel Wiener filter.
 

@@ -32,13 +32,13 @@ Proposes **Distributed FastMNMF**, a blind source separation method for distribu
 
 ### FastMNMF Background
 
-The observed STFT coefficients $\bm{x}_{ij} \in \mathbb{C}^M$ are modeled as:
+The observed STFT coefficients $\mathbf{x}_{ij} \in \mathbb{C}^M$ are modeled as:
 
-$$p(\bm{x}_{ij}) = \mathcal{N}_{\mathbb{C}}\left(\bm{x}_{ij}; \bm{0}, \sum_n h_{ijn}\bm{R}_{in}\right)$$
+$$p(\mathbf{x}_{ij}) = \mathcal{N}_{\mathbb{C}}\left(\mathbf{x}_{ij}; \mathbf{0}, \sum_n h_{ijn}\mathbf{R}_{in}\right)$$
 
-where $h_{ijn} = \sum_k t_{ikn}v_{kjn}$ (NMF model) and $\bm{R}_{in}$ is the source SCM. FastMNMF assumes joint diagonalizability of SCMs across sources:
+where $h_{ijn} = \sum_k t_{ikn}v_{kjn}$ (NMF model) and $\mathbf{R}_{in}$ is the source SCM. FastMNMF assumes joint diagonalizability of SCMs across sources:
 
-$$\bm{W}_i^{\mathsf{H}}\bm{R}_{in}\bm{W}_i = \bm{\Lambda}_{in}, \quad \forall n$$
+$$\mathbf{W}_i^{\mathsf{H}}\mathbf{R}_{in}\mathbf{W}_i = \mathbf{\Lambda}_{in}, \quad \forall n$$
 
 reducing computational cost by diagonalizing the $M \times M$ matrices.
 
@@ -46,27 +46,27 @@ reducing computational cost by diagonalizing the $M \times M$ matrices.
 
 For $L$ subarrays with $M^{(l)}$ microphones each ($M = \sum_l M^{(l)}$), the SCMs are constrained to be block-diagonal:
 
-$$\bm{R}_{in} = \operatorname{blkdiag}\left(\bm{R}_{in}^{(1)}, \dots, \bm{R}_{in}^{(L)}\right)$$
+$$\mathbf{R}_{in} = \operatorname{blkdiag}\left(\mathbf{R}_{in}^{(1)}, \dots, \mathbf{R}_{in}^{(L)}\right)$$
 
-Equivalently, $\bm{W}_i$ is constrained to be block-diagonal: $\bm{W}_i = \operatorname{blkdiag}(\bm{W}_i^{(1)}, \dots, \bm{W}_i^{(L)})$. Joint diagonalization and iterative projection (IP) updates are performed independently per subarray, while the NMF variables $t_{ikn}, v_{kjn}$ are shared globally.
+Equivalently, $\mathbf{W}_i$ is constrained to be block-diagonal: $\mathbf{W}_i = \operatorname{blkdiag}(\mathbf{W}_i^{(1)}, \dots, \mathbf{W}_i^{(L)})$. Joint diagonalization and iterative projection (IP) updates are performed independently per subarray, while the NMF variables $t_{ikn}, v_{kjn}$ are shared globally.
 
 The negative log-likelihood cost function becomes:
 
-$$\sum_l\Biggl[\sum_{i,j,\mu}\Biggl(\frac{|y_{ij\mu}^{(l)}|^2}{\sum_{k,n}t_{ikn}v_{kjn}[\bm{\Lambda}_{in}^{(l)}]_{\mu\mu}} + \ln\sum_{k,n}t_{ikn}v_{kjn}[\bm{\Lambda}_{in}^{(l)}]_{\mu\mu}\Biggr) - \sum_i J\ln|\det\bm{W}_i^{(l)}|^2\Biggr]$$
+$$\sum_l\Biggl[\sum_{i,j,\mu}\Biggl(\frac{|y_{ij\mu}^{(l)}|^2}{\sum_{k,n}t_{ikn}v_{kjn}[\mathbf{\Lambda}_{in}^{(l)}]_{\mu\mu}} + \ln\sum_{k,n}t_{ikn}v_{kjn}[\mathbf{\Lambda}_{in}^{(l)}]_{\mu\mu}\Biggr) - \sum_i J\ln|\det\mathbf{W}_i^{(l)}|^2\Biggr]$$
 
 ## Methodology
 
 ### Update Rules
 
-- **$\bm{W}_i^{(l)}$** updated via iterative projection (IP) independently per subarray (Eqs. 14-16)
-- **$t_{ikn}, v_{kjn}, \bm{\Lambda}_{in}^{(l)}$** updated via MM algorithm using conventional FastMNMF rules (Eqs. 8-10) but applied to the decorrelated signals $y_{ij\mu}^{(l)}$
+- **$\mathbf{W}_i^{(l)}$** updated via iterative projection (IP) independently per subarray (Eqs. 14-16)
+- **$t_{ikn}, v_{kjn}, \mathbf{\Lambda}_{in}^{(l)}$** updated via MM algorithm using conventional FastMNMF rules (Eqs. 8-10) but applied to the decorrelated signals $y_{ij\mu}^{(l)}$
 - After estimation, source images at each subarray obtained via multichannel Wiener filter
 
 ### Computational Complexity
 
 | Operation | FastMNMF (all) | Distributed FastMNMF |
 |-----------|----------------|----------------------|
-| $\bm{W}_i$ update | $\mathcal{O}(M^4 + JM^3)$ | $\mathcal{O}(\sum_l M^{(l)4} + J\sum_l M^{(l)3})$ |
+| $\mathbf{W}_i$ update | $\mathcal{O}(M^4 + JM^3)$ | $\mathcal{O}(\sum_l M^{(l)4} + J\sum_l M^{(l)3})$ |
 | NMF/SCM update | $\mathcal{O}(JM^2 + JN(K+M))$ | $\mathcal{O}(J\sum_l M^{(l)2} + JN(K+M))$ |
 | **Total per freq** | $\mathcal{O}(M^4 + JM^3 + JN(K+M))$ | $\mathcal{O}(\sum_l M^{(l)4} + J\sum_l M^{(l)3} + JN(K+M))$ |
 
@@ -102,8 +102,8 @@ Distributed FastMNMF gained +0.8 dB (3 src) / +0.5 dB (5 src) over single-subarr
 ## Key Contributions
 
 1. **Block-diagonal SCM constraint** for distributed microphone arrays within FastMNMF framework
-2. **Shared source spectrogram model** across subarrays while discarding inter-subarray covariance — enables information aggregation without full matrix operations
-3. **Provably equivalent** to conventional FastMNMF with block-diagonal $\bm{W}_i$ constraint
+2. **Shared source spectrogram model** across subarrays while discarding inter-subarray covariance �?enables information aggregation without full matrix operations
+3. **Provably equivalent** to conventional FastMNMF with block-diagonal $\mathbf{W}_i$ constraint
 4. **Computational trade-off analysis**: $L^3$ reduction in matrix inversion cost, $L^2$ reduction in scalar-matrix multiplication cost vs. full-array approach
 5. **Locally underdetermined capability**: Works with 5 sources over 4-mic subarrays by sharing spectrogram information across subarrays
 
