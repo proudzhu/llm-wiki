@@ -83,5 +83,5 @@
 | [[sources/wang-2022-fusing-bc-ac-complex-domain-se\|Wang, Zhang & Wang 2022: Fusing BC and AC for Complex-Domain SE]] | Attention-based AC-BC fusion with DC-CRN; CycleGAN semi-supervised framework matching full supervision with 50% data; +21.1% STOI at −5 dB | 2022 |
 | [[sources/lu-2021-survey-active-noise-control-linear\|Lu et al. 2021: Survey on ANC — Part I: Linear Systems]] | Comprehensive survey of linear ANC: FxLMS, FeLMS, FuLMS, FxAP, FxRLS, subband, distributed ANC, sparse ANC, and practical considerations | 2021 |
 | [[sources/cai-2024-tf-sepnet\|Cai, Zhang & Li 2024: TF-SepNet]] | CNN architecture using parallel 1D kernels along time and frequency axes for low-complexity acoustic scene classification | 2024 |
-
+| [[sources/he-2025-vibomni\|He, Guo, Hou & Yan 2025: VibOmni]] | Multi-modal speech enhancement for earables using IMU bone-conducted vibration; 21% PESQ improvement, BCF data augmentation | 2026-05-16 |
 

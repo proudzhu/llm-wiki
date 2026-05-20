@@ -171,5 +171,11 @@
 | [[concepts/time-frequency-separate-convolutions\|Time-Frequency Separate Convolutions]] | Parallel 1D temporal and frequential convolutions with split channels for efficient audio networks | 2026-05-20 |
 | [[concepts/adaptive-residual-normalization\|Adaptive Residual Normalization]] | Trainable residual normalization balancing raw features with Frequency Instance Normalization | 2026-05-20 |
 | [[concepts/bc-resnet\|BC-ResNet]] | CNN architecture using 1D temporal convolutions broadcasted back to 2D for efficient audio classification | 2026-05-20 |
-
+| [[concepts/all-pass-filter\|All Pass Filter]] | Signal processing filter with unity magnitude response at all frequencies, used to modify phase or delay without affecting amplitude | 2026-05-20 |
+| [[concepts/bone-conduction-function\|Bone Conduction Function (BCF)]] | Transfer function from audio to bone-conducted vibration; enables synthetic vibration data augmentation | 2026-05-16 |
+| [[concepts/complex-ratio-mask\|Complex Ratio Mask]] | Masking target in STFT domain estimating both magnitude and phase of clean speech, providing superior enhancement compared to magnitude-only masks | 2026-05-20 |
+| [[concepts/depthwise-separable-convolution\|Depthwise Separable Convolution]] | Efficient convolution block splitting standard convolution into spatial depthwise and channel-wise pointwise convolutions | 2026-05-20 |
+| [[concepts/dprnn\|Dual-Path RNN (DPRNN)]] | Lightweight sequence modeling with intra/inter-block RNNs for speech separation | 2026-05-16 |
+| [[concepts/robust-control\|Robust Control]] | Branch of control theory dealing with system uncertainty; designs controllers like H-infinity or LQG that maintain stability under acoustic variations | 2026-05-20 |
+| [[concepts/waterbed-effect\|Waterbed Effect]] | Fundamental constraint in feedback control (Bode sensitivity integral) where noise reduction in one band inevitably increases noise in others | 2026-05-20 |
 

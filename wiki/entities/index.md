@@ -188,5 +188,8 @@
 | [[entities/yiqiang-cai\|Yiqiang Cai]] | Researcher at XJTLU — low-complexity acoustic scene classification, TF-SepNet | 2026-05-20 |
 | [[entities/peihong-zhang\|Peihong Zhang]] | Researcher at XJTLU — co-author on TF-SepNet | 2026-05-20 |
 | [[entities/shengchen-li\|Shengchen Li]] | Associate Professor at XJTLU — supervisor, machine listening & acoustic signal processing | 2026-05-20 |
-
+| [[entities/haozheng-hou\|Haozheng Hou]] | CUHK — multi-modal speech enhancement, bone-conduction vibration sensing | 2026-05-16 |
+| [[entities/lixing-he\|Lixing He]] | CUHK — multi-modal speech enhancement, earable computing | 2026-05-16 |
+| [[entities/yunqi-guo\|Yunqi Guo]] | CUHK — multi-modal speech enhancement, bone-conduction sensing | 2026-05-16 |
+| [[entities/zhenyu-yan\|Zhenyu Yan]] | CUHK — mobile/wearable systems, multi-modal sensing, speech enhancement | 2026-05-16 |
 
