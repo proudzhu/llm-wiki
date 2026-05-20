@@ -104,16 +104,10 @@ Remove-Item "raw/papers/{slug}/paper.pdf"
 
 #### 3c. MinerU (For Non-arXiv Papers or arXiv Fallback)
 
-For papers without an arXiv HTML version, or if Defuddle extraction fails, use MinerU to extract markdown.
+For papers without an arXiv HTML version, or if Defuddle extraction fails, use MinerU `extract` to extract markdown.
 
-**Option A: MinerU `flash-extract` (No token required)**
-Recommended for quick zero-setup extraction if the PDF is under 10 MB and under 20 pages.
-```bash
-mineru-open-api flash-extract "raw/papers/{slug}/paper.pdf" -o "raw/papers/{slug}/full-text.md" --language en --timeout 600
-```
-
-**Option B: MinerU `extract` (Token required)**
-Recommended for complex layouts, large papers, or when precision VLM-based layout analysis is needed. Requires running `mineru-open-api auth` first.
+**Command (Token required):**
+Recommended for complex layouts, large papers, or when precision VLM-based layout analysis is needed. Requires running `mineru-open-api auth` to set up token before running.
 ```bash
 mineru-open-api extract "raw/papers/{slug}/paper.pdf" -o "raw/papers/{slug}/full-text.md" --language en --model vlm --formula --table --timeout 600
 ```
