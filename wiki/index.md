@@ -319,7 +319,7 @@
 | [[concepts/spatial-audio-representation-learning\|Spatial Audio Representation Learning]] | SARL framework: conditions MC-SE on VM signals (SARL-S) or features (SARL-F) for improved spatial diversity | 2026-05-12 |
 | [[concepts/neural-directional-filtering\|Neural Directional Filtering]] | Data-driven VDM reconstruction using DNNs to learn ideal directional microphone behavior on compact arrays | 2026-05-13 |
 | [[concepts/neural-observation-filter\|Neural Observation Filter]] | Neural network estimation of RMT observation filter coefficients online; CNN (367k params) or Conv-TasNet; GCC-PHAT + position inputs; async dual-loop | 2026-05-17 |
-| [[concepts/fastmnf\|FastMNMF]] | Fast multichannel NMF with joint diagonalizable SCMs for BSS; block-diagonal variant for distributed arrays reduces cost from O(M^4) to O(sum M_l^4) | 2026-05-20 |
+| [[concepts/fastmnmf\|FastMNMF]] | Fast multichannel NMF with joint diagonalizable SCMs for BSS; block-diagonal variant for distributed arrays reduces cost from O(M^4) to O(sum M_l^4) | 2026-05-20 |
 | [[concepts/virtual-directional-microphone\|Virtual Directional Microphone]] | Computationally synthesized microphone with specified directivity pattern reconstructed from array recordings | 2026-05-13 |
 | [[concepts/diffuse-sound-extraction\|Diffuse Sound Extraction]] | Isolating late reverberant diffuse component for spatial audio control and immersive quality | 2026-05-13 |
 | [[concepts/directivity-pattern\|Directivity Pattern]] | Directional sensitivity characterization of beamformers/microphones; Cardioid, hypercardioid, etc. | 2026-05-13 |

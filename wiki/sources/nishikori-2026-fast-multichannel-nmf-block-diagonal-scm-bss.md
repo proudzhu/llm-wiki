@@ -109,7 +109,7 @@ Distributed FastMNMF gained +0.8 dB (3 src) / +0.5 dB (5 src) over single-subarr
 
 ## Related Concepts
 
-- [[concepts/fastmnf|FastMNMF]]
+- [[concepts/fastmnmf|FastMNMF]]
 - [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
 - [[concepts/distributed-anc|Distributed ANC]] (related distributed processing paradigm)
 - Blind Source Separation (BSS)
