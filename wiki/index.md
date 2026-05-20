@@ -144,6 +144,7 @@
 | [[entities/dongheon-lee\|Dongheon Lee]] | Meta Reality Labs / KAIST — Spatial-Magnifier for spatial upsampling | 2026-05-12 |
 | [[entities/ashutosh-pandey\|Ashutosh Pandey]] | Meta Reality Labs — multichannel speech enhancement, neural beamforming | 2026-05-12 |
 | [[entities/sanjeel-parekh\|Sanjeel Parekh]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
+| [[entities/samuele-cornell\|Samuele Cornell]] | CMU — speech separation, robust ASR, CTRnet & PuLSS | 2026-05-20 |
 | [[entities/daniel-wong\|Daniel Wong]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
 | [[entities/jacob-donley\|Jacob Donley]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
 | [[entities/juan-azcarreta\|Juan Azcarreta]] | Meta Reality Labs — virtual microphone estimation, spatial audio | 2026-05-12 |
@@ -175,6 +176,7 @@
 | [[entities/kelan-kuang\|Kelan Kuang]] | Institute of Acoustics, CAS — DenGCAN, speech enhancement, BC fusion | 2026-05-16 |
 | [[entities/feiran-yang\|Feiran Yang]] | Institute of Acoustics, CAS — speech enhancement, BC/AC fusion | 2026-05-16 |
 | [[entities/zhenglong-liu\|Zhenglong Liu]] | Dalian Univ. of Technology — ATFA-based BC/AC fusion with sensor-failure robustness | 2026-05-16 |
+| [[entities/zhong-qiu-wang\|Zhong-Qiu Wang]] | SUSTech — speech separation, cross-talk reduction, CTRnet, PuLSS | 2026-05-20 |
 | [[entities/zhe-chen\|Zhe Chen]] | Dalian Univ. of Technology — multi-modal BC/AC speech enhancement, ATFA dual-mask | 2026-05-16 |
 | [[entities/fuliang-yin\|Fuliang Yin]] | Dalian Univ. of Technology — speech and audio processing, multi-modal fusion | 2026-05-16 |
 | [[entities/chengshi-zheng\|Chengshi Zheng]] | Institute of Acoustics, CAS — hearing aids, acoustic signal processing, deep learning | 2026-05-15 |
@@ -314,6 +316,7 @@
 | [[concepts/mpdr-beamformer\|MPDR Beamformer]] | Minimizes total output power with distortionless constraint; sensitive to snapshot deficiency | 2026-05-07 |
 | [[concepts/gsc-beamformer\|Generalized Sidelobe Canceller (GSC)]] | Orthogonalized LCMV beamformer: fixed quiescent path + adaptive noise cancellation path | 2026-05-07 |
 | [[concepts/condition-number\|Condition Number]] | Matrix sensitivity metric κ = λ_max/λ_min; controls WNG via Kantorovich inequality | 2026-05-07 |
+| [[concepts/cross-talk-reduction\|Cross-Talk Reduction]] | Isolates wearer's close-talk speech from cross-talk+noise via blind deconvolution; CTRnet + PuLSS framework for far-field separation | 2026-05-20 |
 | [[concepts/gershgorin-circle-theorem\|Gershgorin Circle Theorem]] | Eigenvalue bounds via diagonal dominance; O(M²) alternative to exact EVD for DL | 2026-05-07 |
 | [[concepts/virtual-microphone-estimation\|Virtual Microphone Estimation]] | Estimating signals at absent microphone positions from real measurements; decouples spatial from spectral enhancement | 2026-05-12 |
 | [[concepts/spatial-audio-representation-learning\|Spatial Audio Representation Learning]] | SARL framework: conditions MC-SE on VM signals (SARL-S) or features (SARL-F) for improved spatial diversity | 2026-05-12 |
@@ -414,6 +417,7 @@
 | [[sources/petersen-2008-kalman-filter-virtual-sensing-anc\|Petersen 2008: Kalman Filter for Virtual Sensing]] | State-space observer approach for robust virtual sensing in ANC | 2026-04-18 |
 | [[sources/wang-2024-computation-efficient-virtual-sensing\|Wang 2024: Computation-Efficient Virtual Sensing with MCALMS]] | MCALMS-based MVANC: 10× computational savings over MCFxLMS, ~35 dB NR at virtual locations; broadband tuning noise should encompass control stage range | 2026-04-28 |
 | [[sources/nishikori-2026-fast-multichannel-nmf-block-diagonal-scm-bss\|Nishikori et al. 2026: Distributed FastMNMF for BSS]] | Block-diagonal SCMs for distributed arrays; ~2.95x speedup over full FastMNMF, +0.8 dB SDR over single-subarray | 2026-05-20 |
+| [[sources/wang-2026-cross-talk-speech-reduction-separation\|Wang & Cornell 2026: Cross-Talk Speech Reduction]] | CTRnet for cross-talk reduction via blind deconvolution on real close-talk+far-field pairs; PuLSS for far-field separation; SOTA on CHiME-6 | 2026-05-20 |
 | [[sources/oviste-2026-neural-vslf-speech-enhancement\|Oviste 2026: Neural VSLF for Speech Enhancement]] | HVSF architecture: DNN predicts clean-speech SCM, noise SCM, and tradeoff parameter for VSLF weights; generalizes MWF/MVDR; explicit distortion-noise control | 2026-04-29 |
 | [[sources/he-2025-vibomni\|He, Guo, Hou & Yan 2025: VibOmni]] | Multi-modal speech enhancement for earables using IMU bone-conducted vibration; 21% PESQ improvement, BCF data augmentation | 2026-05-16 |
 | [[sources/farmani-2026-virtual-mic-beamforming-hearing-aid\|Farmani 2026: VM Beamforming for Hearing Aids]] | Low-complexity VM synthesis via WDO-based RTF power model; λ parameter for interpolation/extrapolation; +3 dB ISNR over 2-mic baseline | 2026-04-29 |
@@ -503,10 +507,10 @@
 
 ## Statistics
 
-- **Total pages**: 448
-- **Entities**: 183
-- **Concepts**: 163
-- **Sources**: 78
+- **Total pages**: 452
+- **Entities**: 185
+- **Concepts**: 164
+- **Sources**: 79
 - **Synthesis**: 18
 - **Queries**: 6
 - **Last updated**: 2026-05-20

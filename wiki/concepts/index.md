@@ -165,3 +165,4 @@
 | [[concepts/subband-adaptive-filter\|Subband Adaptive Filter]] | Per-subband adaptive filtering for fast convergence with long channel responses | 2026-05-17 |
 | [[concepts/neural-observation-filter\|Neural Observation Filter]] | Neural network estimation of RMT observation filter coefficients online; CNN (367k params) or Conv-TasNet; GCC-PHAT + position inputs; async dual-loop | 2026-05-17 |
 | [[concepts/fastmnmf\|FastMNMF]] | Fast multichannel NMF with joint diagonalizable SCMs for BSS; block-diagonal variant for distributed arrays reduces cost from O(M^4) to O(sum M_l^4) | 2026-05-20 |
+| [[concepts/cross-talk-reduction\|Cross-Talk Reduction]] | Isolates wearer's close-talk speech from cross-talk+noise via blind deconvolution; CTRnet + PuLSS framework for far-field separation | 2026-05-20 |

@@ -1774,3 +1774,24 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 5 entity rows
   - `wiki/concepts/index.md` — added 1 concept row
+
+---
+
+## [2026-05-20] ingest | Cross-Talk Speech Reduction, by Separation, for Separation (Wang & Cornell 2026)
+
+- **Source**: `raw/papers/wang-2026-cross-talk-speech-reduction-separation/full-text.md` (Zotero: MNP3G55C, arXiv: 2605.19695)
+- **Authors**: Zhong-Qiu Wang, Samuele Cornell
+- **Published**: arXiv preprint, May 2026. Extended version of IJCAI 2026 conference paper.
+- **Summary**: CTRnet for cross-talk reduction via blind deconvolution trained on real close-talk+far-field pairs; PuLSS for far-field speech separation using CTRnet pseudo-labels; SOTA 22.1% cpWER on CHiME-6 with oracle diarization
+- **Pages created**:
+  - `raw/papers/wang-2026-cross-talk-speech-reduction-separation/full-text.md` — extracted text from arXiv HTML (Defuddle)
+  - `raw/papers/wang-2026-cross-talk-speech-reduction-separation/figures/` — 6 downloaded figures
+  - `wiki/sources/wang-2026-cross-talk-speech-reduction-separation.md`
+  - `wiki/concepts/cross-talk-reduction.md`
+  - `wiki/entities/zhong-qiu-wang.md`
+  - `wiki/entities/samuele-cornell.md`
+- **Pages updated**:
+  - `wiki/index.md` — added 2 entities, 1 concept, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 2 entity rows
+  - `wiki/concepts/index.md` — added 1 concept row

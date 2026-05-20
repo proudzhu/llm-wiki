@@ -136,6 +136,8 @@
 | [[entities/dongheon-lee\|Dongheon Lee]] | Meta Reality Labs / KAIST — Spatial-Magnifier for spatial upsampling | 2026-05-12 |
 | [[entities/ashutosh-pandey\|Ashutosh Pandey]] | Meta Reality Labs — multichannel speech enhancement, neural beamforming | 2026-05-12 |
 | [[entities/sanjeel-parekh\|Sanjeel Parekh]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
+| [[entities/samuele-cornell\|Samuele Cornell]] | CMU — speech separation, robust ASR, CTRnet & PuLSS | 2026-05-20 |
+| [[entities/zhong-qiu-wang\|Zhong-Qiu Wang]] | SUSTech — speech separation, cross-talk reduction, CTRnet, PuLSS | 2026-05-20 |
 | [[entities/daniel-wong\|Daniel Wong]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
 | [[entities/jacob-donley\|Jacob Donley]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
 | [[entities/juan-azcarreta\|Juan Azcarreta]] | Meta Reality Labs — virtual microphone estimation, spatial audio | 2026-05-12 |
