@@ -1750,3 +1750,27 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/index.md` — added 1 concept, 1 source; updated statistics
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/concepts/index.md` — added 1 concept row
+
+---
+
+## [2026-05-20] ingest | Distributed FastMNMF for Efficient BSS Using Distributed Microphone Arrays (Nishikori et al. 2026)
+
+- **Source**: `raw/papers/nishikori-2026-fast-multichannel-nmf-block-diagonal-scm-bss/full-text.md` (Zotero: XYXBN3H5, arXiv: 2605.19388)
+- **Authors**: Hirotaka Nishikori, Nobutaka Ito, Kouei Yamaoka, Norihiro Takamune, Hiroshi Saruwatari
+- **Published**: arXiv preprint, May 2026
+- **Summary**: Block-diagonal SCM constraint for distributed FastMNMF; ~2.95x speedup over full-array, +0.5-0.8 dB SDR over single-subarray
+- **Pages created**:
+  - `raw/papers/nishikori-2026-fast-multichannel-nmf-block-diagonal-scm-bss/full-text.md` — extracted text from arXiv HTML (Defuddle)
+  - `raw/papers/nishikori-2026-fast-multichannel-nmf-block-diagonal-scm-bss/figures/` — 3 downloaded figures
+  - `wiki/sources/nishikori-2026-fast-multichannel-nmf-block-diagonal-scm-bss.md`
+  - `wiki/concepts/fastmnf.md`
+  - `wiki/entities/hirotaka-nishikori.md`
+  - `wiki/entities/nobutaka-ito.md`
+  - `wiki/entities/kouei-yamaoka.md`
+  - `wiki/entities/norihiro-takamune.md`
+  - `wiki/entities/hiroshi-saruwatari.md`
+- **Pages updated**:
+  - `wiki/index.md` — added 5 entities, 1 concept, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 5 entity rows
+  - `wiki/concepts/index.md` — added 1 concept row

@@ -178,3 +178,8 @@
 | [[entities/heming-wang\|Heming Wang]] | Ohio State University — attention-based AC-BC complex-domain fusion for speech enhancement | 2026-05-16 |
 | [[entities/xueliang-zhang\|Xueliang Zhang]] | Inner Mongolia University — bone-conduction speech processing, multi-modal fusion | 2026-05-16 |
 | [[entities/deliang-wang\|DeLiang Wang]] | Ohio State University — computational auditory scene analysis, speech enhancement | 2026-05-16 |
+| [[entities/hirotaka-nishikori\|Hirotaka Nishikori]] | University of Tokyo — distributed FastMNMF, BSS using distributed microphone arrays | 2026-05-20 |
+| [[entities/hiroshi-saruwatari\|Hiroshi Saruwatari]] | University of Tokyo — BSS, speech enhancement, microphone arrays | 2026-05-20 |
+| [[entities/kouei-yamaoka\|Kouei Yamaoka]] | University of Tokyo — BSS, distributed microphone arrays, IVA | 2026-05-20 |
+| [[entities/nobutaka-ito\|Nobutaka Ito]] | AIST — BSS, FastMNMF, joint diagonalization | 2026-05-20 |
+| [[entities/norihiro-takamune\|Norihiro Takamune]] | University of Tokyo — BSS, multichannel signal processing, IVA | 2026-05-20 |

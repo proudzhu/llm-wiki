@@ -65,9 +65,11 @@
 | [[entities/martin-mckinney\|Martin McKinney]] | Starkey — hearing aid signal processing, multi-modal sensors | 2026-04-27 |
 | [[entities/ariel-frank\|Ariel Frank]] | Technion — time-domain ROI beamforming for smart glasses | 2026-04-28 |
 | [[entities/israel-cohen\|Israel Cohen]] | Technion — speech processing, beamforming, spatial filtering | 2026-04-28 |
+| [[entities/kouei-yamaoka\|Kouei Yamaoka]] | University of Tokyo — BSS, distributed microphone arrays, IVA | 2026-05-20 |
 | [[entities/shiming-zhang\|Shiming Zhang]] | Saitama University — BC speech analysis/synthesis, WACF-CEP pitch extraction, LS-IIR synthesis | 2026-04-28 |
 | [[entities/boxiang-wang\|Boxiang Wang]] | NTU — MCALMS-based MVANC, directional SFANC, PD-SFANC | 2026-04-30 |
 | [[entities/junwei-ji\|Junwei Ji]] | NTU — multichannel ANC, distributed ANC, virtual sensing | 2026-04-28 |
+| [[entities/nobutaka-ito\|Nobutaka Ito]] | AIST — BSS, FastMNMF, joint diagonalization | 2026-05-20 |
 | [[entities/xiaoyi-shen\|Xiaoyi Shen]] | NTU — wireless ANC headphones, coherence-based selection, hybrid ANC | 2026-04-28 |
 | [[entities/dongyuan-shi\|Dongyuan Shi]] | NTU — meta-learning for ANC, generative fixed-filter ANC, open window ANC | 2026-04-28 |
 | [[entities/woon-seng-gan\|Woon-Seng Gan]] | NTU DSP Lab — ANC, adaptive filtering, audio signal processing | 2026-04-28 |
@@ -178,6 +180,7 @@
 | [[entities/chengshi-zheng\|Chengshi Zheng]] | Institute of Acoustics, CAS — hearing aids, acoustic signal processing, deep learning | 2026-05-15 |
 | [[entities/fengyuan-hao\|Fengyuan Hao]] | Institute of Acoustics, CAS — hearing aids, adaptive feedback cancellation | 2026-05-15 |
 | [[entities/tao-yu\|Tao Yu]] | Tencent AI Lab / Ethereal Audio Lab — acoustic howling suppression, speech processing | 2026-05-15 |
+| [[entities/norihiro-takamune\|Norihiro Takamune]] | University of Tokyo — BSS, multichannel signal processing, IVA | 2026-05-20 |
 | [[entities/xiaodong-li\|Xiaodong Li]] | Institute of Acoustics, CAS — hearing aids, acoustic signal processing | 2026-05-15 |
 | [[entities/xiaofan-zhan\|Xiaofan Zhan]] | Institute of Acoustics, CAS — hearing aids, adaptive feedback cancellation, deep learning | 2026-05-15 |
 | [[entities/yuzhong-wu\|Yuzhong Wu]] | Tencent Ethereal Audio Lab — acoustic howling suppression, speech processing | 2026-05-15 |
@@ -186,6 +189,8 @@
 | [[entities/karolis-misiunas\|Karolis Misiunas]] | Google Research — co-author on SEANet multi-modal speech enhancement | 2026-05-17 |
 | [[entities/dominik-roblek\|Dominik Roblek]] | Google Research — co-author on SEANet multi-modal speech enhancement | 2026-05-17 |
 | [[entities/heming-wang\|Heming Wang]] | Ohio State University — attention-based AC-BC complex-domain fusion for speech enhancement | 2026-05-16 |
+| [[entities/hirotaka-nishikori\|Hirotaka Nishikori]] | University of Tokyo — distributed FastMNMF, BSS using distributed microphone arrays | 2026-05-20 |
+| [[entities/hiroshi-saruwatari\|Hiroshi Saruwatari]] | University of Tokyo — BSS, speech enhancement, microphone arrays | 2026-05-20 |
 | [[entities/xueliang-zhang\|Xueliang Zhang]] | Inner Mongolia University — bone-conduction speech processing, multi-modal fusion | 2026-05-16 |
 | [[entities/deliang-wang\|DeLiang Wang]] | Ohio State University — computational auditory scene analysis, speech enhancement | 2026-05-16 |
 
@@ -314,6 +319,7 @@
 | [[concepts/spatial-audio-representation-learning\|Spatial Audio Representation Learning]] | SARL framework: conditions MC-SE on VM signals (SARL-S) or features (SARL-F) for improved spatial diversity | 2026-05-12 |
 | [[concepts/neural-directional-filtering\|Neural Directional Filtering]] | Data-driven VDM reconstruction using DNNs to learn ideal directional microphone behavior on compact arrays | 2026-05-13 |
 | [[concepts/neural-observation-filter\|Neural Observation Filter]] | Neural network estimation of RMT observation filter coefficients online; CNN (367k params) or Conv-TasNet; GCC-PHAT + position inputs; async dual-loop | 2026-05-17 |
+| [[concepts/fastmnf\|FastMNMF]] | Fast multichannel NMF with joint diagonalizable SCMs for BSS; block-diagonal variant for distributed arrays reduces cost from O(M^4) to O(sum M_l^4) | 2026-05-20 |
 | [[concepts/virtual-directional-microphone\|Virtual Directional Microphone]] | Computationally synthesized microphone with specified directivity pattern reconstructed from array recordings | 2026-05-13 |
 | [[concepts/diffuse-sound-extraction\|Diffuse Sound Extraction]] | Isolating late reverberant diffuse component for spatial audio control and immersive quality | 2026-05-13 |
 | [[concepts/directivity-pattern\|Directivity Pattern]] | Directional sensitivity characterization of beamformers/microphones; Cardioid, hypercardioid, etc. | 2026-05-13 |
@@ -407,6 +413,7 @@
 | [[sources/holzmueller-2026-obs-tasnet-virtual-sensing\|Holzmüller 2026: Obs-TasNet for Virtual Sensing]] | Neural RMT observation filter estimation via modified Conv-TasNet; temporal bottleneck cuts params 40%, complexity 4x; asynchronous dual-loop operation | 2026-04-18 |
 | [[sources/petersen-2008-kalman-filter-virtual-sensing-anc\|Petersen 2008: Kalman Filter for Virtual Sensing]] | State-space observer approach for robust virtual sensing in ANC | 2026-04-18 |
 | [[sources/wang-2024-computation-efficient-virtual-sensing\|Wang 2024: Computation-Efficient Virtual Sensing with MCALMS]] | MCALMS-based MVANC: 10× computational savings over MCFxLMS, ~35 dB NR at virtual locations; broadband tuning noise should encompass control stage range | 2026-04-28 |
+| [[sources/nishikori-2026-fast-multichannel-nmf-block-diagonal-scm-bss\|Nishikori et al. 2026: Distributed FastMNMF for BSS]] | Block-diagonal SCMs for distributed arrays; ~2.95x speedup over full FastMNMF, +0.8 dB SDR over single-subarray | 2026-05-20 |
 | [[sources/oviste-2026-neural-vslf-speech-enhancement\|Oviste 2026: Neural VSLF for Speech Enhancement]] | HVSF architecture: DNN predicts clean-speech SCM, noise SCM, and tradeoff parameter for VSLF weights; generalizes MWF/MVDR; explicit distortion-noise control | 2026-04-29 |
 | [[sources/he-2025-vibomni\|He, Guo, Hou & Yan 2025: VibOmni]] | Multi-modal speech enhancement for earables using IMU bone-conducted vibration; 21% PESQ improvement, BCF data augmentation | 2026-05-16 |
 | [[sources/farmani-2026-virtual-mic-beamforming-hearing-aid\|Farmani 2026: VM Beamforming for Hearing Aids]] | Low-complexity VM synthesis via WDO-based RTF power model; λ parameter for interpolation/extrapolation; +3 dB ISNR over 2-mic baseline | 2026-04-29 |
@@ -496,10 +503,10 @@
 
 ## Statistics
 
-- **Total pages**: 441
-- **Entities**: 178
-- **Concepts**: 162
-- **Sources**: 77
+- **Total pages**: 448
+- **Entities**: 183
+- **Concepts**: 163
+- **Sources**: 78
 - **Synthesis**: 18
 - **Queries**: 6
-- **Last updated**: 2026-05-17
+- **Last updated**: 2026-05-20
