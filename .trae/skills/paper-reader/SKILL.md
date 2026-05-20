@@ -104,8 +104,16 @@ Remove-Item "raw/papers/{slug}/paper.pdf"
 
 #### 3c. MinerU (For Non-arXiv Papers or arXiv Fallback)
 
-For papers without an arXiv HTML version, or if Defuddle extraction fails, use MinerU `extract` with VLM model for high accuracy on formulas, tables, and complex layouts.
+For papers without an arXiv HTML version, or if Defuddle extraction fails, use MinerU to extract markdown.
 
+**Option A: MinerU `flash-extract` (No token required)**
+Recommended for quick zero-setup extraction if the PDF is under 10 MB and under 20 pages.
+```bash
+mineru-open-api flash-extract "raw/papers/{slug}/paper.pdf" -o "raw/papers/{slug}/full-text.md" --language en --timeout 600
+```
+
+**Option B: MinerU `extract` (Token required)**
+Recommended for complex layouts, large papers, or when precision VLM-based layout analysis is needed. Requires running `mineru-open-api auth` first.
 ```bash
 mineru-open-api extract "raw/papers/{slug}/paper.pdf" -o "raw/papers/{slug}/full-text.md" --language en --model vlm --formula --table --timeout 600
 ```
@@ -356,6 +364,16 @@ Append to the **end** of `wiki/log.md` (entries are sorted by date ascending, ne
 
 For re-ingestion, use `ingest (re)` as the operation.
 
+### Step 12: Build Verification (MkDocs)
+
+After completing the ingestion, index updates, and log entries, verify that the build is completely clean and no broken references were introduced:
+
+```bash
+uv run mkdocs build --strict
+```
+
+If the command fails or exits with warnings (e.g., due to missing target pages or invalid links), you must resolve those warnings before the task is complete.
+
 ## Naming Conventions
 
 | Type | Pattern | Example |
@@ -369,10 +387,13 @@ For re-ingestion, use `ingest (re)` as the operation.
 - **Never modify** files in `raw/` after creation (immutability rule) — **exception**: replacing remote image URLs with local paths in `full-text.md` is allowed
 - **Always check** if a page already exists before creating (use Glob)
 - **Always read** existing pages before updating them (use Read)
-- **Wikilinks** use vault-absolute paths: `[[entities/name|Display Name]]` from any page
-- **Cross-references** are bidirectional — when adding a link from A to B, also add a link from B to A
-- **Frontmatter dates**: Use today's date for `created` on new pages, update `updated` on modified pages
-- **No comments** in code/markdown unless explicitly requested
-- **Prefer curl over Python** for Zotero API calls
-- **Create missing concept pages** during ingest to maintain wiki integrity
-- **Log entries**: Always append at the end (newest last)
+- **Wikilinks** use vault-absolute paths: `[[entities/name|Display Name]]` from any page.
+- **Never use `../` prefixes inside wikilinks** (e.g., write `[[concepts/foo]]`, not `[[../concepts/foo]]`).
+- **Never link to a page that does not exist.** If you reference `[[concepts/some-new-concept]]`, you MUST create that concept page or leave it as plain text.
+- **Cross-references** are bidirectional — when adding a link from A to B, also add a link from B to A.
+- **Frontmatter dates**: Use today's date for `created` on new pages, update `updated` on modified pages.
+- **No comments** in code/markdown unless explicitly requested.
+- **Prefer curl over Python** for Zotero API calls.
+- **Create missing concept pages** during ingest to maintain wiki integrity.
+- **Always run build verification** with `uv run mkdocs build --strict` as the final step.
+- **Log entries**: Always append at the end (newest last).
