@@ -185,3 +185,8 @@
 | [[entities/kouei-yamaoka\|Kouei Yamaoka]] | University of Tokyo — BSS, distributed microphone arrays, IVA | 2026-05-20 |
 | [[entities/nobutaka-ito\|Nobutaka Ito]] | AIST — BSS, FastMNMF, joint diagonalization | 2026-05-20 |
 | [[entities/norihiro-takamune\|Norihiro Takamune]] | University of Tokyo — BSS, multichannel signal processing, IVA | 2026-05-20 |
+| [[entities/yiqiang-cai\|Yiqiang Cai]] | Researcher at XJTLU — low-complexity acoustic scene classification, TF-SepNet | 2026-05-20 |
+| [[entities/peihong-zhang\|Peihong Zhang]] | Researcher at XJTLU — co-author on TF-SepNet | 2026-05-20 |
+| [[entities/shengchen-li\|Shengchen Li]] | Associate Professor at XJTLU — supervisor, machine listening & acoustic signal processing | 2026-05-20 |
+
+

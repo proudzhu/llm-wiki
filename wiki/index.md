@@ -195,6 +195,9 @@
 | [[entities/hiroshi-saruwatari\|Hiroshi Saruwatari]] | University of Tokyo — BSS, speech enhancement, microphone arrays | 2026-05-20 |
 | [[entities/xueliang-zhang\|Xueliang Zhang]] | Inner Mongolia University — bone-conduction speech processing, multi-modal fusion | 2026-05-16 |
 | [[entities/deliang-wang\|DeLiang Wang]] | Ohio State University — computational auditory scene analysis, speech enhancement | 2026-05-16 |
+| [[entities/yiqiang-cai\|Yiqiang Cai]] | Researcher at XJTLU — low-complexity acoustic scene classification, TF-SepNet | 2026-05-20 |
+| [[entities/peihong-zhang\|Peihong Zhang]] | Researcher at XJTLU — co-author on TF-SepNet | 2026-05-20 |
+| [[entities/shengchen-li\|Shengchen Li]] | Associate Professor at XJTLU — supervisor, machine listening & acoustic signal processing | 2026-05-20 |
 
 ---
 
@@ -368,6 +371,11 @@
 | [[concepts/convex-combination-anc\|Convex Combination ANC]] | Two filters (fast+slow) blended via mixing parameter to avoid convergence/residue tradeoff | 2026-05-17 |
 | [[concepts/sparse-anc\|Sparse ANC]] | Exploiting path or source sparsity via proportionate NLMS and zero-attracting strategies | 2026-05-17 |
 | [[concepts/subband-adaptive-filter\|Subband Adaptive Filter]] | Per-subband adaptive filtering for fast convergence with long channel responses | 2026-05-17 |
+| [[concepts/acoustic-scene-classification\|Acoustic Scene Classification]] | Classifying environmental audio recordings into location-based classes | 2026-05-20 |
+| [[concepts/effective-receptive-field\|Effective Receptive Field]] | The actual input region contributing significantly to a deep network unit's response | 2026-05-20 |
+| [[concepts/time-frequency-separate-convolutions\|Time-Frequency Separate Convolutions]] | Parallel 1D temporal and frequential convolutions with split channels for efficient audio networks | 2026-05-20 |
+| [[concepts/adaptive-residual-normalization\|Adaptive Residual Normalization]] | Trainable residual normalization balancing raw features with Frequency Instance Normalization | 2026-05-20 |
+| [[concepts/bc-resnet\|BC-ResNet]] | CNN architecture using 1D temporal convolutions broadcasted back to 2D for efficient audio classification | 2026-05-20 |
 
 ---
 
@@ -456,6 +464,7 @@
 | [[sources/tagliasacchi-2020-seanet\|Tagliasacchi, Li, Misiunas & Roblek 2020: SEANet]] | Multi-modal speech enhancement using accelerometer data; wave-to-wave UNet with adversarial training; 9.6 dB SI-SDRi in mixed-speech scenarios | 2020 |
 | [[sources/wang-2022-fusing-bc-ac-complex-domain-se\|Wang, Zhang & Wang 2022: Fusing BC and AC for Complex-Domain SE]] | Attention-based AC-BC fusion with DC-CRN; CycleGAN semi-supervised framework matching full supervision with 50% data; +21.1% STOI at −5 dB | 2022 |
 | [[sources/lu-2021-survey-active-noise-control-linear\|Lu et al. 2021: Survey on ANC — Part I: Linear Systems]] | Comprehensive survey of linear ANC: FxLMS, FeLMS, FuLMS, FxAP, FxRLS, subband, distributed ANC, sparse ANC, and practical considerations | 2021 |
+| [[sources/cai-2024-tf-sepnet\|Cai, Zhang & Li 2024: TF-SepNet]] | CNN architecture using parallel 1D kernels along time and frequency axes for low-complexity acoustic scene classification | 2024 |
 
 ---
 
@@ -507,10 +516,10 @@
 
 ## Statistics
 
-- **Total pages**: 452
-- **Entities**: 185
-- **Concepts**: 164
-- **Sources**: 79
+- **Total pages**: 461
+- **Entities**: 188
+- **Concepts**: 169
+- **Sources**: 80
 - **Synthesis**: 18
 - **Queries**: 6
 - **Last updated**: 2026-05-20

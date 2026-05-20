@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-18
-updated: 2026-04-25
+updated: 2026-05-20
 sources:
+  - raw/papers/cai-2024-tf-sepnet/full-text.md
 tags:
   - neural-networks
   - deep-learning
@@ -22,7 +23,7 @@ Computational systems inspired by biological neural networks, organized into thr
 Rate-based neuron: $r = f(Wu + b)$, where $f$ is a nonlinear activation function.
 
 Key architectures:
-- **CNNs**: Weight sharing for grid-like data (images); shift-invariant features
+- **CNNs**: Weight sharing for grid-like data (images); shift-invariant features (e.g., [[concepts/bc-resnet|BC-ResNet]])
 - **RNNs**: Temporal processing via hidden state; LSTM/GRU for long-range dependencies
 - **Transformers**: Self-attention mechanism; parallel processing of sequences
 
@@ -37,13 +38,16 @@ ANN-to-SNN conversion bridges the gap: train with backpropagation, deploy as spi
 
 ## Related Concepts
 
-- [[spiking-neural-networks|Spiking Neural Networks]]
-- [[neuromorphic-computing|Neuromorphic Computing]]
-- [[deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
-- [[backpropagation-through-time|Backpropagation Through Time]]
-- [[real-time-recurrent-learning|Real-Time Recurrent Learning]]
-- [[active-noise-control|Active Noise Control]]
+- [[concepts/spiking-neural-networks|Spiking Neural Networks]]
+- [[concepts/neuromorphic-computing|Neuromorphic Computing]]
+- [[concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
+- [[concepts/backpropagation-through-time|Backpropagation Through Time]]
+- [[concepts/real-time-recurrent-learning|Real-Time Recurrent Learning]]
+- [[concepts/active-noise-control|Active Noise Control]]
+- [[concepts/acoustic-scene-classification|Acoustic Scene Classification]]
+- [[concepts/bc-resnet|BC-ResNet]]
 
 ## Related Sources
 
 - [[sources/yamazaki-2022-spiking-nn-review|Yamazaki 2022: Spiking Neural Networks Review]]
+- [[sources/cai-2024-tf-sepnet|Cai, Zhang & Li 2024: TF-SepNet]]

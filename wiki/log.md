@@ -1795,3 +1795,30 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 2 entity rows
   - `wiki/concepts/index.md` — added 1 concept row
+
+---
+
+## [2026-05-20] ingest | TF-SepNet: an efficient 1D kernel design in CNNs for low-complexity acoustic scene classification (Cai et al. 2024)
+
+- **Source**: `raw/papers/cai-2024-tf-sepnet/full-text.md` (Zotero: FYGJZNTZ, arXiv: 2309.08200)
+- **Authors**: Yiqiang Cai, Peihong Zhang, Shengchen Li
+- **Published**: ICASSP 2024
+- **Summary**: TF-SepNet: an extremely efficient CNN for ASC. Uses parallel 1D depthwise convolutions (TF-SepConvs) along separate frequential and temporal paths to process Mel-spectrogram features, achieving 60.0% accuracy on TAU 2022 dataset with 59% lower MACs and 38-39% fewer parameters. Demonstrates that parallel separate kernels enlarge the Effective Receptive Field (ERF).
+- **Pages created**:
+  - `wiki/sources/cai-2024-tf-sepnet.md`
+  - `wiki/concepts/acoustic-scene-classification.md`
+  - `wiki/concepts/effective-receptive-field.md`
+  - `wiki/concepts/time-frequency-separate-convolutions.md`
+  - `wiki/concepts/adaptive-residual-normalization.md`
+  - `wiki/concepts/bc-resnet.md`
+  - `wiki/entities/yiqiang-cai.md`
+  - `wiki/entities/peihong-zhang.md`
+  - `wiki/entities/shengchen-li.md`
+- **Pages updated**:
+  - `wiki/index.md` — added 3 entities, 5 concepts, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 3 entity rows
+  - `wiki/concepts/index.md` — added 5 concept rows
+  - `wiki/concepts/spectrogram-analysis.md` — updated with STFT/Log-Mel formulations
+  - `wiki/concepts/neural-networks.md` — added related links
+
