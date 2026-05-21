@@ -170,7 +170,10 @@
 | [[concepts/effective-receptive-field\|Effective Receptive Field]] | The actual input region contributing significantly to a deep network unit's response | 2026-05-20 |
 | [[concepts/time-frequency-separate-convolutions\|Time-Frequency Separate Convolutions]] | Parallel 1D temporal and frequential convolutions with split channels for efficient audio networks | 2026-05-20 |
 | [[concepts/adaptive-residual-normalization\|Adaptive Residual Normalization]] | Trainable residual normalization balancing raw features with Frequency Instance Normalization | 2026-05-20 |
-| [[concepts/bc-resnet\|BC-ResNet]] | CNN architecture using 1D temporal convolutions broadcasted back to 2D for efficient audio classification | 2026-05-20 |
+| [[concepts/bc-resnet\|BC-ResNet]] | CNN architecture using broadcasted residual blocks for efficient keyword spotting and audio classification | 2026-05-20 |
+| [[concepts/keyword-spotting\|Keyword Spotting]] | Detecting predefined spoken commands in audio streams under strict latency, memory, and compute constraints | 2026-05-21 |
+| [[concepts/broadcasted-residual-learning\|Broadcasted Residual Learning]] | Residual design that averages 2D spectrogram features over frequency, applies temporal convolution, and broadcasts back to 2D | 2026-05-21 |
+| [[concepts/subspectral-normalization\|SubSpectral Normalization]] | Frequency-subband normalization for spectrogram neural networks, used in BC-ResNet blocks | 2026-05-21 |
 | [[concepts/all-pass-filter\|All Pass Filter]] | Signal processing filter with unity magnitude response at all frequencies, used to modify phase or delay without affecting amplitude | 2026-05-20 |
 | [[concepts/bone-conduction-function\|Bone Conduction Function (BCF)]] | Transfer function from audio to bone-conducted vibration; enables synthetic vibration data augmentation | 2026-05-16 |
 | [[concepts/complex-ratio-mask\|Complex Ratio Mask]] | Masking target in STFT domain estimating both magnitude and phase of clean speech, providing superior enhancement compared to magnitude-only masks | 2026-05-20 |

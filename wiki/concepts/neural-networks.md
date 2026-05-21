@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-18
-updated: 2026-05-20
+updated: 2026-05-21
 sources:
+  - raw/papers/kim-2021-broadcasted-residual-learning/full-text.md
   - raw/papers/cai-2024-tf-sepnet/full-text.md
 tags:
   - neural-networks
@@ -23,7 +24,7 @@ Computational systems inspired by biological neural networks, organized into thr
 Rate-based neuron: $r = f(Wu + b)$, where $f$ is a nonlinear activation function.
 
 Key architectures:
-- **CNNs**: Weight sharing for grid-like data (images); shift-invariant features (e.g., [[concepts/bc-resnet|BC-ResNet]])
+- **CNNs**: Weight sharing for grid-like data such as images and spectrograms; efficient audio variants include [[concepts/bc-resnet|BC-ResNet]] and [[concepts/broadcasted-residual-learning|Broadcasted Residual Learning]]
 - **RNNs**: Temporal processing via hidden state; LSTM/GRU for long-range dependencies
 - **Transformers**: Self-attention mechanism; parallel processing of sequences
 
@@ -45,9 +46,12 @@ ANN-to-SNN conversion bridges the gap: train with backpropagation, deploy as spi
 - [[concepts/real-time-recurrent-learning|Real-Time Recurrent Learning]]
 - [[concepts/active-noise-control|Active Noise Control]]
 - [[concepts/acoustic-scene-classification|Acoustic Scene Classification]]
+- [[concepts/keyword-spotting|Keyword Spotting]]
 - [[concepts/bc-resnet|BC-ResNet]]
+- [[concepts/broadcasted-residual-learning|Broadcasted Residual Learning]]
 
 ## Related Sources
 
 - [[sources/yamazaki-2022-spiking-nn-review|Yamazaki 2022: Spiking Neural Networks Review]]
+- [[sources/kim-2021-broadcasted-residual-learning|Kim, Chang, Lee & Sung 2021: Broadcasted Residual Learning]]
 - [[sources/cai-2024-tf-sepnet|Cai, Zhang & Li 2024: TF-SepNet]]

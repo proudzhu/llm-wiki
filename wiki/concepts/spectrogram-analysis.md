@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-18
-updated: 2026-05-20
+updated: 2026-05-21
 sources:
+  - raw/papers/kim-2021-broadcasted-residual-learning/full-text.md
   - raw/papers/cai-2024-tf-sepnet/full-text.md
 tags:
   - acoustic-signal-processing
@@ -41,14 +42,16 @@ For classification and learning tasks (e.g., Acoustic Scene Classification), the
 2. **Log-Amplitude Scaling**: The filterbank outputs are scaled logarithmically to match human loudness perception:
    $$\text{Log-Mel}(m, b) = \log\left(M(m, b) + \epsilon\right)$$
 
-In TF-SepNet, audio signals are down-sampled to 32 kHz, and STFT is applied with a window size of 3072 and a hop size of 500. A Mel-scaled filter bank with 256 frequency bins and 4096 FFT is then applied to produce the Log-Mel spectrogram.
+In BC-ResNet keyword spotting, 1-second audio clips sampled at 16 kHz are converted to 40-dimensional Log-Mel spectrograms using a 30 ms window and 10 ms frame shift. In TF-SepNet acoustic scene classification, audio signals are down-sampled to 32 kHz, and STFT is applied with a window size of 3072 and a hop size of 500. A Mel-scaled filter bank with 256 frequency bins and 4096 FFT is then applied to produce the Log-Mel spectrogram.
 
 ## Related Concepts
 
 - [[concepts/acoustic-scene-classification|Acoustic Scene Classification]]
+- [[concepts/keyword-spotting|Keyword Spotting]]
 - [[concepts/active-noise-control|Active Noise Control]]
 - [[concepts/time-frequency-separate-convolutions|Time-Frequency Separate Convolutions]]
 
 ## Related Sources
 
+- [[sources/kim-2021-broadcasted-residual-learning|Kim, Chang, Lee & Sung 2021: Broadcasted Residual Learning]]
 - [[sources/cai-2024-tf-sepnet|Cai, Zhang & Li 2024: TF-SepNet]]

@@ -1822,3 +1822,30 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/concepts/spectrogram-analysis.md` — updated with STFT/Log-Mel formulations
   - `wiki/concepts/neural-networks.md` — added related links
 
+---
+
+## [2026-05-21] ingest | Broadcasted Residual Learning for Efficient Keyword Spotting (Kim et al. 2021)
+
+- **Source**: `raw/papers/kim-2021-broadcasted-residual-learning/full-text.md` (Zotero: EFJM3USE, arXiv: 2106.04140)
+- **Authors**: Byeonggeun Kim, Simyung Chang, Jinkyu Lee, Dooyong Sung
+- **Published**: INTERSPEECH 2021
+- **Summary**: Introduces broadcasted residual learning and BC-ResNet for efficient keyword spotting. The method applies frequency-aware 2D processing, averages over frequency, performs low-cost temporal convolution, and broadcasts the temporal residual back over the spectrogram map. BC-ResNet-8 reaches 98.0% on Speech Commands v1 and 98.7% on v2 with 321k parameters.
+- **Pages created**:
+  - `wiki/sources/kim-2021-broadcasted-residual-learning.md`
+  - `wiki/concepts/keyword-spotting.md`
+  - `wiki/concepts/broadcasted-residual-learning.md`
+  - `wiki/concepts/subspectral-normalization.md`
+  - `wiki/entities/byeonggeun-kim.md`
+  - `wiki/entities/simyung-chang.md`
+  - `wiki/entities/jinkyu-lee.md`
+  - `wiki/entities/dooyong-sung.md`
+- **Pages updated**:
+  - `wiki/concepts/bc-resnet.md` — updated with original paper details, equations, figure, and results
+  - `wiki/concepts/depthwise-separable-convolution.md` — added related source
+  - `wiki/concepts/spectrogram-analysis.md` — added BC-ResNet Log-Mel setup and related links
+  - `wiki/concepts/neural-networks.md` — added efficient audio CNN links
+  - `wiki/index.md` — added 4 entities, 3 concepts, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 4 entity rows
+  - `wiki/concepts/index.md` — added 3 concept rows
+

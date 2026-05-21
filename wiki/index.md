@@ -198,6 +198,10 @@
 | [[entities/yiqiang-cai\|Yiqiang Cai]] | Researcher at XJTLU — low-complexity acoustic scene classification, TF-SepNet | 2026-05-20 |
 | [[entities/peihong-zhang\|Peihong Zhang]] | Researcher at XJTLU — co-author on TF-SepNet | 2026-05-20 |
 | [[entities/shengchen-li\|Shengchen Li]] | Associate Professor at XJTLU — supervisor, machine listening & acoustic signal processing | 2026-05-20 |
+| [[entities/byeonggeun-kim\|Byeonggeun Kim]] | Qualcomm AI Research — lead author of BC-ResNet for efficient keyword spotting | 2026-05-21 |
+| [[entities/simyung-chang\|Simyung Chang]] | Qualcomm AI Research — neural audio processing and SubSpectral Normalization in BC-ResNet | 2026-05-21 |
+| [[entities/jinkyu-lee\|Jinkyu Lee]] | Qualcomm AI Research — co-author on BC-ResNet for on-device keyword spotting | 2026-05-21 |
+| [[entities/dooyong-sung\|Dooyong Sung]] | Qualcomm AI Research — co-author on broadcasted residual learning for keyword spotting | 2026-05-21 |
 
 ---
 
@@ -375,7 +379,10 @@
 | [[concepts/effective-receptive-field\|Effective Receptive Field]] | The actual input region contributing significantly to a deep network unit's response | 2026-05-20 |
 | [[concepts/time-frequency-separate-convolutions\|Time-Frequency Separate Convolutions]] | Parallel 1D temporal and frequential convolutions with split channels for efficient audio networks | 2026-05-20 |
 | [[concepts/adaptive-residual-normalization\|Adaptive Residual Normalization]] | Trainable residual normalization balancing raw features with Frequency Instance Normalization | 2026-05-20 |
-| [[concepts/bc-resnet\|BC-ResNet]] | CNN architecture using 1D temporal convolutions broadcasted back to 2D for efficient audio classification | 2026-05-20 |
+| [[concepts/bc-resnet\|BC-ResNet]] | CNN architecture using broadcasted residual blocks for efficient keyword spotting and audio classification | 2026-05-20 |
+| [[concepts/keyword-spotting\|Keyword Spotting]] | Detecting predefined spoken commands in audio streams under strict latency, memory, and compute constraints | 2026-05-21 |
+| [[concepts/broadcasted-residual-learning\|Broadcasted Residual Learning]] | Residual design that averages 2D spectrogram features over frequency, applies temporal convolution, and broadcasts back to 2D | 2026-05-21 |
+| [[concepts/subspectral-normalization\|SubSpectral Normalization]] | Frequency-subband normalization for spectrogram neural networks, used in BC-ResNet blocks | 2026-05-21 |
 | [[concepts/all-pass-filter\|All Pass Filter]] | Signal processing filter with unity magnitude response at all frequencies, used to modify phase or delay without affecting amplitude | 2026-05-20 |
 | [[concepts/complex-ratio-mask\|Complex Ratio Mask]] | Masking target in STFT domain estimating both magnitude and phase of clean speech, providing superior enhancement compared to magnitude-only masks | 2026-05-20 |
 | [[concepts/depthwise-separable-convolution\|Depthwise Separable Convolution]] | Efficient convolution block splitting standard convolution into spatial depthwise and channel-wise pointwise convolutions | 2026-05-20 |
@@ -469,6 +476,7 @@
 | [[sources/tagliasacchi-2020-seanet\|Tagliasacchi, Li, Misiunas & Roblek 2020: SEANet]] | Multi-modal speech enhancement using accelerometer data; wave-to-wave UNet with adversarial training; 9.6 dB SI-SDRi in mixed-speech scenarios | 2020 |
 | [[sources/wang-2022-fusing-bc-ac-complex-domain-se\|Wang, Zhang & Wang 2022: Fusing BC and AC for Complex-Domain SE]] | Attention-based AC-BC fusion with DC-CRN; CycleGAN semi-supervised framework matching full supervision with 50% data; +21.1% STOI at −5 dB | 2022 |
 | [[sources/lu-2021-survey-active-noise-control-linear\|Lu et al. 2021: Survey on ANC — Part I: Linear Systems]] | Comprehensive survey of linear ANC: FxLMS, FeLMS, FuLMS, FxAP, FxRLS, subband, distributed ANC, sparse ANC, and practical considerations | 2021 |
+| [[sources/kim-2021-broadcasted-residual-learning\|Kim, Chang, Lee & Sung 2021: Broadcasted Residual Learning]] | BC-ResNet introduces broadcasted residual blocks for efficient keyword spotting, reaching 98.7% Speech Commands v2 accuracy with 321k parameters | 2021 |
 | [[sources/cai-2024-tf-sepnet\|Cai, Zhang & Li 2024: TF-SepNet]] | CNN architecture using parallel 1D kernels along time and frequency axes for low-complexity acoustic scene classification | 2024 |
 
 ---
@@ -521,10 +529,10 @@
 
 ## Statistics
 
-- **Total pages**: 467
-- **Entities**: 188
-- **Concepts**: 174
-- **Sources**: 80
+- **Total pages**: 475
+- **Entities**: 192
+- **Concepts**: 177
+- **Sources**: 81
 - **Synthesis**: 19
 - **Queries**: 6
-- **Last updated**: 2026-05-20
+- **Last updated**: 2026-05-21

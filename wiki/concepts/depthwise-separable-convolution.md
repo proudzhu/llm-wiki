@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-20
-updated: 2026-05-20
+updated: 2026-05-21
+sources:
+  - raw/papers/kim-2021-broadcasted-residual-learning/full-text.md
 tags:
   - deep-learning
   - neural-networks
@@ -81,4 +83,5 @@ For a standard $3 \times 3$ kernel ($D_k = 3$) and large $C_{out}$, this yields 
 
 ## Related Sources
 
+- [[sources/kim-2021-broadcasted-residual-learning|Kim, Chang, Lee & Sung 2021: Broadcasted Residual Learning]]
 - [[sources/cai-2024-tf-sepnet|Cai, Zhang & Li 2024: TF-SepNet]]

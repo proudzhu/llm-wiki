@@ -188,6 +188,10 @@
 | [[entities/yiqiang-cai\|Yiqiang Cai]] | Researcher at XJTLU — low-complexity acoustic scene classification, TF-SepNet | 2026-05-20 |
 | [[entities/peihong-zhang\|Peihong Zhang]] | Researcher at XJTLU — co-author on TF-SepNet | 2026-05-20 |
 | [[entities/shengchen-li\|Shengchen Li]] | Associate Professor at XJTLU — supervisor, machine listening & acoustic signal processing | 2026-05-20 |
+| [[entities/byeonggeun-kim\|Byeonggeun Kim]] | Qualcomm AI Research — lead author of BC-ResNet for efficient keyword spotting | 2026-05-21 |
+| [[entities/simyung-chang\|Simyung Chang]] | Qualcomm AI Research — neural audio processing and SubSpectral Normalization in BC-ResNet | 2026-05-21 |
+| [[entities/jinkyu-lee\|Jinkyu Lee]] | Qualcomm AI Research — co-author on BC-ResNet for on-device keyword spotting | 2026-05-21 |
+| [[entities/dooyong-sung\|Dooyong Sung]] | Qualcomm AI Research — co-author on broadcasted residual learning for keyword spotting | 2026-05-21 |
 | [[entities/haozheng-hou\|Haozheng Hou]] | CUHK — multi-modal speech enhancement, bone-conduction vibration sensing | 2026-05-16 |
 | [[entities/lixing-he\|Lixing He]] | CUHK — multi-modal speech enhancement, earable computing | 2026-05-16 |
 | [[entities/yunqi-guo\|Yunqi Guo]] | CUHK — multi-modal speech enhancement, bone-conduction sensing | 2026-05-16 |
