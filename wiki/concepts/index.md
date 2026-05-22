@@ -187,5 +187,7 @@
 | [[concepts/spline-adaptive-filter\|Spline Adaptive Filter]] | Cascades linear block with adaptive LUT (look-up table) for efficient nonlinear system modeling | 2026-05-18 |
 | [[concepts/kernel-adaptive-filter\|Kernel Adaptive Filter (KAF)]] | Uses kernel trick to project into high-dimensional feature space; KLMS, KAPA, KRLS variants | 2026-05-18 |
 | [[concepts/bilinear-filter\|Bilinear Filter]] | Recursive nonlinear filter combining past inputs and outputs via cross-product terms; simple NLANC baseline | 2026-05-18 |
+| [[concepts/independent-vector-analysis\|Independent Vector Analysis]] | Multivariate extension of ICA for frequency-domain blind source separation; exploits inter-frequency dependencies to avoid permutation ambiguity | 2026-05-21 |
+| [[concepts/blind-source-separation\|Blind Source Separation]] | Recovering individual source signals from observed mixtures without knowledge of mixing process; core audio BSS methods include IVA, ILRMA, FastMNMF | 2026-05-21 |
 | [[concepts/heuristic-anc-algorithms\|Heuristic ANC Algorithms]] | Population-based global optimizers (PSO, DE, GA) applied to ANC for non-convex or constrained problems | 2026-05-18 |
 

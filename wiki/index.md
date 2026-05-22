@@ -202,6 +202,9 @@
 | [[entities/simyung-chang\|Simyung Chang]] | Qualcomm AI Research — neural audio processing and SubSpectral Normalization in BC-ResNet | 2026-05-21 |
 | [[entities/jinkyu-lee\|Jinkyu Lee]] | Qualcomm AI Research — co-author on BC-ResNet for on-device keyword spotting | 2026-05-21 |
 | [[entities/dooyong-sung\|Dooyong Sung]] | Qualcomm AI Research — co-author on broadcasted residual learning for keyword spotting | 2026-05-21 |
+| [[entities/ruiming-guo\|Ruiming Guo]] | Sichuan University of Science and Engineering — IVA optimization for audio blind source separation | 2026-05-21 |
+| [[entities/zhongqiang-luo\|Zhongqiang Luo]] | Sichuan University of Science and Engineering — BSS, wireless signal processing, IVA | 2026-05-21 |
+| [[entities/mingchun-li\|Mingchun Li]] | Sichuan University of Science and Engineering — signal processing, blind source separation | 2026-05-21 |
 
 ---
 
@@ -394,6 +397,8 @@
 | [[concepts/spline-adaptive-filter\|Spline Adaptive Filter]] | Cascades linear block with adaptive LUT (look-up table) for efficient nonlinear system modeling | 2026-05-18 |
 | [[concepts/kernel-adaptive-filter\|Kernel Adaptive Filter (KAF)]] | Uses kernel trick to project into high-dimensional feature space; KLMS, KAPA, KRLS variants | 2026-05-18 |
 | [[concepts/bilinear-filter\|Bilinear Filter]] | Recursive nonlinear filter combining past inputs and outputs via cross-product terms; simple NLANC baseline | 2026-05-18 |
+| [[concepts/independent-vector-analysis\|Independent Vector Analysis]] | Multivariate extension of ICA for frequency-domain blind source separation; exploits inter-frequency dependencies to avoid permutation ambiguity | 2026-05-21 |
+| [[concepts/blind-source-separation\|Blind Source Separation]] | Recovering individual source signals from observed mixtures without knowledge of mixing process; core audio BSS methods include IVA, ILRMA, FastMNMF | 2026-05-21 |
 | [[concepts/heuristic-anc-algorithms\|Heuristic ANC Algorithms]] | Population-based global optimizers (PSO, DE, GA) applied to ANC for non-convex or constrained problems | 2026-05-18 |
 
 ---
@@ -444,6 +449,7 @@
 | [[sources/petersen-2008-kalman-filter-virtual-sensing-anc\|Petersen 2008: Kalman Filter for Virtual Sensing]] | State-space observer approach for robust virtual sensing in ANC | 2026-04-18 |
 | [[sources/wang-2024-computation-efficient-virtual-sensing\|Wang 2024: Computation-Efficient Virtual Sensing with MCALMS]] | MCALMS-based MVANC: 10× computational savings over MCFxLMS, ~35 dB NR at virtual locations; broadband tuning noise should encompass control stage range | 2026-04-28 |
 | [[sources/nishikori-2026-fast-multichannel-nmf-block-diagonal-scm-bss\|Nishikori et al. 2026: Distributed FastMNMF for BSS]] | Block-diagonal SCMs for distributed arrays; ~2.95x speedup over full FastMNMF, +0.8 dB SDR over single-subarray | 2026-05-20 |
+| [[sources/guo-2023-iva-survey\|Guo, Luo & Li 2023: IVA Survey]] | Comprehensive survey of six IVA optimization families (NG, FastIVA, AuxIVA, EM, BCD, EVD) with experimental comparison for audio BSS | 2023 |
 | [[sources/wang-2026-cross-talk-speech-reduction-separation\|Wang & Cornell 2026: Cross-Talk Speech Reduction]] | CTRnet for cross-talk reduction via blind deconvolution on real close-talk+far-field pairs; PuLSS for far-field separation; SOTA on CHiME-6 | 2026-05-20 |
 | [[sources/oviste-2026-neural-vslf-speech-enhancement\|Oviste 2026: Neural VSLF for Speech Enhancement]] | HVSF architecture: DNN predicts clean-speech SCM, noise SCM, and tradeoff parameter for VSLF weights; generalizes MWF/MVDR; explicit distortion-noise control | 2026-04-29 |
 | [[sources/he-2025-vibomni\|He, Guo, Hou & Yan 2025: VibOmni]] | Multi-modal speech enhancement for earables using IMU bone-conducted vibration; 21% PESQ improvement, BCF data augmentation | 2026-05-16 |
@@ -537,10 +543,10 @@
 
 ## Statistics
 
-- **Total pages**: 483
-- **Entities**: 192
-- **Concepts**: 184
-- **Sources**: 82
+- **Total pages**: 489
+- **Entities**: 195
+- **Concepts**: 186
+- **Sources**: 83
 - **Synthesis**: 19
 - **Queries**: 6
 - **Last updated**: 2026-05-21

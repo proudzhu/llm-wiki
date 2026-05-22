@@ -1859,3 +1859,26 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
 - **Statistics**: Updated from 475/192/177/81/19 to 483/192/184/82/19
 - **Skill fix verification**: Tested updated wiki-lint commands — Python-based Step 4 (missing entries) works clean; `Select-String` regex now uses single quotes inside `pwsh -Command` to avoid `^|` being parsed as regex OR. All 6 × (main + sub-index) diffs = 0 ✅
 
+---
+
+## [2026-05-21] ingest | A Survey of Optimization Methods for Independent Vector Analysis in Audio Source Separation (Guo et al. 2023)
+
+- **Source**: `raw/papers/guo-2023-iva-survey/full-text.md` (Zotero: DA3F64K6)
+- **Authors**: Ruiming Guo, Zhongqiang Luo, Mingchun Li
+- **Published**: Sensors 2023, Vol. 23, Issue 1, Article 493
+- **DOI**: 10.3390/s23010493
+- **Summary**: Comprehensive survey of six IVA optimization families (NG, FastIVA, AuxIVA, EM, BCD/IP/ISS, EVD) with unified notation, taxonomy, and experimental comparison under determined and overdetermined reverberant audio scenarios.
+- **Pages created**:
+  - `wiki/sources/guo-2023-iva-survey.md`
+  - `wiki/concepts/independent-vector-analysis.md`
+  - `wiki/concepts/blind-source-separation.md`
+  - `wiki/entities/ruiming-guo.md`
+  - `wiki/entities/zhongqiang-luo.md`
+  - `wiki/entities/mingchun-li.md`
+- **Pages updated**:
+  - `wiki/concepts/fastmnmf.md` — added IVA/BSS wikilinks and related source
+  - `wiki/index.md` — added 3 entities, 2 concepts, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 3 entity rows
+  - `wiki/concepts/index.md` — added 2 concept rows
+

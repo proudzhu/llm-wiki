@@ -192,6 +192,9 @@
 | [[entities/simyung-chang\|Simyung Chang]] | Qualcomm AI Research — neural audio processing and SubSpectral Normalization in BC-ResNet | 2026-05-21 |
 | [[entities/jinkyu-lee\|Jinkyu Lee]] | Qualcomm AI Research — co-author on BC-ResNet for on-device keyword spotting | 2026-05-21 |
 | [[entities/dooyong-sung\|Dooyong Sung]] | Qualcomm AI Research — co-author on broadcasted residual learning for keyword spotting | 2026-05-21 |
+| [[entities/ruiming-guo\|Ruiming Guo]] | Sichuan University of Science and Engineering — IVA optimization for audio blind source separation | 2026-05-21 |
+| [[entities/zhongqiang-luo\|Zhongqiang Luo]] | Sichuan University of Science and Engineering — BSS, wireless signal processing, IVA | 2026-05-21 |
+| [[entities/mingchun-li\|Mingchun Li]] | Sichuan University of Science and Engineering — signal processing, blind source separation | 2026-05-21 |
 | [[entities/haozheng-hou\|Haozheng Hou]] | CUHK — multi-modal speech enhancement, bone-conduction vibration sensing | 2026-05-16 |
 | [[entities/lixing-he\|Lixing He]] | CUHK — multi-modal speech enhancement, earable computing | 2026-05-16 |
 | [[entities/yunqi-guo\|Yunqi Guo]] | CUHK — multi-modal speech enhancement, bone-conduction sensing | 2026-05-16 |
