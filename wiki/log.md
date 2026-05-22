@@ -1849,3 +1849,13 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/entities/index.md` — added 4 entity rows
   - `wiki/concepts/index.md` — added 3 concept rows
 
+
+
+## [2026-05-21] lint | Health check (post-skill-fix)
+
+- **Index consistency**: Found 7 concepts and 1 source missing from main index + sub-indexes. All gaps fixed.
+- **Broken links**: Not checked (Step 5 not run this pass)
+- **Orphan pages**: Not checked (Step 6 not run this pass)
+- **Statistics**: Updated from 475/192/177/81/19 to 483/192/184/82/19
+- **Skill fix verification**: Tested updated wiki-lint commands — Python-based Step 4 (missing entries) works clean; `Select-String` regex now uses single quotes inside `pwsh -Command` to avoid `^|` being parsed as regex OR. All 6 × (main + sub-index) diffs = 0 ✅
+

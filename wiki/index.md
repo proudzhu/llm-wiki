@@ -388,6 +388,13 @@
 | [[concepts/depthwise-separable-convolution\|Depthwise Separable Convolution]] | Efficient convolution block splitting standard convolution into spatial depthwise and channel-wise pointwise convolutions | 2026-05-20 |
 | [[concepts/robust-control\|Robust Control]] | Branch of control theory dealing with system uncertainty; designs controllers like H-infinity or LQG that maintain stability under acoustic variations | 2026-05-20 |
 | [[concepts/waterbed-effect\|Waterbed Effect]] | Fundamental constraint in feedback control (Bode sensitivity integral) where noise reduction in one band inevitably increases noise in others | 2026-05-20 |
+| [[concepts/nonlinear-active-noise-control\|Nonlinear Active Noise Control (NLANC)]] | Extends ANC to scenarios with nonlinear primary/secondary paths using Volterra, FLANN, spline, kernel filters | 2026-05-18 |
+| [[concepts/volterra-filter\|Volterra Filter]] | Polynomial expansion for modeling nonlinear systems with fading memory; used in NLANC as functional link | 2026-05-18 |
+| [[concepts/flann-filter\|Functional Link ANN (FLANN)]] | Single-layer nonlinear expansion via fixed basis functions; low-complexity alternative to Volterra filters | 2026-05-18 |
+| [[concepts/spline-adaptive-filter\|Spline Adaptive Filter]] | Cascades linear block with adaptive LUT (look-up table) for efficient nonlinear system modeling | 2026-05-18 |
+| [[concepts/kernel-adaptive-filter\|Kernel Adaptive Filter (KAF)]] | Uses kernel trick to project into high-dimensional feature space; KLMS, KAPA, KRLS variants | 2026-05-18 |
+| [[concepts/bilinear-filter\|Bilinear Filter]] | Recursive nonlinear filter combining past inputs and outputs via cross-product terms; simple NLANC baseline | 2026-05-18 |
+| [[concepts/heuristic-anc-algorithms\|Heuristic ANC Algorithms]] | Population-based global optimizers (PSO, DE, GA) applied to ANC for non-convex or constrained problems | 2026-05-18 |
 
 ---
 
@@ -478,6 +485,7 @@
 | [[sources/lu-2021-survey-active-noise-control-linear\|Lu et al. 2021: Survey on ANC — Part I: Linear Systems]] | Comprehensive survey of linear ANC: FxLMS, FeLMS, FuLMS, FxAP, FxRLS, subband, distributed ANC, sparse ANC, and practical considerations | 2021 |
 | [[sources/kim-2021-broadcasted-residual-learning\|Kim, Chang, Lee & Sung 2021: Broadcasted Residual Learning]] | BC-ResNet introduces broadcasted residual blocks for efficient keyword spotting, reaching 98.7% Speech Commands v2 accuracy with 321k parameters | 2021 |
 | [[sources/cai-2024-tf-sepnet\|Cai, Zhang & Li 2024: TF-SepNet]] | CNN architecture using parallel 1D kernels along time and frequency axes for low-complexity acoustic scene classification | 2024 |
+| [[sources/lu-2021-anc-survey-nonlinear\|Lu et al. 2021: Survey on ANC — Part II: Nonlinear Systems]] | Comprehensive survey of nonlinear ANC: Volterra, FLANN, spline, kernel, bilinear filters, and heuristic algorithms | 2021 |
 
 ---
 
@@ -529,10 +537,10 @@
 
 ## Statistics
 
-- **Total pages**: 475
+- **Total pages**: 483
 - **Entities**: 192
-- **Concepts**: 177
-- **Sources**: 81
+- **Concepts**: 184
+- **Sources**: 82
 - **Synthesis**: 19
 - **Queries**: 6
 - **Last updated**: 2026-05-21

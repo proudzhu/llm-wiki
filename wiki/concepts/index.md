@@ -181,4 +181,11 @@
 | [[concepts/dprnn\|Dual-Path RNN (DPRNN)]] | Lightweight sequence modeling with intra/inter-block RNNs for speech separation | 2026-05-16 |
 | [[concepts/robust-control\|Robust Control]] | Branch of control theory dealing with system uncertainty; designs controllers like H-infinity or LQG that maintain stability under acoustic variations | 2026-05-20 |
 | [[concepts/waterbed-effect\|Waterbed Effect]] | Fundamental constraint in feedback control (Bode sensitivity integral) where noise reduction in one band inevitably increases noise in others | 2026-05-20 |
+| [[concepts/nonlinear-active-noise-control\|Nonlinear Active Noise Control (NLANC)]] | Extends ANC to scenarios with nonlinear primary/secondary paths using Volterra, FLANN, spline, kernel filters | 2026-05-18 |
+| [[concepts/volterra-filter\|Volterra Filter]] | Polynomial expansion for modeling nonlinear systems with fading memory; used in NLANC as functional link | 2026-05-18 |
+| [[concepts/flann-filter\|Functional Link ANN (FLANN)]] | Single-layer nonlinear expansion via fixed basis functions; low-complexity alternative to Volterra filters | 2026-05-18 |
+| [[concepts/spline-adaptive-filter\|Spline Adaptive Filter]] | Cascades linear block with adaptive LUT (look-up table) for efficient nonlinear system modeling | 2026-05-18 |
+| [[concepts/kernel-adaptive-filter\|Kernel Adaptive Filter (KAF)]] | Uses kernel trick to project into high-dimensional feature space; KLMS, KAPA, KRLS variants | 2026-05-18 |
+| [[concepts/bilinear-filter\|Bilinear Filter]] | Recursive nonlinear filter combining past inputs and outputs via cross-product terms; simple NLANC baseline | 2026-05-18 |
+| [[concepts/heuristic-anc-algorithms\|Heuristic ANC Algorithms]] | Population-based global optimizers (PSO, DE, GA) applied to ANC for non-convex or constrained problems | 2026-05-18 |
 
