@@ -1934,3 +1934,36 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 4 entity rows
   - `wiki/concepts/index.md` — added 2 concept rows
+
+---
+
+## [2026-05-23] ingest | Verification of Simultaneous Equations Method (Fujii et al. 2006)
+
+- **Source**: `raw/papers/fujii-2006-simultaneous-equations-anc/full-text.md` (Zotero: TW8DUFVN)
+- **Authors**: Kensaku Fujii, Kotaro Yamaguchi, Shigeyuki Hashimoto, Yusuke Fujita, Mitsuji Muneyasu
+- **Published**: Acoustical Science and Technology, Vol. 27, No. 5, pp. 270-277
+- **DOI**: 10.1250/ast.27.270
+- **Summary**: First experimental verification of the simultaneous equations method for feedforward ANC - estimates optimal noise control filter without secondary path model using an auxiliary filter and frequency-domain adaptation
+- **Pages created**:
+  - `raw/papers/fujii-2006-simultaneous-equations-anc/full-text.md` - MinerU extracted text from Zotero PDF
+  - `wiki/sources/fujii-2006-simultaneous-equations-anc.md` - source page
+  - `wiki/entities/kensaku-fujii.md` - first/prolific author
+  - `wiki/entities/kotaro-yamaguchi.md` - co-author
+  - `wiki/entities/shigeyuki-hashimoto.md` - co-author
+  - `wiki/entities/yusuke-fujita.md` - co-author
+  - `wiki/entities/mitsuji-muneyasu.md` - co-author/co-proposer of method
+  - `wiki/concepts/simultaneous-equations-method.md` - core method concept
+  - `wiki/concepts/auxiliary-filter.md` - auxiliary filter concept
+- **Pages updated**:
+  - `wiki/concepts/filtered-x-lms-algorithm.md` - added paper as related source
+  - `wiki/concepts/feedforward-anc.md` - added paper as related source
+  - `wiki/concepts/active-noise-control.md` - added paper as related source
+  - `wiki/concepts/secondary-path-modeling.md` - added paper as related source
+  - `wiki/concepts/adaptive-filtering.md` - added paper as related source
+  - `wiki/synthesis/anc-architecture-evolution.md` - added paper reference
+  - `wiki/synthesis/adaptive-algorithm-tradeoffs.md` - added paper reference
+  - `wiki/synthesis/computational-efficiency-evolution.md` - added paper reference
+  - `wiki/index.md` - added 5 entities, 2 concepts, 1 source; updated statistics to 512/206/195/86/19/6
+  - `wiki/sources/index.md` - added 1 source row
+  - `wiki/entities/index.md` - added 5 entity rows
+  - `wiki/concepts/index.md` - added 2 concept rows

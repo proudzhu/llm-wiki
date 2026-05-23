@@ -197,4 +197,6 @@
 | [[concepts/doa-microphone-positional-encoding\|DOA-Microphone Positional Encoding (DOA-MPE)]] | Joint encoding of microphone positions and target DOA via sinusoidal features; enables geometry-aware spatial filtering | 2026-05-23 |
 | [[concepts/film-layer\|FiLM Layer]] | Feature-wise Linear Modulation for conditioning neural networks via learned scaling and bias parameters | 2026-05-23 |
 | [[concepts/target-speaker-extraction\|Target Speaker Extraction]] | Isolating a specific speaker's speech from a mixture using spatial, enrolment, visual, or textual cues | 2026-05-23 |
+| [[concepts/auxiliary-filter\|Auxiliary Filter]] | Filter identifying the overall path from noise control filter input to error microphone output; used in simultaneous equations method to avoid explicit secondary path modeling | 2026-05-23 |
+| [[concepts/simultaneous-equations-method\|Simultaneous Equations Method]] | ANC method that estimates the optimal noise control filter without a secondary path model by solving two independent equations from an auxiliary filter | 2006 |
 

@@ -207,6 +207,11 @@
 | [[entities/mingchun-li\|Mingchun Li]] | Sichuan University of Science and Engineering — signal processing, blind source separation | 2026-05-21 |
 | [[entities/jiatong-li\|Jiatong Li]] | Universität Oldenburg — geometry-conditioned SSF, DOA-MPE, target speaker extraction | 2026-05-23 |
 | [[entities/wiebke-middelberg\|Wiebke Middelberg]] | Universität Oldenburg — multi-channel speech enhancement, neural spatial filtering | 2026-05-23 |
+| [[entities/kensaku-fujii\|Kensaku Fujii]] | University of Hyogo — co-proposer of simultaneous equations method for ANC, frequency-domain adaptive algorithm | 2006 |
+| [[entities/kotaro-yamaguchi\|Kotaro Yamaguchi]] | University of Hyogo — co-author on experimental verification of simultaneous equations method | 2006 |
+| [[entities/mitsuji-muneyasu\|Mitsuji Muneyasu]] | Kansai University — co-proposer of simultaneous equations method for ANC | 2006 |
+| [[entities/shigeyuki-hashimoto\|Shigeyuki Hashimoto]] | University of Hyogo — co-author on frequency-domain simultaneous equations method | 2006 |
+| [[entities/yusuke-fujita\|Yusuke Fujita]] | Catsystem Corporation — co-author on experimental verification of simultaneous equations method | 2006 |
 
 ---
 
@@ -409,6 +414,8 @@
 | [[concepts/doa-microphone-positional-encoding\|DOA-Microphone Positional Encoding (DOA-MPE)]] | Joint encoding of microphone positions and target DOA via sinusoidal features; enables geometry-aware spatial filtering | 2026-05-23 |
 | [[concepts/film-layer\|FiLM Layer]] | Feature-wise Linear Modulation for conditioning neural networks via learned scaling and bias parameters | 2026-05-23 |
 | [[concepts/target-speaker-extraction\|Target Speaker Extraction]] | Isolating a specific speaker's speech from a mixture using spatial, enrolment, visual, or textual cues | 2026-05-23 |
+| [[concepts/auxiliary-filter\|Auxiliary Filter]] | Filter identifying the overall path from noise control filter input to error microphone output; core of simultaneous equations method for ANC | 2026-05-23 |
+| [[concepts/simultaneous-equations-method\|Simultaneous Equations Method]] | ANC method estimating optimal noise control filter without secondary path model using two independent equations from an auxiliary filter | 2006 |
 
 ---
 
@@ -503,6 +510,7 @@
 | [[sources/lu-2021-anc-survey-nonlinear\|Lu et al. 2021: Survey on ANC — Part II: Nonlinear Systems]] | Comprehensive survey of nonlinear ANC: Volterra, FLANN, spline, kernel, bilinear filters, and heuristic algorithms | 2021 |
 | [[sources/xiao-2026-robust-spatially-selective-anc\|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]] | Robust soft-constrained spatially selective ANC averaging the cost over $J=44$ secondary path estimates; narrows performance spread under plant variations; dSPACE real-time validation | 2026-05-23 |
 | [[sources/li-2026-geometry-conditioned-ssanc\|Li 2026: Geometry-Conditioned SSF for Target Speaker Extraction]] | GC-SSF with FiLM-based geometry conditioning and DOA-MPE feature; generalises across circular, ULA, and random arrays; +0.45 PESQ over SSF-Random, +1.25 PESQ over SSF-Circ on mismatched geometries | 2026-05-23 |
+| [[sources/fujii-2006-simultaneous-equations-anc\|Fujii et al. 2006: Verification of Simultaneous Equations Method]] | Experimental validation of secondary-path-model-free feedforward ANC using auxiliary filter and frequency-domain adaptation | 2006 |
 
 ---
 
@@ -554,10 +562,10 @@
 
 ## Statistics
 
-- **Total pages**: 504
-- **Entities**: 201
-- **Concepts**: 193
-- **Sources**: 85
+- **Total pages**: 512
+- **Entities**: 206
+- **Concepts**: 195
+- **Sources**: 86
 - **Synthesis**: 19
 - **Queries**: 6
 - **Last updated**: 2026-05-23

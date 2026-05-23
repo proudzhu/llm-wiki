@@ -75,3 +75,4 @@ where $\mathbf{G}(\omega)$ and $\hat{\mathbf{G}}(\omega)$ are the Fourier transf
 ## Related Sources
 
 - [[sources/lu-2021-survey-active-noise-control-linear|Lu et al. 2021: Survey on ANC — Part I: Linear Systems]]
+- [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method — a method avoiding the secondary path filter requirement of FxLMS]]

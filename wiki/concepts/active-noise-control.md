@@ -105,6 +105,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]] — Elliptic and convex hull uncertainty models for robust feedback ANC
 - [[sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]] — CRNN predicts next-frame DoA for proactive filter selection in moving source ANC
 - [[sources/holzmuller-2026-dtw-secondary-path-anc|Holzmüller & Sontacchi 2026: DTW for Secondary Path Interpolation in ANC]] — DTW-based interpolation extends stable frequency range for moving listeners
+- [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method]] — Experimental validation of secondary-path-model-free ANC
 
 ## Related Entities
 

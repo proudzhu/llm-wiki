@@ -242,3 +242,5 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 - [[concepts/linear-recurrent-unit|Linear Recurrent Unit]]
 
 ## Related Sources
+
+- [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method]] — Frequency-domain processing for the simultaneous equations method, reducing computational cost vs. time-domain NLMS-based transformation

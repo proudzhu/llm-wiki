@@ -205,4 +205,9 @@
 | [[entities/matthias-blau\|Matthias Blau]] | Jade-Hochschule Oldenburg — audiology, individual ear-canal acoustics, hearable transfer functions | 2026-05-23 |
 | [[entities/jiatong-li\|Jiatong Li]] | Universität Oldenburg — geometry-conditioned SSF, DOA-MPE, target speaker extraction | 2026-05-23 |
 | [[entities/wiebke-middelberg\|Wiebke Middelberg]] | Universität Oldenburg — multi-channel speech enhancement, neural spatial filtering | 2026-05-23 |
+| [[entities/kensaku-fujii\|Kensaku Fujii]] | University of Hyogo — co-proposer of simultaneous equations method for feedforward ANC | 2006 |
+| [[entities/kotaro-yamaguchi\|Kotaro Yamaguchi]] | University of Hyogo — co-author on experimental verification of simultaneous equations method | 2006 |
+| [[entities/mitsuji-muneyasu\|Mitsuji Muneyasu]] | Kansai University — co-proposer of simultaneous equations method for ANC | 2006 |
+| [[entities/shigeyuki-hashimoto\|Shigeyuki Hashimoto]] | University of Hyogo — co-author on frequency-domain simultaneous equations method for ANC | 2006 |
+| [[entities/yusuke-fujita\|Yusuke Fujita]] | Catsystem Corporation — co-author on experimental validation of simultaneous equations method | 2006 |
 
