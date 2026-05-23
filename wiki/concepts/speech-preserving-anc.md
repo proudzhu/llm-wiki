@@ -52,6 +52,7 @@ Speech-preserving ANC is fundamentally different from traditional Speech Enhance
 
 ### Spatial Selectivity
 - Xiao et al. (2023) proposed spatially selective ANC using beamforming to create quiet zones while allowing sound in other areas
+- The robust soft-constrained SSANC formulation in [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026]] handles secondary-path variations across users by averaging the cost over a measured set of plant estimates
 - Complementary to spectral selectivity; can be combined for enhanced separation
 
 ## Performance Characteristics
@@ -70,6 +71,8 @@ The system conservatively reduces noise for Babble (5.30 dB) to protect speech, 
 ## Related Concepts
 
 - [[active-noise-control|Active Noise Control]]
+- [[concepts/spatially-selective-anc|Spatially Selective ANC]]
+- [[concepts/soft-constrained-anc|Soft-Constrained ANC]]
 - [[convolutional-recurrent-network|Convolutional Recurrent Network]]
 - [[complex-spectrum-mapping|Complex Spectrum Mapping]]
 - [[transparency-mode|Transparency Mode]]
@@ -79,6 +82,7 @@ The system conservatively reduces noise for Babble (5.30 dB) to protect speech, 
 ## Related Sources
 
 - [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
+- [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]]
 
 ## Related Synthesis
 

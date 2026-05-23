@@ -199,4 +199,8 @@
 | [[entities/lixing-he\|Lixing He]] | CUHK — multi-modal speech enhancement, earable computing | 2026-05-16 |
 | [[entities/yunqi-guo\|Yunqi Guo]] | CUHK — multi-modal speech enhancement, bone-conduction sensing | 2026-05-16 |
 | [[entities/zhenyu-yan\|Zhenyu Yan]] | CUHK — mobile/wearable systems, multi-modal sensing, speech enhancement | 2026-05-16 |
+| [[entities/tong-xiao\|Tong Xiao]] | Universität Oldenburg — soft-constrained spatially selective ANC and robust hearable design | 2026-05-23 |
+| [[entities/simon-doclo\|Simon Doclo]] | Universität Oldenburg — multi-microphone speech enhancement, beamforming, ANC for hearables | 2026-05-23 |
+| [[entities/reinhild-roden\|Reinhild Roden]] | Jade-Hochschule Oldenburg — hearables, transfer-function characterisation, real-time ANC | 2026-05-23 |
+| [[entities/matthias-blau\|Matthias Blau]] | Jade-Hochschule Oldenburg — audiology, individual ear-canal acoustics, hearable transfer functions | 2026-05-23 |
 

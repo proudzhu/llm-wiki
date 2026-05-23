@@ -21,3 +21,11 @@ Key concepts include:
 - [[concepts/sensitivity-function|Sensitivity Function]]
 - [[concepts/waterbed-effect|Waterbed Effect]]
 - [[concepts/q-parameterization|Q-Parameterization]]
+- [[concepts/uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
+- [[concepts/spatially-selective-anc|Spatially Selective ANC]]
+- [[concepts/soft-constrained-anc|Soft-Constrained ANC]]
+
+## Related Sources
+
+- [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
+- [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]]

@@ -1882,3 +1882,27 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/entities/index.md` — added 3 entity rows
   - `wiki/concepts/index.md` — added 2 concept rows
 
+
+---
+
+## [2026-05-23] ingest | Xiao, Roden, Blau & Doclo (2026) Robust Soft-Constrained SSANC for Hearables
+
+- **Source**: Zotero (Xiao 2026, JASA-EL/Acta Acustica preprint)
+- **Summary**: Robust soft-constrained spatially selective ANC (SSANC) for hearables. Cost is averaged over $J=44$ secondary path estimates from KEMAR/different ear-canal placements, narrowing the performance spread under plant variations. Soft constraint with trade-off $\beta$ balances noise reduction against target-direction preservation. Validated in real time on dSPACE SCALEXIO LabBox + FPGA at 40 kHz with $L_w=1800$ taps.
+- **Pages created**:
+  - `raw/papers/xiao-2026-robust-spatially-selective-anc/full-text.txt` — pdftotext extraction (43 KB)
+  - `wiki/sources/xiao-2026-robust-spatially-selective-anc.md` — source page
+  - `wiki/entities/tong-xiao.md` — first author
+  - `wiki/entities/simon-doclo.md` — corresponding author
+  - `wiki/entities/reinhild-roden.md` — co-author
+  - `wiki/entities/matthias-blau.md` — co-author
+  - `wiki/concepts/spatially-selective-anc.md` — SSANC concept
+  - `wiki/concepts/soft-constrained-anc.md` — soft-constrained ANC concept
+- **Pages updated**:
+  - `wiki/concepts/uncertainty-modeling-for-anc.md` — added cross-references to new SSANC concepts and source
+  - `wiki/concepts/speech-preserving-anc.md` — added Xiao 2026 reference and related-concept links
+  - `wiki/concepts/robust-control.md` — added related ANC robustness concepts and Related Sources section
+  - `wiki/index.md` — added 4 entities, 2 concepts, 1 source; updated statistics to 496/199/188/84/19/6
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 4 entity rows
+  - `wiki/concepts/index.md` — added 2 concept rows

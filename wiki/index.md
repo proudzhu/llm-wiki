@@ -400,6 +400,8 @@
 | [[concepts/independent-vector-analysis\|Independent Vector Analysis]] | Multivariate extension of ICA for frequency-domain blind source separation; exploits inter-frequency dependencies to avoid permutation ambiguity | 2026-05-21 |
 | [[concepts/blind-source-separation\|Blind Source Separation]] | Recovering individual source signals from observed mixtures without knowledge of mixing process; core audio BSS methods include IVA, ILRMA, FastMNMF | 2026-05-21 |
 | [[concepts/heuristic-anc-algorithms\|Heuristic ANC Algorithms]] | Population-based global optimizers (PSO, DE, GA) applied to ANC for non-convex or constrained problems | 2026-05-18 |
+| [[concepts/spatially-selective-anc\|Spatially Selective ANC]] | ANC variant for hearables that suppresses noise from undesired directions while preserving sound from a chosen target direction at the eardrum, using ReIRs in a soft-constrained cost | 2026-05-23 |
+| [[concepts/soft-constrained-anc\|Soft-Constrained ANC]] | ANC controller design that adds a weighted penalty for a secondary objective (speech preservation, distortion) rather than imposing it as a hard constraint, governed by trade-off scalar $\beta$ | 2026-05-23 |
 
 ---
 
@@ -492,6 +494,7 @@
 | [[sources/kim-2021-broadcasted-residual-learning\|Kim, Chang, Lee & Sung 2021: Broadcasted Residual Learning]] | BC-ResNet introduces broadcasted residual blocks for efficient keyword spotting, reaching 98.7% Speech Commands v2 accuracy with 321k parameters | 2021 |
 | [[sources/cai-2024-tf-sepnet\|Cai, Zhang & Li 2024: TF-SepNet]] | CNN architecture using parallel 1D kernels along time and frequency axes for low-complexity acoustic scene classification | 2024 |
 | [[sources/lu-2021-anc-survey-nonlinear\|Lu et al. 2021: Survey on ANC — Part II: Nonlinear Systems]] | Comprehensive survey of nonlinear ANC: Volterra, FLANN, spline, kernel, bilinear filters, and heuristic algorithms | 2021 |
+| [[sources/xiao-2026-robust-spatially-selective-anc\|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]] | Robust soft-constrained spatially selective ANC averaging the cost over $J=44$ secondary path estimates; narrows performance spread under plant variations; dSPACE real-time validation | 2026-05-23 |
 
 ---
 
@@ -543,10 +546,10 @@
 
 ## Statistics
 
-- **Total pages**: 489
-- **Entities**: 195
-- **Concepts**: 186
-- **Sources**: 83
+- **Total pages**: 496
+- **Entities**: 199
+- **Concepts**: 188
+- **Sources**: 84
 - **Synthesis**: 19
 - **Queries**: 6
 - **Last updated**: 2026-05-21

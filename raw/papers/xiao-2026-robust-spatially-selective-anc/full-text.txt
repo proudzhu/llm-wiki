@@ -1,0 +1,386 @@
+arXiv:2605.17407v1 [eess.AS] 17 May 2026                       ROBUST SOFT-CONSTRAINED SPATIALLY SELECTIVE
+                                          ACTIVE NOISE CONTROL FOR HEARABLES UNDER SECONDARY PATH VARIATIONS
+
+                                                                  Tong Xiao1, Reinhild Roden2, Matthias Blau2, Simon Doclo1
+
+                                            1 Department of Medical Physics and Acoustics and Cluster of Excellence "Hearing4all.connects",
+                                                                       Carl von Ossietzky Universita¨t Oldenburg, Germany
+
+                                                                  tong.xiao@uni-oldenburg.de, simon.doclo@uni-oldenburg.de
+                                                2 Institut fu¨r Ho¨rtechnik und Audiologie and Cluster of Excellence "Hearing4all.connects",
+
+                                                                               Jade-Hochschule, Oldenburg, Germany
+                                                                      reinhild.roden@jade-hs.de, matthias.blau@jade-hs.de
+
+                                                                           ABSTRACT                                   Noise source                        Loudspeaker          Leakage
+                                                                                                                                         Outer mics.  (secondary source)  (noise + speech)
+                                          Spatially selective active noise control (SSANC) hearables aim to
+                                          attenuate noise from certain directions at the eardrum while preserving                                                         +
+                                          desired speech arriving from selected directions. Existing SSANC
+                                          systems typically assume an accurate estimate of the secondary path                                                  Acoustic region  Inner error
+                                          from the loudspeaker to the inner error microphone. In practice, how-                                                                 microphone
+                                          ever, this path varies across users and device fits, which can degrade                                                        +
+                                          performance and compromise system stability. This paper proposes a              Desired
+                                          robust soft-constrained optimization framework that computes a single       speech source
+                                          control filter by minimizing the average cost over a set of secondary
+                                          path estimates derived from human measurements. Simulations and             Fig. 1. Block diagram of an SSANC system with K outer micro-
+                                          experiments on a real-time control platform show that the proposed ap-      phones, one inner error microphone and one loudspeaker (i.e., sec-
+                                          proach slightly reduces mean performance relative to the matched case       ondary source). The control filter is denoted by w, the secondary path
+                                          but substantially narrows the performance spread under secondary path       is denoted by g, and its estimate by g.
+                                          mismatch. The proposed framework therefore provides a practical de-
+                                          sign strategy when accurate secondary path estimates are unavailable.       across individuals due to ear anatomy and device fit. Such mismatches
+                                                                                                                      can degrade performance and compromise system stability.
+                                               Index Terms-- Active noise control, spatially selective active
+                                          noise control, soft constraints, secondary path variations, hearables            In this paper, we propose a robust optimization framework for
+                                                                                                                      soft-constrained SSANC under secondary path variations. We assume
+                                                                     1. INTRODUCTION                                  that a set of secondary path estimates is available to represent variations
+                                                                                                                      across different users and device fittings when the exact secondary path
+                                          Active noise control (ANC) hearables use secondary sources to gen-          is unknown. Instead of estimating a specific individual path, we deter-
+                                          erate anti-noise to minimize the noise leakage at the eardrum [1-3].        mine a control filter that is robust to secondary path variations by min-
+                                          Conventional ANC hearables treat all incoming sounds as noise [4, 5].       imizing the average cost function evaluated over this set of estimates.
+                                          This becomes problematic in complex acoustic environments when              A similar robust optimization was recently proposed for sound pres-
+                                          desired speech is present [6-11]. In these cases, the user may want         sure equalization [18]. For experimental validation, we implemented
+                                          to focus on a specific speech source from a certain direction (e.g., the    the proposed framework in real time using a dSPACE SCALEXIO
+                                          front) while reducing the noise leakage from other directions.              LabBox system. The experimental results are consistent with the sim-
+                                                                                                                      ulation findings. This framework provides a practical design option
+                                               To achieve this, modern hearables employ a combination of              for hearables when accurate secondary path estimation is unavailable.
+                                          outer microphones and inner error microphones. While traditional
+                                          beamforming methods preserve desired speech, they often ignore                                  2. SIGNAL MODEL
+                                          the leakage at the inner error microphones [12-14]. Spatially selec-
+                                          tive ANC (SSANC) combines beamforming and ANC principles to                 As shown in Fig. 1, we consider a hearable with K outer microphones.
+                                          preserve speech from desired directions while reducing noise from
+                                          other directions [11, 15, 16]. A soft-constrained SSANC system was          Without loss of generality, we consider one loudspeaker as the sec-
+                                          recently proposed to use a trade-off parameter to balance the noise
+                                          reduction and speech distortion [17]. So far, these approaches have         ondary source and one inner error microphone, resulting in a total
+                                          assumed an accurate secondary path estimate between the secondary
+                                          source and the inner error microphone. In practice, these paths vary        of K + 1 microphones. We assume that the acoustic feedback paths
+
+                                               This research was funded by the Deutsche Forschungsgemeinschaft (DFG,  between the loudspeaker and the outer microphones are known, such
+                                          German Research Foundation) - Project-ID 352015383 - SFB 1330 C1, and
+                                          Germany's Excellence Strategy - EXC 2177/2 - Project ID 390895286.          that acoustic feedback can be canceled.
+
+                                                                                                                      The inner error microphone signal e(n), with n the discrete time
+
+                                                                                                                      index, is given by
+
+                                                                                                                                          e(n) = p(n) + (Gw)T x(n),                          (1)
+
+                                                                                                                      where (·)T denotes the transpose operator. The leakage (including
+
+                                                                                                                      noise and desired speech) at the inner error microphone is denoted
+
+                                                                                                                      by p(n), and the anti-noise component at the inner error microphone
+is given by (Gw)T x(n), where w is the stacked control filter, x(n)       where E{·} denotes the mathematical expectation operator. wT Bw
+is the stacked input vector, and G represents the secondary path          is a regularization term to prevent overloading the secondary source
+convolution matrix. The stacked control filter w is defined as            and to ensure stability, with B being a block-diagonal matrix applying
+
+   w = [w1T w2T . . . wK+1 T ]T  R(K+1)Lw , (2a)                          different penalty weights to the feedforward (FF) and feedback (FB)
+
+   wk = [wk,0 wk,1 . . . wk,Lw-1]T  RLw ,        (2b)                     channels. It is defined as
+                                                                           B = blkdiag (FFI, . . . , FFI, FBI)  R(K+1)Lw×(K+1)Lw, (10)
+where Lw denotes the control filter length for each channel. The
+convolution matrix of the secondary path g = [g0 g1 . . . gLg-1]T         where FF and FB are the regularization parameters for the FF and
+                                                                          FB channels, respectively, and I denotes the Lw × Lw identity matrix.
+with a length of Lg is defined as                                         The real-valued positive parameter µ controls the trade-off between
+                                                                          noise reduction and speech distortion. A larger µ emphasizes speech
+   G = blkdiag (G . . . G)  R(K+1)L×(K+1)Lw , (3a)                        preservation, while a smaller µ allows for more noise reduction at the
+                                                                          cost of increased speech distortion. The matrix H contains the acausal
+       g0 · · · 0                                                         relative impulse responses (ReIRs), and  represents the delayed
+       .. . .        ..                                                   target response with a delay of  samples [15, 16],
+      .              . .
+                     . . . g   RL×Lw ,
+   G = g                                         (3b)                     H = [H1 . . . HK+1]  R(La+Lh+L-1)×(K+1)L,             (11a)
+           Lg -1     0                                                                                                          (11b)
+                                                                                                                                (11c)
+                     .
+           .
+       . ... .                 
+
+          .          .                                                            hk,-La · · ·  0
+          0       · · · gLg-1                                                     .. . .        .. 
+                                                                                 .        . .
+                                                                          Hk = hk,Lh-1 . . . hk,-La   R(La+Lh+L-1)×L,
+where L = Lg + Lw - 1. As input signals to the control filter, we con-           . .            .
+sider the K outer microphone signals xk(n), k = 1, . . . , K, and an es-          .   .   ..    .
+timate of the leakage p(n). The stacked input vector x(n) is defined as          .
+                                                                                 0   · · · hk,Lh-1
+          x(n) = [x1T (n) . . . xK T (n) pT (n)]T  R(K+1)L, (4)
+                                                                           = [ 0 . . . 0 0 . . . 0 1 0 . . . 0 ]T  RLa+Lh+L-1,
+with
+                                                                                 La   Lh+L-1-
+
+   xk(n) = [xk(n) . . . xk(n - L + 1)]T  RL, (5a)                         where Hk is the convolution matrix of the ReIR for the k-th channel
+                                                                          with respect to a chosen reference microphone, with La and Lh
+   p(n) = [ p (n) . . . p (n - L + 1)]T  RL.     (5b)                     denoting the length of the anti-causal and causal parts of the ReIR,
+                                                                          respectively [16].  is a real-valued positive amplification factor of the
+The estimated leakage p(n) can be computed from the inner error           desired speech signal. It should be particularly noted that although the
+                                                                          ReIRs are acausal, the control filter w for reducing noise is still causal.
+microphone signal e(n), the loudspeaker signal vector y(n) =
+[y(n) . . . y(n - Lg + 1)]T , and an estimate of the secondary path            The solution to (9) is found to be [17]
+g = [g0 g1 . . . gLg-1]T  RLg as                                          wsoft = - rr +µGTHTHG  -1 -µGTHT(-Hq) , (12)
+
+             p(n) = e(n) - gT y(n).                                  (6)
+
+To derive the optimal control filter, we first assume an accurate sec-    where
+
+ondary path estimate, g = g. Under this assumption, the estimated                    rr = GT E{x(n)xT (n)}G + B,                (13a)
+leakage equals the true leakage, p(n) = p(n) = qT x(n), with                            = GT E{x(n)xT (n)}q.                    (13b)
+
+   q = [ 0T . . . 0T T ]T  R(K+1)L, (7a)
+
+    = [ 1 0 . . . 0 ]T  RL.                      (7b)                     3.1. Case 1: Matched case (oracle)
+
+Hence, the inner error microphone signal in (1) can be rewritten as       To establish a performance bound, we first consider the matched sce-
+                                                                          nario where the secondary path estimate used for optimization exactly
+          e(n) = (q + Gw)T x(n).                                     (8)  matches the physical secondary path. In this case, the control filter in
+                                                                          (12) is both optimized and evaluated using the same secondary path.
+     While this assumption is used to derive the optimal control filter,  This scenario serves as an oracle performance level and represents an
+the true secondary path can vary for different individuals and for        approximate upper bound within the considered formulation.
+different device fits. This mismatch can cause the estimated leakage
+to differ from the true leakage, which impacts the system performance.    3.2. Case 2: Mismatched case
+However, we first establish a matched-case performance reference
+before analyzing secondary path mismatch.                                 In practice, secondary path variations may arise. To analyze the
+                                                                          sensitivity of the controlfilter optimization to secondary path mis-
+3. SSANC FORMULATION AND EVALUATION CASES                                 match, we consider a set of J secondary path estimates {Gj}jJ=1,
+                                                                          which represent a range of conditions that may or may not accurately
+The objective of the SSANC system is to minimize the power of the         characterize the true secondary path G.
+inner error microphone signal while preserving the delayed desired
+speech component of an outer reference microphone signal. A soft-              For each estimate, a control filter wj is calculated based on the
+constrained optimization has been proposed to balance the noise reduc-    estimate Gj as
+tion and the speech distortion [17]. The cost function is formulated as   wj = -(rr,j + µGjT HT HGj )-1[j - µGjT HT ( - Hq)],
+
+   2              T                           2                                                                                                        (14)
+min E{e (n)} + w Bw + µH(q + Gw) - 2, (9)                                 where the mismatched correlation matrix rr,j and vector j are
+w                                                                         constructed according to (13) by replacing G with Gj. The input
+correlation matrix remainx fixed. Each j-th secondary path estimate         Concha    Secondary  Inner error
+was used for optimization and but evaluated on the remaining J - 1        microphone    source   microphone
+paths. This case illustrates the distribution of performance under
+                                                                           Entrance
+various degrees of estimate accuracy.                                     microphone
+
+       4. CASE 3: ROBUST OPTIMIZATION
+
+Significant secondary path variations can lead to performance degrada-                (a)                     (b)
+tion when the control filter is optimized for a single nominal secondary
+path. To ensure consistency across a diverse set of conditions, we        Fig. 2. (a) Illustration of the closed-fitting hearable. (b) Acoustic
+propose a robust optimization framework that minimizes the average        scenario with one desired speech source at 0, two noise sources at
+cost over a set of secondary path estimates.                              60 and 245, and environmental noise from 12 loudspeakers (omitted
+
+     The objective is to determine a robust control filter wrobust that   for clarity).
+minimizes the average cost over the set of J secondary path estimates,
+which is formulated as
+
+       1 2 J                                         2  T
+min      E{ej (n)} + µH(q + Gjw)-2 +w Bw,                                 speaker "p361". Two airplane cabin noise sources [20] were positioned
+w J j=1                                                                   at 60 (0.7 m) and 245 (0.9 m). Additionally, a 12-loudspeaker cir-
+                                                                          cular array (radius of 1.8 m) generated a diffuse pub scene rendered
+                                                           (15)           by TASCAR [21, 22]. All signals were recorded for 10 s at 40 kHz
+                                                                          using a dSPACE SCALEXIO LabBox with a field programmable gate
+where ej(n) denotes the inner error microphone signal associated          array (FPGA). The average leakage signal-to-noise ratio (SNR) at the
+with the j-th secondary path estimate. The robust filter wrobust can      inner error microphones was -7.0 dB, with -6.6 dB at the left ear
+be derived as                                                             and -7.2 dB at the right ear.
+
+                             1 T T J -1                                        The secondary paths for KEMAR were identified by least-squares
+wrobust = - rr + µ J Gj H HGj                                             estimation under white noise excitation. To model secondary path
+                                                                          variations, we generated a set of J = 44 secondary paths by applying
+                                                j=1                       spectral variations derived from human measurements [23, 24] to the
+                                                                          KEMAR responses. These variations were converted into causal filters
+                     1J T T                                               using a windowed inverse Fourier transform and convolved with the
+         × -µ               Gj H ( - Hq) , (16)                           KEMAR response. In the simulations, this set of J paths was used to
+                     J j=1                                                define the three evaluation cases. In Case 1 (Matched), each path was
+                                                                          optimized and evaluated on itself, resulting in J scenarios. In Case 2
+where                                                                     (Mismatched), each j-th path was used for optimization and evaluated
+                                                                          on the remaining J - 1 paths, yielding J(J - 1) scenarios in total. In
+              1 T T J                                                     Case 3 (Robust), a single robust filter was optimized using all J paths
+       rr =          Gj E{x(n)x (n)}Gj + B,                (17a)          and evaluated across the same set.
+              J j=1                                        (17b)
+                                                                               The ReIRs were derived by first obtaining absolute impulse
+              1 T T J                                                     responses from the desired source to all microphones via exponential
+         =           Gj E{x(n)x (n)}q.                                    sine sweep (ESS). A least-squares estimation, using white noise as
+              J j=1                                                       a synthetic excitation, was then applied to identify the ReIRs with
+                                                                          respect to the reference microphone.
+By averaging over the set of secondary path estimates, the robust
+optimization explicitly accounts for path variations and is expected           The lengths of the control filters and secondary paths were set
+to reduce sensitivity to mismatch.                                        to Lw = 1800 and Lg = 1800, respectively, while ReIR modeling
+                                                                          lengths were La = Lh = 4500. The desired speech delay was  =
+                             5. EVALUATION                                240 (6 ms). Internal processing latencies of 2 and 3 samples from the
+                                                                          dSPACE system were incorporated for the feedforward and feedback
+5.1. Setup                                                                paths, respectively. The amplification factor for the desired speech was
+                                                                          set to  = 2.0. To ensure stability, the regularization parameters were
+For the evaluation, we considered a pair of closed-fitting hearables      chosen relative to the largest eigenvalue (max) of the input correlation
+inserted into both ears of a GRAS 45BB-12 KEMAR Head & Torso              matrix. In particular, the feedforward regularization parameter was
+simulator, as illustrated in Fig. 2a. We used four outer microphones      set to FF = max/104. The feedback channel generally needs more
+(entrance microphones and concha microphones at the left and right        regularization to prevent instability, and thus FB = 30 FF was used.
+ears, labeled as #1-#4), two inner error microphones (located at          The trade-off parameter µ was varied from 1 to 3000, which corre-
+the eardrum, labeled as #5 and #6), and the inner drivers acting as       sponds to a log10(µ) range of 0 to 3.48, to evaluate the performance.
+the secondary sources. Control was performed independently for
+each side, using the four outer microphones (#1-#4) in combination        5.2. Evaluation metrics
+with the respective inner error microphone (#5 or #6). The entrance
+microphones #1 and #3 were chosen as the reference microphones due        The performance was evaluated in terms of noise reduction, speech
+to the clear speech pickup.                                               distortion, speech quality and intelligibility.
+
+     The acoustic scenario (Fig. 2b) was conducted in a moderately             The noise reduction is defined as the difference between the power
+reverberant room (7 × 6 × 2.7 m, T60  370 ms). The desired speech
+source (0, 0.7 m) consisted of VCTK [19] utterances "005-006" from
+                             Case 1: Matched       Case 2: Mismatch  Case 3: Robust                                                         Left (#5)                                 Right (#6)
+                 11
+NR (dB)                                                                              Noise Component (dB) Speech Component (dB)     0                    Desired speech (at #1)                     Desired speech (at #3)
+                   9                                                                                                             -10                     Matched (simulation)
+                                                                                                                                 -20                     Matched (experiment)
+                   7                                                                                                                                     Robust (simulation)
+                                                                                                                                                         Robust (experiment)
+                   5
+                                                                                                                                 -30
+                   3
+SDintellig (dB)                                                                                                                  -40
+                   0
+                 -2                                                                                                                 0              Without control
+                 -4                                                                                                              -10
+                 -6
+PESQ             -8                                                                                                              -20
+                 0.5
+                 0.4                                                                                                             -30
+                 0.3
+                 0.2                                                                                                             -40
+                 0.1
+                                                                                                                                       100  1,000           10,000               100  1,000           10,000
+                   0
+                 0.3
+
+ESTOI            0.2                                                                                                                        Frequency (Hz)                            Frequency (Hz)
+
+                 0.1                                                                 Fig. 4. Spectra of the speech component (top row) and the noise
+                                                                                     component (bottom row) of the inner error microphone signals (#5 and
+                  0 0 0.5 1 1.5 2 2.5 3 3.5                                          #6) from the simulated and experimental evaluations for the matched
+                                                                                     and the robust cases for µ = 150, i.e., log10(µ) = 2.18.
+                                                 log10 µ
+                                                                                     a narrow spread. This serves as the upper bound as expected. In con-
+Fig. 3. Noise reduction, intelligibility-weighted spectral distortion,               trast, the mismatched case shows a substantially wider performance
+narrowband PESQ improvement, and ESTOI improvement for the                           range, particularly for noise reduction, where the 5th-95th percentile
+matched case (Case 1), the mismatched case (Case 2), and the robust                  interval spans up to approximately 6 dB. The PESQ improvement also
+case (Case 3) at the right inner error microphone (#6) with respect to               exhibits a noticeably larger spread, whereas the speech distortion and
+different values of the trade-off parameter µ. Solid lines denote the                ESTOI improvement are less affected by the mismatch. The proposed
+mean across scenarios, and the shaded regions indicate the 5th-95th                  robust case (Case 3) achieves a mean performance slightly lower
+percentile range.                                                                    than the matched case but comparable to the mismatched case, while
+                                                                                     significantly narrowing the 5th to 95th percentile range to mitigate the
+of the noise component of the leakage pv(n) (without control) and                    impact of secondary path variations across the entire range of µ.
+the noise component of the inner error microphone signal ev(n) (with
+                                                                                     5.4. Experimental validation
+control), i.e.,
+                                                                                     To validate the simulation results, we implemented the control filters
+                                              N                      N               obtained from the matched and robust optimizations on the real-time
+                                                                                     dSPACE system in the same acoustic scenario. The control filter for
+NR (dB) = 10 log10 pv2(n) - 10 log10 ev2(n), (18)                                    the matched case was calculated according to (12) using the matched
+                                                                                     secondary path from KEMAR, and the filter for the robust case was
+                                              n=1                    n=1             calculated according to (16) using the average matrices across all 44
+                                                                                     paths. The spectra of the speech and noise components at the error
+where N denotes the total signal length.                                             microphones for µ = 150 (log10(µ)  2.18) are shown in Fig. 4.
+                                                                                     The experimental and simulation results are consistent, thus validating
+The intelligibility-weighted spectral distortion is used to assess                   the simulation findings.
+
+the amount of speech distortion [8, 25, 26]. It is defined as                                                    6. CONCLUSION
+
+                                              B P(b)                                 This paper examined the impact of secondary path variations on the
+                 SDintellig (dB) = I(b) 10 log10                          , (19)     performance of spatially selective active noise control systems for hear-
+                                              b=1 Pref,s(b)                          ables. Simulation results showed that the matched case, assuming or-
+                                                                                     acle knowledge of the secondary path, achieves the best overall perfor-
+where the band importance function I(b) expresses the importance                     mance. However, when the estimated secondary path does not match
+of the b-th one-third octave band for intelligibility [27], and B denotes            the true secondary path, the performance can degrade substantially, par-
+the total number of bands. P(b) is the power spectral density of (n)                 ticularly in terms of noise reduction. To address this issue, we proposed
+in the b-th band, where (n) = es(n) - xref,s(n - ). Pref,s(b)                        a robust optimization framework that minimizes the average cost over a
+is the power spectral density of xref,s(n - ) in the b-th band.                      set of secondary path estimates. The resulting robust filter achieves per-
+                                                                                     formance that is slightly lower than that of the matched case but remains
+In addition, we considered the narrowband perceptual evaluation                      stable across different secondary path conditions. Compared with fil-
+                                                                                     ters optimized for a single mismatched secondary path, the proposed
+of speech quality (PESQ) [28] and the extended short-term objective                  robust filter produces more consistent performance across the consid-
+intelligibility (ESTOI) [29] metrics using xref,s(n - ) as the                       ered set of secondary path estimates. Experimental results obtained
+reference signal. We evaluated the PESQ and ESTOI differences                        with a real-time system are consistent with the simulation findings.
+
+between the leakage (without control) and the inner error microphone
+
+signal (with control).
+
+5.3. Simulation results
+
+The performance of the three cases is illustrated in Fig. 3 for the
+right inner error microphone (#6). The solid lines denote the mean
+performance across all evaluated scenarios, while the shaded regions
+indicate the 5th-95th percentile range. The same trends were observed
+at the left ear (#5) and are omitted for brevity.
+
+     The matched case achieves the best mean performance overall in
+terms of noise reduction, speech distortion, PESQ improvement, and
+ESTOI improvement across the entire range of µ, while exhibiting only
+                            7. REFERENCES                                          in Proc. IEEE International Conference on Acoustics, Speech
+                                                                                   and Signal Processing (ICASSP), Seoul, Republic of Korea,
+ [1] S. M. Kuo and D. R. Morgan, Active noise control systems:                     2024, pp. 1056-1060.
+      Algorithms and DSP implementations. Wiley, 1996.
+                                                                             [16] ----, "Spatially selective active noise control for open-fitting
+ [2] S. J. Elliott, Signal processing for active control. Academic                 hearables with acausal optimization," in Proc. Forum Acusticum
+      Press, 2000.                                                                 Euronoise 2025, Ma´laga, Spain, Jun. 2025, pp. 117-124.
+
+ [3] C. Hansen, S. Snyder, X. Qiu, L. Brooks, and D. Moreau, Active          [17] T. Xiao, R. Roden, M. Blau, and S. Doclo, "Soft-constrained
+      control of noise and vibration, 2nd ed. CRC Press, Nov. 2012.                spatially selective active noise control for open-fitting hearables,"
+                                                                                   in Proc. IEEE Workshop on Applications of Signal Processing to
+ [4] P. R. Benois, R. Roden, M. Blau, and S. Doclo, "Optimization                  Audio and Acoustics (WASPAA), Tahoe City, USA, 2025, pp. 1-5.
+      of a fixed virtual sensing feedback ANC controller for in-ear
+      headphones with multiple loudspeakers," in Proc. IEEE                  [18] H. Schepker, F. Denk, B. Kollmeier, and S. Doclo, "Robust
+      International Conference on Acoustics, Speech and Signal                     single-and multi-loudspeaker least-squares-based equalization
+      Processing (ICASSP), Singapore, 2022, pp. 8717-8721.                         for hearing devices," EURASIP Journal on Audio, Speech, and
+                                                                                   Music Processing, vol. 2022, no. 1, pp. 1-14, 2022.
+ [5] F. Hilgemann, E. Chatzimoustafa, and P. Jax, "Data-driven
+      uncertainty modeling for robust feedback active noise control in       [19] C. Veaux, J. Yamagishi, and K. MacDonald, "CSTR
+      headphones," Journal of the Audio Engineering Society, vol. 72,              VCTK corpus: English multi-speaker corpus for
+      no. 12, pp. 873-883, Apr 2024.                                               CSTR voice cloning toolkit," 2017. [Online]. Available:
+                                                                                   https://doi.org/10.7488/ds/2645
+ [6] C.-Y. Chang, A. Siswanto, C.-Y. Ho, T.-K. Yeh, Y.-R. Chen,
+      and S. M. Kuo, "Listening in a noisy environment: Integration          [20] British Broadcasting Corporation, "Sound sample
+      of active noise control in audio products," IEEE Consumer                    07025055," BBC Sound Effects Archive, 2024,
+      Electronics Magazine, vol. 5, no. 4, pp. 34-43, 2016.                        accessed: March 04, 2026. [Online]. Available:
+                                                                                   https://sound-effects.bbcrewind.co.uk/search?q=07025055
+ [7] R. Gupta, J. He, R. Ranjan, W.-S. Gan, F. Klein, C. Schnei-
+      derwind, A. Neidhardt, K. Brandenburg, and V. Va¨lima¨ki,              [21] G. Grimm, J. Luberadzka, and V. Hohmann, "A toolbox for
+      "Augmented/mixed reality audio for hearables: Sensing, control,              rendering virtual acoustic environments in the context of
+      and rendering," IEEE Signal Processing Magazine, vol. 39,                    audiology," Acta acustica united with acustica, vol. 105, no. 3,
+      no. 3, pp. 63-89, 2022.                                                      pp. 566-578, 2019.
+
+ [8] R. Serizel, M. Moonen, J. Wouters, and S. H. Jensen, "Integrated        [22] G. Grimm, M. Hendrikse, and V. Hohmann,
+      active noise control and noise reduction in hearing aids," IEEE              "Pub environment," Sep. 2021. [Online]. Available:
+      Transactions on Audio, Speech, and Language Processing,                      https://doi.org/10.5281/zenodo.5886987
+      vol. 18, no. 6, pp. 1137-1146, 2010.
+                                                                             [23] F. Denk, M. Lettau, H. Schepker, S. Doclo, R. Roden, M. Blau, J.-
+ [9] D. Dalga and S. Doclo, "Influence of secondary path estimation                H. Bach, J. Wellmann, and B. Kollmeier, "A one-size-fits-all ear-
+      errors on the performance of ANC-motivated noise reduction                   piece with multiple microphones and drivers for hearing device
+      algorithms for hearing aids," in Proc. IEEE Workshop on                      research," in Proc. AES International Conference on Headphone
+      Applications of Signal Processing to Audio and Acoustics                     Technology, San Francisco, USA, Aug. 2019, pp. 1-9.
+      (WASPAA), New Paltz, USA, 2013, pp. 1-4.
+                                                                             [24] F. Denk and B. Kollmeier, "The hearpiece database of individual
+[10] V. Patel, J. Cheer, and S. Fontana, "Design and implementation of             transfer functions of an in-the-ear earpiece for hearing device
+      an active noise control headphone with directional hear-through              research," Acta Acustica, vol. 5, no. 2, pp. 1-16, 2021.
+      capability," IEEE Transactions on Consumer Electronics,
+      vol. 66, no. 1, pp. 32-40, Feb. 2020.                                  [25] A. Spriet, M. Moonen, and J. Wouters, "Spatially pre-processed
+                                                                                   speech distortion weighted multi-channel Wiener filtering
+[11] T. Xiao, B. Xu, and C. Zhao, "Spatially selective active noise                for noise reduction," Signal Processing, vol. 84, no. 12, pp.
+      control systems," The Journal of the Acoustical Society of                   2367-2387, 2004.
+      America, vol. 153, no. 5, pp. 2733-2744, May 2023.
+                                                                             [26] S. Doclo, A. Spriet, J. Wouters, and M. Moonen, "Frequency-
+[12] B. Van Veen and K. Buckley, "Beamforming: A versatile                         domain criterion for the speech distortion weighted multichannel
+      approach to spatial filtering," IEEE ASSP Magazine, vol. 5, no. 2,           Wiener filter for robust noise reduction," Speech Communication,
+      pp. 4-24, 1988.                                                              vol. 49, no. 7, pp. 636-656, 2007.
+
+[13] S. Gannot, E. Vincent, S. Markovich-Golan, and A. Ozerov,               [27] Acoustical Society of America (ASA), "Methods for Calculation
+      "A consolidated perspective on multimicrophone speech                        of the Speech Intelligibility Index," American National Stan-
+      enhancement and source separation," IEEE/ACM Transactions                    dards Institute (ANSI), ANSI/ASA S3.5-1997 Standard, 1997.
+      on Audio, Speech, and Language Processing, vol. 25, no. 4, pp.
+      692-730, 2017.                                                         [28] A. Rix, J. Beerends, M. Hollier, and A. Hekstra, "Perceptual
+                                                                                   evaluation of speech quality (PESQ)-a new method for speech
+[14] S. Doclo, W. Kellermann, S. Makino, and S. E. Nordholm,                       quality assessment of telephone networks and codecs," in Proc.
+      "Multichannel signal enhancement algorithms for assisted                     IEEE International Conference on Acoustics, Speech, and Signal
+      listening devices: Exploiting spatial diversity using multiple               Processing. Proceedings (ICASSP), Salt Lake City, USA, May
+      microphones," IEEE Signal Processing Magazine, vol. 32, no. 2,               2001, pp. 749-752.
+      pp. 18-30, Mar. 2015.
+                                                                             [29] J. Jensen and C. H. Taal, "An algorithm for predicting the
+[15] T. Xiao and S. Doclo, "Effect of target signals and delays on                 intelligibility of speech masked by modulated noise maskers,"
+      spatially selective active noise control for open-fitting hearables,"        IEEE/ACM Transactions on Audio, Speech, and Language
+                                                                                   Processing, vol. 24, no. 11, pp. 2009-2022, 2016.
+

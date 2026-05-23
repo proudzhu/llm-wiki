@@ -66,7 +66,10 @@ The convex hull model achieves **18 dB more attenuation** at 300 Hz than the con
 - [[concepts/elliptic-uncertainty-model|Elliptic Uncertainty Model]]
 - [[concepts/robust-stability-constraint|Robust Stability Constraint]]
 - [[concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
+- [[concepts/spatially-selective-anc|Spatially Selective ANC]]
+- [[concepts/soft-constrained-anc|Soft-Constrained ANC]]
 
 ## Related Sources
 
 - [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
+- [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]]

@@ -190,4 +190,6 @@
 | [[concepts/independent-vector-analysis\|Independent Vector Analysis]] | Multivariate extension of ICA for frequency-domain blind source separation; exploits inter-frequency dependencies to avoid permutation ambiguity | 2026-05-21 |
 | [[concepts/blind-source-separation\|Blind Source Separation]] | Recovering individual source signals from observed mixtures without knowledge of mixing process; core audio BSS methods include IVA, ILRMA, FastMNMF | 2026-05-21 |
 | [[concepts/heuristic-anc-algorithms\|Heuristic ANC Algorithms]] | Population-based global optimizers (PSO, DE, GA) applied to ANC for non-convex or constrained problems | 2026-05-18 |
+| [[concepts/spatially-selective-anc\|Spatially Selective ANC]] | ANC variant for hearables that suppresses noise from undesired directions while preserving sound from a chosen target direction at the eardrum, using ReIRs in a soft-constrained cost | 2026-05-23 |
+| [[concepts/soft-constrained-anc\|Soft-Constrained ANC]] | ANC controller design that adds a weighted penalty for a secondary objective (speech preservation, distortion) rather than imposing it as a hard constraint, governed by trade-off scalar $\beta$ | 2026-05-23 |
 
