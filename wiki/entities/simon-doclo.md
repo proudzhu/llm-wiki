@@ -21,10 +21,12 @@ tags:
 
 - Long-standing research program on multi-microphone speech enhancement and noise reduction for assistive listening devices
 - Co-author on the soft-constrained spatially selective ANC framework and its robust extension under secondary path variations
+- Co-author on geometry-conditioned spatially selective non-linear filter (GC-SSF) for robust target speaker extraction across array geometries
 
 ## Related Sources
 
 - [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]]
+- [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
 
 ## Related Concepts
 

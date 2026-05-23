@@ -70,7 +70,10 @@ SSANC is closer in spirit to combining beamforming and ANC than to spectral meth
 - [[concepts/speech-preserving-anc|Speech-Preserving ANC]]
 - [[concepts/uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
 - [[concepts/selective-anc|Selective ANC (filter selection)]]
+- [[concepts/target-speaker-extraction|Target Speaker Extraction]]
+- [[concepts/spatially-selective-nonlinear-filter|Spatially Selective Non-Linear Filter (SSF)]]
 
 ## Related Sources
 
 - [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]]
+- [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]

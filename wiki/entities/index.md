@@ -203,4 +203,6 @@
 | [[entities/simon-doclo\|Simon Doclo]] | Universität Oldenburg — multi-microphone speech enhancement, beamforming, ANC for hearables | 2026-05-23 |
 | [[entities/reinhild-roden\|Reinhild Roden]] | Jade-Hochschule Oldenburg — hearables, transfer-function characterisation, real-time ANC | 2026-05-23 |
 | [[entities/matthias-blau\|Matthias Blau]] | Jade-Hochschule Oldenburg — audiology, individual ear-canal acoustics, hearable transfer functions | 2026-05-23 |
+| [[entities/jiatong-li\|Jiatong Li]] | Universität Oldenburg — geometry-conditioned SSF, DOA-MPE, target speaker extraction | 2026-05-23 |
+| [[entities/wiebke-middelberg\|Wiebke Middelberg]] | Universität Oldenburg — multi-channel speech enhancement, neural spatial filtering | 2026-05-23 |
 

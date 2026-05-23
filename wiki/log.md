@@ -1882,6 +1882,34 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/entities/index.md` — added 3 entity rows
   - `wiki/concepts/index.md` — added 2 concept rows
 
+---
+
+## [2026-05-23] ingest | Li, Middelberg & Doclo (2026) Geometry-Conditioned SSF for Target Speaker Extraction
+
+- **Source**: `raw/papers/li-2026-geometry-conditioned-ssanc/full-text.md` (Zotero: D5LDQUHY, arXiv: 2605.18442)
+- **Authors**: Jiatong Li, Wiebke Middelberg, Simon Doclo
+- **Published**: arXiv preprint, 2026-05-18 (submitted to IWAENC 2026)
+- **DOI**: 10.48550/arXiv.2605.18442
+- **Summary**: Geometry-Conditioned Spatially Selective Non-Linear Filter (GC-SSF) for target speaker extraction. Extends baseline SSF (Tesch & Gerkmann 2024) with FiLM-based conditioning branch driven by DOA-Microphone Positional Encoding (DOA-MPE). Trained on random arrays, GC-SSF surpasses SSF-Random by ~0.45 PESQ across all geometries and achieves +1.25 PESQ over SSF-Circ on mismatched geometries while maintaining high spatial selectivity.
+- **Pages created**:
+  - `raw/papers/li-2026-geometry-conditioned-ssanc/full-text.md` — Defuddle extraction from arXiv HTML
+  - `raw/papers/li-2026-geometry-conditioned-ssanc/figures/` — 4 downloaded figures (system, scenario, random, pesq_sisdr)
+  - `wiki/sources/li-2026-geometry-conditioned-ssanc.md` — source page
+  - `wiki/entities/jiatong-li.md` — first author
+  - `wiki/entities/wiebke-middelberg.md` — co-author
+  - `wiki/concepts/spatially-selective-nonlinear-filter.md` — baseline SSF concept
+  - `wiki/concepts/geometry-conditioned-ssf.md` — GC-SSF concept
+  - `wiki/concepts/doa-microphone-positional-encoding.md` — DOA-MPE concept
+  - `wiki/concepts/film-layer.md` — FiLM conditioning layer concept
+  - `wiki/concepts/target-speaker-extraction.md` — TSE concept
+- **Pages updated**:
+  - `wiki/entities/simon-doclo.md` — added GC-SSF contribution and source link
+  - `wiki/concepts/spatially-selective-anc.md` — added cross-references to SSF/TSE concepts and source link
+  - `wiki/index.md` — added 2 entities, 5 concepts, 1 source; updated statistics to 504/201/193/85/19/6
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 2 entity rows
+  - `wiki/concepts/index.md` — added 5 concept rows
+
 
 ---
 

@@ -192,4 +192,9 @@
 | [[concepts/heuristic-anc-algorithms\|Heuristic ANC Algorithms]] | Population-based global optimizers (PSO, DE, GA) applied to ANC for non-convex or constrained problems | 2026-05-18 |
 | [[concepts/spatially-selective-anc\|Spatially Selective ANC]] | ANC variant for hearables that suppresses noise from undesired directions while preserving sound from a chosen target direction at the eardrum, using ReIRs in a soft-constrained cost | 2026-05-23 |
 | [[concepts/soft-constrained-anc\|Soft-Constrained ANC]] | ANC controller design that adds a weighted penalty for a secondary objective (speech preservation, distortion) rather than imposing it as a hard constraint, governed by trade-off scalar $\beta$ | 2026-05-23 |
+| [[concepts/spatially-selective-nonlinear-filter\|Spatially Selective Non-Linear Filter (SSF)]] | Deep-learning-based spatial filter for target speaker extraction using LSTM layers and DOA conditioning; geometry-dependent performance | 2026-05-23 |
+| [[concepts/geometry-conditioned-ssf\|Geometry-Conditioned SSF (GC-SSF)]] | SSF extension with FiLM-based geometry conditioning via DOA-MPE; generalises across array geometries without retraining | 2026-05-23 |
+| [[concepts/doa-microphone-positional-encoding\|DOA-Microphone Positional Encoding (DOA-MPE)]] | Joint encoding of microphone positions and target DOA via sinusoidal features; enables geometry-aware spatial filtering | 2026-05-23 |
+| [[concepts/film-layer\|FiLM Layer]] | Feature-wise Linear Modulation for conditioning neural networks via learned scaling and bias parameters | 2026-05-23 |
+| [[concepts/target-speaker-extraction\|Target Speaker Extraction]] | Isolating a specific speaker's speech from a mixture using spatial, enrolment, visual, or textual cues | 2026-05-23 |
 

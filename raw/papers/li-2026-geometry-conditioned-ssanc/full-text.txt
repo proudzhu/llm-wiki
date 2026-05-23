@@ -1,0 +1,345 @@
+                                             FLEXIBLE MULTI-CHANNEL TARGET SPEAKER EXTRACTION USING
+                                          GEOMETRY-CONDITIONED SPATIALLY SELECTIVE NON-LINEAR FILTERS
+
+                                                                    Jiatong Li, Wiebke Middelberg, Simon Doclo
+
+                                                 Dept. of Medical Physics and Acoustics and Cluster of Excellence Hearing4all,
+                                                         Carl von Ossietzky Universita¨t Oldenburg, Oldenburg, Germany
+                                                          {jiatong.li,wiebke.middelberg, simon.doclo}@uni-oldenburg.de
+
+arXiv:2605.18442v1 [eess.AS] 18 May 2026                                   ABSTRACT                                       Fig. 1. Overview of the proposed geometry-conditioned SSF. White
+                                                                                                                          blocks represent the baseline SSF architecture, while gray blocks denote
+                                          Recently, a spatially selective non-linear filter (SSF) has been proposed       the proposed geometry-conditioning branch. The output of the encoder is
+                                          for target speaker extraction, using the target direction-of-arrival (DOA)      integrated into the SSF system via a FiLM layer at one of three points of
+                                          as a spatial cue. Since learned intermediate features are tied to the micro-    injection (POI 1 , 2 , or 3 ).
+                                          phone geometry, the performance of the SSF degrades significantly when
+                                          evaluated on mismatched array geometries. In this paper, we propose a           extraction. Although geometry-conditioning systems have been proposed
+                                          geometry-conditioned SSF (GC-SSF), which incorporates a geometry-               for DOA estimation [20, 21] and blind speaker separation [22], to the
+                                          conditioning branch based on FiLM layers. Furthermore, we propose a             best of our knowledge geometry-conditioning has not been considered
+                                          feature that jointly encodes the DOA and the microphone positions (DOA-         for DOA-based target speaker extraction.
+                                          MPE). The conditioning branch modulates the intermediate feature maps
+                                          of the SSF using the DOA-MPE feature to capture the spatial relationship             In this paper, we propose a geometry-conditioned spatially selective
+                                          between the microphone positions and the target speaker. Experimental           filter (GC-SSF), which uses the microphone array geometry as a con-
+                                          results across circular, uniform linear, and random microphone arrays           ditioning input to achieve robustness across different array geometries,
+                                          show that the proposed GC-SSF generalizes better to mismatched geome-           assuming a fixed number of microphones. The main contributions are:
+                                          tries while maintaining high spatial selectivity, demonstrating its ability     1) integration of a geometry-conditioning branch into the baseline SSF
+                                          to effectively adapt the filtering process to different array geometries.       (see Fig. 1), using a Feature-wise Linear Modulation (FiLM) layer [23]
+                                                                                                                          to modulate intermediate feature maps from the SSF system, 2) a DOA-
+                                               Index Terms-- spatially selective non-linear filter, geometry condi-       Microphone Positional Encoding (DOA-MPE) feature, which effectively
+                                          tioning, microphone array processing, target speaker extraction                 represents the spatial relationship between the microphone positions
+                                                                                                                          and the target speaker to provide the important geometric context for
+                                                                     1. INTRODUCTION                                      DOA-steered target speaker extraction. In the experimental evaluation,
+                                                                                                                          we compare the proposed GC-SSF system, trained on random arrays,
+                                          Extracting a target speaker from a mixture of speakers and background           against baseline SSF systems, trained either on a fixed circular array or on
+                                          noise remains a fundamental challenge in acoustic signal processing [1].        random arrays. The performance is evaluated on both matched and mis-
+                                          To discriminate the target speaker from the interfering speakers, various       matched array geometries. Experimental results show that the proposed
+                                          cues have been proposed, such as enrollment utterances [2, 3], visual           GC-SSF consistently outperforms the baseline SSF trained on random
+                                          information [4, 5], and spatial features [6-11]. In this paper, we focus        arrays across all evaluated geometries. While the baseline SSF trained
+                                          on the spatially selective non-linear filter (SSF) proposed in [8]. The SSF     on the circular array shows the best performance for the matched circular
+                                          utilizes the target direction-of-arrival (DOA) as a spatial cue and employs     array geometry, a substantial performance degradation is observed for
+                                          Long Short-Term Memory (LSTM) layers to estimate a complex-valued               mismatched geometries. In contrast, the GC-SSF effectively bridges this
+                                          mask that is applied to the reference microphone signal to extract the          performance gap, achieving robust performance across all considered
+                                          target speaker.                                                                 geometries. Furthermore, a sensitivity analysis with respect to target DOA
+                                                                                                                          errors demonstrates that the proposed GC-SSF achieves both strong gen-
+                                               Despite its effectiveness, a limitation of the SSF is its inherent depen-  eralization across different array geometries and high spatial selectivity.
+                                          dency on a fixed microphone array geometry. Since the SSF is typically
+                                          trained on a specific microphone array, the learned intermediate features
+                                          are tied to its specific array geometry. Consequently, the performance
+                                          degrades significantly when the SSF system is evaluated on mismatched
+                                          array geometries. Although a meta-learning approach [12] attempts
+                                          to address this limitation via fine-tuning, it often lacks scalability for
+                                          diverse real-world geometries. Alternatively, various geometry-agnostic
+                                          systems [13-19] have been proposed, which are not tied to a specific
+                                          array geometry. However, these systems are designed for noise reduc-
+                                          tion or blind speaker separation rather than DOA-based target speaker
+
+                                               This work was funded by the Deutsche Forschungsgemeinschaft (DFG,
+                                          German Research Foundation) under Germany's Excellence Strategy - EXC
+                                          2177/2 - Project ID 390895286, Project ID 352015383 - SFB 1330 B2, and
+                                          Project ID 568930428. Simulations were conducted on the HPC cluster ROSA
+                                          funded by the DFG under INST 184/225-1 FUGG.
+2. SPATIALLY SELECTIVE NON-LINEAR FILTER                                        where v  =  2  [0,  1,  ...,  K  - 1]T        K  is a constant vector, and , ,
+                                                                                            K                 2
+                                                                                                                          R2
+
+                                                                                and K are constant hyperparameters. Here, dm represents the Euclidean
+
+In this section, we review the spatially selective non-linear filter (SSF)      distance from the m-th microphone to the array centroid. The azimuth
+
+for target speaker extraction [8], which serves as the baseline system.         angles m are defined counter-clockwise relative to the reference axis
+
+In the short-time Fourier transform (STFT) domain, the observed                 passing through the array centroid and the reference microphone (see Fig.
+
+noisy speech signal at the m-th microphone for frequency bin f  [1, F ]         3). As described in [21], by employing these sinusoidal features, the MPE
+
+and time frame t  [1, T ] is denoted by Ym(f, t), where F and T denote          explicitly reflects the phase-related relationships between microphones
+
+the number of frequency bins and time frames, respectively. By stacking         that are critical for spatial filtering. This is a property not easily captured
+
+the signals from all M microphones, the multichannel observed noisy             by simply concatenating microphone coordinates [20]. By stacking the
+speech vector Y(f, t) = [Y1(f, t), Y2(f, t), ..., YM (f, t)]T  CM is
+                                                                                positional encoding features pm from all M microphones, the positional
+
+given by                                                                        encoding feature for the whole microphone array PMPE is defined as,
+
+          Y(f, t) = X(f, t) + V(f, t),                                   (1)                   PMPE = [p1, p2, ...pM ]  RK×M . (4)
+
+where the target speech vector X(f, t)  CM and the interfering speech                While PMPE characterizes the array geometry, it does not explicitly
+vector V(f, t)  CM are defined similar as Y(f, t).                              capture the spatial relationship between the microphone positions and
+                                                                                the target source. To facilitate the network in learning the relationship
+The goal is to recover the reverberant target speech component                  between the array geometry and the target DOA , which is anticipated
+                                                                                to be important for DOA-steered target speaker extraction, we propose
+X1(f, t) from the noisy speech vector Y(f, t), with the first microphone        an augmented feature, DOA-MPE:
+
+chosen as the reference microphone. To achieve this, the SSF estimates
+
+a single-channel complex mask M(f, t), which is applied to the noisy
+
+speech at the reference microphone Y1(f, t), i.e.,
+
+          X^ 1(f, t) = M(f, t)Y1(f, t).                                  (2)                PDOA-MPE = [PMPE, pDOA]  RK×(M+1), (5)
+                                                                                             pDOA =  cos(2v + )  RK, (6)
+     The SSF estimates the mask M(f, t) from the noisy speech vec-
+tor Y(f, t), conditioned on the target DOA  (see Fig. 1). The SSF                                           sin(2v + )
+architecture comprises two Long Short-Term Memory (LSTM) layers
+to jointly process spatial, spectral, and temporal information. The first       where the target DOA  is defined relative to the same reference axis
+LSTM layer, the frequency-domain LSTM (F-LSTM), analyzes spatial                as the microphone azimuth angle m. It should be noted that since the
+and spectral information by encoding the noisy speech vector Y(f, t)            distance between the array centroid and the target speaker is typically
+into a high-dimensional feature vector. This is followed by a time-domain       unknown in practice, we only incorporate the target DOA  into pDOA.
+LSTM (T-LSTM), which models spatial and temporal dependencies by
+processing the F-LSTM outputs along the time dimension. Finally, a              3.2. Conditioning using FiLM
+linear layer outputs the complex mask M(f, t). To steer the SSF, the
+target DOA  is mapped to a 180-dimensional one-hot vector with a 2              To condition the target speaker extraction on the microphone array
+resolution. This vector is projected via a linear layer to initialize the cell  geometry, we utilize a FiLM layer [23] to modulate the intermediate
+state of the F-LSTM, thereby conditioning the SSF on the target DOA.            feature maps O(t) of the SSF at time frame t, i.e.,
+
+     Typically, the SSF system is trained on a specific microphone                                  FiLM(O(t)) = W  O(t) + B,    (7)
+array. This, however, makes the learned intermediate features inherently
+dependent on the microphone array considered during training. As a                                           W = Encoder(P), (8)
+result, the system exhibits substantial performance degradation when                                          B
+applied to mismatched array geometries.
+                                                                                where  denotes element-wise multiplication. The conditioning parame-
+           3. PROPOSED GEOMETRY-CONDITIONED                                     ters, the scaling matrix W and the bias matrix B, are estimated by an en-
+         SPATIALLY SELECTIVE NON-LINEAR FILTER                                  coder from the input positional encoding feature P  {PMPE, PDOA-MPE}.
+                                                                                In the proposed system, the parameters W and B are time-invariant, as
+To improve the generalization ability of the SSF system across different        the array geometry and the target DOA are assumed to be static. For
+microphone array geometries for a fixed number of microphones, we               the encoder, we employ one-dimensional convolutional (Conv1d) layers
+propose to incorporate a geometry-conditioning branch into the SSF (see         followed by Leaky ReLU activation functions. The Conv1d layers are
+Fig. 1). This branch first transforms the microphone array geometry and         suitable for this task as they enable the network to effectively exploit
+the target DOA to spatial features using a positional encoding scheme           phase-related relationships across microphone and DOA dimensions in
+(see Section 3.1). These spatial features are then processed by an encoder,     the positional encoding feature PDOA-MPE. As illustrated in Fig. 1, we
+whose output is used to modulate the intermediate feature maps of the           investigate three potential points of injection (POIs) for the conditioning
+SSF via a FiLM layer (see Section 3.2).                                         mechanism, denoted as 1 , 2 , and 3 . Depending on the selected
+                                                                                POI, the output dimensionality of the encoder is adjusted to match
+3.1. Positional Encoding                                                        the dimensions of the corresponding intermediate feature maps O(t).
+                                                                                This flexibility allows us to evaluate the effect of applying geometric
+To represent the microphone array geometry for DNN processing, we               conditioning at different stages of the spatial filtering process.
+utilize the Microphone Positional Encoding (MPE) scheme [21]. The
+MPE encodes the position of the m-th microphone using their polar                                           4. EXPERIMENTS
+coordinates (m, dm) relative to the array centroid into high-dimensional
+sinusoidal features without requiring learnable parameters, i.e.,               This section first presents the experimental setup, including the training
+                                                                                and evaluation datasets, the network structure, and the training procedure.
+                pm =  dm cos(2v + m)  RK, (3)                                   Then, the experimental results are presented and discussed, evaluating
+                                 sin(2v + m)                                    the performance, generalization ability, and the spatial selectivity of the
+                                                                                proposed GC-SSF system compared with the baseline SSF systems.
+4.1. Datasets                                                                                          Room characteristics
+
+To evaluate the performance of the proposed GC-SSF system, acoustic en-                                Width   2.5-5 m
+vironments were simulated using the Pyroomacoustics library [24]. The                                  Length  3-9 m
+room dimensions and the reverberation time T60 were uniformly sampled                                  Height  2.2-3.5 m
+from the ranges specified in Fig. 2 (right). In order to investigate the gener-                        T60     0.2-0.5 s
+alization ability of the system to mismatched array geometries, three array
+geometries with M = 4 microphones were considered: Circular (Circ),              Fig. 2. Illustration of the simulation setup and the room characteristics.
+Uniform Linear (ULA), and Random arrays (see Fig. 3). These arrays               The target speaker and the interfering speaker are located in the gray
+were randomly placed in the horizontal plane at a height of 1.6 m with a         region.
+random rotation. For each array geometry, the first microphone was cho-
+sen as the reference microphone. For the random array, the microphone
+positions were randomly sampled within a square region of 10 × 10 cm2.
+As illustrated in Fig. 2 (left), one target speaker and one interfering
+speaker were placed at a height of 1.6 m. The angular separation between
+two speakers was constrained to a minimum of 20. The acoustic datasets
+were generated using speech signals from the Wall Street Journal (WSJ0)
+corpus [25], sampled at 16 kHz. Following the data split defined in [8],
+the corpus is split into training, validation, and evaluation sets, ensuring
+disjoint sets of speakers. The training and validation sets comprise 30 h
+and 1 h of data, respectively, with a utterance duration of 3 s. Similarly,
+1 h of data was generated for each array geometry for evaluation. The
+mixture signals were generated such that the ratio between the power of
+the reverberant target speech and the power of the reverberant interfering
+speech at the reference microphone was between -5 dB and 10 dB.
+
+                                                                                 (a) Random  (b) Circ          (c) ULA
+
+4.2. Network and Training                                                        Fig. 3. Considered random, circular and ULA array geometries with
+                                                                                 M = 4 microphones. Gray circle denotes the reference microphone.
+Following the framework in [8], the STFT is computed using a frame               Red cross denotes the array centroid.
+length of 512 with 50% overlap and a square-root Hann window for both
+analysis and synthesis. The baseline SSF model, illustrated in Fig. 1,           4.3. Experimental Results
+adopts the network architecture described in [8]. For the positional
+encoding block, the hyperparameters were set to:  = 7,  = 4, and                 In this section, we provide an experimental evaluation of the GC-SSF.
+K = 514. The encoder consists of three Conv1d layers with a kernel               First, we investigate the optimal configuration by comparing different
+size of 5, each followed by a LeakyReLU activation function. The first           positional encoding features (PMPE and PDOA-MPE) and POIs (see Table
+two layers contain 64 and 128 output channels, respectively, while the           1). Then, we compare the performance and generalization ability of the
+third Conv1d layer contains 2M output channels for POI 1 and 2F                  GC-SSF with baseline SSF systems (see Table 2). In the end, we analyze
+output channels for POIs 2 and 3 . To ensure the positional encoding             the spatial selectivity of the systems by evaluating their sensitivity to target
+feature (PMPE or PDOA-MPE) matches the dimensions of the intermediate            DOA errors (see Fig. 4). The performance is evaluated using the wide-
+feature map at the selected POI, the strides for the Conv1d layers are set       band Perceptual Evaluation of Speech Quality (PESQ) [26] and the Scale
+to (1, 1, 1) for POIs 1 and 2 , and (2, 2, 1) for POI 3 . The encoder            Invariant Signal-to-Distortion Ratio (SI-SDR) [27], with the reverberant
+output dimensions for each POI are illustrated in Fig. 1.                        target speech at the reference microphone as the clean reference signal.
+
+     The training procedure follows the strategy in [8]. All the networks             Table 1 shows the average PESQ results for the GC-SSF system
+were trained to minimize a loss function, which combines time-domain             configured with different positional encoding features across the three
+and frequency-domain loss terms, i.e.,                                           considered POIs. In this experiment, the models are trained on Random
+                                                                                 arrays and evaluated on both Circ and Random geometries. As shown
+       N                    1   TF                                               in the table, the proposed feature PDOA-MPE consistently outperforms
+                                                                                 the feature PMPE for all considered POIs and evaluation geometries.
+L=  N     |x1(n)-x^1(n)| +  TF           |X1(f, t)|-|X^ 1(f, t)| , (9)           This suggests that the joint encoding of the microphone positions and
+                                                                                 the target DOA enables the conditioning branch to effectively model
+       n=1                      t=1f =1                                          the spatial relationship between the microphones and the target source.
+                                                                                 Regarding the choice of POI, integrating the conditioning at the output
+where x1(n) denotes the reverberant time-domain target speech sig-               of the T-LSTM (POI 3 ) yields lower performance compared to earlier
+nal at the reference microphone, and x^1(n) represents its estimated             points of injections (POI 1 and 2 ), suggesting that late-stage injection
+time-domain signal reconstructed via inverse STFT and overlap-add.               limits the network's ability to adapt its internal representations to different
+Here, n denotes the time sample index and N denotes the number of                array geometries. Since the feature PDOA-MPE combined with POI 2
+samples. The scalar weighting factor  is set to  = 10 following the              achieves the highest PESQ score, it is utilized as the default configuration
+configuration in [8]. All networks were trained for 500 epochs with a            for the GC-SSF in the remaining experiments.
+batch size of 16. Optimization was performed using the Adam optimizer
+with an initial learning rate of 0.001. A multi-step learning rate scheduler          Table 2 compares the proposed GC-SSF trained on Random arrays
+was employed, decaying the learning rate by a factor of 0.75 every 50            with the baseline SSF systems trained on either Circ array (SSF-Circ)
+epochs, up to epoch 400. To ensure stable convergence, the l2-norm of
+gradients are clipped to 1.
+Table 1. Average PESQ of GC-SSF with different positional encoding
+features for three POIs ( 1 , 2 and 3 ), Systems are trained with random
+arrays and evaluated on circular and random arrays.
+
+ Feature      POI 1        POI 2         POI 3
+          Circ Random  Circ Random   Circ Random
+  PMPE    1.72 1.70    2.09 2.02     1.99 1.89
+PDOA-MPE  2.51 2.43    2.53 2.46     2.12 2.15
+
+Table 2. Average PESQ (with standard deviation) of the baseline SSF
+(trained on circular or random arrays) and the proposed GC-SSF (trained
+on random arrays) with positional encoding feature PDOA-MPE at POI 2 .
+Systems are evaluated on circular, ULA, and random arrays.
+
+       System       Train    Circ    Evaluation  Random                     Fig. 4. Average PESQ and SI-SDR (dB) of the baseline SSF (trained on
+    Unprocessed        -     1.38       ULA        1.36                     circular or random arrays) and proposed GC-SSF (trained on Random
+                           (± 0.28)     1.39                                arrays) with positional encoding feature PDOA-MPE at POI 2 for different
+      SSF-Circ       Circ    2.95                (± 0.27)                   target DOA errors. Systems are evaluated on the circular array.
+    SSF-Random     Random  (± 0.59)   (± 0.29)     1.20
+GC-SSF (PDOA-MPE)  Random    2.04       1.16                                system fails to properly use the given DOA information, resulting in
+                           (± 0.67)              (± 0.35)                   low spatial selectivity and degraded performance. Compared with these
+                             2.53     (± 0.28)     1.93                     baseline systems, the proposed GC-SSF achieves higher SI-SDR and
+                           (± 0.63)     2.02                                PESQ scores than the SSF-Random for DOA errors below 20, while
+                                                 (± 0.67)                   showing a comparable spatial selectivity to the SSF-Circ. This shows that
+                                      (± 0.66)     2.46                     the GC-SSF effectively uses the input DOA information, despite being
+                                        2.41                                trained on Random arrays. Overall, these results demonstrate that explicit
+                                                 (± 0.63)                   geometry conditioning enables the GC-SSF to achieve both high spatial
+                                     (± 0.66)                               selectivity and generalization ability across different array geometries.
+
+or Random array (SSF-Random). The baseline SSF-Circ shows the                                           5. CONCLUSIONS
+best performance in the matched Circ dataset but fails to generalize to
+mismatched ULA and Random geometries, resulting in PESQ scores              In this paper, we proposed the GC-SSF system, designed to achieve
+lower than those of the unprocessed mixtures. This indicates that the       robust target speaker extraction across different array geometries for a
+system learns spatial features tied specifically to the Circ geometry. In   fixed number of microphones. The proposed system extends the baseline
+contrast, the baseline SSF-Random system shows more consistent perfor-      SSF by incorporating an explicit geometry-conditioning branch via a
+mance across different geometries but suffers from overall performance      FiLM layer and a proposed DOA-MPE feature to represent the spatial
+degradation. This can be explained by the inconsistent mapping between      relationship between the microphone positions and the target source.
+the input DOA and the array-dependent phase-related relationships in        Experimental results demonstrate that while a baseline SSF trained on a
+observed multichannel signals, which is unresolvable in random arrays       fixed geometry achieves competitive performance in matched conditions,
+without explicit geometry information. Compared to the SSF-Circ and         the proposed GC-SSF trained on random arrays shows better generaliza-
+the SSF-Random, the proposed GC-SSF addresses these limitations. The        tion ability across mismatched array geometries. A sensitivity analysis
+GC-SSF surpasses the SSF-Random by approximately 0.45 in PESQ               to target DOA errors further shows that the proposed GC-SSF maintains
+across all evaluated geometries and achieves a substantial improvement      high spatial selectivity without sacrificing generalization ability across
+of up to 1.25 in PESQ over the SSF-Circ in mismatched array geometries.     different array geometries. While the current architecture is designed for
+While the baseline SSF-Circ achieves better performance than our pro-       a fixed number of microphones, future work will investigate architectures
+posed GC-SSF in the matched Circ geometry, these results demonstrate        that are independent of the number of microphones, thereby enabling the
+that the proposed GC-SSF system achieves better generalization ability      deployment of the GC-SSF in ad-hoc acoustic sensor networks.
+across different array geometries.
+                                                                                                         6. REFERENCES
+     To investigate the spatial selectivity of the systems, we evaluate
+them on the Circ array under different target DOA errors. The results        [1] K. Zmolikova, M. Delcroix, T. Ochiai, K. Kinoshita, J. C ernocky´,
+are illustrated in Fig. 4. In general, the PESQ and SI-SDR scores of all          and D. Yu, "Neural target speech extraction: An overview," IEEE
+systems decrease as the target DOA error increases. Specifically, for the         Signal Processing Magazine, vol. 40, pp. 8-29, 2023.
+baseline SSF-Circ, the PESQ and SI-SDR scores decrease significantly
+when the target DOA error exceeds 15, which indicates that the baseline      [2] M. Delcroix, K. Zmolikova, K. Kinoshita, A. Ogawa, and
+SSF-Circ effectively utilizes the input DOA information and achieves              T. Nakatani, "Single channel target speaker extraction and
+high spatial selectivity. The underlying reason is that the fixed geometry        recognition with speaker beam," in Proc. IEEE International
+in training allows the network to learn a direct mapping between the              Conference on Acoustics, Speech and Signal Processing, Calgary,
+inter-channel phase relationships and the provided DOA, resulting in a            Canada, Apr. 2018, pp. 5554-5558.
+trade-off between high spatial selectivity and robustness to target DOA
+errors. In contrast, the baseline SSF-Random exhibits considerably
+lower sensitivity to target DOA errors than the SSF-Circ in terms of
+both PESQ and SI-SDR. This implies that, without a fixed geometric
+context or explicit conditioning, the system cannot learn the relationship
+between the array geometry and the input DOA. Consequently, the
+ [3] R. Sinha, C. Rollwage, and S. Doclo, "Variants of LSTM cells               [17] M. Tatarjitzky and B. Rafaely, "Ambidrop: Array-agnostic speech
+      for single-channel speaker-conditioned target speaker extraction,"              enhancement using ambisonics encoding and dropout-based
+      EURASIP Journal on Audio, Speech, and Music Processing, vol.                    learning," in Proc. IEEE International Conference on Acoustics,
+      2024, pp. 63, 2024.                                                             Speech and Signal Processing, Barcelona, Spain, May 2026, pp.
+                                                                                      14732-14736.
+ [4] D. Michelsanti, Z.-H. Tan, S.-X. Zhang, Y. Xu, M. Yu, D. Yu,
+      and J. Jensen, "An overview of deep-learning-based audio-visual           [18] D. Zhang, A. I. Mezza, F. Miotello, J. Chen, M. Wang, F. Antonacci,
+      speech enhancement and separation," IEEE/ACM Trans. on Audio,                   and A. Bernardini, "Eigenbeam-feature-based multi-order encoder
+      Speech, and Language Processing, vol. 29, pp. 1368-1396, 2021.                  for geometry-agnostic speech enhancement," in Proc. IEEE
+                                                                                      International Conference on Acoustics, Speech and Signal
+ [5] J. Lin, X. Cai, H. Dinkel, J. Chen, Z. Yan, Y. Wang, J. Zhang,                   Processing, Barcelona, Spain, May 2026, pp. 22192-22196.
+      Z. Wu, Y. Wang, and H. Meng, "AV-Sepformer: Cross-attention
+      sepformer for audio-visual target speaker extraction," in Proc.           [19] Y. Masuyama, K. Saijo, F. Paissan, J. Han, M. Delcroix, R. Aihara,
+      IEEE International Conference on Acoustics, Speech and Signal                   F. G. Germain, G. Wichern, and J. Le Roux, "Flexio: Flexible
+      Processing, Rhodes Island, Greece, June 2023, pp. 1-5.                          single- and multi-channel speech separation and enhancement," in
+                                                                                      Proc. IEEE International Conference on Acoustics, Speech and
+ [6] Z.-Q. Wang and D. Wang, "Combining spectral and spatial features                 Signal Processing, Barcelona, Spain, May 2026, pp. 14417-14421.
+      for deep learning based blind speaker separation," IEEE/ACM
+      Trans. on Audio, Speech, and Language Processing, vol. 27, pp.            [20] U. Kowalk, S. Doclo, and J. Bitzer, "Geometry-aware DOA esti-
+      457-468, 2019.                                                                  mation using a deep neural network with mixed-data input features,"
+                                                                                      in Proc. IEEE International Conference on Acoustics, Speech and
+ [7] M. Elminshawi, S. Raj Chetupalli, and E. A. P. Habets,                           Signal Processing, Rohdes Island, Greece, Jun. 2023, pp. 1-5.
+      "Beamformer-guided target speaker extraction," in Proc. IEEE
+      International Conference on Acoustics, Speech and Signal                  [21] M.-S. Baek, J.-H. Chang, and I. Cohen, "DNN-based geometry-
+      Processing, Rhodes Island, Greece, June 2023, pp. 1-5.                          invariant DOA estimation with microphone positional encoding
+                                                                                      and complexity gradual training," IEEE Trans. on Audio, Speech
+ [8] K. Tesch and T. Gerkmann, "Multi-channel speech separation using                 and Language Processing, vol. 33, pp. 2360-2376, 2025.
+      spatially selective deep non-linear filters," IEEE/ACM Trans. on Au-
+      dio, Speech, and Language Processing, vol. 32, pp. 542-553, 2024.         [22] J. Fan, R. Gu, Y. Luo, and C. Pang, "A unified geometry-aware
+                                                                                      source localization and separation framework for ad-hoc micro-
+ [9] J. Kienegger, A. Mannanova, H. Fang, and T. Gerkmann,                            phone array," in Proc. IEEE International Conference on Acoustics,
+      "Self-steering deep non-linear spatially selective filters for efficient        Speech and Signal Processing Workshops, Seoul, Korea, Apr. 2024,
+      extraction of moving speakers under weak guidance," in Proc.                    pp. 725-729.
+      IEEE Workshop on Applications of Signal Processing to Audio and
+      Acoustics, Tahoe City, USA, Oct. 2025, pp. 1-5.                           [23] E. Perez, F. Strub, H. de Vries, V. Dumoulin, and A. Courville,
+                                                                                      "FiLM: Visual reasoning with a general conditioning layer," Proc.
+[10] S. S. Shetu, E. A. P. Habets, and A. Brendel, "GAN-based                         AAAI Conference on Artificial Intelligence, vol. 32, 2018.
+      multi-microphone spatial target speaker extraction," in arXiv, 2025.
+                                                                                [24] R. Scheibler, E. Bezzam, and I. Dokmanic´, "Pyroomacoustics: A
+[11] Y. Wang, J. Zhang, C. Jiang, W. Zhang, Z. Ye, and L. Dai, "Leverag-              python package for audio room simulation and array processing
+      ing boolean directivity embedding for binaural target speaker extrac-           algorithms," in Proc. IEEE International Conference on Acoustics,
+      tion," in Proc. IEEE International Conference on Acoustics, Speech              Speech and Signal Processing, Calgary, Canada, 2018, pp. 351-355.
+      and Signal Processing, Hyderabad, India, April 2025, pp. 1-5.
+                                                                                [25] J. S. Garofolo, D. Graff, D. Paul, and D. Pallett, "CSR-I (WSJ0)
+[12] A. Mannanova, K. Tesch, J.-M. Lemercier, and T. Gerkmann,                        Complete LDC93S6A," Linguistic Data Consortium, Philadelphia,
+      "Meta-learning for variable array configurations in end-to-end                  May 2007.
+      few-shot multichannel speech enhancement," in Proc. International
+      Workshop on Acoustic Signal Enhancement, Aalborg, Denmark,                [26] A. W. Rix, J. G. Beerends, M. P. Hollier, and A. P. Hekstra, "Percep-
+      2024, pp. 200-204.                                                              tual evaluation of speech quality (PESQ)-a new method for speech
+                                                                                      quality assessment of telephone networks and codecs," in Proc.
+[13] Y. Luo, Z. Chen, N. Mesgarani, and T. Yoshioka, "End-to-end                      IEEE International Conference on Acoustics, Speech and Signal
+      microphone permutation and number invariant multi-channel                       Processing, Salt Lake City, USA, May 2001, vol. 2, pp. 749-752.
+      speech separation," in Proc. IEEE International Conference on
+      Acoustics, Speech and Signal Processing, Barcelona, Spain, May            [27] J. L. Roux, S. Wisdom, H. Erdogan, and J. R. Hershey, "SDR -
+      2020, pp. 6394-6398.                                                            half-baked or well done?," in Proc. IEEE International Conference
+                                                                                      on Acoustics, Speech and Signal Processing, Brighton, UK, May
+[14] A. Jukic´, J. Balam, and B. Ginsburg, "Flexible multichannel speech              2019, pp. 626-630.
+      enhancement for noise-robust frontend," in Proc. IEEE Workshop
+      on Applications of Signal Processing to Audio and Acoustics, New
+      Paltz, USA, Oct. 2023, pp. 1-5.
+
+[15] M. Tammen, T. Ochiai, M. Delcroix, T. Nakatani, S. Araki,
+      and S. Doclo, "Array geometry-robust attention-based neural
+      beamformer for moving speakers," in Proc. Interspeech, Kos,
+      Greece, Sep. 2024, pp. 3345-3349.
+
+[16] D. Lee and J.-W. Choi, "DeFTAN-AA: Array geometry agnostic
+      multichannel speech enhancement," in Proc. Interspeech, Kos,
+      Greece, Sep. 2024, pp. 3360-3364.
+

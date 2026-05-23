@@ -205,6 +205,8 @@
 | [[entities/ruiming-guo\|Ruiming Guo]] | Sichuan University of Science and Engineering — IVA optimization for audio blind source separation | 2026-05-21 |
 | [[entities/zhongqiang-luo\|Zhongqiang Luo]] | Sichuan University of Science and Engineering — BSS, wireless signal processing, IVA | 2026-05-21 |
 | [[entities/mingchun-li\|Mingchun Li]] | Sichuan University of Science and Engineering — signal processing, blind source separation | 2026-05-21 |
+| [[entities/jiatong-li\|Jiatong Li]] | Universität Oldenburg — geometry-conditioned SSF, DOA-MPE, target speaker extraction | 2026-05-23 |
+| [[entities/wiebke-middelberg\|Wiebke Middelberg]] | Universität Oldenburg — multi-channel speech enhancement, neural spatial filtering | 2026-05-23 |
 
 ---
 
@@ -402,6 +404,11 @@
 | [[concepts/heuristic-anc-algorithms\|Heuristic ANC Algorithms]] | Population-based global optimizers (PSO, DE, GA) applied to ANC for non-convex or constrained problems | 2026-05-18 |
 | [[concepts/spatially-selective-anc\|Spatially Selective ANC]] | ANC variant for hearables that suppresses noise from undesired directions while preserving sound from a chosen target direction at the eardrum, using ReIRs in a soft-constrained cost | 2026-05-23 |
 | [[concepts/soft-constrained-anc\|Soft-Constrained ANC]] | ANC controller design that adds a weighted penalty for a secondary objective (speech preservation, distortion) rather than imposing it as a hard constraint, governed by trade-off scalar $\beta$ | 2026-05-23 |
+| [[concepts/spatially-selective-nonlinear-filter\|Spatially Selective Non-Linear Filter (SSF)]] | Deep-learning-based spatial filter for target speaker extraction using LSTM layers and DOA conditioning; geometry-dependent performance | 2026-05-23 |
+| [[concepts/geometry-conditioned-ssf\|Geometry-Conditioned SSF (GC-SSF)]] | SSF extension with FiLM-based geometry conditioning via DOA-MPE; generalises across array geometries without retraining | 2026-05-23 |
+| [[concepts/doa-microphone-positional-encoding\|DOA-Microphone Positional Encoding (DOA-MPE)]] | Joint encoding of microphone positions and target DOA via sinusoidal features; enables geometry-aware spatial filtering | 2026-05-23 |
+| [[concepts/film-layer\|FiLM Layer]] | Feature-wise Linear Modulation for conditioning neural networks via learned scaling and bias parameters | 2026-05-23 |
+| [[concepts/target-speaker-extraction\|Target Speaker Extraction]] | Isolating a specific speaker's speech from a mixture using spatial, enrolment, visual, or textual cues | 2026-05-23 |
 
 ---
 
@@ -495,6 +502,7 @@
 | [[sources/cai-2024-tf-sepnet\|Cai, Zhang & Li 2024: TF-SepNet]] | CNN architecture using parallel 1D kernels along time and frequency axes for low-complexity acoustic scene classification | 2024 |
 | [[sources/lu-2021-anc-survey-nonlinear\|Lu et al. 2021: Survey on ANC — Part II: Nonlinear Systems]] | Comprehensive survey of nonlinear ANC: Volterra, FLANN, spline, kernel, bilinear filters, and heuristic algorithms | 2021 |
 | [[sources/xiao-2026-robust-spatially-selective-anc\|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]] | Robust soft-constrained spatially selective ANC averaging the cost over $J=44$ secondary path estimates; narrows performance spread under plant variations; dSPACE real-time validation | 2026-05-23 |
+| [[sources/li-2026-geometry-conditioned-ssanc\|Li 2026: Geometry-Conditioned SSF for Target Speaker Extraction]] | GC-SSF with FiLM-based geometry conditioning and DOA-MPE feature; generalises across circular, ULA, and random arrays; +0.45 PESQ over SSF-Random, +1.25 PESQ over SSF-Circ on mismatched geometries | 2026-05-23 |
 
 ---
 
@@ -546,10 +554,10 @@
 
 ## Statistics
 
-- **Total pages**: 496
-- **Entities**: 199
-- **Concepts**: 188
-- **Sources**: 84
+- **Total pages**: 504
+- **Entities**: 201
+- **Concepts**: 193
+- **Sources**: 85
 - **Synthesis**: 19
 - **Queries**: 6
-- **Last updated**: 2026-05-21
+- **Last updated**: 2026-05-23

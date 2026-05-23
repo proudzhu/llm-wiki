@@ -88,4 +88,5 @@
 | [[sources/he-2025-vibomni\|He, Guo, Hou & Yan 2025: VibOmni]] | Multi-modal speech enhancement for earables using IMU bone-conducted vibration; 21% PESQ improvement, BCF data augmentation | 2026-05-16 |
 | [[sources/lu-2021-anc-survey-nonlinear\|Lu et al. 2021: Survey on ANC — Part II: Nonlinear Systems]] | Comprehensive survey of nonlinear ANC: Volterra, FLANN, spline, kernel, bilinear filters, and heuristic algorithms | 2021 |
 | [[sources/xiao-2026-robust-spatially-selective-anc\|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]] | Robust soft-constrained spatially selective ANC averaging the cost over $J=44$ secondary path estimates; narrows performance spread under plant variations; dSPACE real-time validation | 2026-05-23 |
+| [[sources/li-2026-geometry-conditioned-ssanc\|Li 2026: Geometry-Conditioned SSF for Target Speaker Extraction]] | GC-SSF with FiLM-based geometry conditioning and DOA-MPE feature; generalises across circular, ULA, and random arrays; +0.45 PESQ over SSF-Random | 2026-05-23 |
 
