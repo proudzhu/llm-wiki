@@ -16,15 +16,15 @@ tags:
 
 The NLCMV beamformer minimizes the output power subject to a linear equality constraint (target-preserving) and a nonlinear inequality constraint (WNG):
 
-$$\bm{h}^{H}(j\omega)\left[\bm{\Phi}_{dd}(j\omega) + \phi_{pp}(w)\sum_{n=1}^{N}\alpha_{p,n}\cdot\bm{g}_{n}(j\omega)\bm{g}_{n}^{H}(j\omega)\right]\bm{h}(j\omega)$$
+$$\mathbf{h}^{H}(j\omega)\left[\mathbf{\Phi}_{dd}(j\omega) + \phi_{pp}(w)\sum_{n=1}^{N}\alpha_{p,n}\cdot\mathbf{g}_{n}(j\omega)\mathbf{g}_{n}^{H}(j\omega)\right]\mathbf{h}(j\omega)$$
 
 subject to:
-$$\bm{h}^{H}{(j\omega)}\bm{g}{(j\omega)} = 1$$
-$$c(w) \triangleq \bm{h}^{H}({j\omega})\bm{\Psi}(j\omega)\bm{h}(j\omega) \leq 0$$
+$$\mathbf{h}^{H}{(j\omega)}\mathbf{g}{(j\omega)} = 1$$
+$$c(w) \triangleq \mathbf{h}^{H}({j\omega})\mathbf{\Psi}(j\omega)\mathbf{h}(j\omega) \leq 0$$
 
-where $\bm{\Phi}_{dd}$ is the diffuse noise covariance, $\phi_{pp}(w)$ is the point noise PSD, $\alpha_{p,n}$ weights the $n$th point noise source, and $\bm{\Psi}(j\omega)$ encodes the WNG constraint:
+where $\mathbf{\Phi}_{dd}$ is the diffuse noise covariance, $\phi_{pp}(w)$ is the point noise PSD, $\alpha_{p,n}$ weights the $n$th point noise source, and $\mathbf{\Psi}(j\omega)$ encodes the WNG constraint:
 
-$$\bm{\Psi}(j\omega) \triangleq \textbf{I} - \bm{g}(j\omega)\bm{g}^{H}(j\omega) \cdot M / [\sum_{m=1}^{M}|G_{m}(j\omega)|^2]$$
+$$\mathbf{\Psi}(j\omega) \triangleq \textbf{I} - \mathbf{g}(j\omega)\mathbf{g}^{H}(j\omega) \cdot M / [\sum_{m=1}^{M}|G_{m}(j\omega)|^2]$$
 
 ## Key Differences from MVDR
 

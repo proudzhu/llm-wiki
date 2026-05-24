@@ -391,3 +391,4 @@ If the command fails or exits with warnings (e.g., due to missing target pages o
 - **Create missing concept pages** during ingest to maintain wiki integrity.
 - **Always run build verification** with `uv run mkdocs build --strict` as the final step.
 - **Log entries**: Always append at the end (newest last).
+- **Avoid `\bm{}` in LaTeX math**: MkDocs MathJax does not load the `bm` package by default, so `\bm{x}` renders as an error. Use `\mathbf{x}` (bold upright) or `\boldsymbol{x}` (bold italic, for math symbols) instead. Check for this during build verification.

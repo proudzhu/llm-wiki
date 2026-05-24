@@ -52,13 +52,13 @@ The system comprises:
 
 The key beamforming contribution is Non-Linearly Constrained Minimum Variance (NLCMV), which extends MVDR by adding white noise gain control and null direction constraints:
 
-$$\bm{h}^{H}(j\omega)\left[\bm{\Phi}_{dd}(j\omega) + \phi_{pp}(w)\sum_{n=1}^{N}\alpha_{p,n}\cdot\bm{g}_{n}(j\omega)\bm{g}_{n}^{H}(j\omega)\right]\bm{h}(j\omega)$$
+$$\mathbf{h}^{H}(j\omega)\left[\mathbf{\Phi}_{dd}(j\omega) + \phi_{pp}(w)\sum_{n=1}^{N}\alpha_{p,n}\cdot\mathbf{g}_{n}(j\omega)\mathbf{g}_{n}^{H}(j\omega)\right]\mathbf{h}(j\omega)$$
 
 subject to:
-$$\bm{h}^{H}{(j\omega)}\bm{g}{(j\omega)} = 1 \quad \text{(linear equality)}$$
-$$c(w) \triangleq \bm{h}^{H}({j\omega})\bm{\Psi}(j\omega)\bm{h}(j\omega) \leq 0 \quad \text{(nonlinear inequality: WNG constraint)}$$
+$$\mathbf{h}^{H}{(j\omega)}\mathbf{g}{(j\omega)} = 1 \quad \text{(linear equality)}$$
+$$c(w) \triangleq \mathbf{h}^{H}({j\omega})\mathbf{\Psi}(j\omega)\mathbf{h}(j\omega) \leq 0 \quad \text{(nonlinear inequality: WNG constraint)}$$
 
-where $\bm{\Psi}(j\omega) \triangleq \textbf{I} - \bm{g}(j\omega)\bm{g}^{H}(j\omega) \cdot M / [\sum_{m=1}^{M}|G_{m}(j\omega)|^2]$.
+where $\mathbf{\Psi}(j\omega) \triangleq \textbf{I} - \mathbf{g}(j\omega)\mathbf{g}^{H}(j\omega) \cdot M / [\sum_{m=1}^{M}|G_{m}(j\omega)|^2]$.
 
 Compared to super-directive beamforming, NLCMV achieves a superior 10 dB gain at the designated look direction (e.g., backwards), and early ASR tests on real data showed ~0.7% absolute WER gain.
 
