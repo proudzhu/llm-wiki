@@ -91,3 +91,4 @@
 | [[sources/xiao-2026-robust-spatially-selective-anc\|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]] | Robust soft-constrained spatially selective ANC averaging the cost over $J=44$ secondary path estimates; narrows performance spread under plant variations; dSPACE real-time validation | 2026-05-23 |
 | [[sources/li-2026-geometry-conditioned-ssanc\|Li 2026: Geometry-Conditioned SSF for Target Speaker Extraction]] | GC-SSF with FiLM-based geometry conditioning and DOA-MPE feature; generalises across circular, ULA, and random arrays; +0.45 PESQ over SSF-Random | 2026-05-23 |
 | [[sources/rong-2024-gtcrn-speech-enhancement-ultralow\|Rong et al. 2024: GTCRN]] | Ultralightweight SE model with 23.7K params, grouped strategies, SFE and TRA modules | 2024 |
+| [[sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition\|Lin et al. 2024: AGADIR]] | Geometry-agnostic directional ASR for smart glasses; NLCMV beamforming | 2024 |

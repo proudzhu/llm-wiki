@@ -216,3 +216,10 @@
 | [[entities/yuxiang-hu\|Yuxiang Hu]] | Horizon Robotics — co-author of GTCRN | 2026-05-24 |
 | [[entities/changbao-zhu\|Changbao Zhu]] | Horizon Robotics — co-author of GTCRN | 2026-05-24 |
 | [[entities/jing-lu\|Jing Lu]] | Nanjing University — co-author of DPCRN and GTCRN | 2026-05-24 |
+| [[entities/ju-lin\|Ju Lin]] | Meta — lead author of AGADIR directional ASR for smart glasses | 2026-05-24 |
+| [[entities/niko-moritz\|Niko Moritz]] | Meta — co-author of AGADIR and monotonic transducers | 2026-05-24 |
+| [[entities/yiteng-huang\|Yiteng Huang]] | Meta — co-author of AGADIR, NLCMV beamforming | 2026-05-24 |
+| [[entities/ruiming-xie\|Ruiming Xie]] | Meta — co-author of AGADIR directional ASR | 2026-05-24 |
+| [[entities/ming-sun\|Ming Sun]] | Meta — co-author of AGADIR | 2026-05-24 |
+| [[entities/christian-fuegen\|Christian Fuegen]] | Meta — co-author of AGADIR, alignment-restricted RNN-T | 2026-05-24 |
+| [[entities/frank-seide\|Frank Seide]] | Meta — co-author of AGADIR, monotonic transducers | 2026-05-24 |

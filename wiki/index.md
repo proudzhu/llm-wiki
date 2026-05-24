@@ -222,6 +222,13 @@
 | [[entities/yuxiang-hu\|Yuxiang Hu]] | Horizon Robotics — co-author of GTCRN | 2026-05-24 |
 | [[entities/changbao-zhu\|Changbao Zhu]] | Horizon Robotics — co-author of GTCRN | 2026-05-24 |
 | [[entities/jing-lu\|Jing Lu]] | Nanjing University — co-author of DPCRN and GTCRN | 2026-05-24 |
+| [[entities/ju-lin\|Ju Lin]] | Meta — lead author of AGADIR directional ASR for smart glasses | 2026-05-24 |
+| [[entities/niko-moritz\|Niko Moritz]] | Meta — co-author of AGADIR and monotonic transducers | 2026-05-24 |
+| [[entities/yiteng-huang\|Yiteng Huang]] | Meta — co-author of AGADIR, NLCMV beamforming | 2026-05-24 |
+| [[entities/ruiming-xie\|Ruiming Xie]] | Meta — co-author of AGADIR directional ASR | 2026-05-24 |
+| [[entities/ming-sun\|Ming Sun]] | Meta — co-author of AGADIR | 2026-05-24 |
+| [[entities/christian-fuegen\|Christian Fuegen]] | Meta — co-author of AGADIR, alignment-restricted RNN-T | 2026-05-24 |
+| [[entities/frank-seide\|Frank Seide]] | Meta — co-author of AGADIR, monotonic transducers | 2026-05-24 |
 
 ---
 
@@ -427,6 +434,7 @@
 | [[concepts/auxiliary-filter\|Auxiliary Filter]] | Filter identifying the overall path from noise control filter input to error microphone output; core of simultaneous equations method for ANC | 2026-05-23 |
 | [[concepts/simultaneous-equations-method\|Simultaneous Equations Method]] | ANC method estimating optimal noise control filter without secondary path model using two independent equations from an auxiliary filter | 2006 |
 | [[concepts/gtcrn\|GTCRN (Grouped Temporal CRN)]] | Grouped temporal convolutional recurrent network for ultralightweight speech enhancement; 23.7K params | 2026-05-24 |
+| [[concepts/nlcmv-beamforming\|NLCMV Beamforming]] | Non-Linearly Constrained Minimum Variance beamforming with WNG and null constraints for directional ASR | 2026-05-24 |
 ---
 
 ## Sources
@@ -522,6 +530,7 @@
 | [[sources/li-2026-geometry-conditioned-ssanc\|Li 2026: Geometry-Conditioned SSF for Target Speaker Extraction]] | GC-SSF with FiLM-based geometry conditioning and DOA-MPE feature; generalises across circular, ULA, and random arrays; +0.45 PESQ over SSF-Random, +1.25 PESQ over SSF-Circ on mismatched geometries | 2026-05-23 |
 | [[sources/fujii-2006-simultaneous-equations-anc\|Fujii et al. 2006: Verification of Simultaneous Equations Method]] | Experimental validation of secondary-path-model-free feedforward ANC using auxiliary filter and frequency-domain adaptation | 2006 |
 | [[sources/rong-2024-gtcrn-speech-enhancement-ultralow\|Rong et al. 2024: GTCRN]] | Ultralightweight SE model with 23.7K params, grouped strategies, SFE and TRA modules | 2024 |
+| [[sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition\|Lin et al. 2024: AGADIR]] | Geometry-agnostic directional ASR for smart glasses; NLCMV beamforming, 15-28% WER improvement | 2024 |
 ---
 
 ## Synthesis
@@ -572,10 +581,10 @@
 
 ## Statistics
 
-- **Total pages**: 520
-- **Entities**: 212
-- **Concepts**: 196
-- **Sources**: 87
+- **Total pages**: 529
+- **Entities**: 219
+- **Concepts**: 197
+- **Sources**: 88
 - **Synthesis**: 19
 - **Queries**: 6
 - **Last updated**: 2026-05-24

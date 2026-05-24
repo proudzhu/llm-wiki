@@ -2003,3 +2003,29 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
 - **Orphan pages**: 0
 - **Statistics**: Updated from 512/207/194/86 to 520/212/196/87 to match actual
 - **Actions taken**: Added 4 entity rows to main index, updated statistics section
+---
+
+## [2026-05-24] ingest | AGADIR: Towards Array-Geometry Agnostic Directional Speech Recognition (Lin et al. 2024)
+
+- **Source**: `raw/papers/lin-2024-agadir-array-geometry-agnostic-speech-recognition/full-text.md` (Zotero: 8K2YN6P5)
+- **Authors**: Ju Lin, Niko Moritz, Yiteng Huang, Ruiming Xie, Ming Sun, Christian Fuegen, Frank Seide
+- **Published**: ICASSP 2024 (arXiv: 2401.10411)
+- **DOI**: 10.48550/arXiv.2401.10411
+- **Summary**: AGADIR — geometry-agnostic directional ASR for smart glasses using multi-geometry training and NLCMV beamforming; 15–28% relative WER improvement.
+- **Pages created**:
+  - `raw/papers/lin-2024-agadir-array-geometry-agnostic-speech-recognition/full-text.md` — Defuddle extraction from arXiv HTML
+  - `wiki/sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition.md` — source page
+  - `wiki/entities/ju-lin.md` — first author
+  - `wiki/entities/niko-moritz.md` — co-author
+  - `wiki/entities/yiteng-huang.md` — co-author
+  - `wiki/entities/ruiming-xie.md` — co-author
+  - `wiki/entities/ming-sun.md` — co-author
+  - `wiki/entities/christian-fuegen.md` — co-author
+  - `wiki/entities/frank-seide.md` — co-author
+  - `wiki/concepts/nlcmv-beamforming.md` — NLCMV beamforming concept
+- **Pages updated**:
+  - `wiki/concepts/beamforming.md` — added NLCMV variant to techniques list and source
+  - `wiki/index.md` — added 7 entities, 1 concept, 1 source; updated statistics to 529/219/197/88/19/6
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 7 entity rows
+  - `wiki/concepts/index.md` — added 1 concept row
