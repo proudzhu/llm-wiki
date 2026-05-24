@@ -1,4 +1,4 @@
-# Wiki Log
+﻿# Wiki Log
 
 > **Purpose**: Chronological, append-only record of what happened and when.
 > **Format**: `## [YYYY-MM-DD] operation | Description`
@@ -2029,3 +2029,33 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 7 entity rows
   - `wiki/concepts/index.md` — added 1 concept row
+
+---
+
+## [2026-05-20] ingest | Directional Source Separation for Robust Speech Recognition on Smart Glasses (Feng et al. 2025)
+
+- **Source**: `raw/papers/feng-2025-directional-source-separation-smart-glasses/full-text.md` (Zotero: 3DZ5NNH3, arXiv: 2309.10993)
+- **Authors**: Tiantian Feng, Ju Lin, Yiteng Huang, Weipeng He, Kaustubh Kalgaonkar, Niko Moritz, Li Wan, Xin Lei, Ming Sun, Frank Seide
+- **Published**: ICASSP 2025
+- **DOI**: 10.1109/ICASSP49660.2025.10888256
+- **Summary**: Directional source separation combining NLCMV/neural beamforming with separation network on Project Aria; neural BF +2.27 dB SI-SDR; joint training achieves 13.25% WER
+- **Pages created**:
+  - `raw/papers/feng-2025-directional-source-separation-smart-glasses/full-text.md` �� Defuddle extraction from arXiv HTML
+  - `raw/papers/feng-2025-directional-source-separation-smart-glasses/figures/` �� 7 downloaded figures
+  - `wiki/sources/feng-2025-directional-source-separation-smart-glasses.md`
+  - `wiki/concepts/neural-beamforming.md`
+  - `wiki/entities/tiantian-feng.md`
+  - `wiki/entities/weipeng-he.md`
+  - `wiki/entities/kaustubh-kalgaonkar.md`
+  - `wiki/entities/li-wan.md`
+  - `wiki/entities/xin-lei.md`
+- **Pages updated**:
+  - `wiki/entities/ju-lin.md` �� added this paper
+  - `wiki/entities/yiteng-huang.md` �� added this paper
+  - `wiki/entities/niko-moritz.md` �� added this paper
+  - `wiki/entities/frank-seide.md` �� added this paper
+  - `wiki/entities/ming-sun.md` �� added this paper
+  - `wiki/index.md` �� added 5 entities, 1 concept, 1 source; updated statistics
+  - `wiki/sources/index.md` �� added 1 source row
+  - `wiki/entities/index.md` �� added 5 entity rows
+  - `wiki/concepts/index.md` �� added 1 concept row

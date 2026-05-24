@@ -17,3 +17,4 @@ tags:
 ## Key Contributions
 
 - Co-author of AGADIR (ICASSP 2024) — array-geometry agnostic directional ASR
+- Co-author of directional source separation on Project Aria smart glasses (ICASSP 2025)

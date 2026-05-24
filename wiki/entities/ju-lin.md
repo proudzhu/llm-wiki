@@ -18,3 +18,4 @@ tags:
 
 - Lead author of AGADIR (ICASSP 2024) — array-geometry agnostic directional speech recognition for smart glasses
 - Co-author of directional speech recognition for speaker disambiguation and cross-talk suppression (INTERSPEECH 2023)
+- Co-author of directional source separation on Project Aria smart glasses (ICASSP 2025)

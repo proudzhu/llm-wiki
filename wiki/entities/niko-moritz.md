@@ -19,3 +19,4 @@ tags:
 - Co-author of AGADIR (ICASSP 2024) — array-geometry agnostic directional ASR
 - Co-author of monotonic transducers investigation (2022)
 - Co-author of directional speech recognition (INTERSPEECH 2023)
+- Co-author of directional source separation on Project Aria smart glasses (ICASSP 2025)

@@ -144,6 +144,11 @@
 | [[entities/dongheon-lee\|Dongheon Lee]] | Meta Reality Labs / KAIST — Spatial-Magnifier for spatial upsampling | 2026-05-12 |
 | [[entities/ashutosh-pandey\|Ashutosh Pandey]] | Meta Reality Labs — multichannel speech enhancement, neural beamforming | 2026-05-12 |
 | [[entities/sanjeel-parekh\|Sanjeel Parekh]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
+| [[entities/tiantian-feng\|Tiantian Feng]] | USC — wearable audio, source separation, trustworthy ML | 2026-05-20 |
+| [[entities/weipeng-he\|Weipeng He]] | Meta — multi-channel ASR, neural beamforming, spatial attention | 2026-05-20 |
+| [[entities/kaustubh-kalgaonkar\|Kaustubh Kalgaonkar]] | Meta — directional ASR, speech enhancement | 2026-05-20 |
+| [[entities/li-wan\|Li Wan]] | Meta — ASR, end-to-end speech recognition | 2026-05-20 |
+| [[entities/xin-lei\|Xin Lei]] | Meta — ASR, speech enhancement, codec | 2026-05-20 |
 | [[entities/samuele-cornell\|Samuele Cornell]] | CMU — speech separation, robust ASR, CTRnet & PuLSS | 2026-05-20 |
 | [[entities/daniel-wong\|Daniel Wong]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
 | [[entities/jacob-donley\|Jacob Donley]] | Meta Reality Labs — spatial audio, multichannel speech enhancement | 2026-05-12 |
@@ -356,6 +361,7 @@
 | [[concepts/spatial-audio-representation-learning\|Spatial Audio Representation Learning]] | SARL framework: conditions MC-SE on VM signals (SARL-S) or features (SARL-F) for improved spatial diversity | 2026-05-12 |
 | [[concepts/neural-directional-filtering\|Neural Directional Filtering]] | Data-driven VDM reconstruction using DNNs to learn ideal directional microphone behavior on compact arrays | 2026-05-13 |
 | [[concepts/neural-observation-filter\|Neural Observation Filter]] | Neural network estimation of RMT observation filter coefficients online; CNN (367k params) or Conv-TasNet; GCC-PHAT + position inputs; async dual-loop | 2026-05-17 |
+| [[concepts/neural-beamforming\|Neural Beamforming]] | Learning beamformer weights via backprop; integrated with separation/ASR; NLCMV-weight initialization + fine-tuning | 2026-05-20 |
 | [[concepts/fastmnmf\|FastMNMF]] | Fast multichannel NMF with joint diagonalizable SCMs for BSS; block-diagonal variant for distributed arrays reduces cost from O(M^4) to O(sum M_l^4) | 2026-05-20 |
 | [[concepts/virtual-directional-microphone\|Virtual Directional Microphone]] | Computationally synthesized microphone with specified directivity pattern reconstructed from array recordings | 2026-05-13 |
 | [[concepts/diffuse-sound-extraction\|Diffuse Sound Extraction]] | Isolating late reverberant diffuse component for spatial audio control and immersive quality | 2026-05-13 |
@@ -499,6 +505,7 @@
 | [[sources/miran-2026-imu-feedback-cancellation\|Miran 2026: IMU-Based Acoustic Feedback Cancellation]] | IMU head-motion detection for AFC step-size control in hearing aids; outperforms audio-only VSS | 2026 |
 | [[sources/frank-2026-low-latency-roi-beamforming\|Frank & Cohen 2026: Low-latency ROI Beamforming for Smart Glasses]] | Time-domain vs STFT-domain LDMG ROI beamformers; time-domain has 2x lower latency and higher performance | 2026-04-28 |
 | [[sources/liu-2026-scm-reconstruction-speech-enhancement\|Liu et al. 2026: SCM Reconstruction for Speech Enhancement]] | Online SCM reconstruction via variance ratio estimation with multiplicative update; R-MWF for multi-source reverberant speech enhancement | 2026-04-30 |
+| [[sources/feng-2025-directional-source-separation-smart-glasses\|Feng et al. 2025: Directional Source Separation for Smart Glasses]] | BF front-end (NLCMV/neural) + sep back-end; joint training achieves 13.25% WER on LibriSpeech; wearer benefits but partner degrades | 2025 |
 | [[sources/wang-2026-predictive-dsfanc-crnn\|Wang et al. 2026: Predictive Directional SFANC via CRNN]] | CRNN predicts next-frame DoA for proactive filter selection in moving source ANC; PD-SFANC eliminates D-SFANC lag | 2026-04-30 |
 | [[sources/wang-2026-directional-sfanc-reverberant\|Wang et al. 2026: Directional SFANC in Reverberant Environments]] | CNN-based DoA estimation for SFANC in reverberant conditions; multi-task learning for azimuth+elevation; ~96%/91% accuracy with 0.03M params | 2026-04-30 |
 | [[sources/yin-2023-selective-fixed-filter-anc-headphones\|Yin et al. 2023: Selective Fixed-Filter ANC Based on Frequency Response Matching in Headphones]] | FRM-SFANC: online frequency response matching for filter selection in headphone ANC; HMM framework; 12-21 dB NR; LayerCAM explainability | 2023 |
@@ -581,10 +588,10 @@
 
 ## Statistics
 
-- **Total pages**: 529
-- **Entities**: 219
-- **Concepts**: 197
-- **Sources**: 88
+- **Total pages**: 537
+- **Entities**: 224
+- **Concepts**: 198
+- **Sources**: 89
 - **Synthesis**: 19
 - **Queries**: 6
 - **Last updated**: 2026-05-24

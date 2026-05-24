@@ -201,3 +201,4 @@
 | [[concepts/simultaneous-equations-method\|Simultaneous Equations Method]] | ANC method that estimates the optimal noise control filter without a secondary path model by solving two independent equations from an auxiliary filter | 2006 |
 | [[concepts/gtcrn\|GTCRN (Grouped Temporal CRN)]] | Grouped temporal CRN for ultralightweight speech enhancement; 23.7K params, SFE, TRA | 2026-05-24 |
 | [[concepts/nlcmv-beamforming\|NLCMV Beamforming]] | Non-Linearly Constrained Minimum Variance beamforming with WNG and null constraints | 2026-05-24 |
+| [[concepts/neural-beamforming\|Neural Beamforming]] | Learning beamformer weights via backprop; integrated with separation/ASR; NLCMV-weight initialization + fine-tuning | 2026-05-20 |
