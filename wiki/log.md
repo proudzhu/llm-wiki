@@ -1994,3 +1994,12 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 6 entity rows
   - `wiki/concepts/index.md` — added 1 concept row
+---
+
+## [2026-05-24] lint | Health check
+
+- **Index consistency**: 4 entities missing from main index (tong-xiao, simon-doclo, reinhild-roden, matthias-blau) — added; all sub-indexes matched actual files
+- **Broken links**: 693 legacy `../` prefixed wikilinks (pre-existing, not actual broken targets)
+- **Orphan pages**: 0
+- **Statistics**: Updated from 512/207/194/86 to 520/212/196/87 to match actual
+- **Actions taken**: Added 4 entity rows to main index, updated statistics section

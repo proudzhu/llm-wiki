@@ -205,6 +205,10 @@
 | [[entities/ruiming-guo\|Ruiming Guo]] | Sichuan University of Science and Engineering — IVA optimization for audio blind source separation | 2026-05-21 |
 | [[entities/zhongqiang-luo\|Zhongqiang Luo]] | Sichuan University of Science and Engineering — BSS, wireless signal processing, IVA | 2026-05-21 |
 | [[entities/mingchun-li\|Mingchun Li]] | Sichuan University of Science and Engineering — signal processing, blind source separation | 2026-05-21 |
+| [[entities/tong-xiao\|Tong Xiao]] | Universität Oldenburg — soft-constrained spatially selective ANC and robust hearable design | 2026-05-23 |
+| [[entities/simon-doclo\|Simon Doclo]] | Universität Oldenburg — multi-microphone speech enhancement, beamforming, ANC for hearables | 2026-05-23 |
+| [[entities/reinhild-roden\|Reinhild Roden]] | Jade-Hochschule Oldenburg — hearables, transfer-function characterisation, real-time ANC | 2026-05-23 |
+| [[entities/matthias-blau\|Matthias Blau]] | Jade-Hochschule Oldenburg — audiology, individual ear-canal acoustics, hearable transfer functions | 2026-05-23 |
 | [[entities/jiatong-li\|Jiatong Li]] | Universität Oldenburg — geometry-conditioned SSF, DOA-MPE, target speaker extraction | 2026-05-23 |
 | [[entities/wiebke-middelberg\|Wiebke Middelberg]] | Universität Oldenburg — multi-channel speech enhancement, neural spatial filtering | 2026-05-23 |
 | [[entities/kensaku-fujii\|Kensaku Fujii]] | University of Hyogo — co-proposer of simultaneous equations method for ANC, frequency-domain adaptive algorithm | 2006 |
@@ -568,10 +572,10 @@
 
 ## Statistics
 
-- **Total pages**: 512
-- **Entities**: 207
-- **Concepts**: 194
-- **Sources**: 86
+- **Total pages**: 520
+- **Entities**: 212
+- **Concepts**: 196
+- **Sources**: 87
 - **Synthesis**: 19
 - **Queries**: 6
 - **Last updated**: 2026-05-24
