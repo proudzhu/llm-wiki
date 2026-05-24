@@ -1967,3 +1967,30 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/sources/index.md` - added 1 source row
   - `wiki/entities/index.md` - added 5 entity rows
   - `wiki/concepts/index.md` - added 2 concept rows
+---
+
+## [2026-05-24] ingest | GTCRN: A Speech Enhancement Model Requiring Ultralow Computational Resources (Rong et al. 2024)
+
+- **Source**: `raw/papers/rong-2024-gtcrn-speech-enhancement-ultralow/full-text.md` (Zotero: BACCUUCC)
+- **Authors**: Xiaobin Rong, Tianchi Sun, Xu Zhang, Yuxiang Hu, Changbao Zhu, Jing Lu
+- **Published**: ICASSP 2024, pp. 971–975
+- **DOI**: 10.1109/ICASSP48485.2024.10448310
+- **Summary**: GTCRN — ultralightweight (23.7 K params, 39.6 MMACs/s) speech enhancement using grouped convolution, grouped DPRNN, ERB-based band merging, subband feature extraction (SFE), and temporal recurrent attention (TRA).
+- **Pages created**:
+  - `raw/papers/rong-2024-gtcrn-speech-enhancement-ultralow/full-text.md` — MinerU VLM extraction from Zotero PDF
+  - `wiki/sources/rong-2024-gtcrn-speech-enhancement-ultralow.md` — source page
+  - `wiki/entities/xiaobin-rong.md` — first author
+  - `wiki/entities/tianchi-sun.md` — co-author
+  - `wiki/entities/xu-zhang.md` — co-author
+  - `wiki/entities/yuxiang-hu.md` — co-author
+  - `wiki/entities/changbao-zhu.md` — co-author
+  - `wiki/entities/jing-lu.md` — co-author
+  - `wiki/concepts/gtcrn.md` — GTCRN concept
+- **Pages updated**:
+  - `wiki/concepts/dprnn.md` — added G-DPRNN variant section and source link
+  - `wiki/concepts/convolutional-recurrent-network.md` — added GTCRN application
+  - `wiki/synthesis/computational-efficiency-evolution.md` — added GTCRN to frontier
+  - `wiki/index.md` — added 6 entities, 1 concept, 1 source; updated statistics to 512/207/194/86/19/6
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 6 entity rows
+  - `wiki/concepts/index.md` — added 1 concept row

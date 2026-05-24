@@ -45,6 +45,12 @@ In [[sources/he-2025-vibomni|VibOmni]], DPRNN is used as the core separator modu
 
 - Y. Luo, Z. Chen, and T. Yoshioka, "Dual-path RNN: efficient long sequence modeling for time-domain single-channel speech separation," in *ICASSP 2020*.
 
+
+## Variants
+
+### Grouped DPRNN (G-DPRNN)
+
+Used in [[concepts/gtcrn|GTCRN (Rong et al. 2024)]], G-DPRNN combines grouped RNN (GRNN) with DPRNN to further reduce parameters. Both input features and hidden states are split into 2 groups, each processed by a recurrent layer with 2× fewer parameters. Intra-frame modeling uses grouped bidirectional GRU, while inter-frame modeling uses grouped unidirectional GRU to maintain causality.
 ## Related Concepts
 
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
@@ -55,3 +61,4 @@ In [[sources/he-2025-vibomni|VibOmni]], DPRNN is used as the core separator modu
 ## Related Sources
 
 - [[sources/he-2025-vibomni|He, Guo, Hou & Yan 2025: VibOmni]]
+- [[sources/rong-2024-gtcrn-speech-enhancement-ultralow|Rong et al. 2024: GTCRN — Ultralightweight Speech Enhancement]]

@@ -48,6 +48,7 @@ The CRN follows an **encoder-decoder** structure with a recurrent bottleneck:
 - **Speech Enhancement**: Real-time noise suppression (Tan & Wang 2018)
 - **DCCRN**: Deep Complex CRN won 1st place in Interspeech 2020 Deep Noise Suppression Challenge
 - **Attention Recurrent Network (ARN)**: CRN variant with attention for lower latency (Zhang et al. 2023)
+- **GTCRN**: Grouped Temporal CRN with only 23.7 K parameters for edge-device speech enhancement (Rong et al. 2024, ICASSP)
 
 ## Related Concepts
 

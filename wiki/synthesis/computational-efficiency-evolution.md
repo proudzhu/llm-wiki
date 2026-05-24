@@ -1,13 +1,15 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-04-29
+updated: 2026-05-24
 sources:
 - zotero://select/items/0_WLMRLH9W
 - zotero://select/items/0_5SFJK2MD
 - zotero://select/items/0_76XGXYSM
 - zotero://select/items/0_N8MHRKXP
+- zotero://select/items/0_BACCUUCC
 tags:
+  - lightweight-speech-enhancement
 - computational-complexity
 - efficiency
 - fast-rls
@@ -22,7 +24,7 @@ aliases:
 
 # Computational Efficiency in ANC: From O(N²) to GPU-Accelerated DSP
 
-> Cross-source synthesis connecting: Cioffi & Kailath (1984) fast RLS, Li & Chen (2023) FxLMS complexity survey, Spanio & Rodà (2025) TorchFX GPU DSP, and Zhao & Chen (2023) nonlinear adaptive filters.
+> Cross-source synthesis connecting: Cioffi & Kailath (1984) fast RLS, Li & Chen (2023) FxLMS complexity survey, Spanio & Rodà (2025) TorchFX GPU DSP, Zhao & Chen (2023) nonlinear adaptive filters, and Rong et al. (2024) GTCRN ultralightweight speech enhancement.
 
 ---
 
@@ -193,6 +195,7 @@ Three approaches currently define the Pareto frontier:
 1. **Subband FxLMS**: Best balance of complexity and NR for broadband noise
 2. **FxGMCC**: Best robustness to impulsive noise at moderate complexity
 3. **GPU-accelerated TorchFX**: Best for research/prototyping, not yet for embedded deployment
+4. **GTCRN (Rong et al. 2024)**: Neural speech enhancement at extreme efficiency — only 23.7 K parameters and 39.6 MMACs/s, outperforming RNNoise and matching models with 100× more parameters. Represents the lightweight deep learning frontier for edge-device audio processing.
 
 ### 5.3 The Open Question
 
@@ -244,3 +247,4 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 ## Related Sources
 
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method]] — Frequency-domain processing for the simultaneous equations method, reducing computational cost vs. time-domain NLMS-based transformation
+- [[sources/rong-2024-gtcrn-speech-enhancement-ultralow|Rong et al. 2024: GTCRN — A Speech Enhancement Model Requiring Ultralow Computational Resources]]

@@ -212,6 +212,12 @@
 | [[entities/mitsuji-muneyasu\|Mitsuji Muneyasu]] | Kansai University — co-proposer of simultaneous equations method for ANC | 2006 |
 | [[entities/shigeyuki-hashimoto\|Shigeyuki Hashimoto]] | University of Hyogo — co-author on frequency-domain simultaneous equations method | 2006 |
 | [[entities/yusuke-fujita\|Yusuke Fujita]] | Catsystem Corporation — co-author on experimental verification of simultaneous equations method | 2006 |
+| [[entities/xiaobin-rong\|Xiaobin Rong]] | Nanjing University — lead author of GTCRN ultralightweight speech enhancement | 2026-05-24 |
+| [[entities/tianchi-sun\|Tianchi Sun]] | Nanjing University — co-author of GTCRN | 2026-05-24 |
+| [[entities/xu-zhang\|Xu Zhang]] | Jiangsu Thingstar IT — co-author of GTCRN | 2026-05-24 |
+| [[entities/yuxiang-hu\|Yuxiang Hu]] | Horizon Robotics — co-author of GTCRN | 2026-05-24 |
+| [[entities/changbao-zhu\|Changbao Zhu]] | Horizon Robotics — co-author of GTCRN | 2026-05-24 |
+| [[entities/jing-lu\|Jing Lu]] | Nanjing University — co-author of DPCRN and GTCRN | 2026-05-24 |
 
 ---
 
@@ -416,7 +422,7 @@
 | [[concepts/target-speaker-extraction\|Target Speaker Extraction]] | Isolating a specific speaker's speech from a mixture using spatial, enrolment, visual, or textual cues | 2026-05-23 |
 | [[concepts/auxiliary-filter\|Auxiliary Filter]] | Filter identifying the overall path from noise control filter input to error microphone output; core of simultaneous equations method for ANC | 2026-05-23 |
 | [[concepts/simultaneous-equations-method\|Simultaneous Equations Method]] | ANC method estimating optimal noise control filter without secondary path model using two independent equations from an auxiliary filter | 2006 |
-
+| [[concepts/gtcrn\|GTCRN (Grouped Temporal CRN)]] | Grouped temporal convolutional recurrent network for ultralightweight speech enhancement; 23.7K params | 2026-05-24 |
 ---
 
 ## Sources
@@ -511,7 +517,7 @@
 | [[sources/xiao-2026-robust-spatially-selective-anc\|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]] | Robust soft-constrained spatially selective ANC averaging the cost over $J=44$ secondary path estimates; narrows performance spread under plant variations; dSPACE real-time validation | 2026-05-23 |
 | [[sources/li-2026-geometry-conditioned-ssanc\|Li 2026: Geometry-Conditioned SSF for Target Speaker Extraction]] | GC-SSF with FiLM-based geometry conditioning and DOA-MPE feature; generalises across circular, ULA, and random arrays; +0.45 PESQ over SSF-Random, +1.25 PESQ over SSF-Circ on mismatched geometries | 2026-05-23 |
 | [[sources/fujii-2006-simultaneous-equations-anc\|Fujii et al. 2006: Verification of Simultaneous Equations Method]] | Experimental validation of secondary-path-model-free feedforward ANC using auxiliary filter and frequency-domain adaptation | 2006 |
-
+| [[sources/rong-2024-gtcrn-speech-enhancement-ultralow\|Rong et al. 2024: GTCRN]] | Ultralightweight SE model with 23.7K params, grouped strategies, SFE and TRA modules | 2024 |
 ---
 
 ## Synthesis
@@ -563,9 +569,9 @@
 ## Statistics
 
 - **Total pages**: 512
-- **Entities**: 206
-- **Concepts**: 195
+- **Entities**: 207
+- **Concepts**: 194
 - **Sources**: 86
 - **Synthesis**: 19
 - **Queries**: 6
-- **Last updated**: 2026-05-23
+- **Last updated**: 2026-05-24
