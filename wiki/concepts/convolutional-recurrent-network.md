@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-04-30
+updated: 2026-05-25
 sources:
 tags:
   - deep-learning
@@ -62,3 +62,4 @@ The CRN follows an **encoder-decoder** structure with a recurrent bottleneck:
 ## Related Sources
 
 - [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
+- [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement|Tan & Wang 2018: CRN for Real-Time Speech Enhancement (original proposal)]]

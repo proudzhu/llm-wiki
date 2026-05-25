@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-05-24
+updated: 2026-05-25
 sources:
 - zotero://select/items/0_WLMRLH9W
 - zotero://select/items/0_5SFJK2MD
@@ -248,3 +248,4 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method]] — Frequency-domain processing for the simultaneous equations method, reducing computational cost vs. time-domain NLMS-based transformation
 - [[sources/rong-2024-gtcrn-speech-enhancement-ultralow|Rong et al. 2024: GTCRN — A Speech Enhancement Model Requiring Ultralow Computational Resources]]
+- [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement|Tan & Wang 2018: CRN for Real-Time Speech Enhancement (original CRN proposal)]]

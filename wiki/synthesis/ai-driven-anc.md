@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-17
-updated: 2026-05-01
+updated: 2026-05-25
 tags:
 - active-noise-control
 - adaptive-filtering
@@ -84,3 +84,4 @@ Recent research focuses on using RNNs as "stability observers." By predicting th
 - [[sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]]
 - [[sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]]
 - [[sources/yin-2023-selective-fixed-filter-anc-headphones|Yin 2023: Selective Fixed-Filter ANC Based on Frequency Response Matching in Headphones]]
+- [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement|Tan & Wang 2018: CRN for Real-Time Speech Enhancement (original CRN proposal)]]

@@ -43,6 +43,7 @@
 | [[entities/lisyarus\|lisyarus]] | Software engineer and graphics/math blogger | 2026-04-18 |
 | [[entities/andreas-schwarz\|Andreas Schwarz]] | FAU — spatial coherence models for dereverberation and robust ASR | 2026-04-25 |
 | [[entities/kashu-yamazaki\|Kashu Yamazaki]] | U. Arkansas at Little Rock — SNN review, computer vision, robotics | 2026-04-25 |
+| [[entities/ke-tan\|Ke Tan]] | Ohio State University — CRN for real-time speech enhancement | 2026-05-25 |
 | [[entities/viet-khoa-vo-ho\|Viet-Khoa Vo-Ho]] | U. Arkansas at Little Rock — co-author on SNN review | 2026-04-25 |
 | [[entities/darshan-bulsara\|Darshan Bulsara]] | U. Arkansas at Little Rock — co-author on SNN review | 2026-04-25 |
 | [[entities/ngan-le\|Ngan Le]] | U. Arkansas at Little Rock — SNN review corresponding author, computer vision | 2026-04-25 |
@@ -199,7 +200,7 @@
 | [[entities/hirotaka-nishikori\|Hirotaka Nishikori]] | University of Tokyo — distributed FastMNMF, BSS using distributed microphone arrays | 2026-05-20 |
 | [[entities/hiroshi-saruwatari\|Hiroshi Saruwatari]] | University of Tokyo — BSS, speech enhancement, microphone arrays | 2026-05-20 |
 | [[entities/xueliang-zhang\|Xueliang Zhang]] | Inner Mongolia University — bone-conduction speech processing, multi-modal fusion | 2026-05-16 |
-| [[entities/deliang-wang\|DeLiang Wang]] | Ohio State University — computational auditory scene analysis, speech enhancement | 2026-05-16 |
+| [[entities/deliang-wang\|DeLiang Wang]] | Ohio State University — computational auditory scene analysis, speech enhancement; CRN for real-time speech enhancement | 2026-05-25 |
 | [[entities/yiqiang-cai\|Yiqiang Cai]] | Researcher at XJTLU — low-complexity acoustic scene classification, TF-SepNet | 2026-05-20 |
 | [[entities/peihong-zhang\|Peihong Zhang]] | Researcher at XJTLU — co-author on TF-SepNet | 2026-05-20 |
 | [[entities/shengchen-li\|Shengchen Li]] | Associate Professor at XJTLU — supervisor, machine listening & acoustic signal processing | 2026-05-20 |
@@ -538,6 +539,7 @@
 | [[sources/fujii-2006-simultaneous-equations-anc\|Fujii et al. 2006: Verification of Simultaneous Equations Method]] | Experimental validation of secondary-path-model-free feedforward ANC using auxiliary filter and frequency-domain adaptation | 2006 |
 | [[sources/rong-2024-gtcrn-speech-enhancement-ultralow\|Rong et al. 2024: GTCRN]] | Ultralightweight SE model with 23.7K params, grouped strategies, SFE and TRA modules | 2024 |
 | [[sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition\|Lin et al. 2024: AGADIR]] | Geometry-agnostic directional ASR for smart glasses; NLCMV beamforming, 15-28% WER improvement | 2024 |
+| [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement\|Tan & Wang 2018: CRN for Real-Time Speech Enhancement]] | CRN combining CED + LSTM with causal convolutions for noise- and speaker-independent monaural speech enhancement; 17.58M params | 2018 |
 ---
 
 ## Synthesis
@@ -588,10 +590,10 @@
 
 ## Statistics
 
-- **Total pages**: 537
-- **Entities**: 224
+- **Total pages**: 538
+- **Entities**: 225
 - **Concepts**: 198
-- **Sources**: 89
+- **Sources**: 90
 - **Synthesis**: 19
 - **Queries**: 6
-- **Last updated**: 2026-05-24
+- **Last updated**: 2026-05-25

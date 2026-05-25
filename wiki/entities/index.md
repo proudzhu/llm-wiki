@@ -37,6 +37,7 @@
 | [[entities/lisyarus\|lisyarus]] | Software engineer and graphics/math blogger | 2026-04-18 |
 | [[entities/andreas-schwarz\|Andreas Schwarz]] | FAU — spatial coherence models for dereverberation and robust ASR | 2026-04-25 |
 | [[entities/kashu-yamazaki\|Kashu Yamazaki]] | U. Arkansas at Little Rock — SNN review, computer vision, robotics | 2026-04-25 |
+| [[entities/ke-tan\|Ke Tan]] | Ohio State University — CRN for real-time speech enhancement, gated residual networks, complex spectral mapping | 2026-05-25 |
 | [[entities/viet-khoa-vo-ho\|Viet-Khoa Vo-Ho]] | U. Arkansas at Little Rock — co-author on SNN review | 2026-04-25 |
 | [[entities/darshan-bulsara\|Darshan Bulsara]] | U. Arkansas at Little Rock — co-author on SNN review | 2026-04-25 |
 | [[entities/ngan-le\|Ngan Le]] | U. Arkansas at Little Rock — SNN review corresponding author, computer vision | 2026-04-25 |
@@ -179,7 +180,7 @@
 | [[entities/dominik-roblek\|Dominik Roblek]] | Google Research — co-author on SEANet multi-modal speech enhancement | 2026-05-17 |
 | [[entities/heming-wang\|Heming Wang]] | Ohio State University — attention-based AC-BC complex-domain fusion for speech enhancement | 2026-05-16 |
 | [[entities/xueliang-zhang\|Xueliang Zhang]] | Inner Mongolia University — bone-conduction speech processing, multi-modal fusion | 2026-05-16 |
-| [[entities/deliang-wang\|DeLiang Wang]] | Ohio State University — computational auditory scene analysis, speech enhancement | 2026-05-16 |
+| [[entities/deliang-wang\|DeLiang Wang]] | Ohio State University — CAS, speech separation/enhancement; CRN for real-time speech enhancement | 2026-05-25 |
 | [[entities/hirotaka-nishikori\|Hirotaka Nishikori]] | University of Tokyo — distributed FastMNMF, BSS using distributed microphone arrays | 2026-05-20 |
 | [[entities/hiroshi-saruwatari\|Hiroshi Saruwatari]] | University of Tokyo — BSS, speech enhancement, microphone arrays | 2026-05-20 |
 | [[entities/kouei-yamaoka\|Kouei Yamaoka]] | University of Tokyo — BSS, distributed microphone arrays, IVA | 2026-05-20 |

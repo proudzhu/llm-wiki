@@ -1,4 +1,4 @@
-﻿# Wiki Log
+# Wiki Log
 
 > **Purpose**: Chronological, append-only record of what happened and when.
 > **Format**: `## [YYYY-MM-DD] operation | Description`
@@ -2059,3 +2059,23 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/sources/index.md` �� added 1 source row
   - `wiki/entities/index.md` �� added 5 entity rows
   - `wiki/concepts/index.md` �� added 1 concept row
+
+## [2026-05-25] ingest | A Convolutional Recurrent Neural Network for Real-Time Speech Enhancement (Tan & Wang 2018)
+
+- **Source**: `raw/papers/tan-2018-convolutional-recurrent-network-speech-enhancement/full-text.md` (Zotero: F8A8SVLS)
+- **Authors**: Ke Tan, DeLiang Wang
+- **Published**: Interspeech 2018, pp. 3229-3233
+- **DOI**: 10.21437/Interspeech.2018-1405
+- **Summary**: Proposes CRN combining CED with LSTM and causal convolutions for noise- and speaker-independent real-time monaural speech enhancement
+- **Pages created**:
+  - `raw/papers/tan-2018-convolutional-recurrent-network-speech-enhancement/full-text.md` -- extracted text from Zotero PDF
+  - `wiki/sources/tan-2018-convolutional-recurrent-network-speech-enhancement.md`
+  - `wiki/entities/ke-tan.md`
+- **Pages updated**:
+  - `wiki/entities/deliang-wang.md` -- added this paper
+  - `wiki/concepts/convolutional-recurrent-network.md` -- added source link and updated date
+  - `wiki/synthesis/ai-driven-anc.md` -- added source link
+  - `wiki/synthesis/computational-efficiency-evolution.md` -- added source link
+  - `wiki/index.md` -- added 1 entity, 1 source; updated statistics
+  - `wiki/sources/index.md` -- added 1 source row
+  - `wiki/entities/index.md` -- added 1 entity row, updated 1 existing
