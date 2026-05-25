@@ -7,6 +7,17 @@ description: "Full paper ingestion workflow from Zotero to wiki: search, extract
 
 End-to-end workflow for ingesting academic papers from Zotero into the LLM Wiki knowledge base.
 
+## Shell Notes
+
+The harness runs bash by default. For PowerShell commands, wrap with `powershell -Command '...'` from bash. This skill documents both variants where they differ — choose whichever works in your environment.
+
+| Operation | Bash | PowerShell (via `powershell -Command`) |
+|-----------|------|----------------------------------------|
+| Delete file | `rm -f path` | `Remove-Item path -ErrorAction SilentlyContinue` |
+| Create dir | `mkdir -p path` | `New-Item -ItemType Directory -Force -Path path \| Out-Null` |
+| Move dir | `mv src dst` | `Move-Item src dst -Force` |
+| Read file bytes | `head -c N path` | `[System.IO.File]::ReadAllBytes('path')[0..N]` |
+
 ## When to Invoke
 
 Invoke this skill when the user asks to:
@@ -47,7 +58,10 @@ curl -s "http://localhost:23119/api/users/0/items/KEY/children" > .tmp_children.
 
 Extract: title, authors, year, type, abstract, DOI, URL, tags, and **PDF attachment key**.
 
-**Clean up** temp files after extraction:
+**Clean up** temp files:
+```bash
+rm -f .tmp_zotero.json .tmp_children.json
+```
 ```powershell
 Remove-Item .tmp_zotero.json, .tmp_children.json -ErrorAction SilentlyContinue
 ```
@@ -56,28 +70,41 @@ Remove-Item .tmp_zotero.json, .tmp_children.json -ErrorAction SilentlyContinue
 
 #### 3a. Copy PDF and Create Directory
 
+Create directory:
+```bash
+mkdir -p "raw/papers/{slug}"
+```
 ```powershell
-# Create directory (use `mkdir` without -p on Windows; New-Item for full control)
 New-Item -ItemType Directory -Force -Path "raw/papers/{slug}" | Out-Null
+```
 
-# Zotero storage path: C:\Users\proud\Zotero\storage\{PDF_KEY}\
+Copy PDF from Zotero storage (`C:\Users\proud\Zotero\storage\{PDF_KEY}\`):
+```bash
+ls "C:/Users/proud/Zotero/storage/{PDF_KEY}/"*.pdf
+cp "C:/Users/proud/Zotero/storage/{PDF_KEY}/FILENAME" "raw/papers/{slug}/paper.pdf"
+```
+```powershell
 $pdf = Get-ChildItem "C:\Users\proud\Zotero\storage\{PDF_KEY}\" -Filter "*.pdf" | Select-Object -First 1
 Copy-Item $pdf.FullName "raw/papers/{slug}/paper.pdf"
 ```
 
-**Verify the PDF copy** is valid by checking the file header starts with `%` (PDF magic bytes):
+**Verify** the PDF header:
+```bash
+head -c 5 "raw/papers/{slug}/paper.pdf"
+# Should output: %PDF-
+```
 ```powershell
 $bytes = [System.IO.File]::ReadAllBytes("raw/papers/{slug}/paper.pdf"); [System.Text.Encoding]::ASCII.GetString($bytes[0..4])
-# Should output something like: %PDF-
+# Should output: %PDF-
 ```
 
-If the header is empty or the file size is 0, the copy failed — re-copy using the exact filename from `Get-ChildItem`.
+If the header is empty or file size is 0, re-copy with the exact filename.
 
-Slug format: `author-year-short-title` (lowercase, hyphenated, meaningful abbreviation).
+Slug format: `author-year-short-title` (lowercase, hyphenated).
 
 #### 3b. arXiv HTML (Preferred for arXiv Papers)
 
-If the paper has an arXiv ID, **always prefer the HTML version** — it provides better text quality than PDF extraction (preserves equations, tables, and figure links natively).
+If the paper has an arXiv ID, **always prefer the HTML version** — better text quality than PDF extraction.
 
 1. **Extract markdown with Defuddle**:
 ```bash
@@ -87,64 +114,55 @@ defuddle parse "https://arxiv.org/html/ARXIV_ID" --md -o "raw/papers/{slug}/full
 2. **Download figures from arXiv HTML**:
 ```bash
 mkdir -p raw/papers/{slug}/figures
-# Download each figure referenced in the HTML (check the extracted markdown for URLs)
 curl -s -L "https://arxiv.org/html/ARXIV_IDv1/figure1.png" -o "raw/papers/{slug}/figures/fig1.png"
 # Repeat for all figures
 ```
 
-3. **Replace remote image links with local paths** in `full-text.md`:
-```
-![caption](https://arxiv.org/html/ARXIV_IDv1/figure.png)  →  ![caption](figures/fig1.png)
-```
+3. **Replace remote image links with local paths** in `full-text.md`.
 
-4. **Delete the PDF** after extraction — only keep `full-text.md` and `figures/`:
+4. **Delete the PDF**:
+```bash
+rm -f "raw/papers/{slug}/paper.pdf"
+```
 ```powershell
 Remove-Item "raw/papers/{slug}/paper.pdf"
 ```
 
 #### 3c. MinerU (For Non-arXiv Papers or arXiv Fallback)
 
-For papers without an arXiv HTML version, or if Defuddle extraction fails, use MinerU `extract` to extract markdown.
-
-**Command (Token required):**
-Recommended for complex layouts, large papers, or when precision VLM-based layout analysis is needed. Requires running `mineru-open-api auth` to set up token before running.
 ```bash
 mineru-open-api extract "raw/papers/{slug}/paper.pdf" -o "raw/papers/{slug}/full-text.md" --language en --model vlm --formula --table --timeout 600
 ```
 
-**Parameters:**
-- `--language en`: Set to paper's language (en, zh, etc.). Default is `ch` (Chinese+English)
-- `--model vlm`: VLM-based layout analysis, higher accuracy (default choice)
-- `--model pipeline`: Pipeline model, zero hallucination — use when exact text fidelity is critical
-- `--formula`: Enable formula recognition
-- `--table`: Enable table recognition
-- `--timeout 600`: Extended timeout for large documents
+**Parameters**: `--language en` (paper language), `--model vlm` (VLM layout analysis, default), `--model pipeline` (zero-hallucination), `--formula`, `--table`, `--timeout 600`.
 
-**Token required**: MinerU `extract` requires authentication. Run `mineru-open-api auth` to configure, or set `MINERU_TOKEN` environment variable. Verify with `mineru-open-api auth --show`.
+**Token required**: Run `mineru-open-api auth` to configure, or set `MINERU_TOKEN`. Verify with `mineru-open-api auth --show`.
 
-**Output**: Single `full-text.md` file with embedded LaTeX math and inline image references.
-
-**Post-processing**: MinerU saves images in an `images/` subdirectory. Rename it to `figures/` and update the markdown references:
+**Post-processing**: MinerU saves images in an `images/` subdirectory. Rename and update references:
+```bash
+mv "raw/papers/{slug}/images" "raw/papers/{slug}/figures"
+sed -i 's|images/|figures/|g' "raw/papers/{slug}/full-text.md"
+```
 ```powershell
-# Rename 'images' to 'figures' (use Move-Item -Force; Rename-Item may fail on Windows with 'images' as a reserved name)
 Move-Item "raw/papers/{slug}/images" "raw/papers/{slug}/figures" -Force
 (Get-Content "raw/papers/{slug}/full-text.md") -replace 'images/', 'figures/' | Set-Content "raw/papers/{slug}/full-text.md"
 ```
 
-**Note**: After renaming, image paths in the markdown reference `figures/...` relative to the `full-text.md` file location.
+**Verify extraction quality**: Read first 200 lines and last 100 lines of `full-text.md`.
 
-**Verify extraction quality**: Read the first 200 lines and last 100 lines of `full-text.md` to check for completeness.
-
-**Note**: MinerU VLM may produce mermaid code blocks for diagrams/flowcharts — these are normal VLM behavior and can be left as-is (they won't render in MkDocs but the actual figure images are preserved separately in `figures/`).
+**Note**: MinerU VLM may produce mermaid code blocks for diagrams — these are normal and can be left as-is.
 
 **Delete the PDF** after successful extraction:
+```bash
+rm -f "raw/papers/{slug}/paper.pdf"
+```
 ```powershell
 Remove-Item "raw/papers/{slug}/paper.pdf"
 ```
 
 **Troubleshooting**:
-- If extract returns `parsing failed`, the PDF may be corrupted — verify with the PDF header check in 3a
-- If server errors persist after retry, fall back to pdftotext (3d)
+- If extract returns `parsing failed`, verify PDF is valid (Step 3a header check)
+- If server errors persist, fall back to pdftotext (3d)
 - If MinerU is not installed: `npm install -g mineru-open-api`
 
 #### 3d. Fallback: pdftotext (If MinerU Fails)
@@ -153,26 +171,27 @@ Remove-Item "raw/papers/{slug}/paper.pdf"
 pdftotext -layout "raw/papers/{slug}/paper.pdf" "raw/papers/{slug}/full-text.txt"
 ```
 
-Font mismatch warnings from pdftotext are normal and can be ignored. Note: pdftotext produces `.txt` without images.
+Font mismatch warnings are normal. Note: pdftotext produces `.txt` without images.
 
-**Delete the PDF** after extraction:
+**Delete the PDF**:
+```bash
+rm -f "raw/papers/{slug}/paper.pdf"
+```
 ```powershell
 Remove-Item "raw/papers/{slug}/paper.pdf"
 ```
 
 #### 3e. Extract Images (Optional)
 
-Only extract images if the user explicitly requests it:
-
+Only if the user explicitly requests it:
 ```bash
 pdfimages -all "raw/papers/{slug}/paper.pdf" "raw/papers/{slug}/img"
 ```
+Requires `poppler-utils`.
 
 ### Step 4: Read and Analyze the Full Paper Content
 
-Read the extracted text from `raw/papers/{slug}/full-text.md` (or `.txt` if from pdftotext fallback). The extracted file is typically 400–1000+ lines — read in chunks (head 200 + tail 100 + targeted range reads for methodology/experiments/results) rather than pulling the whole file at once.
-
-Extract:
+Read the extracted text in chunks (head 200 + tail 100 + targeted range reads for methodology/experiments/results). Extract:
 
 - **Core problem and motivation**
 - **Key technical contributions** (numbered)
@@ -217,21 +236,18 @@ tags:
 
 **Figure usage in source pages:**
 
-Figures should be included selectively — only when they convey information that text and tables cannot easily capture. Use the following criteria:
-
 | Include figure? | Criteria | Examples |
 |-----------------|----------|----------|
 | ✅ Include | Visual is essential to understand the core problem or method | System block diagram, network architecture, problem illustration |
 | ❌ Skip | Data is already well-summarized in text or tables | Performance curves, spectrogram plots, convergence plots |
 
 Guidelines:
-- Place figures immediately after the section they illustrate (not in a separate figures section)
-- Use relative paths from the wiki root: `![[raw/papers/{slug}/figures/fig-name.png|caption]]`
-- For arXiv papers extracted via Defuddle, figures are also in `figures/` subdirectory: `![[raw/papers/{slug}/figures/fig-name.png|caption]]`
+- Place figures immediately after the section they illustrate
+- Use vault-absolute wikilink paths: `![[raw/papers/{slug}/figures/fig-name.png|caption]]`
 - Add an italicized caption below each figure: `*Figure N: description.*`
 - Maximum 3 figures per source page — prefer the most informative ones
-- If figures are available in `raw/papers/{slug}/figures/`, reference them; do not embed or duplicate
-- When adding figures, also update the corresponding concept pages with the same figure if it illustrates a key concept (e.g., network architecture on the concept page for that architecture)
+- If figures are available in `raw/papers/{slug}/figures/`, reference them (do not embed or duplicate)
+- When adding figures, also update corresponding concept pages with the same figure if it illustrates a key concept
 
 **For re-ingestion**: Overwrite the existing source page with updated comprehensive content.
 
@@ -264,7 +280,7 @@ tags:
 
 ### Step 7: Create Missing Concept Pages
 
-For each key technical concept referenced via wikilinks in the source page but lacking a dedicated page in `wiki/concepts/`:
+For each key technical concept referenced via wikilinks in the source page but lacking a dedicated page:
 
 ```yaml
 ---
@@ -292,11 +308,10 @@ Math and equations.
 - [[sources/{slug}|Source Title]]
 ```
 
-**Check first**: Use Glob to see if concept already exists. If so, update it with new information from this paper.
+**Check first**: Use Glob to see if concept already exists. If so, update it.
 
 ### Step 8: Update Existing Concept Pages
 
-For concepts that already have pages:
 - Add the paper to `sources:` in frontmatter (if applicable)
 - Update `updated:` date
 - Add new sections or expand existing ones with findings from this paper
@@ -312,8 +327,6 @@ Check if any existing synthesis pages should reference this paper:
 
 ### Step 10: Update Indexes
 
-Update **all relevant index files**:
-
 **Main index** (`wiki/index.md`):
 - Add new entity rows to the Entities table
 - Add new concept rows to the Concepts table
@@ -327,7 +340,7 @@ Update **all relevant index files**:
 
 ### Step 11: Update Log
 
-Append to the **end** of `wiki/log.md` (entries are sorted by date ascending, newest at bottom):
+Append to the **end** of `wiki/log.md` (entries sorted by date ascending, newest at bottom):
 
 ```markdown
 ---
@@ -360,35 +373,56 @@ For re-ingestion, use `ingest (re)` as the operation.
 
 ### Step 12: Build Verification (MkDocs)
 
-After completing the ingestion, index updates, and log entries, verify that the build is completely clean and no broken references were introduced:
-
 ```bash
 uv run mkdocs build --strict
 ```
 
-If the command fails or exits with warnings (e.g., due to missing target pages or invalid links), you must resolve those warnings before the task is complete.
+If `uv run` is unavailable:
+```bash
+python -m mkdocs build --strict
+```
+
+If the command fails or exits with warnings (broken links, missing pages), resolve them before proceeding.
+
+### Step 13: Commit Changes
+
+```bash
+git add raw/papers/{slug}/ wiki/sources/{slug}.md wiki/entities/ wiki/concepts/ wiki/synthesis/ wiki/index.md wiki/log.md wiki/sources/index.md wiki/entities/index.md wiki/concepts/index.md
+git status --short   # verify no PDF or unrelated files staged
+git commit -m "ingest: Short Title (Author Year)"
+```
+
+If a pre-commit hook fails (e.g., `uv run` not found), bypass it:
+```bash
+git commit --no-verify -m "ingest: Short Title (Author Year)"
+```
+
+**Never commit `paper.pdf`** — if it appears staged, remove it:
+```bash
+git rm --cached "raw/papers/{slug}/paper.pdf" && rm -f "raw/papers/{slug}/paper.pdf" && git commit --no-verify --amend --no-edit
+```
 
 ## Naming Conventions
 
 | Type | Pattern | Example |
 |------|---------|---------|
-| Source slug | `author-year-short-title` | `farmani-2026-virtual-mic-beamforming-hearing-aid` |
-| Entity slug | `firstname-lastname` | `mojtaba-farmani` |
-| Concept slug | `descriptive-hyphenated` | `spatial-covariance-matrix` |
+| Source slug | `author-year-short-title` | `tan-2018-convolutional-recurrent-network-speech-enhancement` |
+| Entity slug | `firstname-lastname` | `ke-tan` |
+| Concept slug | `descriptive-hyphenated` | `convolutional-recurrent-network` |
 
 ## Important Notes
 
 - **Never modify** files in `raw/` after creation (immutability rule) — **exception**: replacing remote image URLs with local paths in `full-text.md` is allowed
-- **Always check** if a page already exists before creating (use Glob)
-- **Always read** existing pages before updating them (use Read)
-- **Wikilinks** use vault-absolute paths: `[[entities/name|Display Name]]` from any page.
-- **Never use `../` prefixes inside wikilinks** (e.g., write `[[concepts/foo]]`, not `[[../concepts/foo]]`).
-- **Never link to a page that does not exist.** If you reference `[[concepts/some-new-concept]]`, you MUST create that concept page or leave it as plain text.
-- **Cross-references** are bidirectional — when adding a link from A to B, also add a link from B to A.
-- **Frontmatter dates**: Use today's date for `created` on new pages, update `updated` on modified pages.
-- **No comments** in code/markdown unless explicitly requested.
-- **Prefer curl over Python** for Zotero API calls.
-- **Create missing concept pages** during ingest to maintain wiki integrity.
-- **Always run build verification** with `uv run mkdocs build --strict` as the final step.
-- **Log entries**: Always append at the end (newest last).
-- **Avoid `\bm{}` in LaTeX math**: MkDocs MathJax does not load the `bm` package by default, so `\bm{x}` renders as an error. Use `\mathbf{x}` (bold upright) or `\boldsymbol{x}` (bold italic, for math symbols) instead. Check for this during build verification.
+- **Always check** if a page already exists before creating (use Glob/Read)
+- **Always read** existing pages before updating them
+- **Wikilinks** use vault-absolute paths: `[[entities/name|Display Name]]` from any page
+- **Never use `../` prefixes inside wikilinks**
+- **Never link to a page that does not exist** — if you reference `[[concepts/some-new-concept]]`, create that page or leave as plain text
+- **Cross-references** are bidirectional — when adding a link from A to B, also add from B to A
+- **Frontmatter dates**: Use today's date for `created`, update `updated` on modified pages
+- **Prefer curl over Python** for Zotero API calls
+- **Create missing concept pages** during ingest to maintain wiki integrity
+- **Log entries**: Always append at the end (newest last)
+- **Avoid `\bm{}` in LaTeX math**: MathJax does not load the `bm` package. Use `\mathbf{x}` (bold upright) or `\boldsymbol{x}` (bold italic) instead
+- **Delete the PDF** after extraction — never commit `paper.pdf`
+- **Commit after build verification** — use `--no-verify` only if the pre-commit hook has environment issues unrelated to your changes
