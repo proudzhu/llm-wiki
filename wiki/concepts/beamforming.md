@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-04-28
+updated: 2026-05-26
 sources:
   - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.txt
 tags:
@@ -32,6 +32,7 @@ Modern ANC headphones use beamforming for several critical tasks:
 - **[[mvdr-beamformer|MVDR (Minimum Variance Distortionless Response)]]**: Minimizes interference-plus-noise power while maintaining a constant gain in the target direction.
 - **[[gsc-beamformer|GSC (Generalized Sidelobe Canceller)]]**: A structure that splits the beamformer into a fixed path and an adaptive interference-cancellation path.
 - **[[concepts/nlcmv-beamforming|NLCMV (Non-Linearly Constrained Minimum Variance)]]**: Extends MVDR with explicit white-noise-gain and null-direction constraints; used in AGADIR for smart-glasses directional ASR (Lin et al. 2024).
+- **[[lcmv-beamformer|LCMV (Linearly Constrained Minimum Variance)]]**: Generalizes MVDR to multiple linear constraints for simultaneous target preservation and null steering.
 - **Neural Beamforming**: Using deep learning models (e.g., U-Nets or LSTMs) to perform spatial filtering in complex, multi-path environments.
 
 ## Robustness and Diagonal Loading
@@ -85,3 +86,4 @@ The beamformer's directivity increases with SH order $L$, but higher orders requ
 - [[sources/frank-2026-low-latency-roi-beamforming|Frank & Cohen 2026: Low-latency Audio Front-end ROI Beamforming for Smart Glasses]]
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
 - [[sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition|Lin et al. 2024: AGADIR — NLCMV Beamforming for Directional ASR]]
+- [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]]

@@ -2079,3 +2079,34 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/index.md` -- added 1 entity, 1 source; updated statistics
   - `wiki/sources/index.md` -- added 1 source row
   - `wiki/entities/index.md` -- added 1 entity row, updated 1 existing
+
+---
+
+## [2026-05-26] ingest | Linearly Constrained Deep Beamformer for Multi-Speaker Scenarios (Zaidel, Engel, Engel & Gannot 2026)
+
+- **Source**: `raw/papers/zaidel-2026-linearly-constrained-deep-beamformer/full-text.md` (Zotero: TLSRHKI7)
+- **Authors**: Ilai Zaidel, Ori Engel, Bar Engel, Sharon Gannot
+- **Published**: arXiv preprint, May 2026
+- **DOI**: 10.48550/arXiv.2605.21141
+- **Summary**: Fully DNN-based beamformer with adaptive multi-term loss enforcing distortionless response and null-steering constraints via augmented Lagrangian-inspired training; outperforms classical LCMV in SI-SDR and SNR
+- **Pages created**:
+  - `raw/papers/zaidel-2026-linearly-constrained-deep-beamformer/full-text.md` — extracted text from arXiv HTML
+  - `wiki/sources/zaidel-2026-linearly-constrained-deep-beamformer.md`
+  - `wiki/entities/ilai-zaidel.md`
+  - `wiki/entities/ori-engel.md`
+  - `wiki/entities/bar-engel.md`
+  - `wiki/entities/sharon-gannot.md`
+  - `wiki/concepts/lcmv-beamformer.md`
+  - `wiki/concepts/relative-transfer-function.md`
+- **Pages updated**:
+  - `wiki/concepts/beamforming.md` — added LCMV technique and source link
+  - `wiki/concepts/mvdr-beamformer.md` — added LCMV relationship and source link
+  - `wiki/concepts/gsc-beamformer.md` — added LCMV concept link and source link
+  - `wiki/concepts/target-speaker-extraction.md` — added source link
+  - `wiki/concepts/multi-channel-speech-enhancement.md` — added source link
+  - `wiki/index.md` — added 4 entities, 2 concepts, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 4 entity rows
+  - `wiki/concepts/index.md` — added 2 concept rows
+
+

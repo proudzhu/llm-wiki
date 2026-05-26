@@ -235,6 +235,10 @@
 | [[entities/ming-sun\|Ming Sun]] | Meta — co-author of AGADIR | 2026-05-24 |
 | [[entities/christian-fuegen\|Christian Fuegen]] | Meta — co-author of AGADIR, alignment-restricted RNN-T | 2026-05-24 |
 | [[entities/frank-seide\|Frank Seide]] | Meta — co-author of AGADIR, monotonic transducers | 2026-05-24 |
+| [[entities/ilai-zaidel\|Ilai Zaidel]] | Bar-Ilan University — linearly constrained deep beamformer for multi-speaker scenarios | 2026-05-26 |
+| [[entities/ori-engel\|Ori Engel]] | Bar-Ilan University — co-author on linearly constrained deep beamformer | 2026-05-26 |
+| [[entities/bar-engel\|Bar Engel]] | Bar-Ilan University — co-author on linearly constrained deep beamformer | 2026-05-26 |
+| [[entities/sharon-gannot\|Sharon Gannot]] | Bar-Ilan University — professor, deep learning beamforming, RTF estimation, multichannel speech enhancement | 2026-05-26 |
 
 ---
 
@@ -442,6 +446,9 @@
 | [[concepts/simultaneous-equations-method\|Simultaneous Equations Method]] | ANC method estimating optimal noise control filter without secondary path model using two independent equations from an auxiliary filter | 2006 |
 | [[concepts/gtcrn\|GTCRN (Grouped Temporal CRN)]] | Grouped temporal convolutional recurrent network for ultralightweight speech enhancement; 23.7K params | 2026-05-24 |
 | [[concepts/nlcmv-beamforming\|NLCMV Beamforming]] | Non-Linearly Constrained Minimum Variance beamforming with WNG and null constraints for directional ASR | 2026-05-24 |
+| [[concepts/lcmv-beamformer\|LCMV Beamformer]] | Generalizes MVDR to multiple linear constraints; enables simultaneous target preservation and null steering | 2026-05-26 |
+| [[concepts/relative-transfer-function\|Relative Transfer Function (RTF)]] | Acoustic propagation relative to reference microphone; estimated via covariance whitening for beamforming | 2026-05-26 |
+
 ---
 
 ## Sources
@@ -590,10 +597,10 @@
 
 ## Statistics
 
-- **Total pages**: 538
-- **Entities**: 225
-- **Concepts**: 198
-- **Sources**: 90
+- **Total pages**: 545
+- **Entities**: 229
+- **Concepts**: 200
+- **Sources**: 91
 - **Synthesis**: 19
 - **Queries**: 6
-- **Last updated**: 2026-05-25
+- **Last updated**: 2026-05-26

@@ -229,3 +229,8 @@
 | [[entities/ming-sun\|Ming Sun]] | Meta — co-author of AGADIR | 2026-05-24 |
 | [[entities/christian-fuegen\|Christian Fuegen]] | Meta — co-author of AGADIR, alignment-restricted RNN-T | 2026-05-24 |
 | [[entities/frank-seide\|Frank Seide]] | Meta — co-author of AGADIR, monotonic transducers | 2026-05-24 |
+| [[entities/ilai-zaidel\|Ilai Zaidel]] | Bar-Ilan University — linearly constrained deep beamformer for multi-speaker scenarios | 2026-05-26 |
+| [[entities/ori-engel\|Ori Engel]] | Bar-Ilan University — co-author on linearly constrained deep beamformer | 2026-05-26 |
+| [[entities/bar-engel\|Bar Engel]] | Bar-Ilan University — co-author on linearly constrained deep beamformer | 2026-05-26 |
+| [[entities/sharon-gannot\|Sharon Gannot]] | Bar-Ilan University — professor, deep learning beamforming, RTF estimation, multichannel speech enhancement | 2026-05-26 |
+

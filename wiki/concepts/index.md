@@ -202,3 +202,6 @@
 | [[concepts/gtcrn\|GTCRN (Grouped Temporal CRN)]] | Grouped temporal CRN for ultralightweight speech enhancement; 23.7K params, SFE, TRA | 2026-05-24 |
 | [[concepts/nlcmv-beamforming\|NLCMV Beamforming]] | Non-Linearly Constrained Minimum Variance beamforming with WNG and null constraints | 2026-05-24 |
 | [[concepts/neural-beamforming\|Neural Beamforming]] | Learning beamformer weights via backprop; integrated with separation/ASR; NLCMV-weight initialization + fine-tuning | 2026-05-20 |
+| [[concepts/lcmv-beamformer\|LCMV Beamformer]] | Generalizes MVDR to multiple linear constraints; enables simultaneous target preservation and null steering | 2026-05-26 |
+| [[concepts/relative-transfer-function\|Relative Transfer Function (RTF)]] | Acoustic propagation relative to reference microphone; estimated via covariance whitening for beamforming | 2026-05-26 |
+

@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-04-29
+updated: 2026-05-26
 tags:
   - beamforming
   - speech-enhancement
@@ -18,6 +18,10 @@ $$h_{\text{MVDR}} = \frac{\Phi_n^{-1} a}{a^H \Phi_n^{-1} a}$$
 
 where $a$ is the steering vector for the target direction and $\Phi_n$ is the noise spatial covariance matrix.
 
+## Relationship to LCMV
+
+The MVDR is a special case of the [[concepts/lcmv-beamformer|LCMV beamformer]] with a single distortionless constraint.
+
 ## Relationship to VSLF
 
 The MVDR is a special case of the [[concepts/variable-span-linear-filter|Variable Span Linear Filter]] with $\mu=0$ and $Q=P$ (true rank of $\Phi_x$).
@@ -26,6 +30,7 @@ The MVDR is a special case of the [[concepts/variable-span-linear-filter|Variabl
 
 - [[concepts/beamforming|Beamforming]]
 - [[concepts/mpdr-beamformer|MPDR Beamformer]]
+- [[concepts/lcmv-beamformer|LCMV Beamformer]]
 - [[concepts/gsc-beamformer|Generalized Sidelobe Canceller]]
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
 - [[concepts/variable-span-linear-filter|Variable Span Linear Filter]]

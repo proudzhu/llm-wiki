@@ -14,7 +14,7 @@ tags:
 
 ## Definition
 
-The Generalized Sidelobe Canceller (GSC) is an alternative formulation of the linearly constrained minimum variance beamformer that orthogonalizes the distortionless constraint and the adaptive noise cancellation components:
+The Generalized Sidelobe Canceller (GSC) is an alternative formulation of the [[concepts/lcmv-beamformer|linearly constrained minimum variance (LCMV) beamformer]] that orthogonalizes the distortionless constraint and the adaptive noise cancellation components:
 
 $$\mathbf{w}_{gsc} = \mathbf{w}_q - \mathbf{B}\mathbf{w}_a$$
 
@@ -62,3 +62,4 @@ $$\tilde{\mathbf{R}} = \begin{bmatrix} M p_q & \sqrt{M} \mathbf{r}_{qn}^H \\ \sq
 ## Related Sources
 
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
+- [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]]
