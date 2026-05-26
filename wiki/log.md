@@ -2110,3 +2110,17 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/concepts/index.md` — added 2 concept rows
 
 
+
+---
+
+## [2026-05-26] ingest (re) | A Review of Virtual Sensing Algorithms for Active Noise Control (Moreau, Cazzolato, Zander & Petersen 2008)
+
+- **Source**: `raw/papers/moreau-2008-virtual-sensing-review/full-text.md` (Zotero: LJDPCZ9G)
+- **Authors**: Danielle Moreau, Ben Cazzolato, Anthony Zander, Cornelis Petersen
+- **Published**: Algorithms, Vol. 1, No. 2, pp. 69–99, 2008
+- **DOI**: 10.3390/a1020069
+- **Summary**: Re-ingested with MinerU VLM extraction (93 figures, full LaTeX equations, tables) replacing previous pdftotext extraction
+- **Pages updated**:
+  - `raw/papers/moreau-2008-virtual-sensing-review/full-text.md` — replaced .txt with MinerU markdown
+  - `raw/papers/moreau-2008-virtual-sensing-review/figures/` — 93 new figures from MinerU
+  - `wiki/sources/a-review-of-virtual-sensing-algorithms-for-active-.md` — updated sources and dates

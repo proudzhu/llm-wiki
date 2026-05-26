@@ -1,10 +1,10 @@
 ---
 type: source
 created: 2026-04-18
-updated: 2026-04-28
+updated: 2026-05-26
 sources:
-  - raw/papers/moreau-2008-virtual-sensing-review/full-text.txt
-  - raw/papers/moreau-2008-virtual-sensing-review/images/
+  - raw/papers/moreau-2008-virtual-sensing-review/full-text.md
+  - raw/papers/moreau-2008-virtual-sensing-review/figures/
   - https://www.mdpi.com/1999-4893/1/2/69
   - zotero://select/items/0_LJDPCZ9G
 tags:
