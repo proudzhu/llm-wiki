@@ -95,4 +95,5 @@
 | [[sources/feng-2025-directional-source-separation-smart-glasses\|Feng et al. 2025: Directional Source Separation for Smart Glasses]] | BF front-end (NLCMV/neural) + sep back-end; joint training achieves 13.25% WER on LibriSpeech; wearer benefits but partner degrades | 2025 |
 | [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement\|Tan & Wang 2018: CRN for Real-Time Speech Enhancement]] | CRN combining CED + LSTM with causal convolutions for noise/speaker-independent monaural speech enhancement; outperforms LSTM baselines with 17.58M params | 2018 |
 | [[sources/zaidel-2026-linearly-constrained-deep-beamformer\|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]] | Fully DNN-based beamformer with adaptive multi-term loss enforcing distortionless and null-steering constraints; outperforms LCMV | 2026-05-26 |
+| [[sources/martin-2001-noise-psd-estimation-optimal-smoothing\|Martin 2001: Noise PSD Estimation via Optimal Smoothing and Minimum Statistics]] | VAD-free noise PSD estimation via spectral minima tracking; optimal smoothing and bias compensation | 2001 |
 

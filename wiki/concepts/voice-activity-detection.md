@@ -45,8 +45,15 @@ Sophisticated VAD systems use multi-modal data to avoid false positives from:
 - **[[transparency-mode|Transparency Mode]]**: Automatically enabling ambient sound pass-through when the user starts a conversation.
 - **Acoustic Echo Cancellation**: Knowing when the local user is speaking helps the AEC algorithm distinguish between local speech and echoed remote speech.
 
+## VAD-Free Alternatives
+
+While VAD is widely used, VAD-free noise estimation methods avoid the binary speech/pause decision and its associated tuning difficulties:
+
+- **[[concepts/minimum-statistics|Minimum Statistics]]** (Martin 2001): Tracks spectral minima in each frequency band without distinguishing speech from silence. Derives optimal time-varying smoothing parameters and bias compensation. Performs well in low SNR and nonstationary noise, and updates noise estimates even during speech activity.
+
 ## Related Concepts
 
+- [[concepts/minimum-statistics|Minimum Statistics]]
 - [[transparency-mode|Transparency Mode]]
 - [[beamforming|Beamforming]]
 - [[bone-conduction|Bone Conduction]]
@@ -57,3 +64,4 @@ Sophisticated VAD systems use multi-modal data to avoid false positives from:
 - [[sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]]
 - [[sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
 - [[sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Earbuds]]
+- [[sources/martin-2001-noise-psd-estimation-optimal-smoothing|Martin 2001: Noise PSD Estimation via Optimal Smoothing and Minimum Statistics]]

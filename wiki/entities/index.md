@@ -233,4 +233,5 @@
 | [[entities/ori-engel\|Ori Engel]] | Bar-Ilan University — co-author on linearly constrained deep beamformer | 2026-05-26 |
 | [[entities/bar-engel\|Bar Engel]] | Bar-Ilan University — co-author on linearly constrained deep beamformer | 2026-05-26 |
 | [[entities/sharon-gannot\|Sharon Gannot]] | Bar-Ilan University — professor, deep learning beamforming, RTF estimation, multichannel speech enhancement | 2026-05-26 |
+| [[entities/rainer-martin\|Rainer Martin]] | RWTH Aachen — Minimum Statistics noise estimation, speech enhancement, acoustic echo cancellation | 2026-05-26 |
 

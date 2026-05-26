@@ -239,6 +239,7 @@
 | [[entities/ori-engel\|Ori Engel]] | Bar-Ilan University — co-author on linearly constrained deep beamformer | 2026-05-26 |
 | [[entities/bar-engel\|Bar Engel]] | Bar-Ilan University — co-author on linearly constrained deep beamformer | 2026-05-26 |
 | [[entities/sharon-gannot\|Sharon Gannot]] | Bar-Ilan University — professor, deep learning beamforming, RTF estimation, multichannel speech enhancement | 2026-05-26 |
+| [[entities/rainer-martin\|Rainer Martin]] | RWTH Aachen — Minimum Statistics noise estimation, speech enhancement, acoustic echo cancellation | 2026-05-26 |
 
 ---
 
@@ -448,6 +449,7 @@
 | [[concepts/nlcmv-beamforming\|NLCMV Beamforming]] | Non-Linearly Constrained Minimum Variance beamforming with WNG and null constraints for directional ASR | 2026-05-24 |
 | [[concepts/lcmv-beamformer\|LCMV Beamformer]] | Generalizes MVDR to multiple linear constraints; enables simultaneous target preservation and null steering | 2026-05-26 |
 | [[concepts/relative-transfer-function\|Relative Transfer Function (RTF)]] | Acoustic propagation relative to reference microphone; estimated via covariance whitening for beamforming | 2026-05-26 |
+| [[concepts/minimum-statistics\|Minimum Statistics]] | VAD-free noise PSD estimation via optimal smoothing and spectral minima tracking; bias compensation for correlated PSD estimates | 2026-05-26 |
 
 ---
 
@@ -486,6 +488,7 @@
 | [[sources/zhang-2023-deep-mcanc\|Zhang 2023: Deep MCANC]] | Convolutional Recurrent Network (CRN) for end-to-end multi-channel ANC | 2023-01-01 |
 | [[sources/zhu-2020-robust-gmcc-anc-paper-reading-note\|Zhu 2020: Robust GMCC for ANC Paper Reading Note]] | FxGMCC→IFxGMCC→C-IFxGMCC 演进链：连续混合 Lp 范数消除参数选择，凸组合解决收敛-稳态权衡 | 2026-04-12 |
 | [[sources/masilamani-2024-headphone-conversation-detect-paper-reading-note\|Masilamani 2024: Headphone Conversation Detect]] | 专利：双 VAD + 自适应空闲阈值自动检测对话并切换透明模式，误触发拒绝 + 动态波束形成 + 行人边界 | 2026-04-12 |
+| [[sources/martin-2001-noise-psd-estimation-optimal-smoothing\|Martin 2001: Noise Power Spectral Density Estimation Based on Optimal Smoothing and Minimum Statistics]] | VAD-free noise PSD estimation via spectral minima tracking; optimal smoothing and bias compensation | 2001 |
 | [[sources/zucchet-2026-forward-propagation-errors-through-time\|Zucchet 2026: Forward Propagation of Errors Through Time]] | 博客：误差能否正向传播？FPTT 推导出精确正向算法，但遗忘（特征值<1）导致数值指数不稳定 | 2026-04-12 |
 | [[sources/wills-2008-mpc-constraint-handling-anc-avc\|Wills 2008: MPC Constraint Handling in ANC/AVC]] | MPC 显式处理执行器饱和约束，18 阶模型 5kHz 采样，DSP 实现 <150μs/QP，优于饱和 LQG | 2026-04-12 |
 | [[sources/pawelczyk-1997-anc-feedback-fixed-adaptive\|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]] | ISVR TM822：MVC/IMC 固定控制器 + RLS/LMS/FXLMS 自适应反馈 ANC，延迟对性能的影响，鲁棒性分析 | 1997 |
@@ -597,10 +600,10 @@
 
 ## Statistics
 
-- **Total pages**: 545
-- **Entities**: 229
-- **Concepts**: 200
-- **Sources**: 91
+- **Total pages**: 548
+- **Entities**: 230
+- **Concepts**: 201
+- **Sources**: 92
 - **Synthesis**: 19
 - **Queries**: 6
 - **Last updated**: 2026-05-26

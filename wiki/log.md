@@ -2124,3 +2124,24 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `raw/papers/moreau-2008-virtual-sensing-review/full-text.md` — replaced .txt with MinerU markdown
   - `raw/papers/moreau-2008-virtual-sensing-review/figures/` — 93 new figures from MinerU
   - `wiki/sources/a-review-of-virtual-sensing-algorithms-for-active-.md` — updated sources and dates
+
+---
+
+## [2026-05-26] ingest (re) | Noise Power Spectral Density Estimation Based on Optimal Smoothing and Minimum Statistics (Martin 2001)
+
+- **Source**: `raw/papers/martin-2001-noise-psd-estimation-optimal-smoothing/full-text.md` (Zotero: SUKHAUHG)
+- **Authors**: Rainer Martin
+- **Published**: IEEE Trans. Speech and Audio Processing, Vol. 9, No. 5, pp. 504–512, 2001
+- **DOI**: 10.1109/89.928915
+- **Summary**: VAD-free noise PSD estimation using optimal time-varying smoothing and minimum statistics with bias compensation
+- **Pages created**:
+  - `raw/papers/martin-2001-noise-psd-estimation-optimal-smoothing/full-text.md` — re-extracted with MinerU VLM (formulas, tables, 37 figures)
+  - `wiki/entities/rainer-martin.md`
+  - `wiki/concepts/minimum-statistics.md`
+- **Pages updated**:
+  - `wiki/sources/martin-2001-noise-psd-estimation-optimal-smoothing.md` — rewrote with comprehensive methodology, equations, experimental results, and figures
+  - `wiki/concepts/voice-activity-detection.md` — added VAD-free alternatives section with Minimum Statistics link
+  - `wiki/index.md` — added 1 entity, 1 concept, 1 source; updated statistics
+  - `wiki/entities/index.md` — added 1 entity row
+  - `wiki/concepts/index.md` — added 1 concept row
+  - `wiki/sources/index.md` — added 1 source row
