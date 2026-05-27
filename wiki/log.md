@@ -2148,12 +2148,28 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
 
 ---
 
-## [2026-05-26] query | Far-Field Speech Enhancement
+## [2026-05-27] ingest | An Active Noise Control Casing Using the Multi-Channel Feedforward Control System and the Relative Path Based Virtual Sensing Method (Shi 2020)
 
-- **Answer saved to**: `wiki/queries/far-field-speech-enhancement.md`
-- **Summary**: 综合 wiki 知识库回答"远场语音增强"查询，涵盖问题定义、方法体系（波束形成/MWF/去混响/BSS/深度学习）、最新论文进展（CTRnet+PuLSS、Neural VSLF、R-MWF 等）、算法对比与开放问题
+- **Source**: `raw/papers/shi-2020-active-noise-control-casing-virtual-sensing/full-text.md` (Zotero: DAGTQQLP)
+- **Authors**: Chuang Shi, Zhuoying Jia, Rong Xie, Huiyong Li
+- **Published**: Mechanical Systems and Signal Processing, Vol. 144, pp. 106878, 2020
+- **DOI**: 10.1016/j.ymssp.2020.106878
+- **Summary**: Proposes Relative Path based Virtual Sensing (RP-VS) method that unifies AF-VS and RM-VS. Theoretical analysis, simulations on single/dual-channel ANC systems, and ANC casing prototype validation with (1,4,4) configuration on real-time DSP.
 - **Pages created**:
-  - `wiki/queries/far-field-speech-enhancement.md` — query page
+  - `raw/papers/shi-2020-active-noise-control-casing-virtual-sensing/full-text.md` — extracted text from Zotero PDF via MinerU VLM
+  - `raw/papers/shi-2020-active-noise-control-casing-virtual-sensing/figures/` — extracted figures from MinerU
+  - `wiki/sources/shi-2020-active-noise-control-casing-virtual-sensing.md`
+  - `wiki/entities/chuang-shi.md`
+  - `wiki/entities/zhuoying-jia.md`
+  - `wiki/entities/rong-xie.md`
+  - `wiki/entities/huiyong-li.md`
+  - `wiki/concepts/relative-path-virtual-sensing.md`
 - **Pages updated**:
-  - `wiki/queries/index.md` — added 1 query row
-  - `wiki/index.md` — added 1 query row, updated statistics
+  - `wiki/concepts/virtual-sensing.md` — added AF-VS, RM-VS, RP-VS to Common Algorithms; added cross-refs to RP-VS concept
+  - `wiki/concepts/multi-channel-anc.md` — added ANC Casing Application section
+  - `wiki/concepts/remote-microphone-technique.md` — added RP-VS cross-reference
+  - `wiki/synthesis/virtual-sensing-evolution.md` — added Section 2.4: Unified RP-VS framework with comparative analysis table
+  - `wiki/index.md` — added 4 entities, 1 concept, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 4 entity rows
+  - `wiki/concepts/index.md` — added 1 concept row

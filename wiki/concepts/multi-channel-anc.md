@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-04-10
+updated: 2026-05-27
 sources:
 tags:
 - active-noise-control
@@ -41,6 +41,16 @@ For a system with M secondary sources, L filter taps, and N error sensors:
 - **Computational complexity**: O(M · L · N)
 
 This grows rapidly: a 4×4 system (4 secondary sources, 4 error sensors) with 256-tap filters requires filtering through 16 secondary paths.
+
+## ANC Casing Application
+
+An **ANC casing** is a practical multi-channel ANC application — a noise source enclosed in a sound-proof shield with an opening for ventilation. Control sources (loudspeakers) are distributed at the opening to transmit anti-noise. Error microphones must be placed near the control sources (to avoid protuberance), but the target ZoQ is farther away, requiring [[concepts/virtual-sensing|virtual sensing]].
+
+A representative implementation[^shi2020] uses a (1,4,4) configuration: 1 reference microphone inside the casing, 4 loudspeakers, 4 monitoring microphones near the speakers, and 4 virtual microphones (used only during tuning). This configuration highlights the **spatial coverage** motivation — a single-channel system cannot form a large enough ZoQ at the desired location.
+
+For multi-channel systems, virtual sensing is more challenging than single-channel because cross-channel acoustic paths introduce errors in the relative path models. All VS methods show reduced performance in multi-channel relative to single-channel configurations, but the [[concepts/relative-path-virtual-sensing|RP-VS]] method achieves the best average noise reduction.
+
+[^shi2020]: [[sources/shi-2020-active-noise-control-casing-virtual-sensing|Shi, Jia, Xie & Li 2020: ANC Casing with RP-VS]]
 
 ## Computational Challenge
 

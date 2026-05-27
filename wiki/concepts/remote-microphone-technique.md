@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-05-17
+updated: 2026-05-27
 tags:
   - virtual-sensing
   - anc
@@ -67,6 +67,7 @@ Recent advances replace the pre-computed filter bank with a neural network that 
 ## Related Concepts
 
 - [[concepts/virtual-sensing|Virtual Sensing]]
+- [[concepts/relative-path-virtual-sensing|Relative Path Virtual Sensing]]
 - [[concepts/active-noise-control|Active Noise Control]]
 - [[concepts/secondary-path-modeling|Secondary Path Modeling]]
 - [[concepts/neural-observation-filter|Neural Observation Filter]]

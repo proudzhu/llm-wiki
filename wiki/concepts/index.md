@@ -205,4 +205,5 @@
 | [[concepts/lcmv-beamformer\|LCMV Beamformer]] | Generalizes MVDR to multiple linear constraints; enables simultaneous target preservation and null steering | 2026-05-26 |
 | [[concepts/relative-transfer-function\|Relative Transfer Function (RTF)]] | Acoustic propagation relative to reference microphone; estimated via covariance whitening for beamforming | 2026-05-26 |
 | [[concepts/minimum-statistics\|Minimum Statistics]] | VAD-free noise PSD estimation via optimal smoothing and spectral minima tracking; bias compensation for correlated PSD estimates | 2026-05-26 |
+| [[concepts/relative-path-virtual-sensing\|Relative Path Virtual Sensing]] | VS method estimating disturbance + anti-noise via relative primary/secondary path models; unifies AF-VS and RM-VS | 2026-05-27 |
 

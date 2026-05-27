@@ -240,6 +240,10 @@
 | [[entities/bar-engel\|Bar Engel]] | Bar-Ilan University — co-author on linearly constrained deep beamformer | 2026-05-26 |
 | [[entities/sharon-gannot\|Sharon Gannot]] | Bar-Ilan University — professor, deep learning beamforming, RTF estimation, multichannel speech enhancement | 2026-05-26 |
 | [[entities/rainer-martin\|Rainer Martin]] | RWTH Aachen — Minimum Statistics noise estimation, speech enhancement, acoustic echo cancellation | 2026-05-26 |
+| [[entities/chuang-shi\|Chuang Shi]] | UESTC — active noise control, virtual sensing, RP-VS method, ANC casing | 2026-05-27 |
+| [[entities/zhuoying-jia\|Zhuoying Jia]] | UESTC — active noise control, virtual sensing, DSP implementation | 2026-05-27 |
+| [[entities/rong-xie\|Rong Xie]] | UESTC — active noise control, virtual sensing, selective virtual sensing for MCFFANC | 2026-05-27 |
+| [[entities/huiyong-li\|Huiyong Li]] | UESTC — active noise control, signal processing, virtual sensing | 2026-05-27 |
 
 ---
 
@@ -450,6 +454,7 @@
 | [[concepts/lcmv-beamformer\|LCMV Beamformer]] | Generalizes MVDR to multiple linear constraints; enables simultaneous target preservation and null steering | 2026-05-26 |
 | [[concepts/relative-transfer-function\|Relative Transfer Function (RTF)]] | Acoustic propagation relative to reference microphone; estimated via covariance whitening for beamforming | 2026-05-26 |
 | [[concepts/minimum-statistics\|Minimum Statistics]] | VAD-free noise PSD estimation via optimal smoothing and spectral minima tracking; bias compensation for correlated PSD estimates | 2026-05-26 |
+| [[concepts/relative-path-virtual-sensing\|Relative Path Virtual Sensing]] | VS method estimating both disturbance and anti-noise using relative primary and secondary path models; unifies AF-VS and RM-VS | 2026-05-27 |
 
 ---
 
@@ -550,6 +555,7 @@
 | [[sources/rong-2024-gtcrn-speech-enhancement-ultralow\|Rong et al. 2024: GTCRN]] | Ultralightweight SE model with 23.7K params, grouped strategies, SFE and TRA modules | 2024 |
 | [[sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition\|Lin et al. 2024: AGADIR]] | Geometry-agnostic directional ASR for smart glasses; NLCMV beamforming, 15-28% WER improvement | 2024 |
 | [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement\|Tan & Wang 2018: CRN for Real-Time Speech Enhancement]] | CRN combining CED + LSTM with causal convolutions for noise- and speaker-independent monaural speech enhancement; 17.58M params | 2018 |
+| [[sources/shi-2020-active-noise-control-casing-virtual-sensing\|Shi, Jia, Xie & Li 2020: ANC Casing with RP-VS]] | Relative Path based Virtual Sensing (RP-VS) unifies AF-VS and RM-VS; ANC casing validation with (1,4,4) MCFFANC | 2020 |
 ---
 
 ## Synthesis
@@ -601,10 +607,10 @@
 
 ## Statistics
 
-- **Total pages**: 548
-- **Entities**: 230
-- **Concepts**: 201
-- **Sources**: 92
+- **Total pages**: 553
+- **Entities**: 234
+- **Concepts**: 202
+- **Sources**: 93
 - **Synthesis**: 19
-- **Queries**: 7
-- **Last updated**: 2026-05-26
+- **Queries**: 6
+- **Last updated**: 2026-05-27

@@ -234,4 +234,8 @@
 | [[entities/bar-engel\|Bar Engel]] | Bar-Ilan University — co-author on linearly constrained deep beamformer | 2026-05-26 |
 | [[entities/sharon-gannot\|Sharon Gannot]] | Bar-Ilan University — professor, deep learning beamforming, RTF estimation, multichannel speech enhancement | 2026-05-26 |
 | [[entities/rainer-martin\|Rainer Martin]] | RWTH Aachen — Minimum Statistics noise estimation, speech enhancement, acoustic echo cancellation | 2026-05-26 |
+| [[entities/chuang-shi\|Chuang Shi]] | UESTC — active noise control, virtual sensing, RP-VS method | 2026-05-27 |
+| [[entities/zhuoying-jia\|Zhuoying Jia]] | UESTC — active noise control, virtual sensing, DSP implementation | 2026-05-27 |
+| [[entities/rong-xie\|Rong Xie]] | UESTC — active noise control, virtual sensing, selective VS for MCFFANC | 2026-05-27 |
+| [[entities/huiyong-li\|Huiyong Li]] | UESTC — active noise control, signal processing, virtual sensing | 2026-05-27 |
 

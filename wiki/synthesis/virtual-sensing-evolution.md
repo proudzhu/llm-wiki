@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-18
-updated: 2026-05-17
+updated: 2026-05-27
 tags:
 - active-noise-control
 - deep-learning
@@ -45,6 +45,28 @@ Uses an array of physical microphones to interpolate the sound pressure at the v
 Introduced to improve robustness by using an auxiliary filter to model the primary noise path difference. This is often combined with hybrid FF/FB structures[^2].
 
 ---
+
+### 2.4 Unified Framework: RP-VS
+
+Shi et al. (2020)[^shi2020] provided a unified theoretical framework showing that AF-VS and RM-VS are not fundamentally distinct but are special cases of a more general **Relative Path VS (RP-VS)** method:
+
+| Condition | RP-VS degenerates to | Rationale |
+|-----------|---------------------|-----------|
+| Invariant secondary paths | RM-VS | $W_{RP} \to W_{RM}$ when $S_{m'} = S_m$ |
+| Invariant primary paths | AF-VS | $W_{RP} \to W_{AF}$ when $P_{m'} = P_m$ |
+
+Key analytical result — residual noise under varying acoustic paths:
+
+| Method | Invariant Secondary Paths | Invariant Primary Paths | All Paths Varying |
+|--------|--------------------------|------------------------|-------------------|
+| FC Filter | $P_{v'} - P_v$ | $\left(1 - \frac{S_{v'}}{S_v}\right)P_v$ | $P_{v'} - \frac{S_{v'}}{S_v}P_v$ |
+| AF-VS | $P_{v'} - P_{v} + \frac{S_{v'}}{S_{m'}}(P_m - P_{m'})$ | $\left(1 - \frac{S_{v'} S_m}{S_v S_{m'}}\right)P_v$ | $P_{v'} - \frac{S_{v'} S_m}{S_v S_{m'}}P_v + \frac{S_{v'}}{S_{m'}}(P_m - P_{m'})$ |
+| RM-VS | $P_{v'} - \frac{P_{m'}}{P_m}P_v$ | $\left(1 - \frac{S_{v'}}{S_v}\right)P_v$ | $P_{v'} - \frac{S_{v'} P_{m'}}{S_v P_m}P_v$ |
+| RP-VS | $P_{v'} - \frac{P_{m'}}{P_m}P_v$ | $\left(1 - \frac{S_{v'} S_m}{S_v S_{m'}}\right)P_v$ | $P_{v'} - \frac{S_{v'} S_m P_{m'}}{S_v S_m' P_m}P_v$ |
+
+The RP-VS method achieves optimal noise reduction when relative changes in primary and secondary paths are balanced ($P_{v'}/P_v = P_{m'}/P_m$ and $S_{v'}/S_v = S_{m'}/S_m$). An ANC casing prototype with (1,4,4) configuration validated that RP-VS is as effective as AF-VS and RM-VS for broadband fan noise, while showing superior robustness under varying noise frequency bands.
+
+[^shi2020]: [[sources/shi-2020-active-noise-control-casing-virtual-sensing|Shi, Jia, Xie & Li 2020: ANC Casing with RP-VS]]
 
 ## 3. Statistical and Optimal Estimation
 
