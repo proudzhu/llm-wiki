@@ -34,7 +34,7 @@ llm-wiki/
 
 ### Link Conventions (apply when creating/editing pages)
 
-These rules ensure pages render correctly in **both Obsidian and MkDocs** at write time, so the build never has anything to fix later. The rule of thumb: **all internal references use vault-absolute paths from the project root** — Obsidian (vault root = project root) and MkDocs (via the `fix_obsidian_escapes` plugin) both resolve them identically.
+These rules ensure pages render correctly in **both Obsidian and MkDocs** at write time, so the build never has anything to fix later. The rule of thumb: **all internal references use vault-absolute paths from the project root** — Obsidian (vault root = project root) and MkDocs (via the `fix_obsidian_escapes` plugin) both resolve them identically. This means: **never use `../` in wikilinks** (write `[[entities/foo|Foo]]`, not `[[../entities/foo|Foo]]`), and **use embed wikilinks `![[…]]` for figures** (markdown `![alt](…)` paths resolve incorrectly in Obsidian).
 
 | Reference type | Form to write | Example |
 | --- | --- | --- |
@@ -45,10 +45,8 @@ These rules ensure pages render correctly in **both Obsidian and MkDocs** at wri
 
 **Rules to follow while writing:**
 
-1. **Never use `../` prefixes inside wikilinks.** Write `[[entities/foo\|Foo]]`, not `[[../entities/foo\|Foo]]`. The leading `../` is not vault-absolute and breaks Obsidian.
-2. **Use embed wikilinks `![[…]]` for figures**, not markdown image syntax `![alt](../raw/…)`. Markdown images with `../` paths break in Obsidian (vault root mismatch). Embed wikilinks are vault-absolute and work in both tools.
-3. **Never link to a page that does not exist.** Before writing `[[concepts/foo]]`, confirm the target file exists; otherwise either create it or use plain text.
-4. **No stray `[text](...)` placeholders** in `log.md` or anywhere else.
+1. **Never link to a page that does not exist.** Before writing `[[concepts/foo]]`, confirm the target file exists; otherwise either create it or use plain text.
+2. **No stray `[text](...)` placeholders** in `log.md` or anywhere else.
 
 See [BUILD.md](BUILD.md) for the build mechanics that make these conventions work, and `plugins/fix_obsidian_escapes.py` for the resolver implementation.
 
@@ -133,15 +131,13 @@ Periodically (when requested), health-check the wiki:
 
 ## Tips
 
-- Sources in `raw/` are **immutable** — never modify them
-- The wiki is a **git repo** — encourage version control
+- `raw/` is **immutable** — never edit source documents in place
+- This is a **git repo** — commit often
 - Suggest new questions and sources to investigate
-- Keep cross-references current and consistent
 - Flag contradictions for user review rather than silently resolving them
-- Use `uv run` when running Python scripts (e.g. `uv run mkdocs build --strict`)
 
 ## Build Verification (MkDocs)
 
-After any ingest or significant edit, verify the build is clean with `uv run mkdocs build --strict`.
+After any ingest or significant edit, run `uv run mkdocs build --strict`. A clean build exits 0 with `INFO - Documentation built in N seconds`.
 
-See [BUILD.md](BUILD.md) for full details on build mechanics, link conventions, and common pitfalls that fail strict mode.
+See [BUILD.md](BUILD.md) for full mechanics, link-resolution internals, and common strict-mode pitfalls.
