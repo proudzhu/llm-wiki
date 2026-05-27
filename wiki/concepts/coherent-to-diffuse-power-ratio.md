@@ -79,4 +79,5 @@ The signal coherence $\Gamma_s$, noise coherence $\Gamma_n$, and mixed coherence
 ## Key Sources
 
 - [[sources/schwarz-2015-coherent-to-diffuse-power-ratio|Schwarz & Kellermann 2015: CDR Estimation for Dereverberation]] — foundational CDR estimation paper with unbiased estimators
+- [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement|Löllmann, Brendel & Kellermann 2020: Generalized Coherence-Based Signal Enhancement]] — GMC-based CDR estimator using eigenvalue decomposition for multi-microphone arrays
 - [[sources/schwarz-2019-dereverberation-spatial-coherence|Schwarz 2019: Dereverberation and Robust Speech Recognition]] — comprehensive treatment of CDR methods

@@ -50,6 +50,7 @@
 | [[sources/karpathy-llm-os\|Karpathy: LLM OS]] | The LLM as an OS kernel orchestrating tools, memory, and reasoning | 2026-04-18 |
 | [[sources/jensen-huang-nvidia-moat\|Jensen Huang: Will Nvidia's Moat Persist?]] | Discussion on the transformation of electrons to tokens, AI agents as tool multipliers, and infrastructure moats | 2026-04-19 |
 | [[sources/schwarz-2015-coherent-to-diffuse-power-ratio\|Schwarz & Kellermann 2015: CDR Estimation for Dereverberation]] | Novel unbiased CDR estimators and DOA-independent dereverberation system | 2015 |
+| [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement\|Löllmann, Brendel & Kellermann 2020: GMC-Based Signal Enhancement]] | GMC-based CDR estimator using eigenvalue decomposition; implicit mic selection; 4-mic binaural HA evaluation | 2020 |
 | [[sources/schwarz-2019-dereverberation-spatial-coherence\|Schwarz 2019: Dereverberation and Robust Speech Recognition]] | Doctoral dissertation on spatial coherence models for dereverberation and robust ASR | 2019 |
 | [[sources/yamazaki-2022-spiking-nn-review\|Yamazaki 2022: Spiking Neural Networks Review]] | Comprehensive review: biological neurons, SNN models, STDP, encoding, CV/robotics applications | 2022 |
 | [[sources/fareedha-2026-joint-deep-spe-anc\|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]] | End-to-end DeepSPE + ANC-Net: joint secondary path estimation and adaptive control via binary weight filter selection | 2026 |

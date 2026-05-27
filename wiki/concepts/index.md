@@ -70,6 +70,7 @@
 | [[concepts/spatial-coherence\|Spatial Coherence]] | Multi-channel signal correlation for separating coherent sources from diffuse sound fields | 2026-04-25 |
 | [[concepts/coherent-to-diffuse-power-ratio\|Coherent-to-Diffuse Power Ratio (CDR)]] | Power ratio between directional and diffuse components; estimated from spatial coherence for dereverberation | 2026-05-27 |
 | [[concepts/dereverberation\|Dereverberation]] | Processing to reduce late reverberation in speech; CDR-based, MCLP, and deep learning approaches | 2026-05-27 |
+| [[concepts/generalized-magnitude-coherence\|Generalized Magnitude Coherence (GMC)]] | Multi-microphone coherence via eigenvalue decomposition; inherently integrates N channels | 2026-05-27 |
 | [[concepts/spiking-neural-networks\|Spiking Neural Networks]] | Third-generation neural networks using spike-based computation; energy-efficient, temporally coded | 2026-04-25 |
 | [[concepts/neuromorphic-computing\|Neuromorphic Computing]] | Brain-inspired hardware (TrueNorth, Loihi, SpiNNaker) for energy-efficient SNN deployment | 2026-04-25 |
 | [[concepts/spike-timing-dependent-plasticity\|Spike-Timing-Dependent Plasticity]] | Unsupervised Hebbian learning rule based on pre/post-spike timing; key SNN training mechanism | 2026-04-25 |

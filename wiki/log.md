@@ -2196,3 +2196,26 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 1 entity row
   - `wiki/concepts/index.md` — added 2 concept rows
+
+---
+
+## [2026-05-27] ingest | Generalized Coherence-Based Signal Enhancement (Löllmann, Brendel & Kellermann 2020)
+
+- **Source**: `raw/papers/lollmann-2020-generalized-coherence-based-signal-enhancement/full-text.md` (Zotero: DSYMKBRQ)
+- **Authors**: Heinrich W. Löllmann, Andreas Brendel, Walter Kellermann
+- **Published**: ICASSP 2020, pp. 201–205
+- **DOI**: 10.1109/ICASSP40776.2020.9054470
+- **Summary**: CDR-based speech enhancement using generalized magnitude coherence (GMC) via eigenvalue decomposition; implicit microphone selection without DOA estimation; 4-microphone binaural HA evaluation
+- **Pages created**:
+  - `raw/papers/lollmann-2020-generalized-coherence-based-signal-enhancement/full-text.md` — extracted text from Zotero PDF via MinerU
+  - `wiki/sources/lollmann-2020-generalized-coherence-based-signal-enhancement.md`
+  - `wiki/entities/heinrich-w-lollmann.md`
+  - `wiki/entities/andreas-brendel.md`
+  - `wiki/concepts/generalized-magnitude-coherence.md`
+- **Pages updated**:
+  - `wiki/entities/walter-kellermann.md` — added this paper to sources and related pages
+  - `wiki/concepts/coherent-to-diffuse-power-ratio.md` — added this paper to key sources
+  - `wiki/index.md` — added 2 entities, 1 concept, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 2 entity rows
+  - `wiki/concepts/index.md` — added 1 concept row
