@@ -102,7 +102,12 @@ Slug format: `author-year-short-title` (lowercase, hyphenated).
 
 #### 3b. arXiv HTML (Preferred for arXiv Papers)
 
-If the paper has an arXiv ID, **always prefer the HTML version** — better text quality than PDF extraction.
+If the paper has an arXiv ID, **always prefer the HTML version** — better text quality than PDF extraction. **But first verify it exists** — many older papers (pre-2022) don't have HTML versions:
+```bash
+curl -s -o /dev/null -w "%{http_code}" "https://arxiv.org/html/ARXIV_ID"
+# If 200, proceed with HTML extraction below.
+# If 404, fall back to MinerU (Step 3c).
+```
 
 1. **Extract markdown with Defuddle**:
 ```bash
@@ -139,7 +144,8 @@ mineru-open-api extract "raw/papers/{slug}/paper.pdf" -o "raw/papers/{slug}/full
 **Post-processing**: MinerU saves images in an `images/` subdirectory. Rename and update references:
 ```bash
 mv "raw/papers/{slug}/images" "raw/papers/{slug}/figures"
-sed -i 's|images/|figures/|g' "raw/papers/{slug}/full-text.md"
+# sed is often unavailable on Windows — use Python as a cross-platform fallback:
+python -c "content = open('raw/papers/{slug}/full-text.md', encoding='utf-8').read(); content = content.replace('images/', 'figures/'); open('raw/papers/{slug}/full-text.md', 'w', encoding='utf-8').write(content)"
 ```
 ```powershell
 Move-Item "raw/papers/{slug}/images" "raw/papers/{slug}/figures" -Force
@@ -179,13 +185,15 @@ rm -f "raw/papers/{slug}/paper.pdf"
 Remove-Item "raw/papers/{slug}/paper.pdf"
 ```
 
-#### 3e. Extract Images (Optional)
+#### 3e. Extract Images (Optional — before deleting PDF)
 
-Only if the user explicitly requests it:
+If the user explicitly requests it, extract images **before the PDF is deleted** (add this step before the deletion command in whichever extraction path was taken):
 ```bash
 pdfimages -all "raw/papers/{slug}/paper.pdf" "raw/papers/{slug}/img"
 ```
 Requires `poppler-utils`.
+
+**Note**: MinerU figures are hash-named JPEGs (e.g., `8b539670…583.jpg`). When referencing them in a source page, list the `figures/` directory to discover actual filenames rather than guessing — the filenames are deterministic from the PDF content.
 
 ### Step 4: Read and Analyze the Full Paper Content
 
@@ -241,7 +249,8 @@ tags:
 
 Guidelines:
 - Place figures immediately after the section they illustrate
-- Use vault-absolute wikilink paths: `![[raw/papers/{slug}/figures/fig-name.png|caption]]`
+- Use vault-absolute wikilink paths: `![[raw/papers/{slug}/figures/ACTUAL_FILENAME.ext|caption]]`
+- **List the `figures/` directory first** to discover actual filenames — MinerU produces hash-named `.jpg` files, arXiv HTML figures are named `fig1.png`
 - Add an italicized caption below each figure: `*Figure N: description.*`
 - Maximum 3 figures per source page — prefer the most informative ones
 - If figures are available in `raw/papers/{slug}/figures/`, reference them (do not embed or duplicate)
@@ -410,6 +419,7 @@ git rm --cached "raw/papers/{slug}/paper.pdf" && rm -f "raw/papers/{slug}/paper.
 
 ## Important Notes
 
+- **Skill self-update**: This skill lives in `.reasonix/skills/paper-reader/SKILL.md`. The `.reasonix/` directory is a **separate git repository** from the main project. After editing this skill, commit with `git -C .reasonix add ../.trae/skills/paper-reader/SKILL.md && git -C .reasonix commit` (or the equivalent path for your setup).
 - **Never modify** files in `raw/` after creation (immutability rule) — **exception**: replacing remote image URLs with local paths in `full-text.md` is allowed
 - **Always check** if a page already exists before creating (use Glob/Read)
 - **Always read** existing pages before updating them
