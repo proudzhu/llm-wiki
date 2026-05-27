@@ -549,6 +549,7 @@
 | [[sources/seo-2016-feedback-anc-constrained-optimization\|Seo, Park & Youn 2016: Feedback ANC via Constrained Optimization]] | Low-order WFIR filter design via Q-parameterization + frequency warping; 16th order matches 128th FIR at <1kHz | 2016 |
 | [[sources/kuang-2024-lightweight-speech-enhancement-bone-air\|Kuang, Yang & Yang 2024: Lightweight SE Fusing BC/AC]] | DenGCAN: 1.03M params, 0.859 GMACs, 1.870 wb-PESQ improvement on A4BS dataset | 2024 |
 | [[sources/liu-2025-robust-fusion-bc-ac-attention\|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]] | ATFA dual-axis attention + dual-channel mask + Special Training (random modality dropout); 1.6M params; recovers PESQ 1.18→2.54 under AC sensor failure | 2025 |
+| [[sources/zaidel-2026-linearly-constrained-deep-beamformer\|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]] | Fully DNN-based beamformer with adaptive multi-term loss enforcing distortionless and null-steering constraints; outperforms LCMV | 2026-05-26 |
 | [[sources/zhan-2025-deeppem-afc\|Zhan et al. 2025: DeepPEM-AFC]] | Deep learning prediction error method for hearing aid adaptive feedback cancellation | 2025 |
 | [[sources/zhang-2023-hybrid-ahs\|Zhang et al. 2023: Hybrid AHS]] | Hybrid acoustic howling suppression combining Kalman filter and deep learning | 2023 |
 | [[sources/tagliasacchi-2020-seanet\|Tagliasacchi, Li, Misiunas & Roblek 2020: SEANet]] | Multi-modal speech enhancement using accelerometer data; wave-to-wave UNet with adversarial training; 9.6 dB SI-SDRi in mixed-speech scenarios | 2020 |
@@ -584,15 +585,12 @@
 | [[synthesis/adaptive-algorithm-tradeoffs\|Adaptive Algorithm Trade-offs]] | Decision matrix across 6 algorithms: FxLMS, Leaky, Simplified, GMCC, MPC, VSS on performance/robustness/cost | 10+ papers |
 | [[synthesis/application-specific-anc\|Application-Specific ANC]] | Drone, smart glasses, vehicle, selective attenuation — form factor drives architecture, not algorithm | Steiner 2026, Yuan 2026, Yang 2026, Huang 2026 |
 | [[synthesis/ai-driven-anc\|AI-Driven ANC]] | Shift from classical FxLMS to neural-hybrid architectures and generative noise selection | MKAWB86B, XS7Z5XTN, UCJR5KDZ, Z7FUV6LL |
-| [[synthesis/computational-efficiency-evolution\|Computational Efficiency Evolution]] | Fast RLS → FxLMS reductions → GPU DSP → nonlinear filters: 40 years of the shifting bottleneck | Cioffi 1984, Li & Chen 2023, Spanio 2025, Zhao & Chen 2023 |
 | [[synthesis/computational-efficiency-evolution\|Computational Efficiency Evolution]] | ANC 计算复杂度演进 + RNN 内存瓶颈 (BPTT vs FEP) + 2026 效率前沿 | Zucchet 2026, Liang 2026, Kuo 1999 |
-| [[synthesis/impulsive-noise-control\|Impulsive Noise Control]] | Beyond Gaussian: FxLMS/F, FxRLS clipping, MVC vs GMCC, Versoria VSS — 4 robust cost functions | Liu 2024, Zeb 2017, Huang 2017, Tian 2026 |
 | [[synthesis/nonlinear-anc-approaches\|Nonlinear ANC Approaches]] | FLNN, Volterra, Kernel, Spline, Convex Combination — when linear filters aren't enough | Zhao & Zeng 2010, Zhao & Chen 2023, Song & Zhao 2019 |
-| [[synthesis/feedback-anc-filter-design\|Feedback ANC Filter Design]] | MVC, IMC+FxLMS, H∞ robust, constrained LMS, reduced FLNN — stability/robustness/performance triangle | Pawelczyk 1997, Vaudrey 2003, Arablouei 2015, Morari 2002, Zhao & Zeng 2010 |
 | [[synthesis/iir-filter-fitting-frequency-response\|IIR 滤波器拟合频响曲线]] | 向量拟合、最小二乘、输出误差、Hankel-SVD — 从频响测量到状态空间模型 | Liang 2026, Cioffi 1984, Lesniewski, Vaudrey 2003 |
 | [[synthesis/kalman-filter-theory-and-application\|Kalman Filter Theory and Application]] | Comprehensive overview of KF, MCC-KF, and applications in MPC and audio tracking | Welch & Bishop 2006, Chen & Liu 2017, Wills 2008, Liang 2026 |
 | [[synthesis/llm-wiki-best-practices|LLM Wiki Best Practices]] | Comprehensive guide to LLM Wiki architecture, workflows, and maintenance practices | schema/AGENTS.md |
-| [[synthesis/iir-filter-fitting-frequency-response\|IIR Filter Fitting for Frequency Response]] | 向量拟合、SOS 参数化、峰值/谷值滤波器、梯度优化、状态空间辨识、Q&A | Liang 2026, Pawelczyk 1997 |
+| [[synthesis/multi-modal-speech-enhancement\|Multi-Modal Speech Enhancement]] | Multi-modal approaches combining bone conduction, air conduction, IMU for robust speech enhancement | He 2025, Kuang 2024, Wang 2022, Tagliasacchi 2020 |
 | [[synthesis/secondary-path-modeling-evolution|Secondary Path Modeling Evolution]] | 离线→在线→免建模→绕过：四条技术路线的决策矩阵与演进趋势 | Kuo 1999, Benois 2020, Liang 2026, Zhu 2020 |
 
 ---
@@ -615,7 +613,7 @@
 
 ## Statistics
 
-- **Total pages**: 553
+- **Total pages**: 562
 - **Entities**: 237
 - **Concepts**: 205
 - **Sources**: 95
