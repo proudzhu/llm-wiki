@@ -29,6 +29,11 @@ Invoke this skill when the user asks to:
 - Zotero must be running with "Allow other applications" enabled
 - Verify with: `curl -s http://localhost:23119/connector/ping`
 - `mineru-open-api` CLI available for MinerU extraction (`npm install -g mineru-open-api`)
+- **Verify MinerU token is configured** before attempting extraction (avoids 600s timeout on auth failure):
+  ```bash
+  mineru-open-api auth --show
+  ```
+  If no token shown, run `mineru-open-api auth` to configure.
 - `defuddle` CLI available for arXiv HTML extraction (`npm install -g defuddle`)
 
 ## Workflow Steps
@@ -76,10 +81,17 @@ mkdir -p "raw/papers/{slug}"
 New-Item -ItemType Directory -Force -Path "raw/papers/{slug}" | Out-Null
 ```
 
-Copy PDF from Zotero storage (`C:\Users\proud\Zotero\storage\{PDF_KEY}\`):
+Copy PDF from Zotero storage (`C:\Users\proud\Zotero\storage\{PDF_KEY}\`). **Zotero filenames often contain non-ASCII characters (umlauts, CJK, etc.) that break bash `cp`. Use Python for reliable cross-platform copying:**
 ```bash
-ls "C:/Users/proud/Zotero/storage/{PDF_KEY}/"*.pdf
-cp "C:/Users/proud/Zotero/storage/{PDF_KEY}/FILENAME" "raw/papers/{slug}/paper.pdf"
+python -c "
+import shutil, glob
+files = glob.glob('C:/Users/proud/Zotero/storage/{PDF_KEY}/*.pdf')
+if files:
+    shutil.copy2(files[0], 'raw/papers/{slug}/paper.pdf')
+    print('Copied:', files[0])
+else:
+    print('No PDF found')
+"
 ```
 ```powershell
 $pdf = Get-ChildItem "C:\Users\proud\Zotero\storage\{PDF_KEY}\" -Filter "*.pdf" | Select-Object -First 1
@@ -144,8 +156,7 @@ mineru-open-api extract "raw/papers/{slug}/paper.pdf" -o "raw/papers/{slug}/full
 **Post-processing**: MinerU saves images in an `images/` subdirectory. Rename and update references:
 ```bash
 mv "raw/papers/{slug}/images" "raw/papers/{slug}/figures"
-# sed is often unavailable on Windows — use Python as a cross-platform fallback:
-python -c "content = open('raw/papers/{slug}/full-text.md', encoding='utf-8').read(); content = content.replace('images/', 'figures/'); open('raw/papers/{slug}/full-text.md', 'w', encoding='utf-8').write(content)"
+sed -i 's|images/|figures/|g' "raw/papers/{slug}/full-text.md"
 ```
 ```powershell
 Move-Item "raw/papers/{slug}/images" "raw/papers/{slug}/figures" -Force
@@ -394,7 +405,11 @@ If the command fails or exits with warnings (broken links, missing pages), resol
 ### Step 13: Commit Changes
 
 ```bash
-git add raw/papers/{slug}/ wiki/sources/{slug}.md wiki/entities/ wiki/concepts/ wiki/synthesis/ wiki/index.md wiki/log.md wiki/sources/index.md wiki/entities/index.md wiki/concepts/index.md
+git add raw/papers/{slug}/ wiki/sources/{slug}.md wiki/index.md wiki/log.md wiki/sources/index.md
+# Add new/modified entity, concept, and synthesis files explicitly (avoid broad dir adds):
+git add wiki/entities/{author1}.md wiki/entities/{author2}.md wiki/concepts/{concept1}.md wiki/concepts/{concept2}.md
+# Then update subdirectory indexes:
+git add wiki/entities/index.md wiki/concepts/index.md
 git status --short   # verify no PDF or unrelated files staged
 git commit -m "ingest: Short Title (Author Year)"
 ```
