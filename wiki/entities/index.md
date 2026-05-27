@@ -36,6 +36,7 @@
 | [[entities/yaqi-zhu\|Yaqi Zhu]] | Researcher specializing in sound field control and robust PSZ optimization | 2026-04-19 |
 | [[entities/lisyarus\|lisyarus]] | Software engineer and graphics/math blogger | 2026-04-18 |
 | [[entities/andreas-schwarz\|Andreas Schwarz]] | FAU — spatial coherence models for dereverberation and robust ASR | 2026-04-25 |
+| [[entities/walter-kellermann\|Walter Kellermann]] | FAU — professor, CDR-based dereverberation, multichannel signal processing, IEEE Fellow | 2026-05-27 |
 | [[entities/kashu-yamazaki\|Kashu Yamazaki]] | U. Arkansas at Little Rock — SNN review, computer vision, robotics | 2026-04-25 |
 | [[entities/ke-tan\|Ke Tan]] | Ohio State University — CRN for real-time speech enhancement, gated residual networks, complex spectral mapping | 2026-05-25 |
 | [[entities/viet-khoa-vo-ho\|Viet-Khoa Vo-Ho]] | U. Arkansas at Little Rock — co-author on SNN review | 2026-04-25 |

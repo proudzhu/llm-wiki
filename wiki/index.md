@@ -42,6 +42,7 @@
 | [[entities/yaqi-zhu\|Yaqi Zhu]] | Researcher specializing in sound field control and robust PSZ optimization | 2026-04-19 |
 | [[entities/lisyarus\|lisyarus]] | Software engineer and graphics/math blogger | 2026-04-18 |
 | [[entities/andreas-schwarz\|Andreas Schwarz]] | FAU — spatial coherence models for dereverberation and robust ASR | 2026-04-25 |
+| [[entities/walter-kellermann\|Walter Kellermann]] | FAU — professor, CDR-based dereverberation, multichannel signal processing, IEEE Fellow | 2026-05-27 |
 | [[entities/kashu-yamazaki\|Kashu Yamazaki]] | U. Arkansas at Little Rock — SNN review, computer vision, robotics | 2026-04-25 |
 | [[entities/ke-tan\|Ke Tan]] | Ohio State University — CRN for real-time speech enhancement | 2026-05-25 |
 | [[entities/viet-khoa-vo-ho\|Viet-Khoa Vo-Ho]] | U. Arkansas at Little Rock — co-author on SNN review | 2026-04-25 |
@@ -320,6 +321,8 @@
 | [[concepts/adaptive-filtering\|Adaptive Filtering]] | Placeholder for adaptive filtering fundamentals | 2026-04-18 |
 | [[concepts/numerical-stability\|Numerical Stability]] | Placeholder for numerical stability fundamentals | 2026-04-18 |
 | [[concepts/spatial-coherence\|Spatial Coherence]] | Multi-channel signal correlation for separating coherent sources from diffuse sound fields | 2026-04-25 |
+| [[concepts/coherent-to-diffuse-power-ratio\|Coherent-to-Diffuse Power Ratio (CDR)]] | Power ratio between directional and diffuse signal components; estimated from spatial coherence for dereverberation | 2026-05-27 |
+| [[concepts/dereverberation\|Dereverberation]] | Processing to reduce late reverberation in speech; CDR-based, MCLP, and deep learning approaches | 2026-05-27 |
 | [[concepts/spiking-neural-networks\|Spiking Neural Networks]] | Third-generation neural networks using spike-based computation; energy-efficient, temporally coded | 2026-04-25 |
 | [[concepts/neuromorphic-computing\|Neuromorphic Computing]] | Brain-inspired hardware (TrueNorth, Loihi, SpiNNaker) for energy-efficient SNN deployment | 2026-04-25 |
 | [[concepts/spike-timing-dependent-plasticity\|Spike-Timing-Dependent Plasticity]] | Unsupervised Hebbian learning rule based on pre/post-spike timing; key SNN training mechanism | 2026-04-25 |
@@ -514,6 +517,7 @@
 | [[sources/wang-2024-metric-learning-virtual-sensing\|Wang 2024: Transferable Selective Virtual Sensing]] | Metric learning + 13K-param 1D CNN for cross-environment VS; 92.6% accuracy on unseen classes, 6x less complex than full CNN | 2026-04-18 |
 | [[sources/karpathy-llm-os\|Karpathy: LLM OS]] | The LLM as an OS kernel orchestrating tools, memory, and reasoning | 2026-04-18 |
 | [[sources/jensen-huang-nvidia-moat\|Jensen Huang: Will Nvidia's Moat Persist?]] | Discussion on the transformation of electrons to tokens, AI agents as tool multipliers, and infrastructure moats | 2026-04-19 |
+| [[sources/schwarz-2015-coherent-to-diffuse-power-ratio\|Schwarz & Kellermann 2015: CDR Estimation for Dereverberation]] | Novel unbiased CDR estimators and DOA-independent dereverberation system; best ASR improvement across all methods evaluated | 2015 |
 | [[sources/schwarz-2019-dereverberation-spatial-coherence\|Schwarz 2019: Dereverberation and Robust Speech Recognition]] | Doctoral dissertation on spatial coherence models for dereverberation and robust ASR | 2019 |
 | [[sources/yamazaki-2022-spiking-nn-review\|Yamazaki 2022: Spiking Neural Networks Review]] | Comprehensive review: biological neurons, SNN models, STDP, encoding, CV/robotics applications | 2022 |
 | [[sources/fareedha-2026-joint-deep-spe-anc\|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]] | End-to-end DeepSPE + ANC-Net: joint secondary path estimation and adaptive control via binary weight filter selection | 2026 |
@@ -608,9 +612,9 @@
 ## Statistics
 
 - **Total pages**: 553
-- **Entities**: 234
-- **Concepts**: 202
-- **Sources**: 93
+- **Entities**: 235
+- **Concepts**: 204
+- **Sources**: 94
 - **Synthesis**: 19
 - **Queries**: 6
 - **Last updated**: 2026-05-27

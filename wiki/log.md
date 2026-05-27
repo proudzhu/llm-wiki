@@ -2173,3 +2173,26 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 4 entity rows
   - `wiki/concepts/index.md` — added 1 concept row
+
+---
+
+## [2026-05-27] ingest | Coherent-to-Diffuse Power Ratio Estimation for Dereverberation (Schwarz & Kellermann 2015)
+
+- **Source**: `raw/papers/schwarz-2015-coherent-to-diffuse-power-ratio/full-text.md` (Zotero: AT69JCEX)
+- **Authors**: Andreas Schwarz, Walter Kellermann
+- **Published**: IEEE/ACM Transactions on Audio, Speech, and Language Processing, Vol. 23, No. 6, June 2015, pp. 1006–1018
+- **DOI**: 10.1109/TASLP.2015.2418571
+- **Summary**: Comprehensive investigation of CDR estimation from spatial coherence; proposed novel unbiased CDR estimators and a DOA-independent dereverberation system
+- **Pages created**:
+  - `raw/papers/schwarz-2015-coherent-to-diffuse-power-ratio/full-text.md` — extracted text from Zotero PDF via MinerU
+  - `wiki/sources/schwarz-2015-coherent-to-diffuse-power-ratio.md`
+  - `wiki/entities/walter-kellermann.md`
+  - `wiki/concepts/coherent-to-diffuse-power-ratio.md`
+  - `wiki/concepts/dereverberation.md`
+- **Pages updated**:
+  - `wiki/entities/andreas-schwarz.md` — added this paper to sources and related pages
+  - `wiki/concepts/spatial-coherence.md` — added this paper to sources and key literature
+  - `wiki/index.md` — added 1 entity, 2 concepts, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 1 entity row
+  - `wiki/concepts/index.md` — added 2 concept rows

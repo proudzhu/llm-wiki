@@ -1,8 +1,9 @@
 ---
 type: entity
 created: 2026-04-25
-updated: 2026-04-25
+updated: 2026-05-27
 sources:
+  - raw/papers/schwarz-2015-coherent-to-diffuse-power-ratio/full-text.md
 tags:
   - researcher
   - dereverberation
@@ -33,4 +34,5 @@ Researcher in dereverberation and robust speech recognition using spatial cohere
 
 ## Related Pages
 
+- [[sources/schwarz-2015-coherent-to-diffuse-power-ratio|Schwarz & Kellermann 2015: CDR Estimation for Dereverberation]] — foundational CDR estimation paper with novel unbiased estimators
 - [[sources/schwarz-2019-dereverberation-spatial-coherence|Schwarz 2019: Dereverberation and Robust Speech Recognition]]

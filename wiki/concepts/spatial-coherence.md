@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-04-30
+updated: 2026-05-27
 sources:
+  - raw/papers/schwarz-2015-coherent-to-diffuse-power-ratio/full-text.md
 tags:
   - signal-processing
   - multichannel
@@ -56,5 +57,6 @@ CDR > 0 表示相干分量（直达声）占主导，CDR < 0 表示扩散分量�
 
 ## 关键文献
 
+- [[sources/schwarz-2015-coherent-to-diffuse-power-ratio|Schwarz & Kellermann 2015]] — CDR 估计的奠基性工作，提出无偏 CDR 估计器和 DOA 无关去混响系统
 - [[sources/schwarz-2019-dereverberation-spatial-coherence|Schwarz 2019]] — 博士论文，系统研究空间相干性模型在去混响和 ASR 中的应用
 - [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026]] — 利用扩散声场相干矩阵 $\Gamma_d$ 作为预定义基，通过方差比估计重建 SCM
