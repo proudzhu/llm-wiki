@@ -21,98 +21,132 @@ Read `schema/AGENTS.md` to understand the lint workflow requirements (contradict
 
 ### Step 2: Count Actual Files
 
-Use PowerShell to count actual files in each directory:
+Use Python to count actual files in each directory:
 
-```powershell
-# Count actual files (excluding index.md)
-$entities = (Get-ChildItem "wiki/entities/*.md" -Exclude "index.md").Count
-$concepts = (Get-ChildItem "wiki/concepts/*.md" -Exclude "index.md").Count
-$sources = (Get-ChildItem "wiki/sources/*.md" -Exclude "index.md").Count
-$synthesis = (Get-ChildItem "wiki/synthesis/*.md" -Exclude "index.md").Count
-$queries = (Get-ChildItem "wiki/queries/*.md" -Exclude "index.md").Count
-$total = $entities + $concepts + $sources + $synthesis + $queries
-Write-Output "Actual: ${entities} entities, ${concepts} concepts, ${sources} sources, ${synthesis} synthesis, ${queries} queries = ${total} total"
+```bash
+python -c "
+import os
+dirs = {'entities':0,'concepts':0,'sources':0,'synthesis':0,'queries':0}
+for d in dirs:
+    count = len([f for f in os.listdir(f'wiki/{d}') if f.endswith('.md') and f != 'index.md'])
+    dirs[d] = count
+total = sum(dirs.values())
+print(f'Actual: {dirs[\"entities\"]} entities, {dirs[\"concepts\"]} concepts, {dirs[\"sources\"]} sources, {dirs[\"synthesis\"]} synthesis, {dirs[\"queries\"]} queries = {total} total')
+"
 ```
-
-> ⚠️ **Windows/cmd compatibility**: All PowerShell commands below must be run via `pwsh -NoProfile -Command "..."` since the default shell is cmd. Use forward slashes in paths to avoid escaping issues.
 
 ### Step 3: Count Index Rows
 
-Count rows in each index file:
+Count rows in each index file using Python (reliable regex across all platforms):
 
-```powershell
-# Count index rows
-$eidx = (Select-String -Path "wiki/index.md" -Pattern '^\| \[\[entities/' | Measure-Object).Count
-$cidx = (Select-String -Path "wiki/index.md" -Pattern '^\| \[\[concepts/' | Measure-Object).Count
-$sidx = (Select-String -Path "wiki/index.md" -Pattern '^\| \[\[sources/' | Measure-Object).Count
-Write-Output "Index: ${eidx} entities, ${cidx} concepts, ${sidx} sources"
-
-# Count subdirectory index rows
-$eidx2 = (Select-String -Path "wiki/entities/index.md" -Pattern '^\| \[\[entities/' | Measure-Object).Count
-$cidx2 = (Select-String -Path "wiki/concepts/index.md" -Pattern '^\| \[\[concepts/' | Measure-Object).Count
-$sidx2 = (Select-String -Path "wiki/sources/index.md" -Pattern '^\| \[\[sources/' | Measure-Object).Count
-Write-Output "Sub-index: ${eidx2} entities, ${cidx2} concepts, ${sidx2} sources"
+```bash
+python -c "
+import re
+with open('wiki/index.md') as f:
+    content = f.read()
+for name in ('entities','concepts','sources','synthesis','queries'):
+    count = len(re.findall(rf'^\\| \\[\\[{name}/', content, re.MULTILINE))
+    print(f'Main index {name}: {count}')
+"
 ```
 
-### Step 4: Identify Missing Entries
+Also check subdirectory indexes:
 
-Compare actual files against index entries to find missing ones. **Use Python for regex matching** (PowerShell's `Select-String` has trouble with `|` inside character classes like `[^\|\\]`):
-
-```powershell
-# Dump actual file names to temp files
-Get-ChildItem "wiki/entities/*.md" -Exclude "index.md" | Select-Object -ExpandProperty BaseName | Sort-Object > tmp_actual_entities.txt
-Get-ChildItem "wiki/concepts/*.md" -Exclude "index.md" | Select-Object -ExpandProperty BaseName | Sort-Object > tmp_actual_concepts.txt
-Get-ChildItem "wiki/sources/*.md" -Exclude "index.md" | Select-Object -ExpandProperty BaseName | Sort-Object > tmp_actual_sources.txt
+```bash
+python -c "
+import re
+for name in ('entities','concepts','sources','synthesis','queries'):
+    with open(f'wiki/{name}/index.md') as f:
+        count = len(re.findall(r'^\\| \\[\\[' + name + r'/', f.read(), re.MULTILINE))
+    print(f'Sub-index {name}: {count}')
+"
 ```
 
-Then run the comparison in Python:
+### Step 4: Identify Missing & Phantom Entries
+
+Compare actual files against index entries to find both **missing entries** (file exists but not in index) and **phantom entries** (index row with no file). Also check for **duplicate rows** (same slug multiple times):
 
 ```bash
 python -c "
 import os, re
-for name in ('entities','concepts','sources'):
-    actual = set(open(f'tmp_actual_{name}.txt').read().splitlines())
+from collections import Counter
+
+for name in ('entities','concepts','sources','synthesis'):
+    actual = set(os.path.splitext(f)[0] for f in os.listdir(f'wiki/{name}') if f.endswith('.md') and f != 'index.md')
     indexed = set()
+    indexed_list = []
     with open('wiki/index.md') as f:
         for line in f:
-            m = re.match(r'^\| \[\[' + name + r'/([^|\\\\]+)', line)
-            if m: indexed.add(m.group(1))
+            m = re.match(r'^\\| \\[\\[' + name + r'/([^|\\\\]+)', line)
+            if m:
+                indexed.add(m.group(1))
+                indexed_list.append(m.group(1))
+    
     missing = actual - indexed
+    phantom = indexed - actual
+    dupes = {k:v for k,v in Counter(indexed_list).items() if v > 1}
+    
     print(f'{name}: {len(actual)} files, {len(indexed)} indexed')
     if missing:
-        for x in sorted(missing): print(f'  MISSING: {x}')
+        print(f'  MISSING from index ({len(missing)}):')
+        for x in sorted(missing): print(f'    {x}')
+    if phantom:
+        print(f'  PHANTOM in index ({len(phantom)}):')
+        for x in sorted(phantom): print(f'    {x}')
+    if dupes:
+        print(f'  DUPLICATE rows ({len(dupes)}):')
+        for x, c in dupes.items(): print(f'    {x} appears {c}x')
 "
 ```
 
-Clean up temp files afterward: `Remove-Item tmp_actual_*.txt`
+Also check subdirectory indexes for consistency:
+
+```bash
+for name in entities concepts sources synthesis queries; do
+  actual=$(ls wiki/$name/*.md 2>/dev/null | grep -v index.md | wc -l)
+  indexed=$(grep -c '^| \[\[' wiki/$name/index.md 2>/dev/null || echo 0)
+  echo "Sub-index $name: $indexed indexed vs $actual actual"
+done
+```
 
 ### Step 5: Check for Broken Wikilinks
 
-Search for wikilinks that reference non-existent files. Use Python for reliable regex:
+Search for wikilinks that reference non-existent files. **Important:** use `os.path.normpath()` + `os.path.exists()` to correctly resolve `../` relative paths (which are convention violations but not actually broken):
 
 ```bash
 python -c "
-import glob, re
-# Collect all wikilinks from wiki content
-wikilinks = set()
+import glob, os, re
+
+wikilinks = {}
 for f in glob.glob('wiki/**/*.md', recursive=True):
     with open(f, encoding='utf-8') as fh:
         for m in re.finditer(r'\[\[([^\]|]+)(?:\|[^\]]+)?\]\]', fh.read()):
-            wikilinks.add(m.group(1))
+            link = m.group(1)
+            if link.strip() == '...':  # skip placeholder in log.md
+                continue
+            if link not in wikilinks:
+                wikilinks[link] = []
+            wikilinks[link].append(os.path.relpath(f))
 
-# Check each link target exists
 broken = []
 for link in sorted(wikilinks):
-    target = f'wiki/{link}.md'
-    if not glob.glob(target):
+    target = os.path.normpath(f'wiki/{link}.md')
+    if not os.path.exists(target):
         broken.append(link)
 
-if broken:
-    for b in broken: print(f'BROKEN: {b}')
-else:
-    print('No broken wikilinks found')
+print(f'Total wikilinks found: {len(wikilinks)}')
+print(f'Broken wikilinks: {len(broken)}')
+for b in broken[:20]:
+    sources = wikilinks.get(b, [])
+    print(f'  BROKEN: {b}')
+    for s in sources[:2]:
+        print(f'    from: {s}')
+if len(broken) > 20:
+    print(f'  ... and {len(broken)-20} more')
 "
 ```
+
+**Note:** Wikilinks using `../` prefixes (e.g., `[[../concepts/foo]]`) violate the vault-absolute convention but resolve correctly in MkDocs builds. They are not broken links — only links whose normalized path doesn't exist on disk are truly broken.
 
 ### Step 6: Check for Orphan Pages
 
@@ -192,16 +226,19 @@ After running the script, use the output to:
 
 ### Step 9: Log Results
 
-Append lint results to `wiki/log.md`:
+Append lint results to `wiki/log.md`. Include the `---` separator before the entry (consistent with existing log format):
 
 ```markdown
+---
+
 ## [YYYY-MM-DD] lint | Health check
 
-- **Index consistency**: [summary of findings]
-- **Broken links**: [count and details]
-- **Orphan pages**: [count]
-- **Statistics**: [current vs actual]
-- **Actions taken**: [rebuild details if applicable]
+- **Index consistency**: [summary of findings — which categories match and which don't]
+- **Broken links**: [count of truly broken links; note convention-violating `../` links separately]
+- **Duplicate entries**: [count and which slugs]
+- **Orphan pages**: [count per category]
+- **Statistics**: [stated vs actual, whether Total pages is correct]
+- **Actions taken**: [rebuild details, entries added/removed, stats corrected]
 ```
 
 ## Common Issues
