@@ -2219,3 +2219,35 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 2 entity rows
   - `wiki/concepts/index.md` — added 1 concept row
+
+
+---
+
+## [2026-05-27] lint | Health check
+
+- **Index consistency**: All 5 categories match (entities: 237, concepts: 205, sources: 95, synthesis: 19, queries: 6). No duplicates remain.
+- **Broken links**: 0 build-blocking broken wikilinks. ~827 pre-existing \`../\`-prefixed links are convention violations (not build failures — they resolve correctly in MkDocs).
+- **Orphan pages**: 0 concept orphans, 5 source orphans (not referenced from other content pages), 20 entity orphans (linked only from indexes — expected).
+- **Statistics**: Total pages corrected from 553 to 562.
+- **Actions taken**:
+  - Added missing source entry for zaidel-2026 to main index
+  - Added missing synthesis entries for iir-filter-fitting-frequency-response and multi-modal-speech-enhancement
+  - Removed 4 duplicate synthesis rows (impulsive-noise-control, computational-efficiency-evolution, feedback-anc-filter-design, iir-filter-fitting)
+  - Added multi-modal-speech-enhancement to synthesis subdirectory index
+  - Updated Total pages statistic from 553 to 562
+
+
+---
+
+## [2026-05-27] lint | Health check
+
+- **Index consistency**: All 5 categories match (entities: 237, concepts: 205, sources: 95, synthesis: 19, queries: 6). No duplicates remain.
+- **Broken links**: 0 build-blocking broken wikilinks. Pre-existing ../-prefixed links are convention violations (not build failures).
+- **Orphan pages**: 0 concept orphans, 5 source orphans, 20 entity orphans (expected — mostly linked from indexes).
+- **Statistics**: Total pages corrected from 553 to 562.
+- **Actions taken**:
+  - Added missing source entry for zaidel-2026 to main index
+  - Added missing synthesis entries for iir-filter-fitting-frequency-response and multi-modal-speech-enhancement
+  - Removed 4 duplicate synthesis rows
+  - Added multi-modal-speech-enhancement to synthesis subdirectory index
+  - Updated Total pages statistic from 553 to 562
