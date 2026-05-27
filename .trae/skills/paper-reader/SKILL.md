@@ -7,17 +7,6 @@ description: "Full paper ingestion workflow from Zotero to wiki: search, extract
 
 End-to-end workflow for ingesting academic papers from Zotero into the LLM Wiki knowledge base.
 
-## Shell Notes
-
-The harness runs bash by default. For PowerShell commands, wrap with `powershell -Command '...'` from bash. This skill documents both variants where they differ — choose whichever works in your environment.
-
-| Operation | Bash | PowerShell (via `powershell -Command`) |
-|-----------|------|----------------------------------------|
-| Delete file | `rm -f path` | `Remove-Item path -ErrorAction SilentlyContinue` |
-| Create dir | `mkdir -p path` | `New-Item -ItemType Directory -Force -Path path \| Out-Null` |
-| Move dir | `mv src dst` | `Move-Item src dst -Force` |
-| Read file bytes | `head -c N path` | `[System.IO.File]::ReadAllBytes('path')[0..N]` |
-
 ## When to Invoke
 
 Invoke this skill when the user asks to:
@@ -25,6 +14,15 @@ Invoke this skill when the user asks to:
 - "re-ingest paper X from Zotero"
 - "read paper X from Zotero"
 - Add a paper from their Zotero library to the wiki
+
+## When NOT to Invoke
+
+- **Paper is already in the wiki and up-to-date** — Check `wiki/sources/` and `wiki/log.md` first. If the paper was recently ingested and nothing changed, skip.
+- **User just wants a quick summary** — For a skim or TL;DR, read the existing wiki source page or use the abstract directly. Full ingestion is only warranted for deep analysis.
+- **Zotero is not running or unreachable** — The workflow depends on Zotero's local API. Verify first with `curl -s http://localhost:23119/connector/ping`.
+- **Paper is not in the user's Zotero library** — This skill only ingests from Zotero. For external papers, manually download the PDF and use a different workflow.
+- **Source is not a PDF/academic paper** — This skill is designed for scholarly articles. Web pages, blog posts, and informal documents should use the standard raw article workflow instead.
+- **Re-ingestion of an identical version** — Only re-ingest if the source PDF was updated (e.g., camera-ready replaces preprint) or the existing wiki page is significantly incomplete.
 
 ## Prerequisites
 
