@@ -10,3 +10,4 @@
 | [[queries/open-ear-anc-smart-glasses\|Open-Ear Smart Glasses ANC]] | CMU 首个开放式眼镜 ANC 系统：虚拟耳内感知 + 双流水线 DSP，11.2 dB 降噪 | 2026-04-11 |
 | [[queries/how-ai-impacts-coding\|How AI Impacts Coding]] | RCT evidence: AI +80% productivity on skilled tasks but −17% mastery when learning new skills; 6 interaction patterns | 2026-04-11 |
 | [[queries/adaptive-filtering-variable-step-size-algorithms\|Adaptive Filtering Variable Step Size]] | 9 篇 Zotero 论文综述：Versiera/Versoria、噪声功率估计、误差自相关、动量扰动、凸组合 FxLMS/F | 2026-04-12 |
+| [[queries/far-field-speech-enhancement\|Far-Field Speech Enhancement]] | 综合回答：波束形成、MWF、去混响、BSS、深度学习等方法体系、最新论文进展与开放问题 | 2026-05-26 |

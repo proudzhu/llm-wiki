@@ -2145,3 +2145,15 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/entities/index.md` — added 1 entity row
   - `wiki/concepts/index.md` — added 1 concept row
   - `wiki/sources/index.md` — added 1 source row
+
+---
+
+## [2026-05-26] query | Far-Field Speech Enhancement
+
+- **Answer saved to**: `wiki/queries/far-field-speech-enhancement.md`
+- **Summary**: 综合 wiki 知识库回答"远场语音增强"查询，涵盖问题定义、方法体系（波束形成/MWF/去混响/BSS/深度学习）、最新论文进展（CTRnet+PuLSS、Neural VSLF、R-MWF 等）、算法对比与开放问题
+- **Pages created**:
+  - `wiki/queries/far-field-speech-enhancement.md` — query page
+- **Pages updated**:
+  - `wiki/queries/index.md` — added 1 query row
+  - `wiki/index.md` — added 1 query row, updated statistics
