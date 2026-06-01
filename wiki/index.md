@@ -613,10 +613,10 @@
 
 ## Statistics
 
-- **Total pages**: 562
-- **Entities**: 237
-- **Concepts**: 205
-- **Sources**: 95
+- **Total pages**: 568
+- **Entities**: 238
+- **Concepts**: 209
+- **Sources**: 96
 - **Synthesis**: 19
 - **Queries**: 6
-- **Last updated**: 2026-05-27
+- **Last updated**: 2026-06-01

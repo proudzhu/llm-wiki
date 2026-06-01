@@ -99,4 +99,5 @@
 | [[sources/zaidel-2026-linearly-constrained-deep-beamformer\|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]] | Fully DNN-based beamformer with adaptive multi-term loss enforcing distortionless and null-steering constraints; outperforms LCMV | 2026-05-26 |
 | [[sources/martin-2001-noise-psd-estimation-optimal-smoothing\|Martin 2001: Noise PSD Estimation via Optimal Smoothing and Minimum Statistics]] | VAD-free noise PSD estimation via spectral minima tracking; optimal smoothing and bias compensation | 2001 |
 | [[sources/shi-2020-active-noise-control-casing-virtual-sensing\|Shi, Jia, Xie & Li 2020: ANC Casing with RP-VS]] | Relative Path based Virtual Sensing (RP-VS) method unifying AF-VS and RM-VS; ANC casing prototype validation with (1,4,4) configuration | 2020 |
+| [[sources/wang-2018-supervised-speech-separation-deep-learning-overview\|Wang & Chen 2018: Supervised Speech Separation Based on Deep Learning: An Overview]] | Comprehensive survey of DNN-based supervised speech separation: learning machines, training targets, features, monaural and array algorithms, and generalization | 2018 |
 

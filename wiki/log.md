@@ -2251,3 +2251,27 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - Removed 4 duplicate synthesis rows
   - Added multi-modal-speech-enhancement to synthesis subdirectory index
   - Updated Total pages statistic from 553 to 562
+
+---
+
+## [2026-06-01] ingest | Supervised Speech Separation Based on Deep Learning: An Overview (Wang & Chen 2018)
+
+- **Source**: `raw/papers/wang-2018-supervised-speech-separation-deep-learning-overview/full-text.md` (Zotero: D79MZFJA)
+- **Authors**: DeLiang Wang, Jitong Chen
+- **Published**: IEEE/ACM Trans. Audio, Speech, Lang. Process. 2018, Vol. 26, No. 10, pp. 1702–1726
+- **DOI**: 10.1109/TASLP.2018.2842159
+- **Summary**: Comprehensive survey of DNN-based supervised speech separation covering learning machines, training targets, acoustic features, monaural and array algorithms, and generalization
+- **Pages created**:
+  - `raw/papers/wang-2018-supervised-speech-separation-deep-learning-overview/full-text.md` — extracted text from Zotero PDF via MinerU
+  - `wiki/sources/wang-2018-supervised-speech-separation-deep-learning-overview.md`
+  - `wiki/entities/jitong-chen.md`
+  - `wiki/concepts/ideal-binary-mask.md`
+  - `wiki/concepts/ideal-ratio-mask.md`
+  - `wiki/concepts/permutation-invariant-training.md`
+  - `wiki/concepts/deep-clustering-speech-separation.md`
+- **Pages updated**:
+  - `wiki/entities/deliang-wang.md` — added survey contribution and this paper
+  - `wiki/index.md` — added 1 entity, 4 concepts, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 1 entity row
+  - `wiki/concepts/index.md` — added 4 concept rows

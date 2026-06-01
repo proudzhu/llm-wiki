@@ -209,4 +209,8 @@
 | [[concepts/relative-transfer-function\|Relative Transfer Function (RTF)]] | Acoustic propagation relative to reference microphone; estimated via covariance whitening for beamforming | 2026-05-26 |
 | [[concepts/minimum-statistics\|Minimum Statistics]] | VAD-free noise PSD estimation via optimal smoothing and spectral minima tracking; bias compensation for correlated PSD estimates | 2026-05-26 |
 | [[concepts/relative-path-virtual-sensing\|Relative Path Virtual Sensing]] | VS method estimating disturbance + anti-noise via relative primary/secondary path models; unifies AF-VS and RM-VS | 2026-05-27 |
+| [[concepts/ideal-binary-mask\|Ideal Binary Mask (IBM)]] | Binary T-F mask training target for supervised speech separation; labels T-F units as speech- or noise-dominated | 2026-06-01 |
+| [[concepts/ideal-ratio-mask\|Ideal Ratio Mask (IRM)]] | Soft T-F mask training target representing speech energy proportion per unit; preferred target for separation quality | 2026-06-01 |
+| [[concepts/permutation-invariant-training\|Permutation Invariant Training (PIT)]] | Training strategy resolving output-speaker ambiguity by minimizing over all output permutations; enables speaker-independent separation | 2026-06-01 |
+| [[concepts/deep-clustering-speech-separation\|Deep Clustering for Speech Separation]] | DNN-based embedding learning + K-means clustering of T-F units for speaker-independent multi-talker separation | 2026-06-01 |
 
