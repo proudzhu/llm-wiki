@@ -249,6 +249,12 @@
 | [[entities/huiyong-li\|Huiyong Li]] | UESTC — active noise control, signal processing, virtual sensing | 2026-05-27 |
 | [[entities/haonan-dong\|Haonan Dong]] | Waseda University — SR-SwIVA-ISS, switching IVA, iterative source steering | 2026-06-04 |
 | [[entities/xuemai-xie\|Xuemai Xie]] | Waseda University — blind source separation, speech separation | 2026-06-04 |
+| [[entities/evgenii-indenbom\|Evgenii Indenbom]] | Microsoft — DeepVQE joint AEC/NS/DR, cross-attention alignment | 2026-06-06 |
+| [[entities/nicolae-catalin-ristea\|Nicolae-Catalin Ristea]] | Microsoft — DeepVQE joint AEC/NS/DR | 2026-06-06 |
+| [[entities/ando-saabas\|Ando Saabas]] | Microsoft — DeepVQE, AEC-MOS metric | 2026-06-06 |
+| [[entities/tanel-parnamaa\|Tanel Parnamaa]] | Microsoft — DeepVQE joint AEC/NS/DR | 2026-06-06 |
+| [[entities/jegor-guzvin\|Jegor Guzvin]] | Microsoft — DeepVQE, cross-attention alignment | 2026-06-06 |
+| [[entities/ross-cutler\|Ross Cutler]] | Microsoft — DeepVQE, ICASSP AEC/DNS challenges, DNSMOS | 2026-06-06 |
 
 ---
 
@@ -466,6 +472,10 @@
 | [[concepts/switching-independent-vector-analysis\|Switching Independent Vector Analysis]] | IVA extension using multiple demixing matrices with switching mechanism for time-varying acoustic conditions | 2026-06-04 |
 | [[concepts/iterative-source-steering\|Iterative Source Steering]] | Rank-one update for IVA without matrix inversions; 5–7× faster than IP updates | 2026-06-04 |
 | [[concepts/spatial-regularization\|Spatial Regularization]] | DOA-based regularization for BSS to resolve permutation ambiguity and improve convergence | 2026-06-04 |
+| [[concepts/acoustic-echo-cancellation\|Acoustic Echo Cancellation]] | Removing acoustic echo from microphone signals using adaptive filtering or deep learning | 2026-06-06 |
+| [[concepts/cross-attention-alignment\|Cross-Attention Alignment]] | Soft-aligning microphone and far-end signals in feature space for AEC | 2026-06-06 |
+| [[concepts/complex-convolving-mask\|Complex Convolving Mask]] | Time-frequency varying complex filter for speech enhancement using 120° weight components | 2026-06-06 |
+| [[concepts/sub-pixel-convolution\|Sub-Pixel Convolution]] | Learnable upsampling method for decoder architectures; factor-2 frequency-axis upsampling | 2026-06-06 |
 
 ---
 
@@ -571,6 +581,8 @@
 | [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement\|Tan & Wang 2018: CRN for Real-Time Speech Enhancement]] | CRN combining CED + LSTM with causal convolutions for noise- and speaker-independent monaural speech enhancement; 17.58M params | 2018 |
 | [[sources/shi-2020-active-noise-control-casing-virtual-sensing\|Shi, Jia, Xie & Li 2020: ANC Casing with RP-VS]] | Relative Path based Virtual Sensing (RP-VS) unifies AF-VS and RM-VS; ANC casing validation with (1,4,4) MCFFANC | 2020 |
 | [[sources/dong-2026-spatially-regularized-switching-iva\|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]] | SR-SwIVA-ISS: ISS rank-one update replaces IP in spatially regularized switching IVA; 5.5–7× speedup, comparable separation | 2026 |
+| [[sources/indenbom-2023-deepvqe\|Indenbom et al. 2023: DeepVQE]] | Real-time joint AEC/NS/DR with cross-attention alignment and CCM; SOTA on ICASSP 2023 AEC and DNS challenges | 2023 |
+
 ---
 
 ## Synthesis
@@ -619,10 +631,10 @@
 
 ## Statistics
 
-- **Total pages**: 574
-- **Entities**: 240
-- **Concepts**: 212
-- **Sources**: 97
+- **Total pages**: 585
+- **Entities**: 246
+- **Concepts**: 216
+- **Sources**: 98
 - **Synthesis**: 19
 - **Queries**: 6
-- **Last updated**: 2026-06-04
+- **Last updated**: 2026-06-06

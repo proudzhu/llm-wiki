@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-04-30
+updated: 2026-06-06
 tags:
   - speech-enhancement
   - multi-channel
@@ -28,6 +28,7 @@ tags:
 - **GEV Beamformer**: Generalized Eigenvalue Decomposition-based beamformer
 - **Variable Span Linear Filter (VSLF)**: Generalized framework with controllable tradeoff
 - **SCM Reconstruction-Based MWF (R-MWF)**: Reconstructs SCM from variance ratios and predefined coherence matrices; lightweight online algorithm
+- **Joint AEC+NS+DR (DeepVQE)**: Unified model with cross-attention alignment and complex convolving mask for simultaneous echo/noise/reverb removal
 
 ## Related Concepts
 
@@ -38,6 +39,8 @@ tags:
 - [[concepts/variable-span-linear-filter|Variable Span Linear Filter]]
 - [[concepts/virtual-microphone-estimation|Virtual Microphone Estimation]]
 - [[concepts/spatial-audio-representation-learning|Spatial Audio Representation Learning]]
+- [[concepts/acoustic-echo-cancellation|Acoustic Echo Cancellation]]
+- [[concepts/complex-convolving-mask|Complex Convolving Mask]]
 
 ## Related Sources
 
@@ -45,3 +48,4 @@ tags:
 - [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
 - [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]]
 - [[sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026: Spatial-Magnifier]]
+- [[sources/indenbom-2023-deepvqe|Indenbom et al. 2023: DeepVQE]]

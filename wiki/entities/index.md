@@ -244,4 +244,10 @@
 | [[entities/jitong-chen\|Jitong Chen]] | Ohio State — supervised speech separation, MRCG feature, large-scale training for noise generalization, LSTM speaker generalization | 2026-06-01 |
 | [[entities/haonan-dong\|Haonan Dong]] | Waseda University — SR-SwIVA-ISS, switching IVA, iterative source steering | 2026-06-04 |
 | [[entities/xuemai-xie\|Xuemai Xie]] | Waseda University — blind source separation, speech separation | 2026-06-04 |
+| [[entities/evgenii-indenbom\|Evgenii Indenbom]] | Microsoft — DeepVQE joint AEC/NS/DR, cross-attention alignment | 2026-06-06 |
+| [[entities/nicolae-catalin-ristea\|Nicolae-Catalin Ristea]] | Microsoft — DeepVQE joint AEC/NS/DR | 2026-06-06 |
+| [[entities/ando-saabas\|Ando Saabas]] | Microsoft — DeepVQE, AEC-MOS metric | 2026-06-06 |
+| [[entities/tanel-parnamaa\|Tanel Parnamaa]] | Microsoft — DeepVQE joint AEC/NS/DR | 2026-06-06 |
+| [[entities/jegor-guzvin\|Jegor Guzvin]] | Microsoft — DeepVQE, cross-attention alignment | 2026-06-06 |
+| [[entities/ross-cutler\|Ross Cutler]] | Microsoft — DeepVQE, ICASSP AEC/DNS challenges, DNSMOS | 2026-06-06 |
 

@@ -216,4 +216,8 @@
 | [[concepts/switching-independent-vector-analysis\|Switching Independent Vector Analysis]] | IVA extension using multiple demixing matrices with switching mechanism for time-varying acoustic conditions | 2026-06-04 |
 | [[concepts/iterative-source-steering\|Iterative Source Steering]] | Rank-one update for IVA without matrix inversions; 5–7× faster than IP updates | 2026-06-04 |
 | [[concepts/spatial-regularization\|Spatial Regularization]] | DOA-based regularization for BSS to resolve permutation ambiguity and improve convergence | 2026-06-04 |
+| [[concepts/acoustic-echo-cancellation\|Acoustic Echo Cancellation]] | Removing acoustic echo from microphone signals using adaptive filtering or deep learning | 2026-06-06 |
+| [[concepts/cross-attention-alignment\|Cross-Attention Alignment]] | Soft-aligning microphone and far-end signals in feature space for AEC | 2026-06-06 |
+| [[concepts/complex-convolving-mask\|Complex Convolving Mask]] | Time-frequency varying complex filter for speech enhancement using 120° weight components | 2026-06-06 |
+| [[concepts/sub-pixel-convolution\|Sub-Pixel Convolution]] | Learnable upsampling method for decoder architectures; factor-2 frequency-axis upsampling | 2026-06-06 |
 

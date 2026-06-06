@@ -2301,3 +2301,36 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 2 entity rows
   - `wiki/concepts/index.md` — added 3 concept rows
+
+---
+
+## [2026-06-06] ingest | DeepVQE: Real Time Deep Voice Quality Enhancement for Joint Acoustic Echo Cancellation, Noise Suppression and Dereverberation (Indenbom et al. 2023)
+
+- **Source**: `raw/papers/indenbom-2023-deepvqe/full-text.md` (Zotero: WV7YKFHR, arXiv: 2306.03177)
+- **Authors**: Evgenii Indenbom, Nicolae-Catalin Ristea, Ando Saabas, Tanel Parnamaa, Jegor Guzvin, Ross Cutler
+- **Published**: ICASSP 2023, pp. 1–5
+- **DOI**: 10.1109/ICASSP49357.2023.10096890
+- **Summary**: Real-time joint AEC+NS+DR system using cross-attention alignment and complex convolving mask (CCM); encoder-decoder architecture with GRU bottleneck and sub-pixel convolution; SOTA on ICASSP 2023 AEC and DNS challenges with over 10 dB SRR improvement
+- **Extraction**: MinerU pipeline extract from Zotero PDF (34,806 bytes, 8 figures)
+- **Pages created**:
+  - `raw/papers/indenbom-2023-deepvqe/full-text.md` — extracted text from Zotero PDF
+  - `raw/papers/indenbom-2023-deepvqe/figures/` — 8 extracted figures
+  - `wiki/sources/indenbom-2023-deepvqe.md` — source page
+  - `wiki/entities/evgenii-indenbom.md` — first author
+  - `wiki/entities/nicolae-catalin-ristea.md` — co-author
+  - `wiki/entities/ando-saabas.md` — co-author
+  - `wiki/entities/tanel-parnamaa.md` — co-author
+  - `wiki/entities/jegor-guzvin.md` — co-author
+  - `wiki/entities/ross-cutler.md` — co-author
+  - `wiki/concepts/acoustic-echo-cancellation.md` — AEC concept
+  - `wiki/concepts/cross-attention-alignment.md` — cross-attention alignment concept
+  - `wiki/concepts/complex-convolving-mask.md` — CCM concept
+  - `wiki/concepts/sub-pixel-convolution.md` — sub-pixel convolution concept
+- **Pages updated**:
+  - `wiki/concepts/dereverberation.md` — added DeepVQE to approaches table, cross-references, source link
+  - `wiki/concepts/complex-ratio-mask.md` — added CCM cross-reference
+  - `wiki/concepts/multi-channel-speech-enhancement.md` — added DeepVQE to key techniques, cross-references, source link
+  - `wiki/index.md` — added 6 entities, 4 concepts, 1 source; updated statistics to 585/246/216/98/19/6
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 6 entity rows
+  - `wiki/concepts/index.md` — added 4 concept rows

@@ -101,4 +101,5 @@
 | [[sources/shi-2020-active-noise-control-casing-virtual-sensing\|Shi, Jia, Xie & Li 2020: ANC Casing with RP-VS]] | Relative Path based Virtual Sensing (RP-VS) method unifying AF-VS and RM-VS; ANC casing prototype validation with (1,4,4) configuration | 2020 |
 | [[sources/wang-2018-supervised-speech-separation-deep-learning-overview\|Wang & Chen 2018: Supervised Speech Separation Based on Deep Learning: An Overview]] | Comprehensive survey of DNN-based supervised speech separation: learning machines, training targets, features, monaural and array algorithms, and generalization | 2018 |
 | [[sources/dong-2026-spatially-regularized-switching-iva\|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]] | SR-SwIVA-ISS: ISS rank-one update replaces IP in spatially regularized switching IVA; 5.5–7× speedup, comparable separation | 2026 |
+| [[sources/indenbom-2023-deepvqe\|Indenbom et al. 2023: DeepVQE]] | Real-time joint AEC/NS/DR with cross-attention alignment and CCM; SOTA on ICASSP 2023 AEC and DNS challenges | 2023 |
 

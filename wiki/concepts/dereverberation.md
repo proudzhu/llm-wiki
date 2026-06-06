@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-27
-updated: 2026-05-27
+updated: 2026-06-06
 tags:
   - signal-processing
   - speech-enhancement
@@ -37,6 +37,7 @@ Key advantages: can operate blindly without DOA knowledge, requires only two mic
 | **Spectral subtraction (Lebart)** | Exponential decay model of late reverberation energy | Requires $T_{60}$ estimate |
 | **MCLP (Multi-Channel Linear Prediction)** | Linear prediction models reverberation as delayed/weighted copies | Effective for WPE-style dereverberation |
 | **Deep learning** | DNN-based spectral mapping or masking | Data-driven, can operate single-channel |
+| **Joint AEC+NS+DR (DeepVQE)** | Unified model with CCM for simultaneous echo/noise/reverb removal | Over 10 dB SRR improvement, real-time |
 | **Beamforming + postfilter** | Spatial filtering combined with postfiltering | Multi-channel required |
 
 ## Related Concepts
@@ -47,8 +48,11 @@ Key advantages: can operate blindly without DOA knowledge, requires only two mic
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
 - [[concepts/beamforming|Beamforming]]
 - [[concepts/wiener-filter|Wiener Filter]]
+- [[concepts/acoustic-echo-cancellation|Acoustic Echo Cancellation]]
+- [[concepts/complex-convolving-mask|Complex Convolving Mask]]
 
 ## Key Sources
 
 - [[sources/schwarz-2015-coherent-to-diffuse-power-ratio|Schwarz & Kellermann 2015: CDR Estimation for Dereverberation]]
 - [[sources/schwarz-2019-dereverberation-spatial-coherence|Schwarz 2019: Dereverberation and Robust Speech Recognition]]
+- [[sources/indenbom-2023-deepvqe|Indenbom et al. 2023: DeepVQE]]
