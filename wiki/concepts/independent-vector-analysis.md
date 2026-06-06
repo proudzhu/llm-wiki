@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-21
-updated: 2026-05-21
+updated: 2026-06-04
 sources:
   - raw/papers/guo-2023-iva-survey/full-text.md
+  - raw/papers/dong-2026-spatially-regularized-switching-iva/full-text.md
 tags:
   - blind-source-separation
   - audio-source-separation
@@ -62,8 +63,12 @@ IVA combined with Nonnegative Matrix Factorization gives **Independent Low-Rank 
 - [[concepts/blind-source-separation|Blind Source Separation]]
 - [[concepts/fastmnmf|FastMNMF]]
 - [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
+- [[concepts/switching-independent-vector-analysis|Switching Independent Vector Analysis]]
+- [[concepts/iterative-source-steering|Iterative Source Steering]]
+- [[concepts/spatial-regularization|Spatial Regularization]]
 
 ## Related Sources
 
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
 - [[sources/nishikori-2026-fast-multichannel-nmf-block-diagonal-scm-bss|Nishikori et al. 2026: Distributed FastMNMF for BSS]]
+- [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]

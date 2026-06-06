@@ -242,4 +242,6 @@
 | [[entities/rong-xie\|Rong Xie]] | UESTC — active noise control, virtual sensing, selective VS for MCFFANC | 2026-05-27 |
 | [[entities/huiyong-li\|Huiyong Li]] | UESTC — active noise control, signal processing, virtual sensing | 2026-05-27 |
 | [[entities/jitong-chen\|Jitong Chen]] | Ohio State — supervised speech separation, MRCG feature, large-scale training for noise generalization, LSTM speaker generalization | 2026-06-01 |
+| [[entities/haonan-dong\|Haonan Dong]] | Waseda University — SR-SwIVA-ISS, switching IVA, iterative source steering | 2026-06-04 |
+| [[entities/xuemai-xie\|Xuemai Xie]] | Waseda University — blind source separation, speech separation | 2026-06-04 |
 

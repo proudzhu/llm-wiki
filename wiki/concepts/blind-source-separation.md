@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-21
-updated: 2026-05-21
+updated: 2026-06-04
 sources:
   - raw/papers/guo-2023-iva-survey/full-text.md
+  - raw/papers/dong-2026-spatially-regularized-switching-iva/full-text.md
 tags:
   - signal-processing
   - audio-source-separation
@@ -30,6 +31,7 @@ $$\mathbf{x}^{(k)}[z] = \mathbf{A}^{(k)}\mathbf{s}^{(k)}[z]$$
 |--------|-------|---------------------|
 | Frequency-domain ICA | Per-bin instantaneous | Post-hoc alignment needed |
 | [[concepts/independent-vector-analysis\|IVA]] | Multivariate across freq bins | Built into cost function |
+| [[concepts/switching-independent-vector-analysis\|SwIVA]] | Multiple demixing matrices | Switching mechanism + spatial regularization |
 | ILRMA | IVA + NMF source model | Via NMF spectral structure |
 | [[concepts/fastmnmf\|FastMNMF]] | Full-rank SCM + NMF | Joint diagonalization |
 
@@ -50,6 +52,9 @@ $$\mathbf{x}^{(k)}[z] = \mathbf{A}^{(k)}\mathbf{s}^{(k)}[z]$$
 ## Related Concepts
 
 - [[concepts/independent-vector-analysis|Independent Vector Analysis]]
+- [[concepts/switching-independent-vector-analysis|Switching Independent Vector Analysis]]
+- [[concepts/iterative-source-steering|Iterative Source Steering]]
+- [[concepts/spatial-regularization|Spatial Regularization]]
 - [[concepts/fastmnmf|FastMNMF]]
 - [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
 - [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
@@ -60,3 +65,4 @@ $$\mathbf{x}^{(k)}[z] = \mathbf{A}^{(k)}\mathbf{s}^{(k)}[z]$$
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
 - [[sources/nishikori-2026-fast-multichannel-nmf-block-diagonal-scm-bss|Nishikori et al. 2026: Distributed FastMNMF for BSS]]
 - [[sources/wang-2026-cross-talk-speech-reduction-separation|Wang & Cornell 2026: Cross-Talk Speech Reduction]]
+- [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]

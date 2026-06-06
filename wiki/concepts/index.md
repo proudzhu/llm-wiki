@@ -213,4 +213,7 @@
 | [[concepts/ideal-ratio-mask\|Ideal Ratio Mask (IRM)]] | Soft T-F mask training target representing speech energy proportion per unit; preferred target for separation quality | 2026-06-01 |
 | [[concepts/permutation-invariant-training\|Permutation Invariant Training (PIT)]] | Training strategy resolving output-speaker ambiguity by minimizing over all output permutations; enables speaker-independent separation | 2026-06-01 |
 | [[concepts/deep-clustering-speech-separation\|Deep Clustering for Speech Separation]] | DNN-based embedding learning + K-means clustering of T-F units for speaker-independent multi-talker separation | 2026-06-01 |
+| [[concepts/switching-independent-vector-analysis\|Switching Independent Vector Analysis]] | IVA extension using multiple demixing matrices with switching mechanism for time-varying acoustic conditions | 2026-06-04 |
+| [[concepts/iterative-source-steering\|Iterative Source Steering]] | Rank-one update for IVA without matrix inversions; 5–7× faster than IP updates | 2026-06-04 |
+| [[concepts/spatial-regularization\|Spatial Regularization]] | DOA-based regularization for BSS to resolve permutation ambiguity and improve convergence | 2026-06-04 |
 

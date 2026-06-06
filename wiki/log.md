@@ -1,4 +1,4 @@
-# Wiki Log
+﻿# Wiki Log
 
 > **Purpose**: Chronological, append-only record of what happened and when.
 > **Format**: `## [YYYY-MM-DD] operation | Description`
@@ -2275,3 +2275,29 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 1 entity row
   - `wiki/concepts/index.md` — added 4 concept rows
+
+---
+
+## [2026-06-04] ingest | Spatially-Regularized Switching IVA with ISS (Dong et al. 2026)
+
+- **Source**: `raw/papers/dong-2026-spatially-regularized-switching-iva/full-text.md` (Zotero: GMZWLILS)
+- **Authors**: Haonan Dong, Wei Liu, Xuemai Xie, Shoji Makino
+- **Published**: Conference paper, 2026
+- **Summary**: SR-SwIVA-ISS replaces IP update with ISS rank-one update in spatially regularized switching IVA; 5.5–7× computational speedup with comparable separation performance
+- **Pages created**:
+  - `raw/papers/dong-2026-spatially-regularized-switching-iva/full-text.md` — extracted text from Zotero PDF via MinerU
+  - `wiki/sources/dong-2026-spatially-regularized-switching-iva.md`
+  - `wiki/entities/haonan-dong.md`
+  - `wiki/entities/xuemai-xie.md`
+  - `wiki/concepts/switching-independent-vector-analysis.md`
+  - `wiki/concepts/iterative-source-steering.md`
+  - `wiki/concepts/spatial-regularization.md`
+- **Pages updated**:
+  - `wiki/entities/wei-liu.md` — added this paper
+  - `wiki/entities/shoji-makino.md` — added this paper
+  - `wiki/concepts/independent-vector-analysis.md` — added cross-references to SwIVA, ISS, spatial regularization
+  - `wiki/concepts/blind-source-separation.md` — added SwIVA to main approaches table and cross-references
+  - `wiki/index.md` — added 2 entities, 3 concepts, 1 source; updated statistics to 574/240/212/97/19/6
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 2 entity rows
+  - `wiki/concepts/index.md` — added 3 concept rows

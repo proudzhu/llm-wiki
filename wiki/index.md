@@ -247,6 +247,8 @@
 | [[entities/zhuoying-jia\|Zhuoying Jia]] | UESTC — active noise control, virtual sensing, DSP implementation | 2026-05-27 |
 | [[entities/rong-xie\|Rong Xie]] | UESTC — active noise control, virtual sensing, selective virtual sensing for MCFFANC | 2026-05-27 |
 | [[entities/huiyong-li\|Huiyong Li]] | UESTC — active noise control, signal processing, virtual sensing | 2026-05-27 |
+| [[entities/haonan-dong\|Haonan Dong]] | Waseda University — SR-SwIVA-ISS, switching IVA, iterative source steering | 2026-06-04 |
+| [[entities/xuemai-xie\|Xuemai Xie]] | Waseda University — blind source separation, speech separation | 2026-06-04 |
 
 ---
 
@@ -461,6 +463,9 @@
 | [[concepts/relative-transfer-function\|Relative Transfer Function (RTF)]] | Acoustic propagation relative to reference microphone; estimated via covariance whitening for beamforming | 2026-05-26 |
 | [[concepts/minimum-statistics\|Minimum Statistics]] | VAD-free noise PSD estimation via optimal smoothing and spectral minima tracking; bias compensation for correlated PSD estimates | 2026-05-26 |
 | [[concepts/relative-path-virtual-sensing\|Relative Path Virtual Sensing]] | VS method estimating both disturbance and anti-noise using relative primary and secondary path models; unifies AF-VS and RM-VS | 2026-05-27 |
+| [[concepts/switching-independent-vector-analysis\|Switching Independent Vector Analysis]] | IVA extension using multiple demixing matrices with switching mechanism for time-varying acoustic conditions | 2026-06-04 |
+| [[concepts/iterative-source-steering\|Iterative Source Steering]] | Rank-one update for IVA without matrix inversions; 5–7× faster than IP updates | 2026-06-04 |
+| [[concepts/spatial-regularization\|Spatial Regularization]] | DOA-based regularization for BSS to resolve permutation ambiguity and improve convergence | 2026-06-04 |
 
 ---
 
@@ -565,6 +570,7 @@
 | [[sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition\|Lin et al. 2024: AGADIR]] | Geometry-agnostic directional ASR for smart glasses; NLCMV beamforming, 15-28% WER improvement | 2024 |
 | [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement\|Tan & Wang 2018: CRN for Real-Time Speech Enhancement]] | CRN combining CED + LSTM with causal convolutions for noise- and speaker-independent monaural speech enhancement; 17.58M params | 2018 |
 | [[sources/shi-2020-active-noise-control-casing-virtual-sensing\|Shi, Jia, Xie & Li 2020: ANC Casing with RP-VS]] | Relative Path based Virtual Sensing (RP-VS) unifies AF-VS and RM-VS; ANC casing validation with (1,4,4) MCFFANC | 2020 |
+| [[sources/dong-2026-spatially-regularized-switching-iva\|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]] | SR-SwIVA-ISS: ISS rank-one update replaces IP in spatially regularized switching IVA; 5.5–7× speedup, comparable separation | 2026 |
 ---
 
 ## Synthesis
@@ -613,10 +619,10 @@
 
 ## Statistics
 
-- **Total pages**: 568
-- **Entities**: 238
-- **Concepts**: 209
-- **Sources**: 96
+- **Total pages**: 574
+- **Entities**: 240
+- **Concepts**: 212
+- **Sources**: 97
 - **Synthesis**: 19
 - **Queries**: 6
-- **Last updated**: 2026-06-01
+- **Last updated**: 2026-06-04
