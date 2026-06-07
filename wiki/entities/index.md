@@ -250,4 +250,8 @@
 | [[entities/tanel-parnamaa\|Tanel Parnamaa]] | Microsoft — DeepVQE joint AEC/NS/DR | 2026-06-06 |
 | [[entities/jegor-guzvin\|Jegor Guzvin]] | Microsoft — DeepVQE, cross-attention alignment | 2026-06-06 |
 | [[entities/ross-cutler\|Ross Cutler]] | Microsoft — DeepVQE, ICASSP AEC/DNS challenges, DNSMOS | 2026-06-06 |
+| [[entities/hendrik-schroter\|Hendrik Schröter]] | FAU Erlangen-Nürnberg — DeepFilterNet, CLCNet, deep filtering for speech enhancement | 2026-06-07 |
+| [[entities/alberto-n-escalante-b\|Alberto N. Escalante-B.]] | WS Audiology — DeepFilterNet, hearing aid noise reduction | 2026-06-07 |
+| [[entities/tobias-rosenkranz\|Tobias Rosenkranz]] | WS Audiology — DeepFilterNet, CLCNet, hearing aid DSP | 2026-06-07 |
+| [[entities/andreas-maier\|Andreas Maier]] | FAU Erlangen-Nürnberg — Pattern Recognition Lab, deep learning for speech processing | 2026-06-07 |
 

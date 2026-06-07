@@ -2334,3 +2334,30 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 6 entity rows
   - `wiki/concepts/index.md` — added 4 concept rows
+
+---
+
+## [2026-06-07] ingest | DeepFilterNet — Low Complexity Speech Enhancement via Deep Filtering (Schröter et al. 2022)
+
+- **Source**: aw/papers/schroter-2022-deepfilternet/full-text.md (Zotero: TXVFFJPG)
+- **Authors**: Hendrik Schröter, Alberto N. Escalante-B., Tobias Rosenkranz, Andreas Maier
+- **Published**: ICASSP 2022, pp. 7407–7411
+- **arXiv**: 2110.05588
+- **Summary**: Two-stage speech enhancement framework using ERB-scaled gains + deep filtering; 1.8M params, 0.35 GMACs, WB-PESQ 2.81, SI-SDR 16.63 dB on VCTK-DEMAND
+- **Pages created**:
+  - aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zotero PDF via MinerU
+  - wiki/sources/schroter-2022-deepfilternet.md
+  - wiki/entities/hendrik-schroter.md
+  - wiki/entities/alberto-n-escalante-b.md
+  - wiki/entities/tobias-rosenkranz.md
+  - wiki/entities/andreas-maier.md
+  - wiki/concepts/deep-filtering.md
+  - wiki/concepts/erb-scale.md
+- **Pages updated**:
+  - wiki/sources/rong-2024-gtcrn-speech-enhancement-ultralow.md — linked DeepFilterNet source, ERB Scale concept
+  - wiki/concepts/gtcrn.md — linked DeepFilterNet source, ERB Scale concept
+  - wiki/synthesis/computational-efficiency-evolution.md — added DeepFilterNet to efficiency frontier
+  - wiki/index.md — added 4 entities, 2 concepts, 1 source; updated statistics
+  - wiki/sources/index.md — added 1 source row
+  - wiki/entities/index.md — added 4 entity rows
+  - wiki/concepts/index.md — added 2 concept rows

@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-24
-updated: 2026-05-24
+updated: 2026-06-07
 tags:
   - neural-network
   - speech-enhancement
@@ -60,7 +60,7 @@ with $\alpha = 0.01$, $\beta = 0.3$, and spectrogram compression exponent $0.3$.
 
 With 23.7 K parameters and 39.6 MMACs/s, GTCRN achieves:
 - **PESQ 2.87** on VCTK-DEMAND (vs 2.84 for S-DCCRN with 100× more params)
-- **SISNR 18.83 dB** on VCTK-DEMAND (vs 16.63 for DeepFilterNet with 75× more params)
+- **SISNR 18.83 dB** on VCTK-DEMAND (vs 16.63 for [[sources/schroter-2022-deepfilternet|DeepFilterNet]] with 75× more params)
 - **DNSMOS P.808 3.44** on DNS3 blind test set (vs 3.15 for RNNoise)
 
 ## Related Concepts
@@ -69,10 +69,11 @@ With 23.7 K parameters and 39.6 MMACs/s, GTCRN achieves:
 - [[concepts/dprnn|Dual-Path RNN (DPRNN)]]
 - [[concepts/depthwise-separable-convolution|Depthwise Separable Convolution]]
 - [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
-- ERB Scale
+- [[concepts/erb-scale|ERB Scale]]
 - [[concepts/broadcasted-residual-learning|Broadcasted Residual Learning]]
 - [[concepts/adaptive-residual-normalization|Adaptive Residual Normalization]]
 
 ## Related Sources
 
 - [[sources/rong-2024-gtcrn-speech-enhancement-ultralow|Rong et al. 2024: GTCRN — A Speech Enhancement Model Requiring Ultralow Computational Resources]]
+- [[sources/schroter-2022-deepfilternet|Schröter et al. 2022: DeepFilterNet]]

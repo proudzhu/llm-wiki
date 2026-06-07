@@ -1,13 +1,14 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-05-25
+updated: 2026-06-07
 sources:
 - zotero://select/items/0_WLMRLH9W
 - zotero://select/items/0_5SFJK2MD
 - zotero://select/items/0_76XGXYSM
 - zotero://select/items/0_N8MHRKXP
 - zotero://select/items/0_BACCUUCC
+- zotero://select/items/0_TXVFFJPG
 tags:
   - lightweight-speech-enhancement
 - computational-complexity
@@ -196,6 +197,7 @@ Three approaches currently define the Pareto frontier:
 2. **FxGMCC**: Best robustness to impulsive noise at moderate complexity
 3. **GPU-accelerated TorchFX**: Best for research/prototyping, not yet for embedded deployment
 4. **GTCRN (Rong et al. 2024)**: Neural speech enhancement at extreme efficiency — only 23.7 K parameters and 39.6 MMACs/s, outperforming RNNoise and matching models with 100× more parameters. Represents the lightweight deep learning frontier for edge-device audio processing.
+5. **[[sources/schroter-2022-deepfilternet|DeepFilterNet (Schröter et al., ICASSP 2022)]]**: Two-stage deep filtering framework with 1.8M params and 0.35 GMACs/s, achieving WB-PESQ 2.81 at 48 kHz full-band. Serves as the key baseline for GTCRN and subsequent ultralightweight models.
 
 ### 5.3 The Open Question
 
@@ -249,3 +251,4 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method]] — Frequency-domain processing for the simultaneous equations method, reducing computational cost vs. time-domain NLMS-based transformation
 - [[sources/rong-2024-gtcrn-speech-enhancement-ultralow|Rong et al. 2024: GTCRN — A Speech Enhancement Model Requiring Ultralow Computational Resources]]
 - [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement|Tan & Wang 2018: CRN for Real-Time Speech Enhancement (original CRN proposal)]]
+- [[sources/schroter-2022-deepfilternet|Schröter et al. 2022: DeepFilterNet — Low Complexity Speech Enhancement via Deep Filtering]]

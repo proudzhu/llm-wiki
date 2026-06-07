@@ -1,11 +1,12 @@
 ---
 type: source
 created: 2026-05-24
-updated: 2026-05-24
+updated: 2026-06-07
 sources:
   - raw/papers/rong-2024-gtcrn-speech-enhancement-ultralow/full-text.md
   - https://doi.org/10.1109/ICASSP48485.2024.10448310
   - zotero://select/items/0_BACCUUCC
+  - zotero://select/items/0_TXVFFJPG
 tags:
   - speech-enhancement
   - lightweight-model
@@ -132,7 +133,7 @@ where $\alpha = 0.01$ and $\beta = 0.3$. The SISNR loss operates on waveforms, w
 |-------|-----------|------------|-------|------|------|
 | RNNoise (2018) | 0.06 | 0.04 | — | 2.29 | — |
 | PercepNet (2020) | 8.00 | 0.80 | — | 2.73 | — |
-| DeepFilterNet (2022) | 1.80 | 0.35 | 16.63 | 2.81 | 0.942 |
+| [[sources/schroter-2022-deepfilternet|DeepFilterNet]] (2022) | 1.80 | 0.35 | 16.63 | 2.81 | 0.942 |
 | S-DCCRN (2022) | 2.34 | — | — | 2.84 | 0.940 |
 | **GTCRN (proposed)** | **0.02** | **0.04** | **18.83** | **2.87** | **0.940** |
 
@@ -146,7 +147,7 @@ where $\alpha = 0.01$ and $\beta = 0.3$. The SISNR loss operates on waveforms, w
 
 ## Key Contributions
 
-1. **Ultralightweight architecture**: 23.7 K parameters and 39.6 MMACs/s — approximately 3× smaller than RNNoise and 100× smaller than DeepFilterNet
+1. **Ultralightweight architecture**: 23.7 K parameters and 39.6 MMACs/s — approximately 3× smaller than RNNoise and 100× smaller than [[sources/schroter-2022-deepfilternet|DeepFilterNet]]
 2. **Grouped strategies across the entire model**: Grouped convolution (GT-Conv), grouped RNN (G-DPRNN), and band grouping (ERB-based BM) collectively reduce complexity while maintaining representational capacity
 3. **Subband Feature Extraction (SFE)**: Novel module that unfolds frequency bands into subband units along the channel dimension, enhancing frequency information utilization in convolutions
 4. **Temporal Recurrent Attention (TRA)**: Attention mechanism using GRU-based energy aggregation that outperforms standard time-dimension attention with minimal computational overhead
@@ -159,7 +160,7 @@ where $\alpha = 0.01$ and $\beta = 0.3$. The SISNR loss operates on waveforms, w
 - [[concepts/gtcrn|Grouped Temporal Convolutional Recurrent Network (GTCRN)]]
 - [[concepts/depthwise-separable-convolution|Depthwise Separable Convolution]]
 - [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
-- ERB Scale
+- [[concepts/erb-scale|ERB Scale]]
 
 ## Related Synthesis
 

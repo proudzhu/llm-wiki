@@ -255,6 +255,10 @@
 | [[entities/tanel-parnamaa\|Tanel Parnamaa]] | Microsoft — DeepVQE joint AEC/NS/DR | 2026-06-06 |
 | [[entities/jegor-guzvin\|Jegor Guzvin]] | Microsoft — DeepVQE, cross-attention alignment | 2026-06-06 |
 | [[entities/ross-cutler\|Ross Cutler]] | Microsoft — DeepVQE, ICASSP AEC/DNS challenges, DNSMOS | 2026-06-06 |
+| [[entities/hendrik-schroter\|Hendrik Schröter]] | FAU Erlangen-Nürnberg — DeepFilterNet, CLCNet, deep filtering for speech enhancement | 2026-06-07 |
+| [[entities/alberto-n-escalante-b\|Alberto N. Escalante-B.]] | WS Audiology — DeepFilterNet, hearing aid noise reduction | 2026-06-07 |
+| [[entities/tobias-rosenkranz\|Tobias Rosenkranz]] | WS Audiology — DeepFilterNet, CLCNet, hearing aid DSP | 2026-06-07 |
+| [[entities/andreas-maier\|Andreas Maier]] | FAU Erlangen-Nürnberg — Pattern Recognition Lab, deep learning for speech processing | 2026-06-07 |
 
 ---
 
@@ -476,6 +480,8 @@
 | [[concepts/cross-attention-alignment\|Cross-Attention Alignment]] | Soft-aligning microphone and far-end signals in feature space for AEC | 2026-06-06 |
 | [[concepts/complex-convolving-mask\|Complex Convolving Mask]] | Time-frequency varying complex filter for speech enhancement using 120° weight components | 2026-06-06 |
 | [[concepts/sub-pixel-convolution\|Sub-Pixel Convolution]] | Learnable upsampling method for decoder architectures; factor-2 frequency-axis upsampling | 2026-06-06 |
+| [[concepts/deep-filtering\|Deep Filtering]] | Complex-valued linear filtering in STFT domain along time axis; outperforms CRMs at low latency | 2026-06-07 |
+| [[concepts/erb-scale\|ERB Scale]] | Psychoacoustic frequency scale modeling human auditory filter bandwidths; compresses to 32 bands for efficient SE | 2026-06-07 |
 
 ---
 
@@ -582,6 +588,7 @@
 | [[sources/shi-2020-active-noise-control-casing-virtual-sensing\|Shi, Jia, Xie & Li 2020: ANC Casing with RP-VS]] | Relative Path based Virtual Sensing (RP-VS) unifies AF-VS and RM-VS; ANC casing validation with (1,4,4) MCFFANC | 2020 |
 | [[sources/dong-2026-spatially-regularized-switching-iva\|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]] | SR-SwIVA-ISS: ISS rank-one update replaces IP in spatially regularized switching IVA; 5.5–7× speedup, comparable separation | 2026 |
 | [[sources/indenbom-2023-deepvqe\|Indenbom et al. 2023: DeepVQE]] | Real-time joint AEC/NS/DR with cross-attention alignment and CCM; SOTA on ICASSP 2023 AEC and DNS challenges | 2023 |
+| [[sources/schroter-2022-deepfilternet\|Schrőter et al. 2022: DeepFilterNet]] | Low-complexity two-stage speech enhancement using ERB gains + deep filtering; 1.8M params, 0.35 GMACs, WB-PESQ 2.81 | 2022 |
 
 ---
 
@@ -631,10 +638,10 @@
 
 ## Statistics
 
-- **Total pages**: 585
-- **Entities**: 246
-- **Concepts**: 216
-- **Sources**: 98
+- **Total pages**: 593
+- **Entities**: 250
+- **Concepts**: 218
+- **Sources**: 99
 - **Synthesis**: 19
 - **Queries**: 6
-- **Last updated**: 2026-06-06
+- **Last updated**: 2026-06-07
