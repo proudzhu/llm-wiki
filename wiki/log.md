@@ -2339,13 +2339,15 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
 
 ## [2026-06-07] ingest | DeepFilterNet — Low Complexity Speech Enhancement via Deep Filtering (Schröter et al. 2022)
 
-- **Source**: aw/papers/schroter-2022-deepfilternet/full-text.md (Zotero: TXVFFJPG)
+- **Source**: 
+aw/papers/schroter-2022-deepfilternet/full-text.md (Zotero: TXVFFJPG)
 - **Authors**: Hendrik Schröter, Alberto N. Escalante-B., Tobias Rosenkranz, Andreas Maier
 - **Published**: ICASSP 2022, pp. 7407–7411
 - **arXiv**: 2110.05588
 - **Summary**: Two-stage speech enhancement framework using ERB-scaled gains + deep filtering; 1.8M params, 0.35 GMACs, WB-PESQ 2.81, SI-SDR 16.63 dB on VCTK-DEMAND
 - **Pages created**:
-  - aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zotero PDF via MinerU
+  - 
+aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zotero PDF via MinerU
   - wiki/sources/schroter-2022-deepfilternet.md
   - wiki/entities/hendrik-schroter.md
   - wiki/entities/alberto-n-escalante-b.md
@@ -2361,3 +2363,20 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - wiki/sources/index.md — added 1 source row
   - wiki/entities/index.md — added 4 entity rows
   - wiki/concepts/index.md — added 2 concept rows
+
+---
+
+## [2026-06-07] lint | Health check
+
+- **Index consistency**: Main index had 6 missing entries (1 entity, 4 concepts, 1 source); synthesis sub-index had 4 duplicate rows (23 rows vs 19 actual)
+- **Broken links**: 860 wikilinks using `../` prefix convention (not truly broken, just convention-violating); 0 truly broken links
+- **Duplicate entries**: 4 duplicates in synthesis sub-index (computational-efficiency-evolution, impulsive-noise-control, feedback-anc-filter-design, iir-filter-fitting-frequency-response each appeared twice)
+- **Orphan pages**: 30 entities, 12 concepts, 10 sources, 2 synthesis pages with no inbound wikilinks (expected for index-only references)
+- **Statistics**: Queries stated=6, actual=7 (corrected)
+- **Actions taken**:
+  - Added 1 entity to main index: jitong-chen
+  - Added 4 concepts to main index: deep-clustering-speech-separation, ideal-binary-mask, ideal-ratio-mask, permutation-invariant-training
+  - Added 1 source to main index: wang-2018-supervised-speech-separation-deep-learning-overview
+  - Removed 4 duplicate rows from synthesis sub-index
+  - Updated Queries statistic from 6 to 7
+  - Build verification passed (31.71s, 0 warnings)

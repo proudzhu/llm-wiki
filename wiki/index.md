@@ -97,6 +97,7 @@
 | [[entities/wei-liu\|Wei Liu]] | Wuhan University / Waseda University — SCM reconstruction, STFT-domain beamforming | 2026-04-30 |
 | [[entities/gongping-huang\|Gongping Huang]] | Wuhan University — differential beamforming, microphone array processing | 2026-04-30 |
 | [[entities/jingdong-chen\|Jingdong Chen]] | NWPU — microphone arrays, speech enhancement, beamforming | 2026-04-30 |
+| [[entities/jitong-chen\|Jitong Chen]] | Ohio State University — supervised speech separation, MRCG features, large-scale training | 2026-06-01 |
 | [[entities/jacob-benesty\|Jacob Benesty]] | INRS-EMT, U. Quebec — microphone arrays, MWF theory, adaptive filtering | 2026-04-30 |
 | [[entities/shoji-makino\|Shoji Makino]] | Waseda University — blind source separation, speech enhancement | 2026-04-30 |
 | [[entities/zhengding-luo\|Zhengding Luo]] | NTU Singapore — SFANC, DoA-based ANC, deep learning for ANC | 2026-04-30 |
@@ -288,6 +289,7 @@
 | [[concepts/adaptive-feedback-control\|Adaptive Feedback Control]] | Feedback ANC systems that adapt automatically — IMC-based and simplified architectures | 2026-04-10 |
 | [[concepts/online-secondary-path-modeling\|Online Secondary-Path Modeling]] | Identifying S(z) during ANC operation via auxiliary noise injection | 2026-04-10 |
 | [[concepts/deep-learning-for-signal-processing\|Deep Learning for Signal Processing]] | Neural networks replacing or augmenting TSP algorithms for nonlinearity and robustness | 2026-04-17 |
+| [[concepts/deep-clustering-speech-separation\|Deep Clustering for Speech Separation]] | Speaker-independent separation via DNN embeddings + spectral clustering; flexible number of speakers | 2026-06-01 |
 | [[concepts/complex-analysis\|Complex Analysis]] | Mathematical foundation for branch cuts, analytic continuation, and CAS behavior | 2026-04-10 |
 | [[concepts/analytic-continuation\|Analytic Continuation]] | Extending analytic functions beyond their original domain via branch cuts | 2026-04-10 |
 | [[concepts/offline-secondary-path-modeling\|Offline Secondary-Path Modeling]] | Identifying S(z) during a training phase before ANC operation begins | 2026-04-11 |
@@ -311,6 +313,8 @@
 | [[concepts/quadratic-programming\|Quadratic Programming]] | Optimization with quadratic objective and linear constraints; MPC solver | 2026-04-12 |
 | [[concepts/kalman-filter\|Kalman Filter]] | Optimal state estimation for linear systems with Gaussian noise | 2026-04-12 |
 | [[concepts/impulsive-noise\|Impulsive Noise]] | Non-Gaussian noise with heavy-tailed distribution; requires robust algorithms | 2026-04-12 |
+| [[concepts/ideal-binary-mask\|Ideal Binary Mask (IBM)]] | Binary T-F mask classifying units as target-dominated or interference-dominated; first supervised separation target | 2026-06-01 |
+| [[concepts/ideal-ratio-mask\|Ideal Ratio Mask (IRM)]] | Soft T-F mask representing target energy proportion; related to Wiener filter, preferred for intelligibility | 2026-06-01 |
 | [[concepts/kernel-methods\|Kernel Methods]] | Nonlinear mapping to reproducing kernel Hilbert space; basis for correntropy | 2026-04-12 |
 | [[concepts/renyi-entropy\|Rényi Entropy]] | Generalized entropy measure parameterized by order; used in ITL | 2026-04-12 |
 | [[concepts/generalized-maximum-correntropy-criterion\|Generalized Maximum Correntropy Criterion]] | GGD-kernel MCC with shape parameter p; robust to impulsive noise | 2026-04-12 |
@@ -426,6 +430,7 @@
 | [[concepts/hearing-aid-feedback-cancellation\|Hearing Aid Feedback Cancellation (AFC)]] | Suppression of acoustic feedback in hearing aids via adaptive filtering and PEM | 2026-05-15 |
 | [[concepts/maximum-stable-gain\|Maximum Stable Gain (MSG)]] | The maximum gain a hearing aid can provide before feedback oscillation, used as AFC evaluation metric | 2026-05-15 |
 | [[concepts/prediction-error-method\|Prediction Error Method (PEM)]] | De-correlation technique for hearing aid AFC that models speech as an AR process | 2026-05-15 |
+| [[concepts/permutation-invariant-training\|Permutation Invariant Training (PIT)]] | Speaker-independent separation resolving output-speaker ambiguity by selecting best permutation during training | 2026-06-01 |
 | [[concepts/self-attentive-recurrent-neural-network\|Self-Attentive RNN (SARNN)]] | RNN variant combining self-attention with recurrent connections for sequence modeling | 2026-05-15 |
 | [[concepts/teacher-forcing\|Teacher Forcing]] | Training technique feeding ground-truth output as next-step input instead of model prediction | 2026-05-15 |
 | [[concepts/online-secondary-path-estimation\|Online Secondary Path Estimation]] | Continuous adaptation of the secondary path model during ANC operation | 2026-05-17 |
@@ -575,6 +580,7 @@
 | [[sources/zhang-2023-hybrid-ahs\|Zhang et al. 2023: Hybrid AHS]] | Hybrid acoustic howling suppression combining Kalman filter and deep learning | 2023 |
 | [[sources/tagliasacchi-2020-seanet\|Tagliasacchi, Li, Misiunas & Roblek 2020: SEANet]] | Multi-modal speech enhancement using accelerometer data; wave-to-wave UNet with adversarial training; 9.6 dB SI-SDRi in mixed-speech scenarios | 2020 |
 | [[sources/wang-2022-fusing-bc-ac-complex-domain-se\|Wang, Zhang & Wang 2022: Fusing BC and AC for Complex-Domain SE]] | Attention-based AC-BC fusion with DC-CRN; CycleGAN semi-supervised framework matching full supervision with 50% data; +21.1% STOI at −5 dB | 2022 |
+| [[sources/wang-2018-supervised-speech-separation-deep-learning-overview\|Wang & Chen 2018: Supervised Speech Separation Based on Deep Learning]] | Comprehensive survey of deep learning for speech separation: learning machines, training targets (IBM/IRM/cIRM), MRCG features, speaker generalization | 2018 |
 | [[sources/lu-2021-survey-active-noise-control-linear\|Lu et al. 2021: Survey on ANC — Part I: Linear Systems]] | Comprehensive survey of linear ANC: FxLMS, FeLMS, FuLMS, FxAP, FxRLS, subband, distributed ANC, sparse ANC, and practical considerations | 2021 |
 | [[sources/kim-2021-broadcasted-residual-learning\|Kim, Chang, Lee & Sung 2021: Broadcasted Residual Learning]] | BC-ResNet introduces broadcasted residual blocks for efficient keyword spotting, reaching 98.7% Speech Commands v2 accuracy with 321k parameters | 2021 |
 | [[sources/cai-2024-tf-sepnet\|Cai, Zhang & Li 2024: TF-SepNet]] | CNN architecture using parallel 1D kernels along time and frequency axes for low-complexity acoustic scene classification | 2024 |
@@ -643,5 +649,5 @@
 - **Concepts**: 218
 - **Sources**: 99
 - **Synthesis**: 19
-- **Queries**: 6
+- **Queries**: 7
 - **Last updated**: 2026-06-07
