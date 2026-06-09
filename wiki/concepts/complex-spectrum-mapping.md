@@ -62,7 +62,11 @@ By jointly estimating real and imaginary parts, CSM implicitly models both ampli
 - [[active-noise-control|Active Noise Control]]
 - [[speech-preserving-anc|Speech-Preserving ANC]]
 - [[deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
+- [[concepts/time-domain-speech-enhancement|Time-Domain Speech Enhancement]]
+- [[concepts/frequency-domain-loss|Frequency Domain Loss for Time-Domain Networks]]
+- [[concepts/invalid-stft-problem|Invalid STFT Problem]]
 
 ## Related Sources
 
 - [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
+- [[sources/pandey-2019-cnn-speech-enhancement-time-domain|Pandey & Wang 2019: CNN-Based Speech Enhancement in the Time Domain]]

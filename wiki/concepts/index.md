@@ -200,6 +200,9 @@
 | [[concepts/doa-microphone-positional-encoding\|DOA-Microphone Positional Encoding (DOA-MPE)]] | Joint encoding of microphone positions and target DOA via sinusoidal features; enables geometry-aware spatial filtering | 2026-05-23 |
 | [[concepts/film-layer\|FiLM Layer]] | Feature-wise Linear Modulation for conditioning neural networks via learned scaling and bias parameters | 2026-05-23 |
 | [[concepts/target-speaker-extraction\|Target Speaker Extraction]] | Isolating a specific speaker's speech from a mixture using spatial, enrolment, visual, or textual cues | 2026-05-23 |
+| [[concepts/time-domain-speech-enhancement\|Time-Domain Speech Enhancement]] | Neural network approaches operating directly on raw waveform samples; avoids invalid STFT and phase reconstruction problems | 2026-05-23 |
+| [[concepts/frequency-domain-loss\|Frequency Domain Loss for Time-Domain Networks]] | Training paradigm using spectral loss (STFT magnitude MAE) to optimise time-domain networks; better perceptual quality than waveform loss | 2026-05-23 |
+| [[concepts/invalid-stft-problem\|Invalid STFT Problem]] | Modified magnitude + noisy phase may not correspond to valid time-domain signal; causes artefacts in frequency-domain enhancement | 2026-05-23 |
 | [[concepts/auxiliary-filter\|Auxiliary Filter]] | Filter identifying the overall path from noise control filter input to error microphone output; used in simultaneous equations method to avoid explicit secondary path modeling | 2026-05-23 |
 | [[concepts/simultaneous-equations-method\|Simultaneous Equations Method]] | ANC method that estimates the optimal noise control filter without a secondary path model by solving two independent equations from an auxiliary filter | 2006 |
 | [[concepts/gtcrn\|GTCRN (Grouped Temporal CRN)]] | Grouped temporal CRN for ultralightweight speech enhancement; 23.7K params, SFE, TRA | 2026-05-24 |

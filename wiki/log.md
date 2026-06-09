@@ -2380,3 +2380,26 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - Removed 4 duplicate rows from synthesis sub-index
   - Updated Queries statistic from 6 to 7
   - Build verification passed (31.71s, 0 warnings)
+
+---
+
+## [2026-06-07] ingest | Pandey & Wang (2019) A New Framework for CNN-Based Speech Enhancement in the Time Domain
+
+- **Source**: `raw/papers/pandey-2019-cnn-speech-enhancement-time-domain/full-text.txt` (Zotero: 35DQRHLV)
+- **Authors**: Ashutosh Pandey, DeLiang Wang
+- **Published**: IEEE/ACM Trans. Audio, Speech, Lang. Process., Vol. 27, No. 7, pp. 1179-1188, July 2019
+- **DOI**: 10.1109/TASLP.2019.2913512
+- **Summary**: Proposes AECNN — a U-Net fully convolutional autoencoder operating in time domain, trained with STFT magnitude MAE loss (frequency domain). Avoids invalid STFT problem. AECNN-SM1 significantly outperforms SEGAN and 62-layer GRN on TIMIT, IEEE, and WSJ0 SI-84 datasets. Demonstrates learned phase is better than noisy phase.
+- **Pages created**:
+  - `raw/papers/pandey-2019-cnn-speech-enhancement-time-domain/full-text.txt` — pdftotext extraction
+  - `wiki/sources/pandey-2019-cnn-speech-enhancement-time-domain.md` — source page
+  - `wiki/concepts/time-domain-speech-enhancement.md` — time-domain SE concept
+  - `wiki/concepts/frequency-domain-loss.md` — frequency-domain loss concept
+  - `wiki/concepts/invalid-stft-problem.md` — invalid STFT problem concept
+- **Pages updated**:
+  - `wiki/entities/ashutosh-pandey.md` — added AECNN contribution, related sources/concepts
+  - `wiki/entities/deliang-wang.md` — added AECNN contribution and source link
+  - `wiki/concepts/complex-spectrum-mapping.md` — added cross-references to time-domain SE concepts
+  - `wiki/index.md` — added 3 concepts, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/concepts/index.md` — added 3 concept rows

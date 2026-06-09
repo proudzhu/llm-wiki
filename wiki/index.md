@@ -470,6 +470,9 @@
 | [[concepts/doa-microphone-positional-encoding\|DOA-Microphone Positional Encoding (DOA-MPE)]] | Joint encoding of microphone positions and target DOA via sinusoidal features; enables geometry-aware spatial filtering | 2026-05-23 |
 | [[concepts/film-layer\|FiLM Layer]] | Feature-wise Linear Modulation for conditioning neural networks via learned scaling and bias parameters | 2026-05-23 |
 | [[concepts/target-speaker-extraction\|Target Speaker Extraction]] | Isolating a specific speaker's speech from a mixture using spatial, enrolment, visual, or textual cues | 2026-05-23 |
+| [[concepts/time-domain-speech-enhancement\|Time-Domain Speech Enhancement]] | Neural network approaches operating directly on raw waveform samples; avoids invalid STFT and phase reconstruction problems | 2026-05-23 |
+| [[concepts/frequency-domain-loss\|Frequency Domain Loss for Time-Domain Networks]] | Training paradigm using spectral loss (STFT magnitude MAE) to optimise time-domain networks; better perceptual quality than waveform loss | 2026-05-23 |
+| [[concepts/invalid-stft-problem\|Invalid STFT Problem]] | Modified magnitude + noisy phase may not correspond to valid time-domain signal; causes artefacts in frequency-domain enhancement | 2026-05-23 |
 | [[concepts/auxiliary-filter\|Auxiliary Filter]] | Filter identifying the overall path from noise control filter input to error microphone output; core of simultaneous equations method for ANC | 2026-05-23 |
 | [[concepts/simultaneous-equations-method\|Simultaneous Equations Method]] | ANC method estimating optimal noise control filter without secondary path model using two independent equations from an auxiliary filter | 2006 |
 | [[concepts/gtcrn\|GTCRN (Grouped Temporal CRN)]] | Grouped temporal convolutional recurrent network for ultralightweight speech enhancement; 23.7K params | 2026-05-24 |
@@ -591,11 +594,11 @@
 | [[sources/rong-2024-gtcrn-speech-enhancement-ultralow\|Rong et al. 2024: GTCRN]] | Ultralightweight SE model with 23.7K params, grouped strategies, SFE and TRA modules | 2024 |
 | [[sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition\|Lin et al. 2024: AGADIR]] | Geometry-agnostic directional ASR for smart glasses; NLCMV beamforming, 15-28% WER improvement | 2024 |
 | [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement\|Tan & Wang 2018: CRN for Real-Time Speech Enhancement]] | CRN combining CED + LSTM with causal convolutions for noise- and speaker-independent monaural speech enhancement; 17.58M params | 2018 |
+| [[sources/pandey-2019-cnn-speech-enhancement-time-domain\|Pandey & Wang 2019: CNN-Based Speech Enhancement in the Time Domain]] | AECNN: time-domain fully-convolutional autoencoder trained with STFT magnitude MAE loss; avoids invalid STFT; outperforms SEGAN and GRN on TIMIT/IEEE/WSJ0 | 2026-05-23 |
 | [[sources/shi-2020-active-noise-control-casing-virtual-sensing\|Shi, Jia, Xie & Li 2020: ANC Casing with RP-VS]] | Relative Path based Virtual Sensing (RP-VS) unifies AF-VS and RM-VS; ANC casing validation with (1,4,4) MCFFANC | 2020 |
 | [[sources/dong-2026-spatially-regularized-switching-iva\|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]] | SR-SwIVA-ISS: ISS rank-one update replaces IP in spatially regularized switching IVA; 5.5–7× speedup, comparable separation | 2026 |
 | [[sources/indenbom-2023-deepvqe\|Indenbom et al. 2023: DeepVQE]] | Real-time joint AEC/NS/DR with cross-attention alignment and CCM; SOTA on ICASSP 2023 AEC and DNS challenges | 2023 |
 | [[sources/schroter-2022-deepfilternet\|Schrőter et al. 2022: DeepFilterNet]] | Low-complexity two-stage speech enhancement using ERB gains + deep filtering; 1.8M params, 0.35 GMACs, WB-PESQ 2.81 | 2022 |
-
 ---
 
 ## Synthesis
@@ -644,10 +647,10 @@
 
 ## Statistics
 
-- **Total pages**: 593
+- **Total pages**: 597
 - **Entities**: 250
-- **Concepts**: 218
-- **Sources**: 99
+- **Concepts**: 221
+- **Sources**: 100
 - **Synthesis**: 19
 - **Queries**: 7
 - **Last updated**: 2026-06-07
