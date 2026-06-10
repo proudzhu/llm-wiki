@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-15
-updated: 2026-05-15
+updated: 2026-06-10
 sources:
   - raw/papers/zhan-2025-deeppem-afc/full-text.txt
+  - raw/papers/lydaki-2026-deep-feedback-cancellation-hearing-aids/full-text.md
 tags:
   - hearing-aids
   - feedback-cancellation
@@ -50,4 +51,5 @@ where F̂(k,l) is the estimated feedback path.
 
 ## Related Sources
 
+- [[sources/lydaki-2026-deep-feedback-cancellation-hearing-aids|Lydaki 2026: Deep Feedback Cancellation]] — DFC achieves ~23 dB MSG for speech, ~21.5 dB for music
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — ASG and tracking time evaluation

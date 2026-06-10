@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-15
-updated: 2026-05-15
+updated: 2026-06-10
 sources:
   - raw/papers/zhan-2025-deeppem-afc/full-text.txt
+  - raw/papers/lydaki-2026-deep-feedback-cancellation-hearing-aids/full-text.md
 tags:
   - hearing-aids
   - feedback-cancellation
@@ -45,9 +46,10 @@ Uses an adaptive filter to estimate and subtract the feedback component:
 
 ## Deep Learning Approaches
 
-Recent work integrates deep learning for automatic step-size control:
+Recent work integrates deep learning for automatic step-size control or direct IR estimation:
 - **Neural-AFC**: End-to-end neural network for AFC
 - **DeepPEM-AFC**: GRU-based step-size prediction combined with PEM de-correlation
+- **[[concepts/deep-feedback-cancellation|DFC]]**: Compact DNN (856K params) that directly estimates the feedback-path IR, outperforming both adaptive filtering and signal-prediction approaches with 30x faster convergence after path changes
 
 ## Metrics
 
@@ -66,6 +68,7 @@ Recent work integrates deep learning for automatic step-size control:
 
 ## Related Sources
 
+- [[sources/lydaki-2026-deep-feedback-cancellation-hearing-aids|Lydaki 2026: Deep Feedback Cancellation]] — DFC with direct IR estimation
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC
 - Waterschoot & Moonen 2011: Fifty years of acoustic feedback control
 - Spriet et al. 2008: Feedback control in hearing aids

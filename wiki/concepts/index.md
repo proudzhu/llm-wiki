@@ -224,5 +224,7 @@
 | [[concepts/complex-convolving-mask\|Complex Convolving Mask]] | Time-frequency varying complex filter for speech enhancement using 120° weight components | 2026-06-06 |
 | [[concepts/sub-pixel-convolution\|Sub-Pixel Convolution]] | Learnable upsampling method for decoder architectures; factor-2 frequency-axis upsampling | 2026-06-06 |
 | [[concepts/deep-filtering\|Deep Filtering]] | Complex-valued linear filtering in STFT domain along time axis; outperforms CRMs at low latency | 2026-06-07 |
-| [[concepts/erb-scale\|ERB Scale]] | Psychoacoustic frequency scale modeling human auditory filter bandwidths; compresses to 32 bands for efficient SE | 2026-06-07 |
+| [[concepts/erb-scale|ERB Scale]] | Psychoacoustic frequency scale modeling human auditory filter bandwidths; compresses to 32 bands for efficient SE | 2026-06-07 |
+| [[concepts/deep-feedback-cancellation|Deep Feedback Cancellation]] | Compact DNN (856K params) for direct feedback-path IR estimation in hearing aids; 30x faster convergence than FD-AFC | 2026-06-10 |
+| [[concepts/normalized-euclidean-system-distance|Normalized Euclidean System Distance]] | NESD: normalized squared error between true and estimated feedback-path IRs; used as loss and metric in AFC | 2026-06-10 |
 

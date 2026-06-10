@@ -253,5 +253,8 @@
 | [[entities/hendrik-schroter\|Hendrik Schröter]] | FAU Erlangen-Nürnberg — DeepFilterNet, CLCNet, deep filtering for speech enhancement | 2026-06-07 |
 | [[entities/alberto-n-escalante-b\|Alberto N. Escalante-B.]] | WS Audiology — DeepFilterNet, hearing aid noise reduction | 2026-06-07 |
 | [[entities/tobias-rosenkranz\|Tobias Rosenkranz]] | WS Audiology — DeepFilterNet, CLCNet, hearing aid DSP | 2026-06-07 |
-| [[entities/andreas-maier\|Andreas Maier]] | FAU Erlangen-Nürnberg — Pattern Recognition Lab, deep learning for speech processing | 2026-06-07 |
+| [[entities/andreas-maier|Andreas Maier]] | FAU Erlangen-Nürnberg — Pattern Recognition Lab, deep learning for speech processing | 2026-06-07 |
+| [[entities/eleftheria-lydaki|Eleftheria Lydaki]] | Eriksholm / Aalborg U — Deep Feedback Cancellation (DFC) for hearing aids | 2026-06-10 |
+| [[entities/zheng-hua-tan|Zheng-Hua Tan]] | Aalborg University — speech processing, deep learning for audio, hearing aid DSP | 2026-06-10 |
+| [[entities/meng-guo|Meng Guo]] | Eriksholm Research Centre — hearing aid signal processing, acoustic feedback cancellation | 2026-06-10 |
 

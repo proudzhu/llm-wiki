@@ -260,6 +260,9 @@
 | [[entities/alberto-n-escalante-b\|Alberto N. Escalante-B.]] | WS Audiology — DeepFilterNet, hearing aid noise reduction | 2026-06-07 |
 | [[entities/tobias-rosenkranz\|Tobias Rosenkranz]] | WS Audiology — DeepFilterNet, CLCNet, hearing aid DSP | 2026-06-07 |
 | [[entities/andreas-maier\|Andreas Maier]] | FAU Erlangen-Nürnberg — Pattern Recognition Lab, deep learning for speech processing | 2026-06-07 |
+| [[entities/eleftheria-lydaki\|Eleftheria Lydaki]] | Eriksholm / Aalborg U — Deep Feedback Cancellation (DFC) for hearing aids | 2026-06-10 |
+| [[entities/zheng-hua-tan\|Zheng-Hua Tan]] | Aalborg University — speech processing, deep learning for audio, hearing aid DSP | 2026-06-10 |
+| [[entities/meng-guo\|Meng Guo]] | Eriksholm Research Centre — hearing aid signal processing, acoustic feedback cancellation | 2026-06-10 |
 
 ---
 
@@ -490,6 +493,8 @@
 | [[concepts/sub-pixel-convolution\|Sub-Pixel Convolution]] | Learnable upsampling method for decoder architectures; factor-2 frequency-axis upsampling | 2026-06-06 |
 | [[concepts/deep-filtering\|Deep Filtering]] | Complex-valued linear filtering in STFT domain along time axis; outperforms CRMs at low latency | 2026-06-07 |
 | [[concepts/erb-scale\|ERB Scale]] | Psychoacoustic frequency scale modeling human auditory filter bandwidths; compresses to 32 bands for efficient SE | 2026-06-07 |
+| [[concepts/deep-feedback-cancellation\|Deep Feedback Cancellation]] | Compact DNN (856K params) for direct feedback-path IR estimation in hearing aids; 30x faster convergence than FD-AFC | 2026-06-10 |
+| [[concepts/normalized-euclidean-system-distance\|Normalized Euclidean System Distance]] | NESD: normalized squared error between true and estimated feedback-path IRs; used as loss and metric in AFC | 2026-06-10 |
 
 ---
 
@@ -599,6 +604,7 @@
 | [[sources/dong-2026-spatially-regularized-switching-iva\|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]] | SR-SwIVA-ISS: ISS rank-one update replaces IP in spatially regularized switching IVA; 5.5–7× speedup, comparable separation | 2026 |
 | [[sources/indenbom-2023-deepvqe\|Indenbom et al. 2023: DeepVQE]] | Real-time joint AEC/NS/DR with cross-attention alignment and CCM; SOTA on ICASSP 2023 AEC and DNS challenges | 2023 |
 | [[sources/schroter-2022-deepfilternet\|Schrőter et al. 2022: DeepFilterNet]] | Low-complexity two-stage speech enhancement using ERB gains + deep filtering; 1.8M params, 0.35 GMACs, WB-PESQ 2.81 | 2022 |
+| [[sources/lydaki-2026-deep-feedback-cancellation-hearing-aids\|Lydaki et al. 2026: Deep Feedback Cancellation in Hearing Aids]] | DFC: 856K-param DNN for direct IR estimation; PESQ 4.54, MUSHRA 86.13; 30x faster convergence than FD-AFC | 2026 |
 ---
 
 ## Synthesis
@@ -647,10 +653,10 @@
 
 ## Statistics
 
-- **Total pages**: 597
-- **Entities**: 250
-- **Concepts**: 221
-- **Sources**: 100
+- **Total pages**: 603
+- **Entities**: 253
+- **Concepts**: 223
+- **Sources**: 101
 - **Synthesis**: 19
 - **Queries**: 7
-- **Last updated**: 2026-06-07
+- **Last updated**: 2026-06-10

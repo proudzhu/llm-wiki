@@ -1,4 +1,4 @@
-﻿# Wiki Log
+﻿﻿# Wiki Log
 
 > **Purpose**: Chronological, append-only record of what happened and when.
 > **Format**: `## [YYYY-MM-DD] operation | Description`
@@ -1848,6 +1848,32 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 4 entity rows
   - `wiki/concepts/index.md` — added 3 concept rows
+
+## [2026-06-10] ingest | Deep Feedback Cancellation in Hearing Aids (Lydaki et al. 2026)
+
+- **Source**: `raw/papers/lydaki-2026-deep-feedback-cancellation-hearing-aids/full-text.md` (Zotero: QQE7D6DX)
+- **Authors**: Eleftheria Lydaki, Zheng-Hua Tan, Jesper Jensen, Meng Guo
+- **Published**: IEEE Trans. Audio, Speech, Lang. Process., 2026, pp. 1-15
+- **DOI**: 10.1109/TASLPRO.2026.3700049
+- **Summary**: DFC — compact DNN (856K params) for direct feedback-path IR estimation in hearing aids. NESD loss with temporal smoothing (average pooling N=50, exponential smoothing α=0.5) resolves convergence/steady-state trade-off. Two-stage training (synthetic → measured IRs). Outperforms FD-AFC and DeepMFC on speech (PESQ 4.54 vs 4.34/4.35) and music (PEAQ -0.53 vs -2.31/-0.92). MUSHRA 86.13 vs 57.48/37.45. 30x faster convergence after path changes.
+- **Pages created**:
+  - `raw/papers/lydaki-2026-deep-feedback-cancellation-hearing-aids/full-text.md` — MinerU VLM extraction
+  - `wiki/sources/lydaki-2026-deep-feedback-cancellation-hearing-aids.md` — source page
+  - `wiki/entities/eleftheria-lydaki.md` — DFC lead author
+  - `wiki/entities/zheng-hua-tan.md` — co-author
+  - `wiki/entities/meng-guo.md` — co-author
+  - `wiki/concepts/deep-feedback-cancellation.md` — DFC concept
+  - `wiki/concepts/normalized-euclidean-system-distance.md` — NESD metric/loss
+- **Pages updated**:
+  - `wiki/entities/jesper-jensen.md` — added DFC contribution
+  - `wiki/concepts/hearing-aid-feedback-cancellation.md` — added DFC to deep learning approaches
+  - `wiki/concepts/maximum-stable-gain.md` — added DFC source
+  - `wiki/concepts/prediction-error-method.md` — added DFC source
+  - `wiki/concepts/frequency-shift-feedback-cancellation.md` — added DFC source
+  - `wiki/index.md` — added 3 entities, 2 concepts, 1 source; updated statistics
+  - `wiki/entities/index.md` — added 3 entity rows
+  - `wiki/concepts/index.md` — added 2 concept rows
+  - `wiki/sources/index.md` — added 1 source row
 
 
 

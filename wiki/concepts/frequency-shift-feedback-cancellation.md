@@ -51,6 +51,7 @@ FS can be combined with other AFC methods for improved performance:
 
 ## Related Sources
 
+- [[sources/lydaki-2026-deep-feedback-cancellation-hearing-aids|Lydaki 2026: Deep Feedback Cancellation]] — DFC outperforms FD-AFC-FS without frequency shifting artifacts
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — FS+DeepPEM-AFC achieves optimal performance
 - Schroeder 1964: Improvement of acoustic-feedback stability by frequency shifting
 - Zheng et al. 2016: Analysis of additional stable gain by frequency shifting

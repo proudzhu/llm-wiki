@@ -76,5 +76,6 @@ where Q is the overlap-save matrix. This reduces complexity significantly, makin
 
 ## Related Sources
 
+- [[sources/lydaki-2026-deep-feedback-cancellation-hearing-aids|Lydaki 2026: Deep Feedback Cancellation]] — DFC as alternative to PEM-based approaches
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC with GRU step-size prediction
 - Spriet et al. 2005: Adaptive feedback cancellation in hearing aids with linear prediction of the desired signal
