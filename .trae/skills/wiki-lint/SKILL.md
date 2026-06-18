@@ -7,6 +7,21 @@ description: "Performs comprehensive health check of the LLM wiki knowledge base
 
 This skill performs a comprehensive health check of the LLM wiki knowledge base, checking for index drift, broken links, orphan pages, and data gaps.
 
+## Available Scripts
+
+All Python scripts are in the `scripts/` subdirectory. Run from the project root.
+
+| Script | Purpose |
+|--------|---------|
+| `scripts/count_files.py` | Count actual `.md` files per category directory |
+| `scripts/count_index_rows.py` | Count rows in main index and subdirectory indexes |
+| `scripts/check_index_drift.py` | Check missing, phantom, duplicate entries |
+| `scripts/check_broken_links.py` | Categorized broken wikilink analysis |
+| `scripts/check_orphans.py` | Find pages with zero inbound references |
+| `scripts/check_statistics.py` | Verify stated stats vs actual file counts |
+| `scripts/verify_index.py` | Post-rebuild diff=0 verification |
+| `scripts/rebuild_index.py` | Auto-generate missing index rows |
+
 ## When to Invoke
 
 - User asks to "lint" the wiki
@@ -21,189 +36,96 @@ Read `schema/AGENTS.md` to understand the lint workflow requirements (contradict
 
 ### Step 2: Count Actual Files
 
-Use Python to count actual files in each directory:
+Count actual `.md` files in each category directory (excluding `index.md`):
 
 ```bash
-python -c "
-import os
-dirs = {'entities':0,'concepts':0,'sources':0,'synthesis':0,'queries':0}
-for d in dirs:
-    count = len([f for f in os.listdir(f'wiki/{d}') if f.endswith('.md') and f != 'index.md'])
-    dirs[d] = count
-total = sum(dirs.values())
-print(f'Actual: {dirs[\"entities\"]} entities, {dirs[\"concepts\"]} concepts, {dirs[\"sources\"]} sources, {dirs[\"synthesis\"]} synthesis, {dirs[\"queries\"]} queries = {total} total')
-"
+python .agents/skills/wiki-lint/scripts/count_files.py
+```
+
+**Expected output:**
+```
+Actual: 258 entities, 224 concepts, 102 sources, 19 synthesis, 7 queries = 610 total
 ```
 
 ### Step 3: Count Index Rows
 
-Count rows in each index file using Python (reliable regex across all platforms):
+Count rows in the main index and each subdirectory index:
 
 ```bash
-python -c "
-import re
-with open('wiki/index.md') as f:
-    content = f.read()
-for name in ('entities','concepts','sources','synthesis','queries'):
-    count = len(re.findall(rf'^\\| \\[\\[{name}/', content, re.MULTILINE))
-    print(f'Main index {name}: {count}')
-"
+python .agents/skills/wiki-lint/scripts/count_index_rows.py
 ```
 
-Also check subdirectory indexes:
+This counts lines like `| [[entities/some-page|...` in `wiki/index.md` and all `| [[` lines in subdirectory indexes. If counts match Step 2, there is no index drift.
 
-```bash
-python -c "
-import re
-for name in ('entities','concepts','sources','synthesis','queries'):
-    with open(f'wiki/{name}/index.md') as f:
-        count = len(re.findall(r'^\\| \\[\\[' + name + r'/', f.read(), re.MULTILINE))
-    print(f'Sub-index {name}: {count}')
-"
+**Expected output:**
+```
+Main index entities: 258
+Main index concepts: 224
+...
+Sub-index entities: 258
+Sub-index concepts: 224
+...
 ```
 
 ### Step 4: Identify Missing & Phantom Entries
 
-Compare actual files against index entries to find both **missing entries** (file exists but not in index) and **phantom entries** (index row with no file). Also check for **duplicate rows** (same slug multiple times):
+Compare actual files against index entries to find **missing** (file exists but not in index), **phantom** (index row with no file), and **duplicate** entries:
 
 ```bash
-python -c "
-import os, re
-from collections import Counter
-
-for name in ('entities','concepts','sources','synthesis'):
-    actual = set(os.path.splitext(f)[0] for f in os.listdir(f'wiki/{name}') if f.endswith('.md') and f != 'index.md')
-    indexed = set()
-    indexed_list = []
-    with open('wiki/index.md') as f:
-        for line in f:
-            m = re.match(r'^\\| \\[\\[' + name + r'/([^|\\\\]+)', line)
-            if m:
-                indexed.add(m.group(1))
-                indexed_list.append(m.group(1))
-    
-    missing = actual - indexed
-    phantom = indexed - actual
-    dupes = {k:v for k,v in Counter(indexed_list).items() if v > 1}
-    
-    print(f'{name}: {len(actual)} files, {len(indexed)} indexed')
-    if missing:
-        print(f'  MISSING from index ({len(missing)}):')
-        for x in sorted(missing): print(f'    {x}')
-    if phantom:
-        print(f'  PHANTOM in index ({len(phantom)}):')
-        for x in sorted(phantom): print(f'    {x}')
-    if dupes:
-        print(f'  DUPLICATE rows ({len(dupes)}):')
-        for x, c in dupes.items(): print(f'    {x} appears {c}x')
-"
+python .agents/skills/wiki-lint/scripts/check_index_drift.py
 ```
 
-Also check subdirectory indexes for consistency:
-
-```bash
-for name in entities concepts sources synthesis queries; do
-  actual=$(ls wiki/$name/*.md 2>/dev/null | grep -v index.md | wc -l)
-  indexed=$(grep -c '^| \[\[' wiki/$name/index.md 2>/dev/null || echo 0)
-  echo "Sub-index $name: $indexed indexed vs $actual actual"
-done
-```
+The script handles escaped pipes (`\|`) in markdown tables. The slug capture pattern `[^|\\\]]+` excludes pipe, backslash, and closing bracket so that `\|` doesn't append a trailing backslash to the slug name.
 
 ### Step 5: Check for Broken Wikilinks
 
-Search for wikilinks that reference non-existent files. **Important:** use `os.path.normpath()` + `os.path.exists()` to correctly resolve `../` relative paths (which are convention violations but not actually broken):
+Scans all wiki content for wikilinks and categorizes them. **Important considerations:**
+
+1. **Escaped pipes** (`\|`) in markdown tables: the `\|` sequence separates the link target from display text inside `[[...]]`. Treat `\|` as a delimiter.
+2. **Section anchors** (`#Heading`): stripped before existence checking.
+3. **`../` prefixes**: violate the vault-absolute convention (per `schema/AGENTS.md`) but resolve in MkDocs. Reported separately as convention violations.
+4. **`wiki/` prefixes**: e.g., `[[wiki/concepts/beamforming]]` -- the target resolves to `wiki/wiki/concepts/beamforming.md` which doesn't exist. Correct form is `[[concepts/beamforming]]`.
+5. **Missing category prefix**: e.g., `[[beamforming]]` instead of `[[concepts/beamforming]]`. The target `wiki/beamforming.md` doesn't exist, but `wiki/concepts/beamforming.md` does.
 
 ```bash
-python -c "
-import glob, os, re
-
-wikilinks = {}
-for f in glob.glob('wiki/**/*.md', recursive=True):
-    with open(f, encoding='utf-8') as fh:
-        for m in re.finditer(r'\[\[([^\]|]+)(?:\|[^\]]+)?\]\]', fh.read()):
-            link = m.group(1)
-            if link.strip() == '...':  # skip placeholder in log.md
-                continue
-            if link not in wikilinks:
-                wikilinks[link] = []
-            wikilinks[link].append(os.path.relpath(f))
-
-broken = []
-for link in sorted(wikilinks):
-    target = os.path.normpath(f'wiki/{link}.md')
-    if not os.path.exists(target):
-        broken.append(link)
-
-print(f'Total wikilinks found: {len(wikilinks)}')
-print(f'Broken wikilinks: {len(broken)}')
-for b in broken[:20]:
-    sources = wikilinks.get(b, [])
-    print(f'  BROKEN: {b}')
-    for s in sources[:2]:
-        print(f'    from: {s}')
-if len(broken) > 20:
-    print(f'  ... and {len(broken)-20} more')
-"
+python .agents/skills/wiki-lint/scripts/check_broken_links.py
 ```
 
-**Note:** Wikilinks using `../` prefixes (e.g., `[[../concepts/foo]]`) violate the vault-absolute convention but resolve correctly in MkDocs builds. They are not broken links — only links whose normalized path doesn't exist on disk are truly broken.
+**Note:** Wikilinks using `../` prefixes are convention violations but not broken links. Links missing category prefix are the most common issue -- the script automatically detects the correct category. Links using `wiki/` prefix should be fixed by removing the `wiki/` prefix.
 
 ### Step 6: Check for Orphan Pages
 
-Find pages with no inbound wikilinks. Use Python for robust file scanning:
+Find pages with **zero inbound references** from any wiki content. Checks both wikilinks (`[[target]]`) and markdown links (`[text](../target.md)`), with nested-bracket support in link text:
 
 ```bash
-python -c "
-import glob, os, re
-# Get all page names
-entity_pages = [os.path.splitext(os.path.basename(f))[0] for f in glob.glob('wiki/entities/*.md') if 'index.md' not in f]
-
-# Collect all wikilink targets from ALL wiki content
-all_links = set()
-for f in glob.glob('wiki/**/*.md', recursive=True):
-    with open(f, encoding='utf-8') as fh:
-        for m in re.finditer(r'\[\[([^\]|]+)(?:\|[^\]]+)?\]\]', fh.read()):
-            all_links.add(m.group(1))
-
-# Find orphans (pages never linked to)
-orphans = [p for p in entity_pages if p not in all_links]
-print(f'Orphan pages: {len(orphans)}')
-for o in sorted(orphans): print(f'  {o}')
+python .agents/skills/wiki-lint/scripts/check_orphans.py
 ```
 
-Note: Many pages are expected to be linked only from index files, not from other content pages.
+This covers wikilinks and markdown links, normalizes `../` and `wiki/` prefixes to avoid false positives. A page counted as "orphaned" genuinely has zero inbound references from any wiki page, index, or log entry.
 
 ### Step 7: Check Statistics Consistency
 
-Read the Statistics section in `wiki/index.md` and verify counts match actual files from Step 2:
+Read the Statistics section in `wiki/index.md` and verify stated counts match actual files:
 
 ```bash
-python -c "
-import re
-with open('wiki/index.md') as f:
-    content = f.read()
-# Extract stats from the Statistics section
-stats = re.findall(r'- \*\*(Entities|Concepts|Sources|Synthesis|Queries|Total pages)\*\*: (\d+)', content)
-for name, val in stats:
-    print(f'  {name}: {val}')
-"
+python .agents/skills/wiki-lint/scripts/check_statistics.py
 ```
+
+This parses the `## Statistics` section, extracts stated counts, and compares each category (including Total pages) against the actual file counts from disk.
 
 ### Step 8: Rebuild Indexes (if drift detected)
 
 If index drift is found, use the bundled `rebuild_index.py` script:
 
 ```bash
-python .trae/skills/wiki-lint/rebuild_index.py
+python .agents/skills/wiki-lint/scripts/rebuild_index.py
 ```
 
 The script:
 1. Reads existing index entries from `wiki/index.md` using regex (handles escaped `\|` in wikilinks)
 2. Compares against actual files in `wiki/entities/`, `wiki/concepts/`, `wiki/sources/`
-3. Outputs missing entries in markdown table format with auto-generated summaries (stdout only, not stderr)
+3. Outputs missing entries in markdown table format with auto-generated summaries
 4. Preserves existing high-quality summaries (only generates new ones for truly missing entries)
-
-> ⚠️ **For Python in `pwsh -Command`**: When passing multi-line Python scripts inside `"..."`, escape `$` as `` `$ ``. Better yet, write the script to a temp `.py` file and run it with `python tmp_lint_script.py`.
 
 After running the script, use the output to:
 1. Add missing entries to `wiki/index.md` (entities, concepts, sources tables)
@@ -212,29 +134,24 @@ After running the script, use the output to:
 4. Update statistics section in `wiki/index.md`
 
 **Manual rebuild approach** (if script is unavailable):
-
 1. Read existing index entries to preserve high-quality summaries
 2. Identify missing entries
 3. Generate summaries from page content (skip tag lines, frontmatter, find first meaningful paragraph)
-4. Add missing entries to all index files:
-   - `wiki/index.md` (main index)
-   - `wiki/entities/index.md`
-   - `wiki/concepts/index.md`
-   - `wiki/sources/index.md`
+4. Add missing entries to all index files: `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md`
 5. Remove any duplicates found
 6. Update statistics section
 
 ### Step 9: Log Results
 
-Append lint results to `wiki/log.md`. Include the `---` separator before the entry (consistent with existing log format):
+Append lint results to `wiki/log.md`. Include the `---` separator before the entry:
 
 ```markdown
 ---
 
 ## [YYYY-MM-DD] lint | Health check
 
-- **Index consistency**: [summary of findings — which categories match and which don't]
-- **Broken links**: [count of truly broken links; note convention-violating `../` links separately]
+- **Index consistency**: [summary of findings -- which categories match and which don't]
+- **Broken links**: [count per category: truly broken, missing-prefix, wiki/-prefix, ../ violations, log.md refs]
 - **Duplicate entries**: [count and which slugs]
 - **Orphan pages**: [count per category]
 - **Statistics**: [stated vs actual, whether Total pages is correct]
@@ -250,46 +167,34 @@ Accumulates over multiple ingest operations where subdirectory indexes were upda
 Same entity/concept/source appears multiple times in index with different summaries. Fix by keeping the better summary and removing the duplicate.
 
 ### Escaped Pipes in Wikilinks
-Markdown tables use `\|` for display text containing pipes. Regex patterns must handle both escaped and unescaped pipes: `r'\[\[entities/([^\|\\]+)(?:\\?\|[^\]]+)?\]\]'`
+Markdown tables use `\|` for display text containing pipes. Regex patterns must handle both escaped and unescaped pipes. The `\|` sequence splits the target from display text. Use `[^|\\\]]+` to capture slug characters excluding pipe, backslash, and closing bracket.
 
 ### Unicode Encoding on Windows
-Python's default 'gbk' codec can't handle special characters. Use `sys.stdout.reconfigure(encoding='utf-8')` or redirect output to file.
+Python's default 'gbk' codec can't handle special characters on Windows. All scripts use `sys.stdout.reconfigure(encoding='utf-8')` and `encoding='utf-8'` in `open()` calls.
+
+### Missing Category Prefix in Wikilinks
+Content pages frequently use bare slugs (e.g., `[[beamforming]]`) instead of category-qualified paths (e.g., `[[concepts/beamforming]]`). Fix by prepending the correct category.
+
+### `wiki/` Prefix in Wikilinks
+Some pages use `[[wiki/concepts/foo]]` instead of the correct `[[concepts/foo]]`. The `wiki/` prefix duplicates the root directory name. Fix by removing the `wiki/` prefix.
+
+### `../` Relative Prefixes
+Using `[[../concepts/foo]]` instead of `[[concepts/foo]]` violates the vault-absolute convention (per `schema/AGENTS.md`). While these resolve in MkDocs builds, they should be fixed to use the standard `[[category/slug]]` form.
 
 ## Verification Commands
 
 After any index rebuild, verify all diffs are 0:
 
-```python
-# Run this as: python verification_script.py
-import os, re
-
-for name in ('entities','concepts','sources','synthesis'):
-    idx_path = f'wiki/{name}/index.md'
-    actual = len([f for f in os.listdir(f'wiki/{name}') if f.endswith('.md') and f != 'index.md'])
-    
-    indexed = 0
-    with open(idx_path) as f:
-        for line in f:
-            if re.match(r'^\| \[\[', line):
-                indexed += 1
-    
-    diff = indexed - actual
-    status = '✅' if diff == 0 else '❌'
-    print(f'{status} {name}: {indexed} indexed, {actual} actual (diff={diff})')
-
-# Also check main index
-total_actual = sum(
-    len([f for f in os.listdir(f'wiki/{d}') if f.endswith('.md') and f != 'index.md'])
-    for d in ('entities','concepts','sources','synthesis','queries')
-)
-print(f'\nTotal actual files: {total_actual}')
+```bash
+python .agents/skills/wiki-lint/scripts/verify_index.py
 ```
 
+Quick PowerShell check:
+
 ```powershell
-# Quick PowerShell check (forward slashes, ${} for variables)
 $eidx = (Select-String -Path "wiki/entities/index.md" -Pattern '^\| \[\[entities/' | Measure-Object).Count
 $eact = (Get-ChildItem "wiki/entities/*.md" -Exclude "index.md").Count
 $diff = $eidx - $eact
-if ($diff -eq 0) { Write-Output "✅ Entities: ${eidx} = ${eact}" }
-else { Write-Output "❌ Entities: ${eidx} indexed vs ${eact} actual (diff=${diff})" }
+if ($diff -eq 0) { Write-Output "OK Entities: ${eidx} = ${eact}" }
+else { Write-Output "MISMATCH Entities: ${eidx} indexed vs ${eact} actual (diff=${diff})" }
 ```
