@@ -2429,3 +2429,36 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/index.md` — added 3 concepts, 1 source; updated statistics
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/concepts/index.md` — added 3 concept rows
+
+---
+
+## [2026-06-18] ingest | HALO: Half-frame-rate Adaptive Learnable Operator (Zhao et al. 2026)
+
+- **Source**: `raw/papers/zhao-2026-halo-half-frame-rate-adaptive-operator/full-text.md` (Zotero: WQLLU8C4)
+- **Authors**: Jiadong Zhao, Dahan Wang, Yu Sun, Leyan Yang, Xiaobin Rong, Shiruo Sun, Yuxiang Hu, Jing Lu
+- **Published**: arXiv preprint, June 2026
+- **DOI**: 10.48550/arXiv.2606.12328
+- **Summary**: HALO introduces a causal plug-in module that halves the internal frame rate in STFT-based speech enhancement using adaptive dynamic-convolution-based reduction and restoration operators, reducing backbone compute with no added algorithmic latency.
+- **Extraction**: Defuddle (arXiv HTML)
+- **Pages created**:
+  - `raw/papers/zhao-2026-halo-half-frame-rate-adaptive-operator/full-text.md` — extracted text from arXiv HTML
+  - `raw/papers/zhao-2026-halo-half-frame-rate-adaptive-operator/figures/Fig1.png` — overall framework diagram
+  - `raw/papers/zhao-2026-halo-half-frame-rate-adaptive-operator/figures/Fig2.png` — rate-reduction operator diagram
+  - `wiki/sources/zhao-2026-halo-half-frame-rate-adaptive-operator.md`
+  - `wiki/entities/jiadong-zhao.md`
+  - `wiki/entities/dahan-wang.md`
+  - `wiki/entities/yu-sun.md`
+  - `wiki/entities/leyan-yang.md`
+  - `wiki/entities/shiruo-sun.md`
+  - `wiki/concepts/dynamic-convolution.md`
+- **Pages updated**:
+  - `wiki/entities/xiaobin-rong.md` — added HALO contribution
+  - `wiki/entities/yuxiang-hu.md` — added HALO contribution
+  - `wiki/entities/jing-lu.md` — added HALO contribution
+  - `wiki/concepts/gtcrn.md` — added HALO as related source
+  - `wiki/concepts/spectrogram-analysis.md` — added HALO as related source
+  - `wiki/concepts/attention-gate.md` — added dynamic convolution link and HALO source
+  - `wiki/index.md` — added 5 entities, 1 concept, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 5 entity rows
+  - `wiki/concepts/index.md` — added 1 concept row

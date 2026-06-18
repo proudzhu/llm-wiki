@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-18
-updated: 2026-05-21
+updated: 2026-06-18
 sources:
   - raw/papers/kim-2021-broadcasted-residual-learning/full-text.md
   - raw/papers/cai-2024-tf-sepnet/full-text.md
@@ -55,3 +55,4 @@ In BC-ResNet keyword spotting, 1-second audio clips sampled at 16 kHz are conver
 
 - [[sources/kim-2021-broadcasted-residual-learning|Kim, Chang, Lee & Sung 2021: Broadcasted Residual Learning]]
 - [[sources/cai-2024-tf-sepnet|Cai, Zhang & Li 2024: TF-SepNet]]
+- [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator|Zhao et al. 2026: HALO — Overlap-induced redundancy in STFT-based speech enhancement]]

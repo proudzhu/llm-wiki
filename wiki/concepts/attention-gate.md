@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-16
-updated: 2026-05-16
+updated: 2026-06-18
 sources:
   - wiki/sources/kuang-2024-lightweight-speech-enhancement-bone-air.md
 tags:
@@ -59,7 +59,9 @@ $$
 
 - [[concepts/densely-gated-convolutional-attention-network|DenGCAN]]
 - [[concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
+- [[concepts/dynamic-convolution|Dynamic Convolution]]
 
 ## Related Sources
 
 - [[sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]
+- [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator|Zhao et al. 2026: HALO — Gated dynamic convolution for adaptive frame-rate reduction]]

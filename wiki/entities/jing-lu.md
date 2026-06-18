@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-24
-updated: 2026-05-24
+updated: 2026-06-18
 tags:
   - researcher
   - speech-enhancement
@@ -19,3 +19,4 @@ tags:
 
 - Co-author of GTCRN (ICASSP 2024) — ultralightweight speech enhancement
 - Co-author of DPCRN (Interspeech 2021) — dual-path convolution recurrent network for speech enhancement
+- Co-author of HALO (arXiv 2026) — half-frame-rate adaptive learnable operator for lightweight STFT-based speech enhancement

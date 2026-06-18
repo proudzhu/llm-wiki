@@ -1,20 +1,19 @@
 ---
 type: entity
-created: 2026-05-24
+created: 2026-06-18
 updated: 2026-06-18
 tags:
   - researcher
   - speech-enhancement
-  - horizon-robotics
+  - nju
 ---
 
-# Yuxiang Hu
+# Leyan Yang
 
-**Affiliation**: NJU-Horizon Intelligent Audio Lab, Horizon Robotics, Beijing, China
+**Affiliation**: Key Laboratory of Modern Acoustics, Nanjing University, China
 **Role**: Researcher
 **Research Focus**: Speech enhancement, audio signal processing.
 
 ## Key Contributions
 
-- Co-author of GTCRN (ICASSP 2024) — ultralightweight speech enhancement
 - Co-author of HALO (arXiv 2026) — half-frame-rate adaptive learnable operator for lightweight STFT-based speech enhancement

@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-24
-updated: 2026-06-07
+updated: 2026-06-18
 tags:
   - neural-network
   - speech-enhancement
@@ -77,3 +77,4 @@ With 23.7 K parameters and 39.6 MMACs/s, GTCRN achieves:
 
 - [[sources/rong-2024-gtcrn-speech-enhancement-ultralow|Rong et al. 2024: GTCRN — A Speech Enhancement Model Requiring Ultralow Computational Resources]]
 - [[sources/schroter-2022-deepfilternet|Schröter et al. 2022: DeepFilterNet]]
+- [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator|Zhao et al. 2026: HALO — Half-frame-rate Adaptive Learnable Operator for Lightweight STFT-based Speech Enhancement]]

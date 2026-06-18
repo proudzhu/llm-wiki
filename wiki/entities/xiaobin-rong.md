@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-24
-updated: 2026-05-24
+updated: 2026-06-18
 tags:
   - researcher
   - speech-enhancement
@@ -18,3 +18,4 @@ tags:
 ## Key Contributions
 
 - Lead author of GTCRN (ICASSP 2024) — a speech enhancement model requiring only 23.7K parameters and 39.6 MMACs/s
+- Co-author of HALO (arXiv 2026) — half-frame-rate adaptive learnable operator for lightweight STFT-based speech enhancement

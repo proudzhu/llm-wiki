@@ -257,4 +257,9 @@
 | [[entities/eleftheria-lydaki|Eleftheria Lydaki]] | Eriksholm / Aalborg U — Deep Feedback Cancellation (DFC) for hearing aids | 2026-06-10 |
 | [[entities/zheng-hua-tan|Zheng-Hua Tan]] | Aalborg University — speech processing, deep learning for audio, hearing aid DSP | 2026-06-10 |
 | [[entities/meng-guo|Meng Guo]] | Eriksholm Research Centre — hearing aid signal processing, acoustic feedback cancellation | 2026-06-10 |
+| [[entities/jiadong-zhao|Jiadong Zhao]] | Nanjing University — lead author of HALO: adaptive frame-rate reduction for lightweight STFT-based speech enhancement | 2026-06-18 |
+| [[entities/dahan-wang|Dahan Wang]] | Nanjing University — co-author of HALO lightweight STFT speech enhancement | 2026-06-18 |
+| [[entities/yu-sun|Yu Sun]] | Samsung Electronics (China) — co-author of HALO lightweight STFT speech enhancement | 2026-06-18 |
+| [[entities/leyan-yang|Leyan Yang]] | Nanjing University — co-author of HALO lightweight STFT speech enhancement | 2026-06-18 |
+| [[entities/shiruo-sun|Shiruo Sun]] | Horizon Robotics — co-author of HALO lightweight STFT speech enhancement | 2026-06-18 |
 

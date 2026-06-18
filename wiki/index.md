@@ -263,6 +263,11 @@
 | [[entities/eleftheria-lydaki\|Eleftheria Lydaki]] | Eriksholm / Aalborg U — Deep Feedback Cancellation (DFC) for hearing aids | 2026-06-10 |
 | [[entities/zheng-hua-tan\|Zheng-Hua Tan]] | Aalborg University — speech processing, deep learning for audio, hearing aid DSP | 2026-06-10 |
 | [[entities/meng-guo\|Meng Guo]] | Eriksholm Research Centre — hearing aid signal processing, acoustic feedback cancellation | 2026-06-10 |
+| [[entities/jiadong-zhao\|Jiadong Zhao]] | Nanjing University — lead author of HALO adaptive frame-rate operator for lightweight STFT speech enhancement | 2026-06-18 |
+| [[entities/dahan-wang\|Dahan Wang]] | Nanjing University — co-author of HALO lightweight STFT speech enhancement | 2026-06-18 |
+| [[entities/yu-sun\|Yu Sun]] | Samsung Electronics (China) — co-author of HALO lightweight STFT speech enhancement | 2026-06-18 |
+| [[entities/leyan-yang\|Leyan Yang]] | Nanjing University — co-author of HALO lightweight STFT speech enhancement | 2026-06-18 |
+| [[entities/shiruo-sun\|Shiruo Sun]] | Horizon Robotics — co-author of HALO lightweight STFT speech enhancement | 2026-06-18 |
 
 ---
 
@@ -495,6 +500,7 @@
 | [[concepts/erb-scale\|ERB Scale]] | Psychoacoustic frequency scale modeling human auditory filter bandwidths; compresses to 32 bands for efficient SE | 2026-06-07 |
 | [[concepts/deep-feedback-cancellation\|Deep Feedback Cancellation]] | Compact DNN (856K params) for direct feedback-path IR estimation in hearing aids; 30x faster convergence than FD-AFC | 2026-06-10 |
 | [[concepts/normalized-euclidean-system-distance\|Normalized Euclidean System Distance]] | NESD: normalized squared error between true and estimated feedback-path IRs; used as loss and metric in AFC | 2026-06-10 |
+| [[concepts/dynamic-convolution\|Dynamic Convolution]] | Input-dependent convolution kernel mixing via lightweight gating; used in HALO adaptive frame-rate operators | 2026-06-18 |
 
 ---
 
@@ -605,6 +611,7 @@
 | [[sources/indenbom-2023-deepvqe\|Indenbom et al. 2023: DeepVQE]] | Real-time joint AEC/NS/DR with cross-attention alignment and CCM; SOTA on ICASSP 2023 AEC and DNS challenges | 2023 |
 | [[sources/schroter-2022-deepfilternet\|Schrőter et al. 2022: DeepFilterNet]] | Low-complexity two-stage speech enhancement using ERB gains + deep filtering; 1.8M params, 0.35 GMACs, WB-PESQ 2.81 | 2022 |
 | [[sources/lydaki-2026-deep-feedback-cancellation-hearing-aids\|Lydaki et al. 2026: Deep Feedback Cancellation in Hearing Aids]] | DFC: 856K-param DNN for direct IR estimation; PESQ 4.54, MUSHRA 86.13; 30x faster convergence than FD-AFC | 2026 |
+| [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator\|Zhao et al. 2026: HALO — Half-frame-rate Adaptive Learnable Operator]] | Causal plug-in module halving STFT frame rate via adaptive dynamic convolution; consistent PESQ+ across GTCRN, DPCRN, LiSenNet, UL-UNAS | 2026 |
 ---
 
 ## Synthesis
@@ -653,10 +660,10 @@
 
 ## Statistics
 
-- **Total pages**: 603
-- **Entities**: 253
-- **Concepts**: 223
-- **Sources**: 101
+- **Total pages**: 610
+- **Entities**: 258
+- **Concepts**: 224
+- **Sources**: 102
 - **Synthesis**: 19
 - **Queries**: 7
-- **Last updated**: 2026-06-10
+- **Last updated**: 2026-06-18
