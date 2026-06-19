@@ -263,3 +263,12 @@
 | [[entities/leyan-yang|Leyan Yang]] | Nanjing University — co-author of HALO lightweight STFT speech enhancement | 2026-06-18 |
 | [[entities/shiruo-sun|Shiruo Sun]] | Horizon Robotics — co-author of HALO lightweight STFT speech enhancement | 2026-06-18 |
 
+| [[entities/yike-zhu\|Yike Zhu]] | NPU — G-MaP-SE: guided speech enhancement via GMM-based prior matching (Interspeech 2026) | 2026-06-19 |
+| [[entities/ziqian-wang\|Ziqian Wang]] | NPU — co-author of G-MaP-SE (Interspeech 2026) | 2026-06-19 |
+| [[entities/zikai-liu\|Zikai Liu]] | NPU — co-author of G-MaP-SE (Interspeech 2026) | 2026-06-19 |
+| [[entities/xingchen-li\|Xingchen Li]] | NPU — co-author of G-MaP-SE (Interspeech 2026) | 2026-06-19 |
+| [[entities/zhuangqi-chen\|Zhuangqi Chen]] | NPU — co-author of G-MaP-SE (Interspeech 2026) | 2026-06-19 |
+| [[entities/xianjun-xia\|Xianjun Xia]] | NPU — co-author of G-MaP-SE (Interspeech 2026) | 2026-06-19 |
+| [[entities/chuanzeng-huang\|Chuanzeng Huang]] | NPU — co-author of G-MaP-SE (Interspeech 2026) | 2026-06-19 |
+| [[entities/lei-xie\|Lei Xie]] | NPU Professor — G-MaP-SE, speech processing, speaker recognition, voice conversion | 2026-06-19 |
+

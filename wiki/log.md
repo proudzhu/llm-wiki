@@ -2462,3 +2462,56 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 5 entity rows
   - `wiki/concepts/index.md` — added 1 concept row
+
+---
+
+## [2026-06-19] lint | Health check
+
+- **Index consistency**: All category files and index rows match perfectly: 258 entities, 224 concepts, 102 sources, 19 synthesis, 7 queries = 610 total. No missing entries, phantom entries, or duplicate rows in either main index (`wiki/index.md`) or subdirectory indexes. Statistics section accurate.
+- **Broken links**:
+  - 171 wikilinks missing category prefix; all resolve to existing wiki pages when the correct category is prepended (e.g., `[[beamforming]]` → `[[concepts/beamforming]]`). Most prevalent in concept and synthesis pages that link to other concepts/entities/sources without the directory prefix.
+  - 29 wikilinks incorrectly use `wiki/` prefix (e.g., `[[wiki/concepts/beamforming]]` instead of `[[concepts/beamforming]]`). Found in concept pages and some source pages.
+  - 88 convention violations using `../` relative prefixes (e.g., `[[../concepts/foo]]`). These resolve correctly in MkDocs but violate the vault-absolute convention from `schema/AGENTS.md`.
+  - 17 log.md informal references using human-readable names (expected — these are not actual wikilinks).
+  - 23 image embed wikilinks (`![[raw/papers/…]]`) referencing non-existent figure files. Likely assets from recent paper ingests that haven't been committed.
+- **Duplicate entries**: None found in any index.
+- **Orphan pages**: 0 — every page is referenced from at least one content page, index, or log entry.
+- **Statistics**: All stated counts match actual file counts exactly (610 total, 258 entities, 224 concepts, 102 sources, 19 synthesis, 7 queries). Last updated 2026-06-18.
+- **Actions taken**: No index rebuild needed (all counts consistent). Results logged.
+
+---
+
+## [2026-06-19] ingest | G-MaP-SE: Guided Speech Enhancement via GMM-Based Prior Matching (Zhu et al. 2026)
+
+- **Source**: `raw/papers/zhu-2026-g-map-se-guided-speech-enhancement/full-text.md` (Zotero: N5AZRUJV)
+- **Authors**: Yike Zhu, Ziqian Wang, Zikai Liu, Xingchen Li, Zhuangqi Chen, Xianjun Xia, Chuanzeng Huang, Lei Xie
+- **Published**: Interspeech 2026 (arXiv preprint 2606.08580)
+- **DOI**: 10.48550/arXiv.2606.08580
+- **Summary**: GMM-based prior matching refines noisy speaker-conditioning embeddings for guided speech enhancement; consistent cross-domain gains on DNS2020 without enrollment audio
+- **Pages created**:
+  - `raw/papers/zhu-2026-g-map-se-guided-speech-enhancement/full-text.md` — arXiv HTML via Defuddle
+  - `raw/papers/zhu-2026-g-map-se-guided-speech-enhancement/figures/x1.png`, `x2.png`, `x3.png` — 3 figures from arXiv HTML
+  - `wiki/sources/zhu-2026-g-map-se-guided-speech-enhancement.md`
+  - `wiki/entities/yike-zhu.md`
+  - `wiki/entities/ziqian-wang.md`
+  - `wiki/entities/zikai-liu.md`
+  - `wiki/entities/xingchen-li.md`
+  - `wiki/entities/zhuangqi-chen.md`
+  - `wiki/entities/xianjun-xia.md`
+  - `wiki/entities/chuanzeng-huang.md`
+  - `wiki/entities/lei-xie.md`
+  - `wiki/concepts/speech-enhancement.md`
+  - `wiki/concepts/gaussian-mixture-model.md`
+  - `wiki/concepts/speaker-embedding.md`
+  - `wiki/concepts/prior-matching.md`
+  - `wiki/concepts/ecapa-tdnn.md`
+  - `wiki/concepts/mp-senet.md`
+  - `wiki/concepts/personalized-speech-enhancement.md`
+  - `wiki/concepts/voicebank-demand.md`
+  - `wiki/concepts/dns-challenge.md`
+  - `wiki/concepts/pesq.md`
+- **Pages updated**:
+  - `wiki/index.md` — added 8 entities, 10 concepts, 1 source; updated statistics to 629 total, 266 entities, 234 concepts, 103 sources
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 8 entity rows
+  - `wiki/concepts/index.md` — added 10 concept rows

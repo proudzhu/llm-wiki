@@ -229,3 +229,14 @@
 | [[concepts/normalized-euclidean-system-distance|Normalized Euclidean System Distance]] | NESD: normalized squared error between true and estimated feedback-path IRs; used as loss and metric in AFC | 2026-06-10 |
 | [[concepts/dynamic-convolution|Dynamic Convolution]] | Input-dependent convolution kernel mixing via lightweight gating; used in HALO adaptive frame-rate operators | 2026-06-18 |
 
+| [[concepts/speech-enhancement\|Speech Enhancement]] | Foundational concept of improving quality and intelligibility of noisy speech | 2026-06-19 |
+| [[concepts/gaussian-mixture-model\|Gaussian Mixture Model (GMM)]] | Probabilistic model of weighted Gaussian components; used for clean-speech embedding priors | 2026-06-19 |
+| [[concepts/speaker-embedding\|Speaker Embedding]] | Fixed-dimensional vector capturing speaker characteristics for conditioning | 2026-06-19 |
+| [[concepts/prior-matching\|Prior Matching]] | Refining noisy embeddings by matching against a clean GMM prior | 2026-06-19 |
+| [[concepts/ecapa-tdnn\|ECAPA-TDNN]] | Speaker embedding extractor with channel attention and multi-layer aggregation | 2026-06-19 |
+| [[concepts/mp-senet\|MP-SENet]] | TF-domain speech enhancement backbone with magnitude-phase estimation | 2026-06-19 |
+| [[concepts/personalized-speech-enhancement\|Personalized Speech Enhancement]] | Speaker-conditioned enhancement using enrollment embeddings | 2026-06-19 |
+| [[concepts/voicebank-demand\|VoiceBank+DEMAND (VBD)]] | Standard SE benchmark dataset | 2026-06-19 |
+| [[concepts/dns-challenge\|DNS Challenge]] | Deep Noise Suppression challenge dataset | 2026-06-19 |
+| [[concepts/pesq\|PESQ]] | ITU-T P.862 perceptual speech quality metric | 2026-06-19 |
+

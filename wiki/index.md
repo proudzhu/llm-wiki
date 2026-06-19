@@ -269,6 +269,15 @@
 | [[entities/leyan-yang\|Leyan Yang]] | Nanjing University — co-author of HALO lightweight STFT speech enhancement | 2026-06-18 |
 | [[entities/shiruo-sun\|Shiruo Sun]] | Horizon Robotics — co-author of HALO lightweight STFT speech enhancement | 2026-06-18 |
 
+| [[entities/yike-zhu\|Yike Zhu]] | NPU — G-MaP-SE guided speech enhancement via GMM-based prior matching | 2026-06-19 |
+| [[entities/ziqian-wang\|Ziqian Wang]] | NPU — co-author of G-MaP-SE guided speech enhancement | 2026-06-19 |
+| [[entities/zikai-liu\|Zikai Liu]] | NPU — co-author of G-MaP-SE guided speech enhancement | 2026-06-19 |
+| [[entities/xingchen-li\|Xingchen Li]] | NPU — co-author of G-MaP-SE guided speech enhancement | 2026-06-19 |
+| [[entities/zhuangqi-chen\|Zhuangqi Chen]] | NPU — co-author of G-MaP-SE guided speech enhancement | 2026-06-19 |
+| [[entities/xianjun-xia\|Xianjun Xia]] | NPU — co-author of G-MaP-SE guided speech enhancement | 2026-06-19 |
+| [[entities/chuanzeng-huang\|Chuanzeng Huang]] | NPU — co-author of G-MaP-SE guided speech enhancement | 2026-06-19 |
+| [[entities/lei-xie\|Lei Xie]] | NPU Professor — G-MaP-SE, speech processing, speaker recognition, voice conversion | 2026-06-19 |
+
 ---
 
 ## Concepts
@@ -502,6 +511,17 @@
 | [[concepts/normalized-euclidean-system-distance\|Normalized Euclidean System Distance]] | NESD: normalized squared error between true and estimated feedback-path IRs; used as loss and metric in AFC | 2026-06-10 |
 | [[concepts/dynamic-convolution\|Dynamic Convolution]] | Input-dependent convolution kernel mixing via lightweight gating; used in HALO adaptive frame-rate operators | 2026-06-18 |
 
+| [[concepts/speech-enhancement\|Speech Enhancement]] | Foundational concept: improving quality and intelligibility of noisy speech via time-domain or TF-domain deep learning | 2026-06-19 |
+| [[concepts/gaussian-mixture-model\|Gaussian Mixture Model (GMM)]] | Probabilistic model representing distributions as weighted sum of Gaussian components; used for clean-speech embedding priors | 2026-06-19 |
+| [[concepts/speaker-embedding\|Speaker Embedding]] | Fixed-dimensional vector capturing speaker characteristics; used as conditioning signal in personalized speech enhancement | 2026-06-19 |
+| [[concepts/prior-matching\|Prior Matching]] | Refining noisy embeddings by matching against a clean GMM prior via soft cosine-similarity weighting | 2026-06-19 |
+| [[concepts/ecapa-tdnn\|ECAPA-TDNN]] | State-of-the-art speaker embedding extractor with channel attention and multi-layer feature aggregation | 2026-06-19 |
+| [[concepts/mp-senet\|MP-SENet]] | TF-domain speech enhancement backbone with magnitude-phase estimation and multi-head attention | 2026-06-19 |
+| [[concepts/personalized-speech-enhancement\|Personalized Speech Enhancement]] | Speaker-conditioned enhancement using enrollment embeddings to preserve target speaker characteristics | 2026-06-19 |
+| [[concepts/voicebank-demand\|VoiceBank+DEMAND (VBD)]] | Standard SE benchmark: VoiceBank clean speech + DEMAND noise; 28 train / 2 test speakers | 2026-06-19 |
+| [[concepts/dns-challenge\|DNS Challenge]] | Microsoft-organized Deep Noise Suppression challenge; large-scale dataset for cross-domain SE evaluation | 2026-06-19 |
+| [[concepts/pesq\|PESQ]] | ITU-T P.862 perceptual speech quality metric; wide-band PESQ (WB-PESQ) common in SE evaluation | 2026-06-19 |
+
 ---
 
 ## Sources
@@ -612,6 +632,8 @@
 | [[sources/schroter-2022-deepfilternet\|Schrőter et al. 2022: DeepFilterNet]] | Low-complexity two-stage speech enhancement using ERB gains + deep filtering; 1.8M params, 0.35 GMACs, WB-PESQ 2.81 | 2022 |
 | [[sources/lydaki-2026-deep-feedback-cancellation-hearing-aids\|Lydaki et al. 2026: Deep Feedback Cancellation in Hearing Aids]] | DFC: 856K-param DNN for direct IR estimation; PESQ 4.54, MUSHRA 86.13; 30x faster convergence than FD-AFC | 2026 |
 | [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator\|Zhao et al. 2026: HALO — Half-frame-rate Adaptive Learnable Operator]] | Causal plug-in module halving STFT frame rate via adaptive dynamic convolution; consistent PESQ+ across GTCRN, DPCRN, LiSenNet, UL-UNAS | 2026 |
+
+| [[sources/zhu-2026-g-map-se-guided-speech-enhancement\|Zhu et al. 2026: G-MaP-SE — Guided Speech Enhancement via GMM-Based Prior Matching]] | GMM-based prior matching for noisy speaker-conditioning embeddings; +0.03 WB-PESQ over noisy cond on DNS2020; 0.025M added params | 2026-06-19 |
 ---
 
 ## Synthesis
@@ -660,10 +682,10 @@
 
 ## Statistics
 
-- **Total pages**: 610
-- **Entities**: 258
-- **Concepts**: 224
-- **Sources**: 102
+- **Total pages**: 629
+- **Entities**: 266
+- **Concepts**: 234
+- **Sources**: 103
 - **Synthesis**: 19
 - **Queries**: 7
-- **Last updated**: 2026-06-18
+- **Last updated**: 2026-06-19
