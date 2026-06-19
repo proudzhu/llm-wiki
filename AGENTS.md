@@ -20,7 +20,7 @@ llm-wiki/
 │   ├── synthesis/          # Cross-source analysis, comparisons, insights
 │   └── queries/            # Saved query results and analyses
 ├── schema/                 # Configuration and conventions
-│   └── AGENTS.md           # This file
+├── AGENTS.md               # Schema/conventions document (this file)
 └── README.md               # Project overview
 ```
 
@@ -46,9 +46,11 @@ These rules ensure pages render correctly in **both Obsidian and MkDocs** at wri
 **Rules to follow while writing:**
 
 1. **Never link to a page that does not exist.** Before writing `[[concepts/foo]]`, confirm the target file exists; otherwise either create it or use plain text.
-2. **No stray `[text](...)` placeholders** in `log.md` or anywhere else.
+2. **Always include the category prefix.** Write `[[concepts/beamforming]]`, not bare `[[beamforming]]`. A slug without `/` is treated as `wiki/<slug>.md` and will not resolve to the actual page. The six categories are: `entities/`, `concepts/`, `sources/`, `synthesis/`, `queries/`, and `raw/` (for asset files).
+3. **Never use `wiki/` as a prefix.** The vault root is already the `wiki/` directory. Write `[[concepts/beamforming]]`, not `[[wiki/concepts/beamforming]]`.
+4. **No stray `[text](...)` placeholders** in `log.md` or anywhere else.
 
-See [BUILD.md](BUILD.md) for the build mechanics that make these conventions work, and `plugins/fix_obsidian_escapes.py` for the resolver implementation.
+See [BUILD.md](schema/BUILD.md) for the build mechanics that make these conventions work, and `plugins/fix_obsidian_escapes.py` for the resolver implementation.
 
 ### Page Naming
 - **Entities**: `wiki/entities/{name}.md` (lowercase, hyphenated)
@@ -140,4 +142,4 @@ Periodically (when requested), health-check the wiki:
 
 After any ingest or significant edit, run `uv run mkdocs build --strict`. A clean build exits 0 with `INFO - Documentation built in N seconds`.
 
-See [BUILD.md](BUILD.md) for full mechanics, link-resolution internals, and common strict-mode pitfalls.
+See [BUILD.md](schema/BUILD.md) for full mechanics, link-resolution internals, and common strict-mode pitfalls.

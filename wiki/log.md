@@ -2515,3 +2515,20 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 8 entity rows
   - `wiki/concepts/index.md` — added 10 concept rows
+
+---
+
+## [2026-06-19] lint | Health check
+
+- **Index consistency**: All category files and index rows match perfectly: 266 entities, 234 concepts, 103 sources, 19 synthesis, 7 queries = 629 total. No missing entries, phantom entries, or duplicate rows in either main index (`wiki/index.md`) or subdirectory indexes. Statistics section accurate.
+- **Broken links**:
+  - 171 wikilinks missing category prefix; all resolve to existing wiki pages when the correct category is prepended (e.g., `[[beamforming]]` → `[[concepts/beamforming]]`). Breakdown: 662 in concepts, 64 in entities, 24 in sources, 16 in synthesis, 3 in queries. Most prevalent in concept and synthesis pages that link to other concepts without the directory prefix.
+  - 30 wikilinks incorrectly use `wiki/` prefix (e.g., `[[wiki/concepts/beamforming]]` instead of `[[concepts/beamforming]]`). Found across 12 distinct source pages.
+  - 38 convention violations using `../` relative prefixes (e.g., `[[../concepts/foo]]`). These resolve correctly in MkDocs but violate the vault-absolute convention from `schema/AGENTS.md`. Spread across 20 distinct pages.
+  - 1 template placeholder (`[[concepts/concept-name]]` in `synthesis/llm-wiki-best-practices.md`).
+  - 25 figure embed wikilinks (`[[raw/papers/…/figures/…]]`) — files exist on disk as raw assets, correctly referenced via Obsidian vault-absolute paths.
+  - 17 log.md informal references using human-readable names (expected — these are not actual wikilinks).
+- **Duplicate entries**: None found in any index.
+- **Orphan pages**: 1 — `sources/why-mathematica-not-simplify-sinh-arccosh` has zero inbound references from any wiki page.
+- **Statistics**: All stated counts match actual file counts exactly (629 total, 266 entities, 234 concepts, 103 sources, 19 synthesis, 7 queries). Last updated 2026-06-19.
+- **Actions taken**: No index rebuild needed (all counts consistent). Results logged.

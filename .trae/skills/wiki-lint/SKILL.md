@@ -32,7 +32,7 @@ All Python scripts are in the `scripts/` subdirectory. Run from the project root
 
 ### Step 1: Understand Lint Requirements
 
-Read `schema/AGENTS.md` to understand the lint workflow requirements (contradictions, stale claims, orphan pages, missing pages, cross-references, data gaps).
+Read `AGENTS.md` (project root) to understand the lint workflow requirements (contradictions, stale claims, orphan pages, missing pages, cross-references, data gaps).
 
 ### Step 2: Count Actual Files
 
@@ -83,7 +83,7 @@ Scans all wiki content for wikilinks and categorizes them. **Important considera
 
 1. **Escaped pipes** (`\|`) in markdown tables: the `\|` sequence separates the link target from display text inside `[[...]]`. Treat `\|` as a delimiter.
 2. **Section anchors** (`#Heading`): stripped before existence checking.
-3. **`../` prefixes**: violate the vault-absolute convention (per `schema/AGENTS.md`) but resolve in MkDocs. Reported separately as convention violations.
+3. **`../` prefixes**: violate the vault-absolute convention (per `AGENTS.md`) but resolve in MkDocs. Reported separately as convention violations.
 4. **`wiki/` prefixes**: e.g., `[[wiki/concepts/beamforming]]` -- the target resolves to `wiki/wiki/concepts/beamforming.md` which doesn't exist. Correct form is `[[concepts/beamforming]]`.
 5. **Missing category prefix**: e.g., `[[beamforming]]` instead of `[[concepts/beamforming]]`. The target `wiki/beamforming.md` doesn't exist, but `wiki/concepts/beamforming.md` does.
 
@@ -179,7 +179,7 @@ Content pages frequently use bare slugs (e.g., `[[beamforming]]`) instead of cat
 Some pages use `[[wiki/concepts/foo]]` instead of the correct `[[concepts/foo]]`. The `wiki/` prefix duplicates the root directory name. Fix by removing the `wiki/` prefix.
 
 ### `../` Relative Prefixes
-Using `[[../concepts/foo]]` instead of `[[concepts/foo]]` violates the vault-absolute convention (per `schema/AGENTS.md`). While these resolve in MkDocs builds, they should be fixed to use the standard `[[category/slug]]` form.
+Using `[[../concepts/foo]]` instead of `[[concepts/foo]]` violates the vault-absolute convention (per `AGENTS.md`). While these resolve in MkDocs builds, they should be fixed to use the standard `[[category/slug]]` form.
 
 ## Verification Commands
 

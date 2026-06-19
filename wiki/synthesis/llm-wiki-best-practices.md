@@ -3,7 +3,7 @@ type: synthesis
 created: 2026-04-25
 updated: 2026-04-25
 sources:
-  - schema/AGENTS.md
+  - AGENTS.md
 tags:
   - llm-wiki
   - knowledge-management

@@ -44,6 +44,9 @@ The goal of speech enhancement is to estimate $\hat{x}$ from $y$. The paper addr
 
 ## Methodology
 
+![[raw/papers/zhu-2026-g-map-se-guided-speech-enhancement/figures/x1.png|Overview of G-MaP-SE framework]]
+*Figure 1: Overview of G-MaP-SE. The noisy input is fed to both the SE model and a frozen feature extractor. The MaP module matches the noisy embedding to a precomputed GMM prior and produces a refined prior embedding, which is injected into the backbone via gated fusion.*
+
 ### GMM Prior Construction
 
 A GMM with $K$ diagonal-covariance components is fit via EM on $\ell_2$-normalized speaker embeddings extracted from clean speech using a frozen ECAPA-TDNN extractor:
@@ -130,8 +133,14 @@ A frozen ECAPA-TDNN model outputs 192-dimensional $\ell_2$-normalized speaker em
 
 - **Temperature $\tau$**: Performance peaks at $\tau = 0.2$. Lower values over-commit to a single prototype; higher values over-smooth toward a mean prototype.
 - **GMM components $K$**: Mild peak at $K = 192$. Performance is more sensitive to $\tau$ than $K$ within reasonable ranges.
+![[raw/papers/zhu-2026-g-map-se-guided-speech-enhancement/figures/x3.png|Ablation study on temperature and GMM components]]
+*Figure 3: Ablation on VBD with respect to matching temperature $	au$ (left, $K=192$) and number of GMM components $K$ (right, $	au=0.2$). Performance peaks at $	au=0.2$ and $K=192$.*
+
 
 ### Embedding Analysis
+
+![[raw/papers/zhu-2026-g-map-se-guided-speech-enhancement/figures/x2.png|Embedding cosine similarity distributions]]
+*Figure 2: Cosine similarity between noisy/clean embeddings (left) and matched-prior/clean embeddings (right). The matched embedding shifts toward higher similarity with clean embeddings, validating the noise-correction effect of GMM matching.*
 
 G-MaP shifts the cosine similarity distribution between noisy and clean embeddings toward higher similarity, confirming that GMM matching corrects noise-induced distortions. Some utterances see limited improvement due to suboptimal prototype assignment, but the matched embedding stays in the clean embedding space, reducing noise artifacts.
 
@@ -160,13 +169,3 @@ G-MaP shifts the cosine similarity distribution between noisy and clean embeddin
 
 - [[synthesis/multi-modal-speech-enhancement|Multi-Modal Speech Enhancement]]
 
-## Figures
-
-![[raw/papers/zhu-2026-g-map-se-guided-speech-enhancement/figures/x1.png|Overview of G-MaP-SE framework]]
-*Figure 1: Overview of G-MaP-SE. The noisy input is fed to both the SE model and a frozen feature extractor. The MaP module matches the noisy embedding to a precomputed GMM prior and produces a refined prior embedding, which is injected into the backbone via gated fusion.*
-
-![[raw/papers/zhu-2026-g-map-se-guided-speech-enhancement/figures/x2.png|Embedding cosine similarity distributions]]
-*Figure 2: Cosine similarity between noisy/clean embeddings (left) and matched-prior/clean embeddings (right). The matched embedding shifts toward higher similarity with clean embeddings, validating the noise-correction effect of GMM matching.*
-
-![[raw/papers/zhu-2026-g-map-se-guided-speech-enhancement/figures/x3.png|Ablation study on temperature and GMM components]]
-*Figure 3: Ablation on VBD with respect to matching temperature $\tau$ (left, $K=192$) and number of GMM components $K$ (right, $\tau=0.2$). Performance peaks at $\tau=0.2$ and $K=192$.*

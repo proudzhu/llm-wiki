@@ -42,7 +42,7 @@ llm-wiki/
 
 2. **The Wiki** (`wiki/`) — LLM-generated markdown files: summaries, entity pages, concept pages, comparisons, synthesis. The LLM owns this layer entirely.
 
-3. **The Schema** (`schema/AGENTS.md`) — Tells the LLM how the wiki is structured, what conventions to follow, and what workflows to execute. This is what makes the LLM a disciplined wiki maintainer rather than a generic chatbot.
+3. **The Schema** (`AGENTS.md`) — Tells the LLM how the wiki is structured, what conventions to follow, and what workflows to execute. This is what makes the LLM a disciplined wiki maintainer rather than a generic chatbot.
 
 ### Three Operations
 
@@ -60,7 +60,7 @@ llm-wiki/
 ## Getting Started
 
 1. **Add a source**: Place a document (article, paper, report) into `raw/articles/`, `raw/papers/`, or `raw/reports/`.
-2. **Tell the LLM to ingest**: Share the `schema/AGENTS.md` with your LLM agent and ask it to process the new source.
+2. **Tell the LLM to ingest**: Share the `AGENTS.md` with your LLM agent and ask it to process the new source.
 3. **Browse the wiki**: Open `wiki/index.md` to see what's in the knowledge base. Use Obsidian for the best experience (graph view, real-time preview).
 4. **Ask questions**: Query the wiki through your LLM. Good answers can be saved as new pages in `wiki/queries/`.
 

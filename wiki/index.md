@@ -655,7 +655,7 @@
 | [[synthesis/nonlinear-anc-approaches\|Nonlinear ANC Approaches]] | FLNN, Volterra, Kernel, Spline, Convex Combination — when linear filters aren't enough | Zhao & Zeng 2010, Zhao & Chen 2023, Song & Zhao 2019 |
 | [[synthesis/iir-filter-fitting-frequency-response\|IIR 滤波器拟合频响曲线]] | 向量拟合、最小二乘、输出误差、Hankel-SVD — 从频响测量到状态空间模型 | Liang 2026, Cioffi 1984, Lesniewski, Vaudrey 2003 |
 | [[synthesis/kalman-filter-theory-and-application\|Kalman Filter Theory and Application]] | Comprehensive overview of KF, MCC-KF, and applications in MPC and audio tracking | Welch & Bishop 2006, Chen & Liu 2017, Wills 2008, Liang 2026 |
-| [[synthesis/llm-wiki-best-practices|LLM Wiki Best Practices]] | Comprehensive guide to LLM Wiki architecture, workflows, and maintenance practices | schema/AGENTS.md |
+| [[synthesis/llm-wiki-best-practices|LLM Wiki Best Practices]] | Comprehensive guide to LLM Wiki architecture, workflows, and maintenance practices | AGENTS.md |
 | [[synthesis/multi-modal-speech-enhancement\|Multi-Modal Speech Enhancement]] | Multi-modal approaches combining bone conduction, air conduction, IMU for robust speech enhancement | He 2025, Kuang 2024, Wang 2022, Tagliasacchi 2020 |
 | [[synthesis/secondary-path-modeling-evolution|Secondary Path Modeling Evolution]] | 离线→在线→免建模→绕过：四条技术路线的决策矩阵与演进趋势 | Kuo 1999, Benois 2020, Liang 2026, Zhu 2020 |
 
