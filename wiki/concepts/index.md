@@ -228,7 +228,6 @@
 | [[concepts/deep-feedback-cancellation|Deep Feedback Cancellation]] | Compact DNN (856K params) for direct feedback-path IR estimation in hearing aids; 30x faster convergence than FD-AFC | 2026-06-10 |
 | [[concepts/normalized-euclidean-system-distance|Normalized Euclidean System Distance]] | NESD: normalized squared error between true and estimated feedback-path IRs; used as loss and metric in AFC | 2026-06-10 |
 | [[concepts/dynamic-convolution|Dynamic Convolution]] | Input-dependent convolution kernel mixing via lightweight gating; used in HALO adaptive frame-rate operators | 2026-06-18 |
-
 | [[concepts/speech-enhancement\|Speech Enhancement]] | Foundational concept of improving quality and intelligibility of noisy speech | 2026-06-19 |
 | [[concepts/gaussian-mixture-model\|Gaussian Mixture Model (GMM)]] | Probabilistic model of weighted Gaussian components; used for clean-speech embedding priors | 2026-06-19 |
 | [[concepts/speaker-embedding\|Speaker Embedding]] | Fixed-dimensional vector capturing speaker characteristics for conditioning | 2026-06-19 |

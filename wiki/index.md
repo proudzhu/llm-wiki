@@ -268,7 +268,6 @@
 | [[entities/yu-sun\|Yu Sun]] | Samsung Electronics (China) — co-author of HALO lightweight STFT speech enhancement | 2026-06-18 |
 | [[entities/leyan-yang\|Leyan Yang]] | Nanjing University — co-author of HALO lightweight STFT speech enhancement | 2026-06-18 |
 | [[entities/shiruo-sun\|Shiruo Sun]] | Horizon Robotics — co-author of HALO lightweight STFT speech enhancement | 2026-06-18 |
-
 | [[entities/yike-zhu\|Yike Zhu]] | NPU — G-MaP-SE guided speech enhancement via GMM-based prior matching | 2026-06-19 |
 | [[entities/ziqian-wang\|Ziqian Wang]] | NPU — co-author of G-MaP-SE guided speech enhancement | 2026-06-19 |
 | [[entities/zikai-liu\|Zikai Liu]] | NPU — co-author of G-MaP-SE guided speech enhancement | 2026-06-19 |
@@ -510,7 +509,6 @@
 | [[concepts/deep-feedback-cancellation\|Deep Feedback Cancellation]] | Compact DNN (856K params) for direct feedback-path IR estimation in hearing aids; 30x faster convergence than FD-AFC | 2026-06-10 |
 | [[concepts/normalized-euclidean-system-distance\|Normalized Euclidean System Distance]] | NESD: normalized squared error between true and estimated feedback-path IRs; used as loss and metric in AFC | 2026-06-10 |
 | [[concepts/dynamic-convolution\|Dynamic Convolution]] | Input-dependent convolution kernel mixing via lightweight gating; used in HALO adaptive frame-rate operators | 2026-06-18 |
-
 | [[concepts/speech-enhancement\|Speech Enhancement]] | Foundational concept: improving quality and intelligibility of noisy speech via time-domain or TF-domain deep learning | 2026-06-19 |
 | [[concepts/gaussian-mixture-model\|Gaussian Mixture Model (GMM)]] | Probabilistic model representing distributions as weighted sum of Gaussian components; used for clean-speech embedding priors | 2026-06-19 |
 | [[concepts/speaker-embedding\|Speaker Embedding]] | Fixed-dimensional vector capturing speaker characteristics; used as conditioning signal in personalized speech enhancement | 2026-06-19 |
@@ -632,7 +630,6 @@
 | [[sources/schroter-2022-deepfilternet\|Schrőter et al. 2022: DeepFilterNet]] | Low-complexity two-stage speech enhancement using ERB gains + deep filtering; 1.8M params, 0.35 GMACs, WB-PESQ 2.81 | 2022 |
 | [[sources/lydaki-2026-deep-feedback-cancellation-hearing-aids\|Lydaki et al. 2026: Deep Feedback Cancellation in Hearing Aids]] | DFC: 856K-param DNN for direct IR estimation; PESQ 4.54, MUSHRA 86.13; 30x faster convergence than FD-AFC | 2026 |
 | [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator\|Zhao et al. 2026: HALO — Half-frame-rate Adaptive Learnable Operator]] | Causal plug-in module halving STFT frame rate via adaptive dynamic convolution; consistent PESQ+ across GTCRN, DPCRN, LiSenNet, UL-UNAS | 2026 |
-
 | [[sources/zhu-2026-g-map-se-guided-speech-enhancement\|Zhu et al. 2026: G-MaP-SE — Guided Speech Enhancement via GMM-Based Prior Matching]] | GMM-based prior matching for noisy speaker-conditioning embeddings; +0.03 WB-PESQ over noisy cond on DNS2020; 0.025M added params | 2026-06-19 |
 ---
 

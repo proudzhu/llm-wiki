@@ -262,7 +262,6 @@
 | [[entities/yu-sun|Yu Sun]] | Samsung Electronics (China) — co-author of HALO lightweight STFT speech enhancement | 2026-06-18 |
 | [[entities/leyan-yang|Leyan Yang]] | Nanjing University — co-author of HALO lightweight STFT speech enhancement | 2026-06-18 |
 | [[entities/shiruo-sun|Shiruo Sun]] | Horizon Robotics — co-author of HALO lightweight STFT speech enhancement | 2026-06-18 |
-
 | [[entities/yike-zhu\|Yike Zhu]] | NPU — G-MaP-SE: guided speech enhancement via GMM-based prior matching (Interspeech 2026) | 2026-06-19 |
 | [[entities/ziqian-wang\|Ziqian Wang]] | NPU — co-author of G-MaP-SE (Interspeech 2026) | 2026-06-19 |
 | [[entities/zikai-liu\|Zikai Liu]] | NPU — co-author of G-MaP-SE (Interspeech 2026) | 2026-06-19 |
