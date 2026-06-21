@@ -242,4 +242,7 @@
 | [[concepts/quality-aware-speech-enhancement\|Quality-Aware Speech Enhancement]] | Multi-modal fusion paradigm dynamically weighting auxiliary modality by self-assessed quality; mitigates modality imbalance (QuaSE) | 2026-06-21 |
 | [[concepts/object-detection\|Object Detection]] | CV task of localizing + classifying objects; 30-year history from hand-crafted features (Viola-Jones/SIFT/HOG/DPM) to deep learning (R-CNN→Faster R-CNN) | 2026-06-21 |
 | [[concepts/faster-r-cnn\|Faster R-CNN]] | End-to-end object detection with Region Proposal Network sharing conv features; modern detection paradigm; NeurIPS 2025 Test of Time Award | 2026-06-21 |
+| [[concepts/robust-minimum-variance-beamforming\|Robust Minimum Variance Beamforming (RMVB)]] | Extension of Capon's MVDR enforcing unity-gain over an ellipsoidal array-response uncertainty set; formulated as SOCP, solved by Lagrange multipliers | 2026-06-21 |
+| [[concepts/ellipsoidal-uncertainty-modeling\|Ellipsoidal Uncertainty Modeling]] | Representing array-manifold uncertainty as an ellipsoid and propagating it via ellipsoidal calculus (Minkowski sum, Hadamard product) for robust optimization | 2026-06-21 |
+| [[concepts/hadamard-product-ellipsoids\|Hadamard Product of Ellipsoids]] | Outer-ellipsoidal approximation of element-wise product of two ellipsoid-valued vectors; propagates multiplicative gain/phase uncertainty in robust beamforming | 2026-06-21 |
 

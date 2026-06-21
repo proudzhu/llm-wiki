@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-06-21
+sources:
+  - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
 tags:
   - beamforming
   - robustness
@@ -56,6 +58,15 @@ Three scalable estimation modes provide O(M) to O(M³) complexity:
 - **Architecture-agnostic**: Works in both direct MPDR and GSC formulations
 - **Deterministic guarantee**: WNG is strictly bounded at every frame
 
+## Comparison with the Robust MVB
+
+Diagonal loading is a *regularization* approach to robustness: it stabilizes the weights without using any geometric knowledge of how the array manifold varies. Lorenz & Boyd (2005) note two limitations that motivate their [[concepts/robust-minimum-variance-beamforming|Robust MVB (RMVB)]]:
+
+1. The loading parameter $\mu$ is difficult to choose and is typically set heuristically.
+2. Diagonal loading is **isotropic** — it inflates the noise floor uniformly and ignores *anisotropic* knowledge of array-manifold variation (e.g., the manifold varies more in some directions than others).
+
+For **isotropic** uncertainty, the RMVB coincides (up to scale) with the diagonal-loading regularized beamformer for the proper choice of $\mu$. For anisotropic uncertainty, the RMVB strictly dominates: it achieves 15.63 dB worst-case SINR versus 1.85 dB for point-mainbeam constraints in the Lorenz–Boyd 10-element ULA experiment, while regularization-based methods remain sensitive to the $\mu$ choice.
+
 ## Related Concepts
 
 - [[white-noise-gain|White Noise Gain (WNG)]]
@@ -63,10 +74,13 @@ Three scalable estimation modes provide O(M) to O(M³) complexity:
 - [[condition-number|Condition Number]]
 - [[mpdr-beamformer|MPDR Beamformer]]
 - [[mvdr-beamformer|MVDR Beamformer]]
+- [[robust-minimum-variance-beamforming|Robust Minimum Variance Beamforming (RMVB)]]
+- [[ellipsoidal-uncertainty-modeling|Ellipsoidal Uncertainty Modeling]]
 - [[gsc-beamformer|Generalized Sidelobe Canceller]]
 - [[gershgorin-circle-theorem|Gershgorin Circle Theorem]]
 - [[beamforming|Beamforming]]
 
 ## Related Sources
 
+- [[sources/lorenz-2005-robust-minimum-variance-beamforming|Lorenz & Boyd 2005: Robust Minimum Variance Beamforming]]
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]

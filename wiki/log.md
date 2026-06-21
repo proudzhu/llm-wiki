@@ -1,4 +1,4 @@
-﻿# Wiki Log
+# Wiki Log
 
 > **Purpose**: Chronological, append-only record of what happened and when.
 > **Format**: `## [YYYY-MM-DD] operation | Description`
@@ -2568,3 +2568,15 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 - **Pages updated**: `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added entries; statistics 638→642 total, 272→273 entities, 236→238 concepts, 104→105 sources
 - **Key insights**: 30-year history of object detection across three eras — (1) hand-crafted features + classifiers (Viola-Jones, SIFT, HOG, DPM), (2) CNN-based region classification (AlexNet, R-CNN), (3) end-to-end proposal+detection networks (SPP-Net→Fast R-CNN→Faster R-CNN). Central lessons: feature learning replaced feature engineering; shared computation (SPP-Net→Fast R-CNN→Faster R-CNN's RPN) drove the speed evolution. Faster R-CNN's RPN unified proposal generation and detection into a jointly-trainable framework, defining the modern paradigm.
 - **Build verification**: `uv run mkdocs build --strict` passed (exit 0, 36.76s, no WARNINGs)
+
+## [2026-06-21] ingest | Lorenz & Boyd 2005: Robust Minimum Variance Beamforming
+
+- **Source**: Lorenz, R. G. & Boyd, S. P. (2005). "Robust Minimum Variance Beamforming." IEEE Transactions on Signal Processing, 53(5), 1684–1696. DOI: [10.1109/TSP.2005.845436](https://doi.org/10.1109/TSP.2005.845436). Zotero key: `I5RQB5AR`.
+- **Raw material**: `raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md` (MinerU VLM extraction with figures/), PDF retrieved from Zotero attachment.
+- **Pages created**:
+  - Source: `wiki/sources/lorenz-2005-robust-minimum-variance-beamforming.md`
+  - Entities (2): `robert-g-lorenz`, `stephen-boyd`
+  - Concepts (3): `robust-minimum-variance-beamforming`, `ellipsoidal-uncertainty-modeling`, `hadamard-product-ellipsoids`
+- **Pages updated**: `mvdr-beamformer` (added Capon alias, mismatch-sensitivity section, RMVB link), `diagonal-loading` (added RMVB comparison section), `socp-optimization` (added robust-beamforming role + standard form), `beamforming` (added "Robust Beamforming with Ellipsoidal Uncertainty" section)
+- **Indexes updated**: `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added entries; statistics 642→648 total, 273→275 entities, 238→241 concepts, 105→106 sources
+- **Key insights**: (1) The RMVB enforces $\mathbf{Re}\,w^* a \geq 1$ over an entire ellipsoidal uncertainty set rather than at a single nominal direction; the semi-infinite constraint becomes a second-order cone constraint via Cauchy–Schwarz. (2) The SOCP reduces to a scalar secular equation in the Lagrange multiplier $\lambda$, solvable by quadratically-convergent Newton iteration (~7–10 steps, size-independent), giving ~12× the cost of a regularized beamformer. (3) For isotropic uncertainty the RMVB coincides (up to scale) with diagonal loading; for anisotropic uncertainty it strictly dominates by exploiting directional manifold-variation knowledge. (4) Novel Hadamard-product-of-ellipsoids calculus (real: 3-term Minkowski sum; complex: 6-term, reducible to 5 via Givens rotation) propagates multiplicative gain/phase uncertainties through the signal path. (5) Worst-case SINR 15.63 dB vs 1.85 dB for point-mainbeam constraints in the 10-element ULA experiment; overestimating the ellipsoid preserves the gain guarantee while underestimating risks constraint violation.

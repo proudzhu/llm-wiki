@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-05-26
+updated: 2026-06-21
 sources:
   - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.txt
+  - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
 tags:
 - acoustics
 - antenna-theory
@@ -74,14 +75,19 @@ The beamformer's directivity increases with SH order $L$, but higher orders requ
 - [[roi-beamforming|Region-of-Interest Beamforming]]
 - [[mpdr-beamformer|MPDR Beamformer]]
 - [[mvdr-beamformer|MVDR Beamformer]]
+- [[robust-minimum-variance-beamforming|Robust Minimum Variance Beamforming (RMVB)]]
+- [[ellipsoidal-uncertainty-modeling|Ellipsoidal Uncertainty Modeling]]
+- [[hadamard-product-ellipsoids|Hadamard Product of Ellipsoids]]
 - [[gsc-beamformer|Generalized Sidelobe Canceller]]
 - [[diagonal-loading|Diagonal Loading]]
 - [[white-noise-gain|White Noise Gain]]
 - [[kantorovich-inequality|Kantorovich Inequality]]
 - [[condition-number|Condition Number]]
+- [[socp-optimization|SOCP Optimization]]
 
 ## Related Sources
 
+- [[sources/lorenz-2005-robust-minimum-variance-beamforming|Lorenz & Boyd 2005: Robust Minimum Variance Beamforming]]
 - [[sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]]
 - [[sources/frank-2026-low-latency-roi-beamforming|Frank & Cohen 2026: Low-latency Audio Front-end ROI Beamforming for Smart Glasses]]
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]

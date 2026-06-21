@@ -277,4 +277,6 @@
 | [[entities/yuanhao-feng\|Yuanhao Feng]] | The University of Electro-Communications — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
 | [[entities/panlong-yang\|Panlong Yang]] | NUIST — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
 | [[entities/kaiming-he\|Kaiming He (何恺明)]] | MIT Associate Professor / Google DeepMind — ResNets, Faster R-CNN, Mask R-CNN, MoCo, MAE; NeurIPS 2025 Test of Time Award | 2026-06-21 |
+| [[entities/robert-g-lorenz\|Robert G. Lorenz]] | Beceem Communications / SiRF / Ashtech — robust beamforming, GPS receiver design; co-author of RMVB (IEEE TSP 2005) | 2026-06-21 |
+| [[entities/stephen-boyd\|Stephen P. Boyd]] | Stanford University — Samsung Professor of Engineering; convex optimization (CVX/CVXPY), co-author of RMVB | 2026-06-21 |
 
