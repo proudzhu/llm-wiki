@@ -2532,3 +2532,23 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 - **Orphan pages**: 1 — `sources/why-mathematica-not-simplify-sinh-arccosh` has zero inbound references from any wiki page.
 - **Statistics**: All stated counts match actual file counts exactly (629 total, 266 entities, 234 concepts, 103 sources, 19 synthesis, 7 queries). Last updated 2026-06-19.
 - **Actions taken**: No index rebuild needed (all counts consistent). Results logged.
+
+## [2026-06-21] ingest | Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone Speech Enhancement
+
+- **Source**: `raw/papers/han-2026-quality-aware-earable-se/full-text.txt` (extracted via `pdftotext -layout` after MinerU VLM and pipeline failures)
+- **Zotero key**: 92AXTWCU
+- **DOI**: 10.1145/3810214 (Proc. ACM IMWUT, Vol. 10, No. 2, Article 40, June 2026)
+- **Authors**: Feiyu Han (corresponding, NUIST), Dawei Yan (Hebei Univ), Shanyue Wang (HKPU), Jinyang Huang (HFUT), Yuanhao Feng (UEC Japan), Panlong Yang (NUIST)
+- **Pages created**:
+  - Source: `wiki/sources/han-2026-quality-aware-earable-se.md`
+  - Entities (6): `feiyu-han`, `dawei-yan`, `shanyue-wang`, `jinyang-huang`, `yuanhao-feng`, `panlong-yang`
+  - Concepts (2): `ear-canal-deformation`, `quality-aware-speech-enhancement`
+- **Pages updated**:
+  - `wiki/concepts/ear-canal-occlusion-effect.md` — added ECD relationship section and cross-references
+  - `wiki/concepts/multi-channel-speech-enhancement.md` — added QuaSE to methods list and related concepts/sources
+  - `wiki/concepts/bone-conduction.md` — added section 6 on ECD and in-ear speech quality
+  - `wiki/synthesis/multimodal-bc-speech-enhancement.md` — added section 2.8 (Quality-Aware Fusion), benchmark table row, related concepts/sources
+  - `wiki/index.md` — added 6 entities, 2 concepts, 1 source; updated statistics (629→638 total, 266→272 entities, 234→236 concepts, 103→104 sources)
+  - `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added corresponding rows
+- **Key insights**: ECD (articulatory-gesture-induced ear canal deformation) causes air pressure imbalance in sealed ear canal, degrading in-ear speech quality via stuck-at-low microphone fault. QuaSE addresses this with self-supervised quality assessment (autoencoder trained on high-quality samples selected by spectral peak-to-valley matching + DTW) and dynamic quality-weighted fusion. QA module is modular and improves EarSpeech by up to +5.48% PESQ. Distinct from Liu 2025 ATFA (binary sensor failure) — QuaSE handles continuous quality variations.
+- **Build verification**: `uv run mkdocs build --strict` passed (exit 0, 32.11s, no WARNINGs)

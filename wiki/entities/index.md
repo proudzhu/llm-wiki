@@ -270,4 +270,10 @@
 | [[entities/xianjun-xia\|Xianjun Xia]] | NPU — co-author of G-MaP-SE (Interspeech 2026) | 2026-06-19 |
 | [[entities/chuanzeng-huang\|Chuanzeng Huang]] | NPU — co-author of G-MaP-SE (Interspeech 2026) | 2026-06-19 |
 | [[entities/lei-xie\|Lei Xie]] | NPU Professor — G-MaP-SE, speech processing, speaker recognition, voice conversion | 2026-06-19 |
+| [[entities/feiyu-han\|Feiyu Han]] | NUIST (corresponding) — QuaSE: quality-aware earable dual-microphone speech enhancement (IMWUT 2026) | 2026-06-21 |
+| [[entities/dawei-yan\|Dawei Yan]] | Hebei University — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
+| [[entities/shanyue-wang\|Shanyue Wang]] | The Hong Kong Polytechnic University — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
+| [[entities/jinyang-huang\|Jinyang Huang]] | Hefei University of Technology — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
+| [[entities/yuanhao-feng\|Yuanhao Feng]] | The University of Electro-Communications — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
+| [[entities/panlong-yang\|Panlong Yang]] | NUIST — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
 

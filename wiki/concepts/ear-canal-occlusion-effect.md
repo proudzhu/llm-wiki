@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-04-17
+updated: 2026-06-21
 sources:
+  - wiki/sources/han-2026-quality-aware-earable-se.md
 tags:
 - acoustics
 - biology
@@ -33,12 +34,19 @@ In high-end ANC headphones, the occlusion effect can be unpleasant for users dur
 - **Vented Design**: Including a small acoustic vent to allow low-frequency pressure to escape (at the cost of some passive isolation).
 - **Active Mitigation**: Using the feedback microphone and speaker to actively cancel the "booming" sound of the user's own voice.
 
+## Relationship to Ear Canal Deformation (ECD)
+
+While the occlusion effect is a *static* phenomenon that *amplifies* bone-conducted low-frequency sound when the canal is blocked, **[[concepts/ear-canal-deformation|Ear Canal Deformation (ECD)]]** is a *dynamic* phenomenon caused by articulatory gestures during speech. ECD alters air pressure inside the sealed ear canal, which *degrades* in-ear microphone recordings via a stuck-at-low fault. Both phenomena co-occur in sealed earphones, but ECD's negative impact on in-ear speech quality is the focus of [[concepts/quality-aware-speech-enhancement|Quality-Aware Speech Enhancement]] (QuaSE, Han et al. 2026).
+
 ## Related Concepts
 
-- [[bone-conduction|Bone Conduction]]
+- [[concepts/bone-conduction|Bone Conduction]]
+- [[concepts/ear-canal-deformation|Ear Canal Deformation]]
+- [[concepts/quality-aware-speech-enhancement|Quality-Aware Speech Enhancement]]
 - [[sources/fukumoto-2025-whisphone-paper-reading-note|Whisphone]]
-- [[transparency-mode|Transparency Mode]]
+- [[concepts/transparency-mode|Transparency Mode]]
 
 ## Related Sources
 
 - [[sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
+- [[sources/han-2026-quality-aware-earable-se|Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone SE]]

@@ -107,4 +107,5 @@
 | [[sources/lydaki-2026-deep-feedback-cancellation-hearing-aids|Lydaki et al. 2026: Deep Feedback Cancellation in Hearing Aids]] | DFC: 856K-param DNN for direct IR estimation; PESQ 4.54, MUSHRA 86.13; 30x faster convergence than FD-AFC | 2026 |
 | [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator|Zhao et al. 2026: HALO — Half-frame-rate Adaptive Learnable Operator]] | Causal plug-in module halving internal STFT frame rate via adaptive dynamic convolution; consistent PESQ+ across GTCRN, DPCRN, LiSenNet, UL-UNAS | 2026 |
 | [[sources/zhu-2026-g-map-se-guided-speech-enhancement\|Zhu et al. 2026: G-MaP-SE — Guided Speech Enhancement via GMM-Based Prior Matching]] | GMM-based prior matching for noisy speech enhancement conditioning; Interspeech 2026 | 2026-06-19 |
+| [[sources/han-2026-quality-aware-earable-se\|Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone SE]] | Quality-aware dual-mic SE addressing ECD-induced in-ear speech degradation; self-supervised quality assessment + dynamic fusion; +9.35% PESQ over SOTA | 2026-06-21 |
 

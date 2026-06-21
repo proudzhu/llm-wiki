@@ -1,0 +1,1243 @@
+Exploring and Addressing Low-Quality Auxiliary Modality in Earable
+Dual-microphone Speech Enhancement
+FEIYU HAN∗ , Nanjing University of Information Science and Technology, China
+DAWEI YAN, Hebei University, China
+SHANYUE WANG, The Hong Kong Polytechnic University, China
+JINYANG HUANG, Hefei University of Technology, China
+YUANHAO FENG, The University of Electro-Communications, Japan
+PANLONG YANG, Nanjing University of Information Science and Technology, China
+To enhance the speech clarity in earable voice interaction scenarios, dual-microphone speech enhancement (SE) techniques
+with collaboration of in-ear and out-ear microphones have garnered significant attention from the research community.
+Nevertheless, existing dual-microphone SE techniques are established on a strong assumption: high-quality in-ear speech
+(auxiliary modality) could provide efficient complementary information to target airborne speech (primary modality), which
+decreases the adaptation in the real world. In our work, we explore a key observation that air pressure imbalance caused by
+ear canal deformation (ECD) adversely affects the quality of in-ear speech, subsequently leading to a significant degradation in
+speech enhancement performance. To address this bottleneck issue, we design an efficient quality-aware speech enhancement
+solution, named QuaSE, which efficiently and dynamically fuses complementary information by assessing the quality variations
+of in-ear speech. Additionally, based on the analysis of spectral distortion induced by ECD, a training strategy including
+quality-aware data selection and content-aware augmentation is designed to improve the generalization capability of QuaSE.
+Extensive experiments demonstrate that QuaSE outperforms state-of-the-art techniques by 6.27%, 4.54%, 14.90%, and 11.93%
+in terms of PESQ, STOI, SI-SDR, and SegSNR. Moreover, we also validate that the proposed quality-aware fusion strategy can
+be modularly integrated into other sensing tasks, improving the fusion performance.
+
+CCS Concepts: • Human-centered computing → Ubiquitous and mobile computing; Human computer interaction
+(HCI).
+
+Additional Key Words and Phrases: Earable Sensing, Speech Enhancement, Quality-aware Sensing.
+
+ACM Reference Format:
+Feiyu Han, Dawei Yan, Shanyue Wang, Jinyang Huang, Yuanhao Feng, and Panlong Yang. 2026. Exploring and Addressing
+Low-Quality Auxiliary Modality in Earable Dual-microphone Speech Enhancement. Proc. ACM Interact. Mob. Wearable
+Ubiquitous Technol. 10, 2, Article 40 (June 2026), 26 pages. https://doi.org/10.1145/3810214
+
+∗ Corresponding author.
+
+
+
+
+Authors’ Contact Information: Feiyu Han (corresponding author), Nanjing University of Information Science and Technology, Nanjing,
+China, fyhan@nuist.edu.cn; Dawei Yan, Hebei University, Baoding, China, daweiyan@hbu.edu.cn; Shanyue Wang, The Hong Kong
+Polytechnic University, Hong Kong, China, shanywang@polyu.edu.hk; Jinyang Huang, Hefei University of Technology, Hefei, China,
+hjy@hfut.edu.cn; Yuanhao Feng, The University of Electro-Communications, Tokyo, Japan, fengyuanhao@uec.ac.jp; Panlong Yang,
+Nanjing University of Information Science and Technology, Nanjing, China, plyang@nuist.edu.cn.
+
+
+
+
+This work is licensed under a Creative Commons Attribution 4.0 International License.
+© 2026 Copyright held by the owner/author(s).
+ACM 2474-9567/2026/6-ART40
+https://doi.org/10.1145/3810214
+
+
+                           Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+40:2   •   Han et al.
+
+
+1      INTRODUCTION
+Voice interaction is increasingly prevalent on earable devices, providing intuitive, hands-free control while
+enhancing user convenience and accessibility [39]. Consequently, speech enhancement (SE) technology designed
+for earables has emerged to ensure clear and intelligible speech input, particularly in noisy environments.
+Compared with single-channel SE techniques, multi-modality/channel SE techniques have demonstrated excellent
+performance, including IMU-audio [20], ultrasound-audio [12, 13, 50], and RF-audio [31].
+   Among them, dual-microphone SE techniques [18, 34] with the collaboration of in-ear and out-ear microphones
+have become one of the alternatives with wide availability and high universality. Narrow-bandwidth bone-
+conducted speech captured by in-ear microphones (referred to as in-ear speech) is less susceptible to ambient
+noise due to special characteristics of the channel, which can provide complementary information to noisy-
+susceptible airborne speech. This fusion significantly improves the intelligibility and quality of airborne speech
+in noisy conditions. However, most existing studies have been predicated on a strong assumption that in-ear
+speech exhibits a highly stable correlation with airborne speech. In our work, a key observation is identified:
+the cross-channel correlation between in-ear speech and airborne speech may be severely degraded in practical
+scenarios, directly limiting the applicability of prior techniques.
+   Key Observation. During the pronunciation process, articulatory gestures cause deformation of the ear
+canal by stretching or compressing facial muscles and soft tissues around the ear canal. Ear canal deformation
+(ECD) changes the air pressure in the sealed cavity formed by the earphone and the eardrum. Such ECD-
+induced pressure fluctuations alter the in-ear microphone’s diaphragm response, compromising the fidelity of
+microphone recordings. In our in-depth investigation, we observed that ECD-induced pressure fluctuations
+introduce significant distortions into captured in-ear speech (see Sec. 3.3), significantly degrading the cross-
+channel correlation between in-ear and airborne speech. This observation underscores a critical limitation of
+existing speech enhancement techniques based on in-ear speech fusion. In dual-microphone speech enhancement
+tasks, the degradation of in-ear speech quality significantly undermines overall fusion performance, a phenomenon
+commonly referred to as modality imbalance [51].
+   Prior research [3, 40] has been conducted to characterize speech quality using objective or subjective metrics,
+such as Perceptual Evaluation of Speech Quality (PESQ) and Mean Opinion Score (MOS). However, these
+quality metrics mainly assess the global perceptual quality of speech and are inadequate for evaluating the
+integrity of detailed structural components within the signal. Thus, these quality metrics are difficult to guide the
+effective fusion of airborne speech with low-quality in-ear speech. In recent years, dynamic multi-modality fusion
+frameworks towards low-quality data have been widely studied [47, 51]. Nevertheless, most of them mainly
+focus on the fusion of images, videos, or text in the classification tasks. Therefore, an urgent issue arises: “How to
+dynamically fuse in-ear speech for effective and robust airborne speech enhancement?"
+   To bridge this gap, several challenges need to be urgently addressed. (i) Fine-grained assessment of time–frequency
+distortion of in-ear speech without matching references. In practice, airborne speech corresponding to in-ear
+speech is often corrupted by external interference, making it unreliable as a reference for distortion assessment.
+Consequently, in the absence of prior knowledge, quantitatively evaluating the time–frequency distortion of
+in-ear speech remains highly challenging. (ii) Effective and dynamic fusion of airborne speech with quality-varying
+in-ear speech. The fluctuating quality of the in-ear modality can introduce imbalance and even degrade overall
+enhancement performance. Moreover, these unpredictable quality variations pose a significant challenge for
+designing adaptive fusion mechanisms. (iii) Real-time and generalized speech enhancement across individuals and
+scenarios. Individual differences (like ear canal anatomy and pronunciation habits) and scenario diversity (like
+noise characteristics) lead to substantial variability in signal patterns, while real-time response imposes stringent
+constraints on computational complexity, especially for IoT devices.
+
+
+
+Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+               Exploring and Addressing Low-Quality Auxiliary Modality in Earable Dual-microphone Speech Enhancement •            40:3
+
+
+   Thus, we propose QuaSE, an effective and robust dual-microphone airborne speech enhancement solution
+by addressing the low-quality in-ear speech. QuaSE integrates quality variations of in-ear speech into dynamic
+fusion to mitigate the negative impact of quality variations. First, we investigate and analyze the ECD-induced
+speech distortion phenomenon from the hardware aspect and explore its non-negligible negative impact on
+the speech enhancement task. Building on that, we propose a lightweight self-supervised quality assessment
+framework incorporating a data quality selection strategy to generate quality indicators that can represent
+the time-frequency structure distortion of in-ear speech. In particular, we introduce a spectral peak-to-valley
+matching algorithm that quantifies a reliable quality metric to perform quality-aware data selection. Then, we
+ingeniously transform quality indicators to high-level embeddings, which can serve as a middleware and capture
+inherent correlation to guide the dynamic fusion of cross-modality complementary features. Subsequently, we
+carefully design a computationally efficient deep learning framework integrating the above modules to achieve
+effective airborne speech enhancement. Additionally, a content-aware low-quality data augmentation approach
+that applies adaptive time masking on time-frequency structures is designed to improve the generalization.
+   Through extensive experiments with 32 participants in daily interaction scenarios, we validate that QuaSE out-
+performs the state-of-the-art baselines by 6.27%, 4.54%, 14.90%, and 11.93% in terms of PESQ, STOI, SI-SDR, and
+SegSNR, respectively. With the contributions of the designed quality-aware adaptation (QA) module, SI-SDR
+and SegSNR can be improved by up to 11.76% and 10.31%. The QA module can also serve as an intermediate
+component to improve the performance of existing solutions. Lastly, we believe that our solution can provide
+valuable insights into multi-modal sensing tasks with the presence of low-quality modalities.
+
+
+2 RELATED WORK
+2.1 Multi-modal Speech Enhancement for Earables
+Since earable devices have emerged as a unique voice input side, it is necessary to develop effective speech
+enhancement technology for earables to improve the quality of speech. Conventional single-modal speech
+enhancement (SE) technology [10, 26, 48] takes advantage of distribution differences between clean speech and
+noise to denoise. Nowadays, multi-modal SE technologies have demonstrated superior performance compared to
+conventional single-modal SE technologies. In general, multi-modal SE technologies augment the audio modality
+by leveraging a complementary modality that is less sensitive to noise, such as ultrasounds [12, 44, 50] and RF
+signals [31, 32, 35]. However, these solutions either require active operation by the user or rely on dedicated RF
+modules to complete the speech enhancement process, making them not suitable for earable devices.
+   Nowadays, specifically for earables, various multimodal speech enhancement solutions have been proposed.
+For example, He et al. [20] leverage motion sensors on earphones to capture bone-conducted sound vibrations
+for speech enhancement. However, to maintain excellent performance, such technology usually requires high-
+sampling motion sensors that are unavailable on earables, to recover speech’s high-frequency components. Duan et
+al. [13] leverage ultrasonic leakage from earables to sense articulatory gestures. However, such technology requires
+spacers to be attached to the ear pads and requires earables to support the boom microphone structure, which is
+not suitable for special types of earables like wireless earables and in-ear earables.
+   As the number of microphones on earables increases, multi-channel speech enhancement technologies have
+been studied [6]. Most importantly, the in-ear audio modality has been explored as an effective and ubiquitous
+complementary modality for speech enhancement [18, 34], since it can be captured by low-cost microphones
+embedded inside of earables. However, existing solutions are based on the high-quality in-ear audio modality to
+enhance the airborne audio modality. In the real world, the quality of in-ear speech cannot be guaranteed due
+to air pressure variations induced by ear canal deformation. Thus, our work aims to enable effective airborne
+speech enhancement with low-quality in-ear modality.
+
+
+                       Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+40:4    •   Han et al.
+
+
+2.2      In-ear Acoustic Sensing on Earables
+Since various acoustic sensors have been widely equipped on earables, in-ear audio modality has empowered
+sensing capability of earables [39]. promote the application of earables in various scenarios including health
+care [16, 24], user authentication [15, 17, 25], and human-computer interaction (HCI) [29, 43, 53]. Recently,
+ear canal deformation (ECD) measurements with earables have attracted widespread research attention. Since
+ECD can be influenced by various activities, accurate ECD measurements can help recognize human activities,
+including tongue-jaw movements [4], articulatory gestures [22, 23, 28], and facial expression [1, 52]. Furthermore,
+some significant solutions [14, 45] have explored ECD-based biometric technologies for secure user authentication.
+This work explores the negative impact of ear canal deformation on in-ear audio modality, thereby designing the
+corresponding methodology to empower the sensing capability of in-ear complementary modality.
+
+3 MOTIVATION AND PRELIMINARY
+3.1 Motivation: Speech Enhancement with In-ear and Out-ear Microphones
+Nowadays, earphones have become a novel speech interaction or voice input platform. A key issue is how to
+ensure speech intelligibility in noisy environments. Since most earphones are equipped with not only out-ear
+microphones but also in-ear microphones that can capture the sound transmitted into the ear canal through
+bone conduction, dual-microphone-based speech enhancement techniques that leverage in-ear and out-ear
+microphones have been widely studied [18, 21, 34]. Due to the particularity of the channel, prior literature has
+explored that in-ear speech is non-susceptible to ambient noise, making it an ideal auxiliary modality to improve
+the intelligibility of airborne speech. However, existing techniques are studied based on the following assumption:
+       • There is a high correlation between in-ear speech (i.e., auxiliary modality) and airborne speech (i.e., target
+         modality), which ensures that in-ear speech can offer complementary information to airborne speech.
+  However, this strong assumption may not be met in real-world scenarios. Based on our practical observations in
+Sec. 3.3, we find that in-ear speech will experience severe interference, correspondingly decreasing the correlation
+between airborne speech. Existing dual-microphone-based speech enhancement techniques [18, 21, 34] ignore the
+negative impact of low-quality in-ear speech on the target modality, making it difficult to ensure their robustness
+and effectiveness in real scenarios.
+
+3.2      Air Pressure Variations Induced By ECD
+3.2.1 Ear canal deformation (ECD) induced by articulatory gestures. The ear canal, also known as the
+external auditory canal, is a tubular structure that extends from the outer ear (pinna) to the tympanic membrane
+(eardrum). Soft tissues surrounding the ear canal are situated between the mandible and the mastoid and are
+highly deformable. As shown in Fig. 1(a), during the pronunciation process, speech organs (such as the mandible,
+lips, tongue, jaw, and velum) cause facial muscles to stretch or compress. These articulatory gestures may activate
+movements of the mandible and facial muscles and pull the soft tissues around the ear canal to move, changing
+the shape of the ear canal, i.e., ear canal deformation (ECD) [9, 11, 28], as shown in Fig. 1(b). In general, the ear
+canal model can be discretized into 11 cross sections [11]. The morphological parameters of each cross section
+(including diameter, circumference, area, curvature, and angulation) contribute to ear canal deformation. In
+addition to articulatory gestures, head movements, insertion depth of the earphones, etc., can also cause slight
+ear canal deformation [2]. In our work, we mainly address the impact of ECD induced by articulatory gestures.
+3.2.2 Air pressure variations inside the ear canal. As shown in Fig. 1(c), we can observe that the sealed space
+is created when the earphone fully seals the ear canal. In this fully sealed cavity, the ear canal deformation alters
+the available volume for the air inside. According to basic principles of fluid mechanics, when the space volume
+decreases because the ear canal walls press inward, the air molecules are forced closer together, resulting in an
+
+Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+                Exploring and Addressing Low-Quality Auxiliary Modality in Earable Dual-microphone Speech Enhancement •            40:5
+
+
+
+
+  (a) Articulatory gestures.                 (b) Ear canal deformation.                          (c) Air pressure variations.
+
+Fig. 1. Articulatory gestures cause geometrical deformation of the ear canal, which in turn causes air pressure
+variations inside the ear canal.
+
+
+
+
+Fig. 2. A basic workflow illustration of the electret condenser microphone and MEMS microphone. When the ear
+canals are fully sealed by earphones, audio signals captured by in-ear microphones are distorted by ECD-induced
+air pressure variations.
+increase in air pressure. Conversely, if the space volume increases slightly, the air pressure may drop. Therefore,
+when the user is speaking, ear canal deformation induced by articulatory gestures will alter the air pressure
+in the ear canals. Based on this physical phenomenon, prior studies [2, 22, 23] have explored the feasibility of
+leveraging air pressure in ear canals for face-related movement recognition.
+
+3.3   Understanding the Phenomenon of In-Ear Speech Distortion
+3.3.1 Basic workflow of Microphone Chips. Common microphone types on earphones are Electret Condenser
+Microphones (ECM) and Micro Electro Mechanical Systems (MEMS) microphones [49]. Regardless of the type of
+microphone, the basic principle is to convert sound waves into digital signals. Sound waves consist of a series of
+air pressure variations. A microphone diaphragm responds to sound pressure variations, causing its displacement
+relative to the back plate, as shown in Fig. 2. The transducer component in the microphone translates mechanical
+movements to analog electrical signals. Then, digital audio signals are output after being processed by the signal
+amplifier, low-pass filter (LPF), and analog-to-digital conversion (ADC) circuit.
+3.3.2 In-ear speech signal distortion induced by pressure imbalance. As introduced in Sec. 3.2, articulatory
+gestures cause ear canal deformation (ECD). The deformation alters the air pressure within the ear canal, often
+
+                        Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+40:6   •    Han et al.
+
+
+
+
+           (a) Speech in the non-fully sealed ear canal.                       (b) Speech in the fully sealed ear canal.
+
+Fig. 3. In-ear speech recording in the two cases: (a) non-fully sealed ear canal and (b) fully sealed ear canal.
+Notably, airborne speech is also recorded as the reference signal during the process of in-ear speech recording.
+
+
+
+
+                                                 (a) Δ PESQ                      (b) Δ SegSNR                     (c) Δ SI-SDR
+
+Fig. 4. Correlation analysis            Fig. 5. Negative impact of low-quality in-ear speech on the dual-microphone-
+of in-ear channel and air-              based speech enhancement task.
+borne channel.
+creating a constant (or slowly varying) pressure difference across the diaphragm. As shown in Fig. 2, in the
+sealed ear canal, the pressure imbalance caused by ear canal deformation counteracts or “clamps” the intended
+oscillatory forces of the incoming sound waves and inhibits the movement of the diaphragm. According to the
+prior literature [37], the relationship between the diaphragm movement 𝑑𝑑 (𝑡) and the transducer output voltage
+𝑢 (𝑡) can be expressed as follows:
+                                             𝑢 (𝑡) = 𝑆𝑒 ∗ (𝑑𝑑 (𝑡) − 𝑑 0 (𝑡))                                    (1)
+where 𝑆𝑒 and 𝑑 0 (𝑡) represent the electronic sensitivity and the initial displacement of the microphone package,
+respectively. Based on Eq. 1, the output voltage signal 𝑢 (𝑡) depends on the displacement difference between 𝑑𝑑 (𝑡)
+and 𝑑 0 (𝑡). When the ear canal deforms and causes changes in the air pressure inside the ear canal, the relative
+movement of the diaphragm caused by the sound waves will be restricted. Such a phenomenon may cause the
+microphone sensor to encounter a stuck-at-low fault, where the output audio signal remains permanently biased
+at a low level. Under this condition, the sensor fails to respond to acoustic pressure variations, resulting in a
+constant low-level output. Such a malfunction prevents effective sound acquisition and severely compromises
+the integrity of the recorded in-ear audio signals.
+3.3.3 Negative impact analysis in the speech enhancement task. We designed a proof-of-concept hardware
+prototype (introduced in Sec. 7.1.1) to validate the impact of ECD-induced air pressure variations on in-ear speech
+quality. Then, we required participants to wear earphones in the following cases:
+
+Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+                Exploring and Addressing Low-Quality Auxiliary Modality in Earable Dual-microphone Speech Enhancement •            40:7
+
+
+    • Case 1: the eartips of earphones did not fit tightly into the ear canal (insertion depth is about 8 mm, referred
+      to as the non-fully sealed ear canal).
+    • Case 2: the eartips of earphones fit tightly into the ear canal (insertion depth is about 15 mm, referred to as
+      the fully sealed ear canal)
+   During the process of in-ear speech recording, we also used recorded airborne speech as the reference to explore
+the impact of ECD-induced air pressure variations on in-ear speech. In the non-fully sealed ear canal, airborne
+speech and in-ear speech are shown in Fig. 3(a). We can observe that in-ear speech aligns with airborne speech,
+and the temporal and spectral structures of in-ear speech are fully preserved. For example, the spectrogram of
+high-quality in-ear speech displays rich and well-defined frequency components. On the contrary, as shown in the
+white box of Fig. 3(b), low-quality in-ear speech recorded in the fully sealed ear canal is severely distorted, losing
+temporal and spectral information compared with reference speech. That is because the in-ear microphone’s
+stuck-at-low fault causes the microphone output to remain at the “0" level.
+   The correlation between airborne speech and high-quality in-ear speech is about 30 times greater than the
+correlation between airborne speech and low-quality in-ear speech, as shown in Fig. 4, indicating that ECD-
+induced air pressure variations severely decrease the correlation between in-ear speech and airborne speech.
+Furthermore, we explore the negative impact of low-quality in-ear speech on the airborne speech enhancement
+task. Since EarSpeech designed by Han et al. [18] is the state-of-the-art dual-channel-based speech enhancement
+solution, we reproduce it as our baseline model to conduct the negative impact of low-quality in-ear speech. As
+shown in Fig. 5, we can clearly observe that low-quality in-ear speech (Case 2) decreases the fusion performance
+in terms of PESQ, SegSNR, and SI-SDR. For instance, with the assistance of high-quality in-ear speech, the fusing
+performance could bring 0.960, 8.229, and 10.719 improvements on PESQ, SegSNR, and SI-SDR, respectively.
+However, the fusing performance with low-quality in-ear speech only yields 0.623, 5.172, and 7.835 improvements
+on PESQ, SegSNR, and SI-SDR, respectively. These experimental results indicate that ECD-induced air pressure
+variations not only degrade the quality of in-ear speech but also affect the fusion performance.
+   Insight. Although prior solutions have validated the effectiveness of in-ear speech as an auxiliary modality in
+airborne speech enhancement, they are all based on the assumption that in-ear speech is of high quality. From
+the above observation and analysis, we can recognize that ear canal deformation induced by articulatory gestures
+degrades the quality of in-ear speech by altering the air pressure in the ear canal. Subsequently, the low-quality
+in-ear speech decreases the fusing performance. Therefore, how to ensure the effectiveness and robustness of
+dual-microphone-based speech enhancement with low-quality in-ear speech is an issue that cannot be ignored.
+
+4   SYSTEM OVERVIEW
+To mitigate the negative impact of low-quality in-ear speech, we design a deep-learning-based efficient speech
+enhancement framework that can effectively fuse the complementary information of in-ear speech and airborne
+speech by adaptively assessing the quality of in-ear speech. Fig. 6 demonstrates the technical workflow of QuaSE.
+   ♦ Multi-scale Deep Feature Extraction (§5.1): The dual-channel speech collected by in-ear and out-ear
+microphones is pre-processed and then transformed into time-frequency (T-F) representations. A dual-channel
+multi-scale audio encoder module consisting of two symmetric audio encoders is designed to capture multi-scale
+feature representations, achieving a balance between receptive field expansion and detail preservation.
+   ♦ Quality Assessment and Adaptation (§5.2): Considering the quality uncertainty of in-ear speech, a self-
+supervised data-level quality assessment module and a quality embedding generation module are designed to
+quantify the contribution of the in-ear speech. Subsequently, a quality-aware fusion module combines weighted
+in-ear feature representations and out-ear feature representations to capture complementary information.
+   ♦ Dual-channel Speech Reconstruction (§5.3): The fused feature representations are fed into the dual-channel
+speech reconstruction module and then transformed to T-domain speech signals. It should be noted that the in-ear
+
+                        Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+40:8   •   Han et al.
+
+
+
+
+                                            Fig. 6. The overall framework of QuaSE.
+
+
+
+speech reconstruction module is added to eliminate the problem of modality imbalance, so it only participates
+in the training process. Additionally, we design a customized multi-dimensional loss function to optimize the
+model, significantly enhancing its learning capabilities.
+   ♦ Data Selection and Augmentation (§6): To ensure the generalization and robustness of QuaSE, we construct
+a large-scale synthetic dataset for pre-training. Based on the cross-channel correlation between airborne and
+in-ear speech, a data selection strategy is designed to identify the modality quality. Then, based on the spectral
+characteristics of low-quality in-ear speech, a content-aware data augmentation strategy is designed to expand
+the scale of the dataset.
+
+5      DESIGN OF QUASE
+Because the in-ear microphone also captures motion-induced and heartbeat-induced body sounds, we need to
+perform the pre-processing operations on in-ear audio signals. To do this, we apply a high-pass filter with a
+cut-off frequency of 100 Hz is leveraged to remove the low-frequency components of in-ear and out-ear audio
+signals. Then, to maintain computational efficiency, we also downsample the two-channel audio signals to 16
+kHz. After that, in-ear speech samples and airborne speech samples are transformed into Time-Frequency (T-F)
+representations via the short-time Fourier transform (STFT). Considering the uncertainty of speech quality, we
+propose a multi-scale audio encoder model to capture fine-grained features. In addition, the in-ear audio encoder
+and the out-ear audio encoder are designed to have the same structure to ensure the consistency of extracted
+in-ear and airborne features. Fig. 7 demonstrates the detailed model structure of the multi-scale audio encoder.
+At the core, the network is composed of multiple ConvBlocks arranged sequentially, interleaved with Frequency
+Transformation Blocks (FTBs) [48]. The number of filters in ConvBlocks is 12, 24, and 48, respectively. Each
+ConvBlock follows a hierarchical design. An initial 3×3 dilated convolution (dilation = 2) is applied to expand the
+receptive field, followed by a split operation that distributes features into three parallel branches. These branches
+apply 3×3 convolutions with different dilation rates (1, 2, and 3), enabling the block to capture spatial information
+at multiple scales. The outputs of the branches are then concatenated and fused through a final 3×3 dilated
+convolution (dilation = 2), producing enriched feature maps that integrate local and contextual information.
+
+Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+                Exploring and Addressing Low-Quality Auxiliary Modality in Earable Dual-microphone Speech Enhancement •            40:9
+
+
+
+
+                           Fig. 7. Model structure of the multi-scale feature extraction.
+
+
+5.1   Multi-scale Audio Encoder
+5.2   Quality-aware Adaptation
+5.2.1 Data-level Quality Self-assessment. Fig. 3 demonstrates that the low-frequency components (≤1000
+Hz) of in-ear speech are significantly enhanced, but the spectral structure is still similar to that of airborne speech.
+That is because the occlusion effect increases the acoustic impedance inside the ear canal, correspondingly
+enhancing the gain of low-frequency components and attenuating the gain of high-frequency components [5].
+Intuitively, we can identify the in-ear speech quality based on the similarity of the low-frequency spectral
+structure between in-ear speech and airborne speech. Unfortunately, ambient noise interferes with airborne
+speech in the real world, making it difficult to obtain clean airborne speech for reference. Therefore, an acute
+issue arises: how to accurately characterize in-ear speech quality in the frequency domain without reference speech?
+   To solve the above issue, we carefully design a self-supervised in-ear speech quality assessment network with
+an autoencoder backbone structure. Fig. 8 presents the workflow of the quality assessment network. In order
+to preserve key information and keep computational efficiency, we adopt fully-connected convolutional layers
+without down-sampling operations to construct the encoder module. Each convolutional layer is configured with
+a kernel size of 5×5, a stride of 1, and no padding. The decoder module consists of stacked deconvolutional layers
+that are symmetrically structured in relation to the convolutional layers of the encoder module. To preserve more
+structural details in the output of deconvolutional layers, shortcut connection operations are applied to map the
+convolutional and corresponding deconvolutional layers [7].
+   In the model training process, we use high-quality in-ear spectrograms to train the network. The high-quality
+data selection strategy is introduced in Sec. 6.1. The encoder module is responsible for compressing the input
+high-quality in-ear spectrogram 𝑆𝑖𝑛   𝑇 ×𝐹 into the high-level feature map 𝐹 𝐶 ×𝑇 ×𝐹 , where 𝐶 = 48. Then, the decoder
+                                                                             𝑖𝑚
+module reconstructs it back into the spectrogram. The entire training process is in unsupervised way. Constrained
+by the MSE loss function 𝐿𝑚𝑠𝑒 , the feature extraction network can achieve accurate reconstruction of the input
+spectrogram. In the feature extraction process, only high-quality in-ear spectrograms can be reconstructed
+with minimal error. Low-quality in-ear spectrograms cannot be accurately reconstructed because their spectral
+structures have been distorted by ECD-induced air pressure variations. Therefore, we calculate the mean absolute
+error between the input 𝑆𝑖𝑛 𝑇 ×𝐹 and output 𝑆 𝑇 ×𝐹 as quality metrics.
+                                                𝑜𝑢𝑡
+
+5.2.2 Quality Embedding Generation. If the quality matrix is directly fed into the subsequent modules, the
+entire network may struggle to converge. Thus, we design a quality embedding generation module that consists
+of a frequency squeeze block, a quality learning block, and an unsqueeze block. Fig. 9 demonstrates the workflow
+
+                        Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+40:10   •   Han et al.
+
+
+
+
+                            Fig. 8. Self-supervised in-ear speech quality assessment network.
+of quality embedding generation. For a given quality matrix 𝑄𝑚 ∈ R1×𝐹 ×𝑇 , if we perform element-by-element
+calculations, it will incur high computational overhead and storage pressure. As analyzed in Sec. 3.3, we can find
+that if the signal is distorted at a certain time 𝑇 , then the frequency components 𝐹 = {𝑓1, 𝑓2, ...𝑓𝑛 }of the signal at
+that time will suffer from frequency-independent severe attenuation. Since such attenuation mainly results from
+the abnormal signal acquisition of the hardware, the attenuation coefficients in different frequency bands are
+considered to be the same.
+   Based on this key observation and signal distortion characteristics, we adopt squeeze and unsqueeze operations
+to improve computing efficiency. Specifically, for a given input quality matrix 𝑄𝑚 ∈ R1×𝐹 ×𝑇 , we leverage a
+convolutional layer with a kernel size of 1×1 followed by frequency-dimensional global average pooling (GAP)
+to squeeze along the frequency dimension:
+                                                               𝑛
+                                                            1 ∑︁
+                                                𝑈𝑠𝑞𝑢 ( 𝑗) =       𝑄𝑚 (𝑖, 𝑗)                                          (2)
+                                                            𝑛 𝑖=1
+
+where 𝑈 ∈ R1×1×𝑇 represents the squeezed quality matrix. In this way, the complex matrix operations are
+transformed into efficient vector operations, improving computing efficiency by 𝐹 times. Subsequently, a quality
+learning block is designed to fully leverage the information aggregated in the above squeeze operation. To achieve
+this objective, two fully-connected layers with ReLU (𝜓 ) and Sigmoid (𝜎) functions are combined, which can
+learn the underlying nonlinear relationship. It is worth noting that the first fully connected layer reduces the
+input dimension to 1/2 of the original, balancing the model complexity and learning capability. Through the
+mapping of the Sigmoid activation function, the value of each element will be in the range of 0-1, representing
+the weight of quality. The output of the quality learning block can be expressed as follows:
+                                                       𝑈𝑙 = 𝜎 (𝑊2 𝜓 (𝑊1𝑈𝑠𝑞𝑢 ))                                       (3)
+where 𝑊1 and 𝑊2 represent the weights of two fully-connected layers. Then, a frequency and channel unsqueeze
+block is added to expand the scale of the feature map along the frequency dimension and the channel dimension,
+respectively. Finally, the input quality matrix 𝑄𝑚 ∈ R1×𝐹 ×𝑇 is transformed to the quality embeddings 𝑄𝑒 ∈ R𝐶 ×𝐹 ×𝑇
+that can be directly multiplied by the in-ear audio feature maps. The detailed quality embedding generation
+module structure and the process of in-ear feature map weighting are demonstrated in Fig. 10.
+
+Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+               Exploring and Addressing Low-Quality Auxiliary Modality in Earable Dual-microphone Speech Enhancement •           40:11
+
+
+
+
+                               Fig. 9. The workflow of quality embedding generation.
+
+
+
+
+Fig. 10. The process of in-ear feature map weighting and the detailed              Fig. 11. Spectrogram comparison be-
+structure of the quality embedding generation module.                              tween airborne speech and in-ear speech.
+5.2.3 Feature-level Cross Fusion. After the processing of the multi-scale audio encoder, the input in-ear
+speech spectrogram (𝑆𝑖𝑒    𝑇 ×𝐹 ) and the airborne speech spectrogram (𝑆 𝑇 ×𝐹 ) are transformed into feature maps
+                                                                             𝑎𝑖𝑟
+ 𝐶
+𝐹𝑖𝑒 ×𝑇 ×𝐹      𝐶 ×𝑇
+          and 𝐹𝑎𝑖𝑟  ×𝐹 , respectively. The quality embedding 𝑄𝑒𝐶 ×𝑇 ×𝐹 is multiplied by 𝐹𝑖𝑒 𝐶 ×𝑇 ×𝐹 . Then, the weighted
+
+in-ear feature map 𝑄𝑒   𝐶 ×𝑇 ×𝐹  ∗ 𝐹𝑖𝑒
+                                    𝐶  ×𝑇 ×𝐹                                 ×𝑇
+                                             and the airborne feature map 𝐹𝑎𝑖𝑟
+                                                                           𝐶     ×𝐹 are concatenated along the channel
+dimension. To avoid information loss, we do not perform downsampling operations on these feature maps, which
+brings challenges to real-time and effective feature fusion. Therefore, a lightweight attention mechanism, i.e.,
+Convolutional Block Attention Module (CBAM) [46], is performed on 𝐶𝑎𝑡 (𝑄𝑒𝐶 ×𝑇 ×𝐹 ∗ 𝐹𝑖𝑒          𝐶 ×𝑇 ×𝐹 , 𝐹 𝐶 ×𝑇 ×𝐹 ), which
+                                                                                                           𝑎𝑖𝑟
+can sequentially apply channel and spatial attention to refine feature representations, enabling the network to
+focus on informative regions while suppressing irrelevant features.
+
+5.3   Speech Enhancement Decoder
+In the dual-channel fusion-based speech enhancement module, the output of the in-ear audio encoder (i.e.,
+ 𝐶 ×𝑇 ×𝐹 ) and the fused feature map (i.e., 𝐹 2×𝐶 ×𝑇 ×𝐹 ) are fed into the in-ear speech reconstruction model and the
+𝐹𝑖𝑒                                           𝑓 𝑒𝑠𝑒
+airborne speech reconstruction model, respectively.
+5.3.1 Airborne Speech Reconstruction. In the airborne speech reconstruction model, the fused feature map
+𝐹 𝑓2×𝐶  ×𝑇 ×𝐹 is reconstructed to clean airborne speech signals. The core components consist of four 3×3 dilated
+    𝑒𝑠𝑒
+convolution (dilation = 2) blocks with 48, 24, 12, and 1 filters. Each convolution block is followed by batch
+normalization and the ReLU function. In addition, skip connections are leveraged to directly transfer feature
+maps from the encoder to the corresponding decoder layers, which helps preserve fine-grained time-frequency
+details. The final convolution block applies a 3×3 dilated convolution (dilation = 2) layer, batch normalization,
+
+                        Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+40:12   •   Han et al.
+
+                                                                                           𝑇 ×𝐹 . The final output
+and a sigmoid activation function to generate a single-channel spectrogram mask, i.e., 𝑀𝑎𝑠𝑘𝑎𝑖𝑟
+                                                      ×𝐹     ×𝐹
+airborne speech is generated by 𝑠ˆ𝑎𝑖𝑟 = iSTFT(𝑀𝑎𝑠𝑘𝑎𝑖𝑟 ∗ 𝑆𝑎𝑖𝑟 ).
+                                                    𝑇      𝑇
+
+5.3.2 In-ear Speech Reconstruction. Inspired by prior literature [18], we also add an auxiliary in-ear speech
+reconstruction module to force the model not to forget in-ear branch information during learning. Specifically, it
+consists of four 3×3 dilated convolution (dilation = 2) blocks with 48, 24, 12, and 1 filters. Each convolution block
+is followed by batch normalization and the ReLU function. Lastly, a reconstructed in-ear spectrogram 𝑆ˆ𝑖𝑒    𝑇 ×𝐹 will
+
+be output. It is worth noting that the in-ear speech reconstruction model only participates in the training process
+and will be frozen during the inference process.
+5.3.3 Customized Loss Function. The customized loss function consists of three components: in-ear time-
+                          𝑡𝑓                                     𝑡𝑓
+frequency domain loss L𝑖𝑒 , airborne time-frequency domain loss L𝑎𝑖𝑟 , and airborne time domain loss L𝑎𝑖𝑟
+                                                                                                      𝑡 ,
+
+which are defined as follows:
+                                       2                    2                        2
+                       L = 𝑆ˆ𝑖𝑒 − 𝑆𝑖𝑒 , L = 𝑆ˆ𝑎𝑖𝑟 − 𝑆𝑎𝑖𝑟
+                         𝑡𝑓                  𝑡𝑓         𝑐        𝑡               𝑐
+                               𝑖𝑒                         𝑎𝑖𝑟   L𝑎𝑖𝑟  = 𝑠ˆ𝑎𝑖𝑟 − 𝑠𝑎𝑖𝑟                   (4)
+       𝑐 and 𝑆 𝑐 represent the clean airborne speech signals and the corresponding spectrogram. 𝑆ˆ
+where 𝑠𝑎𝑖𝑟      𝑎𝑖𝑟                                                                               𝑎𝑖𝑟 represent
+                                                            ˆ            ×𝐹     ×𝐹
+the reconstructed airborne speech spectrogram, denoted by 𝑆𝑎𝑖𝑟 = 𝑀𝑎𝑠𝑘𝑎𝑖𝑟 ∗ 𝑆𝑎𝑖𝑟 .
+                                                                       𝑇      𝑇
+
+
+6     DATA SELECTION AND AUGMENTATION
+Since the quality of in-ear modality varies, we need to design a training strategy including high-quality data
+selection, masking-based data augmentation, and noise mixing to effectively complete the training process of the
+designed deep learning model.
+
+6.1     High-quality Data Selection Strategy
+The training dataset comprises multiple pairs of airborne and in-ear speech samples. To train the self-supervised
+quality assessment model, it is essential to select high-quality in-ear speech samples together with their corre-
+sponding airborne speech samples. However, the lack of ground-truth high-quality references for in-ear speech
+poses a major challenge for quality evaluation. To address this issue, we propose an automatic strategy to identify
+the quality of the in-ear speech
+   Since in-ear speech and airborne speech are audio signals transmitted along different channels from the same
+sound source, there is a cross-channel correlation between in-ear speech and airborne speech [18, 19]. As shown
+in Fig. 11, we can observe that the low-frequency components (≤1000 Hz) of the in-ear speech are significantly
+enhanced, but the spectral structure (like fundamental frequency and its corresponding harmonics) is still similar
+to that of airborne speech. Thus, we design a spectral peak-to-valley matching algorithm to identify the in-ear
+speech quality based on the similarity of the low-frequency structure between in-ear speech and airborne speech.
+   Because the high-frequency components of in-ear speech are severely attenuated, we mainly focus on the
+contribution of low-frequency components. Thereby, we use a bandpass filter with passband frequencies of 100
+Hz and 1000 Hz to preserve the low-frequency components of in-ear speech and airborne speech. Then, we split
+the input speech sample into multiple clips using a sliding window with a length of 100 ms and a step of 50 ms.
+At each audio clip, the Fast Fourier Transform (FFT) is applied to extract the magnitude spectrum:
+                                                    ∫ ∞
+                                  𝑀 (𝑚, 𝜔)) = 𝑎𝑏𝑠 (     𝑥 (𝑡) 𝑤 (𝑡 − 𝑚𝑇 ) 𝑒 − 𝑗𝜔𝑡 𝑑𝑡)                           (5)
+                                                                −∞
+where 𝑚 and 𝜔 represent the indexes in the time domain and frequency domain, respectively. To eliminate
+the interference of residual noise, we adopt a Gaussian smoothing and Z-score normalization to extract the
+magnitude spectrum envelope of each frame, denoted by 𝐸𝑛𝑣 (𝑚, 𝜔). Then, we start to find the peaks and valleys
+of the spectrum envelope based on local extrema detection. Considering the characteristics of the spectrum
+
+Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+              Exploring and Addressing Low-Quality Auxiliary Modality in Earable Dual-microphone Speech Enhancement •           40:13
+
+
+
+
+ Fig. 12. Peak-valley matching in high-quality data selection. (a) The FFT spectrum envelop of airborne speech;(b)
+ The FFT spectrum envelop of high-quality in-ear speech;(c) Peaks and valleys matching using DTW.
+
+
+
+
+ Fig. 13. Peak-valley matching in low-quality data selection. (a) The FFT spectrum envelop of airborne speech;
+ (b) The FFT spectrum envelope of low-quality in-ear speech; (c) Peaks and valleys matching using DTW.
+
+
+envelope, the minimum difference between two adjacent peaks or valleys is set to 0.1*𝑁 , where 𝑁 is the length
+of the spectrum envelope. In addition, a minimum prominence parameter is set to 0.1*std(𝐸𝑛𝑣 (𝑚, 𝜔)) to keep
+robustness under drifting baselines. After processing, the peak values and valley values of the airborne spectrum
+envelope and the in-ear spectrum envelope are denoted by 𝑃𝑎𝑖𝑟 , 𝑉𝑎𝑖𝑟 , 𝑃𝑖𝑒 , 𝑉𝑖𝑒 , and the peak locations and valley
+locations are correspondingly denoted by 𝐿𝑎𝑖𝑟 𝑃 , 𝐿𝑉 , 𝐿 𝑃 , 𝐿𝑉 . Based on the timing, ordering, and rhythm of peaks
+                                                   𝑎𝑖𝑟 𝑖𝑒 𝑖𝑒
+and valleys, we quantify similarity by greedy matching and DTW alignment.
+   ♦ Greedy matching. For the given peak locations and valley locations, we design a greedy matching approach
+to calculate the matching rate and the matching error, which is given by Alg. 1. As for high-quality in-ear speech
+and corresponding airborne speech, the peaks and valleys of the spectral envelope should appear at approximately
+the same locations. Yet, the peak and valley locations of the low-quality in-ear spectral envelope mismatch with
+those of the airborne spectral envelope, as shown in Fig. 12 and Fig. 13.
+   ♦ First-order difference DTW alignment. Then, we calculate the interval sequences of adjacent peaks (or
+valleys) and align them with DTW (Dynamic Time Warping), which can represent the rhythm of peaks and
+valleys. For the peak locations of the in-ear spectrum envelope and the airborne spectrum envelope, the DTW
+alignment algorithm is given by Alg. 2.
+   ♦ Similarity Score Calculation. Then, we calculate the similarity score by combining the weighted matching
+rates and first-order difference distances. If the similarity score is larger than the threshold 𝜉, the in-ear audio
+clip is considered to be of high quality. The complete algorithm flow is shown in Alg. 3. Fig. 12 represents peak
+and valley matching results of the high-quality in-ear speech and corresponding airborne speech. However, as
+shown in Fig. 13, peaks and valleys of low-quality in-ear speech cannot be accurately matched with those of
+airborne speech, resulting in large errors.
+
+6.2   Content-aware Low-quality Data Augmentation
+Data augmentation approaches can expand the scale of the dataset, thereby improving the robustness and
+generalization. Different from prior solutions [18, 19] that focus on the augmentation of high-quality speech, our
+work needs to expand the scale of low-quality in-ear speech. This work additionally designs a highly interpretable
+masking-based data augmentation approach, as shown in Fig. 14.
+
+                       Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+40:14   •     Han et al.
+
+
+ Algorithm 1: Peak/Valley Greedy Matching
+   Input: 𝐿𝑜𝑐𝑖𝑒 , 𝐿𝑜𝑐 𝑎𝑖𝑟 : the peak locations of the in-ear spectrum envelope and the airborne spectrum envelope. 𝜏 :
+           matching tolerance.
+   Output: 𝑅: the peak-to-peak matching rate. 𝐸𝑟𝑟 : the absolute error of matched peak locations.
+ 1 𝑁𝑚𝑎𝑡𝑐ℎ = 0, 𝐸𝑟𝑟 = 0 ;
+ 2 for 𝑖 ← 1 to len(𝐿𝑜𝑐 𝑖𝑒 ) and 𝑗 ← 1 to len(𝐿𝑜𝑐 𝑎𝑖𝑟 ) do
+ 3     𝑑 = 𝐿𝑜𝑐𝑖𝑒 (𝑖) − 𝐿𝑜𝑐 𝑎𝑖𝑟 ( 𝑗);
+ 4     if abs(𝑑) ≤ 𝜏 then
+ 5          𝑁𝑚𝑎𝑡𝑐ℎ = 𝑁𝑚𝑎𝑡𝑐ℎ + 1 ;
+ 6          𝐸𝑟𝑟 = 𝐸𝑟𝑟 + abs(𝑑) 𝑖 = 𝑖 + 1, 𝑗 = 𝑗 + 1 ;
+ 7     end
+ 8     else if 𝑑 < 0 then
+ 9          𝑖 =𝑖 +1;
+10     end
+11     else
+12          𝑗 = 𝑗 + 1;
+13     end
+14 end
+                  𝑁𝑚𝑎𝑡𝑐ℎ
+15 𝑅 =
+        (max(len(𝐿𝑜𝑐𝑖𝑒 ),len(𝐿𝑜𝑐𝑎𝑖𝑟 ) ) ;
+16 𝐸𝑟𝑟 = 𝐸𝑟𝑟 /𝑁𝑚𝑎𝑡𝑐ℎ ;
+
+
+
+
+ Algorithm 2: First-order Difference Alignment
+  Input: 𝐿𝑜𝑐𝑖𝑒 , 𝐿𝑜𝑐 𝑎𝑖𝑟 : the peak locations of the in-ear spectrum envelope and the airborne spectrum envelope.
+  Output: 𝐷: normalized DTW distance.
+1 𝐷 =0;
+2 Δ𝑖𝑒 = diff(𝐿𝑜𝑐 𝑖𝑒 ), Δ𝑎𝑖𝑟 = diff(𝐿𝑜𝑐 𝑎𝑖𝑟 ) ;// First-order difference calculation.
+3 [D, 𝑦𝑖𝑒 , 𝑦𝑎𝑖𝑟 ] = dtw(Δ𝑖𝑒 , Δ𝑎𝑖𝑟 ); // 𝑦𝑖𝑒 and 𝑦𝑎𝑖𝑟 represent the alignment indexs of 𝐿𝑜𝑐 𝑖𝑒 and 𝐿𝑜𝑐 𝑎𝑖𝑟 .
+             1
+4 𝐷 =         𝐷     ; // Mapping 𝐷 into [0, 1];
+            1+ 𝑙𝑒𝑛 (𝑦 )
+                     𝑖𝑒
+
+
+
+
+                                 Fig. 14. Workflow of the low-quality data augmentation.
+  As introduced in Sec. 3.3, in-ear air pressure variations induced by ear canal deformation (ECD) suppress
+the movements of the microphone diaphragm, thus affecting the sound capture. From the perspective of the
+spectrogram, it looks like adding masks to cover the original information. First, we leverage a Gaussian Mixture
+
+Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+                Exploring and Addressing Low-Quality Auxiliary Modality in Earable Dual-microphone Speech Enhancement •            40:15
+
+
+ Algorithm 3: High-quality Data Selection Strategy
+   Input: 𝑠𝑖𝑒 and 𝑠𝑎𝑖𝑟 : input in-ear and airborne speech signals.
+   Output: 𝑄𝑚 : the quality metrics of 𝑠𝑖𝑒 , where 1 represents the high quality and 0 represents the low quality.
+                                                              𝑖=1,...,𝑀      𝑖=1,...,𝑀
+ 1 Splitting 𝑠𝑖𝑒 and 𝑠𝑎𝑖𝑟 into multiple audio clips 𝑥𝑖𝑒                 and 𝑥𝑎𝑖𝑟       ;
+ 2 for 𝑖 ← 1 to 𝑀 do
+ 3      𝐹𝑖𝑒 (𝜔) = FFT(𝑥𝑖𝑒   𝑖 , 𝑓 ), 𝐹
+                                 𝑠     𝑎𝑖𝑟 (𝜔) = FFT(𝑥𝑎𝑖𝑟 , 𝑓𝑠 ); // 100 Hz ≤ 𝜔 ≤ 1000 Hz.
+                                                          𝑖
+
+ 4      𝐸𝑛𝑣𝑖𝑒 = norm(smooth(𝑀𝑖𝑒 )); // Extracting the magnitude spectrum envelope.
+ 5      𝐸𝑛𝑣 𝑎𝑖𝑟 = norm(smooth(𝑀𝑎𝑖𝑟 ));
+ 6
+                𝑃 ] = findPeaks(𝐸𝑛𝑣 , Θ) ;
+        [𝑃𝑖𝑒 , 𝐿𝑖𝑒                        𝑖𝑒
+ 7      [𝑉𝑖𝑒 , 𝐿𝑖𝑒 ] = findPeaks((−1) ∗ 𝐸𝑛𝑣𝑖𝑒 , Θ) ;
+                𝑉
+
+ 8
+                  𝑃 ] = findPeaks(𝐸𝑛𝑣 , Θ) ;
+        [𝑃𝑎𝑖𝑟 , 𝐿𝑎𝑖𝑟                         𝑎𝑖𝑟
+ 9      [𝑉𝑎𝑖𝑟 , 𝐿𝑎𝑖𝑟 ] = findPeaks((−1) ∗ 𝐸𝑛𝑣 𝑎𝑖𝑟 , Θ) ;
+                 𝑉
+
+10      [𝑅𝑝𝑘 , 𝐸𝑟𝑟 𝑝𝑘 ] = greedyMatching(𝐿𝑖𝑒       𝑃 , 𝐿𝑉 , 𝜏); // see Alg. 1.
+                                                        𝑎𝑖𝑟
+11      [𝑅𝑣𝑙 , 𝐸𝑟𝑟 𝑣𝑙 ] = greedyMatching(𝑉𝑖𝑒 , 𝑉𝑎𝑖𝑟
+                                                  𝑃    𝑉 , 𝜏) ;
+
+12      [𝐷 𝑝𝑘 ] = dtwDistance(𝐿𝑖𝑒      𝑃 , 𝐿𝑉 ); // see Alg. 2.
+                                             𝑎𝑖𝑟
+13      [𝐷 𝑣𝑙 ] = dtwDistance(𝑉𝑖𝑒 , 𝑉𝑎𝑖𝑟
+                                      𝑃     𝑉 ) ;
+                                               (𝐷   +𝐷 )          𝐸𝑟𝑟   +𝐸𝑟𝑟
+14     𝑆𝑐𝑜𝑟𝑒 (𝑖) = 𝛼 1 ∗ 𝑅𝑝𝑘 + 𝛼 2 ∗ 𝑅𝑣𝑙 + 𝛼 3 ∗ 𝑝𝑘 2 𝑣𝑙 - 𝛼 4 * 𝑝𝑘 2 𝑣𝑙 ;
+15     𝑆𝑐𝑜𝑟𝑒 (𝑖) = max(0, min(1, 𝑆𝑐𝑜𝑟𝑒 (𝑖))); // Mapping to [0,1].
+16 end
+17 if avg(𝑆𝑐𝑜𝑟𝑒) ≤ 𝜉 then
+18     𝑄𝑚 = 0; // Low quality.
+19 end
+20 else
+21     𝑄𝑚 = 1; // High quality.
+22 end
+
+
+
+
+Model (GMM) to generate high-quality in-ear speech from the existing large airborne speech corpus, similar
+to a prior solution [18]. Then, we add random masks to the synthesized in-ear speech to generate low-quality
+in-ear speech. Since the ECD-induced air pressure imbalance only interferes frequency component at a certain
+moment, we perform the time masking on the in-ear spectrogram. Unlike prior methods that apply random
+masks, we introduce content-aware adaptive time masking, where mask locations are conditioned on the spectral
+energy distribution. The in-ear speech spectrogram is denoted by 𝑆 (𝑇 , 𝐹 ), where 𝑇 and 𝐹 represent the time and
+frequency bins, respectively. For the 𝑚-th time bin, the probability of being masked is defined as:
+                                                       𝐹
+                                                      ∑︁                       𝐹
+                                                                            𝑇 ∑︁
+                                                                           ∑︁
+                                               𝑃𝑚 =           𝑆 (𝑚, 𝑓 )/               𝑆 (𝑡, 𝑓 )                                     (6)
+                                                      𝑓 =𝑓0             𝑡 =𝑡 0 𝑓 =𝑓0
+
+  Finally, airborne speech samples combined with their synthesized high-quality in-ear samples constitute the
+high-quality pre-training dataset, whereas pairing with synthesized low-quality in-ear samples constitutes the
+low-quality pre-training dataset.
+
+7 EXPERIMENTAL SETUP
+7.1 Dataset Construction
+7.1.1 Hardware Implementation. Since most existing commercial earphones do not provide open or pro-
+grammable access to raw audio data, directly acquiring audio data from commercial earphones is challenging. In
+
+                          Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+40:16   •   Han et al.
+
+
+
+
+                  (a) Hardware components.                                                 (b) Earphone types.
+
+                                        Fig. 15. Hardware implementation of QuaSE.
+our work, we implement a hardware prototype based on the common structure of existing in-ear earphones, as
+shown in Fig. 15. The earphones are equipped with in-ear microphones and out-ear microphones simultaneously.
+The in-ear microphone type is selected as AS-B6027AL30-RC1 and the out-ear microphone type is selected as
+SO-COURT-MIC-22 . The detailed internal structure of earphones is present in Fig. 15(a). The earphones are
+connected to a Raspberry Pi 5 with sound cards. To ensure realistic usage conditions and capture the variability
+introduced by different earphone designs, we use three representative types of earphones, as illustrated in
+Fig. 15(b). These earphones differ in both ear tip materials (memory foam and silicone), vent design, and shell
+materials (metal and plastic), covering a broad range of commonly used commercial and prototype designs.
+7.1.2 Clean Dual-channel Dataset. In real-world quiet environments, we leverage the above three earphone
+types to collect dual-channel speech from 32 participants 3 (20 males and 12 females), aged between 18 and
+45. This age range covers the primary population of active users in daily and professional earphone-usage
+scenarios. Thus, this setting can provide a reasonable and informative generalization evaluation for our solution.
+Among these participants, 27 are native Mandarin speakers and 5 are native English speakers. Each participant is
+required to wear earphones and read the English materials that are selected from an online English website4 , for
+approximately 20 to 30 minutes. In particular, each participant must ensure that the ear tips fit the ear canals
+tightly. To facilitate subsequent signal processing, all speech signals are split into multiple 5-second clips. If the
+signal length is less than 5 seconds, it will be automatically padded with 0. In total, a real-world dual-channel
+speech dataset including about 2800 pairs of airborne speech samples and in-ear speech samples is constructed.
+7.1.3 High-quality Dual-channel Dataset. As introduced in Sec. 5.2.1, a high-quality dual-channel dataset
+including high-quality in-ear speech and corresponding airborne speech needs to be constructed to train the
+self-supervised quality assessment model. Based on the design in Sec. 6.1, we need to select high-quality in-ear
+speech from the clean dual-channel dataset. Specifically, based on the empirical analysis, the similarity score
+threshold (i.e., 𝜉) is set to 0.5. 𝛼 1 , 𝛼 2 , 𝛼 3 , and 𝛼 4 in Alg. 3 are set to 0.4, 0.4, 0.1, and 0.1, respectively. This
+weight assignment strategy is motivated by the observation that spectral structures provide informative cues for
+identifying distortions in signal quality.
+7.1.4 Noisy Dual-channel Dataset. To construct the noisy dual-channel dataset, we need to add noise to the
+clean dual-speech dataset. We adopt the same noise addition strategy as in the prior literature [18]. Noise is added
+to both the airborne and in-ear speech channels to simulate realistic acoustic interference encountered during
+1 http://www.aospow.com/Products/znjqry6mmm.html
+2 https://soundprofessionals.com/product/sp-court-mic-2/
+3 Before conducting research, we have obtained voluntary informed consent from research participants.
+4 https://basicenglishspeaking.com
+
+
+
+Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+               Exploring and Addressing Low-Quality Auxiliary Modality in Earable Dual-microphone Speech Enhancement •           40:17
+
+
+daily earphone usage. Considering the diversity and complexity of real-world environments, we incorporate
+three representative categories of noise sources: environmental noise from the ESC-50 dataset [38], competing
+speaker noise derived from the LibriSpeech corpus [36], and music noise from the MUSAN dataset [42]. The
+signal-to-noise ratio (SNR) of the noisy speech is uniformly sampled within the range of -5 dB to 10 dB, which
+can cover most noisy scenarios.
+7.1.5 Synthetic Dual-channel Dataset. As introduced in Sec. 6.2, a data augmentation strategy is designed to
+expand the scale of high-quality and low-quality datasets. Therefore, an existing airborne speech corpus (i.e.,
+LibriSpeech [36]) is leveraged to generate high-quality in-ear speech and low-quality in-ear speech, simultaneously.
+In total, we construct a synthetic dual-channel dataset that includes about 8000 pairs of airborne speech and
+in-ear speech. Constructing such a synthetic dataset allows the proposed deep learning model to be trained on a
+broader distribution of quality conditions, thereby improving robustness and generalization without requiring
+laborious in-ear data collection.
+
+7.2   Model Training and Evaluation Metrics
+We implement the proposed model using the PyTorch framework. The complete model training process is
+conducted on a server that is equipped with 144 Intel(R) Xeon(R) Platinum 8352V@2.10GHz CPUs and 3 NVIDIA
+RTX A6000 GPUs. During the training process, the noisy airborne speech signals and corresponding in-ear speech
+signals are fed into the model, and the clean airborne speech signals serve as the ground truth for computing the
+loss. First, we use the high-quality dual-channel dataset to train the quality self-assessment model. After that, the
+model parameters are frozen. Then, the synthetic dual-channel dataset is used to pre-train the entire model of
+QuaSE. Afterwards, we fine-tune the pre-trained model with the noisy dual-channel dataset. Specifically, the
+model is trained using the Adam optimizer with an initial learning rate of 0.001 and a weight decay of 1.0 × 10−5 .
+The training process runs for 32 epochs with a batch size of 12. To improve convergence, a learning rate scheduler
+is applied, which reduces the learning rate by a factor of 0.5 if the validation loss does not improve within 1 epoch.
+Additionally, we set gradient clipping with a maximum norm of 10 to improve training stability. Unless otherwise
+specified, a fixed random seed is used to ensure reproducibility, and data loading operations are parallelized using
+multiple worker threads to accelerate training.
+   We divide all participants into eight groups and adopt leave-one-group-out cross-validation for evaluation.
+Speech quality and intelligibility are evaluated using four widely adopted objective metrics [18, 48]. (1) Perceptual
+Evaluation of Speech Quality (PESQ): measuring perceptual speech quality of reconstructed speech (-0.5 to 4.5,
+higher is better). (2) Short-Time Objective Intelligibility (STOI): estimating speech intelligibility of reconstructed
+speech (0 to 1, higher is better). (3) Scale-Invariant Signal-to-Distortion Ratio (SI-SDR): measuring distortion
+between reconstructed and reference speech in a scale-invariant manner. (4) Segmental Signal-to-Noise Ratio
+(SegSNR): measuring segmental noise suppression performance across short overlapping frames.
+
+8 EVALUATION ANALYSIS
+8.1 Baseline Comparison
+To evaluate the overall performance of our solution, we conduct a baseline comparison with several solutions,
+including Phasen [48], Inter-Subnet [8], ClearSpeech [34], and EarSpeech [18]. Among them, Phasen and Inter-
+Subnet are typical single modality-based speech enhancement solutions. ClearSpeech and EarSpeech are the
+state-of-the-art dual-microphone speech enhancement solutions that incorporate in-ear and out-ear microphones.
+To ensure a fair comparison, we only reproduce the models of these works, while the data processing pipeline,
+including data augmentation, is the same as that in our work. Tab. 1 summarizes speech enhancement metrics
+under different noise conditions, where EN, MN, and SN represent environmental noise, music noise, and speech
+noise, respectively. QuaSE consistently outperforms existing baselines across all reported metrics. Specifically,
+
+                        Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+40:18   •   Han et al.
+
+
+Table 1. Overall performance in different noise conditions with cross-validation. EN, MN, and SN represent
+environmental noise, music noise, and speech noise, respectively.
+
+                             PESQ                        STOI                          SI-SDR (dB)                SegSNR (dB)
+        Method           EN MN SN Avg                EN MN SN Avg                EN     MN SN Avg            EN    MN SN Avg
+   Noisy Speech          2.62   2.26   2.31   2.45   0.85   0.78   0.77   0.81   5.03 4.91 5.03 5.00         6.52 1.98 8.92 5.93
+    Phasen [48]          3.21   3.10   3.01   3.11   0.84   0.81   0.80   0.82   10.85 10.13 8.46 9.81      10.97 10.17 9.51 10.22
+ Inter-Subnet [8]        3.35   3.14   3.09   3.19   0.85   0.82   0.81   0.83   11.07 10.72 9.46 10.41     11.02 10.65 10.39 10.69
+ ClearSpeech [34]        3.33   3.07   2.96   3.12   0.86   0.86   0.84   0.85   13.07 12.14 11.64 12.28    12.82 11.74 10.65 11.74
+  EarSpeech [18]         3.27   3.13   2.89   3.10   0.88   0.87   0.87   0.88   12.47 12.03 11.48 11.99    12.76 10.58 11.59 11.64
+      QuaSE              3.58   3.43   3.17   3.39   0.93   0.91   0.91   0.92   15.24 12.98 13.04 14.11    13.47 12.53 13.43 13.14
+ EarSpeech w/ QA         3.37   3.26   3.19   3.27   0.91   0.88   0.86   0.88   13.75 13.46 12.98 13.40    13.55 12.73 12.24 12.84
+  QuaSE w/o QA           3.19   3.06   3.01   3.09   0.87   0.85   0.85   0.86   14.20 12.05 12.03 13.11    12.34 11.93 11.47 11.91
+
+
+
+
+            (a) PESQ                          (b) SI-SDR                              (a) PESQ                    (b) SI-SDR
+  Fig. 16. Generalization among unseen sentences.                          Fig. 17. Generalization among different languages.
+QuaSE achieves improvements of 9.35%, 4.55%, 17.68%, and 12.89% over the best-performing baseline in PESQ,
+STOI, SI-SDR, and SegSNR, respectively. Compared with ClearSpeech and EarSpeech, the significant improvement
+of QuaSE mainly lies in its capability to address the negative impact of low-quality in-ear speech on the airborne
+speech enhancement by dynamically fusing the complementary information based on quality variations. For
+some user groups, QuaSE and baselines demonstrate a comparable performance. That is because the deep learning
+model in baselines may also exhibit a generalization capability towards low-quality in-ear speech when the
+training dataset involves low-quality in-ear speech. Additionally, the enhancement performance of speech noise
+is lower than that of environmental noise and music noise. That is because speech noise contains similar spectral
+structures to the target speech.
+
+8.2     Quality-aware Adaptation Effectiveness
+The primary novelty of our solution is the quality-aware adaptation of cross-modal fusion. Next, we evaluate the
+effectiveness of the quality-aware adaptation (QA) module designed in Sec. 5.2. As shown in Tab. 1, with the
+assistance of the QA module, the enhancement performance of QuaSE can be improved by 6.27%, 4.54%, 14.90%,
+and 11.93% in terms of PESQ, STOI, SI-SDR, and SegSNR, respectively. Additionally, we try to integrate the QA
+module into EarSpeech to explore its feasibility as an auxiliary component to improve performance. From the
+comparison in Tab. 1, PESQ, SI-SDR, and SegSNR are improved by up to 5.48%, 11.76%, and 10.31%, respectively,
+revealing the effective gains of the QA module. The performance improvements of EarSpeech indicate that the
+QA module can also be used as an intermediate component to facilitate the effectiveness of other sensing tasks.
+
+8.3     Data Augmentation Effectiveness
+Next, we assess the effectiveness of data augmentation (Sec. 6.2) in terms of generalization across unseen sentences,
+unseen languages, and user groups.
+
+Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+               Exploring and Addressing Low-Quality Auxiliary Modality in Earable Dual-microphone Speech Enhancement •            40:19
+
+
+
+
+              (a) PESQ                                       (a) PESQ                                       (a) PESQ
+
+
+
+
+             (b) SI-SDR                                     (b) SI-SDR                                     (b) SI-SDR
+
+Fig. 18. Enhancement performance            Fig. 19. Enhancement performance               Fig. 20. Enhancement performance
+across user groups.                         within the SNR of [-10, 10] dB.                at different SNR boundaries.
+   (1) Generalization Across Unseen Sentence First, we additionally collect dual-channel speech of previously
+unseen sentences to evaluate the generalization capability of QuaSE. As shown in Fig. 16, the proposed data
+augmentation strategy consistently improves performance across multiple metrics (PESQ, STOI, and SI-SDR),
+demonstrating enhanced robustness to lexical and syntactic variations. For instance, compared with the baseline,
+QuaSE with data augmentation achieves relative gains of about 10% in terms of SI-SDR. These results confirm
+that augmentation not only prevents overfitting to sentence-specific acoustic patterns but also strengthens the
+capability to generalize to diverse sentence structures encountered in real-world scenarios.
+   (2) Generalization Across Unseen Language. Next, we further investigate cross-language generalization by
+evaluating performance on languages that are not included during training. In our work, we select the Mandarin
+language that has phonetic or tonal deviations from English. As illustrated in Fig. 17, the data augmentation scheme
+maintains competitive performance even under substantial phonetic and tonal mismatches. It demonstrates that
+the augmentation strategy facilitates learning language-agnostic acoustic cues, thereby enabling the system to
+operate effectively in cross-language deployment scenarios without requiring language-specific retraining.
+   (3) Generalization Across User Group. The leave-one-group-out cross-validation is adopted for the evaluation.
+It ensures that all speech samples of users in the test dataset have not appeared in the training dataset before. Fig. 18
+demonstrates the enhancement performance of QuaSE across different user groups. The slight differences of PESQ
+and SI-SDR between various user groups indicate that QuaSE also shows a great generalization capability among
+user groups. That is because the synthetic dual-channel dataset has included 60 speakers, making QuaSE learn
+user-independent features for speech enhancement.
+
+8.4   Noise Scope Study
+We investigate the noise scope of QuaSE to understand the noise conditions under which the proposed system
+remains effective. First, we still use a dual-channel dataset with the SNR range of [-5, 10] dB for training and
+
+                         Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+40:20   •   Han et al.
+
+
+
+
+Fig. 21. Impact of gender and age.             Fig. 22. Impact of similarity threshold.          Fig. 23. Impact of earphone type.
+
+
+
+
+use a dual-channel dataset with the SNR range of [-10, 10] dB for testing. Fig. 19 demonstrates the enhancement
+performance in terms of PESQ and SI-SDR. We can clearly observe that even in the range of [-10, -5] dB, QuaSE can
+achieve improvements of 1.14 and 14.65 dB in terms of PESQ and SI-SDR, respectively. In addition, the performance
+improvement is more significant at lower SNR conditions. Furthermore, we continue to expand the low boundary
+of SNR to -15 dB, typically corresponding to highly adverse acoustic environments in which speech intelligibility
+is severely compromised, even for human listeners [33]. Fig. 20 illustrates the enhancement performance in
+terms of PESQ and SI-SDR under varying input SNR levels. Even when the SNR of input speech is -15 dB,
+QuaSE still achieves an averaged PESQ and an averaged SI-SDR of approximately 1.8 and 0 dB for enhanced
+speech, respectively. However, at an SNR level of -15 dB, we can clearly observe a significant decrease in both the
+PESQ and SI-SDR of the enhanced speech.
+
+8.5     Impact of Gender and Age
+A total of 32 participants are involved in the evaluation, aged between 18 and 45. Anatomical differences related
+to gender and age may affect the acoustic properties of the ear canal [17], thereby directly affecting the quality
+of in-ear speech signals. Thus, it is necessary to evaluate the generalization capability of our solution across
+different genders and age groups. Among the participants, 10 individuals were aged 18–25 (6 males and 4 females),
+10 individuals were aged 26–30 (7 males and 3 females), 8 individuals were aged 31–35 (5 males and 3 females),
+and 4 individuals were aged 36–45 (2 males and 2 females). As shown in Fig. 21, we can observe that while slight
+performance differences can be observed between genders in certain age ranges (e.g., 18 to 25 years old), these
+variations remain relatively small with only 1.82 dB. These experimental results indicate that QuaSE maintains
+consistent performance trends across different genders and ages, suggesting a certain degree of robustness to
+gender-related and age-related anatomical variability.
+
+8.6     Impact of Similarity Threshold
+In the high-quality data selection strategy (Alg. 3 in Sec. 6.1), a similarity threshold 𝜉 is used to identify whether
+the input in-ear speech is of high quality. Next, we conducted an impact analysis of the similarity threshold
+on enhancement performance, as shown in Fig. 22. The similarity threshold varies from 0.1 to 0.9. The results
+indicate that while the enhancement performance improves as the threshold increases, it quickly stabilizes when
+the threshold exceeds approximately 0.5. That is because, as the threshold increases, in-ear speech with higher
+quality is retained for training, allowing the quality assessment model (Sec. 5.2.1) to capture more fine-grained
+information of quality variations. Yet, a higher threshold results in fewer high-quality samples to involve in
+model training, which may lead to overfitting. Thus, the threshold of 0.5 can retain as much data as possible for
+sufficient model training while maintaining performance.
+
+Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+               Exploring and Addressing Low-Quality Auxiliary Modality in Earable Dual-microphone Speech Enhancement •           40:21
+
+
+
+
+         Fig. 24. WER of real-world scenarios.                             Fig. 25. MOS of real-world scenarios.
+
+8.7   Impact of Earphone Type
+Different types of earphones with various structures may result in different degrees of seal in the ear canal, which
+directly brings different degrees of in-ear speech distortion. Thus, for the three earphone types in Fig. 15(b), we
+assess the performance of QuaSE across different earphone types. Notably, two earphone types (i.e., Earphone-1
+and Earphone-2) are designed with vents for pressure equalisation. Fig. 23 shows the SI-SDR of EarSpeech (Base-
+line) and QuaSE (Ours). Performance variations are observed due to differences in acoustic sealing, microphone
+placement, and resonance characteristics. However, compared with the baseline, QuaSE still shows outperforming
+performance. For the second earphone type, EarSpeech and QuaSE show only a slight performance difference.
+This is because the design of the second earphone type does not form a closed space with the ear canal, so the air
+pressure inside the ear canal and the air pressure outside the ear canal remain balanced, which may not cause
+severe speech distortion. Nevertheless, QuaSE still outperforms EarSpeech, suggesting that vents on earphones
+do not completely eliminate the negative impact of in-ear speech quality variations on speech enhancement
+performance. As for the first and third earphone types, we can observe that QuaSE can effectively deal with the
+issue of ECD-induced in-ear speech distortion.
+
+8.8   Real-world Study
+In three typical voice interaction scenarios, a real-world study is conducted to assess the robustness of QuaSE.
+Specifically, three typical voice interaction scenarios include an office room with the noise level of 57.43 dB (Env.
+1), a canteen with the noise level of 63.76 dB (Env. 2), and the outside street with the noise level of 75.12 dB (Env.
+3). Since the noisy speech collected in the real scenarios cannot be accurately measured by objective evaluation
+metrics such as SNR and SDR, we use the Word Error Rate (WER) and Mean Opinion Score (MOS) to quantify the
+enhancement performance of QuaSE from objective and subjective perspectives, respectively.
+   In terms of objective measuring, the enhanced airborne speech is converted into text with Whisper Transcription
+GPT – AI Audio Converter. Then, WER is calculated using the transcribed text and the real text. Fig. 24 demonstrates
+the WER results of raw noisy speech, enhanced speech by EarSpeech (Baseline), and enhanced speech by
+QuaSE (Ours). We can observe that QuaSE can effectively enhance the intelligibility of raw speech and achieve
+a lower WER across all three scenarios. In the more challenging canteen scenario with strong overlapping
+competitive speech, QuaSE still achieves a significant relative reduction of 35% in WER compared to raw speech,
+demonstrating robustness against multi-speaker interference. Similarly, in the outdoor street scenario with
+dynamic noise sources such as traffic, QuaSE still lowers the WER by 30%, confirming its adaptability to highly
+non-stationary noise conditions. Additionally, compared to EarSpeech, QuaSE can also yield a lower WER in Env.
+1 and Env. 3. However, the WER of QuaSE is slightly higher than that of EarSpeech. We speculate that this is
+due to the following factors. First, because the Whisper Transcription GPT model is trained on a large dataset
+of audio and text, it inherently exhibits a certain resistance to ambient noise, thus enabling it to identify some
+noisy sentences. Second, the proposed quality-aware speech enhancement framework may slightly suppress
+
+                        Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+40:22   •   Han et al.
+
+
+                   Table 2. Averaged run-time latency of 5-second speech clip on different platforms.
+
+
+                                                  Desktop-GPU                Desktop-CPU               Redmi Note 12
+                Quality Adaptation             0.047 (± 0.187) s          0.429 (± 0.010) s          3.456 (± 0.011) s
+                Encoder & Decoder              0.073 (± 0.241) s          0.561 (± 0.049) s          5.072 (± 0.235) s
+                 Overall Pipeline              0.119 (± 0.127) s          1.009 (± 0.333) s          8.849 (± 0.633) s
+
+
+short-duration phonetic cues that are critical for text transcription, resulting in a marginal WER increase. Fig. 25
+demonstrates the results of subjective evaluation. Specifically, we recruit 10 volunteers to rate the enhanced
+speech samples using the Mean Opinion Score (MOS) [18, 48] rating 0-5. A higher MOS reflects improved
+intelligibility and listening comfort, signifying that the enhancement method produces speech closer to natural
+human perception. Obviously, QuaSE consistently achieves higher MOS than both raw speech and EarSpeech
+across all environments, indicating improved perceptual quality in real-world usage.
+
+8.9     Latency Evaluation
+We conduct inference latency measurements under different hardware platforms to give a deployability analysis
+of QuaSE. Given that the interfaces of existing earable devices are not publicly available, it is difficult for us to
+conduct a direct evaluation on commercial earphones. Thus, we adopt a client-server computational paradigm
+to conduct the latency evaluation. It is worth noting that the designed hardware prototype is connected to the
+computing platform via cable, so the latency caused by data transmission can be ignored. The main focus is on
+the runtime latency induced by the quality-aware speech enhancement model. We deploy the entire technical
+pipeline on a desktop platform (i.e., Lenovo ThinkPad X1 Carbon) and a mobile platform (i.e., Redmi Note 12).
+Specifically, the desktop platform represents the edge inference setting, and the mobile phone represents the
+resource-constrained on-device inference setting. In this work, we have made efforts to optimize the model to
+reduce computational complexity. For instance, we adjusted the number of convolution channels in the data-level
+quality self-assessment model (Sec. 5.2.1), reducing it from 96 to 48, which balanced both latency and model
+performance. Furthermore, we adopt the squeeze and unsqueeze operations along frequency dimensions in the
+quality embedding generation model (Sec. 5.2.2). As summarized in Tab. 2, the runtime latency of QuaSE only
+achieves 1.009 s with a real-time factor of 0.20 (< 1.00) even on the desktop CPU platform. However, on the
+mobile platform, QuaSE achieves an average latency of 8.8 s, corresponding to a real-time factor of 1.77. This high
+latency primarily stems from the computational cost of multi-scale convolutional encoding and quality-aware
+adaptation under constrained mobile system-on-chip resources. Although real-time performance has not yet been
+reached on mobile devices, these optimization operations still reduce runtime latency by nearly 50% compared to
+the 14-second latency before optimization, highlighting the potential for further mobile-oriented acceleration.
+
+9 DISCUSSION
+9.1 Verification of Speech Quality Changes on COTS Earphones
+Nowadays, some higher-end ANC (Active Noise Cancelling) earphones may also include advanced techniques
+or special hardware designs (e.g., vents 5 ) to balance air pressure in the ear canal. However, since most existing
+commercial earphones do not open audio interfaces for public developers, it is difficult for us to verify whether
+in-ear speech distortion exists in commercial earphones. However, we want to emphasize that the core motivation
+of our work is to address the broader and more fundamental issue that the quality of the in-ear modality
+5 https://patents.google.com/patent/US11206471B1/en
+
+
+
+Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+               Exploring and Addressing Low-Quality Auxiliary Modality in Earable Dual-microphone Speech Enhancement •           40:23
+
+
+is inherently unstable in real-world usage. Even with these advanced techniques or special hardware designs,
+individual anatomical differences, insertion depth, speaking style, and movement patterns can all induce significant
+variability in in-ear signal quality. The contribution of our work is that we first study the impact of in-ear speech
+quality variations on speech enhancement performance and design quality-aware speech enhancement to make
+up for this limitation. In the future, we will continue to advance our cooperation with mainstream manufacturers
+to achieve real-world deployment and verification in COTS earphones.
+
+9.2   Real-time Inference on COTS Devices
+While QuaSE demonstrates effectiveness in handling quality-varying in-ear speech, it does not yet achieve
+real-time inference on mobile platforms. This is primarily because our work focuses on algorithmic design and
+validation, without incorporating engineering-level optimizations tailored for mobile system-on-chip architec-
+tures. Based on the previous efforts, we found that appropriately adjusting the network structure parameters
+(like kernel sizes, layer depths, and channel numbers) can significantly reduce computational overhead while
+preserving enhancement performance. Thus, an important future direction is to explore Neural Architecture
+Search (NAS) technology [30] to automatically identify optimal network structures. Unlike manually designed
+architectures, NAS enables the automated discovery of task-specific network structures that balance performance
+and computational complexity under explicit resource constraints. In addition, emerging hardware accelerators,
+software-hardware codesign structures, and edge-assisted deployment paradigms provide promising opportu-
+nities to further reduce latency [30, 41]. With these optimizations, we believe that the quality-aware speech
+enhancement framework remains a viable and promising direction for practical deployment on mobile platforms.
+
+9.3   Evaluation Across More Diverse User Groups
+Although our evaluation involves 32 participants with different genders, ages, and nationalities, we still ac-
+knowledge that the current study does not comprehensively represent the full diversity of real-world users. In
+particular, broader age ranges, anatomical variations, and even long-term wearing states remain underexplored.
+Prior studies have shown that factors such as age-related changes in ear canal elasticity, skin compliance, and
+even ear canal diseases can influence in-ear acoustic characteristics [17, 27]. These factors may further affect
+the severity and temporal dynamics of ear-canal deformation, as well as the resulting quality variation of in-ear
+audio signals. We will make this one of the key focuses of our future research and will continue to advance it.
+
+10    CONCLUSION
+In our work, we identify that ear canal deformation induces air pressure fluctuations, degrading in-ear speech
+quality and limiting existing methods. To address that, we present QuaSE, a quality-aware dual-microphone
+speech enhancement framework that can dynamically fuse quality-varying in-ear speech and noisy airborne
+speech. Extensive experiments demonstrate that our work significantly improves the robustness and effectiveness
+of speech enhancement performance in real-world scenarios and provides meaningful guidance for future studies.
+
+Acknowledgments
+This work is partially supported by Basic Research Program of Jiangsu with No. BK20250727, National Natural
+Science Foundation of China with No. 62502214, "Pioneer” and “Leading Goose” R&D Program of Zhejiang with
+No. 2025C02044, Jiangsu Province Higher Education Basic Science (Natural Science) Research Program with No.
+25KJB520026, and Startup Foundation for Introducing Talent of NUIST with No. 2025r068. We also appreciate the
+valuable suggestions and feedback from the anonymous reviewers.
+
+                        Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+40:24   •   Han et al.
+
+
+References
+ [1] Takashi Amesaka, Hiroki Watanabe, and Masanori Sugimoto. 2019. Facial expression recognition using ear canal transfer function. In
+     Proceedings of the 2019 ACM International Symposium on Wearable Computers. 1–9. doi:10.1145/3341163.3347747
+ [2] Toshiyuki Ando, Yuki Kubo, Buntarou Shizuki, and Shin Takahashi. 2017. Canalsense: Face-related movement recognition system based
+     on sensing air pressure in ear canals. In Proceedings of the 30th Annual ACM Symposium on User Interface Software and Technology.
+     Association for Computing Machinery, New York, NY, USA, 679–689. doi:10.1145/3126594.3126649
+ [3] Anderson R Avila, Hannes Gamper, Chandan Reddy, Ross Cutler, Ivan Tashev, and Johannes Gehrke. 2019. Non-intrusive speech quality
+     assessment using neural networks. In ICASSP 2019-2019 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP).
+     IEEE, 631–635. doi:10.1109/ICASSP.2019.8683175
+ [4] Yetong Cao, Huijie Chen, Fan Li, and Yu Wang. 2021. CanalScan: Tongue-jaw movement recognition via ear canal deformation sensing.
+     In IEEE INFOCOM 2021-IEEE Conference on Computer Communications. IEEE, 1–10. doi:10.1109/INFOCOM42981.2021.9488852
+ [5] Kévin Carillo, Olivier Doutres, and Franck Sgard. 2020. Theoretical investigation of the low frequency fundamental mechanism of
+     the objective occlusion effect induced by bone-conducted stimulation. The Journal of the Acoustical Society of America 147, 5 (2020),
+     3476–3489. doi:10.1121/10.0001237
+ [6] Ishan Chatterjee, Maruchi Kim, Vivek Jayaram, Shyamnath Gollakota, Ira Kemelmacher, Shwetak Patel, and Steven M. Seitz. 2022.
+     ClearBuds: wireless binaural earbuds for learning-based speech enhancement. In Proceedings of the 20th Annual International Conference
+     on Mobile Systems, Applications and Services. 384–396. doi:10.1145/3498361.3538933
+ [7] Hu Chen, Yi Zhang, Mannudeep K Kalra, Feng Lin, Yang Chen, Peixi Liao, Jiliu Zhou, and Ge Wang. 2017. Low-dose CT with a residual
+     encoder-decoder convolutional neural network. IEEE transactions on medical imaging 36, 12 (2017), 2524–2535. doi:10.1109/TMI.2017.
+     2715284
+ [8] Jun Chen, Wei Rao, Zilin Wang, Jiuxin Lin, Zhiyong Wu, Yannan Wang, Shidong Shang, and Helen Meng. 2023. Inter-subnet: Speech
+     enhancement with subband interaction. In ICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing
+     (ICASSP). IEEE, 1–5. doi:10.1109/ICASSP49357.2023.10094858
+ [9] Sune Darkner, Rasmus Larsen, and Rasmus R Paulsen. 2007. Analysis of deformation of the human ear and canal caused by mandibular
+     movement. In International Conference on Medical Image Computing and Computer-Assisted Intervention. Springer, 801–808.
+[10] Alexandre Defossez, Gabriel Synnaeve, and Yossi Adi. 2020. Real Time Speech Enhancement in the Waveform Domain.
+     arXiv:2006.12847 [eess.AS]
+[11] Michel Demuynck, Aidin Delnavaz, and Jérémie Voix. 2024. Morphological analysis of the human earcanal deformations during
+     face-related activities. Applied Ergonomics 116 (2024), 104195. doi:10.1016/j.apergo.2023.104195
+[12] Han Ding, Yizhan Wang, Hao Li, Cui Zhao, Ge Wang, Wei Xi, and Jizhong Zhao. 2022. Ultraspeech: Speech enhancement by interaction
+     between ultrasound and speech. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies 6, 3 (2022), 1–25.
+     doi:10.1145/3550303
+[13] Di Duan, Yongliang Chen, Weitao Xu, and Tianxing Li. 2024. EarSE: Bringing Robust Speech Enhancement to COTS Headphones.
+     Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies 7, 4 (2024), 1–33. doi:10.1145/3631447
+[14] Yang Gao, Wei Wang, Vir V Phoha, Wei Sun, and Zhanpeng Jin. 2019. EarEcho: Using ear canal echo for wearable authentication.
+     Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies 3, 3 (2019), 1–24. doi:10.1145/3351239
+[15] Feiyu Han, Panlong Yang, Yuanhao Feng, Haohua Du, and Xiang-Yang Li. 2024. Exploring Earable-Based Passive User Authentication
+     via Interpretable In-Ear Breathing Biometrics. IEEE Transactions on Mobile Computing 23, 12 (2024), 15238–15255. doi:10.1109/TMC.2024.
+     3453412
+[16] Feiyu Han, Panlong Yang, Yuanhao Feng, Weiwei Jiang, Youwei Zhang, and Xiang-Yang Li. 2024. EarSleep: In-ear Acoustic-based
+     Physical and Physiological Activity Recognition for Sleep Stage Detection. Proceedings of the ACM on Interactive, Mobile, Wearable and
+     Ubiquitous Technologies 8, 2 (2024), 1–31. doi:10.1145/3659595
+[17] Feiyu Han, Panlong Yang, Shaojie Yan, Haohua Du, and Yuanhao Feng. 2023. BreathSign: Transparent and continuous in-ear authentica-
+     tion using bone-conducted breathing biometrics. In IEEE INFOCOM 2023-IEEE Conference on Computer Communications. IEEE, 1–10.
+     doi:10.1109/INFOCOM53939.2023.10229037
+[18] Feiyu Han, Panlong Yang, You Zuo, Fei Shang, Fenglei Xu, and Xiang-Yang Li. 2024. Earspeech: Exploring in-ear occlusion effect on
+     earphones for data-efficient airborne speech enhancement. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous
+     Technologies 8, 3 (2024), 1–30. doi:10.1145/3678594
+[19] Feiyu Han, You Zuo, Weiwei Jiang, Dawei Yan, Yuxin Zhao, Panlong Yang, and Yubo Yan. 2025. EAROE: Enabling Body-Channel Voice
+     Interaction Interface on Earphones via Occlusion Effect. IEEE Internet of Things Journal (2025). doi:10.1109/JIOT.2025.3529912
+[20] Lixing He, Haozheng Hou, Shuyao Shi, Xian Shuai, and Zhenyu Yan. 2023. Towards Bone-Conducted Vibration Speech Enhancement
+     on Head-Mounted Wearables. In Proceedings of the 21st Annual International Conference on Mobile Systems, Applications and Services.
+     14–27. doi:10.1145/3581791.3596832
+
+
+
+
+Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+                   Exploring and Addressing Low-Quality Auxiliary Modality in Earable Dual-microphone Speech Enhancement •                     40:25
+
+
+[21] Jens Heitkaemper, Joe Caroselli, Max McKinnon, Arun Narayanan, and Nathan Howard. 2025. Bone Conducted Signal Guided Speech
+     Enhancement For Voice Assistant on Earbuds. In ICASSP 2025-2025 IEEE International Conference on Acoustics, Speech and Signal
+     Processing (ICASSP). IEEE, 1–5. doi:10.1109/ICASSP49660.2025.10889416
+[22] Yasufumi Hoji, Hiroki Watanabe, and Yoshinari Takegawa. 2025. Silent Speech Recognition Using Ear Canal Pressure Changes. In
+     International Conference on Advances in Mobile Computing and Multimedia Intelligence. Springer, 108–121. doi:10.1007/978-3-032-11768-
+     7_9
+[23] Delwar Hossain, Tonmoy Ghosh, Masudul Haider Imtiaz, and Edward Sazonov. 2023. Ear canal pressure sensor for food intake detection.
+     Frontiers in Electronics 4 (2023), 1173607. doi:10.3389/felec.2023.1173607
+[24] Changshuo Hu, Thivya Kandappu, Yang Liu, Cecilia Mascolo, and Dong Ma. 2024. BreathPro: Monitoring breathing mode during running
+     with earables. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies 8, 2 (2024), 1–25. doi:10.1145/3659607
+[25] Changshuo Hu, Xiao Ma, Xinger Huang, Yiran Shen, and Dong Ma. 2024. LR-Auth: Towards Practical Implementation of Implicit
+     User Authentication on Earbuds. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies 8, 4 (2024), 1–27.
+     doi:10.1145/3699793
+[26] Yanxin Hu, Yun Liu, Shubo Lv, Mengtao Xing, Shimin Zhang, Yihui Fu, Jian Wu, Bihong Zhang, and Lei Xie. 2020. DCCRN: Deep
+     Complex Convolution Recurrent Network for Phase-Aware Speech Enhancement. arXiv:2008.00264 [eess.AS]
+[27] Yincheng Jin, Yang Gao, Xiaotao Guo, Jun Wen, Zhengxiong Li, and Zhanpeng Jin. 2022. Earhealth: an earphone-based acoustic otoscope
+     for detection of multiple ear diseases in daily life. In Proceedings of the 20th annual international conference on mobile systems, applications
+     and services. 397–408. doi:10.1145/3498361.3538935
+[28] Yincheng Jin, Yang Gao, Xuhai Xu, Seokmin Choi, Jiyang Li, Feng Liu, Zhengxiong Li, and Zhanpeng Jin. 2022. EarCommand: " Hearing"
+     Your Silent Speech Commands In Ear. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies 6, 2 (2022),
+     1–28. doi:10.1145/3534613
+[29] Ke Li, Ruidong Zhang, Bo Liang, François Guimbretière, and Cheng Zhang. 2022. Eario: A low-power acoustic sensing earable for
+     continuously tracking detailed facial movements. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies 6,
+     2 (2022), 1–24. doi:10.1145/3534621
+[30] Hou-I Liu, Marco Galindo, Hongxia Xie, Lai-Kuan Wong, Hong-Han Shuai, Yung-Hui Li, and Wen-Huang Cheng. 2024. Lightweight
+     deep learning for resource-constrained environments: A survey. Comput. Surveys 56, 10 (2024), 1–42. doi:10.1145/3657282
+[31] Tiantian Liu, Ming Gao, Feng Lin, Chao Wang, Zhongjie Ba, Jinsong Han, Wenyao Xu, and Kui Ren. 2021. Wavoice: A noise-resistant
+     multi-modal speech recognition system fusing mmwave and audio signals. In Proceedings of the 19th ACM Conference on Embedded
+     Networked Sensor Systems. 97–110. doi:10.1145/3485730.3485945
+[32] Tiantian Liu, Feng Lin, Chao Wang, Chenhan Xu, Xiaoyu Zhang, Zhengxiong Li, Wenyao Xu, Ming-Chun Huang, and Kui Ren. 2023.
+     WavoID: Robust and secure multi-modal user identification via mmWave-voice mechanism. In Proceedings of the 36th Annual ACM
+     Symposium on User Interface Software and Technology. 1–15. doi:10.1145/3586183.3606775
+[33] Philipos C Loizou. 2007. Speech enhancement: theory and practice. CRC press. doi:10.1201/9781420015836
+[34] Dong Ma, Ting Dang, Ming Ding, and Rajesh Balan. 2024. ClearSpeech: Improving Voice Quality of Earbuds Using Both In-Ear
+     and Out-Ear Microphones. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies 7, 4 (2024), 1–25.
+     doi:10.1145/3631409
+[35] Muhammed Zahid Ozturk, Chenshu Wu, Beibei Wang, Min Wu, and KJ Ray Liu. 2023. Radio SES: mmWave-Based Audioradio
+     Speech Enhancement and Separation System. IEEE/ACM Transactions on Audio, Speech, and Language Processing 31 (2023), 1333–1347.
+     doi:10.1109/TASLP.2023.3250846
+[36] Vassil Panayotov, Guoguo Chen, Daniel Povey, and Sanjeev Khudanpur. 2015. Librispeech: an asr corpus based on public domain audio
+     books. In 2015 IEEE international conference on acoustics, speech and signal processing (ICASSP). IEEE, 5206–5210. doi:10.1109/ICASSP.
+     2015.7178964
+[37] Michael Pedersen, Wouter Olthuis, and Piet Bergveld. 1997. A silicon condenser microphone with polyimide diaphragm and backplate.
+     Sensors and Actuators A: Physical 63, 2 (1997), 97–104. doi:10.1016/S0924-4247(97)01532-X
+[38] Karol J Piczak. 2015. ESC: Dataset for environmental sound classification. In Proceedings of the 23rd ACM international conference on
+     Multimedia. 1015–1018. doi:10.1145/2733373.2806390
+[39] Tobias Röddiger, Christopher Clarke, Paula Breitling, Tim Schneegans, Haibin Zhao, Hans Gellersen, and Michael Beigl. 2022. Sensing
+     with earables: A systematic literature review and taxonomy of phenomena. Proceedings of the ACM on interactive, mobile, wearable and
+     ubiquitous technologies 6, 3 (2022), 1–57. doi:10.1145/3550314
+[40] Kailai Shen, Diqun Yan, Jing Hu, and Zhe Ye. 2024. Non-intrusive speech quality assessment: A survey. Neurocomputing 580 (2024),
+     127471. doi:10.1016/j.neucom.2024.127471
+[41] Md. Maruf Hossain Shuvo, Syed Kamrul Islam, Jianlin Cheng, and Bashir I. Morshed. 2023. Efficient Acceleration of Deep Learning
+     Inference on Resource-Constrained Edge Devices: A Review. Proc. IEEE 111, 1 (2023), 42–91. doi:10.1109/JPROC.2022.3226481
+[42] David Snyder, Guoguo Chen, and Daniel Povey. 2015. MUSAN: A Music, Speech, and Noise Corpus. arXiv:1510.08484 arXiv:1510.08484v1.
+
+
+
+                             Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+40:26   •   Han et al.
+
+
+[43] Xingzhe Song, Kai Huang, and Wei Gao. 2022. FaceListener: Recognizing Human Facial Expressions via Acoustic Sensing on Commodity
+     Headphones. In 2022 21st ACM/IEEE International Conference on Information Processing in Sensor Networks (IPSN). 145–157. doi:10.1109/
+     IPSN54338.2022.00019
+[44] Ke Sun and Xinyu Zhang. 2021. UltraSE: single-channel speech enhancement using ultrasound. In Proceedings of the 27th annual
+     international conference on mobile computing and networking. Association for Computing Machinery, New York, NY, USA, 160–173.
+     doi:10.1145/3447993.3448626
+[45] Zi Wang, Sheng Tan, Linghan Zhang, Yili Ren, Zhi Wang, and Jie Yang. 2021. EarDynamic: An ear canal deformation based continuous
+     user authentication using in-ear wearables. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies 5, 1
+     (2021), 1–27. doi:10.1145/3448098
+[46] Sanghyun Woo, Jongchan Park, Joon-Young Lee, and In So Kweon. 2018. Cbam: Convolutional block attention module. In Proceedings of
+     the European conference on computer vision (ECCV). 3–19. doi:10.1007/978-3-030-01234-2_1
+[47] Yixuan Wu, Jintai Chen, Lianting Hu, Hongxia Xu, Huiying Liang, and Jian Wu. 2025. OmniFuse: A general modality fusion framework
+     for multi-modality learning on low-quality medical data. Information Fusion 117 (2025), 102890. doi:j.inffus.2024.102890
+[48] Dacheng Yin, Chong Luo, Zhiwei Xiong, and Wenjun Zeng. 2020. Phasen: A phase-and-harmonics-aware speech enhancement network.
+     In Proceedings of the AAAI Conference on Artificial Intelligence, Vol. 34. 9458–9465. doi:10.1609/aaai.v34i05.6489
+[49] Guoming Zhang, Chen Yan, Xiaoyu Ji, Tianchen Zhang, Taimin Zhang, and Wenyuan Xu. 2017. Dolphinattack: Inaudible voice commands.
+     In Proceedings of the 2017 ACM SIGSAC conference on computer and communications security. Association for Computing Machinery,
+     New York, NY, USA, 103–117. doi:10.1145/3133956.3134052
+[50] Qian Zhang, Kaiyi Guo, Yifei Yang, and Dong Wang. 2025. WearSE: Enabling Streaming Speech Enhancement on Eyewear Using Acoustic
+     Sensing. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies 9, 1 (2025), 1–30. doi:10.1145/3712288
+[51] Qingyang Zhang, Yake Wei, Zongbo Han, Huazhu Fu, Xi Peng, Cheng Deng, Qinghua Hu, Cai Xu, Jie Wen, Di Hu, et al. 2024. Multimodal
+     fusion on low-quality data: A comprehensive survey. arXiv preprint arXiv:2404.18947 (2024). doi:10.48550/arXiv.2404.18947
+[52] Shijia Zhang, Taiting Lu, Hao Zhou, Yilin Liu, Runze Liu, and Mahanth Gowda. 2023. I Am an Earphone and I Can Hear My User’s Face:
+     Facial Landmark Tracking Using Smart Earphones. ACM Transactions on Internet of Things 5, 1 (2023), 1–29. doi:10.1145/3614438
+[53] Peizhao Zhu, Yuzheng Zhu, Wenyuan Li, Yanbo He, Yongpan Zou, Kaishun Wu, and Victor C. M. Leung. 2025. CHAR: Composite
+     Head-Body Activities Recognition With a Single Earable Device. IEEE Transactions on Mobile Computing 24, 7 (2025), 6532–6549.
+     doi:10.1109/TMC.2025.3548647
+
+
+
+
+Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., Vol. 10, No. 2, Article 40. Publication date: June 2026.
+

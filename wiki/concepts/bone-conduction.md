@@ -42,9 +42,14 @@ Bone conduction sensors (accelerometers) in headphones can reliably detect when 
 ### 5. Sensor-Failure Robustness
 A practical concern with wearable BC sensors is intermittent invalidity (loose contact, jaw movement, body motion). Liu, Chen & Yin (2025) introduce a **Special Training** strategy — randomly disabling either the BC or AC channel during training (p = 0.2) — combined with a dual-channel mask architecture, achieving graceful degradation when one sensor fails. See [[concepts/sensor-failure-robust-fusion|Sensor-Failure Robust Multi-Modal Fusion]].
 
+### 6. Ear Canal Deformation and In-Ear Speech Quality
+In-ear microphones capture bone-conducted speech through the sealed ear canal. However, [[concepts/ear-canal-deformation|Ear Canal Deformation (ECD)]] induced by articulatory gestures alters air pressure inside the sealed cavity, degrading in-ear speech quality via a stuck-at-low microphone fault. Han et al. (2026) address this with [[concepts/quality-aware-speech-enhancement|Quality-Aware Speech Enhancement (QuaSE)]], which dynamically weights in-ear features based on self-assessed quality before fusion with airborne speech.
+
 ## Related Concepts
 
 - [[concepts/ear-canal-occlusion-effect|Ear Canal Occlusion Effect]]
+- [[concepts/ear-canal-deformation|Ear Canal Deformation]]
+- [[concepts/quality-aware-speech-enhancement|Quality-Aware Speech Enhancement]]
 - [[concepts/voice-activity-detection|Voice Activity Detection]]
 - [[concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
 - [[concepts/transparency-mode|Transparency Mode]]
@@ -58,3 +63,4 @@ A practical concern with wearable BC sensors is intermittent invalidity (loose c
 - [[sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]]
 - [[sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
 - [[sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]]
+- [[sources/han-2026-quality-aware-earable-se|Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone SE]]

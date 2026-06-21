@@ -276,6 +276,12 @@
 | [[entities/xianjun-xia\|Xianjun Xia]] | NPU — co-author of G-MaP-SE guided speech enhancement | 2026-06-19 |
 | [[entities/chuanzeng-huang\|Chuanzeng Huang]] | NPU — co-author of G-MaP-SE guided speech enhancement | 2026-06-19 |
 | [[entities/lei-xie\|Lei Xie]] | NPU Professor — G-MaP-SE, speech processing, speaker recognition, voice conversion | 2026-06-19 |
+| [[entities/feiyu-han\|Feiyu Han]] | NUIST (corresponding) — QuaSE: quality-aware earable dual-microphone speech enhancement (IMWUT 2026) | 2026-06-21 |
+| [[entities/dawei-yan\|Dawei Yan]] | Hebei University — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
+| [[entities/shanyue-wang\|Shanyue Wang]] | The Hong Kong Polytechnic University — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
+| [[entities/jinyang-huang\|Jinyang Huang]] | Hefei University of Technology — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
+| [[entities/yuanhao-feng\|Yuanhao Feng]] | The University of Electro-Communications — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
+| [[entities/panlong-yang\|Panlong Yang]] | NUIST — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
 
 ---
 
@@ -519,6 +525,8 @@
 | [[concepts/voicebank-demand\|VoiceBank+DEMAND (VBD)]] | Standard SE benchmark: VoiceBank clean speech + DEMAND noise; 28 train / 2 test speakers | 2026-06-19 |
 | [[concepts/dns-challenge\|DNS Challenge]] | Microsoft-organized Deep Noise Suppression challenge; large-scale dataset for cross-domain SE evaluation | 2026-06-19 |
 | [[concepts/pesq\|PESQ]] | ITU-T P.862 perceptual speech quality metric; wide-band PESQ (WB-PESQ) common in SE evaluation | 2026-06-19 |
+| [[concepts/ear-canal-deformation\|Ear Canal Deformation (ECD)]] | Articulatory-gesture-induced ear canal shape change causing air pressure imbalance in sealed ear canal; degrades in-ear speech quality | 2026-06-21 |
+| [[concepts/quality-aware-speech-enhancement\|Quality-Aware Speech Enhancement]] | Multi-modal fusion paradigm dynamically weighting auxiliary modality by self-assessed quality; mitigates modality imbalance (QuaSE) | 2026-06-21 |
 
 ---
 
@@ -631,6 +639,7 @@
 | [[sources/lydaki-2026-deep-feedback-cancellation-hearing-aids\|Lydaki et al. 2026: Deep Feedback Cancellation in Hearing Aids]] | DFC: 856K-param DNN for direct IR estimation; PESQ 4.54, MUSHRA 86.13; 30x faster convergence than FD-AFC | 2026 |
 | [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator\|Zhao et al. 2026: HALO — Half-frame-rate Adaptive Learnable Operator]] | Causal plug-in module halving STFT frame rate via adaptive dynamic convolution; consistent PESQ+ across GTCRN, DPCRN, LiSenNet, UL-UNAS | 2026 |
 | [[sources/zhu-2026-g-map-se-guided-speech-enhancement\|Zhu et al. 2026: G-MaP-SE — Guided Speech Enhancement via GMM-Based Prior Matching]] | GMM-based prior matching for noisy speaker-conditioning embeddings; +0.03 WB-PESQ over noisy cond on DNS2020; 0.025M added params | 2026-06-19 |
+| [[sources/han-2026-quality-aware-earable-se\|Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone SE]] | Quality-aware dual-mic SE addressing ECD-induced in-ear speech degradation; self-supervised quality assessment + dynamic fusion; +9.35% PESQ over SOTA | 2026-06-21 |
 ---
 
 ## Synthesis
@@ -679,10 +688,10 @@
 
 ## Statistics
 
-- **Total pages**: 629
-- **Entities**: 266
-- **Concepts**: 234
-- **Sources**: 103
+- **Total pages**: 638
+- **Entities**: 272
+- **Concepts**: 236
+- **Sources**: 104
 - **Synthesis**: 19
 - **Queries**: 7
-- **Last updated**: 2026-06-19
+- **Last updated**: 2026-06-21

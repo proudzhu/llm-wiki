@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-22
-updated: 2026-05-16
+updated: 2026-06-21
 sources:
   - wiki/sources/tagliasacchi-2020-seanet.md
   - wiki/sources/zhang-2022-bone-conducted-speech-dissertation.md
@@ -11,6 +11,7 @@ sources:
   - wiki/sources/liu-2025-robust-fusion-bc-ac-attention.md
   - wiki/sources/dai-2026-speech-preserving-deep-anc.md
   - wiki/sources/heitkaemper-2026-bcs-speech-enhancement-earbuds.md
+  - wiki/sources/han-2026-quality-aware-earable-se.md
   - zotero://select/items/0_B92ER5KS (Khanagha 2026: Conditional Diffusion)
   - zotero://select/items/0_NIIDMA7J (Contrastive Learning for BC)
 tags:
@@ -22,6 +23,7 @@ tags:
   - smart-hearables
   - attention-mechanism
   - sensor-failure-robustness
+  - quality-aware-fusion
 ---
 
 # Multimodal Smart Hearables: Bone-Conduction Aided Speech Enhancement
@@ -98,6 +100,16 @@ Shifts from predicting clean speech to **generating** it using BC signals as gui
 
 - **[[sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. (Google, US Patent 2026)]]**: Proposes a BCS-guided speech enhancement pipeline for earbuds targeting voice assistants. Uses a [[concepts/bcs-guided-speech-enhancement|VAD-gated dual-path]] architecture where BC signals control when enhancement activates, and the system falls back to raw AC when no BC speech is detected. Demonstrates that BCS guidance improves ASR accuracy in noisy conditions by reducing false triggering and preserving speech during silence intervals.
 
+### 2.8 Quality-Aware Fusion: Addressing Modality Imbalance (2026)
+
+- **[[sources/han-2026-quality-aware-earable-se|Han et al. (IMWUT 2026) — QuaSE]]**: Identifies that [[concepts/ear-canal-deformation|Ear Canal Deformation (ECD)]] induced by articulatory gestures causes air pressure imbalance in the sealed ear canal, degrading in-ear (bone-conducted) speech quality and breaking the cross-channel correlation assumption of prior dual-microphone SE systems. Proposes [[concepts/quality-aware-speech-enhancement|Quality-Aware Speech Enhancement (QuaSE)]], which:
+  - **Self-assesses** in-ear speech quality without reference via an autoencoder trained only on high-quality samples (selected by spectral peak-to-valley matching + DTW alignment)
+  - **Generates quality embeddings** via frequency squeeze → FC layers with Sigmoid → unsqueeze, producing per-time-bin weights in [0, 1]
+  - **Dynamically weights** in-ear features before cross-modal fusion with airborne speech
+  - Uses **content-aware adaptive time masking** for data augmentation, simulating ECD-induced distortion conditioned on spectral energy distribution
+  - **Key result**: +9.35% PESQ, +17.68% SI-SDR over best baseline (EarSpeech); QA module is modular and improves EarSpeech by up to +5.48% PESQ
+  - **Distinction from Liu 2025 ATFA**: While ATFA handles *binary* sensor failure via random dropout, QuaSE handles *continuous* quality variations via dynamic quality-weighted fusion — a finer-grained approach to modality robustness
+
 ---
 
 ## 3. Core Technical Challenges
@@ -131,6 +143,7 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 | **DenGCAN (Kuang)** | 2024 | 1.03M | +1.870 wb-PESQ | Minimum compute on ARM |
 | **ATFA (Liu)** | 2025 | 1.6M | +0.2 PESQ | Robust to sensor failure |
 | **BCDM (Khanagha)** | 2026 | — | **High** | Extreme noise (-10 dB SNR) |
+| **QuaSE (Han)** | 2026 | — | +9.35% PESQ | Quality-varying in-ear modality |
 
 ---
 
@@ -144,6 +157,8 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 - [[concepts/attention-gate|Attention Gate (AG)]]
 - [[concepts/adaptive-time-frequency-attention|Adaptive Temporal-Frequency Attention (ATFA)]]
 - [[concepts/sensor-failure-robust-fusion|Sensor-Failure Robust Multi-Modal Fusion]]
+- [[concepts/quality-aware-speech-enhancement|Quality-Aware Speech Enhancement]]
+- [[concepts/ear-canal-deformation|Ear Canal Deformation]]
 - [[concepts/dprnn|DPRNN]]
 
 ## Related Sources
@@ -156,6 +171,7 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 - [[sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]]
 - [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 - [[sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2026: BCS-Guided SE for Earbuds]]
+- [[sources/han-2026-quality-aware-earable-se|Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone SE]]
 
 ## Related Synthesis
 

@@ -238,4 +238,6 @@
 | [[concepts/voicebank-demand\|VoiceBank+DEMAND (VBD)]] | Standard SE benchmark dataset | 2026-06-19 |
 | [[concepts/dns-challenge\|DNS Challenge]] | Deep Noise Suppression challenge dataset | 2026-06-19 |
 | [[concepts/pesq\|PESQ]] | ITU-T P.862 perceptual speech quality metric | 2026-06-19 |
+| [[concepts/ear-canal-deformation\|Ear Canal Deformation (ECD)]] | Articulatory-gesture-induced ear canal shape change causing air pressure imbalance in sealed ear canal; degrades in-ear speech quality | 2026-06-21 |
+| [[concepts/quality-aware-speech-enhancement\|Quality-Aware Speech Enhancement]] | Multi-modal fusion paradigm dynamically weighting auxiliary modality by self-assessed quality; mitigates modality imbalance (QuaSE) | 2026-06-21 |
 
