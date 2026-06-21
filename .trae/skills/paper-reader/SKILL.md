@@ -434,7 +434,7 @@ git rm --cached "raw/papers/{slug}/paper.pdf" && rm -f "raw/papers/{slug}/paper.
 
 ## Important Notes
 
-- **Skill self-update**: This skill lives in `.reasonix/skills/paper-reader/SKILL.md`. The `.reasonix/` directory is a **separate git repository** from the main project. After editing this skill, commit with `git -C .reasonix add ../.trae/skills/paper-reader/SKILL.md && git -C .reasonix commit` (or the equivalent path for your setup).
+- **Skill self-update**: The canonical, git-tracked copy of this skill is `.trae/skills/paper-reader/SKILL.md` in the main project repo (`proudzhu/llm-wiki`). The `.claude/skills`, `.reasonix/skills`, and `.agents/skills` directories are **symbolic links** to `.trae/skills` — they are the same file, not separate copies, so editing any path edits the canonical file. Only `.trae/` is git-tracked; commit normally: `git add .trae/skills/paper-reader/SKILL.md && git commit -m "..."`.
 - **Never modify** files in `raw/` after creation (immutability rule) — **exception**: replacing remote image URLs with local paths in `full-text.md` is allowed
 - **Always check** if a page already exists before creating (use Glob/Read)
 - **Always read** existing pages before updating them
