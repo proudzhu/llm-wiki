@@ -282,6 +282,7 @@
 | [[entities/jinyang-huang\|Jinyang Huang]] | Hefei University of Technology — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
 | [[entities/yuanhao-feng\|Yuanhao Feng]] | The University of Electro-Communications — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
 | [[entities/panlong-yang\|Panlong Yang]] | NUIST — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
+| [[entities/kaiming-he\|Kaiming He (何恺明)]] | MIT Associate Professor / Google DeepMind — ResNets, Faster R-CNN, Mask R-CNN, MoCo, MAE; NeurIPS 2025 Test of Time Award | 2026-06-21 |
 
 ---
 
@@ -527,6 +528,8 @@
 | [[concepts/pesq\|PESQ]] | ITU-T P.862 perceptual speech quality metric; wide-band PESQ (WB-PESQ) common in SE evaluation | 2026-06-19 |
 | [[concepts/ear-canal-deformation\|Ear Canal Deformation (ECD)]] | Articulatory-gesture-induced ear canal shape change causing air pressure imbalance in sealed ear canal; degrades in-ear speech quality | 2026-06-21 |
 | [[concepts/quality-aware-speech-enhancement\|Quality-Aware Speech Enhancement]] | Multi-modal fusion paradigm dynamically weighting auxiliary modality by self-assessed quality; mitigates modality imbalance (QuaSE) | 2026-06-21 |
+| [[concepts/object-detection\|Object Detection]] | CV task of localizing + classifying objects; 30-year history from hand-crafted features (Viola-Jones/SIFT/HOG/DPM) to deep learning (R-CNN→Faster R-CNN) | 2026-06-21 |
+| [[concepts/faster-r-cnn\|Faster R-CNN]] | End-to-end object detection with Region Proposal Network sharing conv features; modern detection paradigm; NeurIPS 2025 Test of Time Award | 2026-06-21 |
 
 ---
 
@@ -640,6 +643,7 @@
 | [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator\|Zhao et al. 2026: HALO — Half-frame-rate Adaptive Learnable Operator]] | Causal plug-in module halving STFT frame rate via adaptive dynamic convolution; consistent PESQ+ across GTCRN, DPCRN, LiSenNet, UL-UNAS | 2026 |
 | [[sources/zhu-2026-g-map-se-guided-speech-enhancement\|Zhu et al. 2026: G-MaP-SE — Guided Speech Enhancement via GMM-Based Prior Matching]] | GMM-based prior matching for noisy speaker-conditioning embeddings; +0.03 WB-PESQ over noisy cond on DNS2020; 0.025M added params | 2026-06-19 |
 | [[sources/han-2026-quality-aware-earable-se\|Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone SE]] | Quality-aware dual-mic SE addressing ECD-induced in-ear speech degradation; self-supervised quality assessment + dynamic fusion; +9.35% PESQ over SOTA | 2026-06-21 |
+| [[sources/kaiming-he-2025-neurips-object-detection-history\|He 2025: A Brief History of Visual Object Detection (NeurIPS 2025 Talk)]] | Kaiming He's NeurIPS 2025 Test of Time Award talk; 30-year history of object detection (Viola-Jones→SIFT/HOG/DPM→AlexNet/R-CNN→Faster R-CNN); Bilibili BV1nckaBcEra | 2026-06-21 |
 ---
 
 ## Synthesis
@@ -688,10 +692,10 @@
 
 ## Statistics
 
-- **Total pages**: 638
-- **Entities**: 272
-- **Concepts**: 236
-- **Sources**: 104
+- **Total pages**: 642
+- **Entities**: 273
+- **Concepts**: 238
+- **Sources**: 105
 - **Synthesis**: 19
 - **Queries**: 7
 - **Last updated**: 2026-06-21

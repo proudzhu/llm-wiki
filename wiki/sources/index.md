@@ -108,4 +108,5 @@
 | [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator|Zhao et al. 2026: HALO — Half-frame-rate Adaptive Learnable Operator]] | Causal plug-in module halving internal STFT frame rate via adaptive dynamic convolution; consistent PESQ+ across GTCRN, DPCRN, LiSenNet, UL-UNAS | 2026 |
 | [[sources/zhu-2026-g-map-se-guided-speech-enhancement\|Zhu et al. 2026: G-MaP-SE — Guided Speech Enhancement via GMM-Based Prior Matching]] | GMM-based prior matching for noisy speech enhancement conditioning; Interspeech 2026 | 2026-06-19 |
 | [[sources/han-2026-quality-aware-earable-se\|Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone SE]] | Quality-aware dual-mic SE addressing ECD-induced in-ear speech degradation; self-supervised quality assessment + dynamic fusion; +9.35% PESQ over SOTA | 2026-06-21 |
+| [[sources/kaiming-he-2025-neurips-object-detection-history\|He 2025: A Brief History of Visual Object Detection (NeurIPS 2025 Talk)]] | Kaiming He's NeurIPS 2025 Test of Time Award talk; 30-year history of object detection (Viola-Jones→SIFT/HOG/DPM→AlexNet/R-CNN→Faster R-CNN); Bilibili BV1nckaBcEra | 2026-06-21 |
 

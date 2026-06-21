@@ -1,4 +1,4 @@
-﻿﻿# Wiki Log
+﻿# Wiki Log
 
 > **Purpose**: Chronological, append-only record of what happened and when.
 > **Format**: `## [YYYY-MM-DD] operation | Description`
@@ -2552,3 +2552,19 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added corresponding rows
 - **Key insights**: ECD (articulatory-gesture-induced ear canal deformation) causes air pressure imbalance in sealed ear canal, degrading in-ear speech quality via stuck-at-low microphone fault. QuaSE addresses this with self-supervised quality assessment (autoencoder trained on high-quality samples selected by spectral peak-to-valley matching + DTW) and dynamic quality-weighted fusion. QA module is modular and improves EarSpeech by up to +5.48% PESQ. Distinct from Liu 2025 ATFA (binary sensor failure) — QuaSE handles continuous quality variations.
 - **Build verification**: `uv run mkdocs build --strict` passed (exit 0, 32.11s, no WARNINGs)
+
+## [2026-06-21] ingest | He 2025: A Brief History of Visual Object Detection (NeurIPS 2025 Talk, Bilibili video)
+
+- **Source**: Bilibili video [BV1nckaBcEra](https://www.bilibili.com/video/BV1nckaBcEra/) — "恺明老师带你看完视觉目标检测30年 | NeurIPS 2025 | 何恺明 | Kaiming He | 原创中英字幕", uploaded by 京口先生 (2026-01-19, ~26:26)
+- **Original talk**: "A Brief History of Visual Object Detection", Test of Time Award Presentation, NeurIPS 2025, by Kaiming He (MIT / Google DeepMind)
+- **Award context**: Faster R-CNN (Ren, He, Girshick, Sun, 2015) won the NeurIPS 2025 Test of Time Award
+- **Slides**: https://people.csail.mit.edu/kaiming/neurips2025talk/neurips2025_fasterrcnn_kaiming.pdf
+- **Sourcing note**: Video transcript not directly accessible (Bilibili subtitle API requires auth). Content reconstructed from Bilibili metadata + verified reporting article (机器之心, 2025-12-11), cross-checked against official slides and Kaiming He's homepage.
+- **Raw materials**: `raw/articles/kaiming-he-2025-neurips-object-detection/` (bilibili-metadata.json, talk-summary.md)
+- **Pages created**:
+  - Source: `wiki/sources/kaiming-he-2025-neurips-object-detection-history.md`
+  - Entity: `wiki/entities/kaiming-he.md` (new domain: computer vision)
+  - Concepts (2): `object-detection`, `faster-r-cnn`
+- **Pages updated**: `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added entries; statistics 638→642 total, 272→273 entities, 236→238 concepts, 104→105 sources
+- **Key insights**: 30-year history of object detection across three eras — (1) hand-crafted features + classifiers (Viola-Jones, SIFT, HOG, DPM), (2) CNN-based region classification (AlexNet, R-CNN), (3) end-to-end proposal+detection networks (SPP-Net→Fast R-CNN→Faster R-CNN). Central lessons: feature learning replaced feature engineering; shared computation (SPP-Net→Fast R-CNN→Faster R-CNN's RPN) drove the speed evolution. Faster R-CNN's RPN unified proposal generation and detection into a jointly-trainable framework, defining the modern paradigm.
+- **Build verification**: `uv run mkdocs build --strict` passed (exit 0, 36.76s, no WARNINGs)

@@ -276,4 +276,5 @@
 | [[entities/jinyang-huang\|Jinyang Huang]] | Hefei University of Technology — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
 | [[entities/yuanhao-feng\|Yuanhao Feng]] | The University of Electro-Communications — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
 | [[entities/panlong-yang\|Panlong Yang]] | NUIST — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
+| [[entities/kaiming-he\|Kaiming He (何恺明)]] | MIT Associate Professor / Google DeepMind — ResNets, Faster R-CNN, Mask R-CNN, MoCo, MAE; NeurIPS 2025 Test of Time Award | 2026-06-21 |
 

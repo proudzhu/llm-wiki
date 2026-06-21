@@ -240,4 +240,6 @@
 | [[concepts/pesq\|PESQ]] | ITU-T P.862 perceptual speech quality metric | 2026-06-19 |
 | [[concepts/ear-canal-deformation\|Ear Canal Deformation (ECD)]] | Articulatory-gesture-induced ear canal shape change causing air pressure imbalance in sealed ear canal; degrades in-ear speech quality | 2026-06-21 |
 | [[concepts/quality-aware-speech-enhancement\|Quality-Aware Speech Enhancement]] | Multi-modal fusion paradigm dynamically weighting auxiliary modality by self-assessed quality; mitigates modality imbalance (QuaSE) | 2026-06-21 |
+| [[concepts/object-detection\|Object Detection]] | CV task of localizing + classifying objects; 30-year history from hand-crafted features (Viola-Jones/SIFT/HOG/DPM) to deep learning (R-CNN→Faster R-CNN) | 2026-06-21 |
+| [[concepts/faster-r-cnn\|Faster R-CNN]] | End-to-end object detection with Region Proposal Network sharing conv features; modern detection paradigm; NeurIPS 2025 Test of Time Award | 2026-06-21 |
 

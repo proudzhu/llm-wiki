@@ -1,0 +1,18 @@
+{
+  "platform": "bilibili",
+  "url": "https://www.bilibili.com/video/BV1nckaBcEra/",
+  "bvid": "BV1nckaBcEra",
+  "aid": 115919841919116,
+  "cid": 35477587843,
+  "title": "恺明老师带你看完视觉目标检测30年 | NeurIPS 2025 | 何恺明 | Kaiming He | 原创中英字幕",
+  "title_en": "A Brief History of Visual Object Detection — Kaiming He, NeurIPS 2025 (Chinese-English subtitles)",
+  "desc": "波澜壮阔的30年，期待下一个30年！",
+  "desc_en": "A magnificent 30 years, looking forward to the next 30 years!",
+  "owner": "京口先生",
+  "duration_sec": 1586,
+  "pubdate_unix": 1768796753,
+  "pubdate_iso": "2026-01-19",
+  "view_count": 11385,
+  "tags": ["人工智能", "目标检测", "Kaiming He", "京口先生", "计算机视觉", "机器学习", "深度学习", "何恺明", "Fast R-CNN", "Faster R-CNN"],
+  "fetched": "2026-06-21"
+}
