@@ -245,4 +245,6 @@
 | [[concepts/robust-minimum-variance-beamforming\|Robust Minimum Variance Beamforming (RMVB)]] | Extension of Capon's MVDR enforcing unity-gain over an ellipsoidal array-response uncertainty set; formulated as SOCP, solved by Lagrange multipliers | 2026-06-21 |
 | [[concepts/ellipsoidal-uncertainty-modeling\|Ellipsoidal Uncertainty Modeling]] | Representing array-manifold uncertainty as an ellipsoid and propagating it via ellipsoidal calculus (Minkowski sum, Hadamard product) for robust optimization | 2026-06-21 |
 | [[concepts/hadamard-product-ellipsoids\|Hadamard Product of Ellipsoids]] | Outer-ellipsoidal approximation of element-wise product of two ellipsoid-valued vectors; propagates multiplicative gain/phase uncertainty in robust beamforming | 2026-06-21 |
+| [[concepts/physics-informed-neural-network\|Physics-Informed Neural Network (PINN)]] | Neural network trained with PDE residual loss to respect physical laws; used for soundfield interpolation, HRTF upsampling | 2026-06-25 |
+| [[concepts/soundfield-interpolation\|Soundfield Interpolation]] | Estimating acoustic pressure at unmeasured positions from limited sensor measurements; SH, PINN, and RMT methods | 2026-06-25 |
 

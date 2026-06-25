@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-05-06
+updated: 2026-06-25
 sources:
+  - raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md
 aliases:
 - Active Noise Control
 tags:
@@ -48,6 +49,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - **[[convolutional-recurrent-network|CRN]]-based Deep ANC**: End-to-end anti-noise generation using encoder-LSTM-decoder architecture with [[complex-spectrum-mapping|Complex Spectrum Mapping]] for precise phase control
 - **[[speech-preserving-anc|Speech-Preserving ANC]]**: Uses a modified loss function that algebraically cancels speech components, training the network to cancel only noise while leaving speech transparent
 - SFANC/GFANC: Selective/Generative Fixed-Filter ANC uses CNNs for filter selection or generation, enabling instant response to changing noise types
+- **[[concepts/physics-informed-neural-network|PINN]]-assisted ANC** (Zhang 2024): A PINN interpolates the soundfield at virtual microphone positions from monitoring microphones placed outside the ROI, using the acoustic wave equation as a PDE residual loss. The interpolated signals drive a multi-channel FxLMS controller, achieving better noise reduction at the ear than a conventional multiple-point ANC system.
 - **E2E-CFG**: End-to-End Control-Filter Generation directly generates control filters via Transformer co-processor in a differentiable ANC system, trained unsupervised on residual error
 
 ### Performance Comparison (Dai 2026, RT60=0.3s)
@@ -105,6 +107,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]] — Elliptic and convex hull uncertainty models for robust feedback ANC
 - [[sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]] — CRNN predicts next-frame DoA for proactive filter selection in moving source ANC
 - [[sources/holzmuller-2026-dtw-secondary-path-anc|Holzmüller & Sontacchi 2026: DTW for Secondary Path Interpolation in ANC]] — DTW-based interpolation extends stable frequency range for moving listeners
+- [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]] — PINN interpolates soundfield from outside-ROI monitoring microphones for improved ANC
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method]] — Experimental validation of secondary-path-model-free ANC
 
 ## Related Entities

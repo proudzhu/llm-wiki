@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-18
-updated: 2026-05-27
+updated: 2026-06-25
 tags:
 - active-noise-control
 - deep-learning
@@ -9,7 +9,8 @@ tags:
 - signal-processing
 - virtual-sensing
 - adjoint-lms
-sources: []
+sources:
+  - raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md
 ---
 # Evolution of Virtual Sensing in Active Noise Control
 
@@ -46,7 +47,22 @@ Introduced to improve robustness by using an auxiliary filter to model the prima
 
 ---
 
-### 2.4 Unified Framework: RP-VS
+### 2.4 PINN-Based Soundfield Interpolation for Virtual Sensing
+
+Zhang et al. (2024)[^zhang2024] proposed a [[concepts/physics-informed-neural-network|physics-informed neural network (PINN)]] approach for soundfield interpolation in [[concepts/active-noise-control|active noise control]]. Unlike classical VMA and RMT methods that rely on fixed filters or array geometry, the PINN is trained to solve the acoustic wave equation:
+
+- A fully connected network (1 hidden layer, 16 neurons) takes space-time coordinates $(x, y, z, n)$ as input and outputs pressure $\hat{p}(x, y, z, n)$
+- **Dual loss**: MSE at monitoring microphone positions + PDE residual enforcing $
+abla^2 p - \frac{1}{c^2} \partial^2 p / \partial t^2 = 0$ at random collocation points
+- **Key advantage**: Monitoring microphones can be placed *outside* the ROI (e.g., on a sphere around the user's ears), giving the user more freedom of movement
+- **Performance**: ~8 dB lower interpolation error than SH methods with Q=8 microphones; the PINN-assisted ANC system achieves −13 dB more noise reduction than multiple-point ANC
+- **Limitation**: Expensive training phase ($5 \times 10^5$ epochs) with sensitivity to learning rate and loss weighting
+
+This approach bridges classical soundfield interpolation (SH-based) with modern deep learning (PINNs), offering a path to embedding physical knowledge directly into the VS pipeline without pre-computed filter databases.
+
+---
+
+### 2.5 Unified Framework: RP-VS
 
 Shi et al. (2020)[^shi2020] provided a unified theoretical framework showing that AF-VS and RM-VS are not fundamentally distinct but are special cases of a more general **Relative Path VS (RP-VS)** method:
 
@@ -111,6 +127,7 @@ Note: Secondary path interpolation (DTW-based) addresses the moving-listener pro
 [^5]: [[sources/holzmueller-2026-obs-tasnet-virtual-sensing|Holzmüller 2026: Obs-TasNet for Virtual Sensing]] (Zotero: [items/0_WY4S7C6Z](zotero://select/items/0_WY4S7C6Z))
 [^6]: [[sources/wang-2024-metric-learning-virtual-sensing|Wang 2024: Transferable Selective Virtual Sensing]] (Zotero: [items/0_NBYTXNH4](zotero://select/items/0_NBYTXNH4))
 [^7]: [[sources/holzmuller-2025-deep-observation-filter-virtual-sensing-active-noise-control|Holzmuller & Sontacchi 2025: Deep Observation Filter for Virtual Sensing ANC]] (Zotero: [items/0_5KW3SUYE](zotero://select/items/0_5KW3SUYE))
+[^zhang2024]: [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]] (Zotero: [items/0_PYI2K3NS](zotero://select/items/0_PYI2K3NS))
 
 ---
 
@@ -137,3 +154,4 @@ Note: Secondary path interpolation (DTW-based) addresses the moving-listener pro
 - [[sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026: Hybrid ANC with Dual Compensation]]
 - [[sources/wang-2024-metric-learning-virtual-sensing|Wang 2024: Transferable Selective Virtual Sensing]]
 - [[sources/holzmuller-2026-dtw-secondary-path-anc|Holzmüller & Sontacchi 2026: DTW for Secondary Path Interpolation in ANC]]
+- [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]]

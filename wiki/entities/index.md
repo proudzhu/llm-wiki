@@ -279,4 +279,9 @@
 | [[entities/kaiming-he\|Kaiming He (何恺明)]] | MIT Associate Professor / Google DeepMind — ResNets, Faster R-CNN, Mask R-CNN, MoCo, MAE; NeurIPS 2025 Test of Time Award | 2026-06-21 |
 | [[entities/robert-g-lorenz\|Robert G. Lorenz]] | Beceem Communications / SiRF / Ashtech — robust beamforming, GPS receiver design; co-author of RMVB (IEEE TSP 2005) | 2026-06-21 |
 | [[entities/stephen-boyd\|Stephen P. Boyd]] | Stanford University — Samsung Professor of Engineering; convex optimization (CVX/CVXPY), co-author of RMVB | 2026-06-21 |
+| [[entities/yile-angela-zhang\|Yile (Angela) Zhang]] | ANU — PINN-based soundfield interpolation for ANC | 2026-06-25 |
+| [[entities/fei-ma\|Fei Ma]] | ANU — PINN for ANC, HRTF upsampling, broadband noise field control | 2026-06-25 |
+| [[entities/thushara-d-abhayapala\|Thushara D. Abhayapala]] | ANU Professor — spatial audio, soundfield reproduction, spherical mic arrays, ANC | 2026-06-25 |
+| [[entities/prasanga-n-samarasinghe\|Prasanga N. Samarasinghe]] | ANU — PINN for ANC, HRTF upsampling, SH-domain feedforward ANC | 2026-06-25 |
+| [[entities/amy-bastine\|Amy Bastine]] | ANU — PINN-based soundfield estimation and ANC | 2026-06-25 |
 

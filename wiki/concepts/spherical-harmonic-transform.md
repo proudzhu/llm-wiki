@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-05
-updated: 2026-05-05
+updated: 2026-06-25
 sources:
   - raw/papers/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation/full-text.md
 tags:
@@ -63,6 +63,16 @@ $$\mathrm{iSHT}_L(f_{lm}) = \sum_{l=0}^{L}\sum_{m=-l}^{l} f_{lm} Y_{lm}(\varthet
 - [[beamforming|Beamforming]] — SH-domain beamformers
 - [[direction-of-arrival-estimation|Direction-of-Arrival Estimation]] — spatial estimation on the sphere
 
+## Comparison with PINN-Based Interpolation
+
+In soundfield interpolation, SH-based methods require $Q > (U+1)^2$ microphones to accurately estimate coefficients up to order $U$, limiting performance with small arrays. A [[concepts/physics-informed-neural-network|PINN]] approach (Zhang et al. 2024) that incorporates the wave equation as a PDE residual achieves ~8 dB lower interpolation error than SH with $Q = 8$ microphones (limiting SH to $U = 2$). The PINN also requires no specific array geometry (no need to surround the ROI), offering greater flexibility in ANC system design.
+
+## Related Concepts
+
+- [[concepts/physics-informed-neural-network|Physics-Informed Neural Network]]
+- [[concepts/soundfield-interpolation|Soundfield Interpolation]]
+
 ## Related Sources
 
 - [[sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation|Görtz et al. 2026: Blind DDAP Estimation Using Smart Glasses]]
+- [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]]

@@ -283,6 +283,11 @@
 | [[entities/yuanhao-feng\|Yuanhao Feng]] | The University of Electro-Communications — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
 | [[entities/panlong-yang\|Panlong Yang]] | NUIST — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
 | [[entities/kaiming-he\|Kaiming He (何恺明)]] | MIT Associate Professor / Google DeepMind — ResNets, Faster R-CNN, Mask R-CNN, MoCo, MAE; NeurIPS 2025 Test of Time Award | 2026-06-21 |
+| [[entities/amy-bastine\|Amy Bastine]] | ANU — PINN for soundfield estimation and ANC | 2026-06-25 |
+| [[entities/fei-ma\|Fei Ma]] | ANU — PINN-based soundfield interpolation, HRTF upsampling, ANC | 2026-06-25 |
+| [[entities/prasanga-n-samarasinghe\|Prasanga N. Samarasinghe]] | ANU — PINN for soundfield interpolation, SH-domain ANC, HRTF upsampling | 2026-06-25 |
+| [[entities/thushara-d-abhayapala\|Thushara D. Abhayapala]] | ANU Professor — spatial audio, soundfield reproduction, ANC, spherical arrays, PINN | 2026-06-25 |
+| [[entities/yile-angela-zhang\|Yile (Angela) Zhang]] | ANU — PINN-based soundfield interpolation for ANC | 2026-06-25 |
 
 ---
 
@@ -530,6 +535,8 @@
 | [[concepts/quality-aware-speech-enhancement\|Quality-Aware Speech Enhancement]] | Multi-modal fusion paradigm dynamically weighting auxiliary modality by self-assessed quality; mitigates modality imbalance (QuaSE) | 2026-06-21 |
 | [[concepts/object-detection\|Object Detection]] | CV task of localizing + classifying objects; 30-year history from hand-crafted features (Viola-Jones/SIFT/HOG/DPM) to deep learning (R-CNN→Faster R-CNN) | 2026-06-21 |
 | [[concepts/faster-r-cnn\|Faster R-CNN]] | End-to-end object detection with Region Proposal Network sharing conv features; modern detection paradigm; NeurIPS 2025 Test of Time Award | 2026-06-21 |
+| [[concepts/physics-informed-neural-network\|Physics-Informed Neural Network (PINN)]] | Neural network trained with PDE residual loss to respect physical laws; used for soundfield interpolation, HRTF upsampling | 2026-06-25 |
+| [[concepts/soundfield-interpolation\|Soundfield Interpolation]] | Estimating acoustic pressure at unmeasured positions from limited sensor measurements; SH, PINN, and RMT methods | 2026-06-25 |
 
 ---
 
@@ -645,6 +652,7 @@
 | [[sources/han-2026-quality-aware-earable-se\|Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone SE]] | Quality-aware dual-mic SE addressing ECD-induced in-ear speech degradation; self-supervised quality assessment + dynamic fusion; +9.35% PESQ over SOTA | 2026-06-21 |
 | [[sources/kaiming-he-2025-neurips-object-detection-history\|He 2025: A Brief History of Visual Object Detection (NeurIPS 2025 Talk)]] | Kaiming He's NeurIPS 2025 Test of Time Award talk; 30-year history of object detection (Viola-Jones→SIFT/HOG/DPM→AlexNet/R-CNN→Faster R-CNN); Bilibili BV1nckaBcEra | 2026-06-21 |
 | [[sources/lorenz-2005-robust-minimum-variance-beamforming\|Lorenz & Boyd 2005: Robust Minimum Variance Beamforming]] | RMVB: ellipsoidal array-manifold uncertainty → SOCP via Cauchy–Schwarz; Lagrange-multiplier solver ~12× regularized beamformer; novel Hadamard-product-of-ellipsoids calculus | 2005 |
+| [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn\|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]] | PINN interpolates soundfield from outside-ROI monitoring microphones using wave equation PDE loss; 8 dB better interpolation than SH; −13 dB more NR than multiple-point ANC | 2026-06-25 |
 
 ---
 
@@ -694,10 +702,10 @@
 
 ## Statistics
 
-- **Total pages**: 648
-- **Entities**: 275
-- **Concepts**: 241
-- **Sources**: 106
+- **Total pages**: 656
+- **Entities**: 280
+- **Concepts**: 243
+- **Sources**: 107
 - **Synthesis**: 19
 - **Queries**: 7
-- **Last updated**: 2026-06-21
+- **Last updated**: 2026-06-25

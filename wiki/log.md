@@ -2580,3 +2580,42 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 - **Pages updated**: `mvdr-beamformer` (added Capon alias, mismatch-sensitivity section, RMVB link), `diagonal-loading` (added RMVB comparison section), `socp-optimization` (added robust-beamforming role + standard form), `beamforming` (added "Robust Beamforming with Ellipsoidal Uncertainty" section)
 - **Indexes updated**: `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added entries; statistics 642→648 total, 273→275 entities, 238→241 concepts, 105→106 sources
 - **Key insights**: (1) The RMVB enforces $\mathbf{Re}\,w^* a \geq 1$ over an entire ellipsoidal uncertainty set rather than at a single nominal direction; the semi-infinite constraint becomes a second-order cone constraint via Cauchy–Schwarz. (2) The SOCP reduces to a scalar secular equation in the Lagrange multiplier $\lambda$, solvable by quadratically-convergent Newton iteration (~7–10 steps, size-independent), giving ~12× the cost of a regularized beamformer. (3) For isotropic uncertainty the RMVB coincides (up to scale) with diagonal loading; for anisotropic uncertainty it strictly dominates by exploiting directional manifold-variation knowledge. (4) Novel Hadamard-product-of-ellipsoids calculus (real: 3-term Minkowski sum; complex: 6-term, reducible to 5 via Givens rotation) propagates multiplicative gain/phase uncertainties through the signal path. (5) Worst-case SINR 15.63 dB vs 1.85 dB for point-mainbeam constraints in the 10-element ULA experiment; overestimating the ellipsoid preserves the gain guarantee while underestimating risks constraint violation.
+
+## [2026-06-25] ingest | Zhang, Ma, Abhayapala, Samarasinghe & Bastine 2024: ANC with PINN-based Soundfield Interpolation
+
+- **Source**: `raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md` (MinerU VLM extraction with figures/), PDF retrieved from Zotero attachment
+- **Zotero key**: PYI2K3NS (PDF: 24P8GYCW)
+- **DOI**: 10.1109/ICASSP48485.2024.10447208
+- **Authors**: Yile (Angela) Zhang, Fei Ma, Thushara D. Abhayapala, Prasanga N. Samarasinghe, Amy Bastine
+- **Published**: ICASSP 2024, pp. 506–510
+- **Pages created**:
+  - `raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md` — extracted text from Zotero PDF
+  - `wiki/sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn.md`
+  - Entities (5): `yile-angela-zhang`, `fei-ma`, `thushara-d-abhayapala`, `prasanga-n-samarasinghe`, `amy-bastine`
+  - Concepts (2): `physics-informed-neural-network`, `soundfield-interpolation`
+- **Pages updated**:
+  - `wiki/concepts/active-noise-control.md` — added PINN-assisted ANC to Deep Learning Approaches, updated sources frontmatter
+  - `wiki/concepts/virtual-sensing.md` — added PINN-based soundfield interpolation method section
+  - `wiki/concepts/remote-microphone-technique.md` — updated date
+  - `wiki/concepts/multi-channel-anc.md` — added PINN-assisted multi-channel ANC section
+  - `wiki/concepts/spherical-harmonic-transform.md` — added PINN comparison section, related concepts/sources
+  - `wiki/synthesis/virtual-sensing-evolution.md` — added PINN-based soundfield interpolation section with footnotes
+  - `wiki/synthesis/index.md` — updated virtual-sensing-evolution summary and Zotero keys
+  - `wiki/index.md` — added 5 entities, 2 concepts, 1 source; updated statistics (648→656 total, 275→280 entities, 241→243 concepts, 106→107 sources)
+  - `wiki/entities/index.md` — added 5 entity rows
+  - `wiki/concepts/index.md` — added 2 concept rows
+  - `wiki/sources/index.md` — added 1 source row
+- **Key insights**: (1) Monitoring microphones placed *outside* the ROI give users more movement freedom vs spherical/circular arrays. (2) PINN (1 hidden layer, 16 neurons) trained with wave equation PDE residual + data MSE achieves ~8 dB better soundfield interpolation than SH with Q=8 mics (limiting SH to U=2). (3) PINN-assisted FxLMS ANC achieves −13 dB more steady-state noise reduction than multiple-point ANC by minimizing at virtual ear positions instead of monitoring mic positions. (4) The PINN approach requires no specific array geometry and integrates physical knowledge via automatic differentiation, but requires expensive training ($5 \times 10^5$ epochs).
+
+---
+
+## [2026-06-25] ingest (re) | Zhang, Ma, Abhayapala, Samarasinghe & Bastine 2024: ANC with PINN-based Soundfield Interpolation (completion)
+
+- **Reason**: Previous ingest (same date) left the source page minimal (44 lines, no Problem Formulation / Methodology / Experimental Setup / Results sections) and the subdirectory indexes `wiki/sources/index.md` and `wiki/entities/index.md` were not actually updated despite the prior log entry claiming so. Re-ingestion completes the workflow per the paper-reader skill template.
+- **Pages updated**:
+  - `wiki/sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn.md` — expanded from 44 to ~207 lines: added Problem Formulation (Eqs. 1–2), Methodology with Multiple-point ANC, PINN-assisted ANC (loss Eq. 5, wave equation Eq. 6, FxLMS update Eq. 3), and SH interpolation baseline (Eqs. 7–8); full Experimental Setup table; Results with interpolation error (Eq. 9), ANC noise reduction (Eq. 10), and spatial noise field analysis; embedded 3 figures (system setup Fig. 1, block diagram Fig. 2, noise reduction Fig. 4); added Limitations and Future Work section
+  - `wiki/sources/index.md` — added the missing 1 source row (was not actually added in prior attempt)
+  - `wiki/entities/index.md` — added the missing 5 entity rows for `yile-angela-zhang`, `fei-ma`, `thushara-d-abhayapala`, `prasanga-n-samarasinghe`, `amy-bastine` (were not actually added in prior attempt)
+- **Pages verified unchanged** (already correctly updated in prior attempt): entity pages, concept pages (`physics-informed-neural-network`, `soundfield-interpolation`), updated concept pages (`active-noise-control`, `multi-channel-anc`, `remote-microphone-technique`, `spherical-harmonic-transform`, `virtual-sensing`), synthesis page `virtual-sensing-evolution.md`, main `wiki/index.md`, `wiki/concepts/index.md`
+- **Figures**: 3 embedded (Fig. 1 system setup, Fig. 2 block diagram, Fig. 4 noise reduction) — all sourced from existing `raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/figures/` (16 figures total from MinerU VLM extraction)
+- **Outcome**: Source page now conforms to the paper-reader skill template with all required sections; subdirectory indexes complete and consistent with main index.

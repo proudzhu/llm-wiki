@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-05-27
+updated: 2026-06-25
 sources:
 tags:
 - active-noise-control
@@ -68,6 +68,11 @@ The main challenge is the **explosive growth in computation**. For each error se
 - [[subband-anc|Subband ANC]]
 - [[simplified-adaptive-feedback-anc|Simplified Adaptive Feedback ANC]]
 
+## PINN-Assisted Multi-Channel ANC
+
+In the PINN-assisted ANC system ([[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang et al. 2024]]), the standard multiple-point FxLMS is modified so that the error signals driving the weight update are the **interpolated virtual microphone signals** rather than the physical monitoring microphone signals. A [[concepts/physics-informed-neural-network|PINN]] trained on $Q = 8$ monitoring microphones with the wave equation PDE loss interpolates the soundfield at $V = 2$ virtual ear positions. This means the controller minimizes noise at the *listener's ears* rather than at the monitoring microphones, achieving −13 dB more noise reduction than the baseline multiple-point system.
+
 ## Related Sources
 
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section V: Multiple-Channel ANC
+- [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]]

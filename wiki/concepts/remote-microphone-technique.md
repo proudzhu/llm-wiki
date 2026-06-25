@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-05-27
+updated: 2026-06-25
 tags:
   - virtual-sensing
   - anc

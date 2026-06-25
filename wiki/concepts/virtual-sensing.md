@@ -9,7 +9,7 @@ tags:
 - active-noise-control
 - control-theory
 - signal-processing
-updated: 2026-05-27
+updated: 2026-06-25
 ---
 # Virtual Sensing
 
@@ -32,6 +32,7 @@ The three canonical virtual sensing methods for feedforward ANC systems, unified
 ### Other Approaches
 - **Remote Microphone Technique (RMT)**: Uses an auxiliary microphone during a training phase to learn the relationship between the physical error mic and the virtual location.
 - **Virtual Microphone Arrangement (VMA)**: Uses a physical array to interpolate the pressure at a virtual point.
+- **[[concepts/physics-informed-neural-network|PINN]]-Based Soundfield Interpolation** (Zhang 2024): A PINN trained on monitoring microphone signals with the acoustic wave equation as a PDE residual interpolates the soundfield at virtual positions. Achieves ~8 dB better interpolation than SH methods with $Q = 8$ microphones, and the PINN-assisted ANC system reduces noise by −13 dB more than multiple-point ANC.
 - **Observer-Based Estimation**: Uses a **[[state-space-model|State-Space Model]]** and **[[kalman-filter|Kalman Filter]]** to estimate the virtual state based on available physical measurements.
 - **Neural Observation Filters**: Uses deep learning (e.g., Obs-TasNet) to estimate filters online for dynamic environments.
 
