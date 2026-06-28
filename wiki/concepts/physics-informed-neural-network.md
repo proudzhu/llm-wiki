@@ -4,6 +4,7 @@ created: 2026-06-25
 updated: 2026-06-25
 sources:
   - raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md
+  - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
 tags:
   - neural-networks
   - physics-informed
@@ -60,4 +61,11 @@ where $c$ is the speed of sound. See [[sources/zhang-2024-active-noise-control-s
 - [[neural-networks|Neural Networks]]
 - [[soundfield-interpolation|Soundfield Interpolation]]
 - [[active-noise-control|Active Noise Control]]
+- [[active-vibration-control|Active Vibration Control]]
+- [[input-shaping|Input Shaping]]
 - [[spherical-harmonic-transform|Spherical Harmonic Transform]]
+
+## Related Sources
+
+- [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]]
+- [[sources/jiang-2025-ai-driven-avnc-review|Jiang et al. 2025: AI-Driven AVNC Review]]

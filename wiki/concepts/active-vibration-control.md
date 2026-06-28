@@ -3,7 +3,8 @@ type: concept
 created: 2026-04-12
 updated: 2026-04-17
 sources:
-  in active noise and vibration control.md
+  - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
+  - in active noise and vibration control.md
 tags:
 - active-vibration-control
 - control-theory
@@ -50,6 +51,9 @@ The effectiveness of AVC depends heavily on placing sensors and actuators at poi
 ## Related Concepts
 
 - [[active-noise-control|Active Noise Control]]
+- [[input-shaping|Input Shaping]]
+- [[reinforcement-learning-for-control|Reinforcement Learning for Control]]
+- [[safe-reinforcement-learning|Safe Reinforcement Learning]]
 - [[model-predictive-control|Model Predictive Control]]
 - [[quadratic-programming|Quadratic Programming]]
 - [[system-identification|System Identification]]
@@ -60,3 +64,4 @@ The effectiveness of AVC depends heavily on placing sensors and actuators at poi
 
 - [[sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]
 - [[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]]
+- [[sources/jiang-2025-ai-driven-avnc-review|Jiang et al. 2025: AI-Driven AVNC Review]]

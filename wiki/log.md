@@ -2619,3 +2619,38 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 - **Pages verified unchanged** (already correctly updated in prior attempt): entity pages, concept pages (`physics-informed-neural-network`, `soundfield-interpolation`), updated concept pages (`active-noise-control`, `multi-channel-anc`, `remote-microphone-technique`, `spherical-harmonic-transform`, `virtual-sensing`), synthesis page `virtual-sensing-evolution.md`, main `wiki/index.md`, `wiki/concepts/index.md`
 - **Figures**: 3 embedded (Fig. 1 system setup, Fig. 2 block diagram, Fig. 4 noise reduction) — all sourced from existing `raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/figures/` (16 figures total from MinerU VLM extraction)
 - **Outcome**: Source page now conforms to the paper-reader skill template with all required sections; subdirectory indexes complete and consistent with main index.
+
+---
+
+## [2026-06-28] ingest (re) | Jiang, Xue & Yue 2025: A Review of Artificial Intelligence-Driven Active Vibration and Noise Control (completion)
+
+- **Reason**: Previous ingest left the source page with gaps — missing raw paper path in frontmatter, empty Related Synthesis section, no raw full-text in standard location, and no entity pages for authors. Re-ingestion completes the workflow per the paper-reader skill template.
+- **Source**: `raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md` (Zotero: B6G9D6NQ)
+- **Authors**: Zongkang Jiang, Hongtao Xue, Huiyu Yue
+- **Published**: Machines 2025, 13(10), 1027
+- **DOI**: 10.3390/machines13101027
+- **Summary**: Comprehensive 48-page review classifying AI-AVNC into four technical paths (input shaping, system identification, controller parameter optimization, end-to-end controller modeling) with engineering applications in EVs, aerospace, and manufacturing
+- **Extraction**: MinerU pipeline extract from Zotero PDF (191,690 bytes, 40 figures)
+- **Pages created**:
+  - `raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md` — extracted text from Zotero PDF via MinerU
+  - `raw/papers/jiang-2025-ai-driven-avnc-review/figures/` — 40 extracted figures
+  - `wiki/entities/zongkang-jiang.md` — first author
+  - `wiki/entities/hongtao-xue.md` — co-author, supervisor
+  - `wiki/entities/huiyu-yue.md` — corresponding author
+  - `wiki/concepts/input-shaping.md` — feedforward control technique
+  - `wiki/concepts/reinforcement-learning-for-control.md` — RL for dynamic system control
+  - `wiki/concepts/safe-reinforcement-learning.md` — Safe-RL with constraints and guarantees
+- **Pages updated**:
+  - `wiki/sources/jiang-2025-ai-driven-avnc-review.md` — expanded with raw paper path, DOI, comprehensive methodology (four technical paths), results, future work, limitations, related concepts (15 wikilinks), related synthesis (5 wikilinks)
+  - `wiki/concepts/active-vibration-control.md` — added source link, cross-refs to input-shaping, RL-for-control, safe-RL
+  - `wiki/concepts/physics-informed-neural-network.md` — added source link, cross-refs to AVC and input-shaping, Related Sources section
+  - `wiki/concepts/model-predictive-control.md` — added source link
+  - `wiki/concepts/system-identification.md` — added source link, cross-refs to AVC and deep-secondary-path-estimation
+  - `wiki/concepts/filtered-x-lms-algorithm.md` — added source link
+  - `wiki/concepts/generative-fixed-filter-anc.md` — added source link
+  - `wiki/synthesis/ai-driven-anc.md` — added source link and reference to four-path classification
+  - `wiki/index.md` — added 3 entities, 3 concepts; updated source summary; updated statistics (656→662 total, 280→283 entities, 243→246 concepts)
+  - `wiki/sources/index.md` — updated source summary
+  - `wiki/entities/index.md` — added 3 entity rows
+  - `wiki/concepts/index.md` — added 3 concept rows
+- **Key insights**: (1) AI-AVNC is classified into four technical paths: input shaping (ANN/RL/PINN-enhanced), system identification (deep secondary path estimation), controller parameter optimization (RL-PID, neural MPC), and end-to-end controller modeling (Deep ANC, GFANC). (2) RL methods (DDPG, PPO, SAC) enable model-free nonlinear control but suffer from low sample efficiency and exploration safety risks. (3) Safe-RL frameworks (CMDP, Lyapunov constraints, CBF, conservative fallback) are essential for physical deployment. (4) Deep ANC and GFANC represent the end-to-end paradigm shift, replacing iterative adaptation with neural network inference. (5) Key challenges include sim-to-real gap, lack of interpretability, and need for formal stability verification.

@@ -5,6 +5,7 @@ updated: 2026-05-04
 sources:
   - raw/papers/yang-2026-transformer-e2e-cfg-anc/full-text.md
   - raw/papers/luo-2026-hybrid-gfanc-fxnlms/full-text.md
+  - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
 tags:
   - active-noise-control
   - fixed-filter-anc
@@ -72,3 +73,4 @@ where $\alpha_n$ follows a forgetting-factor scheme ($\lambda = 0.999$).
 
 - [[sources/yang-2026-transformer-e2e-cfg-anc|Yang 2026: Transformer-based E2E-CFG for ANC]] — direct filter generation with Transformer co-processor
 - [[sources/luo-2026-hybrid-gfanc-fxnlms|Luo 2026: Hybrid GFANC-FxNLMS]] — unsupervised GFANC with CNN co-processor and hybrid stabilization
+- [[sources/jiang-2025-ai-driven-avnc-review|Jiang et al. 2025: AI-Driven AVNC Review]] — reviews GFANC as a key end-to-end controller modeling approach

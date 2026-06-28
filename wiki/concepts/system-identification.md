@@ -3,8 +3,9 @@ type: concept
 created: 2026-04-12
 updated: 2026-04-17
 sources:
-  in active noise and vibration control.md
-  control in active noise control systems.md
+  - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
+  - in active noise and vibration control.md
+  - control in active noise control systems.md
 tags:
 - control-theory
 - signal-processing
@@ -34,13 +35,15 @@ In [[active-noise-control|Active Noise Control]] and [[active-vibration-control|
 ## Related Concepts
 
 - [[active-noise-control|Active Noise Control]]
+- [[active-vibration-control|Active Vibration Control]]
 - [[secondary-path-modeling|Secondary Path Modeling]]
+- [[deep-secondary-path-estimation|Deep Secondary Path Estimation]]
 - [[state-space-model|State-Space Model]]
 - [[model-predictive-control|Model Predictive Control]]
-- [[active-vibration-control|Active Vibration Control]]
 
 ## Related Sources
 
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
 - [[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]]
 - [[sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]
+- [[sources/jiang-2025-ai-driven-avnc-review|Jiang et al. 2025: AI-Driven AVNC Review]]

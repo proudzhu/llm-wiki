@@ -3,6 +3,7 @@ type: concept
 created: 2026-04-10
 updated: 2026-04-10
 sources:
+  - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
 tags:
 - adaptive-algorithms
 - lms
@@ -76,3 +77,4 @@ where $\mathbf{G}(\omega)$ and $\hat{\mathbf{G}}(\omega)$ are the Fourier transf
 
 - [[sources/lu-2021-survey-active-noise-control-linear|Lu et al. 2021: Survey on ANC — Part I: Linear Systems]]
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method — a method avoiding the secondary path filter requirement of FxLMS]]
+- [[sources/jiang-2025-ai-driven-avnc-review|Jiang et al. 2025: AI-Driven AVNC Review]]

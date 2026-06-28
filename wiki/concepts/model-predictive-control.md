@@ -3,8 +3,9 @@ type: concept
 created: 2026-04-12
 updated: 2026-04-17
 sources:
-  in active noise and vibration control.md
-  control in active noise control systems.md
+  - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
+  - in active noise and vibration control.md
+  - control in active noise control systems.md
 tags:
 - control-theory
 - model-predictive-control
@@ -58,3 +59,4 @@ Proposed by Liang (2026), this method exploits the propagation delay in the prim
 
 - [[sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]
 - [[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]]
+- [[sources/jiang-2025-ai-driven-avnc-review|Jiang et al. 2025: AI-Driven AVNC Review]]

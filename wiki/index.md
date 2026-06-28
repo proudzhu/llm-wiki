@@ -288,6 +288,9 @@
 | [[entities/prasanga-n-samarasinghe\|Prasanga N. Samarasinghe]] | ANU — PINN for soundfield interpolation, SH-domain ANC, HRTF upsampling | 2026-06-25 |
 | [[entities/thushara-d-abhayapala\|Thushara D. Abhayapala]] | ANU Professor — spatial audio, soundfield reproduction, ANC, spherical arrays, PINN | 2026-06-25 |
 | [[entities/yile-angela-zhang\|Yile (Angela) Zhang]] | ANU — PINN-based soundfield interpolation for ANC | 2026-06-25 |
+| [[entities/zongkang-jiang\|Zongkang Jiang]] | Jiangsu University — lead author of AI-AVNC review; AI-driven active vibration and noise control | 2026-06-28 |
+| [[entities/hongtao-xue\|Hongtao Xue]] | Jiangsu University — supervisor, co-author of AI-AVNC review; in-wheel motor fault diagnosis | 2026-06-28 |
+| [[entities/huiyu-yue\|Huiyu Yue]] | Jiangsu University — corresponding author of AI-AVNC review; mobility equipment and AI | 2026-06-28 |
 
 ---
 
@@ -537,6 +540,9 @@
 | [[concepts/faster-r-cnn\|Faster R-CNN]] | End-to-end object detection with Region Proposal Network sharing conv features; modern detection paradigm; NeurIPS 2025 Test of Time Award | 2026-06-21 |
 | [[concepts/physics-informed-neural-network\|Physics-Informed Neural Network (PINN)]] | Neural network trained with PDE residual loss to respect physical laws; used for soundfield interpolation, HRTF upsampling | 2026-06-25 |
 | [[concepts/soundfield-interpolation\|Soundfield Interpolation]] | Estimating acoustic pressure at unmeasured positions from limited sensor measurements; SH, PINN, and RMT methods | 2026-06-25 |
+| [[concepts/input-shaping\|Input Shaping]] | Feedforward control technique that convolves command input with impulse sequences to cancel residual vibrations at natural frequencies | 2026-06-28 |
+| [[concepts/reinforcement-learning-for-control\|Reinforcement Learning for Control]] | Applies RL paradigm to dynamic system control, enabling adaptive model-free strategies for nonlinear and time-varying systems | 2026-06-28 |
+| [[concepts/safe-reinforcement-learning\|Safe Reinforcement Learning]] | Extends RL with hard constraints, risk metrics, and formal safety guarantees for safety-critical engineering applications | 2026-06-28 |
 
 ---
 
@@ -581,7 +587,7 @@
 | [[sources/pawelczyk-1997-anc-feedback-fixed-adaptive\|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]] | ISVR TM822：MVC/IMC 固定控制器 + RLS/LMS/FXLMS 自适应反馈 ANC，延迟对性能的影响，鲁棒性分析 | 1997 |
 | [[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones\|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]] | 博士论文：FF+MVC+IMC 三种方案同时组合，两阶段优化，Modified N-FxLMS 自适应，FPGA 原型验证 | 2020 |
 | [[sources/its-ok-to-compare-floating-points\|It's ok to compare floating points for equality]] | Critique of universal epsilon-comparisons in geometry and physics | 2026-04-18 |
-| [[sources/jiang-2025-ai-driven-avnc-review\|Jiang 2025: AI-Driven AVNC Review]] | Systematic review of 4 technical paths (IS, Modeling, Tuning, Controller) and engineering applications | 2025-10-13 |
+| [[sources/jiang-2025-ai-driven-avnc-review\|Jiang 2025: AI-Driven AVNC Review]] | Systematic review of 4 AI-AVNC technical paths (input shaping, system identification, controller parameter optimization, end-to-end controller modeling) with engineering applications | 2025-10-13 |
 | [[sources/holzmuller-2025-deep-observation-filter-virtual-sensing-active-noise-control\|Holzmuller & Sontacchi 2025: Deep Observation Filter for Virtual Sensing ANC]] | CNN-based neural observation filter for online RMT; GCC-PHAT + position inputs; −33.53 dB NMSE; 367k params; async dual-loop | 2025-06 |
 | [[sources/holzmueller-2026-obs-tasnet-virtual-sensing\|Holzmüller 2026: Obs-TasNet for Virtual Sensing]] | Neural RMT observation filter estimation via modified Conv-TasNet; temporal bottleneck cuts params 40%, complexity 4x; asynchronous dual-loop operation | 2026-04-18 |
 | [[sources/petersen-2008-kalman-filter-virtual-sensing-anc\|Petersen 2008: Kalman Filter for Virtual Sensing]] | State-space observer approach for robust virtual sensing in ANC | 2026-04-18 |
@@ -702,10 +708,10 @@
 
 ## Statistics
 
-- **Total pages**: 656
-- **Entities**: 280
-- **Concepts**: 243
+- **Total pages**: 662
+- **Entities**: 283
+- **Concepts**: 246
 - **Sources**: 107
 - **Synthesis**: 19
 - **Queries**: 7
-- **Last updated**: 2026-06-25
+- **Last updated**: 2026-06-28

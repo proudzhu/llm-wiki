@@ -284,4 +284,7 @@
 | [[entities/thushara-d-abhayapala\|Thushara D. Abhayapala]] | ANU Professor — spatial audio, soundfield reproduction, spherical mic arrays, ANC | 2026-06-25 |
 | [[entities/prasanga-n-samarasinghe\|Prasanga N. Samarasinghe]] | ANU — PINN for ANC, HRTF upsampling, SH-domain feedforward ANC | 2026-06-25 |
 | [[entities/amy-bastine\|Amy Bastine]] | ANU — PINN-based soundfield estimation and ANC | 2026-06-25 |
+| [[entities/zongkang-jiang\|Zongkang Jiang]] | Jiangsu University — lead author of AI-AVNC review; AI-driven active vibration and noise control | 2026-06-28 |
+| [[entities/hongtao-xue\|Hongtao Xue]] | Jiangsu University — supervisor, co-author of AI-AVNC review; in-wheel motor fault diagnosis | 2026-06-28 |
+| [[entities/huiyu-yue\|Huiyu Yue]] | Jiangsu University — corresponding author of AI-AVNC review; mobility equipment and AI | 2026-06-28 |
 
