@@ -218,3 +218,17 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# IDE / Agent tool directories (skills are symlinked from .trae/skills/)
+.qwen/
+.reasonix/
+.antigravitycli/
+
+# Temporary files
+.tmp_*
+*.tmp
+
+# Node.js (project is Python/MkDocs-driven; no Node toolchain needed)
+package.json
+package-lock.json
+node_modules/
