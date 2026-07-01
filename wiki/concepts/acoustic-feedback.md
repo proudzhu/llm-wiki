@@ -102,8 +102,14 @@ In hearing aids, AFC uses an adaptive filter (typically PEM-NLMS) to estimate an
 - [[frequency-shift-feedback-cancellation|Frequency Shift Feedback Cancellation]]
 - [[maximum-stable-gain|Maximum Stable Gain]]
 
+## Related Concepts
+
+- [[concepts/deep-marginal-feedback-cancellation|Deep Marginal Feedback Cancellation]]
+- [[concepts/closed-loop-fine-tuning|Closed-Loop Fine Tuning]]
+
 ## Related Sources
 
+- [[sources/hao-2025-l3c-deepmfc|Hao et al. 2025: L3C-DeepMFC]] — Low-latency low-complexity deep marginal feedback cancellation
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section II-D: Feedback Effects and Solutions
 - [[sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC with GRU step-size prediction

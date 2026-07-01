@@ -46,10 +46,18 @@ Uses an adaptive filter to estimate and subtract the feedback component:
 
 ## Deep Learning Approaches
 
+### AFC-Based Methods
 Recent work integrates deep learning for automatic step-size control or direct IR estimation:
 - **Neural-AFC**: End-to-end neural network for AFC
 - **DeepPEM-AFC**: GRU-based step-size prediction combined with PEM de-correlation
 - **[[concepts/deep-feedback-cancellation|DFC]]**: Compact DNN (856K params) that directly estimates the feedback-path IR, outperforming both adaptive filtering and signal-prediction approaches with 30x faster convergence after path changes
+
+### Direct Feedback Suppression (DeepMFC)
+[[concepts/deep-marginal-feedback-cancellation|Deep Marginal Feedback Cancellation (DeepMFC)]] treats feedback cancellation as interference suppression rather than path estimation:
+- **DeepMFC** (Zheng et al. 2022): Complex spectrum mapping to estimate feedback-free speech directly; trained open-loop, applied closed-loop
+- **L3C-DeepMFC** (Hao et al. 2025): Low-latency (4 ms) low-complexity (0.31M params) variant with full- and sub-band recurrent modeling and closed-loop fine tuning
+- Maintains stability at high gains where AFC methods struggle
+- Can be integrated with AFC for further improvement
 
 ## Metrics
 
@@ -66,9 +74,15 @@ Recent work integrates deep learning for automatic step-size control or direct I
 - [[concepts/frequency-shift-feedback-cancellation|Frequency Shift Feedback Cancellation]]
 - [[concepts/maximum-stable-gain|Maximum Stable Gain]]
 
+## Related Concepts
+
+- [[concepts/deep-marginal-feedback-cancellation|Deep Marginal Feedback Cancellation]]
+- [[concepts/closed-loop-fine-tuning|Closed-Loop Fine Tuning]]
+
 ## Related Sources
 
 - [[sources/lydaki-2026-deep-feedback-cancellation-hearing-aids|Lydaki 2026: Deep Feedback Cancellation]] — DFC with direct IR estimation
+- [[sources/hao-2025-l3c-deepmfc|Hao et al. 2025: L3C-DeepMFC]] — Low-latency low-complexity deep marginal feedback cancellation
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC
 - Waterschoot & Moonen 2011: Fifty years of acoustic feedback control
 - Spriet et al. 2008: Feedback control in hearing aids

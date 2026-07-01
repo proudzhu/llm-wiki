@@ -150,6 +150,8 @@
 | [[concepts/self-attentive-recurrent-neural-network\|Self-Attentive Recurrent Neural Network]] | Recurrent + self-attention architecture used in Hybrid AHS for recursive speech enhancement | 2026-05-15 |
 | [[concepts/prediction-error-method\|Prediction Error Method]] | De-correlation technique using whitening pre-filters to solve bias in closed-loop AFC | 2026-05-15 |
 | [[concepts/hearing-aid-feedback-cancellation\|Hearing Aid Feedback Cancellation]] | AFC methods specific to hearing aids: PEM, FS, probe noise, and deep learning approaches | 2026-05-15 |
+| [[concepts/deep-marginal-feedback-cancellation\|Deep Marginal Feedback Cancellation]] | DNN-based interference suppression for hearing aid feedback via complex spectrum mapping; L3C-DeepMFC extension | 2026-07-01 |
+| [[concepts/closed-loop-fine-tuning\|Closed-Loop Fine Tuning]] | Training strategy addressing open-loop training vs. closed-loop estimation mismatch | 2026-07-01 |
 | [[concepts/densely-gated-convolutional-attention-network\|DenGCAN]] | Lightweight encoder-decoder with dense blocks, gated conv, sConformer bottleneck, AG skip-connections | 2026-05-16 |
 | [[concepts/iterative-attentional-feature-fusion\|Iterative Attentional Feature Fusion (iAFF)]] | Coarse-then-refined multi-modal fusion using channel attention modules | 2026-05-16 |
 | [[concepts/attention-gate\|Attention Gate (AG)]] | Selective skip-connection mechanism using local + global feature attention | 2026-05-16 |

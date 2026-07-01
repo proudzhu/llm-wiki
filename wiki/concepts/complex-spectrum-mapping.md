@@ -66,7 +66,12 @@ By jointly estimating real and imaginary parts, CSM implicitly models both ampli
 - [[concepts/frequency-domain-loss|Frequency Domain Loss for Time-Domain Networks]]
 - [[concepts/invalid-stft-problem|Invalid STFT Problem]]
 
+## Related Concepts
+
+- [[concepts/deep-marginal-feedback-cancellation|Deep Marginal Feedback Cancellation]]
+
 ## Related Sources
 
+- [[sources/hao-2025-l3c-deepmfc|Hao et al. 2025: L3C-DeepMFC]] — Gain-shape complex spectrum mapping for hearing aid feedback cancellation
 - [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 - [[sources/pandey-2019-cnn-speech-enhancement-time-domain|Pandey & Wang 2019: CNN-Based Speech Enhancement in the Time Domain]]

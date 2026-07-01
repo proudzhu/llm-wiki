@@ -35,6 +35,7 @@
 | [[entities/piero-iared-rivera-benois\|Piero Iared Rivera Benois]] | Helmut-Schmidt-Universität — Hybrid FF+MVC+IMC ANC structures, FPGA implementation | 2026-04-13 |
 | [[entities/stephen-j-elliott\|Stephen J. Elliott]] | ISVR, University of Southampton — pioneer of feedback ANC and optimal control | 2026-04-12 |
 | [[entities/boaz-rafaely\|Boaz Rafaely]] | ISVR — feedback ANC researcher, spherical microphone arrays | 2026-04-12 |
+| [[entities/brian-c-j-moore\|Brian C. J. Moore]] | Cambridge Hearing Group — psychoacoustics, hearing aids, feedback cancellation | 2026-07-01 |
 | [[entities/andrew-j-fleming\|Andrew J. Fleming]] | Active control systems researcher, co-author with Wills on MPC for ANC/AVC | 2026-04-12 |
 | [[entities/udo-zolzer\|Udo Zölzer]] | Helmut-Schmidt-Universität — signal processing, Benois PhD supervisor | 2026-04-12 |
 | [[entities/delf-sachau\|Delf Sachau]] | Helmut-Schmidt-Universität — active noise control, Benois co-supervisor | 2026-04-12 |
@@ -248,6 +249,7 @@
 | [[entities/zhuoying-jia\|Zhuoying Jia]] | UESTC — active noise control, virtual sensing, DSP implementation | 2026-05-27 |
 | [[entities/rong-xie\|Rong Xie]] | UESTC — active noise control, virtual sensing, selective virtual sensing for MCFFANC | 2026-05-27 |
 | [[entities/huiyong-li\|Huiyong Li]] | UESTC — active noise control, signal processing, virtual sensing | 2026-05-27 |
+| [[entities/huiyong-zhang\|Huiyong Zhang]] | CAS — hearing aid signal processing, feedback cancellation | 2026-07-01 |
 | [[entities/haonan-dong\|Haonan Dong]] | Waseda University — SR-SwIVA-ISS, switching IVA, iterative source steering | 2026-06-04 |
 | [[entities/xuemai-xie\|Xuemai Xie]] | Waseda University — blind source separation, speech separation | 2026-06-04 |
 | [[entities/evgenii-indenbom\|Evgenii Indenbom]] | Microsoft — DeepVQE joint AEC/NS/DR, cross-attention alignment | 2026-06-06 |
@@ -462,6 +464,8 @@
 | [[concepts/complex-spectral-mapping\|Complex Spectral Mapping]] | Predicting RI components of clean speech STFT directly; preserves phase for superior enhancement | 2026-05-16 |
 | [[concepts/frequency-shift-feedback-cancellation\|Frequency Shift Feedback Cancellation]] | De-correlation method for hearing aid AFC by shifting frequency to reduce bias | 2026-05-15 |
 | [[concepts/hearing-aid-feedback-cancellation\|Hearing Aid Feedback Cancellation (AFC)]] | Suppression of acoustic feedback in hearing aids via adaptive filtering and PEM | 2026-05-15 |
+| [[concepts/deep-marginal-feedback-cancellation\|Deep Marginal Feedback Cancellation (DeepMFC)]] | DNN-based interference suppression for hearing aid feedback; complex spectrum mapping; L3C-DeepMFC achieves 4ms latency, 0.31M params | 2026-07-01 |
+| [[concepts/closed-loop-fine-tuning\|Closed-Loop Fine Tuning]] | Training strategy addressing open-loop training vs. closed-loop estimation mismatch in feedback cancellation systems | 2026-07-01 |
 | [[concepts/maximum-stable-gain\|Maximum Stable Gain (MSG)]] | The maximum gain a hearing aid can provide before feedback oscillation, used as AFC evaluation metric | 2026-05-15 |
 | [[concepts/prediction-error-method\|Prediction Error Method (PEM)]] | De-correlation technique for hearing aid AFC that models speech as an AR process | 2026-05-15 |
 | [[concepts/permutation-invariant-training\|Permutation Invariant Training (PIT)]] | Speaker-independent separation resolving output-speaker ambiguity by selecting best permutation during training | 2026-06-01 |
@@ -643,6 +647,7 @@
 | [[sources/liu-2025-robust-fusion-bc-ac-attention\|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]] | ATFA dual-axis attention + dual-channel mask + Special Training (random modality dropout); 1.6M params; recovers PESQ 1.18→2.54 under AC sensor failure | 2025 |
 | [[sources/zaidel-2026-linearly-constrained-deep-beamformer\|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]] | Fully DNN-based beamformer with adaptive multi-term loss enforcing distortionless and null-steering constraints; outperforms LCMV | 2026-05-26 |
 | [[sources/zhan-2025-deeppem-afc\|Zhan et al. 2025: DeepPEM-AFC]] | Deep learning prediction error method for hearing aid adaptive feedback cancellation | 2025 |
+| [[sources/hao-2025-l3c-deepmfc\|Hao et al. 2025: L3C-DeepMFC]] | Low-latency (4ms) low-complexity (0.31M params) deep marginal feedback cancellation with closed-loop fine tuning for hearing aids | 2025 |
 | [[sources/zhang-2023-hybrid-ahs\|Zhang et al. 2023: Hybrid AHS]] | Hybrid acoustic howling suppression combining Kalman filter and deep learning | 2023 |
 | [[sources/tagliasacchi-2020-seanet\|Tagliasacchi, Li, Misiunas & Roblek 2020: SEANet]] | Multi-modal speech enhancement using accelerometer data; wave-to-wave UNet with adversarial training; 9.6 dB SI-SDRi in mixed-speech scenarios | 2020 |
 | [[sources/wang-2022-fusing-bc-ac-complex-domain-se\|Wang, Zhang & Wang 2022: Fusing BC and AC for Complex-Domain SE]] | Attention-based AC-BC fusion with DC-CRN; CycleGAN semi-supervised framework matching full supervision with 50% data; +21.1% STOI at −5 dB | 2022 |

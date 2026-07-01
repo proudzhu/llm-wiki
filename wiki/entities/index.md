@@ -29,6 +29,7 @@
 | [[entities/piero-iared-rivera-benois\|Piero Iared Rivera Benois]] | Helmut-Schmidt-Universität — Hybrid FF+MVC+IMC ANC structures, FPGA implementation | 2026-04-13 |
 | [[entities/stephen-j-elliott\|Stephen J. Elliott]] | ISVR, University of Southampton — pioneer of feedback ANC and optimal control | 2026-04-12 |
 | [[entities/boaz-rafaely\|Boaz Rafaely]] | ISVR — feedback ANC researcher, spherical microphone arrays | 2026-04-12 |
+| [[entities/brian-c-j-moore\|Brian C. J. Moore]] | Cambridge Hearing Group — psychoacoustics, hearing aids, feedback cancellation | 2026-07-01 |
 | [[entities/andrew-j-fleming\|Andrew J. Fleming]] | Active control systems researcher, co-author with Wills on MPC for ANC/AVC | 2026-04-12 |
 | [[entities/udo-zolzer\|Udo Zölzer]] | Helmut-Schmidt-Universität — signal processing, Benois PhD supervisor | 2026-04-12 |
 | [[entities/delf-sachau\|Delf Sachau]] | Helmut-Schmidt-Universität — active noise control, Benois co-supervisor | 2026-04-12 |
@@ -241,6 +242,7 @@
 | [[entities/zhuoying-jia\|Zhuoying Jia]] | UESTC — active noise control, virtual sensing, DSP implementation | 2026-05-27 |
 | [[entities/rong-xie\|Rong Xie]] | UESTC — active noise control, virtual sensing, selective VS for MCFFANC | 2026-05-27 |
 | [[entities/huiyong-li\|Huiyong Li]] | UESTC — active noise control, signal processing, virtual sensing | 2026-05-27 |
+| [[entities/huiyong-zhang\|Huiyong Zhang]] | CAS — hearing aid signal processing, feedback cancellation | 2026-07-01 |
 | [[entities/jitong-chen\|Jitong Chen]] | Ohio State — supervised speech separation, MRCG feature, large-scale training for noise generalization, LSTM speaker generalization | 2026-06-01 |
 | [[entities/haonan-dong\|Haonan Dong]] | Waseda University — SR-SwIVA-ISS, switching IVA, iterative source steering | 2026-06-04 |
 | [[entities/xuemai-xie\|Xuemai Xie]] | Waseda University — blind source separation, speech separation | 2026-06-04 |

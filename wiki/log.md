@@ -2707,3 +2707,30 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/entities/index.md` - added 2 entity entries
   - `wiki/concepts/index.md` - added 6 concept entries
 - **Key insights**: (1) For block-based realtime audio processing where the host delivers b_host samples per callback and the plugin processes b_plugin samples per callback, the minimum FIFO buffering delay is exactly Δ = b_plugin − gcd(b_host, b_plugin) samples — not b_host + b_plugin, not max(b_host, b_plugin), and not dependent on LCM. (2) The bound is tight: for any two coprime block sizes (gcd = 1), the minimum delay is b_plugin − 1 samples, meaning one nearly-full plugin block must be buffered. For integer multiples (gcd = b_plugin when b_plugin divides b_host), the minimum delay is 0 — no extra reblocking delay needed, the host block contains an integer number of plugin blocks. (3) The elegant proof uses a pigeonhole argument combined with Bézout's identity: congruence classes modulo g repeat every GCD positions, and a linear combination achieving the GCD guarantees that the buffer occupancy pattern visits the same congruence class within one LCM cycle, proving the upper bound. (4) The PortAudio library previously computed this delay via brute-force simulation up to LCM(b_host, b_plugin) steps (which can be as large as 44,100 × 48,000 / 300 = ~7 million steps for common audio rates); the closed-form GCD computation is O(log min(b_host, b_plugin)) and exact. (5) The result generalizes beyond audio: any block-based streaming system where a producer pushes n samples and a consumer pulls m samples per block must delay at least max(n,m) − gcd(n,m) samples to avoid underruns.
+
+## [2026-07-01] ingest | L3C-DeepMFC: Low-Latency Low-Complexity Deep Marginal Feedback Cancellation
+
+- **Source**: `raw/papers/hao-2025-l3c-deepmfc/full-text.md` (Zotero: FDVXMTIJ)
+- **Authors**: Fengyuan Hao, Brian C. J. Moore, Huiyong Zhang, Xiaodong Li, Chengshi Zheng
+- **Published**: Interspeech 2025
+- **URL**: https://www.isca-archive.org/interspeech_2025/hao25_interspeech.pdf
+- **Summary**: Proposes L3C-DeepMFC, a low-latency (4ms) low-complexity (0.31M params, 0.43 G/s) extension of DeepMFC for hearing aid feedback cancellation. Uses gain-shape complex spectrum mapping, full- and sub-band recurrent modeling (shared sub-band LSTM + full-band GLSTM), a low-latency overlap-add scheme, and closed-loop fine tuning to address the open-loop-training vs. closed-loop-estimation mismatch. Achieves WB-PESQ 4.08 at GM=0 vs. DeepMFC's 4.34 while using ~32× fewer parameters and ~28× lower complexity.
+- **Pages created**:
+  - `raw/papers/hao-2025-l3c-deepmfc/full-text.md` — MinerU VLM extraction
+  - `wiki/sources/hao-2025-l3c-deepmfc.md` — source page
+  - `wiki/entities/brian-c-j-moore.md` — entity page (Cambridge Hearing Group)
+  - `wiki/entities/huiyong-zhang.md` — entity page (CAS)
+  - `wiki/concepts/deep-marginal-feedback-cancellation.md` — DeepMFC concept
+  - `wiki/concepts/closed-loop-fine-tuning.md` — closed-loop fine tuning concept
+- **Pages updated**:
+  - `wiki/entities/fengyuan-hao.md` — added L3C-DeepMFC contribution
+  - `wiki/entities/chengshi-zheng.md` — added L3C-DeepMFC contribution
+  - `wiki/entities/xiaodong-li.md` — added L3C-DeepMFC contribution
+  - `wiki/concepts/hearing-aid-feedback-cancellation.md` — added DeepMFC subsection + cross-references
+  - `wiki/concepts/acoustic-feedback.md` — added related concepts/sources
+  - `wiki/concepts/complex-spectrum-mapping.md` — added related concepts/sources
+  - `wiki/index.md` — added 2 entities, 2 concepts, 1 source; updated statistics (602/252/223/101/19/7)
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 2 entity rows
+  - `wiki/concepts/index.md` — added 2 concept rows
+
