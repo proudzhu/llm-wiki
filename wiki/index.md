@@ -291,6 +291,7 @@
 | [[entities/zongkang-jiang\|Zongkang Jiang]] | Jiangsu University — lead author of AI-AVNC review; AI-driven active vibration and noise control | 2026-06-28 |
 | [[entities/hongtao-xue\|Hongtao Xue]] | Jiangsu University — supervisor, co-author of AI-AVNC review; in-wheel motor fault diagnosis | 2026-06-28 |
 | [[entities/huiyu-yue\|Huiyu Yue]] | Jiangsu University — corresponding author of AI-AVNC review; mobility equipment and AI | 2026-06-28 |
+| [[entities/avichay-ashur\|Avichay Ashur]] | Technion — acoustic howling suppression by fine-tuning deep speech enhancement networks | 2026-07-03 |
 
 ---
 
@@ -543,6 +544,7 @@
 | [[concepts/input-shaping\|Input Shaping]] | Feedforward control technique that convolves command input with impulse sequences to cancel residual vibrations at natural frequencies | 2026-06-28 |
 | [[concepts/reinforcement-learning-for-control\|Reinforcement Learning for Control]] | Applies RL paradigm to dynamic system control, enabling adaptive model-free strategies for nonlinear and time-varying systems | 2026-06-28 |
 | [[concepts/safe-reinforcement-learning\|Safe Reinforcement Learning]] | Extends RL with hard constraints, risk metrics, and formal safety guarantees for safety-critical engineering applications | 2026-06-28 |
+| [[concepts/denoiser-network\|Denoiser Network (DEMUCS)]] | Real-time waveform-domain speech enhancement network from DEMUCS; pretrained baseline fine-tuned for AHS by mixing howling samples with noise-reduction data | 2026-07-03 |
 
 ---
 
@@ -659,6 +661,7 @@
 | [[sources/kaiming-he-2025-neurips-object-detection-history\|He 2025: A Brief History of Visual Object Detection (NeurIPS 2025 Talk)]] | Kaiming He's NeurIPS 2025 Test of Time Award talk; 30-year history of object detection (Viola-Jones→SIFT/HOG/DPM→AlexNet/R-CNN→Faster R-CNN); Bilibili BV1nckaBcEra | 2026-06-21 |
 | [[sources/lorenz-2005-robust-minimum-variance-beamforming\|Lorenz & Boyd 2005: Robust Minimum Variance Beamforming]] | RMVB: ellipsoidal array-manifold uncertainty → SOCP via Cauchy–Schwarz; Lagrange-multiplier solver ~12× regularized beamformer; novel Hadamard-product-of-ellipsoids calculus | 2005 |
 | [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn\|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]] | PINN interpolates soundfield from outside-ROI monitoring microphones using wave equation PDE loss; 8 dB better interpolation than SH; −13 dB more NR than multiple-point ANC | 2026-06-25 |
+| [[sources/ashur-2026-acoustic-howling-suppression-fine-tuning\|Ashur & Cohen 2026: AHS by Fine-Tuning Deep Speech Enhancement Networks]] | Fine-tunes pretrained DEMUCS-based Denoiser with offline-generated howling samples; 60-40 mixing ratio achieves state-of-the-art PESQ stability across gains with <1% noise-reduction loss; no architectural modification or recursive training | 2026-07-03 |
 
 ---
 
@@ -708,10 +711,10 @@
 
 ## Statistics
 
-- **Total pages**: 662
-- **Entities**: 283
-- **Concepts**: 246
-- **Sources**: 107
+- **Total pages**: 665
+- **Entities**: 284
+- **Concepts**: 247
+- **Sources**: 108
 - **Synthesis**: 19
 - **Queries**: 7
-- **Last updated**: 2026-06-28
+- **Last updated**: 2026-07-03

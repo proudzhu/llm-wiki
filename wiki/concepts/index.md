@@ -250,4 +250,5 @@
 | [[concepts/input-shaping\|Input Shaping]] | Feedforward control technique that convolves command input with impulse sequences to cancel residual vibrations at natural frequencies | 2026-06-28 |
 | [[concepts/reinforcement-learning-for-control\|Reinforcement Learning for Control]] | Applies RL paradigm to dynamic system control, enabling adaptive model-free strategies for nonlinear and time-varying systems | 2026-06-28 |
 | [[concepts/safe-reinforcement-learning\|Safe Reinforcement Learning]] | Extends RL with hard constraints, risk metrics, and formal safety guarantees for safety-critical engineering applications | 2026-06-28 |
+| [[concepts/denoiser-network\|Denoiser Network (DEMUCS)]] | Real-time waveform-domain speech enhancement network from DEMUCS; pretrained baseline fine-tuned for AHS by mixing howling samples with noise-reduction data | 2026-07-03 |
 

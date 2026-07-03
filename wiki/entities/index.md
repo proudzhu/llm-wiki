@@ -287,4 +287,5 @@
 | [[entities/zongkang-jiang\|Zongkang Jiang]] | Jiangsu University — lead author of AI-AVNC review; AI-driven active vibration and noise control | 2026-06-28 |
 | [[entities/hongtao-xue\|Hongtao Xue]] | Jiangsu University — supervisor, co-author of AI-AVNC review; in-wheel motor fault diagnosis | 2026-06-28 |
 | [[entities/huiyu-yue\|Huiyu Yue]] | Jiangsu University — corresponding author of AI-AVNC review; mobility equipment and AI | 2026-06-28 |
+| [[entities/avichay-ashur\|Avichay Ashur]] | Technion — acoustic howling suppression by fine-tuning deep speech enhancement networks | 2026-07-03 |
 

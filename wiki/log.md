@@ -2654,3 +2654,28 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/entities/index.md` — added 3 entity rows
   - `wiki/concepts/index.md` — added 3 concept rows
 - **Key insights**: (1) AI-AVNC is classified into four technical paths: input shaping (ANN/RL/PINN-enhanced), system identification (deep secondary path estimation), controller parameter optimization (RL-PID, neural MPC), and end-to-end controller modeling (Deep ANC, GFANC). (2) RL methods (DDPG, PPO, SAC) enable model-free nonlinear control but suffer from low sample efficiency and exploration safety risks. (3) Safe-RL frameworks (CMDP, Lyapunov constraints, CBF, conservative fallback) are essential for physical deployment. (4) Deep ANC and GFANC represent the end-to-end paradigm shift, replacing iterative adaptation with neural network inference. (5) Key challenges include sim-to-real gap, lack of interpretability, and need for formal stability verification.
+
+---
+
+## [2026-07-03] ingest | Ashur & Cohen 2026: Acoustic Howling Suppression Enhancement by Fine-Tuning Deep Speech Enhancement Networks
+
+- **Source**: `raw/papers/ashur-2026-acoustic-howling-suppression-fine-tuning/full-text.md` (Zotero: HRHUQQER)
+- **Authors**: Avichay Ashur, Israel Cohen
+- **Published**: Preprint, 2026 (hosted on israelcohen.com, May 2026)
+- **URL**: https://israelcohen.com/wp-content/uploads/2026/05/Enhancing_Acoustic_Howling_Suppression_Robustness_in_Deep_Speech_Enhancement_Networks.pdf
+- **Summary**: Fine-tunes a pretrained DEMUCS-based real-time Denoiser network for acoustic howling suppression by mixing offline-generated synthetic howling samples (AISHELL-2 + image-method RIRs + hard-clipping loudspeaker nonlinearity) with the original Valentini-Botinhao noise-reduction data. The 60-40 mixing ratio achieves state-of-the-art perceptual speech quality (PESQ) at higher gains with the most stable PESQ across gain levels (only ~0.05 drop from G=1.5 to G=3 vs 0.5-0.6 for HybridAHS/NKal-AHS), while preserving <1% PESQ and <2% SDR of the original noise-reduction capability. No architectural modification, no recursive training, no additional inference latency.
+- **Extraction**: MinerU VLM extract from Zotero PDF (30,167 bytes, 9 figures) - second extraction attempt after first produced truncated output.
+- **Pages created**:
+  - `raw/papers/ashur-2026-acoustic-howling-suppression-fine-tuning/full-text.md` - extracted text from Zotero PDF via MinerU
+  - `raw/papers/ashur-2026-acoustic-howling-suppression-fine-tuning/figures/` - 9 extracted figures
+  - `wiki/sources/ashur-2026-acoustic-howling-suppression-fine-tuning.md`
+  - `wiki/entities/avichay-ashur.md`
+  - `wiki/concepts/denoiser-network.md` - DEMUCS-based real-time speech enhancement baseline
+- **Pages updated**:
+  - `wiki/entities/israel-cohen.md` - added AHS fine-tuning contribution, related sources/entities/concepts, updated `updated` date and tags
+  - `wiki/concepts/acoustic-howling-suppression.md` - added DeepMFC and Denoiser fine-tuning entries to Deep Learning Approaches; updated sources frontmatter; added cross-refs to denoiser-network and speech-enhancement
+  - `wiki/index.md` - added 1 entity, 1 concept, 1 source; updated statistics (662->665 total, 283->284 entities, 246->247 concepts, 107->108 sources)
+  - `wiki/sources/index.md` - added 1 source row
+  - `wiki/entities/index.md` - added 1 entity row
+  - `wiki/concepts/index.md` - added 1 concept row
+- **Key insights**: (1) Acoustic howling suppression and speech enhancement can be jointly addressed within a single pretrained network via fine-tuning - howling data acts as a complementary signal alongside noise-reduction data rather than the sole supervision signal (unlike DeepMFC). (2) The howling/noise mixing ratio is the key trade-off knob: ratios up to 60% preserve noise-reduction performance (<1% PESQ drop, <2% SDR drop) while substantially improving AHS robustness; excessive ratios (75-25) bias the model toward narrowband feedback suppression at the expense of broadband speech reconstruction. (3) The proposed approach achieves the most stable PESQ across gain levels among all evaluated AHS methods (DeepMFC, DeepAHS, HybridAHS, Neural-KG, NKal-AHS, Hybrid-NN), with only ~0.05 PESQ drop from G=1.5 to G=3 versus 0.5-0.6 for HybridAHS/NKal-AHS. (4) Dedicated feedback-cancellation methods (Hybrid-NN) still achieve higher SDR, suggesting residual distortion reduction as a future improvement direction. (5) The fine-tuning strategy requires no architectural modification, no recursive/teacher-forced training, and introduces no additional inference latency - making it a practical drop-in for real-time audio systems.
