@@ -288,4 +288,6 @@
 | [[entities/hongtao-xue\|Hongtao Xue]] | Jiangsu University — supervisor, co-author of AI-AVNC review; in-wheel motor fault diagnosis | 2026-06-28 |
 | [[entities/huiyu-yue\|Huiyu Yue]] | Jiangsu University — corresponding author of AI-AVNC review; mobility equipment and AI | 2026-06-28 |
 | [[entities/avichay-ashur\|Avichay Ashur]] | Technion — acoustic howling suppression by fine-tuning deep speech enhancement networks | 2026-07-03 |
+| [[entities/matthias-rath\|Matthias Rath]] | Institute for Advanced Procrastination, Berlin — minimum delay formula for realtime block size adaptation in audio DSP (LAC 2026) | 2026-07-07 |
+| [[entities/matthias-geier\|Matthias Geier]] | ai-coustics / Fraunhofer IIS — co-author of minimum delay formula for realtime block size adaptation (LAC 2026) | 2026-07-07 |
 

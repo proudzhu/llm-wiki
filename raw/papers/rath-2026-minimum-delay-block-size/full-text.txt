@@ -1,0 +1,584 @@
+Proceedings of the 20th Linux Audio Conference (LAC-26), Maynooth, Ireland, June 18–20, 2026
+
+
+      MINIMUM REQUIRED DELAY FOR REALTIME BLOCK SIZE ADAPTATION IN
+                    DIGITAL AUDIO SIGNAL PROCESSING
+
+                                Matthias Rath                                                         Matthias Geier ∗
+              Institute for Advanced Procrastination                                              ai-coustics
+                          Berlin, Germany                                                       Berlin, Germany
+        matthias.rath@mattoncino-software.com                                          matthias.geier@ai-coustics.com
+
+
+                             ABSTRACT                                            In the trivial case, when bhost = bplugin , the host may do
+                                                                             some processing on each input block and then it invokes the plu-
+When a block-based realtime audio application invokes a signal               gin, passing the entire block. The plugin produces an output
+processing component which uses a different block size, this re-             block of the same size, which the host may then process further,
+quires some buffering of audio data between invocations of said              before returning it to the audio backend. The remainder of this
+signal processing component. This is sometimes called reblock-               paper describes what to do if the two block sizes are different
+ing. Depending on the two block sizes, this buffering may intro-             and how much – if any – delay has to be introduced.
+duce a delay. This paper answers the question of the minimum                     In our example scenarios we will assume that the plugin’s
+such delay required for any given combination of the two block               API does not support in-place processing. This means that the
+sizes.                                                                       plugin will access separate input and output buffers and it will
+                                                                             not reuse a single buffer for both input and output. Further-
+                                                                             more, the examples will assume that the host will provide con-
+                       1. INTRODUCTION                                       tiguous input and output blocks (of size bplugin ) that the plugin
+                                                                             can read from and write to, respectively. However, the mathe-
+This paper is structured as follows: In section 1.1 we state the             matical derivation that follows will have no such restrictions and
+problem to be solved, describe in which context it arises and we             the resulting minimal delay will be the same whether in-place
+introduce some terms as we use them in the rest of the paper.                processing is used or not and regardless how the audio data is
+In section 1.2 we look at some concrete examples in order to                 passed from the host to the plugin and back again.
+support a better understanding of the problem. These examples
+show that the question of the minimum required delay is fairly
+easy to answer for certain combinations of block sizes but can               1.2. Some examples
+become quite complicated in others. The charm of the question                The following examples are meant to illustrate different situa-
+for arbitrary block sizes lies in the fact that it relates to results        tions that can arise depending on certain combinations of bhost
+of elementary number theory. This step of abstraction and the                and bplugin and how to approach them in a software implemen-
+mathematical deduction of our main result are presented in sec-              tation. These situations may turn out to be less trivial than one
+tions 2 and 3. We finally discuss our finding in the context of              might think at first glance. Even worse, from these concrete ex-
+existing works and draw some conclusions in section 5.                       amples it will not be obvious how a generic implementation for
+                                                                             arbitrary combinations of bhost and bplugin may look like and in
+                                                                             particular, which minimum delay any such implementation may
+1.1. Terms and conditions
+                                                                             need to introduce. Impatient readers may want to skip to sec-
+We are considering a realtime audio processing application that              tion 2, where a general solution is presented.
+we will refer to as host. This could be, for example, a digital
+audio workstation, an audio driver, an audio middleware, an in-                  1.2.1. bhost is divisible by bplugin
+teractive audio programming environment or a bespoke sound
+synthesis application. We are assuming that the host operates on             Let bhost = 256 and bplugin = 64. The host can split its input
+audio blocks of a fixed block size called bhost , which may or may           buffer into four parts (of size 64) and invoke the plugin once with
+not be chosen by the end user.                                               each part. The four blocks generated by the plugin can then be
+     What makes this a realtime system is the fact that the un-              concatenated and become a single output block (of size 256) of
+derlying audio backend provides bhost audio samples (for each                the host. This causes no delay.
+input channel) at a time, which the host has to process within                    Parts of the host’s input and output buffer can be directly
+a fixed time interval. More specifically, the host has to provide            used as input and output to the plugin, respectively, without
+bhost audio samples (for each output channel) in time for the au-            needing any intermediate buffers. In the following examples,
+dio backend to send it to the audio hardware. Not meeting this               this will not be possible anymore.
+deadline will lead to a disruption in the produced audio signal,
+which is highly undesired.                                                       1.2.2. bplugin is divisible by bhost
+     The host might delegate some of the signal processing to
+separate modules, which we will call plugins. These might be                 The opposite case is slightly less straightforward, for example
+provided by a third party, but they may also be software modules             when bplugin = 256 and bhost = 64. The host needs 256 input
+that are part of the host. Let the block size of such a plugin               samples to invoke the plugin, but is provided only 64 samples at
+be called bplugin . Other architectures exist, but here we only              a time and has to return 64 output samples before it can obtain
+consider systems where the host’s input and output blocks have               the next input block from the audio backend. To deal with this,
+the same size bhost , the plugin’s input and output blocks have              the host can provide an input buffer and an output buffer for in-
+the same size bplugin and neither of those block sizes change                termediate storage, both of size 256, both initially filled with ze-
+over time.                                                                   ros. It can then start working through the first three host blocks,
+                                                                             each time storing the incoming 64 samples in the input buffer (in
+   ∗ Portions of this work were carried out while the author was em-         the first, second and third part, respectively) and in turn yield-
+ployed at Fraunhofer IIS (Fraunhofer Institute for Integrated Circuits) in   ing 64 output samples from the output buffer (from the second,
+Erlangen, Germany.                                                           third and fourth part, respectively). Note that in the first pass, all
+Proceedings of the 20th Linux Audio Conference (LAC-26), Maynooth, Ireland, June 18–20, 2026
+
+those parts are still filled with zeros. Upon receiving the fourth     wrap-around and therefore guarantee contiguous plugin blocks.
+host block, it writes the 64 input samples to the fourth part of the   Note that extending the capacity like this does not increase the
+input buffer and invokes the plugin with the whole buffer, which       latency any further. The minimal required latency remains at 72
+in turn writes 256 samples into the output buffer. The first 64        samples.
+samples of the output buffer are immediately returned. From the             We could of course also extend the buffer capacity even fur-
+fifth host block on, the process is repeated. Note that this pro-      ther, in a way that it becomes a multiple of both block sizes. This
+cedure introduces a delay of 192 samples (originating from the         would entirely avoid the need for copying partial blocks but in
+three zero-filled parts of the output buffer that have been passed     some combinations of block sizes this would need significantly
+to the audio backend in the very beginning). Other implemen-           more memory.
+tations are possible, especially if the plugin is considered time           There are many combinations of block sizes where the re-
+invariant. In this case, the delay can also be generated by filling    quired delay can be found out much quicker, but another fairly
+the beginning of the input buffer with the corresponding number        complicated example is bhost = 48 and bplugin = 128, the anal-
+of zero values and starting to write the actual input samples after    ysis of which is left as an exercise for the reader.
+them. This way, the input signal is delayed before the plugin is
+invoked. The delay could even be split between the input and
+                                                                           1.2.4. What did we learn?
+output buffers. Either way, this does not change the minimum
+delay, as section 3.5 will show.                                       The setup described in the previous section, consisting of two
+                                                                       ring buffers, can be used to create a generic implementation that
+    1.2.3. Neither of the two block sizes divides the other            works for any combination of block sizes, but we still need a
+                                                                       way to calculate the minimal delay required for each of those
+Because the block sizes do not line up as neatly as in the previ-      combinations.
+ous example, this time we will use a buffer size that generally is          As we have seen, it can be surprisingly laborious to work
+not a multiple of bhost . This means that sometimes there will not     out the minimum required delay on a case-by-case basis. Fur-
+be enough space at the end of the buffer to fit a whole block. In      thermore, the results so far (see table 1) do not show an obvious
+this case, we will copy a partial block to the end and the remain-     pattern which would suggest a way for finding a formula that
+ing part to the beginning of the buffer. Because of this wrap-         works for arbitrary combinations of block sizes. But even if we
+around behavior, such a buffer is often called circular buffer or      were to discover a formula that satisfies all the examples we ever
+ring buffer. We will discuss the exact size requirements of those      tried, we would still not know if that formula will correctly pro-
+ring buffers below.                                                    vide the minimum delay for all possible combinations.
+     In the following, we consider an example where bhost = 54
+and bplugin = 90. In the first block, the host is not able to invoke                       Table 1: Some examples.
+the plugin, because there are not enough input samples. There-
+fore, we need to introduce 54 samples of delay which provide the
+                                                                                           bhost    bplugin    delay
+(zero-filled) output for the first block. In the second host block,
+the plugin can be invoked with all input samples from the first                             128        128        0
+block plus 36 samples from the second block, which generates                                256         64        0
+90 output samples, 54 of which are immediately returned. 18                                  64        256      192
+samples remain in the input buffer and 36 samples remain in the                              54         90       72
+output buffer.                                                                               48        128        ?
+     In the third host block, the plugin again cannot be invoked
+because not enough input samples are available. There are 36
+                                                                           To find a formula for the minimum delay that is valid for all
+leftover output samples from the previous plugin invocation, but
+                                                                       combinations of block sizes, we now switch gears into a higher
+to be able to fill up all 54 host output samples, 18 more samples
+                                                                       level of mathematical abstraction. From now on, we will not
+are needed. Therefore, we have to revise our original choice of a
+                                                                       dwell on any implementation details like whether buffers should
+delay of 54 samples and change it to 72 samples. With this, the
+                                                                       be contiguous or whether to support in-place processing or not.
+third host block has enough output samples to return. We still
+cannot rule out that more delay might be needed at a later point,
+so we have to continue analyzing.                                                  2. MINIMUM REQUIRED DELAY
+     By the fourth host block, we have saved up enough input
+samples to invoke the plugin again and 36 excess samples remain        Since thinking about how to implement a buffering mechanism
+in the input buffer. The host returns 54 samples and 36 remain         (as in above examples) turns out to quickly become complex
+in the output buffer. In the fifth host block, 90 input samples are    and not helpful for finding (and proving) a general formula for
+available to invoke the plugin. The host again returns 54 samples      the minimum required delay for arbitrary block sizes, we take
+and 72 remain in the output buffer. With the sixth host block, the     a bird’s eye view at the situation instead: Figure 1 depicts the
+pattern starts repeating and we finally know that 72 samples of        flow of samples between host and plugin for two combinations
+delay are sufficient and that we initially need to fill the output     of host and plugin block sizes.
+ring buffer with 72 zeros. Again, if the plugin is time invariant,          The upper rows (in both subfigures) show the stream of sam-
+alternative implementations may insert some (or all) of the delay      ples which the host hands over to the plugin, packaged into host
+before invoking the plugin, i.e. into the input ring buffer.           (input) blocks. Right below is the same stream of samples re-
+     Readers who have kept track of the intermediate storage           packaged into plugin blocks. We only show a single plugin
+might have noticed that its usage has fluctuated over time, but        stream, which suggests that the plugin supports in-place process-
+the largest size was reached at 126 samples (by the input ring         ing and writes its output samples into the same stream. If the
+buffer during the fourth host block and by the output ring buffer      plugin would not support in-place processing, the plugin stream
+during the fifth host block). This size is needed to store one host    would simply have to be duplicated. Note: From now on we
+block (in this case 54 samples) plus the necessary delay (in this      ignore implementation details, such as whether and how sam-
+case 72 samples). A size of 126 would be sufficient for both ring      ples are actually copied in a computer’s memory. (The examples
+buffers, were it not for the desire to pass contiguous blocks of       above have shown that e.g. for a plugin block size dividing the
+audio data to the plugin (as many – but not all – existing plu-        host block size no buffering or copying of samples is necessary.)
+gin interfaces require). If we extend the capacities of the ring       The reader is asked to think in abstract streams and imagine suit-
+buffers to a multiple of bplugin (in this case to 180) we can avoid    able copying operations where it might be relevant. The same
+Proceedings of the 20th Linux Audio Conference (LAC-26), Maynooth, Ireland, June 18–20, 2026
+
+ 0      Host input block 0               6   Host input block 1                    12    Host input block 2                   18       Host input block 3           24      Host input block 4               30   Host input block 5
+
+
+ 0        Plugin block 0                             8          Plugin block 1                                   16     Plugin block 2                              24        Plugin block 3                              32         Plugin block 4
+
+
+                             6 samples                                       4 samples                                    2 samples                                                              6 samples
+
+
+ 0     Host output block 0               6   Host output block 1                   12    Host output block 2                  18       Host output block 3          24     Host output block 4               30   Host output block 5
+
+
+
+
+ 0      Host input block 0                           8       Host input block 1                                  16   Host input block 2                            24      Host input block 3                            32 Host input block 4
+
+
+ 0        Plugin block 0                 6     Plugin block 1                      12      Plugin block 2                     18         Plugin block 3             24        Plugin block 4                 30     Plugin block 5
+
+
+     0 samples                                   2 samples                                           4 samples            -2 samples                                     0 samples                                    2 samples
+
+
+ 0     Host output block 0                           8       Host output block 1                                 16   Host output block 2                           24     Host output block 3                            32 Host output block 4
+
+
+
+
+Figure 1: Flow of sample streams from host to plugin and back for two different combinations of block sizes. Arrows are pointing from
+the beginning of each plugin block to the beginning of the last overlapping host block and show the necessary delays for each plugin
+block.
+
+
+stream of samples packaged in plugin blocks also represents the                                                                 even be processed earlier – notice the occasional “negative de-
+output of the plugin. The plugin’s output stream is finally handed                                                              lays” in the lower subfigure of figure 1. This observation does
+back to the host and packaged into the host’s output blocks (de-                                                                not defy our general argument in any way. In general terms,
+picted in the lowest rows in figure 1).
+                                                                                                                                               the minimum delay required for one specific plu-
+     We assume for now that the first block handed to the plugin
+                                                                                                                                               gin block is given by the distance between its start
+starts with the first sample of the stream, aligned with the be-
+                                                                                                                                               sample and the start sample of the last overlapping
+ginning of the first host block. If the processing of the plugin
+                                                                                                                                               host block
+is time invariant in the usual sense (of commuting with shifts of
+in- and output) we might actually let the first plugin block start                                                              or, slightly more precise, host block start sample index minus
+before the first host block and pad the input stream with zeros, as                                                             plugin block start sample index. We stress once again, that this
+briefly mentioned in the examples in the section 1.2. Section 3.5                                                               observation is the central basis for the following steps. We will
+will however show that such a shift of the first (and therefore all)                                                            write it down in mathematical terms first (2.1) and derive a gen-
+plugin block(s) does not improve (i.e. decrease) the minimum                                                                    eral formula for the minimum required delay by several (mostly
+required delay. For the following we assume alignment of the                                                                    rather simple) logical steps.
+first host and plugin blocks.
+     The crucial observation to grasp in this scenario (exempli-                                                                2.1. Abstracting the problem – mathematical description
+fied in figure 1) now is:
+                                                                                                                                With the notation for block sizes introduced in subsection 1.1,
+           Each plugin block can only be processed (and handed
+                                                                                                                                host and plugin blocks with indices m resp. n start with samples
+           back to the host) once all contained input samples
+                                                                                                                                mbhost resp. nbplugin (m, n ∈ N0 ).1 We further denote the min-
+           are received (from the host), which is when the last
+                                                                                                                                imum delay required for processing plugin block n by ∆n and
+           host block overlapping this specific plugin block
+                                                                                                                                by mn the index of its last overlapping host block; the latter then
+           starts.
+                                                                                                                                starts with sample mn bhost . The main observation of the previ-
+While this observation as such looks simple it is worthwhile to                                                                 ous subsection – namely the minimum delay for a specific plugin
+engrave in one’s mind for a moment as it is really the central                                                                  block being the distance (of start samples) to its last overlapping
+starting point for the following deductions which will finally lead                                                             host block – is now expressed by
+to a formula for the minimum required delay. In figure 1 the
+dotted lines represent the relations of plugin blocks and their last                                                                                         ∆n = mn bhost − nbplugin , n ∈ N0 .                                             (1)
+overlapping host blocks. Looking at the example in the upper
+subfigure,                                                                                                                      Since all plugin blocks must be delayed by the same number
+                                                                                                                                of samples in order to form a gapless output stream, the global
+ • plugin block 0, starting at sample 0, can be processed at the
+                                                                                                                                minimum required delay ∆ when repackaging host blocks into
+   earliest when host block 1 starts, at sample 6, which implies
+                                                                                                                                plugin blocks and back is the maximum of all ∆n ,
+   that the plugin’s output sample 0 can be handed to the host
+   at the earliest with input sample 6. This potential handover                                                                                                  ∆ = max{∆n | n ∈ N0 }.                                                      (2)
+   of the plugin’s output sample 0 to host output sample 6 is
+   represented by an arrow in the figure. Plugin block 0 by itself                                                              For curious readers and sake of completeness we finally state an
+   thus requires a delay of at least 6 samples (6 - 0).                                                                         expression for mn using integer (Euclidean) division as
+ • plugin block 1, starting at sample 8, can be processed at the                                                                                                        
+   earliest when host block 2 starts, at sample 12, which implies                                                                                    (n + 1) bplugin − 1
+                                                                                                                                            mn =                           , n ∈ N0 .        (3)
+   that the plugin’s output sample 8 can be handed to the host                                                                                              bhost
+   at the earliest with input sample 12. Plugin block 1 by itself
+                                                                                                                                We will however not make use of this term for deducing a for-
+   thus requires a delay of at least 4 samples (12 - 8).
+                                                                                                                                mula for ∆ in the next section but circumvent its complexity
+ • . . . plugin block 2 by itself requires a delay of at least 2 sam-                                                           with a “trick”.
+   ples (18 - 16).                                                                                                                  A note is in place about equation (2): It is clear that all ∆n
+ • . . . plugin block 3 by itself again requires a delay of at least                                                            must be (strictly) smaller than the plugin block size bplugin , oth-
+   6 samples (30 - 24).                                                                                                         erwise the blocks (host and plugin) in equation (1) would not
+    Above observation holds true no matter which block size,                                                                       1 We have chosen zero-based numbering of samples and blocks be-
+host or plugin, is larger. Side note: For the plugin’s block size                                                               cause the affected mathematical expressions would otherwise be much
+being smaller than the host’s, some of the plugin’s output might                                                                more lengthy.
+Proceedings of the 20th Linux Audio Conference (LAC-26), Maynooth, Ireland, June 18–20, 2026
+
+overlap (as the host block would start after the plugin block),          a linear combination3 of z1 and z2 (with factors c1 and c2 ). The
+which contradicts the definition of mn . In mathematical nota-           ∆n of equation (1) are obviously special cases of linear combi-
+tion:                                                                    nations of bhost and bplugin and our analysis of the set of these
+                    ∆n < bplugin , n ∈ N0 .                 (4)          ∆n (which will finally lead to our main result, a characterisation
+                                                                         of their maximum ∆) is based on the relation of linear combi-
+As a consequence, the maximum ∆ of the set of all ∆n (equa-              nations and the greatest common divisor (GCD) of two integer
+tion (2)) exists in N0 !                                                 numbers. We start with the very simple
+    An attentive reader will notice that equation (4) (together
+with equation (2)) implies ∆ < bplugin , which is equivalent to          Lemma 3.1. Given any z1 , z2 ∈ Z and a common divisor d ∈ Z
+                                                                         (i.e. d dividing both z1 and z2 ), d also divides any linear combi-
+                         ∆ ≤ bplugin − 1.                         (5)    nation of z1 and z2 (or expressed vice versa, any linear combi-
+                                                                         nation of z1 and z2 is a multiple of d).
+In other words, it is already clear that bplugin − 1 is an upper
+bound for the minimum delay we are looking for. The examples             Proof. Since d divides z1 and z2 there exist d1 , d2 ∈ Z such
+in section 1.2 have shown however, that we can in general solve          that z1 = d1 d, z2 = d2 d. Let l = c1 z1 + c2 z2 , c1 , c2 ∈ Z
+our block adaptation problem with a delay of less than bplugin −         be a linear combination of z1 and z2 . Using the associative and
+1. In the hope that this will rather increase than spoil the reader’s    distributive laws we then have
+curiosity, we already reveal that ∆ = bplugin −1, i.e. the required
+delay for a given plugin block size bplugin gets worst exactly if            l = c1 z1 + c2 z2 = c1 d1 d + c2 d2 d = (c1 d1 + c2 d2 )d,
+bhost and bplugin are coprime.
+                                                                         i.e. l is a multiple of d.
+
+       3. SOLVING THE MATHS: THE FORMULA                                 and its special case
+
+                                                                         Corollary 3.2. Any linear combination of z1 , z2 ∈ Z is a multi-
+Equation 2 together with equations 1 and 3 forms an abstract             ple of gcd(z1 , z2 ).
+mathematical description of our question of the minimum delay:
+On their basis we are searching for a possibly simple expression         Proof. Since gcd(z1 , z2 ) is a common (namely the greatest) di-
+for ∆ in terms of bhost and bplugin . This section derives such          visor of z1 and z2 this is a direct consequence of lemma 3.1.
+a (surprisingly simple) expression. Because the text may look
+tedious at a first glance we would like to quickly sketch the main            For the following we denote the GCD of bhost and bplugin by
+steps at this point in order to encourage the reader to hang on          g. Corollary 3.2 tells us that all ∆n (as linear combinations of
+and steer their focus according to their specific (mathematical or       bhost and bplugin ) are multiples of g. We have already noted in
+practical) inclinations:                                                 inequality (4) that all ∆n are (strictly) smaller than bplugin , and
+                                                                         clearly the latter is also a multiple of g. (bplugin being a multiple
+ • Subsection 3.1 introduces the central notion of examining the         of g is just another way of saying that g is a divider of bplugin .
+   connection of linear combinations and the greatest common             g is the greatest common divder after all.) It is then easy to see
+   divisor of two integer numbers and presents a better upper            that
+   bound than inequality (4) for the minimum delay by means                                   ∆n ≤ bplugin − g ∀n ∈ N0                     (6)
+   of very simple arithmetic deductions. The remaining sub-
+   sections 3.2 to 3.4 deal with the substantially more difficult        (bplugin − g is the multiple of g which precedes bplugin ) and
+   task of proving that the upper bound derived in subsection 3.1        therefore
+   cannot be improved.                                                                        ∆ ≤ bplugin − g.4                      (7)
+ • In subsection 3.2 we define an intermediate set S comprising              We have thus found a better upper bound than inequality (4)
+   but exceeding the set of all ∆n , with a short explanation why        for ∆ using only a few steps of basic integer arithmetic (such as
+   we look at this set in a first step.                                  additions, multiplications, associative and distributive laws and
+                                                                         comparisons). The opposite direction, ie. showing that the min-
+ • Subsection 3.3 deduces a simple characterisation of S. It             imum delay can not be improved beyond this upper bound, is
+   starts by stating a result of elementary number theory, a con-        more involved and builds on elementary number theory.
+   sequence of the Euclidean algorithm, sometimes denoted as
+   Bézout’s lemma. A characterisation of S is then derived by
+                                                                         3.2. Simplifying the maths by extending the job
+   lemma 3.5 resp. corollary 3.6. From a pure mathematical
+   standpoint lemma 3.5 is the only non-trivial contribution of          For a given plugin block index n, the start sample of the last
+   this paper and can be seen as a small generalisation of Bé-           overlapping host block is given by mn according to equation (3).
+   zout’s lemma for two positive integers. While this generali-          At this point however, we use a little “trick” first which will later
+   sation is a small step for a number theorist, in our context it       make it much easier to argue about the set of all ∆n : Instead
+   is a joyful leap for the DSP practitioner (such as the authors,       of considering only the relevant distances ∆n = mn bhost −
+   who are not number theorists).                                        nbplugin , we first look at all difference terms mbhost − nbplugin .
+                                                                         (Notice the tiny but crucial difference of mn vs. the independent
+ • Subsection 3.4 finally closes the cycle to our initial ques-
+                                                                         index m.) For the following we denote this set of differences of
+   tion of the minimum delay and tackles equation 2 using the
+                                                                         non-negative multiples (of bhost and bplugin ) by
+   knowledge about S (with its subset of all ∆n ) which we will
+   have acquired by then.                                                Definition S := {mbhost − nbplugin | n, m ∈ N0 }.
+                                                                             3 The term “linear combination” is most often heard in the context
+3.1. The easy part: A better upper bound for ∆                           of a vector space in which case the factors are elements of the underly-
+                                                                         ing field. Instead we are always staying in the ring of integer numbers,
+Let us formally introduce a term which will be central for the           where some authors also speak of “integer linear combinations (ILC)”.
+remainder of this section: For two integer numbers z1 , z2 ∈ Z           We however trust that the reader can easily follow all arguments without
+we call any expression of the form2 c1 z1 + c2 z2 with c1 , c2 ∈ Z       this more lengthy wording or additional abbreviation.
+                                                                             4 An attentive reader might notice that b
+                                                                                                                       plugin and g may coincide, in
+    2 Where possible without too much linguistic overhead we will dis-   which case we have an upper bound of 0. This is in fact the case exactly
+tinguish between such expressions and their value. At other places we    if bplugin divides bhost and we have seen in example 1.2.1 that indeed
+will be a bit sloppy in this respect however.                            no delay is necessary in this case.
+Proceedings of the 20th Linux Audio Conference (LAC-26), Maynooth, Ireland, June 18–20, 2026
+
+In a later step we limit our focus again to only those difference               lemma 3.3 there exist chost , cplugin ∈ Z with g = chost bhost +
+terms which are actually relevant in our context. While this may                cplugin bplugin . Since bhost , bplugin > 0 and 0 < g < bhost ,
+at first appear to be a huge unnecessary deviation it really makes              bplugin , we must have either chost > 0, cplugin < 0 or vice
+our reasoning much more simple. This approach might be some-                    versa, chost < 0, cplugin > 0. In the first case we have g ∈ S,
+what compared to solving an equation in the field of complex                    in the second −g ∈ S. Let now c be the quotient of bhost and
+numbers even if it is clear from the start that only real valued                g, such that bhost = cg. Since g divides bhost and bhost > g we
+solutions are of final interest.                                                have c ∈ N, c > 1. We now have
+     To avoid misunderstandings at this point: Of course the max-
+imum of all ∆n (defintion (2)) is not simply the maximum of S                        g = cg + (1 − c)g = bhost + (1 − c)g
+(which is easily seen to have no upper bound)! As written above                        = bhost + (1 − c)(chost bhost + cplugin bplugin )
+we look at the much larger set of all these differences because it                     = bhost + (1 − c)chost bhost + (1 − c)cplugin bplugin
+is of more “generous” or “comfortable” nature than the subset of
+the ∆n .                                                                               = (1 + (1 − c)chost )bhost + (1 − c)cplugin bplugin
+                                                                                       = c̃host bhost + c̃plugin bplugin ,
+3.3. Characterisation of differences of non-negative multi-
+                                                                                with c̃host := 1+(1−c)chost and c̃plugin := (1−c)cplugin . c >
+ples
+                                                                                1 implies that 1 − c < 0 and therefore cplugin and c̃plugin have
+We start our small journey into elementary number theory by                     opposite signs and c̃host has opposite sign to chost or c̃host = 0.
+citing Bézout’s lemma (also called Bézout’s identity):                          As a consequence, if we had g ∈ S above, we see that also
+                                                                                −g ∈ S and vice versa.
+Lemma 3.3. For any z1 , z2 ∈ Z there exist c1 , c2 ∈ Z such
+that gcd(z1 , z2 ) = c1 z1 + c2 z2 . In plain words: The GCD of                 We can now state a simple characterisation of S:
+two integer numbers can be expressed as a linear combination
+thereof.5                                                                       Corollary 3.6. S = {zg, z ∈ Z}. In plain words: S consists
+                                                                                exactly of all multiples of g.
+Proof. For a proof we refer to external sources, e.g. [1]. We only
+state that the (extended) Euclidean algorithm forms a construc-                 Proof. Any multiple zg, z ∈ Z of g is a non-negative multiple
+tive proof of the lemma6 – in the sense of a recipe to calculate                of either g or −g (depending on the sign of z). After lemma 3.5 it
+concrete values of the factors in the linear combination (and thus              is then easy to see that zg ∈ S. On the other hand, corollary 3.2
+the value of the GCD itself), while there is also a shorter, non-               tells us that any element of S (as a linear combination of bhost
+constructive proof. Details should be covered in any introduc-                  and bplugin ) is a multiple of g.
+tory book on number theory but interested readers will also find
+many free resources on the Euclidean algorithm and Bézout’s                         As a quick takeaway note: Corollary 3.4 states that the set
+identity on the internet.                                                       of multiples of the GCD coincides with the set of values of all
+                                                                                linear combinations. Corollary 3.6 tells us that for two positive
+Sometimes Bézout’s lemma is also stated in the form of the fol-                 integers the very same set is already spanned by linear combina-
+lowing straightforward                                                          tions of a restricted type, namely all differences of non-negative
+                                                                                multiples of the ordered pair of integers.7 Corollary 3.6 thus
+Corollary 3.4. For any z1 , z2 ∈ Z we have                                      forms a small extension of Bézout’s lemma for the case of two
+                                                                                positive integers.
+     {c1 z1 + c2 z2 | c1 , c2 ∈ Z} = {c gcd(z1 , z2 ) | c ∈ Z}
+
+In plain words: The set of all values of linear combinations of                 3.4. Deriving the minimum required delay
+z1 and z2 coincides with the set of all multiples of their GCD.
+                                                                                We are now bringing our attention back to the set {∆n , n ∈
+Proof. Lemma 3.3 tells us that gcd(z1 , z2 ) and with it (by ap-                N0 } of which we need to know the maximum (equation (2)).
+plication of the associative and distributive laws) all its multiples           Corollary 3.6 tells us that
+are linear combinations of z1 and z2 . On the other hand, corol-                        the set of all possible differences between start sam-
+lary 3.2 tells us that all linear combinations of z1 and z2 are                         ples of host and plugin blocks consists exactly of
+multiples of gcd(z1 , z2 ).                                                             all multiples of the greatest common divisor.
+    As described above however, we are not interested in the set                We are ultimately not interested in all pairs of host and plugin
+of all linear combinations of bhost and bplugin but in its subset S             blocks though, but only those consisting of a plugin block and
+of differences of non-negative multiples (and ultimately in yet a               its last overlapping host block – in our notation above the combi-
+subset thereof). The main step to this end is                                   nations of indices n and mn (equation (1)). Determining the in-
+                                                                                dex mn of the last overlapping host block is rather inconvenient
+Lemma 3.5. g, −g ∈ S. In words: S contains the greatest                         (equation (3)), which is exactly why we have looked at the set S
+common divisor of bhost and bplugin and its negative.                           first and take the opposite approach on ∆n now by asking: How
+                                                                                do we express the condition on the last overlapping host block in
+Proof. If one block size divides the other the claim is fairly easy
+                                                                                terms of the difference of start samples, δ := mbhost −nbplugin ?
+to show: We then have either g = bhost and −g = −bhost =
+                                                                                The crucial observation for answering this question is:
+(bplugin /bhost − 1)bhost − bplugin or −g = −bplugin and g =
+bplugin = bhost − (bhost /bplugin − 1)bplugin .                                         Host block m is the last host block overlapping
+     We thus now assume that neither of the block sizes is a mul-                       plugin block n exactly if it contains the plugin block’s
+tiple of the other, which implies g < bhost , bplugin . According to                    last sample.
+    5 It is easy to see that factors c , c are not unique but infinitely many   The latter has index (n + 1)bplugin − 1, so relevant for us are
+                                      1 2
+such linear combinations exist. We neither show this nor is it relevant         exactly those pairs of host and plugin blocks m and n which
+for our argumentation.                                                          satisfy
+    6 One may even question whether the lemma should be named after
+an 18th century mathematician when it is a direct consequence of an                      mbhost ≤ (n + 1)bplugin − 1 < (m + 1)bhost .
+algorithm known since around 300 BC [2]. As yet another ironic twist,
+                                                                                    7 The order of b
+the Euclidean algorithm was probably known to mathematicians already                                 host and bplugin in the definition of our set S in sec-
+before Euclid wrote it down.                                                    tion 3.2 is crucial! Otherwise lemma 3.5 would be much easier to prove.
+Proceedings of the 20th Linux Audio Conference (LAC-26), Maynooth, Ireland, June 18–20, 2026
+
+This necessary and sufficient(!) condition can be transformed in         4. NOTES ON AN ITERATIVE BLOCK ADAPTATION
+the following way:                                                                       ALGORITHM
+
+mbhost ≤ (n + 1)bplugin − 1 < (m + 1)bhost                              Sections 2 and 3 look at the question of minimum required delay
+ ⇐⇒ mbhost < (n + 1)bplugin ≤ (m + 1)bhost               | − mbhost     from a bird’s eye perspective but don’t give any hints on how to
+ ⇐⇒ 0 < nbplugin − mbhost + bplugin ≤ bhost              | subs. −δ     realise block adaptation in practice. While we’re not discussing
+                                                                        such a concrete realisation in any detail, the following coarse
+ ⇐⇒ 0 < bplugin − δ ≤ bhost                              | − bplugin
+                                                                        pseudo algorithm may be helpful for applying the knowledge of
+ ⇐⇒ −bplugin < −δ ≤ bhost − bplugin                      | · −1         equation 9 in a practical implementation.
+ ⇐⇒ bplugin > δ ≥ bplugin − bhost                                            As discussed in section 1.2 and [3] the callback method of
+                                                                        our host may in general not always be able to immediately pass
+In other words, the pairs of host and plugin blocks m and n             all samples received by the backend to the plugin for process-
+which are relevant for us are the ones satisfying                       ing, and thus generally needs to store received samples in some
+                                                                        sort of “input buffer” in order to process them in later callbacks.
+                 bplugin − bhost ≤ δ < bplugin .                 (8)
+                                                                        Similarly not all samples received from the plugin within one
+Following the same arguments as at the end of section 3.1, for δ        host callback can always be passed to the backend immediately,
+as a linear combination of bhost and bplugin and thus multiple of       so some sort of “output buffer” needs to be maintained as well. It
+g, we have δ < bplugin ⇐⇒ δ ≤ bplugin − g, and condition (8)            is plausible that these in- and output buffers can be seen as FIFO
+leads us to the characterisation of relevant delays:                    (first in first out) queues because samples must maintain their or-
+                                                                        der when being passed between backend, host, plugin and back.
+Lemma 3.7. {∆n | n ∈ N0 } =                                             The host callback may now consist of the following principle
+     {bplugin − bhost , bplugin − bhost + g, . . . , bplugin − g}.      steps:
+
+In particular this lemma tells us that the upper bound bplugin − g         1. Initially the input queue contains p and the output queue
+for all ∆n derived in section 3.1 is actually reached by at least             q samples.
+one ∆n ! Expressed differently: At least one plugin block exists           2. The bhost samples received from the backend are fed into
+which overlaps at its end with a host block by exactly g samples.             the input queue which will then contain p+bhost samples.
+Combined with equation (2) we thus finally get the equation for
+the minimum required delay we were looking for:                            3. If and as long as the input queue contains at least bplugin
+                                                                              samples, bplugin are taken from the input queue, processed
+Corollary 3.8. ∆(= max{∆n | n ∈ N0 }) = bplugin − g.                          by the plugin and the resulting bplugin samples are fed
+                                                                              into the output queue. After these potential repeated plu-
+One remark: If the plugin’s block size is smaller than the host’s,
+                                                                              gin calls the numbers of samples in the in- and output
+bplugin < bhost , the lower bound for δ, bplugin − bhost , is nega-
+                                                                              queues are p + bhost − x and q + x, with x being a non-
+tive. This expresses the fact that for some plugin blocks the last
+                                                                              negative (but possible zero) multiple of bplugin .
+overlapping host block may already start before the plugin block
+(in the case of bplugin < bhost ). This is irrelevant for the maxi-        4. bhost samples are taken from the output queue and sent to
+mum of the ∆n however, which is our main interest and which                   the backend. The number of samples in the in- and output
+deserves to be stated again:                                                  queues are now p + bhost − x and q + x − bhost ,
+Main result. The minimum required delay ∆ for block sizes               It is easy to see (and picture mentally with a queue metaphor)
+bhost and bplugin is                                                    that the sum of the sample counts in both, in- and output, queues,
+                                                                        before and after the invocation of the host callback is constant:
+               ∆ = bplugin − gcd(bhost , bplugin ).              (9)    p + bhost − x + q + x − bhost = p + q. After step 2 and before
+                                                                        step 4 however the total number of samples in both queues is
+3.5. Shifts of plugin blocks                                            bhost larger. Of course the number of samples in a single queue
+                                                                        (in- or output) does change with invocations of the host callback
+The discussion in the last subsections was based on the assump-
+                                                                        and both queues sometimes grow and sometimes shrink.
+tion that the first plugin block starts at sample 0. We mentioned
+                                                                             We now start the recursive process of repeated host callbacks
+before that for plugins with time invariant behaviour the first plu-
+                                                                        with an empty input queue (p = 0) and p = ∆ (as in equation 9)
+gin block might also start earlier (by padding the input stream
+                                                                        samples (typically of some zero or “default” value) in the out-
+with zeros). Without real formal strictness we want to show that
+                                                                        put queue. As just seen we then have p + q = ∆ between host
+such a left shift of plugin blocks will not improve the required
+                                                                        callbacks and a total of ∆ + bhost samples in both queues after
+overall delay. The general way to see this is as follows:
+                                                                        step 2 and before step 4. We can then make use of some mathe-
+ • Without shift, the possible distances of plugin and last over-       matical tools we have gathered in section 3 in order to check the
+   lapping host blocks (lemma 3.7) are {∆n | n ∈ N0 } =                 stability of the (pseudo) algorithm: According to steps 2 and 3
+        {bplugin − bhost , bplugin − bhost + g, . . . , bplugin − g}.   above, p changes by bhost − x with each callback, with x being
+ • If we shift the plugin blocks to the left by d < g samples, the      a multiple of bplugin . As a consequence p can easily be shown
+   indices of last overlapping host blocks, mn for all n, don’t         to always be a linear combination of bhost and bplugin . (A for-
+   change, and the ∆n grow by d, so the same holds true for             mal proof might be by induction but we do not write this out
+   their maximum, ∆. At the same time the plugin blocks start           here but leave it as an easy exercise.) Corollary 3.2 thus tells
+   d samples earlier, thus the overall delay remains unchanged.         us that p is always a multiple of gcd(bhost , bplugin ). We also
+                                                                        know that after step 3 above, p is (strictly) smaller than bplugin
+ • If we shift all plugin blocks g samples to the left, the indices     (by the definition of step 3), p < bplugin . As elaborated in sec-
+   of the overlapping host blocks mn do change for some n               tion 3.4, ∆ = bplugin − gcd(bhost , bplugin ) is the largest multi-
+   (namely the ones with ∆n = bplugin − g). The set of all              ple of gcd(bhost , bplugin ) which is smaller than bplugin . We thus
+   ∆n , {∆n | n ∈ N0 }, however, is the same as without shift           have p ≤ ∆. We also know that just before step 4 we must have
+   (although the individual correspondences n → ∆n change –             p+q = ∆+bhost . With the equivalence p+q = ∆+bhost ⇐⇒
+   the ∆n are “swapped”).                                               q = ∆ + bhost − p we thus have q ≥ bhost . In other words: Just
+Summing up, shifting plugin blocks to the left does not change          before step 4 we always have at least bhost samples in our output
+the minimum required delay.                                             queue and are thus safe from “buffer underruns”! The sketched
+Proceedings of the 20th Linux Audio Conference (LAC-26), Maynooth, Ireland, June 18–20, 2026
+
+algorithm will always “work out”, in every host callback, “for-              int lcm = (M * N) / GCD(M, N);
+ever”.                                                                       for (int i = M; i < lcm; i += M) {
+     Closing the cycle to section 3, the last paragraph can be seen              result = MAX(result, i % N);
+as an informal constructive proof that the minimum required de-              }
+lay does not exceed bplugin −gcd(bhost , bplugin ), parallel to sub-         return result;
+section 3.1. In fact, the only mathematical tool used here is          }
+corollary 3.2 from this subsection. Proofing the opposite, ie.
+the impossibility to perform block adaptation with a delay of          bhost is passed as the argument M and bplugin is passed as N,
+less than ∆, requires a more abstract view, because starting off       the variable name lcm means least common multiple, GCD is
+with a specific algorithm cannot rule out the possible existence       a function that calculates the greatest common divisor and MAX
+of other, smarter algorithms which might get by with a smaller         returns the larger of the two given arguments. It is interesting to
+delay. This is what subsections 3.2 to 3.4 do.                         analyze it on the background of section 2: The loop is over all
+                                                                       positive multiples of M (= bhost ) up to (but not including) lcm.
+          5. DISCUSSION AND CONCLUSIONS                                In the context of our arguments in section 2 these are the start
+                                                                       samples of host blocks 1 to lcm/M. Purpose of the loop is to find
+We have proven a simple formula for the required delay for any         the maximum of all modulo values (i % N), which are exactly
+given combination of host and plugin block sizes. It delivers          the differences of the host block start samples (here i) and their
+a compact explanation of the different delay values which may          preceding plugin block start samples. As a result the function
+seem somewhat enigmatic when found by ad-hoc testing. As               calculates experimentally (“by brute force”) what we did above
+one consequence of formula (9), for a given plugin block size          in more abstract mathematical terms to deduce equation (9). Our
+the required delay is largest if the GCD of the block sizes is 1,      paper demonstrates that the function could be greatly simplified:
+i.e. block sizes are coprime.
+                                                                       int CalculateFrameShift(int M, int N) {
+     As the other extreme, if one block size divides the other, the
+                                                                           return N - GCD(M, N);
+GCD is the smaller of the two. In the most common case, when
+                                                                       }
+both sizes are powers of two, this is always true. Formula (9)
+then simplifies to
+                                                                            This paper has dealt with the situation of fixed bhost and
+                                                                       bplugin , chosen at initialisation time. However, there are also use
+                       (
+                        bplugin − bhost for bhost < bplugin ,
+      ∆powers of two =                                                 cases where bhost and/or bplugin may change between callbacks
+                        0                otherwise.                    and only maximum sizes for both are known. If the plugin allows
+                                                                       flexible block sizes, the host can simply invoke it with the maxi-
+This situation is described in [4]:
+                                                                       mum block size as many times as possible and then once for the
+            “There is an inherent delay introduced by us-              remaining samples. No buffering or delay needs to be introduced
+       ing block~ to increase the block size (but none if              in this case. The situation of flexible bhost and fixed bplugin ,
+       it is used [. . . ] to reduce block size relative to the        however, is not as straightforward as we have to expect that for
+       parent window.) The delay can be measured from                  some host blocks we may not be able to package all incoming
+       the inlet to the outlet of the sub-patch, and is equal          samples into suitable plugin blocks. We therefore have to re-
+       to the difference of the two block sizes. In this               sort to buffering, i.e. introduce a delay, again. Unfortunately for
+       example the buffering delay is 512 − 64 = 448                   flexible bhost most of the arguments in sections 2.1 and follow-
+       samples.”                                                       ing cannot be applied. The central observation at the beginning
+This paragraph talks about Pure Data (Pd),8 which is a visual          of section 2 however, namely the required delay for each single
+programming language for multimedia. As it turns out, Pd only          plugin block being given by the distance to its last overlapping
+supports block sizes that are powers of two, which makes the           host block, is still valid. The overall required delay is again the
+statement consistent with our findings.                                maximum of all these individual required delays. Since individ-
+     While the problem of block size adaptation has for sure been      ual host blocks can now take any size (up to a maximum), any
+tackled and solved multiple times over the past decades within         possible constellation of plugin and last overlapping host block
+the implementations of several realtime applications, the only         may occur, including the worst case of an overlap of exactly one
+paper where we found it discussed in any depth is [3]. The             sample. The required delay for any such most unlucky plugin
+author’s analysis of the situation is quite similar to section 2       block is bplugin − 1, and this is now the overall required delay.
+but looking from the direction of host blocks: While figure 1               As a final note, we want to remark that we see the main
+focusses on the plugin blocks and which delay is required by           value of the formula in equation (9) not so much in saving over-
+each of these in its specific placement relative to the host blocks,   head of implementation and computation (as exemplified by the
+the reasoning in [3] cycles through host blocks and checks how         last reference to the PortAudio implementation; such overhead
+many plugin blocks are available to be passed. Not too surpris-        should be unproblematic in most practical cases). Rather we
+ingly the resulting mathematical question is equivalent to the one     see it on one hand as an important tool to help with concrete
+raised by equation (2). Whereas we answer this question theo-          implementation of block adaptation, as it gives mathematically
+retically (with formula 9), using Bézout’s lemma as the main           proven confidence about necessary buffer sizes for storing and
+tool, [3] presents an iterative algorithm to answer it by cycling      copying audio data before and after plugin invocations. On the
+through a number of blocks. The author thereby exploits the            other hand, this compact formula can be very useful when fac-
+fact that the pattern of host and plugin blocks must repeat after      ing questions of suitable choices of block sizes under aspects of
+LCM(bhost , bplugin ) samples (LCM denoting the least common           balancing realtime performance and latencies.
+multiple). The following C code, which is utilised in the Por-
+tAudio library9 is probably the most compact representation of
+the procedure in [3], (shown here slightly simplified):                                 6. ACKNOWLEDGMENTS
+int CalculateFrameShift(int M, int N) {
+                                                                       Thanks to Roland Lehnertz for grumpy and demotivating but
+    int result = 0;
+                                                                       annoyingly helpful comments on the presented work. Thanks
+   8 http://puredata.info/                                             to Sascha Disch for helpful feedback on a draft of this paper.
+  9 https://github.com/PortAudio/portaudio/blob/                       Thanks to aikiriao for interesting discussions about the topic of
+v19.7.0/src/common/pa_process.c#L73-L87                                the paper. Thanks to Stephan Eckes for making us aware of [3].
+Proceedings of the 20th Linux Audio Conference (LAC-26), Maynooth, Ireland, June 18–20, 2026
+
+                    7. REFERENCES
+
+[1] Gareth A. Jones and J. Mary Jones, Elementary Number
+    Theory, Springer-Verlag, 1998.
+[2] Andrew Granville, “It is not “Bézout’s identity”,” arXiv
+    [math.HO], 2024, DOI: 10.48550/arXiv.2406.15642.
+[3] Stéphane Letz, “Callback adaptation techniques,” Techni-
+    cal report, GRAME, 2001, https://hal.science/
+    hal-02158912v1.
+[4] Miller Puckette, The Theory and Technique of Electronic
+    Music, World Scientific Publishing Co. Pte. Ltd., 2007.
+

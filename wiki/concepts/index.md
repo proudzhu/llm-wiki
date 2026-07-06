@@ -251,4 +251,10 @@
 | [[concepts/reinforcement-learning-for-control\|Reinforcement Learning for Control]] | Applies RL paradigm to dynamic system control, enabling adaptive model-free strategies for nonlinear and time-varying systems | 2026-06-28 |
 | [[concepts/safe-reinforcement-learning\|Safe Reinforcement Learning]] | Extends RL with hard constraints, risk metrics, and formal safety guarantees for safety-critical engineering applications | 2026-06-28 |
 | [[concepts/denoiser-network\|Denoiser Network (DEMUCS)]] | Real-time waveform-domain speech enhancement network from DEMUCS; pretrained baseline fine-tuned for AHS by mixing howling samples with noise-reduction data | 2026-07-03 |
+| [[concepts/block-size-adaptation\|Block Size Adaptation (Reblocking)]] | Buffering between host/plugin block sizes in realtime audio; minimum delay Δ = b_plugin − gcd(b_host, b_plugin) | 2026-07-07 |
+| [[concepts/ring-buffer\|Ring Buffer (Circular Buffer)]] | Fixed-size FIFO data structure using contiguous memory with wrap-around; standard for realtime audio buffering | 2026-07-07 |
+| [[concepts/greatest-common-divisor\|Greatest Common Divisor (GCD)]] | Largest integer dividing two inputs; Euclidean algorithm computes it in O(log n); key to audio block delay formula | 2026-07-07 |
+| [[concepts/bezouts-identity\|Bézout's Identity]] | Number theory result: gcd(a,b) = c₁a + c₂b for integers c₁,c₂; foundation for proving tightness of block delay bound | 2026-07-07 |
+| [[concepts/audio-latency\|Audio Latency]] | Time delay between input and output in audio systems; sources include block size, reblocking, AD/DA, resampling | 2026-07-07 |
+| [[concepts/fifo-queue\|FIFO Queue (First-In-First-Out)]] | Order-preserving queue data structure; implemented as ring buffers for audio stream buffering | 2026-07-07 |
 

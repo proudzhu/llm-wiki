@@ -2679,3 +2679,31 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/entities/index.md` - added 1 entity row
   - `wiki/concepts/index.md` - added 1 concept row
 - **Key insights**: (1) Acoustic howling suppression and speech enhancement can be jointly addressed within a single pretrained network via fine-tuning - howling data acts as a complementary signal alongside noise-reduction data rather than the sole supervision signal (unlike DeepMFC). (2) The howling/noise mixing ratio is the key trade-off knob: ratios up to 60% preserve noise-reduction performance (<1% PESQ drop, <2% SDR drop) while substantially improving AHS robustness; excessive ratios (75-25) bias the model toward narrowband feedback suppression at the expense of broadband speech reconstruction. (3) The proposed approach achieves the most stable PESQ across gain levels among all evaluated AHS methods (DeepMFC, DeepAHS, HybridAHS, Neural-KG, NKal-AHS, Hybrid-NN), with only ~0.05 PESQ drop from G=1.5 to G=3 versus 0.5-0.6 for HybridAHS/NKal-AHS. (4) Dedicated feedback-cancellation methods (Hybrid-NN) still achieve higher SDR, suggesting residual distortion reduction as a future improvement direction. (5) The fine-tuning strategy requires no architectural modification, no recursive/teacher-forced training, and introduces no additional inference latency - making it a practical drop-in for real-time audio systems.
+
+---
+
+## [2026-07-07] ingest | Rath & Geier 2026: Minimum Required Delay for Realtime Block Size Adaptation in Digital Audio Signal Processing
+
+- **Source**: `raw/papers/rath-2026-minimum-delay-block-size/full-text.txt` (Zotero: 9W3D99QX)
+- **Authors**: Matthias Rath, Matthias Geier
+- **Published**: Linux Audio Conference 2026 (LAC 2026), Berlin
+- **URL**: https://linuxaudioconference.org/2026/papers/mrath.pdf
+- **Summary**: Derives a closed-form formula for the minimum delay Δ = b_plugin − gcd(b_host, b_plugin) required when a host and plugin operate with different block sizes b_host and b_plugin in realtime audio processing. The bound replaces the PortAudio brute-force algorithm which iterates up to LCM(b_host, b_plugin) combinations with O(1) computation via Euclidean GCD. Tightness is proven using Bézout's identity from elementary number theory (gcd(a,b) can be expressed as an integer linear combination of a and b).
+- **Extraction**: pdftotext fallback after MinerU produced incomplete 117-byte output (67KB full-text.txt extracted successfully).
+- **Pages created**:
+  - `raw/papers/rath-2026-minimum-delay-block-size/full-text.txt` - extracted text from Zotero PDF via pdftotext
+  - `wiki/sources/rath-2026-minimum-delay-block-size.md` - source summary page with full derivation
+  - `wiki/entities/matthias-rath.md` - first author (Institute for Advanced Procrastination, Berlin)
+  - `wiki/entities/matthias-geier.md` - co-author (ai-coustics / Fraunhofer IIS)
+  - `wiki/concepts/block-size-adaptation.md` - reblocking problem and minimum delay formula
+  - `wiki/concepts/ring-buffer.md` - circular FIFO data structure for audio buffering
+  - `wiki/concepts/greatest-common-divisor.md` - GCD and Euclidean algorithm
+  - `wiki/concepts/bezouts-identity.md` - number theory foundation for tightness proof
+  - `wiki/concepts/audio-latency.md` - latency sources in audio systems
+  - `wiki/concepts/fifo-queue.md` - first-in-first-out queue abstract data type
+- **Pages updated**:
+  - `wiki/index.md` - added 2 entities, 6 concepts, 1 source to respective tables
+  - `wiki/sources/index.md` - added source entry
+  - `wiki/entities/index.md` - added 2 entity entries
+  - `wiki/concepts/index.md` - added 6 concept entries
+- **Key insights**: (1) For block-based realtime audio processing where the host delivers b_host samples per callback and the plugin processes b_plugin samples per callback, the minimum FIFO buffering delay is exactly Δ = b_plugin − gcd(b_host, b_plugin) samples — not b_host + b_plugin, not max(b_host, b_plugin), and not dependent on LCM. (2) The bound is tight: for any two coprime block sizes (gcd = 1), the minimum delay is b_plugin − 1 samples, meaning one nearly-full plugin block must be buffered. For integer multiples (gcd = b_plugin when b_plugin divides b_host), the minimum delay is 0 — no extra reblocking delay needed, the host block contains an integer number of plugin blocks. (3) The elegant proof uses a pigeonhole argument combined with Bézout's identity: congruence classes modulo g repeat every GCD positions, and a linear combination achieving the GCD guarantees that the buffer occupancy pattern visits the same congruence class within one LCM cycle, proving the upper bound. (4) The PortAudio library previously computed this delay via brute-force simulation up to LCM(b_host, b_plugin) steps (which can be as large as 44,100 × 48,000 / 300 = ~7 million steps for common audio rates); the closed-form GCD computation is O(log min(b_host, b_plugin)) and exact. (5) The result generalizes beyond audio: any block-based streaming system where a producer pushes n samples and a consumer pulls m samples per block must delay at least max(n,m) − gcd(n,m) samples to avoid underruns.

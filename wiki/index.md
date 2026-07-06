@@ -292,6 +292,8 @@
 | [[entities/hongtao-xue\|Hongtao Xue]] | Jiangsu University — supervisor, co-author of AI-AVNC review; in-wheel motor fault diagnosis | 2026-06-28 |
 | [[entities/huiyu-yue\|Huiyu Yue]] | Jiangsu University — corresponding author of AI-AVNC review; mobility equipment and AI | 2026-06-28 |
 | [[entities/avichay-ashur\|Avichay Ashur]] | Technion — acoustic howling suppression by fine-tuning deep speech enhancement networks | 2026-07-03 |
+| [[entities/matthias-rath\|Matthias Rath]] | Institute for Advanced Procrastination, Berlin — minimum delay formula for realtime block size adaptation in audio DSP (LAC 2026) | 2026-07-07 |
+| [[entities/matthias-geier\|Matthias Geier]] | ai-coustics / Fraunhofer IIS — co-author of minimum delay formula for realtime block size adaptation (LAC 2026) | 2026-07-07 |
 
 ---
 
@@ -545,6 +547,12 @@
 | [[concepts/reinforcement-learning-for-control\|Reinforcement Learning for Control]] | Applies RL paradigm to dynamic system control, enabling adaptive model-free strategies for nonlinear and time-varying systems | 2026-06-28 |
 | [[concepts/safe-reinforcement-learning\|Safe Reinforcement Learning]] | Extends RL with hard constraints, risk metrics, and formal safety guarantees for safety-critical engineering applications | 2026-06-28 |
 | [[concepts/denoiser-network\|Denoiser Network (DEMUCS)]] | Real-time waveform-domain speech enhancement network from DEMUCS; pretrained baseline fine-tuned for AHS by mixing howling samples with noise-reduction data | 2026-07-03 |
+| [[concepts/block-size-adaptation\|Block Size Adaptation (Reblocking)]] | Buffering between host/plugin block sizes in realtime audio; minimum delay Δ = b_plugin − gcd(b_host, b_plugin) | 2026-07-07 |
+| [[concepts/ring-buffer\|Ring Buffer (Circular Buffer)]] | Fixed-size FIFO data structure using contiguous memory with wrap-around; standard for realtime audio buffering | 2026-07-07 |
+| [[concepts/greatest-common-divisor\|Greatest Common Divisor (GCD)]] | Largest integer dividing two inputs; Euclidean algorithm computes it in O(log n); key to audio block delay formula | 2026-07-07 |
+| [[concepts/bezouts-identity\|Bézout's Identity]] | Number theory result: gcd(a,b) = c₁a + c₂b for integers c₁,c₂; foundation for proving tightness of block delay bound | 2026-07-07 |
+| [[concepts/audio-latency\|Audio Latency]] | Time delay between input and output in audio systems; sources include block size, reblocking, AD/DA, resampling | 2026-07-07 |
+| [[concepts/fifo-queue\|FIFO Queue (First-In-First-Out)]] | Order-preserving queue data structure; implemented as ring buffers for audio stream buffering | 2026-07-07 |
 
 ---
 
@@ -662,6 +670,7 @@
 | [[sources/lorenz-2005-robust-minimum-variance-beamforming\|Lorenz & Boyd 2005: Robust Minimum Variance Beamforming]] | RMVB: ellipsoidal array-manifold uncertainty → SOCP via Cauchy–Schwarz; Lagrange-multiplier solver ~12× regularized beamformer; novel Hadamard-product-of-ellipsoids calculus | 2005 |
 | [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn\|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]] | PINN interpolates soundfield from outside-ROI monitoring microphones using wave equation PDE loss; 8 dB better interpolation than SH; −13 dB more NR than multiple-point ANC | 2026-06-25 |
 | [[sources/ashur-2026-acoustic-howling-suppression-fine-tuning\|Ashur & Cohen 2026: AHS by Fine-Tuning Deep Speech Enhancement Networks]] | Fine-tunes pretrained DEMUCS-based Denoiser with offline-generated howling samples; 60-40 mixing ratio achieves state-of-the-art PESQ stability across gains with <1% noise-reduction loss; no architectural modification or recursive training | 2026-07-03 |
+| [[sources/rath-2026-minimum-delay-block-size\|Rath & Geier 2026: Minimum Required Delay for Realtime Block Size Adaptation]] | Closed-form formula Δ = b_plugin − gcd(b_host, b_plugin) for minimum latency in block-based audio reblocking; replaces O(LCM) PortAudio brute-force algorithm with O(1) computation; uses Bézout's identity from number theory | 2026-07-07 |
 
 ---
 
