@@ -91,7 +91,8 @@ When a new source is added to `raw/`:
 9. Append entry to `wiki/log.md` with format: `## [YYYY-MM-DD] ingest | Source Title`
 10. **Update subdirectory index files**: Add new entries to `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md`, and `wiki/synthesis/index.md` (as applicable) — each subdirectory maintains its own index table mirroring the corresponding section of `wiki/index.md`
 11. **Verify**: Check that all new concepts/entities mentioned in the source page have corresponding wiki pages; create any missing ones
-12. **Build sanity check (final step)**: Run `uv run mkdocs build --strict` to confirm no WARNINGs slipped through. The page-creation rules in *Link Conventions* above are designed so this step should always pass; if it does not, the offending page violated a convention and must be fixed before the ingest is complete.
+12. **Update statistics**: Recount pages in each category and update the `## Statistics` section at the bottom of `wiki/index.md` (Total pages, Entities, Concepts, Sources, Synthesis, Queries, Last updated). Run `python .trae/skills/wiki-lint/scripts/check_statistics.py` to verify counts match actual files.
+13. **Build sanity check (final step)**: Run `uv run mkdocs build --strict` to confirm no WARNINGs slipped through. The page-creation rules in *Link Conventions* above are designed so this step should always pass; if it does not, the offending page violated a convention and must be fixed before the ingest is complete.
 
 ### 2. Query Wiki
 
@@ -105,15 +106,17 @@ When the user asks a question:
 
 ### 3. Lint Wiki
 
-Periodically (when requested), health-check the wiki:
+Periodically (when requested), health-check the wiki using the **wiki-lint skill** (see [`.trae/skills/wiki-lint/SKILL.md`](.trae/skills/wiki-lint/SKILL.md) for full details):
 
-1. **Contradictions**: Check for conflicting claims between pages
-2. **Stale claims**: Identify claims superseded by newer sources
-3. **Orphan pages**: Find pages with no inbound links
-4. **Missing pages**: Identify concepts mentioned but lacking dedicated pages
-5. **Cross-references**: Suggest missing links between related pages
-6. **Data gaps**: Identify areas that could benefit from web search
-7. Log the lint pass in `wiki/log.md` with format: `## [YYYY-MM-DD] lint | Health check`
+1. **Index drift**: Run `python .trae/skills/wiki-lint/scripts/check_index_drift.py` — finds missing, phantom, and duplicate entries
+2. **Broken links**: Run `python .trae/skills/wiki-lint/scripts/check_broken_links.py` — categorizes truly broken links vs. convention violations (bare slugs, `wiki/` prefixes, `../` prefixes)
+3. **Orphan pages**: Run `python .trae/skills/wiki-lint/scripts/check_orphans.py` — finds pages with zero inbound references
+4. **Statistics**: Run `python .trae/skills/wiki-lint/scripts/check_statistics.py` — verifies stated counts vs. actual files
+5. **Contradictions**: Manually check for conflicting claims between pages
+6. **Stale claims**: Identify claims superseded by newer sources
+7. **Cross-references**: Suggest missing links between related pages
+8. **Data gaps**: Identify areas that could benefit from web search
+9. Log the lint pass in `wiki/log.md` with format: `## [YYYY-MM-DD] lint | Health check`
 
 ## Index Maintenance
 
@@ -143,3 +146,18 @@ Periodically (when requested), health-check the wiki:
 After any ingest or significant edit, run `uv run mkdocs build --strict`. A clean build exits 0 with `INFO - Documentation built in N seconds`.
 
 See [BUILD.md](schema/BUILD.md) for full mechanics, link-resolution internals, and common strict-mode pitfalls.
+
+## Skills
+
+Reusable workflows are stored in `.trae/skills/`. Each skill has a `SKILL.md` with full instructions.
+
+| Skill | Path | When to use |
+|-------|------|-------------|
+| **paper-reader** | [`.trae/skills/paper-reader/SKILL.md`](.trae/skills/paper-reader/SKILL.md) | Ingesting a paper from Zotero — handles search, PDF extraction (MinerU/arXiv HTML/pdftotext), and full wiki page creation |
+| **wiki-lint** | [`.trae/skills/wiki-lint/SKILL.md`](.trae/skills/wiki-lint/SKILL.md) | Health-checking the wiki — index drift, broken links, orphan pages, statistics verification |
+
+**Convention violations** (bare-slug wikilinks, `wiki/` prefixes, `../` prefixes in wikilinks) accumulate over time. To bulk-fix legacy links, run:
+
+```powershell
+uv run python scripts/migrate_to_vault_absolute.py
+```

@@ -105,7 +105,8 @@ def read_index_entries_by_type(filepath, dir_type):
         return entries
     section = section_m.group(1)
     # Handle both escaped \| and unescaped | in wikilinks
-    pattern = r'\|\s*\[\[' + dir_type + r'/([^\|\\]+)(?:\\?\|[^\]]+)?\]\]\s*\|\s*([^\|]+)\s*\|\s*([^\|]+)\s*\|'
+    # Display text may contain ] (e.g., "Sinh[ArcCosh[x]]"), so use non-greedy .+? up to closing ]]
+    pattern = r'\|\s*\[\[' + dir_type + r'/([^\|\\]+)(?:\\?\|.+?)?\]\]\s*\|\s*([^\|]+)\s*\|\s*([^\|]+)\s*\|'
     for m in re.finditer(pattern, section):
         name = m.group(1).strip()
         summary = m.group(2).strip()
