@@ -285,6 +285,8 @@
 | [[entities/yuanhao-feng\|Yuanhao Feng]] | The University of Electro-Communications — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
 | [[entities/panlong-yang\|Panlong Yang]] | NUIST — co-author of QuaSE quality-aware earable SE (IMWUT 2026) | 2026-06-21 |
 | [[entities/kaiming-he\|Kaiming He (何恺明)]] | MIT Associate Professor / Google DeepMind — ResNets, Faster R-CNN, Mask R-CNN, MoCo, MAE; NeurIPS 2025 Test of Time Award | 2026-06-21 |
+| [[entities/robert-g-lorenz\|Robert G. Lorenz]] | Beceem Communications — robust minimum variance beamforming with ellipsoidal uncertainty modeling | 2026-06-21 |
+| [[entities/stephen-boyd\|Stephen Boyd]] | Stanford University — Samsung Professor of Engineering; convex optimization, robust beamforming co-author | 2026-06-21 |
 | [[entities/amy-bastine\|Amy Bastine]] | ANU — PINN for soundfield estimation and ANC | 2026-06-25 |
 | [[entities/fei-ma\|Fei Ma]] | ANU — PINN-based soundfield interpolation, HRTF upsampling, ANC | 2026-06-25 |
 | [[entities/prasanga-n-samarasinghe\|Prasanga N. Samarasinghe]] | ANU — PINN for soundfield interpolation, SH-domain ANC, HRTF upsampling | 2026-06-25 |
@@ -545,6 +547,9 @@
 | [[concepts/quality-aware-speech-enhancement\|Quality-Aware Speech Enhancement]] | Multi-modal fusion paradigm dynamically weighting auxiliary modality by self-assessed quality; mitigates modality imbalance (QuaSE) | 2026-06-21 |
 | [[concepts/object-detection\|Object Detection]] | CV task of localizing + classifying objects; 30-year history from hand-crafted features (Viola-Jones/SIFT/HOG/DPM) to deep learning (R-CNN→Faster R-CNN) | 2026-06-21 |
 | [[concepts/faster-r-cnn\|Faster R-CNN]] | End-to-end object detection with Region Proposal Network sharing conv features; modern detection paradigm; NeurIPS 2025 Test of Time Award | 2026-06-21 |
+| [[concepts/ellipsoidal-uncertainty-modeling\|Ellipsoidal Uncertainty Modeling]] | Representing uncertain vectors as ellipsoidal sets for robust beamforming; enables convex optimization of robust filters | 2026-06-21 |
+| [[concepts/hadamard-product-ellipsoids\|Hadamard Product Ellipsoids]] | Element-wise product of two ellipsoids; key operation for propagating uncertainty through array manifold vectors | 2026-06-21 |
+| [[concepts/robust-minimum-variance-beamforming\|Robust Minimum Variance Beamforming]] | Extension of MVDR beamformer accounting for steering vector uncertainty via ellipsoidal modeling; solved as SOCP | 2026-06-21 |
 | [[concepts/physics-informed-neural-network\|Physics-Informed Neural Network (PINN)]] | Neural network trained with PDE residual loss to respect physical laws; used for soundfield interpolation, HRTF upsampling | 2026-06-25 |
 | [[concepts/soundfield-interpolation\|Soundfield Interpolation]] | Estimating acoustic pressure at unmeasured positions from limited sensor measurements; SH, PINN, and RMT methods | 2026-06-25 |
 | [[concepts/input-shaping\|Input Shaping]] | Feedforward control technique that convolves command input with impulse sequences to cancel residual vibrations at natural frequencies | 2026-06-28 |
@@ -725,10 +730,10 @@
 
 ## Statistics
 
-- **Total pages**: 665
-- **Entities**: 284
-- **Concepts**: 247
-- **Sources**: 108
+- **Total pages**: 679
+- **Entities**: 288
+- **Concepts**: 255
+- **Sources**: 110
 - **Synthesis**: 19
 - **Queries**: 7
-- **Last updated**: 2026-07-03
+- **Last updated**: 2026-07-07

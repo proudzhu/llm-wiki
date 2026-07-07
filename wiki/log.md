@@ -2734,3 +2734,16 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/entities/index.md` — added 2 entity rows
   - `wiki/concepts/index.md` — added 2 concept rows
 
+---
+
+## [2026-07-07] lint | Health check
+
+- **Index consistency**: Main index had 2 missing entities (`robert-g-lorenz`, `stephen-boyd`) and 3 missing concepts (`ellipsoidal-uncertainty-modeling`, `hadamard-product-ellipsoids`, `robust-minimum-variance-beamforming`); subdirectory indexes were all correct. Fixed by adding missing entries to `wiki/index.md`.
+- **Statistics**: Stated 665 total (284/247/108/19/7) was stale vs actual 679 (288/255/110/19/7). Corrected all counts and last-updated date.
+- **Broken links**: No truly broken links. Convention violations found: ~181 bare-slug wikilinks (missing category prefix), 30 `wiki/`-prefix links, 38 `../`-prefix links, 19 informal log.md refs. Build passes — these are cosmetic, not functional.
+- **Duplicate entries**: None found.
+- **Orphan pages**: 1 — `sources/why-mathematica-not-simplify-sinh-arccosh` (zero inbound references).
+- **Content fix**: Merged duplicate `## Related Concepts` heading in `wiki/concepts/hearing-aid-feedback-cancellation.md` (leftover from rebase conflict resolution).
+- **Build**: `uv run mkdocs build --strict` passes clean (0 warnings, exit 0).
+- **Actions taken**: Added 5 missing index entries to `wiki/index.md`; corrected statistics; merged duplicate heading; verified all indexes now match actual files (diff=0 across all categories).
+

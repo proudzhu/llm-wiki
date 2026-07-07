@@ -73,9 +73,6 @@ Recent work integrates deep learning for automatic step-size control or direct I
 - [[concepts/prediction-error-method|Prediction Error Method]]
 - [[concepts/frequency-shift-feedback-cancellation|Frequency Shift Feedback Cancellation]]
 - [[concepts/maximum-stable-gain|Maximum Stable Gain]]
-
-## Related Concepts
-
 - [[concepts/deep-marginal-feedback-cancellation|Deep Marginal Feedback Cancellation]]
 - [[concepts/closed-loop-fine-tuning|Closed-Loop Fine Tuning]]
 
