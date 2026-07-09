@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-20
-updated: 2026-05-20
+updated: 2026-07-09
 tags:
   - beamforming
   - deep-learning
@@ -34,6 +34,7 @@ The beamforming operation is embedded as a differentiable layer (e.g., a filter-
 
 - **FaSNet** (Filter-and-Sum Network): Time-domain filter-and-sum layer that learns beamforming coefficients
 - **Neural MVDR**: DNN-estimated signal statistics plugged into the MVDR formula, forming a differentiable beamformer
+- **Differentiable robust MVDR**: Closed-form WNG-constrained MVDR solution embedded as a differentiable layer with learnable frequency-dependent WNG thresholds (Deng et al. 2026)
 - **BEAMNET**: Fully learned spatial filtering with no explicit signal model
 
 ### Integration with Downstream Tasks
@@ -54,3 +55,4 @@ Neural beamformers are often trained jointly with downstream models:
 ## Related Sources
 
 - [[sources/feng-2025-directional-source-separation-smart-glasses|Feng et al. 2025: Directional Source Separation for Smart Glasses]]
+- [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026: Joint Covariance and WNG Learning for Robust MVDR]]

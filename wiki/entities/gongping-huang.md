@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-30
-updated: 2026-04-30
+updated: 2026-07-09
 tags:
   - researcher
   - microphone-arrays
@@ -26,6 +26,7 @@ tags:
 - Dimensionality reduction for STFT-domain beamforming
 - Advances in microphone array processing (ICASSP 2025 overview)
 - SCM reconstruction method for multi-source speech enhancement (Liu et al. 2026)
+- Joint learning of covariance estimation and WNG for robust MVDR beamforming (Deng et al. 2026)
 
 ## Affiliations
 
@@ -40,3 +41,4 @@ tags:
 ## Related Sources
 
 - [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
+- [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026: Joint Covariance and WNG Learning for Robust MVDR]]

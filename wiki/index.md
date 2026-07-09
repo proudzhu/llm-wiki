@@ -298,6 +298,9 @@
 | [[entities/avichay-ashur\|Avichay Ashur]] | Technion — acoustic howling suppression by fine-tuning deep speech enhancement networks | 2026-07-03 |
 | [[entities/matthias-rath\|Matthias Rath]] | Institute for Advanced Procrastination, Berlin — minimum delay formula for realtime block size adaptation in audio DSP (LAC 2026) | 2026-07-07 |
 | [[entities/matthias-geier\|Matthias Geier]] | ai-coustics / Fraunhofer IIS — co-author of minimum delay formula for realtime block size adaptation (LAC 2026) | 2026-07-07 |
+| [[entities/yongyi-deng\|Yongyi Deng]] | Wuhan University — lead author of joint covariance/WNG learning for robust MVDR beamforming (INTERSPEECH 2026) | 2026-07-09 |
+| [[entities/hanchen-pei\|Hanchen Pei]] | Wuhan University — co-author of joint covariance/WNG learning for robust MVDR beamforming | 2026-07-09 |
+| [[entities/jianbo-ma\|Jianbo Ma]] | Dolby Laboratories — co-author of joint covariance/WNG learning for robust MVDR beamforming | 2026-07-09 |
 | [[entities/g-w-stewart\|G. W. Stewart]] | Numerical analyst, University of Maryland — author of the SVD history survey; matrix perturbation theory and CS decomposition | 2026-07-12 |
 | [[entities/eugenio-beltrami\|Eugenio Beltrami]] | Italian mathematician (1835–1899) — first publisher of the SVD (1873) via bilinear forms | 2026-07-12 |
 | [[entities/camille-jordan\|Camille Jordan]] | French mathematician (1838–1921) — codiscoverer of the SVD (1874); introduced deflation technique | 2026-07-12 |
@@ -701,6 +704,7 @@
 | [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn\|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]] | PINN interpolates soundfield from outside-ROI monitoring microphones using wave equation PDE loss; 8 dB better interpolation than SH; −13 dB more NR than multiple-point ANC | 2026-06-25 |
 | [[sources/ashur-2026-acoustic-howling-suppression-fine-tuning\|Ashur & Cohen 2026: AHS by Fine-Tuning Deep Speech Enhancement Networks]] | Fine-tunes pretrained DEMUCS-based Denoiser with offline-generated howling samples; 60-40 mixing ratio achieves state-of-the-art PESQ stability across gains with <1% noise-reduction loss; no architectural modification or recursive training | 2026-07-03 |
 | [[sources/rath-2026-minimum-delay-block-size\|Rath & Geier 2026: Minimum Required Delay for Realtime Block Size Adaptation]] | Closed-form formula Δ = b_plugin − gcd(b_host, b_plugin) for minimum latency in block-based audio reblocking; replaces O(LCM) PortAudio brute-force algorithm with O(1) computation; uses Bézout's identity from number theory | 2026-07-07 |
+| [[sources/deng-2026-joint-covariance-wng-mvdr\|Deng, Pei, Ma, Huang, Chen & Benesty 2026: Joint Covariance and WNG Learning for Robust MVDR]] | Dual-branch network jointly learning TF masks for SCM estimation and frequency-dependent WNG thresholds for robust MVDR; differentiable RMVDR layer; +1.4–1.8 dB SNR gain over fixed-WNG baselines under array mismatch | 2026-07-09 |
 | [[sources/stewart-1993-early-history-svd\|Stewart 1993: On the Early History of the Singular Value Decomposition]] | Surveys five mathematicians (Beltrami 1873, Jordan 1874, Sylvester 1889, Schmidt 1907, Weyl 1912) who established the SVD; two traditions (bilinear forms vs. integral equations); Schmidt's approximation theorem and Weyl's perturbation theory | 1993 |
 | [[sources/zartbot-2026-dspark-speculative-decoding\|zartbot 2026: 详细谈谈DSpark投机解码的原理]] | Code-level walkthrough of DSpark (DeepSeek's speculative decoding framework); semi-autoregressive generation + confidence-scheduled verification; surveys 14 draft-model algorithms across 6 stages (2022–2026); reports 60–85% speedup on DeepSeek-V4 | 2026-07-04 |
 
@@ -752,10 +756,10 @@
 
 ## Statistics
 
-- **Total pages**: 701
-- **Entities**: 296
+- **Total pages**: 705
+- **Entities**: 299
 - **Concepts**: 267
-- **Sources**: 112
+- **Sources**: 113
 - **Synthesis**: 19
 - **Queries**: 7
 - **Last updated**: 2026-07-12

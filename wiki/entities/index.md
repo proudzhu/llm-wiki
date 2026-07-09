@@ -292,6 +292,9 @@
 | [[entities/avichay-ashur\|Avichay Ashur]] | Technion — acoustic howling suppression by fine-tuning deep speech enhancement networks | 2026-07-03 |
 | [[entities/matthias-rath\|Matthias Rath]] | Institute for Advanced Procrastination, Berlin — minimum delay formula for realtime block size adaptation in audio DSP (LAC 2026) | 2026-07-07 |
 | [[entities/matthias-geier\|Matthias Geier]] | ai-coustics / Fraunhofer IIS — co-author of minimum delay formula for realtime block size adaptation (LAC 2026) | 2026-07-07 |
+| [[entities/yongyi-deng\|Yongyi Deng]] | Wuhan University — lead author of joint covariance/WNG learning for robust MVDR beamforming (INTERSPEECH 2026) | 2026-07-09 |
+| [[entities/hanchen-pei\|Hanchen Pei]] | Wuhan University — co-author of joint covariance/WNG learning for robust MVDR beamforming | 2026-07-09 |
+| [[entities/jianbo-ma\|Jianbo Ma]] | Dolby Laboratories — co-author of joint covariance/WNG learning for robust MVDR beamforming | 2026-07-09 |
 | [[entities/g-w-stewart\|G. W. Stewart]] | Numerical analyst, University of Maryland — author of the SVD history survey; matrix perturbation theory and CS decomposition | 2026-07-12 |
 | [[entities/eugenio-beltrami\|Eugenio Beltrami]] | Italian mathematician (1835–1899) — first publisher of the SVD (1873) via bilinear forms | 2026-07-12 |
 | [[entities/camille-jordan\|Camille Jordan]] | French mathematician (1838–1921) — codiscoverer of the SVD (1874); introduced deflation technique | 2026-07-12 |

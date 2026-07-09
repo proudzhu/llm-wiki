@@ -2749,6 +2749,35 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 
 ---
 
+## [2026-07-09] ingest | Joint Covariance and WNG Learning for Robust MVDR (Deng et al. 2026)
+
+- **Source**: `raw/papers/deng-2026-joint-covariance-wng-mvdr/full-text.md` (arXiv HTML extraction via defuddle, Zotero unavailable)
+- **Authors**: Yongyi Deng, Hanchen Pei, Jianbo Ma, Gongping Huang, Jingdong Chen, Jacob Benesty
+- **Published**: INTERSPEECH 2026
+- **URL**: https://arxiv.org/abs/2606.24137 (arXiv:2606.24137)
+- **Summary**: Proposes an end-to-end data-driven robust MVDR beamforming framework with a dual-branch neural network that jointly learns (1) complex time-frequency masks for spatial covariance matrix estimation and (2) frequency-dependent White Noise Gain (WNG) thresholds for robustness control. A differentiable robust MVDR layer implements the closed-form WNG-constrained solution, enabling end-to-end training via MAE reconstruction loss without explicit WNG supervision.
+- **Extraction**: arXiv HTML (2606.24137) parsed via defuddle to markdown; 2 figures downloaded and converted to local embed wikilinks; Zotero bypassed due to local API unavailability.
+- **Pages created**:
+  - `raw/papers/deng-2026-joint-covariance-wng-mvdr/full-text.md` — extracted markdown text with corrected local image links
+  - `raw/papers/deng-2026-joint-covariance-wng-mvdr/figures/` — 2 downloaded figures (fig1.png, fig2.png)
+  - `wiki/sources/deng-2026-joint-covariance-wng-mvdr.md` — source summary page
+  - `wiki/entities/yongyi-deng.md` — first author (Wuhan University)
+  - `wiki/entities/hanchen-pei.md` — co-author (Wuhan University)
+  - `wiki/entities/jianbo-ma.md` — co-author (Dolby Laboratories)
+- **Pages updated**:
+  - `wiki/entities/gongping-huang.md` — added this paper to notable contributions and related sources
+  - `wiki/entities/jingdong-chen.md` — added this paper to notable contributions and related sources
+  - `wiki/entities/jacob-benesty.md` — added this paper to notable contributions and related sources
+  - `wiki/concepts/robust-minimum-variance-beamforming.md` — added Data-Driven Approaches section with the frequency-adaptive learnable WNG scheme; fixed bare-slug links in related concepts
+  - `wiki/concepts/neural-beamforming.md` — added Differentiable robust MVDR layer entry to end-to-end approaches section
+  - `wiki/concepts/white-noise-gain.md` — added Data-Driven WNG Estimation section; fixed bare-slug links in related concepts to use vault-absolute category prefixes; added new related concepts/sources
+  - `wiki/index.md` — added 3 entities, 1 source; updated statistics (679→683 total, 288→291 entities, 110→111 sources; last updated 2026-07-09)
+  - `wiki/entities/index.md` — added 3 entity rows
+  - `wiki/sources/index.md` — added 1 source row
+- **Key insights**: (1) WNG threshold need not be a fixed global hyperparameter — it can be learned per frequency bin jointly with the mask estimator, adapting to local SNR, interference characteristics, and frequency-dependent array sensitivity. (2) The reconstruction loss implicitly regularizes WNG without explicit labels: excessively large WNG causes diagonal loading that reduces interference nulling, while excessively small WNG causes white noise amplification; MAE loss balances these tradeoffs automatically. (3) The orthogonal decomposition h = h_D + Ū h̄ separates the distortionless delay-and-sum component from the adaptive interference-canceling subspace, providing a clean closed-form for the differentiable robust MVDR layer. (4) The method generalizes to unseen microphone spacings (1 cm and 3 cm when trained on 2 cm), achieving +1.4–1.8 dB SNR gain over the optimal fixed-WNG FullSubNet baseline across all array conditions. (5) This work extends the neural beamforming paradigm beyond mask-only SCM estimation to co-optimizing both statistical estimation and robustness regularization in a unified end-to-end framework.
+
+---
+
 ## [2026-07-12] ingest | On the Early History of the Singular Value Decomposition (Stewart 1993)
 
 - **Source**: `raw/papers/stewart-1993-early-history-svd/full-text.md` (Zotero: WKC35DNZ)
@@ -2803,4 +2832,3 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 2 entity rows; fixed pre-existing index drift (missing Hermann Weyl entry from SVD ingest)
   - `wiki/concepts/index.md` — added 9 concept rows
-

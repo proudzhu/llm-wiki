@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-06-21
-updated: 2026-06-21
+updated: 2026-07-09
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
+  - raw/papers/deng-2026-joint-covariance-wng-mvdr/full-text.md
 tags:
   - beamforming
   - robust-beamforming
@@ -79,6 +80,20 @@ The dominant cost is the $10n^3$-flop eigendecomposition in step 3; overall the 
 
 The ellipsoid $\mathcal{E}$ can be derived from measured or simulated array responses using the methods described in [[concepts/ellipsoidal-uncertainty-modeling|Ellipsoidal Uncertainty Modeling]] — either sample mean/covariance fitting or the minimum-volume (Löwner–John) ellipsoid. For multiplicative gain/phase uncertainties, [[concepts/hadamard-product-ellipsoids|Hadamard Product of Ellipsoids]] calculus propagates separate component-level ellipsoids into an aggregate array-response ellipsoid.
 
+## Data-Driven Approaches
+
+While classical RMVB relies on manually designed uncertainty sets and fixed [[concepts/white-noise-gain|WNG]] constraints, recent deep learning approaches learn robustness parameters directly from data:
+
+Deng et al. (2026) propose a dual-branch network that jointly learns:
+1. Complex time-frequency masks for [[concepts/spatial-covariance-matrix|spatial covariance matrix]] estimation
+2. **Frequency-dependent WNG thresholds** $\mathcal{W}_0(k)$ that adapt per frequency bin
+
+A differentiable robust MVDR layer implements the closed-form WNG-constrained solution, enabling end-to-end training via mean absolute error reconstruction loss. The network implicitly learns physically meaningful WNG values without explicit WNG supervision — the reconstruction loss naturally balances directivity against robustness:
+- Overly large WNG → excessive [[concepts/diagonal-loading|diagonal loading]] → reduced interference suppression
+- Overly small WNG → white noise amplification and sensitivity to mismatch
+
+This adaptive approach achieves +1.4–1.8 dB SNR gain over optimally tuned fixed-WNG baselines and generalizes to unseen microphone spacing configurations.
+
 ## Related Concepts
 
 - [[concepts/mvdr-beamformer|MVDR Beamformer]] — non-robust baseline (Capon's method)
@@ -95,3 +110,4 @@ The ellipsoid $\mathcal{E}$ can be derived from measured or simulated array resp
 ## Related Sources
 
 - [[sources/lorenz-2005-robust-minimum-variance-beamforming|Lorenz & Boyd 2005: Robust Minimum Variance Beamforming]]
+- [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026: Joint Covariance and WNG Learning for Robust MVDR]]

@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-30
-updated: 2026-04-30
+updated: 2026-07-09
 tags:
   - researcher
   - array-processing
@@ -27,6 +27,7 @@ tags:
 - Foundational work on multichannel Wiener filter theory
 - Differential beamforming with high directivity factors
 - Dimensionality reduction for STFT-domain beamforming
+- Joint learning of covariance estimation and WNG for robust MVDR beamforming (Deng et al. 2026)
 
 ## Affiliations
 
@@ -42,3 +43,4 @@ tags:
 ## Related Sources
 
 - [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
+- [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026: Joint Covariance and WNG Learning for Robust MVDR]]
