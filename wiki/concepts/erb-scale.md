@@ -50,7 +50,10 @@ The ERB scale provides finer frequency resolution at low frequencies compared to
 ## Related Concepts
 
 - [[concepts/deep-filtering|Deep Filtering]]
+- [[concepts/grouped-recurrent-neural-network|Grouped Recurrent Neural Network]]
+- [[concepts/distributed-binaural-speech-enhancement|Distributed Binaural Speech Enhancement]]
 
 ## Related Sources
 
 - [[sources/schroter-2022-deepfilternet|Schröter et al. 2022: DeepFilterNet]]
+- [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]

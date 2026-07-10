@@ -295,6 +295,13 @@
 | [[entities/yongyi-deng\|Yongyi Deng]] | Wuhan University — lead author of joint covariance/WNG learning for robust MVDR beamforming (INTERSPEECH 2026) | 2026-07-09 |
 | [[entities/hanchen-pei\|Hanchen Pei]] | Wuhan University — co-author of joint covariance/WNG learning for robust MVDR beamforming | 2026-07-09 |
 | [[entities/jianbo-ma\|Jianbo Ma]] | Dolby Laboratories — co-author of joint covariance/WNG learning for robust MVDR beamforming | 2026-07-09 |
+| [[entities/zahra-benslimane\|Zahra Benslimane]] | CEA, List (Paris-Saclay) — lead author of RT-Tango real-time distributed binaural SE for hearing aids | 2026-07-10 |
+| [[entities/pierre-chouteau\|Pierre Chouteau]] | CEA, List (Paris-Saclay) — co-author of RT-Tango distributed binaural SE | 2026-07-10 |
+| [[entities/martyna-poreba\|Martyna Poreba]] | CEA, List (Paris-Saclay) — co-author of RT-Tango distributed binaural SE | 2026-07-10 |
+| [[entities/fabrice-auzanneau\|Fabrice Auzanneau]] | CEA, List (Paris-Saclay) — co-author of RT-Tango distributed binaural SE | 2026-07-10 |
+| [[entities/michal-szczepanski\|Michal Szczepanski]] | LORIA, U. Lorraine — co-author of RT-Tango distributed binaural SE | 2026-07-10 |
+| [[entities/fabian-chersi\|Fabian Chersi]] | LORIA, U. Lorraine — co-author of RT-Tango distributed binaural SE | 2026-07-10 |
+| [[entities/romain-serizel\|Romain Serizel]] | LORIA, U. Lorraine — senior author of Tango/RT-Tango distributed binaural SE frameworks | 2026-07-10 |
 | [[entities/g-w-stewart\|G. W. Stewart]] | Numerical analyst, University of Maryland — author of the SVD history survey; matrix perturbation theory and CS decomposition | 2026-07-12 |
 | [[entities/eugenio-beltrami\|Eugenio Beltrami]] | Italian mathematician (1835–1899) — first publisher of the SVD (1873) via bilinear forms | 2026-07-12 |
 | [[entities/camille-jordan\|Camille Jordan]] | French mathematician (1838–1921) — codiscoverer of the SVD (1874); introduced deflation technique | 2026-07-12 |

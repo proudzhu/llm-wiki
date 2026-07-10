@@ -2778,6 +2778,46 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 
 ---
 
+## [2026-07-10] ingest | RT-Tango — Real-time Distributed Binaural SE for Low-power Hearing Aids (Benslimane et al. 2026)
+
+- **Source**: `raw/papers/benslimane-2026-rt-tango-binaural-speech-enhancement/full-text.md` (arXiv HTML extraction via defuddle; single figure downloaded locally)
+- **Authors**: Zahra Benslimane, Pierre Chouteau, Martyna Poreba, Fabrice Auzanneau, Michal Szczepanski, Fabian Chersi, Romain Serizel
+- **Affiliations**: CEA, List (Université Paris-Saclay); LORIA (Université de Lorraine, CNRS, Inria)
+- **Published**: arXiv preprint (INTERSPEECH 2026 submission), arXiv:2607.01834
+- **URL**: https://arxiv.org/abs/2607.01834
+- **Zotero**: Local key 8ZWV2E4T; PDF attachment 5H7GWRF3
+- **Summary**: Introduces RT-Tango, a real-time distributed binaural speech enhancement framework for low-power hearing aids that revisits the two-stage Tango architecture with four complementary efficiency mechanisms: (1) ERB-scaled feature compression, (2) grouped recurrent neural network (GRNN) mask estimation with asymmetric grouping (SN=8, MN=2), (3) fixed-rate skipping (FRS) with update rates 1/4 (SN-DNN) and 1/2 (MN-DNN), and (4) asymmetric STFT (32 ms analysis / 8 ms synthesis windows). The strictly causal streaming variant RT-Tango-OS achieves 8 ms algorithmic latency with online recursive SCM estimation (EMA, α=0.995). At 33.4 MMACs/s, RT-Tango is ~6× more efficient than GTCRN at the same 4 ms hop and ~18× cheaper than the Tango baseline, while preserving SE quality and interaural balance (SI-SIR 20.8/24.6 dB left/right).
+- **Extraction**: arXiv HTML (2607.01834) parsed via defuddle to markdown; 1 figure downloaded and converted to local embed wikilink.
+- **Pages created**:
+  - `raw/papers/benslimane-2026-rt-tango-binaural-speech-enhancement/full-text.md` — extracted markdown text with local figure link
+  - `raw/papers/benslimane-2026-rt-tango-binaural-speech-enhancement/figures/fig1.png` — downloaded figure
+  - `wiki/sources/benslimane-2026-rt-tango-binaural-speech-enhancement.md` — source summary page
+  - `wiki/entities/zahra-benslimane.md` — lead author (CEA, List)
+  - `wiki/entities/pierre-chouteau.md` — co-author (CEA, List)
+  - `wiki/entities/martyna-poreba.md` — co-author (CEA, List)
+  - `wiki/entities/fabrice-auzanneau.md` — co-author (CEA, List)
+  - `wiki/entities/michal-szczepanski.md` — co-author (LORIA)
+  - `wiki/entities/fabian-chersi.md` — co-author (LORIA)
+  - `wiki/entities/romain-serizel.md` — senior author (LORIA)
+  - `wiki/concepts/distributed-binaural-speech-enhancement.md` — two-device SE with compressed-representation exchange
+  - `wiki/concepts/tango-framework.md` — baseline two-stage distributed architecture (SN-DNN → SDW-MWF → exchange → MN-DNN → SDW-MWF)
+  - `wiki/concepts/grouped-recurrent-neural-network.md` — partitioned RNN hidden state for O(H²/G) complexity
+  - `wiki/concepts/asymmetric-stft.md` — long analysis + short synthesis window decoupling spectral resolution from latency
+  - `wiki/concepts/fixed-rate-skipping.md` — temporal sparsification via mask reuse at fixed intervals
+- **Pages updated**:
+  - `wiki/concepts/multi-channel-wiener-filter.md` — added SDW-MWF section (speech-distortion-weighted variant used in Tango/RT-Tango for the exchanged compressed signal)
+  - `wiki/concepts/spatial-covariance-matrix.md` — added Online Recursive SCM Estimation (EMA) section with RT-Tango-OS configuration
+  - `wiki/concepts/erb-scale.md` — added Usage in RT-Tango section describing front-end feature compression + inverse ERB mapping
+  - `wiki/concepts/gtcrn.md` — added As a Baseline in Distributed Binaural SE section contrasting per-node GTCRN (197.5 MMACs/s, asymmetric L/R) with RT-Tango (33.4 MMACs/s, balanced)
+  - `wiki/concepts/multi-channel-speech-enhancement.md` — added Distributed Binaural SE category and related concepts/sources
+  - `wiki/index.md` — added 7 entities, 5 concepts, 1 source; updated statistics (683→696 total, 291→298 entities, 255→260 concepts, 111→112 sources; last updated 2026-07-10)
+  - `wiki/entities/index.md` — added 7 entity rows
+  - `wiki/concepts/index.md` — added 5 concept rows
+  - `wiki/sources/index.md` — added 1 source row
+- **Key insights**: (1) The Tango distributed two-stage architecture (neural mask → SDW-MWF → compressed exchange → refined mask → SDW-MWF) is highly compressible: ~18× reduction in MMACs/s versus the CNN baseline despite a 4× higher frame rate, because the neural network only guides the spatial filter rather than directly reconstructing the signal. (2) Compressibility is heterogeneous across stages: the Single-Node DNN (SN-DNN) is robust to aggressive grouping (G=8) and high skipping rates (1/4), whereas the Multi-Node DNN (MN-DNN) is more sensitive and requires milder settings (G=2, 1/2), motivating an asymmetric efficiency strategy. (3) Fixed-rate skipping (FRS) outperforms learned skip gates (Skip RNN, TinyLSTM) in this regime — the latter's additional MACs and learned skip dynamics degrade MN-DNN SI-SDR by ~0.7–1.2 dB, while FRS preserves quality within 0.2 dB. (4) The asymmetric STFT (long analysis / short synthesis) decouples spectral resolution from algorithmic latency: 32 ms analysis preserves frequency detail for masking, while an 8 ms asymmetric Hann synthesis window caps latency at 8 ms — halving to 4 ms further reduces latency but degrades quality. (5) Online recursive SCM estimation via EMA (α=0.995, ~31 updates/s) introduces only a slight SI-SDR/SI-SAR drop relative to offline SCMs, preserving SI-SIR and PESQ/STOI competitive with higher-cost baselines — making the streaming variant RT-Tango-OS practical for hearing-aid deployment. (6) The two-stage distributed architecture yields naturally balanced left/right behavior (SI-SIR 20.8/24.6 dB) because both ears share information, unlike per-node GTCRN which is strongly ear-asymmetric (16.6/13.8 dB) — a property important for stable spatial perception in binaural hearing aids.
+
+---
+
 ## [2026-07-12] ingest | On the Early History of the Singular Value Decomposition (Stewart 1993)
 
 - **Source**: `raw/papers/stewart-1993-early-history-svd/full-text.md` (Zotero: WKC35DNZ)
