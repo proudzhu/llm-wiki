@@ -2818,6 +2818,39 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 
 ---
 
+## [2026-07-10] ingest | Don't Listen to Me: Own-Voice Cancellation (Østergaard et al. 2026)
+
+- **Source**: `raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md` (Zotero: 3F6BYI69)
+- **Authors**: Mads Østergaard, Alexander Neergaard Zahid, Karl Ulbæk, Andreas Hansen Bagge, Kenny Falkjær Olsen, Rasmus Malik Høegh Lindrup
+- **Published**: arXiv preprint, 2026-06-22
+- **DOI**: 10.48550/arXiv.2606.23332
+- **Summary**: Introduces own-voice cancellation (OVC) — removing an enrolled speaker from a noisy mixture while preserving remaining speech; proposes compute-efficient Mamba-MinGRU architecture at 2 ms algorithmic latency.
+- **Pages created**:
+  - `raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md` — extracted text via MinerU VLM
+  - `wiki/sources/ostergaard-2026-own-voice-cancellation.md`
+  - `wiki/entities/mads-ostergaard.md`
+  - `wiki/entities/alexander-neergaard-zahid.md`
+  - `wiki/entities/karl-ulbaek.md`
+  - `wiki/entities/andreas-hansen-bagge.md`
+  - `wiki/entities/kenny-falkjaer-olsen.md`
+  - `wiki/entities/rasmus-malik-hoegh-lindrup.md`
+  - `wiki/concepts/own-voice-cancellation.md`
+  - `wiki/concepts/mamba-mingru.md`
+  - `wiki/concepts/td-speakerbeam.md`
+  - `wiki/concepts/mingru.md`
+- **Pages updated**:
+  - `wiki/concepts/target-speaker-extraction.md` — added OVC complement section, cross-refs, source link
+  - `wiki/concepts/speaker-embedding.md` — added auxiliary encoder architectures section, cross-refs, source link
+  - `wiki/concepts/personalized-speech-enhancement.md` — added OVC related task, cross-refs, source link
+  - `wiki/concepts/time-domain-speech-enhancement.md` — added Mamba-MinGRU to architecture table, cross-refs, source link
+  - `wiki/concepts/linear-recurrent-unit.md` — added MinGRU/Mamba-MinGRU related architectures section, cross-refs, source link
+  - `wiki/index.md` — added 6 entities, 4 concepts, 1 source; updated statistics
+  - `wiki/entities/index.md` — added 6 entity rows
+  - `wiki/concepts/index.md` — added 4 concept rows
+  - `wiki/sources/index.md` — added 1 source row
+
+---
+
 ## [2026-07-12] ingest | On the Early History of the Singular Value Decomposition (Stewart 1993)
 
 - **Source**: `raw/papers/stewart-1993-early-history-svd/full-text.md` (Zotero: WKC35DNZ)

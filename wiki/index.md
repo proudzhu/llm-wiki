@@ -301,6 +301,19 @@
 | [[entities/yongyi-deng\|Yongyi Deng]] | Wuhan University — lead author of joint covariance/WNG learning for robust MVDR beamforming (INTERSPEECH 2026) | 2026-07-09 |
 | [[entities/hanchen-pei\|Hanchen Pei]] | Wuhan University — co-author of joint covariance/WNG learning for robust MVDR beamforming | 2026-07-09 |
 | [[entities/jianbo-ma\|Jianbo Ma]] | Dolby Laboratories — co-author of joint covariance/WNG learning for robust MVDR beamforming | 2026-07-09 |
+| [[entities/zahra-benslimane\|Zahra Benslimane]] | CEA, List (Paris-Saclay) — lead author of RT-Tango real-time distributed binaural SE for hearing aids | 2026-07-10 |
+| [[entities/pierre-chouteau\|Pierre Chouteau]] | CEA, List (Paris-Saclay) — co-author of RT-Tango distributed binaural SE | 2026-07-10 |
+| [[entities/martyna-poreba\|Martyna Poreba]] | CEA, List (Paris-Saclay) — co-author of RT-Tango distributed binaural SE | 2026-07-10 |
+| [[entities/fabrice-auzanneau\|Fabrice Auzanneau]] | CEA, List (Paris-Saclay) — co-author of RT-Tango distributed binaural SE | 2026-07-10 |
+| [[entities/michal-szczepanski\|Michal Szczepanski]] | LORIA, U. Lorraine — co-author of RT-Tango distributed binaural SE | 2026-07-10 |
+| [[entities/fabian-chersi\|Fabian Chersi]] | LORIA, U. Lorraine — co-author of RT-Tango distributed binaural SE | 2026-07-10 |
+| [[entities/romain-serizel\|Romain Serizel]] | LORIA, U. Lorraine — senior author of Tango/RT-Tango distributed binaural SE frameworks | 2026-07-10 |
+| [[entities/karl-ulbaek\|Karl Ulbæk]] | WS Audiology; OVC and Mamba-MinGRU | 2026-07-10 |
+| [[entities/andreas-hansen-bagge\|Andreas Hansen Bagge]] | WS Audiology / DTU Compute; OVC and Mamba-MinGRU | 2026-07-10 |
+| [[entities/mads-ostergaard\|Mads Østergaard]] | WS Audiology; OVC and Mamba-MinGRU | 2026-07-10 |
+| [[entities/alexander-neergaard-zahid\|Alexander Neergaard Zahid]] | WS Audiology; OVC and Mamba-MinGRU | 2026-07-10 |
+| [[entities/kenny-falkjaer-olsen\|Kenny Falkjær Olsen]] | WS Audiology / DTU Compute; SepMamba, OVC, Mamba-MinGRU | 2026-07-10 |
+| [[entities/rasmus-malik-hoegh-lindrup\|Rasmus Malik Høegh Lindrup]] | Verth; OVC and Mamba-MinGRU | 2026-07-10 |
 | [[entities/g-w-stewart\|G. W. Stewart]] | Numerical analyst, University of Maryland — author of the SVD history survey; matrix perturbation theory and CS decomposition | 2026-07-12 |
 | [[entities/eugenio-beltrami\|Eugenio Beltrami]] | Italian mathematician (1835–1899) — first publisher of the SVD (1873) via bilinear forms | 2026-07-12 |
 | [[entities/camille-jordan\|Camille Jordan]] | French mathematician (1838–1921) — codiscoverer of the SVD (1874); introduced deflation technique | 2026-07-12 |
@@ -573,6 +586,15 @@
 | [[concepts/bezouts-identity\|Bézout's Identity]] | Number theory result: gcd(a,b) = c₁a + c₂b for integers c₁,c₂; foundation for proving tightness of block delay bound | 2026-07-07 |
 | [[concepts/audio-latency\|Audio Latency]] | Time delay between input and output in audio systems; sources include block size, reblocking, AD/DA, resampling | 2026-07-07 |
 | [[concepts/fifo-queue\|FIFO Queue (First-In-First-Out)]] | Order-preserving queue data structure; implemented as ring buffers for audio stream buffering | 2026-07-07 |
+| [[concepts/distributed-binaural-speech-enhancement\|Distributed Binaural Speech Enhancement]] | Two-device (left/right ear) SE exchanging only a compressed representation; enables hearing-aid deployment under bandwidth/latency constraints | 2026-07-10 |
+| [[concepts/tango-framework\|Tango Framework]] | Two-stage distributed binaural SE (SN-DNN → SDW-MWF → exchange → MN-DNN → SDW-MWF); baseline for RT-Tango | 2026-07-10 |
+| [[concepts/grouped-recurrent-neural-network\|Grouped Recurrent Neural Network (GRNN)]] | Partitions RNN hidden state into G groups for O(H²/G) complexity; cross-band info via rearrangement; used in RT-Tango | 2026-07-10 |
+| [[concepts/asymmetric-stft\|Asymmetric STFT]] | Long analysis window + shorter synthesis window to decouple spectral resolution from algorithmic latency | 2026-07-10 |
+| [[concepts/fixed-rate-skipping\|Fixed-Rate Skipping (FRS)]] | Temporal sparsification: run DNN at fixed interval, reuse mask in between; exploits temporal redundancy for inference cost reduction | 2026-07-10 |
+| [[concepts/td-speakerbeam\|TD-SpeakerBeam]] | Time-domain SpeakerBeam; enrollment-conditioned TSE/OVC baseline | 2026-07-10 |
+| [[concepts/own-voice-cancellation\|Own-Voice Cancellation (OVC)]] | Removing enrolled speaker from noisy mixture; complement of TSE | 2026-07-10 |
+| [[concepts/mamba-mingru\|Mamba-MinGRU]] | Compute-efficient linear RNN architecture; Mamba blocks + MinGRU temporal mixing; 2 ms latency | 2026-07-10 |
+| [[concepts/mingru\|MinGRU]] | Minimal gated RNN; linear recurrence via parallel associative scan | 2026-07-10 |
 | [[concepts/singular-value-decomposition\|Singular Value Decomposition]] | Factorization $\mathbf{A}=\mathbf{U}\boldsymbol{\Sigma}\mathbf{V}^{\mathrm{T}}$; discovered independently by Beltrami (1873), Jordan (1874), Sylvester (1889), Schmidt (1907); fundamental tool in numerical linear algebra | 2026-07-12 |
 | [[concepts/eckart-young-theorem\|Eckart–Young Theorem]] | Best rank-$k$ approximation in Frobenius/spectral norm is truncated SVD; first proved by Schmidt (1907), rediscovered by Eckart & Young (1936), generalized to all unitarily invariant norms by Mirsky (1960) | 2026-07-12 |
 | [[concepts/spectral-norm\|Spectral Norm]] | Matrix 2-norm $\|\mathbf{A}\|_2=\sigma_1(\mathbf{A})$; governs singular-value perturbation bound $|\tilde{\sigma}_i-\sigma_i|\leq\|\mathbf{E}\|_2$ (Weyl 1912) | 2026-07-12 |
@@ -706,6 +728,7 @@
 | [[sources/rath-2026-minimum-delay-block-size\|Rath & Geier 2026: Minimum Required Delay for Realtime Block Size Adaptation]] | Closed-form formula Δ = b_plugin − gcd(b_host, b_plugin) for minimum latency in block-based audio reblocking; replaces O(LCM) PortAudio brute-force algorithm with O(1) computation; uses Bézout's identity from number theory | 2026-07-07 |
 | [[sources/deng-2026-joint-covariance-wng-mvdr\|Deng, Pei, Ma, Huang, Chen & Benesty 2026: Joint Covariance and WNG Learning for Robust MVDR]] | Dual-branch network jointly learning TF masks for SCM estimation and frequency-dependent WNG thresholds for robust MVDR; differentiable RMVDR layer; +1.4–1.8 dB SNR gain over fixed-WNG baselines under array mismatch | 2026-07-09 |
 | [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement\|Benslimane et al. 2026: RT-Tango — Real-time Distributed Binaural SE for Low-power Hearing Aids]] | Real-time distributed binaural SE combining ERB compression, grouped RNN, fixed-rate skipping, asymmetric STFT; 33.4 MMACs/s (~6× more efficient than GTCRN at 4 ms hop) with 8 ms latency streaming variant RT-Tango-OS | 2026-07-10 |
+| [[sources/ostergaard-2026-own-voice-cancellation\|Østergaard et al. 2026: Own-Voice Cancellation]] | Introduces OVC: removing enrolled speaker from noisy mixture; Mamba-MinGRU architecture at 2 ms latency | 2026-07-10 |
 | [[sources/stewart-1993-early-history-svd\|Stewart 1993: On the Early History of the Singular Value Decomposition]] | Surveys five mathematicians (Beltrami 1873, Jordan 1874, Sylvester 1889, Schmidt 1907, Weyl 1912) who established the SVD; two traditions (bilinear forms vs. integral equations); Schmidt's approximation theorem and Weyl's perturbation theory | 1993 |
 | [[sources/zartbot-2026-dspark-speculative-decoding\|zartbot 2026: 详细谈谈DSpark投机解码的原理]] | Code-level walkthrough of DSpark (DeepSeek's speculative decoding framework); semi-autoregressive generation + confidence-scheduled verification; surveys 14 draft-model algorithms across 6 stages (2022–2026); reports 60–85% speedup on DeepSeek-V4 | 2026-07-04 |
 
@@ -757,10 +780,10 @@
 
 ## Statistics
 
-- **Total pages**: 718
-- **Entities**: 306
-- **Concepts**: 272
-- **Sources**: 114
+- **Total pages**: 729
+- **Entities**: 312
+- **Concepts**: 276
+- **Sources**: 115
 - **Synthesis**: 19
 - **Queries**: 7
 - **Last updated**: 2026-07-12

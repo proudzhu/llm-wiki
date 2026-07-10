@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-05-23
+updated: 2026-07-10
+sources:
+  - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
 tags:
   - speech-processing
   - source-separation

@@ -31,6 +31,7 @@ Time-domain methods sidestep both issues by generating the output waveform direc
 | Conv-TasNet | Temporal convolutional network | Time (SI-SNR) | Luo & Mesgarani 2019 |
 | DEMUCS | U-Net + LSTM bottleneck | Time + frequency | Défossez et al. 2020 |
 | FullSubNet+ | Full-band + sub-band fusion | Frequency | Chen et al. 2022 |
+| [[concepts/mamba-mingru\|Mamba-MinGRU]] | Mamba blocks + [[concepts/mingru\|MinGRU]] temporal mixing | Time (thresholded SDR) | Østergaard et al. 2026 |
 
 ## Loss Functions
 

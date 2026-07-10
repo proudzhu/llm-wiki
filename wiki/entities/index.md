@@ -302,6 +302,12 @@
 | [[entities/michal-szczepanski\|Michal Szczepanski]] | LORIA, U. Lorraine — co-author of RT-Tango distributed binaural SE | 2026-07-10 |
 | [[entities/fabian-chersi\|Fabian Chersi]] | LORIA, U. Lorraine — co-author of RT-Tango distributed binaural SE | 2026-07-10 |
 | [[entities/romain-serizel\|Romain Serizel]] | LORIA, U. Lorraine — senior author of Tango/RT-Tango distributed binaural SE frameworks | 2026-07-10 |
+| [[entities/karl-ulbaek\|Karl Ulbæk]] | WS Audiology; OVC and Mamba-MinGRU | 2026-07-10 |
+| [[entities/andreas-hansen-bagge\|Andreas Hansen Bagge]] | WS Audiology / DTU Compute; OVC and Mamba-MinGRU | 2026-07-10 |
+| [[entities/mads-ostergaard\|Mads Østergaard]] | WS Audiology; OVC and Mamba-MinGRU | 2026-07-10 |
+| [[entities/alexander-neergaard-zahid\|Alexander Neergaard Zahid]] | WS Audiology; OVC and Mamba-MinGRU | 2026-07-10 |
+| [[entities/kenny-falkjaer-olsen\|Kenny Falkjær Olsen]] | WS Audiology / DTU Compute; SepMamba, OVC, Mamba-MinGRU | 2026-07-10 |
+| [[entities/rasmus-malik-hoegh-lindrup\|Rasmus Malik Høegh Lindrup]] | Verth; OVC and Mamba-MinGRU | 2026-07-10 |
 | [[entities/g-w-stewart\|G. W. Stewart]] | Numerical analyst, University of Maryland — author of the SVD history survey; matrix perturbation theory and CS decomposition | 2026-07-12 |
 | [[entities/eugenio-beltrami\|Eugenio Beltrami]] | Italian mathematician (1835–1899) — first publisher of the SVD (1873) via bilinear forms | 2026-07-12 |
 | [[entities/camille-jordan\|Camille Jordan]] | French mathematician (1838–1921) — codiscoverer of the SVD (1874); introduced deflation technique | 2026-07-12 |

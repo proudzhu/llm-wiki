@@ -264,6 +264,10 @@
 | [[concepts/grouped-recurrent-neural-network\|Grouped Recurrent Neural Network (GRNN)]] | Partitions RNN hidden state into G groups for O(H²/G) complexity; cross-band info via rearrangement; used in RT-Tango | 2026-07-10 |
 | [[concepts/asymmetric-stft\|Asymmetric STFT]] | Long analysis window + shorter synthesis window to decouple spectral resolution from algorithmic latency | 2026-07-10 |
 | [[concepts/fixed-rate-skipping\|Fixed-Rate Skipping (FRS)]] | Temporal sparsification: run DNN at fixed interval, reuse mask in between; exploits temporal redundancy for inference cost reduction | 2026-07-10 |
+| [[concepts/td-speakerbeam\|TD-SpeakerBeam]] | Time-domain SpeakerBeam; enrollment-conditioned TSE/OVC baseline | 2026-07-10 |
+| [[concepts/own-voice-cancellation\|Own-Voice Cancellation (OVC)]] | Removing enrolled speaker from noisy mixture; complement of TSE | 2026-07-10 |
+| [[concepts/mamba-mingru\|Mamba-MinGRU]] | Compute-efficient linear RNN architecture; Mamba blocks + MinGRU temporal mixing; 2 ms latency | 2026-07-10 |
+| [[concepts/mingru\|MinGRU]] | Minimal gated RNN; linear recurrence via parallel associative scan | 2026-07-10 |
 | [[concepts/singular-value-decomposition\|Singular Value Decomposition]] | Factorization $\mathbf{A}=\mathbf{U}\boldsymbol{\Sigma}\mathbf{V}^{\mathrm{T}}$; discovered independently by Beltrami (1873), Jordan (1874), Sylvester (1889), Schmidt (1907); fundamental tool in numerical linear algebra | 2026-07-12 |
 | [[concepts/eckart-young-theorem\|Eckart–Young Theorem]] | Best rank-$k$ approximation in Frobenius/spectral norm is truncated SVD; first proved by Schmidt (1907), rediscovered by Eckart & Young (1936), generalized to all unitarily invariant norms by Mirsky (1960) | 2026-07-12 |
 | [[concepts/spectral-norm\|Spectral Norm]] | Matrix 2-norm $\|\mathbf{A}\|_2=\sigma_1(\mathbf{A})$; governs singular-value perturbation bound $|\tilde{\sigma}_i-\sigma_i|\leq\|\mathbf{E}\|_2$ (Weyl 1912) | 2026-07-12 |
