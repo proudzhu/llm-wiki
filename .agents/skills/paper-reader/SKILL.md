@@ -19,192 +19,101 @@ Invoke this skill when the user asks to:
 
 - **Paper is already in the wiki and up-to-date** — Check `wiki/sources/` and `wiki/log.md` first. If the paper was recently ingested and nothing changed, skip.
 - **User just wants a quick summary** — For a skim or TL;DR, read the existing wiki source page or use the abstract directly. Full ingestion is only warranted for deep analysis.
-- **Zotero is not running or unreachable** — The workflow depends on Zotero's local API. Verify first with `curl -s http://localhost:23119/connector/ping`.
-- **Paper is not in the user's Zotero library** — This skill only ingests from Zotero. For external papers, manually download the PDF and use a different workflow.
-- **Source is not a PDF/academic paper** — This skill is designed for scholarly articles. Web pages, blog posts, and informal documents should use the standard raw article workflow instead.
+- **Zotero is not running or unreachable** — The workflow depends on Zotero's local API. Verify first: `curl -s http://localhost:23119/connector/ping`.
+- **Paper is not in the user's Zotero library** — This skill only ingests from Zotero. For external papers (e.g. direct arXiv URL), skip Zotero steps and use extraction scripts directly.
+- **Source is not a PDF/academic paper** — Web pages, blog posts, and informal documents should use the standard raw article workflow instead.
 - **Re-ingestion of an identical version** — Only re-ingest if the source PDF was updated (e.g., camera-ready replaces preprint) or the existing wiki page is significantly incomplete.
 
 ## Prerequisites
 
-- Zotero must be running with "Allow other applications" enabled
-- Verify with: `curl -s http://localhost:23119/connector/ping`
-- `mineru-open-api` CLI available for MinerU extraction (`npm install -g mineru-open-api`)
-- **Verify MinerU token is configured** before attempting extraction (avoids 600s timeout on auth failure):
-  ```bash
-  mineru-open-api auth --show
-  ```
-  If no token shown, run `mineru-open-api auth` to configure.
-- `defuddle` CLI available for arXiv HTML extraction (`npm install -g defuddle`)
+- Zotero running with "Allow other applications" enabled
+- `mineru-open-api` CLI (`npm install -g mineru-open-api`) — verify token: `mineru-open-api auth --show`
+- `defuddle` CLI (`npm install -g defuddle`) for arXiv HTML extraction
+- All scripts run from the **project root**
 
-## Workflow Steps
+## Available Scripts
 
-### Step 1: Search Zotero for the Paper
+Mechanical steps are automated as Python scripts in `scripts/`. Run them from the project root.
+
+| Script | Step | Purpose |
+|--------|------|---------|
+| `scripts/zotero_fetch.py` | 1-2 | Search Zotero + fetch metadata + find PDF attachment key |
+| `scripts/prepare_paper.py` | 3a | Create `raw/papers/{slug}/`, copy PDF (handles Unicode), verify `%PDF-` header |
+| `scripts/extract_arxiv_html.py` | 3b | arXiv HTML extraction via Defuddle + download figures + fix links + delete PDF |
+| `scripts/extract_mineru.py` | 3c | MinerU extraction + rename `images/`→`figures/` + update refs + delete PDF |
+| `scripts/extract_pdftotext.py` | 3d | pdftotext fallback (plain text, no images) + delete PDF |
+| `scripts/update_indexes.py` | 10 | Add rows to `wiki/index.md` + subdirectory indexes; recount statistics |
+| `scripts/append_log.py` | 11 | Append formatted entry to `wiki/log.md` |
+| `scripts/build_check.py` | 12 | Run `mkdocs build --strict` (tries `uv run` then `python -m`) |
+| `scripts/commit_ingest.py` | 13 | Stage ingest files + verify no `paper.pdf` + commit |
+
+## Workflow
+
+### Step 1-2: Search Zotero & Fetch Metadata
 
 ```bash
-curl -s "http://localhost:23119/api/users/0/items?q=SEARCH_TERMS&qmode=titleCreatorYear&limit=5"
+# Search by title/author/year
+python .agents/skills/paper-reader/scripts/zotero_fetch.py search "SEARCH_TERMS"
+
+# Fetch full metadata + PDF attachment key for the chosen item
+python .agents/skills/paper-reader/scripts/zotero_fetch.py metadata ZOTERO_KEY
 ```
 
-Parse the JSON response to identify the correct paper. Note the **Zotero key** (e.g., `6EW3W6U6`).
+Note the **Zotero key** (e.g., `8ZWV2E4T`) and **PDF attachment key** (e.g., `5H7GWRF3`).
 
-### Step 2: Fetch Paper Details and Find PDF Attachment
+If the paper has an arXiv ID but is not in Zotero, note the arXiv ID and proceed to Step 3b directly (skip `prepare_paper.py`).
+
+### Step 3: Extract Paper Content
+
+#### 3a. Prepare Directory & Copy PDF
 
 ```bash
-# Save full metadata to temp file (avoids PowerShell encoding issues with JSON)
-curl -s "http://localhost:23119/api/users/0/items/KEY" > .tmp_zotero.json
-
-# Read the temp file with the Read tool to extract metadata fields
-
-# Find PDF attachment (search children)
-curl -s "http://localhost:23119/api/users/0/items/KEY/children" > .tmp_children.json
-# Read the temp file to find the PDF attachment key (contentType: "application/pdf")
+python .agents/skills/paper-reader/scripts/prepare_paper.py --slug SLUG --pdf-key PDF_KEY
 ```
 
-Extract: title, authors, year, type, abstract, DOI, URL, tags, and **PDF attachment key**.
-
-**Clean up** temp files:
-```bash
-rm -f .tmp_zotero.json .tmp_children.json
-```
-```powershell
-Remove-Item .tmp_zotero.json, .tmp_children.json -ErrorAction SilentlyContinue
-```
-
-### Step 3: Extract Paper Content from PDF
-
-#### 3a. Copy PDF and Create Directory
-
-Create directory:
-```bash
-mkdir -p "raw/papers/{slug}"
-```
-```powershell
-New-Item -ItemType Directory -Force -Path "raw/papers/{slug}" | Out-Null
-```
-
-Copy PDF from Zotero storage (`C:\Users\proud\Zotero\storage\{PDF_KEY}\`). **Zotero filenames often contain non-ASCII characters (umlauts, CJK, etc.) that break bash `cp`. Use Python for reliable cross-platform copying:**
-```bash
-python -c "
-import shutil, glob
-files = glob.glob('C:/Users/proud/Zotero/storage/{PDF_KEY}/*.pdf')
-if files:
-    shutil.copy2(files[0], 'raw/papers/{slug}/paper.pdf')
-    print('Copied:', files[0])
-else:
-    print('No PDF found')
-"
-```
-```powershell
-$pdf = Get-ChildItem "C:\Users\proud\Zotero\storage\{PDF_KEY}\" -Filter "*.pdf" | Select-Object -First 1
-Copy-Item $pdf.FullName "raw/papers/{slug}/paper.pdf"
-```
-
-**Verify** the PDF header:
-```bash
-head -c 5 "raw/papers/{slug}/paper.pdf"
-# Should output: %PDF-
-```
-```powershell
-$bytes = [System.IO.File]::ReadAllBytes("raw/papers/{slug}/paper.pdf"); [System.Text.Encoding]::ASCII.GetString($bytes[0..4])
-# Should output: %PDF-
-```
-
-If the header is empty or file size is 0, re-copy with the exact filename.
-
-Slug format: `author-year-short-title` (lowercase, hyphenated).
+Slug format: `author-year-short-title` (lowercase, hyphenated). The script handles non-ASCII filenames and verifies the `%PDF-` header.
 
 #### 3b. arXiv HTML (Preferred for arXiv Papers)
 
-If the paper has an arXiv ID, **always prefer the HTML version** — better text quality than PDF extraction. **But first verify it exists** — many older papers (pre-2022) don't have HTML versions:
+If the paper has an arXiv ID, **always prefer the HTML version** — better text quality than PDF extraction:
+
 ```bash
-curl -s -o /dev/null -w "%{http_code}" "https://arxiv.org/html/ARXIV_ID"
-# If 200, proceed with HTML extraction below.
-# If 404, fall back to MinerU (Step 3c).
+python .agents/skills/paper-reader/scripts/extract_arxiv_html.py --arxiv-id ARXIV_ID --slug SLUG
 ```
 
-1. **Extract markdown with Defuddle**:
-```bash
-defuddle parse "https://arxiv.org/html/ARXIV_ID" --md -o "raw/papers/{slug}/full-text.md"
-```
-
-2. **Download figures from arXiv HTML**:
-```bash
-mkdir -p raw/papers/{slug}/figures
-curl -s -L "https://arxiv.org/html/ARXIV_IDv1/figure1.png" -o "raw/papers/{slug}/figures/fig1.png"
-# Repeat for all figures
-```
-
-3. **Replace remote image links with local paths** in `full-text.md`.
-
-4. **Delete the PDF**:
-```bash
-rm -f "raw/papers/{slug}/paper.pdf"
-```
-```powershell
-Remove-Item "raw/papers/{slug}/paper.pdf"
-```
+The script checks if HTML exists (falls back to MinerU with exit code 2 if 404), runs Defuddle, downloads figures, and replaces remote image links with local embed wikilinks.
 
 #### 3c. MinerU (For Non-arXiv Papers or arXiv Fallback)
 
 ```bash
-mineru-open-api extract "raw/papers/{slug}/paper.pdf" -o "raw/papers/{slug}/full-text.md" --language en --model vlm --formula --table --timeout 600
+python .agents/skills/paper-reader/scripts/extract_mineru.py --slug SLUG [--language en --model vlm --timeout 600]
 ```
 
-**Parameters**: `--language en` (paper language), `--model vlm` (VLM layout analysis, default), `--model pipeline` (zero-hallucination), `--formula`, `--table`, `--timeout 600`.
+Parameters: `--model vlm` (VLM layout analysis, default), `--model pipeline` (zero-hallucination). Token required: `mineru-open-api auth`.
 
-**Token required**: Run `mineru-open-api auth` to configure, or set `MINERU_TOKEN`. Verify with `mineru-open-api auth --show`.
+Post-processing (automatic): `images/` → `figures/`, references updated in `full-text.md`.
 
-**Post-processing**: MinerU saves images in an `images/` subdirectory. Rename and update references:
-```bash
-mv "raw/papers/{slug}/images" "raw/papers/{slug}/figures"
-sed -i 's|images/|figures/|g' "raw/papers/{slug}/full-text.md"
-```
-```powershell
-Move-Item "raw/papers/{slug}/images" "raw/papers/{slug}/figures" -Force
-(Get-Content "raw/papers/{slug}/full-text.md") -replace 'images/', 'figures/' | Set-Content "raw/papers/{slug}/full-text.md"
-```
-
-**Verify extraction quality**: Read first 200 lines and last 100 lines of `full-text.md`.
-
-**Note**: MinerU VLM may produce mermaid code blocks for diagrams — these are normal and can be left as-is.
-
-**Delete the PDF** after successful extraction:
-```bash
-rm -f "raw/papers/{slug}/paper.pdf"
-```
-```powershell
-Remove-Item "raw/papers/{slug}/paper.pdf"
-```
-
-**Troubleshooting**:
-- If extract returns `parsing failed`, verify PDF is valid (Step 3a header check)
-- If server errors persist, fall back to pdftotext (3d)
-- If MinerU is not installed: `npm install -g mineru-open-api`
+Verify extraction quality: Read first 200 lines and last 100 lines of `full-text.md`. MinerU VLM may produce mermaid code blocks for diagrams — these are normal.
 
 #### 3d. Fallback: pdftotext (If MinerU Fails)
 
 ```bash
-pdftotext -layout "raw/papers/{slug}/paper.pdf" "raw/papers/{slug}/full-text.txt"
+python .agents/skills/paper-reader/scripts/extract_pdftotext.py --slug SLUG
 ```
 
-Font mismatch warnings are normal. Note: pdftotext produces `.txt` without images.
-
-**Delete the PDF**:
-```bash
-rm -f "raw/papers/{slug}/paper.pdf"
-```
-```powershell
-Remove-Item "raw/papers/{slug}/paper.pdf"
-```
+Produces `.txt` without images. Font mismatch warnings are normal.
 
 #### 3e. Extract Images (Optional — before deleting PDF)
 
-If the user explicitly requests it, extract images **before the PDF is deleted** (add this step before the deletion command in whichever extraction path was taken):
+If the user explicitly requests standalone image extraction (beyond what MinerU/arXiv HTML provides), and the PDF still exists:
+
 ```bash
 pdfimages -all "raw/papers/{slug}/paper.pdf" "raw/papers/{slug}/img"
 ```
-Requires `poppler-utils`.
 
-**Note**: MinerU figures are hash-named JPEGs (e.g., `8b539670…583.jpg`). When referencing them in a source page, list the `figures/` directory to discover actual filenames rather than guessing — the filenames are deterministic from the PDF content.
+Requires `poppler-utils`. Run this **before** any extraction script that deletes the PDF.
+
+**Note**: MinerU figures are hash-named JPEGs (e.g., `8b539670…583.jpg`). When referencing them, list the `figures/` directory to discover actual filenames — the filenames are deterministic from the PDF content.
 
 ### Step 4: Read and Analyze the Full Paper Content
 
@@ -255,16 +164,15 @@ tags:
 
 | Include figure? | Criteria | Examples |
 |-----------------|----------|----------|
-| ✅ Include | Visual is essential to understand the core problem or method | System block diagram, network architecture, problem illustration |
-| ❌ Skip | Data is already well-summarized in text or tables | Performance curves, spectrogram plots, convergence plots |
+| Include | Visual is essential to understand the core problem or method | System block diagram, network architecture, problem illustration |
+| Skip | Data is already well-summarized in text or tables | Performance curves, spectrogram plots, convergence plots |
 
 Guidelines:
 - Place figures immediately after the section they illustrate
-- Use vault-absolute wikilink paths: `![[raw/papers/{slug}/figures/ACTUAL_FILENAME.ext|caption]]`
+- Use vault-absolute embed wikilink paths: `![[raw/papers/{slug}/figures/ACTUAL_FILENAME.ext|caption]]`
 - **List the `figures/` directory first** to discover actual filenames — MinerU produces hash-named `.jpg` files, arXiv HTML figures are named `fig1.png`
 - Add an italicized caption below each figure: `*Figure N: description.*`
 - Maximum 3 figures per source page — prefer the most informative ones
-- If figures are available in `raw/papers/{slug}/figures/`, reference them (do not embed or duplicate)
 - When adding figures, also update corresponding concept pages with the same figure if it illustrates a key concept
 
 **For re-ingestion**: Overwrite the existing source page with updated comprehensive content.
@@ -345,26 +253,41 @@ Check if any existing synthesis pages should reference this paper:
 
 ### Step 10: Update Indexes
 
-**Main index** (`wiki/index.md`):
-- Add new entity rows to the Entities table
-- Add new concept rows to the Concepts table
-- Add new source row to the Sources table
-- Update Statistics section (increment counts)
+For each new page created, add a row to the indexes:
 
-**Subdirectory indexes** (append new rows to each):
-- `wiki/sources/index.md` — add new source row
-- `wiki/entities/index.md` — add new entity rows
-- `wiki/concepts/index.md` — add new concept rows
+```bash
+# Add source row
+python .agents/skills/paper-reader/scripts/update_indexes.py add \
+    --category sources --slug SLUG --display "Title" --summary "..." --date YYYY-MM-DD
+
+# Add entity rows
+python .agents/skills/paper-reader/scripts/update_indexes.py add \
+    --category entities --slug author-name --display "Author Name" --summary "..." --date YYYY-MM-DD
+
+# Add concept rows
+python .agents/skills/paper-reader/scripts/update_indexes.py add \
+    --category concepts --slug concept-name --display "Concept Name" --summary "..." --date YYYY-MM-DD
+```
+
+The script inserts into both `wiki/index.md` (correct section) and the subdirectory index, skipping duplicates. Then update statistics:
+
+```bash
+python .agents/skills/paper-reader/scripts/update_indexes.py stats
+```
+
+This recounts all categories and rewrites the `## Statistics` section.
 
 ### Step 11: Update Log
 
-Append to the **end** of `wiki/log.md` (entries sorted by date ascending, newest at bottom):
+Write the log entry body to a temp file (or use `--stdin`/`--body`), then append:
+
+```bash
+python .agents/skills/paper-reader/scripts/append_log.py --op ingest --title "Paper Title (Author Year)" --file .tmp_log_entry.md
+```
+
+Entry body format (write to temp file):
 
 ```markdown
----
-
-## [YYYY-MM-DD] ingest | Paper Title (Author Year)
-
 - **Source**: `raw/papers/{slug}/full-text.md` (Zotero: KEY)
 - **Authors**: Author1, Author2, Author3
 - **Published**: Venue Year, pp. XXX–XXX
@@ -374,55 +297,36 @@ Append to the **end** of `wiki/log.md` (entries sorted by date ascending, newest
   - `raw/papers/{slug}/full-text.md` — extracted text from Zotero PDF
   - `wiki/sources/{slug}.md`
   - `wiki/entities/author1.md`
-  - `wiki/entities/author2.md`
   - `wiki/concepts/concept1.md`
-  - `wiki/concepts/concept2.md`
 - **Pages updated**:
   - `wiki/entities/existing-author.md` — added this paper
   - `wiki/concepts/existing-concept.md` — added cross-refs and source link
-  - `wiki/synthesis/synthesis-page.md` — added paper to relevant synthesis
   - `wiki/index.md` — added N entities, N concepts, 1 source; updated statistics
   - `wiki/sources/index.md` — added 1 source row
-  - `wiki/entities/index.md` — added N entity rows
-  - `wiki/concepts/index.md` — added N concept rows
 ```
 
-For re-ingestion, use `ingest (re)` as the operation.
+For re-ingestion, use `ingest (re)` as the operation in `--title`.
 
 ### Step 12: Build Verification (MkDocs)
 
 ```bash
-uv run mkdocs build --strict
+python .agents/skills/paper-reader/scripts/build_check.py
 ```
 
-If `uv run` is unavailable:
-```bash
-python -m mkdocs build --strict
-```
-
-If the command fails or exits with warnings (broken links, missing pages), resolve them before proceeding.
+If the build fails or exits with warnings (broken links, missing pages), resolve them before proceeding. The page-creation rules in AGENTS.md *Link Conventions* are designed so this step should always pass; if it does not, the offending page violated a convention and must be fixed.
 
 ### Step 13: Commit Changes
 
 ```bash
-git add raw/papers/{slug}/ wiki/sources/{slug}.md wiki/index.md wiki/log.md wiki/sources/index.md
-# Add new/modified entity, concept, and synthesis files explicitly (avoid broad dir adds):
-git add wiki/entities/{author1}.md wiki/entities/{author2}.md wiki/concepts/{concept1}.md wiki/concepts/{concept2}.md
-# Then update subdirectory indexes:
-git add wiki/entities/index.md wiki/concepts/index.md
-git status --short   # verify no PDF or unrelated files staged
-git commit -m "ingest: Short Title (Author Year)"
+python .agents/skills/paper-reader/scripts/commit_ingest.py \
+    --slug SLUG \
+    --message "ingest: Short Title (Author Year)" \
+    --entities author1 author2 \
+    --concepts concept1 concept2 \
+    --synthesis synth1
 ```
 
-If a pre-commit hook fails (e.g., `uv run` not found), bypass it:
-```bash
-git commit --no-verify -m "ingest: Short Title (Author Year)"
-```
-
-**Never commit `paper.pdf`** — if it appears staged, remove it:
-```bash
-git rm --cached "raw/papers/{slug}/paper.pdf" && rm -f "raw/papers/{slug}/paper.pdf" && git commit --no-verify --amend --no-edit
-```
+The script stages `raw/papers/{slug}/`, `wiki/sources/{slug}.md`, all index files, `wiki/log.md`, and the specified entity/concept/synthesis pages. It verifies no `paper.pdf` is staged and commits. Use `--no-verify` if the pre-commit hook has environment issues unrelated to your changes.
 
 ## Naming Conventions
 
@@ -445,7 +349,6 @@ git rm --cached "raw/papers/{slug}/paper.pdf" && rm -f "raw/papers/{slug}/paper.
 - **Frontmatter dates**: Use today's date for `created`, update `updated` on modified pages
 - **Prefer curl over Python** for Zotero API calls
 - **Create missing concept pages** during ingest to maintain wiki integrity
-- **Log entries**: Always append at the end (newest last)
 - **Avoid `\bm{}` in LaTeX math**: MathJax does not load the `bm` package. Use `\mathbf{x}` (bold upright) or `\boldsymbol{x}` (bold italic) instead
-- **Delete the PDF** after extraction — never commit `paper.pdf`
+- **Delete the PDF** after extraction — extraction scripts handle this automatically; never commit `paper.pdf`
 - **Commit after build verification** — use `--no-verify` only if the pre-commit hook has environment issues unrelated to your changes
