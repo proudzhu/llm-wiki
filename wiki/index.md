@@ -298,6 +298,12 @@
 | [[entities/avichay-ashur\|Avichay Ashur]] | Technion — acoustic howling suppression by fine-tuning deep speech enhancement networks | 2026-07-03 |
 | [[entities/matthias-rath\|Matthias Rath]] | Institute for Advanced Procrastination, Berlin — minimum delay formula for realtime block size adaptation in audio DSP (LAC 2026) | 2026-07-07 |
 | [[entities/matthias-geier\|Matthias Geier]] | ai-coustics / Fraunhofer IIS — co-author of minimum delay formula for realtime block size adaptation (LAC 2026) | 2026-07-07 |
+| [[entities/g-w-stewart\|G. W. Stewart]] | Numerical analyst, University of Maryland — author of the SVD history survey; matrix perturbation theory and CS decomposition | 2026-07-12 |
+| [[entities/eugenio-beltrami\|Eugenio Beltrami]] | Italian mathematician (1835–1899) — first publisher of the SVD (1873) via bilinear forms | 2026-07-12 |
+| [[entities/camille-jordan\|Camille Jordan]] | French mathematician (1838–1921) — codiscoverer of the SVD (1874); introduced deflation technique | 2026-07-12 |
+| [[entities/james-joseph-sylvester\|James Joseph Sylvester]] | British mathematician (1814–1897) — independently discovered the SVD (1889); coined "matrix" | 2026-07-12 |
+| [[entities/erhard-schmidt\|Erhard Schmidt]] | German mathematician (1876–1959) — generalized SVD to integral equations; proved the approximation theorem (1907) | 2026-07-12 |
+| [[entities/hermann-weyl\|Hermann Weyl]] | German mathematician (1885–1955) — perturbation theory for singular values; Weyl's inequality (1912) | 2026-07-12 |
 
 ---
 
@@ -562,6 +568,9 @@
 | [[concepts/bezouts-identity\|Bézout's Identity]] | Number theory result: gcd(a,b) = c₁a + c₂b for integers c₁,c₂; foundation for proving tightness of block delay bound | 2026-07-07 |
 | [[concepts/audio-latency\|Audio Latency]] | Time delay between input and output in audio systems; sources include block size, reblocking, AD/DA, resampling | 2026-07-07 |
 | [[concepts/fifo-queue\|FIFO Queue (First-In-First-Out)]] | Order-preserving queue data structure; implemented as ring buffers for audio stream buffering | 2026-07-07 |
+| [[concepts/singular-value-decomposition\|Singular Value Decomposition]] | Factorization $\mathbf{A}=\mathbf{U}\boldsymbol{\Sigma}\mathbf{V}^{\mathrm{T}}$; discovered independently by Beltrami (1873), Jordan (1874), Sylvester (1889), Schmidt (1907); fundamental tool in numerical linear algebra | 2026-07-12 |
+| [[concepts/eckart-young-theorem\|Eckart–Young Theorem]] | Best rank-$k$ approximation in Frobenius/spectral norm is truncated SVD; first proved by Schmidt (1907), rediscovered by Eckart & Young (1936), generalized to all unitarily invariant norms by Mirsky (1960) | 2026-07-12 |
+| [[concepts/spectral-norm\|Spectral Norm]] | Matrix 2-norm $\|\mathbf{A}\|_2=\sigma_1(\mathbf{A})$; governs singular-value perturbation bound $|\tilde{\sigma}_i-\sigma_i|\leq\|\mathbf{E}\|_2$ (Weyl 1912) | 2026-07-12 |
 
 ---
 
@@ -681,6 +690,7 @@
 | [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn\|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]] | PINN interpolates soundfield from outside-ROI monitoring microphones using wave equation PDE loss; 8 dB better interpolation than SH; −13 dB more NR than multiple-point ANC | 2026-06-25 |
 | [[sources/ashur-2026-acoustic-howling-suppression-fine-tuning\|Ashur & Cohen 2026: AHS by Fine-Tuning Deep Speech Enhancement Networks]] | Fine-tunes pretrained DEMUCS-based Denoiser with offline-generated howling samples; 60-40 mixing ratio achieves state-of-the-art PESQ stability across gains with <1% noise-reduction loss; no architectural modification or recursive training | 2026-07-03 |
 | [[sources/rath-2026-minimum-delay-block-size\|Rath & Geier 2026: Minimum Required Delay for Realtime Block Size Adaptation]] | Closed-form formula Δ = b_plugin − gcd(b_host, b_plugin) for minimum latency in block-based audio reblocking; replaces O(LCM) PortAudio brute-force algorithm with O(1) computation; uses Bézout's identity from number theory | 2026-07-07 |
+| [[sources/stewart-1993-early-history-svd\|Stewart 1993: On the Early History of the Singular Value Decomposition]] | Surveys five mathematicians (Beltrami 1873, Jordan 1874, Sylvester 1889, Schmidt 1907, Weyl 1912) who established the SVD; two traditions (bilinear forms vs. integral equations); Schmidt's approximation theorem and Weyl's perturbation theory | 1993 |
 
 ---
 
@@ -730,10 +740,10 @@
 
 ## Statistics
 
-- **Total pages**: 679
-- **Entities**: 288
-- **Concepts**: 255
-- **Sources**: 110
+- **Total pages**: 689
+- **Entities**: 294
+- **Concepts**: 258
+- **Sources**: 111
 - **Synthesis**: 19
 - **Queries**: 7
-- **Last updated**: 2026-07-07
+- **Last updated**: 2026-07-12

@@ -2747,3 +2747,31 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 - **Build**: `uv run mkdocs build --strict` passes clean (0 warnings, exit 0).
 - **Actions taken**: Added 5 missing index entries to `wiki/index.md`; corrected statistics; merged duplicate heading; verified all indexes now match actual files (diff=0 across all categories).
 
+---
+
+## [2026-07-12] ingest | On the Early History of the Singular Value Decomposition (Stewart 1993)
+
+- **Source**: `raw/papers/stewart-1993-early-history-svd/full-text.md` (Zotero: WKC35DNZ)
+- **Author**: G. W. Stewart (University of Maryland, College Park)
+- **Published**: SIAM Review, vol. 35, no. 4, pp. 551–566, December 1993
+- **DOI**: 10.1137/1035134
+- **Summary**: Historical survey of five mathematicians who established the SVD — Beltrami (1873), Jordan (1874), Sylvester (1889) via bilinear forms; Schmidt (1907) and Weyl (1912) via integral equations. Schmidt proved the best rank-k approximation theorem; Weyl provided perturbation theory (Weyl's inequality) and the spectral-norm bound.
+- **Extraction**: MinerU pipeline model (OCR) on scanned PDF from Zotero; 741 lines, 62 KB.
+- **Pages created**:
+  - `raw/papers/stewart-1993-early-history-svd/full-text.md` — extracted text via MinerU pipeline
+  - `wiki/sources/stewart-1993-early-history-svd.md`
+  - `wiki/entities/g-w-stewart.md`
+  - `wiki/entities/eugenio-beltrami.md`
+  - `wiki/entities/camille-jordan.md`
+  - `wiki/entities/james-joseph-sylvester.md`
+  - `wiki/entities/erhard-schmidt.md`
+  - `wiki/entities/hermann-weyl.md`
+  - `wiki/concepts/singular-value-decomposition.md`
+  - `wiki/concepts/eckart-young-theorem.md`
+  - `wiki/concepts/spectral-norm.md`
+- **Pages updated**:
+  - `wiki/index.md` — added 6 entities, 3 concepts, 1 source; updated statistics to 689/294/258/111/19/7
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 6 entity rows
+  - `wiki/concepts/index.md` — added 3 concept rows
+
