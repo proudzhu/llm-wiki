@@ -298,4 +298,6 @@
 | [[entities/james-joseph-sylvester\|James Joseph Sylvester]] | British mathematician (1814–1897) — independently discovered the SVD (1889); coined "matrix" | 2026-07-12 |
 | [[entities/erhard-schmidt\|Erhard Schmidt]] | German mathematician (1876–1959) — generalized SVD to integral equations; proved the approximation theorem (1907) | 2026-07-12 |
 | [[entities/hermann-weyl\|Hermann Weyl]] | German mathematician (1885–1955) — perturbation theory for singular values; Weyl's inequality (1912) | 2026-07-12 |
+| [[entities/zartbot\|zartbot]] | Chinese-language technical blogger — code-level walkthroughs of LLM inference and systems topics (speculative decoding, DSpark) | 2026-07-12 |
+| [[entities/deepseek\|DeepSeek]] | Chinese AI research lab — developer of DSpark, DeepSeek-V3 MTP; deployed speculative decoding on DeepSeek-V4 | 2026-07-12 |
 

@@ -304,6 +304,8 @@
 | [[entities/james-joseph-sylvester\|James Joseph Sylvester]] | British mathematician (1814–1897) — independently discovered the SVD (1889); coined "matrix" | 2026-07-12 |
 | [[entities/erhard-schmidt\|Erhard Schmidt]] | German mathematician (1876–1959) — generalized SVD to integral equations; proved the approximation theorem (1907) | 2026-07-12 |
 | [[entities/hermann-weyl\|Hermann Weyl]] | German mathematician (1885–1955) — perturbation theory for singular values; Weyl's inequality (1912) | 2026-07-12 |
+| [[entities/zartbot\|zartbot]] | Chinese-language technical blogger — code-level walkthroughs of LLM inference and systems topics (speculative decoding, DSpark) | 2026-07-12 |
+| [[entities/deepseek\|DeepSeek]] | Chinese AI research lab — developer of DSpark, DeepSeek-V3 MTP; deployed speculative decoding on DeepSeek-V4 | 2026-07-12 |
 
 ---
 
@@ -571,6 +573,15 @@
 | [[concepts/singular-value-decomposition\|Singular Value Decomposition]] | Factorization $\mathbf{A}=\mathbf{U}\boldsymbol{\Sigma}\mathbf{V}^{\mathrm{T}}$; discovered independently by Beltrami (1873), Jordan (1874), Sylvester (1889), Schmidt (1907); fundamental tool in numerical linear algebra | 2026-07-12 |
 | [[concepts/eckart-young-theorem\|Eckart–Young Theorem]] | Best rank-$k$ approximation in Frobenius/spectral norm is truncated SVD; first proved by Schmidt (1907), rediscovered by Eckart & Young (1936), generalized to all unitarily invariant norms by Mirsky (1960) | 2026-07-12 |
 | [[concepts/spectral-norm\|Spectral Norm]] | Matrix 2-norm $\|\mathbf{A}\|_2=\sigma_1(\mathbf{A})$; governs singular-value perturbation bound $|\tilde{\sigma}_i-\sigma_i|\leq\|\mathbf{E}\|_2$ (Weyl 1912) | 2026-07-12 |
+| [[concepts/speculative-decoding\|Speculative Decoding]] | Draft-then-verify LLM inference acceleration; rejection sampling guarantees lossless distribution equivalence; speedup $S=\frac{1+c\gamma\alpha}{1+c\gamma}$ governed by acceptance rate $\alpha$, cost ratio $c$, draft length $\gamma$ | 2026-07-12 |
+| [[concepts/dspark\|DSpark]] | DeepSeek's speculative decoding framework (2026); semi-autoregressive generation (parallel backbone + lightweight serial head) + confidence-scheduled verification with hardware-aware prefix scheduler; deployed on DeepSeek-V4 with 60–85% speedup | 2026-07-12 |
+| [[concepts/dflash\|DFlash]] | Parallel block-diffusion drafting (2025); $O(1)$ drafting latency via bidirectional backbone + KV injection of target hidden states; direct predecessor of DSpark | 2026-07-12 |
+| [[concepts/eagle-speculative-decoding\|EAGLE (Speculative Decoding)]] | Feature-layer autoregressive drafting family (EAGLE-1/2/3, 2024–2025); dynamic draft trees, training-time test; principal autoregressive baseline for DSpark | 2026-07-12 |
+| [[concepts/medusa\|Medusa]] | Multi-head self-speculation (2024); K extra prediction heads on target LLM + tree attention + typical acceptance; spawned the self-speculation research line | 2026-07-12 |
+| [[concepts/multi-token-prediction\|Multi-Token Prediction (MTP)]] | Training-integrated multi-head forecasting (Meta MTP 2024, DeepSeek-V3 MTP 2024); shifts drafting from post-training add-on to pretraining-builtin feature | 2026-07-12 |
+| [[concepts/tree-attention\|Tree Attention]] | Attention-mask trick for single-pass parallel verification of branched draft candidates; $O(b^d)$ paths verified in $O(b\cdot d)$ operations; foundation for SpecInfer, Medusa, EAGLE-2, DDTree, DSpark | 2026-07-12 |
+| [[concepts/specinfer\|SpecInfer]] | First tree-based speculative decoding (2023); token-tree verification + restorative (generalized rejection) sampling; introduced tree attention to the field | 2026-07-12 |
+| [[concepts/ddtree\|DDTree]] | Best-first tree search over DFlash's marginal logits (2026); restores prefix-dependency in parallel drafting without serial heads; sibling approach to DSpark | 2026-07-12 |
 
 ---
 
@@ -691,6 +702,7 @@
 | [[sources/ashur-2026-acoustic-howling-suppression-fine-tuning\|Ashur & Cohen 2026: AHS by Fine-Tuning Deep Speech Enhancement Networks]] | Fine-tunes pretrained DEMUCS-based Denoiser with offline-generated howling samples; 60-40 mixing ratio achieves state-of-the-art PESQ stability across gains with <1% noise-reduction loss; no architectural modification or recursive training | 2026-07-03 |
 | [[sources/rath-2026-minimum-delay-block-size\|Rath & Geier 2026: Minimum Required Delay for Realtime Block Size Adaptation]] | Closed-form formula Δ = b_plugin − gcd(b_host, b_plugin) for minimum latency in block-based audio reblocking; replaces O(LCM) PortAudio brute-force algorithm with O(1) computation; uses Bézout's identity from number theory | 2026-07-07 |
 | [[sources/stewart-1993-early-history-svd\|Stewart 1993: On the Early History of the Singular Value Decomposition]] | Surveys five mathematicians (Beltrami 1873, Jordan 1874, Sylvester 1889, Schmidt 1907, Weyl 1912) who established the SVD; two traditions (bilinear forms vs. integral equations); Schmidt's approximation theorem and Weyl's perturbation theory | 1993 |
+| [[sources/zartbot-2026-dspark-speculative-decoding\|zartbot 2026: 详细谈谈DSpark投机解码的原理]] | Code-level walkthrough of DSpark (DeepSeek's speculative decoding framework); semi-autoregressive generation + confidence-scheduled verification; surveys 14 draft-model algorithms across 6 stages (2022–2026); reports 60–85% speedup on DeepSeek-V4 | 2026-07-04 |
 
 ---
 
@@ -740,10 +752,10 @@
 
 ## Statistics
 
-- **Total pages**: 689
-- **Entities**: 294
-- **Concepts**: 258
-- **Sources**: 111
+- **Total pages**: 701
+- **Entities**: 296
+- **Concepts**: 267
+- **Sources**: 112
 - **Synthesis**: 19
 - **Queries**: 7
 - **Last updated**: 2026-07-12

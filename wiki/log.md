@@ -2775,3 +2775,32 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/entities/index.md` — added 6 entity rows
   - `wiki/concepts/index.md` — added 3 concept rows
 
+---
+
+## [2026-07-12] ingest | 详细谈谈DSpark投机解码的原理 (zartbot 2026)
+
+- **Source**: `raw/articles/dspark-speculative-decoding.md` (WeChat article: https://mp.weixin.qq.com/s/RRHg9UCCInSc_zEcIgjNBQ)
+- **Author**: zartbot (渣注)
+- **Published**: 2026-07-04 (WeChat)
+- **Summary**: Code-level walkthrough of DSpark — DeepSeek's open-source speculative decoding framework. Covers: (1) speculative decoding fundamentals (rejection sampling, speedup formula $S=\frac{1+c\gamma\alpha}{1+c\gamma}$); (2) survey of 14 draft-model algorithms across 6 stages (2022–2026: autoregressive → tree → multi-head → MTP → parallel diffusion → causal tree); (3) DSpark deep dive — semi-autoregressive generation (parallel backbone + lightweight Markov/RNN serial head) and confidence-scheduled verification (confidence head + sequential temperature scaling + hardware-aware prefix scheduler); (4) production deployment on DeepSeek-V4 with 60–85% per-user speedup.
+- **Extraction**: WeChat HTML downloaded via PowerShell (Defuddle and WebFetch failed due to page size); content extracted from `js_content` div; converted to markdown via custom `_convert_wechat.py` (BeautifulSoup-based, 91 KB output).
+- **Pages created**:
+  - `raw/articles/dspark-speculative-decoding.md` — converted markdown
+  - `wiki/sources/zartbot-2026-dspark-speculative-decoding.md`
+  - `wiki/entities/zartbot.md`
+  - `wiki/entities/deepseek.md`
+  - `wiki/concepts/speculative-decoding.md`
+  - `wiki/concepts/dspark.md`
+  - `wiki/concepts/dflash.md`
+  - `wiki/concepts/eagle-speculative-decoding.md`
+  - `wiki/concepts/medusa.md`
+  - `wiki/concepts/multi-token-prediction.md`
+  - `wiki/concepts/tree-attention.md`
+  - `wiki/concepts/specinfer.md`
+  - `wiki/concepts/ddtree.md`
+- **Pages updated**:
+  - `wiki/index.md` — added 2 entities, 9 concepts, 1 source; updated statistics to 701/296/267/112/19/7
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 2 entity rows; fixed pre-existing index drift (missing Hermann Weyl entry from SVD ingest)
+  - `wiki/concepts/index.md` — added 9 concept rows
+
