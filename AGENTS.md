@@ -156,9 +156,17 @@ Reusable workflows are stored in `.agents/skills/`. Each skill has a `SKILL.md` 
 | **paper-reader** | [`.agents/skills/paper-reader/SKILL.md`](.agents/skills/paper-reader/SKILL.md) | Ingesting a paper from Zotero — handles search, PDF extraction (MinerU/arXiv HTML/pdftotext), and full wiki page creation |
 | **wiki-lint** | [`.agents/skills/wiki-lint/SKILL.md`](.agents/skills/wiki-lint/SKILL.md) | Health-checking the wiki — index drift, broken links, orphan pages, statistics verification |
 | **wiki-conflict-resolver** | [`.agents/skills/wiki-conflict-resolver/SKILL.md`](.agents/skills/wiki-conflict-resolver/SKILL.md) | Resolving Git rebase/merge conflicts in `wiki/index.md`, subdirectory indexes, and `wiki/log.md` — dedupes by slug/date and recalculates statistics |
+| **wiki-link-fixer** | [`.agents/skills/wiki-link-fixer/SKILL.md`](.agents/skills/wiki-link-fixer/SKILL.md) | Auto-fixing wikilink convention violations — missing category prefixes, `wiki/` prefixes, `../` prefixes, and `log.md` informal refs. Supports `--dry-run`, `--category`, `--file`; leaves truly broken links for manual review |
 
 **Convention violations** (bare-slug wikilinks, `wiki/` prefixes, `../` prefixes in wikilinks) accumulate over time. To bulk-fix legacy links, run:
 
 ```powershell
+# Preview fixes (always do this first)
+python .agents/skills/wiki-link-fixer/scripts/fix_links.py --dry-run
+
+# Apply all fixable categories
+python .agents/skills/wiki-link-fixer/scripts/fix_links.py
+
+# Or use the legacy migrator (handles a subset of cases)
 uv run python scripts/migrate_to_vault_absolute.py
 ```
