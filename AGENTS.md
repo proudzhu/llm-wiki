@@ -155,6 +155,7 @@ Reusable workflows are stored in `.agents/skills/`. Each skill has a `SKILL.md` 
 |-------|------|-------------|
 | **paper-reader** | [`.agents/skills/paper-reader/SKILL.md`](.agents/skills/paper-reader/SKILL.md) | Ingesting a paper from Zotero — handles search, PDF extraction (MinerU/arXiv HTML/pdftotext), and full wiki page creation |
 | **wiki-lint** | [`.agents/skills/wiki-lint/SKILL.md`](.agents/skills/wiki-lint/SKILL.md) | Health-checking the wiki — index drift, broken links, orphan pages, statistics verification |
+| **wiki-conflict-resolver** | [`.agents/skills/wiki-conflict-resolver/SKILL.md`](.agents/skills/wiki-conflict-resolver/SKILL.md) | Resolving Git rebase/merge conflicts in `wiki/index.md`, subdirectory indexes, and `wiki/log.md` — dedupes by slug/date and recalculates statistics |
 
 **Convention violations** (bare-slug wikilinks, `wiki/` prefixes, `../` prefixes in wikilinks) accumulate over time. To bulk-fix legacy links, run:
 
