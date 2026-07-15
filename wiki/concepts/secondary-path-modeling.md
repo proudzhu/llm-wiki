@@ -59,6 +59,9 @@ The [[filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] can tolerate a phase e
 - [[online-secondary-path-modeling|Online Secondary-Path Modeling]]
 - [[system-identification|System Identification]]
 - [[deep-secondary-path-estimation|Deep Secondary Path Estimation]]
+- [[online-feedback-path-modeling|Online Feedback-Path Modeling]] — sibling online-modeling problem often coupled with OSPM
+- [[supporting-filter-anc|Supporting Filter in ANC]] — auxiliary filter for decoupling OSPM from the controller
+- [[auxiliary-noise-scaling|Auxiliary Noise Scaling]] — AWGN power scheduling strategies for OSPM
 
 ## Related Sources
 
@@ -66,3 +69,4 @@ The [[filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] can tolerate a phase e
 - [[sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]]
 - [[sources/akhtar-2006-vss-lms-online-spm|Akhtar 2006: VSS LMS for Online Secondary Path Modeling]]
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method]] — Proposes a method that avoids secondary path modeling entirely using an auxiliary filter
+- [[sources/ma-2027-robust-ffanc-online-path-modeling|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] — performs online SP and FBP modeling simultaneously with a second supporting filter and an SF-driven global AWGN scaling, achieving near-ideal-benchmark NRP under time-varying paths

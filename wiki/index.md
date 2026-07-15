@@ -322,6 +322,11 @@
 | [[entities/hermann-weyl\|Hermann Weyl]] | German mathematician (1885–1955) — perturbation theory for singular values; Weyl's inequality (1912) | 2026-07-12 |
 | [[entities/zartbot\|zartbot]] | Chinese-language technical blogger — code-level walkthroughs of LLM inference and systems topics (speculative decoding, DSpark) | 2026-07-12 |
 | [[entities/deepseek\|DeepSeek]] | Chinese AI research lab — developer of DSpark, DeepSeek-V3 MTP; deployed speculative decoding on DeepSeek-V4 | 2026-07-12 |
+| [[entities/yaping-ma\|Yaping Ma]] | Researcher (Jiangnan U.); robust FFANC with simultaneous OSPM+OFBPM, supporting-filter architectures. | 2026-07-15 |
+| [[entities/yegui-xiao\|Yegui Xiao]] | Professor (Prefectural U. of Hiroshima); adaptive filtering for ANC, cascade notch filters, online path modeling. | 2026-07-15 |
+| [[entities/wenyi-wu\|Wenyi Wu]] | Researcher (Beijing Aerospace Measurement & Control); ANC, adaptive notch filtering, filter-bank structures. | 2026-07-15 |
+| [[entities/khashayar-khorasani\|Khashayar Khorasani]] | Professor (Concordia U.); adaptive filtering, fault diagnosis, neural networks, ANC with online path modeling. | 2026-07-15 |
+| [[entities/liying-ma\|Liying Ma]] | Researcher (Concordia U.); adaptive signal processing for ANC, online path modeling, narrowband ANC. | 2026-07-15 |
 
 ---
 
@@ -607,6 +612,9 @@
 | [[concepts/tree-attention\|Tree Attention]] | Attention-mask trick for single-pass parallel verification of branched draft candidates; $O(b^d)$ paths verified in $O(b\cdot d)$ operations; foundation for SpecInfer, Medusa, EAGLE-2, DDTree, DSpark | 2026-07-12 |
 | [[concepts/specinfer\|SpecInfer]] | First tree-based speculative decoding (2023); token-tree verification + restorative (generalized rejection) sampling; introduced tree attention to the field | 2026-07-12 |
 | [[concepts/ddtree\|DDTree]] | Best-first tree search over DFlash's marginal logits (2026); restores prefix-dependency in parallel drafting without serial heads; sibling approach to DSpark | 2026-07-12 |
+| [[concepts/online-feedback-path-modeling\|Online Feedback-Path Modeling (OFBPM)]] | Adaptive estimation of the feedback path F(z) during ANC operation; couples with OSPM when both active. | 2026-07-15 |
+| [[concepts/supporting-filter-anc\|Supporting Filter in ANC]] | Auxiliary adaptive filter (e.g., H1/H2) used to decouple OSPM/OFBPM from the FFANC controller and drive AWGN scaling. | 2026-07-15 |
+| [[concepts/auxiliary-noise-scaling\|Auxiliary Noise Scaling]] | Dynamic AWGN gain scheduling for OSPM/OFBPM: local (error-driven) vs global (residual- or SF-driven) strategies. | 2026-07-15 |
 
 ---
 
@@ -731,6 +739,7 @@
 | [[sources/ostergaard-2026-own-voice-cancellation\|Østergaard et al. 2026: Own-Voice Cancellation]] | Introduces OVC: removing enrolled speaker from noisy mixture; Mamba-MinGRU architecture at 2 ms latency | 2026-07-10 |
 | [[sources/stewart-1993-early-history-svd\|Stewart 1993: On the Early History of the Singular Value Decomposition]] | Surveys five mathematicians (Beltrami 1873, Jordan 1874, Sylvester 1889, Schmidt 1907, Weyl 1912) who established the SVD; two traditions (bilinear forms vs. integral equations); Schmidt's approximation theorem and Weyl's perturbation theory | 1993 |
 | [[sources/zartbot-2026-dspark-speculative-decoding\|zartbot 2026: 详细谈谈DSpark投机解码的原理]] | Code-level walkthrough of DSpark (DeepSeek's speculative decoding framework); semi-autoregressive generation + confidence-scheduled verification; surveys 14 draft-model algorithms across 6 stages (2022–2026); reports 60–85% speedup on DeepSeek-V4 | 2026-07-04 |
+| [[sources/ma-2027-robust-ffanc-online-path-modeling\|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] | New FFANC with simultaneous OSPM+OFBPM via second supporting filter H2(z) and SF-driven global AWGN scaling; near-ideal-benchmark NRP under time-varying paths. | 2026-07-15 |
 
 ---
 
@@ -780,10 +789,10 @@
 
 ## Statistics
 
-- **Total pages**: 729
-- **Entities**: 312
-- **Concepts**: 276
-- **Sources**: 115
+- **Total pages**: 738
+- **Entities**: 317
+- **Concepts**: 279
+- **Sources**: 116
 - **Synthesis**: 19
 - **Queries**: 7
-- **Last updated**: 2026-07-12
+- **Last updated**: 2026-07-15

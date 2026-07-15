@@ -2905,3 +2905,30 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 2 entity rows; fixed pre-existing index drift (missing Hermann Weyl entry from SVD ingest)
   - `wiki/concepts/index.md` — added 9 concept rows
+
+---
+
+## [2026-07-15] ingest | Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM
+
+- **Source**: `raw/papers/ma-2027-robust-ffanc-online-path-modeling/full-text.md` (extracted via MinerU VLM)
+- **Authors**: Yaping Ma, Yegui Xiao (corresponding), Wenyi Wu, Liying Ma, Khashayar Khorasani
+- **Published**: *Signal Processing*, Vol. 214, 2027, Art. 110818 — [DOI](https://doi.org/10.1016/j.sigpro.2026.110818)
+- **Summary**: Proposes a robust feedforward ANC (FFANC) system that simultaneously performs online secondary-path modeling (OSPM) and online feedback-path modeling (OFBPM). Two key innovations over Ahmed–Akhtar 2013 and Bai 2019: (1) a new FIR supporting filter $H_2(z)$ whose output $y_2(n)$ — a less noisy estimate of the remaining target noise — drives the controller's FXLMS update, the OSPM desired signal, and the AWGN scaling, decoupling the controller from OSPM; (2) a global AWGN scaling driven by $y_2(n)$ instead of the residual error, yielding a lower steady-state scaling factor because the additive noise $v_p(n)$ is excluded. An approximate steady-state analysis gives closed-form expressions for $E[y_2^2(\infty)]$, $G_s(\infty)$, and $E[e^2(\infty)]$. Simulations with synthetic paths, real IIR paths, and a real hybrid-car road-noise recording show the proposed system matches the ideal benchmark (Sys-A, true SP/FBP) within 0.01–2.4 dB and outperforms Ahmed–Akhtar 2013 (Sys-B) by 3–6 dB in NRP while running faster (no divisions or square roots).
+- **Pages created**:
+  - `wiki/sources/ma-2027-robust-ffanc-online-path-modeling.md` — Source summary page (with Figs. 1 and 4)
+  - `wiki/entities/yaping-ma.md` — Entity page for Yaping Ma (Jiangnan University)
+  - `wiki/entities/yegui-xiao.md` — Entity page for Yegui Xiao (Prefectural University of Hiroshima)
+  - `wiki/entities/wenyi-wu.md` — Entity page for Wenyi Wu (Beijing Aerospace Measurement & Control)
+  - `wiki/entities/liying-ma.md` — Entity page for Liying Ma (Concordia University)
+  - `wiki/entities/khashayar-khorasani.md` — Entity page for Khashayar Khorasani (Concordia University)
+  - `wiki/concepts/online-feedback-path-modeling.md` — New concept page for OFBPM
+  - `wiki/concepts/supporting-filter-anc.md` — New concept page for the SF mechanism ($H_1$/$H_2$)
+  - `wiki/concepts/auxiliary-noise-scaling.md` — New concept page for AWGN power scheduling strategies
+- **Pages updated** (cross-references to the new source):
+  - `wiki/concepts/online-secondary-path-modeling.md` — added OFBPM, SF, AWGN-scaling links and Ma 2027 source
+  - `wiki/concepts/feedforward-anc.md` — added OSPM/OFBPM/SF/AWGN-scaling links and Ma 2027 source
+  - `wiki/concepts/acoustic-feedback.md` — added OFBPM/SF/AWGN-scaling links and Ma 2027 source
+  - `wiki/concepts/filtered-x-lms-algorithm.md` — added Ma 2027 source (modified FXLMS using $y_2(n)$)
+  - `wiki/concepts/secondary-path-modeling.md` — added OFBPM/SF/AWGN-scaling links and Ma 2027 source
+  - `wiki/concepts/active-noise-control.md` — added Ma 2027 source
+- **Indexes updated**: `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` (statistics: 738 total, 317 entities, 279 concepts, 116 sources, 19 synthesis, 7 queries)

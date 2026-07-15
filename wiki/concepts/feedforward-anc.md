@@ -68,6 +68,10 @@ This motivates [[hybrid-anc|Hybrid ANC]] architectures where the [[feedback-anc|
 - [[filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
 - [[acoustic-feedback|Acoustic Feedback]]
 - [[secondary-path-modeling|Secondary Path Modeling]]
+- [[online-secondary-path-modeling|Online Secondary-Path Modeling]] — required when SP drifts during operation
+- [[online-feedback-path-modeling|Online Feedback-Path Modeling]] — required when FBP drifts during operation
+- [[supporting-filter-anc|Supporting Filter in ANC]] — auxiliary filter for decoupling OSPM/OFBPM from the controller
+- [[auxiliary-noise-scaling|Auxiliary Noise Scaling]] — strategies to reduce the AWGN contribution to the residual
 
 ## Related Sources
 
@@ -75,3 +79,4 @@ This motivates [[hybrid-anc|Hybrid ANC]] architectures where the [[feedback-anc|
 - [[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method for Feedforward ANC]]
+- [[sources/ma-2027-robust-ffanc-online-path-modeling|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] — extends the basic FFANC of Kuo 1999 with simultaneous online SP/FBP modeling and a second supporting filter, achieving near-ideal-benchmark NRP under time-varying paths

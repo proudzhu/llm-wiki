@@ -316,4 +316,9 @@
 | [[entities/hermann-weyl\|Hermann Weyl]] | German mathematician (1885–1955) — perturbation theory for singular values; Weyl's inequality (1912) | 2026-07-12 |
 | [[entities/zartbot\|zartbot]] | Chinese-language technical blogger — code-level walkthroughs of LLM inference and systems topics (speculative decoding, DSpark) | 2026-07-12 |
 | [[entities/deepseek\|DeepSeek]] | Chinese AI research lab — developer of DSpark, DeepSeek-V3 MTP; deployed speculative decoding on DeepSeek-V4 | 2026-07-12 |
+| [[entities/yaping-ma\|Yaping Ma]] | Researcher (Jiangnan U.); robust FFANC with simultaneous OSPM+OFBPM, supporting-filter architectures. | 2026-07-15 |
+| [[entities/yegui-xiao\|Yegui Xiao]] | Professor (Prefectural U. of Hiroshima); adaptive filtering for ANC, cascade notch filters, online path modeling. | 2026-07-15 |
+| [[entities/wenyi-wu\|Wenyi Wu]] | Researcher (Beijing Aerospace Measurement & Control); ANC, adaptive notch filtering, filter-bank structures. | 2026-07-15 |
+| [[entities/khashayar-khorasani\|Khashayar Khorasani]] | Professor (Concordia U.); adaptive filtering, fault diagnosis, neural networks, ANC with online path modeling. | 2026-07-15 |
+| [[entities/liying-ma\|Liying Ma]] | Researcher (Concordia U.); adaptive signal processing for ANC, online path modeling, narrowband ANC. | 2026-07-15 |
 

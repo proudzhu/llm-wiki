@@ -98,6 +98,9 @@ In hearing aids, AFC uses an adaptive filter (typically PEM-NLMS) to estimate an
 - [[simplified-adaptive-feedback-anc|Simplified Adaptive Feedback ANC]]
 - [[variable-step-size-lms|Variable Step Size LMS]]
 - [[prediction-error-method|Prediction Error Method]]
+- [[online-feedback-path-modeling|Online Feedback-Path Modeling]] — adaptive compensation of the time-varying FBP during ANC operation
+- [[supporting-filter-anc|Supporting Filter in ANC]] — auxiliary filter for decoupling OFBPM/OSPM from the controller
+- [[auxiliary-noise-scaling|Auxiliary Noise Scaling]] — AWGN power scheduling shared by OFBPM and OSPM
 - [[hearing-aid-feedback-cancellation|Hearing Aid Feedback Cancellation]]
 - [[frequency-shift-feedback-cancellation|Frequency Shift Feedback Cancellation]]
 - [[maximum-stable-gain|Maximum Stable Gain]]
@@ -113,6 +116,7 @@ In hearing aids, AFC uses an adaptive filter (typically PEM-NLMS) to estimate an
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section II-D: Feedback Effects and Solutions
 - [[sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC with GRU step-size prediction
+- [[sources/ma-2027-robust-ffanc-online-path-modeling|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] — performs OFBPM adaptively during ANC operation; demonstrates that an SF-driven global AWGN scaling and a second supporting filter $H_2(z)$ keep the residual-AWGN floor low even under abrupt FBP changes
 
 ## Related Entities
 

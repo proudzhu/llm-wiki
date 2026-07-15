@@ -280,4 +280,7 @@
 | [[concepts/tree-attention\|Tree Attention]] | Attention-mask trick for single-pass parallel verification of branched draft candidates; $O(b^d)$ paths verified in $O(b\cdot d)$ operations; foundation for SpecInfer, Medusa, EAGLE-2, DDTree, DSpark | 2026-07-12 |
 | [[concepts/specinfer\|SpecInfer]] | First tree-based speculative decoding (2023); token-tree verification + restorative (generalized rejection) sampling; introduced tree attention to the field | 2026-07-12 |
 | [[concepts/ddtree\|DDTree]] | Best-first tree search over DFlash's marginal logits (2026); restores prefix-dependency in parallel drafting without serial heads; sibling approach to DSpark | 2026-07-12 |
+| [[concepts/online-feedback-path-modeling\|Online Feedback-Path Modeling (OFBPM)]] | Adaptive estimation of the feedback path F(z) during ANC operation; couples with OSPM when both active. | 2026-07-15 |
+| [[concepts/supporting-filter-anc\|Supporting Filter in ANC]] | Auxiliary adaptive filter (e.g., H1/H2) used to decouple OSPM/OFBPM from the FFANC controller and drive AWGN scaling. | 2026-07-15 |
+| [[concepts/auxiliary-noise-scaling\|Auxiliary Noise Scaling]] | Dynamic AWGN gain scheduling for OSPM/OFBPM: local (error-driven) vs global (residual- or SF-driven) strategies. | 2026-07-15 |
 

@@ -77,8 +77,12 @@ Some methods exploit the fact that the controller output y(n) itself can serve a
 - [[offline-secondary-path-modeling|Offline Secondary-Path Modeling]]
 - [[variable-step-size-lms|Variable Step Size LMS]]
 - [[deep-secondary-path-estimation|Deep Secondary Path Estimation]]
+- [[online-feedback-path-modeling|Online Feedback-Path Modeling]] — sibling online-modeling problem; coupled with OSPM when both are active
+- [[supporting-filter-anc|Supporting Filter in ANC]] — auxiliary filter used to decouple OSPM from the controller (e.g., $H_2(z)$ in Ma 2027)
+- [[auxiliary-noise-scaling|Auxiliary Noise Scaling]] — strategies to reduce the AWGN contribution to the residual
 
 ## Related Sources
 
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section VI: Online Secondary-Path Modeling
 - [[sources/akhtar-2006-vss-lms-online-spm|Akhtar 2006: VSS LMS for Online Secondary Path Modeling]]
+- [[sources/ma-2027-robust-ffanc-online-path-modeling|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] — introduces a second supporting filter $H_2(z)$ and an SF-driven global AWGN scaling that decouple OSPM from the FFANC controller, achieving near-ideal-benchmark NRP with no divisions or square roots
