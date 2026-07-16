@@ -2973,3 +2973,38 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   6. Rath & Geier formula anchors engineering frontier — algorithmic latency below reblocking floor is masked by host/plugin buffering
 - **Indexes updated**: wiki/index.md (synthesis row added), wiki/synthesis/index.md (row added)
 - **Statistics updated**: 739 total (317 entities / 279 concepts / 116 sources / 20 synthesis / 7 queries), last updated 2026-07-16
+
+---
+
+## [2026-07-16] ingest | It takes few to TANGO: a quantized distributed model for binaural speech enhancement (Benslimane 2026)
+
+- **Source**: `raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md` (Zotero: FN59JY3C)
+- **Authors**: Zahra Benslimane, Pierre Chouteau, Martyna Poreba, Fabrice Auzanneau, Michal Szczepanski, Fabian Chersi, Romain Serizel
+- **Published**: arXiv preprint, 2026
+- **DOI**: 10.48550/arXiv.2607.08645
+- **arXiv**: 2607.08645
+- **Summary**: Studies low-precision inference for the TANGO hybrid distributed binaural SE system. Shows the downstream GEVD-based spatial filter compensates for most INT8 quantization-induced mask errors; simplifies TANGO into MN-TANGO (single-stage) and combines W8A8 QAT + ERB + grouped LSTM to reach 4.65 MMAC/s and 0.177 MB.
+- **Pages created**:
+  - `raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md` — extracted text from Zotero PDF (MinerU VLM)
+  - `wiki/sources/benslimane-2026-tango-quantized-distributed.md`
+  - `wiki/concepts/mn-tango.md`
+  - `wiki/concepts/quantization-aware-training.md`
+  - `wiki/concepts/post-training-quantization.md`
+  - `wiki/concepts/gevd-spatial-filtering.md`
+- **Pages updated**:
+  - `wiki/concepts/tango-framework.md` — added MN-TANGO / Quantized TANGO variants; GEVD reference; spatial-filter robustness property
+  - `wiki/concepts/grouped-recurrent-neural-network.md` — added MN-TANGO application; non-monotonic grouping effect; 4.65 MMAC/s / 0.177 MB operating point
+  - `wiki/concepts/erb-scale.md` — added TANGO-family usage section
+  - `wiki/concepts/multi-channel-wiener-filter.md` — added differentiable SDW-MWF for end-to-end training section
+  - `wiki/concepts/distributed-binaural-speech-enhancement.md` — added MN-TANGO; hybrid neural-spatial robustness subsection
+  - `wiki/entities/zahra-benslimane.md` — added quantized MN-TANGO contribution; LORIA affiliation; quantization research focus
+  - `wiki/entities/romain-serizel.md` — added quantized MN-TANGO contribution; GEVD/MWF low-rank 2014 reference
+  - `wiki/entities/pierre-chouteau.md` — added quantized MN-TANGO contribution
+  - `wiki/entities/martyna-poreba.md` — added quantized MN-TANGO contribution
+  - `wiki/entities/fabrice-auzanneau.md` — added quantized MN-TANGO contribution; EEAI 2025 reference
+  - `wiki/entities/michal-szczepanski.md` — added quantized MN-TANGO contribution; corrected CEA affiliation
+  - `wiki/entities/fabian-chersi.md` — added quantized MN-TANGO contribution; corrected CEA affiliation
+  - `wiki/synthesis/computational-efficiency-evolution.md` — added MN-TANGO to the 2026 efficiency frontier (14× compute / 23× memory reduction)
+  - `wiki/index.md` — added 4 concepts, 1 source; updated statistics
+  - `wiki/concepts/index.md` — added 4 concept rows
+  - `wiki/sources/index.md` — added 1 source row

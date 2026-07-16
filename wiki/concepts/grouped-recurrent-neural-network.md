@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-16
+sources:
+  - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
 tags:
   - neural-network
   - recurrent
@@ -39,15 +41,29 @@ In [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|RT-Tango (Bens
 
 The combined strategy (SN=8, MN=2) reduces total DNN complexity from 67.2 to 18.2 MMAC/s while preserving interaural balance.
 
+## Application in Quantized MN-TANGO
+
+In [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026 (Quantized TANGO)]], grouped LSTM layers are used inside [[concepts/mn-tango|MN-TANGO]] (the single-stage simplification of TANGO). The original 3-layer unidirectional LSTM is replaced with a 2-layer grouped LSTM (128 hidden units), with $G \in \{1, 2, 4, 6, 8, 10\}$ evaluated.
+
+Key findings:
+
+- The LSTM dominates neural compute: 459.26 kMAC/frame at $G=1$ vs. 27.04 kMAC/frame at $G=10$ — a ~17× reduction.
+- The grouping effect is **not strictly monotonic**: $G=2$ gives the best quality, $G=4$/$6$ degrade noticeably, and $G=8$/$10$ partially recover (depending on how the recurrent representation partitions across groups).
+- **Best trade-off**: $G=2$ → 10.79 MMAC/s, 0.179 M params, 0.274 MB (after W8A8 quantization).
+- **Most compact**: $G=8$ → 4.65 MMAC/s, 0.081 M params, 0.177 MB.
+- Because the downstream [[concepts/gevd-spatial-filtering|GEVD-based]] filter absorbs most mask-estimation degradation, the grouped + quantized MN-TANGO variants retain competitive final SI-SIR/STOI/PESQ even at extreme compression.
+
 ## Relationship to Other Grouped Architectures
 
 - [[concepts/gtcrn|GTCRN]] applies grouped RNN within a Dual-Path RNN (G-DPRNN) bottleneck, splitting features and hidden states into 2 groups.
-- GRNN as used in RT-Tango originates from the group recurrent networks of Gao et al. (2018) for efficient sequence learning.
+- GRNN as used in RT-Tango and MN-TANGO originates from the group recurrent networks of Gao et al. (2018) for efficient sequence learning.
 
 ## Related Concepts
 
 - [[concepts/distributed-binaural-speech-enhancement|Distributed Binaural Speech Enhancement]]
 - [[concepts/tango-framework|Tango Framework]]
+- [[concepts/mn-tango|MN-TANGO]]
+- [[concepts/quantization-aware-training|Quantization-Aware Training (QAT)]]
 - [[concepts/gtcrn|GTCRN]]
 - [[concepts/depthwise-separable-convolution|Depthwise Separable Convolution]]
 - [[concepts/erb-scale|ERB Scale]]
@@ -55,3 +71,4 @@ The combined strategy (SN=8, MN=2) reduces total DNN complexity from 67.2 to 18.
 ## Related Sources
 
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]
+- [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]]

@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-07-16
+sources:
+  - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
 tags:
   - speech-enhancement
   - binaural
@@ -29,6 +31,11 @@ Binaural hearing devices (hearing aids, earbuds) place microphones on physically
 
 - **Tango** (Furnon et al., 2021): A two-stage distributed architecture using DNN-based mask estimation and a Speech Distortion Weighted Multichannel Wiener Filter (SDW-MWF). Each ear-node estimates speech/noise masks, computes a compressed signal via SDW-MWF, transmits it to the contra-lateral node, then a Multi-Node DNN refines the masks for a final SDW-MWF. See [[concepts/tango-framework|Tango Framework]].
 - **RT-Tango** (Benslimane et al., 2026): A real-time, low-latency redesign of Tango for hearing aids, adding [[concepts/erb-scale|ERB]] feature compression, [[concepts/grouped-recurrent-neural-network|grouped RNN]] mask estimation, [[concepts/asymmetric-stft|asymmetric STFT]], and [[concepts/fixed-rate-skipping|temporal sparsification]]. See [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026]].
+- **MN-TANGO** (Benslimane et al., 2026): A simplified single-stage variant that removes the SN-DNN entirely, retaining only the MN-DNN and the final [[concepts/gevd-spatial-filtering|GEVD-based]] spatial filter. Combined with [[concepts/quantization-aware-training|W8A8 quantization]], ERB compression, and grouped LSTM, it reaches as low as 4.65 MMAC/s and 0.177 MB. See [[concepts/mn-tango|MN-TANGO]] and [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026]].
+
+## Robustness of Hybrid Neural-Spatial Architectures
+
+A distinguishing property of distributed binaural SE frameworks with a hybrid neural-mask + classical-spatial-filter structure is that the **spatial filter compensates for most errors in the neural mask estimators** — including errors introduced by INT8 quantization. In MN-TANGO, W8A8 quantization degrades the intermediate MN-DNN mask output SI-SIR by ~1.5 dB, but the final GEVD-filtered output is within 0.1–0.6 dB of the FP32 baseline. This makes hybrid distributed binaural SE particularly well-suited to aggressive neural compression for resource-constrained hearing-aid deployment.
 
 ## Relationship to Multi-Channel Speech Enhancement
 
@@ -37,15 +44,19 @@ Distributed binaural SE is a special case of [[concepts/multi-channel-speech-enh
 ## Related Concepts
 
 - [[concepts/tango-framework|Tango Framework]]
+- [[concepts/mn-tango|MN-TANGO]]
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
 - [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
+- [[concepts/gevd-spatial-filtering|GEVD-Based Spatial Filtering]]
 - [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
 - [[concepts/asymmetric-stft|Asymmetric STFT]]
 - [[concepts/grouped-recurrent-neural-network|Grouped Recurrent Neural Network]]
 - [[concepts/fixed-rate-skipping|Fixed-Rate Skipping]]
 - [[concepts/erb-scale|ERB Scale]]
+- [[concepts/quantization-aware-training|Quantization-Aware Training (QAT)]]
 - [[concepts/audio-latency|Audio Latency]]
 
 ## Related Sources
 
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]
+- [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]]

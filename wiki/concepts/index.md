@@ -283,4 +283,8 @@
 | [[concepts/online-feedback-path-modeling\|Online Feedback-Path Modeling (OFBPM)]] | Adaptive estimation of the feedback path F(z) during ANC operation; couples with OSPM when both active. | 2026-07-15 |
 | [[concepts/supporting-filter-anc\|Supporting Filter in ANC]] | Auxiliary adaptive filter (e.g., H1/H2) used to decouple OSPM/OFBPM from the FFANC controller and drive AWGN scaling. | 2026-07-15 |
 | [[concepts/auxiliary-noise-scaling\|Auxiliary Noise Scaling]] | Dynamic AWGN gain scheduling for OSPM/OFBPM: local (error-driven) vs global (residual- or SF-driven) strategies. | 2026-07-15 |
+| [[concepts/mn-tango\|MN-TANGO]] | Simplified single-stage Tango variant; removes SN-DNN; W8A8 + ERB + grouped LSTM reaches 4.65 MMAC/s, 0.177 MB | 2026-07-16 |
+| [[concepts/quantization-aware-training\|Quantization-Aware Training (QAT)]] | Quantization strategy simulating INT8 inference during training via fake-quantization + straight-through estimator; preserves FP32 quality for LSTM-based SE | 2026-07-16 |
+| [[concepts/post-training-quantization\|Post-Training Quantization (DPTQ)]] | Quantize a trained FP32 model without retraining; INT8 weights + dynamic activation quantization; fails for LSTM due to heterogeneous activation ranges | 2026-07-16 |
+| [[concepts/gevd-spatial-filtering\|GEVD-Based Spatial Filtering]] | Rank-constrained SDW-MWF via generalized eigendecomposition of speech/noise SCMs; inference-time spatial filter in TANGO family; robust to mask errors | 2026-07-16 |
 

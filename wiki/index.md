@@ -615,6 +615,10 @@
 | [[concepts/online-feedback-path-modeling\|Online Feedback-Path Modeling (OFBPM)]] | Adaptive estimation of the feedback path F(z) during ANC operation; couples with OSPM when both active. | 2026-07-15 |
 | [[concepts/supporting-filter-anc\|Supporting Filter in ANC]] | Auxiliary adaptive filter (e.g., H1/H2) used to decouple OSPM/OFBPM from the FFANC controller and drive AWGN scaling. | 2026-07-15 |
 | [[concepts/auxiliary-noise-scaling\|Auxiliary Noise Scaling]] | Dynamic AWGN gain scheduling for OSPM/OFBPM: local (error-driven) vs global (residual- or SF-driven) strategies. | 2026-07-15 |
+| [[concepts/mn-tango\|MN-TANGO]] | Simplified single-stage Tango variant; removes SN-DNN; W8A8 + ERB + grouped LSTM reaches 4.65 MMAC/s, 0.177 MB | 2026-07-16 |
+| [[concepts/quantization-aware-training\|Quantization-Aware Training (QAT)]] | Quantization strategy simulating INT8 inference during training via fake-quantization + straight-through estimator; preserves FP32 quality for LSTM-based SE | 2026-07-16 |
+| [[concepts/post-training-quantization\|Post-Training Quantization (DPTQ)]] | Quantize a trained FP32 model without retraining; INT8 weights + dynamic activation quantization; fails for LSTM due to heterogeneous activation ranges | 2026-07-16 |
+| [[concepts/gevd-spatial-filtering\|GEVD-Based Spatial Filtering]] | Rank-constrained SDW-MWF via generalized eigendecomposition of speech/noise SCMs; inference-time spatial filter in TANGO family; robust to mask errors | 2026-07-16 |
 
 ---
 
@@ -740,6 +744,7 @@
 | [[sources/stewart-1993-early-history-svd\|Stewart 1993: On the Early History of the Singular Value Decomposition]] | Surveys five mathematicians (Beltrami 1873, Jordan 1874, Sylvester 1889, Schmidt 1907, Weyl 1912) who established the SVD; two traditions (bilinear forms vs. integral equations); Schmidt's approximation theorem and Weyl's perturbation theory | 1993 |
 | [[sources/zartbot-2026-dspark-speculative-decoding\|zartbot 2026: 详细谈谈DSpark投机解码的原理]] | Code-level walkthrough of DSpark (DeepSeek's speculative decoding framework); semi-autoregressive generation + confidence-scheduled verification; surveys 14 draft-model algorithms across 6 stages (2022–2026); reports 60–85% speedup on DeepSeek-V4 | 2026-07-04 |
 | [[sources/ma-2027-robust-ffanc-online-path-modeling\|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] | New FFANC with simultaneous OSPM+OFBPM via second supporting filter H2(z) and SF-driven global AWGN scaling; near-ideal-benchmark NRP under time-varying paths. | 2026-07-15 |
+| [[sources/benslimane-2026-tango-quantized-distributed\|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]] | INT8 QAT + ERB + grouped LSTM for TANGO; MN-TANGO simplification; spatial filter absorbs quantization errors; 4.65 MMAC/s, 0.177 MB | 2026-07-16 |
 
 ---
 
@@ -790,10 +795,10 @@
 
 ## Statistics
 
-- **Total pages**: 739
+- **Total pages**: 744
 - **Entities**: 317
-- **Concepts**: 279
-- **Sources**: 116
+- **Concepts**: 283
+- **Sources**: 117
 - **Synthesis**: 20
 - **Queries**: 7
 - **Last updated**: 2026-07-16

@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-06-07
-updated: 2026-06-07
+updated: 2026-07-16
+sources:
+  - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
 tags:
   - psychoacoustics
   - speech-enhancement
@@ -37,6 +39,10 @@ In [[sources/schroter-2022-deepfilternet|DeepFilterNet]], the ERB scale is used 
 
 This perceptual compression allows the network to operate efficiently — the minimum ERB bandwidth ranges from ~100 Hz (low frequencies) to ~250 Hz (high frequencies, depending on FFT size).
 
+## Usage in TANGO-Family Frameworks
+
+Both [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|RT-Tango]] and [[sources/benslimane-2026-tango-quantized-distributed|Quantized MN-TANGO]] use an ERB-scaled filterbank as the front-end for the mask-estimation DNNs. After a point-wise channel-mixing layer, the 257-bin linear-frequency STFT is projected onto a compact ERB scale, reducing the recurrent input dimension; the predicted ERB-domain mask is mapped back to the linear STFT bins via an inverse ERB transform before the [[concepts/multi-channel-wiener-filter|SDW-MWF]] spatial filtering stage. In MN-TANGO, the configuration is 64 low-frequency linear bins + 64 ERB bands → 128-dimensional recurrent input (adjusted for divisibility by the group count $G$).
+
 ## Relationship to Other Scales
 
 | Scale | Formula | Bands | Application |
@@ -52,8 +58,11 @@ The ERB scale provides finer frequency resolution at low frequencies compared to
 - [[concepts/deep-filtering|Deep Filtering]]
 - [[concepts/grouped-recurrent-neural-network|Grouped Recurrent Neural Network]]
 - [[concepts/distributed-binaural-speech-enhancement|Distributed Binaural Speech Enhancement]]
+- [[concepts/tango-framework|Tango Framework]]
+- [[concepts/mn-tango|MN-TANGO]]
 
 ## Related Sources
 
 - [[sources/schroter-2022-deepfilternet|Schröter et al. 2022: DeepFilterNet]]
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]
+- [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]]
