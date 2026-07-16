@@ -26,65 +26,12 @@ import glob
 import argparse
 import tempfile
 
+from link_utils import CATEGORIES, extract_target, split_anchor, find_category_for_slug
+
 sys.stdout.reconfigure(encoding='utf-8')
 sys.stderr.reconfigure(encoding='utf-8')
 
-CATEGORIES = ['entities', 'concepts', 'sources', 'synthesis', 'queries']
-
 ALL_CATEGORIES = {'missing_prefix', 'wiki_prefix', 'dotdot_prefix', 'log_informal'}
-
-
-def extract_target(raw_link: str) -> tuple[str, str | None, str | None]:
-    """Split a wikilink interior into (target, separator, rest).
-
-    Returns:
-        target: the link target (before any | or \\|)
-        separator: None, '|', or '\\|' (the delimiter that introduced display text)
-        rest: the display text after the separator, or None
-
-    Section anchors are kept on the target side: e.g., for 'foo#Section|Display',
-    target='foo#Section', separator='|', rest='Display'.
-    """
-    # Find the first separator (escaped pipe takes precedence over plain pipe)
-    # In markdown tables, \\\n could exist but we don't expect it inside [[]].
-    if '\\|' in raw_link:
-        idx = raw_link.index('\\|')
-        target = raw_link[:idx].strip()
-        rest = raw_link[idx + 2:]
-        return target, '\\|', rest
-    if '|' in raw_link:
-        idx = raw_link.index('|')
-        target = raw_link[:idx].strip()
-        rest = raw_link[idx + 1:]
-        return target, '|', rest
-    return raw_link.strip(), None, None
-
-
-def split_anchor(target: str) -> tuple[str, str]:
-    """Split 'foo#Section' -> ('foo', '#Section'). Returns (slug, anchor_or_empty)."""
-    if '#' in target:
-        idx = target.index('#')
-        return target[:idx], target[idx:]
-    return target, ''
-
-
-def find_category_for_slug(slug: str, case_insensitive: bool = False) -> str | None:
-    """Find which category contains a slug. Returns 'category/slug' or None."""
-    if case_insensitive:
-        slug_lower = slug.lower()
-        for cat in CATEGORIES:
-            d = f'wiki/{cat}'
-            if not os.path.isdir(d):
-                continue
-            for entry in os.listdir(d):
-                if entry.lower() == f'{slug_lower}.md':
-                    return f'{cat}/{entry[:-3]}'
-        return None
-
-    for cat in CATEGORIES:
-        if os.path.exists(f'wiki/{cat}/{slug}.md'):
-            return f'{cat}/{slug}'
-    return None
 
 
 def compute_fix(raw_link: str, is_log: bool, categories: set[str]) -> tuple[str, str] | None:
