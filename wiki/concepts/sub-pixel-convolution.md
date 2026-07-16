@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-06-06
-updated: 2026-06-06
+updated: 2026-07-17
+sources:
+  - raw/papers/li-2025-echofree-neural-aec/full-text.md
 tags:
   - deep-learning
   - upsampling

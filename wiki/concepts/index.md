@@ -290,4 +290,7 @@
 | [[concepts/ulcnet\|ULCNet]] | Ultra-low complexity DNN for noise suppression and joint AENR | 2026-07-16 |
 | [[concepts/channel-wise-feature-reorientation\|Channel-Wise Feature Reorientation]] | Sub-band feature processing technique for low-complexity speech enhancement | 2026-07-16 |
 | [[concepts/power-law-compression\|Power-Law Compression]] | Nonlinear magnitude compression for spectral dynamic range reduction | 2026-07-16 |
+| [[concepts/bark-scale-spectral-features\|Bark-Scale Spectral Features]] | Perceptually motivated low-dimensional STFT magnitude projection onto Bark critical bands; enables ~2.5x compression for lightweight AEC post filters (PercepNet, Bark-AEC, EchoFree) | 2026-07-17 |
+| [[concepts/u-net-post-filter\|U-Net Post Filter]] | Encoder-decoder neural network with skip connections used as the neural stage of a hybrid AEC/SE pipeline; EchoFree instance: 278K params / 30 MMACs/s on Bark-scale features | 2026-07-17 |
+| [[concepts/percepnet-style-neural-post-filter\|PercepNet-Style Neural Post Filter]] | Hybrid AEC/SE design pattern: linear adaptive filter + lightweight neural Bark-scale gain masker; lineage: PercepNet (2021) -> Bark-AEC (2024) -> EchoFree (2025) | 2026-07-17 |
 

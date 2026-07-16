@@ -60,9 +60,11 @@ The ERB scale provides finer frequency resolution at low frequencies compared to
 - [[concepts/distributed-binaural-speech-enhancement|Distributed Binaural Speech Enhancement]]
 - [[concepts/tango-framework|Tango Framework]]
 - [[concepts/mn-tango|MN-TANGO]]
+- [[concepts/bark-scale-spectral-features|Bark-Scale Spectral Features]] — alternative perceptual scale used by the PercepNet / EchoFree AEC lineage
 
 ## Related Sources
 
 - [[sources/schroter-2022-deepfilternet|Schröter et al. 2022: DeepFilterNet]]
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]
 - [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]]
+- [[sources/li-2025-echofree-neural-aec|Li et al. 2025: EchoFree]] — uses the Bark scale rather than ERB for AEC post filtering

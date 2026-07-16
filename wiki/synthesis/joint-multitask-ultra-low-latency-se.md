@@ -39,6 +39,7 @@ Neither trend is independently novel. The **new insight** from the 2025–2026 c
 |--------|------|-------------|---------|---------|---------------|
 | [[sources/indenbom-2023-deepvqe\|DeepVQE (Indenbom)]] | 2023 | AEC + NS + DR | 20 ms | 7.5M params, 3.66 ms/frame | Cross-attention alignment + CCM |
 | [[sources/hao-2025-l3c-deepmfc\|L3C-DeepMFC (Hao)]] | 2025 | Hearing-aid feedback cancellation | **4 ms** | 0.31M params, 0.43 G/s MACs | Gain-shape complex mapping + closed-loop FT |
+| [[sources/li-2025-echofree-neural-aec\|EchoFree (Li)]] | 2025 | AEC only (lightweight) | — | **0.28M params, 30 MMACs/s** | U-Net on Bark + two-stage WavLM SSL loss |
 | [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator\|HALO (Zhao)]] | 2026 | SE backbone accelerator (plug-in) | **0 ms added** | Halves backbone MACs | Dynamic-conv frame-rate reduction |
 | [[sources/ashur-2026-acoustic-howling-suppression-fine-tuning\|Ashur & Cohen]] | 2026 | NS + AHS (joint via fine-tuning) | **0 ms added** | Same as Denoiser baseline | Data-mixing fine-tuning (60-40 ratio) |
 | [[sources/ostergaard-2026-own-voice-cancellation\|OVC (Østergaard)]] | 2026 | OVC (target-speaker removal) | **2 ms** | 0.33 GMAC/s, RTF 0.82–1.69 | Mamba-MinGRU linear RNN |
@@ -166,6 +167,25 @@ DeepVQE's [[concepts/cross-attention-alignment\|alignment block]] addresses the 
 ### Data-Mixing Fine Tuning (Ashur)
 
 Ashur's 60-40 howling/noise mixing ratio is the sweet spot — PESQ drops <1% versus original Denoiser, while AHS robustness improves monotonically up to 60% howling data. Above 60%, the model over-suppresses narrowband components at the expense of broadband speech. This is the first work to **explicitly trade AHS robustness against SE preservation in a controlled manner** — a multi-task trade-off curve, not a single operating point.
+
+### Two-Stage SSL Loss for Lightweight AEC (EchoFree)
+
+[[sources/li-2025-echofree-neural-aec\|EchoFree]] introduces a two-stage training strategy that uses a frozen [[concepts/self-supervised-speech-representation\|WavLM-Large]] as a multi-layer embedding teacher for a 278K-parameter AEC post filter:
+
+- **Stage 1 (coarse)**: SSL loss only — MSE between WavLM embeddings of estimated and ground-truth signals averaged over all $L$ layers.
+- **Stage 2 (fine)**: weighted combination $10 \cdot \mathcal{L}_{\text{Bark}} + 0.5 \cdot \mathcal{L}_{\text{SSL}}$ — a perceptual [[concepts/bark-scale-spectral-features\|Bark-scale gain loss]] (fourth-order + second-order + cross-entropy) is added, with SSL loss kept as a representation-fidelity regularizer.
+
+Ablation results on ICASSP 2023 AEC Challenge blind set:
+
+| Training | ST FE EchoMOS | DT EchoMOS | DT DegMOS |
+|----------|--------------:|-----------:|----------:|
+| Conventional gain loss | 4.15 | 3.74 | 3.52 |
+| SSL loss only | 4.15 | **3.91** | 3.46 |
+| Two-stage (SSL → SSL+Bark) | **4.20** | 3.88 | **3.53** |
+
+**Two key findings**: (1) SSL-only training beats conventional gain loss on double-talk echo suppression (+0.17 EchoMOS), confirming that SSL embeddings carry information useful for residual echo suppression beyond what a hand-crafted gain target provides. (2) Stage-2 fine-tuning with the perceptual Bark loss recovers ST FE / ST NE / DT Deg performance while sacrificing a small amount of DT EchoMOS — a controllable trade-off via the loss weights.
+
+**Distinction from L3C-DeepMFC's closed-loop FT**: Both are two-stage strategies, but L3C-DeepMFC's second stage changes the **data distribution** (closed-loop simulated feedback) while keeping the loss fixed. EchoFree's second stage keeps the data fixed and **changes the loss** (adds perceptual Bark term). The two strategies are orthogonal and could in principle be combined.
 
 ### Negative Thresholded SDR with Silence Handling (OVC)
 

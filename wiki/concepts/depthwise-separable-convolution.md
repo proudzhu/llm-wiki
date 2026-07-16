@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-20
-updated: 2026-05-21
+updated: 2026-07-17
 sources:
   - raw/papers/kim-2021-broadcasted-residual-learning/full-text.md
+  - raw/papers/li-2025-echofree-neural-aec/full-text.md
 tags:
   - deep-learning
   - neural-networks
@@ -85,3 +86,4 @@ For a standard $3 \times 3$ kernel ($D_k = 3$) and large $C_{out}$, this yields 
 
 - [[sources/kim-2021-broadcasted-residual-learning|Kim, Chang, Lee & Sung 2021: Broadcasted Residual Learning]]
 - [[sources/cai-2024-tf-sepnet|Cai, Zhang & Li 2024: TF-SepNet]]
+- [[sources/li-2025-echofree-neural-aec|Li et al. 2025: EchoFree]] — uses depthwise separable convolutions throughout the U-Net post filter encoder/decoder, contributing to the 278K / 30 MMACs/s budget

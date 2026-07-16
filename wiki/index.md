@@ -332,6 +332,10 @@
 | [[entities/jose-miguel-martinez-aponte\|Jose Miguel Martinez Aponte]] | Researcher at Fraunhofer IIS; acoustic signal processing | 2026-07-16 |
 | [[entities/emanuel-habets\|Emanuel A. P. Habets]] | Professor at Fraunhofer IIS / Intl Audio Labs Erlangen; spatial audio, AEC | 2026-07-16 |
 | [[entities/edwin-mabande\|Edwin Mabande]] | Researcher at Fraunhofer IIS; acoustic echo control, adaptive filtering | 2026-07-16 |
+| [[entities/boyi-kang\|Boyi Kang]] | ASLP@NPU — EchoFree ultra-lightweight neural AEC (2025, equal first author) | 2026-07-17 |
+| [[entities/zihan-zhang\|Zihan Zhang]] | ASLP@NPU — EchoFree ultra-lightweight neural AEC (2025) | 2026-07-17 |
+| [[entities/mingshuai-liu\|Mingshuai Liu]] | ASLP@NPU — EchoFree ultra-lightweight neural AEC (2025) | 2026-07-17 |
+| [[entities/zhonghua-fu\|Zhonghua Fu]] | ASLP@NPU — EchoFree ultra-lightweight neural AEC (2025, corresponding author) | 2026-07-17 |
 
 ---
 
@@ -627,6 +631,9 @@
 | [[concepts/ulcnet\|ULCNet]] | Ultra-low complexity DNN for noise suppression and joint AENR | 2026-07-16 |
 | [[concepts/channel-wise-feature-reorientation\|Channel-Wise Feature Reorientation]] | Sub-band feature processing technique for low-complexity speech enhancement | 2026-07-16 |
 | [[concepts/power-law-compression\|Power-Law Compression]] | Nonlinear magnitude compression for spectral dynamic range reduction | 2026-07-16 |
+| [[concepts/bark-scale-spectral-features\|Bark-Scale Spectral Features]] | Perceptually motivated low-dimensional STFT magnitude projection onto Bark critical bands; enables ~2.5x compression for lightweight AEC post filters (PercepNet, Bark-AEC, EchoFree) | 2026-07-17 |
+| [[concepts/u-net-post-filter\|U-Net Post Filter]] | Encoder-decoder neural network with skip connections used as the neural stage of a hybrid AEC/SE pipeline; EchoFree instance: 278K params / 30 MMACs/s on Bark-scale features | 2026-07-17 |
+| [[concepts/percepnet-style-neural-post-filter\|PercepNet-Style Neural Post Filter]] | Hybrid AEC/SE design pattern: linear adaptive filter + lightweight neural Bark-scale gain masker; lineage: PercepNet (2021) -> Bark-AEC (2024) -> EchoFree (2025) | 2026-07-17 |
 
 ---
 
@@ -754,6 +761,7 @@
 | [[sources/ma-2027-robust-ffanc-online-path-modeling\|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] | New FFANC with simultaneous OSPM+OFBPM via second supporting filter H2(z) and SF-driven global AWGN scaling; near-ideal-benchmark NRP under time-varying paths. | 2026-07-15 |
 | [[sources/benslimane-2026-tango-quantized-distributed\|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]] | INT8 QAT + ERB + grouped LSTM for TANGO; MN-TANGO simplification; spatial filter absorbs quantization errors; 4.65 MMAC/s, 0.177 MB | 2026-07-16 |
 | [[sources/shetu-2024-hybrid-low-complexity-aenr\|A Hybrid Approach for Low-Complexity Joint AENR]] | Low-complexity hybrid AENR using KF + modified ULCNet; 0.69M params, 0.10 GMACs | 2026-07-16 |
+| [[sources/li-2025-echofree-neural-aec\|Li et al. 2025: EchoFree]] | Ultra-lightweight neural AEC: 278K params / 30 MMACs/s; U-Net on Bark-scale features + two-stage WavLM SSL training; matches DeepVQE-S on ST FE/NE | 2026-07-17 |
 
 ---
 
@@ -804,10 +812,10 @@
 
 ## Statistics
 
-- **Total pages**: 753
-- **Entities**: 322
-- **Concepts**: 286
-- **Sources**: 118
+- **Total pages**: 761
+- **Entities**: 326
+- **Concepts**: 289
+- **Sources**: 119
 - **Synthesis**: 20
 - **Queries**: 7
-- **Last updated**: 2026-07-16
+- **Last updated**: 2026-07-17

@@ -1,0 +1,70 @@
+---
+type: concept
+created: 2026-07-17
+updated: 2026-07-17
+sources:
+  - raw/papers/li-2025-echofree-neural-aec/full-text.md
+tags:
+  - psychoacoustics
+  - speech-enhancement
+  - signal-processing
+  - acoustic-echo-cancellation
+  - low-complexity
+---
+
+# Bark-Scale Spectral Features
+
+**Bark-scale spectral features** are perceptually motivated low-dimensional representations of audio obtained by projecting the linear-frequency STFT magnitude onto the Bark psychoacoustic frequency scale. They compress the full spectrogram (typically 257 bins at 16 kHz) into a much smaller set of bands (typically ~24 critical bands, or expanded to 100 sub-bands in Bark-AEC / EchoFree), preserving perceptually relevant information while dramatically reducing the input dimensionality and downstream computational cost.
+
+## Definition
+
+The Bark scale models the critical bands of human hearing, where each Bark corresponds to a critical band about 100 Hz wide at low frequencies and progressively wider at high frequencies. The mapping from linear frequency $f$ (in Hz) to Bark $b$ is:
+
+$$
+b(f) = 13 \arctan(0.00076 f) + 3.5 \arctan\left((f/7500)^2\right)
+$$
+
+In practical speech-enhancement / AEC systems, the linear STFT magnitude $|Y| \in \mathbb{R}^{T \times F}$ is multiplied by a fixed mapping matrix $\mathbf{B} \in \mathbb{R}^{F \times N_{\text{Bark}}}$ to obtain a Bark-scale power spectrum, which is then log-compressed:
+
+$$
+\mathbf{X}_{\text{Bark}} = \log\left( |Y|^{\,2} \cdot \mathbf{B} \right)
+$$
+
+The inverse operation $\mathbf{B}^\top$ expands a predicted Bark gain back to the linear STFT resolution for waveform resynthesis.
+
+## Role in Low-Complexity Neural AEC
+
+Bark-scale features are a foundational design choice in lightweight AEC post-filters because they allow the neural network to operate on a compact representation rather than the full 257-bin spectrum. Three lightweight AEC lines of work build directly on this idea:
+
+| System | Bark bands | Input dim | Reference |
+|--------|-----------:|----------:|-----------|
+| Ma et al. 2020 (ADF + RNN) | 100 | 100 + derivatives | [[sources/li-2025-echofree-neural-aec\|EchoFree, ref. 6]] |
+| Seidel et al. ICASSP 2024 (Bark-AEC) | 100 | 100 + derivatives | Seidel, Mowlaee & Fingscheidt 2024 |
+| **EchoFree** (Li et al. 2025) | 100 | **112** (100 Bark + 6 first-order + 6 second-order derivatives) | [[sources/li-2025-echofree-neural-aec\|Li et al. 2025]] |
+
+In [[sources/li-2025-echofree-neural-aec\|EchoFree]] the 112-dim Bark feature vector is fed to a [[concepts/u-net-post-filter\|U-Net post filter]] that predicts a 100-dim Bark gain mask $\hat{\mathbf{g}} \in [0, 1]^{100}$. The mask is expanded back to 257 bins via $\mathbf{B}^\top \hat{\mathbf{g}}$ and applied to $|Y|$ to recover the near-end magnitude spectrum.
+
+## Comparison with Other Perceptual Scales
+
+| Scale | Formula (Hz → scale) | Bands | Application |
+|-------|----------------------|------:|-------------|
+| [[concepts/erb-scale\|ERB]] | $21.4 \cdot \log_{10}(0.00437 f + 1)$ | 32 (DeepFilterNet) | Speech enhancement (DeepFilterNet, TANGO) |
+| Mel | $2595 \cdot \log_{10}(1 + f/700)$ | 40 | ASR, speaker recognition |
+| **Bark** | $13 \arctan(0.00076 f) + 3.5 \arctan((f/7500)^2)$ | 24 critical / 100 sub | AEC post filters (Bark-AEC, EchoFree, PercepNet) |
+
+Bark and ERB are both perceptually motivated, but Bark is more commonly used in AEC contexts following the PercepNet lineage (Valin et al. ICASSP 2021), while ERB dominates the DeepFilterNet / TANGO family. The two scales produce qualitatively similar compression ratios (8:1–32:1) and similar parameter savings when used as a network front-end.
+
+## Related Concepts
+
+- [[concepts/erb-scale\|ERB Scale]]
+- [[concepts/percepnet-style-neural-post-filter\|PercepNet-Style Neural Post Filter]]
+- [[concepts/u-net-post-filter\|U-Net Post Filter]]
+- [[concepts/acoustic-echo-cancellation\|Acoustic Echo Cancellation]]
+- [[concepts/speech-enhancement\|Speech Enhancement]]
+- [[concepts/deep-filtering\|Deep Filtering]]
+
+## Related Sources
+
+- [[sources/li-2025-echofree-neural-aec\|Li et al. 2025: EchoFree]]
+- [[sources/indenbom-2023-deepvqe\|Indenbom et al. 2023: DeepVQE]] — comparison point in the AEC lightweight hierarchy
+- [[sources/shetu-2024-hybrid-low-complexity-aenr\|Shetu et al. 2024: Hybrid Low-Complexity AENR]] — ULCNet-AER baseline (uses linear-frequency sub-band stacking rather than Bark)

@@ -3038,3 +3038,39 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/entities/index.md` — added 5 entity rows
   - `wiki/concepts/index.md` — added 3 concept rows
   - `wiki/sources/index.md` — added 1 source row
+
+---
+
+## [2026-07-17] ingest | EchoFree: Ultra Lightweight Neural AEC (Li 2025)
+
+- **Source**: `raw/papers/li-2025-echofree-neural-aec/full-text.md` (Zotero: RPUN2SVZ)
+- **Authors**: Xingchen Li†, Boyi Kang†, Ziqian Wang, Zihan Zhang, Mingshuai Liu, Zhonghua Fu*, Lei Xie
+- **Published**: arXiv preprint, 8 Aug 2025
+- **DOI**: 10.48550/arXiv.2508.06271
+- **Summary**: EchoFree — ultra-lightweight neural AEC combining partitioned-block FDAKF + U-Net post filter on Bark-scale features + two-stage WavLM SSL training; 278K params / 30 MMACs/s, matches DeepVQE-S on ST FE/NE AECMOS at ~10× lower compute
+- **Pages created**:
+  - `raw/papers/li-2025-echofree-neural-aec/full-text.md` — extracted text from Zotero PDF via MinerU VLM
+  - `wiki/sources/li-2025-echofree-neural-aec.md`
+  - `wiki/entities/boyi-kang.md`
+  - `wiki/entities/zihan-zhang.md`
+  - `wiki/entities/mingshuai-liu.md`
+  - `wiki/entities/zhonghua-fu.md`
+  - `wiki/concepts/bark-scale-spectral-features.md`
+  - `wiki/concepts/u-net-post-filter.md`
+  - `wiki/concepts/percepnet-style-neural-post-filter.md`
+- **Pages updated**:
+  - `wiki/entities/xingchen-li.md` — added EchoFree (equal first author)
+  - `wiki/entities/ziqian-wang.md` — added EchoFree
+  - `wiki/entities/lei-xie.md` — added EchoFree
+  - `wiki/concepts/acoustic-echo-cancellation.md` — added Lightweight/PercepNet-Style Hybrid AEC section with comparison table; cross-refs to new concepts; source link
+  - `wiki/concepts/depthwise-separable-convolution.md` — added EchoFree source link
+  - `wiki/concepts/sub-pixel-convolution.md` — added EchoFree source link; U-Net post filter cross-ref
+  - `wiki/concepts/self-supervised-speech-representation.md` — added Applications in Lightweight AEC (EchoFree) section with two-stage SSL training details; cross-refs; source link
+  - `wiki/concepts/erb-scale.md` — added Bark-scale cross-ref; EchoFree source link
+  - `wiki/sources/indenbom-2023-deepvqe.md` — added EchoFree cross-ref (DeepVQE-S as upper-bound SOTA comparison)
+  - `wiki/sources/shetu-2024-hybrid-low-complexity-aenr.md` — added EchoFree cross-ref; synthesis link
+  - `wiki/synthesis/joint-multitask-ultra-low-latency-se.md` — added EchoFree to source list; new "Two-Stage SSL Loss for Lightweight AEC" subsection in Insight 5
+  - `wiki/index.md` — added 4 entities, 3 concepts, 1 source; updated statistics (761/326/289/119/20/7)
+  - `wiki/entities/index.md` — added 4 entity rows
+  - `wiki/concepts/index.md` — added 3 concept rows
+  - `wiki/sources/index.md` — added 1 source row
