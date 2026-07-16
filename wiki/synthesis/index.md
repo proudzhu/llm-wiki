@@ -23,3 +23,4 @@
 | [[synthesis/iir-filter-fitting-frequency-response\|IIR Filter Fitting for Frequency Response]] | 向量拟合、SOS 参数化、峰值/谷值滤波器、梯度优化、状态空间辨识、Q&A | Liang 2026, Pawelczyk 1997 |
 | [[synthesis/multi-modal-speech-enhancement\|Multi-Modal Speech Enhancement]] | Multi-modal approaches combining BC, AC, IMU for robust speech enhancement | He 2025, Kuang 2024, Wang 2022, Tagliasacchi 2020 |
 | [[synthesis/secondary-path-modeling-evolution|Secondary Path Modeling Evolution]] | 离线→在线→免建模→绕过：四条技术路线的决策矩阵与演进趋势 | Kuo 1999, Benois 2020, Liang 2026, Zhu 2020 |
+| [[synthesis/joint-multitask-ultra-low-latency-se\|Joint Multi-Task SE & Ultra-Low-Latency Paradigm]] | 6 sources + theory: task dissolution (AEC+NS+DR+OVC+AHS), 0–20ms latency tiers, linear RNN/SSM replacing LSTM/ConvTasNet, HALO+FRS redundancy frontier | Indenbom 2023, Hao 2025, Zhao 2026, Ashur 2026, Østergaard 2026, Benslimane 2026, Rath 2026 |

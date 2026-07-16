@@ -768,6 +768,7 @@
 | [[synthesis/llm-wiki-best-practices|LLM Wiki Best Practices]] | Comprehensive guide to LLM Wiki architecture, workflows, and maintenance practices | AGENTS.md |
 | [[synthesis/multi-modal-speech-enhancement\|Multi-Modal Speech Enhancement]] | Multi-modal approaches combining bone conduction, air conduction, IMU for robust speech enhancement | He 2025, Kuang 2024, Wang 2022, Tagliasacchi 2020 |
 | [[synthesis/secondary-path-modeling-evolution|Secondary Path Modeling Evolution]] | 离线→在线→免建模→绕过：四条技术路线的决策矩阵与演进趋势 | Kuo 1999, Benois 2020, Liang 2026, Zhu 2020 |
+| [[synthesis/joint-multitask-ultra-low-latency-se|Joint Multi-Task SE & Ultra-Low-Latency Paradigm]] | 6 sources + theory: task dissolution (AEC+NS+DR+OVC+AHS), 0–20ms latency tiers, linear RNN/SSM replacing LSTM/ConvTasNet, HALO+FRS redundancy frontier | Indenbom 2023, Hao 2025, Zhao 2026, Ashur 2026, Østergaard 2026, Benslimane 2026, Rath 2026 |
 
 ---
 
@@ -789,10 +790,10 @@
 
 ## Statistics
 
-- **Total pages**: 738
+- **Total pages**: 739
 - **Entities**: 317
 - **Concepts**: 279
 - **Sources**: 116
-- **Synthesis**: 19
+- **Synthesis**: 20
 - **Queries**: 7
-- **Last updated**: 2026-07-15
+- **Last updated**: 2026-07-16

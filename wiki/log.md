@@ -2949,3 +2949,27 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 - **Orphan pages**: 1 — sources/why-mathematica-not-simplify-sinh-arccosh
 - **Statistics**: All stated counts match actual (317/279/116/19/7, total 738). Last updated 2026-07-15.
 - **Actions taken**: None — informational lint pass. Recommend running wiki-link-fixer/scripts/fix_links.py to bulk-fix the 184 missing-prefix + 30 wiki/-prefix + 38 ../-prefix violations (252 auto-fixable). Truly broken figure refs require manual asset verification.
+
+
+---
+
+## [2026-07-16] merge | New synthesis: Joint Multi-Task SE & Ultra-Low-Latency Paradigm
+
+- **New synthesis page**: wiki/synthesis/joint-multitask-ultra-low-latency-se.md — merges two proposed themes (joint multi-task SE architectures + ultra-low-latency realtime paradigm) into a single cross-source analysis
+- **Sources synthesized (6 + 1 theory)**:
+  - wiki/sources/indenbom-2023-deepvqe.md — DeepVQE (AEC+NS+DR, 20ms, shared backbone via cross-attention + CCM)
+  - wiki/sources/hao-2025-l3c-deepmfc.md — L3C-DeepMFC (4ms hearing-aid feedback cancellation, 0.31M params)
+  - wiki/sources/zhao-2026-halo-half-frame-rate-adaptive-operator.md — HALO (0ms added, plug-in frame-rate accelerator)
+  - wiki/sources/ashur-2026-acoustic-howling-suppression-fine-tuning.md — Ashur (0ms added, 60-40 data-mixing fine-tuning for joint NS+AHS)
+  - wiki/sources/ostergaard-2026-own-voice-cancellation.md — OVC (2ms, Mamba-MinGRU linear RNN)
+  - wiki/sources/benslimane-2026-rt-tango-binaural-speech-enhancement.md — RT-Tango (8ms, ERB+GRNN+FRS+asymmetric STFT)
+  - wiki/sources/rath-2026-minimum-delay-block-size.md — Rath & Geier (theoretical lower bound Δ = b_plugin − gcd(b_host, b_plugin))
+- **Six key insights**:
+  1. Multi-task fusion strategies form a spectrum (shared backbone / task reframing / distributed multi-stage) with distinct latency implications
+  2. Latency budget drives a 4-tier algorithmic hierarchy (≥20ms / 8–10ms / 4ms / 2ms / 0ms added)
+  3. Linear RNNs / SSMs (Mamba-MinGRU, GRNN) replacing LSTM/ConvTasNet in streaming SE — fills gap in synthesis/computational-efficiency-evolution.md
+  4. Temporal redundancy (HALO + FRS) is the new efficiency frontier, orthogonal to backbone slimming
+  5. Training-side innovations (cross-attention alignment, closed-loop FT, data-mixing FT, silence-aware SDR loss) match architecture innovations in impact
+  6. Rath & Geier formula anchors engineering frontier — algorithmic latency below reblocking floor is masked by host/plugin buffering
+- **Indexes updated**: wiki/index.md (synthesis row added), wiki/synthesis/index.md (row added)
+- **Statistics updated**: 739 total (317 entities / 279 concepts / 116 sources / 20 synthesis / 7 queries), last updated 2026-07-16
