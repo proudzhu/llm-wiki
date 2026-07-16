@@ -81,7 +81,8 @@ For ANC, a Kalman filter can be used to:
 - **[[extended-kalman-filter|Extended Kalman Filter (EKF)]]**: For nonlinear systems — linearizes via Jacobians at each step. Fundamental limitation: nonlinear transforms of Gaussians are not Gaussian.
 - **Unscented Kalman Filter (UKF)**: Handles nonlinearities more accurately than EKF using sigma points (Julier & Uhlmann, 1996)
 - **MCC-KF**: A robust Kalman filter that replaces the standard MSE update with the **[[maximum-correntropy-criterion|Maximum Correntropy Criterion]]**, making it immune to impulsive noise in the measurements
-- **[[frequency-domain-kalman-filter|Frequency-Domain Kalman Filter (FDKF)]]**: Operates in the frequency domain for acoustic echo/howling suppression; per-frequency-bin state updates
+- [[frequency-domain-kalman-filter|Frequency-Domain Kalman Filter (FDKF)]]: Operates in the frequency domain for acoustic echo/howling suppression; per-frequency-bin state updates
+- **Partitioned-block-frequency-domain adaptive KF**: Diagonalized variant used in acoustic echo controllers; serves as the first stage in hybrid AENR systems (e.g., Shetu et al. 2024)
 
 ## Related Concepts
 

@@ -327,6 +327,11 @@
 | [[entities/wenyi-wu\|Wenyi Wu]] | Researcher (Beijing Aerospace Measurement & Control); ANC, adaptive notch filtering, filter-bank structures. | 2026-07-15 |
 | [[entities/khashayar-khorasani\|Khashayar Khorasani]] | Professor (Concordia U.); adaptive filtering, fault diagnosis, neural networks, ANC with online path modeling. | 2026-07-15 |
 | [[entities/liying-ma\|Liying Ma]] | Researcher (Concordia U.); adaptive signal processing for ANC, online path modeling, narrowband ANC. | 2026-07-15 |
+| [[entities/shrishti-saha-shetu\|Shrishti Saha Shetu]] | Researcher at Fraunhofer IIS; low-complexity speech enhancement, ULCNet | 2026-07-16 |
+| [[entities/naveen-kumar-desiraju\|Naveen Kumar Desiraju]] | Researcher at Fraunhofer IIS; acoustic signal processing | 2026-07-16 |
+| [[entities/jose-miguel-martinez-aponte\|Jose Miguel Martinez Aponte]] | Researcher at Fraunhofer IIS; acoustic signal processing | 2026-07-16 |
+| [[entities/emanuel-habets\|Emanuel A. P. Habets]] | Professor at Fraunhofer IIS / Intl Audio Labs Erlangen; spatial audio, AEC | 2026-07-16 |
+| [[entities/edwin-mabande\|Edwin Mabande]] | Researcher at Fraunhofer IIS; acoustic echo control, adaptive filtering | 2026-07-16 |
 
 ---
 
@@ -619,6 +624,9 @@
 | [[concepts/quantization-aware-training\|Quantization-Aware Training (QAT)]] | Quantization strategy simulating INT8 inference during training via fake-quantization + straight-through estimator; preserves FP32 quality for LSTM-based SE | 2026-07-16 |
 | [[concepts/post-training-quantization\|Post-Training Quantization (DPTQ)]] | Quantize a trained FP32 model without retraining; INT8 weights + dynamic activation quantization; fails for LSTM due to heterogeneous activation ranges | 2026-07-16 |
 | [[concepts/gevd-spatial-filtering\|GEVD-Based Spatial Filtering]] | Rank-constrained SDW-MWF via generalized eigendecomposition of speech/noise SCMs; inference-time spatial filter in TANGO family; robust to mask errors | 2026-07-16 |
+| [[concepts/ulcnet\|ULCNet]] | Ultra-low complexity DNN for noise suppression and joint AENR | 2026-07-16 |
+| [[concepts/channel-wise-feature-reorientation\|Channel-Wise Feature Reorientation]] | Sub-band feature processing technique for low-complexity speech enhancement | 2026-07-16 |
+| [[concepts/power-law-compression\|Power-Law Compression]] | Nonlinear magnitude compression for spectral dynamic range reduction | 2026-07-16 |
 
 ---
 
@@ -745,6 +753,7 @@
 | [[sources/zartbot-2026-dspark-speculative-decoding\|zartbot 2026: 详细谈谈DSpark投机解码的原理]] | Code-level walkthrough of DSpark (DeepSeek's speculative decoding framework); semi-autoregressive generation + confidence-scheduled verification; surveys 14 draft-model algorithms across 6 stages (2022–2026); reports 60–85% speedup on DeepSeek-V4 | 2026-07-04 |
 | [[sources/ma-2027-robust-ffanc-online-path-modeling\|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] | New FFANC with simultaneous OSPM+OFBPM via second supporting filter H2(z) and SF-driven global AWGN scaling; near-ideal-benchmark NRP under time-varying paths. | 2026-07-15 |
 | [[sources/benslimane-2026-tango-quantized-distributed\|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]] | INT8 QAT + ERB + grouped LSTM for TANGO; MN-TANGO simplification; spatial filter absorbs quantization errors; 4.65 MMAC/s, 0.177 MB | 2026-07-16 |
+| [[sources/shetu-2024-hybrid-low-complexity-aenr\|A Hybrid Approach for Low-Complexity Joint AENR]] | Low-complexity hybrid AENR using KF + modified ULCNet; 0.69M params, 0.10 GMACs | 2026-07-16 |
 
 ---
 
@@ -795,10 +804,10 @@
 
 ## Statistics
 
-- **Total pages**: 744
-- **Entities**: 317
-- **Concepts**: 283
-- **Sources**: 117
+- **Total pages**: 753
+- **Entities**: 322
+- **Concepts**: 286
+- **Sources**: 118
 - **Synthesis**: 20
 - **Queries**: 7
 - **Last updated**: 2026-07-16

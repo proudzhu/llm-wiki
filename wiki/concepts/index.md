@@ -287,4 +287,7 @@
 | [[concepts/quantization-aware-training\|Quantization-Aware Training (QAT)]] | Quantization strategy simulating INT8 inference during training via fake-quantization + straight-through estimator; preserves FP32 quality for LSTM-based SE | 2026-07-16 |
 | [[concepts/post-training-quantization\|Post-Training Quantization (DPTQ)]] | Quantize a trained FP32 model without retraining; INT8 weights + dynamic activation quantization; fails for LSTM due to heterogeneous activation ranges | 2026-07-16 |
 | [[concepts/gevd-spatial-filtering\|GEVD-Based Spatial Filtering]] | Rank-constrained SDW-MWF via generalized eigendecomposition of speech/noise SCMs; inference-time spatial filter in TANGO family; robust to mask errors | 2026-07-16 |
+| [[concepts/ulcnet\|ULCNet]] | Ultra-low complexity DNN for noise suppression and joint AENR | 2026-07-16 |
+| [[concepts/channel-wise-feature-reorientation\|Channel-Wise Feature Reorientation]] | Sub-band feature processing technique for low-complexity speech enhancement | 2026-07-16 |
+| [[concepts/power-law-compression\|Power-Law Compression]] | Nonlinear magnitude compression for spectral dynamic range reduction | 2026-07-16 |
 

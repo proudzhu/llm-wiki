@@ -121,4 +121,5 @@
 | [[sources/zartbot-2026-dspark-speculative-decoding\|zartbot 2026: 详细谈谈DSpark投机解码的原理]] | Code-level walkthrough of DSpark (DeepSeek's speculative decoding framework); semi-autoregressive generation + confidence-scheduled verification; surveys 14 draft-model algorithms across 6 stages (2022–2026); reports 60–85% speedup on DeepSeek-V4 | 2026-07-04 |
 | [[sources/ma-2027-robust-ffanc-online-path-modeling\|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] | New FFANC with simultaneous OSPM+OFBPM via second supporting filter H2(z) and SF-driven global AWGN scaling; near-ideal-benchmark NRP under time-varying paths. | 2026-07-15 |
 | [[sources/benslimane-2026-tango-quantized-distributed\|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]] | INT8 QAT + ERB + grouped LSTM for TANGO; MN-TANGO simplification; spatial filter absorbs quantization errors; 4.65 MMAC/s, 0.177 MB | 2026-07-16 |
+| [[sources/shetu-2024-hybrid-low-complexity-aenr\|A Hybrid Approach for Low-Complexity Joint AENR]] | Low-complexity hybrid AENR using KF + modified ULCNet; 0.69M params, 0.10 GMACs | 2026-07-16 |
 

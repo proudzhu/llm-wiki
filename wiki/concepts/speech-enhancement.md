@@ -23,6 +23,7 @@ Speech enhancement (SE) is the task of improving the perceptual quality and inte
 - Multi-channel speech enhancement (beamforming, spatial filtering)
 - Bone-conduction speech enhancement
 - Real-time low-latency enhancement
+- Low-complexity enhancement for embedded devices (e.g., [[concepts/ulcnet|ULCNet]])
 
 ## Related Concepts
 
@@ -32,7 +33,10 @@ Speech enhancement (SE) is the task of improving the perceptual quality and inte
 - [[concepts/personalized-speech-enhancement|Personalized Speech Enhancement (PSE)]]
 - [[concepts/mp-senet|MP-SENet]]
 - [[concepts/ecapa-tdnn|ECAPA-TDNN]]
+- [[concepts/ulcnet|ULCNet]]
+- [[concepts/acoustic-echo-cancellation|Acoustic Echo Cancellation]]
 
 ## Related Sources
 
 - [[sources/zhu-2026-g-map-se-guided-speech-enhancement|G-MaP-SE: Guided Speech Enhancement via GMM-Based Prior Matching (Interspeech 2026)]]
+- [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]]

@@ -321,4 +321,9 @@
 | [[entities/wenyi-wu\|Wenyi Wu]] | Researcher (Beijing Aerospace Measurement & Control); ANC, adaptive notch filtering, filter-bank structures. | 2026-07-15 |
 | [[entities/khashayar-khorasani\|Khashayar Khorasani]] | Professor (Concordia U.); adaptive filtering, fault diagnosis, neural networks, ANC with online path modeling. | 2026-07-15 |
 | [[entities/liying-ma\|Liying Ma]] | Researcher (Concordia U.); adaptive signal processing for ANC, online path modeling, narrowband ANC. | 2026-07-15 |
+| [[entities/shrishti-saha-shetu\|Shrishti Saha Shetu]] | Researcher at Fraunhofer IIS; low-complexity speech enhancement, ULCNet | 2026-07-16 |
+| [[entities/naveen-kumar-desiraju\|Naveen Kumar Desiraju]] | Researcher at Fraunhofer IIS; acoustic signal processing | 2026-07-16 |
+| [[entities/jose-miguel-martinez-aponte\|Jose Miguel Martinez Aponte]] | Researcher at Fraunhofer IIS; acoustic signal processing | 2026-07-16 |
+| [[entities/emanuel-habets\|Emanuel A. P. Habets]] | Professor at Fraunhofer IIS / Intl Audio Labs Erlangen; spatial audio, AEC | 2026-07-16 |
+| [[entities/edwin-mabande\|Edwin Mabande]] | Researcher at Fraunhofer IIS; acoustic echo control, adaptive filtering | 2026-07-16 |
 

@@ -3008,3 +3008,33 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/index.md` — added 4 concepts, 1 source; updated statistics
   - `wiki/concepts/index.md` — added 4 concept rows
   - `wiki/sources/index.md` — added 1 source row
+
+---
+
+## [2026-07-16] ingest | A Hybrid Approach for Low-Complexity Joint AENR (Shetu 2024)
+
+- **Source**: `raw/papers/shetu-2024-hybrid-low-complexity-aenr/full-text.md` (Zotero: XIPNNJIZ)
+- **Authors**: Shrishti Saha Shetu, Naveen Kumar Desiraju, Jose Miguel Martinez Aponte, Emanuel A. P. Habets, Edwin Mabande
+- **Published**: IWAENC 2024
+- **DOI**: 10.1109/IWAENC61483.2024.10694288
+- **Summary**: Low-complexity hybrid AENR using Kalman filter + modified ULCNet; 0.69M params, 0.10 GMACs, suitable for embedded devices
+- **Pages created**:
+  - `raw/papers/shetu-2024-hybrid-low-complexity-aenr/full-text.md` — extracted text from Zotero PDF via MinerU
+  - `wiki/sources/shetu-2024-hybrid-low-complexity-aenr.md`
+  - `wiki/entities/shrishti-saha-shetu.md`
+  - `wiki/entities/naveen-kumar-desiraju.md`
+  - `wiki/entities/jose-miguel-martinez-aponte.md`
+  - `wiki/entities/emanuel-habets.md`
+  - `wiki/entities/edwin-mabande.md`
+  - `wiki/concepts/ulcnet.md`
+  - `wiki/concepts/channel-wise-feature-reorientation.md`
+  - `wiki/concepts/power-law-compression.md`
+- **Pages updated**:
+  - `wiki/concepts/acoustic-echo-cancellation.md` — added low-complexity approaches section, ULCNet/KF cross-refs, source link
+  - `wiki/concepts/kalman-filter.md` — added partitioned-block KF variant, AEC cross-ref, source link
+  - `wiki/concepts/speech-enhancement.md` — added ULCNet and AEC cross-refs, source link
+  - `wiki/concepts/complex-ratio-mask.md` — added ULCNet cross-ref, source link
+  - `wiki/index.md` — added 5 entities, 3 concepts, 1 source; updated statistics
+  - `wiki/entities/index.md` — added 5 entity rows
+  - `wiki/concepts/index.md` — added 3 concept rows
+  - `wiki/sources/index.md` — added 1 source row
