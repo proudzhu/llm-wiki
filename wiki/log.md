@@ -2932,3 +2932,20 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/concepts/secondary-path-modeling.md` — added OFBPM/SF/AWGN-scaling links and Ma 2027 source
   - `wiki/concepts/active-noise-control.md` — added Ma 2027 source
 - **Indexes updated**: `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` (statistics: 738 total, 317 entities, 279 concepts, 116 sources, 19 synthesis, 7 queries)
+
+
+---
+
+## [2026-07-16] lint | Health check
+
+- **Index consistency**: All categories consistent. Main index and subdirectory indexes all match actual file counts (entities 317, concepts 279, sources 116, synthesis 19, queries 7). No missing/phantom/duplicate entries.
+- **Broken links**: 
+  - Truly broken: 45 (1 placeholder `[[concepts/concept-name]]` in synthesis/llm-wiki-best-practices.md; 44 missing figure assets across multiple source pages)
+  - Missing category prefix: 184 (bare slugs resolvable to concepts/entities/synthesis)
+  - wiki/ prefix: 30
+  - ../ prefix convention violations: 38
+  - log.md informal refs: 19
+- **Duplicate entries**: 0
+- **Orphan pages**: 1 — sources/why-mathematica-not-simplify-sinh-arccosh
+- **Statistics**: All stated counts match actual (317/279/116/19/7, total 738). Last updated 2026-07-15.
+- **Actions taken**: None — informational lint pass. Recommend running wiki-link-fixer/scripts/fix_links.py to bulk-fix the 184 missing-prefix + 30 wiki/-prefix + 38 ../-prefix violations (252 auto-fixable). Truly broken figure refs require manual asset verification.
