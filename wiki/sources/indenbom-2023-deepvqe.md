@@ -167,3 +167,4 @@ Training data synthesized online from clean/noisy speech with random parameters 
 
 - [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement|Tan & Wang 2018: CRN for Speech Enhancement]]
 - [[sources/wang-2018-supervised-speech-separation-deep-learning-overview|Wang & Chen 2018: Supervised Speech Separation Survey]]
+- [[sources/li-2025-echofree-neural-aec|Li et al. 2025: EchoFree]] — DeepVQE-S serves as the upper-bound SOTA comparison for this 278K-parameter PercepNet-style AEC model

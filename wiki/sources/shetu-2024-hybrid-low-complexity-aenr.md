@@ -145,6 +145,10 @@ The proposed method runs with a **real-time factor of 13.1%** on a Cortex-A53 1.
 - [[concepts/channel-wise-feature-reorientation|Channel-Wise Feature Reorientation]]
 - [[concepts/adaptive-filtering|Adaptive Filtering]]
 
+## Related Sources
+
+- [[sources/li-2025-echofree-neural-aec|Li et al. 2025: EchoFree]] — uses ULCNet-AER as one of the low-complexity AEC baselines; EchoFree's 278K/30 MMACs/s achieves substantially higher AECMOS than ULCNet-AER's 1.12M/173 MMACs/s
+
 ## Related Synthesis
 
-*(None yet)*
+- [[synthesis/joint-multitask-ultra-low-latency-se|Joint Multi-Task SE & Ultra-Low-Latency Paradigm]]
