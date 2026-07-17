@@ -123,4 +123,5 @@
 | [[sources/benslimane-2026-tango-quantized-distributed\|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]] | INT8 QAT + ERB + grouped LSTM for TANGO; MN-TANGO simplification; spatial filter absorbs quantization errors; 4.65 MMAC/s, 0.177 MB | 2026-07-16 |
 | [[sources/shetu-2024-hybrid-low-complexity-aenr\|A Hybrid Approach for Low-Complexity Joint AENR]] | Low-complexity hybrid AENR using KF + modified ULCNet; 0.69M params, 0.10 GMACs | 2026-07-16 |
 | [[sources/li-2025-echofree-neural-aec\|Li et al. 2025: EchoFree]] | Ultra-lightweight neural AEC: 278K params / 30 MMACs/s; U-Net on Bark-scale features + two-stage WavLM SSL training; matches DeepVQE-S on ST FE/NE | 2026-07-17 |
+| [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Seidel et al. 2024: Bark-Scale NN for Residual Echo and Noise Suppression]] | Hybrid LEC + NSNet2-style postfilter on 86 Bark bands; 1.58M params, 235 MMACs/s, ~10% of DeepVQE-S compute at comparable AECMOS | 2024-04-01 |
 

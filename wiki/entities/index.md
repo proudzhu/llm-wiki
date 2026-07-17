@@ -330,4 +330,6 @@
 | [[entities/zihan-zhang\|Zihan Zhang]] | ASLP@NPU — EchoFree ultra-lightweight neural AEC (2025) | 2026-07-17 |
 | [[entities/mingshuai-liu\|Mingshuai Liu]] | ASLP@NPU — EchoFree ultra-lightweight neural AEC (2025) | 2026-07-17 |
 | [[entities/zhonghua-fu\|Zhonghua Fu]] | ASLP@NPU — EchoFree ultra-lightweight neural AEC (2025, corresponding author) | 2026-07-17 |
+| [[entities/ernst-seidel\|Ernst Seidel]] | TU Braunschweig — low-complexity real-time neural AEC (Bark-AEC, Y2-Net FCRN) | 2026-07-17 |
+| [[entities/tim-fingscheidt\|Tim Fingscheidt]] | TU Braunschweig (Professor) — speech enhancement, acoustic echo control, deep learning for speech communications | 2026-07-17 |
 

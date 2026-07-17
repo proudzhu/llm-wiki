@@ -3074,3 +3074,33 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/entities/index.md` — added 4 entity rows
   - `wiki/concepts/index.md` — added 3 concept rows
   - `wiki/sources/index.md` — added 1 source row
+
+---
+
+## [2026-07-17] ingest | Efficient High-Performance Bark-Scale NN for Residual Echo and Noise Suppression (Seidel 2024)
+
+- **Source**: `raw/papers/seidel-2024-bark-scale-nn-residual-suppression/full-text.md` (Zotero: QDIJS9HI)
+- **Authors**: Ernst Seidel, Pejman Mowlaee, Tim Fingscheidt
+- **Published**: ICASSP 2024, pp. 1–5
+- **DOI**: 10.1109/ICASSP48485.2024.10446427
+- **Summary**: Hybrid LEC (subband NLMS, oversampled filterbank) + NSNet2-style FC/GRU neural postfilter on 86-band Bark-scale features for joint residual echo + noise suppression; achieves DeepVQE-S-comparable AECMOS at ~10% of the MACs/s (235M vs 2170M), making it realtime-implementable on speakerphones. Bark mapping ablation confirms major improvement in nearend speech preservation.
+- **Pages created**:
+  - `raw/papers/seidel-2024-bark-scale-nn-residual-suppression/full-text.md` — extracted text via MinerU VLM
+  - `wiki/sources/seidel-2024-bark-scale-nn-residual-suppression.md`
+  - `wiki/entities/ernst-seidel.md`
+  - `wiki/entities/tim-fingscheidt.md`
+  - `wiki/concepts/nsnet2.md`
+  - `wiki/concepts/complex-compressed-mse.md`
+  - `wiki/concepts/stft-consistency.md`
+  - `wiki/concepts/oversampled-filterbank.md`
+  - `wiki/concepts/dtln.md`
+- **Pages updated**:
+  - `wiki/entities/pejman-mowlaee.md` — added Seidel 2024 paper, updated research focus
+  - `wiki/concepts/bark-scale-spectral-features.md` — added Seidel 2024 as source; corrected band count (86 vs 100); added note on citation discrepancy with EchoFree
+  - `wiki/concepts/percepnet-style-neural-post-filter.md` — added Seidel 2024 as source; corrected Bark-AEC row in representative-systems table (1.58M/235M/86 bands from original paper); added NSNet2/CCMSE/STFT-consistency/oversampled-filterbank cross-refs
+  - `wiki/concepts/acoustic-echo-cancellation.md` — corrected Bark-AEC row in lightweight table; added note on number discrepancy with EchoFree citation; added Seidel 2024 source link
+  - `wiki/synthesis/joint-multitask-ultra-low-latency-se.md` — added Seidel 2024 to sources synthesized (2024 efficiency-frontier data point between DeepVQE-S and EchoFree)
+  - `wiki/index.md` — added 2 entities, 5 concepts, 1 source; updated statistics (769/328/294/120/20/7)
+  - `wiki/entities/index.md` — added 2 entity rows
+  - `wiki/concepts/index.md` — added 5 concept rows
+  - `wiki/sources/index.md` — added 1 source row

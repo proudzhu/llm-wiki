@@ -293,4 +293,9 @@
 | [[concepts/bark-scale-spectral-features\|Bark-Scale Spectral Features]] | Perceptually motivated low-dimensional STFT magnitude projection onto Bark critical bands; enables ~2.5x compression for lightweight AEC post filters (PercepNet, Bark-AEC, EchoFree) | 2026-07-17 |
 | [[concepts/u-net-post-filter\|U-Net Post Filter]] | Encoder-decoder neural network with skip connections used as the neural stage of a hybrid AEC/SE pipeline; EchoFree instance: 278K params / 30 MMACs/s on Bark-scale features | 2026-07-17 |
 | [[concepts/percepnet-style-neural-post-filter\|PercepNet-Style Neural Post Filter]] | Hybrid AEC/SE design pattern: linear adaptive filter + lightweight neural Bark-scale gain masker; lineage: PercepNet (2021) -> Bark-AEC (2024) -> EchoFree (2025) | 2026-07-17 |
+| [[concepts/nsnet2\|NSNet2]] | Lightweight FC+GRU neural network for real-time noise suppression; backbone of Seidel 2024 Bark-AEC postfilter | 2026-07-17 |
+| [[concepts/complex-compressed-mse\|Complex Compressed MSE (CCMSE)]] | Speech-enhancement loss combining magnitude-only and phase-aware compressed MSE; used in Seidel 2024 with c=0.3 | 2026-07-17 |
+| [[concepts/stft-consistency\|STFT Consistency]] | Re-transforming estimated time-domain signal back to STFT before loss; ensures loss is on a physically realizable spectrum (Wisdom et al. 2019) | 2026-07-17 |
+| [[concepts/oversampled-filterbank\|Oversampled Filterbank]] | Multi-rate filterbank with total output rate > input rate; reduces aliasing for subband adaptive filtering (Harteneck-Weiss-Stewart 1999) | 2026-07-17 |
+| [[concepts/dtln\|DTLN (Dual-Signal Transformation LSTM Network)]] | Fully data-driven AEC baseline; 4 LSTM(256) + FC sigmoid; 3.16M params, 408 MMACs/s (Westhausen & Meyer 2021) | 2026-07-17 |
 

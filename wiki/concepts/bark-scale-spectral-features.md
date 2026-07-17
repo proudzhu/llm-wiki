@@ -4,6 +4,7 @@ created: 2026-07-17
 updated: 2026-07-17
 sources:
   - raw/papers/li-2025-echofree-neural-aec/full-text.md
+  - raw/papers/seidel-2024-bark-scale-nn-residual-suppression/full-text.md
 tags:
   - psychoacoustics
   - speech-enhancement
@@ -39,8 +40,10 @@ Bark-scale features are a foundational design choice in lightweight AEC post-fil
 | System | Bark bands | Input dim | Reference |
 |--------|-----------:|----------:|-----------|
 | Ma et al. 2020 (ADF + RNN) | 100 | 100 + derivatives | [[sources/li-2025-echofree-neural-aec\|EchoFree, ref. 6]] |
-| Seidel et al. ICASSP 2024 (Bark-AEC) | 100 | 100 + derivatives | Seidel, Mowlaee & Fingscheidt 2024 |
+| Seidel et al. ICASSP 2024 (Bark-AEC) | **86** (0–8 kHz, PEAQ-style uniform Bark) | 86 × 3 (mic, error, far-end log-power) | [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Seidel et al. 2024]] |
 | **EchoFree** (Li et al. 2025) | 100 | **112** (100 Bark + 6 first-order + 6 second-order derivatives) | [[sources/li-2025-echofree-neural-aec\|Li et al. 2025]] |
+
+> **Note on band counts**: Seidel et al. 2024 reports **86 Bark bands** over 0–8 kHz using a PEAQ-style filterbank design (Kabal 2003). EchoFree (Li 2025) and the earlier Ma 2020 use **100 bands**. The later EchoFree paper cites "Bark-AEC (Seidel et al. ICASSP 2024)" with 100 bands, but this appears to be a citation discrepancy — the original Seidel paper reports 86.
 
 In [[sources/li-2025-echofree-neural-aec\|EchoFree]] the 112-dim Bark feature vector is fed to a [[concepts/u-net-post-filter\|U-Net post filter]] that predicts a 100-dim Bark gain mask $\hat{\mathbf{g}} \in [0, 1]^{100}$. The mask is expanded back to 257 bins via $\mathbf{B}^\top \hat{\mathbf{g}}$ and applied to $|Y|$ to recover the near-end magnitude spectrum.
 
@@ -65,6 +68,7 @@ Bark and ERB are both perceptually motivated, but Bark is more commonly used in 
 
 ## Related Sources
 
+- [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Seidel, Mowlaee & Fingscheidt 2024]] — original Bark-AEC paper; 86-band PEAQ-style Bark filterbank with NSNet2-style FC+GRU backbone
 - [[sources/li-2025-echofree-neural-aec\|Li et al. 2025: EchoFree]]
 - [[sources/indenbom-2023-deepvqe\|Indenbom et al. 2023: DeepVQE]] — comparison point in the AEC lightweight hierarchy
 - [[sources/shetu-2024-hybrid-low-complexity-aenr\|Shetu et al. 2024: Hybrid Low-Complexity AENR]] — ULCNet-AER baseline (uses linear-frequency sub-band stacking rather than Bark)

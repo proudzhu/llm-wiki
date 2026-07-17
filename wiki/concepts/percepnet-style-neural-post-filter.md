@@ -4,6 +4,7 @@ created: 2026-07-17
 updated: 2026-07-17
 sources:
   - raw/papers/li-2025-echofree-neural-aec/full-text.md
+  - raw/papers/seidel-2024-bark-scale-nn-residual-suppression/full-text.md
 tags:
   - speech-enhancement
   - acoustic-echo-cancellation
@@ -30,8 +31,10 @@ All PercepNet-style post filters share four ingredients:
 | System | Year | Linear front-end | Neural backbone | Params | MACs/s | Notes |
 |--------|------|------------------|-----------------|-------:|-------:|-------|
 | PercepNet (Valin et al.) | 2021 | LAEC | PercepNet (pitch-conditioned) | — | — | Joint echo + noise; uses periodicity + aperiodicity |
-| Bark-AEC (Seidel et al.) | 2024 | LAEC | FC + stacked GRU on Bark features | 1.62M | 107M | ICASSP 2024 |
+| Bark-AEC (Seidel et al.) | 2024 | Subband NLMS (oversampled FB) | [[concepts/nsnet2\|NSNet2]]-style FC + GRU on 86-band Bark features | 1.58M | 235M | ICASSP 2024; CCMSE + STFT consistency loss |
 | **EchoFree** (Li et al.) | 2025 | Partitioned-block FDAKF | [[concepts/u-net-post-filter\|U-Net]] on Bark features | **0.28M** | **30M** | Two-stage SSL training; matches DeepVQE-S on ST FE/NE |
+
+> **Note on Bark-AEC numbers**: The later [[sources/li-2025-echofree-neural-aec\|EchoFree paper]] cites "Bark-AEC (Seidel et al. ICASSP 2024)" with 1.62M params / 107 MMACs/s, but the original Seidel 2024 paper reports **1.58M params / 235 MMACs/s / 86 Bark bands**. The table here uses the values from the original paper. The discrepancy may stem from different counting methodologies (inclusion/exclusion of LEC, mapping matrix, or different MACs/s protocols) or different model variants.
 
 ## Why Perceptual Features?
 
@@ -52,6 +55,10 @@ PercepNet-style is the most parameter-efficient of these because it leverages th
 
 - [[concepts/bark-scale-spectral-features\|Bark-Scale Spectral Features]]
 - [[concepts/u-net-post-filter\|U-Net Post Filter]]
+- [[concepts/nsnet2\|NSNet2]]
+- [[concepts/complex-compressed-mse\|Complex Compressed MSE (CCMSE)]]
+- [[concepts/stft-consistency\|STFT Consistency]]
+- [[concepts/oversampled-filterbank\|Oversampled Filterbank]]
 - [[concepts/acoustic-echo-cancellation\|Acoustic Echo Cancellation]]
 - [[concepts/frequency-domain-kalman-filter\|Frequency-Domain Kalman Filter]]
 - [[concepts/speech-enhancement\|Speech Enhancement]]
@@ -60,6 +67,7 @@ PercepNet-style is the most parameter-efficient of these because it leverages th
 
 ## Related Sources
 
+- [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Seidel, Mowlaee & Fingscheidt 2024]] — Bark-AEC, the original 86-band NSNet2-style hybrid AEC postfilter
 - [[sources/li-2025-echofree-neural-aec\|Li et al. 2025: EchoFree]] — latest PercepNet-style instance; introduces the U-Net variant and SSL two-stage training
 - [[sources/shetu-2024-hybrid-low-complexity-aenr\|Shetu et al. 2024: Hybrid Low-Complexity AENR]] — ULCNet-AER, a non-PercepNet low-complexity baseline for comparison
 - [[sources/indenbom-2023-deepvqe\|Indenbom et al. 2023: DeepVQE]] — non-PercepNet SOTA used as upper-bound comparison in EchoFree

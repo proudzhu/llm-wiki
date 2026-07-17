@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-17
 sources:
   - raw/papers/indenbom-2023-deepvqe/full-text.md
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
@@ -10,6 +10,7 @@ sources:
   - raw/papers/hao-2025-l3c-deepmfc/full-text.md
   - raw/papers/ashur-2026-acoustic-howling-suppression-fine-tuning/full-text.md
   - raw/papers/rath-2026-minimum-delay-block-size/full-text.txt
+  - raw/papers/seidel-2024-bark-scale-nn-residual-suppression/full-text.md
 tags:
   - speech-enhancement
   - multi-task
@@ -38,6 +39,7 @@ Neither trend is independently novel. The **new insight** from the 2025–2026 c
 | Source | Year | Tasks Joint | Latency | Compute | Key Mechanism |
 |--------|------|-------------|---------|---------|---------------|
 | [[sources/indenbom-2023-deepvqe\|DeepVQE (Indenbom)]] | 2023 | AEC + NS + DR | 20 ms | 7.5M params, 3.66 ms/frame | Cross-attention alignment + CCM |
+| [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Bark-AEC (Seidel)]] | 2024 | AEC + NS (hybrid) | 8 ms (frame shift 128 @ 16 kHz) | 1.58M params, 235 MMACs/s | Subband-NLMS LEC + NSNet2-style FC/GRU on 86 Bark bands |
 | [[sources/hao-2025-l3c-deepmfc\|L3C-DeepMFC (Hao)]] | 2025 | Hearing-aid feedback cancellation | **4 ms** | 0.31M params, 0.43 G/s MACs | Gain-shape complex mapping + closed-loop FT |
 | [[sources/li-2025-echofree-neural-aec\|EchoFree (Li)]] | 2025 | AEC only (lightweight) | — | **0.28M params, 30 MMACs/s** | U-Net on Bark + two-stage WavLM SSL loss |
 | [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator\|HALO (Zhao)]] | 2026 | SE backbone accelerator (plug-in) | **0 ms added** | Halves backbone MACs | Dynamic-conv frame-rate reduction |

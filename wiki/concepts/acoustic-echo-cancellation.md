@@ -58,9 +58,11 @@ A complementary line of work targets ultra-low-complexity AEC for edge devices. 
 | System | Params | MACs/s | ST FE EchoMOS | DT EchoMOS | Notes |
 |--------|-------:|-------:|--------------:|-----------:|-------|
 | ULCNet-AER (Shetu 2024) | 1.12M | 173M | 2.89 | 2.68 | Sub-band interleaved DNN |
-| Bark-AEC (Seidel 2024) | 1.62M | 107M | 3.16 | 2.96 | FC + GRU on Bark features |
+| Bark-AEC (Seidel 2024) | 1.58M | 235M | — (graphical) | — (graphical) | NSNet2-style FC+GRU on 86 Bark bands; CCMSE + STFT consistency loss |
 | DeepVQE-S (Indenbom 2023) | 0.82M | 315M | 4.13 | 3.96 | Residual CNN + CCM |
 | **EchoFree** (Li 2025) | **0.28M** | **30M** | **4.20** | **3.88** | U-Net on Bark + two-stage SSL training |
+
+> **Note on Bark-AEC numbers**: The original [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Seidel et al. 2024]] paper reports **1.58M params / 235 MMACs/s / 86 Bark bands** and presents AECMOS results graphically (no numeric table). The numeric values "1.62M / 107M / 3.16 / 2.96" cited in [[sources/li-2025-echofree-neural-aec\|EchoFree (Li 2025)]] appear to differ from the original paper's self-reported numbers — possibly due to different counting methodologies or a different model variant.
 
 EchoFree achieves DeepVQE-S-comparable single-talk performance at ~10× lower compute via three combined techniques: [[concepts/bark-scale-spectral-features|Bark-scale]] input compression (257 → 100), a [[concepts/u-net-post-filter|U-Net post filter]] with [[concepts/depthwise-separable-convolution|depthwise separable convolutions]] and [[concepts/sub-pixel-convolution|sub-pixel upsampling]], and a two-stage training strategy using frozen [[concepts/self-supervised-speech-representation|WavLM-Large SSL embeddings]] for coarse-to-fine spectral learning.
 
@@ -72,6 +74,11 @@ EchoFree achieves DeepVQE-S-comparable single-talk performance at ~10× lower co
 - [[concepts/bark-scale-spectral-features|Bark-Scale Spectral Features]]
 - [[concepts/u-net-post-filter|U-Net Post Filter]]
 - [[concepts/percepnet-style-neural-post-filter|PercepNet-Style Neural Post Filter]]
+- [[concepts/nsnet2|NSNet2]]
+- [[concepts/oversampled-filterbank|Oversampled Filterbank]]
+- [[concepts/complex-compressed-mse|Complex Compressed MSE (CCMSE)]]
+- [[concepts/stft-consistency|STFT Consistency]]
+- [[concepts/dtln|DTLN]]
 - [[concepts/depthwise-separable-convolution|Depthwise Separable Convolution]]
 - [[concepts/sub-pixel-convolution|Sub-Pixel Convolution]]
 - [[concepts/frequency-domain-kalman-filter|Frequency-Domain Kalman Filter]]
@@ -80,4 +87,5 @@ EchoFree achieves DeepVQE-S-comparable single-talk performance at ~10× lower co
 
 - [[sources/indenbom-2023-deepvqe|Indenbom et al. 2023: DeepVQE]]
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]]
+- [[sources/seidel-2024-bark-scale-nn-residual-suppression|Seidel, Mowlaee & Fingscheidt 2024: Bark-Scale NN for RES+NS]]
 - [[sources/li-2025-echofree-neural-aec|Li et al. 2025: EchoFree]]
