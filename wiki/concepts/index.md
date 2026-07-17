@@ -298,4 +298,8 @@
 | [[concepts/stft-consistency\|STFT Consistency]] | Re-transforming estimated time-domain signal back to STFT before loss; ensures loss is on a physically realizable spectrum (Wisdom et al. 2019) | 2026-07-17 |
 | [[concepts/oversampled-filterbank\|Oversampled Filterbank]] | Multi-rate filterbank with total output rate > input rate; reduces aliasing for subband adaptive filtering (Harteneck-Weiss-Stewart 1999) | 2026-07-17 |
 | [[concepts/dtln\|DTLN (Dual-Signal Transformation LSTM Network)]] | Fully data-driven AEC baseline; 4 LSTM(256) + FC sigmoid; 3.16M params, 408 MMACs/s (Westhausen & Meyer 2021) | 2026-07-17 |
+| [[concepts/percepnet\|PercepNet]] | Perceptually-motivated low-complexity hybrid DSP/DNN speech enhancement & AEC (ERB + pitch coherence + comb filter) | 2026-07-17 |
+| [[concepts/pitch-coherence\|Pitch Coherence]] | Perceptual feature quantifying speech periodicity at pitch; used in PercepNet for double-talk preservation | 2026-07-17 |
+| [[concepts/multidelay-block-frequency-domain-adaptive-filter\|Multidelay Block Frequency-Domain Adaptive Filter (MDF)]] | Frequency-domain adaptive filter for AEC; partitions impulse response into blocks for FFT-based convolution (Soo & Pang 1990) | 2026-07-17 |
+| [[concepts/structured-sparsity\|Structured Sparsity]] | Neural network compression with whole sub-blocks zeroed; preserves SIMD vectorization (16x4 blocks in PercepNet) | 2026-07-17 |
 

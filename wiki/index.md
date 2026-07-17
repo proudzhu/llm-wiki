@@ -338,6 +338,11 @@
 | [[entities/zhonghua-fu\|Zhonghua Fu]] | ASLP@NPU — EchoFree ultra-lightweight neural AEC (2025, corresponding author) | 2026-07-17 |
 | [[entities/ernst-seidel\|Ernst Seidel]] | TU Braunschweig — low-complexity real-time neural AEC (Bark-AEC, Y2-Net FCRN) | 2026-07-17 |
 | [[entities/tim-fingscheidt\|Tim Fingscheidt]] | TU Braunschweig (Professor) — speech enhancement, acoustic echo control, deep learning for speech communications | 2026-07-17 |
+| [[entities/jean-marc-valin\|Jean-Marc Valin]] | Amazon Web Services — PercepNet, LPCNet, SpeexDSP, Opus codec | 2026-07-17 |
+| [[entities/srikanth-tenneti\|Srikanth Tenneti]] | Amazon Web Services — PercepNet AEC (ICASSP 2021 Challenge winner) | 2026-07-17 |
+| [[entities/karim-helwani\|Karim Helwani]] | Amazon Web Services — PercepNet AEC, MVDR echo suppression | 2026-07-17 |
+| [[entities/umut-isik\|Umut Isik]] | Amazon Web Services — PercepNet AEC, PoCoNet | 2026-07-17 |
+| [[entities/arvindh-krishnaswamy\|Arvindh Krishnaswamy]] | Amazon Web Services — PercepNet AEC, original PercepNet (ICASSP 2020) | 2026-07-17 |
 
 ---
 
@@ -641,6 +646,10 @@
 | [[concepts/stft-consistency\|STFT Consistency]] | Re-transforming estimated time-domain signal back to STFT before loss; ensures loss is on a physically realizable spectrum (Wisdom et al. 2019) | 2026-07-17 |
 | [[concepts/oversampled-filterbank\|Oversampled Filterbank]] | Multi-rate filterbank with total output rate > input rate; reduces aliasing for subband adaptive filtering (Harteneck-Weiss-Stewart 1999) | 2026-07-17 |
 | [[concepts/dtln\|DTLN (Dual-Signal Transformation LSTM Network)]] | Fully data-driven AEC baseline; 4 LSTM(256) + FC sigmoid; 3.16M params, 408 MMACs/s (Westhausen & Meyer 2021) | 2026-07-17 |
+| [[concepts/percepnet\|PercepNet]] | Perceptually-motivated low-complexity hybrid DSP/DNN speech enhancement & AEC (ERB + pitch coherence + comb filter) | 2026-07-17 |
+| [[concepts/pitch-coherence\|Pitch Coherence]] | Perceptual feature quantifying speech periodicity at pitch; used in PercepNet for double-talk preservation | 2026-07-17 |
+| [[concepts/multidelay-block-frequency-domain-adaptive-filter\|Multidelay Block Frequency-Domain Adaptive Filter (MDF)]] | Frequency-domain adaptive filter for AEC; partitions impulse response into blocks for FFT-based convolution (Soo & Pang 1990) | 2026-07-17 |
+| [[concepts/structured-sparsity\|Structured Sparsity]] | Neural network compression with whole sub-blocks zeroed; preserves SIMD vectorization (16x4 blocks in PercepNet) | 2026-07-17 |
 
 ---
 
@@ -770,6 +779,7 @@
 | [[sources/shetu-2024-hybrid-low-complexity-aenr\|A Hybrid Approach for Low-Complexity Joint AENR]] | Low-complexity hybrid AENR using KF + modified ULCNet; 0.69M params, 0.10 GMACs | 2026-07-16 |
 | [[sources/li-2025-echofree-neural-aec\|Li et al. 2025: EchoFree]] | Ultra-lightweight neural AEC: 278K params / 30 MMACs/s; U-Net on Bark-scale features + two-stage WavLM SSL training; matches DeepVQE-S on ST FE/NE | 2026-07-17 |
 | [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Seidel et al. 2024: Bark-Scale NN for Residual Echo and Noise Suppression]] | Hybrid LEC + NSNet2-style postfilter on 86 Bark bands; 1.58M params, 235 MMACs/s, ~10% of DeepVQE-S compute at comparable AECMOS | 2024-04-01 |
+| [[sources/valin-2021-percepnet-joint-echo-control\|Valin et al. 2021: PercepNet Joint Echo Control]] | Hybrid AEC + PercepNet RES; 1st place ICASSP 2021 AEC Challenge; 5.5% CPU; 32 ERB bands + pitch coherence + comb filter | 2026-07-17 |
 
 ---
 
@@ -820,10 +830,10 @@
 
 ## Statistics
 
-- **Total pages**: 769
-- **Entities**: 328
-- **Concepts**: 294
-- **Sources**: 120
+- **Total pages**: 779
+- **Entities**: 333
+- **Concepts**: 298
+- **Sources**: 121
 - **Synthesis**: 20
 - **Queries**: 7
-- **Last updated**: 2026-07-17
+- **Last updated**: 2026-07-18

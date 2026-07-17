@@ -55,7 +55,7 @@ In [[sources/li-2025-echofree-neural-aec\|EchoFree]] the 112-dim Bark feature ve
 | Mel | $2595 \cdot \log_{10}(1 + f/700)$ | 40 | ASR, speaker recognition |
 | **Bark** | $13 \arctan(0.00076 f) + 3.5 \arctan((f/7500)^2)$ | 24 critical / 100 sub | AEC post filters (Bark-AEC, EchoFree, PercepNet) |
 
-Bark and ERB are both perceptually motivated, but Bark is more commonly used in AEC contexts following the PercepNet lineage (Valin et al. ICASSP 2021), while ERB dominates the DeepFilterNet / TANGO family. The two scales produce qualitatively similar compression ratios (8:1–32:1) and similar parameter savings when used as a network front-end.
+Bark and ERB are both perceptually motivated. Notably, the original [[concepts/percepnet|PercepNet]] (Valin et al. ICASSP 2020/2021) uses the **ERB scale** (32 bands), while later "PercepNet-style" AEC post filters (Bark-AEC, EchoFree) switched to the Bark scale. ERB also dominates the DeepFilterNet / TANGO family. The two scales produce qualitatively similar compression ratios (8:1–32:1) and similar parameter savings when used as a network front-end.
 
 ## Related Concepts
 

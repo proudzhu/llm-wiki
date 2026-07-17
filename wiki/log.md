@@ -3104,3 +3104,33 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/entities/index.md` — added 2 entity rows
   - `wiki/concepts/index.md` — added 5 concept rows
   - `wiki/sources/index.md` — added 1 source row
+
+---
+
+## [2026-07-18] ingest | PercepNet Joint Echo Control (Valin 2021)
+
+- **Source**: `raw/papers/valin-2021-percepnet-joint-echo-control/full-text.md` (Zotero: 23HVPLE8)
+- **Authors**: Jean-Marc Valin, Srikanth Tenneti, Karim Helwani, Umut Isik, Arvindh Krishnaswamy
+- **Published**: arXiv:2102.05245, Feb 2021 (1st place ICASSP 2021 AEC Challenge)
+- **arXiv**: 2102.05245
+- **Summary**: Hybrid AEC (MDF adaptive filter) + PercepNet-based joint residual echo and noise suppression; 32 ERB bands + pitch coherence + comb filter; 8M 8-bit quantized weights (800M MACs/s, 5.5% CPU); 1st place out of 17 submissions.
+- **Pages created**:
+  - `raw/papers/valin-2021-percepnet-joint-echo-control/full-text.md` — extracted text from Zotero PDF (MinerU VLM)
+  - `wiki/sources/valin-2021-percepnet-joint-echo-control.md`
+  - `wiki/entities/jean-marc-valin.md`
+  - `wiki/entities/srikanth-tenneti.md`
+  - `wiki/entities/karim-helwani.md`
+  - `wiki/entities/umut-isik.md`
+  - `wiki/entities/arvindh-krishnaswamy.md`
+  - `wiki/concepts/percepnet.md`
+  - `wiki/concepts/pitch-coherence.md`
+  - `wiki/concepts/multidelay-block-frequency-domain-adaptive-filter.md`
+  - `wiki/concepts/structured-sparsity.md`
+- **Pages updated**:
+  - `wiki/concepts/percepnet-style-neural-post-filter.md` — corrected ERB vs Bark discrepancy: original PercepNet uses 32 ERB bands (not Bark); added PercepNet row to representative systems table with MDF front-end, 8M params, 800M MACs/s
+  - `wiki/concepts/acoustic-echo-cancellation.md` — added PercepNet row to lightweight AEC table; added note clarifying ERB vs Bark scale usage
+  - `wiki/concepts/bark-scale-spectral-features.md` — corrected lineage description: original PercepNet uses ERB, not Bark
+  - `wiki/concepts/erb-scale.md` — added "Usage in PercepNet" section documenting 32 ERB bands; added source link
+  - `wiki/index.md` — added 5 entities, 4 concepts, 1 source; updated statistics
+  - `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added new rows
+- **Key discrepancy corrected**: The original PercepNet (Valin 2021) uses the **ERB scale (32 bands)**, NOT the Bark scale. The existing wiki incorrectly characterized the entire "PercepNet-style" lineage as Bark-based. This has been corrected across 4 concept pages. The "PercepNet-style" pattern name refers to the hybrid AEC + perceptual-band neural post filter architecture, not strictly to the Bark scale used by later works (Bark-AEC, EchoFree).

@@ -332,4 +332,9 @@
 | [[entities/zhonghua-fu\|Zhonghua Fu]] | ASLP@NPU — EchoFree ultra-lightweight neural AEC (2025, corresponding author) | 2026-07-17 |
 | [[entities/ernst-seidel\|Ernst Seidel]] | TU Braunschweig — low-complexity real-time neural AEC (Bark-AEC, Y2-Net FCRN) | 2026-07-17 |
 | [[entities/tim-fingscheidt\|Tim Fingscheidt]] | TU Braunschweig (Professor) — speech enhancement, acoustic echo control, deep learning for speech communications | 2026-07-17 |
+| [[entities/jean-marc-valin\|Jean-Marc Valin]] | Amazon Web Services — PercepNet, LPCNet, SpeexDSP, Opus codec | 2026-07-17 |
+| [[entities/srikanth-tenneti\|Srikanth Tenneti]] | Amazon Web Services — PercepNet AEC (ICASSP 2021 Challenge winner) | 2026-07-17 |
+| [[entities/karim-helwani\|Karim Helwani]] | Amazon Web Services — PercepNet AEC, MVDR echo suppression | 2026-07-17 |
+| [[entities/umut-isik\|Umut Isik]] | Amazon Web Services — PercepNet AEC, PoCoNet | 2026-07-17 |
+| [[entities/arvindh-krishnaswamy\|Arvindh Krishnaswamy]] | Amazon Web Services — PercepNet AEC, original PercepNet (ICASSP 2020) | 2026-07-17 |
 

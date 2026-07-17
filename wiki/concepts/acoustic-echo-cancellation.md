@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-06-06
-updated: 2026-07-16
+updated: 2026-07-17
 tags:
   - speech-enhancement
   - echo-cancellation
@@ -53,16 +53,19 @@ The goal is to estimate and subtract the echo component, or equivalently learn a
 
 ## Lightweight / PercepNet-Style Hybrid AEC
 
-A complementary line of work targets ultra-low-complexity AEC for edge devices. These systems share the PercepNet pattern (Valin et al. ICASSP 2021): a linear adaptive filter removes the bulk of the linear echo, then a small neural network operating on [[concepts/bark-scale-spectral-features|Bark-scale perceptual features]] predicts a gain mask for residual echo suppression.
+A complementary line of work targets ultra-low-complexity AEC for edge devices. These systems share the [[concepts/percepnet-style-neural-post-filter|PercepNet-style pattern]] (Valin et al. ICASSP 2020/2021): a linear adaptive filter removes the bulk of the linear echo, then a small neural network operating on perceptually-spaced features (ERB or Bark) predicts a gain mask for residual echo suppression.
 
 | System | Params | MACs/s | ST FE EchoMOS | DT EchoMOS | Notes |
 |--------|-------:|-------:|--------------:|-----------:|-------|
+| [[concepts/percepnet\|PercepNet]] (Valin 2021) | 8M | 800M | 4.19 (P.831 DMOS) | 4.34 (P.831 DMOS) | 32 ERB bands; 2 conv + 5 GRU; pitch coherence + comb filter; 1st place ICASSP 2021 AEC Challenge |
 | ULCNet-AER (Shetu 2024) | 1.12M | 173M | 2.89 | 2.68 | Sub-band interleaved DNN |
 | Bark-AEC (Seidel 2024) | 1.58M | 235M | — (graphical) | — (graphical) | NSNet2-style FC+GRU on 86 Bark bands; CCMSE + STFT consistency loss |
 | DeepVQE-S (Indenbom 2023) | 0.82M | 315M | 4.13 | 3.96 | Residual CNN + CCM |
 | **EchoFree** (Li 2025) | **0.28M** | **30M** | **4.20** | **3.88** | U-Net on Bark + two-stage SSL training |
 
-> **Note on Bark-AEC numbers**: The original [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Seidel et al. 2024]] paper reports **1.58M params / 235 MMACs/s / 86 Bark bands** and presents AECMOS results graphically (no numeric table). The numeric values "1.62M / 107M / 3.16 / 2.96" cited in [[sources/li-2025-echofree-neural-aec\|EchoFree (Li 2025)]] appear to differ from the original paper's self-reported numbers — possibly due to different counting methodologies or a different model variant.
+> **Note on PercepNet's scale**: The original PercepNet uses the [[concepts/erb-scale|ERB scale]] (32 bands), **not** the [[concepts/bark-scale-spectral-features|Bark scale]] used by Bark-AEC and EchoFree. The "PercepNet-style" pattern name refers to the hybrid AEC + perceptual-band neural post filter architecture, not strictly to the Bark scale. PercepNet's MOS values are P.831 DMOS (not directly comparable to AECMOS used by later works), and it won 1st place out of 17 submissions in the ICASSP 2021 AEC Challenge.
+
+> **Note on Bark-AEC numbers**: The original [[sources/seidel-2024-bark-scale-nn-residual-suppression|Seidel et al. 2024]] paper reports **1.58M params / 235 MMACs/s / 86 Bark bands** and presents AECMOS results graphically (no numeric table). The numeric values "1.62M / 107M / 3.16 / 2.96" cited in [[sources/li-2025-echofree-neural-aec|EchoFree (Li 2025)]] appear to differ from the original paper's self-reported numbers — possibly due to different counting methodologies or a different model variant.
 
 EchoFree achieves DeepVQE-S-comparable single-talk performance at ~10× lower compute via three combined techniques: [[concepts/bark-scale-spectral-features|Bark-scale]] input compression (257 → 100), a [[concepts/u-net-post-filter|U-Net post filter]] with [[concepts/depthwise-separable-convolution|depthwise separable convolutions]] and [[concepts/sub-pixel-convolution|sub-pixel upsampling]], and a two-stage training strategy using frozen [[concepts/self-supervised-speech-representation|WavLM-Large SSL embeddings]] for coarse-to-fine spectral learning.
 
