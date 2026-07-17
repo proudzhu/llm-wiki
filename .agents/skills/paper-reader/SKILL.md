@@ -24,6 +24,16 @@ Invoke this skill when the user asks to:
 - **Source is not a PDF/academic paper** — Web pages, blog posts, and informal documents should use the standard raw article workflow instead.
 - **Re-ingestion of an identical version** — Only re-ingest if the source PDF was updated (e.g., camera-ready replaces preprint) or the existing wiki page is significantly incomplete.
 
+## Checking Existing Pages (Windows Glob Caveat)
+
+Several steps require checking whether an entity/concept/source page already exists. **On Windows, Glob brace expansion (`{a,b,c}.md`) does not work** and returns "No file found" even when files exist. Use one of these patterns instead:
+
+- **Grep with alternation** (preferred for batch checks): `Grep` with pattern `seidel|fingscheidt|mowlaee`, path `wiki/entities`, `-i true` — returns all matching files in one call.
+- **Multiple parallel Glob calls**: one Glob per slug, e.g. `wiki/entities/ernst-seidel.md`, `wiki/entities/tim-fingscheidt.md` (no braces).
+- **LS the directory**: `LS wiki/entities` returns the full file list; scan visually for the target slugs.
+
+Always use **forward slashes** in Glob patterns (e.g. `wiki/concepts/*bark*.md`), and prefer **relative paths from project root** over absolute Windows paths (`d:\...`) — the latter sometimes fail with backslash escaping.
+
 ## Prerequisites
 
 - Zotero running with "Allow other applications" enabled
@@ -62,6 +72,8 @@ python .agents/skills/paper-reader/scripts/zotero_fetch.py metadata ZOTERO_KEY
 Note the **Zotero key** (e.g., `8ZWV2E4T`) and **PDF attachment key** (e.g., `5H7GWRF3`).
 
 If the paper has an arXiv ID but is not in Zotero, note the arXiv ID and proceed to Step 3b directly (skip `prepare_paper.py`).
+
+**Multiple attachments**: Zotero items often have both an HTML attachment and a PDF attachment (e.g., IEEE Xplore saves both). Always pick the **PDF attachment** (`application/pdf`) for `prepare_paper.py` — HTML attachments from publisher sites are typically cluttered with navigation/ads and not suitable for extraction. The `zotero_fetch.py metadata` output lists all attachments with their MIME types; choose the one whose type is `application/pdf`.
 
 ### Step 3: Extract Paper Content
 
@@ -128,6 +140,24 @@ Read the extracted text in chunks (head 200 + tail 100 + targeted range reads fo
 - **Future work directions**
 - **Key concepts** that warrant their own wiki pages
 - **Authors** who warrant entity pages
+
+#### Handling Graphical-Only Results
+
+Some papers report key metrics **only in figures** (bar charts, curves) without a numeric table. When this happens:
+
+- Do **not** fabricate numbers from the figure — transcription from rendered charts is error-prone.
+- In the source page's `## Results` section, state explicitly: *"AECMOS / DNSMOS scores are reported graphically in Figure N (not as a numeric table). Key qualitative findings from the figure:"* and then list the findings as labeled bullet points matching the paper's own discussion (e.g., "(a) LEC scores highest on DT Other").
+- Always include the numeric tables that **are** present (e.g., ERLE tables, complexity tables) — these are transcription-safe.
+- When a later paper cites this paper's numeric scores, prefer the later paper's cited values **only if** they are explicitly attributed; otherwise flag the discrepancy (see "Citation discrepancies" below).
+
+#### Handling Citation Discrepancies
+
+Later papers often cite earlier work with **different numbers** than the original paper self-reports (e.g., different param counts, MACs/s, or band counts due to different counting methodologies, inclusion/exclusion of the linear stage, or simply typos). When you ingest a paper and notice its self-reported numbers differ from how a later, already-ingested paper cites it:
+
+1. **Use the original paper's self-reported numbers** in the new source page.
+2. **Add a discrepancy note** in the new source page (under `## Results` or a dedicated note) explaining the mismatch with the later citation.
+3. **Update the already-ingested later paper's concept/entity pages** that reference the old numbers — correct the numbers and add a note pointing to the original paper as the authoritative source.
+4. **Do not** modify the later paper's `wiki/sources/*.md` page (immutability of interpretation aside, the later paper *did* cite those numbers — note the discrepancy but leave the citation as-is in the source page; fix only the concept/synthesis pages that treat the cited numbers as ground truth).
 
 ### Step 5: Create/Update Source Page
 
@@ -203,6 +233,16 @@ tags:
 ```
 
 **Check first**: Use Glob to see if entity already exists. If so, update it instead.
+
+#### Updating an existing entity page
+
+When the author already has a page, make these specific edits (do not rewrite the page):
+
+1. Update `updated:` date in frontmatter to today.
+2. Append the new paper to `## Key Contributions` as a new bullet, with a wikilink to the new source page: `- Co-authored [short title] (Venue Year) — [[sources/{slug}|Author Year]]`
+3. If the new paper reveals a new affiliation, research focus area, or tag not already on the page, add it (do not replace existing content).
+4. If the new paper is the author's primary contribution (more important than prior listed work), consider moving it to the top of the list — but otherwise preserve chronological/listed order.
+5. Do **not** touch the `created:` date or rewrite existing bullets.
 
 ### Step 7: Create Missing Concept Pages
 
@@ -352,8 +392,21 @@ The script stages `raw/papers/{slug}/`, `wiki/sources/{slug}.md`, all index file
 - **Never link to a page that does not exist** — if you reference `[[concepts/some-new-concept]]`, create that page or leave as plain text
 - **Cross-references** are bidirectional — when adding a link from A to B, also add from B to A
 - **Frontmatter dates**: Use today's date for `created`, update `updated` on modified pages
-- **Prefer curl over Python** for Zotero API calls
 - **Create missing concept pages** during ingest to maintain wiki integrity
 - **Avoid `\bm{}` in LaTeX math**: MathJax does not load the `bm` package. Use `\mathbf{x}` (bold upright) or `\boldsymbol{x}` (bold italic) instead
 - **Delete the PDF** after extraction — extraction scripts handle this automatically; never commit `paper.pdf`
 - **Commit after build verification** — use `--no-verify` only if the pre-commit hook has environment issues unrelated to your changes
+
+## Common Pitfalls
+
+Concrete lessons from prior ingests:
+
+1. **Brace glob on Windows fails silently** — `wiki/entities/{a,b,c}.md` returns "No file found" even when files exist. Use Grep with alternation or multiple parallel Globs (see "Checking Existing Pages" above).
+2. **Citation discrepancies propagate** — Later papers often cite earlier work with wrong numbers (e.g., EchoFree 2025 cited Seidel 2024 with 1.62M params / 107 MMACs/s / 100 Bark bands, but the original reports 1.58M / 235M / 86). When ingesting the original paper, use its self-reported numbers and add a discrepancy note; update concept/synthesis pages that treated the later citation as ground truth (see "Handling Citation Discrepancies" in Step 4).
+3. **Graphical results are not tables** — Do not transcribe numbers from bar charts or curves. Use qualitative labeled bullet points matching the paper's own discussion (see "Handling Graphical-Only Results" in Step 4).
+4. **Entity updates are append-only** — When an author already has a page, append the new paper to `## Key Contributions` with a wikilink; do not rewrite existing bullets or change `created:` (see Step 6 "Updating an existing entity page").
+5. **Pick the PDF attachment, not HTML** — Zotero items from IEEE/ACM often have both. HTML attachments are cluttered with publisher chrome; always extract from `application/pdf`.
+6. **MinerU figure filenames are deterministic hashes** — Do not guess filenames. Always `LS` the `figures/` directory after extraction to discover actual names before writing embed wikilinks.
+7. **`update_indexes.py stats` is mandatory after `add`** — The `add` subcommand inserts rows but does not recompute the `## Statistics` section. Always run `stats` after all `add` calls, or `wiki/index.md` will show stale totals.
+8. **Build hook INFO messages are not errors** — `mkdocs build --strict` may emit `INFO - Doc file 'log.md' contains an unrecognized relative link` for pre-existing issues in `log.md`. These do not fail the build (exit 0) and are not caused by your ingest; do not block on them.
+9. **Synthesis pages are optional but high-value** — Not every paper warrants a synthesis update, but when a new paper is a key data point on an existing efficiency/architecture frontier (e.g., a new point on the AEC complexity-vs-quality Pareto curve), add it to the synthesis's sources table and write 1–2 sentences on what it contributes to the cross-source analysis.
