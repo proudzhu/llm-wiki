@@ -3,6 +3,7 @@
 
 Subcommands:
   add     Insert a row into wiki/index.md (correct section) and wiki/{category}/index.md.
+  batch   Insert multiple rows from a YAML manifest (entities/concepts/sources/synthesis/queries).
   stats   Recount all categories and rewrite the ## Statistics section in wiki/index.md.
 
 Usage:
@@ -11,7 +12,27 @@ Usage:
       --summary "..." --date 2026-07-10
   python .agents/skills/paper-reader/scripts/update_indexes.py add \
       --category sources --slug paper-slug --display "Title" --summary "..." --date 2026-07-10
+  python .agents/skills/paper-reader/scripts/update_indexes.py batch \
+      --manifest .tmp_ingest_manifest.yaml
   python .agents/skills/paper-reader/scripts/update_indexes.py stats
+
+Batch manifest format (YAML):
+  entries:
+    - category: sources
+      slug: mienye-2024-rnn-comprehensive-review
+      display: "Mienye 2024: RNN Review"
+      summary: "Comprehensive review of RNN architectures..."
+      date: 2026-07-18
+    - category: entities
+      slug: ibomoiye-domor-mienye
+      display: "Ibomoiye Domor Mienye"
+      summary: "University of Johannesburg — lead author"
+      date: 2026-07-18
+    - category: concepts
+      slug: recurrent-neural-network
+      display: "Recurrent Neural Network"
+      summary: "Sequential-data neural network..."
+      date: 2026-07-18
 
 Categories: entities, concepts, sources, synthesis, queries.
 Skips insertion if the slug already exists in the target index.
@@ -67,53 +88,129 @@ def slug_exists_in_section(lines, category, slug):
     return False
 
 
-def cmd_add(args):
-    if args.category not in CATEGORIES:
-        print(f"ERROR: category must be one of {CATEGORIES}", file=sys.stderr)
-        sys.exit(1)
+def _insert_entry(category, slug, display, summary, date):
+    """Insert a single entry into both wiki/index.md and wiki/{category}/index.md.
 
-    row = f"| [[{args.category}/{args.slug}\\|{args.display}]] | {args.summary} | {args.date} |"
+    Returns (added_to_main, added_to_subdir) booleans.
+    """
+    if category not in CATEGORIES:
+        raise ValueError(f"category must be one of {CATEGORIES}")
+    row = f"| [[{category}/{slug}\\|{display}]] | {summary} | {date} |"
+
+    added_main = False
+    added_sub = False
 
     # --- Update main index (wiki/index.md) ---
     main_path = 'wiki/index.md'
     with open(main_path, encoding='utf-8') as f:
         lines = f.readlines()
 
-    if slug_exists_in_section(lines, args.category, args.slug):
-        print(f"SKIP (main index): {args.category}/{args.slug} already exists")
+    if slug_exists_in_section(lines, category, slug):
+        print(f"SKIP (main index): {category}/{slug} already exists")
     else:
-        start, end = find_section_range(lines, args.category)
+        start, end = find_section_range(lines, category)
         if start is None:
-            print(f"ERROR: Cannot find '## {args.category.capitalize()}' section in {main_path}",
-                  file=sys.stderr)
-            sys.exit(1)
-        # Insert before the trailing separator/blank
+            raise RuntimeError(
+                f"Cannot find '## {category.capitalize()}' section in {main_path}"
+            )
         lines.insert(end, row + '\n')
         with open(main_path, 'w', encoding='utf-8') as f:
             f.writelines(lines)
-        print(f"Added to main index: {args.category}/{args.slug}")
+        added_main = True
 
     # --- Update subdirectory index (wiki/{category}/index.md) ---
-    sub_path = f'wiki/{args.category}/index.md'
+    sub_path = f'wiki/{category}/index.md'
     if not os.path.exists(sub_path):
         print(f"WARN: {sub_path} does not exist, skipping subdirectory index",
               file=sys.stderr)
-        return
+        return added_main, False
 
     with open(sub_path, encoding='utf-8') as f:
         sub_lines = f.readlines()
 
-    if slug_exists_in_section(sub_lines, args.category, args.slug):
-        print(f"SKIP (subdir index): {args.category}/{args.slug} already exists")
+    if slug_exists_in_section(sub_lines, category, slug):
+        print(f"SKIP (subdir index): {category}/{slug} already exists")
     else:
-        # Subdirectory index: append before trailing blank lines
         end = len(sub_lines)
         while end > 0 and sub_lines[end - 1].strip() == '':
             end -= 1
         sub_lines.insert(end, row + '\n')
         with open(sub_path, 'w', encoding='utf-8') as f:
             f.writelines(sub_lines)
-        print(f"Added to subdirectory index: {sub_path}")
+        added_sub = True
+
+    if added_main or added_sub:
+        print(f"Added: {category}/{slug}")
+    return added_main, added_sub
+
+
+def cmd_add(args):
+    try:
+        _insert_entry(args.category, args.slug, args.display, args.summary, args.date)
+    except ValueError as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        sys.exit(1)
+    except RuntimeError as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        sys.exit(1)
+
+
+def cmd_batch(args):
+    """Insert multiple entries from a YAML manifest, then optionally run stats."""
+    try:
+        import yaml  # PyYAML
+    except ImportError:
+        print("ERROR: PyYAML is required for the batch subcommand. "
+              "Install with `pip install pyyaml` or `uv add pyyaml`.",
+              file=sys.stderr)
+        sys.exit(2)
+
+    with open(args.manifest, encoding='utf-8') as f:
+        manifest = yaml.safe_load(f)
+
+    if not isinstance(manifest, dict) or 'entries' not in manifest:
+        print("ERROR: manifest must be a YAML object with an 'entries' list",
+              file=sys.stderr)
+        sys.exit(1)
+
+    entries = manifest['entries']
+    if not isinstance(entries, list):
+        print("ERROR: 'entries' must be a list", file=sys.stderr)
+        sys.exit(1)
+
+    required_fields = ('category', 'slug', 'display', 'summary', 'date')
+    counts = {'added': 0, 'skipped': 0, 'errors': 0}
+    for i, entry in enumerate(entries):
+        missing = [f for f in required_fields if f not in entry]
+        if missing:
+            print(f"ERROR: entry {i} missing fields: {missing}", file=sys.stderr)
+            counts['errors'] += 1
+            continue
+        try:
+            added_main, added_sub = _insert_entry(
+                entry['category'], entry['slug'], entry['display'],
+                entry['summary'], entry['date'],
+            )
+            if added_main or added_sub:
+                counts['added'] += 1
+            else:
+                counts['skipped'] += 1
+        except (ValueError, RuntimeError) as e:
+            print(f"ERROR (entry {i}, {entry.get('slug', '?')}): {e}",
+                  file=sys.stderr)
+            counts['errors'] += 1
+
+    print(f"\nBatch summary: {counts['added']} added, "
+          f"{counts['skipped']} skipped, {counts['errors']} errors")
+
+    # Optionally run stats if requested
+    if args.stats:
+        print("\nRunning stats...")
+        cmd_stats(args)
+
+    # Non-zero exit if any errors
+    if counts['errors'] > 0:
+        sys.exit(1)
 
 
 def cmd_stats(args):
@@ -177,6 +274,14 @@ def main():
     pa.add_argument('--summary', required=True, help='One-line summary')
     pa.add_argument('--date', required=True, help='Date (YYYY-MM-DD or year)')
     pa.set_defaults(func=cmd_add)
+
+    pb = sub.add_parser('batch',
+                        help='Add multiple rows from a YAML manifest')
+    pb.add_argument('--manifest', required=True,
+                    help='Path to YAML manifest file with an "entries" list')
+    pb.add_argument('--stats', action='store_true',
+                    help='Run stats subcommand after batch insert')
+    pb.set_defaults(func=cmd_batch)
 
     ps = sub.add_parser('stats', help='Recount and update statistics')
     ps.set_defaults(func=cmd_stats)
