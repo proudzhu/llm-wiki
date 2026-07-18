@@ -168,3 +168,4 @@ Training data synthesized online from clean/noisy speech with random parameters 
 - [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement|Tan & Wang 2018: CRN for Speech Enhancement]]
 - [[sources/wang-2018-supervised-speech-separation-deep-learning-overview|Wang & Chen 2018: Supervised Speech Separation Survey]]
 - [[sources/li-2025-echofree-neural-aec|Li et al. 2025: EchoFree]] — DeepVQE-S serves as the upper-bound SOTA comparison for this 278K-parameter PercepNet-style AEC model
+- [[sources/castelli-2025-embedded-joint-aec-ns|Castelli 2024: Embedded Joint AEC and NS]] — NXP industrial deployment that re-implements DeepVQE-s at 16 kHz and compresses it through a six-stage pipeline to [[concepts/tinyvqe|TinyVQE]] (114k params, 0.48 MMACs/frame, 2.32 ms / 16 ms on a Cadence HiFi4 DSP)

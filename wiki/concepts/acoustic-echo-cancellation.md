@@ -92,3 +92,4 @@ EchoFree achieves DeepVQE-S-comparable single-talk performance at ~10× lower co
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]]
 - [[sources/seidel-2024-bark-scale-nn-residual-suppression|Seidel, Mowlaee & Fingscheidt 2024: Bark-Scale NN for RES+NS]]
 - [[sources/li-2025-echofree-neural-aec|Li et al. 2025: EchoFree]]
+- [[sources/castelli-2025-embedded-joint-aec-ns|Castelli 2024: Embedded Joint AEC and NS]]
