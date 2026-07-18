@@ -302,4 +302,17 @@
 | [[concepts/pitch-coherence\|Pitch Coherence]] | Perceptual feature quantifying speech periodicity at pitch; used in PercepNet for double-talk preservation | 2026-07-17 |
 | [[concepts/multidelay-block-frequency-domain-adaptive-filter\|Multidelay Block Frequency-Domain Adaptive Filter (MDF)]] | Frequency-domain adaptive filter for AEC; partitions impulse response into blocks for FFT-based convolution (Soo & Pang 1990) | 2026-07-17 |
 | [[concepts/structured-sparsity\|Structured Sparsity]] | Neural network compression with whole sub-blocks zeroed; preserves SIMD vectorization (16x4 blocks in PercepNet) | 2026-07-17 |
+| [[concepts/recurrent-neural-network\|Recurrent Neural Network]] | Neural network designed for sequential data; maintains hidden state across time steps. Parent concept for LSTM, GRU, BiLSTM, ESN, IndRNN | 2026-07-18 |
+| [[concepts/long-short-term-memory\|Long Short-Term Memory (LSTM)]] | Gated RNN variant with input/forget/output gates regulating cell state; addresses vanishing gradient problem (Hochreiter & Schmidhuber 1997) | 2026-07-18 |
+| [[concepts/gated-recurrent-unit\|Gated Recurrent Unit (GRU)]] | Simplified LSTM with update/reset gates and merged cell/hidden state (Cho et al. 2014); fewer parameters, comparable performance | 2026-07-18 |
+| [[concepts/bidirectional-lstm\|Bidirectional LSTM (BiLSTM)]] | LSTM processing sequence in both forward and backward directions; captures past and future context. 2x cost, best for sentiment, bioinformatics, anomaly detection | 2026-07-18 |
+| [[concepts/peephole-lstm\|Peephole LSTM]] | LSTM variant with peephole connections letting gates access cell state directly (Gers & Schmidhuber 2000); improves timing decisions | 2026-07-18 |
+| [[concepts/echo-state-network\|Echo State Network (ESN)]] | RNN with fixed random reservoir; only output layer trained (Jaeger 2001). Variants: Deep ESN, Ensemble Deep ESN, ESN+EWT. Fast training, no BPTT | 2026-07-18 |
+| [[concepts/independently-recurrent-neural-network\|Independently Recurrent Neural Network (IndRNN)]] | RNN with element-wise recurrent weights decoupling neurons (Li et al. 2018); enables very deep recurrent stacks with stable gradients | 2026-07-18 |
+| [[concepts/vanishing-gradient-problem\|Vanishing/Exploding Gradient Problem]] | Central RNN training difficulty: gradients shrink or explode exponentially during BPTT. Mitigated by LSTM/GRU gating, gradient clipping, linear recurrences | 2026-07-18 |
+| [[concepts/activation-functions\|Activation Functions]] | Nonlinear functions (tanh, ReLU, Leaky ReLU, ELU, sigmoid, softmax) introducing non-linearity into neural networks | 2026-07-18 |
+| [[concepts/attention-mechanism\|Attention Mechanism]] | Allows networks to focus on relevant parts of input sequence; context vector = weighted sum of hidden states. Foundation of transformers | 2026-07-18 |
+| [[concepts/adam-optimizer\|Adam Optimizer]] | Adaptive moment estimation optimizer (Kingma & Ba 2015); per-parameter learning rates via first/second moment estimates with bias correction | 2026-07-18 |
+| [[concepts/neural-architecture-search\|Neural Architecture Search (NAS)]] | Automates neural network design via optimization over architecture space (Zoph & Le 2016); RL, evolutionary, or gradient-based search | 2026-07-18 |
+| [[concepts/gradient-clipping\|Gradient Clipping]] | Rescales gradient norm to threshold tau to prevent exploding gradients during BPTT; standard for RNN training | 2026-07-18 |
 

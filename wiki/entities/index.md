@@ -337,4 +337,7 @@
 | [[entities/karim-helwani\|Karim Helwani]] | Amazon Web Services — PercepNet AEC, MVDR echo suppression | 2026-07-17 |
 | [[entities/umut-isik\|Umut Isik]] | Amazon Web Services — PercepNet AEC, PoCoNet | 2026-07-17 |
 | [[entities/arvindh-krishnaswamy\|Arvindh Krishnaswamy]] | Amazon Web Services — PercepNet AEC, original PercepNet (ICASSP 2020) | 2026-07-17 |
+| [[entities/ibomoiye-domor-mienye\|Ibomoiye Domor Mienye]] | University of Johannesburg — lead author of RNN comprehensive review (2024) | 2026-07-18 |
+| [[entities/theo-g-swart\|Theo G. Swart]] | University of Johannesburg — co-author and supervisor of RNN comprehensive review (2024) | 2026-07-18 |
+| [[entities/george-obaido\|George Obaido]] | UC Berkeley CHAI/BIDS — co-author of RNN comprehensive review (2024) | 2026-07-18 |
 

@@ -3134,3 +3134,38 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/index.md` — added 5 entities, 4 concepts, 1 source; updated statistics
   - `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added new rows
 - **Key discrepancy corrected**: The original PercepNet (Valin 2021) uses the **ERB scale (32 bands)**, NOT the Bark scale. The existing wiki incorrectly characterized the entire "PercepNet-style" lineage as Bark-based. This has been corrected across 4 concept pages. The "PercepNet-style" pattern name refers to the hybrid AEC + perceptual-band neural post filter architecture, not strictly to the Bark scale used by later works (Bark-AEC, EchoFree).
+
+---
+
+## [2026-07-18] ingest | RNN Comprehensive Review (Mienye 2024)
+
+- **Source**: `raw/papers/mienye-2024-rnn-comprehensive-review/full-text.md` (Zotero: 7GY9DG4W)
+- **Authors**: Ibomoiye Domor Mienye, Theo G. Swart, George Obaido
+- **Published**: Information 2024, 15(9), 517
+- **DOI**: 10.3390/info15090517
+- **Summary**: Comprehensive review of RNN architectures (basic RNN, LSTM, GRU, BiLSTM, stacked, peephole, ESN, IndRNN) and applications across 7 domains (NLP, speech recognition, time-series forecasting, signal processing, bioinformatics, autonomous vehicles, anomaly detection). Covers innovations: hybrid CNN+RNN, RNN+Transformer, attention, NAS, Adam, gradient clipping. Concludes with challenges in scalability, interpretability, bias, data dependency, generalization.
+- **Pages created**:
+  - `raw/papers/mienye-2024-rnn-comprehensive-review/full-text.md` — extracted text via MinerU VLM
+  - `wiki/sources/mienye-2024-rnn-comprehensive-review.md`
+  - `wiki/entities/ibomoiye-domor-mienye.md`
+  - `wiki/entities/theo-g-swart.md`
+  - `wiki/entities/george-obaido.md`
+  - `wiki/concepts/recurrent-neural-network.md`
+  - `wiki/concepts/long-short-term-memory.md`
+  - `wiki/concepts/gated-recurrent-unit.md`
+  - `wiki/concepts/bidirectional-lstm.md`
+  - `wiki/concepts/peephole-lstm.md`
+  - `wiki/concepts/echo-state-network.md`
+  - `wiki/concepts/independently-recurrent-neural-network.md`
+  - `wiki/concepts/vanishing-gradient-problem.md`
+  - `wiki/concepts/activation-functions.md`
+  - `wiki/concepts/attention-mechanism.md`
+  - `wiki/concepts/adam-optimizer.md`
+  - `wiki/concepts/gradient-clipping.md`
+  - `wiki/concepts/neural-architecture-search.md`
+- **Pages updated**:
+  - `wiki/index.md` — added 3 entities, 13 concepts, 1 source; updated statistics (total=796)
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 3 entity rows
+  - `wiki/concepts/index.md` — added 13 concept rows
+- **Cross-references**: Source page notes that Valin et al. 2021 (PercepNet) is cited in the review's signal processing section as a representative ESN application — flagging that the review's classification of PercepNet as an ESN is loose (PercepNet uses GRU, not a reservoir).
