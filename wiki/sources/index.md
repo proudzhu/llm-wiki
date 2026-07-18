@@ -126,4 +126,5 @@
 | [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Seidel et al. 2024: Bark-Scale NN for Residual Echo and Noise Suppression]] | Hybrid LEC + NSNet2-style postfilter on 86 Bark bands; 1.58M params, 235 MMACs/s, ~10% of DeepVQE-S compute at comparable AECMOS | 2024-04-01 |
 | [[sources/valin-2021-percepnet-joint-echo-control\|Valin et al. 2021: PercepNet Joint Echo Control]] | Hybrid AEC + PercepNet RES; 1st place ICASSP 2021 AEC Challenge; 5.5% CPU; 32 ERB bands + pitch coherence + comb filter | 2026-07-17 |
 | [[sources/mienye-2024-rnn-comprehensive-review\|Mienye, Swart & Obaido 2024: RNN Comprehensive Review]] | Comprehensive review of RNN architectures (LSTM, GRU, BiLSTM, ESN, peephole, IndRNN) and applications across NLP, speech, time series, bioinformatics, AV, anomaly detection | 2026-07-18 |
+| [[sources/castelli-2025-embedded-joint-aec-ns\|Castelli 2024: Embedded Joint AEC and NS]] | NXP tinyML 2024 — DeepVQE-s compressed via six-stage pipeline to TinyVQE (114k params, 0.48 MMACs, 2.32 ms / 16 ms on HiFi4 DSP) for joint AEC+NS on i.MX RT600 | 2026-07-18 |
 

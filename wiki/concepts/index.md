@@ -315,4 +315,6 @@
 | [[concepts/adam-optimizer\|Adam Optimizer]] | Adaptive moment estimation optimizer (Kingma & Ba 2015); per-parameter learning rates via first/second moment estimates with bias correction | 2026-07-18 |
 | [[concepts/neural-architecture-search\|Neural Architecture Search (NAS)]] | Automates neural network design via optimization over architecture space (Zoph & Le 2016); RL, evolutionary, or gradient-based search | 2026-07-18 |
 | [[concepts/gradient-clipping\|Gradient Clipping]] | Rescales gradient norm to threshold tau to prevent exploding gradients during BPTT; standard for RNN training | 2026-07-18 |
+| [[concepts/mobilevqe\|MobileVQE]] | Stage-1 depthwise-separable-conv variant of DeepVQE-s for NXP embedded deployment (635k params, 1.34 MMACs) | 2026-07-18 |
+| [[concepts/tinyvqe\|TinyVQE]] | Final selected embedded-deployment variant of DeepVQE-s (114k params, 0.48 MMACs/frame, 2.32 ms / 16 ms on HiFi4 DSP @ 600 MHz) | 2026-07-18 |
 

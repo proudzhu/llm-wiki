@@ -40,6 +40,7 @@ Neither trend is independently novel. The **new insight** from the 2025–2026 c
 |--------|------|-------------|---------|---------|---------------|
 | [[sources/indenbom-2023-deepvqe\|DeepVQE (Indenbom)]] | 2023 | AEC + NS + DR | 20 ms | 7.5M params, 3.66 ms/frame | Cross-attention alignment + CCM |
 | [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Bark-AEC (Seidel)]] | 2024 | AEC + NS (hybrid) | 8 ms (frame shift 128 @ 16 kHz) | 1.58M params, 235 MMACs/s | Subband-NLMS LEC + NSNet2-style FC/GRU on 86 Bark bands |
+| [[sources/castelli-2025-embedded-joint-aec-ns\|TinyVQE (Castelli)]] | 2024 | AEC + NS (joint) | 16 ms (hop) | **0.11M params, 0.48 MMACs/frame**, 420 KB SRAM | DeepVQE-s compressed; HiFi4 DSP custom CCM intrinsics |
 | [[sources/hao-2025-l3c-deepmfc\|L3C-DeepMFC (Hao)]] | 2025 | Hearing-aid feedback cancellation | **4 ms** | 0.31M params, 0.43 G/s MACs | Gain-shape complex mapping + closed-loop FT |
 | [[sources/li-2025-echofree-neural-aec\|EchoFree (Li)]] | 2025 | AEC only (lightweight) | — | **0.28M params, 30 MMACs/s** | U-Net on Bark + two-stage WavLM SSL loss |
 | [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator\|HALO (Zhao)]] | 2026 | SE backbone accelerator (plug-in) | **0 ms added** | Halves backbone MACs | Dynamic-conv frame-rate reduction |
@@ -58,6 +59,10 @@ The corpus reveals three distinct strategies for combining tasks, each with diff
 
 - **Latency cost**: 20 ms algorithmic (frame size 20 ms + 10 ms hop). Acceptable for Microsoft Teams (deployed to hundreds of millions of users) but **disqualifies hearing-aid / earable use**.
 - **Why shared backbone wins**: alignment block stabilizes the delay distribution between mic and far-end; CCM leverages magnitude + phase from neighboring T-F bins. Ablations show alignment and CCM each contribute largest gains.
+
+### Strategy A' — Embedded Compression of a Shared Backbone (Castelli / TinyVQE)
+
+[[sources/castelli-2025-embedded-joint-aec-ns\|Castelli 2024 (NXP)]] provides the corpus's only industrial deployment case study: re-implementing DeepVQE-s at 16 kHz and compressing it through a six-stage pipeline onto an NXP i.MX RT600 MCU with a Cadence HiFi4 DSP (600 MHz, 4.5 MB on-chip SRAM). The pipeline — [[concepts/mobilevqe\|MobileVQE]] (depthwise-separable convs, −7.7× MACs) → parameter cutting → custom HiFi4 intrinsics for the [[concepts/complex-convolving-mask\|CCM]] (−1.8× inference time at unchanged quality) → ReLU replacing ELU (HiFi4 FP32-optimized kernel) → MACs pruning → LayerNorm removal — yields [[concepts/tinyvqe\|TinyVQE]] at 0.11M params / 0.48 MMACs/frame / 2.32 ms per 16 ms frame, with DT EchoMOS within 0.20 of the DeepVQE-s baseline. A rejected 92k-parameter variant shows the practical quality floor (DT Echo 4.24, DT Deg 3.63). This anchors the **deployment-cost** end of the multi-task spectrum: a server-grade joint AEC+NS architecture can be ported to a fixed-point-capable audio MCU if (a) the CCM kernel is rewritten as DSP intrinsics and (b) ~0.1–0.2 MOS degradation is acceptable. The next planned step is 16×8 quantization-aware training, which would exploit the HiFi4's fixed-point MAC path.
 
 ### Strategy B — Task Reframing Without Architectural Change (Ashur, OVC)
 

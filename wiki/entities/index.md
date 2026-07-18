@@ -340,4 +340,5 @@
 | [[entities/ibomoiye-domor-mienye\|Ibomoiye Domor Mienye]] | University of Johannesburg — lead author of RNN comprehensive review (2024) | 2026-07-18 |
 | [[entities/theo-g-swart\|Theo G. Swart]] | University of Johannesburg — co-author and supervisor of RNN comprehensive review (2024) | 2026-07-18 |
 | [[entities/george-obaido\|George Obaido]] | UC Berkeley CHAI/BIDS — co-author of RNN comprehensive review (2024) | 2026-07-18 |
+| [[entities/francesco-castelli\|Francesco Castelli]] | NXP Semiconductors, Voice & Audio Team — embedded deployment of joint AEC+NS on Cadence HiFi4 DSP (TinyVQE) | 2026-07-18 |
 

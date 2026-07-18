@@ -3169,3 +3169,27 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/entities/index.md` — added 3 entity rows
   - `wiki/concepts/index.md` — added 13 concept rows
 - **Cross-references**: Source page notes that Valin et al. 2021 (PercepNet) is cited in the review's signal processing section as a representative ESN application — flagging that the review's classification of PercepNet as an ESN is loose (PercepNet uses GRU, not a reservoir).
+
+---
+
+## [2026-07-18] ingest | Embedded Joint AEC and Noise Suppression (Castelli 2024)
+
+- **Source**: `raw/papers/castelli-2025-embedded-joint-aec-ns/full-text.md` (Zotero: MEBK2YDF)
+- **Authors**: Francesco Castelli
+- **Published**: tinyML Summit, April 22–24, 2024
+- **Type**: Industry presentation (NXP, public)
+- **Summary**: NXP industrial case study compressing DeepVQE-s through a six-stage pipeline (MobileVQE → parameter cuts → HiFi4 CCM intrinsics → ReLU → MACs pruning → LayerNorm removal) into TinyVQE — 114k params, 0.48 MMACs/frame, 420 KB tensor arena, 2.32 ms / 16 ms frame on a Cadence HiFi4 DSP @ 600 MHz (NXP i.MX RT600 MCU)
+- **Pages created**:
+  - `raw/papers/castelli-2025-embedded-joint-aec-ns/full-text.md` — MinerU VLM-extracted text from Zotero PDF
+  - `wiki/sources/castelli-2025-embedded-joint-aec-ns.md`
+  - `wiki/entities/francesco-castelli.md`
+  - `wiki/concepts/mobilevqe.md`
+  - `wiki/concepts/tinyvqe.md`
+- **Pages updated**:
+  - `wiki/sources/indenbom-2023-deepvqe.md` — added cross-reference to Castelli (NXP deployment of DeepVQE-s)
+  - `wiki/concepts/acoustic-echo-cancellation.md` — added TinyVQE to lightweight AEC table; added MobileVQE/TinyVQE to Related Concepts; added Castelli to Related Sources
+  - `wiki/concepts/cross-attention-alignment.md` — added Castelli source (alignment block delay reduced 1 s → 0.25 s across the pipeline)
+  - `wiki/concepts/complex-convolving-mask.md` — added Castelli source (CCM rewritten as HiFi4 batched-complex-dot-product intrinsics, halving CCM-stage inference at unchanged quality)
+  - `wiki/synthesis/joint-multitask-ultra-low-latency-se.md` — added Castelli row to sources table; added new "Strategy A' — Embedded Compression of a Shared Backbone" subsection documenting the industrial deployment case
+  - `wiki/index.md` — added 1 entity, 2 concepts, 1 source; updated statistics (total=800, entities=337, concepts=313, sources=123, synthesis=20, queries=7)
+  - `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added corresponding rows
