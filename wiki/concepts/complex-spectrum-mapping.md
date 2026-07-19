@@ -75,3 +75,4 @@ By jointly estimating real and imaginary parts, CSM implicitly models both ampli
 - [[sources/hao-2025-l3c-deepmfc|Hao et al. 2025: L3C-DeepMFC]] — Gain-shape complex spectrum mapping for hearing aid feedback cancellation
 - [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 - [[sources/pandey-2019-cnn-speech-enhancement-time-domain|Pandey & Wang 2019: CNN-Based Speech Enhancement in the Time Domain]]
+- [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys complex-spectrum DNNs (GCRN, DPCRN, Uformer, DCCRN) and the magnitude-phase "compensation effect" in RI-MSE loss

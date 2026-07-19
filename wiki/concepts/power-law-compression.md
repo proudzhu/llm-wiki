@@ -26,6 +26,8 @@ where $\alpha \in (0, 1)$ is the compression factor (typically 0.3 in ULCNet-bas
 
 The compression factor $\alpha$ affects the balance between echo reduction and speech quality. As noted in Shetu et al. (2024), the modified power-law compression contributes to slightly lower DMOS scores in double-talk scenarios due to the aggressive nature of the suppression.
 
+Zheng et al. (2023) report a surprising listener-dependent effect of input-feature compression: compressed features improve PESQ/ESTOI/SDR/DNSMOS/HASQI scores for simulated normal-hearing listeners, but do *not* help (and sometimes slightly hurt) HASQI/HASPI scores for simulated hearing-impaired listeners (audiograms N2 mild, N3 moderate). This asymmetry is attributed to reduced speech distortion being inaudible to hearing-impaired listeners at high SNRs, and suggests compression may not benefit hearing-aid applications.
+
 ## Related Concepts
 
 - [[concepts/ulcnet|ULCNet]]

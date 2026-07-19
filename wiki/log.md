@@ -3221,3 +3221,36 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 2 entity rows
   - `wiki/concepts/index.md` — added 3 concept rows
+
+---
+
+## [2026-07-19] ingest | Sixty Years of Frequency-Domain Monaural Speech Enhancement (Zheng 2023)
+
+- **Source**: `raw/papers/zheng-2023-survey-frequency-domain-speech-enhancement/full-text.md`
+- **Authors**: Chengshi Zheng, Huiyong Zhang, Wenzhe Liu, Xiaoxue Luo, Andong Li, Xiaodong Li, Brian C. J. Moore
+- **Published**: Trends in Hearing, Vol. 27, 2023, pp. 1–52
+- **DOI**: 10.1177/23312165231209913
+- **Code**: cszheng-ioa/Sixty-years-of-frequency-domain-monaural-speech-enhancement
+- **Summary**: Comprehensive 60-year survey of frequency-domain monaural speech enhancement from Schroeder (1965) through 2022 deep-learning architectures. Proposes a five-group taxonomy (Traditional / Hybrid DeepXi / Magnitude-mapping DNN / Complex-spectrum DNN / Decoupling-style DNN) and conducts a unified objective evaluation across 17 representative methods on WSJ+DNS and Voice Bank+DEMAND using PESQ, ESTOI, SDR, DNSMOS, and — uniquely — HASQI/HASPI metrics simulating both normal-hearing and hearing-impaired listeners (audiograms N2 mild, N3 moderate). Key finding: input-feature compression helps normal-hearing but not hearing-impaired listeners; model complexity and SE quality are decoupled (DPCRN at 0.72M params / 0.77 GMAC/s matches larger models).
+- **Pages created**:
+  - `raw/papers/zheng-2023-survey-frequency-domain-speech-enhancement/full-text.md` — extracted text from Zotero PDF
+  - `wiki/sources/zheng-2023-survey-frequency-domain-speech-enhancement.md` — review-paper-structured source page (Taxonomy / Methodology / Applications Survey / Key Contributions / Limitations and Caveats)
+  - `wiki/entities/wenzhe-liu.md` — new co-author entity page
+  - `wiki/entities/xiaoxue-luo.md` — new co-author entity page
+  - `wiki/entities/andong-li.md` — new co-author entity page (decoupling-style architectures focus)
+- **Pages updated**:
+  - `wiki/entities/chengshi-zheng.md` — appended this survey to existing "Sixty years..." bullet and Related Sources
+  - `wiki/entities/huiyong-zhang.md` — appended contribution bullet and Related Sources entry
+  - `wiki/entities/xiaodong-li.md` — appended contribution bullet and Related Sources entry
+  - `wiki/entities/brian-c-j-moore.md` — inserted contribution bullet in chronological position and Related Sources entry
+  - `wiki/concepts/speech-enhancement.md` — added frequency-domain sub-area bullet with taxonomy summary
+  - `wiki/concepts/power-law-compression.md` — added paragraph on listener-dependent compression benefit (NH helped, HI not)
+  - `wiki/concepts/complex-spectrum-mapping.md` — added cross-reference to survey
+  - `wiki/concepts/convolutional-recurrent-network.md` — added cross-reference for CRN family evolution
+  - `wiki/concepts/complex-ratio-mask.md` — added sources key and cross-reference for cIRM/masking-vs-mapping comparison
+  - `wiki/concepts/bark-scale-spectral-features.md` — added raw source to frontmatter and cross-reference for Bark/ERB-band perceptual features
+  - `wiki/concepts/frequency-domain-loss.md` — added cross-reference for loss-function survey and "compensation effect"
+  - `wiki/concepts/time-domain-speech-enhancement.md` — added cross-reference as companion survey
+  - `wiki/concepts/deep-learning-for-signal-processing.md` — added cross-reference for 60-year migration narrative
+  - `wiki/index.md` — added 1 source, 3 entities; updated statistics (810 total)
+  - `wiki/sources/index.md`, `wiki/entities/index.md` — added new rows

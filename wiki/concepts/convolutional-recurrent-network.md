@@ -63,3 +63,4 @@ The CRN follows an **encoder-decoder** structure with a recurrent bottleneck:
 
 - [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 - [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement|Tan & Wang 2018: CRN for Real-Time Speech Enhancement (original proposal)]]
+- [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys CRN family evolution (CRN → DCCRN → DPCRN → GCRN) and decoupling-style successors

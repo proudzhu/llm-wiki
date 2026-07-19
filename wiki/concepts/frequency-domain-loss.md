@@ -64,3 +64,4 @@ Uses multiple STFT configurations (different window sizes) for robustness across
 ## Related Sources
 
 - [[sources/pandey-2019-cnn-speech-enhancement-time-domain|Pandey & Wang 2019: CNN-Based Speech Enhancement in the Time Domain]]
+- [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys frequency-domain loss functions (Mag-MSE, RI-MSE, RI+Mag combined, log-spectral, power-law-compressed) and the magnitude-phase "compensation effect" in RI-MSE

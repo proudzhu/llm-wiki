@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-07-01
-updated: 2026-07-01
+updated: 2026-07-19
 tags:
   - researcher
   - hearing-aids
@@ -21,6 +21,7 @@ tags:
 ## Related Sources
 
 - [[sources/hao-2025-l3c-deepmfc|Hao et al. 2025: L3C-DeepMFC]]
+- [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]]
 
 ## Related Concepts
 

@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-17
-updated: 2026-04-27
+updated: 2026-07-19
 tags:
 - deep-learning
 - machine-learning
@@ -53,3 +53,4 @@ In traditional signal processing (TSP), algorithms like the **[[wiener-filter]]*
 - [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 - [[sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]]
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — GRU-based step-size prediction for adaptive feedback cancellation
+- [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys the migration from statistical/heuristic signal-processing methods to deep-learning architectures across a 60-year horizon

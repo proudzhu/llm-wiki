@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-07-17
-updated: 2026-07-17
+updated: 2026-07-19
 sources:
   - raw/papers/li-2025-echofree-neural-aec/full-text.md
   - raw/papers/seidel-2024-bark-scale-nn-residual-suppression/full-text.md
+  - raw/papers/zheng-2023-survey-frequency-domain-speech-enhancement/full-text.md
 tags:
   - psychoacoustics
   - speech-enhancement
@@ -71,4 +72,5 @@ Bark and ERB are both perceptually motivated. Notably, the original [[concepts/p
 - [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Seidel, Mowlaee & Fingscheidt 2024]] — original Bark-AEC paper; 86-band PEAQ-style Bark filterbank with NSNet2-style FC+GRU backbone
 - [[sources/li-2025-echofree-neural-aec\|Li et al. 2025: EchoFree]]
 - [[sources/indenbom-2023-deepvqe\|Indenbom et al. 2023: DeepVQE]] — comparison point in the AEC lightweight hierarchy
-- [[sources/shetu-2024-hybrid-low-complexity-aenr\|Shetu et al. 2024: Hybrid Low-Complexity AENR]] — ULCNet-AER baseline (uses linear-frequency sub-band stacking rather than Bark)
+- [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]] — ULCNet-AER baseline (uses linear-frequency sub-band stacking rather than Bark)
+- [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys Bark/ERB-band perceptual features (Valin 2018 BFCCs, Valin et al. 2020 ERB-band features) as the dominant strategy for reducing full-band input feature dimensionality

@@ -2,6 +2,7 @@
 type: concept
 created: 2026-05-20
 updated: 2026-07-19
+sources:
 tags:
   - speech-enhancement
   - deep-learning
@@ -23,3 +24,4 @@ The **Complex Ratio Mask (cRM)** is a mask-based speech enhancement target that 
 ## Related Sources
 
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]]
+- [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys cIRM (Williamson et al. 2016) and compares masking-based vs. mapping-based training targets

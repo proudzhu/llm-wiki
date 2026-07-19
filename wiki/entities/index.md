@@ -343,4 +343,7 @@
 | [[entities/francesco-castelli\|Francesco Castelli]] | NXP Semiconductors, Voice & Audio Team — embedded deployment of joint AEC+NS on Cadence HiFi4 DSP (TinyVQE) | 2026-07-18 |
 | [[entities/nicolas-arrieta-larraza\|Nicolás Arrieta Larraza]] | Bang & Olufsen — Fast-ULCNet / Comfi-FastGRNN author | 2026-07-19 |
 | [[entities/niels-de-koeijer\|Niels de Koeijer]] | Bang & Olufsen — Fast-ULCNet / Comfi-FastGRNN author | 2026-07-19 |
+| [[entities/wenzhe-liu\|Wenzhe Liu]] | Researcher at Institute of Acoustics, CAS — co-author of 60-year frequency-domain SE survey | 2026-07-19 |
+| [[entities/xiaoxue-luo\|Xiaoxue Luo]] | Researcher at Institute of Acoustics, CAS — co-author of 60-year frequency-domain SE survey | 2026-07-19 |
+| [[entities/andong-li\|Andong Li]] | Researcher at Institute of Acoustics, CAS — co-author of 60-year frequency-domain SE survey (decoupling-style architectures) | 2026-07-19 |
 

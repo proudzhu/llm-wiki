@@ -349,6 +349,9 @@
 | [[entities/francesco-castelli\|Francesco Castelli]] | NXP Semiconductors, Voice & Audio Team — embedded deployment of joint AEC+NS on Cadence HiFi4 DSP (TinyVQE) | 2026-07-18 |
 | [[entities/nicolas-arrieta-larraza\|Nicolás Arrieta Larraza]] | Bang & Olufsen — Fast-ULCNet / Comfi-FastGRNN author | 2026-07-19 |
 | [[entities/niels-de-koeijer\|Niels de Koeijer]] | Bang & Olufsen — Fast-ULCNet / Comfi-FastGRNN author | 2026-07-19 |
+| [[entities/wenzhe-liu\|Wenzhe Liu]] | Researcher at Institute of Acoustics, CAS — co-author of 60-year frequency-domain SE survey | 2026-07-19 |
+| [[entities/xiaoxue-luo\|Xiaoxue Luo]] | Researcher at Institute of Acoustics, CAS — co-author of 60-year frequency-domain SE survey | 2026-07-19 |
+| [[entities/andong-li\|Andong Li]] | Researcher at Institute of Acoustics, CAS — co-author of 60-year frequency-domain SE survey (decoupling-style architectures) | 2026-07-19 |
 
 ---
 
@@ -807,6 +810,7 @@
 | [[sources/mienye-2024-rnn-comprehensive-review\|Mienye, Swart & Obaido 2024: RNN Comprehensive Review]] | Comprehensive review of RNN architectures (LSTM, GRU, BiLSTM, ESN, peephole, IndRNN) and applications across NLP, speech, time series, bioinformatics, AV, anomaly detection | 2026-07-18 |
 | [[sources/castelli-2025-embedded-joint-aec-ns\|Castelli 2024: Embedded Joint AEC and NS]] | NXP tinyML 2024 — DeepVQE-s compressed via six-stage pipeline to TinyVQE (114k params, 0.48 MMACs, 2.32 ms / 16 ms on HiFi4 DSP) for joint AEC+NS on i.MX RT600 | 2026-07-18 |
 | [[sources/larraza-2026-fast-ulcnet-speech-enhancement\|Larraza & de Koeijer 2026: Fast-ULCNet]] | Fast-ULCNet replaces ULCNet's GRU with FastGRNN; Comfi-FastGRNN mitigates state drift on long sequences; 0.338M params, ~34% RTF reduction | 2026-07-19 |
+| [[sources/zheng-2023-survey-frequency-domain-speech-enhancement\|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] | 60-year survey of frequency-domain monaural SE from traditional statistical methods to deep learning; five-group taxonomy and unified evaluation across normal-hearing and hearing-impaired listeners | 2026-07-19 |
 
 ---
 
@@ -857,10 +861,10 @@
 
 ## Statistics
 
-- **Total pages**: 806
-- **Entities**: 339
+- **Total pages**: 810
+- **Entities**: 342
 - **Concepts**: 316
-- **Sources**: 124
+- **Sources**: 125
 - **Synthesis**: 20
 - **Queries**: 7
 - **Last updated**: 2026-07-19

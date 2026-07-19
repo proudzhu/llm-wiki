@@ -65,3 +65,4 @@ The [[concepts/frequency-domain-loss|frequency domain loss for time-domain netwo
 ## Related Sources
 
 - [[sources/pandey-2019-cnn-speech-enhancement-time-domain|Pandey & Wang 2019: CNN-Based Speech Enhancement in the Time Domain]]
+- [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — companion survey to frequency-domain methods; notes that frequency-domain methods historically outperform time-domain methods (though partly because more research effort has been invested in frequency-domain methods)

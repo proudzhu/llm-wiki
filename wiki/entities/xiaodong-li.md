@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-15
-updated: 2026-07-01
+updated: 2026-07-19
 tags:
   - researcher
   - hearing-aids
@@ -18,6 +18,7 @@ tags:
 
 - L3C-DeepMFC: Low-latency low-complexity deep marginal feedback cancellation for hearing aids (Interspeech 2025)
 - DeepPEM-AFC: GRU-based step-size prediction for PEM-AFC (ICASSP 2025)
+- Co-authored comprehensive 60-year survey of frequency-domain monaural speech enhancement (Trends in Hearing 2023) — [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023]]
 
 ## Related Sources
 
