@@ -347,6 +347,8 @@
 | [[entities/theo-g-swart\|Theo G. Swart]] | University of Johannesburg — co-author and supervisor of RNN comprehensive review (2024) | 2026-07-18 |
 | [[entities/george-obaido\|George Obaido]] | UC Berkeley CHAI/BIDS — co-author of RNN comprehensive review (2024) | 2026-07-18 |
 | [[entities/francesco-castelli\|Francesco Castelli]] | NXP Semiconductors, Voice & Audio Team — embedded deployment of joint AEC+NS on Cadence HiFi4 DSP (TinyVQE) | 2026-07-18 |
+| [[entities/nicolas-arrieta-larraza\|Nicolás Arrieta Larraza]] | Bang & Olufsen — Fast-ULCNet / Comfi-FastGRNN author | 2026-07-19 |
+| [[entities/niels-de-koeijer\|Niels de Koeijer]] | Bang & Olufsen — Fast-ULCNet / Comfi-FastGRNN author | 2026-07-19 |
 
 ---
 
@@ -669,6 +671,9 @@
 | [[concepts/gradient-clipping\|Gradient Clipping]] | Rescales gradient norm to threshold tau to prevent exploding gradients during BPTT; standard for RNN training | 2026-07-18 |
 | [[concepts/mobilevqe\|MobileVQE]] | Stage-1 depthwise-separable-conv variant of DeepVQE-s for NXP embedded deployment (635k params, 1.34 MMACs) | 2026-07-18 |
 | [[concepts/tinyvqe\|TinyVQE]] | Final selected embedded-deployment variant of DeepVQE-s (114k params, 0.48 MMACs/frame, 2.32 ms / 16 ms on HiFi4 DSP @ 600 MHz) | 2026-07-18 |
+| [[concepts/fastgrnn\|FastGRNN]] | Lightweight gated RNN reusing weight matrices for gate and candidate; 2-4x fewer params than GRU; exhibits inference-time state drift on long sequences | 2026-07-19 |
+| [[concepts/comfi-fastgrnn\|Comfi-FastGRNN]] | Complementary-filter extension of FastGRNN (2 scalars) that mitigates inference-time state drift on long streaming sequences | 2026-07-19 |
+| [[concepts/fast-ulcnet\|Fast-ULCNet]] | ULCNet variant using FastGRNN/Comfi-FastGRNN; 0.338M params, ~34% RTF reduction vs. ULCNet at matched NS quality | 2026-07-19 |
 
 ---
 
@@ -801,6 +806,7 @@
 | [[sources/valin-2021-percepnet-joint-echo-control\|Valin et al. 2021: PercepNet Joint Echo Control]] | Hybrid AEC + PercepNet RES; 1st place ICASSP 2021 AEC Challenge; 5.5% CPU; 32 ERB bands + pitch coherence + comb filter | 2026-07-17 |
 | [[sources/mienye-2024-rnn-comprehensive-review\|Mienye, Swart & Obaido 2024: RNN Comprehensive Review]] | Comprehensive review of RNN architectures (LSTM, GRU, BiLSTM, ESN, peephole, IndRNN) and applications across NLP, speech, time series, bioinformatics, AV, anomaly detection | 2026-07-18 |
 | [[sources/castelli-2025-embedded-joint-aec-ns\|Castelli 2024: Embedded Joint AEC and NS]] | NXP tinyML 2024 — DeepVQE-s compressed via six-stage pipeline to TinyVQE (114k params, 0.48 MMACs, 2.32 ms / 16 ms on HiFi4 DSP) for joint AEC+NS on i.MX RT600 | 2026-07-18 |
+| [[sources/larraza-2026-fast-ulcnet-speech-enhancement\|Larraza & de Koeijer 2026: Fast-ULCNet]] | Fast-ULCNet replaces ULCNet's GRU with FastGRNN; Comfi-FastGRNN mitigates state drift on long sequences; 0.338M params, ~34% RTF reduction | 2026-07-19 |
 
 ---
 
@@ -851,10 +857,10 @@
 
 ## Statistics
 
-- **Total pages**: 800
-- **Entities**: 337
-- **Concepts**: 313
-- **Sources**: 123
+- **Total pages**: 806
+- **Entities**: 339
+- **Concepts**: 316
+- **Sources**: 124
 - **Synthesis**: 20
 - **Queries**: 7
-- **Last updated**: 2026-07-18
+- **Last updated**: 2026-07-19

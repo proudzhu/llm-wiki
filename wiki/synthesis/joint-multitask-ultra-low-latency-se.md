@@ -48,6 +48,7 @@ Neither trend is independently novel. The **new insight** from the 2025–2026 c
 | [[sources/ostergaard-2026-own-voice-cancellation\|OVC (Østergaard)]] | 2026 | OVC (target-speaker removal) | **2 ms** | 0.33 GMAC/s, RTF 0.82–1.69 | Mamba-MinGRU linear RNN |
 | [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement\|RT-Tango (Benslimane)]] | 2026 | Distributed binaural SE | **8 ms** | 35 MMACs/s | ERB + GRNN + FRS + asymmetric STFT |
 | [[sources/rath-2026-minimum-delay-block-size\|Rath & Geier]] | 2026 | Theoretical lower bound | — | O(1) closed form | $\Delta = b_\text{plugin} - \gcd(b_\text{host}, b_\text{plugin})$ |
+| [[sources/larraza-2026-fast-ulcnet-speech-enhancement\|Fast-ULCNet (Larraza)]] | 2026 | NS (single-task) | 16 ms (hop) | **0.338M params, 1.69 MMACs**, RTF 0.60 ARM | GRU→FastGRNN replacement + Comfi-FastGRNN drift correction |
 
 ## Insight 1: Multi-Task Fusion Strategies Form a Spectrum
 
@@ -206,7 +207,9 @@ This is necessary because OVC's "negative" objective (remove target speaker) mea
 
 [[sources/rath-2026-minimum-delay-block-size\|Rath & Geier 2026]] provides the **theoretical lower bound** for block-size adaptation latency:
 
-$$\Delta = b_\text{plugin} - \gcd(b_\text{host}, b_\text{plugin})$$
+$$
+\Delta = b_\text{plugin} - \gcd(b_\text{host}, b_\text{plugin})
+$$
 
 This is relevant to the multi-task / low-latency synthesis in two ways:
 
@@ -214,6 +217,17 @@ This is relevant to the multi-task / low-latency synthesis in two ways:
 2. **Plugin size selection**: For sub-10ms hearing-aid budgets, the plugin block size must be small enough that $\Delta$ stays within budget. At 16 kHz, a 32-sample plugin (2 ms) inside any host with $\gcd \geq 1$ contributes at most 31 samples (~2 ms) of reblocking latency — consistent with OVC's 2 ms algorithmic latency target.
 
 **Synthesis implication**: Rath & Geier's formula is the **floor** against which all engineering-tier techniques (asymmetric STFT, time-domain, FRS) are measured. Algorithmic latency improvements below the reblocking floor are masked by host/plugin buffering. This is why OVC's 2 ms is significant: it sits at the edge of what is theoretically achievable in a generic plugin host.
+
+## Insight 7: Training-Stable RNNs Can Drift at Inference on Long Sequences
+
+[[sources/larraza-2026-fast-ulcnet-speech-enhancement\|Larraza & de Koeijer 2026]] document a failure mode absent from the rest of the corpus: **a gated RNN whose training-time stability guarantee does not transfer to the inference-time forward pass over long streaming sequences**. The specific finding:
+
+- [[concepts/fastgrnn\|FastGRNN]] (Kusupati et al., NeurIPS 2018) is provably stable during training, but its original length-invariance claim was validated only on sequences up to 1.63 s.
+- Applied to >60 s audio signals for SE, FastGRNN's mean hidden-state magnitude drifts monotonically over time during inference, and SE quality degrades measurably (e.g., on the 90 s DNS Challenge test set, BAKMOS drops 3.95 → 3.62, SI-SDR drops 16.89 → 13.58).
+- The root cause is structural: the FastGRNN state-update coefficients do not satisfy a sum-to-one constraint, so the state lacks a contraction guarantee over long horizons. This is a training-vs-inference gap, not a training failure.
+- The proposed [[concepts/comfi-fastgrnn\|Comfi-FastGRNN]] adds two scalar trainable parameters ($\gamma$, $\lambda$) inspired by complementary filters in inertial-sensor fusion, and fully recovers long-sequence performance at essentially zero parameter/MAC cost.
+
+**Synthesis implication**: The 2023–2026 SE corpus repeatedly replaces LSTM/GRU with linear RNNs / SSMs (Mamba-MinGRU in OVC, GRNN in RT-Tango) and praises their streaming properties — but none of those works validate on sequences longer than the standard ~10 s DNS test clip. Larraza & de Koeijer's result is a caution: **length-invariance claims validated on short test clips do not generalize to streaming deployment**. The standard 10 s DNS evaluation window is too short to surface state-drift failure modes. Future low-complexity SE works targeting real-time deployment should report long-sequence (>60 s) evaluation as a separate condition, and consider whether their chosen recurrent unit has a contraction guarantee on the forward pass (not just during training). Comfi-FastGRNN's complementary-filter approach is one parameter-efficient fix; whether the same drift affects Mamba-MinGRU, GRNN, and other linear-RNN replacements at streaming scale is an open question.
 
 ## Cross-Cutting Decision Matrix
 
@@ -263,3 +277,6 @@ For a practitioner choosing a multi-task SE architecture under a latency budget 
 - [[concepts/bezouts-identity\|Bézout's Identity]]
 - [[concepts/gtcrn\|GTCRN]]
 - [[concepts/td-speakerbeam\|TD-SpeakerBeam]]
+- [[concepts/fast-ulcnet\|Fast-ULCNet]]
+- [[concepts/fastgrnn\|FastGRNN]]
+- [[concepts/comfi-fastgrnn\|Comfi-FastGRNN]]

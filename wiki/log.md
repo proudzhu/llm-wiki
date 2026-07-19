@@ -3193,3 +3193,31 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/synthesis/joint-multitask-ultra-low-latency-se.md` — added Castelli row to sources table; added new "Strategy A' — Embedded Compression of a Shared Backbone" subsection documenting the industrial deployment case
   - `wiki/index.md` — added 1 entity, 2 concepts, 1 source; updated statistics (total=800, entities=337, concepts=313, sources=123, synthesis=20, queries=7)
   - `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added corresponding rows
+
+---
+
+## [2026-07-19] ingest | Fast-ULCNet: a fast and ultra low complexity network for single-channel speech enhancement (Larraza & de Koeijer 2026)
+
+- **Source**: `raw/papers/larraza-2026-fast-ulcnet-speech-enhancement/full-text.md` (Zotero: 292A8CGG)
+- **Authors**: Nicolás Arrieta Larraza, Niels de Koeijer
+- **Published**: ICASSP 2026 (preprint arXiv:2601.14925)
+- **DOI**: 10.48550/arXiv.2601.14925
+- **Summary**: Fast-ULCNet replaces ULCNet's GRU layers with FastGRNN to halve parameters (0.338M) and reduce RTF by ~34% on embedded ARM targets; identifies and mitigates FastGRNN inference-time state drift on long (>60 s) sequences via Comfi-FastGRNN, a trainable complementary-filter extension.
+- **Pages created**:
+  - `raw/papers/larraza-2026-fast-ulcnet-speech-enhancement/full-text.md` — extracted text from Zotero PDF via MinerU
+  - `wiki/sources/larraza-2026-fast-ulcnet-speech-enhancement.md`
+  - `wiki/entities/nicolas-arrieta-larraza.md`
+  - `wiki/entities/niels-de-koeijer.md`
+  - `wiki/concepts/fastgrnn.md`
+  - `wiki/concepts/comfi-fastgrnn.md`
+  - `wiki/concepts/fast-ulcnet.md`
+- **Pages updated**:
+  - `wiki/concepts/ulcnet.md` — added Fast-ULCNet extension section, TF re-implementation baseline numbers, and cross-refs
+  - `wiki/concepts/channel-wise-feature-reorientation.md` — added source link
+  - `wiki/concepts/power-law-compression.md` — added source link (modified power-law on real/imag STFT)
+  - `wiki/concepts/complex-ratio-mask.md` — added source link
+  - `wiki/synthesis/joint-multitask-ultra-low-latency-se.md` — added Fast-ULCNet row to sources table; new Insight 7 on training-vs-inference RNN state drift; added open question on long-sequence drift in linear RNNs/SSMs
+  - `wiki/index.md` — added 2 entities, 3 concepts, 1 source; updated statistics (total 800→806)
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 2 entity rows
+  - `wiki/concepts/index.md` — added 3 concept rows

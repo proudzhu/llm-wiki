@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-19
 tags:
   - deep-learning
   - speech-enhancement
@@ -38,6 +38,12 @@ In the hybrid AENR system (Shetu et al., IWAENC 2024), ULCNet was modified with 
 | ULCNet_Freq | 0.68M | 0.09 |
 | ULCNet_AENR | 0.69M | 0.10 |
 
+For the original (single-task NS) ULCNet configuration re-implemented in TensorFlow by Larraza & de Koeijer (2026), the reported baseline is 0.685M parameters and 2.057M MACs with RTF 0.976 on a Raspberry Pi 3 B+ and 0.927 on an Arm Cortex-A53.
+
+## Extension: Fast-ULCNet
+
+[[sources/larraza-2026-fast-ulcnet-speech-enhancement|Larraza & de Koeijer 2026]] propose [[concepts/fast-ulcnet|Fast-ULCNet]], an extension that replaces ULCNet's GRU layers with [[concepts/fastgrnn|FastGRNN]]-based layers (optionally with the [[concepts/comfi-fastgrnn|Comfi-FastGRNN]] drift-correction variant). The substitution halves the parameter count (0.685M → 0.338M), reduces MACs by ~18%, and improves RTF by ~34% on embedded ARM targets, at matched noise-suppression quality on standard 10 s DNS test signals. The Comfi-FastGRNN variant additionally preserves quality on long (>60 s) streaming sequences where plain FastGRNN suffers from inference-time state drift.
+
 ## Related Concepts
 
 - [[concepts/acoustic-echo-cancellation|Acoustic Echo Cancellation]]
@@ -45,7 +51,11 @@ In the hybrid AENR system (Shetu et al., IWAENC 2024), ULCNet was modified with 
 - [[concepts/complex-ratio-mask|Complex Ratio Mask]]
 - [[concepts/power-law-compression|Power-Law Compression]]
 - [[concepts/channel-wise-feature-reorientation|Channel-Wise Feature Reorientation]]
+- [[concepts/fast-ulcnet|Fast-ULCNet]]
+- [[concepts/fastgrnn|FastGRNN]]
+- [[concepts/comfi-fastgrnn|Comfi-FastGRNN]]
 
 ## Related Sources
 
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]]
+- [[sources/larraza-2026-fast-ulcnet-speech-enhancement|Larraza & de Koeijer 2026: Fast-ULCNet]]

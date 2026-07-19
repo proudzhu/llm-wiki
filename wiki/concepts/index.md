@@ -317,4 +317,7 @@
 | [[concepts/gradient-clipping\|Gradient Clipping]] | Rescales gradient norm to threshold tau to prevent exploding gradients during BPTT; standard for RNN training | 2026-07-18 |
 | [[concepts/mobilevqe\|MobileVQE]] | Stage-1 depthwise-separable-conv variant of DeepVQE-s for NXP embedded deployment (635k params, 1.34 MMACs) | 2026-07-18 |
 | [[concepts/tinyvqe\|TinyVQE]] | Final selected embedded-deployment variant of DeepVQE-s (114k params, 0.48 MMACs/frame, 2.32 ms / 16 ms on HiFi4 DSP @ 600 MHz) | 2026-07-18 |
+| [[concepts/fastgrnn\|FastGRNN]] | Lightweight gated RNN reusing weight matrices for gate and candidate; 2-4x fewer params than GRU; exhibits inference-time state drift on long sequences | 2026-07-19 |
+| [[concepts/comfi-fastgrnn\|Comfi-FastGRNN]] | Complementary-filter extension of FastGRNN (2 scalars) that mitigates inference-time state drift on long streaming sequences | 2026-07-19 |
+| [[concepts/fast-ulcnet\|Fast-ULCNet]] | ULCNet variant using FastGRNN/Comfi-FastGRNN; 0.338M params, ~34% RTF reduction vs. ULCNet at matched NS quality | 2026-07-19 |
 

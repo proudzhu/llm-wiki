@@ -29,9 +29,11 @@ This interleaving preserves the frequency-wise correspondence between inputs whi
 ## Related Concepts
 
 - [[concepts/ulcnet|ULCNet]]
+- [[concepts/fast-ulcnet|Fast-ULCNet]]
 - [[concepts/speech-enhancement|Speech Enhancement]]
 - [[concepts/power-law-compression|Power-Law Compression]]
 
 ## Related Sources
 
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]]
+- [[sources/larraza-2026-fast-ulcnet-speech-enhancement|Larraza & de Koeijer 2026: Fast-ULCNet]]
