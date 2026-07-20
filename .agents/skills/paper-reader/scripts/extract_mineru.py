@@ -8,8 +8,8 @@ Workflow:
   4. Delete the PDF.
 
 Usage:
-  python .agents/skills/paper-reader/scripts/extract_mineru.py --slug author-year-title
-  python .agents/skills/paper-reader/scripts/extract_mineru.py --slug ... --language zh --model pipeline --timeout 900
+  uv run python .agents/skills/paper-reader/scripts/extract_mineru.py --slug author-year-title
+  uv run python .agents/skills/paper-reader/scripts/extract_mineru.py --slug ... --language zh --model pipeline --timeout 900
 
 Requires: mineru-open-api CLI (npm install -g mineru-open-api).
 Verify token first: `mineru-open-api auth --show`

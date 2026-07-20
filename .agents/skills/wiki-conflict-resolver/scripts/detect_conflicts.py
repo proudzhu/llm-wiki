@@ -6,10 +6,10 @@ markers (`<<<<<<<`, `=======`, `>>>>>>`) and reports which files contain
 unresolved conflicts, along with the line ranges and counts.
 
 Usage:
-  python .agents/skills/wiki-conflict-resolver/scripts/detect_conflicts.py
-  python .agents/skills/wiki-conflict-resolver/scripts/detect_conflicts.py --path wiki
-  python .agents/skills/wiki-conflict-resolver/scripts/detect_conflicts.py --path wiki/index.md
-  python .agents/skills/wiki-conflict-resolver/scripts/detect_conflicts.py --check-only  # exit 1 if any conflicts
+  uv run python .agents/skills/wiki-conflict-resolver/scripts/detect_conflicts.py
+  uv run python .agents/skills/wiki-conflict-resolver/scripts/detect_conflicts.py --path wiki
+  uv run python .agents/skills/wiki-conflict-resolver/scripts/detect_conflicts.py --path wiki/index.md
+  uv run python .agents/skills/wiki-conflict-resolver/scripts/detect_conflicts.py --check-only  # exit 1 if any conflicts
 """
 import argparse
 import os

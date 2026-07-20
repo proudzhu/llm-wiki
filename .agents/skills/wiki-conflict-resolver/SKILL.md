@@ -56,13 +56,13 @@ All Python scripts are in `scripts/`. Run from the project root.
 If you want the full pipeline to run automatically:
 
 ```bash
-python .agents/skills/wiki-conflict-resolver/scripts/resolve_all.py
+uv run python .agents/skills/wiki-conflict-resolver/scripts/resolve_all.py
 ```
 
 This runs all four steps in sequence. To preview without writing, add `--dry-run`:
 
 ```bash
-python .agents/skills/wiki-conflict-resolver/scripts/resolve_all.py --dry-run
+uv run python .agents/skills/wiki-conflict-resolver/scripts/resolve_all.py --dry-run
 ```
 
 ### Step-by-Step Path
@@ -72,25 +72,25 @@ Use this when you need fine-grained control or want to inspect intermediate stat
 #### Step 1: Detect Conflicts
 
 ```bash
-python .agents/skills/wiki-conflict-resolver/scripts/detect_conflicts.py
+uv run python .agents/skills/wiki-conflict-resolver/scripts/detect_conflicts.py
 ```
 
 Output lists each affected file with line ranges of conflict blocks. Use `--check-only` for scripting (exits 1 if any conflicts found):
 
 ```bash
-python .agents/skills/wiki-conflict-resolver/scripts/detect_conflicts.py --check-only
+uv run python .agents/skills/wiki-conflict-resolver/scripts/detect_conflicts.py --check-only
 ```
 
 #### Step 2: Resolve `wiki/log.md`
 
 ```bash
-python .agents/skills/wiki-conflict-resolver/scripts/resolve_log_conflict.py
+uv run python .agents/skills/wiki-conflict-resolver/scripts/resolve_log_conflict.py
 ```
 
 Strategy: strip markers → parse entries → dedupe by `(date, op, title)` → sort chronologically → rewrite file. Use `--dry-run` to preview:
 
 ```bash
-python .agents/skills/wiki-conflict-resolver/scripts/resolve_log_conflict.py --dry-run
+uv run python .agents/skills/wiki-conflict-resolver/scripts/resolve_log_conflict.py --dry-run
 ```
 
 If the log has no conflict markers, the script exits 0 without modifying anything.
@@ -99,10 +99,10 @@ If the log has no conflict markers, the script exits 0 without modifying anythin
 
 ```bash
 # Resolve all default targets (wiki/index.md + all subdirectory indexes)
-python .agents/skills/wiki-conflict-resolver/scripts/resolve_index_conflict.py --all
+uv run python .agents/skills/wiki-conflict-resolver/scripts/resolve_index_conflict.py --all
 
 # Or resolve a single file
-python .agents/skills/wiki-conflict-resolver/scripts/resolve_index_conflict.py --path wiki/index.md
+uv run python .agents/skills/wiki-conflict-resolver/scripts/resolve_index_conflict.py --path wiki/index.md
 ```
 
 Strategy: for each conflict block, extract `| [[category/slug\|...]] |` rows from both sides, dedupe by `(category, slug)`, preserve first-seen order, replace conflict block with merged rows. Non-row lines (headers, separators, statistics) are left untouched.
@@ -112,7 +112,7 @@ Use `--dry-run` to preview the first 50 lines of each resolved file.
 #### Step 4: Finalize (Statistics + Verification)
 
 ```bash
-python .agents/skills/wiki-conflict-resolver/scripts/finalize.py
+uv run python .agents/skills/wiki-conflict-resolver/scripts/finalize.py
 ```
 
 This script:
@@ -161,7 +161,7 @@ A clean build exits 0 with `INFO - Documentation built in N seconds`. If warning
 The scripts do **not** resolve conflicts in regular wiki page bodies (`wiki/sources/*.md`, `wiki/concepts/*.md`, etc.). These require manual review — open the file, read both sides, and choose the better content (or merge manually). Run `detect_conflicts.py` to find them:
 
 ```bash
-python .agents/skills/wiki-conflict-resolver/scripts/detect_conflicts.py
+uv run python .agents/skills/wiki-conflict-resolver/scripts/detect_conflicts.py
 ```
 
 Any file listed that is **not** `wiki/index.md`, `wiki/*/index.md`, or `wiki/log.md` needs manual resolution.
@@ -183,7 +183,7 @@ $env:GIT_EDITOR='true'; git rebase --continue
 If `git rebase --continue` fails with "you need to resolve your current index first", there are still unmerged paths. Check with `git status` and re-run the detection script:
 
 ```bash
-python .agents/skills/wiki-conflict-resolver/scripts/detect_conflicts.py
+uv run python .agents/skills/wiki-conflict-resolver/scripts/detect_conflicts.py
 ```
 
 ### Statistics Section Not Updated
@@ -196,13 +196,13 @@ After resolution, verify the wiki is consistent:
 
 ```bash
 # No residual conflict markers anywhere in wiki/
-python .agents/skills/wiki-conflict-resolver/scripts/detect_conflicts.py --check-only
+uv run python .agents/skills/wiki-conflict-resolver/scripts/detect_conflicts.py --check-only
 
 # Index drift check (no missing/phantom/duplicate entries)
-python .agents/skills/wiki-lint/scripts/check_index_drift.py
+uv run python .agents/skills/wiki-lint/scripts/check_index_drift.py
 
 # Statistics consistency
-python .agents/skills/wiki-lint/scripts/check_statistics.py
+uv run python .agents/skills/wiki-lint/scripts/check_statistics.py
 
 # MkDocs build (must exit 0)
 uv run mkdocs build --strict

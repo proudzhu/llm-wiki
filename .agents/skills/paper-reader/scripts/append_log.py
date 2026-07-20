@@ -7,15 +7,15 @@ followed by the body content.
 
 Usage:
   # From a file:
-  python .agents/skills/paper-reader/scripts/append_log.py \
+  uv run python .agents/skills/paper-reader/scripts/append_log.py \
       --op ingest --title "Paper Title (Author Year)" --file entry.md
 
   # From stdin:
-  echo "body content" | python .agents/skills/paper-reader/scripts/append_log.py \
+  echo "body content" | uv run python .agents/skills/paper-reader/scripts/append_log.py \
       --op ingest --title "..." --stdin
 
   # From a string:
-  python .agents/skills/paper-reader/scripts/append_log.py \
+  uv run python .agents/skills/paper-reader/scripts/append_log.py \
       --op query --title "Question topic" --body "One-line answer..."
 
 Operations: ingest, query, lint, merge.

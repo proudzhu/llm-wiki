@@ -10,11 +10,11 @@ Runs the full conflict-resolution pipeline:
 If a step finds nothing to do, it is skipped silently.
 
 Usage:
-  python .agents/skills/wiki-conflict-resolver/scripts/resolve_all.py
-  python .agents/skills/wiki-conflict-resolver/scripts/resolve_all.py --dry-run
-  python .agents/skills/wiki-conflict-resolver/scripts/resolve_all.py --skip-log
-  python .agents/skills/wiki-conflict-resolver/scripts/resolve_all.py --skip-index
-  python .agents/skills/wiki-conflict-resolver/scripts/resolve_all.py --skip-finalize
+  uv run python .agents/skills/wiki-conflict-resolver/scripts/resolve_all.py
+  uv run python .agents/skills/wiki-conflict-resolver/scripts/resolve_all.py --dry-run
+  uv run python .agents/skills/wiki-conflict-resolver/scripts/resolve_all.py --skip-log
+  uv run python .agents/skills/wiki-conflict-resolver/scripts/resolve_all.py --skip-index
+  uv run python .agents/skills/wiki-conflict-resolver/scripts/resolve_all.py --skip-finalize
 """
 import argparse
 import os

@@ -7,7 +7,7 @@ via `git status` (e.g., concept pages edited to add bidirectional cross-
 references per Step 8). Verifies no paper.pdf is accidentally staged.
 
 Usage:
-  python .agents/skills/paper-reader/scripts/commit_ingest.py \
+  uv run python .agents/skills/paper-reader/scripts/commit_ingest.py \
       --slug author-year-title \
       --message "ingest: Short Title (Author Year)" \
       --entities author1 author2 \

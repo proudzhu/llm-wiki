@@ -53,7 +53,7 @@ All scripts are in `scripts/`. Run from the project root.
 ### Step 1: Scan & Classify
 
 ```bash
-python .agents/skills/wiki-link-fixer/scripts/classify_links.py
+uv run python .agents/skills/wiki-link-fixer/scripts/classify_links.py
 ```
 
 Outputs a JSON report to stdout (and a summary to stderr). Use `--output report.json` to save the full report. Categories in the report:
@@ -71,7 +71,7 @@ Outputs a JSON report to stdout (and a summary to stderr). Use `--output report.
 ### Step 2: Preview Fixes (Always Do This First)
 
 ```bash
-python .agents/skills/wiki-link-fixer/scripts/fix_links.py --dry-run
+uv run python .agents/skills/wiki-link-fixer/scripts/fix_links.py --dry-run
 ```
 
 Shows per-file diff of what would change, without writing. Output format:
@@ -91,16 +91,16 @@ Summary: 268 fixes across 84 files (dry-run)
 
 ```bash
 # All categories, all files
-python .agents/skills/wiki-link-fixer/scripts/fix_links.py
+uv run python .agents/skills/wiki-link-fixer/scripts/fix_links.py
 
 # Single category only
-python .agents/skills/wiki-link-fixer/scripts/fix_links.py --category missing_prefix
-python .agents/skills/wiki-link-fixer/scripts/fix_links.py --category wiki_prefix
-python .agents/skills/wiki-link-fixer/scripts/fix_links.py --category dotdot_prefix
-python .agents/skills/wiki-link-fixer/scripts/fix_links.py --category log_informal
+uv run python .agents/skills/wiki-link-fixer/scripts/fix_links.py --category missing_prefix
+uv run python .agents/skills/wiki-link-fixer/scripts/fix_links.py --category wiki_prefix
+uv run python .agents/skills/wiki-link-fixer/scripts/fix_links.py --category dotdot_prefix
+uv run python .agents/skills/wiki-link-fixer/scripts/fix_links.py --category log_informal
 
 # Single file (all categories)
-python .agents/skills/wiki-link-fixer/scripts/fix_links.py --file wiki/log.md
+uv run python .agents/skills/wiki-link-fixer/scripts/fix_links.py --file wiki/log.md
 ```
 
 The script:
@@ -117,14 +117,14 @@ The script:
 
 ```bash
 # Re-classify — fixable categories should be empty
-python .agents/skills/wiki-link-fixer/scripts/classify_links.py
+uv run python .agents/skills/wiki-link-fixer/scripts/classify_links.py
 
 # Confirm truly_broken count unchanged (script never touches these)
 # Confirm mkdocs still builds
 uv run mkdocs build --strict
 
 # Or use the bundled verifier (does both)
-python .agents/skills/wiki-link-fixer/scripts/verify_fix.py
+uv run python .agents/skills/wiki-link-fixer/scripts/verify_fix.py
 ```
 
 ### Step 5: Review & Commit
@@ -182,13 +182,13 @@ This happens when violations are in categories the fixer doesn't handle (truly b
 
 ```bash
 # Should report 0 for all fixable categories after a successful run
-python .agents/skills/wiki-lint/scripts/check_broken_links.py
+uv run python .agents/skills/wiki-lint/scripts/check_broken_links.py
 
 # Should exit 0
 uv run mkdocs build --strict
 
 # Statistics should be unchanged (link fixes don't add/remove pages)
-python .agents/skills/wiki-lint/scripts/check_statistics.py
+uv run python .agents/skills/wiki-lint/scripts/check_statistics.py
 ```
 
 ## Important Notes

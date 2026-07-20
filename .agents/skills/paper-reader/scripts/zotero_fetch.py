@@ -6,8 +6,8 @@ Subcommands:
   metadata <key>    Fetch full metadata for an item + locate its PDF attachment.
 
 Usage:
-  python .agents/skills/paper-reader/scripts/zotero_fetch.py search "RT-Tango"
-  python .agents/skills/paper-reader/scripts/zotero_fetch.py metadata 8ZWV2E4T
+  uv run python .agents/skills/paper-reader/scripts/zotero_fetch.py search "RT-Tango"
+  uv run python .agents/skills/paper-reader/scripts/zotero_fetch.py metadata 8ZWV2E4T
 
 Requires Zotero running with "Allow other applications" enabled.
 """

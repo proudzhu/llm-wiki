@@ -5,8 +5,8 @@ Handles non-ASCII filenames (umlauts, CJK) reliably via Python's shutil,
 which bash `cp` mishandles on Windows.
 
 Usage:
-  python .agents/skills/paper-reader/scripts/prepare_paper.py --slug author-year-title --pdf-key 5H7GWRF3
-  python .agents/skills/paper-reader/scripts/prepare_paper.py --slug ... --pdf-key ... --zotero-storage "D:\\Zotero\\storage"
+  uv run python .agents/skills/paper-reader/scripts/prepare_paper.py --slug author-year-title --pdf-key 5H7GWRF3
+  uv run python .agents/skills/paper-reader/scripts/prepare_paper.py --slug ... --pdf-key ... --zotero-storage "D:\\Zotero\\storage"
 
 Exit codes: 0 success, 1 no PDF found, 2 bad header, 3 copy error.
 """

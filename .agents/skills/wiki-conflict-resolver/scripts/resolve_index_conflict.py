@@ -18,10 +18,10 @@ Conflict resolution strategy:
   4. Leave non-conflicted regions untouched.
 
 Usage:
-  python .agents/skills/wiki-conflict-resolver/scripts/resolve_index_conflict.py
-  python .agents/skills/wiki-conflict-resolver/scripts/resolve_index_conflict.py --dry-run
-  python .agents/skills/wiki-conflict-resolver/scripts/resolve_index_conflict.py --path wiki/index.md
-  python .agents/skills/wiki-conflict-resolver/scripts/resolve_index_conflict.py --all
+  uv run python .agents/skills/wiki-conflict-resolver/scripts/resolve_index_conflict.py
+  uv run python .agents/skills/wiki-conflict-resolver/scripts/resolve_index_conflict.py --dry-run
+  uv run python .agents/skills/wiki-conflict-resolver/scripts/resolve_index_conflict.py --path wiki/index.md
+  uv run python .agents/skills/wiki-conflict-resolver/scripts/resolve_index_conflict.py --all
 """
 import argparse
 import os
@@ -190,7 +190,7 @@ def main():
 
     if any_resolved:
         print()
-        print("Done. Run `python .agents/skills/wiki-conflict-resolver/scripts/finalize.py` "
+        print("Done. Run `uv run python .agents/skills/wiki-conflict-resolver/scripts/finalize.py` "
               "to update statistics and verify.")
     else:
         print("No conflicts found in any target file.")

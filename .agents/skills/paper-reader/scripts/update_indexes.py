@@ -7,14 +7,14 @@ Subcommands:
   stats   Recount all categories and rewrite the ## Statistics section in wiki/index.md.
 
 Usage:
-  python .agents/skills/paper-reader/scripts/update_indexes.py add \
+  uv run python .agents/skills/paper-reader/scripts/update_indexes.py add \
       --category entities --slug author-name --display "Author Name" \
       --summary "..." --date 2026-07-10
-  python .agents/skills/paper-reader/scripts/update_indexes.py add \
+  uv run python .agents/skills/paper-reader/scripts/update_indexes.py add \
       --category sources --slug paper-slug --display "Title" --summary "..." --date 2026-07-10
-  python .agents/skills/paper-reader/scripts/update_indexes.py batch \
+  uv run python .agents/skills/paper-reader/scripts/update_indexes.py batch \
       --manifest .tmp_ingest_manifest.yaml
-  python .agents/skills/paper-reader/scripts/update_indexes.py stats
+  uv run python .agents/skills/paper-reader/scripts/update_indexes.py stats
 
 Batch manifest format (YAML):
   entries:

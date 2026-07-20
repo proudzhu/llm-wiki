@@ -4,7 +4,7 @@
 Produces plain text without images. Font mismatch warnings are normal.
 
 Usage:
-  python .agents/skills/paper-reader/scripts/extract_pdftotext.py --slug author-year-title
+  uv run python .agents/skills/paper-reader/scripts/extract_pdftotext.py --slug author-year-title
 
 Requires: poppler-utils (pdftotext on PATH).
 """

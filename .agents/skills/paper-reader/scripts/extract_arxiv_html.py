@@ -9,7 +9,7 @@ Workflow:
   5. Delete the PDF if it exists (extraction source is HTML).
 
 Usage:
-  python .agents/skills/paper-reader/scripts/extract_arxiv_html.py --arxiv-id 2607.01834 --slug author-year-title
+  uv run python .agents/skills/paper-reader/scripts/extract_arxiv_html.py --arxiv-id 2607.01834 --slug author-year-title
 
 Requires: defuddle CLI (npm install -g defuddle).
 Falls back to MinerU if arXiv HTML is unavailable (404) — exit code 2.

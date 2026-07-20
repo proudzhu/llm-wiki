@@ -9,7 +9,7 @@ This skill performs a comprehensive health check of the LLM wiki knowledge base,
 
 ## Available Scripts
 
-All Python scripts are in the `scripts/` subdirectory. Run from the project root using `python .agents/skills/wiki-lint/scripts/<script>.py`.
+All Python scripts are in the `scripts/` subdirectory. Run from the project root using `uv run python .agents/skills/wiki-lint/scripts/<script>.py`.
 
 | Script | Purpose |
 |--------|---------|
@@ -39,7 +39,7 @@ Read `AGENTS.md` (project root) to understand the lint workflow requirements (co
 Count actual `.md` files in each category directory (excluding `index.md`):
 
 ```bash
-python .agents/skills/wiki-lint/scripts/count_files.py
+uv run python .agents/skills/wiki-lint/scripts/count_files.py
 ```
 
 **Expected output:**
@@ -52,7 +52,7 @@ Actual: 258 entities, 224 concepts, 102 sources, 19 synthesis, 7 queries = 610 t
 Count rows in the main index and each subdirectory index:
 
 ```bash
-python .agents/skills/wiki-lint/scripts/count_index_rows.py
+uv run python .agents/skills/wiki-lint/scripts/count_index_rows.py
 ```
 
 This counts lines like `| [[entities/some-page|...` in `wiki/index.md` and all `| [[` lines in subdirectory indexes. If counts match Step 2, there is no index drift.
@@ -72,7 +72,7 @@ Sub-index concepts: 224
 Compare actual files against index entries to find **missing** (file exists but not in index), **phantom** (index row with no file), and **duplicate** entries:
 
 ```bash
-python .agents/skills/wiki-lint/scripts/check_index_drift.py
+uv run python .agents/skills/wiki-lint/scripts/check_index_drift.py
 ```
 
 The script handles escaped pipes (`\|`) in markdown tables. The slug capture pattern `[^|\\\]]+` excludes pipe, backslash, and closing bracket so that `\|` doesn't append a trailing backslash to the slug name.
@@ -88,7 +88,7 @@ Scans all wiki content for wikilinks and categorizes them. **Important considera
 5. **Missing category prefix**: e.g., `[[beamforming]]` instead of `[[concepts/beamforming]]`. The target `wiki/beamforming.md` doesn't exist, but `wiki/concepts/beamforming.md` does.
 
 ```bash
-python .agents/skills/wiki-lint/scripts/check_broken_links.py
+uv run python .agents/skills/wiki-lint/scripts/check_broken_links.py
 ```
 
 **Note:** Wikilinks using `../` prefixes are convention violations but not broken links. Links missing category prefix are the most common issue -- the script automatically detects the correct category. Links using `wiki/` prefix should be fixed by removing the `wiki/` prefix.
@@ -98,7 +98,7 @@ python .agents/skills/wiki-lint/scripts/check_broken_links.py
 Find pages with **zero inbound references** from any wiki content. Checks both wikilinks (`[[target]]`) and markdown links (`[text](../target.md)`), with nested-bracket support in link text:
 
 ```bash
-python .agents/skills/wiki-lint/scripts/check_orphans.py
+uv run python .agents/skills/wiki-lint/scripts/check_orphans.py
 ```
 
 This covers wikilinks and markdown links, normalizes `../` and `wiki/` prefixes to avoid false positives. A page counted as "orphaned" genuinely has zero inbound references from any wiki page, index, or log entry.
@@ -108,7 +108,7 @@ This covers wikilinks and markdown links, normalizes `../` and `wiki/` prefixes 
 Read the Statistics section in `wiki/index.md` and verify stated counts match actual files:
 
 ```bash
-python .agents/skills/wiki-lint/scripts/check_statistics.py
+uv run python .agents/skills/wiki-lint/scripts/check_statistics.py
 ```
 
 This parses the `## Statistics` section, extracts stated counts, and compares each category (including Total pages) against the actual file counts from disk.
@@ -118,7 +118,7 @@ This parses the `## Statistics` section, extracts stated counts, and compares ea
 If index drift is found, use the bundled `rebuild_index.py` script:
 
 ```bash
-python .agents/skills/wiki-lint/scripts/rebuild_index.py
+uv run python .agents/skills/wiki-lint/scripts/rebuild_index.py
 ```
 
 The script:
@@ -186,7 +186,7 @@ Using `[[../concepts/foo]]` instead of `[[concepts/foo]]` violates the vault-abs
 After any index rebuild, verify all diffs are 0:
 
 ```bash
-python .agents/skills/wiki-lint/scripts/verify_index.py
+uv run python .agents/skills/wiki-lint/scripts/verify_index.py
 ```
 
 Quick PowerShell check:

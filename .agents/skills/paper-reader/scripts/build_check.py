@@ -5,7 +5,7 @@ Tries `uv run mkdocs build --strict` first, falls back to `python -m mkdocs buil
 A clean build exits 0 with 'INFO - Documentation built in N seconds'.
 
 Usage:
-  python .agents/skills/paper-reader/scripts/build_check.py
+  uv run python .agents/skills/paper-reader/scripts/build_check.py
 
 Exit code 0 = clean build, non-zero = build failed or warnings found.
 """

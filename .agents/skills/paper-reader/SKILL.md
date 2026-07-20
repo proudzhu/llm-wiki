@@ -76,8 +76,8 @@ Load these on demand when the relevant situation arises. Do not read them up fro
 ### Step 1-2: Search Zotero & Fetch Metadata
 
 ```bash
-python .agents/skills/paper-reader/scripts/zotero_fetch.py search "SEARCH_TERMS"
-python .agents/skills/paper-reader/scripts/zotero_fetch.py metadata ZOTERO_KEY
+uv run python .agents/skills/paper-reader/scripts/zotero_fetch.py search "SEARCH_TERMS"
+uv run python .agents/skills/paper-reader/scripts/zotero_fetch.py metadata ZOTERO_KEY
 ```
 
 Note the **Zotero key** (e.g., `8ZWV2E4T`) and **PDF attachment key** (e.g., `5H7GWRF3`).
@@ -91,7 +91,7 @@ If the paper has an arXiv ID but is not in Zotero, note the arXiv ID and proceed
 #### 3a. Prepare Directory & Copy PDF
 
 ```bash
-python .agents/skills/paper-reader/scripts/prepare_paper.py --slug SLUG --pdf-key PDF_KEY
+uv run python .agents/skills/paper-reader/scripts/prepare_paper.py --slug SLUG --pdf-key PDF_KEY
 ```
 
 Slug format: `author-year-short-title` (lowercase, hyphenated). The script handles non-ASCII filenames and verifies the `%PDF-` header.
@@ -101,7 +101,7 @@ Slug format: `author-year-short-title` (lowercase, hyphenated). The script handl
 If the paper has an arXiv ID, **always prefer the HTML version** — better text quality than PDF extraction:
 
 ```bash
-python .agents/skills/paper-reader/scripts/extract_arxiv_html.py --arxiv-id ARXIV_ID --slug SLUG
+uv run python .agents/skills/paper-reader/scripts/extract_arxiv_html.py --arxiv-id ARXIV_ID --slug SLUG
 ```
 
 The script auto-creates `raw/papers/{slug}/` (so arXiv-only papers can skip `prepare_paper.py`), checks if HTML exists (falls back to MinerU with exit code 2 if 404), verifies `defuddle` is on PATH (falls back to MinerU with exit code 2 if missing), runs Defuddle, downloads figures, and replaces remote image links with local embed wikilinks.
@@ -111,7 +111,7 @@ If the script exits with code 2 (HTML 404 or defuddle missing), proceed to 3c (M
 #### 3c. MinerU (For Non-arXiv Papers or arXiv Fallback)
 
 ```bash
-python .agents/skills/paper-reader/scripts/extract_mineru.py --slug SLUG [--language en --model vlm --timeout 600]
+uv run python .agents/skills/paper-reader/scripts/extract_mineru.py --slug SLUG [--language en --model vlm --timeout 600]
 ```
 
 Parameters: `--model vlm` (VLM layout analysis, default), `--model pipeline` (zero-hallucination). Token required: `mineru-open-api auth`.
@@ -123,7 +123,7 @@ Verify extraction quality: Read first 200 lines and last 100 lines of `full-text
 #### 3d. Fallback: pdftotext (If MinerU Fails)
 
 ```bash
-python .agents/skills/paper-reader/scripts/extract_pdftotext.py --slug SLUG
+uv run python .agents/skills/paper-reader/scripts/extract_pdftotext.py --slug SLUG
 ```
 
 Produces `.txt` without images. Font mismatch warnings are normal.
@@ -234,7 +234,7 @@ entries:
 Then run:
 
 ```bash
-python .agents/skills/paper-reader/scripts/update_indexes.py batch \
+uv run python .agents/skills/paper-reader/scripts/update_indexes.py batch \
     --manifest .tmp_ingest_manifest.yaml --stats
 ```
 
@@ -243,20 +243,20 @@ The `--stats` flag runs the statistics recount automatically. Delete the temp ma
 #### Option B: Single-entry `add` (one-off additions or re-ingests)
 
 ```bash
-python .agents/skills/paper-reader/scripts/update_indexes.py add \
+uv run python .agents/skills/paper-reader/scripts/update_indexes.py add \
     --category sources --slug SLUG --display "Title" --summary "..." --date YYYY-MM-DD
 ```
 
 If you used `add`, **always** run `stats` afterward:
 
 ```bash
-python .agents/skills/paper-reader/scripts/update_indexes.py stats
+uv run python .agents/skills/paper-reader/scripts/update_indexes.py stats
 ```
 
 ### Step 11: Update Log
 
 ```bash
-python .agents/skills/paper-reader/scripts/append_log.py --op ingest \
+uv run python .agents/skills/paper-reader/scripts/append_log.py --op ingest \
     --title "Paper Title (Author Year)" --file .tmp_log_entry.md
 ```
 
@@ -285,7 +285,7 @@ For re-ingestion, use `ingest (re)` as the operation in `--title`.
 ### Step 12: Build Verification (MkDocs)
 
 ```bash
-python .agents/skills/paper-reader/scripts/build_check.py
+uv run python .agents/skills/paper-reader/scripts/build_check.py
 ```
 
 If the build fails or exits with warnings (broken links, missing pages), resolve them before proceeding. The page-creation rules in AGENTS.md *Link Conventions* are designed so this step should always pass; if it does not, the offending page violated a convention and must be fixed.
@@ -295,7 +295,7 @@ Note: `mkdocs build --strict` may emit `INFO - Doc file 'log.md' contains an unr
 ### Step 13: Commit Changes
 
 ```bash
-python .agents/skills/paper-reader/scripts/commit_ingest.py \
+uv run python .agents/skills/paper-reader/scripts/commit_ingest.py \
     --slug SLUG \
     --message "ingest: Short Title (Author Year)" \
     --entities author1 author2 \

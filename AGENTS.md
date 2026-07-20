@@ -91,7 +91,7 @@ When a new source is added to `raw/`:
 9. Append entry to `wiki/log.md` with format: `## [YYYY-MM-DD] ingest | Source Title`
 10. **Update subdirectory index files**: Add new entries to `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md`, and `wiki/synthesis/index.md` (as applicable) — each subdirectory maintains its own index table mirroring the corresponding section of `wiki/index.md`
 11. **Verify**: Check that all new concepts/entities mentioned in the source page have corresponding wiki pages; create any missing ones
-12. **Update statistics**: Recount pages in each category and update the `## Statistics` section at the bottom of `wiki/index.md` (Total pages, Entities, Concepts, Sources, Synthesis, Queries, Last updated). Run `python .agents/skills/wiki-lint/scripts/check_statistics.py` to verify counts match actual files.
+12. **Update statistics**: Recount pages in each category and update the `## Statistics` section at the bottom of `wiki/index.md` (Total pages, Entities, Concepts, Sources, Synthesis, Queries, Last updated). Run `uv run python .agents/skills/wiki-lint/scripts/check_statistics.py` to verify counts match actual files.
 13. **Build sanity check (final step)**: Run `uv run mkdocs build --strict` to confirm no WARNINGs slipped through. The page-creation rules in *Link Conventions* above are designed so this step should always pass; if it does not, the offending page violated a convention and must be fixed before the ingest is complete.
 
 ### 2. Query Wiki
@@ -108,10 +108,10 @@ When the user asks a question:
 
 Periodically (when requested), health-check the wiki using the **wiki-lint skill** (see [`.agents/skills/wiki-lint/SKILL.md`](.agents/skills/wiki-lint/SKILL.md) for full details):
 
-1. **Index drift**: Run `python .agents/skills/wiki-lint/scripts/check_index_drift.py` — finds missing, phantom, and duplicate entries
-2. **Broken links**: Run `python .agents/skills/wiki-lint/scripts/check_broken_links.py` — categorizes truly broken links vs. convention violations (bare slugs, `wiki/` prefixes, `../` prefixes)
-3. **Orphan pages**: Run `python .agents/skills/wiki-lint/scripts/check_orphans.py` — finds pages with zero inbound references
-4. **Statistics**: Run `python .agents/skills/wiki-lint/scripts/check_statistics.py` — verifies stated counts vs. actual files
+1. **Index drift**: Run `uv run python .agents/skills/wiki-lint/scripts/check_index_drift.py` — finds missing, phantom, and duplicate entries
+2. **Broken links**: Run `uv run python .agents/skills/wiki-lint/scripts/check_broken_links.py` — categorizes truly broken links vs. convention violations (bare slugs, `wiki/` prefixes, `../` prefixes)
+3. **Orphan pages**: Run `uv run python .agents/skills/wiki-lint/scripts/check_orphans.py` — finds pages with zero inbound references
+4. **Statistics**: Run `uv run python .agents/skills/wiki-lint/scripts/check_statistics.py` — verifies stated counts vs. actual files
 5. **Contradictions**: Manually check for conflicting claims between pages
 6. **Stale claims**: Identify claims superseded by newer sources
 7. **Cross-references**: Suggest missing links between related pages
@@ -162,10 +162,10 @@ Reusable workflows are stored in `.agents/skills/`. Each skill has a `SKILL.md` 
 
 ```powershell
 # Preview fixes (always do this first)
-python .agents/skills/wiki-link-fixer/scripts/fix_links.py --dry-run
+uv run python .agents/skills/wiki-link-fixer/scripts/fix_links.py --dry-run
 
 # Apply all fixable categories
-python .agents/skills/wiki-link-fixer/scripts/fix_links.py
+uv run python .agents/skills/wiki-link-fixer/scripts/fix_links.py
 
 # Or use the legacy migrator (handles a subset of cases)
 uv run python scripts/migrate_to_vault_absolute.py

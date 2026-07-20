@@ -8,8 +8,8 @@ Steps:
   3. Print a summary of what was updated.
 
 Usage:
-  python .agents/skills/wiki-conflict-resolver/scripts/finalize.py
-  python .agents/skills/wiki-conflict-resolver/scripts/finalize.py --dry-run
+  uv run python .agents/skills/wiki-conflict-resolver/scripts/finalize.py
+  uv run python .agents/skills/wiki-conflict-resolver/scripts/finalize.py --dry-run
 """
 import argparse
 import datetime

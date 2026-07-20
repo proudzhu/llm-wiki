@@ -15,9 +15,9 @@ Conflict resolution strategy:
   5. Re-emit the file with the standard header.
 
 Usage:
-  python .agents/skills/wiki-conflict-resolver/scripts/resolve_log_conflict.py
-  python .agents/skills/wiki-conflict-resolver/scripts/resolve_log_conflict.py --dry-run
-  python .agents/skills/wiki-conflict-resolver/scripts/resolve_log_conflict.py --path wiki/log.md
+  uv run python .agents/skills/wiki-conflict-resolver/scripts/resolve_log_conflict.py
+  uv run python .agents/skills/wiki-conflict-resolver/scripts/resolve_log_conflict.py --dry-run
+  uv run python .agents/skills/wiki-conflict-resolver/scripts/resolve_log_conflict.py --path wiki/log.md
 """
 import argparse
 import os
