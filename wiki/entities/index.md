@@ -348,4 +348,11 @@
 | [[entities/andong-li\|Andong Li]] | Researcher at Institute of Acoustics, CAS — co-author of 60-year frequency-domain SE survey (decoupling-style architectures) | 2026-07-19 |
 | [[entities/panos-apostolidis\|Panos Apostolidis]] | Aalborg University / Eriksholm Research Centre — lead author of Listen first (output-based SE). | 2026-07-21 |
 | [[entities/jan-ostergaard\|Jan Østergaard]] | Aalborg University — co-author of Listen first (output-based SE). | 2026-07-21 |
+| [[entities/hangting-chen\|Hangting Chen]] | Tencent AI Lab — lead author of Ultra Dual-Path Compression (Interspeech 2023) | 2026-07-20 |
+| [[entities/jianwei-yu\|Jianwei Yu]] | Tencent AI Lab — co-author of Ultra Dual-Path Compression (Interspeech 2023) | 2026-07-20 |
+| [[entities/yi-luo\|Yi Luo]] | Tencent AI Lab — co-author of Ultra Dual-Path Compression (Interspeech 2023) | 2026-07-20 |
+| [[entities/rongzhi-gu\|Rongzhi Gu]] | Tencent AI Lab — co-author of Ultra Dual-Path Compression (Interspeech 2023) | 2026-07-20 |
+| [[entities/weihua-li\|Weihua Li]] | Tencent AI Lab — co-author of Ultra Dual-Path Compression (Interspeech 2023) | 2026-07-20 |
+| [[entities/zhuocheng-lu\|Zhuocheng Lu]] | Tencent AI Lab — co-author of Ultra Dual-Path Compression (Interspeech 2023) | 2026-07-20 |
+| [[entities/chao-weng\|Chao Weng]] | Tencent AI Lab — co-author of Ultra Dual-Path Compression (Interspeech 2023) | 2026-07-20 |
 

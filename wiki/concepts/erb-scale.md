@@ -61,6 +61,7 @@ The ERB scale provides finer frequency resolution at low frequencies compared to
 - [[concepts/tango-framework|Tango Framework]]
 - [[concepts/mn-tango|MN-TANGO]]
 - [[concepts/bark-scale-spectral-features|Bark-Scale Spectral Features]] — alternative perceptual scale used by later PercepNet-style AEC works (Bark-AEC, EchoFree)
+- [[concepts/trainable-frequency-compression|Trainable Frequency Compression]] — Chen et al. 2023 show fixed ERB filters underperform trainable Mel filters on WB-PESQ across all compression ratios
 
 ## Related Sources
 
@@ -69,3 +70,4 @@ The ERB scale provides finer frequency resolution at low frequencies compared to
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]
 - [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]]
 - [[sources/li-2025-echofree-neural-aec|Li et al. 2025: EchoFree]] — later PercepNet-style work that switched to the Bark scale (100 bands)
+- [[sources/chen-2023-ultra-dual-path-compression|Chen et al. 2023: Ultra Dual-Path Compression]] — benchmarks FixedERB vs. FixedMel vs. TrainMel frequency compression; ERB wins SI-SNR at large ratios because SI-SNR weights all frequencies equally (Mel emphasises lows)

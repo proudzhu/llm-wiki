@@ -47,7 +47,9 @@ where $C$ are the complex coefficients of filter order $N$, $X$ is the input spe
 - [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
 - [[concepts/erb-scale|ERB Scale]]
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
+- [[concepts/trainable-frequency-compression|Trainable Frequency Compression]] — complementary axis: DF learns a per-band temporal filter, trainable frequency compression learns a per-band frequency filter
 
 ## Related Sources
 
 - [[sources/schroter-2022-deepfilternet|Schröter et al. 2022: DeepFilterNet]]
+- [[sources/chen-2023-ultra-dual-path-compression|Chen et al. 2023: Ultra Dual-Path Compression]] — matches DeepFilterNet quality at 1/4 the parameters by combining time and frequency compression on a DPT-FSNet backbone

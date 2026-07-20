@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-07-16
-updated: 2026-07-17
+updated: 2026-07-20
 sources:
   - raw/papers/indenbom-2023-deepvqe/full-text.md
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
@@ -11,6 +11,7 @@ sources:
   - raw/papers/ashur-2026-acoustic-howling-suppression-fine-tuning/full-text.md
   - raw/papers/rath-2026-minimum-delay-block-size/full-text.txt
   - raw/papers/seidel-2024-bark-scale-nn-residual-suppression/full-text.md
+  - raw/papers/chen-2023-ultra-dual-path-compression/full-text.md
 tags:
   - speech-enhancement
   - multi-task
@@ -39,6 +40,7 @@ Neither trend is independently novel. The **new insight** from the 2025–2026 c
 | Source | Year | Tasks Joint | Latency | Compute | Key Mechanism |
 |--------|------|-------------|---------|---------|---------------|
 | [[sources/indenbom-2023-deepvqe\|DeepVQE (Indenbom)]] | 2023 | AEC + NS + DR | 20 ms | 7.5M params, 3.66 ms/frame | Cross-attention alignment + CCM |
+| [[sources/chen-2023-ultra-dual-path-compression\|Ultra Dual-Path Compression (Chen)]] | 2023 | AEC + NS (joint) | 10 ms hop (20 ms window) | **0.11–0.48M params, 57–1822M MACs/s** (ratio-tunable) | DPT-FSNet + grid-searched time×frequency compression + PostNet |
 | [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Bark-AEC (Seidel)]] | 2024 | AEC + NS (hybrid) | 8 ms (frame shift 128 @ 16 kHz) | 1.58M params, 235 MMACs/s | Subband-NLMS LEC + NSNet2-style FC/GRU on 86 Bark bands |
 | [[sources/castelli-2025-embedded-joint-aec-ns\|TinyVQE (Castelli)]] | 2024 | AEC + NS (joint) | 16 ms (hop) | **0.11M params, 0.48 MMACs/frame**, 420 KB SRAM | DeepVQE-s compressed; HiFi4 DSP custom CCM intrinsics |
 | [[sources/hao-2025-l3c-deepmfc\|L3C-DeepMFC (Hao)]] | 2025 | Hearing-aid feedback cancellation | **4 ms** | 0.31M params, 0.43 G/s MACs | Gain-shape complex mapping + closed-loop FT |
@@ -150,15 +152,26 @@ A recurring structural shift across 2026 sources: **linear RNNs and state-space 
 
 ## Insight 4: Temporal Redundancy Is the New Efficiency Frontier
 
-Three independent 2026 sources converge on the same insight: **adjacent STFT frames are highly redundant due to 50% overlap, and exploiting this redundancy is cheaper than slimming the backbone**.
+Four independent sources spanning 2023–2026 converge on the same insight: **adjacent STFT frames are highly redundant due to 50% overlap, and exploiting this redundancy is cheaper than slimming the backbone**.
 
-- **HALO**: Halves the internal frame rate via dynamic-convolution-based rate reduction/restoration. PESQ +0.097, SI-SNR +0.51 dB on GTCRN at matched MAC/s. Ablation shows simple decimation + duplication is the worst HALO variant — adaptive gating is essential.
-- **RT-Tango**: [[concepts/fixed-rate-skipping\|Fixed-Rate Skipping (FRS)]] runs the mask estimator at 1/4 (SN-DNN) or 1/2 (MN-DNN) rate and reuses the previous mask in between. FRS preserves quality within 0.2 dB of baseline; learned skip gates (Skip RNN, TinyLSTM) degrade MN-DNN SI-SDR from 4.5 to 3.3–3.8 dB despite ~80% effective skip ratios.
-- **L3C-DeepMFC**: Modified overlap-add using only current + next frames (vs. full overlap-add) — explicit recognition that 2 ms hop creates redundancy exploitable for latency reduction.
+- **Chen et al. 2023 (Ultra Dual-Path Compression)**: [[concepts/frame-skip-prediction\|Frame-Skip Prediction]] runs the heavy mask estimator once every $r$ frames and copies the predicted mask to the $r-1$ skipped frames. Skip prediction alone suffers from unmatched masks (DT WB-PESQ drops from 2.78 to 2.14 at 8×), but a lightweight [[concepts/post-processing-network\|PostNet]] (67K params, 15M MACs/s, 1-layer GRU + convs) recovers +0.33 WB-PESQ at 8×. This is the earliest corpus example of explicit temporal-redundancy exploitation with a learned refinement module.
+- **HALO (2026)**: Halves the internal frame rate via dynamic-convolution-based rate reduction/restoration. PESQ +0.097, SI-SNR +0.51 dB on GTCRN at matched MAC/s. Ablation shows simple decimation + duplication is the worst HALO variant — adaptive gating is essential.
+- **RT-Tango (2026)**: [[concepts/fixed-rate-skipping\|Fixed-Rate Skipping (FRS)]] runs the mask estimator at 1/4 (SN-DNN) or 1/2 (MN-DNN) rate and reuses the previous mask in between. FRS preserves quality within 0.2 dB of baseline; learned skip gates (Skip RNN, TinyLSTM) degrade MN-DNN SI-SDR from 4.5 to 3.3–3.8 dB despite ~80% effective skip ratios.
+- **L3C-DeepMFC (2025)**: Modified overlap-add using only current + next frames (vs. full overlap-add) — explicit recognition that 2 ms hop creates redundancy exploitable for latency reduction.
 
-**Why FRS beats learned skipping**: learned skip gates introduce additional MACs to decide whether to skip, and their training signal is noisy. FRS commits to a fixed schedule, eliminating decision overhead. The result: simpler is better for streaming.
+**Three temporal-redundancy strategies compared**:
 
-**Combined implication**: HALO's frame-rate reduction and RT-Tango's FRS are complementary — HALO compresses within the backbone, FRS skips backbone invocation entirely. A combined HALO + FRS configuration is unexplored but predictably Pareto-improving.
+| Strategy | Source | Where it operates | Refinement | Cost |
+|----------|--------|-------------------|-----------|------|
+| Frame-Skip Prediction + PostNet | Chen 2023 | T-F feature inside backbone | Learned (1-layer GRU + convs) | 67K params, 15M MACs/s |
+| HALO rate reduction/restoration | Zhao 2026 | T-F feature inside backbone | Learned (dynamic conv) | Larger (adaptive gating) |
+| Fixed-Rate Skipping | Benslimane 2026 | Whole backbone invocation | None (fixed schedule) | 0 added params |
+
+**Why FRS beats learned skipping in RT-Tango**: learned skip gates introduce additional MACs to decide whether to skip, and their training signal is noisy. FRS commits to a fixed schedule, eliminating decision overhead.
+
+**Why Chen 2023 uses learned refinement despite RT-Tango's finding**: Chen compresses the **T-F feature** (so the backbone still runs on every frame, just on a shorter feature), whereas FRS skips the whole backbone. The two strategies operate at different levels and are in principle complementary — FRS can be applied on top of any backbone, including one that already uses frame-skip prediction + PostNet internally.
+
+**Combined implication**: HALO's frame-rate reduction, RT-Tango's FRS, and Chen's frame-skip prediction + PostNet are three points on a spectrum of temporal-redundancy exploitation. HALO compresses within the backbone with adaptive gating; Chen compresses within the backbone with fixed copy + learned refinement; FRS skips backbone invocation entirely. A combined HALO + FRS configuration is unexplored but predictably Pareto-improving. Chen + FRS combined would skip both backbone invocation and intra-backbone refinement — also unexplored.
 
 ## Insight 5: Training Paradigm Innovations Match Architecture Innovations
 
@@ -229,6 +242,24 @@ This is relevant to the multi-task / low-latency synthesis in two ways:
 
 **Synthesis implication**: The 2023–2026 SE corpus repeatedly replaces LSTM/GRU with linear RNNs / SSMs (Mamba-MinGRU in OVC, GRNN in RT-Tango) and praises their streaming properties — but none of those works validate on sequences longer than the standard ~10 s DNS test clip. Larraza & de Koeijer's result is a caution: **length-invariance claims validated on short test clips do not generalize to streaming deployment**. The standard 10 s DNS evaluation window is too short to surface state-drift failure modes. Future low-complexity SE works targeting real-time deployment should report long-sequence (>60 s) evaluation as a separate condition, and consider whether their chosen recurrent unit has a contraction guarantee on the forward pass (not just during training). Comfi-FastGRNN's complementary-filter approach is one parameter-efficient fix; whether the same drift affects Mamba-MinGRU, GRNN, and other linear-RNN replacements at streaming scale is an open question.
 
+## Insight 8: Compression-Ratio Flexibility Is a First-Class Design Axis
+
+[[sources/chen-2023-ultra-dual-path-compression\|Chen et al. 2023]] articulate a design axis that the rest of the corpus treats only implicitly: **the ability to tune computational cost over a wide range (4×–32×) without resizing the model**. Most works in the corpus fix a single operating point — DeepVQE at 7.5M params, RT-Tango at 35 MMACs/s, OVC at 0.33 GMAC/s, EchoFree at 30 MMACs/s. Chen et al. instead present a single 109K-parameter base architecture whose MACs/s can be tuned from 57M to 1822M by changing only the compression ratio, with model size staying under 0.5M parameters throughout.
+
+**Why this matters for deployment**: real-world SE deployment targets span an order of magnitude in compute budget — from cloud communication (DeepVQE's 7.5M params) to embedded MCUs (Castelli's TinyVQE at 114K params). A compression-ratio-flexible architecture lets a single R&D investment cover multiple deployment tiers without re-training or re-architecting.
+
+**Three flexibility strategies in the corpus**:
+
+| Strategy | Source | Range | Model size change |
+|----------|--------|-------|-------------------|
+| Dual-path compression (T×F grid search) | Chen 2023 | 4×–32× (57M–1822M MACs/s) | <500K params throughout |
+| Stage-wise surgical compression | Castellc 2024 | 610K → 114K params | Each stage re-trained |
+| Backbone replacement (GRU→FastGRNN) | Larraza 2026 | Single point (0.338M params) | Single retrain |
+
+**Trade-off**: Chen's compression-ratio flexibility comes at the cost of compression/decompression module overhead — at ratios >32× these modules begin to dominate cost. Castelli's stage-wise approach achieves higher per-stage compression (610K→114K = 5.4× param reduction) but each stage requires retraining and the operating point is fixed after deployment. The two strategies are complementary: Chen's dual-path compression can be applied to a Castelli-style compressed backbone to get ratio-flexibility at the embedded tier.
+
+**Synthesis implication**: future low-complexity SE works should report a **compression-ratio curve** (quality vs. MACs/s) rather than a single operating point, so practitioners can choose the right point for their deployment tier. Chen et al. 2023 is the only source in the corpus that does this explicitly.
+
 ## Cross-Cutting Decision Matrix
 
 For a practitioner choosing a multi-task SE architecture under a latency budget $L$:
@@ -280,3 +311,8 @@ For a practitioner choosing a multi-task SE architecture under a latency budget 
 - [[concepts/fast-ulcnet\|Fast-ULCNet]]
 - [[concepts/fastgrnn\|FastGRNN]]
 - [[concepts/comfi-fastgrnn\|Comfi-FastGRNN]]
+- [[concepts/dpt-fsnet\|DPT-FSNet]]
+- [[concepts/dual-path-compression\|Dual-Path Compression]]
+- [[concepts/trainable-frequency-compression\|Trainable Frequency Compression]]
+- [[concepts/frame-skip-prediction\|Frame-Skip Prediction]]
+- [[concepts/post-processing-network\|Post-Processing Network]]

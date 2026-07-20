@@ -1,0 +1,20 @@
+---
+type: entity
+created: 2026-07-20
+updated: 2026-07-20
+tags:
+  - researcher
+  - speech-enhancement
+  - acoustic-echo-cancellation
+  - deep-learning
+---
+
+# Hangting Chen
+
+**Affiliation**: Tencent AI Lab, Audio and Speech Signal Processing Oteam
+**Role**: Researcher
+**Research Focus**: Acoustic echo cancellation, noise suppression, low-complexity neural network design for speech enhancement.
+
+## Key Contributions
+
+- Lead author of [Ultra Dual-Path Compression for Joint Echo Cancellation and Noise Suppression](https://doi.org/10.21437/Interspeech.2023-2302) (Interspeech 2023) — [[sources/chen-2023-ultra-dual-path-compression\|Chen et al. 2023]]

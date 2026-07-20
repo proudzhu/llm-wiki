@@ -324,4 +324,9 @@
 | [[concepts/cross-path-fusion\|Cross-Path Fusion (CPF)]] | Lightweight bottleneck fusion module bridging CoFi-Lite's parallel coarse/fine paths via concat–FC–GRU–FC; +0.14 PESQ in ablation | 2026-07-21 |
 | [[concepts/output-based-speech-enhancement\|Output-based Speech Enhancement]] | Paradigm configuring an SE system by evaluating SI/SQ of candidate outputs rather than extracting input features. | 2026-07-21 |
 | [[concepts/glimpse-proportion\|Glimpse Proportion]] | SI-inspired measure: fraction of T-F tiles where estimated audibility exceeds a threshold (Cooke 2006). | 2026-07-21 |
+| [[concepts/dpt-fsnet\|DPT-FSNet]] | Dual-Path Transformer-based Full-Subband Network; 2D-conv encoder + dual-path transformer + 2D-conv decoder on T-F feature map | 2026-07-20 |
+| [[concepts/dual-path-compression\|Dual-Path Compression]] | Grid-searched T x F compression combining frame-skip prediction + trainable Mel filters; outperforms single-path at 8x-16x | 2026-07-20 |
+| [[concepts/trainable-frequency-compression\|Trainable Frequency Compression]] | Learnable linear transform per band replacing fixed ERB/Mel triangle filters; >0.1 WB-PESQ gain at 8x-16x | 2026-07-20 |
+| [[concepts/frame-skip-prediction\|Frame-Skip Prediction]] | Run mask estimator once every r frames, copy mask to skipped frames; PostNet recovers +0.33 WB-PESQ at 8x | 2026-07-20 |
+| [[concepts/post-processing-network\|Post-Processing Network (PostNet)]] | Lightweight 67K-param 1-layer GRU + convs refinement module for frame-skip prediction; 15M MACs/s | 2026-07-20 |
 

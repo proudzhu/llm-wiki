@@ -354,6 +354,13 @@
 | [[entities/andong-li\|Andong Li]] | Researcher at Institute of Acoustics, CAS — co-author of 60-year frequency-domain SE survey (decoupling-style architectures) | 2026-07-19 |
 | [[entities/panos-apostolidis\|Panos Apostolidis]] | Aalborg University / Eriksholm Research Centre — lead author of Listen first (output-based SE). | 2026-07-21 |
 | [[entities/jan-ostergaard\|Jan Østergaard]] | Aalborg University — co-author of Listen first (output-based SE). | 2026-07-21 |
+| [[entities/hangting-chen\|Hangting Chen]] | Tencent AI Lab — lead author of Ultra Dual-Path Compression (Interspeech 2023) | 2026-07-20 |
+| [[entities/jianwei-yu\|Jianwei Yu]] | Tencent AI Lab — co-author of Ultra Dual-Path Compression (Interspeech 2023) | 2026-07-20 |
+| [[entities/yi-luo\|Yi Luo]] | Tencent AI Lab — co-author of Ultra Dual-Path Compression (Interspeech 2023) | 2026-07-20 |
+| [[entities/rongzhi-gu\|Rongzhi Gu]] | Tencent AI Lab — co-author of Ultra Dual-Path Compression (Interspeech 2023) | 2026-07-20 |
+| [[entities/weihua-li\|Weihua Li]] | Tencent AI Lab — co-author of Ultra Dual-Path Compression (Interspeech 2023) | 2026-07-20 |
+| [[entities/zhuocheng-lu\|Zhuocheng Lu]] | Tencent AI Lab — co-author of Ultra Dual-Path Compression (Interspeech 2023) | 2026-07-20 |
+| [[entities/chao-weng\|Chao Weng]] | Tencent AI Lab — co-author of Ultra Dual-Path Compression (Interspeech 2023) | 2026-07-20 |
 
 ---
 
@@ -683,6 +690,11 @@
 | [[concepts/cross-path-fusion\|Cross-Path Fusion (CPF)]] | Lightweight bottleneck fusion module bridging CoFi-Lite's parallel coarse/fine paths via concat–FC–GRU–FC; +0.14 PESQ in ablation | 2026-07-21 |
 | [[concepts/output-based-speech-enhancement\|Output-based Speech Enhancement]] | Paradigm configuring an SE system by evaluating SI/SQ of candidate outputs rather than extracting input features. | 2026-07-21 |
 | [[concepts/glimpse-proportion\|Glimpse Proportion]] | SI-inspired measure: fraction of T-F tiles where estimated audibility exceeds a threshold (Cooke 2006). | 2026-07-21 |
+| [[concepts/dpt-fsnet\|DPT-FSNet]] | Dual-Path Transformer-based Full-Subband Network; 2D-conv encoder + dual-path transformer + 2D-conv decoder on T-F feature map | 2026-07-20 |
+| [[concepts/dual-path-compression\|Dual-Path Compression]] | Grid-searched T x F compression combining frame-skip prediction + trainable Mel filters; outperforms single-path at 8x-16x | 2026-07-20 |
+| [[concepts/trainable-frequency-compression\|Trainable Frequency Compression]] | Learnable linear transform per band replacing fixed ERB/Mel triangle filters; >0.1 WB-PESQ gain at 8x-16x | 2026-07-20 |
+| [[concepts/frame-skip-prediction\|Frame-Skip Prediction]] | Run mask estimator once every r frames, copy mask to skipped frames; PostNet recovers +0.33 WB-PESQ at 8x | 2026-07-20 |
+| [[concepts/post-processing-network\|Post-Processing Network (PostNet)]] | Lightweight 67K-param 1-layer GRU + convs refinement module for frame-skip prediction; 15M MACs/s | 2026-07-20 |
 
 ---
 
@@ -819,6 +831,7 @@
 | [[sources/zheng-2023-survey-frequency-domain-speech-enhancement\|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] | 60-year survey of frequency-domain monaural SE from traditional statistical methods to deep learning; five-group taxonomy and unified evaluation across normal-hearing and hearing-impaired listeners | 2026-07-19 |
 | [[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement\|Yang et al. 2026: CoFi-Lite — Pushing the Limits of Ultra-Lightweight Speech Enhancement]] | Dual coarse/fine-path ultra-lightweight SE model with Cross-Path Fusion; beats GTCRN at 40% of its compute (12.87M MACs/s, 83.12k params) | 2026-07-21 |
 | [[sources/apostolidis-2026-listen-first-output-based-multi-microphone\|Apostolidis 2026: Listen first — output-based multi-microphone speech enhancement]] | Output-based SE paradigm selecting GP-maximizing MPDR from a candidate dictionary; outperforms input-based MVDR, especially at low SNR. | 2026-07-21 |
+| [[sources/chen-2023-ultra-dual-path-compression\|Chen et al. 2023: Ultra Dual-Path Compression for Joint AEC and NS]] | Time-frequency dual-path compression on DPT-FSNet for joint AEC+NS; 4x-32x ratio range, 57M-1822M MACs/s, <0.5M params; matches DeepFilterNet at 1/4 params | 2026-07-20 |
 
 ---
 
@@ -869,10 +882,10 @@
 
 ## Statistics
 
-- **Total pages**: 818
-- **Entities**: 344
-- **Concepts**: 320
-- **Sources**: 127
+- **Total pages**: 831
+- **Entities**: 351
+- **Concepts**: 325
+- **Sources**: 128
 - **Synthesis**: 20
 - **Queries**: 7
-- **Last updated**: 2026-07-21
+- **Last updated**: 2026-07-22

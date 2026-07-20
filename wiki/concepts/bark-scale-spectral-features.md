@@ -66,6 +66,7 @@ Bark and ERB are both perceptually motivated. Notably, the original [[concepts/p
 - [[concepts/acoustic-echo-cancellation\|Acoustic Echo Cancellation]]
 - [[concepts/speech-enhancement\|Speech Enhancement]]
 - [[concepts/deep-filtering\|Deep Filtering]]
+- [[concepts/trainable-frequency-compression\|Trainable Frequency Compression]] — Chen et al. 2023 show that making the Mel-scale filterbank trainable (TrainMel) beats both fixed ERB and fixed Mel filters on WB-PESQ across all compression ratios
 
 ## Related Sources
 

@@ -83,35 +83,25 @@
 - **Answer saved to**: `wiki/queries/how-to-estimate-secondary-path.md`
 - **Summary**: Three methods: offline modeling (inject white noise, identify with LMS), online modeling (simultaneous identification during ANC operation with low-power noise injection), and pure delay approximation (for narrow-band). FXLMS tolerates <90° phase error.
 
----
-
 ## [2026-04-10] query (rewrite) | 如何估计次级通道
 
 - **Answer updated**: `wiki/queries/how-to-estimate-secondary-path.md`
 - **Summary**: Expanded from Kuo 1999 Section VI. Added: fundamental problem (y(n) causes biased convergence to 1/W(z)), additive random noise method with convergence analysis (online takes σ_d²/σ_v² times longer than offline), improvement techniques (adaptive noise cancellation ×30 speedup, adaptive predictor), overall modeling algorithm with 3 filters, comparison table, and multi-channel challenges.
-
----
 
 ## [2026-04-10] query (rewrite) | 如何估计次级通道
 
 - **Answer updated**: `wiki/queries/how-to-estimate-secondary-path.md`
 - **Summary**: Added two new methods: (1) Simultaneous Equations Method (Jin, Yang & Xiao 2007) — solves for W(z) and S(z) simultaneously from algebraic relations without auxiliary noise injection; (2) Genetic Algorithm (Chang & Chen 2010) — evolutionary search bypasses S(z) identification entirely, tolerant of nonlinearities but extremely high computation. Updated comparison table to 5 methods + pure delay approximation.
 
----
-
 ## [2026-04-10] query (rewrite) | 如何估计次级通道 — Zotero 文献综述
 
 - **Answer updated**: `wiki/queries/how-to-estimate-secondary-path.md`
 - **Summary**: Comprehensive rewrite based on 21 papers from Zotero library. Reorganized into 4 categories: (1) Explicit S(z) modeling — offline, additive noise (Yang 2026 RMFxLMS, Cao 2025 ELSTM-ANC-OSPM), overall modeling, coefficient update; (2) No auxiliary noise — simultaneous equations (Jin 2007, Fujii 1999, Kajikawa 2000); (3) No S(z) identification — SPR (Zhou 2007), evolutionary (GA: Chang 2010/96 cites, PSO: Rout 2012/72 cites), careful control (Lopes 2022/2024), meta-learning (Yang 2026); (4) Coping strategies — blended FxLMS (Sarkar 2025), modeling error analysis (Tabatabaei 2012/67 cites). Added full comparison table with 12 methods and 21 paper index.
 
----
-
 ## [2026-04-10] query (enhance) | 如何估计次级通道 — 添加 Zotero 链接
 
 - **Answer updated**: `wiki/queries/how-to-estimate-secondary-path.md`
 - **Summary**: Added `zotero://select/items/0_XXX` links to all 21 paper references (41 total link instances across inline tables and paper index). Clicking opens the paper directly in Zotero from Obsidian.
-
----
 
 ## [2026-04-10] query (enhance) | 如何估计次级通道 — 添加推导公式
 
@@ -126,8 +116,6 @@
 - **Mappings**: Kuo 1999 → `99AD6FSU`, Wu 2014 → `IUCZFYQX`
 - **Updated**: All wiki pages' `sources:` frontmatter from `.pdf` → `.md`
 - **Added**: 📎 Zotero links to wiki source summary pages
-
----
 
 ---
 
@@ -165,8 +153,6 @@
   - `[[Subband ANC]]` — linked from `multi-channel-anc.md` (×2)
 - **Missing cross-references**: Speech enhancement review has no links back to ANC concept pages
 - **Data gaps**: WPE dereverberation, GSS/GEVD, neural ANC (Deep ANC, SFANC) — papers exist in Zotero but no concept pages
-
----
 
 ## [2026-04-11] lint (fix) | Resolved all lint findings
 
@@ -246,8 +232,6 @@
 - **Result**: 91/94 unique wikilinks resolve (remaining 3 are documentation text inside code blocks in log.md, not navigation links)
 - **index.md updated**: Added all 30 new pages (statistics: 100 total, 29 entities, 50 concepts)
 
----
-
 - **Files renamed**:
   1. `concepts/filtered-x-lms.md` → `concepts/filtered-x-lms-algorithm.md` (title: "# Filtered-x LMS Algorithm")
   2. `concepts/leaky-fxlms.md` → `concepts/leaky-fxlms-algorithm.md` (title: "# Leaky FxLMS Algorithm")
@@ -312,6 +296,7 @@
   - 极点翻转稳定性处理方法
 - **index.md updated**: 12 synthesis pages, 110 total
 
+---
 
 ## [2026-04-12] ingest | Generalized Correntropy for Robust Adaptive Filtering
 
@@ -331,6 +316,8 @@
 - **Note saved to**: `wiki/sources/chen-2016-generalized-correntropy-paper-reading-note.md`
 - **Summary**: 完整中文阅读笔记（可直接发布到技术社区），覆盖 10 个章节：动机、GGD 核定义、GC-loss 与范数关系、GMCC 三极限定理（MAP/LMP/Wiener）、最优解类 Wiener 形式、可变步长推导、零 POD 证明与实验、稳态 EMSE 公式、α 设计直觉、系统对比表、Q&A。
 
+---
+
 ## [2026-04-12] ingest | Whisphone: Whispering Input Earbuds
 
 - **Source**: `raw/papers/Fukumoto - 2025 - Whisphone whispering input earbuds.md` (Zotero: GD9G92MT, arXiv: 2501.01636)
@@ -342,6 +329,8 @@
   - `wiki/index.md` — 更新
   - `wiki/log.md` — 记录
 
+---
+
 ## [2026-04-12] ingest | Real-time Implementation of Delayed MPC in ANC Systems
 
 - **Source**: `raw/papers/Liang 等 - 2026 - Real-time implementation of delayed model predictive control in active noise control systems.md` (Zotero: J5CZZBZ2, JSV 2026)
@@ -352,6 +341,8 @@
   - `wiki/sources/liang-2026-delayed-mpc-anc-paper-reading-note.md` — 完整中文阅读笔记
   - `wiki/entities/chao-liang.md`, `wiki/entities/francesco-ripamonti.md`, `wiki/entities/marek-pawelczyk.md`
   - `wiki/index.md`, `wiki/log.md`
+
+---
 
 ## [2026-04-12] ingest | Robust Generalized Maximum Correntropy Criterion Algorithms for ANC
 
@@ -375,8 +366,6 @@
 - **Pages created/updated**:
   - `wiki/sources/masilamani-2024-headphone-conversation-detect-paper-reading-note.md`
   - `wiki/index.md`, `wiki/log.md`
-
----
 
 ## [2026-04-12] defuddle ingest | Forward Propagation of Errors Through Time
 
@@ -439,8 +428,6 @@
   - `wiki/sources/pawelczyk-1997-anc-feedback-fixed-adaptive.md`（初版，元数据）
   - `wiki/index.md`, `wiki/log.md`
 
----
-
 ## [2026-04-12] ingest (OCR complete) | ANC Feedback: Fixed and Adaptive Controllers
 
 - **Source**: `raw/papers/Pawelczyk 等 - 1997 - Active Noise Control Using Feedback. Fixed and Adaptive Controllers.md` (Zotero: 78M97YB2, ISVR TM822, 74 pages, OCR'd)
@@ -464,8 +451,6 @@
   - `wiki/sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones.md`
   - `wiki/entities/piero-iared-rivera-benois.md`
   - `wiki/index.md`, `wiki/log.md`
-
----
 
 ---
 
@@ -527,19 +512,57 @@
   - `wiki/index.md` — Added to sources table, updated statistics.
 
 ---
+
 ## [2026-04-17] lint | Health check: Identified 1 orphan page (robust-anc-impulsive-non-stationary)
+
 ## [2026-04-17] lint (fix) | Resolved orphan page: robust-anc-impulsive-non-stationary linked
+
+---
+
 ## [2026-04-17] ingest | Synthesis: Computational and Memory Efficiency
+
+---
+
 ## [2026-04-17] ingest | Synthesis: AI-Driven Active Noise Control
+
+---
+
 ## [2026-04-17] lint | Expanded AI-Driven ANC synthesis with details on SFANC, GFANC, and Deep ANC (CRN)
+
+---
+
 ## [2026-04-17] lint | Health check: Created missing concept pages for Deep Learning for Signal Processing and Virtual Sensing; updated index
+
+---
+
 ## [2026-04-18] ingest | It's ok to compare floating points for equality
+
+---
+
 ## [2026-04-18] synthesis | Virtual Sensing Evolution: from RMT to Neural observation filters (Zotero)
+
+---
+
 ## [2026-04-18] ingest | Source: Obs-TasNet paper (Neural Virtual Sensing)
+
+---
+
 ## [2026-04-18] ingest | Added summary pages for 6 papers on Virtual Sensing
+
+---
+
 ## [2026-04-18] synthesis | Head-Mounted ANC: Occlusion & Transparency (multi-modal convergence)
+
+---
+
 ## [2026-04-18] ingest | Zhang 2024: Neural Network Augmented Kalman Filter for Robust Acoustic Howling Suppression
+
+---
+
 ## [2026-04-18] ingest | Source: Karpathy: LLM OS
+
+---
+
 ## [2026-04-19] ingest | Jensen Huang: Will Nvidia’s moat persist?
 
 ---
@@ -598,7 +621,10 @@
   - `wiki/log.md` — Logged the action.
   - 140+ other files in `wiki/` subdirectories.
 
+---
+
 ## [2026-04-22] ingest | Zhang 2022: Statistical signal processing approaches to analysis and synthesis of bone-conducted speech
+
 - **Source**: `zotero://select/items/0_T6BE3UFG`
 - **Summary**: Doctoral dissertation proposing WACF-CEP for noise-robust pitch extraction and LS-IIR for converting AC speech to synthetic BC speech.
 - **Pages created/updated**:
@@ -607,7 +633,10 @@
   - `wiki/synthesis/multimodal-bc-speech-enhancement.md`
   - `wiki/index.md` — Updated statistics (167 pages)
 
+---
+
 ## [2026-04-22] ingest | Shen 2023: Advanced active noise control headphone: algorithm and implementation
+
 - **Source**: `zotero://select/items/0_EUIIZATZ`
 - **Summary**: Doctoral dissertation proposing Adaptive Gain (AG), ASHANC, and Wireless ANC for modern headphones.
 - **Pages created/updated**:
@@ -677,8 +706,6 @@
 - **Pages updated**:
   - `wiki/concepts/neural-networks.md` — expanded from placeholder with three-generation framework and SNN connections
   - `wiki/index.md` — added 8 new pages, updated stats
-
----
 
 ## [2026-04-25] ingest (re) | Speech-Preserving Active Noise Control: A Deep Learning Approach in Reverberant Environments
 
@@ -876,6 +903,73 @@
 
 ---
 
+## [2026-04-28] ingest | Low-latency Audio Front-end Region-of-Interest Beamforming for Smart Glasses
+
+- **Source**: `raw/papers/frank-2026-low-latency-roi-beamforming/full-text.txt` (Zotero: DE8N9LJ7)
+- **Authors**: Ariel Frank, Israel Cohen
+- **Published**: ICASSP 2026, pp. 14727–14731
+- **DOI**: 10.1109/ICASSP55912.2026.11462987
+- **Summary**: Head-to-head comparison of time-domain and STFT-domain LDMG ROI beamformers for smart glasses. Using real 6-mic recordings, time-domain delivers 2x lower algorithmic latency and higher performance (DF, WNG, own-voice suppression) at the cost of increased computation (M Ly² vs O(M Ly log₂ Ly)).
+- **Pages created**:
+  - `raw/papers/frank-2026-low-latency-roi-beamforming/full-text.txt` — extracted text from Zotero PDF
+  - `wiki/sources/frank-2026-low-latency-roi-beamforming.md`
+  - `wiki/entities/ariel-frank.md`
+  - `wiki/entities/israel-cohen.md`
+  - `wiki/concepts/roi-beamforming.md`
+- **Pages updated**:
+  - `wiki/concepts/beamforming.md` — added ROI beamforming section with time-domain vs STFT comparison, updated sources
+  - `wiki/index.md` — added 2 entities, 1 concept, 1 source, updated statistics (220→224 total)
+
+## [2026-04-28] ingest (re) | Statistical Signal Processing Approaches to Analysis and Synthesis of Bone-Conducted Speech
+
+- **Source**: `raw/papers/zhang-2022-bone-conducted-speech-dissertation/full-text.txt` (Zotero: T6BE3UFG)
+- **Author**: Shiming Zhang
+- **Published**: Saitama University, Doctoral Dissertation, 2022
+- **Summary**: Re-ingested full dissertation text and merged with existing reading note. Comprehensive source page now includes: (1) WACF-CEP and WACF-WACF dual-modal pitch extraction with full experimental setup and GPE results across 5 noise types; (2) LS-IIR AC-to-BC synthesis with coefficient tables, LAR distance, listening test results, and noise-robustness analysis; (3) Systematic SNR quantification showing ~10 dB BC gain across 8 speakers.
+- **Pages created**:
+  - `raw/papers/zhang-2022-bone-conducted-speech-dissertation/full-text.txt` — extracted text from Zotero PDF
+  - `wiki/entities/shiming-zhang.md`
+- **Pages updated**:
+  - `wiki/sources/zhang-2022-bone-conducted-speech-dissertation.md` — comprehensive rewrite merging source page + reading note with full equations, tables, and results
+  - `wiki/synthesis/multimodal-bc-speech-enhancement.md` — updated date
+  - `wiki/index.md` — merged 2 source entries into 1, added 1 entity, updated stats (54→53 sources, 57→58 entities)
+- **Pages deleted**:
+  - `wiki/sources/zhang-2022-bone-conducted-speech-reading-note.md` — content merged into source page
+
+---
+
+## [2026-04-28] merge | Consolidate duplicate source files in wiki/sources
+
+- **Summary**: Merged 5 pairs of duplicate source files (source + reading note) into single comprehensive source pages, re-ingested PDFs from Zotero library for each
+- **Duplicate pairs merged**:
+  1. `chen-2016-generalized-correntropy-robust-adaptive-filtering.md` + `chen-2016-generalized-correntropy-paper-reading-note.md` → unified source with GGD correntropy, GMCC, zero-POD, Q&A
+  2. `shen-2023-advanced-anc.md` + `shen-2023-advanced-anc-reading-note.md` → unified source with AG, ASHANC, Wireless ANC, ESM, math derivations
+  3. `wang-2024-metric-learning-virtual-sensing.md` + `wang-2024-metric-learning-virtual-sensing-reading-note.md` → unified source with metric learning, 1D CNN, cosine similarity
+  4. `holzmueller-2026-obs-tasnet-virtual-sensing.md` + `holzmueller-2026-obs-tasnet-virtual-sensing-reading-note.md` → unified source with Conv-TasNet, temporal bottleneck, asynchronous estimation
+  5. `toyooka-2026-hybrid-anc-remote-sensing.md` + `toyooka-2026-hybrid-anc-virtual-sensing-paper-reading-note.md` → unified source with dual compensation filters, signal decomposition
+- **Pages created**:
+  - `raw/papers/chen-2016-generalized-correntropy/full-text.txt` — extracted from Zotero PDF (KJ2ILUFH)
+  - `raw/papers/shen-2023-advanced-anc/full-text.txt` — extracted from Zotero PDF (BB3AEY8Z)
+  - `raw/papers/wang-2024-metric-learning-virtual-sensing/full-text.txt` — extracted from Zotero PDF (6ABIUSW8)
+  - `raw/papers/holzmueller-2026-obs-tasnet-virtual-sensing/full-text.txt` — extracted from Zotero PDF (5D63H833)
+  - `raw/papers/toyooka-2026-hybrid-anc-virtual-sensing/full-text.txt` — extracted from Zotero PDF (ECHHX8YL)
+- **Pages updated**:
+  - `wiki/sources/chen-2016-generalized-correntropy-robust-adaptive-filtering.md` — merged with reading note, added motivation, system comparison, Q&A
+  - `wiki/sources/shen-2023-advanced-anc.md` — merged with reading note, added math derivations, performance tables, Q&A
+  - `wiki/sources/wang-2024-metric-learning-virtual-sensing.md` — merged with reading note, added AF-VS background, performance tables
+  - `wiki/sources/holzmueller-2026-obs-tasnet-virtual-sensing.md` — merged with reading note, added RMT background, ablation study
+  - `wiki/sources/toyooka-2026-hybrid-anc-remote-sensing.md` — merged with reading note, added NLMS equations, tuning stages
+  - `wiki/synthesis/virtual-sensing-evolution.md` — updated references to use merged source slugs
+  - `wiki/index.md` — removed 5 reading note entries, updated source summaries, stats (53→48 sources, 224→219 total)
+- **Pages deleted**:
+  - `wiki/sources/chen-2016-generalized-correntropy-paper-reading-note.md`
+  - `wiki/sources/shen-2023-advanced-anc-reading-note.md`
+  - `wiki/sources/wang-2024-metric-learning-virtual-sensing-reading-note.md`
+  - `wiki/sources/holzmueller-2026-obs-tasnet-virtual-sensing-reading-note.md`
+  - `wiki/sources/toyooka-2026-hybrid-anc-virtual-sensing-paper-reading-note.md`
+
+---
+
 ## [2026-04-29] ingest | VM Beamforming for Hearing Aids (Farmani 2026)
 
 - **Source**: `raw/papers/farmani-2026-virtual-mic-beamforming-hearing-aid/full-text.txt` (Zotero: 6EW3W6U6)
@@ -928,75 +1022,6 @@
 
 ---
 
-## [2026-04-28] ingest | Low-latency Audio Front-end Region-of-Interest Beamforming for Smart Glasses
-
-- **Source**: `raw/papers/frank-2026-low-latency-roi-beamforming/full-text.txt` (Zotero: DE8N9LJ7)
-- **Authors**: Ariel Frank, Israel Cohen
-- **Published**: ICASSP 2026, pp. 14727–14731
-- **DOI**: 10.1109/ICASSP55912.2026.11462987
-- **Summary**: Head-to-head comparison of time-domain and STFT-domain LDMG ROI beamformers for smart glasses. Using real 6-mic recordings, time-domain delivers 2x lower algorithmic latency and higher performance (DF, WNG, own-voice suppression) at the cost of increased computation (M Ly² vs O(M Ly log₂ Ly)).
-- **Pages created**:
-  - `raw/papers/frank-2026-low-latency-roi-beamforming/full-text.txt` — extracted text from Zotero PDF
-  - `wiki/sources/frank-2026-low-latency-roi-beamforming.md`
-  - `wiki/entities/ariel-frank.md`
-  - `wiki/entities/israel-cohen.md`
-  - `wiki/concepts/roi-beamforming.md`
-- **Pages updated**:
-  - `wiki/concepts/beamforming.md` — added ROI beamforming section with time-domain vs STFT comparison, updated sources
-  - `wiki/index.md` — added 2 entities, 1 concept, 1 source, updated statistics (220→224 total)
-
----
-
-## [2026-04-28] ingest (re) | Statistical Signal Processing Approaches to Analysis and Synthesis of Bone-Conducted Speech
-
-- **Source**: `raw/papers/zhang-2022-bone-conducted-speech-dissertation/full-text.txt` (Zotero: T6BE3UFG)
-- **Author**: Shiming Zhang
-- **Published**: Saitama University, Doctoral Dissertation, 2022
-- **Summary**: Re-ingested full dissertation text and merged with existing reading note. Comprehensive source page now includes: (1) WACF-CEP and WACF-WACF dual-modal pitch extraction with full experimental setup and GPE results across 5 noise types; (2) LS-IIR AC-to-BC synthesis with coefficient tables, LAR distance, listening test results, and noise-robustness analysis; (3) Systematic SNR quantification showing ~10 dB BC gain across 8 speakers.
-- **Pages created**:
-  - `raw/papers/zhang-2022-bone-conducted-speech-dissertation/full-text.txt` — extracted text from Zotero PDF
-  - `wiki/entities/shiming-zhang.md`
-- **Pages updated**:
-  - `wiki/sources/zhang-2022-bone-conducted-speech-dissertation.md` — comprehensive rewrite merging source page + reading note with full equations, tables, and results
-  - `wiki/synthesis/multimodal-bc-speech-enhancement.md` — updated date
-  - `wiki/index.md` — merged 2 source entries into 1, added 1 entity, updated stats (54→53 sources, 57→58 entities)
-- **Pages deleted**:
-  - `wiki/sources/zhang-2022-bone-conducted-speech-reading-note.md` — content merged into source page
-
----
-
-## [2026-04-28] merge | Consolidate duplicate source files in wiki/sources
-
-- **Summary**: Merged 5 pairs of duplicate source files (source + reading note) into single comprehensive source pages, re-ingested PDFs from Zotero library for each
-- **Duplicate pairs merged**:
-  1. `chen-2016-generalized-correntropy-robust-adaptive-filtering.md` + `chen-2016-generalized-correntropy-paper-reading-note.md` → unified source with GGD correntropy, GMCC, zero-POD, Q&A
-  2. `shen-2023-advanced-anc.md` + `shen-2023-advanced-anc-reading-note.md` → unified source with AG, ASHANC, Wireless ANC, ESM, math derivations
-  3. `wang-2024-metric-learning-virtual-sensing.md` + `wang-2024-metric-learning-virtual-sensing-reading-note.md` → unified source with metric learning, 1D CNN, cosine similarity
-  4. `holzmueller-2026-obs-tasnet-virtual-sensing.md` + `holzmueller-2026-obs-tasnet-virtual-sensing-reading-note.md` → unified source with Conv-TasNet, temporal bottleneck, asynchronous estimation
-  5. `toyooka-2026-hybrid-anc-remote-sensing.md` + `toyooka-2026-hybrid-anc-virtual-sensing-paper-reading-note.md` → unified source with dual compensation filters, signal decomposition
-- **Pages created**:
-  - `raw/papers/chen-2016-generalized-correntropy/full-text.txt` — extracted from Zotero PDF (KJ2ILUFH)
-  - `raw/papers/shen-2023-advanced-anc/full-text.txt` — extracted from Zotero PDF (BB3AEY8Z)
-  - `raw/papers/wang-2024-metric-learning-virtual-sensing/full-text.txt` — extracted from Zotero PDF (6ABIUSW8)
-  - `raw/papers/holzmueller-2026-obs-tasnet-virtual-sensing/full-text.txt` — extracted from Zotero PDF (5D63H833)
-  - `raw/papers/toyooka-2026-hybrid-anc-virtual-sensing/full-text.txt` — extracted from Zotero PDF (ECHHX8YL)
-- **Pages updated**:
-  - `wiki/sources/chen-2016-generalized-correntropy-robust-adaptive-filtering.md` — merged with reading note, added motivation, system comparison, Q&A
-  - `wiki/sources/shen-2023-advanced-anc.md` — merged with reading note, added math derivations, performance tables, Q&A
-  - `wiki/sources/wang-2024-metric-learning-virtual-sensing.md` — merged with reading note, added AF-VS background, performance tables
-  - `wiki/sources/holzmueller-2026-obs-tasnet-virtual-sensing.md` — merged with reading note, added RMT background, ablation study
-  - `wiki/sources/toyooka-2026-hybrid-anc-remote-sensing.md` — merged with reading note, added NLMS equations, tuning stages
-  - `wiki/synthesis/virtual-sensing-evolution.md` — updated references to use merged source slugs
-  - `wiki/index.md` — removed 5 reading note entries, updated source summaries, stats (53→48 sources, 224→219 total)
-- **Pages deleted**:
-  - `wiki/sources/chen-2016-generalized-correntropy-paper-reading-note.md`
-  - `wiki/sources/shen-2023-advanced-anc-reading-note.md`
-  - `wiki/sources/wang-2024-metric-learning-virtual-sensing-reading-note.md`
-  - `wiki/sources/holzmueller-2026-obs-tasnet-virtual-sensing-reading-note.md`
-  - `wiki/sources/toyooka-2026-hybrid-anc-virtual-sensing-paper-reading-note.md`
-
----
-
 ## [2026-04-29] merge | Synthesis page consolidation (5 groups, 12→7 pages)
 
 - **Group A (Robust ANC)**: Merged `robust-anc-correntropy-to-gmcc.md` + `robust-anc-impulsive-non-stationary.md` → `impulsive-noise-control.md`
@@ -1041,179 +1066,6 @@
 
 ---
 
-## [2026-05-06] ingest | Dynamic Time Warping for Secondary Path Interpolation in Local ANC (Holzmüller & Sontacchi 2026)
-
-- **Source**: `raw/papers/holzmuller-2026-dtw-secondary-path-anc/full-text.md` (Zotero: ZV3BCM38)
-- **Authors**: Felix Holzmüller, Alois Sontacchi
-- **Published**: IEEE Open Journal of Signal Processing, 2026, pp. 1–10
-- **DOI**: 10.1109/OJSP.2026.3689448
-- **Summary**: DTW-based interpolation of secondary path filter coefficients for local ANC with moving listeners; achieves −17.65 dB system mismatch vs 2.49 dB for nearest-neighbor at 15 cm spacing, extending stable bandwidth to ~7.7 kHz
-- **Extraction**: MinerU (VLM backend) for PDF text, formulas, tables, and figures
-- **Pages created**:
-  - `raw/papers/holzmuller-2026-dtw-secondary-path-anc/full-text.md` — extracted text from Zotero PDF
-  - `wiki/sources/holzmuller-2026-dtw-secondary-path-anc.md` — source page
-  - `wiki/concepts/dynamic-time-warping.md` — new concept: Dynamic Time Warping
-  - `wiki/concepts/secondary-path-interpolation.md` — new concept: Secondary Path Interpolation
-- **Pages updated**:
-  - `wiki/entities/felix-holzmueller.md` — added DTW paper contribution, updated affiliation
-  - `wiki/entities/alois-sontacchi.md` — added DTW paper contribution, updated affiliation
-  - `wiki/concepts/secondary-path-modeling.md` — added secondary path interpolation section and cross-references
-  - `wiki/concepts/active-noise-control.md` — added moving listeners challenge and cross-references
-  - `wiki/concepts/filtered-x-lms-algorithm.md` — added MIMO stability criterion and cross-references
-  - `wiki/index.md` — added 2 concepts, 1 source; updated entity summaries
-
----
-
-## [2026-05-06] ingest | BCS-Guided Speech Enhancement for Voice Assistant on Earbuds (Heitkaemper et al. 2026)
-
-- **Source**: `raw/patents/us20260073929a1/full-text.md` (Zotero: Q833LYDX)
-- **Inventors**: Jens Heitkaemper, Joseph Peter Caroselli Jr., Max McKinnon, Arun Narayanan, Nathan David Howard
-- **Assignee**: Google LLC
-- **Published**: US Patent Application US20260073929A1, 2026-03-12
-- **URL**: https://patents.google.com/patent/US20260073929A1/en
-- **Summary**: Conformer-based fusion of upscaled BCS + air-conducted STFT for earbud speech enhancement; ratio mask estimation; VAD-gated ASR; mic-agnostic design
-- **Extraction**: WebFetch from Google Patents
-- **Pages created**:
-  - `raw/patents/us20260073929a1/full-text.md` — extracted patent text
-  - `wiki/sources/heitkaemper-2026-bcs-speech-enhancement-earbuds.md` — source page
-  - `wiki/entities/jens-heitkaemper.md` — entity: Jens Heitkaemper
-  - `wiki/entities/joseph-caroselli-jr.md` — entity: Joseph Peter Caroselli Jr.
-  - `wiki/entities/max-mckinnon.md` — entity: Max McKinnon
-  - `wiki/entities/arun-narayanan.md` — entity: Arun Narayanan
-  - `wiki/entities/nathan-howard.md` — entity: Nathan David Howard
-  - `wiki/concepts/bcs-guided-speech-enhancement.md` — new concept: BCS-Guided Speech Enhancement
-- **Pages updated**:
-  - `wiki/concepts/bone-conduction.md` — added BCS-guided speech enhancement section and cross-references
-  - `wiki/concepts/voice-activity-detection.md` — added BCS-gated speech enhancement application and cross-references
-  - `wiki/synthesis/multimodal-bc-speech-enhancement.md` — added Conformer-based fusion era section and cross-references
-  - `wiki/index.md` — added 5 entities, 1 concept, 1 source; updated synthesis summary
-  - `wiki/entities/index.md` — added 5 entity entries
-  - `wiki/concepts/index.md` — added 1 concept entry
-  - `wiki/sources/index.md` — added 1 source entry
-
----
-
-## [2026-05-13] lint | Index rebuild
-
-- **Index consistency rebuild**:
-  - **wiki/index.md**: Added 15 missing entities, 11 missing concepts, 3 missing sources; removed 1 duplicate entity (zhengding-luo); updated statistics (123→147 entities, 119→135 concepts, 62→67 sources, 18→22 synthesis, 324→377 total)
-  - **wiki/entities/index.md**: Added 15 missing entity entries; removed 1 duplicate (zhengding-luo); now 147 rows matching 147 files
-  - **wiki/concepts/index.md**: Added 11 missing concept entries; removed 2 duplicates (dynamic-time-warping, secondary-path-interpolation); now 135 rows matching 135 files
-  - **wiki/sources/index.md**: Added 3 missing source entries; now 67 rows matching 67 files
-- **Missing entries added**:
-  - **Entities**: ali-aroudi, anjali-menon, bastiaan-kleijn, buye-xu, calvin-murdock, diego-caviedes-nozal, ishwarya-ananthabhotla, lei-guo, liang-xu, longfei-yan, morteza-khaleghimeybodi, payal-mohapatra, rasmus-kongsgaard-olsson, xin-zheng, yifei-jin
-  - **Concepts**: acoustic-zones-of-interest, diffusion-models-for-speech, drifting-models, dynamic-time-warping, head-orientation-from-imu, inertial-measurement-unit, momentum-lms, one-step-generative-models, online-learning, secondary-path-interpolation, self-supervised-speech-representation
-  - **Sources**: jin-2026-momentum-lms-nonstationarity, mohapatra-2026-localizing-conversation-partners-head-motion, xu-2026-drifting-models-speech-enhancement
-- **Duplicates removed**: zhengding-luo (entities), dynamic-time-warping (concepts), secondary-path-interpolation (concepts)
-- **All indexes now fully synchronized with actual page counts**
-
----
-
-## [2026-05-13] ingest | Feedback ANC via Constrained Optimization for Headphones (Seo 2016)
-
-- **Source**: `raw/papers/seo-2016-feedback-anc-constrained-optimization/full-text.md` (Zotero: 926LI9YV)
-- **Authors**: Ji-ho Seo, Young-cheol Park, Dae Hee Youn
-- **Published**: 2016 IEEE ICCE-Asia, pp. 1–4
-- **DOI**: 10.1109/ICCE-Asia.2016.7804751
-- **Summary**: Low-order WFIR filter design via Q-parameterization + frequency warping; 16th order matches 128th FIR at <1kHz
-- **Pages created**:
-  - `raw/papers/seo-2016-feedback-anc-constrained-optimization/full-text.md` — extracted text from Zotero PDF via MinerU
-  - `wiki/sources/seo-2016-feedback-anc-constrained-optimization.md`
-  - `wiki/entities/ji-ho-seo.md`
-  - `wiki/entities/young-cheol-park.md`
-  - `wiki/entities/dae-hee-youn.md`
-  - `wiki/concepts/frequency-warping.md`
-  - `wiki/concepts/warped-fir-filter.md`
-  - `wiki/concepts/q-parameterization.md`
-  - `wiki/concepts/sensitivity-function.md`
-- **Pages updated**:
-  - `wiki/concepts/feedback-anc.md` — added Seo 2016 section, source reference
-  - `wiki/index.md` — added 3 entities, 4 concepts, 1 source; updated statistics (147→150 entities, 135→139 concepts, 67→68 sources, 377→385 total)
-  - `wiki/entities/index.md` — added 3 entity entries
-  - `wiki/concepts/index.md` — added 4 concept entries
-  - `wiki/sources/index.md` — added 1 source entry
-
----
-
-## [2026-05-13] lint | Health check
-
-- **Index consistency**:
-  - **wiki/index.md**: 133 entity rows (actual: 147, missing 14), 124 concept rows (actual: 135, missing 11), 64 source rows (actual: 67, missing 3)
-  - **wiki/entities/index.md**: 133 rows (actual: 147, missing 14)
-  - **wiki/concepts/index.md**: 126 rows (actual: 135, missing 9)
-  - **wiki/sources/index.md**: 64 rows (actual: 67, missing 3)
-  - **Statistics in wiki/index.md**: reports 123 entities, 119 concepts, 62 sources, 324 total — all stale (actual: 147 entities, 135 concepts, 67 sources, 18 synthesis, 6 queries = 373 total)
-- **Missing from wiki/index.md entities table** (14): ali-aroudi, anjali-menon, bastiaan-kleijn, buye-xu, calvin-murdock, christopher-durand, diego-caviedes-nozal, ishwarya-ananthabhotla, james-bucklew, jan-gerrit-richter, johannes-fabry, lei-guo, liang-xu, limin-zhang, longfei-yan, morteza-khaleghimeybodi, payal-mohapatra, qirui-huang, rajesh-sharma, rasmus-kongsgaard-olsson, stefan-liebich, william-sethares, xin-zheng, yifei-jin, yisong-zou
-- **Missing from wiki/index.md concepts table** (11): acoustic-zones-of-interest, diffusion-models-for-speech, drifting-models, dynamic-time-warping, head-orientation-from-imu, inertial-measurement-unit, momentum-lms, one-step-generative-models, online-learning, secondary-path-interpolation, self-supervised-speech-representation
-- **Missing from wiki/index.md sources table** (3): jin-2026-momentum-lms-nonstationarity, mohapatra-2026-localizing-conversation-partners-head-motion, xu-2026-drifting-models-speech-enhancement
-- **Broken wikilinks**: 1 (concepts/concept-name in llm-wiki-best-practices.md — template example, not a real broken link)
-- **Orphan pages**: 363 pages have no inbound wikilinks (expected for a wiki where most pages are linked only from index files)
-- **Contradictions**: None detected
-- **Stale claims**: None detected
-- **Action needed**: The index files (wiki/index.md, wiki/entities/index.md, wiki/concepts/index.md, wiki/sources/index.md) are significantly out of sync with actual page counts. A full index rebuild is recommended.
-
----
-
-## [2026-05-13] ingest | NDF+: joint neural directional filtering and diffuse sound extraction (Huang et al. 2026)
-
-- **Source**: `raw/papers/huang-2026-ndf-joint-neural-directional-filtering/full-text.md` (Zotero: BVBAGBIJ)
-- **Authors**: Weilong Huang, Le Nhat Tam Huynh, Oliver Thiergart, Emanuël A. P. Habets
-- **Published**: arXiv preprint arXiv:2605.06108v1, 2026-05-07
-- **URL**: https://arxiv.org/abs/2605.06108v1
-- **Summary**: NDF+ extends neural directional filtering to jointly perform dereverberated VDM reconstruction and diffuse sound extraction via a dual-mask architecture, enabling explicit control over diffuse components for applications like controllable stereo recording.
-- **Pages created**:
-  - `wiki/sources/huang-2026-ndf-joint-neural-directional-filtering.md` — source page with full methodology, results, and contributions
-  - `wiki/entities/weilong-huang.md` — entity: Weilong Huang (FAU)
-  - `wiki/entities/le-nhat-tam-huynh.md` — entity: Le Nhat Tam Huynh (FAU)
-  - `wiki/entities/oliver-thiergart.md` — entity: Oliver Thiergart (FAU)
-  - `wiki/concepts/neural-directional-filtering.md` — NDF concept: data-driven VDM reconstruction
-  - `wiki/concepts/virtual-directional-microphone.md` — VDM concept: synthesized directional microphone
-  - `wiki/concepts/diffuse-sound-extraction.md` — diffuse sound extraction concept
-  - `wiki/concepts/directivity-pattern.md` — directivity pattern concept
-  - `wiki/concepts/fixed-beamformer.md` — fixed beamformer concept
-  - `wiki/concepts/differential-microphone-array.md` — DMA concept
-  - `wiki/concepts/room-transfer-function.md` — RTF concept
-  - `wiki/concepts/room-impulse-response.md` — RIR concept
-  - `wiki/concepts/joint-nonlinear-filtering.md` — JNF/FT-JNF concept
-- **Pages updated**:
-  - `wiki/entities/emanuele-habets.md` — added NDF+ contribution and source reference
-  - `wiki/index.md` — added 3 entities, 9 concepts, 1 source; updated statistics (120→123 entities, 110→119 concepts, 61→62 sources, 314→324 total)
-  - `wiki/entities/index.md` — added 3 entity entries
-  - `wiki/concepts/index.md` — added 9 concept entries
-  - `wiki/sources/index.md` — added 1 source entry
-
----
-
-## [2026-05-12] ingest | Spatial-Magnifier: Spatial Upsampling for Multichannel Speech Enhancement (Lee et al. 2026)
-
-- **Source**: `raw/papers/lee-2026-spatial-magnifier-spatial-upsampling/full-text.md` (Zotero: KC7HJ7T3)
-- **Authors**: Dongheon Lee, Ashutosh Pandey, Sanjeel Parekh, Daniel Wong, Jacob Donley, Buye Xu, Juan Azcarreta
-- **Published**: arXiv preprint, 2026-05-06
-- **DOI**: 10.48550/arXiv.2605.04749
-- **Summary**: GAN-based Spatial-Magnifier network generates virtual microphone signals from limited real microphones; SARL framework conditions downstream MC-SE on VM signals/features; nearly recovers oracle 6ch performance from 2ch with ~10× fewer params than baselines
-- **Pages created**:
-  - `raw/papers/lee-2026-spatial-magnifier-spatial-upsampling/full-text.md` — extracted text from arXiv HTML via Defuddle
-  - `raw/papers/lee-2026-spatial-magnifier-spatial-upsampling/figures/fig1-spatial-magnifier.png` — generator architecture
-  - `raw/papers/lee-2026-spatial-magnifier-spatial-upsampling/figures/fig2-sarl-framework.png` — SARL framework
-  - `wiki/sources/lee-2026-spatial-magnifier-spatial-upsampling.md` — source page
-  - `wiki/entities/dongheon-lee.md` — first author (Meta Reality Labs / KAIST)
-  - `wiki/entities/ashutosh-pandey.md` — co-author (Meta Reality Labs)
-  - `wiki/entities/sanjeel-parekh.md` — co-author (Meta Reality Labs)
-  - `wiki/entities/daniel-wong.md` — co-author (Meta Reality Labs)
-  - `wiki/entities/jacob-donley.md` — co-author (Meta Reality Labs)
-  - `wiki/entities/juan-azcarreta.md` — co-author (Meta Reality Labs)
-  - `wiki/concepts/virtual-microphone-estimation.md` — Neural-VME concept
-  - `wiki/concepts/spatial-audio-representation-learning.md` — SARL concept
-- **Pages updated**:
-  - `wiki/entities/buye-xu.md` — added Spatial-Magnifier contribution
-  - `wiki/concepts/multi-channel-speech-enhancement.md` — added Neural-VME and SARL techniques, cross-references
-  - `wiki/concepts/spatial-covariance-matrix.md` — added VME cross-reference, source
-  - `wiki/concepts/mvdr-beamformer.md` — added source reference
-  - `wiki/index.md` — added 6 entities, 2 concepts, 1 source
-  - `wiki/synthesis/index.md` — updated multimodal BC summary
-
----
-
 ## [2026-04-30] ingest | Predictive Directional SFANC via CRNN (Wang et al. 2026)
 
 - **Source**: `raw/papers/wang-2026-predictive-dsfanc-crnn/full-text.md` (Zotero: I6FHS99P, arXiv: 2604.23144)
@@ -1239,16 +1091,6 @@
   - `wiki/synthesis/ai-driven-anc.md` — added PD-SFANC to SFANC section
   - `wiki/index.md` — added 2 entities, 3 concepts, 1 source; updated statistics
 
-
-
-## [2026-05-16] lint | Health check
-
-- **Index consistency**: Found 6 entities, 6 concepts, 2 sources missing from main index; 4 synthesis pages over-counted in statistics (had 22 indexed, 18 actual). All gaps fixed.
-- **Broken links**: None detected
-- **Orphan pages**: N/A (all pages linked from index)
-- **Statistics**: Updated from 398/156/144/70/22 to 408/162/150/72/18
-- **Actions taken**: Added 14 missing index rows (6 entities, 6 concepts, 2 sources); corrected synthesis count; updated statistics.
-
 ---
 
 ## [2026-04-30] ingest | Directional SFANC in Reverberant Environments (Wang 2026)
@@ -1271,6 +1113,8 @@ aw/papers/wang-2026-directional-sfanc-reverberant/full-text.md\ — extracted fr
   - \wiki/concepts/selective-fixed-filter-anc.md\ — added source reference
   - \wiki/index.md\ — added 3 entities, 1 source; updated statistics
 
+---
+
 ## [2026-05-01] ingest | Yin 2023: Selective Fixed-Filter ANC Based on Frequency Response Matching in Headphones
 
 - **Source**: `raw/papers/yin-2023-selective-fixed-filter-anc-headphones/full-text.md` (Zotero: 0_4MBBAJXH)
@@ -1292,8 +1136,6 @@ aw/papers/wang-2026-directional-sfanc-reverberant/full-text.md\ — extracted fr
   - `wiki/concepts/selective-fixed-filter-anc.md` — added FRM-SFANC variant, comparison table row, concept/source references
   - `wiki/synthesis/ai-driven-anc.md` — added FRM-SFANC non-neural selection, efficiency table row, source reference
   - `wiki/index.md` — added 7 entities, 1 concept, 1 source
-
----
 
 ## [2026-05-02] ingest (re) | Directional SFANC Based on CNN in Reverberant Environments (Wang 2026)
 
@@ -1327,8 +1169,6 @@ aw/papers/wang-2026-directional-sfanc-reverberant/full-text.md\ — extracted fr
   - `wiki/concepts/vandermonde-matrix.md` — Vandermonde matrix concept
 - **Pages updated**:
   - `wiki/index.md` — added 1 entity, 2 concepts, 1 source
-
----
 
 ## [2026-05-02] ingest (re) | Neural Network Augmented Kalman Filter for AHS (Zhang 2024)
 
@@ -1480,6 +1320,58 @@ aw/papers/wang-2026-directional-sfanc-reverberant/full-text.md\ — extracted fr
 
 ---
 
+## [2026-05-06] ingest | Dynamic Time Warping for Secondary Path Interpolation in Local ANC (Holzmüller & Sontacchi 2026)
+
+- **Source**: `raw/papers/holzmuller-2026-dtw-secondary-path-anc/full-text.md` (Zotero: ZV3BCM38)
+- **Authors**: Felix Holzmüller, Alois Sontacchi
+- **Published**: IEEE Open Journal of Signal Processing, 2026, pp. 1–10
+- **DOI**: 10.1109/OJSP.2026.3689448
+- **Summary**: DTW-based interpolation of secondary path filter coefficients for local ANC with moving listeners; achieves −17.65 dB system mismatch vs 2.49 dB for nearest-neighbor at 15 cm spacing, extending stable bandwidth to ~7.7 kHz
+- **Extraction**: MinerU (VLM backend) for PDF text, formulas, tables, and figures
+- **Pages created**:
+  - `raw/papers/holzmuller-2026-dtw-secondary-path-anc/full-text.md` — extracted text from Zotero PDF
+  - `wiki/sources/holzmuller-2026-dtw-secondary-path-anc.md` — source page
+  - `wiki/concepts/dynamic-time-warping.md` — new concept: Dynamic Time Warping
+  - `wiki/concepts/secondary-path-interpolation.md` — new concept: Secondary Path Interpolation
+- **Pages updated**:
+  - `wiki/entities/felix-holzmueller.md` — added DTW paper contribution, updated affiliation
+  - `wiki/entities/alois-sontacchi.md` — added DTW paper contribution, updated affiliation
+  - `wiki/concepts/secondary-path-modeling.md` — added secondary path interpolation section and cross-references
+  - `wiki/concepts/active-noise-control.md` — added moving listeners challenge and cross-references
+  - `wiki/concepts/filtered-x-lms-algorithm.md` — added MIMO stability criterion and cross-references
+  - `wiki/index.md` — added 2 concepts, 1 source; updated entity summaries
+
+---
+
+## [2026-05-06] ingest | BCS-Guided Speech Enhancement for Voice Assistant on Earbuds (Heitkaemper et al. 2026)
+
+- **Source**: `raw/patents/us20260073929a1/full-text.md` (Zotero: Q833LYDX)
+- **Inventors**: Jens Heitkaemper, Joseph Peter Caroselli Jr., Max McKinnon, Arun Narayanan, Nathan David Howard
+- **Assignee**: Google LLC
+- **Published**: US Patent Application US20260073929A1, 2026-03-12
+- **URL**: https://patents.google.com/patent/US20260073929A1/en
+- **Summary**: Conformer-based fusion of upscaled BCS + air-conducted STFT for earbud speech enhancement; ratio mask estimation; VAD-gated ASR; mic-agnostic design
+- **Extraction**: WebFetch from Google Patents
+- **Pages created**:
+  - `raw/patents/us20260073929a1/full-text.md` — extracted patent text
+  - `wiki/sources/heitkaemper-2026-bcs-speech-enhancement-earbuds.md` — source page
+  - `wiki/entities/jens-heitkaemper.md` — entity: Jens Heitkaemper
+  - `wiki/entities/joseph-caroselli-jr.md` — entity: Joseph Peter Caroselli Jr.
+  - `wiki/entities/max-mckinnon.md` — entity: Max McKinnon
+  - `wiki/entities/arun-narayanan.md` — entity: Arun Narayanan
+  - `wiki/entities/nathan-howard.md` — entity: Nathan David Howard
+  - `wiki/concepts/bcs-guided-speech-enhancement.md` — new concept: BCS-Guided Speech Enhancement
+- **Pages updated**:
+  - `wiki/concepts/bone-conduction.md` — added BCS-guided speech enhancement section and cross-references
+  - `wiki/concepts/voice-activity-detection.md` — added BCS-gated speech enhancement application and cross-references
+  - `wiki/synthesis/multimodal-bc-speech-enhancement.md` — added Conformer-based fusion era section and cross-references
+  - `wiki/index.md` — added 5 entities, 1 concept, 1 source; updated synthesis summary
+  - `wiki/entities/index.md` — added 5 entity entries
+  - `wiki/concepts/index.md` — added 1 concept entry
+  - `wiki/sources/index.md` — added 1 source entry
+
+---
+
 ## [2026-05-07] ingest | Adaptive Diagonal Loading for Norm Constrained Beamforming (Mittal et al. 2026)
 
 - **Source**: `raw/papers/mittal-2026-adaptive-diagonal-loading-beamforming/full-text.md` (Zotero: KQQNX9WS)
@@ -1508,6 +1400,127 @@ aw/papers/wang-2026-directional-sfanc-reverberant/full-text.md\ — extracted fr
   - `wiki/index.md` — added 4 entities, 7 concepts, 1 source; updated statistics
   - `wiki/entities/index.md` — added 4 entity entries
   - `wiki/concepts/index.md` — added 7 concept entries
+  - `wiki/sources/index.md` — added 1 source entry
+
+---
+
+## [2026-05-12] ingest | Spatial-Magnifier: Spatial Upsampling for Multichannel Speech Enhancement (Lee et al. 2026)
+
+- **Source**: `raw/papers/lee-2026-spatial-magnifier-spatial-upsampling/full-text.md` (Zotero: KC7HJ7T3)
+- **Authors**: Dongheon Lee, Ashutosh Pandey, Sanjeel Parekh, Daniel Wong, Jacob Donley, Buye Xu, Juan Azcarreta
+- **Published**: arXiv preprint, 2026-05-06
+- **DOI**: 10.48550/arXiv.2605.04749
+- **Summary**: GAN-based Spatial-Magnifier network generates virtual microphone signals from limited real microphones; SARL framework conditions downstream MC-SE on VM signals/features; nearly recovers oracle 6ch performance from 2ch with ~10× fewer params than baselines
+- **Pages created**:
+  - `raw/papers/lee-2026-spatial-magnifier-spatial-upsampling/full-text.md` — extracted text from arXiv HTML via Defuddle
+  - `raw/papers/lee-2026-spatial-magnifier-spatial-upsampling/figures/fig1-spatial-magnifier.png` — generator architecture
+  - `raw/papers/lee-2026-spatial-magnifier-spatial-upsampling/figures/fig2-sarl-framework.png` — SARL framework
+  - `wiki/sources/lee-2026-spatial-magnifier-spatial-upsampling.md` — source page
+  - `wiki/entities/dongheon-lee.md` — first author (Meta Reality Labs / KAIST)
+  - `wiki/entities/ashutosh-pandey.md` — co-author (Meta Reality Labs)
+  - `wiki/entities/sanjeel-parekh.md` — co-author (Meta Reality Labs)
+  - `wiki/entities/daniel-wong.md` — co-author (Meta Reality Labs)
+  - `wiki/entities/jacob-donley.md` — co-author (Meta Reality Labs)
+  - `wiki/entities/juan-azcarreta.md` — co-author (Meta Reality Labs)
+  - `wiki/concepts/virtual-microphone-estimation.md` — Neural-VME concept
+  - `wiki/concepts/spatial-audio-representation-learning.md` — SARL concept
+- **Pages updated**:
+  - `wiki/entities/buye-xu.md` — added Spatial-Magnifier contribution
+  - `wiki/concepts/multi-channel-speech-enhancement.md` — added Neural-VME and SARL techniques, cross-references
+  - `wiki/concepts/spatial-covariance-matrix.md` — added VME cross-reference, source
+  - `wiki/concepts/mvdr-beamformer.md` — added source reference
+  - `wiki/index.md` — added 6 entities, 2 concepts, 1 source
+  - `wiki/synthesis/index.md` — updated multimodal BC summary
+
+---
+
+## [2026-05-13] lint | Index rebuild
+
+- **Index consistency rebuild**:
+  - **wiki/index.md**: Added 15 missing entities, 11 missing concepts, 3 missing sources; removed 1 duplicate entity (zhengding-luo); updated statistics (123→147 entities, 119→135 concepts, 62→67 sources, 18→22 synthesis, 324→377 total)
+  - **wiki/entities/index.md**: Added 15 missing entity entries; removed 1 duplicate (zhengding-luo); now 147 rows matching 147 files
+  - **wiki/concepts/index.md**: Added 11 missing concept entries; removed 2 duplicates (dynamic-time-warping, secondary-path-interpolation); now 135 rows matching 135 files
+  - **wiki/sources/index.md**: Added 3 missing source entries; now 67 rows matching 67 files
+- **Missing entries added**:
+  - **Entities**: ali-aroudi, anjali-menon, bastiaan-kleijn, buye-xu, calvin-murdock, diego-caviedes-nozal, ishwarya-ananthabhotla, lei-guo, liang-xu, longfei-yan, morteza-khaleghimeybodi, payal-mohapatra, rasmus-kongsgaard-olsson, xin-zheng, yifei-jin
+  - **Concepts**: acoustic-zones-of-interest, diffusion-models-for-speech, drifting-models, dynamic-time-warping, head-orientation-from-imu, inertial-measurement-unit, momentum-lms, one-step-generative-models, online-learning, secondary-path-interpolation, self-supervised-speech-representation
+  - **Sources**: jin-2026-momentum-lms-nonstationarity, mohapatra-2026-localizing-conversation-partners-head-motion, xu-2026-drifting-models-speech-enhancement
+- **Duplicates removed**: zhengding-luo (entities), dynamic-time-warping (concepts), secondary-path-interpolation (concepts)
+- **All indexes now fully synchronized with actual page counts**
+
+---
+
+## [2026-05-13] ingest | Feedback ANC via Constrained Optimization for Headphones (Seo 2016)
+
+- **Source**: `raw/papers/seo-2016-feedback-anc-constrained-optimization/full-text.md` (Zotero: 926LI9YV)
+- **Authors**: Ji-ho Seo, Young-cheol Park, Dae Hee Youn
+- **Published**: 2016 IEEE ICCE-Asia, pp. 1–4
+- **DOI**: 10.1109/ICCE-Asia.2016.7804751
+- **Summary**: Low-order WFIR filter design via Q-parameterization + frequency warping; 16th order matches 128th FIR at <1kHz
+- **Pages created**:
+  - `raw/papers/seo-2016-feedback-anc-constrained-optimization/full-text.md` — extracted text from Zotero PDF via MinerU
+  - `wiki/sources/seo-2016-feedback-anc-constrained-optimization.md`
+  - `wiki/entities/ji-ho-seo.md`
+  - `wiki/entities/young-cheol-park.md`
+  - `wiki/entities/dae-hee-youn.md`
+  - `wiki/concepts/frequency-warping.md`
+  - `wiki/concepts/warped-fir-filter.md`
+  - `wiki/concepts/q-parameterization.md`
+  - `wiki/concepts/sensitivity-function.md`
+- **Pages updated**:
+  - `wiki/concepts/feedback-anc.md` — added Seo 2016 section, source reference
+  - `wiki/index.md` — added 3 entities, 4 concepts, 1 source; updated statistics (147→150 entities, 135→139 concepts, 67→68 sources, 377→385 total)
+  - `wiki/entities/index.md` — added 3 entity entries
+  - `wiki/concepts/index.md` — added 4 concept entries
+  - `wiki/sources/index.md` — added 1 source entry
+
+---
+
+## [2026-05-13] lint | Health check
+
+- **Index consistency**:
+  - **wiki/index.md**: 133 entity rows (actual: 147, missing 14), 124 concept rows (actual: 135, missing 11), 64 source rows (actual: 67, missing 3)
+  - **wiki/entities/index.md**: 133 rows (actual: 147, missing 14)
+  - **wiki/concepts/index.md**: 126 rows (actual: 135, missing 9)
+  - **wiki/sources/index.md**: 64 rows (actual: 67, missing 3)
+  - **Statistics in wiki/index.md**: reports 123 entities, 119 concepts, 62 sources, 324 total — all stale (actual: 147 entities, 135 concepts, 67 sources, 18 synthesis, 6 queries = 373 total)
+- **Missing from wiki/index.md entities table** (14): ali-aroudi, anjali-menon, bastiaan-kleijn, buye-xu, calvin-murdock, christopher-durand, diego-caviedes-nozal, ishwarya-ananthabhotla, james-bucklew, jan-gerrit-richter, johannes-fabry, lei-guo, liang-xu, limin-zhang, longfei-yan, morteza-khaleghimeybodi, payal-mohapatra, qirui-huang, rajesh-sharma, rasmus-kongsgaard-olsson, stefan-liebich, william-sethares, xin-zheng, yifei-jin, yisong-zou
+- **Missing from wiki/index.md concepts table** (11): acoustic-zones-of-interest, diffusion-models-for-speech, drifting-models, dynamic-time-warping, head-orientation-from-imu, inertial-measurement-unit, momentum-lms, one-step-generative-models, online-learning, secondary-path-interpolation, self-supervised-speech-representation
+- **Missing from wiki/index.md sources table** (3): jin-2026-momentum-lms-nonstationarity, mohapatra-2026-localizing-conversation-partners-head-motion, xu-2026-drifting-models-speech-enhancement
+- **Broken wikilinks**: 1 (concepts/concept-name in llm-wiki-best-practices.md — template example, not a real broken link)
+- **Orphan pages**: 363 pages have no inbound wikilinks (expected for a wiki where most pages are linked only from index files)
+- **Contradictions**: None detected
+- **Stale claims**: None detected
+- **Action needed**: The index files (wiki/index.md, wiki/entities/index.md, wiki/concepts/index.md, wiki/sources/index.md) are significantly out of sync with actual page counts. A full index rebuild is recommended.
+
+---
+
+## [2026-05-13] ingest | NDF+: joint neural directional filtering and diffuse sound extraction (Huang et al. 2026)
+
+- **Source**: `raw/papers/huang-2026-ndf-joint-neural-directional-filtering/full-text.md` (Zotero: BVBAGBIJ)
+- **Authors**: Weilong Huang, Le Nhat Tam Huynh, Oliver Thiergart, Emanuël A. P. Habets
+- **Published**: arXiv preprint arXiv:2605.06108v1, 2026-05-07
+- **URL**: https://arxiv.org/abs/2605.06108v1
+- **Summary**: NDF+ extends neural directional filtering to jointly perform dereverberated VDM reconstruction and diffuse sound extraction via a dual-mask architecture, enabling explicit control over diffuse components for applications like controllable stereo recording.
+- **Pages created**:
+  - `wiki/sources/huang-2026-ndf-joint-neural-directional-filtering.md` — source page with full methodology, results, and contributions
+  - `wiki/entities/weilong-huang.md` — entity: Weilong Huang (FAU)
+  - `wiki/entities/le-nhat-tam-huynh.md` — entity: Le Nhat Tam Huynh (FAU)
+  - `wiki/entities/oliver-thiergart.md` — entity: Oliver Thiergart (FAU)
+  - `wiki/concepts/neural-directional-filtering.md` — NDF concept: data-driven VDM reconstruction
+  - `wiki/concepts/virtual-directional-microphone.md` — VDM concept: synthesized directional microphone
+  - `wiki/concepts/diffuse-sound-extraction.md` — diffuse sound extraction concept
+  - `wiki/concepts/directivity-pattern.md` — directivity pattern concept
+  - `wiki/concepts/fixed-beamformer.md` — fixed beamformer concept
+  - `wiki/concepts/differential-microphone-array.md` — DMA concept
+  - `wiki/concepts/room-transfer-function.md` — RTF concept
+  - `wiki/concepts/room-impulse-response.md` — RIR concept
+  - `wiki/concepts/joint-nonlinear-filtering.md` — JNF/FT-JNF concept
+- **Pages updated**:
+  - `wiki/entities/emanuele-habets.md` — added NDF+ contribution and source reference
+  - `wiki/index.md` — added 3 entities, 9 concepts, 1 source; updated statistics (120→123 entities, 110→119 concepts, 61→62 sources, 314→324 total)
+  - `wiki/entities/index.md` — added 3 entity entries
+  - `wiki/concepts/index.md` — added 9 concept entries
   - `wiki/sources/index.md` — added 1 source entry
 
 ---
@@ -1561,8 +1574,17 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/concepts/deep-learning-for-signal-processing.md` — added DeepPEM-AFC application
   - `wiki/index.md` — added 4 entities, 4 concepts, 1 source
 
+---
 
+## [2026-05-16] lint | Health check
 
+- **Index consistency**: Found 6 entities, 6 concepts, 2 sources missing from main index; 4 synthesis pages over-counted in statistics (had 22 indexed, 18 actual). All gaps fixed.
+- **Broken links**: None detected
+- **Orphan pages**: N/A (all pages linked from index)
+- **Statistics**: Updated from 398/156/144/70/22 to 408/162/150/72/18
+- **Actions taken**: Added 14 missing index rows (6 entities, 6 concepts, 2 sources); corrected synthesis count; updated statistics.
+
+---
 
 ## [2026-05-16] ingest | He et al. (2025) VibOmni
 
@@ -1588,7 +1610,7 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/synthesis/multimodal-bc-speech-enhancement.md` — added Lightweight Multi-Modal Fusion era, VibOmni details
   - `wiki/index.md` — added 4 entities, 2 concepts, 1 source; updated statistics
 
-
+---
 
 ## [2026-05-16] ingest | Kuang, Yang & Yang (2024) Lightweight SE Fusing BC/AC
 
@@ -1643,26 +1665,6 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
 
 ---
 
-## [2026-05-17] ingest | SEANet (Tagliasacchi, Li, Misiunas & Roblek 2020)
-
-- **Source**: `raw/papers/tagliasacchi-2020-seanet/full-text.md` (Zotero: BW784N4C)
-- **Authors**: Marco Tagliasacchi, Yunpeng Li, Karolis Misiunas, Dominik Roblek
-- **Published**: INTERSPEECH 2020
-- **Summary**: First multi-modal speech enhancement using accelerometer data from earbud bone-conductance sensors; wave-to-wave UNet with MelGAN adversarial + feature losses; 9.6 dB SI-SDRi in overlapping-speaker scenarios
-- **Pages created**:
-  - `raw/papers/tagliasacchi-2020-seanet/full-text.md` — MinerU extraction from Zotero PDF
-  - `wiki/sources/tagliasacchi-2020-seanet.md`
-  - `wiki/entities/marco-tagliasacchi.md`
-  - `wiki/entities/yunpeng-li.md`
-  - `wiki/entities/karolis-misiunas.md`
-  - `wiki/entities/dominik-roblek.md`
-- **Pages updated**:
-  - `wiki/concepts/bcs-guided-speech-enhancement.md` — added SEANet entry to comparison table; added to sources and Related Sources
-  - `wiki/synthesis/multimodal-bc-speech-enhancement.md` — new `2.1 Foundational Era` subsection with SEANet; renumbered sections 2.2–2.6; added to sources and Related Sources
-  - `wiki/index.md` — added 4 entities, 1 source; updated statistics
-
----
-
 ## [2026-05-16] ingest | Fusing Bone-Conduction and Air-Conduction Sensors for Complex-Domain Speech Enhancement (Wang, Zhang & Wang 2022)
 
 - **Source**: `raw/papers/wang-2022-fusing-bc-ac-complex-domain-se/full-text.md` (Zotero: K592VRRE)
@@ -1682,6 +1684,26 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/concepts/bone-conduction.md` — added source, complex-spectral-mapping concept link
   - `wiki/synthesis/multimodal-bc-speech-enhancement.md` — expanded §2.2 with Wang 2022 details, updated benchmarks table, added to Related Sources/Concepts
   - `wiki/index.md` — added 3 entities, 1 concept, 1 source; updated statistics
+
+---
+
+## [2026-05-17] ingest | SEANet (Tagliasacchi, Li, Misiunas & Roblek 2020)
+
+- **Source**: `raw/papers/tagliasacchi-2020-seanet/full-text.md` (Zotero: BW784N4C)
+- **Authors**: Marco Tagliasacchi, Yunpeng Li, Karolis Misiunas, Dominik Roblek
+- **Published**: INTERSPEECH 2020
+- **Summary**: First multi-modal speech enhancement using accelerometer data from earbud bone-conductance sensors; wave-to-wave UNet with MelGAN adversarial + feature losses; 9.6 dB SI-SDRi in overlapping-speaker scenarios
+- **Pages created**:
+  - `raw/papers/tagliasacchi-2020-seanet/full-text.md` — MinerU extraction from Zotero PDF
+  - `wiki/sources/tagliasacchi-2020-seanet.md`
+  - `wiki/entities/marco-tagliasacchi.md`
+  - `wiki/entities/yunpeng-li.md`
+  - `wiki/entities/karolis-misiunas.md`
+  - `wiki/entities/dominik-roblek.md`
+- **Pages updated**:
+  - `wiki/concepts/bcs-guided-speech-enhancement.md` — added SEANet entry to comparison table; added to sources and Related Sources
+  - `wiki/synthesis/multimodal-bc-speech-enhancement.md` — new `2.1 Foundational Era` subsection with SEANet; renumbered sections 2.2–2.6; added to sources and Related Sources
+  - `wiki/index.md` — added 4 entities, 1 source; updated statistics
 
 ---
 
@@ -1824,6 +1846,36 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
 
 ---
 
+## [2026-05-20] ingest | Directional Source Separation for Robust Speech Recognition on Smart Glasses (Feng et al. 2025)
+
+- **Source**: `raw/papers/feng-2025-directional-source-separation-smart-glasses/full-text.md` (Zotero: 3DZ5NNH3, arXiv: 2309.10993)
+- **Authors**: Tiantian Feng, Ju Lin, Yiteng Huang, Weipeng He, Kaustubh Kalgaonkar, Niko Moritz, Li Wan, Xin Lei, Ming Sun, Frank Seide
+- **Published**: ICASSP 2025
+- **DOI**: 10.1109/ICASSP49660.2025.10888256
+- **Summary**: Directional source separation combining NLCMV/neural beamforming with separation network on Project Aria; neural BF +2.27 dB SI-SDR; joint training achieves 13.25% WER
+- **Pages created**:
+  - `raw/papers/feng-2025-directional-source-separation-smart-glasses/full-text.md` �� Defuddle extraction from arXiv HTML
+  - `raw/papers/feng-2025-directional-source-separation-smart-glasses/figures/` �� 7 downloaded figures
+  - `wiki/sources/feng-2025-directional-source-separation-smart-glasses.md`
+  - `wiki/concepts/neural-beamforming.md`
+  - `wiki/entities/tiantian-feng.md`
+  - `wiki/entities/weipeng-he.md`
+  - `wiki/entities/kaustubh-kalgaonkar.md`
+  - `wiki/entities/li-wan.md`
+  - `wiki/entities/xin-lei.md`
+- **Pages updated**:
+  - `wiki/entities/ju-lin.md` �� added this paper
+  - `wiki/entities/yiteng-huang.md` �� added this paper
+  - `wiki/entities/niko-moritz.md` �� added this paper
+  - `wiki/entities/frank-seide.md` �� added this paper
+  - `wiki/entities/ming-sun.md` �� added this paper
+  - `wiki/index.md` �� added 5 entities, 1 concept, 1 source; updated statistics
+  - `wiki/sources/index.md` �� added 1 source row
+  - `wiki/entities/index.md` �� added 5 entity rows
+  - `wiki/concepts/index.md` �� added 1 concept row
+
+---
+
 ## [2026-05-21] ingest | Broadcasted Residual Learning for Efficient Keyword Spotting (Kim et al. 2021)
 
 - **Source**: `raw/papers/kim-2021-broadcasted-residual-learning/full-text.md` (Zotero: EFJM3USE, arXiv: 2106.04140)
@@ -1849,33 +1901,7 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/entities/index.md` — added 4 entity rows
   - `wiki/concepts/index.md` — added 3 concept rows
 
-## [2026-06-10] ingest | Deep Feedback Cancellation in Hearing Aids (Lydaki et al. 2026)
-
-- **Source**: `raw/papers/lydaki-2026-deep-feedback-cancellation-hearing-aids/full-text.md` (Zotero: QQE7D6DX)
-- **Authors**: Eleftheria Lydaki, Zheng-Hua Tan, Jesper Jensen, Meng Guo
-- **Published**: IEEE Trans. Audio, Speech, Lang. Process., 2026, pp. 1-15
-- **DOI**: 10.1109/TASLPRO.2026.3700049
-- **Summary**: DFC — compact DNN (856K params) for direct feedback-path IR estimation in hearing aids. NESD loss with temporal smoothing (average pooling N=50, exponential smoothing α=0.5) resolves convergence/steady-state trade-off. Two-stage training (synthetic → measured IRs). Outperforms FD-AFC and DeepMFC on speech (PESQ 4.54 vs 4.34/4.35) and music (PEAQ -0.53 vs -2.31/-0.92). MUSHRA 86.13 vs 57.48/37.45. 30x faster convergence after path changes.
-- **Pages created**:
-  - `raw/papers/lydaki-2026-deep-feedback-cancellation-hearing-aids/full-text.md` — MinerU VLM extraction
-  - `wiki/sources/lydaki-2026-deep-feedback-cancellation-hearing-aids.md` — source page
-  - `wiki/entities/eleftheria-lydaki.md` — DFC lead author
-  - `wiki/entities/zheng-hua-tan.md` — co-author
-  - `wiki/entities/meng-guo.md` — co-author
-  - `wiki/concepts/deep-feedback-cancellation.md` — DFC concept
-  - `wiki/concepts/normalized-euclidean-system-distance.md` — NESD metric/loss
-- **Pages updated**:
-  - `wiki/entities/jesper-jensen.md` — added DFC contribution
-  - `wiki/concepts/hearing-aid-feedback-cancellation.md` — added DFC to deep learning approaches
-  - `wiki/concepts/maximum-stable-gain.md` — added DFC source
-  - `wiki/concepts/prediction-error-method.md` — added DFC source
-  - `wiki/concepts/frequency-shift-feedback-cancellation.md` — added DFC source
-  - `wiki/index.md` — added 3 entities, 2 concepts, 1 source; updated statistics
-  - `wiki/entities/index.md` — added 3 entity rows
-  - `wiki/concepts/index.md` — added 2 concept rows
-  - `wiki/sources/index.md` — added 1 source row
-
-
+---
 
 ## [2026-05-21] lint | Health check (post-skill-fix)
 
@@ -1936,7 +1962,6 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/entities/index.md` — added 2 entity rows
   - `wiki/concepts/index.md` — added 5 concept rows
 
-
 ---
 
 ## [2026-05-23] ingest | Xiao, Roden, Blau & Doclo (2026) Robust Soft-Constrained SSANC for Hearables
@@ -1993,6 +2018,7 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/sources/index.md` - added 1 source row
   - `wiki/entities/index.md` - added 5 entity rows
   - `wiki/concepts/index.md` - added 2 concept rows
+
 ---
 
 ## [2026-05-24] ingest | GTCRN: A Speech Enhancement Model Requiring Ultralow Computational Resources (Rong et al. 2024)
@@ -2020,6 +2046,7 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 6 entity rows
   - `wiki/concepts/index.md` — added 1 concept row
+
 ---
 
 ## [2026-05-24] lint | Health check
@@ -2029,6 +2056,7 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
 - **Orphan pages**: 0
 - **Statistics**: Updated from 512/207/194/86 to 520/212/196/87 to match actual
 - **Actions taken**: Added 4 entity rows to main index, updated statistics section
+
 ---
 
 ## [2026-05-24] ingest | AGADIR: Towards Array-Geometry Agnostic Directional Speech Recognition (Lin et al. 2024)
@@ -2057,34 +2085,6 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/concepts/index.md` — added 1 concept row
 
 ---
-
-## [2026-05-20] ingest | Directional Source Separation for Robust Speech Recognition on Smart Glasses (Feng et al. 2025)
-
-- **Source**: `raw/papers/feng-2025-directional-source-separation-smart-glasses/full-text.md` (Zotero: 3DZ5NNH3, arXiv: 2309.10993)
-- **Authors**: Tiantian Feng, Ju Lin, Yiteng Huang, Weipeng He, Kaustubh Kalgaonkar, Niko Moritz, Li Wan, Xin Lei, Ming Sun, Frank Seide
-- **Published**: ICASSP 2025
-- **DOI**: 10.1109/ICASSP49660.2025.10888256
-- **Summary**: Directional source separation combining NLCMV/neural beamforming with separation network on Project Aria; neural BF +2.27 dB SI-SDR; joint training achieves 13.25% WER
-- **Pages created**:
-  - `raw/papers/feng-2025-directional-source-separation-smart-glasses/full-text.md` �� Defuddle extraction from arXiv HTML
-  - `raw/papers/feng-2025-directional-source-separation-smart-glasses/figures/` �� 7 downloaded figures
-  - `wiki/sources/feng-2025-directional-source-separation-smart-glasses.md`
-  - `wiki/concepts/neural-beamforming.md`
-  - `wiki/entities/tiantian-feng.md`
-  - `wiki/entities/weipeng-he.md`
-  - `wiki/entities/kaustubh-kalgaonkar.md`
-  - `wiki/entities/li-wan.md`
-  - `wiki/entities/xin-lei.md`
-- **Pages updated**:
-  - `wiki/entities/ju-lin.md` �� added this paper
-  - `wiki/entities/yiteng-huang.md` �� added this paper
-  - `wiki/entities/niko-moritz.md` �� added this paper
-  - `wiki/entities/frank-seide.md` �� added this paper
-  - `wiki/entities/ming-sun.md` �� added this paper
-  - `wiki/index.md` �� added 5 entities, 1 concept, 1 source; updated statistics
-  - `wiki/sources/index.md` �� added 1 source row
-  - `wiki/entities/index.md` �� added 5 entity rows
-  - `wiki/concepts/index.md` �� added 1 concept row
 
 ## [2026-05-25] ingest | A Convolutional Recurrent Neural Network for Real-Time Speech Enhancement (Tan & Wang 2018)
 
@@ -2135,10 +2135,6 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/entities/index.md` — added 4 entity rows
   - `wiki/concepts/index.md` — added 2 concept rows
 
-
-
----
-
 ## [2026-05-26] ingest (re) | A Review of Virtual Sensing Algorithms for Active Noise Control (Moreau, Cazzolato, Zander & Petersen 2008)
 
 - **Source**: `raw/papers/moreau-2008-virtual-sensing-review/full-text.md` (Zotero: LJDPCZ9G)
@@ -2150,8 +2146,6 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `raw/papers/moreau-2008-virtual-sensing-review/full-text.md` — replaced .txt with MinerU markdown
   - `raw/papers/moreau-2008-virtual-sensing-review/figures/` — 93 new figures from MinerU
   - `wiki/sources/a-review-of-virtual-sensing-algorithms-for-active-.md` — updated sources and dates
-
----
 
 ## [2026-05-26] ingest (re) | Noise Power Spectral Density Estimation Based on Optimal Smoothing and Minimum Statistics (Martin 2001)
 
@@ -2246,7 +2240,6 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - `wiki/entities/index.md` — added 2 entity rows
   - `wiki/concepts/index.md` — added 1 concept row
 
-
 ---
 
 ## [2026-05-27] lint | Health check
@@ -2259,22 +2252,6 @@ aw/papers/zhang-2023-hybrid-ahs/full-text.txt — extracted via pdftotext from Z
   - Added missing source entry for zaidel-2026 to main index
   - Added missing synthesis entries for iir-filter-fitting-frequency-response and multi-modal-speech-enhancement
   - Removed 4 duplicate synthesis rows (impulsive-noise-control, computational-efficiency-evolution, feedback-anc-filter-design, iir-filter-fitting)
-  - Added multi-modal-speech-enhancement to synthesis subdirectory index
-  - Updated Total pages statistic from 553 to 562
-
-
----
-
-## [2026-05-27] lint | Health check
-
-- **Index consistency**: All 5 categories match (entities: 237, concepts: 205, sources: 95, synthesis: 19, queries: 6). No duplicates remain.
-- **Broken links**: 0 build-blocking broken wikilinks. Pre-existing ../-prefixed links are convention violations (not build failures).
-- **Orphan pages**: 0 concept orphans, 5 source orphans, 20 entity orphans (expected — mostly linked from indexes).
-- **Statistics**: Total pages corrected from 553 to 562.
-- **Actions taken**:
-  - Added missing source entry for zaidel-2026 to main index
-  - Added missing synthesis entries for iir-filter-fitting-frequency-response and multi-modal-speech-enhancement
-  - Removed 4 duplicate synthesis rows
   - Added multi-modal-speech-enhancement to synthesis subdirectory index
   - Updated Total pages statistic from 553 to 562
 
@@ -2432,6 +2409,34 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 
 ---
 
+## [2026-06-10] ingest | Deep Feedback Cancellation in Hearing Aids (Lydaki et al. 2026)
+
+- **Source**: `raw/papers/lydaki-2026-deep-feedback-cancellation-hearing-aids/full-text.md` (Zotero: QQE7D6DX)
+- **Authors**: Eleftheria Lydaki, Zheng-Hua Tan, Jesper Jensen, Meng Guo
+- **Published**: IEEE Trans. Audio, Speech, Lang. Process., 2026, pp. 1-15
+- **DOI**: 10.1109/TASLPRO.2026.3700049
+- **Summary**: DFC — compact DNN (856K params) for direct feedback-path IR estimation in hearing aids. NESD loss with temporal smoothing (average pooling N=50, exponential smoothing α=0.5) resolves convergence/steady-state trade-off. Two-stage training (synthetic → measured IRs). Outperforms FD-AFC and DeepMFC on speech (PESQ 4.54 vs 4.34/4.35) and music (PEAQ -0.53 vs -2.31/-0.92). MUSHRA 86.13 vs 57.48/37.45. 30x faster convergence after path changes.
+- **Pages created**:
+  - `raw/papers/lydaki-2026-deep-feedback-cancellation-hearing-aids/full-text.md` — MinerU VLM extraction
+  - `wiki/sources/lydaki-2026-deep-feedback-cancellation-hearing-aids.md` — source page
+  - `wiki/entities/eleftheria-lydaki.md` — DFC lead author
+  - `wiki/entities/zheng-hua-tan.md` — co-author
+  - `wiki/entities/meng-guo.md` — co-author
+  - `wiki/concepts/deep-feedback-cancellation.md` — DFC concept
+  - `wiki/concepts/normalized-euclidean-system-distance.md` — NESD metric/loss
+- **Pages updated**:
+  - `wiki/entities/jesper-jensen.md` — added DFC contribution
+  - `wiki/concepts/hearing-aid-feedback-cancellation.md` — added DFC to deep learning approaches
+  - `wiki/concepts/maximum-stable-gain.md` — added DFC source
+  - `wiki/concepts/prediction-error-method.md` — added DFC source
+  - `wiki/concepts/frequency-shift-feedback-cancellation.md` — added DFC source
+  - `wiki/index.md` — added 3 entities, 2 concepts, 1 source; updated statistics
+  - `wiki/entities/index.md` — added 3 entity rows
+  - `wiki/concepts/index.md` — added 2 concept rows
+  - `wiki/sources/index.md` — added 1 source row
+
+---
+
 ## [2026-06-18] ingest | HALO: Half-frame-rate Adaptive Learnable Operator (Zhao et al. 2026)
 
 - **Source**: `raw/papers/zhao-2026-halo-half-frame-rate-adaptive-operator/full-text.md` (Zotero: WQLLU8C4)
@@ -2467,16 +2472,17 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 
 ## [2026-06-19] lint | Health check
 
-- **Index consistency**: All category files and index rows match perfectly: 258 entities, 224 concepts, 102 sources, 19 synthesis, 7 queries = 610 total. No missing entries, phantom entries, or duplicate rows in either main index (`wiki/index.md`) or subdirectory indexes. Statistics section accurate.
+- **Index consistency**: All category files and index rows match perfectly: 266 entities, 234 concepts, 103 sources, 19 synthesis, 7 queries = 629 total. No missing entries, phantom entries, or duplicate rows in either main index (`wiki/index.md`) or subdirectory indexes. Statistics section accurate.
 - **Broken links**:
-  - 171 wikilinks missing category prefix; all resolve to existing wiki pages when the correct category is prepended (e.g., `[[beamforming]]` → `[[concepts/beamforming]]`). Most prevalent in concept and synthesis pages that link to other concepts/entities/sources without the directory prefix.
-  - 29 wikilinks incorrectly use `wiki/` prefix (e.g., `[[wiki/concepts/beamforming]]` instead of `[[concepts/beamforming]]`). Found in concept pages and some source pages.
-  - 88 convention violations using `../` relative prefixes (e.g., `[[../concepts/foo]]`). These resolve correctly in MkDocs but violate the vault-absolute convention from `schema/AGENTS.md`.
+  - 171 wikilinks missing category prefix; all resolve to existing wiki pages when the correct category is prepended (e.g., `[[beamforming]]` → `[[concepts/beamforming]]`). Breakdown: 662 in concepts, 64 in entities, 24 in sources, 16 in synthesis, 3 in queries. Most prevalent in concept and synthesis pages that link to other concepts without the directory prefix.
+  - 30 wikilinks incorrectly use `wiki/` prefix (e.g., `[[wiki/concepts/beamforming]]` instead of `[[concepts/beamforming]]`). Found across 12 distinct source pages.
+  - 38 convention violations using `../` relative prefixes (e.g., `[[../concepts/foo]]`). These resolve correctly in MkDocs but violate the vault-absolute convention from `schema/AGENTS.md`. Spread across 20 distinct pages.
+  - 1 template placeholder (`[[concepts/concept-name]]` in `synthesis/llm-wiki-best-practices.md`).
+  - 25 figure embed wikilinks (`[[raw/papers/…/figures/…]]`) — files exist on disk as raw assets, correctly referenced via Obsidian vault-absolute paths.
   - 17 log.md informal references using human-readable names (expected — these are not actual wikilinks).
-  - 23 image embed wikilinks (`![[raw/papers/…]]`) referencing non-existent figure files. Likely assets from recent paper ingests that haven't been committed.
 - **Duplicate entries**: None found in any index.
-- **Orphan pages**: 0 — every page is referenced from at least one content page, index, or log entry.
-- **Statistics**: All stated counts match actual file counts exactly (610 total, 258 entities, 224 concepts, 102 sources, 19 synthesis, 7 queries). Last updated 2026-06-18.
+- **Orphan pages**: 1 — `sources/why-mathematica-not-simplify-sinh-arccosh` has zero inbound references from any wiki page.
+- **Statistics**: All stated counts match actual file counts exactly (629 total, 266 entities, 234 concepts, 103 sources, 19 synthesis, 7 queries). Last updated 2026-06-19.
 - **Actions taken**: No index rebuild needed (all counts consistent). Results logged.
 
 ---
@@ -2518,21 +2524,6 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 
 ---
 
-## [2026-06-19] lint | Health check
-
-- **Index consistency**: All category files and index rows match perfectly: 266 entities, 234 concepts, 103 sources, 19 synthesis, 7 queries = 629 total. No missing entries, phantom entries, or duplicate rows in either main index (`wiki/index.md`) or subdirectory indexes. Statistics section accurate.
-- **Broken links**:
-  - 171 wikilinks missing category prefix; all resolve to existing wiki pages when the correct category is prepended (e.g., `[[beamforming]]` → `[[concepts/beamforming]]`). Breakdown: 662 in concepts, 64 in entities, 24 in sources, 16 in synthesis, 3 in queries. Most prevalent in concept and synthesis pages that link to other concepts without the directory prefix.
-  - 30 wikilinks incorrectly use `wiki/` prefix (e.g., `[[wiki/concepts/beamforming]]` instead of `[[concepts/beamforming]]`). Found across 12 distinct source pages.
-  - 38 convention violations using `../` relative prefixes (e.g., `[[../concepts/foo]]`). These resolve correctly in MkDocs but violate the vault-absolute convention from `schema/AGENTS.md`. Spread across 20 distinct pages.
-  - 1 template placeholder (`[[concepts/concept-name]]` in `synthesis/llm-wiki-best-practices.md`).
-  - 25 figure embed wikilinks (`[[raw/papers/…/figures/…]]`) — files exist on disk as raw assets, correctly referenced via Obsidian vault-absolute paths.
-  - 17 log.md informal references using human-readable names (expected — these are not actual wikilinks).
-- **Duplicate entries**: None found in any index.
-- **Orphan pages**: 1 — `sources/why-mathematica-not-simplify-sinh-arccosh` has zero inbound references from any wiki page.
-- **Statistics**: All stated counts match actual file counts exactly (629 total, 266 entities, 234 concepts, 103 sources, 19 synthesis, 7 queries). Last updated 2026-06-19.
-- **Actions taken**: No index rebuild needed (all counts consistent). Results logged.
-
 ## [2026-06-21] ingest | Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone Speech Enhancement
 
 - **Source**: `raw/papers/han-2026-quality-aware-earable-se/full-text.txt` (extracted via `pdftotext -layout` after MinerU VLM and pipeline failures)
@@ -2553,6 +2544,8 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 - **Key insights**: ECD (articulatory-gesture-induced ear canal deformation) causes air pressure imbalance in sealed ear canal, degrading in-ear speech quality via stuck-at-low microphone fault. QuaSE addresses this with self-supervised quality assessment (autoencoder trained on high-quality samples selected by spectral peak-to-valley matching + DTW) and dynamic quality-weighted fusion. QA module is modular and improves EarSpeech by up to +5.48% PESQ. Distinct from Liu 2025 ATFA (binary sensor failure) — QuaSE handles continuous quality variations.
 - **Build verification**: `uv run mkdocs build --strict` passed (exit 0, 32.11s, no WARNINGs)
 
+---
+
 ## [2026-06-21] ingest | He 2025: A Brief History of Visual Object Detection (NeurIPS 2025 Talk, Bilibili video)
 
 - **Source**: Bilibili video [BV1nckaBcEra](https://www.bilibili.com/video/BV1nckaBcEra/) — "恺明老师带你看完视觉目标检测30年 | NeurIPS 2025 | 何恺明 | Kaiming He | 原创中英字幕", uploaded by 京口先生 (2026-01-19, ~26:26)
@@ -2569,6 +2562,8 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 - **Key insights**: 30-year history of object detection across three eras — (1) hand-crafted features + classifiers (Viola-Jones, SIFT, HOG, DPM), (2) CNN-based region classification (AlexNet, R-CNN), (3) end-to-end proposal+detection networks (SPP-Net→Fast R-CNN→Faster R-CNN). Central lessons: feature learning replaced feature engineering; shared computation (SPP-Net→Fast R-CNN→Faster R-CNN's RPN) drove the speed evolution. Faster R-CNN's RPN unified proposal generation and detection into a jointly-trainable framework, defining the modern paradigm.
 - **Build verification**: `uv run mkdocs build --strict` passed (exit 0, 36.76s, no WARNINGs)
 
+---
+
 ## [2026-06-21] ingest | Lorenz & Boyd 2005: Robust Minimum Variance Beamforming
 
 - **Source**: Lorenz, R. G. & Boyd, S. P. (2005). "Robust Minimum Variance Beamforming." IEEE Transactions on Signal Processing, 53(5), 1684–1696. DOI: [10.1109/TSP.2005.845436](https://doi.org/10.1109/TSP.2005.845436). Zotero key: `I5RQB5AR`.
@@ -2580,6 +2575,8 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 - **Pages updated**: `mvdr-beamformer` (added Capon alias, mismatch-sensitivity section, RMVB link), `diagonal-loading` (added RMVB comparison section), `socp-optimization` (added robust-beamforming role + standard form), `beamforming` (added "Robust Beamforming with Ellipsoidal Uncertainty" section)
 - **Indexes updated**: `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added entries; statistics 642→648 total, 273→275 entities, 238→241 concepts, 105→106 sources
 - **Key insights**: (1) The RMVB enforces $\mathbf{Re}\,w^* a \geq 1$ over an entire ellipsoidal uncertainty set rather than at a single nominal direction; the semi-infinite constraint becomes a second-order cone constraint via Cauchy–Schwarz. (2) The SOCP reduces to a scalar secular equation in the Lagrange multiplier $\lambda$, solvable by quadratically-convergent Newton iteration (~7–10 steps, size-independent), giving ~12× the cost of a regularized beamformer. (3) For isotropic uncertainty the RMVB coincides (up to scale) with diagonal loading; for anisotropic uncertainty it strictly dominates by exploiting directional manifold-variation knowledge. (4) Novel Hadamard-product-of-ellipsoids calculus (real: 3-term Minkowski sum; complex: 6-term, reducible to 5 via Givens rotation) propagates multiplicative gain/phase uncertainties through the signal path. (5) Worst-case SINR 15.63 dB vs 1.85 dB for point-mainbeam constraints in the 10-element ULA experiment; overestimating the ellipsoid preserves the gain guarantee while underestimating risks constraint violation.
+
+---
 
 ## [2026-06-25] ingest | Zhang, Ma, Abhayapala, Samarasinghe & Bastine 2024: ANC with PINN-based Soundfield Interpolation
 
@@ -2607,8 +2604,6 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/sources/index.md` — added 1 source row
 - **Key insights**: (1) Monitoring microphones placed *outside* the ROI give users more movement freedom vs spherical/circular arrays. (2) PINN (1 hidden layer, 16 neurons) trained with wave equation PDE residual + data MSE achieves ~8 dB better soundfield interpolation than SH with Q=8 mics (limiting SH to U=2). (3) PINN-assisted FxLMS ANC achieves −13 dB more steady-state noise reduction than multiple-point ANC by minimizing at virtual ear positions instead of monitoring mic positions. (4) The PINN approach requires no specific array geometry and integrates physical knowledge via automatic differentiation, but requires expensive training ($5 \times 10^5$ epochs).
 
----
-
 ## [2026-06-25] ingest (re) | Zhang, Ma, Abhayapala, Samarasinghe & Bastine 2024: ANC with PINN-based Soundfield Interpolation (completion)
 
 - **Reason**: Previous ingest (same date) left the source page minimal (44 lines, no Problem Formulation / Methodology / Experimental Setup / Results sections) and the subdirectory indexes `wiki/sources/index.md` and `wiki/entities/index.md` were not actually updated despite the prior log entry claiming so. Re-ingestion completes the workflow per the paper-reader skill template.
@@ -2619,8 +2614,6 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 - **Pages verified unchanged** (already correctly updated in prior attempt): entity pages, concept pages (`physics-informed-neural-network`, `soundfield-interpolation`), updated concept pages (`active-noise-control`, `multi-channel-anc`, `remote-microphone-technique`, `spherical-harmonic-transform`, `virtual-sensing`), synthesis page `virtual-sensing-evolution.md`, main `wiki/index.md`, `wiki/concepts/index.md`
 - **Figures**: 3 embedded (Fig. 1 system setup, Fig. 2 block diagram, Fig. 4 noise reduction) — all sourced from existing `raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/figures/` (16 figures total from MinerU VLM extraction)
 - **Outcome**: Source page now conforms to the paper-reader skill template with all required sections; subdirectory indexes complete and consistent with main index.
-
----
 
 ## [2026-06-28] ingest (re) | Jiang, Xue & Yue 2025: A Review of Artificial Intelligence-Driven Active Vibration and Noise Control (completion)
 
@@ -2654,6 +2647,34 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/entities/index.md` — added 3 entity rows
   - `wiki/concepts/index.md` — added 3 concept rows
 - **Key insights**: (1) AI-AVNC is classified into four technical paths: input shaping (ANN/RL/PINN-enhanced), system identification (deep secondary path estimation), controller parameter optimization (RL-PID, neural MPC), and end-to-end controller modeling (Deep ANC, GFANC). (2) RL methods (DDPG, PPO, SAC) enable model-free nonlinear control but suffer from low sample efficiency and exploration safety risks. (3) Safe-RL frameworks (CMDP, Lyapunov constraints, CBF, conservative fallback) are essential for physical deployment. (4) Deep ANC and GFANC represent the end-to-end paradigm shift, replacing iterative adaptation with neural network inference. (5) Key challenges include sim-to-real gap, lack of interpretability, and need for formal stability verification.
+
+---
+
+## [2026-07-01] ingest | L3C-DeepMFC: Low-Latency Low-Complexity Deep Marginal Feedback Cancellation
+
+- **Source**: `raw/papers/hao-2025-l3c-deepmfc/full-text.md` (Zotero: FDVXMTIJ)
+- **Authors**: Fengyuan Hao, Brian C. J. Moore, Huiyong Zhang, Xiaodong Li, Chengshi Zheng
+- **Published**: Interspeech 2025
+- **URL**: https://www.isca-archive.org/interspeech_2025/hao25_interspeech.pdf
+- **Summary**: Proposes L3C-DeepMFC, a low-latency (4ms) low-complexity (0.31M params, 0.43 G/s) extension of DeepMFC for hearing aid feedback cancellation. Uses gain-shape complex spectrum mapping, full- and sub-band recurrent modeling (shared sub-band LSTM + full-band GLSTM), a low-latency overlap-add scheme, and closed-loop fine tuning to address the open-loop-training vs. closed-loop-estimation mismatch. Achieves WB-PESQ 4.08 at GM=0 vs. DeepMFC's 4.34 while using ~32× fewer parameters and ~28× lower complexity.
+- **Pages created**:
+  - `raw/papers/hao-2025-l3c-deepmfc/full-text.md` — MinerU VLM extraction
+  - `wiki/sources/hao-2025-l3c-deepmfc.md` — source page
+  - `wiki/entities/brian-c-j-moore.md` — entity page (Cambridge Hearing Group)
+  - `wiki/entities/huiyong-zhang.md` — entity page (CAS)
+  - `wiki/concepts/deep-marginal-feedback-cancellation.md` — DeepMFC concept
+  - `wiki/concepts/closed-loop-fine-tuning.md` — closed-loop fine tuning concept
+- **Pages updated**:
+  - `wiki/entities/fengyuan-hao.md` — added L3C-DeepMFC contribution
+  - `wiki/entities/chengshi-zheng.md` — added L3C-DeepMFC contribution
+  - `wiki/entities/xiaodong-li.md` — added L3C-DeepMFC contribution
+  - `wiki/concepts/hearing-aid-feedback-cancellation.md` — added DeepMFC subsection + cross-references
+  - `wiki/concepts/acoustic-feedback.md` — added related concepts/sources
+  - `wiki/concepts/complex-spectrum-mapping.md` — added related concepts/sources
+  - `wiki/index.md` — added 2 entities, 2 concepts, 1 source; updated statistics (602/252/223/101/19/7)
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 2 entity rows
+  - `wiki/concepts/index.md` — added 2 concept rows
 
 ---
 
@@ -2707,32 +2728,6 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/entities/index.md` - added 2 entity entries
   - `wiki/concepts/index.md` - added 6 concept entries
 - **Key insights**: (1) For block-based realtime audio processing where the host delivers b_host samples per callback and the plugin processes b_plugin samples per callback, the minimum FIFO buffering delay is exactly Δ = b_plugin − gcd(b_host, b_plugin) samples — not b_host + b_plugin, not max(b_host, b_plugin), and not dependent on LCM. (2) The bound is tight: for any two coprime block sizes (gcd = 1), the minimum delay is b_plugin − 1 samples, meaning one nearly-full plugin block must be buffered. For integer multiples (gcd = b_plugin when b_plugin divides b_host), the minimum delay is 0 — no extra reblocking delay needed, the host block contains an integer number of plugin blocks. (3) The elegant proof uses a pigeonhole argument combined with Bézout's identity: congruence classes modulo g repeat every GCD positions, and a linear combination achieving the GCD guarantees that the buffer occupancy pattern visits the same congruence class within one LCM cycle, proving the upper bound. (4) The PortAudio library previously computed this delay via brute-force simulation up to LCM(b_host, b_plugin) steps (which can be as large as 44,100 × 48,000 / 300 = ~7 million steps for common audio rates); the closed-form GCD computation is O(log min(b_host, b_plugin)) and exact. (5) The result generalizes beyond audio: any block-based streaming system where a producer pushes n samples and a consumer pulls m samples per block must delay at least max(n,m) − gcd(n,m) samples to avoid underruns.
-
-## [2026-07-01] ingest | L3C-DeepMFC: Low-Latency Low-Complexity Deep Marginal Feedback Cancellation
-
-- **Source**: `raw/papers/hao-2025-l3c-deepmfc/full-text.md` (Zotero: FDVXMTIJ)
-- **Authors**: Fengyuan Hao, Brian C. J. Moore, Huiyong Zhang, Xiaodong Li, Chengshi Zheng
-- **Published**: Interspeech 2025
-- **URL**: https://www.isca-archive.org/interspeech_2025/hao25_interspeech.pdf
-- **Summary**: Proposes L3C-DeepMFC, a low-latency (4ms) low-complexity (0.31M params, 0.43 G/s) extension of DeepMFC for hearing aid feedback cancellation. Uses gain-shape complex spectrum mapping, full- and sub-band recurrent modeling (shared sub-band LSTM + full-band GLSTM), a low-latency overlap-add scheme, and closed-loop fine tuning to address the open-loop-training vs. closed-loop-estimation mismatch. Achieves WB-PESQ 4.08 at GM=0 vs. DeepMFC's 4.34 while using ~32× fewer parameters and ~28× lower complexity.
-- **Pages created**:
-  - `raw/papers/hao-2025-l3c-deepmfc/full-text.md` — MinerU VLM extraction
-  - `wiki/sources/hao-2025-l3c-deepmfc.md` — source page
-  - `wiki/entities/brian-c-j-moore.md` — entity page (Cambridge Hearing Group)
-  - `wiki/entities/huiyong-zhang.md` — entity page (CAS)
-  - `wiki/concepts/deep-marginal-feedback-cancellation.md` — DeepMFC concept
-  - `wiki/concepts/closed-loop-fine-tuning.md` — closed-loop fine tuning concept
-- **Pages updated**:
-  - `wiki/entities/fengyuan-hao.md` — added L3C-DeepMFC contribution
-  - `wiki/entities/chengshi-zheng.md` — added L3C-DeepMFC contribution
-  - `wiki/entities/xiaodong-li.md` — added L3C-DeepMFC contribution
-  - `wiki/concepts/hearing-aid-feedback-cancellation.md` — added DeepMFC subsection + cross-references
-  - `wiki/concepts/acoustic-feedback.md` — added related concepts/sources
-  - `wiki/concepts/complex-spectrum-mapping.md` — added related concepts/sources
-  - `wiki/index.md` — added 2 entities, 2 concepts, 1 source; updated statistics (602/252/223/101/19/7)
-  - `wiki/sources/index.md` — added 1 source row
-  - `wiki/entities/index.md` — added 2 entity rows
-  - `wiki/concepts/index.md` — added 2 concept rows
 
 ---
 
@@ -2933,7 +2928,6 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/concepts/active-noise-control.md` — added Ma 2027 source
 - **Indexes updated**: `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` (statistics: 738 total, 317 entities, 279 concepts, 116 sources, 19 synthesis, 7 queries)
 
-
 ---
 
 ## [2026-07-16] lint | Health check
@@ -2949,7 +2943,6 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 - **Orphan pages**: 1 — sources/why-mathematica-not-simplify-sinh-arccosh
 - **Statistics**: All stated counts match actual (317/279/116/19/7, total 738). Last updated 2026-07-15.
 - **Actions taken**: None — informational lint pass. Recommend running wiki-link-fixer/scripts/fix_links.py to bulk-fix the 184 missing-prefix + 30 wiki/-prefix + 38 ../-prefix violations (252 auto-fixable). Truly broken figure refs require manual asset verification.
-
 
 ---
 
@@ -3257,6 +3250,42 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 
 ---
 
+## [2026-07-20] ingest | Ultra Dual-Path Compression for Joint Echo Cancellation and Noise Suppression (Chen et al. 2023)
+
+- **Source**: `raw/papers/chen-2023-ultra-dual-path-compression/full-text.md` (Zotero: VNWWREC6)
+- **Authors**: Hangting Chen, Jianwei Yu, Yi Luo, Rongzhi Gu, Weihua Li, Zhuocheng Lu, Chao Weng
+- **Published**: Interspeech 2023, pp. 2048–2052
+- **DOI**: 10.21437/Interspeech.2023-2302
+- **arXiv**: 2308.11053
+- **Summary**: Time-frequency dual-path compression on online DPT-FSNet for joint AEC + NS; grid-searched T×F compression ratios 4×–32×, model size held <0.5M params throughout, MACs/s tunable 57M–1822M; dual-path outperforms single-path at 8×–16×; TrainMel + PostNet + DualPath(2×4) matches DeepFilterNet at 1/4 the parameters.
+- **Pages created**:
+  - `raw/papers/chen-2023-ultra-dual-path-compression/full-text.md` — extracted text from Zotero PDF (MinerU VLM, arXiv HTML fallback after defuddle CLI missing from PATH)
+  - `wiki/sources/chen-2023-ultra-dual-path-compression.md`
+  - `wiki/entities/hangting-chen.md`
+  - `wiki/entities/jianwei-yu.md`
+  - `wiki/entities/yi-luo.md`
+  - `wiki/entities/rongzhi-gu.md`
+  - `wiki/entities/weihua-li.md`
+  - `wiki/entities/zhuocheng-lu.md`
+  - `wiki/entities/chao-weng.md`
+  - `wiki/concepts/dpt-fsnet.md`
+  - `wiki/concepts/dual-path-compression.md`
+  - `wiki/concepts/trainable-frequency-compression.md`
+  - `wiki/concepts/frame-skip-prediction.md`
+  - `wiki/concepts/post-processing-network.md`
+- **Pages updated**:
+  - `wiki/concepts/erb-scale.md` — added TrainMel cross-reference and Chen 2023 source
+  - `wiki/concepts/bark-scale-spectral-features.md` — added Trainable Frequency Compression cross-reference
+  - `wiki/concepts/fixed-rate-skipping.md` — added Frame-Skip Prediction cross-reference (analogous strategy at T-F feature level vs. backbone-invocation level)
+  - `wiki/concepts/deep-filtering.md` — added Trainable Frequency Compression cross-reference and Chen 2023 source
+  - `wiki/synthesis/joint-multitask-ultra-low-latency-se.md` — added Chen 2023 to sources table; enriched Insight 4 (Temporal Redundancy) with Chen 2023 as 2023 predecessor to HALO/FRS; added new Insight 8 (Compression-Ratio Flexibility as a First-Class Design Axis); added 2 new open questions; added 5 new related concepts
+  - `wiki/index.md` — added 7 entities, 5 concepts, 1 source; updated statistics (total 823, entities 349, concepts 321, sources 126)
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 7 entity rows
+  - `wiki/concepts/index.md` — added 5 concept rows
+
+---
+
 ## [2026-07-21] ingest | CoFi-Lite: Pushing the Limits of Ultra-Lightweight Speech Enhancement (Yang et al. 2026)
 
 - **Source**: `raw/papers/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement/full-text.md` (Zotero: NUV4VYRE)
@@ -3315,3 +3344,5 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/concepts/index.md` — added 2 concept rows
   - `wiki/sources/index.md` — added 1 source row
 - **Synthesis**: Step 9 skipped per the "when in doubt, prefer not updating" rule — paper introduces a new axis (input vs. output processing) but no existing synthesis page is the right home; creating a new synthesis page from a single paper is not synthesis.
+
+---

@@ -36,7 +36,9 @@ At a 4 ms hop rate, this reduces the DNN cost from 67.5 MMACs/s (no sparsificati
 - [[concepts/tango-framework|Tango Framework]]
 - [[concepts/grouped-recurrent-neural-network|Grouped Recurrent Neural Network]]
 - [[concepts/asymmetric-stft|Asymmetric STFT]]
+- [[concepts/frame-skip-prediction|Frame-Skip Prediction]] — Chen et al. 2023's analogous strategy that compresses the T-F feature inside the backbone (vs. FRS which skips backbone invocation entirely)
 
 ## Related Sources
 
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]
+- [[sources/chen-2023-ultra-dual-path-compression|Chen et al. 2023: Ultra Dual-Path Compression]] — earlier work on frame-skip prediction + PostNet refinement, conceptually analogous to FRS but operating at the T-F feature level rather than the backbone-invocation level
