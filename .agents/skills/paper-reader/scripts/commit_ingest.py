@@ -2,7 +2,9 @@
 """Step 13: Stage ingest files and commit.
 
 Stages the standard ingest file set plus any new/modified entity, concept,
-and synthesis pages. Verifies no paper.pdf is accidentally staged.
+and synthesis pages. Also auto-stages any other wiki/ modifications detected
+via `git status` (e.g., concept pages edited to add bidirectional cross-
+references per Step 8). Verifies no paper.pdf is accidentally staged.
 
 Usage:
   python .agents/skills/paper-reader/scripts/commit_ingest.py \
@@ -16,6 +18,13 @@ Always files staged:
   raw/papers/{slug}/  wiki/sources/{slug}.md  wiki/index.md  wiki/log.md
   wiki/sources/index.md  wiki/entities/index.md  wiki/concepts/index.md
   wiki/synthesis/index.md
+
+Auto-staged (detected via git status, not required in --entities/--concepts/
+--synthesis):
+  Any modified or untracked file under wiki/ (e.g., existing concept pages
+  edited to add cross-references back to the new source). This prevents the
+  recurring bug where Step 8 edits to existing concept pages are silently
+  dropped from the commit because the operator forgot to list them.
 """
 import argparse, os, subprocess, sys
 
@@ -53,6 +62,10 @@ def main():
     p.add_argument('--synthesis', nargs='*', default=[], help='Synthesis slugs (no .md)')
     p.add_argument('--no-verify', action='store_true',
                    help='Bypass pre-commit hooks (use if hook has env issues)')
+    p.add_argument('--strict', action='store_true',
+                   help='Disable auto-staging of unlisted wiki/ modifications. '
+                        'Use only when you intentionally want to leave edits '
+                        'uncommitted (e.g., partial ingest for review).')
     args = p.parse_args()
 
     # Always-staged files. Note: wiki/synthesis/index.md may not exist on a
@@ -80,8 +93,40 @@ def main():
     if missing:
         print(f"WARN: skipping non-existent files: {missing}", file=sys.stderr)
 
-    # Stage
+    # Stage explicit list first
     git(['add'] + existing)
+
+    # Auto-stage any other modified/untracked wiki/ files not in the explicit
+    # list. This catches Step 8 edits to existing concept/entity pages that
+    # the operator forgot to pass via --concepts/--entities. Without this, the
+    # commit silently drops those edits and the working tree stays dirty.
+    auto_staged = []
+    if not args.strict:
+        status = git(['status', '--porcelain']).stdout
+        for line in status.splitlines():
+            # Porcelain format: XY <path>  (X=index, Y=worktree)
+            if len(line) < 4:
+                continue
+            xy, path = line[:2], line[3:]
+            path = path.strip().strip('"')
+            # Skip already-staged files (XY starts with a letter in index col)
+            if xy[0] in ('A', 'M', 'R', 'C', 'D'):
+                continue
+            # Only auto-stage wiki/ modifications
+            if not path.startswith('wiki/'):
+                continue
+            # Skip paper.pdf defensively (shouldn't be under wiki/ but be safe)
+            if 'paper.pdf' in path:
+                continue
+            auto_staged.append(path)
+        if auto_staged:
+            git(['add'] + auto_staged)
+            print(f"=== Auto-staged unlisted wiki/ modifications ===")
+            for path in auto_staged:
+                print(f"  {path}")
+            print(f"(Auto-staged {len(auto_staged)} file(s) not in explicit "
+                  f"--entities/--concepts/--synthesis list. Use --strict to "
+                  f"disable this behavior.)\n")
 
     # Verify no paper.pdf is staged
     status = git(['status', '--short'])
@@ -99,7 +144,8 @@ def main():
                 git(['rm', '--cached', path])
                 if os.path.exists(path):
                     os.remove(path)
-        git(['add'] + existing)
+        # Re-stage the explicit list + auto-staged files
+        git(['add'] + existing + auto_staged)
 
     # Show staged status
     print("=== Staged files ===")

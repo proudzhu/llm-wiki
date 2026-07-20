@@ -303,7 +303,11 @@ python .agents/skills/paper-reader/scripts/commit_ingest.py \
     --synthesis synth1
 ```
 
-The script stages `raw/papers/{slug}/`, `wiki/sources/{slug}.md`, all index files, `wiki/log.md`, and the specified entity/concept/synthesis pages. It verifies no `paper.pdf` is staged and commits. Use `--no-verify` only if the pre-commit hook has environment issues unrelated to your changes.
+The script stages `raw/papers/{slug}/`, `wiki/sources/{slug}.md`, all index files, `wiki/log.md`, and the specified entity/concept/synthesis pages. It verifies no `paper.pdf` is staged and commits.
+
+**Auto-staging of unlisted `wiki/` modifications**: the script also auto-stages any other modified or untracked file under `wiki/` that you did not list explicitly. This catches Step 8 edits to **existing** concept/entity pages (bidirectional cross-references) that would otherwise be silently dropped from the commit. The auto-staged files are printed before the commit so you can verify them. Pass `--strict` to disable this behavior (e.g., for a partial ingest under review).
+
+Use `--no-verify` only if the pre-commit hook has environment issues unrelated to your changes.
 
 ## Naming Conventions
 
