@@ -677,6 +677,8 @@
 | [[concepts/fastgrnn\|FastGRNN]] | Lightweight gated RNN reusing weight matrices for gate and candidate; 2-4x fewer params than GRU; exhibits inference-time state drift on long sequences | 2026-07-19 |
 | [[concepts/comfi-fastgrnn\|Comfi-FastGRNN]] | Complementary-filter extension of FastGRNN (2 scalars) that mitigates inference-time state drift on long streaming sequences | 2026-07-19 |
 | [[concepts/fast-ulcnet\|Fast-ULCNet]] | ULCNet variant using FastGRNN/Comfi-FastGRNN; 0.338M params, ~34% RTF reduction vs. ULCNet at matched NS quality | 2026-07-19 |
+| [[concepts/cofi-lite\|CoFi-Lite]] | Ultra-lightweight SE model (Yang et al. 2026) decoupling spectral modeling into parallel coarse (full-band envelope) and fine (low-frequency detail) paths; 12.87M MACs/s, outperforms GTCRN | 2026-07-21 |
+| [[concepts/cross-path-fusion\|Cross-Path Fusion (CPF)]] | Lightweight bottleneck fusion module bridging CoFi-Lite's parallel coarse/fine paths via concat–FC–GRU–FC; +0.14 PESQ in ablation | 2026-07-21 |
 
 ---
 
@@ -811,6 +813,7 @@
 | [[sources/castelli-2025-embedded-joint-aec-ns\|Castelli 2024: Embedded Joint AEC and NS]] | NXP tinyML 2024 — DeepVQE-s compressed via six-stage pipeline to TinyVQE (114k params, 0.48 MMACs, 2.32 ms / 16 ms on HiFi4 DSP) for joint AEC+NS on i.MX RT600 | 2026-07-18 |
 | [[sources/larraza-2026-fast-ulcnet-speech-enhancement\|Larraza & de Koeijer 2026: Fast-ULCNet]] | Fast-ULCNet replaces ULCNet's GRU with FastGRNN; Comfi-FastGRNN mitigates state drift on long sequences; 0.338M params, ~34% RTF reduction | 2026-07-19 |
 | [[sources/zheng-2023-survey-frequency-domain-speech-enhancement\|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] | 60-year survey of frequency-domain monaural SE from traditional statistical methods to deep learning; five-group taxonomy and unified evaluation across normal-hearing and hearing-impaired listeners | 2026-07-19 |
+| [[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement\|Yang et al. 2026: CoFi-Lite — Pushing the Limits of Ultra-Lightweight Speech Enhancement]] | Dual coarse/fine-path ultra-lightweight SE model with Cross-Path Fusion; beats GTCRN at 40% of its compute (12.87M MACs/s, 83.12k params) | 2026-07-21 |
 
 ---
 
@@ -861,10 +864,10 @@
 
 ## Statistics
 
-- **Total pages**: 810
+- **Total pages**: 813
 - **Entities**: 342
-- **Concepts**: 316
-- **Sources**: 125
+- **Concepts**: 318
+- **Sources**: 126
 - **Synthesis**: 20
 - **Queries**: 7
-- **Last updated**: 2026-07-19
+- **Last updated**: 2026-07-21

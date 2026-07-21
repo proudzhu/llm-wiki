@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-06-01
-updated: 2026-06-01
+updated: 2026-07-21
 tags:
   - speech-separation
   - time-frequency-masking
@@ -28,6 +28,10 @@ where beta is a scaling parameter (commonly 0.5).
 
 The IRM emerged as one of the preferred training targets. Masking-based targets outperform mapping-based targets for intelligibility (STOI).
 
+## Variants
+
+- **Dual decoupled IRMs ([[concepts/cofi-lite|CoFi-Lite]], Yang et al. 2026)**: two IRMs predicted by separate coarse/fine paths and applied **sequentially** — a full-band coarse mask restoring the magnitude envelope, then a fine mask refining only low frequencies ($f \leq f_\text{low}$, 2 kHz). This band-decoupled masking lets each mask specialize: the coarse mask needs no fine spectral detail (tolerates ×16 compression), the fine mask focuses capacity where salient speech structure concentrates.
+
 ## Related Concepts
 
 - [[concepts/ideal-binary-mask|Ideal Binary Mask (IBM)]]
@@ -37,3 +41,4 @@ The IRM emerged as one of the preferred training targets. Masking-based targets 
 ## Related Sources
 
 - [[sources/wang-2018-supervised-speech-separation-deep-learning-overview|Wang & Chen 2018: Supervised Speech Separation Based on Deep Learning: An Overview]]
+- [[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement|Yang et al. 2026: CoFi-Lite]] — dual band-decoupled IRMs applied sequentially

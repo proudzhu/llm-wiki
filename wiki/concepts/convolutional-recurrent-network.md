@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-05-25
+updated: 2026-07-21
 sources:
 tags:
   - deep-learning
@@ -49,6 +49,7 @@ The CRN follows an **encoder-decoder** structure with a recurrent bottleneck:
 - **DCCRN**: Deep Complex CRN won 1st place in Interspeech 2020 Deep Noise Suppression Challenge
 - **Attention Recurrent Network (ARN)**: CRN variant with attention for lower latency (Zhang et al. 2023)
 - **GTCRN**: Grouped Temporal CRN with only 23.7 K parameters for edge-device speech enhancement (Rong et al. 2024, ICASSP)
+- **[[concepts/cofi-lite|CoFi-Lite]]**: Dual coarse/fine-path CRN with [[concepts/cross-path-fusion|Cross-Path Fusion]], reaching 12.87M MACs/s while outperforming GTCRN (Yang et al. 2026, IEEE SPL)
 
 ## Related Concepts
 
@@ -63,4 +64,5 @@ The CRN follows an **encoder-decoder** structure with a recurrent bottleneck:
 
 - [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 - [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement|Tan & Wang 2018: CRN for Real-Time Speech Enhancement (original proposal)]]
+- [[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement|Yang et al. 2026: CoFi-Lite — Pushing the Limits of Ultra-Lightweight Speech Enhancement]] — dual coarse/fine-path CRN decoupling spectral modeling at 12.87M MACs/s
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys CRN family evolution (CRN → DCCRN → DPCRN → GCRN) and decoupling-style successors

@@ -3254,3 +3254,31 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/concepts/deep-learning-for-signal-processing.md` — added cross-reference for 60-year migration narrative
   - `wiki/index.md` — added 1 source, 3 entities; updated statistics (810 total)
   - `wiki/sources/index.md`, `wiki/entities/index.md` — added new rows
+
+---
+
+## [2026-07-21] ingest | CoFi-Lite: Pushing the Limits of Ultra-Lightweight Speech Enhancement (Yang et al. 2026)
+
+- **Source**: `raw/papers/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement/full-text.md` (Zotero: NUV4VYRE)
+- **Authors**: Leyan Yang, Dahan Wang, Xiaobin Rong, Jiadong Zhao, Jing Lu
+- **Published**: IEEE Signal Processing Letters, 2026
+- **DOI**: 10.1109/LSP.2026.3712291
+- **Summary**: Ultra-lightweight SE model decoupling spectral modeling into parallel coarse (full-band envelope) and fine (low-frequency detail) paths with Cross-Path Fusion; outperforms GTCRN at 40% of its compute (12.87M MACs/s, 83.12k params)
+- **Pages created**:
+  - `raw/papers/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement/full-text.md` — extracted text from Zotero PDF (MinerU)
+  - `wiki/sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement.md`
+  - `wiki/concepts/cofi-lite.md`
+  - `wiki/concepts/cross-path-fusion.md`
+- **Pages updated**:
+  - `wiki/entities/leyan-yang.md` — added this paper (lead author)
+  - `wiki/entities/dahan-wang.md` — added this paper
+  - `wiki/entities/xiaobin-rong.md` — added this paper
+  - `wiki/entities/jiadong-zhao.md` — added this paper
+  - `wiki/entities/jing-lu.md` — added this paper
+  - `wiki/concepts/gtcrn.md` — added Successors section (CoFi-Lite), cross-refs and source link
+  - `wiki/concepts/convolutional-recurrent-network.md` — added CoFi-Lite to Applications and Related Sources
+  - `wiki/concepts/ideal-ratio-mask.md` — added dual band-decoupled IRM variant and source link
+  - `wiki/synthesis/computational-efficiency-evolution.md` — added CoFi-Lite to 2026 efficiency frontier and Related Sources
+  - `wiki/index.md` — added 2 concepts, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/concepts/index.md` — added 2 concept rows

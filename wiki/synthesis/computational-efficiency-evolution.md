@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-07-16
+updated: 2026-07-21
 sources:
 - zotero://select/items/0_WLMRLH9W
 - zotero://select/items/0_5SFJK2MD
@@ -10,6 +10,7 @@ sources:
 - zotero://select/items/0_BACCUUCC
 - zotero://select/items/0_TXVFFJPG
 - zotero://select/items/0_FN59JY3C
+- zotero://select/items/0_NUV4VYRE
 tags:
   - lightweight-speech-enhancement
 - computational-complexity
@@ -202,6 +203,7 @@ Three approaches currently define the Pareto frontier:
 4. **GTCRN (Rong et al. 2024)**: Neural speech enhancement at extreme efficiency — only 23.7 K parameters and 39.6 MMACs/s, outperforming RNNoise and matching models with 100× more parameters. Represents the lightweight deep learning frontier for edge-device audio processing.
 5. **[[sources/schroter-2022-deepfilternet|DeepFilterNet (Schröter et al., ICASSP 2022)]]**: Two-stage deep filtering framework with 1.8M params and 0.35 GMACs/s, achieving WB-PESQ 2.81 at 48 kHz full-band. Serves as the key baseline for GTCRN and subsequent ultralightweight models.
 6. **[[concepts/mn-tango|MN-TANGO (Benslimane et al., 2026)]]**: A hybrid neural-spatial distributed binaural SE system that exploits a unique structural prior — the downstream [[concepts/gevd-spatial-filtering|GEVD-based]] spatial filter absorbs most quantization-induced mask errors — to push neural compression to extremes. Combining architectural simplification (single-stage MN-TANGO, 0.5 M params / 30.79 MMAC/s vs. 1.0 M / 65.65 for full TANGO), [[concepts/quantization-aware-training|W8A8 QAT]], [[concepts/erb-scale|ERB]] compression, and [[concepts/grouped-recurrent-neural-network|grouped LSTM]] ($G=8$), it reaches **4.65 MMAC/s and 0.177 MB** — a 14× compute reduction and 23× memory reduction relative to the FP32 TANGO baseline, with final SI-SIR still at 21.2/21.3 dB. The key insight is that **hybrid neural-spatial architectures are quantization-robust by construction**, opening a compression axis unavailable to purely neural SE models.
+7. **[[concepts/cofi-lite|CoFi-Lite (Yang et al., IEEE SPL 2026)]]**: Pushes the *purely neural* ultra-lightweight SE frontier below GTCRN — **12.87M MACs/s and 83.12k params** while *outperforming* GTCRN (PESQ 2.16 vs. 2.07 on DNS3) at 40.26% of its compute and 34% lower RTF. The mechanism is **asymmetric capacity reallocation** rather than uniform slimming: a deeply compressed coarse path (×16, ERB-merged full-band envelope) paired with a nearly uncompressed fine path (×2, low frequencies below 2 kHz), bridged by a lightweight [[concepts/cross-path-fusion|Cross-Path Fusion]] module (+0.14 PESQ in ablation). Its scaled-up variant matches AdaptCRN with 19.34% fewer MACs. Complementary to MN-TANGO's quantization axis: CoFi-Lite shows architectural decoupling alone can still halve the compute of the previous best design.
 
 ### 5.3 The Open Question
 
@@ -258,6 +260,7 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method]] — Frequency-domain processing for the simultaneous equations method, reducing computational cost vs. time-domain NLMS-based transformation
 - [[sources/rong-2024-gtcrn-speech-enhancement-ultralow|Rong et al. 2024: GTCRN — A Speech Enhancement Model Requiring Ultralow Computational Resources]]
+- [[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement|Yang et al. 2026: CoFi-Lite — Pushing the Limits of Ultra-Lightweight Speech Enhancement]] — asymmetric coarse/fine-path decoupling beats GTCRN at 40% of its compute (12.87M MACs/s)
 - [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement|Tan & Wang 2018: CRN for Real-Time Speech Enhancement (original CRN proposal)]]
 - [[sources/schroter-2022-deepfilternet|Schröter et al. 2022: DeepFilterNet — Low Complexity Speech Enhancement via Deep Filtering]]
 - [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]] — Hybrid neural-spatial robustness to INT8 quantization; 14× compute / 23× memory reduction vs. FP32 TANGO

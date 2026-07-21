@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-24
-updated: 2026-06-18
+updated: 2026-07-21
 tags:
   - neural-network
   - speech-enhancement
@@ -63,10 +63,16 @@ With 23.7 K parameters and 39.6 MMACs/s, GTCRN achieves:
 - **SISNR 18.83 dB** on VCTK-DEMAND (vs 16.63 for [[sources/schroter-2022-deepfilternet|DeepFilterNet]] with 75× more params)
 - **DNSMOS P.808 3.44** on DNS3 blind test set (vs 3.15 for RNNoise)
 
+## Successors
+
+- **[[concepts/cofi-lite|CoFi-Lite]]** (Yang et al., IEEE SPL 2026) reuses GTCRN's BM, SFE, TRA modules and loss function, but decouples spectral modeling into parallel coarse (full-band envelope, ×16 compression) and fine (low-frequency detail below 2 kHz, ×2 compression) paths bridged by [[concepts/cross-path-fusion|Cross-Path Fusion]]. It **outperforms GTCRN** (PESQ 2.16 vs. 2.07 on DNS3) at only 40.26% of its MACs (12.87M vs. 31.97M MACs/s) and 34% lower RTF — trading a higher parameter count (83.12k vs. 23.67k) for drastically lower compute.
+
 ## Related Concepts
 
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
 - [[concepts/dprnn|Dual-Path RNN (DPRNN)]]
+- [[concepts/cofi-lite|CoFi-Lite]]
+- [[concepts/cross-path-fusion|Cross-Path Fusion (CPF)]]
 - [[concepts/depthwise-separable-convolution|Depthwise Separable Convolution]]
 - [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
 - [[concepts/erb-scale|ERB Scale]]
@@ -79,6 +85,7 @@ With 23.7 K parameters and 39.6 MMACs/s, GTCRN achieves:
 ## Related Sources
 
 - [[sources/rong-2024-gtcrn-speech-enhancement-ultralow|Rong et al. 2024: GTCRN — A Speech Enhancement Model Requiring Ultralow Computational Resources]]
+- [[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement|Yang et al. 2026: CoFi-Lite — Pushing the Limits of Ultra-Lightweight Speech Enhancement]]
 - [[sources/schroter-2022-deepfilternet|Schröter et al. 2022: DeepFilterNet]]
 - [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator|Zhao et al. 2026: HALO — Half-frame-rate Adaptive Learnable Operator for Lightweight STFT-based Speech Enhancement]]
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]
