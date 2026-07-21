@@ -10,7 +10,13 @@ Requires: poppler-utils (pdftotext on PATH).
 """
 import argparse, os, subprocess, sys
 
-sys.stdout.reconfigure(encoding='utf-8')
+# Force UTF-8 stdout/stderr so non-ASCII characters in paper titles, figure
+# names, and subprocess output don't trip Windows cp1252 consoles.
+for _s in (sys.stdout, sys.stderr):
+    try:
+        _s.reconfigure(encoding='utf-8')
+    except (AttributeError, ValueError):
+        pass
 
 
 def main():
@@ -32,6 +38,7 @@ def main():
     result = subprocess.run(
         ['pdftotext', '-layout', pdf_path, txt_path],
         capture_output=True, text=True,
+        encoding='utf-8', errors='replace',
     )
     # pdftotext exits 0 even with warnings; check output file exists
     if not os.path.exists(txt_path) or os.path.getsize(txt_path) == 0:

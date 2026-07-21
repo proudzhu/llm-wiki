@@ -16,7 +16,13 @@ Verify token first: `mineru-open-api auth --show`
 """
 import argparse, os, shutil, subprocess, sys
 
-sys.stdout.reconfigure(encoding='utf-8')
+# Force UTF-8 stdout/stderr so non-ASCII characters in paper titles, figure
+# names, and subprocess output don't trip Windows cp1252 consoles.
+for _s in (sys.stdout, sys.stderr):
+    try:
+        _s.reconfigure(encoding='utf-8')
+    except (AttributeError, ValueError):
+        pass
 
 
 def main():
@@ -51,7 +57,10 @@ def main():
         '--timeout', str(args.timeout),
     ]
     print(f"Running: {' '.join(cmd)}")
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(
+        cmd, capture_output=True, text=True,
+        encoding='utf-8', errors='replace',
+    )
     if result.returncode != 0:
         print(f"MinerU extraction failed:\n{result.stderr}", file=sys.stderr)
         print("\nTroubleshooting:", file=sys.stderr)

@@ -15,15 +15,28 @@ Usage:
 Always files staged:
   raw/papers/{slug}/  wiki/sources/{slug}.md  wiki/index.md  wiki/log.md
   wiki/sources/index.md  wiki/entities/index.md  wiki/concepts/index.md
+  wiki/synthesis/index.md
 """
 import argparse, os, subprocess, sys
 
-sys.stdout.reconfigure(encoding='utf-8')
+# Force UTF-8 stdout/stderr so non-ASCII characters in paper titles, author
+# names (e.g., "Østergaard"), and git output don't trip Windows cp1252 consoles.
+for _s in (sys.stdout, sys.stderr):
+    try:
+        _s.reconfigure(encoding='utf-8')
+    except (AttributeError, ValueError):
+        pass
 
 
 def git(args, check=True):
-    """Run a git command, return CompletedProcess."""
-    result = subprocess.run(['git'] + args, capture_output=True, text=True)
+    """Run a git command, return CompletedProcess. Forces UTF-8 I/O."""
+    result = subprocess.run(
+        ['git'] + args,
+        capture_output=True,
+        text=True,
+        encoding='utf-8',
+        errors='replace',
+    )
     if check and result.returncode != 0:
         print(f"git {' '.join(args)} failed:\n{result.stderr}", file=sys.stderr)
         sys.exit(result.returncode)
@@ -42,7 +55,8 @@ def main():
                    help='Bypass pre-commit hooks (use if hook has env issues)')
     args = p.parse_args()
 
-    # Build the file list
+    # Always-staged files. Note: wiki/synthesis/index.md may not exist on a
+    # fresh repo; the filter below drops missing paths.
     files = [
         f'raw/papers/{args.slug}',
         f'wiki/sources/{args.slug}.md',
@@ -51,6 +65,7 @@ def main():
         'wiki/sources/index.md',
         'wiki/entities/index.md',
         'wiki/concepts/index.md',
+        'wiki/synthesis/index.md',
     ]
     for slug in args.entities:
         files.append(f'wiki/entities/{slug}.md')
@@ -99,6 +114,15 @@ def main():
     result = git(commit_cmd, check=False)
     if result.returncode == 0:
         print(f"\nCommitted: {args.message}")
+        # Verify commit actually captured all expected files; warn if any are
+        # still unstaged (can happen if a parallel-edit race dropped content).
+        remaining = git(['status', '--short']).stdout.strip()
+        if remaining:
+            print("\nWARN: uncommitted changes remain after commit:",
+                  file=sys.stderr)
+            print(remaining, file=sys.stderr)
+            print("Re-run with the affected files, or use `git add -p` to "
+                  "inspect.", file=sys.stderr)
     else:
         print(f"\nCommit failed:\n{result.stderr}", file=sys.stderr)
         sys.exit(result.returncode)

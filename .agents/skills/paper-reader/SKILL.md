@@ -104,7 +104,9 @@ If the paper has an arXiv ID, **always prefer the HTML version** — better text
 python .agents/skills/paper-reader/scripts/extract_arxiv_html.py --arxiv-id ARXIV_ID --slug SLUG
 ```
 
-The script checks if HTML exists (falls back to MinerU with exit code 2 if 404), runs Defuddle, downloads figures, and replaces remote image links with local embed wikilinks.
+The script auto-creates `raw/papers/{slug}/` (so arXiv-only papers can skip `prepare_paper.py`), checks if HTML exists (falls back to MinerU with exit code 2 if 404), verifies `defuddle` is on PATH (falls back to MinerU with exit code 2 if missing), runs Defuddle, downloads figures, and replaces remote image links with local embed wikilinks.
+
+If the script exits with code 2 (HTML 404 or defuddle missing), proceed to 3c (MinerU) using the PDF you'll need to fetch first via `prepare_paper.py --slug SLUG --pdf-key PDF_KEY`.
 
 #### 3c. MinerU (For Non-arXiv Papers or arXiv Fallback)
 
@@ -322,6 +324,9 @@ The script stages `raw/papers/{slug}/`, `wiki/sources/{slug}.md`, all index file
 - **Avoid `\bm{}` in LaTeX math**: MathJax does not load the `bm` package. Use `\mathbf{x}` (bold upright) or `\boldsymbol{x}` (bold italic) instead.
 - **Delete the PDF** after extraction — extraction scripts handle this automatically; never commit `paper.pdf`.
 - **Commit after build verification** — use `--no-verify` only if the pre-commit hook has environment issues unrelated to your changes.
+- **Sequence edits to the same file** — when updating an existing page with multiple changes (e.g., frontmatter date + new section + Related Concepts/Sources extension), issue the Edit calls **sequentially, one tool call per message**, not in parallel. Parallel Edits to the same file silently race against each other and only one of them persists, leading to missing sections and follow-up "complete pending edits" commits. Parallel Edits to **different** files are fine and encouraged.
+- **Verify each Edit actually persisted** — after editing an existing page (especially in a multi-edit batch), re-Read the relevant section of the file before assuming the edit landed. If an edit was silently dropped, re-apply it before committing. The `commit_ingest.py` script now warns if uncommitted changes remain after commit; treat that warning as a signal to inspect.
+- **Commit hygiene** — if you do discover missing edits after a commit, stage the affected files explicitly and create a follow-up commit (e.g., `ingest(slug): complete pending concept cross-refs missed by first commit`) rather than amending or force-pushing.
 
 ## Skill Self-Update
 

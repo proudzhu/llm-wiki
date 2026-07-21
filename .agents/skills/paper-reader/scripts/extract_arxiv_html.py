@@ -6,17 +6,25 @@ Workflow:
   2. Run `defuddle parse` to produce markdown.
   3. Download figures referenced in the markdown to figures/.
   4. Replace remote image links with local embed wikilinks.
-  5. Delete the PDF (extraction source is HTML).
+  5. Delete the PDF if it exists (extraction source is HTML).
 
 Usage:
   python .agents/skills/paper-reader/scripts/extract_arxiv_html.py --arxiv-id 2607.01834 --slug author-year-title
 
 Requires: defuddle CLI (npm install -g defuddle).
-Falls back to MinerU if arXiv HTML is unavailable (404).
+Falls back to MinerU if arXiv HTML is unavailable (404) — exit code 2.
+Auto-creates raw/papers/{slug}/ if missing, so arXiv-only papers can skip
+prepare_paper.py entirely.
 """
 import argparse, os, re, shutil, subprocess, sys, urllib.request
 
-sys.stdout.reconfigure(encoding='utf-8')
+# Force UTF-8 stdout/stderr so non-ASCII characters in paper titles, figure
+# names, and subprocess output don't trip Windows cp1252 consoles.
+for _s in (sys.stdout, sys.stderr):
+    try:
+        _s.reconfigure(encoding='utf-8')
+    except (AttributeError, ValueError):
+        pass
 
 
 def check_arxiv_html(arxiv_id):
@@ -30,12 +38,24 @@ def check_arxiv_html(arxiv_id):
         return False
 
 
+def check_defuddle():
+    """Return True if defuddle CLI is on PATH."""
+    try:
+        subprocess.run(
+            ['defuddle', '--version'],
+            capture_output=True, text=True, encoding='utf-8', errors='replace',
+        )
+        return True
+    except FileNotFoundError:
+        return False
+
+
 def run_defuddle(url, out_path):
     """Run defuddle parse to extract markdown."""
     print(f"Running defuddle on {url} ...")
     result = subprocess.run(
         ['defuddle', 'parse', url, '--md', '-o', out_path],
-        capture_output=True, text=True,
+        capture_output=True, text=True, encoding='utf-8', errors='replace',
     )
     if result.returncode != 0:
         print(f"defuddle failed:\n{result.stderr}", file=sys.stderr)
