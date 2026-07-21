@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-05-06
+updated: 2026-07-21
 sources:
 tags:
 - audio-processing
@@ -50,6 +50,10 @@ Sophisticated VAD systems use multi-modal data to avoid false positives from:
 While VAD is widely used, VAD-free noise estimation methods avoid the binary speech/pause decision and its associated tuning difficulties:
 
 - **[[concepts/minimum-statistics|Minimum Statistics]]** (Martin 2001): Tracks spectral minima in each frequency band without distinguishing speech from silence. Derives optimal time-varying smoothing parameters and bias compensation. Performs well in low SNR and nonstationary noise, and updates noise estimates even during speech activity.
+
+## Neural VAD as Audibility Estimator
+
+Apostolidis et al. (2026) train a [[concepts/convolutional-recurrent-network|CRN]]-based neural VAD that does not output a binary speech/pause flag but instead estimates a per-time-frequency **audibility** map $\widehat{\mathrm{AUD}}(k,l) \in [0,1]$ adopted from the Speech Intelligibility Index (SII; ANSI S3.5-1997): the T-F SNR at the reference microphone is clipped to $[-15, 15]$ dB and linearly mapped to $[0, 1]$. The network is trained with MSE against ground-truth AUD computed from clean separated speech/noise. This continuous audibility output serves two roles in their [[concepts/output-based-speech-enhancement|output-based SE]] system: (i) forming ideal binary masks (with thresholds $\gamma_S, \gamma_V$) for the input-based [[concepts/mvdr-beamformer|MVDR]] baseline, and (ii) computing [[concepts/glimpse-proportion|Glimpse Proportion]] from each candidate [[concepts/mpdr-beamformer|MPDR]] output to drive selection. The fair comparison (same VAD in both systems) isolates the input-vs-output structural distinction rather than conflating it with VAD-architecture differences.
 
 ## Related Concepts
 

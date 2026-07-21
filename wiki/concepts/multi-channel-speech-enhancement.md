@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-07-10
+updated: 2026-07-21
 tags:
   - speech-enhancement
   - multi-channel
@@ -30,6 +30,7 @@ tags:
 - **SCM Reconstruction-Based MWF (R-MWF)**: Reconstructs SCM from variance ratios and predefined coherence matrices; lightweight online algorithm
 - **Joint AEC+NS+DR (DeepVQE)**: Unified model with cross-attention alignment and complex convolving mask for simultaneous echo/noise/reverb removal
 - **Quality-Aware Dual-Microphone SE (QuaSE)**: Dynamically fuses quality-varying in-ear speech with noisy airborne speech via self-supervised quality assessment; addresses [[concepts/ear-canal-deformation|ECD]]-induced modality imbalance in earables
+- **[[concepts/output-based-speech-enhancement|Output-based SE]]**: Configures the system by evaluating SI/SQ of candidate outputs (rather than extracting input features from noisy signals); demonstrated by Apostolidis et al. (2026) via GP-selected [[concepts/mpdr-beamformer|MPDR]] beamforming
 
 ## Related Concepts
 
@@ -44,6 +45,9 @@ tags:
 - [[concepts/complex-convolving-mask|Complex Convolving Mask]]
 - [[concepts/quality-aware-speech-enhancement|Quality-Aware Speech Enhancement]]
 - [[concepts/ear-canal-deformation|Ear Canal Deformation]]
+- [[concepts/output-based-speech-enhancement|Output-based Speech Enhancement]]
+- [[concepts/glimpse-proportion|Glimpse Proportion]]
+- [[concepts/mpdr-beamformer|MPDR Beamformer]]
 
 ## Related Sources
 
@@ -53,3 +57,4 @@ tags:
 - [[sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026: Spatial-Magnifier]]
 - [[sources/indenbom-2023-deepvqe|Indenbom et al. 2023: DeepVQE]]
 - [[sources/han-2026-quality-aware-earable-se|Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone SE]]
+- [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis et al. 2026: Listen first — output-based multi-microphone speech enhancement]]

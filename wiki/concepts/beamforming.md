@@ -67,6 +67,10 @@ $$h_{\boldsymbol{\theta}_j}[n] = \sum_{l=0}^{L} \sum_{m=-l}^{l} w_l Y_{lm}(\bold
 
 The beamformer's directivity increases with SH order $L$, but higher orders require more microphones and are susceptible to spatial aliasing at high frequencies.
 
+## Output-based MPDR Selection
+
+Apostolidis et al. (2026) propose an [[concepts/output-based-speech-enhancement|output-based]] paradigm in which a discrete dictionary of candidate [[concepts/mpdr-beamformer|MPDR]] beamformers (one per candidate target direction in a pre-enrolled [[concepts/relative-transfer-function|RTF]] dictionary) is evaluated by computing [[concepts/glimpse-proportion|Glimpse Proportion]] from each candidate's output via a neural [[concepts/voice-activity-detection|VAD]]. The candidate maximizing GP is selected per segment. This wrapper rehabilitates MPDR (notoriously sensitive to steering-vector mismatch in conventional usage) by searching over the dictionary rather than committing to a single steering vector, and it significantly outperforms an input-based [[concepts/mvdr-beamformer|MVDR]] baseline especially at low input SNR and under RTF mismatch.
+
 ## Related Concepts
 
 - [[transparency-mode|Transparency Mode]]
@@ -84,6 +88,8 @@ The beamformer's directivity increases with SH order $L$, but higher orders requ
 - [[kantorovich-inequality|Kantorovich Inequality]]
 - [[condition-number|Condition Number]]
 - [[socp-optimization|SOCP Optimization]]
+- [[concepts/output-based-speech-enhancement|Output-based Speech Enhancement]]
+- [[concepts/glimpse-proportion|Glimpse Proportion]]
 
 ## Related Sources
 
@@ -93,3 +99,4 @@ The beamformer's directivity increases with SH order $L$, but higher orders requ
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
 - [[sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition|Lin et al. 2024: AGADIR — NLCMV Beamforming for Directional ASR]]
 - [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]]
+- [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis et al. 2026: Listen first — output-based multi-microphone speech enhancement]]

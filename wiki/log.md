@@ -3282,3 +3282,36 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/index.md` — added 2 concepts, 1 source; updated statistics
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/concepts/index.md` — added 2 concept rows
+
+---
+
+## [2026-07-21] ingest | Listen first: output-based multi-microphone speech enhancement (Apostolidis 2026)
+
+- **Source**: `raw/papers/apostolidis-2026-listen-first-output-based-multi-microphone/full-text.md` (Zotero: HFEKLBV8)
+- **Authors**: Panos Apostolidis, Svend Feldt, Zheng-Hua Tan, Jan Østergaard, Jesper Jensen
+- **Published**: arXiv preprint, 2026-07-14
+- **DOI**: 10.48550/arXiv.2607.12529
+- **Summary**: Proposes an output-based SE paradigm that selects among a dictionary of candidate MPDR beamformers the one whose output maximizes a Glimpse Proportion score; outperforms input-based MVDR baseline, especially at low SNR and under RTF mismatch.
+- **Pages created**:
+  - `raw/papers/apostolidis-2026-listen-first-output-based-multi-microphone/full-text.md` — extracted text from Zotero PDF (MinerU VLM)
+  - `wiki/sources/apostolidis-2026-listen-first-output-based-multi-microphone.md`
+  - `wiki/entities/panos-apostolidis.md`
+  - `wiki/entities/jan-ostergaard.md`
+  - `wiki/concepts/output-based-speech-enhancement.md`
+  - `wiki/concepts/glimpse-proportion.md`
+- **Pages updated**:
+  - `wiki/entities/zheng-hua-tan.md` — added this paper
+  - `wiki/entities/jesper-jensen.md` — added this paper
+  - `wiki/entities/svend-feldt.md` — added this paper
+  - `wiki/concepts/mpdr-beamformer.md` — added "MPDR Rehabilitated via Output-based Selection" section
+  - `wiki/concepts/mvdr-beamformer.md` — added "MVDR as Input-based Baseline" section
+  - `wiki/concepts/voice-activity-detection.md` — added "Neural VAD as Audibility Estimator" section
+  - `wiki/concepts/convolutional-recurrent-network.md` — added audibility-estimation CRN application
+  - `wiki/concepts/multi-channel-speech-enhancement.md` — added output-based SE technique and related links
+  - `wiki/concepts/beamforming.md` — added "Output-based MPDR Selection" section
+  - `wiki/concepts/relative-transfer-function.md` — added "RTF Dictionaries for Output-based Beamformer Selection" section
+  - `wiki/index.md` — added 2 entities, 2 concepts, 1 source; updated statistics
+  - `wiki/entities/index.md` — added 2 entity rows
+  - `wiki/concepts/index.md` — added 2 concept rows
+  - `wiki/sources/index.md` — added 1 source row
+- **Synthesis**: Step 9 skipped per the "when in doubt, prefer not updating" rule — paper introduces a new axis (input vs. output processing) but no existing synthesis page is the right home; creating a new synthesis page from a single paper is not synthesis.

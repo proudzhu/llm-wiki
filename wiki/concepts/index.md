@@ -322,4 +322,6 @@
 | [[concepts/fast-ulcnet\|Fast-ULCNet]] | ULCNet variant using FastGRNN/Comfi-FastGRNN; 0.338M params, ~34% RTF reduction vs. ULCNet at matched NS quality | 2026-07-19 |
 | [[concepts/cofi-lite\|CoFi-Lite]] | Ultra-lightweight SE model (Yang et al. 2026) decoupling spectral modeling into parallel coarse (full-band envelope) and fine (low-frequency detail) paths; 12.87M MACs/s, outperforms GTCRN | 2026-07-21 |
 | [[concepts/cross-path-fusion\|Cross-Path Fusion (CPF)]] | Lightweight bottleneck fusion module bridging CoFi-Lite's parallel coarse/fine paths via concat–FC–GRU–FC; +0.14 PESQ in ablation | 2026-07-21 |
+| [[concepts/output-based-speech-enhancement\|Output-based Speech Enhancement]] | Paradigm configuring an SE system by evaluating SI/SQ of candidate outputs rather than extracting input features. | 2026-07-21 |
+| [[concepts/glimpse-proportion\|Glimpse Proportion]] | SI-inspired measure: fraction of T-F tiles where estimated audibility exceeds a threshold (Cooke 2006). | 2026-07-21 |
 

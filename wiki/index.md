@@ -352,6 +352,8 @@
 | [[entities/wenzhe-liu\|Wenzhe Liu]] | Researcher at Institute of Acoustics, CAS — co-author of 60-year frequency-domain SE survey | 2026-07-19 |
 | [[entities/xiaoxue-luo\|Xiaoxue Luo]] | Researcher at Institute of Acoustics, CAS — co-author of 60-year frequency-domain SE survey | 2026-07-19 |
 | [[entities/andong-li\|Andong Li]] | Researcher at Institute of Acoustics, CAS — co-author of 60-year frequency-domain SE survey (decoupling-style architectures) | 2026-07-19 |
+| [[entities/panos-apostolidis\|Panos Apostolidis]] | Aalborg University / Eriksholm Research Centre — lead author of Listen first (output-based SE). | 2026-07-21 |
+| [[entities/jan-ostergaard\|Jan Østergaard]] | Aalborg University — co-author of Listen first (output-based SE). | 2026-07-21 |
 
 ---
 
@@ -679,6 +681,8 @@
 | [[concepts/fast-ulcnet\|Fast-ULCNet]] | ULCNet variant using FastGRNN/Comfi-FastGRNN; 0.338M params, ~34% RTF reduction vs. ULCNet at matched NS quality | 2026-07-19 |
 | [[concepts/cofi-lite\|CoFi-Lite]] | Ultra-lightweight SE model (Yang et al. 2026) decoupling spectral modeling into parallel coarse (full-band envelope) and fine (low-frequency detail) paths; 12.87M MACs/s, outperforms GTCRN | 2026-07-21 |
 | [[concepts/cross-path-fusion\|Cross-Path Fusion (CPF)]] | Lightweight bottleneck fusion module bridging CoFi-Lite's parallel coarse/fine paths via concat–FC–GRU–FC; +0.14 PESQ in ablation | 2026-07-21 |
+| [[concepts/output-based-speech-enhancement\|Output-based Speech Enhancement]] | Paradigm configuring an SE system by evaluating SI/SQ of candidate outputs rather than extracting input features. | 2026-07-21 |
+| [[concepts/glimpse-proportion\|Glimpse Proportion]] | SI-inspired measure: fraction of T-F tiles where estimated audibility exceeds a threshold (Cooke 2006). | 2026-07-21 |
 
 ---
 
@@ -814,6 +818,7 @@
 | [[sources/larraza-2026-fast-ulcnet-speech-enhancement\|Larraza & de Koeijer 2026: Fast-ULCNet]] | Fast-ULCNet replaces ULCNet's GRU with FastGRNN; Comfi-FastGRNN mitigates state drift on long sequences; 0.338M params, ~34% RTF reduction | 2026-07-19 |
 | [[sources/zheng-2023-survey-frequency-domain-speech-enhancement\|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] | 60-year survey of frequency-domain monaural SE from traditional statistical methods to deep learning; five-group taxonomy and unified evaluation across normal-hearing and hearing-impaired listeners | 2026-07-19 |
 | [[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement\|Yang et al. 2026: CoFi-Lite — Pushing the Limits of Ultra-Lightweight Speech Enhancement]] | Dual coarse/fine-path ultra-lightweight SE model with Cross-Path Fusion; beats GTCRN at 40% of its compute (12.87M MACs/s, 83.12k params) | 2026-07-21 |
+| [[sources/apostolidis-2026-listen-first-output-based-multi-microphone\|Apostolidis 2026: Listen first — output-based multi-microphone speech enhancement]] | Output-based SE paradigm selecting GP-maximizing MPDR from a candidate dictionary; outperforms input-based MVDR, especially at low SNR. | 2026-07-21 |
 
 ---
 
@@ -864,10 +869,10 @@
 
 ## Statistics
 
-- **Total pages**: 813
-- **Entities**: 342
-- **Concepts**: 318
-- **Sources**: 126
+- **Total pages**: 818
+- **Entities**: 344
+- **Concepts**: 320
+- **Sources**: 127
 - **Synthesis**: 20
 - **Queries**: 7
 - **Last updated**: 2026-07-21

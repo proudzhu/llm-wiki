@@ -346,4 +346,6 @@
 | [[entities/wenzhe-liu\|Wenzhe Liu]] | Researcher at Institute of Acoustics, CAS — co-author of 60-year frequency-domain SE survey | 2026-07-19 |
 | [[entities/xiaoxue-luo\|Xiaoxue Luo]] | Researcher at Institute of Acoustics, CAS — co-author of 60-year frequency-domain SE survey | 2026-07-19 |
 | [[entities/andong-li\|Andong Li]] | Researcher at Institute of Acoustics, CAS — co-author of 60-year frequency-domain SE survey (decoupling-style architectures) | 2026-07-19 |
+| [[entities/panos-apostolidis\|Panos Apostolidis]] | Aalborg University / Eriksholm Research Centre — lead author of Listen first (output-based SE). | 2026-07-21 |
+| [[entities/jan-ostergaard\|Jan Østergaard]] | Aalborg University — co-author of Listen first (output-based SE). | 2026-07-21 |
 

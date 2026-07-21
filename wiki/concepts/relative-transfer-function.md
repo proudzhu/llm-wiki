@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-26
-updated: 2026-05-26
+updated: 2026-07-21
 tags:
   - spatial-filtering
   - beamforming
@@ -55,6 +55,10 @@ where $\mathbf{e}_{\mathrm{ref}}$ is the selection vector for the reference micr
 
 The RTF captures both direct-path and reverberant propagation effects. RTF-based beamforming yields improved speech quality compared with approaches relying solely on direct-path (steering vector) models, particularly in reverberant environments.
 
+## RTF Dictionaries for Output-based Beamformer Selection
+
+Apostolidis et al. (2026) construct a pre-enrolled dictionary of $N$ time-invariant candidate RTF vectors $\mathbf{d}_\theta(k) = \{\mathbf{d}_{\theta_1}(k), \ldots, \mathbf{d}_{\theta_N}(k)\}$, each corresponding to a candidate target direction at a fixed distance. Each candidate RTF parameterizes a candidate [[concepts/mpdr-beamformer|MPDR]] beamformer, and the [[concepts/output-based-speech-enhancement|output-based]] wrapper selects the candidate whose output maximizes [[concepts/glimpse-proportion|Glimpse Proportion]]. The system remains robust to RTF mismatch: significant SNR/ESTOI gains over an input-based [[concepts/mvdr-beamformer|MVDR]] baseline persist when the dictionary is coarse (15° spacing) or non-individualized (HATS-measured RTFs).
+
 ## Related Concepts
 
 - [[concepts/lcmv-beamformer|LCMV Beamformer]]
@@ -64,7 +68,10 @@ The RTF captures both direct-path and reverberant propagation effects. RTF-based
 - [[concepts/room-transfer-function|Room Transfer Function]]
 - [[concepts/room-impulse-response|Room Impulse Response]]
 - [[concepts/generalized-eigenvalue-decomposition|Generalized Eigenvalue Decomposition]]
+- [[concepts/mpdr-beamformer|MPDR Beamformer]]
+- [[concepts/output-based-speech-enhancement|Output-based Speech Enhancement]]
 
 ## Related Sources
 
 - [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]]
+- [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis et al. 2026: Listen first — output-based multi-microphone speech enhancement]]

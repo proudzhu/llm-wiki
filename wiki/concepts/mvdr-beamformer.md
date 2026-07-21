@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-06-21
+updated: 2026-07-21
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
 tags:
@@ -34,6 +34,10 @@ The MVDR is a special case of the [[concepts/lcmv-beamformer|LCMV beamformer]] w
 
 The MVDR is a special case of the [[concepts/variable-span-linear-filter|Variable Span Linear Filter]] with $\mu=0$ and $Q=P$ (true rank of $\Phi_x$).
 
+## MVDR as Input-based Baseline
+
+Apostolidis et al. (2026) use a conventional input-based MVDR as the baseline against which their [[concepts/output-based-speech-enhancement|output-based]] [[concepts/mpdr-beamformer|MPDR]] system is compared. The MVDR uses the same neural [[concepts/voice-activity-detection|VAD]] as the proposed system (for fair architectural comparison), with ideal binary masks formed from the VAD's audibility map used to estimate $\mathbf{C}_{\mathbf{S}}$ and $\mathbf{C}_{\mathbf{V}}$ and the RTF via the principal-eigenvector method. The input-based MVDR consistently underperforms the output-based MPDR — particularly at low input SNR ($-10$ to $-5$ dB) — because VAD decisions on noisy microphone signals corrupt the noise covariance estimate. This illustrates that the input-vs-output *structural* distinction matters even when the VAD architecture is held constant.
+
 ## Related Concepts
 
 - [[concepts/beamforming|Beamforming]]
@@ -55,3 +59,4 @@ The MVDR is a special case of the [[concepts/variable-span-linear-filter|Variabl
 - [[sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
 - [[sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026: Spatial-Magnifier]]
+- [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis et al. 2026: Listen first — output-based multi-microphone speech enhancement]]
