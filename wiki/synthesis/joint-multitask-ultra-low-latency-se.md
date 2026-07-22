@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-07-16
-updated: 2026-07-20
+updated: 2026-07-22
 sources:
   - raw/papers/indenbom-2023-deepvqe/full-text.md
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
@@ -12,6 +12,9 @@ sources:
   - raw/papers/rath-2026-minimum-delay-block-size/full-text.txt
   - raw/papers/seidel-2024-bark-scale-nn-residual-suppression/full-text.md
   - raw/papers/chen-2023-ultra-dual-path-compression/full-text.md
+  - raw/papers/castelli-2025-embedded-joint-aec-ns/full-text.md
+  - raw/papers/li-2025-echofree-neural-aec/full-text.md
+  - raw/papers/larraza-2026-fast-ulcnet-speech-enhancement/full-text.md
 tags:
   - speech-enhancement
   - multi-task
@@ -45,7 +48,7 @@ Neither trend is independently novel. The **new insight** from the 2025–2026 c
 | [[sources/castelli-2025-embedded-joint-aec-ns\|TinyVQE (Castelli)]] | 2024 | AEC + NS (joint) | 16 ms (hop) | **0.11M params, 0.48 MMACs/frame**, 420 KB SRAM | DeepVQE-s compressed; HiFi4 DSP custom CCM intrinsics |
 | [[sources/hao-2025-l3c-deepmfc\|L3C-DeepMFC (Hao)]] | 2025 | Hearing-aid feedback cancellation | **4 ms** | 0.31M params, 0.43 G/s MACs | Gain-shape complex mapping + closed-loop FT |
 | [[sources/li-2025-echofree-neural-aec\|EchoFree (Li)]] | 2025 | AEC only (lightweight) | — | **0.28M params, 30 MMACs/s** | U-Net on Bark + two-stage WavLM SSL loss |
-| [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator\|HALO (Zhao)]] | 2026 | SE backbone accelerator (plug-in) | **0 ms added** | Halves backbone MACs | Dynamic-conv frame-rate reduction |
+| [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator\|HALO (Zhao)]] | 2026 | SE backbone accelerator (plug-in) | **0 ms added** | Halves internal frame rate (≈½ MACs) | Dynamic-conv frame-rate reduction |
 | [[sources/ashur-2026-acoustic-howling-suppression-fine-tuning\|Ashur & Cohen]] | 2026 | NS + AHS (joint via fine-tuning) | **0 ms added** | Same as Denoiser baseline | Data-mixing fine-tuning (60-40 ratio) |
 | [[sources/ostergaard-2026-own-voice-cancellation\|OVC (Østergaard)]] | 2026 | OVC (target-speaker removal) | **2 ms** | 0.33 GMAC/s, RTF 0.82–1.69 | Mamba-MinGRU linear RNN |
 | [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement\|RT-Tango (Benslimane)]] | 2026 | Distributed binaural SE | **8 ms** | 35 MMACs/s | ERB + GRNN + FRS + asymmetric STFT |
@@ -89,6 +92,7 @@ Instead of bolting tasks onto a shared backbone, **reframe** the task so a pretr
 | Strategy | Latency Flexibility | Multi-Task Mechanism | Example |
 |----------|---------------------|----------------------|---------|
 | A. Shared backbone | Constrained by backbone frame size | Cross-attention / shared encoder | DeepVQE (20 ms) |
+| A'. Embedded compression of shared backbone | Constrained by backbone frame size (fixed after deployment) | Same as A, plus stage-wise compression (depthwise conv, intrinsics, ReLU, pruning) | TinyVQE (16 ms hop, HiFi4 DSP) |
 | B. Task reframing | Inherited from backbone | Data-mixing / objective redefinition | Ashur (0 ms added), OVC (2 ms) |
 | C. Distributed multi-stage | Constrained by inter-node comm | Pipeline of specialized stages | RT-Tango (8 ms) |
 
@@ -253,7 +257,7 @@ This is relevant to the multi-task / low-latency synthesis in two ways:
 | Strategy | Source | Range | Model size change |
 |----------|--------|-------|-------------------|
 | Dual-path compression (T×F grid search) | Chen 2023 | 4×–32× (57M–1822M MACs/s) | <500K params throughout |
-| Stage-wise surgical compression | Castellc 2024 | 610K → 114K params | Each stage re-trained |
+| Stage-wise surgical compression | Castelli 2024 | 610K → 114K params | Each stage re-trained |
 | Backbone replacement (GRU→FastGRNN) | Larraza 2026 | Single point (0.338M params) | Single retrain |
 
 **Trade-off**: Chen's compression-ratio flexibility comes at the cost of compression/decompression module overhead — at ratios >32× these modules begin to dominate cost. Castelli's stage-wise approach achieves higher per-stage compression (610K→114K = 5.4× param reduction) but each stage requires retraining and the operating point is fixed after deployment. The two strategies are complementary: Chen's dual-path compression can be applied to a Castelli-style compressed backbone to get ratio-flexibility at the embedded tier.
