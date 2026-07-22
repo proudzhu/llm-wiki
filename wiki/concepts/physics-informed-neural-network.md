@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-06-25
-updated: 2026-06-25
+updated: 2026-07-17
 sources:
   - raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md
   - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
@@ -64,6 +64,7 @@ where $c$ is the speed of sound. See [[sources/zhang-2024-active-noise-control-s
 - [[active-vibration-control|Active Vibration Control]]
 - [[input-shaping|Input Shaping]]
 - [[spherical-harmonic-transform|Spherical Harmonic Transform]]
+- [[concepts/pi-nlms|Physics-Informed NLMS (PI-NLMS)]]
 
 ## Related Sources
 

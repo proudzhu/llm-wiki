@@ -355,4 +355,7 @@
 | [[entities/weihua-li\|Weihua Li]] | Tencent AI Lab — co-author of Ultra Dual-Path Compression (Interspeech 2023) | 2026-07-20 |
 | [[entities/zhuocheng-lu\|Zhuocheng Lu]] | Tencent AI Lab — co-author of Ultra Dual-Path Compression (Interspeech 2023) | 2026-07-20 |
 | [[entities/chao-weng\|Chao Weng]] | Tencent AI Lab — co-author of Ultra Dual-Path Compression (Interspeech 2023) | 2026-07-20 |
+| [[entities/michele-scarpiniti\|Michele Scarpiniti]] | DIET, Sapienza University of Rome — adaptive signal processing, acoustic echo cancellation | 2026-07-17 |
+| [[entities/danilo-comminiello\|Danilo Comminiello]] | DIET, Sapienza University of Rome — acoustic signal processing, adaptive filtering | 2026-07-17 |
+| [[entities/aurelio-uncini\|Aurelio Uncini]] | DIET, Sapienza University of Rome — adaptive signal processing, author of Fundamentals of Adaptive Signal Processing | 2026-07-17 |
 

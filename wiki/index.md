@@ -361,6 +361,9 @@
 | [[entities/weihua-li\|Weihua Li]] | Tencent AI Lab — co-author of Ultra Dual-Path Compression (Interspeech 2023) | 2026-07-20 |
 | [[entities/zhuocheng-lu\|Zhuocheng Lu]] | Tencent AI Lab — co-author of Ultra Dual-Path Compression (Interspeech 2023) | 2026-07-20 |
 | [[entities/chao-weng\|Chao Weng]] | Tencent AI Lab — co-author of Ultra Dual-Path Compression (Interspeech 2023) | 2026-07-20 |
+| [[entities/michele-scarpiniti\|Michele Scarpiniti]] | DIET, Sapienza University of Rome — adaptive signal processing, acoustic echo cancellation | 2026-07-17 |
+| [[entities/danilo-comminiello\|Danilo Comminiello]] | DIET, Sapienza University of Rome — acoustic signal processing, adaptive filtering | 2026-07-17 |
+| [[entities/aurelio-uncini\|Aurelio Uncini]] | DIET, Sapienza University of Rome — adaptive signal processing, author of Fundamentals of Adaptive Signal Processing | 2026-07-17 |
 
 ---
 
@@ -695,6 +698,7 @@
 | [[concepts/trainable-frequency-compression\|Trainable Frequency Compression]] | Learnable linear transform per band replacing fixed ERB/Mel triangle filters; >0.1 WB-PESQ gain at 8x-16x | 2026-07-20 |
 | [[concepts/frame-skip-prediction\|Frame-Skip Prediction]] | Run mask estimator once every r frames, copy mask to skipped frames; PostNet recovers +0.33 WB-PESQ at 8x | 2026-07-20 |
 | [[concepts/post-processing-network\|Post-Processing Network (PostNet)]] | Lightweight 67K-param 1-layer GRU + convs refinement module for frame-skip prediction; 15M MACs/s | 2026-07-20 |
+| [[concepts/pi-nlms\|PI-NLMS (Physics-Informed NLMS)]] | Adaptive filtering algorithm incorporating RIR structural priors for AEC | 2026-07-17 |
 
 ---
 
@@ -832,6 +836,7 @@
 | [[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement\|Yang et al. 2026: CoFi-Lite — Pushing the Limits of Ultra-Lightweight Speech Enhancement]] | Dual coarse/fine-path ultra-lightweight SE model with Cross-Path Fusion; beats GTCRN at 40% of its compute (12.87M MACs/s, 83.12k params) | 2026-07-21 |
 | [[sources/apostolidis-2026-listen-first-output-based-multi-microphone\|Apostolidis 2026: Listen first — output-based multi-microphone speech enhancement]] | Output-based SE paradigm selecting GP-maximizing MPDR from a candidate dictionary; outperforms input-based MVDR, especially at low SNR. | 2026-07-21 |
 | [[sources/chen-2023-ultra-dual-path-compression\|Chen et al. 2023: Ultra Dual-Path Compression for Joint AEC and NS]] | Time-frequency dual-path compression on DPT-FSNet for joint AEC+NS; 4x-32x ratio range, 57M-1822M MACs/s, <0.5M params; matches DeepFilterNet at 1/4 params | 2026-07-20 |
+| [[sources/scarpiniti-2027-physics-informed-adaptive-filtering-aec\|Scarpiniti, Comminiello & Uncini 2027: Physics-informed adaptive filtering for AEC]] | Physics-Informed NLMS (PI-NLMS) algorithm incorporating RIR structural priors for acoustic echo cancellation | 2026-07-17 |
 
 ---
 
@@ -882,10 +887,10 @@
 
 ## Statistics
 
-- **Total pages**: 831
-- **Entities**: 351
-- **Concepts**: 325
-- **Sources**: 128
+- **Total pages**: 836
+- **Entities**: 354
+- **Concepts**: 326
+- **Sources**: 129
 - **Synthesis**: 20
 - **Queries**: 7
 - **Last updated**: 2026-07-22

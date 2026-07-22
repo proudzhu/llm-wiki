@@ -85,6 +85,7 @@ EchoFree achieves DeepVQE-S-comparable single-talk performance at ~10× lower co
 - [[concepts/depthwise-separable-convolution|Depthwise Separable Convolution]]
 - [[concepts/sub-pixel-convolution|Sub-Pixel Convolution]]
 - [[concepts/frequency-domain-kalman-filter|Frequency-Domain Kalman Filter]]
+- [[concepts/pi-nlms|Physics-Informed NLMS (PI-NLMS)]]
 
 ## Related Sources
 
@@ -93,3 +94,4 @@ EchoFree achieves DeepVQE-S-comparable single-talk performance at ~10× lower co
 - [[sources/seidel-2024-bark-scale-nn-residual-suppression|Seidel, Mowlaee & Fingscheidt 2024: Bark-Scale NN for RES+NS]]
 - [[sources/li-2025-echofree-neural-aec|Li et al. 2025: EchoFree]]
 - [[sources/castelli-2025-embedded-joint-aec-ns|Castelli 2024: Embedded Joint AEC and NS]]
+- [[sources/scarpiniti-2027-physics-informed-adaptive-filtering-aec|Scarpiniti, Comminiello & Uncini 2027: Physics-informed adaptive filtering for AEC]]

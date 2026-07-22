@@ -3346,3 +3346,26 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 - **Synthesis**: Step 9 skipped per the "when in doubt, prefer not updating" rule — paper introduces a new axis (input vs. output processing) but no existing synthesis page is the right home; creating a new synthesis page from a single paper is not synthesis.
 
 ---
+---
+
+## [2026-07-22] ingest | Scarpiniti, Comminiello & Uncini 2027: Physics-informed adaptive filtering for acoustic echo cancellation
+
+**Source**: `raw/papers/scarpiniti-2027-physics-informed-adaptive-filtering-aec/full-text.md` (Zotero: 6PXZWENL)
+**Authors**: Michele Scarpiniti, Danilo Comminiello, Aurelio Uncini
+**Published**: Signal Processing, 2027
+**DOI**: 10.1016/j.sigpro.2026.110819
+**Summary**: Introduces Physics-Informed NLMS (PI-NLMS) algorithm for AEC, incorporating RIR structural priors (causality, exponential decay, sparsity, temporal/spectral smoothness, slow variation) via composite stochastic optimization.
+**Pages created**:
+- `raw/papers/scarpiniti-2027-physics-informed-adaptive-filtering-aec/full-text.md` — extracted text from Zotero PDF
+- `wiki/sources/scarpiniti-2027-physics-informed-adaptive-filtering-aec.md`
+- `wiki/entities/michele-scarpiniti.md`
+- `wiki/entities/danilo-comminiello.md`
+- `wiki/entities/aurelio-uncini.md`
+- `wiki/concepts/pi-nlms.md`
+**Pages updated**:
+- `wiki/concepts/acoustic-echo-cancellation.md` — added PI-NLMS to Related Concepts and source to Related Sources
+- `wiki/concepts/physics-informed-neural-network.md` — added PI-NLMS to Related Concepts
+- `wiki/index.md` — added 1 source, 3 entities, 1 concept; updated statistics
+- `wiki/sources/index.md` — added 1 source row
+- `wiki/entities/index.md` — added 3 entity rows
+- `wiki/concepts/index.md` — added 1 concept row

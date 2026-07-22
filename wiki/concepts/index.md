@@ -329,4 +329,5 @@
 | [[concepts/trainable-frequency-compression\|Trainable Frequency Compression]] | Learnable linear transform per band replacing fixed ERB/Mel triangle filters; >0.1 WB-PESQ gain at 8x-16x | 2026-07-20 |
 | [[concepts/frame-skip-prediction\|Frame-Skip Prediction]] | Run mask estimator once every r frames, copy mask to skipped frames; PostNet recovers +0.33 WB-PESQ at 8x | 2026-07-20 |
 | [[concepts/post-processing-network\|Post-Processing Network (PostNet)]] | Lightweight 67K-param 1-layer GRU + convs refinement module for frame-skip prediction; 15M MACs/s | 2026-07-20 |
+| [[concepts/pi-nlms\|PI-NLMS (Physics-Informed NLMS)]] | Adaptive filtering algorithm incorporating RIR structural priors for AEC | 2026-07-17 |
 
