@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-07-10
-updated: 2026-07-16
+updated: 2026-07-22
 sources:
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
 tags:
@@ -56,6 +56,7 @@ Key findings:
 ## Relationship to Other Grouped Architectures
 
 - [[concepts/gtcrn|GTCRN]] applies grouped RNN within a Dual-Path RNN (G-DPRNN) bottleneck, splitting features and hidden states into 2 groups.
+- [[concepts/adaptcrn|AdaptCRN]] (Wang et al. 2025) inherits GTCRN's grouped-DPRNN pattern verbatim (2 groups, intra-frame grouped GRU hidden 8, inter-frame grouped GRU hidden 16) for its bottleneck — and goes further by removing the representation rearrangement after the grouped RNN, noting that the subsequent FC layer inherently performs inter-group fusion and rearrangement is mathematically equivalent to permuting the FC weight rows. This is a useful simplification for ultra-lightweight models where every parameter counts.
 - GRNN as used in RT-Tango and MN-TANGO originates from the group recurrent networks of Gao et al. (2018) for efficient sequence learning.
 
 ## Related Concepts
@@ -65,6 +66,7 @@ Key findings:
 - [[concepts/mn-tango|MN-TANGO]]
 - [[concepts/quantization-aware-training|Quantization-Aware Training (QAT)]]
 - [[concepts/gtcrn|GTCRN]]
+- [[concepts/adaptcrn|AdaptCRN]]
 - [[concepts/depthwise-separable-convolution|Depthwise Separable Convolution]]
 - [[concepts/erb-scale|ERB Scale]]
 
@@ -72,3 +74,4 @@ Key findings:
 
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]
 - [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]]
+- [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — AdaptCRN's grouped-DPRNN bottleneck (with rearrangement removed)

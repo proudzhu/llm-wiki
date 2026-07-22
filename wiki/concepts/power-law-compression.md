@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-07-16
-updated: 2026-07-19
+updated: 2026-07-22
 tags:
   - signal-processing
   - speech-enhancement
@@ -33,7 +33,9 @@ Zheng et al. (2023) report a surprising listener-dependent effect of input-featu
 - [[concepts/ulcnet|ULCNet]]
 - [[concepts/channel-wise-feature-reorientation|Channel-Wise Feature Reorientation]]
 - [[concepts/speech-enhancement|Speech Enhancement]]
+- [[concepts/adaptcrn|AdaptCRN]]
 
 ## Related Sources
 
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]]
+- [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — AdaptCRN uses exponent 0.3 for magnitude MSE loss and 0.7 for real/imag MSE loss (i.e., real/imag parts compressed by $|S|^{0.7}$ before MSE), with $\log_{10}$ applied to compress magnitude input features in the spectral compression module. Ablation: removing dynamic-range compression costs ~0.2 dB SI-SNR and ~0.05 PESQ on AdaptCRN.

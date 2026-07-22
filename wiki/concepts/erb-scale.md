@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-06-07
-updated: 2026-07-16
+updated: 2026-07-22
 sources:
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
 tags:
@@ -43,6 +43,10 @@ This perceptual compression allows the network to operate efficiently — the mi
 
 Both [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|RT-Tango]] and [[sources/benslimane-2026-tango-quantized-distributed|Quantized MN-TANGO]] use an ERB-scaled filterbank as the front-end for the mask-estimation DNNs. After a point-wise channel-mixing layer, the 257-bin linear-frequency STFT is projected onto a compact ERB scale, reducing the recurrent input dimension; the predicted ERB-domain mask is mapped back to the linear STFT bins via an inverse ERB transform before the [[concepts/multi-channel-wiener-filter|SDW-MWF]] spatial filtering stage. In MN-TANGO, the configuration is 64 low-frequency linear bins + 64 ERB bands → 128-dimensional recurrent input (adjusted for divisibility by the group count $G$).
 
+## Usage in AdaptCRN
+
+[[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025]]'s [[concepts/adaptcrn|AdaptCRN]] reuses GTCRN's ERB band-merging scheme for its **spectral compression** module: the first 65 low-frequency bins (below 2 kHz) are kept unaltered, while the 192 high-frequency bins (above 2 kHz) are downsampled to 64 ERB bands via a triangular ERB filter. The 129-D compressed feature is then expanded to 9 channels × 129 D per frame via SFE (subband feature extraction, kernel 3) before entering the encoder. Spectral decompression applies the **transpose** of the (non-learnable) downsampling matrix. Combined with dynamic-range compression ($\log_{10}$ on magnitude, $|S|^{0.7}$ on real/imag — see [[concepts/power-law-compression|Power-Law Compression]]), this module reduces both frequency dimension and dynamic range before the network. This design pattern (ERB band merging + SFE + transposed-matrix decompression) originates from [[concepts/gtcrn|GTCRN]] and is reused by [[concepts/cofi-lite|CoFi-Lite]] and AdaptCRN in the same NJU/Horizon Robotics lab lineage.
+
 ## Relationship to Other Scales
 
 | Scale | Formula | Bands | Application |
@@ -62,6 +66,8 @@ The ERB scale provides finer frequency resolution at low frequencies compared to
 - [[concepts/mn-tango|MN-TANGO]]
 - [[concepts/bark-scale-spectral-features|Bark-Scale Spectral Features]] — alternative perceptual scale used by later PercepNet-style AEC works (Bark-AEC, EchoFree)
 - [[concepts/trainable-frequency-compression|Trainable Frequency Compression]] — Chen et al. 2023 show fixed ERB filters underperform trainable Mel filters on WB-PESQ across all compression ratios
+- [[concepts/gtcrn|GTCRN]] — origin of the ERB + SFE + transposed-decompression pattern reused by AdaptCRN
+- [[concepts/adaptcrn|AdaptCRN]] — reuses GTCRN's ERB spectral compression scheme
 
 ## Related Sources
 
@@ -71,3 +77,4 @@ The ERB scale provides finer frequency resolution at low frequencies compared to
 - [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]]
 - [[sources/li-2025-echofree-neural-aec|Li et al. 2025: EchoFree]] — later PercepNet-style work that switched to the Bark scale (100 bands)
 - [[sources/chen-2023-ultra-dual-path-compression|Chen et al. 2023: Ultra Dual-Path Compression]] — benchmarks FixedERB vs. FixedMel vs. TrainMel frequency compression; ERB wins SI-SNR at large ratios because SI-SNR weights all frequencies equally (Mel emphasises lows)
+- [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — AdaptCRN's spectral compression uses ERB band merging (65 low + 64 ERB)

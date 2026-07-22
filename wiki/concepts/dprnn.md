@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-16
-updated: 2026-05-16
+updated: 2026-07-22
 tags:
   - neural-network
   - speech-separation
@@ -62,3 +62,4 @@ Used in [[concepts/gtcrn|GTCRN (Rong et al. 2024)]], G-DPRNN combines grouped RN
 
 - [[sources/he-2025-vibomni|He, Guo, Hou & Yan 2025: VibOmni]]
 - [[sources/rong-2024-gtcrn-speech-enhancement-ultralow|Rong et al. 2024: GTCRN — Ultralightweight Speech Enhancement]]
+- [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — [[concepts/adaptcrn|AdaptCRN]] uses a 2-block grouped DPRNN bottleneck (2 groups, frequency dim 33, intra-frame GRU hidden 8, inter-frame GRU hidden 16) between its adaptive-block encoder and decoder; the representation rearrangement after grouped RNN is removed since the following FC layer performs equivalent inter-group fusion.

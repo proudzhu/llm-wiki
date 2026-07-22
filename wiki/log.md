@@ -3346,7 +3346,6 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 - **Synthesis**: Step 9 skipped per the "when in doubt, prefer not updating" rule — paper introduces a new axis (input vs. output processing) but no existing synthesis page is the right home; creating a new synthesis page from a single paper is not synthesis.
 
 ---
----
 
 ## [2026-07-22] ingest | Scarpiniti, Comminiello & Uncini 2027: Physics-informed adaptive filtering for acoustic echo cancellation
 
@@ -3382,6 +3381,40 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 
 ---
 
+## [2026-07-22] ingest | Adaptive Convolution for CNN-based Speech Enhancement Models (Wang 2025)
+
+- **Source**: `raw/papers/wang-2025-adaptive-convolution-cnn-speech-enhancement/full-text.md` (Zotero: G3J7XJQF)
+- **Authors**: Dahan Wang, Xiaobin Rong, Shiruo Sun, Yuxiang Hu, Changbao Zhu, Jing Lu
+- **Published**: IEEE Transactions on Audio, Speech, and Language Processing, 2025
+- **DOI**: 10.1109/TASLPRO.2025.3623897
+- **Summary**: Proposes adaptive convolution (frame-wise causal dynamic convolution with per-frame attention over K=8 candidate kernels) and AdaptCRN (135K params, 41 MMACs/s, PESQ 2.98 on VCTK-DEMAND); validates generalization across DPCRN/DCCRN/GTCRN/LiSenNet backbones with largest gains on lightweight models; documents CV→SE transfer failures (temperature annealing, softmax).
+- **Pages created**:
+  - `raw/papers/wang-2025-adaptive-convolution-cnn-speech-enhancement/full-text.md` — extracted text from Zotero PDF (MinerU VLM)
+  - `wiki/sources/wang-2025-adaptive-convolution-cnn-speech-enhancement.md`
+  - `wiki/concepts/adaptive-convolution.md`
+  - `wiki/concepts/adaptcrn.md`
+- **Pages updated**:
+  - `wiki/entities/dahan-wang.md` — added this paper (lead author)
+  - `wiki/entities/xiaobin-rong.md` — added this paper
+  - `wiki/entities/shiruo-sun.md` — added this paper
+  - `wiki/entities/yuxiang-hu.md` — added this paper
+  - `wiki/entities/changbao-zhu.md` — added this paper
+  - `wiki/entities/jing-lu.md` — added this paper
+  - `wiki/concepts/dynamic-convolution.md` — added adaptive convolution variant to table, applications, cross-refs
+  - `wiki/concepts/gtcrn.md` — added AdaptCRN as successor, cross-refs to adaptive-convolution/adaptcrn
+  - `wiki/concepts/convolutional-recurrent-network.md` — added AdaptCRN to applications
+  - `wiki/concepts/grouped-recurrent-neural-network.md` — added AdaptCRN's grouped-DPRNN variant (rearrangement removed)
+  - `wiki/concepts/power-law-compression.md` — added AdaptCRN's 0.3/0.7 exponents and ablation
+  - `wiki/concepts/erb-scale.md` — added AdaptCRN's ERB band-merging usage section
+  - `wiki/concepts/dprnn.md` — added AdaptCRN's grouped DPRNN bottleneck to related sources
+  - `wiki/concepts/adaptive-filtering.md` — added neural counterpart (adaptive convolution) section
+  - `wiki/synthesis/computational-efficiency-evolution.md` — added AdaptCRN as 8th Pareto-frontier point introducing the dynamic-capacity axis
+  - `wiki/index.md` — added 2 concepts, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/concepts/index.md` — added 2 concept rows
+
+---
+
 ## [2026-07-23] ingest | High-Selectivity Filter Banks for Spectral Analysis of Music Signals (Diniz et al. 2006)
 
 - **Source**: `raw/papers/diniz-2006-high-selectivity-filter-banks-spectral-analysis-music/full-text.md` (Zotero: HSWGWJQ6)
@@ -3407,3 +3440,5 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 4 entity rows
   - `wiki/concepts/index.md` — added 6 concept rows
+
+---

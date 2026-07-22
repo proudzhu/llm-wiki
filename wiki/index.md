@@ -709,6 +709,8 @@
 | [[concepts/constant-q-fast-filter-bank\|Constant-Q Fast Filter Bank (CQFFB)]] | High-selectivity geometric-spacing filter bank combining FFB selectivity with CQT distribution; high cost. | 2026-07-23 |
 | [[concepts/bounded-q-fast-filter-bank\|Bounded-Q Fast Filter Bank (BQFFB)]] | High-selectivity piecewise-linear filter bank; CQFFB octave separation + FFB intra-octave; ~5 orders lower cost than CQFFB. | 2026-07-23 |
 | [[concepts/frequency-response-masking\|Frequency Response Masking (FRM)]] | Digital filter design technique for sharp-transition-band linear-phase FIR filters; underlies the FFB. | 2026-07-23 |
+| [[concepts/adaptive-convolution\|Adaptive Convolution]] | Frame-wise causal dynamic convolution for streaming SE; per-frame kernel aggregation via frequency-pooled temporal (GRU) attention; CV→SE transfer failures documented | 2026-07-22 |
+| [[concepts/adaptcrn\|AdaptCRN]] | Ultra-lightweight SE model pairing adaptive convolution with ConvNeXt/StarNet block, grouped DPRNN, ERB spectral compression — 135K params, 41 MMACs/s, PESQ 2.98 on VCTK-DEMAND | 2026-07-22 |
 
 ---
 
@@ -848,6 +850,7 @@
 | [[sources/chen-2023-ultra-dual-path-compression\|Chen et al. 2023: Ultra Dual-Path Compression for Joint AEC and NS]] | Time-frequency dual-path compression on DPT-FSNet for joint AEC+NS; 4x-32x ratio range, 57M-1822M MACs/s, <0.5M params; matches DeepFilterNet at 1/4 params | 2026-07-20 |
 | [[sources/scarpiniti-2027-physics-informed-adaptive-filtering-aec\|Scarpiniti, Comminiello & Uncini 2027: Physics-informed adaptive filtering for AEC]] | Physics-Informed NLMS (PI-NLMS) algorithm incorporating RIR structural priors for acoustic echo cancellation | 2026-07-17 |
 | [[sources/diniz-2006-high-selectivity-filter-banks-spectral-analysis-music\|Diniz et al. 2006: High-Selectivity Filter Banks for Spectral Analysis of Music Signals]] | Unified framework for music spectral analysis introducing CQFFB and BQFFB; BQFFB achieves ~5 orders of magnitude cost reduction over CQFFB. | 2026-07-23 |
+| [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement\|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] | Frame-wise causal dynamic convolution (adaptive convolution) for SE; AdaptCRN ultra-lightweight model (135K params, 41 MMACs/s, PESQ 2.98 on VCTK-DEMAND) | 2026-07-22 |
 
 ---
 
@@ -898,10 +901,10 @@
 
 ## Statistics
 
-- **Total pages**: 847
+- **Total pages**: 850
 - **Entities**: 358
-- **Concepts**: 332
-- **Sources**: 130
+- **Concepts**: 334
+- **Sources**: 131
 - **Synthesis**: 20
 - **Queries**: 7
 - **Last updated**: 2026-07-23

@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-07-21
+updated: 2026-07-22
 sources:
 - zotero://select/items/0_WLMRLH9W
 - zotero://select/items/0_5SFJK2MD
@@ -11,6 +11,7 @@ sources:
 - zotero://select/items/0_TXVFFJPG
 - zotero://select/items/0_FN59JY3C
 - zotero://select/items/0_NUV4VYRE
+- raw/papers/wang-2025-adaptive-convolution-cnn-speech-enhancement/full-text.md
 tags:
   - lightweight-speech-enhancement
 - computational-complexity
@@ -205,6 +206,8 @@ Three approaches currently define the Pareto frontier:
 6. **[[concepts/mn-tango|MN-TANGO (Benslimane et al., 2026)]]**: A hybrid neural-spatial distributed binaural SE system that exploits a unique structural prior — the downstream [[concepts/gevd-spatial-filtering|GEVD-based]] spatial filter absorbs most quantization-induced mask errors — to push neural compression to extremes. Combining architectural simplification (single-stage MN-TANGO, 0.5 M params / 30.79 MMAC/s vs. 1.0 M / 65.65 for full TANGO), [[concepts/quantization-aware-training|W8A8 QAT]], [[concepts/erb-scale|ERB]] compression, and [[concepts/grouped-recurrent-neural-network|grouped LSTM]] ($G=8$), it reaches **4.65 MMAC/s and 0.177 MB** — a 14× compute reduction and 23× memory reduction relative to the FP32 TANGO baseline, with final SI-SIR still at 21.2/21.3 dB. The key insight is that **hybrid neural-spatial architectures are quantization-robust by construction**, opening a compression axis unavailable to purely neural SE models.
 7. **[[concepts/cofi-lite|CoFi-Lite (Yang et al., IEEE SPL 2026)]]**: Pushes the *purely neural* ultra-lightweight SE frontier below GTCRN — **12.87M MACs/s and 83.12k params** while *outperforming* GTCRN (PESQ 2.16 vs. 2.07 on DNS3) at 40.26% of its compute and 34% lower RTF. The mechanism is **asymmetric capacity reallocation** rather than uniform slimming: a deeply compressed coarse path (×16, ERB-merged full-band envelope) paired with a nearly uncompressed fine path (×2, low frequencies below 2 kHz), bridged by a lightweight [[concepts/cross-path-fusion|Cross-Path Fusion]] module (+0.14 PESQ in ablation). Its scaled-up variant matches AdaptCRN with 19.34% fewer MACs. Complementary to MN-TANGO's quantization axis: CoFi-Lite shows architectural decoupling alone can still halve the compute of the previous best design.
 
+8. **[[concepts/adaptcrn|AdaptCRN (Wang et al., IEEE TASLPRO 2025)]]**: Introduces a **new efficiency axis — dynamic capacity expansion via adaptive convolution** — that is orthogonal to the architectural-decoupling axis of CoFi-Lite and the quantization axis of MN-TANGO. [[concepts/adaptive-convolution|Adaptive convolution]] replaces each vanilla conv with $K=8$ candidate kernels whose mixture weights are computed per STFT frame from frequency-pooled input statistics (parameters ↑ $K\times$, MACs ≈ flat because the attention module is cheap). On the DPCRN-light backbone, adaptive convolution adds +0.1 PESQ / +0.05 DNSMOS-OVRL for ~10% more MACs. **Crucially, gains are largest for lightweight models** (GTCRN +0.16 PESQ, LiSenNet +0.12 PESQ) and diminish for large models (DPCRN-large +0.02 PESQ) where existing kernels already cover diverse spectral features — and become prohibitively costly in models where convolutions already dominate compute (DCCRN: 6× params, 1.5× MACs, applicability limited). AdaptCRN itself pairs adaptive convolution with a ConvNeXt/StarNet-inspired block, grouped DPRNN, and ERB spectral compression to reach **41 MMACs/s and 135K params** — PESQ 2.98 on VCTK-DEMAND (best among DeepFilterNet, GTCRN, ULCNet, FSPEN, LiSenNet) at 1/8.5 the MACs of DeepFilterNet. An interpretability bonus: candidate-kernel selection correlates with speaker pitch and speech/noise activity — kernels 6–8 specialize in noise frames — a neural analogue of classical adaptive-filter coefficient tuning. This adds a fourth Pareto-axis option to the lightweight-SE design space: **params ↑, MACs ≈ flat, with input-dependent kernel mixing**.
+
 ### 5.3 The Open Question
 
 **Can neural/learned ANC controllers match traditional algorithms at lower computational cost?**
@@ -255,6 +258,8 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 - [[concepts/quantization-aware-training|Quantization-Aware Training (QAT)]]
 - [[concepts/grouped-recurrent-neural-network|Grouped Recurrent Neural Network]]
 - [[concepts/gevd-spatial-filtering|GEVD-Based Spatial Filtering]]
+- [[concepts/adaptive-convolution|Adaptive Convolution]]
+- [[concepts/adaptcrn|AdaptCRN]]
 
 ## Related Sources
 
@@ -264,3 +269,4 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 - [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement|Tan & Wang 2018: CRN for Real-Time Speech Enhancement (original CRN proposal)]]
 - [[sources/schroter-2022-deepfilternet|Schröter et al. 2022: DeepFilterNet — Low Complexity Speech Enhancement via Deep Filtering]]
 - [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]] — Hybrid neural-spatial robustness to INT8 quantization; 14× compute / 23× memory reduction vs. FP32 TANGO
+- [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — [[concepts/adaptcrn|AdaptCRN]] introduces a fourth Pareto axis: dynamic capacity via per-frame adaptive convolution (params ↑ $K\times$, MACs ≈ flat); largest gains on lightweight backbones, diminishing and eventually prohibitive for large models.

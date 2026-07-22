@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-24
-updated: 2026-07-21
+updated: 2026-07-22
 tags:
   - neural-network
   - speech-enhancement
@@ -66,6 +66,7 @@ With 23.7 K parameters and 39.6 MMACs/s, GTCRN achieves:
 ## Successors
 
 - **[[concepts/cofi-lite|CoFi-Lite]]** (Yang et al., IEEE SPL 2026) reuses GTCRN's BM, SFE, TRA modules and loss function, but decouples spectral modeling into parallel coarse (full-band envelope, ×16 compression) and fine (low-frequency detail below 2 kHz, ×2 compression) paths bridged by [[concepts/cross-path-fusion|Cross-Path Fusion]]. It **outperforms GTCRN** (PESQ 2.16 vs. 2.07 on DNS3) at only 40.26% of its MACs (12.87M vs. 31.97M MACs/s) and 34% lower RTF — trading a higher parameter count (83.12k vs. 23.67k) for drastically lower compute.
+- **[[concepts/adaptcrn|AdaptCRN]]** (Wang et al., IEEE TASLPRO 2025) is built by the same lab and reuses GTCRN's ERB-based spectral compression, SFE, and grouped-DPRNN patterns, but replaces vanilla convolutions with [[concepts/adaptive-convolution|adaptive convolution]] in a ConvNeXt/StarNet-inspired block. It trades more parameters (135K vs. 23.67K) for higher quality (PESQ 2.98 vs. 2.87 on VCTK-DEMAND) at comparable MACs (41 vs. 34 MMACs/s). GTCRN with adaptive convolution (GTCRN-Adaptive, 117K params, 41 MMACs/s) is an explicit comparison point in Wang et al. 2025; it underperforms AdaptCRN, validating AdaptCRN's additional structural design choices.
 
 ## Related Concepts
 
@@ -81,6 +82,8 @@ With 23.7 K parameters and 39.6 MMACs/s, GTCRN achieves:
 - [[concepts/grouped-recurrent-neural-network|Grouped Recurrent Neural Network]]
 - [[concepts/distributed-binaural-speech-enhancement|Distributed Binaural Speech Enhancement]]
 - [[concepts/tango-framework|Tango Framework]]
+- [[concepts/adaptive-convolution|Adaptive Convolution]]
+- [[concepts/adaptcrn|AdaptCRN]]
 
 ## Related Sources
 
@@ -89,3 +92,4 @@ With 23.7 K parameters and 39.6 MMACs/s, GTCRN achieves:
 - [[sources/schroter-2022-deepfilternet|Schröter et al. 2022: DeepFilterNet]]
 - [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator|Zhao et al. 2026: HALO — Half-frame-rate Adaptive Learnable Operator for Lightweight STFT-based Speech Enhancement]]
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]
+- [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — uses GTCRN as a baseline and reuses its ERB/SFE/grouped-DPRNN design patterns in AdaptCRN

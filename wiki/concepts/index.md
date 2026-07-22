@@ -336,4 +336,6 @@
 | [[concepts/constant-q-fast-filter-bank\|Constant-Q Fast Filter Bank (CQFFB)]] | High-selectivity geometric-spacing filter bank combining FFB selectivity with CQT distribution; high cost. | 2026-07-23 |
 | [[concepts/bounded-q-fast-filter-bank\|Bounded-Q Fast Filter Bank (BQFFB)]] | High-selectivity piecewise-linear filter bank; CQFFB octave separation + FFB intra-octave; ~5 orders lower cost than CQFFB. | 2026-07-23 |
 | [[concepts/frequency-response-masking\|Frequency Response Masking (FRM)]] | Digital filter design technique for sharp-transition-band linear-phase FIR filters; underlies the FFB. | 2026-07-23 |
+| [[concepts/adaptive-convolution\|Adaptive Convolution]] | Frame-wise causal dynamic convolution for streaming SE; per-frame kernel aggregation via frequency-pooled temporal (GRU) attention; CV→SE transfer failures documented | 2026-07-22 |
+| [[concepts/adaptcrn\|AdaptCRN]] | Ultra-lightweight SE model pairing adaptive convolution with ConvNeXt/StarNet block, grouped DPRNN, ERB spectral compression — 135K params, 41 MMACs/s, PESQ 2.98 on VCTK-DEMAND | 2026-07-22 |
 
