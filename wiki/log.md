@@ -3369,3 +3369,13 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 - `wiki/sources/index.md` — added 1 source row
 - `wiki/entities/index.md` — added 3 entity rows
 - `wiki/concepts/index.md` — added 1 concept row
+
+---
+
+## [2026-07-22] lint | Health check
+
+**Index consistency**: All 5 categories match perfectly (entities 354, concepts 326, sources 129, synthesis 20, queries 7 = 836 total). Zero missing, phantom, or duplicate entries.
+**Broken links**: 67 truly broken (mostly figure/image refs, pre-existing); 187 missing category prefix; 30 wiki/ prefix; 38 ../ prefix; 18 log.md informal refs.
+**Orphan pages**: 1 orphan (sources/why-mathematica-not-simplify-sinh-arccosh).
+**Statistics**: All stated counts match actual files — entities 354, concepts 326, sources 129, synthesis 20, queries 7, total 836.
+**Actions taken**: None (lint only, no fixes applied).
