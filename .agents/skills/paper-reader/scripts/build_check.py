@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Step 12: Run MkDocs strict build to verify no warnings.
 
-Tries `uv run mkdocs build --strict` first, falls back to `python -m mkdocs build --strict`.
-A clean build exits 0 with 'INFO - Documentation built in N seconds'.
+Tries `uv run mkdocs build --strict --quiet` first, falls back to `python -m mkdocs build --strict --quiet`.
+A clean build exits 0 with 'Documentation built in N seconds'. Uses --quiet to suppress INFO-level nav file lists.
 
 Usage:
   uv run python .agents/skills/paper-reader/scripts/build_check.py
@@ -16,8 +16,8 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 def main():
     cmds = [
-        ['uv', 'run', 'mkdocs', 'build', '--strict'],
-        ['python', '-m', 'mkdocs', 'build', '--strict'],
+        ['uv', 'run', 'mkdocs', 'build', '--strict', '--quiet'],
+        ['python', '-m', 'mkdocs', 'build', '--strict', '--quiet'],
     ]
     last_err = None
     for cmd in cmds:
