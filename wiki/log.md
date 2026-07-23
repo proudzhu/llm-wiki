@@ -3379,3 +3379,31 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 **Orphan pages**: 1 orphan (sources/why-mathematica-not-simplify-sinh-arccosh).
 **Statistics**: All stated counts match actual files — entities 354, concepts 326, sources 129, synthesis 20, queries 7, total 836.
 **Actions taken**: None (lint only, no fixes applied).
+
+---
+
+## [2026-07-23] ingest | High-Selectivity Filter Banks for Spectral Analysis of Music Signals (Diniz et al. 2006)
+
+- **Source**: `raw/papers/diniz-2006-high-selectivity-filter-banks-spectral-analysis-music/full-text.md` (Zotero: HSWGWJQ6)
+- **Authors**: Filipe C. C. B. Diniz, Iuri Kothe, Sergio L. Netto, Luiz W. P. Biscainho
+- **Published**: EURASIP Journal on Advances in Signal Processing, 2007, Article ID 94704
+- **DOI**: 10.1155/2007/94704
+- **Summary**: Unified framework for music signal spectral analysis covering FFT, FFB, CQT, and BQT, introducing two novel high-selectivity variants (CQFFB and BQFFB); the BQFFB combines FFT-like low cost, BQT-like piecewise-linear frequency spacing, and FFB-like high selectivity, achieving ~5 orders of magnitude cost reduction over the CQFFB at typical channel counts.
+- **Pages created**:
+  - `raw/papers/diniz-2006-high-selectivity-filter-banks-spectral-analysis-music/full-text.md` — extracted text from Zotero PDF (MinerU VLM, 451 lines)
+  - `wiki/sources/diniz-2006-high-selectivity-filter-banks-spectral-analysis-music.md`
+  - `wiki/entities/filipe-diniz.md`
+  - `wiki/entities/iuri-kothe.md`
+  - `wiki/entities/sergio-netto.md`
+  - `wiki/entities/luiz-biscainho.md`
+  - `wiki/concepts/fast-filter-bank.md`
+  - `wiki/concepts/constant-q-transform.md`
+  - `wiki/concepts/bounded-q-transform.md`
+  - `wiki/concepts/constant-q-fast-filter-bank.md`
+  - `wiki/concepts/bounded-q-fast-filter-bank.md`
+  - `wiki/concepts/frequency-response-masking.md`
+- **Pages updated**:
+  - `wiki/index.md` — added 1 source, 4 entities, 6 concepts; updated statistics (total 847)
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 4 entity rows
+  - `wiki/concepts/index.md` — added 6 concept rows

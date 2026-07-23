@@ -364,6 +364,10 @@
 | [[entities/michele-scarpiniti\|Michele Scarpiniti]] | DIET, Sapienza University of Rome — adaptive signal processing, acoustic echo cancellation | 2026-07-17 |
 | [[entities/danilo-comminiello\|Danilo Comminiello]] | DIET, Sapienza University of Rome — acoustic signal processing, adaptive filtering | 2026-07-17 |
 | [[entities/aurelio-uncini\|Aurelio Uncini]] | DIET, Sapienza University of Rome — adaptive signal processing, author of Fundamentals of Adaptive Signal Processing | 2026-07-17 |
+| [[entities/filipe-diniz\|Filipe C. C. B. Diniz]] | UFRJ/COPPE researcher; co-author of high-selectivity filter banks for music signals. | 2026-07-23 |
+| [[entities/iuri-kothe\|Iuri Kothe]] | UFRJ LPS researcher; co-author of high-selectivity filter banks for music signals. | 2026-07-23 |
+| [[entities/sergio-netto\|Sergio L. Netto]] | Associate Professor at UFRJ DEL/Poli and COPPE; co-author of high-selectivity filter banks for music signals. | 2026-07-23 |
+| [[entities/luiz-biscainho\|Luiz W. P. Biscainho]] | Associate Professor at UFRJ DEL/Poli and COPPE; co-author of high-selectivity filter banks for music signals. | 2026-07-23 |
 
 ---
 
@@ -699,6 +703,12 @@
 | [[concepts/frame-skip-prediction\|Frame-Skip Prediction]] | Run mask estimator once every r frames, copy mask to skipped frames; PostNet recovers +0.33 WB-PESQ at 8x | 2026-07-20 |
 | [[concepts/post-processing-network\|Post-Processing Network (PostNet)]] | Lightweight 67K-param 1-layer GRU + convs refinement module for frame-skip prediction; 15M MACs/s | 2026-07-20 |
 | [[concepts/pi-nlms\|PI-NLMS (Physics-Informed NLMS)]] | Adaptive filtering algorithm incorporating RIR structural priors for AEC | 2026-07-17 |
+| [[concepts/fast-filter-bank\|Fast Filter Bank (FFB)]] | High-selectivity linear-phase FFT tree with FRM-designed kernels; ~56 dB sidelobe rejection at ~2x FFT cost. | 2026-07-23 |
+| [[concepts/constant-q-transform\|Constant-Q Transform (CQT)]] | Spectral transform with constant Q=f_k/Df_k, geometric channel spacing matching the musical equal-tempered scale. | 2026-07-23 |
+| [[concepts/bounded-q-transform\|Bounded-Q Transform (BQT)]] | CQT approximation with geometric octave spacing and linear intra-octave channel spacing; medium cost. | 2026-07-23 |
+| [[concepts/constant-q-fast-filter-bank\|Constant-Q Fast Filter Bank (CQFFB)]] | High-selectivity geometric-spacing filter bank combining FFB selectivity with CQT distribution; high cost. | 2026-07-23 |
+| [[concepts/bounded-q-fast-filter-bank\|Bounded-Q Fast Filter Bank (BQFFB)]] | High-selectivity piecewise-linear filter bank; CQFFB octave separation + FFB intra-octave; ~5 orders lower cost than CQFFB. | 2026-07-23 |
+| [[concepts/frequency-response-masking\|Frequency Response Masking (FRM)]] | Digital filter design technique for sharp-transition-band linear-phase FIR filters; underlies the FFB. | 2026-07-23 |
 
 ---
 
@@ -837,6 +847,7 @@
 | [[sources/apostolidis-2026-listen-first-output-based-multi-microphone\|Apostolidis 2026: Listen first — output-based multi-microphone speech enhancement]] | Output-based SE paradigm selecting GP-maximizing MPDR from a candidate dictionary; outperforms input-based MVDR, especially at low SNR. | 2026-07-21 |
 | [[sources/chen-2023-ultra-dual-path-compression\|Chen et al. 2023: Ultra Dual-Path Compression for Joint AEC and NS]] | Time-frequency dual-path compression on DPT-FSNet for joint AEC+NS; 4x-32x ratio range, 57M-1822M MACs/s, <0.5M params; matches DeepFilterNet at 1/4 params | 2026-07-20 |
 | [[sources/scarpiniti-2027-physics-informed-adaptive-filtering-aec\|Scarpiniti, Comminiello & Uncini 2027: Physics-informed adaptive filtering for AEC]] | Physics-Informed NLMS (PI-NLMS) algorithm incorporating RIR structural priors for acoustic echo cancellation | 2026-07-17 |
+| [[sources/diniz-2006-high-selectivity-filter-banks-spectral-analysis-music\|Diniz et al. 2006: High-Selectivity Filter Banks for Spectral Analysis of Music Signals]] | Unified framework for music spectral analysis introducing CQFFB and BQFFB; BQFFB achieves ~5 orders of magnitude cost reduction over CQFFB. | 2026-07-23 |
 
 ---
 
@@ -887,10 +898,10 @@
 
 ## Statistics
 
-- **Total pages**: 836
-- **Entities**: 354
-- **Concepts**: 326
-- **Sources**: 129
+- **Total pages**: 847
+- **Entities**: 358
+- **Concepts**: 332
+- **Sources**: 130
 - **Synthesis**: 20
 - **Queries**: 7
-- **Last updated**: 2026-07-22
+- **Last updated**: 2026-07-23

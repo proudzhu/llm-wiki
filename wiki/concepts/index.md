@@ -330,4 +330,10 @@
 | [[concepts/frame-skip-prediction\|Frame-Skip Prediction]] | Run mask estimator once every r frames, copy mask to skipped frames; PostNet recovers +0.33 WB-PESQ at 8x | 2026-07-20 |
 | [[concepts/post-processing-network\|Post-Processing Network (PostNet)]] | Lightweight 67K-param 1-layer GRU + convs refinement module for frame-skip prediction; 15M MACs/s | 2026-07-20 |
 | [[concepts/pi-nlms\|PI-NLMS (Physics-Informed NLMS)]] | Adaptive filtering algorithm incorporating RIR structural priors for AEC | 2026-07-17 |
+| [[concepts/fast-filter-bank\|Fast Filter Bank (FFB)]] | High-selectivity linear-phase FFT tree with FRM-designed kernels; ~56 dB sidelobe rejection at ~2x FFT cost. | 2026-07-23 |
+| [[concepts/constant-q-transform\|Constant-Q Transform (CQT)]] | Spectral transform with constant Q=f_k/Df_k, geometric channel spacing matching the musical equal-tempered scale. | 2026-07-23 |
+| [[concepts/bounded-q-transform\|Bounded-Q Transform (BQT)]] | CQT approximation with geometric octave spacing and linear intra-octave channel spacing; medium cost. | 2026-07-23 |
+| [[concepts/constant-q-fast-filter-bank\|Constant-Q Fast Filter Bank (CQFFB)]] | High-selectivity geometric-spacing filter bank combining FFB selectivity with CQT distribution; high cost. | 2026-07-23 |
+| [[concepts/bounded-q-fast-filter-bank\|Bounded-Q Fast Filter Bank (BQFFB)]] | High-selectivity piecewise-linear filter bank; CQFFB octave separation + FFB intra-octave; ~5 orders lower cost than CQFFB. | 2026-07-23 |
+| [[concepts/frequency-response-masking\|Frequency Response Masking (FRM)]] | Digital filter design technique for sharp-transition-band linear-phase FIR filters; underlies the FFB. | 2026-07-23 |
 

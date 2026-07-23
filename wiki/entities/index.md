@@ -358,4 +358,8 @@
 | [[entities/michele-scarpiniti\|Michele Scarpiniti]] | DIET, Sapienza University of Rome — adaptive signal processing, acoustic echo cancellation | 2026-07-17 |
 | [[entities/danilo-comminiello\|Danilo Comminiello]] | DIET, Sapienza University of Rome — acoustic signal processing, adaptive filtering | 2026-07-17 |
 | [[entities/aurelio-uncini\|Aurelio Uncini]] | DIET, Sapienza University of Rome — adaptive signal processing, author of Fundamentals of Adaptive Signal Processing | 2026-07-17 |
+| [[entities/filipe-diniz\|Filipe C. C. B. Diniz]] | UFRJ/COPPE researcher; co-author of high-selectivity filter banks for music signals. | 2026-07-23 |
+| [[entities/iuri-kothe\|Iuri Kothe]] | UFRJ LPS researcher; co-author of high-selectivity filter banks for music signals. | 2026-07-23 |
+| [[entities/sergio-netto\|Sergio L. Netto]] | Associate Professor at UFRJ DEL/Poli and COPPE; co-author of high-selectivity filter banks for music signals. | 2026-07-23 |
+| [[entities/luiz-biscainho\|Luiz W. P. Biscainho]] | Associate Professor at UFRJ DEL/Poli and COPPE; co-author of high-selectivity filter banks for music signals. | 2026-07-23 |
 
