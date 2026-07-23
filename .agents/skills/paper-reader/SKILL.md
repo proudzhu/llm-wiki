@@ -164,7 +164,7 @@ Read the extracted text in chunks (head 200 + tail 100 + targeted range reads fo
 
 ### Step 5: Create/Update Source Page
 
-Create `wiki/sources/{slug}.md`. Load [`references/page-templates.md`](references/page-templates.md) for the full frontmatter, required sections, and figure-usage criteria. Key points: H1 is `Author1, Author2 & Author3 Year: Short Title`; required sections are Summary / Problem Formulation / Methodology / Experimental Setup / Results / Key Contributions / Related Concepts / Related Synthesis; max 3 figures, placed immediately after the section they illustrate, with `LS figures/` first to discover actual filenames.
+Create `wiki/sources/{slug}.md`. Load [`references/page-templates.md`](references/page-templates.md) for the full frontmatter, required sections, and figure-usage criteria. Key points: H1 is `Author1, Author2 & Author3 Year: Short Title`; required sections are Summary / Problem Formulation / Methodology / Experimental Setup / Results / Key Contributions / Related Concepts / Related Synthesis; include figures wherever they materially aid understanding (block diagrams, frequency responses, architecture diagrams, listening-test curves, etc.), placed immediately after the section they illustrate. **No hard cap on figure count** — include every figure that adds substantive value, but skip pure data plots already captured in tables. Always `LS figures/` first to discover actual filenames, and **verify each filename exists** before writing the embed wikilink (use Glob with a partial hash prefix to confirm).
 
 For re-ingestion: overwrite the existing source page with updated comprehensive content.
 

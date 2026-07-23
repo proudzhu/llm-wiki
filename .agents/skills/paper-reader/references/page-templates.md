@@ -37,16 +37,17 @@ tags:
 
 | Include figure? | Criteria | Examples |
 |-----------------|----------|----------|
-| Include | Visual is essential to understand the core problem or method | System block diagram, network architecture, problem illustration |
-| Skip | Data is already well-summarized in text or tables | Performance curves, spectrogram plots, convergence plots |
+| Include | Visual is essential to understand the core problem, method, or results | System block diagram, network architecture, frequency response, listening-test curves, problem illustration |
+| Skip | Data is already well-summarized in text or tables, or the figure is purely decorative | Performance curves with numbers already in a table, stock photos |
 
 Guidelines:
 
 - Place figures immediately after the section they illustrate.
 - Use vault-absolute embed wikilink paths: `![[raw/papers/{slug}/figures/ACTUAL_FILENAME.ext|caption]]`.
 - **List the `figures/` directory first** to discover actual filenames — MinerU produces hash-named `.jpg` files, arXiv HTML figures are named `fig1.png`.
+- **Verify each filename exists** before writing the embed wikilink — a single-character typo in a hash filename will cause a build failure. Use Glob with a partial hash prefix (e.g., `raw/papers/{slug}/figures/3c0491873b*`) to confirm the exact filename.
 - Add an italicized caption below each figure: `*Figure N: description.*`
-- Maximum 3 figures per source page — prefer the most informative ones.
+- **No hard cap on figure count** — include every figure that adds substantive value. Tutorial and survey papers may legitimately warrant 15–25 figures (one per surveyed concept/application); research papers typically warrant 3–8. Use judgment: include figures that aid comprehension, skip those that merely decorate.
 - When adding figures, also update corresponding concept pages with the same figure if it illustrates a key concept.
 
 For re-ingestion: overwrite the existing source page with updated comprehensive content.
@@ -81,7 +82,11 @@ tags:
 When the author already has a page, make these specific edits (do not rewrite the page):
 
 1. Update `updated:` date in frontmatter to today.
-2. Append the new paper to `## Key Contributions` as a new bullet, with a wikilink to the new source page: `- Co-authored [short title] (Venue Year) — [[sources/{slug}|Author Year]]`
+2. Append the new paper to `## Key Contributions` as a new bullet, with a wikilink to the new source page. **Use quotes around the paper title** to avoid MkDocs interpreting `[title](venue)` as a broken markdown link:
+   ```
+   - Co-authored "Short Title" (Venue Year) — [[sources/{slug}|Author Year]]
+   ```
+   Do **not** write `- Co-authored [Short Title] (Venue Year)` — MkDocs parses `[text](parenthesized)` as a markdown link and the build will fail with "target not found".
 3. If the new paper reveals a new affiliation, research focus area, or tag not already on the page, add it (do not replace existing content).
 4. If the new paper is the author's primary contribution (more important than prior listed work), consider moving it to the top of the list — but otherwise preserve chronological/listed order.
 5. Do **not** touch the `created:` date or rewrite existing bullets.
