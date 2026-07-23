@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-05-13
+updated: 2026-07-23
+sources:
+  - raw/papers/harma-2000-frequency-warped-signal-processing/full-text.md
 tags:
   - signal-processing
   - frequency-warping
@@ -28,16 +30,33 @@ $$W_{trunc.}(z) = \sum_{n=0}^{W} w(n) [D(z)]^n$$
 
 where $D(z)$ is the all-pass element and $W$ is the final filter order.
 
+## Bark Bilinear Mapping
+
+Smith and Abel (1999) derived an analytic expression for $\lambda$ that best matches the [[concepts/bark-scale-spectral-features|Bark scale]] for a given sampling frequency $f_s$:
+
+$$\lambda_{f_s} \approx 1.0674 \left[\frac{2}{\pi} \arctan(0.06583 f_s)\right]^{1/2} - 0.1916$$
+
+At $f_s = 44.1$ kHz this yields $\lambda = 0.756$. The resulting mapping is called **Bark bilinear mapping** (or Bark warping). A slightly higher value ($\lambda \approx 0.78$) best matches Greenwood's cochlear frequency-position function at low frequencies. The first-order all-pass mapping is a good approximation but cannot exactly match the Bark, ERB, or Greenwood scales globally — exact matches require higher-order all-pass filter banks.
+
+The **turning-point frequency** $f_{tp}$ (where warping leaves frequency unchanged) is:
+
+$$f_{tp} = \pm \frac{f_s}{2\pi} \arccos(\lambda)$$
+
 ## Applications
 
 - **Active Noise Control**: Enables low-order WFIR filters to achieve performance comparable to high-order FIR filters, especially at low frequencies
-- **Audio Signal Processing**: Frequency-warped signal processing for audio applications (Härmä et al. 2000)
+- **Audio Signal Processing**: Frequency-warped DSP for audio coding, loudspeaker equalization, physical modeling, and HRTF design — [[sources/harma-2000-frequency-warped-signal-processing|Härmä et al. 2000]]
+- **Warped Linear Prediction**: WLP achieves ~6 dB (1 bit/sample) residual SNR savings over conventional LPC at wideband rates
 
 ## Related Concepts
 
 - [[concepts/warped-fir-filter|Warped FIR Filter]]
+- [[concepts/warped-iir-filter|Warped IIR Filter]]
+- [[concepts/warped-linear-prediction|Warped Linear Prediction]]
 - [[concepts/all-pass-filter|All-Pass Filter]]
+- [[concepts/erb-scale|ERB Scale]]
 
 ## Related Sources
 
+- [[sources/harma-2000-frequency-warped-signal-processing|Härmä et al. 2000: Frequency-Warped Signal Processing for Audio Applications]] — the canonical tutorial surveying frequency-warping methodology and audio applications
 - [[sources/seo-2016-feedback-anc-constrained-optimization|Seo et al. 2016: Feedback ANC via Constrained Optimization]]

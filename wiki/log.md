@@ -3462,3 +3462,34 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/index.md` — added 2 entities, 1 source; updated statistics
   - `wiki/entities/index.md` — added 2 entity rows
   - `wiki/sources/index.md` — added 1 source row
+
+---
+
+## [2026-07-23] ingest | Frequency-Warped Signal Processing for Audio Applications (Härmä 2000)
+
+- **Source**: `raw/papers/harma-2000-frequency-warped-signal-processing/full-text.md` (Zotero: H64BZGKP)
+- **Authors**: Aki Härmä, Matti Karjalainen, Lauri Savioja, Vesa Välimäki, Unto K. Laine, Jyri Huopaniemi
+- **Published**: Journal of the Audio Engineering Society, Vol. 48, No. 11, 2000 (November)
+- **Zotero**: zotero://select/items/0_H64BZGKP
+- **Summary**: Tutorial on frequency-warped DSP — all-pass chain theory, WFIR/WIIR filter design, warped linear prediction, and applications to audio coding, loudspeaker EQ, guitar body modeling, HRTF design, and digital waveguide mesh dispersion correction.
+- **Pages created**:
+  - `raw/papers/harma-2000-frequency-warped-signal-processing/full-text.md` — extracted text from Zotero PDF (MinerU VLM)
+  - `wiki/sources/harma-2000-frequency-warped-signal-processing.md`
+  - `wiki/entities/aki-harma.md`
+  - `wiki/entities/matti-karjalainen.md`
+  - `wiki/entities/lauri-savioja.md`
+  - `wiki/entities/vesa-valimaki.md`
+  - `wiki/entities/unto-k-laine.md`
+  - `wiki/entities/jyri-huopaniemi.md`
+  - `wiki/concepts/warped-iir-filter.md`
+  - `wiki/concepts/warped-linear-prediction.md`
+- **Pages updated**:
+  - `wiki/concepts/frequency-warping.md` — added Bark bilinear mapping section, sources, cross-refs to warped-iir-filter and warped-linear-prediction
+  - `wiki/concepts/all-pass-filter.md` — added phase/group delay details, role in warped DSP, source link
+  - `wiki/concepts/warped-fir-filter.md` — added synthesis/analysis (dewarping) details, expanded advantages, source link
+  - `wiki/concepts/erb-scale.md` — added foundational context (ERB vs Bark vs Greenwood comparison), source link
+  - `wiki/concepts/bark-scale-spectral-features.md` — added foundational context (Bark bilinear mapping), source link
+  - `wiki/index.md` — added 6 entities, 2 concepts, 1 source; updated statistics
+  - `wiki/entities/index.md` — added 6 entity rows
+  - `wiki/concepts/index.md` — added 2 concept rows
+  - `wiki/sources/index.md` — added 1 source row

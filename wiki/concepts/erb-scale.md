@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-06-07
-updated: 2026-07-22
+updated: 2026-07-23
 sources:
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
+  - raw/papers/harma-2000-frequency-warped-signal-processing/full-text.md
 tags:
   - psychoacoustics
   - speech-enhancement
@@ -57,9 +58,14 @@ Both [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|RT-Tango]] a
 
 The ERB scale provides finer frequency resolution at low frequencies compared to the Mel scale, which is advantageous for speech enhancement where low-frequency harmonics carry important periodicity information.
 
+### Foundational Context
+
+[[sources/harma-2000-frequency-warped-signal-processing|Härmä et al. 2000]] provide a foundational comparison of auditory scales, noting that the ERB scale (Moore, Peters & Glasberg 1990) matches Greenwood's cochlear frequency-position mapping better than the Bark scale — ERBs are very close to Greenwood's bandwidth measure, while Bark bands are 2–4× wider than ERBs below 200 Hz and 1.5–2× wider above 5 kHz. This motivates ERB-like [[concepts/frequency-warping|frequency warping]] for auditory-matched DSP, though the first-order all-pass Bark bilinear mapping can only approximate the ERB scale globally.
+
 ## Related Concepts
 
 - [[concepts/deep-filtering|Deep Filtering]]
+- [[concepts/frequency-warping|Frequency Warping]] — ERB-like warping approximates the ERB scale via all-pass mapping
 - [[concepts/grouped-recurrent-neural-network|Grouped Recurrent Neural Network]]
 - [[concepts/distributed-binaural-speech-enhancement|Distributed Binaural Speech Enhancement]]
 - [[concepts/tango-framework|Tango Framework]]
@@ -71,6 +77,7 @@ The ERB scale provides finer frequency resolution at low frequencies compared to
 
 ## Related Sources
 
+- [[sources/harma-2000-frequency-warped-signal-processing|Härmä et al. 2000: Frequency-Warped Signal Processing for Audio Applications]] — foundational comparison of ERB, Bark, and Greenwood scales in the context of frequency warping
 - [[sources/valin-2021-percepnet-joint-echo-control|Valin et al. 2021: PercepNet Joint Echo Control]] — original PercepNet uses 32 ERB bands (NOT Bark)
 - [[sources/schroter-2022-deepfilternet|Schröter et al. 2022: DeepFilterNet]]
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]

@@ -370,6 +370,12 @@
 | [[entities/luiz-biscainho\|Luiz W. P. Biscainho]] | Associate Professor at UFRJ DEL/Poli and COPPE; co-author of high-selectivity filter banks for music signals. | 2026-07-23 |
 | [[entities/kyle-kashima\|Kyle L. Kashima]] | CCRMA, Stanford University — co-introduced the Bounded-Q Transform (1985) | 2026-07-23 |
 | [[entities/bernard-mont-reynaud\|Bernard Mont-Reynaud]] | CCRMA, Stanford University — co-introduced the Bounded-Q Transform (1985) | 2026-07-23 |
+| [[entities/aki-harma\|Aki Härmä]] | Helsinki University of Technology — frequency warping, WLP, audio coding | 2026-07-23 |
+| [[entities/matti-karjalainen\|Matti Karjalainen]] | Helsinki University of Technology — audio DSP, physical modeling, warped filter design | 2026-07-23 |
+| [[entities/lauri-savioja\|Lauri Savioja]] | Helsinki University of Technology — room acoustics, digital waveguide mesh, dispersion correction | 2026-07-23 |
+| [[entities/vesa-valimaki\|Vesa Välimäki]] | Helsinki University of Technology — audio effects, fractional delay filters, waveguide synthesis | 2026-07-23 |
+| [[entities/unto-k-laine\|Unto K. Laine]] | Helsinki University of Technology — frequency warping theory, FAM/FAMlet functions, nonuniform filter banks | 2026-07-23 |
+| [[entities/jyri-huopaniemi\|Jyri Huopaniemi]] | Nokia Research Center — binaural technology, 3-D sound, HRTF filter design | 2026-07-23 |
 
 ---
 
@@ -713,6 +719,8 @@
 | [[concepts/frequency-response-masking\|Frequency Response Masking (FRM)]] | Digital filter design technique for sharp-transition-band linear-phase FIR filters; underlies the FFB. | 2026-07-23 |
 | [[concepts/adaptive-convolution\|Adaptive Convolution]] | Frame-wise causal dynamic convolution for streaming SE; per-frame kernel aggregation via frequency-pooled temporal (GRU) attention; CV→SE transfer failures documented | 2026-07-22 |
 | [[concepts/adaptcrn\|AdaptCRN]] | Ultra-lightweight SE model pairing adaptive convolution with ConvNeXt/StarNet block, grouped DPRNN, ERB spectral compression — 135K params, 41 MMACs/s, PESQ 2.98 on VCTK-DEMAND | 2026-07-22 |
+| [[concepts/warped-iir-filter\|Warped IIR Filter]] | IIR filters with all-pass warping; modified structures eliminate delay-free recursive loops | 2026-07-23 |
+| [[concepts/warped-linear-prediction\|Warped Linear Prediction]] | LPC with all-pass chain — Bark-scale spectral matching, ~6dB SNR savings over conventional LPC at wideband rates | 2026-07-23 |
 
 ---
 
@@ -854,6 +862,7 @@
 | [[sources/diniz-2006-high-selectivity-filter-banks-spectral-analysis-music\|Diniz et al. 2006: High-Selectivity Filter Banks for Spectral Analysis of Music Signals]] | Unified framework for music spectral analysis introducing CQFFB and BQFFB; BQFFB achieves ~5 orders of magnitude cost reduction over CQFFB. | 2026-07-23 |
 | [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement\|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] | Frame-wise causal dynamic convolution (adaptive convolution) for SE; AdaptCRN ultra-lightweight model (135K params, 41 MMACs/s, PESQ 2.98 on VCTK-DEMAND) | 2026-07-22 |
 | [[sources/kashima-1985-bounded-q-frequency-transform\|Kashima & Mont-Reynaud 1985: The Bounded-Q Frequency Transform]] | Introduces the BQT — FFT-based piecewise-linear approximation to the constant-Q filter bank for polyphonic music transcription; ~3 orders of magnitude faster than DFT filter bank. | 2026-07-23 |
+| [[sources/harma-2000-frequency-warped-signal-processing\|Härmä et al. 2000: Frequency-Warped Signal Processing for Audio Applications]] | Tutorial on frequency-warped DSP — all-pass chain, WFIR/WIIR filters, WLP, and audio applications (coding, EQ, HRTF, waveguide mesh) | 2026-07-23 |
 
 ---
 
@@ -904,10 +913,10 @@
 
 ## Statistics
 
-- **Total pages**: 853
-- **Entities**: 360
-- **Concepts**: 334
-- **Sources**: 132
+- **Total pages**: 862
+- **Entities**: 366
+- **Concepts**: 336
+- **Sources**: 133
 - **Synthesis**: 20
 - **Queries**: 7
 - **Last updated**: 2026-07-23

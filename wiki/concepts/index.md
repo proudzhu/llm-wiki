@@ -338,4 +338,6 @@
 | [[concepts/frequency-response-masking\|Frequency Response Masking (FRM)]] | Digital filter design technique for sharp-transition-band linear-phase FIR filters; underlies the FFB. | 2026-07-23 |
 | [[concepts/adaptive-convolution\|Adaptive Convolution]] | Frame-wise causal dynamic convolution for streaming SE; per-frame kernel aggregation via frequency-pooled temporal (GRU) attention; CV→SE transfer failures documented | 2026-07-22 |
 | [[concepts/adaptcrn\|AdaptCRN]] | Ultra-lightweight SE model pairing adaptive convolution with ConvNeXt/StarNet block, grouped DPRNN, ERB spectral compression — 135K params, 41 MMACs/s, PESQ 2.98 on VCTK-DEMAND | 2026-07-22 |
+| [[concepts/warped-iir-filter\|Warped IIR Filter]] | IIR filters with all-pass warping; modified structures eliminate delay-free recursive loops | 2026-07-23 |
+| [[concepts/warped-linear-prediction\|Warped Linear Prediction]] | LPC with all-pass chain — Bark-scale spectral matching, ~6dB SNR savings over conventional LPC at wideband rates | 2026-07-23 |
 

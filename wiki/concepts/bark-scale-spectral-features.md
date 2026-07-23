@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-07-17
-updated: 2026-07-19
+updated: 2026-07-23
 sources:
   - raw/papers/li-2025-echofree-neural-aec/full-text.md
   - raw/papers/seidel-2024-bark-scale-nn-residual-suppression/full-text.md
   - raw/papers/zheng-2023-survey-frequency-domain-speech-enhancement/full-text.md
+  - raw/papers/harma-2000-frequency-warped-signal-processing/full-text.md
 tags:
   - psychoacoustics
   - speech-enhancement
@@ -57,6 +58,10 @@ In [[sources/li-2025-echofree-neural-aec\|EchoFree]] the 112-dim Bark feature ve
 | **Bark** | $13 \arctan(0.00076 f) + 3.5 \arctan((f/7500)^2)$ | 24 critical / 100 sub | AEC post filters (Bark-AEC, EchoFree, PercepNet) |
 
 Bark and ERB are both perceptually motivated. Notably, the original [[concepts/percepnet|PercepNet]] (Valin et al. ICASSP 2020/2021) uses the **ERB scale** (32 bands), while later "PercepNet-style" AEC post filters (Bark-AEC, EchoFree) switched to the Bark scale. ERB also dominates the DeepFilterNet / TANGO family. The two scales produce qualitatively similar compression ratios (8:1–32:1) and similar parameter savings when used as a network front-end.
+
+### Foundational Context
+
+The Bark scale's relationship to auditory filter banks and cochlear mapping is surveyed in [[sources/harma-2000-frequency-warped-signal-processing|Härmä et al. 2000]], which compares the Bark, ERB, and Greenwood scales and presents the Bark bilinear mapping — an all-pass [[concepts/frequency-warping|frequency warping]] that approximates the Bark scale for DSP implementation. The paper notes that the ERB scale matches Greenwood's physiological mapping better than Bark, but the first-order all-pass Bark mapping remains the most practical approximation for real-time warped signal processing.
 
 ## Related Concepts
 

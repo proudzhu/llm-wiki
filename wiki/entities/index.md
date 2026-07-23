@@ -364,4 +364,10 @@
 | [[entities/luiz-biscainho\|Luiz W. P. Biscainho]] | Associate Professor at UFRJ DEL/Poli and COPPE; co-author of high-selectivity filter banks for music signals. | 2026-07-23 |
 | [[entities/kyle-kashima\|Kyle L. Kashima]] | CCRMA, Stanford University — co-introduced the Bounded-Q Transform (1985) | 2026-07-23 |
 | [[entities/bernard-mont-reynaud\|Bernard Mont-Reynaud]] | CCRMA, Stanford University — co-introduced the Bounded-Q Transform (1985) | 2026-07-23 |
+| [[entities/aki-harma\|Aki Härmä]] | Helsinki University of Technology — frequency warping, WLP, audio coding | 2026-07-23 |
+| [[entities/matti-karjalainen\|Matti Karjalainen]] | Helsinki University of Technology — audio DSP, physical modeling, warped filter design | 2026-07-23 |
+| [[entities/lauri-savioja\|Lauri Savioja]] | Helsinki University of Technology — room acoustics, digital waveguide mesh, dispersion correction | 2026-07-23 |
+| [[entities/vesa-valimaki\|Vesa Välimäki]] | Helsinki University of Technology — audio effects, fractional delay filters, waveguide synthesis | 2026-07-23 |
+| [[entities/unto-k-laine\|Unto K. Laine]] | Helsinki University of Technology — frequency warping theory, FAM/FAMlet functions, nonuniform filter banks | 2026-07-23 |
+| [[entities/jyri-huopaniemi\|Jyri Huopaniemi]] | Nokia Research Center — binaural technology, 3-D sound, HRTF filter design | 2026-07-23 |
 
