@@ -11,7 +11,7 @@ tags:
 
 # Bounded-Q Transform (BQT)
 
-The **Bounded-Q Transform (BQT)**, proposed by Kashima and Mont-Reynaud (1985), is a fast approximation of the [[concepts/constant-q-transform|Constant-Q Transform (CQT)]] in which only the octaves are geometrically spaced, while the channels inside each octave are linearly spaced. The resulting **piecewise-linear frequency grid** is a good approximation to the full geometric grid when the number of channels per octave is chosen appropriately.
+The **Bounded-Q Transform (BQT)**, proposed by Kashima and Mont-Reynaud (1985), is a fast approximation of the [[concepts/constant-q-transform|Constant-Q Transform (CQT)]] in which only the octaves are geometrically spaced, while the channels inside each octave are linearly spaced. The resulting **piecewise-linear frequency grid** is a good approximation to the full geometric grid when the number of channels per octave is chosen appropriately. The original algorithm is described in [[sources/kashima-1985-bounded-q-frequency-transform|Kashima & Mont-Reynaud 1985]].
 
 ## Overview
 
@@ -49,7 +49,7 @@ For quartertone resolution $R = 24$, $N_{\min} = 64$ — though $N = 32$ is show
 - **Piecewise-linear frequency spacing**: octaves geometric, intra-octave linear.
 - **Medium computational complexity**: cheaper than CQT, more expensive than FFT/FFB.
 - **Low channel selectivity**: inherited from FFT-based design — ~13 dB sidelobe rejection (same limitation as the CQT).
-- **Non-invertible** (as with the CQT): direct resynthesis requires a synthesis filter bank approximating perfect reconstruction.
+- **Invertible** (unlike the CQT): the original Kashima & Mont-Reynaud (1985) algorithm uses a sharp ~80 dB lowpass cutoff in the octave-separation step, which allows the original signal to be reconstructed nearly distortion-free by reversing the split-and-downsample procedure. This invertibility is a by-product of the implementation rather than of the piecewise-linear grid itself.
 
 ## Relation to Other Tools
 
@@ -64,4 +64,5 @@ The BQT is the **piecewise-linear-frequency-spacing parent** of the BQFFB, the h
 
 ## Related Sources
 
-- [[sources/diniz-2006-high-selectivity-filter-banks-spectral-analysis-music|Diniz, Kothe, Netto & Biscainho 2006: High-Selectivity Filter Banks for Spectral Analysis of Music Signals]]
+- [[sources/kashima-1985-bounded-q-frequency-transform|Kashima & Mont-Reynaud 1985: The Bounded-Q Frequency Transform]] — the original paper introducing the BQT, including the iterative FFT + downsample algorithm, frequency-domain lowpass filtering, dovetailing, and the invertibility property.
+- [[sources/diniz-2006-high-selectivity-filter-banks-spectral-analysis-music|Diniz, Kothe, Netto & Biscainho 2006: High-Selectivity Filter Banks for Spectral Analysis of Music Signals]] — extends the BQT into the high-selectivity BQFFB.

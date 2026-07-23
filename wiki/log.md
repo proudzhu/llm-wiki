@@ -3442,3 +3442,23 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/concepts/index.md` — added 6 concept rows
 
 ---
+---
+
+## [2026-07-23] ingest | The Bounded-Q Frequency Transform (Kashima & Mont-Reynaud 1985)
+
+- **Source**: `raw/papers/kashima-1985-bounded-q-frequency-transform/full-text.md` (Zotero: U5AP27SH)
+- **Authors**: Kyle L. Kashima, Bernard Mont-Reynaud
+- **Published**: Department of Music Report STAN-M-28, CCRMA, Stanford University, 1985
+- **URL**: https://www.ee.columbia.edu/~dpwe/papers/KashMR85-bQ-stanm28.pdf
+- **Summary**: Introduces the Bounded-Q Transform (BQT) — an FFT-based piecewise-linear approximation to the constant-Q filter bank for polyphonic music transcription; ~3 orders of magnitude faster than the equivalent DFT filter bank.
+- **Pages created**:
+  - `raw/papers/kashima-1985-bounded-q-frequency-transform/full-text.md` — extracted text from Zotero PDF (MinerU VLM)
+  - `wiki/sources/kashima-1985-bounded-q-frequency-transform.md`
+  - `wiki/entities/kyle-kashima.md`
+  - `wiki/entities/bernard-mont-reynaud.md`
+- **Pages updated**:
+  - `wiki/concepts/bounded-q-transform.md` — added primary source link, fixed invertibility contradiction (original paper states BQT is invertible due to sharp lowpass cutoff, contradicting prior "non-invertible" claim), expanded Related Sources
+  - `wiki/sources/diniz-2006-high-selectivity-filter-banks-spectral-analysis-music.md` — added bidirectional wikilink to the new Kashima 1985 source page
+  - `wiki/index.md` — added 2 entities, 1 source; updated statistics
+  - `wiki/entities/index.md` — added 2 entity rows
+  - `wiki/sources/index.md` — added 1 source row

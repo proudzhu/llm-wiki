@@ -362,4 +362,6 @@
 | [[entities/iuri-kothe\|Iuri Kothe]] | UFRJ LPS researcher; co-author of high-selectivity filter banks for music signals. | 2026-07-23 |
 | [[entities/sergio-netto\|Sergio L. Netto]] | Associate Professor at UFRJ DEL/Poli and COPPE; co-author of high-selectivity filter banks for music signals. | 2026-07-23 |
 | [[entities/luiz-biscainho\|Luiz W. P. Biscainho]] | Associate Professor at UFRJ DEL/Poli and COPPE; co-author of high-selectivity filter banks for music signals. | 2026-07-23 |
+| [[entities/kyle-kashima\|Kyle L. Kashima]] | CCRMA, Stanford University — co-introduced the Bounded-Q Transform (1985) | 2026-07-23 |
+| [[entities/bernard-mont-reynaud\|Bernard Mont-Reynaud]] | CCRMA, Stanford University — co-introduced the Bounded-Q Transform (1985) | 2026-07-23 |
 

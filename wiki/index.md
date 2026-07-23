@@ -368,6 +368,8 @@
 | [[entities/iuri-kothe\|Iuri Kothe]] | UFRJ LPS researcher; co-author of high-selectivity filter banks for music signals. | 2026-07-23 |
 | [[entities/sergio-netto\|Sergio L. Netto]] | Associate Professor at UFRJ DEL/Poli and COPPE; co-author of high-selectivity filter banks for music signals. | 2026-07-23 |
 | [[entities/luiz-biscainho\|Luiz W. P. Biscainho]] | Associate Professor at UFRJ DEL/Poli and COPPE; co-author of high-selectivity filter banks for music signals. | 2026-07-23 |
+| [[entities/kyle-kashima\|Kyle L. Kashima]] | CCRMA, Stanford University — co-introduced the Bounded-Q Transform (1985) | 2026-07-23 |
+| [[entities/bernard-mont-reynaud\|Bernard Mont-Reynaud]] | CCRMA, Stanford University — co-introduced the Bounded-Q Transform (1985) | 2026-07-23 |
 
 ---
 
@@ -851,6 +853,7 @@
 | [[sources/scarpiniti-2027-physics-informed-adaptive-filtering-aec\|Scarpiniti, Comminiello & Uncini 2027: Physics-informed adaptive filtering for AEC]] | Physics-Informed NLMS (PI-NLMS) algorithm incorporating RIR structural priors for acoustic echo cancellation | 2026-07-17 |
 | [[sources/diniz-2006-high-selectivity-filter-banks-spectral-analysis-music\|Diniz et al. 2006: High-Selectivity Filter Banks for Spectral Analysis of Music Signals]] | Unified framework for music spectral analysis introducing CQFFB and BQFFB; BQFFB achieves ~5 orders of magnitude cost reduction over CQFFB. | 2026-07-23 |
 | [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement\|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] | Frame-wise causal dynamic convolution (adaptive convolution) for SE; AdaptCRN ultra-lightweight model (135K params, 41 MMACs/s, PESQ 2.98 on VCTK-DEMAND) | 2026-07-22 |
+| [[sources/kashima-1985-bounded-q-frequency-transform\|Kashima & Mont-Reynaud 1985: The Bounded-Q Frequency Transform]] | Introduces the BQT — FFT-based piecewise-linear approximation to the constant-Q filter bank for polyphonic music transcription; ~3 orders of magnitude faster than DFT filter bank. | 2026-07-23 |
 
 ---
 
@@ -901,10 +904,10 @@
 
 ## Statistics
 
-- **Total pages**: 850
-- **Entities**: 358
+- **Total pages**: 853
+- **Entities**: 360
 - **Concepts**: 334
-- **Sources**: 131
+- **Sources**: 132
 - **Synthesis**: 20
 - **Queries**: 7
 - **Last updated**: 2026-07-23

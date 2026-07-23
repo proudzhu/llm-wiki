@@ -73,7 +73,7 @@ where $r = (2 + 1/Q^2 + (1/Q)\sqrt{4 + 1/Q^2})/2$ is the contiguous-channel cent
 
 ### Piecewise-Linear Frequency Spacing
 
-- **BQT** (Kashima & Mont-Reynaud, 1985): Octaves geometrically spaced, channels inside each octave linearly spaced. Reduces CQT cost while approximating the geometric grid.
+- **BQT** ([[sources/kashima-1985-bounded-q-frequency-transform|Kashima & Mont-Reynaud, 1985]]): Octaves geometrically spaced, channels inside each octave linearly spaced. Reduces CQT cost while approximating the geometric grid.
 - **BQFFB** (novel, central contribution): Uses a CQFFB to separate the input into $D$ octaves (typically $D = 10$ for the human auditory range) and applies an FFB within each octave. The octave-separation filter procedure is:
 
   1. Take the second filter of a 2-channel FFB as the highest-octave filter.
