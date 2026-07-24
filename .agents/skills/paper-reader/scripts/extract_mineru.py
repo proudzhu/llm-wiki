@@ -9,7 +9,24 @@ Workflow:
 
 Usage:
   uv run python .agents/skills/paper-reader/scripts/extract_mineru.py --slug author-year-title
-  uv run python .agents/skills/paper-reader/scripts/extract_mineru.py --slug ... --language zh --model pipeline --timeout 900
+  uv run python .agents/skills/paper-reader/scripts/extract_mineru.py --slug ... --language ch --model pipeline --timeout 900
+
+MinerU language codes (NOT ISO 639 — MinerU's own convention):
+    ch          Chinese (Simplified)  [default]
+    ch_server   Chinese (server)
+    ch_lite     Chinese (lite)
+    en          English
+    japan       Japanese
+    korean      Korean
+    chinese_cht Traditional Chinese
+    latin       Latin-script languages
+    arabic      Arabic
+    east_slavic East Slavic
+    cyrillic    Cyrillic
+    devanagari  Devanagari
+    ta, te, ka  Tamil / Telugu / Kannada
+
+NOTE: `zh` is NOT a valid MinerU language code — use `ch` for Chinese.
 
 Requires: mineru-open-api CLI (npm install -g mineru-open-api).
 Verify token first: `mineru-open-api auth --show`
@@ -29,11 +46,29 @@ def main():
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument('--slug', required=True, help='Paper slug')
-    p.add_argument('--language', default='en', help='Paper language (default: en)')
+    p.add_argument('--language', default='en', help='Paper language (default: en). '
+                    'Valid MinerU codes: ch, ch_server, ch_lite, en, japan, korean, '
+                    'chinese_cht, latin, arabic, east_slavic, cyrillic, devanagari, '
+                    'ta, te, ka. NOTE: "zh" is INVALID — use "ch" for Chinese.')
     p.add_argument('--model', default='vlm', choices=['vlm', 'pipeline'],
                    help='VLM layout analysis (vlm, default) or pipeline (zero-hallucination)')
     p.add_argument('--timeout', type=int, default=600, help='Timeout in seconds (default 600)')
     args = p.parse_args()
+
+    # Validate language code against MinerU's accepted set (prevents the
+    # [-10002] "field language is invalid" API error at runtime).
+    # Reference: https://mineru.net/ & `mineru-open-api extract --help`
+    VALID_LANGS = {
+        'ch', 'ch_server', 'ch_lite', 'en', 'japan', 'korean', 'chinese_cht',
+        'latin', 'arabic', 'east_slavic', 'cyrillic', 'devanagari',
+        'ta', 'te', 'ka',
+    }
+    if args.language not in VALID_LANGS:
+        print(f"ERROR: invalid --language {args.language!r}. "
+              f"MinerU uses its own codes, not ISO 639. "
+              f"Common gotcha: use 'ch' for Chinese, NOT 'zh'.\n"
+              f"Valid codes: {sorted(VALID_LANGS)}", file=sys.stderr)
+        sys.exit(2)
 
     paper_dir = os.path.join('raw', 'papers', args.slug)
     pdf_path = os.path.join(paper_dir, 'paper.pdf')

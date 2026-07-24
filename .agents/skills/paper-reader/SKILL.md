@@ -24,7 +24,7 @@ End-to-end workflow for ingesting academic papers from Zotero into the LLM Wiki 
 - **User just wants a quick summary** — Read the existing source page or use the abstract directly. Full ingestion is only for deep analysis.
 - **Zotero is not running or unreachable** — Verify first: `curl -s http://localhost:23119/connector/ping`.
 - **Paper is not in Zotero** — This skill only ingests from Zotero. For external papers (e.g., direct arXiv URL), skip Zotero steps and use extraction scripts directly.
-- **Source is not a PDF/academic paper** — Web pages, blog posts, and informal documents use the standard raw article workflow instead.
+- **Source is not a PDF/academic paper** — Web pages, blog posts, and informal HTML articles use the standard raw article workflow instead. **Exception**: substantive PDF primary sources that are not academic papers (e.g., investor-meeting transcripts, interview transcripts, conference talk slides, internal presentations) DO qualify for this workflow — they benefit from Zotero metadata extraction, MinerU PDF parsing, and structured wiki page creation. For such sources, adapt the source page template: replace academic sections (Problem Formulation / Methodology / Experimental Setup / Results) with themed sections matching the source's content (e.g., Vision & Strategy / Q&A / Key Quotes). Slug follows thought-piece convention (no year, e.g., `liang-wenfeng-investor-exchange-meeting`), matching prior precedents like `karpathy-llm-os` and `jensen-huang-nvidia-moat`.
 - **Re-ingestion of an identical version** — Only re-ingest if the source PDF was updated (e.g., camera-ready replaces preprint) or the existing wiki page is significantly incomplete.
 
 ## Checking Existing Pages (Windows Glob Caveat)
@@ -115,6 +115,19 @@ uv run python .agents/skills/paper-reader/scripts/extract_mineru.py --slug SLUG 
 ```
 
 Parameters: `--model vlm` (VLM layout analysis, default), `--model pipeline` (zero-hallucination). Token required: `mineru-open-api auth`.
+
+**Language codes** (MinerU's own convention, NOT ISO 639 — common gotcha: `zh` is INVALID, use `ch` for Chinese):
+
+| Code | Language | Code | Language |
+|------|----------|------|----------|
+| `ch` | Chinese (Simplified, default) | `chinese_cht` | Traditional Chinese |
+| `en` | English | `japan` | Japanese |
+| `korean` | Korean | `latin` | Latin-script languages |
+| `arabic` | Arabic | `cyrillic` | Cyrillic |
+| `east_slavic` | East Slavic | `devanagari` | Devanagari |
+| `ta`/`te`/`ka` | Tamil/Telugu/Kannada | `ch_server`/`ch_lite` | Chinese server/lite variants |
+
+The script validates the language code locally before calling MinerU — invalid codes exit 2 with the valid list, instead of failing at the API call.
 
 Post-processing (automatic): `images/` → `figures/`, references updated in `full-text.md`.
 
