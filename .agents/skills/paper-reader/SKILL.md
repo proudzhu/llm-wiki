@@ -177,7 +177,7 @@ Read the extracted text in chunks (head 200 + tail 100 + targeted range reads fo
 
 ### Step 5: Create/Update Source Page
 
-Create `wiki/sources/{slug}.md`. Load [`references/page-templates.md`](references/page-templates.md) for the full frontmatter, required sections, and figure-usage criteria. Key points: H1 is `Author1, Author2 & Author3 Year: Short Title`; required sections are Summary / Problem Formulation / Methodology / Experimental Setup / Results / Key Contributions / Related Concepts / Related Synthesis; include figures wherever they materially aid understanding (block diagrams, frequency responses, architecture diagrams, listening-test curves, etc.), placed immediately after the section they illustrate. **No hard cap on figure count** — include every figure that adds substantive value, but skip pure data plots already captured in tables. Always `LS figures/` first to discover actual filenames, and **verify each filename exists** before writing the embed wikilink (use Glob with a partial hash prefix to confirm).
+Create `wiki/sources/{slug}.md`. Load [`references/page-templates.md`](references/page-templates.md) for the full frontmatter, required sections, figure-usage criteria, and figure-filename verification rules. H1 is `Author1, Author2 & Author3 Year: Short Title`; required sections are Summary / Problem Formulation / Methodology / Experimental Setup / Results / Key Contributions / Related Concepts / Related Synthesis.
 
 For re-ingestion: overwrite the existing source page with updated comprehensive content.
 
@@ -189,7 +189,7 @@ For each author not already in `wiki/entities/`, create a new page. For existing
 
 ### Step 7: Create Missing Concept Pages
 
-For each key technical concept referenced via wikilinks in the source page but lacking a dedicated page, create `wiki/concepts/{concept-name}.md`. Load [`references/page-templates.md`](references/page-templates.md) for the template and the **concept-page threshold** — only create a page if the paper introduces, formulates distinctly, or centrally relies on the concept. Do **not** create pages for generic ML/DL primitives (Adam, ReLU, dropout, gradient clipping) — link them as plain text instead.
+For each key technical concept referenced via wikilinks in the source page but lacking a dedicated page, create `wiki/concepts/{concept-name}.md`. Load [`references/page-templates.md`](references/page-templates.md) for the template and the full **concept-page threshold** (novelty / distinctive formulation / central-to-contribution). Quick rule: do **not** create pages for generic ML/DL primitives (Adam, ReLU, dropout, gradient clipping) — link them as plain text instead.
 
 **Check first**: use Glob/Grep to see if a concept already exists. If so, update it.
 
@@ -301,9 +301,7 @@ For re-ingestion, use `ingest (re)` as the operation in `--title`.
 uv run python .agents/skills/paper-reader/scripts/build_check.py
 ```
 
-If the build fails or exits with warnings (broken links, missing pages), resolve them before proceeding. The page-creation rules in AGENTS.md *Link Conventions* are designed so this step should always pass; if it does not, the offending page violated a convention and must be fixed.
-
-Note: `mkdocs build --strict` may emit `INFO - Doc file 'log.md' contains an unrecognized relative link` for pre-existing issues in `log.md`. These do not fail the build (exit 0) and are not caused by your ingest; do not block on them.
+If the build fails or exits with warnings (broken links, missing pages), resolve them before proceeding. (Pre-existing `INFO` messages about `log.md` links do not fail the build — see `pitfalls.md` #8.)
 
 ### Step 13: Commit Changes
 
@@ -322,28 +320,11 @@ The script stages `raw/papers/{slug}/`, `wiki/sources/{slug}.md`, all index file
 
 Use `--no-verify` only if the pre-commit hook has environment issues unrelated to your changes.
 
-## Naming Conventions
-
-| Type | Pattern | Example |
-|------|---------|---------|
-| Source slug | `author-year-short-title` | `tan-2018-convolutional-recurrent-network-speech-enhancement` |
-| Entity slug | `firstname-lastname` | `ke-tan` |
-| Concept slug | `descriptive-hyphenated` | `convolutional-recurrent-network` |
-
 ## Important Notes
 
-- **Never modify** files in `raw/` after creation (immutability rule) — **exception**: replacing remote image URLs with local paths in `full-text.md` is allowed.
-- **Always check** if a page already exists before creating (use Glob/Grep).
-- **Always read** existing pages before updating them.
-- **Wikilinks** use vault-absolute paths: `[[entities/name|Display Name]]` from any page. Never use `../` prefixes inside wikilinks. Never link to a page that does not exist — if you reference `[[concepts/some-new-concept]]`, create that page or leave as plain text.
-- **Cross-references** are bidirectional — when adding a link from A to B, also add from B to A.
-- **Frontmatter dates**: Use today's date for `created`, update `updated` on modified pages.
-- **Avoid `\bm{}` in LaTeX math**: MathJax does not load the `bm` package. Use `\mathbf{x}` (bold upright) or `\boldsymbol{x}` (bold italic) instead.
-- **Delete the PDF** after extraction — extraction scripts handle this automatically; never commit `paper.pdf`.
-- **Commit after build verification** — use `--no-verify` only if the pre-commit hook has environment issues unrelated to your changes.
-- **Sequence edits to the same file** — when updating an existing page with multiple changes (e.g., frontmatter date + new section + Related Concepts/Sources extension), issue the Edit calls **sequentially, one tool call per message**, not in parallel. Parallel Edits to the same file silently race against each other and only one of them persists, leading to missing sections and follow-up "complete pending edits" commits. Parallel Edits to **different** files are fine and encouraged.
-- **Verify each Edit actually persisted** — after editing an existing page (especially in a multi-edit batch), re-Read the relevant section of the file before assuming the edit landed. If an edit was silently dropped, re-apply it before committing. The `commit_ingest.py` script now warns if uncommitted changes remain after commit; treat that warning as a signal to inspect.
-- **Commit hygiene** — if you do discover missing edits after a commit, stage the affected files explicitly and create a follow-up commit (e.g., `ingest(slug): complete pending concept cross-refs missed by first commit`) rather than amending or force-pushing.
+- **`raw/` immutability exception**: replacing remote image URLs with local paths in `full-text.md` is allowed (the immutability rule itself is in AGENTS.md Tips).
+- **Avoid `\bm{}` in LaTeX math** — MathJax does not load the `bm` package. Use `\mathbf{x}` (bold upright) or `\boldsymbol{x}` (bold italic) instead.
+- **Sequence edits to the same file** — when applying multiple edits to one page (e.g., frontmatter date + new section + Related Sources extension), issue Edit calls **sequentially, one per message**, not in parallel. Parallel Edits to the same file race and only one persists. See `pitfalls.md` #13 for the full story and recovery guidance.
 
 ## Skill Self-Update
 
