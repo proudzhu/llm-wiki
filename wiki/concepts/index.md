@@ -340,4 +340,7 @@
 | [[concepts/adaptcrn\|AdaptCRN]] | Ultra-lightweight SE model pairing adaptive convolution with ConvNeXt/StarNet block, grouped DPRNN, ERB spectral compression — 135K params, 41 MMACs/s, PESQ 2.98 on VCTK-DEMAND | 2026-07-22 |
 | [[concepts/warped-iir-filter\|Warped IIR Filter]] | IIR filters with all-pass warping; modified structures eliminate delay-free recursive loops | 2026-07-23 |
 | [[concepts/warped-linear-prediction\|Warped Linear Prediction]] | LPC with all-pass chain — Bark-scale spectral matching, ~6dB SNR savings over conventional LPC at wideband rates | 2026-07-23 |
+| [[concepts/agi-roadmap-staircase\|AGI Roadmap Staircase]] | Liang Wenfeng's staircase narrative of intelligence: GPT → CoT → Agent → Continuous learning → Self-iterating singularity → Embodied AI; each step non-disposable; world models and video gen excluded from main line | 2026-07-24 |
+| [[concepts/continuous-learning\|Continuous Learning (LLM)]] | Next AI bottleneck per Liang Wenfeng — a problem (not one technique); currently unsolved globally; low-resource 'lottery' research mode at DeepSeek | 2026-07-24 |
+| [[concepts/restraint-as-strategy\|Restraint as Strategy]] | Liang Wenfeng's commercial argument: in a market as large as AI, the player willing to take less profit wins; expressed in open-source, 10-month payback pricing, no-KPI organization | 2026-07-24 |
 

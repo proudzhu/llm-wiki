@@ -370,4 +370,5 @@
 | [[entities/vesa-valimaki\|Vesa Välimäki]] | Helsinki University of Technology — audio effects, fractional delay filters, waveguide synthesis | 2026-07-23 |
 | [[entities/unto-k-laine\|Unto K. Laine]] | Helsinki University of Technology — frequency warping theory, FAM/FAMlet functions, nonuniform filter banks | 2026-07-23 |
 | [[entities/jyri-huopaniemi\|Jyri Huopaniemi]] | Nokia Research Center — binaural technology, 3-D sound, HRTF filter design | 2026-07-23 |
+| [[entities/wenfeng-liang\|Liang Wenfeng (梁文锋)]] | Founder of DeepSeek — articulated AGI staircase roadmap, restraint-as-strategy commercial logic, vision-driven organization | 2026-07-24 |
 

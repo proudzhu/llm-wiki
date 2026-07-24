@@ -376,6 +376,7 @@
 | [[entities/vesa-valimaki\|Vesa Välimäki]] | Helsinki University of Technology — audio effects, fractional delay filters, waveguide synthesis | 2026-07-23 |
 | [[entities/unto-k-laine\|Unto K. Laine]] | Helsinki University of Technology — frequency warping theory, FAM/FAMlet functions, nonuniform filter banks | 2026-07-23 |
 | [[entities/jyri-huopaniemi\|Jyri Huopaniemi]] | Nokia Research Center — binaural technology, 3-D sound, HRTF filter design | 2026-07-23 |
+| [[entities/wenfeng-liang\|Liang Wenfeng (梁文锋)]] | Founder of DeepSeek — articulated AGI staircase roadmap, restraint-as-strategy commercial logic, vision-driven organization | 2026-07-24 |
 
 ---
 
@@ -721,6 +722,9 @@
 | [[concepts/adaptcrn\|AdaptCRN]] | Ultra-lightweight SE model pairing adaptive convolution with ConvNeXt/StarNet block, grouped DPRNN, ERB spectral compression — 135K params, 41 MMACs/s, PESQ 2.98 on VCTK-DEMAND | 2026-07-22 |
 | [[concepts/warped-iir-filter\|Warped IIR Filter]] | IIR filters with all-pass warping; modified structures eliminate delay-free recursive loops | 2026-07-23 |
 | [[concepts/warped-linear-prediction\|Warped Linear Prediction]] | LPC with all-pass chain — Bark-scale spectral matching, ~6dB SNR savings over conventional LPC at wideband rates | 2026-07-23 |
+| [[concepts/agi-roadmap-staircase\|AGI Roadmap Staircase]] | Liang Wenfeng's staircase narrative of intelligence: GPT → CoT → Agent → Continuous learning → Self-iterating singularity → Embodied AI; each step non-disposable; world models and video gen excluded from main line | 2026-07-24 |
+| [[concepts/continuous-learning\|Continuous Learning (LLM)]] | Next AI bottleneck per Liang Wenfeng — a problem (not one technique); currently unsolved globally; low-resource 'lottery' research mode at DeepSeek | 2026-07-24 |
+| [[concepts/restraint-as-strategy\|Restraint as Strategy]] | Liang Wenfeng's commercial argument: in a market as large as AI, the player willing to take less profit wins; expressed in open-source, 10-month payback pricing, no-KPI organization | 2026-07-24 |
 
 ---
 
@@ -863,6 +867,7 @@
 | [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement\|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] | Frame-wise causal dynamic convolution (adaptive convolution) for SE; AdaptCRN ultra-lightweight model (135K params, 41 MMACs/s, PESQ 2.98 on VCTK-DEMAND) | 2026-07-22 |
 | [[sources/kashima-1985-bounded-q-frequency-transform\|Kashima & Mont-Reynaud 1985: The Bounded-Q Frequency Transform]] | Introduces the BQT — FFT-based piecewise-linear approximation to the constant-Q filter bank for polyphonic music transcription; ~3 orders of magnitude faster than DFT filter bank. | 2026-07-23 |
 | [[sources/harma-2000-frequency-warped-signal-processing\|Härmä et al. 2000: Frequency-Warped Signal Processing for Audio Applications]] | Tutorial on frequency-warped DSP — all-pass chain, WFIR/WIIR filters, WLP, and audio applications (coding, EQ, HRTF, waveguide mesh) | 2026-07-23 |
+| [[sources/liang-wenfeng-investor-exchange-meeting\|Liang Wenfeng 2026: Investor Exchange Meeting (Audio Transcript)]] | Closed-door investor meeting with DeepSeek founder — vision, open-source strategy, AGI staircase roadmap, US–China compute gap, ten-month payback pricing, vision-driven organization | 2026-07-24 |
 
 ---
 
@@ -913,10 +918,10 @@
 
 ## Statistics
 
-- **Total pages**: 862
-- **Entities**: 366
-- **Concepts**: 336
-- **Sources**: 133
+- **Total pages**: 867
+- **Entities**: 367
+- **Concepts**: 339
+- **Sources**: 134
 - **Synthesis**: 20
 - **Queries**: 7
-- **Last updated**: 2026-07-23
+- **Last updated**: 2026-07-24

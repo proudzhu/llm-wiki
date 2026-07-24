@@ -3493,3 +3493,27 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/entities/index.md` — added 6 entity rows
   - `wiki/concepts/index.md` — added 2 concept rows
   - `wiki/sources/index.md` — added 1 source row
+
+---
+
+## [2026-07-24] ingest | Liang Wenfeng 2026: Investor Exchange Meeting (Audio Transcript)
+
+- **Source**: `raw/papers/liang-wenfeng-investor-exchange-meeting/full-text.md` (Zotero: KI4HWLYE)
+- **Speaker**: Liang Wenfeng (梁文锋), founder of DeepSeek
+- **Format**: Audio recording transcript (3h 44min, ~900 lines), recorded 2026-05-20, transcribed 2026-07-16
+- **Type**: Primary source — closed-door investor exchange meeting
+- **Summary**: First-person strategic disclosures from DeepSeek founder — vision-driven organization, open-source of frontier models as original intent, AGI staircase roadmap (GPT → CoT → Agent → continuous learning → self-iterating singularity → embodied AI), "ten-month payback / 6× profit" API pricing, US–China compute gap (~20k H-equivalent vs. 800B-activation US models), no-KPI/no-formal-structure organization philosophy
+- **Pages created**:
+  - `raw/papers/liang-wenfeng-investor-exchange-meeting/full-text.md` — extracted text from Zotero PDF (MinerU VLM, language=ch)
+  - `wiki/sources/liang-wenfeng-investor-exchange-meeting.md`
+  - `wiki/entities/wenfeng-liang.md`
+  - `wiki/concepts/agi-roadmap-staircase.md`
+  - `wiki/concepts/continuous-learning.md`
+  - `wiki/concepts/restraint-as-strategy.md`
+- **Pages updated**:
+  - `wiki/entities/deepseek.md` — added founder link, new "Strategic Vision (2026 Investor Meeting)" section, and source link in References; added `open-weight` and `agi` tags
+  - `wiki/index.md` — added 1 source, 1 entity, 3 concepts; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 1 entity row
+  - `wiki/concepts/index.md` — added 3 concept rows
+- **Note**: Adapted paper-reader workflow for a non-paper primary source (audio transcript). Slug follows thought-piece precedent (no year, like `karpathy-llm-os` and `jensen-huang-nvidia-moat`). No synthesis page created — existing synthesis pages are audio/speech-focused; deferred per skill guidance ("when in doubt, prefer not updating").
