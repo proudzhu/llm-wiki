@@ -3517,3 +3517,29 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/entities/index.md` — added 1 entity row
   - `wiki/concepts/index.md` — added 3 concept rows
 - **Note**: Adapted paper-reader workflow for a non-paper primary source (audio transcript). Slug follows thought-piece precedent (no year, like `karpathy-llm-os` and `jensen-huang-nvidia-moat`). No synthesis page created — existing synthesis pages are audio/speech-focused; deferred per skill guidance ("when in doubt, prefer not updating").
+
+---
+
+## [2026-07-25] ingest | Lightweight Speech Enhancement Guided TSE in Noisy Multi-Speaker Scenarios (Huang et al. 2026)
+
+- **Source**: `raw/papers/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction/full-text.md` (Zotero: UJMWF4E2)
+- **Authors**: Ziling Huang, Junnan Wu, Lichun Fan, Zhenbo Luo, Jian Luan, Haixin Guan, Yanhua Long
+- **Published**: arXiv preprint 2508.19583, 2026-03-13
+- **DOI**: 10.48550/arXiv.2508.19583
+- **Summary**: LGTSE/D-LGTSE integrate a lightweight GTCRN denoiser as a front-end for noise-agnostic enrollment guidance and distortion-aware training in target speech extraction, improving SI-SDR by +0.89 dB on Libri2Mix (2-speaker+noise) over SEF-PNet.
+- **Pages created**:
+  - `raw/papers/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction/full-text.md` — extracted text from Zotero PDF via MinerU VLM
+  - `wiki/sources/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction.md`
+  - `wiki/entities/ziling-huang.md`
+  - `wiki/entities/yanhua-long.md`
+  - `wiki/concepts/noise-agnostic-enrollment-guidance.md`
+  - `wiki/concepts/distortion-aware-training.md`
+  - `wiki/concepts/sef-pnet.md`
+  - `wiki/concepts/cie-mdptnet.md`
+- **Pages updated**:
+  - `wiki/concepts/target-speaker-extraction.md` — expanded enrollment-based methods section with embedding-free sub-families and noise-agnostic guidance; added cross-refs and source link
+  - `wiki/concepts/gtcrn.md` — added "Reuse as a TSE Front-end (LGTSE/D-LGTSE)" section; added cross-refs and source link
+  - `wiki/index.md` — added 2 entities, 4 concepts, 1 source; updated statistics (total=874)
+  - `wiki/entities/index.md` — added 2 entity rows
+  - `wiki/concepts/index.md` — added 4 concept rows
+  - `wiki/sources/index.md` — added 1 source row

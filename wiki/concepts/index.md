@@ -343,4 +343,8 @@
 | [[concepts/agi-roadmap-staircase\|AGI Roadmap Staircase]] | Liang Wenfeng's staircase narrative of intelligence: GPT → CoT → Agent → Continuous learning → Self-iterating singularity → Embodied AI; each step non-disposable; world models and video gen excluded from main line | 2026-07-24 |
 | [[concepts/continuous-learning\|Continuous Learning (LLM)]] | Next AI bottleneck per Liang Wenfeng — a problem (not one technique); currently unsolved globally; low-resource 'lottery' research mode at DeepSeek | 2026-07-24 |
 | [[concepts/restraint-as-strategy\|Restraint as Strategy]] | Liang Wenfeng's commercial argument: in a market as large as AI, the player willing to take less profit wins; expressed in open-source, 10-month payback pricing, no-KPI organization | 2026-07-24 |
+| [[concepts/noise-agnostic-enrollment-guidance\|Noise-agnostic Enrollment Guidance]] | Denoise mixture before context interaction with enrollment so guidance is free of noise contamination (LGTSE) | 2026-07-25 |
+| [[concepts/distortion-aware-training\|Distortion-aware Training]] | Use denoiser's mildly distorted output as additional training input to expose model to distortion (D-LGTSE) | 2026-07-25 |
+| [[concepts/sef-pnet\|SEF-PNet]] | Speaker encoder-free personalized TSE backbone (ICASSP 2025); baseline for LGTSE/D-LGTSE | 2026-07-25 |
+| [[concepts/cie-mdptnet\|CIE-mDPTNet]] | SOTA embedding-free TSE backbone (Interspeech 2024); stronger baseline for D-LGTSE generalization | 2026-07-25 |
 

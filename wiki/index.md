@@ -377,6 +377,8 @@
 | [[entities/unto-k-laine\|Unto K. Laine]] | Helsinki University of Technology — frequency warping theory, FAM/FAMlet functions, nonuniform filter banks | 2026-07-23 |
 | [[entities/jyri-huopaniemi\|Jyri Huopaniemi]] | Nokia Research Center — binaural technology, 3-D sound, HRTF filter design | 2026-07-23 |
 | [[entities/wenfeng-liang\|Liang Wenfeng (梁文锋)]] | Founder of DeepSeek — articulated AGI staircase roadmap, restraint-as-strategy commercial logic, vision-driven organization | 2026-07-24 |
+| [[entities/ziling-huang\|Ziling Huang]] | Shanghai Normal University / Xiaomi MiLM Plus — TSE, embedding-free PSE (SEF-PNet, LGTSE/D-LGTSE) | 2026-07-25 |
+| [[entities/yanhua-long\|Yanhua Long]] | Shanghai Normal University / Unisound AI — corresponding author of LGTSE/D-LGTSE, SEF-PNet | 2026-07-25 |
 
 ---
 
@@ -725,6 +727,10 @@
 | [[concepts/agi-roadmap-staircase\|AGI Roadmap Staircase]] | Liang Wenfeng's staircase narrative of intelligence: GPT → CoT → Agent → Continuous learning → Self-iterating singularity → Embodied AI; each step non-disposable; world models and video gen excluded from main line | 2026-07-24 |
 | [[concepts/continuous-learning\|Continuous Learning (LLM)]] | Next AI bottleneck per Liang Wenfeng — a problem (not one technique); currently unsolved globally; low-resource 'lottery' research mode at DeepSeek | 2026-07-24 |
 | [[concepts/restraint-as-strategy\|Restraint as Strategy]] | Liang Wenfeng's commercial argument: in a market as large as AI, the player willing to take less profit wins; expressed in open-source, 10-month payback pricing, no-KPI organization | 2026-07-24 |
+| [[concepts/noise-agnostic-enrollment-guidance\|Noise-agnostic Enrollment Guidance]] | Denoise mixture before context interaction with enrollment so guidance is free of noise contamination (LGTSE) | 2026-07-25 |
+| [[concepts/distortion-aware-training\|Distortion-aware Training]] | Use denoiser's mildly distorted output as additional training input to expose model to distortion (D-LGTSE) | 2026-07-25 |
+| [[concepts/sef-pnet\|SEF-PNet]] | Speaker encoder-free personalized TSE backbone (ICASSP 2025); baseline for LGTSE/D-LGTSE | 2026-07-25 |
+| [[concepts/cie-mdptnet\|CIE-mDPTNet]] | SOTA embedding-free TSE backbone (Interspeech 2024); stronger baseline for D-LGTSE generalization | 2026-07-25 |
 
 ---
 
@@ -868,6 +874,7 @@
 | [[sources/kashima-1985-bounded-q-frequency-transform\|Kashima & Mont-Reynaud 1985: The Bounded-Q Frequency Transform]] | Introduces the BQT — FFT-based piecewise-linear approximation to the constant-Q filter bank for polyphonic music transcription; ~3 orders of magnitude faster than DFT filter bank. | 2026-07-23 |
 | [[sources/harma-2000-frequency-warped-signal-processing\|Härmä et al. 2000: Frequency-Warped Signal Processing for Audio Applications]] | Tutorial on frequency-warped DSP — all-pass chain, WFIR/WIIR filters, WLP, and audio applications (coding, EQ, HRTF, waveguide mesh) | 2026-07-23 |
 | [[sources/liang-wenfeng-investor-exchange-meeting\|Liang Wenfeng 2026: Investor Exchange Meeting (Audio Transcript)]] | Closed-door investor meeting with DeepSeek founder — vision, open-source strategy, AGI staircase roadmap, US–China compute gap, ten-month payback pricing, vision-driven organization | 2026-07-24 |
+| [[sources/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction\|Huang et al. 2026: Lightweight Speech Enhancement Guided TSE in Noisy Multi-Speaker Scenarios]] | LGTSE/D-LGTSE: GTCRN denoiser front-end for noise-agnostic enrollment guidance + distortion-aware training in TSE | 2026-07-25 |
 
 ---
 
@@ -918,10 +925,10 @@
 
 ## Statistics
 
-- **Total pages**: 867
-- **Entities**: 367
-- **Concepts**: 339
-- **Sources**: 134
+- **Total pages**: 874
+- **Entities**: 369
+- **Concepts**: 343
+- **Sources**: 135
 - **Synthesis**: 20
 - **Queries**: 7
-- **Last updated**: 2026-07-24
+- **Last updated**: 2026-07-25
