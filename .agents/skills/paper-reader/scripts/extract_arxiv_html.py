@@ -27,6 +27,19 @@ for _s in (sys.stdout, sys.stderr):
         pass
 
 
+def resolve_defuddle():
+    """Resolve the defuddle executable path.
+
+    On Windows, npm-installed CLIs ship as `.cmd` shims. `subprocess.run` with
+    a list argument calls `CreateProcess` directly, which does NOT consult
+    `PATHEXT`, so `['defuddle', ...]` raises `FileNotFoundError` even when
+    `defuddle.cmd` is on PATH. `shutil.which` does consult `PATHEXT`, so we
+    use it to resolve the full executable path before invoking subprocess.
+    Returns the path string, or None if not found.
+    """
+    return shutil.which('defuddle')
+
+
 def check_arxiv_html(arxiv_id):
     """Return True if arXiv HTML version exists."""
     url = f"https://arxiv.org/html/{arxiv_id}"
@@ -40,9 +53,12 @@ def check_arxiv_html(arxiv_id):
 
 def check_defuddle():
     """Return True if defuddle CLI is on PATH."""
+    exe = resolve_defuddle()
+    if exe is None:
+        return False
     try:
         subprocess.run(
-            ['defuddle', '--version'],
+            [exe, '--version'],
             capture_output=True, text=True, encoding='utf-8', errors='replace',
         )
         return True
@@ -52,9 +68,14 @@ def check_defuddle():
 
 def run_defuddle(url, out_path):
     """Run defuddle parse to extract markdown."""
+    exe = resolve_defuddle()
+    if exe is None:
+        print("defuddle CLI not found on PATH. Install with: npm install -g defuddle",
+              file=sys.stderr)
+        sys.exit(1)
     print(f"Running defuddle on {url} ...")
     result = subprocess.run(
-        ['defuddle', 'parse', url, '--md', '-o', out_path],
+        [exe, 'parse', url, '--md', '-o', out_path],
         capture_output=True, text=True, encoding='utf-8', errors='replace',
     )
     if result.returncode != 0:
