@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-05-23
+updated: 2026-07-27
 tags:
   - deep-learning
   - spatial-filtering
@@ -66,7 +66,9 @@ The conditioning can be applied at three locations in the SSF pipeline:
 - [[concepts/target-speaker-extraction|Target Speaker Extraction]]
 - [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]]
 - [[concepts/beamforming|Beamforming]]
+- [[concepts/geometry-aware-dynamic-convolution|Geometry-Aware Dynamic Convolution (Geo-DConv)]] — sibling geometry-conditioning approach for SE (vs. GC-SSF for target-speaker extraction); uses [[concepts/topology-aware-coordinate-transformer|TACT]] + dynamic-kernel basis instead of FiLM, and is permutation-equivariant
 
 ## Related Sources
 
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
+- [[sources/liu-2026-array-invariant-speech-enhancement|Liu, Zhang, Li & Qian 2026: Array-Invariant SE via Geo-DConv]]

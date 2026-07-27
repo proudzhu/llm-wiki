@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-06-18
-updated: 2026-07-22
+updated: 2026-07-27
 sources:
   - raw/papers/wang-2025-adaptive-convolution-cnn-speech-enhancement/full-text.md
 tags:
@@ -32,6 +32,7 @@ where $\alpha_k(x) \geq 0$ and $\sum_k \alpha_k(x) = 1$. The gating network is t
 | Per-pixel convolution (Wang et al. 2021) | T-F-dependent weights | Position-wise conditioning for spectrograms |
 | ODConv (Li et al. 2022) | Multi-dimensional attention (spatial, channel, filter, kernel) | Complementary attention across kernel-space dimensions |
 | **Adaptive convolution** (Wang et al. 2025) | **Per-frame**, frequency-only power pooling + temporal (GRU) channel modeling | Frame-wise causal dynamic convolution for streaming SE — see [[concepts/adaptive-convolution\|Adaptive Convolution]] |
+| **Geo-DConv** (Liu et al. 2026) | **Per-array**, [[concepts/topology-aware-coordinate-transformer\|TACT]] over Fourier-encoded microphone coordinates | Geometry-aware dynamic convolution for [[concepts/array-invariant-speech-enhancement\|array-invariant multi-channel SE]]; kernel bank indexed by basis dim, weights are coordinate-conditioned — see [[concepts/geometry-aware-dynamic-convolution\|Geometry-Aware Dynamic Convolution]] |
 
 ## Applications
 
@@ -45,9 +46,13 @@ where $\alpha_k(x) \geq 0$ and $\sum_k \alpha_k(x) = 1$. The gating network is t
 - [[concepts/attention-gate|Attention Gate / Gating Mechanisms]]
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
 - [[concepts/adaptive-convolution|Adaptive Convolution]]
+- [[concepts/geometry-aware-dynamic-convolution|Geometry-Aware Dynamic Convolution (Geo-DConv)]]
+- [[concepts/topology-aware-coordinate-transformer|Topology-Aware Coordinate Transformer (TACT)]]
+- [[concepts/array-invariant-speech-enhancement|Array-Invariant Speech Enhancement]]
 - [[concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
 
 ## Related Sources
 
 - [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator|Zhao et al. 2026: HALO — Half-frame-rate Adaptive Learnable Operator]]
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]]
+- [[sources/liu-2026-array-invariant-speech-enhancement|Liu, Zhang, Li & Qian 2026: Array-Invariant SE via Geo-DConv]]

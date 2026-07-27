@@ -52,6 +52,7 @@ Apostolidis et al. (2026) use a conventional input-based MVDR as the baseline ag
 - [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
 - [[concepts/diagonal-loading|Diagonal Loading]]
 - [[concepts/white-noise-gain|White Noise Gain]]
+- [[concepts/geometry-aware-dynamic-convolution|Geometry-Aware Dynamic Convolution (Geo-DConv)]] — data-driven counterpart that, like MVDR, exploits explicit microphone coordinates but via a learned dynamic kernel
 
 ## Related Sources
 
@@ -60,3 +61,4 @@ Apostolidis et al. (2026) use a conventional input-based MVDR as the baseline ag
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
 - [[sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026: Spatial-Magnifier]]
 - [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis et al. 2026: Listen first — output-based multi-microphone speech enhancement]]
+- [[sources/liu-2026-array-invariant-speech-enhancement|Liu, Zhang, Li & Qian 2026: Array-Invariant SE via Geo-DConv]]

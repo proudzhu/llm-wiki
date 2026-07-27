@@ -347,4 +347,7 @@
 | [[concepts/distortion-aware-training\|Distortion-aware Training]] | Use denoiser's mildly distorted output as additional training input to expose model to distortion (D-LGTSE) | 2026-07-25 |
 | [[concepts/sef-pnet\|SEF-PNet]] | Speaker encoder-free personalized TSE backbone (ICASSP 2025); baseline for LGTSE/D-LGTSE | 2026-07-25 |
 | [[concepts/cie-mdptnet\|CIE-mDPTNet]] | SOTA embedding-free TSE backbone (Interspeech 2024); stronger baseline for D-LGTSE generalization | 2026-07-25 |
+| [[concepts/geometry-aware-dynamic-convolution\|Geometry-Aware Dynamic Convolution (Geo-DConv)]] | Dynamic conv whose basis-kernel mixture weights are produced from microphone coordinates by TACT; universal adapter converting fixed-array SE backbones into array-invariant systems with permutation equivariance. | 2026-07-27 |
+| [[concepts/topology-aware-coordinate-transformer\|Topology-Aware Coordinate Transformer (TACT)]] | Transformer-Encoder over Fourier-encoded microphone coordinates; produces the transformation matrix used by Geo-DConv; permutation-equivariant by construction. | 2026-07-27 |
+| [[concepts/array-invariant-speech-enhancement\|Array-Invariant Speech Enhancement]] | Subfield of MCSE building models that generalize across mic counts and geometries without retraining; spans array-agnostic (TAC, USES2, FOA, UniArray) and geometry-aware (Geo-DConv, GC-SSF) approaches. | 2026-07-27 |
 

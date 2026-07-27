@@ -3543,3 +3543,29 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/entities/index.md` — added 2 entity rows
   - `wiki/concepts/index.md` — added 4 concept rows
   - `wiki/sources/index.md` — added 1 source row
+
+---
+
+## [2026-07-27] ingest | Array-Invariant Speech Enhancement via Geometry-Aware Dynamic Convolution (Liu et al. 2026)
+
+**Source**: Liu, Zhang, Li & Qian 2026 — "Towards Array-Invariant Speech Enhancement via Geometry-Aware Dynamic Convolution" (arXiv preprint)
+- Raw: `raw/papers/liu-2026-array-invariant-speech-enhancement/full-text.md` (MinerU extraction)
+- DOI: https://doi.org/10.48550/arXiv.2607.18658
+- Zotero key: `0_REFWW6J4`
+
+**Key contributions**
+- Introduces **Geometry-Aware Dynamic Convolution (Geo-DConv)** — a universal front-end that converts any fixed-array SE backbone (SpatialNet, TF-GridNet) into an array-invariant system by generating geometry-specific convolution kernels from explicit microphone coordinates.
+- Introduces **Topology-Aware Coordinate Transformer (TACT)** — a Transformer-Encoder over Fourier-encoded microphone coordinates producing the transformation matrix consumed by Geo-DConv; permutation-equivariant by construction, guaranteeing channel-order invariance.
+- Demonstrates that the same learned basis generalizes across microphone counts (4/6/8/12) and array geometries (circular, linear, random), and zero-shot to unseen arrays (CHiME-4 6-mic, trained on RealMAN).
+- Reports that fixed-array backbones retrofitted with Geo-DConv match USES2-comp quality at ~10× lower MACs, with negligible overhead (+0.1 M params, +0.09 G/s for SpatialNet).
+
+**Wiki pages created / updated**
+- Created: `sources/liu-2026-array-invariant-speech-enhancement`
+- Created entities: `wangyou-zhang`, `chenda-li`, `yanmin-qian`
+- Updated entity: `zhenglong-liu` (new affiliation SJTU/VUI Labs, new contribution)
+- Created concepts: `geometry-aware-dynamic-convolution`, `topology-aware-coordinate-transformer`, `array-invariant-speech-enhancement`
+- Updated concepts (cross-links + categorization): `multi-channel-speech-enhancement`, `dynamic-convolution`, `mvdr-beamformer`, `virtual-microphone-estimation`, `geometry-conditioned-ssf`, `doa-microphone-positional-encoding`
+
+**Verification**
+- Statistics recounted: 881 total pages (entities=372, concepts=346, sources=136, synthesis=20, queries=7) — verified by `check_statistics.py`.
+- `mkdocs build --strict` to be run as final sanity check.

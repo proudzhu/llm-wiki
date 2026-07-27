@@ -379,6 +379,9 @@
 | [[entities/wenfeng-liang\|Liang Wenfeng (梁文锋)]] | Founder of DeepSeek — articulated AGI staircase roadmap, restraint-as-strategy commercial logic, vision-driven organization | 2026-07-24 |
 | [[entities/ziling-huang\|Ziling Huang]] | Shanghai Normal University / Xiaomi MiLM Plus — TSE, embedding-free PSE (SEF-PNet, LGTSE/D-LGTSE) | 2026-07-25 |
 | [[entities/yanhua-long\|Yanhua Long]] | Shanghai Normal University / Unisound AI — corresponding author of LGTSE/D-LGTSE, SEF-PNet | 2026-07-25 |
+| [[entities/wangyou-zhang\|Wangyou Zhang]] | SJTU / VUI Labs — co-author of Geo-DConv array-invariant SE. | 2026-07-27 |
+| [[entities/chenda-li\|Chenda Li]] | SJTU / VUI Labs — co-author of Geo-DConv array-invariant SE. | 2026-07-27 |
+| [[entities/yanmin-qian\|Yanmin Qian]] | SJTU / VUI Labs — senior/corresponding author on Geo-DConv array-invariant SE. | 2026-07-27 |
 
 ---
 
@@ -731,6 +734,9 @@
 | [[concepts/distortion-aware-training\|Distortion-aware Training]] | Use denoiser's mildly distorted output as additional training input to expose model to distortion (D-LGTSE) | 2026-07-25 |
 | [[concepts/sef-pnet\|SEF-PNet]] | Speaker encoder-free personalized TSE backbone (ICASSP 2025); baseline for LGTSE/D-LGTSE | 2026-07-25 |
 | [[concepts/cie-mdptnet\|CIE-mDPTNet]] | SOTA embedding-free TSE backbone (Interspeech 2024); stronger baseline for D-LGTSE generalization | 2026-07-25 |
+| [[concepts/geometry-aware-dynamic-convolution\|Geometry-Aware Dynamic Convolution (Geo-DConv)]] | Dynamic conv whose basis-kernel mixture weights are produced from microphone coordinates by TACT; universal adapter converting fixed-array SE backbones into array-invariant systems with permutation equivariance. | 2026-07-27 |
+| [[concepts/topology-aware-coordinate-transformer\|Topology-Aware Coordinate Transformer (TACT)]] | Transformer-Encoder over Fourier-encoded microphone coordinates; produces the transformation matrix used by Geo-DConv; permutation-equivariant by construction. | 2026-07-27 |
+| [[concepts/array-invariant-speech-enhancement\|Array-Invariant Speech Enhancement]] | Subfield of MCSE building models that generalize across mic counts and geometries without retraining; spans array-agnostic (TAC, USES2, FOA, UniArray) and geometry-aware (Geo-DConv, GC-SSF) approaches. | 2026-07-27 |
 
 ---
 
@@ -875,6 +881,7 @@
 | [[sources/harma-2000-frequency-warped-signal-processing\|Härmä et al. 2000: Frequency-Warped Signal Processing for Audio Applications]] | Tutorial on frequency-warped DSP — all-pass chain, WFIR/WIIR filters, WLP, and audio applications (coding, EQ, HRTF, waveguide mesh) | 2026-07-23 |
 | [[sources/liang-wenfeng-investor-exchange-meeting\|Liang Wenfeng 2026: Investor Exchange Meeting (Audio Transcript)]] | Closed-door investor meeting with DeepSeek founder — vision, open-source strategy, AGI staircase roadmap, US–China compute gap, ten-month payback pricing, vision-driven organization | 2026-07-24 |
 | [[sources/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction\|Huang et al. 2026: Lightweight Speech Enhancement Guided TSE in Noisy Multi-Speaker Scenarios]] | LGTSE/D-LGTSE: GTCRN denoiser front-end for noise-agnostic enrollment guidance + distortion-aware training in TSE | 2026-07-25 |
+| [[sources/liu-2026-array-invariant-speech-enhancement\|Liu, Zhang, Li & Qian 2026: Array-Invariant SE via Geo-DConv]] | Geo-DConv + TACT — universal front-end that converts fixed-array SE backbones (SpatialNet, TF-GridNet) into array-invariant systems via geometry-conditioned dynamic convolution; matches USES2-comp at ~10× lower MACs, zero-shot generalizes to CHiME-4. | 2026-07-27 |
 
 ---
 
@@ -925,10 +932,10 @@
 
 ## Statistics
 
-- **Total pages**: 874
-- **Entities**: 369
-- **Concepts**: 343
-- **Sources**: 135
+- **Total pages**: 881
+- **Entities**: 372
+- **Concepts**: 346
+- **Sources**: 136
 - **Synthesis**: 20
 - **Queries**: 7
-- **Last updated**: 2026-07-25
+- **Last updated**: 2026-07-27

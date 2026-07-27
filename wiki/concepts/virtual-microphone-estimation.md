@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-12
-updated: 2026-05-12
+updated: 2026-07-27
 tags:
   - speech-enhancement
   - virtual-microphone
@@ -47,6 +47,7 @@ The primary advantage of Neural-VME lies in **decoupling spatial representation 
 - [[concepts/beamforming|Beamforming]]
 - [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
 - [[concepts/remote-microphone-technique|Remote Microphone Technique]]
+- [[concepts/array-invariant-speech-enhancement|Array-Invariant Speech Enhancement]] — VME underlies UniArray, an array-agnostic alternative to [[concepts/geometry-aware-dynamic-convolution|Geo-DConv]]
 
 ## Related Sources
 

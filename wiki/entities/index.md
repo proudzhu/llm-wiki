@@ -373,4 +373,7 @@
 | [[entities/wenfeng-liang\|Liang Wenfeng (梁文锋)]] | Founder of DeepSeek — articulated AGI staircase roadmap, restraint-as-strategy commercial logic, vision-driven organization | 2026-07-24 |
 | [[entities/ziling-huang\|Ziling Huang]] | Shanghai Normal University / Xiaomi MiLM Plus — TSE, embedding-free PSE (SEF-PNet, LGTSE/D-LGTSE) | 2026-07-25 |
 | [[entities/yanhua-long\|Yanhua Long]] | Shanghai Normal University / Unisound AI — corresponding author of LGTSE/D-LGTSE, SEF-PNet | 2026-07-25 |
+| [[entities/wangyou-zhang\|Wangyou Zhang]] | SJTU / VUI Labs — co-author of Geo-DConv array-invariant SE. | 2026-07-27 |
+| [[entities/chenda-li\|Chenda Li]] | SJTU / VUI Labs — co-author of Geo-DConv array-invariant SE. | 2026-07-27 |
+| [[entities/yanmin-qian\|Yanmin Qian]] | SJTU / VUI Labs — senior/corresponding author on Geo-DConv array-invariant SE. | 2026-07-27 |
 

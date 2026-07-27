@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-05-23
+updated: 2026-07-27
 tags:
   - positional-encoding
   - microphone-arrays
@@ -66,7 +66,9 @@ and $\theta$ is the target DOA defined relative to the same reference axis as th
 - [[concepts/spatially-selective-nonlinear-filter|Spatially Selective Non-Linear Filter (SSF)]]
 - [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]]
 - [[concepts/beamforming|Beamforming]]
+- [[concepts/topology-aware-coordinate-transformer|Topology-Aware Coordinate Transformer (TACT)]] — alternative microphone-coordinate encoding for SE (no DOA, Cartesian/spherical, Transformer-driven)
 
 ## Related Sources
 
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
+- [[sources/liu-2026-array-invariant-speech-enhancement|Liu, Zhang, Li & Qian 2026: Array-Invariant SE via Geo-DConv]]

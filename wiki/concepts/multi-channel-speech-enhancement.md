@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-07-21
+updated: 2026-07-27
 tags:
   - speech-enhancement
   - multi-channel
@@ -19,6 +19,7 @@ tags:
 | Linear filtering (probabilistic) | MWF, MVDR, GEV beamformer | Interpretable, controllable tradeoff |
 | End-to-end data-driven | Neural network-based | Black box, implicit tradeoff |
 | Hybrid methods | DNN-guided linear filters | Combines interpretability with data-driven estimation |
+| [[concepts/array-invariant-speech-enhancement\|Array-invariant / array-agnostic]] | TAC, USES2, FOA, UniArray, [[concepts/geometry-aware-dynamic-convolution\|Geo-DConv]] | Generalizes across microphone counts and geometries; explicit (geometry-aware) or implicit (geometry-agnostic) |
 
 ## Key Techniques
 
@@ -31,6 +32,7 @@ tags:
 - **Joint AEC+NS+DR (DeepVQE)**: Unified model with cross-attention alignment and complex convolving mask for simultaneous echo/noise/reverb removal
 - **Quality-Aware Dual-Microphone SE (QuaSE)**: Dynamically fuses quality-varying in-ear speech with noisy airborne speech via self-supervised quality assessment; addresses [[concepts/ear-canal-deformation|ECD]]-induced modality imbalance in earables
 - **[[concepts/output-based-speech-enhancement|Output-based SE]]**: Configures the system by evaluating SI/SQ of candidate outputs (rather than extracting input features from noisy signals); demonstrated by Apostolidis et al. (2026) via GP-selected [[concepts/mpdr-beamformer|MPDR]] beamforming
+- **[[concepts/geometry-aware-dynamic-convolution|Geo-DConv]]**: Universal front-end that converts fixed-array SE backbones (SpatialNet, TF-GridNet) into [[concepts/array-invariant-speech-enhancement|array-invariant]] systems by generating geometry-specific convolution kernels from microphone coordinates via [[concepts/topology-aware-coordinate-transformer|TACT]] (Liu et al. 2026); matches USES2-comp quality at ~10× lower MACs and generalizes zero-shot to unseen array sizes (CHiME-4)
 
 ## Related Concepts
 
@@ -48,6 +50,9 @@ tags:
 - [[concepts/output-based-speech-enhancement|Output-based Speech Enhancement]]
 - [[concepts/glimpse-proportion|Glimpse Proportion]]
 - [[concepts/mpdr-beamformer|MPDR Beamformer]]
+- [[concepts/array-invariant-speech-enhancement|Array-Invariant Speech Enhancement]]
+- [[concepts/geometry-aware-dynamic-convolution|Geometry-Aware Dynamic Convolution (Geo-DConv)]]
+- [[concepts/topology-aware-coordinate-transformer|Topology-Aware Coordinate Transformer (TACT)]]
 
 ## Related Sources
 
@@ -58,3 +63,4 @@ tags:
 - [[sources/indenbom-2023-deepvqe|Indenbom et al. 2023: DeepVQE]]
 - [[sources/han-2026-quality-aware-earable-se|Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone SE]]
 - [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis et al. 2026: Listen first — output-based multi-microphone speech enhancement]]
+- [[sources/liu-2026-array-invariant-speech-enhancement|Liu, Zhang, Li & Qian 2026: Array-Invariant SE via Geo-DConv]]
