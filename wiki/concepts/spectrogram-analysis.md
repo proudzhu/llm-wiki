@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-04-18
-updated: 2026-06-18
+updated: 2026-07-31
 sources:
   - raw/papers/kim-2021-broadcasted-residual-learning/full-text.md
   - raw/papers/cai-2024-tf-sepnet/full-text.md
+  - raw/papers/lostanlen-2019-pcen-why-and-how/full-text.md
 tags:
   - acoustic-signal-processing
   - spectrogram-analysis
@@ -50,9 +51,11 @@ In BC-ResNet keyword spotting, 1-second audio clips sampled at 16 kHz are conver
 - [[concepts/keyword-spotting|Keyword Spotting]]
 - [[concepts/active-noise-control|Active Noise Control]]
 - [[concepts/time-frequency-separate-convolutions|Time-Frequency Separate Convolutions]]
+- [[concepts/per-channel-energy-normalization|Per-Channel Energy Normalization (PCEN)]]
 
 ## Related Sources
 
 - [[sources/kim-2021-broadcasted-residual-learning|Kim, Chang, Lee & Sung 2021: Broadcasted Residual Learning]]
 - [[sources/cai-2024-tf-sepnet|Cai, Zhang & Li 2024: TF-SepNet]]
 - [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator|Zhao et al. 2026: HALO — Overlap-induced redundancy in STFT-based speech enhancement]]
+- [[sources/lostanlen-2019-pcen-why-and-how|Lostanlen et al. 2019: Per-Channel Energy Normalization: Why and How]]

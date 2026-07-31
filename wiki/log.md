@@ -3442,7 +3442,6 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/concepts/index.md` — added 6 concept rows
 
 ---
----
 
 ## [2026-07-23] ingest | The Bounded-Q Frequency Transform (Kashima & Mont-Reynaud 1985)
 
@@ -3599,6 +3598,31 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 
 ---
 
+## [2026-07-31] ingest | Per-Channel Energy Normalization: Why and How (Lostanlen et al. 2019)
+
+- **Source**: `raw/papers/lostanlen-2019-pcen-why-and-how/full-text.md` (Zotero: X24LMQYC)
+- **Authors**: Vincent Lostanlen, Justin Salamon, Mark Cartwright, Brian McFee, Andrew Farnsworth, Steve Kelling, Juan Pablo Bello
+- **Published**: IEEE Signal Processing Letters 26(1), pp. 39–43, January 2019
+- **DOI**: 10.1109/LSP.2018.2878620
+- **Summary**: Explains why PCEN outperforms logmelspec as an acoustic frontend — it Gaussianizes magnitude distributions and whitens mel-frequency bands (approaching AWGN, theoretically optimal for DNN robustness) — and how it works via asymptotic analysis of temporal integration, AGC, and DRC, with practical parameter guidance
+- **Pages created**:
+  - `raw/papers/lostanlen-2019-pcen-why-and-how/full-text.md` — extracted text from Zotero PDF (MinerU)
+  - `wiki/sources/lostanlen-2019-pcen-why-and-how.md`
+  - `wiki/entities/vincent-lostanlen.md`
+  - `wiki/entities/justin-salamon.md`
+  - `wiki/entities/mark-cartwright.md`
+  - `wiki/entities/brian-mcfee.md`
+  - `wiki/entities/andrew-farnsworth.md`
+  - `wiki/entities/steve-kelling.md`
+  - `wiki/entities/juan-pablo-bello.md`
+  - `wiki/concepts/per-channel-energy-normalization.md`
+- **Pages updated**:
+  - `wiki/concepts/spectrogram-analysis.md` — added PCEN cross-ref and source link
+  - `wiki/index.md` — added 1 source, 7 entities, 1 concept; updated statistics
+  - `wiki/sources/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md` — added rows
+
+---
+
 ## [2026-08-01] ingest | PCEN-Based Mask Thresholding and VAD for DNN Speech Enhancement Training (Liu et al. 2025, Dolby patent)
 
 - **Source**: `raw/papers/liu-2025-pcen-mask-vad-speech-enhancement/full-text.md` (Zotero: 9KQXCFTE)
@@ -3623,3 +3647,5 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/concepts/index.md` — added 1 concept row
   - `wiki/sources/index.md` — added 1 source row
 - **Notes**: R. M. Figin (R·M·菲金) listed as plain text in the source page because the exact English spelling could not be confirmed from the CN patent or the English PCT bibliographic data; the other three inventors use standard pinyin romanizations. No synthesis page updated — the patent reports no comparative benchmarks and its multi-task IRM extension is a training-strategy note rather than a low-latency architecture contribution.
+
+---

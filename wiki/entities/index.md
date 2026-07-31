@@ -385,4 +385,11 @@
 | [[entities/xiaoyu-liu\|Xiaoyu Liu]] | Dolby Laboratories — researcher/inventor on speech-enhancement patents | 2026-08-01 |
 | [[entities/cong-zhou\|Cong Zhou]] | Dolby Laboratories — researcher/inventor on speech-enhancement patents | 2026-08-01 |
 | [[entities/kai-li\|Kai Li]] | Dolby Laboratories — researcher/inventor on audio/speech-enhancement patents | 2026-08-01 |
+| [[entities/vincent-lostanlen\|Vincent Lostanlen]] | CNRS researcher — time-frequency scattering, PCEN, bioacoustics | 2026-07-31 |
+| [[entities/justin-salamon\|Justin Salamon]] | Adobe Research — sound event detection, environmental audio, PCEN | 2026-07-31 |
+| [[entities/mark-cartwright\|Mark Cartwright]] | NYU — acoustic sensing, urban noise monitoring (SONYC), PCEN co-author | 2026-07-31 |
+| [[entities/brian-mcfee\|Brian McFee]] | NYU — librosa lead maintainer, MIR, PCEN co-author | 2026-07-31 |
+| [[entities/andrew-farnsworth\|Andrew Farnsworth]] | Cornell Lab of Ornithology — avian bioacoustics, BirdVox co-developer | 2026-07-31 |
+| [[entities/steve-kelling\|Steve Kelling]] | Cornell Lab of Ornithology — biodiversity informatics, eBird, BirdVox co-developer | 2026-07-31 |
+| [[entities/juan-pablo-bello\|Juan Pablo Bello]] | NYU professor — SONYC lead, urban noise monitoring, sound event detection | 2026-07-31 |
 

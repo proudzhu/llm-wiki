@@ -391,6 +391,13 @@
 | [[entities/xiaoyu-liu\|Xiaoyu Liu]] | Dolby Laboratories — researcher/inventor on speech-enhancement patents | 2026-08-01 |
 | [[entities/cong-zhou\|Cong Zhou]] | Dolby Laboratories — researcher/inventor on speech-enhancement patents | 2026-08-01 |
 | [[entities/kai-li\|Kai Li]] | Dolby Laboratories — researcher/inventor on audio/speech-enhancement patents | 2026-08-01 |
+| [[entities/vincent-lostanlen\|Vincent Lostanlen]] | CNRS researcher — time-frequency scattering, PCEN, bioacoustics | 2026-07-31 |
+| [[entities/justin-salamon\|Justin Salamon]] | Adobe Research — sound event detection, environmental audio, PCEN | 2026-07-31 |
+| [[entities/mark-cartwright\|Mark Cartwright]] | NYU — acoustic sensing, urban noise monitoring (SONYC), PCEN co-author | 2026-07-31 |
+| [[entities/brian-mcfee\|Brian McFee]] | NYU — librosa lead maintainer, MIR, PCEN co-author | 2026-07-31 |
+| [[entities/andrew-farnsworth\|Andrew Farnsworth]] | Cornell Lab of Ornithology — avian bioacoustics, BirdVox co-developer | 2026-07-31 |
+| [[entities/steve-kelling\|Steve Kelling]] | Cornell Lab of Ornithology — biodiversity informatics, eBird, BirdVox co-developer | 2026-07-31 |
+| [[entities/juan-pablo-bello\|Juan Pablo Bello]] | NYU professor — SONYC lead, urban noise monitoring, sound event detection | 2026-07-31 |
 
 ---
 
@@ -896,6 +903,7 @@
 | [[sources/liu-2026-array-invariant-speech-enhancement\|Liu, Zhang, Li & Qian 2026: Array-Invariant SE via Geo-DConv]] | Geo-DConv + TACT — universal front-end that converts fixed-array SE backbones (SpatialNet, TF-GridNet) into array-invariant systems via geometry-conditioned dynamic convolution; matches USES2-comp at ~10× lower MACs, zero-shot generalizes to CHiME-4. | 2026-07-27 |
 | [[sources/choi-2021-trunet-real-time-speech-enhancement\|Choi et al. 2021: TRU-Net — Real-Time Denoising and Dereverberation with Tiny Recurrent U-Net]] | Lightweight frequency-axis U-Net (0.38 M params, 362 KB INT8) with phase-aware β-sigmoid mask for single-stage joint denoising + dereverberation at 0 ms lookahead | 2026-07-31 |
 | [[sources/liu-2025-pcen-mask-vad-speech-enhancement\|Liu et al. 2025: PCEN-Based Mask Thresholding and VAD for DNN Speech Enhancement Training]] | Dolby patent — training-time PCEN mask thresholding, PCEN-VAD, and sign-flipped asymmetric loss for mask-based DNN speech enhancement | 2026-08-01 |
+| [[sources/lostanlen-2019-pcen-why-and-how\|Lostanlen et al. 2019: Per-Channel Energy Normalization: Why and How]] | Explains why PCEN beats logmelspec (Gaussianization + whitening toward AWGN) and how it works (asymptotic analysis of temporal integration, AGC, DRC) | 2026-07-31 |
 
 ---
 
@@ -946,10 +954,10 @@
 
 ## Statistics
 
-- **Total pages**: 895
-- **Entities**: 381
+- **Total pages**: 903
+- **Entities**: 388
 - **Concepts**: 349
-- **Sources**: 138
+- **Sources**: 139
 - **Synthesis**: 20
 - **Queries**: 7
 - **Last updated**: 2026-08-01
