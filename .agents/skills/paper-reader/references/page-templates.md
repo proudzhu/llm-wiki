@@ -43,9 +43,10 @@ tags:
 Guidelines:
 
 - Place figures immediately after the section they illustrate.
-- Use vault-absolute embed wikilink paths: `![[raw/papers/{slug}/figures/ACTUAL_FILENAME.ext|caption]]`.
-- **List the `figures/` directory first** to discover actual filenames — MinerU produces hash-named `.jpg` files, arXiv HTML figures are named `fig1.png`.
-- **Verify each filename exists** before writing the embed wikilink — a single-character typo in a hash filename will cause a build failure. Use Glob with a partial hash prefix (e.g., `raw/papers/{slug}/figures/3c0491873b*`) to confirm the exact filename.
+- **Use embed wikilinks, NOT markdown image syntax.** Write `![[raw/papers/{slug}/figures/ACTUAL_FILENAME.ext|caption]]` — never `![alt](path)` — because markdown image paths resolve incorrectly in Obsidian and break the vault-absolute convention. A stray `![...](...)` figure line is a convention violation and will surface in `mkdocs build --strict`.
+- **Run `scripts/map_figures.py --slug {slug}` FIRST** (Step 4a) to map hash-named crops to "Fig. N." captions in one call. MinerU splits multi-panel figures into several files and sometimes extracts axis/colorbar strips it never references; the script lists each caption's images with line numbers and dimensions, flags unreferenced strips, and errors (exit 2) on referenced-but-missing hashes. Copy filenames verbatim from its output.
+- **Verify each filename exists** before writing the embed wikilink — a single-character typo in a hash filename will cause a build failure. Use Glob with a partial hash prefix (e.g., `raw/papers/{slug}/figures/3c0491873b*`) or `map_figures.py` output to confirm the exact filename.
+- **Multi-panel figures**: MinerU extracts each panel as a separate file. When a figure has (a)/(b)/(c) sub-labels, embed each panel file separately with its own caption line (e.g., `(a) ...` / `(b) ...`) above the shared `*Figure N: ...*` caption — do not embed one cropped panel as a stand-in for the whole figure.
 - Add an italicized caption below each figure: `*Figure N: description.*`
 - **No hard cap on figure count** — include every figure that adds substantive value. Tutorial and survey papers may legitimately warrant 15–25 figures (one per surveyed concept/application); research papers typically warrant 3–8. Use judgment: include figures that aid comprehension, skip those that merely decorate.
 - When adding figures, also update corresponding concept pages with the same figure if it illustrates a key concept.

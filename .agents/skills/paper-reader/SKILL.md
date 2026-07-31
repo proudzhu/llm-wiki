@@ -55,6 +55,7 @@ Mechanical steps are automated as Python scripts in `scripts/`. Run them from th
 | `scripts/extract_arxiv_html.py` | 3b | arXiv HTML extraction via Defuddle + download figures + fix links + delete PDF |
 | `scripts/extract_mineru.py` | 3c | MinerU extraction + rename `images/`→`figures/` + update refs + delete PDF |
 | `scripts/extract_pdftotext.py` | 3d | pdftotext fallback (plain text, no images) + delete PDF |
+| `scripts/map_figures.py` | 4a | Map hash-named figure crops to "Fig. N." captions + flag unreferenced strips + verify hashes exist |
 | `scripts/update_indexes.py` | 10 | Add rows (`add`), batch-add from YAML manifest (`batch --manifest`), or recount statistics (`stats`) |
 | `scripts/append_log.py` | 11 | Append formatted entry to `wiki/log.md` |
 | `scripts/build_check.py` | 12 | Run `mkdocs build --strict` (tries `uv run` then `python -m`) |
@@ -133,6 +134,8 @@ Post-processing (automatic): `images/` → `figures/`, references updated in `fu
 
 Verify extraction quality: Read first 200 lines and last 100 lines of `full-text.md`. MinerU VLM may produce mermaid code blocks for diagrams — these are normal.
 
+**Map figures to captions**: run `scripts/map_figures.py --slug SLUG` — it pairs each hash-named crop in `figures/` with its "Fig. N." caption (by line proximity), prints dimensions, flags axis/colorbar strips, and exits 2 on referenced-but-missing hashes. This is the one-call replacement for manual figure forensics (see `pitfalls.md` #25).
+
 #### 3d. Fallback: pdftotext (If MinerU Fails)
 
 ```bash
@@ -178,6 +181,8 @@ Read the extracted text in chunks (head 200 + tail 100 + targeted range reads fo
 ### Step 5: Create/Update Source Page
 
 Create `wiki/sources/{slug}.md`. Load [`references/page-templates.md`](references/page-templates.md) for the full frontmatter, required sections, figure-usage criteria, and figure-filename verification rules. H1 is `Author1, Author2 & Author3 Year: Short Title`; required sections are Summary / Problem Formulation / Methodology / Experimental Setup / Results / Key Contributions / Related Concepts / Related Synthesis.
+
+**Figure embeds**: use the `map_figures.py` output from Step 3c to write embed wikilinks `![[raw/papers/{slug}/figures/HASH.jpg|caption]]`. Multi-panel figures are embedded panel-by-panel (one `![[...]]` per (a)/(b) crop) above the shared `*Figure N: ...*` caption. Never use markdown `![alt](path)` — see `pitfalls.md` #26-27.
 
 For re-ingestion: overwrite the existing source page with updated comprehensive content.
 
