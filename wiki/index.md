@@ -382,6 +382,12 @@
 | [[entities/wangyou-zhang\|Wangyou Zhang]] | SJTU / VUI Labs — co-author of Geo-DConv array-invariant SE. | 2026-07-27 |
 | [[entities/chenda-li\|Chenda Li]] | SJTU / VUI Labs — co-author of Geo-DConv array-invariant SE. | 2026-07-27 |
 | [[entities/yanmin-qian\|Yanmin Qian]] | SJTU / VUI Labs — senior/corresponding author on Geo-DConv array-invariant SE. | 2026-07-27 |
+| [[entities/hyeong-seok-choi\|Hyeong-Seok Choi]] | Seoul National University / Supertone — phase-aware speech enhancement, DCU-Net and TRU-Net lead author | 2026-07-31 |
+| [[entities/sungjin-park\|Sungjin Park]] | Seoul National University — co-author of TRU-Net | 2026-07-31 |
+| [[entities/jie-hwan-lee\|Jie Hwan Lee]] | Supertone Inc. — co-author of TRU-Net | 2026-07-31 |
+| [[entities/hoon-heo\|Hoon Heo]] | Supertone Inc. — co-author of TRU-Net | 2026-07-31 |
+| [[entities/dongsuk-jeon\|Dongsuk Jeon]] | Seoul National University — INT8 quantization lead for TRU-Net | 2026-07-31 |
+| [[entities/kyogu-lee\|Kyogu Lee]] | Seoul National University / Supertone — senior author on DCU-Net and TRU-Net | 2026-07-31 |
 
 ---
 
@@ -737,6 +743,8 @@
 | [[concepts/geometry-aware-dynamic-convolution\|Geometry-Aware Dynamic Convolution (Geo-DConv)]] | Dynamic conv whose basis-kernel mixture weights are produced from microphone coordinates by TACT; universal adapter converting fixed-array SE backbones into array-invariant systems with permutation equivariance. | 2026-07-27 |
 | [[concepts/topology-aware-coordinate-transformer\|Topology-Aware Coordinate Transformer (TACT)]] | Transformer-Encoder over Fourier-encoded microphone coordinates; produces the transformation matrix used by Geo-DConv; permutation-equivariant by construction. | 2026-07-27 |
 | [[concepts/array-invariant-speech-enhancement\|Array-Invariant Speech Enhancement]] | Subfield of MCSE building models that generalize across mic counts and geometries without retraining; spans array-agnostic (TAC, USES2, FOA, UniArray) and geometry-aware (Geo-DConv, GC-SSF) approaches. | 2026-07-27 |
+| [[concepts/trunet\|Tiny Recurrent U-Net (TRU-Net)]] | Lightweight frequency-axis U-Net with FGRU/TGRU recurrent mixing for real-time speech enhancement (0.38 M params, 0 ms lookahead) | 2026-07-31 |
+| [[concepts/phase-aware-beta-sigmoid-mask\|Phase-aware β-sigmoid Mask (PHM)]] | Complex-valued mask with learnable β magnitude range and law-of-cosines phase reconstruction; quadrilateral extension enables joint denoising + dereverberation | 2026-07-31 |
 
 ---
 
@@ -882,6 +890,7 @@
 | [[sources/liang-wenfeng-investor-exchange-meeting\|Liang Wenfeng 2026: Investor Exchange Meeting (Audio Transcript)]] | Closed-door investor meeting with DeepSeek founder — vision, open-source strategy, AGI staircase roadmap, US–China compute gap, ten-month payback pricing, vision-driven organization | 2026-07-24 |
 | [[sources/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction\|Huang et al. 2026: Lightweight Speech Enhancement Guided TSE in Noisy Multi-Speaker Scenarios]] | LGTSE/D-LGTSE: GTCRN denoiser front-end for noise-agnostic enrollment guidance + distortion-aware training in TSE | 2026-07-25 |
 | [[sources/liu-2026-array-invariant-speech-enhancement\|Liu, Zhang, Li & Qian 2026: Array-Invariant SE via Geo-DConv]] | Geo-DConv + TACT — universal front-end that converts fixed-array SE backbones (SpatialNet, TF-GridNet) into array-invariant systems via geometry-conditioned dynamic convolution; matches USES2-comp at ~10× lower MACs, zero-shot generalizes to CHiME-4. | 2026-07-27 |
+| [[sources/choi-2021-trunet-real-time-speech-enhancement\|Choi et al. 2021: TRU-Net — Real-Time Denoising and Dereverberation with Tiny Recurrent U-Net]] | Lightweight frequency-axis U-Net (0.38 M params, 362 KB INT8) with phase-aware β-sigmoid mask for single-stage joint denoising + dereverberation at 0 ms lookahead | 2026-07-31 |
 
 ---
 
@@ -932,10 +941,10 @@
 
 ## Statistics
 
-- **Total pages**: 881
-- **Entities**: 372
-- **Concepts**: 346
-- **Sources**: 136
+- **Total pages**: 890
+- **Entities**: 378
+- **Concepts**: 348
+- **Sources**: 137
 - **Synthesis**: 20
 - **Queries**: 7
-- **Last updated**: 2026-07-27
+- **Last updated**: 2026-07-31

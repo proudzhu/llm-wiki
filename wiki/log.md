@@ -3569,3 +3569,30 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 **Verification**
 - Statistics recounted: 881 total pages (entities=372, concepts=346, sources=136, synthesis=20, queries=7) — verified by `check_statistics.py`.
 - `mkdocs build --strict` to be run as final sanity check.
+
+---
+
+## [2026-07-31] ingest | Real-Time Denoising and Dereverberation with Tiny Recurrent U-Net (Choi 2021)
+
+- **Source**: `raw/papers/choi-2021-trunet-real-time-speech-enhancement/full-text.md` (Zotero: CZEIF8BU)
+- **Authors**: Hyeong-Seok Choi, Sungjin Park, Jie Hwan Lee, Hoon Heo, Dongsuk Jeon, Kyogu Lee
+- **Published**: ICASSP 2021, pp. 5771–5775
+- **DOI**: 10.1109/ICASSP39728.2021.9414852
+- **Summary**: Lightweight frequency-axis U-Net (TRU-Net, 0.38 M params, 362 KB INT8) with phase-aware β-sigmoid mask (PHM) for single-stage joint denoising and dereverberation at 0 ms lookahead.
+- **Pages created**:
+  - `raw/papers/choi-2021-trunet-real-time-speech-enhancement/full-text.md` — extracted text from Zotero PDF (MinerU VLM, English)
+  - `wiki/sources/choi-2021-trunet-real-time-speech-enhancement.md`
+  - `wiki/entities/hyeong-seok-choi.md`
+  - `wiki/entities/sungjin-park.md`
+  - `wiki/entities/jie-hwan-lee.md`
+  - `wiki/entities/hoon-heo.md`
+  - `wiki/entities/dongsuk-jeon.md`
+  - `wiki/entities/kyogu-lee.md`
+  - `wiki/concepts/trunet.md`
+  - `wiki/concepts/phase-aware-beta-sigmoid-mask.md`
+- **Pages updated**:
+  - `wiki/concepts/dereverberation.md` — added PHM quadrilateral row to methods table, cross-referenced TRU-Net and PHM, added source link
+  - `wiki/index.md` — added 6 entities, 2 concepts, 1 source; updated statistics (total=890)
+  - `wiki/entities/index.md` — added 6 entity rows
+  - `wiki/concepts/index.md` — added 2 concept rows
+  - `wiki/sources/index.md` — added 1 source row

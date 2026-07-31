@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-27
-updated: 2026-06-06
+updated: 2026-07-31
 tags:
   - signal-processing
   - speech-enhancement
@@ -37,6 +37,7 @@ Key advantages: can operate blindly without DOA knowledge, requires only two mic
 | **Spectral subtraction (Lebart)** | Exponential decay model of late reverberation energy | Requires $T_{60}$ estimate |
 | **MCLP (Multi-Channel Linear Prediction)** | Linear prediction models reverberation as delayed/weighted copies | Effective for WPE-style dereverberation |
 | **Deep learning** | DNN-based spectral mapping or masking | Data-driven, can operate single-channel |
+| **PHM quadrilateral (TRU-Net)** | Two pairs of phase-aware β-sigmoid masks form a quadrilateral in the complex STFT domain; the reverberation mask is uniquely determined by the other three sides | Single-stage joint denoising + dereverberation, 0.38 M params, 0 ms lookahead |
 | **Joint AEC+NS+DR (DeepVQE)** | Unified model with CCM for simultaneous echo/noise/reverb removal | Over 10 dB SRR improvement, real-time |
 | **Beamforming + postfilter** | Spatial filtering combined with postfiltering | Multi-channel required |
 
@@ -50,9 +51,12 @@ Key advantages: can operate blindly without DOA knowledge, requires only two mic
 - [[concepts/wiener-filter|Wiener Filter]]
 - [[concepts/acoustic-echo-cancellation|Acoustic Echo Cancellation]]
 - [[concepts/complex-convolving-mask|Complex Convolving Mask]]
+- [[concepts/trunet|Tiny Recurrent U-Net (TRU-Net)]]
+- [[concepts/phase-aware-beta-sigmoid-mask|Phase-aware β-sigmoid Mask (PHM)]]
 
 ## Key Sources
 
 - [[sources/schwarz-2015-coherent-to-diffuse-power-ratio|Schwarz & Kellermann 2015: CDR Estimation for Dereverberation]]
 - [[sources/schwarz-2019-dereverberation-spatial-coherence|Schwarz 2019: Dereverberation and Robust Speech Recognition]]
 - [[sources/indenbom-2023-deepvqe|Indenbom et al. 2023: DeepVQE]]
+- [[sources/choi-2021-trunet-real-time-speech-enhancement|Choi et al. 2021: TRU-Net — Real-Time Denoising and Dereverberation with Tiny Recurrent U-Net]]

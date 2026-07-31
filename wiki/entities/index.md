@@ -376,4 +376,10 @@
 | [[entities/wangyou-zhang\|Wangyou Zhang]] | SJTU / VUI Labs — co-author of Geo-DConv array-invariant SE. | 2026-07-27 |
 | [[entities/chenda-li\|Chenda Li]] | SJTU / VUI Labs — co-author of Geo-DConv array-invariant SE. | 2026-07-27 |
 | [[entities/yanmin-qian\|Yanmin Qian]] | SJTU / VUI Labs — senior/corresponding author on Geo-DConv array-invariant SE. | 2026-07-27 |
+| [[entities/hyeong-seok-choi\|Hyeong-Seok Choi]] | Seoul National University / Supertone — phase-aware speech enhancement, DCU-Net and TRU-Net lead author | 2026-07-31 |
+| [[entities/sungjin-park\|Sungjin Park]] | Seoul National University — co-author of TRU-Net | 2026-07-31 |
+| [[entities/jie-hwan-lee\|Jie Hwan Lee]] | Supertone Inc. — co-author of TRU-Net | 2026-07-31 |
+| [[entities/hoon-heo\|Hoon Heo]] | Supertone Inc. — co-author of TRU-Net | 2026-07-31 |
+| [[entities/dongsuk-jeon\|Dongsuk Jeon]] | Seoul National University — INT8 quantization lead for TRU-Net | 2026-07-31 |
+| [[entities/kyogu-lee\|Kyogu Lee]] | Seoul National University / Supertone — senior author on DCU-Net and TRU-Net | 2026-07-31 |
 

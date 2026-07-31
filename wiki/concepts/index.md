@@ -350,4 +350,6 @@
 | [[concepts/geometry-aware-dynamic-convolution\|Geometry-Aware Dynamic Convolution (Geo-DConv)]] | Dynamic conv whose basis-kernel mixture weights are produced from microphone coordinates by TACT; universal adapter converting fixed-array SE backbones into array-invariant systems with permutation equivariance. | 2026-07-27 |
 | [[concepts/topology-aware-coordinate-transformer\|Topology-Aware Coordinate Transformer (TACT)]] | Transformer-Encoder over Fourier-encoded microphone coordinates; produces the transformation matrix used by Geo-DConv; permutation-equivariant by construction. | 2026-07-27 |
 | [[concepts/array-invariant-speech-enhancement\|Array-Invariant Speech Enhancement]] | Subfield of MCSE building models that generalize across mic counts and geometries without retraining; spans array-agnostic (TAC, USES2, FOA, UniArray) and geometry-aware (Geo-DConv, GC-SSF) approaches. | 2026-07-27 |
+| [[concepts/trunet\|Tiny Recurrent U-Net (TRU-Net)]] | Lightweight frequency-axis U-Net with FGRU/TGRU recurrent mixing for real-time speech enhancement (0.38 M params, 0 ms lookahead) | 2026-07-31 |
+| [[concepts/phase-aware-beta-sigmoid-mask\|Phase-aware β-sigmoid Mask (PHM)]] | Complex-valued mask with learnable β magnitude range and law-of-cosines phase reconstruction; quadrilateral extension enables joint denoising + dereverberation | 2026-07-31 |
 
