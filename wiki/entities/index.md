@@ -382,4 +382,7 @@
 | [[entities/hoon-heo\|Hoon Heo]] | Supertone Inc. — co-author of TRU-Net | 2026-07-31 |
 | [[entities/dongsuk-jeon\|Dongsuk Jeon]] | Seoul National University — INT8 quantization lead for TRU-Net | 2026-07-31 |
 | [[entities/kyogu-lee\|Kyogu Lee]] | Seoul National University / Supertone — senior author on DCU-Net and TRU-Net | 2026-07-31 |
+| [[entities/xiaoyu-liu\|Xiaoyu Liu]] | Dolby Laboratories — researcher/inventor on speech-enhancement patents | 2026-08-01 |
+| [[entities/cong-zhou\|Cong Zhou]] | Dolby Laboratories — researcher/inventor on speech-enhancement patents | 2026-08-01 |
+| [[entities/kai-li\|Kai Li]] | Dolby Laboratories — researcher/inventor on audio/speech-enhancement patents | 2026-08-01 |
 

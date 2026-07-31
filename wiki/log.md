@@ -3596,3 +3596,30 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/entities/index.md` — added 6 entity rows
   - `wiki/concepts/index.md` — added 2 concept rows
   - `wiki/sources/index.md` — added 1 source row
+
+---
+
+## [2026-08-01] ingest | PCEN-Based Mask Thresholding and VAD for DNN Speech Enhancement Training (Liu et al. 2025, Dolby patent)
+
+- **Source**: `raw/papers/liu-2025-pcen-mask-vad-speech-enhancement/full-text.md` (Zotero: 9KQXCFTE)
+- **Inventors**: Xiaoyu Liu (刘晓宇), R. M. Figin (R·M·菲金, romanized), Cong Zhou (周聪), Kai Li (李凯)
+- **Assignee**: Dolby Laboratories Licensing Corporation
+- **Publication**: CN 119404249 A (2025-02-07); PCT WO 2023/205240 A1 (2023-10-26)
+- **Priority**: US 63/437,273 (2023-01-05); US 63/493,979 (2023-04-03); PCT/CN2022/087983 (2022-04-20)
+- **Type**: Patent (invention patent application)
+- **Summary**: Dolby patent proposing three training-time-only mechanisms for mask-based DNN speech enhancement: PCEN-based mask thresholding (zeroes IRM on stationary-noise bands of the clean target), PCEN-based VAD (frame-level speech/non-speech from summed band PCEN energies), and a sign-flipped asymmetric loss that preserves speech in speech frames and aggressively suppresses artifacts in non-speech frames. PCEN is used only as a threshold oracle and loss driver, never as a replacement target, and only at training time.
+- **Pages created**:
+  - `raw/papers/liu-2025-pcen-mask-vad-speech-enhancement/full-text.md` — extracted text from Zotero PDF (MinerU, Chinese)
+  - `wiki/sources/liu-2025-pcen-mask-vad-speech-enhancement.md`
+  - `wiki/entities/xiaoyu-liu.md`
+  - `wiki/entities/cong-zhou.md`
+  - `wiki/entities/kai-li.md`
+  - `wiki/concepts/per-channel-energy-normalization.md`
+- **Pages updated**:
+  - `wiki/concepts/voice-activity-detection.md` — added "Training-Time VAD for Loss Gating" section and source link
+  - `wiki/concepts/ideal-ratio-mask.md` — added PCEN-thresholded IRM variant and source link
+  - `wiki/index.md` — added 3 entities, 1 concept, 1 source; updated statistics
+  - `wiki/entities/index.md` — added 3 entity rows
+  - `wiki/concepts/index.md` — added 1 concept row
+  - `wiki/sources/index.md` — added 1 source row
+- **Notes**: R. M. Figin (R·M·菲金) listed as plain text in the source page because the exact English spelling could not be confirmed from the CN patent or the English PCT bibliographic data; the other three inventors use standard pinyin romanizations. No synthesis page updated — the patent reports no comparative benchmarks and its multi-task IRM extension is a training-strategy note rather than a low-latency architecture contribution.

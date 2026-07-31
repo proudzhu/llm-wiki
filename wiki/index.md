@@ -388,6 +388,9 @@
 | [[entities/hoon-heo\|Hoon Heo]] | Supertone Inc. — co-author of TRU-Net | 2026-07-31 |
 | [[entities/dongsuk-jeon\|Dongsuk Jeon]] | Seoul National University — INT8 quantization lead for TRU-Net | 2026-07-31 |
 | [[entities/kyogu-lee\|Kyogu Lee]] | Seoul National University / Supertone — senior author on DCU-Net and TRU-Net | 2026-07-31 |
+| [[entities/xiaoyu-liu\|Xiaoyu Liu]] | Dolby Laboratories — researcher/inventor on speech-enhancement patents | 2026-08-01 |
+| [[entities/cong-zhou\|Cong Zhou]] | Dolby Laboratories — researcher/inventor on speech-enhancement patents | 2026-08-01 |
+| [[entities/kai-li\|Kai Li]] | Dolby Laboratories — researcher/inventor on audio/speech-enhancement patents | 2026-08-01 |
 
 ---
 
@@ -745,6 +748,7 @@
 | [[concepts/array-invariant-speech-enhancement\|Array-Invariant Speech Enhancement]] | Subfield of MCSE building models that generalize across mic counts and geometries without retraining; spans array-agnostic (TAC, USES2, FOA, UniArray) and geometry-aware (Geo-DConv, GC-SSF) approaches. | 2026-07-27 |
 | [[concepts/trunet\|Tiny Recurrent U-Net (TRU-Net)]] | Lightweight frequency-axis U-Net with FGRU/TGRU recurrent mixing for real-time speech enhancement (0.38 M params, 0 ms lookahead) | 2026-07-31 |
 | [[concepts/phase-aware-beta-sigmoid-mask\|Phase-aware β-sigmoid Mask (PHM)]] | Complex-valued mask with learnable β magnitude range and law-of-cosines phase reconstruction; quadrilateral extension enables joint denoising + dereverberation | 2026-07-31 |
+| [[concepts/per-channel-energy-normalization\|Per-Channel Energy Normalization (PCEN)]] | Spectral-normalization technique that divides each band's energy by its time-averaged level; used as a training-time threshold oracle and VAD | 2026-08-01 |
 
 ---
 
@@ -891,6 +895,7 @@
 | [[sources/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction\|Huang et al. 2026: Lightweight Speech Enhancement Guided TSE in Noisy Multi-Speaker Scenarios]] | LGTSE/D-LGTSE: GTCRN denoiser front-end for noise-agnostic enrollment guidance + distortion-aware training in TSE | 2026-07-25 |
 | [[sources/liu-2026-array-invariant-speech-enhancement\|Liu, Zhang, Li & Qian 2026: Array-Invariant SE via Geo-DConv]] | Geo-DConv + TACT — universal front-end that converts fixed-array SE backbones (SpatialNet, TF-GridNet) into array-invariant systems via geometry-conditioned dynamic convolution; matches USES2-comp at ~10× lower MACs, zero-shot generalizes to CHiME-4. | 2026-07-27 |
 | [[sources/choi-2021-trunet-real-time-speech-enhancement\|Choi et al. 2021: TRU-Net — Real-Time Denoising and Dereverberation with Tiny Recurrent U-Net]] | Lightweight frequency-axis U-Net (0.38 M params, 362 KB INT8) with phase-aware β-sigmoid mask for single-stage joint denoising + dereverberation at 0 ms lookahead | 2026-07-31 |
+| [[sources/liu-2025-pcen-mask-vad-speech-enhancement\|Liu et al. 2025: PCEN-Based Mask Thresholding and VAD for DNN Speech Enhancement Training]] | Dolby patent — training-time PCEN mask thresholding, PCEN-VAD, and sign-flipped asymmetric loss for mask-based DNN speech enhancement | 2026-08-01 |
 
 ---
 
@@ -941,10 +946,10 @@
 
 ## Statistics
 
-- **Total pages**: 890
-- **Entities**: 378
-- **Concepts**: 348
-- **Sources**: 137
+- **Total pages**: 895
+- **Entities**: 381
+- **Concepts**: 349
+- **Sources**: 138
 - **Synthesis**: 20
 - **Queries**: 7
-- **Last updated**: 2026-07-31
+- **Last updated**: 2026-08-01

@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-07-21
+updated: 2026-08-01
 sources:
+  - raw/papers/liu-2025-pcen-mask-vad-speech-enhancement/full-text.md
 tags:
 - audio-processing
 - machine-learning
@@ -45,6 +46,18 @@ Sophisticated VAD systems use multi-modal data to avoid false positives from:
 - **[[transparency-mode|Transparency Mode]]**: Automatically enabling ambient sound pass-through when the user starts a conversation.
 - **Acoustic Echo Cancellation**: Knowing when the local user is speaking helps the AEC algorithm distinguish between local speech and echoed remote speech.
 
+## Training-Time VAD for Loss Gating
+
+Most VAD usage described above is an **inference-time** component — it runs at runtime to gate processing or steer a beamformer. A distinct role for VAD, introduced by [[sources/liu-2025-pcen-mask-vad-speech-enhancement|Liu et al. 2025 (Dolby patent)]], is as a **training-time** mechanism that conditions the loss function rather than the inference pipeline.
+
+In that patent, a mask-based DNN speech-enhancement model must learn two contradictory behaviors: preserve speech (favoring over-preservation of speech over noise removal) in speech frames, but aggressively suppress artifacts in non-speech frames. Rather than letting the DNN implicitly learn a VAD, an explicit VAD gates the loss:
+
+- A simple **PCEN-VAD** computes, per frame, $E(t) = \sum_f PCEN(t,f)$ from the clean training target (see [[concepts/per-channel-energy-normalization|PCEN]]), and classifies the frame as speech if $E(t) > TH_\text{frame}$, where $TH_\text{frame} \approx TH_\text{band}\cdot N$.
+- Speech frames use a signed error $IRM^\gamma - mask_\text{est}^\gamma$ in an asymmetric loss $a^\text{diff}-\text{diff}-1$ that penalizes over-suppression of speech more than under-suppression of noise.
+- Non-speech frames have their [[concepts/ideal-ratio-mask|IRM]] set to 0 and a **sign-flipped** error $mask_\text{est}^\gamma$ so the prediction sits on the steeper-gradient side of the loss, driving the mask toward 0.
+
+Key distinctions from inference-time VAD: (i) it operates only during training, adding no inference cost; (ii) its decisions zero the training target (IRM) and select the loss form, rather than steering a runtime beamformer or pass-through; (iii) it generalizes from frame-level binary decisions to sub-band **speech-presence-probability (SPP)** control within speech frames. Any VAD (e.g., WebRTC VAD) can be substituted, but the PCEN-VAD reuses the same PCEN computation already needed for the mask-thresholding step.
+
 ## VAD-Free Alternatives
 
 While VAD is widely used, VAD-free noise estimation methods avoid the binary speech/pause decision and its associated tuning difficulties:
@@ -69,3 +82,4 @@ Apostolidis et al. (2026) train a [[concepts/convolutional-recurrent-network|CRN
 - [[sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
 - [[sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Earbuds]]
 - [[sources/martin-2001-noise-psd-estimation-optimal-smoothing|Martin 2001: Noise PSD Estimation via Optimal Smoothing and Minimum Statistics]]
+- [[sources/liu-2025-pcen-mask-vad-speech-enhancement|Liu et al. 2025: PCEN-Based Mask Thresholding and VAD for DNN Speech Enhancement Training]] — training-time PCEN-VAD that gates an asymmetric loss
