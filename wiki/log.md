@@ -3731,3 +3731,39 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 2 entity rows
   - `wiki/concepts/index.md` — added 3 concept rows
+
+---
+
+## [2026-08-01] ingest | SSE-Net: Toward Low-Power-Consumption Spiking Neural Network for Monaural Speech Enhancement (Liu et al. 2026)
+
+- **Source**: `raw/papers/liu-2026-sse-net/full-text.md` (Zotero: DPLD7XGZ)
+- **Authors**: Enrui Liu, Andong Li, Cunhang Fan, Chengshi Zheng, Jiangyan Yi, Ruibo Fu, Xinhui Li, Jian Zhou, Zhao Lv
+- **Published**: IEEE/ACM TASLP, vol. 34, 2026
+- **DOI**: 10.1109/TASLPRO.2026.3677621
+- **Summary**: SSE-Net — first spike-native SNN-SE architecture (SFEB/SFEG/ITB blocks designed for spike signals instead of ANN→SNN conversion). SOTA among SNN-based SE models (WB-PESQ 2.89 VB+DEMAND, PESQ 2.65 WSJ0-DNS causal) with 62% lower power proxy than Spiking-FullSubNet (19.70 M Ops/s, 1.31 μJ) and 0.44 G/s MACs (~17× below average ANN baseline). Extracted via MinerU (VLM) after token refresh; no arXiv version.
+- **Pages created**:
+  - `raw/papers/liu-2026-sse-net/full-text.md` — extracted text from Zotero PDF (4 figures)
+  - `wiki/sources/liu-2026-sse-net.md`
+  - `wiki/entities/enrui-liu.md`
+  - `wiki/entities/cunhang-fan.md`
+  - `wiki/entities/jiangyan-yi.md`
+  - `wiki/entities/ruibo-fu.md`
+  - `wiki/entities/xinhui-li.md`
+  - `wiki/entities/jian-zhou.md`
+  - `wiki/entities/zhao-lv.md`
+  - `wiki/concepts/sse-net.md`
+  - `wiki/concepts/spiking-feature-extraction-block.md`
+  - `wiki/concepts/information-transformation-block.md`
+  - `wiki/concepts/intel-neuromorphic-dns-challenge.md`
+- **Pages updated**:
+  - `wiki/entities/andong-li.md` — added SSE-Net contribution + related source
+  - `wiki/entities/chengshi-zheng.md` — added SSE-Net contribution + related source
+  - `wiki/concepts/spiking-neural-networks.md` — added Applications: Speech Enhancement section + source link
+  - `wiki/concepts/neuromorphic-computing.md` — added low-power SNN-SE application + source link
+  - `wiki/concepts/dns-challenge.md` — added SSE-Net to Related Sources
+  - `wiki/concepts/speech-enhancement.md` — added low-power spiking enhancement sub-area + source link
+  - `wiki/synthesis/computational-efficiency-evolution.md` — added SSE-Net as fifth (spiking/neuromorphic) efficiency axis in §5.2 frontier + Related Sources
+  - `wiki/index.md` — added 1 source, 7 entities, 4 concepts; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 7 entity rows
+  - `wiki/concepts/index.md` — added 4 concept rows

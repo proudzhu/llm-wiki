@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-15
-updated: 2026-07-01
+updated: 2026-08-01
 tags:
   - researcher
   - hearing-aids
@@ -18,6 +18,7 @@ tags:
 ## Key Contributions
 
 - L3C-DeepMFC: Low-latency low-complexity deep marginal feedback cancellation with closed-loop fine tuning (Interspeech 2025)
+- Co-authored "SSE-Net: Toward Low-Power-Consumption Spiking Neural Network for Monaural Speech Enhancement" (IEEE/ACM TASLP 2026) — [[sources/liu-2026-sse-net|Liu et al. 2026]]: spike-native SNN speech enhancement, 62% lower power proxy than Spiking-FullSubNet
 - DeepPEM-AFC: GRU-based step-size prediction for PEM-AFC (ICASSP 2025)
 - Deep learning solution to marginal stability problems of acoustic feedback systems for hearing aids (JASA 2022)
 - Sixty years of frequency-domain monaural speech enhancement survey (Trends in Hearing 2023)
@@ -26,6 +27,7 @@ tags:
 ## Related Sources
 
 - [[sources/hao-2025-l3c-deepmfc|Hao et al. 2025: L3C-DeepMFC]]
+- [[sources/liu-2026-sse-net|Liu et al. 2026: SSE-Net]]
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]]
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]]
 

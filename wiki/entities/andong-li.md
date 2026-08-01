@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-08-01
 tags:
   - researcher
   - speech-enhancement
@@ -18,10 +18,12 @@ tags:
 ## Key Contributions
 
 - Co-authored comprehensive 60-year survey of frequency-domain monaural speech enhancement (Trends in Hearing 2023) — [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023]]
+- Co-authored "SSE-Net: Toward Low-Power-Consumption Spiking Neural Network for Monaural Speech Enhancement" (IEEE/ACM TASLP 2026) — [[sources/liu-2026-sse-net|Liu et al. 2026]]: first spike-native SNN-SE architecture (SFEB/ITB blocks), SOTA among SNN-SE models with 62% lower power proxy than Spiking-FullSubNet
 
 ## Related Sources
 
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]]
+- [[sources/liu-2026-sse-net|Liu et al. 2026: SSE-Net]]
 
 ## Related Concepts
 

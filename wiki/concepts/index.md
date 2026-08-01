@@ -363,4 +363,8 @@
 | [[concepts/sicrn\|SICRN]] | State-space + Inplace-Conv CRN; first S4ND + inplace conv combination for monaural SE. | 2026-08-01 |
 | [[concepts/sic-block\|SIC Block]] | Channel-bifurcated S4ND + 2D inplace conv module fused via sigmoid attention; SICRN's core contribution. | 2026-08-01 |
 | [[concepts/s4nd\|S4ND]] | Multidimensional state space model (PDE extension of S4) with infinite receptive field along every axis; SICRN's global branch. | 2026-08-01 |
+| [[concepts/sse-net\|SSE-Net]] | Spike-native SNN-SE architecture (SFEB/ITB, LIF encoder-decoder) — SOTA SNN-SE, 19.70 M Ops/s power proxy | 2026-08-01 |
+| [[concepts/spiking-feature-extraction-block\|Spiking Feature Extraction Block]] | Three-branch residual spiking block (LIF + continuous path) mitigating binary-activation information loss | 2026-08-01 |
+| [[concepts/information-transformation-block\|Information Transformation Block]] | Two-branch gated refinement converting spike features back to continuous signals | 2026-08-01 |
+| [[concepts/intel-neuromorphic-dns-challenge\|Intel Neuromorphic DNS Challenge]] | SNN-SE benchmark defining power-proxy metrics (SynOPs + 10×NeuronOPs, PDP) on Intel Loihi energy accounting | 2026-08-01 |
 

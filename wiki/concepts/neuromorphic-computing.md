@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-04-25
+updated: 2026-08-01
 sources:
+  - raw/papers/liu-2026-sse-net/full-text.md
 tags:
   - neuromorphic-computing
   - hardware
@@ -34,6 +35,7 @@ Computing paradigm inspired by the brain's architecture, using spiking neurons a
 - Robotics: real-time perception and control on low-power platforms
 - Edge AI: always-on sensing with battery constraints
 - Brain simulation: real-time or faster-than-real-time neural simulation
+- Low-power speech enhancement: SNN-based SE models like [[concepts/sse-net|SSE-Net]] report power proxies of ~20 M Ops/s (≈1 μJ energy cost) on Loihi-class energy accounting — 1–2 orders of magnitude below ANN SE baselines
 
 ## Related Concepts
 
@@ -43,3 +45,4 @@ Computing paradigm inspired by the brain's architecture, using spiking neurons a
 ## Related Sources
 
 - [[sources/yamazaki-2022-spiking-nn-review|Yamazaki 2022: Spiking Neural Networks Review]]
+- [[sources/liu-2026-sse-net|Liu et al. 2026: SSE-Net]] — SNN speech enhancement targeting neuromorphic deployment

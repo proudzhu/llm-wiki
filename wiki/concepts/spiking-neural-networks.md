@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-04-25
+updated: 2026-08-01
 sources:
+  - raw/papers/liu-2026-sse-net/full-text.md
 tags:
   - spiking-neural-networks
   - neuromorphic-computing
@@ -55,6 +56,10 @@ Trade-off between biological accuracy and computational cost:
 - Performance on large-scale datasets (ImageNet) still lags ANNs
 - Lack of SNN-specific architectures (most work repurposes ANN architectures)
 
+## Applications: Speech Enhancement
+
+SNN-based monaural speech enhancement (SNN-SE) has emerged as a low-power alternative to ANN-based SE for edge deployment (e.g., the Intel Neuromorphic DNS Challenge). Early SNN-SE models (Spiking-U-Net, Spiking-FullSubNet, DPSNN) are converted from ANN architectures; [[concepts/sse-net|SSE-Net]] (Liu et al. 2026) instead designs spike-native blocks ([[concepts/spiking-feature-extraction-block|SFEB]]/[[concepts/information-transformation-block|ITB]]) trained with surrogate gradients, and reports SOTA SNN-SE performance (WB-PESQ 2.89 on VoiceBank+DEMAND) with a power proxy 62% below Spiking-FullSubNet.
+
 ## Related Concepts
 
 - [[neuromorphic-computing|Neuromorphic Computing]]
@@ -66,3 +71,4 @@ Trade-off between biological accuracy and computational cost:
 ## Related Sources
 
 - [[sources/yamazaki-2022-spiking-nn-review|Yamazaki 2022: Spiking Neural Networks Review]]
+- [[sources/liu-2026-sse-net|Liu et al. 2026: SSE-Net]] — spike-native SNN-SE architecture with record-low power proxy

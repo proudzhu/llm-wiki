@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-07-19
+updated: 2026-08-01
 tags:
   - speech-processing
   - audio-enhancement
@@ -24,6 +24,7 @@ Speech enhancement (SE) is the task of improving the perceptual quality and inte
 - Bone-conduction speech enhancement
 - Real-time low-latency enhancement
 - Low-complexity enhancement for embedded devices (e.g., [[concepts/ulcnet|ULCNet]])
+- Low-power spiking enhancement — SNN-based SE for neuromorphic/edge deployment (e.g., [[concepts/sse-net|SSE-Net]])
 
 ## Related Concepts
 
@@ -40,3 +41,4 @@ Speech enhancement (SE) is the task of improving the perceptual quality and inte
 
 - [[sources/zhu-2026-g-map-se-guided-speech-enhancement|G-MaP-SE: Guided Speech Enhancement via GMM-Based Prior Matching (Interspeech 2026)]]
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]]
+- [[sources/liu-2026-sse-net|Liu et al. 2026: SSE-Net]] — spike-native SNN-based monaural speech enhancement (SOTA among SNN-SE, power proxy 19.70 M Ops/s)

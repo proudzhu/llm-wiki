@@ -401,6 +401,13 @@
 | [[entities/jinjiang-liu\|Jinjiang Liu]] | Inner Mongolia University — proposed ICCRN and IGCRN for monaural/multi-channel SE and AEC. | 2026-08-01 |
 | [[entities/changjiang-zhao\|Changjiang Zhao]] | Inner Mongolia University — first author of SICRN. | 2026-08-01 |
 | [[entities/shulin-he\|Shulin He]] | Inner Mongolia University — co-author of SICRN. | 2026-08-01 |
+| [[entities/enrui-liu\|Enrui Liu]] | Anhui University — lead author of SSE-Net, SNN-based speech enhancement | 2026-08-01 |
+| [[entities/cunhang-fan\|Cunhang Fan]] | Anhui University — professor, speech enhancement, BSDB-Net, noise-robust ASR | 2026-08-01 |
+| [[entities/jiangyan-yi\|Jiangyan Yi]] | CASIA / Tsinghua — speech processing, synthesis, anti-spoofing, IEEE SLTC member | 2026-08-01 |
+| [[entities/ruibo-fu\|Ruibo Fu]] | CASIA — speech synthesis and neural audio processing | 2026-08-01 |
+| [[entities/xinhui-li\|Xinhui Li]] | Institute of Acoustics, CAS — monaural SE, hearing aids (Li/Zheng group) | 2026-08-01 |
+| [[entities/jian-zhou\|Jian Zhou]] | Anhui University — low-complexity SE, spiking neural networks | 2026-08-01 |
+| [[entities/zhao-lv\|Zhao Lv]] | Anhui University — professor, speech enhancement, brain-computer interface | 2026-08-01 |
 
 ---
 
@@ -769,6 +776,10 @@
 | [[concepts/sicrn\|SICRN]] | State-space + Inplace-Conv CRN; first S4ND + inplace conv combination for monaural SE. | 2026-08-01 |
 | [[concepts/sic-block\|SIC Block]] | Channel-bifurcated S4ND + 2D inplace conv module fused via sigmoid attention; SICRN's core contribution. | 2026-08-01 |
 | [[concepts/s4nd\|S4ND]] | Multidimensional state space model (PDE extension of S4) with infinite receptive field along every axis; SICRN's global branch. | 2026-08-01 |
+| [[concepts/sse-net\|SSE-Net]] | Spike-native SNN-SE architecture (SFEB/ITB, LIF encoder-decoder) — SOTA SNN-SE, 19.70 M Ops/s power proxy | 2026-08-01 |
+| [[concepts/spiking-feature-extraction-block\|Spiking Feature Extraction Block]] | Three-branch residual spiking block (LIF + continuous path) mitigating binary-activation information loss | 2026-08-01 |
+| [[concepts/information-transformation-block\|Information Transformation Block]] | Two-branch gated refinement converting spike features back to continuous signals | 2026-08-01 |
+| [[concepts/intel-neuromorphic-dns-challenge\|Intel Neuromorphic DNS Challenge]] | SNN-SE benchmark defining power-proxy metrics (SynOPs + 10×NeuronOPs, PDP) on Intel Loihi energy accounting | 2026-08-01 |
 
 ---
 
@@ -920,6 +931,7 @@
 | [[sources/liu-2023-iccrn\|Liu & Zhang 2023: ICCRN — Inplace Cepstral CRN]] | Inplace CRN with cepstral-space branch (CFB); best STOI at low SNR on WSJ0 SI-84, most compact model (0.46M params). | 2026-08-01 |
 | [[sources/liu-2021-igcrn\|Liu & Zhang 2021: IGCRN — Inplace Gated Convolutional Recurrent Neural Network]] | Compact end-to-end dual-channel SE that mirrors the beamforming pipeline (DOA → beamforming → post-filter) inside a CRN; inplace convolutions + channel-wise LSTM reused across frequency bins; 1.4M params, outperforms oracle-DOA MVDR and GCRN. | 2026-08-01 |
 | [[sources/zhao-2024-sicrn\|Zhao, He & Zhang 2024: SICRN — State Space Model + Inplace Convolution for Speech Enhancement]] | S4ND + 2D inplace conv (SIC block) CRN; near-FullSubNet quality on DNS Challenge at 0.38× params, 0.14× MACs, 0 ms look-ahead. | 2026-08-01 |
+| [[sources/liu-2026-sse-net\|Liu et al. 2026: SSE-Net]] | SSE-Net — first spike-native SNN-SE architecture (SFEB/ITB); SOTA among SNN-SE models with 62% lower power proxy than Spiking-FullSubNet (19.70 M Ops/s), 0.44 G/s MACs | 2026-08-01 |
 
 ---
 
@@ -970,10 +982,10 @@
 
 ## Statistics
 
-- **Total pages**: 919
-- **Entities**: 391
-- **Concepts**: 359
-- **Sources**: 142
+- **Total pages**: 931
+- **Entities**: 398
+- **Concepts**: 363
+- **Sources**: 143
 - **Synthesis**: 20
 - **Queries**: 7
 - **Last updated**: 2026-08-01

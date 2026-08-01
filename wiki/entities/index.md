@@ -395,4 +395,11 @@
 | [[entities/jinjiang-liu\|Jinjiang Liu]] | Inner Mongolia University — proposed ICCRN and IGCRN for monaural/multi-channel SE and AEC. | 2026-08-01 |
 | [[entities/changjiang-zhao\|Changjiang Zhao]] | Inner Mongolia University — first author of SICRN. | 2026-08-01 |
 | [[entities/shulin-he\|Shulin He]] | Inner Mongolia University — co-author of SICRN. | 2026-08-01 |
+| [[entities/enrui-liu\|Enrui Liu]] | Anhui University — lead author of SSE-Net, SNN-based speech enhancement | 2026-08-01 |
+| [[entities/cunhang-fan\|Cunhang Fan]] | Anhui University — professor, speech enhancement, BSDB-Net, noise-robust ASR | 2026-08-01 |
+| [[entities/jiangyan-yi\|Jiangyan Yi]] | CASIA / Tsinghua — speech processing, synthesis, anti-spoofing, IEEE SLTC member | 2026-08-01 |
+| [[entities/ruibo-fu\|Ruibo Fu]] | CASIA — speech synthesis and neural audio processing | 2026-08-01 |
+| [[entities/xinhui-li\|Xinhui Li]] | Institute of Acoustics, CAS — monaural SE, hearing aids (Li/Zheng group) | 2026-08-01 |
+| [[entities/jian-zhou\|Jian Zhou]] | Anhui University — low-complexity SE, spiking neural networks | 2026-08-01 |
+| [[entities/zhao-lv\|Zhao Lv]] | Anhui University — professor, speech enhancement, brain-computer interface | 2026-08-01 |
 
