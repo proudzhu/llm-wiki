@@ -399,6 +399,8 @@
 | [[entities/steve-kelling\|Steve Kelling]] | Cornell Lab of Ornithology — biodiversity informatics, eBird, BirdVox co-developer | 2026-07-31 |
 | [[entities/juan-pablo-bello\|Juan Pablo Bello]] | NYU professor — SONYC lead, urban noise monitoring, sound event detection | 2026-07-31 |
 | [[entities/jinjiang-liu\|Jinjiang Liu]] | Inner Mongolia University — proposed ICCRN and IGCRN for monaural/multi-channel SE and AEC. | 2026-08-01 |
+| [[entities/changjiang-zhao\|Changjiang Zhao]] | Inner Mongolia University — first author of SICRN. | 2026-08-01 |
+| [[entities/shulin-he\|Shulin He]] | Inner Mongolia University — co-author of SICRN. | 2026-08-01 |
 
 ---
 
@@ -764,6 +766,9 @@
 | [[concepts/inplace-convolution\|Inplace Convolution]] | Stride-1 convolution on the frequency dimension that preserves per-bin spatial cues for multi-channel SE; the core architectural choice of IGCRN/ICCRN. | 2026-08-01 |
 | [[concepts/channel-wise-lstm\|Channel-wise LSTM with Model Reuse]] | Per-frequency-bin LSTM with weights shared across all bins (one 64-hidden LSTM vs. 1024 in conventional CRN); the compact recurrent bottleneck of the inplace-CRN family. | 2026-08-01 |
 | [[concepts/mask-mapping-amplitude-prediction\|Mask + Mapping + Phase Target]] | Multi-output training target combining amplitude mask, amplitude mapping, and normalized phase in a single decoder; complementary strengths at high/low SNR; introduced by IGCRN. | 2026-08-01 |
+| [[concepts/sicrn\|SICRN]] | State-space + Inplace-Conv CRN; first S4ND + inplace conv combination for monaural SE. | 2026-08-01 |
+| [[concepts/sic-block\|SIC Block]] | Channel-bifurcated S4ND + 2D inplace conv module fused via sigmoid attention; SICRN's core contribution. | 2026-08-01 |
+| [[concepts/s4nd\|S4ND]] | Multidimensional state space model (PDE extension of S4) with infinite receptive field along every axis; SICRN's global branch. | 2026-08-01 |
 
 ---
 
@@ -914,6 +919,7 @@
 | [[sources/lostanlen-2019-pcen-why-and-how\|Lostanlen et al. 2019: Per-Channel Energy Normalization: Why and How]] | Explains why PCEN beats logmelspec (Gaussianization + whitening toward AWGN) and how it works (asymptotic analysis of temporal integration, AGC, DRC) | 2026-07-31 |
 | [[sources/liu-2023-iccrn\|Liu & Zhang 2023: ICCRN — Inplace Cepstral CRN]] | Inplace CRN with cepstral-space branch (CFB); best STOI at low SNR on WSJ0 SI-84, most compact model (0.46M params). | 2026-08-01 |
 | [[sources/liu-2021-igcrn\|Liu & Zhang 2021: IGCRN — Inplace Gated Convolutional Recurrent Neural Network]] | Compact end-to-end dual-channel SE that mirrors the beamforming pipeline (DOA → beamforming → post-filter) inside a CRN; inplace convolutions + channel-wise LSTM reused across frequency bins; 1.4M params, outperforms oracle-DOA MVDR and GCRN. | 2026-08-01 |
+| [[sources/zhao-2024-sicrn\|Zhao, He & Zhang 2024: SICRN — State Space Model + Inplace Convolution for Speech Enhancement]] | S4ND + 2D inplace conv (SIC block) CRN; near-FullSubNet quality on DNS Challenge at 0.38× params, 0.14× MACs, 0 ms look-ahead. | 2026-08-01 |
 
 ---
 
@@ -964,10 +970,10 @@
 
 ## Statistics
 
-- **Total pages**: 913
-- **Entities**: 389
-- **Concepts**: 356
-- **Sources**: 141
+- **Total pages**: 919
+- **Entities**: 391
+- **Concepts**: 359
+- **Sources**: 142
 - **Synthesis**: 20
 - **Queries**: 7
 - **Last updated**: 2026-08-01

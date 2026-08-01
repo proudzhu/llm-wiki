@@ -4,6 +4,7 @@ created: 2026-08-01
 updated: 2026-08-01
 sources:
   - raw/papers/liu-2021-igcrn/full-text.md
+  - raw/papers/zhao-2024-sicrn/full-text.md
 tags:
   - neural-network
   - speech-enhancement
@@ -56,12 +57,15 @@ The `IGCRN80` variant (wider channels, no downsampling) matches `IGCRN64-1DS` in
 
 - **[[concepts/igcrn|IGCRN]]** (Liu & Zhang 2021) — introduces inplace convolution as the encoder/decoder building block for dual-channel SE.
 - **[[concepts/iccrn|ICCRN]]** (Liu & Zhang 2023) — inherits the inplace design (no frequency downsampling, $f = 160$ throughout) and replaces the GLU with the [[concepts/cepstral-frequency-block|Cepstral Frequency Block (CFB)]]. ICCRN's authors note that IGCRN's monaural performance was relatively weak because discarding frequency downsampling also discards full-band modeling capacity; ICCRN recovers that capacity by modeling speech in the cepstral space, where harmonic structure is sparsely represented, instead of relying on frequency downsampling to discover it.
+- **[[concepts/sicrn|SICRN]]** (Zhao, He & Zhang 2024) — the first model outside the original Liu/Zhang IGCRN/ICCRN line to adopt inplace convolution. SICRN uses 2D inplace convolution as the **local-feature branch** of a novel [[concepts/sic-block|SIC block]], paired with an [[concepts/s4nd|S4ND]] global branch that recovers the full-band correlations a pure inplace design misses. This is the same full-band-modeling gap that ICCRN addressed via the cepstral space; SICRN addresses it via state-space global modeling instead.
 
 ## Related Concepts
 
 - [[concepts/igcrn|IGCRN]] — the model that introduces inplace convolution
 - [[concepts/channel-wise-lstm|Channel-wise LSTM with Model Reuse]] — the recurrent bottleneck that exploits the inplace design
 - [[concepts/iccrn|ICCRN]] — successor that inherits the inplace design
+- [[concepts/sicrn|SICRN]] — extends inplace convolution with an S4ND global branch
+- [[concepts/sic-block|SIC Block]] — the S4ND + inplace-conv module of SICRN
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]] — the conventional CRN that uses frequency downsampling
 - [[concepts/beamforming|Beamforming]] — the traditional per-frequency-bin processing that motivates inplace convolution
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]] — broader task
@@ -70,3 +74,4 @@ The `IGCRN80` variant (wider channels, no downsampling) matches `IGCRN64-1DS` in
 
 - [[sources/liu-2021-igcrn|Liu & Zhang 2021: IGCRN — Inplace Gated Convolutional Recurrent Neural Network]]
 - [[sources/liu-2023-iccrn|Liu & Zhang 2023: ICCRN — Inplace Cepstral Convolutional Recurrent Neural Network]]
+- [[sources/zhao-2024-sicrn|Zhao, He & Zhang 2024: SICRN — State Space Model + Inplace Convolution for Speech Enhancement]]

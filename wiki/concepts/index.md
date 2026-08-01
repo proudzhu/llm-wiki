@@ -360,4 +360,7 @@
 | [[concepts/inplace-convolution\|Inplace Convolution]] | Stride-1 convolution on the frequency dimension that preserves per-bin spatial cues for multi-channel SE; the core architectural choice of IGCRN/ICCRN. | 2026-08-01 |
 | [[concepts/channel-wise-lstm\|Channel-wise LSTM with Model Reuse]] | Per-frequency-bin LSTM with weights shared across all bins (one 64-hidden LSTM vs. 1024 in conventional CRN); the compact recurrent bottleneck of the inplace-CRN family. | 2026-08-01 |
 | [[concepts/mask-mapping-amplitude-prediction\|Mask + Mapping + Phase Target]] | Multi-output training target combining amplitude mask, amplitude mapping, and normalized phase in a single decoder; complementary strengths at high/low SNR; introduced by IGCRN. | 2026-08-01 |
+| [[concepts/sicrn\|SICRN]] | State-space + Inplace-Conv CRN; first S4ND + inplace conv combination for monaural SE. | 2026-08-01 |
+| [[concepts/sic-block\|SIC Block]] | Channel-bifurcated S4ND + 2D inplace conv module fused via sigmoid attention; SICRN's core contribution. | 2026-08-01 |
+| [[concepts/s4nd\|S4ND]] | Multidimensional state space model (PDE extension of S4) with infinite receptive field along every axis; SICRN's global branch. | 2026-08-01 |
 

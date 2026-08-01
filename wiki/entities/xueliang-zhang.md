@@ -8,21 +8,24 @@ tags:
   - bone-conduction
   - cepstral-analysis
   - acoustic-echo-cancellation
+  - state-space-model
 ---
 
 # Xueliang Zhang
 
 **Affiliation**: Inner Mongolia University, School of Computer Science
 **Role**: Professor / Researcher
-**Research Focus**: Bone-conduction speech processing, multi-modal fusion, speech enhancement, cepstral-domain neural speech processing, inplace convolutional recurrent networks, acoustic echo cancellation.
+**Research Focus**: Bone-conduction speech processing, multi-modal fusion, speech enhancement, cepstral-domain neural speech processing, inplace convolutional recurrent networks, state space models for speech, acoustic echo cancellation.
 
 ## Key Contributions
 
 - Attention-based AC-BC fusion with complex-domain CRN and CycleGAN semi-supervised framework (IEEE TASLP 2022)
 - Co-authored "ICCRN: Inplace Cepstral Convolutional Recurrent Neural Network for Monaural Speech Enhancement" (ICASSP 2023) — [[sources/liu-2023-iccrn|Liu & Zhang 2023: ICCRN]]. Senior author on the IGCRN line of inplace CRN models for multi-channel SE and acoustic echo cancellation; ICCRN extends IGCRN with a Cepstral Frequency Block (FFT-based cepstral-space branch) and achieves state-of-the-art low-SNR STOI on WSJ0 SI-84 while being the most compact model in the comparison (0.46 M params, 2.09 G MACs).
+- Senior author of "SICRN: advancing speech enhancement through state space model and inplace convolution techniques" (arXiv 2024) — [[sources/zhao-2024-sicrn|Zhao, He & Zhang 2024: SICRN]]. Continues the inplace-CRN line from his group; combines a multidimensional state space model ([[concepts/s4nd|S4ND]]) with 2D [[concepts/inplace-convolution|inplace convolution]] in a novel SIC block, addressing the full-band-modeling gap of pure inplace designs at 0.38× FullSubNet's parameters and 0.14× its MACs with 0 ms look-ahead on the DNS Challenge.
 
 ## Related Sources
 
 - [[sources/wang-2022-fusing-bc-ac-complex-domain-se|Wang, Zhang & Wang 2022: Fusing BC and AC for Complex-Domain SE]]
 - [[sources/liu-2021-igcrn|Liu & Zhang 2021: IGCRN]]
 - [[sources/liu-2023-iccrn|Liu & Zhang 2023: ICCRN]]
+- [[sources/zhao-2024-sicrn|Zhao, He & Zhang 2024: SICRN]]

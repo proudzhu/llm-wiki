@@ -4,6 +4,7 @@ created: 2026-08-01
 updated: 2026-08-01
 sources:
   - raw/papers/liu-2021-igcrn/full-text.md
+  - raw/papers/zhao-2024-sicrn/full-text.md
 tags:
   - neural-network
   - speech-enhancement
@@ -73,8 +74,9 @@ The most striking ablation is the **downsampling sweep** (Table 5 of the paper):
 
 - **IGCRN** (Liu & Zhang 2021, Interspeech) — inplace gated CRN for dual-channel SE; channel-wise LSTM preserves per-bin spatial cues. Also applied to mono and stereo AEC.
 - **ICCRN** (Liu & Zhang 2023, ICASSP) — replaces GLU with the [[concepts/cepstral-frequency-block|Cepstral Frequency Block (CFB)]]; introduces cepstral-space processing; achieves SOTA low-SNR STOI on WSJ0 SI-84 at minimum complexity.
+- **SICRN** (Zhao, He & Zhang 2024, arXiv) — first model outside the original Liu/Zhang line to adopt the inplace design; from the same lab ([[entities/xueliang-zhang|Xueliang Zhang]]'s group at Inner Mongolia University). Replaces standard convolution with the [[concepts/sic-block|SIC block]] (2D inplace conv + [[concepts/s4nd|S4ND]] + sigmoid attention) and addresses the same full-band-modeling gap that ICCRN's CFB addresses — but via a parallel state-space global branch rather than a cepstral transform. Targets single-channel SE on the [[concepts/dns-challenge|DNS Challenge]] rather than multi-channel SE.
 
-The ICCRN paper notes that IGCRN's monaural performance was relatively weak because discarding frequency downsampling also discards full-band modeling capacity; ICCRN recovers that capacity by replacing the GLU with the CFB, which models speech in the cepstral space where harmonic structure is sparsely represented.
+The ICCRN paper notes that IGCRN's monaural performance was relatively weak because discarding frequency downsampling also discards full-band modeling capacity; ICCRN recovers that capacity by replacing the GLU with the CFB, which models speech in the cepstral space where harmonic structure is sparsely represented. SICRN tackles the same limitation by augmenting inplace convolution with a global S4ND branch in the SIC block, instead of changing the spectral domain.
 
 ## Related Concepts
 
@@ -82,6 +84,9 @@ The ICCRN paper notes that IGCRN's monaural performance was relatively weak beca
 - [[concepts/channel-wise-lstm|Channel-wise LSTM with Model Reuse]] — the compact recurrent bottleneck
 - [[concepts/mask-mapping-amplitude-prediction|Mask + Mapping + Phase Target]] — the proposed training target
 - [[concepts/iccrn|ICCRN]] — successor in the inplace-CRN lineage
+- [[concepts/sicrn|SICRN]] — later member of the inplace-CRN lineage (same lab); augments inplace conv with S4ND
+- [[concepts/sic-block|SIC Block]] — SICRN's novel module combining inplace conv with S4ND
+- [[concepts/s4nd|S4ND]] — the multidimensional state space model used in SICRN's global branch
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]] — CRN family baseline
 - [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]] — related training paradigm
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]] — broader task
@@ -92,3 +97,4 @@ The ICCRN paper notes that IGCRN's monaural performance was relatively weak beca
 
 - [[sources/liu-2021-igcrn|Liu & Zhang 2021: IGCRN — Inplace Gated Convolutional Recurrent Neural Network]]
 - [[sources/liu-2023-iccrn|Liu & Zhang 2023: ICCRN — Inplace Cepstral Convolutional Recurrent Neural Network]]
+- [[sources/zhao-2024-sicrn|Zhao, He & Zhang 2024: SICRN — State Space Model + Inplace Convolution for Speech Enhancement]]

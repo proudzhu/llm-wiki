@@ -3702,3 +3702,32 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/index.md` — added 4 concepts, 1 source; updated statistics (total=913)
   - `wiki/concepts/index.md` — added 4 concept rows
   - `wiki/sources/index.md` — added 1 source row
+
+---
+
+## [2026-08-01] ingest | SICRN: State Space Model + Inplace Convolution for Speech Enhancement (Zhao, He & Zhang 2024)
+
+- **Source**: `raw/papers/zhao-2024-sicrn/full-text.md` (Zotero: DRNH5RMU; arXiv: 2402.14225)
+- **Authors**: Changjiang Zhao, Shulin He, Xueliang Zhang
+- **Published**: arXiv preprint, 2024-02-22
+- **DOI**: 10.48550/arXiv.2402.14225
+- **Summary**: SICRN combines a multidimensional state space model (S4ND) with 2D inplace convolution in a novel SIC block, achieving near-FullSubNet quality on the DNS Challenge at 0.38× params (2.16 M), 0.14× MACs (4.24 G/s), and 0 ms look-ahead. First application of S4ND to monaural SE and the first non-Liu paper in the inplace-CRN lineage from Xueliang Zhang's group.
+- **Pages created**:
+  - `raw/papers/zhao-2024-sicrn/full-text.md` — extracted text from arXiv HTML (1 figure)
+  - `wiki/sources/zhao-2024-sicrn.md`
+  - `wiki/entities/changjiang-zhao.md`
+  - `wiki/entities/shulin-he.md`
+  - `wiki/concepts/sicrn.md`
+  - `wiki/concepts/sic-block.md`
+  - `wiki/concepts/s4nd.md`
+- **Pages updated**:
+  - `wiki/entities/xueliang-zhang.md` — added SICRN as senior-author contribution; added `state-space-model` tag
+  - `wiki/concepts/inplace-convolution.md` — added SICRN as third use case (first non-Liu/Zhang adoption)
+  - `wiki/concepts/igcrn.md` — added SICRN to inplace-CRN lineage; added cross-refs to SIC block / S4ND
+  - `wiki/concepts/convolutional-recurrent-network.md` — added SICRN to applications list and Related Sources
+  - `wiki/concepts/state-space-model.md` — added Deep-Learning SSM section covering S4ND and Mamba-MinGRU
+  - `wiki/concepts/dns-challenge.md` — added SICRN to Related Sources
+  - `wiki/index.md` — added 2 entities, 3 concepts, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 2 entity rows
+  - `wiki/concepts/index.md` — added 3 concept rows

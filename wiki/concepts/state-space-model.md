@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-04-25
+updated: 2026-08-01
 sources:
   in active noise and vibration control.md
   control in active noise control systems.md
 tags:
 - control-theory
 - mathematics
+- deep-learning
 ---
 
 # State-Space Model
@@ -38,6 +39,15 @@ In modern [[active-noise-control|Active Noise Control]] and [[active-vibration-c
 
 For ANC systems, state-space models are typically obtained via **[[system-identification|System Identification]]**. Methods like **Vector Fitting** (Liang 2026) are used to fit a high-order state-space representation (e.g., 15th to 30th order) to the measured frequency response of the primary and secondary paths.
 
+## Deep-Learning State-Space Models
+
+A separate subfamily of state-space models has emerged in deep learning, where the continuous-time SSM equations above are used as a **trainable neural-network layer** rather than as a model of a physical plant. The discretized convolution form $y = \overline{K} * u$ makes the layer trainable on long sequences via FFT, with theoretically infinite receptive field. Notable variants in this wiki:
+
+- **[[concepts/s4nd|S4ND]]** (Nguyen et al., NeurIPS 2022) — multidimensional PDE extension of the S4 structured SSM, with independent SSMs along each input axis. Used as the global-feature branch of the [[concepts/sic-block|SIC block]] in [[concepts/sicrn|SICRN]] for monaural speech enhancement.
+- **[[concepts/mamba-mingru|Mamba-MinGRU]]** (Østergaard et al. 2026) — selective state-space model (Mamba) + MinGRU linear recurrence for time-domain own-voice cancellation at 2 ms latency.
+
+These deep-learning SSMs share the underlying state-space mathematics with the control-theoretic SSMs above, but are used as learnable sequence-modeling layers rather than as identified plant models.
+
 ## Related Concepts
 
 - [[model-predictive-control|Model Predictive Control]]
@@ -47,9 +57,12 @@ For ANC systems, state-space models are typically obtained via **[[system-identi
 - [[active-vibration-control|Active Vibration Control]]
 - [[kalman-filter|Kalman Filter]]
 - [[extended-kalman-filter|Extended Kalman Filter]]
+- [[s4nd|S4ND]] — multidimensional deep-learning SSM (speech enhancement)
+- [[mamba-mingru|Mamba-MinGRU]] — selective SSM + MinGRU (own-voice cancellation)
 
 ## Related Sources
 
 - [[sources/welch-2006-kalman-filter-intro|Welch & Bishop 2006: Introduction to the Kalman Filter]]
 - [[sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]
 - [[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]]
+- [[sources/zhao-2024-sicrn|Zhao, He & Zhang 2024: SICRN]] — applies S4ND (multidimensional deep-learning SSM) to monaural speech enhancement

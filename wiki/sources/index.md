@@ -145,4 +145,5 @@
 | [[sources/lostanlen-2019-pcen-why-and-how\|Lostanlen et al. 2019: Per-Channel Energy Normalization: Why and How]] | Explains why PCEN beats logmelspec (Gaussianization + whitening toward AWGN) and how it works (asymptotic analysis of temporal integration, AGC, DRC) | 2026-07-31 |
 | [[sources/liu-2023-iccrn\|Liu & Zhang 2023: ICCRN — Inplace Cepstral CRN]] | Inplace CRN with cepstral-space branch (CFB); best STOI at low SNR on WSJ0 SI-84, most compact model (0.46M params). | 2026-08-01 |
 | [[sources/liu-2021-igcrn\|Liu & Zhang 2021: IGCRN — Inplace Gated Convolutional Recurrent Neural Network]] | Compact end-to-end dual-channel SE that mirrors the beamforming pipeline (DOA → beamforming → post-filter) inside a CRN; inplace convolutions + channel-wise LSTM reused across frequency bins; 1.4M params, outperforms oracle-DOA MVDR and GCRN. | 2026-08-01 |
+| [[sources/zhao-2024-sicrn\|Zhao, He & Zhang 2024: SICRN — State Space Model + Inplace Convolution for Speech Enhancement]] | S4ND + 2D inplace conv (SIC block) CRN; near-FullSubNet quality on DNS Challenge at 0.38× params, 0.14× MACs, 0 ms look-ahead. | 2026-08-01 |
 
