@@ -398,6 +398,7 @@
 | [[entities/andrew-farnsworth\|Andrew Farnsworth]] | Cornell Lab of Ornithology — avian bioacoustics, BirdVox co-developer | 2026-07-31 |
 | [[entities/steve-kelling\|Steve Kelling]] | Cornell Lab of Ornithology — biodiversity informatics, eBird, BirdVox co-developer | 2026-07-31 |
 | [[entities/juan-pablo-bello\|Juan Pablo Bello]] | NYU professor — SONYC lead, urban noise monitoring, sound event detection | 2026-07-31 |
+| [[entities/jinjiang-liu\|Jinjiang Liu]] | Inner Mongolia University — proposed ICCRN and IGCRN for monaural/multi-channel SE and AEC. | 2026-08-01 |
 
 ---
 
@@ -756,6 +757,9 @@
 | [[concepts/trunet\|Tiny Recurrent U-Net (TRU-Net)]] | Lightweight frequency-axis U-Net with FGRU/TGRU recurrent mixing for real-time speech enhancement (0.38 M params, 0 ms lookahead) | 2026-07-31 |
 | [[concepts/phase-aware-beta-sigmoid-mask\|Phase-aware β-sigmoid Mask (PHM)]] | Complex-valued mask with learnable β magnitude range and law-of-cosines phase reconstruction; quadrilateral extension enables joint denoising + dereverberation | 2026-07-31 |
 | [[concepts/per-channel-energy-normalization\|Per-Channel Energy Normalization (PCEN)]] | Spectral-normalization technique that divides each band's energy by its time-averaged level; used as a training-time threshold oracle and VAD | 2026-08-01 |
+| [[concepts/iccrn\|ICCRN]] | Inplace Cepstral CRN — Liu & Zhang 2023; CFB + U-Net, no frequency downsampling, CSM loss. | 2026-08-01 |
+| [[concepts/cepstral-frequency-block\|Cepstral Frequency Block (CFB)]] | Core novel ICCRN block — FFT-based cepstral-space branch + TF residual branch with task-split gate. | 2026-08-01 |
+| [[concepts/cepstral-space-speech-enhancement\|Cepstral-Space Speech Enhancement]] | SE paradigm processing TF features in a cepstral space reached via real-valued FFT; exploits harmonic sparsity. | 2026-08-01 |
 
 ---
 
@@ -904,6 +908,7 @@
 | [[sources/choi-2021-trunet-real-time-speech-enhancement\|Choi et al. 2021: TRU-Net — Real-Time Denoising and Dereverberation with Tiny Recurrent U-Net]] | Lightweight frequency-axis U-Net (0.38 M params, 362 KB INT8) with phase-aware β-sigmoid mask for single-stage joint denoising + dereverberation at 0 ms lookahead | 2026-07-31 |
 | [[sources/liu-2025-pcen-mask-vad-speech-enhancement\|Liu et al. 2025: PCEN-Based Mask Thresholding and VAD for DNN Speech Enhancement Training]] | Dolby patent — training-time PCEN mask thresholding, PCEN-VAD, and sign-flipped asymmetric loss for mask-based DNN speech enhancement | 2026-08-01 |
 | [[sources/lostanlen-2019-pcen-why-and-how\|Lostanlen et al. 2019: Per-Channel Energy Normalization: Why and How]] | Explains why PCEN beats logmelspec (Gaussianization + whitening toward AWGN) and how it works (asymptotic analysis of temporal integration, AGC, DRC) | 2026-07-31 |
+| [[sources/liu-2023-iccrn\|Liu & Zhang 2023: ICCRN — Inplace Cepstral CRN]] | Inplace CRN with cepstral-space branch (CFB); best STOI at low SNR on WSJ0 SI-84, most compact model (0.46M params). | 2026-08-01 |
 
 ---
 
@@ -954,10 +959,10 @@
 
 ## Statistics
 
-- **Total pages**: 903
-- **Entities**: 388
-- **Concepts**: 349
-- **Sources**: 139
+- **Total pages**: 908
+- **Entities**: 389
+- **Concepts**: 352
+- **Sources**: 140
 - **Synthesis**: 20
 - **Queries**: 7
 - **Last updated**: 2026-08-01

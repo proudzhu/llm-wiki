@@ -76,3 +76,4 @@ By jointly estimating real and imaginary parts, CSM implicitly models both ampli
 - [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 - [[sources/pandey-2019-cnn-speech-enhancement-time-domain|Pandey & Wang 2019: CNN-Based Speech Enhancement in the Time Domain]]
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys complex-spectrum DNNs (GCRN, DPCRN, Uformer, DCCRN) and the magnitude-phase "compensation effect" in RI-MSE loss
+- [[sources/liu-2023-iccrn|Liu & Zhang 2023: ICCRN]] — uses CSM with a weighted L1 RI+amplitude loss ($\alpha=2$ on amplitude); the estimated spectrum is inverted to time domain and re-transformed before the loss to enforce [[concepts/stft-consistency|STFT consistency]]. ICCRN reports that DCCRN(CSM) and DPCRN(CSM) outperform their magnitude-mask counterparts, consistent with the literature.

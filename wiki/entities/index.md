@@ -392,4 +392,5 @@
 | [[entities/andrew-farnsworth\|Andrew Farnsworth]] | Cornell Lab of Ornithology — avian bioacoustics, BirdVox co-developer | 2026-07-31 |
 | [[entities/steve-kelling\|Steve Kelling]] | Cornell Lab of Ornithology — biodiversity informatics, eBird, BirdVox co-developer | 2026-07-31 |
 | [[entities/juan-pablo-bello\|Juan Pablo Bello]] | NYU professor — SONYC lead, urban noise monitoring, sound event detection | 2026-07-31 |
+| [[entities/jinjiang-liu\|Jinjiang Liu]] | Inner Mongolia University — proposed ICCRN and IGCRN for monaural/multi-channel SE and AEC. | 2026-08-01 |
 

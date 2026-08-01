@@ -55,4 +55,5 @@ STFT consistency is used together with the [[concepts/complex-compressed-mse\|CC
 
 ## Related Sources
 
-- [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Seidel, Mowlaee & Fingscheidt 2024]] — uses STFT consistency in conjunction with CCMSE for training the Bark-scale postfilter
+- [[sources/seidel-2024-bark-scale-nn-residual-suppression|Seidel, Mowlaee & Fingscheidt 2024]] — uses STFT consistency in conjunction with CCMSE for training the Bark-scale postfilter
+- [[sources/liu-2023-iccrn|Liu & Zhang 2023: ICCRN]] — applies STFT consistency for the weighted L1 RI+amplitude loss in [[concepts/complex-spectrum-mapping|CSM]] training: the estimated complex spectrum is inverted to the time domain and re-transformed back to the TF domain before computing the loss

@@ -3649,3 +3649,28 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 - **Notes**: R. M. Figin (R·M·菲金) listed as plain text in the source page because the exact English spelling could not be confirmed from the CN patent or the English PCT bibliographic data; the other three inventors use standard pinyin romanizations. No synthesis page updated — the patent reports no comparative benchmarks and its multi-task IRM extension is a training-strategy note rather than a low-latency architecture contribution.
 
 ---
+---
+
+## [2026-08-01] ingest | ICCRN: Inplace Cepstral CRN for Monaural Speech Enhancement (Liu & Zhang 2023)
+
+- **Source**: `raw/papers/liu-2023-iccrn/full-text.md` (Zotero: S3KNZA83)
+- **Authors**: Jinjiang Liu, Xueliang Zhang
+- **Published**: ICASSP 2023, pp. 1–5
+- **DOI**: 10.1109/ICASSP49357.2023.10096918
+- **Summary**: ICCRN — Inplace Cepstral CRN; augments IGCRN with a Cepstral Frequency Block (FFT-based cepstral-space branch + TF residual). Best STOI at -5 dB on WSJ0 SI-84 (Auditec babble/cafeteria) while being the most compact model in the comparison (0.46 M params, 2.09 G MACs).
+- **Pages created**:
+  - `raw/papers/liu-2023-iccrn/full-text.md` — extracted text from Zotero PDF (MinerU VLM)
+  - `wiki/sources/liu-2023-iccrn.md`
+  - `wiki/entities/jinjiang-liu.md`
+  - `wiki/concepts/iccrn.md`
+  - `wiki/concepts/cepstral-frequency-block.md`
+  - `wiki/concepts/cepstral-space-speech-enhancement.md`
+- **Pages updated**:
+  - `wiki/entities/xueliang-zhang.md` — added ICCRN contribution, tags, related source
+  - `wiki/concepts/convolutional-recurrent-network.md` — added ICCRN to CRN family list and Related Sources
+  - `wiki/concepts/complex-spectrum-mapping.md` — added ICCRN as Related Source
+  - `wiki/concepts/stft-consistency.md` — added ICCRN as Related Source, sources: frontmatter
+  - `wiki/index.md` — added 1 entity, 3 concepts, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 1 entity row
+  - `wiki/concepts/index.md` — added 3 concept rows

@@ -353,4 +353,7 @@
 | [[concepts/trunet\|Tiny Recurrent U-Net (TRU-Net)]] | Lightweight frequency-axis U-Net with FGRU/TGRU recurrent mixing for real-time speech enhancement (0.38 M params, 0 ms lookahead) | 2026-07-31 |
 | [[concepts/phase-aware-beta-sigmoid-mask\|Phase-aware β-sigmoid Mask (PHM)]] | Complex-valued mask with learnable β magnitude range and law-of-cosines phase reconstruction; quadrilateral extension enables joint denoising + dereverberation | 2026-07-31 |
 | [[concepts/per-channel-energy-normalization\|Per-Channel Energy Normalization (PCEN)]] | Spectral-normalization technique that divides each band's energy by its time-averaged level; used as a training-time threshold oracle and VAD | 2026-08-01 |
+| [[concepts/iccrn\|ICCRN]] | Inplace Cepstral CRN — Liu & Zhang 2023; CFB + U-Net, no frequency downsampling, CSM loss. | 2026-08-01 |
+| [[concepts/cepstral-frequency-block\|Cepstral Frequency Block (CFB)]] | Core novel ICCRN block — FFT-based cepstral-space branch + TF residual branch with task-split gate. | 2026-08-01 |
+| [[concepts/cepstral-space-speech-enhancement\|Cepstral-Space Speech Enhancement]] | SE paradigm processing TF features in a cepstral space reached via real-valued FFT; exploits harmonic sparsity. | 2026-08-01 |
 

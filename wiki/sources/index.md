@@ -143,4 +143,5 @@
 | [[sources/choi-2021-trunet-real-time-speech-enhancement\|Choi et al. 2021: TRU-Net — Real-Time Denoising and Dereverberation with Tiny Recurrent U-Net]] | Lightweight frequency-axis U-Net (0.38 M params, 362 KB INT8) with phase-aware β-sigmoid mask for single-stage joint denoising + dereverberation at 0 ms lookahead | 2026-07-31 |
 | [[sources/liu-2025-pcen-mask-vad-speech-enhancement\|Liu et al. 2025: PCEN-Based Mask Thresholding and VAD for DNN Speech Enhancement Training]] | Dolby patent — training-time PCEN mask thresholding, PCEN-VAD, and sign-flipped asymmetric loss for mask-based DNN speech enhancement | 2026-08-01 |
 | [[sources/lostanlen-2019-pcen-why-and-how\|Lostanlen et al. 2019: Per-Channel Energy Normalization: Why and How]] | Explains why PCEN beats logmelspec (Gaussianization + whitening toward AWGN) and how it works (asymptotic analysis of temporal integration, AGC, DRC) | 2026-07-31 |
+| [[sources/liu-2023-iccrn\|Liu & Zhang 2023: ICCRN — Inplace Cepstral CRN]] | Inplace CRN with cepstral-space branch (CFB); best STOI at low SNR on WSJ0 SI-84, most compact model (0.46M params). | 2026-08-01 |
 
