@@ -15,7 +15,7 @@ tags:
 
 # ICCRN
 
-**ICCRN** (Inplace Cepstral Convolutional Recurrent Neural Network) is a monaural speech-enhancement architecture proposed by Liu & Zhang (ICASSP 2023). It extends the authors' earlier [[concepts/convolutional-recurrent-network|IGCRN]] by replacing the GLU-based blocks with a novel [[concepts/cepstral-frequency-block|Cepstral Frequency Block (CFB)]] that performs neural processing in a cepstral space reached via real-valued FFT. ICCRN is **inplace** (no frequency downsampling) and predicts real and imaginary STFT components directly ([[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]).
+**ICCRN** (Inplace Cepstral Convolutional Recurrent Neural Network) is a monaural speech-enhancement architecture proposed by Liu & Zhang (ICASSP 2023). It extends the authors' earlier [[concepts/igcrn|IGCRN]] by replacing the GLU-based blocks with a novel [[concepts/cepstral-frequency-block|Cepstral Frequency Block (CFB)]] that performs neural processing in a cepstral space reached via real-valued FFT. ICCRN is **inplace** (no frequency downsampling) and predicts real and imaginary STFT components directly ([[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]).
 
 ## Architecture
 
@@ -68,7 +68,7 @@ Removing the cepstral branch (`ICCRN(-ceps)`) is far more damaging than removing
 
 ## Position in the Inplace-CRN Lineage
 
-- **IGCRN** (Liu & Zhang 2021, Interspeech) — inplace gated CRN for dual-channel SE; channel-wise LSTM preserves per-bin spatial cues. Also applied to mono and stereo AEC.
+- **[[concepts/igcrn|IGCRN]]** (Liu & Zhang 2021, Interspeech — [[sources/liu-2021-igcrn|source]]) — inplace gated CRN for dual-channel SE; uses [[concepts/inplace-convolution|inplace convolutions]] and a [[concepts/channel-wise-lstm|channel-wise LSTM reused across frequency bins]] to preserve per-bin spatial cues. Also applied to mono and stereo AEC.
 - **ICCRN** (Liu & Zhang 2023, ICASSP) — replaces GLU with CFB; introduces cepstral-space processing; achieves SOTA low-SNR STOI on WSJ0 SI-84 at minimum complexity.
 
 The authors note that ICCRN's improved single-channel SE is expected to also lift multi-channel SE and AEC systems built on the inplace-CRN backbone.
@@ -77,6 +77,9 @@ The authors note that ICCRN's improved single-channel SE is expected to also lif
 
 - [[concepts/cepstral-frequency-block|Cepstral Frequency Block (CFB)]] — the core novel module
 - [[concepts/cepstral-space-speech-enhancement|Cepstral-Space Speech Enhancement]] — the broader paradigm
+- [[concepts/igcrn|IGCRN]] — predecessor in the inplace-CRN lineage
+- [[concepts/inplace-convolution|Inplace Convolution]] — inherited architectural choice (no frequency downsampling)
+- [[concepts/channel-wise-lstm|Channel-wise LSTM with Model Reuse]] — inherited bottleneck design
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]] — CRN family baseline
 - [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]] — training paradigm
 - [[concepts/stft-consistency|STFT Consistency]] — loss-construction technique used in training
@@ -84,4 +87,5 @@ The authors note that ICCRN's improved single-channel SE is expected to also lif
 
 ## Related Sources
 
+- [[sources/liu-2021-igcrn|Liu & Zhang 2021: IGCRN — Inplace Gated Convolutional Recurrent Neural Network]] — predecessor; introduces the inplace CRN design that ICCRN inherits
 - [[sources/liu-2023-iccrn|Liu & Zhang 2023: ICCRN — Inplace Cepstral Convolutional Recurrent Neural Network]]

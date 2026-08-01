@@ -3674,3 +3674,31 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 1 entity row
   - `wiki/concepts/index.md` — added 3 concept rows
+
+---
+
+## [2026-08-01] ingest | IGCRN: Inplace Gated Convolutional Recurrent Neural Network for Dual-channel Speech Enhancement (Liu & Zhang 2021)
+
+- **Source**: `raw/papers/liu-2021-igcrn/full-text.md` (Zotero: PR35K3UL)
+- **Authors**: Jinjiang Liu, Xueliang Zhang
+- **Published**: Interspeech 2021 (arXiv preprint 2107.11968, 2021-07-26)
+- **DOI**: 10.48550/arXiv.2107.11968
+- **Summary**: Compact end-to-end dual-channel SE that mirrors the beamforming pipeline (DOA → beamforming → post-filter) inside a CRN; uses inplace convolutions (stride-1 on frequency) and a channel-wise LSTM reused across all frequency bins to preserve per-bin spatial cues. Achieves 1.4M params (vs. GCRN's 71.8M) while outperforming oracle-DOA MVDR and conventional GCRN at -3/0/3 dB on AISHELL-1 + NOISEX-92. Introduces a mask + mapping + phase training target. The downsampling ablation provides direct evidence that the inplace characteristic — not capacity — drives multi-channel SE performance. Predecessor of ICCRN and the foundation of the inplace-CRN family.
+- **Pages created**:
+  - `raw/papers/liu-2021-igcrn/full-text.md` — extracted text from Zotero PDF (MinerU VLM)
+  - `wiki/sources/liu-2021-igcrn.md`
+  - `wiki/concepts/igcrn.md`
+  - `wiki/concepts/inplace-convolution.md`
+  - `wiki/concepts/channel-wise-lstm.md`
+  - `wiki/concepts/mask-mapping-amplitude-prediction.md`
+- **Pages updated**:
+  - `wiki/entities/jinjiang-liu.md` — added IGCRN source link to Related Sources
+  - `wiki/entities/xueliang-zhang.md` — added IGCRN source link to Related Sources
+  - `wiki/concepts/iccrn.md` — fixed `[[concepts/convolutional-recurrent-network|IGCRN]]` link to point to the new `[[concepts/igcrn|IGCRN]]` concept page; added IGCRN/Inplace-Convolution/Channel-wise-LSTM to Related Concepts; added IGCRN source link to Related Sources; updated lineage section with wikilinks
+  - `wiki/concepts/convolutional-recurrent-network.md` — added IGCRN to Applications and Related Sources
+  - `wiki/concepts/complex-spectrum-mapping.md` — added IGCRN as Related Source (uses mask+map+phase variant of CSM)
+  - `wiki/concepts/multi-channel-speech-enhancement.md` — added IGCRN to Related Sources
+  - `wiki/sources/liu-2023-iccrn.md` — added IGCRN as Related Source (predecessor)
+  - `wiki/index.md` — added 4 concepts, 1 source; updated statistics (total=913)
+  - `wiki/concepts/index.md` — added 4 concept rows
+  - `wiki/sources/index.md` — added 1 source row

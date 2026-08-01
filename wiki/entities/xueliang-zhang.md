@@ -24,4 +24,5 @@ tags:
 ## Related Sources
 
 - [[sources/wang-2022-fusing-bc-ac-complex-domain-se|Wang, Zhang & Wang 2022: Fusing BC and AC for Complex-Domain SE]]
+- [[sources/liu-2021-igcrn|Liu & Zhang 2021: IGCRN]]
 - [[sources/liu-2023-iccrn|Liu & Zhang 2023: ICCRN]]

@@ -356,4 +356,8 @@
 | [[concepts/iccrn\|ICCRN]] | Inplace Cepstral CRN — Liu & Zhang 2023; CFB + U-Net, no frequency downsampling, CSM loss. | 2026-08-01 |
 | [[concepts/cepstral-frequency-block\|Cepstral Frequency Block (CFB)]] | Core novel ICCRN block — FFT-based cepstral-space branch + TF residual branch with task-split gate. | 2026-08-01 |
 | [[concepts/cepstral-space-speech-enhancement\|Cepstral-Space Speech Enhancement]] | SE paradigm processing TF features in a cepstral space reached via real-valued FFT; exploits harmonic sparsity. | 2026-08-01 |
+| [[concepts/igcrn\|IGCRN]] | Inplace Gated CRN for dual-channel SE — inplace convolutions + channel-wise LSTM reused across frequency bins; the inplace-CRN family founder and predecessor of ICCRN. | 2026-08-01 |
+| [[concepts/inplace-convolution\|Inplace Convolution]] | Stride-1 convolution on the frequency dimension that preserves per-bin spatial cues for multi-channel SE; the core architectural choice of IGCRN/ICCRN. | 2026-08-01 |
+| [[concepts/channel-wise-lstm\|Channel-wise LSTM with Model Reuse]] | Per-frequency-bin LSTM with weights shared across all bins (one 64-hidden LSTM vs. 1024 in conventional CRN); the compact recurrent bottleneck of the inplace-CRN family. | 2026-08-01 |
+| [[concepts/mask-mapping-amplitude-prediction\|Mask + Mapping + Phase Target]] | Multi-output training target combining amplitude mask, amplitude mapping, and normalized phase in a single decoder; complementary strengths at high/low SNR; introduced by IGCRN. | 2026-08-01 |
 

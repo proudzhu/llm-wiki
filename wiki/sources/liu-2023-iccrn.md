@@ -199,6 +199,10 @@ The authors contrast ICCRN with the contemporaneous FFC-SE (Shchekotov et al., I
 - [[concepts/speech-enhancement|Speech Enhancement]] — broader task
 - [[concepts/pesq|PESQ]] — quality metric
 
+## Related Sources
+
+- [[sources/liu-2021-igcrn|Liu & Zhang 2021: IGCRN]] — predecessor; introduces the inplace CRN design (inplace convolutions + channel-wise LSTM with model reuse) for dual-channel SE. ICCRN inherits the inplace design and replaces the GLU blocks with the Cepstral Frequency Block to recover the full-band modeling capacity that IGCRN sacrificed by discarding frequency downsampling.
+
 ## Related Synthesis
 
 No synthesis page currently incorporates this source. ICCRN is a single-task monaural speech-enhancement system evaluated on WSJ0 SI-84 with Auditec noise; it does not fit cleanly into the existing multi-task / low-latency synthesis (which focuses on joint AEC+NS+DR at sub-10 ms latency on VoiceBank+DEMAND or DNS challenge benchmarks). Its cepstral-domain processing axis is a new dimension not represented in any current synthesis page; should a future synthesis on cross-domain speech enhancement (TF vs. cepstral vs. time-domain) emerge, this paper would be a foundational reference.

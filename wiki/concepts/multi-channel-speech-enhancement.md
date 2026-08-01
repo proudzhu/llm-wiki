@@ -64,3 +64,4 @@ tags:
 - [[sources/han-2026-quality-aware-earable-se|Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone SE]]
 - [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis et al. 2026: Listen first — output-based multi-microphone speech enhancement]]
 - [[sources/liu-2026-array-invariant-speech-enhancement|Liu, Zhang, Li & Qian 2026: Array-Invariant SE via Geo-DConv]]
+- [[sources/liu-2021-igcrn|Liu & Zhang 2021: IGCRN]] — end-to-end dual-channel SE that mirrors the beamforming pipeline (DOA estimation → beamforming → post-filtering) inside a CRN-style network with [[concepts/inplace-convolution|inplace convolutions]] and a [[concepts/channel-wise-lstm|channel-wise LSTM reused across frequency bins]]. Outperforms oracle-DOA MVDR and conventional GCRN at -3/0/3 dB; the inplace-CRN family founder.

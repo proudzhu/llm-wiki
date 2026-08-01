@@ -22,4 +22,5 @@ tags:
 
 ## Related Sources
 
+- [[sources/liu-2021-igcrn|Liu & Zhang 2021: IGCRN]]
 - [[sources/liu-2023-iccrn|Liu & Zhang 2023: ICCRN]]
