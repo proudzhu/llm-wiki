@@ -1,11 +1,17 @@
 ---
 type: source
 created: 2026-05-16
-updated: 2026-05-16
+updated: 2026-08-02
 sources:
   - raw/papers/wang-2022-fusing-bc-ac-complex-domain-se/full-text.md
   - https://doi.org/10.1109/TASLP.2022.3209943
   - zotero://select/items/0_K592VRRE
+related_publications:
+  - title: "Attention-Based Fusion for Bone-Conducted and Air-Conducted Speech Enhancement in the Complex Domain"
+    venue: ICASSP 2022, pp. 7757–7761
+    doi: 10.1109/ICASSP43922.2022.9746374
+    zotero: XZMGZG67
+    relation: conference_precursor
 tags:
   - bone-conduction
   - speech-enhancement
@@ -28,6 +34,16 @@ tags:
 ## Summary
 
 This paper proposes an attention-based fusion method to combine air-conduction (AC) and bone-conduction (BC) signals for complex spectral mapping-based speech enhancement. The key insight is that AC provides full-band information susceptible to noise, while BC is noise-immune but bandwidth-limited (<2 kHz). The approach additionally introduces a CycleGAN-based semi-supervised framework that leverages unpaired AC data (AISHELL-1) alongside limited parallel AC-BC data (ESMB corpus), achieving supervised-level performance with only 50% parallel data.
+
+## Conference Precursor
+
+This journal article extends an earlier ICASSP 2022 conference paper:
+
+- **Heming Wang, Xueliang Zhang, DeLiang Wang.** "Attention-Based Fusion for Bone-Conducted and Air-Conducted Speech Enhancement in the Complex Domain." ICASSP 2022, pp. 7757–7761. DOI: [10.1109/ICASSP43922.2022.9746374](https://doi.org/10.1109/ICASSP43922.2022.9746374). Zotero: [XZMGZG67](zotero://select/items/0_XZMGZG67).
+
+The conference paper introduces the same core method (DC-CRN + attention-based fusion with early/late fusion strategies, evaluated on the ESMB corpus). The journal version's only genuine extension is the **CycleGAN-based semi-supervised framework** — explicitly listed as "future work" in the conference paper's §5 Conclusion. The journal version also expands the experiments and ablations.
+
+Because the conference paper is a strict methodological subset of this journal version, it is not ingested as a separate source page. The conference DOI is tracked in `related_publications` frontmatter above for provenance. Minor numerical differences (e.g., the conference paper reports late-fusion STOI of 74.8% at −5 dB, +21.5% over FCN; the journal reports +21.1% over FCN-AF) reflect the extended experiments in the journal version and are subsumed by it.
 
 ## Problem Formulation
 

@@ -3767,3 +3767,16 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 7 entity rows
   - `wiki/concepts/index.md` — added 4 concept rows
+
+---
+
+## [2026-08-02] ingest | Attention-Based Fusion for BC/AC Speech Enhancement (Wang 2022 ICASSP) — comparison only
+
+- **Source**: Zotero key XZMGZG67 (ICASSP 2022 conference paper); not ingested as separate source
+- **Authors**: Heming Wang, Xueliang Zhang, DeLiang Wang
+- **Published**: ICASSP 2022, pp. 7757–7761
+- **DOI**: 10.1109/ICASSP43922.2022.9746374
+- **Decision**: Compared against already-ingested TASLP 2022 journal version (`wiki/sources/wang-2022-fusing-bc-ac-complex-domain-se.md`, Zotero K592VRRE). The ICASSP conference paper is a strict methodological subset — same core method (DC-CRN + attention-based fusion + early/late fusion, ESMB corpus). The journal version's only genuine extension is the CycleGAN semi-supervised framework, which was explicitly the conference paper's "future work". Per user decision, skipped full ingestion to avoid a near-duplicate source page.
+- **Pages updated**:
+  - `wiki/sources/wang-2022-fusing-bc-ac-complex-domain-se.md` — added `related_publications` frontmatter (ICASSP DOI/Zotero key) and a new `## Conference Precursor` section cross-referencing the conference paper; updated `updated:` date
+- **Cleanup**: Temporary MinerU extraction at `raw/papers/wang-2022-attention-fusion-bc-ac-icassp/` deleted after comparison.
