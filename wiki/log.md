@@ -3816,3 +3816,33 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/entities/index.md` — added 7 entity rows
   - `wiki/concepts/index.md` — added 3 concept rows
   - `wiki/sources/index.md` — added 1 source row
+
+---
+
+## [2026-08-03] ingest | Lightweight SE with SSM and DSConv (Jiang et al. 2026)
+
+- **Source**: `raw/papers/jiang-2026-lightweight-speech-enhancement-ssm-dsc/full-text.md` (Zotero: WNWMR26M)
+- **Authors**: Chen Jiang, Dai Gao, Sirui Wang, Chengxuan Zou, Jie Liu
+- **Published**: *Digital Signal Processing* (Elsevier), Vol. 157, 2026-04-15
+- **DOI**: 10.1016/j.dsp.2026.105987
+- **Summary**: Lightweight SE framework pairing a diagonal-constrained S4 variant ([[concepts/lights4|lightS4]]) with depthwise separable convolutions, an Auditory-Inspired Spectral Compressor ([[concepts/auditory-inspired-spectral-compressor|AISC]]) and a [[concepts/classifier-loss|Classifier Loss]] for vocal-interference suppression. Reaches PESQ 3.32 / STOI 0.96 on VoiceBank+DEMAND and SOTA PESQ 3.01 / STOI 0.87 on WSJ0-SI84 with only 1.65 M params, 0.50 G MACs, RTF 0.13 on consumer CPU — a ~60× MACs reduction vs. SEMamba at a 0.20 PESQ cost. Ablation shows lightS4 is the explicit efficiency–quality compromise (Mamba gives +0.03 PESQ at 1.6× params/1.4× MACs; full S4 NPLR gives -0.10 PESQ).
+- **Pages created**:
+  - `raw/papers/jiang-2026-lightweight-speech-enhancement-ssm-dsc/full-text.md` — MinerU VLM-extracted text (715 lines) + figures
+  - `wiki/sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc.md`
+  - `wiki/entities/chen-jiang.md`
+  - `wiki/entities/dai-gao.md`
+  - `wiki/entities/sirui-wang.md`
+  - `wiki/entities/chengxuan-zou.md`
+  - `wiki/entities/jie-liu.md`
+  - `wiki/concepts/lights4.md` — diagonal-constrained S4 variant (novel)
+  - `wiki/concepts/auditory-inspired-spectral-compressor.md` — parameter-free ERB-based dimensionality reduction (novel)
+  - `wiki/concepts/classifier-loss.md` — auxiliary speaker-classification cross-entropy loss (novel)
+- **Pages updated**:
+  - `wiki/concepts/state-space-model.md` — added lightS4 bullet to Deep-Learning SSM section; added source link
+  - `wiki/concepts/erb-scale.md` — added AISC usage section; added source link and AISC related-concept cross-reference
+  - `wiki/concepts/depthwise-separable-convolution.md` — added "Usage in Jiang et al. 2026" section; added lightS4 + AISC cross-references and source link
+  - `wiki/synthesis/computational-efficiency-evolution.md` — added 6th Pareto axis entry for lightS4 + DSConv + AISC; added 4 new related concepts and source link
+  - `wiki/index.md` — added 5 entities, 3 concepts, 1 source; updated statistics (total=951)
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 5 entity rows
+  - `wiki/concepts/index.md` — added 3 concept rows

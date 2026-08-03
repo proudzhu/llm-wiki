@@ -370,4 +370,7 @@
 | [[concepts/mamba\|Mamba]] | Selective state-space model with input-dependent parameters and linear-time scan | 2026-08-03 |
 | [[concepts/semamba\|SEMamba]] | First Mamba-based speech enhancement system; SOTA PESQ 3.69 on VoiceBank-DEMAND with PCS | 2026-08-03 |
 | [[concepts/perceptual-contrast-stretching\|Perceptual Contrast Stretching (PCS)]] | Post-enhancement spectral stretching by perceptual importance; lifts SEMamba PESQ to 3.69 | 2026-08-03 |
+| [[concepts/lights4\|lightS4]] | Diagonal-constrained S4 variant for lightweight SE; element-wise ZOH discretization + FFT global convolution | 2026-08-03 |
+| [[concepts/auditory-inspired-spectral-compressor\|Auditory-Inspired Spectral Compressor (AISC)]] | Parameter-free ERB-based dimensionality reduction; 1.5kHz perceptual split, 2.6x MACs reduction | 2026-08-03 |
+| [[concepts/classifier-loss\|Classifier Loss]] | Auxiliary speaker-classification cross-entropy loss for vocal-interference suppression; +0.16 PESQ under competing voices | 2026-08-03 |
 

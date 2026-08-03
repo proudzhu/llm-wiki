@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-06-07
-updated: 2026-07-23
+updated: 2026-08-03
 sources:
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
   - raw/papers/harma-2000-frequency-warped-signal-processing/full-text.md
+  - raw/papers/jiang-2026-lightweight-speech-enhancement-ssm-dsc/full-text.md
 tags:
   - psychoacoustics
   - speech-enhancement
@@ -48,6 +49,10 @@ Both [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|RT-Tango]] a
 
 [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025]]'s [[concepts/adaptcrn|AdaptCRN]] reuses GTCRN's ERB band-merging scheme for its **spectral compression** module: the first 65 low-frequency bins (below 2 kHz) are kept unaltered, while the 192 high-frequency bins (above 2 kHz) are downsampled to 64 ERB bands via a triangular ERB filter. The 129-D compressed feature is then expanded to 9 channels × 129 D per frame via SFE (subband feature extraction, kernel 3) before entering the encoder. Spectral decompression applies the **transpose** of the (non-learnable) downsampling matrix. Combined with dynamic-range compression ($\log_{10}$ on magnitude, $|S|^{0.7}$ on real/imag — see [[concepts/power-law-compression|Power-Law Compression]]), this module reduces both frequency dimension and dynamic range before the network. This design pattern (ERB band merging + SFE + transposed-matrix decompression) originates from [[concepts/gtcrn|GTCRN]] and is reused by [[concepts/cofi-lite|CoFi-Lite]] and AdaptCRN in the same NJU/Horizon Robotics lab lineage.
 
+## Usage in AISC (Jiang et al. 2026)
+
+[[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang et al. 2026]]'s [[concepts/auditory-inspired-spectral-compressor|Auditory-Inspired Spectral Compressor (AISC)]] applies a **perceptually-motivated low/high split**: low frequencies below 1.5 kHz are preserved at full resolution (where cochlear sensitivity is highest for harmonics/formants), while high frequencies above 1.5 kHz are projected onto the ERB scale via a fixed triangular filter bank $W_{\mathrm{ERB}} \in \mathbb{R}^{F_{\mathrm{ERB}} \times F_H}$. The decoder inverts the projection via $W_{\mathrm{ERB}}^T$. This parameter-free module delivers a **2.6× MACs reduction** (1.32 → 0.50 G) with only 0.04 PESQ loss vs. full-resolution processing. Distinctive vs. GTCRN/AdaptCRN (which use a hard 2 kHz split with full low-res preservation): AISC explicitly frames the split as a cochlea-motivated design choice (low frequencies need fine resolution; high frequencies are perceived via critical-band energy integration), and applies ERB compression only to the high-frequency branch.
+
 ## Relationship to Other Scales
 
 | Scale | Formula | Bands | Application |
@@ -74,6 +79,7 @@ The ERB scale provides finer frequency resolution at low frequencies compared to
 - [[concepts/trainable-frequency-compression|Trainable Frequency Compression]] — Chen et al. 2023 show fixed ERB filters underperform trainable Mel filters on WB-PESQ across all compression ratios
 - [[concepts/gtcrn|GTCRN]] — origin of the ERB + SFE + transposed-decompression pattern reused by AdaptCRN
 - [[concepts/adaptcrn|AdaptCRN]] — reuses GTCRN's ERB spectral compression scheme
+- [[concepts/auditory-inspired-spectral-compressor|Auditory-Inspired Spectral Compressor (AISC)]] — Jiang et al. 2026's perceptually-motivated low/high split + ERB compression on high band
 
 ## Related Sources
 
@@ -85,3 +91,4 @@ The ERB scale provides finer frequency resolution at low frequencies compared to
 - [[sources/li-2025-echofree-neural-aec|Li et al. 2025: EchoFree]] — later PercepNet-style work that switched to the Bark scale (100 bands)
 - [[sources/chen-2023-ultra-dual-path-compression|Chen et al. 2023: Ultra Dual-Path Compression]] — benchmarks FixedERB vs. FixedMel vs. TrainMel frequency compression; ERB wins SI-SNR at large ratios because SI-SNR weights all frequencies equally (Mel emphasises lows)
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — AdaptCRN's spectral compression uses ERB band merging (65 low + 64 ERB)
+- [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight SE with SSM and DSConv]] — AISC uses 1.5 kHz perceptual split + ERB compression on the high-frequency branch

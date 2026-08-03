@@ -13,6 +13,7 @@ sources:
 - zotero://select/items/0_NUV4VYRE
 - raw/papers/wang-2025-adaptive-convolution-cnn-speech-enhancement/full-text.md
 - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
+- raw/papers/jiang-2026-lightweight-speech-enhancement-ssm-dsc/full-text.md
 tags:
   - lightweight-speech-enhancement
 - computational-complexity
@@ -211,6 +212,8 @@ Three approaches currently define the Pareto frontier:
 
 9. **[[concepts/sse-net|SSE-Net (Liu et al., IEEE TASLP 2026)]]**: Opens a **fifth axis — the spiking/neuromorphic one** — for low-power SE. Unlike the ANN ultralightweight line (GTCRN/CoFi-Lite/AdaptCRN) that minimizes MACs/params on von-Neumann hardware, SSE-Net is a spike-native SNN-SE architecture ([[concepts/spiking-feature-extraction-block|SFEB]] + [[concepts/information-transformation-block|ITB]], surrogate-gradient trained) whose energy is measured in the [[concepts/intel-neuromorphic-dns-challenge|Intel N-DNS]] power-proxy metric (SynOPs + 10×NeuronOPs on Loihi energy accounting): **19.70 M Ops/s power proxy, 0.63 M Ops PDP, 1.31 μJ energy cost** — 62% below the N-DNS winner Spiking-FullSubNet and ~2–3 orders of magnitude below ANN baselines (FullSubNet 3650 M, DCCRN 5070 M Ops/s). Quality-wise it is SOTA among SNN-SE (WB-PESQ 2.89 VB+DEMAND, PESQ 2.65 WSJ0-DNS causal, MOS 3.78) and beats mid-size ANN baselines, while its 0.44 G/s MACs sits between the ultra-lightweight ANN models (12.87 M–41 M) and DeepFilterNet (0.35 G). The trade-off is a residual quality gap vs. large ANN SOTA (CMGAN-class) and MACs that are not directly comparable across the ANN/SNN divide — but the energy-per-utterance regime (~μJ) is what no ANN architecture reaches.
 
+10. **[[concepts/lights4|lightS4 + DSConv (Jiang et al., DSP 2026)]]**: Defines a **sixth axis — diagonal-constrained SSM + parameter-free psychoacoustic preprocessing** — that bridges the gap between the **ANN ultra-lightweight class** (CoFi-Lite/AdaptCRN at 12.87–41 MMACs/s) and the **Mamba quality-frontier class** (SEMamba at 32.73 G MACs / PESQ 3.52). With **1.65 M params / 0.50 G MACs / RTF 0.13** on consumer CPU, it reaches **PESQ 3.32 / STOI 0.96 on VoiceBank+DEMAND** and SOTA on WSJ0-SI84 (PESQ 3.01 / STOI 0.87) — a **~60× MACs reduction vs. SEMamba** at a 0.20 PESQ cost, and **1.4× MACs vs. DeepFilterNet3** at +0.15 PESQ. The mechanism is a triple structural prior: (i) [[concepts/lights4|lightS4]] replaces S4's NPLR decomposition with a strict diagonal constraint $\mathbf{A} = -\mathrm{diag}(\exp(\mathbf{A}_{\log}))$, enabling element-wise ZOH discretization and FFT global convolution — ablation shows full S4 gives PESQ 3.22 (0.04 M params, 0.03 G MACs more) and Mamba gives 3.35 (1.6× params, 1.4× MACs more), positioning lightS4 as the explicit efficiency–quality compromise; (ii) [[concepts/auditory-inspired-spectral-compressor|AISC]] applies a 1.5 kHz perceptual split (full-res low + ERB-compressed high) that delivers a 2.6× MACs reduction at zero parameter cost; (iii) [[concepts/depthwise-separable-convolution|DSConv2D]] encoder/decoder + atrous DSConv2D ASPP slashes params ~5.8× and MACs ~9× vs. standard convolutions. A [[concepts/classifier-loss|Classifier Loss]] (auxiliary speaker classifier, $\lambda_5{=}0.1$) adds +0.16 PESQ specifically under vocal interference, and a parameter-free **Griffin–Lim Algorithm** phase post-processor adds +0.08 PESQ at zero parameter cost — both demonstrating that **non-neural / auxiliary-supervision components** can substitute for learned modules when MACs budget is binding. The trade-off vs. SEMamba is a quality gap (3.32 vs. 3.52 PESQ) and a marginally lower BAK score (3.41 vs. 3.98) — a deliberate design choice prioritizing speech naturalness over aggressive noise suppression.
+
 ### 5.3 The Open Question
 
 **Can neural/learned ANC controllers match traditional algorithms at lower computational cost?**
@@ -267,6 +270,10 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 - [[concepts/gevd-spatial-filtering|GEVD-Based Spatial Filtering]]
 - [[concepts/adaptive-convolution|Adaptive Convolution]]
 - [[concepts/adaptcrn|AdaptCRN]]
+- [[concepts/lights4|lightS4]] — diagonal-constrained S4 variant; sixth Pareto axis (Jiang et al. 2026)
+- [[concepts/auditory-inspired-spectral-compressor|Auditory-Inspired Spectral Compressor (AISC)]] — parameter-free ERB-based psychoacoustic preprocessing
+- [[concepts/classifier-loss|Classifier Loss]] — auxiliary speaker-classification loss for vocal-interference suppression
+- [[concepts/erb-scale|ERB Scale]] — psychoacoustic basis for AISC and other spectral compressors
 
 ## Related Sources
 
@@ -279,3 +286,4 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — [[concepts/adaptcrn|AdaptCRN]] introduces a fourth Pareto axis: dynamic capacity via per-frame adaptive convolution (params ↑ $K\times$, MACs ≈ flat); largest gains on lightweight backbones, diminishing and eventually prohibitive for large models.
 - [[sources/liu-2026-sse-net|Liu et al. 2026: SSE-Net]] — spike-native SNN-SE introducing the spiking/neuromorphic efficiency axis: power proxy 19.70 M Ops/s (62% below Spiking-FullSubNet), 1.31 μJ energy cost, 0.44 G/s MACs, WB-PESQ 2.89 on VoiceBank+DEMAND
 - [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] — [[concepts/semamba|SEMamba]] introduces the selective-SSM (Mamba) efficiency axis: replaces Conformer/Transformer at quality parity with 12–66% FLOPs reduction; SOTA PESQ 3.69 on VoiceBank-DEMAND with PCS
+- [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight SE with SSM and DSConv]] — introduces the sixth Pareto axis: diagonal-constrained [[concepts/lights4|lightS4]] + DSConv2D + [[concepts/auditory-inspired-spectral-compressor|AISC]] reaches PESQ 3.32 on VoiceBank+DEMAND at 0.50 G MACs / 1.65 M params / RTF 0.13, a ~60× MACs reduction vs. SEMamba at a 0.20 PESQ cost

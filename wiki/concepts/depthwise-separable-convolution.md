@@ -75,15 +75,22 @@ For a standard $3 \times 3$ kernel ($D_k = 3$) and large $C_{out}$, this yields 
 
 ---
 
+## Usage in Jiang et al. 2026 (Lightweight SE + lightS4)
+
+[[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang et al. 2026]] uses DSConv2D as the core building block for both encoder (six cascaded blocks with progressive channel expansion) and decoder (alternating DSConv2D with transposed convolutions), alongside an **Atrous Spatial Pyramid Pooling (ASPP)** module of atrous DSConv2D (ADSConv2D) with dilation rates $\{2, 4, 8\}$ matched to speech spectro-temporal structure (harmonics, formants, syllabic context). The metric discriminator also uses spectrally-normalized DSConv2D for stability. Ablation shows DSConv2D slashes parameters ~5.8× (9.63 M → 1.65 M) and MACs ~9× (4.53 G → 0.50 G) vs. standard convolutions with negligible PESQ change (3.26 → 3.32), confirming the efficiency advantage of the factorization at this scale.
+
 ## Related Concepts
 
 - [[concepts/neural-networks|Neural Networks]]
 - [[concepts/bc-resnet|BC-ResNet]]
 - [[concepts/time-frequency-separate-convolutions|Time-Frequency Separate Convolutions]]
 - [[concepts/acoustic-scene-classification|Acoustic Scene Classification]]
+- [[concepts/lights4|lightS4]] — Jiang et al. 2026's diagonal-constrained S4 paired with DSConv2D encoder/decoder
+- [[concepts/auditory-inspired-spectral-compressor|Auditory-Inspired Spectral Compressor (AISC)]] — feeds compressed features into the DSConv2D encoder
 
 ## Related Sources
 
 - [[sources/kim-2021-broadcasted-residual-learning|Kim, Chang, Lee & Sung 2021: Broadcasted Residual Learning]]
 - [[sources/cai-2024-tf-sepnet|Cai, Zhang & Li 2024: TF-SepNet]]
 - [[sources/li-2025-echofree-neural-aec|Li et al. 2025: EchoFree]] — uses depthwise separable convolutions throughout the U-Net post filter encoder/decoder, contributing to the 278K / 30 MMACs/s budget
+- [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight SE with SSM and DSConv]] — DSConv2D encoder/decoder + ADSConv2D ASPP; 1.65 M params / 0.50 G MACs

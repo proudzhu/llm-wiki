@@ -409,4 +409,9 @@
 | [[entities/chao-han-huck-yang\|Chao-Han Huck Yang]] | NVIDIA Research Taiwan / Georgia Tech — co-author of SEMamba and S4ND-UNet | 2026-08-03 |
 | [[entities/szu-wei-fu\|Szu-Wei Fu]] | Academia Sinica — co-author of SEMamba | 2026-08-03 |
 | [[entities/yu-tsao\|Yu Tsao]] | Academia Sinica — co-author of SEMamba | 2026-08-03 |
+| [[entities/chen-jiang\|Chen Jiang]] | Beijing Jiaotong University — co-first author of Jiang et al. 2026 (lightS4 SE) | 2026-08-03 |
+| [[entities/dai-gao\|Dai Gao]] | Soochow University — co-first author of Jiang et al. 2026 (lightS4 SE) | 2026-08-03 |
+| [[entities/sirui-wang\|Sirui Wang]] | Beijing Jiaotong University — co-author of Jiang et al. 2026 (lightS4 SE) | 2026-08-03 |
+| [[entities/chengxuan-zou\|Chengxuan Zou]] | Beijing Jiaotong University — co-author of Jiang et al. 2026 (lightS4 SE) | 2026-08-03 |
+| [[entities/jie-liu\|Jie Liu]] | Beijing Jiaotong University — corresponding author of Jiang et al. 2026 (lightS4 SE) | 2026-08-03 |
 

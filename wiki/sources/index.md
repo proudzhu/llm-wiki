@@ -148,4 +148,5 @@
 | [[sources/zhao-2024-sicrn\|Zhao, He & Zhang 2024: SICRN — State Space Model + Inplace Convolution for Speech Enhancement]] | S4ND + 2D inplace conv (SIC block) CRN; near-FullSubNet quality on DNS Challenge at 0.38× params, 0.14× MACs, 0 ms look-ahead. | 2026-08-01 |
 | [[sources/liu-2026-sse-net\|Liu et al. 2026: SSE-Net]] | SSE-Net — first spike-native SNN-SE architecture (SFEB/ITB); SOTA among SNN-SE models with 62% lower power proxy than Spiking-FullSubNet (19.70 M Ops/s), 0.44 G/s MACs | 2026-08-01 |
 | [[sources/chao-2024-mamba-speech-enhancement\|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] | First Mamba-based SE system (SEMamba); basic + advanced configs; SOTA PESQ 3.69 on VoiceBank-DEMAND with PCS | 2026-08-03 |
+| [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc\|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight SE with SSM and DSConv]] | Lightweight SE with diagonal-constrained lightS4 + DSConv + AISC; 1.65M params, 0.50G MACs, PESQ 3.32 on VoiceBank+DEMAND, ~60x MACs reduction vs SEMamba | 2026-08-03 |
 

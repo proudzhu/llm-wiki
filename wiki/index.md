@@ -415,6 +415,11 @@
 | [[entities/chao-han-huck-yang\|Chao-Han Huck Yang]] | NVIDIA Research Taiwan / Georgia Tech — co-author of SEMamba and S4ND-UNet | 2026-08-03 |
 | [[entities/szu-wei-fu\|Szu-Wei Fu]] | Academia Sinica — co-author of SEMamba | 2026-08-03 |
 | [[entities/yu-tsao\|Yu Tsao]] | Academia Sinica — co-author of SEMamba | 2026-08-03 |
+| [[entities/chen-jiang\|Chen Jiang]] | Beijing Jiaotong University — co-first author of Jiang et al. 2026 (lightS4 SE) | 2026-08-03 |
+| [[entities/dai-gao\|Dai Gao]] | Soochow University — co-first author of Jiang et al. 2026 (lightS4 SE) | 2026-08-03 |
+| [[entities/sirui-wang\|Sirui Wang]] | Beijing Jiaotong University — co-author of Jiang et al. 2026 (lightS4 SE) | 2026-08-03 |
+| [[entities/chengxuan-zou\|Chengxuan Zou]] | Beijing Jiaotong University — co-author of Jiang et al. 2026 (lightS4 SE) | 2026-08-03 |
+| [[entities/jie-liu\|Jie Liu]] | Beijing Jiaotong University — corresponding author of Jiang et al. 2026 (lightS4 SE) | 2026-08-03 |
 
 ---
 
@@ -790,6 +795,9 @@
 | [[concepts/mamba\|Mamba]] | Selective state-space model with input-dependent parameters and linear-time scan | 2026-08-03 |
 | [[concepts/semamba\|SEMamba]] | First Mamba-based speech enhancement system; SOTA PESQ 3.69 on VoiceBank-DEMAND with PCS | 2026-08-03 |
 | [[concepts/perceptual-contrast-stretching\|Perceptual Contrast Stretching (PCS)]] | Post-enhancement spectral stretching by perceptual importance; lifts SEMamba PESQ to 3.69 | 2026-08-03 |
+| [[concepts/lights4\|lightS4]] | Diagonal-constrained S4 variant for lightweight SE; element-wise ZOH discretization + FFT global convolution | 2026-08-03 |
+| [[concepts/auditory-inspired-spectral-compressor\|Auditory-Inspired Spectral Compressor (AISC)]] | Parameter-free ERB-based dimensionality reduction; 1.5kHz perceptual split, 2.6x MACs reduction | 2026-08-03 |
+| [[concepts/classifier-loss\|Classifier Loss]] | Auxiliary speaker-classification cross-entropy loss for vocal-interference suppression; +0.16 PESQ under competing voices | 2026-08-03 |
 
 ---
 
@@ -943,6 +951,7 @@
 | [[sources/zhao-2024-sicrn\|Zhao, He & Zhang 2024: SICRN — State Space Model + Inplace Convolution for Speech Enhancement]] | S4ND + 2D inplace conv (SIC block) CRN; near-FullSubNet quality on DNS Challenge at 0.38× params, 0.14× MACs, 0 ms look-ahead. | 2026-08-01 |
 | [[sources/liu-2026-sse-net\|Liu et al. 2026: SSE-Net]] | SSE-Net — first spike-native SNN-SE architecture (SFEB/ITB); SOTA among SNN-SE models with 62% lower power proxy than Spiking-FullSubNet (19.70 M Ops/s), 0.44 G/s MACs | 2026-08-01 |
 | [[sources/chao-2024-mamba-speech-enhancement\|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] | First Mamba-based SE system (SEMamba); basic + advanced configs; SOTA PESQ 3.69 on VoiceBank-DEMAND with PCS | 2026-08-03 |
+| [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc\|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight SE with SSM and DSConv]] | Lightweight SE with diagonal-constrained lightS4 + DSConv + AISC; 1.65M params, 0.50G MACs, PESQ 3.32 on VoiceBank+DEMAND, ~60x MACs reduction vs SEMamba | 2026-08-03 |
 
 ---
 
@@ -993,10 +1002,10 @@
 
 ## Statistics
 
-- **Total pages**: 942
-- **Entities**: 405
-- **Concepts**: 366
-- **Sources**: 144
+- **Total pages**: 951
+- **Entities**: 410
+- **Concepts**: 369
+- **Sources**: 145
 - **Synthesis**: 20
 - **Queries**: 7
 - **Last updated**: 2026-08-03

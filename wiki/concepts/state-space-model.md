@@ -6,6 +6,7 @@ sources:
   in active noise and vibration control.md
   control in active noise control systems.md
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
+  - raw/papers/jiang-2026-lightweight-speech-enhancement-ssm-dsc/full-text.md
 tags:
 - control-theory
 - mathematics
@@ -48,6 +49,7 @@ A separate subfamily of state-space models has emerged in deep learning, where t
 - **[[concepts/mamba|Mamba]]** (Gu & Dao 2023) — selective SSM with input-dependent parameters and hardware-aware linear-time scan; the first structured SSM to perform content-based filtering. Applied to speech enhancement by [[concepts/semamba|SEMamba]] (Chao et al. 2024) and to own-voice cancellation by [[concepts/mamba-mingru|Mamba-MinGRU]] (Østergaard et al. 2026).
 - **[[concepts/semamba|SEMamba]]** (Chao et al., IEEE SLT 2024) — first Mamba-based speech enhancement system; replaces Transformer/Conformer with Mamba blocks in both basic and advanced (MP-SENet-style) configurations. SOTA PESQ 3.69 on VoiceBank-DEMAND with PCS.
 - **[[concepts/mamba-mingru|Mamba-MinGRU]]** (Østergaard et al. 2026) — selective state-space model (Mamba) + MinGRU linear recurrence for time-domain own-voice cancellation at 2 ms latency.
+- **[[concepts/lights4|lightS4]]** (Jiang et al. 2026) — diagonal-constrained S4 variant that replaces the NPLR decomposition with a strict diagonal structure $\mathbf{A} = -\mathrm{diag}(\exp(\mathbf{A}_{\log}))$, enabling element-wise ZOH discretization and FFT convolution. Used inside the dual-path Featuremask of a lightweight SE framework that reaches PESQ 3.32 on VoiceBank+DEMAND with only 0.50 G MACs — a ~60× reduction vs. SEMamba at a 0.20 PESQ cost. Ablation shows Mamba gives +0.03 PESQ over lightS4 at 1.6× params / 1.4× MACs, positioning lightS4 as the explicit efficiency–quality compromise.
 
 These deep-learning SSMs share the underlying state-space mathematics with the control-theoretic SSMs above, but are used as learnable sequence-modeling layers rather than as identified plant models.
 
@@ -64,6 +66,7 @@ These deep-learning SSMs share the underlying state-space mathematics with the c
 - [[mamba|Mamba]] — selective SSM with input-dependent parameters (deep-learning sequence model)
 - [[semamba|SEMamba]] — first Mamba-based speech enhancement system
 - [[mamba-mingru|Mamba-MinGRU]] — selective SSM + MinGRU (own-voice cancellation)
+- [[lights4|lightS4]] — diagonal-constrained S4 variant for lightweight SE (Jiang et al. 2026)
 
 ## Related Sources
 
@@ -72,3 +75,4 @@ These deep-learning SSMs share the underlying state-space mathematics with the c
 - [[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]]
 - [[sources/zhao-2024-sicrn|Zhao, He & Zhang 2024: SICRN]] — applies S4ND (multidimensional deep-learning SSM) to monaural speech enhancement
 - [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] — first Mamba-based SE; SOTA PESQ 3.69 on VoiceBank-DEMAND
+- [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight SE with SSM and DSConv]] — introduces [[concepts/lights4|lightS4]] (diagonal-constrained S4); 0.50 G MACs vs. SEMamba's 32.73 G
