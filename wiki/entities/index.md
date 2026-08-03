@@ -402,4 +402,11 @@
 | [[entities/xinhui-li\|Xinhui Li]] | Institute of Acoustics, CAS — monaural SE, hearing aids (Li/Zheng group) | 2026-08-01 |
 | [[entities/jian-zhou\|Jian Zhou]] | Anhui University — low-complexity SE, spiking neural networks | 2026-08-01 |
 | [[entities/zhao-lv\|Zhao Lv]] | Anhui University — professor, speech enhancement, brain-computer interface | 2026-08-01 |
+| [[entities/rong-chao\|Rong Chao]] | NTU/Academia Sinica — first author of SEMamba (Mamba for SE) | 2026-08-03 |
+| [[entities/wen-huang-cheng\|Wen-Huang Cheng]] | National Taiwan University — co-author of SEMamba | 2026-08-03 |
+| [[entities/moreno-la-quatra\|Moreno La Quatra]] | Politecnico di Torino / U. della Calabria — co-author of SEMamba | 2026-08-03 |
+| [[entities/sabato-marco-siniscalchi\|Sabato Marco Siniscalchi]] | U. of Enna Kore / NTNU — co-author of SEMamba and S4ND-UNet | 2026-08-03 |
+| [[entities/chao-han-huck-yang\|Chao-Han Huck Yang]] | NVIDIA Research Taiwan / Georgia Tech — co-author of SEMamba and S4ND-UNet | 2026-08-03 |
+| [[entities/szu-wei-fu\|Szu-Wei Fu]] | Academia Sinica — co-author of SEMamba | 2026-08-03 |
+| [[entities/yu-tsao\|Yu Tsao]] | Academia Sinica — co-author of SEMamba | 2026-08-03 |
 

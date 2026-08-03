@@ -367,4 +367,7 @@
 | [[concepts/spiking-feature-extraction-block\|Spiking Feature Extraction Block]] | Three-branch residual spiking block (LIF + continuous path) mitigating binary-activation information loss | 2026-08-01 |
 | [[concepts/information-transformation-block\|Information Transformation Block]] | Two-branch gated refinement converting spike features back to continuous signals | 2026-08-01 |
 | [[concepts/intel-neuromorphic-dns-challenge\|Intel Neuromorphic DNS Challenge]] | SNN-SE benchmark defining power-proxy metrics (SynOPs + 10×NeuronOPs, PDP) on Intel Loihi energy accounting | 2026-08-01 |
+| [[concepts/mamba\|Mamba]] | Selective state-space model with input-dependent parameters and linear-time scan | 2026-08-03 |
+| [[concepts/semamba\|SEMamba]] | First Mamba-based speech enhancement system; SOTA PESQ 3.69 on VoiceBank-DEMAND with PCS | 2026-08-03 |
+| [[concepts/perceptual-contrast-stretching\|Perceptual Contrast Stretching (PCS)]] | Post-enhancement spectral stretching by perceptual importance; lifts SEMamba PESQ to 3.69 | 2026-08-03 |
 

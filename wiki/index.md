@@ -408,6 +408,13 @@
 | [[entities/xinhui-li\|Xinhui Li]] | Institute of Acoustics, CAS — monaural SE, hearing aids (Li/Zheng group) | 2026-08-01 |
 | [[entities/jian-zhou\|Jian Zhou]] | Anhui University — low-complexity SE, spiking neural networks | 2026-08-01 |
 | [[entities/zhao-lv\|Zhao Lv]] | Anhui University — professor, speech enhancement, brain-computer interface | 2026-08-01 |
+| [[entities/rong-chao\|Rong Chao]] | NTU/Academia Sinica — first author of SEMamba (Mamba for SE) | 2026-08-03 |
+| [[entities/wen-huang-cheng\|Wen-Huang Cheng]] | National Taiwan University — co-author of SEMamba | 2026-08-03 |
+| [[entities/moreno-la-quatra\|Moreno La Quatra]] | Politecnico di Torino / U. della Calabria — co-author of SEMamba | 2026-08-03 |
+| [[entities/sabato-marco-siniscalchi\|Sabato Marco Siniscalchi]] | U. of Enna Kore / NTNU — co-author of SEMamba and S4ND-UNet | 2026-08-03 |
+| [[entities/chao-han-huck-yang\|Chao-Han Huck Yang]] | NVIDIA Research Taiwan / Georgia Tech — co-author of SEMamba and S4ND-UNet | 2026-08-03 |
+| [[entities/szu-wei-fu\|Szu-Wei Fu]] | Academia Sinica — co-author of SEMamba | 2026-08-03 |
+| [[entities/yu-tsao\|Yu Tsao]] | Academia Sinica — co-author of SEMamba | 2026-08-03 |
 
 ---
 
@@ -780,6 +787,9 @@
 | [[concepts/spiking-feature-extraction-block\|Spiking Feature Extraction Block]] | Three-branch residual spiking block (LIF + continuous path) mitigating binary-activation information loss | 2026-08-01 |
 | [[concepts/information-transformation-block\|Information Transformation Block]] | Two-branch gated refinement converting spike features back to continuous signals | 2026-08-01 |
 | [[concepts/intel-neuromorphic-dns-challenge\|Intel Neuromorphic DNS Challenge]] | SNN-SE benchmark defining power-proxy metrics (SynOPs + 10×NeuronOPs, PDP) on Intel Loihi energy accounting | 2026-08-01 |
+| [[concepts/mamba\|Mamba]] | Selective state-space model with input-dependent parameters and linear-time scan | 2026-08-03 |
+| [[concepts/semamba\|SEMamba]] | First Mamba-based speech enhancement system; SOTA PESQ 3.69 on VoiceBank-DEMAND with PCS | 2026-08-03 |
+| [[concepts/perceptual-contrast-stretching\|Perceptual Contrast Stretching (PCS)]] | Post-enhancement spectral stretching by perceptual importance; lifts SEMamba PESQ to 3.69 | 2026-08-03 |
 
 ---
 
@@ -932,6 +942,7 @@
 | [[sources/liu-2021-igcrn\|Liu & Zhang 2021: IGCRN — Inplace Gated Convolutional Recurrent Neural Network]] | Compact end-to-end dual-channel SE that mirrors the beamforming pipeline (DOA → beamforming → post-filter) inside a CRN; inplace convolutions + channel-wise LSTM reused across frequency bins; 1.4M params, outperforms oracle-DOA MVDR and GCRN. | 2026-08-01 |
 | [[sources/zhao-2024-sicrn\|Zhao, He & Zhang 2024: SICRN — State Space Model + Inplace Convolution for Speech Enhancement]] | S4ND + 2D inplace conv (SIC block) CRN; near-FullSubNet quality on DNS Challenge at 0.38× params, 0.14× MACs, 0 ms look-ahead. | 2026-08-01 |
 | [[sources/liu-2026-sse-net\|Liu et al. 2026: SSE-Net]] | SSE-Net — first spike-native SNN-SE architecture (SFEB/ITB); SOTA among SNN-SE models with 62% lower power proxy than Spiking-FullSubNet (19.70 M Ops/s), 0.44 G/s MACs | 2026-08-01 |
+| [[sources/chao-2024-mamba-speech-enhancement\|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] | First Mamba-based SE system (SEMamba); basic + advanced configs; SOTA PESQ 3.69 on VoiceBank-DEMAND with PCS | 2026-08-03 |
 
 ---
 
@@ -982,10 +993,10 @@
 
 ## Statistics
 
-- **Total pages**: 931
-- **Entities**: 398
-- **Concepts**: 363
-- **Sources**: 143
+- **Total pages**: 942
+- **Entities**: 405
+- **Concepts**: 366
+- **Sources**: 144
 - **Synthesis**: 20
 - **Queries**: 7
-- **Last updated**: 2026-08-01
+- **Last updated**: 2026-08-03

@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-08-03
 sources:
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
 tags:
@@ -66,10 +66,12 @@ Expansion factor $K = 2.0$ for both variants. The auxiliary network (speaker emb
 
 ## Related Concepts
 
+- [[concepts/mamba|Mamba]] — the selective SSM block used in Mamba-MinGRU
 - [[concepts/mingru|MinGRU]]
 - [[concepts/linear-recurrent-unit|Linear Recurrent Unit]]
 - [[concepts/state-space-model|State-Space Model]]
 - [[concepts/own-voice-cancellation|Own-Voice Cancellation (OVC)]]
+- [[concepts/semamba|SEMamba]] — the other Mamba-based SE system in this wiki; STFT-domain (vs. Mamba-MinGRU's time-domain)
 - [[concepts/td-speakerbeam|TD-SpeakerBeam]]
 - [[concepts/time-domain-speech-enhancement|Time-Domain Speech Enhancement]]
 - [[concepts/speaker-embedding|Speaker Embedding]]

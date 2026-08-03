@@ -3780,3 +3780,39 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 - **Pages updated**:
   - `wiki/sources/wang-2022-fusing-bc-ac-complex-domain-se.md` — added `related_publications` frontmatter (ICASSP DOI/Zotero key) and a new `## Conference Precursor` section cross-referencing the conference paper; updated `updated:` date
 - **Cleanup**: Temporary MinerU extraction at `raw/papers/wang-2022-attention-fusion-bc-ac-icassp/` deleted after comparison.
+
+---
+
+## [2026-08-03] ingest | An Investigation of Incorporating Mamba for Speech Enhancement (Chao et al. 2024)
+
+- **Source**: `raw/papers/chao-2024-mamba-speech-enhancement/full-text.md` (arXiv:2405.06573, Zotero: KTXM4766)
+- **Authors**: Rong Chao, Wen-Huang Cheng, Moreno La Quatra, Sabato Marco Siniscalchi, Chao-Han Huck Yang, Szu-Wei Fu, Yu Tsao
+- **Published**: IEEE SLT 2024
+- **DOI**: 10.1109/SLT61566.2024.10832332
+- **Summary**: First application of Mamba (selective SSM) to speech enhancement. Proposes SEMamba in basic (magnitude-mapping) and advanced (MP-SENet-style magnitude-phase) configurations with causal/non-causal and uni-/bi-directional variants. SOTA PESQ 3.69 on VoiceBank-DEMAND with PCS; ~12% FLOPs reduction vs. Conformer at parity quality; 12.22%/12.90% relative WER reduction as Whisper ASR front-end.
+- **Pages created**:
+  - `raw/papers/chao-2024-mamba-speech-enhancement/full-text.md` — extracted text from arXiv HTML (defuddle)
+  - `wiki/sources/chao-2024-mamba-speech-enhancement.md`
+  - `wiki/entities/rong-chao.md`
+  - `wiki/entities/wen-huang-cheng.md`
+  - `wiki/entities/moreno-la-quatra.md`
+  - `wiki/entities/sabato-marco-siniscalchi.md`
+  - `wiki/entities/chao-han-huck-yang.md`
+  - `wiki/entities/szu-wei-fu.md`
+  - `wiki/entities/yu-tsao.md`
+  - `wiki/concepts/mamba.md` — selective SSM architecture (Gu & Dao 2023)
+  - `wiki/concepts/semamba.md` — first Mamba-based SE system
+  - `wiki/concepts/perceptual-contrast-stretching.md` — PCS post-processing
+- **Pages updated**:
+  - `wiki/concepts/state-space-model.md` — added Mamba and SEMamba to Deep-Learning SSM section, related concepts/sources
+  - `wiki/concepts/mp-senet.md` — expanded with architecture details, SEMamba as derived system, related concepts/sources
+  - `wiki/concepts/voicebank-demand.md` — added standard config, SOTA results table, SEMamba cross-refs
+  - `wiki/concepts/pesq.md` — added SOTA progression table on VoiceBank-DEMAND, SEMamba/PCS cross-refs
+  - `wiki/concepts/speech-enhancement.md` — added SSM-based SE sub-area, SEMamba/Mamba/PCS related concepts and source
+  - `wiki/concepts/s4nd.md` — added Mamba/SEMamba cross-references and source
+  - `wiki/concepts/mamba-mingru.md` — added Mamba and SEMamba cross-references
+  - `wiki/synthesis/computational-efficiency-evolution.md` — added "Mamba axis for high-quality SE" paragraph, SEMamba to Related Concepts and Sources
+  - `wiki/index.md` — added 7 entities, 3 concepts, 1 source; updated statistics
+  - `wiki/entities/index.md` — added 7 entity rows
+  - `wiki/concepts/index.md` — added 3 concept rows
+  - `wiki/sources/index.md` — added 1 source row

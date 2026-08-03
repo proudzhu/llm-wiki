@@ -147,4 +147,5 @@
 | [[sources/liu-2021-igcrn\|Liu & Zhang 2021: IGCRN — Inplace Gated Convolutional Recurrent Neural Network]] | Compact end-to-end dual-channel SE that mirrors the beamforming pipeline (DOA → beamforming → post-filter) inside a CRN; inplace convolutions + channel-wise LSTM reused across frequency bins; 1.4M params, outperforms oracle-DOA MVDR and GCRN. | 2026-08-01 |
 | [[sources/zhao-2024-sicrn\|Zhao, He & Zhang 2024: SICRN — State Space Model + Inplace Convolution for Speech Enhancement]] | S4ND + 2D inplace conv (SIC block) CRN; near-FullSubNet quality on DNS Challenge at 0.38× params, 0.14× MACs, 0 ms look-ahead. | 2026-08-01 |
 | [[sources/liu-2026-sse-net\|Liu et al. 2026: SSE-Net]] | SSE-Net — first spike-native SNN-SE architecture (SFEB/ITB); SOTA among SNN-SE models with 62% lower power proxy than Spiking-FullSubNet (19.70 M Ops/s), 0.44 G/s MACs | 2026-08-01 |
+| [[sources/chao-2024-mamba-speech-enhancement\|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] | First Mamba-based SE system (SEMamba); basic + advanced configs; SOTA PESQ 3.69 on VoiceBank-DEMAND with PCS | 2026-08-03 |
 

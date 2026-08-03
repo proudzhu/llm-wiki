@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-08-01
+updated: 2026-08-03
+sources:
+  - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
 tags:
   - speech-processing
   - audio-enhancement
@@ -25,6 +27,7 @@ Speech enhancement (SE) is the task of improving the perceptual quality and inte
 - Real-time low-latency enhancement
 - Low-complexity enhancement for embedded devices (e.g., [[concepts/ulcnet|ULCNet]])
 - Low-power spiking enhancement — SNN-based SE for neuromorphic/edge deployment (e.g., [[concepts/sse-net|SSE-Net]])
+- State-space-model-based enhancement — Mamba / S4ND / S4 as the core sequence model (e.g., [[concepts/semamba|SEMamba]], [[concepts/sicrn|SICRN]])
 
 ## Related Concepts
 
@@ -33,6 +36,9 @@ Speech enhancement (SE) is the task of improving the perceptual quality and inte
 - [[concepts/prior-matching|Prior Matching]]
 - [[concepts/personalized-speech-enhancement|Personalized Speech Enhancement (PSE)]]
 - [[concepts/mp-senet|MP-SENet]]
+- [[concepts/semamba|SEMamba]] — first Mamba-based SE; SOTA PESQ 3.69 on VoiceBank-DEMAND
+- [[concepts/mamba|Mamba]] — selective SSM core block used by SEMamba
+- [[concepts/perceptual-contrast-stretching|Perceptual Contrast Stretching (PCS)]] — post-processing that boosts SE PESQ
 - [[concepts/ecapa-tdnn|ECAPA-TDNN]]
 - [[concepts/ulcnet|ULCNet]]
 - [[concepts/acoustic-echo-cancellation|Acoustic Echo Cancellation]]
@@ -42,3 +48,4 @@ Speech enhancement (SE) is the task of improving the perceptual quality and inte
 - [[sources/zhu-2026-g-map-se-guided-speech-enhancement|G-MaP-SE: Guided Speech Enhancement via GMM-Based Prior Matching (Interspeech 2026)]]
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]]
 - [[sources/liu-2026-sse-net|Liu et al. 2026: SSE-Net]] — spike-native SNN-based monaural speech enhancement (SOTA among SNN-SE, power proxy 19.70 M Ops/s)
+- [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] — first Mamba-based SE; SOTA PESQ 3.69 on VoiceBank-DEMAND

@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-01
-updated: 2026-08-01
+updated: 2026-08-03
 sources:
   - raw/papers/zhao-2024-sicrn/full-text.md
+  - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
 tags:
   - neural-network
   - state-space-model
@@ -65,6 +66,8 @@ The S4ND-U-Net variant of Ku et al. (2023, arXiv:2306.00331) is referenced as pr
 ## Related Concepts
 
 - [[concepts/state-space-model|State-Space Model]] — the broader SSM family (this page covers the deep-learning SSM subfamily; the main SSM page focuses on control-theory applications)
+- [[concepts/mamba|Mamba]] — successor selective SSM that adds input-dependent filtering; S4ND's fixed-parameter counterpart
+- [[concepts/semamba|SEMamba]] — applies Mamba (a selective evolution of S4/S4ND) to speech enhancement; SOTA PESQ 3.69 on VoiceBank-DEMAND
 - [[concepts/sicrn|SICRN]] — uses S4ND as its global-feature branch
 - [[concepts/sic-block|SIC Block]] — the module that wraps S4ND + inplace convolution
 - [[concepts/mamba-mingru|Mamba-MinGRU]] — another deep-learning SSM application (selective SSM + MinGRU) in own-voice cancellation
@@ -75,3 +78,4 @@ The S4ND-U-Net variant of Ku et al. (2023, arXiv:2306.00331) is referenced as pr
 ## Related Sources
 
 - [[sources/zhao-2024-sicrn|Zhao, He & Zhang 2024: SICRN — State Space Model + Inplace Convolution for Speech Enhancement]]
+- [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] — benchmarks S4ND-UNet (an S4ND-based SE baseline) alongside the proposed SEMamba

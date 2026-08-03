@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-07-22
+updated: 2026-08-03
 sources:
 - zotero://select/items/0_WLMRLH9W
 - zotero://select/items/0_5SFJK2MD
@@ -12,6 +12,7 @@ sources:
 - zotero://select/items/0_FN59JY3C
 - zotero://select/items/0_NUV4VYRE
 - raw/papers/wang-2025-adaptive-convolution-cnn-speech-enhancement/full-text.md
+- raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
 tags:
   - lightweight-speech-enhancement
 - computational-complexity
@@ -240,6 +241,8 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 - **Event-Driven/Adaptive Rate**: Running resource-intensive modules (like virtual error estimators) at lower sample rates than the primary audio loop.
 - **Hardware-Algorithm Co-Design**: Algorithms like FEP are being designed for streaming, analog-compatible flows, where the memory bottleneck of storing hidden states is fundamentally removed.
 
+**The Mamba axis for high-quality SE.** [[concepts/semamba|SEMamba]] (Chao et al., IEEE SLT 2024) demonstrates a complementary efficiency axis: not ultra-lightweight edge SE (GTCRN / CoFi-Lite / SSE-Net class), but **attention-free SE at quality parity with Conformer/Transformer backbones at lower FLOPs**. Replacing the Conformer in [[concepts/mp-senet|MP-SENet]] with a Time-Frequency [[concepts/mamba|Mamba]] block cuts FLOPs by ~12% (65.46 G vs. 74.29 G) while slightly *raising* PESQ (3.52 vs. 3.50); the basic SEMamba configuration cuts FLOPs by 53–66% and parameters by 28–60% vs. the Transformer at equal PESQ. Combined with [[concepts/perceptual-contrast-stretching|PCS]], SEMamba sets a SOTA PESQ of 3.69 on VoiceBank-DEMAND. This positions selective SSMs (Mamba) alongside [[concepts/adaptcrn|adaptive convolution]] and [[concepts/cofi-lite|asymmetric path decoupling]] as a third Pareto-axis for SE efficiency — one that targets the **quality frontier** rather than the extreme-lightweight frontier.
+
 ---
 
 ## Related Concepts
@@ -253,6 +256,8 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 - [[concepts/model-predictive-control|Model Predictive Control]]
 - [[concepts/active-noise-control|Active Noise Control]]
 - [[concepts/state-space-model|State-Space Model]]
+- [[concepts/mamba|Mamba]] — selective SSM as a SE quality-frontier efficiency axis (SEMamba)
+- [[concepts/semamba|SEMamba]] — Mamba-based SE; SOTA PESQ 3.69 with ~12% FLOPs reduction vs. Conformer
 - [[concepts/backpropagation-through-time|Backpropagation Through Time]]
 - [[concepts/real-time-recurrent-learning|Real-Time Recurrent Learning]]
 - [[concepts/linear-recurrent-unit|Linear Recurrent Unit]]
@@ -273,3 +278,4 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 - [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]] — Hybrid neural-spatial robustness to INT8 quantization; 14× compute / 23× memory reduction vs. FP32 TANGO
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — [[concepts/adaptcrn|AdaptCRN]] introduces a fourth Pareto axis: dynamic capacity via per-frame adaptive convolution (params ↑ $K\times$, MACs ≈ flat); largest gains on lightweight backbones, diminishing and eventually prohibitive for large models.
 - [[sources/liu-2026-sse-net|Liu et al. 2026: SSE-Net]] — spike-native SNN-SE introducing the spiking/neuromorphic efficiency axis: power proxy 19.70 M Ops/s (62% below Spiking-FullSubNet), 1.31 μJ energy cost, 0.44 G/s MACs, WB-PESQ 2.89 on VoiceBank+DEMAND
+- [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] — [[concepts/semamba|SEMamba]] introduces the selective-SSM (Mamba) efficiency axis: replaces Conformer/Transformer at quality parity with 12–66% FLOPs reduction; SOTA PESQ 3.69 on VoiceBank-DEMAND with PCS
