@@ -117,6 +117,7 @@ In hearing aids, AFC uses an adaptive filter (typically PEM-NLMS) to estimate an
 - [[sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC with GRU step-size prediction
 - [[sources/ma-2027-robust-ffanc-online-path-modeling|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] — performs OFBPM adaptively during ANC operation; demonstrates that an SF-driven global AWGN scaling and a second supporting filter $H_2(z)$ keep the residual-AWGN floor low even under abrupt FBP changes
+- [[sources/mounir-2025-robust-early-howling-detection-sparsity|Mounir, Bernardi & van Waterschoot 2025]] — formalizes the PA/hearing-aid closed-loop model with the Nyquist stability criterion (loop gain ≥ 1 and loop phase = $n2\pi$) and the MSG definition; the same closed-loop instability physics underlies ANC and acoustic-howling feedback
 
 ## Related Entities
 

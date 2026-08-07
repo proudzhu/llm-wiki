@@ -3875,3 +3875,29 @@ Created [[synthesis/deep-speech-enhancement|Deep Speech Enhancement]] synthesis 
 - **Generative**: diffusion (SGMSE+) crossed one-step barrier (ROSE-CD, SBCTM, DriftSE) in 2026, but discriminative SEMamba+PCS still holds SOTA PESQ 3.69.
 
 Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zheng 2023, Rong 2024, Zhao 2024, Chao 2024, Wang 2025, Zhu 2026, Xu 2026, Yang 2026, Liu 2026, Apostolidis 2026, Østergaard 2026, Huang 2026). Defers multi-modal / joint-multitask / ANC-efficiency sub-topics to existing synthesis pages. Updated `wiki/index.md` and `wiki/synthesis/index.md` Synthesis sections; bumped Synthesis count 20→21 and Total 951→952.
+
+---
+
+## [2026-08-07] ingest | Robust and Early Howling Detection (Mounir 2025)
+
+- **Source**: `raw/papers/mounir-2025-robust-early-howling-detection-sparsity/full-text.md` (Zotero: UNDKU7LR)
+- **Authors**: Mina Mounir, Giuliano Bernardi, Toon van Waterschoot
+- **Published**: EURASIP Journal on Audio, Speech, and Music Processing, 2025-03-27
+- **DOI**: 10.1186/s13636-025-00399-1
+- **Summary**: Proposes NINOS²-T, a transposed spectral sparsity howling detection feature that removes candidate-frequency preselection to enable early-howling and ringing detection; introduces a PR-based evaluation procedure for the class-imbalanced HD problem and a larger automatically annotated HD dataset
+- **Pages created**:
+  - `raw/papers/mounir-2025-robust-early-howling-detection-sparsity/full-text.md` — extracted text via MinerU VLM
+  - `wiki/sources/mounir-2025-robust-early-howling-detection-sparsity.md`
+  - `wiki/entities/mina-mounir.md`
+  - `wiki/entities/giuliano-bernardi.md`
+  - `wiki/entities/toon-van-waterschoot.md`
+  - `wiki/concepts/howling-detection.md`
+  - `wiki/concepts/notch-filter-based-howling-suppression.md`
+  - `wiki/concepts/ninosp2-transposed.md`
+  - `wiki/concepts/howling-detection-features.md`
+- **Pages updated**:
+  - `wiki/concepts/acoustic-howling-suppression.md` — expanded Notch Filter section with NHS/NINOS²-T; added cross-refs and source link
+  - `wiki/concepts/maximum-stable-gain.md` — added source link (MSG used in HD dataset gain profiling)
+  - `wiki/concepts/acoustic-feedback.md` — added source link (Nyquist closed-loop model)
+  - `wiki/index.md` — added 3 entities, 4 concepts, 1 source; updated statistics
+  - `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added new rows

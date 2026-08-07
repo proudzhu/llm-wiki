@@ -149,4 +149,5 @@
 | [[sources/liu-2026-sse-net\|Liu et al. 2026: SSE-Net]] | SSE-Net — first spike-native SNN-SE architecture (SFEB/ITB); SOTA among SNN-SE models with 62% lower power proxy than Spiking-FullSubNet (19.70 M Ops/s), 0.44 G/s MACs | 2026-08-01 |
 | [[sources/chao-2024-mamba-speech-enhancement\|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] | First Mamba-based SE system (SEMamba); basic + advanced configs; SOTA PESQ 3.69 on VoiceBank-DEMAND with PCS | 2026-08-03 |
 | [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc\|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight SE with SSM and DSConv]] | Lightweight SE with diagonal-constrained lightS4 + DSConv + AISC; 1.65M params, 0.50G MACs, PESQ 3.32 on VoiceBank+DEMAND, ~60x MACs reduction vs SEMamba | 2026-08-03 |
+| [[sources/mounir-2025-robust-early-howling-detection-sparsity\|Mounir, Bernardi & van Waterschoot 2025: Robust and Early Howling Detection]] | NINOS²-T sparsity-based howling detection feature enabling early-howling detection; PR-based evaluation; new HD dataset | 2026-08-07 |
 

@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-15
-updated: 2026-06-10
+updated: 2026-08-07
 sources:
   - raw/papers/zhan-2025-deeppem-afc/full-text.txt
   - raw/papers/lydaki-2026-deep-feedback-cancellation-hearing-aids/full-text.md
+  - raw/papers/mounir-2025-robust-early-howling-detection-sparsity/full-text.md
 tags:
   - hearing-aids
   - feedback-cancellation
@@ -53,3 +54,4 @@ where F̂(k,l) is the estimated feedback path.
 
 - [[sources/lydaki-2026-deep-feedback-cancellation-hearing-aids|Lydaki 2026: Deep Feedback Cancellation]] — DFC achieves ~23 dB MSG for speech, ~21.5 dB for music
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — ASG and tracking time evaluation
+- [[sources/mounir-2025-robust-early-howling-detection-sparsity|Mounir, Bernardi & van Waterschoot 2025]] — uses MSG to normalize feedback paths and define the time-varying gain profile (MSG−6 dB → MSG) that triggers howling onset in the HD dataset; the howling frequency is predicted from the Nyquist criterion at $G=\mathrm{MSG}$

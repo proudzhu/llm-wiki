@@ -373,4 +373,8 @@
 | [[concepts/lights4\|lightS4]] | Diagonal-constrained S4 variant for lightweight SE; element-wise ZOH discretization + FFT global convolution | 2026-08-03 |
 | [[concepts/auditory-inspired-spectral-compressor\|Auditory-Inspired Spectral Compressor (AISC)]] | Parameter-free ERB-based dimensionality reduction; 1.5kHz perceptual split, 2.6x MACs reduction | 2026-08-03 |
 | [[concepts/classifier-loss\|Classifier Loss]] | Auxiliary speaker-classification cross-entropy loss for vocal-interference suppression; +0.16 PESQ under competing voices | 2026-08-03 |
+| [[concepts/howling-detection\|Howling Detection]] | Binary hypothesis testing to identify howling/ringing frequencies and time intervals; candidate-based vs full-grid paradigms | 2026-08-07 |
+| [[concepts/notch-filter-based-howling-suppression\|Notch-Filter-Based Howling Suppression (NHS)]] | Two-stage AHS: howling detection + adjustable notch filter bank; lowest distortion among gain-reduction methods | 2026-08-07 |
+| [[concepts/ninosp2-transposed\|NINOS²-T]] | Transposed spectral sparsity HD feature (L2/L4 norm ratio over time); normalized [0,1]; enables early-howling detection without candidate preselection | 2026-08-07 |
+| [[concepts/howling-detection-features\|Howling Detection Features]] | Spectral (PTPR, PAPR, PNPR, PHPR) and temporal (IPMP, IMSD) HD baseline features; complexity and normalization comparison | 2026-08-07 |
 

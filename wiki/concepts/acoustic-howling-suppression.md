@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-02
-updated: 2026-07-03
+updated: 2026-08-07
 sources:
   - raw/papers/zhang-2024-neural-kalman-howling/full-text.txt
   - raw/papers/zhang-2023-hybrid-ahs/full-text.txt
   - raw/papers/ashur-2026-acoustic-howling-suppression-fine-tuning/full-text.md
+  - raw/papers/mounir-2025-robust-early-howling-detection-sparsity/full-text.md
 tags:
   - acoustic-howling
   - feedback-cancellation
@@ -38,7 +39,7 @@ The recursive re-amplification of playback signal through the acoustic path $h(t
 Reduce loudspeaker gain to break the feedback loop. Simple but limits system output.
 
 ### Notch Filter
-Insert narrow-band filters at detected howling frequencies. Requires accurate howling detection.
+Insert narrow-band filters at detected howling frequencies. Requires accurate [[concepts/howling-detection|howling detection]]. This is the [[concepts/notch-filter-based-howling-suppression|NHS]] approach — a two-stage solution where a howling detection (HD) block first identifies howling components, then a bank of adjustable notch filters suppresses them. NHS achieves the lowest audio signal distortion among gain-reduction methods but is reactive (howling must be detected before suppression). Classical HD features (PTPR, PAPR, PNPR, PHPR, IPMP, IMSD) rely on candidate howling frequency preselection via magnitude-spectrum peak-picking, which structurally excludes early howling and ringing. The [[concepts/ninosp2-transposed|NINOS²-T]] feature (Mounir et al. 2025) removes the candidate-selection step by computing a transposed spectral sparsity measure over all STFT bins, enabling early-howling detection with $O(M\mathcal{Q}_M)$ complexity.
 
 ### Adaptive Feedback Cancellation (AFC)
 Use adaptive filters (e.g., Kalman filter, FxLMS) to estimate and subtract the feedback component. Real-time adaptation breaks the positive feedback loop.
@@ -64,9 +65,14 @@ Training-inference mismatch: offline training without AHS processing differs fro
 - [[concepts/self-attentive-recurrent-neural-network|Self-Attentive Recurrent Neural Network]] — Hybrid AHS neural backbone
 - [[concepts/denoiser-network|Denoiser Network (DEMUCS)]] — pretrained speech-enhancement backbone fine-tuned for AHS in Ashur & Cohen 2026
 - [[concepts/speech-enhancement|Speech Enhancement]] — the original task that fine-tuned Denoiser preserves alongside AHS
+- [[concepts/howling-detection|Howling Detection]] — the HD stage that fronts NHS
+- [[concepts/notch-filter-based-howling-suppression|Notch-Filter-Based Howling Suppression (NHS)]] — the classical two-stage HD + notch filter AHS method
+- [[concepts/howling-detection-features|Howling Detection Features]] — the spectral and temporal HD feature families used in NHS
+- [[concepts/ninosp2-transposed|NINOS²-T]] — a sparsity-based HD feature enabling early-howling detection without candidate preselection
 
 ## Related Sources
 
 - [[sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]
 - [[sources/zhang-2024-neural-kalman-howling|Zhang 2024: Neural Network Augmented Kalman Filter for AHS]]
 - [[sources/ashur-2026-acoustic-howling-suppression-fine-tuning|Ashur & Cohen 2026: AHS by Fine-Tuning Deep Speech Enhancement Networks]]
+- [[sources/mounir-2025-robust-early-howling-detection-sparsity|Mounir, Bernardi & van Waterschoot 2025]] — NINOS²-T sparsity-based HD feature for early-howling detection in NHS
