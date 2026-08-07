@@ -149,7 +149,7 @@ Setting `GIT_EDITOR='true'` bypasses the commit-message editor — the existing 
 After the rebase completes, verify the wiki still builds:
 
 ```bash
-uv run mkdocs build --strict
+uv run mkdocs build --strict --quiet
 ```
 
 A clean build exits 0 with `INFO - Documentation built in N seconds`. If warnings appear (broken links, missing pages), they indicate convention violations that need manual fixing — see the `wiki-lint` skill for health-check tooling.
@@ -205,7 +205,7 @@ uv run python .agents/skills/wiki-lint/scripts/check_index_drift.py
 uv run python .agents/skills/wiki-lint/scripts/check_statistics.py
 
 # MkDocs build (must exit 0)
-uv run mkdocs build --strict
+uv run mkdocs build --strict --quiet
 ```
 
 ## Important Notes

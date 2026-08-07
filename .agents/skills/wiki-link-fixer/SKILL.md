@@ -121,7 +121,7 @@ uv run python .agents/skills/wiki-link-fixer/scripts/classify_links.py
 
 # Confirm truly_broken count unchanged (script never touches these)
 # Confirm mkdocs still builds
-uv run mkdocs build --strict
+uv run mkdocs build --strict --quiet
 
 # Or use the bundled verifier (does both)
 uv run python .agents/skills/wiki-link-fixer/scripts/verify_fix.py
@@ -185,7 +185,7 @@ This happens when violations are in categories the fixer doesn't handle (truly b
 uv run python .agents/skills/wiki-lint/scripts/check_broken_links.py
 
 # Should exit 0
-uv run mkdocs build --strict
+uv run mkdocs build --strict --quiet
 
 # Statistics should be unchanged (link fixes don't add/remove pages)
 uv run python .agents/skills/wiki-lint/scripts/check_statistics.py

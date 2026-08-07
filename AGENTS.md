@@ -92,7 +92,7 @@ When a new source is added to `raw/`:
 10. **Update subdirectory index files**: Add new entries to `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md`, and `wiki/synthesis/index.md` (as applicable) — each subdirectory maintains its own index table mirroring the corresponding section of `wiki/index.md`
 11. **Verify**: Check that all new concepts/entities mentioned in the source page have corresponding wiki pages; create any missing ones
 12. **Update statistics**: Recount pages in each category and update the `## Statistics` section at the bottom of `wiki/index.md` (Total pages, Entities, Concepts, Sources, Synthesis, Queries, Last updated). Run `uv run python .agents/skills/wiki-lint/scripts/check_statistics.py` to verify counts match actual files.
-13. **Build sanity check (final step)**: Run `uv run mkdocs build --strict` to confirm no WARNINGs slipped through. The page-creation rules in *Link Conventions* above are designed so this step should always pass; if it does not, the offending page violated a convention and must be fixed before the ingest is complete.
+13. **Build sanity check (final step)**: Run `uv run mkdocs build --strict --quiet` to confirm no WARNINGs slipped through. The page-creation rules in *Link Conventions* above are designed so this step should always pass; if it does not, the offending page violated a convention and must be fixed before the ingest is complete.
 
 ### 2. Query Wiki
 
@@ -143,7 +143,7 @@ Periodically (when requested), health-check the wiki using the **wiki-lint skill
 
 ## Build Verification (MkDocs)
 
-After any ingest or significant edit, run `uv run mkdocs build --strict`. A clean build exits 0 with `INFO - Documentation built in N seconds`.
+After any ingest or significant edit, run `uv run mkdocs build --strict --quiet`. A clean build exits 0 with `INFO - Documentation built in N seconds`.
 
 See [BUILD.md](schema/BUILD.md) for full mechanics, link-resolution internals, and common strict-mode pitfalls.
 

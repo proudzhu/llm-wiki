@@ -58,7 +58,7 @@ Mechanical steps are automated as Python scripts in `scripts/`. Run them from th
 | `scripts/map_figures.py` | 4a | Map hash-named figure crops to "Fig. N." captions + flag unreferenced strips + verify hashes exist |
 | `scripts/update_indexes.py` | 10 | Add rows (`add`), batch-add from YAML manifest (`batch --manifest`), or recount statistics (`stats`) |
 | `scripts/append_log.py` | 11 | Append formatted entry to `wiki/log.md` |
-| `scripts/build_check.py` | 12 | Run `mkdocs build --strict` (tries `uv run` then `python -m`) |
+| `scripts/build_check.py` | 12 | Run `mkdocs build --strict --quiet` (tries `uv run` then `python -m`) |
 | `scripts/commit_ingest.py` | 13 | Stage ingest files + verify no `paper.pdf` + commit |
 
 ## References
