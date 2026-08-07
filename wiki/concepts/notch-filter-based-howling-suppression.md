@@ -3,6 +3,7 @@ type: concept
 created: 2026-08-07
 updated: 2026-08-07
 sources:
+  - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/mounir-2025-robust-early-howling-detection-sparsity/full-text.md
 tags:
   - acoustic-howling
@@ -60,6 +61,6 @@ Mounir et al. (2025) propose a **modified scheme** that omits the candidate-sele
 
 ## Related Sources
 
+- [[sources/vanwaterschoot-2011-fifty-years-afc|van Waterschoot & Moonen 2011]] — the comprehensive survey of acoustic feedback control including NHS; formalizes the two-stage NHS structure, the six HD features, and the pole-zero-placement notch-filter design
 - [[sources/mounir-2025-robust-early-howling-detection-sparsity|Mounir, Bernardi & van Waterschoot 2025]] — proposes NINOS²-T for the HD stage and a modified NHS scheme without candidate selection
 - Waterschoot & Moonen 2010, "Comparative evaluation of howling detection criteria in notch-filter-based howling suppression" (J. Audio Eng. Soc.) — the reference survey of NHS HD features
-- Waterschoot & Moonen 2011, "Fifty years of acoustic feedback control" (Proc. IEEE) — comprehensive survey of acoustic feedback control including NHS

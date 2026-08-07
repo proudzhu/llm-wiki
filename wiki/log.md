@@ -3901,3 +3901,32 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/concepts/acoustic-feedback.md` — added source link (Nyquist closed-loop model)
   - `wiki/index.md` — added 3 entities, 4 concepts, 1 source; updated statistics
   - `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added new rows
+
+---
+
+## [2026-08-07] ingest | Fifty Years of Acoustic Feedback Control (van Waterschoot & Moonen 2011)
+
+- **Source**: `raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md` (Zotero: YPB3F9QE)
+- **Authors**: Toon van Waterschoot, Marc Moonen
+- **Published**: Proceedings of the IEEE, Vol. 99, No. 2, Feb. 2011, pp. 288–327
+- **DOI**: 10.1109/JPROC.2010.2090998
+- **Summary**: Canonical five-decade survey of automatic acoustic feedback control; formalizes the PA-system closed-loop model and Nyquist stability criterion, proposes the four-category taxonomy (phase modulation, gain reduction, spatial filtering, room modeling), provides an in-depth treatment of PFC/NHS/AFC, and reports the first unified comparative evaluation (ΔMSG, SD, HOP, TRI) crowning AFC-PF (PEM-AFROW) as the practical state of the art.
+- **Pages created**:
+  - `raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md` — MinerU VLM extraction (1403 lines, 16 figures)
+  - `wiki/sources/vanwaterschoot-2011-fifty-years-afc.md`
+  - `wiki/entities/marc-moonen.md`
+  - `wiki/concepts/phase-modulating-feedback-control.md`
+  - `wiki/concepts/adaptive-feedback-cancellation.md`
+  - `wiki/concepts/decorrelation-for-afc.md`
+- **Pages updated**:
+  - `wiki/entities/toon-van-waterschoot.md` — added wikilink to the 2011 survey source page
+  - `wiki/concepts/acoustic-howling-suppression.md` — added the survey as the foundational AHS taxonomy reference
+  - `wiki/concepts/maximum-stable-gain.md` — added the general PA-system MSG definition, Schroeder's statistical bound, and the ~10 dB smoothing-limit distinction
+  - `wiki/concepts/howling-detection-features.md` — added the survey as the reference that formalizes the six-feature family
+  - `wiki/concepts/notch-filter-based-howling-suppression.md` — converted the plain-text survey mention to a wikilink; added as a source
+  - `wiki/concepts/howling-detection.md` — added the survey as the HD-stage reference
+  - `wiki/concepts/acoustic-feedback.md` — added the PA-system closed-loop formalization, Nyquist criterion, and four-category taxonomy; cross-refed PFC/AFC/decorrelation
+  - `wiki/concepts/frequency-shift-feedback-cancellation.md` — added FS's dual role as a PFC variant and an AFC decorrelator
+  - `wiki/concepts/prediction-error-method.md` — added PEM-AFROW as the AFC-PF realization; cross-refed AFC and decorrelation-for-afc
+  - `wiki/index.md` — added 1 entity, 3 concepts, 1 source; updated statistics
+  - `wiki/sources/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md` — added new rows

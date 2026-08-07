@@ -423,6 +423,7 @@
 | [[entities/mina-mounir\|Mina Mounir]] | KU Leuven — NINOS²-T howling detection feature; acoustic event detection | 2026-08-07 |
 | [[entities/giuliano-bernardi\|Giuliano Bernardi]] | KU Leuven — HD dataset creation and evaluation | 2026-08-07 |
 | [[entities/toon-van-waterschoot\|Toon van Waterschoot]] | KU Leuven — acoustic feedback control; supervised NINOS²-T research; ERC SONORA | 2026-08-07 |
+| [[entities/marc-moonen\|Marc Moonen]] | KU Leuven — co-author of the Fifty Years of Acoustic Feedback Control survey; PEM-AFROW and AFC regularization | 2026-08-07 |
 
 ---
 
@@ -805,6 +806,9 @@
 | [[concepts/notch-filter-based-howling-suppression\|Notch-Filter-Based Howling Suppression (NHS)]] | Two-stage AHS: howling detection + adjustable notch filter bank; lowest distortion among gain-reduction methods | 2026-08-07 |
 | [[concepts/ninosp2-transposed\|NINOS²-T]] | Transposed spectral sparsity HD feature (L2/L4 norm ratio over time); normalized [0,1]; enables early-howling detection without candidate preselection | 2026-08-07 |
 | [[concepts/howling-detection-features\|Howling Detection Features]] | Spectral (PTPR, PAPR, PNPR, PHPR) and temporal (IPMP, IMSD) HD baseline features; complexity and normalization comparison | 2026-08-07 |
+| [[concepts/phase-modulating-feedback-control\|Phase-Modulating Feedback Control (PFC)]] | LPTV forward-path filter that smooths loop gain and bypasses the Nyquist phase condition; unifies FS/PM/FM/AM/DM | 2026-08-07 |
+| [[concepts/adaptive-feedback-cancellation\|Adaptive Feedback Cancellation (AFC)]] | Room-modeling feedback control via an adaptive feedback-path estimate; bias problem, decorrelation, NLMS/RLS/APA, AFC-PF state of the art | 2026-08-07 |
+| [[concepts/decorrelation-for-afc\|Decorrelation for AFC]] | Two-axis taxonomy (in-loop vs in-circuit; noise/LPTV/nonlinear/delay/prefilter) for reducing AFC closed-loop identification bias | 2026-08-07 |
 
 ---
 
@@ -960,6 +964,7 @@
 | [[sources/chao-2024-mamba-speech-enhancement\|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] | First Mamba-based SE system (SEMamba); basic + advanced configs; SOTA PESQ 3.69 on VoiceBank-DEMAND with PCS | 2026-08-03 |
 | [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc\|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight SE with SSM and DSConv]] | Lightweight SE with diagonal-constrained lightS4 + DSConv + AISC; 1.65M params, 0.50G MACs, PESQ 3.32 on VoiceBank+DEMAND, ~60x MACs reduction vs SEMamba | 2026-08-03 |
 | [[sources/mounir-2025-robust-early-howling-detection-sparsity\|Mounir, Bernardi & van Waterschoot 2025: Robust and Early Howling Detection]] | NINOS²-T sparsity-based howling detection feature enabling early-howling detection; PR-based evaluation; new HD dataset | 2026-08-07 |
+| [[sources/vanwaterschoot-2011-fifty-years-afc\|van Waterschoot & Moonen 2011: Fifty Years of Acoustic Feedback Control]] | Canonical five-decade survey; four-category taxonomy (PM, gain reduction, spatial filtering, room modeling) and first comparative evaluation of PFC, NHS, and AFC | 2026-08-07 |
 
 ---
 
@@ -1011,10 +1016,10 @@
 
 ## Statistics
 
-- **Total pages**: 960
-- **Entities**: 413
-- **Concepts**: 373
-- **Sources**: 146
+- **Total pages**: 965
+- **Entities**: 414
+- **Concepts**: 376
+- **Sources**: 147
 - **Synthesis**: 21
 - **Queries**: 7
 - **Last updated**: 2026-08-07

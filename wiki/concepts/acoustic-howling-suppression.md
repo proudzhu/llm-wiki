@@ -3,6 +3,7 @@ type: concept
 created: 2026-05-02
 updated: 2026-08-07
 sources:
+  - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/zhang-2024-neural-kalman-howling/full-text.txt
   - raw/papers/zhang-2023-hybrid-ahs/full-text.txt
   - raw/papers/ashur-2026-acoustic-howling-suppression-fine-tuning/full-text.md
@@ -72,6 +73,7 @@ Training-inference mismatch: offline training without AHS processing differs fro
 
 ## Related Sources
 
+- [[sources/vanwaterschoot-2011-fifty-years-afc|van Waterschoot & Moonen 2011]] — the canonical five-decade survey; formalizes the four-category taxonomy of acoustic feedback control (PM, gain reduction, spatial filtering, room modeling) and the comparative evaluation of PFC, NHS, and AFC that structures the AHS field
 - [[sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]
 - [[sources/zhang-2024-neural-kalman-howling|Zhang 2024: Neural Network Augmented Kalman Filter for AHS]]
 - [[sources/ashur-2026-acoustic-howling-suppression-fine-tuning|Ashur & Cohen 2026: AHS by Fine-Tuning Deep Speech Enhancement Networks]]

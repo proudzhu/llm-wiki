@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-04-27
+updated: 2026-08-07
 sources:
+  - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/miran-2026-imu-feedback-cancellation/full-text.txt
 tags:
 - acoustic
@@ -43,6 +44,21 @@ W(z) = P(z) / [S(z) + F(z)·P(z)]
 ```
 
 This has both poles and zeros, making it fundamentally different from the FIR solution without feedback.
+
+## PA-System Closed-Loop Formalization
+
+In a public address (PA) / sound-reinforcement system, the same closed-loop physics produces the [[concepts/acoustic-howling-suppression|howling]] artifact. Van Waterschoot & Moonen (2011) formalize the single-channel PA system as:
+
+$$\bar{\mathbf{y}}(t) = \mathbf{F}(q,t)\bar{\mathbf{u}}(t) + \bar{\mathbf{v}}(t), \qquad \bar{\mathbf{u}}(t) = \mathbf{G}[\bar{\mathbf{y}}(t),t]$$
+
+with closed-loop frequency response $U/V = G/(1 - GF)$, where $G(\omega,t)F(\omega,t)$ is the **loop response**. The **Nyquist stability criterion** states the loop is unstable iff $|GF| \geq 1$ *and* $\angle GF = n \cdot 2\pi$; this is the common root from which all four categories of automatic feedback control are derived:
+
+- **Phase modulation** ([[concepts/phase-modulating-feedback-control|PFC]]) — bypasses the phase condition via an LPTV forward-path filter.
+- **Gain reduction** ([[concepts/notch-filter-based-howling-suppression|NHS]], AGC, AEQ) — breaks the magnitude condition by reducing gain at critical frequencies.
+- **Spatial filtering** — beamforming to reduce the loop gain.
+- **Room modeling** ([[concepts/adaptive-feedback-cancellation|AFC]]) — estimates and subtracts the feedback component, removing the coupling.
+
+The achievable amplification is bounded by the [[concepts/maximum-stable-gain|MSG]]; Schroeder's statistical room-acoustics result sets a ~10 dB upper bound for loop-gain-smoothing methods, while AFC is not bound by it.
 
 ## Solutions
 
@@ -104,6 +120,10 @@ In hearing aids, AFC uses an adaptive filter (typically PEM-NLMS) to estimate an
 - [[hearing-aid-feedback-cancellation|Hearing Aid Feedback Cancellation]]
 - [[frequency-shift-feedback-cancellation|Frequency Shift Feedback Cancellation]]
 - [[maximum-stable-gain|Maximum Stable Gain]]
+- [[phase-modulating-feedback-control|Phase-Modulating Feedback Control (PFC)]] — PA-system feedback control via loop-gain smoothing
+- [[adaptive-feedback-cancellation|Adaptive Feedback Cancellation (AFC)]] — PA/HA feedback control via feedback-path modeling
+- [[decorrelation-for-afc|Decorrelation for AFC]] — bias reduction for AFC identification
+- [[acoustic-howling-suppression|Acoustic Howling Suppression]] — the howling artifact of PA-system acoustic feedback
 
 ## Related Concepts
 
@@ -112,6 +132,7 @@ In hearing aids, AFC uses an adaptive filter (typically PEM-NLMS) to estimate an
 
 ## Related Sources
 
+- [[sources/vanwaterschoot-2011-fifty-years-afc|van Waterschoot & Moonen 2011]] — the canonical PA-system closed-loop formalization, the Nyquist stability criterion, the four-category taxonomy of feedback control, and the comparative evaluation of PFC/NHS/AFC
 - [[sources/hao-2025-l3c-deepmfc|Hao et al. 2025: L3C-DeepMFC]] — Low-latency low-complexity deep marginal feedback cancellation
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section II-D: Feedback Effects and Solutions
 - [[sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]

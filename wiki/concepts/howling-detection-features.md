@@ -3,6 +3,7 @@ type: concept
 created: 2026-08-07
 updated: 2026-08-07
 sources:
+  - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/mounir-2025-robust-early-howling-detection-sparsity/full-text.md
 tags:
   - acoustic-howling
@@ -85,5 +86,6 @@ Measures frame-wise variation of the log-magnitude slope. Expected to approach z
 
 ## Related Sources
 
+- [[sources/vanwaterschoot-2011-fifty-years-afc|van Waterschoot & Moonen 2011]] — the survey that formalizes these six features as a coherent family with explicit equations, thresholds, and complexity (Section V-B-1)
 - [[sources/mounir-2025-robust-early-howling-detection-sparsity|Mounir, Bernardi & van Waterschoot 2025]] — surveys these six baseline features and benchmarks them against NINOS²-T under the full-grid PR-based evaluation
 - Waterschoot & Moonen 2010, "Comparative evaluation of howling detection criteria in notch-filter-based howling suppression" (J. Audio Eng. Soc.) — the reference survey that established these features as the state-of-the-art baselines

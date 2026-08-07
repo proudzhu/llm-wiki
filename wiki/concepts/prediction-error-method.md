@@ -3,6 +3,7 @@ type: concept
 created: 2026-05-15
 updated: 2026-05-15
 sources:
+  - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/zhan-2025-deeppem-afc/full-text.txt
 tags:
   - adaptive-filtering
@@ -70,12 +71,15 @@ where Q is the overlap-save matrix. This reduces complexity significantly, makin
 
 - [[concepts/acoustic-feedback|Acoustic Feedback]]
 - [[concepts/adaptive-feedback-control|Adaptive Feedback Control]]
+- [[concepts/adaptive-feedback-cancellation|Adaptive Feedback Cancellation (AFC)]] — PEM-AFROW realizes the AFC-PF variant (decorrelating prefilters in the adaptive filtering circuit)
+- [[concepts/decorrelation-for-afc|Decorrelation for AFC]] — PEM-AFROW is the in-circuit decorrelation approach identified as superior by the 2011 survey
 - [[concepts/hearing-aid-feedback-cancellation|Hearing Aid Feedback Cancellation]]
 - [[concepts/frequency-shift-feedback-cancellation|Frequency Shift Feedback Cancellation]]
 - [[concepts/variable-step-size-lms|Variable Step-Size LMS]]
 
 ## Related Sources
 
+- [[sources/vanwaterschoot-2011-fifty-years-afc|van Waterschoot & Moonen 2011]] — formalizes PEM-AFROW as the decorrelating-prefilter realization (AFC-PF) for both speech (Rombouts et al.) and audio (van Waterschoot & Moonen) applications; identifies it as the practical state-of-the-art AFC variant
 - [[sources/lydaki-2026-deep-feedback-cancellation-hearing-aids|Lydaki 2026: Deep Feedback Cancellation]] — DFC as alternative to PEM-based approaches
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC with GRU step-size prediction
 - Spriet et al. 2005: Adaptive feedback cancellation in hearing aids with linear prediction of the desired signal

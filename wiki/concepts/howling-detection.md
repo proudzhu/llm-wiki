@@ -3,6 +3,7 @@ type: concept
 created: 2026-08-07
 updated: 2026-08-07
 sources:
+  - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/mounir-2025-robust-early-howling-detection-sparsity/full-text.md
 tags:
   - acoustic-howling
@@ -64,4 +65,5 @@ When the feedback path $F$ and forward path $G$ are known (e.g., in simulated da
 
 ## Related Sources
 
+- [[sources/vanwaterschoot-2011-fifty-years-afc|van Waterschoot & Moonen 2011]] — surveys HD as the front-end stage of two-stage NHS and formalizes the six classical HD features
 - [[sources/mounir-2025-robust-early-howling-detection-sparsity|Mounir, Bernardi & van Waterschoot 2025]] — proposes NINOS²-T, the full-grid PR-based evaluation, and an automatically annotated dataset
