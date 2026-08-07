@@ -5,6 +5,7 @@ updated: 2026-08-07
 sources:
   - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/miran-2026-imu-feedback-cancellation/full-text.txt
+  - raw/papers/williams-2014-acoustic-feedback-elimination/full-text.md
 tags:
 - acoustic
 - active-noise-control
@@ -129,6 +130,8 @@ In hearing aids, AFC uses an adaptive filter (typically PEM-NLMS) to estimate an
 
 - [[concepts/deep-marginal-feedback-cancellation|Deep Marginal Feedback Cancellation]]
 - [[concepts/closed-loop-fine-tuning|Closed-Loop Fine Tuning]]
+- [[concepts/ballistics-based-howling-detection|Ballistics-Based Howling Detection]] — PA-system HD front end exploiting persistence of feedback vs transience of music
+- [[concepts/trial-and-verify-notch-insertion|Trial-and-Verify Notch Insertion]] — PA-system NHS verification by probing the closed loop with a trial notch
 
 ## Related Sources
 
@@ -139,6 +142,7 @@ In hearing aids, AFC uses an adaptive filter (typically PEM-NLMS) to estimate an
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC with GRU step-size prediction
 - [[sources/ma-2027-robust-ffanc-online-path-modeling|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] — performs OFBPM adaptively during ANC operation; demonstrates that an SF-driven global AWGN scaling and a second supporting filter $H_2(z)$ keep the residual-AWGN floor low even under abrupt FBP changes
 - [[sources/mounir-2025-robust-early-howling-detection-sparsity|Mounir, Bernardi & van Waterschoot 2025]] — formalizes the PA/hearing-aid closed-loop model with the Nyquist stability criterion (loop gain ≥ 1 and loop phase = $n2\pi$) and the MSG definition; the same closed-loop instability physics underlies ANC and acoustic-howling feedback
+- [[sources/williams-2014-acoustic-feedback-elimination|Williams 2014]] — Harman patent (US 8,634,575 B2) for a two-rate NHS system: ballistics-based candidate detection + trial-and-verify notch insertion in PA/sound-reinforcement systems
 
 ## Related Entities
 

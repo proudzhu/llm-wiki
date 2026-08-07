@@ -380,4 +380,6 @@
 | [[concepts/phase-modulating-feedback-control\|Phase-Modulating Feedback Control (PFC)]] | LPTV forward-path filter that smooths loop gain and bypasses the Nyquist phase condition; unifies FS/PM/FM/AM/DM | 2026-08-07 |
 | [[concepts/adaptive-feedback-cancellation\|Adaptive Feedback Cancellation (AFC)]] | Room-modeling feedback control via an adaptive feedback-path estimate; bias problem, decorrelation, NLMS/RLS/APA, AFC-PF state of the art | 2026-08-07 |
 | [[concepts/decorrelation-for-afc\|Decorrelation for AFC]] | Two-axis taxonomy (in-loop vs in-circuit; noise/LPTV/nonlinear/delay/prefilter) for reducing AFC closed-loop identification bias | 2026-08-07 |
+| [[concepts/ballistics-based-howling-detection\|Ballistics-Based Howling Detection]] | Asymmetric per-FFT-bin attack/release filter that accumulates persistent feedback tones into prominences while releasing transient music instantly | 2026-08-07 |
+| [[concepts/trial-and-verify-notch-insertion\|Trial-and-Verify Notch Insertion]] | Closed-loop NHS verification paradigm — insert a shallow trial notch, measure amplitude reduction, deepen only if feedback is confirmed | 2026-08-07 |
 

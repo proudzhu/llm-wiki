@@ -8,6 +8,7 @@ sources:
   - raw/papers/zhang-2023-hybrid-ahs/full-text.txt
   - raw/papers/ashur-2026-acoustic-howling-suppression-fine-tuning/full-text.md
   - raw/papers/mounir-2025-robust-early-howling-detection-sparsity/full-text.md
+  - raw/papers/williams-2014-acoustic-feedback-elimination/full-text.md
 tags:
   - acoustic-howling
   - feedback-cancellation
@@ -78,3 +79,4 @@ Training-inference mismatch: offline training without AHS processing differs fro
 - [[sources/zhang-2024-neural-kalman-howling|Zhang 2024: Neural Network Augmented Kalman Filter for AHS]]
 - [[sources/ashur-2026-acoustic-howling-suppression-fine-tuning|Ashur & Cohen 2026: AHS by Fine-Tuning Deep Speech Enhancement Networks]]
 - [[sources/mounir-2025-robust-early-howling-detection-sparsity|Mounir, Bernardi & van Waterschoot 2025]] — NINOS²-T sparsity-based HD feature for early-howling detection in NHS
+- [[sources/williams-2014-acoustic-feedback-elimination|Williams 2014]] — Harman patent (US 8,634,575 B2) instantiating NHS with [[concepts/ballistics-based-howling-detection|ballistics-based HD]] and [[concepts/trial-and-verify-notch-insertion|trial-and-verify notch insertion]] for PA systems

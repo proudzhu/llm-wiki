@@ -3930,3 +3930,29 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/concepts/prediction-error-method.md` — added PEM-AFROW as the AFC-PF realization; cross-refed AFC and decorrelation-for-afc
   - `wiki/index.md` — added 1 entity, 3 concepts, 1 source; updated statistics
   - `wiki/sources/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md` — added new rows
+
+---
+
+## [2026-08-07] ingest | System for Elimination of Acoustic Feedback (Williams 2014)
+
+- **Source**: `raw/papers/williams-2014-acoustic-feedback-elimination/full-text.md` (Zotero: BGTSGWNK)
+- **Authors**: Paul Robert Williams
+- **Published**: U.S. Patent 8,634,575 B2, granted Jan. 21, 2014 (filed Oct. 27, 2009; divisional of Ser. No. 09/658,538 filed Sep. 9, 2000)
+- **Assignee**: Harman International Industries Limited (Chester, GB)
+- **URL**: https://patents.google.com/patent/US8634575B2/en
+- **Summary**: Harman patent for automatic acoustic-feedback elimination in PA/sound-reinforcement systems. Two-rate DSP: audio-rate notch-filter bank + frame-rate (11.7 Hz) analysis. Core novelties are (1) ballistics-based howling detection — an asymmetric per-FFT-bin attack/release filter (gradual attack, zero release) with frequency-dependent time constants (200 ms high / 2 s low) that turns persistent feedback tones into "prominences" while releasing transient music instantly, and (2) trial-and-verify notch insertion — a 6 dB trial notch + 500 ms test + 3 dB TESTDROP confirmation, with deepening in 6 dB steps for verified feedback and bypass for false candidates. Concrete instance of NHS in van Waterschoot & Moonen's gain-reduction category.
+- **Pages created**:
+  - `raw/papers/williams-2014-acoustic-feedback-elimination/full-text.md` — extracted text from Zotero PDF (MinerU VLM, English)
+  - `wiki/sources/williams-2014-acoustic-feedback-elimination.md`
+  - `wiki/entities/paul-robert-williams.md`
+  - `wiki/concepts/ballistics-based-howling-detection.md`
+  - `wiki/concepts/trial-and-verify-notch-insertion.md`
+- **Pages updated**:
+  - `wiki/concepts/acoustic-feedback.md` — added Williams 2014 source link and cross-refs to ballistics and trial-and-verify concepts
+  - `wiki/concepts/notch-filter-based-howling-suppression.md` — added "Concrete Patent Instance: Williams 2014" subsection mapping the patent onto the NHS pipeline; added cross-refs and source link
+  - `wiki/concepts/howling-detection.md` — noted ballistics as a temporal-persistence variant of candidate-based HD; added cross-refs and source link
+  - `wiki/concepts/acoustic-howling-suppression.md` — added Williams 2014 to Related Sources
+  - `wiki/index.md` — added 1 entity, 2 concepts, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 1 entity row
+  - `wiki/concepts/index.md` — added 2 concept rows

@@ -5,6 +5,7 @@ updated: 2026-08-07
 sources:
   - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/mounir-2025-robust-early-howling-detection-sparsity/full-text.md
+  - raw/papers/williams-2014-acoustic-feedback-elimination/full-text.md
 tags:
   - acoustic-howling
   - howling-detection
@@ -25,7 +26,7 @@ $$Y(\omega_k, t) = \sum_{n=0}^{M-1} w(t_n) y(t_n) e^{-j \omega_k t_n}, \quad k =
 
 ### Two Solution Paradigms
 
-1. **Candidate-based HD (state-of-the-art)** — magnitude-spectrum peak-picking selects a few candidate howling frequencies $\mathcal{D}_{\breve{\omega}}(t)$; discriminating features are then computed only for those candidates. This excludes low-energy howling and ringing from detection.
+1. **Candidate-based HD (state-of-the-art)** — magnitude-spectrum peak-picking selects a few candidate howling frequencies $\mathcal{D}_{\breve{\omega}}(t)$; discriminating features are then computed only for those candidates. This excludes low-energy howling and ringing from detection. A temporal-persistence variant is [[concepts/ballistics-based-howling-detection|ballistics-based howling detection]] (Williams 2014), which replaces peak-picking with an asymmetric per-bin attack/release filter so that only persistent tones accumulate into candidates.
 2. **Full-grid HD (proposed in Mounir et al. 2025)** — features are computed over *all* STFT frequency bins, treating every bin as a candidate. This enables **early howling and ringing detection** since no minimum energy is required to enter the candidate set.
 
 ### Howling Properties Exploited for Detection
@@ -59,6 +60,8 @@ When the feedback path $F$ and forward path $G$ are known (e.g., in simulated da
 - [[concepts/notch-filter-based-howling-suppression|Notch-Filter-Based Howling Suppression (NHS)]] — the solution scheme HD serves
 - [[concepts/howling-detection-features|Howling Detection Features]] — the spectral and temporal features used for HD
 - [[concepts/ninosp2-transposed|NINOS²-T]] — a sparsity-based HD feature enabling early-howling detection
+- [[concepts/ballistics-based-howling-detection|Ballistics-Based Howling Detection]] — a temporal-persistence candidate-selection front end (Williams 2014)
+- [[concepts/trial-and-verify-notch-insertion|Trial-and-Verify Notch Insertion]] — a closed-loop verification alternative to open-loop feature thresholding (Williams 2014)
 - [[concepts/acoustic-howling-suppression|Acoustic Howling Suppression]] — broader AHS context
 - [[concepts/acoustic-feedback|Acoustic Feedback]] — the closed-loop instability producing howling
 - [[concepts/maximum-stable-gain|Maximum Stable Gain]] — bounds the gain before howling onset
@@ -67,3 +70,4 @@ When the feedback path $F$ and forward path $G$ are known (e.g., in simulated da
 
 - [[sources/vanwaterschoot-2011-fifty-years-afc|van Waterschoot & Moonen 2011]] — surveys HD as the front-end stage of two-stage NHS and formalizes the six classical HD features
 - [[sources/mounir-2025-robust-early-howling-detection-sparsity|Mounir, Bernardi & van Waterschoot 2025]] — proposes NINOS²-T, the full-grid PR-based evaluation, and an automatically annotated dataset
+- [[sources/williams-2014-acoustic-feedback-elimination|Williams 2014]] — Harman patent (US 8,634,575 B2) instantiating candidate-based HD with ballistics and closed-loop trial-and-verify

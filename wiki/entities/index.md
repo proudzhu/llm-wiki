@@ -418,4 +418,5 @@
 | [[entities/giuliano-bernardi\|Giuliano Bernardi]] | KU Leuven — HD dataset creation and evaluation | 2026-08-07 |
 | [[entities/toon-van-waterschoot\|Toon van Waterschoot]] | KU Leuven — acoustic feedback control; supervised NINOS²-T research; ERC SONORA | 2026-08-07 |
 | [[entities/marc-moonen\|Marc Moonen]] | KU Leuven — co-author of the Fifty Years of Acoustic Feedback Control survey; PEM-AFROW and AFC regularization | 2026-08-07 |
+| [[entities/paul-robert-williams\|Paul Robert Williams]] | Inventor (Harman International) — ballistics-based howling detection and trial-and-verify notch insertion for PA-system acoustic feedback elimination | 2026-08-07 |
 
