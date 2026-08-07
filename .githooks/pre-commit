@@ -1,2 +1,2 @@
 #!/bin/sh
-exec uv run mkdocs build --strict
+exec uv run mkdocs build --strict --quiet
