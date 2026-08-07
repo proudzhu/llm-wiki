@@ -3846,3 +3846,32 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 5 entity rows
   - `wiki/concepts/index.md` — added 3 concept rows
+
+---
+
+## [2026-08-04] lint | Health check
+
+- **Index consistency**: All categories consistent. Main index and all subdirectory indexes match actual file counts exactly (entities 410/410, concepts 369/369, sources 145/145, synthesis 20/20, queries 7/7). No missing, phantom, or duplicate entries detected by `check_index_drift.py`.
+- **Broken links**: 130 truly broken + 278 convention violations.
+  - Truly broken: 130 — 1 placeholder `[[concepts/concept-name]]` in `wiki/synthesis/llm-wiki-best-practices.md` + 129 missing `raw/` asset references (image files not extracted/committed for jiang-2025, apostolidis-2026, ashur-2026, benslimane-2026 x2, cai-2024, chao-2024, and others). These need manual attention: delete the placeholder, and either extract the missing figures or convert the embeds to plain-text captions.
+  - Missing category prefix: 192 (auto-fixable by `wiki-link-fixer`).
+  - `wiki/` prefix: 30 (auto-fixable).
+  - `../` prefix violations: 38 (auto-fixable, resolve in MkDocs but violate vault-absolute convention).
+  - `log.md` informal refs: 18 (auto-fixable, e.g. `[[AI Assistance and Coding Skills]]` → `[[concepts/ai-assistance-and-coding-skills]]`).
+- **Duplicate entries**: 0.
+- **Orphan pages**: 1 — `sources/why-mathematica-not-simplify-sinh-arccosh` has zero inbound references from any wiki page, index, or log entry. Consider linking it from a relevant concept page or removing it.
+- **Statistics**: All stated counts match actual file counts. Entities 410=410, Concepts 369=369, Sources 145=145, Synthesis 20=20, Queries 7=7, Total pages 951=951. Last updated 2026-08-03.
+- **Actions taken**: No index rebuild needed (no drift). Convention violations (278 total: 192 missing-prefix + 30 `wiki/`-prefix + 38 `../`-prefix + 18 log.md refs) are auto-fixable via `wiki-link-fixer` skill but were not applied in this lint pass — run `uv run python .agents/skills/wiki-link-fixer/scripts/fix_links.py --dry-run` to preview, then `fix_links.py` to apply. Truly broken links (130) require manual triage: 1 placeholder to delete, 129 missing figure assets to extract or de-reference.
+
+## [2026-08-04] ingest | Synthesis — Deep Speech Enhancement
+
+Created [[synthesis/deep-speech-enhancement|Deep Speech Enhancement]] synthesis page, the umbrella architectural/methodological evolution narrative (2018→2026) tracing deep SE along six near-orthogonal axes:
+- **Training target**: pointwise masks (IBM→IRM→cIRM) → complex spectrum mapping → neighborhood filters (CCM, Deep Filtering); CRM = DF with N=1, l=0.
+- **Signal domain**: time-domain vs TF-domain converged on hybrid (time-domain arch + frequency loss; Pandey & Wang 2019).
+- **Backbone**: CRN → DPCRN/DPRNN → decoupling (CTSNet/G2Net/TaylorSENet) → Conformer/MP-SENet → Mamba/SSM (SEMamba, SICRN) → linear RNN (Mamba-MinGRU) → SNN (SSE-Net).
+- **Efficiency**: ~1000× reduction (CRN 17.58M → GTCRN 23.7K → CoFi-Lite 83K/12.87M MACs) via four orthogonal techniques (perceptual band compression, grouped conv+RNN, inplace convolution, adaptive conv).
+- **Multi-channel**: estimate-SCM→beamform (Neural VSLF) → end-to-end neural beamforming → array-invariant conditioning (Geo-DConv); output-based SE (Apostolidis 2026) inverts input-centric assumption.
+- **Conditioning**: PSE → TSE → OVC (complement); G-MaP-SE refines noisy embeddings via GMM prior matching.
+- **Generative**: diffusion (SGMSE+) crossed one-step barrier (ROSE-CD, SBCTM, DriftSE) in 2026, but discriminative SEMamba+PCS still holds SOTA PESQ 3.69.
+
+Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zheng 2023, Rong 2024, Zhao 2024, Chao 2024, Wang 2025, Zhu 2026, Xu 2026, Yang 2026, Liu 2026, Apostolidis 2026, Østergaard 2026, Huang 2026). Defers multi-modal / joint-multitask / ANC-efficiency sub-topics to existing synthesis pages. Updated `wiki/index.md` and `wiki/synthesis/index.md` Synthesis sections; bumped Synthesis count 20→21 and Total 951→952.
