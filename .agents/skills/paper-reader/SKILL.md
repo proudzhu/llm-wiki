@@ -56,6 +56,7 @@ Mechanical steps are automated as Python scripts in `scripts/`. Run them from th
 | `scripts/extract_mineru.py` | 3c | MinerU extraction + rename `images/`→`figures/` + update refs + delete PDF |
 | `scripts/extract_pdftotext.py` | 3d | pdftotext fallback (plain text, no images) + delete PDF |
 | `scripts/map_figures.py` | 4a | Map hash-named figure crops to "Fig. N." captions + flag unreferenced strips + verify hashes exist |
+| `scripts/triage_synthesis.py` | 9 | Triage synthesis pages by frontmatter-tag overlap with the source page — finds candidates to read |
 | `scripts/update_indexes.py` | 10 | Add rows (`add`), batch-add from YAML manifest (`batch --manifest`), or recount statistics (`stats`) |
 | `scripts/append_log.py` | 11 | Append formatted entry to `wiki/log.md` |
 | `scripts/build_check.py` | 12 | Run `mkdocs build --strict --quiet` (tries `uv run` then `python -m`) |
@@ -210,6 +211,17 @@ For concepts that already have pages:
 
 ### Step 9: Update Synthesis Pages
 
+**Triage procedure (do this first, cheaply)** — don't read full synthesis pages to decide. Instead, run the triage script, which reads the `tags:` from the source page frontmatter (Step 5) and from each `wiki/synthesis/*.md` frontmatter via proper YAML parsing, then prints the synthesis pages that share at least one tag:
+
+```bash
+uv run python .agents/skills/paper-reader/scripts/triage_synthesis.py --slug SLUG
+```
+
+- If the script reports **no matching synthesis pages** → skip Step 9 entirely (common for single-method papers). Move straight to Step 10.
+- If it reports **candidate page(s)** → read only those pages, then evaluate the trigger checklist below.
+
+This avoids the cost of reading long synthesis pages (some are 200–400 lines) just to decide *not* to update them. The Gil-Cacho 2009 ingest read two full synthesis pages (412 + 227 lines, zero tag overlap with the paper) to reach a "skip" decision; the triage script would have skipped both in one call.
+
 Check if any existing synthesis pages should reference this paper. Update (or create) a synthesis page if **any** of these triggers fire:
 
 1. **New data point on an existing frontier** — a new (params, MACs/s, quality) tuple or row in an existing comparison table.
@@ -330,6 +342,7 @@ Use `--no-verify` only if the pre-commit hook has environment issues unrelated t
 - **`raw/` immutability exception**: replacing remote image URLs with local paths in `full-text.md` is allowed (the immutability rule itself is in AGENTS.md Tips).
 - **Avoid `\bm{}` in LaTeX math** — MathJax does not load the `bm` package. Use `\mathbf{x}` (bold upright) or `\boldsymbol{x}` (bold italic) instead.
 - **Sequence edits to the same file** — when applying multiple edits to one page (e.g., frontmatter date + new section + Related Sources extension), issue Edit calls **sequentially, one per message**, not in parallel. Parallel Edits to the same file race and only one persists. See `pitfalls.md` #13 for the full story and recovery guidance.
+- **Todo list structure** — create one todo per workflow step (1–13), **in numerical order**, so Step 9 (synthesis) doesn't end up displaced by later-created todos. Treat Steps 3a–3e as a single "extract content" todo (pick whichever branch applies), not five separate todos. If the Step 9 grep triage finds no candidate synthesis pages, mark that todo `completed` immediately with a one-line "none relevant — grep triage" summary rather than leaving it `pending` or skipping it silently.
 
 ## Skill Self-Update
 

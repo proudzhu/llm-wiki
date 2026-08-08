@@ -16,16 +16,16 @@ sources:
 - raw/papers/jiang-2026-lightweight-speech-enhancement-ssm-dsc/full-text.md
 tags:
   - lightweight-speech-enhancement
-- computational-complexity
-- efficiency
-- fast-rls
-- gpu-dsp
-- nonlinear-filtering
-- memory-efficiency
-- real-time-systems
-- recurrent-neural-networks
-- quantization
-- model-compression
+  - computational-complexity
+  - efficiency
+  - fast-rls
+  - gpu-dsp
+  - nonlinear-filtering
+  - memory-efficiency
+  - real-time-systems
+  - recurrent-neural-networks
+  - quantization
+  - model-compression
 aliases:
 - Computational and Memory Efficiency in Adaptive Systems
 ---
