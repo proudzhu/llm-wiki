@@ -421,4 +421,8 @@
 | [[entities/paul-robert-williams\|Paul Robert Williams]] | Inventor (Harman International) — ballistics-based howling detection and trial-and-verify notch insertion for PA-system acoustic feedback elimination | 2026-08-07 |
 | [[entities/pepe-gil-cacho\|Pepe Gil-Cacho]] | KU Leuven ESAT-SCD — lead author of the RANF howling suppression method (EUSIPCO 2009). | 2026-08-08 |
 | [[entities/soren-holdt-jensen\|Søren Holdt Jensen]] | Aalborg University, Dept. Electronic Systems — co-author of the RANF howling suppression method (EUSIPCO 2009). | 2026-08-08 |
+| [[entities/gael-richard\|Gaël Richard]] | Télécom Paris — lead author of the TC-AASP 25-year retrospective; MIR, source separation, audio coding | 2026-08-08 |
+| [[entities/paris-smaragdis\|Paris Smaragdis]] | UIUC / Adobe Research — NMF and deep-learning source separation; co-author of the retrospective | 2026-08-08 |
+| [[entities/patrick-a-naylor\|Patrick A. Naylor]] | Imperial College London — dereverberation, room acoustics, Acoustic SLAM; co-author of the retrospective | 2026-08-08 |
+| [[entities/akihiko-sugiyama\|Akihiko Sugiyama]] | NEC — audio coding and digital-audio-device history; co-author of the retrospective | 2026-08-08 |
 

@@ -427,6 +427,10 @@
 | [[entities/paul-robert-williams\|Paul Robert Williams]] | Inventor (Harman International) — ballistics-based howling detection and trial-and-verify notch insertion for PA-system acoustic feedback elimination | 2026-08-07 |
 | [[entities/pepe-gil-cacho\|Pepe Gil-Cacho]] | KU Leuven ESAT-SCD — lead author of the RANF howling suppression method (EUSIPCO 2009). | 2026-08-08 |
 | [[entities/soren-holdt-jensen\|Søren Holdt Jensen]] | Aalborg University, Dept. Electronic Systems — co-author of the RANF howling suppression method (EUSIPCO 2009). | 2026-08-08 |
+| [[entities/gael-richard\|Gaël Richard]] | Télécom Paris — lead author of the TC-AASP 25-year retrospective; MIR, source separation, audio coding | 2026-08-08 |
+| [[entities/paris-smaragdis\|Paris Smaragdis]] | UIUC / Adobe Research — NMF and deep-learning source separation; co-author of the retrospective | 2026-08-08 |
+| [[entities/patrick-a-naylor\|Patrick A. Naylor]] | Imperial College London — dereverberation, room acoustics, Acoustic SLAM; co-author of the retrospective | 2026-08-08 |
+| [[entities/akihiko-sugiyama\|Akihiko Sugiyama]] | NEC — audio coding and digital-audio-device history; co-author of the retrospective | 2026-08-08 |
 
 ---
 
@@ -973,6 +977,7 @@
 | [[sources/vanwaterschoot-2011-fifty-years-afc\|van Waterschoot & Moonen 2011: Fifty Years of Acoustic Feedback Control]] | Canonical five-decade survey; four-category taxonomy (PM, gain reduction, spatial filtering, room modeling) and first comparative evaluation of PFC, NHS, and AFC | 2026-08-07 |
 | [[sources/williams-2014-acoustic-feedback-elimination\|Williams 2014: System for Elimination of Acoustic Feedback]] | Harman patent (US 8,634,575 B2) — two-rate NHS for PA systems: ballistics-based candidate detection + trial-and-verify notch insertion | 2026-08-07 |
 | [[sources/gil-cacho-2009-regularized-adaptive-notch-filters\|Gil-Cacho et al. 2009: Regularized Adaptive Notch Filters for AHS]] | Introduces RANF — three parallel direct-form ANFs with signed regularization (+λ, 0, −λ) whose coefficient convergence/divergence is used as a howling detection criterion for NHS in PA systems. | 2026-08-08 |
+| [[sources/richard-2023-audio-signal-processing-21st-century\|Richard et al. 2023: Audio Signal Processing in the 21st Century]] | TC-AASP 25-year retrospective; taxonomy of advances in coding, scene analysis, enhancement, separation, MIR, DCASE; paradigm shift to data-driven methods | 2026-08-08 |
 
 ---
 
@@ -1024,10 +1029,10 @@
 
 ## Statistics
 
-- **Total pages**: 973
-- **Entities**: 417
+- **Total pages**: 978
+- **Entities**: 421
 - **Concepts**: 379
-- **Sources**: 149
+- **Sources**: 150
 - **Synthesis**: 21
 - **Queries**: 7
 - **Last updated**: 2026-08-08

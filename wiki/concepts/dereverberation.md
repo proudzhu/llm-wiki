@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-27
-updated: 2026-07-31
+updated: 2026-08-08
 tags:
   - signal-processing
   - speech-enhancement
@@ -41,6 +41,10 @@ Key advantages: can operate blindly without DOA knowledge, requires only two mic
 | **Joint AEC+NS+DR (DeepVQE)** | Unified model with CCM for simultaneous echo/noise/reverb removal | Over 10 dB SRR improvement, real-time |
 | **Beamforming + postfilter** | Spatial filtering combined with postfiltering | Multi-channel required |
 
+## Historical Context
+
+[[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023]] position dereverberation as a blind estimation problem (no anechoic reference) that matured from a sparse late-1990s literature into a flourishing field, marked by Naylor's dedicated dereverberation book (2010) and the community-wide REVERB Challenge. In their 25-year TC-AASP retrospective, the **weighted prediction error (WPE)** method is highlighted as the dominant blind multichannel-linear-prediction approach — it introduced a nonstationary Gaussian source model and delayed prediction that protects inherent source correlations from being whitened — with subsequent work shifting toward DNN-based spectral mapping and an expected continuation toward model-based + data-driven hybrids.
+
 ## Related Concepts
 
 - [[concepts/coherent-to-diffuse-power-ratio|Coherent-to-Diffuse Power Ratio (CDR)]]
@@ -60,3 +64,4 @@ Key advantages: can operate blindly without DOA knowledge, requires only two mic
 - [[sources/schwarz-2019-dereverberation-spatial-coherence|Schwarz 2019: Dereverberation and Robust Speech Recognition]]
 - [[sources/indenbom-2023-deepvqe|Indenbom et al. 2023: DeepVQE]]
 - [[sources/choi-2021-trunet-real-time-speech-enhancement|Choi et al. 2021: TRU-Net — Real-Time Denoising and Dereverberation with Tiny Recurrent U-Net]]
+- [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023: Audio Signal Processing in the 21st Century]] — 25-year retrospective positioning WPE and the dereverberation field

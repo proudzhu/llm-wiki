@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-30
-updated: 2026-06-04
+updated: 2026-08-08
 tags:
   - researcher
   - speech-enhancement
@@ -27,6 +27,7 @@ tags:
 - Time-frequency-bin-wise linear combination of beamformers
 - SCM reconstruction for multi-source speech enhancement (Liu et al. 2026)
 - SR-SwIVA-ISS: Fast optimization for spatially regularized switching IVA (Dong et al. 2026)
+- Co-authored "Audio Signal Processing in the 21st Century" (IEEE Signal Processing Magazine 2023) — TC-AASP 25-year retrospective; the determined-separation subsection traces IVA/ILRMA/MVAE lineage — [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023]]
 
 ## Affiliations
 
@@ -41,3 +42,4 @@ tags:
 
 - [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
 - [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]
+- [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023: Audio Signal Processing in the 21st Century]]

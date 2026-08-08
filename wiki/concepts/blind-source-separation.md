@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-21
-updated: 2026-06-04
+updated: 2026-08-08
 sources:
   - raw/papers/guo-2023-iva-survey/full-text.md
   - raw/papers/dong-2026-spatially-regularized-switching-iva/full-text.md
+  - raw/papers/richard-2023-audio-signal-processing-21st-century/full-text.md
 tags:
   - signal-processing
   - audio-source-separation
@@ -49,6 +50,10 @@ $$\mathbf{x}^{(k)}[z] = \mathbf{A}^{(k)}\mathbf{s}^{(k)}[z]$$
 - Robot audition
 - Music source separation
 
+## Historical Context
+
+[[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023]] trace the 25-year evolution of audio BSS along two branches. The **determined case** moved from frequency-domain ICA (with its permutation/scaling ambiguities resolved by spatial and spectral source information) through TRINICON (an information-theoretic cost exploiting nonwhiteness, nongaussianity, and nonstationarity), IVA, ILRMA (combining ICA spatial info with NMF spectral structure), to the DNN-augmented multichannel VAE (MVAE). The **monophonic / underdetermined case** moved from trained NMF dictionaries, through W-disjoint-orthogonality binary masking and deep clustering, to discriminative mask-prediction networks (now dominant, spanning on-device enhancers and offline music-separation models used in award-winning Beatles restorations). Open questions highlighted by the retrospective include universal separators, limited-data learning, and out-of-distribution generalization.
+
 ## Related Concepts
 
 - [[concepts/independent-vector-analysis|Independent Vector Analysis]]
@@ -66,3 +71,4 @@ $$\mathbf{x}^{(k)}[z] = \mathbf{A}^{(k)}\mathbf{s}^{(k)}[z]$$
 - [[sources/nishikori-2026-fast-multichannel-nmf-block-diagonal-scm-bss|Nishikori et al. 2026: Distributed FastMNMF for BSS]]
 - [[sources/wang-2026-cross-talk-speech-reduction-separation|Wang & Cornell 2026: Cross-Talk Speech Reduction]]
 - [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]
+- [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023: Audio Signal Processing in the 21st Century]] — 25-year retrospective tracing the determined and monophonic BSS lineages

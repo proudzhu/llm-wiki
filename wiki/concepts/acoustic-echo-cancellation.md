@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-06-06
-updated: 2026-07-17
+updated: 2026-08-08
 tags:
   - speech-enhancement
   - echo-cancellation
@@ -69,6 +69,10 @@ A complementary line of work targets ultra-low-complexity AEC for edge devices. 
 
 EchoFree achieves DeepVQE-S-comparable single-talk performance at ~10× lower compute via three combined techniques: [[concepts/bark-scale-spectral-features|Bark-scale]] input compression (257 → 100), a [[concepts/u-net-post-filter|U-Net post filter]] with [[concepts/depthwise-separable-convolution|depthwise separable convolutions]] and [[concepts/sub-pixel-convolution|sub-pixel upsampling]], and a two-stage training strategy using frozen [[concepts/self-supervised-speech-representation|WavLM-Large SSL embeddings]] for coarse-to-fine spectral learning.
 
+## Historical Context
+
+[[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023]] trace AEC from its 1960s origins through the adaptive-filter generation already surveyed at the SPS 50th anniversary (RLS, affine projection, subband, and frequency-domain adaptive filters, plus double-talk detectors) that made hands-free telephony and modern videoconferencing possible. Subsequent advances tackled loudspeaker/microphone nonlinearities (including DNN-based nonlinear AEC), combined AEC + dereverberation + noise-reduction postfiltering, multichannel and MIMO/wave-domain AEC, and step-size control evolving from double-talk detection through Kalman-filter-based schemes to Kalman + deep-learning step-size optimization. The International Workshop on Acoustic Echo and Noise Control (IWAENC, 1989→, later renamed International Workshop on Acoustic Signal Enhancement) tracks the field.
+
 ## Related Concepts
 
 - [[concepts/cross-attention-alignment|Cross-Attention Alignment]]
@@ -95,3 +99,4 @@ EchoFree achieves DeepVQE-S-comparable single-talk performance at ~10× lower co
 - [[sources/li-2025-echofree-neural-aec|Li et al. 2025: EchoFree]]
 - [[sources/castelli-2025-embedded-joint-aec-ns|Castelli 2024: Embedded Joint AEC and NS]]
 - [[sources/scarpiniti-2027-physics-informed-adaptive-filtering-aec|Scarpiniti, Comminiello & Uncini 2027: Physics-informed adaptive filtering for AEC]]
+- [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023: Audio Signal Processing in the 21st Century]] — 25-year retrospective of the AEC field and the IWAENC workshop series

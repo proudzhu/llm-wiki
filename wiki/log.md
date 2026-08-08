@@ -3983,3 +3983,32 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/entities/index.md` — added 2 entity rows
   - `wiki/concepts/index.md` — added 1 concept row
   - `wiki/sources/index.md` — added 1 source row
+
+---
+
+## [2026-08-08] ingest | Audio Signal Processing in the 21st Century (Richard et al. 2023)
+
+- **Source**: `raw/papers/richard-2023-audio-signal-processing-21st-century/full-text.md` (Zotero: 6DW9CX6C)
+- **Authors**: Gaël Richard, Paris Smaragdis, Sharon Gannot, Patrick A. Naylor, Shoji Makino, Walter Kellermann, Akihiko Sugiyama
+- **Published**: IEEE Signal Processing Magazine 2023 (TC-AASP 25-years retrospective)
+- **DOI**: 10.1109/MSP.2023.3276171
+- **Summary**: 25-year retrospective of the IEEE TC-AASP, extending the 1997 Kahrs et al. survey; two-axis taxonomy (advances by problem domain + emerging topics) tracing the paradigm shift to data-driven/deep-learning methods across coding, acoustic-environment modeling, scene analysis/synthesis, enhancement (AEC, feedback/ANC, dereverberation, noise suppression, beamforming, audio-visual), separation (determined ICA/IVA/ILRMA/MVAE + monophonic NMF/deep-clustering/discriminative), objective evaluation, MIR, and DCASE; perspectives on hybrid model-based DNNs, federated learning, and multimodal processing.
+- **Pages created**:
+  - `raw/papers/richard-2023-audio-signal-processing-21st-century/full-text.md` — extracted text via MinerU VLM (5 figures)
+  - `wiki/sources/richard-2023-audio-signal-processing-21st-century.md` — review-structure source page (Taxonomy / Methodology / Applications Survey table / Key Contributions / Limitations)
+  - `wiki/entities/gael-richard.md`
+  - `wiki/entities/paris-smaragdis.md`
+  - `wiki/entities/patrick-a-naylor.md`
+  - `wiki/entities/akihiko-sugiyama.md`
+- **Pages updated**:
+  - `wiki/entities/shoji-makino.md` — appended retrospective contribution + Related Sources link
+  - `wiki/entities/walter-kellermann.md` — appended retrospective contribution + source in frontmatter
+  - `wiki/entities/sharon-gannot.md` — appended retrospective contribution
+  - `wiki/concepts/dereverberation.md` — added Historical Context section (WPE lineage) + Key Sources link
+  - `wiki/concepts/blind-source-separation.md` — added Historical Context section (ICA→DNN evolution) + Related Sources link + frontmatter source
+  - `wiki/concepts/acoustic-echo-cancellation.md` — added Historical Context section (AEC field + IWAENC) + Related Sources link
+  - `wiki/index.md` — added 4 entities, 1 source; updated statistics (total=978)
+  - `wiki/entities/index.md` — added 4 entity rows
+  - `wiki/sources/index.md` — added 1 source row
+- **Synthesis**: triage found 10 candidate pages (top: deep-speech-enhancement.md, 3 shared tags); all skipped — retrospective is high-level and adds no new frontier data point / axis / claim-refinement beyond already-cited Wang 2018 and Zheng 2023.
+- **Concepts**: no new concept pages created (stricter review-paper threshold — survey surveys but does not distinctively contribute individual algorithms).
