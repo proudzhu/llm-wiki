@@ -431,6 +431,12 @@
 | [[entities/paris-smaragdis\|Paris Smaragdis]] | UIUC / Adobe Research — NMF and deep-learning source separation; co-author of the retrospective | 2026-08-08 |
 | [[entities/patrick-a-naylor\|Patrick A. Naylor]] | Imperial College London — dereverberation, room acoustics, Acoustic SLAM; co-author of the retrospective | 2026-08-08 |
 | [[entities/akihiko-sugiyama\|Akihiko Sugiyama]] | NEC — audio coding and digital-audio-device history; co-author of the retrospective | 2026-08-08 |
+| [[entities/jason-wung\|Jason Wung]] | Georgia Tech — first author, system approach to RES | 2026-08-08 |
+| [[entities/ted-wada\|Ted S. Wada]] | Georgia Tech — robust AEC with ERN (WASPAA 2009) | 2026-08-08 |
+| [[entities/biing-hwang-juang\|Biing-Hwang (Fred) Juang]] | Georgia Tech — senior author, robust AEC + RES system | 2026-08-08 |
+| [[entities/bowon-lee\|Bowon Lee]] | HP Labs — co-author, RES for hands-free teleconferencing | 2026-08-08 |
+| [[entities/ton-kalker\|Ton Kalker]] | HP Labs — co-author, RES for hands-free teleconferencing | 2026-08-08 |
+| [[entities/ronald-schafer\|Ronald W. Schafer]] | HP Labs — DSP pioneer, co-author of system-approach RES | 2026-08-08 |
 
 ---
 
@@ -819,6 +825,9 @@
 | [[concepts/ballistics-based-howling-detection\|Ballistics-Based Howling Detection]] | Asymmetric per-FFT-bin attack/release filter that accumulates persistent feedback tones into prominences while releasing transient music instantly | 2026-08-07 |
 | [[concepts/trial-and-verify-notch-insertion\|Trial-and-Verify Notch Insertion]] | Closed-loop NHS verification paradigm — insert a shallow trial notch, measure amplitude reduction, deepen only if feedback is confirmed | 2026-08-07 |
 | [[concepts/regularized-adaptive-notch-filter\|Regularized Adaptive Notch Filter (RANF)]] | ANF-based one-stage NHS variant: three parallel signed-regularization ANFs whose coefficient convergence detects howling without power-spectrum analysis (Gil-Cacho et al. 2009). | 2026-08-08 |
+| [[concepts/residual-echo-suppression\|Residual Echo Suppression (RES)]] | Post-AEC stage attenuating residual echo; system approach via LSA−AEC echo difference | 2026-08-08 |
+| [[concepts/psychoacoustic-postfilter\|Psychoacoustic Postfilter]] | Masking-threshold-driven spectral gain suppressing residual echo without audible distortion | 2026-08-08 |
+| [[concepts/error-recovery-nonlinearity\|Error Recovery Nonlinearity (ERN)]] | Nonlinear AEC stage enabling DTD-free adaptation during double talk via batch adaptation | 2026-08-08 |
 
 ---
 
@@ -978,6 +987,7 @@
 | [[sources/williams-2014-acoustic-feedback-elimination\|Williams 2014: System for Elimination of Acoustic Feedback]] | Harman patent (US 8,634,575 B2) — two-rate NHS for PA systems: ballistics-based candidate detection + trial-and-verify notch insertion | 2026-08-07 |
 | [[sources/gil-cacho-2009-regularized-adaptive-notch-filters\|Gil-Cacho et al. 2009: Regularized Adaptive Notch Filters for AHS]] | Introduces RANF — three parallel direct-form ANFs with signed regularization (+λ, 0, −λ) whose coefficient convergence/divergence is used as a howling detection criterion for NHS in PA systems. | 2026-08-08 |
 | [[sources/richard-2023-audio-signal-processing-21st-century\|Richard et al. 2023: Audio Signal Processing in the 21st Century]] | TC-AASP 25-year retrospective; taxonomy of advances in coding, scene analysis, enhancement, separation, MIR, DCASE; paradigm shift to data-driven methods | 2026-08-08 |
+| [[sources/wung-2011-residual-echo-suppression-system\|Wung et al. 2011: A System Approach to RES]] | System-level residual echo estimate (LSA echo − AEC echo) with psychoacoustic postfilter; robust AEC w/ ERN, no DTD | 2026-08-08 |
 
 ---
 
@@ -1029,10 +1039,10 @@
 
 ## Statistics
 
-- **Total pages**: 978
-- **Entities**: 421
-- **Concepts**: 379
-- **Sources**: 150
+- **Total pages**: 988
+- **Entities**: 427
+- **Concepts**: 382
+- **Sources**: 151
 - **Synthesis**: 21
 - **Queries**: 7
 - **Last updated**: 2026-08-08

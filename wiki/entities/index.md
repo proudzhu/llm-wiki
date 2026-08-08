@@ -425,4 +425,10 @@
 | [[entities/paris-smaragdis\|Paris Smaragdis]] | UIUC / Adobe Research — NMF and deep-learning source separation; co-author of the retrospective | 2026-08-08 |
 | [[entities/patrick-a-naylor\|Patrick A. Naylor]] | Imperial College London — dereverberation, room acoustics, Acoustic SLAM; co-author of the retrospective | 2026-08-08 |
 | [[entities/akihiko-sugiyama\|Akihiko Sugiyama]] | NEC — audio coding and digital-audio-device history; co-author of the retrospective | 2026-08-08 |
+| [[entities/jason-wung\|Jason Wung]] | Georgia Tech — first author, system approach to RES | 2026-08-08 |
+| [[entities/ted-wada\|Ted S. Wada]] | Georgia Tech — robust AEC with ERN (WASPAA 2009) | 2026-08-08 |
+| [[entities/biing-hwang-juang\|Biing-Hwang (Fred) Juang]] | Georgia Tech — senior author, robust AEC + RES system | 2026-08-08 |
+| [[entities/bowon-lee\|Bowon Lee]] | HP Labs — co-author, RES for hands-free teleconferencing | 2026-08-08 |
+| [[entities/ton-kalker\|Ton Kalker]] | HP Labs — co-author, RES for hands-free teleconferencing | 2026-08-08 |
+| [[entities/ronald-schafer\|Ronald W. Schafer]] | HP Labs — DSP pioneer, co-author of system-approach RES | 2026-08-08 |
 

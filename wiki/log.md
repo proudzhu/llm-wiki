@@ -4012,3 +4012,29 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/sources/index.md` — added 1 source row
 - **Synthesis**: triage found 10 candidate pages (top: deep-speech-enhancement.md, 3 shared tags); all skipped — retrospective is high-level and adds no new frontier data point / axis / claim-refinement beyond already-cited Wang 2018 and Zheng 2023.
 - **Concepts**: no new concept pages created (stricter review-paper threshold — survey surveys but does not distinctively contribute individual algorithms).
+
+---
+
+## [2026-08-08] ingest | A System Approach to Residual Echo Suppression (Wung et al. 2011)
+
+- **Source**: `raw/papers/wung-2011-residual-echo-suppression-system/full-text.md` (Zotero: PUI8FYUL)
+- **Authors**: Jason Wung, Ted S. Wada, Biing-Hwang (Fred) Juang, Bowon Lee, Ton Kalker, Ronald W. Schafer
+- **Published**: Proc. IEEE ICASSP 2011, pp. 4456–4459
+- **DOI**: 10.1109/ICASSP.2011.5946436
+- **Summary**: System approach to residual echo suppression combining a robust AEC (ERN + batch adaptation, no DTD), a system-level residual echo estimate (LSA nonlinear echo − AEC linear echo), and a psychoacoustic postfilter with MPEG-1 Model 2 masking. Outperforms ETF+CF baseline on SSRR/LSD/PESQ; raises PESQ by up to 0.53 over unprocessed robust AEC.
+- **Pages created**:
+  - `raw/papers/wung-2011-residual-echo-suppression-system/full-text.md` — extracted text via MinerU VLM
+  - `wiki/sources/wung-2011-residual-echo-suppression-system.md`
+  - `wiki/entities/jason-wung.md`
+  - `wiki/entities/ted-wada.md`
+  - `wiki/entities/biing-hwang-juang.md`
+  - `wiki/entities/bowon-lee.md`
+  - `wiki/entities/ton-kalker.md`
+  - `wiki/entities/ronald-schafer.md`
+  - `wiki/concepts/residual-echo-suppression.md`
+  - `wiki/concepts/psychoacoustic-postfilter.md`
+  - `wiki/concepts/error-recovery-nonlinearity.md`
+- **Pages updated**:
+  - `wiki/concepts/acoustic-echo-cancellation.md` — added cross-refs to RES, psychoacoustic postfilter, ERN; added Wung 2011 to Related Sources
+  - `wiki/index.md` — added 6 entities, 3 concepts, 1 source; updated statistics (total=988)
+  - `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added rows

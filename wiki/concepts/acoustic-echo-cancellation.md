@@ -90,6 +90,9 @@ EchoFree achieves DeepVQE-S-comparable single-talk performance at ~10× lower co
 - [[concepts/sub-pixel-convolution|Sub-Pixel Convolution]]
 - [[concepts/frequency-domain-kalman-filter|Frequency-Domain Kalman Filter]]
 - [[concepts/pi-nlms|Physics-Informed NLMS (PI-NLMS)]]
+- [[concepts/residual-echo-suppression|Residual Echo Suppression]]
+- [[concepts/psychoacoustic-postfilter|Psychoacoustic Postfilter]]
+- [[concepts/error-recovery-nonlinearity|Error Recovery Nonlinearity (ERN)]]
 
 ## Related Sources
 
@@ -100,3 +103,4 @@ EchoFree achieves DeepVQE-S-comparable single-talk performance at ~10× lower co
 - [[sources/castelli-2025-embedded-joint-aec-ns|Castelli 2024: Embedded Joint AEC and NS]]
 - [[sources/scarpiniti-2027-physics-informed-adaptive-filtering-aec|Scarpiniti, Comminiello & Uncini 2027: Physics-informed adaptive filtering for AEC]]
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023: Audio Signal Processing in the 21st Century]] — 25-year retrospective of the AEC field and the IWAENC workshop series
+- [[sources/wung-2011-residual-echo-suppression-system|Wung et al. 2011: A System Approach to RES]] — robust AEC with ERN + batch adaptation (DTD-free) feeding a system-level residual echo estimate and psychoacoustic postfilter
