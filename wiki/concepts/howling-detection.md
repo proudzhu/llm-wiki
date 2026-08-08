@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-08-07
-updated: 2026-08-07
+updated: 2026-08-08
 sources:
   - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/mounir-2025-robust-early-howling-detection-sparsity/full-text.md
   - raw/papers/williams-2014-acoustic-feedback-elimination/full-text.md
+  - raw/papers/gil-cacho-2009-regularized-adaptive-notch-filters/full-text.md
 tags:
   - acoustic-howling
   - howling-detection
@@ -28,6 +29,10 @@ $$Y(\omega_k, t) = \sum_{n=0}^{M-1} w(t_n) y(t_n) e^{-j \omega_k t_n}, \quad k =
 
 1. **Candidate-based HD (state-of-the-art)** — magnitude-spectrum peak-picking selects a few candidate howling frequencies $\mathcal{D}_{\breve{\omega}}(t)$; discriminating features are then computed only for those candidates. This excludes low-energy howling and ringing from detection. A temporal-persistence variant is [[concepts/ballistics-based-howling-detection|ballistics-based howling detection]] (Williams 2014), which replaces peak-picking with an asymmetric per-bin attack/release filter so that only persistent tones accumulate into candidates.
 2. **Full-grid HD (proposed in Mounir et al. 2025)** — features are computed over *all* STFT frequency bins, treating every bin as a candidate. This enables **early howling and ringing detection** since no minimum energy is required to enter the candidate set.
+
+### ANF-Based Convergence Detection (Gil-Cacho et al. 2009)
+
+A third paradigm, distinct from both candidate-based and full-grid spectral HD, is **ANF-based convergence detection**. [[sources/gil-cacho-2009-regularized-adaptive-notch-filters|Gil-Cacho et al. 2009]] run three direct-form adaptive notch filters in parallel with signed regularization ($+\lambda$, $0$, $-\lambda$). Because the signed regularization leaks or accumulates the coefficient estimates in opposite directions when no tonal component dominates, the three frequency estimates **diverge** when howling is absent and **converge** to a common value when howling is present. Howling is declared when at least two of the three estimates agree within a frequency threshold (e.g. 5 Hz) over a short block ($L = 5$ samples ≈ 0.3 ms at 16 kHz). This avoids power-spectrum analysis entirely — and hence the candidate-preselection question — at the cost of direct-form ANF instability near $0$ and $f_s/2$. See [[concepts/regularized-adaptive-notch-filter|RANF]].
 
 ### Howling Properties Exploited for Detection
 
@@ -65,9 +70,11 @@ When the feedback path $F$ and forward path $G$ are known (e.g., in simulated da
 - [[concepts/acoustic-howling-suppression|Acoustic Howling Suppression]] — broader AHS context
 - [[concepts/acoustic-feedback|Acoustic Feedback]] — the closed-loop instability producing howling
 - [[concepts/maximum-stable-gain|Maximum Stable Gain]] — bounds the gain before howling onset
+- [[concepts/regularized-adaptive-notch-filter|Regularized Adaptive Notch Filter (RANF)]] — ANF-based convergence detection paradigm (Gil-Cacho et al. 2009)
 
 ## Related Sources
 
 - [[sources/vanwaterschoot-2011-fifty-years-afc|van Waterschoot & Moonen 2011]] — surveys HD as the front-end stage of two-stage NHS and formalizes the six classical HD features
 - [[sources/mounir-2025-robust-early-howling-detection-sparsity|Mounir, Bernardi & van Waterschoot 2025]] — proposes NINOS²-T, the full-grid PR-based evaluation, and an automatically annotated dataset
 - [[sources/williams-2014-acoustic-feedback-elimination|Williams 2014]] — Harman patent (US 8,634,575 B2) instantiating candidate-based HD with ballistics and closed-loop trial-and-verify
+- [[sources/gil-cacho-2009-regularized-adaptive-notch-filters|Gil-Cacho et al. 2009]] — ANF-based convergence detection paradigm (RANF): three signed-regularization ANFs whose coefficient agreement detects howling without power-spectrum analysis

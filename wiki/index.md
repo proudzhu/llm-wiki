@@ -425,6 +425,8 @@
 | [[entities/toon-van-waterschoot\|Toon van Waterschoot]] | KU Leuven — acoustic feedback control; supervised NINOS²-T research; ERC SONORA | 2026-08-07 |
 | [[entities/marc-moonen\|Marc Moonen]] | KU Leuven — co-author of the Fifty Years of Acoustic Feedback Control survey; PEM-AFROW and AFC regularization | 2026-08-07 |
 | [[entities/paul-robert-williams\|Paul Robert Williams]] | Inventor (Harman International) — ballistics-based howling detection and trial-and-verify notch insertion for PA-system acoustic feedback elimination | 2026-08-07 |
+| [[entities/pepe-gil-cacho\|Pepe Gil-Cacho]] | KU Leuven ESAT-SCD — lead author of the RANF howling suppression method (EUSIPCO 2009). | 2026-08-08 |
+| [[entities/soren-holdt-jensen\|Søren Holdt Jensen]] | Aalborg University, Dept. Electronic Systems — co-author of the RANF howling suppression method (EUSIPCO 2009). | 2026-08-08 |
 
 ---
 
@@ -812,6 +814,7 @@
 | [[concepts/decorrelation-for-afc\|Decorrelation for AFC]] | Two-axis taxonomy (in-loop vs in-circuit; noise/LPTV/nonlinear/delay/prefilter) for reducing AFC closed-loop identification bias | 2026-08-07 |
 | [[concepts/ballistics-based-howling-detection\|Ballistics-Based Howling Detection]] | Asymmetric per-FFT-bin attack/release filter that accumulates persistent feedback tones into prominences while releasing transient music instantly | 2026-08-07 |
 | [[concepts/trial-and-verify-notch-insertion\|Trial-and-Verify Notch Insertion]] | Closed-loop NHS verification paradigm — insert a shallow trial notch, measure amplitude reduction, deepen only if feedback is confirmed | 2026-08-07 |
+| [[concepts/regularized-adaptive-notch-filter\|Regularized Adaptive Notch Filter (RANF)]] | ANF-based one-stage NHS variant: three parallel signed-regularization ANFs whose coefficient convergence detects howling without power-spectrum analysis (Gil-Cacho et al. 2009). | 2026-08-08 |
 
 ---
 
@@ -969,6 +972,7 @@
 | [[sources/mounir-2025-robust-early-howling-detection-sparsity\|Mounir, Bernardi & van Waterschoot 2025: Robust and Early Howling Detection]] | NINOS²-T sparsity-based howling detection feature enabling early-howling detection; PR-based evaluation; new HD dataset | 2026-08-07 |
 | [[sources/vanwaterschoot-2011-fifty-years-afc\|van Waterschoot & Moonen 2011: Fifty Years of Acoustic Feedback Control]] | Canonical five-decade survey; four-category taxonomy (PM, gain reduction, spatial filtering, room modeling) and first comparative evaluation of PFC, NHS, and AFC | 2026-08-07 |
 | [[sources/williams-2014-acoustic-feedback-elimination\|Williams 2014: System for Elimination of Acoustic Feedback]] | Harman patent (US 8,634,575 B2) — two-rate NHS for PA systems: ballistics-based candidate detection + trial-and-verify notch insertion | 2026-08-07 |
+| [[sources/gil-cacho-2009-regularized-adaptive-notch-filters\|Gil-Cacho et al. 2009: Regularized Adaptive Notch Filters for AHS]] | Introduces RANF — three parallel direct-form ANFs with signed regularization (+λ, 0, −λ) whose coefficient convergence/divergence is used as a howling detection criterion for NHS in PA systems. | 2026-08-08 |
 
 ---
 
@@ -1020,10 +1024,10 @@
 
 ## Statistics
 
-- **Total pages**: 969
-- **Entities**: 415
-- **Concepts**: 378
-- **Sources**: 148
+- **Total pages**: 973
+- **Entities**: 417
+- **Concepts**: 379
+- **Sources**: 149
 - **Synthesis**: 21
 - **Queries**: 7
-- **Last updated**: 2026-08-07
+- **Last updated**: 2026-08-08

@@ -382,4 +382,5 @@
 | [[concepts/decorrelation-for-afc\|Decorrelation for AFC]] | Two-axis taxonomy (in-loop vs in-circuit; noise/LPTV/nonlinear/delay/prefilter) for reducing AFC closed-loop identification bias | 2026-08-07 |
 | [[concepts/ballistics-based-howling-detection\|Ballistics-Based Howling Detection]] | Asymmetric per-FFT-bin attack/release filter that accumulates persistent feedback tones into prominences while releasing transient music instantly | 2026-08-07 |
 | [[concepts/trial-and-verify-notch-insertion\|Trial-and-Verify Notch Insertion]] | Closed-loop NHS verification paradigm — insert a shallow trial notch, measure amplitude reduction, deepen only if feedback is confirmed | 2026-08-07 |
+| [[concepts/regularized-adaptive-notch-filter\|Regularized Adaptive Notch Filter (RANF)]] | ANF-based one-stage NHS variant: three parallel signed-regularization ANFs whose coefficient convergence detects howling without power-spectrum analysis (Gil-Cacho et al. 2009). | 2026-08-08 |
 

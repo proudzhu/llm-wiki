@@ -3956,3 +3956,30 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 1 entity row
   - `wiki/concepts/index.md` — added 2 concept rows
+
+---
+
+## [2026-08-08] ingest | Regularized Adaptive Notch Filters for Acoustic Howling Suppression (Gil-Cacho et al. 2009)
+
+- **Source**: `raw/papers/gil-cacho-2009-regularized-adaptive-notch-filters/full-text.md` (Zotero: D4RBAKAU)
+- **Authors**: Pepe Gil-Cacho, Toon van Waterschoot, Marc Moonen, Søren Holdt Jensen
+- **Published**: Proc. 17th European Signal Processing Conference (EUSIPCO '09), Glasgow, Scotland, August 2009
+- **URL**: https://ieeexplore.ieee.org/abstract/document/7077829
+- **Summary**: Introduces the Regularized Adaptive Notch Filter (RANF) — three parallel direct-form ANFs with signed regularization (+λ, 0, −λ) whose coefficient convergence/divergence is used as a howling detection criterion, giving ANF-based NHS a detection capability comparable to FFT-based methods while preserving minimum delay and low complexity. Fails for howling near 0 or f_s/2 due to direct-form ANF instability.
+- **Pages created**:
+  - `raw/papers/gil-cacho-2009-regularized-adaptive-notch-filters/full-text.md` — extracted text via MinerU VLM (PDF deleted after extraction)
+  - `raw/papers/gil-cacho-2009-regularized-adaptive-notch-filters/figures/` — 8 figures (32 crops) extracted
+  - `wiki/sources/gil-cacho-2009-regularized-adaptive-notch-filters.md`
+  - `wiki/entities/pepe-gil-cacho.md`
+  - `wiki/entities/soren-holdt-jensen.md`
+  - `wiki/concepts/regularized-adaptive-notch-filter.md`
+- **Pages updated**:
+  - `wiki/entities/toon-van-waterschoot.md` — appended 2009 RANF paper (Key Contributions + Related Sources)
+  - `wiki/entities/marc-moonen.md` — appended 2009 RANF paper (Key Contributions + Related Sources)
+  - `wiki/concepts/notch-filter-based-howling-suppression.md` — added "ANF-Based One-Stage Variant: RANF" subsection; added RANF to Related Concepts and source to Related Sources; updated frontmatter sources
+  - `wiki/concepts/howling-detection.md` — added "ANF-Based Convergence Detection" paradigm subsection; added RANF to Related Concepts and source to Related Sources; updated frontmatter sources
+  - `wiki/concepts/acoustic-howling-suppression.md` — added RANF note to Notch Filter subsection; added RANF to Related Concepts and source to Related Sources; updated frontmatter sources
+  - `wiki/index.md` — added 2 entities, 1 concept, 1 source; updated statistics
+  - `wiki/entities/index.md` — added 2 entity rows
+  - `wiki/concepts/index.md` — added 1 concept row
+  - `wiki/sources/index.md` — added 1 source row

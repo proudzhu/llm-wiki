@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-08-07
-updated: 2026-08-07
+updated: 2026-08-08
 sources:
   - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/mounir-2025-robust-early-howling-detection-sparsity/full-text.md
   - raw/papers/williams-2014-acoustic-feedback-elimination/full-text.md
+  - raw/papers/gil-cacho-2009-regularized-adaptive-notch-filters/full-text.md
 tags:
   - acoustic-howling
   - notch-filter
@@ -60,6 +61,12 @@ Mounir et al. (2025) propose a **modified scheme** that omits the candidate-sele
 
 The trial-and-verify twist is notable because it sidesteps the **sustained-tone ambiguity** that pure open-loop HD features face: a held violin note is spectrally indistinguishable from feedback in the open-loop microphone signal, but only feedback is sustained by the loop, so the post-notch response differs. The cost is 500 ms of latency per candidate and a brief 6 dB intrusion on wanted tones that happen to be candidates.
 
+## ANF-Based One-Stage Variant: Regularized Adaptive Notch Filter (RANF)
+
+The two-stage FFT-based pipeline above is not the only NHS architecture. **Adaptive notch filter (ANF)-based NHS** is a one-stage alternative in which a parametric second-order IIR notch filter adapts sample-by-sample to track and suppress a howling tone simultaneously — no FFT and no separate detection block. ANF-based methods have minimum processing delay and low complexity, and track howling frequency on a sample-by-sample basis, but historically lacked a reliable howling-detection mechanism because no power-spectrum information is available.
+
+[[sources/gil-cacho-2009-regularized-adaptive-notch-filters|Gil-Cacho et al. 2009]] introduced the [[concepts/regularized-adaptive-notch-filter|Regularized Adaptive Notch Filter (RANF)]] to close this gap: three direct-form ANFs run in parallel with signed regularization ($+\lambda$, $0$, $-\lambda$). The sign of the regularization drives the three frequency estimates to **diverge** when no howling is present and to **converge** to a common value when howling is present, so coefficient convergence itself becomes a detection criterion — giving the ANF approach a detection capability comparable to FFT-based methods without their delay/complexity. The method fails for howling near $0$ or $f_s/2$ due to direct-form ANF instability at frequency extremes (a limitation lattice ANFs do not satisfactorily fix for coloured speech/music inputs). See [[concepts/regularized-adaptive-notch-filter|RANF]] for the full formulation.
+
 ## Related Concepts
 
 - [[concepts/howling-detection|Howling Detection]] — the critical front-end component of NHS
@@ -70,6 +77,7 @@ The trial-and-verify twist is notable because it sidesteps the **sustained-tone 
 - [[concepts/acoustic-howling-suppression|Acoustic Howling Suppression]] — broader AHS context including AFC and deep-learning approaches
 - [[concepts/acoustic-feedback|Acoustic Feedback]] — the problem NHS addresses
 - [[concepts/maximum-stable-gain|Maximum Stable Gain]] — NHS effectively increases the operable gain above the passive MSG
+- [[concepts/regularized-adaptive-notch-filter|Regularized Adaptive Notch Filter (RANF)]] — the ANF-based one-stage NHS variant (Gil-Cacho et al. 2009)
 
 ## Related Sources
 
@@ -77,3 +85,4 @@ The trial-and-verify twist is notable because it sidesteps the **sustained-tone 
 - [[sources/mounir-2025-robust-early-howling-detection-sparsity|Mounir, Bernardi & van Waterschoot 2025]] — proposes NINOS²-T for the HD stage and a modified NHS scheme without candidate selection
 - [[sources/williams-2014-acoustic-feedback-elimination|Williams 2014]] — Harman patent (US 8,634,575 B2) instantiating NHS as a two-rate system with ballistics-based candidate detection and trial-and-verify notch insertion
 - Waterschoot & Moonen 2010, "Comparative evaluation of howling detection criteria in notch-filter-based howling suppression" (J. Audio Eng. Soc.) — the reference survey of NHS HD features
+- [[sources/gil-cacho-2009-regularized-adaptive-notch-filters|Gil-Cacho et al. 2009]] — introduces the ANF-based one-stage NHS variant RANF with signed-regularization convergence detection

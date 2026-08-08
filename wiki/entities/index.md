@@ -419,4 +419,6 @@
 | [[entities/toon-van-waterschoot\|Toon van Waterschoot]] | KU Leuven — acoustic feedback control; supervised NINOS²-T research; ERC SONORA | 2026-08-07 |
 | [[entities/marc-moonen\|Marc Moonen]] | KU Leuven — co-author of the Fifty Years of Acoustic Feedback Control survey; PEM-AFROW and AFC regularization | 2026-08-07 |
 | [[entities/paul-robert-williams\|Paul Robert Williams]] | Inventor (Harman International) — ballistics-based howling detection and trial-and-verify notch insertion for PA-system acoustic feedback elimination | 2026-08-07 |
+| [[entities/pepe-gil-cacho\|Pepe Gil-Cacho]] | KU Leuven ESAT-SCD — lead author of the RANF howling suppression method (EUSIPCO 2009). | 2026-08-08 |
+| [[entities/soren-holdt-jensen\|Søren Holdt Jensen]] | Aalborg University, Dept. Electronic Systems — co-author of the RANF howling suppression method (EUSIPCO 2009). | 2026-08-08 |
 
