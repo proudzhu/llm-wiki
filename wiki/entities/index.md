@@ -438,4 +438,6 @@
 | [[entities/chuang-gan\|Chuang Gan]] | MIT-IBM Watson AI Lab — co-author of MCUNet and Once-for-All; efficient & multi-modal learning. | 2026-08-09 |
 | [[entities/song-han\|Song Han]] | MIT — senior author of MCUNet; model compression, NAS, and TinyML. | 2026-08-09 |
 | [[entities/han-cai\|Han Cai]] | MIT HAN Lab — Once-for-All, ProxylessNAS, MCUNetV2 co-author | 2026-08-09 |
+| [[entities/ligeng-zhu\|Ligeng Zhu]] | MIT EECS PhD student (advised by Song Han) — efficient deep-learning systems; co-author of TinyML review | 2026-08-09 |
+| [[entities/wei-chen-wang\|Wei-Chen Wang]] | MIT EECS postdoc (PhD NTU 2021) — efficient DL, model compression, TinyML; co-author of TinyML review | 2026-08-09 |
 

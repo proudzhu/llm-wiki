@@ -5,6 +5,7 @@ updated: 2026-08-09
 sources:
   - raw/papers/lin-2020-mcunet/full-text.md
   - raw/papers/lin-2021-mcunetv2/full-text.md
+  - raw/papers/lin-2023-tinyml-progress-futures/full-text.md
 tags:
   - tinyml
   - deep-learning
@@ -42,6 +43,8 @@ MCUNet (NeurIPS 2020) was the first system to exceed **70% ImageNet top-1 accura
 
 MCUNetV2 (arXiv 2021) advanced the frontier by identifying the [[concepts/imbalanced-memory-distribution\|imbalanced memory distribution]] of CNNs and introducing [[concepts/patch-based-inference\|patch-based inference]] + [[concepts/receptive-field-redistribution\|receptive field redistribution]]. It cut peak SRAM of existing networks by 4–8×, set a new record **71.8% ImageNet top-1** on STM32H743 (int8, +3.3% over V1's int8), achieved **>90% Visual Wake Words accuracy under 32 kB SRAM** (4× smaller than V1), and unlocked **object detection on MCUs** (+16.9% mAP on Pascal VOC over V1).
 
+MCUNetV3 (NeurIPS 2022, surveyed in [[sources/lin-2023-tinyml-progress-futures\|Lin et al. 2023: TinyML — Progress and Futures]]) extended TinyML from **inference to on-device training** by co-designing [[concepts/quantization-aware-scaling\|Quantization-Aware Scaling (QAS)]] (hyperparameter-free gradient rescaling that stabilizes real int8 quantized training), [[concepts/sparse-update\|Sparse Update]] (selective layer/tensor backpropagation via contribution analysis), and the [[concepts/tiny-training-engine\|Tiny Training Engine (TTE)]] (compile-time differentiation + backward-graph pruning + operator reordering). V3 reduced training memory from 303 MB (PyTorch) to **149 KB** at equal transfer-learning accuracy (2077×), fitting on-device training into 256 kB SRAM, and reached 89.3% VWW transfer-learning accuracy at 173 kB peak memory.
+
 ## Related Concepts
 
 - [[concepts/tinynas\|TinyNAS]] — resource-constrained NAS for MCUs
@@ -49,6 +52,9 @@ MCUNetV2 (arXiv 2021) advanced the frontier by identifying the [[concepts/imbala
 - [[concepts/patch-based-inference\|Patch-based Inference]] — MCUNetV2's patch-by-patch scheduling that cuts peak SRAM 4–8×
 - [[concepts/receptive-field-redistribution\|Receptive Field Redistribution]] — minimizes the overlapping-patch overhead
 - [[concepts/imbalanced-memory-distribution\|Imbalanced Memory Distribution]] — the structural CNN memory pattern MCUNetV2 exploits
+- [[concepts/quantization-aware-scaling\|Quantization-Aware Scaling (QAS)]] — MCUNetV3's hyperparameter-free gradient rescaling for int8 training
+- [[concepts/sparse-update\|Sparse Update]] — MCUNetV3's selective layer/tensor backpropagation
+- [[concepts/tiny-training-engine\|Tiny Training Engine (TTE)]] — MCUNetV3's compile-time training system (training-side sibling of TinyEngine)
 - [[concepts/neural-architecture-search\|Neural Architecture Search]]
 - [[concepts/post-training-quantization\|Post-Training Quantization]]
 - [[concepts/quantization-aware-training\|Quantization-Aware Training]]
@@ -58,3 +64,4 @@ MCUNetV2 (arXiv 2021) advanced the frontier by identifying the [[concepts/imbala
 
 - [[sources/lin-2020-mcunet\|Lin et al. 2020: MCUNet — Tiny Deep Learning on IoT Devices]]
 - [[sources/lin-2021-mcunetv2\|Lin et al. 2021: MCUNetV2 — Memory-Efficient Patch-based Inference for Tiny Deep Learning]]
+- [[sources/lin-2023-tinyml-progress-futures\|Lin et al. 2023: TinyML — Progress and Futures]]

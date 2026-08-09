@@ -26,3 +26,4 @@ tags:
 - Co-author of Once-for-All: train one network and specialize it for efficient deployment (ICLR 2020).
 - Co-author of HAQ: hardware-aware automated quantization with mixed precision (CVPR 2019).
 - Co-author of AMC: AutoML for model compression and acceleration on mobile devices (ECCV 2018).
+- Senior author of "Tiny Machine Learning: Progress and Futures" (IEEE Circuits and Systems Magazine 2023) — [[sources/lin-2023-tinyml-progress-futures\|Lin et al. 2023: TinyML — Progress and Futures]]; review surveying TinyML inference and training, and unifying the MCUNet V1/V2/V3 co-design arc including the MCUNetV3 on-device-training contribution (QAS + sparse update + Tiny Training Engine).

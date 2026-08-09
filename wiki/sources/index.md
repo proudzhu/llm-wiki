@@ -157,4 +157,5 @@
 | [[sources/wung-2011-residual-echo-suppression-system\|Wung et al. 2011: A System Approach to RES]] | System-level residual echo estimate (LSA echo − AEC echo) with psychoacoustic postfilter; robust AEC w/ ERN, no DTD | 2026-08-08 |
 | [[sources/lin-2020-mcunet\|Lin, Chen, Lin, Cohn, Gan & Han 2020: MCUNet — Tiny Deep Learning on IoT Devices]] | System–algorithm co-design (TinyNAS + TinyEngine) achieving the first >70% ImageNet accuracy on a commercial microcontroller. | 2026-08-09 |
 | [[sources/lin-2021-mcunetv2\|Lin et al. 2021: MCUNetV2 — Memory-Efficient Patch-based Inference for Tiny Deep Learning]] | Patch-based inference + receptive field redistribution cut peak SRAM 4–8×; record 71.8% ImageNet on MCU, >90% VWW under 32kB, +16.9% VOC mAP | 2026-08-09 |
+| [[sources/lin-2023-tinyml-progress-futures\|Lin et al. 2023: TinyML — Progress and Futures]] | Review surveying TinyML inference & training on MCUs; integrates MCUNet V1/V2/V3 co-design arc, introduces QAS + sparse update + TTE for on-device training (173 kB SRAM) | 2026-08-09 |
 

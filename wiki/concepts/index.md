@@ -392,4 +392,7 @@
 | [[concepts/patch-based-inference\|Patch-based Inference]] | MCUNetV2's patch-by-patch execution of CNN initial stage, cutting peak SRAM 4–8× at small computation overhead | 2026-08-09 |
 | [[concepts/receptive-field-redistribution\|Receptive Field Redistribution]] | Shifts RF from patch-based initial stage to per-layer later stage, cutting MobileNetV2 overhead from 10% to 3% | 2026-08-09 |
 | [[concepts/imbalanced-memory-distribution\|Imbalanced Memory Distribution]] | CNN pattern: first few blocks consume order-of-magnitude more SRAM than rest; root cause is hierarchical structure | 2026-08-09 |
+| [[concepts/quantization-aware-scaling\|Quantization-Aware Scaling (QAS)]] | MCUNetV3's hyperparameter-free gradient rescaling rule that stabilizes real int8 quantized-graph training on MCUs | 2026-08-09 |
+| [[concepts/sparse-update\|Sparse Update]] | MCUNetV3's selective layer/tensor backpropagation via contribution analysis; 4.5–7.5× smaller extra memory than last-k-layers | 2026-08-09 |
+| [[concepts/tiny-training-engine\|Tiny Training Engine (TTE)]] | MCUNetV3's compile-time training system (auto-diff + backward-graph pruning + operator reordering + codegen); 20–21× peak-mem, 23–25× speed | 2026-08-09 |
 

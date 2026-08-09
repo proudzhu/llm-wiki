@@ -4095,3 +4095,33 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/index.md` — added 1 entity, 3 concepts, 1 source; updated statistics
   - `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added new rows
 - **Synthesis**: skipped — triage_synthesis.py found 0 matching synthesis pages out of 21 checked (source tags do not overlap with any synthesis page; the only ANC/SE efficiency synthesis shares no tags).
+
+---
+
+## [2026-08-09] ingest | Tiny Machine Learning: Progress and Futures (Lin et al. 2023)
+
+- **Source**: `raw/papers/lin-2023-tinyml-progress-futures/full-text.md` (Zotero: 8P6FBNQD; arXiv: 2403.19076)
+- **Authors**: Ji Lin, Ligeng Zhu, Wei-Ming Chen, Wei-Chen Wang, Song Han
+- **Published**: IEEE Circuits and Systems Magazine, 2023 (DOI: 10.1109/MCAS.2023.3302182)
+- **Type**: Review / survey article
+- **Summary**: Surveys TinyML inference & training on microcontrollers; integrates the MCUNet V1/V2/V3 system–algorithm co-design arc and introduces MCUNetV3's on-device-training contribution (Quantization-Aware Scaling + Sparse Update + Tiny Training Engine), reducing training memory 2077× (303 MB → 149 KB) and fitting on-device training into 256 kB SRAM.
+- **Pages created**:
+  - `raw/papers/lin-2023-tinyml-progress-futures/full-text.md` — extracted via arXiv HTML (defuddle) + 21 figures
+  - `wiki/sources/lin-2023-tinyml-progress-futures.md`
+  - `wiki/entities/ligeng-zhu.md`
+  - `wiki/entities/wei-chen-wang.md`
+  - `wiki/concepts/quantization-aware-scaling.md`
+  - `wiki/concepts/sparse-update.md`
+  - `wiki/concepts/tiny-training-engine.md`
+- **Pages updated**:
+  - `wiki/entities/ji-lin.md` — appended 2023 TinyML review contribution
+  - `wiki/entities/wei-ming-chen.md` — appended 2023 TinyML review contribution
+  - `wiki/entities/song-han.md` — appended 2023 TinyML review contribution
+  - `wiki/concepts/tinyml.md` — added V3 milestone paragraph + QAS/sparse-update/TTE concept links + source link
+  - `wiki/concepts/tinynas.md` — added source link
+  - `wiki/concepts/tinyengine.md` — added source link + TTE sibling cross-reference
+  - `wiki/index.md` — added 2 entities, 3 concepts, 1 source; updated statistics (total=1009, entities=436, concepts=391, sources=154, synthesis=21, queries=7)
+  - `wiki/entities/index.md` — added 2 entity rows
+  - `wiki/concepts/index.md` — added 3 concept rows
+  - `wiki/sources/index.md` — added 1 source row
+- **Synthesis**: triage found 6 candidate pages (generic `deep-learning`/`survey`/`quantization` tag overlap only); all are acoustics/speech-enhancement synthesis — no TinyML overlap, no updates made.

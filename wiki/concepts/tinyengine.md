@@ -5,6 +5,7 @@ updated: 2026-08-09
 sources:
   - raw/papers/lin-2020-mcunet/full-text.md
   - raw/papers/lin-2021-mcunetv2/full-text.md
+  - raw/papers/lin-2023-tinyml-progress-futures/full-text.md
 tags:
   - tinyml
   - inference-engine
@@ -73,3 +74,4 @@ Because [[concepts/depthwise-separable-convolution\|depth-wise convolution]] doe
 
 - [[sources/lin-2020-mcunet\|Lin et al. 2020: MCUNet — Tiny Deep Learning on IoT Devices]]
 - [[sources/lin-2021-mcunetv2\|Lin et al. 2021: MCUNetV2 — Memory-Efficient Patch-based Inference for Tiny Deep Learning]]
+- [[sources/lin-2023-tinyml-progress-futures\|Lin et al. 2023: TinyML — Progress and Futures]] — surveys TinyEngine and introduces the [[concepts/tiny-training-engine\|Tiny Training Engine (TTE)]] as its training-side sibling
