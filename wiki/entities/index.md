@@ -431,4 +431,10 @@
 | [[entities/bowon-lee\|Bowon Lee]] | HP Labs — co-author, RES for hands-free teleconferencing | 2026-08-08 |
 | [[entities/ton-kalker\|Ton Kalker]] | HP Labs — co-author, RES for hands-free teleconferencing | 2026-08-08 |
 | [[entities/ronald-schafer\|Ronald W. Schafer]] | HP Labs — DSP pioneer, co-author of system-approach RES | 2026-08-08 |
+| [[entities/ji-lin\|Ji Lin]] | MIT — lead author of MCUNet; efficient deep learning & TinyML. | 2026-08-09 |
+| [[entities/wei-ming-chen\|Wei-Ming Chen]] | MIT & NTU — co-author of MCUNet; TinyML architecture search and inference engines. | 2026-08-09 |
+| [[entities/yujun-lin\|Yujun Lin]] | MIT — co-author of MCUNet and HAQ; efficient deep learning & hardware-aware quantization. | 2026-08-09 |
+| [[entities/john-cohn\|John Cohn]] | MIT-IBM Watson AI Lab — co-author of MCUNet; edge AI & TinyML. | 2026-08-09 |
+| [[entities/chuang-gan\|Chuang Gan]] | MIT-IBM Watson AI Lab — co-author of MCUNet and Once-for-All; efficient & multi-modal learning. | 2026-08-09 |
+| [[entities/song-han\|Song Han]] | MIT — senior author of MCUNet; model compression, NAS, and TinyML. | 2026-08-09 |
 

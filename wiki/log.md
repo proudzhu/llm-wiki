@@ -4038,3 +4038,31 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/concepts/acoustic-echo-cancellation.md` — added cross-refs to RES, psychoacoustic postfilter, ERN; added Wung 2011 to Related Sources
   - `wiki/index.md` — added 6 entities, 3 concepts, 1 source; updated statistics (total=988)
   - `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added rows
+
+---
+
+## [2026-08-09] ingest | MCUNet: Tiny Deep Learning on IoT Devices (Lin et al. 2020)
+
+- **Source**: `raw/papers/lin-2020-mcunet/full-text.md` (Zotero: T3XNP2YC)
+- **Authors**: Ji Lin, Wei-Ming Chen, Yujun Lin, John Cohn, Chuang Gan, Song Han
+- **Published**: NeurIPS 2020 (preprint v2, 2020-11-19)
+- **DOI**: 10.48550/arXiv.2007.10319
+- **arXiv**: 2007.10319
+- **Summary**: MCUNet jointly designs TinyNAS (two-stage NAS with automated search-space optimization for MCU memory constraints) and TinyEngine (code-generation inference engine with in-place depth-wise convolution), achieving the first >70% ImageNet top-1 accuracy (70.7%) on an off-the-shelf commercial microcontroller (STM32H743) using 3.5× less SRAM and 5.7× less Flash than int8 MobileNetV2/ResNet-18.
+- **Pages created**:
+  - `raw/papers/lin-2020-mcunet/full-text.md` — extracted text via MinerU VLM (arXiv HTML 404, fell back from arXiv path)
+  - `wiki/sources/lin-2020-mcunet.md`
+  - `wiki/entities/ji-lin.md`
+  - `wiki/entities/wei-ming-chen.md`
+  - `wiki/entities/yujun-lin.md`
+  - `wiki/entities/john-cohn.md`
+  - `wiki/entities/chuang-gan.md`
+  - `wiki/entities/song-han.md`
+  - `wiki/concepts/tinyml.md`
+  - `wiki/concepts/tinynas.md`
+  - `wiki/concepts/tinyengine.md`
+- **Pages updated**:
+  - `wiki/concepts/neural-architecture-search.md` — added "Search-Space Optimization for Resource-Constrained Devices" section, TinyNAS/TinyML cross-refs, source link, tinyml tag
+  - `wiki/index.md` — added 6 entities, 3 concepts, 1 source; updated statistics
+  - `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added rows
+- **Synthesis**: skipped — the only tag-overlap candidate (`computational-efficiency-evolution.md`, shared `model-compression`) is an ANC/SE efficiency synthesis; MCUNet is a vision/TinyML paper, so the cross-source contribution would be thin and off-topic.

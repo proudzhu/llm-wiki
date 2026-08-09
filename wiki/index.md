@@ -437,6 +437,12 @@
 | [[entities/bowon-lee\|Bowon Lee]] | HP Labs — co-author, RES for hands-free teleconferencing | 2026-08-08 |
 | [[entities/ton-kalker\|Ton Kalker]] | HP Labs — co-author, RES for hands-free teleconferencing | 2026-08-08 |
 | [[entities/ronald-schafer\|Ronald W. Schafer]] | HP Labs — DSP pioneer, co-author of system-approach RES | 2026-08-08 |
+| [[entities/ji-lin\|Ji Lin]] | MIT — lead author of MCUNet; efficient deep learning & TinyML. | 2026-08-09 |
+| [[entities/wei-ming-chen\|Wei-Ming Chen]] | MIT & NTU — co-author of MCUNet; TinyML architecture search and inference engines. | 2026-08-09 |
+| [[entities/yujun-lin\|Yujun Lin]] | MIT — co-author of MCUNet and HAQ; efficient deep learning & hardware-aware quantization. | 2026-08-09 |
+| [[entities/john-cohn\|John Cohn]] | MIT-IBM Watson AI Lab — co-author of MCUNet; edge AI & TinyML. | 2026-08-09 |
+| [[entities/chuang-gan\|Chuang Gan]] | MIT-IBM Watson AI Lab — co-author of MCUNet and Once-for-All; efficient & multi-modal learning. | 2026-08-09 |
+| [[entities/song-han\|Song Han]] | MIT — senior author of MCUNet; model compression, NAS, and TinyML. | 2026-08-09 |
 
 ---
 
@@ -828,6 +834,9 @@
 | [[concepts/residual-echo-suppression\|Residual Echo Suppression (RES)]] | Post-AEC stage attenuating residual echo; system approach via LSA−AEC echo difference | 2026-08-08 |
 | [[concepts/psychoacoustic-postfilter\|Psychoacoustic Postfilter]] | Masking-threshold-driven spectral gain suppressing residual echo without audible distortion | 2026-08-08 |
 | [[concepts/error-recovery-nonlinearity\|Error Recovery Nonlinearity (ERN)]] | Nonlinear AEC stage enabling DTD-free adaptation during double talk via batch adaptation | 2026-08-08 |
+| [[concepts/tinyml\|TinyML]] | Running deep-learning inference on microcontroller-class devices under severe SRAM/Flash constraints. | 2026-08-09 |
+| [[concepts/tinynas\|TinyNAS]] | Two-stage NAS that auto-optimizes the search space for MCU memory constraints (MCUNet). | 2026-08-09 |
+| [[concepts/tinyengine\|TinyEngine]] | Memory-efficient MCU inference engine using code generation and in-place depth-wise convolution (MCUNet). | 2026-08-09 |
 
 ---
 
@@ -988,6 +997,7 @@
 | [[sources/gil-cacho-2009-regularized-adaptive-notch-filters\|Gil-Cacho et al. 2009: Regularized Adaptive Notch Filters for AHS]] | Introduces RANF — three parallel direct-form ANFs with signed regularization (+λ, 0, −λ) whose coefficient convergence/divergence is used as a howling detection criterion for NHS in PA systems. | 2026-08-08 |
 | [[sources/richard-2023-audio-signal-processing-21st-century\|Richard et al. 2023: Audio Signal Processing in the 21st Century]] | TC-AASP 25-year retrospective; taxonomy of advances in coding, scene analysis, enhancement, separation, MIR, DCASE; paradigm shift to data-driven methods | 2026-08-08 |
 | [[sources/wung-2011-residual-echo-suppression-system\|Wung et al. 2011: A System Approach to RES]] | System-level residual echo estimate (LSA echo − AEC echo) with psychoacoustic postfilter; robust AEC w/ ERN, no DTD | 2026-08-08 |
+| [[sources/lin-2020-mcunet\|Lin, Chen, Lin, Cohn, Gan & Han 2020: MCUNet — Tiny Deep Learning on IoT Devices]] | System–algorithm co-design (TinyNAS + TinyEngine) achieving the first >70% ImageNet accuracy on a commercial microcontroller. | 2026-08-09 |
 
 ---
 
@@ -1039,10 +1049,10 @@
 
 ## Statistics
 
-- **Total pages**: 988
-- **Entities**: 427
-- **Concepts**: 382
-- **Sources**: 151
+- **Total pages**: 998
+- **Entities**: 433
+- **Concepts**: 385
+- **Sources**: 152
 - **Synthesis**: 21
 - **Queries**: 7
-- **Last updated**: 2026-08-08
+- **Last updated**: 2026-08-09

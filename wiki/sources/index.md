@@ -155,4 +155,5 @@
 | [[sources/gil-cacho-2009-regularized-adaptive-notch-filters\|Gil-Cacho et al. 2009: Regularized Adaptive Notch Filters for AHS]] | Introduces RANF — three parallel direct-form ANFs with signed regularization (+λ, 0, −λ) whose coefficient convergence/divergence is used as a howling detection criterion for NHS in PA systems. | 2026-08-08 |
 | [[sources/richard-2023-audio-signal-processing-21st-century\|Richard et al. 2023: Audio Signal Processing in the 21st Century]] | TC-AASP 25-year retrospective; taxonomy of advances in coding, scene analysis, enhancement, separation, MIR, DCASE; paradigm shift to data-driven methods | 2026-08-08 |
 | [[sources/wung-2011-residual-echo-suppression-system\|Wung et al. 2011: A System Approach to RES]] | System-level residual echo estimate (LSA echo − AEC echo) with psychoacoustic postfilter; robust AEC w/ ERN, no DTD | 2026-08-08 |
+| [[sources/lin-2020-mcunet\|Lin, Chen, Lin, Cohn, Gan & Han 2020: MCUNet — Tiny Deep Learning on IoT Devices]] | System–algorithm co-design (TinyNAS + TinyEngine) achieving the first >70% ImageNet accuracy on a commercial microcontroller. | 2026-08-09 |
 

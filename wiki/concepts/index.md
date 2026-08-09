@@ -386,4 +386,7 @@
 | [[concepts/residual-echo-suppression\|Residual Echo Suppression (RES)]] | Post-AEC stage attenuating residual echo; system approach via LSA−AEC echo difference | 2026-08-08 |
 | [[concepts/psychoacoustic-postfilter\|Psychoacoustic Postfilter]] | Masking-threshold-driven spectral gain suppressing residual echo without audible distortion | 2026-08-08 |
 | [[concepts/error-recovery-nonlinearity\|Error Recovery Nonlinearity (ERN)]] | Nonlinear AEC stage enabling DTD-free adaptation during double talk via batch adaptation | 2026-08-08 |
+| [[concepts/tinyml\|TinyML]] | Running deep-learning inference on microcontroller-class devices under severe SRAM/Flash constraints. | 2026-08-09 |
+| [[concepts/tinynas\|TinyNAS]] | Two-stage NAS that auto-optimizes the search space for MCU memory constraints (MCUNet). | 2026-08-09 |
+| [[concepts/tinyengine\|TinyEngine]] | Memory-efficient MCU inference engine using code generation and in-place depth-wise convolution (MCUNet). | 2026-08-09 |
 
