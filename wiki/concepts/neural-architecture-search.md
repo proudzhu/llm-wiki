@@ -6,6 +6,7 @@ sources:
   - raw/papers/mienye-2024-rnn-comprehensive-review/full-text.md
   - raw/papers/lin-2020-mcunet/full-text.md
   - raw/papers/lin-2021-mcunetv2/full-text.md
+  - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
 tags:
   - deep-learning
   - neural-networks
@@ -53,6 +54,17 @@ Most NAS assumes a fixed mobile search space and targets FLOPs or latency. For [
 
 [[sources/lin-2021-mcunetv2\|MCUNetV2 (Lin et al. 2021)]] extends this by merging the two-stage search-space optimization into a single stage: per-block width multiplier $w_{[\,]}$ and input resolution $r$ are added *directly to the search space*, alongside **inference-scheduling knobs** (patch count $p$, patch-stage depth $n$) that enable [[concepts/patch-based-inference\|patch-based inference]] and [[concepts/receptive-field-redistribution\|receptive field redistribution]]. The joint architecture + inference-scheduling search discovers models that cut peak SRAM 4–8× and set a record 71.8% ImageNet top-1 on MCU, unlocking object detection on MCUs.
 
+## Algorithm-Family Taxonomy (per Liu et al. 2024)
+
+[[sources/liu-2024-lightweight-dl-survey\|Liu et al. 2024]] organizes the broader NAS literature into four families by **search algorithm**:
+
+1. **RL-based NAS** — Zoph et al.'s RNN controller generates candidate architectures and updates itself from the accuracy reward; MnasNet adds a factorized hierarchical search space and Pareto-optimizes for latency.
+2. **EA-based NAS** — population-based evolution with mutation (AmoebaNet); encoding mechanisms (Sun et al.) and queue-based crossover (Xue et al.) accelerate the evolution.
+3. **Gradient-based NAS** — converts the discrete search space to a continuous, differentiable one. DARTS makes structural parameters differentiable; FBNet's DNAS pipeline uses a stochastic supernetwork optimized by SGD with a latency-aware loss $L(a, w_a) = CE(a, w_a) \cdot \alpha \log(LAT(a))^\beta$, where $LAT(\cdot)$ is a per-layer latency lookup table. **Hardware-aware NAS** (FBNet, NetAdapt, NetAdaptV2) belongs here and is the appropriate choice when memory/energy/latency are key constraints and compute is limited.
+4. **Other NAS** — symbolic rule-based tuning (Symbolic DNN-Tuner), zero-cost proxies for single-forward-pass scoring (Abdelfattah et al.).
+
+**Practical selection rule** (per the survey): when GPU budget is limited, prefer gradient-based NAS (DARTS, FBNet); when ample compute is available, RL/EA-based NAS yields superior performance; when memory/energy/latency are the binding constraints, use hardware-aware NAS (FBNet, NetAdapt, NetAdaptV2).
+
 ## Related Concepts
 
 - [[concepts/recurrent-neural-network\|Recurrent Neural Network]]
@@ -69,3 +81,4 @@ Most NAS assumes a fixed mobile search space and targets FLOPs or latency. For [
 - [[sources/mienye-2024-rnn-comprehensive-review\|Mienye, Swart & Obaido 2024: RNN Comprehensive Review]] — Section 5.2 covers NAS as an innovation in RNN architecture design
 - [[sources/lin-2020-mcunet\|Lin et al. 2020: MCUNet — Tiny Deep Learning on IoT Devices]] — introduces TinyNAS, a two-stage NAS that auto-optimizes the search space for MCU memory constraints
 - [[sources/lin-2021-mcunetv2\|Lin et al. 2021: MCUNetV2 — Memory-Efficient Patch-based Inference for Tiny Deep Learning]] — merges search-space optimization into one stage and co-optimizes inference scheduling (patch count, patch-stage depth)
+- [[sources/liu-2024-lightweight-dl-survey\|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] — surveys NAS by algorithm family (RL / EA / gradient / hardware-aware) with practical selection rules; Figures 7–9 illustrate the RL controller loop, the DNAS/FBNet pipeline, and NetAdapt's layer-wise lookup table

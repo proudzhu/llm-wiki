@@ -395,4 +395,7 @@
 | [[concepts/quantization-aware-scaling\|Quantization-Aware Scaling (QAS)]] | MCUNetV3's hyperparameter-free gradient rescaling rule that stabilizes real int8 quantized-graph training on MCUs | 2026-08-09 |
 | [[concepts/sparse-update\|Sparse Update]] | MCUNetV3's selective layer/tensor backpropagation via contribution analysis; 4.5–7.5× smaller extra memory than last-k-layers | 2026-08-09 |
 | [[concepts/tiny-training-engine\|Tiny Training Engine (TTE)]] | MCUNetV3's compile-time training system (auto-diff + backward-graph pruning + operator reordering + codegen); 20–21× peak-mem, 23–25× speed | 2026-08-09 |
+| [[concepts/lightweight-cnn-families\|Lightweight CNN Families]] | Liu et al. 2024's six-series taxonomy of efficient CNNs (SqueezeNet, ShuffleNet, CondenseNet, MobileNet, Shift, Add) | 2026-08-09 |
+| [[concepts/knowledge-distillation-paradigms\|Knowledge Distillation Paradigms]] | Three-paradigm taxonomy of KD (offline, online, self-distillation) with practical selection rules | 2026-08-09 |
+| [[concepts/hardware-dataflow-types\|Hardware Dataflow Types]] | Four-type taxonomy of DL accelerator dataflows (pipeline, DaDianNao, systolic-array, streaming) | 2026-08-09 |
 

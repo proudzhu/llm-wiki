@@ -1,14 +1,16 @@
 ---
 type: concept
 created: 2026-07-18
-updated: 2026-07-18
+updated: 2026-08-09
 sources:
   - raw/papers/mienye-2024-rnn-comprehensive-review/full-text.md
+  - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
 tags:
   - deep-learning
   - attention
   - sequence-modeling
   - transformer
+  - efficient-deep-learning
 ---
 
 # Attention Mechanism
@@ -46,6 +48,18 @@ where $\mathbf{Q}$, $\mathbf{K}$, $\mathbf{V}$ are the query, key, and value mat
 - **Self-attention** — Vaswani et al. 2017: transformer, fully attention-based, no recurrence
 - **Hybrid RNN+Transformer** — Yang et al. 2017: integrate RNNs into transformer for sequential dependencies + parallel efficiency
 
+## Efficient Transformer Taxonomy (per Liu et al. 2024)
+
+Self-attention has $O(N^2)$ complexity in sequence length, creating an efficiency bottleneck for resource-constrained deployment. [[sources/liu-2024-lightweight-dl-survey|Liu et al. 2024]] surveys three efficiency directions for vision transformers (§2.3), with quantitative comparison on ImageNet (Table 3):
+
+| Direction | Representative Models | Mechanism |
+|-----------|----------------------|-----------|
+| **Efficient self-attention** | Sparse Transformer ($O(N\sqrt{N})$), Linformer ($O(N)$), Reformer ($O(N\log N)$) | Reduces the $O(N^2)$ attention complexity |
+| **Token sparsing** | T2T-ViT (soft unfolding), DynamicViT (binary mask), EViT (top-K tokens), A-ViT (adaptive token count) | Prunes less-important tokens to reduce per-layer compute; EViT-DeiT-S (k=0.7) achieves highest throughput (5408 img/s) |
+| **Lightweight hybrid models** | DeiT (KD from CNN teacher), MobileViT (MobileNetV2 + MobileViT block), MobileFormer (parallel CNN+transformer + cross-attention) | Combines CNN inductive bias with transformer long-range dependence; Mobile-Former-96M has lowest FLOPs (0.096 G), MobileViT-XS lowest params (2.3 M) |
+
+**Key insight from the survey**: lower FLOPs has greater accuracy impact than lower parameters — challenging the assumption that they correlate. Hybrid models achieve extreme lightness but trade off accuracy (MobileViT-XS: 74.8% top-1 vs. MobileViT-S: 78.4%).
+
 ## RNN + Attention vs. Transformer
 
 | Property | RNN + Attention | Transformer |
@@ -78,3 +92,4 @@ Attention mechanisms appear throughout the llm-wiki:
 
 - [[sources/mienye-2024-rnn-comprehensive-review\|Mienye, Swart & Obaido 2024: RNN Comprehensive Review]] — Section 5.4 covers RNNs with attention mechanisms
 - [[sources/indenbom-2023-deepvqe\|Indenbom et al. 2023: DeepVQE]] — uses cross-attention for AEC
+- [[sources/liu-2024-lightweight-dl-survey\|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] — §2.3 surveys efficient transformers along three directions (efficient self-attention, token sparsing, lightweight hybrid); notes ViT inference on mobile devices is up to 40× slower than CNN, with MatMul and FFN layers as the bottlenecks

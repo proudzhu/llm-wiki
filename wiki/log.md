@@ -4125,3 +4125,38 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/concepts/index.md` — added 3 concept rows
   - `wiki/sources/index.md` — added 1 source row
 - **Synthesis**: triage found 6 candidate pages (generic `deep-learning`/`survey`/`quantization` tag overlap only); all are acoustics/speech-enhancement synthesis — no TinyML overlap, no updates made.
+
+---
+
+## [2026-08-09] ingest | Lightweight Deep Learning for Resource-Constrained Environments (Liu et al. 2024)
+
+- **Source**: `raw/papers/liu-2024-lightweight-dl-survey/full-text.md` (Zotero: FFWWNXQT)
+- **Authors**: Hou-I. Liu, Marco Galindo, Hongxia Xie, Lai-Kuan Wong, Hong-Han Shuai, Yung-Hui Li, Wen-Huang Cheng
+- **Published**: arXiv preprint, 2024 (Computer Science — CV and ML)
+- **DOI**: 10.48550/arXiv.2404.07236
+- **Summary**: Survey unifying lightweight architecture design (CNN families + efficient transformers), model compression (pruning, quantization, KD, NAS), and hardware acceleration (GPU/FPGA/ASIC/TPU, dataflows, libraries, co-design) into a single end-to-end pipeline; frames TinyML and lightweight LLMs as the two future frontiers of resource-constrained DL.
+- **Pages created**:
+  - `raw/papers/liu-2024-lightweight-dl-survey/full-text.md` — extracted text from arXiv HTML (Defuddle) + 11 figures
+  - `wiki/sources/liu-2024-lightweight-dl-survey.md`
+  - `wiki/entities/hou-i-liu.md`
+  - `wiki/entities/marco-galindo.md`
+  - `wiki/entities/hongxia-xie.md`
+  - `wiki/entities/lai-kuan-wong.md`
+  - `wiki/entities/hong-han-shuai.md`
+  - `wiki/entities/yung-hui-li.md`
+  - `wiki/concepts/lightweight-cnn-families.md` — six-series taxonomy (SqueezeNet, ShuffleNet, CondenseNet, MobileNet, Shift, Add)
+  - `wiki/concepts/knowledge-distillation-paradigms.md` — offline/online/self-distillation taxonomy with practical selection rules
+  - `wiki/concepts/hardware-dataflow-types.md` — four-type dataflow taxonomy (pipeline / DaDianNao / systolic-array / streaming)
+- **Pages updated**:
+  - `wiki/entities/wen-huang-cheng.md` — added this paper as senior author; expanded research focus to include lightweight DL
+  - `wiki/concepts/tinyml.md` — added Liu 2024 source; added "TinyML in the Broader Lightweight-DL Pipeline" section with MCU library catalog (CMSIS-NN, CMIX-NN, MicroNet) and three structural impediments
+  - `wiki/concepts/neural-architecture-search.md` — added Liu 2024 source; added "Algorithm-Family Taxonomy" section (RL / EA / gradient / hardware-aware NAS with practical selection rules)
+  - `wiki/concepts/depthwise-separable-convolution.md` — added Liu 2024 source; cross-referenced the MobileNet series taxonomy and the MAC-vs-FLOPs insight
+  - `wiki/concepts/attention-mechanism.md` — added Liu 2024 source; added "Efficient Transformer Taxonomy" section (efficient self-attention, token sparsing, lightweight hybrid models with ImageNet comparison)
+  - `wiki/concepts/post-training-quantization.md` — added Liu 2024 source; cross-referenced bit-width trade-offs (Table 5) and hardware-matched quantization guidance
+  - `wiki/concepts/quantization-aware-training.md` — added Liu 2024 source; cross-referenced quantization-as-compression guidance
+  - `wiki/index.md` — added 6 entities, 3 concepts, 1 source; updated statistics (total=1019)
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 6 entity rows
+  - `wiki/concepts/index.md` — added 3 concept rows
+- **Synthesis**: triage ran (2 candidate pages by tag overlap); skipped updates — Liu 2024 is CV/ML-focused, does not add a substantive data point to the ANC-focused `computational-efficiency-evolution.md` synthesis; cross-reference in source page's Related Synthesis section is sufficient

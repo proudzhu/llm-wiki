@@ -6,6 +6,7 @@ sources:
   - raw/papers/lin-2020-mcunet/full-text.md
   - raw/papers/lin-2021-mcunetv2/full-text.md
   - raw/papers/lin-2023-tinyml-progress-futures/full-text.md
+  - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
 tags:
   - tinyml
   - deep-learning
@@ -45,6 +46,17 @@ MCUNetV2 (arXiv 2021) advanced the frontier by identifying the [[concepts/imbala
 
 MCUNetV3 (NeurIPS 2022, surveyed in [[sources/lin-2023-tinyml-progress-futures\|Lin et al. 2023: TinyML — Progress and Futures]]) extended TinyML from **inference to on-device training** by co-designing [[concepts/quantization-aware-scaling\|Quantization-Aware Scaling (QAS)]] (hyperparameter-free gradient rescaling that stabilizes real int8 quantized training), [[concepts/sparse-update\|Sparse Update]] (selective layer/tensor backpropagation via contribution analysis), and the [[concepts/tiny-training-engine\|Tiny Training Engine (TTE)]] (compile-time differentiation + backward-graph pruning + operator reordering). V3 reduced training memory from 303 MB (PyTorch) to **149 KB** at equal transfer-learning accuracy (2077×), fitting on-device training into 256 kB SRAM, and reached 89.3% VWW transfer-learning accuracy at 173 kB peak memory.
 
+## TinyML in the Broader Lightweight-DL Pipeline
+
+[[sources/liu-2024-lightweight-dl-survey\|Liu et al. 2024]] frames TinyML as one of two future frontiers of resource-constrained deep learning (the other being lightweight LLMs), positioned at the end of a three-stage pipeline: lightweight architecture design → model compression → hardware acceleration. The survey catalogs the **MCU inference library landscape** alongside TinyNAS/TinyEngine:
+
+- **CMSIS-NN** (ARM Cortex-M) — pioneering library with NNfunctions (conv/pool/activation) + NNsupportfunctions (data conversion/activation tables) split.
+- **CMIX-NN** — open-source mixed-precision tool supporting arbitrary 8/4/2-bit quantization of weights and activations.
+- **MCUNet** / **MCUNetV2** — see Milestone above.
+- **MicroNet** — differentiable NAS (DNAS) for low-operation models on TensorFlow Lite Micro (TFLM); state-of-the-art on TinyMLperf benchmarks (Visual Wake Words, Google Speech Commands, Anomaly Detection).
+
+The survey also identifies three structural impediments to TinyML's rapid development: (1) **extreme resource constraints** (< 1 MB Flash, small SRAM); (2) **hardware/software heterogeneity** (solutions must be tweaked per device, unlike cross-platform PyTorch/TensorFlow on GPUs); (3) **lack of standard datasets** matching the data characteristics produced by edge-device external sensors.
+
 ## Related Concepts
 
 - [[concepts/tinynas\|TinyNAS]] — resource-constrained NAS for MCUs
@@ -65,3 +77,4 @@ MCUNetV3 (NeurIPS 2022, surveyed in [[sources/lin-2023-tinyml-progress-futures\|
 - [[sources/lin-2020-mcunet\|Lin et al. 2020: MCUNet — Tiny Deep Learning on IoT Devices]]
 - [[sources/lin-2021-mcunetv2\|Lin et al. 2021: MCUNetV2 — Memory-Efficient Patch-based Inference for Tiny Deep Learning]]
 - [[sources/lin-2023-tinyml-progress-futures\|Lin et al. 2023: TinyML — Progress and Futures]]
+- [[sources/liu-2024-lightweight-dl-survey\|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] — broader survey that frames TinyML as a future frontier alongside lightweight LLMs; catalogs CMSIS-NN, CMIX-NN, MicroNet alongside the MCUNet family

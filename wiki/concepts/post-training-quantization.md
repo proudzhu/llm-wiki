@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-08-09
 sources:
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
+  - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
 tags:
   - neural-network
   - quantization
@@ -71,3 +72,4 @@ Weight-only QAT recovers essentially all of the FP32 quality, confirming that th
 ## Related Sources
 
 - [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]]
+- [[sources/liu-2024-lightweight-dl-survey|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] — surveys bit-width trade-offs on ResNet18/ImageNet (Table 5): 4-bit PTQ preserves accuracy (LLT: +0.6% / −0.3%); 2-bit causes 3–4% loss; 1-bit (XNOR-Net) causes 18% loss. Practical guidance: match quantization precision to hardware (MCUs/edge TPUs often require full integer); 8-bit int recommended for low-power CPUs; 16-bit float as starting point when hardware permits; TF-Lite achieves 4× size reduction and 3×+ inference speedup.

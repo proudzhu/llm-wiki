@@ -440,4 +440,10 @@
 | [[entities/han-cai\|Han Cai]] | MIT HAN Lab — Once-for-All, ProxylessNAS, MCUNetV2 co-author | 2026-08-09 |
 | [[entities/ligeng-zhu\|Ligeng Zhu]] | MIT EECS PhD student (advised by Song Han) — efficient deep-learning systems; co-author of TinyML review | 2026-08-09 |
 | [[entities/wei-chen-wang\|Wei-Chen Wang]] | MIT EECS postdoc (PhD NTU 2021) — efficient DL, model compression, TinyML; co-author of TinyML review | 2026-08-09 |
+| [[entities/hou-i-liu\|Hou-I. Liu]] | NYCU researcher — lead author of the Liu et al. 2024 lightweight-DL survey | 2026-08-09 |
+| [[entities/marco-galindo\|Marco Galindo]] | NYCU researcher — co-author of the Liu et al. 2024 lightweight-DL survey | 2026-08-09 |
+| [[entities/hongxia-xie\|Hongxia Xie]] | Jilin University / NYCU researcher — co-author of the Liu et al. 2024 lightweight-DL survey | 2026-08-09 |
+| [[entities/lai-kuan-wong\|Lai-Kuan Wong]] | Multimedia University researcher — co-author of the Liu et al. 2024 lightweight-DL survey | 2026-08-09 |
+| [[entities/hong-han-shuai\|Hong-Han Shuai]] | NYCU researcher / professor — co-author of the Liu et al. 2024 lightweight-DL survey | 2026-08-09 |
+| [[entities/yung-hui-li\|Yung-Hui Li]] | Hon Hai Research Institute (Foxconn) researcher — co-author of the Liu et al. 2024 lightweight-DL survey | 2026-08-09 |
 

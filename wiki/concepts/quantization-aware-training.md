@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-08-09
 sources:
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
+  - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
 tags:
   - neural-network
   - quantization
@@ -73,3 +74,4 @@ QAT can be combined with **knowledge distillation (KD)** using the FP32 model as
 ## Related Sources
 
 - [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]]
+- [[sources/liu-2024-lightweight-dl-survey|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] — surveys quantization as a compression method with bit-width guidance (4-bit QAT preserves accuracy; HAWQ-V3 mixed-precision achieves 3.0% drop); recommends matching quantization precision to hardware constraints (e.g., specific MCUs/edge TPUs exclusively support integer operations, making full integer quantization essential via TF-Lite, which reduces model size by up to 4× and accelerates inference by more than 3×)

@@ -446,6 +446,12 @@
 | [[entities/han-cai\|Han Cai]] | MIT HAN Lab — Once-for-All, ProxylessNAS, MCUNetV2 co-author | 2026-08-09 |
 | [[entities/ligeng-zhu\|Ligeng Zhu]] | MIT EECS PhD student (advised by Song Han) — efficient deep-learning systems; co-author of TinyML review | 2026-08-09 |
 | [[entities/wei-chen-wang\|Wei-Chen Wang]] | MIT EECS postdoc (PhD NTU 2021) — efficient DL, model compression, TinyML; co-author of TinyML review | 2026-08-09 |
+| [[entities/hou-i-liu\|Hou-I. Liu]] | NYCU researcher — lead author of the Liu et al. 2024 lightweight-DL survey | 2026-08-09 |
+| [[entities/marco-galindo\|Marco Galindo]] | NYCU researcher — co-author of the Liu et al. 2024 lightweight-DL survey | 2026-08-09 |
+| [[entities/hongxia-xie\|Hongxia Xie]] | Jilin University / NYCU researcher — co-author of the Liu et al. 2024 lightweight-DL survey | 2026-08-09 |
+| [[entities/lai-kuan-wong\|Lai-Kuan Wong]] | Multimedia University researcher — co-author of the Liu et al. 2024 lightweight-DL survey | 2026-08-09 |
+| [[entities/hong-han-shuai\|Hong-Han Shuai]] | NYCU researcher / professor — co-author of the Liu et al. 2024 lightweight-DL survey | 2026-08-09 |
+| [[entities/yung-hui-li\|Yung-Hui Li]] | Hon Hai Research Institute (Foxconn) researcher — co-author of the Liu et al. 2024 lightweight-DL survey | 2026-08-09 |
 
 ---
 
@@ -846,6 +852,9 @@
 | [[concepts/quantization-aware-scaling\|Quantization-Aware Scaling (QAS)]] | MCUNetV3's hyperparameter-free gradient rescaling rule that stabilizes real int8 quantized-graph training on MCUs | 2026-08-09 |
 | [[concepts/sparse-update\|Sparse Update]] | MCUNetV3's selective layer/tensor backpropagation via contribution analysis; 4.5–7.5× smaller extra memory than last-k-layers | 2026-08-09 |
 | [[concepts/tiny-training-engine\|Tiny Training Engine (TTE)]] | MCUNetV3's compile-time training system (auto-diff + backward-graph pruning + operator reordering + codegen); 20–21× peak-mem, 23–25× speed | 2026-08-09 |
+| [[concepts/lightweight-cnn-families\|Lightweight CNN Families]] | Liu et al. 2024's six-series taxonomy of efficient CNNs (SqueezeNet, ShuffleNet, CondenseNet, MobileNet, Shift, Add) | 2026-08-09 |
+| [[concepts/knowledge-distillation-paradigms\|Knowledge Distillation Paradigms]] | Three-paradigm taxonomy of KD (offline, online, self-distillation) with practical selection rules | 2026-08-09 |
+| [[concepts/hardware-dataflow-types\|Hardware Dataflow Types]] | Four-type taxonomy of DL accelerator dataflows (pipeline, DaDianNao, systolic-array, streaming) | 2026-08-09 |
 
 ---
 
@@ -1009,6 +1018,7 @@
 | [[sources/lin-2020-mcunet\|Lin, Chen, Lin, Cohn, Gan & Han 2020: MCUNet — Tiny Deep Learning on IoT Devices]] | System–algorithm co-design (TinyNAS + TinyEngine) achieving the first >70% ImageNet accuracy on a commercial microcontroller. | 2026-08-09 |
 | [[sources/lin-2021-mcunetv2\|Lin et al. 2021: MCUNetV2 — Memory-Efficient Patch-based Inference for Tiny Deep Learning]] | Patch-based inference + receptive field redistribution cut peak SRAM 4–8×; record 71.8% ImageNet on MCU, >90% VWW under 32kB, +16.9% VOC mAP | 2026-08-09 |
 | [[sources/lin-2023-tinyml-progress-futures\|Lin et al. 2023: TinyML — Progress and Futures]] | Review surveying TinyML inference & training on MCUs; integrates MCUNet V1/V2/V3 co-design arc, introduces QAS + sparse update + TTE for on-device training (173 kB SRAM) | 2026-08-09 |
+| [[sources/liu-2024-lightweight-dl-survey\|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] | Survey unifying lightweight architecture design, model compression, and hardware acceleration into a single pipeline; TinyML and lightweight LLMs as future frontiers | 2026-08-09 |
 
 ---
 
@@ -1060,10 +1070,10 @@
 
 ## Statistics
 
-- **Total pages**: 1009
-- **Entities**: 436
-- **Concepts**: 391
-- **Sources**: 154
+- **Total pages**: 1019
+- **Entities**: 442
+- **Concepts**: 394
+- **Sources**: 155
 - **Synthesis**: 21
 - **Queries**: 7
 - **Last updated**: 2026-08-09
