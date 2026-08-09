@@ -443,6 +443,7 @@
 | [[entities/john-cohn\|John Cohn]] | MIT-IBM Watson AI Lab — co-author of MCUNet; edge AI & TinyML. | 2026-08-09 |
 | [[entities/chuang-gan\|Chuang Gan]] | MIT-IBM Watson AI Lab — co-author of MCUNet and Once-for-All; efficient & multi-modal learning. | 2026-08-09 |
 | [[entities/song-han\|Song Han]] | MIT — senior author of MCUNet; model compression, NAS, and TinyML. | 2026-08-09 |
+| [[entities/han-cai\|Han Cai]] | MIT HAN Lab — Once-for-All, ProxylessNAS, MCUNetV2 co-author | 2026-08-09 |
 
 ---
 
@@ -837,6 +838,9 @@
 | [[concepts/tinyml\|TinyML]] | Running deep-learning inference on microcontroller-class devices under severe SRAM/Flash constraints. | 2026-08-09 |
 | [[concepts/tinynas\|TinyNAS]] | Two-stage NAS that auto-optimizes the search space for MCU memory constraints (MCUNet). | 2026-08-09 |
 | [[concepts/tinyengine\|TinyEngine]] | Memory-efficient MCU inference engine using code generation and in-place depth-wise convolution (MCUNet). | 2026-08-09 |
+| [[concepts/patch-based-inference\|Patch-based Inference]] | MCUNetV2's patch-by-patch execution of CNN initial stage, cutting peak SRAM 4–8× at small computation overhead | 2026-08-09 |
+| [[concepts/receptive-field-redistribution\|Receptive Field Redistribution]] | Shifts RF from patch-based initial stage to per-layer later stage, cutting MobileNetV2 overhead from 10% to 3% | 2026-08-09 |
+| [[concepts/imbalanced-memory-distribution\|Imbalanced Memory Distribution]] | CNN pattern: first few blocks consume order-of-magnitude more SRAM than rest; root cause is hierarchical structure | 2026-08-09 |
 
 ---
 
@@ -998,6 +1002,7 @@
 | [[sources/richard-2023-audio-signal-processing-21st-century\|Richard et al. 2023: Audio Signal Processing in the 21st Century]] | TC-AASP 25-year retrospective; taxonomy of advances in coding, scene analysis, enhancement, separation, MIR, DCASE; paradigm shift to data-driven methods | 2026-08-08 |
 | [[sources/wung-2011-residual-echo-suppression-system\|Wung et al. 2011: A System Approach to RES]] | System-level residual echo estimate (LSA echo − AEC echo) with psychoacoustic postfilter; robust AEC w/ ERN, no DTD | 2026-08-08 |
 | [[sources/lin-2020-mcunet\|Lin, Chen, Lin, Cohn, Gan & Han 2020: MCUNet — Tiny Deep Learning on IoT Devices]] | System–algorithm co-design (TinyNAS + TinyEngine) achieving the first >70% ImageNet accuracy on a commercial microcontroller. | 2026-08-09 |
+| [[sources/lin-2021-mcunetv2\|Lin et al. 2021: MCUNetV2 — Memory-Efficient Patch-based Inference for Tiny Deep Learning]] | Patch-based inference + receptive field redistribution cut peak SRAM 4–8×; record 71.8% ImageNet on MCU, >90% VWW under 32kB, +16.9% VOC mAP | 2026-08-09 |
 
 ---
 
@@ -1049,10 +1054,10 @@
 
 ## Statistics
 
-- **Total pages**: 998
-- **Entities**: 433
-- **Concepts**: 385
-- **Sources**: 152
+- **Total pages**: 1003
+- **Entities**: 434
+- **Concepts**: 388
+- **Sources**: 153
 - **Synthesis**: 21
 - **Queries**: 7
 - **Last updated**: 2026-08-09

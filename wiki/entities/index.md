@@ -437,4 +437,5 @@
 | [[entities/john-cohn\|John Cohn]] | MIT-IBM Watson AI Lab — co-author of MCUNet; edge AI & TinyML. | 2026-08-09 |
 | [[entities/chuang-gan\|Chuang Gan]] | MIT-IBM Watson AI Lab — co-author of MCUNet and Once-for-All; efficient & multi-modal learning. | 2026-08-09 |
 | [[entities/song-han\|Song Han]] | MIT — senior author of MCUNet; model compression, NAS, and TinyML. | 2026-08-09 |
+| [[entities/han-cai\|Han Cai]] | MIT HAN Lab — Once-for-All, ProxylessNAS, MCUNetV2 co-author | 2026-08-09 |
 

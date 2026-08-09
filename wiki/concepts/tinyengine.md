@@ -4,6 +4,7 @@ created: 2026-08-09
 updated: 2026-08-09
 sources:
   - raw/papers/lin-2020-mcunet/full-text.md
+  - raw/papers/lin-2021-mcunetv2/full-text.md
 tags:
   - tinyml
   - inference-engine
@@ -54,13 +55,21 @@ Because [[concepts/depthwise-separable-convolution\|depth-wise convolution]] doe
 - **Memory**: runs model configurations (w{}-r{}) that other libraries mark out-of-memory, enlarging TinyNAS's design space (Figure 4b).
 - **Co-design gain**: on STM32F746 (320 kB / 1 MB), switching the library from CMSIS-NN to TinyEngine raises ImageNet accuracy from 35.2% → 47.4% (S-MbV2) and 49.5% → 56.4% (S-Proxyless) *for the same model family* — direct evidence that library efficiency lifts the accuracy ceiling.
 
+## MCUNetV2 Extension: Patch-based Inference Support
+
+[[sources/lin-2021-mcunetv2\|MCUNetV2 (Lin et al. 2021)]] extends TinyEngine to support [[concepts/patch-based-inference\|patch-based inference]]. The engine now allocates the patch buffer for the memory-intensive initial stage and orchestrates the patch-by-patch execution loop, while the rest of the network continues to use the per-layer schedule with code generation, model-adaptive memory scheduling, kernel specialization, and in-place depth-wise convolution. This extension is what enables the 4–8× peak SRAM reduction on existing networks and the record MCU results (71.8% ImageNet top-1, >90% VWW under 32 kB SRAM, +16.9% mAP on Pascal VOC) reported in MCUNetV2.
+
 ## Related Concepts
 
 - [[concepts/tinyml\|TinyML]] — problem domain
 - [[concepts/tinynas\|TinyNAS]] — co-designed NAS that uses TinyEngine to measure per-candidate memory
+- [[concepts/patch-based-inference\|Patch-based Inference]] — the scheduling strategy TinyEngine is extended to support in MCUNetV2
+- [[concepts/receptive-field-redistribution\|Receptive Field Redistribution]] — companion technique minimizing overlapping-patch overhead
+- [[concepts/imbalanced-memory-distribution\|Imbalanced Memory Distribution]] — the pattern that motivates patch-based scheduling
 - [[concepts/depthwise-separable-convolution\|Depthwise Separable Convolution]] — operator optimized by in-place scheduling
 - [[concepts/inplace-convolution\|Inplace Convolution]] — distinct SE concept sharing a name (see disambiguation above)
 
 ## Related Sources
 
 - [[sources/lin-2020-mcunet\|Lin et al. 2020: MCUNet — Tiny Deep Learning on IoT Devices]]
+- [[sources/lin-2021-mcunetv2\|Lin et al. 2021: MCUNetV2 — Memory-Efficient Patch-based Inference for Tiny Deep Learning]]

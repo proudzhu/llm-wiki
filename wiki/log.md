@@ -4066,3 +4066,32 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/index.md` — added 6 entities, 3 concepts, 1 source; updated statistics
   - `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added rows
 - **Synthesis**: skipped — the only tag-overlap candidate (`computational-efficiency-evolution.md`, shared `model-compression`) is an ANC/SE efficiency synthesis; MCUNet is a vision/TinyML paper, so the cross-source contribution would be thin and off-topic.
+
+---
+
+## [2026-08-09] ingest | MCUNetV2: Memory-Efficient Patch-based Inference for Tiny Deep Learning (Lin et al. 2021)
+
+- **Source**: `raw/papers/lin-2021-mcunetv2/full-text.md` (Zotero: W65ANM64)
+- **Authors**: Ji Lin, Wei-Ming Chen, Han Cai, Chuang Gan, Song Han
+- **Published**: arXiv preprint 2021 (v1: 2021-10-28; v2: camera-ready)
+- **DOI**: 10.48550/arXiv.2110.15352
+- **Summary**: MCUNetV2 introduces patch-based inference (executing the memory-intensive initial CNN stage patch-by-patch) and receptive field redistribution to cut peak SRAM 4–8×; joint NAS + inference-scheduling search sets a record 71.8% ImageNet top-1 on MCU, >90% VWW accuracy under 32kB SRAM, and +16.9% mAP on Pascal VOC object detection vs. MCUNet V1.
+- **Pages created**:
+  - `raw/papers/lin-2021-mcunetv2/full-text.md` — extracted text from arXiv HTML (via Defuddle)
+  - `wiki/sources/lin-2021-mcunetv2.md`
+  - `wiki/entities/han-cai.md`
+  - `wiki/concepts/patch-based-inference.md`
+  - `wiki/concepts/receptive-field-redistribution.md`
+  - `wiki/concepts/imbalanced-memory-distribution.md`
+- **Pages updated**:
+  - `wiki/entities/ji-lin.md` — added MCUNetV2 as lead author
+  - `wiki/entities/wei-ming-chen.md` — added MCUNetV2
+  - `wiki/entities/song-han.md` — added MCUNetV2 as senior author
+  - `wiki/entities/chuang-gan.md` — added MCUNetV2
+  - `wiki/concepts/tinyml.md` — added MCUNetV2 milestone, cross-refs to patch-based-inference / receptive-field-redistribution / imbalanced-memory-distribution
+  - `wiki/concepts/tinynas.md` — added MCUNetV2 extension section (per-block w, r, p, n knobs merged into one search stage)
+  - `wiki/concepts/tinyengine.md` — added MCUNetV2 patch-based inference support section
+  - `wiki/concepts/neural-architecture-search.md` — added MCUNetV2 joint architecture + inference-scheduling search note
+  - `wiki/index.md` — added 1 entity, 3 concepts, 1 source; updated statistics
+  - `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added new rows
+- **Synthesis**: skipped — triage_synthesis.py found 0 matching synthesis pages out of 21 checked (source tags do not overlap with any synthesis page; the only ANC/SE efficiency synthesis shares no tags).

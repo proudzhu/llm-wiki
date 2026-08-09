@@ -4,6 +4,7 @@ created: 2026-08-09
 updated: 2026-08-09
 sources:
   - raw/papers/lin-2020-mcunet/full-text.md
+  - raw/papers/lin-2021-mcunetv2/full-text.md
 tags:
   - neural-architecture-search
   - tinyml
@@ -47,13 +48,26 @@ Within the selected $S^*$, TinyNAS trains one **super network** via weight shari
 
 TinyNAS extends general [[concepts/neural-architecture-search\|Neural Architecture Search]] with two MCU-specific ideas: (1) *search-space optimization as a first-class stage* (prior NAS assumes a fixed mobile space), and (2) *co-design with the inference engine* so that the memory schedule, not just FLOPs, is the constraint measured during search.
 
+## MCUNetV2 Extension: Joint Architecture + Inference-Scheduling Search
+
+[[sources/lin-2021-mcunetv2\|MCUNetV2 (Lin et al. 2021)]] extends TinyNAS with two changes that merge V1's two-stage search-space optimization into a single stage:
+
+1. **Per-block width multiplier** $w_{[\,]} \in \{0.5, 0.75, 1.0\}$ and **input resolution** $r \in \{96, 128, 160, 192, 224, 256\}$ are added *directly to the search space*, rather than being optimized in a separate pre-NAS stage. The same super network can therefore span tight resource budgets (ablation: Table 6 of the paper shows this beats V1's two-stage method and prior NAS+scale approaches at 25/50/100M MACs budgets, with the gain largest at ≤25M).
+2. **Inference-scheduling knobs** — patch count $p \in \{1, 2, 3, 4\}$ (image split into $p \times p$ overlapping patches) and patch-stage depth $n$ (number of initial blocks executed patch-by-patch) — are co-optimized with the architecture, enabling [[concepts/patch-based-inference\|patch-based inference]] and [[concepts/receptive-field-redistribution\|receptive field redistribution]] to be discovered automatically rather than tuned case-by-case.
+
+The discovered architectures consistently show small kernels (1×1, 3×3) in the patch stage, small expansion ratios early in the per-layer stage, and avoid combining large expansion ratios with large kernels — patterns discovered without human expertise.
+
 ## Related Concepts
 
 - [[concepts/tinyml\|TinyML]] — problem domain
 - [[concepts/tinyengine\|TinyEngine]] — co-designed inference engine that measures per-candidate memory
 - [[concepts/neural-architecture-search\|Neural Architecture Search]] — general framework
+- [[concepts/patch-based-inference\|Patch-based Inference]] — the scheduling strategy co-optimized by MCUNetV2's NAS
+- [[concepts/receptive-field-redistribution\|Receptive Field Redistribution]] — automated by MCUNetV2's joint search
+- [[concepts/imbalanced-memory-distribution\|Imbalanced Memory Distribution]] — motivates patch-based inference
 - [[concepts/depthwise-separable-convolution\|Depthwise Separable Convolution]] — building block of the scaled mobile search space
 
 ## Related Sources
 
 - [[sources/lin-2020-mcunet\|Lin et al. 2020: MCUNet — Tiny Deep Learning on IoT Devices]]
+- [[sources/lin-2021-mcunetv2\|Lin et al. 2021: MCUNetV2 — Memory-Efficient Patch-based Inference for Tiny Deep Learning]]

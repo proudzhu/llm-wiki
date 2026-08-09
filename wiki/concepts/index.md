@@ -389,4 +389,7 @@
 | [[concepts/tinyml\|TinyML]] | Running deep-learning inference on microcontroller-class devices under severe SRAM/Flash constraints. | 2026-08-09 |
 | [[concepts/tinynas\|TinyNAS]] | Two-stage NAS that auto-optimizes the search space for MCU memory constraints (MCUNet). | 2026-08-09 |
 | [[concepts/tinyengine\|TinyEngine]] | Memory-efficient MCU inference engine using code generation and in-place depth-wise convolution (MCUNet). | 2026-08-09 |
+| [[concepts/patch-based-inference\|Patch-based Inference]] | MCUNetV2's patch-by-patch execution of CNN initial stage, cutting peak SRAM 4–8× at small computation overhead | 2026-08-09 |
+| [[concepts/receptive-field-redistribution\|Receptive Field Redistribution]] | Shifts RF from patch-based initial stage to per-layer later stage, cutting MobileNetV2 overhead from 10% to 3% | 2026-08-09 |
+| [[concepts/imbalanced-memory-distribution\|Imbalanced Memory Distribution]] | CNN pattern: first few blocks consume order-of-magnitude more SRAM than rest; root cause is hierarchical structure | 2026-08-09 |
 

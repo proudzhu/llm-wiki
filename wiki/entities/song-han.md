@@ -19,6 +19,7 @@ tags:
 ## Key Contributions
 
 - Senior author of "MCUNet: Tiny Deep Learning on IoT Devices" (NeurIPS 2020) — [[sources/lin-2020-mcunet\|Lin et al. 2020: MCUNet]]; led the system–algorithm co-design of TinyNAS + TinyEngine that achieved the first >70% ImageNet accuracy on a commercial microcontroller.
+- Senior author of "MCUNetV2: Memory-Efficient Patch-based Inference for Tiny Deep Learning" (arXiv 2021) — [[sources/lin-2021-mcunetv2\|Lin et al. 2021: MCUNetV2]]; directed the patch-based inference + receptive field redistribution approach that cut peak SRAM 4–8× and set a record 71.8% ImageNet accuracy on MCU.
 - Co-author of Deep Compression: pruning + trained quantization + Huffman coding (ICLR 2016), a foundational model-compression result.
 - Co-author of "Learning both Weights and Connections for Efficient Neural Networks" (NeurIPS 2015) — network pruning.
 - Co-author of ProxylessNAS: direct neural architecture search on target task and hardware (ICLR 2019).

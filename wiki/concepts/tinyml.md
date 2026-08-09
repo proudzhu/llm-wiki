@@ -4,6 +4,7 @@ created: 2026-08-09
 updated: 2026-08-09
 sources:
   - raw/papers/lin-2020-mcunet/full-text.md
+  - raw/papers/lin-2021-mcunetv2/full-text.md
 tags:
   - tinyml
   - deep-learning
@@ -39,10 +40,15 @@ MCUs are bare-metal devices with no operating system and no DRAM. Three conseque
 
 MCUNet (NeurIPS 2020) was the first system to exceed **70% ImageNet top-1 accuracy (70.7%)** on an off-the-shelf commercial microcontroller (STM32H743), using 3.5× less SRAM and 5.7× less Flash than int8 MobileNetV2/ResNet-18 at comparable accuracy.
 
+MCUNetV2 (arXiv 2021) advanced the frontier by identifying the [[concepts/imbalanced-memory-distribution\|imbalanced memory distribution]] of CNNs and introducing [[concepts/patch-based-inference\|patch-based inference]] + [[concepts/receptive-field-redistribution\|receptive field redistribution]]. It cut peak SRAM of existing networks by 4–8×, set a new record **71.8% ImageNet top-1** on STM32H743 (int8, +3.3% over V1's int8), achieved **>90% Visual Wake Words accuracy under 32 kB SRAM** (4× smaller than V1), and unlocked **object detection on MCUs** (+16.9% mAP on Pascal VOC over V1).
+
 ## Related Concepts
 
 - [[concepts/tinynas\|TinyNAS]] — resource-constrained NAS for MCUs
 - [[concepts/tinyengine\|TinyEngine]] — memory-efficient MCU inference engine
+- [[concepts/patch-based-inference\|Patch-based Inference]] — MCUNetV2's patch-by-patch scheduling that cuts peak SRAM 4–8×
+- [[concepts/receptive-field-redistribution\|Receptive Field Redistribution]] — minimizes the overlapping-patch overhead
+- [[concepts/imbalanced-memory-distribution\|Imbalanced Memory Distribution]] — the structural CNN memory pattern MCUNetV2 exploits
 - [[concepts/neural-architecture-search\|Neural Architecture Search]]
 - [[concepts/post-training-quantization\|Post-Training Quantization]]
 - [[concepts/quantization-aware-training\|Quantization-Aware Training]]
@@ -51,3 +57,4 @@ MCUNet (NeurIPS 2020) was the first system to exceed **70% ImageNet top-1 accura
 ## Related Sources
 
 - [[sources/lin-2020-mcunet\|Lin et al. 2020: MCUNet — Tiny Deep Learning on IoT Devices]]
+- [[sources/lin-2021-mcunetv2\|Lin et al. 2021: MCUNetV2 — Memory-Efficient Patch-based Inference for Tiny Deep Learning]]

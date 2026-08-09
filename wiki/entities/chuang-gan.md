@@ -18,4 +18,5 @@ tags:
 ## Key Contributions
 
 - Co-author of "MCUNet: Tiny Deep Learning on IoT Devices" (NeurIPS 2020) — [[sources/lin-2020-mcunet\|Lin et al. 2020: MCUNet]].
+- Co-author of "MCUNetV2: Memory-Efficient Patch-based Inference for Tiny Deep Learning" (arXiv 2021) — [[sources/lin-2021-mcunetv2\|Lin et al. 2021: MCUNetV2]].
 - Co-author of Once-for-All: train one network and specialize it for efficient deployment (ICLR 2020).
