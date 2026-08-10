@@ -400,4 +400,6 @@
 | [[concepts/hardware-dataflow-types\|Hardware Dataflow Types]] | Four-type taxonomy of DL accelerator dataflows (pipeline, DaDianNao, systolic-array, streaming) | 2026-08-09 |
 | [[concepts/loihi-2\|Loihi 2]] | Intel's second-generation neuromorphic chip; microcode-programmed neuron models, graded spikes, on-chip learning, and sparse event-driven communication; target hardware for Intel N-DNS Challenge Track 2 and the calibration reference for the Track 1 power-proxy metric. | 2026-08-10 |
 | [[concepts/sigma-delta-neural-network\|Sigma-Delta Neural Network (SDNN)]] | SNN architecture using sigma-delta encoding for sparse event-driven message passing and axonal delays for temporal memory; the released Intel N-DNS Challenge baseline reaches SI-SNR 12.50 dB at 14.54 M-Ops/s power proxy with 525K params - 9.4x lower power than NsNet2 at comparable SI-SNR. | 2026-08-10 |
+| [[concepts/output-saturation-effect\|Output Saturation Effect]] | Nonlinear distortion from secondary-path amplifier saturation in ANC; causes adaptive filter divergence under severe saturation | 2026-08-10 |
+| [[concepts/output-constraint-anc-algorithms\|Output Constraint ANC Algorithms]] | FxLMS variants that limit output power to keep the amplifier linear; the practical default for severe output saturation (2-GD, Re-scaling, Leaky, MOV, OLFxLMS, MOV-Modified) | 2026-08-10 |
 

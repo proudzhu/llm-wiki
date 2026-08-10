@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-04-17
+updated: 2026-08-10
 sources:
   Controllers.md
+  - raw/papers/guo-2024-anc-saturation-survey/full-text.md
 tags:
 - control-theory
 - mathematics
@@ -17,6 +18,8 @@ tags:
 
 MVC is a fundamental concept in stochastic control. In the context of [[active-noise-control|Active Noise Control]], MVC is used to design the optimal fixed controller for **[[feedback-anc|Feedback ANC]]** systems. The goal is to minimize the expected value of the square of the residual error:
 $$ J = E[e^2(n)] $$
+
+> **Not to be confused with MOV-FxLMS (Minimum Output Variance FxLMS)** — a distinct algorithm in the [[output-constraint-anc-algorithms|output constraint ANC]] family that adds a penalty on the *control output* variance $\alpha\,\mathbb{E}[y^2(n)]$ to the FxLMS cost function to mitigate the [[output-saturation-effect|output saturation effect]]. MOV-FxLMS constrains the **control signal** $y(n)$, whereas classical MVC (this page) minimises the **error signal** $e(n)$ of a feedback ANC loop. See [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024]] for the MOV-FxLMS formulation.
 
 ## Mechanism
 
@@ -45,3 +48,4 @@ The maximum noise reduction achievable by MVC is determined by the **predictabil
 
 - [[sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]]
 - [[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
+- [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024: ANC Algorithms Overcoming Output Saturation]] — discusses MOV-FxLMS (Minimum *Output* Variance FxLMS), a distinct output-constraint algorithm that shares the "minimum variance" name but constrains the control output rather than the error

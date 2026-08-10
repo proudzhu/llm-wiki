@@ -1,24 +1,25 @@
 ---
 type: entity
 created: 2026-04-28
-updated: 2026-04-28
+updated: 2026-08-10
 tags:
   - researcher
   - active-noise-control
-  - headphone-anc
   - wireless-anc
+  - adaptive-filtering
 ---
 
 # Xiaoyi Shen
 
-**Affiliation**: Nanyang Technological University, Singapore
+**Affiliation**: Digital Signal Processing Lab, School of Electrical and Electronic Engineering, Nanyang Technological University, Singapore
 **Role**: Researcher
-**Research Focus**: Active noise control headphones, wireless reference ANC, coherence-based selection techniques, hybrid ANC approaches.
+**Research Focus**: Active noise control, wireless ANC, ANC headphones, output-constrained ANC algorithms, momentum-based adaptive filters.
 
 ## Key Contributions
 
-- Wireless reference ANC headphone using coherence-based selection technique (ICASSP 2021)
-- Multi-channel wireless ANC headphone with coherence-based weight determination (J. Signal Process. Syst. 2022)
-- Hybrid approach combining wireless and earcup microphones for ANC headphones (ICASSP 2022)
-- Adaptive-gain algorithm on fixed filters for ANC headphones (Mech. Syst. Signal Process. 2022)
-- Co-authored MCALMS-based MVANC system for computationally efficient virtual sensing (INTER-NOISE 2024)
+- Co-authored "A Survey on Adaptive Active Noise Control Algorithms Overcoming the Output Saturation Effect" (Signal Processing 2024) — [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024]]
+- Multi-channel wireless hybrid active noise control with fixed-adaptive control selection (Journal of Sound and Vibration 2022)
+- Adaptive-gain algorithm on fixed filters applied for ANC headphones (Mechanical Systems and Signal Processing 2022)
+- Momentum two-gradient direction FxLMS algorithm with variable step size for output-constrained ANC (ICASSP 2023)
+- Co-authored directional SFANC with CNN-based DoA estimation in reverberant environments (arXiv 2026)
+- Co-authored Predictive Directional SFANC (PD-SFANC) using CRNN for moving source DoA prediction (arXiv 2026)

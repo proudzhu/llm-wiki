@@ -65,3 +65,4 @@ Bilinear filters are most effective when:
 ## Related Sources
 
 - [[../sources/lu-2021-anc-survey-nonlinear|Lu et al. 2021: Survey on ANC — Part II (Nonlinear)]]
+- [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024: ANC Algorithms Overcoming Output Saturation]] — surveys BFxLMS as one of the NLANC algorithms for mitigating output saturation; notes its suitability for strong saturation nonlinearity at lower filter length than Volterra/FLANN

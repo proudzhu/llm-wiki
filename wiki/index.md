@@ -460,6 +460,9 @@
 | [[entities/jeffrey-kopsick\|Jeffrey Kopsick]] | Co-author of the Intel N-DNS Challenge; Intel Labs Neuromorphic Computing Lab. | 2026-08-10 |
 | [[entities/mike-davies\|Mike Davies]] | Co-author; Director of Intel Labs Neuromorphic Computing Lab; principal investigator for Loihi 2 and the Intel N-DNS Challenge. | 2026-08-10 |
 | [[entities/karthikeyan-ramasamy\|Karthikeyan Ramasamy]] | Co-author of the Intel N-DNS Challenge; Intel Labs Neuromorphic Computing Lab. | 2026-08-10 |
+| [[entities/yu-guo\|Yu Guo]] | NTU DSP Lab — lead author of the survey on ANC algorithms overcoming output saturation | 2026-08-10 |
+| [[entities/xiaoyi-shen\|Xiaoyi Shen]] | NTU DSP Lab — wireless ANC, output-constrained ANC, momentum-based FxLMS variants | 2026-08-10 |
+| [[entities/junwei-ji\|Junwei Ji]] | NTU DSP Lab — output-constrained adaptive algorithms, momentum 2GD FxLMS | 2026-08-10 |
 
 ---
 
@@ -865,6 +868,8 @@
 | [[concepts/hardware-dataflow-types\|Hardware Dataflow Types]] | Four-type taxonomy of DL accelerator dataflows (pipeline, DaDianNao, systolic-array, streaming) | 2026-08-09 |
 | [[concepts/loihi-2\|Loihi 2]] | Intel's second-generation neuromorphic chip; microcode-programmed neuron models, graded spikes, on-chip learning, and sparse event-driven communication; target hardware for Intel N-DNS Challenge Track 2 and the calibration reference for the Track 1 power-proxy metric. | 2026-08-10 |
 | [[concepts/sigma-delta-neural-network\|Sigma-Delta Neural Network (SDNN)]] | SNN architecture using sigma-delta encoding for sparse event-driven message passing and axonal delays for temporal memory; the released Intel N-DNS Challenge baseline reaches SI-SNR 12.50 dB at 14.54 M-Ops/s power proxy with 525K params - 9.4x lower power than NsNet2 at comparable SI-SNR. | 2026-08-10 |
+| [[concepts/output-saturation-effect\|Output Saturation Effect]] | Nonlinear distortion from secondary-path amplifier saturation in ANC; causes adaptive filter divergence under severe saturation | 2026-08-10 |
+| [[concepts/output-constraint-anc-algorithms\|Output Constraint ANC Algorithms]] | FxLMS variants that limit output power to keep the amplifier linear; the practical default for severe output saturation (2-GD, Re-scaling, Leaky, MOV, OLFxLMS, MOV-Modified) | 2026-08-10 |
 
 ---
 
@@ -1030,6 +1035,7 @@
 | [[sources/lin-2023-tinyml-progress-futures\|Lin et al. 2023: TinyML — Progress and Futures]] | Review surveying TinyML inference & training on MCUs; integrates MCUNet V1/V2/V3 co-design arc, introduces QAS + sparse update + TTE for on-device training (173 kB SRAM) | 2026-08-09 |
 | [[sources/liu-2024-lightweight-dl-survey\|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] | Survey unifying lightweight architecture design, model compression, and hardware acceleration into a single pipeline; TinyML and lightweight LLMs as future frontiers | 2026-08-09 |
 | [[sources/timcheck-2023-intel-neuromorphic-dns-challenge\|Timcheck et al. 2023: The Intel Neuromorphic DNS Challenge]] | Defines the Intel Neuromorphic DNS Challenge (LAVA 2023): a benchmark for SNN-based real-time monaural speech enhancement on Loihi 2. Two tracks (algorithmic simulation / hardware implementation) evaluate audio quality (SI-SNR, DNSMOS), power (Loihi-calibrated proxy P = SynOPS + 10x NeuronOPS), latency, and chip resources. Includes a 500-hour dataset derived from the Microsoft DNS Challenge corpus, an SDNN baseline (sigma-delta encoding + axonal delays) reaching SI-SNR 12.50 dB at 14.54 M-Ops/s, and the NsNet2 conventional baseline (136.13 M-Ops/s). | 2026-08-10 |
+| [[sources/guo-2024-anc-saturation-survey\|Guo et al. 2024: ANC Algorithms Overcoming Output Saturation]] | Survey organising saturation-mitigation ANC algorithms into output-constraint and nonlinear-adaptive families; QCQP formulation; complexity and stability comparison | 2026-08-10 |
 
 ---
 
@@ -1081,10 +1087,10 @@
 
 ## Statistics
 
-- **Total pages**: 1035
-- **Entities**: 455
-- **Concepts**: 396
-- **Sources**: 156
+- **Total pages**: 1039
+- **Entities**: 456
+- **Concepts**: 398
+- **Sources**: 157
 - **Synthesis**: 21
 - **Queries**: 7
 - **Last updated**: 2026-08-10

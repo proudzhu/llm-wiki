@@ -79,3 +79,4 @@ where $\mathbf{G}(\omega)$ and $\hat{\mathbf{G}}(\omega)$ are the Fourier transf
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method — a method avoiding the secondary path filter requirement of FxLMS]]
 - [[sources/jiang-2025-ai-driven-avnc-review|Jiang et al. 2025: AI-Driven AVNC Review]]
 - [[sources/ma-2027-robust-ffanc-online-path-modeling|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] — modifies the FXLMS update to use the second SF output $y_2(n)$ instead of the residual error $e(n)$, reducing the influence of additive noise and injected AWGN
+- [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024: ANC Algorithms Overcoming Output Saturation]] — uses FxLMS as the baseline for the output-saturation analysis and complexity comparison of saturation-mitigation algorithms

@@ -1,16 +1,18 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-05-17
+updated: 2026-08-10
 sources:
 - zotero://select/items/0_N8MHRKXP
 - zotero://select/items/0_FERIFUEJ
+- raw/papers/guo-2024-anc-saturation-survey/full-text.md
 tags:
 - flnn
 - kernel
 - nonlinear-anc
 - spline
 - volterra
+- output-saturation
 ---
 
 # Nonlinear ANC: When Linear Filters Aren't Enough
@@ -180,6 +182,26 @@ A practical challenge: **how do you know if your ANC system has nonlinear distor
 
 ---
 
+## The Saturation Regime: When NLANC Diverges (Guo 2024)
+
+A critical limitation absent from the individual NLANC algorithm papers is highlighted by [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024]]: **NLANC algorithms themselves diverge under severe output saturation**. The survey distinguishes two saturation regimes:
+
+| Regime | Definition | NLANC behaviour | Recommended family |
+|:-------|:-----------|:----------------|:-------------------|
+| **Mild saturation** | Fundamental still cancelable; only harmonics remain | Effective — pre-distortion cancels harmonics | NLANC (this page) |
+| **Severe saturation** | Fundamental not fully cancelable; amplifier clips | **Diverges** — residual error retains phase of filtered reference, coefficients grow without bound | [[output-constraint-anc-algorithms|Output constraint algorithms]] |
+
+The divergence result (Eq. 12 of the survey) applies to *all* unconstrained adaptive filters — linear FxLMS and NLANC alike — once the amplifier enters its severe nonlinear region. The practical implication: NLANC is the right tool only when the saturation is mild enough that the fundamental can still be cancelled. Under severe saturation, an output constraint algorithm (e.g., MOV-Modified FxLMS) is required to preserve stability, at the cost of not fully cancelling the disturbance.
+
+### Additional NLANC Algorithms for Output Saturation
+
+The survey also covers two NLANC algorithms not elsewhere in this synthesis:
+
+- **THF-FxLMS** (Sahib 2012): Hammerstein model with tangential hyperbolic nonlinearity $f(y) = \alpha_f \tanh(\beta y)$. Lowest computational cost among NLANC algorithms ($2N + 2L + 3$ multiplications), but effective only for periodic noise and requires a small step size.
+- **MLPNN-FxLMS** (Elliott 2001): Multi-layer perceptron with backpropagation. Universal approximator with the strongest nonlinear modelling ability, but at an unachievable computational burden for real-time ANC ($O(M^2 L)$); suffers from gradient vanishing with depth.
+
+---
+
 ## Related Concepts
 
 - [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
@@ -187,5 +209,10 @@ A practical challenge: **how do you know if your ANC system has nonlinear distor
 - [[concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
 - [[concepts/generalized-maximum-correntropy-criterion|Generalized Maximum Correntropy Criterion]]
 - [[concepts/information-theoretic-learning|Information Theoretic Learning]]
+- [[concepts/nonlinear-active-noise-control|Nonlinear Active Noise Control]]
+- [[concepts/output-saturation-effect|Output Saturation Effect]]
+- [[concepts/output-constraint-anc-algorithms|Output Constraint ANC Algorithms]] — the complementary family required under severe saturation
 
 ## Related Sources
+
+- [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024: ANC Algorithms Overcoming Output Saturation]] — surveys NLANC algorithms for output saturation; proves NLANC divergence under severe saturation; covers THF-FxLMS and MLPNN-FxLMS

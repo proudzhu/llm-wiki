@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-06-25
+updated: 2026-08-10
 sources:
   - raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md
+  - raw/papers/guo-2024-anc-saturation-survey/full-text.md
 aliases:
 - Active Noise Control
 tags:
@@ -66,6 +67,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - **Stability**: Phase shifts in the secondary path can cause negative feedback to become positive feedback
 - **Predictability**: Performance depends on how predictable the primary noise is; narrow-band noise works better than broadband noise
 - **Nonlinear distortion**: Low-cost speakers and high-SPL scenarios introduce nonlinearities that linear algorithms cannot model
+- **[[output-saturation-effect|Output saturation]]**: When the secondary-path amplifier is driven beyond its rated output, the control signal is clipped and unconstrained adaptive filters (linear and nonlinear) diverge. Mitigated by [[output-constraint-anc-algorithms|output constraint algorithms]] or [[nonlinear-active-noise-control|nonlinear adaptive algorithms]] depending on the saturation regime (Guo 2024)
 - **Speech cancellation**: Traditional "cancel everything" approach damages useful speech signals in mixed sound fields
 - **DOA dependency**: The primary path $P(z)$ varies with sound direction, degrading feedforward ANC at non-nominal DOAs (Liebich 2018)
 
@@ -98,6 +100,9 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - [[robust-stability-constraint|Robust Stability Constraint]]
 - [[convex-hull-uncertainty-model|Convex Hull Uncertainty Model]]
 - [[elliptic-uncertainty-model|Elliptic Uncertainty Model]]
+- [[concepts/output-saturation-effect|Output Saturation Effect]]
+- [[concepts/output-constraint-anc-algorithms|Output Constraint ANC Algorithms]]
+- [[concepts/nonlinear-active-noise-control|Nonlinear Active Noise Control]]
 
 ## Related Sources
 
@@ -110,6 +115,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]] — PINN interpolates soundfield from outside-ROI monitoring microphones for improved ANC
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method]] — Experimental validation of secondary-path-model-free ANC
 - [[sources/ma-2027-robust-ffanc-online-path-modeling|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] — feedforward ANC with simultaneous online SP and FBP modeling; introduces a second supporting filter and SF-driven global AWGN scaling for robustness under time-varying paths
+- [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024: ANC Algorithms Overcoming Output Saturation]] — survey of adaptive ANC algorithms mitigating the output saturation effect, organising the field into output-constraint and nonlinear-adaptive families
 
 ## Related Entities
 

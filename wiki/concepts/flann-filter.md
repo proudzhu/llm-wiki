@@ -79,3 +79,4 @@ $$ T_{q+1}(x) = 2xT_q(x) - T_{q-1}(x), \quad T_0(x)=1. $$
 ## Related Sources
 
 - [[../sources/lu-2021-anc-survey-nonlinear|Lu et al. 2021: Survey on ANC — Part II (Nonlinear)]]
+- [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024: ANC Algorithms Overcoming Output Saturation]] — surveys FLANN-FsLMS as one of the NLANC algorithms for mitigating output saturation; provides $O(N(2P+1)(L+3))$ complexity comparison

@@ -454,4 +454,7 @@
 | [[entities/jeffrey-kopsick\|Jeffrey Kopsick]] | Co-author of the Intel N-DNS Challenge; Intel Labs Neuromorphic Computing Lab. | 2026-08-10 |
 | [[entities/mike-davies\|Mike Davies]] | Co-author; Director of Intel Labs Neuromorphic Computing Lab; principal investigator for Loihi 2 and the Intel N-DNS Challenge. | 2026-08-10 |
 | [[entities/karthikeyan-ramasamy\|Karthikeyan Ramasamy]] | Co-author of the Intel N-DNS Challenge; Intel Labs Neuromorphic Computing Lab. | 2026-08-10 |
+| [[entities/yu-guo\|Yu Guo]] | NTU DSP Lab — lead author of the survey on ANC algorithms overcoming output saturation | 2026-08-10 |
+| [[entities/xiaoyi-shen\|Xiaoyi Shen]] | NTU DSP Lab — wireless ANC, output-constrained ANC, momentum-based FxLMS variants | 2026-08-10 |
+| [[entities/junwei-ji\|Junwei Ji]] | NTU DSP Lab — output-constrained adaptive algorithms, momentum 2GD FxLMS | 2026-08-10 |
 

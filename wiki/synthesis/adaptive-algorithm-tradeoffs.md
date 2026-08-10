@@ -1,19 +1,22 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-05-17
+updated: 2026-08-10
 sources:
 - zotero://select/items/0_IZATI7ZF
 - zotero://select/items/0_9KNF4YUC
 - zotero://select/items/0_FERIFUEJ
 - zotero://select/items/0_NEWLEZ9B
 - zotero://select/items/0_QVJMFTWC
+- raw/papers/guo-2024-anc-saturation-survey/full-text.md
 tags:
 - adaptive-algorithms
 - algorithm-selection
 - convergence
 - trade-off-analysis
 - variable-step-size
+- output-constraint-algorithms
+- output-saturation
 ---
 
 # Adaptive Algorithm Trade-offs: A Decision Framework
@@ -123,6 +126,30 @@ No algorithm dominates on all three dimensions simultaneously.
 
 **Trade-off**: Additional parameters to tune ($\mu_{\max}$, smoothing factor $\alpha$).
 
+### 1.7 Output Constraint Family ([[concepts/output-constraint-anc-algorithms|Output Constraint ANC Algorithms]])
+
+Per [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024]], this family mitigates the [[output-saturation-effect|output saturation effect]] by limiting output power so the secondary-path amplifier stays linear. They are the **only family that preserves stability under severe saturation** (when the fundamental cannot be fully cancelled and unconstrained filters diverge).
+
+| Algorithm | Mechanism | Multiplications | Notes |
+|-----------|-----------|-----------------|-------|
+| **2-GD FxLMS** | Two gradient directions; weight-reduction when $|y|>C$ | $2N + L + 1$ (matches FxLMS) | Lowest cost in family |
+| **Re-scaling FxLMS** | Rescales $\mathbf{w}$ and $y$ by $C/|y|$ when threshold exceeded | $3N + L + 2$ | Simple amplitude clamp |
+| **Leaky FxLMS** | Scalar leakage $\gamma$ penalises $\mathbf{w}^T\mathbf{w}$ | $3N + L + 1$ | Also used for feedback ANC stability |
+| **Extended Leaky FxLMS** | Matrix leakage $\boldsymbol{\gamma}=\mathbf{C}^T\mathbf{C}$ | $2N^2 + 2N + L + 1$ | More control freedom, $O(N^2)$ |
+| **OLFxLMS** (Optimal Leaky) | $\boldsymbol{\gamma}=\Lambda_o \mathbf{R}_x$; converges to QCQP optimum | $2N^2 + 2N + L$ | Needs offline inverse-modeling of $G_s$ |
+| **MOV FxLMS** | Penalty $\alpha\,\mathbb{E}[y^2]$ on output variance | $3N + L + 1$ (basic); $4N + L + 7$ (optimal) | Power constraint |
+| **MOV-Modified FxLMS** | Online estimation of $G_s \approx \sigma_{x'}^2/\sigma_x^2$ via moving filter; variable $\alpha(n)$ | $4N + L + K + 7$ | Tracks time-varying noise/environments |
+
+| Dimension | Rating (MOV-Modified) | Notes |
+|-----------|----------------------|-------|
+| Performance | ★★★☆☆ | Cancels what the linear-region budget allows; harmonic distortion left untreated |
+| Robustness | ★★★★★ | Preserves stability under severe saturation — only family that does |
+| Computational Cost | ★★★★☆ | $O(N)$ for most variants; $O(N^2)$ only for optimal-leaky |
+
+**Best for**: Severe output saturation where unconstrained FxLMS/NLANC diverge; dynamic noise environments (MOV-Modified).
+
+**Trade-off**: Does not cancel harmonic distortion under mild saturation — for that, pair with an [[nonlinear-active-noise-control|NLANC]] algorithm.
+
 ---
 
 ## 2. The Performance-Robustness Frontier
@@ -161,7 +188,7 @@ Robustness
 | **Mechanical impacts (industrial)** | C-IFxGMCC ($\beta \approx 0.5$) | Severe impulse robustness + convergence |
 | **Headphones, DSP-constrained** | Simplified Feedback (Leaky FxLMS) | Eliminate IMC convolution |
 | **Headphones, premium (no constraint)** | Hybrid FF+MVC+IMC (N-FxLMS) | Maximum NR across all frequencies |
-| **Actuator saturation (large speakers)** | MPC (Liang 2026 closed-form) | Explicit saturation handling |
+| **Actuator saturation (large speakers)** | MOV-Modified FxLMS (severe) or MPC (Liang 2026 closed-form) | Output-constraint family preserves stability under severe saturation; NLANC diverges (Guo 2024) |
 | **Multi-channel (6+ speakers)** | MPC or Frequency-Domain ANC | Naturally handles MIMO |
 | **Changing noise conditions** | VSS-FxLMS (noise power estimate) | Fast adaptation to non-stationary noise |
 | **Ultra-low latency (< 1 ms)** | FxLMS or Simplified FB | Minimal computation per sample |
@@ -215,6 +242,8 @@ Where $L$ = filter length, $L_{\hat{S}}$ = secondary path length, $N_{state}$ = 
 - [[concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
 - [[concepts/impulsive-noise|Impulsive Noise]]
 - [[concepts/information-theoretic-learning|Information Theoretic Learning]]
+- [[concepts/output-saturation-effect|Output Saturation Effect]]
+- [[concepts/output-constraint-anc-algorithms|Output Constraint ANC Algorithms]]
 
 ## Related Sources
 
@@ -225,3 +254,4 @@ Where $L$ = filter length, $L_{\hat{S}}$ = secondary path length, $N_{state}$ = 
 - [[sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]
 - [[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]]
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method]] — Frequency-domain adaptive algorithm with faster convergence than filtered-x NLMS, no secondary path model required
+- [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024: ANC Algorithms Overcoming Output Saturation]] — introduces the output-constraint family (Section 1.7) as the practical default for severe saturation; provides per-algorithm complexity table and the mild-vs-severe saturation regime distinction
