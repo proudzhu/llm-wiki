@@ -1,18 +1,22 @@
 ---
 type: concept
 created: 2026-08-01
-updated: 2026-08-01
+updated: 2026-08-10
+sources:
+  - raw/papers/timcheck-2023-intel-neuromorphic-dns-challenge/full-text.md
 tags:
   - challenge
   - speech-enhancement
   - neuromorphic-computing
   - spiking-neural-networks
   - power-efficiency
+  - intel
+  - loihi
 ---
 
 # Intel Neuromorphic DNS Challenge
 
-The Intel Neuromorphic Deep Noise Suppression (N-DNS) Challenge (Timcheck et al., *Neuromorphic Computing and Engineering* 2023) solicited high-performance **SNN-based speech enhancement models** targeting ultra-low-power deployment on neuromorphic hardware (e.g., Intel Loihi). It is the main benchmark/evaluation framework for SNN-SE work such as [[concepts/sse-net|SSE-Net]] ([[sources/liu-2026-sse-net|Liu et al. 2026]]), whose champion was Spiking-FullSubNet (Hao et al. 2025).
+The Intel Neuromorphic Deep Noise Suppression (N-DNS) Challenge (Timcheck et al., arXiv 2023; *Neuromorphic Computing and Engineering*) solicited high-performance **SNN-based speech enhancement models** targeting ultra-low-power deployment on neuromorphic hardware ([[concepts/loihi-2|Intel Loihi 2]]). Introduced by [[sources/timcheck-2023-intel-neuromorphic-dns-challenge|Timcheck et al. 2023]], it is the main benchmark/evaluation framework for SNN-SE work such as [[concepts/sse-net|SSE-Net]] ([[sources/liu-2026-sse-net|Liu et al. 2026]]), whose champion was Spiking-FullSubNet (Hao et al. 2025).
 
 ## Power-Proxy Metrics
 
@@ -37,12 +41,16 @@ Because neuromorphic energy scales with fundamental computational operations, th
 
 ## Related Concepts
 
+- [[concepts/loihi-2|Loihi 2]] — the neuromorphic chip targeted by Track 2 of the challenge
+- [[concepts/sigma-delta-neural-network|Sigma-Delta Neural Network (SDNN)]] — the released baseline solution
 - [[concepts/spiking-neural-networks|Spiking Neural Networks]]
 - [[concepts/neuromorphic-computing|Neuromorphic Computing]]
 - [[concepts/sse-net|SSE-Net]]
 - [[concepts/speech-enhancement|Speech Enhancement]]
+- [[concepts/nsnet2|NSNet2]] — Microsoft DNS 2022 baseline used as the conventional comparison point
 - [[concepts/dns-challenge|DNS Challenge (Microsoft)]] — the ANN-era predecessor benchmark
 
 ## Related Sources
 
-- [[sources/liu-2026-sse-net|Liu et al. 2026: SSE-Net]]
+- [[sources/timcheck-2023-intel-neuromorphic-dns-challenge|Timcheck et al. 2023: The Intel Neuromorphic DNS Challenge]] — primary source defining the challenge, tracks, metrics, dataset, and SDNN baseline
+- [[sources/liu-2026-sse-net|Liu et al. 2026: SSE-Net]] — SNN-SE model reporting power proxy against the N-DNS Challenge landscape

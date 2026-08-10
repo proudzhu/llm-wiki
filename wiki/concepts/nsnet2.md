@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-07-17
-updated: 2026-07-17
+updated: 2026-08-10
 sources:
   - raw/papers/seidel-2024-bark-scale-nn-residual-suppression/full-text.md
+  - raw/papers/timcheck-2023-intel-neuromorphic-dns-challenge/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -28,10 +29,14 @@ The architecture is fully causal (streaming-friendly) and uses only dense + recu
 
 ## Role in Hybrid AEC Postfilters
 
-NSNet2-style backbones are the basis for several [[concepts/percepnet-style-neural-post-filter\|PercepNet-style neural postfilters]] in hybrid AEC pipelines, including:
+NSNet2-style backbones are the basis for several [[concepts/percepnet-style-neural-post-filter\|Percepnet-style neural postfilters]] in hybrid AEC pipelines, including:
 
 - The proposed Bark-scale postfilter in [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Seidel et al. 2024]], which augments NSNet2 with a [[concepts/bark-scale-spectral-features\|Bark-scale input mapping]] (86 bands) to improve nearend speech preservation. Achieves 235 MMACs/s with 1.58M params.
 - Various Microsoft DNS Challenge baselines.
+
+## Role as a Conventional Baseline for Neuromorphic SE
+
+NSNet2 (the Microsoft DNS 2022 baseline) serves as the **conventional comparison point** in the [[concepts/intel-neuromorphic-dns-challenge|Intel Neuromorphic DNS Challenge]] ([[sources/timcheck-2023-intel-neuromorphic-dns-challenge\|Timcheck et al. 2023]]). On the Intel N-DNS validation set, NsNet2 achieves SI-SNR 11.89 dB and DNSMOS OVRL 2.95 with a power proxy of 136.13 M-Ops/s and 2,681K parameters; the challenge's SDNN baseline matches its SI-SNR (12.50 dB) while reducing power proxy by 9.4×, parameter count by 5×, and model size by 22× — establishing NsNet2 as the reference point against which neuromorphic SNN-SE solutions are evaluated.
 
 ## Key Properties
 
@@ -64,7 +69,10 @@ NSNet2's advantage is its **fully-connected + recurrent** nature, which is signi
 - [[concepts/dtln\|DTLN]]
 - [[concepts/speech-enhancement\|Speech Enhancement]]
 - [[concepts/complex-compressed-mse\|Complex Compressed MSE (CCMSE)]]
+- [[concepts/intel-neuromorphic-dns-challenge\|Intel Neuromorphic DNS Challenge]] — uses NsNet2 as the conventional baseline
+- [[concepts/dns-challenge\|DNS Challenge (Microsoft)]]
 
 ## Related Sources
 
 - [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Seidel, Mowlaee & Fingscheidt 2024]] — adopts NSNet2 as the postfilter backbone with an added Bark-scale input mapping
+- [[sources/timcheck-2023-intel-neuromorphic-dns-challenge\|Timcheck et al. 2023: The Intel Neuromorphic DNS Challenge]] — uses NsNet2 as the conventional baseline against which the SDNN neuromorphic baseline is compared

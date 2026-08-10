@@ -4160,3 +4160,31 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/entities/index.md` — added 6 entity rows
   - `wiki/concepts/index.md` — added 3 concept rows
 - **Synthesis**: triage ran (2 candidate pages by tag overlap); skipped updates — Liu 2024 is CV/ML-focused, does not add a substantive data point to the ANC-focused `computational-efficiency-evolution.md` synthesis; cross-reference in source page's Related Synthesis section is sufficient
+
+## [2026-08-10] ingest | Timcheck et al. 2023: The Intel Neuromorphic DNS Challenge
+
+- **Source**: `raw/papers/timcheck-2023-intel-neuromorphic-dns-challenge/full-text.md` (MinerU extraction from arXiv 2303.09503 PDF; Zotero item key `0_TJJYB8BC`)
+- **Summary**: Defines the Intel Neuromorphic DNS Challenge (LAVA 2023) — a benchmark for SNN-based real-time monaural speech enhancement on Loihi 2. Two tracks (algorithmic simulation / hardware implementation) evaluate audio quality (SI-SNR, DNSMOS), power (Loihi-calibrated proxy P = SynOPS + 10×NeuronOPS), latency, and chip resources; minimum improvement thresholds prevent trivial solutions. Includes a 500-hour dataset derived from the Microsoft DNS Challenge corpus and an SDNN baseline (sigma-delta encoding + axonal delays) reaching SI-SNR 12.50 dB at **14.54 M-Ops/s power proxy, 525K params, 465 KB** — 9.4× lower power, 5× fewer params, 22× smaller model than the NsNet2 conventional baseline (136.13 M-Ops/s, 2,681K params) on the same validation set.
+- **Pages created**:
+  - `wiki/sources/timcheck-2023-intel-neuromorphic-dns-challenge.md` — source summary with full metadata, methodology, results, and key contributions
+  - 8 entity pages for authors (all Intel Labs Neuromorphic Computing Lab):
+    - `wiki/entities/jonathan-timcheck.md` (first author)
+    - `wiki/entities/sumit-bam-shrestha.md` (SNN training / surrogate gradients)
+    - `wiki/entities/petrus-foloppe.md`
+    - `wiki/entities/daniel-cleland.md`
+    - `wiki/entities/aidan-schuman.md`
+    - `wiki/entities/jeffrey-kopsick.md`
+    - `wiki/entities/mike-davies.md` (Director, Intel Labs Neuromorphic Computing Lab)
+    - `wiki/entities/karthikeyan-ramasamy.md`
+  - 2 new concept pages:
+    - `wiki/concepts/loihi-2.md` — Intel's second-generation neuromorphic chip; documents the 10× neuron-vs-synapse energy ratio underpinning the Track 1 power-proxy metric
+    - `wiki/concepts/sigma-delta-neural-network.md` — SDNN architecture, sigma-delta sparse message passing, axonal-delay temporal memory, and the baseline's N-DNS performance vs. NsNet2 / Spiking-FullSubNet
+- **Pages updated** (added source citation, cross-references, and updated `updated` dates):
+  - `wiki/concepts/intel-neuromorphic-dns-challenge.md` — now points to the primary source and the Loihi 2 / SDNN concept pages; Related Concepts/Sources expanded
+  - `wiki/concepts/neuromorphic-computing.md` — added Timcheck 2023 source; cross-referenced Loihi 2 and the Intel N-DNS Challenge
+  - `wiki/concepts/spiking-neural-networks.md` — added Timcheck 2023 source; cross-referenced Loihi 2, SDNN, and the Intel N-DNS Challenge
+  - `wiki/concepts/dns-challenge.md` — added a paragraph linking the Microsoft DNS Challenge to its neuromorphic counterpart and citing Timcheck 2023
+  - `wiki/concepts/nsnet2.md` — added "Role as a Conventional Baseline for Neuromorphic SE" section with the N-DNS comparison numbers (136.13 M-Ops/s, 2,681K params vs. SDNN's 14.54 / 525K)
+- **Synthesis**: triage ran (6 candidate pages by tag overlap); 1 updated:
+  - `wiki/synthesis/computational-efficiency-evolution.md` — added Timcheck 2023 to Related Sources and to the SSE-Net (axis #5) entry of the 2026 efficiency frontier: anchored the Loihi power-proxy metric citation with its primary source and added the SDNN baseline as the originating frontier point of the spiking/neuromorphic Pareto axis. Also added Loihi 2, SDNN, Intel N-DNS Challenge, and NsNet2 to the Related Concepts list. The other 5 candidates had only 1 shared tag (speech-enhancement) with no substantive cross-source contribution and were skipped.
+- **Indexes**: ran `update_indexes.py batch --stats` — 11 added (1 source + 8 entities + 2 new concepts), 6 updated pages already present (skipped). After creating 5 entity files that were missing from disk (see "Pages created" above — the previous session had only written 3 of 8 to disk), re-ran `update_indexes.py stats`: total=1035, entities=455, concepts=396, sources=156, synthesis=21, queries=7. Verified with `check_statistics.py` — all counts match actual files. Note: `check_index_drift.py` surfaced 5 pre-existing orphan entity files unrelated to this ingest (adam-kupryjanow, daniel-ben-dayan-rubin, garrick-orchard, lukasz-pindor, timothy-shea) — present on disk but never indexed by their original ingests; left for a future lint pass.

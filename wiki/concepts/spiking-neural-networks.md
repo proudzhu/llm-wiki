@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-08-01
+updated: 2026-08-10
 sources:
   - raw/papers/liu-2026-sse-net/full-text.md
+  - raw/papers/timcheck-2023-intel-neuromorphic-dns-challenge/full-text.md
 tags:
   - spiking-neural-networks
   - neuromorphic-computing
@@ -67,8 +68,12 @@ SNN-based monaural speech enhancement (SNN-SE) has emerged as a low-power altern
 - [[neural-networks|Neural Networks]]
 - [[backpropagation-through-time|Backpropagation Through Time]]
 - [[real-time-recurrent-learning|Real-Time Recurrent Learning]]
+- [[concepts/loihi-2|Loihi 2]] — Intel neuromorphic chip supporting graded spikes, microcode-programmed neuron models, and on-chip learning
+- [[concepts/sigma-delta-neural-network|Sigma-Delta Neural Network (SDNN)]] — SNN baseline using sigma-delta sparse message passing
+- [[concepts/intel-neuromorphic-dns-challenge|Intel Neuromorphic DNS Challenge]] — SNN-SE benchmark targeting Loihi 2
 
 ## Related Sources
 
 - [[sources/yamazaki-2022-spiking-nn-review|Yamazaki 2022: Spiking Neural Networks Review]]
+- [[sources/timcheck-2023-intel-neuromorphic-dns-challenge|Timcheck et al. 2023: The Intel Neuromorphic DNS Challenge]] — defines an SNN-SE benchmark on Loihi 2 with an SDNN baseline exploiting graded spikes and axonal delays
 - [[sources/liu-2026-sse-net|Liu et al. 2026: SSE-Net]] — spike-native SNN-SE architecture with record-low power proxy

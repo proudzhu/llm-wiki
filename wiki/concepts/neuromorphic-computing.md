@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-08-01
+updated: 2026-08-10
 sources:
   - raw/papers/liu-2026-sse-net/full-text.md
+  - raw/papers/timcheck-2023-intel-neuromorphic-dns-challenge/full-text.md
 tags:
   - neuromorphic-computing
   - hardware
@@ -41,8 +42,11 @@ Computing paradigm inspired by the brain's architecture, using spiking neurons a
 
 - [[spiking-neural-networks|Spiking Neural Networks]]
 - [[spike-timing-dependent-plasticity|Spike-Timing-Dependent Plasticity]]
+- [[concepts/loihi-2|Loihi 2]] — Intel neuromorphic chip targeted by the Intel N-DNS Challenge
+- [[concepts/intel-neuromorphic-dns-challenge|Intel Neuromorphic DNS Challenge]] — benchmark for SNN-based real-time audio denoising
 
 ## Related Sources
 
 - [[sources/yamazaki-2022-spiking-nn-review|Yamazaki 2022: Spiking Neural Networks Review]]
+- [[sources/timcheck-2023-intel-neuromorphic-dns-challenge|Timcheck et al. 2023: The Intel Neuromorphic DNS Challenge]] — defines a neuromorphic benchmark for real-time audio denoising on Loihi 2 with power/latency/resource evaluation methodology
 - [[sources/liu-2026-sse-net|Liu et al. 2026: SSE-Net]] — SNN speech enhancement targeting neuromorphic deployment

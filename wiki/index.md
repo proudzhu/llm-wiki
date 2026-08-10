@@ -452,6 +452,14 @@
 | [[entities/lai-kuan-wong\|Lai-Kuan Wong]] | Multimedia University researcher — co-author of the Liu et al. 2024 lightweight-DL survey | 2026-08-09 |
 | [[entities/hong-han-shuai\|Hong-Han Shuai]] | NYCU researcher / professor — co-author of the Liu et al. 2024 lightweight-DL survey | 2026-08-09 |
 | [[entities/yung-hui-li\|Yung-Hui Li]] | Hon Hai Research Institute (Foxconn) researcher — co-author of the Liu et al. 2024 lightweight-DL survey | 2026-08-09 |
+| [[entities/jonathan-timcheck\|Jonathan Timcheck]] | First author of the Intel Neuromorphic DNS Challenge; Intel Labs Neuromorphic Computing Lab. | 2026-08-10 |
+| [[entities/sumit-bam-shrestha\|Sumit Bam Shrestha]] | Co-author of the Intel N-DNS Challenge; SNN training and surrogate-gradient methodology at Intel Labs. | 2026-08-10 |
+| [[entities/petrus-foloppe\|Petrus Foloppe]] | Co-author of the Intel N-DNS Challenge; Intel Labs Neuromorphic Computing Lab. | 2026-08-10 |
+| [[entities/daniel-cleland\|Daniel Cleland]] | Co-author of the Intel N-DNS Challenge; Intel Labs Neuromorphic Computing Lab. | 2026-08-10 |
+| [[entities/aidan-schuman\|Aidan Schuman]] | Co-author of the Intel N-DNS Challenge; Intel Labs Neuromorphic Computing Lab. | 2026-08-10 |
+| [[entities/jeffrey-kopsick\|Jeffrey Kopsick]] | Co-author of the Intel N-DNS Challenge; Intel Labs Neuromorphic Computing Lab. | 2026-08-10 |
+| [[entities/mike-davies\|Mike Davies]] | Co-author; Director of Intel Labs Neuromorphic Computing Lab; principal investigator for Loihi 2 and the Intel N-DNS Challenge. | 2026-08-10 |
+| [[entities/karthikeyan-ramasamy\|Karthikeyan Ramasamy]] | Co-author of the Intel N-DNS Challenge; Intel Labs Neuromorphic Computing Lab. | 2026-08-10 |
 
 ---
 
@@ -855,6 +863,8 @@
 | [[concepts/lightweight-cnn-families\|Lightweight CNN Families]] | Liu et al. 2024's six-series taxonomy of efficient CNNs (SqueezeNet, ShuffleNet, CondenseNet, MobileNet, Shift, Add) | 2026-08-09 |
 | [[concepts/knowledge-distillation-paradigms\|Knowledge Distillation Paradigms]] | Three-paradigm taxonomy of KD (offline, online, self-distillation) with practical selection rules | 2026-08-09 |
 | [[concepts/hardware-dataflow-types\|Hardware Dataflow Types]] | Four-type taxonomy of DL accelerator dataflows (pipeline, DaDianNao, systolic-array, streaming) | 2026-08-09 |
+| [[concepts/loihi-2\|Loihi 2]] | Intel's second-generation neuromorphic chip; microcode-programmed neuron models, graded spikes, on-chip learning, and sparse event-driven communication; target hardware for Intel N-DNS Challenge Track 2 and the calibration reference for the Track 1 power-proxy metric. | 2026-08-10 |
+| [[concepts/sigma-delta-neural-network\|Sigma-Delta Neural Network (SDNN)]] | SNN architecture using sigma-delta encoding for sparse event-driven message passing and axonal delays for temporal memory; the released Intel N-DNS Challenge baseline reaches SI-SNR 12.50 dB at 14.54 M-Ops/s power proxy with 525K params - 9.4x lower power than NsNet2 at comparable SI-SNR. | 2026-08-10 |
 
 ---
 
@@ -1019,6 +1029,7 @@
 | [[sources/lin-2021-mcunetv2\|Lin et al. 2021: MCUNetV2 — Memory-Efficient Patch-based Inference for Tiny Deep Learning]] | Patch-based inference + receptive field redistribution cut peak SRAM 4–8×; record 71.8% ImageNet on MCU, >90% VWW under 32kB, +16.9% VOC mAP | 2026-08-09 |
 | [[sources/lin-2023-tinyml-progress-futures\|Lin et al. 2023: TinyML — Progress and Futures]] | Review surveying TinyML inference & training on MCUs; integrates MCUNet V1/V2/V3 co-design arc, introduces QAS + sparse update + TTE for on-device training (173 kB SRAM) | 2026-08-09 |
 | [[sources/liu-2024-lightweight-dl-survey\|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] | Survey unifying lightweight architecture design, model compression, and hardware acceleration into a single pipeline; TinyML and lightweight LLMs as future frontiers | 2026-08-09 |
+| [[sources/timcheck-2023-intel-neuromorphic-dns-challenge\|Timcheck et al. 2023: The Intel Neuromorphic DNS Challenge]] | Defines the Intel Neuromorphic DNS Challenge (LAVA 2023): a benchmark for SNN-based real-time monaural speech enhancement on Loihi 2. Two tracks (algorithmic simulation / hardware implementation) evaluate audio quality (SI-SNR, DNSMOS), power (Loihi-calibrated proxy P = SynOPS + 10x NeuronOPS), latency, and chip resources. Includes a 500-hour dataset derived from the Microsoft DNS Challenge corpus, an SDNN baseline (sigma-delta encoding + axonal delays) reaching SI-SNR 12.50 dB at 14.54 M-Ops/s, and the NsNet2 conventional baseline (136.13 M-Ops/s). | 2026-08-10 |
 
 ---
 
@@ -1070,10 +1081,10 @@
 
 ## Statistics
 
-- **Total pages**: 1019
-- **Entities**: 442
-- **Concepts**: 394
-- **Sources**: 155
+- **Total pages**: 1035
+- **Entities**: 455
+- **Concepts**: 396
+- **Sources**: 156
 - **Synthesis**: 21
 - **Queries**: 7
-- **Last updated**: 2026-08-09
+- **Last updated**: 2026-08-10

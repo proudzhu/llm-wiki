@@ -446,4 +446,12 @@
 | [[entities/lai-kuan-wong\|Lai-Kuan Wong]] | Multimedia University researcher — co-author of the Liu et al. 2024 lightweight-DL survey | 2026-08-09 |
 | [[entities/hong-han-shuai\|Hong-Han Shuai]] | NYCU researcher / professor — co-author of the Liu et al. 2024 lightweight-DL survey | 2026-08-09 |
 | [[entities/yung-hui-li\|Yung-Hui Li]] | Hon Hai Research Institute (Foxconn) researcher — co-author of the Liu et al. 2024 lightweight-DL survey | 2026-08-09 |
+| [[entities/jonathan-timcheck\|Jonathan Timcheck]] | First author of the Intel Neuromorphic DNS Challenge; Intel Labs Neuromorphic Computing Lab. | 2026-08-10 |
+| [[entities/sumit-bam-shrestha\|Sumit Bam Shrestha]] | Co-author of the Intel N-DNS Challenge; SNN training and surrogate-gradient methodology at Intel Labs. | 2026-08-10 |
+| [[entities/petrus-foloppe\|Petrus Foloppe]] | Co-author of the Intel N-DNS Challenge; Intel Labs Neuromorphic Computing Lab. | 2026-08-10 |
+| [[entities/daniel-cleland\|Daniel Cleland]] | Co-author of the Intel N-DNS Challenge; Intel Labs Neuromorphic Computing Lab. | 2026-08-10 |
+| [[entities/aidan-schuman\|Aidan Schuman]] | Co-author of the Intel N-DNS Challenge; Intel Labs Neuromorphic Computing Lab. | 2026-08-10 |
+| [[entities/jeffrey-kopsick\|Jeffrey Kopsick]] | Co-author of the Intel N-DNS Challenge; Intel Labs Neuromorphic Computing Lab. | 2026-08-10 |
+| [[entities/mike-davies\|Mike Davies]] | Co-author; Director of Intel Labs Neuromorphic Computing Lab; principal investigator for Loihi 2 and the Intel N-DNS Challenge. | 2026-08-10 |
+| [[entities/karthikeyan-ramasamy\|Karthikeyan Ramasamy]] | Co-author of the Intel N-DNS Challenge; Intel Labs Neuromorphic Computing Lab. | 2026-08-10 |
 
