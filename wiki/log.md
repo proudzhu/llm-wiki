@@ -4245,3 +4245,27 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
 - **Synthesis**: no updates. Existing synthesis pages are thematically focused on ANC/speech enhancement; the Lê 2026 paper is squarely outside those themes, so no synthesis cross-references were added (avoiding thin stubs).
 - **Indexes**: updated `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` with 7 new entries (1 source + 3 entities + 3 concepts). Statistics recounted and verified with `check_statistics.py`: total=1046, entities=459, concepts=401, sources=158, synthesis=21, queries=7 — all counts match actual files.
 - **Verification**: `mkdocs build --strict` passed (exit 0, no page-level warnings).
+
+---
+
+## [2026-08-11] ingest | A Robust Residual Echo Suppression Algorithm Even During Double Talk (Fang 2020)
+
+- **Source**: `raw/papers/fang-2020-robust-residual-echo-suppression/full-text.md` (Zotero: PCS7RXHC)
+- **Authors**: Bingxiao Fang
+- **Published**: Proc. IEEE ICICS 2020, Sep. 2020
+- **DOI**: 10.1109/ICICSP50920.2020.9232011
+- **Summary**: VAD-free residual echo PSD estimator via statistical normalized correlation between mean-removed AEC error and echo replica; robust during double talk; outperforms slow-attach-fast-decay baseline on both ERLE and SSDR
+- **Pages created**:
+  - `raw/papers/fang-2020-robust-residual-echo-suppression/full-text.md` — extracted text from Zotero PDF (MinerU VLM)
+  - `wiki/sources/fang-2020-robust-residual-echo-suppression.md`
+  - `wiki/entities/bingxiao-fang.md`
+  - `wiki/concepts/statistical-normalized-correlation.md`
+  - `wiki/concepts/echo-return-loss-enhancement.md`
+  - `wiki/concepts/speech-to-speech-distortion-ratio.md`
+- **Pages updated**:
+  - `wiki/concepts/residual-echo-suppression.md` — added Fang 2020 method section, cross-refs to new concepts, and source link
+  - `wiki/concepts/multidelay-block-frequency-domain-adaptive-filter.md` — added Fang 2020 as a related source (uses GMDF front-end)
+  - `wiki/index.md` — added 1 entity, 3 concepts, 1 source; updated statistics
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 1 entity row
+  - `wiki/concepts/index.md` — added 3 concept rows

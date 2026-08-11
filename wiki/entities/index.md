@@ -460,4 +460,5 @@
 | [[entities/minh-tri-le\|Minh Tri Lê]] | Université Grenoble Alpes / Inria — TinyML, quantization, Bayesian compression | 2026-08-11 |
 | [[entities/pierre-wolinski\|Pierre Wolinski]] | Université Grenoble Alpes / Inria / Paris-Dauphine — TinyML, Bayesian compression, NAS | 2026-08-11 |
 | [[entities/julyan-arbel\|Julyan Arbel]] | Université Grenoble Alpes / Inria — Bayesian statistics, Bayesian neural networks, TinyML | 2026-08-11 |
+| [[entities/bingxiao-fang\|Bingxiao Fang]] | Beijing Sabine Technologies — residual echo suppression via statistical normalized correlation | 2026-08-11 |
 

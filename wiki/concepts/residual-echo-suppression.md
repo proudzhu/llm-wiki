@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-08
-updated: 2026-08-08
+updated: 2026-08-11
 sources:
   - raw/papers/wung-2011-residual-echo-suppression-system/full-text.md
+  - raw/papers/fang-2020-robust-residual-echo-suppression/full-text.md
 tags:
   - acoustic-echo-cancellation
   - residual-echo-suppression
@@ -35,12 +36,24 @@ The LSA filter is applied to the microphone signal $Y$ (treating the near-end $v
 
 Conventional RES estimates $\lambda_B$ from the equivalent transfer function (ETF) method and/or the coherence function (CF) method. Frequency-domain Wiener filtering based on these estimates is sensitive to SNR-estimation accuracy and may introduce near-end speech distortion or musical noise.
 
+### Statistical Normalized Correlation (Fang 2020)
+
+[[sources/fang-2020-robust-residual-echo-suppression|Fang 2020]] proposes a VAD-free residual echo PSD estimator based on the [[concepts/statistical-normalized-correlation|statistical normalized correlation]] between the mean-removed AEC error $\tilde{E}$ and echo replica $\tilde{D}$:
+
+$$\hat{\lambda}_R(i,k) = \frac{r^{de}(i,k)\cdot r^{de}(i,k)}{r^{dd}(i,k)},$$
+
+where $r^{de}$ and $r^{dd}$ are recursively smoothed cross- and auto-PSDs. Because the residual echo $R=(H-W)X$ and echo replica $\hat{D}=WX$ share the same excitation $X$, their coherence $\cos\theta \approx 1$ in single talk, so $\hat{\lambda}_R \approx |R|^2$. During double talk, near-end speech $S$ is statistically uncorrelated with $\hat{D}$ over the smoothing window, so the cross-term averages out — making the estimator robust without a double-talk detector. The PSD feeds an Ephraim-Malah-style gain. Real recordings show simultaneous improvements in both [[concepts/echo-return-loss-enhancement|ERLE]] and [[concepts/speech-to-speech-distortion-ratio|SSDR]] over a slow-attach-fast-decay baseline.
+
 ## Related Concepts
 
 - [[concepts/acoustic-echo-cancellation|Acoustic Echo Cancellation]] — the linear front-end whose residual error RES suppresses.
 - [[concepts/psychoacoustic-postfilter|Psychoacoustic Postfilter]] — a masking-threshold-driven gain that suppresses residual echo without audible distortion.
 - [[concepts/error-recovery-nonlinearity|Error Recovery Nonlinearity (ERN)]] — the nonlinear stage that makes the robust AEC's residual echo small enough for the system approach to hold.
+- [[concepts/statistical-normalized-correlation|Statistical Normalized Correlation]] — Fang 2020's VAD-free residual echo PSD estimator.
+- [[concepts/echo-return-loss-enhancement|Echo Return Loss Enhancement (ERLE)]] — single-talk evaluation metric for RES.
+- [[concepts/speech-to-speech-distortion-ratio|Speech-to-Speech-Distortion power Ratio (SSDR)]] — double-talk evaluation metric for RES.
 
 ## Related Sources
 
 - [[sources/wung-2011-residual-echo-suppression-system|Wung et al. 2011]] — system approach combining robust AEC, LSA-based residual echo estimation, and a psychoacoustic postfilter.
+- [[sources/fang-2020-robust-residual-echo-suppression|Fang 2020]] — VAD-free residual echo PSD estimation via statistical normalized correlation, robust during double talk.

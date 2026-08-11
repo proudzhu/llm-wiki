@@ -405,4 +405,7 @@
 | [[concepts/model-pruning\|Model Pruning]] | Three-granularity taxonomy (unstructured, structured, Bayesian) for removing less-important NN parameters; TinyML favors structured pruning for hardware efficiency | 2026-08-11 |
 | [[concepts/bayesian-compression\|Bayesian Compression]] | Unifying framework for pruning + quantization via spike-and-slab, horseshoe, and log-uniform priors with variational inference; enables per-parameter heterogeneous precision | 2026-08-11 |
 | [[concepts/tinymlops\|TinyMLOps]] | End-to-end pipeline for deploying ML models on MCUs; runtime (TFLM) vs transcompiler (NNoM, Edge Impulse, μTVM) framework taxonomy; CMSIS-NN backend; MLPerf Tiny benchmark | 2026-08-11 |
+| [[concepts/statistical-normalized-correlation\|Statistical Normalized Correlation (for Residual Echo PSD)]] | VAD-free residual echo PSD estimator using normalized cross-correlation between mean-removed AEC error and echo replica (Fang 2020) | 2026-08-11 |
+| [[concepts/echo-return-loss-enhancement\|Echo Return Loss Enhancement (ERLE)]] | Standard single-talk metric for AEC/RES echo attenuation, ratio of output to input echo power in dB | 2026-08-11 |
+| [[concepts/speech-to-speech-distortion-ratio\|Speech-to-Speech-Distortion power Ratio (SSDR)]] | Double-talk metric measuring near-end speech distortion introduced by RES gain | 2026-08-11 |
 

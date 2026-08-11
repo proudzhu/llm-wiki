@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-07-17
-updated: 2026-07-17
+updated: 2026-08-11
 sources:
   - raw/papers/valin-2021-percepnet-joint-echo-control/full-text.md
+  - raw/papers/fang-2020-robust-residual-echo-suppression/full-text.md
 tags:
   - adaptive-filtering
   - acoustic-echo-cancellation
@@ -41,3 +42,4 @@ Despite the neural post filter, the linear AEC is critical for double-talk perfo
 ## Related Sources
 
 - [[sources/valin-2021-percepnet-joint-echo-control|Valin et al. 2021: Joint Neural Echo Control and Speech Enhancement Based On PercepNet]]
+- [[sources/fang-2020-robust-residual-echo-suppression|Fang 2020]] — uses GMDF as the AEC front-end for a correlation-based residual echo suppressor, chosen for its flexibility in selecting FFT size and block delay independently.
