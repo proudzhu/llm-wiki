@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-07-16
-updated: 2026-08-09
+updated: 2026-08-11
 sources:
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
   - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
+  - raw/papers/le-2026-efficient-nn-tinyml-review/full-text.md
 tags:
   - neural-network
   - quantization
@@ -73,3 +74,4 @@ Weight-only QAT recovers essentially all of the FP32 quality, confirming that th
 
 - [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]]
 - [[sources/liu-2024-lightweight-dl-survey|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] — surveys bit-width trade-offs on ResNet18/ImageNet (Table 5): 4-bit PTQ preserves accuracy (LLT: +0.6% / −0.3%); 2-bit causes 3–4% loss; 1-bit (XNOR-Net) causes 18% loss. Practical guidance: match quantization precision to hardware (MCUs/edge TPUs often require full integer); 8-bit int recommended for low-power CPUs; 16-bit float as starting point when hardware permits; TF-Lite achieves 4× size reduction and 3×+ inference speedup.
+- [[sources/le-2026-efficient-nn-tinyml-review|Lê, Wolinski & Arbel 2026: Efficient NNs for TinyML — A Comprehensive Review]] — surveys PTQ for ultra-low-power MCUs and concludes "we would favor uniform 8-bit PTQ due to its simplicity and acceptable results until we need lower-bit precision for more power footprint reduction." Notes that "the most widely used quantization method for MCUs is uniform affine PTQ to int8 because it is straightforward and supported by MCUs." Below 8 bits, "PTQ may lead to a more significant loss in accuracy" and QAT becomes preferable. Also flags a TinyML-specific sensitivity: "very small models, that can be found in TinyML, should be more sensitive to quantization" because the overparameterization that buffers larger models against quantization noise is precisely what TinyML lacks.

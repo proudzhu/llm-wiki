@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-08-09
-updated: 2026-08-09
+updated: 2026-08-11
 sources:
   - raw/papers/lin-2020-mcunet/full-text.md
   - raw/papers/lin-2021-mcunetv2/full-text.md
   - raw/papers/lin-2023-tinyml-progress-futures/full-text.md
   - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
+  - raw/papers/le-2026-efficient-nn-tinyml-review/full-text.md
 tags:
   - tinyml
   - deep-learning
@@ -71,10 +72,15 @@ The survey also identifies three structural impediments to TinyML's rapid develo
 - [[concepts/post-training-quantization\|Post-Training Quantization]]
 - [[concepts/quantization-aware-training\|Quantization-Aware Training]]
 - [[concepts/depthwise-separable-convolution\|Depthwise Separable Convolution]]
+- [[concepts/tinymlops\|TinyMLOps]] — deployment pipeline and framework taxonomy (TFLM, NNoM, Edge Impulse, CMSIS-NN)
+- [[concepts/model-pruning\|Model Pruning]] — unstructured / structured / Bayesian pruning taxonomy
+- [[concepts/bayesian-compression\|Bayesian Compression]] — unifying framework for pruning + quantization via spike-and-slab / horseshoe / log-uniform priors
+- [[concepts/keyword-spotting\|Keyword Spotting]] — primary TinyML audio application
 
 ## Related Sources
 
-- [[sources/lin-2020-mcunet\|Lin et al. 2020: MCUNet — Tiny Deep Learning on IoT Devices]]
-- [[sources/lin-2021-mcunetv2\|Lin et al. 2021: MCUNetV2 — Memory-Efficient Patch-based Inference for Tiny Deep Learning]]
-- [[sources/lin-2023-tinyml-progress-futures\|Lin et al. 2023: TinyML — Progress and Futures]]
-- [[sources/liu-2024-lightweight-dl-survey\|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] — broader survey that frames TinyML as a future frontier alongside lightweight LLMs; catalogs CMSIS-NN, CMIX-NN, MicroNet alongside the MCUNet family
+- [[sources/lin-2020-mcunet|Lin et al. 2020: MCUNet — Tiny Deep Learning on IoT Devices]]
+- [[sources/lin-2021-mcunetv2|Lin et al. 2021: MCUNetV2 — Memory-Efficient Patch-based Inference for Tiny Deep Learning]]
+- [[sources/lin-2023-tinyml-progress-futures|Lin et al. 2023: TinyML — Progress and Futures]]
+- [[sources/liu-2024-lightweight-dl-survey|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] — broader survey that frames TinyML as a future frontier alongside lightweight LLMs; catalogs CMSIS-NN, CMIX-NN, MicroNet alongside the MCUNet family
+- [[sources/le-2026-efficient-nn-tinyml-review|Lê, Wolinski & Arbel 2026: Efficient NNs for TinyML — A Comprehensive Review]] — bridges methodological and application TinyML surveys; introduces the runtime-vs-transcompiler framework taxonomy (TFLM vs NNoM/Edge Impulse/μTVM) covered in [[concepts/tinymlops|TinyMLOps]]; surveys the five model-compression methods with a unifying [[concepts/bayesian-compression|Bayesian compression]] synthesis; targets the extreme-low-power regime (<8 kB SRAM, Cortex-M0+/eDMPv1); provides per-dataset Flash-size-vs-accuracy landscapes overlaid with Cortex-M0+/M4/M7 memory thresholds for MNIST, ImageNet, VWW, and Google Speech Commands v2-12

@@ -402,4 +402,7 @@
 | [[concepts/sigma-delta-neural-network\|Sigma-Delta Neural Network (SDNN)]] | SNN architecture using sigma-delta encoding for sparse event-driven message passing and axonal delays for temporal memory; the released Intel N-DNS Challenge baseline reaches SI-SNR 12.50 dB at 14.54 M-Ops/s power proxy with 525K params - 9.4x lower power than NsNet2 at comparable SI-SNR. | 2026-08-10 |
 | [[concepts/output-saturation-effect\|Output Saturation Effect]] | Nonlinear distortion from secondary-path amplifier saturation in ANC; causes adaptive filter divergence under severe saturation | 2026-08-10 |
 | [[concepts/output-constraint-anc-algorithms\|Output Constraint ANC Algorithms]] | FxLMS variants that limit output power to keep the amplifier linear; the practical default for severe output saturation (2-GD, Re-scaling, Leaky, MOV, OLFxLMS, MOV-Modified) | 2026-08-10 |
+| [[concepts/model-pruning\|Model Pruning]] | Three-granularity taxonomy (unstructured, structured, Bayesian) for removing less-important NN parameters; TinyML favors structured pruning for hardware efficiency | 2026-08-11 |
+| [[concepts/bayesian-compression\|Bayesian Compression]] | Unifying framework for pruning + quantization via spike-and-slab, horseshoe, and log-uniform priors with variational inference; enables per-parameter heterogeneous precision | 2026-08-11 |
+| [[concepts/tinymlops\|TinyMLOps]] | End-to-end pipeline for deploying ML models on MCUs; runtime (TFLM) vs transcompiler (NNoM, Edge Impulse, μTVM) framework taxonomy; CMSIS-NN backend; MLPerf Tiny benchmark | 2026-08-11 |
 

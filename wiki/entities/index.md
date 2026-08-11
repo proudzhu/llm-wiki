@@ -457,4 +457,7 @@
 | [[entities/yu-guo\|Yu Guo]] | NTU DSP Lab — lead author of the survey on ANC algorithms overcoming output saturation | 2026-08-10 |
 | [[entities/xiaoyi-shen\|Xiaoyi Shen]] | NTU DSP Lab — wireless ANC, output-constrained ANC, momentum-based FxLMS variants | 2026-08-10 |
 | [[entities/junwei-ji\|Junwei Ji]] | NTU DSP Lab — output-constrained adaptive algorithms, momentum 2GD FxLMS | 2026-08-10 |
+| [[entities/minh-tri-le\|Minh Tri Lê]] | Université Grenoble Alpes / Inria — TinyML, quantization, Bayesian compression | 2026-08-11 |
+| [[entities/pierre-wolinski\|Pierre Wolinski]] | Université Grenoble Alpes / Inria / Paris-Dauphine — TinyML, Bayesian compression, NAS | 2026-08-11 |
+| [[entities/julyan-arbel\|Julyan Arbel]] | Université Grenoble Alpes / Inria — Bayesian statistics, Bayesian neural networks, TinyML | 2026-08-11 |
 

@@ -463,6 +463,9 @@
 | [[entities/yu-guo\|Yu Guo]] | NTU DSP Lab — lead author of the survey on ANC algorithms overcoming output saturation | 2026-08-10 |
 | [[entities/xiaoyi-shen\|Xiaoyi Shen]] | NTU DSP Lab — wireless ANC, output-constrained ANC, momentum-based FxLMS variants | 2026-08-10 |
 | [[entities/junwei-ji\|Junwei Ji]] | NTU DSP Lab — output-constrained adaptive algorithms, momentum 2GD FxLMS | 2026-08-10 |
+| [[entities/minh-tri-le\|Minh Tri Lê]] | Université Grenoble Alpes / Inria — TinyML, quantization, Bayesian compression | 2026-08-11 |
+| [[entities/pierre-wolinski\|Pierre Wolinski]] | Université Grenoble Alpes / Inria / Paris-Dauphine — TinyML, Bayesian compression, NAS | 2026-08-11 |
+| [[entities/julyan-arbel\|Julyan Arbel]] | Université Grenoble Alpes / Inria — Bayesian statistics, Bayesian neural networks, TinyML | 2026-08-11 |
 
 ---
 
@@ -870,6 +873,9 @@
 | [[concepts/sigma-delta-neural-network\|Sigma-Delta Neural Network (SDNN)]] | SNN architecture using sigma-delta encoding for sparse event-driven message passing and axonal delays for temporal memory; the released Intel N-DNS Challenge baseline reaches SI-SNR 12.50 dB at 14.54 M-Ops/s power proxy with 525K params - 9.4x lower power than NsNet2 at comparable SI-SNR. | 2026-08-10 |
 | [[concepts/output-saturation-effect\|Output Saturation Effect]] | Nonlinear distortion from secondary-path amplifier saturation in ANC; causes adaptive filter divergence under severe saturation | 2026-08-10 |
 | [[concepts/output-constraint-anc-algorithms\|Output Constraint ANC Algorithms]] | FxLMS variants that limit output power to keep the amplifier linear; the practical default for severe output saturation (2-GD, Re-scaling, Leaky, MOV, OLFxLMS, MOV-Modified) | 2026-08-10 |
+| [[concepts/model-pruning\|Model Pruning]] | Three-granularity taxonomy (unstructured, structured, Bayesian) for removing less-important NN parameters; TinyML favors structured pruning for hardware efficiency | 2026-08-11 |
+| [[concepts/bayesian-compression\|Bayesian Compression]] | Unifying framework for pruning + quantization via spike-and-slab, horseshoe, and log-uniform priors with variational inference; enables per-parameter heterogeneous precision | 2026-08-11 |
+| [[concepts/tinymlops\|TinyMLOps]] | End-to-end pipeline for deploying ML models on MCUs; runtime (TFLM) vs transcompiler (NNoM, Edge Impulse, μTVM) framework taxonomy; CMSIS-NN backend; MLPerf Tiny benchmark | 2026-08-11 |
 
 ---
 
@@ -1036,6 +1042,7 @@
 | [[sources/liu-2024-lightweight-dl-survey\|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] | Survey unifying lightweight architecture design, model compression, and hardware acceleration into a single pipeline; TinyML and lightweight LLMs as future frontiers | 2026-08-09 |
 | [[sources/timcheck-2023-intel-neuromorphic-dns-challenge\|Timcheck et al. 2023: The Intel Neuromorphic DNS Challenge]] | Defines the Intel Neuromorphic DNS Challenge (LAVA 2023): a benchmark for SNN-based real-time monaural speech enhancement on Loihi 2. Two tracks (algorithmic simulation / hardware implementation) evaluate audio quality (SI-SNR, DNSMOS), power (Loihi-calibrated proxy P = SynOPS + 10x NeuronOPS), latency, and chip resources. Includes a 500-hour dataset derived from the Microsoft DNS Challenge corpus, an SDNN baseline (sigma-delta encoding + axonal delays) reaching SI-SNR 12.50 dB at 14.54 M-Ops/s, and the NsNet2 conventional baseline (136.13 M-Ops/s). | 2026-08-10 |
 | [[sources/guo-2024-anc-saturation-survey\|Guo et al. 2024: ANC Algorithms Overcoming Output Saturation]] | Survey organising saturation-mitigation ANC algorithms into output-constraint and nonlinear-adaptive families; QCQP formulation; complexity and stability comparison | 2026-08-10 |
+| [[sources/le-2026-efficient-nn-tinyml-review\|Lê, Wolinski & Arbel 2026: Efficient NNs for TinyML — A Comprehensive Review]] | ACM TIST review bridging TinyML methodology and applications; five-method compression taxonomy (pruning, quantization, KD, NAS, weight-sharing + low-rank) unified by Bayesian compression; runtime-vs-transcompiler framework taxonomy (TFLM/NNoM/Edge Impulse/μTVM/CMSIS-NN); Flash-vs-accuracy landscapes for MNIST/ImageNet/VWW/Speech Commands | 2026-08-11 |
 
 ---
 
@@ -1087,10 +1094,10 @@
 
 ## Statistics
 
-- **Total pages**: 1039
-- **Entities**: 456
-- **Concepts**: 398
-- **Sources**: 157
+- **Total pages**: 1046
+- **Entities**: 459
+- **Concepts**: 401
+- **Sources**: 158
 - **Synthesis**: 21
 - **Queries**: 7
-- **Last updated**: 2026-08-10
+- **Last updated**: 2026-08-11

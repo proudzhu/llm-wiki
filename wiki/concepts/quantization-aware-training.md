@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-07-16
-updated: 2026-08-09
+updated: 2026-08-11
 sources:
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
   - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
+  - raw/papers/le-2026-efficient-nn-tinyml-review/full-text.md
 tags:
   - neural-network
   - quantization
@@ -75,3 +76,4 @@ QAT can be combined with **knowledge distillation (KD)** using the FP32 model as
 
 - [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]]
 - [[sources/liu-2024-lightweight-dl-survey|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] — surveys quantization as a compression method with bit-width guidance (4-bit QAT preserves accuracy; HAWQ-V3 mixed-precision achieves 3.0% drop); recommends matching quantization precision to hardware constraints (e.g., specific MCUs/edge TPUs exclusively support integer operations, making full integer quantization essential via TF-Lite, which reduces model size by up to 4× and accelerates inference by more than 3×)
+- [[sources/le-2026-efficient-nn-tinyml-review|Lê, Wolinski & Arbel 2026: Efficient NNs for TinyML — A Comprehensive Review]] — surveys QAT for ultra-low-power MCUs and concludes "QAT emerges as a superior option in below 8-bit settings, but is more complex and requires more computations than PTQ." Notes that the straight-through estimator (Bengio et al. 2013; BinaryConnect) is the standard approach for handling the non-differentiable rounding in the backward pass. Highlights Lê et al.'s own progressive-quantization QAT generalization (Lê et al. 2022) that uses a regularization schedule to converge weights to any target bit-precision, and the [[concepts/bayesian-compression|Bayesian quantization]] framework of Van Baalen et al. (2021) that uses gated residuals to discover per-parameter bit-widths progressively during training. Also notes that "QAT often requires a lot of tuning, additional computation, and access to the dataset to re-train the model, especially for low-bit quantization," and that AskariHemmat et al. (2022) found quantization itself acts as regularization "where the induced quantization noise can help improve generalization, and particularly to 8-bits on several computer vision tasks."

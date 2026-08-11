@@ -4216,3 +4216,32 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/synthesis/adaptive-algorithm-tradeoffs.md` — added Section 1.7 "Output Constraint Family" with per-algorithm complexity table; updated the actuator-saturation row of the decision matrix to recommend MOV-Modified FxLMS for severe saturation; added output-saturation-effect and output-constraint-anc-algorithms to Related Concepts; added Guo 2024 to Related Sources
 - **Indexes**: updated `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` with 6 new entries (1 source + 3 entities + 2 concepts). Statistics recounted and verified with `check_statistics.py`: total=1039, entities=456, concepts=398, sources=157, synthesis=21, queries=7 — all counts match actual files. (Note: entities actual=456 vs +3 from the prior 455 baseline indicates a pre-existing 2-file drift that this ingest corrected in the stated count.)
 - **Verification**: `mkdocs build --strict` passed (exit 0, no page-level warnings).
+
+
+
+## [2026-08-11] ingest | Efficient Neural Networks for Tiny Machine Learning: A Comprehensive Review (Lê, Wolinski & Arbel 2026)
+
+- **Source**: `raw/papers/le-2026-efficient-nn-tinyml-review/full-text.md` (Zotero: QDFZSG5A; arXiv: 2311.11883)
+- **Authors**: Minh Tri Lê, Pierre Wolinski, Julyan Arbel
+- **Published**: ACM Transactions on Intelligent Systems and Technology (TIST), 2026
+- **DOI**: 10.1145/3729429
+- **Summary**: ACM TIST review bridging TinyML methodology and applications. Introduces a five-method compression taxonomy (pruning, quantization, knowledge distillation, neural architecture search, weight-sharing + low-rank decomposition) unified by a Bayesian compression synthesis using spike-and-slab, horseshoe, and log-uniform priors with variational inference. Presents a runtime-vs-transcompiler TinyMLOps framework taxonomy (TFLM, NNoM, Edge Impulse/EON, μTVM, CMSIS-NN backend). Provides Flash-size-vs-accuracy landscapes overlaid with Cortex-M0+/M4/M7 memory thresholds for MNIST, ImageNet, Visual Wake Words, and Google Speech Commands v2-12. Targets the extreme-low-power regime (<8 kB SRAM, Cortex-M0+/eDMPv1).
+- **Pages created**:
+  - `raw/papers/le-2026-efficient-nn-tinyml-review/full-text.md` — extracted text from Zotero PDF (MinerU VLM, 1106 lines, 9 referenced figures mapped)
+  - `wiki/sources/le-2026-efficient-nn-tinyml-review.md` — source page with full taxonomy, methodology, results, key contributions, and limitations
+  - 3 entity pages for the authors:
+    - `wiki/entities/minh-tri-le.md` (Université Grenoble Alpes / Inria — TinyML, quantization, Bayesian compression)
+    - `wiki/entities/pierre-wolinski.md` (UGA / Inria / Paris-Dauphine — TinyML, Bayesian compression, NAS)
+    - `wiki/entities/julyan-arbel.md` (UGA / Inria — Bayesian statistics, Bayesian neural networks, TinyML)
+  - 3 new concept pages:
+    - `wiki/concepts/model-pruning.md` — three-granularity taxonomy (unstructured, structured, Bayesian) with TinyML considerations
+    - `wiki/concepts/bayesian-compression.md` — unifying framework for pruning + quantization via sparsity-inducing priors and variational inference; covers spike-and-slab, horseshoe, log-uniform priors and the gated-residual Bayesian quantization of Van Baalen et al. 2021
+    - `wiki/concepts/tinymlops.md` — end-to-end MCU deployment pipeline; runtime (TFLM) vs transcompiler (NNoM, Edge Impulse, μTVM) framework taxonomy; CMSIS-NN backend; MLPerf Tiny benchmark
+- **Pages updated** (added cross-references; `created` dates preserved, only `updated` bumped to 2026-08-11):
+  - `wiki/concepts/tinyml.md` — added Lê 2026 to sources and Related Sources; added cross-refs to tinymlops, model-pruning, bayesian-compression, keyword-spotting
+  - `wiki/concepts/knowledge-distillation-paradigms.md` — added new "KD for TinyML" section with MCU-class KD compression table (Polino, Zein, TinyBERT) and the standard KD loss formulation
+  - `wiki/concepts/post-training-quantization.md` — added Lê 2026 to Related Sources with the 8-bit PTQ recommendation for MCUs and the TinyML-specific quantization sensitivity observation
+  - `wiki/concepts/quantization-aware-training.md` — added Lê 2026 to Related Sources with the below-8-bit QAT superiority, straight-through estimator, and the Bayesian quantization cross-reference
+- **Synthesis**: no updates. Existing synthesis pages are thematically focused on ANC/speech enhancement; the Lê 2026 paper is squarely outside those themes, so no synthesis cross-references were added (avoiding thin stubs).
+- **Indexes**: updated `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` with 7 new entries (1 source + 3 entities + 3 concepts). Statistics recounted and verified with `check_statistics.py`: total=1046, entities=459, concepts=401, sources=158, synthesis=21, queries=7 — all counts match actual files.
+- **Verification**: `mkdocs build --strict` passed (exit 0, no page-level warnings).
