@@ -5,6 +5,7 @@ updated: 2026-08-14
 sources:
   - raw/papers/valin-2021-percepnet-joint-echo-control/full-text.md
   - raw/papers/buthe-2025-blind-wideband-to-fullband-extension/full-text.md
+  - raw/papers/valin-2022-real-time-plc/full-text.md
 tags:
   - speech-enhancement
   - acoustic-echo-cancellation

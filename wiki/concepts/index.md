@@ -411,4 +411,8 @@
 | [[concepts/blind-bandwidth-extension\|Blind Bandwidth Extension]] | Regenerating missing highband content without side information; classical folding/non-linear methods vs. DNN methods; hybrid DSP/DNN BBWENet | 2026-08-14 |
 | [[concepts/adaconv\|AdaConv]] | Adaptive convolution whose weights are adapted at fixed rate (200 Hz) from latent features; LACE/NoLACE; pre/post-filtering in BBWENet | 2026-08-14 |
 | [[concepts/adashape\|AdaShape]] | Adaptive temporal shaping multiplying signal by locally periodic non-negative weights; spectral folding in BBWENet | 2026-08-14 |
+| [[concepts/packet-loss-concealment\|Packet Loss Concealment]] | Synthesizing audio to replace lost voice packets in real-time communication | 2026-08-14 |
+| [[concepts/lpcnet\|LPCNet]] | Autoregressive neural vocoder using linear prediction + Bark-scale BFCC features | 2026-08-14 |
+| [[concepts/burg-spectral-estimation\|Burg Spectral Estimation]] | Windowless all-pole spectral estimation; used at 5ms half-frames in Valin 2022 PLC | 2026-08-14 |
+| [[concepts/opus-codec\|Opus Audio Codec]] | Low-latency open-source speech/audio codec (RFC 6716); Valin 2022 integrates neural PLC into its SILK mode | 2026-08-14 |
 

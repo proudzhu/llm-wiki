@@ -4293,3 +4293,8 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/concepts/percepnet.md` — added BBWENet cross-ref + source
   - `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added 5 rows; updated statistics
 - **Synthesis**: none — tag triage found no matching synthesis pages (single-task BWE paper)
+
+---
+
+## [2026-08-14] ingest | Real-Time PLC (Valin 2022)
+

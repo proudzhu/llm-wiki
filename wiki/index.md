@@ -468,6 +468,10 @@
 | [[entities/julyan-arbel\|Julyan Arbel]] | Université Grenoble Alpes / Inria — Bayesian statistics, Bayesian neural networks, TinyML | 2026-08-11 |
 | [[entities/bingxiao-fang\|Bingxiao Fang]] | Beijing Sabine Technologies — residual echo suppression via statistical normalized correlation | 2026-08-11 |
 | [[entities/jan-buthe\|Jan Büthe]] | Amazon Web Services — LACE, NoLACE, BBWENet (blind BWE, WASPAA 2025) | 2026-08-14 |
+| [[entities/ahmed-mustafa\|Ahmed Mustafa]] | Amazon Web Services — co-author of Valin 2022 PLC paper | 2026-08-14 |
+| [[entities/christopher-montgomery\|Christopher Montgomery]] | Amazon Web Services (Xiph.Org founder) — co-author of Valin 2022 PLC and Opus RFC 6716 | 2026-08-14 |
+| [[entities/timothy-b-terriberry\|Timothy B. Terriberry]] | Amazon Web Services (formerly Xiph.Org/Mozilla) — co-author of Valin 2022 PLC and Opus RFC 6716 | 2026-08-14 |
+| [[entities/michael-klingbeil\|Michael Klingbeil]] | Amazon Web Services — co-author of Valin 2022 PLC and DRED (2024) | 2026-08-14 |
 
 ---
 
@@ -884,6 +888,10 @@
 | [[concepts/blind-bandwidth-extension\|Blind Bandwidth Extension]] | Regenerating missing highband content without side information; classical folding/non-linear methods vs. DNN methods; hybrid DSP/DNN BBWENet | 2026-08-14 |
 | [[concepts/adaconv\|AdaConv]] | Adaptive convolution whose weights are adapted at fixed rate (200 Hz) from latent features; LACE/NoLACE; pre/post-filtering in BBWENet | 2026-08-14 |
 | [[concepts/adashape\|AdaShape]] | Adaptive temporal shaping multiplying signal by locally periodic non-negative weights; spectral folding in BBWENet | 2026-08-14 |
+| [[concepts/packet-loss-concealment\|Packet Loss Concealment]] | Synthesizing audio to replace lost voice packets in real-time communication | 2026-08-14 |
+| [[concepts/lpcnet\|LPCNet]] | Autoregressive neural vocoder using linear prediction + Bark-scale BFCC features | 2026-08-14 |
+| [[concepts/burg-spectral-estimation\|Burg Spectral Estimation]] | Windowless all-pole spectral estimation; used at 5ms half-frames in Valin 2022 PLC | 2026-08-14 |
+| [[concepts/opus-codec\|Opus Audio Codec]] | Low-latency open-source speech/audio codec (RFC 6716); Valin 2022 integrates neural PLC into its SILK mode | 2026-08-14 |
 
 ---
 
@@ -1053,6 +1061,7 @@
 | [[sources/le-2026-efficient-nn-tinyml-review\|Lê, Wolinski & Arbel 2026: Efficient NNs for TinyML — A Comprehensive Review]] | ACM TIST review bridging TinyML methodology and applications; five-method compression taxonomy (pruning, quantization, KD, NAS, weight-sharing + low-rank) unified by Bayesian compression; runtime-vs-transcompiler framework taxonomy (TFLM/NNoM/Edge Impulse/μTVM/CMSIS-NN); Flash-vs-accuracy landscapes for MNIST/ImageNet/VWW/Speech Commands | 2026-08-11 |
 | [[sources/fang-2020-robust-residual-echo-suppression\|Fang 2020: A Robust Residual Echo Suppression Algorithm Even During Double Talk]] | VAD-free residual echo PSD estimator via statistical normalized correlation between AEC error and echo replica; robust during double talk | 2026-08-11 |
 | [[sources/buthe-2025-blind-wideband-to-fullband-extension\|Büthe & Valin 2025: Blind Wideband-to-Fullband Extension]] | BBWENet — hybrid DSP/DNN blind BWE (~370 K params, ~140 MFLOPS); Opus 1.5 + BWE at 9 kb/s matches EVS 9.6 kb/s and Opus 1.4 18 kb/s | 2026-08-14 |
+| [[sources/valin-2022-real-time-plc\|Valin et al. 2022: Real-Time Packet Loss Concealment]] | Hybrid LPCNet + predictive RNN PLC; 2nd place Interspeech 2022 PLC Challenge; integrates into Opus codec | 2026-08-14 |
 
 ---
 
@@ -1104,10 +1113,10 @@
 
 ## Statistics
 
-- **Total pages**: 1056
-- **Entities**: 461
-- **Concepts**: 407
-- **Sources**: 160
+- **Total pages**: 1065
+- **Entities**: 465
+- **Concepts**: 411
+- **Sources**: 161
 - **Synthesis**: 21
 - **Queries**: 7
 - **Last updated**: 2026-08-14

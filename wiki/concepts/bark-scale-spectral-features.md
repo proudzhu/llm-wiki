@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-07-17
-updated: 2026-07-23
+updated: 2026-08-14
 sources:
   - raw/papers/li-2025-echofree-neural-aec/full-text.md
   - raw/papers/seidel-2024-bark-scale-nn-residual-suppression/full-text.md
   - raw/papers/zheng-2023-survey-frequency-domain-speech-enhancement/full-text.md
   - raw/papers/harma-2000-frequency-warped-signal-processing/full-text.md
+  - raw/papers/valin-2022-real-time-plc/full-text.md
 tags:
   - psychoacoustics
   - speech-enhancement
@@ -67,6 +68,7 @@ The Bark scale's relationship to auditory filter banks and cochlear mapping is s
 
 - [[concepts/erb-scale\|ERB Scale]]
 - [[concepts/percepnet-style-neural-post-filter\|PercepNet-Style Neural Post Filter]]
+- [[concepts/lpcnet\|LPCNet]] — uses 18 BFCCs as a smaller-scale Bark-cepstral instance for neural vocoding
 - [[concepts/u-net-post-filter\|U-Net Post Filter]]
 - [[concepts/acoustic-echo-cancellation\|Acoustic Echo Cancellation]]
 - [[concepts/speech-enhancement\|Speech Enhancement]]
@@ -80,3 +82,4 @@ The Bark scale's relationship to auditory filter banks and cochlear mapping is s
 - [[sources/indenbom-2023-deepvqe\|Indenbom et al. 2023: DeepVQE]] — comparison point in the AEC lightweight hierarchy
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]] — ULCNet-AER baseline (uses linear-frequency sub-band stacking rather than Bark)
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys Bark/ERB-band perceptual features (Valin 2018 BFCCs, Valin et al. 2020 ERB-band features) as the dominant strategy for reducing full-band input feature dimensionality
+- [[sources/valin-2022-real-time-plc\|Valin et al. 2022: Real-Time PLC]] — uses 18 BFCCs (LPCNet features) plus pitch period/correlation as conditioning for the autoregressive vocoder

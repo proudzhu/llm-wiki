@@ -462,4 +462,8 @@
 | [[entities/julyan-arbel\|Julyan Arbel]] | Université Grenoble Alpes / Inria — Bayesian statistics, Bayesian neural networks, TinyML | 2026-08-11 |
 | [[entities/bingxiao-fang\|Bingxiao Fang]] | Beijing Sabine Technologies — residual echo suppression via statistical normalized correlation | 2026-08-11 |
 | [[entities/jan-buthe\|Jan Büthe]] | Amazon Web Services — LACE, NoLACE, BBWENet (blind BWE, WASPAA 2025) | 2026-08-14 |
+| [[entities/ahmed-mustafa\|Ahmed Mustafa]] | Amazon Web Services — co-author of Valin 2022 PLC paper | 2026-08-14 |
+| [[entities/christopher-montgomery\|Christopher Montgomery]] | Amazon Web Services (Xiph.Org founder) — co-author of Valin 2022 PLC and Opus RFC 6716 | 2026-08-14 |
+| [[entities/timothy-b-terriberry\|Timothy B. Terriberry]] | Amazon Web Services (formerly Xiph.Org/Mozilla) — co-author of Valin 2022 PLC and Opus RFC 6716 | 2026-08-14 |
+| [[entities/michael-klingbeil\|Michael Klingbeil]] | Amazon Web Services — co-author of Valin 2022 PLC and DRED (2024) | 2026-08-14 |
 
