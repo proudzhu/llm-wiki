@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-07-22
-updated: 2026-07-22
+updated: 2026-08-14
 sources:
   - raw/papers/wang-2025-adaptive-convolution-cnn-speech-enhancement/full-text.md
 tags:
@@ -106,6 +106,7 @@ This is the first explicit demonstration in dynamic-convolution SE that kernel a
 
 ## Related Concepts
 
+- [[concepts/adaconv|AdaConv]] — a *different* adaptive-convolution mechanism from the codec-enhancement lineage (LACE/NoLACE/BBWENet): weights mapped from a latent feature vector at a fixed 200 Hz rate, used for time-varying filtering in hybrid DSP/DNN pipelines; contrast with this page's frame-wise candidate-kernel attention
 - [[concepts/dynamic-convolution|Dynamic Convolution]] — the CV ancestor generalized by adaptive convolution
 - [[concepts/adaptcrn|AdaptCRN]] — ultra-lightweight SE model built around adaptive convolution
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]] — the broader CNN-based SE family where adaptive convolution drops in
@@ -117,3 +118,4 @@ This is the first explicit demonstration in dynamic-convolution SE that kernel a
 ## Related Sources
 
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]]
+- [[sources/buthe-2025-blind-wideband-to-fullband-extension|Büthe & Valin 2025: A Lightweight and Robust Method for Blind Wideband-to-Fullband Extension of Speech]] — uses the distinct [[concepts/adaconv|AdaConv]] mechanism (latent-feature-driven weights) for adaptive filtering in blind BWE

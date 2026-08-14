@@ -461,4 +461,5 @@
 | [[entities/pierre-wolinski\|Pierre Wolinski]] | Université Grenoble Alpes / Inria / Paris-Dauphine — TinyML, Bayesian compression, NAS | 2026-08-11 |
 | [[entities/julyan-arbel\|Julyan Arbel]] | Université Grenoble Alpes / Inria — Bayesian statistics, Bayesian neural networks, TinyML | 2026-08-11 |
 | [[entities/bingxiao-fang\|Bingxiao Fang]] | Beijing Sabine Technologies — residual echo suppression via statistical normalized correlation | 2026-08-11 |
+| [[entities/jan-buthe\|Jan Büthe]] | Amazon Web Services — LACE, NoLACE, BBWENet (blind BWE, WASPAA 2025) | 2026-08-14 |
 

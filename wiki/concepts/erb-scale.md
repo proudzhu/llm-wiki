@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-06-07
-updated: 2026-08-03
+updated: 2026-08-14
 sources:
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
   - raw/papers/harma-2000-frequency-warped-signal-processing/full-text.md
   - raw/papers/jiang-2026-lightweight-speech-enhancement-ssm-dsc/full-text.md
+  - raw/papers/buthe-2025-blind-wideband-to-fullband-extension/full-text.md
 tags:
   - psychoacoustics
   - speech-enhancement
@@ -53,6 +54,10 @@ Both [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|RT-Tango]] a
 
 [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang et al. 2026]]'s [[concepts/auditory-inspired-spectral-compressor|Auditory-Inspired Spectral Compressor (AISC)]] applies a **perceptually-motivated low/high split**: low frequencies below 1.5 kHz are preserved at full resolution (where cochlear sensitivity is highest for harmonics/formants), while high frequencies above 1.5 kHz are projected onto the ERB scale via a fixed triangular filter bank $W_{\mathrm{ERB}} \in \mathbb{R}^{F_{\mathrm{ERB}} \times F_H}$. The decoder inverts the projection via $W_{\mathrm{ERB}}^T$. This parameter-free module delivers a **2.6× MACs reduction** (1.32 → 0.50 G) with only 0.04 PESQ loss vs. full-resolution processing. Distinctive vs. GTCRN/AdaptCRN (which use a hard 2 kHz split with full low-res preservation): AISC explicitly frames the split as a cochlea-motivated design choice (low frequencies need fine resolution; high frequencies are perceived via critical-band energy integration), and applies ERB compression only to the high-frequency branch.
 
+## Usage in BBWENet (Büthe & Valin 2025)
+
+[[sources/buthe-2025-blind-wideband-to-fullband-extension|Büthe & Valin 2025]]'s blind bandwidth-extension model uses a **32-band ERB-scale log-magnitude spectrogram** as part of its 72-dimensional input features (computed from a 20 ms Hanning-window STFT with 10 ms hop), alongside **complex phase differences** for the first 40 STFT bins — phase differences that proved sufficient for high-accuracy pitch estimation (Subramani et al. ICASSP 2024). The ERB-scale features provide the spectral-envelope information that drives the feature encoder, which in turn steers the [[concepts/adaconv|AdaConv]] pre/post-filters and [[concepts/adashape|AdaShape]] extension weights. This is a *feature-compression* use of the ERB scale (like PercepNet/DeepFilterNet) rather than a filter-bank gain-prediction use.
+
 ## Relationship to Other Scales
 
 | Scale | Formula | Bands | Application |
@@ -80,6 +85,7 @@ The ERB scale provides finer frequency resolution at low frequencies compared to
 - [[concepts/gtcrn|GTCRN]] — origin of the ERB + SFE + transposed-decompression pattern reused by AdaptCRN
 - [[concepts/adaptcrn|AdaptCRN]] — reuses GTCRN's ERB spectral compression scheme
 - [[concepts/auditory-inspired-spectral-compressor|Auditory-Inspired Spectral Compressor (AISC)]] — Jiang et al. 2026's perceptually-motivated low/high split + ERB compression on high band
+- [[concepts/blind-bandwidth-extension|Blind Bandwidth Extension]] — BBWENet's feature encoder uses a 32-band ERB log-magnitude spectrogram + phase differences
 
 ## Related Sources
 
@@ -92,3 +98,4 @@ The ERB scale provides finer frequency resolution at low frequencies compared to
 - [[sources/chen-2023-ultra-dual-path-compression|Chen et al. 2023: Ultra Dual-Path Compression]] — benchmarks FixedERB vs. FixedMel vs. TrainMel frequency compression; ERB wins SI-SNR at large ratios because SI-SNR weights all frequencies equally (Mel emphasises lows)
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — AdaptCRN's spectral compression uses ERB band merging (65 low + 64 ERB)
 - [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight SE with SSM and DSConv]] — AISC uses 1.5 kHz perceptual split + ERB compression on the high-frequency branch
+- [[sources/buthe-2025-blind-wideband-to-fullband-extension|Büthe & Valin 2025: A Lightweight and Robust Method for Blind Wideband-to-Fullband Extension of Speech]] — 32-band ERB log-magnitude + phase-difference features drive the BWE feature encoder

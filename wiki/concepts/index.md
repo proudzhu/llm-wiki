@@ -408,4 +408,7 @@
 | [[concepts/statistical-normalized-correlation\|Statistical Normalized Correlation (for Residual Echo PSD)]] | VAD-free residual echo PSD estimator using normalized cross-correlation between mean-removed AEC error and echo replica (Fang 2020) | 2026-08-11 |
 | [[concepts/echo-return-loss-enhancement\|Echo Return Loss Enhancement (ERLE)]] | Standard single-talk metric for AEC/RES echo attenuation, ratio of output to input echo power in dB | 2026-08-11 |
 | [[concepts/speech-to-speech-distortion-ratio\|Speech-to-Speech-Distortion power Ratio (SSDR)]] | Double-talk metric measuring near-end speech distortion introduced by RES gain | 2026-08-11 |
+| [[concepts/blind-bandwidth-extension\|Blind Bandwidth Extension]] | Regenerating missing highband content without side information; classical folding/non-linear methods vs. DNN methods; hybrid DSP/DNN BBWENet | 2026-08-14 |
+| [[concepts/adaconv\|AdaConv]] | Adaptive convolution whose weights are adapted at fixed rate (200 Hz) from latent features; LACE/NoLACE; pre/post-filtering in BBWENet | 2026-08-14 |
+| [[concepts/adashape\|AdaShape]] | Adaptive temporal shaping multiplying signal by locally periodic non-negative weights; spectral folding in BBWENet | 2026-08-14 |
 

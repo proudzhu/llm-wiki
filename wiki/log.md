@@ -4269,3 +4269,27 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 1 entity row
   - `wiki/concepts/index.md` — added 3 concept rows
+
+---
+
+## [2026-08-14] ingest | A Lightweight and Robust Method for Blind Wideband-to-Fullband Extension of Speech (Büthe & Valin 2025)
+
+- **Source**: `raw/papers/buthe-2025-blind-wideband-to-fullband-extension/full-text.md` (Zotero: 2HT68ITY, arXiv HTML extraction)
+- **Authors**: Jan Büthe, Jean-Marc Valin
+- **Published**: WASPAA 2025, 5 pp. (preprint arXiv:2412.11392)
+- **DOI**: 10.48550/arXiv.2412.11392
+- **Summary**: BBWENet — a hybrid DSP/DNN blind wideband-to-fullband bandwidth extension model (~370 K params, ~140 MFLOPS / ~70 MMACS, 10 ms frame + 0.27 ms lookahead) combining classical pre-filter/upsample/extension/post-filter signal processing with a small DNN that steers AdaConv pre/post-filters and AdaShape spectral folding. Trained with regression + frequency-domain adversarial losses on a 900+-speaker TTS mixture with robustness augmentations; paired with Opus 1.5 it significantly improves P.808 DCR quality at 6–12 kb/s and at 9 kb/s statistically matches EVS 9.6 kb/s and Opus 1.4 at 18 kb/s.
+- **Pages created**:
+  - `raw/papers/buthe-2025-blind-wideband-to-fullband-extension/full-text.md` — arXiv HTML extraction (Defuddle) + 1 figure
+  - `wiki/sources/buthe-2025-blind-wideband-to-fullband-extension.md`
+  - `wiki/entities/jan-buthe.md`
+  - `wiki/concepts/blind-bandwidth-extension.md`
+  - `wiki/concepts/adaconv.md`
+  - `wiki/concepts/adashape.md`
+- **Pages updated**:
+  - `wiki/entities/jean-marc-valin.md` — appended BBWENet contribution
+  - `wiki/concepts/erb-scale.md` — added BBWENet usage section + source
+  - `wiki/concepts/adaptive-convolution.md` — added AdaConv cross-ref (distinct mechanism)
+  - `wiki/concepts/percepnet.md` — added BBWENet cross-ref + source
+  - `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added 5 rows; updated statistics
+- **Synthesis**: none — tag triage found no matching synthesis pages (single-task BWE paper)

@@ -467,6 +467,7 @@
 | [[entities/pierre-wolinski\|Pierre Wolinski]] | Université Grenoble Alpes / Inria / Paris-Dauphine — TinyML, Bayesian compression, NAS | 2026-08-11 |
 | [[entities/julyan-arbel\|Julyan Arbel]] | Université Grenoble Alpes / Inria — Bayesian statistics, Bayesian neural networks, TinyML | 2026-08-11 |
 | [[entities/bingxiao-fang\|Bingxiao Fang]] | Beijing Sabine Technologies — residual echo suppression via statistical normalized correlation | 2026-08-11 |
+| [[entities/jan-buthe\|Jan Büthe]] | Amazon Web Services — LACE, NoLACE, BBWENet (blind BWE, WASPAA 2025) | 2026-08-14 |
 
 ---
 
@@ -880,6 +881,9 @@
 | [[concepts/statistical-normalized-correlation\|Statistical Normalized Correlation (for Residual Echo PSD)]] | VAD-free residual echo PSD estimator using normalized cross-correlation between mean-removed AEC error and echo replica (Fang 2020) | 2026-08-11 |
 | [[concepts/echo-return-loss-enhancement\|Echo Return Loss Enhancement (ERLE)]] | Standard single-talk metric for AEC/RES echo attenuation, ratio of output to input echo power in dB | 2026-08-11 |
 | [[concepts/speech-to-speech-distortion-ratio\|Speech-to-Speech-Distortion power Ratio (SSDR)]] | Double-talk metric measuring near-end speech distortion introduced by RES gain | 2026-08-11 |
+| [[concepts/blind-bandwidth-extension\|Blind Bandwidth Extension]] | Regenerating missing highband content without side information; classical folding/non-linear methods vs. DNN methods; hybrid DSP/DNN BBWENet | 2026-08-14 |
+| [[concepts/adaconv\|AdaConv]] | Adaptive convolution whose weights are adapted at fixed rate (200 Hz) from latent features; LACE/NoLACE; pre/post-filtering in BBWENet | 2026-08-14 |
+| [[concepts/adashape\|AdaShape]] | Adaptive temporal shaping multiplying signal by locally periodic non-negative weights; spectral folding in BBWENet | 2026-08-14 |
 
 ---
 
@@ -1048,6 +1052,7 @@
 | [[sources/guo-2024-anc-saturation-survey\|Guo et al. 2024: ANC Algorithms Overcoming Output Saturation]] | Survey organising saturation-mitigation ANC algorithms into output-constraint and nonlinear-adaptive families; QCQP formulation; complexity and stability comparison | 2026-08-10 |
 | [[sources/le-2026-efficient-nn-tinyml-review\|Lê, Wolinski & Arbel 2026: Efficient NNs for TinyML — A Comprehensive Review]] | ACM TIST review bridging TinyML methodology and applications; five-method compression taxonomy (pruning, quantization, KD, NAS, weight-sharing + low-rank) unified by Bayesian compression; runtime-vs-transcompiler framework taxonomy (TFLM/NNoM/Edge Impulse/μTVM/CMSIS-NN); Flash-vs-accuracy landscapes for MNIST/ImageNet/VWW/Speech Commands | 2026-08-11 |
 | [[sources/fang-2020-robust-residual-echo-suppression\|Fang 2020: A Robust Residual Echo Suppression Algorithm Even During Double Talk]] | VAD-free residual echo PSD estimator via statistical normalized correlation between AEC error and echo replica; robust during double talk | 2026-08-11 |
+| [[sources/buthe-2025-blind-wideband-to-fullband-extension\|Büthe & Valin 2025: Blind Wideband-to-Fullband Extension]] | BBWENet — hybrid DSP/DNN blind BWE (~370 K params, ~140 MFLOPS); Opus 1.5 + BWE at 9 kb/s matches EVS 9.6 kb/s and Opus 1.4 18 kb/s | 2026-08-14 |
 
 ---
 
@@ -1099,10 +1104,10 @@
 
 ## Statistics
 
-- **Total pages**: 1051
-- **Entities**: 460
-- **Concepts**: 404
-- **Sources**: 159
+- **Total pages**: 1056
+- **Entities**: 461
+- **Concepts**: 407
+- **Sources**: 160
 - **Synthesis**: 21
 - **Queries**: 7
-- **Last updated**: 2026-08-11
+- **Last updated**: 2026-08-14
