@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-04-25
+updated: 2026-08-15
 sources:
   Controllers.md
+  - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
 tags:
 - mathematics
 - signal-processing
@@ -36,6 +37,16 @@ In **[[active-noise-control|Active Noise Control]]**, the Wiener filter represen
 - **Stationarity**: The standard Wiener filter assumes the signals are stationary. In real-world ANC, signals are often non-stationary, necessitating **Adaptive Filters** (like LMS or RLS) that iteratively converge toward the Wiener solution.
 - **Causality**: The optimal Wiener solution may be non-causal (requiring future information). In practical systems, a causal approximation must be used, which may have lower performance.
 
+## Wiener Gain as Offline Optimization Reference
+
+Tashev et al. (2008) use the Wiener gain as an **offline optimization target** for a non-Wiener estimator. Their [[concepts/probability-based-spatial-filter|probability-based spatial filter]] computes, per frame and per frequency bin, a posterior probability $P_k^{(n)}$ that the signal comes from the desired direction, and applies $P_k^{(n)}$ directly as the suppression gain. Because $P_k^{(n)}$ is an MMSE estimator under the assumed source-distribution model, it can be compared against an **oracle Wiener gain**
+
+$$
+H_w^{(n)}(k) = \frac{|X_k^{(n)}|^2}{|X_k^{(n)}|^2 + |N_k^{(n)}|^2}
+$$
+
+computed from separately recorded clean speech $X$ and noise $N$ (the mixture is the sum, so the per-bin clean and noise components are known). The eight non-estimable parameters of the post-filter (four adaptation time constants and four feature gains) are tuned offline by steepest-gradient descent minimizing $\sum_{n,k}(H_w - P)^2$, with an 80/20 train/test split and early stopping. The Wiener gain is *not* used at runtime — only as a supervised learning target for parameter optimization.
+
 ## Related Concepts
 
 - [[active-noise-control|Active Noise Control]]
@@ -50,3 +61,4 @@ In **[[active-noise-control|Active Noise Control]]**, the Wiener filter represen
 - [[sources/welch-2006-kalman-filter-intro|Welch & Bishop 2006: Introduction to the Kalman Filter]]
 - [[sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]]
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
+- [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — uses the Wiener gain as an offline supervised target for tuning a probability-based spatial filter's parameters

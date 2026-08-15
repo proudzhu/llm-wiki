@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-06-21
+updated: 2026-08-15
 sources:
   - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.txt
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
+  - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
 tags:
 - acoustics
 - antenna-theory
@@ -35,6 +36,7 @@ Modern ANC headphones use beamforming for several critical tasks:
 - **[[concepts/nlcmv-beamforming|NLCMV (Non-Linearly Constrained Minimum Variance)]]**: Extends MVDR with explicit white-noise-gain and null-direction constraints; used in AGADIR for smart-glasses directional ASR (Lin et al. 2024).
 - **[[lcmv-beamformer|LCMV (Linearly Constrained Minimum Variance)]]**: Generalizes MVDR to multiple linear constraints for simultaneous target preservation and null steering.
 - **Neural Beamforming**: Using deep learning models (e.g., U-Nets or LSTMs) to perform spatial filtering in complex, multi-path environments.
+- **Difference-Maximizing Beamformer (Back-to-Back Array)**: Tashev et al. (2008) propose a two-beam beamformer for [[concepts/back-to-back-microphone-array|back-to-back unidirectional microphone arrays]] whose optimization criterion is **maximizing the front-back energy ratio** rather than the usual minimum-variance / maximum-SNR criteria. The front beam is optimized to maximize the ratio of integrated energy in the desired $\pm\Delta\theta$ cone to that in the opposite cone, subject to unity-gain and zero-phase-shift constraints enforced via punishing functions. This objective fits the back-to-back geometry (where the rear capsule is *designed* to face away from the source) and pairs naturally with a [[concepts/probability-based-spatial-filter|probability-based non-linear spatial filter]] that consumes the front/rear beam outputs.
 
 ## Robustness and Diagonal Loading
 
@@ -90,6 +92,8 @@ Apostolidis et al. (2026) propose an [[concepts/output-based-speech-enhancement|
 - [[socp-optimization|SOCP Optimization]]
 - [[concepts/output-based-speech-enhancement|Output-based Speech Enhancement]]
 - [[concepts/glimpse-proportion|Glimpse Proportion]]
+- [[concepts/back-to-back-microphone-array|Back-to-Back Microphone Array]]
+- [[concepts/probability-based-spatial-filter|Probability-Based Spatial Filter]]
 
 ## Related Sources
 
@@ -100,3 +104,4 @@ Apostolidis et al. (2026) propose an [[concepts/output-based-speech-enhancement|
 - [[sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition|Lin et al. 2024: AGADIR — NLCMV Beamforming for Directional ASR]]
 - [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]]
 - [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis et al. 2026: Listen first — output-based multi-microphone speech enhancement]]
+- [[sources/tashev-2008-sound-capture-spatial-filter|Tashev, Mihov, Gleghorn & Acero 2008: Sound Capture System and Spatial Filter for Small Devices]] — difference-maximizing front/back beamformer for back-to-back unidirectional microphone arrays

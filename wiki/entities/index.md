@@ -466,4 +466,8 @@
 | [[entities/christopher-montgomery\|Christopher Montgomery]] | Amazon Web Services (Xiph.Org founder) — co-author of Valin 2022 PLC and Opus RFC 6716 | 2026-08-14 |
 | [[entities/timothy-b-terriberry\|Timothy B. Terriberry]] | Amazon Web Services (formerly Xiph.Org/Mozilla) — co-author of Valin 2022 PLC and Opus RFC 6716 | 2026-08-14 |
 | [[entities/michael-klingbeil\|Michael Klingbeil]] | Amazon Web Services — co-author of Valin 2022 PLC and DRED (2024) | 2026-08-14 |
+| [[entities/ivan-tashev\|Ivan Tashev]] | Microsoft Research — microphone-array sound capture for small devices | 2026-08-15 |
+| [[entities/slavy-mihov\|Slavy Mihov]] | Technical University of Sofia — constrained optimization for beamformers and spatial filters | 2026-08-15 |
+| [[entities/tyler-gleghorn\|Tyler Gleghorn]] | Microsoft Corporation — acoustic hardware and anechoic directivity measurement | 2026-08-15 |
+| [[entities/alex-acero\|Alex Acero]] | Microsoft — speech recognition, enhancement, microphone-array processing | 2026-08-15 |
 

@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-08-03
+updated: 2026-08-15
 sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
+  - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
 tags:
   - speech-processing
   - audio-enhancement
@@ -49,3 +50,4 @@ Speech enhancement (SE) is the task of improving the perceptual quality and inte
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]]
 - [[sources/liu-2026-sse-net|Liu et al. 2026: SSE-Net]] — spike-native SNN-based monaural speech enhancement (SOTA among SNN-SE, power proxy 19.70 M Ops/s)
 - [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] — first Mamba-based SE; SOTA PESQ 3.69 on VoiceBank-DEMAND
+- [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — classical statistical-model multi-channel SE for small devices (10.43 dB SNR / 0.39 PESQ-MOS on a 9.6 mm back-to-back array)

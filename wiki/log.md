@@ -4298,3 +4298,30 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
 
 ## [2026-08-14] ingest | Real-Time PLC (Valin 2022)
 
+
+---
+
+## [2026-08-15] ingest | Sound Capture System and Spatial Filter for Small Devices (Tashev et al. 2008)
+
+- **Source**: `raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md` (Zotero: 79EJS2D7)
+- **Authors**: Ivan Tashev, Slavy Mihov, Tyler Gleghorn, Alex Acero
+- **Published**: 2008 (conference paper)
+- **URL**: https://www.microsoft.com/en-us/research/publication/sound-capture-system-and-spatial-filter-for-small-devices/
+- **Summary**: Two-microphone sound capture system for small devices — back-to-back unidirectional capsules (9.6 mm baseline) + front-back-difference-maximizing beamformer + probability-based non-linear spatial filter; 10.43 dB SNR improvement and 0.39 PESQ-MOS improvement at 16 kHz / 512-sample frames.
+- **Pages created**:
+  - `raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md` — MinerU VLM extraction (English, 231 lines, 4 figures mapped)
+  - `wiki/sources/tashev-2008-sound-capture-spatial-filter.md`
+  - `wiki/entities/ivan-tashev.md`
+  - `wiki/entities/slavy-mihov.md`
+  - `wiki/entities/tyler-gleghorn.md`
+  - `wiki/entities/alex-acero.md`
+  - `wiki/concepts/back-to-back-microphone-array.md`
+  - `wiki/concepts/probability-based-spatial-filter.md`
+- **Pages updated** (bidirectional cross-references):
+  - `wiki/concepts/beamforming.md` — added Difference-Maximizing Beamformer subsection; Related Concepts and Related Sources extended
+  - `wiki/concepts/voice-activity-detection.md` — added note about energy-based binary VAD with minimum-energy tracking under Traditional Signal Processing
+  - `wiki/concepts/multi-channel-speech-enhancement.md` — Related Concepts and Related Sources extended
+  - `wiki/concepts/wiener-filter.md` — added "Wiener Gain as Offline Optimization Reference" section
+  - `wiki/concepts/differential-microphone-array.md` — added "Back-to-Back Unidirectional Variant" comparison subsection
+  - `wiki/concepts/speech-enhancement.md` — Related Sources extended
+  - `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added 7 entries, statistics recounted (total=1072)

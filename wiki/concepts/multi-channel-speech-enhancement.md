@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-07-27
+updated: 2026-08-15
+sources:
+  - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
 tags:
   - speech-enhancement
   - multi-channel
@@ -53,6 +55,8 @@ tags:
 - [[concepts/array-invariant-speech-enhancement|Array-Invariant Speech Enhancement]]
 - [[concepts/geometry-aware-dynamic-convolution|Geometry-Aware Dynamic Convolution (Geo-DConv)]]
 - [[concepts/topology-aware-coordinate-transformer|Topology-Aware Coordinate Transformer (TACT)]]
+- [[concepts/back-to-back-microphone-array|Back-to-Back Microphone Array]]
+- [[concepts/probability-based-spatial-filter|Probability-Based Spatial Filter]]
 
 ## Related Sources
 
@@ -65,3 +69,4 @@ tags:
 - [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis et al. 2026: Listen first — output-based multi-microphone speech enhancement]]
 - [[sources/liu-2026-array-invariant-speech-enhancement|Liu, Zhang, Li & Qian 2026: Array-Invariant SE via Geo-DConv]]
 - [[sources/liu-2021-igcrn|Liu & Zhang 2021: IGCRN]] — end-to-end dual-channel SE that mirrors the beamforming pipeline (DOA estimation → beamforming → post-filtering) inside a CRN-style network with [[concepts/inplace-convolution|inplace convolutions]] and a [[concepts/channel-wise-lstm|channel-wise LSTM reused across frequency bins]]. Outperforms oracle-DOA MVDR and conventional GCRN at -3/0/3 dB; the inplace-CRN family founder.
+- [[sources/tashev-2008-sound-capture-spatial-filter|Tashev, Mihov, Gleghorn & Acero 2008: Sound Capture System and Spatial Filter for Small Devices]] — classical statistical-model MCSE: back-to-back unidirectional array + front-back-difference beamformer + probability-based spatial filter; 10.43 dB SNR / 0.39 PESQ-MOS improvement on a 9.6 mm baseline

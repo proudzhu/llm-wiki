@@ -472,6 +472,10 @@
 | [[entities/christopher-montgomery\|Christopher Montgomery]] | Amazon Web Services (Xiph.Org founder) — co-author of Valin 2022 PLC and Opus RFC 6716 | 2026-08-14 |
 | [[entities/timothy-b-terriberry\|Timothy B. Terriberry]] | Amazon Web Services (formerly Xiph.Org/Mozilla) — co-author of Valin 2022 PLC and Opus RFC 6716 | 2026-08-14 |
 | [[entities/michael-klingbeil\|Michael Klingbeil]] | Amazon Web Services — co-author of Valin 2022 PLC and DRED (2024) | 2026-08-14 |
+| [[entities/ivan-tashev\|Ivan Tashev]] | Microsoft Research — microphone-array sound capture for small devices | 2026-08-15 |
+| [[entities/slavy-mihov\|Slavy Mihov]] | Technical University of Sofia — constrained optimization for beamformers and spatial filters | 2026-08-15 |
+| [[entities/tyler-gleghorn\|Tyler Gleghorn]] | Microsoft Corporation — acoustic hardware and anechoic directivity measurement | 2026-08-15 |
+| [[entities/alex-acero\|Alex Acero]] | Microsoft — speech recognition, enhancement, microphone-array processing | 2026-08-15 |
 
 ---
 
@@ -892,6 +896,8 @@
 | [[concepts/lpcnet\|LPCNet]] | Autoregressive neural vocoder using linear prediction + Bark-scale BFCC features | 2026-08-14 |
 | [[concepts/burg-spectral-estimation\|Burg Spectral Estimation]] | Windowless all-pole spectral estimation; used at 5ms half-frames in Valin 2022 PLC | 2026-08-14 |
 | [[concepts/opus-codec\|Opus Audio Codec]] | Low-latency open-source speech/audio codec (RFC 6716); Valin 2022 integrates neural PLC into its SILK mode | 2026-08-14 |
+| [[concepts/back-to-back-microphone-array\|Back-to-Back Microphone Array]] | Small-baseline 2-mic geometry with two unidirectional capsules pointing in opposite directions; relies on directional-response level differences rather than delay | 2026-08-15 |
+| [[concepts/probability-based-spatial-filter\|Probability-Based Spatial Filter]] | Non-linear post-beamformer that applies a Bayesian posterior (front/rear/noise) directly as a per-bin suppression gain; an MMSE estimator | 2026-08-15 |
 
 ---
 
@@ -1062,6 +1068,7 @@
 | [[sources/fang-2020-robust-residual-echo-suppression\|Fang 2020: A Robust Residual Echo Suppression Algorithm Even During Double Talk]] | VAD-free residual echo PSD estimator via statistical normalized correlation between AEC error and echo replica; robust during double talk | 2026-08-11 |
 | [[sources/buthe-2025-blind-wideband-to-fullband-extension\|Büthe & Valin 2025: Blind Wideband-to-Fullband Extension]] | BBWENet — hybrid DSP/DNN blind BWE (~370 K params, ~140 MFLOPS); Opus 1.5 + BWE at 9 kb/s matches EVS 9.6 kb/s and Opus 1.4 18 kb/s | 2026-08-14 |
 | [[sources/valin-2022-real-time-plc\|Valin et al. 2022: Real-Time Packet Loss Concealment]] | Hybrid LPCNet + predictive RNN PLC; 2nd place Interspeech 2022 PLC Challenge; integrates into Opus codec | 2026-08-14 |
+| [[sources/tashev-2008-sound-capture-spatial-filter\|Tashev, Mihov, Gleghorn & Acero 2008: Sound Capture System and Spatial Filter for Small Devices]] | Back-to-back unidirectional 2-mic array (9.6 mm) + difference-maximizing beamformer + probability-based non-linear spatial filter; 10.43 dB SNR / 0.39 PESQ-MOS | 2026-08-15 |
 
 ---
 
@@ -1113,10 +1120,10 @@
 
 ## Statistics
 
-- **Total pages**: 1065
-- **Entities**: 465
-- **Concepts**: 411
-- **Sources**: 161
+- **Total pages**: 1072
+- **Entities**: 469
+- **Concepts**: 413
+- **Sources**: 162
 - **Synthesis**: 21
 - **Queries**: 7
-- **Last updated**: 2026-08-14
+- **Last updated**: 2026-08-15

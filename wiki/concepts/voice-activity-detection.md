@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-08-01
+updated: 2026-08-15
 sources:
   - raw/papers/liu-2025-pcen-mask-vad-speech-enhancement/full-text.md
+  - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
 tags:
 - audio-processing
 - machine-learning
@@ -30,6 +31,8 @@ In the context of ANC headphones, VAD is often split into two categories (Masila
 - **Energy Thresholding**: Comparing the signal energy to the background noise floor.
 - **Zero-Crossing Rate**: Speech often has a different zero-crossing profile compared to white noise or periodic hum.
 - **Spectral Slope/Flux**: Analyzing changes in the frequency domain.
+
+A simple, classical instance is the **energy-based binary VAD with minimum-energy tracking** used by Tashev et al. (2008) for their small-device sound-capture system: a state machine with two thresholds ("noise" and "voice" states) gates whether the current frame updates the noise-only statistical models or the speech-direction statistical models of the post-filter. The VAD itself is not the contribution; it is a binary gate for the [[concepts/probability-based-spatial-filter|probability-based spatial filter]]'s model adaptation.
 
 ### 2. Machine Learning Approaches
 - **GMMs and HMMs**: Traditional statistical models for speech.
@@ -83,3 +86,4 @@ Apostolidis et al. (2026) train a [[concepts/convolutional-recurrent-network|CRN
 - [[sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Earbuds]]
 - [[sources/martin-2001-noise-psd-estimation-optimal-smoothing|Martin 2001: Noise PSD Estimation via Optimal Smoothing and Minimum Statistics]]
 - [[sources/liu-2025-pcen-mask-vad-speech-enhancement|Liu et al. 2025: PCEN-Based Mask Thresholding and VAD for DNN Speech Enhancement Training]] — training-time PCEN-VAD that gates an asymmetric loss
+- [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — energy-based binary VAD with minimum-energy tracking used as a binary gate for spatial-filter model adaptation
