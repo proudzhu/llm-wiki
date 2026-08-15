@@ -123,6 +123,8 @@ Create `wiki/sources/{slug}.md`. Load [`references/page-templates.md`](reference
 
 **Figure embeds**: use `map_figures.py` output (Step 3e) to write `![[raw/papers/{slug}/figures/HASH.jpg|caption]]` — never markdown `![alt](path)` (`pitfalls.md` #27). Multi-panel figures: one `![[...]]` per (a)/(b) crop above the shared `*Figure N: ...*` caption (`pitfalls.md` #26).
 
+**Unreferenced figure files**: `map_figures.py` lists files in `figures/` that `full-text.md` never references — these are typically axis/colorbar strips split off by MinerU (flagged as `<-- likely axis/colorbar strip, skip`). **Do not embed unreferenced files.** Only embed figures that are (i) referenced in `full-text.md` AND (ii) either paired with a "Fig. N." caption by `map_figures.py` or manually matched to a "Fig. N" reference in the text. If `map_figures.py` reports "no 'Fig. N.' captions found", fall back to reading the text for "Fig. N" / "Figure N" mentions and matching by position (see `pitfalls.md` #32).
+
 For re-ingestion: overwrite the existing source page with updated comprehensive content.
 
 ### Step 6: Create or Update Entity Pages
@@ -131,11 +133,23 @@ For each author not already in `wiki/entities/`, create a new page. For existing
 
 ### Step 7: Create Missing Concept Pages
 
-For each key concept referenced via wikilink in the source page but lacking a dedicated page, create `wiki/concepts/{concept-name}.md`. Load [`references/page-templates.md`](references/page-templates.md) for the template and **concept-page threshold** (novelty / distinctive formulation / central-to-contribution). Do **not** create pages for generic ML/DL primitives (Adam, ReLU, dropout, gradient clipping) — link them as plain text. **Check first**: Grep `wiki/concepts` for the concept slug.
+For each key concept referenced via wikilink in the source page but lacking a dedicated page, create `wiki/concepts/{concept-name}.md`. Load [`references/page-templates.md`](references/page-templates.md) for the template and **concept-page threshold** (novelty / distinctive formulation / central-to-contribution). Do **not** create pages for generic ML/DL primitives (Adam, ReLU, dropout, gradient clipping) — link them as plain text.
+
+**Batch existence check** (one Grep call, not N Globs): before creating any concept page, list all candidate concept slugs from the source page and check them in a single Grep call with alternation:
+
+```
+Grep pattern: "concept-slug-1|concept-slug-2|concept-slug-3"
+      path: wiki/concepts
+      output_mode: files_with_matches
+```
+
+This returns all matching `.md` files in one call. Candidates with no match are confirmed missing and should be created (if they pass the concept-page threshold). This avoids the anti-pattern of issuing 5–15 separate Glob calls (one per slug), which wastes tool-call budget.
 
 ### Step 8: Update Existing Concept Pages
 
 For each existing concept page touched by this paper: add the paper to `sources:` in frontmatter, update `updated:` date, add new sections with findings, extend `## Related Concepts` and `## Related Sources` with new wikilinks.
+
+**Identify existing concept pages to update** using the same batch Grep approach as Step 7 — the candidates that *did* match in the Step 7 Grep are the existing pages to update here. No separate existence check needed.
 
 **Efficient batched-update pattern** (when updating >2 existing concept pages in one ingest):
 
@@ -213,6 +227,16 @@ For re-ingestion, use `ingest (re)` in `--title`.
 
 ### Step 12: Build Verification
 
+**Step 12a — Wikilink verification** (fast pre-check, catches broken links before the build):
+
+```bash
+uv run python .agents/skills/paper-reader/scripts/verify_wikilinks.py --slug SLUG
+```
+
+Scans the source page + all new/modified `wiki/*.md` files for `[[concepts/X]]`, `[[entities/X]]`, `[[sources/X]]`, `[[synthesis/X]]`, `[[queries/X]]` wikilinks and verifies each target file exists. Exits 0 if all links resolve, 1 if broken links found. Fix any broken links (create the missing page, correct the slug, or use plain text) before proceeding to 12b.
+
+**Step 12b — MkDocs strict build**:
+
 ```bash
 uv run python .agents/skills/paper-reader/scripts/build_check.py
 ```
@@ -233,4 +257,4 @@ Stages `raw/papers/{slug}/`, `wiki/sources/{slug}.md`, all index files, `wiki/lo
 
 - **`raw/` immutability exception**: replacing remote image URLs with local paths in `full-text.md` is allowed.
 - **Avoid `\bm{}` in LaTeX math** — MathJax does not load the `bm` package. Use `\mathbf{x}` or `\boldsymbol{x}` instead.
-- **Todo list structure**: one todo per workflow step (1–13), in numerical order. Treat Steps 3a–3e as a single "extract content" todo. If Step 9 triage finds no candidates, mark that todo `completed` with "none relevant — grep triage" rather than leaving it `pending`.
+- **Todo list structure**: one todo per workflow step (1–13), in numerical order. Treat Steps 3a–3e as a single "extract content" todo. Treat Step 12a–12b as a single "build verification" todo. If Step 9 triage finds no candidates, mark that todo `completed` with "none relevant — grep triage" rather than leaving it `pending`.
