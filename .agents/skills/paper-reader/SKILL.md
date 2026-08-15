@@ -16,16 +16,12 @@ End-to-end workflow for ingesting academic papers from Zotero into the LLM Wiki 
 
 ## When NOT to Invoke
 
-- **Paper is already in the wiki and up-to-date** — Check `wiki/sources/` and `wiki/log.md` first. Quick check:
-  ```bash
-  Select-String -Path wiki\log.md -Pattern "author|short title"
-  Select-String -Path wiki\sources\*.md -Pattern "Author Year" -List
-  ```
-- **User just wants a quick summary** — Read the existing source page or use the abstract directly. Full ingestion is only for deep analysis.
-- **Zotero is not running or unreachable** — Verify first: `curl -s http://localhost:23119/connector/ping`.
-- **Paper is not in Zotero** — This skill only ingests from Zotero. For external papers (e.g., direct arXiv URL), skip Zotero steps and use extraction scripts directly.
-- **Source is not a PDF/academic paper** — Web pages, blog posts, and informal HTML articles use the standard raw article workflow instead. **Exception**: substantive PDF primary sources that are not academic papers (e.g., investor-meeting transcripts, interview transcripts, conference talk slides, internal presentations) DO qualify for this workflow — they benefit from Zotero metadata extraction, MinerU PDF parsing, and structured wiki page creation. For such sources, adapt the source page template: replace academic sections (Problem Formulation / Methodology / Experimental Setup / Results) with themed sections matching the source's content (e.g., Vision & Strategy / Q&A / Key Quotes). Slug follows thought-piece convention (no year, e.g., `liang-wenfeng-investor-exchange-meeting`), matching prior precedents like `karpathy-llm-os` and `jensen-huang-nvidia-moat`.
-- **Re-ingestion of an identical version** — Only re-ingest if the source PDF was updated (e.g., camera-ready replaces preprint) or the existing wiki page is significantly incomplete.
+- **Paper already in wiki and up-to-date** — Grep `wiki/log.md` and `wiki/sources/*.md` for author/title first
+- **User wants a quick summary** — read the existing source page or abstract; full ingest is only for deep analysis
+- **Zotero not running** — verify: `curl -s http://localhost:23119/connector/ping`
+- **Paper not in Zotero** — skip Zotero steps, use extraction scripts directly with an arXiv ID or local PDF
+- **Source is a web page/blog/informal HTML** — use the standard raw article workflow. **Exception**: substantive non-academic PDFs (transcripts, slides, presentations) DO qualify — adapt the source page template with themed sections (Vision & Strategy / Q&A / Key Quotes); slug follows thought-piece convention without a year (e.g., `liang-wenfeng-investor-exchange-meeting`)
+- **Re-ingesting an identical version** — only if PDF was updated (camera-ready replaces preprint) or the wiki page is significantly incomplete
 
 ## Checking Existing Pages (Windows Glob Caveat)
 
@@ -44,36 +40,16 @@ Always use **forward slashes** in Glob patterns and prefer **relative paths from
 - Zotero running with "Allow other applications" enabled
 - `mineru-open-api` CLI (`npm install -g mineru-open-api`) — verify token: `mineru-open-api auth --show`
 - `defuddle` CLI (`npm install -g defuddle`) for arXiv HTML extraction
-- All scripts run from the **project root**
+- All scripts run from the **project root** via `uv run python .agents/skills/paper-reader/scripts/<script>.py`
 
-## Available Scripts
-
-Mechanical steps are automated as Python scripts in `scripts/`. Run them from the project root.
-
-| Script | Step | Purpose |
-|--------|------|---------|
-| `scripts/zotero_fetch.py` | 1-2 | Search Zotero + fetch metadata + find PDF attachment key |
-| `scripts/prepare_paper.py` | 3a | Create `raw/papers/{slug}/`, copy PDF (handles Unicode), verify `%PDF-` header |
-| `scripts/extract_arxiv_html.py` | 3b | arXiv HTML extraction via Defuddle + download figures + fix links + delete PDF |
-| `scripts/extract_mineru.py` | 3c | MinerU extraction + rename `images/`→`figures/` + update refs + delete PDF |
-| `scripts/extract_pdftotext.py` | 3d | pdftotext fallback (plain text, no images) + delete PDF |
-| `scripts/map_figures.py` | 4a | Map hash-named figure crops to "Fig. N." captions + flag unreferenced strips + verify hashes exist |
-| `scripts/triage_synthesis.py` | 9 | Triage synthesis pages by frontmatter-tag overlap with the source page — finds candidates to read |
-| `scripts/update_indexes.py` | 10 | Add rows (`add`), batch-add from YAML manifest (`batch --manifest`), or recount statistics (`stats`) |
-| `scripts/append_log.py` | 11 | Append formatted entry to `wiki/log.md` |
-| `scripts/build_check.py` | 12 | Run `mkdocs build --strict --quiet` (tries `uv run` then `python -m`) |
-| `scripts/commit_ingest.py` | 13 | Stage ingest files + verify no `paper.pdf` + commit |
-
-## References
-
-Load these on demand when the relevant situation arises. Do not read them up front.
+## References (load on demand)
 
 | Reference | When to load |
 |-----------|--------------|
-| [`references/page-templates.md`](references/page-templates.md) | Step 5 (source pages), Step 6 (entity pages), Step 7 (concept pages) — full templates and the concept-page threshold rules |
-| [`references/edge-cases.md`](references/edge-cases.md) | Step 4 — graphical-only results, citation discrepancies, loose classifications in review papers, cross-references to already-ingested papers |
-| [`references/review-papers.md`](references/review-papers.md) | Step 4-7 — when the paper is a review/survey (different analysis targets and required sections) |
-| [`references/pitfalls.md`](references/pitfalls.md) | When something unexpected happens, or skim before starting an ingest for known gotchas |
+| [`references/page-templates.md`](references/page-templates.md) | Step 5-7 — full templates and concept-page threshold |
+| [`references/edge-cases.md`](references/edge-cases.md) | Step 4 — graphical-only results, citation discrepancies, loose review classifications |
+| [`references/review-papers.md`](references/review-papers.md) | Step 4-7 — when the paper is a review/survey |
+| [`references/pitfalls.md`](references/pitfalls.md) | When something unexpected happens, or skim before starting an ingest |
 
 ## Workflow
 
@@ -92,273 +68,169 @@ If the paper has an arXiv ID but is not in Zotero, note the arXiv ID and proceed
 
 ### Step 3: Extract Paper Content
 
-#### 3a. Prepare Directory & Copy PDF
+**Extraction priority**: arXiv HTML > MinerU > pdftotext. All scripts delete the PDF after extraction (so run `pdfimages` first if you need standalone images).
+
+#### 3a. Prepare directory & copy PDF (skip for arXiv-only papers with HTML)
 
 ```bash
 uv run python .agents/skills/paper-reader/scripts/prepare_paper.py --slug SLUG --pdf-key PDF_KEY
 ```
 
-Slug format: `author-year-short-title` (lowercase, hyphenated). The script handles non-ASCII filenames and verifies the `%PDF-` header.
+Slug format: `author-year-short-title` (lowercase, hyphenated).
 
-#### 3b. arXiv HTML (Preferred for arXiv Papers)
-
-If the paper has an arXiv ID, **always prefer the HTML version** — better text quality than PDF extraction:
+#### 3b. arXiv HTML (preferred for arXiv papers — better text quality than PDF)
 
 ```bash
 uv run python .agents/skills/paper-reader/scripts/extract_arxiv_html.py --arxiv-id ARXIV_ID --slug SLUG
 ```
 
-The script auto-creates `raw/papers/{slug}/` (so arXiv-only papers can skip `prepare_paper.py`), checks if HTML exists (falls back to MinerU with exit code 2 if 404), verifies `defuddle` is on PATH (falls back to MinerU with exit code 2 if missing), runs Defuddle, downloads figures, and replaces remote image links with local embed wikilinks.
+Auto-creates `raw/papers/{slug}/`. Falls back to MinerU (exit code 2) if HTML 404 or `defuddle` missing — then run 3a + 3c.
 
-If the script exits with code 2 (HTML 404 or defuddle missing), proceed to 3c (MinerU) using the PDF you'll need to fetch first via `prepare_paper.py --slug SLUG --pdf-key PDF_KEY`.
-
-#### 3c. MinerU (For Non-arXiv Papers or arXiv Fallback)
+#### 3c. MinerU (non-arXiv papers or arXiv fallback)
 
 ```bash
 uv run python .agents/skills/paper-reader/scripts/extract_mineru.py --slug SLUG [--language en --model vlm --timeout 600]
 ```
 
-Parameters: `--model vlm` (VLM layout analysis, default), `--model pipeline` (zero-hallucination). Token required: `mineru-open-api auth`.
+- `--model vlm` (default, layout analysis) or `--model pipeline` (zero-hallucination). Token required: `mineru-open-api auth`.
+- **Language codes** (MinerU convention, NOT ISO 639 — `zh` is INVALID, use `ch`): `ch` (Chinese), `en` (English), `chinese_cht`, `japan`, `korean`, `latin`, `arabic`, `cyrillic`, `east_slavic`, `devanagari`, `ta`/`te`/`ka`. Script validates locally; invalid codes exit 2 with the valid list.
+- Post-processing: `images/` → `figures/`, refs updated in `full-text.md`.
+- Verify quality: Read first 200 + last 100 lines. Mermaid code blocks for diagrams are normal.
 
-**Language codes** (MinerU's own convention, NOT ISO 639 — common gotcha: `zh` is INVALID, use `ch` for Chinese):
-
-| Code | Language | Code | Language |
-|------|----------|------|----------|
-| `ch` | Chinese (Simplified, default) | `chinese_cht` | Traditional Chinese |
-| `en` | English | `japan` | Japanese |
-| `korean` | Korean | `latin` | Latin-script languages |
-| `arabic` | Arabic | `cyrillic` | Cyrillic |
-| `east_slavic` | East Slavic | `devanagari` | Devanagari |
-| `ta`/`te`/`ka` | Tamil/Telugu/Kannada | `ch_server`/`ch_lite` | Chinese server/lite variants |
-
-The script validates the language code locally before calling MinerU — invalid codes exit 2 with the valid list, instead of failing at the API call.
-
-Post-processing (automatic): `images/` → `figures/`, references updated in `full-text.md`.
-
-Verify extraction quality: Read first 200 lines and last 100 lines of `full-text.md`. MinerU VLM may produce mermaid code blocks for diagrams — these are normal.
-
-**Map figures to captions**: run `scripts/map_figures.py --slug SLUG` — it pairs each hash-named crop in `figures/` with its "Fig. N." caption (by line proximity), prints dimensions, flags axis/colorbar strips, and exits 2 on referenced-but-missing hashes. This is the one-call replacement for manual figure forensics (see `pitfalls.md` #25).
-
-#### 3d. Fallback: pdftotext (If MinerU Fails)
+#### 3d. pdftotext fallback (plain text, no images)
 
 ```bash
 uv run python .agents/skills/paper-reader/scripts/extract_pdftotext.py --slug SLUG
 ```
 
-Produces `.txt` without images. Font mismatch warnings are normal.
-
-#### 3e. Extract Images (Optional — before deleting PDF)
-
-If the user explicitly requests standalone image extraction (beyond what MinerU/arXiv HTML provides), and the PDF still exists:
+#### 3e. Map figures to captions (after 3b or 3c)
 
 ```bash
-pdfimages -all "raw/papers/{slug}/paper.pdf" "raw/papers/{slug}/img"
+uv run python .agents/skills/paper-reader/scripts/map_figures.py --slug SLUG
 ```
 
-Requires `poppler-utils`. Run this **before** any extraction script that deletes the PDF.
-
-**Note**: MinerU figures are hash-named JPEGs. When referencing them, list the `figures/` directory to discover actual filenames — the filenames are deterministic from the PDF content.
+Pairs each hash-named crop with its "Fig. N." caption (line proximity), prints dimensions, flags axis/colorbar strips, exits 2 on referenced-but-missing hashes. One-call replacement for manual figure forensics (`pitfalls.md` #25).
 
 ### Step 4: Read and Analyze the Full Paper Content
 
-Read the extracted text in chunks (head 200 + tail 100 + targeted range reads for methodology/experiments/results). Extract:
+Read the extracted text in chunks (head 200 + tail 100 + targeted range reads). Extract: core problem/motivation, key contributions (numbered), methodology (architecture/algorithms/losses/equations), experimental setup (datasets/metrics/hyperparameters), results (quantitative tables), key concepts warranting wiki pages, authors warranting entity pages.
 
-- **Core problem and motivation**
-- **Key technical contributions** (numbered)
-- **Methodology** (architecture, algorithms, loss functions, equations)
-- **Experimental setup** (datasets, metrics, hyperparameters)
-- **Results** (quantitative tables, key findings)
-- **Important distinctions** (e.g., how this differs from related work)
-- **Future work directions**
-- **Key concepts** that warrant their own wiki pages
-- **Authors** who warrant entity pages
-
-**If the paper is a review/survey**, load [`references/review-papers.md`](references/review-papers.md) for different analysis targets and required source-page sections.
-
-**If you encounter any of these situations**, load [`references/edge-cases.md`](references/edge-cases.md):
-- Results reported only in figures (do not transcribe numbers from charts)
-- Self-reported numbers differ from how a later, already-ingested paper cites them
-- A review paper groups cited methods under labels that don't fit
-- The paper cites or discusses a paper already in the wiki (add bidirectional links)
+**If review/survey**: load [`references/review-papers.md`](references/review-papers.md). **If you encounter** graphical-only results, citation discrepancies, loose review classifications, or cross-references to already-ingested papers: load [`references/edge-cases.md`](references/edge-cases.md).
 
 ### Step 5: Create/Update Source Page
 
-Create `wiki/sources/{slug}.md`. Load [`references/page-templates.md`](references/page-templates.md) for the full frontmatter, required sections, figure-usage criteria, and figure-filename verification rules. H1 is `Author1, Author2 & Author3 Year: Short Title`; required sections are Summary / Problem Formulation / Methodology / Experimental Setup / Results / Key Contributions / Related Concepts / Related Synthesis.
+Create `wiki/sources/{slug}.md`. Load [`references/page-templates.md`](references/page-templates.md) for frontmatter, required sections (Summary / Problem Formulation / Methodology / Experimental Setup / Results / Key Contributions / Related Concepts / Related Synthesis), figure-usage criteria, and figure-filename verification rules. H1 is `Author1, Author2 & Author3 Year: Short Title`.
 
-**Figure embeds**: use the `map_figures.py` output from Step 3c to write embed wikilinks `![[raw/papers/{slug}/figures/HASH.jpg|caption]]`. Multi-panel figures are embedded panel-by-panel (one `![[...]]` per (a)/(b) crop) above the shared `*Figure N: ...*` caption. Never use markdown `![alt](path)` — see `pitfalls.md` #26-27.
+**Figure embeds**: use `map_figures.py` output (Step 3e) to write `![[raw/papers/{slug}/figures/HASH.jpg|caption]]` — never markdown `![alt](path)` (`pitfalls.md` #27). Multi-panel figures: one `![[...]]` per (a)/(b) crop above the shared `*Figure N: ...*` caption (`pitfalls.md` #26).
 
 For re-ingestion: overwrite the existing source page with updated comprehensive content.
 
 ### Step 6: Create or Update Entity Pages
 
-For each author not already in `wiki/entities/`, create a new page. For existing authors, make **append-only** edits (update `updated:`, append a bullet to `## Key Contributions`, do not touch `created:` or rewrite existing bullets). Load [`references/page-templates.md`](references/page-templates.md) for the full template and the append-only update rules.
-
-**Check first**: use Glob/Grep (see "Checking Existing Pages" above) to see if an entity already exists.
+For each author not already in `wiki/entities/`, create a new page. For existing authors, make **append-only** edits (update `updated:`, append a bullet to `## Key Contributions`, do not touch `created:` or rewrite existing bullets). Load [`references/page-templates.md`](references/page-templates.md) for the full template and the append-only update rules. **Check first**: Grep `wiki/entities` for the author slug.
 
 ### Step 7: Create Missing Concept Pages
 
-For each key technical concept referenced via wikilinks in the source page but lacking a dedicated page, create `wiki/concepts/{concept-name}.md`. Load [`references/page-templates.md`](references/page-templates.md) for the template and the full **concept-page threshold** (novelty / distinctive formulation / central-to-contribution). Quick rule: do **not** create pages for generic ML/DL primitives (Adam, ReLU, dropout, gradient clipping) — link them as plain text instead.
-
-**Check first**: use Glob/Grep to see if a concept already exists. If so, update it.
+For each key concept referenced via wikilink in the source page but lacking a dedicated page, create `wiki/concepts/{concept-name}.md`. Load [`references/page-templates.md`](references/page-templates.md) for the template and **concept-page threshold** (novelty / distinctive formulation / central-to-contribution). Do **not** create pages for generic ML/DL primitives (Adam, ReLU, dropout, gradient clipping) — link them as plain text. **Check first**: Grep `wiki/concepts` for the concept slug.
 
 ### Step 8: Update Existing Concept Pages
 
-For concepts that already have pages:
-
-- Add the paper to `sources:` in frontmatter (if applicable)
-- Update `updated:` date
-- Add new sections or expand existing ones with findings from this paper
-- Add cross-references (wikilinks) to new concepts/entities
-- Add the paper to `## Related Sources` section
+For each existing concept page touched by this paper: add the paper to `sources:` in frontmatter, update `updated:` date, add new sections with findings, extend `## Related Concepts` and `## Related Sources` with new wikilinks.
 
 **Efficient batched-update pattern** (when updating >2 existing concept pages in one ingest):
 
-1. **Read all target pages in parallel** — issue one Read per file in a single message (different files, safe to parallelize). Typical ingest touches 4–8 existing concept pages.
-2. **Round 1 — frontmatter edits in parallel** — one Edit per file (different files, safe). Each edit updates `updated:` date and appends the new source path to `sources:`.
-3. **Round 2 — content additions in parallel** — one Edit per file, each inserting a new `## Section` or extending an existing section with findings from this paper. Place the new section at the most natural location (e.g. a new subsection under "Common Beamforming Techniques" for a beamforming variant).
-4. **Round 3 — `## Related Concepts` and `## Related Sources` extensions in parallel** — one Edit per file, each appending the new wikilinks to the relevant list.
+1. **Read all target pages in parallel** — one Read per file in a single message (different files, safe). Typical ingest touches 4–8 existing concept pages.
+2. **Round 1 — frontmatter edits in parallel** — one Edit per file (different files, safe).
+3. **Round 2 — content additions in parallel** — one Edit per file.
+4. **Round 3 — `## Related Concepts` / `## Related Sources` extensions in parallel** — one Edit per file.
 
-**CRITICAL**: parallel Edits to the *same* file race and silently drop each other (see `pitfalls.md` #13). The pattern above parallelizes *across files*, never *within* a file. If a single page needs frontmatter + content + Related Sources changes, apply them as **three sequential Edit calls in separate messages** — never three Edits to the same file in one message. `commit_ingest.py` emits `WARN: uncommitted changes remain after commit` when an edit was silently dropped; treat that warning as a signal to inspect.
+**Parallel Edits to the *same* file race and silently drop each other** (`pitfalls.md` #13). Parallelize *across files*, never *within* a file. If a single page needs frontmatter + content + Related Sources changes, apply them as **sequential Edit calls in separate messages**. `commit_ingest.py` emits `WARN: uncommitted changes remain after commit` when an edit was silently dropped.
 
 ### Step 9: Update Synthesis Pages
 
-**Triage procedure (do this first, cheaply)** — don't read full synthesis pages to decide. Instead, run the triage script, which reads the `tags:` from the source page frontmatter (Step 5) and from each `wiki/synthesis/*.md` frontmatter via proper YAML parsing, then prints the synthesis pages that share at least one tag:
+**Triage first** (cheap — avoids reading 200–400-line synthesis pages):
 
 ```bash
 uv run python .agents/skills/paper-reader/scripts/triage_synthesis.py --slug SLUG
 ```
 
-- If the script reports **no matching synthesis pages** → skip Step 9 entirely (common for single-method papers). Move straight to Step 10.
-- If it reports **candidate page(s)** → evaluate the **thin-match heuristic** first (below); only read the page(s) that survive the heuristic, then evaluate the trigger checklist.
-
-This avoids the cost of reading long synthesis pages (some are 200–400 lines) just to decide *not* to update them. The Gil-Cacho 2009 ingest read two full synthesis pages (412 + 227 lines, zero tag overlap with the paper) to reach a "skip" decision; the triage script would have skipped both in one call.
-
-**Thin-match heuristic** (skip without reading): the triage output prints `Shared tags (N): tag1, tag2, ...` per candidate. If **N = 1** *and* the single shared tag is a **broad topic tag** (e.g. `speech-enhancement`, `beamforming`, `audio-processing`, `signal-processing`, `machine-learning`), the candidate almost certainly has no real topical overlap with the paper — the tag matched just because both pages are in the same broad field. Skip it without reading. This is the common case for classical / statistical-method papers (e.g. Tashev 2008) where the synthesis pages are all neural / multimodal / learning-based; all 5 triage candidates shared only `speech-enhancement` and were correctly skipped. **Read the page only if** N ≥ 2, *or* N = 1 but the shared tag is *specific* to the paper's contribution (e.g. `packet-loss-concealment`, `lpcnet`, `multi-channel-wiener-filter`).
-
-Check if any existing synthesis pages should reference this paper. Update (or create) a synthesis page if **any** of these triggers fire:
-
-1. **New data point on an existing frontier** — a new (params, MACs/s, quality) tuple or row in an existing comparison table.
-2. **Fills a gap in an existing comparison** — covers a configuration (latency, sample rate, model size) flagged as missing.
-3. **Crosses multiple synthesis pages** — relevant to more than one existing synthesis; add to each.
-4. **Refutes or refines an existing synthesis claim** — findings contradict or sharpen a claim; update the claim and cite the paper.
-5. **Introduces a new axis of comparison** — proposes a new evaluation axis that should be added to an existing comparison table.
-
-**When NOT to update**: the paper is a narrow incremental result on a single existing system, does not change any cross-source comparison, and does not introduce a new axis. Skip — synthesis pages are for *synthesis*, not for listing every paper.
+- **No matches** → skip Step 9 entirely (common for single-method papers).
+- **Candidates** with `Shared tags (1): <broad-topic>` (e.g. `speech-enhancement`, `beamforming`, `audio-processing`, `signal-processing`, `machine-learning`) → **skip without reading** — topical coincidence. Read only if N ≥ 2, or N = 1 with a contribution-specific tag (e.g. `lpcnet`, `packet-loss-concealment`).
+- **Surviving candidates** → read, then update if any trigger fires:
+  1. New data point on an existing frontier (params/MACs/quality tuple)
+  2. Fills a gap in an existing comparison
+  3. Refutes or refines an existing synthesis claim
+  4. Introduces a new axis of comparison
 
 **When in doubt**: prefer *not* updating. A thin synthesis addition adds clutter; a substantive one (1–2 sentences + a table row) is valuable. If you cannot write at least one substantive sentence about what the paper *contributes to the cross-source analysis*, skip.
 
 ### Step 10: Update Indexes
 
-For each new page created, add a row to the indexes. For ingests creating **multiple pages** (typical: 1 source + 2–4 entities + 5–15 concepts), **prefer the `batch` subcommand** with a YAML manifest.
-
-#### Option A: Batch (preferred for multi-page ingests)
-
-Write a YAML manifest to a temp file (e.g., `.tmp_ingest_manifest.yaml`):
+For ingests creating **multiple pages** (typical: 1 source + 2–4 entities + 5–15 concepts), **prefer `batch`** with a YAML manifest:
 
 ```yaml
+# .tmp_ingest_manifest.yaml
 entries:
   - category: sources
     slug: author-year-short-title
     display: "Author Year: Short Title"
     summary: "One-line summary"
     date: YYYY-MM-DD
-  - category: entities
-    slug: firstname-lastname
-    display: "Author Name"
-    summary: "Affiliation — role in paper"
-    date: YYYY-MM-DD
-  - category: concepts
-    slug: concept-name
-    display: "Concept Name"
-    summary: "One-line summary"
-    date: YYYY-MM-DD
+  # ... repeat for each entity and concept
 ```
-
-Then run:
 
 ```bash
 uv run python .agents/skills/paper-reader/scripts/update_indexes.py batch \
     --manifest .tmp_ingest_manifest.yaml --stats
 ```
 
-The `--stats` flag runs the statistics recount automatically. Delete the temp manifest afterward.
+`--stats` recounts statistics automatically. Delete the temp manifest afterward.
 
-#### Option B: Single-entry `add` (one-off additions or re-ingests)
-
-```bash
-uv run python .agents/skills/paper-reader/scripts/update_indexes.py add \
-    --category sources --slug SLUG --display "Title" --summary "..." --date YYYY-MM-DD
-```
-
-If you used `add`, **always** run `stats` afterward:
-
-```bash
-uv run python .agents/skills/paper-reader/scripts/update_indexes.py stats
-```
+For one-off additions or re-ingests, use `add --category <cat> --slug <slug> --display "..." --summary "..." --date YYYY-MM-DD`, then run `stats`.
 
 ### Step 11: Update Log
+
+Write the entry body to a temp file, then call the script:
 
 ```bash
 uv run python .agents/skills/paper-reader/scripts/append_log.py --op ingest \
     --title "Paper Title (Author Year)" --file .tmp_log_entry.md
 ```
 
-Entry body format (write to temp file):
+Entry body format (temp file):
 
 ```markdown
 - **Source**: `raw/papers/{slug}/full-text.md` (Zotero: KEY)
-- **Authors**: Author1, Author2, Author3
+- **Authors**: Author1, Author2, ...
 - **Published**: Venue Year, pp. XXX–XXX
 - **DOI**: 10.xxxx/xxxxx
 - **Summary**: One-line summary
-- **Pages created**:
-  - `raw/papers/{slug}/full-text.md` — extracted text from Zotero PDF
-  - `wiki/sources/{slug}.md`
-  - `wiki/entities/author1.md`
-  - `wiki/concepts/concept1.md`
-- **Pages updated**:
-  - `wiki/entities/existing-author.md` — added this paper
-  - `wiki/concepts/existing-concept.md` — added cross-refs and source link
-  - `wiki/index.md` — added N entities, N concepts, 1 source; updated statistics
-  - `wiki/sources/index.md` — added 1 source row
+- **Pages created**: list each new file path
+- **Pages updated**: list each modified file with a short note (e.g., "added cross-refs")
 ```
 
-For re-ingestion, use `ingest (re)` as the operation in `--title`.
+For re-ingestion, use `ingest (re)` in `--title`.
 
-### Step 12: Build Verification (MkDocs)
+### Step 12: Build Verification
 
 ```bash
 uv run python .agents/skills/paper-reader/scripts/build_check.py
 ```
 
-If the build fails or exits with warnings (broken links, missing pages), resolve them before proceeding. (Pre-existing `INFO` messages about `log.md` links do not fail the build — see `pitfalls.md` #8.)
+If the build fails, resolve broken links/missing pages before proceeding. Pre-existing `INFO` messages about `log.md` links and the Material "MkDocs 2.0" banner do not fail the build (`pitfalls.md` #8, #28).
 
 ### Step 13: Commit Changes
 
 ```bash
 uv run python .agents/skills/paper-reader/scripts/commit_ingest.py \
-    --slug SLUG \
-    --message "ingest: Short Title (Author Year)" \
-    --entities author1 author2 \
-    --concepts concept1 concept2 \
-    --synthesis synth1
+    --slug SLUG --message "ingest: Short Title (Author Year)" \
+    --entities author1 author2 --concepts concept1 concept2 --synthesis synth1
 ```
 
-The script stages `raw/papers/{slug}/`, `wiki/sources/{slug}.md`, all index files, `wiki/log.md`, and the specified entity/concept/synthesis pages. It verifies no `paper.pdf` is staged and commits.
-
-**Auto-staging of unlisted `wiki/` modifications**: the script also auto-stages any other modified or untracked file under `wiki/` that you did not list explicitly. This catches Step 8 edits to **existing** concept/entity pages (bidirectional cross-references) that would otherwise be silently dropped from the commit. The auto-staged files are printed before the commit so you can verify them. Pass `--strict` to disable this behavior (e.g., for a partial ingest under review).
-
-Use `--no-verify` only if the pre-commit hook has environment issues unrelated to your changes.
+Stages `raw/papers/{slug}/`, `wiki/sources/{slug}.md`, all index files, `wiki/log.md`, and the specified entity/concept/synthesis pages. Verifies no `paper.pdf` is staged. **Auto-stages** any other modified/untracked file under `wiki/` (catches Step 8 edits to existing concept/entity pages that would otherwise be dropped) — pass `--strict` to disable. Use `--no-verify` only if the pre-commit hook has environment issues unrelated to your changes.
 
 ## Important Notes
 
-- **`raw/` immutability exception**: replacing remote image URLs with local paths in `full-text.md` is allowed (the immutability rule itself is in AGENTS.md Tips).
-- **Avoid `\bm{}` in LaTeX math** — MathJax does not load the `bm` package. Use `\mathbf{x}` (bold upright) or `\boldsymbol{x}` (bold italic) instead.
-- **Sequence edits to the same file** — when applying multiple edits to one page (e.g., frontmatter date + new section + Related Sources extension), issue Edit calls **sequentially, one per message**, not in parallel. Parallel Edits to the same file race and only one persists. See `pitfalls.md` #13 for the full story and recovery guidance.
-- **Todo list structure** — create one todo per workflow step (1–13), **in numerical order**, so Step 9 (synthesis) doesn't end up displaced by later-created todos. Treat Steps 3a–3e as a single "extract content" todo (pick whichever branch applies), not five separate todos. If the Step 9 grep triage finds no candidate synthesis pages, mark that todo `completed` immediately with a one-line "none relevant — grep triage" summary rather than leaving it `pending` or skipping it silently.
-
-## Skill Self-Update
-
-The canonical, git-tracked copy of this skill is `.agents/skills/paper-reader/SKILL.md` in the main project repo (`proudzhu/llm-wiki`). Other IDE skill directories mirror it via filesystem links (`.claude/skills` and `.reasonix/skills` symlink to `..\.agents\skills`; `.gemini/skills` is a plain text file pointing at the same path — Windows symlink creation failed there). Edit the canonical `.agents/skills/paper-reader/SKILL.md` directly and commit normally.
-
-If something unexpected happens during an ingest, consult [`references/pitfalls.md`](references/pitfalls.md) for concrete lessons from prior ingests.
+- **`raw/` immutability exception**: replacing remote image URLs with local paths in `full-text.md` is allowed.
+- **Avoid `\bm{}` in LaTeX math** — MathJax does not load the `bm` package. Use `\mathbf{x}` or `\boldsymbol{x}` instead.
+- **Todo list structure**: one todo per workflow step (1–13), in numerical order. Treat Steps 3a–3e as a single "extract content" todo. If Step 9 triage finds no candidates, mark that todo `completed` with "none relevant — grep triage" rather than leaving it `pending`.
