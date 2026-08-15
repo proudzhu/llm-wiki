@@ -37,6 +37,8 @@ Several steps require checking whether a page already exists. **On Windows, Glob
 
 Always use **forward slashes** in Glob patterns and prefer **relative paths from project root** over absolute Windows paths.
 
+**Do not use `RunCommand` with PowerShell `Where-Object { $_.Name -match '...' }`** for batch existence checks — the shell wrapper strips `$_` and other `$`-prefixed automatic variables, producing "item not recognized" errors (see `pitfalls.md` #31). Prefer the Grep tool with alternation, which calls ripgrep directly and avoids PowerShell quoting entirely.
+
 ## Prerequisites
 
 - Zotero running with "Allow other applications" enabled
@@ -209,6 +211,15 @@ For concepts that already have pages:
 - Add cross-references (wikilinks) to new concepts/entities
 - Add the paper to `## Related Sources` section
 
+**Efficient batched-update pattern** (when updating >2 existing concept pages in one ingest):
+
+1. **Read all target pages in parallel** — issue one Read per file in a single message (different files, safe to parallelize). Typical ingest touches 4–8 existing concept pages.
+2. **Round 1 — frontmatter edits in parallel** — one Edit per file (different files, safe). Each edit updates `updated:` date and appends the new source path to `sources:`.
+3. **Round 2 — content additions in parallel** — one Edit per file, each inserting a new `## Section` or extending an existing section with findings from this paper. Place the new section at the most natural location (e.g. a new subsection under "Common Beamforming Techniques" for a beamforming variant).
+4. **Round 3 — `## Related Concepts` and `## Related Sources` extensions in parallel** — one Edit per file, each appending the new wikilinks to the relevant list.
+
+**CRITICAL**: parallel Edits to the *same* file race and silently drop each other (see `pitfalls.md` #13). The pattern above parallelizes *across files*, never *within* a file. If a single page needs frontmatter + content + Related Sources changes, apply them as **three sequential Edit calls in separate messages** — never three Edits to the same file in one message. `commit_ingest.py` emits `WARN: uncommitted changes remain after commit` when an edit was silently dropped; treat that warning as a signal to inspect.
+
 ### Step 9: Update Synthesis Pages
 
 **Triage procedure (do this first, cheaply)** — don't read full synthesis pages to decide. Instead, run the triage script, which reads the `tags:` from the source page frontmatter (Step 5) and from each `wiki/synthesis/*.md` frontmatter via proper YAML parsing, then prints the synthesis pages that share at least one tag:
@@ -218,9 +229,11 @@ uv run python .agents/skills/paper-reader/scripts/triage_synthesis.py --slug SLU
 ```
 
 - If the script reports **no matching synthesis pages** → skip Step 9 entirely (common for single-method papers). Move straight to Step 10.
-- If it reports **candidate page(s)** → read only those pages, then evaluate the trigger checklist below.
+- If it reports **candidate page(s)** → evaluate the **thin-match heuristic** first (below); only read the page(s) that survive the heuristic, then evaluate the trigger checklist.
 
 This avoids the cost of reading long synthesis pages (some are 200–400 lines) just to decide *not* to update them. The Gil-Cacho 2009 ingest read two full synthesis pages (412 + 227 lines, zero tag overlap with the paper) to reach a "skip" decision; the triage script would have skipped both in one call.
+
+**Thin-match heuristic** (skip without reading): the triage output prints `Shared tags (N): tag1, tag2, ...` per candidate. If **N = 1** *and* the single shared tag is a **broad topic tag** (e.g. `speech-enhancement`, `beamforming`, `audio-processing`, `signal-processing`, `machine-learning`), the candidate almost certainly has no real topical overlap with the paper — the tag matched just because both pages are in the same broad field. Skip it without reading. This is the common case for classical / statistical-method papers (e.g. Tashev 2008) where the synthesis pages are all neural / multimodal / learning-based; all 5 triage candidates shared only `speech-enhancement` and were correctly skipped. **Read the page only if** N ≥ 2, *or* N = 1 but the shared tag is *specific* to the paper's contribution (e.g. `packet-loss-concealment`, `lpcnet`, `multi-channel-wiener-filter`).
 
 Check if any existing synthesis pages should reference this paper. Update (or create) a synthesis page if **any** of these triggers fire:
 
