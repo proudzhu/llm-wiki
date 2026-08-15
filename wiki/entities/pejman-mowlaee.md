@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-29
-updated: 2026-07-17
+updated: 2026-08-15
 tags:
   - researcher
   - multi-channel-speech-enhancement
@@ -18,6 +18,7 @@ tags:
 
 ## Key Contributions
 
+- Co-authored "DiffVQE: hybrid diffusion voice quality enhancement under acoustic echo and noise" (arXiv 2026) — [[sources/lugo-2026-diffvqe\|Lugo, Seidel, Mowlaee, Zhao & Fingscheidt 2026]]. First fully reproducible diffusion-based AEC system; hybrid single-step Cond/Score framework outperforming DeepVQE on most metrics at ~10% of its compute.
 - Co-authored Hybrid Variable Span Filter (HVSF) for interpretable multi-channel speech enhancement (ICASSP 2026)
 - Co-authored efficient high-performance Bark-scale neural network for residual echo and noise suppression (ICASSP 2024) — [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Seidel, Mowlaee & Fingscheidt 2024]]
 - Co-authored efficient deep acoustic echo suppression with condition-aware training (WASPAA 2023)

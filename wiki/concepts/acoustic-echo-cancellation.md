@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-06-06
-updated: 2026-08-08
+updated: 2026-08-15
 tags:
   - speech-enhancement
   - echo-cancellation
@@ -37,6 +37,9 @@ The goal is to estimate and subtract the echo component, or equivalently learn a
 | **Hybrid DL+AEC** | DL post-processor after LAEC | Combines interpretability with learning |
 | **End-to-end DL** | Pure neural network AEC | No explicit echo path estimation |
 | **Cross-attention alignment** | Soft alignment in feature space | Replaces DSP delay compensator |
+| **Hybrid diffusion AEC** | Discriminative estimate + single-step score-based refinement | Generative modeling of near-end speech (DiffVQE) |
+
+**Diffusion-based AEC**: [[sources/lugo-2026-diffvqe|DiffVQE (Lugo et al. 2026)]] is the first fully reproducible diffusion-based AEC model (non-causal). A discriminative Cond DNN estimates near-end speech from the concatenated mic + far-end signals, and a score-based Score DNN applies a single-step diffusion refinement (EffDiffSE-style hybrid, 1 NFE). It outperforms a retrained DeepVQE on most quality metrics (DT/ST Other, PESQ, ESTOI, LPS) at ~10–13% of DeepVQE's FLOPS and with fewer parameters; DeepVQE retains a small edge on DT/ST Echo.
 
 ## Key Challenges
 
@@ -93,10 +96,13 @@ EchoFree achieves DeepVQE-S-comparable single-talk performance at ~10× lower co
 - [[concepts/residual-echo-suppression|Residual Echo Suppression]]
 - [[concepts/psychoacoustic-postfilter|Psychoacoustic Postfilter]]
 - [[concepts/error-recovery-nonlinearity|Error Recovery Nonlinearity (ERN)]]
+- [[concepts/diffusion-models-for-speech|Diffusion Models for Speech Enhancement]]
+- [[concepts/urgent-challenge|URGENT Challenge]]
 
 ## Related Sources
 
 - [[sources/indenbom-2023-deepvqe|Indenbom et al. 2023: DeepVQE]]
+- [[sources/lugo-2026-diffvqe|Lugo et al. 2026: DiffVQE]] — first reproducible diffusion-based AEC; beats DeepVQE on most metrics at ~10% of its FLOPS
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]]
 - [[sources/seidel-2024-bark-scale-nn-residual-suppression|Seidel, Mowlaee & Fingscheidt 2024: Bark-Scale NN for RES+NS]]
 - [[sources/li-2025-echofree-neural-aec|Li et al. 2025: EchoFree]]

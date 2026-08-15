@@ -476,6 +476,8 @@
 | [[entities/slavy-mihov\|Slavy Mihov]] | Technical University of Sofia — constrained optimization for beamformers and spatial filters | 2026-08-15 |
 | [[entities/tyler-gleghorn\|Tyler Gleghorn]] | Microsoft Corporation — acoustic hardware and anechoic directivity measurement | 2026-08-15 |
 | [[entities/alex-acero\|Alex Acero]] | Microsoft — speech recognition, enhancement, microphone-array processing | 2026-08-15 |
+| [[entities/haljan-lugo\|Haljan Lugo]] | TU Braunschweig — first author of DiffVQE, single-step hybrid diffusion AEC | 2026-08-15 |
+| [[entities/ziyue-zhao\|Ziyue Zhao]] | GN Advanced Science — co-author of DiffVQE diffusion-based AEC | 2026-08-15 |
 
 ---
 
@@ -898,6 +900,7 @@
 | [[concepts/opus-codec\|Opus Audio Codec]] | Low-latency open-source speech/audio codec (RFC 6716); Valin 2022 integrates neural PLC into its SILK mode | 2026-08-14 |
 | [[concepts/back-to-back-microphone-array\|Back-to-Back Microphone Array]] | Small-baseline 2-mic geometry with two unidirectional capsules pointing in opposite directions; relies on directional-response level differences rather than delay | 2026-08-15 |
 | [[concepts/probability-based-spatial-filter\|Probability-Based Spatial Filter]] | Non-linear post-beamformer that applies a Bayesian posterior (front/rear/noise) directly as a per-bin suppression gain; an MMSE estimator | 2026-08-15 |
+| [[concepts/urgent-challenge\|URGENT Challenge]] | URGENT (Universality, Robustness, GeneralizatioN) SE challenge series — Interspeech 2024/2025 editions, LPS hallucination metric; DiffVQE training corpus | 2026-08-15 |
 
 ---
 
@@ -1069,6 +1072,7 @@
 | [[sources/buthe-2025-blind-wideband-to-fullband-extension\|Büthe & Valin 2025: Blind Wideband-to-Fullband Extension]] | BBWENet — hybrid DSP/DNN blind BWE (~370 K params, ~140 MFLOPS); Opus 1.5 + BWE at 9 kb/s matches EVS 9.6 kb/s and Opus 1.4 18 kb/s | 2026-08-14 |
 | [[sources/valin-2022-real-time-plc\|Valin et al. 2022: Real-Time Packet Loss Concealment]] | Hybrid LPCNet + predictive RNN PLC; 2nd place Interspeech 2022 PLC Challenge; integrates into Opus codec | 2026-08-14 |
 | [[sources/tashev-2008-sound-capture-spatial-filter\|Tashev, Mihov, Gleghorn & Acero 2008: Sound Capture System and Spatial Filter for Small Devices]] | Back-to-back unidirectional 2-mic array (9.6 mm) + difference-maximizing beamformer + probability-based non-linear spatial filter; 10.43 dB SNR / 0.39 PESQ-MOS | 2026-08-15 |
+| [[sources/lugo-2026-diffvqe\|Lugo et al. 2026: DiffVQE]] | First fully reproducible diffusion-based AEC (hybrid single-step Cond/Score, EffDiffSE lineage); beats retrained DeepVQE on most metrics at ~10% of its FLOPS | 2026-08-15 |
 
 ---
 
@@ -1120,10 +1124,10 @@
 
 ## Statistics
 
-- **Total pages**: 1072
-- **Entities**: 469
-- **Concepts**: 413
-- **Sources**: 162
+- **Total pages**: 1076
+- **Entities**: 471
+- **Concepts**: 414
+- **Sources**: 163
 - **Synthesis**: 21
 - **Queries**: 7
 - **Last updated**: 2026-08-15

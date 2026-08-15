@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-06-06
-updated: 2026-07-17
+updated: 2026-08-15
 sources:
   - raw/papers/li-2025-echofree-neural-aec/full-text.md
+  - raw/papers/lugo-2026-diffvqe/full-text.md
 tags:
   - deep-learning
   - upsampling
@@ -36,6 +37,7 @@ Each upscaling is by factor 2 on the frequency axis.
 - Speech enhancement decoders (frequency-axis upsampling)
 - Image super-resolution (original application)
 - Any encoder-decoder architecture requiring upsampling
+- Diffusion-based AEC ([[sources/lugo-2026-diffvqe|DiffVQE]]): sub-pixel convolution replaces transposed convolution in the Cond/Score U-Net decoder to alleviate aliasing phenomena
 
 ## Related Concepts
 
@@ -45,3 +47,4 @@ Each upscaling is by factor 2 on the frequency axis.
 ## Related Sources
 
 - [[sources/indenbom-2023-deepvqe|Indenbom et al. 2023: DeepVQE]]
+- [[sources/lugo-2026-diffvqe|Lugo et al. 2026: DiffVQE]] — anti-aliasing replacement for transposed convolutions in the Cond/Score U-Net

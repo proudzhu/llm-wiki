@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-03
-updated: 2026-05-03
+updated: 2026-08-15
 sources:
   - raw/papers/xu-2026-drifting-models-speech-enhancement/full-text.md
+  - raw/papers/lugo-2026-diffvqe/full-text.md
 tags:
   - speech-enhancement
   - generative-models
@@ -35,6 +36,10 @@ However, their inference is inherently iterative — numerically integrating the
 ### Beyond Trajectories
 - **[[drifting-models|Drifting Models]]**: Reformulate generation as a distributional equilibrium problem, achieving native one-step inference without any trajectory (DriftSE)
 
+### Single-Step Hybrid Discriminative + Generative (EffDiffSE lineage)
+
+A complementary route to 1-NFE diffusion is a **hybrid discriminative+generative** design: a discriminative Cond DNN predicts a first estimate $\hat{\mathbf{S}}^{\mathrm{cond}}$, which initializes the reverse process at $t = T$; a generative Score DNN then applies a **single** noise-consistent Langevin correction step. Matched-condition training at $\tilde{t} = T$, denoising score matching, and Karras preconditioning yield stable single-step inference. [[sources/lugo-2026-diffvqe|DiffVQE (Lugo et al. 2026)]] brings this EffDiffSE-style framework to joint [[concepts/acoustic-echo-cancellation|acoustic echo control]] + denoising: it outperforms the discriminative DeepVQE baseline on most quality/intelligibility metrics (PESQ, ESTOI, LPS, AECMOS Other) at ~10–13% of its FLOPS, with RTF 0.172–0.185 on CPU — evidence that generative SE can be single-step without a distillation teacher.
+
 ## Representative Methods on VoiceBank-DEMAND
 
 | Method | NFE | PESQ | SI-SDR | Approach |
@@ -50,7 +55,10 @@ However, their inference is inherently iterative — numerically integrating the
 - [[concepts/drifting-models|Drifting Models]]
 - [[concepts/one-step-generative-models|One-Step Generative Models]]
 - [[concepts/self-supervised-speech-representation|Self-Supervised Speech Representation]]
+- [[concepts/acoustic-echo-cancellation|Acoustic Echo Cancellation]]
+- [[concepts/urgent-challenge|URGENT Challenge]]
 
 ## Related Sources
 
 - [[sources/xu-2026-drifting-models-speech-enhancement|Xu et al. 2026: Speech Enhancement Based on Drifting Models]]
+- [[sources/lugo-2026-diffvqe|Lugo et al. 2026: DiffVQE]] — first reproducible diffusion-based AEC; single-step hybrid Cond/Score framework (EffDiffSE lineage)

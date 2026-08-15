@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-22
-updated: 2026-06-21
+updated: 2026-08-15
 sources:
   - wiki/sources/tagliasacchi-2020-seanet.md
   - wiki/sources/zhang-2022-bone-conducted-speech-dissertation.md
@@ -12,6 +12,7 @@ sources:
   - wiki/sources/dai-2026-speech-preserving-deep-anc.md
   - wiki/sources/heitkaemper-2026-bcs-speech-enhancement-earbuds.md
   - wiki/sources/han-2026-quality-aware-earable-se.md
+  - wiki/sources/lugo-2026-diffvqe.md
   - zotero://select/items/0_B92ER5KS (Khanagha 2026: Conditional Diffusion)
   - zotero://select/items/0_NIIDMA7J (Contrastive Learning for BC)
 tags:
@@ -122,6 +123,7 @@ Because BC speech is missing frequencies above 2 kHz, multimodal systems must pe
 
 - **STFT vs. Time-Domain**: Frequency-domain methods (STFT) introduce frame-level latency (~32-64ms).
 - **Embedded Constraints**: Diffusion models require multiple reverse steps (e.g., $N=60$), making them challenging for low-power DSPs. Recent work (Liang, 2026) emphasizes **Analytic/Closed-form** solutions to minimize these overheads.
+- **Single-step hybrid diffusion**: [[sources/lugo-2026-diffvqe|DiffVQE (Lugo et al. 2026)]] refines the multi-step constraint: a discriminative Cond DNN initializes the reverse process at $t = T$ and a score-based Score DNN applies exactly **one** correction step (1 NFE, RTF 0.172–0.185 on a single CPU thread) for joint AEC + denoising — no distillation teacher required. Hybrid design, not NFE, may thus be the practical route to real-time generative SE.
 
 ### 3.3 Data Scarcity
 
@@ -172,6 +174,7 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 - [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 - [[sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2026: BCS-Guided SE for Earbuds]]
 - [[sources/han-2026-quality-aware-earable-se|Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone SE]]
+- [[sources/lugo-2026-diffvqe|Lugo et al. 2026: DiffVQE]] — single-step hybrid diffusion evidence for real-time generative SE (§3.2)
 
 ## Related Synthesis
 

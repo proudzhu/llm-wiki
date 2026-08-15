@@ -1,7 +1,7 @@
 ---
 type: source
 created: 2026-06-06
-updated: 2026-06-06
+updated: 2026-08-15
 sources:
   - raw/papers/indenbom-2023-deepvqe/full-text.md
   - https://doi.org/10.48550/arXiv.2306.03177
@@ -169,3 +169,4 @@ Training data synthesized online from clean/noisy speech with random parameters 
 - [[sources/wang-2018-supervised-speech-separation-deep-learning-overview|Wang & Chen 2018: Supervised Speech Separation Survey]]
 - [[sources/li-2025-echofree-neural-aec|Li et al. 2025: EchoFree]] — DeepVQE-S serves as the upper-bound SOTA comparison for this 278K-parameter PercepNet-style AEC model
 - [[sources/castelli-2025-embedded-joint-aec-ns|Castelli 2024: Embedded Joint AEC and NS]] — NXP industrial deployment that re-implements DeepVQE-s at 16 kHz and compresses it through a six-stage pipeline to [[concepts/tinyvqe|TinyVQE]] (114k params, 0.48 MMACs/frame, 2.32 ms / 16 ms on a Cadence HiFi4 DSP)
+- [[sources/lugo-2026-diffvqe|Lugo et al. 2026: DiffVQE]] — single-step hybrid diffusion challenger that outperforms a *retrained* DeepVQE (5.29M params on their 16 kHz setup, vs. 7.5M in the original paper) on most quality/intelligibility metrics at ~10% of its FLOPS; DeepVQE retains a slight DT/ST Echo edge

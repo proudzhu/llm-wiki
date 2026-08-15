@@ -470,4 +470,6 @@
 | [[entities/slavy-mihov\|Slavy Mihov]] | Technical University of Sofia — constrained optimization for beamformers and spatial filters | 2026-08-15 |
 | [[entities/tyler-gleghorn\|Tyler Gleghorn]] | Microsoft Corporation — acoustic hardware and anechoic directivity measurement | 2026-08-15 |
 | [[entities/alex-acero\|Alex Acero]] | Microsoft — speech recognition, enhancement, microphone-array processing | 2026-08-15 |
+| [[entities/haljan-lugo\|Haljan Lugo]] | TU Braunschweig — first author of DiffVQE, single-step hybrid diffusion AEC | 2026-08-15 |
+| [[entities/ziyue-zhao\|Ziyue Zhao]] | GN Advanced Science — co-author of DiffVQE diffusion-based AEC | 2026-08-15 |
 

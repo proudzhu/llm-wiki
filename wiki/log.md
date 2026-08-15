@@ -4325,3 +4325,15 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/concepts/differential-microphone-array.md` — added "Back-to-Back Unidirectional Variant" comparison subsection
   - `wiki/concepts/speech-enhancement.md` — Related Sources extended
   - `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — added 7 entries, statistics recounted (total=1072)
+
+---
+
+## [2026-08-15] ingest | DiffVQE: hybrid diffusion voice quality enhancement under acoustic echo and noise (Lugo et al. 2026)
+
+- **Source**: `raw/papers/lugo-2026-diffvqe/full-text.md` (Zotero: 9UTQLQW7)
+- **Authors**: Haljan Lugo, Ernst Seidel, Pejman Mowlaee, Ziyue Zhao, Tim Fingscheidt
+- **Published**: arXiv preprint 2026-06-17 (v2), arXiv:2605.08189
+- **DOI**: 10.48550/arXiv.2605.08189
+- **Summary**: First fully reproducible diffusion-based AEC model (DiffVQE): hybrid single-step Cond/Score framework adapted from EffDiffSE, trained on curated URGENT 2025 + AEC Challenge 2023 data; outperforms retrained DeepVQE on most quality/intelligibility metrics at ~10–13% of its FLOPS (DeepVQE retains slight DT/ST Echo edge)
+- **Pages created**: `wiki/sources/lugo-2026-diffvqe.md`, `wiki/entities/haljan-lugo.md`, `wiki/entities/ziyue-zhao.md`, `wiki/concepts/urgent-challenge.md`
+- **Pages updated**: `wiki/entities/ernst-seidel.md`, `wiki/entities/pejman-mowlaee.md`, `wiki/entities/tim-fingscheidt.md` (appended DiffVQE contribution); `wiki/concepts/diffusion-models-for-speech.md` (single-step hybrid section); `wiki/concepts/acoustic-echo-cancellation.md` (hybrid diffusion AEC row + paragraph); `wiki/concepts/sub-pixel-convolution.md` (DiffVQE application); `wiki/sources/indenbom-2023-deepvqe.md` (cross-ref DiffVQE); `wiki/synthesis/multimodal-bc-speech-enhancement.md` (single-step diffusion refines multi-step claim)

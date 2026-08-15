@@ -166,4 +166,5 @@
 | [[sources/buthe-2025-blind-wideband-to-fullband-extension\|Büthe & Valin 2025: Blind Wideband-to-Fullband Extension]] | BBWENet — hybrid DSP/DNN blind BWE (~370 K params, ~140 MFLOPS); Opus 1.5 + BWE at 9 kb/s matches EVS 9.6 kb/s and Opus 1.4 18 kb/s | 2026-08-14 |
 | [[sources/valin-2022-real-time-plc\|Valin et al. 2022: Real-Time Packet Loss Concealment]] | Hybrid LPCNet + predictive RNN PLC; 2nd place Interspeech 2022 PLC Challenge; integrates into Opus codec | 2026-08-14 |
 | [[sources/tashev-2008-sound-capture-spatial-filter\|Tashev, Mihov, Gleghorn & Acero 2008: Sound Capture System and Spatial Filter for Small Devices]] | Back-to-back unidirectional 2-mic array (9.6 mm) + difference-maximizing beamformer + probability-based non-linear spatial filter; 10.43 dB SNR / 0.39 PESQ-MOS | 2026-08-15 |
+| [[sources/lugo-2026-diffvqe\|Lugo et al. 2026: DiffVQE]] | First fully reproducible diffusion-based AEC (hybrid single-step Cond/Score, EffDiffSE lineage); beats retrained DeepVQE on most metrics at ~10% of its FLOPS | 2026-08-15 |
 
