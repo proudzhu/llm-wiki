@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-05-27
+updated: 2026-08-15
 sources:
   - raw/papers/schwarz-2015-coherent-to-diffuse-power-ratio/full-text.md
+  - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
 tags:
   - signal-processing
   - multichannel
@@ -39,6 +40,14 @@ $$\text{CDR} = \frac{|\Gamma_{x_1 x_2}|^2 - |\Gamma_{\text{diff}}|^2}{1 - |\Gamm
 
 CDR > 0 表示相干分量（直达声）占主导，CDR < 0 表示扩散分量（混响）占主导。
 
+## 自适应相干性模型
+
+理论上扩散声场的相干性由 sinc 函数给出 (Eq. $\Gamma_{\text{diff}}$)，但在实际移动设备上，麦克风的非全向特性和设备外壳的反射会使实测相干性偏离理论模型。Jin et al. (2017) 在多通道噪声估计中提出将 sinc 模型作为**初始化**，并在语音缺席帧（SPP $\rho < 0.1$）自适应更新相干函数：
+
+$$\gamma_{pq}(\tau, \omega) = \alpha_\gamma \gamma_{pq}(\tau - 1, \omega) + (1 - \alpha_\gamma) \frac{\Phi_{pq}}{\sqrt{\Phi_{pp} \Phi_{qq}}}, \quad \rho < 0.1$$
+
+其中 $\alpha_\gamma = 0.9$。这种自适应方案使噪声相干模型能够跟踪时变噪声场，而非依赖静态的完全扩散或完全不相干假设（Zelinski/McCowan 的局限）。更新的相干函数同时用于：(i) 通过最小二乘全局求解噪声方差的 MMSE 分解（相干-扩散分量 $\sigma_c^2$ 与不相干分量 $\sigma_w^2$）；(ii) 自适应地确定单/多通道噪声估计的分频点（$|\gamma|^2 = 0.5$ 的频率）。详见 [[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence Noise Estimation]]。
+
 ## 应用
 
 | 应用 | 原理 |
@@ -60,3 +69,4 @@ CDR > 0 表示相干分量（直达声）占主导，CDR < 0 表示扩散分量�
 - [[sources/schwarz-2015-coherent-to-diffuse-power-ratio|Schwarz & Kellermann 2015]] — CDR 估计的奠基性工作，提出无偏 CDR 估计器和 DOA 无关去混响系统
 - [[sources/schwarz-2019-dereverberation-spatial-coherence|Schwarz 2019]] — 博士论文，系统研究空间相干性模型在去混响和 ASR 中的应用
 - [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026]] — 利用扩散声场相干矩阵 $\Gamma_d$ 作为预定义基，通过方差比估计重建 SCM
+- [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin et al. 2017]] — 将 sinc 扩散场相干性作为初始化，在语音缺席帧自适应更新相干函数，用于多通道噪声 PSD 估计与分频点选择

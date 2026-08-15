@@ -4337,3 +4337,30 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
 - **Summary**: First fully reproducible diffusion-based AEC model (DiffVQE): hybrid single-step Cond/Score framework adapted from EffDiffSE, trained on curated URGENT 2025 + AEC Challenge 2023 data; outperforms retrained DeepVQE on most quality/intelligibility metrics at ~10–13% of its FLOPS (DeepVQE retains slight DT/ST Echo edge)
 - **Pages created**: `wiki/sources/lugo-2026-diffvqe.md`, `wiki/entities/haljan-lugo.md`, `wiki/entities/ziyue-zhao.md`, `wiki/concepts/urgent-challenge.md`
 - **Pages updated**: `wiki/entities/ernst-seidel.md`, `wiki/entities/pejman-mowlaee.md`, `wiki/entities/tim-fingscheidt.md` (appended DiffVQE contribution); `wiki/concepts/diffusion-models-for-speech.md` (single-step hybrid section); `wiki/concepts/acoustic-echo-cancellation.md` (hybrid diffusion AEC row + paragraph); `wiki/concepts/sub-pixel-convolution.md` (DiffVQE application); `wiki/sources/indenbom-2023-deepvqe.md` (cross-ref DiffVQE); `wiki/synthesis/multimodal-bc-speech-enhancement.md` (single-step diffusion refines multi-step claim)
+
+---
+
+## [2026-08-15] ingest | Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones (Jin et al. 2017)
+
+- **Source**: `raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md` (Zotero: 45QQHIE9)
+- **Authors**: Wenyu Jin, Mohammad J. Taghizadeh, Kainan Chen, Wei Xiao
+- **Published**: ICASSP 2017, pp. 5700–5704 (DOI: 10.1109/ICASSP.2017.7952207)
+- **DOI**: 10.1109/ICASSP.2017.7952207
+- **Summary**: Adaptive coherence NE for hands-free mobile-phone voice communication — combines single-channel SPP-based NE (low frequencies) with globally MMSE-optimized multi-channel coherence-based NE (high frequencies) under an adaptively varying split frequency; validated on a 3-microphone Huawei Mate 8 in pink point-source and real Marienplatz rush-hour noise.
+- **Pages created**:
+  - `wiki/sources/jin-2017-multichannel-noise-reduction-mobile.md`
+  - `wiki/entities/wenyu-jin.md`
+  - `wiki/entities/mohammad-taghizadeh.md`
+  - `wiki/entities/kainan-chen.md`
+  - `wiki/entities/wei-xiao.md`
+  - `wiki/concepts/adaptive-coherence-noise-estimation.md`
+  - `wiki/concepts/speech-presence-probability.md`
+- **Pages updated**:
+  - `wiki/concepts/mvdr-beamformer.md` — added "MVDR with Adaptive Coherence Post-filter" section + cross-refs
+  - `wiki/concepts/multi-channel-speech-enhancement.md` — added adaptive coherence NE to Key Techniques + cross-refs
+  - `wiki/concepts/multi-channel-wiener-filter.md` — added "MVDR + Single-Channel Wiener Factorization" section
+  - `wiki/concepts/spatial-coherence.md` — added "自适应相干性模型" section on adaptive coherence updates
+  - `wiki/concepts/coherent-to-diffuse-power-ratio.md` — added "Relation to Global Coherence-Based Noise Variance Decomposition" section
+  - `wiki/concepts/voice-activity-detection.md` — added "Soft-Decision VAD via Speech Presence Probability" section
+  - `wiki/concepts/minimum-statistics.md` — added "Relation to SPP-Based Noise Estimation" section
+- **Synthesis**: skipped — triage found only broad-tag (speech-enhancement) candidates

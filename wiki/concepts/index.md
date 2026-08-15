@@ -418,4 +418,6 @@
 | [[concepts/back-to-back-microphone-array\|Back-to-Back Microphone Array]] | Small-baseline 2-mic geometry with two unidirectional capsules pointing in opposite directions; relies on directional-response level differences rather than delay | 2026-08-15 |
 | [[concepts/probability-based-spatial-filter\|Probability-Based Spatial Filter]] | Non-linear post-beamformer that applies a Bayesian posterior (front/rear/noise) directly as a per-bin suppression gain; an MMSE estimator | 2026-08-15 |
 | [[concepts/urgent-challenge\|URGENT Challenge]] | URGENT (Universality, Robustness, GeneralizatioN) SE challenge series — Interspeech 2024/2025 editions, LPS hallucination metric; DiffVQE training corpus | 2026-08-15 |
+| [[concepts/adaptive-coherence-noise-estimation\|Adaptive Coherence Noise Estimation]] | Jin et al. 2017 — hybrid SPP/coherence NE with adaptive split-frequency and globally MMSE-optimal multi-channel variance decomposition | 2026-08-15 |
+| [[concepts/speech-presence-probability\|Speech Presence Probability (SPP)]] | Soft-decision VAD estimating per-bin speech presence probability; gates noise PSD updates | 2026-08-15 |
 

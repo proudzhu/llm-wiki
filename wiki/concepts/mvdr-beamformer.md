@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-07-21
+updated: 2026-08-15
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
+  - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
 tags:
   - beamforming
   - speech-enhancement
@@ -38,6 +39,10 @@ The MVDR is a special case of the [[concepts/variable-span-linear-filter|Variabl
 
 Apostolidis et al. (2026) use a conventional input-based MVDR as the baseline against which their [[concepts/output-based-speech-enhancement|output-based]] [[concepts/mpdr-beamformer|MPDR]] system is compared. The MVDR uses the same neural [[concepts/voice-activity-detection|VAD]] as the proposed system (for fair architectural comparison), with ideal binary masks formed from the VAD's audibility map used to estimate $\mathbf{C}_{\mathbf{S}}$ and $\mathbf{C}_{\mathbf{V}}$ and the RTF via the principal-eigenvector method. The input-based MVDR consistently underperforms the output-based MPDR — particularly at low input SNR ($-10$ to $-5$ dB) — because VAD decisions on noisy microphone signals corrupt the noise covariance estimate. This illustrates that the input-vs-output *structural* distinction matters even when the VAD architecture is held constant.
 
+## MVDR with Adaptive Coherence Post-filter
+
+Jin et al. (2017) adopt the standard **MVDR + single-channel Wiener post-filter** factorization (Simmer et al. [14]) for hands-free mobile-phone voice communication. The MVDR beamformer runs on a 3-microphone Huawei Mate 8 array (Mic1–Mic2 bottom spacing 3.4 cm; Mic3 top, 15.7 cm from Mic2) and the post-filter is driven by a novel [[concepts/adaptive-coherence-noise-estimation|adaptive coherence noise estimator]]: low-frequency noise PSD comes from an [[concepts/speech-presence-probability|SPP]]-based estimator on the primary microphone, high-frequency noise PSD from a globally MMSE-optimized least-squares decomposition into coherent-diffuse and incoherent components, fused at an adaptively varying split frequency. The MVDR provides the distortionless spatial filter; all the contribution is in the noise PSD estimate that drives the post-filter. On a real Marienplatz rush-hour recording replayed over a 22.2-speaker array (SNR = 5 dB, non-stationary diffuse noise), the system achieves PESQ 1.83 / SDR 5.84 dB, outperforming Zelinski (1.49 / 1.72 dB), McCowan (1.51 / 1.73 dB), and Nelke et al. (1.76 / 5.46 dB) baselines.
+
 ## Related Concepts
 
 - [[concepts/beamforming|Beamforming]]
@@ -53,6 +58,8 @@ Apostolidis et al. (2026) use a conventional input-based MVDR as the baseline ag
 - [[concepts/diagonal-loading|Diagonal Loading]]
 - [[concepts/white-noise-gain|White Noise Gain]]
 - [[concepts/geometry-aware-dynamic-convolution|Geometry-Aware Dynamic Convolution (Geo-DConv)]] — data-driven counterpart that, like MVDR, exploits explicit microphone coordinates but via a learned dynamic kernel
+- [[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence Noise Estimation]] — post-filter noise PSD estimator that drives the Wiener gain on MVDR output (Jin et al. 2017)
+- [[concepts/speech-presence-probability|Speech Presence Probability (SPP)]] — soft-decision VAD used to gate noise covariance updates for MVDR post-filtering
 
 ## Related Sources
 
@@ -62,3 +69,4 @@ Apostolidis et al. (2026) use a conventional input-based MVDR as the baseline ag
 - [[sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026: Spatial-Magnifier]]
 - [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis et al. 2026: Listen first — output-based multi-microphone speech enhancement]]
 - [[sources/liu-2026-array-invariant-speech-enhancement|Liu, Zhang, Li & Qian 2026: Array-Invariant SE via Geo-DConv]]
+- [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — MVDR + adaptive coherence post-filter on a 3-mic Huawei Mate 8

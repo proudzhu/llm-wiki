@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-27
-updated: 2026-05-27
+updated: 2026-08-15
+sources:
+  - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
 tags:
   - signal-processing
   - spatial-audio
@@ -67,6 +69,14 @@ The signal coherence $\Gamma_s$, noise coherence $\Gamma_n$, and mixed coherence
 | **Beamforming postfilter** | CDR-based Wiener postfilter for beamformer output |
 | **Spatial audio coding** | Parametric representation of sound field diffuseness |
 
+## Relation to Global Coherence-Based Noise Variance Decomposition
+
+Jin et al. (2017) propose a related but distinct coherence-based decomposition for multi-channel noise PSD estimation. Rather than estimating a per-bin CDR ratio, they solve a **global least-squares problem** over all $P$ microphones to decompose the noise field into a coherent-diffuse component (variance $\sigma_c^2$) and an incoherent component (variance $\sigma_w^2$):
+
+$$\mathbf{R} = \boldsymbol{\Phi} \boldsymbol{\sigma}, \quad \widehat{\boldsymbol{\sigma}} = \operatorname{real}(\boldsymbol{\Phi}^{\ddagger} \mathbf{R})$$
+
+where $\mathbf{R}$ stacks the diagonal/off-diagonal entries of the noise covariance matrix and $\boldsymbol{\Phi}$ is built from the adaptive coherence model. This formulation is MMSE-optimal for $P > 2$, whereas classical CDR estimators typically operate on microphone pairs and average. The coherence model itself is initialized with the diffuse-field sinc function and **adaptively updated** during speech-absent frames (SPP $\rho < 0.1$), accommodating time-varying noise fields — a generalization of the static diffuse coherence assumption underlying classical CDR. See [[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence Noise Estimation]] for the full method.
+
 ## Related Concepts
 
 - [[concepts/spatial-coherence|Spatial Coherence]]
@@ -75,9 +85,11 @@ The signal coherence $\Gamma_s$, noise coherence $\Gamma_n$, and mixed coherence
 - [[concepts/beamforming|Beamforming]]
 - [[concepts/wiener-filter|Wiener Filter]]
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence Noise Estimation]] — global MMSE coherence-based noise variance decomposition (Jin et al. 2017)
 
 ## Key Sources
 
 - [[sources/schwarz-2015-coherent-to-diffuse-power-ratio|Schwarz & Kellermann 2015: CDR Estimation for Dereverberation]] — foundational CDR estimation paper with unbiased estimators
 - [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement|Löllmann, Brendel & Kellermann 2020: Generalized Coherence-Based Signal Enhancement]] — GMC-based CDR estimator using eigenvalue decomposition for multi-microphone arrays
 - [[sources/schwarz-2019-dereverberation-spatial-coherence|Schwarz 2019: Dereverberation and Robust Speech Recognition]] — comprehensive treatment of CDR methods
+- [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — global MMSE coherence-based noise variance decomposition with adaptive coherence model

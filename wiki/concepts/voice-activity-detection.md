@@ -5,6 +5,7 @@ updated: 2026-08-15
 sources:
   - raw/papers/liu-2025-pcen-mask-vad-speech-enhancement/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
+  - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
 tags:
 - audio-processing
 - machine-learning
@@ -67,6 +68,10 @@ While VAD is widely used, VAD-free noise estimation methods avoid the binary spe
 
 - **[[concepts/minimum-statistics|Minimum Statistics]]** (Martin 2001): Tracks spectral minima in each frequency band without distinguishing speech from silence. Derives optimal time-varying smoothing parameters and bias compensation. Performs well in low SNR and nonstationary noise, and updates noise estimates even during speech activity.
 
+## Soft-Decision VAD via Speech Presence Probability
+
+An intermediate between binary VAD and VAD-free estimation is **[[concepts/speech-presence-probability|Speech Presence Probability (SPP)]]** — a per-time-frequency-bin soft decision $\rho(\tau, \omega) \in [0, 1]$ that gates noise PSD updates by continuity rather than a binary flag. The Gerkmann & Hendriks (2011) SPP formulation updates the noise PSD as a soft combination of the previous estimate and the current periodogram, weighted by $1 - \rho$; a binary VAD can be recovered by thresholding (e.g., Jin et al. 2017 use $\rho < 0.1$ as the speech-absent gate for coherence and noise-covariance adaptation in their [[concepts/adaptive-coherence-noise-estimation|adaptive coherence NE]]). SPP retains the per-bin selectivity of minimum statistics while exploiting the speech/pause distinction, and is widely used as the single-channel stage of hybrid single/multi-channel noise estimators.
+
 ## Neural VAD as Audibility Estimator
 
 Apostolidis et al. (2026) train a [[concepts/convolutional-recurrent-network|CRN]]-based neural VAD that does not output a binary speech/pause flag but instead estimates a per-time-frequency **audibility** map $\widehat{\mathrm{AUD}}(k,l) \in [0,1]$ adopted from the Speech Intelligibility Index (SII; ANSI S3.5-1997): the T-F SNR at the reference microphone is clipped to $[-15, 15]$ dB and linearly mapped to $[0, 1]$. The network is trained with MSE against ground-truth AUD computed from clean separated speech/noise. This continuous audibility output serves two roles in their [[concepts/output-based-speech-enhancement|output-based SE]] system: (i) forming ideal binary masks (with thresholds $\gamma_S, \gamma_V$) for the input-based [[concepts/mvdr-beamformer|MVDR]] baseline, and (ii) computing [[concepts/glimpse-proportion|Glimpse Proportion]] from each candidate [[concepts/mpdr-beamformer|MPDR]] output to drive selection. The fair comparison (same VAD in both systems) isolates the input-vs-output structural distinction rather than conflating it with VAD-architecture differences.
@@ -74,6 +79,8 @@ Apostolidis et al. (2026) train a [[concepts/convolutional-recurrent-network|CRN
 ## Related Concepts
 
 - [[concepts/minimum-statistics|Minimum Statistics]]
+- [[concepts/speech-presence-probability|Speech Presence Probability (SPP)]] — soft-decision VAD generalization
+- [[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence Noise Estimation]] — uses SPP as the speech-absence gate
 - [[transparency-mode|Transparency Mode]]
 - [[beamforming|Beamforming]]
 - [[bone-conduction|Bone Conduction]]
@@ -87,3 +94,4 @@ Apostolidis et al. (2026) train a [[concepts/convolutional-recurrent-network|CRN
 - [[sources/martin-2001-noise-psd-estimation-optimal-smoothing|Martin 2001: Noise PSD Estimation via Optimal Smoothing and Minimum Statistics]]
 - [[sources/liu-2025-pcen-mask-vad-speech-enhancement|Liu et al. 2025: PCEN-Based Mask Thresholding and VAD for DNN Speech Enhancement Training]] — training-time PCEN-VAD that gates an asymmetric loss
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — energy-based binary VAD with minimum-energy tracking used as a binary gate for spatial-filter model adaptation
+- [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — uses SPP ($\rho < 0.1$ threshold) as the speech-absence gate for adaptive coherence and noise covariance updates

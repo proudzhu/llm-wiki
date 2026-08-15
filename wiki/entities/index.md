@@ -472,4 +472,8 @@
 | [[entities/alex-acero\|Alex Acero]] | Microsoft — speech recognition, enhancement, microphone-array processing | 2026-08-15 |
 | [[entities/haljan-lugo\|Haljan Lugo]] | TU Braunschweig — first author of DiffVQE, single-step hybrid diffusion AEC | 2026-08-15 |
 | [[entities/ziyue-zhao\|Ziyue Zhao]] | GN Advanced Science — co-author of DiffVQE diffusion-based AEC | 2026-08-15 |
+| [[entities/wenyu-jin\|Wenyu Jin]] | Huawei ERC Munich; multi-channel noise reduction for mobile-phone hands-free | 2026-08-15 |
+| [[entities/mohammad-taghizadeh\|Mohammad J. Taghizadeh]] | Huawei ERC Munich; microphone array processing, ad hoc array calibration, diffuse field modeling | 2026-08-15 |
+| [[entities/kainan-chen\|Kainan Chen]] | Huawei ERC Munich; multi-channel noise reduction for mobile-phone hands-free | 2026-08-15 |
+| [[entities/wei-xiao\|Wei Xiao]] | Huawei ERC Munich; multi-channel noise reduction for mobile-phone hands-free | 2026-08-15 |
 

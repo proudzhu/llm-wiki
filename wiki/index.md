@@ -478,6 +478,10 @@
 | [[entities/alex-acero\|Alex Acero]] | Microsoft — speech recognition, enhancement, microphone-array processing | 2026-08-15 |
 | [[entities/haljan-lugo\|Haljan Lugo]] | TU Braunschweig — first author of DiffVQE, single-step hybrid diffusion AEC | 2026-08-15 |
 | [[entities/ziyue-zhao\|Ziyue Zhao]] | GN Advanced Science — co-author of DiffVQE diffusion-based AEC | 2026-08-15 |
+| [[entities/wenyu-jin\|Wenyu Jin]] | Huawei ERC Munich; multi-channel noise reduction for mobile-phone hands-free | 2026-08-15 |
+| [[entities/mohammad-taghizadeh\|Mohammad J. Taghizadeh]] | Huawei ERC Munich; microphone array processing, ad hoc array calibration, diffuse field modeling | 2026-08-15 |
+| [[entities/kainan-chen\|Kainan Chen]] | Huawei ERC Munich; multi-channel noise reduction for mobile-phone hands-free | 2026-08-15 |
+| [[entities/wei-xiao\|Wei Xiao]] | Huawei ERC Munich; multi-channel noise reduction for mobile-phone hands-free | 2026-08-15 |
 
 ---
 
@@ -901,6 +905,8 @@
 | [[concepts/back-to-back-microphone-array\|Back-to-Back Microphone Array]] | Small-baseline 2-mic geometry with two unidirectional capsules pointing in opposite directions; relies on directional-response level differences rather than delay | 2026-08-15 |
 | [[concepts/probability-based-spatial-filter\|Probability-Based Spatial Filter]] | Non-linear post-beamformer that applies a Bayesian posterior (front/rear/noise) directly as a per-bin suppression gain; an MMSE estimator | 2026-08-15 |
 | [[concepts/urgent-challenge\|URGENT Challenge]] | URGENT (Universality, Robustness, GeneralizatioN) SE challenge series — Interspeech 2024/2025 editions, LPS hallucination metric; DiffVQE training corpus | 2026-08-15 |
+| [[concepts/adaptive-coherence-noise-estimation\|Adaptive Coherence Noise Estimation]] | Jin et al. 2017 — hybrid SPP/coherence NE with adaptive split-frequency and globally MMSE-optimal multi-channel variance decomposition | 2026-08-15 |
+| [[concepts/speech-presence-probability\|Speech Presence Probability (SPP)]] | Soft-decision VAD estimating per-bin speech presence probability; gates noise PSD updates | 2026-08-15 |
 
 ---
 
@@ -1073,6 +1079,7 @@
 | [[sources/valin-2022-real-time-plc\|Valin et al. 2022: Real-Time Packet Loss Concealment]] | Hybrid LPCNet + predictive RNN PLC; 2nd place Interspeech 2022 PLC Challenge; integrates into Opus codec | 2026-08-14 |
 | [[sources/tashev-2008-sound-capture-spatial-filter\|Tashev, Mihov, Gleghorn & Acero 2008: Sound Capture System and Spatial Filter for Small Devices]] | Back-to-back unidirectional 2-mic array (9.6 mm) + difference-maximizing beamformer + probability-based non-linear spatial filter; 10.43 dB SNR / 0.39 PESQ-MOS | 2026-08-15 |
 | [[sources/lugo-2026-diffvqe\|Lugo et al. 2026: DiffVQE]] | First fully reproducible diffusion-based AEC (hybrid single-step Cond/Score, EffDiffSE lineage); beats retrained DeepVQE on most metrics at ~10% of its FLOPS | 2026-08-15 |
+| [[sources/jin-2017-multichannel-noise-reduction-mobile\|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] | Adaptive coherence NE with adaptive split-frequency and globally MMSE-optimal multi-channel variance estimation on a 3-mic Huawei Mate 8 | 2026-08-15 |
 
 ---
 
@@ -1124,10 +1131,10 @@
 
 ## Statistics
 
-- **Total pages**: 1076
-- **Entities**: 471
-- **Concepts**: 414
-- **Sources**: 163
+- **Total pages**: 1083
+- **Entities**: 475
+- **Concepts**: 416
+- **Sources**: 164
 - **Synthesis**: 21
 - **Queries**: 7
 - **Last updated**: 2026-08-15

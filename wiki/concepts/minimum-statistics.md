@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-26
-updated: 2026-05-26
+updated: 2026-08-15
+sources:
+  - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
 tags:
   - noise-estimation
   - speech-enhancement
@@ -87,13 +89,22 @@ $$\hat{\sigma}_N^2(\lambda, k) = B_{\min}(D, Q_{\text{eq}}(\lambda, k)) \cdot P_
 - **Bias in nonstationary noise** — tends to underestimate highly nonstationary noise floors
 - **Computational cost** — higher than simple VAD-based approaches due to per-bin variance tracking
 
+## Relation to SPP-Based Noise Estimation
+
+The two dominant single-channel noise PSD estimators — minimum statistics (VAD-free) and [[concepts/speech-presence-probability|SPP-based NE]] (soft-decision VAD) — are complementary. Minimum statistics tracks spectral minima and updates during both speech and pauses, with a tracking delay proportional to the search window. SPP-based NE (Gerkmann & Hendriks 2011) updates the noise estimate weighted by $1 - \rho$ during speech-absent frames, giving faster tracking in truly non-stationary noise but requiring a soft-decision estimate of $\rho$.
+
+Jin et al. (2017) chose SPP-based NE for the low-frequency stage of their [[concepts/adaptive-coherence-noise-estimation|adaptive coherence NE]] precisely because (i) low-frequency coherence-based NE is unreliable due to speech/noise coherence overlap, and (ii) the SPP $\rho$ doubles as the speech-absence gate ($\rho < 0.1$) for the high-frequency coherence and noise-covariance adaptation — a coupling that a VAD-free method like minimum statistics cannot provide. The Martin (2001) minimum statistics method is cited as ref [5] in their system overview but not used in the final pipeline.
+
 ## Related Concepts
 
 - [[concepts/voice-activity-detection|Voice Activity Detection (VAD)]]
 - [[concepts/spectrogram-analysis|Spectrogram Analysis]]
 - [[concepts/wiener-filter|Wiener Filter]]
 - [[concepts/kalman-filter|Kalman Filter]]
+- [[concepts/speech-presence-probability|Speech Presence Probability (SPP)]] — the soft-decision VAD counterpart
+- [[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence Noise Estimation]] — uses SPP-based NE (not minimum statistics) for the low-frequency stage
 
 ## Related Sources
 
 - [[sources/martin-2001-noise-psd-estimation-optimal-smoothing|Noise Power Spectral Density Estimation Based on Optimal Smoothing and Minimum Statistics (Martin 2001)]]
+- [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — cites minimum statistics (ref [5]) but uses SPP-based NE for the low-frequency stage to exploit SPP's dual role as speech-absence gate
