@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-27
-updated: 2026-08-15
+updated: 2026-08-16
 sources:
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
+  - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
 tags:
   - signal-processing
   - spatial-audio
@@ -77,6 +78,10 @@ $$\mathbf{R} = \boldsymbol{\Phi} \boldsymbol{\sigma}, \quad \widehat{\boldsymbol
 
 where $\mathbf{R}$ stacks the diagonal/off-diagonal entries of the noise covariance matrix and $\boldsymbol{\Phi}$ is built from the adaptive coherence model. This formulation is MMSE-optimal for $P > 2$, whereas classical CDR estimators typically operate on microphone pairs and average. The coherence model itself is initialized with the diffuse-field sinc function and **adaptively updated** during speech-absent frames (SPP $\rho < 0.1$), accommodating time-varying noise fields — a generalization of the static diffuse coherence assumption underlying classical CDR. See [[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence Noise Estimation]] for the full method.
 
+## CDR as a Priori Speech Absence Probability Control (Taseska & Habets 2018)
+
+Taseska & Habets use the CDR not as a post-filter gain, but as a **control signal for the a priori Speech Absence Probability (SAP)** in a [[concepts/multichannel-mcra|multichannel MCRA]] noise-PSD-matrix estimator. The CDR is mapped via a sigmoid-like function to an a priori SAP that is robust to non-stationary noise: because desired speech is coherent across the array while background noise is approximately diffuse, a low CDR reliably indicates speech absence even when the noise properties change. This CDR-controlled a priori SAP yields more accurate noise PSD matrix estimates and better noise tracking in non-stationary conditions than single-channel and multichannel SNR-based SAPs (SC-Cohen, MC-Souden). The estimated noise PSD matrix and SPP then drive [[concepts/informed-spatial-filter|informed MVDR and MWF filters]]. This is a distinct application of CDR — as a *detector control* rather than a *spectral gain* — and was shown to be crucial where the pure-ML noise-PSD/SPP solution fails in non-stationary environments.
+
 ## Related Concepts
 
 - [[concepts/spatial-coherence|Spatial Coherence]]
@@ -86,6 +91,8 @@ where $\mathbf{R}$ stacks the diagonal/off-diagonal entries of the noise covaria
 - [[concepts/wiener-filter|Wiener Filter]]
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
 - [[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence Noise Estimation]] — global MMSE coherence-based noise variance decomposition (Jin et al. 2017)
+- [[concepts/informed-spatial-filter|Informed Spatial Filter (ISF)]] — CDR used as a priori SAP control for informed MVDR/MWF (Taseska & Habets 2018)
+- [[concepts/multichannel-mcra|Multichannel MCRA]] — CDR-controlled a priori SAP for noise PSD matrix estimation
 
 ## Key Sources
 
@@ -93,3 +100,4 @@ where $\mathbf{R}$ stacks the diagonal/off-diagonal entries of the noise covaria
 - [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement|Löllmann, Brendel & Kellermann 2020: Generalized Coherence-Based Signal Enhancement]] — GMC-based CDR estimator using eigenvalue decomposition for multi-microphone arrays
 - [[sources/schwarz-2019-dereverberation-spatial-coherence|Schwarz 2019: Dereverberation and Robust Speech Recognition]] — comprehensive treatment of CDR methods
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — global MMSE coherence-based noise variance decomposition with adaptive coherence model
+- [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] — CDR as a priori SAP control for multichannel MCRA noise PSD matrix estimation (Ch 3)

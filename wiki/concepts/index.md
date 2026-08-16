@@ -418,6 +418,13 @@
 | [[concepts/back-to-back-microphone-array\|Back-to-Back Microphone Array]] | Small-baseline 2-mic geometry with two unidirectional capsules pointing in opposite directions; relies on directional-response level differences rather than delay | 2026-08-15 |
 | [[concepts/probability-based-spatial-filter\|Probability-Based Spatial Filter]] | Non-linear post-beamformer that applies a Bayesian posterior (front/rear/noise) directly as a per-bin suppression gain; an MMSE estimator | 2026-08-15 |
 | [[concepts/urgent-challenge\|URGENT Challenge]] | URGENT (Universality, Robustness, GeneralizatioN) SE challenge series — Interspeech 2024/2025 editions, LPS hallucination metric; DiffVQE training corpus | 2026-08-15 |
+| [[concepts/informed-spatial-filter\|Informed Spatial Filter (ISF)]] | Spatial filter paradigm using narrowband detectors to continuously update PSD matrices and RTF vectors per TF bin for near-instantaneous adaptation | 2026-08-16 |
+| [[concepts/acoustic-spotforming\|Acoustic Spotforming]] | Position-selective sound acquisition from a 2D spatial region using distributed arrays; rank-one MVDR with position-based detection | 2026-08-16 |
+| [[concepts/doa-informed-source-extraction\|DOA-Informed Source Extraction]] | Semi-blind source extraction using a von Mises DOA-model detector to discriminate desired speech from competing talkers | 2026-08-16 |
+| [[concepts/multichannel-mcra\|Multichannel MCRA]] | ML-equivalent noise PSD matrix estimation with CDR-based a priori SAP for robust non-stationary noise tracking | 2026-08-16 |
+| [[concepts/informed-gsc\|Informed GSC]] | GSC with bin-wise detector-controlled FBF/BM/NC adaptation; RLS noise canceller; avoids signal cancellation from RTF mismatch | 2026-08-16 |
+| [[concepts/tf-mask-estimation\|TF Mask Estimation]] | Posterior source-index probabilities from EM/tracker updating per-source PSD matrices for BSS; data-association probabilities as masks | 2026-08-16 |
+| [[concepts/sparsity-based-source-tracking\|Sparsity-Based Source Tracking]] | Bayesian multi-source tracker using narrowband position+signal measurements; JPDA/PMHT-like with multi-measurement-per-source model | 2026-08-16 |
 | [[concepts/adaptive-coherence-noise-estimation\|Adaptive Coherence Noise Estimation]] | Jin et al. 2017 — hybrid SPP/coherence NE with adaptive split-frequency and globally MMSE-optimal multi-channel variance decomposition | 2026-08-15 |
 | [[concepts/speech-presence-probability\|Speech Presence Probability (SPP)]] | Soft-decision VAD estimating per-bin speech presence probability; gates noise PSD updates | 2026-08-15 |
 

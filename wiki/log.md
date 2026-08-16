@@ -4388,3 +4388,32 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
 - **Pages updated**:
   - `wiki/index.md` — added 1 synthesis row; updated statistics (total 1083 → 1084, synthesis 21 → 22)
   - `wiki/synthesis/index.md` — added 1 synthesis row
+
+---
+
+## [2026-08-16] ingest | Informed Spatial Filters for Speech Enhancement (Taseska 2018)
+
+- **Source**: `raw/papers/taseska-2018-informed-spatial-filters/full-text.md` (FAU PhD thesis, OpenFAU; Zotero: 0_VQZTHIS3)
+- **Author**: Maja Taseska (supervisor: Emanuele A. P. Habets, FAU Erlangen-Nuremberg)
+- **Published**: 2018 (Dr.-Ing. dissertation, FAU)
+- **Summary**: PhD thesis establishing the **Informed Spatial Filter (ISF)** paradigm — narrowband detectors continuously update PSD matrices and RTF vectors per TF bin, yielding near-instantaneous filter adaptation. Unifies six applications across single-array (Ch 3–5) and multi-array (Ch 6–8) scenarios: (1) CDR-controlled noise PSD matrix estimation via multichannel MCRA with CDR-based a priori SAP; (2) DOA model-based source extraction with von Mises / notched likelihoods; (3) informed GSC with bin-wise detector-controlled FBF/BM/NC and RLS noise canceller; (4) acoustic spotforming via position-based detection and rank-one MVDR with distributed arrays; (5) EM-based BSS with joint number-of-source detection using narrowband position features; (6) Bayesian multi-source tracker for BSS of moving sources with augmented position+signal measurement model (JPDA/PMHT-like, multi-measurement-per-source). Extracted via MinerU (VLM) in two chunks (pages 1–174, 175–231) due to 200-page limit.
+- **Pages created**:
+  - `wiki/sources/taseska-2018-informed-spatial-filters.md` — comprehensive source page with per-chapter summaries (Ch 1–8)
+  - `wiki/entities/maja-taseska.md`
+  - `wiki/concepts/informed-spatial-filter.md`
+  - `wiki/concepts/acoustic-spotforming.md`
+  - `wiki/concepts/doa-informed-source-extraction.md`
+  - `wiki/concepts/multichannel-mcra.md`
+  - `wiki/concepts/informed-gsc.md`
+  - `wiki/concepts/tf-mask-estimation.md`
+  - `wiki/concepts/sparsity-based-source-tracking.md`
+- **Pages updated**:
+  - `wiki/entities/emanuele-habets.md` — added thesis supervision to key contributions
+  - `wiki/concepts/coherent-to-diffuse-power-ratio.md` — added CDR as a priori SAP control (Taseska & Habets 2018, Ch 3) + source link
+  - `wiki/concepts/mvdr-beamformer.md` — added informed MVDR section + source link
+  - `wiki/concepts/gsc-beamformer.md` — added informed GSC section + related concepts + source link
+  - `wiki/synthesis/multi-channel-speech-enhancement.md` — added Taseska 2018 to sources/frontmatter/table; added "CDR as detector control" parallel track paragraph in Insight 1
+  - `wiki/index.md` — added 1 source, 1 entity, 7 concepts; updated statistics (total 1084 → 1093, entities 475 → 476, concepts 416 → 423, sources 164 → 165)
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 1 entity row
+  - `wiki/concepts/index.md` — added 7 concept rows

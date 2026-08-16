@@ -480,6 +480,7 @@
 | [[entities/ziyue-zhao\|Ziyue Zhao]] | GN Advanced Science — co-author of DiffVQE diffusion-based AEC | 2026-08-15 |
 | [[entities/wenyu-jin\|Wenyu Jin]] | Huawei ERC Munich; multi-channel noise reduction for mobile-phone hands-free | 2026-08-15 |
 | [[entities/mohammad-taghizadeh\|Mohammad J. Taghizadeh]] | Huawei ERC Munich; microphone array processing, ad hoc array calibration, diffuse field modeling | 2026-08-15 |
+| [[entities/maja-taseska\|Maja Taseska]] | FAU Erlangen-Nuremberg — informed spatial filters for speech enhancement; spotforming, BSS, source tracking | 2026-08-16 |
 | [[entities/kainan-chen\|Kainan Chen]] | Huawei ERC Munich; multi-channel noise reduction for mobile-phone hands-free | 2026-08-15 |
 | [[entities/wei-xiao\|Wei Xiao]] | Huawei ERC Munich; multi-channel noise reduction for mobile-phone hands-free | 2026-08-15 |
 
@@ -907,6 +908,13 @@
 | [[concepts/urgent-challenge\|URGENT Challenge]] | URGENT (Universality, Robustness, GeneralizatioN) SE challenge series — Interspeech 2024/2025 editions, LPS hallucination metric; DiffVQE training corpus | 2026-08-15 |
 | [[concepts/adaptive-coherence-noise-estimation\|Adaptive Coherence Noise Estimation]] | Jin et al. 2017 — hybrid SPP/coherence NE with adaptive split-frequency and globally MMSE-optimal multi-channel variance decomposition | 2026-08-15 |
 | [[concepts/speech-presence-probability\|Speech Presence Probability (SPP)]] | Soft-decision VAD estimating per-bin speech presence probability; gates noise PSD updates | 2026-08-15 |
+| [[concepts/informed-spatial-filter\|Informed Spatial Filter (ISF)]] | Spatial filter paradigm using narrowband detectors to continuously update PSD matrices and RTF vectors per TF bin for near-instantaneous adaptation | 2026-08-16 |
+| [[concepts/acoustic-spotforming\|Acoustic Spotforming]] | Position-selective sound acquisition from a 2D spatial region using distributed arrays; rank-one MVDR with position-based detection | 2026-08-16 |
+| [[concepts/doa-informed-source-extraction\|DOA-Informed Source Extraction]] | Semi-blind source extraction using a von Mises DOA-model detector to discriminate desired speech from competing talkers | 2026-08-16 |
+| [[concepts/multichannel-mcra\|Multichannel MCRA]] | ML-equivalent noise PSD matrix estimation with CDR-based a priori SAP for robust non-stationary noise tracking | 2026-08-16 |
+| [[concepts/informed-gsc\|Informed GSC]] | GSC with bin-wise detector-controlled FBF/BM/NC adaptation; RLS noise canceller; avoids signal cancellation from RTF mismatch | 2026-08-16 |
+| [[concepts/tf-mask-estimation\|TF Mask Estimation]] | Posterior source-index probabilities from EM/tracker updating per-source PSD matrices for BSS; data-association probabilities as masks | 2026-08-16 |
+| [[concepts/sparsity-based-source-tracking\|Sparsity-Based Source Tracking]] | Bayesian multi-source tracker using narrowband position+signal measurements; JPDA/PMHT-like with multi-measurement-per-source model | 2026-08-16 |
 
 ---
 
@@ -1080,6 +1088,7 @@
 | [[sources/tashev-2008-sound-capture-spatial-filter\|Tashev, Mihov, Gleghorn & Acero 2008: Sound Capture System and Spatial Filter for Small Devices]] | Back-to-back unidirectional 2-mic array (9.6 mm) + difference-maximizing beamformer + probability-based non-linear spatial filter; 10.43 dB SNR / 0.39 PESQ-MOS | 2026-08-15 |
 | [[sources/lugo-2026-diffvqe\|Lugo et al. 2026: DiffVQE]] | First fully reproducible diffusion-based AEC (hybrid single-step Cond/Score, EffDiffSE lineage); beats retrained DeepVQE on most metrics at ~10% of its FLOPS | 2026-08-15 |
 | [[sources/jin-2017-multichannel-noise-reduction-mobile\|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] | Adaptive coherence NE with adaptive split-frequency and globally MMSE-optimal multi-channel variance estimation on a 3-mic Huawei Mate 8 | 2026-08-15 |
+| [[sources/taseska-2018-informed-spatial-filters\|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] | PhD thesis (FAU): ISF paradigm unifying noise reduction (CDR-MCRA), DOA-informed extraction, informed GSC, spotforming, EM-based BSS, and Bayesian source tracking | 2018 |
 
 ---
 
@@ -1132,10 +1141,10 @@
 
 ## Statistics
 
-- **Total pages**: 1084
-- **Entities**: 475
-- **Concepts**: 416
-- **Sources**: 164
+- **Total pages**: 1093
+- **Entities**: 476
+- **Concepts**: 423
+- **Sources**: 165
 - **Synthesis**: 22
 - **Queries**: 7
 - **Last updated**: 2026-08-16

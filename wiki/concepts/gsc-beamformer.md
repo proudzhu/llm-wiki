@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-08-16
+sources:
+  - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
 tags:
   - beamforming
   - adaptive-filtering
@@ -50,6 +52,10 @@ $$\tilde{\mathbf{R}} = \begin{bmatrix} M p_q & \sqrt{M} \mathbf{r}_{qn}^H \\ \sq
 - **EVD and Trace modes**: Perfectly invariant between MPDR and GSC (identical weights and performance)
 - **Gershgorin mode**: Basis-dependent — the blocking matrix $\mathbf{B}$ alters the distribution between diagonal and off-diagonal elements, yielding different loading estimates
 
+## Informed GSC (Taseska, Varzandeh & Habets 2016)
+
+Taseska et al. develop the [[concepts/informed-gsc|informed GSC]], where the FBF, BM, and NC are adapted *per TF bin* under the control of a narrowband signal detector (the DOA model-based detector). The signal-cancellation problem of standard GSCs is alleviated by updating the NC **only when the desired signal is absent** — i.e., using the undesired-signal PSD matrix $\boldsymbol{\Phi}_{\mathbf{u}}$ rather than the microphone PSD matrix $\boldsymbol{\Phi}_{\mathbf{y}}$ in the NC computation. The BM uses the RTF-based form (Gannot et al.) rather than the anechoic Griffiths-Jim form, with the RTF estimated online via the detector. An RLS-based recursive NC implementation avoids per-bin matrix inversion, matching the closed-form informed MVDR's performance without notable loss — validating the GSC as an efficient practical alternative in highly non-stationary scenarios.
+
 ## Related Concepts
 
 - [[mpdr-beamformer|MPDR Beamformer]]
@@ -58,8 +64,11 @@ $$\tilde{\mathbf{R}} = \begin{bmatrix} M p_q & \sqrt{M} \mathbf{r}_{qn}^H \\ \sq
 - [[white-noise-gain|White Noise Gain]]
 - [[gershgorin-circle-theorem|Gershgorin Circle Theorem]]
 - [[beamforming|Beamforming]]
+- [[concepts/informed-spatial-filter|Informed Spatial Filter (ISF)]] — paradigm unifying the informed GSC (Taseska & Habets 2018)
+- [[concepts/informed-gsc|Informed GSC]] — bin-wise detector-controlled GSC with RLS noise canceller
 
 ## Related Sources
 
+- [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] — informed GSC with bin-wise detector-controlled FBF/BM/NC and RLS noise canceller (Ch 5)
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
 - [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]]

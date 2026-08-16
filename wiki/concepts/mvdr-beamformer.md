@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-08-15
+updated: 2026-08-16
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
+  - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
 tags:
   - beamforming
   - speech-enhancement
@@ -43,6 +44,10 @@ Apostolidis et al. (2026) use a conventional input-based MVDR as the baseline ag
 
 Jin et al. (2017) adopt the standard **MVDR + single-channel Wiener post-filter** factorization (Simmer et al. [14]) for hands-free mobile-phone voice communication. The MVDR beamformer runs on a 3-microphone Huawei Mate 8 array (Mic1–Mic2 bottom spacing 3.4 cm; Mic3 top, 15.7 cm from Mic2) and the post-filter is driven by a novel [[concepts/adaptive-coherence-noise-estimation|adaptive coherence noise estimator]]: low-frequency noise PSD comes from an [[concepts/speech-presence-probability|SPP]]-based estimator on the primary microphone, high-frequency noise PSD from a globally MMSE-optimized least-squares decomposition into coherent-diffuse and incoherent components, fused at an adaptively varying split frequency. The MVDR provides the distortionless spatial filter; all the contribution is in the noise PSD estimate that drives the post-filter. On a real Marienplatz rush-hour recording replayed over a 22.2-speaker array (SNR = 5 dB, non-stationary diffuse noise), the system achieves PESQ 1.83 / SDR 5.84 dB, outperforming Zelinski (1.49 / 1.72 dB), McCowan (1.51 / 1.73 dB), and Nelke et al. (1.76 / 5.46 dB) baselines.
 
+## Informed MVDR (Taseska & Habets 2018)
+
+Taseska & Habets develop the [[concepts/informed-spatial-filter|informed spatial filter]] paradigm, where the MVDR filter is re-computed per TF bin using the *undesired*-signal PSD matrix $\boldsymbol{\Phi}_{\mathbf{u}}$ and the desired-signal RTF vector $\mathbf{g}$, both estimated online via a narrowband signal detector. Using $\boldsymbol{\Phi}_{\mathbf{u}}$ (rather than the microphone PSD matrix $\boldsymbol{\Phi}_{\mathbf{y}}$ of MPDR) avoids the signal-distortion sensitivity to RTF mismatch, because the RTF is *estimated from data* rather than modelled anechoically. The detector is application-dependent: a CDR-based a priori SAP for noise reduction (Ch 3), a DOA model-based detector for competing-talker extraction (Ch 4), and a position-based detector for spotforming (Ch 6). The informed MVDR can equivalently be implemented as an [[concepts/informed-gsc|informed GSC]] without per-bin matrix inversion.
+
 ## Related Concepts
 
 - [[concepts/beamforming|Beamforming]]
@@ -60,6 +65,8 @@ Jin et al. (2017) adopt the standard **MVDR + single-channel Wiener post-filter*
 - [[concepts/geometry-aware-dynamic-convolution|Geometry-Aware Dynamic Convolution (Geo-DConv)]] — data-driven counterpart that, like MVDR, exploits explicit microphone coordinates but via a learned dynamic kernel
 - [[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence Noise Estimation]] — post-filter noise PSD estimator that drives the Wiener gain on MVDR output (Jin et al. 2017)
 - [[concepts/speech-presence-probability|Speech Presence Probability (SPP)]] — soft-decision VAD used to gate noise covariance updates for MVDR post-filtering
+- [[concepts/informed-spatial-filter|Informed Spatial Filter (ISF)]] — per-bin MVDR re-computed from detector-driven online statistics (Taseska & Habets 2018)
+- [[concepts/informed-gsc|Informed GSC]] — adaptive, matrix-inversion-free implementation of the informed MVDR
 
 ## Related Sources
 
@@ -70,3 +77,4 @@ Jin et al. (2017) adopt the standard **MVDR + single-channel Wiener post-filter*
 - [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis et al. 2026: Listen first — output-based multi-microphone speech enhancement]]
 - [[sources/liu-2026-array-invariant-speech-enhancement|Liu, Zhang, Li & Qian 2026: Array-Invariant SE via Geo-DConv]]
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — MVDR + adaptive coherence post-filter on a 3-mic Huawei Mate 8
+- [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] — per-bin informed MVDR with detector-driven online statistics

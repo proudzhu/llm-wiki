@@ -18,6 +18,7 @@ sources:
   - raw/papers/apostolidis-2026-listen-first-output-based-multi-microphone/full-text.md
   - raw/papers/liu-2026-array-invariant-speech-enhancement/full-text.md
   - raw/papers/lin-2024-agadir-array-geometry-agnostic-speech-recognition/full-text.md
+  - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
   - raw/papers/li-2026-geometry-conditioned-ssanc/full-text.md
   - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.txt
 tags:
@@ -53,6 +54,7 @@ The distinction: this synthesis is about **spatial filtering** (beamforming, coh
 | [[sources/lorenz-2005-robust-minimum-variance-beamforming\|Lorenz & Boyd 2005]] | 2005 | Robustness | Robust MVB: ellipsoidal array-manifold uncertainty → SOCP, guaranteed unity-gain over uncertainty set |
 | [[sources/tashev-2008-sound-capture-spatial-filter\|Tashev et al. 2008]] | 2008 | Estimate what | Back-to-back unidirectional array + probability-based spatial filter; level-difference-dominated post-filter for 9.6 mm baseline |
 | [[sources/jin-2017-multichannel-noise-reduction-mobile\|Jin et al. 2017]] | 2017 | Estimate what | MVDR + adaptive coherence NE with adaptive split-frequency; globally MMSE-optimal multi-channel variance decomposition |
+| [[sources/taseska-2018-informed-spatial-filters\|Taseska 2018]] | 2018 | Estimate what | ISF paradigm: CDR as a priori SAP *control* (not post-filter gain) for multichannel MCRA; DOA-model & position-based detectors drive per-bin MVDR/GSC across noise reduction, spotforming, and BSS |
 | [[sources/schwarz-2015-coherent-to-diffuse-power-ratio\|Schwarz & Kellermann 2015]] | 2015 | Estimate what | Unified CDR framework; first DOA-independent unbiased CDR estimator (requires only $\Gamma_n$) |
 | [[sources/schwarz-2019-dereverberation-spatial-coherence\|Schwarz 2019]] | 2019 | Estimate what | Doctoral thesis: spatial coherence models for dereverb + spatial features as DNN-ASR input |
 | [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement\|Löllmann et al. 2020]] | 2020 | Estimate what | GMC-based CDR via eigenvalue decomposition of $N$-channel coherence matrix; implicit microphone selection via principal eigenvector |
@@ -82,6 +84,8 @@ The longest-running MCSE sub-lineage is **coherence-based dereverberation**, in 
 | 2020 | [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement\|Löllmann (GMC)]] | $\Gamma_n$ only (binaural model) | **Generalizes pairwise coherence to $N$ channels via eigenvalue decomposition**; implicit mic selection via principal eigenvector |
 
 The trajectory is clear: each step removes an assumption. Schwarz 2015's **DOA-independent estimator** (Proposal 3) is the inflection point — it achieves MSE within 1% of the best DOA-dependent estimator while requiring no source localization, enabling fully blind dereverberation. Löllmann 2020's GMC then removes the pairwise-averaging suboptimality by exploiting all $N$ microphones simultaneously through the largest eigenvalue of the coherence matrix, and recovers microphone selection as a free byproduct of the principal eigenvector.
+
+**A parallel track — CDR as detector control, not post-filter gain**: while the lineage above uses the CDR *estimate* directly as a spectral gain, [[sources/taseska-2018-informed-spatial-filters|Taseska & Habets 2018]] (Ch 3) redirect the CDR to control the *a priori Speech Absence Probability* in a [[concepts/multichannel-mcra|multichannel MCRA]] noise-PSD-matrix estimator. A sigmoid-mapped CDR → SAP is more robust to non-stationary noise-property changes than SNR-based SAPs (SC-Cohen, MC-Souden), because spatial coherence (coherent speech vs. diffuse noise) is a more reliable presence cue than energy ratios when the noise floor shifts. This is the same physical quantity (CDR) serving a *different* role in the pipeline — gating statistics updates rather than attenuating bins — and it underpins the broader [[concepts/informed-spatial-filter|ISF]] paradigm where per-bin detectors (CDR-based, DOA-model-based, or position-based) drive online PSD-matrix and RTF estimation for MVDR/MWF/GSC filters across noise reduction, spotforming, and BSS.
 
 **Why this lineage persists in 2026**: classical coherence/CDR methods are **deterministic, low-compute, and require no training data** — properties that matter for hearing aids and mobile phones. The 2026 hybrid systems below ([[sources/oviste-2026-neural-vslf-speech-enhancement|HVSF]], [[sources/liu-2026-scm-reconstruction-speech-enhancement|R-MWF]]) deliberately keep classical filter structures and add data-driven estimation only for the SCM/noise-statistics stage, preserving these deployment advantages.
 
