@@ -86,7 +86,7 @@ On the 9.6 mm back-to-back array at 16 kHz, the optimizer **disabled both delay-
 - [[concepts/speech-enhancement\|Speech Enhancement]]
 - [[concepts/multi-channel-wiener-filter\|Multi-Channel Wiener Filter]]
 - [[concepts/ideal-ratio-mask\|Ideal Ratio Mask]] — also a per-bin multiplicative mask, but derived from clean/noise separation rather than spatial statistics
-- [[concepts/mmse\|MMSE]] (mentioned conceptually)
+- MMSE (Minimum Mean Square Error) — mentioned conceptually; the probability-based post-filter is an MMSE estimator of the time-domain waveform
 
 ## Related Sources
 
