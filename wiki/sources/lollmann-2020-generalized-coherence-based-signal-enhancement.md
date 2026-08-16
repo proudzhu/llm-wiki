@@ -1,7 +1,7 @@
 ---
 type: source
 created: 2026-05-27
-updated: 2026-05-27
+updated: 2026-08-16
 sources:
   - raw/papers/lollmann-2020-generalized-coherence-based-signal-enhancement/full-text.md
   - https://doi.org/10.1109/ICASSP40776.2020.9054470
@@ -99,6 +99,14 @@ $$\boldsymbol{C}_n(f) = \begin{bmatrix} 1 & \Gamma_n^{(I)}(f) & \Gamma_n^{(II)}(
 
 ## Results
 
+![[raw/papers/lollmann-2020-generalized-coherence-based-signal-enhancement/figures/3e48dfcc41c156ddcd6c28f5b9f8f04c02f80637117ebd4e63fc0bfdc459cc26.jpg|SRMR results]]
+
+![[raw/papers/lollmann-2020-generalized-coherence-based-signal-enhancement/figures/a083912459c0a8879efc69ba411a01f1268c2c6cf4a3b2aa87b5d907af7eb4ca.jpg|fwSNR results]]
+
+![[raw/papers/lollmann-2020-generalized-coherence-based-signal-enhancement/figures/7e6b309d9c999db4a9b2dc15ba917e3f98d1a6d2a5f9a1845bb96977d7bd8d76.jpg|PESQ results]]
+
+*Figure 1: Evaluation results for CDR-based binaural signal enhancement schemes for different acoustical environments (Cafeteria, Courtyard, Office I, Office II) and an input CDR of 5 dB. Bars compare unprocessed, averaged coherence, Thiergart et al. [22], Schwarz et al. [24], and the proposed GMC-based algorithm across SRMR (top), fwSNR (middle), and PESQ (bottom).*
+
 The proposed GMC-based method consistently achieves the best results across all environments and measures:
 
 | Measure | Best competitor | Proposed GMC | Improvement |
@@ -132,5 +140,4 @@ Key observations:
 
 ## Related Synthesis
 
-- [[synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]]
-- [[synthesis/multi-modal-speech-enhancement|Multi-Modal Speech Enhancement]]
+(None — this paper is a classical coherence-based dereverberation method. Existing synthesis pages focus on deep-learning SE, ANC, or multi-modal approaches, none of which is materially advanced by this contribution. Candidate for future synthesis on classical multichannel dereverberation / CDR estimation if more sources in this lineage are ingested.)

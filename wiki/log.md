@@ -4364,3 +4364,15 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/concepts/voice-activity-detection.md` — added "Soft-Decision VAD via Speech Presence Probability" section
   - `wiki/concepts/minimum-statistics.md` — added "Relation to SPP-Based Noise Estimation" section
 - **Synthesis**: skipped — triage found only broad-tag (speech-enhancement) candidates
+
+---
+
+## [2026-08-16] ingest | Generalized Coherence-Based Signal Enhancement (Löllmann, Brendel & Kellermann 2020) (re)
+
+- **Source**: `raw/papers/lollmann-2020-generalized-coherence-based-signal-enhancement/full-text.md` (Zotero: DSYMKBRQ)
+- **Authors**: Heinrich W. Löllmann, Andreas Brendel, Walter Kellermann
+- **Published**: ICASSP 2020, pp. 201–205
+- **DOI**: 10.1109/ICASSP40776.2020.9054470
+- **Summary**: Targeted update to existing source page — added missing Fig. 1 embed (3 panels: SRMR, fwSNR, PESQ) identified by `map_figures.py`; removed two incorrect synthesis links (Modern Headphone ANC Systems, Multi-Modal Speech Enhancement) that had no topical relevance to this classical CDR-based dereverberation paper, replaced with a note. Entity and concept pages verified complete; no new pages needed.
+- **Pages updated**:
+  - `wiki/sources/lollmann-2020-generalized-coherence-based-signal-enhancement.md` — added Fig. 1 embed (3 panels), fixed Related Synthesis section, bumped `updated` date
