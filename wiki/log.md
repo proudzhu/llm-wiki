@@ -4376,3 +4376,15 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
 - **Summary**: Targeted update to existing source page — added missing Fig. 1 embed (3 panels: SRMR, fwSNR, PESQ) identified by `map_figures.py`; removed two incorrect synthesis links (Modern Headphone ANC Systems, Multi-Modal Speech Enhancement) that had no topical relevance to this classical CDR-based dereverberation paper, replaced with a note. Entity and concept pages verified complete; no new pages needed.
 - **Pages updated**:
   - `wiki/sources/lollmann-2020-generalized-coherence-based-signal-enhancement.md` — added Fig. 1 embed (3 panels), fixed Related Synthesis section, bumped `updated` date
+
+---
+
+## [2026-08-16] merge | Synthesis: Multi-Channel Speech Enhancement (17 sources, 2005-2026)
+
+- **Source**: 17 MCSE sources (2005–2026) — see `wiki/synthesis/multi-channel-speech-enhancement.md` sources list
+- **Summary**: New cross-source synthesis tracing multi-channel speech enhancement along 5 axes: (1) classical coherence/CDR lineage with DOA-independence as key relaxation (Schwarz 2015 → Löllmann 2020 GMC); (2) MVDR robustness eras (ellipsoidal RMVB → Kantorovich adaptive loading → data-driven WNG); (3) "estimate what" relaxation chain (DOA → coherence → CDR → SCM → RTF → direct weights); (4) input→output inversion (Apostolidis 2026); (5) array geometry (fixed → agnostic → conditioned). Argues classical MCSE survives in 2026 as the interpretability backbone of hybrid systems.
+- **Pages created**:
+  - `wiki/synthesis/multi-channel-speech-enhancement.md` — 17 sources, 7 insights + cross-cutting takeaways + open questions
+- **Pages updated**:
+  - `wiki/index.md` — added 1 synthesis row; updated statistics (total 1083 → 1084, synthesis 21 → 22)
+  - `wiki/synthesis/index.md` — added 1 synthesis row

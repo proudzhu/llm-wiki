@@ -1110,6 +1110,7 @@
 | [[synthesis/secondary-path-modeling-evolution|Secondary Path Modeling Evolution]] | 离线→在线→免建模→绕过：四条技术路线的决策矩阵与演进趋势 | Kuo 1999, Benois 2020, Liang 2026, Zhu 2020 |
 | [[synthesis/joint-multitask-ultra-low-latency-se|Joint Multi-Task SE & Ultra-Low-Latency Paradigm]] | 6 sources + theory: task dissolution (AEC+NS+DR+OVC+AHS), 0–20ms latency tiers, linear RNN/SSM replacing LSTM/ConvTasNet, HALO+FRS redundancy frontier | Indenbom 2023, Hao 2025, Zhao 2026, Ashur 2026, Østergaard 2026, Benslimane 2026, Rath 2026 |
 | [[synthesis/deep-speech-enhancement|Deep Speech Enhancement]] | Architectural/methodological evolution 2018→2026 along 6 axes: target (IBM→cIRM→CCM→DF), domain (hybrid time+freq loss), backbone (CRN→DPCRN→Conformer→Mamba/linear RNN/SNN), efficiency (~1000× via 4 orthogonal techniques), multi-channel (array-invariant Geo-DConv), conditioning (PSE/TSE/OVC) | Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zheng 2023, Rong 2024, Chao 2024, Yang 2026, Liu 2026, Apostolidis 2026, Østergaard 2026 |
+| [[synthesis/multi-channel-speech-enhancement\|Multi-Channel Speech Enhancement]] | From coherence models to geometry-conditioned neural filters: 5 axes (estimate what, robustness, input/output, geometry, hybrid) across 17 sources 2005-2026 | 2026-08-16 |
 
 ---
 
@@ -1131,10 +1132,10 @@
 
 ## Statistics
 
-- **Total pages**: 1083
+- **Total pages**: 1084
 - **Entities**: 475
 - **Concepts**: 416
 - **Sources**: 164
-- **Synthesis**: 21
+- **Synthesis**: 22
 - **Queries**: 7
-- **Last updated**: 2026-08-15
+- **Last updated**: 2026-08-16
