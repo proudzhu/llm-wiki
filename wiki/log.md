@@ -4471,3 +4471,32 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
   - `wiki/entities/index.md` — added 4 entity rows
   - `wiki/concepts/index.md` — added 2 concept rows
 
+
+---
+
+## [2026-08-19] ingest | Neural Target Speech Extraction: An Overview (Zmolikova 2023)
+
+- **Source**: `raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md` (Zotero: X5JSCD25)
+- **Authors**: Katerina Zmolikova, Marc Delcroix, Tsubasa Ochiai, Keisuke Kinoshita, Jan Černocký, Dong Yu
+- **Published**: IEEE Signal Processing Magazine 40, 2023, pp. 8–29
+- **DOI**: 10.1109/MSP.2023.3240008
+- **Summary**: Review/survey unifying neural target speech extraction (TSE) under a single framework (clue encoder + mixture encoder + fusion layer + target extractor) covering audio, visual, and spatial clue variants; reports comparative experiments with TD-SpeakerBeam and catalogs datasets/toolkits.
+- **Pages created**:
+  - `wiki/sources/zmolikova-2023-neural-target-speech-extraction-overview.md`
+  - `wiki/entities/katerina-zmolikova.md`
+  - `wiki/entities/marc-delcroix.md`
+  - `wiki/entities/tsubasa-ochiai.md`
+  - `wiki/entities/keisuke-kinoshita.md`
+  - `wiki/entities/jan-cernocky.md`
+  - `wiki/concepts/cocktail-party-problem.md`
+  - `wiki/concepts/target-speaker-vad.md`
+  - `wiki/concepts/target-speaker-asr.md`
+  - `wiki/concepts/angle-feature.md`
+- **Pages updated**:
+  - `wiki/entities/dong-yu.md` — added TSE/PIT/MIMO beamformer contributions
+  - `wiki/concepts/target-speaker-extraction.md` — added "Unified Neural TSE Framework" + "Extensions Beyond Waveform Extraction" sections, new concept cross-refs, expanded challenges
+  - `wiki/concepts/td-speakerbeam.md` — added "Role in the TSE Survey Literature" section
+  - `wiki/concepts/speaker-embedding.md` — added "Audio Clue Encoder Families in TSE" table
+  - `wiki/concepts/film-layer.md` — added "Use in Target Speech Extraction" fusion-layer survey
+  - `wiki/concepts/ideal-binary-mask.md` — added "Role in Target Speech Extraction" section
+  - `wiki/synthesis/deep-speech-enhancement.md` — added Zmolikova 2023 reference in Insight 8 (TSE/PSE/OVC complementarity)

@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-05-23
+updated: 2026-08-19
+sources:
+  - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
 tags:
   - deep-learning
   - neural-networks
@@ -56,12 +58,30 @@ FiLM was originally proposed for visual question answering, where image features
 | **FiLM** | **Element-wise scale + bias** | **Low** | **High** |
 | Adaptive normalisation | Modulate normalisation statistics | Medium | Medium |
 
+## Use in Target Speech Extraction (TSE)
+
+Zmolikova et al. 2023 [[sources/zmolikova-2023-neural-target-speech-extraction-overview|(Zmolikova 2023)]] survey five widely used **fusion layers** for conditioning a [[concepts/target-speaker-extraction|TSE]] speech-extraction module on a clue embedding $\mathbf{E}_{s}$, with FiLM being one of them:
+
+| Fusion type | Equation | Parameters |
+|:-----------|:---------|:-----------|
+| Concatenation | $\mathbf{Z}_{s} = [\mathbf{Z}_{y}, \mathbf{E}_{s}]$ | — |
+| Addition | $\mathbf{Z}_{s} = \mathbf{Z}_{y} + \mathbf{L}\mathbf{E}_{s}$ | $\mathbf{L} \in \mathbb{R}^{D^{Z} \times D^{\mathrm{Emb}}}$ |
+| Multiplication | $\mathbf{Z}_{s} = \mathbf{Z}_{y} \odot (\mathbf{L}\mathbf{E}_{s})$ | $\mathbf{L} \in \mathbb{R}^{D^{Z} \times D^{\mathrm{Emb}}}$ |
+| **FiLM** | $\mathbf{Z}_{s} = \mathbf{Z}_{y} \odot (\mathbf{L}_{1}\mathbf{E}_{s}) + \mathbf{L}_{2}\mathbf{E}_{s}$ | $\mathbf{L}_{1}, \mathbf{L}_{2} \in \mathbb{R}^{D^{Z} \times D^{\mathrm{Emb}}}$ |
+| Factorized layer | $\mathbf{Z}_{s} = \sum_{i=1}^{D^{\mathrm{Emb}}} \mathbf{L}_{i}\mathbf{Z}_{y} \mathrm{diag}(\mathbf{e}_{i})$ | $\mathbf{L}_{i} \in \mathbb{R}^{D^{Z} \times D^{Z}}$ |
+
+The review reports that, in TSE settings, the choice of fusion layer has "rather insignificant" impact on performance, with **multiplication and FiLM generally performing well**. Best results come from placing a fusion layer in the lower part of the extraction module (shallow mixture encoder + deep extractor). Attention-based fusion [40] is an alternative that supports dynamic per-clue reliability weighting for multi-clue (e.g., audio-visual) TSE.
+
 ## Related Concepts
 
 - [[concepts/geometry-conditioned-ssf|Geometry-Conditioned SSF (GC-SSF)]]
 - [[concepts/doa-microphone-positional-encoding|DOA-Microphone Positional Encoding (DOA-MPE)]]
 - [[concepts/spatially-selective-nonlinear-filter|Spatially Selective Non-Linear Filter (SSF)]]
+- [[concepts/target-speaker-extraction|Target Speaker Extraction (TSE)]]
+- [[concepts/td-speakerbeam|TD-SpeakerBeam]]
+- [[concepts/angle-feature|Angle Feature]]
 
 ## Related Sources
 
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
+- [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova et al. 2023: Neural Target Speech Extraction: An Overview]]

@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-04
-updated: 2026-08-04
+updated: 2026-08-19
 sources:
   - raw/papers/tan-2018-convolutional-recurrent-network-speech-enhancement/full-text.md
   - raw/papers/pandey-2019-cnn-speech-enhancement-time-domain/full-text.md
@@ -16,6 +16,7 @@ sources:
   - raw/papers/liu-2026-array-invariant-speech-enhancement/full-text.md
   - raw/papers/apostolidis-2026-listen-first-output-based-multi-microphone/full-text.md
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
+  - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -170,6 +171,8 @@ Conditioning SE on a speaker embedding has bifurcated into two complementary tas
 - **[[concepts/own-voice-cancellation\|Own-Voice Cancellation (OVC)]]** — *invert* PSE: remove the enrolled (self) speaker, preserve everyone else.
 
 [[sources/ostergaard-2026-own-voice-cancellation\|OVC (Østergaard 2026)]] makes the complementarity explicit — the same [[concepts/td-speakerbeam\|TD-SpeakerBeam]] / [[concepts/mamba-mingru\|Mamba-MinGRU]] conditioning runs forward (PSE) and backward (OVC), differing only in the objective. The conditioning signal itself is the hard part: [[sources/zhu-2026-g-map-se-guided-speech-enhancement\|G-MaP-SE (Zhu 2026)]] shows that **noisy enrollment embeddings** degrade PSE, and fixes it with GMM-based [[concepts/prior-matching\|prior matching]] to refine the embedding before conditioning (+0.03 WB-PESQ over noisy conditioning on DNS2020 at 0.025M added params). The lesson generalizes: in enrollment-conditioned SE, the *quality of the embedding* is as decisive as the enhancement backbone.
+
+The canonical survey for the TSE half of this complementarity is [[sources/zmolikova-2023-neural-target-speech-extraction-overview\|Zmolikova et al. 2023 (IEEE SPM)]]: it factors TSE into a single framework (clue encoder + mixture encoder + fusion layer + target extractor) that subsumes audio/visual/spatial clue variants, and explicitly notes that TSE internally solves two sub-tasks (identify the target + estimate its speech), the same two sub-tasks that OVC/PSE later split asymmetrically (preserve-target vs. suppress-target). The survey also reports that direct TSE consistently outperforms the cascade BSS-then-speaker-ID alternative, especially in adverse conditions, and that multi-clue (audio-visual-spatial) attention fusion outperforms any single-clue system under clue corruption — both findings directly motivate the 2026 LGTSE/D-LGTSE focus on enrollment-conditioning robustness.
 
 ## Cross-Cutting Takeaways
 

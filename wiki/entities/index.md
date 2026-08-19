@@ -488,4 +488,9 @@
 | [[entities/tomohiko-nakamura\|Tomohiko Nakamura]] | University of Tokyo — BSS, real-time speech extraction, spatial covariance matrix estimation | 2026-08-19 |
 | [[entities/yu-takahashi\|Yu Takahashi]] | Yamaha Corporation — speech enhancement, microphone arrays, BSS for human–avatar communication | 2026-08-19 |
 | [[entities/kazunobu-kondo\|Kazunobu Kondo]] | Yamaha Corporation — acoustic signal processing, real-time BSS, microphone arrays | 2026-08-19 |
+| [[entities/katerina-zmolikova\|Katerina Zmolikova]] | Brno UT / NTT CS-Lab — TSE, speaker-aware beamforming; lead author of the 2023 IEEE SPM TSE overview | 2026-08-19 |
+| [[entities/marc-delcroix\|Marc Delcroix]] | NTT CS-Lab — TSE, robust ASR, multi-modal speech processing; co-author of the 2023 IEEE SPM TSE overview | 2026-08-19 |
+| [[entities/tsubasa-ochiai\|Tsubasa Ochiai]] | NTT CS-Lab — multi-modal TSE, universal sound selector; co-author of the 2023 IEEE SPM TSE overview | 2026-08-19 |
+| [[entities/keisuke-kinoshita\|Keisuke Kinoshita]] | NTT CS-Lab — speech enhancement, TSE, microphone-array processing; co-author of the 2023 IEEE SPM TSE overview | 2026-08-19 |
+| [[entities/jan-cernocky\|Jan Černocký]] | Brno UT — speech processing, speaker recognition; co-author and supervisor lineage of the 2023 IEEE SPM TSE overview | 2026-08-19 |
 

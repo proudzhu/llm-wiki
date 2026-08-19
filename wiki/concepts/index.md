@@ -431,4 +431,8 @@
 | [[concepts/independent-low-rank-matrix-analysis\|Independent Low-Rank Matrix Analysis (ILRMA)]] | Unified determined BSS method combining IVA's spatial unmixing matrix with IS-NMF source-spectrogram model; convergence point of ICA and NMF routes | 2026-08-19 |
 | [[concepts/rank-constrained-spatial-covariance-matrix-estimation\|Rank-Constrained Spatial Covariance Matrix Estimation (RCSCME)]] | Blind speech-extraction method modeling observed SCM as a rank-1 target plus full-rank diffuse-noise SCM; majorization-equalization updates with sparsity-inducing inverse-gamma prior | 2026-08-19 |
 | [[concepts/fast-demixing-matrix-estimation\|Fast Demixing Matrix Estimation (FastVCD / FastIP)]] | Fast, numerically stable update rules for ILRMA demixing matrices via four algebraic transformations of VCD/IP; analytically equivalent to originals, ~33% faster | 2026-08-19 |
+| [[concepts/cocktail-party-problem\|Cocktail-Party Problem]] | Selective attention to a target voice in a multi-source acoustic scene; the motivating problem for TSE | 2026-08-19 |
+| [[concepts/target-speaker-vad\|Target-Speaker VAD (TS-VAD)]] | Speaker-conditioned VAD predicting target activity; multi-target extension is SOTA for diarization (CHiME-6) | 2026-08-19 |
+| [[concepts/target-speaker-asr\|Target-Speaker ASR (TS-ASR)]] | Transcribe a target speaker in a mixture given a clue; cascade / joint / integrated architectures | 2026-08-19 |
+| [[concepts/angle-feature\|Angle Feature]] | Directional feature for spatial-clue TSE: cosine of TPD-vs-IPD difference over microphone pairs | 2026-08-19 |
 

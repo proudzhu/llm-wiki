@@ -494,6 +494,11 @@
 | [[entities/tomohiko-nakamura\|Tomohiko Nakamura]] | University of Tokyo — BSS, real-time speech extraction, spatial covariance matrix estimation | 2026-08-19 |
 | [[entities/yu-takahashi\|Yu Takahashi]] | Yamaha Corporation — speech enhancement, microphone arrays, BSS for human–avatar communication | 2026-08-19 |
 | [[entities/kazunobu-kondo\|Kazunobu Kondo]] | Yamaha Corporation — acoustic signal processing, real-time BSS, microphone arrays | 2026-08-19 |
+| [[entities/katerina-zmolikova\|Katerina Zmolikova]] | Brno UT / NTT CS-Lab — TSE, speaker-aware beamforming; lead author of the 2023 IEEE SPM TSE overview | 2026-08-19 |
+| [[entities/marc-delcroix\|Marc Delcroix]] | NTT CS-Lab — TSE, robust ASR, multi-modal speech processing; co-author of the 2023 IEEE SPM TSE overview | 2026-08-19 |
+| [[entities/tsubasa-ochiai\|Tsubasa Ochiai]] | NTT CS-Lab — multi-modal TSE, universal sound selector; co-author of the 2023 IEEE SPM TSE overview | 2026-08-19 |
+| [[entities/keisuke-kinoshita\|Keisuke Kinoshita]] | NTT CS-Lab — speech enhancement, TSE, microphone-array processing; co-author of the 2023 IEEE SPM TSE overview | 2026-08-19 |
+| [[entities/jan-cernocky\|Jan Černocký]] | Brno UT — speech processing, speaker recognition; co-author and supervisor lineage of the 2023 IEEE SPM TSE overview | 2026-08-19 |
 
 ---
 
@@ -930,6 +935,10 @@
 | [[concepts/independent-low-rank-matrix-analysis\|Independent Low-Rank Matrix Analysis (ILRMA)]] | Unified determined BSS method combining IVA's spatial unmixing matrix with IS-NMF source-spectrogram model; convergence point of ICA and NMF routes | 2026-08-19 |
 | [[concepts/rank-constrained-spatial-covariance-matrix-estimation\|Rank-Constrained Spatial Covariance Matrix Estimation (RCSCME)]] | Blind speech-extraction method modeling observed SCM as a rank-1 target plus full-rank diffuse-noise SCM; majorization-equalization updates with sparsity-inducing inverse-gamma prior | 2026-08-19 |
 | [[concepts/fast-demixing-matrix-estimation\|Fast Demixing Matrix Estimation (FastVCD / FastIP)]] | Fast, numerically stable update rules for ILRMA demixing matrices via four algebraic transformations of VCD/IP; analytically equivalent to originals, ~33% faster | 2026-08-19 |
+| [[concepts/cocktail-party-problem\|Cocktail-Party Problem]] | Selective attention to a target voice in a multi-source acoustic scene; the motivating problem for TSE | 2026-08-19 |
+| [[concepts/target-speaker-vad\|Target-Speaker VAD (TS-VAD)]] | Speaker-conditioned VAD predicting target activity; multi-target extension is SOTA for diarization (CHiME-6) | 2026-08-19 |
+| [[concepts/target-speaker-asr\|Target-Speaker ASR (TS-ASR)]] | Transcribe a target speaker in a mixture given a clue; cascade / joint / integrated architectures | 2026-08-19 |
+| [[concepts/angle-feature\|Angle Feature]] | Directional feature for spatial-clue TSE: cosine of TPD-vs-IPD difference over microphone pairs | 2026-08-19 |
 
 ---
 
@@ -1106,6 +1115,7 @@
 | [[sources/taseska-2018-informed-spatial-filters\|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] | PhD thesis (FAU): ISF paradigm unifying noise reduction (CDR-MCRA), DOA-informed extraction, informed GSC, spotforming, EM-based BSS, and Bayesian source tracking | 2018 |
 | [[sources/sawada-2019-bss-ilrma-review\|Sawada et al. 2019: BSS/ILRMA Review]] | Unified tutorial of ICA and NMF routes converging at ILRMA; determined convolutive BSS, AuxIVA, MNMF, MM algorithm with auxiliary functions | 2019 |
 | [[sources/ishikawa-2025-real-time-speech-extraction\|Ishikawa et al. 2025: Real-Time RCSCME-based Speech Extraction]] | Blockwise batch real-time RCSCME+ILRMA framework; SR-ILRMA / NSR-ILRMA regularizers using only the prior target steering vector; FastVCD / FastIP demixing updates; runs on CPU + Jetson AGX | 2025 |
+| [[sources/zmolikova-2023-neural-target-speech-extraction-overview\|Zmolikova 2023: Neural Target Speech Extraction: An Overview]] | IEEE SPM review unifying audio/visual/spatial clue neural TSE under a single framework (clue encoder + mixture encoder + fusion + target extractor) | 2026-08-19 |
 
 ---
 
@@ -1158,10 +1168,10 @@
 
 ## Statistics
 
-- **Total pages**: 1107
-- **Entities**: 484
-- **Concepts**: 427
-- **Sources**: 167
+- **Total pages**: 1117
+- **Entities**: 489
+- **Concepts**: 431
+- **Sources**: 168
 - **Synthesis**: 22
 - **Queries**: 7
 - **Last updated**: 2026-08-19

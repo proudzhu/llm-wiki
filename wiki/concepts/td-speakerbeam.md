@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-07-10
-updated: 2026-07-10
+updated: 2026-08-19
 sources:
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
+  - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
 tags:
   - neural-network
   - speech-enhancement
@@ -51,6 +52,16 @@ TD-SpeakerBeam is the baseline for [[concepts/own-voice-cancellation|OVC]], achi
 
 The [[concepts/mamba-mingru|Mamba-MinGRU]] architecture matches this performance at ~15× lower main-network compute.
 
+## Role in the TSE Survey Literature
+
+The Zmolikova et al. 2023 overview [[sources/zmolikova-2023-neural-target-speech-extraction-overview|(Zmolikova 2023)]] uses time-domain SpeakerBeam as the **representative experimental backbone** for all three clue types — audio, visual, and audio-visual — and as the baseline for the spatial-clue comparison. The choice lets the survey isolate the effect of the clue/encoder by holding the extraction backbone constant. Three key findings from those experiments:
+
+1. **Direct TSE > cascade BSS+speaker-ID**, especially in reverberant + noisy conditions (WHAMR!), because the TSE model is directly optimized for the target and has the speaker clue upfront.
+2. **Audio-visual > single-clue systems** under corrupted-clue conditions (audio enrollment with 0 dB SNR noise; video with mouth-masked frames), because attention-based fusion reweights toward the more reliable clue.
+3. **Spatial clues dominate** when speakers are angularly separated (> 15°), but degrade sharply below 15°; combining spatial with audio/visual clues recovers performance in the close-angle regime.
+
+The original SpeakerBeam (Delcroix et al., Interspeech 2017 [30]; ICASSP 2018 [25]) is also cited as one of the first neural enrollment-conditioned TSE systems, alongside VoiceFilter [11] and SpEx/SpEx+ [31].
+
 ## Related Concepts
 
 - [[concepts/target-speaker-extraction|Target Speaker Extraction (TSE)]]
@@ -58,7 +69,10 @@ The [[concepts/mamba-mingru|Mamba-MinGRU]] architecture matches this performance
 - [[concepts/mamba-mingru|Mamba-MinGRU]]
 - [[concepts/speaker-embedding|Speaker Embedding]]
 - [[concepts/time-domain-speech-enhancement|Time-Domain Speech Enhancement]]
+- [[concepts/angle-feature|Angle Feature]]
+- [[concepts/film-layer|FiLM Layer]]
 
 ## Related Sources
 
 - [[sources/ostergaard-2026-own-voice-cancellation|Østergaard et al. 2026: Don't Listen to Me — Own-Voice Cancellation]]
+- [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova et al. 2023: Neural Target Speech Extraction: An Overview]]
