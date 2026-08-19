@@ -490,6 +490,10 @@
 | [[entities/nobutaka-ono\|Nobutaka Ono]] | Tokyo Metropolitan University — Independent Vector Analysis (AuxIVA), majorization-minimization for BSS | 2026-08-19 |
 | [[entities/hirokazu-kameoka\|Hirokazu Kameoka]] | NTT Corporation / The University of Tokyo — probabilistic models for audio source separation, MVAE, ILRMA | 2026-08-19 |
 | [[entities/daichi-kitamura\|Daichi Kitamura]] | National Institute of Technology, Kagawa College — Independent Low-Rank Matrix Analysis (ILRMA) | 2026-08-19 |
+| [[entities/yuto-ishikawa\|Yuto Ishikawa]] | University of Tokyo — real-time BSS, spatially regularized ILRMA, RCSCME | 2026-08-19 |
+| [[entities/tomohiko-nakamura\|Tomohiko Nakamura]] | University of Tokyo — BSS, real-time speech extraction, spatial covariance matrix estimation | 2026-08-19 |
+| [[entities/yu-takahashi\|Yu Takahashi]] | Yamaha Corporation — speech enhancement, microphone arrays, BSS for human–avatar communication | 2026-08-19 |
+| [[entities/kazunobu-kondo\|Kazunobu Kondo]] | Yamaha Corporation — acoustic signal processing, real-time BSS, microphone arrays | 2026-08-19 |
 
 ---
 
@@ -924,6 +928,8 @@
 | [[concepts/sparsity-based-source-tracking\|Sparsity-Based Source Tracking]] | Bayesian multi-source tracker using narrowband position+signal measurements; JPDA/PMHT-like with multi-measurement-per-source model | 2026-08-16 |
 | [[concepts/multichannel-nmf\|Multichannel NMF (MNMF)]] | Extends NMF to multichannel mixtures using source spatial covariance models; source-wise MNMF is equivalent to ILRMA, full MNMF uses block-diagonal SCMs | 2026-08-19 |
 | [[concepts/independent-low-rank-matrix-analysis\|Independent Low-Rank Matrix Analysis (ILRMA)]] | Unified determined BSS method combining IVA's spatial unmixing matrix with IS-NMF source-spectrogram model; convergence point of ICA and NMF routes | 2026-08-19 |
+| [[concepts/rank-constrained-spatial-covariance-matrix-estimation\|Rank-Constrained Spatial Covariance Matrix Estimation (RCSCME)]] | Blind speech-extraction method modeling observed SCM as a rank-1 target plus full-rank diffuse-noise SCM; majorization-equalization updates with sparsity-inducing inverse-gamma prior | 2026-08-19 |
+| [[concepts/fast-demixing-matrix-estimation\|Fast Demixing Matrix Estimation (FastVCD / FastIP)]] | Fast, numerically stable update rules for ILRMA demixing matrices via four algebraic transformations of VCD/IP; analytically equivalent to originals, ~33% faster | 2026-08-19 |
 
 ---
 
@@ -1099,6 +1105,7 @@
 | [[sources/jin-2017-multichannel-noise-reduction-mobile\|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] | Adaptive coherence NE with adaptive split-frequency and globally MMSE-optimal multi-channel variance estimation on a 3-mic Huawei Mate 8 | 2026-08-15 |
 | [[sources/taseska-2018-informed-spatial-filters\|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] | PhD thesis (FAU): ISF paradigm unifying noise reduction (CDR-MCRA), DOA-informed extraction, informed GSC, spotforming, EM-based BSS, and Bayesian source tracking | 2018 |
 | [[sources/sawada-2019-bss-ilrma-review\|Sawada et al. 2019: BSS/ILRMA Review]] | Unified tutorial of ICA and NMF routes converging at ILRMA; determined convolutive BSS, AuxIVA, MNMF, MM algorithm with auxiliary functions | 2019 |
+| [[sources/ishikawa-2025-real-time-speech-extraction\|Ishikawa et al. 2025: Real-Time RCSCME-based Speech Extraction]] | Blockwise batch real-time RCSCME+ILRMA framework; SR-ILRMA / NSR-ILRMA regularizers using only the prior target steering vector; FastVCD / FastIP demixing updates; runs on CPU + Jetson AGX | 2025 |
 
 ---
 
@@ -1151,10 +1158,10 @@
 
 ## Statistics
 
-- **Total pages**: 1100
-- **Entities**: 480
-- **Concepts**: 425
-- **Sources**: 166
+- **Total pages**: 1107
+- **Entities**: 484
+- **Concepts**: 427
+- **Sources**: 167
 - **Synthesis**: 22
 - **Queries**: 7
 - **Last updated**: 2026-08-19

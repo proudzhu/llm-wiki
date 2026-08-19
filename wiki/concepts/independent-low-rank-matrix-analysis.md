@@ -107,6 +107,9 @@ ILRMA sits at the intersection: IVA's spatial model + MNMF's spectrogram model, 
 - [[concepts/multichannel-nmf|Multichannel NMF]]
 - [[concepts/fastmnmf|FastMNMF]]
 - [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
+- [[concepts/spatial-regularization|Spatial Regularization]]
+- [[concepts/rank-constrained-spatial-covariance-matrix-estimation|Rank-Constrained Spatial Covariance Matrix Estimation (RCSCME)]]
+- [[concepts/fast-demixing-matrix-estimation|Fast Demixing Matrix Estimation (FastVCD / FastIP)]]
 
 ## Related Sources
 

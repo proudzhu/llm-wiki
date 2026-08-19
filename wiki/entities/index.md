@@ -484,4 +484,8 @@
 | [[entities/nobutaka-ono\|Nobutaka Ono]] | Tokyo Metropolitan University — Independent Vector Analysis (AuxIVA), majorization-minimization for BSS | 2026-08-19 |
 | [[entities/hirokazu-kameoka\|Hirokazu Kameoka]] | NTT Corporation / The University of Tokyo — probabilistic models for audio source separation, MVAE, ILRMA | 2026-08-19 |
 | [[entities/daichi-kitamura\|Daichi Kitamura]] | National Institute of Technology, Kagawa College — Independent Low-Rank Matrix Analysis (ILRMA) | 2026-08-19 |
+| [[entities/yuto-ishikawa\|Yuto Ishikawa]] | University of Tokyo — real-time BSS, spatially regularized ILRMA, RCSCME | 2026-08-19 |
+| [[entities/tomohiko-nakamura\|Tomohiko Nakamura]] | University of Tokyo — BSS, real-time speech extraction, spatial covariance matrix estimation | 2026-08-19 |
+| [[entities/yu-takahashi\|Yu Takahashi]] | Yamaha Corporation — speech enhancement, microphone arrays, BSS for human–avatar communication | 2026-08-19 |
+| [[entities/kazunobu-kondo\|Kazunobu Kondo]] | Yamaha Corporation — acoustic signal processing, real-time BSS, microphone arrays | 2026-08-19 |
 

@@ -429,4 +429,6 @@
 | [[concepts/speech-presence-probability\|Speech Presence Probability (SPP)]] | Soft-decision VAD estimating per-bin speech presence probability; gates noise PSD updates | 2026-08-15 |
 | [[concepts/multichannel-nmf\|Multichannel NMF (MNMF)]] | Extends NMF to multichannel mixtures using source spatial covariance models; source-wise MNMF is equivalent to ILRMA, full MNMF uses block-diagonal SCMs | 2026-08-19 |
 | [[concepts/independent-low-rank-matrix-analysis\|Independent Low-Rank Matrix Analysis (ILRMA)]] | Unified determined BSS method combining IVA's spatial unmixing matrix with IS-NMF source-spectrogram model; convergence point of ICA and NMF routes | 2026-08-19 |
+| [[concepts/rank-constrained-spatial-covariance-matrix-estimation\|Rank-Constrained Spatial Covariance Matrix Estimation (RCSCME)]] | Blind speech-extraction method modeling observed SCM as a rank-1 target plus full-rank diffuse-noise SCM; majorization-equalization updates with sparsity-inducing inverse-gamma prior | 2026-08-19 |
+| [[concepts/fast-demixing-matrix-estimation\|Fast Demixing Matrix Estimation (FastVCD / FastIP)]] | Fast, numerically stable update rules for ILRMA demixing matrices via four algebraic transformations of VCD/IP; analytically equivalent to originals, ~33% faster | 2026-08-19 |
 

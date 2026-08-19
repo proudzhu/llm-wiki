@@ -59,6 +59,7 @@ Normalization by trace transforms the SCM estimation problem from estimating abs
 - [[concepts/virtual-microphone-estimation|Virtual Microphone Estimation]]
 - [[concepts/distributed-binaural-speech-enhancement|Distributed Binaural Speech Enhancement]]
 - [[concepts/asymmetric-stft|Asymmetric STFT]]
+- [[concepts/rank-constrained-spatial-covariance-matrix-estimation|Rank-Constrained Spatial Covariance Matrix Estimation (RCSCME)]]
 
 ## Related Sources
 
@@ -67,3 +68,4 @@ Normalization by trace transforms the SCM estimation problem from estimating abs
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
 - [[sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026: Spatial-Magnifier]]
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]
+- [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025: Real-Time RCSCME-based Speech Extraction]]

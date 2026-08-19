@@ -170,4 +170,5 @@
 | [[sources/jin-2017-multichannel-noise-reduction-mobile\|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] | Adaptive coherence NE with adaptive split-frequency and globally MMSE-optimal multi-channel variance estimation on a 3-mic Huawei Mate 8 | 2026-08-15 |
 | [[sources/taseska-2018-informed-spatial-filters\|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] | PhD thesis (FAU): ISF paradigm unifying noise reduction (CDR-MCRA), DOA-informed extraction, informed GSC, spotforming, EM-based BSS, and Bayesian source tracking | 2018 |
 | [[sources/sawada-2019-bss-ilrma-review\|Sawada et al. 2019: BSS/ILRMA Review]] | Unified tutorial of ICA and NMF routes converging at ILRMA; determined convolutive BSS, AuxIVA, MNMF, MM algorithm with auxiliary functions | 2019 |
+| [[sources/ishikawa-2025-real-time-speech-extraction\|Ishikawa et al. 2025: Real-Time RCSCME-based Speech Extraction]] | Blockwise batch real-time RCSCME+ILRMA framework; SR-ILRMA / NSR-ILRMA regularizers using only the prior target steering vector; FastVCD / FastIP demixing updates; runs on CPU + Jetson AGX | 2025 |
 

@@ -4442,3 +4442,32 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/entities/index.md` — added 4 entity rows
   - `wiki/concepts/index.md` — added 2 concept rows
 
+## [2026-08-19] ingest | Ishikawa et al. 2025: Real-Time RCSCME-based Speech Extraction
+
+Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA + RCSCME speech-extraction pipeline via the blockwise batch algorithm, two new spatially regularized ILRMA variants (SR-ILRMA using the prior target steering vector, NSR-ILRMA using a null-beamformer regularizer that admits the cheaper IP update), and the FastVCD / FastIP demixing-matrix update rules derived by four algebraic transformations of VCD/IP that are analytically equivalent to the originals but ~33% faster and more numerically stable. Real-time operation validated on Intel Core i9-13900KF CPU and NVIDIA Jetson AGX Xavier / AGX Orin, exceeding Online IVA-IP/ISS in SDR/SIR under diffuse-noise conditions.
+
+- **Zotero key**: `4U5QAMLY`
+- **DOI**: 10.1109/ACCESS.2025.3569590
+- **Raw extraction**: `raw/papers/ishikawa-2025-real-time-speech-extraction/full-text.md` (1294 lines via MinerU)
+- **Figures**: 17 figures mapped; 7 embedded in source page (Figs. 2, 3, 4, 6, 7, 8, 9, 10(a), 13, 14(a), 17(left)) — the rest are boxplot panels covering comparable metrics across SNRs / devices.
+- **Pages created**:
+  - `wiki/sources/ishikawa-2025-real-time-speech-extraction.md` — source page with Summary, Problem Formulation (ILRMA + RCSCME), Methodology (blockwise batch, SR-ILRMA / NSR-ILRMA, FastVCD / FastIP), Experimental Setup, Results, Key Contributions
+  - `wiki/entities/yuto-ishikawa.md` — U. Tokyo, lead author
+  - `wiki/entities/tomohiko-nakamura.md` — U. Tokyo
+  - `wiki/entities/yu-takahashi.md` — Yamaha Corporation
+  - `wiki/entities/kazunobu-kondo.md` — Yamaha Corporation
+  - `wiki/concepts/rank-constrained-spatial-covariance-matrix-estimation.md` — RCSCME: rank-1 target SCM + full-rank diffuse-noise SCM with inverse-gamma sparsity prior; majorization-equalization updates; MWF target extraction
+  - `wiki/concepts/fast-demixing-matrix-estimation.md` — FastVCD / FastIP: four algebraic transformations (Sherman–Morrison Hermitian inversion, redundant MatVec removal, row/column updates using $\mathbf{F}_{in}^{(l)}$ structure, closed-form $\varphi_{in}$ branch); analytically equivalent to VCD/IP
+- **Pages updated**:
+  - `wiki/entities/daichi-kitamura.md` — added contribution from this paper
+  - `wiki/entities/norihiro-takamune.md` — added contribution from this paper
+  - `wiki/entities/hiroshi-saruwatari.md` — added contribution from this paper
+  - `wiki/concepts/independent-low-rank-matrix-analysis.md` — added SR-ILRMA / NSR-ILRMA variants row; cross-links to RCSCME and Fast Demixing
+  - `wiki/concepts/spatial-regularization.md` — added "Spatially Regularized ILRMA (SR-ILRMA / NSR-ILRMA)" subsection; cross-links to Fast Demixing and RCSCME
+  - `wiki/concepts/iterative-source-steering.md` — added "Comparison with FastVCD / FastIP" section contrasting the two fast-update paradigms
+  - `wiki/concepts/spatial-covariance-matrix.md` — added cross-link to RCSCME
+  - `wiki/index.md` — added 1 source, 4 entities, 2 concepts; updated statistics (total 1100 → 1107, entities 480 → 484, concepts 425 → 427, sources 166 → 167)
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 4 entity rows
+  - `wiki/concepts/index.md` — added 2 concept rows
+

@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-06-04
-updated: 2026-06-04
+updated: 2026-08-19
 tags:
   - blind-source-separation
   - independent-vector-analysis
   - direction-of-arrival
   - spatial-processing
+  - independent-low-rank-matrix-analysis
 ---
 
 # Spatial Regularization
@@ -50,6 +51,15 @@ Spatial regularization has been integrated into various IVA frameworks:
 - [[concepts/switching-independent-vector-analysis|Switching IVA]] (SR-SwIVA)
 - Geometrically constrained IVA
 
+### Spatially Regularized ILRMA (SR-ILRMA / NSR-ILRMA)
+
+[[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025]] introduces two spatially regularized ILRMA variants designed for **real-time diffuse-noise speech extraction** that use only the **prior target-speech steering vector** (rather than all-source priors required by conventional SR-ILRMA):
+
+- **SR-ILRMA** — replaces the Euclidean distance $\sum_{i,n}\|\mathbf{w}_{in} - \hat{\mathbf{w}}_{in}\|^2$ with a Mahalanobis distance using metric $(\hat{\mathbf{A}}_i\hat{\mathbf{A}}_i^{\mathsf{H}})^{-1}$, then specializes it to involve only $\hat{\mathbf{a}}_{in^{(\mathrm{t})}}$. Only the target row of $\mathbf{W}_i$ carries the regularization term; the other rows are updated by the standard IP rule. Updated by vectorwise coordinate descent (VCD).
+- **NSR-ILRMA** — modifies the regularizer so that the target-row update of $\mathbf{W}_i$ is constrained via a **null beamformer** built from $\hat{\mathbf{a}}_{in^{(\mathrm{t})}}$. This admits a closed-form IP-style update, making it cheaper than SR-ILRMA.
+
+Both variants are paired with the [[concepts/fast-demixing-matrix-estimation|FastVCD / FastIP]] fast update rules for real-time operation, and feed into the [[concepts/rank-constrained-spatial-covariance-matrix-estimation|RCSCME]] framework.
+
 ### Spatially-Guided Initialization
 
 Spatial regularization can also guide initialization strategies:
@@ -79,8 +89,12 @@ The SRSS-init strategy typically provides the best separation performance by ini
 - [[concepts/blind-source-separation|Blind Source Separation]]
 - [[concepts/switching-independent-vector-analysis|Switching Independent Vector Analysis]]
 - [[concepts/iterative-source-steering|Iterative Source Steering]]
+- [[concepts/independent-low-rank-matrix-analysis|Independent Low-Rank Matrix Analysis (ILRMA)]]
+- [[concepts/fast-demixing-matrix-estimation|Fast Demixing Matrix Estimation (FastVCD / FastIP)]]
+- [[concepts/rank-constrained-spatial-covariance-matrix-estimation|Rank-Constrained Spatial Covariance Matrix Estimation (RCSCME)]]
 
 ## Related Sources
 
 - [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
+- [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025: Real-Time RCSCME-based Speech Extraction]]
