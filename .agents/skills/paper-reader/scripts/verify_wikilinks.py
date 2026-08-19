@@ -35,11 +35,18 @@ for _s in (sys.stdout, sys.stderr):
 # Does NOT match [[raw/...]] (image embeds — handled by map_figures.py)
 # or bare [[slug]] (no slash — these are convention violations, not
 # broken-link candidates for this script).
+#
+# Slug capture excludes backslash so that `\|` (the MkDocs/Obsidian
+# pipe-escape used in table cells, e.g. `[[concepts/foo\|Foo]]`) is
+# not treated as part of the slug. Without this exclusion, the regex
+# would capture slug='foo\' and look for wiki/concepts/foo\.md, which
+# never exists — producing false-positive NOT FOUND reports on every
+# wikilink written inside a markdown table.
 WIKILINK_RE = re.compile(
     r'\[\['
-    r'(entities|concepts|sources|synthesis|queries)/([^\]|#]+)'
-    r'(?:#[^\]|]*)?'
-    r'(?:\|[^\]]*)?'
+    r'(entities|concepts|sources|synthesis|queries)/([^\]|#\\]+)'
+    r'(?:#[^\]|\\]*)?'
+    r'(?:\\?\|[^\]]*)?'
     r'\]\]'
 )
 

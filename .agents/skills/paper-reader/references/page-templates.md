@@ -33,6 +33,27 @@ tags:
 - `## Related Concepts` — wikilinks to concept pages
 - `## Related Synthesis` — wikilinks to synthesis pages
 
+### Section Quality Examples
+
+Concrete examples of what a good vs. thin section looks like (drawn from real ingests):
+
+**`## Summary` (good — 2-3 sentences, captures the contribution):**
+> This paper presents an in-depth overview of recent neural-based approaches to target speech/speaker extraction (TSE), the task of isolating a target speaker's speech from a mixture using auxiliary clues. The review unifies the field by introducing a single general neural TSE framework and showing how audio, visual, and spatial clue variants instantiate it.
+
+**`## Methodology` (good — equations + prose, not just a list):**
+> A neural TSE system consists of two main modules. The clue encoder converts the raw clue $\mathbf{C}_{s}$ into embeddings $\mathbf{E}_{s} = \mathrm{ClueEncoder}(\mathbf{C}_{s})$. The speech extraction module decomposes as $\mathbf{Z}_{y} = \mathrm{MixEncoder}(\mathbf{y})$, $\mathbf{Z}_{s} = \mathrm{Fusion}(\mathbf{Z}_{y}, \mathbf{E}_{s})$, $\hat{\mathbf{x}}_{s} = \mathrm{TgtExtractor}(\mathbf{Z}_{s}, \mathbf{y})$.
+
+**`## Methodology` (thin — list only, no equations or reasoning):**
+> The system uses a clue encoder, a mixture encoder, a fusion layer, and a target extractor. See Figure 3.
+
+**`## Key Contributions` (good — numbered, specific, falsifiable):**
+> 1. **Unified framework**: introduces the general neural TSE framework (clue encoder + mixture encoder + fusion layer + target extractor) that subsumes audio, visual, and spatial clue variants under a single description.
+> 2. **Fusion layer survey**: tabulates five widely used fusion layers with equations and parameter counts, and reports empirically that the choice has "rather insignificant" impact.
+
+**`## Key Contributions` (thin — vague, non-falsifiable):**
+> 1. We propose a comprehensive review of TSE.
+> 2. We compare various methods.
+
 ### Figure Usage
 
 | Include figure? | Criteria | Examples |
@@ -133,5 +154,18 @@ Math and equations.
 **Do NOT create concept pages for** generic prerequisites the paper merely *uses* without contribution — e.g., "Adam optimizer", "activation functions", "gradient clipping", "ReLU", "dropout", "batch normalization". The same applies to **named-but-generic signal-processing algorithms** the paper adopts off-the-shelf — e.g., "Leaky LMS", "gradient descent", "FxLMS", "Gauss-Newton", "RLS", "Welch's method". A named algorithm is not by itself a contribution; promote it to a wikilink only when a paper *modifies, extends, or surveys* it distinctively. Concrete example from the Gil-Cacho 2009 ingest: the [[concepts/regularized-adaptive-notch-filter|RANF]] method gets a page because it *introduces* signed regularization as a howling-detection mechanism; "Leaky LMS", which RANF merely *borrows* as its update rule, stays plain text. Link these as **plain text** in the source page instead. Creating pages for generic ML/DSP primitives leads to index bloat and dilutes the wiki's focus on the project's domain (acoustic echo cancellation, speech enhancement, sequence modeling).
 
 **Stricter threshold for review papers**: see `review-papers.md`.
+
+**Concrete examples** (from real ingests):
+
+| Concept | Decision | Reason |
+|:--------|:---------|:------|
+| [[concepts/ranf\|RANF]] (Gil-Cacho 2009) | **Create** | Novelty — introduces signed regularization as a howling-detection mechanism. |
+| "Leaky LMS" (Gil-Cacho 2009) | **Skip** (plain text) | Generic — RANF borrows it as its update rule; no distinctive formulation. |
+| [[concepts/cocktail-party-problem\|Cocktail-Party Problem]] (Zmolikova 2023) | **Create** | Distinctive formulation — review contributes the engineering framing (TSE as the response that mirrors human selective hearing); not just a mention. |
+| [[concepts/angle-feature\|Angle Feature]] (Zmolikova 2023) | **Create** | Central + distinctive — review surveys the TPD-vs-IPD cosine formulation with equations; central to spatial-clue TSE. |
+| "i-vector" (Zmolikova 2023) | **Skip** (plain text) | Mentioned as one of three audio-clue encoder families, but the review does not contribute a distinctive formulation of i-vectors — it cites the standard speaker-verification formulation. |
+| "d-vector" / "x-vector" (Zmolikova 2023) | **Skip** (plain text) | Same as i-vector — surveyed but not distinctively formulated by the review. [[concepts/speaker-embedding\|Speaker Embedding]] already exists as the umbrella page. |
+| [[concepts/target-speaker-vad\|TS-VAD]] (Zmolikova 2023) | **Create** | Distinctive + central — review contributes the framing of TS-VAD as the activity-detection analog of TSE, plus the multi-target diarization extension. |
+| [[concepts/film-layer\|FiLM Layer]] (existing, updated) | **Update, not create** | Page already exists from earlier ingest; review adds the fusion-layer survey table, so update rather than create. |
 
 **When in doubt**: prefer plain text over a new page. It is much cheaper to promote a plain-text mention to a wikilink later (when another paper contributes to the concept) than to maintain a thin stub page that adds no value.

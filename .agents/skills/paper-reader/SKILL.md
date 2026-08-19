@@ -46,10 +46,41 @@ Always use **forward slashes** in Glob patterns and prefer **relative paths from
 
 | Reference | When to load |
 |-----------|--------------|
+| [`references/review-papers.md`](references/review-papers.md) | **First** — if the paper is a review/survey/tutorial. Determines the routing for Steps 4–7. |
 | [`references/page-templates.md`](references/page-templates.md) | Step 5-7 — full templates and concept-page threshold |
 | [`references/edge-cases.md`](references/edge-cases.md) | Step 4 — graphical-only results, citation discrepancies, loose review classifications |
-| [`references/review-papers.md`](references/review-papers.md) | Step 4-7 — when the paper is a review/survey |
 | [`references/pitfalls.md`](references/pitfalls.md) | When something unexpected happens, or skim before starting an ingest |
+
+## Review/Survey Paper Routing
+
+The default workflow (Steps 4–9) is shaped around **research papers** — Problem Formulation / Methodology / Experimental Setup / Results. **Review/survey/tutorial papers** need different analysis targets, source-page sections, concept-page thresholds, and figure selection. Detect them early and route accordingly.
+
+### How to detect a review/survey paper
+
+Any of the following is a strong signal (load [`references/review-papers.md`](references/review-papers.md) on the first match):
+
+- **Title** contains: survey, overview, review, comprehensive, taxonomy, tutorial, primer, introduction to
+- **Abstract** phrases: "we survey", "we review", "we present an overview", "this paper reviews", "a comprehensive review"
+- **Zotero metadata**: `paperType` is `journalArticle` and the venue is a magazine (IEEE SPM, IEEE Comms. Surveys & Tutorials, ACM Comput. Surv.) rather than conference proceedings
+- **Structure**: the paper's primary contribution is a taxonomy/comparison table, not a single proposed method; "Section II: Background" appears before any "Proposed Method"
+- **Reference count**: 60+ references (reviews typically cite 50–200+; research papers usually 20–40)
+
+### Step-by-step routing differences
+
+Once you've identified a review/survey, these steps change:
+
+| Step | Research-paper default | Review/survey variant |
+|:-----|:-----------------------|:---------------------|
+| **4 (Analyze)** | Extract: problem, contributions, methodology, experimental setup, results | Extract: **taxonomy**, comparison tables, application domains, open challenges, coverage gaps |
+| **5 (Source page)** | Sections: Summary / Problem Formulation / Methodology / Experimental Setup / Results | Sections: Summary / Taxonomy / Methodology (surveyed methods) / Applications Survey / Key Contributions / Limitations and Caveats |
+| **5 (Figures)** | Include system block diagrams, architecture diagrams, results plots | Prefer **taxonomy/comparison diagrams** over per-method architecture diagrams |
+| **7 (New concepts)** | Create pages for novel methods/losses/architectures introduced by the paper | **Stricter threshold** — only create pages for concepts the review itself contributes a distinctive taxonomy or synthesis of; **do not** create a page for every surveyed term. Tutorials are an exception (a tutorial that introduces/formulates a concept distinctly warrants a page). |
+| **8 (Update concepts)** | Add the paper as a source; extend sections with findings | Same, but the synthesis contribution is the taxonomy/comparison, not a new data point |
+| **9 (Synthesis)** | Triage by tag overlap; update if new data point / gap-fill / refutation / new axis | Same triage, but reviews often **refine** existing synthesis claims (e.g., a review's framing of TSE vs. BSS sharpens the field's terminology) — this counts as trigger 3 (refines a claim). |
+
+### Tutorials are a special case
+
+Tutorial papers survey methods AND teach them. Treat tutorials as reviews for **structure** (Taxonomy / Applications Survey / Limitations), but treat them as research papers for **figure inclusion** — include every figure that aids comprehension of a surveyed method or concept (a tutorial with 7 application areas may legitimately warrant 15–25 figures).
 
 ## Workflow
 
@@ -115,11 +146,15 @@ Pairs each hash-named crop with its "Fig. N." caption (line proximity), prints d
 
 Read the extracted text in chunks (head 200 + tail 100 + targeted range reads). Extract: core problem/motivation, key contributions (numbered), methodology (architecture/algorithms/losses/equations), experimental setup (datasets/metrics/hyperparameters), results (quantitative tables), key concepts warranting wiki pages, authors warranting entity pages.
 
-**If review/survey**: load [`references/review-papers.md`](references/review-papers.md). **If you encounter** graphical-only results, citation discrepancies, loose review classifications, or cross-references to already-ingested papers: load [`references/edge-cases.md`](references/edge-cases.md).
+**Review/survey paper**: use the **Analysis Targets** in [`references/review-papers.md`](references/review-papers.md) — taxonomy, comparison tables, application domains, open challenges, coverage gaps — instead of the research-paper-shaped list above. See the **Review/Survey Paper Routing** section earlier in this file for the full routing table.
+
+**If you encounter** graphical-only results, citation discrepancies, loose review classifications, or cross-references to already-ingested papers: load [`references/edge-cases.md`](references/edge-cases.md).
 
 ### Step 5: Create/Update Source Page
 
 Create `wiki/sources/{slug}.md`. Load [`references/page-templates.md`](references/page-templates.md) for frontmatter, required sections (Summary / Problem Formulation / Methodology / Experimental Setup / Results / Key Contributions / Related Concepts / Related Synthesis), figure-usage criteria, and figure-filename verification rules. H1 is `Author1, Author2 & Author3 Year: Short Title`.
+
+**Review/survey paper**: use the **review-paper source-page template** in [`references/review-papers.md`](references/review-papers.md) — sections are Summary / Taxonomy / Methodology (surveyed methods) / Applications Survey / Key Contributions / Limitations and Caveats / Related Concepts / Related Sources. The research-paper sections (Problem Formulation / Experimental Setup / Results) do not apply unless the review itself reports original experiments.
 
 **Figure embeds**: use `map_figures.py` output (Step 3e) to write `![[raw/papers/{slug}/figures/HASH.jpg|caption]]` — never markdown `![alt](path)` (`pitfalls.md` #27). Multi-panel figures: one `![[...]]` per (a)/(b) crop above the shared `*Figure N: ...*` caption (`pitfalls.md` #26).
 
@@ -134,6 +169,8 @@ For each author not already in `wiki/entities/`, create a new page. For existing
 ### Step 7: Create Missing Concept Pages
 
 For each key concept referenced via wikilink in the source page but lacking a dedicated page, create `wiki/concepts/{concept-name}.md`. Load [`references/page-templates.md`](references/page-templates.md) for the template and **concept-page threshold** (novelty / distinctive formulation / central-to-contribution). Do **not** create pages for generic ML/DL primitives (Adam, ReLU, dropout, gradient clipping) — link them as plain text.
+
+**Review/survey paper**: apply the **stricter concept-page threshold** described in [`references/review-papers.md`](references/review-papers.md). A review surveys many terms, but only warrants creating a concept page when the review itself contributes a **distinctive taxonomy or synthesis** of that concept — not merely because the concept is mentioned. Tutorials are an exception (a tutorial that introduces/formulates a concept distinctly warrants a page).
 
 **Batch existence check** (one Grep call, not N Globs): before creating any concept page, list all candidate concept slugs from the source page and check them in a single Grep call with alternation:
 
@@ -175,6 +212,15 @@ uv run python .agents/skills/paper-reader/scripts/triage_synthesis.py --slug SLU
   2. Fills a gap in an existing comparison
   3. Refutes or refines an existing synthesis claim
   4. Introduces a new axis of comparison
+
+**Concrete trigger examples** (from real ingests):
+
+| Trigger | Example |
+|:--------|:--------|
+| 1 (new data point) | CoFi-Lite (Yang 2026) ingest added a row to the efficiency-frontier table in `deep-speech-enhancement.md` — (0.78M params, 0.6 GMACs, PESQ 2.92) was a new point on the existing params-vs-quality frontier. |
+| 2 (gap-fill) | A future ingest of a PercepNet successor that adds ERB-scale-complexity numbers would fill a gap in the `multi-scale-speech-enhancement` comparison, which currently lacks that column for PercepNet-style models. |
+| 3 (refine claim) | Zmolikova 2023 ingest refined `deep-speech-enhancement.md` Insight 8 — the review's framing of TSE as "internally solving identify + extract" sharpened the existing PSE/OVC complementarity claim, giving it a cleaner conceptual handle. |
+| 4 (new axis) | A future ingest of a wave-RNN-based TSE paper would introduce "vocoder stage" as a new comparison axis in `multi-modal-speech-enhancement.md`, which currently tracks only clue type and fusion method. |
 
 **When in doubt**: prefer *not* updating. A thin synthesis addition adds clutter; a substantive one (1–2 sentences + a table row) is valuable. If you cannot write at least one substantive sentence about what the paper *contributes to the cross-source analysis*, skip.
 
