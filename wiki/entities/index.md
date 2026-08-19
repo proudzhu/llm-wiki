@@ -477,4 +477,8 @@
 | [[entities/maja-taseska\|Maja Taseska]] | FAU Erlangen-Nuremberg — informed spatial filters for speech enhancement; spotforming, BSS, source tracking | 2026-08-16 |
 | [[entities/kainan-chen\|Kainan Chen]] | Huawei ERC Munich; multi-channel noise reduction for mobile-phone hands-free | 2026-08-15 |
 | [[entities/wei-xiao\|Wei Xiao]] | Huawei ERC Munich; multi-channel noise reduction for mobile-phone hands-free | 2026-08-15 |
+| [[entities/hiroshi-sawada\|Hiroshi Sawada]] | NTT Corporation — blind source separation, multichannel NMF, ILRMA; lead author of the BSS/ILRMA review | 2026-08-19 |
+| [[entities/nobutaka-ono\|Nobutaka Ono]] | Tokyo Metropolitan University — Independent Vector Analysis (AuxIVA), majorization-minimization for BSS | 2026-08-19 |
+| [[entities/hirokazu-kameoka\|Hirokazu Kameoka]] | NTT Corporation / The University of Tokyo — probabilistic models for audio source separation, MVAE, ILRMA | 2026-08-19 |
+| [[entities/daichi-kitamura\|Daichi Kitamura]] | National Institute of Technology, Kagawa College — Independent Low-Rank Matrix Analysis (ILRMA) | 2026-08-19 |
 

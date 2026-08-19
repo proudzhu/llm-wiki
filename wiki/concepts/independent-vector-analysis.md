@@ -56,11 +56,13 @@ AuxIVA (Ono 2011) is the most widely adopted baseline due to its guaranteed mono
 
 ## Relationship to ILRMA and FastMNMF
 
-IVA combined with Nonnegative Matrix Factorization gives **Independent Low-Rank Matrix Analysis (ILRMA)**, which uses NMF to model source spectral structure. [[concepts/fastmnmf|FastMNMF]] generalizes ILRMA to full-rank spatial models with joint diagonalization.
+IVA combined with Nonnegative Matrix Factorization gives **[[concepts/independent-low-rank-matrix-analysis|Independent Low-Rank Matrix Analysis (ILRMA)]]**, which uses NMF to model source spectral structure. [[concepts/multichannel-nmf|MNMF]] generalizes the rank-1 spatial model of ILRMA to a full-rank per-source spatial property matrix, and [[concepts/fastmnmf|FastMNMF]] further imposes joint diagonalizability of these spatial covariances for computational efficiency. The dual derivation of ILRMA from the IVA cost function (this page) and the MNMF Gaussian likelihood is unified in [[sources/sawada-2019-bss-ilrma-review|Sawada et al. 2019]].
 
 ## Related Concepts
 
 - [[concepts/blind-source-separation|Blind Source Separation]]
+- [[concepts/independent-low-rank-matrix-analysis|Independent Low-Rank Matrix Analysis]]
+- [[concepts/multichannel-nmf|Multichannel NMF]]
 - [[concepts/fastmnmf|FastMNMF]]
 - [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
 - [[concepts/switching-independent-vector-analysis|Switching Independent Vector Analysis]]
@@ -72,3 +74,4 @@ IVA combined with Nonnegative Matrix Factorization gives **Independent Low-Rank 
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
 - [[sources/nishikori-2026-fast-multichannel-nmf-block-diagonal-scm-bss|Nishikori et al. 2026: Distributed FastMNMF for BSS]]
 - [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]
+- [[sources/sawada-2019-bss-ilrma-review|Sawada et al. 2019: BSS/ILRMA Review]]

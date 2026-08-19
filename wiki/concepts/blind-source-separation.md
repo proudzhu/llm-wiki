@@ -60,6 +60,8 @@ $$\mathbf{x}^{(k)}[z] = \mathbf{A}^{(k)}\mathbf{s}^{(k)}[z]$$
 - [[concepts/switching-independent-vector-analysis|Switching Independent Vector Analysis]]
 - [[concepts/iterative-source-steering|Iterative Source Steering]]
 - [[concepts/spatial-regularization|Spatial Regularization]]
+- [[concepts/multichannel-nmf|Multichannel NMF]]
+- [[concepts/independent-low-rank-matrix-analysis|Independent Low-Rank Matrix Analysis]]
 - [[concepts/fastmnmf|FastMNMF]]
 - [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
 - [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
@@ -72,3 +74,4 @@ $$\mathbf{x}^{(k)}[z] = \mathbf{A}^{(k)}\mathbf{s}^{(k)}[z]$$
 - [[sources/wang-2026-cross-talk-speech-reduction-separation|Wang & Cornell 2026: Cross-Talk Speech Reduction]]
 - [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023: Audio Signal Processing in the 21st Century]] — 25-year retrospective tracing the determined and monophonic BSS lineages
+- [[sources/sawada-2019-bss-ilrma-review|Sawada et al. 2019: BSS/ILRMA Review]] — unified tutorial of the ICA and NMF routes converging at ILRMA

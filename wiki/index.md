@@ -483,6 +483,10 @@
 | [[entities/maja-taseska\|Maja Taseska]] | FAU Erlangen-Nuremberg — informed spatial filters for speech enhancement; spotforming, BSS, source tracking | 2026-08-16 |
 | [[entities/kainan-chen\|Kainan Chen]] | Huawei ERC Munich; multi-channel noise reduction for mobile-phone hands-free | 2026-08-15 |
 | [[entities/wei-xiao\|Wei Xiao]] | Huawei ERC Munich; multi-channel noise reduction for mobile-phone hands-free | 2026-08-15 |
+| [[entities/hiroshi-sawada\|Hiroshi Sawada]] | NTT Corporation — blind source separation, multichannel NMF, ILRMA; lead author of the BSS/ILRMA review | 2026-08-19 |
+| [[entities/nobutaka-ono\|Nobutaka Ono]] | Tokyo Metropolitan University — Independent Vector Analysis (AuxIVA), majorization-minimization for BSS | 2026-08-19 |
+| [[entities/hirokazu-kameoka\|Hirokazu Kameoka]] | NTT Corporation / The University of Tokyo — probabilistic models for audio source separation, MVAE, ILRMA | 2026-08-19 |
+| [[entities/daichi-kitamura\|Daichi Kitamura]] | National Institute of Technology, Kagawa College — Independent Low-Rank Matrix Analysis (ILRMA) | 2026-08-19 |
 
 ---
 
@@ -915,6 +919,8 @@
 | [[concepts/informed-gsc\|Informed GSC]] | GSC with bin-wise detector-controlled FBF/BM/NC adaptation; RLS noise canceller; avoids signal cancellation from RTF mismatch | 2026-08-16 |
 | [[concepts/tf-mask-estimation\|TF Mask Estimation]] | Posterior source-index probabilities from EM/tracker updating per-source PSD matrices for BSS; data-association probabilities as masks | 2026-08-16 |
 | [[concepts/sparsity-based-source-tracking\|Sparsity-Based Source Tracking]] | Bayesian multi-source tracker using narrowband position+signal measurements; JPDA/PMHT-like with multi-measurement-per-source model | 2026-08-16 |
+| [[concepts/multichannel-nmf\|Multichannel NMF (MNMF)]] | Extends NMF to multichannel mixtures using source spatial covariance models; source-wise MNMF is equivalent to ILRMA, full MNMF uses block-diagonal SCMs | 2026-08-19 |
+| [[concepts/independent-low-rank-matrix-analysis\|Independent Low-Rank Matrix Analysis (ILRMA)]] | Unified determined BSS method combining IVA's spatial unmixing matrix with IS-NMF source-spectrogram model; convergence point of ICA and NMF routes | 2026-08-19 |
 
 ---
 
@@ -1089,6 +1095,7 @@
 | [[sources/lugo-2026-diffvqe\|Lugo et al. 2026: DiffVQE]] | First fully reproducible diffusion-based AEC (hybrid single-step Cond/Score, EffDiffSE lineage); beats retrained DeepVQE on most metrics at ~10% of its FLOPS | 2026-08-15 |
 | [[sources/jin-2017-multichannel-noise-reduction-mobile\|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] | Adaptive coherence NE with adaptive split-frequency and globally MMSE-optimal multi-channel variance estimation on a 3-mic Huawei Mate 8 | 2026-08-15 |
 | [[sources/taseska-2018-informed-spatial-filters\|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] | PhD thesis (FAU): ISF paradigm unifying noise reduction (CDR-MCRA), DOA-informed extraction, informed GSC, spotforming, EM-based BSS, and Bayesian source tracking | 2018 |
+| [[sources/sawada-2019-bss-ilrma-review\|Sawada et al. 2019: BSS/ILRMA Review]] | Unified tutorial of ICA and NMF routes converging at ILRMA; determined convolutive BSS, AuxIVA, MNMF, MM algorithm with auxiliary functions | 2019 |
 
 ---
 
@@ -1141,10 +1148,10 @@
 
 ## Statistics
 
-- **Total pages**: 1093
-- **Entities**: 476
-- **Concepts**: 423
-- **Sources**: 165
+- **Total pages**: 1100
+- **Entities**: 480
+- **Concepts**: 425
+- **Sources**: 166
 - **Synthesis**: 22
 - **Queries**: 7
-- **Last updated**: 2026-08-16
+- **Last updated**: 2026-08-19

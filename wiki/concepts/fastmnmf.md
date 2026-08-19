@@ -56,7 +56,8 @@ For distributed microphone arrays, the SCMs can be constrained to be block-diago
 
 - [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
 - [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
-- Independent Low-Rank Matrix Analysis (ILRMA)
+- [[concepts/independent-low-rank-matrix-analysis|Independent Low-Rank Matrix Analysis]]
+- [[concepts/multichannel-nmf|Multichannel NMF]]
 - [[concepts/independent-vector-analysis|Independent Vector Analysis]]
 - [[concepts/blind-source-separation|Blind Source Separation]]
 
@@ -64,3 +65,4 @@ For distributed microphone arrays, the SCMs can be constrained to be block-diago
 
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
 - [[sources/nishikori-2026-fast-multichannel-nmf-block-diagonal-scm-bss|Nishikori et al. 2026: Distributed FastMNMF for BSS]]
+- [[sources/sawada-2019-bss-ilrma-review|Sawada et al. 2019: BSS/ILRMA Review]]

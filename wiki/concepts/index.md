@@ -427,4 +427,6 @@
 | [[concepts/sparsity-based-source-tracking\|Sparsity-Based Source Tracking]] | Bayesian multi-source tracker using narrowband position+signal measurements; JPDA/PMHT-like with multi-measurement-per-source model | 2026-08-16 |
 | [[concepts/adaptive-coherence-noise-estimation\|Adaptive Coherence Noise Estimation]] | Jin et al. 2017 — hybrid SPP/coherence NE with adaptive split-frequency and globally MMSE-optimal multi-channel variance decomposition | 2026-08-15 |
 | [[concepts/speech-presence-probability\|Speech Presence Probability (SPP)]] | Soft-decision VAD estimating per-bin speech presence probability; gates noise PSD updates | 2026-08-15 |
+| [[concepts/multichannel-nmf\|Multichannel NMF (MNMF)]] | Extends NMF to multichannel mixtures using source spatial covariance models; source-wise MNMF is equivalent to ILRMA, full MNMF uses block-diagonal SCMs | 2026-08-19 |
+| [[concepts/independent-low-rank-matrix-analysis\|Independent Low-Rank Matrix Analysis (ILRMA)]] | Unified determined BSS method combining IVA's spatial unmixing matrix with IS-NMF source-spectrogram model; convergence point of ICA and NMF routes | 2026-08-19 |
 

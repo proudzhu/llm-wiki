@@ -4417,3 +4417,28 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 1 entity row
   - `wiki/concepts/index.md` — added 7 concept rows
+
+## [2026-08-19] ingest | Sawada et al. 2019: BSS/ILRMA Review
+
+- **Source**: `raw/papers/sawada-2019-bss-ilrma-review/full-text.md` (extracted via MinerU from Zotero PDF)
+- **Zotero**: item key `AVA2LQ34`, attachment `EBIZXTUI`
+- **DOI**: [10.1017/ATSIP.2019.5](https://doi.org/10.1017/ATSIP.2019.5)
+- **Summary**: Ingested the review article "A review of blind source separation methods: two converging routes to ILRMA originating from ICA and NMF" (Sawada, Ono, Kameoka, Kitamura & Saruwatari, APSIPA Trans. Signal Inf. Process. 2019). The paper unifies the ICA route (FD-ICA → IVA → ILRMA) and NMF route (IS-NMF → MNMF → ILRMA) under a common majorization-minimization (MM) optimization engine with auxiliary functions. Created comprehensive source page with taxonomy, problem formulation, methodology, experimental setup, and key contributions; embedded 11 main figures via wikilink embeds.
+- **Pages created**:
+  - `wiki/sources/sawada-2019-bss-ilrma-review.md` — full source page with metadata, taxonomy, methodology, results, and key contributions
+  - `wiki/entities/hiroshi-sawada.md` — NTT Corporation, lead author
+  - `wiki/entities/nobutaka-ono.md` — Tokyo Metropolitan University, AuxIVA
+  - `wiki/entities/hirokazu-kameoka.md` — NTT Corporation / U. Tokyo, MVAE
+  - `wiki/entities/daichi-kitamura.md` — NIT Kagawa College, ILRMA
+  - `wiki/concepts/independent-low-rank-matrix-analysis.md` — ILRMA concept page with dual IVA/NMF derivation
+  - `wiki/concepts/multichannel-nmf.md` — MNMF concept page covering full and source-wise variants
+- **Pages updated**:
+  - `wiki/entities/hiroshi-saruwatari.md` — added review contribution
+  - `wiki/concepts/blind-source-separation.md` — added ILRMA and MNMF rows to methods table, cross-references to new concept pages, added source link
+  - `wiki/concepts/independent-vector-analysis.md` — clarified relationship to ILRMA/MNMF, added source link
+  - `wiki/concepts/fastmnmf.md` — added MNMF/ILRMA cross-reference, added source link
+  - `wiki/index.md` — added 1 source, 4 entities, 2 concepts; updated statistics (total 1093 → 1100, entities 476 → 480, concepts 423 → 425, sources 165 → 166)
+  - `wiki/sources/index.md` — added 1 source row
+  - `wiki/entities/index.md` — added 4 entity rows
+  - `wiki/concepts/index.md` — added 2 concept rows
+
