@@ -73,9 +73,7 @@
 | [[entities/kouei-yamaoka\|Kouei Yamaoka]] | University of Tokyo — BSS, distributed microphone arrays, IVA | 2026-05-20 |
 | [[entities/shiming-zhang\|Shiming Zhang]] | Saitama University — BC speech analysis/synthesis, WACF-CEP pitch extraction, LS-IIR synthesis | 2026-04-28 |
 | [[entities/boxiang-wang\|Boxiang Wang]] | NTU — MCALMS-based MVANC, directional SFANC, PD-SFANC | 2026-04-30 |
-| [[entities/junwei-ji\|Junwei Ji]] | NTU — multichannel ANC, distributed ANC, virtual sensing | 2026-04-28 |
 | [[entities/nobutaka-ito\|Nobutaka Ito]] | AIST — BSS, FastMNMF, joint diagonalization | 2026-05-20 |
-| [[entities/xiaoyi-shen\|Xiaoyi Shen]] | NTU — wireless ANC headphones, coherence-based selection, hybrid ANC | 2026-04-28 |
 | [[entities/dongyuan-shi\|Dongyuan Shi]] | NTU — meta-learning for ANC, generative fixed-filter ANC, open window ANC | 2026-04-28 |
 | [[entities/woon-seng-gan\|Woon-Seng Gan]] | NTU DSP Lab — ANC, adaptive filtering, audio signal processing | 2026-04-28 |
 | [[entities/haowen-li\|Haowen Li]] | NTU — active noise control, audio signal processing | 2026-04-30 |
@@ -460,6 +458,11 @@
 | [[entities/jeffrey-kopsick\|Jeffrey Kopsick]] | Co-author of the Intel N-DNS Challenge; Intel Labs Neuromorphic Computing Lab. | 2026-08-10 |
 | [[entities/mike-davies\|Mike Davies]] | Co-author; Director of Intel Labs Neuromorphic Computing Lab; principal investigator for Loihi 2 and the Intel N-DNS Challenge. | 2026-08-10 |
 | [[entities/karthikeyan-ramasamy\|Karthikeyan Ramasamy]] | Co-author of the Intel N-DNS Challenge; Intel Labs Neuromorphic Computing Lab. | 2026-08-10 |
+| [[entities/adam-kupryjanow\|Adam Kupryjanow]] | Design Engineering Group Poland, Intel — co-author of the Intel N-DNS Challenge; audio processing, noise suppression | 2026-08-10 |
+| [[entities/lukasz-pindor\|Lukasz Pindor]] | Design Engineering Group Poland, Intel — co-author of the Intel N-DNS Challenge; audio processing, neuromorphic denoising | 2026-08-10 |
+| [[entities/daniel-ben-dayan-rubin\|Daniel Ben Dayan Rubin]] | Neuromorphic Computing Lab, Intel Labs — co-author of the Intel N-DNS Challenge; co-developed challenge framework, evaluation methodology, and SDNN baseline | 2026-08-10 |
+| [[entities/garrick-orchard\|Garrick Orchard]] | Neuromorphic Computing Lab, Intel Labs — co-author of the Intel N-DNS Challenge; co-originator of SLAYER surrogate-gradient SNN training framework | 2026-08-10 |
+| [[entities/timothy-shea\|Timothy Shea]] | Neuromorphic Computing Lab, Intel Labs — co-author of the Intel N-DNS Challenge; co-developed challenge framework and baseline solution | 2026-08-10 |
 | [[entities/yu-guo\|Yu Guo]] | NTU DSP Lab — lead author of the survey on ANC algorithms overcoming output saturation | 2026-08-10 |
 | [[entities/xiaoyi-shen\|Xiaoyi Shen]] | NTU DSP Lab — wireless ANC, output-constrained ANC, momentum-based FxLMS variants | 2026-08-10 |
 | [[entities/junwei-ji\|Junwei Ji]] | NTU DSP Lab — output-constrained adaptive algorithms, momentum 2GD FxLMS | 2026-08-10 |
