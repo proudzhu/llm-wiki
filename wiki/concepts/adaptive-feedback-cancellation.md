@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-07
-updated: 2026-08-07
+updated: 2026-08-20
 sources:
   - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
+  - raw/papers/schepker-2016-sdp-minmax-acoustic-feedback/full-text.md
 tags:
   - acoustic-feedback
   - adaptive-filters
@@ -77,6 +78,10 @@ AFC-PF (PEM-AFROW) is the practical state of the art: ~9 dB mean / ~12 dB max Δ
 - **Multichannel AFC**: complexity scales with $S \times L$ (microphones × loudspeakers). Shared-denominator IIR models and identifiability under correlated loudspeaker signals are open problems (analogous to multichannel AEC).
 - **Hybrid AFC**: combining AFC with postfiltering, gain reduction (ANF/AEQ/NHS), or beamforming. The survey argues existing hybrids are *suboptimal* because the components are designed independently; **joint estimation** of AFC + postfilter / gain-reduction / beamformer coefficients is expected to outperform decoupled designs.
 
+## Common Part Decomposition for Parameter Reduction
+
+A complementary approach to reduce the number of adaptive parameters is [[concepts/common-part-decomposition|common part decomposition]], which models each feedback path as the convolution of a time-invariant common part (shared across paths, e.g., transducer/ear characteristics) and a time-varying variable part (tracking fast changes like telephone proximity). The common part is estimated offline from measured impulse responses, while only the lower-order variable part is adapted online. Schepker & Doclo (2016) proposed a [[concepts/min-max-common-part-estimation|min-max SDP optimization]] that directly maximizes the [[concepts/maximum-stable-gain|MSG]] rather than minimizing misalignment, yielding 2–5 dB MSG improvement over least-squares and faster AFC convergence when integrated with [[concepts/prediction-error-method|PEM]]-based adaptive filtering.
+
 ## Related Concepts
 
 - [[concepts/acoustic-feedback|Acoustic Feedback]] — the problem AFC solves
@@ -95,3 +100,4 @@ AFC-PF (PEM-AFROW) is the practical state of the art: ~9 dB mean / ~12 dB max Δ
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — deep-learning PEM-AFC extending the PEM-AFROW line for hearing aids
 - [[sources/lydaki-2026-deep-feedback-cancellation-hearing-aids|Lydaki 2026: Deep Feedback Cancellation]] — deep-learning DFC for hearing aids
 - [[sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]] — IMU-based step-size control for HA-AFC
+- [[sources/schepker-2016-sdp-minmax-acoustic-feedback|Schepker & Doclo 2016: SDP Min-max Common Part Estimation]] — common part decomposition with min-max SDP optimization for MSG maximization and faster AFC convergence

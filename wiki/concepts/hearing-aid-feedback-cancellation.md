@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-15
-updated: 2026-06-10
+updated: 2026-08-20
 sources:
   - raw/papers/zhan-2025-deeppem-afc/full-text.txt
   - raw/papers/lydaki-2026-deep-feedback-cancellation-hearing-aids/full-text.md
+  - raw/papers/schepker-2016-sdp-minmax-acoustic-feedback/full-text.md
 tags:
   - hearing-aids
   - feedback-cancellation
@@ -66,6 +67,10 @@ Recent work integrates deep learning for automatic step-size control or direct I
 - **Tracking Time**: Time to re-converge after path change
 - **WB-PESQ, eSTOI, SI-SDR**: Speech quality metrics
 
+## Common Part Decomposition
+
+A parameter-reduction approach specific to multi-microphone or multi-condition hearing aids is [[concepts/common-part-decomposition|common part decomposition]], which separates each feedback path into a time-invariant common part (shared transducer/ear characteristics, modeled as a pole-zero filter) and a time-varying variable part (modeled as an all-zero filter). Only the variable part is adapted online, reducing convergence time. Schepker & Doclo (2016) proposed a [[concepts/min-max-common-part-estimation|min-max SDP optimization]] that directly maximizes the [[concepts/maximum-stable-gain|MSG]] rather than minimizing misalignment, yielding 2–5 dB MSG improvement and faster [[concepts/prediction-error-method|PEM]]-AFC convergence. The approach is robust to unseen feedback path conditions (telephone, repositioning).
+
 ## Related Concepts
 
 - [[concepts/acoustic-feedback|Acoustic Feedback]]
@@ -81,5 +86,6 @@ Recent work integrates deep learning for automatic step-size control or direct I
 - [[sources/lydaki-2026-deep-feedback-cancellation-hearing-aids|Lydaki 2026: Deep Feedback Cancellation]] — DFC with direct IR estimation
 - [[sources/hao-2025-l3c-deepmfc|Hao et al. 2025: L3C-DeepMFC]] — Low-latency low-complexity deep marginal feedback cancellation
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC
+- [[sources/schepker-2016-sdp-minmax-acoustic-feedback|Schepker & Doclo 2016]] — common part decomposition with min-max SDP optimization for MSG maximization and faster AFC convergence
 - Waterschoot & Moonen 2011: Fifty years of acoustic feedback control
 - Spriet et al. 2008: Feedback control in hearing aids

@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-15
-updated: 2026-08-07
+updated: 2026-08-20
 sources:
   - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
+  - raw/papers/schepker-2016-sdp-minmax-acoustic-feedback/full-text.md
   - raw/papers/zhan-2025-deeppem-afc/full-text.txt
   - raw/papers/lydaki-2026-deep-feedback-cancellation-hearing-aids/full-text.md
   - raw/papers/mounir-2025-robust-early-howling-detection-sparsity/full-text.md
@@ -61,6 +62,10 @@ where F̂(k,l) is the estimated feedback path.
 
 **Tracking time** is defined as the time required for the average ASG to exceed the MSG by 3 dB following a feedback path change. This metric is critical for evaluating AFC performance in real-world scenarios where the feedback path changes (e.g., hat on/off, phone near ear).
 
+## Direct MSG Maximization via Min-max Optimization
+
+While most AFC methods aim to minimize the misalignment (filter estimation error) as a proxy for increasing MSG, [[entities/henning-schepker|Schepker]] & [[entities/simon-doclo|Doclo]] (2016) proposed directly maximizing the MSG by formulating the common part estimation as a [[concepts/min-max-common-part-estimation|min-max optimization problem solved via semidefinite programming]]. This approach minimizes the worst-case output-error across all frequencies and paths (rather than the sum of squared errors), yielding 2–5 dB MSG improvement over least-squares optimization. The trade-off is a 1–4 dB increase in misalignment — acceptable since MSG directly determines the applicable hearing aid gain, while misalignment does not.
+
 ## Related Concepts
 
 - [[concepts/hearing-aid-feedback-cancellation|Hearing Aid Feedback Cancellation]]
@@ -76,3 +81,4 @@ where F̂(k,l) is the estimated feedback path.
 - [[sources/lydaki-2026-deep-feedback-cancellation-hearing-aids|Lydaki 2026: Deep Feedback Cancellation]] — DFC achieves ~23 dB MSG for speech, ~21.5 dB for music
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — ASG and tracking time evaluation
 - [[sources/mounir-2025-robust-early-howling-detection-sparsity|Mounir, Bernardi & van Waterschoot 2025]] — uses MSG to normalize feedback paths and define the time-varying gain profile (MSG−6 dB → MSG) that triggers howling onset in the HD dataset; the howling frequency is predicted from the Nyquist criterion at $G=\mathrm{MSG}$
+- [[sources/schepker-2016-sdp-minmax-acoustic-feedback|Schepker & Doclo 2016]] — directly maximizes MSG via min-max SDP optimization of common part, yielding 2–5 dB improvement over least-squares

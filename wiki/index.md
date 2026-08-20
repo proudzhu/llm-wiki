@@ -939,6 +939,8 @@
 | [[concepts/target-speaker-vad\|Target-Speaker VAD (TS-VAD)]] | Speaker-conditioned VAD predicting target activity; multi-target extension is SOTA for diarization (CHiME-6) | 2026-08-19 |
 | [[concepts/target-speaker-asr\|Target-Speaker ASR (TS-ASR)]] | Transcribe a target speaker in a mixture given a clue; cascade / joint / integrated architectures | 2026-08-19 |
 | [[concepts/angle-feature\|Angle Feature]] | Directional feature for spatial-clue TSE: cosine of TPD-vs-IPD difference over microphone pairs | 2026-08-19 |
+| [[concepts/common-part-decomposition\|Common Part Decomposition]] | Decomposing acoustic feedback paths into time-invariant common part and time-varying variable part to reduce adaptive parameters | 2026-08-20 |
+| [[concepts/min-max-common-part-estimation\|Min-max Common Part Estimation]] | SDP-based min-max optimization directly maximizing MSG for common part estimation with Lyapunov stability constraint | 2026-08-20 |
 
 ---
 
@@ -1116,6 +1118,7 @@
 | [[sources/sawada-2019-bss-ilrma-review\|Sawada et al. 2019: BSS/ILRMA Review]] | Unified tutorial of ICA and NMF routes converging at ILRMA; determined convolutive BSS, AuxIVA, MNMF, MM algorithm with auxiliary functions | 2019 |
 | [[sources/ishikawa-2025-real-time-speech-extraction\|Ishikawa et al. 2025: Real-Time RCSCME-based Speech Extraction]] | Blockwise batch real-time RCSCME+ILRMA framework; SR-ILRMA / NSR-ILRMA regularizers using only the prior target steering vector; FastVCD / FastIP demixing updates; runs on CPU + Jetson AGX | 2025 |
 | [[sources/zmolikova-2023-neural-target-speech-extraction-overview\|Zmolikova 2023: Neural Target Speech Extraction: An Overview]] | IEEE SPM review unifying audio/visual/spatial clue neural TSE under a single framework (clue encoder + mixture encoder + fusion + target extractor) | 2026-08-19 |
+| [[sources/schepker-2016-sdp-minmax-acoustic-feedback\|Schepker & Doclo 2016: SDP Min-max Common Part Estimation]] | Min-max SDP optimization for common part estimation of acoustic feedback paths, directly maximizing MSG with Lyapunov stability constraint | 2026-08-20 |
 
 ---
 
@@ -1168,10 +1171,10 @@
 
 ## Statistics
 
-- **Total pages**: 1117
+- **Total pages**: 1120
 - **Entities**: 489
-- **Concepts**: 431
-- **Sources**: 168
+- **Concepts**: 433
+- **Sources**: 169
 - **Synthesis**: 22
 - **Queries**: 7
-- **Last updated**: 2026-08-19
+- **Last updated**: 2026-08-20

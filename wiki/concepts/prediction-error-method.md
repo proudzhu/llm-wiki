@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-15
-updated: 2026-05-15
+updated: 2026-08-20
 sources:
   - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/zhan-2025-deeppem-afc/full-text.txt
+  - raw/papers/schepker-2016-sdp-minmax-acoustic-feedback/full-text.md
 tags:
   - adaptive-filtering
   - system-identification
@@ -67,6 +68,10 @@ where Q is the overlap-save matrix. This reduces complexity significantly, makin
 - Requires careful design of whitening pre-filters
 - Performance depends on accurate speech model for pre-whitening
 
+## Integration with Common Part Decomposition
+
+PEM-based AFC can be combined with [[concepts/common-part-decomposition|common part decomposition]] to reduce the number of adaptive parameters. Schepker & Doclo (2016) used PEM-AFC with a pre-estimated common part (pole-zero filter) and a shorter adaptive variable part (24 taps instead of 36), demonstrating increased initial convergence speed and faster reconvergence after feedback path changes, while maintaining similar steady-state performance. The common part was estimated offline using [[concepts/min-max-common-part-estimation|min-max SDP optimization]] from measured free-field impulse responses.
+
 ## Related Concepts
 
 - [[concepts/acoustic-feedback|Acoustic Feedback]]
@@ -82,4 +87,5 @@ where Q is the overlap-save matrix. This reduces complexity significantly, makin
 - [[sources/vanwaterschoot-2011-fifty-years-afc|van Waterschoot & Moonen 2011]] — formalizes PEM-AFROW as the decorrelating-prefilter realization (AFC-PF) for both speech (Rombouts et al.) and audio (van Waterschoot & Moonen) applications; identifies it as the practical state-of-the-art AFC variant
 - [[sources/lydaki-2026-deep-feedback-cancellation-hearing-aids|Lydaki 2026: Deep Feedback Cancellation]] — DFC as alternative to PEM-based approaches
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC with GRU step-size prediction
+- [[sources/schepker-2016-sdp-minmax-acoustic-feedback|Schepker & Doclo 2016]] — PEM-AFC integrated with common part decomposition, showing faster convergence with fewer adaptive parameters
 - Spriet et al. 2005: Adaptive feedback cancellation in hearing aids with linear prediction of the desired signal

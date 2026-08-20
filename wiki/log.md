@@ -4500,3 +4500,24 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
   - `wiki/concepts/film-layer.md` — added "Use in Target Speech Extraction" fusion-layer survey
   - `wiki/concepts/ideal-binary-mask.md` — added "Role in Target Speech Extraction" section
   - `wiki/synthesis/deep-speech-enhancement.md` — added Zmolikova 2023 reference in Insight 8 (TSE/PSE/OVC complementarity)
+
+---
+
+## [2026-08-20] ingest | SDP Min-max Common Part Estimation (Schepker & Doclo 2016)
+
+- **Source**: `raw/papers/schepker-2016-sdp-minmax-acoustic-feedback/full-text.md` (Zotero: ADNDYTV8)
+- **Authors**: Henning Schepker, Simon Doclo
+- **Published**: IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 24, no. 2, pp. 246–257, Feb. 2016
+- **DOI**: 10.1109/TASLP.2015.2507940
+- **Summary**: Proposes a min-max SDP optimization for common part estimation of acoustic feedback paths, directly maximizing MSG (2–5 dB improvement over LS) with Lyapunov stability constraint, enabling faster AFC convergence and reduced variable-part parameters
+- **Pages created**:
+  - `wiki/sources/schepker-2016-sdp-minmax-acoustic-feedback.md`
+  - `wiki/concepts/common-part-decomposition.md`
+  - `wiki/concepts/min-max-common-part-estimation.md`
+- **Pages updated**:
+  - `wiki/entities/henning-schepker.md` — added paper, updated date, added Doclo cross-ref
+  - `wiki/entities/simon-doclo.md` — added paper, updated date, added Schepker cross-ref
+  - `wiki/concepts/adaptive-feedback-cancellation.md` — added common part decomposition section, added source
+  - `wiki/concepts/maximum-stable-gain.md` — added min-max optimization section, added source
+  - `wiki/concepts/prediction-error-method.md` — added common part integration section, added source
+  - `wiki/concepts/hearing-aid-feedback-cancellation.md` — added common part decomposition section, added source

@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-27
-updated: 2026-04-27
+updated: 2026-08-20
 tags:
   - researcher
   - acoustic-feedback-cancellation
@@ -17,6 +17,7 @@ tags:
 
 ## Key Contributions
 
+- "A Semidefinite Programming Approach to Min-max Estimation of the Common Part of Acoustic Feedback Paths in Hearing Aids" (IEEE/ACM TASLP 2016) — [[sources/schepker-2016-sdp-minmax-acoustic-feedback|Schepker & Doclo 2016]]
 - Co-author on IMU-based step-size control for AFC (ICASSP 2026)
 - Null-steering beamformer-based feedback cancellation for multi-microphone hearing aids (IEEE/ACM TASLP, 2019)
 - Stability-controlled hybrid adaptive feedback cancellation scheme (JASA, 2018)
@@ -24,6 +25,7 @@ tags:
 
 ## Related Sources
 
+- [[sources/schepker-2016-sdp-minmax-acoustic-feedback|Schepker & Doclo 2016: SDP Min-max Common Part Estimation]]
 - [[sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
 
 ## Related Concepts
@@ -32,6 +34,7 @@ tags:
 
 ## Related Entities
 
+- [[entities/simon-doclo|Simon Doclo]] — Co-author / PhD advisor
 - [[entities/sina-miran|Sina Miran]] — Co-author
 - [[entities/ivo-merks|Ivo Merks]] — Co-author
 - [[entities/martin-mckinney|Martin McKinney]] — Co-author

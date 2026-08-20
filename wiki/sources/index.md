@@ -172,4 +172,5 @@
 | [[sources/sawada-2019-bss-ilrma-review\|Sawada et al. 2019: BSS/ILRMA Review]] | Unified tutorial of ICA and NMF routes converging at ILRMA; determined convolutive BSS, AuxIVA, MNMF, MM algorithm with auxiliary functions | 2019 |
 | [[sources/ishikawa-2025-real-time-speech-extraction\|Ishikawa et al. 2025: Real-Time RCSCME-based Speech Extraction]] | Blockwise batch real-time RCSCME+ILRMA framework; SR-ILRMA / NSR-ILRMA regularizers using only the prior target steering vector; FastVCD / FastIP demixing updates; runs on CPU + Jetson AGX | 2025 |
 | [[sources/zmolikova-2023-neural-target-speech-extraction-overview\|Zmolikova 2023: Neural Target Speech Extraction: An Overview]] | IEEE SPM review unifying audio/visual/spatial clue neural TSE under a single framework (clue encoder + mixture encoder + fusion + target extractor) | 2026-08-19 |
+| [[sources/schepker-2016-sdp-minmax-acoustic-feedback\|Schepker & Doclo 2016: SDP Min-max Common Part Estimation]] | Min-max SDP optimization for common part estimation of acoustic feedback paths, directly maximizing MSG with Lyapunov stability constraint | 2026-08-20 |
 
