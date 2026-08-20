@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-16
-updated: 2026-08-16
+updated: 2026-08-20
 sources:
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
+  - raw/papers/ansari-2023-ai-bss-survey/full-text.md
 tags:
   - blind-source-separation
   - speech-enhancement
@@ -11,6 +12,7 @@ tags:
   - clustering
   - tf-mask
   - em-algorithm
+  - deep-learning
 ---
 
 # TF Mask Estimation
@@ -26,6 +28,7 @@ tags:
 
 - **Clustering-based** (static sources): features (narrowband positions, DOAs, binaural cues, or signal vectors) are modelled as a mixture density; EM estimates the parameters and the posterior source-index probabilities serve as the masks. Taseska & Habets propose an EM variant that *jointly estimates the number of sources* while clustering, using narrowband position estimates from distributed arrays, with a Gaussian-model SPP accounting for speech presence uncertainty.
 - **Tracking-based** (moving sources): the masks are obtained from the **data-association probabilities** of an approximate Bayesian multi-source tracker. The measurement-to-source association at each TF bin *is* the mask entry. This avoids the sub-optimality of online clustering for moving sources.
+- **DNN-based mask prediction** (single-channel SCSS): a DNN is trained to predict the time-frequency mask directly from the mixture spectrogram. The survey by [[sources/ansari-2023-ai-bss-survey|Ansari et al. 2023]] reports that **DNNs are the most-employed deep-learning algorithm for BSS**, with multi-DNN mask ensembles [126] (softmax/IBM/direct-source/discriminative-constraint cost functions concatenated) outperforming single-DNN predictions. Different mask types trade off distortion vs. cross-talk: ideal binary mask (IBM), ideal ratio mask (IRM), and direct soft-mask prediction each occupy a different point on the SAR/SDR/SIR frontier.
 
 ## From Masks to Separation
 
@@ -48,3 +51,4 @@ A "large gap" remains between ISFs using *oracle* TF masks and those using *esti
 ## Related Sources
 
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] (Chapters 7–8)
+- [[sources/ansari-2023-ai-bss-survey|Ansari et al. 2023: AI Approaches in BSS Survey]] — surveys DNN-based mask prediction (Refs. [124, 126, 133, 160, 167]) as a deep-learning BSS sub-area

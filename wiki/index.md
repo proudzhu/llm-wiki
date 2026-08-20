@@ -503,6 +503,13 @@
 | [[entities/yiming-he\|Yiming He]] | Nanjing University researcher; multi-reference ANC and modified LMS Newton algorithms. | 2026-08-21 |
 | [[entities/xiaofeng-nan\|Xiaofeng Nan]] | Nanjing University researcher; co-author of feedback-guided controller fusion (2026). | 2026-08-21 |
 | [[entities/kai-chen\|Kai Chen]] | Nanjing University researcher; co-author of feedback-guided controller fusion (2026) and WaveNet-VNN (2025). | 2026-08-21 |
+| [[entities/sam-ansari\|Sam Ansari]] | Researcher at University of Sharjah; first author of AI-based BSS survey (2023). | 2026-08-20 |
+| [[entities/abbas-saad-alatrany\|Abbas Saad Alatrany]] | Researcher at Liverpool John Moores University; co-author of AI-based BSS survey (2023). | 2026-08-20 |
+| [[entities/khawla-a-alnajjar\|Khawla A. Alnajjar]] | Researcher at University of Sharjah; co-author of AI-based BSS survey (2023). | 2026-08-20 |
+| [[entities/tarek-khater\|Tarek Khater]] | Researcher at University of Sharjah; co-author of AI-based BSS survey (2023). | 2026-08-20 |
+| [[entities/soliman-mahmoud\|Soliman Mahmoud]] | Researcher at University of Sharjah; co-author of AI-based BSS survey (2023). | 2026-08-20 |
+| [[entities/dhiya-al-jumeily\|Dhiya Al-Jumeily]] | Researcher at Liverpool John Moores University; co-author of AI-based BSS survey (2023). | 2026-08-20 |
+| [[entities/abir-jaafar-hussain\|Abir Jaafar Hussain]] | Researcher (corresponding author) at University of Sharjah and Liverpool John Moores University; corresponding author of AI-based BSS survey (2023). | 2026-08-20 |
 
 ---
 
@@ -1126,6 +1133,7 @@
 | [[sources/zmolikova-2023-neural-target-speech-extraction-overview\|Zmolikova 2023: Neural Target Speech Extraction: An Overview]] | IEEE SPM review unifying audio/visual/spatial clue neural TSE under a single framework (clue encoder + mixture encoder + fusion + target extractor) | 2026-08-19 |
 | [[sources/schepker-2016-sdp-minmax-acoustic-feedback\|Schepker & Doclo 2016: SDP Min-max Common Part Estimation]] | Min-max SDP optimization for common part estimation of acoustic feedback paths, directly maximizing MSG with Lyapunov stability constraint | 2026-08-20 |
 | [[sources/bai-2026-feedback-guided-anc\|Bai 2026: Feedback-guided DNN-based Controller Fusion for Robust Fixed-Parameter ANC]] | Hybrid WaveNet + feedback-guided MoE of FIR experts for robust fixed-parameter ANC; 19 dB avg NR (50Hz-5kHz) on CCF-AATC headphone ANC. | 2026-08-21 |
+| [[sources/ansari-2023-ai-bss-survey\|Ansari et al. 2023: AI Approaches in BSS Survey]] | Survey of AI-based BSS (Classical ML / DL / Evolutionary) with three-way taxonomy, benchmark tables, complexity comparison, and edge/mobile future directions. | 2026-08-20 |
 
 ---
 
@@ -1178,10 +1186,10 @@
 
 ## Statistics
 
-- **Total pages**: 1127
-- **Entities**: 493
+- **Total pages**: 1135
+- **Entities**: 500
 - **Concepts**: 435
-- **Sources**: 170
+- **Sources**: 171
 - **Synthesis**: 22
 - **Queries**: 7
 - **Last updated**: 2026-08-21

@@ -1,15 +1,19 @@
 ---
 type: concept
 created: 2026-05-21
-updated: 2026-08-08
+updated: 2026-08-20
 sources:
   - raw/papers/guo-2023-iva-survey/full-text.md
   - raw/papers/dong-2026-spatially-regularized-switching-iva/full-text.md
   - raw/papers/richard-2023-audio-signal-processing-21st-century/full-text.md
+  - raw/papers/ansari-2023-ai-bss-survey/full-text.md
 tags:
   - signal-processing
   - audio-source-separation
   - unsupervised-methods
+  - machine-learning
+  - deep-learning
+  - evolutionary-algorithms
 ---
 
 # Blind Source Separation
@@ -35,6 +39,24 @@ $$\mathbf{x}^{(k)}[z] = \mathbf{A}^{(k)}\mathbf{s}^{(k)}[z]$$
 | [[concepts/switching-independent-vector-analysis\|SwIVA]] | Multiple demixing matrices | Switching mechanism + spatial regularization |
 | ILRMA | IVA + NMF source model | Via NMF spectral structure |
 | [[concepts/fastmnmf\|FastMNMF]] | Full-rank SCM + NMF | Joint diagonalization |
+
+## AI-Based BSS Taxonomy
+
+[[sources/ansari-2023-ai-bss-survey|Ansari et al. 2023]] propose a distinctive three-way taxonomy of **AI-based BSS approaches**, complementing the classical statistical BSS lineage (ICA/IVA/ILRMA/FastMNMF) tabulated above. The survey consolidates ~60 surveyed papers (2003–2023) into:
+
+| Approach | Representative algorithms | Surveyed references |
+|----------|---------------------------|---------------------|
+| **Classical machine learning** | FNN, variational Bayes / VB-EM, customized EM, MLP, WMM-MAP, MAP, DBSCAN, K-means, AP, SVM, fuzzy c-means, RBF, CSKC, BNN, ANN, KAM, RF, IBM, K-hyperline clustering, CFSFDP, bigradient neural network | [89, 102–109, 111–113, 115–123, 135, 149–161, 174] |
+| **Deep learning** | DNN, RNN, CNN, Conv-TasNet, BLSTM, DRNN, GAN, DAN, deep clustering, GRU, LSTM, deep fully CDAE, BRNN, mixed-type detection hierarchical DNN, VAE, GAN+VAEM, Transformer-based networks (SepFormer, Demucs) | [86, 97, 124–126, 129–137, 162–172] |
+| **Evolutionary / swarm intelligence** | PSO, GA, CGA, BCO, ACO, DE, ABC, HEPSO, QPSO, BCC, BCA, DNPSO, quantum GA, FPA, cat swarm | [138–140, 142–148, 173–182] |
+
+The survey benchmarks these methods across audio, speech, music, voice, and source separation applications (Tables 1, 5, 6) and contrasts their computational complexity (Tables 7, 8). Key cross-method findings:
+
+- **DL dominates when labeled data is abundant** but at substantially higher computational cost than classical statistical methods.
+- **Classical ML reaches strong SIR/SDR on synthetic data** (e.g., FastICA with ML contrast: SDR 49.70 dB / SIR 51.33 dB / SAR 54.76 dB), but performance is data-specific.
+- **Evolutionary methods** are most often used to optimize ICA / FastICA contrast functions or solve nonlinear BSS; their performance is problem-dependent (MABC+covariance-ratio reaches SNR 25.84 dB on speech/music, while ABC permutation alignment reaches only SDR 1.85 dB).
+- **Heterogeneous metrics across studies** make fair cross-study comparison difficult; the survey calls for a standardized perceptual evaluation framework and explicit Big-O complexity reporting.
+- **Open challenges**: speed/accuracy trade-off, multipurpose BSS models, robustness/scalability, underdetermined convolutive cases, non-harmonic instruments, nonlinear mixing, hybrid ML models, edge/mobile/on-device deployment, and transfer learning for data-scarce domains.
 
 ## Key Challenges
 
@@ -75,3 +97,4 @@ $$\mathbf{x}^{(k)}[z] = \mathbf{A}^{(k)}\mathbf{s}^{(k)}[z]$$
 - [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023: Audio Signal Processing in the 21st Century]] — 25-year retrospective tracing the determined and monophonic BSS lineages
 - [[sources/sawada-2019-bss-ilrma-review|Sawada et al. 2019: BSS/ILRMA Review]] — unified tutorial of the ICA and NMF routes converging at ILRMA
+- [[sources/ansari-2023-ai-bss-survey|Ansari et al. 2023: AI Approaches in BSS Survey]] — three-way taxonomy of AI-based BSS (Classical ML / DL / Evolutionary) complementing the statistical lineage above

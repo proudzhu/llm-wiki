@@ -497,4 +497,11 @@
 | [[entities/yiming-he\|Yiming He]] | Nanjing University researcher; multi-reference ANC and modified LMS Newton algorithms. | 2026-08-21 |
 | [[entities/xiaofeng-nan\|Xiaofeng Nan]] | Nanjing University researcher; co-author of feedback-guided controller fusion (2026). | 2026-08-21 |
 | [[entities/kai-chen\|Kai Chen]] | Nanjing University researcher; co-author of feedback-guided controller fusion (2026) and WaveNet-VNN (2025). | 2026-08-21 |
+| [[entities/sam-ansari\|Sam Ansari]] | Researcher at University of Sharjah; first author of AI-based BSS survey (2023). | 2026-08-20 |
+| [[entities/abbas-saad-alatrany\|Abbas Saad Alatrany]] | Researcher at Liverpool John Moores University; co-author of AI-based BSS survey (2023). | 2026-08-20 |
+| [[entities/khawla-a-alnajjar\|Khawla A. Alnajjar]] | Researcher at University of Sharjah; co-author of AI-based BSS survey (2023). | 2026-08-20 |
+| [[entities/tarek-khater\|Tarek Khater]] | Researcher at University of Sharjah; co-author of AI-based BSS survey (2023). | 2026-08-20 |
+| [[entities/soliman-mahmoud\|Soliman Mahmoud]] | Researcher at University of Sharjah; co-author of AI-based BSS survey (2023). | 2026-08-20 |
+| [[entities/dhiya-al-jumeily\|Dhiya Al-Jumeily]] | Researcher at Liverpool John Moores University; co-author of AI-based BSS survey (2023). | 2026-08-20 |
+| [[entities/abir-jaafar-hussain\|Abir Jaafar Hussain]] | Researcher (corresponding author) at University of Sharjah and Liverpool John Moores University; corresponding author of AI-based BSS survey (2023). | 2026-08-20 |
 

@@ -3649,7 +3649,6 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 - **Notes**: R. M. Figin (R·M·菲金) listed as plain text in the source page because the exact English spelling could not be confirmed from the CN patent or the English PCT bibliographic data; the other three inventors use standard pinyin romanizations. No synthesis page updated — the patent reports no comparative benchmarks and its multi-task IRM extension is a training-strategy note rather than a low-latency architecture contribution.
 
 ---
----
 
 ## [2026-08-01] ingest | ICCRN: Inplace Cepstral CRN for Monaural Speech Enhancement (Liu & Zhang 2023)
 
@@ -3862,6 +3861,8 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 - **Orphan pages**: 1 — `sources/why-mathematica-not-simplify-sinh-arccosh` has zero inbound references from any wiki page, index, or log entry. Consider linking it from a relevant concept page or removing it.
 - **Statistics**: All stated counts match actual file counts. Entities 410=410, Concepts 369=369, Sources 145=145, Synthesis 20=20, Queries 7=7, Total pages 951=951. Last updated 2026-08-03.
 - **Actions taken**: No index rebuild needed (no drift). Convention violations (278 total: 192 missing-prefix + 30 `wiki/`-prefix + 38 `../`-prefix + 18 log.md refs) are auto-fixable via `wiki-link-fixer` skill but were not applied in this lint pass — run `uv run python .agents/skills/wiki-link-fixer/scripts/fix_links.py --dry-run` to preview, then `fix_links.py` to apply. Truly broken links (130) require manual triage: 1 placeholder to delete, 129 missing figure assets to extract or de-reference.
+
+---
 
 ## [2026-08-04] ingest | Synthesis — Deep Speech Enhancement
 
@@ -4161,6 +4162,8 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/concepts/index.md` — added 3 concept rows
 - **Synthesis**: triage ran (2 candidate pages by tag overlap); skipped updates — Liu 2024 is CV/ML-focused, does not add a substantive data point to the ANC-focused `computational-efficiency-evolution.md` synthesis; cross-reference in source page's Related Synthesis section is sufficient
 
+---
+
 ## [2026-08-10] ingest | Timcheck et al. 2023: The Intel Neuromorphic DNS Challenge
 
 - **Source**: `raw/papers/timcheck-2023-intel-neuromorphic-dns-challenge/full-text.md` (MinerU extraction from arXiv 2303.09503 PDF; Zotero item key `0_TJJYB8BC`)
@@ -4217,7 +4220,7 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
 - **Indexes**: updated `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` with 6 new entries (1 source + 3 entities + 2 concepts). Statistics recounted and verified with `check_statistics.py`: total=1039, entities=456, concepts=398, sources=157, synthesis=21, queries=7 — all counts match actual files. (Note: entities actual=456 vs +3 from the prior 455 baseline indicates a pre-existing 2-file drift that this ingest corrected in the stated count.)
 - **Verification**: `mkdocs build --strict` passed (exit 0, no page-level warnings).
 
-
+---
 
 ## [2026-08-11] ingest | Efficient Neural Networks for Tiny Machine Learning: A Comprehensive Review (Lê, Wolinski & Arbel 2026)
 
@@ -4297,7 +4300,6 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
 ---
 
 ## [2026-08-14] ingest | Real-Time PLC (Valin 2022)
-
 
 ---
 
@@ -4418,6 +4420,8 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/entities/index.md` — added 1 entity row
   - `wiki/concepts/index.md` — added 7 concept rows
 
+---
+
 ## [2026-08-19] ingest | Sawada et al. 2019: BSS/ILRMA Review
 
 - **Source**: `raw/papers/sawada-2019-bss-ilrma-review/full-text.md` (extracted via MinerU from Zotero PDF)
@@ -4441,6 +4445,8 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 4 entity rows
   - `wiki/concepts/index.md` — added 2 concept rows
+
+---
 
 ## [2026-08-19] ingest | Ishikawa et al. 2025: Real-Time RCSCME-based Speech Extraction
 
@@ -4470,7 +4476,6 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
   - `wiki/sources/index.md` — added 1 source row
   - `wiki/entities/index.md` — added 4 entity rows
   - `wiki/concepts/index.md` — added 2 concept rows
-
 
 ---
 
@@ -4524,6 +4529,20 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
 
 ---
 
+## [2026-08-20] ingest | AI Approaches in BSS Survey (Ansari 2023)
+
+- **Source**: `raw/papers/ansari-2023-ai-bss-survey/full-text.md` (Zotero: ND66R5YG)
+- **Authors**: Sam Ansari, Abbas Saad Alatrany, Khawla A. Alnajjar, Tarek Khater, Soliman Mahmoud, Dhiya Al-Jumeily, Abir Jaafar Hussain
+- **Published**: Neurocomputing, 2023, art. 126895
+- **DOI**: 10.1016/j.neucom.2023.126895
+- **Summary**: Systematic literature survey of AI-based BSS proposing a three-way taxonomy (Classical ML / DL / Evolutionary), with benchmark tables, complexity comparison, and a forward-looking edge/mobile deployment roadmap. Applies the review-paper source-page template and the stricter concept-page threshold — only the AI-based-BSS taxonomy synthesis warranted updating the existing [[concepts/blind-source-separation]] page; no new concept pages were created.
+- **Pages created**: 1 source (`wiki/sources/ansari-2023-ai-bss-survey.md`) + 7 entity pages (`wiki/entities/sam-ansari.md`, `abbas-saad-alatrany.md`, `khawla-a-alnajjar.md`, `tarek-khater.md`, `soliman-mahmoud.md`, `dhiya-al-jumeily.md`, `abir-jaafar-hussain.md`)
+- **Pages updated**: 4 concept pages — `wiki/concepts/blind-source-separation.md` (added "AI-Based BSS Taxonomy" section with the three-way classification, cross-method findings, and open challenges), `wiki/concepts/tf-mask-estimation.md` (added DNN-based mask-prediction bullet and survey reference), `wiki/concepts/deep-clustering-speech-separation.md` (added survey reference), `wiki/concepts/cocktail-party-problem.md` (added survey reference)
+- **Synthesis pages updated**: none — triage found only `deep-speech-enhancement.md` with 2 broad shared tags (deep-learning, survey), and the Ansari survey adds no new deep-speech-enhancement frontier data point, so the trigger checklist did not fire.
+- **Routing note**: title contains "survey" — review-paper template applied (Summary / Taxonomy / Methodology / Applications Survey / Key Contributions / Limitations and Caveats). Stricter concept-page threshold applied; the survey's distinctive synthesis (the three-way AI-based-BSS taxonomy) was placed on the existing [[concepts/blind-source-separation]] page rather than spawning a new page.
+
+---
+
 ## [2026-08-21] ingest | Feedback-guided DNN-based Controller Fusion for Robust Fixed-Parameter ANC (Bai 2026)
 
 - **Source**: `raw/papers/bai-2026-feedback-guided-anc/full-text.md` (Zotero: MPHR6YAJ, arXiv: 2608.14061)
@@ -4548,3 +4567,5 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
   - `wiki/synthesis/ai-driven-anc.md` — added Section 2.5 (Feedback-Guided Controller Fusion as 4th architectural pattern), efficiency frontier table row, and Related Sources entry; new comparison axis: reference-only vs. reference+error feedback
   - `wiki/index.md`, `wiki/sources/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md` — 7 new entries, stats recounted
 - **Extraction**: arXiv HTML via defuddle (v1 URL fallback after the unversioned URL returned 404); 5 figures (architecture, 2× NR spectra, time-domain, third-octave) downloaded and embedded as `![[raw/papers/.../figures/figN.png|caption]]`.
+
+---

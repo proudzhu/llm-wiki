@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-06-01
-updated: 2026-06-01
+updated: 2026-08-20
+sources:
+  - raw/papers/ansari-2023-ai-bss-survey/full-text.md
 tags:
   - speech-separation
   - speaker-separation
@@ -39,3 +41,4 @@ The DNN learns high-dimensional embeddings for each time-frequency unit such tha
 ## Related Sources
 
 - [[sources/wang-2018-supervised-speech-separation-deep-learning-overview|Wang & Chen 2018: Supervised Speech Separation Based on Deep Learning: An Overview]]
+- [[sources/ansari-2023-ai-bss-survey|Ansari et al. 2023: AI Approaches in BSS Survey]] — classifies deep clustering as one of the surveyed DL-based BSS methods (Refs. [97, 137, 160]).

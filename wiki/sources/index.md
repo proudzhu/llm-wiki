@@ -174,4 +174,5 @@
 | [[sources/zmolikova-2023-neural-target-speech-extraction-overview\|Zmolikova 2023: Neural Target Speech Extraction: An Overview]] | IEEE SPM review unifying audio/visual/spatial clue neural TSE under a single framework (clue encoder + mixture encoder + fusion + target extractor) | 2026-08-19 |
 | [[sources/schepker-2016-sdp-minmax-acoustic-feedback\|Schepker & Doclo 2016: SDP Min-max Common Part Estimation]] | Min-max SDP optimization for common part estimation of acoustic feedback paths, directly maximizing MSG with Lyapunov stability constraint | 2026-08-20 |
 | [[sources/bai-2026-feedback-guided-anc\|Bai 2026: Feedback-guided DNN-based Controller Fusion for Robust Fixed-Parameter ANC]] | Hybrid WaveNet + feedback-guided MoE of FIR experts for robust fixed-parameter ANC; 19 dB avg NR (50Hz-5kHz) on CCF-AATC headphone ANC. | 2026-08-21 |
+| [[sources/ansari-2023-ai-bss-survey\|Ansari et al. 2023: AI Approaches in BSS Survey]] | Survey of AI-based BSS (Classical ML / DL / Evolutionary) with three-way taxonomy, benchmark tables, complexity comparison, and edge/mobile future directions. | 2026-08-20 |
 
