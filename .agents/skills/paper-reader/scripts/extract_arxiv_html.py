@@ -41,14 +41,23 @@ def resolve_defuddle():
 
 
 def check_arxiv_html(arxiv_id):
-    """Return True if arXiv HTML version exists."""
-    url = f"https://arxiv.org/html/{arxiv_id}"
-    try:
-        req = urllib.request.Request(url, method='HEAD')
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            return resp.status == 200
-    except Exception:
-        return False
+    """Return True if arXiv HTML version exists.
+
+    Tries the unversioned URL first (canonical), then falls back to the v1
+    URL — arXiv sometimes only serves the versioned HTML page for very recent
+    submissions. Returns the resolved URL via the second tuple element so the
+    caller can use the working URL for defuddle.
+    """
+    for url in (f"https://arxiv.org/html/{arxiv_id}",
+                f"https://arxiv.org/html/{arxiv_id}v1"):
+        try:
+            req = urllib.request.Request(url, method='HEAD')
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                if resp.status == 200:
+                    return url
+        except Exception:
+            continue
+    return None
 
 
 def check_defuddle():
@@ -155,14 +164,14 @@ def main():
 
     # Step 1: Verify arXiv HTML exists
     print(f"Checking arXiv HTML for {args.arxiv_id} ...")
-    if not check_arxiv_html(args.arxiv_id):
+    html_url = check_arxiv_html(args.arxiv_id)
+    if html_url is None:
         print(f"arXiv HTML not available for {args.arxiv_id} (404).")
         print("FALLBACK: Use extract_mineru.py instead.")
         sys.exit(2)
 
     # Step 2: Extract markdown with Defuddle
-    url = f"https://arxiv.org/html/{args.arxiv_id}"
-    run_defuddle(url, md_path)
+    run_defuddle(html_url, md_path)
 
     # Step 3: Download figures
     print("\nDownloading figures ...")
