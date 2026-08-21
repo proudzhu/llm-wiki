@@ -1,6 +1,6 @@
 ---
 type: entity
-created: 2026-05-20
+created: 2026-08-22
 updated: 2026-08-22
 tags:
   - researcher
@@ -9,19 +9,17 @@ tags:
   - meta
 ---
 
-# Li Wan
+# Yang Liu
 
 **Affiliation**: Meta (Reality Labs)
 **Role**: Researcher
-**Research Focus**: Automatic speech recognition, multi-channel ASR, end-to-end ASR.
+**Research Focus**: Speech recognition / ASR; side-talk rejection on smart glasses.
 
 ## Key Contributions
 
-- Co-author of directional source separation on Project Aria smart glasses (ICASSP 2025)
-- Co-author of streaming end-to-end ASR (Google, ICASSP 2020)
 - Co-author of "Multi-Channel Differential ASR for Robust Wearer Speech Recognition on Smart Glasses" (arXiv 2025) — [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025]]
+- Co-author of MMW (Multi-Microphone Whisper) on smart glasses with side-talk rejection (ASRU 2025, ref [23] in Yang 2025)
 
 ## Related Sources
 
-- [[sources/feng-2025-directional-source-separation-smart-glasses|Feng et al. 2025: Directional Source Separation for Smart Glasses]]
 - [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]]

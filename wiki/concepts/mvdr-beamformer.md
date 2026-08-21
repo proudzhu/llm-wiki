@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-08-16
+updated: 2026-08-22
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
+  - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
 tags:
   - beamforming
   - speech-enhancement
@@ -48,6 +49,10 @@ Jin et al. (2017) adopt the standard **MVDR + single-channel Wiener post-filter*
 
 Taseska & Habets develop the [[concepts/informed-spatial-filter|informed spatial filter]] paradigm, where the MVDR filter is re-computed per TF bin using the *undesired*-signal PSD matrix $\boldsymbol{\Phi}_{\mathbf{u}}$ and the desired-signal RTF vector $\mathbf{g}$, both estimated online via a narrowband signal detector. Using $\boldsymbol{\Phi}_{\mathbf{u}}$ (rather than the microphone PSD matrix $\boldsymbol{\Phi}_{\mathbf{y}}$ of MPDR) avoids the signal-distortion sensitivity to RTF mismatch, because the RTF is *estimated from data* rather than modelled anechoically. The detector is application-dependent: a CDR-based a priori SAP for noise reduction (Ch 3), a DOA model-based detector for competing-talker extraction (Ch 4), and a position-based detector for spotforming (Ch 6). The informed MVDR can equivalently be implemented as an [[concepts/informed-gsc|informed GSC]] without per-bin matrix inversion.
 
+## Wearer-Focused Adjusted MVDR (Yang et al. 2025)
+
+Yang et al. (2025) adopt an internal adjusted MVDR for [[concepts/wearer-speech-recognition|WSR]] on Ray-Ban Meta smart glasses (5-mic array), with the beamformer steered to the wearer's mouth only. This contrasts with the [[concepts/nlcmv-beamforming|NLCMV]] beamformer of AGADIR (Lin et al. 2024), which steers multiple directions to support conversational ASR of both wearer and bystander. For pure WSR, the single-direction MVDR is reported as more suitable than NLCMV. The MVDR output (`ch-x`) is then used as one of three complementary frontends in the [[concepts/differential-asr|differential ASR]] framework, alongside a fixed microphone selection (`ch-0`) and a [[concepts/side-talk-detection|side-talk detection]] embedding. The combination achieves 18.0% relative WER reduction on real side-talk data over the noisy-trained single-MVDR-frontend baseline.
+
 ## Related Concepts
 
 - [[concepts/beamforming|Beamforming]]
@@ -67,6 +72,8 @@ Taseska & Habets develop the [[concepts/informed-spatial-filter|informed spatial
 - [[concepts/speech-presence-probability|Speech Presence Probability (SPP)]] — soft-decision VAD used to gate noise covariance updates for MVDR post-filtering
 - [[concepts/informed-spatial-filter|Informed Spatial Filter (ISF)]] — per-bin MVDR re-computed from detector-driven online statistics (Taseska & Habets 2018)
 - [[concepts/informed-gsc|Informed GSC]] — adaptive, matrix-inversion-free implementation of the informed MVDR
+- [[concepts/nlcmv-beamforming|NLCMV Beamforming]] — multi-direction, multi-constraint extension (Lin et al. 2024)
+- [[concepts/differential-asr|Differential ASR]] — framework where MVDR is one of several parallel frontends (Yang et al. 2025)
 
 ## Related Sources
 
@@ -78,3 +85,4 @@ Taseska & Habets develop the [[concepts/informed-spatial-filter|informed spatial
 - [[sources/liu-2026-array-invariant-speech-enhancement|Liu, Zhang, Li & Qian 2026: Array-Invariant SE via Geo-DConv]]
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — MVDR + adaptive coherence post-filter on a 3-mic Huawei Mate 8
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] — per-bin informed MVDR with detector-driven online statistics
+- [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] — wearer-focused adjusted MVDR as one frontend in a differential ASR system

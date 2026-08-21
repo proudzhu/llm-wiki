@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-08-15
+updated: 2026-08-22
 sources:
   - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.txt
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
+  - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
 tags:
 - acoustics
 - antenna-theory
@@ -73,6 +74,10 @@ The beamformer's directivity increases with SH order $L$, but higher orders requ
 
 Apostolidis et al. (2026) propose an [[concepts/output-based-speech-enhancement|output-based]] paradigm in which a discrete dictionary of candidate [[concepts/mpdr-beamformer|MPDR]] beamformers (one per candidate target direction in a pre-enrolled [[concepts/relative-transfer-function|RTF]] dictionary) is evaluated by computing [[concepts/glimpse-proportion|Glimpse Proportion]] from each candidate's output via a neural [[concepts/voice-activity-detection|VAD]]. The candidate maximizing GP is selected per segment. This wrapper rehabilitates MPDR (notoriously sensitive to steering-vector mismatch in conventional usage) by searching over the dictionary rather than committing to a single steering vector, and it significantly outperforms an input-based [[concepts/mvdr-beamformer|MVDR]] baseline especially at low input SNR and under RTF mismatch.
 
+## Differential ASR with MVDR Frontend
+
+Yang et al. (2025) introduce [[concepts/differential-asr|differential ASR]], a design pattern in which a single beamformer (an adjusted MVDR steered to the wearer's mouth on Ray-Ban Meta smart glasses) is only **one of several parallel frontends** feeding a streaming RNN-T ASR backbone. The other two frontends are a fixed microphone selection (the nose mic, highest SNR) and a [[concepts/side-talk-detection|side-talk detection]] embedding. All frontends are frozen; only the ASR model and small feature-extraction layers are trained. The differential framework achieves up to 18.0% relative WER reduction on real side-talk data over the single-MVDR-frontend baseline, and is the first paper in the smart-glasses ASR line (after [[sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition|AGADIR]] and [[sources/feng-2025-directional-source-separation-smart-glasses|Feng 2025]]) to break the "single beamformer as frontend" assumption.
+
 ## Related Concepts
 
 - [[transparency-mode|Transparency Mode]]
@@ -105,3 +110,4 @@ Apostolidis et al. (2026) propose an [[concepts/output-based-speech-enhancement|
 - [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]]
 - [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis et al. 2026: Listen first — output-based multi-microphone speech enhancement]]
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev, Mihov, Gleghorn & Acero 2008: Sound Capture System and Spatial Filter for Small Devices]] — difference-maximizing front/back beamformer for back-to-back unidirectional microphone arrays
+- [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] — adjusted MVDR as one of three complementary frontends in differential ASR

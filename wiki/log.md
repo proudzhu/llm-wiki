@@ -4569,3 +4569,39 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
 - **Extraction**: arXiv HTML via defuddle (v1 URL fallback after the unversioned URL returned 404); 5 figures (architecture, 2× NR spectra, time-domain, third-octave) downloaded and embedded as `![[raw/papers/.../figures/figN.png|caption]]`.
 
 ---
+---
+
+## [2026-08-22] ingest | Multi-Channel Differential ASR for Robust Wearer Speech Recognition on Smart Glasses (Yang et al. 2025)
+
+- **Source**: `raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md` (Zotero: UVUJA5LX)
+- **Authors**: Yufeng Yang, Yiteng Huang, Yong Xu, Li Wan, Suwon Shon, Yang Liu, Yifeng Fan, Zhaojun Yang, Olivier Siohan, Yue Liu, Ming Sun, Florian Metze
+- **Published**: arXiv:2509.14430, 2025
+- **DOI**: arXiv:2509.14430
+- **Summary**: Multi-channel differential ASR — beamformer + close-mic + STD embedding as parallel frontends to a streaming RNN-T for robust wearer speech recognition on Ray-Ban Meta smart glasses; up to 18.0% relative WER reduction on real side-talk data over single-MVDR-frontend baseline.
+- **Pages created**:
+  - `raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md` — Defuddle extraction from arXiv HTML (4 figures downloaded)
+  - `wiki/sources/yang-2025-mc-differential-asr-smart-glasses.md` — source page
+  - `wiki/entities/yufeng-yang.md` — lead author (PhD intern at Meta)
+  - `wiki/entities/yong-xu.md` — co-author (Meta)
+  - `wiki/entities/suwon-shon.md` — co-author (Meta)
+  - `wiki/entities/yang-liu.md` — co-author (Meta, also MMW side-talk rejection ASRU 2025)
+  - `wiki/entities/yifeng-fan.md` — co-author (Meta)
+  - `wiki/entities/zhaojun-yang.md` — co-author (Meta)
+  - `wiki/entities/olivier-siohan.md` — co-author (Meta)
+  - `wiki/entities/yue-liu.md` — co-author (Meta)
+  - `wiki/entities/florian-metze.md` — co-author (CMU faculty; also AGADIR co-author)
+  - `wiki/concepts/differential-asr.md` — novel framework introduced by this paper
+  - `wiki/concepts/side-talk-detection.md` — VAD-adjacent task; distinctive TCN-based streaming formulation
+  - `wiki/concepts/wearer-speech-recognition.md` — central research area for the smart-glasses ASR line (AGADIR, Feng 2025, Yang 2025)
+- **Pages updated**:
+  - `wiki/entities/li-wan.md` — appended new paper bullet + cross-ref
+  - `wiki/entities/ming-sun.md` — appended new paper bullet
+  - `wiki/entities/yiteng-huang.md` — appended new paper bullet
+  - `wiki/concepts/nlcmv-beamforming.md` — added "WSR vs. Conversational Directional ASR" section contrasting NLCMV with adjusted MVDR
+  - `wiki/concepts/mvdr-beamformer.md` — added "Wearer-Focused Adjusted MVDR (Yang 2025)" section + cross-refs to NLCMV and Differential ASR
+  - `wiki/concepts/beamforming.md` — added "Differential ASR with MVDR Frontend" section
+  - `wiki/concepts/voice-activity-detection.md` — added "Side-Talk Detection as Role-Conditional VAD" section
+  - `wiki/concepts/multi-channel-speech-enhancement.md` — added Differential ASR technique bullet + cross-refs
+  - `wiki/concepts/target-speaker-asr.md` — added "Privacy-Preserving Alternative: Differential ASR" section
+  - `wiki/synthesis/multi-channel-speech-enhancement.md` — extended "where the decision lives" axis from {input, output} to {input, output, multi-frontend-fusion}; added Yang 2025 to Sources table and smart-glasses application row; updated thesis statement and Cross-Cutting Takeaway #4
+  - `wiki/index.md`, `wiki/sources/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/synthesis/index.md` — added 13 new entries; statistics updated to 1148/509/438/172/22/7

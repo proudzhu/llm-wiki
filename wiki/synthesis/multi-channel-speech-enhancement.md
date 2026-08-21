@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-16
-updated: 2026-08-16
+updated: 2026-08-22
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/schwarz-2015-coherent-to-diffuse-power-ratio/full-text.md
@@ -21,6 +21,7 @@ sources:
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
   - raw/papers/li-2026-geometry-conditioned-ssanc/full-text.md
   - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.txt
+  - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
 tags:
   - multi-channel-speech-enhancement
   - beamforming
@@ -31,11 +32,12 @@ tags:
   - array-invariant
   - neural-beamforming
   - evolution
+  - differential-asr
 ---
 
 # Multi-Channel Speech Enhancement: From Coherence Models to Geometry-Conditioned Neural Filters
 
-> Cross-source synthesis tracing how multi-channel speech enhancement (MCSE) evolved along five largely independent axes — **what to estimate** (DOA → coherence → CDR → SCM → filter weights), **how to guarantee robustness** (ellipsoidal → Kantorovich → data-driven WNG), **where the decision lives** (input-based vs. output-based), **how to handle array geometry** (fixed → agnostic → conditioned), and **how to fuse data-driven estimation with classical structure** (purely classical → hybrid DNN-guided → end-to-end neural). The thesis: classical statistical-model MCSE is not obsolete in 2026 — it survives as the interpretability backbone of hybrid systems and the deployment-ready choice for resource-constrained hearables.
+> Cross-source synthesis tracing how multi-channel speech enhancement (MCSE) evolved along five largely independent axes — **what to estimate** (DOA → coherence → CDR → SCM → filter weights), **how to guarantee robustness** (ellipsoidal → Kantorovich → data-driven WNG), **where the decision lives** (input-based → output-based → multi-frontend fusion), **how to handle array geometry** (fixed → agnostic → conditioned), and **how to fuse data-driven estimation with classical structure** (purely classical → hybrid DNN-guided → end-to-end neural). The thesis: classical statistical-model MCSE is not obsolete in 2026 — it survives as the interpretability backbone of hybrid systems and the deployment-ready choice for resource-constrained hearables.
 
 ## Scope and Relationship to Other Syntheses
 
@@ -153,6 +155,8 @@ Results at $\text{SNR}_i = -5$ dB: ΔSNR of 10.64 dB (MPDR$_F$) vs 6.69 dB (inpu
 
 **Why this matters for the synthesis**: the input→output inversion is a **structural** contribution, not a parameter-tuning one. It generalizes beyond beamforming — any SE system with a discrete configuration space (filter order, tradeoff parameter, array subset) can in principle be wrapped in an output-based selector. The 2026 work is the first to demonstrate it concretely for hearing-aid MPDR, rehabilitating a filter that classical robustness analysis (Insight 2) had largely sidelined.
 
+**A third "where" axis — multi-frontend fusion (Yang 2025)**: [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025]] introduce a third option orthogonal to input-based vs. output-based: rather than parameterize one filter (input-based) or select one output (output-based), **feed the downstream model multiple complementary frontend outputs in parallel**. Their differential ASR system concatenates a beamformer output (ch-x), a fixed microphone-selection output (ch-0), and a 5-dim side-talk-detection embedding as parallel input channels to a streaming RNN-T, with all frontends frozen (<1M additional trainable parameters). The 18.0% relative WER reduction over the single-MVDR-frontend baseline shows that breaking the "single frontend" assumption is a substantive structural axis — and while framed for ASR, the pattern is directly portable to MCSE pipelines that currently feed only one beamformer output to downstream consumers (ASR, codecs, assistants). The "where the decision lives" axis therefore expands from {input, output} to {input, output, multi-frontend-fusion}.
+
 ## Insight 6: Array Geometry — From Fixed to Agnostic to Conditioned
 
 Array-geometry handling has three phases, each relaxing an assumption of the previous:
@@ -187,7 +191,7 @@ The corpus shows that **form factor and use case, not algorithmic novelty, are t
 |-------------|-----------|------------------------|----------------|
 | **Hearing aids** | Sub-mW compute, binaural cue preservation, no training data | Classical CDR/GMC + binaural coherence models; output-based MPDR with dictionary | [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement\|Löllmann 2020]], [[sources/farmani-2026-virtual-mic-beamforming-hearing-aid\|Farmani 2026]], [[sources/apostolidis-2026-listen-first-output-based-multi-microphone\|Apostolidis 2026]] |
 | **Mobile phones** | 2–3 mics, <10 mm baseline, hands-free at arm's length | Level-difference-dominated post-filters; back-to-back unidirectional capsules; adaptive coherence NE with split-frequency | [[sources/tashev-2008-sound-capture-spatial-filter\|Tashev 2008]], [[sources/jin-2017-multichannel-noise-reduction-mobile\|Jin 2017]] |
-| **Smart glasses** | Sub-2 ms latency, 6-mic wearable array, head motion | Time-domain ROI beamforming (2× lower latency than STFT); NLCMV with WNG + null control; multi-geometry training | [[sources/frank-2026-low-latency-roi-beamforming\|Frank 2026]], [[sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition\|AGADIR 2024]] |
+| **Smart glasses** | Sub-2 ms latency, 6-mic wearable array, head motion | Time-domain ROI beamforming (2× lower latency than STFT); NLCMV with WNG + null control; multi-geometry training; multi-frontend differential ASR (beamformer + close-mic + STD embedding) | [[sources/frank-2026-low-latency-roi-beamforming\|Frank 2026]], [[sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition\|AGADIR 2024]], [[sources/yang-2025-mc-differential-asr-smart-glasses\|Yang 2025]] |
 | **ASR front-end** | Recognition-rate optimization, robustness to reverberation | CDR post-filter + spatial features as DNN-ASR input (beyond signal enhancement) | [[sources/schwarz-2015-coherent-to-diffuse-power-ratio\|Schwarz 2015]], [[sources/schwarz-2019-dereverberation-spatial-coherence\|Schwarz 2019]] |
 
 [[sources/frank-2026-low-latency-roi-beamforming|Frank & Cohen 2026]] crystallize the latency–complexity–performance tradeoff for smart glasses: time-domain ROI beamforming achieves 2× lower algorithmic latency (0.5 ms at $L_y=16$) than STFT-domain, with higher directivity factor and better own-voice suppression — at the cost of $\mathcal{O}(M L_y^2)$ vs $\mathcal{O}(M L_y \log L_y)$ complexity. The conclusion is deployment-guided: "when low latency is critical and modest additional on-device computing power is available, time-domain ROI beamforming is the preferred choice."

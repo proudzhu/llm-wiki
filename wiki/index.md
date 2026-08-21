@@ -510,6 +510,15 @@
 | [[entities/soliman-mahmoud\|Soliman Mahmoud]] | Researcher at University of Sharjah; co-author of AI-based BSS survey (2023). | 2026-08-20 |
 | [[entities/dhiya-al-jumeily\|Dhiya Al-Jumeily]] | Researcher at Liverpool John Moores University; co-author of AI-based BSS survey (2023). | 2026-08-20 |
 | [[entities/abir-jaafar-hussain\|Abir Jaafar Hussain]] | Researcher (corresponding author) at University of Sharjah and Liverpool John Moores University; corresponding author of AI-based BSS survey (2023). | 2026-08-20 |
+| [[entities/yufeng-yang\|Yufeng Yang]] | Lead author of Multi-Channel Differential ASR (2025); PhD intern at Meta. | 2026-08-22 |
+| [[entities/yong-xu\|Yong Xu]] | Meta researcher; co-author of Multi-Channel Differential ASR (2025). | 2026-08-22 |
+| [[entities/suwon-shon\|Suwon Shon]] | Meta researcher; co-author of Multi-Channel Differential ASR (2025). | 2026-08-22 |
+| [[entities/yang-liu\|Yang Liu]] | Meta researcher; co-author of Multi-Channel Differential ASR (2025) and MMW side-talk rejection (ASRU 2025). | 2026-08-22 |
+| [[entities/yifeng-fan\|Yifeng Fan]] | Meta researcher; co-author of Multi-Channel Differential ASR (2025). | 2026-08-22 |
+| [[entities/zhaojun-yang\|Zhaojun Yang]] | Meta researcher; co-author of Multi-Channel Differential ASR (2025). | 2026-08-22 |
+| [[entities/olivier-siohan\|Olivier Siohan]] | Meta researcher; co-author of Multi-Channel Differential ASR (2025). | 2026-08-22 |
+| [[entities/yue-liu\|Yue Liu]] | Meta researcher; co-author of Multi-Channel Differential ASR (2025). | 2026-08-22 |
+| [[entities/florian-metze\|Florian Metze]] | CMU faculty; co-author of AGADIR (2024) and Multi-Channel Differential ASR (2025). | 2026-08-22 |
 
 ---
 
@@ -954,6 +963,9 @@
 | [[concepts/min-max-common-part-estimation\|Min-max Common Part Estimation]] | SDP-based min-max optimization directly maximizing MSG for common part estimation with Lyapunov stability constraint | 2026-08-20 |
 | [[concepts/feedback-guided-controller-fusion\|Feedback-guided Controller Fusion]] | Bai 2026's framework: WaveNet baseline + MoE of FIR experts, gated by reference + control + delayed residual-error signals. | 2026-08-21 |
 | [[concepts/frequency-aware-anc-loss\|Frequency-aware ANC Loss]] | Bai 2026's loss combining one-third-octave NR (50Hz-5kHz), high-freq rebound (1-16kHz), and broadband NMSE. | 2026-08-21 |
+| [[concepts/differential-asr\|Differential ASR]] | ASR design pattern combining multiple complementary frontends (beamformer + close-mic + STD embedding) as parallel input channels to a streaming RNN-T. | 2026-08-22 |
+| [[concepts/side-talk-detection\|Side-Talk Detection (STD)]] | VAD-adjacent task distinguishing wearer/bystander/non-speech at sample level without speaker-identity modeling; privacy-preserving frontend for smart-glasses WSR. | 2026-08-22 |
+| [[concepts/wearer-speech-recognition\|Wearer Speech Recognition (WSR)]] | Task of transcribing the device-wearer's speech from on-body microphone array; central to AGADIR, Feng 2025, and Yang 2025 smart-glasses ASR line. | 2026-08-22 |
 
 ---
 
@@ -1134,6 +1146,7 @@
 | [[sources/schepker-2016-sdp-minmax-acoustic-feedback\|Schepker & Doclo 2016: SDP Min-max Common Part Estimation]] | Min-max SDP optimization for common part estimation of acoustic feedback paths, directly maximizing MSG with Lyapunov stability constraint | 2026-08-20 |
 | [[sources/bai-2026-feedback-guided-anc\|Bai 2026: Feedback-guided DNN-based Controller Fusion for Robust Fixed-Parameter ANC]] | Hybrid WaveNet + feedback-guided MoE of FIR experts for robust fixed-parameter ANC; 19 dB avg NR (50Hz-5kHz) on CCF-AATC headphone ANC. | 2026-08-21 |
 | [[sources/ansari-2023-ai-bss-survey\|Ansari et al. 2023: AI Approaches in BSS Survey]] | Survey of AI-based BSS (Classical ML / DL / Evolutionary) with three-way taxonomy, benchmark tables, complexity comparison, and edge/mobile future directions. | 2026-08-20 |
+| [[sources/yang-2025-mc-differential-asr-smart-glasses\|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] | Multi-frontend differential ASR (beamformer + close-mic + STD embedding) for robust wearer speech recognition on Ray-Ban Meta smart glasses; 18.0% relative WER reduction on real side-talk data. | 2026-08-22 |
 
 ---
 
@@ -1186,10 +1199,10 @@
 
 ## Statistics
 
-- **Total pages**: 1135
-- **Entities**: 500
-- **Concepts**: 435
-- **Sources**: 171
+- **Total pages**: 1148
+- **Entities**: 509
+- **Concepts**: 438
+- **Sources**: 172
 - **Synthesis**: 22
 - **Queries**: 7
-- **Last updated**: 2026-08-21
+- **Last updated**: 2026-08-22

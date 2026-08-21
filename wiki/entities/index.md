@@ -504,4 +504,13 @@
 | [[entities/soliman-mahmoud\|Soliman Mahmoud]] | Researcher at University of Sharjah; co-author of AI-based BSS survey (2023). | 2026-08-20 |
 | [[entities/dhiya-al-jumeily\|Dhiya Al-Jumeily]] | Researcher at Liverpool John Moores University; co-author of AI-based BSS survey (2023). | 2026-08-20 |
 | [[entities/abir-jaafar-hussain\|Abir Jaafar Hussain]] | Researcher (corresponding author) at University of Sharjah and Liverpool John Moores University; corresponding author of AI-based BSS survey (2023). | 2026-08-20 |
+| [[entities/yufeng-yang\|Yufeng Yang]] | Lead author of Multi-Channel Differential ASR (2025); PhD intern at Meta. | 2026-08-22 |
+| [[entities/yong-xu\|Yong Xu]] | Meta researcher; co-author of Multi-Channel Differential ASR (2025). | 2026-08-22 |
+| [[entities/suwon-shon\|Suwon Shon]] | Meta researcher; co-author of Multi-Channel Differential ASR (2025). | 2026-08-22 |
+| [[entities/yang-liu\|Yang Liu]] | Meta researcher; co-author of Multi-Channel Differential ASR (2025) and MMW side-talk rejection (ASRU 2025). | 2026-08-22 |
+| [[entities/yifeng-fan\|Yifeng Fan]] | Meta researcher; co-author of Multi-Channel Differential ASR (2025). | 2026-08-22 |
+| [[entities/zhaojun-yang\|Zhaojun Yang]] | Meta researcher; co-author of Multi-Channel Differential ASR (2025). | 2026-08-22 |
+| [[entities/olivier-siohan\|Olivier Siohan]] | Meta researcher; co-author of Multi-Channel Differential ASR (2025). | 2026-08-22 |
+| [[entities/yue-liu\|Yue Liu]] | Meta researcher; co-author of Multi-Channel Differential ASR (2025). | 2026-08-22 |
+| [[entities/florian-metze\|Florian Metze]] | CMU faculty; co-author of AGADIR (2024) and Multi-Channel Differential ASR (2025). | 2026-08-22 |
 

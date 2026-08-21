@@ -175,4 +175,5 @@
 | [[sources/schepker-2016-sdp-minmax-acoustic-feedback\|Schepker & Doclo 2016: SDP Min-max Common Part Estimation]] | Min-max SDP optimization for common part estimation of acoustic feedback paths, directly maximizing MSG with Lyapunov stability constraint | 2026-08-20 |
 | [[sources/bai-2026-feedback-guided-anc\|Bai 2026: Feedback-guided DNN-based Controller Fusion for Robust Fixed-Parameter ANC]] | Hybrid WaveNet + feedback-guided MoE of FIR experts for robust fixed-parameter ANC; 19 dB avg NR (50Hz-5kHz) on CCF-AATC headphone ANC. | 2026-08-21 |
 | [[sources/ansari-2023-ai-bss-survey\|Ansari et al. 2023: AI Approaches in BSS Survey]] | Survey of AI-based BSS (Classical ML / DL / Evolutionary) with three-way taxonomy, benchmark tables, complexity comparison, and edge/mobile future directions. | 2026-08-20 |
+| [[sources/yang-2025-mc-differential-asr-smart-glasses\|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] | Multi-frontend differential ASR (beamformer + close-mic + STD embedding) for robust wearer speech recognition on Ray-Ban Meta smart glasses; 18.0% relative WER reduction on real side-talk data. | 2026-08-22 |
 

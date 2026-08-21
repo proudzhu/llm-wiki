@@ -1,7 +1,10 @@
 ---
 type: concept
 created: 2026-05-24
-updated: 2026-05-24
+updated: 2026-08-22
+sources:
+  - raw/papers/lin-2024-agadir-array-geometry-agnostic-speech-recognition/full-text.md
+  - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
 tags:
   - beamforming
   - speech-recognition
@@ -38,6 +41,10 @@ $$\mathbf{\Psi}(j\omega) \triangleq \textbf{I} - \mathbf{g}(j\omega)\mathbf{g}^{
 
 NLCMV achieves ~10 dB gain at the designated look direction compared to super-directive beamforming, and ~0.7% absolute WER improvement in real ASR tests.
 
+## WSR vs. Conversational Directional ASR
+
+Yang et al. (2025) compared NLCMV (multi-direction, for conversational ASR where both wearer and bystander must be transcribed) with an internal adjusted MVDR steered solely at the wearer's mouth for [[concepts/wearer-speech-recognition|WSR]]. For pure WSR, the single-direction MVDR is more suitable than NLCMV because NLCMV's null-direction control and multiple steering directions add complexity without benefit when only the wearer is being transcribed. The paper's [[concepts/differential-asr|differential ASR]] framework then layers additional frontends (microphone selection, side-talk detection embedding) on top of the MVDR output to recover the side-talk robustness that NLCMV's spatial filtering alone cannot provide. This suggests NLCMV and MVDR+differential-frontends occupy different niches: NLCMV for multi-talker conversational ASR, MVDR+differential for single-talker WSR.
+
 ## Related Concepts
 
 - [[concepts/beamforming|Beamforming]]
@@ -45,7 +52,10 @@ NLCMV achieves ~10 dB gain at the designated look direction compared to super-di
 - [[concepts/fixed-beamformer|Fixed Beamformer]]
 - [[concepts/differential-microphone-array|Differential Microphone Array]]
 - [[concepts/white-noise-gain|White Noise Gain (WNG)]]
+- [[concepts/differential-asr|Differential ASR]]
+- [[concepts/wearer-speech-recognition|Wearer Speech Recognition (WSR)]]
 
 ## Related Sources
 
 - [[sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition|Lin et al. 2024: AGADIR — Towards Array-Geometry Agnostic Directional Speech Recognition]]
+- [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] — contrasts NLCMV (multi-direction) with adjusted MVDR (wearer-only) for WSR

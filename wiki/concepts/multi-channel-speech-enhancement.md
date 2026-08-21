@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-08-15
+updated: 2026-08-22
 sources:
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
+  - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
 tags:
   - speech-enhancement
   - multi-channel
@@ -37,6 +38,7 @@ tags:
 - **[[concepts/output-based-speech-enhancement|Output-based SE]]**: Configures the system by evaluating SI/SQ of candidate outputs (rather than extracting input features from noisy signals); demonstrated by Apostolidis et al. (2026) via GP-selected [[concepts/mpdr-beamformer|MPDR]] beamforming
 - **[[concepts/geometry-aware-dynamic-convolution|Geo-DConv]]**: Universal front-end that converts fixed-array SE backbones (SpatialNet, TF-GridNet) into [[concepts/array-invariant-speech-enhancement|array-invariant]] systems by generating geometry-specific convolution kernels from microphone coordinates via [[concepts/topology-aware-coordinate-transformer|TACT]] (Liu et al. 2026); matches USES2-comp quality at ~10× lower MACs and generalizes zero-shot to unseen array sizes (CHiME-4)
 - **[[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence NE]] (Jin et al. 2017)**: Classical statistical-model MCSE for mobile-phone hands-free — MVDR front-end + Wiener post-filter driven by an SPP/coherence hybrid noise estimator with adaptive split-frequency and globally MMSE-optimal multi-channel variance decomposition; validated on a 3-mic Huawei Mate 8 in real non-stationary noise
+- **[[concepts/differential-asr|Differential ASR]] (Yang et al. 2025)**: Multi-frontend pattern in which a beamformer + microphone selection + [[concepts/side-talk-detection|side-talk detection]] embedding are concatenated as complementary input channels to a streaming RNN-T ASR backbone for smart-glasses [[concepts/wearer-speech-recognition|WSR]]. All frontends are frozen; only the ASR backbone and small feature-extraction layers are trained (<1M additional parameters). Achieves up to 18.0% relative WER reduction over the single-MVDR-frontend baseline on real side-talk data. While framed for ASR rather than signal-level SE, the differential pattern is directly portable to MCSE pipelines that need complementary cues beyond a single beamformer output.
 
 ## Related Concepts
 
@@ -61,6 +63,8 @@ tags:
 - [[concepts/probability-based-spatial-filter|Probability-Based Spatial Filter]]
 - [[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence Noise Estimation]]
 - [[concepts/speech-presence-probability|Speech Presence Probability (SPP)]]
+- [[concepts/differential-asr|Differential ASR]] — multi-frontend pattern portable to MCSE pipelines
+- [[concepts/side-talk-detection|Side-Talk Detection (STD)]] — role-conditional VAD frontend in differential ASR
 
 ## Related Sources
 
@@ -75,3 +79,4 @@ tags:
 - [[sources/liu-2021-igcrn|Liu & Zhang 2021: IGCRN]] — end-to-end dual-channel SE that mirrors the beamforming pipeline (DOA estimation → beamforming → post-filtering) inside a CRN-style network with [[concepts/inplace-convolution|inplace convolutions]] and a [[concepts/channel-wise-lstm|channel-wise LSTM reused across frequency bins]]. Outperforms oracle-DOA MVDR and conventional GCRN at -3/0/3 dB; the inplace-CRN family founder.
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev, Mihov, Gleghorn & Acero 2008: Sound Capture System and Spatial Filter for Small Devices]] — classical statistical-model MCSE: back-to-back unidirectional array + front-back-difference beamformer + probability-based spatial filter; 10.43 dB SNR / 0.39 PESQ-MOS improvement on a 9.6 mm baseline
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — MVDR + adaptive coherence NE post-filter on a 3-microphone Huawei Mate 8; globally MMSE-optimal multi-channel variance estimation with adaptive split-frequency
+- [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] — multi-frontend differential pattern (beamformer + close-mic + STD embedding) for smart-glasses WSR

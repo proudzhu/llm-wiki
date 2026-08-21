@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-08-15
+updated: 2026-08-22
 sources:
   - raw/papers/liu-2025-pcen-mask-vad-speech-enhancement/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
+  - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
 tags:
 - audio-processing
 - machine-learning
@@ -76,11 +77,17 @@ An intermediate between binary VAD and VAD-free estimation is **[[concepts/speec
 
 Apostolidis et al. (2026) train a [[concepts/convolutional-recurrent-network|CRN]]-based neural VAD that does not output a binary speech/pause flag but instead estimates a per-time-frequency **audibility** map $\widehat{\mathrm{AUD}}(k,l) \in [0,1]$ adopted from the Speech Intelligibility Index (SII; ANSI S3.5-1997): the T-F SNR at the reference microphone is clipped to $[-15, 15]$ dB and linearly mapped to $[0, 1]$. The network is trained with MSE against ground-truth AUD computed from clean separated speech/noise. This continuous audibility output serves two roles in their [[concepts/output-based-speech-enhancement|output-based SE]] system: (i) forming ideal binary masks (with thresholds $\gamma_S, \gamma_V$) for the input-based [[concepts/mvdr-beamformer|MVDR]] baseline, and (ii) computing [[concepts/glimpse-proportion|Glimpse Proportion]] from each candidate [[concepts/mpdr-beamformer|MPDR]] output to drive selection. The fair comparison (same VAD in both systems) isolates the input-vs-output structural distinction rather than conflating it with VAD-architecture differences.
 
+## Side-Talk Detection as Role-Conditional VAD
+
+[[concepts/side-talk-detection|Side-Talk Detection (STD)]] (Yang et al. 2025) is a VAD-adjacent task that replaces the binary speech/pause decision with a three-class sample-level output over {wearer, bystander, non-speech}. The role label (wearer/bystander) is determined by the spatial relationship to the device rather than by speaker identity, so STD avoids the privacy issues of speaker diarization while still distinguishing target from interferer. In the [[concepts/differential-asr|differential ASR]] system, the STD model is a lightweight (~2M parameter) streaming TCN whose logits are downsampled to a 5-dimensional embedding and concatenated with the beamformer and microphone-selection features as input to a streaming RNN-T. The STD model thus functions as a VAD that contributes *role information* rather than just speech/pause information — closer to the OVAD/TVAD split used in headphone conversation detection but at sample level and without bone-conduction sensors.
+
 ## Related Concepts
 
 - [[concepts/minimum-statistics|Minimum Statistics]]
 - [[concepts/speech-presence-probability|Speech Presence Probability (SPP)]] — soft-decision VAD generalization
 - [[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence Noise Estimation]] — uses SPP as the speech-absence gate
+- [[concepts/side-talk-detection|Side-Talk Detection (STD)]] — three-class role-conditional VAD variant for smart-glasses WSR (Yang et al. 2025)
+- [[concepts/differential-asr|Differential ASR]] — uses STD embedding as a complementary frontend
 - [[transparency-mode|Transparency Mode]]
 - [[beamforming|Beamforming]]
 - [[bone-conduction|Bone Conduction]]
@@ -95,3 +102,4 @@ Apostolidis et al. (2026) train a [[concepts/convolutional-recurrent-network|CRN
 - [[sources/liu-2025-pcen-mask-vad-speech-enhancement|Liu et al. 2025: PCEN-Based Mask Thresholding and VAD for DNN Speech Enhancement Training]] — training-time PCEN-VAD that gates an asymmetric loss
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — energy-based binary VAD with minimum-energy tracking used as a binary gate for spatial-filter model adaptation
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — uses SPP ($\rho < 0.1$ threshold) as the speech-absence gate for adaptive coherence and noise covariance updates
+- [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] — STD model as a role-conditional VAD frontend
