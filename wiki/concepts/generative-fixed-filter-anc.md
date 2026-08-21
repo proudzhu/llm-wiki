@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-08-21
 sources:
   - raw/papers/yang-2026-transformer-e2e-cfg-anc/full-text.md
   - raw/papers/luo-2026-hybrid-gfanc-fxnlms/full-text.md
   - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
+  - raw/papers/bai-2026-feedback-guided-anc/full-text.md
 tags:
   - active-noise-control
   - fixed-filter-anc
@@ -38,6 +39,9 @@ Integrates the co-processor and real-time controller into a **differentiable ANC
 ### End-to-End CFG (E2E-CFG) (Yang et al. 2026)
 Replaces the decomposition-recombination paradigm with **direct control-filter generation**. A Transformer-based co-processor outputs the full $N$-dimensional filter coefficient vector, removing dependence on intermediate sub-filter representations. Trained unsupervised using the same differentiable ANC framework.
 
+### Feedback-Guided Fusion of Pre-Trained Experts (Bai 2026)
+[[feedback-guided-controller-fusion|Bai et al. 2026]] extend the "weighted combination of pre-trained filters" idea along a different axis: rather than generating combination weights from reference-side features (GFANC) or learned sub-filter bases (E2E-CFG), they pre-train one FIR expert **per acoustic path** and fuse them with weights produced by a gating network that consumes reference + control + **delayed residual-error** signals. The feedback path closes the loop on the actual acoustic condition, addressing the path-mismatch robustness gap that reference-side-only GFANC leaves open. The result is a hybrid WaveNet + MoE controller that achieves 19.00 dB average NR (50 Hz–5 kHz) on the CCF-AATC headphone ANC dataset with negligible 1–8 kHz amplification, while being lighter (28.57k params / 672.83 MMac/s for 8 experts) than the CCF 2026 official baseline (42.76k / 2.04 GMac/s).
+
 ## Comparison: SFANC vs. GFANC vs. E2E-CFG
 
 | Aspect | SFANC | GFANC | E2E-CFG |
@@ -68,9 +72,11 @@ where $\alpha_n$ follows a forgetting-factor scheme ($\lambda = 0.999$).
 - [[concepts/active-noise-control|Active Noise Control]] — parent domain
 - [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — adaptive alternative
 - [[concepts/end-to-end-differentiable-anc|End-to-End Differentiable ANC]] — training paradigm for unsupervised GFANC and E2E-CFG
+- [[concepts/feedback-guided-controller-fusion|Feedback-guided Controller Fusion]] — extension that fuses per-path pre-trained FIR experts using residual-error feedback
 
 ## Related Sources
 
 - [[sources/yang-2026-transformer-e2e-cfg-anc|Yang 2026: Transformer-based E2E-CFG for ANC]] — direct filter generation with Transformer co-processor
 - [[sources/luo-2026-hybrid-gfanc-fxnlms|Luo 2026: Hybrid GFANC-FxNLMS]] — unsupervised GFANC with CNN co-processor and hybrid stabilization
 - [[sources/jiang-2025-ai-driven-avnc-review|Jiang et al. 2025: AI-Driven AVNC Review]] — reviews GFANC as a key end-to-end controller modeling approach
+- [[sources/bai-2026-feedback-guided-anc|Bai 2026: Feedback-guided DNN-based Controller Fusion for Robust Fixed-Parameter ANC]] — fuses per-path pre-trained FIR experts with residual-error feedback, addressing GFANC's path-mismatch robustness gap

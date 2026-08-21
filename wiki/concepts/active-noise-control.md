@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-08-10
+updated: 2026-08-21
 sources:
   - raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md
   - raw/papers/guo-2024-anc-saturation-survey/full-text.md
+  - raw/papers/bai-2026-feedback-guided-anc/full-text.md
 aliases:
 - Active Noise Control
 tags:
@@ -50,6 +51,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - **[[convolutional-recurrent-network|CRN]]-based Deep ANC**: End-to-end anti-noise generation using encoder-LSTM-decoder architecture with [[complex-spectrum-mapping|Complex Spectrum Mapping]] for precise phase control
 - **[[speech-preserving-anc|Speech-Preserving ANC]]**: Uses a modified loss function that algebraically cancels speech components, training the network to cancel only noise while leaving speech transparent
 - SFANC/GFANC: Selective/Generative Fixed-Filter ANC uses CNNs for filter selection or generation, enabling instant response to changing noise types
+- **[[feedback-guided-controller-fusion|Feedback-guided Controller Fusion]]** (Bai 2026): Hybrid WaveNet + mixture-of-experts of FIR experts, where the MoE gating network consumes reference + control + **delayed residual-error** signals — closing the loop on the actual acoustic condition (unlike SFANC/GFANC, which use reference-side features only). 19.00 dB avg NR (50 Hz–5 kHz) on CCF-AATC headphone ANC with negligible 1–8 kHz amplification; 32.69k params / 672.93 MMac/s for the 10-expert streaming model.
 - **[[concepts/physics-informed-neural-network|PINN]]-assisted ANC** (Zhang 2024): A PINN interpolates the soundfield at virtual microphone positions from monitoring microphones placed outside the ROI, using the acoustic wave equation as a PDE residual loss. The interpolated signals drive a multi-channel FxLMS controller, achieving better noise reduction at the ear than a conventional multiple-point ANC system.
 - **E2E-CFG**: End-to-End Control-Filter Generation directly generates control filters via Transformer co-processor in a differentiable ANC system, trained unsupervised on residual error
 
@@ -116,6 +118,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method]] — Experimental validation of secondary-path-model-free ANC
 - [[sources/ma-2027-robust-ffanc-online-path-modeling|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] — feedforward ANC with simultaneous online SP and FBP modeling; introduces a second supporting filter and SF-driven global AWGN scaling for robustness under time-varying paths
 - [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024: ANC Algorithms Overcoming Output Saturation]] — survey of adaptive ANC algorithms mitigating the output saturation effect, organising the field into output-constraint and nonlinear-adaptive families
+- [[sources/bai-2026-feedback-guided-anc|Bai 2026: Feedback-guided DNN-based Controller Fusion for Robust Fixed-Parameter ANC]] — hybrid WaveNet + feedback-guided MoE of FIR experts; 19 dB avg NR (50 Hz–5 kHz) on CCF-AATC headphone ANC with negligible 1–8 kHz amplification
 
 ## Related Entities
 

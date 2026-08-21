@@ -4521,3 +4521,30 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
   - `wiki/concepts/maximum-stable-gain.md` — added min-max optimization section, added source
   - `wiki/concepts/prediction-error-method.md` — added common part integration section, added source
   - `wiki/concepts/hearing-aid-feedback-cancellation.md` — added common part decomposition section, added source
+
+---
+
+## [2026-08-21] ingest | Feedback-guided DNN-based Controller Fusion for Robust Fixed-Parameter ANC (Bai 2026)
+
+- **Source**: `raw/papers/bai-2026-feedback-guided-anc/full-text.md` (Zotero: MPHR6YAJ, arXiv: 2608.14061)
+- **Authors**: Lu Bai, Yiming He, Xiaofeng Nan, Kai Chen, Jing Lu
+- **Published**: arXiv preprint (eess.SY) 2026-08-14
+- **DOI**: 10.48550/arXiv.2608.14061
+- **Summary**: Proposes feedback-guided DNN-based controller fusion for robust fixed-parameter ANC — a causal WaveNet baseline fused with a feedback-guided mixture-of-experts of pre-trained per-path FIR experts, where the gating network consumes reference + control + delayed residual-error signals (unlike SFANC/GFANC which use reference-side features only). 10-expert streaming model attains 19.00 dB avg NR (50 Hz–5 kHz) on CCF-AATC headphone ANC with negligible 1–8 kHz amplification, at 32.69k params / 672.93 MMac/s with peak-MAC optimization (peak 34.62k → 14.15k per sample).
+- **Pages created**:
+  - `wiki/sources/bai-2026-feedback-guided-anc.md`
+  - `wiki/entities/lu-bai.md`
+  - `wiki/entities/yiming-he.md`
+  - `wiki/entities/xiaofeng-nan.md`
+  - `wiki/entities/kai-chen.md`
+  - `wiki/concepts/feedback-guided-controller-fusion.md`
+  - `wiki/concepts/frequency-aware-anc-loss.md`
+- **Pages updated**:
+  - `wiki/entities/jing-lu.md` — appended corresponding-author bullet + active-noise-control tag
+  - `wiki/concepts/selective-fixed-filter-anc.md` — added "Feedback-Guided Controller Fusion (Bai 2026)" subsection contrasting with reference-only SFANC selection
+  - `wiki/concepts/generative-fixed-filter-anc.md` — added "Feedback-Guided Fusion of Pre-Trained Experts (Bai 2026)" subsection
+  - `wiki/concepts/hybrid-anc.md` — added "Feedforward–Feedback-Hybrid DNN (Bai 2026)" implementation architecture
+  - `wiki/concepts/active-noise-control.md` — added Bai 2026 bullet under Deep Learning Approaches
+  - `wiki/synthesis/ai-driven-anc.md` — added Section 2.5 (Feedback-Guided Controller Fusion as 4th architectural pattern), efficiency frontier table row, and Related Sources entry; new comparison axis: reference-only vs. reference+error feedback
+  - `wiki/index.md`, `wiki/sources/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md` — 7 new entries, stats recounted
+- **Extraction**: arXiv HTML via defuddle (v1 URL fallback after the unversioned URL returned 404); 5 figures (architecture, 2× NR spectra, time-domain, third-octave) downloaded and embedded as `![[raw/papers/.../figures/figN.png|caption]]`.

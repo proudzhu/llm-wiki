@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-17
-updated: 2026-06-28
+updated: 2026-08-21
 tags:
 - active-noise-control
 - adaptive-filtering
@@ -9,6 +9,7 @@ tags:
 - generative-models
 sources:
   - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
+  - raw/papers/bai-2026-feedback-guided-anc/full-text.md
 ---
 # AI-Driven Active Noise Control
 
@@ -47,6 +48,13 @@ Unlike SFANC which is limited by its pre-trained library, **GFANC** ([UCJR5KDZ](
 ### 2.4 Joint Deep SPE + Adaptive Control
 Fareedha et al. (2026) propose an end-to-end framework that jointly estimates the secondary path and generates adaptive control signals. Unlike SFANC/GFANC which assume a fixed secondary path, **DeepSPE** (Conv1D + BiLSTM + Attention) predicts $\hat{S}(z)$ in real time at frame level (32 ms), achieving −16.27 dB NMSE — 3.92 dB better than the best classical method. The estimated path conditions an **ANC-Net** controller that uses SE blocks and temporal attention to generate binary weights for selecting sub-control filters from a pre-trained bank. The dual-stream design achieves −12.38 dB NMSE with only 1.05 M parameters and 0.43 ms latency, outperforming ResNet50 (23.5 M params, 2.6 ms) and DenseNet121 (7.98 M params, 2.2 ms).
 
+### 2.5 Feedback-Guided Controller Fusion (Bai 2026)
+A fourth architectural pattern beyond selection, generation, and joint SPE+control: **feedback-guided fusion of pre-trained per-path experts**. [[concepts/feedback-guided-controller-fusion|Bai et al. 2026]] observe that SFANC, GFANC, and DeepSPE all determine the controller from **reference-side features** (input-noise characteristics or estimated secondary path) — none directly reflects the *actual control outcome* under the current acoustic system. Their framework closes this loop by driving a gating network with reference $\mathbf{x}(n)$ + control $\mathbf{y}(n)$ + **delayed residual-error** $\mathbf{e}(n-1)$ signals to dynamically fuse $N$ pre-trained FIR experts (one per acoustic path) with a WaveNet baseline. The delayed-error signal is causal: $\mathbf{e}(n)$ becomes available only after $\mathbf{y}(n)$ propagates through the secondary path. This introduces a **new axis of comparison** for AI-driven ANC: *what signals drive the controller-selection/generation mechanism* — reference-only (SFANC/GFANC/DeepSPE) vs. reference + control + delayed-error (Bai 2026).
+
+The fusion is $\mathbf{y}(n) = \alpha\, \mathbf{y}_W(n) + (1-\alpha)\, \mathbf{y}_M(n)$, exploiting the same FF+FB complementarity as classical [[concepts/hybrid-anc|hybrid ANC]]: the WaveNet branch stabilizes high-frequency behavior (mitigating the MoE-only branch's amplification on certain paths), while the MoE branch substantially improves low-frequency reduction on path outliers. Training is staged (WaveNet → per-path FIR experts → frozen-backbone gating network with cross-entropy path-label auxiliary), and the [[concepts/frequency-aware-anc-loss|frequency-aware ANC loss]] jointly optimizes one-third-octave-band NR, high-frequency rebound, and broadband NMSE.
+
+**Empirical result**: On the CCF-AATC headphone ANC dataset, the 10-expert streaming model achieves **19.00 dB avg NR (50 Hz–5 kHz) with negligible 1–8 kHz amplification**, with stable reduction across condition switches (no convergence time).
+
 ---
 
 ## 3. The Efficiency Frontier: Real-Time Implementation
@@ -59,6 +67,7 @@ The primary hurdle for AI-driven ANC is the computational cost of deep networks 
 | **FRM-SFANC** | Very Low | No training data needed; interpretable | Embedded ANC |
 | **Hybrid SFANC-FxNLMS** | Moderate | High steady-state reduction | High-end Headphones |
 | **CRN Spectrogram** | High | Handles nonlinear distortion | Smart Speakers/Mobile |
+| **Feedback-guided MoE fusion** (Bai 2026) | Moderate (672.83 MMac/s, 28.57k params) | Robust to acoustic-path mismatch; no online adaptation; 19 dB avg NR (50 Hz–5 kHz) | Headphones |
 
 ### 3.1 Neural Stability and Robustness
 Recent research focuses on using RNNs as "stability observers." By predicting the innovative whiteness of the error signal, the network can dynamically adjust the step-size of a traditional FxLMS filter, preventing divergence during impulsive events without the full overhead of an end-to-end neural controller.

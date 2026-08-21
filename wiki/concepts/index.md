@@ -437,4 +437,6 @@
 | [[concepts/angle-feature\|Angle Feature]] | Directional feature for spatial-clue TSE: cosine of TPD-vs-IPD difference over microphone pairs | 2026-08-19 |
 | [[concepts/common-part-decomposition\|Common Part Decomposition]] | Decomposing acoustic feedback paths into time-invariant common part and time-varying variable part to reduce adaptive parameters | 2026-08-20 |
 | [[concepts/min-max-common-part-estimation\|Min-max Common Part Estimation]] | SDP-based min-max optimization directly maximizing MSG for common part estimation with Lyapunov stability constraint | 2026-08-20 |
+| [[concepts/feedback-guided-controller-fusion\|Feedback-guided Controller Fusion]] | Bai 2026's framework: WaveNet baseline + MoE of FIR experts, gated by reference + control + delayed residual-error signals. | 2026-08-21 |
+| [[concepts/frequency-aware-anc-loss\|Frequency-aware ANC Loss]] | Bai 2026's loss combining one-third-octave NR (50Hz-5kHz), high-freq rebound (1-16kHz), and broadband NMSE. | 2026-08-21 |
 

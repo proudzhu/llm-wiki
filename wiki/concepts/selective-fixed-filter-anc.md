@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-04-30
-updated: 2026-05-05
+updated: 2026-08-21
 sources:
   - raw/papers/wang-2026-predictive-dsfanc-crnn/full-text.md
   - raw/papers/yin-2023-selective-fixed-filter-anc-headphones/full-text.md
   - raw/papers/wang-2026-directional-sfanc-reverberant/full-text.md
   - raw/papers/zhang-2014-causality-feedforward-anc-headset/full-text.md
+  - raw/papers/bai-2026-feedback-guided-anc/full-text.md
 tags:
   - active-noise-control
   - fixed-filter-anc
@@ -55,6 +56,9 @@ Yin et al. (2023) propose a non-neural selection mechanism that uses **online fr
 ### Generative Fixed-Filter ANC (GFANC)
 Instead of selecting from a discrete library, GFANC uses a generative model to synthesize custom control filters, enabling better generalization to untrained noise conditions.
 
+### Feedback-Guided Controller Fusion (Bai 2026)
+A contrasting framework rather than a SFANC variant: [[feedback-guided-controller-fusion|Bai et al. 2026]] observe that SFANC and GFANC determine the controller primarily from **reference-side noise features**, which characterize input noise but not the actual control outcome under the current acoustic system. Their framework instead drives a gating network with reference $\mathbf{x}(n)$, control $\mathbf{y}(n)$, and delayed residual-error $\mathbf{e}(n-1)$ signals to dynamically fuse multiple pre-trained FIR experts (one per acoustic path) with a WaveNet baseline. The feedback path closes the loop on the actual acoustic condition, improving robustness to acoustic-path mismatch without online parameter updates. On the CCF-AATC headphone ANC dataset, the 10-expert streaming model attains 19.00 dB average NR (50 Hz–5 kHz) with negligible 1–8 kHz amplification.
+
 ## Comparison of SFANC Variants
 
 | Variant | Selection Basis | Predictive? | Auto-tuned? | Moving source | Reverberant |
@@ -77,6 +81,7 @@ Instead of selecting from a discrete library, GFANC uses a generative model to s
 - [[concepts/generative-fixed-filter-anc|Generative Fixed-Filter ANC]] — GFANC and E2E-CFG: generative approaches beyond discrete selection
 - [[concepts/end-to-end-differentiable-anc|End-to-End Differentiable ANC]] — differentiable training paradigm for unsupervised GFANC and E2E-CFG
 - [[concepts/frequency-response-matching|Frequency Response Matching]] — non-neural selection mechanism used in FRM-SFANC
+- [[concepts/feedback-guided-controller-fusion|Feedback-guided Controller Fusion]] — contrasting framework that uses residual-error feedback (rather than reference-only selection)
 
 ## Related Sources
 

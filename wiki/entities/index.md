@@ -493,4 +493,8 @@
 | [[entities/tsubasa-ochiai\|Tsubasa Ochiai]] | NTT CS-Lab — multi-modal TSE, universal sound selector; co-author of the 2023 IEEE SPM TSE overview | 2026-08-19 |
 | [[entities/keisuke-kinoshita\|Keisuke Kinoshita]] | NTT CS-Lab — speech enhancement, TSE, microphone-array processing; co-author of the 2023 IEEE SPM TSE overview | 2026-08-19 |
 | [[entities/jan-cernocky\|Jan Černocký]] | Brno UT — speech processing, speaker recognition; co-author and supervisor lineage of the 2023 IEEE SPM TSE overview | 2026-08-19 |
+| [[entities/lu-bai\|Lu Bai]] | Nanjing University researcher; lead author of feedback-guided controller fusion (2026) and WaveNet-VNN (2025). | 2026-08-21 |
+| [[entities/yiming-he\|Yiming He]] | Nanjing University researcher; multi-reference ANC and modified LMS Newton algorithms. | 2026-08-21 |
+| [[entities/xiaofeng-nan\|Xiaofeng Nan]] | Nanjing University researcher; co-author of feedback-guided controller fusion (2026). | 2026-08-21 |
+| [[entities/kai-chen\|Kai Chen]] | Nanjing University researcher; co-author of feedback-guided controller fusion (2026) and WaveNet-VNN (2025). | 2026-08-21 |
 

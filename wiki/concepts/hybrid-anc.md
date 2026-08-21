@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-05-05
+updated: 2026-08-21
 sources:
   to Headphones.md
+  - raw/papers/bai-2026-feedback-guided-anc/full-text.md
 tags:
 - active-noise-control
 - hybrid-systems
@@ -34,6 +35,9 @@ A more integrated approach proposed by Benois (2020) for headphones, where FF, M
 - Low memory and computational overhead.
 - Compensation of the secondary path for both FF and FB components.
 
+### 3. Feedforward–Feedback-Hybrid DNN (Bai 2026)
+[[feedback-guided-controller-fusion|Bai et al. 2026]] instantiate the hybrid idea at the controller level rather than the sensor topology level: a feedforward **WaveNet** branch provides a stable condition-averaged baseline (analogous to the FF component), while a feedback-guided **mixture-of-experts** branch uses the delayed residual-error signal $\mathbf{e}(n-1)$ to dynamically fuse multiple path-specific FIR experts (analogous to a feedback-corrective component). The fusion $\mathbf{y}(n) = \alpha\, \mathbf{y}_W(n) + (1-\alpha)\, \mathbf{y}_M(n)$ exploits the same complementarity as classical hybrids: the WaveNet branch stabilizes high-frequency behavior, while the MoE branch substantially improves low-frequency reduction on path outliers (e.g., path 7 in the experiments) without the high-frequency amplification the MoE-only branch would introduce. On CCF-AATC headphone ANC: 19.00 dB avg NR (50 Hz–5 kHz), negligible amplification 1–8 kHz, 32.69k params / 672.93 MMac/s.
+
 ## DOA Robustness
 
 A key advantage of hybrid ANC is its robustness to direction-of-arrival (DOA) variations. Liebich et al. (2018) showed experimentally that:
@@ -57,9 +61,11 @@ Most modern high-end ANC headphones use a hybrid approach:
 - [[internal-model-control|Internal Model Control]]
 - [[minimum-variance-control|Minimum Variance Control]]
 - [[acoustic-feedback|Acoustic Feedback]]
+- [[feedback-guided-controller-fusion|Feedback-guided Controller Fusion]] — controller-level FF+FB hybrid (Bai 2026)
 
 ## Related Sources
 
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
 - [[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
+- [[sources/bai-2026-feedback-guided-anc|Bai 2026: Feedback-guided DNN-based Controller Fusion for Robust Fixed-Parameter ANC]] — controller-level FF+FB hybrid (WaveNet + feedback-guided MoE)
