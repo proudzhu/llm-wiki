@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-05-13
+updated: 2026-08-22
+sources:
+  - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
 tags:
   - neural-directional-filtering
   - virtual-directional-microphone
@@ -48,4 +50,5 @@ The FT-JNF-based NDF architecture processes concatenated real/imaginary STFT coe
 
 ## Related Sources
 
+- [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023: Insights Into Deep Non-linear Filters for Improved Multi-channel Speech Enhancement]] — origin of the FT-JNF backbone used by NDF [22]
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]

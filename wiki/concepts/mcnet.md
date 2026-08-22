@@ -3,6 +3,7 @@ type: concept
 created: 2026-08-22
 updated: 2026-08-22
 sources:
+  - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
   - raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md
 tags:
   - neural-network
@@ -61,4 +62,5 @@ On a simulated reverberant separation task (WSJ0, 3-mic circular array, 5 interf
 
 ## Related Sources
 
+- [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023: Insights Into Deep Non-linear Filters for Improved Multi-channel Speech Enhancement]] — origin of the JNF (FT-JNF) backbone that McNet extends [22]
 - [[sources/tesch-2024-spatially-selective-nonlinear-filters|Tesch & Gerkmann 2024: Multi-channel Speech Separation Using Spatially Selective Deep Non-linear Filters]]

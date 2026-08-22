@@ -3,6 +3,7 @@ type: concept
 created: 2026-05-13
 updated: 2026-08-22
 sources:
+  - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
   - raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md
   - raw/papers/huang-2026-ndf-joint-neural-directional-filtering/full-text.md
 tags:
@@ -54,5 +55,6 @@ NDF+ extends FT-JNF with:
 
 ## Related Sources
 
+- [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023: Insights Into Deep Non-linear Filters for Improved Multi-channel Speech Enhancement]] — introduces the FT-JNF architecture and the T-JNF/F-JNF/FT-JNF/NSF/PF variant family; the foundational analysis of spatial-spectral-temporal interplay
 - [[sources/tesch-2024-spatially-selective-nonlinear-filters|Tesch & Gerkmann 2024: Multi-channel Speech Separation Using Spatially Selective Deep Non-linear Filters]]
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]

@@ -4628,3 +4628,23 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
   - `wiki/concepts/spatially-selective-nonlinear-filter.md` — added Tesch 2024 as the primary source; added "Multi-Speaker Separation (Tesch & Gerkmann 2024)" section with the SSF-vs-DS/iDS table, robustness findings, and blind-deployment strategies; clarified bidirectional F-LSTM conditioning; extended Related Concepts/Sources
   - `wiki/concepts/joint-nonlinear-filtering.md` — added Tesch 2024 as source; added "FT-JNF in Speech Separation" section describing the F-LSTM/T-LSTM stack in Tesch's terminology and the Williamson & Wang CRM expansion; extended Related Concepts/Sources
   - `wiki/concepts/target-speaker-extraction.md` — added Tesch 2024 to sources and Related Sources; extended SSF bullet in Spatial Methods to note the multi-speaker separation context and SSF-vs-DS finding
+
+---
+
+## [2026-08-22] ingest | Insights Into Deep Non-linear Filters for Improved Multi-channel Speech Enhancement (Tesch & Gerkmann 2023)
+
+- **Source**: `raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md` (Zotero: QZMBNBLN)
+- **Authors**: Kristina Tesch, Timo Gerkmann
+- **Published**: IEEE/ACM Transactions on Audio, Speech, and Language Processing, 2023
+- **DOI**: 10.1109/TASLP.2022.3221046
+- **Summary**: Systematic analysis of DNN-based joint non-linear spatial + tempo-spectral filters (JNF); introduces the FT-JNF architecture (two LSTM + FF with F→T sequence-dim switch) that outperforms an oracle MVDR + post-filter at low microphone counts and five SOTA baselines (EaBNet, FaSNet+TAC, COSPA, CRNN, T-JNF) on speaker extraction and CHiME3, with the fewest parameters (1.2M). Establishes that spectral information contributes more to spatial filtering than temporal information, and that joint non-linear filtering empirically validates the MMSE non-separability result for non-Gaussian noise. The FT-JNF backbone seeds the SSF (Tesch 2024), McNet, and NDF (Huang 2026) lineages.
+- **Pages created**:
+  - `wiki/sources/tesch-2023-insights-deep-nonlinear-filters.md` — source page with 6 figure embeds (Fig 1, 2, 4, 7, 8, 9), Tables II/III/IV, and six numbered Key Contributions
+- **Pages updated**:
+  - `wiki/entities/kristina-tesch.md` — wikilinked the existing Tesch 2023 [22] bullet to the new source page
+  - `wiki/entities/timo-gerkmann.md` — wikilinked the existing Tesch 2023 [22] bullet to the new source page
+  - `wiki/concepts/joint-nonlinear-filtering.md` — added Tesch 2023 to `sources:` frontmatter; added new "Information-Source Variants (Tesch & Gerkmann 2023)" section documenting the T-JNF/F-JNF/FT-JNF/NSF/PF variant family with the key empirical findings; added Tesch 2023 to `## Related Sources`
+  - `wiki/concepts/spatially-selective-nonlinear-filter.md` — added Tesch 2023 to `sources:` frontmatter and `## Related Sources`
+  - `wiki/concepts/mcnet.md` — added Tesch 2023 to `sources:` frontmatter and `## Related Sources`
+  - `wiki/concepts/neural-directional-filtering.md` — added `sources:` field with Tesch 2023 (page previously had no sources field); added Tesch 2023 to `## Related Sources`
+  - `wiki/synthesis/deep-speech-enhancement.md` — added Tesch 2023 to `sources:` frontmatter and Sources Synthesized table; expanded Insight 6 to split the end-to-end neural filter phase into two parallel lineages (2a. neural beamformers / filter-and-sum inspired vs 2b. mask-based non-linear joint filters), with Tesch 2023's FT-JNF as the type example of 2b; gap-fill trigger — the multi-channel synthesis previously omitted the foundational non-linear joint-filter lineage that later SSF/McNet/NDF works build on

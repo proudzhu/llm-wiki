@@ -17,6 +17,7 @@ sources:
   - raw/papers/apostolidis-2026-listen-first-output-based-multi-microphone/full-text.md
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
+  - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
 tags:
   - speech-enhancement
   - deep-learning

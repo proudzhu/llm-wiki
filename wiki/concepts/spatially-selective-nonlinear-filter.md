@@ -3,6 +3,7 @@ type: concept
 created: 2026-05-23
 updated: 2026-08-22
 sources:
+  - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
   - raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md
 tags:
   - deep-learning
@@ -104,5 +105,6 @@ A [[concepts/doa-informed-direct-separation|DoA-informed DS variant (iDS)]] that
 
 ## Related Sources
 
+- [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023: Insights Into Deep Non-linear Filters for Improved Multi-channel Speech Enhancement]] — origin of the FT-JNF backbone and the F-LSTM cell-state observation that controls spatial selectivity [22]
 - [[sources/tesch-2024-spatially-selective-nonlinear-filters|Tesch & Gerkmann 2024: Multi-channel Speech Separation Using Spatially Selective Deep Non-linear Filters]]
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
