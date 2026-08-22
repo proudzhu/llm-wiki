@@ -3,7 +3,7 @@
 The wiki is published via MkDocs Material. The canonical correctness check is:
 
 ```powershell
-uv run mkdocs build --strict --quiet
+uv run mkdocs build --strict
 ```
 
 `--strict` causes the build to fail on **any** WARNING. This is intended as a *sanity check* — page-creation conventions in [AGENTS.md → Link Conventions](AGENTS.md) are designed so the build should always pass on the first try. If a WARNING is produced, the offending page violated a convention and should be fixed in place rather than worked around at build time.
@@ -33,13 +33,13 @@ Three failure modes the conventions defend against:
 Run a full strict build:
 
 ```powershell
-uv run mkdocs build --strict --quiet
+uv run mkdocs build --strict
 ```
 
 Filter to only failing-level output:
 
 ```powershell
-uv run mkdocs build --strict --quiet 2>&1 | Select-String -Pattern "WARNING|ERROR|Aborted"
+uv run mkdocs build --strict 2>&1 | Select-String -Pattern "WARNING|ERROR|Aborted"
 ```
 
 Migrate legacy `[[../...]]` and `![alt](../raw/...)` to the current conventions:
