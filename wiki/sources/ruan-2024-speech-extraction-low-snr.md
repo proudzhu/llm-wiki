@@ -45,7 +45,7 @@ so the cost depends on either $\{\mathbf{a}_i\}$ or $\{\mathbf{w}_i\}$ alone —
 
 ### 1. Convergence-region analysis on real speech
 
-For a $2\times 2$ instantaneous mixture ($\mathbf{A} = [[1,1],[-1,1]]$) of real speech and Gaussian noise at SNR ∈ {−20, 0, 20} dB, the authors plot the cost function against $\mathbf{w} = [1, w]^{\mathrm{T}}$ and $\mathbf{a} = [1, a]^{\mathrm{T}}$ (desired solution $w = a = -1$). Findings:
+For a $2\times 2$ instantaneous mixture ($\mathbf{A} = \begin{bmatrix} 1 & 1 \\ -1 & 1 \end{bmatrix}$) of real speech and Gaussian noise at SNR ∈ {−20, 0, 20} dB, the authors plot the cost function against $\mathbf{w} = [1, w]^{\mathrm{T}}$ and $\mathbf{a} = [1, a]^{\mathrm{T}}$ (desired solution $w = a = -1$). Findings:
 
 - **−20 dB**: the cost w.r.t. $\mathbf{a}$ is *flat and wide* near the desired solution (large region of convergence, ROC — a slightly-off solution barely hurts), while the cost w.r.t. $\mathbf{w}$ is *sharp and narrow* (hard to land accurately). Optimizing $\mathbf{a}$ is advantageous.
 - **0 dB**: the two landscapes are nearly identical.

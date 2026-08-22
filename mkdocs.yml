@@ -4,6 +4,21 @@ site_dir: site
 use_directory_urls: false
 exclude_docs: |
   raw/**/*.md
+# Pages reachable via each category's index page — keep the nav shallow and
+# silence mkdocs's per-page "not included in the nav" INFO listing (1160+ lines
+# of noise per build). Index pages are explicitly listed in nav below and are
+# exempted from these globs.
+not_in_nav: |
+  concepts/*
+  !concepts/index.md
+  entities/*
+  !entities/index.md
+  queries/*
+  !queries/index.md
+  sources/*
+  !sources/index.md
+  synthesis/*
+  !synthesis/index.md
 
 theme:
   name: material
