@@ -4605,3 +4605,26 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
   - `wiki/concepts/target-speaker-asr.md` — added "Privacy-Preserving Alternative: Differential ASR" section
   - `wiki/synthesis/multi-channel-speech-enhancement.md` — extended "where the decision lives" axis from {input, output} to {input, output, multi-frontend-fusion}; added Yang 2025 to Sources table and smart-glasses application row; updated thesis statement and Cross-Cutting Takeaway #4
   - `wiki/index.md`, `wiki/sources/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/synthesis/index.md` — added 13 new entries; statistics updated to 1148/509/438/172/22/7
+
+---
+
+## [2026-08-22] ingest | Multi-channel Speech Separation Using Spatially Selective Deep Non-linear Filters (Tesch & Gerkmann 2024)
+
+- **Source**: `raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md` (Zotero: LFX897WM, PDF key DZ3LMJ9U)
+- **Authors**: Kristina Tesch, Timo Gerkmann
+- **Published**: IEEE/ACM Transactions on Audio, Speech, and Language Processing, 2024
+- **DOI**: [10.1109/TASLP.2023.3334101](https://doi.org/10.1109/TASLP.2023.3334101)
+- **Predecessor**: Tesch & Gerkmann, ICASSP 2023 [26]
+- **Summary**: Journal extension of the ICASSP 2023 SSF paper. Systematically compares the steerable Spatially Selective Filter (SSF) against a PIT-trained Direct Separation (DS) baseline using matched JNF and McNet backbones. SSF advantage grows with speaker count (0.03 ΔPOLQA for 2 spk → 0.56 for 5 spk on McNet). Two blind DoA-estimation strategies (search-based and a compact DNN classifier) match oracle-DoA performance. Robustness experiments show trainable DoA-error tolerance, sharp sensitivity to >1 mm microphone perturbations, far-field/near-field trade-offs, per-speaker output decoupling in collocated-speaker scenarios, and superior generalization to unseen music noise.
+- **Pages created**:
+  - `wiki/sources/tesch-2024-spatially-selective-nonlinear-filters.md` (source)
+  - `wiki/entities/kristina-tesch.md`, `wiki/entities/timo-gerkmann.md` (author entities)
+  - `wiki/concepts/mcnet.md` (Multi-Cue Network architecture)
+  - `wiki/concepts/direct-separation.md` (DS baseline with PIT)
+  - `wiki/concepts/doa-informed-direct-separation.md` (iDS variant)
+  - `wiki/concepts/dnn-based-doa-classifier.md` (proposed blind localizer)
+  - `wiki/concepts/search-based-doa-estimation.md` (proposed search-based localizer)
+- **Pages updated**:
+  - `wiki/concepts/spatially-selective-nonlinear-filter.md` — added Tesch 2024 as the primary source; added "Multi-Speaker Separation (Tesch & Gerkmann 2024)" section with the SSF-vs-DS/iDS table, robustness findings, and blind-deployment strategies; clarified bidirectional F-LSTM conditioning; extended Related Concepts/Sources
+  - `wiki/concepts/joint-nonlinear-filtering.md` — added Tesch 2024 as source; added "FT-JNF in Speech Separation" section describing the F-LSTM/T-LSTM stack in Tesch's terminology and the Williamson & Wang CRM expansion; extended Related Concepts/Sources
+  - `wiki/concepts/target-speaker-extraction.md` — added Tesch 2024 to sources and Related Sources; extended SSF bullet in Spatial Methods to note the multi-speaker separation context and SSF-vs-DS finding

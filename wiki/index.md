@@ -519,6 +519,8 @@
 | [[entities/olivier-siohan\|Olivier Siohan]] | Meta researcher; co-author of Multi-Channel Differential ASR (2025). | 2026-08-22 |
 | [[entities/yue-liu\|Yue Liu]] | Meta researcher; co-author of Multi-Channel Differential ASR (2025). | 2026-08-22 |
 | [[entities/florian-metze\|Florian Metze]] | CMU faculty; co-author of AGADIR (2024) and Multi-Channel Differential ASR (2025). | 2026-08-22 |
+| [[entities/kristina-tesch\|Kristina Tesch]] | Doctoral researcher, Universität Hamburg Signal Processing Group; multi-channel speech enhancement/separation, SSF author (ICASSP 2023 + TASLP 2024). | 2026-08-22 |
+| [[entities/timo-gerkmann\|Timo Gerkmann]] | Professor, Universität Hamburg; head of Signal Processing Research Group; Senior Area Editor IEEE/ACM TASLP; statistical + ML speech/audio processing. | 2026-08-22 |
 
 ---
 
@@ -966,6 +968,11 @@
 | [[concepts/differential-asr\|Differential ASR]] | ASR design pattern combining multiple complementary frontends (beamformer + close-mic + STD embedding) as parallel input channels to a streaming RNN-T. | 2026-08-22 |
 | [[concepts/side-talk-detection\|Side-Talk Detection (STD)]] | VAD-adjacent task distinguishing wearer/bystander/non-speech at sample level without speaker-identity modeling; privacy-preserving frontend for smart-glasses WSR. | 2026-08-22 |
 | [[concepts/wearer-speech-recognition\|Wearer Speech Recognition (WSR)]] | Task of transcribing the device-wearer's speech from on-body microphone array; central to AGADIR, Feng 2025, and Yang 2025 smart-glasses ASR line. | 2026-08-22 |
+| [[concepts/mcnet\|McNet (Multi-Cue Network)]] | Yang/Quan/Li 2023 architecture extending JNF with two single-channel LSTM layers and skip connections; used centrally in Tesch 2024 SSF/DS comparison. | 2026-08-22 |
+| [[concepts/direct-separation\|Direct Separation (DS) with PIT]] | End-to-end regression-based multi-channel speech separation trained with utterance-wise permutation invariant training; contrastive baseline to SSF in Tesch & Gerkmann 2024. | 2026-08-22 |
+| [[concepts/doa-informed-direct-separation\|DoA-Informed Direct Separation (iDS)]] | Tesch & Gerkmann 2024 variant of DS augmented with multi-hot DoA conditioning; controls for DoA-supervision confound — does not close SSF–DS gap for 3+ speakers. | 2026-08-22 |
+| [[concepts/dnn-based-doa-classifier\|DNN-based DoA Classifier]] | Compact F-LSTM + 2-FF network proposed in Tesch & Gerkmann 2024 for blind SSF deployment — more efficient and more accurate than search-based localization. | 2026-08-22 |
+| [[concepts/search-based-doa-estimation\|Search-based DoA Estimation]] | Tesch & Gerkmann 2024 blind-localization strategy: evaluate SSF on direction grid, peak-find on filtered-output energy; computationally expensive but exposes SSF spatial selectivity. | 2026-08-22 |
 
 ---
 
@@ -1147,6 +1154,7 @@
 | [[sources/bai-2026-feedback-guided-anc\|Bai 2026: Feedback-guided DNN-based Controller Fusion for Robust Fixed-Parameter ANC]] | Hybrid WaveNet + feedback-guided MoE of FIR experts for robust fixed-parameter ANC; 19 dB avg NR (50Hz-5kHz) on CCF-AATC headphone ANC. | 2026-08-21 |
 | [[sources/ansari-2023-ai-bss-survey\|Ansari et al. 2023: AI Approaches in BSS Survey]] | Survey of AI-based BSS (Classical ML / DL / Evolutionary) with three-way taxonomy, benchmark tables, complexity comparison, and edge/mobile future directions. | 2026-08-20 |
 | [[sources/yang-2025-mc-differential-asr-smart-glasses\|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] | Multi-frontend differential ASR (beamformer + close-mic + STD embedding) for robust wearer speech recognition on Ray-Ban Meta smart glasses; 18.0% relative WER reduction on real side-talk data. | 2026-08-22 |
+| [[sources/tesch-2024-spatially-selective-nonlinear-filters\|Tesch & Gerkmann 2024: Multi-channel Speech Separation Using Spatially Selective Deep Non-linear Filters]] | Extends ICASSP 2023 SSF; systematically compares SSF vs PIT-trained DS on JNF/McNet — SSF advantage grows with speaker count; search-based and DNN DoA estimation match oracle; robustness/generalization studies. | 2026-08-22 |
 
 ---
 
@@ -1199,10 +1207,10 @@
 
 ## Statistics
 
-- **Total pages**: 1148
-- **Entities**: 509
-- **Concepts**: 438
-- **Sources**: 172
+- **Total pages**: 1156
+- **Entities**: 511
+- **Concepts**: 443
+- **Sources**: 173
 - **Synthesis**: 22
 - **Queries**: 7
 - **Last updated**: 2026-08-22

@@ -442,4 +442,9 @@
 | [[concepts/differential-asr\|Differential ASR]] | ASR design pattern combining multiple complementary frontends (beamformer + close-mic + STD embedding) as parallel input channels to a streaming RNN-T. | 2026-08-22 |
 | [[concepts/side-talk-detection\|Side-Talk Detection (STD)]] | VAD-adjacent task distinguishing wearer/bystander/non-speech at sample level without speaker-identity modeling; privacy-preserving frontend for smart-glasses WSR. | 2026-08-22 |
 | [[concepts/wearer-speech-recognition\|Wearer Speech Recognition (WSR)]] | Task of transcribing the device-wearer's speech from on-body microphone array; central to AGADIR, Feng 2025, and Yang 2025 smart-glasses ASR line. | 2026-08-22 |
+| [[concepts/mcnet\|McNet (Multi-Cue Network)]] | Yang/Quan/Li 2023 architecture extending JNF with two single-channel LSTM layers and skip connections; used centrally in Tesch 2024 SSF/DS comparison. | 2026-08-22 |
+| [[concepts/direct-separation\|Direct Separation (DS) with PIT]] | End-to-end regression-based multi-channel speech separation trained with utterance-wise permutation invariant training; contrastive baseline to SSF in Tesch & Gerkmann 2024. | 2026-08-22 |
+| [[concepts/doa-informed-direct-separation\|DoA-Informed Direct Separation (iDS)]] | Tesch & Gerkmann 2024 variant of DS augmented with multi-hot DoA conditioning; controls for DoA-supervision confound — does not close SSF–DS gap for 3+ speakers. | 2026-08-22 |
+| [[concepts/dnn-based-doa-classifier\|DNN-based DoA Classifier]] | Compact F-LSTM + 2-FF network proposed in Tesch & Gerkmann 2024 for blind SSF deployment — more efficient and more accurate than search-based localization. | 2026-08-22 |
+| [[concepts/search-based-doa-estimation\|Search-based DoA Estimation]] | Tesch & Gerkmann 2024 blind-localization strategy: evaluate SSF on direction grid, peak-find on filtered-output energy; computationally expensive but exposes SSF spatial selectivity. | 2026-08-22 |
 

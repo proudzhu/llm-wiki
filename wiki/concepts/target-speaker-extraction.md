@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-08-19
+updated: 2026-08-22
 sources:
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
   - raw/papers/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction/full-text.md
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
+  - raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md
 tags:
   - speech-processing
   - source-separation
@@ -31,7 +32,7 @@ tags:
 ### Spatial Methods
 
 - **[[concepts/beamforming|Beamforming]]**: Classical spatial filtering using array geometry
-- **[[concepts/spatially-selective-nonlinear-filter|Spatially Selective Non-Linear Filter (SSF)]]**: Deep learning-based mask estimation conditioned on target DOA
+- **[[concepts/spatially-selective-nonlinear-filter|Spatially Selective Non-Linear Filter (SSF)]]**: Deep learning-based mask estimation conditioned on target DOA — repeatedly steered to each speaker to recover individual sources in a multi-speaker separation task; systematically outperforms [[concepts/direct-separation|direct separation (DS) with PIT]] especially as the number of speakers grows (Tesch & Gerkmann 2024)
 - **[[concepts/geometry-conditioned-ssf|Geometry-Conditioned SSF (GC-SSF)]]**: SSF extended with explicit geometry conditioning for robustness across array configurations
 - **[[concepts/spatially-selective-anc|Spatially Selective ANC]]**: Control-theoretic approach for hearables combining ANC with spatial discrimination
 
@@ -116,6 +117,7 @@ The TSE framework naturally extends to:
 ## Related Sources
 
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova et al. 2023: Neural Target Speech Extraction: An Overview]]
+- [[sources/tesch-2024-spatially-selective-nonlinear-filters|Tesch & Gerkmann 2024: Multi-channel Speech Separation Using Spatially Selective Deep Non-linear Filters]]
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
 - [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]]
 - [[sources/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction|Huang et al. 2026: Lightweight Speech Enhancement Guided TSE in Noisy Multi-Speaker Scenarios]]

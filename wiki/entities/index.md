@@ -513,4 +513,6 @@
 | [[entities/olivier-siohan\|Olivier Siohan]] | Meta researcher; co-author of Multi-Channel Differential ASR (2025). | 2026-08-22 |
 | [[entities/yue-liu\|Yue Liu]] | Meta researcher; co-author of Multi-Channel Differential ASR (2025). | 2026-08-22 |
 | [[entities/florian-metze\|Florian Metze]] | CMU faculty; co-author of AGADIR (2024) and Multi-Channel Differential ASR (2025). | 2026-08-22 |
+| [[entities/kristina-tesch\|Kristina Tesch]] | Doctoral researcher, Universität Hamburg Signal Processing Group; multi-channel speech enhancement/separation, SSF author (ICASSP 2023 + TASLP 2024). | 2026-08-22 |
+| [[entities/timo-gerkmann\|Timo Gerkmann]] | Professor, Universität Hamburg; head of Signal Processing Research Group; Senior Area Editor IEEE/ACM TASLP; statistical + ML speech/audio processing. | 2026-08-22 |
 
