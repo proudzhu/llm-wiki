@@ -515,4 +515,6 @@
 | [[entities/florian-metze\|Florian Metze]] | CMU faculty; co-author of AGADIR (2024) and Multi-Channel Differential ASR (2025). | 2026-08-22 |
 | [[entities/kristina-tesch\|Kristina Tesch]] | Doctoral researcher, Universität Hamburg Signal Processing Group; multi-channel speech enhancement/separation, SSF author (ICASSP 2023 + TASLP 2024). | 2026-08-22 |
 | [[entities/timo-gerkmann\|Timo Gerkmann]] | Professor, Universität Hamburg; head of Signal Processing Research Group; Senior Area Editor IEEE/ACM TASLP; statistical + ML speech/audio processing. | 2026-08-22 |
+| [[entities/haoxin-ruan\|Haoxin Ruan]] | NJU researcher; co-first author of low-SNR OGIVE speech extraction (2024) | 2026-08-22 |
+| [[entities/lele-liao\|Lele Liao]] | NJU researcher; IVE of dominant source, IVA for closely spaced sources, low-SNR extraction | 2026-08-22 |
 

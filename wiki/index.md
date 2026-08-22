@@ -521,6 +521,8 @@
 | [[entities/florian-metze\|Florian Metze]] | CMU faculty; co-author of AGADIR (2024) and Multi-Channel Differential ASR (2025). | 2026-08-22 |
 | [[entities/kristina-tesch\|Kristina Tesch]] | Doctoral researcher, Universität Hamburg Signal Processing Group; multi-channel speech enhancement/separation, SSF author (ICASSP 2023 + TASLP 2024). | 2026-08-22 |
 | [[entities/timo-gerkmann\|Timo Gerkmann]] | Professor, Universität Hamburg; head of Signal Processing Research Group; Senior Area Editor IEEE/ACM TASLP; statistical + ML speech/audio processing. | 2026-08-22 |
+| [[entities/haoxin-ruan\|Haoxin Ruan]] | NJU researcher; co-first author of low-SNR OGIVE speech extraction (2024) | 2026-08-22 |
+| [[entities/lele-liao\|Lele Liao]] | NJU researcher; IVE of dominant source, IVA for closely spaced sources, low-SNR extraction | 2026-08-22 |
 
 ---
 
@@ -973,6 +975,10 @@
 | [[concepts/doa-informed-direct-separation\|DoA-Informed Direct Separation (iDS)]] | Tesch & Gerkmann 2024 variant of DS augmented with multi-hot DoA conditioning; controls for DoA-supervision confound — does not close SSF–DS gap for 3+ speakers. | 2026-08-22 |
 | [[concepts/dnn-based-doa-classifier\|DNN-based DoA Classifier]] | Compact F-LSTM + 2-FF network proposed in Tesch & Gerkmann 2024 for blind SSF deployment — more efficient and more accurate than search-based localization. | 2026-08-22 |
 | [[concepts/search-based-doa-estimation\|Search-based DoA Estimation]] | Tesch & Gerkmann 2024 blind-localization strategy: evaluate SSF on direction grid, peak-find on filtered-output energy; computationally expensive but exposes SSF spatial selectivity. | 2026-08-22 |
+| [[concepts/blind-source-extraction\|Blind Source Extraction]] | Extract only the source of interest, disregarding background estimation; IVE is the efficient statistical instantiation | 2026-08-22 |
+| [[concepts/independent-vector-extraction\|Independent Vector Extraction]] | Extraction-targeted IVA variant: non-Gaussian SOI prior + Gaussian background; optimization-parameter choice is decisive at extreme SNR | 2026-08-22 |
+| [[concepts/ogive\|OGIVE]] | IVE with orthogonal constraint; ROC analysis shows mixing-vector optimization wins at extremely low SNR; natural-gradient variants OGIVEa_NG/OGIVEw_NG | 2026-08-22 |
+| [[concepts/natural-gradient\|Natural Gradient]] | Steepest ascent on the Riemannian manifold of demixing matrices (premultiply by W^H W); stabilizes OGIVE convergence and avoids matrix inversions | 2026-08-22 |
 
 ---
 
@@ -1156,6 +1162,7 @@
 | [[sources/yang-2025-mc-differential-asr-smart-glasses\|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] | Multi-frontend differential ASR (beamformer + close-mic + STD embedding) for robust wearer speech recognition on Ray-Ban Meta smart glasses; 18.0% relative WER reduction on real side-talk data. | 2026-08-22 |
 | [[sources/tesch-2024-spatially-selective-nonlinear-filters\|Tesch & Gerkmann 2024: Multi-channel Speech Separation Using Spatially Selective Deep Non-linear Filters]] | Extends ICASSP 2023 SSF; systematically compares SSF vs PIT-trained DS on JNF/McNet — SSF advantage grows with speaker count; search-based and DNN DoA estimation match oracle; robustness/generalization studies. | 2026-08-22 |
 | [[sources/tesch-2023-insights-deep-nonlinear-filters\|Tesch & Gerkmann 2023: Insights Into Deep Non-linear Filters]] | FT-JNF (two-LSTM + FF) joint non-linear spatial + tempo-spectral filter; outperforms oracle MVDR+PF and five SOTA baselines; the architectural basis for SSF, McNet, and NDF | 2026-08-22 |
+| [[sources/ruan-2024-speech-extraction-low-snr\|Ruan, Liao, Chen & Lu 2024: Speech Extraction Under Extremely Low SNR Conditions]] | OGIVE speech extraction at −20 dB SNR: mixing-vector optimization (wide convergence region) + natural-gradient variants (OGIVEa_NG) comparable to ILRMA separation | 2026-08-22 |
 
 ---
 
@@ -1208,10 +1215,10 @@
 
 ## Statistics
 
-- **Total pages**: 1157
-- **Entities**: 511
-- **Concepts**: 443
-- **Sources**: 174
+- **Total pages**: 1164
+- **Entities**: 513
+- **Concepts**: 447
+- **Sources**: 175
 - **Synthesis**: 22
 - **Queries**: 7
 - **Last updated**: 2026-08-22

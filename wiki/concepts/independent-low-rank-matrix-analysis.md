@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-19
-updated: 2026-08-19
+updated: 2026-08-22
 sources:
   - raw/papers/sawada-2019-bss-ilrma-review/full-text.md
+  - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
 tags:
   - blind-source-separation
   - independent-vector-analysis
@@ -81,6 +82,7 @@ All updates are multiplicative and monotonic — they never increase $\mathcal{J
 - **Identifiability**: ILRMA is identifiable when each source's spectrogram is sufficiently low-rank and the mixing matrices are sufficiently different across sources.
 - **Computational cost**: lower than MNMF (no per-bin $M \times M$ matrix inversions of $\mathbf{R}^{(k)}[z]$); the dominant cost is the IP update of $\mathbf{W}^{(k)}$, $\mathcal{O}(N^3 K Z)$ per iteration.
 - **Initialization sensitivity**: random NMF initialization can lead to different local optima; multiple restarts are recommended.
+- **Low-SNR behavior**: at extremely low SNR (−20 dB), removing the projection-back amplitude adjustment *improves* ILRMA's performance, and ILRMA's NMF source modeling keeps it the strongest baseline under sparse interference — though the extraction-only method [[concepts/ogive|OGIVEa_NG]] reaches comparable results while modeling only the target ([[sources/ruan-2024-speech-extraction-low-snr|Ruan et al. 2024]]).
 
 ## Variants and Successors
 
@@ -116,3 +118,4 @@ ILRMA sits at the intersection: IVA's spatial model + MNMF's spectrogram model, 
 - [[sources/sawada-2019-bss-ilrma-review|Sawada et al. 2019: BSS/ILRMA Review]]
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
 - [[sources/nishikori-2026-fast-multichannel-nmf-block-diagonal-scm-bss|Nishikori et al. 2026: Distributed FastMNMF for BSS]]
+- [[sources/ruan-2024-speech-extraction-low-snr|Ruan, Liao, Chen & Lu 2024: Speech Extraction Under Extremely Low SNR Conditions]] — uses ILRMA as the strongest separation baseline at −20 dB SNR

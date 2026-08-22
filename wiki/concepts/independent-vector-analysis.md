@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-21
-updated: 2026-06-04
+updated: 2026-08-22
 sources:
   - raw/papers/guo-2023-iva-survey/full-text.md
   - raw/papers/dong-2026-spatially-regularized-switching-iva/full-text.md
+  - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
 tags:
   - blind-source-separation
   - audio-source-separation
@@ -31,7 +32,7 @@ where $\mathbf{y}_n = [y_n^{(1)}, \ldots, y_n^{(K)}]^T$ is the estimated source 
 
 1. **Permutation-free**: By modeling joint distributions $g(\mathbf{y}_n)$ across frequency bins, the separated sources are automatically aligned — no post-hoc permutation alignment is needed.
 2. **Source prior flexibility**: Common choices include multivariate Laplacian, Gaussian mixture models, Student-t mixtures, and deep-learning-based priors.
-3. **Separation vs. extraction**: Full IVA separates all sources simultaneously; Independent Vector Extraction (IVE) targets a single source of interest.
+3. **Separation vs. extraction**: Full IVA separates all sources simultaneously; [[concepts/independent-vector-extraction|Independent Vector Extraction (IVE)]] targets a single source of interest — and at extremely low SNR, the choice of optimization parameter (mixing vs. demixing vector) becomes decisive ([[concepts/ogive|OGIVE]]).
 
 ## Three Assumptions
 
@@ -45,7 +46,7 @@ Six main families of update rules have been developed for IVA:
 
 | Family | Key idea | Convergence |
 |--------|----------|-------------|
-| Natural Gradient | Step-size-based Riemannian descent | Slow; step-size sensitive |
+| [[concepts/natural-gradient\|Natural Gradient]] | Step-size-based Riemannian descent (premultiply by $\mathbf{W}^{\mathrm{H}}\mathbf{W}$) | Slow; step-size sensitive |
 | FastIVA | Newton fixed-point iteration | Fast; no step-size |
 | AuxIVA | Auxiliary function (majorize-minimize) | Monotonic; stable |
 | EM | Expectation-maximization for latent variables | Handles noise models |
@@ -61,6 +62,10 @@ IVA combined with Nonnegative Matrix Factorization gives **[[concepts/independen
 ## Related Concepts
 
 - [[concepts/blind-source-separation|Blind Source Separation]]
+- [[concepts/blind-source-extraction|Blind Source Extraction]]
+- [[concepts/independent-vector-extraction|Independent Vector Extraction]]
+- [[concepts/ogive|OGIVE]]
+- [[concepts/natural-gradient|Natural Gradient]]
 - [[concepts/independent-low-rank-matrix-analysis|Independent Low-Rank Matrix Analysis]]
 - [[concepts/multichannel-nmf|Multichannel NMF]]
 - [[concepts/fastmnmf|FastMNMF]]
@@ -75,3 +80,4 @@ IVA combined with Nonnegative Matrix Factorization gives **[[concepts/independen
 - [[sources/nishikori-2026-fast-multichannel-nmf-block-diagonal-scm-bss|Nishikori et al. 2026: Distributed FastMNMF for BSS]]
 - [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]
 - [[sources/sawada-2019-bss-ilrma-review|Sawada et al. 2019: BSS/ILRMA Review]]
+- [[sources/ruan-2024-speech-extraction-low-snr|Ruan, Liao, Chen & Lu 2024: Speech Extraction Under Extremely Low SNR Conditions]]

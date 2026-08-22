@@ -22,6 +22,7 @@ sources:
   - raw/papers/li-2026-geometry-conditioned-ssanc/full-text.md
   - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.txt
   - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
+  - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
 tags:
   - multi-channel-speech-enhancement
   - beamforming
@@ -61,6 +62,7 @@ The distinction: this synthesis is about **spatial filtering** (beamforming, coh
 | [[sources/schwarz-2019-dereverberation-spatial-coherence\|Schwarz 2019]] | 2019 | Estimate what | Doctoral thesis: spatial coherence models for dereverb + spatial features as DNN-ASR input |
 | [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement\|Löllmann et al. 2020]] | 2020 | Estimate what | GMC-based CDR via eigenvalue decomposition of $N$-channel coherence matrix; implicit microphone selection via principal eigenvector |
 | [[sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition\|Lin et al. 2024 (AGADIR)]] | 2024 | Geometry | Multi-geometry training + NLCMV beamformer with WNG control for smart-glasses ASR |
+| [[sources/ruan-2024-speech-extraction-low-snr\|Ruan et al. 2024]] | 2024 | Estimate what | Blind extraction at −20 dB SNR: OGIVE with mixing-vector optimization + natural gradient; parameterization choice beats modeling sophistication |
 | [[sources/mittal-2026-adaptive-diagonal-loading-beamforming\|Mittal et al. 2026]] | 2026 | Robustness | Kantorovich-bounded adaptive diagonal loading; deterministic WNG guarantee via condition-number bound |
 | [[sources/deng-2026-joint-covariance-wng-mvdr\|Deng et al. 2026]] | 2026 | Robustness | Data-driven frequency-dependent WNG thresholds via dual-branch network + differentiable robust MVDR layer |
 | [[sources/oviste-2026-neural-vslf-speech-enhancement\|Oviste et al. 2026]] | 2026 | Hybrid | HVSF: DNN predicts SCM + tradeoff → classical VSLF weights (MWF/MVDR/GEV as special cases) |
@@ -129,6 +131,8 @@ Across the whole corpus, MCSE methods can be placed on a single spectrum of **wh
 **The tradeoff**: moving down the spectrum relaxes assumptions (DOA → coherence → SCM → direct weights) but sacrifices interpretability and controllability. Schwarz 2015's CDR estimators expose a clean physical quantity (coherent-to-diffuse ratio) with a geometric interpretation in the complex plane; Zaidel 2026's deep beamformer produces weights that satisfy constraints only statistically via the loss function. The 2026 **hybrid** methods (Steps 4–5) deliberately stop short of Step 6 to preserve the ability to inspect and control the filter — HVSF exposes the VSLF tradeoff parameter $\mu$ and span dimension $Q$, R-MWF exposes variance ratios $\psi_i, \psi_R, \psi_V$, Farmani's virtual-mic MVDR exposes the RTF power $\lambda$.
 
 **The relaxation is not monotonic in performance**: [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis 2026]] shows that an output-based wrapper around Step 5 (MPDR with RTF dictionary) can outperform a Step 6 end-to-end approach at low SNR — the structural prior (candidate dictionary + GP selection) beats unconstrained learned weights when input statistics are unreliable.
+
+**A parallel blind-extraction branch (Ruan 2024)**: [[sources/ruan-2024-speech-extraction-low-snr|Ruan et al. 2024]] sit outside the spatial-statistics chain entirely — [[concepts/ogive|OGIVE]] estimates the extraction filter from statistical *independence* (non-Gaussian SOI + Gaussian background), with no DOA/coherence/SCM estimation step. At −20 dB SNR — far below the −5 dB regime of Apostolidis 2026 — they show that the **parameterization of the estimator dominates its modeling sophistication**: optimizing the mixing vector $\mathbf{a}$ (whose cost landscape has a wide, flat convergence region at low SNR) instead of the conventional demixing vector $\mathbf{w}$ is the difference between extracting the weak speech source and locking onto the dominant noise, and replacing the ordinary gradient with the natural gradient removes the remaining convergence instability. The resulting OGIVEa_NG matches [[concepts/independent-low-rank-matrix-analysis|ILRMA]] separation despite modeling only the target — the same "structure beats capacity" lesson as R-MWF (Insight 4), now extended to the blind-statistical branch and the extreme-SNR regime.
 
 ## Insight 4: Hybrid DNN-Guided Linear Filters Preserve Interpretability
 

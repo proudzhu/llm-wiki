@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-21
-updated: 2026-08-20
+updated: 2026-08-22
 sources:
   - raw/papers/guo-2023-iva-survey/full-text.md
   - raw/papers/dong-2026-spatially-regularized-switching-iva/full-text.md
   - raw/papers/richard-2023-audio-signal-processing-21st-century/full-text.md
   - raw/papers/ansari-2023-ai-bss-survey/full-text.md
+  - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
 tags:
   - signal-processing
   - audio-source-separation
@@ -79,6 +80,7 @@ The survey benchmarks these methods across audio, speech, music, voice, and sour
 ## Related Concepts
 
 - [[concepts/independent-vector-analysis|Independent Vector Analysis]]
+- [[concepts/blind-source-extraction|Blind Source Extraction]]
 - [[concepts/switching-independent-vector-analysis|Switching Independent Vector Analysis]]
 - [[concepts/iterative-source-steering|Iterative Source Steering]]
 - [[concepts/spatial-regularization|Spatial Regularization]]

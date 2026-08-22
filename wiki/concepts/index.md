@@ -447,4 +447,8 @@
 | [[concepts/doa-informed-direct-separation\|DoA-Informed Direct Separation (iDS)]] | Tesch & Gerkmann 2024 variant of DS augmented with multi-hot DoA conditioning; controls for DoA-supervision confound — does not close SSF–DS gap for 3+ speakers. | 2026-08-22 |
 | [[concepts/dnn-based-doa-classifier\|DNN-based DoA Classifier]] | Compact F-LSTM + 2-FF network proposed in Tesch & Gerkmann 2024 for blind SSF deployment — more efficient and more accurate than search-based localization. | 2026-08-22 |
 | [[concepts/search-based-doa-estimation\|Search-based DoA Estimation]] | Tesch & Gerkmann 2024 blind-localization strategy: evaluate SSF on direction grid, peak-find on filtered-output energy; computationally expensive but exposes SSF spatial selectivity. | 2026-08-22 |
+| [[concepts/blind-source-extraction\|Blind Source Extraction]] | Extract only the source of interest, disregarding background estimation; IVE is the efficient statistical instantiation | 2026-08-22 |
+| [[concepts/independent-vector-extraction\|Independent Vector Extraction]] | Extraction-targeted IVA variant: non-Gaussian SOI prior + Gaussian background; optimization-parameter choice is decisive at extreme SNR | 2026-08-22 |
+| [[concepts/ogive\|OGIVE]] | IVE with orthogonal constraint; ROC analysis shows mixing-vector optimization wins at extremely low SNR; natural-gradient variants OGIVEa_NG/OGIVEw_NG | 2026-08-22 |
+| [[concepts/natural-gradient\|Natural Gradient]] | Steepest ascent on the Riemannian manifold of demixing matrices (premultiply by W^H W); stabilizes OGIVE convergence and avoids matrix inversions | 2026-08-22 |
 

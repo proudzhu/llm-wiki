@@ -4648,3 +4648,15 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
   - `wiki/concepts/mcnet.md` — added Tesch 2023 to `sources:` frontmatter and `## Related Sources`
   - `wiki/concepts/neural-directional-filtering.md` — added `sources:` field with Tesch 2023 (page previously had no sources field); added Tesch 2023 to `## Related Sources`
   - `wiki/synthesis/deep-speech-enhancement.md` — added Tesch 2023 to `sources:` frontmatter and Sources Synthesized table; expanded Insight 6 to split the end-to-end neural filter phase into two parallel lineages (2a. neural beamformers / filter-and-sum inspired vs 2b. mask-based non-linear joint filters), with Tesch 2023's FT-JNF as the type example of 2b; gap-fill trigger — the multi-channel synthesis previously omitted the foundational non-linear joint-filter lineage that later SSF/McNet/NDF works build on
+
+---
+
+## [2026-08-22] ingest | Speech extraction under extremely low SNR conditions (Ruan 2024)
+
+- **Source**: `raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md` (Zotero: N9UGYX3K)
+- **Authors**: Haoxin Ruan, Lele Liao, Kai Chen, Jing Lu
+- **Published**: Applied Acoustics 2024, Art. 110149
+- **DOI**: 10.1016/j.apacoust.2024.110149
+- **Summary**: OGIVE-based blind speech extraction at −20 dB SNR; real-speech cost-landscape analysis shows mixing-vector optimization is advantageous at extremely low SNR (wide flat convergence region); proposed natural-gradient variants (OGIVEa_NG best) match ILRMA separation across reverberant/real-room/noise-type conditions.
+- **Pages created**: `wiki/sources/ruan-2024-speech-extraction-low-snr.md`, `wiki/entities/haoxin-ruan.md`, `wiki/entities/lele-liao.md`, `wiki/concepts/blind-source-extraction.md`, `wiki/concepts/independent-vector-extraction.md`, `wiki/concepts/ogive.md`, `wiki/concepts/natural-gradient.md`
+- **Pages updated**: `wiki/entities/jing-lu.md` + `wiki/entities/kai-chen.md` (appended paper bullets), `wiki/concepts/independent-vector-analysis.md` (IVE/OGIVE/natural-gradient cross-refs, new source), `wiki/concepts/independent-low-rank-matrix-analysis.md` (low-SNR behavior note), `wiki/concepts/blind-source-separation.md` (BSE cross-ref), `wiki/synthesis/multi-channel-speech-enhancement.md` (blind-extraction branch paragraph in Insight 3 + sources table row)

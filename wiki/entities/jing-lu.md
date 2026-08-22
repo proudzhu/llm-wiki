@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-24
-updated: 2026-08-21
+updated: 2026-08-22
 tags:
   - researcher
   - speech-enhancement
@@ -23,3 +23,4 @@ tags:
 - Co-author of CoFi-Lite (IEEE SPL 2026) — ultra-lightweight speech enhancement with decoupled coarse/fine paths, 12.87M MACs/s — [[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement|Yang et al. 2026]]
 - Co-author of DPCRN (Interspeech 2021) — dual-path convolution recurrent network for speech enhancement
 - Co-author of HALO (arXiv 2026) — half-frame-rate adaptive learnable operator for lightweight STFT-based speech enhancement
+- Corresponding author of "Speech extraction under extremely low SNR conditions" (Applied Acoustics 2024) — OGIVE convergence-region analysis on real speech plus natural-gradient variants (OGIVEa_NG/OGIVEw_NG), NSFC 12274221 — [[sources/ruan-2024-speech-extraction-low-snr|Ruan et al. 2024]]
