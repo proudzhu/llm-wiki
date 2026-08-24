@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-21
-updated: 2026-08-22
+updated: 2026-08-24
 sources:
   - raw/papers/guo-2023-iva-survey/full-text.md
   - raw/papers/dong-2026-spatially-regularized-switching-iva/full-text.md
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
+  - raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md
 tags:
   - blind-source-separation
   - audio-source-separation
@@ -51,7 +52,7 @@ Six main families of update rules have been developed for IVA:
 | AuxIVA | Auxiliary function (majorize-minimize) | Monotonic; stable |
 | EM | Expectation-maximization for latent variables | Handles noise models |
 | BCD (IP/ISS/IPA) | Block coordinate descent with closed-form updates | Widely used; efficient |
-| EVD | Eigenvalue decomposition for extraction | Very fast for single source |
+| EVD | Eigenvalue decomposition for extraction ([[concepts/fast-independent-vector-extraction\|FIVE]]) | Very fast for single source |
 
 AuxIVA (Ono 2011) is the most widely adopted baseline due to its guaranteed monotonic convergence without tuning parameters.
 
@@ -65,6 +66,7 @@ IVA combined with Nonnegative Matrix Factorization gives **[[concepts/independen
 - [[concepts/blind-source-extraction|Blind Source Extraction]]
 - [[concepts/independent-vector-extraction|Independent Vector Extraction]]
 - [[concepts/ogive|OGIVE]]
+- [[concepts/fast-independent-vector-extraction|Fast Independent Vector Extraction]]
 - [[concepts/natural-gradient|Natural Gradient]]
 - [[concepts/independent-low-rank-matrix-analysis|Independent Low-Rank Matrix Analysis]]
 - [[concepts/multichannel-nmf|Multichannel NMF]]
@@ -81,3 +83,4 @@ IVA combined with Nonnegative Matrix Factorization gives **[[concepts/independen
 - [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]
 - [[sources/sawada-2019-bss-ilrma-review|Sawada et al. 2019: BSS/ILRMA Review]]
 - [[sources/ruan-2024-speech-extraction-low-snr|Ruan, Liao, Chen & Lu 2024: Speech Extraction Under Extremely Low SNR Conditions]]
+- [[sources/scheibler-2020-fast-independent-vector-extraction|Scheibler & Ono 2020: Fast Independent Vector Extraction]]

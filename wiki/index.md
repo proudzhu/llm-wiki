@@ -523,6 +523,7 @@
 | [[entities/timo-gerkmann\|Timo Gerkmann]] | Professor, Universität Hamburg; head of Signal Processing Research Group; Senior Area Editor IEEE/ACM TASLP; statistical + ML speech/audio processing. | 2026-08-22 |
 | [[entities/haoxin-ruan\|Haoxin Ruan]] | NJU researcher; co-first author of low-SNR OGIVE speech extraction (2024) | 2026-08-22 |
 | [[entities/lele-liao\|Lele Liao]] | NJU researcher; IVE of dominant source, IVA for closely spaced sources, low-SNR extraction | 2026-08-22 |
+| [[entities/robin-scheibler\|Robin Scheibler]] | Tokyo Metropolitan University (JSPS fellow, Ono Lab) - FIVE, OverIVA, pyroomacoustics | 2026-08-24 |
 
 ---
 
@@ -979,6 +980,7 @@
 | [[concepts/independent-vector-extraction\|Independent Vector Extraction]] | Extraction-targeted IVA variant: non-Gaussian SOI prior + Gaussian background; optimization-parameter choice is decisive at extreme SNR | 2026-08-22 |
 | [[concepts/ogive\|OGIVE]] | IVE with orthogonal constraint; ROC analysis shows mixing-vector optimization wins at extremely low SNR; natural-gradient variants OGIVEa_NG/OGIVEw_NG | 2026-08-22 |
 | [[concepts/natural-gradient\|Natural Gradient]] | Steepest ascent on the Riemannian manifold of demixing matrices (premultiply by W^H W); stabilizes OGIVE convergence and avoids matrix inversions | 2026-08-22 |
+| [[concepts/fast-independent-vector-extraction\|Fast Independent Vector Extraction (FIVE)]] | Iterative maximum-SINR beamforming with a reweighted background covariance; globally minimizes the auxiliary function at every iteration, converging in a few iterations | 2026-08-24 |
 
 ---
 
@@ -1163,6 +1165,7 @@
 | [[sources/tesch-2024-spatially-selective-nonlinear-filters\|Tesch & Gerkmann 2024: Multi-channel Speech Separation Using Spatially Selective Deep Non-linear Filters]] | Extends ICASSP 2023 SSF; systematically compares SSF vs PIT-trained DS on JNF/McNet — SSF advantage grows with speaker count; search-based and DNN DoA estimation match oracle; robustness/generalization studies. | 2026-08-22 |
 | [[sources/tesch-2023-insights-deep-nonlinear-filters\|Tesch & Gerkmann 2023: Insights Into Deep Non-linear Filters]] | FT-JNF (two-LSTM + FF) joint non-linear spatial + tempo-spectral filter; outperforms oracle MVDR+PF and five SOTA baselines; the architectural basis for SSF, McNet, and NDF | 2026-08-22 |
 | [[sources/ruan-2024-speech-extraction-low-snr\|Ruan, Liao, Chen & Lu 2024: Speech Extraction Under Extremely Low SNR Conditions]] | OGIVE speech extraction at −20 dB SNR: mixing-vector optimization (wide convergence region) + natural-gradient variants (OGIVEa_NG) comparable to ILRMA separation | 2026-08-22 |
+| [[sources/scheibler-2020-fast-independent-vector-extraction\|Scheibler & Ono 2020: Fast Independent Vector Extraction]] | FIVE: blind extraction of a single non-Gaussian source from a Gaussian background via iterative max-SINR beamforming; auxiliary function globally minimized per iteration, peak SDR in 1-3 iterations | 2026-08-24 |
 
 ---
 
@@ -1215,10 +1218,10 @@
 
 ## Statistics
 
-- **Total pages**: 1164
-- **Entities**: 513
-- **Concepts**: 447
-- **Sources**: 175
+- **Total pages**: 1167
+- **Entities**: 514
+- **Concepts**: 448
+- **Sources**: 176
 - **Synthesis**: 22
 - **Queries**: 7
-- **Last updated**: 2026-08-22
+- **Last updated**: 2026-08-24

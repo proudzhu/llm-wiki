@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-05-21
-updated: 2026-08-22
+updated: 2026-08-24
 sources:
   - raw/papers/guo-2023-iva-survey/full-text.md
   - raw/papers/dong-2026-spatially-regularized-switching-iva/full-text.md
   - raw/papers/richard-2023-audio-signal-processing-21st-century/full-text.md
   - raw/papers/ansari-2023-ai-bss-survey/full-text.md
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
+  - raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md
 tags:
   - signal-processing
   - audio-source-separation
@@ -64,7 +65,7 @@ The survey benchmarks these methods across audio, speech, music, voice, and sour
 - **Permutation ambiguity**: Each frequency bin is solved independently in ICA, so source ordering may differ across bins.
 - **Scaling ambiguity**: Source magnitudes are not identifiable without additional constraints.
 - **Underdetermined mixtures**: When sources outnumber microphones ($N > M$), full separation requires sparse/structured priors.
-- **Computational cost**: Joint optimization over all frequency bins is expensive; efficient update rules (IP, ISS, AuxIVA) are critical.
+- **Computational cost**: Joint optimization over all frequency bins is expensive; efficient update rules (IP, ISS, AuxIVA) are critical — for single-source extraction, FIVE's global auxiliary-function minimization reaches peak performance in a handful of iterations (Scheibler & Ono 2020).
 
 ## Applications
 
@@ -100,3 +101,4 @@ The survey benchmarks these methods across audio, speech, music, voice, and sour
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023: Audio Signal Processing in the 21st Century]] — 25-year retrospective tracing the determined and monophonic BSS lineages
 - [[sources/sawada-2019-bss-ilrma-review|Sawada et al. 2019: BSS/ILRMA Review]] — unified tutorial of the ICA and NMF routes converging at ILRMA
 - [[sources/ansari-2023-ai-bss-survey|Ansari et al. 2023: AI Approaches in BSS Survey]] — three-way taxonomy of AI-based BSS (Classical ML / DL / Evolutionary) complementing the statistical lineage above
+- [[sources/scheibler-2020-fast-independent-vector-extraction|Scheibler & Ono 2020: Fast Independent Vector Extraction]] — fast single-source extraction via iterative SINR maximization

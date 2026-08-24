@@ -517,4 +517,5 @@
 | [[entities/timo-gerkmann\|Timo Gerkmann]] | Professor, Universität Hamburg; head of Signal Processing Research Group; Senior Area Editor IEEE/ACM TASLP; statistical + ML speech/audio processing. | 2026-08-22 |
 | [[entities/haoxin-ruan\|Haoxin Ruan]] | NJU researcher; co-first author of low-SNR OGIVE speech extraction (2024) | 2026-08-22 |
 | [[entities/lele-liao\|Lele Liao]] | NJU researcher; IVE of dominant source, IVA for closely spaced sources, low-SNR extraction | 2026-08-22 |
+| [[entities/robin-scheibler\|Robin Scheibler]] | Tokyo Metropolitan University (JSPS fellow, Ono Lab) - FIVE, OverIVA, pyroomacoustics | 2026-08-24 |
 

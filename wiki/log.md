@@ -4660,3 +4660,15 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
 - **Summary**: OGIVE-based blind speech extraction at −20 dB SNR; real-speech cost-landscape analysis shows mixing-vector optimization is advantageous at extremely low SNR (wide flat convergence region); proposed natural-gradient variants (OGIVEa_NG best) match ILRMA separation across reverberant/real-room/noise-type conditions.
 - **Pages created**: `wiki/sources/ruan-2024-speech-extraction-low-snr.md`, `wiki/entities/haoxin-ruan.md`, `wiki/entities/lele-liao.md`, `wiki/concepts/blind-source-extraction.md`, `wiki/concepts/independent-vector-extraction.md`, `wiki/concepts/ogive.md`, `wiki/concepts/natural-gradient.md`
 - **Pages updated**: `wiki/entities/jing-lu.md` + `wiki/entities/kai-chen.md` (appended paper bullets), `wiki/concepts/independent-vector-analysis.md` (IVE/OGIVE/natural-gradient cross-refs, new source), `wiki/concepts/independent-low-rank-matrix-analysis.md` (low-SNR behavior note), `wiki/concepts/blind-source-separation.md` (BSE cross-ref), `wiki/synthesis/multi-channel-speech-enhancement.md` (blind-extraction branch paragraph in Insight 3 + sources table row)
+
+---
+
+## [2026-08-24] ingest | Fast Independent Vector Extraction (Scheibler & Ono 2020)
+
+- **Source**: `raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md` (Zotero: P4LS24WL, arXiv: 1910.10654)
+- **Authors**: Robin Scheibler, Nobutaka Ono
+- **Published**: IEEE ICASSP 2020, Barcelona, Spain
+- **DOI**: 10.1109/ICASSP40776.2020.9053066
+- **Summary**: FIVE — blind extraction of a single non-Gaussian source from a Gaussian background via iterative max-SINR beamforming with a target-suppressing reweighted background covariance; proven to globally minimize the OverIVA auxiliary function at every iteration via an exact eigendecomposition (special case of HEAD); peak SDR improvement in 1–3 iterations, ~5× faster than OverIVA and ≥10× faster than full AuxIVA.
+- **Pages created**: `wiki/sources/scheibler-2020-fast-independent-vector-extraction.md`, `wiki/entities/robin-scheibler.md`, `wiki/concepts/fast-independent-vector-extraction.md`
+- **Pages updated**: `wiki/entities/nobutaka-ono.md` (added FIVE contribution), `wiki/concepts/independent-vector-extraction.md` (FIVE in method families + convergence section), `wiki/concepts/ogive.md` (FIVE comparison section), `wiki/concepts/blind-source-extraction.md` (FIVE in method families), `wiki/concepts/independent-vector-analysis.md` (FIVE as EVD-family exemplar), `wiki/concepts/generalized-eigenvalue-decomposition.md` (FIVE application section), `wiki/concepts/blind-source-separation.md` (computational-cost cross-ref), `wiki/synthesis/multi-channel-speech-enhancement.md` (blind-extraction speed-frontier paragraph + timeline row)

@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-22
-updated: 2026-08-22
+updated: 2026-08-24
 sources:
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
+  - raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md
 tags:
   - blind-source-extraction
   - audio-source-separation
@@ -25,7 +26,7 @@ Since identifying the BG $\mathbf{z}_{ij} = \mathbf{B}_i\mathbf{x}_{ij}$ is not 
 
 ## Method Families
 
-- **[[concepts/independent-vector-extraction|Independent Vector Extraction (IVE)]]** — computationally efficient, extraction-targeted variant of IVA; includes [[concepts/ogive|OGIVE]] (orthogonal constraint, gradient-based), auxiliary-function-based IVE, and OverIVE (overdetermined formulation).
+- **[[concepts/independent-vector-extraction|Independent Vector Extraction (IVE)]]** — computationally efficient, extraction-targeted variant of IVA; includes [[concepts/ogive|OGIVE]] (orthogonal constraint, gradient-based), auxiliary-function-based IVE, OverIVE (overdetermined formulation), and [[concepts/fast-independent-vector-extraction|FIVE]] (iterative SINR maximization, converges in a few iterations).
 - **Neural target-speaker extraction** — clue-driven deep-learning extraction ([[concepts/target-speaker-extraction|Target Speaker Extraction]]); requires a speaker/enrollment clue rather than relying on statistical independence alone.
 
 ## Why Extraction (Not Separation) at Low SNR
@@ -37,9 +38,11 @@ At extremely low SNR (e.g., −20 dB), separation algorithms that model *all* so
 - [[concepts/blind-source-separation|Blind Source Separation]]
 - [[concepts/independent-vector-extraction|Independent Vector Extraction]]
 - [[concepts/ogive|OGIVE]]
+- [[concepts/fast-independent-vector-extraction|Fast Independent Vector Extraction]]
 - [[concepts/target-speaker-extraction|Target Speaker Extraction]]
 
 ## Related Sources
 
 - [[sources/ruan-2024-speech-extraction-low-snr|Ruan, Liao, Chen & Lu 2024: Speech Extraction Under Extremely Low SNR Conditions]]
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova et al. 2023: Neural Target Speech Extraction Overview]]
+- [[sources/scheibler-2020-fast-independent-vector-extraction|Scheibler & Ono 2020: Fast Independent Vector Extraction]]

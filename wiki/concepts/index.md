@@ -451,4 +451,5 @@
 | [[concepts/independent-vector-extraction\|Independent Vector Extraction]] | Extraction-targeted IVA variant: non-Gaussian SOI prior + Gaussian background; optimization-parameter choice is decisive at extreme SNR | 2026-08-22 |
 | [[concepts/ogive\|OGIVE]] | IVE with orthogonal constraint; ROC analysis shows mixing-vector optimization wins at extremely low SNR; natural-gradient variants OGIVEa_NG/OGIVEw_NG | 2026-08-22 |
 | [[concepts/natural-gradient\|Natural Gradient]] | Steepest ascent on the Riemannian manifold of demixing matrices (premultiply by W^H W); stabilizes OGIVE convergence and avoids matrix inversions | 2026-08-22 |
+| [[concepts/fast-independent-vector-extraction\|Fast Independent Vector Extraction (FIVE)]] | Iterative maximum-SINR beamforming with a reweighted background covariance; globally minimizes the auxiliary function at every iteration, converging in a few iterations | 2026-08-24 |
 

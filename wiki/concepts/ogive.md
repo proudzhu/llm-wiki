@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-22
-updated: 2026-08-22
+updated: 2026-08-24
 sources:
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
+  - raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md
 tags:
   - blind-source-extraction
   - independent-vector-extraction
@@ -49,9 +50,14 @@ Plotting the OGIVE cost on real speech against $\mathbf{w} = [1, w]^{\mathrm{T}}
 
 The same analysis explains convergence behavior: demixing-vector methods drift to the *dominant* source (the noise at −20 dB), mixing-vector methods extract the *weak* source; the natural gradient removes OGIVEa's unstable convergence and OGIVEw's below-start degradation.
 
+## Comparison with FIVE
+
+The auxiliary-function-based [[concepts/fast-independent-vector-extraction|FIVE]] is the fast counterpart of OGIVE within the IVE family: in Scheibler & Ono's (2020) experiments, FIVE reaches peak SDR improvement in **one to three iterations**, while gradient-ascent OGIVE (4000 iterations, step size 0.1) converges much more slowly, eventually reaching similar SDR improvement only outside the plotted runtime range. Both share the Gaussian-background blind spot — under background-model mismatch (few interferers) FIVE and OGIVE degrade similarly, where model-free AuxIVA is markedly more robust.
+
 ## Related Concepts
 
 - [[concepts/independent-vector-extraction|Independent Vector Extraction]]
+- [[concepts/fast-independent-vector-extraction|Fast Independent Vector Extraction]]
 - [[concepts/blind-source-extraction|Blind Source Extraction]]
 - [[concepts/natural-gradient|Natural Gradient]]
 - [[concepts/independent-vector-analysis|Independent Vector Analysis]]
@@ -60,3 +66,4 @@ The same analysis explains convergence behavior: demixing-vector methods drift t
 
 - [[sources/ruan-2024-speech-extraction-low-snr|Ruan, Liao, Chen & Lu 2024: Speech Extraction Under Extremely Low SNR Conditions]]
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
+- [[sources/scheibler-2020-fast-independent-vector-extraction|Scheibler & Ono 2020: Fast Independent Vector Extraction]]
