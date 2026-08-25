@@ -518,4 +518,6 @@
 | [[entities/haoxin-ruan\|Haoxin Ruan]] | NJU researcher; co-first author of low-SNR OGIVE speech extraction (2024) | 2026-08-22 |
 | [[entities/lele-liao\|Lele Liao]] | NJU researcher; IVE of dominant source, IVA for closely spaced sources, low-SNR extraction | 2026-08-22 |
 | [[entities/robin-scheibler\|Robin Scheibler]] | Tokyo Metropolitan University (JSPS fellow, Ono Lab) - FIVE, OverIVA, pyroomacoustics | 2026-08-24 |
+| [[entities/saeed-bagheri\|Saeed Bagheri]] | Researcher at Sonos Inc.; multi-channel noise reduction and parametric Wiener filtering for smart loudspeaker arrays. | 2026-08-25 |
+| [[entities/daniele-giacobello\|Daniele Giacobello]] | Researcher at Sonos Inc.; speech enhancement, sparse speech modeling/coding for consumer audio devices. | 2026-08-25 |
 

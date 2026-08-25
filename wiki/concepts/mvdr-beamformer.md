@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-08-22
+updated: 2026-08-25
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
   - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
+  - raw/papers/bagheri-2019-pmwf-spp/full-text.md
 tags:
   - beamforming
   - speech-enhancement
@@ -53,6 +54,10 @@ Taseska & Habets develop the [[concepts/informed-spatial-filter|informed spatial
 
 Yang et al. (2025) adopt an internal adjusted MVDR for [[concepts/wearer-speech-recognition|WSR]] on Ray-Ban Meta smart glasses (5-mic array), with the beamformer steered to the wearer's mouth only. This contrasts with the [[concepts/nlcmv-beamforming|NLCMV]] beamformer of AGADIR (Lin et al. 2024), which steers multiple directions to support conversational ASR of both wearer and bystander. For pure WSR, the single-direction MVDR is reported as more suitable than NLCMV. The MVDR output (`ch-x`) is then used as one of three complementary frontends in the [[concepts/differential-asr|differential ASR]] framework, alongside a fixed microphone selection (`ch-0`) and a [[concepts/side-talk-detection|side-talk detection]] embedding. The combination achieves 18.0% relative WER reduction on real side-talk data over the noisy-trained single-MVDR-frontend baseline.
 
+## MVDR as the β = 0 Endpoint of the PMWF
+
+The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-wiener-filter|PMWF]] family: setting the trade-off parameter $\beta = 0$ in the PMWF closed form recovers the MVDR, while $\beta = 1$ gives the MWF. [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019]] benchmark this continuum on a 4-mic circular array (TIMIT speech, babble/pink interference, $T_{60}=300$ ms): the MWF consistently beats MVDR on ΔSINR, ΔSegSNR, and noise reduction at the expected cost of nonzero speech distortion, and an [[concepts/multi-channel-speech-presence-probability|MC-SPP]]-controlled $\beta$ (plus an MMSE output blend) improves further over the fixed-parameter MWF. This matches the structural intuition that MVDR's distortionless constraint leaves noise-reduction headroom on the table.
+
 ## Related Concepts
 
 - [[concepts/beamforming|Beamforming]]
@@ -74,6 +79,7 @@ Yang et al. (2025) adopt an internal adjusted MVDR for [[concepts/wearer-speech-
 - [[concepts/informed-gsc|Informed GSC]] — adaptive, matrix-inversion-free implementation of the informed MVDR
 - [[concepts/nlcmv-beamforming|NLCMV Beamforming]] — multi-direction, multi-constraint extension (Lin et al. 2024)
 - [[concepts/differential-asr|Differential ASR]] — framework where MVDR is one of several parallel frontends (Yang et al. 2025)
+- [[concepts/parametric-multi-channel-wiener-filter|Parametric Multi-Channel Wiener Filter (PMWF)]] — MVDR is the $\beta = 0$ distortionless endpoint
 
 ## Related Sources
 
@@ -86,3 +92,4 @@ Yang et al. (2025) adopt an internal adjusted MVDR for [[concepts/wearer-speech-
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — MVDR + adaptive coherence post-filter on a 3-mic Huawei Mate 8
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] — per-bin informed MVDR with detector-driven online statistics
 - [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] — wearer-focused adjusted MVDR as one frontend in a differential ASR system
+- [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]] — MVDR vs. MWF vs. SPP-controlled PMWF continuum benchmark

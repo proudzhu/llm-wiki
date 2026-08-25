@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-16
-updated: 2026-08-16
+updated: 2026-08-25
 sources:
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
+  - raw/papers/bagheri-2019-pmwf-spp/full-text.md
 tags:
   - noise-estimation
   - speech-enhancement
@@ -35,6 +36,10 @@ The key contribution: a **CDR-based a priori SAP** estimator that exploits the s
 
 The estimated $\boldsymbol{\Phi}_{\mathbf{v}}$ and SPP drive [[concepts/informed-spatial-filter|informed MVDR and MWF filters]] for blind speech extraction. The SPP also serves as the PMWF trade-off parameter, balancing noise reduction against speech distortion.
 
+## Practical Implementation (Bagheri & Giacobello 2019)
+
+[[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019]] implement exactly this structure — described as a multi-channel generalization of MCRA — with the [[concepts/multi-channel-speech-presence-probability|MC-SPP]] as the control signal: effective smoothing $\tilde{\alpha}_v(\ell,k) = \alpha_v + (1-\alpha_v)\,p(\ell,k)$ with fixed $q_0 = 0.5$, plus practical safeguards the ML derivation does not cover: SPP smoothing with clamping to $[p_{\min}, p_{\max}]$, a fallback $\widehat{\boldsymbol{\Phi}}_{vv}^{-1} = \widehat{\boldsymbol{\Phi}}_{yy}^{-1}$ when $\gamma$ or $\xi$ go negative, a noise-only initialization period, and — since each update is a rank-1 correction — a **direct Woodbury/Sherman–Morrison update of the inverse** $\widehat{\boldsymbol{\Phi}}_{vv}^{-1}$ that avoids per-frame matrix inversions. The same SPP drives the [[concepts/parametric-multi-channel-wiener-filter|PMWF]] trade-off parameter and an MMSE output estimate with a $G_{\min}$ suppression floor.
+
 ## Related Concepts
 
 - [[concepts/informed-spatial-filter|Informed Spatial Filter (ISF)]]
@@ -44,7 +49,10 @@ The estimated $\boldsymbol{\Phi}_{\mathbf{v}}$ and SPP drive [[concepts/informed
 - [[concepts/multi-channel-wiener-filter|Multichannel Wiener Filter]]
 - [[concepts/voice-activity-detection|Voice Activity Detection]]
 - [[concepts/speech-enhancement|Speech Enhancement]]
+- [[concepts/multi-channel-speech-presence-probability|Multi-Channel Speech Presence Probability]] — the SPP control signal in the multi-channel recursive averager
+- [[concepts/parametric-multi-channel-wiener-filter|Parametric Multi-Channel Wiener Filter]] — downstream consumer of the noise PSD matrix estimate
 
 ## Related Sources
 
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] (Chapter 3)
+- [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]] — practical MC-SPP-driven implementation with Woodbury inverse updates

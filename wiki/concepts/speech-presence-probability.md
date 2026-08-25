@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-15
-updated: 2026-08-15
+updated: 2026-08-25
 sources:
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
+  - raw/papers/bagheri-2019-pmwf-spp/full-text.md
 tags:
   - noise-estimation
   - speech-enhancement
@@ -44,6 +45,10 @@ SPP-based NE is one of two main single-channel noise PSD estimators in the wiki:
 
 The two are complementary: SPP gives faster tracking in truly non-stationary noise (no search-window delay), while minimum statistics avoids the soft-decision threshold altogether. Jin et al. 2017 chose SPP for the low-frequency stage precisely because low-frequency coherence-based NE is unreliable, and SPP provides both the low-frequency noise PSD *and* the speech-absence gate needed by the high-frequency coherence stage.
 
+## Multi-Channel Extension (MC-SPP)
+
+The Gaussian-model **multi-channel SPP** (Souden et al. 2010) replaces the scalar a priori SNR with the multi-channel statistics $\xi(\ell,k) = \mathrm{tr}\{\boldsymbol{\Phi}_{vv}^{-1}\boldsymbol{\Phi}_{yy}\} - N$ and a quadratic-form a posteriori term, computing the posterior from the whole observation vector — see [[concepts/multi-channel-speech-presence-probability|Multi-Channel Speech Presence Probability]]. [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019]] use MC-SPP for the same soft-combined recursive noise update as Eq. (2), generalized to the noise PSD *matrix* with effective smoothing $\tilde{\alpha}_v = \alpha_v + (1-\alpha_v)\,p(\ell,k)$, and additionally to control a PMWF trade-off parameter and an MMSE output blend.
+
 ## Related Concepts
 
 - [[concepts/voice-activity-detection|Voice Activity Detection]] — SPP is the soft-decision generalization of binary VAD
@@ -51,7 +56,9 @@ The two are complementary: SPP gives faster tracking in truly non-stationary noi
 - [[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence Noise Estimation]] — uses SPP for both low-frequency NE and the speech-absence gate
 - [[concepts/wiener-filter|Wiener Filter]] — downstream consumer of the estimated noise PSD
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[concepts/multi-channel-speech-presence-probability|Multi-Channel Speech Presence Probability]] — multi-channel Gaussian-model extension
 
 ## Related Sources
 
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — uses SPP for the low-frequency NE stage and as the speech-absence gate for the multi-channel coherence stage
+- [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]] — multi-channel Gaussian-model extension driving noise PSD matrix tracking, PMWF trade-off, and MMSE output

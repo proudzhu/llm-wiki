@@ -452,4 +452,6 @@
 | [[concepts/ogive\|OGIVE]] | IVE with orthogonal constraint; ROC analysis shows mixing-vector optimization wins at extremely low SNR; natural-gradient variants OGIVEa_NG/OGIVEw_NG | 2026-08-22 |
 | [[concepts/natural-gradient\|Natural Gradient]] | Steepest ascent on the Riemannian manifold of demixing matrices (premultiply by W^H W); stabilizes OGIVE convergence and avoids matrix inversions | 2026-08-22 |
 | [[concepts/fast-independent-vector-extraction\|Fast Independent Vector Extraction (FIVE)]] | Iterative maximum-SINR beamforming with a reweighted background covariance; globally minimizes the auxiliary function at every iteration, converging in a few iterations | 2026-08-24 |
+| [[concepts/parametric-multi-channel-wiener-filter\|Parametric Multi-Channel Wiener Filter (PMWF)]] | Constrained-optimization filter family parameterized by trade-off β between noise reduction and speech distortion; β=0 gives MVDR, β=1 the MWF; practical MC-SPP-driven implementation by Bagheri & Giacobello 2019. | 2026-08-25 |
+| [[concepts/multi-channel-speech-presence-probability\|Multi-Channel Speech Presence Probability (MC-SPP)]] | Gaussian-model multi-channel extension of SPP using array-wide quadratic-form SNR statistics; drives noise PSD matrix tracking, PMWF trade-off control, and MMSE output estimation. | 2026-08-25 |
 

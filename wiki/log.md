@@ -4672,3 +4672,16 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
 - **Summary**: FIVE — blind extraction of a single non-Gaussian source from a Gaussian background via iterative max-SINR beamforming with a target-suppressing reweighted background covariance; proven to globally minimize the OverIVA auxiliary function at every iteration via an exact eigendecomposition (special case of HEAD); peak SDR improvement in 1–3 iterations, ~5× faster than OverIVA and ≥10× faster than full AuxIVA.
 - **Pages created**: `wiki/sources/scheibler-2020-fast-independent-vector-extraction.md`, `wiki/entities/robin-scheibler.md`, `wiki/concepts/fast-independent-vector-extraction.md`
 - **Pages updated**: `wiki/entities/nobutaka-ono.md` (added FIVE contribution), `wiki/concepts/independent-vector-extraction.md` (FIVE in method families + convergence section), `wiki/concepts/ogive.md` (FIVE comparison section), `wiki/concepts/blind-source-extraction.md` (FIVE in method families), `wiki/concepts/independent-vector-analysis.md` (FIVE as EVD-family exemplar), `wiki/concepts/generalized-eigenvalue-decomposition.md` (FIVE application section), `wiki/concepts/blind-source-separation.md` (computational-cost cross-ref), `wiki/synthesis/multi-channel-speech-enhancement.md` (blind-extraction speed-frontier paragraph + timeline row)
+
+---
+
+## [2026-08-25] ingest | Exploiting Multi-Channel Speech Presence Probability in Parametric Multi-Channel Wiener Filter (Bagheri & Giacobello 2019)
+
+- **Source**: `raw/papers/bagheri-2019-pmwf-spp/full-text.md` (Zotero: WNDECJQC)
+- **Authors**: Saeed Bagheri, Daniele Giacobello
+- **Published**: Interspeech 2019
+- **DOI**: 10.21437/Interspeech.2019-2665
+- **Summary**: Practical PMWF implementation exploiting MC-SPP in three ways — SPP-weighted noise PSD matrix tracking with direct Woodbury inverse updates, SPP-controlled trade-off parameter β(ℓ,k), and an MMSE output blend with a G_min suppression floor; outperforms MVDR and fixed-β MCWF on a 4-mic circular array (TIMIT, babble/pink NOISEX-92, T60 = 300 ms).
+- **Pages created**: `wiki/sources/bagheri-2019-pmwf-spp.md`; `wiki/entities/saeed-bagheri.md`; `wiki/entities/daniele-giacobello.md`; `wiki/concepts/parametric-multi-channel-wiener-filter.md`; `wiki/concepts/multi-channel-speech-presence-probability.md`
+- **Pages updated**: `wiki/concepts/multi-channel-wiener-filter.md` (PMWF section); `wiki/concepts/mvdr-beamformer.md` (MVDR as β=0 endpoint of PMWF); `wiki/concepts/speech-presence-probability.md` (MC-SPP extension section); `wiki/concepts/multichannel-mcra.md` (practical implementation with Woodbury inverse updates)
+- **Synthesis**: triaged — no candidates passed tag-overlap threshold (all shared only 1 broad-topic tag)

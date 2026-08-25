@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-08-15
+updated: 2026-08-25
 sources:
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
+  - raw/papers/bagheri-2019-pmwf-spp/full-text.md
 tags:
   - speech-enhancement
   - wiener-filter
@@ -47,6 +48,10 @@ The closed-form SDW-MWF $h = (\Phi_x + \mu \Phi_n)^{-1} \Phi_x i_1$ is different
 
 Simmer et al. [14] showed that the broadband MMSE-optimal multi-channel NR can be factored as a single-channel Wiener filter applied to the output of an [[concepts/mvdr-beamformer|MVDR beamformer]]. Jin et al. (2017) adopt this factorization for hands-free mobile-phone voice communication: the MVDR provides the distortionless spatial filter, and a single-channel Wiener post-filter (driven by the [[concepts/adaptive-coherence-noise-estimation|adaptive coherence noise estimator]]) applies the spectral gain. The contribution of Jin et al. lives entirely in the noise PSD estimate that feeds the Wiener gain — the MWF structure itself is the classical rank-1 case. This factorization is computationally lighter than a full MWF and decouples spatial filtering (MVDR) from noise PSD estimation (post-filter), which is attractive for real-time mobile-phone implementations.
 
+## Parametric MWF (PMWF)
+
+The MWF is one endpoint of a parameterized family: the [[concepts/parametric-multi-channel-wiener-filter|PMWF]] (Souden, Benesty & Affes 2010) derives from a constrained optimization (maximize noise reduction subject to a distortion bound) with trade-off parameter $\beta$, where $\beta = 1$ recovers the conventional MWF and $\beta = 0$ the MVDR. [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019]] show a practical implementation in which the [[concepts/multi-channel-speech-presence-probability|MC-SPP]] controls $\beta$ per time-frequency bin, updates the noise PSD matrix by SPP-weighted recursive averaging (with a Woodbury rank-1 update of its inverse), and blends the output with a $G_{\min}$-floored reference channel — improving ΔSINR, ΔSegSNR, and noise reduction over both MVDR and the fixed-$\beta$ MWF at nearly unchanged speech distortion.
+
 ## Related Concepts
 
 - [[concepts/wiener-filter|Wiener Filter]]
@@ -58,6 +63,8 @@ Simmer et al. [14] showed that the broadband MMSE-optimal multi-channel NR can b
 - [[concepts/tango-framework|Tango Framework]]
 - [[concepts/gevd-spatial-filtering|GEVD-Based Spatial Filtering]]
 - [[concepts/mn-tango|MN-TANGO]]
+- [[concepts/parametric-multi-channel-wiener-filter|Parametric Multi-Channel Wiener Filter (PMWF)]] — parameterized family with the MWF as the $\beta = 1$ endpoint
+- [[concepts/multi-channel-speech-presence-probability|Multi-Channel Speech Presence Probability (MC-SPP)]]
 
 ## Related Sources
 
@@ -66,3 +73,4 @@ Simmer et al. [14] showed that the broadband MMSE-optimal multi-channel NR can b
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]
 - [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]]
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — adopts the MVDR + single-channel Wiener factorization (Simmer et al.) with an adaptive coherence noise PSD estimate driving the post-filter
+- [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]] — MC-SPP-controlled PMWF with direct inverse noise PSD updates
