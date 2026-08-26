@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-08-19
-updated: 2026-08-22
+updated: 2026-08-26
 sources:
   - raw/papers/sawada-2019-bss-ilrma-review/full-text.md
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
+  - raw/papers/kang-2019-low-complexity-permutation-alignment/full-text.md
 tags:
   - blind-source-separation
   - independent-vector-analysis
@@ -83,6 +84,7 @@ All updates are multiplicative and monotonic — they never increase $\mathcal{J
 - **Computational cost**: lower than MNMF (no per-bin $M \times M$ matrix inversions of $\mathbf{R}^{(k)}[z]$); the dominant cost is the IP update of $\mathbf{W}^{(k)}$, $\mathcal{O}(N^3 K Z)$ per iteration.
 - **Initialization sensitivity**: random NMF initialization can lead to different local optima; multiple restarts are recommended.
 - **Low-SNR behavior**: at extremely low SNR (−20 dB), removing the projection-back amplitude adjustment *improves* ILRMA's performance, and ILRMA's NMF source modeling keeps it the strongest baseline under sparse interference — though the extraction-only method [[concepts/ogive|OGIVEa_NG]] reaches comparable results while modeling only the target ([[sources/ruan-2024-speech-extraction-low-snr|Ruan et al. 2024]]).
+- **Speed vs. alignment-based ICA**: ILRMA achieved the best SIR/PESQ in most conditions of the Kang et al. 2019 benchmark, but is neither the cheapest nor universally best — it was inferior to ICA + permutation alignment on some source configurations (e.g., sources 1, 2, 5) and took 29.8 s versus 10.3 s for ICA + low-complexity [[concepts/permutation-alignment|permutation alignment]] in the 4-source runtime test ([[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019]]).
 
 ## Variants and Successors
 
@@ -105,6 +107,7 @@ ILRMA sits at the intersection: IVA's spatial model + MNMF's spectrogram model, 
 ## Related Concepts
 
 - [[concepts/blind-source-separation|Blind Source Separation]]
+- [[concepts/permutation-alignment|Permutation Alignment]]
 - [[concepts/independent-vector-analysis|Independent Vector Analysis]]
 - [[concepts/multichannel-nmf|Multichannel NMF]]
 - [[concepts/fastmnmf|FastMNMF]]
@@ -119,3 +122,4 @@ ILRMA sits at the intersection: IVA's spatial model + MNMF's spectrogram model, 
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
 - [[sources/nishikori-2026-fast-multichannel-nmf-block-diagonal-scm-bss|Nishikori et al. 2026: Distributed FastMNMF for BSS]]
 - [[sources/ruan-2024-speech-extraction-low-snr|Ruan, Liao, Chen & Lu 2024: Speech Extraction Under Extremely Low SNR Conditions]] — uses ILRMA as the strongest separation baseline at −20 dB SNR
+- [[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019: A Low-Complexity Permutation Alignment Method for Frequency-Domain BSS]] — benchmarks ILRMA against ICA + alignment on SIR, PESQ, and runtime

@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-21
-updated: 2026-08-24
+updated: 2026-08-26
 sources:
   - raw/papers/guo-2023-iva-survey/full-text.md
   - raw/papers/dong-2026-spatially-regularized-switching-iva/full-text.md
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
   - raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md
+  - raw/papers/kang-2019-low-complexity-permutation-alignment/full-text.md
 tags:
   - blind-source-separation
   - audio-source-separation
@@ -31,7 +32,7 @@ where $\mathbf{y}_n = [y_n^{(1)}, \ldots, y_n^{(K)}]^T$ is the estimated source 
 
 ## Key Properties
 
-1. **Permutation-free**: By modeling joint distributions $g(\mathbf{y}_n)$ across frequency bins, the separated sources are automatically aligned — no post-hoc permutation alignment is needed.
+1. **Permutation-free**: By modeling joint distributions $g(\mathbf{y}_n)$ across frequency bins, the separated sources are automatically aligned — no post-hoc permutation alignment is needed. This remains IVA's structural advantage over per-bin ICA even now that [[concepts/permutation-alignment|post-hoc alignment]] itself can be made low-complexity: [[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019]] cut the alignment stage to 7.3 s (vs. 39–51 s for Sawada/MBMC) at equal separation quality, showing the gap is narrower than commonly assumed when alignment efficiency is optimized.
 2. **Source prior flexibility**: Common choices include multivariate Laplacian, Gaussian mixture models, Student-t mixtures, and deep-learning-based priors.
 3. **Separation vs. extraction**: Full IVA separates all sources simultaneously; [[concepts/independent-vector-extraction|Independent Vector Extraction (IVE)]] targets a single source of interest — and at extremely low SNR, the choice of optimization parameter (mixing vs. demixing vector) becomes decisive ([[concepts/ogive|OGIVE]]).
 
@@ -63,6 +64,7 @@ IVA combined with Nonnegative Matrix Factorization gives **[[concepts/independen
 ## Related Concepts
 
 - [[concepts/blind-source-separation|Blind Source Separation]]
+- [[concepts/permutation-alignment|Permutation Alignment]]
 - [[concepts/blind-source-extraction|Blind Source Extraction]]
 - [[concepts/independent-vector-extraction|Independent Vector Extraction]]
 - [[concepts/ogive|OGIVE]]
@@ -84,3 +86,4 @@ IVA combined with Nonnegative Matrix Factorization gives **[[concepts/independen
 - [[sources/sawada-2019-bss-ilrma-review|Sawada et al. 2019: BSS/ILRMA Review]]
 - [[sources/ruan-2024-speech-extraction-low-snr|Ruan, Liao, Chen & Lu 2024: Speech Extraction Under Extremely Low SNR Conditions]]
 - [[sources/scheibler-2020-fast-independent-vector-extraction|Scheibler & Ono 2020: Fast Independent Vector Extraction]]
+- [[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019: A Low-Complexity Permutation Alignment Method for Frequency-Domain BSS]] — the per-bin-ICA alternative to IVA, with alignment cost largely eliminated

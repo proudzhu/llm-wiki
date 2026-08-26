@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-21
-updated: 2026-08-24
+updated: 2026-08-26
 sources:
   - raw/papers/guo-2023-iva-survey/full-text.md
   - raw/papers/dong-2026-spatially-regularized-switching-iva/full-text.md
@@ -9,6 +9,7 @@ sources:
   - raw/papers/ansari-2023-ai-bss-survey/full-text.md
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
   - raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md
+  - raw/papers/kang-2019-low-complexity-permutation-alignment/full-text.md
 tags:
   - signal-processing
   - audio-source-separation
@@ -62,7 +63,7 @@ The survey benchmarks these methods across audio, speech, music, voice, and sour
 
 ## Key Challenges
 
-- **Permutation ambiguity**: Each frequency bin is solved independently in ICA, so source ordering may differ across bins.
+- **Permutation ambiguity**: Each frequency bin is solved independently in ICA, so source ordering may differ across bins. Post-hoc [[concepts/permutation-alignment|permutation alignment]] resolves it — and can be made cheap: a confidence-thresholded local-first scheme matches state-of-the-art alignment quality at 4–5× lower runtime ([[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019]]); IVA/ILRMA-class methods avoid the problem by construction.
 - **Scaling ambiguity**: Source magnitudes are not identifiable without additional constraints.
 - **Underdetermined mixtures**: When sources outnumber microphones ($N > M$), full separation requires sparse/structured priors.
 - **Computational cost**: Joint optimization over all frequency bins is expensive; efficient update rules (IP, ISS, AuxIVA) are critical — for single-source extraction, FIVE's global auxiliary-function minimization reaches peak performance in a handful of iterations (Scheibler & Ono 2020).
@@ -80,6 +81,7 @@ The survey benchmarks these methods across audio, speech, music, voice, and sour
 
 ## Related Concepts
 
+- [[concepts/permutation-alignment|Permutation Alignment]]
 - [[concepts/independent-vector-analysis|Independent Vector Analysis]]
 - [[concepts/blind-source-extraction|Blind Source Extraction]]
 - [[concepts/switching-independent-vector-analysis|Switching Independent Vector Analysis]]
@@ -102,3 +104,4 @@ The survey benchmarks these methods across audio, speech, music, voice, and sour
 - [[sources/sawada-2019-bss-ilrma-review|Sawada et al. 2019: BSS/ILRMA Review]] — unified tutorial of the ICA and NMF routes converging at ILRMA
 - [[sources/ansari-2023-ai-bss-survey|Ansari et al. 2023: AI Approaches in BSS Survey]] — three-way taxonomy of AI-based BSS (Classical ML / DL / Evolutionary) complementing the statistical lineage above
 - [[sources/scheibler-2020-fast-independent-vector-extraction|Scheibler & Ono 2020: Fast Independent Vector Extraction]] — fast single-source extraction via iterative SINR maximization
+- [[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019: A Low-Complexity Permutation Alignment Method for Frequency-Domain BSS]] — makes the post-hoc alignment route computationally competitive with permutation-free methods

@@ -520,4 +520,5 @@
 | [[entities/robin-scheibler\|Robin Scheibler]] | Tokyo Metropolitan University (JSPS fellow, Ono Lab) - FIVE, OverIVA, pyroomacoustics | 2026-08-24 |
 | [[entities/saeed-bagheri\|Saeed Bagheri]] | Researcher at Sonos Inc.; multi-channel noise reduction and parametric Wiener filtering for smart loudspeaker arrays. | 2026-08-25 |
 | [[entities/daniele-giacobello\|Daniele Giacobello]] | Researcher at Sonos Inc.; speech enhancement, sparse speech modeling/coding for consumer audio devices. | 2026-08-25 |
+| [[entities/fang-kang\|Fang Kang]] | Institute of Acoustics, CAS — blind source separation and permutation alignment | 2026-08-26 |
 

@@ -4685,3 +4685,15 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
 - **Pages created**: `wiki/sources/bagheri-2019-pmwf-spp.md`; `wiki/entities/saeed-bagheri.md`; `wiki/entities/daniele-giacobello.md`; `wiki/concepts/parametric-multi-channel-wiener-filter.md`; `wiki/concepts/multi-channel-speech-presence-probability.md`
 - **Pages updated**: `wiki/concepts/multi-channel-wiener-filter.md` (PMWF section); `wiki/concepts/mvdr-beamformer.md` (MVDR as β=0 endpoint of PMWF); `wiki/concepts/speech-presence-probability.md` (MC-SPP extension section); `wiki/concepts/multichannel-mcra.md` (practical implementation with Woodbury inverse updates)
 - **Synthesis**: triaged — no candidates passed tag-overlap threshold (all shared only 1 broad-topic tag)
+
+---
+
+## [2026-08-26] ingest | A low-complexity permutation alignment method for frequency-domain blind source separation (Kang 2019)
+
+- **Source**: `raw/papers/kang-2019-low-complexity-permutation-alignment/full-text.md` (Zotero: IH67EZK3)
+- **Authors**: Fang Kang, Feiran Yang, Jun Yang
+- **Published**: Speech Communication, Vol. 112, 2019
+- **DOI**: 10.1016/j.specom.2019.11.002
+- **Summary**: Low-complexity three-stage permutation alignment for frequency-domain BSS — confidence-thresholded bin-wise alignment, local-centroid correction for low-confidence bins, then few-iteration global one-centroid clustering; matches Sawada/MBMC separation quality at 4–5× lower permutation-stage runtime.
+- **Pages created**: `wiki/sources/kang-2019-low-complexity-permutation-alignment.md`, `wiki/entities/fang-kang.md`, `wiki/concepts/permutation-alignment.md`
+- **Pages updated**: `wiki/entities/jun-yang.md` and `wiki/entities/feiran-yang.md` (new paper + BSS tags); `wiki/concepts/blind-source-separation.md`, `wiki/concepts/independent-vector-analysis.md`, `wiki/concepts/independent-low-rank-matrix-analysis.md` (permutation-alignment cross-refs, ILRMA runtime benchmark data point); `wiki/synthesis/multi-channel-speech-enhancement.md` (Kang 2019 row + "initialization-before-iteration" paragraph paralleling FIVE)

@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-16
-updated: 2026-08-24
+updated: 2026-08-26
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/schwarz-2015-coherent-to-diffuse-power-ratio/full-text.md
@@ -24,6 +24,7 @@ sources:
   - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
   - raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md
+  - raw/papers/kang-2019-low-complexity-permutation-alignment/full-text.md
 tags:
   - multi-channel-speech-enhancement
   - beamforming
@@ -61,6 +62,7 @@ The distinction: this synthesis is about **spatial filtering** (beamforming, coh
 | [[sources/taseska-2018-informed-spatial-filters\|Taseska 2018]] | 2018 | Estimate what | ISF paradigm: CDR as a priori SAP *control* (not post-filter gain) for multichannel MCRA; DOA-model & position-based detectors drive per-bin MVDR/GSC across noise reduction, spotforming, and BSS |
 | [[sources/schwarz-2015-coherent-to-diffuse-power-ratio\|Schwarz & Kellermann 2015]] | 2015 | Estimate what | Unified CDR framework; first DOA-independent unbiased CDR estimator (requires only $\Gamma_n$) |
 | [[sources/schwarz-2019-dereverberation-spatial-coherence\|Schwarz 2019]] | 2019 | Estimate what | Doctoral thesis: spatial coherence models for dereverb + spatial features as DNN-ASR input |
+| [[sources/kang-2019-low-complexity-permutation-alignment\|Kang, Yang & Yang 2019]] | 2019 | Estimate what | Low-complexity permutation alignment for per-bin-ICA BSS: confidence-thresholded bin-wise + local-centroid stages cut alignment runtime 4–5× at equal SIR/PESQ |
 | [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement\|Löllmann et al. 2020]] | 2020 | Estimate what | GMC-based CDR via eigenvalue decomposition of $N$-channel coherence matrix; implicit microphone selection via principal eigenvector |
 | [[sources/scheibler-2020-fast-independent-vector-extraction\|Scheibler & Ono 2020]] | 2020 | Estimate what | Blind extraction via iterative max-SINR beamforming (FIVE): auxiliary function globally minimized per iteration; peak SDR in 1–3 iterations, an order of magnitude faster than full AuxIVA |
 | [[sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition\|Lin et al. 2024 (AGADIR)]] | 2024 | Geometry | Multi-geometry training + NLCMV beamformer with WNG control for smart-glasses ASR |
@@ -137,6 +139,8 @@ Across the whole corpus, MCSE methods can be placed on a single spectrum of **wh
 **A parallel blind-extraction branch (Ruan 2024)**: [[sources/ruan-2024-speech-extraction-low-snr|Ruan et al. 2024]] sit outside the spatial-statistics chain entirely — [[concepts/ogive|OGIVE]] estimates the extraction filter from statistical *independence* (non-Gaussian SOI + Gaussian background), with no DOA/coherence/SCM estimation step. At −20 dB SNR — far below the −5 dB regime of Apostolidis 2026 — they show that the **parameterization of the estimator dominates its modeling sophistication**: optimizing the mixing vector $\mathbf{a}$ (whose cost landscape has a wide, flat convergence region at low SNR) instead of the conventional demixing vector $\mathbf{w}$ is the difference between extracting the weak speech source and locking onto the dominant noise, and replacing the ordinary gradient with the natural gradient removes the remaining convergence instability. The resulting OGIVEa_NG matches [[concepts/independent-low-rank-matrix-analysis|ILRMA]] separation despite modeling only the target — the same "structure beats capacity" lesson as R-MWF (Insight 4), now extended to the blind-statistical branch and the extreme-SNR regime.
 
 **The blind-extraction branch's speed frontier (FIVE)**: the branch's convergence-speed limit is set by [[sources/scheibler-2020-fast-independent-vector-extraction|Scheibler & Ono 2020]]'s [[concepts/fast-independent-vector-extraction|FIVE]] — iterative max-SINR beamforming in which each iteration's auxiliary function is minimized *globally* via an eigendecomposition. Where gradient-based OGIVE needs thousands of step-size-sensitive iterations, FIVE reaches peak SDR improvement in 1–3 iterations (roughly 5× faster than OverIVA, 10× than full AuxIVA), making blind extraction a real-time prospect. The two blind-extraction data points bracket the branch's tradeoffs: FIVE establishes the speed frontier under a Gaussian-background assumption, while Ruan 2024 establishes the robustness frontier at extreme SNR — both degrade when the background deviates from Gaussianity, which identifies the background model as the branch's open problem.
+
+**The same lesson on the separation side (Kang 2019)**: the *determined-separation* branch learned the initialization-before-iteration lesson a year earlier. [[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019]] show that for per-bin ICA, reordering the pipeline — cheap confidence-thresholded [[concepts/permutation-alignment|permutation alignment]] first, global one-centroid clustering second — cuts the alignment stage from 39–51 s to 7.3 s (4 sources, 10 s signals) at SIR/PESQ parity with Sawada/MBMC, because the global stage converges in <5 iterations instead of ~15. As with FIVE, the gain comes not from a better optimizer but from exploiting problem structure (inter-frequency power-ratio correlation) to start the iterative part nearly converged.
 
 ## Insight 4: Hybrid DNN-Guided Linear Filters Preserve Interpretability
 
