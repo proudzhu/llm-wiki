@@ -987,6 +987,7 @@
 | [[concepts/parametric-multi-channel-wiener-filter\|Parametric Multi-Channel Wiener Filter (PMWF)]] | Constrained-optimization filter family parameterized by trade-off β between noise reduction and speech distortion; β=0 gives MVDR, β=1 the MWF; practical MC-SPP-driven implementation by Bagheri & Giacobello 2019. | 2026-08-25 |
 | [[concepts/multi-channel-speech-presence-probability\|Multi-Channel Speech Presence Probability (MC-SPP)]] | Gaussian-model multi-channel extension of SPP using array-wide quadratic-form SNR statistics; drives noise PSD matrix tracking, PMWF trade-off control, and MMSE output estimation. | 2026-08-25 |
 | [[concepts/permutation-alignment\|Permutation Alignment]] | Resolving the per-bin source-ordering ambiguity of frequency-domain BSS; method families and the low-complexity three-stage scheme of Kang 2019 | 2026-08-26 |
+| [[concepts/constrained-fdlms\|Constrained FDLMS]] | Frequency-domain LMS with convex constraints enforced via one-sided quadratic penalty and steepest descent (Rafaely & Elliott 2000) | 2026-08-27 |
 
 ---
 
@@ -1174,6 +1175,7 @@
 | [[sources/scheibler-2020-fast-independent-vector-extraction\|Scheibler & Ono 2020: Fast Independent Vector Extraction]] | FIVE: blind extraction of a single non-Gaussian source from a Gaussian background via iterative max-SINR beamforming; auxiliary function globally minimized per iteration, peak SDR in 1-3 iterations | 2026-08-24 |
 | [[sources/bagheri-2019-pmwf-spp\|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]] | Practical PMWF implementation exploiting MC-SPP: SPP-weighted noise PSD matrix tracking with Woodbury inverse updates, SPP-controlled trade-off parameter, and MMSE output blend; outperforms MVDR and MCWF. | 2026-08-25 |
 | [[sources/kang-2019-low-complexity-permutation-alignment\|Kang, Yang & Yang 2019: A Low-Complexity Permutation Alignment Method for Frequency-Domain BSS]] | Three-stage permutation alignment (confidence-thresholded bin-wise, local-centroid, few-iteration global clustering) matching Sawada/MBMC quality at 4-5x lower runtime | 2026-08-26 |
+| [[sources/rafaely-2000-constrained-fdlms\|Rafaely & Elliott 2000: Computationally Efficient Frequency-Domain LMS with Constraints]] | Penalty-function extension of FDLMS supporting convex frequency-domain constraints (magnitude, output power, robust stability), demonstrated on adaptive sound equalization | 2026-08-27 |
 
 ---
 
@@ -1226,10 +1228,10 @@
 
 ## Statistics
 
-- **Total pages**: 1175
+- **Total pages**: 1177
 - **Entities**: 517
-- **Concepts**: 451
-- **Sources**: 178
+- **Concepts**: 452
+- **Sources**: 179
 - **Synthesis**: 22
 - **Queries**: 7
-- **Last updated**: 2026-08-26
+- **Last updated**: 2026-08-27

@@ -1,11 +1,12 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-08-10
+updated: 2026-08-27
 sources:
 - zotero://select/items/0_N8MHRKXP
 - zotero://select/items/0_FERIFUEJ
 - raw/papers/guo-2024-anc-saturation-survey/full-text.md
+- raw/papers/rafaely-2000-constrained-fdlms/full-text.md
 tags:
 - flnn
 - kernel
@@ -193,6 +194,8 @@ A critical limitation absent from the individual NLANC algorithm papers is highl
 
 The divergence result (Eq. 12 of the survey) applies to *all* unconstrained adaptive filters — linear FxLMS and NLANC alike — once the amplifier enters its severe nonlinear region. The practical implication: NLANC is the right tool only when the saturation is mild enough that the fundamental can still be cancelled. Under severe saturation, an output constraint algorithm (e.g., MOV-Modified FxLMS) is required to preserve stability, at the cost of not fully cancelling the disturbance.
 
+The output-constraint idea itself long predates the survey: [[sources/rafaely-2000-constrained-fdlms|Rafaely & Elliott 2000]] introduced [[concepts/constrained-fdlms|constrained FDLMS]], which enforces magnitude and output-power limits online via a penalty function in the frequency domain — and showed that explicit, frequency-selective penalties dominate the leaky-LMS-style global penalty that otherwise keeps unconstrained adaptation stable. The later time-domain family (MOV, OLFxLMS, etc.) can be read as porting this penalty-function principle to FxLMS.
+
 ### Additional NLANC Algorithms for Output Saturation
 
 The survey also covers two NLANC algorithms not elsewhere in this synthesis:
@@ -216,3 +219,4 @@ The survey also covers two NLANC algorithms not elsewhere in this synthesis:
 ## Related Sources
 
 - [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024: ANC Algorithms Overcoming Output Saturation]] — surveys NLANC algorithms for output saturation; proves NLANC divergence under severe saturation; covers THF-FxLMS and MLPNN-FxLMS
+- [[sources/rafaely-2000-constrained-fdlms|Rafaely & Elliott 2000: Computationally Efficient Frequency-Domain LMS with Constraints]] — frequency-domain origin of the output-constraint principle (penalty-function constrained adaptation)

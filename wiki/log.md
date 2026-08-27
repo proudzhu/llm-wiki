@@ -4697,3 +4697,15 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
 - **Summary**: Low-complexity three-stage permutation alignment for frequency-domain BSS — confidence-thresholded bin-wise alignment, local-centroid correction for low-confidence bins, then few-iteration global one-centroid clustering; matches Sawada/MBMC separation quality at 4–5× lower permutation-stage runtime.
 - **Pages created**: `wiki/sources/kang-2019-low-complexity-permutation-alignment.md`, `wiki/entities/fang-kang.md`, `wiki/concepts/permutation-alignment.md`
 - **Pages updated**: `wiki/entities/jun-yang.md` and `wiki/entities/feiran-yang.md` (new paper + BSS tags); `wiki/concepts/blind-source-separation.md`, `wiki/concepts/independent-vector-analysis.md`, `wiki/concepts/independent-low-rank-matrix-analysis.md` (permutation-alignment cross-refs, ILRMA runtime benchmark data point); `wiki/synthesis/multi-channel-speech-enhancement.md` (Kang 2019 row + "initialization-before-iteration" paragraph paralleling FIVE)
+
+---
+
+## [2026-08-27] ingest | A computationally efficient frequency-domain LMS algorithm with constraints on the adaptive filter (Rafaely & Elliott 2000)
+
+- **Source**: `raw/papers/rafaely-2000-constrained-fdlms/full-text.md` (Zotero: KVF3QFKE)
+- **Authors**: Boaz Rafaely, Stephen J. Elliott
+- **Published**: IEEE Transactions on Signal Processing, vol. 48, no. 6, pp. 1649–1655, June 2000
+- **DOI**: 10.1109/78.845922
+- **Summary**: Extends the frequency-domain LMS algorithm with convex frequency-domain constraints (per-frequency magnitude limits, output-power limits, robust-stability margins for IMC feedback controllers) via a penalty-function formulation and steepest descent — implementable in real time on conventional DSP. Demonstrated on adaptive sound equalization, where a 4 dB magnitude constraint prevents the >20 dB filter peaks that conventional FDLMS produces away from the equalization microphone, and outperforms leaky LMS's global penalty.
+- **Pages created**: `wiki/sources/rafaely-2000-constrained-fdlms.md`, `wiki/concepts/constrained-fdlms.md`
+- **Pages updated**: `wiki/entities/boaz-rafaely.md` (added contribution + source), `wiki/entities/stephen-j-elliott.md` (added contribution + source), `wiki/concepts/output-constraint-anc-algorithms.md` (frequency-domain antecedent section), `wiki/concepts/leaky-fxlms-algorithm.md` (global-penalty limitations vs. explicit constraints), `wiki/concepts/robust-stability-constraint.md` (online enforcement via constrained FDLMS), `wiki/synthesis/nonlinear-anc-approaches.md` (output-constraint principle origin note)

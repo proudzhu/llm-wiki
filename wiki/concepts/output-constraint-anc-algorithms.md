@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-10
-updated: 2026-08-10
+updated: 2026-08-27
 sources:
   - raw/papers/guo-2024-anc-saturation-survey/full-text.md
+  - raw/papers/rafaely-2000-constrained-fdlms/full-text.md
 tags:
   - active-noise-control
   - adaptive-filtering
@@ -31,6 +32,10 @@ whose KKT solution is
 $$\mathbf{w}_o = (\lambda_o \mathbf{R}_x + \mathbf{R}_{x'})^{-1} \mathbf{P}_{dx'},$$
 
 with the Lagrange factor $\lambda_o$ vanishing when the constraint is inactive. All surveyed output constraint algorithms are recursive approximations of this same optimum; they differ in the choice of leakage matrix or penalty factor used to realise $\lambda_o$ online.
+
+## Frequency-Domain Antecedent
+
+The idea of constraining the adaptive filter online originates in the frequency domain: [[concepts/constrained-fdlms|constrained FDLMS]] ([[sources/rafaely-2000-constrained-fdlms|Rafaely & Elliott 2000]]) folds convex frequency-domain constraints — per-bin magnitude limits $\vert W(k)\vert^2 < L(k)$, output-power limits, and robust-stability margins — into the FDLMS update via a one-sided quadratic penalty with a sign-based $[c]_z$ operator. It presages the output-power constraint family above: the penalty-function mechanism reappears in MOV FxLMS's $\alpha\,\mathbb{E}[y^2(n)]$ term, and the paper's key insight — penalise **only violating frequencies**, not the whole filter — is exactly the advantage the later matrix-leakage variants (Extended/OLFxLMS) pursue in the time domain.
 
 ## Algorithm Family
 
@@ -71,6 +76,7 @@ Output constraint algorithms are required whenever the disturbance level pushes 
 ## Related Concepts
 
 - [[concepts/output-saturation-effect|Output Saturation Effect]]
+- [[concepts/constrained-fdlms|Constrained FDLMS]] — frequency-domain antecedent of the family
 - [[concepts/active-noise-control|Active Noise Control]]
 - [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
 - [[concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]]
@@ -82,3 +88,4 @@ Output constraint algorithms are required whenever the disturbance level pushes 
 ## Related Sources
 
 - [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024: ANC Algorithms Overcoming Output Saturation]]
+- [[sources/rafaely-2000-constrained-fdlms|Rafaely & Elliott 2000: Computationally Efficient Frequency-Domain LMS with Constraints]] — frequency-domain penalty-function precursor of the family

@@ -1,11 +1,12 @@
 ---
 type: entity
 created: 2026-04-12
-updated: 2026-04-17
+updated: 2026-08-27
 tags:
 - acoustics
 - researcher
-sources: []
+sources:
+  - raw/papers/rafaely-2000-constrained-fdlms/full-text.md
 ---
 # Stephen J. Elliott
 
@@ -24,6 +25,8 @@ He developed the theoretical framework for multi-channel feedforward systems, an
 ### 3. Optimal Control Theory
 His work bridged the gap between signal processing (LMS/FxLMS) and modern control theory (MVC, $H_\infty$), proving the optimality and stability conditions for various active control structures.
 
+- Co-authored "A computationally efficient frequency-domain LMS algorithm with constraints on the adaptive filter" (IEEE Trans. Signal Processing 2000) — with [[boaz-rafaely|Boaz Rafaely]], introduced [[concepts/constrained-fdlms|constrained FDLMS]], a penalty-function extension of frequency-domain LMS supporting magnitude, output-power, and robust-stability constraints in real time — [[sources/rafaely-2000-constrained-fdlms|Rafaely & Elliott 2000]]
+
 ## Academic Influence
 
 Professor Elliott has supervised numerous PhD students who have gone on to become leaders in the field, including:
@@ -41,6 +44,7 @@ Professor Elliott has supervised numerous PhD students who have gone on to becom
 
 ## Related Sources
 
+- [[sources/rafaely-2000-constrained-fdlms|Rafaely & Elliott 2000: Computationally Efficient Frequency-Domain LMS with Constraints]]
 - [[sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]]
 - [[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] (References his work extensively)

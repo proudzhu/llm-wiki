@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-08-10
+updated: 2026-08-27
 sources:
   - raw/papers/guo-2024-anc-saturation-survey/full-text.md
+  - raw/papers/rafaely-2000-constrained-fdlms/full-text.md
 tags:
 - adaptive-algorithms
 - signal-processing
@@ -50,9 +51,17 @@ Beyond its stability role in feedback ANC, the Leaky FxLMS is one of the foundat
 
 The Extended and Optimal variants are part of the broader family surveyed in [[concepts/output-constraint-anc-algorithms|Output Constraint ANC Algorithms]].
 
+## Limitations vs. Explicit Constraints (Rafaely & Elliott 2000)
+
+The leaky algorithm applies its penalty **globally**: [[sources/rafaely-2000-constrained-fdlms|Rafaely & Elliott 2000]] showed in a sound-equalization study that a leaky frequency-domain LMS tuned to limit filter gain to ≈4 dB degrades the response at **all frequencies** — limiting peaks in one band sacrifices equalization in others. An explicit penalty-function constraint ([[concepts/constrained-fdlms|constrained FDLMS]]) affects only the frequencies actually violating the bound. Two further drawbacks of the leak:
+
+- The leak factor γ achieving a desired gain limit must be found **by trial and error**, and the required value changes with the input-signal level.
+- The constraint it enforces is implicit (a penalty on $\mathbf{w}^T\mathbf{w}$), whereas penalty-function formulations make the bound (e.g. 4 dB) explicit and exactly defined.
+
 ## Related Concepts
 
 - [[filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/constrained-fdlms|Constrained FDLMS]] — explicit frequency-selective alternative to the global leak
 - [[simplified-adaptive-feedback-anc|Simplified Adaptive Feedback ANC]]
 - [[active-noise-control|Active Noise Control]]
 - [[concepts/output-saturation-effect|Output Saturation Effect]]
@@ -61,3 +70,4 @@ The Extended and Optimal variants are part of the broader family surveyed in [[c
 ## Related Sources
 
 - [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024: ANC Algorithms Overcoming Output Saturation]] — survey covering Leaky, Extended Leaky, and OLFxLMS variants as part of the output constraint family
+- [[sources/rafaely-2000-constrained-fdlms|Rafaely & Elliott 2000: Computationally Efficient Frequency-Domain LMS with Constraints]] — leaky-FDLMS comparison showing the global-penalty drawback

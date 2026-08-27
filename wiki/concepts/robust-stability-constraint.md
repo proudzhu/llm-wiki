@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-04-26
+updated: 2026-08-27
 sources:
+  - raw/papers/rafaely-2000-constrained-fdlms/full-text.md
 tags:
   - active-noise-control
   - robust-control
@@ -64,9 +65,14 @@ subject to $C_\mu(q) < 0$ for $1 \leq \mu \leq N_\Omega$
 
 where $q$ is the impulse response of the IMC feedforward filter $Q(z)$.
 
+## Online Enforcement via Constrained FDLMS
+
+Beyond offline convex optimization, the robust-stability constraint can be enforced **adaptively** in real time: [[concepts/constrained-fdlms|constrained FDLMS]] ([[sources/rafaely-2000-constrained-fdlms|Rafaely & Elliott 2000]]) uses the multiplicative-uncertainty form $c_k = \vert W(k) G(k) B(k)\vert^2 - 1 < 0$ — with $G$ the plant model and $B$ the uncertainty bound — as a penalty term inside the frequency-domain LMS update. Because $c_k$ is a convex quadratic in the filter coefficients, steepest descent converges to the constrained minimum on conventional DSP hardware, guaranteeing robustness to plant variations while the controller adapts (at the cost of a joint adaptive-stability / closed-loop-stability analysis).
+
 ## Related Concepts
 
 - [[concepts/uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
+- [[concepts/constrained-fdlms|Constrained FDLMS]] — online enforcement of the constraint during adaptation
 - [[concepts/convex-hull-uncertainty-model|Convex Hull Uncertainty Model]]
 - [[concepts/elliptic-uncertainty-model|Elliptic Uncertainty Model]]
 - [[concepts/feedback-anc|Feedback ANC]]
@@ -76,3 +82,4 @@ where $q$ is the impulse response of the IMC feedforward filter $Q(z)$.
 ## Related Sources
 
 - [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
+- [[sources/rafaely-2000-constrained-fdlms|Rafaely & Elliott 2000: Computationally Efficient Frequency-Domain LMS with Constraints]] — adaptive online enforcement of the $|WGB|^2<1$ constraint
