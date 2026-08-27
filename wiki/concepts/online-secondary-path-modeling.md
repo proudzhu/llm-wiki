@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-04-27
+updated: 2026-08-27
 sources:
   - raw/papers/akhtar-2006-vss-lms-online-spm/full-text.txt
+  - raw/papers/guldenschuh-2014-secondary-path-irregularities/full-text.md
 tags:
 - active-noise-control
 - online-modeling
@@ -68,6 +69,10 @@ This two-filter structure achieves better or comparable performance to three-fil
 ## Alternative: Natural Excitation
 
 Some methods exploit the fact that the controller output y(n) itself can serve as an excitation signal if the primary noise has sufficient spectral content. This avoids the need for auxiliary noise injection but requires careful signal separation.
+
+## Limitations in Feedback ANC Headphones
+
+[[sources/guldenschuh-2014-secondary-path-irregularities|Guldenschuh & de Callafon 2014]] report that an online SPM method (Zhang et al. 2003, three-filter cross-updated structure) **failed under abrupt path changes** in a feedback headphone scenario: with the headphones lifted, the method diverged because the modeling error exceeded 90°. Even when stable, its auxiliary noise plus hard norm constraint on the control filter cost **50–62% of the broadband noise reduction** compared to a plain 6-tap IMC controller. This motivates detection-based alternatives (the [[dc-gain-stability-constraint|DC-gain stability constraint]]) that track the *controller* rather than re-identify the path.
 
 ## Related Concepts
 

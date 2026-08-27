@@ -527,6 +527,8 @@
 | [[entities/saeed-bagheri\|Saeed Bagheri]] | Researcher at Sonos Inc.; multi-channel noise reduction and parametric Wiener filtering for smart loudspeaker arrays. | 2026-08-25 |
 | [[entities/daniele-giacobello\|Daniele Giacobello]] | Researcher at Sonos Inc.; speech enhancement, sparse speech modeling/coding for consumer audio devices. | 2026-08-25 |
 | [[entities/fang-kang\|Fang Kang]] | Institute of Acoustics, CAS — blind source separation and permutation alignment | 2026-08-26 |
+| [[entities/markus-guldenschuh\|Markus Guldenschuh]] | IEM Graz — ANC headphones, secondary-path variability, prediction filter design | 2026-08-27 |
+| [[entities/raymond-de-callafon\|Raymond de Callafon]] | UCSD professor — control-relevant system identification, adaptive control; co-author of secondary-path irregularity detection | 2026-08-27 |
 
 ---
 
@@ -988,6 +990,8 @@
 | [[concepts/multi-channel-speech-presence-probability\|Multi-Channel Speech Presence Probability (MC-SPP)]] | Gaussian-model multi-channel extension of SPP using array-wide quadratic-form SNR statistics; drives noise PSD matrix tracking, PMWF trade-off control, and MMSE output estimation. | 2026-08-25 |
 | [[concepts/permutation-alignment\|Permutation Alignment]] | Resolving the per-bin source-ordering ambiguity of frequency-domain BSS; method families and the low-complexity three-stage scheme of Kang 2019 | 2026-08-26 |
 | [[concepts/constrained-fdlms\|Constrained FDLMS]] | Frequency-domain LMS with convex constraints enforced via one-sided quadratic penalty and steepest descent (Rafaely & Elliott 2000) | 2026-08-27 |
+| [[concepts/secondary-path-variability\|Secondary-Path Variability]] | Fit-induced secondary-path changes in ANC headphones: leaks/lifting cause low-frequency magnitude drop-off, 17.3 dB additive uncertainty below 300 Hz | 2026-08-27 |
+| [[concepts/dc-gain-stability-constraint\|DC-Gain Stability Constraint]] | Time-domain robust-stability check reducing the frequency-domain constraint to a coefficient sum (6 MACs per update); detects headphone secondary-path irregularities from the adaptive filter itself | 2026-08-27 |
 
 ---
 
@@ -1176,6 +1180,7 @@
 | [[sources/bagheri-2019-pmwf-spp\|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]] | Practical PMWF implementation exploiting MC-SPP: SPP-weighted noise PSD matrix tracking with Woodbury inverse updates, SPP-controlled trade-off parameter, and MMSE output blend; outperforms MVDR and MCWF. | 2026-08-25 |
 | [[sources/kang-2019-low-complexity-permutation-alignment\|Kang, Yang & Yang 2019: A Low-Complexity Permutation Alignment Method for Frequency-Domain BSS]] | Three-stage permutation alignment (confidence-thresholded bin-wise, local-centroid, few-iteration global clustering) matching Sawada/MBMC quality at 4-5x lower runtime | 2026-08-26 |
 | [[sources/rafaely-2000-constrained-fdlms\|Rafaely & Elliott 2000: Computationally Efficient Frequency-Domain LMS with Constraints]] | Penalty-function extension of FDLMS supporting convex frequency-domain constraints (magnitude, output power, robust stability), demonstrated on adaptive sound equalization | 2026-08-27 |
+| [[sources/guldenschuh-2014-secondary-path-irregularities\|Guldenschuh & de Callafon 2014: Detection of Secondary-Path Irregularities in ANC Headphones]] | DC-gain stability constraint (6 MACs) detects headphone leaks/lifting from the adaptive filter itself; smooth fallback default filter; leaky FxLMS γ=0.005; 17.3 dB low-frequency secondary-path uncertainty | 2026-08-27 |
 
 ---
 
@@ -1228,10 +1233,10 @@
 
 ## Statistics
 
-- **Total pages**: 1177
-- **Entities**: 517
-- **Concepts**: 452
-- **Sources**: 179
+- **Total pages**: 1182
+- **Entities**: 519
+- **Concepts**: 454
+- **Sources**: 180
 - **Synthesis**: 22
 - **Queries**: 7
 - **Last updated**: 2026-08-27

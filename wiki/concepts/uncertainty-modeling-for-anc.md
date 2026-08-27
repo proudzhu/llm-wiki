@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-04-26
+updated: 2026-08-27
 sources:
+  - raw/papers/guldenschuh-2014-secondary-path-irregularities/full-text.md
 tags:
   - active-noise-control
   - feedback-anc
@@ -44,6 +45,14 @@ The shape of uncertainty varies with frequency:
 - **Low frequencies** (< 200 Hz): Widely dispersed, elongated along imaginary axis — disk model severely overestimates
 - **Mid frequencies** (~2.8 kHz): Elongated along a line at ~30° angle — elliptic model captures well
 - **High frequencies** (~4.6 kHz): Quasi-circular distribution — disk model is already accurate
+
+## Headphone Measurement Data
+
+[[sources/guldenschuh-2014-secondary-path-irregularities|Guldenschuh & de Callafon 2014]] provide additive-uncertainty measurements for ANC headphones (four leak conditions on a dummy head + 16 measurements on two persons, referenced to a tight-fit nominal model):
+
+- **Below 300 Hz**: $U_{\max}$ up to **17.3 dB** — dominated by the leaky paths; the tight-fit response is lost first at low frequencies
+- **Above 300 Hz**: uncertainty decreases (approx. 0.5–3 dB); the maximum phase error occurs around 1300 Hz (open headphones)
+- The $|W \cdot U_{\max}|$ robustness margin is violated first **below 300 Hz**, pinpointing low frequencies as the stability-critical region for fit-induced [[concepts/secondary-path-variability|secondary-path variability]]
 
 ## Impact on ANC Performance
 

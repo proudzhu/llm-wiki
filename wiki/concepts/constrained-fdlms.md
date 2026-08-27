@@ -4,6 +4,7 @@ created: 2026-08-27
 updated: 2026-08-27
 sources:
   - raw/papers/rafaely-2000-constrained-fdlms/full-text.md
+  - raw/papers/guldenschuh-2014-secondary-path-irregularities/full-text.md
 tags:
   - adaptive-filtering
   - frequency-domain
@@ -56,6 +57,18 @@ Unlike the **leaky LMS**, whose leak factor $\gamma$ penalizes filter gain at *a
 ## Historical Significance
 
 Constrained FDLMS is the frequency-domain antecedent of the later time-domain [[concepts/output-constraint-anc-algorithms|output constraint ANC algorithm]] family: it was arguably the first to formulate adaptive-filter output/gain constraints as an online penalty-function optimization rather than a fixed leak, and it influenced subsequent work on gain-limited frequency-domain adaptive filters (e.g. Kozacky & Ogunfunmi 2009).
+
+## Cost Benchmark
+
+[[sources/guldenschuh-2014-secondary-path-irregularities|Guldenschuh & de Callafon 2014]] benchmark the constrained FDLMS (12-tap $W$, 2×24-pt FFTs + IFFT) against their own [[concepts/dc-gain-stability-constraint|DC-gain stability constraint]] on ANC headphones:
+
+| | Constrained FDLMS | DC-gain constraint |
+|:--|:--|:--|
+| Cost per update | ≥ 661 MACs | 6 MACs |
+| Narrowband noise reduction | **2–5 dB better** (close to 12-tap MMSE) | ~12.5% below MMSE |
+| Broadband noise reduction | comparable | comparable |
+
+The result illustrates the frequency-selective advantage of penalty-function constraints — better narrowband performance at two orders of magnitude higher computational cost.
 
 ## Related Concepts
 

@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-04-17
-updated: 2026-05-06
+updated: 2026-08-27
 sources:
   - raw/papers/fareedha-2026-joint-deep-spe-anc/full-text.txt
   - raw/papers/akhtar-2006-vss-lms-online-spm/full-text.txt
   - raw/papers/holzmuller-2026-dtw-secondary-path-anc/full-text.md
+  - raw/papers/guldenschuh-2014-secondary-path-irregularities/full-text.md
 tags:
 - active-noise-control
 - signal-processing

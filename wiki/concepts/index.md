@@ -456,4 +456,6 @@
 | [[concepts/multi-channel-speech-presence-probability\|Multi-Channel Speech Presence Probability (MC-SPP)]] | Gaussian-model multi-channel extension of SPP using array-wide quadratic-form SNR statistics; drives noise PSD matrix tracking, PMWF trade-off control, and MMSE output estimation. | 2026-08-25 |
 | [[concepts/permutation-alignment\|Permutation Alignment]] | Resolving the per-bin source-ordering ambiguity of frequency-domain BSS; method families and the low-complexity three-stage scheme of Kang 2019 | 2026-08-26 |
 | [[concepts/constrained-fdlms\|Constrained FDLMS]] | Frequency-domain LMS with convex constraints enforced via one-sided quadratic penalty and steepest descent (Rafaely & Elliott 2000) | 2026-08-27 |
+| [[concepts/secondary-path-variability\|Secondary-Path Variability]] | Fit-induced secondary-path changes in ANC headphones: leaks/lifting cause low-frequency magnitude drop-off, 17.3 dB additive uncertainty below 300 Hz | 2026-08-27 |
+| [[concepts/dc-gain-stability-constraint\|DC-Gain Stability Constraint]] | Time-domain robust-stability check reducing the frequency-domain constraint to a coefficient sum (6 MACs per update); detects headphone secondary-path irregularities from the adaptive filter itself | 2026-08-27 |
 

@@ -5,6 +5,7 @@ updated: 2026-08-27
 sources:
   - raw/papers/guo-2024-anc-saturation-survey/full-text.md
   - raw/papers/rafaely-2000-constrained-fdlms/full-text.md
+  - raw/papers/guldenschuh-2014-secondary-path-irregularities/full-text.md
 tags:
 - adaptive-algorithms
 - signal-processing
@@ -57,6 +58,16 @@ The leaky algorithm applies its penalty **globally**: [[sources/rafaely-2000-con
 
 - The leak factor γ achieving a desired gain limit must be found **by trial and error**, and the required value changes with the input-signal level.
 - The constraint it enforces is implicit (a penalty on $\mathbf{w}^T\mathbf{w}$), whereas penalty-function formulations make the bound (e.g. 4 dB) explicit and exactly defined.
+
+## Stabilizing Adaptation Under Secondary-Path Phase Errors
+
+For feedback ANC with a time-varying secondary path, the leak keeps the **adaptation** itself stable when the phase error between $\hat{G}$ and $G$ exceeds 90°. [[sources/guldenschuh-2014-secondary-path-irregularities|Guldenschuh & de Callafon 2014]] found experimentally (leaky FxLMS, headphone prototypes with leaks):
+
+- Without leakage, lifting the headphones caused the **worst-case divergence** — the filter grows without bound
+- With leakage $\gamma = 0.005$, the worst case became a **bounded response**; smaller $\gamma$ values slowed convergence and reduced the obtained noise reduction
+- $\gamma = 0.005$ was the **smallest leakage for stable adaptation** when phase deviations exceeded 90°, and also suppressed gain growth at high frequencies — where the leaky FxLMS otherwise pushes gain up as a side effect of model mismatch
+
+Note the two distinct instability channels in this setting: the leak addresses the **adaptation** channel; the low-frequency feedback instability (ringing poles) additionally requires a stability constraint on the filter itself, such as the [[dc-gain-stability-constraint|DC-gain stability constraint]].
 
 ## Related Concepts
 

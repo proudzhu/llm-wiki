@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-05
-updated: 2026-05-05
+updated: 2026-08-27
 sources:
   - wiki/sources/liebich-2018-doa-dependency-anc-headphones.md
+  - wiki/sources/guldenschuh-2014-secondary-path-irregularities.md
 tags:
   - active-noise-control
   - direction-of-arrival
@@ -50,13 +51,19 @@ In-ear headphones show less primary path variability than on-ear headphones (cf.
 - The two microphones are in closer proximity
 - The housing is more compact and acoustically sealed
 
+## Contrast with Secondary-Path Variability
+
+Primary-path variability is DOA-driven and attacks **high frequencies** (>1 kHz, housing resonances), degrading feedforward performance but not stability. Its sibling, [[secondary-path-variability|secondary-path variability]], is fit-driven (leaks, lifting) and attacks **low frequencies** (<300 Hz), where it threatens both adaptation and feedback-loop stability — see [[sources/guldenschuh-2014-secondary-path-irregularities|Guldenschuh & de Callafon 2014]].
+
 ## Related Concepts
 
 - [[device-specific-hrtf|Device-Specific HRTF (DHRTF)]]
 - [[anc-attenuation-bounds|ANC Attenuation Bounds]]
 - [[feedforward-anc|Feedforward ANC]]
 - [[uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
+- [[secondary-path-variability|Secondary Path Variability]]
 
 ## Related Sources
 
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
+- [[sources/guldenschuh-2014-secondary-path-irregularities|Guldenschuh & de Callafon 2014: Detection of Secondary-Path Irregularities in ANC Headphones]]

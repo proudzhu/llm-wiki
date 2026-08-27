@@ -521,4 +521,6 @@
 | [[entities/saeed-bagheri\|Saeed Bagheri]] | Researcher at Sonos Inc.; multi-channel noise reduction and parametric Wiener filtering for smart loudspeaker arrays. | 2026-08-25 |
 | [[entities/daniele-giacobello\|Daniele Giacobello]] | Researcher at Sonos Inc.; speech enhancement, sparse speech modeling/coding for consumer audio devices. | 2026-08-25 |
 | [[entities/fang-kang\|Fang Kang]] | Institute of Acoustics, CAS — blind source separation and permutation alignment | 2026-08-26 |
+| [[entities/markus-guldenschuh\|Markus Guldenschuh]] | IEM Graz — ANC headphones, secondary-path variability, prediction filter design | 2026-08-27 |
+| [[entities/raymond-de-callafon\|Raymond de Callafon]] | UCSD professor — control-relevant system identification, adaptive control; co-author of secondary-path irregularity detection | 2026-08-27 |
 
