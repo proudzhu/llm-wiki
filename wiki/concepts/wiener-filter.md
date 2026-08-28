@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-08-15
+updated: 2026-08-28
 sources:
   Controllers.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
+  - raw/papers/kim-2014-doa-based-snr-estimation/full-text.txt
 tags:
 - mathematics
 - signal-processing
@@ -47,6 +48,10 @@ $$
 
 computed from separately recorded clean speech $X$ and noise $N$ (the mixture is the sum, so the per-bin clean and noise components are known). The eight non-estimable parameters of the post-filter (four adaptation time constants and four feature gains) are tuned offline by steepest-gradient descent minimizing $\sum_{n,k}(H_w - P)^2$, with an 80/20 train/test split and early stopping. The Wiener gain is *not* used at runtime — only as a supervised learning target for parameter optimization.
 
+## Wiener Gain Driven by DOA-Based SNR (Kim & Kim 2014)
+
+In dual-microphone speech enhancement, Kim & Kim (2014) drive the Wiener spectral gain $G = \hat{\xi}/(1+\hat{\xi})$ with an a priori SNR estimated from **spatial cues** rather than from a noise-variance estimate: the phase difference between the time-aligned channels is first converted into a [[concepts/target-to-non-target-directional-signal-ratio|TNR]] estimate ($\cot^2(\Delta\tilde\psi/2)$), which a statistical model-based LRT speech-activity decision and two decision-directed updates then turn into the final SNR (see [[concepts/doa-based-snr-estimation|DOA-based SNR estimation]]). This decouples the Wiener gain from unreliable noise-variance tracking in adverse noise, and the resulting system outperforms single-channel Wiener filtering and dual-channel beamformer/post-filter baselines in SDR and PESQ at 0–20 dB SNR. A Wiener-filtering step is also used *inside* the estimator to obtain the speech-side power for the DOA-based SNR.
+
 ## Related Concepts
 
 - [[active-noise-control|Active Noise Control]]
@@ -62,3 +67,4 @@ computed from separately recorded clean speech $X$ and noise $N$ (the mixture is
 - [[sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]]
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — uses the Wiener gain as an offline supervised target for tuning a probability-based spatial filter's parameters
+- [[sources/kim-2014-doa-based-snr-estimation|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] — Wiener spectral gain driven by a spatial-cue (DOA-based) SNR estimate instead of a noise-variance-based one

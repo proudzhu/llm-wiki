@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-04-30
-updated: 2026-05-05
+updated: 2026-08-28
 sources:
   - raw/papers/wang-2026-predictive-dsfanc-crnn/full-text.md
   - raw/papers/wang-2026-directional-sfanc-reverberant/full-text.md
   - raw/papers/zhang-2014-causality-feedforward-anc-headset/full-text.md
+  - raw/papers/kim-2014-doa-based-snr-estimation/full-text.txt
 tags:
   - signal-processing
   - array-processing
@@ -49,6 +50,10 @@ $$\hat{\mathbf{p}} = \text{Softmax}[\text{FC}(\mathbf{h}_{T'})] \in \mathbb{R}^{
 
 The CRNN achieves >90% DoA classification accuracy at SNR ≥ 20 dB with only 0.05M parameters.
 
+## DOA as a Cue for SNR Estimation (Kim & Kim 2014)
+
+Beyond localization and filter selection, DOA information can serve directly as an **SNR cue** for speech enhancement. Kim & Kim (2014) assume the target DOA (TDOA) is known a priori for a dual-microphone array, time-align the channels accordingly, and convert the residual phase difference into a [[concepts/target-to-non-target-directional-signal-ratio|TNR]] and then a [[concepts/doa-based-snr-estimation|DOA-based SNR]] for a Wiener-filter speech enhancer. Their DOA-error analysis shows the enhancement performance is best near zero target-DOA error and degrades outside a small window — but since GCC/SRP-PHAT localization is reliable within that window, the cue is practical. A super-directive beamformer's broadside dual-microphone directivity is by contrast nearly DOA-error-invariant. The approach fails when target and interference share a DOA, the fundamental ambiguity of DOA cues.
+
 ## Key Considerations
 
 - **Discretization**: DoA is typically discretized into a grid (e.g., 36 angles at 10° resolution) for classification-based estimation
@@ -62,6 +67,7 @@ The CRNN achieves >90% DoA classification accuracy at SNR ≥ 20 dB with only 0.
 - [[concepts/moving-source-tracking|Moving Source Tracking]] — temporal DoA evolution for moving sources
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]] — neural architecture for data-driven DoA estimation
 - [[concepts/active-noise-control|Active Noise Control]] — application domain
+- [[concepts/doa-based-snr-estimation|DOA-Based SNR Estimation]] — DOA as a cue for SNR rather than filter selection
 
 ## Related Sources
 

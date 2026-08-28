@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-16
-updated: 2026-08-26
+updated: 2026-08-28
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/schwarz-2015-coherent-to-diffuse-power-ratio/full-text.md
@@ -139,6 +139,8 @@ Across the whole corpus, MCSE methods can be placed on a single spectrum of **wh
 | 6 | Filter weights $\mathbf{w}$ directly | (no intermediate) | [[sources/zaidel-2026-linearly-constrained-deep-beamformer\|Zaidel 2026]], [[sources/huang-2026-ndf-joint-neural-directional-filtering\|NDF+]] |
 
 **The tradeoff**: moving down the spectrum relaxes assumptions (DOA → coherence → SCM → direct weights) but sacrifices interpretability and controllability. Schwarz 2015's CDR estimators expose a clean physical quantity (coherent-to-diffuse ratio) with a geometric interpretation in the complex plane; Zaidel 2026's deep beamformer produces weights that satisfy constraints only statistically via the loss function. The 2026 **hybrid** methods (Steps 4–5) deliberately stop short of Step 6 to preserve the ability to inspect and control the filter — HVSF exposes the VSLF tradeoff parameter $\mu$ and span dimension $Q$, R-MWF exposes variance ratios $\psi_i, \psi_R, \psi_V$, Farmani's virtual-mic MVDR exposes the RTF power $\lambda$.
+
+**A Step-1 variant — DOA as an SNR cue rather than a weights cue**: [[sources/kim-2014-doa-based-snr-estimation|Kim & Kim 2014]] show that the DOA cue can enter the pipeline at a different stage altogether: instead of converting a steering vector into spatial-filter weights, the phase difference of the time-aligned dual microphones is converted into a [[concepts/target-to-non-target-directional-signal-ratio|TNR]] and then a [[concepts/doa-based-snr-estimation|DOA-based a priori SNR]] for a single-reference [[concepts/wiener-filter|Wiener gain]]. This is Step-1 prior information driving a Step-2/3-style post-filter, and it quantifies the small-array ceiling of the classical beamforming branch directly: a dual-microphone SDB (Step 1 applied literally) was consistently the *worst* method in their benchmark, while the same two microphones used as a phase-difference cue beat every conventional baseline — the number of microphones constrains the SDP of a beamformer but not the information content of the inter-channel phase.
 
 **The relaxation is not monotonic in performance**: [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis 2026]] shows that an output-based wrapper around Step 5 (MPDR with RTF dictionary) can outperform a Step 6 end-to-end approach at low SNR — the structural prior (candidate dictionary + GP selection) beats unconstrained learned weights when input statistics are unreliable.
 

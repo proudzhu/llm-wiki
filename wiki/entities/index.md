@@ -525,4 +525,6 @@
 | [[entities/raymond-de-callafon\|Raymond de Callafon]] | UCSD professor — control-relevant system identification, adaptive control; co-author of secondary-path irregularity detection | 2026-08-27 |
 | [[entities/xinye-yan\|Xinye Yan]] | NJU researcher; first author of dual-mic Bluetooth headset noise suppression (coherence-based vs spatial pre-separation, 2014) | 2026-08-30 |
 | [[entities/jan-skoglund\|Jan Skoglund]] | Google researcher; neural speech/audio coding, low-bitrate neural vocoders; co-author of LPCNet | 2026-08-30 |
+| [[entities/seon-man-kim\|Seon Man Kim]] | ISVR Southampton / GIST — dual-microphone speech enhancement, DOA-based SNR estimation | 2026-08-28 |
+| [[entities/hong-kook-kim\|Hong Kook Kim]] | GIST professor — speech recognition, speech/audio source separation, embedded speech processing | 2026-08-28 |
 

@@ -467,4 +467,7 @@
 | [[concepts/fargan\|FARGAN]] | Framewise autoregressive GAN vocoder: 2.5-ms subframes, pitch prediction as second AR feedback, no teacher forcing, 8-bit end-to-end | 2026-08-30 |
 | [[concepts/pitch-prediction\|Pitch Prediction]] | Long-term prediction of speech from one pitch period back; FARGAN's explicit second autoregressive feedback | 2026-08-30 |
 | [[concepts/exposure-bias\|Teacher Forcing and Exposure Bias]] | The structural training/inference gap of density-estimation autoregressive vocoders; escaped by framewise unrolled generation | 2026-08-30 |
+| [[concepts/doa-based-snr-estimation\|DOA-Based SNR Estimation]] | A priori SNR estimated from spatial (phase-difference) cues via TNR + LRT speech-activity decision + decision-directed updates, replacing unreliable noise-variance estimation (Kim & Kim 2014) | 2026-08-28 |
+| [[concepts/target-to-non-target-directional-signal-ratio\|Target-to-Non-target Directional Signal Ratio (TNR)]] | DSB/BM transfer-function power ratio of time-aligned dual mics, closed form cot²(Δψ̃/2); spatial-cue analogue of the SNR | 2026-08-28 |
+| [[concepts/phase-error-based-filter\|Phase-Error-Based Filter (PEF)]] | Dual-mic soft-masking gain driven by phase-difference error; approximates TNR as 1/(Δψ)² — effective at low SNR, distorts target speech at high SNR | 2026-08-28 |
 

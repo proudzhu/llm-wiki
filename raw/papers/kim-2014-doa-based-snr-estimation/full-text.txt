@@ -1,0 +1,1188 @@
+IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 22, NO. 12, DECEMBER 2014
+2207
+Direction-of-Arrival Based SNR Estimation for
+Dual-Microphone Speech Enhancement
+Seon Man Kim and Hong Kook Kim, Senior Member, IEEE
+Abstract—In this paper, we propose a method for estimating
+target speech by exploring the spatial cues in adverse noise
+environments. This method is able to reliably estimate the
+signal-to-noise ratio (SNR) using the phase difference obtained
+from dual-microphone signals. To this end, spatial cues such as
+the phase difference are used to estimate the target-to-non-target
+directional signal ratio (TNR). Based on the estimated TNR, a
+direction-of-arrival (DOA)-based SNR is then estimated by using
+a statistical model-based log-likelihood ratio test for the target
+speech activity decision followed by a decision-directed approach.
+The estimate is then incorporated into a Wiener ﬁlter in order to
+obtain a spectral-gain attenuator. The perceptual evaluation of
+speech quality shows that the performance of a dual-microphone
+speech enhancement system employing the proposed estimation
+method outperforms single- and dual-microphone speech en-
+hancement systems that use conventional methods such as Wiener
+ﬁltering, beamforming, or phase-error-based ﬁltering under noise
+conditions whose SNR ranges from 0 to 20 dB.
+Index Terms—Direction-of-arrival, dual-microphone signal,
+signal-to-noise ratio, spatial cue, speech enhancement, target-to-
+non-target directional signal ratio.
+I. INTRODUCTION
+R
+ECENTLY, speech enhancement in noisy environments
+has attracted a great deal of research interest, especially
+in applications such as mobile voice communications, automatic
+speech recognition, and hearing aids [1]–[4]. The goal of speech
+enhancement is to suppress additive background noise compo-
+nents while maintaining the quality and intelligibility of speech
+[1]. This task is usually accomplished by preserving the char-
+acteristics of speech using the short-term spectral amplitude
+(STSA), for which the reliable estimation of the signal-to-noise
+ratio (SNR) is crucial in noisy environments [1], [2].
+The SNR estimation generally involves two steps: a noise
+variance estimation and an SNR computation that is based on
+the estimated noise variance [1], [3]. For the SNR computation,
+Manuscript received January 28, 2014; revised May 07, 2014; accepted
+September 22, 2014. Date of publication September 26, 2014; date of current
+version November 05, 2014. This work was supported in part by a National
+Research Foundation of Korea (NRF) grant funded by the Ministry of Science,
+ICT and Future Planning (MSIP) (No. 2012-010636), and ICT R&D program
+of MSIP/IITP [2014-044-055-002, Loudness Based Broadcasting Loudness
+and Stress Assessment of Indoor Environment Noises]. The associate editor
+coordinating the review of this manuscript and approving it for publication was
+Dr. Man-Wai Mak.
+S. M. Kim is with the Institute of Sound and Vibration Research
+(ISVR), University of Southampton, Southampton SO17 1BJ, U.K. (e-mail:
+kobem30002@gmail.com).
+H. K. Kim is with the School of Information and Communications, Gwangju
+Institute of Science and Technology (GIST), Gwangju 500-712, Korea (e-mail:
+hongkook@gist.ac.kr).
+Digital Object Identiﬁer 10.1109/TASLP.2014.2360646
+it has been reported that a decision-directed (DD) approach, in
+which the decision was based on the a priori and a posteriori
+SNR estimates, provided a simple but effective solution with a
+reasonable computational cost [2]. However, since the a poste-
+riori SNR estimate is directly obtained from the noisy speech
+and the estimated noise variance, an unreliable noise variance
+estimate can affect the SNR estimation, which can then distort
+the estimated clean speech in severely adverse noise environ-
+ments [2]. Thus, accurate noise variance estimation plays an im-
+portant role in reliable SNR estimation; however, it may also be
+unreliable in adverse noise environments [2], [3].
+To improve the speech enhancement performance in ad-
+verse noise environments, multiple-microphone systems are
+increasingly becoming popular despite their additional cost
+since they result in a better performance than can be obtained
+by single-microphone speech enhancement algorithms [4]. As
+opposed to only time information from a single microphone
+signal, multiple-microphone signals allow additional spatial
+cues to be exploited because the direction-of-arrival (DOA) of
+target speech is strongly linked to the phase difference between
+multiple-microphone signals [4]–[6]. Thus, by assuming that
+only one sound source power is dominant in each time-fre-
+quency (T-F) bin, the dominance of the target speech’s presence
+or absence in each T-F bin can be determined using the phase
+difference [5]–[10]. This binary decision has become quite
+well-known for achieving a good performance [5]–[10]. How-
+ever, enhanced speech continues to suffer from musical noise,
+because the inherent discontinuous zero-paddings result in
+artifact distortions in the estimated target signal. This problem
+is even worse in real world environments where the sparseness
+assumption cannot quite be satisﬁed.
+On one hand, under non-sparse conditions, the phase differ-
+ence from a directional target speech signal would be variable
+due to non-target-directional noises. Thus, the binary decision
+for the dominance of the target speech in each T-F bin would be
+inappropriate [10]–[19]. For example, a beamformer was uti-
+lized to construct the directional sensitivity—referred to as the
+spatial directivity pattern (SDP)—and attenuate spatially-un-
+wanted noises arising from non-target directions [14]–[16]. A
+post-ﬁltering technique was also utilized to further improve the
+noise reduction performance of the beamformer [4], [17], and
+an independent component analysis (ICA) based blind source
+separation (BSS) was used to estimate the acoustic paths from
+the sound sources to each microphone [18]. In addition, a soft-
+masking method, which was referred to as a phase-error-based
+ﬁlter (PEF) [19], was employed as the spectral-gain function of
+phase differences. This approach was motivated by the fact that
+phase difference errors between the dual-microphone signals
+were related to the SNR of the observed noisy speech signal.
+2329-9290 © 2014 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission.
+See http://www.ieee.org/publications_standards/publications/rights/index.html for more information.
+
+
+2208
+IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 22, NO. 12, DECEMBER 2014
+However, since the phase difference of the target speech is
+estimated based on target DOA information, an unreliable DOA
+estimate can distort the estimated clean speech in a PEF or a
+beamformer [4], [19]. Thus, the accurate DOA estimation of
+the target speech plays an important role in the reliability of the
+target speech estimation. However, it may also be unreliable in
+adverse noise environments [4]. Since the accurate estimation
+of the target DOA is beyond the scope of this paper, this paper
+assumes that the target DOA is known a priori.
+Besides the DOA problem, the strategies of using beam-
+formers, ICA-based BSS, PEF, and post-ﬁltering techniques
+limit the performance of dual-microphone speech enhance-
+ments due to the following reasons. First, the SDPs of a
+beamformer were constrained by the number of microphones.
+In other words, the performance of beamformer-based speech
+enhancement systems was found to be highly dependent on
+the number of microphones used [4]. Thus, the performance
+obtained via dual-microphones might not be satisfactory,
+compared to the masking-based methods such as PEF [19].
+Second, for the acoustic path estimation in an ICA-based
+BSS, the number of sound sources should be smaller than or
+equal to that of the microphones, which might be impractical
+[18], [20]. Third, PEF was effective at reducing non-target
+directional noise under low SNR conditions, but it could distort
+the target-directional speech at high SNRs [19]. Moreover, a
+beamformer-based post-ﬁltering technique estimates the spec-
+tral-gain attenuator by utilizing the power ratio between the
+input and output signals of the beamformer, and the estimated
+spectral-gain attenuator was then applied to the beamformer
+output signal to further reduce the noise components. How-
+ever, since such a post-ﬁltering technique was similar to PEF
+[19], the performance at a high SNR was poorer than those
+at low SNRs. Nevertheless, when the DOA of target speech
+is uncertain, the performance of non-target directional signal
+attenuation by the PEF could be worse than that by a single-mi-
+crophone technique using a temporal cue. This is because PEF
+works only on the basis of a DOA cue represented by phase
+differences [19]. Accordingly, it could be more beneﬁcial for
+better spectral estimate to use both the temporal and DOA cues
+than to use either of them.
+As motivated above, this paper proposes a method for
+estimating the target speech in a dual-microphone speech
+enhancement system by exploring the spatial cues in adverse
+noise environments in order to reliably estimate the SNR using
+the phase difference obtained from dual-microphone signals.
+First, spatial cues such as the phase difference are derived as
+a form of target-to-non-target directional signal ratio (TNR),
+which is deﬁned as the power ratio between the target-direc-
+tional enhanced and rejected signals [21]. Next, a DOA-based
+SNR is deﬁned using the TNR, from which a DOA-based
+SNR estimation method is also proposed. Then, the estimated
+DOA-based SNR is incorporated into a Wiener ﬁlter in order
+to obtain a spectral-gain attenuator. Finally, the performance of
+a dual-microphone speech enhancement system employing the
+proposed method is evaluated by measuring the source-to-dis-
+tortion ratio (SDR), source-to-interference ratio (SIR), and
+source-to-artifacts ratio (SAR) [22] under interference speech
+conditions whose SNR ranges from 0 to 20 dB. In addition,
+we evaluate the performance by measuring the perceptual
+evaluation of speech quality (PESQ) scores [23] under four
+Fig. 1. Block diagram of a dual-microphone speech enhancement system that
+utilizes the phase differences as spatial cues.
+different noise conditions such as interference speech, factory,
+vacuum cleaner, and white noise. Finally, we compare the
+performance of a dual-microphone speech enhancement system
+employing the proposed method with that of a conventional
+one using either a super-directive beamformer (SDB) [4], [14],
+[15], a generalized sidelobe canceller (GSC) [16] followed
+by a post Wiener ﬁlter (GSC-PW), PEF [19], or an angular
+spectrum-based masking method (ASBM) [24].1
+The remainder of this paper is organized as follows. Section II
+brieﬂy reviews a dual-microphone speech enhancement system
+using a spatial cue such as the phase differences between dual-
+microphone signals. Section III proposes a DOA-based SNR
+estimation method to improve the performance of a dual-mi-
+crophone speech enhancement system. Section IV evaluates the
+performance of a dual-microphone speech enhancement system
+employing the proposed method and compares it with those of
+conventional single- and dual-microphone speech enhancement
+systems. Finally, our ﬁndings are summarized in Section V.
+II. DUAL-MICROPHONE SPEECH ENHANCEMENT
+USING PHASE DIFFERENCES
+In this section, we brieﬂy describe a dual-microphone speech
+enhancement system that utilizes spatial cues estimated from
+dual-microphone signals. As shown in Fig. 1, spatial cues such
+as the phase differences between dual-microphone signals are
+ﬁrst estimated. Then, the spectral gain for estimating target
+speech is obtained from the estimated phase differences.
+In order to model dual-microphone signals, we assume that
+sound sources can be classiﬁed into target and non-target di-
+rectional sources, and that the target directional speech source
+is located far enough from the microphone array, which is re-
+ferred to as the acoustic far ﬁeld condition. In other words,
+the target-directional speech is free from any room reverbera-
+tion effects since only the direct path is considered in modeling
+dual-microphone input signals. Then, the
+-th spectral compo-
+nent of the
+-th microphone signal at the -th frame,
+,
+can be represented as
+(1)
+(2)
+where
+is the
+-th spectral
+component representing the target directional source, and
+is each microphone-recorded version of
+the non-target directional source
+[4], [19]. Note here
+that
+denotes the total number of frequency bins. In addition,
+is the time difference-of-arrival (TDOA) between the two
+1All abbreviations in this paper were listed in Appendix I.
+
+
+KIM AND KIM: DOA BASED SNR ESTIMATION FOR DUAL-MICROPHONE SPEECH ENHANCEMENT
+2209
+microphones, and
+is the angular frequency in
+radians at the
+-th frequency bin. Here, we can also assume
+that the DOA of the desired signal source is either easily pre-
+dictable or known a priori, such as for an interlocutor-facing
+hearing-aid wearer [4] or a driver in a car telematics system [2],
+[25]. Moreover, even when it is difﬁcult to predict the DOA of
+the desired signal source, the TDOA can be estimated before
+applying a speech enhancement algorithm. To this end, we can
+apply popular localization algorithms such as the generalized
+cross correlation (GCC) or steered response power (SRP) with
+phase transform (PHAT) weighting
+[4], [19]. For
+example, the TDOA estimate by GCC-PHAT,
+, is repre-
+sented as [19]
+(3)
+where
+and
+is
+a
+complex
+conjugate
+operator.
+Next,
+by
+multiplying
+into
+in (2),
+can be rewritten as
+. Then, assuming
+, we
+have
+(4)
+where
+also becomes a non-
+target directional source.
+As shown in Fig. 1, dual-microphone speech enhance-
+ment algorithms such as binary masking, beamformers, and
+PEF attempt to estimate the spectrum of the target direc-
+tional signal,
+, in the form
+or
+, where
+is the spectral-gain
+attenuator estimated from spatial cues such as the phase dif-
+ferences between dual-microphone signals. For example, when
+the dual-microphone beamforming output from (1) and (4) is
+denoted as
+, the transfer function of the beamformer,
+, for the target-directional source is
+given by
+(5)
+where
+denotes a beamformer weight of the
+-th microphone signal [4], [14], [21], and
+is a phase
+difference between
+and
+.
+Depending on the process how the beamformer weights
+are chosen, beamformers are classiﬁed as either data-inde-
+pendent or data-dependent [14]. To be speciﬁc, the weights in
+data-independent beamformers are designed so that the spatial
+directivity approximates a desired pattern, which is indepen-
+dent of the array input data; a delay-and-sum beamformer
+(DSB) or blocking matrix (BM) belongs to such a category.
+Conversely, the weights in data-dependent beamformers are
+determined based on the statistics of the input audio signals. As
+an example of a data-dependent beamformer, a super-directive
+beamformer (SDB) has been designed to obtain an optimal
+performance on the diffuse noise ﬁeld, in which the beam-
+former weights
+are derived as
+[4], [15]. Here,
+represents
+the Hermitian operator,
+, and
+denotes the coherence matrix of the diffuse noise sound ﬁeld,
+whose element
+represents the coherence
+between the
+-th and
+-th microphones [15], [17] where
+is the distance between the
+-th and
+-th microphones and
+is the speed of sound (
+m s in dry air). The perfor-
+mance of beamformer-based speech enhancement systems are
+highly dependent on the number of microphones used [4]. For
+example, the performance of an SDB implemented with dual
+microphones might be worse than that of a PEF [19].
+As another example, PEF is motivated by the fact that the
+error in phase difference between dual-microphone signals
+varies depending on the power ratio between the target and
+non-target directional signals, i.e., TNR. The TNR at the
+-th
+spectral component and the -th frame,
+, is deﬁned as [21]
+(6)
+where
+and
+are respectively the
+-th spectral com-
+ponents of the target directional source signal and non-target
+directional signal at the -th frame. Then, the TNR-based spec-
+tral-gain attenuator,
+, can be derived by employing the
+Wiener ﬁlter formulation as
+(7)
+where
+is a constant used to control the degree of noise attenu-
+ation, in which a higher value of
+results in better performance
+at low input TNRs but worse performance at high input TNRs
+[19], [21].
+PEF attempts to ﬁnd a corresponding TNR,
+, to de-
+termine the phase difference
+between
+and
+, which is then utilized to estimate
+. It has been
+reported in [19] that
+is related to the phase difference, and
+the inverse of the squared phase difference,
+, can
+be used to approximate
+. Thus, PEF uses
+instead of
+in order to obtain the spectral-gain attenuator,
+which is then denoted as
+[19], i.e.,
+(8)
+It has been shown that the PEF provided a higher digit recog-
+nition accuracy than both the dual-microphone SDB and the
+beamformer with a post-ﬁlter [19]. Thus, it was postulated that
+the PEF could be effective in non-target directional noise sup-
+pression, potentially improving the desired signal performance.
+However, though the PEF was effective at reducing non-target
+directional signals under low TNR conditions, it could distort
+the target-directional desired signal at high TNRs [19]. This
+could be a major drawback with the PEF since the phase dif-
+ference-based TNR estimation approach may be unreliable, al-
+though it gives better performance than other dual-microphone
+speech enhancement algorithms.
+Consequently, the phase difference is seen to play a crucial
+role in estimating the spectral-gain attenuator using spatial
+cues. Therefore, it is important how phase differences are
+utilized for the reliable enhancement of target noisy speech
+components; this paper attempts to provide a solution to deal
+with this problem.
+
+
+2210
+IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 22, NO. 12, DECEMBER 2014
+Fig. 2. Block diagram of a dual-microphone speech enhancement system em-
+ploying the proposed SNR estimation method.
+III. PROPOSED DOA-BASED SNR ESTIMATION USING
+DUAL-MICROPHONE SIGNALS
+As mentioned in Section I, the performance of a speech en-
+hancement method using a single-microphone signal such as
+the Wiener ﬁlter may be poorer than that of a speech enhance-
+ment method using multiple-microphone signals; however, the
+better a priori SNR estimation can provide a more accurate
+spectral-gain attenuation [1]. Thus, in this section, an SNR-esti-
+mation method based on dual-microphone phase differences is
+proposed in order to reliably utilize spatial cues for the target
+speech estimation.
+Fig. 2 shows a block diagram of the proposed method. First,
+the phase difference,
+, between
+and a time-
+aligned version of
+,
+, is estimated and utilized
+to obtain a TNR estimate,
+. Next,
+is used to estimate
+the DOA-based SNR,
+, which is also utilized to reliably
+obtain an SNR estimate,
+. Finally, a speech enhancement
+spectral-gain attenuator,
+, is obtained on the basis of
+, which is subsequently applied to the ﬁrst or second mi-
+crophone noisy speech signal.2
+A. TNR Estimation
+As shown in (7) and (8), the spectral-gain attenuator realized
+by
+was found to provide better speech
+enhancement performance than a beamforming algorithm [19].
+In this subsection, we explain the TNR estimation method that
+is based on the phase differences.
+For this task, we use the spectral-gain function of phase
+difference that is developed for a beamformer as in (5). Fortu-
+nately, this spectral-gain function makes it possible to improve
+the performance of the beamformer by replacing the phase
+difference,
+, with its frequency-normalized version,
+. This is because we understand
+that a beamforming function employing
+enables a
+better performance than employing
+; the performance
+beneﬁt from using
+instead of
+was also
+reported in [5] and [10]. Thus, we can obtain the DSB transfer
+function to estimate the target-directional speech,
+,
+2In this paper, the spectral gain is applied to the ﬁrst microphone signal,
+.
+where the beamformer weights for DSB are expressed as
+and
+[4]. That is,
+(9)
+On the other hand, since
+and
+, the transfer function of a BM,
+, can be
+obtained to reject the target-directional speech [4] as
+(10)
+By
+multiplying
+by
+and
+,
+the estimates of
+and
+can be obtained as
+and
+,
+respectively. Finally, as derived in Appendix II of this paper,
+the TNR estimate,
+, can be obtained as
+the ratio between the two transfer functions of
+and
+, such that3
+(11)
+Consequently, as shown in (11), the TNR can be estimated by
+only using the phase difference term. In the next subsection, it
+is explored how the DOA-based SNR can be estimated with this
+TNR estimate.
+B. DOA-Based SNR Estimation
+For the dual-microphone array given in (1) and (4), we
+assume that each target-directional signal,
+, or non-target
+signal,
+, can be decomposed into the target speech,
+,
+and noise,
+. In other words, we assume that
+can
+be represented as
+, where
+and
+denote the target- and non-target-directional noise
+spectral components, respectively. Similar to
+,
+can
+be represented as
+, where
+and
+also denote the target- and non-target-directional speech
+spectral components, respectively. Even if
+can be af-
+fected by reverberation effects in real environments,
+can be negligible when the target speech comes close to the
+microphones. Consequently, we can assume
+.
+Therefore, two hypotheses pertaining to target speech activity,
+and
+, can then be represented as
+(12)
+The above equation can subsequently be extended as
+(13)
+Since
+, the
+two hypotheses above can be represented as
+(14)
+3Hereafter within this section, we remove the frequency bin index
+in equa-
+tions to improve the readability.
+
+
+KIM AND KIM: DOA BASED SNR ESTIMATION FOR DUAL-MICROPHONE SPEECH ENHANCEMENT
+2211
+where
+and
+denote
+and
+,
+respectively.
+Next,
+we
+can
+deﬁne
+the
+DOA-based SNR,
+, as
+(15)
+where
+and
+denote the expected values of
+and
+, which are deﬁned as
+and
+, respectively. To obtain an estimate of
+,
+and
+should be estimated. First, the
+estimate of
+,
+, can be obtained through a recursive
+procedure with a smoothing parameter
+, such that
+(16)
+Note that (16) is performed only when
+is true, in which the
+decision is based on the statistical model-based log-likelihood
+ratio test (LRT) for the target speech activity decision [26] used
+in this paper.
+On the other hand, to obtain the estimate of
+in (15),
+i.e.,
+, a Wiener ﬁltering procedure is employed as
+(17)
+where
+is estimated using a DD approach [1], [2], such that
+(18)
+where
+is the smoothing parameter. Consequently, we
+can obtain the DOA-based SNR estimate as
+by using
+in (17) and
+in
+(16).
+C. SNR Update by a Posteriori SNR
+By using the estimate of the DOA-based SNR,
+, the
+SNR,
+, can also be estimated using a DD approach as
+(19)
+where
+is the smoothing parameter. In (19),
+is the estimate of the a posteriori SNR, which is expressed as
+(20)
+where
+is the noise variance estimate, and can be esti-
+mated via a recursive procedure with a smoothing parameter
+, such that
+is true
+(21)
+D. Target Speech Reconstruction
+The proposed noise attenuating spectral gain for the speech
+enhancement based on the Wiener ﬁlter,
+, is repre-
+sented as
+(22)
+Fig. 3. The geometric conﬁguration of a room environment simulation for ob-
+taining dual-microphone noisy speech signals.
+where
+is obtained in (19). Thus, the target speech spec-
+tral estimate,
+, can be obtained by multiplying
+by
+, which is transformed back into a time domain signal.
+IV. PERFORMANCE EVALUATION
+In this section, we evaluated the performance of a speech en-
+hancement system employing the proposed DOA-based SNR
+estimation approach. Fig. 3 illustrates the geometric conﬁgura-
+tion for the simulation setup to obtain dual-microphone noisy
+speech signals in a reverberant room. In this paper, even though
+the proposed method was developed without considering any
+reverberant effects of the target speech signals, we attempted to
+evaluate the performance of the proposed method in reverbera-
+tion environments. To this end, we assumed that a reverberant
+room had dimensions of
+m
+m
+m and a dual-microphone
+system with 4-cm spacing was located in the room. Here, four
+reverberation times (RT60s) of 0, 100, 200, and 300 ms were
+modeled using the image source method (ISM) [27], [28]. For
+the ISM, early and lateral reﬂections were all considered by the
+diffused decay model in [28].
+For an intensive analysis, we considered two target speech
+source locations and four noise source locations, as shown in
+Fig. 3. All the heights of sources and microphones were set to
+1.5 m. In this simulation, we utilized ten target speech utter-
+ances (ﬁve males and ﬁve females) from the TIMIT database
+[29]. The target speech sources were located along the azimuth
+directions of
+and
+on a circle of 1 m radius, which
+were referred to as
+and
+, respectively. In order to test the
+robustness against speech interference, four interfering speech
+sources from the TIMIT database [29] were positioned along
+the azimuth directions of
+,
+,
+, and
+on a circle at
+a radius of 2 m; these were referred to as N1, N2, N3, and N4.
+We combined two speech-source and four noise-source
+locations to construct six different scenarios, as described in
+Table I. They were S2-N1, S2-N2, S2-N3, S1-N3, S1-N4-N1,
+and S2-N3-N1. Among them, S2-N1, S2-N2, and S2-N3, which
+were respectively referred to as Case 1, Case 2, and Case 3,
+were comparably easier scenarios than others, because the
+sources were located on the opposite side. On the other hand,
+S1-N3 (referred to as Case 4) was the most difﬁcult because the
+sources were located close to one another and they had very
+
+
+2212
+IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 22, NO. 12, DECEMBER 2014
+TABLE I
+SIMULATION SCENARIOS ACCORDING TO SPEECH
+AND NOISE SOURCE LOCATIONS
+similar DOAs. Furthermore, two-noise mixture scenarios such
+as S1-N1-N4 and S2-N3-N1 were respectively referred to as
+Case 5 and Case 6. Consequently, to evaluate the noise-robust
+speech enhancement performance, 50 test noisy speech signals
+(10 signals at different SNRs of 0, 5, 10, 15, or 20 dB) were
+prepared for each scenario (Cases 1, 2, 3, 4, 5, and 6) under
+each reverberation time of 0, 100, 200, and 300 ms.
+A. Algorithm Implementation
+For the simulation, it was assumed that all TDOAs
+’s were
+known a priori, i.e.
+, instead of using the TDOA estimate
+in (3). Furthermore, each test signal was down-sampled from
+16 kHz to 8 kHz, then segmented into consecutive frames by
+half-overlapping a cosine window with a length of 32 ms, which
+corresponded to 256 samples at a sampling rate of 8 kHz. In
+this paper, SIR, SAR, and SDR were measured to evaluate the
+performance of the speech enhancement algorithms in noisy
+environments [22].
+The true clean target signal,
+, and its estimate,
+,
+were related by
+, where
+,
+, and
+were the er-
+rors associated with the interference, noise, and artifacts, re-
+spectively; they were obtained through a least-square projection
+[22]. By using those errors, SIR, SAR, and SDR were deﬁned
+as [22]
+(23)
+(24)
+(25)
+where
+is the norm operator.
+As shown in (23)–(25), the SIR could mainly measure how
+well the algorithm suppressed interfering sources, while SAR
+measured how many artifacts remained in the separated (target)
+source. SDR was a global performance index, which might give
+a better assessment of the overall performance of the algorithms
+under comparison by considering both the interference and ar-
+tifact components. Note that the left (or the ﬁrst) microphone
+signal of the dual-microphone system was used as the reference
+for measuring SDR, SIR, and SAR in this paper.
+In order to select proper values for
+in (16),
+in (18),
+in
+(19), and
+in (21), we measured the SDR values according to
+different values of
+,
+,
+, and
+for all SNRs, RT60s, and
+scenarios. Consequently, it was found that setting
+in (16),
+in (18),
+in (19), and
+Fig. 4. Comparison of SDR values averaged over (a) high SNRs (15 and 20 dB)
+and (b) low SNRs (0, 5, and 10 dB) between PEF and the proposed TNR method
+for Case 1 with no reverberation (
+ms), according to the different
+values of
+.
+in (21) provided the maximized SDR value. Thus, we set those
+parameters as ﬁxed for all the simulations.
+B. Objective Quality Test and Results
+We compared the speech enhancement performance of
+in (11) with that of
+in (8) according to
+the parameter
+that controls the degree of noise attenuation.
+To this end, we implemented the TNR-based spectral gain
+using
+. Fig. 4 shows the comparison of SDR
+values of the signals processed by the PEF method in (8) and
+the proposed method in (11), where
+varied from 0.1 to 15.
+Note that the SDR values for Case 1 were averaged over high
+SNRs (15 and 20 dB SNRs) or low SNRs (0, 5, and 10 dB
+SNRs). It was shown from the ﬁgure that the proposed TNR
+and PEF methods provided the highest SDR values when
+was about 1 and 5, respectively, under high SNR conditions.
+On the other hand, at low SNRs, the proposed TNR achieved
+the highest SDR value when
+was about 3, and higher SDR
+values than PEF for all
+’s. This implies that the proposed TNR
+method can provide better speech enhancement performance
+than the conventional PEF by properly setting
+.
+Figs. 5(a) and (b) show the spectrograms of the target-direc-
+tional desired speech and its noise-contaminated version at 5 dB
+SNR for Case 1, respectively, under no reverberation condition,
+i.e.,
+ms. In addition, Fig. 5(c) was obtained by ap-
+plying the spectral gain
+with
+, based on the
+TNR estimate
+to Fig. 5(b). In addition, Fig. 5(d) was ob-
+tained by applying the proposed
+in (22) to Fig. 5(b).
+It was shown from the ﬁgure that the proposed TNR method
+effectively suppressed the non-target-directional noise compo-
+nents. Moreover, it was shown by comparing Figs. 5(c) and 5(d)
+
+
+KIM AND KIM: DOA BASED SNR ESTIMATION FOR DUAL-MICROPHONE SPEECH ENHANCEMENT
+2213
+Fig. 5. Step-by-step illustrations of: spectrograms of (a) clean male speech,
+(b) interference speech contaminated by noisy speech at 5 dB SNR in Case
+1 (target speech at
+and noise at
+) under no reverberation conditions,
+(c) signal processed by
+, and (d) signal processed by
+.
+Fig. 6. Illustration of (a) the noisy speech signal at 5 dB SNR of Case 1 with
+no reverberation, and the SNRs estimated by the conventional and proposed
+methods at (b) 1 kHz, (c) 2 kHz, and (d) 3 kHz.
+that
+could provide more suppressed non-target-direc-
+tional noise components and more-reﬁned target speech than
+.
+To demonstrate the effectiveness of the proposed method fur-
+ther, the proposed SNR estimate,
+in (19), was compared
+to the conventional DD-based estimate in [3], where the true
+SNR was used as a reference. Fig. 6 shows the performance
+comparison of the SNR estimate at speciﬁc frequencies of 1, 2,
+and 3 kHz for the methods applied to the noisy speech signal in
+Fig. 5(b). It was shown from the ﬁgure that the proposed method
+gave an SNR estimate that was more similar to the true value
+than the conventional single-microphone method. To quantify
+the similarity, Table II compares the root mean square (RMS)
+errors between the true and estimated SNR values at speciﬁc fre-
+quencies from 500 Hz to 3 kHz at a step of 500 Hz. As shown in
+the table, the proposed method achieved much smaller RMS er-
+rors than the conventional method. These results imply that the
+TABLE II
+RMS ERROR BETWEEN TRUE AND ESTIMATED
+SNR AT DIFFERENT FREQUENCIES
+Fig. 7. Comparison of (a) SDR, (b) SIR, and (c) SAR values according to dif-
+ferent approaches for all scenarios.
+SNR estimate based on the DOA information from the dual-mi-
+crophone signals can provide more reliable information for es-
+timating the SNR.
+Fig. 7 compares the SDR, SIR, and SAR values averaged over
+all SNRs and RT60s of different methods according to different
+scenarios. In this ﬁgure, we labeled no speech enhancement
+as ‘None,’ and we compared the proposed dual-microphone
+TNR and SNR-based methods with four different conventional
+dual-microphone speech enhancement methods (SDB, GSC
+followed by post-ﬁlter (GSC-PW), PEF, and angular spec-
+trum-based masking (ASBM)).4 As shown in the ﬁgure, the
+SAR values did not seem to be dependent on the scenario; how-
+ever, the SDR and SIR values in one-noise mixture scenarios
+(Cases 1, 2, and 3) seemed to be higher than those in two-noise
+mixture scenarios (Cases 5 and 6). Note that the SDR values
+were little varied according to the different dual-microphone
+4Some speech samples can be found inhttp://hucom.gist.ac.kr/TASL-2014/
+sample.html.
+
+
+2214
+IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 22, NO. 12, DECEMBER 2014
+Fig. 8. Conceptual diagram for a DOA error simulation.
+methods in Case 4; this was because in Case 4 the target speech
+and noise were in the same direction, which made it difﬁcult
+to discriminate between the target and non-target signals using
+DOA cues. These DOA cue ambiguities present a challenging
+problem for our future work. In Cases 1 and 2, the proposed
+method did not provide a higher SIR value than the conven-
+tional methods. However, the proposed method achieved the
+highest SDR value, which implies that a speech enhancement
+system employing the proposed SNR estimation method could
+provide a better speech enhancement performance than con-
+ventional methods, since the SDR was an assessment measure
+that represented the overall speech enhancement performance
+[22]. Note that the proposed TNR-based method provided a
+better SDR performance than SDB, GSC-PW, and PEF in all
+scenarios except Case 4; however, its performance did not seem
+to be better than that of ASBM or the proposed DOA-based
+SNR methods.
+As mentioned earlier, we assumed that the target DOA was
+known a priori; however, in a real environment, the target DOA
+estimation might not be robust, thus the performance against
+the target DOA error was also investigated in an interference
+speech environment. As depicted in Fig. 8, in order to simu-
+late the DOA error, the clean speech signal from the left mi-
+crophone was ﬁxed as the reference signal for measuring the
+SDR over all DOA error conditions. Fig. 9 compares the SDR
+values of a noisy target speech according to the target DOA
+error, ranging from
+to
+, which denotes the relative dif-
+ference to the true DOA value. It should be noted that the SDR
+values were averaged over all SNRs. In the ﬁgure, the SDB pro-
+vided nearly constant SDR values, regardless of the DOA error
+under both one-noise mixture situations (Cases 1, 2, and 3) and
+two-noise mixture situations (Cases 5 and 6). This was because
+the SDB using a dual-microphone broadside array had almost
+the same directional sensitivity over all the target directions of
+errors. On the other hand, in terms of SDR values, the GSC-PW,
+PEF, ASBM, and proposed TNR/SNR estimation methods pro-
+vided the speech enhancement performance that was dependent
+on the DOA error. In particular, it was shown that the best per-
+formance of the proposed SNR estimation method had a DOA
+error of around
+, denoting an accurate target DOA estimate.
+Note that although the proposed TNR and SNR methods pro-
+vided the highest SDR values at DOA errors ranging from
+to
+, they achieved lower SDR values than the conventional
+Fig. 9. Comparison of SDR averaged over all SNRs and RT60s for different
+speech enhancement methods under DOA errors ranging from
+to
+;
+(a) SDR values averaged over Cases 1, 2, and 3, (b) SDR values averaged over
+Cases 5 and 6.
+methods beyond this range. Nevertheless, the proposed method
+was deemed more effective for speech enhancement than the
+convention methods, because the conventional GCC or SRP ap-
+proach for the DOA estimation exhibited a sufﬁciently reliable
+localization performance in terms of allowable DOA errors for
+the range of
+to
+.
+Table III compares the relative improvements of the SDR
+values of the noise-reduced signals over their corresponding
+original noisy speech signals. The improved SDR were aver-
+aged over the scenarios of Cases 1, 2, 3, 5, and 6, according to
+the different approaches under various SNR and reverberation
+conditions. It was shown from the table that the improved SDR
+values of all the methods decreased when the reverberation
+was severed (i.e., RT60 was increased). Among all compared
+methods, SDB provided the lowest improvement in SDR values
+for all RT60s, but the proposed TNR method provided more
+highly improved SDR values than SDB, PEF, and GSC-PW,
+despite its simplicity. Moreover, ASBM seemed to be the most
+effective for speech enhancement in terms of SDR values
+among the conventional methods. However, the proposed
+DOA-based SNR estimation method yielded the highest im-
+provement in SDR values among all the considered speech
+enhancement approaches for all SNRs when RT60 is below
+300 ms. Note here that the proposed DOA-based SNR method
+outperformed the proposed DOA-based TNR method. This was
+because the proposed DOA-based SNR method well utilized
+spatial cues, even under reverberation conditions, while the
+proposed TNR method was sensitive to the reverberation con-
+ditions. Consequently, it could be concluded here that a speech
+enhancement system employing the proposed DOA-based SNR
+estimation method outperformed those using the conventional
+and TNR-based estimation methods regardless of reverberation
+conditions.
+Table IV subsequently compares the improved SDR values of
+the speech signals processed by the different speech enhance-
+ment methods under three different noise conditions such as
+factory, vacuum cleaner, and white noise [30]. It was shown
+
+
+KIM AND KIM: DOA BASED SNR ESTIMATION FOR DUAL-MICROPHONE SPEECH ENHANCEMENT
+2215
+TABLE III
+COMPARISON OF IMPROVED SDR VALUES ACCORDING TO DIFFERENT METHODS UNDER VARIOUS SNR AND REVERBERATION CONDITIONS
+TABLE IV
+COMPARISON OF IMPROVED SDR VALUES AVERAGED OVER LOW SNRS OF 0, 5, AND 10 dB (OR HIGH SNRS OF 15 AND 20 dB)
+ACCORDING TO DIFFERENT METHODS UNDER VARIOUS NOISE TYPES
+from the table that the proposed DOA-based SNR estimation
+method yielded the most highly improved SDR values of all the
+considered methods under each noise condition, which also out-
+performed the proposed TNR-based method under all SNR and
+RT60 conditions.
+In addition to the SDR, the PESQ [23] score was measured
+in order to compare the quality of the target speech recon-
+structed by the different speech enhancement methods. Note
+here that the simulation settings of the SDR measurements
+were maintained in this evaluation. Table V compares the
+averaged PESQ scores averaged over all RT60s according to all
+scenarios. As shown in the table, ASBM provided higher PESQ
+scores than the other conventional methods under all noise
+conditions. However, the proposed method achieved higher
+PESQ scores than ASBM. Consequently, it could be concluded
+that the speech enhancement system employing the proposed
+TABLE V
+COMPARISON OF PESQ SCORES AVERAGED OVER LOW SNRS OF 0, 5, AND
+10 dB (OR HIGH SNRS OF 15 AND 20 dB) ACCORDING TO DIFFERENT
+METHODS UNDER VARIOUS NOISE TYPES
+
+
+2216
+IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 22, NO. 12, DECEMBER 2014
+DOA-based SNR method outperformed the conventional and
+proposed TNR-based methods, regardless of the noise type.
+V. CONCLUSION
+In this paper, we proposed a new SNR estimation method
+based on the phase differences for dual-microphone speech
+enhancement. For this task, the DOA-based TNR was ﬁrst
+estimated by using the phase difference between the dual-mi-
+crophone signals, which was then utilized to estimate the
+DOA-based SNR under target speech presence uncertainty.
+Next, the estimated DOA-based SNR was incorporated into
+a Wiener ﬁlter in order to obtain a spectral-gain attenuator.
+To investigate the effect of the proposed method on the per-
+formance of a speech enhancement system, test noisy speech
+signals were artiﬁcially prepared to simulate interference
+speech environments at different SNRs of 0, 5, 10, 15, and
+20 dB under reverberant conditions (RT60s) of 0, 100, 200, and
+300 ms. By using the test noisy speech signals, we evaluated the
+speech enhancement performance of the proposed method in
+terms of SDR, SIR, and SAR. Consequently, it was conﬁrmed
+from SDR, SIR, and SAR comparisons that the Wiener ﬁlter
+employing the proposed DOA-based SNR estimation method
+outperformed the method that used a single-microphone Wiener
+ﬁlter, in addition to the dual-microphone methods such as SDB,
+GSC-PW, PEF, and ASBM under reverberant noise conditions.
+It was also shown from PESQ comparison that the Wiener ﬁlter
+using the proposed method provided a better speech quality
+than the other speech enhancement systems under comparison.
+APPENDIX I
+List of Abbreviations and their Meanings
+SNR
+TNR
+DOA
+STSA
+DD
+T-F
+SDP
+ICA
+BSS
+PEF
+SDR
+SIR
+SAR
+PESQ
+SDB
+GSC
+GSC-PW
+ASBM
+TDOA
+GCC
+SRP
+PHAT
+DSB
+BM
+LRT
+ISM
+Signal-to-Noise Ratio
+Target-to-Non-target directional signal Ratio
+Direction-Of-Arrival
+Short-Term Spectral Amplitude
+Decision-Directed
+Time-Frequency
+Spatial Directivity Pattern
+Independent Component Analysis
+Blind Source Separation
+Phase Error-based Filter
+Source-to-Distortion Ratio
+Source-to-Interference Ratio
+Source-to-Artifacts Ratio
+Perceptual Evaluation of Speech Quality
+Super-Directive Beamformer
+Generalized Sidelobe Canceller
+GSC followed by a Post Wiener ﬁlter
+Angular Spectrum-Based Masking
+Time Difference-Of-Arrival
+Generalized Cross-Correlation
+Steered Response Power
+Phase Transform
+Delay-and-Sum Beamformer
+Blocking Matrix
+Log-likelihood Ratio Test
+Image Source Method
+APPENDIX II
+TNR ESTIMATION BASED ON PHASE DIFFERENCE
+In this Appendix, we derive (11) from (9) and (10). First,
+is obtained by using the relationships of (9) and
+(10) as
+(26)
+since
+and
+. Then, the proposed
+TNR estimate
+can be ﬁnally obtained
+from (26) as
+(27)
+REFERENCES
+[1] J. Benesty, S. Makino, and J. Chen, Speech Enhancement.
+New York,
+NY, USA: Springer-Verlag, 2005.
+[2] S. J. Lee, B. O. Kang, H. Jung, Y. Lee, and H. S. Kim, “Statistical
+model-based noise reduction approach for car interior applications to
+speech recognition,” ETRI J., vol. 32, no. 5, pp. 801–809, Oct. 2010.
+[3] N. S. Kim and J.-H. Chang, “Spectral enhancement based on global
+soft decision,” IEEE Signal Process. Lett., vol. 7, no. 5, pp. 108–110,
+May 2000.
+[4] P. M. Brandstein and D. Ward, Microphone Arrays.
+New York, NY,
+USA: Springer-Verlag, 2001.
+[5] S. Araki, H. Sawada, R. Mukai, and S. Makino, “Underdetermined
+blind sparse source separation of arbitrarily arranged multiple sensors,”
+Signal Process., vol. 87, no. 8, pp. 1833–1847, Aug. 2007.
+[6] N. Roman, D. L. Wang, and G. J. Brown, “Speech segregation based
+on sound localization,” J. Acoust. Soc. Amer., vol. 114, no. 4, pp.
+2236–2252, Oct. 2003.
+[7] O. Yilmaz and S. Rickard, “Blind separation of speech mixtures via
+time-frequency masking,” IEEE Trans. Signal Process., vol. 52, no. 7,
+pp. 1830–1847, Jul. 2004.
+[8] M. Aoki, M. Okamoto, S. Aoki, H. Matsui, T. Sakurai, and Y. Kaneda,
+“Sound source segregation based on estimating incident angle of
+each frequency component of input signals acquired by multiple
+microphones,” Acoust. Sci. Technol., vol. 22, no. 2, pp. 149–157, May
+2001.
+[9] B. Loesch and B. Yang, “Online blind source separation based on time-
+frequency sparseness,” in Proc. ICASSP, Taipei, Taiwan, Apr. 2009,
+pp. 117–120.
+[10] S. Araki, S. Makino, H. Sawada, and R. Mukai, “Reducing musical
+noise by a ﬁne-shift overlap-and-add method applied to source separa-
+tion using a time frequency mask,” in Proc. ICASSP, Philadelphia, PA,
+USA, Mar. 2005, vol. 3, pp. 81–84.
+[11] J. H. Park, J. S. Yoon, and H. K. Kim, “HMM-based mask estimation
+for a speech recognition front-end using computational auditory scene
+analysis,” IEICE Trans. Inf. Syst., vol. E91-D, no. 9, pp. 2360–2364,
+Sep. 2008.
+
+
+KIM AND KIM: DOA BASED SNR ESTIMATION FOR DUAL-MICROPHONE SPEECH ENHANCEMENT
+2217
+[12] J. Barker, L. Josifovski, M. Cooke, and P. Green, “Soft decisions in
+missing data techniques for robust automatic speech recognition,” in
+Proc. ICSLP, Beijing, China, Oct. 2000, vol. 1, pp. 373–376.
+[13] S. Srinivasan, N. Roman, and D. Wang, “Binary and ratio time-fre-
+quency masks for robust speech recognition,” Speech Commun., vol.
+48, no. 11, pp. 1486–1501, Nov. 2006.
+[14] B. D. van Veen and K. M. Buckley, “Beamforming: A versatile ap-
+proach to spatial ﬁltering,” IEEE ASSP Mag., vol. 5, no. 2, pp. 4–24,
+Apr. 1988.
+[15] S. Dolco and M. Moonen, “Superdirective beamforming robust against
+microphone mismatch,” IEEE Trans. Audio, Speech, Lang. Process.,
+vol. 15, no. 2, pp. 617–631, Feb. 2007.
+[16] S. Han, J. Hong, S. Jeong, and M. Hahn, “Probabilistic adaption mode
+control algorithm for GSC-based noise reduction,” IEICE Trans.
+Fundam. Electron., Commun., Comput. Sci., vol. E93-A, no. 3, pp.
+627–630, Mar. 2010.
+[17] C. Marro, Y. Mahieux, and K. U. Simmer, “Analysis of noise reduc-
+tion and dereverberation techniques based on microphone arrays with
+postﬁltering,” IEEE Trans. Speech Audio Process., vol. 6, no. 3, pp.
+240–259, May 1998.
+[18] M. S. Pedersen, J. Larsen, U. Kjems, and L. C. Parra, “A survey of
+convolutive blind source separation methods,” in Springer Handbook
+of Speech, J. Benesty, Y. Huang, and M. Sondhi, Eds.
+New York, NY,
+USA: Springer, Nov. 2007, pp. 1–34.
+[19] P. Aarabi and G. Shi, “Phase-based dual-microphone robust speech
+enhancement,” IEEE Trans. Syst., Man, Cybern.-Part B: Cybern., vol.
+34, no. 4, pp. 1763–1773, Aug. 2004.
+[20] R. Mukai, H. Sawada, S. Araki, and S. Makino, “Blind source sepa-
+ration for moving speech signals using blockwise ICA and residual
+crosstalk subtraction,” IEICE Trans. Fundam. Electron., Commun.,
+Comput. Sci., vol. E87-A, no. 8, pp. 1941–1948, Aug. 2004.
+[21] S. M. Kim and H. K. Kim, “Target-to-non-target directional ratio es-
+timation based on dual-microphone phase differences for target-direc-
+tional speech enhancement,” in Proc. Interspeech, Lyon, France, Aug.
+2013, pp. 3254–3258.
+[22] R. Gribonval, C. Févotte, and E. Vincent, “Performance measurement
+in blind audio source separation,” IEEE Trans. Audio, Speech, Lang.
+Process., vol. 14, no. 4, pp. 1462–1469, Jul. 2006.
+[23] “Perceptual evaluation of speech quality (PESQ), and objective method
+for end-to-end speech quality assessment of narrowband telephone net-
+works and speech coders,” ITU-T Recommendation P.862, Feb. 2001.
+[24] C. Blandin, A. Ozerov, and E. Vincent, “Multi-source TDOA estima-
+tion in reverberant audio using angular spectra and clustering,” Signal
+Process., vol. 92, no. 8, pp. 1950–1960, Aug. 2012.
+[25] S. M. Kim and H. K. Kim, “Hybrid probabilistic adaptation mode
+controller for generalized sidelobe canceller-based target-directional
+speech enhancement,” in Proc. ICASSP, Prague, Czech Republic,
+May 2011, pp. 2532–2535.
+[26] J. Sohn, N. S. Kim, and W. Sung, “A statistical model-based voice
+activity detection,” IEEE Signal Process. Lett., vol. 6, no. 1, pp. 1–3,
+Jan. 1999.
+[27] E. A. Lehmann and A. M. Johansson, “Prediction of energy decay in
+room impulse responses simulated with an image-source model,” J.
+Acoust. Soc. Amer., vol. 124, no. 1, pp. 269–277, Jul. 2008.
+[28] E. A. Lehmann and A. M. Johansson, “Diffuse reverberation model for
+efﬁcient image-source simulation of room impulse responses,” IEEE
+Trans. Audio, Speech, Lang. Process., vol. 18, no. 6, pp. 1429–1439,
+Aug. 2010.
+[29] J. S. Garofolo, L. F. Lamel, W. M. Fisher, J. G. Fiscus, D. S. Pallett, N.
+L. Dahlgren, and V. Zue, TIMIT Acoustic-Phonetic Continuous Speech
+Corpus.
+Philadelphia, PA, USA: Linguistic Data Consortium, 1993.
+[30] A. Varga, H. J. M. Steenneken, M. Tomilson, and D. Jones, “The
+NOISEX–92 study on the effect of additive noise on automatic speech
+recognition,” Documentation on the NOISEX–92 CD–ROMs, Jun.
+1992.
+Seon Man Kim is a researcher at the Institute of
+Sound and Vibration Research (ISVR), Univer-
+sity of Southampton. He received a B.S. degree
+in mechanical design engineering from Chonbuk
+National University, Korea, in 2003 and an M.S.
+degree in mechatronics engineering from Gwangju
+Institute of Science and Technology (GIST), Korea,
+in 2005. From 2005 to 2007, he was a researcher
+at the Samsung Reciprocating Compressor RND
+Group, Gwangju, Korea. He received a Ph.D. degree
+in information and communications engineering
+from GIST in 2013. His current research interests involve audio and speech
+signal processing using multi-microphone techniques, non-negative matrix
+factorization, and auditory image models.
+Hong Kook Kim (M’99–SM’01) received a B.S. de-
+gree in control and instrumentation engineering from
+Seoul National University, Korea, in 1988. He then
+received both M.S. and Ph.D. degrees in electrical en-
+gineering from the Korea Advanced Institute of Sci-
+ence and Technology (KAIST), Korea in 1990 and
+1994, respectively. He was a senior researcher at the
+Samsung Advanced Institute of Technology (SAIT),
+Korea, from 1990 to 1998. During 1998–2003, he
+was a senior technical staff member with the Voice
+Enabled Services Research Lab at AT&T Labs-Re-
+search, Florham Park, New Jersey. Since August 2003, he has been with the
+School of Information and Communications at Gwangju Institute of Science
+and Technology (GIST), Gwangju, Korea, as a Professor. From July 2014, he
+is a visiting professor at the City University of New York, New York, USA. He
+is currently an IEEE Senior Member and an afﬁliate member of IEEE Speech
+and Language Technical Committee. Since 2012, he has served as an editorial
+committee member and area editor of Digital Signal Processing. His current
+research interests include large vocabulary speech recognition, audio coding
+and speech/audio source separation, and embedded algorithms and solutions for
+speech and audio processing for handheld devices.

@@ -187,4 +187,5 @@
 | [[sources/yan-2014-dual-mic-bt-noise-reduction\|Yan, Qiu & Lu 2014: Dual-Mic Noise Suppression for Bluetooth Headsets]] | Two-mic BT headset algorithms: coherence-based (CPSD) vs spatial pre-separation (ATF-GSC) unified under an SD-constrained optimal filter; pre-modeled RTF blocking matrix robust to wearing-angle mismatch | 2026-08-30 |
 | [[sources/valin-2018-lpcnet\|Valin & Skoglund 2018: LPCNet]] | WaveRNN variant combining linear prediction with RNNs; speaker-independent neural synthesis under 3 GFLOPS (real-time on an iPhone 6 core) | 2026-08-30 |
 | [[sources/valin-2024-fargan\|Valin, Mustafa & Büthe 2024: FARGAN]] | 600-MFLOPS framewise autoregressive GAN vocoder with pitch prediction; tied with CARGAN/HiFi-GAN v1 at 64–110× lower complexity; deployed in Opus 1.5 | 2026-08-30 |
+| [[sources/kim-2014-doa-based-snr-estimation\|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] | Phase difference of time-aligned dual mics → TNR → LRT/DD-driven DOA-based a priori SNR for a Wiener gain; beats SDB/GSC-PW/PEF/ASBM in SDR & PESQ on a 4 cm array (0–20 dB SNR, RT60 ≤ 300 ms) | 2026-08-28 |
 

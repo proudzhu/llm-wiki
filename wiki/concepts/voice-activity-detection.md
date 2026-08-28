@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-08-22
+updated: 2026-08-28
 sources:
   - raw/papers/liu-2025-pcen-mask-vad-speech-enhancement/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
+  - raw/papers/kim-2014-doa-based-snr-estimation/full-text.txt
 tags:
 - audio-processing
 - machine-learning
@@ -81,6 +82,10 @@ Apostolidis et al. (2026) train a [[concepts/convolutional-recurrent-network|CRN
 
 [[concepts/side-talk-detection|Side-Talk Detection (STD)]] (Yang et al. 2025) is a VAD-adjacent task that replaces the binary speech/pause decision with a three-class sample-level output over {wearer, bystander, non-speech}. The role label (wearer/bystander) is determined by the spatial relationship to the device rather than by speaker identity, so STD avoids the privacy issues of speaker diarization while still distinguishing target from interferer. In the [[concepts/differential-asr|differential ASR]] system, the STD model is a lightweight (~2M parameter) streaming TCN whose logits are downsampled to a 5-dimensional embedding and concatenated with the beamformer and microphone-selection features as input to a streaming RNN-T. The STD model thus functions as a VAD that contributes *role information* rather than just speech/pause information — closer to the OVAD/TVAD split used in headphone conversation detection but at sample level and without bone-conduction sensors.
 
+## LRT Speech Activity Decision inside SNR Estimation
+
+Kim & Kim (2014) embed a **statistical model-based log-likelihood ratio test** (Sohn et al. 1999) as the speech-activity decision inside their [[concepts/doa-based-snr-estimation|DOA-based SNR estimator]]: per time-frequency bin, the LRT decides target-speech presence, and the noise-side power estimate is updated by recursive smoothing only under speech absence. This is a third VAD role beyond inference-time gating and training-time loss conditioning — a *component-level* soft machinery inside a classical statistical estimator, replacing the binary T-F masking decisions that cause musical noise. See also [[concepts/speech-presence-probability|Speech Presence Probability]] for the per-bin soft-decision generalization.
+
 ## Related Concepts
 
 - [[concepts/minimum-statistics|Minimum Statistics]]
@@ -103,3 +108,4 @@ Apostolidis et al. (2026) train a [[concepts/convolutional-recurrent-network|CRN
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — energy-based binary VAD with minimum-energy tracking used as a binary gate for spatial-filter model adaptation
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — uses SPP ($\rho < 0.1$ threshold) as the speech-absence gate for adaptive coherence and noise covariance updates
 - [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] — STD model as a role-conditional VAD frontend
+- [[sources/kim-2014-doa-based-snr-estimation|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] — statistical model-based LRT as the embedded speech-activity decision inside a DOA-based SNR estimator

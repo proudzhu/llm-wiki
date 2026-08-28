@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-08-22
+updated: 2026-08-28
 sources:
   - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.txt
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
+  - raw/papers/kim-2014-doa-based-snr-estimation/full-text.txt
 tags:
 - acoustics
 - antenna-theory
@@ -78,6 +79,10 @@ Apostolidis et al. (2026) propose an [[concepts/output-based-speech-enhancement|
 
 Yang et al. (2025) introduce [[concepts/differential-asr|differential ASR]], a design pattern in which a single beamformer (an adjusted MVDR steered to the wearer's mouth on Ray-Ban Meta smart glasses) is only **one of several parallel frontends** feeding a streaming RNN-T ASR backbone. The other two frontends are a fixed microphone selection (the nose mic, highest SNR) and a [[concepts/side-talk-detection|side-talk detection]] embedding. All frontends are frozen; only the ASR model and small feature-extraction layers are trained. The differential framework achieves up to 18.0% relative WER reduction on real side-talk data over the single-MVDR-frontend baseline, and is the first paper in the smart-glasses ASR line (after [[sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition|AGADIR]] and [[sources/feng-2025-directional-source-separation-smart-glasses|Feng 2025]]) to break the "single beamformer as frontend" assumption.
 
+## Dual-Microphone Limits and the DSB/BM Ratio Trick (Kim & Kim 2014)
+
+Kim & Kim (2014) quantify a fundamental small-array limitation: the spatial directivity patterns of beamformers are constrained by the number of microphones, so a **dual-microphone super-directive beamformer (SDB)** underperforms masking-based methods (PEF, ASBM) in SDR — SDB was consistently the worst method in their benchmark across scenarios, SNRs, and RT60s. GSC followed by a post Wiener filter (GSC-PW) fared little better. Conversely, they *reuse* beamforming machinery analytically: the delay-and-sum beamformer and blocking-matrix transfer functions, evaluated on the time-aligned dual-microphone signals, yield the [[concepts/target-to-non-target-directional-signal-ratio|TNR]] as their power ratio — turning two beamformers into a spatial-cue estimator that feeds [[concepts/doa-based-snr-estimation|DOA-based SNR estimation]] instead of producing the enhancement output directly.
+
 ## Related Concepts
 
 - [[transparency-mode|Transparency Mode]]
@@ -99,6 +104,8 @@ Yang et al. (2025) introduce [[concepts/differential-asr|differential ASR]], a d
 - [[concepts/glimpse-proportion|Glimpse Proportion]]
 - [[concepts/back-to-back-microphone-array|Back-to-Back Microphone Array]]
 - [[concepts/probability-based-spatial-filter|Probability-Based Spatial Filter]]
+- [[concepts/target-to-non-target-directional-signal-ratio|Target-to-Non-target Directional Signal Ratio (TNR)]] — DSB/BM power-ratio estimator
+- [[concepts/doa-based-snr-estimation|DOA-Based SNR Estimation]] — consumer of the DSB/BM ratio trick
 
 ## Related Sources
 
@@ -111,3 +118,4 @@ Yang et al. (2025) introduce [[concepts/differential-asr|differential ASR]], a d
 - [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis et al. 2026: Listen first — output-based multi-microphone speech enhancement]]
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev, Mihov, Gleghorn & Acero 2008: Sound Capture System and Spatial Filter for Small Devices]] — difference-maximizing front/back beamformer for back-to-back unidirectional microphone arrays
 - [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] — adjusted MVDR as one of three complementary frontends in differential ASR
+- [[sources/kim-2014-doa-based-snr-estimation|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] — dual-mic SDB/GSC-PW outperformed by spatial-cue masking methods; DSB/BM transfer-function ratio reused as a TNR estimator

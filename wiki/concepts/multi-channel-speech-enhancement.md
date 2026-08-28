@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-08-22
+updated: 2026-08-28
 sources:
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
+  - raw/papers/kim-2014-doa-based-snr-estimation/full-text.txt
 tags:
   - speech-enhancement
   - multi-channel
@@ -39,6 +40,8 @@ tags:
 - **[[concepts/geometry-aware-dynamic-convolution|Geo-DConv]]**: Universal front-end that converts fixed-array SE backbones (SpatialNet, TF-GridNet) into [[concepts/array-invariant-speech-enhancement|array-invariant]] systems by generating geometry-specific convolution kernels from microphone coordinates via [[concepts/topology-aware-coordinate-transformer|TACT]] (Liu et al. 2026); matches USES2-comp quality at ~10× lower MACs and generalizes zero-shot to unseen array sizes (CHiME-4)
 - **[[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence NE]] (Jin et al. 2017)**: Classical statistical-model MCSE for mobile-phone hands-free — MVDR front-end + Wiener post-filter driven by an SPP/coherence hybrid noise estimator with adaptive split-frequency and globally MMSE-optimal multi-channel variance decomposition; validated on a 3-mic Huawei Mate 8 in real non-stationary noise
 - **[[concepts/differential-asr|Differential ASR]] (Yang et al. 2025)**: Multi-frontend pattern in which a beamformer + microphone selection + [[concepts/side-talk-detection|side-talk detection]] embedding are concatenated as complementary input channels to a streaming RNN-T ASR backbone for smart-glasses [[concepts/wearer-speech-recognition|WSR]]. All frontends are frozen; only the ASR backbone and small feature-extraction layers are trained (<1M additional parameters). Achieves up to 18.0% relative WER reduction over the single-MVDR-frontend baseline on real side-talk data. While framed for ASR rather than signal-level SE, the differential pattern is directly portable to MCSE pipelines that need complementary cues beyond a single beamformer output.
+
+- **[[concepts/doa-based-snr-estimation|DOA-Based SNR Estimation]] (Kim & Kim 2014)**: Classical statistical-model dual-microphone SE that replaces noise-variance-driven a priori SNR estimation with a spatial cue — the phase difference between time-aligned channels is converted into a [[concepts/target-to-non-target-directional-signal-ratio|TNR]] and then a DOA-based SNR via an LRT speech-activity decision and decision-directed updates, feeding a Wiener spectral gain. Outperformed SDB, GSC-PW, PEF, and ASBM baselines in SDR and PESQ (0–20 dB SNR, RT60 up to 300 ms, four noise types) on a 4 cm dual-microphone array.
 
 ## Related Concepts
 
@@ -80,3 +83,4 @@ tags:
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev, Mihov, Gleghorn & Acero 2008: Sound Capture System and Spatial Filter for Small Devices]] — classical statistical-model MCSE: back-to-back unidirectional array + front-back-difference beamformer + probability-based spatial filter; 10.43 dB SNR / 0.39 PESQ-MOS improvement on a 9.6 mm baseline
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — MVDR + adaptive coherence NE post-filter on a 3-microphone Huawei Mate 8; globally MMSE-optimal multi-channel variance estimation with adaptive split-frequency
 - [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] — multi-frontend differential pattern (beamformer + close-mic + STD embedding) for smart-glasses WSR
+- [[sources/kim-2014-doa-based-snr-estimation|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] — phase-difference TNR → DOA-based SNR → Wiener gain; beats SDB/GSC-PW/PEF/ASBM in SDR and PESQ

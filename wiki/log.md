@@ -4723,6 +4723,18 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
 
 ---
 
+## [2026-08-28] ingest | Direction-of-Arrival Based SNR Estimation for Dual-Microphone Speech Enhancement (Kim & Kim 2014)
+
+- **Source**: `raw/papers/kim-2014-doa-based-snr-estimation/full-text.txt` (Zotero: UY66URYH; extracted via PyMuPDF fallback after MinerU/pdftotext unavailability)
+- **Authors**: Seon Man Kim (ISVR Southampton), Hong Kook Kim (GIST)
+- **Published**: IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 22, no. 12, pp. 2207–2217, 2014
+- **DOI**: 10.1109/TASLP.2014.2360646
+- **Summary**: Estimates the a priori SNR for a Wiener-filter speech enhancer from spatial cues instead of a noise-variance estimate: the phase difference of time-aligned dual microphones is converted into a target-to-non-target directional signal ratio (TNR, closed form cot²(Δψ̃/2) as the DSB/BM transfer-function power ratio), then an LRT speech-activity decision and two decision-directed updates turn the TNR into a DOA-based SNR. On a 4 cm dual-microphone array (0–20 dB SNR, RT60 ≤ 300 ms, speech/factory/vacuum/white noise), the method beats single-channel Wiener, SDB, GSC-PW, PEF, and ASBM in SDR and PESQ; the LRT/DD machinery also restores robustness to reverberation that defeats the raw TNR cue.
+- **Pages created**: `wiki/sources/kim-2014-doa-based-snr-estimation.md`, `wiki/entities/seon-man-kim.md`, `wiki/entities/hong-kook-kim.md`, `wiki/concepts/doa-based-snr-estimation.md`, `wiki/concepts/target-to-non-target-directional-signal-ratio.md`, `wiki/concepts/phase-error-based-filter.md`
+- **Pages updated**: `wiki/concepts/wiener-filter.md` (DOA-based SNR-driven Wiener gain section), `wiki/concepts/direction-of-arrival-estimation.md` (DOA as SNR cue), `wiki/concepts/multi-channel-speech-enhancement.md` (method family entry), `wiki/concepts/beamforming.md` (dual-mic SDB limits + DSB/BM ratio trick), `wiki/concepts/voice-activity-detection.md` (LRT as embedded component), `wiki/synthesis/multi-channel-speech-enhancement.md` (Insight 1 table row, Insight 3 DOA-as-SNR-cue variant)
+
+---
+
 ## [2026-08-30] ingest | 基于双传声器的蓝牙耳机降噪算法 (Yan, Qiu & Lu 2014)
 
 - **Source**: `raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md` (MinerU extraction, language ch)
@@ -4745,7 +4757,6 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
   - `wiki/synthesis/multi-channel-speech-enhancement.md` — added Yan 2014 to Sources Synthesized table (earliest entry, Application axis), new Bluetooth-headsets row in the Insight 7 application table, and a paragraph on the distortion-vs-NR trade-off axis the coherence lineage leaves implicit; added coherence/gsc/speech-distortion/bluetooth-headset tags to improve future triage recall
   - `wiki/index.md` + `wiki/{entities,concepts,sources,synthesis}/index.md` — new rows, Xiaojun Qiu summary updated, statistics updated (Total 1164→1169, Entities 513→514, Concepts 447→450, Sources 175→176)
 
----
 ---
 
 ## [2026-08-30] ingest | LPCNet: Improving Neural Speech Synthesis Through Linear Prediction (Valin & Skoglund 2018)
@@ -4783,3 +4794,5 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
   - `wiki/concepts/bark-scale-spectral-features.md` — FARGAN inherits the 18-BFCC vector with no LPC analysis
   - `wiki/concepts/frequency-domain-loss.md` — FARGAN's six-resolution γ=0.5 spectral loss + STFT-discriminator findings
 - **Figures**: 3 SVGs manually downloaded from arXiv HTML (`<object>` embeds are not auto-extracted); subframe-network layer labels recovered from per-glyph SVG text (Conv 2×1 → GRU1 → GRU2 → GRU3 → FC → FC → gain)
+
+---

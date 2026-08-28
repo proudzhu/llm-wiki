@@ -531,6 +531,8 @@
 | [[entities/raymond-de-callafon\|Raymond de Callafon]] | UCSD professor — control-relevant system identification, adaptive control; co-author of secondary-path irregularity detection | 2026-08-27 |
 | [[entities/xinye-yan\|Xinye Yan]] | NJU researcher; first author of dual-mic Bluetooth headset noise suppression (coherence-based vs spatial pre-separation, 2014) | 2026-08-30 |
 | [[entities/jan-skoglund\|Jan Skoglund]] | Google researcher; neural speech/audio coding, low-bitrate neural vocoders; co-author of LPCNet | 2026-08-30 |
+| [[entities/seon-man-kim\|Seon Man Kim]] | ISVR Southampton / GIST — dual-microphone speech enhancement, DOA-based SNR estimation | 2026-08-28 |
+| [[entities/hong-kook-kim\|Hong Kook Kim]] | GIST professor — speech recognition, speech/audio source separation, embedded speech processing | 2026-08-28 |
 
 ---
 
@@ -1003,6 +1005,9 @@
 | [[concepts/fargan\|FARGAN]] | Framewise autoregressive GAN vocoder: 2.5-ms subframes, pitch prediction as second AR feedback, no teacher forcing, 8-bit end-to-end | 2026-08-30 |
 | [[concepts/pitch-prediction\|Pitch Prediction]] | Long-term prediction of speech from one pitch period back; FARGAN's explicit second autoregressive feedback | 2026-08-30 |
 | [[concepts/exposure-bias\|Teacher Forcing and Exposure Bias]] | The structural training/inference gap of density-estimation autoregressive vocoders; escaped by framewise unrolled generation | 2026-08-30 |
+| [[concepts/doa-based-snr-estimation\|DOA-Based SNR Estimation]] | A priori SNR estimated from spatial (phase-difference) cues via TNR + LRT speech-activity decision + decision-directed updates, replacing unreliable noise-variance estimation (Kim & Kim 2014) | 2026-08-28 |
+| [[concepts/target-to-non-target-directional-signal-ratio\|Target-to-Non-target Directional Signal Ratio (TNR)]] | DSB/BM transfer-function power ratio of time-aligned dual mics, closed form cot²(Δψ̃/2); spatial-cue analogue of the SNR | 2026-08-28 |
+| [[concepts/phase-error-based-filter\|Phase-Error-Based Filter (PEF)]] | Dual-mic soft-masking gain driven by phase-difference error; approximates TNR as 1/(Δψ)² — effective at low SNR, distorts target speech at high SNR | 2026-08-28 |
 
 ---
 
@@ -1195,6 +1200,7 @@
 | [[sources/yan-2014-dual-mic-bt-noise-reduction\|Yan, Qiu & Lu 2014: Dual-Mic Noise Suppression for Bluetooth Headsets]] | Two-mic BT headset algorithms: coherence-based (CPSD) vs spatial pre-separation (ATF-GSC) unified under an SD-constrained optimal filter; pre-modeled RTF blocking matrix robust to wearing-angle mismatch | 2026-08-30 |
 | [[sources/valin-2018-lpcnet\|Valin & Skoglund 2018: LPCNet]] | WaveRNN variant combining linear prediction with RNNs; speaker-independent neural synthesis under 3 GFLOPS (real-time on an iPhone 6 core) | 2026-08-30 |
 | [[sources/valin-2024-fargan\|Valin, Mustafa & Büthe 2024: FARGAN]] | 600-MFLOPS framewise autoregressive GAN vocoder with pitch prediction; tied with CARGAN/HiFi-GAN v1 at 64–110× lower complexity; deployed in Opus 1.5 | 2026-08-30 |
+| [[sources/kim-2014-doa-based-snr-estimation\|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] | Phase difference of time-aligned dual mics → TNR → LRT/DD-driven DOA-based a priori SNR for a Wiener gain; beats SDB/GSC-PW/PEF/ASBM in SDR & PESQ on a 4 cm array (0–20 dB SNR, RT60 ≤ 300 ms) | 2026-08-28 |
 
 ---
 
@@ -1248,10 +1254,10 @@
 
 ## Statistics
 
-- **Total pages**: 1197
-- **Entities**: 521
-- **Concepts**: 463
-- **Sources**: 183
+- **Total pages**: 1203
+- **Entities**: 523
+- **Concepts**: 466
+- **Sources**: 184
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-08-30
+- **Last updated**: 2026-08-31
