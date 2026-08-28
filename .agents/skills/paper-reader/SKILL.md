@@ -199,7 +199,7 @@ For each existing concept page touched by this paper: add the paper to `sources:
 
 ### Step 9: Update Synthesis Pages
 
-**Triage first** (cheap — avoids reading 200–400-line synthesis pages):
+**Triage first** (cheap — avoids reading 200–400-line synthesis pages). **Precondition**: the source page `wiki/sources/{slug}.md` must already exist (Step 5) — the script reads its frontmatter tags and exits with an error if the page is missing:
 
 ```bash
 uv run python .agents/skills/paper-reader/scripts/triage_synthesis.py --slug SLUG
@@ -248,6 +248,16 @@ uv run python .agents/skills/paper-reader/scripts/update_indexes.py batch \
 
 For one-off additions or re-ingests, use `add --category <cat> --slug <slug> --display "..." --summary "..." --date YYYY-MM-DD`, then run `stats`.
 
+**Verify after updating indexes** (mandatory, one Grep call): confirm every new slug actually landed in both the main index and its subdirectory index. Long ingests can lose track of which entries were added — statistics alone do not prove the table rows exist (the Guldenschuh 2014 ingest had correct statistics but missing table rows, caught only by this check):
+
+```
+Grep pattern: "new-slug-1|new-slug-2|new-slug-3"
+      path: wiki
+      output_mode: content, -n: true
+```
+
+Each new slug must appear in **two** files: `wiki/index.md` and `wiki/{category}/index.md`. If a slug is missing from either, add the row before proceeding.
+
 ### Step 11: Update Log
 
 Write the entry body to a temp file, then call the script:
@@ -279,7 +289,7 @@ For re-ingestion, use `ingest (re)` in `--title`.
 uv run python .agents/skills/paper-reader/scripts/verify_wikilinks.py --slug SLUG
 ```
 
-Scans the source page + all new/modified `wiki/*.md` files for `[[concepts/X]]`, `[[entities/X]]`, `[[sources/X]]`, `[[synthesis/X]]`, `[[queries/X]]` wikilinks and verifies each target file exists. Exits 0 if all links resolve, 1 if broken links found. Fix any broken links (create the missing page, correct the slug, or use plain text) before proceeding to 12b.
+Checks both `[[category/slug]]` wikilinks and `![[raw/...]]` figure embeds against the filesystem. A single-character hash typo in a MinerU figure filename (`...151105...` vs `...158105...`) aborts the mkdocs build — this check catches it here, before the 60+ second build cycle. Scans the source page + all new/modified `wiki/*.md` files; exits 0 if all links resolve, 1 if broken links found. Fix any broken links (create the missing page, correct the slug, or use plain text; for embeds, Glob the `figures/` dir with a hash prefix and copy the exact filename) before proceeding to 12b.
 
 **Step 12b — MkDocs strict build**:
 

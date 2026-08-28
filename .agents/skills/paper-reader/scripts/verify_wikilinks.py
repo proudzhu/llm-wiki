@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Step 12 pre-check: Verify wikilinks in new/modified wiki pages point to existing files.
 
-Catches broken `[[concepts/foo|Foo]]`, `[[entities/bar|Bar]]`, etc. BEFORE
-running `mkdocs build --strict`, so the model can fix typos or create missing
-pages without a build-fail-fix cycle.
+Catches broken `[[concepts/foo|Foo]]`, `[[entities/bar|Bar]]`, etc. — AND
+broken `![[raw/...]]` figure embeds (a single-character hash typo in a
+MinerU filename aborts `mkdocs build --strict`) — BEFORE running the build,
+so the model can fix typos or create missing pages without a
+build-fail-fix cycle.
 
 Usage:
   # Check the source page for a slug + all new/modified wiki/*.md files
@@ -32,9 +34,8 @@ for _s in (sys.stdout, sys.stderr):
 # Matches [[category/slug|text]], [[category/slug#section|text]],
 # [[category/slug]] (no display text), and [[category/slug#section]].
 # Categories: entities, concepts, sources, synthesis, queries.
-# Does NOT match [[raw/...]] (image embeds — handled by map_figures.py)
-# or bare [[slug]] (no slash — these are convention violations, not
-# broken-link candidates for this script).
+# Does NOT match bare [[slug]] (no slash — these are convention violations,
+# not broken-link candidates for this script).
 #
 # Slug capture excludes backslash so that `\|` (the MkDocs/Obsidian
 # pipe-escape used in table cells, e.g. `[[concepts/foo\|Foo]]`) is
@@ -45,6 +46,20 @@ for _s in (sys.stdout, sys.stderr):
 WIKILINK_RE = re.compile(
     r'\[\['
     r'(entities|concepts|sources|synthesis|queries)/([^\]|#\\]+)'
+    r'(?:#[^\]|\\]*)?'
+    r'(?:\\?\|[^\]]*)?'
+    r'\]\]'
+)
+
+# Matches ![[raw/path|alt]] figure embeds (vault-absolute, from project
+# root). MinerU figure filenames are 64-char SHA-style hashes; a single
+# transposed character breaks `mkdocs build --strict`, and map_figures.py
+# (Step 3e) runs BEFORE the source page is written, so it cannot catch
+# typos introduced while writing the embed. Same backslash exclusion as
+# WIKILINK_RE for embeds written inside table cells.
+RAW_EMBED_RE = re.compile(
+    r'!\[\['
+    r'raw/([^\]|#\\]+)'
     r'(?:#[^\]|\\]*)?'
     r'(?:\\?\|[^\]]*)?'
     r'\]\]'
@@ -83,9 +98,26 @@ def extract_wikilinks(file_path):
         return
 
 
+def extract_raw_embeds(file_path):
+    """Yield (line_no, full_match, raw_path) for each ![[raw/...]] embed in file."""
+    try:
+        with open(file_path, encoding='utf-8') as f:
+            for idx, line in enumerate(f, start=1):
+                for m in RAW_EMBED_RE.finditer(line):
+                    yield (idx, m.group(0), m.group(1).strip())
+    except (IOError, OSError):
+        return
+
+
 def check_wikilink(category, slug, project_root):
     """Return True if wiki/{category}/{slug}.md exists."""
     target = os.path.join(project_root, 'wiki', category, f'{slug}.md')
+    return os.path.exists(target)
+
+
+def check_raw_embed(raw_path, project_root):
+    """Return True if the raw/ asset file exists. raw_path is relative to raw/."""
+    target = os.path.join(project_root, 'raw', raw_path.replace('/', os.sep))
     return os.path.exists(target)
 
 
@@ -127,7 +159,7 @@ def main():
         print("No wiki/*.md files to check.")
         return 0
 
-    print(f"Checking {len(files_to_check)} file(s) for broken wikilinks...\n")
+    print(f"Checking {len(files_to_check)} file(s) for broken wikilinks and raw embeds...\n")
 
     broken = []
     total_links = 0
@@ -142,20 +174,30 @@ def main():
                     'link': full_match,
                     'target': f'wiki/{category}/{slug}.md',
                 })
+        for line_no, full_match, raw_path in extract_raw_embeds(fpath):
+            total_links += 1
+            if not check_raw_embed(raw_path, project_root):
+                broken.append({
+                    'file': fpath,
+                    'line': line_no,
+                    'link': full_match,
+                    'target': f'raw/{raw_path}',
+                })
 
-    print(f"Scanned {total_links} wikilink(s) across {len(files_to_check)} file(s).")
+    print(f"Scanned {total_links} wikilink(s)/embed(s) across {len(files_to_check)} file(s).")
 
     if not broken:
-        print("OK: all wikilinks resolve to existing pages.")
+        print("OK: all wikilinks and raw embeds resolve to existing files.")
         return 0
 
-    print(f"\nBROKEN: {len(broken)} wikilink(s) point to non-existent pages:\n")
+    print(f"\nBROKEN: {len(broken)} link(s) point to non-existent targets:\n")
     for b in broken:
         print(f"  {b['file']}:{b['line']}")
         print(f"    {b['link']}")
         print(f"    -> {b['target']} (NOT FOUND)\n")
 
-    print("Fix: create the missing page, correct the slug, or use plain text.")
+    print("Fix wikilinks: create the missing page, correct the slug, or use plain text.")
+    print("Fix raw embeds: Glob the figures/ dir with a hash prefix and copy the exact filename.")
     return 1
 
 
