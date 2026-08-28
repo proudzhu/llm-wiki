@@ -31,6 +31,58 @@ The method (proposed for dual microphones with known target TDOA) proceeds in fo
 
 The estimated SNR feeds a [[concepts/wiener-filter|Wiener filter]] spectral gain $G = \hat{\xi}/(1+\hat{\xi})$ applied to the reference microphone.
 
+### Pipeline Diagram
+
+```text
+ x₁(n), x₂(n)  (dual microphones, target TDOA assumed known)
+       │
+       ▼
+ ┌──────────────────────────────────────────┐
+ │ STFT: 32 ms cosine window, 50% overlap   │
+ └──────────────────────────────────────────┘
+       │
+       ▼
+ ┌──────────────────────────────────────────┐
+ │ Time-align X₂ to X₁ via target TDOA      │
+ └──────────────────────────────────────────┘
+       │
+       ▼
+ Frequency-normalized phase difference  Δψ̃(k,ℓ)
+       │
+       ├────────────────────────────┐
+       ▼  (spatial branch)          ▼  (temporal branch)
+ ┌───────────────────────┐   ┌─────────────────────────────┐
+ │ TNR estimation        │   │ Statistical model-based LRT │
+ │ TNR = |H_DSB|²/|H_BM|²│   │ speech activity decision    │
+ │     = cot²(Δψ̃/2)     │   │ (H₀ absent / H₁ present)    │
+ └───────────────────────┘   └──────────────┬──────────────┘
+       │                                     │
+       │                              ┌──────┴───────────────┐
+       │                              ▼                      ▼
+       │                     noise-side power        speech-side power
+       │                     (recursive smoothing,   (Wiener filtering,
+       │                      update only            DD a priori SNR)
+       │                      under H₀)                     │
+       │                      └──────────┬─────────────────┘
+       │                                 ▼
+       │                        DOA-based SNR  ξ_DOA
+       │                                 │
+       ▼                                 ▼
+ ┌────────────────────────────────────────────────────────┐
+ │ Final SNR update (second decision-directed step):      │
+ │ blends ξ_DOA with a posteriori SNR computed from a     │
+ │ speech-absence-gated noise variance estimate           │
+ └────────────────────────────────────────────────────────┘
+       │
+       ▼
+ Wiener spectral gain  G = ξ̂ / (1 + ξ̂)
+       │
+       ▼
+ Apply G to X₁(k,ℓ)  →  ISTFT  →  enhanced speech ŝ(n)
+```
+
+The two branches make the estimate robust by design: the spatial branch (phase difference → TNR → DOA-based SNR) fails under DOA ambiguity and reverberation-sensitive raw cues, while the temporal branch (LRT + gated noise variance → a posteriori SNR) fails under unreliable noise tracking in adverse noise — the final DD blend lets neither be a single point of failure.
+
 ## Empirical Findings (Kim & Kim 2014)
 
 - Much lower RMS error against true SNR than single-microphone DD estimation (500 Hz – 3 kHz).
