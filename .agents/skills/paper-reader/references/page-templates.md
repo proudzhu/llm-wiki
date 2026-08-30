@@ -74,6 +74,49 @@ Guidelines:
 
 For re-ingestion: overwrite the existing source page with updated comprehensive content.
 
+## Neural-Network Model Documentation (mandatory for NN papers)
+
+Applies whenever the paper's method includes a neural network (DNN/RNN/CNN/transformer/vocoder, hybrid DSP+DNN systems included). The source page must document **what the model is** (architecture), **what goes in and out** (features/samples at their actual rates), and **how it was trained** (losses) — not just cite the paper's figure. A reader should be able to re-implement the data flow from the source page alone.
+
+### Required sections (inside `## Methodology`)
+
+1. **`### Model Structure, Inputs, and Outputs`** — a mermaid block diagram of the full data flow, followed by one spec table per network, covering:
+   - **Structure** — layer-by-layer (layer types, widths, activation/GRU/LSTM unit counts, sparsity/density if stated)
+   - **Input** — exact feature representation (e.g., "18 BFCCs + pitch period + pitch correlation at 100 Hz"), frame rate, window/hop length, any conditioning or flags
+   - **Output** — what the network produces and at what rate (e.g., "16 kHz samples — the middle 10 ms of each 20-ms window")
+   - **Training data** — hours, corpora, speakers/languages
+   - **Role** — one sentence on the network's function in the system (this is what disambiguates multi-network pipelines)
+2. **`### Training Losses`** — the total objective and each loss term with equations and coefficient values; note which network(s) each loss trains and why the form was chosen (e.g., $L_{1}$ over $L_{2}$ for label-noise robustness). If the paper uses a single standard loss (plain cross-entropy), one sentence suffices — but state it explicitly.
+
+For multi-network pipelines (e.g., predictive model + generative vocoder), also state whether the networks are trained **jointly or separately**, and in what order.
+
+### Mermaid diagram rules
+
+- Use `flowchart TB` (top-to-bottom) by default; one subgraph per network; label edges that carry non-obvious payloads (feature vectors, feedback loops).
+- **Prerequisite**: `mkdocs.yml` must configure superfences `custom_fences` (already in place in this repo — verified in the Valin 2022 session):
+
+  ```yaml
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  ```
+
+  Without it, `mkdocs build --strict` **passes** but the diagram renders as a plain syntax-highlighted code block — a silent failure. Obsidian renders ```mermaid blocks natively with no configuration.
+- **Syntax constraints** (both renderers, Obsidian uses mermaid v11):
+  - Quote all node labels containing parentheses, `/`, `+`, `→`, or commas: `V2["Sample-rate network (GRU-A: 640 units)"]`.
+  - Use `<br/>` for line breaks inside labels; `\n` is NOT rendered.
+  - Self-loops (`V2 --> V2`) and edge labels (`A -->|"caption"| B`) are supported.
+  - Subgraph titles with spaces are fine: `subgraph RNN["Feature prediction RNN"]`.
+  - Do not use `%%` comments on the same line as a statement.
+- The diagram should show **data flow at inference** (inputs → networks → outputs), including feedback loops and any bypass paths (e.g., known features bypassing a predictor). Keep it faithful to the paper — do not invent blocks the paper does not describe.
+- Mermaid is a **supplement, not a substitute**: the spec tables carry the precise numbers; the diagram carries the topology. Include both.
+
+### Worked example
+
+See `wiki/sources/valin-2022-real-time-plc.md` (added 2026-08-30): a two-network pipeline (feature-prediction RNN + LPCNet vocoder) documented with a `flowchart TB` diagram showing input features → RNN subgraph → predicted-feature edge → LPCNet subgraph → autoregressive feedback self-loop → output samples, followed by per-network spec tables and the three perceptual losses ($\mathcal{L}_{s}+\mathcal{L}_{p}+\mathcal{L}_{c}$).
+
 ## Entity Page (`wiki/entities/{firstname-lastname}.md`)
 
 ### Template (new author)

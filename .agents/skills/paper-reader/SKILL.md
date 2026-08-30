@@ -146,6 +146,8 @@ Pairs each hash-named crop with its "Fig. N." caption (line proximity), prints d
 
 Read the extracted text in chunks (head 200 + tail 100 + targeted range reads). Extract: core problem/motivation, key contributions (numbered), methodology (architecture/algorithms/losses/equations), experimental setup (datasets/metrics/hyperparameters), results (quantitative tables), key concepts warranting wiki pages, authors warranting entity pages.
 
+**Neural-network papers** (any paper whose method includes a DNN/RNN/CNN/transformer/vocoder etc.): additionally extract the **model architecture** (layer-by-layer structure with sizes/densities), the **input features** (exact feature representation, frame rate, window length) and **output** (what the network produces, at what rate), and the **training losses** (equations with coefficient values). These feed the mandatory model-documentation section in Step 5 — see the **Neural-Network Model Documentation** rules in [`references/page-templates.md`](references/page-templates.md).
+
 **Review/survey paper**: use the **Analysis Targets** in [`references/review-papers.md`](references/review-papers.md) — taxonomy, comparison tables, application domains, open challenges, coverage gaps — instead of the research-paper-shaped list above. See the **Review/Survey Paper Routing** section earlier in this file for the full routing table.
 
 **If you encounter** graphical-only results, citation discrepancies, loose review classifications, or cross-references to already-ingested papers: load [`references/edge-cases.md`](references/edge-cases.md).
@@ -153,6 +155,8 @@ Read the extracted text in chunks (head 200 + tail 100 + targeted range reads). 
 ### Step 5: Create/Update Source Page
 
 Create `wiki/sources/{slug}.md`. Load [`references/page-templates.md`](references/page-templates.md) for frontmatter, required sections (Summary / Problem Formulation / Methodology / Experimental Setup / Results / Key Contributions / Related Concepts / Related Synthesis), figure-usage criteria, and figure-filename verification rules. H1 is `Author1, Author2 & Author3 Year: Short Title`.
+
+**Neural-network papers**: the source page MUST include a **Model Structure, Inputs, and Outputs** section with a **mermaid architecture block diagram** and per-network spec tables (structure / inputs / outputs / training data / role), plus a **Training Losses** section with the loss equations — see the **Neural-Network Model Documentation** rules in [`references/page-templates.md`](references/page-templates.md) for the template and mermaid syntax constraints.
 
 **Review/survey paper**: use the **review-paper source-page template** in [`references/review-papers.md`](references/review-papers.md) — sections are Summary / Taxonomy / Methodology (surveyed methods) / Applications Survey / Key Contributions / Limitations and Caveats / Related Concepts / Related Sources. The research-paper sections (Problem Formulation / Experimental Setup / Results) do not apply unless the review itself reports original experiments.
 
