@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-07-17
-updated: 2026-08-14
+updated: 2026-08-30
 sources:
+  - raw/papers/valin-2018-lpcnet/full-text.md
   - raw/papers/li-2025-echofree-neural-aec/full-text.md
   - raw/papers/seidel-2024-bark-scale-nn-residual-suppression/full-text.md
   - raw/papers/zheng-2023-survey-frequency-domain-speech-enhancement/full-text.md
@@ -50,6 +51,10 @@ Bark-scale features are a foundational design choice in lightweight AEC post-fil
 
 In [[sources/li-2025-echofree-neural-aec\|EchoFree]] the 112-dim Bark feature vector is fed to a [[concepts/u-net-post-filter\|U-Net post filter]] that predicts a 100-dim Bark gain mask $\hat{\mathbf{g}} \in [0, 1]^{100}$. The mask is expanded back to 257 bins via $\mathbf{B}^\top \hat{\mathbf{g}}$ and applied to $|Y|$ to recover the near-end magnitude spectrum.
 
+## Use in Neural Vocoding
+
+[[concepts/lpcnet|LPCNet]] (Valin & Skoglund 2018) conditions speech synthesis on just **18 Bark-scale cepstral coefficients** plus two pitch parameters (period and correlation) — one of the smallest Bark-cepstral instances in the wiki, using the band layout of Valin's hybrid DSP/deep-learning full-band speech enhancement work (MMSP 2018). The cepstrum serves a second purpose beyond conditioning: LPCNet derives its **linear prediction coefficients** from it (18-band cepstrum → linear-frequency PSD → auto-correlation via inverse FFT → Levinson-Durbin), so the all-pole synthesis filter needs no information beyond the 20 transmitted/synthesized features.
+
 ## Comparison with Other Perceptual Scales
 
 | Scale | Formula (Hz → scale) | Bands | Application |
@@ -77,6 +82,7 @@ The Bark scale's relationship to auditory filter banks and cochlear mapping is s
 
 ## Related Sources
 
+- [[sources/valin-2018-lpcnet|Valin & Skoglund 2018: LPCNet]] — 18 Bark-scale cepstral coefficients as vocoder conditioning, also the source of the LPC analysis
 - [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Seidel, Mowlaee & Fingscheidt 2024]] — original Bark-AEC paper; 86-band PEAQ-style Bark filterbank with NSNet2-style FC+GRU backbone
 - [[sources/li-2025-echofree-neural-aec\|Li et al. 2025: EchoFree]]
 - [[sources/indenbom-2023-deepvqe\|Indenbom et al. 2023: DeepVQE]] — comparison point in the AEC lightweight hierarchy

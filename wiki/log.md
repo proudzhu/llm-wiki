@@ -4746,3 +4746,15 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
   - `wiki/index.md` + `wiki/{entities,concepts,sources,synthesis}/index.md` — new rows, Xiaojun Qiu summary updated, statistics updated (Total 1164→1169, Entities 513→514, Concepts 447→450, Sources 175→176)
 
 ---
+---
+
+## [2026-08-30] ingest | LPCNet: Improving Neural Speech Synthesis Through Linear Prediction (Valin & Skoglund 2018)
+
+- **Source**: `raw/papers/valin-2018-lpcnet/full-text.md` (Zotero: ZGSNBWFM; arXiv 1810.11846, extracted from arXiv HTML via defuddle)
+- **Authors**: Jean-Marc Valin (Mozilla), Jan Skoglund (Google LLC)
+- **Published**: arXiv Oct 2018 (v2 Feb 2019); Proc. ICASSP 2019, Brighton, UK, pp. 5891–5895
+- **DOI**: 10.48550/arXiv.1810.11846
+- **Summary**: Introduces LPCNet — a WaveRNN variant that delegates spectral-envelope modeling to a classical all-pole LPC filter (derived from the 18-band Bark cepstrum via PSD → autocorrelation → Levinson-Durbin) so the network models only the spectrally flat excitation; with pre-emphasis before μ-law quantization (16 dB noise shaping at Nyquist), a DualFC output layer, precomputed μ-law embeddings, a pitch-correlation-driven sampling temperature with thresholding, and CELP-like μ-law-domain training noise injection, speaker-independent synthesis runs at ≈2.8 GFLOPS — real-time on a single Apple A8 (iPhone 6) core — an order of magnitude below WaveRNN/FFTNet/SampleRNN, with MUSHRA quality significantly above an equal-complexity WaveRNN+ baseline.
+- **Pages created**: `wiki/sources/valin-2018-lpcnet.md`, `wiki/entities/jan-skoglund.md`, `wiki/concepts/wavernn.md`, `wiki/concepts/linear-prediction.md`, `wiki/concepts/dual-fc-layer.md`
+- **Pages updated**: `wiki/concepts/lpcnet.md` (original-2018 architecture, efficiency techniques, complexity/MUSHRA — page previously described LPCNet only via the 2022 PLC paper), `wiki/entities/jean-marc-valin.md` (LPCNet bullet extended with source link + 2018 Mozilla affiliation note), `wiki/concepts/structured-sparsity.md` (LPCNet's 16×1 blocks + diagonal retention vs PercepNet's 16×4), `wiki/concepts/bark-scale-spectral-features.md` (new "Use in Neural Vocoding" section: 18 BFCC conditioning + LPC derivation), `wiki/concepts/gated-recurrent-unit.md` (LPCNet added to GRU-backbone list), `wiki/concepts/pitch-coherence.md` (precursor: global pitch correlation as conditioning + sampling temperature)
+- **Figures**: 3 SVG figures downloaded from arXiv HTML (overview, training_noise2, mushra_line) into `raw/papers/valin-2018-lpcnet/figures/`; caption pairing verified against arXiv figure IDs (S3.F1/S3.F2/S4.F3)

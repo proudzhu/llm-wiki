@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-07-18
-updated: 2026-07-18
+updated: 2026-08-30
 sources:
   - raw/papers/mienye-2024-rnn-comprehensive-review/full-text.md
+  - raw/papers/valin-2018-lpcnet/full-text.md
 tags:
   - deep-learning
   - recurrent-neural-network
@@ -54,6 +55,7 @@ GRUs have fewer parameters than LSTM due to the absence of a separate cell state
 - **Decision-making** — Liu & Diao 2024 used GRU with deep RL for autonomous driving
 
 Within the llm-wiki, GRU is the recurrent backbone in:
+- [[concepts/lpcnet\|LPCNet]] (Valin & Skoglund 2018) — two-stage vocoder: block-sparse $\mathrm{GRU_{A}}$ (384 units, 16×1 blocks at 10% density) plus dense $\mathrm{GRU_{B}}$ (16 units) replacing the output fully-connected layer
 - [[concepts/percepnet\|PercepNet]] (Valin et al. 2021) — 5-layer GRU neural post filter
 - [[concepts/nsnet2\|NSNet2]] — FC+GRU speech enhancement baseline
 - [[concepts/dtln\|DTLN]] — dual-path GRU for low-latency speech enhancement
@@ -71,5 +73,6 @@ Within the llm-wiki, GRU is the recurrent backbone in:
 ## Related Sources
 
 - [[sources/mienye-2024-rnn-comprehensive-review\|Mienye, Swart & Obaido 2024: RNN Comprehensive Review]]
+- [[sources/valin-2018-lpcnet\|Valin & Skoglund 2018: LPCNet]] — sparse $\mathrm{GRU_{A}}$ + dense $\mathrm{GRU_{B}}$ vocoder backbone
 - [[sources/valin-2021-percepnet-joint-echo-control\|Valin et al. 2021: PercepNet]] — GRU-based AEC system
 - [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Seidel et al. 2024: Bark-AEC]] — NSNet2-style FC+GRU post filter
