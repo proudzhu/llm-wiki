@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-26
-updated: 2026-07-21
+updated: 2026-08-30
+sources:
+  - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
 tags:
   - spatial-filtering
   - beamforming
@@ -54,6 +56,10 @@ where $\mathbf{e}_{\mathrm{ref}}$ is the selection vector for the reference micr
 ## Importance in Beamforming
 
 The RTF captures both direct-path and reverberant propagation effects. RTF-based beamforming yields improved speech quality compared with approaches relying solely on direct-path (steering vector) models, particularly in reverberant environments.
+
+## Pre-modeled RTF for Near-Field Wearables
+
+For near-field devices where the source-microphone geometry is quasi-fixed — e.g., a Bluetooth headset with the mouth 3–4 cm from the reference microphone — the RTF can be pre-modeled once in a quiet environment and reused. [[sources/yan-2014-dual-mic-bt-noise-reduction|Yan et al. 2014]] show such a pre-modeled RTF (used as the GSC blocking matrix $[1, -W_s]$) is robust to wearing-angle mismatch (0°/45°/90°) and inter-user variation, since the near-field transfer path is dominated by geometry rather than room acoustics — in contrast to noise-environment adaptive RTF estimation, which degrades at low SNR. This is the near-field, single-RTF antecedent of the far-field RTF dictionaries below.
 
 ## RTF Dictionaries for Output-based Beamformer Selection
 

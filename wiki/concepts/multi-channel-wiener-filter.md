@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-08-25
+updated: 2026-08-30
 sources:
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/bagheri-2019-pmwf-spp/full-text.md
+  - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
 tags:
   - speech-enhancement
   - wiener-filter
@@ -39,6 +40,10 @@ where $\Gamma_y(n)$ is the normalized observation SCM reconstructed from varianc
 ## Speech Distortion Weighted MWF (SDW-MWF)
 
 The **Speech Distortion Weighted Multichannel Wiener Filter (SDW-MWF)** is an MWF variant that introduces a parameter $\mu$ controlling the trade-off between noise reduction and speech distortion. It is widely used in binaural hearing aids and distributed [[concepts/distributed-binaural-speech-enhancement|distributed binaural speech enhancement]] frameworks (e.g., the [[concepts/tango-framework|Tango]] / [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|RT-Tango]] two-stage architecture), where it produces the ear-specific compressed signal exchanged between ear-nodes. The SDW-MWF requires [[concepts/spatial-covariance-matrix|spatial covariance matrices (SCM)]] for both speech and noise, which in real-time streaming variants (RT-Tango-OS) are estimated online via a recursive exponential moving average with forgetting factor $\alpha$.
+
+## Speech-Distortion-Constrained Generalization
+
+The SDW-MWF is itself a special case ($\beta = \mu = 1$) of the speech-distortion-constrained optimal filter $h = [\Phi_x + \beta \Phi_n]^{-1} \Phi_x i_1$ (Chen; Souden & Benesty), obtained by minimizing residual noise energy subject to a bound on speech-distortion energy. [[sources/yan-2014-dual-mic-bt-noise-reduction|Yan et al. 2014]] use this framework to unify the dual-microphone algorithm space: coherence-function filters and GSC variants occupy different points on the same $\beta$ trade-off curve, and GSC blocking-matrix mismatch is equivalent to operating at $\beta = 1$. See [[concepts/speech-distortion-constrained-noise-reduction|Speech-Distortion-Constrained Noise Reduction]].
 
 ## Differentiable SDW-MWF for End-to-End Training
 

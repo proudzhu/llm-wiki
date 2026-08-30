@@ -25,12 +25,17 @@ sources:
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
   - raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md
   - raw/papers/kang-2019-low-complexity-permutation-alignment/full-text.md
+  - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
 tags:
   - multi-channel-speech-enhancement
   - beamforming
   - mvdr
   - cdr-estimation
   - spatial-coherence
+  - coherence
+  - gsc
+  - speech-distortion
+  - bluetooth-headset
   - robustness
   - array-invariant
   - neural-beamforming
@@ -57,6 +62,7 @@ The distinction: this synthesis is about **spatial filtering** (beamforming, coh
 | Source | Year | Axis advanced | Key contribution |
 |--------|------|---------------|------------------|
 | [[sources/lorenz-2005-robust-minimum-variance-beamforming\|Lorenz & Boyd 2005]] | 2005 | Robustness | Robust MVB: ellipsoidal array-manifold uncertainty → SOCP, guaranteed unity-gain over uncertainty set |
+| [[sources/yan-2014-dual-mic-bt-noise-reduction\|Yan, Qiu & Lu 2014]] | 2014 | Application | Two-mic Bluetooth headset: coherence-based (CPSD) vs spatial pre-separation (ATF-GSC) framed as an SD-constrained optimal filter $\boldsymbol{h} = [\Phi_{xx} + \beta\Phi_{vv}]^{-1}\Phi_{xx}\boldsymbol{u}$; pre-modeled RTF blocking matrix robust to wearing-angle mismatch |
 | [[sources/tashev-2008-sound-capture-spatial-filter\|Tashev et al. 2008]] | 2008 | Estimate what | Back-to-back unidirectional array + probability-based spatial filter; level-difference-dominated post-filter for 9.6 mm baseline |
 | [[sources/jin-2017-multichannel-noise-reduction-mobile\|Jin et al. 2017]] | 2017 | Estimate what | MVDR + adaptive coherence NE with adaptive split-frequency; globally MMSE-optimal multi-channel variance decomposition |
 | [[sources/taseska-2018-informed-spatial-filters\|Taseska 2018]] | 2018 | Estimate what | ISF paradigm: CDR as a priori SAP *control* (not post-filter gain) for multichannel MCRA; DOA-model & position-based detectors drive per-bin MVDR/GSC across noise reduction, spotforming, and BSS |
@@ -203,12 +209,15 @@ The corpus shows that **form factor and use case, not algorithmic novelty, are t
 |-------------|-----------|------------------------|----------------|
 | **Hearing aids** | Sub-mW compute, binaural cue preservation, no training data | Classical CDR/GMC + binaural coherence models; output-based MPDR with dictionary | [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement\|Löllmann 2020]], [[sources/farmani-2026-virtual-mic-beamforming-hearing-aid\|Farmani 2026]], [[sources/apostolidis-2026-listen-first-output-based-multi-microphone\|Apostolidis 2026]] |
 | **Mobile phones** | 2–3 mics, <10 mm baseline, hands-free at arm's length | Level-difference-dominated post-filters; back-to-back unidirectional capsules; adaptive coherence NE with split-frequency | [[sources/tashev-2008-sound-capture-spatial-filter\|Tashev 2008]], [[sources/jin-2017-multichannel-noise-reduction-mobile\|Jin 2017]] |
+| **Bluetooth headsets** | 2 mics, 3–4 cm baseline, near-field mouth source, wearing-angle variability (0°/45°/90°) | Pre-modeled RTF blocking matrix calibrated in quiet environment (robust to wearing mismatch and user variation); SD-constrained trade-off over pure coherence filtering; post-filtering for incoherent noise | [[sources/yan-2014-dual-mic-bt-noise-reduction\|Yan 2014]] |
 | **Smart glasses** | Sub-2 ms latency, 6-mic wearable array, head motion | Time-domain ROI beamforming (2× lower latency than STFT); NLCMV with WNG + null control; multi-geometry training; multi-frontend differential ASR (beamformer + close-mic + STD embedding) | [[sources/frank-2026-low-latency-roi-beamforming\|Frank 2026]], [[sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition\|AGADIR 2024]], [[sources/yang-2025-mc-differential-asr-smart-glasses\|Yang 2025]] |
 | **ASR front-end** | Recognition-rate optimization, robustness to reverberation | CDR post-filter + spatial features as DNN-ASR input (beyond signal enhancement) | [[sources/schwarz-2015-coherent-to-diffuse-power-ratio\|Schwarz 2015]], [[sources/schwarz-2019-dereverberation-spatial-coherence\|Schwarz 2019]] |
 
 [[sources/frank-2026-low-latency-roi-beamforming|Frank & Cohen 2026]] crystallize the latency–complexity–performance tradeoff for smart glasses: time-domain ROI beamforming achieves 2× lower algorithmic latency (0.5 ms at $L_y=16$) than STFT-domain, with higher directivity factor and better own-voice suppression — at the cost of $\mathcal{O}(M L_y^2)$ vs $\mathcal{O}(M L_y \log L_y)$ complexity. The conclusion is deployment-guided: "when low latency is critical and modest additional on-device computing power is available, time-domain ROI beamforming is the preferred choice."
 
 [[sources/schwarz-2019-dereverberation-spatial-coherence|Schwarz 2019]]'s doctoral thesis reveals a complementary application-driven insight: for **ASR**, feeding spatial coherence features directly to a DNN acoustic model can outperform applying signal enhancement as a preprocessing step — the downstream model extracts more from the raw spatial features than from the enhanced signal. This reframes MCSE for ASR as **feature extraction**, not enhancement.
+
+[[sources/yan-2014-dual-mic-bt-noise-reduction|Yan et al. 2014]] adds the earliest corpus entry for **near-field wearable arrays** and a trade-off axis the later coherence lineage leaves implicit: the coherence-function filter family (Le 1992 → CPSD) buys large noise reduction at the cost of severe speech distortion, because it never models the target statistics. Framing the same two-mic problem as a speech-distortion-constrained optimal filter, $\boldsymbol{h} = [\Phi_{xx} + \beta\Phi_{vv}]^{-1}\Phi_{xx}\boldsymbol{u}$, subsumes both the coherence family and GSC/SDW-MWF as points on a single $\beta$ (distortion-vs-NR) trade-off curve — a precursor of the $\mu$-weighted trade-off that HVSF later lets a DNN predict.
 
 ## Cross-Cutting Takeaways
 

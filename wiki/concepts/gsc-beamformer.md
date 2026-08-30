@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-08-16
+updated: 2026-08-30
 sources:
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
+  - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
 tags:
   - beamforming
   - adaptive-filtering
@@ -55,6 +56,10 @@ $$\tilde{\mathbf{R}} = \begin{bmatrix} M p_q & \sqrt{M} \mathbf{r}_{qn}^H \\ \sq
 ## Informed GSC (Taseska, Varzandeh & Habets 2016)
 
 Taseska et al. develop the [[concepts/informed-gsc|informed GSC]], where the FBF, BM, and NC are adapted *per TF bin* under the control of a narrowband signal detector (the DOA model-based detector). The signal-cancellation problem of standard GSCs is alleviated by updating the NC **only when the desired signal is absent** — i.e., using the undesired-signal PSD matrix $\boldsymbol{\Phi}_{\mathbf{u}}$ rather than the microphone PSD matrix $\boldsymbol{\Phi}_{\mathbf{y}}$ in the NC computation. The BM uses the RTF-based form (Gannot et al.) rather than the anechoic Griffiths-Jim form, with the RTF estimated online via the detector. An RLS-based recursive NC implementation avoids per-bin matrix inversion, matching the closed-form informed MVDR's performance without notable loss — validating the GSC as an efficient practical alternative in highly non-stationary scenarios.
+
+## ATF-GSC for Bluetooth Headsets (Yan, Qiu & Lu 2014)
+
+[[sources/yan-2014-dual-mic-bt-noise-reduction|Yan et al. 2014]] instantiate the RTF-form GSC on a two-microphone Bluetooth headset (3–4 cm baseline, mouth 3–4 cm from the reference mic — near-field, quasi-fixed geometry), with beamforming matrix $A = [1, W_s]$ and blocking matrix $B = [1, -W_s]$ built from the single RTF $W_s$. Two findings generalize: (i) a blocking matrix **pre-modeled in a quiet factory environment** is robust to wearing-angle mismatch (0°/45°/90°) and inter-user variation, because the near-field path is dominated by geometry — unlike noise-environment adaptive RTF estimation (Cohen 2004), which suffers large modeling errors at low SNR; (ii) under mismatch, speech leaks into the noise reference, equivalent to operating at $\beta = 1$ on the [[concepts/speech-distortion-constrained-noise-reduction|SD-constrained optimal filter]] curve — GSC trades some noise reduction for much lower speech distortion than coherence-function post-filters. See [[concepts/atf-gsc|ATF-GSC]].
 
 ## Related Concepts
 

@@ -4569,7 +4569,6 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
 - **Extraction**: arXiv HTML via defuddle (v1 URL fallback after the unversioned URL returned 404); 5 figures (architecture, 2× NR spectra, time-domain, third-octave) downloaded and embedded as `![[raw/papers/.../figures/figN.png|caption]]`.
 
 ---
----
 
 ## [2026-08-22] ingest | Multi-Channel Differential ASR for Robust Wearer Speech Recognition on Smart Glasses (Yang et al. 2025)
 
@@ -4721,3 +4720,29 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
 - **Summary**: In adaptive feedback ANC headphones (IMC + FxLMS), fit-induced secondary-path changes (leaks, lifting) mainly cause a low-frequency magnitude drop-off of G — additive uncertainty up to 17.3 dB below 300 Hz — which destabilizes both adaptation and feedback loop. Since W identifies G⁻¹, irregularities appear as DC-gain growth of W; a DC-gain stability constraint (Σ w_l < 1/U_max(0), 6 MACs per update) detects them without auxiliary noise or real-time FFT, interrupting adaptation and smoothly converging to a default filter (−20 dB scaled impulse) on violation.
 - **Pages created**: `wiki/sources/guldenschuh-2014-secondary-path-irregularities.md`, `wiki/entities/markus-guldenschuh.md`, `wiki/entities/raymond-de-callafon.md`, `wiki/concepts/secondary-path-variability.md`, `wiki/concepts/dc-gain-stability-constraint.md`
 - **Pages updated**: `wiki/concepts/leaky-fxlms-algorithm.md` (γ=0.005 data point, stabilizing adaptation under phase errors), `wiki/concepts/robust-stability-constraint.md` (time-domain DC reduction), `wiki/concepts/constrained-fdlms.md` (cost benchmark vs. 6-MAC check), `wiki/concepts/secondary-path-modeling.md` (headphone fit variability), `wiki/concepts/online-secondary-path-modeling.md` (feedback-headphone limitations), `wiki/concepts/uncertainty-modeling-for-anc.md` (headphone measurement data), `wiki/concepts/primary-path-variability.md` (contrast with secondary-path variability), `wiki/synthesis/feedback-anc-filter-design.md` (time-domain constraint checking section), `wiki/synthesis/secondary-path-modeling-evolution.md` (路线 5: 检测而非跟踪)
+
+---
+
+## [2026-08-30] ingest | 基于双传声器的蓝牙耳机降噪算法 (Yan, Qiu & Lu 2014)
+
+- **Source**: `raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md` (MinerU extraction, language ch)
+- **Authors**: Xinye Yan, Xiaojun Qiu (corresponding), Jing Lu — Key Laboratory of Modern Acoustics, Institute of Acoustics, Nanjing University
+- **Published**: 应用声学 (Applied Acoustics) 2014, 33(3): 204–212
+- **Summary**: 将双传声器降噪算法分为相干函数类（CPSD 为代表）与空间预分离类（ATF-GSC 为代表），在"约束语音损伤的最优滤波器"框架下统一分析：$\boldsymbol{h} = [\Phi_{xx} + \beta\Phi_{vv}]^{-1}\Phi_{xx}\boldsymbol{u}$（TF-GSC/SDW-MWF/GSC 失配分别为特例）。面向蓝牙耳机实现 ATF-GSC：安静环境预建模 RTF 阻塞矩阵对佩戴角度失配（0°/45°/90°）与不同使用者鲁棒；实验（白噪声/人声干扰/风噪声）表明 ATF-GSC 综合性能优于 CPSD，后者降噪量大但语音损伤严重（PESQ 最低）。
+- **Pages created**:
+  - `wiki/sources/yan-2014-dual-mic-bt-noise-reduction.md` — source page with system-model figure embed, taxonomy, methodology, and experimental comparison tables
+  - `wiki/entities/xinye-yan.md` — first author (NJU)
+  - `wiki/concepts/coherence-based-noise-reduction.md` — Le 1992/CPSD algorithm family, noise cross-PSD estimation as the key
+  - `wiki/concepts/atf-gsc.md` — RTF-form GSC for two-mic BT headsets; pre-modeled blocking matrix robustness
+  - `wiki/concepts/speech-distortion-constrained-noise-reduction.md` — SD-constrained optimal filter unifying TF-GSC/SDW-MWF/GSC-mismatch on one β trade-off curve
+- **Pages updated**:
+  - `wiki/entities/xiaojun-qiu.md` — appended Yan 2014 as corresponding author (merged with pre-existing ANC content; prior state restored from git after accidental overwrite)
+  - `wiki/entities/jing-lu.md` — appended Yan 2014 co-author bullet
+  - `wiki/concepts/gsc-beamformer.md` — new "ATF-GSC for Bluetooth Headsets" section (pre-modeled blocking matrix, β=1 equivalence under mismatch)
+  - `wiki/concepts/multi-channel-wiener-filter.md` — new "Speech-Distortion-Constrained Generalization" section (SDW-MWF as β=μ=1 special case)
+  - `wiki/concepts/spatial-coherence.md` — added 双传声器降噪 row to 应用 table
+  - `wiki/concepts/relative-transfer-function.md` — new "Pre-modeled RTF for Near-Field Wearables" section
+  - `wiki/synthesis/multi-channel-speech-enhancement.md` — added Yan 2014 to Sources Synthesized table (earliest entry, Application axis), new Bluetooth-headsets row in the Insight 7 application table, and a paragraph on the distortion-vs-NR trade-off axis the coherence lineage leaves implicit; added coherence/gsc/speech-distortion/bluetooth-headset tags to improve future triage recall
+  - `wiki/index.md` + `wiki/{entities,concepts,sources,synthesis}/index.md` — new rows, Xiaojun Qiu summary updated, statistics updated (Total 1164→1169, Entities 513→514, Concepts 447→450, Sources 175→176)
+
+---

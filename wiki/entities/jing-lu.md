@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-24
-updated: 2026-08-22
+updated: 2026-08-30
 tags:
   - researcher
   - speech-enhancement
@@ -24,3 +24,4 @@ tags:
 - Co-author of DPCRN (Interspeech 2021) — dual-path convolution recurrent network for speech enhancement
 - Co-author of HALO (arXiv 2026) — half-frame-rate adaptive learnable operator for lightweight STFT-based speech enhancement
 - Corresponding author of "Speech extraction under extremely low SNR conditions" (Applied Acoustics 2024) — OGIVE convergence-region analysis on real speech plus natural-gradient variants (OGIVEa_NG/OGIVEw_NG), NSFC 12274221 — [[sources/ruan-2024-speech-extraction-low-snr|Ruan et al. 2024]]
+- Co-author of "基于双传声器的蓝牙耳机降噪算法" ("Two microphone based noise suppression algorithms for Bluetooth headsets", 应用声学 2014) — dual-mic coherence-based vs spatial-pre-separation comparison with SD-constrained optimal filter analysis — [[sources/yan-2014-dual-mic-bt-noise-reduction|Yan et al. 2014]]

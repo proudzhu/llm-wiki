@@ -1,24 +1,27 @@
 ---
 type: entity
 created: 2026-04-10
-updated: 2026-05-05
+updated: 2026-08-30
 sources:
+  - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
 tags:
 - acoustics
 - researcher
+- speech-enhancement
 ---
 
 # Xiaojun Qiu
 
 ## Overview
 
-Researcher in acoustics. Corresponding author for [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] and [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]]. Affiliated with:
+Researcher in acoustics. Corresponding author for [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]], [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]], and [[sources/yan-2014-dual-mic-bt-noise-reduction|Yan 2014: Dual-Mic Noise Suppression for Bluetooth Headsets]]. Affiliated with:
 - **Key Laboratory of Modern Acoustics and Institute of Acoustics**, Nanjing University, Nanjing, China
 - **School of Electrical and Computer Engineering**, RMIT University, Melbourne, Australia
 
 ## Research Areas
 
 - [[concepts/active-noise-control|Active Noise Control]]
+- Multi-channel speech enhancement for wearable/headset devices
 - Modern acoustics
 - Sound and vibration control
 
@@ -26,6 +29,7 @@ Researcher in acoustics. Corresponding author for [[sources/wu-2014-simplified-a
 
 - [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Co-author, corresponding author
 - [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — Co-author
+- [[sources/yan-2014-dual-mic-bt-noise-reduction|Yan 2014: Dual-Mic Noise Suppression for Bluetooth Headsets]] — Co-author, corresponding author, with [[entities/xinye-yan|Xinye Yan]] and [[entities/jing-lu|Jing Lu]] — dual-mic coherence-based vs spatial-pre-separation (ATF-GSC) algorithms under a speech-distortion-constrained optimal filter framework
 
 ## Contact
 
@@ -36,8 +40,11 @@ Researcher in acoustics. Corresponding author for [[sources/wu-2014-simplified-a
 
 - [[entities/limin-zhang|Limin Zhang]] — co-author on Zhang 2014
 - [[entities/lifu-wu|Lifu Wu]] — co-author on Wu 2014
+- [[entities/xinye-yan|Xinye Yan]] — first author on Yan 2014
+- [[entities/jing-lu|Jing Lu]] — co-author on Yan 2014
 
 ## Related Sources
 
 - [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]]
 - [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]]
+- [[sources/yan-2014-dual-mic-bt-noise-reduction|Yan 2014: Dual-Mic Noise Suppression for Bluetooth Headsets]]

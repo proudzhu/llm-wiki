@@ -458,4 +458,7 @@
 | [[concepts/constrained-fdlms\|Constrained FDLMS]] | Frequency-domain LMS with convex constraints enforced via one-sided quadratic penalty and steepest descent (Rafaely & Elliott 2000) | 2026-08-27 |
 | [[concepts/secondary-path-variability\|Secondary-Path Variability]] | Fit-induced secondary-path changes in ANC headphones: leaks/lifting cause low-frequency magnitude drop-off, 17.3 dB additive uncertainty below 300 Hz | 2026-08-27 |
 | [[concepts/dc-gain-stability-constraint\|DC-Gain Stability Constraint]] | Time-domain robust-stability check reducing the frequency-domain constraint to a coefficient sum (6 MACs per update); detects headphone secondary-path irregularities from the adaptive filter itself | 2026-08-27 |
+| [[concepts/coherence-based-noise-reduction\|Coherence-Based Noise Reduction]] | Dual-mic algorithm family using the measured coherence function as spectral gain (Le 1992, CPSD); large NR but severe speech distortion — noise cross-PSD estimation is the key | 2026-08-30 |
+| [[concepts/atf-gsc\|ATF-GSC]] | RTF-form GSC for two-mic Bluetooth headsets; quiet-environment pre-modeled blocking matrix robust to wearing-angle mismatch and user variation | 2026-08-30 |
+| [[concepts/speech-distortion-constrained-noise-reduction\|Speech-Distortion-Constrained Noise Reduction]] | Optimal filter h = [Φxx + βΦvv]^-1 Φxx u unifying TF-GSC, GSC mismatch (β=1), and SDW-MWF on one distortion-vs-NR trade-off curve | 2026-08-30 |
 

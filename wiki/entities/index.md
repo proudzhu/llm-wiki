@@ -6,7 +6,7 @@
 |------|---------|---------|
 | [[entities/john-d-cook\|John D. Cook]] | Mathematician, blogger, consultant — writes about math, stats, and computation | 2026-04-10 |
 | [[entities/lifu-wu\|Lifu Wu]] | Researcher in acoustics and signal processing, Nanjing University of Information Science and Technology | 2026-04-10 |
-| [[entities/xiaojun-qiu\|Xiaojun Qiu]] | Acoustics researcher, Nanjing University & RMIT University; corresponding author on ANC papers | 2026-04-10 |
+| [[entities/xiaojun-qiu\|Xiaojun Qiu]] | Acoustics researcher, Nanjing University & RMIT University; corresponding author on ANC and dual-mic speech enhancement papers | 2026-04-10 |
 | [[entities/yecai-guo\|Yecai Guo]] | Researcher, Nanjing University of Information Science and Technology | 2026-04-10 |
 | [[entities/sen-m-kuo\|Sen M. Kuo]] | ANC authority, Northern Illinois University — author of the definitive ANC textbook | 2026-04-10 |
 | [[entities/dennis-r-morgan\|Dennis R. Morgan]] | Bell Labs, Lucent Technologies — foundational FXLMS stability analysis | 2026-04-10 |
@@ -523,4 +523,5 @@
 | [[entities/fang-kang\|Fang Kang]] | Institute of Acoustics, CAS — blind source separation and permutation alignment | 2026-08-26 |
 | [[entities/markus-guldenschuh\|Markus Guldenschuh]] | IEM Graz — ANC headphones, secondary-path variability, prediction filter design | 2026-08-27 |
 | [[entities/raymond-de-callafon\|Raymond de Callafon]] | UCSD professor — control-relevant system identification, adaptive control; co-author of secondary-path irregularity detection | 2026-08-27 |
+| [[entities/xinye-yan\|Xinye Yan]] | NJU researcher; first author of dual-mic Bluetooth headset noise suppression (coherence-based vs spatial pre-separation, 2014) | 2026-08-30 |
 

@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-08-15
+updated: 2026-08-30
 sources:
   - raw/papers/schwarz-2015-coherent-to-diffuse-power-ratio/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
+  - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
 tags:
   - signal-processing
   - multichannel
@@ -56,6 +57,7 @@ $$\gamma_{pq}(\tau, \omega) = \alpha_\gamma \gamma_{pq}(\tau - 1, \omega) + (1 -
 | **噪声 reduction** | 区分相干目标源和扩散噪声 |
 | **鲁棒 ASR** | 从短时相干性提取空间特征向量作为 DNN 输入 |
 | **波束形成辅助** | CDR 估计可作为 MVDR/MWF 的后滤波器 |
+| **双传声器降噪** | 实测相干函数（或扣除噪声互谱的 CPSD 形式）直接作为谱增益——语音相关噪声导致性能下降，噪声互谱估计是关键，见 [[concepts/coherence-based-noise-reduction|Coherence-Based Noise Reduction]] |
 
 ## 与其他概念的关系
 

@@ -12,7 +12,7 @@
 |------|---------|---------|
 | [[entities/john-d-cook\|John D. Cook]] | Mathematician, blogger, consultant — writes about math, stats, and computation | 2026-04-10 |
 | [[entities/lifu-wu\|Lifu Wu]] | Researcher in acoustics and signal processing, Nanjing University of Information Science and Technology | 2026-04-10 |
-| [[entities/xiaojun-qiu\|Xiaojun Qiu]] | Acoustics researcher, Nanjing University & RMIT University; corresponding author on ANC papers | 2026-04-10 |
+| [[entities/xiaojun-qiu\|Xiaojun Qiu]] | Acoustics researcher, Nanjing University & RMIT University; corresponding author on ANC and dual-mic speech enhancement papers | 2026-04-10 |
 | [[entities/yecai-guo\|Yecai Guo]] | Researcher, Nanjing University of Information Science and Technology | 2026-04-10 |
 | [[entities/sen-m-kuo\|Sen M. Kuo]] | ANC authority, Northern Illinois University — author of the definitive ANC textbook | 2026-04-10 |
 | [[entities/dennis-r-morgan\|Dennis R. Morgan]] | Bell Labs, Lucent Technologies — foundational FXLMS stability analysis | 2026-04-10 |
@@ -529,6 +529,7 @@
 | [[entities/fang-kang\|Fang Kang]] | Institute of Acoustics, CAS — blind source separation and permutation alignment | 2026-08-26 |
 | [[entities/markus-guldenschuh\|Markus Guldenschuh]] | IEM Graz — ANC headphones, secondary-path variability, prediction filter design | 2026-08-27 |
 | [[entities/raymond-de-callafon\|Raymond de Callafon]] | UCSD professor — control-relevant system identification, adaptive control; co-author of secondary-path irregularity detection | 2026-08-27 |
+| [[entities/xinye-yan\|Xinye Yan]] | NJU researcher; first author of dual-mic Bluetooth headset noise suppression (coherence-based vs spatial pre-separation, 2014) | 2026-08-30 |
 
 ---
 
@@ -992,6 +993,9 @@
 | [[concepts/constrained-fdlms\|Constrained FDLMS]] | Frequency-domain LMS with convex constraints enforced via one-sided quadratic penalty and steepest descent (Rafaely & Elliott 2000) | 2026-08-27 |
 | [[concepts/secondary-path-variability\|Secondary-Path Variability]] | Fit-induced secondary-path changes in ANC headphones: leaks/lifting cause low-frequency magnitude drop-off, 17.3 dB additive uncertainty below 300 Hz | 2026-08-27 |
 | [[concepts/dc-gain-stability-constraint\|DC-Gain Stability Constraint]] | Time-domain robust-stability check reducing the frequency-domain constraint to a coefficient sum (6 MACs per update); detects headphone secondary-path irregularities from the adaptive filter itself | 2026-08-27 |
+| [[concepts/coherence-based-noise-reduction\|Coherence-Based Noise Reduction]] | Dual-mic algorithm family using the measured coherence function as spectral gain (Le 1992, CPSD); large NR but severe speech distortion — noise cross-PSD estimation is the key | 2026-08-30 |
+| [[concepts/atf-gsc\|ATF-GSC]] | RTF-form GSC for two-mic Bluetooth headsets; quiet-environment pre-modeled blocking matrix robust to wearing-angle mismatch and user variation | 2026-08-30 |
+| [[concepts/speech-distortion-constrained-noise-reduction\|Speech-Distortion-Constrained Noise Reduction]] | Optimal filter h = [Φxx + βΦvv]^-1 Φxx u unifying TF-GSC, GSC mismatch (β=1), and SDW-MWF on one distortion-vs-NR trade-off curve | 2026-08-30 |
 
 ---
 
@@ -1181,6 +1185,7 @@
 | [[sources/kang-2019-low-complexity-permutation-alignment\|Kang, Yang & Yang 2019: A Low-Complexity Permutation Alignment Method for Frequency-Domain BSS]] | Three-stage permutation alignment (confidence-thresholded bin-wise, local-centroid, few-iteration global clustering) matching Sawada/MBMC quality at 4-5x lower runtime | 2026-08-26 |
 | [[sources/rafaely-2000-constrained-fdlms\|Rafaely & Elliott 2000: Computationally Efficient Frequency-Domain LMS with Constraints]] | Penalty-function extension of FDLMS supporting convex frequency-domain constraints (magnitude, output power, robust stability), demonstrated on adaptive sound equalization | 2026-08-27 |
 | [[sources/guldenschuh-2014-secondary-path-irregularities\|Guldenschuh & de Callafon 2014: Detection of Secondary-Path Irregularities in ANC Headphones]] | DC-gain stability constraint (6 MACs) detects headphone leaks/lifting from the adaptive filter itself; smooth fallback default filter; leaky FxLMS γ=0.005; 17.3 dB low-frequency secondary-path uncertainty | 2026-08-27 |
+| [[sources/yan-2014-dual-mic-bt-noise-reduction\|Yan, Qiu & Lu 2014: Dual-Mic Noise Suppression for Bluetooth Headsets]] | Two-mic BT headset algorithms: coherence-based (CPSD) vs spatial pre-separation (ATF-GSC) unified under an SD-constrained optimal filter; pre-modeled RTF blocking matrix robust to wearing-angle mismatch | 2026-08-30 |
 
 ---
 
@@ -1233,10 +1238,10 @@
 
 ## Statistics
 
-- **Total pages**: 1182
-- **Entities**: 519
-- **Concepts**: 454
-- **Sources**: 180
+- **Total pages**: 1187
+- **Entities**: 520
+- **Concepts**: 457
+- **Sources**: 181
 - **Synthesis**: 22
 - **Queries**: 7
-- **Last updated**: 2026-08-27
+- **Last updated**: 2026-08-30
