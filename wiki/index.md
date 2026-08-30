@@ -1000,6 +1000,9 @@
 | [[concepts/wavernn\|WaveRNN]] | Autoregressive neural vocoder (GRU + sparse matrices + discrete softmax output) that LPCNet extends with linear prediction | 2026-08-30 |
 | [[concepts/linear-prediction\|Linear Prediction]] | Classical all-pole vocal-tract modeling; in LPCNet the LPC filter carries the spectral envelope so the network models only the excitation | 2026-08-30 |
 | [[concepts/dual-fc-layer\|DualFC Layer]] | LPCNet output layer: element-wise weighted sum of two tanh FC layers, each implementing roughly one mu-law interval comparison | 2026-08-30 |
+| [[concepts/fargan\|FARGAN]] | Framewise autoregressive GAN vocoder: 2.5-ms subframes, pitch prediction as second AR feedback, no teacher forcing, 8-bit end-to-end | 2026-08-30 |
+| [[concepts/pitch-prediction\|Pitch Prediction]] | Long-term prediction of speech from one pitch period back; FARGAN's explicit second autoregressive feedback | 2026-08-30 |
+| [[concepts/exposure-bias\|Teacher Forcing and Exposure Bias]] | The structural training/inference gap of density-estimation autoregressive vocoders; escaped by framewise unrolled generation | 2026-08-30 |
 
 ---
 
@@ -1191,6 +1194,7 @@
 | [[sources/guldenschuh-2014-secondary-path-irregularities\|Guldenschuh & de Callafon 2014: Detection of Secondary-Path Irregularities in ANC Headphones]] | DC-gain stability constraint (6 MACs) detects headphone leaks/lifting from the adaptive filter itself; smooth fallback default filter; leaky FxLMS γ=0.005; 17.3 dB low-frequency secondary-path uncertainty | 2026-08-27 |
 | [[sources/yan-2014-dual-mic-bt-noise-reduction\|Yan, Qiu & Lu 2014: Dual-Mic Noise Suppression for Bluetooth Headsets]] | Two-mic BT headset algorithms: coherence-based (CPSD) vs spatial pre-separation (ATF-GSC) unified under an SD-constrained optimal filter; pre-modeled RTF blocking matrix robust to wearing-angle mismatch | 2026-08-30 |
 | [[sources/valin-2018-lpcnet\|Valin & Skoglund 2018: LPCNet]] | WaveRNN variant combining linear prediction with RNNs; speaker-independent neural synthesis under 3 GFLOPS (real-time on an iPhone 6 core) | 2026-08-30 |
+| [[sources/valin-2024-fargan\|Valin, Mustafa & Büthe 2024: FARGAN]] | 600-MFLOPS framewise autoregressive GAN vocoder with pitch prediction; tied with CARGAN/HiFi-GAN v1 at 64–110× lower complexity; deployed in Opus 1.5 | 2026-08-30 |
 
 ---
 
@@ -1222,6 +1226,7 @@
 | [[synthesis/joint-multitask-ultra-low-latency-se|Joint Multi-Task SE & Ultra-Low-Latency Paradigm]] | 6 sources + theory: task dissolution (AEC+NS+DR+OVC+AHS), 0–20ms latency tiers, linear RNN/SSM replacing LSTM/ConvTasNet, HALO+FRS redundancy frontier | Indenbom 2023, Hao 2025, Zhao 2026, Ashur 2026, Østergaard 2026, Benslimane 2026, Rath 2026 |
 | [[synthesis/deep-speech-enhancement|Deep Speech Enhancement]] | Architectural/methodological evolution 2018→2026 along 6 axes: target (IBM→cIRM→CCM→DF), domain (hybrid time+freq loss), backbone (CRN→DPCRN→Conformer→Mamba/linear RNN/SNN), efficiency (~1000× via 4 orthogonal techniques), multi-channel (array-invariant Geo-DConv), conditioning (PSE/TSE/OVC) | Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zheng 2023, Rong 2024, Chao 2024, Yang 2026, Liu 2026, Apostolidis 2026, Østergaard 2026 |
 | [[synthesis/multi-channel-speech-enhancement\|Multi-Channel Speech Enhancement]] | From coherence models to geometry-conditioned neural filters: 5 axes (estimate what, robustness, input/output, geometry, hybrid) across 17 sources 2005-2026 | 2026-08-16 |
+| [[synthesis/low-complexity-neural-vocoders\|Low-Complexity Neural Vocoders]] | Complexity-quality frontier from WaveRNN to FARGAN; each 5× reduction moves speech structure (envelope, periodicity) out of the network | 2026-08-30 |
 
 ---
 
@@ -1243,10 +1248,10 @@
 
 ## Statistics
 
-- **Total pages**: 1192
+- **Total pages**: 1197
 - **Entities**: 521
-- **Concepts**: 460
-- **Sources**: 182
-- **Synthesis**: 22
+- **Concepts**: 463
+- **Sources**: 183
+- **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-08-30

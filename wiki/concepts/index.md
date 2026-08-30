@@ -464,4 +464,7 @@
 | [[concepts/wavernn\|WaveRNN]] | Autoregressive neural vocoder (GRU + sparse matrices + discrete softmax output) that LPCNet extends with linear prediction | 2026-08-30 |
 | [[concepts/linear-prediction\|Linear Prediction]] | Classical all-pole vocal-tract modeling; in LPCNet the LPC filter carries the spectral envelope so the network models only the excitation | 2026-08-30 |
 | [[concepts/dual-fc-layer\|DualFC Layer]] | LPCNet output layer: element-wise weighted sum of two tanh FC layers, each implementing roughly one mu-law interval comparison | 2026-08-30 |
+| [[concepts/fargan\|FARGAN]] | Framewise autoregressive GAN vocoder: 2.5-ms subframes, pitch prediction as second AR feedback, no teacher forcing, 8-bit end-to-end | 2026-08-30 |
+| [[concepts/pitch-prediction\|Pitch Prediction]] | Long-term prediction of speech from one pitch period back; FARGAN's explicit second autoregressive feedback | 2026-08-30 |
+| [[concepts/exposure-bias\|Teacher Forcing and Exposure Bias]] | The structural training/inference gap of density-estimation autoregressive vocoders; escaped by framewise unrolled generation | 2026-08-30 |
 

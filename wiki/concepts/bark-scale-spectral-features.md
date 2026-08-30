@@ -9,6 +9,7 @@ sources:
   - raw/papers/zheng-2023-survey-frequency-domain-speech-enhancement/full-text.md
   - raw/papers/harma-2000-frequency-warped-signal-processing/full-text.md
   - raw/papers/valin-2022-real-time-plc/full-text.md
+  - raw/papers/valin-2024-fargan/full-text.md
 tags:
   - psychoacoustics
   - speech-enhancement
@@ -55,6 +56,8 @@ In [[sources/li-2025-echofree-neural-aec\|EchoFree]] the 112-dim Bark feature ve
 
 [[concepts/lpcnet|LPCNet]] (Valin & Skoglund 2018) conditions speech synthesis on just **18 Bark-scale cepstral coefficients** plus two pitch parameters (period and correlation) — one of the smallest Bark-cepstral instances in the wiki, using the band layout of Valin's hybrid DSP/deep-learning full-band speech enhancement work (MMSP 2018). The cepstrum serves a second purpose beyond conditioning: LPCNet derives its **linear prediction coefficients** from it (18-band cepstrum → linear-frequency PSD → auto-correlation via inverse FFT → Levinson-Durbin), so the all-pole synthesis filter needs no information beyond the 20 transmitted/synthesized features.
 
+[[concepts/fargan|FARGAN]] ([[sources/valin-2024-fargan|Valin et al. 2024]]) inherits this exact 18-BFCC feature vector (with a voicing indicator replacing the pitch correlation), demonstrating that the representation outlives the architecture: it conditions a GAN-based subframe synthesizer that no longer performs any LPC analysis at all — the Bark cepstrum is purely a conditioning signal there.
+
 ## Comparison with Other Perceptual Scales
 
 | Scale | Formula (Hz → scale) | Bands | Application |
@@ -88,4 +91,5 @@ The Bark scale's relationship to auditory filter banks and cochlear mapping is s
 - [[sources/indenbom-2023-deepvqe\|Indenbom et al. 2023: DeepVQE]] — comparison point in the AEC lightweight hierarchy
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]] — ULCNet-AER baseline (uses linear-frequency sub-band stacking rather than Bark)
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys Bark/ERB-band perceptual features (Valin 2018 BFCCs, Valin et al. 2020 ERB-band features) as the dominant strategy for reducing full-band input feature dimensionality
-- [[sources/valin-2022-real-time-plc\|Valin et al. 2022: Real-Time PLC]] — uses 18 BFCCs (LPCNet features) plus pitch period/correlation as conditioning for the autoregressive vocoder
+- [[sources/valin-2022-real-time-plc|Valin et al. 2022: Real-Time PLC]] — uses 18 BFCCs (LPCNet features) plus pitch period/correlation as conditioning for the autoregressive vocoder
+- [[sources/valin-2024-fargan|Valin, Mustafa & Büthe 2024: FARGAN]] — same 18-BFCC features (voicing indicator in place of pitch correlation) conditioning a GAN vocoder with no LPC analysis

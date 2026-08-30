@@ -4758,3 +4758,28 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
 - **Pages created**: `wiki/sources/valin-2018-lpcnet.md`, `wiki/entities/jan-skoglund.md`, `wiki/concepts/wavernn.md`, `wiki/concepts/linear-prediction.md`, `wiki/concepts/dual-fc-layer.md`
 - **Pages updated**: `wiki/concepts/lpcnet.md` (original-2018 architecture, efficiency techniques, complexity/MUSHRA — page previously described LPCNet only via the 2022 PLC paper), `wiki/entities/jean-marc-valin.md` (LPCNet bullet extended with source link + 2018 Mozilla affiliation note), `wiki/concepts/structured-sparsity.md` (LPCNet's 16×1 blocks + diagonal retention vs PercepNet's 16×4), `wiki/concepts/bark-scale-spectral-features.md` (new "Use in Neural Vocoding" section: 18 BFCC conditioning + LPC derivation), `wiki/concepts/gated-recurrent-unit.md` (LPCNet added to GRU-backbone list), `wiki/concepts/pitch-coherence.md` (precursor: global pitch correlation as conditioning + sampling temperature)
 - **Figures**: 3 SVG figures downloaded from arXiv HTML (overview, training_noise2, mushra_line) into `raw/papers/valin-2018-lpcnet/figures/`; caption pairing verified against arXiv figure IDs (S3.F1/S3.F2/S4.F3)
+
+---
+
+## [2026-08-30] ingest | FARGAN: Very Low Complexity Speech Synthesis Using Framewise Autoregressive GAN with Pitch Prediction (Valin et al. 2024)
+
+- **Source**: `raw/papers/valin-2024-fargan/full-text.md` (Zotero: 832PXENT)
+- **Authors**: Jean-Marc Valin, Ahmed Mustafa, Jan Büthe
+- **Published**: IEEE Signal Processing Letters 2024 (arXiv:2405.21069v2)
+- **DOI**: 10.48550/arXiv.2405.21069
+- **Summary**: FARGAN — a 600-MFLOPS framewise autoregressive GAN vocoder that uses long-term pitch prediction as a second autoregressive feedback and avoids teacher forcing by unrolling at training time; statistically tied with CARGAN and HiFi-GAN v1 at 64–110× lower complexity; replaced LPCNet in Opus 1.5's DRED.
+- **Pages created**:
+  - `wiki/sources/valin-2024-fargan.md`
+  - `wiki/concepts/fargan.md`
+  - `wiki/concepts/pitch-prediction.md`
+  - `wiki/concepts/exposure-bias.md`
+  - `wiki/synthesis/low-complexity-neural-vocoders.md` — new cross-source synthesis (LPCNet + FARGAN complexity-quality frontier)
+- **Pages updated**:
+  - `wiki/entities/jean-marc-valin.md` — FARGAN contribution bullet; Xiph.Org 2024 affiliation note
+  - `wiki/entities/ahmed-mustafa.md` — FARGAN bullet (FWGAN lineage); sources frontmatter added
+  - `wiki/entities/jan-buthe.md` — FARGAN bullet (NoLACE discriminator reuse); sources frontmatter added
+  - `wiki/concepts/lpcnet.md` — new "Successor: FARGAN" section (dropped LPC filter, pitch prediction, Opus 1.5); Related Concepts/Sources extended
+  - `wiki/concepts/pitch-coherence.md` — FARGAN paragraph completing the LPCNet → PercepNet → FARGAN pitch-feature progression
+  - `wiki/concepts/bark-scale-spectral-features.md` — FARGAN inherits the 18-BFCC vector with no LPC analysis
+  - `wiki/concepts/frequency-domain-loss.md` — FARGAN's six-resolution γ=0.5 spectral loss + STFT-discriminator findings
+- **Figures**: 3 SVGs manually downloaded from arXiv HTML (`<object>` embeds are not auto-extracted); subframe-network layer labels recovered from per-glyph SVG text (Conv 2×1 → GRU1 → GRU2 → GRU3 → FC → FC → gain)

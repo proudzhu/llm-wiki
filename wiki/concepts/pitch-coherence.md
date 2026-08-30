@@ -5,6 +5,7 @@ updated: 2026-08-30
 sources:
   - raw/papers/valin-2021-percepnet-joint-echo-control/full-text.md
   - raw/papers/valin-2018-lpcnet/full-text.md
+  - raw/papers/valin-2024-fargan/full-text.md
 tags:
   - speech-enhancement
   - acoustic-echo-cancellation
@@ -32,6 +33,8 @@ The comb filter removes noise between pitch harmonics, making the signal more pe
 
 The same periodicity feature appears earlier — and globally rather than per-band — in [[concepts/lpcnet|LPCNet]] (Valin & Skoglund 2018), where a scalar **pitch correlation** $g_p \in (0, 1)$ is one of the 20 conditioning inputs (alongside 18 Bark-scale cepstral coefficients and the pitch period). LPCNet also exploits it at *inference* time: the sampling temperature of the autoregressive excitation distribution is set to $c = 1 + \max(0,\, 1.5\,g_p - 0.5)$, so highly periodic (voiced) frames are sampled from a sharper distribution — a continuous generalization of the earlier practice of multiplying logits by a constant only for voiced sounds. PercepNet later generalized the idea to per-ERB-band coherence, for enhancement rather than synthesis.
 
+A third step in this line appears in [[concepts/fargan|FARGAN]] (Valin et al. 2024): the pitch period stops being mere *conditioning* and becomes an *operator* on the synthesis history — [[concepts/pitch-prediction|pitch prediction]] copies the signal from one period back as an explicit autoregressive feedback, gated by a voicing indicator computed from the conditioning. Across the three systems, pitch information thus progresses from a scalar feature (LPCNet) to per-band coherence (PercepNet) to a direct prediction mechanism (FARGAN).
+
 ## Why It Matters for AEC
 
 In acoustic echo cancellation, residual echo can be hard to distinguish from near-end voiced speech because both are speech-like. Pitch coherence provides a complementary cue to spectral envelope: even when the spectral envelopes overlap, the near-end and far-end signals typically have different pitch periods, so their coherence patterns differ. This helps the PercepNet DNN preserve near-end speech during double-talk while suppressing residual echo.
@@ -49,3 +52,4 @@ In acoustic echo cancellation, residual echo can be hard to distinguish from nea
 
 - [[sources/valin-2021-percepnet-joint-echo-control|Valin et al. 2021: Joint Neural Echo Control and Speech Enhancement Based On PercepNet]]
 - [[sources/valin-2018-lpcnet|Valin & Skoglund 2018: LPCNet]] — earlier global pitch-correlation feature and its use as the sampling temperature
+- [[sources/valin-2024-fargan|Valin, Mustafa & Büthe 2024: FARGAN]] — pitch period as a direct prediction mechanism

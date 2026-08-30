@@ -186,4 +186,5 @@
 | [[sources/guldenschuh-2014-secondary-path-irregularities\|Guldenschuh & de Callafon 2014: Detection of Secondary-Path Irregularities in ANC Headphones]] | DC-gain stability constraint (6 MACs) detects headphone leaks/lifting from the adaptive filter itself; smooth fallback default filter; leaky FxLMS γ=0.005; 17.3 dB low-frequency secondary-path uncertainty | 2026-08-27 |
 | [[sources/yan-2014-dual-mic-bt-noise-reduction\|Yan, Qiu & Lu 2014: Dual-Mic Noise Suppression for Bluetooth Headsets]] | Two-mic BT headset algorithms: coherence-based (CPSD) vs spatial pre-separation (ATF-GSC) unified under an SD-constrained optimal filter; pre-modeled RTF blocking matrix robust to wearing-angle mismatch | 2026-08-30 |
 | [[sources/valin-2018-lpcnet\|Valin & Skoglund 2018: LPCNet]] | WaveRNN variant combining linear prediction with RNNs; speaker-independent neural synthesis under 3 GFLOPS (real-time on an iPhone 6 core) | 2026-08-30 |
+| [[sources/valin-2024-fargan\|Valin, Mustafa & Büthe 2024: FARGAN]] | 600-MFLOPS framewise autoregressive GAN vocoder with pitch prediction; tied with CARGAN/HiFi-GAN v1 at 64–110× lower complexity; deployed in Opus 1.5 | 2026-08-30 |
 
