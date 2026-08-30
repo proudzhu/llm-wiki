@@ -1,7 +1,7 @@
 ---
 type: source
 created: 2026-08-14
-updated: 2026-08-14
+updated: 2026-08-30
 sources:
   - raw/papers/valin-2022-real-time-plc/full-text.md
   - https://arxiv.org/abs/2205.05785
@@ -60,9 +60,63 @@ A separate **predictive RNN** (1 fully-connected input layer, 2 GRUs of 512 unit
 
 **Causal LPCNet**: The original LPCNet uses two 3×1 convolutions with 2-frame look-ahead (25 ms added latency). For PLC the look-ahead is unavailable during loss, so a strictly causal feature model is used; the 20-ms analysis overlap still imposes 5 ms algorithmic delay.
 
-### Perceptual Loss Functions
+### Model Structure, Inputs, and Outputs
 
-Three asymmetric, perceptually-motivated losses replace a single $L_{2}$ term; unpredictable events are treated as label noise (favoring $L_{1}$), and biased terms penalize specific failure modes:
+The system cascades two networks. During loss, data flows: known Burg/LPCNet features → prediction RNN → predicted feature vector → LPCNet → synthesized 16 kHz samples.
+
+```mermaid
+flowchart TB
+    A["LPCNet feature vector<br/>(known, or zeros during loss)"] --> R1
+    B["Binary 'lost' flag"] --> R1
+    C["Burg cepstral coefficients<br/>(two 5-ms half-frames)"] --> R1
+
+    subgraph RNN["Feature prediction RNN (predictive model)"]
+        R1["Input FC layer<br/>(256 units)"] --> R2["2 x GRU<br/>(512 units)"] --> R3["Output FC layer"]
+    end
+
+    R3 -->|"Predicted feature vector:<br/>18 BFCCs + pitch period + pitch correlation"| V1
+    A -->|"known features, no loss"| V1
+
+    subgraph LPCNET["LPCNet vocoder (generative model)"]
+        V1["Frame-rate network (100 Hz)<br/>causal features"] --> V2["Sample-rate network<br/>(GRU-A: 640 units, 15% density)"]
+    end
+
+    V2 -->|"previous synthesized samples<br/>(autoregressive feedback)"| V2
+    V2 --> OUT["Synthesized 16 kHz speech samples<br/>(middle 10 ms of each 20-ms window)"]
+    OUT --> X["Cross-fade & resynchronization<br/>with received audio (causal / non-causal)"]
+```
+
+**Frame-type behavior**: on known frames ($K$) the LPCNet features bypass the prediction (the RNN merely updates its state, output discarded) and drive LPCNet directly; on lost frames ($U_{0}$, $U$) the RNN's predicted features replace the unavailable computed features.
+
+**1. Feature prediction RNN (predictive model)**
+
+| Item | Specification |
+|------|---------------|
+| **Structure** | 256-unit fully-connected input layer → 2 GRUs (512 units each) → fully-connected output layer |
+| **Input (per 10-ms frame)** | LPCNet feature vector — the known feature vector, or a vector of zeros during loss — plus a binary "lost" flag (appended because known features could theoretically be all zeros), plus Burg-derived cepstral coefficients from the two 5-ms half-frames (Section 3.2) |
+| **Output** | Predicted LPCNet feature vector: 18 BFCCs + pitch period + pitch correlation |
+| **Training data** | The 205 hours used for the vocoder + 64 hours of PLC-challenge-organizer training speech |
+| **Role** | Long-term control: keeps the synthesized spectral trajectory plausible, countering autoregressive drift |
+
+**2. LPCNet vocoder (generative model)**
+
+| Item | Specification |
+|------|---------------|
+| **Structure** | Frame-rate network (100 Hz, causal features) + sample-rate network (autoregressive); improved low-complexity variant [16] with $\mathrm{GRU_{A}}$ = 640 units at 15% density |
+| **Input** | Feature vectors (known or predicted) at 10-ms intervals + previously synthesized 16 kHz samples (autoregressive conditioning) |
+| **Output** | 16 kHz speech samples — the middle 10 ms of each 20-ms analysis window |
+| **Training data** | 205 hours of 16 kHz speech from 9 TTS corpora (900+ speakers, 34 languages/dialects), trained as in [16] with explicit sign randomization of each sequence so the algorithm is polarity-invariant |
+| **Role** | Short-time creativity: synthesizes natural-sounding samples consistent with the conditioning features |
+
+The two networks are trained **separately**: the vocoder is trained first (as in [16]), then the prediction RNN is trained with the perceptual losses below to predict the features the vocoder expects.
+
+### Training Losses
+
+Only the prediction RNN is trained with the losses in this section. Because some aspects of PLC are completely unpredictable, an $L_{1}$ loss (robust to label noise) is preferred over $L_{2}$, and a **different loss is applied to each predicted feature group**. The total training objective is the sum of the three terms:
+
+$$
+\mathcal{L}=\mathcal{L}_{s}+\mathcal{L}_{p}+\mathcal{L}_{c}.
+$$
 
 **Spectral / cepstral loss** — overestimating voiced-frame energy hurts more than underestimating it:
 
