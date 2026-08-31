@@ -533,6 +533,7 @@
 | [[entities/jan-skoglund\|Jan Skoglund]] | Google researcher; neural speech/audio coding, low-bitrate neural vocoders; co-author of LPCNet | 2026-08-30 |
 | [[entities/seon-man-kim\|Seon Man Kim]] | ISVR Southampton / GIST — dual-microphone speech enhancement, DOA-based SNR estimation | 2026-08-28 |
 | [[entities/hong-kook-kim\|Hong Kook Kim]] | GIST professor — speech recognition, speech/audio source separation, embedded speech processing | 2026-08-28 |
+| [[entities/mike-goodwin\|Mike Goodwin]] | AWS researcher; audio signal processing and ML for audio; co-author of Framewise WaveGAN | 2026-08-31 |
 
 ---
 
@@ -1008,6 +1009,8 @@
 | [[concepts/doa-based-snr-estimation\|DOA-Based SNR Estimation]] | A priori SNR estimated from spatial (phase-difference) cues via TNR + LRT speech-activity decision + decision-directed updates, replacing unreliable noise-variance estimation (Kim & Kim 2014) | 2026-08-28 |
 | [[concepts/target-to-non-target-directional-signal-ratio\|Target-to-Non-target Directional Signal Ratio (TNR)]] | DSB/BM transfer-function power ratio of time-aligned dual mics, closed form cot²(Δψ̃/2); spatial-cue analogue of the SNR | 2026-08-28 |
 | [[concepts/phase-error-based-filter\|Phase-Error-Based Filter (PEF)]] | Dual-mic soft-masking gain driven by phase-difference error; approximates TNR as 1/(Δψ)² — effective at low SNR, distorts target speech at high SNR | 2026-08-28 |
+| [[concepts/framewise-wavegan\|Framewise WaveGAN]] | GAN vocoder generating speech frame-by-frame at the acoustic-feature rate (1.2 GFLOPS) | 2026-08-31 |
+| [[concepts/framewise-convolution\|Framewise Convolution]] | Convolution whose kernel elements are frames rather than samples, built on fully-connected layers | 2026-08-31 |
 
 ---
 
@@ -1201,6 +1204,7 @@
 | [[sources/valin-2018-lpcnet\|Valin & Skoglund 2018: LPCNet]] | WaveRNN variant combining linear prediction with RNNs; speaker-independent neural synthesis under 3 GFLOPS (real-time on an iPhone 6 core) | 2026-08-30 |
 | [[sources/valin-2024-fargan\|Valin, Mustafa & Büthe 2024: FARGAN]] | 600-MFLOPS framewise autoregressive GAN vocoder with pitch prediction; tied with CARGAN/HiFi-GAN v1 at 64–110× lower complexity; deployed in Opus 1.5 | 2026-08-30 |
 | [[sources/kim-2014-doa-based-snr-estimation\|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] | Phase difference of time-aligned dual mics → TNR → LRT/DD-driven DOA-based a priori SNR for a Wiener gain; beats SDB/GSC-PW/PEF/ASBM in SDR & PESQ on a 4 cm array (0–20 dB SNR, RT60 ≤ 300 ms) | 2026-08-28 |
+| [[sources/mustafa-2023-framewise-wavegan\|Mustafa et al. 2023: Framewise WaveGAN]] | 1.2-GFLOPS GAN vocoder generating time-domain speech in 10-ms frames; beats LPCNet at equal complexity | 2026-08-31 |
 
 ---
 
@@ -1254,10 +1258,10 @@
 
 ## Statistics
 
-- **Total pages**: 1203
-- **Entities**: 523
-- **Concepts**: 466
-- **Sources**: 184
+- **Total pages**: 1207
+- **Entities**: 524
+- **Concepts**: 468
+- **Sources**: 185
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-08-31
+- **Last updated**: 2026-09-01

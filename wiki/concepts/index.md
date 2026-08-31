@@ -470,4 +470,6 @@
 | [[concepts/doa-based-snr-estimation\|DOA-Based SNR Estimation]] | A priori SNR estimated from spatial (phase-difference) cues via TNR + LRT speech-activity decision + decision-directed updates, replacing unreliable noise-variance estimation (Kim & Kim 2014) | 2026-08-28 |
 | [[concepts/target-to-non-target-directional-signal-ratio\|Target-to-Non-target Directional Signal Ratio (TNR)]] | DSB/BM transfer-function power ratio of time-aligned dual mics, closed form cot²(Δψ̃/2); spatial-cue analogue of the SNR | 2026-08-28 |
 | [[concepts/phase-error-based-filter\|Phase-Error-Based Filter (PEF)]] | Dual-mic soft-masking gain driven by phase-difference error; approximates TNR as 1/(Δψ)² — effective at low SNR, distorts target speech at high SNR | 2026-08-28 |
+| [[concepts/framewise-wavegan\|Framewise WaveGAN]] | GAN vocoder generating speech frame-by-frame at the acoustic-feature rate (1.2 GFLOPS) | 2026-08-31 |
+| [[concepts/framewise-convolution\|Framewise Convolution]] | Convolution whose kernel elements are frames rather than samples, built on fully-connected layers | 2026-08-31 |
 

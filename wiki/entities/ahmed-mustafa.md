@@ -1,9 +1,10 @@
 ---
 type: entity
 created: 2026-08-14
-updated: 2026-08-30
+updated: 2026-08-31
 sources:
   - raw/papers/valin-2024-fargan/full-text.md
+  - raw/papers/mustafa-2023-framewise-wavegan/full-text.md
 tags:
   - researcher
   - speech-enhancement
@@ -23,3 +24,4 @@ tags:
 - Co-authored "DRED: Deep REDundancy Coding of Speech Using a Rate-Distortion-Optimized Variational Autoencoder" (IEEE J. Sel. Top. Signal Process. 2024) — with Valin, Büthe, Klingbeil
 - Co-authored "NoLACE: Improving Low-Complexity Speech Codec Enhancement Through Adaptive Temporal Shaping" (2023) — with Büthe, Valin, Helwani, Goodwin — neural Opus codec enhancement
 - Co-authored "Very Low Complexity Speech Synthesis Using Framewise Autoregressive GAN (FARGAN) with Pitch Prediction" (IEEE Signal Processing Letters 2024) — with Valin & Büthe; lead author of its Framewise WaveGAN (ICASSP 2023) predecessor, whose framewise generation and spectral pre-training FARGAN builds on — [[sources/valin-2024-fargan|Valin et al. 2024]]
+- Lead author of "Framewise WaveGAN: High Speed Adversarial Vocoder in Time Domain with Very Low Computational Complexity" (ICASSP 2023, pp. 5596–5600) — 1.2-GFLOPS GAN vocoder generating time-domain speech in 10-ms frames at the acoustic-feature rate, significantly outperforming LPCNet at equal complexity; direct predecessor of FARGAN — [[sources/mustafa-2023-framewise-wavegan|Mustafa et al. 2023]]

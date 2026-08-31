@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-08-14
-updated: 2026-08-30
+updated: 2026-08-31
 sources:
   - raw/papers/valin-2022-real-time-plc/full-text.md
   - raw/papers/valin-2018-lpcnet/full-text.md
   - raw/papers/valin-2024-fargan/full-text.md
+  - raw/papers/mustafa-2023-framewise-wavegan/full-text.md
 tags:
   - neural-vocoder
   - speech-synthesis
@@ -59,6 +60,10 @@ The original model totals **≈2.8 GFLOPS** ($N_A=384$ sparse units at 10% densi
 
 LPCNet also dominates the complexity of the Valin 2022 PLC system; the feature-prediction RNN contributes less than 20% of the total. On an Intel i7-10810U laptop CPU, steady-state (known frame $K$ or unknown frame $U$) processing of a 10-ms frame takes 1.34–1.38 ms, i.e. 13–14% of one CPU core.
 
+## Competitor: Framewise WaveGAN
+
+[[concepts/framewise-wavegan|Framewise WaveGAN]] ([[sources/mustafa-2023-framewise-wavegan|Mustafa et al. 2023]]) uses LPCNet's exact acoustic features (18 BFCCs + pitch period + pitch correlation) as conditioning for a GAN vocoder that generates whole 10-ms frames per step. In the FWGAN paper's own P.808 evaluation, the 1.2-GFLOPS sparse FWGAN achieved significantly higher MOS than the End-to-End LPCNet at equal complexity, and slightly (statistically significantly) outperformed LPCNet at 3 GFLOPS — with clearly better pitch consistency (PMAE 5.06 vs. 6.10; VDE 0.0163 vs. 0.0177 at 1.2 GFLOPS). This established that adversarial framewise generation beats autoregressive density estimation per FLOP, while keeping LPCNet's feature representation as the interface.
+
 ## Successor: FARGAN
 
 [[concepts/fargan|FARGAN]] ([[sources/valin-2024-fargan|Valin, Mustafa & Büthe 2024]]) keeps LPCNet's 20-dimensional Bark-cepstral feature set (18 BFCCs + pitch period, with a voicing indicator in place of the pitch correlation) but replaces essentially everything else: the all-pole **LPC filter is dropped**, short-term linear prediction giving way to [[concepts/pitch-prediction|long-term pitch prediction]] as an explicit second autoregressive feedback, and the density-estimation softmax training gives way to adversarial training with no [[concepts/exposure-bias|teacher forcing]]. The result is 600 MFLOPS versus LPCNet's ≈2.8 GFLOPS with significantly higher PESQ/P.808 quality. The paper also reports that earlier attempts to add direct pitch prediction to LPCNet failed — attributed to teacher forcing, since pitch prediction is acutely sensitive to the ground-truth/synthesized history mismatch. FARGAN replaced LPCNet as the DRED redundancy vocoder in Opus 1.5, cutting synthesis complexity 5×.
@@ -81,6 +86,7 @@ LPCNet generates speech samples; PercepNet filters an existing noisy/echoed sign
 - [[concepts/packet-loss-concealment|Packet Loss Concealment]] — primary application of LPCNet in Valin 2022
 - [[concepts/percepnet|PercepNet]] — sibling Valin-lab hybrid system for speech enhancement / AEC
 - [[concepts/fargan|FARGAN]] — successor vocoder: same features, pitch prediction instead of LPC, adversarial training
+- [[concepts/framewise-wavegan|Framewise WaveGAN]] — GAN competitor on the same features that beat LPCNet per FLOP
 - [[concepts/pitch-prediction|Pitch Prediction]] — the long-term feedback that replaced LPCNet's short-term predictor
 - [[concepts/exposure-bias|Teacher Forcing and Exposure Bias]] — the structural training limitation of LPCNet-class vocoders
 - [[concepts/bark-scale-spectral-features|Bark-Scale Spectral Features]] — LPCNet's 18 BFCC inputs
@@ -91,3 +97,4 @@ LPCNet generates speech samples; PercepNet filters an existing noisy/echoed sign
 
 - [[sources/valin-2018-lpcnet|Valin & Skoglund 2018: LPCNet]] — the original paper: architecture, efficiency techniques, complexity analysis, and MUSHRA evaluation
 - [[sources/valin-2022-real-time-plc|Valin et al. 2022: Real-Time Packet Loss Concealment With Mixed Generative and Predictive Model]] — uses the improved low-complexity LPCNet variant with causal features
+- [[sources/mustafa-2023-framewise-wavegan|Mustafa et al. 2023: Framewise WaveGAN]] — GAN-vocoder evaluation against End-to-End LPCNet (P.808, PMAE/VDE) on the same 18-BFCC features

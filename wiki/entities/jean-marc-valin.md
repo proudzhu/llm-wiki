@@ -1,8 +1,9 @@
 ---
 type: entity
 created: 2026-07-17
-updated: 2026-08-30
+updated: 2026-08-31
 sources:
+  - raw/papers/mustafa-2023-framewise-wavegan/full-text.md
   - raw/papers/valin-2021-percepnet-joint-echo-control/full-text.md
   - raw/papers/valin-2022-real-time-plc/full-text.md
   - raw/papers/valin-2018-lpcnet/full-text.md
@@ -29,3 +30,4 @@ tags:
 - Co-authored "A Lightweight and Robust Method for Blind Wideband-to-Fullband Extension of Speech" (WASPAA 2025) — a hybrid DSP/DNN blind BWE model (~370 K params, ~140 MFLOPS) that, paired with Opus 1.5 at 9 kb/s, statistically matches EVS at 9.6 kb/s and Opus 1.4 at 18 kb/s — [[sources/buthe-2025-blind-wideband-to-fullband-extension|Büthe & Valin 2025]]
 - Lead author of "Real-Time Packet Loss Concealment With Mixed Generative and Predictive Model" (INTERSPEECH 2022, pp. 570–574) — hybrid LPCNet + predictive RNN PLC, 2nd place Interspeech 2022 Audio Deep PLC Challenge (1st in WAcc); first neural PLC integrated into the Opus speech codec (replacing SILK PLC) — [[sources/valin-2022-real-time-plc|Valin et al. 2022]]
 - Lead author of "Very Low Complexity Speech Synthesis Using Framewise Autoregressive GAN (FARGAN) with Pitch Prediction" (IEEE Signal Processing Letters 2024) — 600-MFLOPS GAN vocoder with pitch-prediction autoregression, statistically tied with CARGAN and HiFi-GAN v1 at 64–110× lower complexity; replaced LPCNet as the DRED vocoder in Opus 1.5 — [[sources/valin-2024-fargan|Valin et al. 2024]]
+- Co-authored "Framewise WaveGAN: High Speed Adversarial Vocoder in Time Domain with Very Low Computational Complexity" (ICASSP 2023) — the 1.2-GFLOPS framewise GAN vocoder whose framewise generation and two-stage spectral pre-training/adversarial recipe FARGAN builds on — [[sources/mustafa-2023-framewise-wavegan|Mustafa et al. 2023]]

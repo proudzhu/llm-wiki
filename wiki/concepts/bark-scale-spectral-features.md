@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-07-17
-updated: 2026-08-30
+updated: 2026-08-31
 sources:
   - raw/papers/valin-2018-lpcnet/full-text.md
+  - raw/papers/mustafa-2023-framewise-wavegan/full-text.md
   - raw/papers/li-2025-echofree-neural-aec/full-text.md
   - raw/papers/seidel-2024-bark-scale-nn-residual-suppression/full-text.md
   - raw/papers/zheng-2023-survey-frequency-domain-speech-enhancement/full-text.md
@@ -58,6 +59,8 @@ In [[sources/li-2025-echofree-neural-aec\|EchoFree]] the 112-dim Bark feature ve
 
 [[concepts/fargan|FARGAN]] ([[sources/valin-2024-fargan|Valin et al. 2024]]) inherits this exact 18-BFCC feature vector (with a voicing indicator replacing the pitch correlation), demonstrating that the representation outlives the architecture: it conditions a GAN-based subframe synthesizer that no longer performs any LPC analysis at all — the Bark cepstrum is purely a conditioning signal there.
 
+[[concepts/framewise-wavegan|Framewise WaveGAN]] ([[sources/mustafa-2023-framewise-wavegan|Mustafa et al. 2023]]) is the middle link in this lineage: it conditions on the identical 18-BFCC + pitch period + pitch correlation vector, and even derives its AMR-WB perceptual weighting filter's LPC coefficients from the BFCCs — while generating whole 10-ms frames adversarially.
+
 ## Comparison with Other Perceptual Scales
 
 | Scale | Formula (Hz → scale) | Bands | Application |
@@ -93,3 +96,4 @@ The Bark scale's relationship to auditory filter banks and cochlear mapping is s
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys Bark/ERB-band perceptual features (Valin 2018 BFCCs, Valin et al. 2020 ERB-band features) as the dominant strategy for reducing full-band input feature dimensionality
 - [[sources/valin-2022-real-time-plc|Valin et al. 2022: Real-Time PLC]] — uses 18 BFCCs (LPCNet features) plus pitch period/correlation as conditioning for the autoregressive vocoder
 - [[sources/valin-2024-fargan|Valin, Mustafa & Büthe 2024: FARGAN]] — same 18-BFCC features (voicing indicator in place of pitch correlation) conditioning a GAN vocoder with no LPC analysis
+- [[sources/mustafa-2023-framewise-wavegan|Mustafa et al. 2023: Framewise WaveGAN]] — same 18-BFCC + pitch conditioning for a framewise GAN vocoder; BFCCs also feed its perceptual weighting filter

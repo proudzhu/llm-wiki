@@ -4796,3 +4796,22 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
 - **Figures**: 3 SVGs manually downloaded from arXiv HTML (`<object>` embeds are not auto-extracted); subframe-network layer labels recovered from per-glyph SVG text (Conv 2×1 → GRU1 → GRU2 → GRU3 → FC → FC → gain)
 
 ---
+---
+
+## [2026-09-01] ingest | Framewise WaveGAN (Mustafa et al. 2023)
+
+- **Source**: `raw/papers/mustafa-2023-framewise-wavegan/full-text.md` (Zotero: 26IHRUNV; arXiv 2212.04532)
+- **Authors**: Ahmed Mustafa, Jean-Marc Valin, Jan Büthe, Paris Smaragdis, Mike Goodwin
+- **Published**: Proc. IEEE ICASSP 2023, Rhodes Island, Greece, pp. 5596–5600
+- **DOI**: 10.48550/arXiv.2212.04532
+- **Summary**: Framewise WaveGAN (FWGAN), a 1.2-GFLOPS GAN vocoder generating 16 kHz time-domain speech in 10-ms frames at the acoustic-feature rate (GRUs + framewise-convolution FC stack, no upsampling layers); significantly outperforms End-to-End LPCNet at equal complexity in P.808 with better pitch consistency; direct predecessor of FARGAN. Figures 1–2 fetched as SVG from arXiv HTML.
+- **Pages created**: `wiki/sources/mustafa-2023-framewise-wavegan.md`, `wiki/entities/mike-goodwin.md`, `wiki/concepts/framewise-wavegan.md`, `wiki/concepts/framewise-convolution.md`
+- **Pages updated**:
+  - `wiki/entities/ahmed-mustafa.md`, `wiki/entities/jean-marc-valin.md`, `wiki/entities/jan-buthe.md`, `wiki/entities/paris-smaragdis.md` — added source + paper bullet
+  - `wiki/concepts/lpcnet.md` — new "Competitor: Framewise WaveGAN" section + cross-refs
+  - `wiki/concepts/fargan.md` — FWGAN predecessor lineage now wikilinked
+  - `wiki/concepts/frequency-domain-loss.md` — FWGAN as earliest GAN-vocoder instance (sqrt-compressed six-resolution loss; time-domain discriminators failed)
+  - `wiki/concepts/structured-sparsity.md` — FWGAN per-matrix-type densities row + prose
+  - `wiki/concepts/bark-scale-spectral-features.md` — FWGAN as middle link in the 18-BFCC vocoder lineage
+  - `wiki/synthesis/low-complexity-neural-vocoders.md` — FWGAN frontier row enriched with own-quality evidence; new Insight 6 (quality does not scale with generator complexity); gap bullet resolved
+  - `wiki/index.md`, `wiki/{sources,entities,concepts}/index.md` — 4 new entries; statistics recounted (total 1207)

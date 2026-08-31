@@ -527,4 +527,5 @@
 | [[entities/jan-skoglund\|Jan Skoglund]] | Google researcher; neural speech/audio coding, low-bitrate neural vocoders; co-author of LPCNet | 2026-08-30 |
 | [[entities/seon-man-kim\|Seon Man Kim]] | ISVR Southampton / GIST — dual-microphone speech enhancement, DOA-based SNR estimation | 2026-08-28 |
 | [[entities/hong-kook-kim\|Hong Kook Kim]] | GIST professor — speech recognition, speech/audio source separation, embedded speech processing | 2026-08-28 |
+| [[entities/mike-goodwin\|Mike Goodwin]] | AWS researcher; audio signal processing and ML for audio; co-author of Framewise WaveGAN | 2026-08-31 |
 

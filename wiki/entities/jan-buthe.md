@@ -1,9 +1,10 @@
 ---
 type: entity
 created: 2026-08-14
-updated: 2026-08-30
+updated: 2026-08-31
 sources:
   - raw/papers/valin-2024-fargan/full-text.md
+  - raw/papers/mustafa-2023-framewise-wavegan/full-text.md
 tags:
   - researcher
   - speech-coding
@@ -25,3 +26,4 @@ tags:
 - Co-author of **NoLACE** (ICASSP 2024) — improving low-complexity speech codec enhancement through adaptive temporal shaping (AdaShape); its frequency-domain discriminator design is adapted in BBWENet
 - Co-author of noise-robust DSP-assisted neural pitch estimation (ICASSP 2024, with Subramani, Valin, Smaragdis & Goodwin) — complex phase-difference features that proved sufficient for high-accuracy pitch estimation, reused as BBWENet input features
 - Co-authored "Very Low Complexity Speech Synthesis Using Framewise Autoregressive GAN (FARGAN) with Pitch Prediction" (IEEE Signal Processing Letters 2024) — 600-MFLOPS pitch-predictive GAN vocoder; its STFT discriminator bank reuses the frequency-stride and positional-embedding modifications he introduced with NoLACE — [[sources/valin-2024-fargan|Valin et al. 2024]]
+- Co-authored "Framewise WaveGAN: High Speed Adversarial Vocoder in Time Domain with Very Low Computational Complexity" (ICASSP 2023) — 1.2-GFLOPS framewise GAN vocoder, direct predecessor of FARGAN — [[sources/mustafa-2023-framewise-wavegan|Mustafa et al. 2023]]

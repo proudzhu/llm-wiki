@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-07-17
-updated: 2026-08-30
+updated: 2026-08-31
 sources:
   - raw/papers/valin-2021-percepnet-joint-echo-control/full-text.md
   - raw/papers/valin-2018-lpcnet/full-text.md
+  - raw/papers/mustafa-2023-framewise-wavegan/full-text.md
 tags:
   - deep-learning
   - model-compression
@@ -47,6 +48,9 @@ The original [[concepts/lpcnet|LPCNet]] vocoder (Valin & Skoglund 2018) applies 
 |--------|------------|--------:|-------|
 | [[concepts/percepnet\|PercepNet]] AEC (2021) | 16×4 | 10–50% per gate | Unequal per-gate densities (see above) |
 | [[concepts/lpcnet\|LPCNet]] vocoder (2018) | 16×1 (+ diagonal) | 10% | All diagonal terms retained |
+| [[concepts/framewise-wavegan\|Framewise WaveGAN]] vocoder (2023) | per-matrix-type | GRUs 0.6, FC 0.65 | Last three FC layers kept dense; 7.8M → 5.9M active params (1.5 → 1.2 GFLOPS) |
+
+[[concepts/framewise-wavegan|Framewise WaveGAN]] ([[sources/mustafa-2023-framewise-wavegan|Mustafa et al. 2023]]) sparsifies "as done in WaveRNN and LPCNet" but selects density **per matrix type** rather than a single global value: 0.6 for all GRUs and 0.65 for all fully-connected layers except the last three, which are kept dense (the output layers that shape the final signal). Because its framewise-convolution layers are implemented as single fully-connected networks (see [[concepts/framewise-convolution|framewise convolution]]), the same FC sparsification covers the entire generator.
 
 Training starts from **dense matrices** and progressively forces the lowest-magnitude blocks to zero until the target sparsity is reached. LPCNet additionally keeps **all diagonal terms** explicitly: the diagonal is the most likely place for non-zero weights, and although diagonal elements do not align with the 16×1 blocks, they reduce to an element-wise multiply with the vector operand — cheap to vectorize — avoiding the waste of an entire block on a single diagonal element. With $N_A = 384$ units at 10% density, the sparse GRU carries the same non-zero weight count as a dense 122-unit GRU (the paper also evaluates 192 and 640 units, dense-equivalent 61 and 203).
 
@@ -55,9 +59,12 @@ Training starts from **dense matrices** and progressively forces the lowest-magn
 - [[concepts/percepnet|PercepNet]]
 - [[concepts/lpcnet|LPCNet]]
 - [[concepts/wavernn|WaveRNN]] — introduced the 4×4 / 16×1 block shapes LPCNet draws from
+- [[concepts/framewise-wavegan|Framewise WaveGAN]] — per-matrix-type densities (GRU 0.6, FC 0.65)
+- [[concepts/framewise-convolution|Framewise Convolution]] — single-FC layers designed to be sparsification-friendly
 - [[concepts/speech-enhancement|Speech Enhancement]]
 
 ## Related Sources
 
 - [[sources/valin-2021-percepnet-joint-echo-control|Valin et al. 2021: Joint Neural Echo Control and Speech Enhancement Based On PercepNet]]
 - [[sources/valin-2018-lpcnet|Valin & Skoglund 2018: LPCNet]] — 16×1 block-sparse $\mathrm{GRU_{A}}$ with retained diagonal, dense-start progressive pruning
+- [[sources/mustafa-2023-framewise-wavegan|Mustafa et al. 2023: Framewise WaveGAN]] — per-matrix-type density selection (GRU 0.6, FC 0.65, last three FC dense) for a framewise GAN vocoder

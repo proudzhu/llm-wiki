@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-08-30
+updated: 2026-08-31
 sources:
   - raw/papers/valin-2024-fargan/full-text.md
+  - raw/papers/mustafa-2023-framewise-wavegan/full-text.md
 tags:
   - loss-function
   - deep-learning
@@ -53,6 +54,8 @@ $$
 
 and the same spectral loss is retained alongside the adversarial terms during fine-tuning. Notably, FARGAN's discriminators are also frequency-domain (log-magnitude STFT, UnivNet-style): the authors found time-domain multi-scale/multi-period discriminators *degrade* quality on block-wise generators, because they win by flagging temporally irregular but perceptually irrelevant detail — small temporal irregularities are easier to detect in a raw waveform than in a log-magnitude spectrogram.
 
+This recipe traces directly to FARGAN's predecessor [[concepts/framewise-wavegan|Framewise WaveGAN]] ([[sources/mustafa-2023-framewise-wavegan|Mustafa et al. 2023]]), the earliest instance in the wiki: six power-of-two FFT sizes 64–2048 at 75% overlap with a $sqrt$ magnitude non-linearity (chosen over $log$ for better early convergence) for spectral pre-training, followed by adversarial training with six UnivNet-style spectrogram discriminators under a least-squares GAN objective. FWGAN's authors report that time-domain discriminators (MelGAN, StyleMelGAN, HiFi-GAN styles) *failed to achieve stable training* on the framewise generator at all — the stronger form of the finding FARGAN later refined.
+
 ## Why Frequency Loss Outperforms Time-Domain Loss
 
 1. **Structural clarity**: STFT magnitude has clearer temporal-spectral structure than raw waveform oscillations
@@ -73,9 +76,11 @@ and the same spectral loss is retained alongside the adversarial terms during fi
 - [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
 - [[concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
 - [[concepts/fargan|FARGAN]] — six-resolution γ=0.5 spectral pre-training loss plus STFT discriminators
+- [[concepts/framewise-wavegan|Framewise WaveGAN]] — the earlier instance: six-resolution sqrt-compressed spectral pre-training plus spectrogram discriminators
 
 ## Related Sources
 
 - [[sources/pandey-2019-cnn-speech-enhancement-time-domain|Pandey & Wang 2019: CNN-Based Speech Enhancement in the Time Domain]]
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys frequency-domain loss functions (Mag-MSE, RI-MSE, RI+Mag combined, log-spectral, power-law-compressed) and the magnitude-phase "compensation effect" in RI-MSE
 - [[sources/valin-2024-fargan|Valin, Mustafa & Büthe 2024: FARGAN]] — GAN-vocoder instance: six-resolution power-law-compressed magnitude loss and frequency-domain discriminators
+- [[sources/mustafa-2023-framewise-wavegan|Mustafa et al. 2023: Framewise WaveGAN]] — earliest GAN-vocoder instance: sqrt-compressed multi-resolution loss; spectrogram discriminators adopted after time-domain discriminators failed to train stably

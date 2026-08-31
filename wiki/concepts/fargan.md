@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-30
-updated: 2026-08-30
+updated: 2026-08-31
 sources:
   - raw/papers/valin-2024-fargan/full-text.md
+  - raw/papers/mustafa-2023-framewise-wavegan/full-text.md
 tags:
   - neural-vocoder
   - speech-synthesis
@@ -44,13 +45,14 @@ Trained speaker-independently on 205 hours (900+ speakers, 34 languages), FARGAN
 
 ## Position in the Vocoder Landscape
 
-FARGAN descends from two lines: CARGAN's argument that autoregressive models have an inductive bias for pitch and phase (but its 512-sample chunks still need teacher forcing for the AR part), and FWGAN's framewise adversarial generation (10-ms frames, 1.2 GFLOPS, no explicit pitch structure). FARGAN keeps LPCNet's acoustic features but *drops the LPC filter*, replacing short-term linear prediction with explicit long-term pitch prediction — a GAN rather than a density model, so no softmax sampling either. It replaced LPCNet as the vocoder of the DRED redundancy scheme in **Opus 1.5**, cutting DRED synthesis complexity 5×. Unlike LPCNet it does not generalize to music, since the pitch-prediction lookback presumes a single periodic source.
+FARGAN descends from two lines: CARGAN's argument that autoregressive models have an inductive bias for pitch and phase (but its 512-sample chunks still need teacher forcing for the AR part), and [[concepts/framewise-wavegan|FWGAN]]'s framewise adversarial generation (10-ms frames, 1.2 GFLOPS, no explicit pitch structure — the two-stage spectral pre-training + spectrogram-discriminator recipe and the time-domain-discriminator failure finding both originate there; see [[sources/mustafa-2023-framewise-wavegan|Mustafa et al. 2023]]). FARGAN keeps LPCNet's acoustic features but *drops the LPC filter*, replacing short-term linear prediction with explicit long-term pitch prediction — a GAN rather than a density model, so no softmax sampling either. It replaced LPCNet as the vocoder of the DRED redundancy scheme in **Opus 1.5**, cutting DRED synthesis complexity 5×. Unlike LPCNet it does not generalize to music, since the pitch-prediction lookback presumes a single periodic source.
 
 ## Related Concepts
 
 - [[concepts/pitch-prediction|Pitch Prediction]] — the long-term prediction feedback at the core of the design
 - [[concepts/exposure-bias|Teacher Forcing and Exposure Bias]] — the training pathology FARGAN's unrolled framewise training eliminates
 - [[concepts/lpcnet|LPCNet]] — predecessor; same features, different prediction structure, density-estimation training
+- [[concepts/framewise-wavegan|Framewise WaveGAN]] — direct predecessor: framewise adversarial generation without explicit pitch structure
 - [[concepts/wavernn|WaveRNN]] — the AR density-estimation lineage both depart from
 - [[concepts/frequency-domain-loss|Frequency Domain Loss]] — the spectral pre-training loss and STFT discriminator design
 - [[concepts/bark-scale-spectral-features|Bark-Scale Spectral Features]] — the 18-BFCC input representation
@@ -58,3 +60,4 @@ FARGAN descends from two lines: CARGAN's argument that autoregressive models hav
 ## Related Sources
 
 - [[sources/valin-2024-fargan|Valin, Mustafa & Büthe 2024: FARGAN]] — the original paper
+- [[sources/mustafa-2023-framewise-wavegan|Mustafa et al. 2023: Framewise WaveGAN]] — the predecessor whose framewise GAN recipe FARGAN extends
