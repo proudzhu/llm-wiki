@@ -43,8 +43,10 @@ Fast-ULCNet (plain FastGRNN) suffers from [[concepts/fastgrnn|FastGRNN]] state d
 - [[concepts/channel-wise-feature-reorientation|Channel-Wise Feature Reorientation]]
 - [[concepts/power-law-compression|Power-Law Compression]]
 - [[concepts/complex-ratio-mask|Complex Ratio Mask]]
+- [[concepts/munet|μNet]]
 - [[concepts/speech-enhancement|Speech Enhancement]]
 
 ## Related Sources
 
 - [[sources/larraza-2026-fast-ulcnet-speech-enhancement|Larraza & de Koeijer 2026: Fast-ULCNet]]
+- [[sources/shetu-2026-munet|Shetu et al. 2026: μNet]] — parallel ULCNet descendant targeting integer DSPs / neural accelerators instead of floating-point ARM; notably, μNet reverts ULCNet's depthwise separable convolutions to standard convolutions for DSP memory-access efficiency, the opposite trade-off direction

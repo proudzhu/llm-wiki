@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-24
-updated: 2026-07-25
+updated: 2026-08-31
 tags:
   - neural-network
   - speech-enhancement
@@ -92,10 +92,12 @@ Huang et al. (2026) reuse GTCRN not as a standalone enhancer but as a **lightwei
 - [[concepts/distortion-aware-training|Distortion-aware Training]]
 - [[concepts/sef-pnet|SEF-PNet]]
 - [[concepts/cie-mdptnet|CIE-mDPTNet]]
+- [[concepts/munet|μNet]]
 
 ## Related Sources
 
 - [[sources/rong-2024-gtcrn-speech-enhancement-ultralow|Rong et al. 2024: GTCRN — A Speech Enhancement Model Requiring Ultralow Computational Resources]]
+- [[sources/shetu-2026-munet|Shetu et al. 2026: μNet]] — uses GTCRN as primary baseline
 - [[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement|Yang et al. 2026: CoFi-Lite — Pushing the Limits of Ultra-Lightweight Speech Enhancement]]
 - [[sources/schroter-2022-deepfilternet|Schröter et al. 2022: DeepFilterNet]]
 - [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator|Zhao et al. 2026: HALO — Half-frame-rate Adaptive Learnable Operator for Lightweight STFT-based Speech Enhancement]]

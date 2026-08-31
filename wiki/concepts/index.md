@@ -472,4 +472,6 @@
 | [[concepts/phase-error-based-filter\|Phase-Error-Based Filter (PEF)]] | Dual-mic soft-masking gain driven by phase-difference error; approximates TNR as 1/(Δψ)² — effective at low SNR, distorts target speech at high SNR | 2026-08-28 |
 | [[concepts/framewise-wavegan\|Framewise WaveGAN]] | GAN vocoder generating speech frame-by-frame at the acoustic-feature rate (1.2 GFLOPS) | 2026-08-31 |
 | [[concepts/framewise-convolution\|Framewise Convolution]] | Convolution whose kernel elements are frames rather than samples, built on fully-connected layers | 2026-08-31 |
+| [[concepts/munet\|μNet]] | Ultra-low-memory SE for embedded DSPs (Shetu et al. 2026): 46K params, 28 MMACs, 90 KB static, int8, 4–16 ms latency; hybrid feature reorientation + shared subband GRU; deployed on Cadence Tensilica HiFi 4 | 2026-08-31 |
+| [[concepts/noise-attenuation-control\|Noise Attenuation Control]] | Post-processing knob trading noise suppression against speech quality at inference time; empirically equivalent to power-law compression of the estimated mask (Shetu et al. 2026) | 2026-08-31 |
 

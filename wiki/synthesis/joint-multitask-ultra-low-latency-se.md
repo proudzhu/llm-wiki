@@ -15,6 +15,7 @@ sources:
   - raw/papers/castelli-2025-embedded-joint-aec-ns/full-text.md
   - raw/papers/li-2025-echofree-neural-aec/full-text.md
   - raw/papers/larraza-2026-fast-ulcnet-speech-enhancement/full-text.md
+  - raw/papers/shetu-2026-munet/full-text.md
 tags:
   - speech-enhancement
   - multi-task
@@ -313,6 +314,7 @@ For a practitioner choosing a multi-task SE architecture under a latency budget 
 - [[concepts/gtcrn\|GTCRN]]
 - [[concepts/td-speakerbeam\|TD-SpeakerBeam]]
 - [[concepts/fast-ulcnet\|Fast-ULCNet]]
+- [[concepts/munet\|μNet]]
 - [[concepts/fastgrnn\|FastGRNN]]
 - [[concepts/comfi-fastgrnn\|Comfi-FastGRNN]]
 - [[concepts/dpt-fsnet\|DPT-FSNet]]

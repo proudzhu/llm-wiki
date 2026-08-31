@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-04
-updated: 2026-08-19
+updated: 2026-08-31
 sources:
   - raw/papers/tan-2018-convolutional-recurrent-network-speech-enhancement/full-text.md
   - raw/papers/pandey-2019-cnn-speech-enhancement-time-domain/full-text.md
@@ -60,6 +60,7 @@ The thesis here is that the field's progress is **not a single replacement story
 | [[sources/liu-2026-array-invariant-speech-enhancement\|Liu et al. 2026 (Geo-DConv)]] | 2026 | Multi-channel | Geometry-conditioned dynamic conv → array-invariant SE backbones |
 | [[sources/apostolidis-2026-listen-first-output-based-multi-microphone\|Apostolidis 2026]] | 2026 | Multi-channel | Output-based SE: select MPDR output by Glimpse Proportion, not input features |
 | [[sources/ostergaard-2026-own-voice-cancellation\|Østergaard et al. 2026 (OVC)]] | 2026 | Conditioning | Inverts PSE: remove the enrolled speaker; Mamba-MinGRU at 2 ms |
+| [[sources/shetu-2026-munet\|Shetu et al. 2026 (μNet)]] | 2026 | Efficiency | 46K params / 90 KB static / int8 on HiFi 4 DSP; 4–16 ms latency; [[concepts/noise-attenuation-control\|noise attenuation control]] |
 
 ## Insight 1: The Training Target Evolved from Pointwise Masks to Neighborhood Filters
 
@@ -138,6 +139,8 @@ The **inplace-CRN family** is its own lineage: [[concepts/igcrn\|IGCRN]] (2021, 
 The 2026 efficiency frontier is **CoFi-Lite** ([[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement\|Yang 2026]]): it reuses GTCRN's ERB/SFE/TRA machinery but decouples spectral modeling into parallel coarse (full-band envelope, ×16 compression) and fine (low-frequency detail below 2 kHz, ×2 compression) paths bridged by Cross-Path Fusion. It **outperforms GTCRN** (PESQ 2.16 vs 2.07 on DNS3) at 40% of its MACs (12.87M vs 31.97M MACs/s) — trading a higher parameter count (83K vs 24K) for drastically lower compute. The same lab lineage (GTCRN → CoFi-Lite → AdaptCRN) shows the techniques compose.
 
 A second life for these ultralight models: [[sources/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction\|Huang 2026 (LGTSE)]] reuses GTCRN not as a standalone enhancer but as a **pluggable denoiser front-end** for target speech extraction, adding negligible overhead (6.08M → 6.13M params) while delivering +0.89 dB SI-SDR.
+
+The efficiency frontier also has a **deployment axis** that params/MACs tables hide: [[concepts/munet\|μNet (Shetu 2026)]] argues that once a model must run int8-quantized on a consumer DSP (Cadence Tensilica HiFi 4), the binding constraints become static memory (μNet: 90 KB) and memory-access patterns, not MAC counts. μNet *reverts* ULCNet's depthwise separable convolutions to standard convolutions precisely because fragmented memory access makes "cheaper" convolutions slower in wall-clock DSP cycles — the inverse of the DSConv2D choice in the lightS4 line, showing that the right convolution type is target-hardware-dependent, not a universal constant.
 
 ## Insight 6: Multi-Channel SE Went "Estimate SCM → Beamform" → End-to-End → Array-Invariant
 

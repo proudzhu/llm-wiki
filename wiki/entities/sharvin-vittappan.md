@@ -1,26 +1,23 @@
 ---
 type: entity
-created: 2026-07-16
+created: 2026-08-31
 updated: 2026-08-31
 tags:
   - researcher
   - speech-enhancement
-  - acoustic-echo-reduction
   - embedded-dsp
 ---
 
-# Jose Miguel Martinez Aponte
+# Sharvin Vittappan
 
 **Affiliation**: Fraunhofer IIS, Erlangen, Germany
 **Role**: Researcher
-**Research Focus**: Acoustic signal processing, speech enhancement, embedded DSP deployment.
+**Research Focus**: Speech enhancement, embedded DSP deployment.
 
 ## Key Contributions
 
-- Hybrid low-complexity joint acoustic echo and noise reduction (IWAENC 2024)
 - μNet: ultra-low-memory and low-complexity speech enhancement for embedded DSPs (arXiv 2026)
 
 ## Related Sources
 
-- [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]]
 - [[sources/shetu-2026-munet|Shetu et al. 2026: μNet]]

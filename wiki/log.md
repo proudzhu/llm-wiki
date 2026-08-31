@@ -4796,6 +4796,35 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
 - **Figures**: 3 SVGs manually downloaded from arXiv HTML (`<object>` embeds are not auto-extracted); subframe-network layer labels recovered from per-glyph SVG text (Conv 2×1 → GRU1 → GRU2 → GRU3 → FC → FC → gain)
 
 ---
+
+## [2026-08-31] ingest | μNet: ultra-low-memory and low-complexity speech enhancement for embedded digital signal processors (Shetu et al. 2026)
+
+- **Source**: `raw/papers/shetu-2026-munet/full-text.md` (arXiv:2608.21155)
+- **Authors**: Shrishti Saha Shetu, Jose Miguel Martinez Aponte, Nagashree K. S. Rao, Sharvin Vittappan, Oliver Thiergart, Emanuele A. P. Habets
+- **Published**: arXiv 2026
+- **Summary**: μNet — an ultra-low-memory (90 KB static), low-complexity (28 MMACs), low-latency (4–16 ms) end-to-end DNN for speech enhancement on embedded DSPs, fully int8-quantized and running real-time on a Cadence Tensilica HiFi 4 (NXP RT685, 70 MHz). Two-stage backbone with hybrid feature reorientation (C-SubFR + C-SamFR) and a GRU shared across subbands; reverts depthwise separable convolutions to standard convolutions for DSP memory-access efficiency. Beats GTCRN perceptually (MUSHRA 77.78 vs. 74.24); noise attenuation control (NAL control) shown empirically equivalent to power-law compression.
+- **Pages created**:
+  - `wiki/sources/shetu-2026-munet.md`
+  - `wiki/concepts/munet.md`
+  - `wiki/concepts/noise-attenuation-control.md`
+  - `wiki/entities/nagashree-k-s-rao.md`
+  - `wiki/entities/sharvin-vittappan.md`
+- **Pages updated**:
+  - `wiki/entities/shrishti-saha-shetu.md` — μNet contribution bullet + source link
+  - `wiki/entities/jose-miguel-martinez-aponte.md` — μNet contribution bullet + source link
+  - `wiki/entities/oliver-thiergart.md` — μNet contribution bullet + source link
+  - `wiki/entities/emanuele-habets.md` — μNet contribution bullet + source link
+  - `wiki/concepts/ulcnet.md` — μNet's reversion of depthwise separable convolutions + memory-driven redesign
+  - `wiki/concepts/fast-ulcnet.md` — μNet as DSP-deployment alternative to FastGRNN swap
+  - `wiki/concepts/gtcrn.md` — μNet perceptual comparison (MUSHRA/PESQ)
+  - `wiki/concepts/channel-wise-feature-reorientation.md` — μNet's hybrid C-SubFR + C-SamFR combination
+  - `wiki/concepts/power-law-compression.md` — NAL-control equivalence result
+  - `wiki/concepts/complex-ratio-mask.md` — μNet's CRM-based reconstruction with NAL control
+  - `wiki/synthesis/deep-speech-enhancement.md` — deployment axis paragraph in Insight 5 + source row
+  - `wiki/synthesis/computational-efficiency-evolution.md` — seventh Pareto axis (deployment-hardware co-design) + source row
+  - `wiki/synthesis/joint-multitask-ultra-low-latency-se.md` — μNet in model table, Tier-2 asymmetric-STFT discussion (int8 × latency interaction), latency tier table
+- **Indexes updated**: `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md`
+
 ---
 
 ## [2026-09-01] ingest | Framewise WaveGAN (Mustafa et al. 2023)
@@ -4815,3 +4844,5 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
   - `wiki/concepts/bark-scale-spectral-features.md` — FWGAN as middle link in the 18-BFCC vocoder lineage
   - `wiki/synthesis/low-complexity-neural-vocoders.md` — FWGAN frontier row enriched with own-quality evidence; new Insight 6 (quality does not scale with generator complexity); gap bullet resolved
   - `wiki/index.md`, `wiki/{sources,entities,concepts}/index.md` — 4 new entries; statistics recounted (total 1207)
+
+---

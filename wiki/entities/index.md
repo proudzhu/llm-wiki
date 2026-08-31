@@ -324,6 +324,8 @@
 | [[entities/jose-miguel-martinez-aponte\|Jose Miguel Martinez Aponte]] | Researcher at Fraunhofer IIS; acoustic signal processing | 2026-07-16 |
 | [[entities/emanuel-habets\|Emanuel A. P. Habets]] | Professor at Fraunhofer IIS / Intl Audio Labs Erlangen; spatial audio, AEC | 2026-07-16 |
 | [[entities/edwin-mabande\|Edwin Mabande]] | Researcher at Fraunhofer IIS; acoustic echo control, adaptive filtering | 2026-07-16 |
+| [[entities/nagashree-k-s-rao\|Nagashree K. S. Rao]] | Researcher at Fraunhofer IIS; speech enhancement, embedded DSP deployment (μNet) | 2026-08-31 |
+| [[entities/sharvin-vittappan\|Sharvin Vittappan]] | Researcher at Fraunhofer IIS; speech enhancement, embedded DSP deployment (μNet) | 2026-08-31 |
 | [[entities/boyi-kang\|Boyi Kang]] | ASLP@NPU — EchoFree ultra-lightweight neural AEC (2025, equal first author) | 2026-07-17 |
 | [[entities/zihan-zhang\|Zihan Zhang]] | ASLP@NPU — EchoFree ultra-lightweight neural AEC (2025) | 2026-07-17 |
 | [[entities/mingshuai-liu\|Mingshuai Liu]] | ASLP@NPU — EchoFree ultra-lightweight neural AEC (2025) | 2026-07-17 |

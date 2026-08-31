@@ -44,6 +44,12 @@ For the original (single-task NS) ULCNet configuration re-implemented in TensorF
 
 [[sources/larraza-2026-fast-ulcnet-speech-enhancement|Larraza & de Koeijer 2026]] propose [[concepts/fast-ulcnet|Fast-ULCNet]], an extension that replaces ULCNet's GRU layers with [[concepts/fastgrnn|FastGRNN]]-based layers (optionally with the [[concepts/comfi-fastgrnn|Comfi-FastGRNN]] drift-correction variant). The substitution halves the parameter count (0.685M → 0.338M), reduces MACs by ~18%, and improves RTF by ~34% on embedded ARM targets, at matched noise-suppression quality on standard 10 s DNS test signals. The Comfi-FastGRNN variant additionally preserves quality on long (>60 s) streaming sequences where plain FastGRNN suffers from inference-time state drift.
 
+## Extension: μNet
+
+[[sources/shetu-2026-munet|Shetu et al. 2026]] propose [[concepts/munet|μNet]], another descendant of the ULCNet two-stage backbone (magnitude-mask stage + complex ratio mask stage) targeting embedded digital signal processors. μNet keeps the power-law compressed input and channel-wise feature reorientation, but: (i) reverts to standard convolutions instead of depthwise separable ones, since depthwise separable convolutions suffer from fragmented memory access and poor hardware utilization on consumer DSPs; (ii) shares one GRU across subbands and shares a single linear projection across overlapping segments of the latent vector; (iii) supports latencies down to 4 ms via an asymmetric analysis–synthesis window pair and int8 quantization. It requires 46 K parameters, 28 MMACs, and 90 KB static memory — roughly an order of magnitude smaller than ULCNet itself (0.685M parameters), at the cost of reduced enhancement performance (PESQ 1.90–2.27 vs. ULCNet_MS 2.64 on DNS).
+
+While Fast-ULCNet targets floating-point ARM Cortex-A processors, μNet targets integer-only DSPs (Cadence Tensilica HiFi 4/5, ADI SHARC, Qualcomm Hexagon) and neural accelerators, making the two extensions complementary deployment paths for the ULCNet backbone.
+
 ## Related Concepts
 
 - [[concepts/acoustic-echo-cancellation|Acoustic Echo Cancellation]]
@@ -52,6 +58,7 @@ For the original (single-task NS) ULCNet configuration re-implemented in TensorF
 - [[concepts/power-law-compression|Power-Law Compression]]
 - [[concepts/channel-wise-feature-reorientation|Channel-Wise Feature Reorientation]]
 - [[concepts/fast-ulcnet|Fast-ULCNet]]
+- [[concepts/munet|μNet]]
 - [[concepts/fastgrnn|FastGRNN]]
 - [[concepts/comfi-fastgrnn|Comfi-FastGRNN]]
 
@@ -59,3 +66,4 @@ For the original (single-task NS) ULCNet configuration re-implemented in TensorF
 
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]]
 - [[sources/larraza-2026-fast-ulcnet-speech-enhancement|Larraza & de Koeijer 2026: Fast-ULCNet]]
+- [[sources/shetu-2026-munet|Shetu et al. 2026: μNet]]

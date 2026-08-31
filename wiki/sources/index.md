@@ -189,4 +189,5 @@
 | [[sources/valin-2024-fargan\|Valin, Mustafa & Büthe 2024: FARGAN]] | 600-MFLOPS framewise autoregressive GAN vocoder with pitch prediction; tied with CARGAN/HiFi-GAN v1 at 64–110× lower complexity; deployed in Opus 1.5 | 2026-08-30 |
 | [[sources/kim-2014-doa-based-snr-estimation\|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] | Phase difference of time-aligned dual mics → TNR → LRT/DD-driven DOA-based a priori SNR for a Wiener gain; beats SDB/GSC-PW/PEF/ASBM in SDR & PESQ on a 4 cm array (0–20 dB SNR, RT60 ≤ 300 ms) | 2026-08-28 |
 | [[sources/mustafa-2023-framewise-wavegan\|Mustafa et al. 2023: Framewise WaveGAN]] | 1.2-GFLOPS GAN vocoder generating time-domain speech in 10-ms frames; beats LPCNet at equal complexity | 2026-08-31 |
+| [[sources/shetu-2026-munet\|Shetu et al. 2026: μNet — Ultra-Low-Memory and Low-Complexity Speech Enhancement for Embedded DSPs]] | 46K params / 28 MMACs / 90 KB static, int8, 4–16 ms latency on Cadence Tensilica HiFi 4; beats GTCRN perceptually; noise attenuation control ≈ power-law compression | 2026-08-31 |
 

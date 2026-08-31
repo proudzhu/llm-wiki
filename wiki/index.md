@@ -330,6 +330,8 @@
 | [[entities/jose-miguel-martinez-aponte\|Jose Miguel Martinez Aponte]] | Researcher at Fraunhofer IIS; acoustic signal processing | 2026-07-16 |
 | [[entities/emanuel-habets\|Emanuel A. P. Habets]] | Professor at Fraunhofer IIS / Intl Audio Labs Erlangen; spatial audio, AEC | 2026-07-16 |
 | [[entities/edwin-mabande\|Edwin Mabande]] | Researcher at Fraunhofer IIS; acoustic echo control, adaptive filtering | 2026-07-16 |
+| [[entities/nagashree-k-s-rao\|Nagashree K. S. Rao]] | Researcher at Fraunhofer IIS; speech enhancement, embedded DSP deployment (μNet) | 2026-08-31 |
+| [[entities/sharvin-vittappan\|Sharvin Vittappan]] | Researcher at Fraunhofer IIS; speech enhancement, embedded DSP deployment (μNet) | 2026-08-31 |
 | [[entities/boyi-kang\|Boyi Kang]] | ASLP@NPU — EchoFree ultra-lightweight neural AEC (2025, equal first author) | 2026-07-17 |
 | [[entities/zihan-zhang\|Zihan Zhang]] | ASLP@NPU — EchoFree ultra-lightweight neural AEC (2025) | 2026-07-17 |
 | [[entities/mingshuai-liu\|Mingshuai Liu]] | ASLP@NPU — EchoFree ultra-lightweight neural AEC (2025) | 2026-07-17 |
@@ -1011,6 +1013,8 @@
 | [[concepts/phase-error-based-filter\|Phase-Error-Based Filter (PEF)]] | Dual-mic soft-masking gain driven by phase-difference error; approximates TNR as 1/(Δψ)² — effective at low SNR, distorts target speech at high SNR | 2026-08-28 |
 | [[concepts/framewise-wavegan\|Framewise WaveGAN]] | GAN vocoder generating speech frame-by-frame at the acoustic-feature rate (1.2 GFLOPS) | 2026-08-31 |
 | [[concepts/framewise-convolution\|Framewise Convolution]] | Convolution whose kernel elements are frames rather than samples, built on fully-connected layers | 2026-08-31 |
+| [[concepts/munet\|μNet]] | Ultra-low-memory SE for embedded DSPs (Shetu et al. 2026): 46K params, 28 MMACs, 90 KB static, int8, 4–16 ms latency; hybrid feature reorientation + shared subband GRU; deployed on Cadence Tensilica HiFi 4 | 2026-08-31 |
+| [[concepts/noise-attenuation-control\|Noise Attenuation Control]] | Post-processing knob trading noise suppression against speech quality at inference time; empirically equivalent to power-law compression of the estimated mask (Shetu et al. 2026) | 2026-08-31 |
 
 ---
 
@@ -1205,6 +1209,7 @@
 | [[sources/valin-2024-fargan\|Valin, Mustafa & Büthe 2024: FARGAN]] | 600-MFLOPS framewise autoregressive GAN vocoder with pitch prediction; tied with CARGAN/HiFi-GAN v1 at 64–110× lower complexity; deployed in Opus 1.5 | 2026-08-30 |
 | [[sources/kim-2014-doa-based-snr-estimation\|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] | Phase difference of time-aligned dual mics → TNR → LRT/DD-driven DOA-based a priori SNR for a Wiener gain; beats SDB/GSC-PW/PEF/ASBM in SDR & PESQ on a 4 cm array (0–20 dB SNR, RT60 ≤ 300 ms) | 2026-08-28 |
 | [[sources/mustafa-2023-framewise-wavegan\|Mustafa et al. 2023: Framewise WaveGAN]] | 1.2-GFLOPS GAN vocoder generating time-domain speech in 10-ms frames; beats LPCNet at equal complexity | 2026-08-31 |
+| [[sources/shetu-2026-munet\|Shetu et al. 2026: μNet — Ultra-Low-Memory and Low-Complexity Speech Enhancement for Embedded DSPs]] | 46K params / 28 MMACs / 90 KB static, int8, 4–16 ms latency on Cadence Tensilica HiFi 4; beats GTCRN perceptually; noise attenuation control ≈ power-law compression | 2026-08-31 |
 
 ---
 
@@ -1258,10 +1263,10 @@
 
 ## Statistics
 
-- **Total pages**: 1207
-- **Entities**: 524
-- **Concepts**: 468
-- **Sources**: 185
+- **Total pages**: 1212
+- **Entities**: 526
+- **Concepts**: 470
+- **Sources**: 186
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-09-01
