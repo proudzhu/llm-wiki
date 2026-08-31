@@ -18,7 +18,7 @@ tags:
 
 # Shetu, Martinez Aponte, Rao, Vittappan, Thiergart & Habets 2026: μNet — Ultra-Low-Memory and Low-Complexity Speech Enhancement for Embedded DSPs
 
-**Authors**: [[entities/shrishti-saha-shetu|Shrishti Saha Shetu]]¹, [[entities/jose-miguel-martinez-aponte|Jose Miguel Martinez Aponte]]², [[entities/nagashree-k-s-rao|Nagashree K. S. Rao]]², [[entities/sharvin-vittappan|Sharvin Vittappan]]², [[entities/oliver-thiergart|Oliver Thiergart]]¹, [[entities/emanuele-habets|Emanuël A. P. Habets]]¹
+**Authors**: [[entities/shrishti-saha-shetu|Shrishti Saha Shetu]]¹, [[entities/jose-miguel-martinez-aponte|Jose Miguel Martinez Aponte]]², [[entities/nagashree-k-s-rao|Nagashree K. S. Rao]]², [[entities/sharvin-vittappan|Sharvin Vittappan]]², [[entities/oliver-thiergart|Oliver Thiergart]]¹, [[entities/emanuel-habets|Emanuel A. P. Habets]]¹
 
 **Affiliation**: ¹International Audio Laboratories Erlangen, Germany; ²Fraunhofer IIS, Erlangen, Germany
 

@@ -1307,7 +1307,7 @@ aw/papers/wang-2026-directional-sfanc-reverberant/full-text.md\ — extracted fr
   - `wiki/entities/paul-calamia.md` — co-author (Meta Reality Labs)
   - `wiki/entities/andrew-francl.md` — co-author (Meta Reality Labs)
   - `wiki/entities/carl-schissler.md` — co-author (Meta Reality Labs)
-  - `wiki/entities/emanuele-habets.md` — co-author (FAU Erlangen-Nuremberg)
+  - `wiki/entities/emanuel-habets.md` — co-author (FAU Erlangen-Nuremberg)
   - `wiki/concepts/direction-dependent-acoustic-parameters.md` — DDAP concept
   - `wiki/concepts/spherical-harmonic-transform.md` — SHT concept
   - `wiki/concepts/auditory-augmented-reality.md` — AAR concept
@@ -1517,7 +1517,7 @@ aw/papers/wang-2026-directional-sfanc-reverberant/full-text.md\ — extracted fr
   - `wiki/concepts/room-impulse-response.md` — RIR concept
   - `wiki/concepts/joint-nonlinear-filtering.md` — JNF/FT-JNF concept
 - **Pages updated**:
-  - `wiki/entities/emanuele-habets.md` — added NDF+ contribution and source reference
+  - `wiki/entities/emanuel-habets.md` — added NDF+ contribution and source reference
   - `wiki/index.md` — added 3 entities, 9 concepts, 1 source; updated statistics (120→123 entities, 110→119 concepts, 61→62 sources, 314→324 total)
   - `wiki/entities/index.md` — added 3 entity entries
   - `wiki/concepts/index.md` — added 9 concept entries
@@ -3007,7 +3007,7 @@ aw/papers/schroter-2022-deepfilternet/full-text.md — extracted text from Zoter
 ## [2026-07-16] ingest | A Hybrid Approach for Low-Complexity Joint AENR (Shetu 2024)
 
 - **Source**: `raw/papers/shetu-2024-hybrid-low-complexity-aenr/full-text.md` (Zotero: XIPNNJIZ)
-- **Authors**: Shrishti Saha Shetu, Naveen Kumar Desiraju, Jose Miguel Martinez Aponte, Emanuel A. P. Habets, Edwin Mabande
+- **Authors**: Shrishti Saha Shetu, Naveen Kumar Desiraju, Jose Miguel Martinez Aponte, Emanuele A. P. Habets, Edwin Mabande
 - **Published**: IWAENC 2024
 - **DOI**: 10.1109/IWAENC61483.2024.10694288
 - **Summary**: Low-complexity hybrid AENR using Kalman filter + modified ULCNet; 0.69M params, 0.10 GMACs, suitable for embedded devices
@@ -4410,7 +4410,7 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
   - `wiki/concepts/tf-mask-estimation.md`
   - `wiki/concepts/sparsity-based-source-tracking.md`
 - **Pages updated**:
-  - `wiki/entities/emanuele-habets.md` — added thesis supervision to key contributions
+  - `wiki/entities/emanuel-habets.md` — added thesis supervision to key contributions
   - `wiki/concepts/coherent-to-diffuse-power-ratio.md` — added CDR as a priori SAP control (Taseska & Habets 2018, Ch 3) + source link
   - `wiki/concepts/mvdr-beamformer.md` — added informed MVDR section + source link
   - `wiki/concepts/gsc-beamformer.md` — added informed GSC section + related concepts + source link
@@ -4813,7 +4813,7 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
   - `wiki/entities/shrishti-saha-shetu.md` — μNet contribution bullet + source link
   - `wiki/entities/jose-miguel-martinez-aponte.md` — μNet contribution bullet + source link
   - `wiki/entities/oliver-thiergart.md` — μNet contribution bullet + source link
-  - `wiki/entities/emanuele-habets.md` — μNet contribution bullet + source link
+  - `wiki/entities/emanuel-habets.md` — μNet contribution bullet + source link
   - `wiki/concepts/ulcnet.md` — μNet's reversion of depthwise separable convolutions + memory-driven redesign
   - `wiki/concepts/fast-ulcnet.md` — μNet as DSP-deployment alternative to FastGRNN swap
   - `wiki/concepts/gtcrn.md` — μNet perceptual comparison (MUSHRA/PESQ)
@@ -4824,6 +4824,19 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
   - `wiki/synthesis/computational-efficiency-evolution.md` — seventh Pareto axis (deployment-hardware co-design) + source row
   - `wiki/synthesis/joint-multitask-ultra-low-latency-se.md` — μNet in model table, Tier-2 asymmetric-STFT discussion (int8 × latency interaction), latency tier table
 - **Indexes updated**: `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md`
+
+---
+
+## [2026-08-31] merge | 合并重复实体页，规范 slug 定为 emanuel-habets
+
+- **操作**: 合并重复实体页，保留 `wiki/entities/emanuel-habets.md` 作为唯一页面（用户确认的规范名称）。
+- **并入内容**: SLT 2023 混合声学回声消除、TASLP 2008 联合去混响与残余回声抑制、IWAENC 2024 混合低复杂度 AENR 贡献项及 [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024]] 源链接；机构信息合并为 FAU / Intl Audio Labs / Fraunhofer IIS。
+- **引用修正**:
+  - `wiki/sources/shetu-2024-hybrid-low-complexity-aenr.md` — 作者 wikilink 统一指向 `entities/emanuel-habets`
+  - `wiki/index.md`、`wiki/entities/index.md` — 删除重复行，主行摘要更新
+  - `wiki/log.md` — 历史条目中的文件路径统一
+- **统计更新**: Entities 525 → 524，Total pages 1208 → 1207
+- **修正记录**: 初次提交（8960f23）误将 "emanuele-habets" 作为保留页，随后按用户指示反转为 `emanuel-habets` 并重定向全部引用。
 
 ---
 

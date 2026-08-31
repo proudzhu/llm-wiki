@@ -17,7 +17,7 @@ tags:
 
 # Görtz, Amengual, Calamia, Ananthabhotla, Francl, Schissler & Habets 2026: Blind Direction-Dependent Acoustic Parameter Estimation Using Smart Glasses
 
-**Authors**: [[entities/philipp-goetz|Philipp Görtz]]¹, [[entities/sebastia-amengual|Sebastià V. Amengual]]², [[entities/paul-calamia|Paul Calamia]]², [[entities/ishwarya-ananthabhotla|Ishwarya Ananthabhotla]]², [[entities/andrew-francl|Andrew Francl]]², [[entities/carl-schissler|Carl Schissler]]², [[entities/emanuele-habets|Emanuele A. P. Habets]]¹
+**Authors**: [[entities/philipp-goetz|Philipp Görtz]]¹, [[entities/sebastia-amengual|Sebastià V. Amengual]]², [[entities/paul-calamia|Paul Calamia]]², [[entities/ishwarya-ananthabhotla|Ishwarya Ananthabhotla]]², [[entities/andrew-francl|Andrew Francl]]², [[entities/carl-schissler|Carl Schissler]]², [[entities/emanuel-habets|Emanuel A. P. Habets]]¹
 
 **Affiliations**: ¹ Friedrich-Alexander University Erlangen-Nuremberg, Germany · ² Meta Reality Labs, Redmond, WA, USA
 

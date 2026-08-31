@@ -15,7 +15,7 @@ tags:
 
 # Huang, Huynh, Thiergart & Habets 2026: NDF+
 
-**Authors**: [[entities/weilong-huang|Weilong Huang]], [[entities/le-nhat-tam-huynh|Le Nhat Tam Huynh]], [[entities/oliver-thiergart|Oliver Thiergart]], [[entities/emanuele-habets|Emanuël A. P. Habets]]
+**Authors**: [[entities/weilong-huang|Weilong Huang]], [[entities/le-nhat-tam-huynh|Le Nhat Tam Huynh]], [[entities/oliver-thiergart|Oliver Thiergart]], [[entities/emanuel-habets|Emanuel A. P. Habets]]
 **Institution**: International Audio Laboratories Erlangen, Friedrich-Alexander University Erlangen-Nuremberg (FAU), Germany
 **Venue**: arXiv preprint, 2026
 **Year**: 2026

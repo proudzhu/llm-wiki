@@ -32,7 +32,7 @@ tags:
 
 ## Related Pages
 
-- [[entities/emanuele-habets|Emanuël A. P. Habets]] — PhD supervisor
+- [[entities/emanuel-habets|Emanuel A. P. Habets]] — PhD supervisor
 - [[concepts/informed-spatial-filter|Informed Spatial Filter (ISF)]]
 - [[concepts/acoustic-spotforming|Acoustic Spotforming]]
 - [[concepts/doa-informed-source-extraction|DOA-Informed Source Extraction]]

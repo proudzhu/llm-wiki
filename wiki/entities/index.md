@@ -126,7 +126,7 @@
 | [[entities/paul-calamia\|Paul Calamia]] | Meta Reality Labs — acoustic signal processing, spatial audio | 2026-05-05 |
 | [[entities/andrew-francl\|Andrew Francl]] | Meta Reality Labs — acoustic signal processing for smart glasses | 2026-05-05 |
 | [[entities/carl-schissler\|Carl Schissler]] | Meta Reality Labs — acoustic simulation, spatial audio rendering | 2026-05-05 |
-| [[entities/emanuele-habets\|Emanuele A. P. Habets]] | FAU Erlangen-Nuremberg — spatial audio, acoustic signal processing, microphone arrays | 2026-05-05 |
+| [[entities/emanuel-habets\|Emanuel A. P. Habets]] | FAU Erlangen-Nuremberg / Intl Audio Labs / Fraunhofer IIS — spatial audio, AEC, speech enhancement | 2026-08-31 |
 | [[entities/jens-heitkaemper\|Jens Heitkaemper]] | Google LLC — BCS-guided speech enhancement for earbud voice assistants | 2026-05-06 |
 | [[entities/joseph-caroselli-jr\|Joseph Peter Caroselli Jr.]] | Google LLC — BCS-guided speech enhancement for earbuds | 2026-05-06 |
 | [[entities/max-mckinnon\|Max McKinnon]] | Google LLC — BCS-guided speech enhancement for earbuds | 2026-05-06 |
@@ -322,7 +322,6 @@
 | [[entities/shrishti-saha-shetu\|Shrishti Saha Shetu]] | Researcher at Fraunhofer IIS; low-complexity speech enhancement, ULCNet | 2026-07-16 |
 | [[entities/naveen-kumar-desiraju\|Naveen Kumar Desiraju]] | Researcher at Fraunhofer IIS; acoustic signal processing | 2026-07-16 |
 | [[entities/jose-miguel-martinez-aponte\|Jose Miguel Martinez Aponte]] | Researcher at Fraunhofer IIS; acoustic signal processing | 2026-07-16 |
-| [[entities/emanuel-habets\|Emanuel A. P. Habets]] | Professor at Fraunhofer IIS / Intl Audio Labs Erlangen; spatial audio, AEC | 2026-07-16 |
 | [[entities/edwin-mabande\|Edwin Mabande]] | Researcher at Fraunhofer IIS; acoustic echo control, adaptive filtering | 2026-07-16 |
 | [[entities/nagashree-k-s-rao\|Nagashree K. S. Rao]] | Researcher at Fraunhofer IIS; speech enhancement, embedded DSP deployment (μNet) | 2026-08-31 |
 | [[entities/sharvin-vittappan\|Sharvin Vittappan]] | Researcher at Fraunhofer IIS; speech enhancement, embedded DSP deployment (μNet) | 2026-08-31 |

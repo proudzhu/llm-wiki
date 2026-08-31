@@ -29,7 +29,7 @@ tags:
 # Taseska 2018: Informed Spatial Filters for Speech Enhancement
 
 **Author**: [[entities/maja-taseska|Maja Taseska]]
-**Supervisor**: [[entities/emanuele-habets|Emanuël A. P. Habets]]
+**Supervisor**: [[entities/emanuel-habets|Emanuel A. P. Habets]]
 **Second Reviewer**: Reinhold Häb-Umbach
 **Institution**: Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU), International Audio Laboratories Erlangen
 **Type**: PhD Dissertation
