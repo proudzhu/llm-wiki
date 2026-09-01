@@ -8,28 +8,15 @@ Categories:
   - Convention violations: ../ relative prefixes
   - Log.md informal refs: human-readable names in log entries
 
-Handles escaped pipes (\\|) in markdown tables and section anchors (#Heading).
+Handles escaped pipes (\\|) in markdown tables, section anchors (#Heading),
+raw/ asset embeds (existence checked as actual files, not .md pages), and
+nested brackets in display text (e.g., [[target|Sinh[ArcCosh[x]]]]). Links
+inside code (fenced blocks or inline code spans) are examples, not links,
+and are skipped.
 """
 import sys, glob, os, re
 
 sys.stdout.reconfigure(encoding='utf-8')
-
-
-def extract_target(raw_link):
-    """Extract the page target from a [[...]] wikilink.
-
-    Handles: [[target]], [[target|display]], [[target#Section|display]],
-             [[target\\|display]] (escaped pipe in markdown tables)
-    """
-    if '#' in raw_link:
-        raw_link = raw_link.split('#')[0]
-    if '\\|' in raw_link:
-        target = raw_link.split('\\|')[0].strip()
-    elif '|' in raw_link:
-        target = raw_link.split('|')[0].strip()
-    else:
-        target = raw_link.strip()
-    return target
 
 
 categories = ['entities', 'concepts', 'sources', 'synthesis', 'queries']
@@ -45,44 +32,55 @@ for f in glob.glob('wiki/**/*.md', recursive=True):
     is_log = 'log.md' in rel
 
     with open(f, encoding='utf-8') as fh:
-        for m in re.finditer(r'\[\[([^\[\]]+?)\]\]', fh.read()):
-            raw = m.group(1)
-            if raw.strip() == '...':
-                continue
+        content = fh.read()
 
-            target = extract_target(raw)
-            if not target:
-                continue
+    # Links inside code (fenced blocks / inline spans) are examples, not links
+    content = re.sub(r'```[\s\S]*?```', '', content)
+    content = re.sub(r'`[^`\n]*`', '', content)
 
-            if target.startswith('../'):
-                convention_violations.setdefault(target, []).append(rel)
-                continue
+    # Capture the target portion of a wikilink: chars after [[ up to the first
+    # |, #, ] or newline. Robust to nested brackets in display text, escaped
+    # pipes in tables, and section anchors. Trailing '\' from '\|' is stripped.
+    for m in re.finditer(r'\[\[([^\[\]|#\n]+)(?=[\]|#\n])', content):
+        target = m.group(1).strip().rstrip('\\').strip()
+        if not target or '...' in target:
+            continue
 
-            if target.startswith('wiki/'):
-                fixed = target[5:]
-                fixed_path = os.path.normpath(f'wiki/{fixed}.md')
-                if os.path.exists(fixed_path):
-                    wiki_prefix.setdefault(target, []).append((rel, fixed))
-                else:
-                    truly_broken.setdefault(target, []).append(rel)
-                continue
+        if target.startswith('../'):
+            convention_violations.setdefault(target, []).append(rel)
+            continue
 
-            target_path = os.path.normpath(f'wiki/{target}.md')
-            if not os.path.exists(target_path):
-                found_cat = None
-                if '/' not in target:
-                    for cat in categories:
-                        if os.path.exists(f'wiki/{cat}/{target}.md'):
-                            found_cat = cat
-                            break
+        if target.startswith('wiki/'):
+            fixed = target[5:]
+            fixed_path = os.path.normpath(f'wiki/{fixed}.md')
+            if os.path.exists(fixed_path):
+                wiki_prefix.setdefault(target, []).append((rel, fixed))
+            else:
+                truly_broken.setdefault(target, []).append(rel)
+            continue
 
-                if found_cat and not is_log:
-                    missing_prefix.setdefault(target, []).append(
-                        (rel, f'{found_cat}/{target}'))
-                elif is_log:
-                    log_refs.setdefault(target, []).append(rel)
-                else:
-                    truly_broken.setdefault(target, []).append(rel)
+        # raw/ asset embeds: check the actual file at project root
+        if target.startswith('raw/'):
+            if not os.path.exists(target):
+                truly_broken.setdefault(target, []).append(rel)
+            continue
+
+        target_path = os.path.normpath(f'wiki/{target}.md')
+        if not os.path.exists(target_path):
+            found_cat = None
+            if '/' not in target:
+                for cat in categories:
+                    if os.path.exists(f'wiki/{cat}/{target}.md'):
+                        found_cat = cat
+                        break
+
+            if found_cat and not is_log:
+                missing_prefix.setdefault(target, []).append(
+                    (rel, f'{found_cat}/{target}'))
+            elif is_log:
+                log_refs.setdefault(target, []).append(rel)
+            else:
+                truly_broken.setdefault(target, []).append(rel)
 
 # Print report
 print('=== Broken Wikilinks Report ===')

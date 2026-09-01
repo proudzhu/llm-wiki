@@ -4859,3 +4859,19 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
   - `wiki/index.md`, `wiki/{sources,entities,concepts}/index.md` — 4 new entries; statistics recounted (total 1207)
 
 ---
+
+## [2026-09-01] lint | Health check
+
+- **Index consistency**: All categories consistent — main index and all subdirectory indexes match actual file counts exactly (entities 525/525, concepts 470/470, sources 186/186, synthesis 23/23, queries 7/7). No missing, phantom, or duplicate entries.
+- **Statistics**: All stated counts match actual files (Total 1211 = 525 + 470 + 186 + 23 + 7); last updated 2026-09-01.
+- **Broken links**: 0 truly broken after script fixes (see below). Convention violations remain, all auto-fixable by the wiki-link-fixer skill: 204 missing category prefix, 30 `wiki/` prefix, 37 `../` prefix. Log.md informal refs: 0.
+- **Orphan pages**: 0 (the long-reported 1 was a false positive — see tooling fixes).
+- **Duplicate entries**: None found in any index.
+- **Tooling fixes** — two lint scripts produced systematic false positives and were fixed:
+  - `check_broken_links.py`: (1) `raw/` asset embeds were checked as `wiki/<target>.md` and reported as "truly broken" (~369 false hits this run); they are now verified as actual files at the project root. (2) Wikilink extraction now captures the target up to the first `|`/`#`/`]`/newline, so nested brackets in display text no longer hide links. (3) Links inside code spans/fenced code blocks and `...` placeholder targets are skipped.
+  - `check_orphans.py`: markdown-link detection now matches link destinations (`](path)`) directly, handling arbitrary bracket nesting in link text; wikilink targets use the same robust extraction; code spans are skipped. This resolves the persistent false orphan `sources/why-mathematica-not-simplify-sinh-arccosh` (reported in every lint since 2026-04-10 — its 2 index rows and 6 content-page markdown links were invisible to the old regexes because of the nested brackets in `Sinh[ArcCosh[x]]`).
+- **Prior concern resolved**: the [2026-08-04] lint flagged 129 missing `raw/` figure assets for manual attention — all referenced raw assets now exist on disk (truly broken = 0).
+- **Contradictions / stale claims / data gaps**: no full manual cross-page scan performed this pass (1211 pages); no new flags surfaced beyond the above.
+- **Actions taken**: no wiki content changes required; only the two lint scripts under `.agents/skills/wiki-lint/scripts/` were modified. Recommended next step: run the wiki-link-fixer skill to normalize the 271 convention-violating wikilink targets (204 + 30 + 37).
+
+---
