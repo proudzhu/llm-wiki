@@ -4875,3 +4875,22 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
 - **Actions taken**: no wiki content changes required; only the two lint scripts under `.agents/skills/wiki-lint/scripts/` were modified. Recommended next step: run the wiki-link-fixer skill to normalize the 271 convention-violating wikilink targets (204 + 30 + 37).
 
 ---
+---
+
+## [2026-09-02] ingest | Residual Noise Control Using a Parametric Multichannel Wiener Filter (Braun et al. 2015)
+
+- **Source**: `raw/papers/braun-2015-residual-noise-control/full-text.md` (Zotero: 3986SHVW)
+- **Authors**: Sebastian Braun, Konrad Kowalczyk, Emanuel A. P. Habets
+- **Published**: Proc. IEEE ICASSP 2015, Brisbane, Australia, pp. 360–364
+- **DOI**: 10.1109/ICASSP.2015.7177991
+- **Summary**: Residual noise control via a parametric multichannel Wiener filter — redefines the estimation target as Z = e₁ᵀx + c·e₁ᵀv (0 ≤ c ≤ 1), yielding h_Z = (1−c)·h_X + c·e₁: an exact interpolation between the standard PMWF and the plain reference microphone that caps the maximum noise reduction at c without requiring a rank-one speech PSD model, while bounding speech distortion at (1−c)². The parameter c can be picked per-frequency or from a psychoacoustic loudness criterion; validated on a binaural 2-mic behind-the-ear hearing-aid setup with time-varying traffic noise, keeping output noise power constant across SNR. Classical origin of μNet's noise-attenuation-control (NAL) knob.
+- **Pages created**: `wiki/sources/braun-2015-residual-noise-control.md`, `wiki/entities/sebastian-braun.md`, `wiki/entities/konrad-kowalczyk.md`
+- **Pages updated**:
+  - `wiki/entities/emanuel-habets.md` — 2015 co-authorship bullet + source link
+  - `wiki/concepts/noise-attenuation-control.md` — Origin section rewritten as a full derivation of the classical PMWF formulation (h_Z equation, three key properties, two c-selection mechanisms, Shetu 2026 transplant)
+  - `wiki/concepts/parametric-multi-channel-wiener-filter.md` — new "Residual Noise Control Extension" section (c axis orthogonal to μ/β trade-off, rank-one-free validity)
+  - `wiki/concepts/multi-channel-wiener-filter.md` — new "Residual Noise Control (RNC-MWF)" section
+  - `wiki/concepts/speech-distortion-constrained-noise-reduction.md` — 含噪声目标的推广（Braun 2015）section (in Chinese, matching page language)
+  - `wiki/sources/shetu-2026-munet.md` — "inspired by Braun et al. 2015" now wikilinked + Related Sources row
+  - `wiki/synthesis/multi-channel-speech-enhancement.md` — source row + Insight 4 paragraph: classical ancestor of the controllable-knob claim (extends Yan 2014 lineage)
+- **Indexes updated**: `wiki/index.md`, `wiki/sources/index.md`, `wiki/entities/index.md` — 3 new entries; statistics recounted (total 1214, entities 527, sources 187)

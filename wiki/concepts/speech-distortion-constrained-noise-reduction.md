@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-30
-updated: 2026-08-30
+updated: 2026-09-02
 sources:
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
+  - raw/papers/braun-2015-residual-noise-control/full-text.md
 tags:
   - speech-enhancement
   - multi-channel
@@ -37,6 +38,14 @@ $$\boldsymbol{h}_{\text{optim}} = \left[\Phi_{xx}(\omega) + \beta \Phi_{vv}(\ome
 
 $\Phi_{vv}$ 可在语音间歇段估计，但 $\Phi_{xx} = \Phi_{yy} - \Phi_{vv}$ 中两项不在同一时段估计，噪声非平稳性越高越难估计准确——这是实际算法逼近理论最优解的主要障碍，也是约束语音损伤在实践中难以精确实现的原因。完美降噪与语音无损相互牵制，实用算法（如 [[concepts/atf-gsc|ATF-GSC]]）通过放松约束换取综合性能。
 
+## 含噪声目标的推广（Braun 2015）
+
+[[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015]] 将目标信号从"仅语音"推广为"语音 + 期望残留噪声"：$Z = \mathbf{e}_1^T\mathbf{x} + c\,\mathbf{e}_1^T\mathbf{v}$（$0 \le c \le 1$），在最小化语音失真、约束滤波后噪声接近期望残留水平的同一规划下解得
+
+$$\mathbf{h}_Z = (\Phi_{xx} + \mu\Phi_{vv})^{-1}(\Phi_{xx}\mathbf{e}_1 + \mu\Phi_{vv}\mathbf{c}_1) = (1-c)\,\mathbf{h}_X + c\,\mathbf{e}_1$$
+
+即标准闭式解 $\mathbf{h}_X$（$c=0$，即上文的 $\beta$/$\mu$ 加权形式）与参考传声器 $\mathbf{e}_1$ 的线性插值。参数 $c$ 直接控制**最大降噪量**（低 SNR 渐近值），并将语音失真指数限制在标准解的 $(1-c)^2$ 倍以内。其关键优势在于：控制残留噪声**无需将滤波器分解为空间滤波器 + 限幅谱增益**，因此对任意秩的语音 PSD 矩阵（混响场景）均成立——而原框架中为达到给定 $\sigma$ 需 $\mu$ 随 SNR 线性变化、且仅在秩一假设下存在闭式解。该机制的 DNN 单通道后处理后裔见 [[concepts/noise-attenuation-control|Noise Attenuation Control]]。
+
 ## Related Concepts
 
 - [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
@@ -45,7 +54,10 @@ $\Phi_{vv}$ 可在语音间歇段估计，但 $\Phi_{xx} = \Phi_{yy} - \Phi_{vv}
 - [[concepts/atf-gsc|ATF-GSC]]
 - [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
 - [[concepts/variable-span-linear-filter|Variable Span Linear Filter]]
+- [[concepts/parametric-multi-channel-wiener-filter|Parametric Multi-Channel Wiener Filter (PMWF)]]
+- [[concepts/noise-attenuation-control|Noise Attenuation Control]]
 
 ## Related Sources
 
 - [[sources/yan-2014-dual-mic-bt-noise-reduction|Yan, Qiu & Lu 2014]] — 以该框架统一两类双传声器算法并对比实验
+- [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015]] — 将目标推广为"语音 + 期望残留噪声"，得到 $(1-c)\mathbf{h}_X + c\mathbf{e}_1$ 插值形式

@@ -1,7 +1,7 @@
 ---
 type: source
 created: 2026-08-31
-updated: 2026-08-31
+updated: 2026-09-02
 sources:
   - raw/papers/shetu-2026-munet/full-text.md
   - https://doi.org/10.48550/arXiv.2608.21155
@@ -99,7 +99,7 @@ Each variant trains the full network (no per-stage losses). All models use PF $\
 
 ### Noise Attenuation Control
 
-A post-processing mechanism (inspired by Braun et al. 2015) for user-defined control of the noise attenuation level (NAL) with speech-quality trade-off. Given the enhanced estimate $\hat{\mathbf{s}}$ and estimated residual noise $\hat{\mathbf{n}}=\mathbf{x}-\hat{\mathbf{s}}$:
+A post-processing mechanism (inspired by [[sources/braun-2015-residual-noise-control|Braun et al. 2015]]) for user-defined control of the noise attenuation level (NAL) with speech-quality trade-off. Given the enhanced estimate $\hat{\mathbf{s}}$ and estimated residual noise $\hat{\mathbf{n}}=\mathbf{x}-\hat{\mathbf{s}}$:
 
 $$\hat{\mathbf{s}}_{-\text{dB}}=\hat{\mathbf{s}}+\beta\,\hat{\mathbf{n}}, \qquad \beta=\sqrt{\frac{P_{\hat{s}}}{P_{\hat{n}}\cdot 10^{(\text{NAL}_{\text{dB}}/10)}}}$$
 
@@ -209,6 +209,7 @@ Key finding: the two mechanisms are near-equivalent knobs for the same trade-off
 ## Related Sources
 
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]] — same group; μNet inherits the two-stage ULCNet backbone and power-law compression from this line of work
+- [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015: Residual Noise Control PMWF]] — the classical multichannel origin of the NAL control mechanism adopted here
 - [[sources/rong-2024-gtcrn-speech-enhancement-ultralow|Rong et al. 2024: GTCRN]] — primary baseline; note Shetu et al. report GTCRN as 48 K params / 33 MMACs in their measurement setup (GTCRN's own paper reports 23.67 K params / 39.6 MMACs/s — different measurement conventions)
 - [[sources/larraza-2026-fast-ulcnet-speech-enhancement|Larraza & de Koeijer 2026: Fast-ULCNet]] — parallel ULCNet-descendant line targeting embedded ARM; μNet targets integer DSPs + neural accelerators instead
 

@@ -535,6 +535,8 @@
 | [[entities/seon-man-kim\|Seon Man Kim]] | ISVR Southampton / GIST — dual-microphone speech enhancement, DOA-based SNR estimation | 2026-08-28 |
 | [[entities/hong-kook-kim\|Hong Kook Kim]] | GIST professor — speech recognition, speech/audio source separation, embedded speech processing | 2026-08-28 |
 | [[entities/mike-goodwin\|Mike Goodwin]] | AWS researcher; audio signal processing and ML for audio; co-author of Framewise WaveGAN | 2026-08-31 |
+| [[entities/sebastian-braun\|Sebastian Braun]] | AudioLabs Erlangen → Microsoft — residual-noise-control PMWF (2015), alternating Kalman filters (2018), NSNet2 and compressed complex MSE (with Tashev) | 2026-09-02 |
+| [[entities/konrad-kowalczyk\|Konrad Kowalczyk]] | Erlangen (LMS) → Warsaw University of Technology — spatial audio and noise reduction; co-author of the residual-noise-control PMWF | 2026-09-02 |
 
 ---
 
@@ -1209,6 +1211,7 @@
 | [[sources/kim-2014-doa-based-snr-estimation\|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] | Phase difference of time-aligned dual mics → TNR → LRT/DD-driven DOA-based a priori SNR for a Wiener gain; beats SDB/GSC-PW/PEF/ASBM in SDR & PESQ on a 4 cm array (0–20 dB SNR, RT60 ≤ 300 ms) | 2026-08-28 |
 | [[sources/mustafa-2023-framewise-wavegan\|Mustafa et al. 2023: Framewise WaveGAN]] | 1.2-GFLOPS GAN vocoder generating time-domain speech in 10-ms frames; beats LPCNet at equal complexity | 2026-08-31 |
 | [[sources/shetu-2026-munet\|Shetu et al. 2026: μNet — Ultra-Low-Memory and Low-Complexity Speech Enhancement for Embedded DSPs]] | 46K params / 28 MMACs / 90 KB static, int8, 4–16 ms latency on Cadence Tensilica HiFi 4; beats GTCRN perceptually; noise attenuation control ≈ power-law compression | 2026-08-31 |
+| [[sources/braun-2015-residual-noise-control\|Braun, Kowalczyk & Habets 2015: Residual Noise Control Using a Parametric Multichannel Wiener Filter]] | Generalized PMWF with residual noise control — target = speech + c·noise yields (1−c)h_X + c·e₁; rank-one-free control of maximum noise reduction; ancestor of μNet's NAL knob | 2026-09-02 |
 
 ---
 
@@ -1262,10 +1265,10 @@
 
 ## Statistics
 
-- **Total pages**: 1211
-- **Entities**: 525
+- **Total pages**: 1214
+- **Entities**: 527
 - **Concepts**: 470
-- **Sources**: 186
+- **Sources**: 187
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-01
+- **Last updated**: 2026-09-02

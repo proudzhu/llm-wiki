@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-16
-updated: 2026-08-28
+updated: 2026-09-02
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/schwarz-2015-coherent-to-diffuse-power-ratio/full-text.md
@@ -26,6 +26,7 @@ sources:
   - raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md
   - raw/papers/kang-2019-low-complexity-permutation-alignment/full-text.md
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
+  - raw/papers/braun-2015-residual-noise-control/full-text.md
 tags:
   - multi-channel-speech-enhancement
   - beamforming
@@ -63,6 +64,7 @@ The distinction: this synthesis is about **spatial filtering** (beamforming, coh
 |--------|------|---------------|------------------|
 | [[sources/lorenz-2005-robust-minimum-variance-beamforming\|Lorenz & Boyd 2005]] | 2005 | Robustness | Robust MVB: ellipsoidal array-manifold uncertainty → SOCP, guaranteed unity-gain over uncertainty set |
 | [[sources/yan-2014-dual-mic-bt-noise-reduction\|Yan, Qiu & Lu 2014]] | 2014 | Application | Two-mic Bluetooth headset: coherence-based (CPSD) vs spatial pre-separation (ATF-GSC) framed as an SD-constrained optimal filter $\boldsymbol{h} = [\Phi_{xx} + \beta\Phi_{vv}]^{-1}\Phi_{xx}\boldsymbol{u}$; pre-modeled RTF blocking matrix robust to wearing-angle mismatch |
+| [[sources/braun-2015-residual-noise-control\|Braun, Kowalczyk & Habets 2015]] | 2015 | Trade-off control | Extends the SD-constrained framework with a noise-containing target ($Z = \mathbf{e}_1^T\mathbf{x} + c\,\mathbf{e}_1^T\mathbf{v}$), yielding $\mathbf{h}_Z = (1-c)\mathbf{h}_X + c\,\mathbf{e}_1$ — direct control of maximum noise reduction without the rank-one assumption; classical origin of the DNN-era NAL knob |
 | [[sources/tashev-2008-sound-capture-spatial-filter\|Tashev et al. 2008]] | 2008 | Estimate what | Back-to-back unidirectional array + probability-based spatial filter; level-difference-dominated post-filter for 9.6 mm baseline |
 | [[sources/jin-2017-multichannel-noise-reduction-mobile\|Jin et al. 2017]] | 2017 | Estimate what | MVDR + adaptive coherence NE with adaptive split-frequency; globally MMSE-optimal multi-channel variance decomposition |
 | [[sources/taseska-2018-informed-spatial-filters\|Taseska 2018]] | 2018 | Estimate what | ISF paradigm: CDR as a priori SAP *control* (not post-filter gain) for multichannel MCRA; DOA-model & position-based detectors drive per-bin MVDR/GSC across noise reduction, spotforming, and BSS |
@@ -164,6 +166,8 @@ A distinct 2026 cluster keeps the classical filter structure and uses a DNN only
 R-MWF is the extreme case: **no neural network at all**, just an online $\mathcal{O}(M^2(I+2))$ multiplicative update for variance ratios against predefined coherence matrices (rank-one RTF, diffuse sinc, white identity). Yet it outperforms DG-MVDR and MVJD-MWF baselines on real RealMAN recordings (LivingRoom6: SNRseg 4.66 vs 3.07 dB; STOI 0.76 vs 0.70). The lesson: for multi-source reverberant scenes, **the SCM model matters more than the estimator's neural capacity** — a well-structured analytical decomposition (source + diffuse + noise coherence) captures the field's physical structure that a black-box mask estimator must rediscover from data.
 
 HVSF generalizes this by letting the DNN predict the SCM decomposition (via Cholesky factorization to guarantee PSD) and the tradeoff parameter, then computing VSLF weights in closed form. The span dimension $Q$ — automatically estimated by thresholding generalized eigenvalues — provides a data-driven rank for the speech SCM that classical MWF/MVDR assume is known.
+
+**The classical ancestor of the controllable knob (Braun 2015)**: the controllability motivation is not a 2026 invention. [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015]] showed that a single interpretable parameter can control a *different* axis than the distortion-vs-suppression trade-off: redefining the MWF/PMWF target as speech plus a fraction $c$ of the noise yields $\mathbf{h}_Z = (1-c)\,\mathbf{h}_X + c\,\mathbf{e}_1$, capping the maximum noise reduction and bounding speech distortion at $(1-c)^2$ — *without* the rank-one assumption that spectral-gain flooring requires, so the control survives in reverberant scenes. This knob crossed the classical→neural boundary: it reappears as the inference-time [[concepts/noise-attenuation-control|noise attenuation level (NAL)]] post-processor on μNet (2026), where it trades suppression depth against speech quality without retraining — evidence for Takeaway 1 that classical control structures outlive their statistical estimation machinery.
 
 ## Insight 5: The Input → Output Inversion (Apostolidis 2026)
 

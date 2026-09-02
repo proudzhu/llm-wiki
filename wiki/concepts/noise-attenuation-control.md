@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-31
-updated: 2026-08-31
+updated: 2026-09-02
 sources:
   - raw/papers/shetu-2026-munet/full-text.md
+  - raw/papers/braun-2015-residual-noise-control/full-text.md
 tags:
   - speech-enhancement
   - noise-suppression
@@ -21,7 +22,13 @@ where $P_{\hat{s}}$ and $P_{\hat{n}}$ are the mean powers of the enhanced speech
 
 ## Origin
 
-The formulation is inspired by the parametric multichannel Wiener filter of Braun et al. (2015), applied by [[sources/shetu-2026-munet|Shetu et al. 2026]] as a user-facing control on their μNet model. This mirrors how classical hearing-aid noise reduction exposes a suppression-depth parameter to the fitter/user.
+The concept originates with the **parametric multichannel Wiener filter with residual noise control** of [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015]]. They redefine the multichannel target signal as speech plus a scaled portion of the noise, $Z = \mathbf{e}_1^T\mathbf{x} + c\,\mathbf{e}_1^T\mathbf{v}$ with $0 \le c \le 1$, and derive the MMSE-optimal filter
+
+$$\mathbf{h}_Z = \left(\boldsymbol{\Phi}_x + \mu\boldsymbol{\Phi}_v\right)^{-1}\left(\boldsymbol{\Phi}_x\mathbf{e}_1 + \mu\boldsymbol{\Phi}_v\mathbf{c}_1\right) = (1-c)\,\mathbf{h}_X + c\,\mathbf{e}_1$$
+
+an interpolation between the standard [[concepts/parametric-multi-channel-wiener-filter|PMWF]] and the reference microphone that (i) directly caps the maximum noise reduction at $c$ (low SNR asymptote), (ii) requires no rank-one assumption on $\Phi_x$ — unlike spectral-gain flooring, which fails for reverberant/higher-rank desired signals — and (iii) bounds the speech distortion index at $(1-c)^2$ times the standard PMWF's. Two mechanisms select $c$: a fixed (optionally frequency-dependent) value for constant maximum suppression and spectral shaping of the residual noise, or a noise-adaptive rule $c = \min[\sqrt{\phi_0/(\mu\,\phi_V)}, 1]$ that keeps the *output noise power* constant in slowly time-varying noise fields.
+
+[[sources/shetu-2026-munet|Shetu et al. 2026]] transplanted the idea to single-channel DNN enhancement as the user-facing NAL knob on μNet — mixing a scaled residual-noise estimate back into the enhanced output. This mirrors how classical hearing-aid noise reduction exposes a suppression-depth parameter to the fitter/user.
 
 ## Relationship to Power-Law Compression
 
@@ -50,7 +57,10 @@ NAL −30 dB achieves the best PESQ of all models in the comparison (including G
 - [[concepts/power-law-compression|Power-Law Compression]]
 - [[concepts/speech-enhancement|Speech Enhancement]]
 - [[concepts/complex-ratio-mask|Complex Ratio Mask (cRM)]]
+- [[concepts/parametric-multi-channel-wiener-filter|Parametric Multi-Channel Wiener Filter (PMWF)]]
+- [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
 
 ## Related Sources
 
 - [[sources/shetu-2026-munet|Shetu et al. 2026: μNet]]
+- [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015: Residual Noise Control PMWF]]

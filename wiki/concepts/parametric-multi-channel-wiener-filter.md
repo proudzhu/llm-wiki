@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-25
-updated: 2026-08-25
+updated: 2026-09-02
 sources:
   - raw/papers/bagheri-2019-pmwf-spp/full-text.md
+  - raw/papers/braun-2015-residual-noise-control/full-text.md
 tags:
   - speech-enhancement
   - wiener-filter
@@ -33,6 +34,14 @@ requiring only the input PSD matrix $\boldsymbol{\Phi}_{yy}$ and the noise PSD m
 
 Additional implementation safeguards: smoothing the SPP with clamping to $[p_{\min}, p_{\max}]$; falling back to $\widehat{\boldsymbol{\Phi}}_{vv}^{-1} = \widehat{\boldsymbol{\Phi}}_{yy}^{-1}$ when estimated $\gamma$ or $\xi$ go negative; and a short noise-only initialization period ($L \geq N$ frames) for consistent convergence.
 
+## Residual Noise Control Extension (Braun, Kowalczyk & Habets 2015)
+
+[[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015]] generalize the PMWF by redefining the target as *speech plus a fraction $c$ of the noise*, $Z = \mathbf{e}_1^T\mathbf{x} + c\,\mathbf{e}_1^T\mathbf{v}$ ($0 \le c \le 1$), and solving the speech-distortion-constrained program (minimize speech distortion subject to the filtered noise staying near the desired residual level). The Lagrangian solution is
+
+$$\mathbf{h}_Z = \left(\Phi_x + \mu\Phi_v\right)^{-1}\left(\Phi_x\mathbf{e}_1 + \mu\Phi_v\mathbf{c}_1\right) = (1-c)\,\mathbf{h}_X + c\,\mathbf{e}_1$$
+
+where $c = 0$ recovers the standard PMWF and $\mu = 1$ an MWF similar to binaural hearing-aid filters. The $c$ axis is *orthogonal* to the $\mu$/$\beta$ distortion-vs-suppression trade-off: $c$ directly caps the **maximum** noise reduction (asymptote at low SNR) and bounds the speech distortion index at $(1-c)^2$, while $\mu$ only over/underestimates the noise (shifting the noise-reduction curve along the SNR axis). Crucially, this control works **without the rank-one assumption** on $\Phi_x$: gain-limited decomposition into spatial filter + spectral gain is unnecessary, so the bound holds for reverberant (higher-rank) desired signals — where the standard PMWF has no closed-form $\mu(\sigma)$ and would need iterative/adaptive multiplier computation. The single-channel DNN descendant of this mechanism is [[concepts/noise-attenuation-control|Noise Attenuation Control]].
+
 ## Empirical Positioning
 
 On a 4-mic circular array (TIMIT speech, babble/pink NOISEX-92 interference, $T_{60} = 300$ ms, input SINR −5 to 15 dB): MCWF beats MVDR on all metrics except speech distortion; the SPP-controlled PMWF improves ΔSINR, ΔSegSNR, and noise reduction over MCWF at nearly unchanged distortion; adding the MMSE output gives the best overall performance (gains largest for pink noise) at a marginal distortion increase. Gains over MCWF shrink as input SINR grows.
@@ -52,8 +61,10 @@ On a 4-mic circular array (TIMIT speech, babble/pink NOISEX-92 interference, $T_
 - [[concepts/informed-spatial-filter|Informed Spatial Filter (ISF)]]
 - [[concepts/variable-span-linear-filter|Variable Span Linear Filter]]
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[concepts/noise-attenuation-control|Noise Attenuation Control]]
 
 ## Related Sources
 
 - [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]]
+- [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015: Residual Noise Control PMWF]]
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]]

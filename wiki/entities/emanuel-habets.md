@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-05
-updated: 2026-08-31
+updated: 2026-09-02
 tags:
   - researcher
   - acoustic-parameter-estimation
@@ -27,8 +27,11 @@ tags:
 - Hybrid acoustic echo reduction using Kalman filtering and informed source extraction (SLT 2023)
 - Joint dereverberation and residual echo suppression (IEEE TASLP 2008)
 - Hybrid low-complexity joint acoustic echo and noise reduction (IWAENC 2024) — [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024]]
+- Co-authored "Residual noise control using a parametric multichannel Wiener filter" (ICASSP 2015) — generalized PMWF with direct control of maximum noise reduction, valid for higher-rank desired signals — [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015]]
 
 ## Related Sources
+
+- [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015: Residual Noise Control PMWF]]
 
 - [[sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation|Görtz et al. 2026: Blind DDAP Estimation Using Smart Glasses]]
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]

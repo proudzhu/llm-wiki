@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-08-30
+updated: 2026-09-02
 sources:
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/bagheri-2019-pmwf-spp/full-text.md
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
+  - raw/papers/braun-2015-residual-noise-control/full-text.md
 tags:
   - speech-enhancement
   - wiener-filter
@@ -45,6 +46,10 @@ The **Speech Distortion Weighted Multichannel Wiener Filter (SDW-MWF)** is an MW
 
 The SDW-MWF is itself a special case ($\beta = \mu = 1$) of the speech-distortion-constrained optimal filter $h = [\Phi_x + \beta \Phi_n]^{-1} \Phi_x i_1$ (Chen; Souden & Benesty), obtained by minimizing residual noise energy subject to a bound on speech-distortion energy. [[sources/yan-2014-dual-mic-bt-noise-reduction|Yan et al. 2014]] use this framework to unify the dual-microphone algorithm space: coherence-function filters and GSC variants occupy different points on the same $\beta$ trade-off curve, and GSC blocking-matrix mismatch is equivalent to operating at $\beta = 1$. See [[concepts/speech-distortion-constrained-noise-reduction|Speech-Distortion-Constrained Noise Reduction]].
 
+## Residual Noise Control (RNC-MWF)
+
+[[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015]] redefine the MWF/PMWF target as *speech plus a fraction $c$ of the noise* and obtain $\mathbf{h}_Z = (1-c)\,\mathbf{h}_X + c\,\mathbf{e}_1$ — a weighted sum of the (standard parametric) MWF and the reference microphone that directly caps the maximum noise reduction at $c$ and bounds the speech distortion at $(1-c)^2$. Because no decomposition into spatial filter + gain-limited spectral gain is needed, the control remains valid for higher-rank speech PSD matrices (reverberant scenes). A noise-adaptive $c$ further keeps the output noise power constant in slowly time-varying noise fields. The mechanism survives today as the inference-time NAL knob of DNN suppressors ([[concepts/noise-attenuation-control|Noise Attenuation Control]]); see [[concepts/parametric-multi-channel-wiener-filter|PMWF]] for the full formulation.
+
 ## Differentiable SDW-MWF for End-to-End Training
 
 The closed-form SDW-MWF $h = (\Phi_x + \mu \Phi_n)^{-1} \Phi_x i_1$ is differentiable (matrix inversion is smooth as long as $\Phi_x + \mu \Phi_n$ is well-conditioned), so it can be included in the training loop of a hybrid neural-spatial SE system. [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026]] use this property to train [[concepts/mn-tango|MN-TANGO]] end-to-end: gradients from an enhanced-STFT loss flow through the differentiable SDW-MWF back to the neural mask estimators. At inference, the [[concepts/gevd-spatial-filtering|GEVD-based]] rank-constrained SDW-MWF is used instead, which is non-differentiable but more robust to SCM estimation noise. The train-test mismatch is intentional: SDW-MWF acts as an optimization surrogate, while GEVD remains preferable at deployment.
@@ -70,6 +75,7 @@ The MWF is one endpoint of a parameterized family: the [[concepts/parametric-mul
 - [[concepts/mn-tango|MN-TANGO]]
 - [[concepts/parametric-multi-channel-wiener-filter|Parametric Multi-Channel Wiener Filter (PMWF)]] — parameterized family with the MWF as the $\beta = 1$ endpoint
 - [[concepts/multi-channel-speech-presence-probability|Multi-Channel Speech Presence Probability (MC-SPP)]]
+- [[concepts/noise-attenuation-control|Noise Attenuation Control]]
 
 ## Related Sources
 
@@ -79,3 +85,4 @@ The MWF is one endpoint of a parameterized family: the [[concepts/parametric-mul
 - [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]]
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — adopts the MVDR + single-channel Wiener factorization (Simmer et al.) with an adaptive coherence noise PSD estimate driving the post-filter
 - [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]] — MC-SPP-controlled PMWF with direct inverse noise PSD updates
+- [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015: Residual Noise Control PMWF]] — target-signal redefinition yielding direct control of maximum noise reduction
