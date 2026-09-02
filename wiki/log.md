@@ -4875,7 +4875,6 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
 - **Actions taken**: no wiki content changes required; only the two lint scripts under `.agents/skills/wiki-lint/scripts/` were modified. Recommended next step: run the wiki-link-fixer skill to normalize the 271 convention-violating wikilink targets (204 + 30 + 37).
 
 ---
----
 
 ## [2026-09-02] ingest | Residual Noise Control Using a Parametric Multichannel Wiener Filter (Braun et al. 2015)
 
@@ -4894,3 +4893,17 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
   - `wiki/sources/shetu-2026-munet.md` — "inspired by Braun et al. 2015" now wikilinked + Related Sources row
   - `wiki/synthesis/multi-channel-speech-enhancement.md` — source row + Insight 4 paragraph: classical ancestor of the controllable-knob claim (extends Yan 2014 lineage)
 - **Indexes updated**: `wiki/index.md`, `wiki/sources/index.md`, `wiki/entities/index.md` — 3 new entries; statistics recounted (total 1214, entities 527, sources 187)
+
+---
+
+## [2026-09-02] ingest | Sound-Object-Based Echo Control (Hoshuyama 2026)
+
+- **Source**: `raw/papers/hoshuyama-2026-sound-object-echo-control/full-text.md` (Zotero: R9DNFLUX)
+- **Authors**: Osamu Hoshuyama
+- **Published**: arXiv preprint 2608.25413, 2026-08-26
+- **DOI**: 10.48550/arXiv.2608.25413
+- **Summary**: Proposes sound-object-based echo control — identifying sound objects and gating pass/playback with a default-mute/conditional-pass policy (an extension of voice-switched half-duplex toward conditional half-duplex) to suppress echo and howling from complicated inter-terminal acoustic paths that path-estimation AEC cannot handle; verified in a two-room, three-terminal simulation showing howling suppression at an over-muting cost.
+- **Pages created**: `wiki/sources/hoshuyama-2026-sound-object-echo-control.md`, `wiki/entities/osamu-hoshuyama.md`, `wiki/concepts/sound-object-based-echo-control.md`, `wiki/concepts/voice-switched-half-duplex.md`, `wiki/concepts/audio-fingerprinting.md`
+- **Pages updated**: `wiki/concepts/acoustic-howling-suppression.md` (added object-identity gating section for inter-terminal howling), `wiki/concepts/acoustic-echo-cancellation.md` (added "Beyond Path Estimation" section), `wiki/concepts/acoustic-feedback.md` (added inter-terminal loops + object-identity gating subsection)
+
+---

@@ -537,6 +537,7 @@
 | [[entities/mike-goodwin\|Mike Goodwin]] | AWS researcher; audio signal processing and ML for audio; co-author of Framewise WaveGAN | 2026-08-31 |
 | [[entities/sebastian-braun\|Sebastian Braun]] | AudioLabs Erlangen → Microsoft — residual-noise-control PMWF (2015), alternating Kalman filters (2018), NSNet2 and compressed complex MSE (with Tashev) | 2026-09-02 |
 | [[entities/konrad-kowalczyk\|Konrad Kowalczyk]] | Erlangen (LMS) → Warsaw University of Technology — spatial audio and noise reduction; co-author of the residual-noise-control PMWF | 2026-09-02 |
+| [[entities/osamu-hoshuyama\|Osamu Hoshuyama]] | Researcher (NEC background) on acoustic echo control — nonlinear residual echo suppression and sound-object-based echo control | 2026-09-02 |
 
 ---
 
@@ -1016,6 +1017,9 @@
 | [[concepts/framewise-convolution\|Framewise Convolution]] | Convolution whose kernel elements are frames rather than samples, built on fully-connected layers | 2026-08-31 |
 | [[concepts/munet\|μNet]] | Ultra-low-memory SE for embedded DSPs (Shetu et al. 2026): 46K params, 28 MMACs, 90 KB static, int8, 4–16 ms latency; hybrid feature reorientation + shared subband GRU; deployed on Cadence Tensilica HiFi 4 | 2026-08-31 |
 | [[concepts/noise-attenuation-control\|Noise Attenuation Control]] | Post-processing knob trading noise suppression against speech quality at inference time; empirically equivalent to power-law compression of the estimated mask (Shetu et al. 2026) | 2026-08-31 |
+| [[concepts/sound-object-based-echo-control\|Sound-Object-Based Echo Control]] | Echo/howling control paradigm: identify sound objects and gate pass/playback (default mute, conditional pass) instead of estimating echo paths | 2026-09-02 |
+| [[concepts/voice-switched-half-duplex\|Voice-Switched Half-Duplex]] | Classical speakerphone technique routing one talk direction at a time; extended by sound-object-based echo control into conditional half-duplex | 2026-09-02 |
+| [[concepts/audio-fingerprinting\|Audio Fingerprinting]] | Compact content-based audio signatures for identity matching under deformation; candidate feature for low-latency sound-object identification | 2026-09-02 |
 
 ---
 
@@ -1212,6 +1216,7 @@
 | [[sources/mustafa-2023-framewise-wavegan\|Mustafa et al. 2023: Framewise WaveGAN]] | 1.2-GFLOPS GAN vocoder generating time-domain speech in 10-ms frames; beats LPCNet at equal complexity | 2026-08-31 |
 | [[sources/shetu-2026-munet\|Shetu et al. 2026: μNet — Ultra-Low-Memory and Low-Complexity Speech Enhancement for Embedded DSPs]] | 46K params / 28 MMACs / 90 KB static, int8, 4–16 ms latency on Cadence Tensilica HiFi 4; beats GTCRN perceptually; noise attenuation control ≈ power-law compression | 2026-08-31 |
 | [[sources/braun-2015-residual-noise-control\|Braun, Kowalczyk & Habets 2015: Residual Noise Control Using a Parametric Multichannel Wiener Filter]] | Generalized PMWF with residual noise control — target = speech + c·noise yields (1−c)h_X + c·e₁; rank-one-free control of maximum noise reduction; ancestor of μNet's NAL knob | 2026-09-02 |
+| [[sources/hoshuyama-2026-sound-object-echo-control\|Hoshuyama 2026: Sound-Object-Based Echo Control]] | Proposes sound-object identification with default-mute/conditional-pass gating to suppress echo and howling from complicated inter-terminal acoustic paths | 2026-09-02 |
 
 ---
 
@@ -1265,10 +1270,10 @@
 
 ## Statistics
 
-- **Total pages**: 1214
-- **Entities**: 527
-- **Concepts**: 470
-- **Sources**: 187
+- **Total pages**: 1219
+- **Entities**: 528
+- **Concepts**: 473
+- **Sources**: 188
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-02
+- **Last updated**: 2026-09-03

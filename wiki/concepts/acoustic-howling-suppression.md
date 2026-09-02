@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-02
-updated: 2026-08-08
+updated: 2026-09-02
 sources:
   - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/zhang-2024-neural-kalman-howling/full-text.txt
@@ -10,6 +10,7 @@ sources:
   - raw/papers/mounir-2025-robust-early-howling-detection-sparsity/full-text.md
   - raw/papers/williams-2014-acoustic-feedback-elimination/full-text.md
   - raw/papers/gil-cacho-2009-regularized-adaptive-notch-filters/full-text.md
+  - raw/papers/hoshuyama-2026-sound-object-echo-control/full-text.md
 tags:
   - acoustic-howling
   - feedback-cancellation
@@ -54,6 +55,12 @@ Use adaptive filters (e.g., Kalman filter, FxLMS) to estimate and subtract the f
 - **NeuralKalmanAHS**: NN modules integrated into FDKF for reference refinement and covariance estimation
 - **Denoiser fine-tuning (Ashur & Cohen 2026)**: A pretrained real-time speech-enhancement ([[concepts/denoiser-network|Denoiser Network (DEMUCS)]]) is fine-tuned by mixing offline-generated howling samples with the original noise-reduction training data. Unlike dedicated AHS models, this approach explicitly **preserves speech-enhancement capabilities** while gaining AHS robustness — the 60-40 mixing ratio achieves state-of-the-art PESQ stability across gains (only ~0.05 PESQ drop from G=1.5 to G=3 vs. 0.5–0.6 for HybridAHS/NKal-AHS), with <1% noise-reduction degradation. No architectural modification or recursive training required.
 
+### Object-Identity Gating (Inter-Terminal Conferencing Howling)
+
+All methods above address **local** feedback loops (PA system, hearing aid, single terminal). A distinct howling regime arises when **multiple hands-free terminals coexist in the same room**: an echo loop traverses the communication server — microphone A2 → codec → server → loudspeaker A1 → back to microphone A2 — including network delay variation, nonlinear in-device processing (noise/echo suppressors, dynamic range control), and fragmentation by user mute actions. Path estimation is infeasible for these inter-terminal paths even with deep learning (Hoshuyama 2026).
+
+[[concepts/sound-object-based-echo-control|Sound-object-based echo control]] (Hoshuyama 2026) instead **identifies sound objects** and gates their reproduction: channels are muted by default, and pass/playback is allowed only when the signal is judged *not identical* to recently observed objects — an extension of [[concepts/voice-switched-half-duplex|voice-switched half-duplex]] toward conditional half-duplex that breaks the loop **without any path knowledge**. A two-room, three-terminal simulation (partitioned AEC + nonlinear RES + spectral subtraction + codec distortion in the chain) shows sustained howling suppressed even under triple-talk, at the cost of over-muting that fragments desired speech. Non-persistent identification errors cause only brief echo rather than sustained howling.
+
 ## Key Challenge
 
 Training-inference mismatch: offline training without AHS processing differs from real-time streaming inference where AHS output recursively influences input. Streaming training strategies and hybrid adaptive-neural designs address this.
@@ -73,6 +80,8 @@ Training-inference mismatch: offline training without AHS processing differs fro
 - [[concepts/howling-detection-features|Howling Detection Features]] — the spectral and temporal HD feature families used in NHS
 - [[concepts/ninosp2-transposed|NINOS²-T]] — a sparsity-based HD feature enabling early-howling detection without candidate preselection
 - [[concepts/regularized-adaptive-notch-filter|Regularized Adaptive Notch Filter (RANF)]] — ANF-based one-stage NHS variant with convergence-based howling detection (Gil-Cacho et al. 2009)
+- [[concepts/sound-object-based-echo-control|Sound-Object-Based Echo Control]] — object-identity gating for inter-terminal conferencing howling (Hoshuyama 2026)
+- [[concepts/voice-switched-half-duplex|Voice-Switched Half-Duplex]] — the classical technique the conditional-half-duplex gating extends
 
 ## Related Sources
 
@@ -83,3 +92,4 @@ Training-inference mismatch: offline training without AHS processing differs fro
 - [[sources/mounir-2025-robust-early-howling-detection-sparsity|Mounir, Bernardi & van Waterschoot 2025]] — NINOS²-T sparsity-based HD feature for early-howling detection in NHS
 - [[sources/williams-2014-acoustic-feedback-elimination|Williams 2014]] — Harman patent (US 8,634,575 B2) instantiating NHS with [[concepts/ballistics-based-howling-detection|ballistics-based HD]] and [[concepts/trial-and-verify-notch-insertion|trial-and-verify notch insertion]] for PA systems
 - [[sources/gil-cacho-2009-regularized-adaptive-notch-filters|Gil-Cacho et al. 2009]] — the ANF-based one-stage NHS variant RANF with signed-regularization convergence detection for PA systems
+- [[sources/hoshuyama-2026-sound-object-echo-control|Hoshuyama 2026]] — sound-object-based echo control: default-mute object-identity gating for inter-terminal howling in multi-terminal conferencing

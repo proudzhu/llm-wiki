@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-08-07
+updated: 2026-09-02
 sources:
   - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/miran-2026-imu-feedback-cancellation/full-text.txt
   - raw/papers/williams-2014-acoustic-feedback-elimination/full-text.md
+  - raw/papers/hoshuyama-2026-sound-object-echo-control/full-text.md
 tags:
 - acoustic
 - active-noise-control
@@ -60,6 +61,10 @@ with closed-loop frequency response $U/V = G/(1 - GF)$, where $G(\omega,t)F(\ome
 - **Room modeling** ([[concepts/adaptive-feedback-cancellation|AFC]]) — estimates and subtracts the feedback component, removing the coupling.
 
 The achievable amplification is bounded by the [[concepts/maximum-stable-gain|MSG]]; Schroeder's statistical room-acoustics result sets a ~10 dB upper bound for loop-gain-smoothing methods, while AFC is not bound by it.
+
+### Inter-Terminal Loops and Object-Identity Gating
+
+All four categories above assume the loop can be modeled or attenuated **locally**. A distinct regime arises in multi-terminal conferencing: the feedback path traverses the **communication server and network** (microphone A2 → codec → server → loudspeaker A1 → back to A2), with delay variation, nonlinear in-device processing, and user-mute fragmentation, making path estimation infeasible (Hoshuyama 2026). [[concepts/sound-object-based-echo-control|Sound-object-based echo control]] bypasses the loop model altogether: default mute with pass only when the signal is judged *not identical* to recently observed sound objects breaks the magnitude condition by construction, without path knowledge — a fifth, non-path-based control category extending [[concepts/voice-switched-half-duplex|voice-switched half-duplex]] to conditional half-duplex.
 
 ## Solutions
 
@@ -125,6 +130,7 @@ In hearing aids, AFC uses an adaptive filter (typically PEM-NLMS) to estimate an
 - [[adaptive-feedback-cancellation|Adaptive Feedback Cancellation (AFC)]] — PA/HA feedback control via feedback-path modeling
 - [[decorrelation-for-afc|Decorrelation for AFC]] — bias reduction for AFC identification
 - [[acoustic-howling-suppression|Acoustic Howling Suppression]] — the howling artifact of PA-system acoustic feedback
+- [[concepts/sound-object-based-echo-control|Sound-Object-Based Echo Control]] — non-path-based control for inter-terminal feedback loops
 
 ## Related Concepts
 
@@ -143,6 +149,7 @@ In hearing aids, AFC uses an adaptive filter (typically PEM-NLMS) to estimate an
 - [[sources/ma-2027-robust-ffanc-online-path-modeling|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] — performs OFBPM adaptively during ANC operation; demonstrates that an SF-driven global AWGN scaling and a second supporting filter $H_2(z)$ keep the residual-AWGN floor low even under abrupt FBP changes
 - [[sources/mounir-2025-robust-early-howling-detection-sparsity|Mounir, Bernardi & van Waterschoot 2025]] — formalizes the PA/hearing-aid closed-loop model with the Nyquist stability criterion (loop gain ≥ 1 and loop phase = $n2\pi$) and the MSG definition; the same closed-loop instability physics underlies ANC and acoustic-howling feedback
 - [[sources/williams-2014-acoustic-feedback-elimination|Williams 2014]] — Harman patent (US 8,634,575 B2) for a two-rate NHS system: ballistics-based candidate detection + trial-and-verify notch insertion in PA/sound-reinforcement systems
+- [[sources/hoshuyama-2026-sound-object-echo-control|Hoshuyama 2026]] — inter-terminal feedback loops traversing the communication server, and object-identity gating as a non-path-based control category
 
 ## Related Entities
 

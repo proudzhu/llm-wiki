@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-06-06
-updated: 2026-08-15
+updated: 2026-09-02
+sources:
+  - raw/papers/hoshuyama-2026-sound-object-echo-control/full-text.md
 tags:
   - speech-enhancement
   - echo-cancellation
@@ -47,6 +49,10 @@ The goal is to estimate and subtract the echo component, or equivalently learn a
 - **Time-varying echo paths**: Room acoustics change with movement
 - **Long delays**: Echo delays up to 1 second in large rooms
 - **Nonlinear distortion**: Loudspeaker and microphone nonlinearities
+
+## Beyond Path Estimation: Inter-Terminal Echo Loops
+
+When multiple hands-free terminals coexist in one room, echo loops can form via the **communication server** (microphone A2 → codec → server → loudspeaker A1 → back to microphone A2). These inter-terminal paths include network delay variation, nonlinear in-device processing (noise/echo suppressors, dynamic range control), and fragmentation by user mute actions — Hoshuyama (2026) argues they are infeasible to estimate even with deep learning, and that AEC benchmarks (e.g., the AEC Challenge) cover only intra-device echo. His proposed alternative, [[concepts/sound-object-based-echo-control|sound-object-based echo control]], abandons path estimation entirely: channels are **muted by default** and pass/playback is allowed only when the signal is judged not identical to recently observed sound objects, breaking the loop without path knowledge — an extension of [[concepts/voice-switched-half-duplex|voice-switched half-duplex]] toward conditional half-duplex.
 
 ## Evaluation Metrics
 
@@ -98,6 +104,8 @@ EchoFree achieves DeepVQE-S-comparable single-talk performance at ~10× lower co
 - [[concepts/error-recovery-nonlinearity|Error Recovery Nonlinearity (ERN)]]
 - [[concepts/diffusion-models-for-speech|Diffusion Models for Speech Enhancement]]
 - [[concepts/urgent-challenge|URGENT Challenge]]
+- [[concepts/sound-object-based-echo-control|Sound-Object-Based Echo Control]]
+- [[concepts/voice-switched-half-duplex|Voice-Switched Half-Duplex]]
 
 ## Related Sources
 
@@ -110,3 +118,4 @@ EchoFree achieves DeepVQE-S-comparable single-talk performance at ~10× lower co
 - [[sources/scarpiniti-2027-physics-informed-adaptive-filtering-aec|Scarpiniti, Comminiello & Uncini 2027: Physics-informed adaptive filtering for AEC]]
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023: Audio Signal Processing in the 21st Century]] — 25-year retrospective of the AEC field and the IWAENC workshop series
 - [[sources/wung-2011-residual-echo-suppression-system|Wung et al. 2011: A System Approach to RES]] — robust AEC with ERN + batch adaptation (DTD-free) feeding a system-level residual echo estimate and psychoacoustic postfilter
+- [[sources/hoshuyama-2026-sound-object-echo-control|Hoshuyama 2026: Sound-Object-Based Echo Control]] — shifts echo control from path estimation to sound object identification for inter-terminal loops

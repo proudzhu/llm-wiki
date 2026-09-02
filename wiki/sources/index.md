@@ -191,4 +191,5 @@
 | [[sources/mustafa-2023-framewise-wavegan\|Mustafa et al. 2023: Framewise WaveGAN]] | 1.2-GFLOPS GAN vocoder generating time-domain speech in 10-ms frames; beats LPCNet at equal complexity | 2026-08-31 |
 | [[sources/shetu-2026-munet\|Shetu et al. 2026: μNet — Ultra-Low-Memory and Low-Complexity Speech Enhancement for Embedded DSPs]] | 46K params / 28 MMACs / 90 KB static, int8, 4–16 ms latency on Cadence Tensilica HiFi 4; beats GTCRN perceptually; noise attenuation control ≈ power-law compression | 2026-08-31 |
 | [[sources/braun-2015-residual-noise-control\|Braun, Kowalczyk & Habets 2015: Residual Noise Control Using a Parametric Multichannel Wiener Filter]] | Generalized PMWF with residual noise control — target = speech + c·noise yields (1−c)h_X + c·e₁; rank-one-free control of maximum noise reduction; ancestor of μNet's NAL knob | 2026-09-02 |
+| [[sources/hoshuyama-2026-sound-object-echo-control\|Hoshuyama 2026: Sound-Object-Based Echo Control]] | Proposes sound-object identification with default-mute/conditional-pass gating to suppress echo and howling from complicated inter-terminal acoustic paths | 2026-09-02 |
 

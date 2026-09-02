@@ -531,4 +531,5 @@
 | [[entities/mike-goodwin\|Mike Goodwin]] | AWS researcher; audio signal processing and ML for audio; co-author of Framewise WaveGAN | 2026-08-31 |
 | [[entities/sebastian-braun\|Sebastian Braun]] | AudioLabs Erlangen → Microsoft — residual-noise-control PMWF (2015), alternating Kalman filters (2018), NSNet2 and compressed complex MSE (with Tashev) | 2026-09-02 |
 | [[entities/konrad-kowalczyk\|Konrad Kowalczyk]] | Erlangen (LMS) → Warsaw University of Technology — spatial audio and noise reduction; co-author of the residual-noise-control PMWF | 2026-09-02 |
+| [[entities/osamu-hoshuyama\|Osamu Hoshuyama]] | Researcher (NEC background) on acoustic echo control — nonlinear residual echo suppression and sound-object-based echo control | 2026-09-02 |
 

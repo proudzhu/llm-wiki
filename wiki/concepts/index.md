@@ -474,4 +474,7 @@
 | [[concepts/framewise-convolution\|Framewise Convolution]] | Convolution whose kernel elements are frames rather than samples, built on fully-connected layers | 2026-08-31 |
 | [[concepts/munet\|μNet]] | Ultra-low-memory SE for embedded DSPs (Shetu et al. 2026): 46K params, 28 MMACs, 90 KB static, int8, 4–16 ms latency; hybrid feature reorientation + shared subband GRU; deployed on Cadence Tensilica HiFi 4 | 2026-08-31 |
 | [[concepts/noise-attenuation-control\|Noise Attenuation Control]] | Post-processing knob trading noise suppression against speech quality at inference time; empirically equivalent to power-law compression of the estimated mask (Shetu et al. 2026) | 2026-08-31 |
+| [[concepts/sound-object-based-echo-control\|Sound-Object-Based Echo Control]] | Echo/howling control paradigm: identify sound objects and gate pass/playback (default mute, conditional pass) instead of estimating echo paths | 2026-09-02 |
+| [[concepts/voice-switched-half-duplex\|Voice-Switched Half-Duplex]] | Classical speakerphone technique routing one talk direction at a time; extended by sound-object-based echo control into conditional half-duplex | 2026-09-02 |
+| [[concepts/audio-fingerprinting\|Audio Fingerprinting]] | Compact content-based audio signatures for identity matching under deformation; candidate feature for low-latency sound-object identification | 2026-09-02 |
 
