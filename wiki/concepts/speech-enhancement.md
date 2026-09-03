@@ -6,6 +6,7 @@ sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/shetu-2026-generative-discriminative-comparison/full-text.md
+  - raw/papers/li-2020-residual-noise-control/full-text.md
 tags:
   - speech-processing
   - audio-enhancement
@@ -31,6 +32,7 @@ Speech enhancement (SE) is the task of improving the perceptual quality and inte
 - Low-power spiking enhancement — SNN-based SE for neuromorphic/edge deployment (e.g., [[concepts/sse-net|SSE-Net]])
 - State-space-model-based enhancement — Mamba / S4ND / S4 as the core sequence model (e.g., [[concepts/semamba|SEMamba]], [[concepts/sicrn|SICRN]])
 - Training-paradigm choice — generative (GAN / diffusion / flow / consistency) vs. discriminative training, with quantified robustness, complexity, and hallucination trade-offs (see [[concepts/generative-vs-discriminative-speech-enhancement|Generative vs. Discriminative Speech Enhancement]])
+- Loss-function design with residual noise control — training-time trade-off between speech distortion and natural residual noise, generalizing MSE/components loss into a parameterized family (e.g., [[concepts/generalized-loss-function|Generalized Loss Function]])
 
 ## Related Concepts
 
@@ -48,6 +50,7 @@ Speech enhancement (SE) is the task of improving the perceptual quality and inte
 - [[concepts/generative-vs-discriminative-speech-enhancement|Generative vs. Discriminative Speech Enhancement]]
 - [[concepts/speech-enhancement-hallucination|Speech Enhancement Hallucination]]
 - [[concepts/diffusion-models-for-speech|Diffusion Models for Speech Enhancement]]
+- [[concepts/generalized-loss-function|Generalized Loss Function]]
 
 ## Related Sources
 
@@ -57,3 +60,4 @@ Speech enhancement (SE) is the task of improving the perceptual quality and inte
 - [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] — first Mamba-based SE; SOTA PESQ 3.69 on VoiceBank-DEMAND
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — classical statistical-model multi-channel SE for small devices (10.43 dB SNR / 0.39 PESQ-MOS on a 9.6 mm back-to-back array)
 - [[sources/shetu-2026-generative-discriminative-comparison|Shetu, Habets & Brendel 2026: Generative vs. Discriminative SE]] — 14-model controlled comparison of generative and discriminative training paradigms
+- [[sources/li-2020-residual-noise-control|Li, Peng, Zheng & Li 2020: Supervised Speech Enhancement with Residual Noise Control]] — generalized loss function embedding residual noise control in training

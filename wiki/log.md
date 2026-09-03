@@ -4919,3 +4919,23 @@ Ingested "A Comparison of Generative and Discriminative Methods for Speech Enhan
 - Updated concepts: diffusion-models-for-speech, one-step-generative-models, speech-enhancement, dns-challenge, urgent-challenge.
 - Updated synthesis [[synthesis/deep-speech-enhancement|deep-speech-enhancement]] (new seventh axis: training paradigm; GAN sweet spot, 60-100x diffusion GMACs cost, hallucination threshold around -7 dB SNR).
 - Indexes and statistics updated via batch manifest.
+
+---
+
+## [2026-09-03] ingest | A Supervised Speech Enhancement Approach with Residual Noise Control for Voice Communication (Li et al. 2020)
+
+- **Source**: `raw/papers/li-2020-residual-noise-control/full-text.md` (Zotero: 2UNUCIN9)
+- **Authors**: Andong Li, Renhua Peng, Chengshi Zheng, Xiaodong Li
+- **Published**: Applied Sciences (MDPI) 2020, vol. 10(8), article 2894
+- **DOI**: 10.3390/app10082894
+- **Summary**: Derives a generalized loss function for supervised speech enhancement that embeds residual noise control (preset noise floor β_0) in the training objective; MSE, components loss, and complex-spectral MSE are special cases; ~70% listener preference over MSE/TMSE/SI-SDR-trained baselines on the same causal U-Net.
+- **Pages created**: `wiki/sources/li-2020-residual-noise-control.md`, `wiki/entities/renhua-peng.md`, `wiki/concepts/generalized-loss-function.md`
+- **Pages updated**:
+  - `wiki/entities/andong-li.md`, `wiki/entities/chengshi-zheng.md`, `wiki/entities/xiaodong-li.md` — appended 2020 paper contribution + source cross-refs
+  - `wiki/concepts/noise-attenuation-control.md` — added Li 2020 as the training-time member of the residual-noise-control mechanism family
+  - `wiki/concepts/speech-distortion-constrained-noise-reduction.md` — added supervised/fullband generalization section (γ, α exponent family)
+  - `wiki/concepts/power-law-compression.md` — added loss-side spectral exponent α note (opposite quality-vs-α direction vs feature compression)
+  - `wiki/concepts/speech-enhancement.md` — added loss-function-design sub-area + source cross-refs
+  - `wiki/concepts/frequency-domain-loss.md` — added generalized exponent family variant
+  - `wiki/synthesis/deep-speech-enhancement.md` — added source row, Insight 2 data point (objective-metric vs listener disagreement), Takeaway 2 refinement, concept cross-refs
+  - `wiki/index.md`, `wiki/sources/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md` — new entries + statistics

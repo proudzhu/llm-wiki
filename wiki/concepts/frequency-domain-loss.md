@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-08-31
+updated: 2026-09-03
 sources:
   - raw/papers/valin-2024-fargan/full-text.md
   - raw/papers/mustafa-2023-framewise-wavegan/full-text.md
+  - raw/papers/li-2020-residual-noise-control/full-text.md
 tags:
   - loss-function
   - deep-learning
@@ -46,6 +47,14 @@ $$
 
 Uses multiple STFT configurations (different window sizes) for robustness across temporal/spectral resolutions.
 
+### Generalized Exponent Family with Residual Noise Control (Li et al. 2020)
+
+The magnitude-domain generalized loss of [[sources/li-2020-residual-noise-control|Li et al. 2020]],
+
+$$\mathcal{J}_x^{\gamma,\alpha} = \sum_{l,k}\left|(1-M_l^{\alpha}(k))\,S_l^{\alpha}(k)\right|^{\gamma} + \mu\sum_{l,k}\left||M_l(k)D_l(k)|^{\alpha\gamma} - |\beta_0 D_l(k)|^{\alpha\gamma}\right|,$$
+
+generalizes mag-MSE ($\gamma=2$, $\alpha=1$, no control) with a power-law spectral exponent and a **residual-noise-control term** that targets a preset noise floor $\beta_0$ instead of zero suppression — the training-time member of the noise-shaping family. See [[concepts/generalized-loss-function|Generalized Loss Function]] for the full family and special cases.
+
 A GAN-vocoder instance appears in [[concepts/fargan|FARGAN]] ([[sources/valin-2024-fargan|Valin et al. 2024]]): the pre-training loss sums **six** resolutions (window sizes 80–2560 samples at 75% overlap) of a magnitude loss with **power-law compression** $\gamma=0.5$ chosen to approximate perceived loudness,
 
 $$
@@ -77,6 +86,7 @@ This recipe traces directly to FARGAN's predecessor [[concepts/framewise-wavegan
 - [[concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
 - [[concepts/fargan|FARGAN]] — six-resolution γ=0.5 spectral pre-training loss plus STFT discriminators
 - [[concepts/framewise-wavegan|Framewise WaveGAN]] — the earlier instance: six-resolution sqrt-compressed spectral pre-training plus spectrogram discriminators
+- [[concepts/generalized-loss-function|Generalized Loss Function]] — exponent-parameterized magnitude-loss family with residual noise control
 
 ## Related Sources
 
@@ -84,3 +94,4 @@ This recipe traces directly to FARGAN's predecessor [[concepts/framewise-wavegan
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys frequency-domain loss functions (Mag-MSE, RI-MSE, RI+Mag combined, log-spectral, power-law-compressed) and the magnitude-phase "compensation effect" in RI-MSE
 - [[sources/valin-2024-fargan|Valin, Mustafa & Büthe 2024: FARGAN]] — GAN-vocoder instance: six-resolution power-law-compressed magnitude loss and frequency-domain discriminators
 - [[sources/mustafa-2023-framewise-wavegan|Mustafa et al. 2023: Framewise WaveGAN]] — earliest GAN-vocoder instance: sqrt-compressed multi-resolution loss; spectrogram discriminators adopted after time-domain discriminators failed to train stably
+- [[sources/li-2020-residual-noise-control|Li, Peng, Zheng & Li 2020: Supervised Speech Enhancement with Residual Noise Control]] — generalizes mag-MSE with exponents γ, α and a residual-noise-control term targeting a preset noise floor

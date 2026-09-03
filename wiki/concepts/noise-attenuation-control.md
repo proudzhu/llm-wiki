@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-08-31
-updated: 2026-09-02
+updated: 2026-09-03
 sources:
   - raw/papers/shetu-2026-munet/full-text.md
   - raw/papers/braun-2015-residual-noise-control/full-text.md
+  - raw/papers/li-2020-residual-noise-control/full-text.md
 tags:
   - speech-enhancement
   - noise-suppression
@@ -27,6 +28,8 @@ The concept originates with the **parametric multichannel Wiener filter with res
 $$\mathbf{h}_Z = \left(\boldsymbol{\Phi}_x + \mu\boldsymbol{\Phi}_v\right)^{-1}\left(\boldsymbol{\Phi}_x\mathbf{e}_1 + \mu\boldsymbol{\Phi}_v\mathbf{c}_1\right) = (1-c)\,\mathbf{h}_X + c\,\mathbf{e}_1$$
 
 an interpolation between the standard [[concepts/parametric-multi-channel-wiener-filter|PMWF]] and the reference microphone that (i) directly caps the maximum noise reduction at $c$ (low SNR asymptote), (ii) requires no rank-one assumption on $\Phi_x$ — unlike spectral-gain flooring, which fails for reverberant/higher-rank desired signals — and (iii) bounds the speech distortion index at $(1-c)^2$ times the standard PMWF's. Two mechanisms select $c$: a fixed (optionally frequency-dependent) value for constant maximum suppression and spectral shaping of the residual noise, or a noise-adaptive rule $c = \min[\sqrt{\phi_0/(\mu\,\phi_V)}, 1]$ that keeps the *output noise power* constant in slowly time-varying noise fields.
+
+[[sources/li-2020-residual-noise-control|Li et al. 2020]] first carried the idea into *supervised training*, five years before μNet: their [[concepts/generalized-loss-function|generalized loss function]] replaces the residual-noise penalty with a **noise-control term** $\sum_{l,k}\big||M_l(k)D_l(k)|^{\alpha\gamma} - |\beta_0 D_l(k)|^{\alpha\gamma}\big|$ that drives the filtered noise toward a preset threshold $\beta_0$ (e.g. −20 dB) instead of toward zero. With $\beta_0 = -20$ dB, listeners preferred the trained model over MSE/TMSE/SI-SDR baselines by ~70%, mainly because the residual noise retains the character of the background noise. Unlike Braun's $c$ and Shetu's NAL, this mechanism acts at *training time* — the trade-off is baked into the weights, and changing $\beta_0$ requires retraining.
 
 [[sources/shetu-2026-munet|Shetu et al. 2026]] transplanted the idea to single-channel DNN enhancement as the user-facing NAL knob on μNet — mixing a scaled residual-noise estimate back into the enhanced output. This mirrors how classical hearing-aid noise reduction exposes a suppression-depth parameter to the fitter/user.
 
@@ -59,8 +62,10 @@ NAL −30 dB achieves the best PESQ of all models in the comparison (including G
 - [[concepts/complex-ratio-mask|Complex Ratio Mask (cRM)]]
 - [[concepts/parametric-multi-channel-wiener-filter|Parametric Multi-Channel Wiener Filter (PMWF)]]
 - [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
+- [[concepts/generalized-loss-function|Generalized Loss Function]]
 
 ## Related Sources
 
 - [[sources/shetu-2026-munet|Shetu et al. 2026: μNet]]
 - [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015: Residual Noise Control PMWF]]
+- [[sources/li-2020-residual-noise-control|Li, Peng, Zheng & Li 2020: Supervised Speech Enhancement with Residual Noise Control]] — training-time member: residual-noise-control term in the loss

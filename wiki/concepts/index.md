@@ -479,4 +479,5 @@
 | [[concepts/audio-fingerprinting\|Audio Fingerprinting]] | Compact content-based audio signatures for identity matching under deformation; candidate feature for low-latency sound-object identification | 2026-09-02 |
 | [[concepts/generative-vs-discriminative-speech-enhancement\|Generative vs. Discriminative Speech Enhancement]] | Training-paradigm choice for speech enhancement: discriminative regression, adversarial (GAN), and diffusion/score-matching objectives; the objective — not the backbone — drives robustness and cost. | 2026-09-03 |
 | [[concepts/speech-enhancement-hallucination\|Speech Enhancement Hallucination]] | Generative SE hallucination below about -7 dB SNR: spurious spectral content not present in the target, measured by WER/CER and Levenshtein phoneme similarity (LPS). | 2026-09-03 |
+| [[concepts/generalized-loss-function\|Generalized Loss Function]] | Training-loss family with exponents gamma/alpha and residual-noise-control term beta_0 for supervised SE | 2026-09-03 |
 

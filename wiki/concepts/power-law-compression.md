@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-07-16
-updated: 2026-08-31
+updated: 2026-09-03
+sources:
+  - raw/papers/li-2020-residual-noise-control/full-text.md
 tags:
   - signal-processing
   - speech-enhancement
@@ -32,6 +34,10 @@ Zheng et al. (2023) report a surprising listener-dependent effect of input-featu
 
 [[sources/shetu-2026-munet|Shetu et al. 2026]] show empirically (with [[concepts/munet|μNet]] on DNS) that the compression factor $\alpha$ and the post-processing [[concepts/noise-attenuation-control|noise attenuation level]] (NAL) act as **near-equivalent controls** of the same speech-quality vs. noise-suppression trade-off: increasing $\alpha$ improves speech quality at the cost of less suppression, functionally like a higher NAL. The practical difference is that each $\alpha$ requires retraining, whereas NAL is adjustable at inference time — so they recommend training with aggressive compression (low $\alpha$) and exposing NAL as the user-facing knob.
 
+## Loss-Side Exponent (Li 2020)
+
+A *loss-side* counterpart appears in the [[concepts/generalized-loss-function|generalized loss function]] of [[sources/li-2020-residual-noise-control|Li et al. 2020]], where the spectral exponent $\alpha \ge 1$ is applied to the spectra inside the loss (and, analytically, inside the generalized Wiener gain $M = \left(\xi^{\alpha}/(\mu + \xi^{\alpha})\right)^{1/\alpha}$) rather than to input features. The suppression direction matches feature compression: raising $\alpha$ pushes the gain toward 1, reducing both noise attenuation and speech attenuation. The quality direction differs, however — Li et al. report PESQ/SDR *declining* as $\alpha$ goes from 1 to 2 (the preserved residual noise outweighs the reduced distortion), whereas Shetu et al. report quality gains from raising the feature-compression α. Li et al. also restrict $\alpha \ge 1$ because smaller exponents cause infinite gradients during backpropagation.
+
 ## Related Concepts
 
 - [[concepts/ulcnet|ULCNet]]
@@ -40,9 +46,11 @@ Zheng et al. (2023) report a surprising listener-dependent effect of input-featu
 - [[concepts/channel-wise-feature-reorientation|Channel-Wise Feature Reorientation]]
 - [[concepts/speech-enhancement|Speech Enhancement]]
 - [[concepts/adaptcrn|AdaptCRN]]
+- [[concepts/generalized-loss-function|Generalized Loss Function]]
 
 ## Related Sources
 
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]]
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — AdaptCRN uses exponent 0.3 for magnitude MSE loss and 0.7 for real/imag MSE loss (i.e., real/imag parts compressed by $|S|^{0.7}$ before MSE), with $\log_{10}$ applied to compress magnitude input features in the spectral compression module. Ablation: removing dynamic-range compression costs ~0.2 dB SI-SNR and ~0.05 PESQ on AdaptCRN.
 - [[sources/shetu-2026-munet|Shetu et al. 2026: μNet]] — documents the PF vs. NAL equivalence
+- [[sources/li-2020-residual-noise-control|Li et al. 2020: Supervised Speech Enhancement with Residual Noise Control]] — loss-side spectral exponent α (≥1) with the opposite quality-vs-α direction

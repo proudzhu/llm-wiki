@@ -532,4 +532,5 @@
 | [[entities/sebastian-braun\|Sebastian Braun]] | AudioLabs Erlangen → Microsoft — residual-noise-control PMWF (2015), alternating Kalman filters (2018), NSNet2 and compressed complex MSE (with Tashev) | 2026-09-02 |
 | [[entities/konrad-kowalczyk\|Konrad Kowalczyk]] | Erlangen (LMS) → Warsaw University of Technology — spatial audio and noise reduction; co-author of the residual-noise-control PMWF | 2026-09-02 |
 | [[entities/osamu-hoshuyama\|Osamu Hoshuyama]] | Researcher (NEC background) on acoustic echo control — nonlinear residual echo suppression and sound-object-based echo control | 2026-09-02 |
+| [[entities/renhua-peng\|Renhua Peng]] | Institute of Acoustics, CAS — speech enhancement, noise reduction; co-author of residual-noise-control GL loss | 2026-09-03 |
 

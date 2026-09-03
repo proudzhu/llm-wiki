@@ -538,6 +538,7 @@
 | [[entities/sebastian-braun\|Sebastian Braun]] | AudioLabs Erlangen → Microsoft — residual-noise-control PMWF (2015), alternating Kalman filters (2018), NSNet2 and compressed complex MSE (with Tashev) | 2026-09-02 |
 | [[entities/konrad-kowalczyk\|Konrad Kowalczyk]] | Erlangen (LMS) → Warsaw University of Technology — spatial audio and noise reduction; co-author of the residual-noise-control PMWF | 2026-09-02 |
 | [[entities/osamu-hoshuyama\|Osamu Hoshuyama]] | Researcher (NEC background) on acoustic echo control — nonlinear residual echo suppression and sound-object-based echo control | 2026-09-02 |
+| [[entities/renhua-peng\|Renhua Peng]] | Institute of Acoustics, CAS — speech enhancement, noise reduction; co-author of residual-noise-control GL loss | 2026-09-03 |
 
 ---
 
@@ -1022,6 +1023,7 @@
 | [[concepts/audio-fingerprinting\|Audio Fingerprinting]] | Compact content-based audio signatures for identity matching under deformation; candidate feature for low-latency sound-object identification | 2026-09-02 |
 | [[concepts/generative-vs-discriminative-speech-enhancement\|Generative vs. Discriminative Speech Enhancement]] | Training-paradigm choice for speech enhancement: discriminative regression, adversarial (GAN), and diffusion/score-matching objectives; the objective — not the backbone — drives robustness and cost. | 2026-09-03 |
 | [[concepts/speech-enhancement-hallucination\|Speech Enhancement Hallucination]] | Generative SE hallucination below about -7 dB SNR: spurious spectral content not present in the target, measured by WER/CER and Levenshtein phoneme similarity (LPS). | 2026-09-03 |
+| [[concepts/generalized-loss-function\|Generalized Loss Function]] | Training-loss family with exponents gamma/alpha and residual-noise-control term beta_0 for supervised SE | 2026-09-03 |
 
 ---
 
@@ -1220,6 +1222,7 @@
 | [[sources/braun-2015-residual-noise-control\|Braun, Kowalczyk & Habets 2015: Residual Noise Control Using a Parametric Multichannel Wiener Filter]] | Generalized PMWF with residual noise control — target = speech + c·noise yields (1−c)h_X + c·e₁; rank-one-free control of maximum noise reduction; ancestor of μNet's NAL knob | 2026-09-02 |
 | [[sources/hoshuyama-2026-sound-object-echo-control\|Hoshuyama 2026: Sound-Object-Based Echo Control]] | Proposes sound-object identification with default-mute/conditional-pass gating to suppress echo and howling from complicated inter-terminal acoustic paths | 2026-09-02 |
 | [[sources/shetu-2026-generative-discriminative-comparison\|Shetu, Habets & Brendel 2026: Generative vs. Discriminative SE]] | Controlled 14-model comparison of discriminative, GAN, and diffusion training for speech enhancement: GAN training wins on robustness at 60-100x lower cost; hallucination emerges below -7 dB SNR. | 2026-09-03 |
+| [[sources/li-2020-residual-noise-control\|Li, Peng, Zheng & Li 2020: A Supervised Speech Enhancement Approach with Residual Noise Control for Voice Communication]] | Generalized loss function with residual noise control for DNN SE; unifies MSE/components loss; ~70% listener preference | 2026-09-03 |
 
 ---
 
@@ -1273,10 +1276,10 @@
 
 ## Statistics
 
-- **Total pages**: 1222
-- **Entities**: 528
-- **Concepts**: 475
-- **Sources**: 189
+- **Total pages**: 1225
+- **Entities**: 529
+- **Concepts**: 476
+- **Sources**: 190
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-09-03

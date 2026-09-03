@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-15
-updated: 2026-08-01
+updated: 2026-09-03
 tags:
   - researcher
   - hearing-aids
@@ -23,6 +23,7 @@ tags:
 - Deep learning solution to marginal stability problems of acoustic feedback systems for hearing aids (JASA 2022)
 - Sixty years of frequency-domain monaural speech enhancement survey (Trends in Hearing 2023)
 - Analysis of additional stable gain by frequency shifting for acoustic feedback suppression (SPL 2016)
+- Co-authored "A Supervised Speech Enhancement Approach with Residual Noise Control for Voice Communication" (Applied Sciences 2020) — [[sources/li-2020-residual-noise-control|Li et al. 2020]]: [[concepts/generalized-loss-function|generalized loss function]] with residual noise control for supervised SE (corresponding author; conceptualization, methodology, review and editing)
 
 ## Related Sources
 
@@ -30,6 +31,7 @@ tags:
 - [[sources/liu-2026-sse-net|Liu et al. 2026: SSE-Net]]
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]]
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]]
+- [[sources/li-2020-residual-noise-control|Li et al. 2020: Supervised Speech Enhancement with Residual Noise Control]]
 
 ## Related Concepts
 
