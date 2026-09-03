@@ -20,6 +20,7 @@ sources:
   - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
   - raw/papers/shetu-2026-generative-discriminative-comparison/full-text.md
   - raw/papers/li-2020-residual-noise-control/full-text.md
+  - raw/papers/ke-2021-low-complexity-artificial-noise-suppression/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -50,6 +51,7 @@ The thesis here is that the field's progress is **not a single replacement story
 | [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement\|Tan & Wang 2018 (CRN)]] | 2018 | Backbone | CED + LSTM, causal convolutions; the foundational deep SE architecture (17.58M params) |
 | [[sources/pandey-2019-cnn-speech-enhancement-time-domain\|Pandey & Wang 2019 (AECNN)]] | 2019 | Domain | Time-domain U-Net trained with STFT-magnitude loss → frequency-loss-for-time-domain-nets paradigm |
 | [[sources/li-2020-residual-noise-control\|Li et al. 2020 (GL)]] | 2020 | Training objective | [[concepts/generalized-loss-function\|Generalized loss]] with residual noise control; MSE / components loss as special cases; same-net four-loss comparison with subjective validation |
+| [[sources/ke-2021-low-complexity-artificial-noise-suppression\|Ke et al. 2021 (ANS)]] | 2021 | Post-processing | Classical MMSE/SPP postfilter on the DNN output suppressing [[concepts/artificial-residual-noise\|artificial residual noise]] — three SPP strategies at 0.0098–0.016 MFLOPs/frame |
 | [[sources/schroter-2022-deepfilternet\|Schröter et al. 2022 (DeepFilterNet)]] | 2022 | Target | Deep Filtering: complex temporal filter generalizing the complex ratio mask |
 | [[sources/indenbom-2023-deepvqe\|Indenbom et al. 2023 (DeepVQE)]] | 2023 | Target | Complex Convolving Mask: T-F-neighborhood filter with 120° three-vector weights |
 | [[sources/zheng-2023-survey-frequency-domain-speech-enhancement\|Zheng et al. 2023]] | 2023 | All | 60-year survey; five-group taxonomy; magnitude–phase "compensation effect" |
@@ -95,6 +97,8 @@ The decisive observation came from [[sources/pandey-2019-cnn-speech-enhancement-
 The 60-year survey ([[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng 2023]]) notes the field historically invested more research effort in frequency-domain methods, partly explaining their lead — but the convergence is now clear: modern systems use **time-domain or learned-encoder representations with multi-resolution STFT / RI losses**, and the choice of loss often matters more than minor architecture changes (the DCCRN(SNR) variant demonstrates loss choice outweighing architecture tweaks).
 
 A complementary early data point: [[sources/li-2020-residual-noise-control|Li et al. 2020]] trained one 0.59M causal U-Net under four objectives (MSE, TMSE, SI-SDR, and their [[concepts/generalized-loss-function|generalized loss]] with residual noise control). The objective metrics and the listeners disagreed: SI-SDR loss achieved the best SDR but a PESQ below even plain MSE, while the residual-noise-controlled loss — only *comparable* on objective scores — won ~70% of pairwise preferences, because MSE-style objectives drive residual noise to zero and leave unnatural artifacts that the metrics miss. Two refinements follow: (i) loss choice dominates not only architecture but also *metric optimization* — each loss optimizes its own metric and degrades the others; (ii) PESQ/SDR are blind to the residual-noise-naturalness failure mode, which is exactly the axis the noise-shaping loss family (and later inference-time NAL, see [[concepts/noise-attenuation-control|Noise Attenuation Control]]) targets.
+
+[[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke et al. 2021]] — the same CAS group — supply the inference-time *classical* counterpart: a psychoacoustic model shows the [[concepts/artificial-residual-noise|artificial residual noise]] of four MSE-trained front-ends exceeds the speech masking threshold by 10–50 dB, and an MMSE noise-PSD postfilter with three re-designed SPP inputs (from the noisy spectrum, from the DNN gain, from a sigmoid of the PSD ratio) removes it at 0.0098–0.016 MFLOPs/frame — again with >60% AB preference far out of proportion to the modest PESQ/segSNR gains. The residual-noise-control design space is thereby mapped at three points: training-time loss (Li 2020), inference-time statistical postfilter (Ke 2021), and inference-time NAL mixing (Shetu 2026).
 
 ## Insight 3: The Magnitude–Phase "Compensation Effect" Drove Architectural Decoupling
 
@@ -219,4 +223,4 @@ The canonical survey for the TSE half of this complementarity is [[sources/zmoli
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]] · [[concepts/neural-beamforming|Neural Beamforming]] · [[concepts/array-invariant-speech-enhancement|Array-Invariant SE]] · [[concepts/geometry-aware-dynamic-convolution|Geo-DConv]] · [[concepts/output-based-speech-enhancement|Output-based SE]]
 - [[concepts/personalized-speech-enhancement|Personalized SE]] · [[concepts/target-speaker-extraction|Target Speaker Extraction]] · [[concepts/own-voice-cancellation|Own-Voice Cancellation]] · [[concepts/prior-matching|Prior Matching]]
 - [[concepts/diffusion-models-for-speech|Diffusion Models for Speech]] · [[concepts/drifting-models|Drifting Models]] · [[concepts/generative-vs-discriminative-speech-enhancement|Generative vs. Discriminative Speech Enhancement]] · [[concepts/speech-enhancement-hallucination|Speech Enhancement Hallucination]] · [[concepts/one-step-generative-models|One-Step Generative Models]]
-- [[concepts/generalized-loss-function|Generalized Loss Function]] · [[concepts/frequency-domain-loss|Frequency-Domain Loss]] · [[concepts/noise-attenuation-control|Noise Attenuation Control]] — training-objective / noise-control lineage
+- [[concepts/generalized-loss-function|Generalized Loss Function]] · [[concepts/frequency-domain-loss|Frequency-Domain Loss]] · [[concepts/noise-attenuation-control|Noise Attenuation Control]] · [[concepts/artificial-residual-noise|Artificial Residual Noise]] — training-objective / noise-control lineage

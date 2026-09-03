@@ -533,4 +533,5 @@
 | [[entities/konrad-kowalczyk\|Konrad Kowalczyk]] | Erlangen (LMS) → Warsaw University of Technology — spatial audio and noise reduction; co-author of the residual-noise-control PMWF | 2026-09-02 |
 | [[entities/osamu-hoshuyama\|Osamu Hoshuyama]] | Researcher (NEC background) on acoustic echo control — nonlinear residual echo suppression and sound-object-based echo control | 2026-09-02 |
 | [[entities/renhua-peng\|Renhua Peng]] | Institute of Acoustics, CAS — speech enhancement, noise reduction; co-author of residual-noise-control GL loss | 2026-09-03 |
+| [[entities/yuxuan-ke\|Yuxuan Ke]] | Institute of Acoustics, CAS — first author of the low-complexity artificial-noise-suppression postfilter for DNN speech enhancement | 2026-09-03 |
 

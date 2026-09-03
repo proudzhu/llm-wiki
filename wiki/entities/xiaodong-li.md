@@ -20,12 +20,14 @@ tags:
 - DeepPEM-AFC: GRU-based step-size prediction for PEM-AFC (ICASSP 2025)
 - Co-authored comprehensive 60-year survey of frequency-domain monaural speech enhancement (Trends in Hearing 2023) — [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023]]
 - Co-authored "A Supervised Speech Enhancement Approach with Residual Noise Control for Voice Communication" (Applied Sciences 2020) — [[sources/li-2020-residual-noise-control|Li et al. 2020]]: generalized loss function with residual noise control for supervised SE (supervision)
+- Co-authored "Low-complexity artificial noise suppression methods for deep learning-based speech enhancement algorithms" (EURASIP Journal on Audio, Speech, and Music Processing 2021) — [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke et al. 2021]]: MMSE/SPP postfilter suppressing [[concepts/artificial-residual-noise|artificial residual noise]] of DNN front-ends
 
 ## Related Sources
 
 - [[sources/hao-2025-l3c-deepmfc|Hao et al. 2025: L3C-DeepMFC]]
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]]
 - [[sources/li-2020-residual-noise-control|Li et al. 2020: Supervised Speech Enhancement with Residual Noise Control]]
+- [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke et al. 2021: Low-Complexity Artificial Noise Suppression]]
 
 ## Related Concepts
 

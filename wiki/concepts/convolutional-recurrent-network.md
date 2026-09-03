@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-08-01
+updated: 2026-09-03
 sources:
 tags:
   - deep-learning
@@ -74,3 +74,4 @@ The CRN follows an **encoder-decoder** structure with a recurrent bottleneck:
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — applies [[concepts/adaptive-convolution|adaptive convolution]] across the CRN family (DPCRN at 3 scales, DCCRN, GTCRN, LiSenNet); proposes [[concepts/adaptcrn|AdaptCRN]]
 - [[sources/liu-2023-iccrn|Liu & Zhang 2023: ICCRN]] — inplace CRN variant with a cepstral-space branch; competes with DPCRN/DCCRN/GCRN baselines on WSJ0 SI-84 at low SNR
 - [[sources/zhao-2024-sicrn|Zhao, He & Zhang 2024: SICRN]] — inplace CRN variant with a state-space (S4ND) global branch; near-FullSubNet quality on DNS Challenge at 0.38× params, 0.14× MACs, 0 ms look-ahead
+- [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke et al. 2021: Low-Complexity Artificial Noise Suppression]] — CRN as postfiltering front-end baseline; SPP-based postfilter lifts CRN PESQ 2.59 → 2.74

@@ -4939,3 +4939,23 @@ Ingested "A Comparison of Generative and Discriminative Methods for Speech Enhan
   - `wiki/concepts/frequency-domain-loss.md` — added generalized exponent family variant
   - `wiki/synthesis/deep-speech-enhancement.md` — added source row, Insight 2 data point (objective-metric vs listener disagreement), Takeaway 2 refinement, concept cross-refs
   - `wiki/index.md`, `wiki/sources/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md` — new entries + statistics
+
+---
+
+## [2026-09-03] ingest | Low-Complexity Artificial Noise Suppression for Deep Learning-Based Speech Enhancement (Ke et al. 2021)
+
+**Source**: [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke, Li, Zheng, Peng & Li 2021: Low-Complexity Artificial Noise Suppression]] (EURASIP Journal on Audio, Speech, and Music Processing, DOI 10.1186/s13636-021-00204-9)
+
+**What was ingested**: Full paper via MinerU extraction (PDF from Zotero), with publisher-page cross-check recovering the minus signs MinerU dropped on the SNR ranges. 13 figures embedded with hash-verified filenames.
+
+**New pages**:
+- Source: [[sources/ke-2021-low-complexity-artificial-noise-suppression|ke-2021-low-complexity-artificial-noise-suppression]]
+- Entity: [[entities/yuxuan-ke|yuxuan-ke]] (first author; the other four authors already existed)
+- Concept: [[concepts/artificial-residual-noise|artificial-residual-noise]]
+
+**Updated pages**:
+- Entities: [[entities/andong-li|andong-li]], [[entities/chengshi-zheng|chengshi-zheng]], [[entities/renhua-peng|renhua-peng]], [[entities/xiaodong-li|xiaodong-li]] (append-only Key Contributions bullets)
+- Concepts: [[concepts/speech-presence-probability|speech-presence-probability]] (new section: three SPP-input strategies for DNN-output postfiltering), [[concepts/noise-attenuation-control|noise-attenuation-control]] (Ke 2021 as the classical-postfilter member of the residual-noise family), [[concepts/convolutional-recurrent-network|convolutional-recurrent-network]] (postfiltering front-end baseline application)
+- Synthesis: [[synthesis/deep-speech-enhancement|deep-speech-enhancement]] (Sources Synthesized row; Insight 2 extension mapping the residual-noise-control design space at three points: training-time loss / inference-time statistical postfilter / inference-time NAL)
+
+**Key takeaways**: DNN speech enhancement leaves *artificial residual noise* — non-stationary output of the nonlinear mapping, 10–50 dB above the speech masking threshold. A classical Gerkmann–Hendriks MMSE noise-PSD postfilter fails on it because SPP overestimation freezes noise tracking; three re-designed SPP inputs (from the noisy spectrum, from the DNN gain via γ = 1/(1 − min(M̄, 0.999)), and an adaptive sigmoid prior from the PSD ratio ζ) fix the tracking at 0.0098–0.016 MFLOPs/frame — ~3 orders of magnitude below the DNN front-ends — lifting PESQ by ~0.1–0.15 and winning >60% of AB preferences. Same CAS group as Li 2020 (training-time residual noise control): the subjective–objective gap (PESQ/segSNR blind to residual-noise audibility) recurs in both.

@@ -20,15 +20,18 @@ tags:
 - Co-authored comprehensive 60-year survey of frequency-domain monaural speech enhancement (Trends in Hearing 2023) — [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023]]
 - Co-authored "SSE-Net: Toward Low-Power-Consumption Spiking Neural Network for Monaural Speech Enhancement" (IEEE/ACM TASLP 2026) — [[sources/liu-2026-sse-net|Liu et al. 2026]]: first spike-native SNN-SE architecture (SFEB/ITB blocks), SOTA among SNN-SE models with 62% lower power proxy than Spiking-FullSubNet
 - First-authored "A Supervised Speech Enhancement Approach with Residual Noise Control for Voice Communication" (Applied Sciences 2020) — [[sources/li-2020-residual-noise-control|Li et al. 2020]]: derived the [[concepts/generalized-loss-function|generalized loss function]] embedding residual noise control in DNN speech enhancement training (conceptualization, methodology, original draft)
+- Co-authored "Low-complexity artificial noise suppression methods for deep learning-based speech enhancement algorithms" (EURASIP Journal on Audio, Speech, and Music Processing 2021) — [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke et al. 2021]]: classical MMSE/SPP postfilter suppressing [[concepts/artificial-residual-noise|artificial residual noise]] of DNN front-ends at ~0.01 MFLOPs/frame
 
 ## Related Sources
 
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]]
 - [[sources/liu-2026-sse-net|Liu et al. 2026: SSE-Net]]
 - [[sources/li-2020-residual-noise-control|Li et al. 2020: Supervised Speech Enhancement with Residual Noise Control]]
+- [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke et al. 2021: Low-Complexity Artificial Noise Suppression]]
 
 ## Related Concepts
 
 - [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
 - [[concepts/generalized-loss-function|Generalized Loss Function]]
+- [[concepts/artificial-residual-noise|Artificial Residual Noise]]
