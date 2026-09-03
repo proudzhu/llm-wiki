@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-07-16
-updated: 2026-08-31
+updated: 2026-09-03
 tags:
   - researcher
   - speech-enhancement
@@ -13,15 +13,17 @@ tags:
 
 **Affiliation**: International Audio Laboratories Erlangen, Erlangen, Germany (previously Fraunhofer IIS)
 **Role**: Researcher
-**Research Focus**: Low-complexity deep learning for speech enhancement, acoustic echo reduction, noise suppression, and embedded DSP deployment.
+**Research Focus**: Low-complexity deep learning for speech enhancement, acoustic echo reduction, noise suppression, embedded DSP deployment, and generative (GAN/diffusion) speech enhancement for low-SNR conditions.
 
 ## Key Contributions
 
 - ULCNet: Ultra-low complexity deep learning-based noise suppression (ICASSP 2024)
 - Hybrid low-complexity joint acoustic echo and noise reduction (IWAENC 2024)
 - μNet: ultra-low-memory (90 KB) and low-complexity (28 MMACs) speech enhancement for embedded DSPs with 4 ms latency and int8 quantization (arXiv 2026) — introduces [[concepts/noise-attenuation-control|noise attenuation control]]
+- Comprehensive comparison of generative (GAN, diffusion, flow matching, consistency) and discriminative SE methods across robustness, complexity, and hallucination (arXiv 2026) — [[sources/shetu-2026-generative-discriminative-comparison|Shetu et al. 2026]]
 
 ## Related Sources
 
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]]
 - [[sources/shetu-2026-munet|Shetu et al. 2026: μNet]]
+- [[sources/shetu-2026-generative-discriminative-comparison|Shetu et al. 2026: Generative vs. Discriminative SE]]

@@ -1020,6 +1020,8 @@
 | [[concepts/sound-object-based-echo-control\|Sound-Object-Based Echo Control]] | Echo/howling control paradigm: identify sound objects and gate pass/playback (default mute, conditional pass) instead of estimating echo paths | 2026-09-02 |
 | [[concepts/voice-switched-half-duplex\|Voice-Switched Half-Duplex]] | Classical speakerphone technique routing one talk direction at a time; extended by sound-object-based echo control into conditional half-duplex | 2026-09-02 |
 | [[concepts/audio-fingerprinting\|Audio Fingerprinting]] | Compact content-based audio signatures for identity matching under deformation; candidate feature for low-latency sound-object identification | 2026-09-02 |
+| [[concepts/generative-vs-discriminative-speech-enhancement\|Generative vs. Discriminative Speech Enhancement]] | Training-paradigm choice for speech enhancement: discriminative regression, adversarial (GAN), and diffusion/score-matching objectives; the objective — not the backbone — drives robustness and cost. | 2026-09-03 |
+| [[concepts/speech-enhancement-hallucination\|Speech Enhancement Hallucination]] | Generative SE hallucination below about -7 dB SNR: spurious spectral content not present in the target, measured by WER/CER and Levenshtein phoneme similarity (LPS). | 2026-09-03 |
 
 ---
 
@@ -1217,6 +1219,7 @@
 | [[sources/shetu-2026-munet\|Shetu et al. 2026: μNet — Ultra-Low-Memory and Low-Complexity Speech Enhancement for Embedded DSPs]] | 46K params / 28 MMACs / 90 KB static, int8, 4–16 ms latency on Cadence Tensilica HiFi 4; beats GTCRN perceptually; noise attenuation control ≈ power-law compression | 2026-08-31 |
 | [[sources/braun-2015-residual-noise-control\|Braun, Kowalczyk & Habets 2015: Residual Noise Control Using a Parametric Multichannel Wiener Filter]] | Generalized PMWF with residual noise control — target = speech + c·noise yields (1−c)h_X + c·e₁; rank-one-free control of maximum noise reduction; ancestor of μNet's NAL knob | 2026-09-02 |
 | [[sources/hoshuyama-2026-sound-object-echo-control\|Hoshuyama 2026: Sound-Object-Based Echo Control]] | Proposes sound-object identification with default-mute/conditional-pass gating to suppress echo and howling from complicated inter-terminal acoustic paths | 2026-09-02 |
+| [[sources/shetu-2026-generative-discriminative-comparison\|Shetu, Habets & Brendel 2026: Generative vs. Discriminative SE]] | Controlled 14-model comparison of discriminative, GAN, and diffusion training for speech enhancement: GAN training wins on robustness at 60-100x lower cost; hallucination emerges below -7 dB SNR. | 2026-09-03 |
 
 ---
 
@@ -1270,10 +1273,10 @@
 
 ## Statistics
 
-- **Total pages**: 1219
+- **Total pages**: 1222
 - **Entities**: 528
-- **Concepts**: 473
-- **Sources**: 188
+- **Concepts**: 475
+- **Sources**: 189
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-09-03

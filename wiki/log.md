@@ -4907,3 +4907,15 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
 - **Pages updated**: `wiki/concepts/acoustic-howling-suppression.md` (added object-identity gating section for inter-terminal howling), `wiki/concepts/acoustic-echo-cancellation.md` (added "Beyond Path Estimation" section), `wiki/concepts/acoustic-feedback.md` (added inter-terminal loops + object-identity gating subsection)
 
 ---
+---
+
+## [2026-09-03] ingest | A Comparison of Generative and Discriminative Methods for Speech Enhancement
+
+Ingested "A Comparison of Generative and Discriminative Methods for Speech Enhancement: Robustness, Complexity, and Hallucination" (Shetu, Habets & Brendel, arXiv 2606.02913) from Zotero via the arXiv HTML pipeline.
+
+- Created source page [[sources/shetu-2026-generative-discriminative-comparison|shetu-2026-generative-discriminative-comparison]] covering the 14-model controlled comparison (DCCRN → SEBridge) across discriminative, GAN, and diffusion training objectives.
+- Created concepts [[concepts/generative-vs-discriminative-speech-enhancement|generative-vs-discriminative-speech-enhancement]] and [[concepts/speech-enhancement-hallucination|speech-enhancement-hallucination]].
+- Updated entities: shrishti-saha-shetu, emanuel-habets, andreas-brendel.
+- Updated concepts: diffusion-models-for-speech, one-step-generative-models, speech-enhancement, dns-challenge, urgent-challenge.
+- Updated synthesis [[synthesis/deep-speech-enhancement|deep-speech-enhancement]] (new seventh axis: training paradigm; GAN sweet spot, 60-100x diffusion GMACs cost, hallucination threshold around -7 dB SNR).
+- Indexes and statistics updated via batch manifest.

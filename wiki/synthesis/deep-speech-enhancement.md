@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-04
-updated: 2026-08-31
+updated: 2026-09-03
 sources:
   - raw/papers/tan-2018-convolutional-recurrent-network-speech-enhancement/full-text.md
   - raw/papers/pandey-2019-cnn-speech-enhancement-time-domain/full-text.md
@@ -18,6 +18,7 @@ sources:
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
   - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
+  - raw/papers/shetu-2026-generative-discriminative-comparison/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -28,7 +29,7 @@ tags:
 
 # Deep Speech Enhancement: Architectural & Methodological Evolution
 
-> Cross-source synthesis tracing how deep learning for speech enhancement (SE) evolved from the 2018 Convolutional Recurrent Network to the 2026 SSM / array-invariant / generative frontier — along six largely independent axes: training target, signal domain, backbone, efficiency, multi-channel integration, and conditioning paradigm.
+> Cross-source synthesis tracing how deep learning for speech enhancement (SE) evolved from the 2018 Convolutional Recurrent Network to the 2026 SSM / array-invariant / generative frontier — along seven largely independent axes: training target, signal domain, backbone, efficiency, multi-channel integration, conditioning paradigm, and training paradigm (generative vs. discriminative).
 
 ## Scope and Relationship to Other Syntheses
 
@@ -61,6 +62,7 @@ The thesis here is that the field's progress is **not a single replacement story
 | [[sources/apostolidis-2026-listen-first-output-based-multi-microphone\|Apostolidis 2026]] | 2026 | Multi-channel | Output-based SE: select MPDR output by Glimpse Proportion, not input features |
 | [[sources/ostergaard-2026-own-voice-cancellation\|Østergaard et al. 2026 (OVC)]] | 2026 | Conditioning | Inverts PSE: remove the enrolled speaker; Mamba-MinGRU at 2 ms |
 | [[sources/shetu-2026-munet\|Shetu et al. 2026 (μNet)]] | 2026 | Efficiency | 46K params / 90 KB static / int8 on HiFi 4 DSP; 4–16 ms latency; [[concepts/noise-attenuation-control\|noise attenuation control]] |
+| [[sources/shetu-2026-generative-discriminative-comparison\|Shetu, Habets & Brendel 2026]] | 2026 | Training paradigm | 14-model controlled comparison of discriminative / GAN / diffusion training; same NCSN++ backbone under three objectives |
 
 ## Insight 1: The Training Target Evolved from Pointwise Masks to Neighborhood Filters
 
@@ -166,6 +168,8 @@ The conceptual move from phase 2 to phase 3 is from "learn the beamformer" to "c
 
 Yet **discriminative** [[concepts/semamba\|SEMamba]] + PCS still holds SOTA PESQ 3.69 — higher than every one-step generative method. The practical split is clear: **generative methods win on unseen-noise / generalization robustness** (they model the clean-speech distribution, not a mapping), while **discriminative methods win on latency and MACs** (single forward pass, no NFE budget). The two are converging via hybrid predictive + few-step refinement (Storm, Diffusion-GAN), but as of 2026 the discriminative frontier remains the quality leader on standard benchmarks.
 
+[[sources/shetu-2026-generative-discriminative-comparison\|Shetu, Habets & Brendel 2026]] sharpen this picture with the first controlled training-paradigm comparison (14 models, ~1000-h DNS-derived data, matched high/low-SNR and mismatched conditions, the same NCSN++ backbone trained with diffusion, GAN, and discriminative objectives). Their findings split the "generative" category: **single-step GAN training is the robustness + efficiency sweet spot** — NCSN++ (GAN) beats every diffusion/flow/consistency model on PESQ, SI-SDR, and FwSegSNR in matched *and* mismatched low-SNR conditions, trains in ~250k steps vs ~400k for diffusion, peaks with 50 h of data vs ≥200 h, and costs 60–100× fewer GMACs than iterative diffusion — while diffusion's only wins are DNSMOS (a generative-quality proxy) and comparable ΔSI-SDR. The training objective, not the backbone, drives the gains; because noise-reduction SE is strongly conditioned on $\mathbf{y}$, the iterative generative machinery buys nothing measurable, and the authors expect diffusion to pay off only where conditioning is weak (synthesis, bandwidth extension). On the hallucination side (WER/CER/LPS), generative methods stay close to the noisy reference at moderate SNR but hallucinate below -7 dB — see [[concepts/speech-enhancement-hallucination\|Speech Enhancement Hallucination]] and [[concepts/generative-vs-discriminative-speech-enhancement\|Generative vs. Discriminative Speech Enhancement]].
+
 ## Insight 8: Personalization Reframed as Enrollment-Conditioned Extraction — and Its Complement
 
 Conditioning SE on a speaker embedding has bifurcated into two complementary tasks sharing the same machinery:
@@ -180,14 +184,14 @@ The canonical survey for the TSE half of this complementarity is [[sources/zmoli
 
 ## Cross-Cutting Takeaways
 
-1. **Progress is a Cartesian product, not a ladder.** A 2026 system picks one option per axis: target (DF/CCM), domain (hybrid loss), backbone (Mamba/linear RNN), efficiency technique (grouped + adaptive conv), multi-channel strategy (array-invariant), conditioning (PSE/OVC). The six axes are near-orthogonal, so most combinations are unexplored.
-2. **Loss choice often dominates architecture choice.** Pandey & Wang 2019 (frequency loss for time-domain nets) and the DCCRN(SNR) variant both show that the training signal can outweigh backbone tweaks. PCEN-based mask thresholding ([[sources/liu-2025-pcen-mask-vad-speech-enhancement\|Liu 2025]]) and [[concepts/perceptual-contrast-stretching\|PCS]] post-processing extend this into the training-data / post-processing regime.
+1. **Progress is a Cartesian product, not a ladder.** A 2026 system picks one option per axis: target (DF/CCM), domain (hybrid loss), backbone (Mamba/linear RNN), efficiency technique (grouped + adaptive conv), multi-channel strategy (array-invariant), conditioning (PSE/OVC), training paradigm (discriminative / GAN / diffusion). The seven axes are near-orthogonal, so most combinations are unexplored.
+2. **Loss choice often dominates architecture choice.** Pandey & Wang 2019 (frequency loss for time-domain nets) and the DCCRN(SNR) variant both show that the training signal can outweigh backbone tweaks. [[sources/shetu-2026-generative-discriminative-comparison\|Shetu 2026]] makes this controlled: the *same* NCSN++ backbone ranks differently under discriminative, GAN, and diffusion objectives — the objective, not the architecture, decides robustness, convergence speed, and cost. PCEN-based mask thresholding ([[sources/liu-2025-pcen-mask-vad-speech-enhancement\|Liu 2025]]) and [[concepts/perceptual-contrast-stretching\|PCS]] post-processing extend this into the training-data / post-processing regime.
 3. **The efficiency frontier is technique-composition, not model-shrinking.** GTCRN's 750× reduction is the product of four orthogonal techniques; CoFi-Lite and AdaptCRN extend it by adding path-decoupling and dynamic convolution rather than shrinking the backbone further.
 4. **2026 inverts input-centric assumptions.** Output-based SE (evaluate outputs, not inputs) and array-invariant SE (condition on geometry, not array-specific SCM) both move the decision from the input side to the output / context side.
 
 ## Open Questions and Gaps
 
-- **Generative vs discriminative on unseen-noise robustness** is not yet benchmarked head-to-head at matched MACs; the corpus suggests generative wins here but lacks a unified comparison.
+- **Generative vs discriminative robustness** has now been benchmarked head-to-head at matched backbone by [[sources/shetu-2026-generative-discriminative-comparison\|Shetu 2026]] (matched/mismatched *SNR*, 60–100× GMAC gap) — GAN training wins on both robustness and cost, contradicting the simple "generative robust, discriminative cheap" split — but the comparison is SNR-mismatch, not *unseen-noise* generalization, and covers a single backbone family.
 - **Inplace-CRN + Mamba** is unexplored: SICRN uses S4ND as a *branch*, but a fully Mamba-based inplace CRN (channel-wise Mamba reused across frequency bins) is not in the corpus.
 - **Array-invariant + personalized conditioning** (Geo-DConv + OVC/PSE) is the obvious multi-channel + conditioning combination but unpublished.
 - **Sub-4 ms generative SE** remains impossible (1 NFE still costs more than one discriminative forward pass); the drifting-models trajectory is the closest approach.
@@ -210,4 +214,4 @@ The canonical survey for the TSE half of this complementarity is [[sources/zmoli
 - [[concepts/gtcrn|GTCRN]] · [[concepts/cofi-lite|CoFi-Lite]] · [[concepts/adaptcrn|AdaptCRN]] · [[concepts/igcrn|IGCRN]] · [[concepts/iccrn|ICCRN]] · [[concepts/sicrn|SICRN]] — efficiency frontier
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]] · [[concepts/neural-beamforming|Neural Beamforming]] · [[concepts/array-invariant-speech-enhancement|Array-Invariant SE]] · [[concepts/geometry-aware-dynamic-convolution|Geo-DConv]] · [[concepts/output-based-speech-enhancement|Output-based SE]]
 - [[concepts/personalized-speech-enhancement|Personalized SE]] · [[concepts/target-speaker-extraction|Target Speaker Extraction]] · [[concepts/own-voice-cancellation|Own-Voice Cancellation]] · [[concepts/prior-matching|Prior Matching]]
-- [[concepts/diffusion-models-for-speech|Diffusion Models for Speech]] · [[concepts/drifting-models|Drifting Models]]
+- [[concepts/diffusion-models-for-speech|Diffusion Models for Speech]] · [[concepts/drifting-models|Drifting Models]] · [[concepts/generative-vs-discriminative-speech-enhancement|Generative vs. Discriminative Speech Enhancement]] · [[concepts/speech-enhancement-hallucination|Speech Enhancement Hallucination]] · [[concepts/one-step-generative-models|One-Step Generative Models]]

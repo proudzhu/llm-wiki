@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-08-15
+updated: 2026-09-03
 sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
+  - raw/papers/shetu-2026-generative-discriminative-comparison/full-text.md
 tags:
   - speech-processing
   - audio-enhancement
@@ -29,6 +30,7 @@ Speech enhancement (SE) is the task of improving the perceptual quality and inte
 - Low-complexity enhancement for embedded devices (e.g., [[concepts/ulcnet|ULCNet]])
 - Low-power spiking enhancement — SNN-based SE for neuromorphic/edge deployment (e.g., [[concepts/sse-net|SSE-Net]])
 - State-space-model-based enhancement — Mamba / S4ND / S4 as the core sequence model (e.g., [[concepts/semamba|SEMamba]], [[concepts/sicrn|SICRN]])
+- Training-paradigm choice — generative (GAN / diffusion / flow / consistency) vs. discriminative training, with quantified robustness, complexity, and hallucination trade-offs (see [[concepts/generative-vs-discriminative-speech-enhancement|Generative vs. Discriminative Speech Enhancement]])
 
 ## Related Concepts
 
@@ -43,6 +45,9 @@ Speech enhancement (SE) is the task of improving the perceptual quality and inte
 - [[concepts/ecapa-tdnn|ECAPA-TDNN]]
 - [[concepts/ulcnet|ULCNet]]
 - [[concepts/acoustic-echo-cancellation|Acoustic Echo Cancellation]]
+- [[concepts/generative-vs-discriminative-speech-enhancement|Generative vs. Discriminative Speech Enhancement]]
+- [[concepts/speech-enhancement-hallucination|Speech Enhancement Hallucination]]
+- [[concepts/diffusion-models-for-speech|Diffusion Models for Speech Enhancement]]
 
 ## Related Sources
 
@@ -51,3 +56,4 @@ Speech enhancement (SE) is the task of improving the perceptual quality and inte
 - [[sources/liu-2026-sse-net|Liu et al. 2026: SSE-Net]] — spike-native SNN-based monaural speech enhancement (SOTA among SNN-SE, power proxy 19.70 M Ops/s)
 - [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] — first Mamba-based SE; SOTA PESQ 3.69 on VoiceBank-DEMAND
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — classical statistical-model multi-channel SE for small devices (10.43 dB SNR / 0.39 PESQ-MOS on a 9.6 mm back-to-back array)
+- [[sources/shetu-2026-generative-discriminative-comparison|Shetu, Habets & Brendel 2026: Generative vs. Discriminative SE]] — 14-model controlled comparison of generative and discriminative training paradigms

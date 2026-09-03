@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-15
-updated: 2026-08-15
+updated: 2026-09-03
 sources:
   - raw/papers/lugo-2026-diffvqe/full-text.md
+  - raw/papers/shetu-2026-generative-discriminative-comparison/full-text.md
 tags:
   - dataset
   - challenge
@@ -29,7 +30,9 @@ Two editions so far:
 - [[concepts/dns-challenge|DNS Challenge]] — the other major SE challenge series (Microsoft)
 - [[concepts/speech-enhancement|Speech Enhancement]]
 - [[concepts/diffusion-models-for-speech|Diffusion Models for Speech Enhancement]]
+- [[concepts/speech-enhancement-hallucination|Speech Enhancement Hallucination]]
 
 ## Related Sources
 
 - [[sources/lugo-2026-diffvqe|Lugo et al. 2026: DiffVQE]]
+- [[sources/shetu-2026-generative-discriminative-comparison|Shetu, Habets & Brendel 2026: Generative vs. Discriminative SE]] — applies LPS/WER/CER to characterize generative-method hallucination, corroborating the need for hallucination-oriented metrics

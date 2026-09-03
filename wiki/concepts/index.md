@@ -477,4 +477,6 @@
 | [[concepts/sound-object-based-echo-control\|Sound-Object-Based Echo Control]] | Echo/howling control paradigm: identify sound objects and gate pass/playback (default mute, conditional pass) instead of estimating echo paths | 2026-09-02 |
 | [[concepts/voice-switched-half-duplex\|Voice-Switched Half-Duplex]] | Classical speakerphone technique routing one talk direction at a time; extended by sound-object-based echo control into conditional half-duplex | 2026-09-02 |
 | [[concepts/audio-fingerprinting\|Audio Fingerprinting]] | Compact content-based audio signatures for identity matching under deformation; candidate feature for low-latency sound-object identification | 2026-09-02 |
+| [[concepts/generative-vs-discriminative-speech-enhancement\|Generative vs. Discriminative Speech Enhancement]] | Training-paradigm choice for speech enhancement: discriminative regression, adversarial (GAN), and diffusion/score-matching objectives; the objective — not the backbone — drives robustness and cost. | 2026-09-03 |
+| [[concepts/speech-enhancement-hallucination\|Speech Enhancement Hallucination]] | Generative SE hallucination below about -7 dB SNR: spurious spectral content not present in the target, measured by WER/CER and Levenshtein phoneme similarity (LPS). | 2026-09-03 |
 
