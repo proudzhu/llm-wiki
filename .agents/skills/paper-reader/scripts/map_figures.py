@@ -16,6 +16,9 @@ Output:
   - For each caption, the image files assigned to it (by line proximity in
     full-text.md, since MinerU's reading order is usually reliable but not
     always), plus any "(a)"/"(b)" sub-label lines in the same span.
+    If no caption-style lines exist, in-text "Fig. N" references (first
+    mention per figure) are used as anchors instead (mode: in-text in the
+    JSON output; verify heuristic pairings against sub-labels).
   - Files in figures/ that full-text.md never references (usually axis strips
     or split-off sub-panels — check dimensions; skip strips).
   - Referenced files that are MISSING on disk (hash typos that would abort
@@ -49,6 +52,11 @@ IMG_RE = re.compile(r'figures/([A-Za-z0-9_\-\.]+\.(?:png|jpe?g|gif|webp))')
 # "Figure 1 compares logmelspec..." has no period after the digit and
 # must not be mistaken for a caption.
 CAP_RE = re.compile(r'^\s*(?:Fig(?:\.?|ure)|FIGURE)\s*(\d+)\s*[:.)]')
+# In-text figure references: "Fig. 1", "Figs. 2 and 3", "Figure 4" anywhere
+# in a line. Used ONLY as a fallback anchor when no caption-style lines
+# exist (pitfalls.md #32) — CAP_RE deliberately excludes these to avoid
+# mistaking prose for captions; here the prose IS the only anchor.
+INTEXT_RE = re.compile(r'\b(?:Figs?\.|Figures?)\s*(\d+)\b', re.IGNORECASE)
 # Sub-panel labels inside a figure: "(a)", "(b)", "(i)", "(left)" ...
 SUB_RE = re.compile(r'^\s*\(([a-z]+|ivx{0,3}|left|middle|right|top|bottom)\)')
 
@@ -85,7 +93,15 @@ def jpeg_size(path):
 
 
 def parse_full_text(md_path):
-    """Return (images, captions, sublabels) as lists of (line_no, value)."""
+    """Return (images, captions, sublabels, mode) as lists of (line_no, value).
+
+    captions are caption-style lines ("Fig. 1." / "Figure 2:") when any
+    exist. When none exist, the FIRST in-text mention of each figure number
+    ("Fig. 1 shows ...", "as shown in Figure 3") is used as a pseudo-caption
+    anchor (mode='in-text') — MinerU places each crop near where the figure
+    appeared in the reading order, so first-mention proximity is a usable
+    heuristic (pitfalls.md #32).
+    """
     with open(md_path, encoding='utf-8') as f:
         lines = f.readlines()
     images, captions, subs = [], [], []
@@ -98,7 +114,21 @@ def parse_full_text(md_path):
             captions.append((idx, int(m.group(1))))
         elif SUB_RE.match(line):
             subs.append((idx, line.strip()[:60]))
-    return images, captions, subs
+
+    mode = 'captions'
+    if not captions:
+        seen = {}
+        for idx, raw in enumerate(lines, start=1):
+            for m in INTEXT_RE.finditer(raw):
+                n = int(m.group(1))
+                if n not in seen:
+                    seen[n] = idx
+        if seen:
+            # Keep first mention per figure number, ordered by line.
+            captions = [(line_no, n) for n, line_no in
+                        sorted(seen.items(), key=lambda kv: kv[1])]
+            mode = 'in-text'
+    return images, captions, subs, mode
 
 
 def main():
@@ -118,7 +148,7 @@ def main():
         print(f"ERROR: {md_path} not found.", file=sys.stderr)
         sys.exit(1)
 
-    images, captions, subs = parse_full_text(md_path)
+    images, captions, subs, mode = parse_full_text(md_path)
     on_disk = sorted(os.listdir(figures_dir)) if os.path.isdir(figures_dir) else []
     on_disk_set = set(on_disk)
 
@@ -135,8 +165,18 @@ def main():
         # caption text hint: the remainder of the caption line
         result.append(entry)
     if not result:
-        print("NOTE: no 'Fig. N.' captions found in full-text.md. "
-              "The paper may use 'Figure N' in-text only; review manually.",
+        print("NOTE: neither caption lines nor in-text 'Fig. N' references "
+              "found in full-text.md — figure numbers cannot be mapped "
+              "automatically. Review the text and images manually.",
+              file=sys.stderr)
+    elif mode == 'in-text':
+        print("NOTE: no caption lines found; anchored on the first in-text "
+              "'Fig. N' reference of each figure. Pairing is heuristic: a "
+              "first-mention anchor can precede the image block of an "
+              "EARLIER figure (MinerU reading order interleaves), merging "
+              "adjacent figures into one group. Verify groupings against "
+              "panel counts and the sub-labels below before embedding "
+              "(pitfalls.md #32).",
               file=sys.stderr)
 
     def nearest_caption(iline):
@@ -172,6 +212,7 @@ def main():
     if args.json:
         out = {
             'slug': args.slug,
+            'mode': mode,
             'figures': [
                 {
                     'num': e['num'],

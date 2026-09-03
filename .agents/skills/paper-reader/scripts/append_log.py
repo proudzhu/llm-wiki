@@ -20,12 +20,32 @@ Usage:
 
 Operations: ingest, query, lint, merge.
 """
-import argparse, datetime, sys
+import argparse, datetime, re, sys
 
 sys.stdout.reconfigure(encoding='utf-8')
 
 LOG_PATH = 'wiki/log.md'
 VALID_OPS = ('ingest', 'query', 'lint', 'merge')
+
+# Markdown links whose targets cannot resolve from wiki/log.md: `../`
+# escapes the docs root, `wiki/` doubles it. Both abort `mkdocs build
+# --strict` at commit time (pitfalls.md #40 — the Ke 2021 ingest appended
+# 12 such links and the commit-time build failed).
+BAD_LINK_RE = re.compile(r'\]\(\s*(?:\.\./|wiki/)')
+
+
+def validate_body(body):
+    """Reject markdown links that break `mkdocs build --strict` from log.md."""
+    m = BAD_LINK_RE.search(body)
+    if m:
+        print("ERROR: log entry body contains a non-resolving markdown link:\n"
+              f"  ...{body[max(0, m.start() - 30):m.start() + 40]}...\n"
+              "Links like [Text](../sources/foo.md) or [Text](wiki/sources/foo.md) "
+              "do not resolve from wiki/log.md and abort `mkdocs build --strict`.\n"
+              "Fix: use vault-absolute wikilinks [[sources/foo|Text]] or "
+              "backticked plain paths `wiki/sources/foo.md` instead.",
+              file=sys.stderr)
+        sys.exit(2)
 
 
 def main():
@@ -48,6 +68,8 @@ def main():
         body = args.body.strip()
     else:
         body = ''
+
+    validate_body(body)
 
     today = datetime.date.today().isoformat()
     entry = f"\n---\n\n## [{today}] {args.op} | {args.title}\n\n"

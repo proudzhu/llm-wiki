@@ -140,7 +140,7 @@ uv run python .agents/skills/paper-reader/scripts/extract_pdftotext.py --slug SL
 uv run python .agents/skills/paper-reader/scripts/map_figures.py --slug SLUG
 ```
 
-Pairs each hash-named crop with its "Fig. N." caption (line proximity), prints dimensions, flags axis/colorbar strips, exits 2 on referenced-but-missing hashes. One-call replacement for manual figure forensics (`pitfalls.md` #25).
+Pairs each hash-named crop with its "Fig. N." caption (line proximity), prints dimensions, flags axis/colorbar strips, exits 2 on referenced-but-missing hashes. One-call replacement for manual figure forensics (`pitfalls.md` #25). If no caption-style lines exist, it falls back automatically to the first in-text "Fig. N" reference of each figure (heuristic — verify multi-panel figures against the sub-labels it prints); only when it reports *neither* captions nor in-text references do you match manually (`pitfalls.md` #32).
 
 ### Step 4: Read and Analyze the Full Paper Content
 
@@ -149,6 +149,8 @@ Read the extracted text in chunks (head 200 + tail 100 + targeted range reads). 
 **Neural-network papers** (any paper whose method includes a DNN/RNN/CNN/transformer/vocoder etc.): additionally extract the **model architecture** (layer-by-layer structure with sizes/densities), the **input features** (exact feature representation, frame rate, window length) and **output** (what the network produces, at what rate), and the **training losses** (equations with coefficient values). These feed the mandatory model-documentation section in Step 5 — see the **Neural-Network Model Documentation** rules in [`references/page-templates.md`](references/page-templates.md).
 
 **Review/survey paper**: use the **Analysis Targets** in [`references/review-papers.md`](references/review-papers.md) — taxonomy, comparison tables, application domains, open challenges, coverage gaps — instead of the research-paper-shaped list above. See the **Review/Survey Paper Routing** section earlier in this file for the full routing table.
+
+**Numeric sign check (MinerU)**: MinerU can silently drop minus signs on negative numbers — the Ke 2021 SNR range −5…10 dB extracted as "5 dB to 10 dB", and the test SNRs {−5, 0, 5, 10} as "5, 0, 5, 10". Suspicious patterns: a 1 dB-step SNR sweep that appears to start positive, or a value list with a repeated entry after a sign flip. Cross-check numeric signs against the publisher page / abstract / PDF before writing them into the source page.
 
 **If you encounter** graphical-only results, citation discrepancies, loose review classifications, or cross-references to already-ingested papers: load [`references/edge-cases.md`](references/edge-cases.md).
 
@@ -162,7 +164,7 @@ Create `wiki/sources/{slug}.md`. Load [`references/page-templates.md`](reference
 
 **Figure embeds**: use `map_figures.py` output (Step 3e) to write `![[raw/papers/{slug}/figures/HASH.jpg|caption]]` — never markdown `![alt](path)` (`pitfalls.md` #27). Multi-panel figures: one `![[...]]` per (a)/(b) crop above the shared `*Figure N: ...*` caption (`pitfalls.md` #26).
 
-**Unreferenced figure files**: `map_figures.py` lists files in `figures/` that `full-text.md` never references — these are typically axis/colorbar strips split off by MinerU (flagged as `<-- likely axis/colorbar strip, skip`). **Do not embed unreferenced files.** Only embed figures that are (i) referenced in `full-text.md` AND (ii) either paired with a "Fig. N." caption by `map_figures.py` or manually matched to a "Fig. N" reference in the text. If `map_figures.py` reports "no 'Fig. N.' captions found", fall back to reading the text for "Fig. N" / "Figure N" mentions and matching by position (see `pitfalls.md` #32).
+**Unreferenced figure files**: `map_figures.py` lists files in `figures/` that `full-text.md` never references — these are typically axis/colorbar strips split off by MinerU (flagged as `<-- likely axis/colorbar strip, skip`). **Do not embed unreferenced files.** Only embed figures that are (i) referenced in `full-text.md` AND (ii) paired with a caption or an in-text "Fig. N" reference by `map_figures.py` (the in-text fallback runs automatically when no caption lines exist), or manually matched. If `map_figures.py` reports *neither* captions nor in-text references, fall back to reading the text for "Fig. N" / "Figure N" mentions and matching by position (see `pitfalls.md` #32).
 
 For re-ingestion: overwrite the existing source page with updated comprehensive content.
 
@@ -285,6 +287,8 @@ Entry body format (temp file):
 
 For re-ingestion, use `ingest (re)` in `--title`.
 
+**Link format in log bodies** (`pitfalls.md` #40): reference wiki pages with vault-absolute wikilinks (`[[sources/slug|Title]]`) or backticked plain paths (`wiki/sources/slug.md`) — **never** `../`-relative markdown links like `[Title](../sources/slug.md)`, which do not resolve from `wiki/log.md` and abort `mkdocs build --strict`. `append_log.py` validates the body and rejects such links (exit 2) before appending.
+
 ### Step 12: Build Verification
 
 **Step 12a — Wikilink verification** (fast pre-check, catches broken links before the build):
@@ -301,7 +305,7 @@ Checks both `[[category/slug]]` wikilinks and `![[raw/...]]` figure embeds again
 uv run python .agents/skills/paper-reader/scripts/build_check.py
 ```
 
-If the build fails, resolve broken links/missing pages before proceeding. Pre-existing `INFO` messages about `log.md` links and the Material "MkDocs 2.0" banner do not fail the build (`pitfalls.md` #8, #28).
+If the build fails, resolve broken links/missing pages before proceeding. Pre-existing `INFO` messages about `log.md` links and the Material "MkDocs 2.0" banner do not fail the build (`pitfalls.md` #8, #28). The check intentionally runs **without `--quiet`**: mkdocs's `--quiet` sets the log level to ERROR, which filters WARNING records before strict-mode's counter sees them — a `--quiet` build can exit 0 despite strict violations (observed in the Ke 2021 ingest). INFO-level nav lines in the output are normal.
 
 ### Step 13: Commit Changes
 

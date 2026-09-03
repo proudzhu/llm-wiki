@@ -65,6 +65,48 @@ RAW_EMBED_RE = re.compile(
     r'\]\]'
 )
 
+# Fenced code blocks (``` or ~~~) and inline code spans (`...`) are removed
+# before scanning: wikilinks quoted as *examples* inside code — common in
+# historical lint reports in log.md, e.g. `[[concepts/concept-name]]` or
+# `![[raw/papers/.../figures/figN.png|caption]]` — are rendered as code by
+# both Obsidian and MkDocs and never resolved as links, so they must not be
+# reported as broken. Without this, every ingest re-flags the same handful
+# of quoted examples in old log.md entries (Ke 2021 ingest: 5 false
+# positives) and drowns out real breakage.
+FENCE_RE = re.compile(r'^\s*(?:```|~~~)')
+INLINE_CODE_RE = re.compile(r'`[^`\n]+`')
+
+
+def clean_lines(file_path):
+    """Yield (line_no, line) with fenced blocks and inline code removed."""
+    try:
+        with open(file_path, encoding='utf-8') as f:
+            in_fence = False
+            for idx, raw in enumerate(f, start=1):
+                line = raw.rstrip('\n')
+                if FENCE_RE.match(line):
+                    in_fence = not in_fence
+                    continue
+                if in_fence:
+                    continue
+                yield idx, INLINE_CODE_RE.sub(' ', line)
+    except (IOError, OSError):
+        return
+
+
+def extract_wikilinks(file_path):
+    """Yield (line_no, full_match, category, slug) for each wikilink in file."""
+    for idx, line in clean_lines(file_path):
+        for m in WIKILINK_RE.finditer(line):
+            yield (idx, m.group(0), m.group(1), m.group(2).strip())
+
+
+def extract_raw_embeds(file_path):
+    """Yield (line_no, full_match, raw_path) for each ![[raw/...]] embed in file."""
+    for idx, line in clean_lines(file_path):
+        for m in RAW_EMBED_RE.finditer(line):
+            yield (idx, m.group(0), m.group(1).strip())
+
 
 def get_modified_wiki_files():
     """Return list of wiki/*.md files modified or untracked since HEAD."""
@@ -85,28 +127,6 @@ def get_modified_wiki_files():
         return files
     except (subprocess.SubprocessError, FileNotFoundError):
         return []
-
-
-def extract_wikilinks(file_path):
-    """Yield (line_no, full_match, category, slug) for each wikilink in file."""
-    try:
-        with open(file_path, encoding='utf-8') as f:
-            for idx, line in enumerate(f, start=1):
-                for m in WIKILINK_RE.finditer(line):
-                    yield (idx, m.group(0), m.group(1), m.group(2).strip())
-    except (IOError, OSError):
-        return
-
-
-def extract_raw_embeds(file_path):
-    """Yield (line_no, full_match, raw_path) for each ![[raw/...]] embed in file."""
-    try:
-        with open(file_path, encoding='utf-8') as f:
-            for idx, line in enumerate(f, start=1):
-                for m in RAW_EMBED_RE.finditer(line):
-                    yield (idx, m.group(0), m.group(1).strip())
-    except (IOError, OSError):
-        return
 
 
 def check_wikilink(category, slug, project_root):
