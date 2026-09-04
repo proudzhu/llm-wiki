@@ -540,6 +540,9 @@
 | [[entities/osamu-hoshuyama\|Osamu Hoshuyama]] | Researcher (NEC background) on acoustic echo control — nonlinear residual echo suppression and sound-object-based echo control | 2026-09-02 |
 | [[entities/renhua-peng\|Renhua Peng]] | Institute of Acoustics, CAS — speech enhancement, noise reduction; co-author of residual-noise-control GL loss | 2026-09-03 |
 | [[entities/yuxuan-ke\|Yuxuan Ke]] | Institute of Acoustics, CAS — first author of the low-complexity artificial-noise-suppression postfilter for DNN speech enhancement | 2026-09-03 |
+| [[entities/julian-wechsler\|Julian Wechsler]] | Researcher, International Audio Laboratories Erlangen; first author of the founding NDF paper | 2026-09-04 |
+| [[entities/srikanth-raj-chetupalli\|Srikanth Raj Chetupalli]] | Researcher, International Audio Laboratories Erlangen; microphone arrays, spatial audio, beamforming | 2026-09-04 |
+| [[entities/mhd-modar-halimeh\|Mhd Modar Halimeh]] | Researcher, International Audio Laboratories Erlangen; neural directional filtering, spatial audio | 2026-09-04 |
 
 ---
 
@@ -1226,6 +1229,7 @@
 | [[sources/shetu-2026-generative-discriminative-comparison\|Shetu, Habets & Brendel 2026: Generative vs. Discriminative SE]] | Controlled 14-model comparison of discriminative, GAN, and diffusion training for speech enhancement: GAN training wins on robustness at 60-100x lower cost; hallucination emerges below -7 dB SNR. | 2026-09-03 |
 | [[sources/li-2020-residual-noise-control\|Li, Peng, Zheng & Li 2020: A Supervised Speech Enhancement Approach with Residual Noise Control for Voice Communication]] | Generalized loss function with residual noise control for DNN SE; unifies MSE/components loss; ~70% listener preference | 2026-09-03 |
 | [[sources/ke-2021-low-complexity-artificial-noise-suppression\|Ke, Li, Zheng, Peng & Li 2021: Low-Complexity Artificial Noise Suppression]] | Psychoacoustic quantification of DNN artificial residual noise (10-50 dB above the masking threshold) plus a classical MMSE/SPP postfilter with three SPP-input strategies at ~0.01 MFLOPs/frame; >60% AB preference | 2026-09-03 |
+| [[sources/wechsler-2024-neural-directional-filtering\|Wechsler et al. 2024: Neural Directional Filtering]] | Founding NDF paper: DNN-estimated complex mask renders a VDM with desired far-field directivity from a 4-mic array; 3rd-order DMA pattern at 18.4 dB SDR | 2026-09-04 |
 
 ---
 
@@ -1279,10 +1283,10 @@
 
 ## Statistics
 
-- **Total pages**: 1228
-- **Entities**: 530
+- **Total pages**: 1232
+- **Entities**: 533
 - **Concepts**: 477
-- **Sources**: 191
+- **Sources**: 192
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-03
+- **Last updated**: 2026-09-05

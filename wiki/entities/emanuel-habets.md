@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-05
-updated: 2026-09-03
+updated: 2026-09-04
 tags:
   - researcher
   - acoustic-parameter-estimation
@@ -20,6 +20,7 @@ tags:
 
 ## Key Contributions
 
+- Co-authored "Neural directional filtering: far-field directivity control with a small microphone array" (IWAENC 2024) — the founding [[concepts/neural-directional-filtering|NDF]] paper — [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024]]
 - Supervised "Informed Spatial Filters for Speech Enhancement" PhD thesis (FAU 2018) — the [[concepts/informed-spatial-filter|ISF]] paradigm unifying noise reduction, DOA-informed extraction, spotforming, and sparsity-based BSS — [[sources/taseska-2018-informed-spatial-filters|Taseska 2018]]
 - Co-authored blind direction-dependent acoustic parameter estimation using smart glasses ([[sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation|Görtz et al. 2026]])
 - NDF+: joint neural directional filtering and diffuse sound extraction (arXiv 2026)
@@ -31,6 +32,8 @@ tags:
 - Co-authored "A comparison of generative and discriminative methods for speech enhancement: robustness, complexity, and hallucination" (arXiv 2026) — 14-model controlled comparison showing GAN-trained NCSN++ beats diffusion at 1/100th the compute — [[sources/shetu-2026-generative-discriminative-comparison|Shetu et al. 2026]]
 
 ## Related Sources
+
+- [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]]
 
 - [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015: Residual Noise Control PMWF]]
 

@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-05-13
+updated: 2026-09-04
+sources:
+  - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
 tags:
   - virtual-directional-microphone
   - spatial-audio
@@ -24,6 +26,16 @@ The directivity pattern $\Lambda(\theta,\phi)$ defines the directional sensitivi
 The $J^{\text{th}}$-order Cardioid is defined as:
 
 $$\Lambda(\theta,\phi)=\left(0.5+0.5(\sin\phi\sin\phi_s\cos(\theta-\theta_s)+\cos\phi\cos\phi_s)\right)^J$$
+
+## Far-Field VDM Signal (Wechsler et al. 2024)
+
+For an anechoic far-field scene with $N$ sources, the VDM signal at position $\mathbf{p}_{\mathrm{VDM}}$ with directivity pattern $S[\vartheta, f]$ is
+
+$$
+Z_{\mathrm{VDM}}[f,t] = \sum_{n=1}^{N} S[\vartheta_n, f]\, H_{\mathbf{p}_{\mathrm{VDM}},n}[f]\, X_n[f,t],
+$$
+
+where $\vartheta_n$ is the DOA of the $n$-th source and $H_{\mathbf{p}_{\mathrm{VDM}},n}[f]$ its direct-path transfer function to the VDM position. This is the training target of the founding [[concepts/neural-directional-filtering|NDF]] study, realized with a DNN-estimated complex mask applied to a reference microphone.
 
 ## VDM Signal Decomposition
 
@@ -59,4 +71,5 @@ where $\beta=10^{-\frac{\mathrm{DI}}{20}}$ is determined by the directivity inde
 
 ## Related Sources
 
+- [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — founding far-field VDM formalization and neural reconstruction
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]

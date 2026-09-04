@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-08-15
+updated: 2026-09-04
 sources:
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
+  - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
 tags:
   - differential-microphone-array
   - beamforming
@@ -55,5 +56,6 @@ For very small baselines where delay-based features become unreliable (Tashev et
 
 ## Related Sources
 
+- [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — neural directional filtering surpasses the order-per-microphone limit: a 3rd-order DMA pattern (6-mic CDMA classically) realized with 4 microphones
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — back-to-back unidirectional variant (9.6 mm baseline)

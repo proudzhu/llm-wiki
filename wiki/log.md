@@ -4959,3 +4959,15 @@ Ingested "A Comparison of Generative and Discriminative Methods for Speech Enhan
 - Synthesis: [[synthesis/deep-speech-enhancement|deep-speech-enhancement]] (Sources Synthesized row; Insight 2 extension mapping the residual-noise-control design space at three points: training-time loss / inference-time statistical postfilter / inference-time NAL)
 
 **Key takeaways**: DNN speech enhancement leaves *artificial residual noise* — non-stationary output of the nonlinear mapping, 10–50 dB above the speech masking threshold. A classical Gerkmann–Hendriks MMSE noise-PSD postfilter fails on it because SPP overestimation freezes noise tracking; three re-designed SPP inputs (from the noisy spectrum, from the DNN gain via γ = 1/(1 − min(M̄, 0.999)), and an adaptive sigmoid prior from the PSD ratio ζ) fix the tracking at 0.0098–0.016 MFLOPs/frame — ~3 orders of magnitude below the DNN front-ends — lifting PESQ by ~0.1–0.15 and winning >60% of AB preferences. Same CAS group as Li 2020 (training-time residual noise control): the subjective–objective gap (PESQ/segSNR blind to residual-noise audibility) recurs in both.
+
+---
+
+## [2026-09-05] ingest | Neural directional filtering: far-field directivity control with a small microphone array (Wechsler et al. 2024)
+
+- **Source**: `raw/papers/wechsler-2024-neural-directional-filtering/full-text.md` (Zotero: 46JP7NVK)
+- **Authors**: Julian Wechsler, Srikanth Raj Chetupalli, Mhd Modar Halimeh, Oliver Thiergart, Emanuël A. P. Habets
+- **Published**: IWAENC 2024
+- **DOI**: 10.1109/IWAENC61483.2024.10693965
+- **Summary**: Founding paper on neural directional filtering — a DNN (FT-JNF backbone, 873K params) estimates a complex mask applied to a reference microphone to render a virtual directional microphone with a desired far-field directivity pattern; realizes a 3rd-order DMA pattern (classically 6 mics) with 4 microphones at 18.4 dB mean SDR, and shows training-set multi-speaker density is decisive for pattern fidelity.
+- **Pages created**: `wiki/sources/wechsler-2024-neural-directional-filtering.md`, `wiki/entities/julian-wechsler.md`, `wiki/entities/srikanth-raj-chetupalli.md`, `wiki/entities/mhd-modar-halimeh.md`
+- **Pages updated**: `wiki/entities/oliver-thiergart.md` and `wiki/entities/emanuel-habets.md` (new paper bullet + source links); `wiki/concepts/neural-directional-filtering.md` (founding-study section, findings); `wiki/concepts/virtual-directional-microphone.md` (far-field VDM formalization); `wiki/concepts/joint-nonlinear-filtering.md` (application to directional filtering); `wiki/concepts/directivity-pattern.md` (R-th order DMA pattern formulation); `wiki/concepts/differential-microphone-array.md` (order-per-microphone limit surpassed); `wiki/concepts/fixed-beamformer.md` (LS baseline empirical limits); `wiki/synthesis/multi-channel-speech-enhancement.md` (NDF row in sources table, Step-6 estimate-what entry); `wiki/index.md` and subdirectory indexes (4 new entries, statistics)

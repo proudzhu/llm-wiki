@@ -534,4 +534,7 @@
 | [[entities/osamu-hoshuyama\|Osamu Hoshuyama]] | Researcher (NEC background) on acoustic echo control — nonlinear residual echo suppression and sound-object-based echo control | 2026-09-02 |
 | [[entities/renhua-peng\|Renhua Peng]] | Institute of Acoustics, CAS — speech enhancement, noise reduction; co-author of residual-noise-control GL loss | 2026-09-03 |
 | [[entities/yuxuan-ke\|Yuxuan Ke]] | Institute of Acoustics, CAS — first author of the low-complexity artificial-noise-suppression postfilter for DNN speech enhancement | 2026-09-03 |
+| [[entities/julian-wechsler\|Julian Wechsler]] | Researcher, International Audio Laboratories Erlangen; first author of the founding NDF paper | 2026-09-04 |
+| [[entities/srikanth-raj-chetupalli\|Srikanth Raj Chetupalli]] | Researcher, International Audio Laboratories Erlangen; microphone arrays, spatial audio, beamforming | 2026-09-04 |
+| [[entities/mhd-modar-halimeh\|Mhd Modar Halimeh]] | Researcher, International Audio Laboratories Erlangen; neural directional filtering, spatial audio | 2026-09-04 |
 

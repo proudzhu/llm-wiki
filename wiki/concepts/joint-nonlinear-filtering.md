@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-08-22
+updated: 2026-09-04
 sources:
   - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
   - raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md
   - raw/papers/huang-2026-ndf-joint-neural-directional-filtering/full-text.md
+  - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
 tags:
   - neural-network
   - spatial-audio
@@ -37,6 +38,10 @@ In Tesch & Gerkmann's speech-enhancement/separation line, the FT-JNF is describe
 
 The design is inspired by Li & Horaud [32], who stack two T-LSTMs; Tesch & Gerkmann's replacement of the first T-LSTM with an F-LSTM is what produces the strong spatial selectivity on which the [[concepts/spatially-selective-nonlinear-filter|SSF]] depends.
 
+## Application to Directional Filtering (Wechsler et al. 2024)
+
+The founding NDF study adopted the single-mask FT-JNF (BiLSTM-frequency → UniLSTM-time → linear+tanh complex mask, 873K parameters) to estimate a VDM from a 4-microphone array, trained with the SA-ε-tSDR loss on simulated multi-speaker scenes — establishing that the pattern itself can be learned implicitly from data, with training-set speaker density determining pattern fidelity.
+
 ## Dual-Mask Extension (NDF+)
 
 NDF+ extends FT-JNF with:
@@ -57,4 +62,5 @@ NDF+ extends FT-JNF with:
 
 - [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023: Insights Into Deep Non-linear Filters for Improved Multi-channel Speech Enhancement]] — introduces the FT-JNF architecture and the T-JNF/F-JNF/FT-JNF/NSF/PF variant family; the foundational analysis of spatial-spectral-temporal interplay
 - [[sources/tesch-2024-spatially-selective-nonlinear-filters|Tesch & Gerkmann 2024: Multi-channel Speech Separation Using Spatially Selective Deep Non-linear Filters]]
+- [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — first application of the single-mask FT-JNF to directivity-pattern learning
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]

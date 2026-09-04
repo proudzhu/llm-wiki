@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-08-22
+updated: 2026-09-04
 sources:
   - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
+  - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
 tags:
   - neural-directional-filtering
   - virtual-directional-microphone
@@ -14,6 +15,14 @@ tags:
 # Neural Directional Filtering
 
 Neural directional filtering (NDF) is a data-driven approach for reconstructing a virtual directional microphone (VDM) with a desired directivity pattern from a compact microphone array. By using a deep neural network to learn the input-output behavior of an ideal directional microphone, NDF achieves frequency-invariant target directivity patterns on arrays with limited microphones and small apertures.
+
+The concept was introduced and formalized by [[entities/julian-wechsler|Wechsler]] et al. (IWAENC 2024): a DNN estimates a single-channel complex mask from the array signals, applied to a reference microphone to render the VDM signal, replacing the DOA-estimation-and-gain pipeline of parametric directional filtering (and its reliance on W-disjoint orthogonality).
+
+## Founding Study Findings (Wechsler et al. 2024)
+
+- **Training-data composition is decisive**: the training set must contain multi-speaker scenes with speaker positions densely sampling the desired pattern (positions on a circle concentric with the array). Single-speaker training fails to generalize to multi-speaker scenes; training on ≥2 speakers generalizes up to six; beyond three brings no significant gain.
+- **Higher-order patterns with fewer microphones**: a 3rd-order DMA pattern (classically a 6-microphone CDMA) was realized with 4 microphones at 18.4 dB mean SDR, versus −5.9 dB for an LS beamformer and 12.7 dB for a parametric baseline.
+- **Baseline failure modes**: parametric filtering excels with a single source but degrades with multiple concurrent sources; fixed LS beamforming is limited by white-noise amplification and cannot approximate the 3rd-order pattern with 4 microphones.
 
 ## Problem Formulation
 
@@ -50,5 +59,6 @@ The FT-JNF-based NDF architecture processes concatenated real/imaginary STFT coe
 
 ## Related Sources
 
+- [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — founding paper: formalizes the task, investigates training-data composition, demonstrates 3rd-order patterns with 4 microphones
 - [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023: Insights Into Deep Non-linear Filters for Improved Multi-channel Speech Enhancement]] — origin of the FT-JNF backbone used by NDF [22]
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]

@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-05-13
+updated: 2026-09-04
+sources:
+  - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
 tags:
   - fixed-beamformer
   - spatial-audio
@@ -27,6 +29,8 @@ Conventional FBFs are fundamentally limited by:
 - Limited number of microphones
 - Low white noise gain (WNG) at low frequencies for higher-order patterns
 
+Empirically, a least-squares FBF designed for a minimum WNG of −15 dB on a 4-microphone, 3 cm array approximates a 1st-order cardioid well but cannot approximate a 3rd-order DMA pattern (negative SDRs), and its performance is dominated by white-noise amplification ([[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024]]).
+
 ## Related Concepts
 
 - [[concepts/differential-microphone-array|Differential Microphone Array]]
@@ -36,4 +40,5 @@ Conventional FBFs are fundamentally limited by:
 
 ## Related Sources
 
+- [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — LS fixed beamformer baseline results
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
