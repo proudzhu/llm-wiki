@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-08-21
-updated: 2026-08-22
+updated: 2026-09-05
 tags:
   - researcher
   - active-noise-control
@@ -22,5 +22,6 @@ tags:
 - Co-author of "Feedback-guided DNN-based controller fusion for robust fixed-parameter active noise control" (arXiv 2026) — feedback-guided MoE fusion of FIR experts with a WaveNet baseline — [[sources/bai-2026-feedback-guided-anc|Bai et al. 2026]]
 - Co-author of "WaveNet-Volterra neural network for active noise control: a fully causal approach" (Mech. Syst. Signal Process. 2025, vol. 241, 113486) — fully causal WaveNet-VNN controller for ANC
 - Co-author of "An adaptive deep neural network for active road noise control" (J. Acoust. Soc. Am. 2026, vol. 159(4), pp. 3674–3685) — adaptive DNN for active road noise control
+- Co-author of "Neural Projection Filter Generation for Multi-Reference Active Noise Control" (IEEE Signal Processing Letters 2026) — condition-aware projection filtering (CAPF/CAPFNet) for multi-reference ANC — [[sources/he-2026-neural-projection-filter-anc|He et al. 2026]]
 - Co-author of "A neural reference projection-based method for multi-reference active noise control (L)" (J. Acoust. Soc. Am. 2026, vol. 159(5), pp. 4482–4486) — neural reference projection for multi-reference ANC
 - Co-author of "Speech extraction under extremely low SNR conditions" (Applied Acoustics 2024) — low-SNR blind source extraction via natural-gradient OGIVE — [[sources/ruan-2024-speech-extraction-low-snr|Ruan et al. 2024]]

@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-22
-updated: 2026-05-17
+updated: 2026-09-05
 sources:
   - zotero://select/items/0_GUY9IXKN (Kronecker Decomposition)
   - zotero://select/items/0_GLPRCTIK (Distributed ANC)
@@ -10,6 +10,7 @@ sources:
   - zotero://select/items/0_WXFYBPPC (Meta-learning Initialization)
   - zotero://select/items/0_N7HG3TSP (Multi-task Learning)
   - zotero://select/items/0_QVJMFTWC (ANC Survey Part I)
+  - raw/papers/he-2026-neural-projection-filter-anc/full-text.md
 tags:
   - active-noise-control
   - multichannel-anc
@@ -41,6 +42,9 @@ The computational load in MC-ANC grows quadratically with the number of secondar
 - **Asynchronous Distributed ANC**: GLPRCTIK moves from a central hub to a distributed network of nodes, allowing local filter updates and asynchronous communication, significantly lowering the central processing burden.
 - **Adjoint LMS (Adjoint-LMS)**: HTIMHJJW utilizes the adjoint property of the multichannel system to derive gradients, which is particularly effective in high-channel-count road noise scenarios.
 
+### 2.4 Reference Compression via Neural Projection (He 2026)
+Rather than optimizing the *controller* for many channels, [[concepts/condition-aware-projection-filtering|CAPF]] reduces the channel count itself: a neural front end generates block-wise FIR projection filters compressing 42 correlated references to 4 decorrelated projected references, shrinking the back-end adaptive controller and improving its conditioning (He et al. 2026, [[sources/he-2026-neural-projection-filter-anc|IEEE SPL 2026]]). On a measured 21 h in-vehicle road-noise dataset, CAPF-Newton reaches the offline-Wiener-level 8.52 dBA average attenuation at 374.0 MMAC/s — beating BCD-Newton by 1.19 dBA at 15% lower complexity, and the point-wise neural projection NRP-FxAP at a 48× complexity reduction. This complements Section 2.2's Kronecker/SVD decompositions: both reduce dimensionality, but the projection filters are *learned, condition-aware, and regenerable online* (every 8 STFT frames) rather than fixed linear transforms.
+
 ---
 
 ## 3. Spatial Robustness and Meta-Learning
@@ -66,6 +70,7 @@ N7HG3TSP introduces a **Frequency-Direction Aware** mechanism:
 | **Decomposition**| Kronecker/SVD | Robustness under model mismatch | Moderate |
 | **Meta-Learning** | Priors/Cold-start | Quickly changing acoustic environments | High (Offline) |
 | **Adjoint LMS** | Gradient Optimization | High-channel-count (Road Noise) | Optimized $O(L)$ |
+| **Neural reference projection** (He 2026) | Learned condition-aware FIR projection of references (42→4) | Correlated multi-reference road noise | 374.0 MMAC/s |
 
 ---
 
@@ -82,7 +87,10 @@ N7HG3TSP introduces a **Frequency-Direction Aware** mechanism:
 ## Related Concepts
 
 - [[concepts/multi-channel-anc|Multi-Channel ANC]]
+- [[concepts/multi-reference-anc|Multi-Reference ANC]]
+- [[concepts/condition-aware-projection-filtering|Condition-Aware Projection Filtering (CAPF)]]
 
 ## Related Sources
 
 - [[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC]]
+- [[sources/he-2026-neural-projection-filter-anc|He et al. 2026: Neural Projection Filter Generation for Multi-Reference ANC]]

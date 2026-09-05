@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-17
-updated: 2026-08-21
+updated: 2026-09-05
 tags:
 - active-noise-control
 - adaptive-filtering
@@ -10,6 +10,7 @@ tags:
 sources:
   - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
   - raw/papers/bai-2026-feedback-guided-anc/full-text.md
+  - raw/papers/he-2026-neural-projection-filter-anc/full-text.md
 ---
 # AI-Driven Active Noise Control
 
@@ -55,6 +56,10 @@ The fusion is $\mathbf{y}(n) = \alpha\, \mathbf{y}_W(n) + (1-\alpha)\, \mathbf{y
 
 **Empirical result**: On the CCF-AATC headphone ANC dataset, the 10-expert streaming model achieves **19.00 dB avg NR (50 Hz–5 kHz) with negligible 1–8 kHz amplification**, with stable reduction across condition switches (no convergence time).
 
+### 2.6 Neural Reference Projection on the Reference Path (He 2026)
+
+A fifth architectural pattern: **neural processing of the reference path** rather than the control path. [[concepts/condition-aware-projection-filtering|CAPF]] (He et al. 2026) uses a 500k-parameter network (CAPFNet) to generate block-wise FIR *projection* filters compressing 42 correlated road-noise references into 4 decorrelated projected references, while the control loop remains a *conventional* adaptive algorithm (FDFxNLMS or LMS-Newton). This positioning is deliberate: the neural stage attacks the inter-channel correlation and dimensionality that slow classical multi-reference adaptation, without replacing the adaptive controller's stability and tracking guarantees. Inference runs at block rate (every 8 STFT frames), yielding 374.0 MMAC/s total — a 48× reduction over the point-wise neural projection baseline NRP-FxAP (17.9 GMAC/s) at equal attenuation (8.52 dBA average, Wiener-comparable), and it generalizes to an unseen 60 km/h driving condition. Compared with the reference-vs-feedback axis of Section 2.5, this adds a second axis: **which pipeline stage the network occupies** — controller (SFANC/GFANC/E2E-CFG), controller fusion (Bai 2026), or reference conditioning (CAPF).
+
 ---
 
 ## 3. The Efficiency Frontier: Real-Time Implementation
@@ -68,6 +73,7 @@ The primary hurdle for AI-driven ANC is the computational cost of deep networks 
 | **Hybrid SFANC-FxNLMS** | Moderate | High steady-state reduction | High-end Headphones |
 | **CRN Spectrogram** | High | Handles nonlinear distortion | Smart Speakers/Mobile |
 | **Feedback-guided MoE fusion** (Bai 2026) | Moderate (672.83 MMac/s, 28.57k params) | Robust to acoustic-path mismatch; no online adaptation; 19 dB avg NR (50 Hz–5 kHz) | Headphones |
+| **Neural reference projection** (He 2026) | Moderate (374.0 MMAC/s, 500k params) | Compresses 42 correlated references to 4; keeps adaptive back end; +2.6 dBA over FDFxNLMS | Automotive road noise |
 
 ### 3.1 Neural Stability and Robustness
 Recent research focuses on using RNNs as "stability observers." By predicting the innovative whiteness of the error signal, the network can dynamically adjust the step-size of a traditional FxLMS filter, preventing divergence during impulsive events without the full overhead of an end-to-end neural controller.
@@ -96,3 +102,4 @@ Recent research focuses on using RNNs as "stability observers." By predicting th
 - [[sources/yin-2023-selective-fixed-filter-anc-headphones|Yin 2023: Selective Fixed-Filter ANC Based on Frequency Response Matching in Headphones]]
 - [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement|Tan & Wang 2018: CRN for Real-Time Speech Enhancement (original CRN proposal)]]
 - [[sources/jiang-2025-ai-driven-avnc-review|Jiang et al. 2025: AI-Driven AVNC Review]] — comprehensive review classifying AI-AVNC into four technical paths
+- [[sources/he-2026-neural-projection-filter-anc|He et al. 2026: Neural Projection Filter Generation for Multi-Reference ANC]] — neural reference-projection front end (CAPF) with conventional adaptive back end

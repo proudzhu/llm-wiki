@@ -537,4 +537,6 @@
 | [[entities/julian-wechsler\|Julian Wechsler]] | Researcher, International Audio Laboratories Erlangen; first author of the founding NDF paper | 2026-09-04 |
 | [[entities/srikanth-raj-chetupalli\|Srikanth Raj Chetupalli]] | Researcher, International Audio Laboratories Erlangen; microphone arrays, spatial audio, beamforming | 2026-09-04 |
 | [[entities/mhd-modar-halimeh\|Mhd Modar Halimeh]] | Researcher, International Audio Laboratories Erlangen; neural directional filtering, spatial audio | 2026-09-04 |
+| [[entities/haishan-zou\|Haishan Zou]] | Researcher, Nanjing University — multi-reference ANC, neural reference projection (CAPF) | 2026-09-05 |
+| [[entities/jiancheng-tao\|Jiancheng Tao]] | Researcher, Nanjing University — multi-reference ANC, adaptive filtering (CAPF, NRP, BCD-LMS-Newton) | 2026-09-05 |
 

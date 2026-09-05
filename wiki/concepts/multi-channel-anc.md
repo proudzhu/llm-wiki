@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-06-25
+updated: 2026-09-05
 sources:
+  - raw/papers/he-2026-neural-projection-filter-anc/full-text.md
 tags:
 - active-noise-control
 - dsp
@@ -59,6 +60,8 @@ The main challenge is the **explosive growth in computation**. For each error se
 - [[subband-anc|Subband ANC]] (parallel processing in frequency subbands)
 - [[simplified-adaptive-feedback-anc|Simplified Adaptive Feedback ANC]] (reducing computation in feedback systems)
 
+When the growth is driven by a large number of **reference channels** (e.g., 42 accelerometers for automotive road noise), a complementary remedy is [[concepts/multi-reference-anc|multi-reference ANC]] reference compression: projecting the $P$ references onto $Q \ll P$ virtual/projected references (via SVD subspaces or neural projection filters such as [[concepts/condition-aware-projection-filtering|CAPF]]) before the control filter, which shrinks the back-end controller and improves its conditioning.
+
 ## Related Concepts
 
 - [[active-noise-control|Active Noise Control]]
@@ -67,6 +70,8 @@ The main challenge is the **explosive growth in computation**. For each error se
 - [[frequency-domain-anc|Frequency-Domain ANC]]
 - [[subband-anc|Subband ANC]]
 - [[simplified-adaptive-feedback-anc|Simplified Adaptive Feedback ANC]]
+- [[multi-reference-anc|Multi-Reference ANC]]
+- [[condition-aware-projection-filtering|Condition-Aware Projection Filtering (CAPF)]]
 
 ## PINN-Assisted Multi-Channel ANC
 
@@ -76,3 +81,4 @@ In the PINN-assisted ANC system ([[sources/zhang-2024-active-noise-control-sound
 
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section V: Multiple-Channel ANC
 - [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]]
+- [[sources/he-2026-neural-projection-filter-anc|He et al. 2026: Neural Projection Filter Generation for Multi-Reference ANC]] — 42-reference road-noise system compressed to 4 projected references

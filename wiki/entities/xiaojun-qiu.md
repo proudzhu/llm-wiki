@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-10
-updated: 2026-08-30
+updated: 2026-09-05
 sources:
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
 tags:
@@ -30,6 +30,7 @@ Researcher in acoustics. Corresponding author for [[sources/wu-2014-simplified-a
 - [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Co-author, corresponding author
 - [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — Co-author
 - [[sources/yan-2014-dual-mic-bt-noise-reduction|Yan 2014: Dual-Mic Noise Suppression for Bluetooth Headsets]] — Co-author, corresponding author, with [[entities/xinye-yan|Xinye Yan]] and [[entities/jing-lu|Jing Lu]] — dual-mic coherence-based vs spatial-pre-separation (ATF-GSC) algorithms under a speech-distortion-constrained optimal filter framework
+- [[sources/he-2026-neural-projection-filter-anc|He et al. 2026: Neural Projection Filter Generation for Multi-Reference ANC]] — Co-author — condition-aware projection filtering (CAPF) generating block-wise FIR projection filters to compress 42 road-noise references to 4 (IEEE SPL 2026)
 
 ## Contact
 
