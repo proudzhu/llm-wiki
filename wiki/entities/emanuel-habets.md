@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-05
-updated: 2026-09-04
+updated: 2026-09-05
 tags:
   - researcher
   - acoustic-parameter-estimation
@@ -23,6 +23,7 @@ tags:
 - Co-authored "Neural directional filtering: far-field directivity control with a small microphone array" (IWAENC 2024) — the founding [[concepts/neural-directional-filtering|NDF]] paper — [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024]]
 - Supervised "Informed Spatial Filters for Speech Enhancement" PhD thesis (FAU 2018) — the [[concepts/informed-spatial-filter|ISF]] paradigm unifying noise reduction, DOA-informed extraction, spotforming, and sparsity-based BSS — [[sources/taseska-2018-informed-spatial-filters|Taseska 2018]]
 - Co-authored blind direction-dependent acoustic parameter estimation using smart glasses ([[sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation|Görtz et al. 2026]])
+- Co-authored "Steerable neural directional filtering" (Euronoise 2025) — steerable extension of NDF with a single trained model — [[sources/huang-2025-steerable-neural-directional-filtering|Huang et al. 2025]]
 - NDF+: joint neural directional filtering and diffuse sound extraction (arXiv 2026)
 - μNet: ultra-low-memory and low-complexity speech enhancement for embedded DSPs (arXiv 2026)
 - Hybrid acoustic echo reduction using Kalman filtering and informed source extraction (SLT 2023)
@@ -34,6 +35,8 @@ tags:
 ## Related Sources
 
 - [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]]
+
+- [[sources/huang-2025-steerable-neural-directional-filtering|Huang et al. 2025: Steerable Neural Directional Filtering]]
 
 - [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015: Residual Noise Control PMWF]]
 

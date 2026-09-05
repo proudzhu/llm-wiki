@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-04
+updated: 2026-09-05
 sources:
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
+  - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
 tags:
   - virtual-directional-microphone
   - spatial-audio
@@ -51,7 +52,8 @@ where $\beta=10^{-\frac{\mathrm{DI}}{20}}$ is determined by the directivity inde
 |--------|-------------|-------------|
 | DMA | Differential microphone array beamforming | Limited by array size and microphone count |
 | Superdirective beamforming | Maximizes directivity factor | Noise amplification at low frequencies |
-| NDF | Neural network-based VDM reconstruction | Requires training data |
+| NDF | Neural network-based VDM reconstruction | Requires training data; fixed pattern per model |
+| SNDF | Steerable NDF: pattern steerable to any direction with one model | Pattern shape fixed at training |
 | NDF+ | Joint VDM + diffuse sound extraction | Extended dual-task capability |
 
 ## Applications
@@ -72,4 +74,5 @@ where $\beta=10^{-\frac{\mathrm{DI}}{20}}$ is determined by the directivity inde
 ## Related Sources
 
 - [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — founding far-field VDM formalization and neural reconstruction
+- [[sources/huang-2025-steerable-neural-directional-filtering|Huang et al. 2025: Steerable Neural Directional Filtering]] — steerable VDM with mid-inference direction switching
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]

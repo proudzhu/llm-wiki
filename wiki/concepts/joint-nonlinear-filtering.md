@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-04
+updated: 2026-09-05
 sources:
   - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
   - raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md
   - raw/papers/huang-2026-ndf-joint-neural-directional-filtering/full-text.md
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
+  - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
 tags:
   - neural-network
   - spatial-audio
@@ -49,12 +50,17 @@ NDF+ extends FT-JNF with:
 - Two complex masks: $\mathcal{M}_{\mathrm{coh}}$ and $\mathcal{M}_{\mathrm{diff}}$
 - Joint estimation of coherent and diffuse components
 
+## Steering-Conditioned Extension (SNDF)
+
+[[concepts/steerable-neural-directional-filtering|SNDF]] (Huang et al. 2025) reuses the single-mask FT-JNF unchanged for mask estimation but adds a steering branch: the desired steering direction is one-hot encoded, mapped through a linear layer, and used to initialize the forward/backward states of the F-BiLSTM per time frame — the same conditioning mechanism Tesch & Gerkmann use for angular-region conditioning in the SSF. This turns the fixed-look-direction NDF into a model steerable to any direction at inference.
+
 ## Related Concepts
 
 - [[concepts/spatially-selective-nonlinear-filter|Spatially Selective Non-Linear Filter (SSF)]]
 - [[concepts/mcnet|McNet (Multi-Cue Network)]]
 - [[concepts/direct-separation|Direct Separation (DS)]]
 - [[concepts/neural-directional-filtering|Neural Directional Filtering]]
+- [[concepts/steerable-neural-directional-filtering|Steerable Neural Directional Filtering]]
 - [[concepts/virtual-directional-microphone|Virtual Directional Microphone]]
 - [[concepts/diffuse-sound-extraction|Diffuse Sound Extraction]]
 
@@ -63,4 +69,5 @@ NDF+ extends FT-JNF with:
 - [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023: Insights Into Deep Non-linear Filters for Improved Multi-channel Speech Enhancement]] — introduces the FT-JNF architecture and the T-JNF/F-JNF/FT-JNF/NSF/PF variant family; the foundational analysis of spatial-spectral-temporal interplay
 - [[sources/tesch-2024-spatially-selective-nonlinear-filters|Tesch & Gerkmann 2024: Multi-channel Speech Separation Using Spatially Selective Deep Non-linear Filters]]
 - [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — first application of the single-mask FT-JNF to directivity-pattern learning
+- [[sources/huang-2025-steerable-neural-directional-filtering|Huang et al. 2025: Steerable Neural Directional Filtering]] — steering-direction conditioning of the F-BiLSTM initial states
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]

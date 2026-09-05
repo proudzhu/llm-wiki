@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-04
+updated: 2026-09-05
 sources:
   - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
+  - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
 tags:
   - neural-directional-filtering
   - virtual-directional-microphone
@@ -37,9 +38,14 @@ where $\Lambda(\theta,\phi)$ is the desired directivity pattern, and $H_{\mathrm
 | Approach | Description | Key Features |
 |----------|-------------|--------------|
 | FT-JNF | Joint spatial and temporal-spectral nonlinear filtering | Uses BiLSTM + UniLSTM for mask estimation |
+| SNDF | Steerable NDF (Huang et al. 2025) | Steering direction as conditioning input; single model steers to any direction at inference |
 | Dual-mask NDF (NDF+) | Extended FT-JNF with two parallel mask branches | Joint coherent/diffuse estimation |
 | SHONDC | Steerable high-order neural directional coding | Supports steerable directivity patterns |
 | UNDF | NDF with user-defined directivity patterns | Flexible directivity configuration |
+
+## Steerable Extension (SNDF)
+
+[[concepts/steerable-neural-directional-filtering|SNDF]] (Huang et al., Euronoise 2025) removes NDF's restriction to a static, fixed-look-direction pattern per model: the steering direction $\theta_s$ is one-hot encoded and injected as the initial states of the F-BiLSTM, so one trained model renders the learned pattern at any direction — with steering-invariant pattern quality and consistent SDR across directions, and 6th-order patterns learned from only 4 microphones.
 
 ## Architecture
 
@@ -60,5 +66,6 @@ The FT-JNF-based NDF architecture processes concatenated real/imaginary STFT coe
 ## Related Sources
 
 - [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — founding paper: formalizes the task, investigates training-data composition, demonstrates 3rd-order patterns with 4 microphones
+- [[sources/huang-2025-steerable-neural-directional-filtering|Huang et al. 2025: Steerable Neural Directional Filtering]] — extends NDF to steerable patterns with a single conditioned model
 - [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023: Insights Into Deep Non-linear Filters for Improved Multi-channel Speech Enhancement]] — origin of the FT-JNF backbone used by NDF [22]
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]

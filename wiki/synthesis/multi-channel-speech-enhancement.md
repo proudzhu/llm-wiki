@@ -1,10 +1,11 @@
 ---
 type: synthesis
 created: 2026-08-16
-updated: 2026-09-04
+updated: 2026-09-05
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
+  - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
   - raw/papers/schwarz-2015-coherent-to-diffuse-power-ratio/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
@@ -79,6 +80,7 @@ The distinction: this synthesis is about **spatial filtering** (beamforming, coh
 | [[sources/mittal-2026-adaptive-diagonal-loading-beamforming\|Mittal et al. 2026]] | 2026 | Robustness | Kantorovich-bounded adaptive diagonal loading; deterministic WNG guarantee via condition-number bound |
 | [[sources/deng-2026-joint-covariance-wng-mvdr\|Deng et al. 2026]] | 2026 | Robustness | Data-driven frequency-dependent WNG thresholds via dual-branch network + differentiable robust MVDR layer |
 | [[sources/wechsler-2024-neural-directional-filtering\|Wechsler et al. 2024 (NDF)]] | 2024 | Hybrid | Founding neural directional filtering: FT-JNF complex mask renders a VDM with desired directivity from 4 mics — 3rd-order DMA pattern at 18.4 dB SDR where 6-mic CDMA was classical; training-set speaker density governs pattern fidelity |
+| [[sources/huang-2025-steerable-neural-directional-filtering\|Huang et al. 2025 (SNDF)]] | 2025 | Hybrid | Steerable NDF: one-hot steering direction conditioned into the F-BiLSTM initial states — a single trained model steers the learned pattern to any direction (switchable mid-recording); steering-invariant patterns, 6th-order from 4 mics |
 | [[sources/oviste-2026-neural-vslf-speech-enhancement\|Oviste et al. 2026]] | 2026 | Hybrid | HVSF: DNN predicts SCM + tradeoff → classical VSLF weights (MWF/MVDR/GEV as special cases) |
 | [[sources/liu-2026-scm-reconstruction-speech-enhancement\|Liu et al. 2026 (R-MWF)]] | 2026 | Hybrid | Analytical SCM reconstruction from variance ratios + predefined coherence matrices; online $\mathcal{O}(M^2(I+2))$ |
 | [[sources/farmani-2026-virtual-mic-beamforming-hearing-aid\|Farmani et al. 2026]] | 2026 | Hybrid | Virtual microphone synthesis via power-function RTF model; +3–4 dB ISNR from 2 mics + 2 VMs on HA |
@@ -140,7 +142,7 @@ Across the whole corpus, MCSE methods can be placed on a single spectrum of **wh
 | 3 | CDR $\Lambda$ | Directly the post-filter gain $G = 1 - \sqrt{\mu/(\Lambda+1)}$ | [[sources/schwarz-2015-coherent-to-diffuse-power-ratio\|Schwarz 2015]], [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement\|Löllmann 2020]] |
 | 4 | SCM $\Phi_x, \Phi_n$ | MVDR/MWF/VSLF weights | [[sources/oviste-2026-neural-vslf-speech-enhancement\|HVSF]], [[sources/liu-2026-scm-reconstruction-speech-enhancement\|R-MWF]] |
 | 5 | RTF $\mathbf{a}$ | Steering vector for MPDR/MVDR | [[sources/farmani-2026-virtual-mic-beamforming-hearing-aid\|Farmani 2026]], [[sources/apostolidis-2026-listen-first-output-based-multi-microphone\|Apostolidis 2026]] |
-| 6 | Filter weights $\mathbf{w}$ directly | (no intermediate) | [[sources/wechsler-2024-neural-directional-filtering\|Wechsler 2024]] (as a complex mask on the reference mic), [[sources/zaidel-2026-linearly-constrained-deep-beamformer\|Zaidel 2026]], [[sources/huang-2026-ndf-joint-neural-directional-filtering\|NDF+]] |
+| 6 | Filter weights $\mathbf{w}$ directly | (no intermediate) | [[sources/wechsler-2024-neural-directional-filtering\|Wechsler 2024]] (as a complex mask on the reference mic), [[sources/huang-2025-steerable-neural-directional-filtering\|SNDF 2025]] (same, with steering-direction conditioning), [[sources/zaidel-2026-linearly-constrained-deep-beamformer\|Zaidel 2026]], [[sources/huang-2026-ndf-joint-neural-directional-filtering\|NDF+]] |
 
 **The tradeoff**: moving down the spectrum relaxes assumptions (DOA → coherence → SCM → direct weights) but sacrifices interpretability and controllability. Schwarz 2015's CDR estimators expose a clean physical quantity (coherent-to-diffuse ratio) with a geometric interpretation in the complex plane; Zaidel 2026's deep beamformer produces weights that satisfy constraints only statistically via the loss function. The 2026 **hybrid** methods (Steps 4–5) deliberately stop short of Step 6 to preserve the ability to inspect and control the filter — HVSF exposes the VSLF tradeoff parameter $\mu$ and span dimension $Q$, R-MWF exposes variance ratios $\psi_i, \psi_R, \psi_V$, Farmani's virtual-mic MVDR exposes the RTF power $\lambda$.
 

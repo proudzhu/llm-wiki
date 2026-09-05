@@ -4983,3 +4983,28 @@ Ingested "A Comparison of Generative and Discriminative Methods for Speech Enhan
 - **Summary**: Introduces condition-aware projection filtering (CAPF/CAPFNet) — a neural front end that generates block-wise causal FIR projection filters compressing 42 correlated in-vehicle road-noise references to 4 projected references for conventional adaptive controllers; CAPF-Newton attains Wiener-level 8.52 dBA average attenuation at 374.0 MMAC/s, +2.6 dBA over FDFxNLMS and 48× cheaper than point-wise NRP-FxAP.
 - **Pages created**: `wiki/sources/he-2026-neural-projection-filter-anc.md`, `wiki/entities/haishan-zou.md`, `wiki/entities/jiancheng-tao.md`, `wiki/concepts/condition-aware-projection-filtering.md`, `wiki/concepts/multi-reference-anc.md`
 - **Pages updated**: `wiki/entities/yiming-he.md`, `wiki/entities/kai-chen.md`, `wiki/entities/xiaojun-qiu.md` (added CAPF contributions); `wiki/concepts/multi-channel-anc.md` (reference-compression remedy + cross-refs); `wiki/concepts/generative-fixed-filter-anc.md` (reference-path filter generation section); `wiki/synthesis/ai-driven-anc.md` (new Section 2.6 neural reference projection + efficiency-frontier table row); `wiki/synthesis/multichannel-anc-efficiency-and-robustness.md` (new Section 2.4 reference compression + comparison table row); `wiki/index.md` and subdirectory indexes (statistics: 1237 total, +5)
+
+---
+
+## [2026-09-05] ingest | Steerable Neural Directional Filtering (Huang et al. 2025)
+
+- **Source**: `raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md` (Zotero: R3CVBTU5)
+- **Authors**: Weilong Huang, Mhd Modar Halimeh, Srikanth Raj Chetupalli, Oliver Thiergart, Emanuël Habets
+- **Published**: 11th Convention of the European Acoustics Association (Euronoise 2025), Málaga, Spain, 23–26 June 2025
+- **DOI**: N/A (open access, CC BY 3.0)
+- **Summary**: Steerable neural directional filtering (SNDF) — extends NDF with steering-direction conditioning (one-hot → linear → F-BiLSTM initial states) so a single trained model steers its learned directivity pattern to any direction at inference; steering-invariant patterns, consistent SDR across directions (25.9/20.2/17.1 dB for 1st/3rd/6th-order targets), 6th-order pattern from 4 microphones.
+- **Extraction note**: MinerU service down (all uploads fail); extracted text via PyMuPDF and rendered all 6 figures from page regions at 300 DPI (Figs 1-2 and polar panels are vector graphics, not embedded rasters).
+- **Pages created**:
+  - `wiki/sources/huang-2025-steerable-neural-directional-filtering.md`
+  - `wiki/concepts/steerable-neural-directional-filtering.md`
+- **Pages updated**:
+  - `wiki/entities/weilong-huang.md` — added SNDF first-author contribution
+  - `wiki/entities/mhd-modar-halimeh.md` — added SNDF contribution
+  - `wiki/entities/srikanth-raj-chetupalli.md` — added SNDF contribution
+  - `wiki/entities/oliver-thiergart.md` — added SNDF contribution
+  - `wiki/entities/emanuel-habets.md` — added SNDF contribution
+  - `wiki/concepts/neural-directional-filtering.md` — added SNDF row + Steerable Extension section
+  - `wiki/concepts/virtual-directional-microphone.md` — added SNDF row to reconstruction methods
+  - `wiki/concepts/joint-nonlinear-filtering.md` — added Steering-Conditioned Extension section
+  - `wiki/synthesis/multi-channel-speech-enhancement.md` — added SNDF row to sources table and Step-6 spectrum entry
+  - `wiki/index.md`, `wiki/sources/index.md`, `wiki/concepts/index.md` — new entries + statistics (1239 total)
