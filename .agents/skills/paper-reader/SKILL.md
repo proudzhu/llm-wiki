@@ -27,13 +27,13 @@ End-to-end workflow for ingesting academic papers from Zotero into the LLM Wiki 
 
 Several steps require checking whether a page already exists. **On Windows, Glob brace expansion (`{a,b,c}.md`) does not work** and returns "No file found" even when files exist. Use one of these patterns instead:
 
-- **Grep with alternation** (preferred for batch checks): `Grep` with pattern `seidel|fingscheidt|mowlaee`, path `wiki/entities`, `-i true` — returns all matching files in one call.
+- **LS the directory** (ground truth for existence — filenames cannot lie): `LS wiki/entities` returns the full file list; scan for the target slugs. One call checks any number of candidates.
 - **Multiple parallel Glob calls**: one Glob per slug (no braces), e.g. `wiki/entities/ernst-seidel.md`.
-- **LS the directory**: `LS wiki/entities` returns the full file list; scan visually for the target slugs.
+- **Grep with alternation** — *content search only, not an existence check.* Grep matches file **contents**, not filenames: a page rarely contains its own slug (e.g. `mvdr-beamformer.md` has H1 "MVDR Beamformer", so grepping `mvdr-beamformer` misses it — false "missing"), while `index.md` contains *every* slug (false "exists"). Use Grep only to find pages that **mention** a name, e.g. pattern `seidel|fingscheidt|mowlaee` finds those authors' entity pages because the names appear in the body text. See `pitfalls.md` #43.
 
 Always use **forward slashes** in Glob patterns and prefer **relative paths from project root** over absolute Windows paths.
 
-**Do not use `RunCommand` with PowerShell `Where-Object { $_.Name -match '...' }`** for batch existence checks — the shell wrapper strips `$_` and other `$`-prefixed automatic variables, producing "item not recognized" errors (see `pitfalls.md` #31). Prefer the Grep tool with alternation, which calls ripgrep directly and avoids PowerShell quoting entirely.
+**Do not use `RunCommand` with PowerShell `Where-Object { $_.Name -match '...' }`** for batch existence checks — the shell wrapper strips `$_` and other `$`-prefixed automatic variables, producing "item not recognized" errors (see `pitfalls.md` #31). Use the LS/Glob/Grep tools directly instead; they avoid PowerShell quoting entirely.
 
 ## Prerequisites
 
@@ -170,7 +170,7 @@ For re-ingestion: overwrite the existing source page with updated comprehensive 
 
 ### Step 6: Create or Update Entity Pages
 
-For each author not already in `wiki/entities/`, create a new page. For existing authors, make **append-only** edits (update `updated:`, append a bullet to `## Key Contributions`, do not touch `created:` or rewrite existing bullets). Load [`references/page-templates.md`](references/page-templates.md) for the full template and the append-only update rules. **Check first**: Grep `wiki/entities` for the author slug.
+For each author not already in `wiki/entities/`, create a new page. For existing authors, make **append-only** edits (update `updated:`, append a bullet to `## Key Contributions`, do not touch `created:` or rewrite existing bullets). Load [`references/page-templates.md`](references/page-templates.md) for the full template and the append-only update rules. **Check first**: LS `wiki/entities` and scan the filenames for the author slug (entity pages don't contain their own slug, so a content Grep gives false "missing").
 
 ### Step 7: Create Missing Concept Pages
 
@@ -178,21 +178,19 @@ For each key concept referenced via wikilink in the source page but lacking a de
 
 **Review/survey paper**: apply the **stricter concept-page threshold** described in [`references/review-papers.md`](references/review-papers.md). A review surveys many terms, but only warrants creating a concept page when the review itself contributes a **distinctive taxonomy or synthesis** of that concept — not merely because the concept is mentioned. Tutorials are an exception (a tutorial that introduces/formulates a concept distinctly warrants a page).
 
-**Batch existence check** (one Grep call, not N Globs): before creating any concept page, list all candidate concept slugs from the source page and check them in a single Grep call with alternation:
+**Batch existence check** (one LS call, not N Globs): before creating any concept page, list all candidate concept slugs from the source page and check them against the directory listing:
 
 ```
-Grep pattern: "concept-slug-1|concept-slug-2|concept-slug-3"
-      path: wiki/concepts
-      output_mode: files_with_matches
+LS wiki/concepts
 ```
 
-This returns all matching `.md` files in one call. Candidates with no match are confirmed missing and should be created (if they pass the concept-page threshold). This avoids the anti-pattern of issuing 5–15 separate Glob calls (one per slug), which wastes tool-call budget.
+Scan the returned filenames for each candidate. Candidates absent from the list are confirmed missing and should be created (if they pass the concept-page threshold). Do **not** use Grep for this — it matches file *contents*: a page like `mvdr-beamformer.md` doesn't contain its own slug (false "missing"), and any page *mentioning* a slug in a wikilink matches (false "exists"). See the "Checking Existing Pages" section above and `pitfalls.md` #43.
 
 ### Step 8: Update Existing Concept Pages
 
 For each existing concept page touched by this paper: add the paper to `sources:` in frontmatter, update `updated:` date, add new sections with findings, extend `## Related Concepts` and `## Related Sources` with new wikilinks.
 
-**Identify existing concept pages to update** using the same batch Grep approach as Step 7 — the candidates that *did* match in the Step 7 Grep are the existing pages to update here. No separate existence check needed.
+**Identify existing concept pages to update** from the same Step 7 LS listing — the candidates that *did* appear in `wiki/concepts` are the existing pages to update here. No separate existence check needed.
 
 **Efficient batched-update pattern** (when updating >2 existing concept pages in one ingest):
 

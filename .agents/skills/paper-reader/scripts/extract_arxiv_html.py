@@ -2,11 +2,14 @@
 """Step 3b: Extract paper content from arXiv HTML via Defuddle.
 
 Workflow:
-  1. Verify arXiv HTML version exists (200 status).
-  2. Run `defuddle parse` to produce markdown.
-  3. Download figures referenced in the markdown to figures/.
-  4. Replace remote image links with local embed wikilinks.
-  5. Delete the PDF if it exists (extraction source is HTML).
+  1. Verify arXiv HTML version exists (200 status) — no filesystem side
+     effects, so a 404 leaves nothing behind.
+  2. Create raw/papers/{slug}/ if missing (arXiv-only papers can skip
+     prepare_paper.py entirely).
+  3. Run `defuddle parse` to produce markdown.
+  4. Download figures referenced in the markdown to figures/.
+  5. Replace remote image links with local embed wikilinks.
+  6. Delete the PDF if it exists (extraction source is HTML).
 
 Usage:
   uv run python .agents/skills/paper-reader/scripts/extract_arxiv_html.py --arxiv-id 2607.01834 --slug author-year-title
@@ -157,12 +160,8 @@ def main():
     figures_dir = os.path.join(paper_dir, 'figures')
     pdf_path = os.path.join(paper_dir, 'paper.pdf')
 
-    if not os.path.isdir(paper_dir):
-        print(f"ERROR: {paper_dir} does not exist. Run prepare_paper.py first.",
-              file=sys.stderr)
-        sys.exit(1)
-
-    # Step 1: Verify arXiv HTML exists
+    # Step 1: Verify arXiv HTML exists (before any filesystem side effects,
+    # so a 404 does not leave behind an empty raw/papers/{slug}/ directory)
     print(f"Checking arXiv HTML for {args.arxiv_id} ...")
     html_url = check_arxiv_html(args.arxiv_id)
     if html_url is None:
@@ -170,19 +169,23 @@ def main():
         print("FALLBACK: Use extract_mineru.py instead.")
         sys.exit(2)
 
-    # Step 2: Extract markdown with Defuddle
+    # Step 2: Create the paper directory if missing (arXiv-only papers can
+    # skip prepare_paper.py entirely)
+    os.makedirs(paper_dir, exist_ok=True)
+
+    # Step 3: Extract markdown with Defuddle
     run_defuddle(html_url, md_path)
 
-    # Step 3: Download figures
+    # Step 4: Download figures
     print("\nDownloading figures ...")
     downloaded = download_figures(md_path, args.arxiv_id, figures_dir)
 
-    # Step 4: Replace remote links with local embed wikilinks
+    # Step 5: Replace remote links with local embed wikilinks
     if downloaded:
         replace_image_links(md_path, downloaded, args.slug)
         print(f"Replaced {len(downloaded)} image link(s) with local embed wikilinks.")
 
-    # Step 5: Delete the PDF
+    # Step 6: Delete the PDF
     if os.path.exists(pdf_path):
         os.remove(pdf_path)
         print(f"\nDeleted PDF: {pdf_path}")
