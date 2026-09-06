@@ -539,4 +539,8 @@
 | [[entities/mhd-modar-halimeh\|Mhd Modar Halimeh]] | Researcher, International Audio Laboratories Erlangen; neural directional filtering, spatial audio | 2026-09-04 |
 | [[entities/haishan-zou\|Haishan Zou]] | Researcher, Nanjing University — multi-reference ANC, neural reference projection (CAPF) | 2026-09-05 |
 | [[entities/jiancheng-tao\|Jiancheng Tao]] | Researcher, Nanjing University — multi-reference ANC, adaptive filtering (CAPF, NRP, BCD-LMS-Newton) | 2026-09-05 |
+| [[entities/de-hu\|De Hu]] | Inner Mongolia University; first author of ABSE-NET (active binaural speech enhancement for open-fit hearing aids) | 2026-09-06 |
+| [[entities/xue-du\|Xue Du]] | Inner Mongolia University; co-author of ABSE-NET | 2026-09-06 |
+| [[entities/qingying-zhao\|Qingying Zhao]] | Inner Mongolia University; co-author of ABSE-NET | 2026-09-06 |
+| [[entities/qintuya-si\|Qintuya Si]] | Inner Mongolia University; co-author of ABSE-NET | 2026-09-06 |
 

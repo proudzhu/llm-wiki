@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-08-25
+updated: 2026-09-06
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
   - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
   - raw/papers/bagheri-2019-pmwf-spp/full-text.md
+  - raw/papers/hu-2026-abse-net/full-text.md
 tags:
   - beamforming
   - speech-enhancement
@@ -54,6 +55,10 @@ Taseska & Habets develop the [[concepts/informed-spatial-filter|informed spatial
 
 Yang et al. (2025) adopt an internal adjusted MVDR for [[concepts/wearer-speech-recognition|WSR]] on Ray-Ban Meta smart glasses (5-mic array), with the beamformer steered to the wearer's mouth only. This contrasts with the [[concepts/nlcmv-beamforming|NLCMV]] beamformer of AGADIR (Lin et al. 2024), which steers multiple directions to support conversational ASR of both wearer and bystander. For pure WSR, the single-direction MVDR is reported as more suitable than NLCMV. The MVDR output (`ch-x`) is then used as one of three complementary frontends in the [[concepts/differential-asr|differential ASR]] framework, alongside a fixed microphone selection (`ch-0`) and a [[concepts/side-talk-detection|side-talk detection]] embedding. The combination achieves 18.0% relative WER reduction on real side-talk data over the noisy-trained single-MVDR-frontend baseline.
 
+## Binaural MVDR with a Neural Post-Filter (Hu et al. 2026)
+
+The **binaural MVDR (BMVDR)** extends the classical MVDR to the binaural hearing-aid setting, preserving the target as received by each ear's reference microphone (and its spatial cues) while minimizing output interferer-plus-noise power. In open-fit hearing aids, Hu et al. (2026) show the BMVDR alone collapses under vent leakage (SI-SDR 5.216 dB → 0.878 dB; PESQ 3.437 → 2.196) and is highly sensitive to ATF/DOA mismatch (SI-SDR −1.010 dB at 15° DOA error — worse than unprocessed). Their [[concepts/abse-net|ABSE-NET]] keeps the BMVDR as a coarse, cue-preserving front-end and cascades a 0.112M-parameter network that cancels the leakage and compensates BMVDR-induced distortion, restoring PESQ to 3.626 and remaining robust at 15° DOA error (6.434 dB). This is a concrete instance of using a lightweight DNN post-filter to absorb a beamformer's estimation errors rather than robustifying the beamformer itself.
+
 ## MVDR as the β = 0 Endpoint of the PMWF
 
 The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-wiener-filter|PMWF]] family: setting the trade-off parameter $\beta = 0$ in the PMWF closed form recovers the MVDR, while $\beta = 1$ gives the MWF. [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019]] benchmark this continuum on a 4-mic circular array (TIMIT speech, babble/pink interference, $T_{60}=300$ ms): the MWF consistently beats MVDR on ΔSINR, ΔSegSNR, and noise reduction at the expected cost of nonzero speech distortion, and an [[concepts/multi-channel-speech-presence-probability|MC-SPP]]-controlled $\beta$ (plus an MMSE output blend) improves further over the fixed-parameter MWF. This matches the structural intuition that MVDR's distortionless constraint leaves noise-reduction headroom on the table.
@@ -93,3 +98,4 @@ The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] — per-bin informed MVDR with detector-driven online statistics
 - [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] — wearer-focused adjusted MVDR as one frontend in a differential ASR system
 - [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]] — MVDR vs. MWF vs. SPP-controlled PMWF continuum benchmark
+- [[sources/hu-2026-abse-net|Hu et al. 2026: ABSE-NET]] — binaural MVDR collapses under open-fit leakage; a lightweight DNN post-filter absorbs its estimation errors

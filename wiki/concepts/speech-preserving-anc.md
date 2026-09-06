@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-04-25
+updated: 2026-09-06
 sources:
+  - raw/papers/hu-2026-abse-net/full-text.md
 tags:
   - active-noise-control
   - speech-processing
@@ -55,6 +56,9 @@ Speech-preserving ANC is fundamentally different from traditional Speech Enhance
 - The robust soft-constrained SSANC formulation in [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026]] handles secondary-path variations across users by averaging the cost over a measured set of plant estimates
 - Complementary to spectral selectivity; can be combined for enhanced separation
 
+### Hearing-Aid Active Binaural Speech Enhancement
+- [[concepts/abse-net|ABSE-NET]] (Hu et al. 2026) extends the speech-preserving idea to **open-fit hearing aids**: the loudspeaker plays both the enhanced signal and a learned anti-leakage component that destructively interferes with vent leakage, while an SI-SDR + STOI loss preserves the target speech. It needs no in-ear error microphone at inference (training-only), and its 0.112M-parameter network preserves binaural spatial cues (ILD/IPD) while cancelling leakage.
+
 ## Performance Characteristics
 
 From Dai 2026 (SNR = 5 dB, RT60 = 0.3s):
@@ -77,12 +81,15 @@ The system conservatively reduces noise for Babble (5.30 dB) to protect speech, 
 - [[complex-spectrum-mapping|Complex Spectrum Mapping]]
 - [[transparency-mode|Transparency Mode]]
 - [[voice-activity-detection|Voice Activity Detection]]
-- [[filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/active-binaural-speech-enhancement|Active Binaural Speech Enhancement]]
+- [[concepts/abse-net|ABSE-NET]]
 
 ## Related Sources
 
 - [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 - [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]]
+- [[sources/hu-2026-abse-net|Hu et al. 2026: ABSE-NET — Active Binaural Speech Enhancement for Open-Fit Hearing Aids]]
 
 ## Related Synthesis
 

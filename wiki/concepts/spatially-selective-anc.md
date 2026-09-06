@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-05-23
+updated: 2026-09-06
+sources:
+  - raw/papers/hu-2026-abse-net/full-text.md
 tags:
   - active-noise-control
   - hearables
@@ -46,6 +48,10 @@ balancing noise reduction against speech distortion via a positive scalar $\beta
 
 SSANC is closer in spirit to combining beamforming and ANC than to spectral methods: the **objective itself** encodes the desired spatial response.
 
+## Relation to Active Binaural Speech Enhancement
+
+A closely related but distinct line targets **open-fit hearing aids**, where the vent that relieves the [[concepts/ear-canal-occlusion-effect|occlusion effect]] also lets noise leak into the ear canal. There the enemy is not non-target *directions* but the leakage component $d_L$ itself, and the objective is to preserve the target's binaural cues (ILD/IPD) while cancelling leakage. [[concepts/abse-net|ABSE-NET]] (Hu et al. 2026) represents the neural, error-microphone-free variant of this idea: a binaural MVDR front-end followed by a lightweight network that synthesizes the anti-leakage signal, achieving the best spatial-cue preservation ($\Delta$ILD 3.047) among compared methods while remaining robust to 15° DOA/ATF mismatch.
+
 ## Practical Challenges
 
 - **Secondary path variability**: $\mathbf{g}$ depends strongly on user, fit, and ear-canal geometry. Designing for a single nominal $\mathbf{g}$ leads to large performance spread across users (see [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026]]).
@@ -72,8 +78,11 @@ SSANC is closer in spirit to combining beamforming and ANC than to spectral meth
 - [[concepts/selective-anc|Selective ANC (filter selection)]]
 - [[concepts/target-speaker-extraction|Target Speaker Extraction]]
 - [[concepts/spatially-selective-nonlinear-filter|Spatially Selective Non-Linear Filter (SSF)]]
+- [[concepts/active-binaural-speech-enhancement|Active Binaural Speech Enhancement]]
+- [[concepts/abse-net|ABSE-NET]]
 
 ## Related Sources
 
 - [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]]
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
+- [[sources/hu-2026-abse-net|Hu et al. 2026: ABSE-NET — Active Binaural Speech Enhancement for Open-Fit Hearing Aids]]

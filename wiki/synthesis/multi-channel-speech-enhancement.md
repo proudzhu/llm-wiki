@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-16
-updated: 2026-09-05
+updated: 2026-09-06
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
@@ -29,6 +29,7 @@ sources:
   - raw/papers/kang-2019-low-complexity-permutation-alignment/full-text.md
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
   - raw/papers/braun-2015-residual-noise-control/full-text.md
+  - raw/papers/hu-2026-abse-net/full-text.md
 tags:
   - multi-channel-speech-enhancement
   - beamforming

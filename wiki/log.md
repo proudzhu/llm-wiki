@@ -5008,3 +5008,15 @@ Ingested "A Comparison of Generative and Discriminative Methods for Speech Enhan
   - `wiki/concepts/joint-nonlinear-filtering.md` — added Steering-Conditioned Extension section
   - `wiki/synthesis/multi-channel-speech-enhancement.md` — added SNDF row to sources table and Step-6 spectrum entry
   - `wiki/index.md`, `wiki/sources/index.md`, `wiki/concepts/index.md` — new entries + statistics (1239 total)
+
+---
+
+## [2026-09-06] ingest | ABSE-NET: A Lightweight Neural Model for Active Binaural Speech Enhancement in Open-Fit Hearing Aids (Hu et al. 2026)
+
+- **Source**: `raw/papers/hu-2026-abse-net/full-text.md` (Zotero: B6TE7KHB)
+- **Authors**: De Hu, Xue Du, Qingying Zhao, Qintuya Si
+- **Published**: arXiv 2609.00966 (accepted to INTERSPEECH 2026)
+- **DOI**: 10.48550/arXiv.2609.00966
+- **Summary**: ABSE-NET cascades a binaural MVDR beamformer with a 0.112M-parameter lightweight neural network that jointly cancels open-fit vent leakage and compensates beamformer-induced distortion — the first ABSE framework requiring no in-ear error microphone at inference (PESQ 3.626, best ΔILD 3.047, 29× fewer params than ASE-TM).
+- **Pages created**: `wiki/sources/hu-2026-abse-net.md`, `wiki/entities/de-hu.md`, `wiki/entities/xue-du.md`, `wiki/entities/qingying-zhao.md`, `wiki/entities/qintuya-si.md`, `wiki/concepts/abse-net.md`, `wiki/concepts/active-binaural-speech-enhancement.md`
+- **Pages updated**: `wiki/concepts/mvdr-beamformer.md` (BMVDR + neural post-filter section), `wiki/concepts/spatially-selective-anc.md` (relation to ABSE), `wiki/concepts/speech-preserving-anc.md` (hearing-aid ABSE approach), `wiki/concepts/ear-canal-occlusion-effect.md` (open-fit leakage trade-off), `wiki/synthesis/multi-channel-speech-enhancement.md` (new hybrid sub-pattern: DNN as error-absorbing post-filter)

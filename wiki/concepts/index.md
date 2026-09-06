@@ -484,4 +484,6 @@
 | [[concepts/condition-aware-projection-filtering\|Condition-Aware Projection Filtering (CAPF)]] | Neural front end generating block-wise causal FIR projection filters with condition experts for multi-reference ANC reference compression | 2026-09-05 |
 | [[concepts/multi-reference-anc\|Multi-Reference ANC]] | Many-channel feedforward ANC (e.g., 42 road-noise accelerometers) and the reference-compression methods (SVD subspaces, neural projection) that tame its correlation and complexity | 2026-09-05 |
 | [[concepts/steerable-neural-directional-filtering\|Steerable Neural Directional Filtering]] | NDF extension where a single trained model renders its learned directivity pattern steered to any direction via one-hot conditioning of the F-BiLSTM initial states | 2026-09-05 |
+| [[concepts/abse-net\|ABSE-NET]] | Lightweight BMVDR + LNN cascade for active binaural speech enhancement in open-fit HAs (0.112M params, F-TDL + ConvAtt blocks) | 2026-09-06 |
+| [[concepts/active-binaural-speech-enhancement\|Active Binaural Speech Enhancement (ABSE)]] | Hybrid ANC + binaural SE framework for open-fit hearing aids; suppresses vent leakage by destructive interference while preserving binaural cues | 2026-09-06 |
 

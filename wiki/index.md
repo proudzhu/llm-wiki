@@ -545,6 +545,10 @@
 | [[entities/mhd-modar-halimeh\|Mhd Modar Halimeh]] | Researcher, International Audio Laboratories Erlangen; neural directional filtering, spatial audio | 2026-09-04 |
 | [[entities/haishan-zou\|Haishan Zou]] | Researcher, Nanjing University — multi-reference ANC, neural reference projection (CAPF) | 2026-09-05 |
 | [[entities/jiancheng-tao\|Jiancheng Tao]] | Researcher, Nanjing University — multi-reference ANC, adaptive filtering (CAPF, NRP, BCD-LMS-Newton) | 2026-09-05 |
+| [[entities/de-hu\|De Hu]] | Inner Mongolia University; first author of ABSE-NET (active binaural speech enhancement for open-fit hearing aids) | 2026-09-06 |
+| [[entities/xue-du\|Xue Du]] | Inner Mongolia University; co-author of ABSE-NET | 2026-09-06 |
+| [[entities/qingying-zhao\|Qingying Zhao]] | Inner Mongolia University; co-author of ABSE-NET | 2026-09-06 |
+| [[entities/qintuya-si\|Qintuya Si]] | Inner Mongolia University; co-author of ABSE-NET | 2026-09-06 |
 
 ---
 
@@ -1034,6 +1038,8 @@
 | [[concepts/condition-aware-projection-filtering\|Condition-Aware Projection Filtering (CAPF)]] | Neural front end generating block-wise causal FIR projection filters with condition experts for multi-reference ANC reference compression | 2026-09-05 |
 | [[concepts/multi-reference-anc\|Multi-Reference ANC]] | Many-channel feedforward ANC (e.g., 42 road-noise accelerometers) and the reference-compression methods (SVD subspaces, neural projection) that tame its correlation and complexity | 2026-09-05 |
 | [[concepts/steerable-neural-directional-filtering\|Steerable Neural Directional Filtering]] | NDF extension where a single trained model renders its learned directivity pattern steered to any direction via one-hot conditioning of the F-BiLSTM initial states | 2026-09-05 |
+| [[concepts/abse-net\|ABSE-NET]] | Lightweight BMVDR + LNN cascade for active binaural speech enhancement in open-fit HAs (0.112M params, F-TDL + ConvAtt blocks) | 2026-09-06 |
+| [[concepts/active-binaural-speech-enhancement\|Active Binaural Speech Enhancement (ABSE)]] | Hybrid ANC + binaural SE framework for open-fit hearing aids; suppresses vent leakage by destructive interference while preserving binaural cues | 2026-09-06 |
 
 ---
 
@@ -1237,6 +1243,7 @@
 | [[sources/wechsler-2024-neural-directional-filtering\|Wechsler et al. 2024: Neural Directional Filtering]] | Founding NDF paper: DNN-estimated complex mask renders a VDM with desired far-field directivity from a 4-mic array; 3rd-order DMA pattern at 18.4 dB SDR | 2026-09-04 |
 | [[sources/he-2026-neural-projection-filter-anc\|He et al. 2026: Neural Projection Filter Generation for Multi-Reference ANC]] | CAPF/CAPFNet: block-wise neural generation of FIR projection filters compressing 42 road-noise references to 4; NRP-FxAP-level attenuation at 48x lower complexity | 2026-09-05 |
 | [[sources/huang-2025-steerable-neural-directional-filtering\|Huang et al. 2025: Steerable Neural Directional Filtering]] | SNDF: steering-direction conditioning lets one NDF model steer its learned directivity pattern to any direction at inference; 6th-order patterns from 4 mics | 2026-09-05 |
+| [[sources/hu-2026-abse-net\|Hu, Du, Zhao & Si 2026: ABSE-NET — Active Binaural Speech Enhancement for Open-Fit Hearing Aids]] | Cascades binaural MVDR with a 0.112M-param LNN that cancels open-fit vent leakage and compensates beamformer distortion; no in-ear error mic at inference (INTERSPEECH 2026) | 2026-09-06 |
 
 ---
 
@@ -1290,10 +1297,10 @@
 
 ## Statistics
 
-- **Total pages**: 1239
-- **Entities**: 535
-- **Concepts**: 480
-- **Sources**: 194
+- **Total pages**: 1246
+- **Entities**: 539
+- **Concepts**: 482
+- **Sources**: 195
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-05
+- **Last updated**: 2026-09-06
