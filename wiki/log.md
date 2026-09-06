@@ -5032,3 +5032,15 @@ Ingested "A Comparison of Generative and Discriminative Methods for Speech Enhan
 - **Summary**: Two spectrally weighted STFT losses (fixed sigmoid $\mathcal{L}_{\mathrm{Sig}}$ + signal-dependent $\mathcal{L}_{\mathrm{Adp}}$) counteract the magnitude-phase compensation effect's mid-to-high frequency over-attenuation; introduces the HyST-Net streaming backbone (MHA spectral + GRU temporal, RTF 0.22).
 - **Pages created**: wiki/sources/zhao-2026-spectrally-adaptive-loss.md, wiki/concepts/spectrally-adaptive-loss.md, wiki/concepts/hyst-net.md, wiki/concepts/magnitude-phase-compensation-effect.md, wiki/entities/haixin-zhao.md, wiki/entities/nilesh-madhu.md
 - **Pages updated**: wiki/concepts/frequency-domain-loss.md (new spectrally weighted phase-aware loss variant), wiki/concepts/power-law-compression.md (compressed-domain phase-aware loss interaction), wiki/concepts/complex-ratio-mask.md (compressed-domain cRM in HyST-Net), wiki/concepts/gated-recurrent-unit.md (HyST-Net streaming rationale), wiki/synthesis/deep-speech-enhancement.md (loss-side compensation-effect remedy; spectral-weighting loss data point), wiki/synthesis/joint-multitask-ultra-low-latency-se.md (per-axis MHA/GRU design rule)
+
+---
+
+## [2026-09-06] ingest | On the Compensation Between Magnitude and Phase in Speech Separation (Wang, Wichern & Le Roux 2021)
+
+- **Source**: `raw/papers/wang-2021-magnitude-phase-compensation/full-text.md` (Zotero: 7734ZCDJ)
+- **Authors**: Zhong-Qiu Wang, Gordon Wichern, Jonathan Le Roux
+- **Published**: IEEE Signal Processing Letters, vol. 28, 2021
+- **DOI**: 10.1109/LSP.2021.3116502
+- **Summary**: Explains why adding a magnitude-domain loss improves PESQ/eSTOI/WER while slightly degrading SI-SDR in end-to-end speech separation — the estimated magnitude implicitly compensates for inaccurate phase (projection of the clean spectrum onto the estimated-phase direction), diagnosed via the mSNR/pSNR decomposition on WHAMR! and SMS-WSJ.
+- **Pages created**: `wiki/sources/wang-2021-magnitude-phase-compensation.md`, `wiki/entities/gordon-wichern.md`, `wiki/entities/jonathan-le-roux.md`, `wiki/concepts/phase-sensitive-mask.md`, `wiki/concepts/magnitude-phase-snr.md`
+- **Pages updated**: [[concepts/magnitude-phase-compensation-effect|Magnitude-Phase Compensation Effect]] (primary-source formulation, Fig. 2, mSNR/pSNR evidence), [[concepts/complex-spectral-mapping|Complex Spectral Mapping]] (magnitude-loss trade-off), [[concepts/frequency-domain-loss|Frequency Domain Loss]] (RI+Mag compensation trade-off subsection), [[concepts/time-domain-speech-enhancement|Time-Domain Speech Enhancement]] (Wav+Mag / Wav×0+Mag findings), [[concepts/pesq|PESQ]] (magnitude-dominant behavior section), [[concepts/teacher-forcing|Teacher Forcing]] (MSA-as-teacher-forcing reinterpretation), [[synthesis/deep-speech-enhancement|Deep Speech Enhancement]] (Insights 2–3 refined with primary source), `wiki/entities/zhong-qiu-wang.md` (new contribution bullet, MERL affiliation)

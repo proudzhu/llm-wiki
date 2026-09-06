@@ -551,6 +551,8 @@
 | [[entities/qintuya-si\|Qintuya Si]] | Inner Mongolia University; co-author of ABSE-NET | 2026-09-06 |
 | [[entities/haixin-zhao\|Haixin Zhao]] | Ghent University researcher; lightweight streaming speech enhancement, transformer SE architectures | 2026-09-06 |
 | [[entities/nilesh-madhu\|Nilesh Madhu]] | Ghent University researcher; speech enhancement and audio signal processing | 2026-09-06 |
+| [[entities/gordon-wichern\|Gordon Wichern]] | MERL researcher; audio signal processing, speech separation, machine listening; WHAMR! corpus co-creator | 2026-09-06 |
+| [[entities/jonathan-le-roux\|Jonathan Le Roux]] | MERL principal researcher; speech separation, robust ASR, SI-SDR metric, phase-sensitive mask, STFT consistency | 2026-09-06 |
 
 ---
 
@@ -1045,6 +1047,8 @@
 | [[concepts/spectrally-adaptive-loss\|Spectrally Adaptive Loss]] | STFT losses modulating the phase-aware term with a frequency-wise (sigmoid) or signal-dependent weight to counter mid-to-high frequency over-attenuation | 2026-09-06 |
 | [[concepts/hyst-net\|HyST-Net]] | Lightweight streaming SE backbone: U-Net with interleaved MHA (spectral) + GRU (temporal) bottleneck; 0.11M params, RTF 0.22 | 2026-09-06 |
 | [[concepts/magnitude-phase-compensation-effect\|Magnitude-Phase Compensation Effect]] | Phase-aware losses drive estimated magnitudes toward zero where phase is unreliable, causing spectrally non-uniform over-attenuation in mid-to-high frequencies | 2026-09-06 |
+| [[concepts/phase-sensitive-mask\|Phase-Sensitive Mask (PSM)]] | T-F mask target encoding the compensated magnitude along mixture phase; motivation for the magnitude-phase compensation effect | 2026-09-06 |
+| [[concepts/magnitude-phase-snr\|mSNR and pSNR]] | Diagnostic metrics decomposing separation quality into magnitude (mSNR) and phase (pSNR) accuracy, isolating the compensation effect | 2026-09-06 |
 
 ---
 
@@ -1250,6 +1254,7 @@
 | [[sources/huang-2025-steerable-neural-directional-filtering\|Huang et al. 2025: Steerable Neural Directional Filtering]] | SNDF: steering-direction conditioning lets one NDF model steer its learned directivity pattern to any direction at inference; 6th-order patterns from 4 mics | 2026-09-05 |
 | [[sources/hu-2026-abse-net\|Hu, Du, Zhao & Si 2026: ABSE-NET — Active Binaural Speech Enhancement for Open-Fit Hearing Aids]] | Cascades binaural MVDR with a 0.112M-param LNN that cancels open-fit vent leakage and compensates beamformer distortion; no in-ear error mic at inference (INTERSPEECH 2026) | 2026-09-06 |
 | [[sources/zhao-2026-spectrally-adaptive-loss\|Zhao & Madhu 2026: Spectrally Adaptive Loss for Streaming Speech Enhancement]] | Spectrally weighted STFT losses (fixed sigmoid + signal-dependent adaptive) counteracting the magnitude-phase compensation effect; HyST-Net streaming backbone | 2026-09-06 |
+| [[sources/wang-2021-magnitude-phase-compensation\|Wang, Wichern & Le Roux 2021: On the Compensation Between Magnitude and Phase in Speech Separation]] | Explains why magnitude losses improve PESQ/eSTOI/WER but degrade SI-SDR: implicit magnitude-phase compensation in complex/time-domain losses, diagnosed via mSNR/pSNR | 2026-09-06 |
 
 ---
 
@@ -1303,10 +1308,10 @@
 
 ## Statistics
 
-- **Total pages**: 1252
-- **Entities**: 541
-- **Concepts**: 485
-- **Sources**: 196
+- **Total pages**: 1257
+- **Entities**: 543
+- **Concepts**: 487
+- **Sources**: 197
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-09-06

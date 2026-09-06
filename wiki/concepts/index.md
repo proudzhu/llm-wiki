@@ -489,4 +489,6 @@
 | [[concepts/spectrally-adaptive-loss\|Spectrally Adaptive Loss]] | STFT losses modulating the phase-aware term with a frequency-wise (sigmoid) or signal-dependent weight to counter mid-to-high frequency over-attenuation | 2026-09-06 |
 | [[concepts/hyst-net\|HyST-Net]] | Lightweight streaming SE backbone: U-Net with interleaved MHA (spectral) + GRU (temporal) bottleneck; 0.11M params, RTF 0.22 | 2026-09-06 |
 | [[concepts/magnitude-phase-compensation-effect\|Magnitude-Phase Compensation Effect]] | Phase-aware losses drive estimated magnitudes toward zero where phase is unreliable, causing spectrally non-uniform over-attenuation in mid-to-high frequencies | 2026-09-06 |
+| [[concepts/phase-sensitive-mask\|Phase-Sensitive Mask (PSM)]] | T-F mask target encoding the compensated magnitude along mixture phase; motivation for the magnitude-phase compensation effect | 2026-09-06 |
+| [[concepts/magnitude-phase-snr\|mSNR and pSNR]] | Diagnostic metrics decomposing separation quality into magnitude (mSNR) and phase (pSNR) accuracy, isolating the compensation effect | 2026-09-06 |
 

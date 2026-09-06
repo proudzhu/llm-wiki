@@ -545,4 +545,6 @@
 | [[entities/qintuya-si\|Qintuya Si]] | Inner Mongolia University; co-author of ABSE-NET | 2026-09-06 |
 | [[entities/haixin-zhao\|Haixin Zhao]] | Ghent University researcher; lightweight streaming speech enhancement, transformer SE architectures | 2026-09-06 |
 | [[entities/nilesh-madhu\|Nilesh Madhu]] | Ghent University researcher; speech enhancement and audio signal processing | 2026-09-06 |
+| [[entities/gordon-wichern\|Gordon Wichern]] | MERL researcher; audio signal processing, speech separation, machine listening; WHAMR! corpus co-creator | 2026-09-06 |
+| [[entities/jonathan-le-roux\|Jonathan Le Roux]] | MERL principal researcher; speech separation, robust ASR, SI-SDR metric, phase-sensitive mask, STFT consistency | 2026-09-06 |
 

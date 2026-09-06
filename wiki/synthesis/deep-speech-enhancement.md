@@ -22,6 +22,7 @@ sources:
   - raw/papers/li-2020-residual-noise-control/full-text.md
   - raw/papers/ke-2021-low-complexity-artificial-noise-suppression/full-text.md
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
+  - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -53,6 +54,7 @@ The thesis here is that the field's progress is **not a single replacement story
 | [[sources/pandey-2019-cnn-speech-enhancement-time-domain\|Pandey & Wang 2019 (AECNN)]] | 2019 | Domain | Time-domain U-Net trained with STFT-magnitude loss → frequency-loss-for-time-domain-nets paradigm |
 | [[sources/li-2020-residual-noise-control\|Li et al. 2020 (GL)]] | 2020 | Training objective | [[concepts/generalized-loss-function\|Generalized loss]] with residual noise control; MSE / components loss as special cases; same-net four-loss comparison with subjective validation |
 | [[sources/ke-2021-low-complexity-artificial-noise-suppression\|Ke et al. 2021 (ANS)]] | 2021 | Post-processing | Classical MMSE/SPP postfilter on the DNN output suppressing [[concepts/artificial-residual-noise\|artificial residual noise]] — three SPP strategies at 0.0098–0.016 MFLOPs/frame |
+| [[sources/wang-2021-magnitude-phase-compensation\|Wang, Wichern & Le Roux 2021]] | 2021 | Training objective (theory) | Names and formulates the [[concepts/magnitude-phase-compensation-effect\|magnitude–phase compensation effect]]; explains why magnitude losses improve perceptual metrics in RI/waveform losses |
 | [[sources/schroter-2022-deepfilternet\|Schröter et al. 2022 (DeepFilterNet)]] | 2022 | Target | Deep Filtering: complex temporal filter generalizing the complex ratio mask |
 | [[sources/indenbom-2023-deepvqe\|Indenbom et al. 2023 (DeepVQE)]] | 2023 | Target | Complex Convolving Mask: T-F-neighborhood filter with 120° three-vector weights |
 | [[sources/zheng-2023-survey-frequency-domain-speech-enhancement\|Zheng et al. 2023]] | 2023 | All | 60-year survey; five-group taxonomy; magnitude–phase "compensation effect" |
@@ -93,7 +95,7 @@ A long-running debate — operate on raw waveforms or on STFT — was resolved n
 - **TF-domain** methods (CRN, DCCRN, DPCRN) estimate a mask/spectrum and reconstruct with noisy phase. They suffer the [[concepts/invalid-stft-problem\|invalid STFT problem]] (enhanced magnitude + noisy phase may not correspond to any real signal) and phase degradation at low SNR.
 - **Time-domain** methods ([[concepts/time-domain-speech-enhancement\|SEGAN, AECNN, Conv-TasNet, DEMUCS]]) generate valid waveforms directly, sidestepping both issues.
 
-The decisive observation came from [[sources/pandey-2019-cnn-speech-enhancement-time-domain\|Pandey & Wang 2019]]: a time-domain AECNN trained with **STFT-magnitude MAE loss** outperforms the same network trained with waveform loss, and beats SEGAN/GRN on TIMIT/IEEE/WSJ0. Spectral losses provide a dramatically better perceptual training signal than waveform losses. The [[concepts/complex-spectrum-mapping\|complex STFT (RI) loss]] variant is best for SI-SDR.
+The decisive observation came from [[sources/pandey-2019-cnn-speech-enhancement-time-domain\|Pandey & Wang 2019]]: a time-domain AECNN trained with **STFT-magnitude MAE loss** outperforms the same network trained with waveform loss, and beats SEGAN/GRN on TIMIT/IEEE/WSJ0. Spectral losses provide a dramatically better perceptual training signal than waveform losses. The [[concepts/complex-spectrum-mapping\|complex STFT (RI) loss]] variant is best for SI-SDR. The **mechanistic explanation** came later from [[sources/wang-2021-magnitude-phase-compensation\|Wang, Wichern & Le Roux 2021]]: a purely waveform-domain loss lets the estimated magnitude compensate for phase errors — which SI-SDR rewards but PESQ/eSTOI/WER punish — so adding a magnitude term trades a little SI-SDR for large perceptual gains (on SMS-WSJ, Wav vs. Wav+Mag: PESQ 1.79 → 2.07, WER 47.5 → 39.2%, SI-SDR 4.22 → 3.42 dB).
 
 The 60-year survey ([[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng 2023]]) notes the field historically invested more research effort in frequency-domain methods, partly explaining their lead — but the convergence is now clear: modern systems use **time-domain or learned-encoder representations with multi-resolution STFT / RI losses**, and the choice of loss often matters more than minor architecture changes (the DCCRN(SNR) variant demonstrates loss choice outweighing architecture tweaks).
 
@@ -103,7 +105,7 @@ A complementary early data point: [[sources/li-2020-residual-noise-control|Li et
 
 ## Insight 3: The Magnitude–Phase "Compensation Effect" Drove Architectural Decoupling
 
-[[sources/zheng-2023-survey-frequency-domain-speech-enhancement\|Zheng 2023]] crystallizes a recurring failure mode of single-stage complex-spectrum networks: a **compensation effect** where magnitude distortion is traded for phase recovery (and vice versa) within one shared decoder. The architecture response was **decoupling**:
+[[sources/zheng-2023-survey-frequency-domain-speech-enhancement\|Zheng 2023]] crystallizes a recurring failure mode of single-stage complex-spectrum networks: a **compensation effect** where magnitude distortion is traded for phase recovery (and vice versa) within one shared decoder. The effect was in fact named and formulated two years earlier by [[sources/wang-2021-magnitude-phase-compensation\|Wang, Wichern & Le Roux 2021]], who traced it to the projection geometry of complex-/time-domain losses (the estimated magnitude slides toward the projection of the clean spectrum onto the estimated-phase direction, reaching zero at π/2 phase error) and diagnosed it with the [[concepts/magnitude-phase-snr\|mSNR/pSNR]] decomposition — establishing that PESQ/eSTOI/WER track magnitude accuracy while SI-SDR tracks the compensated signal. The architecture response was **decoupling**:
 
 | Architecture | Strategy | Phase handling |
 |--------------|----------|----------------|

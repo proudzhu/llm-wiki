@@ -7,6 +7,7 @@ sources:
   - raw/papers/mustafa-2023-framewise-wavegan/full-text.md
   - raw/papers/li-2020-residual-noise-control/full-text.md
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
+  - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
 tags:
   - loss-function
   - deep-learning
@@ -39,6 +40,10 @@ $$\mathcal{L}_{\text{SM2}} = \frac{1}{N}\sum_n \left( \sqrt{\hat{x}_{fr}^2[n] + 
 ### Real-Imaginary Loss — Best for SI-SDR
 
 $$\mathcal{L}_{\text{RI}} = \frac{1}{N}\sum_n \left[ (\hat{x}_{fr}[n] - x_{fr}[n])^2 + (\hat{x}_{fi}[n] - x_{fi}[n])^2 \right]$$
+
+### RI + Magnitude Combined — the Compensation Trade-off (Wang 2021)
+
+[[sources/wang-2021-magnitude-phase-compensation|Wang, Wichern & Le Roux 2021]] give the fundamental explanation for the mag-vs-RI split above: the RI loss alone is minimised by a magnitude that **compensates** for the inaccurate estimated phase (the [[concepts/magnitude-phase-compensation-effect|magnitude-phase compensation effect]]), so SI-SDR is favoured while PESQ/eSTOI/WER suffer. Adding a magnitude term ($\mathcal{L}_{\text{RI+Mag}}$, $L_1$ form) rebalances the two: better PESQ/eSTOI/WER and slightly worse SI-SDR, on both WHAMR! enhancement and SMS-WSJ separation+ASR. The same holds for time-domain losses ($\mathcal{L}_{\text{Wav+Mag}}$), and even a magnitude-only loss through the waveform ($\mathcal{L}_{\text{Wav}\times 0+\text{Mag}}$) retains good PESQ/eSTOI while SI-SDR collapses — strong evidence that these perceptual metrics depend largely on magnitude alone.
 
 ### Multi-Resolution STFT Loss
 
@@ -103,3 +108,4 @@ This recipe traces directly to FARGAN's predecessor [[concepts/framewise-wavegan
 - [[sources/mustafa-2023-framewise-wavegan|Mustafa et al. 2023: Framewise WaveGAN]] — earliest GAN-vocoder instance: sqrt-compressed multi-resolution loss; spectrogram discriminators adopted after time-domain discriminators failed to train stably
 - [[sources/li-2020-residual-noise-control|Li, Peng, Zheng & Li 2020: Supervised Speech Enhancement with Residual Noise Control]] — generalizes mag-MSE with exponents γ, α and a residual-noise-control term targeting a preset noise floor
 - [[sources/zhao-2026-spectrally-adaptive-loss|Zhao & Madhu 2026: Spectrally Adaptive Loss for Streaming Speech Enhancement]] — spectrally weighted phase-aware STFT losses; HF-band C-RMSE/M-RMSE gains invisible to broadband metrics
+- [[sources/wang-2021-magnitude-phase-compensation|Wang, Wichern & Le Roux 2021: On the Compensation Between Magnitude and Phase in Speech Separation]] — the fundamental explanation of why magnitude terms improve perceptual metrics in RI/Wav losses

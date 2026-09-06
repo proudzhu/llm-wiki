@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-05-23
+updated: 2026-09-06
+sources:
+  - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -47,6 +49,8 @@ The choice of training loss critically affects performance even for time-domain 
 
 The [[concepts/frequency-domain-loss|frequency domain loss for time-domain networks]] paradigm, proposed by Pandey & Wang (2019), demonstrated that spectral losses provide significantly better training signals than waveform losses for perceptual quality metrics.
 
+[[sources/wang-2021-magnitude-phase-compensation|Wang, Wichern & Le Roux 2021]] provide the underlying explanation via the [[concepts/magnitude-phase-compensation-effect|magnitude-phase compensation effect]]: a purely time-domain loss (SI-SDR or waveform $L_1$) lets the estimated magnitude compensate for phase errors, which SI-SDR rewards but PESQ/eSTOI/WER punish. Adding a magnitude loss to a Conv-TasNet-style model ($\mathcal{L}_{\text{Wav+Mag}}$) improves PESQ (2.20 → 2.58), eSTOI (78.0 → 80.1%), and WER (47.5 → 39.2%) on SMS-WSJ at a small SI-SDR cost; strikingly, training with *only* the magnitude term ($\mathcal{L}_{\text{Wav}\times 0+\text{Mag}}$) still yields good PESQ/eSTOI/mSNR despite SI-SDR collapsing to −9.09 dB — perceptual quality here is carried almost entirely by the magnitude.
+
 ## Key Properties
 
 - **Valid output guarantee**: Output is always a valid time-domain signal (no reconstruction artefacts)
@@ -65,4 +69,5 @@ The [[concepts/frequency-domain-loss|frequency domain loss for time-domain netwo
 ## Related Sources
 
 - [[sources/pandey-2019-cnn-speech-enhancement-time-domain|Pandey & Wang 2019: CNN-Based Speech Enhancement in the Time Domain]]
+- [[sources/wang-2021-magnitude-phase-compensation|Wang, Wichern & Le Roux 2021: On the Compensation Between Magnitude and Phase in Speech Separation]] — why time-domain models evaluated with PESQ/STOI/WER should include a magnitude loss
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — companion survey to frequency-domain methods; notes that frequency-domain methods historically outperform time-domain methods (though partly because more research effort has been invested in frequency-domain methods)
