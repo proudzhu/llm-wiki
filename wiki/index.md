@@ -549,6 +549,8 @@
 | [[entities/xue-du\|Xue Du]] | Inner Mongolia University; co-author of ABSE-NET | 2026-09-06 |
 | [[entities/qingying-zhao\|Qingying Zhao]] | Inner Mongolia University; co-author of ABSE-NET | 2026-09-06 |
 | [[entities/qintuya-si\|Qintuya Si]] | Inner Mongolia University; co-author of ABSE-NET | 2026-09-06 |
+| [[entities/haixin-zhao\|Haixin Zhao]] | Ghent University researcher; lightweight streaming speech enhancement, transformer SE architectures | 2026-09-06 |
+| [[entities/nilesh-madhu\|Nilesh Madhu]] | Ghent University researcher; speech enhancement and audio signal processing | 2026-09-06 |
 
 ---
 
@@ -1040,6 +1042,9 @@
 | [[concepts/steerable-neural-directional-filtering\|Steerable Neural Directional Filtering]] | NDF extension where a single trained model renders its learned directivity pattern steered to any direction via one-hot conditioning of the F-BiLSTM initial states | 2026-09-05 |
 | [[concepts/abse-net\|ABSE-NET]] | Lightweight BMVDR + LNN cascade for active binaural speech enhancement in open-fit HAs (0.112M params, F-TDL + ConvAtt blocks) | 2026-09-06 |
 | [[concepts/active-binaural-speech-enhancement\|Active Binaural Speech Enhancement (ABSE)]] | Hybrid ANC + binaural SE framework for open-fit hearing aids; suppresses vent leakage by destructive interference while preserving binaural cues | 2026-09-06 |
+| [[concepts/spectrally-adaptive-loss\|Spectrally Adaptive Loss]] | STFT losses modulating the phase-aware term with a frequency-wise (sigmoid) or signal-dependent weight to counter mid-to-high frequency over-attenuation | 2026-09-06 |
+| [[concepts/hyst-net\|HyST-Net]] | Lightweight streaming SE backbone: U-Net with interleaved MHA (spectral) + GRU (temporal) bottleneck; 0.11M params, RTF 0.22 | 2026-09-06 |
+| [[concepts/magnitude-phase-compensation-effect\|Magnitude-Phase Compensation Effect]] | Phase-aware losses drive estimated magnitudes toward zero where phase is unreliable, causing spectrally non-uniform over-attenuation in mid-to-high frequencies | 2026-09-06 |
 
 ---
 
@@ -1244,6 +1249,7 @@
 | [[sources/he-2026-neural-projection-filter-anc\|He et al. 2026: Neural Projection Filter Generation for Multi-Reference ANC]] | CAPF/CAPFNet: block-wise neural generation of FIR projection filters compressing 42 road-noise references to 4; NRP-FxAP-level attenuation at 48x lower complexity | 2026-09-05 |
 | [[sources/huang-2025-steerable-neural-directional-filtering\|Huang et al. 2025: Steerable Neural Directional Filtering]] | SNDF: steering-direction conditioning lets one NDF model steer its learned directivity pattern to any direction at inference; 6th-order patterns from 4 mics | 2026-09-05 |
 | [[sources/hu-2026-abse-net\|Hu, Du, Zhao & Si 2026: ABSE-NET — Active Binaural Speech Enhancement for Open-Fit Hearing Aids]] | Cascades binaural MVDR with a 0.112M-param LNN that cancels open-fit vent leakage and compensates beamformer distortion; no in-ear error mic at inference (INTERSPEECH 2026) | 2026-09-06 |
+| [[sources/zhao-2026-spectrally-adaptive-loss\|Zhao & Madhu 2026: Spectrally Adaptive Loss for Streaming Speech Enhancement]] | Spectrally weighted STFT losses (fixed sigmoid + signal-dependent adaptive) counteracting the magnitude-phase compensation effect; HyST-Net streaming backbone | 2026-09-06 |
 
 ---
 
@@ -1297,10 +1303,10 @@
 
 ## Statistics
 
-- **Total pages**: 1246
-- **Entities**: 539
-- **Concepts**: 482
-- **Sources**: 195
+- **Total pages**: 1252
+- **Entities**: 541
+- **Concepts**: 485
+- **Sources**: 196
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-09-06

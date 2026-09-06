@@ -543,4 +543,6 @@
 | [[entities/xue-du\|Xue Du]] | Inner Mongolia University; co-author of ABSE-NET | 2026-09-06 |
 | [[entities/qingying-zhao\|Qingying Zhao]] | Inner Mongolia University; co-author of ABSE-NET | 2026-09-06 |
 | [[entities/qintuya-si\|Qintuya Si]] | Inner Mongolia University; co-author of ABSE-NET | 2026-09-06 |
+| [[entities/haixin-zhao\|Haixin Zhao]] | Ghent University researcher; lightweight streaming speech enhancement, transformer SE architectures | 2026-09-06 |
+| [[entities/nilesh-madhu\|Nilesh Madhu]] | Ghent University researcher; speech enhancement and audio signal processing | 2026-09-06 |
 

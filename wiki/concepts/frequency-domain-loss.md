@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-09-03
+updated: 2026-09-06
 sources:
   - raw/papers/valin-2024-fargan/full-text.md
   - raw/papers/mustafa-2023-framewise-wavegan/full-text.md
   - raw/papers/li-2020-residual-noise-control/full-text.md
+  - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
 tags:
   - loss-function
   - deep-learning
@@ -47,6 +48,10 @@ $$
 
 Uses multiple STFT configurations (different window sizes) for robustness across temporal/spectral resolutions.
 
+### Spectrally Weighted Phase-Aware Losses (Zhao & Madhu 2026)
+
+The phase-aware compressed loss mixes magnitude and phase-aware terms with a scalar $\lambda$ — but the [[concepts/magnitude-phase-compensation-effect|magnitude-phase compensation effect]] makes the resulting over-attenuation spectrally non-uniform (concentrated in mid-to-high frequencies), which a scalar cannot express. [[sources/zhao-2026-spectrally-adaptive-loss|Zhao & Madhu 2026]] replace $\lambda$ with a frequency-wise weight: a fixed sigmoid of normalised frequency ($\mathcal{L}_{\mathrm{Sig}}$) or a signal-dependent weight derived from the time-averaged clean log-magnitude spectrogram ($\mathcal{L}_{\mathrm{Adp}}$) — see [[concepts/spectrally-adaptive-loss|Spectrally Adaptive Loss]]. On DNS (HyST-Net backbone), both cut HF-band C-RMSE ~9.5% and M-RMSE ~15.2% with broadband metrics unchanged — broadband instrumental metrics are dominated by low frequencies and mask exactly the distortion this weighting fixes, which is why the evaluation uses band-conditional (2–4 kHz / 4–8 kHz) C-RMSE, M-RMSE, and LSD.
+
 ### Generalized Exponent Family with Residual Noise Control (Li et al. 2020)
 
 The magnitude-domain generalized loss of [[sources/li-2020-residual-noise-control|Li et al. 2020]],
@@ -87,6 +92,8 @@ This recipe traces directly to FARGAN's predecessor [[concepts/framewise-wavegan
 - [[concepts/fargan|FARGAN]] — six-resolution γ=0.5 spectral pre-training loss plus STFT discriminators
 - [[concepts/framewise-wavegan|Framewise WaveGAN]] — the earlier instance: six-resolution sqrt-compressed spectral pre-training plus spectrogram discriminators
 - [[concepts/generalized-loss-function|Generalized Loss Function]] — exponent-parameterized magnitude-loss family with residual noise control
+- [[concepts/spectrally-adaptive-loss|Spectrally Adaptive Loss]] — frequency-wise / signal-dependent weighting of the phase-aware term
+- [[concepts/magnitude-phase-compensation-effect|Magnitude-Phase Compensation Effect]] — the failure mode spectrally weighted phase-aware losses target
 
 ## Related Sources
 
@@ -95,3 +102,4 @@ This recipe traces directly to FARGAN's predecessor [[concepts/framewise-wavegan
 - [[sources/valin-2024-fargan|Valin, Mustafa & Büthe 2024: FARGAN]] — GAN-vocoder instance: six-resolution power-law-compressed magnitude loss and frequency-domain discriminators
 - [[sources/mustafa-2023-framewise-wavegan|Mustafa et al. 2023: Framewise WaveGAN]] — earliest GAN-vocoder instance: sqrt-compressed multi-resolution loss; spectrogram discriminators adopted after time-domain discriminators failed to train stably
 - [[sources/li-2020-residual-noise-control|Li, Peng, Zheng & Li 2020: Supervised Speech Enhancement with Residual Noise Control]] — generalizes mag-MSE with exponents γ, α and a residual-noise-control term targeting a preset noise floor
+- [[sources/zhao-2026-spectrally-adaptive-loss|Zhao & Madhu 2026: Spectrally Adaptive Loss for Streaming Speech Enhancement]] — spectrally weighted phase-aware STFT losses; HF-band C-RMSE/M-RMSE gains invisible to broadband metrics

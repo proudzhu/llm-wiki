@@ -486,4 +486,7 @@
 | [[concepts/steerable-neural-directional-filtering\|Steerable Neural Directional Filtering]] | NDF extension where a single trained model renders its learned directivity pattern steered to any direction via one-hot conditioning of the F-BiLSTM initial states | 2026-09-05 |
 | [[concepts/abse-net\|ABSE-NET]] | Lightweight BMVDR + LNN cascade for active binaural speech enhancement in open-fit HAs (0.112M params, F-TDL + ConvAtt blocks) | 2026-09-06 |
 | [[concepts/active-binaural-speech-enhancement\|Active Binaural Speech Enhancement (ABSE)]] | Hybrid ANC + binaural SE framework for open-fit hearing aids; suppresses vent leakage by destructive interference while preserving binaural cues | 2026-09-06 |
+| [[concepts/spectrally-adaptive-loss\|Spectrally Adaptive Loss]] | STFT losses modulating the phase-aware term with a frequency-wise (sigmoid) or signal-dependent weight to counter mid-to-high frequency over-attenuation | 2026-09-06 |
+| [[concepts/hyst-net\|HyST-Net]] | Lightweight streaming SE backbone: U-Net with interleaved MHA (spectral) + GRU (temporal) bottleneck; 0.11M params, RTF 0.22 | 2026-09-06 |
+| [[concepts/magnitude-phase-compensation-effect\|Magnitude-Phase Compensation Effect]] | Phase-aware losses drive estimated magnitudes toward zero where phase is unreliable, causing spectrally non-uniform over-attenuation in mid-to-high frequencies | 2026-09-06 |
 

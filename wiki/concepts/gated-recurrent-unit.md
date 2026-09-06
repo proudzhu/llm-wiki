@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-07-18
-updated: 2026-08-30
+updated: 2026-09-06
 sources:
   - raw/papers/mienye-2024-rnn-comprehensive-review/full-text.md
   - raw/papers/valin-2018-lpcnet/full-text.md
+  - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
 tags:
   - deep-learning
   - recurrent-neural-network
@@ -61,6 +62,7 @@ Within the llm-wiki, GRU is the recurrent backbone in:
 - [[concepts/dtln\|DTLN]] — dual-path GRU for low-latency speech enhancement
 - [[concepts/convolutional-recurrent-network\|CRN]] — CNN+GRU for speech enhancement
 - [[concepts/mingru\|MinGRU]] — minimal gated GRU variant
+- [[concepts/hyst-net\|HyST-Net]] (Zhao & Madhu 2026) — GRU chosen for the *temporal* axis of the interleaved bottleneck precisely for its compact recurrent state: causal MHA with key-value caching costs memory/compute linear in context length, non-trivial for lightweight streaming on edge devices, while the GRU state stays constant (RTF 0.22 in strict frame-by-frame CPU streaming)
 
 ## Related Concepts
 
@@ -75,4 +77,5 @@ Within the llm-wiki, GRU is the recurrent backbone in:
 - [[sources/mienye-2024-rnn-comprehensive-review\|Mienye, Swart & Obaido 2024: RNN Comprehensive Review]]
 - [[sources/valin-2018-lpcnet\|Valin & Skoglund 2018: LPCNet]] — sparse $\mathrm{GRU_{A}}$ + dense $\mathrm{GRU_{B}}$ vocoder backbone
 - [[sources/valin-2021-percepnet-joint-echo-control\|Valin et al. 2021: PercepNet]] — GRU-based AEC system
-- [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Seidel et al. 2024: Bark-AEC]] — NSNet2-style FC+GRU post filter
+- [[sources/seidel-2024-bark-scale-nn-residual-suppression|Seidel et al. 2024: Bark-AEC]] — NSNet2-style FC+GRU post filter
+- [[sources/zhao-2026-spectrally-adaptive-loss|Zhao & Madhu 2026: Spectrally Adaptive Loss for Streaming Speech Enhancement]] — GRU as temporal axis of HyST-Net's hybrid bottleneck

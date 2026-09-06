@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-07-16
-updated: 2026-07-22
+updated: 2026-09-06
 sources:
   - raw/papers/indenbom-2023-deepvqe/full-text.md
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
@@ -16,6 +16,7 @@ sources:
   - raw/papers/li-2025-echofree-neural-aec/full-text.md
   - raw/papers/larraza-2026-fast-ulcnet-speech-enhancement/full-text.md
   - raw/papers/shetu-2026-munet/full-text.md
+  - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
 tags:
   - speech-enhancement
   - multi-task
@@ -154,6 +155,8 @@ A recurring structural shift across 2026 sources: **linear RNNs and state-space 
 4. **Causality-preserving**: linear RNNs are naturally causal; bidirectionality (as in OVC's auxiliary encoder) is added via Hydra bidirectionality without breaking streaming.
 
 **Gap in existing synthesis**: [[synthesis/computational-efficiency-evolution\|Computational Efficiency Evolution]] discusses RNN BPTT vs. FEP memory bottlenecks in ANC but does not cover the SSM/linear-RNN replacement strategy. This synthesis fills that gap for SE.
+
+**A per-axis refinement (Zhao & Madhu 2026)**: [[concepts/hyst-net\|HyST-Net]] qualifies the replacement narrative — the right recurrent/attention choice depends on *which STFT axis* is being modelled. For the **frequency** axis, all bins of a frame are simultaneously available, so parallel MHA incurs no latency penalty and RNN-based spectral modelling (as in FTF-Net) serialises streaming inference (FTF-Net RTF 1.05 vs HyST-Net 0.22 at comparable quality). For the **time** axis, causal MHA with key-value caching still costs memory/compute linear in context length, so the GRU's constant-size recurrent state remains cheaper in lightweight streaming. The design rule is thus: *parallel modules for the inherently parallel axis, constant-state recurrence for the sequential axis* — a middle position between the full-RNN dual-path designs (DPCRN, FTF-Net) and the full linear-RNN replacement (OVC's Mamba-MinGRU).
 
 ## Insight 4: Temporal Redundancy Is the New Efficiency Frontier
 
@@ -322,3 +325,5 @@ For a practitioner choosing a multi-task SE architecture under a latency budget 
 - [[concepts/trainable-frequency-compression\|Trainable Frequency Compression]]
 - [[concepts/frame-skip-prediction\|Frame-Skip Prediction]]
 - [[concepts/post-processing-network\|Post-Processing Network]]
+- [[concepts/hyst-net\|HyST-Net]]
+- [[concepts/spectrally-adaptive-loss\|Spectrally Adaptive Loss]]

@@ -5020,3 +5020,15 @@ Ingested "A Comparison of Generative and Discriminative Methods for Speech Enhan
 - **Summary**: ABSE-NET cascades a binaural MVDR beamformer with a 0.112M-parameter lightweight neural network that jointly cancels open-fit vent leakage and compensates beamformer-induced distortion — the first ABSE framework requiring no in-ear error microphone at inference (PESQ 3.626, best ΔILD 3.047, 29× fewer params than ASE-TM).
 - **Pages created**: `wiki/sources/hu-2026-abse-net.md`, `wiki/entities/de-hu.md`, `wiki/entities/xue-du.md`, `wiki/entities/qingying-zhao.md`, `wiki/entities/qintuya-si.md`, `wiki/concepts/abse-net.md`, `wiki/concepts/active-binaural-speech-enhancement.md`
 - **Pages updated**: `wiki/concepts/mvdr-beamformer.md` (BMVDR + neural post-filter section), `wiki/concepts/spatially-selective-anc.md` (relation to ABSE), `wiki/concepts/speech-preserving-anc.md` (hearing-aid ABSE approach), `wiki/concepts/ear-canal-occlusion-effect.md` (open-fit leakage trade-off), `wiki/synthesis/multi-channel-speech-enhancement.md` (new hybrid sub-pattern: DNN as error-absorbing post-filter)
+
+---
+
+## [2026-09-06] ingest | Towards balanced spectral reconstruction: spectrally adaptive loss for streaming speech enhancement (Zhao & Madhu 2026)
+
+- **Source**: `raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md` (Zotero: JVAXB72F)
+- **Authors**: Haixin Zhao, Nilesh Madhu
+- **Published**: arXiv preprint 2608.30739, 2026 (Ghent University — imec)
+- **DOI**: 10.48550/arXiv.2608.30739
+- **Summary**: Two spectrally weighted STFT losses (fixed sigmoid $\mathcal{L}_{\mathrm{Sig}}$ + signal-dependent $\mathcal{L}_{\mathrm{Adp}}$) counteract the magnitude-phase compensation effect's mid-to-high frequency over-attenuation; introduces the HyST-Net streaming backbone (MHA spectral + GRU temporal, RTF 0.22).
+- **Pages created**: wiki/sources/zhao-2026-spectrally-adaptive-loss.md, wiki/concepts/spectrally-adaptive-loss.md, wiki/concepts/hyst-net.md, wiki/concepts/magnitude-phase-compensation-effect.md, wiki/entities/haixin-zhao.md, wiki/entities/nilesh-madhu.md
+- **Pages updated**: wiki/concepts/frequency-domain-loss.md (new spectrally weighted phase-aware loss variant), wiki/concepts/power-law-compression.md (compressed-domain phase-aware loss interaction), wiki/concepts/complex-ratio-mask.md (compressed-domain cRM in HyST-Net), wiki/concepts/gated-recurrent-unit.md (HyST-Net streaming rationale), wiki/synthesis/deep-speech-enhancement.md (loss-side compensation-effect remedy; spectral-weighting loss data point), wiki/synthesis/joint-multitask-ultra-low-latency-se.md (per-axis MHA/GRU design rule)
