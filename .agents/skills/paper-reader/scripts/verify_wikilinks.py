@@ -3,9 +3,11 @@
 
 Catches broken `[[concepts/foo|Foo]]`, `[[entities/bar|Bar]]`, etc. — AND
 broken `![[raw/...]]` figure embeds (a single-character hash typo in a
-MinerU filename aborts `mkdocs build --strict`) — BEFORE running the build,
-so the model can fix typos or create missing pages without a
-build-fail-fix cycle.
+MinerU filename aborts `mkdocs build --strict`) — AND LaTeX math in
+wikilink/embed display text (`[[concepts/foo|$\\mathcal{L}$]]`, which the
+fix_obsidian_escapes pipe-escaping mangles into a broken link target) —
+BEFORE running the build, so the model can fix typos or create missing
+pages without a build-fail-fix cycle.
 
 Usage:
   # Check the source page for a slug + all new/modified wiki/*.md files
@@ -47,7 +49,7 @@ WIKILINK_RE = re.compile(
     r'\[\['
     r'(entities|concepts|sources|synthesis|queries)/([^\]|#\\]+)'
     r'(?:#[^\]|\\]*)?'
-    r'(?:\\?\|[^\]]*)?'
+    r'(?:\\?\|([^\]]*))?'
     r'\]\]'
 )
 
@@ -61,7 +63,7 @@ RAW_EMBED_RE = re.compile(
     r'!\[\['
     r'raw/([^\]|#\\]+)'
     r'(?:#[^\]|\\]*)?'
-    r'(?:\\?\|[^\]]*)?'
+    r'(?:\\?\|([^\]]*))?'
     r'\]\]'
 )
 
@@ -95,17 +97,19 @@ def clean_lines(file_path):
 
 
 def extract_wikilinks(file_path):
-    """Yield (line_no, full_match, category, slug) for each wikilink in file."""
+    """Yield (line_no, full_match, category, slug, alias) for each wikilink in file."""
     for idx, line in clean_lines(file_path):
         for m in WIKILINK_RE.finditer(line):
-            yield (idx, m.group(0), m.group(1), m.group(2).strip())
+            alias = m.group(3) or ''
+            yield (idx, m.group(0), m.group(1), m.group(2).strip(), alias)
 
 
 def extract_raw_embeds(file_path):
-    """Yield (line_no, full_match, raw_path) for each ![[raw/...]] embed in file."""
+    """Yield (line_no, full_match, raw_path, alias) for each ![[raw/...]] embed in file."""
     for idx, line in clean_lines(file_path):
         for m in RAW_EMBED_RE.finditer(line):
-            yield (idx, m.group(0), m.group(1).strip())
+            alias = m.group(2) or ''
+            yield (idx, m.group(0), m.group(1).strip(), alias)
 
 
 def get_modified_wiki_files():
@@ -182,10 +186,11 @@ def main():
     print(f"Checking {len(files_to_check)} file(s) for broken wikilinks and raw embeds...\n")
 
     broken = []
+    math_aliases = []
     total_links = 0
 
     for fpath in files_to_check:
-        for line_no, full_match, category, slug in extract_wikilinks(fpath):
+        for line_no, full_match, category, slug, alias in extract_wikilinks(fpath):
             total_links += 1
             if not check_wikilink(category, slug, project_root):
                 broken.append({
@@ -194,7 +199,13 @@ def main():
                     'link': full_match,
                     'target': f'wiki/{category}/{slug}.md',
                 })
-        for line_no, full_match, raw_path in extract_raw_embeds(fpath):
+            if '$' in alias:
+                math_aliases.append({
+                    'file': fpath,
+                    'line': line_no,
+                    'link': full_match,
+                })
+        for line_no, full_match, raw_path, alias in extract_raw_embeds(fpath):
             total_links += 1
             if not check_raw_embed(raw_path, project_root):
                 broken.append({
@@ -203,18 +214,35 @@ def main():
                     'link': full_match,
                     'target': f'raw/{raw_path}',
                 })
+            if '$' in alias:
+                math_aliases.append({
+                    'file': fpath,
+                    'line': line_no,
+                    'link': full_match,
+                })
 
     print(f"Scanned {total_links} wikilink(s)/embed(s) across {len(files_to_check)} file(s).")
 
-    if not broken:
+    if not broken and not math_aliases:
         print("OK: all wikilinks and raw embeds resolve to existing files.")
         return 0
 
-    print(f"\nBROKEN: {len(broken)} link(s) point to non-existent targets:\n")
-    for b in broken:
-        print(f"  {b['file']}:{b['line']}")
-        print(f"    {b['link']}")
-        print(f"    -> {b['target']} (NOT FOUND)\n")
+    if broken:
+        print(f"\nBROKEN: {len(broken)} link(s) point to non-existent targets:\n")
+        for b in broken:
+            print(f"  {b['file']}:{b['line']}")
+            print(f"    {b['link']}")
+            print(f"    -> {b['target']} (NOT FOUND)\n")
+
+    if math_aliases:
+        print(f"\nMATH IN ALIAS: {len(math_aliases)} wikilink(s)/embed(s) have LaTeX ($...$) in the display text:\n")
+        for m in math_aliases:
+            print(f"  {m['file']}:{m['line']}")
+            print(f"    {m['link']}\n")
+        print("Math in an alias breaks fix_obsidian_escapes pipe-escaping and aborts")
+        print("mkdocs build --strict with a mangled link target (see pitfalls.md #44).")
+        print("Fix: use a plain-text alias — [[concepts/foo|Spectrally Adaptive Loss]] —")
+        print("and keep LaTeX outside the wikilink.")
 
     print("Fix wikilinks: create the missing page, correct the slug, or use plain text.")
     print("Fix raw embeds: Glob the figures/ dir with a hash prefix and copy the exact filename.")

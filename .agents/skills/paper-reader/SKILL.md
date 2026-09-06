@@ -295,7 +295,7 @@ For re-ingestion, use `ingest (re)` in `--title`.
 uv run python .agents/skills/paper-reader/scripts/verify_wikilinks.py --slug SLUG
 ```
 
-Checks both `[[category/slug]]` wikilinks and `![[raw/...]]` figure embeds against the filesystem. A single-character hash typo in a MinerU figure filename (`...151105...` vs `...158105...`) aborts the mkdocs build — this check catches it here, before the 60+ second build cycle. Scans the source page + all new/modified `wiki/*.md` files; exits 0 if all links resolve, 1 if broken links found. Fix any broken links (create the missing page, correct the slug, or use plain text; for embeds, Glob the `figures/` dir with a hash prefix and copy the exact filename) before proceeding to 12b.
+Checks both `[[category/slug]]` wikilinks and `![[raw/...]]` figure embeds against the filesystem, and flags LaTeX math (`$...$`) in wikilink/embed display text — math aliases mangle the pipe-escaping and abort the build (`pitfalls.md` #44). A single-character hash typo in a MinerU figure filename (`...151105...` vs `...158105...`) aborts the mkdocs build — this check catches it here, before the 60+ second build cycle. Scans the source page + all new/modified `wiki/*.md` files; exits 0 if all links resolve, 1 if broken links found. Fix any broken links (create the missing page, correct the slug, or use plain text; for embeds, Glob the `figures/` dir with a hash prefix and copy the exact filename) before proceeding to 12b.
 
 **Step 12b — MkDocs strict build**:
 
@@ -319,4 +319,5 @@ Stages `raw/papers/{slug}/`, `wiki/sources/{slug}.md`, all index files, `wiki/lo
 
 - **`raw/` immutability exception**: replacing remote image URLs with local paths in `full-text.md` is allowed.
 - **Avoid `\bm{}` in LaTeX math** — MathJax does not load the `bm` package. Use `\mathbf{x}` or `\boldsymbol{x}` instead.
+- **Never put LaTeX math in a wikilink alias** — `[[concepts/foo|$\mathcal{L}$]]` breaks the `fix_obsidian_escapes` pipe-escaping and aborts `mkdocs build --strict` (`pitfalls.md` #44). Use a plain-text alias (`[[concepts/foo|Spectrally Adaptive Loss]]`) and keep the math outside the wikilink.
 - **Todo list structure**: one todo per workflow step (1–13), in numerical order. Treat Steps 3a–3e as a single "extract content" todo. Treat Step 12a–12b as a single "build verification" todo. If Step 9 triage finds no candidates, mark that todo `completed` with "none relevant — grep triage" rather than leaving it `pending`.
