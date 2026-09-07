@@ -1,15 +1,17 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-04-12
+updated: 2026-09-07
 sources:
 - zotero://select/items/0_M2F5PSAU
 - zotero://select/items/0_TVS87FW6
 - zotero://select/items/0_BQ3P7LZJ
 - zotero://select/items/0_WBAA4H6N
+- raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
 tags:
 - application-specific-anc
 - drone-anc
+- hearing-aids
 - multi-channel-anc
 - open-ear-anc
 - selective-attenuation
@@ -17,7 +19,7 @@ tags:
 
 # Application-Specific ANC: Form Factor Drives Architecture
 
-> Cross-source synthesis connecting: Steiner & Hilgemann (2026) drone ANC, Yuan et al. (2026) smart glasses, Yang & Wang (2026) vehicle interior, and Huang et al. (2026) selective attenuation (Sona).
+> Cross-source synthesis connecting: Steiner & Hilgemann (2026) drone ANC, Yuan et al. (2026) smart glasses, Yang & Wang (2026) vehicle interior, Huang et al. (2026) selective attenuation (Sona), and Serizel et al. (2010) hearing aids.
 
 ---
 
@@ -31,8 +33,9 @@ The physical form factor and acoustic environment of an ANC system determine its
 | **Smart glasses** (Yuan 2026) | Ambient, diffuse | Open-ear (unsealed) | Partial attenuation + awareness | Situational awareness, compute |
 | **Vehicle interior** (Yang 2026) | Engine, road, wind | Sealed 3D cavity, multi-passenger | Multi-zone cancellation | Multi-channel cross-coupling |
 | **Selective attenuation** (Huang 2026) | User-selected sources | Variable | Frequency-selective | User preference profile |
+| **Hearing aid** (Serizel 2010) | Leakage through open fitting | Open ear canal (tympanic membrane target) | SNR improvement (NR + leakage cancel) | Causality margin of a few samples; ear-canal error mic |
 
-Each requires a different architecture. A single "ANC algorithm" cannot serve all four.
+Each requires a different architecture. A single "ANC algorithm" cannot serve all of them.
 
 ---
 
@@ -152,20 +155,39 @@ Input audio ──→ Source separation ──→ Identify target sounds ──�
 
 ---
 
-## 5. Cross-Application Comparison
+## 5. Hearing-Aid ANC + Noise Reduction (Serizel et al. 2010)
 
-### 5.1 Architecture Drivers
+### Problem Characteristics
 
-| Factor | Drone | Smart Glasses | Vehicle | Selective |
-|--------|-------|--------------|---------|-----------|
-| **Sealed vs Open** | Open | Open | Sealed | Variable |
-| **Noise predictability** | High (RPM-based) | Low (diffuse) | Medium (engine periodic) | Variable |
-| **Channel count** | 1-2 | 8 mic + 4 speaker | Multi-channel (M×N) | 2 (stereo) |
-| **Primary algorithm** | Narrow-band FxLMS | Neural + DSP hybrid | Multi-channel FxLMS | Source separation + filter |
-| **Latency budget** | < 2ms | 113μs (DSP) + 200ms (NN) | < 5ms | < 20ms |
-| **Power budget** | < 5W | < 1W (glasses frame) | < 50W (vehicle) | < 10W (device) |
+- **Noise source**: The [[concepts/open-fitting-noise-leakage|leakage]] — ambient noise entering the ear canal directly through the open fitting, unprocessed and with lower SNR than the hearing-aid output
+- **Acoustic environment**: Open ear canal; the zone of quiet is the **tympanic membrane**, and the secondary path (loudspeaker → eardrum) attenuates the processed signal (dc gain < 1)
+- **Form factor**: Two-microphone BTE hearing aid; assumes an ear-canal error microphone (technically feasible on the eartip, absent from commercial devices)
+- **Constraints**: The microphone–loudspeaker distance is a few centimeters, leaving a causality margin of only **a few samples** (ν = 2 measured for a 270° noise DOA) — the tightest latency budget of any application in this comparison
 
-### 5.2 What "Performance" Means
+### Architecture: Integrated ANC + NR (FxMWF)
+
+Uniquely among these applications, the hearing aid must run ANC *jointly* with noise reduction. Serizel et al. show the topology decides everything: cascading NR and ANC fails twice (the ANC input is the noise-suppressed NR output, and the NR delay of 32 samples consumes the two-sample causality margin), while the integrated [[concepts/filtered-x-mwf|Filtered-x MWF]] merges both functions into one filter set on secondary-path-filtered references. The filter provably decomposes into an NR part and an ANC part that is *independent of the NR delay*, so no NR/ANC performance trade-off exists.
+
+**Performance**: ~12 dB intelligibility-weighted SNR improvement (vs. ~4 dB cascaded at a relaxed ν = 48; >10 dB vs. ~1 dB cascaded at the realistic ν = 2). In the non-causal regime the ANC benefit vanishes, but secondary-path-aware NR still outperforms standard MWF-NR.
+
+**Key challenge**: The open fitting trades the occlusion effect for leakage — the exact inversion of the sealed-earbud assumption. Combined with the few-sample causality margin, this makes the hearing aid the most constraint-bound ANC application in this comparison.
+
+---
+
+## 6. Cross-Application Comparison
+
+### 6.1 Architecture Drivers
+
+| Factor | Drone | Smart Glasses | Vehicle | Selective | Hearing Aid |
+|--------|-------|--------------|---------|-----------|-------------|
+| **Sealed vs Open** | Open | Open | Sealed | Variable | Open (fitting) |
+| **Noise predictability** | High (RPM-based) | Low (diffuse) | Medium (engine periodic) | Variable | Low (babble) |
+| **Channel count** | 1-2 | 8 mic + 4 speaker | Multi-channel (M×N) | 2 (stereo) | 2 mic + 1 error |
+| **Primary algorithm** | Narrow-band FxLMS | Neural + DSP hybrid | Multi-channel FxLMS | Source separation + filter | FxMWF (integrated NR + ANC) |
+| **Latency budget** | < 2ms | 113μs (DSP) + 200ms (NN) | < 5ms | < 20ms | ~2 samples (~125μs) |
+| **Power budget** | < 5W | < 1W (glasses frame) | < 50W (vehicle) | < 10W (device) | mW-scale (hearing aid) |
+
+### 6.2 What "Performance" Means
 
 | Application | Metric | Target | Achieved |
 |-------------|--------|--------|----------|
@@ -173,8 +195,9 @@ Input audio ──→ Source separation ──→ Identify target sounds ──�
 | Smart glasses | Overall NR | > 10 dB | 9.6-11.2 dB |
 | Vehicle | NR at 20-200 Hz | > 8 dB | 6-12 dB |
 | Selective | Target source attenuation | > 10 dB | 5-15 dB |
+| Hearing aid | Intelligibility-weighted SNR improvement | > 10 dB | ~12 dB (integrated); ~4 dB (cascaded) |
 
-### 5.3 The Open vs. Sealed Divide
+### 6.3 The Open vs. Sealed Divide
 
 The most fundamental architectural split is **open-ear vs. sealed-ear**:
 

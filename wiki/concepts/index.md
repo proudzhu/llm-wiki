@@ -491,4 +491,6 @@
 | [[concepts/magnitude-phase-compensation-effect\|Magnitude-Phase Compensation Effect]] | Phase-aware losses drive estimated magnitudes toward zero where phase is unreliable, causing spectrally non-uniform over-attenuation in mid-to-high frequencies | 2026-09-06 |
 | [[concepts/phase-sensitive-mask\|Phase-Sensitive Mask (PSM)]] | T-F mask target encoding the compensated magnitude along mixture phase; motivation for the magnitude-phase compensation effect | 2026-09-06 |
 | [[concepts/magnitude-phase-snr\|mSNR and pSNR]] | Diagnostic metrics decomposing separation quality into magnitude (mSNR) and phase (pSNR) accuracy, isolating the compensation effect | 2026-09-06 |
+| [[concepts/filtered-x-mwf\|Filtered-x MWF (FxMWF)]] | Integrates multichannel noise reduction and feedforward ANC into one Wiener filter computed on secondary-path-filtered references; ANC part independent of NR delay | 2026-09-07 |
+| [[concepts/open-fitting-noise-leakage\|Open-Fitting Noise Leakage]] | Unprocessed ambient noise entering the ear canal through an open hearing-aid fitting; lowers SNR at the tympanic membrane and motivates integrated ANC+NR | 2026-09-07 |
 

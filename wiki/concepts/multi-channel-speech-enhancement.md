@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-08-28
+updated: 2026-09-07
 sources:
+  - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
@@ -43,6 +44,8 @@ tags:
 
 - **[[concepts/doa-based-snr-estimation|DOA-Based SNR Estimation]] (Kim & Kim 2014)**: Classical statistical-model dual-microphone SE that replaces noise-variance-driven a priori SNR estimation with a spatial cue — the phase difference between time-aligned channels is converted into a [[concepts/target-to-non-target-directional-signal-ratio|TNR]] and then a DOA-based SNR via an LRT speech-activity decision and decision-directed updates, feeding a Wiener spectral gain. Outperformed SDB, GSC-PW, PEF, and ASBM baselines in SDR and PESQ (0–20 dB SNR, RT60 up to 300 ms, four noise types) on a 4 cm dual-microphone array.
 
+- **ANC-integrated MWF for open-fitting hearing aids (Serizel et al. 2010)**: In hearing aids with an open fitting, MWF-based NR must additionally contend with the unprocessed [[concepts/open-fitting-noise-leakage|noise leakage]] and the secondary-path attenuation — the [[concepts/filtered-x-mwf|Filtered-x MWF]] integrates multichannel NR with feedforward ANC in one filter set, gaining ~12 dB intelligibility-weighted SNR improvement where standard MWF-NR degrades at low amplification gains.
+
 ## Related Concepts
 
 - [[concepts/beamforming|Beamforming]]
@@ -68,10 +71,13 @@ tags:
 - [[concepts/speech-presence-probability|Speech Presence Probability (SPP)]]
 - [[concepts/differential-asr|Differential ASR]] — multi-frontend pattern portable to MCSE pipelines
 - [[concepts/side-talk-detection|Side-Talk Detection (STD)]] — role-conditional VAD frontend in differential ASR
+- [[concepts/filtered-x-mwf|Filtered-x MWF (FxMWF)]]
+- [[concepts/open-fitting-noise-leakage|Open-Fitting Noise Leakage]]
 
 ## Related Sources
 
 - [[sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
+- [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] — MWF-NR in the open-fitting hearing-aid context; leakage and secondary-path effects
 - [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
 - [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]]
 - [[sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026: Spatial-Magnifier]]

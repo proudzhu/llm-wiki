@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-02
+updated: 2026-09-07
 sources:
+  - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/bagheri-2019-pmwf-spp/full-text.md
@@ -54,6 +55,10 @@ The SDW-MWF is itself a special case ($\beta = \mu = 1$) of the speech-distortio
 
 The closed-form SDW-MWF $h = (\Phi_x + \mu \Phi_n)^{-1} \Phi_x i_1$ is differentiable (matrix inversion is smooth as long as $\Phi_x + \mu \Phi_n$ is well-conditioned), so it can be included in the training loop of a hybrid neural-spatial SE system. [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026]] use this property to train [[concepts/mn-tango|MN-TANGO]] end-to-end: gradients from an enhanced-STFT loss flow through the differentiable SDW-MWF back to the neural mask estimators. At inference, the [[concepts/gevd-spatial-filtering|GEVD-based]] rank-constrained SDW-MWF is used instead, which is non-differentiable but more robust to SCM estimation noise. The train-test mismatch is intentional: SDW-MWF acts as an optimization surrogate, while GEVD remains preferable at deployment.
 
+## Filtered-x MWF (FxMWF)
+
+For open-fitting hearing aids, [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel et al. 2010]] extend the MWF with the filtered-x principle of ANC: each microphone signal is pre-filtered by the estimated secondary path (loudspeaker → tympanic membrane), and the MSE is defined on the signal reaching the tympanic membrane. The resulting single filter set — the [[concepts/filtered-x-mwf|Filtered-x MWF]] — jointly performs NR (with secondary-path compensation), and ANC canceling the [[concepts/open-fitting-noise-leakage|noise leakage]] through the open fitting. The filter decomposes as $\mathbf{w} = \mathbf{w}^{\parallel} + \mathbf{w}^{\perp}$ (NR part + ANC part), which decouples the ANC from the NR algorithmic delay and eliminates the NR/ANC causality trade-off of cascaded schemes.
+
 ## MVDR + Single-Channel Wiener Factorization
 
 Simmer et al. [14] showed that the broadband MMSE-optimal multi-channel NR can be factored as a single-channel Wiener filter applied to the output of an [[concepts/mvdr-beamformer|MVDR beamformer]]. Jin et al. (2017) adopt this factorization for hands-free mobile-phone voice communication: the MVDR provides the distortionless spatial filter, and a single-channel Wiener post-filter (driven by the [[concepts/adaptive-coherence-noise-estimation|adaptive coherence noise estimator]]) applies the spectral gain. The contribution of Jin et al. lives entirely in the noise PSD estimate that feeds the Wiener gain — the MWF structure itself is the classical rank-1 case. This factorization is computationally lighter than a full MWF and decouples spatial filtering (MVDR) from noise PSD estimation (post-filter), which is attractive for real-time mobile-phone implementations.
@@ -76,10 +81,12 @@ The MWF is one endpoint of a parameterized family: the [[concepts/parametric-mul
 - [[concepts/parametric-multi-channel-wiener-filter|Parametric Multi-Channel Wiener Filter (PMWF)]] — parameterized family with the MWF as the $\beta = 1$ endpoint
 - [[concepts/multi-channel-speech-presence-probability|Multi-Channel Speech Presence Probability (MC-SPP)]]
 - [[concepts/noise-attenuation-control|Noise Attenuation Control]]
+- [[concepts/filtered-x-mwf|Filtered-x MWF (FxMWF)]] — MWF on secondary-path-filtered references; joint NR + ANC for hearing aids
 
 ## Related Sources
 
 - [[sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
+- [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] — the FxMWF extension of the MWF
 - [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]
 - [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]]

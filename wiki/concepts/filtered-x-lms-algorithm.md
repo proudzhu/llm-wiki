@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-04-10
+updated: 2026-09-07
 sources:
+  - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
 tags:
 - adaptive-algorithms
@@ -62,6 +63,10 @@ where $\mathbf{G}(\omega)$ and $\hat{\mathbf{G}}(\omega)$ are the Fourier transf
 - [[leaky-fxlms-algorithm|Leaky FxLMS Algorithm]] — Adds a leakage coefficient to limit filter gain, improving stability
 - Normalized FxLMS — Adapts step size based on reference signal power
 
+## Statistics-Based Counterpart: FxMWF
+
+When the control filter must adapt during *both* noise-only and speech-plus-noise periods (as in hearing-aid NR+ANC), gradient-based FxLMS updates become inconvenient. [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel et al. 2010]] instead compute the filtered-x controller in closed form from estimated second-order statistics — the [[concepts/filtered-x-mwf|Filtered-x MWF]] — a Wiener solution $\mathbf{w} = \mathbf{R}_{\hat{y}\hat{y}}^{-1}\mathbf{r}_{\hat{y}d}$ on secondary-path-filtered references that integrates noise reduction and ANC in one filter set.
+
 ## Related Concepts
 
 - [[concepts/active-noise-control|Active Noise Control]]
@@ -72,10 +77,12 @@ where $\mathbf{G}(\omega)$ and $\hat{\mathbf{G}}(\omega)$ are the Fourier transf
 - [[concepts/distributed-anc|Distributed ANC]]
 - [[concepts/sparse-anc|Sparse ANC]]
 - [[concepts/convex-combination-anc|Convex Combination ANC]]
+- [[concepts/filtered-x-mwf|Filtered-x MWF (FxMWF)]] — closed-form, statistics-based filtered-x controller
 
 ## Related Sources
 
 - [[sources/lu-2021-survey-active-noise-control-linear|Lu et al. 2021: Survey on ANC — Part I: Linear Systems]]
+- [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] — replaces gradient FxLMS adaptation with a Wiener solution on filtered references
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method — a method avoiding the secondary path filter requirement of FxLMS]]
 - [[sources/jiang-2025-ai-driven-avnc-review|Jiang et al. 2025: AI-Driven AVNC Review]]
 - [[sources/ma-2027-robust-ffanc-online-path-modeling|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] — modifies the FXLMS update to use the second SF output $y_2(n)$ instead of the residual error $e(n)$, reducing the influence of additive noise and injected AWGN

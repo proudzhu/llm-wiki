@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-09-05
+updated: 2026-09-07
 sources:
+  - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/he-2026-neural-projection-filter-anc/full-text.md
 tags:
 - active-noise-control
@@ -62,6 +63,10 @@ The main challenge is the **explosive growth in computation**. For each error se
 
 When the growth is driven by a large number of **reference channels** (e.g., 42 accelerometers for automotive road noise), a complementary remedy is [[concepts/multi-reference-anc|multi-reference ANC]] reference compression: projecting the $P$ references onto $Q \ll P$ virtual/projected references (via SVD subspaces or neural projection filters such as [[concepts/condition-aware-projection-filtering|CAPF]]) before the control filter, which shrinks the back-end controller and improves its conditioning.
 
+## ANC + Noise Reduction in Hearing Aids
+
+Open-fitting hearing aids motivate a special multichannel ANC configuration: a two-microphone BTE array provides multichannel NR references, and an ear-canal microphone provides the error signal for feedforward ANC canceling the [[concepts/open-fitting-noise-leakage|noise leakage]] at the tympanic membrane. [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel et al. 2010]] compare the combination topologies: cascading puts the ANC after the NR (starving it of noise-rich input and consuming the causality margin with the NR delay), while the integrated [[concepts/filtered-x-mwf|FxMWF]] merges both functions into one multichannel filter set on secondary-path-filtered references — delivering ~12 dB SNR improvement versus ~4 dB for the multichannel cascade, and >10 dB versus ~1 dB at the realistic two-sample causality margin.
+
 ## Related Concepts
 
 - [[active-noise-control|Active Noise Control]]
@@ -72,6 +77,8 @@ When the growth is driven by a large number of **reference channels** (e.g., 42 
 - [[simplified-adaptive-feedback-anc|Simplified Adaptive Feedback ANC]]
 - [[multi-reference-anc|Multi-Reference ANC]]
 - [[condition-aware-projection-filtering|Condition-Aware Projection Filtering (CAPF)]]
+- [[concepts/filtered-x-mwf|Filtered-x MWF (FxMWF)]]
+- [[concepts/open-fitting-noise-leakage|Open-Fitting Noise Leakage]]
 
 ## PINN-Assisted Multi-Channel ANC
 
@@ -80,5 +87,6 @@ In the PINN-assisted ANC system ([[sources/zhang-2024-active-noise-control-sound
 ## Related Sources
 
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section V: Multiple-Channel ANC
+- [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] — multichannel ANC combined with NR in open-fitting hearing aids
 - [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]]
 - [[sources/he-2026-neural-projection-filter-anc|He et al. 2026: Neural Projection Filter Generation for Multi-Reference ANC]] — 42-reference road-noise system compressed to 4 projected references

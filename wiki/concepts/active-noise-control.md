@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-08-21
+updated: 2026-09-07
 sources:
+  - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md
   - raw/papers/guo-2024-anc-saturation-survey/full-text.md
   - raw/papers/bai-2026-feedback-guided-anc/full-text.md
@@ -119,6 +120,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - [[sources/ma-2027-robust-ffanc-online-path-modeling|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] — feedforward ANC with simultaneous online SP and FBP modeling; introduces a second supporting filter and SF-driven global AWGN scaling for robustness under time-varying paths
 - [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024: ANC Algorithms Overcoming Output Saturation]] — survey of adaptive ANC algorithms mitigating the output saturation effect, organising the field into output-constraint and nonlinear-adaptive families
 - [[sources/bai-2026-feedback-guided-anc|Bai 2026: Feedback-guided DNN-based Controller Fusion for Robust Fixed-Parameter ANC]] — hybrid WaveNet + feedback-guided MoE of FIR experts; 19 dB avg NR (50 Hz–5 kHz) on CCF-AATC headphone ANC with negligible 1–8 kHz amplification
+- [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] — ANC integrated with noise reduction for open-fitting hearing aids; see also [[concepts/filtered-x-mwf|Filtered-x MWF]] and [[concepts/open-fitting-noise-leakage|Open-Fitting Noise Leakage]]
 
 ## Related Entities
 

@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-05-05
+updated: 2026-09-07
 sources:
+  - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
 tags:
 - active-noise-control
 - signal-processing
@@ -52,7 +53,11 @@ Feedforward ANC is inherently dependent on the direction of arrival (DOA) of the
 
 This motivates [[hybrid-anc|Hybrid ANC]] architectures where the [[feedback-anc|Feedback ANC]] component (DOA-independent) compensates for feedforward degradation at non-nominal DOAs. It also motivates direction-selective approaches such as SFANC/GFANC.
 
-## Comparison with Feedback ANC
+## Hearing-Aid Feedforward ANC
+
+Open-fitting hearing aids apply feedforward ANC to cancel the noise component of the [[concepts/open-fitting-noise-leakage|leakage]] at the tympanic membrane, with the BTE microphone array as reference and an ear-canal microphone as error sensor (technically feasible on the eartip, though absent from commercial devices). Because the microphone–loudspeaker distance is a few centimeters, the causality margin is only a few samples — see [[concepts/causality|Causality in ANC]]. The [[concepts/filtered-x-mwf|FxMWF]] of [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel et al. 2010]] shows how to combine this feedforward ANC with NR without the NR delay consuming the margin. Only the leakage's noise component is canceled, preserving its speech component for localization cues.
+
+## Comparison with feedback ANC
 
 | Feature | Feedforward | Feedback |
 |---------|-------------|----------|
@@ -72,10 +77,14 @@ This motivates [[hybrid-anc|Hybrid ANC]] architectures where the [[feedback-anc|
 - [[online-feedback-path-modeling|Online Feedback-Path Modeling]] — required when FBP drifts during operation
 - [[supporting-filter-anc|Supporting Filter in ANC]] — auxiliary filter for decoupling OSPM/OFBPM from the controller
 - [[auxiliary-noise-scaling|Auxiliary Noise Scaling]] — strategies to reduce the AWGN contribution to the residual
+- [[concepts/open-fitting-noise-leakage|Open-Fitting Noise Leakage]]
+- [[concepts/filtered-x-mwf|Filtered-x MWF (FxMWF)]]
+- [[concepts/causality|Causality in ANC]]
 
 ## Related Sources
 
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
+- [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] — feedforward ANC at the tympanic membrane with an ear-canal error microphone
 - [[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method for Feedforward ANC]]

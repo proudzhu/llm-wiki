@@ -553,6 +553,7 @@
 | [[entities/nilesh-madhu\|Nilesh Madhu]] | Ghent University researcher; speech enhancement and audio signal processing | 2026-09-06 |
 | [[entities/gordon-wichern\|Gordon Wichern]] | MERL researcher; audio signal processing, speech separation, machine listening; WHAMR! corpus co-creator | 2026-09-06 |
 | [[entities/jonathan-le-roux\|Jonathan Le Roux]] | MERL principal researcher; speech separation, robust ASR, SI-SDR metric, phase-sensitive mask, STFT consistency | 2026-09-06 |
+| [[entities/jan-wouters\|Jan Wouters]] | KU Leuven ExpORL — audiology and hearing implants; co-author of the FxMWF integrated ANC+NR hearing-aid paper | 2026-09-07 |
 
 ---
 
@@ -1049,6 +1050,8 @@
 | [[concepts/magnitude-phase-compensation-effect\|Magnitude-Phase Compensation Effect]] | Phase-aware losses drive estimated magnitudes toward zero where phase is unreliable, causing spectrally non-uniform over-attenuation in mid-to-high frequencies | 2026-09-06 |
 | [[concepts/phase-sensitive-mask\|Phase-Sensitive Mask (PSM)]] | T-F mask target encoding the compensated magnitude along mixture phase; motivation for the magnitude-phase compensation effect | 2026-09-06 |
 | [[concepts/magnitude-phase-snr\|mSNR and pSNR]] | Diagnostic metrics decomposing separation quality into magnitude (mSNR) and phase (pSNR) accuracy, isolating the compensation effect | 2026-09-06 |
+| [[concepts/filtered-x-mwf\|Filtered-x MWF (FxMWF)]] | Integrates multichannel noise reduction and feedforward ANC into one Wiener filter computed on secondary-path-filtered references; ANC part independent of NR delay | 2026-09-07 |
+| [[concepts/open-fitting-noise-leakage\|Open-Fitting Noise Leakage]] | Unprocessed ambient noise entering the ear canal through an open hearing-aid fitting; lowers SNR at the tympanic membrane and motivates integrated ANC+NR | 2026-09-07 |
 
 ---
 
@@ -1255,6 +1258,7 @@
 | [[sources/hu-2026-abse-net\|Hu, Du, Zhao & Si 2026: ABSE-NET — Active Binaural Speech Enhancement for Open-Fit Hearing Aids]] | Cascades binaural MVDR with a 0.112M-param LNN that cancels open-fit vent leakage and compensates beamformer distortion; no in-ear error mic at inference (INTERSPEECH 2026) | 2026-09-06 |
 | [[sources/zhao-2026-spectrally-adaptive-loss\|Zhao & Madhu 2026: Spectrally Adaptive Loss for Streaming Speech Enhancement]] | Spectrally weighted STFT losses (fixed sigmoid + signal-dependent adaptive) counteracting the magnitude-phase compensation effect; HyST-Net streaming backbone | 2026-09-06 |
 | [[sources/wang-2021-magnitude-phase-compensation\|Wang, Wichern & Le Roux 2021: On the Compensation Between Magnitude and Phase in Speech Separation]] | Explains why magnitude losses improve PESQ/eSTOI/WER but degrade SI-SDR: implicit magnitude-phase compensation in complex/time-domain losses, diagnosed via mSNR/pSNR | 2026-09-06 |
+| [[sources/serizel-2010-integrated-anc-nr-hearing-aids\|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] | Integrates multichannel Wiener-filter noise reduction and feedforward ANC into a single filter (FxMWF); ~12 dB SNR improvement in open-fitting hearing aids where cascaded topologies fail | 2026-09-07 |
 
 ---
 
@@ -1308,10 +1312,10 @@
 
 ## Statistics
 
-- **Total pages**: 1257
-- **Entities**: 543
-- **Concepts**: 487
-- **Sources**: 197
+- **Total pages**: 1261
+- **Entities**: 544
+- **Concepts**: 489
+- **Sources**: 198
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-06
+- **Last updated**: 2026-09-07

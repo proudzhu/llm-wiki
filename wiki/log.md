@@ -5044,3 +5044,15 @@ Ingested "A Comparison of Generative and Discriminative Methods for Speech Enhan
 - **Summary**: Explains why adding a magnitude-domain loss improves PESQ/eSTOI/WER while slightly degrading SI-SDR in end-to-end speech separation — the estimated magnitude implicitly compensates for inaccurate phase (projection of the clean spectrum onto the estimated-phase direction), diagnosed via the mSNR/pSNR decomposition on WHAMR! and SMS-WSJ.
 - **Pages created**: `wiki/sources/wang-2021-magnitude-phase-compensation.md`, `wiki/entities/gordon-wichern.md`, `wiki/entities/jonathan-le-roux.md`, `wiki/concepts/phase-sensitive-mask.md`, `wiki/concepts/magnitude-phase-snr.md`
 - **Pages updated**: [[concepts/magnitude-phase-compensation-effect|Magnitude-Phase Compensation Effect]] (primary-source formulation, Fig. 2, mSNR/pSNR evidence), [[concepts/complex-spectral-mapping|Complex Spectral Mapping]] (magnitude-loss trade-off), [[concepts/frequency-domain-loss|Frequency Domain Loss]] (RI+Mag compensation trade-off subsection), [[concepts/time-domain-speech-enhancement|Time-Domain Speech Enhancement]] (Wav+Mag / Wav×0+Mag findings), [[concepts/pesq|PESQ]] (magnitude-dominant behavior section), [[concepts/teacher-forcing|Teacher Forcing]] (MSA-as-teacher-forcing reinterpretation), [[synthesis/deep-speech-enhancement|Deep Speech Enhancement]] (Insights 2–3 refined with primary source), `wiki/entities/zhong-qiu-wang.md` (new contribution bullet, MERL affiliation)
+
+---
+
+## [2026-09-07] ingest | Integrated Active Noise Control and Noise Reduction in Hearing Aids (Serizel, Moonen, Wouters & Jensen 2010)
+
+- **Source**: `raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md` (Zotero: 742FT4QW)
+- **Authors**: Romain Serizel, Marc Moonen, Jan Wouters, Søren Holdt Jensen
+- **Published**: EURASIP Journal on Advances in Signal Processing, vol. 2010, Article ID 709214
+- **DOI**: 10.1155/2010/709214
+- **Summary**: Integrates multichannel Wiener-filter noise reduction and feedforward ANC into a single filter set (Filtered-x MWF) computed on secondary-path-filtered references. The filter provably decomposes into an NR part and an NR-delay-independent ANC part, avoiding the trade-off that makes cascaded NR→ANC topologies fail in open-fitting hearing aids: ~12 dB intelligibility-weighted SNR improvement vs. ~1 dB (cascaded) at the realistic two-sample causality margin.
+- **Pages created**: `wiki/sources/serizel-2010-integrated-anc-nr-hearing-aids.md`, `wiki/entities/jan-wouters.md`, `wiki/concepts/filtered-x-mwf.md`, `wiki/concepts/open-fitting-noise-leakage.md`
+- **Pages updated**: `wiki/entities/romain-serizel.md`, `wiki/entities/marc-moonen.md`, `wiki/entities/soren-holdt-jensen.md` (new contribution bullets), `wiki/concepts/multi-channel-wiener-filter.md` (FxMWF extension), `wiki/concepts/causality.md` (hearing-aid causality constraints), `wiki/concepts/multi-channel-anc.md` (hearing-aid configuration and FxMWF performance), `wiki/concepts/multi-channel-speech-enhancement.md` (ANC-integrated MWF entry), `wiki/synthesis/application-specific-anc.md` (new §5: hearing-aid ANC + NR; cross-application tables extended)

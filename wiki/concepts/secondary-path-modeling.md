@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-17
-updated: 2026-08-27
+updated: 2026-09-07
 sources:
+  - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/fareedha-2026-joint-deep-spe-anc/full-text.txt
   - raw/papers/akhtar-2006-vss-lms-online-spm/full-text.txt
   - raw/papers/holzmuller-2026-dtw-secondary-path-anc/full-text.md
@@ -52,6 +53,10 @@ Uses deep neural networks (Conv1D + BiLSTM + Attention) to predict $S(z)$ from A
 
 The [[filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] can tolerate a phase error of up to **$\pm 90^\circ$** between the true secondary path and its estimate $\hat{S}(z)$. If the error exceeds this limit, the algorithm will diverge.
 
+## Hearing-Aid Secondary Path
+
+In hearing aids the secondary path is the propagation from the device loudspeaker to the **tympanic membrane** (including the loudspeaker response). Its dc gain is lower than 1, so the processed signal is attenuated before reaching the eardrum — an effect ignored by conventional NR algorithms but included in the NR computation by the filtered-x schemes of [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel et al. 2010]] (offline NLMS identification; the estimate $\hat{S}$ also pre-filters the MWF references, see [[concepts/filtered-x-mwf|FxMWF]]). Combined with the [[concepts/open-fitting-noise-leakage|noise leakage]], this attenuation significantly degrades the output SNR at the small gains typical of open fittings.
+
 ## Related Concepts
 
 - [[active-noise-control|Active Noise Control]]
@@ -63,6 +68,8 @@ The [[filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] can tolerate a phase e
 - [[online-feedback-path-modeling|Online Feedback-Path Modeling]] — sibling online-modeling problem often coupled with OSPM
 - [[supporting-filter-anc|Supporting Filter in ANC]] — auxiliary filter for decoupling OSPM from the controller
 - [[auxiliary-noise-scaling|Auxiliary Noise Scaling]] — AWGN power scheduling strategies for OSPM
+- [[concepts/filtered-x-mwf|Filtered-x MWF (FxMWF)]]
+- [[concepts/open-fitting-noise-leakage|Open-Fitting Noise Leakage]]
 
 ## Related Sources
 

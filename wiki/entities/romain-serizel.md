@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-07-10
-updated: 2026-07-16
+updated: 2026-09-07
 tags:
   - researcher
   - speech-enhancement
@@ -31,6 +31,7 @@ tags:
 - BinauRec binaural dataset for evaluating speech enhancement with measured room impulse responses (EUSIPCO 2023)
 - Frequency-weighted training losses for phoneme-level DNN-based speech enhancement (MMSP 2025)
 - Low-rank approximation based multichannel Wiener filter algorithms for noise reduction with application in cochlear implants (IEEE/ACM TASLP 2014)
+- Integrated active noise control and noise reduction in hearing aids (IEEE Trans. Audio, Speech, Lang. Process. 2010) — PhD work at KU Leuven ESAT-SCD; the FxMWF algorithm combining NR and ANC in one filter set for open-fitting hearing aids — [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010]]
 
 ## Affiliations
 
@@ -51,3 +52,4 @@ tags:
 
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]
 - [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]]
+- [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]]
