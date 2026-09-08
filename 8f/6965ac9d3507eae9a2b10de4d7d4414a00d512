@@ -1,0 +1,97 @@
+wiki/sources/serizel-2010-integrated-anc-nr-hearing-aids.md
+  s_2a8ced1dfbaca2::t_913572639a7670 185-188
+  s_2a8ced1dfbaca2::t_1b47397081f139 4
+wiki/sources/index.md
+  s_2a8ced1dfbaca2::t_9ae7ddd075132c 205
+wiki/synthesis/anc-architecture-evolution.md
+  s_2a8ced1dfbaca2::t_9681f56281fcf6 177
+  s_2a8ced1dfbaca2::t_9acaa98d29e1ab 117-120
+wiki/entities/tong-xiao.md
+  s_2a8ced1dfbaca2::t_7814d5c43134ef 4
+  s_2a8ced1dfbaca2::t_d294068ea65e00 16,22
+  s_2a8ced1dfbaca2::t_5c2f665cb877c9 29
+wiki/sources/xiao-2023-spatially-selective-anc.md
+  s_2a8ced1dfbaca2::t_a72305a58f9f15 1-265
+wiki/entities/chuming-zhao.md
+  s_2a8ced1dfbaca2::t_13dd940e2d3df4 1-29
+wiki/sources/xiao-2026-robust-spatially-selective-anc.md
+  s_2a8ced1dfbaca2::t_23de9f50537faa 4
+  s_2a8ced1dfbaca2::t_9ae7ddd075132c 170
+wiki/concepts/filtered-x-mwf.md
+  s_2a8ced1dfbaca2::t_b6057f8804b165 4,7
+  s_2a8ced1dfbaca2::t_04a450aef9ce39 87
+  s_2a8ced1dfbaca2::t_96b92c16c147f9 70-73
+raw/papers/xiao-2023-spatially-selective-anc/full-text.md
+  s_2a8ced1dfbaca2::t_64608afa57c269 1-1397
+wiki/concepts/waterbed-effect.md
+  s_2a8ced1dfbaca2::t_be5d4c14d55e96 4-6
+  s_2a8ced1dfbaca2::t_65d348f45673d4 17-18,24-27
+wiki/concepts/selective-anc.md
+  s_2a8ced1dfbaca2::t_fde3cb17eb7c1f 4
+  s_2a8ced1dfbaca2::t_922a4c968663b1 44,49
+wiki/synthesis/modern-headphone-anc-systems.md
+  s_2a8ced1dfbaca2::t_602f716cda7910 186
+  s_2a8ced1dfbaca2::t_c106a49640c761 249
+wiki/entities/buye-xu.md
+  s_2a8ced1dfbaca2::t_f1bb7062a929c3 4,9
+  s_2a8ced1dfbaca2::t_88901cb49bda19 20,25
+wiki/concepts/active-binaural-speech-enhancement.md
+  s_2a8ced1dfbaca2::t_7a2e545e003496 33
+  s_2a8ced1dfbaca2::t_502643ff67626c 4,7
+wiki/index.md
+  s_2a8ced1dfbaca2::t_9ae7ddd075132c 557,1263,1317-1318,1320,1323
+wiki/concepts/hybrid-anc.md
+  s_2a8ced1dfbaca2::t_e90a7646f9d244 76
+  s_2a8ced1dfbaca2::t_9ae7ddd075132c 42-44
+wiki/entities/index.md
+  s_2a8ced1dfbaca2::t_9ae7ddd075132c 551
+wiki/log.md
+  s_2a8ced1dfbaca2::t_97c81e3d4057e7 5081-5098
+wiki/concepts/soft-constrained-anc.md
+  s_2a8ced1dfbaca2::t_df45ffad645091 4-6
+  s_2a8ced1dfbaca2::t_1cfacf4fd2749f 45-46
+wiki/concepts/speech-preserving-anc.md
+  s_2a8ced1dfbaca2::t_883f5a3d2f908b 4,6
+  s_2a8ced1dfbaca2::t_435a1a773ed195 91
+  s_2a8ced1dfbaca2::t_6e2973a06eaaae 56
+wiki/concepts/spatially-selective-anc.md
+  s_2a8ced1dfbaca2::t_89eb1133817d71 4,6,35
+  s_2a8ced1dfbaca2::t_c77ce7f95ae9fb 32,34,36-48,52
+  s_2a8ced1dfbaca2::t_84e935a30c0d8a 61
+wiki/concepts/relative-transfer-function.md
+  s_2a8ced1dfbaca2::t_9ae7ddd075132c 69-72
+  s_2a8ced1dfbaca2::t_84fbefb299060b 89
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.2",
+  "base_commit_sha": "8f6965ac9d3507eae9a2b10de4d7d4414a00d512",
+  "prompts": {},
+  "humans": {
+    "h_81c75c8c8ed26f": {
+      "author": "proudzhu <proudzhu.fdu@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_2a8ced1dfbaca2": {
+      "agent_id": {
+        "tool": "trae",
+        "id": "6a9f829aeafff97abdc22ce3",
+        "model": "glm-5.3__dev"
+      },
+      "human_author": "proudzhu <proudzhu.fdu@gmail.com>",
+      "custom_attributes": {
+        "external_session_id": "6a9f829aeafff97abdc22ce3",
+        "edit_kind": "bash",
+        "runtime_client": "trae-tob-git-ai",
+        "operation_id": "6a9f88c1eafff97abdc22e51",
+        "client_type": "ide",
+        "tool_use_id": "6a9f88c1eafff97abdc22e51",
+        "tool_name": "RunCommand",
+        "source_scene": "agent",
+        "session_id": "6a9f829aeafff97abdc22ce3",
+        "display_model_name": "GLM-5.3"
+      }
+    }
+  }
+}
