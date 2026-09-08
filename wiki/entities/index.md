@@ -219,7 +219,8 @@
 | [[entities/shigeyuki-hashimoto\|Shigeyuki Hashimoto]] | University of Hyogo — co-author on frequency-domain simultaneous equations method for ANC | 2006 |
 | [[entities/yusuke-fujita\|Yusuke Fujita]] | Catsystem Corporation — co-author on experimental validation of simultaneous equations method | 2006 |
 | [[entities/xiaobin-rong\|Xiaobin Rong]] | Nanjing University — lead author of GTCRN ultralightweight speech enhancement | 2026-05-24 |
-| [[entities/tianchi-sun\|Tianchi Sun]] | Nanjing University — co-author of GTCRN | 2026-05-24 |
+| [[entities/tianchi-sun\|Tianchi Sun]] | Nanjing University — co-author of GTCRN and lead author of the hybrid GSC+DVAD speech extraction system | 2026-09-08 |
+| [[entities/tong-lei\|Tong Lei]] | Nanjing University — co-author of the hybrid GSC+DVAD speech extraction system | 2026-09-08 |
 | [[entities/xu-zhang\|Xu Zhang]] | Jiangsu Thingstar IT — co-author of GTCRN | 2026-05-24 |
 | [[entities/yuxiang-hu\|Yuxiang Hu]] | Horizon Robotics — co-author of GTCRN | 2026-05-24 |
 | [[entities/changbao-zhu\|Changbao Zhu]] | Horizon Robotics — co-author of GTCRN | 2026-05-24 |

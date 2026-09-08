@@ -1,0 +1,682 @@
+A LIGHTWEIGHT HYBRID MULTI-CHANNEL SPEECH EXTRACTION SYSTEM WITH
+DIRECTIONAL VOICE ACTIVITY DETECTION
+Tianchi Sun1,2, Tong Lei1,2, Xu Zhang3, Yuxiang Hu2, Changbao Zhu2, Jing Lu1,2
+1 Key Laboratory of Modern Acoustics, Nanjing University, Nanjing 210093, China
+2 NJU-Horizon Intelligent Audio Lab, Horizon Robotics, Beijing 100094, China
+3 Jiangsu Thingstar Information Technology Co., Ltd., Nanjing 210046, China
+{tianchi.sun, tonglei}@smail.nju.edu.cn, zhangx@thingstar.cn,
+{yuxiang.hu, changbao.zhu}@horizon.cc, lujing@nju.edu.cn
+ABSTRACT
+Although deep learning (DL) based end-to-end models have shown
+outstanding performance in multi-channel speech extraction, their
+practical applications on edge devices are restricted due to their high
+computational complexity. In this paper, we propose a hybrid system
+that can more effectively integrate the generalized sidelobe canceller
+(GSC) and a lightweight post-filtering model under the assistance of
+spatial speaker activity information provided by a directional voice
+activity detection (DV AD) module. In addition to guiding the update
+of the adaptive blocking matrix (ABM) and the adaptive interference
+canceller (AIC) used in GSC to alleviate the distortion of the de-
+sired speech, DV AD is also utilized as an auxiliary input to the post-
+filtering model to enhance its capability of interference suppression.
+The experimental results demonstrate that, with much lower com-
+putational costs, our method can achieve comparable performance
+with a current state-of-the-art end-to-end model on simulated data
+and generalize even better on real-world data.
+Index Terms— Multi-channel, target speaker extraction, gener-
+alized sidelobe canceller, directional voice activity detection
+1. INTRODUCTION
+The target speaker’s speech is often corrupted by competing speakers
+and background noise in practical applications, resulting in a decline
+in communication quality and speech recognition accuracy. Target
+speaker extraction (TSE) aims at extracting desired speech in such
+an environment, which is achieved by utilizing auxiliary cues related
+to the desired speaker. For example, speaker embeddings used in
+personalized speech enhancement [1, 2, 3] are an effective feature to
+discriminate speakers. However, to produce the embedding vector,
+an enrollment utterance from the target speaker is required, which
+might be inaccessible in many cases. When the location of the target
+speaker is known, as in many video conferencing systems, multiple
+microphones’ spatial information can be exploited to help extract the
+desired speech.
+For an array with only a small number of microphones, the nor-
+mally utilized linear beamforming [4] suffers from limited interfer-
+ence suppression, and a well-designed post-filter (PF) is required.
+The generalized sidelobe canceller (GSC) [5] is a well-known strat-
+egy that can further suppress interference by the implementation
+of an adaptive interference canceller (AIC). However, the desired
+speech is often inevitably distorted due to the leakage of the desired
+signal in the blocking matrix (BM) module [6]. In order to tackle
+this problem, the robust GSC proposed in [7] controls the weights
+update of the adaptive BM (ABM) and the AIC by a signal-to-noise
+ratio (SNR) estimate. In [8] Hoshuyama et al. uses an ABM with
+coefficient-constrained and an AIC with norm-constrained adaptive
+filters. Moreover, in [9] and [10] the ABM is assisted with voice ac-
+tivity detection (V AD) based on signal energy and a recurrent neural
+network (RNN). However, these methods assume the existence of a
+single speaker, and their performance will deteriorate in scenarios
+with interfering speakers.
+The data-driven deep neural networks (DNN) based approaches
+have been proposed in recent years for multi-channel TSE. For ex-
+ample, neural beamformers [11, 12, 13] preserve the structure of
+conventional beamformers and estimate the spatial covariance matri-
+ces (SCMs) of the target speech (or the noise) with neural networks.
+In contrast, deep non-linear filters [14, 15, 16] jointly process tempo-
+ral, spectral and spatial information, and directly estimate the com-
+plex spectrogram of target speech from multi-channel mixture. Al-
+though these methods make great progress in speech enhancement,
+the high computational complexity makes them difficult for appli-
+cation in real-time audio processing. Meanwhile, the robustness of
+end-to-end approaches is not guaranteed in unseen environments.
+In this paper, we propose a lightweight hybrid multi-channel
+TSE system by integrating a robust GSC with a DNN-based PF.
+A lightweight convolutional recurrent network (CRN) is employed
+to estimate the directional V AD (DV AD) of each speaker. The
+DV AD in the target speaker’s direction is used to assist ABM and
+AIC in GSC to enhance the performance of GSC. Then the fixed
+beamformer (FBF) output, the GSC output and the complete DV AD
+are fed into the PF. Experimental results have shown that, with
+much lower complexity our approach can achieve competitive per-
+formance with the current state-of-the-art end-to-end method on
+synthetic data, and even generalize better on real-world data.
+2. PROPOSED METHOD
+2.1. Signal model
+We consider the task of extracting the target speaker in a noisy and
+reverberant environment. In time domain, the multi-channel mixture
+ym(t) is captured by the mth microphone of an array with M mi-
+crophones. The target speech signalxm(t) can be represented as the
+convolution of the non-reverberant speech signals0(t) and the room
+impulse response (RIR)hm(t) between the speaker and themth mi-
+crophone. After applying the short-time Fourier transform (STFT),
+the multi-channel mixture can be written in frequency domain as
+Ym(k,l ) =S0(k,l )Hm(k,l )+Vm(k,l ) (1)
+where Ym(k,l ), S0(k,l )Hm(k,l ) and Vm(k,l ) respectively rep-
+resent the complex spectrogram of the mixture, the reverber-
+ant target speech, and the interference at the kth frequency-bin
+1486979-8-3503-4485-1/24/$31.00 ©2024 IEEE ICASSP 2024
+ICASSP 2024 - 2024 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) | 979-8-3503-4485-1/24/$31.00 ©2024 IEEE | DOI: 10.1109/ICASSP48485.2024.10445953
+Authorized licensed use limited to: HEFEI UNIVERSITY OF TECHNOLOGY. Downloaded on January 12,2026 at 11:25:22 UTC from IEEE Xplore.  Restrictions apply. 
+
+FBF
+ABM
+AIC
+DVAD Module
+Binarize
+PF
+STFT
+Mixture
+Skip Connection
+DeConv
+DeConv
+DeConv
+DeConv
+DeConv
+DPRNN
+DPRNN
+Conv
+Conv
+Conv
+Conv
+Conv
++-
+-+
+Feature
+Extractor
+FC, ReLU
+FC, Sigmoid
+Conv
+Maxpool(4,1)
+Conv
+Maxpool(4,1)
+Conv
+Maxpool(2,1)
+flatten&chunk
+stack
+GRU
+GRU
+GRU
+GRU
++ -
+Tanh
+Fig. 1. Proposed multi-channel target speaker extraction system.
+and the lth time-frame. In practical applications, the interfer-
+ence Vm(k,l ) contains both background noise and competing
+speech. Our goal is to extract the non-reverberant target speech
+S(k,l ) = S0(k,l )Hr,d(k,l ) recorded at the reference channel r,
+whereHr,d(k,l ) denotes the RIR caused by the propagation delay
+only. We useY(k,l ) = [Y1(k,l ),...,Y M (k,l )]T∈ CM to represent
+the multi-channel mixture spectrogram in the following.
+For a commonly utilized planar array, the direction of arrival
+(DOA) of a sound source is usually defined by the azimuth with re-
+spect to the array. The plane can be divided intoN disjointed zones
+(zone-1, ..., zone-N) according to the beam-width of the array, as de-
+picted in the bottom left corner of Fig. 1. When the target speaker’s
+direction is known, as in many video conferencing systems, the spa-
+tial information can help refine multi-channel processing [17]. In
+this paper, without loss of generality, the target speaker is assumed
+to be known in zone-1 and competing speakers are in the other zones.
+2.2. CRN based directional V AD
+CRNs have been widely employed in DOA estimation [18] and
+sound event localization and detection (SELD) [19]. Motivated by
+these works, we modify the network in [18] to perform the DV AD
+estimation, which informs the instantaneous speaker activity in each
+zone. As depicted in Fig. 1, the CRN mainly consists of three
+convolutional neural network (CNN) layers, a RNN layer and two
+fully-connected (FC) layers. Among all the exploitable variants, we
+find through experiments that combining linear-frequency log-power
+spectrograms with sin inter-channel phase differences (sinIPD) as
+the input features yields the best performance in DV AD estimation.
+The two parameters are defined as
+LinSpec(k,l ) = log10
+ 
+|Y(k,l )|2
+∈ RM, (2)
+sin IPD(k,l ) = sin(arg [Y ∗
+1 (k,l )Y2:M (k,l )])∈ RM−1, (3)
+where arg denotes the component-wise phase of a complex vector.
+By concatenating them along the channel axis, a tensor of dimension
+(2M−1)×F×T is obtained as the CRN input, whereF andT denote
+the number of frequency-bins and time-frames respectively. Each
+CNN layer performs 2-D convolution followed by ReLU activation
+and incorporates a max-pooling operation to reduce the frequency
+dimension. The CNN layers’ output features are flattened along the
+channels and chunked to four vectors fed into the RNN layer com-
+posed of four disconnected parallel gated recurrent units (GRUs),
+and then stacked back to a single vector, before fed into a tanh ac-
+tivation layer. Note that grouping wide fully connected RNNs into
+parallel ones can save a significant amount of computational load
+with little performance loss [20]. Through the FC layers, the RNN
+output is mapped to the soft DV AD ˆP(l)∈ RN by sigmoid activa-
+tion. Each node in the output layer corresponds to a zone defined in
+Sec. 2.1.
+2.3. Improved robust GSC
+As shown in Fig. 1, the robust GSC used in this paper mainly con-
+sists of three modules. The upper branch is a FBF steered at the
+approximate direction of the target speaker. The FBF is expected to
+preserve the target speech and suppress the interferers in the other
+directions. The lower branch contains two parts named ABM and
+AIC. The ABM functions to block the target speech in multi-channel
+mixture and pass noise to the AIC. Finally the AIC suppresses the
+residual noise in the FBF output through adaptive filtering. Outputs
+of the modulesYFBF(k,l )∈ C, YABM(k,l )∈ CM andYAIC(k,l )∈ C
+are given as
+YFBF(k,l ) =WH
+FBF(k)Y(k,l ), (4)
+YABM(k,l ) =Y(k,l )−WABM(k,l )YFBF(k,l ), (5)
+YAIC(k,l ) =YFBF(k,l )−WH
+AIC(k,l )YABM(k,l ), (6)
+where WFBF(k)∈ CM , WABM(k,l )∈ CM and WAIC(k,l )∈ CM
+represent filter weights of the three modules and H denotes Her-
+mitian transpose. In the proposed method, the obtained DV AD at
+zone-1 ˆP1(l) is binarized to a hard V AD label
+δ(l) =
+(
+1 if ˆP1(l)≥Pthreshold
+0 otherwise (7)
+Thenδ(l) andeδ(l) = 1−δ(l) are used to control the adaptive filter
+weights update of ABM and AIC with the normalized least mean
+square (NLMS) algorithm
+WABM(k,l +1) =WABM(k,l )+δ(l)µ1
+Y ∗
+FBF(k,l )YABM(k,l )
+PFBF(k,l ) , (8)
+WAIC(k,l +1) =WAIC(k,l )+eδ(l)µ2
+Y ∗
+AIC(k,l )YABM(k,l )
+PABM(k,l ) , (9)
+where µ1 and µ2 are constant step size factors. PFBF(k,l ) and
+PABM(k,l ) represent the power of the FBF and ABM output respec-
+tively smoothed by factorsα andβ as
+PFBF(k,l ) =αPFBF(k,l−1)+(1−α)|YFBF(k,l )|2, (10)
+PABM(k,l ) =βPABM(k,l−1) + (1−β)YH
+ABM(k,l )YABM(k,l ). (11)
+Withδ(l) the update of ABM is expected to occur exclusively dur-
+ing the target speaker’s speech frames, while the AIC update is con-
+ducted during the target speaker’s silent frames.
+2.4. DPCRN based post-filter
+The dual-path CRN (DPCRN) [21] is a lightweight speech enhance-
+ment network, ranking the second in the wide band scenario track
+of the Interspeech 2021 Deep Noise Suppression (DNS) challenge
+[22]. As depicted in Fig. 1, it consists of a convolutional en-
+coder/decoder and a dual-path RNN (DPRNN) [23]. In the DPRNN
+module, the intra-frame RNN block models the spectral patterns in
+a single frame, and the inter-frame RNN block models the time de-
+pendency. Although suppressing more interference, the AIC output
+1487
+Authorized licensed use limited to: HEFEI UNIVERSITY OF TECHNOLOGY. Downloaded on January 12,2026 at 11:25:22 UTC from IEEE Xplore.  Restrictions apply. 
+
+often suffers from the distortion of the desired speech. Note that
+the FBF output YFBF(k,l ) preserves more target speech. Therefore,
+we combine YFBF(k,l ) and YAIC(k,l ) into a dual-channel spectro-
+gram, whose real and imaginary parts are sent as the network input.
+Considering that without auxiliary information the network cannot
+accurately identify the target speaker in overlapping speech seg-
+ments, we concatenate the soft DV ADˆP and the encoder output Yen
+along the channel axis, similar to the approach in [24]. The decoder
+outputs real and imaginary parts of the complex ratio mask (CRM)
+MS(k,l )∈ C. Multiplying the mask with the FBF output, the
+estimated target speech ˆS(k,l ) =MS(k,l )YFBF(k,l ) is obtained.
+3. EXPERIMENTAL SETUP
+3.1. Datasets
+We generate the simulated dataset using the source-image model
+[25]. Referring to the data preparation procedure in [26], the room
+size ranges uniformly from 3m×2.5m×2.2m to 9m×5m×3.5m and
+the reverberation time RT60 ranges uniformly from 0.4s to 1.2s. We
+use a uniform six-microphone circular array of radius 3.5 cm, which
+is placed randomly in the room at the height of 1m and at least 1m
+from the walls. As depicted in Fig. 2. (a), the horizontal plane is di-
+vided into six zones uniformly, with each zone covering a 60◦-span
+area. We choose the first microphone as the reference channel and
+zone-1 as the target zone, which corresponds to an azimuthal range
+from−30◦ to 30◦ relative to the first microphone. As depicted by
+the blue dashed line, the target speaker is positioned between−20◦
+and 20◦, to ensure the absence of interfering speakers within a spec-
+ified range (10◦).
+With a length of 12s and a sampling rate of 16 kHz, the multi-
+channel mixture sample consists of reverberant speech from between
+1 and 3 speakers and diffuse noise. The distance between the micro-
+phone array and the speakers ranges from 0.5m to 5m, and the speak-
+ers are at least 0.5m away from the walls. The heights of the speakers
+are sampled from a normal distribution with mean 1.3m and stan-
+dard deviation 0.08m. We use clean speech data from Librispeech
+[27] and noise data from QUT-NOISE [28], Nonspeech [29] and the
+noise subset in MUSAN [30]. The approach in [31] is employed to
+generate diffuse noise. The SNR is sampled between 3 dB and 12
+dB, and the signal-to-interference ratio (SIR) is sampled betwen -3
+dB and 3 dB. Because the DV AD module and the PF are trained sep-
+arately, two datasets are generated from the same source data. Each
+dataset consists of 4000, 1000, 500 RIRs and 30000, 5000 and 1500
+samples, respectively for training, validation and testing.
+3.1.1. Dataset for directional VAD
+In the samples for training the DV AD module, the azimuths of the
+speakers are uniformly sampled and the speech duration ranges from
+4s to 6s. The ground-truth V AD labels of multi-speakers are obtained
+by applying the rV AD algorithm [32] to reverberant speech of each
+speaker before mixing and then converted to DV AD ones. An exam-
+ple of the DV AD label is shown in Fig. 2. (b).
+3.1.2. Dataset for post-filtering
+There exists a target speaker and between 0 and 2 competing speak-
+ers in each sample for training the PF. The azimuth of the target
+speaker is sampled from a normal distribution with mean 0◦ and
+standard deviation 10◦, and limited to a range between −20◦ and
+20◦. The competing speakers are restricted outside zone-1. Speech
+duration of the target speaker is modified to be between 6s and 8s.
+Moreover, we recorded half an hour of real-world noisy test data in
+a small conference room using a microphone array identical to the
+simulated setup. Yamaha HS5 monitoring loudspeakers were placed
+zone-2
+zone-3
+zone-1
+zone-6
+zone-5
+zone-4
+mic2
+mic3
+mic4
+mic6
+mic5
+3.5cm
+mic1
+target
+speaker
+(a)
+−0.1
+0.1
+−0.1
+0.1
+−0.1
+0.1
+−0.1
+0.1
+−0.1
+0.1
+0 2 4 6 8 10 12
+Time (s)
+−0.1
+0.1
+Signal
+0
+1
+0
+1
+0
+1
+0
+1
+0
+1
+0
+1
+DVAD
+label
+spk1
+spk2
+spk3 (b)
+−0.1
+0.1
+−0.1
+0.1
+−0.1
+0.1
+−0.1
+0.1
+−0.1
+0.1
+0 2 4 6 8 10 12
+Time (s)
+−0.1
+0.1
+Signal
+0
+1
+0
+1
+0
+1
+0
+1
+0
+1
+0
+1
+DVAD
+label
+est-soft
+est-hard
+(c)
+Fig. 2. (a) Array and zone configuration. (b) Example of DV AD
+labeling with 3 speakers at −14◦, 108◦ and 183◦. (c) Example of
+DV AD estimation with one target speaker and two interferers.
+at different positions to play the audio to simulate human speakers,
+and the speech data was drawn from a Chinese speech dataset [33].
+3.2. Model setup
+A square root Hanning window is applied to the multi-channel mix-
+ture signal with a 32ms frame length and a 16ms frame shift. The
+STFT results contain F =257 frequency-bins per frame. The FBF
+employed in our method is a robust super-directive beamformer [34].
+In the DV AD module, all CNN layers are configured with 16 chan-
+nels and the kernel size is set as{(3,3),(3,1),(3,1)} in the frequency
+and time axes. Each of the four GRUs in the RNN layer has 32 hid-
+den units, while the output dimensions of the FC layers are 36 and 6.
+The DV AD module has approximately 33K parameters in total and
+a computational complexity of 31M MACs per second.
+For the PF we adopt the same model configuration as that of
+DPCRN-3 in [21], with the exception of removing the instance layer
+normalization (iLN) module and modifying the hidden dimension
+within the DPRNN modules from 128 to 134 due to the concatenated
+DV AD tensor. Consequently, these modifications result in the PF
+having about 0.84M parameters and a computation load of 1.79G
+MACs per second. To ensure the causality of our method, causal
+convolutions and uni-directional inter-frame RNNs are employed in
+the modules.
+3.3. Training setup
+Training of the DV AD module is viewed as multi-class classification
+withN=6 classes, using the weighted binary cross-entropy loss
+LDV AD=−
+XN
+n=1
+(γPn log( ˆPn)+(1−Pn) log(1− ˆPn)) (12)
+whereγ >1 is a weighting factor to increase the recall rate, and we
+setγ = 10 in our experiments. Utilizing the spatial symmetry of the
+circular array, in each iteration we randomly roll the mixture and its
+DV AD label along the channel axis.
+The PF is trained on the complex compressed mean-squared er-
+ror (ccMSE) loss [35]
+LPF =λMSE(|S|cejφ,| ˆS|cej ˆφ)+(1−λ)MSE(|S|c,| ˆS|c) (13)
+1488
+Authorized licensed use limited to: HEFEI UNIVERSITY OF TECHNOLOGY. Downloaded on January 12,2026 at 11:25:22 UTC from IEEE Xplore.  Restrictions apply. 
+
+Table 1. The objective scores on the simulated test set. BOLD
+indicates the best score in each metric.
+Params
+(M)
+MACs
+(G/s) SI-SDR PESQ ESTOI
+Noisy - - -10.785 1.106 0.325
+FT-JNF 0.88 14.36 4.632 1.664 0.696
+PF-mono 0.82 1.71 1.269 1.436 0.648
+PF-dual 0.82 1.71 3.318 1.670 0.697
+PF-DV AD-1ch 0.83 1.72 3.860 1.686 0.709
+PF-DV AD-6ch 0.87 1.82 3.830 1.687 0.711
+Table 2. The subjective scores on the simulated/real-world test set.
+DNSMOS P.835 metrics include speech quality (SIG), background
+noise quality (BAK), and overall quality (OVRL).
+SIG BAK OVRL
+FT-JNF 2.664/2.892 3.962/3.697 2.191/2.528
+PF-DV AD-1ch 2.635/2.813 3.965/3.776 2.167/2.500
+PF-DV AD-6ch 2.635/3.205 3.967 /3.891 2.169/2.874
+where c is a compression factor and λ is a weighting factor. We
+setc = 0.3 andλ = 0.3 in our experiments. During training, the
+ground-truth DV AD label and the GSC output guided by it are pro-
+vided as input. In the inference stage, the estimated DV AD and the
+corresponding GSC output are used.
+4. RESULTS AND DISCUSSION
+We evaluate the DV AD module on the test set for DV AD and the
+model achieves its best performance with precision of 94% and recall
+of 95% when Pthreshold set to 0.5. This threshold is selected for the
+subsequenet experiments and an example from the test set for post-
+filtering is displayed in Fig. 2. (c). Four types of PFs have been
+evaluated on the simulated test set, each with its respective input
+features as follows:
+• PF-mono: GSC output.
+• PF-dual: FBF output and GSC output.
+• PF-DV AD-1ch: FBF output, GSC output and DV AD in zone-1.
+• PF-DV AD-6ch: FBF output, GSC output and DV AD in all zones.
+4.1. Baseline and evaluation metrics
+We compare our method with a recently proposed end-to-end model
+FT-JNF [26], which is implemented with the open-source code1 and
+the inter-frame bi-directional long-short-term memory (BLSTM)
+layer is replaced by a uni-directional one to satisfy causality in our
+experiments. Objective metrics are used, including scale-invariant
+signal-to-distortion ratio (SI-SDR) [36], perceptual evaluation of
+speech quality (PESQ) [37] and extended short-time objective in-
+telligibility (ESTOI) [38]. DNN-based non-intrusive subjective
+metrics DNSMOS P.835 [39] is also used to evaluate subject speech
+performance both on the simulated and the real-world test set.
+4.2. Results
+We train all networks using the same training set. As is presented
+in Table 1, the simple monaural PF represented by PF-mono, has
+achieved a significant improvement of over 10 dB in SI-SDR. How-
+ever, a substantial performance gap exists when compared to FT-
+JNF. The introduction of FBF output and DV AD information pro-
+gressively enhances the PF’s performance. With the inclusion of
+FBF output, speech distortion caused by the GSC can be effectively
+compensated for, resulting in evident improvements across all objec-
+tive metrics. PF-dual outperforms FT-JNF in terms of PESQ and ES-
+TOI scores. With the assistance of DV AD, even better performance
+can be achieved by PF-DV AD-1ch and PF-DV AD-6ch. Compared to
+1https://github.com/sp-uhh/deep-non-linear-filter
+0
+4
+8Frequency (kHz)
+(a) noisy
+ (b) ideal FBF output of target speech
+0 2 4 6
+Time (s)
+0
+4
+8Frequency (kHz)
+(c) FT-JNF
+0 2 4 6
+Time (s)
+(d) PF-DVAD-6ch
+Fig. 3. Spectrograms of a real-world example: (a) noisy mixture, (b)
+ideal FBF output of target speech, (c) enhanced result by FT-JNF, (d)
+enhanced result by PF-DV AD-6ch.
+FT-JNF, our method achieves similar objective scores while reduc-
+ing computational costs by nearly 90% (1.82G MACs vs. 14.36G
+MACs). The counted parameters and computational load here en-
+compass the DV AD, GSC and PF modules.
+The two best-performing PFs as evaluated on the simulated test
+set are selected for comparison with FT-JNF using both the simu-
+lated and the real-world data. The DNSMOS scores are shown in
+Table 2. Note that the metrics of the noisy speech are not shown
+since it is impossible to evaluate the quality of the target speech in
+an unprocessed multi-speaker recording. The three models achieve
+similar scores on the simulated test set, with FT-JNF slightly lead-
+ing in SIG and OVRL scores. However, the impact of introduc-
+ing complete DV AD is evident when evaluating DNSMOS on real-
+world data. The PF-DV AD-6ch significantly outperforms FT-JNF
+and PF-DV AD-1ch, especially in terms of the SIG score. It sug-
+gests that the activity distribution of all speakers provided by the
+comprehensive DV AD results in less spatial information loss during
+post-filtering, thereby contributing to a more robust extraction of the
+target speech. An audio sample is shown in Fig. 3. In the enhanced
+result by PF-DV AD-6ch, the noise is suppressed more effectively in
+non-speech segments, while significantly more speech components
+are preserved2.
+5. CONCLUSION
+In this paper, we propose a hybrid multi-channel target speaker ex-
+traction system, which combines the robust GSC with a dedicated
+neural post-filter. We design a DV AD module to fully exploit the spa-
+tial information of multi-speakers. The DV AD results are not only
+utilized to enhance the GSC output, but also incorporated as auxil-
+iary information to assist interference suppression in the post-filter.
+Experimental results demonstrate that our proposed method achieves
+comparable performance to a state-of-the-art end-to-end method on
+simulated data, and outperforms it on real-world data.
+6. ACKNOWLEDGEMENTS
+This work was supported by the National Natural Science Founda-
+tion of China (Grant No. 12274221).
+2Examples are available at https://fab0504.github.io/TSE-DV AD/
+1489
+Authorized licensed use limited to: HEFEI UNIVERSITY OF TECHNOLOGY. Downloaded on January 12,2026 at 11:25:22 UTC from IEEE Xplore.  Restrictions apply. 
+
+7. REFERENCES
+[1] K. ˇZmol´ıkov´a, M. Delcroix, K. Kinoshita, T. Ochiai,
+T. Nakatani, L. Burget, and J. ˇCernock´y, “SpeakerBeam:
+Speaker Aware Neural Network for Target Speaker Extraction
+in Speech Mixtures,” IEEE J. Sel. Top. Signal Process. , vol.
+13, no. 4, pp. 800–814, 2019.
+[2] S. He, H. Li, and X. Zhang, “Speakerfilter: Deep Learning-
+Based Target Speaker Extraction Using Anchor Speech,” in
+ICASSP, 2020, pp. 376–380.
+[3] X. Le, L. Chen, C. He, Y . Guo, C. Chen, X. Xia, and
+J. Lu, “Personalized Speech Enhancement Combining Band-
+Split RNN and Speaker Attentive Module,” in ICASSP, 2023,
+pp. 1–2.
+[4] S. Gannot, E. Vincent, S. Markovich-Golan, and A. Ozerov,
+“A Consolidated Perspective on Multimicrophone Speech En-
+hancement and Source Separation,” IEEE/ACM Trans. Audio
+Speech Lang. Process., vol. 25, no. 4, pp. 692–730, 2017.
+[5] T. Dietzen, A. Spriet, W. Tirry, S. Doclo, M. Moonen, and
+T. van Waterschoot, “Comparative Analysis of Generalized
+Sidelobe Cancellation and Multi-Channel Linear Prediction for
+Speech Dereverberation and Noise Reduction,” IEEE/ACM
+Trans. Audio Speech Lang. Process. , vol. 27, no. 3, pp. 544–
+558, 2018.
+[6] S. Nordholm, I. Claesson, and B. Bengtsson, “Adaptive Array
+Noise Suppression of Handsfree Speaker Input in Cars,” IEEE
+Trans. Veh. Technol., vol. 42, no. 4, pp. 514–518, 1993.
+[7] O. Hoshuyama, B. Begasse, A. Sugiyama, and A. Hirano, “A
+Real Time Robust Adaptive Microphone Array Controlled by
+an SNR Estimate,” in ICASSP, 1998, vol. 6, pp. 3605–3608.
+[8] O. Hoshuyama, A. Sugiyama, and A. Hirano, “A Robust Adap-
+tive Beamformer for Microphone Arrays with a Blocking Ma-
+trix Using Constrained Adaptive Filters,” IEEE Trans. Signal
+Process., vol. 47, no. 10, pp. 2677–2684, 1999.
+[9] Q. Yang, Y . Zhou, Y . Ma, and H. Liu, “A New Frequency-
+Domain Adaptive Blocking Matrix Design for Generalized
+Sidelobe Cancellation,” in ICSP, 2020, vol. 1, pp. 109–113.
+[10] N. Sun, Y . Zhou, Y . Ma, and Y . Chen, “A New Lightweight
+Dual-Microphone RNN-V AD Assist Adaptive Blocking Ma-
+trix for Dual-Channel Speech Enhancement,” in ICSPCC,
+2021, pp. 01–05.
+[11] Z. Zhang, Y . Xu, M. Yu, S.-X. Zhang, L. Chen, and D. Yu,
+“ADL-MVDR: All Deep Learning MVDR Beamformer for
+Target Speech Separation,” in ICASSP, 2021, pp. 6089–6093.
+[12] Y . Xu, Z. Zhang, M. Yu, S.-X. Zhang, and D. Yu, “Generalized
+Spatio-Temporal RNN Beamformer for Target Speech Separa-
+tion,” in Interspeech, 2021, pp. 3076–3080.
+[13] T. Ochiai, M. Delcroix, R. Ikeshita, K. Kinoshita, T. Nakatani,
+and S. Araki, “Beam-TasNet: Time-Domain Audio Separation
+Network Meets Frequency-Domain Beamformer,” in ICASSP,
+2020, pp. 6384–6388.
+[14] B. Tolooshams, R. Giri, A. H. Song, U. Isik, and A. Krish-
+naswamy, “Channel-Attention Dense U-Net for Multichannel
+Speech Enhancement,” in ICASSP, 2020, pp. 836–840.
+[15] K. Tan, Z.-Q. Wang, and D. Wang, “Neural Spectrospatial
+Filtering,” IEEE/ACM Trans. Audio Speech Lang. Process. ,
+vol. 30, pp. 605–621, 2022.
+[16] Y . Yang, C. Quan, and X. Li, “MCNET: Fuse Multiple Cues
+for Multichannel Speech Enhancement,” in ICASSP, 2023, pp.
+1–5.
+[17] A. S. Subramanian, C. Weng, M. Yu, S.-X. Zhang, Y . Xu,
+S. Watanabe, and D. Yu, “Far-Field Location Guided Target
+Speech Extraction Using End-to-End Speech Recognition Ob-
+jectives,” in ICASSP, 2020, pp. 7299–7303.
+[18] Z. Tang, J. D. Kanu, K. Hogan, and D. Manocha, “Re-
+gression and Classification for Direction-of-Arrival Estimation
+with Convolutional Recurrent Neural Networks,” in Inter-
+speech, 2019, pp. 654–658.
+[19] S. Adavanne, A. Politis, J. Nikunen, and T. Virtanen, “Sound
+Event Localization and Detection of Overlapping Sources Us-
+ing Convolutional Recurrent Neural Networks,” IEEE J. Sel.
+Top. Signal Process., vol. 13, no. 1, pp. 34–48, 2018.
+[20] K. Tan and D. Wang, “Learning Complex Spectral Mapping
+With Gated Convolutional Recurrent Networks for Monaural
+Speech Enhancement,” IEEE/ACM Trans. Audio Speech Lang.
+Process., vol. 28, pp. 380–390, 2019.
+[21] X. Le, H. Chen, K. Chen, and J. Lu, “DPCRN: Dual-Path Con-
+volution Recurrent Network for Single Channel Speech En-
+hancement,” in Interspeech, 2021, pp. 2811–2815.
+[22] C. K. Reddy, H. Dubey, K. Koishida, A. Nair, V . Gopal, R. Cut-
+ler, S. Braun, H. Gamper, R. Aichner, and S. Srinivasan, “In-
+terspeech 2021 deep noise suppression challenge,” 2021.
+[23] Y . Luo, Z. Chen, and T. Yoshioka, “Dual-Path Rnn: Efficient
+Long Sequence Modeling for Time-Domain Single-Channel
+Speech Separation,” in ICASSP, 2020, pp. 46–50.
+[24] M. Delcroix, K. Zmolikova, T. Ochiai, K. Kinoshita, and
+T. Nakatani, “Speaker Activity Driven Neural Speech Extrac-
+tion,” in ICASSP, 2021, pp. 6099–6103.
+[25] J. B. Allen and D. A. Berkley, “Image Method for Efficiently
+Simulating Small-room Acoustics,” J. Acoust. Soc. Am. , vol.
+65, no. 4, pp. 943–950, 1979.
+[26] K. Tesch and T. Gerkmann, “Insights Into Deep Non-Linear
+Filters for Improved Multi-Channel Speech Enhancement,”
+IEEE/ACM Trans. Audio Speech Lang. Process. , vol. 31, pp.
+563–575, 2022.
+[27] V . Panayotov, G. Chen, D. Povey, and S. Khudanpur, “Lib-
+rispeech: An ASR Corpus Based on Public Domain Audio
+Books,” in ICASSP, 2015, pp. 5206–5210.
+[28] D. Dean, S. Sridharan, R. V ogt, and M. Mason, “The QUT-
+NOISE-TIMIT Corpus for Evaluation of V oice Activity Detec-
+tion Algorithms,” in Interspeech, 2010, pp. 3110–3113.
+[29] G. Hu and D. Wang, “A Tandem Algorithm for Pitch Esti-
+mation and V oiced Speech Segregation,” IEEE Trans. Audio
+Speech Lang. Process., vol. 18, no. 8, pp. 2067–2079, 2010.
+[30] D. Snyder, G. Chen, and D. Povey, “Musan: A music, speech,
+and noise corpus,” 2015.
+[31] E. A. Habets and S. Gannot, “Generating Sensor Signals in
+Isotropic Noise Fields,” J. Acoust. Soc. Am. , vol. 122, no. 6,
+pp. 3464–3470, 2007.
+[32] Z.-H. Tan, A. kr. Sarkar, and N. Dehak, “rV AD: An Un-
+supervised Segment-Based Robust V oice Activity Detection
+Method,” Computer Speech & Language , vol. 59, pp. 1–21,
+2020.
+[33] Magic Data Technology Co., Ltd., “ http:
+//www.imagicdatatech.com/index.php/home/
+dataopensource/data_info/id/101,” 2019.
+[34] S. Doclo and M. Moonen, “Superdirective beamforming robust
+against microphone mismatch,” in ICASSP, 2007, vol. 15, pp.
+617–631.
+[35] A. Ephrat, I. Mosseri, O. Lang, T. Dekel, K. Wilson, A. Has-
+sidim, W. T. Freeman, and M. Rubinstein, “Looking to Lis-
+ten at the Cocktail Party: A Speaker-Independent Audio-Visual
+Model for Speech Separation,” ACM Trans. Graphics, vol. 37,
+no. 4, pp. 1–11, 2018.
+[36] J. L. Roux, S. Wisdom, H. Erdogan, and J. R. Hershey, “SDR
+– Half-Baked or Well Done?,” in ICASSP, 2019, pp. 626–630.
+[37] A. Rix, J. Beerends, M. Hollier, and A. Hekstra, “Percep-
+tual Evaluation of Speech Quality (PESQ)-a New Method
+for Speech Quality Assessment of Telephone Networks and
+Codecs,” in ICASSP, 2001, vol. 2, pp. 749–752.
+[38] J. Jensen and C. H. Taal, “An Algorithm for Predicting the In-
+telligibility of Speech Masked by Modulated Noise Maskers,”
+IEEE/ACM Trans. Audio Speech Lang. Process. , vol. 24, no.
+11, pp. 2009–2022, 2016.
+[39] C. K. A. Reddy, V . Gopal, and R. Cutler, “Dnsmos P.835: A
+Non-Intrusive Perceptual Objective Speech Quality Metric to
+Evaluate Noise Suppressors,” in ICASSP, 2022, pp. 886–890.
+1490
+Authorized licensed use limited to: HEFEI UNIVERSITY OF TECHNOLOGY. Downloaded on January 12,2026 at 11:25:22 UTC from IEEE Xplore.  Restrictions apply. 

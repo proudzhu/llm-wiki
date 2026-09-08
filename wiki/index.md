@@ -226,7 +226,8 @@
 | [[entities/shigeyuki-hashimoto\|Shigeyuki Hashimoto]] | University of Hyogo — co-author on frequency-domain simultaneous equations method | 2006 |
 | [[entities/yusuke-fujita\|Yusuke Fujita]] | Catsystem Corporation — co-author on experimental verification of simultaneous equations method | 2006 |
 | [[entities/xiaobin-rong\|Xiaobin Rong]] | Nanjing University — lead author of GTCRN ultralightweight speech enhancement | 2026-05-24 |
-| [[entities/tianchi-sun\|Tianchi Sun]] | Nanjing University — co-author of GTCRN | 2026-05-24 |
+| [[entities/tianchi-sun\|Tianchi Sun]] | Nanjing University — co-author of GTCRN and lead author of the hybrid GSC+DVAD speech extraction system | 2026-09-08 |
+| [[entities/tong-lei\|Tong Lei]] | Nanjing University — co-author of the hybrid GSC+DVAD speech extraction system | 2026-09-08 |
 | [[entities/xu-zhang\|Xu Zhang]] | Jiangsu Thingstar IT — co-author of GTCRN | 2026-05-24 |
 | [[entities/yuxiang-hu\|Yuxiang Hu]] | Horizon Robotics — co-author of GTCRN | 2026-05-24 |
 | [[entities/changbao-zhu\|Changbao Zhu]] | Horizon Robotics — co-author of GTCRN | 2026-05-24 |
@@ -1053,6 +1054,7 @@
 | [[concepts/magnitude-phase-snr\|mSNR and pSNR]] | Diagnostic metrics decomposing separation quality into magnitude (mSNR) and phase (pSNR) accuracy, isolating the compensation effect | 2026-09-06 |
 | [[concepts/filtered-x-mwf\|Filtered-x MWF (FxMWF)]] | Integrates multichannel noise reduction and feedforward ANC into one Wiener filter computed on secondary-path-filtered references; ANC part independent of NR delay | 2026-09-07 |
 | [[concepts/open-fitting-noise-leakage\|Open-Fitting Noise Leakage]] | Unprocessed ambient noise entering the ear canal through an open hearing-aid fitting; lowers SNR at the tympanic membrane and motivates integrated ANC+NR | 2026-09-07 |
+| [[concepts/directional-vad\|Directional VAD (DVAD)]] | CRN-based per-spatial-zone speaker activity estimation; binarized target-zone label gates GSC ABM/AIC adaptation while the soft multi-zone output conditions a neural post-filter | 2026-09-08 |
 
 ---
 
@@ -1261,6 +1263,7 @@
 | [[sources/wang-2021-magnitude-phase-compensation\|Wang, Wichern & Le Roux 2021: On the Compensation Between Magnitude and Phase in Speech Separation]] | Explains why magnitude losses improve PESQ/eSTOI/WER but degrade SI-SDR: implicit magnitude-phase compensation in complex/time-domain losses, diagnosed via mSNR/pSNR | 2026-09-06 |
 | [[sources/serizel-2010-integrated-anc-nr-hearing-aids\|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] | Integrates multichannel Wiener-filter noise reduction and feedforward ANC into a single filter (FxMWF); ~12 dB SNR improvement in open-fitting hearing aids where cascaded topologies fail | 2026-09-07 |
 | [[sources/xiao-2023-spatially-selective-anc\|Xiao, Xu & Zhao 2023: Spatially Selective ANC]] | Foundational SSANC paper — Frost-type ReIR spatial constraint on hybrid ANC physically preserves desired-direction sound (NR 29.1 dB, SDI −25.1 dB, ~2% secondary-source energy of reconstruct-based systems) | 2026-09-08 |
+| [[sources/sun-2024-lightweight-hybrid-speech-extraction\|Sun, Lei & Zhang 2024: A Lightweight Hybrid Multi-Channel Speech Extraction System with Directional VAD]] | DVAD-gated robust GSC + DPCRN post-filter: 33K-param CRN estimates per-zone speaker activity to gate ABM/AIC NLMS updates and condition the post-filter; matches FT-JNF at ~90% fewer MACs (1.82 vs 14.36 G/s) and beats it on real-world DNSMOS (ICASSP 2024) | 2026-09-08 |
 
 ---
 
@@ -1291,7 +1294,7 @@
 | [[synthesis/secondary-path-modeling-evolution|Secondary Path Modeling Evolution]] | 离线→在线→免建模→绕过：四条技术路线的决策矩阵与演进趋势 | Kuo 1999, Benois 2020, Liang 2026, Zhu 2020 |
 | [[synthesis/joint-multitask-ultra-low-latency-se|Joint Multi-Task SE & Ultra-Low-Latency Paradigm]] | 6 sources + theory: task dissolution (AEC+NS+DR+OVC+AHS), 0–20ms latency tiers, linear RNN/SSM replacing LSTM/ConvTasNet, HALO+FRS redundancy frontier | Indenbom 2023, Hao 2025, Zhao 2026, Ashur 2026, Østergaard 2026, Benslimane 2026, Rath 2026 |
 | [[synthesis/deep-speech-enhancement|Deep Speech Enhancement]] | Architectural/methodological evolution 2018→2026 along 6 axes: target (IBM→cIRM→CCM→DF), domain (hybrid time+freq loss), backbone (CRN→DPCRN→Conformer→Mamba/linear RNN/SNN), efficiency (~1000× via 4 orthogonal techniques), multi-channel (array-invariant Geo-DConv), conditioning (PSE/TSE/OVC) | Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zheng 2023, Rong 2024, Chao 2024, Yang 2026, Liu 2026, Apostolidis 2026, Østergaard 2026 |
-| [[synthesis/multi-channel-speech-enhancement\|Multi-Channel Speech Enhancement]] | From coherence models to geometry-conditioned neural filters: 5 axes (estimate what, robustness, input/output, geometry, hybrid) across 17 sources 2005-2026 | 2026-08-16 |
+| [[synthesis/multi-channel-speech-enhancement\|Multi-Channel Speech Enhancement]] | From coherence models to geometry-conditioned neural filters: 5 axes (estimate what, robustness, input/output, geometry, hybrid incl. DVAD-gated GSC) across sources 2005-2026 | 2026-09-08 |
 | [[synthesis/low-complexity-neural-vocoders\|Low-Complexity Neural Vocoders]] | Complexity-quality frontier from WaveRNN to FARGAN; each 5× reduction moves speech structure (envelope, periodicity) out of the network | 2026-08-30 |
 
 ---
@@ -1314,10 +1317,10 @@
 
 ## Statistics
 
-- **Total pages**: 1263
-- **Entities**: 545
-- **Concepts**: 489
-- **Sources**: 199
+- **Total pages**: 1266
+- **Entities**: 546
+- **Concepts**: 490
+- **Sources**: 200
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-09-08

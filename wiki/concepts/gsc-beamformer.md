@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-08-30
+updated: 2026-09-08
 sources:
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
+  - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
 tags:
   - beamforming
   - adaptive-filtering
@@ -61,6 +62,10 @@ Taseska et al. develop the [[concepts/informed-gsc|informed GSC]], where the FBF
 
 [[sources/yan-2014-dual-mic-bt-noise-reduction|Yan et al. 2014]] instantiate the RTF-form GSC on a two-microphone Bluetooth headset (3–4 cm baseline, mouth 3–4 cm from the reference mic — near-field, quasi-fixed geometry), with beamforming matrix $A = [1, W_s]$ and blocking matrix $B = [1, -W_s]$ built from the single RTF $W_s$. Two findings generalize: (i) a blocking matrix **pre-modeled in a quiet factory environment** is robust to wearing-angle mismatch (0°/45°/90°) and inter-user variation, because the near-field path is dominated by geometry — unlike noise-environment adaptive RTF estimation (Cohen 2004), which suffers large modeling errors at low SNR; (ii) under mismatch, speech leaks into the noise reference, equivalent to operating at $\beta = 1$ on the [[concepts/speech-distortion-constrained-noise-reduction|SD-constrained optimal filter]] curve — GSC trades some noise reduction for much lower speech distortion than coherence-function post-filters. See [[concepts/atf-gsc|ATF-GSC]].
 
+## DVAD-Gated Robust GSC (Sun et al. 2024)
+
+[[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024]] control the ABM and AIC adaptation with a [[concepts/directional-vad|directional VAD]] label instead of an SNR estimate or a single-speaker VAD: the binarized target-zone DVAD $\delta(l)$ gates the ABM's NLMS update (update during target-active frames, so the ABM learns to block the target from the noise reference), while its complement $\bar{\delta}(l)$ gates the AIC's update (update during target-silent frames, when the noise reference is free of target leakage). This makes the adaptation control **multi-speaker-safe** — prior VAD-assisted ABMs assume a single speaker and degrade with interfering speakers. The GSC output feeds a DPCRN post-filter that also receives the soft full-zone DVAD, yielding a lightweight (0.87M params, 1.82 GMACs/s) multi-channel TSE system that matches the end-to-end FT-JNF baseline on simulated data and beats it on real-world recordings.
+
 ## Related Concepts
 
 - [[mpdr-beamformer|MPDR Beamformer]]
@@ -71,9 +76,11 @@ Taseska et al. develop the [[concepts/informed-gsc|informed GSC]], where the FBF
 - [[beamforming|Beamforming]]
 - [[concepts/informed-spatial-filter|Informed Spatial Filter (ISF)]] — paradigm unifying the informed GSC (Taseska & Habets 2018)
 - [[concepts/informed-gsc|Informed GSC]] — bin-wise detector-controlled GSC with RLS noise canceller
+- [[concepts/directional-vad|Directional VAD (DVAD)]] — multi-speaker-safe adaptation gate for the robust GSC
 
 ## Related Sources
 
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] — informed GSC with bin-wise detector-controlled FBF/BM/NC and RLS noise canceller (Ch 5)
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
 - [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]]
+- [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024: Lightweight Hybrid Multi-Channel Speech Extraction with DVAD]] — DVAD-gated ABM/AIC adaptation

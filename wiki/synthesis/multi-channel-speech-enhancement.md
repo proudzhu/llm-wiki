@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-16
-updated: 2026-09-06
+updated: 2026-09-08
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
@@ -30,6 +30,7 @@ sources:
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
   - raw/papers/braun-2015-residual-noise-control/full-text.md
   - raw/papers/hu-2026-abse-net/full-text.md
+  - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
 tags:
   - multi-channel-speech-enhancement
   - beamforming
@@ -45,6 +46,8 @@ tags:
   - neural-beamforming
   - evolution
   - differential-asr
+  - directional-vad
+  - target-speaker-extraction
 ---
 
 # Multi-Channel Speech Enhancement: From Coherence Models to Geometry-Conditioned Neural Filters
@@ -80,6 +83,7 @@ The distinction: this synthesis is about **spatial filtering** (beamforming, coh
 | [[sources/ruan-2024-speech-extraction-low-snr\|Ruan et al. 2024]] | 2024 | Estimate what | Blind extraction at −20 dB SNR: OGIVE with mixing-vector optimization + natural gradient; parameterization choice beats modeling sophistication |
 | [[sources/mittal-2026-adaptive-diagonal-loading-beamforming\|Mittal et al. 2026]] | 2026 | Robustness | Kantorovich-bounded adaptive diagonal loading; deterministic WNG guarantee via condition-number bound |
 | [[sources/deng-2026-joint-covariance-wng-mvdr\|Deng et al. 2026]] | 2026 | Robustness | Data-driven frequency-dependent WNG thresholds via dual-branch network + differentiable robust MVDR layer |
+| [[sources/sun-2024-lightweight-hybrid-speech-extraction\|Sun et al. 2024]] | 2024 | Hybrid | DVAD-gated robust GSC + DPCRN post-filter: a 33K-param CRN estimates per-zone speaker activity to gate ABM/AIC NLMS adaptation and condition the post-filter — matches end-to-end FT-JNF at ~90% fewer MACs (1.82 vs 14.36 G/s) and beats it on real-world DNSMOS |
 | [[sources/wechsler-2024-neural-directional-filtering\|Wechsler et al. 2024 (NDF)]] | 2024 | Hybrid | Founding neural directional filtering: FT-JNF complex mask renders a VDM with desired directivity from 4 mics — 3rd-order DMA pattern at 18.4 dB SDR where 6-mic CDMA was classical; training-set speaker density governs pattern fidelity |
 | [[sources/huang-2025-steerable-neural-directional-filtering\|Huang et al. 2025 (SNDF)]] | 2025 | Hybrid | Steerable NDF: one-hot steering direction conditioned into the F-BiLSTM initial states — a single trained model steers the learned pattern to any direction (switchable mid-recording); steering-invariant patterns, 6th-order from 4 mics |
 | [[sources/oviste-2026-neural-vslf-speech-enhancement\|Oviste et al. 2026]] | 2026 | Hybrid | HVSF: DNN predicts SCM + tradeoff → classical VSLF weights (MWF/MVDR/GEV as special cases) |
@@ -159,10 +163,11 @@ Across the whole corpus, MCSE methods can be placed on a single spectrum of **wh
 
 ## Insight 4: Hybrid DNN-Guided Linear Filters Preserve Interpretability
 
-A distinct 2026 cluster keeps the classical filter structure and uses a DNN only to estimate its parameters. The motivation is explicit: **interpretability + controllability + deployment robustness**.
+A distinct 2024–2026 cluster keeps the classical filter structure and uses a DNN only to estimate its parameters. The motivation is explicit: **interpretability + controllability + deployment robustness**.
 
 | Method | DNN estimates | Classical filter | Controllable knob |
 |--------|--------------|-------------------|-------------------|
+| [[sources/sun-2024-lightweight-hybrid-speech-extraction\|Sun 2024]] | Per-zone DVAD labels (33K CRN) | Robust GSC (DVAD-gated ABM/AIC NLMS) + DPCRN post-filter | DVAD binarization threshold, zone count $N$ |
 | [[sources/oviste-2026-neural-vslf-speech-enhancement\|HVSF (Oviste 2026)]] | $\hat\Phi_x, \hat\Phi_n, \hat\mu$ | VSLF (generalizes MWF/MVDR/GEV) | Tradeoff $\mu$, span $Q$ |
 | [[sources/liu-2026-scm-reconstruction-speech-enhancement\|R-MWF (Liu 2026)]] | (no DNN — analytical) | MWF with reconstructed SCM | Variance ratios $\psi_i, \psi_R, \psi_V$ |
 | [[sources/farmani-2026-virtual-mic-beamforming-hearing-aid\|Farmani 2026]] | (no DNN — power-function RTF) | MVDR with virtual mics | VM position $\lambda$, VM count |
@@ -171,6 +176,8 @@ A distinct 2026 cluster keeps the classical filter structure and uses a DNN only
 R-MWF is the extreme case: **no neural network at all**, just an online $\mathcal{O}(M^2(I+2))$ multiplicative update for variance ratios against predefined coherence matrices (rank-one RTF, diffuse sinc, white identity). Yet it outperforms DG-MVDR and MVJD-MWF baselines on real RealMAN recordings (LivingRoom6: SNRseg 4.66 vs 3.07 dB; STOI 0.76 vs 0.70). The lesson: for multi-source reverberant scenes, **the SCM model matters more than the estimator's neural capacity** — a well-structured analytical decomposition (source + diffuse + noise coherence) captures the field's physical structure that a black-box mask estimator must rediscover from data.
 
 HVSF generalizes this by letting the DNN predict the SCM decomposition (via Cholesky factorization to guarantee PSD) and the tradeoff parameter, then computing VSLF weights in closed form. The span dimension $Q$ — automatically estimated by thresholding generalized eigenvalues — provides a data-driven rank for the speech SCM that classical MWF/MVDR assume is known.
+
+**The control-only hybrid (Sun 2024)**: [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024]] occupy a distinct cell of this design space — the DNN estimates neither SCM nor filter weights, but **when the classical filter is allowed to adapt**. A 33K-parameter [[concepts/directional-vad|directional VAD]] CRN estimates per-zone speaker activity on a 6-mic circular array (precision 94% / recall 95%); the binarized target-zone label gates the GSC's ABM update (target-active frames, so the blocking matrix learns to block the target) while its complement gates the AIC update (target-silent frames, when the noise reference is target-free) — the multi-speaker-safe generalization of the single-speaker SNR/VAD controls of prior robust GSCs, and a learned counterpart of Taseska 2018's CDR-driven SAP gating of statistics updates (Insight 1). The soft full-zone DVAD additionally conditions the DPCRN post-filter. The cluster's efficiency argument is quantified here most starkly: the hybrid matches the causal FT-JNF end-to-end baseline's objective scores at **1.82 vs 14.36 GMACs/s (~90% MACs reduction, 0.87M params)** — and it is the one entry with a direct real-world transfer result: on real conference-room recordings the hybrid *beats* FT-JNF on all DNSMOS P.835 dimensions (SIG 3.205 vs 2.892, OVRL 2.874 vs 2.528), while the end-to-end baseline's simulated advantage does not transfer — evidence that the classical GSC's explicit spatial structure, not just its compute budget, is what generalizes.
 
 **The classical ancestor of the controllable knob (Braun 2015)**: the controllability motivation is not a 2026 invention. [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015]] showed that a single interpretable parameter can control a *different* axis than the distortion-vs-suppression trade-off: redefining the MWF/PMWF target as speech plus a fraction $c$ of the noise yields $\mathbf{h}_Z = (1-c)\,\mathbf{h}_X + c\,\mathbf{e}_1$, capping the maximum noise reduction and bounding speech distortion at $(1-c)^2$ — *without* the rank-one assumption that spectral-gain flooring requires, so the control survives in reverberant scenes. This knob crossed the classical→neural boundary: it reappears as the inference-time [[concepts/noise-attenuation-control|noise attenuation level (NAL)]] post-processor on μNet (2026), where it trades suppression depth against speech quality without retraining — evidence for Takeaway 1 that classical control structures outlive their statistical estimation machinery.
 
@@ -232,7 +239,7 @@ The corpus shows that **form factor and use case, not algorithmic novelty, are t
 
 ## Cross-Cutting Takeaways
 
-1. **Classical MCSE is not obsolete in 2026.** The coherence/CDR lineage (Schwarz → Löllmann) and the analytical SCM reconstruction (R-MWF) remain competitive in resource-constrained and data-scarce settings. The 2026 hybrid methods (HVSF, R-MWF, Farmani) deliberately keep classical filter structures and add data-driven estimation only where it adds value — preserving interpretability, controllability, and deployment robustness.
+1. **Classical MCSE is not obsolete in 2026.** The coherence/CDR lineage (Schwarz → Löllmann) and the analytical SCM reconstruction (R-MWF) remain competitive in resource-constrained and data-scarce settings. The 2024–2026 hybrid methods (Sun, HVSF, R-MWF, Farmani) deliberately keep classical filter structures and add data-driven estimation only where it adds value — preserving interpretability, controllability, and deployment robustness. Sun 2024 adds the sharpest evidence: a DNN that only *controls* GSC adaptation (plus a small post-filter) matches an end-to-end non-linear filter at 10% of its MACs and exceeds it on real-world recordings.
 
 2. **Robustness evolved from design-time to run-time to learned.** Lorenz 2005 (ellipsoidal RMVB) → Mittal 2026 (Kantorovich adaptive loading) → Deng 2026 (data-driven WNG). Each era subsumes the previous; the 2026 frontier makes robustness **frequency-adaptive**, a degree of freedom analytical methods structurally cannot exploit.
 

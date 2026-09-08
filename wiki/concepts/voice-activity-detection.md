@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-08-28
+updated: 2026-09-08
 sources:
   - raw/papers/liu-2025-pcen-mask-vad-speech-enhancement/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
   - raw/papers/kim-2014-doa-based-snr-estimation/full-text.txt
+  - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
 tags:
 - audio-processing
 - machine-learning
@@ -82,6 +83,10 @@ Apostolidis et al. (2026) train a [[concepts/convolutional-recurrent-network|CRN
 
 [[concepts/side-talk-detection|Side-Talk Detection (STD)]] (Yang et al. 2025) is a VAD-adjacent task that replaces the binary speech/pause decision with a three-class sample-level output over {wearer, bystander, non-speech}. The role label (wearer/bystander) is determined by the spatial relationship to the device rather than by speaker identity, so STD avoids the privacy issues of speaker diarization while still distinguishing target from interferer. In the [[concepts/differential-asr|differential ASR]] system, the STD model is a lightweight (~2M parameter) streaming TCN whose logits are downsampled to a 5-dimensional embedding and concatenated with the beamformer and microphone-selection features as input to a streaming RNN-T. The STD model thus functions as a VAD that contributes *role information* rather than just speech/pause information — closer to the OVAD/TVAD split used in headphone conversation detection but at sample level and without bone-conduction sensors.
 
+## Directional VAD: Spatially-Conditioned Activity Detection
+
+[[concepts/directional-vad|Directional VAD (DVAD)]] (Sun et al. 2024) replaces the "any speech?" question with a **per-zone spatial activity map**: the horizontal plane around a microphone array is partitioned into $N$ angular zones (by the array's beam-width), and a tiny CRN (33K params, LinSpec + sinIPD features) outputs one activity probability per zone at frame rate. Unlike TS-VAD, DVAD is conditioned on **space** (a known target zone, e.g., video conferencing) rather than speaker identity — no enrollment utterance needed. In the hybrid TSE system, the binarized target-zone DVAD gates robust-GSC adaptation (ABM updates during target-active frames, AIC during target-silent frames) while the soft full-zone DVAD conditions the neural post-filter; the full-zone variant generalizes best to real-world recordings.
+
 ## LRT Speech Activity Decision inside SNR Estimation
 
 Kim & Kim (2014) embed a **statistical model-based log-likelihood ratio test** (Sohn et al. 1999) as the speech-activity decision inside their [[concepts/doa-based-snr-estimation|DOA-based SNR estimator]]: per time-frequency bin, the LRT decides target-speech presence, and the noise-side power estimate is updated by recursive smoothing only under speech absence. This is a third VAD role beyond inference-time gating and training-time loss conditioning — a *component-level* soft machinery inside a classical statistical estimator, replacing the binary T-F masking decisions that cause musical noise. See also [[concepts/speech-presence-probability|Speech Presence Probability]] for the per-bin soft-decision generalization.
@@ -92,6 +97,7 @@ Kim & Kim (2014) embed a **statistical model-based log-likelihood ratio test** (
 - [[concepts/speech-presence-probability|Speech Presence Probability (SPP)]] — soft-decision VAD generalization
 - [[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence Noise Estimation]] — uses SPP as the speech-absence gate
 - [[concepts/side-talk-detection|Side-Talk Detection (STD)]] — three-class role-conditional VAD variant for smart-glasses WSR (Yang et al. 2025)
+- [[concepts/directional-vad|Directional VAD (DVAD)]] — per-zone spatially-conditioned activity map (Sun et al. 2024)
 - [[concepts/differential-asr|Differential ASR]] — uses STD embedding as a complementary frontend
 - [[transparency-mode|Transparency Mode]]
 - [[beamforming|Beamforming]]
@@ -109,3 +115,4 @@ Kim & Kim (2014) embed a **statistical model-based log-likelihood ratio test** (
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — uses SPP ($\rho < 0.1$ threshold) as the speech-absence gate for adaptive coherence and noise covariance updates
 - [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] — STD model as a role-conditional VAD frontend
 - [[sources/kim-2014-doa-based-snr-estimation|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] — statistical model-based LRT as the embedded speech-activity decision inside a DOA-based SNR estimator
+- [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024: Lightweight Hybrid Multi-Channel Speech Extraction with DVAD]] — directional VAD as per-zone spatial activity detection

@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-15
-updated: 2026-09-06
+updated: 2026-09-08
 sources:
   - raw/papers/zhang-2023-hybrid-ahs/full-text.txt
   - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
+  - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
 tags:
   - deep-learning
   - recurrent-neural-networks
@@ -32,6 +33,10 @@ This makes offline training tractable while still exposing the model to playback
 
 [[sources/wang-2021-magnitude-phase-compensation|Wang, Wichern & Le Roux 2021]] reinterpret magnitude spectrogram approximation (MSA, loss $\|\hat{M}-|S|\|_{1}$) as teacher forcing with the **target phase**: writing $\mathcal{L}_{\text{MSA}}=\|\hat{M}e^{j\angle S}-|S|e^{j\angle S}\|_{1}$ makes explicit that MSA assumes the estimated speech has the clean phase. Since the best approximation of $S(t,f)$ along $\angle S(t,f)$ is exactly $|S(t,f)|$, the [[concepts/magnitude-phase-compensation-effect|magnitude-phase compensation]] is avoided — MSA produces the most accurate magnitudes among learned models, which is why extracting ASR features directly from estimated magnitudes outperforms re-synthesis with mixture phase.
 
+## Role in Hybrid GSC + Post-Filter TSE
+
+[[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024]] train their DPCRN post-filter with ground-truth DVAD labels and the GSC output guided by them; at inference, the estimated DVAD and its corresponding GSC output are substituted. This exposes the post-filter to clean activity cues during training while the deployed system consumes its own upstream estimates — the same train-test mismatch pattern as closed-loop sequence generation, mitigated here by the DVAD's high measured precision/recall (94%/95%).
+
 ## Benefits
 
 - Stabilizes recurrent training
@@ -53,3 +58,4 @@ Teacher forcing introduces a mismatch between offline training and streaming inf
 
 - [[sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]
 - [[sources/wang-2021-magnitude-phase-compensation|Wang, Wichern & Le Roux 2021: On the Compensation Between Magnitude and Phase in Speech Separation]] — MSA as teacher forcing with target phase
+- [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024: Lightweight Hybrid Multi-Channel Speech Extraction with DVAD]] — GT-DVAD and GT-guided GSC during post-filter training

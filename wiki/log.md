@@ -5096,3 +5096,20 @@ Ingested "A Comparison of Generative and Discriminative Methods for Speech Enhan
   - `wiki/index.md`, `wiki/sources/index.md`, `wiki/entities/index.md` — new entries; statistics updated (total 1263, sources 199, entities 545)
 
 ---
+
+## [2026-09-08] ingest | A Lightweight Hybrid Multi-Channel Speech Extraction System with Directional VAD (Sun, Lei & Zhang 2024)
+
+- **Source**: `raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt` (ICASSP 2024, pp. 1486–1490; DOI 10.1109/ICASSP48485.2024.10445953; Zotero I3S7UELX)
+- **Summary**: Lightweight hybrid multi-channel target-speaker extraction: a robust GSC whose ABM/AIC NLMS adaptation is gated by a novel **directional VAD** (33K-param CRN estimating per-zone speaker activity on a 6-mic circular array from LinSpec+sinIPD features; precision 94%/recall 95%), plus a DPCRN post-filter conditioned on the soft 6-zone DVAD. Matches the causal FT-JNF end-to-end baseline's objective scores at ~90% fewer MACs (1.82 vs 14.36 GMACs/s, 0.87M params) and beats it on real-world conference-room DNSMOS P.835 (SIG 3.205 vs 2.892) — evidence that the classical GSC's spatial structure, orchestrated by a tiny DNN, generalizes where end-to-end does not.
+- **Extraction note**: MinerU parsing failed (vlm + pipeline both retried); fell back to `pypdf` text extraction (`full-text.txt`, 5 pages, no figures).
+- **Pages created/updated**:
+  - `wiki/sources/sun-2024-lightweight-hybrid-speech-extraction.md` — Source page (created)
+  - `wiki/entities/tong-lei.md` — Entity page (created)
+  - `wiki/entities/tianchi-sun.md`, `xu-zhang.md`, `yuxiang-hu.md`, `changbao-zhu.md`, `jing-lu.md` — 2024 paper co-authorship
+  - `wiki/concepts/directional-vad.md` — Concept page (created)
+  - `wiki/concepts/gsc-beamformer.md` — "DVAD-Gated Robust GSC (Sun et al. 2024)" section
+  - `wiki/concepts/voice-activity-detection.md`, `target-speaker-extraction.md`, `joint-nonlinear-filtering.md`, `target-speaker-vad.md`, `teacher-forcing.md` — new source + content additions
+  - `wiki/synthesis/multi-channel-speech-enhancement.md` — Insight 4 "control-only hybrid" data point + sources table; Takeaway 1 updated
+  - `wiki/index.md`, `wiki/sources/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/synthesis/index.md` — new/updated entries; statistics updated (total 1266, entities 546, concepts 490, sources 200)
+
+---

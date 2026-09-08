@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-24
-updated: 2026-07-22
+updated: 2026-09-08
 tags:
   - researcher
   - speech-enhancement
@@ -18,3 +18,4 @@ tags:
 
 - Co-author of GTCRN (ICASSP 2024) — ultralightweight speech enhancement
 - Co-author of "Adaptive Convolution for CNN-based Speech Enhancement Models" (IEEE TASLPRO 2025) — [[concepts/adaptive-convolution|adaptive convolution]] and [[concepts/adaptcrn|AdaptCRN]] — [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025]]
+- Co-author of "A Lightweight Hybrid Multi-Channel Speech Extraction System with Directional Voice Activity Detection" (ICASSP 2024) — [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024]]

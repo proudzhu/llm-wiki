@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-19
-updated: 2026-08-19
+updated: 2026-09-08
 sources:
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
+  - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
 tags:
   - speech-processing
   - voice-activity-detection
@@ -47,6 +48,10 @@ Estimating a binary activity mask is strictly simpler than estimating the target
 1. **Lighter architectures** suffice — useful for hearing aids, hearables, and edge deployment.
 2. **Higher robustness** to identification errors — small confusions produce frame-level mistakes rather than full waveform corruption.
 
+## Spatially-Conditioned Variant: DVAD
+
+[[concepts/directional-vad|Directional VAD (DVAD)]] (Sun et al. 2024) is the spatial-clue counterpart of TS-VAD: instead of conditioning the activity decision on a speaker embedding (enrollment), it conditions on the **target's angular zone** around the microphone array and outputs activity probabilities for all $N$ zones simultaneously. DVAD needs no enrollment utterance but presumes a known talker direction (e.g., video conferencing). It serves both as a runtime gate (controlling robust-GSC adaptation) and as a soft feature fed to the TSE post-filter.
+
 ## Limitations and Open Issues
 
 - **Inactive target speaker**: TS-VAD must reliably output "silent" when the target is absent from the mixture, which most TSE systems are not explicitly trained to do [57].
@@ -59,7 +64,9 @@ Estimating a binary activity mask is strictly simpler than estimating the target
 - [[concepts/voice-activity-detection|Voice Activity Detection (VAD)]]
 - [[concepts/speaker-embedding|Speaker Embedding]]
 - [[concepts/target-speaker-asr|Target-Speaker ASR (TS-ASR)]]
+- [[concepts/directional-vad|Directional VAD (DVAD)]] — spatially-conditioned counterpart
 
 ## Related Sources
 
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova et al. 2023: Neural Target Speech Extraction: An Overview]]
+- [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024: Lightweight Hybrid Multi-Channel Speech Extraction with DVAD]] — introduces the spatially-conditioned DVAD variant

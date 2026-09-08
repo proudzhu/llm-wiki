@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-05
+updated: 2026-09-08
 sources:
   - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
   - raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md
   - raw/papers/huang-2026-ndf-joint-neural-directional-filtering/full-text.md
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
   - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
+  - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
 tags:
   - neural-network
   - spatial-audio
@@ -54,6 +55,10 @@ NDF+ extends FT-JNF with:
 
 [[concepts/steerable-neural-directional-filtering|SNDF]] (Huang et al. 2025) reuses the single-mask FT-JNF unchanged for mask estimation but adds a steering branch: the desired steering direction is one-hot encoded, mapped through a linear layer, and used to initialize the forward/backward states of the F-BiLSTM per time frame — the same conditioning mechanism Tesch & Gerkmann use for angular-region conditioning in the SSF. This turns the fixed-look-direction NDF into a model steerable to any direction at inference.
 
+## Hybrid DSP Alternative to FT-JNF (Sun et al. 2024)
+
+[[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024]] use a causalized FT-JNF (inter-frame BLSTM replaced by a uni-directional LSTM) as the end-to-end baseline for multi-channel TSE on a 6-microphone circular array, and show that a **hybrid** system — [[concepts/directional-vad|DVAD]]-gated robust GSC + DPCRN post-filter — matches its objective quality (PESQ 1.687 vs 1.664, ESTOI 0.711 vs 0.696, SI-SDR 3.83 vs 4.63 dB) at **~90% lower MACs** (1.82 vs 14.36 GMACs/s), and clearly beats it on real-world DNSMOS (SIG 3.205 vs 2.892). This is a notable counter-data-point to the JNF line's joint-processing thesis: when the target zone is known and a spatial-activity detector can orchestrate classical adaptive filtering, the joint non-linear advantage largely evaporates for on-device deployment.
+
 ## Related Concepts
 
 - [[concepts/spatially-selective-nonlinear-filter|Spatially Selective Non-Linear Filter (SSF)]]
@@ -71,3 +76,4 @@ NDF+ extends FT-JNF with:
 - [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — first application of the single-mask FT-JNF to directivity-pattern learning
 - [[sources/huang-2025-steerable-neural-directional-filtering|Huang et al. 2025: Steerable Neural Directional Filtering]] — steering-direction conditioning of the F-BiLSTM initial states
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
+- [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024: Lightweight Hybrid Multi-Channel Speech Extraction with DVAD]] — causalized FT-JNF as baseline; hybrid GSC+DPCRN matches it at ~90% lower MACs
