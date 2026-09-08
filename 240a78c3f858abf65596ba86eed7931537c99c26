@@ -1,0 +1,41 @@
+wiki/concepts/causality.md
+  s_34405364d84e22::t_3397920375c77b 71-76,100
+  s_34405364d84e22::t_353e45da983f54 4
+wiki/sources/hu-2026-abse-net.md
+  s_34405364d84e22::t_8a9fcc6321048e 177
+  s_34405364d84e22::t_ecaa202964da72 148-157
+wiki/log.md
+  s_34405364d84e22::t_143a57f8954e1d 5080
+  s_34405364d84e22::t_8ff350e2caee90 5060-5067
+  s_34405364d84e22::t_bb9aa57f37de73 5069-5079
+  s_34405364d84e22::t_d458e11d0c68a6 5059
+  s_34405364d84e22::t_45f41c0771c989 5068
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.2",
+  "base_commit_sha": "240a78c3f858abf65596ba86eed7931537c99c26",
+  "prompts": {},
+  "sessions": {
+    "s_34405364d84e22": {
+      "agent_id": {
+        "tool": "trae",
+        "id": "6a9f53819209515b16754140",
+        "model": "glm-5.3__dev"
+      },
+      "human_author": "proudzhu <proudzhu.fdu@gmail.com>",
+      "custom_attributes": {
+        "client_type": "ide",
+        "tool_use_id": "6a9f54cd9209515b167541d6",
+        "operation_id": "6a9f54cd9209515b167541d6",
+        "session_id": "6a9f53819209515b16754140",
+        "runtime_client": "trae-tob-git-ai",
+        "source_scene": "agent",
+        "external_session_id": "6a9f53819209515b16754140",
+        "tool_name": "RunCommand",
+        "display_model_name": "GLM-5.3",
+        "edit_kind": "bash"
+      }
+    }
+  }
+}
