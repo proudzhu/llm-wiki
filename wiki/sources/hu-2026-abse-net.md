@@ -145,6 +145,16 @@ Key findings:
 
 *Figure 3: Waveforms and spectrograms: (a) clean, (b) unprocessed, (c) BMVDR w/o AL, (d) ABSE-NET. ABSE-NET suppresses leakage artifacts while preserving harmonic structure close to clean speech.*
 
+## Limitations: ANC Causality Not Addressed
+
+The paper's "causal" claims (C-RMB-Conv1D restricting the receptive field to past/present frames) concern only the *network's* information flow, not the ANC system constraint $\tau_{alg}+\tau_{sec}<\tau_{pri}$. No delay-budget analysis is provided:
+
+- The STFT pipeline (320-sample window / 160 hop at 16 kHz, plus iSTFT overlap-add, plus BMVDR SCM/VAD smoothing) incurs **≥ 20–40 ms algorithmic delay**; the physical margin in an open-fit HA (vent leakage path vs. loudspeaker-to-ear-canal path, both a few cm) is ~0.1–0.2 ms (cf. Serizel et al. 2010's measured causality degree ν = 2 samples) — violated by 2–3 orders of magnitude for broadband leakage.
+- Results sidestep this via **offline simulation**: the ear-canal sum $e_L=g_L\hat{u}+d_L$ is synthesized with sample-level time alignment, so algorithm latency never enters a real-time acoustic loop. The network learns a *predictive* mapping (target $-d_L/g_L$ implicitly pre-inverts $g_L$, as in DeepANC), viable only for the predictable (low-frequency, stationary NOISEX-92) leakage component.
+- The cascaded BSE→ANC topology is exactly the structure Serizel et al. 2010 showed collapses (~1 dB vs. ~12 dB integrated) at hearing-aid causality margins; the paper cites Xiao & Doclo 2024 on delay effects in open-fitting hearables but does not analyze them, and defers real-device deployment to future work.
+
+See [[concepts/causality|Causality in ANC]] for the full constraint analysis.
+
 ## Key Contributions
 
 1. **First lightweight, error-microphone-free ABSE framework**: ABSE-NET is (per the authors) the first active binaural speech enhancement method that requires no in-ear error microphone at deployment, removing the main practical blocker of prior BSE+ANC solutions.
@@ -164,6 +174,7 @@ Key findings:
 - [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
 - [[concepts/voice-activity-detection|Voice Activity Detection]]
 - [[concepts/secondary-path-modeling|Secondary Path Modeling]]
+- [[concepts/causality|Causality in ANC]]
 - [[concepts/ear-canal-occlusion-effect|Ear Canal Occlusion Effect]]
 - [[concepts/spatially-selective-anc|Spatially Selective ANC]]
 - [[concepts/speech-preserving-anc|Speech-Preserving ANC]]

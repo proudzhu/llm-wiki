@@ -5056,3 +5056,25 @@ Ingested "A Comparison of Generative and Discriminative Methods for Speech Enhan
 - **Summary**: Integrates multichannel Wiener-filter noise reduction and feedforward ANC into a single filter set (Filtered-x MWF) computed on secondary-path-filtered references. The filter provably decomposes into an NR part and an NR-delay-independent ANC part, avoiding the trade-off that makes cascaded NR→ANC topologies fail in open-fitting hearing aids: ~12 dB intelligibility-weighted SNR improvement vs. ~1 dB (cascaded) at the realistic two-sample causality margin.
 - **Pages created**: `wiki/sources/serizel-2010-integrated-anc-nr-hearing-aids.md`, `wiki/entities/jan-wouters.md`, `wiki/concepts/filtered-x-mwf.md`, `wiki/concepts/open-fitting-noise-leakage.md`
 - **Pages updated**: `wiki/entities/romain-serizel.md`, `wiki/entities/marc-moonen.md`, `wiki/entities/soren-holdt-jensen.md` (new contribution bullets), `wiki/concepts/multi-channel-wiener-filter.md` (FxMWF extension), `wiki/concepts/causality.md` (hearing-aid causality constraints), `wiki/concepts/multi-channel-anc.md` (hearing-aid configuration and FxMWF performance), `wiki/concepts/multi-channel-speech-enhancement.md` (ANC-integrated MWF entry), `wiki/synthesis/application-specific-anc.md` (new §5: hearing-aid ANC + NR; cross-application tables extended)
+
+---
+
+## [2026-09-08] query | ABSE-NET 如何保证因果性
+
+- **Question**: abse-net 如何保证因果性
+- **Pages consulted**: `wiki/concepts/abse-net.md`, `wiki/sources/hu-2026-abse-net.md`, `raw/papers/hu-2026-abse-net/full-text.md` (§3.1 TDL sub-block)
+- **Answer**: 因果性核心由 TDL 子块中的 C-RMB-Conv1D 因果卷积保证——感受野严格限于过去与当前帧、杜绝 future look-ahead（网络中唯一跨帧混合信息的模块）；FDL 子块逐帧独立处理（卷积仅沿频率轴），ConvAtt 仅含逐点线性层与池化、无跨帧卷积/递归；RMB-Conv1D 多尺度因果核经重参数化融合后仍为因果核；STFT 320/160（20 ms 窗 / 10 ms 帧）逐帧流式处理。注意：论文的显式因果性声明仅针对 TDL，ConvAtt 通道注意力的全局池化在流式部署时需按当前帧实现（论文未展开）。
+- **Query page**: not created — single-fact question, answer given in conversation
+
+---
+
+## [2026-09-08] query | ABSE-NET 的 ANC 系统级因果性（算法延时 + 次级路径延时 < 初级路径延时）
+
+- **Question**: 用户澄清所问为 ANC 意义的因果性——STFT 处理必然带来大算法延时，如何满足 τ_alg + τ_sec < τ_pri？
+- **Pages consulted**: `raw/papers/hu-2026-abse-net/full-text.md`（全文核查：无延时预算分析），`wiki/concepts/causality.md`（Serizel 2010 ν=2 样本裕度）
+- **Answer**: **论文未解决该约束，而是绕开**。STFT 320/160 + iSTFT + BMVDR VAD 平滑 → 算法延时 ≥ 20–40 ms，而开放式 HA 物理裕度仅 ~0.1–0.2 ms（漏声通路与次级通路均为数 cm），宽带漏声违反约束 2–3 个数量级。论文结果依赖离线仿真（e = g·û + d 样本级对齐合成，延时未进入实时声学环路）；网络学到的是预测性映射（目标 −d/g 隐含次级路径预逆，DeepANC 式），仅能对消可预测成分（低频、平稳 NOISEX-92 漏声）——即"窄带/可预测噪声不受延时限制"区间。级联 BSE→ANC 拓扑正是 Serizel 2010 证明在 ν=2 时退化为 ~1 dB 的结构；论文引用 Xiao & Doclo 2024（open-fitting hearables 延时效应）但未分析，实机部署列为 future work。
+- **Pages updated**:
+  - `wiki/concepts/causality.md` — 新增 "Neural ABSE and the STFT Delay Problem (Hu et al. 2026)" 小节；sources/Related Sources 增补
+  - `wiki/sources/hu-2026-abse-net.md` — 新增 "Limitations: ANC Causality Not Addressed" 小节；Related Concepts 增补 causality 链接
+
+---

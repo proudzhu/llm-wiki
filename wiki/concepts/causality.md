@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-09-07
+updated: 2026-09-08
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - wiki/sources/shen-2023-advanced-anc.md
@@ -68,6 +68,12 @@ When ANC is combined with noise reduction, the *topology* determines whether the
 - **Cascaded NR + ANC**: the NR delay (half the NR filter length, e.g. 32 samples) must fit inside ν, forcing an NR/ANC performance trade-off that is generally impossible at hearing-aid margins.
 - **Integrated ([[concepts/filtered-x-mwf|FxMWF]])**: the filter decomposes into an NR part and an ANC part that does not depend on the NR delay, so only overall-system causality is required — no trade-off. The integrated scheme keeps >10 dB SNR improvement at ν = 2 where the cascade yields ~1 dB.
 
+## Neural ABSE and the STFT Delay Problem (Hu et al. 2026)
+
+[[concepts/abse-net|ABSE-NET]] (Hu et al. 2026) illustrates how neural ANC-style methods can appear to bypass the causality constraint while actually deferring it. Its leakage-cancellation pipeline (STFT with 320-sample window / 160 hop at 16 kHz → BMVDR → LNN → iSTFT) incurs **≥ 20–40 ms algorithmic delay**, while the physical margin — external noise → vent → ear-canal vs. loudspeaker → ear-canal, both a few cm — is on the order of 0.1–0.2 ms (cf. Serizel's ν = 2 samples). The constraint is violated by 2–3 orders of magnitude for broadband leakage.
+
+The reported results sidestep this because evaluation is offline simulation: the ear-canal sum $e_L = g_L\hat{u} + d_L$ is synthesized with sample-level time alignment, so the algorithm's latency never enters a real-time acoustic loop. The network learns a *predictive* mapping (target $-d_L/g_L$ implicitly pre-inverts the secondary path, as in DeepANC), which can only cancel the *predictable* component of the leakage — vent leakage is low-frequency dominated and NOISEX-92 noises are stationary, i.e., the narrowband/predictable-noise regime where delay is not the binding constraint. Whether the broadband leakage component (unforecastable over a 20–40 ms horizon) survives real-time deployment is untested; the paper cites Xiao & Doclo 2024 on delay effects in open-fitting hearables but performs no delay-budget analysis, and its cascaded BSE→ANC topology is exactly the structure Serizel et al. 2010 showed to collapse (~1 dB) at hearing-aid causality margins.
+
 ## Solutions to Causality Violations
 
 1. **Wireless Reference ANC** (Shen 2023): Place reference microphones near noise sources and transmit wirelessly, providing "look-ahead" time
@@ -91,3 +97,4 @@ When ANC is combined with noise reduction, the *topology* determines whether the
 - [[sources/shen-2023-advanced-anc|Shen 2023: Advanced ANC Headphone]] — Wireless Reference ANC to overcome causality constraints
 - [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — systematic analysis of direction-dependent causality
 - [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] — degree of causality in hearing aids; two-sample realistic margin
+- [[sources/hu-2026-abse-net|Hu et al. 2026: ABSE-NET]] — neural ABSE whose STFT pipeline (≥ 20–40 ms delay) violates the hearing-aid causality margin; offline simulation defers rather than solves the constraint
