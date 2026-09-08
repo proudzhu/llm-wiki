@@ -35,6 +35,19 @@ Always use **forward slashes** in Glob patterns and prefer **relative paths from
 
 **Do not use `RunCommand` with PowerShell `Where-Object { $_.Name -match '...' }`** for batch existence checks — the shell wrapper strips `$_` and other `$`-prefixed automatic variables, producing "item not recognized" errors (see `pitfalls.md` #31). Use the LS/Glob/Grep tools directly instead; they avoid PowerShell quoting entirely.
 
+## Same-File Edit Discipline (applies to EVERY step)
+
+**Never issue parallel Edit/Write calls to the same file.** A batch of N parallel edits to one file races: each call reads the file as it was when the batch started, and last-write-wins discards the others — *silently* (every call reports success). Which edit survives is nondeterministic; sometimes a *later* batch member persists on top of an earlier write, producing duplicated content on re-apply (see `pitfalls.md` #46).
+
+This has now bitten **three** ingests — Apostolidis 2026 (Step 8 concept pages), Xiao 2023 and Sun 2024 (Step 9 synthesis page and Step 10 `wiki/index.md`, where four parallel row-edits were lost and only the Statistics edit survived) — despite the warning previously living only in Step 8. Hence this top-level rule.
+
+Rules:
+
+1. **Parallelize across files, never within a file.** Reads, Globs, Greps, and Edits to *different* files are safe and encouraged in one message.
+2. **Multiple changes to one file = sequential Edit calls in separate messages.** Synthesis updates (Step 9) and hand-edits to any index (Step 10) typically need 4–6 edits to the *same* file — frontmatter `sources:`, `tags:`, a table row, an insight paragraph, a takeaway. Do them one per message, or combine into fewer, larger edits with unique anchors.
+3. **Verify after a suspected race**: Grep the file for the expected new content (e.g. the new slug). If missing, re-read the target region before re-applying — a *prefix-matching* `old_string` can match text that already contains your addition and duplicate it.
+4. Prefer scripts over hand-edits wherever one exists (`update_indexes.py`, `append_log.py`, `commit_ingest.py`) — they are immune to the race by construction.
+
 ## Prerequisites
 
 - Zotero running with "Allow other applications" enabled
@@ -93,6 +106,8 @@ uv run python .agents/skills/paper-reader/scripts/zotero_fetch.py metadata ZOTER
 
 Note the **Zotero key** (e.g., `8ZWV2E4T`) and **PDF attachment key** (e.g., `5H7GWRF3`).
 
+**Keep search terms short (3–5 distinctive words)** — searching with the full paper title times out (Sun 2024 ingest: the complete title timed out; `"directional voice activity detection"` found it instantly, `pitfalls.md` #45).
+
 If the paper has an arXiv ID but is not in Zotero, note the arXiv ID and proceed to Step 3b directly (skip `prepare_paper.py`).
 
 **Multiple attachments**: Zotero items often have both an HTML attachment and a PDF attachment (e.g., IEEE Xplore saves both). Always pick the **PDF attachment** (`application/pdf`) for `prepare_paper.py` — HTML attachments from publisher sites are typically cluttered with navigation/ads and not suitable for extraction. The `zotero_fetch.py metadata` output lists all attachments with their MIME types; choose the one whose type is `application/pdf`.
@@ -128,11 +143,13 @@ uv run python .agents/skills/paper-reader/scripts/extract_mineru.py --slug SLUG 
 - Post-processing: `images/` → `figures/`, refs updated in `full-text.md`.
 - Verify quality: Read first 200 + last 100 lines. Mermaid code blocks for diagrams are normal.
 
-#### 3d. pdftotext fallback (plain text, no images)
+#### 3d. pdftotext/pypdf fallback (plain text, no images)
 
 ```bash
 uv run python .agents/skills/paper-reader/scripts/extract_pdftotext.py --slug SLUG
 ```
+
+Uses `pdftotext` (poppler) if on PATH; **automatically falls back to `pypdf`** when poppler is not installed — common on Windows (both the Xiao 2023 and Sun 2024 ingests hit MinerU failures *and* had no poppler, forcing ad-hoc Python extraction; `pypdf` is now a project dependency so this path always works, `pitfalls.md` #47). If you resort to a custom extraction script anyway, it must still (i) write `full-text.txt`/`full-text.md` into `raw/papers/{slug}/` and (ii) **delete `paper.pdf` afterward** — every standard script enforces this, and `commit_ingest.py` refuses to stage `paper.pdf`; a manual `git add raw/papers/{slug}/` bypasses that guard (Sun 2024 committed its PDF this way, `pitfalls.md` #48).
 
 #### 3e. Map figures to captions (after 3b or 3c)
 
@@ -199,7 +216,7 @@ For each existing concept page touched by this paper: add the paper to `sources:
 3. **Round 2 — content additions in parallel** — one Edit per file.
 4. **Round 3 — `## Related Concepts` / `## Related Sources` extensions in parallel** — one Edit per file.
 
-**Parallel Edits to the *same* file race and silently drop each other** (`pitfalls.md` #13). Parallelize *across files*, never *within* a file. If a single page needs frontmatter + content + Related Sources changes, apply them as **sequential Edit calls in separate messages**. `commit_ingest.py` emits `WARN: uncommitted changes remain after commit` when an edit was silently dropped.
+**Parallel Edits to the *same* file race and silently drop each other** (`pitfalls.md` #13; see the top-level "Same-File Edit Discipline" section). Parallelize *across files*, never *within* a file. If a single page needs frontmatter + content + Related Sources changes, apply them as **sequential Edit calls in separate messages**. `commit_ingest.py` emits `WARN: uncommitted changes remain after commit` when an edit was silently dropped.
 
 ### Step 9: Update Synthesis Pages
 
@@ -228,7 +245,11 @@ uv run python .agents/skills/paper-reader/scripts/triage_synthesis.py --slug SLU
 
 **When in doubt**: prefer *not* updating. A thin synthesis addition adds clutter; a substantive one (1–2 sentences + a table row) is valuable. If you cannot write at least one substantive sentence about what the paper *contributes to the cross-source analysis*, skip.
 
+**Applying a synthesis update** typically means 4–6 edits to the *same* file: frontmatter `sources:` + `updated:`, frontmatter `tags:`, a row in the Sources Synthesized table, a paragraph in the matching insight, possibly a takeaway and an open question. Apply these **sequentially, one Edit per message** — parallel edits to one file race and silently drop each other (see "Same-File Edit Discipline" above; the Sun 2024 ingest lost 3 of 5 synthesis edits this way). Afterwards, Grep the file for the new slug to confirm all edits landed.
+
 ### Step 10: Update Indexes
+
+**Do not hand-edit index tables for new entries** — use the scripts below. Hand-editing is the known cause of lost rows: in the Sun 2024 ingest, four parallel manual edits to `wiki/index.md` all reported success but only the Statistics edit survived, leaving the three new slugs unindexed (caught by the mandatory Grep check below and `check_index_drift.py`). The scripts write rows atomically and recompute statistics; hand-edits are acceptable only for *modifying* an existing row's summary/date.
 
 For ingests creating **multiple pages** (typical: 1 source + 2–4 entities + 5–15 concepts), **prefer `batch`** with a YAML manifest:
 
@@ -320,4 +341,5 @@ Stages `raw/papers/{slug}/`, `wiki/sources/{slug}.md`, all index files, `wiki/lo
 - **`raw/` immutability exception**: replacing remote image URLs with local paths in `full-text.md` is allowed.
 - **Avoid `\bm{}` in LaTeX math** — MathJax does not load the `bm` package. Use `\mathbf{x}` or `\boldsymbol{x}` instead.
 - **Never put LaTeX math in a wikilink alias** — `[[concepts/foo|$\mathcal{L}$]]` breaks the `fix_obsidian_escapes` pipe-escaping and aborts `mkdocs build --strict` (`pitfalls.md` #44). Use a plain-text alias (`[[concepts/foo|Spectrally Adaptive Loss]]`) and keep the math outside the wikilink.
+- **Always commit via `commit_ingest.py`** — manual `git add`/`git commit` bypasses its guards: it refuses to stage `paper.pdf`, auto-stages all `wiki/` modifications, and avoids PowerShell quoting entirely (heredoc `<<'EOF'` is a parse error on PowerShell 5.1, `pitfalls.md` #37). If a manual commit is unavoidable: exclude `paper.pdf` and `.obsidian/`, and pass multi-paragraph messages as multiple `-m` flags — never a heredoc.
 - **Todo list structure**: one todo per workflow step (1–13), in numerical order. Treat Steps 3a–3e as a single "extract content" todo. Treat Step 12a–12b as a single "build verification" todo. If Step 9 triage finds no candidates, mark that todo `completed` with "none relevant — grep triage" rather than leaving it `pending`.
