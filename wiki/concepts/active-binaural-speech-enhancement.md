@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-06
-updated: 2026-09-06
+updated: 2026-09-08
 sources:
   - raw/papers/hu-2026-abse-net/full-text.md
+  - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
 tags:
   - binaural-speech-enhancement
   - active-noise-control
@@ -29,7 +30,7 @@ where $g_L$ is the **secondary path** (loudspeaker-to-ear-canal ATF) and $d_L$ t
 |---|---|---|
 | Cascaded | BSE stage followed by ANC stage | FxMWF (Serizel et al. 2010) |
 | Parallel | BSE and ANC operate in parallel | Sabin et al. 2024 |
-| Unified optimization | BSE and ANC in one objective; closed-form + adaptive solutions | Xiao et al. 2023–2024 (spatially selective ANC) |
+| Unified optimization | BSE and ANC in one objective; closed-form + adaptive solutions | Xiao et al. 2023–2024 ([[sources/xiao-2023-spatially-selective-anc\|Xiao 2023]] spatially selective ANC) |
 | Neural (error-mic-free) | DNN synthesizes the anti-leakage signal; no in-ear microphone at inference | [[concepts/abse-net\|ABSE-NET]] (Hu et al. 2026) |
 
 Traditional ABSE methods place an **error microphone deep inside the ear canal** to provide feedback for model-driven adaptive filters — impractical because the ear canal is too narrow, making long-term wear uncomfortable. Neural approaches such as ABSE-NET remove this requirement by using the error microphone only during training.

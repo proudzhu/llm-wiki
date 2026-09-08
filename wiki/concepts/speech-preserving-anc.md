@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-09-06
+updated: 2026-09-08
 sources:
+  - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
   - raw/papers/hu-2026-abse-net/full-text.md
 tags:
   - active-noise-control
@@ -52,7 +53,7 @@ Speech-preserving ANC is fundamentally different from traditional Speech Enhance
 - Validated in reverberant environments (Dai 2026)
 
 ### Spatial Selectivity
-- Xiao et al. (2023) proposed spatially selective ANC using beamforming to create quiet zones while allowing sound in other areas
+- [[concepts/spatially-selective-anc|Spatially selective ANC]] (Xiao et al. 2023) preserves the desired sound **spatially**: a Frost-type ReIR constraint on the hybrid ANC cost function leaves the desired-direction physical wave unaltered at the error microphone while noise from other directions is minimized — SNR improved from −13.9 to 15.2 dB (NR 29.1 dB, SDI −25.1 dB) on an AR-glasses array, with ~2% of the secondary-source energy of reconstruct-based systems and natural binaural cues preserved ([[sources/xiao-2023-spatially-selective-anc|Xiao 2023]])
 - The robust soft-constrained SSANC formulation in [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026]] handles secondary-path variations across users by averaging the cost over a measured set of plant estimates
 - Complementary to spectral selectivity; can be combined for enhanced separation
 
@@ -87,6 +88,7 @@ The system conservatively reduces noise for Babble (5.30 dB) to protect speech, 
 
 ## Related Sources
 
+- [[sources/xiao-2023-spatially-selective-anc|Xiao 2023: Spatially Selective Active Noise Control Systems]]
 - [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 - [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]]
 - [[sources/hu-2026-abse-net|Hu et al. 2026: ABSE-NET — Active Binaural Speech Enhancement for Open-Fit Hearing Aids]]

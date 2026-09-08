@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-05-23
+updated: 2026-09-08
+sources:
+  - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
 tags:
   - active-noise-control
   - optimization
@@ -39,6 +41,8 @@ Soft formulations are particularly attractive when the "constraint" is a quality
 - **Spatially selective ANC** ([[concepts/spatially-selective-anc|SSANC]]) — penalty term measures the deviation between the achieved post-filter response from the desired direction and a target delayed-impulse template using **relative impulse responses (ReIRs)**:
 
   $$\mathcal{D}(\mathbf{w}) = \| \mathbf{H}(\mathbf{q} + \mathbf{Gw}) - \boldsymbol{\delta}_\Delta \|^2.$$
+
+  The original SSANC formulation ([[sources/xiao-2023-spatially-selective-anc|Xiao 2023]]) instead imposed the spatial response as a **hard equality constraint** $\mathbf{H}^T\mathbf{u} = \mathbf{f}$ (Frost-type) on the hybrid ANC cost; the soft penalty form was introduced later (Xiao et al., WASPAA 2025) to trade constraint satisfaction against noise reduction.
 
 - **Constrained-output ANC** — penalty term restricts the actuator power $\| \mathbf{w} \|^2$ as part of the cost rather than as a hard upper bound.
 

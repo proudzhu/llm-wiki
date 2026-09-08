@@ -1,7 +1,7 @@
 ---
 type: source
 created: 2026-05-23
-updated: 2026-05-23
+updated: 2026-09-08
 sources:
   - raw/papers/xiao-2026-robust-spatially-selective-anc/full-text.txt
   - http://arxiv.org/abs/2605.17407
@@ -167,6 +167,7 @@ Filters from Cases 1 and 3 were deployed on the dSPACE platform in the same scen
 
 ## Related Sources
 
+- [[sources/xiao-2023-spatially-selective-anc|Xiao 2023: Spatially Selective Active Noise Control Systems]] — the foundational SSANC paper (hard Frost constraint on hybrid ANC)
 - [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
 - [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]

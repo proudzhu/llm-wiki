@@ -548,4 +548,5 @@
 | [[entities/gordon-wichern\|Gordon Wichern]] | MERL researcher; audio signal processing, speech separation, machine listening; WHAMR! corpus co-creator | 2026-09-06 |
 | [[entities/jonathan-le-roux\|Jonathan Le Roux]] | MERL principal researcher; speech separation, robust ASR, SI-SDR metric, phase-sensitive mask, STFT consistency | 2026-09-06 |
 | [[entities/jan-wouters\|Jan Wouters]] | KU Leuven ExpORL — audiology and hearing implants; co-author of the FxMWF integrated ANC+NR hearing-aid paper | 2026-09-07 |
+| [[entities/chuming-zhao\|Chuming Zhao]] | Meta Reality Labs Research — co-author of the foundational spatially selective ANC paper (Xiao 2023) | 2026-09-08 |
 

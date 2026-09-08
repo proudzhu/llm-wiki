@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-07
-updated: 2026-09-07
+updated: 2026-09-08
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
+  - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
 tags:
   - active-noise-control
   - speech-enhancement
@@ -66,6 +67,10 @@ On manikin acoustic-path measurements (two-microphone BTE hearing aid, speech at
 - Assumes small secondary-path identification error and slowly-adapting filters in the derivations.
 - The ANC benefit vanishes once the overall system is non-causal.
 
+## Comparison with Spatially Selective ANC
+
+[[sources/xiao-2023-spatially-selective-anc|Xiao, Xu & Zhao 2023]] compared the FxMWF-style partially coupled configuration (beamformer output added to the error signal, 1 ms delay) against their [[concepts/spatially-selective-anc|spatially selective ANC]] on identical six-microphone AR glasses: reconstruct-based systems (FxMWF-style and decoupled hear-through) cancel the desired sound and re-add it, requiring far more secondary-source energy (~50× at a priori SNR 10 dB), suffering eigenvalue-spread-limited step-sizes under multi-source noise, and losing binaural cues (monaural reconstruction), while the constraint-based system preserves the physical desired wave with essentially zero speech-component difference above 140 Hz.
+
 ## Related Concepts
 
 - [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
@@ -79,3 +84,4 @@ On manikin acoustic-path measurements (two-microphone BTE hearing aid, speech at
 ## Related Sources
 
 - [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010: Integrated Active Noise Control and Noise Reduction in Hearing Aids]]
+- [[sources/xiao-2023-spatially-selective-anc|Xiao 2023: Spatially Selective Active Noise Control Systems]]

@@ -114,6 +114,10 @@ The **pseudo-cascaded** implementation processes them sequentially rather than i
 
 **Modified Normalized FxLMS (N-FxLMS)** is used for adaptation, with a two-stage optimization procedure.
 
+### 3.1 Spatially Constrained Hybrid (Xiao 2023)
+
+Hybrid architecture evolution does not stop at combining FF/IMC/MVC — [[sources/xiao-2023-spatially-selective-anc|Xiao, Xu & Zhao 2023]] add a **spatial dimension**: a Frost-type linear constraint (built from relative impulse responses) imposed on the hybrid ANC cost function so that sound from a desired direction is *physically preserved* ($e_s(n)=s(n)$) while noise from undesired directions is minimized. This decouples the architecture question (which references to use) from the *selectivity* question (what to cancel): on a six-microphone AR-glasses array it achieves NR 29.1 dB with SDI −25.1 dB, using only ~2% of the secondary-source energy of cancel-and-reconstruct schemes. See [[concepts/spatially-selective-anc|Spatially Selective ANC]].
+
 ---
 
 ## 4. Cross-Architecture Algorithm Comparison
@@ -170,3 +174,4 @@ All adaptive ANC systems face the same stability constraint: the phase error in 
 - [[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]]
 - [[sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method]] — Secondary-path-model-free feedforward ANC architecture using an auxiliary filter
+- [[sources/xiao-2023-spatially-selective-anc|Xiao, Xu & Zhao 2023: Spatially Selective Active Noise Control Systems]] — Frost-type spatial constraint on hybrid ANC: preserve desired-direction sound instead of cancel-and-reconstruct

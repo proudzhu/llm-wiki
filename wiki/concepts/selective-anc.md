@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-17
-updated: 2026-05-17
+updated: 2026-09-08
 tags:
   - active-noise-control
   - signal-processing
@@ -41,7 +41,9 @@ Real-time adaptive filtering is computationally expensive and can suffer from co
 - [[concepts/active-noise-control|Active Noise Control]]
 - [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
 - [[concepts/generative-fixed-filter-anc|Generative Fixed-Filter ANC (GFANC)]]
+- [[concepts/spatially-selective-anc|Spatially Selective ANC]] — selectivity by direction (ReIR constraint) rather than by filter selection; the two are complementary axes of "selective" ANC
 
 ## Related Sources
 
 - [[sources/lu-2021-survey-active-noise-control-linear|Lu et al. 2021: Survey on ANC — Part I: Linear Systems]]
+- [[sources/xiao-2023-spatially-selective-anc|Xiao 2023: Spatially Selective Active Noise Control Systems]] — contrasts spatial selection with selective fixed-filter and coherence-based methods

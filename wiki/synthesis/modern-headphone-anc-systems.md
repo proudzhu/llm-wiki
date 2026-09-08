@@ -183,6 +183,7 @@ The industry is moving beyond basic "on/off" transparency toward **context-aware
 The rise of Open-Ear (OWS) devices creates a new ANC challenge: the primary noise path is never fully attenuated.
 
 - **Hybrid ANC with Dual Compensation**: As analyzed by [[sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026]], open-ear systems require dual compensation filters to reconstruct target signals accurately in dynamic environments where multiple noise sources (external vs. internal) compete.
+- **Preserve instead of reconstruct**: [[sources/xiao-2023-spatially-selective-anc|Xiao, Xu & Zhao 2023]] show on open-fitting AR glasses that a Frost-type spatial constraint on the hybrid ANC cost function leaves the desired-direction physical wave unaltered at the error microphone — avoiding the latency, energy (~50× more secondary-source energy for reconstruct-based systems), and binaural-cue loss of synthetic reconstruction ([[concepts/spatially-selective-anc|Spatially Selective ANC]]).
 - **SoC Convergence**: Hardware platforms (e.g., BES6100) are now integrating dedicated NPUs and ISP pipelines to manage multi-modal sensing in real-time, moving computation from the cloud to the device edge.
 
 ### 5.2 The Future: Multi-Modal Acoustic Computing
@@ -245,6 +246,7 @@ This requires a dedicated DSP (e.g., Qualcomm QCC5141, ~200 MIPS capability).
 - [[sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
 - [[sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026: Hybrid ANC with Dual Compensation]]
+- [[sources/xiao-2023-spatially-selective-anc|Xiao, Xu & Zhao 2023: Spatially Selective Active Noise Control Systems]]
 - [[sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
 
 ## Related Synthesis

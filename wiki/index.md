@@ -554,6 +554,7 @@
 | [[entities/gordon-wichern\|Gordon Wichern]] | MERL researcher; audio signal processing, speech separation, machine listening; WHAMR! corpus co-creator | 2026-09-06 |
 | [[entities/jonathan-le-roux\|Jonathan Le Roux]] | MERL principal researcher; speech separation, robust ASR, SI-SDR metric, phase-sensitive mask, STFT consistency | 2026-09-06 |
 | [[entities/jan-wouters\|Jan Wouters]] | KU Leuven ExpORL — audiology and hearing implants; co-author of the FxMWF integrated ANC+NR hearing-aid paper | 2026-09-07 |
+| [[entities/chuming-zhao\|Chuming Zhao]] | Meta Reality Labs Research — co-author of the foundational spatially selective ANC paper (Xiao 2023) | 2026-09-08 |
 
 ---
 
@@ -1259,6 +1260,7 @@
 | [[sources/zhao-2026-spectrally-adaptive-loss\|Zhao & Madhu 2026: Spectrally Adaptive Loss for Streaming Speech Enhancement]] | Spectrally weighted STFT losses (fixed sigmoid + signal-dependent adaptive) counteracting the magnitude-phase compensation effect; HyST-Net streaming backbone | 2026-09-06 |
 | [[sources/wang-2021-magnitude-phase-compensation\|Wang, Wichern & Le Roux 2021: On the Compensation Between Magnitude and Phase in Speech Separation]] | Explains why magnitude losses improve PESQ/eSTOI/WER but degrade SI-SDR: implicit magnitude-phase compensation in complex/time-domain losses, diagnosed via mSNR/pSNR | 2026-09-06 |
 | [[sources/serizel-2010-integrated-anc-nr-hearing-aids\|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] | Integrates multichannel Wiener-filter noise reduction and feedforward ANC into a single filter (FxMWF); ~12 dB SNR improvement in open-fitting hearing aids where cascaded topologies fail | 2026-09-07 |
+| [[sources/xiao-2023-spatially-selective-anc\|Xiao, Xu & Zhao 2023: Spatially Selective ANC]] | Foundational SSANC paper — Frost-type ReIR spatial constraint on hybrid ANC physically preserves desired-direction sound (NR 29.1 dB, SDI −25.1 dB, ~2% secondary-source energy of reconstruct-based systems) | 2026-09-08 |
 
 ---
 
@@ -1312,10 +1314,10 @@
 
 ## Statistics
 
-- **Total pages**: 1261
-- **Entities**: 544
+- **Total pages**: 1263
+- **Entities**: 545
 - **Concepts**: 489
-- **Sources**: 198
+- **Sources**: 199
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-07
+- **Last updated**: 2026-09-08

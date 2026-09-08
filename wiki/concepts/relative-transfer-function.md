@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-26
-updated: 2026-08-30
+updated: 2026-09-08
 sources:
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
+  - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
 tags:
   - spatial-filtering
   - beamforming
@@ -65,6 +66,10 @@ For near-field devices where the source-microphone geometry is quasi-fixed — e
 
 Apostolidis et al. (2026) construct a pre-enrolled dictionary of $N$ time-invariant candidate RTF vectors $\mathbf{d}_\theta(k) = \{\mathbf{d}_{\theta_1}(k), \ldots, \mathbf{d}_{\theta_N}(k)\}$, each corresponding to a candidate target direction at a fixed distance. Each candidate RTF parameterizes a candidate [[concepts/mpdr-beamformer|MPDR]] beamformer, and the [[concepts/output-based-speech-enhancement|output-based]] wrapper selects the candidate whose output maximizes [[concepts/glimpse-proportion|Glimpse Proportion]]. The system remains robust to RTF mismatch: significant SNR/ESTOI gains over an input-based [[concepts/mvdr-beamformer|MVDR]] baseline persist when the dictionary is coarse (15° spacing) or non-individualized (HATS-measured RTFs).
 
+## Relative Impulse Responses in Spatially Selective ANC
+
+In the time domain, the RTF counterpart is the **relative impulse response (ReIR)**. [[sources/xiao-2023-spatially-selective-anc|Xiao, Xu & Zhao 2023]] use ReIRs as the building block of [[concepts/spatially-selective-anc|spatially selective ANC]]: $\mathbf{H}$ stacks the Toeplitz matrices of the ReIRs between each microphone and a reference microphone (closest to the desired source), and the constraint vector $\mathbf{f} = \mathbf{h}_K$ (the error-microphone ReIR) fixes the desired-direction response so the physical desired wave is preserved at the error microphone rather than reconstructed. Unlike beamforming-side RTF estimation, these ReIRs are design-time quantities (pre-measured per desired direction), and later soft-constrained SSANC variants use **acausal** ReIRs with a delayed-impulse target $\boldsymbol{\delta}_\Delta$.
+
 ## Related Concepts
 
 - [[concepts/lcmv-beamformer|LCMV Beamformer]]
@@ -81,3 +86,4 @@ Apostolidis et al. (2026) construct a pre-enrolled dictionary of $N$ time-invari
 
 - [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]]
 - [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis et al. 2026: Listen first — output-based multi-microphone speech enhancement]]
+- [[sources/xiao-2023-spatially-selective-anc|Xiao 2023: Spatially Selective Active Noise Control Systems]] — ReIRs as design-time spatial constraints

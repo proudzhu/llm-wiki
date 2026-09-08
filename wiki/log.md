@@ -5078,3 +5078,21 @@ Ingested "A Comparison of Generative and Discriminative Methods for Speech Enhan
   - `wiki/sources/hu-2026-abse-net.md` — 新增 "Limitations: ANC Causality Not Addressed" 小节；Related Concepts 增补 causality 链接
 
 ---
+
+## [2026-09-08] ingest | Spatially Selective Active Noise Control Systems (Xiao, Xu & Zhao 2023)
+
+- **Source**: `raw/papers/xiao-2023-spatially-selective-anc/full-text.md` (J. Acoust. Soc. Am. 153(5), 2733–2744; DOI 10.1121/10.0019336; Zotero 5AJNTV5T)
+- **Summary**: Foundational spatially selective ANC (SSANC) paper. A Frost-type linear spatial constraint (built from relative impulse responses, ReIRs) is imposed on the hybrid ANC cost function so that desired-direction sound is *physically preserved* ($e_s(n)=s(n)$) while noise from undesired directions is minimized. On a six-microphone AR-glasses array (KEMAR): SNR −13.9 → 15.2 dB (NR 29.1 dB, SDI −25.1 dB), ~2% of the secondary-source energy of reconstruct-based systems at a priori SNR 10 dB, natural binaural cues and zero latency. Includes optimal (Lagrange) and adaptive (projection/offset LMS) solutions, minimum-phase spectral weighting, and eigenvalue-based robust regularization (β, θ from λ_max/10⁴ — NR 24.3 dB even at SsNR −30 dB vs 6.1 dB for the classical 10σ² rule).
+- **Extraction note**: MinerU parsing failed (vlm + pipeline both retried); fell back to a custom pymupdf-based text extraction with caption-block-guided figure rendering (12 figures).
+- **Pages created/updated**:
+  - `wiki/sources/xiao-2023-spatially-selective-anc.md` — Source page (created)
+  - `wiki/entities/chuming-zhao.md` — Entity page (created)
+  - `wiki/entities/tong-xiao.md`, `wiki/entities/buye-xu.md` — 2023 affiliation and SSANC co-authorship
+  - `wiki/concepts/spatially-selective-anc.md` — "Original Formulation (Xiao 2023): Hard Frost Constraint" section; comparison table corrected (adaptive + offline optimal)
+  - `wiki/concepts/hybrid-anc.md`, `soft-constrained-anc.md`, `speech-preserving-anc.md`, `selective-anc.md`, `relative-transfer-function.md`, `filtered-x-mwf.md`, `waterbed-effect.md`, `active-binaural-speech-enhancement.md` — SSANC sections/comparisons and source links
+  - `wiki/sources/xiao-2026-robust-spatially-selective-anc.md`, `wiki/sources/serizel-2010-integrated-anc-nr-hearing-aids.md` — references to the foundational paper
+  - `wiki/synthesis/anc-architecture-evolution.md` — new §3.1 "Spatially Constrained Hybrid (Xiao 2023)" + Related Sources
+  - `wiki/synthesis/modern-headphone-anc-systems.md` — "Preserve instead of reconstruct" bullet in §5.1 + Related Sources
+  - `wiki/index.md`, `wiki/sources/index.md`, `wiki/entities/index.md` — new entries; statistics updated (total 1263, sources 199, entities 545)
+
+---

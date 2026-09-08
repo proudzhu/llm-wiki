@@ -1,7 +1,7 @@
 ---
 type: source
 created: 2026-09-07
-updated: 2026-09-07
+updated: 2026-09-08
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - https://doi.org/10.1109/TASL.2009.2030948
@@ -181,6 +181,10 @@ In hearing aids the microphone–loudspeaker distance is a few centimeters, leav
 - [[concepts/active-noise-control|Active Noise Control]]
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
 - [[concepts/ear-canal-occlusion-effect|Ear-Canal Occlusion Effect]] — the comfort motivation for open fittings
+
+## Related Sources
+
+- [[sources/xiao-2023-spatially-selective-anc|Xiao 2023: Spatially Selective Active Noise Control Systems]] — evaluates the FxMWF-style partially coupled configuration against constraint-based spatially selective ANC on identical hardware
 
 ## Related Synthesis
 
