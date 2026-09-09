@@ -1,0 +1,12 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.2",
+  "base_commit_sha": "ed7f6f63200964d15f60b4938bf2838b8876edd4",
+  "prompts": {},
+  "humans": {
+    "h_81c75c8c8ed26f": {
+      "author": "proudzhu <proudzhu.fdu@gmail.com>"
+    }
+  }
+}
