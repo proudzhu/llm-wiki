@@ -560,6 +560,7 @@
 | [[entities/srdan-kitic\|Srdan Kitic]] | Orange Labs — co-author of the 2022 DL-based SSL survey | 2026-09-09 |
 | [[entities/laurent-girin\|Laurent Girin]] | GIPSA-lab / INRIA — co-author of the 2022 DL-based SSL survey | 2026-09-09 |
 | [[entities/alexandre-guerin\|Alexandre Guerin]] | Orange Labs — co-author of the 2022 DL-based SSL survey | 2026-09-09 |
+| [[entities/sakari-tervo\|Sakari Tervo]] | Researcher, Helsinki University of Technology (TKK) Department of Media Technology — intensity-vector direction estimation, room acoustics measurement. | 2026-09-09 |
 
 ---
 
@@ -1063,6 +1064,8 @@
 | [[concepts/sel-d\|SELD (Sound Event Localization and Detection)]] | Joint task of sound event detection and localization; DCASE 2019-2021 challenge formulation. | 2026-09-09 |
 | [[concepts/activity-coupled-cartesian-doa\|ACCDOA (Activity-Coupled Cartesian DoA)]] | Output representation coupling event activity and DoA in one Cartesian vector per class; magnitude encodes activity. | 2026-09-09 |
 | [[concepts/ambisonics\|Ambisonics]] | Spherical-harmonic spatial audio format (FOA/HOA) independent of array geometry; standard input feature for DL-based SSL. | 2026-09-09 |
+| [[concepts/sound-intensity-vector\|Sound Intensity Vector]] | Pressure × particle-velocity energy-flow vector; p–p probe and B-format estimation, finite-difference bias and its interpolation-based compensation with the f_max = c/(d√2) limit; DOA, DirAC, and SELD/ACCDOA feature uses. | 2026-09-09 |
+| [[concepts/intensity-vector-doa-estimation\|Intensity-Vector DOA Estimation]] | Two-class taxonomy of direction estimators on intensity-vector azimuths — circular-statistics averaging (CME/MCA/CMD) vs. wrapped mixture-model fitting (VMM/WGM) — with Tervo 2009's concert-hall comparison results. | 2026-09-09 |
 
 ---
 
@@ -1273,6 +1276,7 @@
 | [[sources/xiao-2023-spatially-selective-anc\|Xiao, Xu & Zhao 2023: Spatially Selective ANC]] | Foundational SSANC paper — Frost-type ReIR spatial constraint on hybrid ANC physically preserves desired-direction sound (NR 29.1 dB, SDI −25.1 dB, ~2% secondary-source energy of reconstruct-based systems) | 2026-09-08 |
 | [[sources/sun-2024-lightweight-hybrid-speech-extraction\|Sun, Lei & Zhang 2024: A Lightweight Hybrid Multi-Channel Speech Extraction System with Directional VAD]] | DVAD-gated robust GSC + DPCRN post-filter: 33K-param CRN estimates per-zone speaker activity to gate ABM/AIC NLMS updates and condition the post-filter; matches FT-JNF at ~90% fewer MACs (1.82 vs 14.36 G/s) and beats it on real-world DNSMOS (ICASSP 2024) | 2026-09-08 |
 | [[sources/grumiaux-2022-ssl-deep-learning-survey\|Grumiaux, Kitic, Girin & Guerin 2022: A Survey of Sound Source Localization with Deep Learning Methods]] | Six-axis taxonomy of 156 DL-based SSL systems (2011-2021): environment, source configuration, architecture, input features, output strategy, data/learning. | 2026-09-09 |
+| [[sources/tervo-2009-sound-intensity-direction\|Tervo 2009: Direction Estimation Based on Sound Intensity Vectors]] | Empirical comparison of five intensity-vector DOA estimators (CME/MCA/CMD averaging vs. von Mises / wrapped Gaussian mixture fitting) on real concert-hall data — mixture models slightly better and far more noise-robust; radial-energy weighting (MCA) clearly worst. | 2026-09-09 |
 
 ---
 
@@ -1326,10 +1330,10 @@
 
 ## Statistics
 
-- **Total pages**: 1275
-- **Entities**: 550
-- **Concepts**: 494
-- **Sources**: 201
+- **Total pages**: 1279
+- **Entities**: 551
+- **Concepts**: 496
+- **Sources**: 202
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-09-09

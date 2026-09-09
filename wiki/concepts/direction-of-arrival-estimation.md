@@ -8,6 +8,7 @@ sources:
   - raw/papers/zhang-2014-causality-feedforward-anc-headset/full-text.md
   - raw/papers/kim-2014-doa-based-snr-estimation/full-text.txt
   - raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt
+  - raw/papers/tervo-2009-sound-intensity-direction/full-text.md
 tags:
   - signal-processing
   - array-processing
@@ -23,7 +24,7 @@ tags:
 
 DoA estimation exploits the spatial diversity of microphone arrays to determine the azimuth and/or elevation of sound sources. Common approaches include:
 
-- **Classical methods**: Beamforming-based scanning (delay-and-sum), MVDR spatial spectrum, MUSIC, ESPRIT
+- **Classical methods**: Beamforming-based scanning (delay-and-sum), MVDR spatial spectrum, MUSIC, ESPRIT, and [[concepts/intensity-vector-doa-estimation|intensity-vector methods]] that read direction off the physical energy flow measured by a compact [[concepts/sound-intensity-vector|sound intensity]] probe
 - **Data-driven methods**: Neural networks (CNN, CRNN) trained to classify or regress DoA from multichannel spectrograms
 
 ## DoA for ANC
@@ -72,6 +73,10 @@ The Grumiaux et al. 2022 survey treats "DoA estimation" and sound source localiz
 
 The survey reports representative gains of DL over conventional DoA methods: a CNN doubled DoA classification accuracy vs SRP-PHAT at low SNR (Chakrabarty & Habets 2017a), and a CRNN halved the average angular error of MUSIC in reverberant conditions (Adavanne et al. 2018).
 
+## Intensity-Vector DoA (Tervo 2009)
+
+Before the DL era, [[sources/tervo-2009-sound-intensity-direction|Tervo (EUSIPCO 2009)]] provided one of the few systematic comparisons of conventional [[concepts/intensity-vector-doa-estimation|intensity-vector DoA estimators]] on real concert-hall data (RT ≈ 2.1 s, SNR 0–40 dB). Fitting two-component wrapped mixture distributions (von Mises / wrapped Gaussian) to the per-frame azimuth histogram of [[concepts/sound-intensity-vector|sound intensity vectors]] outperformed simple circular averaging, and von Mises mixtures were the most noise-robust of the five methods tested; energy-weighted averaging (MCA) was clearly worst, showing that radial-magnitude weighting lets reverberation- and noise-dominated bins dominate the estimate. All methods stayed under 4° circular bias, but anomaly rates remained high at low SNR — quantifying the "degrade quickly under reflections" behavior that the Grumiaux survey attributes to classical intensity methods.
+
 ## Related Concepts
 
 - [[concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — DoA drives filter selection in D-SFANC/PD-SFANC
@@ -79,6 +84,8 @@ The survey reports representative gains of DL over conventional DoA methods: a C
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]] — neural architecture for data-driven DoA estimation
 - [[concepts/active-noise-control|Active Noise Control]] — application domain
 - [[concepts/doa-based-snr-estimation|DOA-Based SNR Estimation]] — DOA as a cue for SNR rather than filter selection
+- [[concepts/sound-intensity-vector|Sound Intensity Vector]] — the physical energy-flow quantity measured by p–p probes and B-format arrays
+- [[concepts/intensity-vector-doa-estimation|Intensity-Vector DOA Estimation]] — averaging vs. mixture-model estimators on intensity-vector azimuths
 
 ## Related Sources
 
@@ -86,3 +93,4 @@ The survey reports representative gains of DL over conventional DoA methods: a C
 - [[sources/wang-2026-directional-sfanc-reverberant|Wang 2026: Directional SFANC in Reverberant Environments]] — CNN-based multi-task DoA estimation for reverberant conditions
 - [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — foundational work showing direction-dependent causality in feedforward ANC
 - [[sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation|Görtz et al. 2026: Blind DDAP Estimation Using Smart Glasses]] — head rotation exploited for direction-dependent parameter estimation
+- [[sources/tervo-2009-sound-intensity-direction|Tervo 2009: Direction Estimation Based on Sound Intensity Vectors]] — conventional intensity-vector DoA estimators compared on real concert-hall data

@@ -498,4 +498,6 @@
 | [[concepts/sel-d\|SELD (Sound Event Localization and Detection)]] | Joint task of sound event detection and localization; DCASE 2019-2021 challenge formulation. | 2026-09-09 |
 | [[concepts/activity-coupled-cartesian-doa\|ACCDOA (Activity-Coupled Cartesian DoA)]] | Output representation coupling event activity and DoA in one Cartesian vector per class; magnitude encodes activity. | 2026-09-09 |
 | [[concepts/ambisonics\|Ambisonics]] | Spherical-harmonic spatial audio format (FOA/HOA) independent of array geometry; standard input feature for DL-based SSL. | 2026-09-09 |
+| [[concepts/sound-intensity-vector\|Sound Intensity Vector]] | Pressure × particle-velocity energy-flow vector; p–p probe and B-format estimation, finite-difference bias and its interpolation-based compensation with the f_max = c/(d√2) limit; DOA, DirAC, and SELD/ACCDOA feature uses. | 2026-09-09 |
+| [[concepts/intensity-vector-doa-estimation\|Intensity-Vector DOA Estimation]] | Two-class taxonomy of direction estimators on intensity-vector azimuths — circular-statistics averaging (CME/MCA/CMD) vs. wrapped mixture-model fitting (VMM/WGM) — with Tervo 2009's concert-hall comparison results. | 2026-09-09 |
 

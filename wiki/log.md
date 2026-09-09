@@ -5125,3 +5125,16 @@ Ingested "A Comparison of Generative and Discriminative Methods for Speech Enhan
 - **Synthesis triage**: 5 tag-overlap candidates; none fired a trigger (survey is SSL-task, candidates are SE/ANC) — no synthesis pages updated
 - **Statistics**: 550 entities / 494 concepts / 201 sources / 1275 total
 - **Fix**: stripped UTF-8 BOM from source page frontmatter (broke tag-based triage)
+
+---
+
+## [2026-09-09] ingest | Direction Estimation Based on Sound Intensity Vectors (Tervo 2009)
+
+- **Source**: `raw/papers/tervo-2009-sound-intensity-direction/full-text.md` (Zotero: 4F8ZDGYE)
+- **Authors**: Sakari Tervo
+- **Published**: 17th European Signal Processing Conference (EUSIPCO 2009), Glasgow, Scotland, pp. 700–704, © EURASIP
+- **DOI**: none (venue metadata recovered from the PDF itself; the Zotero record lacked date/venue)
+- **Summary**: Empirical comparison of five sound-intensity-vector DOA estimators — circular mean (CME), Cartesian mean (MCA), circular median (CMD), von Mises mixture (VMM), wrapped Gaussian mixture (WGM) — on real concert-hall RIRs (Pori, RT ≈ 2.1 s, SNR 0–40 dB): mixture-model fitting is slightly more accurate and markedly more noise-robust than circular averaging, VMM is best overall, and radial-energy weighting (MCA) is clearly harmful.
+- **Pages created**: [[sources/tervo-2009-sound-intensity-direction|Tervo 2009 source page]], [[entities/sakari-tervo|Sakari Tervo]], [[concepts/sound-intensity-vector|Sound Intensity Vector]], [[concepts/intensity-vector-doa-estimation|Intensity-Vector DOA Estimation]]
+- **Pages updated**: [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]] (new intensity-vector section + source/links), [[concepts/sound-source-localization|Sound Source Localization]] (conventional-methods bullet expanded + source), [[concepts/ambisonics|Ambisonics]] (intensity-vector cross-links), [[sources/grumiaux-2022-ssl-deep-learning-survey|Grumiaux et al. 2022]] (cross-refs to the new concept pages)
+- **Notes**: MinerU failed on this PDF ("parsing failed", both vlm and pipeline models); extraction fell back to PyMuPDF — text via page-by-page extraction, and the 5 figures rendered as region crops (`figures/fig01–fig05.png`) located from caption blocks and drawing clusters, edges verified clean against caption glyph positions.

@@ -69,7 +69,7 @@ The taxonomy is cumulative across architectures (a CRNN contains CNN and RNN lay
 
 ### Conventional baselines (Sec. III)
 
-Reviewed briefly because they serve as DL baselines and as feature extractors: TDoA estimation via GCC-PHAT; SRP-PHAT acoustic power maps (grid of delay-and-sum beamformers); sound intensity methods (degrade quickly under reflections); subspace methods — MUSIC (EVD of the CPS matrix; robust to noise, sensitive to reverberation) and ESPRIT (faster but less accurate); probabilistic generative models — GMM/GMM-EM variants and Gaussian mixture regression (GMR, the closest conventional ancestor of DNN-based SSL); Bayesian inference (MCMC, sparse Bayesian learning); compressive sensing/sparse recovery (strong guarantees, but grid constraints and dictionary assumptions); ICA.
+Reviewed briefly because they serve as DL baselines and as feature extractors: TDoA estimation via GCC-PHAT; SRP-PHAT acoustic power maps (grid of delay-and-sum beamformers); sound intensity methods (degrade quickly under reflections — quantified on real concert-hall data by [[sources/tervo-2009-sound-intensity-direction|Tervo 2009]], see [[concepts/intensity-vector-doa-estimation|Intensity-Vector DOA Estimation]]); subspace methods — MUSIC (EVD of the CPS matrix; robust to noise, sensitive to reverberation) and ESPRIT (faster but less accurate); probabilistic generative models — GMM/GMM-EM variants and Gaussian mixture regression (GMR, the closest conventional ancestor of DNN-based SSL); Bayesian inference (MCMC, sparse Bayesian learning); compressive sensing/sparse recovery (strong guarantees, but grid constraints and dictionary assumptions); ICA.
 
 ### Neural network architectures (Sec. IV)
 
@@ -90,7 +90,7 @@ Seven feature families, with a recent trend toward raw waveforms:
 | Cross-correlation | GCC-PHAT (per microphone pair), CPS | robust to speech variability; combined with CNNs to counter noise/reverb sensitivity |
 | Spectrogram | magnitude, phase, real+imaginary, log-Mel | single-channel or per-channel; phase maps central (Chakrabarty & Habets) |
 | Ambisonics | FOA/HOA signals and spectra | array-agnostic; standard for DCASE |
-| Intensity | active/real, reactive/imaginary intensity vectors | DoA-proportional in favorable conditions; FOA-domain dominant/azimuth features |
+| Intensity | active/real, reactive/imaginary [[concepts/sound-intensity-vector\|intensity vectors]] | DoA-proportional in favorable conditions; FOA-domain dominant/azimuth features |
 | Raw waveforms | multichannel samples | end-to-end; growing trend |
 | Other | SRP maps, spatial pseudo-spectra, beamformer outputs, CPS eigenvectors | conventional-method outputs as features |
 
