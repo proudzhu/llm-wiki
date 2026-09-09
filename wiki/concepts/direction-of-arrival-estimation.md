@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-04-30
-updated: 2026-08-28
+updated: 2026-09-09
 sources:
   - raw/papers/wang-2026-predictive-dsfanc-crnn/full-text.md
   - raw/papers/wang-2026-directional-sfanc-reverberant/full-text.md
   - raw/papers/zhang-2014-causality-feedforward-anc-headset/full-text.md
   - raw/papers/kim-2014-doa-based-snr-estimation/full-text.txt
+  - raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt
 tags:
   - signal-processing
   - array-processing
@@ -60,6 +61,16 @@ Beyond localization and filter selection, DOA information can serve directly as 
 - **Temporal context**: Multi-frame input captures source trajectory dynamics, essential for prediction
 - **Far-field assumption**: Small array apertures allow far-field modeling (plane wave assumption)
 - **Robustness**: Must generalize to unseen noise types, rooms, and reverberation conditions
+
+## DoA Estimation in the DL-based SSL Landscape (Grumiaux et al. 2022)
+
+The Grumiaux et al. 2022 survey treats "DoA estimation" and sound source localization as interchangeable (azimuth/elevation without distance) and organizes 156 DL-based systems by output strategy:
+
+- **Classification**: space discretized into zones; softmax (single-source) or sigmoid (multi-source) output forms a *spatial pseudo-spectrum* whose peaks are DoA estimates; grids range from coarse azimuth classes to quasi-uniform 429/432-class spherical grids.
+- **Regression**: continuous Cartesian/spherical coordinates, increasingly via the [[concepts/activity-coupled-cartesian-doa|ACCDOA]] representation that couples event activity with Cartesian DoA.
+- **Non-direct**: the DNN outputs TF masks, denoised features, or likelihood surfaces consumed by a conventional estimator.
+
+The survey reports representative gains of DL over conventional DoA methods: a CNN doubled DoA classification accuracy vs SRP-PHAT at low SNR (Chakrabarty & Habets 2017a), and a CRNN halved the average angular error of MUSIC in reverberant conditions (Adavanne et al. 2018).
 
 ## Related Concepts
 

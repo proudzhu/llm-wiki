@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-09-08
+updated: 2026-09-09
 sources:
   - raw/papers/liu-2025-pcen-mask-vad-speech-enhancement/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
@@ -9,6 +9,7 @@ sources:
   - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
   - raw/papers/kim-2014-doa-based-snr-estimation/full-text.txt
   - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
+  - raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt
 tags:
 - audio-processing
 - machine-learning

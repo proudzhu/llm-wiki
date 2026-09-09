@@ -494,4 +494,8 @@
 | [[concepts/filtered-x-mwf\|Filtered-x MWF (FxMWF)]] | Integrates multichannel noise reduction and feedforward ANC into one Wiener filter computed on secondary-path-filtered references; ANC part independent of NR delay | 2026-09-07 |
 | [[concepts/open-fitting-noise-leakage\|Open-Fitting Noise Leakage]] | Unprocessed ambient noise entering the ear canal through an open hearing-aid fitting; lowers SNR at the tympanic membrane and motivates integrated ANC+NR | 2026-09-07 |
 | [[concepts/directional-vad\|Directional VAD (DVAD)]] | CRN-based per-spatial-zone speaker activity estimation; binarized target-zone label gates GSC ABM/AIC adaptation while the soft multi-zone output conditions a neural post-filter | 2026-09-08 |
+| [[concepts/sound-source-localization\|Sound Source Localization (SSL)]] | Estimating source position (in practice DoA: azimuth/elevation) relative to a microphone array from multichannel signals. | 2026-09-09 |
+| [[concepts/sel-d\|SELD (Sound Event Localization and Detection)]] | Joint task of sound event detection and localization; DCASE 2019-2021 challenge formulation. | 2026-09-09 |
+| [[concepts/activity-coupled-cartesian-doa\|ACCDOA (Activity-Coupled Cartesian DoA)]] | Output representation coupling event activity and DoA in one Cartesian vector per class; magnitude encodes activity. | 2026-09-09 |
+| [[concepts/ambisonics\|Ambisonics]] | Spherical-harmonic spatial audio format (FOA/HOA) independent of array geometry; standard input feature for DL-based SSL. | 2026-09-09 |
 

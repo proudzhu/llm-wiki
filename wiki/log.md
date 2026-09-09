@@ -5113,3 +5113,15 @@ Ingested "A Comparison of Generative and Discriminative Methods for Speech Enhan
   - `wiki/index.md`, `wiki/sources/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/synthesis/index.md` — new/updated entries; statistics updated (total 1266, entities 546, concepts 490, sources 200)
 
 ---
+
+---
+
+## [2026-09-09] ingest | A Survey of Sound Source Localization with Deep Learning Methods (Grumiaux et al. 2022)
+
+- **Source**: [[sources/grumiaux-2022-ssl-deep-learning-survey|Grumiaux, Kitić, Girin & Guérin 2022: A Survey of Sound Source Localization with Deep Learning Methods]] (JASA 152(1), review article)
+- **Raw**: `raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt` (pypdf fallback after MinerU failure)
+- **New pages**: source page; 4 entity pages (Grumiaux, Kitić, Girin, Guérin); 4 concept pages ([[concepts/sound-source-localization|SSL]], [[concepts/sel-d|SELD]], [[concepts/activity-coupled-cartesian-doa|ACCDOA]], [[concepts/ambisonics|Ambisonics]])
+- **Updated concepts**: [[concepts/direction-of-arrival-estimation|DoA estimation]] (DL output strategies), [[concepts/room-impulse-response|RIR]] (synthetic training data), [[concepts/image-source-method|ISM]] (training-data generator), [[concepts/relative-transfer-function|RTF]], [[concepts/voice-activity-detection|VAD]], [[concepts/multi-channel-speech-enhancement|MCSE]] (DL-SSL as spatial-cue front end)
+- **Synthesis triage**: 5 tag-overlap candidates; none fired a trigger (survey is SSL-task, candidates are SE/ANC) — no synthesis pages updated
+- **Statistics**: 550 entities / 494 concepts / 201 sources / 1275 total
+- **Fix**: stripped UTF-8 BOM from source page frontmatter (broke tag-based triage)

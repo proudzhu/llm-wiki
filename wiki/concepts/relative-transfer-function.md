@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-26
-updated: 2026-09-08
+updated: 2026-09-09
 sources:
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
   - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
+  - raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt
 tags:
   - spatial-filtering
   - beamforming

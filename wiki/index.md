@@ -556,6 +556,10 @@
 | [[entities/jonathan-le-roux\|Jonathan Le Roux]] | MERL principal researcher; speech separation, robust ASR, SI-SDR metric, phase-sensitive mask, STFT consistency | 2026-09-06 |
 | [[entities/jan-wouters\|Jan Wouters]] | KU Leuven ExpORL — audiology and hearing implants; co-author of the FxMWF integrated ANC+NR hearing-aid paper | 2026-09-07 |
 | [[entities/chuming-zhao\|Chuming Zhao]] | Meta Reality Labs Research — co-author of the foundational spatially selective ANC paper (Xiao 2023) | 2026-09-08 |
+| [[entities/pierre-amaury-grumiaux\|Pierre-Amaury Grumiaux]] | LS2N Nantes / Orange Labs — lead author of the 2022 JASA survey of DL-based sound source localization | 2026-09-09 |
+| [[entities/srdan-kitic\|Srdan Kitic]] | Orange Labs — co-author of the 2022 DL-based SSL survey | 2026-09-09 |
+| [[entities/laurent-girin\|Laurent Girin]] | GIPSA-lab / INRIA — co-author of the 2022 DL-based SSL survey | 2026-09-09 |
+| [[entities/alexandre-guerin\|Alexandre Guerin]] | Orange Labs — co-author of the 2022 DL-based SSL survey | 2026-09-09 |
 
 ---
 
@@ -1055,6 +1059,10 @@
 | [[concepts/filtered-x-mwf\|Filtered-x MWF (FxMWF)]] | Integrates multichannel noise reduction and feedforward ANC into one Wiener filter computed on secondary-path-filtered references; ANC part independent of NR delay | 2026-09-07 |
 | [[concepts/open-fitting-noise-leakage\|Open-Fitting Noise Leakage]] | Unprocessed ambient noise entering the ear canal through an open hearing-aid fitting; lowers SNR at the tympanic membrane and motivates integrated ANC+NR | 2026-09-07 |
 | [[concepts/directional-vad\|Directional VAD (DVAD)]] | CRN-based per-spatial-zone speaker activity estimation; binarized target-zone label gates GSC ABM/AIC adaptation while the soft multi-zone output conditions a neural post-filter | 2026-09-08 |
+| [[concepts/sound-source-localization\|Sound Source Localization (SSL)]] | Estimating source position (in practice DoA: azimuth/elevation) relative to a microphone array from multichannel signals. | 2026-09-09 |
+| [[concepts/sel-d\|SELD (Sound Event Localization and Detection)]] | Joint task of sound event detection and localization; DCASE 2019-2021 challenge formulation. | 2026-09-09 |
+| [[concepts/activity-coupled-cartesian-doa\|ACCDOA (Activity-Coupled Cartesian DoA)]] | Output representation coupling event activity and DoA in one Cartesian vector per class; magnitude encodes activity. | 2026-09-09 |
+| [[concepts/ambisonics\|Ambisonics]] | Spherical-harmonic spatial audio format (FOA/HOA) independent of array geometry; standard input feature for DL-based SSL. | 2026-09-09 |
 
 ---
 
@@ -1264,6 +1272,7 @@
 | [[sources/serizel-2010-integrated-anc-nr-hearing-aids\|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] | Integrates multichannel Wiener-filter noise reduction and feedforward ANC into a single filter (FxMWF); ~12 dB SNR improvement in open-fitting hearing aids where cascaded topologies fail | 2026-09-07 |
 | [[sources/xiao-2023-spatially-selective-anc\|Xiao, Xu & Zhao 2023: Spatially Selective ANC]] | Foundational SSANC paper — Frost-type ReIR spatial constraint on hybrid ANC physically preserves desired-direction sound (NR 29.1 dB, SDI −25.1 dB, ~2% secondary-source energy of reconstruct-based systems) | 2026-09-08 |
 | [[sources/sun-2024-lightweight-hybrid-speech-extraction\|Sun, Lei & Zhang 2024: A Lightweight Hybrid Multi-Channel Speech Extraction System with Directional VAD]] | DVAD-gated robust GSC + DPCRN post-filter: 33K-param CRN estimates per-zone speaker activity to gate ABM/AIC NLMS updates and condition the post-filter; matches FT-JNF at ~90% fewer MACs (1.82 vs 14.36 G/s) and beats it on real-world DNSMOS (ICASSP 2024) | 2026-09-08 |
+| [[sources/grumiaux-2022-ssl-deep-learning-survey\|Grumiaux, Kitic, Girin & Guerin 2022: A Survey of Sound Source Localization with Deep Learning Methods]] | Six-axis taxonomy of 156 DL-based SSL systems (2011-2021): environment, source configuration, architecture, input features, output strategy, data/learning. | 2026-09-09 |
 
 ---
 
@@ -1317,10 +1326,10 @@
 
 ## Statistics
 
-- **Total pages**: 1266
-- **Entities**: 546
-- **Concepts**: 490
-- **Sources**: 200
+- **Total pages**: 1275
+- **Entities**: 550
+- **Concepts**: 494
+- **Sources**: 201
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-08
+- **Last updated**: 2026-09-09

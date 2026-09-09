@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-07
+updated: 2026-09-09
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
   - raw/papers/kim-2014-doa-based-snr-estimation/full-text.txt
+  - raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt
 tags:
   - speech-enhancement
   - multi-channel
@@ -44,6 +45,8 @@ tags:
 
 - **[[concepts/doa-based-snr-estimation|DOA-Based SNR Estimation]] (Kim & Kim 2014)**: Classical statistical-model dual-microphone SE that replaces noise-variance-driven a priori SNR estimation with a spatial cue — the phase difference between time-aligned channels is converted into a [[concepts/target-to-non-target-directional-signal-ratio|TNR]] and then a DOA-based SNR via an LRT speech-activity decision and decision-directed updates, feeding a Wiener spectral gain. Outperformed SDB, GSC-PW, PEF, and ASBM baselines in SDR and PESQ (0–20 dB SNR, RT60 up to 300 ms, four noise types) on a 4 cm dual-microphone array.
 
+- **DL-based [[concepts/sound-source-localization|SSL]] as the spatial-cue front end (Grumiaux et al. 2022)**: Where classical MCSE derives the target direction from inter-channel phase differences, the deep-learning SSL literature — taxonomized by the Grumiaux et al. 2022 survey (156 systems, 2011–2021) along six axes (environment, source configuration, architecture, input feature, output strategy, data/learning) — estimates [[concepts/direction-of-arrival-estimation|DoA]] directly from multichannel features (GCC-PHAT, [[concepts/relative-transfer-function|RTF]], IPD/ILD, [[concepts/ambisonics|Ambisonics]]). Its output-strategy split — classification over a spatial pseudo-spectrum vs. regression (increasingly the [[concepts/activity-coupled-cartesian-doa|ACCDOA]] representation) — parallels the SE community's own target evolution from masks to filters, and such DL-DoA outputs are the natural upstream provider of steering information for beamforming-based MCSE pipelines.
+
 - **ANC-integrated MWF for open-fitting hearing aids (Serizel et al. 2010)**: In hearing aids with an open fitting, MWF-based NR must additionally contend with the unprocessed [[concepts/open-fitting-noise-leakage|noise leakage]] and the secondary-path attenuation — the [[concepts/filtered-x-mwf|Filtered-x MWF]] integrates multichannel NR with feedforward ANC in one filter set, gaining ~12 dB intelligibility-weighted SNR improvement where standard MWF-NR degrades at low amplification gains.
 
 ## Related Concepts
@@ -73,6 +76,7 @@ tags:
 - [[concepts/side-talk-detection|Side-Talk Detection (STD)]] — role-conditional VAD frontend in differential ASR
 - [[concepts/filtered-x-mwf|Filtered-x MWF (FxMWF)]]
 - [[concepts/open-fitting-noise-leakage|Open-Fitting Noise Leakage]]
+- [[concepts/sound-source-localization|Sound Source Localization]] — DL-based DoA estimation as the upstream spatial-cue provider
 
 ## Related Sources
 
@@ -90,3 +94,4 @@ tags:
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — MVDR + adaptive coherence NE post-filter on a 3-microphone Huawei Mate 8; globally MMSE-optimal multi-channel variance estimation with adaptive split-frequency
 - [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] — multi-frontend differential pattern (beamformer + close-mic + STD embedding) for smart-glasses WSR
 - [[sources/kim-2014-doa-based-snr-estimation|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] — phase-difference TNR → DOA-based SNR → Wiener gain; beats SDB/GSC-PW/PEF/ASBM in SDR and PESQ
+- [[sources/grumiaux-2022-ssl-deep-learning-survey|Grumiaux, Kitić, Girin & Guérin 2022: A Survey of Sound Source Localization with Deep Learning Methods]] — six-axis taxonomy of 156 DL-based SSL systems (2011–2021); the DL-DoA field upstream of beamforming-based MCSE

@@ -550,4 +550,8 @@
 | [[entities/jonathan-le-roux\|Jonathan Le Roux]] | MERL principal researcher; speech separation, robust ASR, SI-SDR metric, phase-sensitive mask, STFT consistency | 2026-09-06 |
 | [[entities/jan-wouters\|Jan Wouters]] | KU Leuven ExpORL — audiology and hearing implants; co-author of the FxMWF integrated ANC+NR hearing-aid paper | 2026-09-07 |
 | [[entities/chuming-zhao\|Chuming Zhao]] | Meta Reality Labs Research — co-author of the foundational spatially selective ANC paper (Xiao 2023) | 2026-09-08 |
+| [[entities/pierre-amaury-grumiaux\|Pierre-Amaury Grumiaux]] | LS2N Nantes / Orange Labs — lead author of the 2022 JASA survey of DL-based sound source localization | 2026-09-09 |
+| [[entities/srdan-kitic\|Srdan Kitic]] | Orange Labs — co-author of the 2022 DL-based SSL survey | 2026-09-09 |
+| [[entities/laurent-girin\|Laurent Girin]] | GIPSA-lab / INRIA — co-author of the 2022 DL-based SSL survey | 2026-09-09 |
+| [[entities/alexandre-guerin\|Alexandre Guerin]] | Orange Labs — co-author of the 2022 DL-based SSL survey | 2026-09-09 |
 
