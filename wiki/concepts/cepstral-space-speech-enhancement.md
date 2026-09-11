@@ -1,13 +1,15 @@
 ---
 type: concept
 created: 2026-08-01
-updated: 2026-08-01
+updated: 2026-09-11
 sources:
   - raw/papers/liu-2023-iccrn/full-text.md
+  - raw/papers/gerkmann-2012-mmse-noise-psd-tracking/full-text.md
 tags:
   - speech-enhancement
   - cepstral-analysis
   - signal-processing
+  - noise-estimation
   - deep-learning
   - cross-domain-modeling
 ---
@@ -32,7 +34,23 @@ In the cepstral domain:
 
 ## Why Cepstral-Space Processing Is Hard Classically
 
-The energy distribution of harmonics and envelope, while sparse in the cepstral domain, exhibits complex patterns that are difficult to model with traditional signal processing. Data-driven deep learning methods are effective in modeling such distributions, which is why cepstral-space speech enhancement is a deep-learning-era development. Earlier traditional algorithms largely stayed in the TF domain (e.g., comb filters for harmonic segregation).
+The energy distribution of harmonics and envelope, while sparse in the cepstral domain, exhibits complex patterns that are difficult to model with traditional signal processing. Data-driven deep learning methods are effective in modeling such distributions, which is why cepstral-space speech enhancement is a deep-learning-era development. Earlier traditional algorithms largely stayed in the TF domain (e.g., comb filters for harmonic segregation) — with the notable exception of the cepstral-smoothing family below.
+
+## Classical Precursor: Temporal Cepstrum Smoothing
+
+Classical statistical methods did exploit exactly the sparsity structure described above, but **without a learned model**: they used it as a *fixed, hand-designed* smoothing rule. [[concepts/temporal-cepstrum-smoothing|Temporal Cepstrum Smoothing (TCS)]] (Breithaupt, Gerkmann & Martin, ICASSP 2008; Gerkmann & Martin, IEEE TSP 2009) transforms a preliminary speech PSD estimate into the cepstral domain via an inverse FFT of the log spectrum, then applies *selective recursive smoothing across time*: little or no smoothing to the low-quefrency envelope coefficients and to the detected pitch peak (found by an $\arg\max$ in the quefrency window corresponding to admissible pitch periods), and strong smoothing to all remaining coefficients, where non-speech-like spectral outliers land.
+
+The division of labour is therefore the same as in cepstral-space neural SE — low quefrency = envelope, pitch peak = excitation, everything else = suppress — but the mechanism differs sharply:
+
+| | TCS (classical, 2008–2012) | Cepstral-space neural SE (e.g. ICCRN, 2023) |
+|---|---|---|
+| Cepstral representation | inverse FFT of the log spectrum (fixed) | real-valued FFT of the TF feature (fixed, but applied to learned features) |
+| Which bins are trusted | hand-designed rule keyed on quefrency index + detected pitch peak | learned per-bin / per-band, via LayerNorm + recurrent modeling over cepstral bins |
+| What happens to trusted bins | pass through with small smoothing factor, enforced analytically | arbitrary learned filtering, including cross-band mixing |
+| Bias handling | analytic correction $\mathcal{B} = \exp(\psi(\bar\mu)+C)/\bar\mu$ derived from distributional assumptions | learned end-to-end; no explicit bias term |
+| Application | speech PSD / a priori SNR estimation inside a noise tracker ([[sources/gerkmann-2012-mmse-noise-psd-tracking\|Gerkmann & Hendriks 2012]]) | full TF-mask enhancement |
+
+TCS is thus the classical answer to the question ICCRN answers neurally, and it is the reason the claim that "traditional algorithms stayed in the TF domain" should be read as *predominantly*, not universally true.
 
 ## Cross-Domain Modeling
 
@@ -62,6 +80,8 @@ ICCRN differs by performing neural processing *inside* the cepstral space (rathe
 
 - [[concepts/iccrn|ICCRN]] — first explicit cepstral-space SE architecture
 - [[concepts/cepstral-frequency-block|Cepstral Frequency Block (CFB)]] — the core module
+- [[concepts/temporal-cepstrum-smoothing|Temporal Cepstrum Smoothing (TCS)]] — the classical, hand-designed counterpart exploiting the same cepstral sparsity
+- [[concepts/mmse-based-noise-psd-estimation|MMSE-Based Noise PSD Estimation]] — the noise tracker TCS was applied to
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]] — CRN family
 - [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]] — training paradigm
 - [[concepts/speech-enhancement|Speech Enhancement]]
@@ -70,3 +90,4 @@ ICCRN differs by performing neural processing *inside* the cepstral space (rathe
 ## Related Sources
 
 - [[sources/liu-2023-iccrn|Liu & Zhang 2023: ICCRN — Inplace Cepstral Convolutional Recurrent Neural Network]]
+- [[sources/gerkmann-2012-mmse-noise-psd-tracking|Gerkmann & Hendriks 2012: Improved MMSE-Based Noise PSD Tracking Using Temporal Cepstrum Smoothing]] — classical cepstral-domain processing: selective smoothing keyed on quefrency index and the detected pitch peak

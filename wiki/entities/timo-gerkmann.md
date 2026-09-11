@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-08-22
-updated: 2026-08-22
+updated: 2026-09-11
 tags:
   - researcher
   - speech-enhancement
@@ -28,3 +28,4 @@ tags:
 - Co-author of "Insights into deep non-linear filters for improved multi-channel speech enhancement" (IEEE/ACM TASLP 2023) [22] — [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023]]. Proposed the JNF (FT-JNF) architecture, the basis for the SSF and [[concepts/mcnet|McNet]].
 - Co-author of "Nonlinear spatial filtering in multichannel speech enhancement" (IEEE/ACM TASLP 2021) [21] — statistical MMSE analysis showing non-linear joint spatial and tempo-spectral filtering outperforms linear spatial filters in non-Gaussian interference; received the ITG VDE award 2022.
 - Co-author of "Unbiased MMSE-based noise power estimation with low complexity and low tracking delay" (IEEE Trans. Audio, Speech, Language Proc. 2012) [44] — widely cited unbiased noise PSD estimator used in many subsequent DNN-based speech-enhancement and separation pipelines.
+- Co-author of "Improved mmse-based noise PSD tracking using temporal cepstrum smoothing" (ICASSP 2012) — [[sources/gerkmann-2012-mmse-noise-psd-tracking|Gerkmann & Hendriks 2012]]. Replaced the two speech-PSD estimates of the MMSE-based noise tracker with a single [[concepts/temporal-cepstrum-smoothing|temporal-cepstrum-smoothing]] estimate, removing the explicit bias-compensation branch and improving noise tracking (~1 dB segmental SNR in babble noise at 0 dB input SNR).

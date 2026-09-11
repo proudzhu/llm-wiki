@@ -5163,3 +5163,26 @@ Ingested "A Comparison of Generative and Discriminative Methods for Speech Enhan
   - `wiki/concepts/image-source-method.md` — added this paper's ANC configuration parameters
   - `wiki/concepts/active-noise-control.md` — added the multichannel feedback challenge and cross-references
   - `wiki/synthesis/multichannel-anc-efficiency-and-robustness.md` — new Section 4 "Acoustic Feedback: The Hidden Stability Bottleneck", comparison-table row, tags and sources
+
+---
+
+## [2026-09-11] ingest | Improved MMSE-Based Noise PSD Tracking Using Temporal Cepstrum Smoothing (Gerkmann & Hendriks 2012)
+
+- **Source**: `raw/papers/gerkmann-2012-mmse-noise-psd-tracking/full-text.md` (Zotero: UXNT8S25)
+- **Authors**: Timo Gerkmann (Universität Oldenburg), Richard C. Hendriks (Delft University of Technology)
+- **Published**: IEEE ICASSP 2012, Kyoto, Japan
+- **DOI**: 10.1109/ICASSP.2012.6287828
+- **Summary**: Replaces the limited-ML + decision-directed speech-PSD pair of the MMSE-based noise PSD tracker with a single temporal-cepstrum-smoothing (TCS) estimate — pitch-protecting selective cepstral smoothing with an analytic bias correction. Removes the explicit bias-compensation branch, lowers LogErr below both the MMSE baseline and minimum statistics, and gains ~1 dB segmental SNR in babble noise at 0 dB input SNR at a cost of two real-valued FFTs.
+- **Pages created**:
+  - `wiki/sources/gerkmann-2012-mmse-noise-psd-tracking.md`
+  - `wiki/entities/richard-c-hendriks.md`
+  - `wiki/concepts/temporal-cepstrum-smoothing.md`
+  - `wiki/concepts/mmse-based-noise-psd-estimation.md`
+  - `wiki/concepts/decision-directed-a-priori-snr.md`
+- **Pages updated**:
+  - `wiki/entities/timo-gerkmann.md` — appended the ICASSP 2012 contribution
+  - `wiki/concepts/minimum-statistics.md` — new "Relation to MMSE-Based Noise Estimation" section (MS keeps the highest speech SNR but the lowest noise reduction), added source + related concepts
+  - `wiki/concepts/speech-presence-probability.md` — the three single-channel NE families are now contrasted (MS / SPP-based / MMSE-based); SPP-based NE vs MMSE-based NE framing added, plus a note that Gerkmann & Hendriks 2011 SPP and the MMSE-based tracker are different estimators
+  - `wiki/concepts/cepstral-space-speech-enhancement.md` — new "Classical Precursor: Temporal Cepstrum Smoothing" section with a TCS-vs-neural comparison table; softens the "traditional algorithms stayed in the TF domain" claim
+  - `wiki/index.md`, `wiki/concepts/index.md`, `wiki/entities/index.md`, `wiki/sources/index.md` — rows + statistics (total 1287: 552 entities / 501 concepts / 204 sources / 23 synthesis / 7 queries)
+- **Notes**: Zotero's abstract field is truncated mid-sentence (full abstract taken from the paper). Results in the source are graphical (grouped bar charts, Fig. 1–2); only the paper's own qualitative discussion and the stated ~1 dB babble-noise gain are reported, no bar heights were transcribed.

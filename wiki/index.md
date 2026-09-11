@@ -561,6 +561,7 @@
 | [[entities/laurent-girin\|Laurent Girin]] | GIPSA-lab / INRIA — co-author of the 2022 DL-based SSL survey | 2026-09-09 |
 | [[entities/alexandre-guerin\|Alexandre Guerin]] | Orange Labs — co-author of the 2022 DL-based SSL survey | 2026-09-09 |
 | [[entities/sakari-tervo\|Sakari Tervo]] | Researcher, Helsinki University of Technology (TKK) Department of Media Technology — intensity-vector direction estimation, room acoustics measurement. | 2026-09-09 |
+| [[entities/richard-c-hendriks\|Richard C. Hendriks]] | Delft University of Technology — single-channel speech enhancement, noise PSD estimation and tracking, MMSE-based statistical estimators | 2026-09-11 |
 
 ---
 
@@ -1068,6 +1069,9 @@
 | [[concepts/intensity-vector-doa-estimation\|Intensity-Vector DOA Estimation]] | Two-class taxonomy of direction estimators on intensity-vector azimuths — circular-statistics averaging (CME/MCA/CMD) vs. wrapped mixture-model fitting (VMM/WGM) — with Tervo 2009's concert-hall comparison results. | 2026-09-09 |
 | [[concepts/relative-transfer-matrix\|Relative Transfer Matrix (ReTM)]] | Matrix generalization of the RTF: a group-to-group spatial mapping between an auxiliary and a reference microphone group, signal-independent and used to subtract loudspeaker leakage in multichannel ANC | 2026-09-11 |
 | [[concepts/covariance-subtraction\|Covariance Subtraction]] | Two-stage identification principle using covariance additivity of independent sources: differencing primary-only and total-field covariances isolates one component without silencing the interferer | 2026-09-11 |
+| [[concepts/temporal-cepstrum-smoothing\|Temporal Cepstrum Smoothing (TCS)]] | Selective recursive smoothing in the cepstral domain — little smoothing to the low-quefrency envelope and the detected pitch peak, strong smoothing elsewhere; analytic bias correction B = exp(psi(mu)+C)/mu | 2026-09-11 |
+| [[concepts/mmse-based-noise-psd-estimation\|MMSE-Based Noise PSD Estimation]] | Third single-channel noise-PSD family: tracks the conditional noise periodogram E[|N|^2 given y] directly instead of spectral minima or speech-presence gating; faster than minimum statistics, needs a speech PSD estimate | 2026-09-11 |
+| [[concepts/decision-directed-a-priori-snr\|Decision-Directed A Priori SNR Estimation]] | Ephraim & Malah's recursive a priori SNR estimator (alpha_dd = 0.98); used as the bias-compensation speech estimate in the 2010 MMSE noise tracker and removed by the TCS variant | 2026-09-11 |
 
 ---
 
@@ -1280,6 +1284,7 @@
 | [[sources/grumiaux-2022-ssl-deep-learning-survey\|Grumiaux, Kitic, Girin & Guerin 2022: A Survey of Sound Source Localization with Deep Learning Methods]] | Six-axis taxonomy of 156 DL-based SSL systems (2011-2021): environment, source configuration, architecture, input features, output strategy, data/learning. | 2026-09-09 |
 | [[sources/tervo-2009-sound-intensity-direction\|Tervo 2009: Direction Estimation Based on Sound Intensity Vectors]] | Empirical comparison of five intensity-vector DOA estimators (CME/MCA/CMD averaging vs. von Mises / wrapped Gaussian mixture fitting) on real concert-hall data — mixture models slightly better and far more noise-robust; radial-energy weighting (MCA) clearly worst. | 2026-09-09 |
 | [[sources/zhang-2026-feedback-path-mitigation-mcanc\|Zhang et al. 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] | ReTM + covariance subtraction neutralizes loudspeaker feedback in multichannel feedforward ANC without silencing the primary noise; stable for all tested step sizes/spacings, within 0.4-2.8 dB of the secondary-only oracle upper bound | 2026-09-11 |
+| [[sources/gerkmann-2012-mmse-noise-psd-tracking\|Gerkmann & Hendriks 2012: Improved MMSE-Based Noise PSD Tracking Using Temporal Cepstrum Smoothing]] | Replaces the limited-ML + decision-directed speech-PSD pair of MMSE-based noise PSD tracking with a single temporal-cepstrum-smoothing estimate; no explicit bias compensation, lower LogErr, ~1 dB segmental-SNR gain in babble noise at 0 dB SNR, cost = two real FFTs | 2026-09-11 |
 
 ---
 
@@ -1333,10 +1338,10 @@
 
 ## Statistics
 
-- **Total pages**: 1282
-- **Entities**: 551
-- **Concepts**: 498
-- **Sources**: 203
+- **Total pages**: 1287
+- **Entities**: 552
+- **Concepts**: 501
+- **Sources**: 204
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-09-11

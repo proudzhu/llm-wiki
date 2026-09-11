@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-08-15
-updated: 2026-09-03
+updated: 2026-09-11
 sources:
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/bagheri-2019-pmwf-spp/full-text.md
   - raw/papers/ke-2021-low-complexity-artificial-noise-suppression/full-text.md
+  - raw/papers/gerkmann-2012-mmse-noise-psd-tracking/full-text.md
 tags:
   - noise-estimation
   - speech-enhancement
@@ -39,12 +40,15 @@ $$\widehat{\Phi_s}(\tau, \omega) = \rho(\tau, \omega) \cdot \widehat{\Phi_s}(\ta
 
 ## Relation to Other Noise Estimators
 
-SPP-based NE is one of two main single-channel noise PSD estimators in the wiki:
+Three single-channel noise PSD estimation families appear in the wiki:
 
 - **[[concepts/minimum-statistics|Minimum Statistics]]** (Martin 2001) — VAD-free; tracks spectral minima. Updates during speech activity via minimum search.
 - **SPP-based NE** (Gerkmann & Hendriks 2011) — soft-decision VAD; updates during speech *absence*, weighted by $1 - \rho$.
+- **[[concepts/mmse-based-noise-psd-estimation|MMSE-Based Noise PSD Estimation]]** (Hendriks et al. 2010; Gerkmann & Hendriks 2012) — no presence decision at all; computes the conditional expectation of the noise periodogram $\mathrm{E}\left[|N|^2 \mid y\right]$ in every frame, incurring instead the need for a speech PSD estimate.
 
-The two are complementary: SPP gives faster tracking in truly non-stationary noise (no search-window delay), while minimum statistics avoids the soft-decision threshold altogether. Jin et al. 2017 chose SPP for the low-frequency stage precisely because low-frequency coherence-based NE is unreliable, and SPP provides both the low-frequency noise PSD *and* the speech-absence gate needed by the high-frequency coherence stage.
+MS and SPP-based NE are complementary: SPP gives faster tracking in truly non-stationary noise (no search-window delay), while minimum statistics avoids the soft-decision threshold altogether. Jin et al. 2017 chose SPP for the low-frequency stage precisely because low-frequency coherence-based NE is unreliable, and SPP provides both the low-frequency noise PSD *and* the speech-absence gate needed by the high-frequency coherence stage.
+
+**SPP-based NE vs. MMSE-based NE** is a genuine fork in philosophy rather than a mere implementation difference: SPP-based NE freezes the noise estimate where speech is present and is therefore only as good as the presence decision, while MMSE-based NE amortizes the speech-uncertainty problem into a closed-form conditional expectation and never fully freezes. On noise-tracking accuracy the MMSE-based estimator outperforms MS; [[sources/gerkmann-2012-mmse-noise-psd-tracking|Gerkmann & Hendriks (ICASSP 2012)]] then improve *that* estimator by supplying its speech-PSD input from [[concepts/temporal-cepstrum-smoothing|temporal cepstrum smoothing]] instead of a limited-ML plus [[concepts/decision-directed-a-priori-snr|decision-directed]] pair, gaining ~1 dB segmental SNR in babble noise at 0 dB input SNR. Note that the same authors' SPP formulation (Gerkmann & Hendriks 2011) is a *different* estimator from this MMSE-based noise-power tracker — the two share authors and a noise-PSD target, not a mechanism.
 
 ## Multi-Channel Extension (MC-SPP)
 
@@ -64,6 +68,9 @@ All three add only 0.0098–0.016 MFLOPs/frame on top of the DNN, and the *choic
 
 - [[concepts/voice-activity-detection|Voice Activity Detection]] — SPP is the soft-decision generalization of binary VAD
 - [[concepts/minimum-statistics|Minimum Statistics]] — alternative single-channel NE paradigm
+- [[concepts/mmse-based-noise-psd-estimation|MMSE-Based Noise PSD Estimation]] — presence-decision-free alternative that conditions on the observation instead
+- [[concepts/temporal-cepstrum-smoothing|Temporal Cepstrum Smoothing (TCS)]] — speech-PSD estimator feeding the improved MMSE-based tracker
+- [[concepts/decision-directed-a-priori-snr|Decision-Directed A Priori SNR Estimation]] — the speech estimator the TCS variant eliminates from that tracker
 - [[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence Noise Estimation]] — uses SPP for both low-frequency NE and the speech-absence gate
 - [[concepts/wiener-filter|Wiener Filter]] — downstream consumer of the estimated noise PSD
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
@@ -75,3 +82,4 @@ All three add only 0.0098–0.016 MFLOPs/frame on top of the DNN, and the *choic
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — uses SPP for the low-frequency NE stage and as the speech-absence gate for the multi-channel coherence stage
 - [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]] — multi-channel Gaussian-model extension driving noise PSD matrix tracking, PMWF trade-off, and MMSE output
 - [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke, Li, Zheng, Peng & Li 2021: Low-Complexity Artificial Noise Suppression]] — three re-designed SPP inputs (noisy spectrum, DNN gain, adaptive prior) that un-freeze noise tracking on DNN artificial residual noise
+- [[sources/gerkmann-2012-mmse-noise-psd-tracking|Gerkmann & Hendriks 2012: Improved MMSE-Based Noise PSD Tracking Using Temporal Cepstrum Smoothing]] — the same authors' presence-decision-free MMSE-based noise tracker, contrasted here as the third single-channel NE family

@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-26
-updated: 2026-08-15
+updated: 2026-09-11
 sources:
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
+  - raw/papers/gerkmann-2012-mmse-noise-psd-tracking/full-text.md
 tags:
   - noise-estimation
   - speech-enhancement
@@ -95,6 +96,12 @@ The two dominant single-channel noise PSD estimators — minimum statistics (VAD
 
 Jin et al. (2017) chose SPP-based NE for the low-frequency stage of their [[concepts/adaptive-coherence-noise-estimation|adaptive coherence NE]] precisely because (i) low-frequency coherence-based NE is unreliable due to speech/noise coherence overlap, and (ii) the SPP $\rho$ doubles as the speech-absence gate ($\rho < 0.1$) for the high-frequency coherence and noise-covariance adaptation — a coupling that a VAD-free method like minimum statistics cannot provide. The Martin (2001) minimum statistics method is cited as ref [5] in their system overview but not used in the final pipeline.
 
+## Relation to MMSE-Based Noise Estimation
+
+The third single-channel family, [[concepts/mmse-based-noise-psd-estimation|MMSE-based noise PSD estimation]], attacks the same problem from the opposite direction: instead of tracking *minima* of a smoothed periodogram, it computes the conditional expectation $\mathrm{E}\left[|N|^2 \mid y\right]$ directly, which requires a speech PSD estimate but allows every frame — not just the minima — to inform the noise estimate.
+
+[[sources/gerkmann-2012-mmse-noise-psd-tracking|Gerkmann & Hendriks (ICASSP 2012)]] compare the two directly and confirm the trade-off that motivates the MMSE family: minimum statistics retains the **highest segmental speech SNR** of the evaluated estimators but delivers the **lowest amount of noise reduction**, i.e. it preserves speech by leaving more noise behind. The MMSE-based estimators — both the baseline and the temporal-cepstrum-smoothed variant — yield a better distortion-vs-noise-reduction trade-off, as indicated by a larger segmental-SNR gain, and a lower log noise-estimation error (LogErr). This matches the earlier finding of Taghia et al. (ICASSP 2011) that MMSE-based noise PSD tracking follows quickly changing noise fields faster than MS-based approaches, whose tracking delay scales with the minimum-search window.
+
 ## Related Concepts
 
 - [[concepts/voice-activity-detection|Voice Activity Detection (VAD)]]
@@ -102,9 +109,12 @@ Jin et al. (2017) chose SPP-based NE for the low-frequency stage of their [[conc
 - [[concepts/wiener-filter|Wiener Filter]]
 - [[concepts/kalman-filter|Kalman Filter]]
 - [[concepts/speech-presence-probability|Speech Presence Probability (SPP)]] — the soft-decision VAD counterpart
+- [[concepts/mmse-based-noise-psd-estimation|MMSE-Based Noise PSD Estimation]] — the conditional-expectation counterpart, with faster tracking of non-stationary noise
+- [[concepts/temporal-cepstrum-smoothing|Temporal Cepstrum Smoothing (TCS)]] — speech-PSD front end of the improved MMSE tracker compared against MS
 - [[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence Noise Estimation]] — uses SPP-based NE (not minimum statistics) for the low-frequency stage
 
 ## Related Sources
 
 - [[sources/martin-2001-noise-psd-estimation-optimal-smoothing|Noise Power Spectral Density Estimation Based on Optimal Smoothing and Minimum Statistics (Martin 2001)]]
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — cites minimum statistics (ref [5]) but uses SPP-based NE for the low-frequency stage to exploit SPP's dual role as speech-absence gate
+- [[sources/gerkmann-2012-mmse-noise-psd-tracking|Gerkmann & Hendriks 2012: Improved MMSE-Based Noise PSD Tracking Using Temporal Cepstrum Smoothing]] — uses MS as a baseline: MS wins on speech SNR, loses on noise reduction and LogErr

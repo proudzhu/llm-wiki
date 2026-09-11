@@ -555,4 +555,5 @@
 | [[entities/laurent-girin\|Laurent Girin]] | GIPSA-lab / INRIA — co-author of the 2022 DL-based SSL survey | 2026-09-09 |
 | [[entities/alexandre-guerin\|Alexandre Guerin]] | Orange Labs — co-author of the 2022 DL-based SSL survey | 2026-09-09 |
 | [[entities/sakari-tervo\|Sakari Tervo]] | Researcher, Helsinki University of Technology (TKK) Department of Media Technology — intensity-vector direction estimation, room acoustics measurement. | 2026-09-09 |
+| [[entities/richard-c-hendriks\|Richard C. Hendriks]] | Delft University of Technology — single-channel speech enhancement, noise PSD estimation and tracking, MMSE-based statistical estimators | 2026-09-11 |
 
