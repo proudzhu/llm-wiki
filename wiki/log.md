@@ -5138,3 +5138,28 @@ Ingested "A Comparison of Generative and Discriminative Methods for Speech Enhan
 - **Pages created**: [[sources/tervo-2009-sound-intensity-direction|Tervo 2009 source page]], [[entities/sakari-tervo|Sakari Tervo]], [[concepts/sound-intensity-vector|Sound Intensity Vector]], [[concepts/intensity-vector-doa-estimation|Intensity-Vector DOA Estimation]]
 - **Pages updated**: [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]] (new intensity-vector section + source/links), [[concepts/sound-source-localization|Sound Source Localization]] (conventional-methods bullet expanded + source), [[concepts/ambisonics|Ambisonics]] (intensity-vector cross-links), [[sources/grumiaux-2022-ssl-deep-learning-survey|Grumiaux et al. 2022]] (cross-refs to the new concept pages)
 - **Notes**: MinerU failed on this PDF ("parsing failed", both vlm and pipeline models); extraction fell back to PyMuPDF — text via page-by-page extraction, and the 5 figures rendered as region crops (`figures/fig01–fig05.png`) located from caption blocks and drawing clusters, edges verified clean against caption glyph positions.
+
+---
+
+## [2026-09-11] ingest | Acoustic Feedback Path Mitigation for Multichannel Active Noise Control (Zhang et al. 2026)
+
+- **Source**: `raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md` (Zotero: LVZPGG2Q, EUSIPCO 2026, 5 pages, paper ID 2140 — no DOI yet)
+- **Authors**: Yile (Angela) Zhang, Thushara D. Abhayapala, Prasanga N. Samarasinghe, Amy Bastine (Audio & Acoustic Signal Processing Group, The Australian National University)
+- **Published**: EUSIPCO 2026, Bruges, Belgium. Note: the Zotero record lists only three creators (missing first author Yile (Angela) Zhang) and no date or venue; the PDF title page and the EUSIPCO 2026 accepted-papers list were used instead.
+- **Summary**: Microphones are split into a reference group (feeding the ANC controller) and an added feedback group; a Relative Transfer Matrix between the two groups — isolated by covariance subtraction from primary-only and total-field measurements — is subtracted from the reference signal ahead of a normalized frequency-domain multichannel FxLMS controller. This neutralizes secondary-loudspeaker acoustic feedback **without ever silencing the primary noise**, which is the precondition conventional offline feedback-path modeling depends on. Stable across all nine tested (step size, loudspeaker spacing) configurations and within 0.4–2.8 dB of a secondary-only oracle upper bound, versus divergence for the no-mitigation baseline and ≈ −2 dB for a naive total-field estimator.
+- **Pages created**:
+  - `wiki/sources/zhang-2026-feedback-path-mitigation-mcanc.md`
+  - `wiki/concepts/relative-transfer-matrix.md`
+  - `wiki/concepts/covariance-subtraction.md`
+- **Pages updated**:
+  - `wiki/entities/yile-angela-zhang.md`, `wiki/entities/thushara-d-abhayapala.md`, `wiki/entities/prasanga-n-samarasinghe.md`, `wiki/entities/amy-bastine.md` — appended key contribution, tags, research focus
+  - `wiki/concepts/acoustic-feedback.md` — added solution 5 (spatial group mapping / ReTM-based neutralization)
+  - `wiki/concepts/relative-transfer-function.md` — added the ReTM multi-source generalization section
+  - `wiki/concepts/online-feedback-path-modeling.md` — added the non-adaptive one-shot-identification contrast and trade-off table
+  - `wiki/concepts/offline-secondary-path-modeling.md` — added the persistent-primary-noise failure mode and the two remedy families
+  - `wiki/concepts/filtered-x-lms-algorithm.md` — added feedback-contaminated-reference section and the divergence regime
+  - `wiki/concepts/multi-channel-anc.md` — added the acoustic-feedback / MIMO stability section
+  - `wiki/concepts/spatial-covariance-matrix.md` — added covariance subtraction as a component-isolation operator
+  - `wiki/concepts/image-source-method.md` — added this paper's ANC configuration parameters
+  - `wiki/concepts/active-noise-control.md` — added the multichannel feedback challenge and cross-references
+  - `wiki/synthesis/multichannel-anc-efficiency-and-robustness.md` — new Section 4 "Acoustic Feedback: The Hidden Stability Bottleneck", comparison-table row, tags and sources

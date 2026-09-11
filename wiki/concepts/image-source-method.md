@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-09-09
+updated: 2026-09-11
 sources:
   - raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt
+  - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
 tags:
   - acoustics
   - room-simulation
@@ -50,6 +51,20 @@ The Grumiaux et al. 2022 survey identifies ISM-based simulators as the workhorse
 - **Reverberation effects**: Reverberation reduces maximum noise reduction and creates frequency-dependent convergence speed differences (Lu & Clarkson 1993)
 - **Robustness validation**: Testing ANC algorithms under realistic reverberant conditions is essential for practical deployment
 
+## ANC Configuration Parameters (Zhang 2026)
+
+From the multichannel feedback-mitigation simulation of [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang et al. 2026]]:
+
+| Parameter | Value | Rationale |
+|-----------|-------|-----------|
+| Room size | 6 m × 7 m × 3 m | Large living space |
+| $T_{60}$ | 0.7 s | Moderately reverberant untreated room |
+| Sampling rate | 8 kHz | Low-frequency ANC band (50–600 Hz) |
+| Array geometry | Secondary loudspeakers and error/feedback microphones on concentric circles in one plane | Controlled, parametrisable coupling via the loudspeaker radius $r_s$ |
+| Loudspeaker radii swept | $r_s \in \{0.2,\ 0.3,\ 0.35\}$ m | Directly tunes feedback strength and closed-loop stability |
+
+All primary, secondary, and feedback paths are generated with ISM (Allen & Berkley 1979; Habets RIR generator); the primary source is a single point source at $[4.78,\ 3.6,\ 1.59]$ m.
+
 ## Related Concepts
 
 - [[active-noise-control|Active Noise Control]]
@@ -58,3 +73,4 @@ The Grumiaux et al. 2022 survey identifies ISM-based simulators as the workhorse
 ## Related Sources
 
 - [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
+- [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] — ISM-generated primary/secondary/feedback paths for a multichannel ANC room simulation

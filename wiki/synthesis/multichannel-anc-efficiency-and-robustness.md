@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-22
-updated: 2026-09-05
+updated: 2026-09-11
 sources:
   - zotero://select/items/0_GUY9IXKN (Kronecker Decomposition)
   - zotero://select/items/0_GLPRCTIK (Distributed ANC)
@@ -11,12 +11,14 @@ sources:
   - zotero://select/items/0_N7HG3TSP (Multi-task Learning)
   - zotero://select/items/0_QVJMFTWC (ANC Survey Part I)
   - raw/papers/he-2026-neural-projection-filter-anc/full-text.md
+  - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
 tags:
   - active-noise-control
   - multichannel-anc
   - computational-complexity
   - distributed-control
   - meta-learning
+  - acoustic-feedback
 ---
 
 # Multichannel ANC: Computational Efficiency and Spatial Robustness
@@ -62,7 +64,17 @@ N7HG3TSP introduces a **Frequency-Direction Aware** mechanism:
 
 ---
 
-## 4. Synthesis Comparison
+## 4. Acoustic Feedback: The Hidden Stability Bottleneck
+
+Complexity is not the only scaling limit in MC-ANC. Every added secondary source also adds a loudspeaker-to-reference feedback path, and the resulting closed loop caps the usable adaptation step size regardless of how efficiently the controller is implemented. This axis is largely orthogonal to the complexity-reduction strategies above: a Kronecker-decomposed or BCD-updated controller still diverges if the feedback loop is left uncompensated.
+
+[[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang et al. 2026]] quantify the limit for a $(J_{\mathrm{R}}, J_{\mathrm{F}}, L, R) = (8, 8, 2, 2)$ array in a $6 \times 7 \times 3$ m room ($T_{60} = 0.7$ s): unmitigated multichannel FxLMS is stable at a secondary-source radius of 0.2 m, diverges at 0.3 m for $\mu = 0.01$, and diverges at **every** tested step size once the radius reaches 0.35 m — the step-size budget collapses with the source spread before any complexity budget is spent. Applying feedback neutralization upstream of the controller (a covariance-subtracted [[concepts/relative-transfer-matrix|Relative Transfer Matrix]]) restores stability in all nine step-size/spacing configurations, landing within 0.4–2.8 dB of an oracle that measured the secondary-only field directly.
+
+The efficiency framing applies to the mitigation mechanism itself. Per-path feedback modeling costs $J_{\mathrm{R}} \times L$ adaptive filters, whereas the ReTM replaces them with a single $J_{\mathrm{R}} \times J_{\mathrm{F}}$ matrix identified once — dimensionality reduction in the same family as the Kronecker/SVD decompositions and reference compression of Section 2, but applied to the *feedback* model rather than to the controller or the reference vector. The trade-off is that it is non-adaptive: unlike the meta-learning and online-modeling directions of Section 3, a fixed ReTM cannot follow secondary-side geometry drift, which the authors list as future work. Identification itself is enabled by [[concepts/covariance-subtraction|covariance subtraction]], which measures primary-only and total-field covariances in two stages so the persistent primary noise never has to be silenced.
+
+---
+
+## 5. Synthesis Comparison
 
 | Strategy | Key Mechanism | Best For | Complexity |
 | :--- | :--- | :--- | :--- |
@@ -71,10 +83,11 @@ N7HG3TSP introduces a **Frequency-Direction Aware** mechanism:
 | **Meta-Learning** | Priors/Cold-start | Quickly changing acoustic environments | High (Offline) |
 | **Adjoint LMS** | Gradient Optimization | High-channel-count (Road Noise) | Optimized $O(L)$ |
 | **Neural reference projection** (He 2026) | Learned condition-aware FIR projection of references (42→4) | Correlated multi-reference road noise | 374.0 MMAC/s |
+| **Feedback-aware front end** (Zhang 2026) | Covariance-subtracted Relative Transfer Matrix subtracts loudspeaker leakage from the reference before FxLMS | Feedback-limited MIMO arrays | One $J_{\mathrm{R}} \times J_{\mathrm{F}}$ matrix, identified once |
 
 ---
 
-## 5. Future Directions
+## 6. Future Directions
 1. **Dynamic Topology**: Systems that can add/drop secondary nodes on-the-fly without retraining the entire control structure.
 2. **Hybrid Physics-Neural Models**: Using neural networks to predict time-varying secondary paths (as seen in recent Virtual Sensing papers) and using traditional FxLMS to perform the final cancellation, combining robustness with adaptivity.
 
@@ -89,8 +102,12 @@ N7HG3TSP introduces a **Frequency-Direction Aware** mechanism:
 - [[concepts/multi-channel-anc|Multi-Channel ANC]]
 - [[concepts/multi-reference-anc|Multi-Reference ANC]]
 - [[concepts/condition-aware-projection-filtering|Condition-Aware Projection Filtering (CAPF)]]
+- [[concepts/acoustic-feedback|Acoustic Feedback]] — the MIMO stability limiter treated in Section 4
+- [[concepts/relative-transfer-matrix|Relative Transfer Matrix (ReTM)]] — one-shot identification of the feedback mapping
+- [[concepts/covariance-subtraction|Covariance Subtraction]] — lets that identification run without a quiet window
 
 ## Related Sources
 
 - [[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC]]
 - [[sources/he-2026-neural-projection-filter-anc|He et al. 2026: Neural Projection Filter Generation for Multi-Reference ANC]]
+- [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] — the acoustic-feedback axis of Section 4

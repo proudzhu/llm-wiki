@@ -1066,6 +1066,8 @@
 | [[concepts/ambisonics\|Ambisonics]] | Spherical-harmonic spatial audio format (FOA/HOA) independent of array geometry; standard input feature for DL-based SSL. | 2026-09-09 |
 | [[concepts/sound-intensity-vector\|Sound Intensity Vector]] | Pressure × particle-velocity energy-flow vector; p–p probe and B-format estimation, finite-difference bias and its interpolation-based compensation with the f_max = c/(d√2) limit; DOA, DirAC, and SELD/ACCDOA feature uses. | 2026-09-09 |
 | [[concepts/intensity-vector-doa-estimation\|Intensity-Vector DOA Estimation]] | Two-class taxonomy of direction estimators on intensity-vector azimuths — circular-statistics averaging (CME/MCA/CMD) vs. wrapped mixture-model fitting (VMM/WGM) — with Tervo 2009's concert-hall comparison results. | 2026-09-09 |
+| [[concepts/relative-transfer-matrix\|Relative Transfer Matrix (ReTM)]] | Matrix generalization of the RTF: a group-to-group spatial mapping between an auxiliary and a reference microphone group, signal-independent and used to subtract loudspeaker leakage in multichannel ANC | 2026-09-11 |
+| [[concepts/covariance-subtraction\|Covariance Subtraction]] | Two-stage identification principle using covariance additivity of independent sources: differencing primary-only and total-field covariances isolates one component without silencing the interferer | 2026-09-11 |
 
 ---
 
@@ -1277,6 +1279,7 @@
 | [[sources/sun-2024-lightweight-hybrid-speech-extraction\|Sun, Lei & Zhang 2024: A Lightweight Hybrid Multi-Channel Speech Extraction System with Directional VAD]] | DVAD-gated robust GSC + DPCRN post-filter: 33K-param CRN estimates per-zone speaker activity to gate ABM/AIC NLMS updates and condition the post-filter; matches FT-JNF at ~90% fewer MACs (1.82 vs 14.36 G/s) and beats it on real-world DNSMOS (ICASSP 2024) | 2026-09-08 |
 | [[sources/grumiaux-2022-ssl-deep-learning-survey\|Grumiaux, Kitic, Girin & Guerin 2022: A Survey of Sound Source Localization with Deep Learning Methods]] | Six-axis taxonomy of 156 DL-based SSL systems (2011-2021): environment, source configuration, architecture, input features, output strategy, data/learning. | 2026-09-09 |
 | [[sources/tervo-2009-sound-intensity-direction\|Tervo 2009: Direction Estimation Based on Sound Intensity Vectors]] | Empirical comparison of five intensity-vector DOA estimators (CME/MCA/CMD averaging vs. von Mises / wrapped Gaussian mixture fitting) on real concert-hall data — mixture models slightly better and far more noise-robust; radial-energy weighting (MCA) clearly worst. | 2026-09-09 |
+| [[sources/zhang-2026-feedback-path-mitigation-mcanc\|Zhang et al. 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] | ReTM + covariance subtraction neutralizes loudspeaker feedback in multichannel feedforward ANC without silencing the primary noise; stable for all tested step sizes/spacings, within 0.4-2.8 dB of the secondary-only oracle upper bound | 2026-09-11 |
 
 ---
 
@@ -1330,10 +1333,10 @@
 
 ## Statistics
 
-- **Total pages**: 1279
+- **Total pages**: 1282
 - **Entities**: 551
-- **Concepts**: 496
-- **Sources**: 202
+- **Concepts**: 498
+- **Sources**: 203
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-09
+- **Last updated**: 2026-09-11

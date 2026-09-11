@@ -1,11 +1,14 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-04-30
+updated: 2026-09-11
+sources:
+  - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
 tags:
   - array-processing
   - spatial-statistics
   - speech-enhancement
+  - active-noise-control
 ---
 
 # Spatial Covariance Matrix
@@ -43,6 +46,16 @@ where $\psi_i, \psi_R, \psi_V$ are **variance ratios** (non-negative, sum to 1),
 
 Normalization by trace transforms the SCM estimation problem from estimating absolute variances to estimating **relative variance ratios** — a simpler constrained optimization with non-negativity and unity-sum constraints, solvable by multiplicative updates.
 
+## Covariance Subtraction for Component Isolation
+
+An SCM is normally *decomposed* into target and noise contributions under the assumption that the components are uncorrelated. In system identification the same additivity is used in reverse, as an operator that isolates one component by differencing two measured SCMs. [[concepts/covariance-subtraction|Covariance subtraction]] exploits this: with a primary-only measurement $\boldsymbol{\Phi}^{(\mathrm{Pri})}$ and a total measurement $\boldsymbol{\Phi}^{(\mathrm{Tot})}$ (secondary loudspeakers probing, primary still present),
+
+$$
+\boldsymbol{\Phi}^{(\mathrm{Sec})} = \boldsymbol{\Phi}^{(\mathrm{Tot})} - \boldsymbol{\Phi}^{(\mathrm{Pri})},
+$$
+
+which recovers the secondary-only contribution exactly when the components are mutually independent — **without ever silencing the primary source**. [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang et al. 2026]] use the resulting auto-covariance $\boldsymbol{\Phi}_{\mathrm{RR}}^{(\mathrm{Sec})}$ and cross-covariance $\boldsymbol{\Phi}_{\mathrm{FR}}^{(\mathrm{Sec})}$ between two microphone groups to estimate a [[concepts/relative-transfer-matrix|Relative Transfer Matrix]] for acoustic-feedback neutralization in multichannel ANC. Their ablation shows the subtraction is decisive rather than cosmetic: estimating the same matrix from total-field SCMs collapses noise reduction to ≈ −2 dB, because the persistent primary field dominates the pseudo-inverse $\boldsymbol{\Phi}_{\mathrm{FR}}^{(\mathrm{Sec})^{\dagger}}$.
+
 ## Related Concepts
 
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
@@ -60,6 +73,8 @@ Normalization by trace transforms the SCM estimation problem from estimating abs
 - [[concepts/distributed-binaural-speech-enhancement|Distributed Binaural Speech Enhancement]]
 - [[concepts/asymmetric-stft|Asymmetric STFT]]
 - [[concepts/rank-constrained-spatial-covariance-matrix-estimation|Rank-Constrained Spatial Covariance Matrix Estimation (RCSCME)]]
+- [[concepts/covariance-subtraction|Covariance Subtraction]] — using SCM additivity as a subtraction operator for system identification
+- [[concepts/relative-transfer-matrix|Relative Transfer Matrix (ReTM)]] — estimated from primary-only vs total-field SCM differences
 
 ## Related Sources
 
@@ -69,3 +84,4 @@ Normalization by trace transforms the SCM estimation problem from estimating abs
 - [[sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026: Spatial-Magnifier]]
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]
 - [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025: Real-Time RCSCME-based Speech Extraction]]
+- [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] — SCMs over two microphone groups, differenced to isolate the secondary-only field for feedback neutralization

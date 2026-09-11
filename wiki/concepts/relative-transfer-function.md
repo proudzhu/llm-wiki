@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-26
-updated: 2026-09-09
+updated: 2026-09-11
 sources:
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
   - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
   - raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt
+  - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
 tags:
   - spatial-filtering
   - beamforming
@@ -71,6 +72,18 @@ Apostolidis et al. (2026) construct a pre-enrolled dictionary of $N$ time-invari
 
 In the time domain, the RTF counterpart is the **relative impulse response (ReIR)**. [[sources/xiao-2023-spatially-selective-anc|Xiao, Xu & Zhao 2023]] use ReIRs as the building block of [[concepts/spatially-selective-anc|spatially selective ANC]]: $\mathbf{H}$ stacks the Toeplitz matrices of the ReIRs between each microphone and a reference microphone (closest to the desired source), and the constraint vector $\mathbf{f} = \mathbf{h}_K$ (the error-microphone ReIR) fixes the desired-direction response so the physical desired wave is preserved at the error microphone rather than reconstructed. Unlike beamforming-side RTF estimation, these ReIRs are design-time quantities (pre-measured per desired direction), and later soft-constrained SSANC variants use **acausal** ReIRs with a delayed-impulse target $\boldsymbol{\delta}_\Delta$.
 
+## Relative Transfer Matrix: The Multi-Source Generalization
+
+The RTF assumes a *single* source and a *single* reference channel. The **[[concepts/relative-transfer-matrix|Relative Transfer Matrix (ReTM)]]** relaxes both: it maps an entire auxiliary microphone group $\mathbf{M}_{\mathrm{F}} \in \mathbb{C}^{J_{\mathrm{F}}}$ onto a reference group $\mathbf{M}_{\mathrm{R}} \in \mathbb{C}^{J_{\mathrm{R}}}$ via $\mathbf{M}_{\mathrm{R}} = \mathbf{R}_{\mathrm{RF}}\mathbf{M}_{\mathrm{F}}$, with $\mathbf{R}_{\mathrm{RF}} \in \mathbb{C}^{J_{\mathrm{R}} \times J_{\mathrm{F}}}$. It is neither normalized to unity nor tied to one source, so it describes an arbitrary source set observed by two arrays.
+
+In multichannel ANC, [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang et al. 2026]] use the secondary-loudspeaker-only instance
+
+$$
+\mathbf{R}_{\mathrm{RF}}^{(\mathrm{Sec})} = \mathbf{S}_{\mathrm{ref}}\mathbf{S}_{\mathrm{fb}}^{\dagger}
+$$
+
+to subtract loudspeaker leakage from the reference microphones ahead of FxLMS. Estimation follows the same covariance template as the RTF, but with a different interference-removal device: instead of [[concepts/spatial-covariance-matrix|SCM]] **whitening** against noise-only frames — unavailable here, because the interfering field is the persistent primary noise and cannot be paused — the secondary-only covariances are isolated by [[concepts/covariance-subtraction|covariance subtraction]], $\boldsymbol{\Phi}^{(\mathrm{Sec})} = \boldsymbol{\Phi}^{(\mathrm{Tot})} - \boldsymbol{\Phi}^{(\mathrm{Pri})}$, before computing $\mathbf{R} \approx \boldsymbol{\Phi}_{\mathrm{RR}}^{(\mathrm{Sec})}\boldsymbol{\Phi}_{\mathrm{FR}}^{(\mathrm{Sec})^{\dagger}}$. As with RTF-based beamforming, the matrix is signal-independent once identified — it depends only on the acoustic transfer structure.
+
 ## Related Concepts
 
 - [[concepts/lcmv-beamformer|LCMV Beamformer]]
@@ -82,9 +95,12 @@ In the time domain, the RTF counterpart is the **relative impulse response (ReIR
 - [[concepts/generalized-eigenvalue-decomposition|Generalized Eigenvalue Decomposition]]
 - [[concepts/mpdr-beamformer|MPDR Beamformer]]
 - [[concepts/output-based-speech-enhancement|Output-based Speech Enhancement]]
+- [[concepts/relative-transfer-matrix|Relative Transfer Matrix (ReTM)]] — the multi-source, multi-reference generalization
+- [[concepts/covariance-subtraction|Covariance Subtraction]] — interference removal for RTF/ReTM estimation when no noise-only segment exists
 
 ## Related Sources
 
 - [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]]
 - [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis et al. 2026: Listen first — output-based multi-microphone speech enhancement]]
 - [[sources/xiao-2023-spatially-selective-anc|Xiao 2023: Spatially Selective Active Noise Control Systems]] — ReIRs as design-time spatial constraints
+- [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] — extends the RTF to a group-to-group Relative Transfer Matrix estimated by covariance subtraction, applied to acoustic-feedback neutralization

@@ -1,14 +1,16 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-09-07
+updated: 2026-09-11
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/he-2026-neural-projection-filter-anc/full-text.md
+  - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
 tags:
 - active-noise-control
 - dsp
 - multi-channel
+- acoustic-feedback
 ---
 
 # Multi-Channel ANC
@@ -67,6 +69,12 @@ When the growth is driven by a large number of **reference channels** (e.g., 42 
 
 Open-fitting hearing aids motivate a special multichannel ANC configuration: a two-microphone BTE array provides multichannel NR references, and an ear-canal microphone provides the error signal for feedforward ANC canceling the [[concepts/open-fitting-noise-leakage|noise leakage]] at the tympanic membrane. [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel et al. 2010]] compare the combination topologies: cascading puts the ANC after the NR (starving it of noise-rich input and consuming the causality margin with the NR delay), while the integrated [[concepts/filtered-x-mwf|FxMWF]] merges both functions into one multichannel filter set on secondary-path-filtered references — delivering ~12 dB SNR improvement versus ~4 dB for the multichannel cascade, and >10 dB versus ~1 dB at the realistic two-sample causality margin.
 
+## Acoustic Feedback and MIMO Stability
+
+Every added secondary loudspeaker and reference microphone adds another loudspeaker-to-reference feedback path, and the closed-loop stability margin shrinks with the number of channels. Because per-path [[concepts/online-feedback-path-modeling|FBPM]] scales as $J_{\mathrm{R}} \times L$, multichannel arrays are precisely where classical offline feedback neutralization becomes least practical.
+
+[[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang et al. 2026]] quantify the consequence for a $(J_{\mathrm{R}}, J_{\mathrm{F}}, L, R) = (8, 8, 2, 2)$ configuration in a $6 \times 7 \times 3$ m room ($T_{60} = 0.7$ s): plain multichannel FxLMS with no feedback mitigation is stable at a secondary-source radius of 0.2 m but diverges at 0.3 m ($\mu = 0.01$) and at **every** tested step size once the radius reaches 0.35 m — a compact demonstration that feedback, not the choice of adaptive algorithm, sets the usable step size in MIMO ANC. Their remedy replaces the $J_{\mathrm{R}} \times L$ path set with a single $J_{\mathrm{R}} \times J_{\mathrm{F}}$ [[concepts/relative-transfer-matrix|Relative Transfer Matrix]] estimated by [[concepts/covariance-subtraction|covariance subtraction]], which restores stability in all nine tested configurations while landing within 0.4–2.8 dB of an oracle that measured the secondary-only field directly.
+
 ## Related Concepts
 
 - [[active-noise-control|Active Noise Control]]
@@ -79,6 +87,9 @@ Open-fitting hearing aids motivate a special multichannel ANC configuration: a t
 - [[condition-aware-projection-filtering|Condition-Aware Projection Filtering (CAPF)]]
 - [[concepts/filtered-x-mwf|Filtered-x MWF (FxMWF)]]
 - [[concepts/open-fitting-noise-leakage|Open-Fitting Noise Leakage]]
+- [[concepts/acoustic-feedback|Acoustic Feedback]] — loudspeaker-to-reference coupling, the MIMO stability limiter
+- [[concepts/relative-transfer-matrix|Relative Transfer Matrix (ReTM)]] — compresses the per-path feedback model into one group-to-group matrix
+- [[concepts/covariance-subtraction|Covariance Subtraction]] — identifies the mapping without silencing the primary noise
 
 ## PINN-Assisted Multi-Channel ANC
 
@@ -90,3 +101,4 @@ In the PINN-assisted ANC system ([[sources/zhang-2024-active-noise-control-sound
 - [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] — multichannel ANC combined with NR in open-fitting hearing aids
 - [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]]
 - [[sources/he-2026-neural-projection-filter-anc|He et al. 2026: Neural Projection Filter Generation for Multi-Reference ANC]] — 42-reference road-noise system compressed to 4 projected references
+- [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] — a (8, 8, 2, 2) multichannel array where unmitigated FxLMS diverges at moderate source spread and a covariance-subtracted ReTM restores stability

@@ -1,14 +1,16 @@
 ---
 type: concept
 created: 2026-07-15
-updated: 2026-07-15
+updated: 2026-09-11
 sources:
   - raw/papers/ma-2027-robust-ffanc-online-path-modeling/full-text.md
+  - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
 tags:
   - active-noise-control
   - online-modeling
   - acoustic-feedback
   - adaptive-filtering
+  - relative-transfer-matrix
 ---
 
 # Online Feedback-Path Modeling
@@ -68,6 +70,24 @@ The OFBPM filter $\hat{F}_n(z)$ initialization is delicate in some architectures
 - **Ahmed–Akhtar 2013 (Sys-B)**: initial weights cannot be null; must be proportional to truth (initial modeling accuracy ≈ −5 dB) — impractical when abrupt path changes occur mid-run.
 - **Ma 2027 (Sys-D)**: null-vector initialization is admissible thanks to the second supporting filter $H_2(z)$, which decouples the OFBPM/OSPM from the controller.
 
+## Non-Adaptive Alternative: One-Shot Identification Under Persistent Noise
+
+OFBPM is not the only way to handle a feedback path that conventional offline estimation cannot measure. A contrasting strategy keeps the *non-adaptive* structure of offline FBPM but removes its precondition: instead of requiring the primary noise to be silenced, it isolates the secondary field from **covariance differences**.
+
+[[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang et al. 2026]] apply this to a multichannel ANC array. Two measurement stages — primary-only (loudspeakers off) and total (loudspeakers probing with the primary still running) — give $\boldsymbol{\Phi}^{(\mathrm{Sec})} = \boldsymbol{\Phi}^{(\mathrm{Tot})} - \boldsymbol{\Phi}^{(\mathrm{Pri})}$ by [[concepts/covariance-subtraction|covariance subtraction]], from which a [[concepts/relative-transfer-matrix|Relative Transfer Matrix]] between a reference microphone group and a feedback microphone group is estimated once and then held fixed.
+
+Trade-offs against OFBPM:
+
+| Aspect | OFBPM (auxiliary-noise adaptive) | One-shot ReTM + covariance subtraction |
+|---|---|---|
+| Tracks secondary-side drift | Yes, continuously | No — explicitly listed as future work |
+| In-operation auxiliary noise | Required (raises the residual floor, mitigated by AWGN scaling) | None — probing confined to the identification stage |
+| Model-order choice | Per-path FIR length $\hat{M}_f$ | Fixed $J_{\mathrm{R}} \times J_{\mathrm{F}}$ matrix, no per-path order |
+| Identification signal | Secondary output $y(n)$ observed at a reference mic | Second-order statistics across two microphone *groups* (needs an extra array) |
+| Bias under persistent primary noise | Unbiased by construction (auxiliary noise dominates locally) | Unbiased provided primary and probe components are mutually independent |
+
+The two are complementary rather than competing: OFBPM buys drift tracking at the cost of an in-operation noise floor, while the covariance-subtracted ReTM buys identification under ongoing primary noise at the cost of a mapping that cannot adapt.
+
 ## Related Concepts
 
 - [[acoustic-feedback|Acoustic Feedback]] — the physical phenomenon OFBPM compensates
@@ -76,8 +96,11 @@ The OFBPM filter $\hat{F}_n(z)$ initialization is delicate in some architectures
 - [[supporting-filter-anc|Supporting Filter in ANC]] — the $H_1(z)$/$H_2(z)$ mechanism used to decouple OFBPM/OSPM from the controller
 - [[feedforward-anc|Feedforward ANC]] — host architecture
 - [[hearing-aid-feedback-cancellation|Hearing Aid Feedback Cancellation]] — related but hearing-aid-specific AFC problem
+- [[concepts/relative-transfer-matrix|Relative Transfer Matrix (ReTM)]] — group-to-group mapping used by the non-adaptive one-shot alternative
+- [[concepts/covariance-subtraction|Covariance Subtraction]] — estimator that replaces the ANC-idle window for FBP/ReTM identification
 
 ## Related Sources
 
 - [[sources/ma-2027-robust-ffanc-online-path-modeling|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] — proposes the $H_2(z)$-driven global AWGN scaling for OFBPM
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section II-D covers the original offline feedback neutralization
+- [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] — non-adaptive alternative: a covariance-subtracted ReTM identified once, stable where a no-mitigation multichannel FxLMS baseline diverges

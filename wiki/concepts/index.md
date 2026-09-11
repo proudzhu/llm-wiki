@@ -500,4 +500,6 @@
 | [[concepts/ambisonics\|Ambisonics]] | Spherical-harmonic spatial audio format (FOA/HOA) independent of array geometry; standard input feature for DL-based SSL. | 2026-09-09 |
 | [[concepts/sound-intensity-vector\|Sound Intensity Vector]] | Pressure × particle-velocity energy-flow vector; p–p probe and B-format estimation, finite-difference bias and its interpolation-based compensation with the f_max = c/(d√2) limit; DOA, DirAC, and SELD/ACCDOA feature uses. | 2026-09-09 |
 | [[concepts/intensity-vector-doa-estimation\|Intensity-Vector DOA Estimation]] | Two-class taxonomy of direction estimators on intensity-vector azimuths — circular-statistics averaging (CME/MCA/CMD) vs. wrapped mixture-model fitting (VMM/WGM) — with Tervo 2009's concert-hall comparison results. | 2026-09-09 |
+| [[concepts/relative-transfer-matrix\|Relative Transfer Matrix (ReTM)]] | Matrix generalization of the RTF: a group-to-group spatial mapping between an auxiliary and a reference microphone group, signal-independent and used to subtract loudspeaker leakage in multichannel ANC | 2026-09-11 |
+| [[concepts/covariance-subtraction\|Covariance Subtraction]] | Two-stage identification principle using covariance additivity of independent sources: differencing primary-only and total-field covariances isolates one component without silencing the interferer | 2026-09-11 |
 

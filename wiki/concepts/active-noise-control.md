@@ -1,18 +1,20 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-09-07
+updated: 2026-09-11
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md
   - raw/papers/guo-2024-anc-saturation-survey/full-text.md
   - raw/papers/bai-2026-feedback-guided-anc/full-text.md
+  - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
 aliases:
 - Active Noise Control
 tags:
 - acoustics
 - control-systems
 - signal-processing
+- acoustic-feedback
 ---
 
 # Active Noise Control
@@ -73,6 +75,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - **[[output-saturation-effect|Output saturation]]**: When the secondary-path amplifier is driven beyond its rated output, the control signal is clipped and unconstrained adaptive filters (linear and nonlinear) diverge. Mitigated by [[output-constraint-anc-algorithms|output constraint algorithms]] or [[nonlinear-active-noise-control|nonlinear adaptive algorithms]] depending on the saturation regime (Guo 2024)
 - **Speech cancellation**: Traditional "cancel everything" approach damages useful speech signals in mixed sound fields
 - **DOA dependency**: The primary path $P(z)$ varies with sound direction, degrading feedforward ANC at non-nominal DOAs (Liebich 2018)
+- **Acoustic feedback in multichannel arrays**: loudspeaker-to-reference coupling grows with channel count, so the closed loop sets the usable step size. In a $(J_{\mathrm{R}}, J_{\mathrm{F}}, L, R) = (8, 8, 2, 2)$ array, plain multichannel FxLMS diverges once the secondary sources are spread beyond ~0.3 m, and the primary noise cannot be switched off to measure the feedback paths offline (Zhang 2026)
 
 ## Related Sources
 
@@ -106,6 +109,9 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - [[concepts/output-saturation-effect|Output Saturation Effect]]
 - [[concepts/output-constraint-anc-algorithms|Output Constraint ANC Algorithms]]
 - [[concepts/nonlinear-active-noise-control|Nonlinear Active Noise Control]]
+- [[concepts/acoustic-feedback|Acoustic Feedback]] — the secondary-to-reference leakage that limits feedforward ANC stability
+- [[concepts/relative-transfer-matrix|Relative Transfer Matrix (ReTM)]] — spatial-mapping approach to multichannel feedback neutralization
+- [[concepts/covariance-subtraction|Covariance Subtraction]] — identifies the mapping without a noise-free training window
 
 ## Related Sources
 
@@ -121,6 +127,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024: ANC Algorithms Overcoming Output Saturation]] — survey of adaptive ANC algorithms mitigating the output saturation effect, organising the field into output-constraint and nonlinear-adaptive families
 - [[sources/bai-2026-feedback-guided-anc|Bai 2026: Feedback-guided DNN-based Controller Fusion for Robust Fixed-Parameter ANC]] — hybrid WaveNet + feedback-guided MoE of FIR experts; 19 dB avg NR (50 Hz–5 kHz) on CCF-AATC headphone ANC with negligible 1–8 kHz amplification
 - [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] — ANC integrated with noise reduction for open-fitting hearing aids; see also [[concepts/filtered-x-mwf|Filtered-x MWF]] and [[concepts/open-fitting-noise-leakage|Open-Fitting Noise Leakage]]
+- [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] — multichannel feedforward ANC with ReTM-based feedback subtraction ahead of a normalized frequency-domain FxLMS controller
 
 ## Related Entities
 

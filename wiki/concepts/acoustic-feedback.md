@@ -1,16 +1,19 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-09-02
+updated: 2026-09-11
 sources:
   - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/miran-2026-imu-feedback-cancellation/full-text.txt
   - raw/papers/williams-2014-acoustic-feedback-elimination/full-text.md
   - raw/papers/hoshuyama-2026-sound-object-echo-control/full-text.md
+  - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
 tags:
 - acoustic
 - active-noise-control
 - feedback
+- multichannel-anc
+- relative-transfer-matrix
 ---
 
 # Acoustic Feedback
@@ -102,6 +105,21 @@ In hearing aids, AFC uses an adaptive filter (typically PEM-NLMS) to estimate an
 
 **IMU-based step-size control** (Miran et al. 2026): Uses head movement acceleration from an integrated IMU to detect feedback path changes. When motion is detected → large step size; when stationary → small step size. Outperforms audio-only methods in steady-state by avoiding audio-induced biases, but cannot detect path changes from external objects that precede head movement.
 
+### 5. Spatial Group Mapping (ReTM-Based Neutralization)
+
+A multichannel variant replaces per-path feedback modeling with a **group-to-group spatial mapping**. [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang et al. 2026]] split the microphones into a **reference group** (feeding the ANC controller) and an additional **feedback group** placed to observe loudspeaker leakage, and estimate a [[concepts/relative-transfer-matrix|Relative Transfer Matrix]] $\mathbf{R}_{\mathrm{RF}}^{(\mathrm{Sec})} = \mathbf{S}_{\mathrm{ref}}\mathbf{S}_{\mathrm{fb}}^{\dagger}$ between them. Neutralization is then a direct subtraction:
+
+$$
+\mathbf{M}_{\mathrm{R}}^{(\mathrm{filt})} = \mathbf{M}_{\mathrm{R}} - \mathbf{R}_{\mathrm{RF}}^{(\mathrm{Sec})}\mathbf{M}_{\mathrm{F}} \approx \mathbf{P}_{\mathrm{R}} - \mathbf{R}_{\mathrm{RF}}^{(\mathrm{Sec})}\mathbf{P}_{\mathrm{F}},
+$$
+
+which cancels the loudspeaker term while leaving a modified primary term. Two departures from classical feedback neutralization are worth noting:
+
+- One $J_{\mathrm{R}} \times J_{\mathrm{F}}$ matrix replaces the $J_{\mathrm{R}} \times L$ individual feedback paths, which is what makes the approach scale to multichannel arrays where per-path FBPM is impractical.
+- Identification uses **[[concepts/covariance-subtraction|covariance subtraction]]** rather than an ANC-idle training window: primary-only and total-field covariances are measured in two stages and differenced, so the primary contribution cancels and the primary noise **never has to be silenced** — exactly the precondition classical offline neutralization depends on.
+
+Because the matrix depends only on the acoustic transfer geometry, a single identification survives changes in primary source position and primary noise signal; only secondary-side geometry drift invalidates it (uncompensated in the original work, which lists online tracking as future work).
+
 ## Impact on Different ANC Types
 
 | ANC Type | Feedback Impact |
@@ -131,6 +149,9 @@ In hearing aids, AFC uses an adaptive filter (typically PEM-NLMS) to estimate an
 - [[decorrelation-for-afc|Decorrelation for AFC]] — bias reduction for AFC identification
 - [[acoustic-howling-suppression|Acoustic Howling Suppression]] — the howling artifact of PA-system acoustic feedback
 - [[concepts/sound-object-based-echo-control|Sound-Object-Based Echo Control]] — non-path-based control for inter-terminal feedback loops
+- [[concepts/relative-transfer-matrix|Relative Transfer Matrix (ReTM)]] — group-to-group spatial mapping used for multichannel feedback subtraction
+- [[concepts/covariance-subtraction|Covariance Subtraction]] — two-stage estimator that isolates the secondary-only covariances without silencing the primary noise
+- [[concepts/multi-channel-anc|Multi-Channel ANC]] — the setting where per-path feedback modeling becomes impractical
 
 ## Related Concepts
 
@@ -150,6 +171,7 @@ In hearing aids, AFC uses an adaptive filter (typically PEM-NLMS) to estimate an
 - [[sources/mounir-2025-robust-early-howling-detection-sparsity|Mounir, Bernardi & van Waterschoot 2025]] — formalizes the PA/hearing-aid closed-loop model with the Nyquist stability criterion (loop gain ≥ 1 and loop phase = $n2\pi$) and the MSG definition; the same closed-loop instability physics underlies ANC and acoustic-howling feedback
 - [[sources/williams-2014-acoustic-feedback-elimination|Williams 2014]] — Harman patent (US 8,634,575 B2) for a two-rate NHS system: ballistics-based candidate detection + trial-and-verify notch insertion in PA/sound-reinforcement systems
 - [[sources/hoshuyama-2026-sound-object-echo-control|Hoshuyama 2026]] — inter-terminal feedback loops traversing the communication server, and object-identity gating as a non-path-based control category
+- [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026]] — multichannel feedback neutralization by a covariance-subtracted Relative Transfer Matrix between a reference and a feedback microphone group; identifies the secondary-only field with the primary noise still running
 
 ## Related Entities
 
