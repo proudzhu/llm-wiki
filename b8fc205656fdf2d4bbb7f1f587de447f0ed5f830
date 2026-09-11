@@ -1,0 +1,45 @@
+.agents/skills/paper-reader/references/pitfalls.md
+  s_962d670b37e49f::t_e4fd1a4ed53bc0 92-99
+  s_962d670b37e49f::t_1c6dce1b2d6da5 29
+.agents/skills/paper-reader/SKILL.md
+  s_962d670b37e49f::t_9dbc224213a295 219
+  h_81c75c8c8ed26f 39,41,43,45,50,110,153,248-249,252-253
+  s_962d670b37e49f::t_4fe313e52c6d4d 38,40,42,44,46-49
+pyproject.toml
+  s_962d670b37e49f::t_c95896a75b178d 10
+.agents/skills/paper-reader/scripts/extract_pdftotext.py
+  s_962d670b37e49f::t_2c6f515c78067f 2,4-7,12,14,25-52,68-83,86-87,90,95
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.2",
+  "base_commit_sha": "b8fc205656fdf2d4bbb7f1f587de447f0ed5f830",
+  "prompts": {},
+  "humans": {
+    "h_81c75c8c8ed26f": {
+      "author": "proudzhu <proudzhu.fdu@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_962d670b37e49f": {
+      "agent_id": {
+        "tool": "trae",
+        "id": "6a9ffa247dd01baf51870f74",
+        "model": "glm-5.3__dev"
+      },
+      "human_author": "proudzhu <proudzhu.fdu@gmail.com>",
+      "custom_attributes": {
+        "tool_name": "RunCommand",
+        "external_session_id": "6a9ffa247dd01baf51870f74",
+        "runtime_client": "trae-tob-git-ai",
+        "display_model_name": "GLM-5.3",
+        "client_type": "ide",
+        "tool_use_id": "6aa00b2c7dd01baf518711c5",
+        "source_scene": "agent",
+        "session_id": "6a9ffa247dd01baf51870f74",
+        "edit_kind": "bash",
+        "operation_id": "6aa00b2c7dd01baf518711c5"
+      }
+    }
+  }
+}

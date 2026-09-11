@@ -1,0 +1,85 @@
+wiki/concepts/multi-channel-speech-enhancement.md
+  s_cf997fcef0ae25::t_b5fd0e3cec68c3 97
+  s_cf997fcef0ae25::t_efeef37aaf9071 79
+  h_81c75c8c8ed26f 48-49
+  s_cf997fcef0ae25::t_1200f672998775 4,11
+wiki/entities/srdan-kitic.md
+  s_cf997fcef0ae25::t_88f9271b457916 1-20
+wiki/concepts/sel-d.md
+  s_cf997fcef0ae25::t_2f08271dd638eb 1-35
+wiki/concepts/relative-transfer-function.md
+  s_cf997fcef0ae25::t_88f10680700b25 4
+  s_cf997fcef0ae25::t_b0368356c3329b 8
+wiki/concepts/image-source-method.md
+  s_cf997fcef0ae25::t_8d74a9df4df788 45-47
+  s_cf997fcef0ae25::t_d2b56f1d48fe61 4,6
+wiki/concepts/room-impulse-response.md
+  s_cf997fcef0ae25::t_d04b61b84911c3 4-6
+  s_cf997fcef0ae25::t_3aab2e4eb36c9d 37-40
+wiki/entities/index.md
+  s_cf997fcef0ae25::t_be23ce648806aa 553-556
+wiki/entities/alexandre-guerin.md
+  s_cf997fcef0ae25::t_49a9e99e8c11e9 1-19
+wiki/concepts/index.md
+  s_cf997fcef0ae25::t_be23ce648806aa 497-500
+wiki/entities/pierre-amaury-grumiaux.md
+  s_cf997fcef0ae25::t_c7532397e23e2a 1-20
+wiki/index.md
+  s_cf997fcef0ae25::t_be23ce648806aa 559-562,1062-1065,1275,1329-1332,1335
+wiki/entities/laurent-girin.md
+  s_cf997fcef0ae25::t_80f4bdee6cc3a2 1-21
+wiki/concepts/direction-of-arrival-estimation.md
+  s_cf997fcef0ae25::t_8bb0d4117a27da 65-74
+  s_cf997fcef0ae25::t_4543b60e559142 4
+  s_cf997fcef0ae25::t_656c66ca5d0bb4 10
+wiki/concepts/sound-source-localization.md
+  s_cf997fcef0ae25::t_9f4827bd69d8d6 1-44
+wiki/log.md
+  s_cf997fcef0ae25::t_823d7cb135f599 5116-5127
+wiki/sources/index.md
+  s_cf997fcef0ae25::t_be23ce648806aa 207
+raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt
+  s_cf997fcef0ae25::t_000c978c13e78f 1-4900
+wiki/concepts/ambisonics.md
+  s_cf997fcef0ae25::t_b83329105181ec 1-36
+wiki/concepts/voice-activity-detection.md
+  s_cf997fcef0ae25::t_c855e93626d609 12
+  s_cf997fcef0ae25::t_be8559c03f0092 4
+wiki/concepts/activity-coupled-cartesian-doa.md
+  s_cf997fcef0ae25::t_fb176e4ef6a368 1-32
+wiki/sources/grumiaux-2022-ssl-deep-learning-survey.md
+  s_cf997fcef0ae25::t_f8edfa07f72fd7 1-149
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.2",
+  "base_commit_sha": "bb8534d0f7dee2bb8e0eb4fccc660d76a2134cc9",
+  "prompts": {},
+  "humans": {
+    "h_81c75c8c8ed26f": {
+      "author": "proudzhu <proudzhu.fdu@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_cf997fcef0ae25": {
+      "agent_id": {
+        "tool": "trae",
+        "id": "6aa0d0317dd01baf518711db",
+        "model": "glm-5.3__dev"
+      },
+      "human_author": "proudzhu <proudzhu.fdu@gmail.com>",
+      "custom_attributes": {
+        "display_model_name": "GLM-5.3",
+        "source_scene": "agent",
+        "operation_id": "6aa0d70f7dd01baf518712f2",
+        "edit_kind": "bash",
+        "tool_name": "RunCommand",
+        "client_type": "ide",
+        "external_session_id": "6aa0d0317dd01baf518711db",
+        "tool_use_id": "6aa0d70f7dd01baf518712f2",
+        "runtime_client": "trae-tob-git-ai",
+        "session_id": "6aa0d0317dd01baf518711db"
+      }
+    }
+  }
+}
