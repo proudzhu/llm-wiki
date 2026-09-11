@@ -5186,3 +5186,23 @@ Ingested "A Comparison of Generative and Discriminative Methods for Speech Enhan
   - `wiki/concepts/cepstral-space-speech-enhancement.md` — new "Classical Precursor: Temporal Cepstrum Smoothing" section with a TCS-vs-neural comparison table; softens the "traditional algorithms stayed in the TF domain" claim
   - `wiki/index.md`, `wiki/concepts/index.md`, `wiki/entities/index.md`, `wiki/sources/index.md` — rows + statistics (total 1287: 552 entities / 501 concepts / 204 sources / 23 synthesis / 7 queries)
 - **Notes**: Zotero's abstract field is truncated mid-sentence (full abstract taken from the paper). Results in the source are graphical (grouped bar charts, Fig. 1–2); only the paper's own qualitative discussion and the stated ~1 dB babble-noise gain are reported, no bar heights were transcribed.
+
+---
+
+## [2026-09-11] ingest | Controlling the Parameterized Multi-Channel Wiener Filter Using a Tiny Neural Network (Grinstein et al. 2025)
+
+Ingested **Grinstein et al. 2025 — Controlling the Parameterized Multi-Channel Wiener Filter Using a Tiny Neural Network** (arXiv 2507.08713, Meta Reality Labs / Imperial College London / Ohio State University) via the paper-reader workflow (arXiv HTML extraction, 4 figures crawled as SVG).
+
+**New pages (8):**
+
+- Source: [[sources/grinstein-2025-tiny-param-mwf|grinstein-2025-tiny-param-mwf]]
+- Concepts: [[concepts/neuralpmwf|neuralpmwf]], [[concepts/splitgru|splitgru]]
+- Entities: [[entities/eric-grinstein|eric-grinstein]], [[entities/cole-li|cole-li]], [[entities/shanmukha-srinivas|shanmukha-srinivas]], [[entities/sanha-lee|sanha-lee]], [[entities/cagdas-bilen|cagdas-bilen]]
+
+**Updated pages (12):**
+
+- Concepts: [[concepts/parametric-multi-channel-wiener-filter|parametric-multi-channel-wiener-filter]] (NeuralPMWF extension), [[concepts/multi-channel-speech-presence-probability|multi-channel-speech-presence-probability]] (mask-derived SPP proxy), [[concepts/noise-attenuation-control|noise-attenuation-control]], [[concepts/multi-channel-speech-enhancement|multi-channel-speech-enhancement]], [[concepts/gtcrn|gtcrn]] (multichannel GTCRN+MWF baseline), [[concepts/spatial-covariance-matrix|spatial-covariance-matrix]] (mask-derived SCM with learned smoothing), [[concepts/neural-beamforming|neural-beamforming]]
+- Entities: [[entities/ashutosh-pandey|ashutosh-pandey]], [[entities/jacob-donley|jacob-donley]], [[entities/juan-azcarreta|juan-azcarreta]], [[entities/ali-aroudi|ali-aroudi]]
+- Synthesis: [[synthesis/multi-channel-speech-enhancement|multi-channel-speech-enhancement]] — NeuralPMWF added to the Insight 4 hybrid-filter table (with a dedicated paragraph), the source table, the smart-glasses application row, and Takeaway 1
+
+Indexes and statistics updated (total 1295 pages).

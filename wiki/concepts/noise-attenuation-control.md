@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-08-31
-updated: 2026-09-03
+updated: 2026-09-11
 sources:
   - raw/papers/shetu-2026-munet/full-text.md
   - raw/papers/braun-2015-residual-noise-control/full-text.md
   - raw/papers/li-2020-residual-noise-control/full-text.md
   - raw/papers/ke-2021-low-complexity-artificial-noise-suppression/full-text.md
+  - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
 tags:
   - speech-enhancement
   - noise-suppression
@@ -35,6 +36,8 @@ an interpolation between the standard [[concepts/parametric-multi-channel-wiener
 [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke et al. 2021]] — the same group — take the complementary *suppression* route: a classical MMSE noise-PSD postfilter on the DNN output drives the [[concepts/artificial-residual-noise|artificial residual noise]] (which exceeds the speech masking threshold by 10–50 dB) down toward inaudibility, using three re-designed SPP inputs for the noise tracker. Unlike NAL or Braun's $c$, it exposes no user-facing trade-off knob — its design choice is the SPP input strategy — and at 0.0098–0.016 MFLOPs/frame it is the lowest-complexity member of the residual-noise family.
 
 [[sources/shetu-2026-munet|Shetu et al. 2026]] transplanted the idea to single-channel DNN enhancement as the user-facing NAL knob on μNet — mixing a scaled residual-noise estimate back into the enhanced output. This mirrors how classical hearing-aid noise reduction exposes a suppression-depth parameter to the fitter/user.
+
+[[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025]]'s [[concepts/neuralpmwf|NeuralPMWF]] adds a *learned, SPP-driven* member to the family: the PMWF trade-off parameter is scheduled per T-F bin as $\beta[t,w]=\beta^{(0)}[w](1-\hat{p}[t,w])$ from a mask-derived SPP proxy, trained end-to-end through the differentiable filter. Unlike the user-facing NAL knob (constant at inference) or Braun's fixed/noise-adaptive $c$, this control is *time-varying within an utterance* — near-distortionless when speech is present, very aggressive ($\beta>30$ learned) when speech is certainly absent — and its ablation shows dynamic scheduling is worth +4.5 STOI over the best static setting. It demonstrates that the suppression/distortion trade-off is best seen not as one knob but as a per-bin control surface that can be learned.
 
 ## Relationship to Power-Law Compression
 
@@ -67,6 +70,8 @@ NAL −30 dB achieves the best PESQ of all models in the comparison (including G
 - [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
 - [[concepts/generalized-loss-function|Generalized Loss Function]]
 - [[concepts/artificial-residual-noise|Artificial Residual Noise]]
+- [[concepts/neuralpmwf|NeuralPMWF]]
+- [[concepts/speech-presence-probability|Speech Presence Probability (SPP)]]
 
 ## Related Sources
 
@@ -74,3 +79,4 @@ NAL −30 dB achieves the best PESQ of all models in the comparison (including G
 - [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015: Residual Noise Control PMWF]]
 - [[sources/li-2020-residual-noise-control|Li, Peng, Zheng & Li 2020: Supervised Speech Enhancement with Residual Noise Control]] — training-time member: residual-noise-control term in the loss
 - [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke, Li, Zheng, Peng & Li 2021: Low-Complexity Artificial Noise Suppression]] — postfilter member: MMSE/SPP suppression (no trade-off knob) of artificial residual noise on DNN output
+- [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — learned SPP-driven member: per-bin dynamic $\beta$ scheduling in the PMWF

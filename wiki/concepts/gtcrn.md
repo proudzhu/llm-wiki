@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-24
-updated: 2026-08-31
+updated: 2026-09-11
 tags:
   - neural-network
   - speech-enhancement
@@ -72,6 +72,10 @@ With 23.7 K parameters and 39.6 MMACs/s, GTCRN achieves:
 
 Huang et al. (2026) reuse GTCRN not as a standalone enhancer but as a **lightweight denoiser front-end** inside target speech extraction (TSE) systems. In LGTSE and D-LGTSE, GTCRN denoises the noisy mixture before its context interaction with enrollment speech, producing [[concepts/noise-agnostic-enrollment-guidance|noise-agnostic enrollment guidance]]; D-LGTSE additionally uses the mildly distorted denoised output for [[concepts/distortion-aware-training|distortion-aware training]]. Because GTCRN is ultralightweight (0.05 M params, 0.03 GMACs/s), it adds negligible overhead to either the [[concepts/sef-pnet|SEF-PNet]] backbone (6.08 M → 6.13 M, 8.50 → 8.53 GMACs/s) or the [[concepts/cie-mdptnet|CIE-mDPTNet]] backbone (2.87 M → 2.92 M, 22.25 → 22.28 GMACs/s), while delivering +0.89 dB and +0.83 dB SI-SDR gains respectively on Libri2Mix (2-speaker + noise). This illustrates a second life for GTCRN beyond monaural SE: as a cheap, pluggable denoiser that unlocks noise-robust enrollment guidance in TSE.
 
+## Multichannel Adaptation as a Baseline (Grinstein et al. 2025)
+
+[[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025]] adapted GTCRN to multi-channel input for smart-glasses speech enhancement by concatenating the input channels and increasing the number of input filters ("GTCRN+MWF", 26.5k params, 91 MMACs/s, paired with a Wang et al. 2023 MWF formulation). It reached STOI 72.7 / SI-SDR 4.66 / NB-PESQ 2.01 — competitive on quality but at notably higher MMACs than their proposed [[concepts/neuralpmwf|NeuralPMWF]] (24.95 MMACs/s, STOI 74.3), illustrating that single-channel lightweight designs do not transfer cost-efficiently to multichannel spatial processing without dedicated spatial blocks.
+
 ## Related Concepts
 
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
@@ -89,10 +93,11 @@ Huang et al. (2026) reuse GTCRN not as a standalone enhancer but as a **lightwei
 - [[concepts/adaptive-convolution|Adaptive Convolution]]
 - [[concepts/adaptcrn|AdaptCRN]]
 - [[concepts/noise-agnostic-enrollment-guidance|Noise-agnostic Enrollment Guidance]]
-- [[concepts/distortion-aware-training|Distortion-aware Training]]
+- [[concepts/distortion-aware-training|Distortion-Aware Training]]
 - [[concepts/sef-pnet|SEF-PNet]]
 - [[concepts/cie-mdptnet|CIE-mDPTNet]]
 - [[concepts/munet|μNet]]
+- [[concepts/neuralpmwf|NeuralPMWF]]
 
 ## Related Sources
 
@@ -104,3 +109,4 @@ Huang et al. (2026) reuse GTCRN not as a standalone enhancer but as a **lightwei
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — uses GTCRN as a baseline and reuses its ERB/SFE/grouped-DPRNN design patterns in AdaptCRN
 - [[sources/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction|Huang et al. 2026: Lightweight Speech Enhancement Guided TSE in Noisy Multi-Speaker Scenarios]] — reuses GTCRN as a pluggable denoiser front-end for noise-agnostic enrollment guidance in TSE
+- [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — multichannel GTCRN adaptation as a low-compute baseline

@@ -562,6 +562,11 @@
 | [[entities/alexandre-guerin\|Alexandre Guerin]] | Orange Labs — co-author of the 2022 DL-based SSL survey | 2026-09-09 |
 | [[entities/sakari-tervo\|Sakari Tervo]] | Researcher, Helsinki University of Technology (TKK) Department of Media Technology — intensity-vector direction estimation, room acoustics measurement. | 2026-09-09 |
 | [[entities/richard-c-hendriks\|Richard C. Hendriks]] | Delft University of Technology — single-channel speech enhancement, noise PSD estimation and tracking, MMSE-based statistical estimators | 2026-09-11 |
+| [[entities/eric-grinstein\|Eric Grinstein]] | Imperial College London (Meta internship) — first author of NeuralPMWF | 2026-09-11 |
+| [[entities/cole-li\|Cole Li]] | Meta Reality Labs — co-author of NeuralPMWF | 2026-09-11 |
+| [[entities/shanmukha-srinivas\|Shanmukha Srinivas]] | Ohio State University — co-author of NeuralPMWF | 2026-09-11 |
+| [[entities/sanha-lee\|Sanha Lee]] | Meta Reality Labs — co-author of NeuralPMWF and Spatial-Magnifier | 2026-09-11 |
+| [[entities/cagdas-bilen\|Çağdaş Bilen]] | Meta Reality Labs — co-author of NeuralPMWF | 2026-09-11 |
 
 ---
 
@@ -1072,6 +1077,8 @@
 | [[concepts/temporal-cepstrum-smoothing\|Temporal Cepstrum Smoothing (TCS)]] | Selective recursive smoothing in the cepstral domain — little smoothing to the low-quefrency envelope and the detected pitch peak, strong smoothing elsewhere; analytic bias correction B = exp(psi(mu)+C)/mu | 2026-09-11 |
 | [[concepts/mmse-based-noise-psd-estimation\|MMSE-Based Noise PSD Estimation]] | Third single-channel noise-PSD family: tracks the conditional noise-periodogram expectation directly instead of spectral minima or speech-presence gating; faster than minimum statistics, needs a speech PSD estimate | 2026-09-11 |
 | [[concepts/decision-directed-a-priori-snr\|Decision-Directed A Priori SNR Estimation]] | Ephraim & Malah's recursive a priori SNR estimator (alpha_dd = 0.98); used as the bias-compensation speech estimate in the 2010 MMSE noise tracker and removed by the TCS variant | 2026-09-11 |
+| [[concepts/neuralpmwf\|NeuralPMWF]] | Hybrid MCSE where a tiny DNN fully controls the PMWF: mask-derived covariances, learned frequency-dependent smoothing, SPP-scheduled dynamic β | 2026-09-11 |
+| [[concepts/splitgru\|SplitGRU]] | GRU variant splitting the hidden dimension into R parallel smaller GRUs, cutting compute by ~R× | 2026-09-11 |
 
 ---
 
@@ -1285,6 +1292,7 @@
 | [[sources/tervo-2009-sound-intensity-direction\|Tervo 2009: Direction Estimation Based on Sound Intensity Vectors]] | Empirical comparison of five intensity-vector DOA estimators (CME/MCA/CMD averaging vs. von Mises / wrapped Gaussian mixture fitting) on real concert-hall data — mixture models slightly better and far more noise-robust; radial-energy weighting (MCA) clearly worst. | 2026-09-09 |
 | [[sources/zhang-2026-feedback-path-mitigation-mcanc\|Zhang et al. 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] | ReTM + covariance subtraction neutralizes loudspeaker feedback in multichannel feedforward ANC without silencing the primary noise; stable for all tested step sizes/spacings, within 0.4-2.8 dB of the secondary-only oracle upper bound | 2026-09-11 |
 | [[sources/gerkmann-2012-mmse-noise-psd-tracking\|Gerkmann & Hendriks 2012: Improved MMSE-Based Noise PSD Tracking Using Temporal Cepstrum Smoothing]] | Replaces the limited-ML + decision-directed speech-PSD pair of MMSE-based noise PSD tracking with a single temporal-cepstrum-smoothing estimate; no explicit bias compensation, lower LogErr, ~1 dB segmental-SNR gain in babble noise at 0 dB SNR, cost = two real FFTs | 2026-09-11 |
+| [[sources/grinstein-2025-tiny-param-mwf\|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] | NeuralPMWF — a tiny DNN (164.9k params, 24.95 MMACs/s) fully controls the PMWF: mask-derived covariances with learned smoothing and SPP-driven dynamic β, beating end-to-end baselines on smartglasses MCSE | 2026-09-11 |
 
 ---
 
@@ -1338,10 +1346,10 @@
 
 ## Statistics
 
-- **Total pages**: 1287
-- **Entities**: 552
-- **Concepts**: 501
-- **Sources**: 204
+- **Total pages**: 1295
+- **Entities**: 557
+- **Concepts**: 503
+- **Sources**: 205
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-09-11

@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-25
-updated: 2026-08-25
+updated: 2026-09-11
 sources:
   - raw/papers/bagheri-2019-pmwf-spp/full-text.md
+  - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
 tags:
   - noise-estimation
   - speech-enhancement
@@ -40,6 +41,14 @@ $\xi$ is the multi-channel a priori SNR (also the theoretical output SNR of the 
 - Fallback to $\widehat{\boldsymbol{\Phi}}_{vv}^{-1} = \widehat{\boldsymbol{\Phi}}_{yy}^{-1}$ when estimation errors yield negative $\gamma$ or $\xi$.
 - Fixed $q_0 = 0.5$ a priori speech absence probability works well in their implementation.
 
+## Mask-Derived SPP Proxy (Grinstein et al. 2025)
+
+[[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025]]'s [[concepts/neuralpmwf|NeuralPMWF]] replaces the Gaussian-model MC-SPP with a lightweight SPP *proxy* computed from the magnitude of a learned multi-channel complex mask at the reference channel:
+
+$$\hat{p}[t,w]=\text{sigmoid}\big(\mathbf{p}^{(a)}[w]\,|\mathbf{G}[t,w,0]|+\mathbf{p}^{(b)}[w]\big)$$
+
+with per-frequency gains $\mathbf{p}^{(a)},\mathbf{p}^{(b)}\in\mathbb{R}^{F}$ learned end-to-end through the differentiable PMWF. This SPP proxy drives the distortion trade-off $\beta[t,w]=\beta^{(0)}[w](1-\hat{p}[t,w])$ and proves to be the single most valuable component of the system (+4.5 STOI over fixed-$\beta$ variants) — evidence that the *role* of SPP as a distortion/suppression scheduler survives the move from statistical-model to neural estimation, without any explicit Gaussian hypothesis or iterative $\Phi_{vv}^{-1}$ dependency.
+
 ## Relation to Single-Channel SPP
 
 The single-channel [[concepts/speech-presence-probability|SPP]] (e.g., Gerkmann & Hendriks 2011, Gerkmann & Malah 1989 optimum a priori SNR modification) computes the posterior from one channel's a posteriori SNR; the MC-SPP replaces scalar SNRs with the multi-channel quadratic forms above, gaining robustness from the array's spatial aperture. Alternative multi-channel a priori SAP estimators exploit spatial structure directly, e.g., the CDR-based estimator of [[concepts/multichannel-mcra|Multichannel MCRA]] (Taseska & Habets) or complex-coherence-based a priori SAP (Taseska & Habets 2012).
@@ -52,9 +61,12 @@ The single-channel [[concepts/speech-presence-probability|SPP]] (e.g., Gerkmann 
 - [[concepts/mvdr-beamformer|MVDR Beamformer]]
 - [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
 - [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
+- [[concepts/neuralpmwf|NeuralPMWF]]
+- [[concepts/complex-ratio-mask|Complex Ratio Mask]]
 
 ## Related Sources
 
 - [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]]
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]]
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin et al. 2017: Multi-channel Noise Reduction for Mobile Phones]] — single-channel SPP counterpart in an MVDR + post-filter pipeline
+- [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — mask-magnitude SPP proxy scheduling the PMWF distortion parameter

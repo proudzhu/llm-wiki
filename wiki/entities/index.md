@@ -556,4 +556,9 @@
 | [[entities/alexandre-guerin\|Alexandre Guerin]] | Orange Labs — co-author of the 2022 DL-based SSL survey | 2026-09-09 |
 | [[entities/sakari-tervo\|Sakari Tervo]] | Researcher, Helsinki University of Technology (TKK) Department of Media Technology — intensity-vector direction estimation, room acoustics measurement. | 2026-09-09 |
 | [[entities/richard-c-hendriks\|Richard C. Hendriks]] | Delft University of Technology — single-channel speech enhancement, noise PSD estimation and tracking, MMSE-based statistical estimators | 2026-09-11 |
+| [[entities/eric-grinstein\|Eric Grinstein]] | Imperial College London (Meta internship) — first author of NeuralPMWF | 2026-09-11 |
+| [[entities/cole-li\|Cole Li]] | Meta Reality Labs — co-author of NeuralPMWF | 2026-09-11 |
+| [[entities/shanmukha-srinivas\|Shanmukha Srinivas]] | Ohio State University — co-author of NeuralPMWF | 2026-09-11 |
+| [[entities/sanha-lee\|Sanha Lee]] | Meta Reality Labs — co-author of NeuralPMWF and Spatial-Magnifier | 2026-09-11 |
+| [[entities/cagdas-bilen\|Çağdaş Bilen]] | Meta Reality Labs — co-author of NeuralPMWF | 2026-09-11 |
 

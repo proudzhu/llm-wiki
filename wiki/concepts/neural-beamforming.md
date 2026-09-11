@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-20
-updated: 2026-07-09
+updated: 2026-09-11
+sources:
+  - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
 tags:
   - beamforming
   - deep-learning
@@ -36,6 +38,7 @@ The beamforming operation is embedded as a differentiable layer (e.g., a filter-
 - **Neural MVDR**: DNN-estimated signal statistics plugged into the MVDR formula, forming a differentiable beamformer
 - **Differentiable robust MVDR**: Closed-form WNG-constrained MVDR solution embedded as a differentiable layer with learnable frequency-dependent WNG thresholds (Deng et al. 2026)
 - **BEAMNET**: Fully learned spatial filtering with no explicit signal model
+- **[[concepts/neuralpmwf|NeuralPMWF]]** (Grinstein et al. 2025): a tiny MaskDNN (164.9k params, 24.95 MMACs/s, 16 ms latency) fully controls the differentiable [[concepts/parametric-multi-channel-wiener-filter|PMWF]] — the network produces the mask from which speech/noise covariances are smoothed, and schedules the distortion trade-off $\beta$ per T-F bin from a mask-derived SPP proxy. Beyond plugging learned statistics into a fixed formula, the *control parameters of the filter itself* (smoothing speeds, distortion schedule) are learned end-to-end, and the SPP-driven dynamic $\beta$ contributes +4.5 STOI over any static setting.
 
 ### Integration with Downstream Tasks
 
@@ -52,7 +55,14 @@ Neural beamformers are often trained jointly with downstream models:
 - Can combine spatial and spectral processing in one network
 - Joint training with downstream tasks optimizes for the final metric
 
+## Related Concepts
+
+- [[concepts/neuralpmwf|NeuralPMWF]]
+- [[concepts/parametric-multi-channel-wiener-filter|Parametric Multi-Channel Wiener Filter (PMWF)]]
+- [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+
 ## Related Sources
 
 - [[sources/feng-2025-directional-source-separation-smart-glasses|Feng et al. 2025: Directional Source Separation for Smart Glasses]]
 - [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026: Joint Covariance and WNG Learning for Robust MVDR]]
+- [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — tiny-NN control of a differentiable PMWF, including its distortion trade-off parameter

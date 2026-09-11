@@ -4,6 +4,7 @@ created: 2026-04-29
 updated: 2026-09-11
 sources:
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
+  - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
 tags:
   - array-processing
   - spatial-statistics
@@ -33,6 +34,7 @@ SCMs can be estimated via:
 - Sample covariance from noise-only periods
 - DNN-based prediction (e.g., HVSF architecture)
 - Voice activity detection-guided updates
+- **Mask-derived estimates with learned smoothing** ([[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025]]): a tiny DNN estimates a multi-channel complex T-F mask $\mathbf{G}$; the masked observation $\hat{\mathbf{S}}_0=\mathbf{G}\odot\mathbf{Y}$ and its complement $\hat{\mathbf{N}}_0=\mathbf{Y}-\hat{\mathbf{S}}_0$ feed per-bin outer products accumulated by exponential smoothing, $\Phi_{ss}[t,w]=(1-\alpha_{ss}[w])\Phi_{ss}[t-1,w]+\alpha_{ss}[w]\hat{\mathbf{S}}_0\hat{\mathbf{S}}_0^H$ (likewise for $\Phi_{nn}$), with the smoothing speeds $\alpha_{ss}, \alpha_{nn}$ *learned per frequency* during end-to-end training and fixed at inference. The learned values satisfy $\alpha_{ss}>\alpha_{nn}$, recovering the classical assumption that speech statistics change faster than noise, and trained frequency-dependent smoothing marginally beat SPP-driven and fixed alternatives.
 
 ## SCM Reconstruction via Normalized Decomposition
 
@@ -75,6 +77,7 @@ which recovers the secondary-only contribution exactly when the components are m
 - [[concepts/rank-constrained-spatial-covariance-matrix-estimation|Rank-Constrained Spatial Covariance Matrix Estimation (RCSCME)]]
 - [[concepts/covariance-subtraction|Covariance Subtraction]] — using SCM additivity as a subtraction operator for system identification
 - [[concepts/relative-transfer-matrix|Relative Transfer Matrix (ReTM)]] — estimated from primary-only vs total-field SCM differences
+- [[concepts/neuralpmwf|NeuralPMWF]] — mask-derived SCMs with learned frequency-dependent exponential smoothing
 
 ## Related Sources
 
@@ -85,3 +88,4 @@ which recovers the secondary-only contribution exactly when the components are m
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]
 - [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025: Real-Time RCSCME-based Speech Extraction]]
 - [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] — SCMs over two microphone groups, differenced to isolate the secondary-only field for feedback neutralization
+- [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — mask-derived SCM estimation with learned per-frequency exponential smoothing

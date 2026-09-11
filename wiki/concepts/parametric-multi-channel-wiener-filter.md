@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-08-25
-updated: 2026-09-02
+updated: 2026-09-11
 sources:
   - raw/papers/bagheri-2019-pmwf-spp/full-text.md
   - raw/papers/braun-2015-residual-noise-control/full-text.md
+  - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
 tags:
   - speech-enhancement
   - wiener-filter
@@ -22,7 +23,7 @@ With $\mathbf{h}_i(\ell,k)$ the filter estimating the speech component at refere
 
 $$\mathbf{h}_i(\ell,k) = \frac{\boldsymbol{\Phi}_{vv}^{-1} \boldsymbol{\Phi}_{yy} - \mathbf{I}_N}{\beta(\ell,k) + \mathrm{tr}\{\boldsymbol{\Phi}_{vv}^{-1} \boldsymbol{\Phi}_{yy}\} - N}\, \mathbf{u}_i$$
 
-requiring only the input PSD matrix $\boldsymbol{\Phi}_{yy}$ and the noise PSD matrix $\boldsymbol{\Phi}_{vv}$. The multi-channel a priori SNR $\xi(\ell,k) = \mathrm{tr}\{\boldsymbol{\Phi}_{vv}^{-1}\boldsymbol{\Phi}_{yy}\} - N$ in the denominator is also the theoretical output SNR of the filter. Souden et al. (2010) unified MVDR, GSC, and PMWF in this common frequency-domain framework.
+requiring only the input PSD matrix $\boldsymbol{\Phi}_{yy}$ and the noise PSD matrix $\boldsymbol{\Phi}_{vv}$. The multi-channel a priori SNR $\xi(\ell,k) = \mathrm{tr}\{\boldsymbol{\Phi}_{vv}^{-1}\boldsymbol{\Phi}_{yy}\} - N$ in the denominator is also the theoretical output SNR of the filter. Souden et al. (2010) unified MVDR, GSC, and PMWF in this common frequency-domain framework. An equivalent form in terms of speech and noise covariances (used by Grinstein et al. 2025) is $\mathbf{h}[t,w] = \boldsymbol{\gamma}[t,w][:,0] / (\beta[t,w] + \mathrm{trace}\,\boldsymbol{\gamma}[t,w])$ with $\boldsymbol{\gamma} = \mathbf{\Phi}_{nn}^{-1}\mathbf{\Phi}_{ss}$.
 
 ## Practical Implementation via MC-SPP (Bagheri & Giacobello 2019)
 
@@ -41,6 +42,10 @@ Additional implementation safeguards: smoothing the SPP with clamping to $[p_{\m
 $$\mathbf{h}_Z = \left(\Phi_x + \mu\Phi_v\right)^{-1}\left(\Phi_x\mathbf{e}_1 + \mu\Phi_v\mathbf{c}_1\right) = (1-c)\,\mathbf{h}_X + c\,\mathbf{e}_1$$
 
 where $c = 0$ recovers the standard PMWF and $\mu = 1$ an MWF similar to binaural hearing-aid filters. The $c$ axis is *orthogonal* to the $\mu$/$\beta$ distortion-vs-suppression trade-off: $c$ directly caps the **maximum** noise reduction (asymptote at low SNR) and bounds the speech distortion index at $(1-c)^2$, while $\mu$ only over/underestimates the noise (shifting the noise-reduction curve along the SNR axis). Crucially, this control works **without the rank-one assumption** on $\Phi_x$: gain-limited decomposition into spatial filter + spectral gain is unnecessary, so the bound holds for reverberant (higher-rank) desired signals — where the standard PMWF has no closed-form $\mu(\sigma)$ and would need iterative/adaptive multiplier computation. The single-channel DNN descendant of this mechanism is [[concepts/noise-attenuation-control|Noise Attenuation Control]].
+
+## Neural Control (Grinstein et al. 2025)
+
+[[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025]]'s [[concepts/neuralpmwf|NeuralPMWF]] makes the *entire* PMWF machinery neural: a 164.9k-parameter MaskDNN estimates a multi-channel complex mask from which speech/noise [[concepts/spatial-covariance-matrix|covariance matrices]] are derived by exponential smoothing with **learned frequency-dependent speeds** $\alpha_{ss}[w], \alpha_{nn}[w]$ (trained, then fixed at inference), and the trade-off parameter is scheduled per T-F bin from a mask-derived SPP proxy, $\beta[t,w] = \beta^{(0)}[w](1-\hat{p}[t,w])$. Ablations on a 5-mic smart-glasses simulation show the SPP-driven dynamic $\beta$ is worth +4.5 STOI over the best fixed or frequency-dependent-only $\beta$ (with $\beta=0$ MVDR and $\beta=1$ MWF nearly identical, and aggressive $\beta=10$ clearly worse); the learned $\alpha_{ss}>\alpha_{nn}$ reproduces the classical speech-faster-than-noise statistics assumption. This replaces the specialized parameter tuning of Braun 2015 / Bagheri & Giacobello 2019 / Ngo et al. 2009 with end-to-end learning through the differentiable filter, making dynamic per-band suppression/distortion control practical.
 
 ## Empirical Positioning
 
@@ -62,9 +67,12 @@ On a 4-mic circular array (TIMIT speech, babble/pink NOISEX-92 interference, $T_
 - [[concepts/variable-span-linear-filter|Variable Span Linear Filter]]
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
 - [[concepts/noise-attenuation-control|Noise Attenuation Control]]
+- [[concepts/neuralpmwf|NeuralPMWF]]
+- [[concepts/neural-beamforming|Neural Beamforming]]
 
 ## Related Sources
 
 - [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]]
 - [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015: Residual Noise Control PMWF]]
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]]
+- [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — end-to-end neural control of covariances, smoothing, and $\beta$
