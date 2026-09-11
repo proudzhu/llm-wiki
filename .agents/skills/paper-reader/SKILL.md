@@ -23,30 +23,51 @@ End-to-end workflow for ingesting academic papers from Zotero into the LLM Wiki 
 - **Source is a web page/blog/informal HTML** — use the standard raw article workflow. **Exception**: substantive non-academic PDFs (transcripts, slides, presentations) DO qualify — adapt the source page template with themed sections (Vision & Strategy / Q&A / Key Quotes); slug follows thought-piece convention without a year (e.g., `liang-wenfeng-investor-exchange-meeting`)
 - **Re-ingesting an identical version** — only if PDF was updated (camera-ready replaces preprint) or the wiki page is significantly incomplete
 
-## Checking Existing Pages (Windows Glob Caveat)
+## Checking Existing Pages (existence checks on this host)
 
-Several steps require checking whether a page already exists. **On Windows, Glob brace expansion (`{a,b,c}.md`) does not work** and returns "No file found" even when files exist. Use one of these patterns instead:
+Several steps require checking whether a page already exists. Three constraints shape how to do it:
 
-- **LS the directory** (ground truth for existence — filenames cannot lie): `LS wiki/entities` returns the full file list; scan for the target slugs. One call checks any number of candidates.
-- **Multiple parallel Glob calls**: one Glob per slug (no braces), e.g. `wiki/entities/ernst-seidel.md`.
-- **Grep with alternation** — *content search only, not an existence check.* Grep matches file **contents**, not filenames: a page rarely contains its own slug (e.g. `mvdr-beamformer.md` has H1 "MVDR Beamformer", so grepping `mvdr-beamformer` misses it — false "missing"), while `index.md` contains *every* slug (false "exists"). Use Grep only to find pages that **mention** a name, e.g. pattern `seidel|fingscheidt|mowlaee` finds those authors' entity pages because the names appear in the body text. See `pitfalls.md` #43.
+- **There is no `LS` / directory-listing tool in this harness.** Use Glob, Grep, and Read.
+- **Glob caps at 100 paths.** `wiki/concepts/*.md` returns `(Showing 100 of 502 paths)` — the 100 most recently modified, in modification-time order — so a directory-wide Glob is **not** an existence check: a page that exists may simply fall outside the window, producing a false "missing" and a duplicate page (`pitfalls.md` #56). When the cap is hit the tool reports where it spilled the complete sorted list; that spill file can be Grepped if you genuinely need the whole listing.
+- **Glob brace expansion (`{a,b,c}.md`) does not work** and returns "No file found" even when the files exist.
+
+**Preferred batch check — Grep the subdirectory index.** `wiki/{category}/index.md` carries a row for every page in that category, so a single alternation Grep answers any number of candidates at once:
+
+```
+Grep pattern: "temporal-cepstrum-smoothing|mmse-based-noise-psd-estimation|decision-directed-a-priori-snr"
+      path: wiki/concepts/index.md
+```
+
+This resolved 5 candidates in 2 calls during the Gerkmann 2012 ingest. Caveat: it is only as current as the index — a page created but not yet indexed reads as "missing", and a deleted page can linger as a phantom row. Those are precisely the drifts `check_index_drift.py` exists to catch, and this workflow's Step 10 keeps the indexes honest for every page it creates.
+
+**For a single candidate**, an exact-path Glob is precise and never capped: `wiki/concepts/temporal-cepstrum-smoothing.md` returns the file or nothing.
+
+**Do not use Grep for existence on the directory itself** — Grep matches file *contents*: a page like `mvdr-beamformer.md` has H1 "MVDR Beamformer" and never contains its own slug (false "missing"), while `index.md` sits in that directory and contains *every* slug (false "exists"). Reserve Grep for finding pages that **mention** a name, e.g. pattern `seidel|fingscheidt|mowlaee` finds those authors' entity pages because the names appear in the body text (`pitfalls.md` #43).
 
 Always use **forward slashes** in Glob patterns and prefer **relative paths from project root** over absolute Windows paths.
-
-**Do not use `RunCommand` with PowerShell `Where-Object { $_.Name -match '...' }`** for batch existence checks — the shell wrapper strips `$_` and other `$`-prefixed automatic variables, producing "item not recognized" errors (see `pitfalls.md` #31). Use the LS/Glob/Grep tools directly instead; they avoid PowerShell quoting entirely.
 
 ## Same-File Edit Discipline (applies to EVERY step)
 
 **Never issue parallel Edit/Write calls to the same file.** A batch of N parallel edits to one file races: each call reads the file as it was when the batch started, and last-write-wins discards the others — *silently* (every call reports success). Which edit survives is nondeterministic; sometimes a *later* batch member persists on top of an earlier write, producing duplicated content on re-apply (see `pitfalls.md` #46).
 
-This has now bitten **three** ingests — Apostolidis 2026 (Step 8 concept pages), Xiao 2023 and Sun 2024 (Step 9 synthesis page and Step 10 `wiki/index.md`, where four parallel row-edits were lost and only the Statistics edit survived) — despite the warning previously living only in Step 8. Hence this top-level rule.
+This has bitten **three** ingests — Apostolidis 2026 (Step 8 concept pages), Xiao 2023 and Sun 2024 (Step 9 synthesis page and Step 10 `wiki/index.md`, where four parallel row-edits were lost and only the Statistics edit survived). Hence this top-level rule.
 
 Rules:
 
 1. **Parallelize across files, never within a file.** Reads, Globs, Greps, and Edits to *different* files are safe and encouraged in one message.
-2. **Multiple changes to one file = sequential Edit calls in separate messages.** Synthesis updates (Step 9) and hand-edits to any index (Step 10) typically need 4–6 edits to the *same* file — frontmatter `sources:`, `tags:`, a table row, an insight paragraph, a takeaway. Do them one per message, or combine into fewer, larger edits with unique anchors.
+2. **Multiple changes to one file: pick one of two safe methods.** The `edit` tool takes a single `old_string`/`new_string` pair — **there is no `edits[]` array**, so "all of this file's changes in one atomic call" is not available (`pitfalls.md` #59). Either apply **sequential `edit` calls, one per message**, or **rewrite the file wholesale** (table below). What races is several `edit` calls against the same file in one message.
 3. **Verify after a suspected race**: Grep the file for the expected new content (e.g. the new slug). If missing, re-read the target region before re-applying — a *prefix-matching* `old_string` can match text that already contains your addition and duplicate it.
 4. Prefer scripts over hand-edits wherever one exists (`update_indexes.py`, `append_log.py`, `commit_ingest.py`) — they are immune to the race by construction.
+
+**Choosing between sequential edits and a full rewrite:**
+
+| Situation | Method |
+|:----------|:-------|
+| ≥2 changes to one file, and a single Read captured the **whole** file (typical concept/entity page) | **Rewrite**: `write` the complete updated content to the project root, then `Move-Item -Force` it over the target. One write per file ⇒ race-free by construction, and it parallelizes across files. |
+| ≥2 changes to one file, page too large to reproduce safely (200–400-line synthesis pages) | **Sequential `edit` calls, one per message**, each anchored on unique surrounding text. |
+| Exactly one change | A single `edit` call. |
+
+A rewrite is only safe if the Read was **complete** — if its output carried a `(Showing lines X–Y of N)` trailer, you do not have the whole file and must not rewrite it. The Gerkmann 2012 ingest used the rewrite path for four existing pages in one parallel batch with zero lost writes; all three earlier races came from several `edit` *calls* against one file, never from a rewrite.
 
 ## Creating Pages Under `wiki/` (Write-Tool Caveat)
 
@@ -56,10 +77,12 @@ Use one of these instead:
 
 | Need | Method |
 |------|--------|
-| **Create a new page** (Steps 5, 7) | `write` to the project root (e.g. `zz_page.tmp.md`), then `mv zz_page.tmp.md wiki/sources/{slug}.md` |
-| **Overwrite on re-ingest** (Step 5) | Same pattern — `mv` overwrites, so it handles camera-ready replacements too |
-| **Modify an existing page** (Steps 6, 8, 9) | `edit` is unaffected — it works normally on files under `wiki/`, so no workaround is needed |
-| **Large or bulk content** | Shell heredoc with a *quoted* delimiter, which preserves `$`, backticks and wikilink-pipe characters byte-exactly: `cat > wiki/concepts/foo.md <<'ZEOF' … ZEOF` |
+| **Create a new page** (Steps 5, 7) | `write` to the project root (e.g. `zz_page.tmp.md`), then `Move-Item -Force zz_page.tmp.md wiki/sources/{slug}.md` |
+| **Overwrite or update any existing page** (Steps 5, 6, 8, 9) | Same pattern — **`Move-Item -Force` overwrites**, so it covers camera-ready re-ingests and the multi-region-update path |
+| **Single targeted change to an existing page** | `edit` is unaffected — it works normally on files under `wiki/`, so no workaround is needed |
+| **Large or bulk content** | Same pattern again — `write` to the project root, then `Move-Item -Force`. There is **no working shell heredoc** on this host: `<<'ZEOF'` is a PowerShell parse error (`pitfalls.md` #60) |
+
+> **`mv` does NOT overwrite here.** `mv` is a PowerShell **alias for `Move-Item`**, which refuses an existing destination with `Move-Item: 当文件已存在时，无法创建该文件。` The Gerkmann 2012 ingest lost all four Step 8 updates this way, because the create-only `mv` calls earlier in the same ingest had succeeded and the failure looked intermittent. Always `Move-Item -Force` when the target may exist (`pitfalls.md` #54).
 
 Give temp files a distinctive name (e.g. `zz_<purpose>.tmp.md`) and delete stragglers before committing — `commit_ingest.py` stages only `wiki/` and `raw/`, so a leftover root-level temp file stays silently untracked.
 
@@ -69,6 +92,25 @@ Give temp files a distinctive name (e.g. `zz_<purpose>.tmp.md`) and delete strag
 - `mineru-open-api` CLI (`npm install -g mineru-open-api`) — verify token: `mineru-open-api auth --show`
 - `defuddle` CLI (`npm install -g defuddle`) for arXiv HTML extraction
 - All scripts run from the **project root** via `uv run python .agents/skills/paper-reader/scripts/<script>.py`
+
+### Environment — set `UV_CACHE_DIR` on every shell call
+
+`uv`'s default cache lives outside the workspace (`D:\Scoop\persist\uv\cache`), which the file sandbox denies, so **every** `uv run` fails before doing any work:
+
+```
+error: Failed to initialize cache at `D:\Scoop\persist\uv\cache`
+  Caused by: failed to open file `…\sdists-v9\.git`: 拒绝访问。 (os error 5)
+```
+
+Each shell call is a fresh process, so an exported variable does **not** persist between calls — prefix every invocation:
+
+```powershell
+$env:UV_CACHE_DIR = "D:\Projects\llm-wiki\.uv-cache"; uv run python .agents/skills/paper-reader/scripts/<script>.py --args
+```
+
+The error text resembles a broken Python environment or a missing dependency; it is purely the cache location (`pitfalls.md` #55). Every script in this skill — including the wiki-lint scripts and `build_check.py` — is affected equally.
+
+The cache directory needs no `.gitignore` entry: `uv` writes its own `.uv-cache/.gitignore` containing `*`, so the whole cache self-ignores and never appears in `git status`.
 
 ## References (load on demand)
 
@@ -131,8 +173,10 @@ If the paper has an arXiv ID but is not in Zotero, note the arXiv ID and proceed
 
 - **Creators can be incomplete.** The EUSIPCO 2026 ingest (`LVZPGG2Q`) returned only 3 of the paper's 4 authors — the **first author was missing entirely**. Since the slug's author segment, the H1, and the Step 6 entity set all derive from the author list, a bad Zotero list yields a wrong slug, a wrong H1, and a missing entity page.
 - **`date`, `conferenceName`, and `publicationTitle` are often blank.** Resolve the year/venue from the paper itself or from an external listing (the conference's accepted-papers page, the publisher page, arXiv) — never default the year to "today".
+- **`abstract` is often truncated mid-sentence** (Gerkmann 2012 returned the abstract cut off at "The MMSE-based approach em…", with no warning). Take the abstract from `full-text.md`, never from the Zotero field.
+- **Page ranges are frequently absent.** The Step 11 log template shows `pp. XXX–XXX`, but if the range cannot be verified, **omit it** rather than inventing one, and note the omission on the source page (`pitfalls.md` #57).
 - **The PDF is authoritative.** `full-text.md` exists by Step 4, so check its title page for the author list *and order*. Do this before Step 5 — the slug is baked into `raw/papers/{slug}/` by then, and renaming afterwards means updating every cross-reference.
-- **Record the discrepancy** on the source page when Zotero and the paper disagree (author list, year, venue), so the next reader knows the wiki page is deliberate.
+- **Record the discrepancy** on the source page when Zotero and the paper disagree (author list, year, venue, truncated abstract), so the next reader knows the wiki page is deliberate.
 
 ### Step 3: Extract Paper Content
 
@@ -164,6 +208,7 @@ uv run python .agents/skills/paper-reader/scripts/extract_mineru.py --slug SLUG 
 - **Language codes** (MinerU convention, NOT ISO 639 — `zh` is INVALID, use `ch`): `ch` (Chinese), `en` (English), `chinese_cht`, `japan`, `korean`, `latin`, `arabic`, `cyrillic`, `east_slavic`, `devanagari`, `ta`/`te`/`ka`. Script validates locally; invalid codes exit 2 with the valid list.
 - Post-processing: `images/` → `figures/`, refs updated in `full-text.md`.
 - Verify quality: Read first 200 + last 100 lines. Mermaid code blocks for diagrams are normal.
+- MinerU succeeds on short non-arXiv conference PDFs (the 4-page Gerkmann 2012 ICASSP paper extracted cleanly with `--model vlm`). The Xiao 2023 / Sun 2024 `parsing failed` runs were the exception, not the rule — do **not** pre-emptively skip MinerU (`pitfalls.md` #47).
 
 #### 3d. pdftotext/pypdf fallback (plain text, no images)
 
@@ -187,15 +232,17 @@ Read the extracted text in chunks (head 200 + tail 100 + targeted range reads). 
 
 **Neural-network papers** (any paper whose method includes a DNN/RNN/CNN/transformer/vocoder etc.): additionally extract the **model architecture** (layer-by-layer structure with sizes/densities), the **input features** (exact feature representation, frame rate, window length) and **output** (what the network produces, at what rate), and the **training losses** (equations with coefficient values). These feed the mandatory model-documentation section in Step 5 — see the **Neural-Network Model Documentation** rules in [`references/page-templates.md`](references/page-templates.md).
 
+Classical/DSP papers have no such requirement, but a **mermaid data-flow diagram** of the algorithm is often the single most useful addition when the paper ships no block diagram of its own (the Gerkmann 2012 ingest added one showing preliminary speech PSD → cepstrum → selective smoothing → pitch detection → bias correction → MMSE noise estimate). See the mermaid rules in `page-templates.md` and the render check in Step 12.
+
 **Review/survey paper**: use the **Analysis Targets** in [`references/review-papers.md`](references/review-papers.md) — taxonomy, comparison tables, application domains, open challenges, coverage gaps — instead of the research-paper-shaped list above. See the **Review/Survey Paper Routing** section earlier in this file for the full routing table.
 
-**Numeric sign check (MinerU)**: MinerU can silently drop minus signs on negative numbers — the Ke 2021 SNR range −5…10 dB extracted as "5 dB to 10 dB", and the test SNRs {−5, 0, 5, 10} as "5, 0, 5, 10". Suspicious patterns: a 1 dB-step SNR sweep that appears to start positive, or a value list with a repeated entry after a sign flip. Cross-check numeric signs against the publisher page / abstract / PDF before writing them into the source page.
+**Numeric sign check (MinerU)**: MinerU can silently drop minus signs on negative numbers — the Ke 2021 SNR range −5…10 dB extracted as "5 dB to 10 dB", and the test SNRs {−5, 0, 5, 10} as "5, 0, 5, 10". Suspicious patterns: a 1 dB-step SNR sweep that appears to start positive, or a value list with a repeated entry after a sign flip. Cross-check numeric signs against the publisher page / abstract / PDF before writing them into the source page. (The Gerkmann 2012 extraction preserved its `−10` correctly, so the fault is intermittent — always eyeball any signed range.)
 
 **If you encounter** graphical-only results, citation discrepancies, loose review classifications, or cross-references to already-ingested papers: load [`references/edge-cases.md`](references/edge-cases.md).
 
 ### Step 5: Create/Update Source Page
 
-Create `wiki/sources/{slug}.md`. Load [`references/page-templates.md`](references/page-templates.md) for frontmatter, required sections (Summary / Problem Formulation / Methodology / Experimental Setup / Results / Key Contributions / Related Concepts / Related Synthesis), figure-usage criteria, and figure-filename verification rules. H1 is `Author1, Author2 & Author3 Year: Short Title`.
+Create `wiki/sources/{slug}.md` (root-temp-then-`Move-Item -Force`, see *Creating Pages Under `wiki/`*). Load [`references/page-templates.md`](references/page-templates.md) for frontmatter, required sections (Summary / Problem Formulation / Methodology / Experimental Setup / Results / Key Contributions / Related Concepts / Related Synthesis), figure-usage criteria, and figure-filename verification rules. H1 is `Author1, Author2 & Author3 Year: Short Title`.
 
 **Neural-network papers**: the source page MUST include a **Model Structure, Inputs, and Outputs** section with a **mermaid architecture block diagram** and per-network spec tables (structure / inputs / outputs / training data / role), plus a **Training Losses** section with the loss equations — see the **Neural-Network Model Documentation** rules in [`references/page-templates.md`](references/page-templates.md) for the template and mermaid syntax constraints.
 
@@ -205,39 +252,42 @@ Create `wiki/sources/{slug}.md`. Load [`references/page-templates.md`](reference
 
 **Unreferenced figure files**: `map_figures.py` lists files in `figures/` that `full-text.md` never references — these are typically axis/colorbar strips split off by MinerU (flagged as `<-- likely axis/colorbar strip, skip`). **Do not embed unreferenced files.** Only embed figures that are (i) referenced in `full-text.md` AND (ii) paired with a caption or an in-text "Fig. N" reference by `map_figures.py` (the in-text fallback runs automatically when no caption lines exist), or manually matched. If `map_figures.py` reports *neither* captions nor in-text references, fall back to reading the text for "Fig. N" / "Figure N" mentions and matching by position (see `pitfalls.md` #32).
 
-For re-ingestion: overwrite the existing source page with updated comprehensive content (use the root-then-`mv` pattern — a direct `write` into a pre-existing `wiki/sources/` fails; see *Creating Pages Under `wiki/`* above).
+For re-ingestion: overwrite the existing source page with updated comprehensive content — `write` to the project root, then `Move-Item -Force` (a direct `write` into a pre-existing `wiki/sources/` fails, and a bare `mv` will not clobber; see *Creating Pages Under `wiki/`* above).
 
 ### Step 6: Create or Update Entity Pages
 
-For each author not already in `wiki/entities/`, create a new page. For existing authors, make **append-only** edits (update `updated:`, append a bullet to `## Key Contributions`, do not touch `created:` or rewrite existing bullets). Load [`references/page-templates.md`](references/page-templates.md) for the full template and the append-only update rules. **Check first**: LS `wiki/entities` and scan the filenames for the author slug (entity pages don't contain their own slug, so a content Grep gives false "missing").
+For each author not already in `wiki/entities/`, create a new page (root-temp-then-`Move-Item -Force`). For existing authors, make **append-only** edits (update `updated:`, append a bullet to `## Key Contributions`, do not touch `created:` or rewrite existing bullets) — an append plus a frontmatter date is two regions, so use a whole-file rewrite or two sequential `edit` calls. Load [`references/page-templates.md`](references/page-templates.md) for the full template and the append-only update rules. **Check first**: Grep `wiki/entities/index.md` for the author slug (already-present authors are exactly the rows that Grep returns; do not Grep `wiki/entities/` itself, `pitfalls.md` #43).
 
 ### Step 7: Create Missing Concept Pages
 
-For each key concept referenced via wikilink in the source page but lacking a dedicated page, create `wiki/concepts/{concept-name}.md`. Load [`references/page-templates.md`](references/page-templates.md) for the template and **concept-page threshold** (novelty / distinctive formulation / central-to-contribution). Do **not** create pages for generic ML/DL primitives (Adam, ReLU, dropout, gradient clipping) — link them as plain text.
+For each key concept referenced via wikilink in the source page but lacking a dedicated page, create `wiki/concepts/{concept-name}.md` (root-temp-then-`Move-Item -Force`). Load [`references/page-templates.md`](references/page-templates.md) for the template and **concept-page threshold** (novelty / distinctive formulation / central-to-contribution). Do **not** create pages for generic ML/DL primitives (Adam, ReLU, dropout, gradient clipping) — link them as plain text.
 
 **Review/survey paper**: apply the **stricter concept-page threshold** described in [`references/review-papers.md`](references/review-papers.md). A review surveys many terms, but only warrants creating a concept page when the review itself contributes a **distinctive taxonomy or synthesis** of that concept — not merely because the concept is mentioned. Tutorials are an exception (a tutorial that introduces/formulates a concept distinctly warrants a page).
 
-**Batch existence check** (one LS call, not N Globs): before creating any concept page, list all candidate concept slugs from the source page and check them against the directory listing:
+**Batch existence check** (one Grep, not N Globs): collect all candidate concept slugs first, then check them in a single call against the subdirectory index:
 
 ```
-LS wiki/concepts
+Grep pattern: "slug-1|slug-2|slug-3|slug-4"
+      path: wiki/concepts/index.md
 ```
 
-Scan the returned filenames for each candidate. Candidates absent from the list are confirmed missing and should be created (if they pass the concept-page threshold). Do **not** use Grep for this — it matches file *contents*: a page like `mvdr-beamformer.md` doesn't contain its own slug (false "missing"), and any page *mentioning* a slug in a wikilink matches (false "exists"). See the "Checking Existing Pages" section above and `pitfalls.md` #43.
+Candidates with no match are confirmed missing and should be created (if they pass the concept-page threshold); candidates that *do* match already have pages and become the Step 8 update targets. Note two traps: a **directory-wide Glob is not a substitute** (it caps at 100 of 502 paths — `pitfalls.md` #56), and Grepping the *directory* rather than its index gives false positives via `index.md` and false negatives for every page whose slug is not in its own body (`pitfalls.md` #43).
 
 ### Step 8: Update Existing Concept Pages
 
 For each existing concept page touched by this paper: add the paper to `sources:` in frontmatter, update `updated:` date, add new sections with findings, extend `## Related Concepts` and `## Related Sources` with new wikilinks.
 
-**Identify existing concept pages to update** from the same Step 7 LS listing — the candidates that *did* appear in `wiki/concepts` are the existing pages to update here. No separate existence check needed.
+**Identify existing concept pages to update** from the Step 7 index Grep — the candidates that *did* match are the existing pages. No separate existence check needed.
 
 **Efficient batched-update pattern** (when updating >2 existing concept pages in one ingest):
 
-1. **Read all target pages in parallel** — one Read per file in a single message (different files, safe). Typical ingest touches 4–8 existing concept pages.
-2. **One Edit call per file, carrying all of that file's changes in its `edits[]` array** — frontmatter (`sources:`, `updated:`, `tags:`), the new body section, and the `## Related Concepts` / `## Related Sources` extensions, together in a single call. A single call is one write and therefore race-free; issuing *several parallel Edit **calls*** against the same file is what races (see the warning below). Parallelize **across files** by issuing one such call per file in the same message.
-3. **Treat a failure as all-or-nothing** — if any one `oldText` does not match, the whole file's edits are discarded and nothing is applied. Grep for one of the intended additions to confirm, re-read the region, fix the anchor, and retry that file only (`pitfalls.md` #51). A common cause is a case mismatch in the anchor (`RCSCME-Based` vs the file's `RCSCME-based`); copy anchors verbatim from the Read output.
+1. **Read all target pages in parallel** — one Read per file in a single message (different files, safe). Check each read is complete: if the output ends with a `(Showing lines X–Y of N)` trailer you do not have the whole file. Typical ingest touches 4–8 existing concept pages.
+2. **Make exactly one write per file, then parallelize across files.** Each page needs frontmatter (`sources:`, `updated:`, `tags:`) + a new body section + `## Related Concepts` / `## Related Sources` extensions. Since `edit` handles only one `old_string`/`new_string` pair (`pitfalls.md` #59):
+   - **Small/medium page** → rewrite: `write` the complete updated content to the project root, then `Move-Item -Force` it over the target. One write per file, so issuing all of them in a single parallel batch cannot race — the Gerkmann 2012 ingest updated 4 pages this way with zero lost writes.
+   - **Large page** (200–400-line synthesis-style pages) → sequential `edit` calls, one per message.
+3. **Verify every file afterwards** — Grep each edited page for one intended addition (e.g. the new slug under `## Related Sources`). A failed `edit` anchor applies **nothing** (`pitfalls.md` #51); a rewrite that silently did not land shows up as the file missing from `git status`.
 
-**Parallel Edits to the *same* file race and silently drop each other** (`pitfalls.md` #13; see the top-level "Same-File Edit Discipline" section). Parallelize *across files*, never *within* a file. If a single page needs frontmatter + content + Related Sources changes, apply them as **sequential Edit calls in separate messages**. `commit_ingest.py` emits `WARN: uncommitted changes remain after commit` when an edit was silently dropped.
+**Never issue several parallel `edit` calls against the *same* file** (`pitfalls.md` #13; see the top-level "Same-File Edit Discipline" section). Parallelize *across files*, never *within* a file. `commit_ingest.py` emits `WARN: uncommitted changes remain after commit` when an edit was silently dropped — in the normal case that list contains only `.obsidian/` churn, so read the file list before assuming a drop (`pitfalls.md` #58).
 
 ### Step 9: Update Synthesis Pages
 
@@ -255,6 +305,12 @@ uv run python .agents/skills/paper-reader/scripts/triage_synthesis.py --slug SLU
   3. Refutes or refines an existing synthesis claim
   4. Introduces a new axis of comparison
 
+**Record which triage outcome actually occurred.** "No matches" and "6 candidates, all sharing a single broad-topic tag" are different results, and the source page's `## Related Synthesis` section must state the true one. Standard wording for the thin-match case:
+
+> _None. Triage (`triage_synthesis.py`, YYYY-MM-DD) returned 6 candidates (`a`, `b`, …), but each shared only a single broad-topic tag (`speech-enhancement`), so all were skipped without reading._
+
+Never write "no matches" when triage did return candidates — the distinction tells a later reader the triage was run rather than skipped.
+
 **Concrete trigger examples** (from real ingests):
 
 | Trigger | Example |
@@ -268,7 +324,7 @@ uv run python .agents/skills/paper-reader/scripts/triage_synthesis.py --slug SLU
 
 **Earn your `## Related Synthesis` links.** List a synthesis page under `## Related Synthesis` only if triage actually surfaced it (tag overlap) and you either updated it or can justify why not. A link the triage never returned is usually *conceptual adjacency* rather than a relation the synthesis supports — the Zhang 2026 ingest initially linked `secondary-path-modeling-evolution` because both concern "path identification", but that synthesis covers the **secondary** path, while the paper identifies the **feedback** path; triage had already reported zero tag overlap, which was the correct signal (`pitfalls.md` #53).
 
-**Applying a synthesis update** typically means 4–6 edits to the *same* file: frontmatter `sources:` + `updated:`, frontmatter `tags:`, a row in the Sources Synthesized table, a paragraph in the matching insight, possibly a takeaway and an open question. Apply these **sequentially, one Edit per message** — parallel edits to one file race and silently drop each other (see "Same-File Edit Discipline" above; the Sun 2024 ingest lost 3 of 5 synthesis edits this way). Afterwards, Grep the file for the new slug to confirm all edits landed.
+**Applying a synthesis update** typically means 4–6 changes to the *same* file: frontmatter `sources:` + `updated:`, frontmatter `tags:`, a row in the Sources Synthesized table, a paragraph in the matching insight, possibly a takeaway and an open question. These sit in several far-apart regions, so **sequential `edit` calls, one per message** (large file — do not rewrite it wholesale), or one rewrite if the file was fully read and is small. Afterwards, Grep the file for the new slug to confirm every change landed (the Sun 2024 ingest lost 3 of 5 parallel synthesis edits).
 
 ### Step 10: Update Indexes
 
@@ -294,14 +350,18 @@ uv run python .agents/skills/paper-reader/scripts/update_indexes.py batch \
 
 `--stats` recounts statistics automatically. Delete the temp manifest afterward.
 
+**Manifest hygiene**:
+
+- **Write `display` and `summary` as prose, not math.** Each row is a pipe-delimited markdown table; `update_indexes.py` now escapes bare pipes, but `E[|N|^2 | y]` becomes `E[\|N\|^2 \| y]` in two index files — write `E[|N|^2 given y]` instead.
+- **Use the ingest date (`YYYY-MM-DD`)** for `date`. Recent rows all do; older rows in `wiki/sources/index.md` carry the paper's publication year. Do not mix the two styles within one batch.
+
 For one-off additions or re-ingests, use `add --category <cat> --slug <slug> --display "..." --summary "..." --date YYYY-MM-DD`, then run `stats`.
 
 **Verify after updating indexes** (mandatory, one Grep call): confirm every new slug actually landed in both the main index and its subdirectory index. Long ingests can lose track of which entries were added — statistics alone do not prove the table rows exist (the Guldenschuh 2014 ingest had correct statistics but missing table rows, caught only by this check):
 
 ```
-Grep pattern: "new-slug-1|new-slug-2|new-slug-3"
+Grep pattern: "new-slug-1|new-slug-2|new-slug-3"   include: index.md
       path: wiki
-      output_mode: content, -n: true
 ```
 
 Each new slug must appear in **two** files: `wiki/index.md` and `wiki/{category}/index.md`. If a slug is missing from either, add the row before proceeding. Note that each category directory contains its own `index.md`, so `ls wiki/sources | wc -l` overcounts by one — for page counts use `check_statistics.py` (or `update_indexes.py`'s own `stats` output), never a directory listing (`pitfalls.md` #52).
@@ -347,7 +407,23 @@ Checks both `[[category/slug]]` wikilinks and `![[raw/...]]` figure embeds again
 uv run python .agents/skills/paper-reader/scripts/build_check.py
 ```
 
-If the build fails, resolve broken links/missing pages before proceeding. Pre-existing `INFO` messages about `log.md` links and the Material "MkDocs 2.0" banner do not fail the build (`pitfalls.md` #8, #28). The check intentionally runs **without `--quiet`**: mkdocs's `--quiet` sets the log level to ERROR, which filters WARNING records before strict-mode's counter sees them — a `--quiet` build can exit 0 despite strict violations (observed in the Ke 2021 ingest). INFO-level nav lines in the output are normal.
+If the build fails, resolve broken links/missing pages before proceeding. Pre-existing `INFO` messages about `log.md` links and the Material "MkDocs 2.0" banner do not fail the build (`pitfalls.md` #8, #28). The check intentionally runs **without `--quiet`**: mkdocs's `--quiet` sets the log level to ERROR, which filters WARNING records before strict-mode's counter sees them — a `--quiet` build can exit 0 despite strict violations (observed in the Ke 2021 ingest). INFO-level nav lines in the output are normal. A clean run takes ~45 s.
+
+**Step 12c — Statistics check** (required by `AGENTS.md`; independent of Step 10's own recount):
+
+```bash
+uv run python .agents/skills/wiki-lint/scripts/check_statistics.py
+```
+
+`update_indexes.py batch --stats` writes the counts; this verifies them against the actual files (`OK` per category, or a stated-vs-actual mismatch to fix).
+
+**Step 12d — Mermaid render check** (only if a page added a mermaid fenced code block). `mkdocs build --strict` **passes** even when mermaid is unconfigured, silently emitting a syntax-highlighted code block instead of a diagram (`pitfalls.md` #38). Confirm the built page really contains the diagram:
+
+```
+Grep pattern: class="mermaid"    path: site/sources/{slug}.html
+```
+
+A match on `<pre class="mermaid">` means it renders; none means fix `mkdocs.yml`'s superfences `custom_fences`.
 
 ### Step 13: Commit Changes
 
@@ -357,12 +433,24 @@ uv run python .agents/skills/paper-reader/scripts/commit_ingest.py \
     --entities author1 author2 --concepts concept1 concept2 --synthesis synth1
 ```
 
-Stages `raw/papers/{slug}/`, `wiki/sources/{slug}.md`, all index files, `wiki/log.md`, and the specified entity/concept/synthesis pages. Verifies no `paper.pdf` is staged. **Auto-stages** any other modified/untracked file under `wiki/` (catches Step 8 edits to existing concept/entity pages that would otherwise be dropped) — pass `--strict` to disable. Use `--no-verify` only if the pre-commit hook has environment issues unrelated to your changes.
+Stages `raw/papers/{slug}/`, `wiki/sources/{slug}.md`, all index files, `wiki/log.md`, and the specified entity/concept/synthesis pages. Verifies no `paper.pdf` is staged. **Auto-stages** any other modified/untracked file under `wiki/` (catches Step 8 edits to existing concept/entity pages that would otherwise be dropped) — pass `--strict` to disable.
+
+**`--no-verify` when the hook cannot run under the sandbox.** On this host the pre-commit hook fails for a purely environmental reason, with this exact signature:
+
+```
+Commit failed:
+  0 [main] sh (…): *** fatal error - couldn't create signal pipe, Win32 error 5
+```
+
+The hook runs `sh.exe` (MSYS), which needs a named pipe the file sandbox forbids — it is unrelated to the staged content, so retrying, re-staging, or trimming the file list will not help. Re-run the identical command with `--no-verify`. This loses no verification **only because Step 12b already ran the same strict build the hook runs** — never skip the hook without a clean 12b (`pitfalls.md` #58).
+
+Afterwards, `WARN: uncommitted changes remain after commit` listing **only** `.obsidian/*.json` is the expected steady state (Obsidian config churn, deliberately excluded — `pitfalls.md` #37). It signals a dropped edit only when `wiki/` paths appear in that list.
 
 ## Important Notes
 
 - **`raw/` immutability exception**: replacing remote image URLs with local paths in `full-text.md` is allowed.
 - **Avoid `\bm{}` in LaTeX math** — MathJax does not load the `bm` package. Use `\mathbf{x}` or `\boldsymbol{x}` instead.
 - **Never put LaTeX math in a wikilink alias** — `[[concepts/foo|$\mathcal{L}$]]` breaks the `fix_obsidian_escapes` pipe-escaping and aborts `mkdocs build --strict` (`pitfalls.md` #44). Use a plain-text alias (`[[concepts/foo|Spectrally Adaptive Loss]]`) and keep the math outside the wikilink.
-- **Always commit via `commit_ingest.py`** — manual `git add`/`git commit` bypasses its guards: it refuses to stage `paper.pdf`, auto-stages all `wiki/` modifications, and avoids PowerShell quoting entirely (heredoc `<<'EOF'` is a parse error on PowerShell 5.1, `pitfalls.md` #37). If a manual commit is unavoidable: exclude `paper.pdf` and `.obsidian/`, and pass multi-paragraph messages as multiple `-m` flags — never a heredoc.
-- **Todo list structure**: one todo per workflow step (1–13), in numerical order. Treat Steps 3a–3e as a single "extract content" todo. Treat Step 12a–12b as a single "build verification" todo. If Step 9 triage finds no candidates, mark that todo `completed` with "none relevant — grep triage" rather than leaving it `pending`.
+- **Always commit via `commit_ingest.py`** — manual `git add`/`git commit` bypasses its guards: it refuses to stage `paper.pdf`, auto-stages all `wiki/` modifications, and avoids PowerShell quoting entirely. If a manual commit is unavoidable: exclude `paper.pdf` and `.obsidian/`, and pass multi-paragraph messages as multiple `-m` flags.
+- **Shell facts for this host (verified 2026-09-11)**: PowerShell **7.6.6**; `&&` works; bash heredocs (`<<'EOF'`) are a **parse error** — never propose one; `$_` automatic variables are **not** stripped. Older notes in `pitfalls.md` claiming otherwise were stale and are corrected in #60. Re-verify with a one-line command before adding any *new* environment claim to these docs.
+- **Todo list structure**: one todo per workflow step (1–13), in numerical order. Treat Steps 3a–3e as a single "extract content" todo. Treat Step 12a–12d as a single "build verification" todo. If Step 9 triage finds no candidates, mark that todo `completed` with "none relevant — grep triage" rather than leaving it `pending`.
