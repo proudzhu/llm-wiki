@@ -1,0 +1,96 @@
+wiki/concepts/multi-channel-speech-enhancement.md
+  s_dd37b4097f0c14::t_48c88ebbc13f04 4,12,46,82-83,102
+wiki/entities/sanha-lee.md
+  s_dd37b4097f0c14::t_7da1bc06a4d51d 1-23
+wiki/concepts/spatial-covariance-matrix.md
+  s_dd37b4097f0c14::t_48c88ebbc13f04 7,37,80,91
+raw/papers/grinstein-2025-tiny-param-mwf/figures/system.svg
+  s_dd37b4097f0c14::t_924491791b65ba 1-200
+wiki/synthesis/multi-channel-speech-enhancement.md
+  s_dd37b4097f0c14::t_c0cd00f05c385a 34
+  s_dd37b4097f0c14::t_eb0231c5aa00a6 177
+  s_dd37b4097f0c14::t_7397d04668aa8e 4,184
+  s_dd37b4097f0c14::t_3a139d7fde3825 236
+  s_dd37b4097f0c14::t_401a6190642fa6 99
+  s_dd37b4097f0c14::t_a2c613b66791a4 183
+  s_dd37b4097f0c14::t_0b8512c9e82b53 247
+raw/papers/grinstein-2025-tiny-param-mwf/figures/network_architecture.svg
+  s_dd37b4097f0c14::t_924491791b65ba 1-366
+wiki/entities/juan-azcarreta.md
+  s_dd37b4097f0c14::t_7da1bc06a4d51d 4,21
+wiki/entities/jacob-donley.md
+  s_dd37b4097f0c14::t_7da1bc06a4d51d 4,20
+raw/papers/grinstein-2025-tiny-param-mwf/figures/simplified_system.svg
+  s_dd37b4097f0c14::t_924491791b65ba 1-158
+wiki/concepts/index.md
+  s_dd37b4097f0c14::t_badc5c6c003623 508-509
+wiki/index.md
+  s_dd37b4097f0c14::t_badc5c6c003623 565-569,1080-1081,1295
+  s_dd37b4097f0c14::t_ceea4711f51126 1349-1352
+wiki/concepts/parametric-multi-channel-wiener-filter.md
+  s_dd37b4097f0c14::t_48c88ebbc13f04 4,8,26,46-49,70-71,78
+wiki/sources/grinstein-2025-tiny-param-mwf.md
+  s_dd37b4097f0c14::t_2b4cb515d00c80 1-219
+wiki/entities/shanmukha-srinivas.md
+  s_dd37b4097f0c14::t_7da1bc06a4d51d 1-22
+raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
+  s_dd37b4097f0c14::t_6e5697f0144b19 1-3476
+wiki/entities/ali-aroudi.md
+  s_dd37b4097f0c14::t_7da1bc06a4d51d 4,20,25
+wiki/entities/cagdas-bilen.md
+  s_dd37b4097f0c14::t_7da1bc06a4d51d 1-23
+wiki/concepts/gtcrn.md
+  s_dd37b4097f0c14::t_48c88ebbc13f04 4,75-78,96,100,112
+wiki/entities/ashutosh-pandey.md
+  s_dd37b4097f0c14::t_7da1bc06a4d51d 4,17,23,29,35
+wiki/concepts/neural-beamforming.md
+  s_dd37b4097f0c14::t_48c88ebbc13f04 4-6,41,58-63,68
+wiki/sources/index.md
+  s_dd37b4097f0c14::t_badc5c6c003623 211
+wiki/concepts/neuralpmwf.md
+  s_dd37b4097f0c14::t_126fb81b9a2b15 1-59
+raw/papers/grinstein-2025-tiny-param-mwf/figures/alpha_beta.svg
+  s_dd37b4097f0c14::t_924491791b65ba 1-517
+wiki/concepts/noise-attenuation-control.md
+  s_dd37b4097f0c14::t_48c88ebbc13f04 4,10,40-41,73-74,82
+wiki/entities/cole-li.md
+  s_dd37b4097f0c14::t_7da1bc06a4d51d 1-22
+wiki/entities/eric-grinstein.md
+  s_dd37b4097f0c14::t_7da1bc06a4d51d 1-23
+wiki/concepts/splitgru.md
+  s_dd37b4097f0c14::t_126fb81b9a2b15 1-31
+wiki/concepts/multi-channel-speech-presence-probability.md
+  s_dd37b4097f0c14::t_48c88ebbc13f04 4,7,44-51,64-65,72
+wiki/entities/index.md
+  s_dd37b4097f0c14::t_badc5c6c003623 559-563
+wiki/log.md
+  s_dd37b4097f0c14::t_6325ff446b21e1 5189-5208
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.2",
+  "base_commit_sha": "216853db5bd93c02ff7aaa130967be33c0c4c4a6",
+  "prompts": {},
+  "sessions": {
+    "s_dd37b4097f0c14": {
+      "agent_id": {
+        "tool": "trae",
+        "id": "6aa34493edb0bdcb0b0b654a",
+        "model": "glm-5.3__dev"
+      },
+      "human_author": "proudzhu <proudzhu.fdu@gmail.com>",
+      "custom_attributes": {
+        "tool_use_id": "6aa41d0bf7857fd0fc01a417",
+        "runtime_client": "trae-tob-git-ai",
+        "tool_name": "RunCommand",
+        "client_type": "ide",
+        "external_session_id": "6aa34493edb0bdcb0b0b654a",
+        "edit_kind": "bash",
+        "source_scene": "agent",
+        "session_id": "6aa34493edb0bdcb0b0b654a",
+        "operation_id": "6aa41d0bf7857fd0fc01a417",
+        "display_model_name": "GLM-5.3"
+      }
+    }
+  }
+}
