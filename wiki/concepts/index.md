@@ -507,4 +507,5 @@
 | [[concepts/decision-directed-a-priori-snr\|Decision-Directed A Priori SNR Estimation]] | Ephraim & Malah's recursive a priori SNR estimator (alpha_dd = 0.98); used as the bias-compensation speech estimate in the 2010 MMSE noise tracker and removed by the TCS variant | 2026-09-11 |
 | [[concepts/neuralpmwf\|NeuralPMWF]] | Hybrid MCSE where a tiny DNN fully controls the PMWF: mask-derived covariances, learned frequency-dependent smoothing, SPP-scheduled dynamic β | 2026-09-11 |
 | [[concepts/splitgru\|SplitGRU]] | GRU variant splitting the hidden dimension into R parallel smaller GRUs, cutting compute by ~R× | 2026-09-11 |
+| [[concepts/eabnet\|EaBNet]] | Embedding and Beamforming Network — causal all-neural beamformer with 3-D spectral-spatial embedding and direct framewise weight regression | 2026-09-11 |
 

@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-07-16
-updated: 2026-09-06
+updated: 2026-09-11
 sources:
   - raw/papers/li-2020-residual-noise-control/full-text.md
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
+  - raw/papers/li-2022-embedding-beamforming/full-text.md
 tags:
   - signal-processing
   - speech-enhancement
@@ -39,6 +40,10 @@ Zheng et al. (2023) report a surprising listener-dependent effect of input-featu
 
 The compression factor also appears inside the phase-aware compressed STFT loss ($c=0.3$), where compressed magnitudes are compared with and without the complex phase term. [[sources/zhao-2026-spectrally-adaptive-loss|Zhao & Madhu 2026]] note that the [[concepts/magnitude-phase-compensation-effect|compensation effect]] of this loss acts on the *compressed* magnitudes — the over-attenuation it induces in mid-to-high frequencies is a direct interaction between the compression and the phase-aware term, motivating their spectrally adaptive reweighting of the phase-aware contribution.
 
+## Phase-Preserving Multichannel Compression (Li et al. 2022)
+
+A multichannel-specific argument for compression appears in [[sources/li-2022-embedding-beamforming|Li et al. 2022]]'s [[concepts/eabnet|EaBNet]]: both the network input and training target use exponent-0.5 compression on **each channel** — $|\mathbf{X}^{p}|^{0.5} e^{j\theta_{\mathbf{X}^{p}}}$, $|\mathbf{S}^{p}|^{0.5} e^{j\theta_{\mathbf{S}^{p}}}$ — with the rationale that compressing only the magnitude while leaving the phase untouched **preserves the inter-channel phase differences that carry spatial information**. The ablation (on a 9-channel setup) shows the usual quality-vs-accuracy trade-off in a new form: compression improves PESQ (+0.34) and ESTOI considerably but mildly degrades SDR (16.72 vs. 17.00 dB) — the nonlinearity reduces dynamic range and prioritizes low-energy regions (better residual-noise suppression) but can destroy the linear separability of different sources, increasing target distortion.
+
 ## Loss-Side Exponent (Li 2020)
 
 A *loss-side* counterpart appears in the [[concepts/generalized-loss-function|generalized loss function]] of [[sources/li-2020-residual-noise-control|Li et al. 2020]], where the spectral exponent $\alpha \ge 1$ is applied to the spectra inside the loss (and, analytically, inside the generalized Wiener gain $M = \left(\xi^{\alpha}/(\mu + \xi^{\alpha})\right)^{1/\alpha}$) rather than to input features. The suppression direction matches feature compression: raising $\alpha$ pushes the gain toward 1, reducing both noise attenuation and speech attenuation. The quality direction differs, however — Li et al. report PESQ/SDR *declining* as $\alpha$ goes from 1 to 2 (the preserved residual noise outweighs the reduced distortion), whereas Shetu et al. report quality gains from raising the feature-compression α. Li et al. also restrict $\alpha \ge 1$ because smaller exponents cause infinite gradients during backpropagation.
@@ -53,6 +58,7 @@ A *loss-side* counterpart appears in the [[concepts/generalized-loss-function|ge
 - [[concepts/adaptcrn|AdaptCRN]]
 - [[concepts/generalized-loss-function|Generalized Loss Function]]
 - [[concepts/magnitude-phase-compensation-effect|Magnitude-Phase Compensation Effect]] — interaction between compression and the phase-aware loss term
+- [[concepts/eabnet|EaBNet]] — phase-preserving multichannel compression rationale
 
 ## Related Sources
 
@@ -61,3 +67,4 @@ A *loss-side* counterpart appears in the [[concepts/generalized-loss-function|ge
 - [[sources/shetu-2026-munet|Shetu et al. 2026: μNet]] — documents the PF vs. NAL equivalence
 - [[sources/li-2020-residual-noise-control|Li et al. 2020: Supervised Speech Enhancement with Residual Noise Control]] — loss-side spectral exponent α (≥1) with the opposite quality-vs-α direction
 - [[sources/zhao-2026-spectrally-adaptive-loss|Zhao & Madhu 2026: Spectrally Adaptive Loss for Streaming Speech Enhancement]] — compressed-domain (c=0.3) phase-aware loss and its compensation-effect interaction
+- [[sources/li-2022-embedding-beamforming|Li et al. 2022: Embedding and Beamforming]] — phase-preserving exponent-0.5 compression for multichannel beamforming; PESQ/ESTOI up, SDR mildly down

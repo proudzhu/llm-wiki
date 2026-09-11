@@ -10,6 +10,7 @@ sources:
   - raw/papers/kim-2014-doa-based-snr-estimation/full-text.txt
   - raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt
   - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
+  - raw/papers/li-2022-embedding-beamforming/full-text.md
 tags:
   - speech-enhancement
   - multi-channel
@@ -44,6 +45,8 @@ tags:
 - **[[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence NE]] (Jin et al. 2017)**: Classical statistical-model MCSE for mobile-phone hands-free — MVDR front-end + Wiener post-filter driven by an SPP/coherence hybrid noise estimator with adaptive split-frequency and globally MMSE-optimal multi-channel variance decomposition; validated on a 3-mic Huawei Mate 8 in real non-stationary noise
 - **[[concepts/differential-asr|Differential ASR]] (Yang et al. 2025)**: Multi-frontend pattern in which a beamformer + microphone selection + [[concepts/side-talk-detection|side-talk detection]] embedding are concatenated as complementary input channels to a streaming RNN-T ASR backbone for smart-glasses [[concepts/wearer-speech-recognition|WSR]]. All frontends are frozen; only the ASR backbone and small feature-extraction layers are trained (<1M additional parameters). Achieves up to 18.0% relative WER reduction over the single-MVDR-frontend baseline on real side-talk data. While framed for ASR rather than signal-level SE, the differential pattern is directly portable to MCSE pipelines that need complementary cues beyond a single beamformer output.
 - **[[concepts/neuralpmwf|NeuralPMWF]] (Grinstein et al. 2025)**: Hybrid method where a tiny DNN (164.9k params, 24.95 MMACs/s, 16 ms latency) fully controls the [[concepts/parametric-multi-channel-wiener-filter|PMWF]] — mask-derived covariances with learned frequency-dependent exponential smoothing, and SPP-proxy-driven dynamic distortion parameter $\beta$. Beats comparably-sized hybrid baselines (TinyGRU+MWF, GTCRN+MWF, MCCRN+MWF) on all metrics in a 5-mic smart-glasses simulation; the largest ablation gain comes from the dynamic $\beta$ (+4.5 STOI), showing the suppression/distortion trade-off itself is best scheduled per T-F bin rather than fixed.
+
+- **[[concepts/eabnet|EaBNet]] (Li et al. 2022)**: End-to-end data-driven causal framewise beamformer — an Embedding Module learns a 3-D spectral-spatial embedding tensor (never computing an explicit SCM) and a Beamforming Module directly regresses complex filter weights applied via filter-and-sum, with a GaGNet PostNet for residual noise. On a simulated 9-channel DNS-Challenge setup (4 cm spacing, RT60 0.05–0.7 s), it beats FasNet+TAC, MC-ConvTasNet, MIMO-UNet by large margins (avg. PESQ 3.52 vs. 2.67 for the best baseline) and even an oracle-IRM MB-MVDR (3.10), at 2.84M params / RTF 0.59. Its EaBNet* ablation (explicit SCM reinsertion degrades results) argues the learned embedding captures higher-order spatial statistics than the second-order SCM.
 
 - **[[concepts/doa-based-snr-estimation|DOA-Based SNR Estimation]] (Kim & Kim 2014)**: Classical statistical-model dual-microphone SE that replaces noise-variance-driven a priori SNR estimation with a spatial cue — the phase difference between time-aligned channels is converted into a [[concepts/target-to-non-target-directional-signal-ratio|TNR]] and then a DOA-based SNR via an LRT speech-activity decision and decision-directed updates, feeding a Wiener spectral gain. Outperformed SDB, GSC-PW, PEF, and ASBM baselines in SDR and PESQ (0–20 dB SNR, RT60 up to 300 ms, four noise types) on a 4 cm dual-microphone array.
 
@@ -81,6 +84,7 @@ tags:
 - [[concepts/sound-source-localization|Sound Source Localization]] — DL-based DoA estimation as the upstream spatial-cue provider
 - [[concepts/neuralpmwf|NeuralPMWF]]
 - [[concepts/parametric-multi-channel-wiener-filter|Parametric Multi-Channel Wiener Filter (PMWF)]]
+- [[concepts/eabnet|EaBNet]]
 
 ## Related Sources
 
@@ -100,3 +104,4 @@ tags:
 - [[sources/kim-2014-doa-based-snr-estimation|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] — phase-difference TNR → DOA-based SNR → Wiener gain; beats SDB/GSC-PW/PEF/ASBM in SDR and PESQ
 - [[sources/grumiaux-2022-ssl-deep-learning-survey|Grumiaux, Kitić, Girin & Guérin 2022: A Survey of Sound Source Localization with Deep Learning Methods]] — six-axis taxonomy of 156 DL-based SSL systems (2011–2021); the DL-DoA field upstream of beamforming-based MCSE
 - [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — hybrid tiny-NN-controlled PMWF for smart glasses
+- [[sources/li-2022-embedding-beamforming|Li et al. 2022: Embedding and Beamforming]] — EaBNet all-neural causal framewise beamformer; implicit spectral-spatial embedding beats oracle-mask MVDR

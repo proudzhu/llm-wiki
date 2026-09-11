@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-04
-updated: 2026-09-06
+updated: 2026-09-11
 sources:
   - raw/papers/tan-2018-convolutional-recurrent-network-speech-enhancement/full-text.md
   - raw/papers/pandey-2019-cnn-speech-enhancement-time-domain/full-text.md
@@ -23,6 +23,7 @@ sources:
   - raw/papers/ke-2021-low-complexity-artificial-noise-suppression/full-text.md
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
   - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
+  - raw/papers/li-2022-embedding-beamforming/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -54,6 +55,7 @@ The thesis here is that the field's progress is **not a single replacement story
 | [[sources/pandey-2019-cnn-speech-enhancement-time-domain\|Pandey & Wang 2019 (AECNN)]] | 2019 | Domain | Time-domain U-Net trained with STFT-magnitude loss → frequency-loss-for-time-domain-nets paradigm |
 | [[sources/li-2020-residual-noise-control\|Li et al. 2020 (GL)]] | 2020 | Training objective | [[concepts/generalized-loss-function\|Generalized loss]] with residual noise control; MSE / components loss as special cases; same-net four-loss comparison with subjective validation |
 | [[sources/ke-2021-low-complexity-artificial-noise-suppression\|Ke et al. 2021 (ANS)]] | 2021 | Post-processing | Classical MMSE/SPP postfilter on the DNN output suppressing [[concepts/artificial-residual-noise\|artificial residual noise]] — three SPP strategies at 0.0098–0.016 MFLOPs/frame |
+| [[sources/li-2022-embedding-beamforming\|Li et al. 2022 (EaBNet)]] | 2022 | Multi-channel | All-neural causal framewise beamformer: implicit spectral-spatial embedding replaces explicit SCM; surpasses oracle-mask MVDR |
 | [[sources/wang-2021-magnitude-phase-compensation\|Wang, Wichern & Le Roux 2021]] | 2021 | Training objective (theory) | Names and formulates the [[concepts/magnitude-phase-compensation-effect\|magnitude–phase compensation effect]]; explains why magnitude losses improve perceptual metrics in RI/waveform losses |
 | [[sources/schroter-2022-deepfilternet\|Schröter et al. 2022 (DeepFilterNet)]] | 2022 | Target | Deep Filtering: complex temporal filter generalizing the complex ratio mask |
 | [[sources/indenbom-2023-deepvqe\|Indenbom et al. 2023 (DeepVQE)]] | 2023 | Target | Complex Convolving Mask: T-F-neighborhood filter with 120° three-vector weights |
@@ -159,9 +161,9 @@ The efficiency frontier also has a **deployment axis** that params/MACs tables h
 
 The multi-channel arc has three phases, each relaxing an assumption of the previous:
 
-1. **Hybrid DNN-guided linear filters** — [[sources/oviste-2026-neural-vslf-speech-enhancement\|Neural VSLF (Oviste 2026)]]: a DNN predicts clean-speech SCM, noise SCM, and a distortion/noise tradeoff parameter, then classical [[concepts/variable-span-linear-filter\|VSLF]] weights are computed (MWF/MVDR are special cases). Interpretable, controllable, but array-specific.
-2. **End-to-end neural beamforming** — [[concepts/neural-beamforming\|neural beamformers]] and [[sources/zaidel-2026-linearly-constrained-deep-beamformer\|Zaidel 2026]]'s linearly-constrained deep beamformer learn the whole filter via differentiable constraint losses, outperforming LCMV. Highest quality, but bound to one array geometry.
-3. **Array-invariant conditioning** — [[sources/liu-2026-array-invariant-speech-enhancement\|Geo-DConv (Liu 2026)]]: a universal front-end (Geo-DConv + [[concepts/topology-aware-coordinate-transformer\|TACT]]) converts *any* fixed-array SE backbone (SpatialNet, TF-GridNet) into an array-invariant system by generating geometry-specific convolution kernels from microphone coordinates. It matches USES2-comp quality at ~10× lower MACs and **zero-shot generalizes to CHiME-4**.
+1. **Hybrid DNN-guided linear filters** — [[sources/oviste-2026-neural-vslf-speech-enhancement|Neural VSLF (Oviste 2026)]]: a DNN predicts clean-speech SCM, noise SCM, and a distortion/noise tradeoff parameter, then classical [[concepts/variable-span-linear-filter|VSLF]] weights are computed (MWF/MVDR are special cases). Interpretable, controllable, but array-specific.
+2. **End-to-end neural beamforming** — [[concepts/neural-beamforming|neural beamformers]] and [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel 2026]]'s linearly-constrained deep beamformer learn the whole filter via differentiable constraint losses, outperforming LCMV. Highest quality, but bound to one array geometry. The earliest decisive evidence for this phase is [[sources/li-2022-embedding-beamforming|Li et al. 2022 (EaBNet)]]: a causal framewise beamformer whose learned spectral-spatial embedding skips SCM computation entirely and *surpasses an oracle-IRM MB-MVDR* (avg. PESQ 3.52 vs. 3.10 on a 9-channel DNS setup) at 2.84M params — and whose EaBNet* ablation shows that *reinserting* explicit SCM computation from predicted masks degrades results, pinning the tandem scheme's bottleneck on the statistical stage itself rather than on mask-estimation error.
+3. **Array-invariant conditioning** — [[sources/liu-2026-array-invariant-speech-enhancement|Geo-DConv (Liu 2026)]]: a universal front-end (Geo-DConv + [[concepts/topology-aware-coordinate-transformer|TACT]]) converts *any* fixed-array SE backbone (SpatialNet, TF-GridNet) into an array-invariant system by generating geometry-specific convolution kernels from microphone coordinates. It matches USES2-comp quality at ~10× lower MACs and **zero-shot generalizes to CHiME-4**.
 
 The conceptual move from phase 2 to phase 3 is from "learn the beamformer" to "condition a backbone on geometry." A parallel reframing appears in [[sources/apostolidis-2026-listen-first-output-based-multi-microphone\|Apostolidis 2026]]'s [[concepts/output-based-speech-enhancement\|output-based SE]]: instead of extracting features from the noisy input to predict a filter, evaluate the SI/SQ of *candidate outputs* and select the best — outperforming input-based MVDR especially at low SNR. Both 2026 works invert a long-standing assumption: the relevant signal is the *output* (or the geometry), not the input spectrum.
 

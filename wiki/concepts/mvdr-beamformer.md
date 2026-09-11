@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-06
+updated: 2026-09-11
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
@@ -9,6 +9,7 @@ sources:
   - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
   - raw/papers/bagheri-2019-pmwf-spp/full-text.md
   - raw/papers/hu-2026-abse-net/full-text.md
+  - raw/papers/li-2022-embedding-beamforming/full-text.md
 tags:
   - beamforming
   - speech-enhancement
@@ -63,6 +64,10 @@ The **binaural MVDR (BMVDR)** extends the classical MVDR to the binaural hearing
 
 The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-wiener-filter|PMWF]] family: setting the trade-off parameter $\beta = 0$ in the PMWF closed form recovers the MVDR, while $\beta = 1$ gives the MWF. [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019]] benchmark this continuum on a 4-mic circular array (TIMIT speech, babble/pink interference, $T_{60}=300$ ms): the MWF consistently beats MVDR on ΔSINR, ΔSegSNR, and noise reduction at the expected cost of nonzero speech distortion, and an [[concepts/multi-channel-speech-presence-probability|MC-SPP]]-controlled $\beta$ (plus an MMSE output blend) improves further over the fixed-parameter MWF. This matches the structural intuition that MVDR's distortionless constraint leaves noise-reduction headroom on the table.
 
+## Neural Beamformers Surpassing Oracle-Mask MVDR (Li et al. 2022)
+
+[[sources/li-2022-embedding-beamforming|Li et al. 2022]] provide the sharpest evidence that the tandem mask-then-MVDR scheme is structurally limited: their all-neural causal beamformer [[concepts/eabnet|EaBNet]] (2.84M params, framewise weights) *surpasses an MB-MVDR beamformer driven by oracle ideal-ratio-mask SCMs* (avg. PESQ 3.52 vs. 3.10, ESTOI 85.91% vs. 83.57%, SDR 16.72 vs. 14.26 dB) on a simulated 9-channel DNS-Challenge setup — meaning even perfect mask estimation cannot rescue the decoupled statistical second stage. The EaBNet* variant, which reinserts explicit SCM computation from predicted speech/noise masks before the weight network, performs *worse* than the version with a purely learned spectral-spatial embedding, suggesting the second-order SCM itself (sparse, redundant) is the bottleneck rather than an aid in end-to-end neural beamformers.
+
 ## Related Concepts
 
 - [[concepts/beamforming|Beamforming]]
@@ -85,6 +90,7 @@ The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-
 - [[concepts/nlcmv-beamforming|NLCMV Beamforming]] — multi-direction, multi-constraint extension (Lin et al. 2024)
 - [[concepts/differential-asr|Differential ASR]] — framework where MVDR is one of several parallel frontends (Yang et al. 2025)
 - [[concepts/parametric-multi-channel-wiener-filter|Parametric Multi-Channel Wiener Filter (PMWF)]] — MVDR is the $\beta = 0$ distortionless endpoint
+- [[concepts/eabnet|EaBNet]] — all-neural causal beamformer that surpasses oracle-mask MB-MVDR
 
 ## Related Sources
 
@@ -99,3 +105,4 @@ The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-
 - [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] — wearer-focused adjusted MVDR as one frontend in a differential ASR system
 - [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]] — MVDR vs. MWF vs. SPP-controlled PMWF continuum benchmark
 - [[sources/hu-2026-abse-net|Hu et al. 2026: ABSE-NET]] — binaural MVDR collapses under open-fit leakage; a lightweight DNN post-filter absorbs its estimation errors
+- [[sources/li-2022-embedding-beamforming|Li et al. 2022: Embedding and Beamforming]] — EaBNet surpasses oracle-mask MB-MVDR; the tandem statistical stage is the structural bottleneck

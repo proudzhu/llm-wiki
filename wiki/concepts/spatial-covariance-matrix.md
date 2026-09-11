@@ -5,6 +5,7 @@ updated: 2026-09-11
 sources:
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
   - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
+  - raw/papers/li-2022-embedding-beamforming/full-text.md
 tags:
   - array-processing
   - spatial-statistics
@@ -48,6 +49,10 @@ where $\psi_i, \psi_R, \psi_V$ are **variance ratios** (non-negative, sum to 1),
 
 Normalization by trace transforms the SCM estimation problem from estimating absolute variances to estimating **relative variance ratios** — a simpler constrained optimization with non-negativity and unity-sum constraints, solvable by multiplicative updates.
 
+## Implicit Embeddings vs. Explicit SCM (Li et al. 2022)
+
+[[sources/li-2022-embedding-beamforming|Li et al. 2022]]'s [[concepts/eabnet|EaBNet]] provides a controlled head-to-head between explicit SCM usage and a purely learned spatial representation: their EaBNet* variant estimates speech/noise complex masks, computes the corresponding SCMs, and concatenates them as input to the beamforming network — while the main EaBNet replaces this entire stage with a learned 3-D spectral-spatial embedding tensor. The implicit embedding *wins* (avg. PESQ 3.52 vs. 3.46; ESTOI 85.91% vs. 84.67%). The authors' explanations: the SCM is sparse and often redundant/unnecessary for spectral-temporal representation, is less robust in real scenarios than a compact embedding, and — being second-order statistics — cannot capture the higher-order spatial statistics the data-driven embedding can potentially learn. This motivates rethinking the role of signal-theory operations (SCM computation and inversion) inside end-to-end neural beamformers.
+
 ## Covariance Subtraction for Component Isolation
 
 An SCM is normally *decomposed* into target and noise contributions under the assumption that the components are uncorrelated. In system identification the same additivity is used in reverse, as an operator that isolates one component by differencing two measured SCMs. [[concepts/covariance-subtraction|Covariance subtraction]] exploits this: with a primary-only measurement $\boldsymbol{\Phi}^{(\mathrm{Pri})}$ and a total measurement $\boldsymbol{\Phi}^{(\mathrm{Tot})}$ (secondary loudspeakers probing, primary still present),
@@ -78,6 +83,7 @@ which recovers the secondary-only contribution exactly when the components are m
 - [[concepts/covariance-subtraction|Covariance Subtraction]] — using SCM additivity as a subtraction operator for system identification
 - [[concepts/relative-transfer-matrix|Relative Transfer Matrix (ReTM)]] — estimated from primary-only vs total-field SCM differences
 - [[concepts/neuralpmwf|NeuralPMWF]] — mask-derived SCMs with learned frequency-dependent exponential smoothing
+- [[concepts/eabnet|EaBNet]] — learned spectral-spatial embedding that empirically beats explicit SCM computation
 
 ## Related Sources
 
@@ -89,3 +95,4 @@ which recovers the secondary-only contribution exactly when the components are m
 - [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025: Real-Time RCSCME-based Speech Extraction]]
 - [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] — SCMs over two microphone groups, differenced to isolate the secondary-only field for feedback neutralization
 - [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — mask-derived SCM estimation with learned per-frequency exponential smoothing
+- [[sources/li-2022-embedding-beamforming|Li et al. 2022: Embedding and Beamforming]] — implicit spectral-spatial embedding empirically beats explicit SCM computation in end-to-end neural beamforming

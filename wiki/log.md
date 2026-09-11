@@ -5206,3 +5206,22 @@ Ingested **Grinstein et al. 2025 — Controlling the Parameterized Multi-Channel
 - Synthesis: [[synthesis/multi-channel-speech-enhancement|multi-channel-speech-enhancement]] — NeuralPMWF added to the Insight 4 hybrid-filter table (with a dedicated paragraph), the source table, the smart-glasses application row, and Takeaway 1
 
 Indexes and statistics updated (total 1295 pages).
+
+---
+
+## [2026-09-12] ingest | Embedding and Beamforming: All-Neural Causal Beamformer for Multichannel Speech Enhancement (Li et al. 2022)
+
+- **Source**: `raw/papers/li-2022-embedding-beamforming/full-text.md` (Zotero: AAS72Q9D)
+- **Authors**: Andong Li, Wenzhe Liu, Chengshi Zheng, Xiaodong Li
+- **Published**: ICASSP 2022, DOI 10.1109/ICASSP43922.2022.9746432
+- **Summary**: EaBNet — all-neural causal framewise beamformer for multichannel speech enhancement; implicit spectral-spatial embedding replaces explicit SCM estimation and surpasses oracle-mask MB-MVDR on a simulated 9-channel DNS setup.
+- **Pages created**: `wiki/sources/li-2022-embedding-beamforming.md`, `wiki/concepts/eabnet.md`
+- **Pages updated**:
+  - `wiki/entities/andong-li.md`, `wiki/entities/wenzhe-liu.md`, `wiki/entities/chengshi-zheng.md`, `wiki/entities/xiaodong-li.md` — appended EaBNet contribution bullets
+  - `wiki/concepts/neural-beamforming.md` — EaBNet as end-to-end framewise beamformer data point (SCM-bottleneck evidence)
+  - `wiki/concepts/mvdr-beamformer.md` — new section: neural beamformers surpassing oracle-mask MVDR
+  - `wiki/concepts/multi-channel-speech-enhancement.md` — EaBNet entry in Key Techniques
+  - `wiki/concepts/spatial-covariance-matrix.md` — new section: implicit embeddings vs. explicit SCM (EaBNet* ablation)
+  - `wiki/concepts/power-law-compression.md` — new section: phase-preserving multichannel compression
+  - `wiki/synthesis/deep-speech-enhancement.md` — EaBNet added as earliest evidence of phase-2 end-to-end neural beamforming (Insight 6)
+  - `wiki/synthesis/multi-channel-speech-enhancement.md` — EaBNet as Step-6 representative and the Step-4→6 boundary tested directly (Insight 3)

@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-07-19
-updated: 2026-09-03
+updated: 2026-09-11
 tags:
   - researcher
   - speech-enhancement
@@ -21,6 +21,7 @@ tags:
 - Co-authored "SSE-Net: Toward Low-Power-Consumption Spiking Neural Network for Monaural Speech Enhancement" (IEEE/ACM TASLP 2026) — [[sources/liu-2026-sse-net|Liu et al. 2026]]: first spike-native SNN-SE architecture (SFEB/ITB blocks), SOTA among SNN-SE models with 62% lower power proxy than Spiking-FullSubNet
 - First-authored "A Supervised Speech Enhancement Approach with Residual Noise Control for Voice Communication" (Applied Sciences 2020) — [[sources/li-2020-residual-noise-control|Li et al. 2020]]: derived the [[concepts/generalized-loss-function|generalized loss function]] embedding residual noise control in DNN speech enhancement training (conceptualization, methodology, original draft)
 - Co-authored "Low-complexity artificial noise suppression methods for deep learning-based speech enhancement algorithms" (EURASIP Journal on Audio, Speech, and Music Processing 2021) — [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke et al. 2021]]: classical MMSE/SPP postfilter suppressing [[concepts/artificial-residual-noise|artificial residual noise]] of DNN front-ends at ~0.01 MFLOPs/frame
+- First-authored "Embedding and Beamforming: All-Neural Causal Beamformer for Multichannel Speech Enhancement" (ICASSP 2022) — [[sources/li-2022-embedding-beamforming|Li et al. 2022]]: proposed [[concepts/eabnet|EaBNet]], an all-neural causal framewise beamformer whose implicit spectral-spatial embedding beats explicit SCM computation and surpasses oracle-mask MVDR
 
 ## Related Sources
 
@@ -28,6 +29,7 @@ tags:
 - [[sources/liu-2026-sse-net|Liu et al. 2026: SSE-Net]]
 - [[sources/li-2020-residual-noise-control|Li et al. 2020: Supervised Speech Enhancement with Residual Noise Control]]
 - [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke et al. 2021: Low-Complexity Artificial Noise Suppression]]
+- [[sources/li-2022-embedding-beamforming|Li et al. 2022: Embedding and Beamforming]]
 
 ## Related Concepts
 

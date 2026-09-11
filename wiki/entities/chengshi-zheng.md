@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-15
-updated: 2026-09-03
+updated: 2026-09-11
 tags:
   - researcher
   - hearing-aids
@@ -25,6 +25,7 @@ tags:
 - Analysis of additional stable gain by frequency shifting for acoustic feedback suppression (SPL 2016)
 - Co-authored "A Supervised Speech Enhancement Approach with Residual Noise Control for Voice Communication" (Applied Sciences 2020) — [[sources/li-2020-residual-noise-control|Li et al. 2020]]: [[concepts/generalized-loss-function|generalized loss function]] with residual noise control for supervised SE (corresponding author; conceptualization, methodology, review and editing)
 - Co-authored "Low-complexity artificial noise suppression methods for deep learning-based speech enhancement algorithms" (EURASIP Journal on Audio, Speech, and Music Processing 2021) — [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke et al. 2021]]: MMSE/SPP postfilter suppressing [[concepts/artificial-residual-noise|artificial residual noise]] of DNN front-ends
+- Co-authored "Embedding and Beamforming: All-Neural Causal Beamformer for Multichannel Speech Enhancement" (ICASSP 2022) — [[sources/li-2022-embedding-beamforming|Li et al. 2022]]: [[concepts/eabnet|EaBNet]] all-neural causal framewise beamformer; implicit embedding beats explicit SCM and surpasses oracle-mask MVDR
 
 ## Related Sources
 
@@ -34,6 +35,7 @@ tags:
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]]
 - [[sources/li-2020-residual-noise-control|Li et al. 2020: Supervised Speech Enhancement with Residual Noise Control]]
 - [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke et al. 2021: Low-Complexity Artificial Noise Suppression]]
+- [[sources/li-2022-embedding-beamforming|Li et al. 2022: Embedding and Beamforming]]
 
 ## Related Concepts
 

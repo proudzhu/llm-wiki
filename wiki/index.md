@@ -1079,6 +1079,7 @@
 | [[concepts/decision-directed-a-priori-snr\|Decision-Directed A Priori SNR Estimation]] | Ephraim & Malah's recursive a priori SNR estimator (alpha_dd = 0.98); used as the bias-compensation speech estimate in the 2010 MMSE noise tracker and removed by the TCS variant | 2026-09-11 |
 | [[concepts/neuralpmwf\|NeuralPMWF]] | Hybrid MCSE where a tiny DNN fully controls the PMWF: mask-derived covariances, learned frequency-dependent smoothing, SPP-scheduled dynamic β | 2026-09-11 |
 | [[concepts/splitgru\|SplitGRU]] | GRU variant splitting the hidden dimension into R parallel smaller GRUs, cutting compute by ~R× | 2026-09-11 |
+| [[concepts/eabnet\|EaBNet]] | Embedding and Beamforming Network — causal all-neural beamformer with 3-D spectral-spatial embedding and direct framewise weight regression | 2026-09-11 |
 
 ---
 
@@ -1293,6 +1294,7 @@
 | [[sources/zhang-2026-feedback-path-mitigation-mcanc\|Zhang et al. 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] | ReTM + covariance subtraction neutralizes loudspeaker feedback in multichannel feedforward ANC without silencing the primary noise; stable for all tested step sizes/spacings, within 0.4-2.8 dB of the secondary-only oracle upper bound | 2026-09-11 |
 | [[sources/gerkmann-2012-mmse-noise-psd-tracking\|Gerkmann & Hendriks 2012: Improved MMSE-Based Noise PSD Tracking Using Temporal Cepstrum Smoothing]] | Replaces the limited-ML + decision-directed speech-PSD pair of MMSE-based noise PSD tracking with a single temporal-cepstrum-smoothing estimate; no explicit bias compensation, lower LogErr, ~1 dB segmental-SNR gain in babble noise at 0 dB SNR, cost = two real FFTs | 2026-09-11 |
 | [[sources/grinstein-2025-tiny-param-mwf\|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] | NeuralPMWF — a tiny DNN (164.9k params, 24.95 MMACs/s) fully controls the PMWF: mask-derived covariances with learned smoothing and SPP-driven dynamic β, beating end-to-end baselines on smartglasses MCSE | 2026-09-11 |
+| [[sources/li-2022-embedding-beamforming\|Li, Liu, Zheng & Li 2022: Embedding and Beamforming]] | EaBNet: all-neural causal framewise beamformer — implicit spectral-spatial embedding replaces explicit SCM and surpasses oracle-mask MVDR | 2026-09-11 |
 
 ---
 
@@ -1346,10 +1348,10 @@
 
 ## Statistics
 
-- **Total pages**: 1295
+- **Total pages**: 1297
 - **Entities**: 557
-- **Concepts**: 503
-- **Sources**: 205
+- **Concepts**: 504
+- **Sources**: 206
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-11
+- **Last updated**: 2026-09-12
