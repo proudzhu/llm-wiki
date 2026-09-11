@@ -88,18 +88,6 @@ def slug_exists_in_section(lines, category, slug):
     return False
 
 
-def _escape_cell(text):
-    """Make text safe for one cell of a pipe-delimited markdown table row.
-
-    Index rows are `| a | b | c |`, so a literal '|' inside a summary adds
-    phantom columns and corrupts the table (Gerkmann 2012 ingest wrote
-    'tracks E[|N|^2 | y] directly' and broke both index files). Escape only
-    *unescaped* pipes so an existing '\\|' is not double-escaped, and fold
-    newlines to spaces so a multi-line value cannot break the row.
-    """
-    return re.sub(r'(?<!\\)\|', r'\\|', str(text)).replace('\n', ' ')
-
-
 def _insert_entry(category, slug, display, summary, date):
     """Insert a single entry into both wiki/index.md and wiki/{category}/index.md.
 
@@ -107,8 +95,6 @@ def _insert_entry(category, slug, display, summary, date):
     """
     if category not in CATEGORIES:
         raise ValueError(f"category must be one of {CATEGORIES}")
-    display = _escape_cell(display)
-    summary = _escape_cell(summary)
     row = f"| [[{category}/{slug}\\|{display}]] | {summary} | {date} |"
 
     added_main = False
