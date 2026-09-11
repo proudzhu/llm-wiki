@@ -2,6 +2,13 @@
 
 Concrete lessons from prior ingests. Skim before starting an ingest; consult when something unexpected happens.
 
+> **⚠ Superseded environment notes (re-verified 2026-09-11 — read #54, #59, #60 before acting on any of these).** Four older entries carry claims that no longer hold and are **not** safe to follow:
+>
+> - **#31** ("the shell wrapper strips `$_`") — *false*; `Where-Object { $_.Name -match … }` works fine.
+> - **#37** ("PowerShell **5.1**, `&&` unsupported, use a heredoc") — the shell is **7.6.6** and `&&` **works**; the parts about `RunCommand` refer to a tool this harness does not have. Heredocs remain a parse error.
+> - **#50** — workaround **(b), the shell heredoc, does not work** on this host (`<<` is a PowerShell parse error), and the claim that "`mv` overwrites" is **wrong**: use `Move-Item -Force` (#54). Workaround (a) is still the right pattern *with* `-Force`; (c) stands.
+> - **#51** — describes an `edit` call carrying several `edits[]` entries. **That tool shape does not exist here** (#59): the `edit` tool takes one `old_string`/`new_string` pair. Its core advice — verify before re-applying a dropped edit — is still correct.
+
 1. **Brace glob on Windows fails silently** — `wiki/entities/{a,b,c}.md` returns "No file found" even when files exist. Use `LS` on the directory (filenames are ground truth) or multiple parallel Globs (see SKILL.md "Checking Existing Pages" and pitfall #43).
 
 2. **Citation discrepancies propagate** — Later papers often cite earlier work with wrong numbers (e.g., EchoFree 2025 cited Seidel 2024 with 1.62M params / 107 MMACs/s / 100 Bark bands, but the original reports 1.58M / 235M / 86). Use the original paper's self-reported numbers and add a discrepancy note; update concept/synthesis pages that treated the later citation as ground truth (see `edge-cases.md` "Citation Discrepancies").
