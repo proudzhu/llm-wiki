@@ -48,21 +48,6 @@ Rules:
 3. **Verify after a suspected race**: Grep the file for the expected new content (e.g. the new slug). If missing, re-read the target region before re-applying — a *prefix-matching* `old_string` can match text that already contains your addition and duplicate it.
 4. Prefer scripts over hand-edits wherever one exists (`update_indexes.py`, `append_log.py`, `commit_ingest.py`) — they are immune to the race by construction.
 
-## Creating Pages Under `wiki/` (Write-Tool Caveat)
-
-**The `write` tool fails for new files inside pre-existing directories.** In the Zhang 2026 ingest, creating `wiki/sources/{slug}.md` failed four times with `EEXIST: file already exists, mkdir 'D:\Projects\llm-wiki\wiki\sources'` — for a directory that plainly exists. Probing showed the failure is **path-dependent, not content-dependent**: writes into pre-existing directories (`wiki/`, `wiki/sources/`, `wiki/concepts/`, `wiki/queries/`, `raw/`, `schema/`, `scripts/`, `plugins/`, `.obsidian/`, `.githooks/`, `site/`) all fail, while writes to the **project root**, to **`.agents/**`**, and to **newly created** directories succeed. Retrying the same path never helps. See `pitfalls.md` #50.
-
-Use one of these instead:
-
-| Need | Method |
-|------|--------|
-| **Create a new page** (Steps 5, 7) | `write` to the project root (e.g. `zz_page.tmp.md`), then `mv zz_page.tmp.md wiki/sources/{slug}.md` |
-| **Overwrite on re-ingest** (Step 5) | Same pattern — `mv` overwrites, so it handles camera-ready replacements too |
-| **Modify an existing page** (Steps 6, 8, 9) | `edit` is unaffected — it works normally on files under `wiki/`, so no workaround is needed |
-| **Large or bulk content** | Shell heredoc with a *quoted* delimiter, which preserves `$`, backticks and wikilink-pipe characters byte-exactly: `cat > wiki/concepts/foo.md <<'ZEOF' … ZEOF` |
-
-Give temp files a distinctive name (e.g. `zz_<purpose>.tmp.md`) and delete stragglers before committing — `commit_ingest.py` stages only `wiki/` and `raw/`, so a leftover root-level temp file stays silently untracked.
-
 ## Prerequisites
 
 - Zotero running with "Allow other applications" enabled
@@ -127,13 +112,6 @@ If the paper has an arXiv ID but is not in Zotero, note the arXiv ID and proceed
 
 **Multiple attachments**: Zotero items often have both an HTML attachment and a PDF attachment (e.g., IEEE Xplore saves both). Always pick the **PDF attachment** (`application/pdf`) for `prepare_paper.py` — HTML attachments from publisher sites are typically cluttered with navigation/ads and not suitable for extraction. The `zotero_fetch.py metadata` output lists all attachments with their MIME types; choose the one whose type is `application/pdf`.
 
-**Verify authors, year, and venue before naming anything** (`pitfalls.md` #49). The Zotero record is a *lead*, not ground truth:
-
-- **Creators can be incomplete.** The EUSIPCO 2026 ingest (`LVZPGG2Q`) returned only 3 of the paper's 4 authors — the **first author was missing entirely**. Since the slug's author segment, the H1, and the Step 6 entity set all derive from the author list, a bad Zotero list yields a wrong slug, a wrong H1, and a missing entity page.
-- **`date`, `conferenceName`, and `publicationTitle` are often blank.** Resolve the year/venue from the paper itself or from an external listing (the conference's accepted-papers page, the publisher page, arXiv) — never default the year to "today".
-- **The PDF is authoritative.** `full-text.md` exists by Step 4, so check its title page for the author list *and order*. Do this before Step 5 — the slug is baked into `raw/papers/{slug}/` by then, and renaming afterwards means updating every cross-reference.
-- **Record the discrepancy** on the source page when Zotero and the paper disagree (author list, year, venue), so the next reader knows the wiki page is deliberate.
-
 ### Step 3: Extract Paper Content
 
 **Extraction priority**: arXiv HTML > MinerU > pdftotext. All scripts delete the PDF after extraction (so run `pdfimages` first if you need standalone images).
@@ -144,7 +122,7 @@ If the paper has an arXiv ID but is not in Zotero, note the arXiv ID and proceed
 uv run python .agents/skills/paper-reader/scripts/prepare_paper.py --slug SLUG --pdf-key PDF_KEY
 ```
 
-Slug format: `author-year-short-title` (lowercase, hyphenated), where **author = the paper's first author as printed on the title page** — not the first creator Zotero happens to list (see the verification block at the end of Step 1-2 and `pitfalls.md` #49).
+Slug format: `author-year-short-title` (lowercase, hyphenated).
 
 #### 3b. arXiv HTML (preferred for arXiv papers — better text quality than PDF)
 
@@ -205,7 +183,7 @@ Create `wiki/sources/{slug}.md`. Load [`references/page-templates.md`](reference
 
 **Unreferenced figure files**: `map_figures.py` lists files in `figures/` that `full-text.md` never references — these are typically axis/colorbar strips split off by MinerU (flagged as `<-- likely axis/colorbar strip, skip`). **Do not embed unreferenced files.** Only embed figures that are (i) referenced in `full-text.md` AND (ii) paired with a caption or an in-text "Fig. N" reference by `map_figures.py` (the in-text fallback runs automatically when no caption lines exist), or manually matched. If `map_figures.py` reports *neither* captions nor in-text references, fall back to reading the text for "Fig. N" / "Figure N" mentions and matching by position (see `pitfalls.md` #32).
 
-For re-ingestion: overwrite the existing source page with updated comprehensive content (use the root-then-`mv` pattern — a direct `write` into a pre-existing `wiki/sources/` fails; see *Creating Pages Under `wiki/`* above).
+For re-ingestion: overwrite the existing source page with updated comprehensive content.
 
 ### Step 6: Create or Update Entity Pages
 
@@ -234,8 +212,9 @@ For each existing concept page touched by this paper: add the paper to `sources:
 **Efficient batched-update pattern** (when updating >2 existing concept pages in one ingest):
 
 1. **Read all target pages in parallel** — one Read per file in a single message (different files, safe). Typical ingest touches 4–8 existing concept pages.
-2. **One Edit call per file, carrying all of that file's changes in its `edits[]` array** — frontmatter (`sources:`, `updated:`, `tags:`), the new body section, and the `## Related Concepts` / `## Related Sources` extensions, together in a single call. A single call is one write and therefore race-free; issuing *several parallel Edit **calls*** against the same file is what races (see the warning below). Parallelize **across files** by issuing one such call per file in the same message.
-3. **Treat a failure as all-or-nothing** — if any one `oldText` does not match, the whole file's edits are discarded and nothing is applied. Grep for one of the intended additions to confirm, re-read the region, fix the anchor, and retry that file only (`pitfalls.md` #51). A common cause is a case mismatch in the anchor (`RCSCME-Based` vs the file's `RCSCME-based`); copy anchors verbatim from the Read output.
+2. **Round 1 — frontmatter edits in parallel** — one Edit per file (different files, safe).
+3. **Round 2 — content additions in parallel** — one Edit per file.
+4. **Round 3 — `## Related Concepts` / `## Related Sources` extensions in parallel** — one Edit per file.
 
 **Parallel Edits to the *same* file race and silently drop each other** (`pitfalls.md` #13; see the top-level "Same-File Edit Discipline" section). Parallelize *across files*, never *within* a file. If a single page needs frontmatter + content + Related Sources changes, apply them as **sequential Edit calls in separate messages**. `commit_ingest.py` emits `WARN: uncommitted changes remain after commit` when an edit was silently dropped.
 
@@ -265,8 +244,6 @@ uv run python .agents/skills/paper-reader/scripts/triage_synthesis.py --slug SLU
 | 4 (new axis) | A future ingest of a wave-RNN-based TSE paper would introduce "vocoder stage" as a new comparison axis in `multi-modal-speech-enhancement.md`, which currently tracks only clue type and fusion method. |
 
 **When in doubt**: prefer *not* updating. A thin synthesis addition adds clutter; a substantive one (1–2 sentences + a table row) is valuable. If you cannot write at least one substantive sentence about what the paper *contributes to the cross-source analysis*, skip.
-
-**Earn your `## Related Synthesis` links.** List a synthesis page under `## Related Synthesis` only if triage actually surfaced it (tag overlap) and you either updated it or can justify why not. A link the triage never returned is usually *conceptual adjacency* rather than a relation the synthesis supports — the Zhang 2026 ingest initially linked `secondary-path-modeling-evolution` because both concern "path identification", but that synthesis covers the **secondary** path, while the paper identifies the **feedback** path; triage had already reported zero tag overlap, which was the correct signal (`pitfalls.md` #53).
 
 **Applying a synthesis update** typically means 4–6 edits to the *same* file: frontmatter `sources:` + `updated:`, frontmatter `tags:`, a row in the Sources Synthesized table, a paragraph in the matching insight, possibly a takeaway and an open question. Apply these **sequentially, one Edit per message** — parallel edits to one file race and silently drop each other (see "Same-File Edit Discipline" above; the Sun 2024 ingest lost 3 of 5 synthesis edits this way). Afterwards, Grep the file for the new slug to confirm all edits landed.
 
@@ -304,7 +281,7 @@ Grep pattern: "new-slug-1|new-slug-2|new-slug-3"
       output_mode: content, -n: true
 ```
 
-Each new slug must appear in **two** files: `wiki/index.md` and `wiki/{category}/index.md`. If a slug is missing from either, add the row before proceeding. Note that each category directory contains its own `index.md`, so `ls wiki/sources | wc -l` overcounts by one — for page counts use `check_statistics.py` (or `update_indexes.py`'s own `stats` output), never a directory listing (`pitfalls.md` #52).
+Each new slug must appear in **two** files: `wiki/index.md` and `wiki/{category}/index.md`. If a slug is missing from either, add the row before proceeding.
 
 ### Step 11: Update Log
 
