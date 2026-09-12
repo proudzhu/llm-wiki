@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-09-12
 sources:
   - raw/papers/yang-2026-transformer-e2e-cfg-anc/full-text.md
+  - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
 tags:
   - active-noise-control
   - deep-learning
@@ -60,3 +61,5 @@ Transformer co-processor directly generates full control-filter coefficients wit
 
 - [[sources/yang-2026-transformer-e2e-cfg-anc|Yang 2026: Transformer-based E2E-CFG for ANC]] — direct filter generation in differentiable ANC
 - [[sources/luo-2026-hybrid-gfanc-fxnlms|Luo 2026: Hybrid GFANC-FxNLMS]] — unsupervised GFANC with differentiable training
+- [[sources/jiang-2025-ai-driven-avnc-review|Jiang, Xue, Yue et al. 2025: AI-Driven Active Vibration and Noise Control Review]]
+

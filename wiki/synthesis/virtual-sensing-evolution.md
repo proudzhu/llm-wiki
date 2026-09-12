@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-18
-updated: 2026-06-25
+updated: 2026-09-12
 tags:
 - active-noise-control
 - deep-learning
@@ -11,6 +11,7 @@ tags:
 - adjoint-lms
 sources:
   - raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md
+  - raw/papers/lu-2021-survey-active-noise-control-linear/full-text.md
 ---
 # Evolution of Virtual Sensing in Active Noise Control
 
@@ -155,3 +156,5 @@ Note: Secondary path interpolation (DTW-based) addresses the moving-listener pro
 - [[sources/wang-2024-metric-learning-virtual-sensing|Wang 2024: Transferable Selective Virtual Sensing]]
 - [[sources/holzmuller-2026-dtw-secondary-path-anc|Holzmüller & Sontacchi 2026: DTW for Secondary Path Interpolation in ANC]]
 - [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]]
+- [[sources/lu-2021-survey-active-noise-control-linear|Lu Lu, Kai-Li Yin, Rodrigo C. de Lamare, Zongsheng Zheng, Yi Yu, Xiaomin Yang & Badong Chen 2021: A Survey on Active Noise Control Techniques — Part I: Linear Systems]]
+

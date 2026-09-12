@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-22
-updated: 2026-09-11
+updated: 2026-09-12
 sources:
   - zotero://select/items/0_GUY9IXKN (Kronecker Decomposition)
   - zotero://select/items/0_GLPRCTIK (Distributed ANC)
@@ -12,6 +12,8 @@ sources:
   - zotero://select/items/0_QVJMFTWC (ANC Survey Part I)
   - raw/papers/he-2026-neural-projection-filter-anc/full-text.md
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
+  - raw/papers/lu-2021-survey-active-noise-control-linear/full-text.md
+  - raw/papers/wang-2024-computation-efficient-virtual-sensing/full-text.txt
 tags:
   - active-noise-control
   - multichannel-anc
@@ -111,3 +113,6 @@ The efficiency framing applies to the mitigation mechanism itself. Per-path feed
 - [[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC]]
 - [[sources/he-2026-neural-projection-filter-anc|He et al. 2026: Neural Projection Filter Generation for Multi-Reference ANC]]
 - [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] — the acoustic-feedback axis of Section 4
+- [[sources/lu-2021-survey-active-noise-control-linear|Lu Lu, Kai-Li Yin, Rodrigo C. de Lamare, Zongsheng Zheng, Yi Yu, Xiaomin Yang & Badong Chen 2021: A Survey on Active Noise Control Techniques — Part I: Linear Systems]]
+- [[sources/wang-2024-computation-efficient-virtual-sensing|Wang, Ji, Shen, Shi & Gan 2024: Computation-Efficient Virtual Sensing with MCALMS]]
+

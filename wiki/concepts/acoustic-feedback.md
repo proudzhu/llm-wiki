@@ -1,13 +1,15 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-09-11
+updated: 2026-09-12
 sources:
   - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/miran-2026-imu-feedback-cancellation/full-text.txt
   - raw/papers/williams-2014-acoustic-feedback-elimination/full-text.md
   - raw/papers/hoshuyama-2026-sound-object-echo-control/full-text.md
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
+  - raw/papers/lu-2021-survey-active-noise-control-linear/full-text.md
+  - raw/papers/richard-2023-audio-signal-processing-21st-century/full-text.md
 tags:
 - acoustic
 - active-noise-control
@@ -172,6 +174,8 @@ Because the matrix depends only on the acoustic transfer geometry, a single iden
 - [[sources/williams-2014-acoustic-feedback-elimination|Williams 2014]] — Harman patent (US 8,634,575 B2) for a two-rate NHS system: ballistics-based candidate detection + trial-and-verify notch insertion in PA/sound-reinforcement systems
 - [[sources/hoshuyama-2026-sound-object-echo-control|Hoshuyama 2026]] — inter-terminal feedback loops traversing the communication server, and object-identity gating as a non-path-based control category
 - [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026]] — multichannel feedback neutralization by a covariance-subtracted Relative Transfer Matrix between a reference and a feedback microphone group; identifies the secondary-only field with the primary noise still running
+- [[sources/lu-2021-survey-active-noise-control-linear|Lu Lu, Kai-Li Yin, Rodrigo C. de Lamare, Zongsheng Zheng, Yi Yu, Xiaomin Yang & Badong Chen 2021: A Survey on Active Noise Control Techniques — Part I: Linear Systems]]
+- [[sources/richard-2023-audio-signal-processing-21st-century|Richard, Smaragdis, Gannot, Naylor, Makino, Kellermann & Sugiyama 2023: Audio Signal Processing in the 21st Century]]
 
 ## Related Entities
 

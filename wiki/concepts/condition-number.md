@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-09-12
+sources:
+  - raw/papers/deng-2026-joint-covariance-wng-mvdr/full-text.md
 tags:
   - mathematics
   - linear-algebra
@@ -55,6 +57,10 @@ $$\kappa_{\max} = (2A_G - 1) + 2\sqrt{A_G(A_G - 1)}$$
 
 where $A_G = M/W_{\min}$. This enables principled selection of the diagonal loading parameter.
 
+### Learned WNG Thresholds (Deng et al. 2026)
+
+Where Mittal et al. derive the WNG→$\kappa_{\max}$ mapping deterministically, [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026]] make the mapping *learned*: a dual-branch network jointly predicts noise masks (for covariance estimation) and frequency-dependent WNG thresholds feeding a differentiable robust MVDR layer, optimized end-to-end without explicit WNG supervision. This replaces the fixed, hand-tuned condition-number/WNG bound with a per-frequency data-driven one, improving speech quality and intelligibility particularly under array mismatch.
+
 ## Related Concepts
 
 - [[diagonal-loading|Diagonal Loading]]
@@ -66,3 +72,4 @@ where $A_G = M/W_{\min}$. This enables principled selection of the diagonal load
 ## Related Sources
 
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
+- [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026: Joint Covariance and WNG Learning for Robust MVDR]] — learns frequency-dependent WNG thresholds end-to-end via a differentiable robust MVDR layer

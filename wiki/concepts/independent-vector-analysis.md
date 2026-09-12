@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-05-21
-updated: 2026-08-26
+updated: 2026-09-12
 sources:
   - raw/papers/guo-2023-iva-survey/full-text.md
   - raw/papers/dong-2026-spatially-regularized-switching-iva/full-text.md
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
   - raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md
   - raw/papers/kang-2019-low-complexity-permutation-alignment/full-text.md
+  - raw/papers/ansari-2023-ai-bss-survey/full-text.md
 tags:
   - blind-source-separation
   - audio-source-separation
@@ -87,3 +88,5 @@ IVA combined with Nonnegative Matrix Factorization gives **[[concepts/independen
 - [[sources/ruan-2024-speech-extraction-low-snr|Ruan, Liao, Chen & Lu 2024: Speech Extraction Under Extremely Low SNR Conditions]]
 - [[sources/scheibler-2020-fast-independent-vector-extraction|Scheibler & Ono 2020: Fast Independent Vector Extraction]]
 - [[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019: A Low-Complexity Permutation Alignment Method for Frequency-Domain BSS]] — the per-bin-ICA alternative to IVA, with alignment cost largely eliminated
+- [[sources/ansari-2023-ai-bss-survey|Ansari, Alatrany, Alnajjar et al. 2023: A Survey of AI Approaches in BSS]]
+

@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-07-27
+updated: 2026-09-12
+sources:
+  - raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md
 tags:
   - deep-learning
   - spatial-filtering
@@ -72,3 +74,5 @@ The conditioning can be applied at three locations in the SSF pipeline:
 
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
 - [[sources/liu-2026-array-invariant-speech-enhancement|Liu, Zhang, Li & Qian 2026: Array-Invariant SE via Geo-DConv]]
+- [[sources/tesch-2024-spatially-selective-nonlinear-filters|Tesch & Gerkmann 2024: Multi-channel Speech Separation Using Spatially Selective Deep Non-linear Filters]]
+

@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-08-19
-updated: 2026-08-26
+updated: 2026-09-12
 sources:
   - raw/papers/sawada-2019-bss-ilrma-review/full-text.md
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
   - raw/papers/kang-2019-low-complexity-permutation-alignment/full-text.md
+  - raw/papers/ishikawa-2025-real-time-speech-extraction/full-text.md
 tags:
   - blind-source-separation
   - independent-vector-analysis
@@ -92,6 +93,7 @@ All updates are multiplicative and monotonic — they never increase $\mathcal{J
 - **FastMNMF / FastMNMF2** — [[concepts/fastmnmf|FastMNMF]] generalizes the rank-1 spatial constraint of ILRMA to a jointly-diagonalizable full-rank spatial model.
 - **MVAE** — replaces the IS-NMF source model with a deep variational autoencoder prior, integrating ILRMA's spatial model with learned spectral priors (Sekiya et al. 2019).
 - **Subspace ILRMA / t-ILRMA / GGD-ILRMA** — extensions using richer source priors (Student-t, generalized Gaussian) that retain the MM framework.
+- **Real-time SR-ILRMA / NSR-ILRMA** — blockwise-batch real-time extension combining ILRMA with [[concepts/rank-constrained-spatial-covariance-matrix-estimation|RCSCME]]: two spatial regularizers (a prior target steering vector, or a null-based variant admitting the cheaper IP update) counter channel-selection errors in short observation windows, and accelerated FastVCD/FastIP updates run in real time on CPU/NVIDIA Jetson while exceeding Online IVA-IP/ISS under diffuse noise ([[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025]]).
 
 ## Relationship to IVA and MNMF
 
@@ -123,3 +125,4 @@ ILRMA sits at the intersection: IVA's spatial model + MNMF's spectrogram model, 
 - [[sources/nishikori-2026-fast-multichannel-nmf-block-diagonal-scm-bss|Nishikori et al. 2026: Distributed FastMNMF for BSS]]
 - [[sources/ruan-2024-speech-extraction-low-snr|Ruan, Liao, Chen & Lu 2024: Speech Extraction Under Extremely Low SNR Conditions]] — uses ILRMA as the strongest separation baseline at −20 dB SNR
 - [[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019: A Low-Complexity Permutation Alignment Method for Frequency-Domain BSS]] — benchmarks ILRMA against ICA + alignment on SIR, PESQ, and runtime
+- [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025: Real-Time Speech Extraction via RCSCME + SR-ILRMA with Fast Demixing]] — blockwise real-time ILRMA with spatial regularization and FastVCD/FastIP updates

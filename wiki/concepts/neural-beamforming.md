@@ -6,6 +6,7 @@ sources:
   - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
   - raw/papers/li-2022-embedding-beamforming/full-text.md
   - raw/papers/zhang-2021-adl-mvdr/full-text.md
+  - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
 tags:
   - beamforming
   - deep-learning
@@ -74,3 +75,5 @@ Neural beamformers are often trained jointly with downstream models:
 - [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — tiny-NN control of a differentiable PMWF, including its distortion trade-off parameter
 - [[sources/li-2022-embedding-beamforming|Li et al. 2022: Embedding and Beamforming]] — all-neural causal framewise beamformer whose implicit embedding beats explicit SCM computation
 - [[sources/zhang-2021-adl-mvdr|Zhang et al. 2021: ADL-MVDR]] — GRU networks replace the matrix inversion and PCA inside the MVDR closed form for stable joint training
+- [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023: Insights Into Deep Non-linear Filters for Improved Multi-channel Speech Enhancement]]
+

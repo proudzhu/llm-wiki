@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-07-23
-updated: 2026-07-23
+updated: 2026-09-12
+sources:
+  - raw/papers/kashima-1985-bounded-q-frequency-transform/full-text.md
 tags:
   - spectral-analysis
   - filter-banks
@@ -62,3 +64,5 @@ The CQT is the **geometric-frequency-spacing parent** of two families:
 ## Related Sources
 
 - [[sources/diniz-2006-high-selectivity-filter-banks-spectral-analysis-music|Diniz, Kothe, Netto & Biscainho 2006: High-Selectivity Filter Banks for Spectral Analysis of Music Signals]]
+- [[sources/kashima-1985-bounded-q-frequency-transform|Kashima & Mont-Reynaud 1985: The Bounded-Q Frequency Transform]]
+

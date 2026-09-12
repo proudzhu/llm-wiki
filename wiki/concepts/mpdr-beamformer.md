@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-07-21
+updated: 2026-09-12
+sources:
+  - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
 tags:
   - beamforming
   - adaptive-filtering
@@ -68,3 +70,5 @@ Apostolidis et al. (2026) show that MPDR's notorious sensitivity to steering-vec
 
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
 - [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis et al. 2026: Listen first — output-based multi-microphone speech enhancement]]
+- [[sources/lorenz-2005-robust-minimum-variance-beamforming|Lorenz & Boyd 2005: Robust Minimum Variance Beamforming]]
+

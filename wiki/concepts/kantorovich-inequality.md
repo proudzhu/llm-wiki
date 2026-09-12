@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-09-12
+sources:
+  - raw/papers/deng-2026-joint-covariance-wng-mvdr/full-text.md
 tags:
   - mathematics
   - inequality
@@ -44,6 +46,8 @@ $$\kappa_{\max} = (2A_G - 1) + 2\sqrt{A_G(A_G - 1)}$$
 
 This provides a deterministic mapping from desired WNG to required condition number bound, enabling principled adaptive diagonal loading.
 
+The deterministic WNG→$\kappa$ mapping can also be made data-driven: [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026]] learn frequency-dependent WNG thresholds jointly with noise covariance estimation via a differentiable robust MVDR layer, replacing the hand-tuned bound with a per-frequency learned one — particularly beneficial under array mismatch.
+
 ## Historical Context
 
 Introduced by Leonid Kantorovich in 1948 (Functional Analysis and Applied Mathematics, Uspekhi Mat Nauk).
@@ -58,3 +62,4 @@ Introduced by Leonid Kantorovich in 1948 (Functional Analysis and Applied Mathem
 ## Related Sources
 
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
+- [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026: Joint Covariance and WNG Learning for Robust MVDR]] — data-driven counterpart: learned per-frequency WNG thresholds instead of a deterministic bound

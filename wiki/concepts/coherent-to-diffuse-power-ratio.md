@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-27
-updated: 2026-08-16
+updated: 2026-09-12
 sources:
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
+  - raw/papers/richard-2023-audio-signal-processing-21st-century/full-text.md
 tags:
   - signal-processing
   - spatial-audio
@@ -101,3 +102,7 @@ Taseska & Habets use the CDR not as a post-filter gain, but as a **control signa
 - [[sources/schwarz-2019-dereverberation-spatial-coherence|Schwarz 2019: Dereverberation and Robust Speech Recognition]] — comprehensive treatment of CDR methods
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — global MMSE coherence-based noise variance decomposition with adaptive coherence model
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] — CDR as a priori SAP control for multichannel MCRA noise PSD matrix estimation (Ch 3)
+
+## Related Sources
+
+- [[sources/richard-2023-audio-signal-processing-21st-century|Richard, Smaragdis, Gannot, Naylor, Makino, Kellermann & Sugiyama 2023: Audio Signal Processing in the 21st Century]]

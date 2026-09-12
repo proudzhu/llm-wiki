@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-01
-updated: 2026-08-01
+updated: 2026-09-12
 sources:
   - raw/papers/zhao-2024-sicrn/full-text.md
+  - raw/papers/jiang-2026-lightweight-speech-enhancement-ssm-dsc/full-text.md
 tags:
   - neural-network
   - speech-enhancement
@@ -103,3 +104,5 @@ Where IGCRN/ICCRN address the full-band-modeling gap by changing *where* the inp
 ## Related Sources
 
 - [[sources/zhao-2024-sicrn|Zhao, He & Zhang 2024: SICRN — State Space Model + Inplace Convolution for Speech Enhancement]]
+- [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight Speech Enhancement with State-Space Model and Depthwise Separable Convolution]]
+

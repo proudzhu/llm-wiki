@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-14
-updated: 2026-08-14
+updated: 2026-09-12
 sources:
   - raw/papers/valin-2022-real-time-plc/full-text.md
+  - raw/papers/valin-2018-lpcnet/full-text.md
 tags:
   - packet-loss-concealment
   - speech-synthesis
@@ -43,7 +44,7 @@ Deep neural network (DNN) techniques have been investigated for PLC, including:
 
 ### Hybrid Generative + Predictive (Valin et al. 2022)
 
-The hybrid approach decouples synthesis across time scales: a *generative* autoregressive [[concepts/lpcnet|LPCNet]] vocoder synthesizes the missing samples, while a *predictive* RNN estimates the acoustic features (BFCCs, pitch period, pitch correlation) that condition the vocoder. The principle: be "creative" in extending missing segments of a phoneme with plausible-sounding audio, but never invent new phonemes or words. This addresses the drift problem of purely autoregressive PLC while avoiding the artifacts of feature repetition.
+The hybrid approach decouples synthesis across time scales: a *generative* autoregressive [[concepts/lpcnet|LPCNet]] ([[sources/valin-2018-lpcnet|Valin & Skoglund 2018]]) vocoder synthesizes the missing samples, while a *predictive* RNN estimates the acoustic features (BFCCs, pitch period, pitch correlation) that condition the vocoder. The principle: be "creative" in extending missing segments of a phoneme with plausible-sounding audio, but never invent new phonemes or words. This addresses the drift problem of purely autoregressive PLC while avoiding the artifacts of feature repetition.
 
 ## Long-Burst Handling
 
@@ -79,3 +80,4 @@ The Interspeech 2022 Audio Deep Packet Loss Concealment Challenge ([Diener et al
 ## Related Sources
 
 - [[sources/valin-2022-real-time-plc|Valin et al. 2022: Real-Time Packet Loss Concealment With Mixed Generative and Predictive Model]] — hybrid generative + predictive architecture, 2nd place Interspeech 2022 PLC Challenge
+- [[sources/valin-2018-lpcnet|Valin & Skoglund 2018: LPCNet]] — the autoregressive neural vocoder whose excitation/LPC division of labor underlies the generative branch

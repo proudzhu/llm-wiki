@@ -1,8 +1,12 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-09-08
+updated: 2026-09-12
 sources:
+  - raw/papers/lu-2021-survey-active-noise-control-linear/full-text.md
+  - raw/papers/shen-2023-advanced-anc/full-text.txt
+  - raw/papers/toyooka-2026-hybrid-anc-virtual-sensing/full-text.txt
+  - raw/papers/xiao-2026-robust-spatially-selective-anc/full-text.txt
   to Headphones.md
   - raw/papers/bai-2026-feedback-guided-anc/full-text.md
   - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
@@ -74,3 +78,8 @@ Most modern high-end ANC headphones use a hybrid approach:
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
 - [[sources/bai-2026-feedback-guided-anc|Bai 2026: Feedback-guided DNN-based Controller Fusion for Robust Fixed-Parameter ANC]] — controller-level FF+FB hybrid (WaveNet + feedback-guided MoE)
 - [[sources/xiao-2023-spatially-selective-anc|Xiao 2023: Spatially Selective Active Noise Control Systems]] — fully coupled spatially constrained hybrid (AR glasses)
+- [[sources/lu-2021-survey-active-noise-control-linear|Lu Lu, Kai-Li Yin, Rodrigo C. de Lamare, Zongsheng Zheng, Yi Yu, Xiaomin Yang & Badong Chen 2021: A Survey on Active Noise Control Techniques — Part I: Linear Systems]]
+- [[sources/shen-2023-advanced-anc|Shen 2023: Advanced Active Noise Control Headphone: Algorithm and Implementation]]
+- [[sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026: Hybrid Active Noise Control System for Remote Microphone Based Virtual Sensing with Two Compensation Filters]]
+- [[sources/xiao-2026-robust-spatially-selective-anc|Xiao, Roden, Blau & Doclo 2026: Robust Soft-Constrained Spatially Selective ANC for Hearables under Secondary Path Variations]]
+

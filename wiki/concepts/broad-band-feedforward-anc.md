@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-04-10
+updated: 2026-09-12
 sources:
+  - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
 tags:
 - active-noise-control
 - broad-band
@@ -73,6 +74,7 @@ The anti-noise radiates **upstream** to the reference microphone, corrupting the
 ## Related Sources
 
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section II: Broad-Band Feedforward ANC, FXLMS derivation
+- [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]]
 
 ## Related Entities
 

@@ -1,13 +1,19 @@
 ---
 type: concept
 created: 2026-04-17
-updated: 2026-09-07
+updated: 2026-09-12
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/fareedha-2026-joint-deep-spe-anc/full-text.txt
   - raw/papers/akhtar-2006-vss-lms-online-spm/full-text.txt
   - raw/papers/holzmuller-2026-dtw-secondary-path-anc/full-text.md
   - raw/papers/guldenschuh-2014-secondary-path-irregularities/full-text.md
+  - raw/papers/guo-2024-anc-saturation-survey/full-text.md
+  - raw/papers/hu-2026-abse-net/full-text.md
+  - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
+  - raw/papers/toyooka-2026-hybrid-anc-virtual-sensing/full-text.txt
+  - raw/papers/xiao-2026-robust-spatially-selective-anc/full-text.txt
+  - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
 tags:
 - active-noise-control
 - signal-processing
@@ -78,3 +84,10 @@ In hearing aids the secondary path is the propagation from the device loudspeake
 - [[sources/akhtar-2006-vss-lms-online-spm|Akhtar 2006: VSS LMS for Online Secondary Path Modeling]]
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method]] — Proposes a method that avoids secondary path modeling entirely using an auxiliary filter
 - [[sources/ma-2027-robust-ffanc-online-path-modeling|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] — performs online SP and FBP modeling simultaneously with a second supporting filter and an SF-driven global AWGN scaling, achieving near-ideal-benchmark NRP under time-varying paths
+- [[sources/guo-2024-anc-saturation-survey|Guo, Shi, Shen, Ji & Gan 2024: ANC Algorithms Overcoming Output Saturation]]
+- [[sources/hu-2026-abse-net|Hu, Du, Zhao & Si 2026: ABSE-NET — Active Binaural Speech Enhancement for Open-Fit Hearing Aids]]
+- [[sources/jiang-2025-ai-driven-avnc-review|Jiang, Xue, Yue et al. 2025: AI-Driven Active Vibration and Noise Control Review]]
+- [[sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026: Hybrid Active Noise Control System for Remote Microphone Based Virtual Sensing with Two Compensation Filters]]
+- [[sources/xiao-2026-robust-spatially-selective-anc|Xiao, Roden, Blau & Doclo 2026: Robust Soft-Constrained Spatially Selective ANC for Hearables under Secondary Path Variations]]
+- [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]]
+

@@ -7,6 +7,7 @@ sources:
   - raw/papers/heitkaemper-2025-bcs-speech-enhancement-earbuds/full-text.txt
   - wiki/sources/liu-2025-robust-fusion-bc-ac-attention.md
   - wiki/sources/tagliasacchi-2020-seanet.md
+  - wiki/sources/wang-2022-fusing-bc-ac-complex-domain-se.md
 tags:
   - speech-enhancement
   - bone-conduction
@@ -76,12 +77,15 @@ The ICASSP 2025 paper validates the architecture on >5 h of real earbud recordin
 | Approach | BCS Usage | Architecture | Output |
 |----------|-----------|-------------|--------|
 | **SEANet** (Tagliasacchi 2020) | Raw waveform concatenation with audio | Wave-to-wave UNet (1D conv) | Waveform (via GAN) |
+| **DC-CRN + AFF** (Wang 2022) | Attention mask soft-selects AC/BC, concatenated with originals | Densely-connected CRN + BLSTM | Complex spectral mapping |
 | **BCS-guided SE** (Heitkaemper 2025) | Band-limited to 500 Hz, upscaled, concatenated with air STFT | Conformer | Ratio mask → iSTFT |
 | **DenGCAN** (Kuang 2024) | iAFF coarse-then-refined fusion of STFTs | Densely gated conv + sConformer | Complex ratio mask → iSTFT |
 | **ATFA Dual-Mask** (Liu 2025) | Shared-conv pre-fusion + concat | Dilated DenseNet + ATFA + AHA | Dual real masks (AC + BC) summed |
 | **VibOmni** (He 2025) | IMU vibration upscaled (BCF aug.) | Dual-encoder DPRNN | Spectrogram |
 | **Whisphone** (Fukumoto 2025) | In-ear MEMS captures occlusion BC | Separate channel | Direct voice input |
 | **OVAD** (Masilamani 2024) | Accelerometer for speech detection | VAD only | Binary speech flag |
+
+Wang 2022's attention-based fusion (AFF) — an attention score soft-selecting between AC and BC features before concatenation — is an early precursor to the learned-fusion strategies in later work: Kuang 2024's [[concepts/iterative-attentional-feature-fusion|iAFF]] and Liu 2025's [[concepts/adaptive-time-frequency-attention|ATFA]]. Its ablation showed that fusion by simple addition loses single-modal information (−5.3% STOI), motivating the preserve-both-concatenate design that later architectures retain.
 
 ## Robustness to Sensor Failure
 
@@ -111,6 +115,7 @@ For the *continuous* distortion case (wind-corrupted but present BCS), Heitkaemp
 ## Related Sources
 
 - [[sources/tagliasacchi-2020-seanet|Tagliasacchi, Li, Misiunas & Roblek 2020: SEANet]]
+- [[sources/wang-2022-fusing-bc-ac-complex-domain-se|Wang, Zhang & Wang 2022: Fusing BC and AC Sensors for Complex-Domain Speech Enhancement]]
 - [[sources/he-2025-vibomni|He, Guo, Hou & Yan 2025: VibOmni]]
 - [[sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Earbuds]]
 - [[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2025: BCS-Guided Speech Enhancement for Voice Assistant on Earbuds]]

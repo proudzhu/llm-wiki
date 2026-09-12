@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-06-19
+updated: 2026-09-12
+sources:
+  - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
 tags:
   - speaker-recognition
   - neural-network-architecture
@@ -19,3 +21,5 @@ ECAPA-TDNN (Emphasized Channel Attention, Propagation and Aggregation in Time De
 ## Related Sources
 
 - [[sources/zhu-2026-g-map-se-guided-speech-enhancement|G-MaP-SE: Guided Speech Enhancement via GMM-Based Prior Matching (Interspeech 2026)]]
+- [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova, Delcroix & Ochiai 2023: Neural Target Speech Extraction: An Overview]]
+

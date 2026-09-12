@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-09
-updated: 2026-09-09
+updated: 2026-09-12
 sources:
   - raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt
+  - raw/papers/tervo-2009-sound-intensity-direction/full-text.md
 tags:
   - ambisonics
   - spatial-audio
@@ -35,3 +36,5 @@ HOA magnitude+phase spectrograms are also used directly as CRNN inputs (e.g. Pos
 ## Related Sources
 
 - [[sources/grumiaux-2022-ssl-deep-learning-survey|Grumiaux et al. 2022: A Survey of SSL with Deep Learning Methods]]
+- [[sources/tervo-2009-sound-intensity-direction|Tervo 2009: Direction Estimation Based on Sound Intensity Vectors]]
+

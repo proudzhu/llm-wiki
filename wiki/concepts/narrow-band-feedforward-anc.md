@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-04-10
+updated: 2026-09-12
 sources:
+  - raw/papers/lu-2021-survey-active-noise-control-linear/full-text.md
 tags:
 - active-noise-control
 - feedforward
@@ -57,3 +58,5 @@ When the secondary path is approximately a **pure delay** (common in narrow-band
 ## Related Sources
 
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section III: Narrow-Band Feedforward ANC
+- [[sources/lu-2021-survey-active-noise-control-linear|Lu Lu, Kai-Li Yin, Rodrigo C. de Lamare, Zongsheng Zheng, Yi Yu, Xiaomin Yang & Badong Chen 2021: A Survey on Active Noise Control Techniques — Part I: Linear Systems]]
+

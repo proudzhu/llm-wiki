@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-09-08
+updated: 2026-09-12
 sources:
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
   - raw/papers/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction/full-text.md
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
   - raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md
   - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
+  - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
 tags:
   - speech-processing
   - source-separation
@@ -125,3 +126,5 @@ The TSE framework naturally extends to:
 - [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]]
 - [[sources/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction|Huang et al. 2026: Lightweight Speech Enhancement Guided TSE in Noisy Multi-Speaker Scenarios]]
 - [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024: A Lightweight Hybrid Multi-Channel Speech Extraction System with Directional Voice Activity Detection]]
+- [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023: Insights Into Deep Non-linear Filters for Improved Multi-channel Speech Enhancement]]
+

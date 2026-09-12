@@ -1,11 +1,13 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-08-30
+updated: 2026-09-12
 sources:
+  - raw/papers/lollmann-2020-generalized-coherence-based-signal-enhancement/full-text.md
   - raw/papers/schwarz-2015-coherent-to-diffuse-power-ratio/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
+  - raw/papers/richard-2023-audio-signal-processing-21st-century/full-text.md
 tags:
   - signal-processing
   - multichannel
@@ -49,6 +51,10 @@ $$\gamma_{pq}(\tau, \omega) = \alpha_\gamma \gamma_{pq}(\tau - 1, \omega) + (1 -
 
 其中 $\alpha_\gamma = 0.9$。这种自适应方案使噪声相干模型能够跟踪时变噪声场，而非依赖静态的完全扩散或完全不相干假设（Zelinski/McCowan 的局限）。更新的相干函数同时用于：(i) 通过最小二乘全局求解噪声方差的 MMSE 分解（相干-扩散分量 $\sigma_c^2$ 与不相干分量 $\sigma_w^2$）；(ii) 自适应地确定单/多通道噪声估计的分频点（$|\gamma|^2 = 0.5$ 的频率）。详见 [[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence Noise Estimation]]。
 
+## 多通道广义化：GMC
+
+Löllmann et al. (2020) 将基于相干性的信号增强从麦克风对推广到 $N$ 个通道：通过 $N \times N$ 相干矩阵的特征值分解计算**广义幅度相干（GMC）**，并以此估计各通道的 CDR。增强对象是"最合适"的麦克风信号——由主特征向量隐式选择，无需 DOA 估计。在 4 麦克风双耳助听器场景中，该方案一致优于 Schwarz/Thiergart 等人的 DOA 无关双通道 CDR 估计器，见 [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement|Löllmann et al. 2020]]。
+
 ## 应用
 
 | 应用 | 原理 |
@@ -72,3 +78,6 @@ $$\gamma_{pq}(\tau, \omega) = \alpha_\gamma \gamma_{pq}(\tau - 1, \omega) + (1 -
 - [[sources/schwarz-2019-dereverberation-spatial-coherence|Schwarz 2019]] — 博士论文，系统研究空间相干性模型在去混响和 ASR 中的应用
 - [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026]] — 利用扩散声场相干矩阵 $\Gamma_d$ 作为预定义基，通过方差比估计重建 SCM
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin et al. 2017]] — 将 sinc 扩散场相干性作为初始化，在语音缺席帧自适应更新相干函数，用于多通道噪声 PSD 估计与分频点选择
+- [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement|Löllmann et al. 2020]] — N 通道广义幅度相干（GMC）：相干矩阵特征值分解估计 CDR，主特征向量隐式选择增强通道
+- [[sources/richard-2023-audio-signal-processing-21st-century|Richard, Smaragdis, Gannot, Naylor, Makino, Kellermann & Sugiyama 2023: Audio Signal Processing in the 21st Century]]
+

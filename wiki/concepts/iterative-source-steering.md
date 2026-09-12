@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-06-04
-updated: 2026-08-19
+updated: 2026-09-12
+sources:
+  - raw/papers/ishikawa-2025-real-time-speech-extraction/full-text.md
 tags:
   - optimization-algorithms
   - blind-source-separation
@@ -73,7 +75,7 @@ ISS has been successfully applied to:
 - Standard IVA for speech separation
 - [[concepts/switching-independent-vector-analysis|Switching IVA]] (SR-SwIVA-ISS)
 - Geometrically constrained IVA
-- Online source extraction
+- Online source extraction: the real-time RCSCME+SR-ILRMA framework of [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025]] exceeds conventional Online IVA-IP/ISS in SDR/SIR under diffuse noise, and derives accelerated FastIP/FastVCD updates by the same algebraic-transformation philosophy applied to the IP rule
 
 ## Related Concepts
 
@@ -86,3 +88,4 @@ ISS has been successfully applied to:
 
 - [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
+- [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025: Real-Time Speech Extraction via RCSCME + SR-ILRMA with Fast Demixing]] — real-time framework exceeding Online IVA-IP/ISS; derives accelerated FastIP/FastVCD updates

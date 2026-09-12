@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-09-08
+updated: 2026-09-12
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - wiki/sources/shen-2023-advanced-anc.md
   - raw/papers/zhang-2014-causality-feedforward-anc-headset/full-text.md
+  - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
 tags:
   - active-noise-control
   - control-theory
@@ -98,3 +99,5 @@ The reported results sidestep this because evaluation is offline simulation: the
 - [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — systematic analysis of direction-dependent causality
 - [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] — degree of causality in hearing aids; two-sample realistic margin
 - [[sources/hu-2026-abse-net|Hu et al. 2026: ABSE-NET]] — neural ABSE whose STFT pipeline (≥ 20–40 ms delay) violates the hearing-aid causality margin; offline simulation defers rather than solves the constraint
+- [[sources/xiao-2023-spatially-selective-anc|Xiao, Xu & Zhao 2023: Spatially Selective Active Noise Control Systems]]
+

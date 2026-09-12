@@ -1,9 +1,10 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-04-29
+updated: 2026-09-12
 sources:
-- zotero://select/items/0_2LKM9QRI
+  - raw/papers/schepker-2016-sdp-minmax-acoustic-feedback/full-text.md
+  - zotero://select/items/0_2LKM9QRI
 - zotero://select/items/0_XLZPIW68
 - zotero://select/items/0_VRSLTC2L
 - zotero://select/items/0_846A4RH7
@@ -238,6 +239,10 @@ While historically separated into "noise control" and "hearing aid" silos, feedb
 | **Critical Challenge** | Latency | Speech/Feedback Decorrelation |
 | **State-of-Art** | Hybrid FF+FB+IMC | DeepPEM + Neural Observers |
 
+### Classical MSG-Maximizing Design (Schepker & Doclo 2016)
+
+On the classical (non-neural) hearing-aid side, [[sources/schepker-2016-sdp-minmax-acoustic-feedback|Schepker & Doclo 2016]] reframe AFC design as a min-max semidefinite program: each feedback path is decomposed into a time-invariant common part (shared transducer/ear characteristics) and a time-varying variable part, and the common-part filter is designed to **maximize the MSG** over all paths in a measured set rather than minimize misalignment — yielding 2–5 dB MSG improvement and faster PEM-AFC convergence, robust to unseen conditions (telephone use, repositioning). This is the hearing-aid counterpart of the H∞ worst-case philosophy of Section 4: optimize against the *worst* path rather than the average one.
+
 ### Deep AFC (Gen 3)
 
 - **DeepPEM-AFC**: Uses Prediction-Error Methods (PEM) embedded in a deep learning framework to separate feedback from speech, significantly improving system stability in speech-heavy environments.
@@ -411,3 +416,4 @@ Every feedback ANC design faces the same trade-off:
 
 - [[sources/lu-2021-survey-active-noise-control-linear|Lu et al. 2021: Survey on ANC — Part I: Linear Systems]]
 - [[sources/guldenschuh-2014-secondary-path-irregularities|Guldenschuh & de Callafon 2014: Detection of Secondary-Path Irregularities in ANC Headphones]]
+- [[sources/schepker-2016-sdp-minmax-acoustic-feedback|Schepker & Doclo 2016: SDP Min-Max Acoustic Feedback Cancellation]] — common-part decomposition with MSG-maximizing min-max SDP for hearing aids

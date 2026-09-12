@@ -1,13 +1,17 @@
 ---
 type: concept
 created: 2026-04-22
-updated: 2026-05-13
+updated: 2026-09-12
 sources:
   - wiki/sources/kuo-1999-active-noise-control-tutorial-review.md
   - wiki/sources/pawelczyk-1997-anc-feedback-fixed-adaptive.md
   - wiki/sources/wu-2014-simplified-adaptive-feedback-anc.md
   - wiki/sources/seo-2016-feedback-anc-constrained-optimization.md
   - wiki/sources/lu-2021-survey-active-noise-control-linear.md
+  - raw/papers/bai-2026-feedback-guided-anc/full-text.md
+  - raw/papers/fujii-2006-simultaneous-equations-anc/full-text.md
+  - raw/papers/guldenschuh-2014-secondary-path-irregularities/full-text.md
+  - raw/papers/xiao-2026-robust-spatially-selective-anc/full-text.txt
 tags:
   - active-noise-control
   - control-theory
@@ -101,6 +105,10 @@ Liebich et al. (2018) confirmed this experimentally: feedback ANC showed consist
 - [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
 - [[sources/seo-2016-feedback-anc-constrained-optimization|Seo et al. 2016: Feedback ANC via Constrained Optimization]]
+- [[sources/bai-2026-feedback-guided-anc|Bai, He, Nan, Chen & Lu 2026: Feedback-guided DNN-based Controller Fusion for Robust Fixed-Parameter ANC]]
+- [[sources/fujii-2006-simultaneous-equations-anc|Fujii, Yamaguchi, Hashimoto, Fujita & Muneyasu 2006: Verification of Simultaneous Equations Method by an Experimental Active Noise Control System]]
+- [[sources/guldenschuh-2014-secondary-path-irregularities|Guldenschuh & de Callafon 2014: Detection of Secondary-Path Irregularities in ANC Headphones]]
+- [[sources/xiao-2026-robust-spatially-selective-anc|Xiao, Roden, Blau & Doclo 2026: Robust Soft-Constrained Spatially Selective ANC for Hearables under Secondary Path Variations]]
 
 ## Related Concepts
 

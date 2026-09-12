@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-04-30
-updated: 2026-08-21
+updated: 2026-09-12
 sources:
   - raw/papers/wang-2026-predictive-dsfanc-crnn/full-text.md
   - raw/papers/yin-2023-selective-fixed-filter-anc-headphones/full-text.md
   - raw/papers/wang-2026-directional-sfanc-reverberant/full-text.md
   - raw/papers/zhang-2014-causality-feedforward-anc-headset/full-text.md
   - raw/papers/bai-2026-feedback-guided-anc/full-text.md
+  - raw/papers/yang-2026-transformer-e2e-cfg-anc/full-text.md
 tags:
   - active-noise-control
   - fixed-filter-anc
@@ -90,3 +91,5 @@ A contrasting framework rather than a SFANC variant: [[feedback-guided-controlle
 - [[sources/luo-2026-hybrid-gfanc-fxnlms|Luo 2026: Hybrid GFANC-FxNLMS]] — generative filter selection with adaptive refinement
 - [[sources/yin-2023-selective-fixed-filter-anc-headphones|Yin 2023: Selective Fixed-Filter ANC Based on Frequency Response Matching in Headphones]] — FRM-SFANC algorithm
 - [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — foundational work establishing direction-dependent causality in feedforward ANC headsets
+- [[sources/yang-2026-transformer-e2e-cfg-anc|Yang, Luo, Zou, Wang, Huang & Gan 2026: Transformer-based E2E-CFG for ANC]]
+

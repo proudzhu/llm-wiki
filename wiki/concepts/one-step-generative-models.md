@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-03
-updated: 2026-09-03
+updated: 2026-09-12
 sources:
   - raw/papers/xu-2026-drifting-models-speech-enhancement/full-text.md
   - raw/papers/shetu-2026-generative-discriminative-comparison/full-text.md
+  - raw/papers/lugo-2026-diffvqe/full-text.md
 tags:
   - generative-models
   - speech-enhancement
@@ -61,3 +62,5 @@ Reduce steps by straightening the generative trajectory:
 
 - [[sources/xu-2026-drifting-models-speech-enhancement|Xu et al. 2026: Speech Enhancement Based on Drifting Models]]
 - [[sources/shetu-2026-generative-discriminative-comparison|Shetu, Habets & Brendel 2026: Generative vs. Discriminative SE]] — empirical validation that one-step GAN training matches or beats iterative diffusion for SE
+- [[sources/lugo-2026-diffvqe|Lugo, Seidel, Mowlaee, Zhao & Fingscheidt 2026: DiffVQE]]
+

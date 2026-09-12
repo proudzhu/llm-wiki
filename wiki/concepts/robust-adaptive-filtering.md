@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-04-17
+updated: 2026-09-12
 sources:
   for active noise control.md
 tags:
@@ -61,3 +61,5 @@ A key goal in robust filtering is achieving **Zero POD**. This means that no mat
 
 - [[sources/chen-2016-generalized-correntropy-robust-adaptive-filtering|Chen 2016: Generalized Correntropy for Robust Adaptive Filtering]]
 - [[sources/zhu-2020-robust-gmcc-anc-paper-reading-note|Zhu 2020: Robust GMCC for ANC Paper Reading Note]]
+- [[sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Active Noise Control Using Feedback. Fixed and Adaptive Controllers]]
+

@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-01
-updated: 2026-08-01
+updated: 2026-09-12
 sources:
   - raw/papers/liu-2023-iccrn/full-text.md
+  - raw/papers/zhao-2024-sicrn/full-text.md
 tags:
   - neural-network
   - speech-enhancement
@@ -70,6 +71,7 @@ Removing the cepstral branch (`ICCRN(-ceps)`) is far more damaging than removing
 
 - **[[concepts/igcrn|IGCRN]]** (Liu & Zhang 2021, Interspeech — [[sources/liu-2021-igcrn|source]]) — inplace gated CRN for dual-channel SE; uses [[concepts/inplace-convolution|inplace convolutions]] and a [[concepts/channel-wise-lstm|channel-wise LSTM reused across frequency bins]] to preserve per-bin spatial cues. Also applied to mono and stereo AEC.
 - **ICCRN** (Liu & Zhang 2023, ICASSP) — replaces GLU with CFB; introduces cepstral-space processing; achieves SOTA low-SNR STOI on WSJ0 SI-84 at minimum complexity.
+- **[[concepts/sicrn|SICRN]]** (Zhao, He & Zhang 2024 — [[sources/zhao-2024-sicrn|source]]) — replaces the CRN's strided convolutions entirely with SIC blocks combining an S4ND state-space model (full-band/global correlations) with 2D inplace convolution (local structure); strictly causal, 2.16 M params, approaching FullSubNet quality on the DNS Challenge. Where ICCRN recovers full-band capacity via the cepstral transform, SICRN recovers it via the state-space model — two answers to the same pure-inplace limitation.
 
 The authors note that ICCRN's improved single-channel SE is expected to also lift multi-channel SE and AEC systems built on the inplace-CRN backbone.
 
@@ -89,3 +91,4 @@ The authors note that ICCRN's improved single-channel SE is expected to also lif
 
 - [[sources/liu-2021-igcrn|Liu & Zhang 2021: IGCRN — Inplace Gated Convolutional Recurrent Neural Network]] — predecessor; introduces the inplace CRN design that ICCRN inherits
 - [[sources/liu-2023-iccrn|Liu & Zhang 2023: ICCRN — Inplace Cepstral Convolutional Recurrent Neural Network]]
+- [[sources/zhao-2024-sicrn|Zhao, He & Zhang 2024: SICRN — State Space Model + Inplace Convolution for Speech Enhancement]] — successor in the inplace-CRN lineage; S4ND supplies the full-band modeling that pure inplace convolutions lack

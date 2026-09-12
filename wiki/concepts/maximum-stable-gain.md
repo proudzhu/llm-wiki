@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-05-15
-updated: 2026-08-20
+updated: 2026-09-12
 sources:
   - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/schepker-2016-sdp-minmax-acoustic-feedback/full-text.md
   - raw/papers/zhan-2025-deeppem-afc/full-text.txt
   - raw/papers/lydaki-2026-deep-feedback-cancellation-hearing-aids/full-text.md
   - raw/papers/mounir-2025-robust-early-howling-detection-sparsity/full-text.md
+  - raw/papers/hao-2025-l3c-deepmfc/full-text.md
 tags:
   - hearing-aids
   - feedback-cancellation
@@ -82,3 +83,5 @@ While most AFC methods aim to minimize the misalignment (filter estimation error
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — ASG and tracking time evaluation
 - [[sources/mounir-2025-robust-early-howling-detection-sparsity|Mounir, Bernardi & van Waterschoot 2025]] — uses MSG to normalize feedback paths and define the time-varying gain profile (MSG−6 dB → MSG) that triggers howling onset in the HD dataset; the howling frequency is predicted from the Nyquist criterion at $G=\mathrm{MSG}$
 - [[sources/schepker-2016-sdp-minmax-acoustic-feedback|Schepker & Doclo 2016]] — directly maximizes MSG via min-max SDP optimization of common part, yielding 2–5 dB improvement over least-squares
+- [[sources/hao-2025-l3c-deepmfc|Hao, Moore, Zhang, Li & Zheng 2025: L3C-DeepMFC for Hearing Aid Feedback Cancellation]]
+

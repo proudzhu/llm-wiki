@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-09-08
+updated: 2026-09-12
 sources:
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
   - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
+  - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
 tags:
   - beamforming
   - adaptive-filtering
@@ -84,3 +85,5 @@ Taseska et al. develop the [[concepts/informed-gsc|informed GSC]], where the FBF
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
 - [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]]
 - [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024: Lightweight Hybrid Multi-Channel Speech Extraction with DVAD]] — DVAD-gated ABM/AIC adaptation
+- [[sources/lorenz-2005-robust-minimum-variance-beamforming|Lorenz & Boyd 2005: Robust Minimum Variance Beamforming]]
+

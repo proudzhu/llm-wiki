@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-09-08
+updated: 2026-09-12
 sources:
   - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
   - raw/papers/hu-2026-abse-net/full-text.md
+  - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
 tags:
   - active-noise-control
   - hearables
@@ -101,3 +102,5 @@ A closely related but distinct line targets **open-fit hearing aids**, where the
 - [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]]
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
 - [[sources/hu-2026-abse-net|Hu et al. 2026: ABSE-NET — Active Binaural Speech Enhancement for Open-Fit Hearing Aids]]
+- [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]]
+

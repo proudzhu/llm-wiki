@@ -5254,3 +5254,25 @@ Created source page zhang-2021-adl-mvdr, concept pages adl-mvdr and numerical-st
   - `wiki/synthesis/multimodal-bc-speech-enhancement.md` — rewrote §2.7 (Industry Deployment) with the paper's empirical results, extended §3.1 (bandwidth thrift), added §4 benchmark row
   - `wiki/sources/heitkaemper-2026-bcs-speech-enhancement-earbuds.md` — added backlink to the ICASSP publication
   - `wiki/index.md`, `wiki/sources/index.md` — added 1 source entry; statistics updated
+
+## [2026-09-12] lint | One-way backlink audit — fixed 16 confirmed omissions (11 sources → 16 target pages)
+
+Ran a partial-reciprocation audit that flags concept/synthesis pages curating ≥50% of their source in-linkers but omitting specific tag-overlapping ones (the "Wang 2022 missing from bcs-guided-speech-enhancement" pattern). From 92 filtered candidates, fixed the 16 most confirmed omissions (frontmatter source + body wikilink + Related Sources entry on each target page):
+
+- `wiki/concepts/bcs-guided-speech-enhancement.md` ← Wang 2022 (DC-CRN + AFF row in Comparison table + ablation-lineage paragraph)
+- `wiki/concepts/multi-channel-wiener-filter.md`, `wiki/concepts/mvdr-beamformer.md` ← Grinstein 2025 (NeuralPMWF: SPP-proxy-driven dynamic β)
+- `wiki/concepts/percepnet.md`, `wiki/concepts/packet-loss-concealment.md` ← Valin & Skoglund 2018 (LPCNet design-language lineage)
+- `wiki/concepts/nlcmv-beamforming.md` ← Feng 2025 (NLCMV predetermined front-end on Project Aria, backprop fine-tuning)
+- `wiki/concepts/hearing-aid-feedback-cancellation.md` ← van Waterschoot & Moonen 2011 (canonical survey; plain-text ref converted to wikilink)
+- `wiki/synthesis/feedback-anc-filter-design.md` ← Schepker & Doclo 2016 (MSG-maximizing min-max SDP subsection)
+- `wiki/concepts/spatial-coherence.md` ← Löllmann 2020 (N-channel GMC subsection)
+- `wiki/concepts/iccrn.md` ← Zhao 2024 (SICRN added to inplace-CRN lineage)
+- `wiki/concepts/independent-low-rank-matrix-analysis.md`, `wiki/concepts/iterative-source-steering.md` ← Ishikawa 2025 (real-time SR-/NSR-ILRMA, FastIP/FastVCD)
+- `wiki/concepts/condition-number.md`, `wiki/concepts/kantorovich-inequality.md`, `wiki/concepts/mvdr-beamformer.md` ← Deng 2026 (learned frequency-dependent WNG thresholds)
+- `wiki/concepts/physics-informed-neural-network.md`, `wiki/concepts/frequency-domain-kalman-filter.md` ← Scarpiniti 2027 (PI-NLMS non-PDE physics-informed branch)
+
+Remaining 76 audit candidates are lower-confidence (hub pages, loose curation, broad surveys) — left unfixed by design. Verified: audit count 92→76 (all 16 cleared), broken-links check 0 truly broken, `uv run mkdocs build --strict` clean.
+
+## [2026-09-12] lint | One-way backlink audit — batch-fixed remaining 76 low-confidence omissions
+
+Follow-up to today's high-confidence pass: batch-processed all 76 remaining audit candidates across 49 target pages (46 concepts + 4 synthesis). For each pair, added the source's raw/ path to the target frontmatter `sources:`, refreshed the `updated:` date, and appended a `- [[sources/<slug>|<Title>]]` entry to the Related Sources / 关键文献 section (created the section for coherent-to-diffuse-power-ratio). Heaviest targets: mvdr-beamformer (+6), secondary-path-modeling (+6), feedback-anc (+4), hybrid-anc (+4). Synthesis multi-channel-speech-enhancement's two omissions (bagheri-2019-pmwf-spp, zmolikova-2023-neural-target-speech-extraction-overview) were added as curated rows to the Sources Synthesized table instead. Script: .tmp_fix_backlinks.py. Verified: audit now reports 0 missing backlinks across partial-recip targets, 0 truly broken links, `uv run mkdocs build --strict` clean.

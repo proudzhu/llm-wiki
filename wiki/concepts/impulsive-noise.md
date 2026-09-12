@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-04-17
+updated: 2026-09-12
 sources:
   for active noise control.md
 tags:
@@ -69,3 +69,5 @@ Simple methods that "clip" the error signal or the reference signal before adapt
 - [[sources/chen-2016-generalized-correntropy-robust-adaptive-filtering|Chen 2016: Generalized Correntropy for Robust Adaptive Filtering]]
 - [[sources/zhu-2020-robust-gmcc-anc-paper-reading-note|Zhu 2020: Robust GMCC for ANC Paper Reading Note]]
 - [[sources/lu-2021-survey-active-noise-control-linear|Lu et al. 2021: Survey on ANC — Part I: Linear Systems]]
+- [[sources/xiao-2016-fxaps-impulsive-noise|A new efficient filtered-x affine projection sign algorithm for active control of impulsive noise]]
+

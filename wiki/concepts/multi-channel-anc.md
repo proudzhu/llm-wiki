@@ -1,11 +1,14 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-09-11
+updated: 2026-09-12
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/he-2026-neural-projection-filter-anc/full-text.md
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
+  - raw/papers/lu-2021-survey-active-noise-control-linear/full-text.md
+  - raw/papers/wang-2024-computation-efficient-virtual-sensing/full-text.txt
+  - raw/papers/wang-2026-directional-sfanc-reverberant/full-text.md
 tags:
 - active-noise-control
 - dsp
@@ -102,3 +105,7 @@ In the PINN-assisted ANC system ([[sources/zhang-2024-active-noise-control-sound
 - [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]]
 - [[sources/he-2026-neural-projection-filter-anc|He et al. 2026: Neural Projection Filter Generation for Multi-Reference ANC]] — 42-reference road-noise system compressed to 4 projected references
 - [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] — a (8, 8, 2, 2) multichannel array where unmitigated FxLMS diverges at moderate source spread and a covariance-subtracted ReTM restores stability
+- [[sources/lu-2021-survey-active-noise-control-linear|Lu Lu, Kai-Li Yin, Rodrigo C. de Lamare, Zongsheng Zheng, Yi Yu, Xiaomin Yang & Badong Chen 2021: A Survey on Active Noise Control Techniques — Part I: Linear Systems]]
+- [[sources/wang-2024-computation-efficient-virtual-sensing|Wang, Ji, Shen, Shi & Gan 2024: Computation-Efficient Virtual Sensing with MCALMS]]
+- [[sources/wang-2026-directional-sfanc-reverberant|Wang, Luo, Li, Shi, Ji, Yang & Gan 2026: Directional Selective Fixed-Filter ANC Based on CNN in Reverberant Environments]]
+

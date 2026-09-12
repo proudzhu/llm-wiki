@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-16
-updated: 2026-08-16
+updated: 2026-09-12
 sources:
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
+  - raw/papers/ansari-2023-ai-bss-survey/full-text.md
 tags:
   - source-tracking
   - blind-source-separation
@@ -57,3 +58,5 @@ Competitive with state-of-the-art sparsity-based and Independent Vector Analysis
 ## Related Sources
 
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] (Chapter 8)
+- [[sources/ansari-2023-ai-bss-survey|Ansari, Alatrany, Alnajjar et al. 2023: A Survey of AI Approaches in BSS]]
+

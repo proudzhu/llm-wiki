@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-08-25
-updated: 2026-09-11
+updated: 2026-09-12
 sources:
   - raw/papers/bagheri-2019-pmwf-spp/full-text.md
   - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
+  - raw/papers/braun-2015-residual-noise-control/full-text.md
 tags:
   - noise-estimation
   - speech-enhancement
@@ -70,3 +71,5 @@ The single-channel [[concepts/speech-presence-probability|SPP]] (e.g., Gerkmann 
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]]
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin et al. 2017: Multi-channel Noise Reduction for Mobile Phones]] — single-channel SPP counterpart in an MVDR + post-filter pipeline
 - [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — mask-magnitude SPP proxy scheduling the PMWF distortion parameter
+- [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015: Residual Noise Control Using a Parametric Multichannel Wiener Filter]]
+

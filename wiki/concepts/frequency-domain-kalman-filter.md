@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-02
-updated: 2026-05-15
+updated: 2026-09-12
 sources:
   - raw/papers/zhang-2024-neural-kalman-howling/full-text.txt
   - raw/papers/zhang-2023-hybrid-ahs/full-text.txt
+  - raw/papers/scarpiniti-2027-physics-informed-adaptive-filtering-aec/full-text.md
 tags:
   - kalman-filter
   - frequency-domain
@@ -59,6 +60,8 @@ Recent work extends FDKF in two complementary directions:
 
 Key insight: FDKF remains a strong adaptive backbone, while neural components are most useful when they compensate for nonlinear distortion, reference mismatch, or poorly modeled covariance terms.
 
+Physics-informed regularization is a complementary direction: [[sources/scarpiniti-2027-physics-informed-adaptive-filtering-aec|Scarpiniti et al. 2027]]'s PI-NLMS adds an FFT-based spectral-smoothness prior on the echo-path estimate (the costliest of its five physical priors, at $\mathcal{O}(L \log L)$), and the framework is designed to integrate into the partitioned-block frequency-domain adaptive filtering implementations used for long room impulse responses in practical AEC — the same long-RIR regime where FDKF operates.
+
 ## Related Concepts
 
 - [[concepts/kalman-filter|Kalman Filter]] — time-domain general framework
@@ -71,3 +74,4 @@ Key insight: FDKF remains a strong adaptive backbone, while neural components ar
 
 - [[sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]
 - [[sources/zhang-2024-neural-kalman-howling|Zhang 2024: Neural Network Augmented Kalman Filter for AHS]]
+- [[sources/scarpiniti-2027-physics-informed-adaptive-filtering-aec|Scarpiniti et al. 2027: Physics-informed adaptive filtering for AEC]] — FFT-based spectral-smoothness prior; integrates into partitioned-block frequency-domain adaptive filtering for long RIRs

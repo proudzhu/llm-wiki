@@ -11,6 +11,14 @@ sources:
   - raw/papers/hu-2026-abse-net/full-text.md
   - raw/papers/li-2022-embedding-beamforming/full-text.md
   - raw/papers/zhang-2021-adl-mvdr/full-text.md
+  - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
+  - raw/papers/deng-2026-joint-covariance-wng-mvdr/full-text.md
+  - raw/papers/farmani-2026-virtual-mic-beamforming-hearing-aid/full-text.txt
+  - raw/papers/lin-2024-agadir-array-geometry-agnostic-speech-recognition/full-text.md
+  - raw/papers/liu-2021-igcrn/full-text.md
+  - raw/papers/richard-2023-audio-signal-processing-21st-century/full-text.md
+  - raw/papers/zaidel-2026-linearly-constrained-deep-beamformer/full-text.md
+  - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
 tags:
   - beamforming
   - speech-enhancement
@@ -32,6 +40,10 @@ $$w_{\text{mv}} = \frac{R_y^{-1} a(\theta)}{a(\theta)^* R_y^{-1} a(\theta)}$$
 ## Sensitivity to Array-Manifold Mismatch
 
 Capon's MVB assumes the array manifold $a(\theta)$ is known exactly. In practice, imprecise knowledge of the angle of arrival or array calibration errors cause the SINR to degrade **catastrophically** for modest differences between the assumed and actual array response. Classical remedies include [[concepts/diagonal-loading|diagonal loading]] and eigenvalue thresholding, but these require heuristic parameter choice and ignore *anisotropic* knowledge of manifold variation. The [[concepts/robust-minimum-variance-beamforming|Robust MVB (RMVB)]] of Lorenz & Boyd (2005) addresses this by enforcing the unity-gain constraint over an entire [[concepts/ellipsoidal-uncertainty-modeling|uncertainty ellipsoid]] of possible array responses, formulated as a [[concepts/socp-optimization|second-order cone program]].
+
+## Learned WNG Thresholds (Deng et al. 2026)
+
+Classical remedies diagonal-load heuristically, and [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026]] derive the loading from a Kantorovich-bounded WNG→condition-number mapping (see [[concepts/condition-number|Condition Number]]). [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026]] make the WNG constraint *learned*: a dual-branch network jointly estimates time-frequency noise masks (for the noise covariance) and frequency-dependent WNG thresholds, which feed a differentiable robust MVDR layer trained end-to-end without explicit WNG supervision — outperforming fixed-threshold baselines particularly under array mismatch.
 
 ## Relationship to LCMV
 
@@ -63,7 +75,7 @@ The **binaural MVDR (BMVDR)** extends the classical MVDR to the binaural hearing
 
 ## MVDR as the β = 0 Endpoint of the PMWF
 
-The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-wiener-filter|PMWF]] family: setting the trade-off parameter $\beta = 0$ in the PMWF closed form recovers the MVDR, while $\beta = 1$ gives the MWF. [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019]] benchmark this continuum on a 4-mic circular array (TIMIT speech, babble/pink interference, $T_{60}=300$ ms): the MWF consistently beats MVDR on ΔSINR, ΔSegSNR, and noise reduction at the expected cost of nonzero speech distortion, and an [[concepts/multi-channel-speech-presence-probability|MC-SPP]]-controlled $\beta$ (plus an MMSE output blend) improves further over the fixed-parameter MWF. This matches the structural intuition that MVDR's distortionless constraint leaves noise-reduction headroom on the table.
+The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-wiener-filter|PMWF]] family: setting the trade-off parameter $\beta = 0$ in the PMWF closed form recovers the MVDR, while $\beta = 1$ gives the MWF. [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019]] benchmark this continuum on a 4-mic circular array (TIMIT speech, babble/pink interference, $T_{60}=300$ ms): the MWF consistently beats MVDR on ΔSINR, ΔSegSNR, and noise reduction at the expected cost of nonzero speech distortion, and an [[concepts/multi-channel-speech-presence-probability|MC-SPP]]-controlled $\beta$ (plus an MMSE output blend) improves further over the fixed-parameter MWF. This matches the structural intuition that MVDR's distortionless constraint leaves noise-reduction headroom on the table. [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025]] exploit this continuum dynamically: their NeuralPMWF drives $\beta$ per T-F bin from a mask-derived SPP proxy, continuously sliding between the MVDR ($\beta = 0$) and MWF ($\beta = 1$) endpoints, with the dynamic $\beta$ contributing the largest single gain in their ablation.
 
 ## Neural Beamformers Surpassing Oracle-Mask MVDR (Li et al. 2022)
 
@@ -112,3 +124,12 @@ The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-
 - [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]] — MVDR vs. MWF vs. SPP-controlled PMWF continuum benchmark
 - [[sources/hu-2026-abse-net|Hu et al. 2026: ABSE-NET]] — binaural MVDR collapses under open-fit leakage; a lightweight DNN post-filter absorbs its estimation errors
 - [[sources/li-2022-embedding-beamforming|Li et al. 2022: Embedding and Beamforming]] — EaBNet surpasses oracle-mask MB-MVDR; the tandem statistical stage is the structural bottleneck
+- [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — SPP-proxy-driven dynamic $\beta$ slides per T-F bin between the MVDR ($\beta = 0$) and MWF ($\beta = 1$) endpoints
+- [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026: Joint Covariance and WNG Learning for Robust MVDR]] — dual-branch network jointly learns noise masks and frequency-dependent WNG thresholds via a differentiable robust MVDR layer
+- [[sources/farmani-2026-virtual-mic-beamforming-hearing-aid|Farmani, Feldt & Jensen 2026: Beamforming Using Virtual Microphones for Hearing Aid Applications]]
+- [[sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition|Lin, Moritz, Huang, Xie, Sun, Fuegen & Seide 2024: AGADIR — Towards Array-Geometry Agnostic Directional Speech Recognition]]
+- [[sources/liu-2021-igcrn|Liu & Zhang 2021: IGCRN — Inplace Gated Convolutional Recurrent Neural Network]]
+- [[sources/richard-2023-audio-signal-processing-21st-century|Richard, Smaragdis, Gannot, Naylor, Makino, Kellermann & Sugiyama 2023: Audio Signal Processing in the 21st Century]]
+- [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel, Engel, Engel & Gannot 2026: Linearly Constrained Deep Beamformer for Multi-Speaker Scenarios]]
+- [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova, Delcroix & Ochiai 2023: Neural Target Speech Extraction: An Overview]]
+

@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-06-25
-updated: 2026-07-17
+updated: 2026-09-12
 sources:
   - raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md
   - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
+  - raw/papers/scarpiniti-2027-physics-informed-adaptive-filtering-aec/full-text.md
 tags:
   - neural-networks
   - physics-informed
@@ -56,6 +57,10 @@ where $c$ is the speed of sound. See [[sources/zhang-2024-active-noise-control-s
 - **Stiff PDEs**: Problems with high-frequency content are difficult.
 - **Generalization**: Performance degrades for domains not seen during training.
 
+## Beyond PDE Residuals: Physics-Informed Adaptive Filtering
+
+The physics-informed idea extends beyond PDE-residual losses. [[sources/scarpiniti-2027-physics-informed-adaptive-filtering-aec|Scarpiniti et al. 2027]]'s Physics-Informed NLMS (PI-NLMS) for acoustic echo cancellation embeds physically motivated priors on the room impulse response — causality, exponential energy decay (Sabine), time-weighted sparsity of early reflections, spectral smoothness, and slow temporal variation — as regularization terms in the adaptive-filter cost function. Compared with PINNs, the physics enters as structured penalties on an interpretable filter estimate rather than autodifferentiated PDE residuals, yielding convergence guarantees at only $\mathcal{O}(L \log L)$ additional cost. See [[concepts/pi-nlms|PI-NLMS]].
+
 ## Related Concepts
 
 - [[neural-networks|Neural Networks]]
@@ -70,3 +75,4 @@ where $c$ is the speed of sound. See [[sources/zhang-2024-active-noise-control-s
 
 - [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]]
 - [[sources/jiang-2025-ai-driven-avnc-review|Jiang et al. 2025: AI-Driven AVNC Review]]
+- [[sources/scarpiniti-2027-physics-informed-adaptive-filtering-aec|Scarpiniti, Comminiello & Uncini 2027: Physics-informed adaptive filtering for AEC]] — RIR physical priors as regularization in adaptive filtering (PI-NLMS), a non-PDE branch of the physics-informed family

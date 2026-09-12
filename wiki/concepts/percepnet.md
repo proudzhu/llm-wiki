@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-07-17
-updated: 2026-08-14
+updated: 2026-09-12
 sources:
   - raw/papers/valin-2021-percepnet-joint-echo-control/full-text.md
   - raw/papers/buthe-2025-blind-wideband-to-fullband-extension/full-text.md
   - raw/papers/valin-2022-real-time-plc/full-text.md
+  - raw/papers/valin-2018-lpcnet/full-text.md
 tags:
   - speech-enhancement
   - acoustic-echo-cancellation
@@ -17,7 +18,7 @@ tags:
 
 # PercepNet
 
-PercepNet is a perceptually-motivated, low-complexity hybrid DSP/DNN approach to real-time speech enhancement and (in its 2021 extension) joint acoustic echo control. Originally introduced by Valin et al. (ICASSP 2020) for fullband speech enhancement, it was extended in [[sources/valin-2021-percepnet-joint-echo-control|Valin et al. 2021]] to combine a traditional AEC with joint residual echo and noise suppression, winning the ICASSP 2021 AEC Challenge.
+PercepNet is a perceptually-motivated, low-complexity hybrid DSP/DNN approach to real-time speech enhancement and (in its 2021 extension) joint acoustic echo control. Originally introduced by Valin et al. (ICASSP 2020) for fullband speech enhancement, it was extended in [[sources/valin-2021-percepnet-joint-echo-control|Valin et al. 2021]] to combine a traditional AEC with joint residual echo and noise suppression, winning the ICASSP 2021 AEC Challenge. The hybrid DSP/DNN design language — a compact GRU network, 8-bit integer weight quantization, and offloading what classical DSP does cheaply to DSP — is shared with Valin's earlier [[concepts/lpcnet|LPCNet]] vocoder ([[sources/valin-2018-lpcnet|Valin & Skoglund 2018]]), which likewise relegated the spectral envelope to a classical LPC filter so the network models only the excitation.
 
 ## Core Ideas
 
@@ -67,3 +68,4 @@ Two sparse variants:
 
 - [[sources/valin-2021-percepnet-joint-echo-control|Valin et al. 2021: Joint Neural Echo Control and Speech Enhancement Based On PercepNet]]
 - [[sources/buthe-2025-blind-wideband-to-fullband-extension|Büthe & Valin 2025: A Lightweight and Robust Method for Blind Wideband-to-Fullband Extension of Speech]] — BBWENet, another Valin-lab low-complexity DSP/DNN hybrid (blind bandwidth extension, ~370 K params) sharing the ERB-band feature and adversarial-training design language
+- [[sources/valin-2018-lpcnet|Valin & Skoglund 2018: LPCNet]] — Valin's earlier hybrid DSP/DNN vocoder; the origin of the compact-GRU + 8-bit-quantization design language

@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-07
+updated: 2026-09-12
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
@@ -9,6 +9,7 @@ sources:
   - raw/papers/bagheri-2019-pmwf-spp/full-text.md
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
   - raw/papers/braun-2015-residual-noise-control/full-text.md
+  - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
 tags:
   - speech-enhancement
   - wiener-filter
@@ -67,6 +68,8 @@ Simmer et al. [14] showed that the broadband MMSE-optimal multi-channel NR can b
 
 The MWF is one endpoint of a parameterized family: the [[concepts/parametric-multi-channel-wiener-filter|PMWF]] (Souden, Benesty & Affes 2010) derives from a constrained optimization (maximize noise reduction subject to a distortion bound) with trade-off parameter $\beta$, where $\beta = 1$ recovers the conventional MWF and $\beta = 0$ the MVDR. [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019]] show a practical implementation in which the [[concepts/multi-channel-speech-presence-probability|MC-SPP]] controls $\beta$ per time-frequency bin, updates the noise PSD matrix by SPP-weighted recursive averaging (with a Woodbury rank-1 update of its inverse), and blends the output with a $G_{\min}$-floored reference channel — improving ΔSINR, ΔSegSNR, and noise reduction over both MVDR and the fixed-$\beta$ MWF at nearly unchanged speech distortion.
 
+[[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025]] push this to the extreme where a tiny neural network *fully controls* the PMWF (**NeuralPMWF**): a 164.9k-parameter network (24.95 MMACs/s, 16 ms algorithmic latency) estimates a multi-channel complex mask from which speech and noise SCMs are derived by exponential smoothing with learned, frequency-dependent smoothing speeds, while $\beta$ is driven dynamically per T-F bin by an SPP proxy computed from the mask — the SPP-driven dynamic $\beta$ contributing the largest single gain in their ablation on a 5-microphone smart-glasses scenario.
+
 ## Related Concepts
 
 - [[concepts/wiener-filter|Wiener Filter]]
@@ -93,3 +96,4 @@ The MWF is one endpoint of a parameterized family: the [[concepts/parametric-mul
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — adopts the MVDR + single-channel Wiener factorization (Simmer et al.) with an adaptive coherence noise PSD estimate driving the post-filter
 - [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]] — MC-SPP-controlled PMWF with direct inverse noise PSD updates
 - [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015: Residual Noise Control PMWF]] — target-signal redefinition yielding direct control of maximum noise reduction
+- [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — NeuralPMWF: a 164.9k-parameter network fully controls the PMWF, including an SPP-proxy-driven dynamic $\beta$

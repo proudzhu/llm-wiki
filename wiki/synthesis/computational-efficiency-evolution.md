@@ -1,8 +1,10 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-08-10
+updated: 2026-09-12
 sources:
+  - raw/papers/benslimane-2026-rt-tango-binaural-speech-enhancement/full-text.md
+  - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
 - zotero://select/items/0_WLMRLH9W
 - zotero://select/items/0_5SFJK2MD
 - zotero://select/items/0_76XGXYSM
@@ -297,3 +299,6 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 - [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] — [[concepts/semamba|SEMamba]] introduces the selective-SSM (Mamba) efficiency axis: replaces Conformer/Transformer at quality parity with 12–66% FLOPs reduction; SOTA PESQ 3.69 on VoiceBank-DEMAND with PCS
 - [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight SE with SSM and DSConv]] — introduces the sixth Pareto axis: diagonal-constrained [[concepts/lights4|lightS4]] + DSConv2D + [[concepts/auditory-inspired-spectral-compressor|AISC]] reaches PESQ 3.32 on VoiceBank+DEMAND at 0.50 G MACs / 1.65 M params / RTF 0.13, a ~60× MACs reduction vs. SEMamba at a 0.20 PESQ cost
 - [[sources/shetu-2026-munet|Shetu, Martinez Aponte, Rao, Vittappan, Thiergart & Habets 2026: μNet]] — introduces the seventh Pareto axis (deployment-hardware co-design): 46K params / 28 MMACs / 90 KB static / int8 / 4–16 ms on Cadence Tensilica HiFi 4; standard convolutions chosen over depthwise separable for DSP memory-access efficiency
+- [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane, Chouteau, Poreba, Auzanneau, Szczepanski, Chersi & Serizel 2026: RT-Tango]]
+- [[sources/liu-2024-lightweight-dl-survey|Liu, Galindo, Xie, Wong, Shuai, Li & Cheng 2024: Lightweight Deep Learning for Resource-Constrained Environments]]
+

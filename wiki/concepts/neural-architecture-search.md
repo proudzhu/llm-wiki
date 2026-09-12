@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-07-18
-updated: 2026-08-09
+updated: 2026-09-12
 sources:
   - raw/papers/mienye-2024-rnn-comprehensive-review/full-text.md
   - raw/papers/lin-2020-mcunet/full-text.md
   - raw/papers/lin-2021-mcunetv2/full-text.md
   - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
+  - raw/papers/le-2026-efficient-nn-tinyml-review/full-text.md
 tags:
   - deep-learning
   - neural-networks
@@ -82,3 +83,5 @@ Most NAS assumes a fixed mobile search space and targets FLOPs or latency. For [
 - [[sources/lin-2020-mcunet\|Lin et al. 2020: MCUNet — Tiny Deep Learning on IoT Devices]] — introduces TinyNAS, a two-stage NAS that auto-optimizes the search space for MCU memory constraints
 - [[sources/lin-2021-mcunetv2\|Lin et al. 2021: MCUNetV2 — Memory-Efficient Patch-based Inference for Tiny Deep Learning]] — merges search-space optimization into one stage and co-optimizes inference scheduling (patch count, patch-stage depth)
 - [[sources/liu-2024-lightweight-dl-survey\|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] — surveys NAS by algorithm family (RL / EA / gradient / hardware-aware) with practical selection rules; Figures 7–9 illustrate the RL controller loop, the DNAS/FBNet pipeline, and NetAdapt's layer-wise lookup table
+- [[sources/le-2026-efficient-nn-tinyml-review|Lê, Wolinski & Arbel 2026: Efficient Neural Networks for Tiny Machine Learning — A Comprehensive Review]]
+

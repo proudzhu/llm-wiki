@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-05-15
-updated: 2026-08-20
+updated: 2026-09-12
 sources:
+  - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/zhan-2025-deeppem-afc/full-text.txt
   - raw/papers/lydaki-2026-deep-feedback-cancellation-hearing-aids/full-text.md
   - raw/papers/schepker-2016-sdp-minmax-acoustic-feedback/full-text.md
@@ -23,6 +24,8 @@ In hearing aids:
 - Some amplified sound radiates back to the microphone (acoustic feedback)
 - This recirculation creates howling artifacts
 - Limits the **Maximum Stable Gain (MSG)**, making devices inefficient for severe/profound hearing loss
+
+The canonical survey [[sources/vanwaterschoot-2011-fifty-years-afc|van Waterschoot & Moonen 2011]] traces fifty years of acoustic feedback control — formalized for PA/sound-reinforcement systems, with side references to hearing aids. It establishes the closed-loop Nyquist model as the common root from which phase modulation, notch-filter howling suppression, and adaptive feedback cancellation all derive, and provides the first unified comparative evaluation of the three dominant methods (achievable amplification, sound quality, reliability).
 
 ## Key Methods
 
@@ -87,5 +90,5 @@ A parameter-reduction approach specific to multi-microphone or multi-condition h
 - [[sources/hao-2025-l3c-deepmfc|Hao et al. 2025: L3C-DeepMFC]] — Low-latency low-complexity deep marginal feedback cancellation
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC
 - [[sources/schepker-2016-sdp-minmax-acoustic-feedback|Schepker & Doclo 2016]] — common part decomposition with min-max SDP optimization for MSG maximization and faster AFC convergence
-- Waterschoot & Moonen 2011: Fifty years of acoustic feedback control
+- [[sources/vanwaterschoot-2011-fifty-years-afc|van Waterschoot & Moonen 2011: Fifty Years of Acoustic Feedback Control]] — canonical survey; closed-loop Nyquist model, method taxonomy, first unified comparative evaluation
 - Spriet et al. 2008: Feedback control in hearing aids

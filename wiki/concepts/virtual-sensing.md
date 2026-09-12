@@ -2,6 +2,10 @@
 type: concept
 created: 2026-04-17
 sources:
+  - raw/papers/lu-2021-survey-active-noise-control-linear/full-text.md
+  - raw/papers/toyooka-2026-hybrid-anc-virtual-sensing/full-text.txt
+  - raw/papers/wang-2024-metric-learning-virtual-sensing/full-text.txt
+  - raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md
 - zotero://select/items/0_LJDPCZ9G
 - zotero://select/items/0_WY4S7C6Z
 - zotero://select/items/0_WX2XSXDA
@@ -9,7 +13,7 @@ tags:
 - active-noise-control
 - control-theory
 - signal-processing
-updated: 2026-06-25
+updated: 2026-09-12
 ---
 # Virtual Sensing
 
@@ -61,4 +65,8 @@ The three canonical virtual sensing methods for feedforward ANC systems, unified
 - [[sources/holzmueller-2026-obs-tasnet-virtual-sensing|Holzmüller 2026: Obs-TasNet for Virtual Sensing]]: Deep learning approach to VS using Conv-TasNet.
 - [[sources/petersen-2008-kalman-filter-virtual-sensing-anc|Petersen 2008: Kalman Filter for Virtual Sensing]]: State-space observer approach.
 - [[sources/wang-2024-computation-efficient-virtual-sensing|Wang 2024: Computation-Efficient Virtual Sensing with MCALMS]]: Multi-channel VS optimization using MCALMS algorithm.
+- [[sources/lu-2021-survey-active-noise-control-linear|Lu Lu, Kai-Li Yin, Rodrigo C. de Lamare, Zongsheng Zheng, Yi Yu, Xiaomin Yang & Badong Chen 2021: A Survey on Active Noise Control Techniques — Part I: Linear Systems]]
+- [[sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026: Hybrid Active Noise Control System for Remote Microphone Based Virtual Sensing with Two Compensation Filters]]
+- [[sources/wang-2024-metric-learning-virtual-sensing|Wang 2024: Transferable Selective Virtual Sensing Active Noise Control Technique Based on Metric Learning]]
+- [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang, Ma, Abhayapala, Samarasinghe & Bastine 2024: An Active Noise Control System Based on Soundfield Interpolation Using a Physics-Informed Neural Network]]
 

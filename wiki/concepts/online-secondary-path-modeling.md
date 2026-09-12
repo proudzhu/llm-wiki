@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-08-27
+updated: 2026-09-12
 sources:
   - raw/papers/akhtar-2006-vss-lms-online-spm/full-text.txt
   - raw/papers/guldenschuh-2014-secondary-path-irregularities/full-text.md
+  - raw/papers/fareedha-2026-joint-deep-spe-anc/full-text.txt
 tags:
 - active-noise-control
 - online-modeling
@@ -91,3 +92,5 @@ Some methods exploit the fact that the controller output y(n) itself can serve a
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section VI: Online Secondary-Path Modeling
 - [[sources/akhtar-2006-vss-lms-online-spm|Akhtar 2006: VSS LMS for Online Secondary Path Modeling]]
 - [[sources/ma-2027-robust-ffanc-online-path-modeling|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] — introduces a second supporting filter $H_2(z)$ and an SF-driven global AWGN scaling that decouple OSPM from the FFANC controller, achieving near-ideal-benchmark NRP with no divisions or square roots
+- [[sources/fareedha-2026-joint-deep-spe-anc|Fareedha, Vasundhara, Kar & Christensen 2026: Joint Deep SPE and Adaptive Control for ANC]]
+

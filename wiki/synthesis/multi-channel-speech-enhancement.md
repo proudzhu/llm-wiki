@@ -34,6 +34,8 @@ sources:
   - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
   - raw/papers/li-2022-embedding-beamforming/full-text.md
   - raw/papers/zhang-2021-adl-mvdr/full-text.md
+  - raw/papers/bagheri-2019-pmwf-spp/full-text.md
+  - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
 tags:
   - multi-channel-speech-enhancement
   - beamforming
@@ -101,6 +103,8 @@ The distinction: this synthesis is about **spatial filtering** (beamforming, coh
 | [[sources/grinstein-2025-tiny-param-mwf\|Grinstein et al. 2025 (NeuralPMWF)]] | 2025 | Hybrid | Tiny DNN (164.9k params, 24.95 MMACs/s) fully controls the PMWF: mask-derived covariances with learned frequency-dependent smoothing + SPP-scheduled dynamic $\beta$ |
 | [[sources/li-2022-embedding-beamforming\|Li et al. 2022 (EaBNet)]] | 2022 | Estimate what | All-neural causal framewise beamformer; implicit spectral-spatial embedding beats explicit SCM reinsertion and surpasses oracle-IRM MB-MVDR |
 | [[sources/zhang-2021-adl-mvdr\|Zhang et al. 2021 (ADL-MVDR)]] | 2021 | Hybrid | All-deep-learning MVDR: GRU-Nets replace the matrix inversion and PCA inside the MVDR closed form; frame-level weights; joint training stabilized where closed-form inversion was not |
+| [[sources/bagheri-2019-pmwf-spp\|Bagheri & Giacobello 2019]] | 2019 | Trade-off control | MC-SPP-controlled PMWF: SPP-driven recursive noise PSD update with direct inverse rank-1 update, per-bin $\beta(\ell,k)$ trade-off control, and SPP-blended MMSE output — the SPP-controlled $\beta$ lineage that Grinstein 2025's NeuralPMWF later neuralized |
+| [[sources/zmolikova-2023-neural-target-speech-extraction-overview\|Zmolikova et al. 2023]] | 2023 | Estimate what | Overview of neural TSE: unified clue-encoder + mixture-encoder + fusion + extractor framework with audio/visual/spatial clue variants — situates speaker-conditioned extraction relative to the beamforming-centric methods on this page |
 
 ## Insight 1: The Classical Coherence/CDR Lineage — DOA-Independence as the Key Relaxation
 

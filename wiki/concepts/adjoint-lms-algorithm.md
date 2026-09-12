@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-28
-updated: 2026-04-28
+updated: 2026-09-12
 sources:
   - raw/papers/wang-2024-computation-efficient-virtual-sensing/full-text.txt
+  - raw/papers/lu-2021-survey-active-noise-control-linear/full-text.md
 tags:
   - active-noise-control
   - adjoint-lms
@@ -61,3 +62,5 @@ where $\hat{S}^*$ is the adjoint (time-reversed) operator of $\hat{S}$.
 ## Related Sources
 
 - [[sources/wang-2024-computation-efficient-virtual-sensing|Wang 2024: Computation-Efficient Virtual Sensing with MCALMS]]
+- [[sources/lu-2021-survey-active-noise-control-linear|Lu Lu, Kai-Li Yin, Rodrigo C. de Lamare, Zongsheng Zheng, Yi Yu, Xiaomin Yang & Badong Chen 2021: A Survey on Active Noise Control Techniques — Part I: Linear Systems]]
+

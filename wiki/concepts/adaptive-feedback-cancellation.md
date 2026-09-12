@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-08-07
-updated: 2026-08-20
+updated: 2026-09-12
 sources:
   - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/schepker-2016-sdp-minmax-acoustic-feedback/full-text.md
+  - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
 tags:
   - acoustic-feedback
   - adaptive-filters
@@ -101,3 +102,5 @@ A complementary approach to reduce the number of adaptive parameters is [[concep
 - [[sources/lydaki-2026-deep-feedback-cancellation-hearing-aids|Lydaki 2026: Deep Feedback Cancellation]] — deep-learning DFC for hearing aids
 - [[sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]] — IMU-based step-size control for HA-AFC
 - [[sources/schepker-2016-sdp-minmax-acoustic-feedback|Schepker & Doclo 2016: SDP Min-max Common Part Estimation]] — common part decomposition with min-max SDP optimization for MSG maximization and faster AFC convergence
+- [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]]
+

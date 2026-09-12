@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-07-10
-updated: 2026-08-03
+updated: 2026-09-12
 sources:
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
+  - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
 tags:
   - neural-network
   - linear-rnn
@@ -79,3 +80,5 @@ Expansion factor $K = 2.0$ for both variants. The auxiliary network (speaker emb
 ## Related Sources
 
 - [[sources/ostergaard-2026-own-voice-cancellation|Østergaard et al. 2026: Don't Listen to Me — Own-Voice Cancellation]]
+- [[sources/chao-2024-mamba-speech-enhancement|Chao, Cheng, La Quatra, Siniscalchi, Yang, Fu & Tsao 2024: An Investigation of Incorporating Mamba for Speech Enhancement]]
+

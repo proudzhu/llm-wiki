@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-03
-updated: 2026-08-03
+updated: 2026-09-12
 sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
+  - raw/papers/jiang-2026-lightweight-speech-enhancement-ssm-dsc/full-text.md
 tags:
   - neural-network
   - state-space-model
@@ -89,3 +90,5 @@ Most parameters live in the linear projections, while the inner SSM is parameter
 ## Related Sources
 
 - [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]]
+- [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight Speech Enhancement with State-Space Model and Depthwise Separable Convolution]]
+

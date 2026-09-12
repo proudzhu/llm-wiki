@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-04
+updated: 2026-09-12
 sources:
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
+  - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
 tags:
   - directivity-pattern
   - spatial-audio
@@ -56,3 +57,5 @@ where $(\theta_s,\phi_s)$ specifies the target look direction.
 
 - [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — R-th order DMA pattern formulation and neural realization
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
+- [[sources/huang-2025-steerable-neural-directional-filtering|Huang, Halimeh, Chetupalli, Thiergart & Habets 2025: Steerable Neural Directional Filtering]]
+

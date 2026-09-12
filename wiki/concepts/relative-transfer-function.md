@@ -1,12 +1,15 @@
 ---
 type: concept
 created: 2026-05-26
-updated: 2026-09-11
+updated: 2026-09-12
 sources:
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
   - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
   - raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
+  - raw/papers/li-2022-embedding-beamforming/full-text.md
+  - raw/papers/richard-2023-audio-signal-processing-21st-century/full-text.md
+  - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
 tags:
   - spatial-filtering
   - beamforming
@@ -104,3 +107,7 @@ to subtract loudspeaker leakage from the reference microphones ahead of FxLMS. E
 - [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis et al. 2026: Listen first — output-based multi-microphone speech enhancement]]
 - [[sources/xiao-2023-spatially-selective-anc|Xiao 2023: Spatially Selective Active Noise Control Systems]] — ReIRs as design-time spatial constraints
 - [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] — extends the RTF to a group-to-group Relative Transfer Matrix estimated by covariance subtraction, applied to acoustic-feedback neutralization
+- [[sources/li-2022-embedding-beamforming|Li, Liu, Zheng & Li 2022: Embedding and Beamforming]]
+- [[sources/richard-2023-audio-signal-processing-21st-century|Richard, Smaragdis, Gannot, Naylor, Makino, Kellermann & Sugiyama 2023: Audio Signal Processing in the 21st Century]]
+- [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]]
+
