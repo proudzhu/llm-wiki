@@ -333,7 +333,17 @@ Checks both `[[category/slug]]` wikilinks and `![[raw/...]]` figure embeds again
 
 Do **not** substitute the wiki-lint `check_broken_links.py` here: it scans the whole vault and reports hundreds of *pre-existing* convention violations (bare slugs, `wiki/` prefixes, `../` prefixes from legacy pages), drowning the signal for the files this ingest touched. `verify_wikilinks.py --slug` is scoped to exactly the new/modified pages; if you do run the vault-wide checker, grep its output for the new slugs rather than reading the full report.
 
-**Step 12b — MkDocs strict build**:
+**Step 12b — Backlink audit** (catches one-way link omissions from Steps 8–9):
+
+```bash
+uv run python .agents/skills/paper-reader/scripts/check_backlinks.py --slug SLUG
+```
+
+Audits the ingested source's curated links (`## Related Concepts` / `## Related Synthesis` on the source page) against the target pages: every concept/synthesis page the source links to must reference the source back — via frontmatter `sources:`, a body wikilink, or a `## Related Sources` entry. A target is flagged only if it already references ≥50% of its in-linkers (partial reciprocation — hub pages like `beamforming` that reference few by design are excluded) and shares ≥1 distinctive frontmatter tag with the source. `mentioned-unlinked` = author+year appear in the body without a wikilink; `not-mentioned` = omitted entirely.
+
+Exit 0 = clean; exit 1 = omissions found. For each flagged target, apply the Step 8 update pattern (frontmatter `sources:` + body reference + `## Related Sources` wikilink) and re-run until clean. This catches the "Wang 2022" failure mode: a source links a concept page that curates comparable sources but omits this one — usually a Step 8/9 edit silently dropped by a parallel-edit race (`pitfalls.md` #46) or a target page missed during candidate identification. Without `--slug`, the script audits the entire vault (slower; also usable during periodic wiki-lint passes).
+
+**Step 12c — MkDocs strict build**:
 
 ```bash
 uv run python .agents/skills/paper-reader/scripts/build_check.py
@@ -357,4 +367,4 @@ Stages `raw/papers/{slug}/`, `wiki/sources/{slug}.md`, all index files, `wiki/lo
 - **Avoid `\bm{}` in LaTeX math** — MathJax does not load the `bm` package. Use `\mathbf{x}` or `\boldsymbol{x}` instead.
 - **Never put LaTeX math in a wikilink alias** — `[[concepts/foo|$\mathcal{L}$]]` breaks the `fix_obsidian_escapes` pipe-escaping and aborts `mkdocs build --strict` (`pitfalls.md` #44). Use a plain-text alias (`[[concepts/foo|Spectrally Adaptive Loss]]`) and keep the math outside the wikilink.
 - **Always commit via `commit_ingest.py`** — manual `git add`/`git commit` bypasses its guards: it refuses to stage `paper.pdf`, auto-stages all `wiki/` modifications, and avoids PowerShell quoting entirely (heredoc `<<'EOF'` is a parse error on PowerShell 5.1, `pitfalls.md` #37). If a manual commit is unavoidable: exclude `paper.pdf` and `.obsidian/`, and pass multi-paragraph messages as multiple `-m` flags — never a heredoc.
-- **Todo list structure**: one todo per workflow step (1–13), in numerical order. Treat Steps 3a–3e as a single "extract content" todo. Treat Step 12a–12b as a single "build verification" todo. If Step 9 triage finds no candidates, mark that todo `completed` with "none relevant — grep triage" rather than leaving it `pending`.
+- **Todo list structure**: one todo per workflow step (1–13), in numerical order. Treat Steps 3a–3e as a single "extract content" todo. Treat Step 12a–12c as a single "build verification" todo. If Step 9 triage finds no candidates, mark that todo `completed` with "none relevant — grep triage" rather than leaving it `pending`.
