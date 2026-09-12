@@ -5225,3 +5225,9 @@ Indexes and statistics updated (total 1295 pages).
   - `wiki/concepts/power-law-compression.md` — new section: phase-preserving multichannel compression
   - `wiki/synthesis/deep-speech-enhancement.md` — EaBNet added as earliest evidence of phase-2 end-to-end neural beamforming (Insight 6)
   - `wiki/synthesis/multi-channel-speech-enhancement.md` — EaBNet as Step-6 representative and the Step-4→6 boundary tested directly (Insight 3)
+
+---
+
+## [2026-09-12] ingest | ADL-MVDR: All Deep Learning MVDR Beamformer for Target Speech Separation (Zhang et al. 2021)
+
+Created source page zhang-2021-adl-mvdr, concept pages adl-mvdr and numerical-stability (stub rewritten), entity pages for Zhuohuang Zhang, Shi-Xiong Zhang, Lianwu Chen. Updated mvdr-beamformer, deep-filtering, complex-ratio-mask, spatial-covariance-matrix, neural-beamforming, gated-recurrent-unit, and entity pages for Yong Xu, Meng Yu, Dong Yu. Synthesis updates: multi-channel-speech-enhancement (new Hybrid row + Insight 3 refinement locating the tandem bottleneck in closed-form inversion, not SCM), deep-speech-enhancement (sources list). Statistics: 1302 total pages.

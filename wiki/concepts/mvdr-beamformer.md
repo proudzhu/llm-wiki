@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-11
+updated: 2026-09-12
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
@@ -10,6 +10,7 @@ sources:
   - raw/papers/bagheri-2019-pmwf-spp/full-text.md
   - raw/papers/hu-2026-abse-net/full-text.md
   - raw/papers/li-2022-embedding-beamforming/full-text.md
+  - raw/papers/zhang-2021-adl-mvdr/full-text.md
 tags:
   - beamforming
   - speech-enhancement
@@ -68,6 +69,10 @@ The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-
 
 [[sources/li-2022-embedding-beamforming|Li et al. 2022]] provide the sharpest evidence that the tandem mask-then-MVDR scheme is structurally limited: their all-neural causal beamformer [[concepts/eabnet|EaBNet]] (2.84M params, framewise weights) *surpasses an MB-MVDR beamformer driven by oracle ideal-ratio-mask SCMs* (avg. PESQ 3.52 vs. 3.10, ESTOI 85.91% vs. 83.57%, SDR 16.72 vs. 14.26 dB) on a simulated 9-channel DNS-Challenge setup — meaning even perfect mask estimation cannot rescue the decoupled statistical second stage. The EaBNet* variant, which reinserts explicit SCM computation from predicted speech/noise masks before the weight network, performs *worse* than the version with a purely learned spectral-spatial embedding, suggesting the second-order SCM itself (sparse, redundant) is the bottleneck rather than an aid in end-to-end neural beamformers.
 
+## All Deep Learning MVDR (Zhang et al. 2021)
+
+[[sources/zhang-2021-adl-mvdr|Zhang et al. 2021]]'s [[concepts/adl-mvdr|ADL-MVDR]] replaces the two matrix operations inside the MVDR closed form — the noise-covariance inversion and the PCA of the speech covariance for the steering vector — with two GRU-based networks, yielding **frame-level** beamforming weights trained jointly with the front-end cRF estimator. This attacks both residual noise (utterance-level weights are frame-suboptimal) and the numerical instability of matrix inversion under joint NN training (which otherwise needs [[concepts/diagonal-loading|diagonal loading]]). On a 15-channel Mandarin corpus it beats mask-based MVDR by ~17% PESQ (3.42 vs. 2.92) and multi-tap MVDR baselines on all objective metrics while cutting WER to 12.73%. Cross-source nuance vs. [[concepts/eabnet|EaBNet]] (Li et al. 2022): EaBNet found reinserting explicit SCM computation into an all-neural beamformer *hurts*, while ADL-MVDR keeps explicit SCMs as RNN inputs and wins — together suggesting the closed-form inversion/eigendecomposition, not the SCM itself, is the limiting stage.
+
 ## Related Concepts
 
 - [[concepts/beamforming|Beamforming]]
@@ -91,6 +96,7 @@ The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-
 - [[concepts/differential-asr|Differential ASR]] — framework where MVDR is one of several parallel frontends (Yang et al. 2025)
 - [[concepts/parametric-multi-channel-wiener-filter|Parametric Multi-Channel Wiener Filter (PMWF)]] — MVDR is the $\beta = 0$ distortionless endpoint
 - [[concepts/eabnet|EaBNet]] — all-neural causal beamformer that surpasses oracle-mask MB-MVDR
+- [[concepts/adl-mvdr|ADL-MVDR]] — GRU networks replace the matrix inversion and PCA inside the MVDR solution for frame-level weights
 
 ## Related Sources
 

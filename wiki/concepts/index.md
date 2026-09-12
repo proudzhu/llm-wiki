@@ -508,4 +508,5 @@
 | [[concepts/neuralpmwf\|NeuralPMWF]] | Hybrid MCSE where a tiny DNN fully controls the PMWF: mask-derived covariances, learned frequency-dependent smoothing, SPP-scheduled dynamic β | 2026-09-11 |
 | [[concepts/splitgru\|SplitGRU]] | GRU variant splitting the hidden dimension into R parallel smaller GRUs, cutting compute by ~R× | 2026-09-11 |
 | [[concepts/eabnet\|EaBNet]] | Embedding and Beamforming Network — causal all-neural beamformer with 3-D spectral-spatial embedding and direct framewise weight regression | 2026-09-11 |
+| [[concepts/adl-mvdr\|ADL-MVDR]] | All deep learning MVDR beamformer: replaces matrix inversion and PCA with GRU networks for stable joint training and frame-level weights | 2026-09-12 |
 

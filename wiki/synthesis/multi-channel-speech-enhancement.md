@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-16
-updated: 2026-09-11
+updated: 2026-09-12
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
@@ -33,6 +33,7 @@ sources:
   - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
   - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
   - raw/papers/li-2022-embedding-beamforming/full-text.md
+  - raw/papers/zhang-2021-adl-mvdr/full-text.md
 tags:
   - multi-channel-speech-enhancement
   - beamforming
@@ -99,6 +100,7 @@ The distinction: this synthesis is about **spatial filtering** (beamforming, coh
 | [[sources/frank-2026-low-latency-roi-beamforming\|Frank & Cohen 2026]] | 2026 | Application | Time-domain vs STFT-domain ROI beamforming for smart glasses: 2× lower latency, higher DF, at higher compute |
 | [[sources/grinstein-2025-tiny-param-mwf\|Grinstein et al. 2025 (NeuralPMWF)]] | 2025 | Hybrid | Tiny DNN (164.9k params, 24.95 MMACs/s) fully controls the PMWF: mask-derived covariances with learned frequency-dependent smoothing + SPP-scheduled dynamic $\beta$ |
 | [[sources/li-2022-embedding-beamforming\|Li et al. 2022 (EaBNet)]] | 2022 | Estimate what | All-neural causal framewise beamformer; implicit spectral-spatial embedding beats explicit SCM reinsertion and surpasses oracle-IRM MB-MVDR |
+| [[sources/zhang-2021-adl-mvdr\|Zhang et al. 2021 (ADL-MVDR)]] | 2021 | Hybrid | All-deep-learning MVDR: GRU-Nets replace the matrix inversion and PCA inside the MVDR closed form; frame-level weights; joint training stabilized where closed-form inversion was not |
 
 ## Insight 1: The Classical Coherence/CDR Lineage — DOA-Independence as the Key Relaxation
 
@@ -156,6 +158,8 @@ Across the whole corpus, MCSE methods can be placed on a single spectrum of **wh
 **The tradeoff**: moving down the spectrum relaxes assumptions (DOA → coherence → SCM → direct weights) but sacrifices interpretability and controllability. Schwarz 2015's CDR estimators expose a clean physical quantity (coherent-to-diffuse ratio) with a geometric interpretation in the complex plane; Zaidel 2026's deep beamformer produces weights that satisfy constraints only statistically via the loss function. The 2026 **hybrid** methods (Steps 4–5) deliberately stop short of Step 6 to preserve the ability to inspect and control the filter — HVSF exposes the VSLF tradeoff parameter $\mu$ and span dimension $Q$, R-MWF exposes variance ratios $\psi_i, \psi_R, \psi_V$, Farmani's virtual-mic MVDR exposes the RTF power $\lambda$.
 
 **The Step-4→6 boundary tested directly (Li 2022)**: [[sources/li-2022-embedding-beamforming|Li et al. 2022 (EaBNet)]] run the controlled experiment this spectrum previously lacked — a Step-6 system (direct framewise weights from a learned spectral-spatial embedding) versus the same system with an explicit Step-4 stage reinserted (predicted speech/noise masks → SCMs → concatenated into the weight network, the GST-RNN recipe). The purely implicit version wins (avg. PESQ 3.52 vs. 3.46), and the Step-6 system even surpasses an oracle-IRM MB-MVDR (3.10). The authors' diagnosis: the SCM is sparse, redundant for spectral-temporal representation, and — as second-order statistics — cannot capture the higher-order spatial statistics a data-driven embedding can learn. This is the empirical counterpoint to the interpretability argument for stopping at Step 4: in end-to-end training, the classical statistic is not merely uncontrollable, it is a *bottleneck*.
+
+**The intermediate point on the spectrum (Zhang 2021)**: a year before EaBNet, [[sources/zhang-2021-adl-mvdr|Zhang et al. 2021 (ADL-MVDR)]] occupied the cell between Steps 4 and 6 — keep the explicit SCMs as network *inputs*, but replace the closed-form operations on them (matrix inversion, PCA for the steering vector) with two GRU-Nets that recursively produce **frame-level** MVDR weights. Read against EaBNet's diagnosis, the two results together locate the bottleneck more precisely than either alone: EaBNet shows SCM reinsertion hurts when the *closed-form weight computation* downstream is a learned network competing with the statistics, while ADL-MVDR shows explicit SCMs are a useful input representation when the closed-form operations themselves are neuralized — suggesting the unstable/limiting stage is the matrix inversion/eigendecomposition, not the SCM. ADL-MVDR also contributes the frame-level vs. utterance-level weights data point: recursively predicted per-frame weights cut the residual noise of utterance-level mask-based MVDR (~17% PESQ, WER 15.91% → 12.73% on a 15-channel Mandarin corpus).
 
 **A Step-1 variant — DOA as an SNR cue rather than a weights cue**: [[sources/kim-2014-doa-based-snr-estimation|Kim & Kim 2014]] show that the DOA cue can enter the pipeline at a different stage altogether: instead of converting a steering vector into spatial-filter weights, the phase difference of the time-aligned dual microphones is converted into a [[concepts/target-to-non-target-directional-signal-ratio|TNR]] and then a [[concepts/doa-based-snr-estimation|DOA-based a priori SNR]] for a single-reference [[concepts/wiener-filter|Wiener gain]]. This is Step-1 prior information driving a Step-2/3-style post-filter, and it quantifies the small-array ceiling of the classical beamforming branch directly: a dual-microphone SDB (Step 1 applied literally) was consistently the *worst* method in their benchmark, while the same two microphones used as a phase-difference cue beat every conventional baseline — the number of microphones constrains the SDP of a beamformer but not the information content of the inter-channel phase.
 

@@ -567,6 +567,9 @@
 | [[entities/shanmukha-srinivas\|Shanmukha Srinivas]] | Ohio State University — co-author of NeuralPMWF | 2026-09-11 |
 | [[entities/sanha-lee\|Sanha Lee]] | Meta Reality Labs — co-author of NeuralPMWF and Spatial-Magnifier | 2026-09-11 |
 | [[entities/cagdas-bilen\|Çağdaş Bilen]] | Meta Reality Labs — co-author of NeuralPMWF | 2026-09-11 |
+| [[entities/zhuohuang-zhang\|Zhuohuang Zhang]] | Columbia University — first author of ADL-MVDR; neural beamforming and speech separation | 2026-09-12 |
+| [[entities/shi-xiong-zhang\|Shi-Xiong Zhang]] | Ohio State University — speech separation, far-field speech recognition | 2026-09-12 |
+| [[entities/lianwu-chen\|Lianwu Chen]] | Amazon Alexa — speech processing, noise robustness | 2026-09-12 |
 
 ---
 
@@ -1080,6 +1083,7 @@
 | [[concepts/neuralpmwf\|NeuralPMWF]] | Hybrid MCSE where a tiny DNN fully controls the PMWF: mask-derived covariances, learned frequency-dependent smoothing, SPP-scheduled dynamic β | 2026-09-11 |
 | [[concepts/splitgru\|SplitGRU]] | GRU variant splitting the hidden dimension into R parallel smaller GRUs, cutting compute by ~R× | 2026-09-11 |
 | [[concepts/eabnet\|EaBNet]] | Embedding and Beamforming Network — causal all-neural beamformer with 3-D spectral-spatial embedding and direct framewise weight regression | 2026-09-11 |
+| [[concepts/adl-mvdr\|ADL-MVDR]] | All deep learning MVDR beamformer: replaces matrix inversion and PCA with GRU networks for stable joint training and frame-level weights | 2026-09-12 |
 
 ---
 
@@ -1295,6 +1299,7 @@
 | [[sources/gerkmann-2012-mmse-noise-psd-tracking\|Gerkmann & Hendriks 2012: Improved MMSE-Based Noise PSD Tracking Using Temporal Cepstrum Smoothing]] | Replaces the limited-ML + decision-directed speech-PSD pair of MMSE-based noise PSD tracking with a single temporal-cepstrum-smoothing estimate; no explicit bias compensation, lower LogErr, ~1 dB segmental-SNR gain in babble noise at 0 dB SNR, cost = two real FFTs | 2026-09-11 |
 | [[sources/grinstein-2025-tiny-param-mwf\|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] | NeuralPMWF — a tiny DNN (164.9k params, 24.95 MMACs/s) fully controls the PMWF: mask-derived covariances with learned smoothing and SPP-driven dynamic β, beating end-to-end baselines on smartglasses MCSE | 2026-09-11 |
 | [[sources/li-2022-embedding-beamforming\|Li, Liu, Zheng & Li 2022: Embedding and Beamforming]] | EaBNet: all-neural causal framewise beamformer — implicit spectral-spatial embedding replaces explicit SCM and surpasses oracle-mask MVDR | 2026-09-11 |
+| [[sources/zhang-2021-adl-mvdr\|Zhang et al. 2021: ADL-MVDR]] | All deep learning MVDR beamformer for target speech separation: GRU-Nets replace matrix inversion and eigenvalue decomposition, enabling stable joint training and frame-level beamforming weights | 2026-09-12 |
 
 ---
 
@@ -1348,10 +1353,10 @@
 
 ## Statistics
 
-- **Total pages**: 1297
-- **Entities**: 557
-- **Concepts**: 504
-- **Sources**: 206
+- **Total pages**: 1302
+- **Entities**: 560
+- **Concepts**: 505
+- **Sources**: 207
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-09-12

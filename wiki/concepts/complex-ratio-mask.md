@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-20
-updated: 2026-09-06
+updated: 2026-09-12
 sources:
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
+  - raw/papers/zhang-2021-adl-mvdr/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -16,6 +17,8 @@ The **Complex Ratio Mask (cRM)** is a mask-based speech enhancement target that 
 
 A compressed-domain variant appears in [[sources/zhao-2026-spectrally-adaptive-loss|Zhao & Madhu 2026]]'s [[concepts/hyst-net|HyST-Net]]: the network estimates a complex-valued ideal ratio mask in the power-law-compressed ($c=0.3$) spectrogram domain, $\widehat{M}_c = |S|^c e^{j\phi_S}/(|X|^c e^{j\phi_X}+\gamma)$, applied to the compressed noisy spectrum and then decompressed — with a small regularisation constant $\gamma$ for numerical stability.
 
+A **complex ratio filter (cRF)** — the multi-tap T-F generalization of the cRM (a cRM is a 1×1 cRF), introduced by Mack & Habets 2019 as deep filtering — exploits neighboring T-F bins instead of pointwise multiplication; see [[concepts/deep-filtering|Deep Filtering]]. [[sources/zhang-2021-adl-mvdr|Zhang et al. 2021]] provide multi-channel evidence for the generalization: a 3×3 cRF consistently outperforms the cRM in both purely NN systems (Si-SNR 12.50 vs. 12.23 dB; WER 22.07 vs. 22.49%) and MVDR-based systems, with the gap widening when the filtered estimates recursively drive frame-level covariance computation in [[concepts/adl-mvdr|ADL-MVDR]].
+
 ## Related Concepts
 
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
@@ -25,6 +28,8 @@ A compressed-domain variant appears in [[sources/zhao-2026-spectrally-adaptive-l
 - [[concepts/ulcnet|ULCNet]]
 - [[concepts/munet|μNet]]
 - [[concepts/hyst-net|HyST-Net]] — compressed-domain cRM estimation
+- [[concepts/deep-filtering|Deep Filtering]] — multi-tap (cRF) generalization of the cRM
+- [[concepts/adl-mvdr|ADL-MVDR]] — multi-channel system where 3×3 cRF beats cRM and drives frame-level covariance estimation
 
 ## Related Sources
 
@@ -32,3 +37,4 @@ A compressed-domain variant appears in [[sources/zhao-2026-spectrally-adaptive-l
 - [[sources/shetu-2026-munet|Shetu et al. 2026: μNet]] — second-stage CRM estimation on top of a magnitude mask, inherited from the ULCNet backbone
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys cIRM (Williamson et al. 2016) and compares masking-based vs. mapping-based training targets
 - [[sources/zhao-2026-spectrally-adaptive-loss|Zhao & Madhu 2026: Spectrally Adaptive Loss for Streaming Speech Enhancement]] — compressed-domain cRM in HyST-Net
+- [[sources/zhang-2021-adl-mvdr|Zhang et al. 2021: ADL-MVDR]] — multi-channel cRM vs. cRF comparison; cRF wins consistently

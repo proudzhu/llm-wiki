@@ -561,4 +561,7 @@
 | [[entities/shanmukha-srinivas\|Shanmukha Srinivas]] | Ohio State University — co-author of NeuralPMWF | 2026-09-11 |
 | [[entities/sanha-lee\|Sanha Lee]] | Meta Reality Labs — co-author of NeuralPMWF and Spatial-Magnifier | 2026-09-11 |
 | [[entities/cagdas-bilen\|Çağdaş Bilen]] | Meta Reality Labs — co-author of NeuralPMWF | 2026-09-11 |
+| [[entities/zhuohuang-zhang\|Zhuohuang Zhang]] | Columbia University — first author of ADL-MVDR; neural beamforming and speech separation | 2026-09-12 |
+| [[entities/shi-xiong-zhang\|Shi-Xiong Zhang]] | Ohio State University — speech separation, far-field speech recognition | 2026-09-12 |
+| [[entities/lianwu-chen\|Lianwu Chen]] | Amazon Alexa — speech processing, noise robustness | 2026-09-12 |
 

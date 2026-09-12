@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-06-07
-updated: 2026-06-07
+updated: 2026-09-12
+sources:
+  - raw/papers/zhang-2021-adl-mvdr/full-text.md
 tags:
   - speech-enhancement
   - signal-processing
@@ -36,6 +38,10 @@ where $C$ are the complex coefficients of filter order $N$, $X$ is the input spe
 - Can recover signal degradations like notch-filters or time-frame zeroing that pointwise masks cannot
 - DF is a strict generalization of CRM (CRM = DF with $N=1$, $l=0$)
 
+## Two-Dimensional (Time-Frequency) Deep Filtering
+
+[[sources/zhang-2021-adl-mvdr|Zhang et al. 2021]] adopt deep filtering — under the name **complex ratio filtering (cRF)**, from Mack & Habets (2019) — as a 2-D extension: the complex filter spans a $(2K+1)\times(2L+1)$ neighborhood of *both* time and frequency (a 3×3 cRF, $K=L=1$), equivalent to a bank of shifted complex ratio masks. The cRF is applied to the multi-channel mixture to estimate speech and noise components, from which **frame-level** covariance matrices are computed for the [[concepts/adl-mvdr|ADL-MVDR]] beamformer (center-mask normalization, no summation over time). Empirically, cRF consistently outperforms the per-bin [[concepts/complex-ratio-mask|cRM]] (e.g., Si-SNR 12.50 vs. 12.23 dB; WER 22.07 vs. 22.49% for NN systems), and matters most when the downstream consumer recursively derives frame-level statistics from the filtered estimates.
+
 ## Applications
 
 - [[sources/schroter-2022-deepfilternet|DeepFilterNet]] (Schröter et al., ICASSP 2022) — two-stage speech enhancement using ERB gains + DF
@@ -49,7 +55,11 @@ where $C$ are the complex coefficients of filter order $N$, $X$ is the input spe
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
 - [[concepts/trainable-frequency-compression|Trainable Frequency Compression]] — complementary axis: DF learns a per-band temporal filter, trainable frequency compression learns a per-band frequency filter
 
+- [[concepts/complex-ratio-mask|Complex Ratio Mask]] — pointwise 1×1 special case
+- [[concepts/adl-mvdr|ADL-MVDR]] — 2-D cRF used for frame-level covariance estimation in an all-deep-learning MVDR
+
 ## Related Sources
 
 - [[sources/schroter-2022-deepfilternet|Schröter et al. 2022: DeepFilterNet]]
 - [[sources/chen-2023-ultra-dual-path-compression|Chen et al. 2023: Ultra Dual-Path Compression]] — matches DeepFilterNet quality at 1/4 the parameters by combining time and frequency compression on a DPT-FSNet backbone
+- [[sources/zhang-2021-adl-mvdr|Zhang et al. 2021: ADL-MVDR]] — 2-D (time-frequency) cRF for multi-channel frame-level covariance estimation

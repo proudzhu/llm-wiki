@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-11
+updated: 2026-09-12
 sources:
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
   - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
   - raw/papers/li-2022-embedding-beamforming/full-text.md
+  - raw/papers/zhang-2021-adl-mvdr/full-text.md
 tags:
   - array-processing
   - spatial-statistics
@@ -63,6 +64,10 @@ $$
 
 which recovers the secondary-only contribution exactly when the components are mutually independent — **without ever silencing the primary source**. [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang et al. 2026]] use the resulting auto-covariance $\boldsymbol{\Phi}_{\mathrm{RR}}^{(\mathrm{Sec})}$ and cross-covariance $\boldsymbol{\Phi}_{\mathrm{FR}}^{(\mathrm{Sec})}$ between two microphone groups to estimate a [[concepts/relative-transfer-matrix|Relative Transfer Matrix]] for acoustic-feedback neutralization in multichannel ANC. Their ablation shows the subtraction is decisive rather than cosmetic: estimating the same matrix from total-field SCMs collapses noise reduction to ≈ −2 dB, because the persistent primary field dominates the pseudo-inverse $\boldsymbol{\Phi}_{\mathrm{FR}}^{(\mathrm{Sec})^{\dagger}}$.
 
+## Frame-Level SCMs via cRF, Inverted by GRU Networks (Zhang et al. 2021)
+
+[[sources/zhang-2021-adl-mvdr|Zhang et al. 2021]]'s [[concepts/adl-mvdr|ADL-MVDR]] estimates **frame-level** SCMs — deliberately *not* summing over time, so each frame keeps its own statistics — from complex ratio filters (3×3 cRF) applied to the multi-channel mixture, with the cRF center mask used for normalization. The inversion of the noise SCM and the PCA of the speech SCM (steering-vector extraction) are then replaced by two GRU networks that recursively accumulate covariance information across frames without heuristic updating factors. This resolves the numerical instability of closed-form matrix inversion during joint NN training. Read together with [[sources/li-2022-embedding-beamforming|Li et al. 2022]]'s EaBNet finding (explicit SCM *computation* reinserted into an all-neural beamformer hurts), ADL-MVDR's success suggests the unstable or limiting stage is the closed-form inversion/eigendecomposition — not the SCM as an input representation, which ADL-MVDR retains and exploits.
+
 ## Related Concepts
 
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
@@ -84,6 +89,7 @@ which recovers the secondary-only contribution exactly when the components are m
 - [[concepts/relative-transfer-matrix|Relative Transfer Matrix (ReTM)]] — estimated from primary-only vs total-field SCM differences
 - [[concepts/neuralpmwf|NeuralPMWF]] — mask-derived SCMs with learned frequency-dependent exponential smoothing
 - [[concepts/eabnet|EaBNet]] — learned spectral-spatial embedding that empirically beats explicit SCM computation
+- [[concepts/adl-mvdr|ADL-MVDR]] — frame-level cRF-derived SCMs whose inversion/PCA is replaced by GRU networks
 
 ## Related Sources
 
@@ -96,3 +102,4 @@ which recovers the secondary-only contribution exactly when the components are m
 - [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] — SCMs over two microphone groups, differenced to isolate the secondary-only field for feedback neutralization
 - [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — mask-derived SCM estimation with learned per-frequency exponential smoothing
 - [[sources/li-2022-embedding-beamforming|Li et al. 2022: Embedding and Beamforming]] — implicit spectral-spatial embedding empirically beats explicit SCM computation in end-to-end neural beamforming
+- [[sources/zhang-2021-adl-mvdr|Zhang et al. 2021: ADL-MVDR]] — frame-level SCMs estimated from cRF filters; inversion and PCA replaced by GRU networks

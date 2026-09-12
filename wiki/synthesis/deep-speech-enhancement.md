@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-04
-updated: 2026-09-11
+updated: 2026-09-12
 sources:
   - raw/papers/tan-2018-convolutional-recurrent-network-speech-enhancement/full-text.md
   - raw/papers/pandey-2019-cnn-speech-enhancement-time-domain/full-text.md
@@ -24,6 +24,7 @@ sources:
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
   - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
   - raw/papers/li-2022-embedding-beamforming/full-text.md
+  - raw/papers/zhang-2021-adl-mvdr/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
