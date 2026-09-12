@@ -245,7 +245,11 @@ uv run python .agents/skills/paper-reader/scripts/triage_synthesis.py --slug SLU
 
 **When in doubt**: prefer *not* updating. A thin synthesis addition adds clutter; a substantive one (1–2 sentences + a table row) is valuable. If you cannot write at least one substantive sentence about what the paper *contributes to the cross-source analysis*, skip.
 
-**Applying a synthesis update** typically means 4–6 edits to the *same* file: frontmatter `sources:` + `updated:`, frontmatter `tags:`, a row in the Sources Synthesized table, a paragraph in the matching insight, possibly a takeaway and an open question. Apply these **sequentially, one Edit per message** — parallel edits to one file race and silently drop each other (see "Same-File Edit Discipline" above; the Sun 2024 ingest lost 3 of 5 synthesis edits this way). Afterwards, Grep the file for the new slug to confirm all edits landed.
+**Applying a synthesis update** typically means 4–6 edits to the *same* file: frontmatter `sources:` + `updated:`, frontmatter `tags:`, a row in the Sources Synthesized table, a paragraph in the matching insight, possibly a takeaway and an open question. Apply these **sequentially, one Edit per message** — parallel edits to one file race and silently drop each other (see "Same-File Edit Discipline" above; the Sun 2024 ingest lost 3 of 5 synthesis edits this way).
+
+**Verify synthesis edits landed (mandatory)**: after the *last* edit to each synthesis page, Grep the file for the new slug and confirm it appears in **both** places you intended — the frontmatter `sources:` list *and* the Sources Synthesized table row (plus any insight paragraph). The frontmatter edit is the one most often lost: it is the first of the sequential edits and produces no visible change in the rendered page. In the ADL-MVDR ingest, an entire synthesis update (frontmatter + row) was believed complete but never landed in `deep-speech-enhancement.md` — caught only because this Grep was re-run at the start of the *next* session (`pitfalls.md` #49).
+
+**Resumed sessions: re-verify before Step 10.** When a conversation continues from a summary (context was compacted), treat every "completed" edit claim as unverified: Grep each synthesis page (and any concept page claimed updated) for the new slug before moving on. A handoff summary can describe an edit that was never actually applied, or an edit that raced and was silently dropped.
 
 ### Step 10: Update Indexes
 
@@ -292,6 +296,15 @@ uv run python .agents/skills/paper-reader/scripts/append_log.py --op ingest \
     --title "Paper Title (Author Year)" --file .tmp_log_entry.md
 ```
 
+For short entries, `--body "..."` avoids the temp file:
+
+```bash
+uv run python .agents/skills/paper-reader/scripts/append_log.py --op ingest \
+    --title "Paper Title (Author Year)" --body "Created ...; updated ... ."
+```
+
+The script takes **no positional arguments** — `--op`, `--title`, and one of `--body`/`--file`/`--stdin` are required flags. Calling it as `append_log.py ingest "Title" --details "..."` exits 2 with the usage message (`pitfalls.md` #50); check `--help` first if unsure of a script's signature.
+
 Entry body format (temp file):
 
 ```markdown
@@ -317,6 +330,8 @@ uv run python .agents/skills/paper-reader/scripts/verify_wikilinks.py --slug SLU
 ```
 
 Checks both `[[category/slug]]` wikilinks and `![[raw/...]]` figure embeds against the filesystem, and flags LaTeX math (`$...$`) in wikilink/embed display text — math aliases mangle the pipe-escaping and abort the build (`pitfalls.md` #44). A single-character hash typo in a MinerU figure filename (`...151105...` vs `...158105...`) aborts the mkdocs build — this check catches it here, before the 60+ second build cycle. Scans the source page + all new/modified `wiki/*.md` files; exits 0 if all links resolve, 1 if broken links found. Fix any broken links (create the missing page, correct the slug, or use plain text; for embeds, Glob the `figures/` dir with a hash prefix and copy the exact filename) before proceeding to 12b.
+
+Do **not** substitute the wiki-lint `check_broken_links.py` here: it scans the whole vault and reports hundreds of *pre-existing* convention violations (bare slugs, `wiki/` prefixes, `../` prefixes from legacy pages), drowning the signal for the files this ingest touched. `verify_wikilinks.py --slug` is scoped to exactly the new/modified pages; if you do run the vault-wide checker, grep its output for the new slugs rather than reading the full report.
 
 **Step 12b — MkDocs strict build**:
 
