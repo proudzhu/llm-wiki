@@ -5231,3 +5231,26 @@ Indexes and statistics updated (total 1295 pages).
 ## [2026-09-12] ingest | ADL-MVDR: All Deep Learning MVDR Beamformer for Target Speech Separation (Zhang et al. 2021)
 
 Created source page zhang-2021-adl-mvdr, concept pages adl-mvdr and numerical-stability (stub rewritten), entity pages for Zhuohuang Zhang, Shi-Xiong Zhang, Lianwu Chen. Updated mvdr-beamformer, deep-filtering, complex-ratio-mask, spatial-covariance-matrix, neural-beamforming, gated-recurrent-unit, and entity pages for Yong Xu, Meng Yu, Dong Yu. Synthesis updates: multi-channel-speech-enhancement (new Hybrid row + Insight 3 refinement locating the tandem bottleneck in closed-form inversion, not SCM), deep-speech-enhancement (sources list). Statistics: 1302 total pages.
+
+---
+
+## [2026-09-12] ingest | Bone Conducted Signal Guided Speech Enhancement for Voice Assistant on Earbuds (Heitkaemper et al. 2025)
+
+- **Source**: `raw/papers/heitkaemper-2025-bcs-speech-enhancement-earbuds/full-text.txt` (Zotero: Y8SU4C7T)
+- **Authors**: Jens Heitkaemper, Joe Caroselli, Max McKinnon, Arun Narayanan, Nathan Howard
+- **Published**: Proc. IEEE ICASSP 2025
+- **DOI**: 10.1109/ICASSP49660.2025.10889416
+- **Summary**: ICASSP 2025 publication of the Google patent system (US20260073929A1): streaming Conformer mask estimator fusing single-channel ACS with band-limited BCS (500 Hz cutoff, FF upscaling, 6.25% transmission bandwidth, <1.5% absolute WER cost), trained with ASR-loss + SI-SNR (λ=1e-4) on 50k h simulated + 6 h real earbud data; VAD-on-BCS gating bypasses the enhancer for uninformative BCS (~30% of recordings); outperforms multi-channel TfCleanformer baselines at RTF 0.01 on 3 of 4 realistic test sets.
+- **Extraction**: MinerU failed twice ("parsing failed"); fell back to pypdf plain text via extract_pdftotext.py (29 KB, no figures)
+- **Pages created**:
+  - `raw/papers/heitkaemper-2025-bcs-speech-enhancement-earbuds/full-text.txt` — extracted text
+  - `wiki/sources/heitkaemper-2025-bcs-speech-enhancement-earbuds.md` — source page with NN model documentation (mermaid diagram, spec table, training losses)
+- **Pages updated**:
+  - `wiki/entities/jens-heitkaemper.md`, `wiki/entities/joseph-caroselli-jr.md`, `wiki/entities/max-mckinnon.md`, `wiki/entities/arun-narayanan.md`, `wiki/entities/nathan-howard.md` — appended ICASSP 2025 paper to Key Contributions and Related Sources
+  - `wiki/concepts/bcs-guided-speech-enhancement.md` — added paper sources, ICASSP loss specification, new Empirical Validation section, updated comparison table
+  - `wiki/concepts/voice-activity-detection.md` — added "VAD on Bone-Conducted Signals as Enhancer Quality Gate" section (modality-validity gate role)
+  - `wiki/concepts/bone-conduction.md` — added BCS transmission bandwidth reduction subsection
+  - `wiki/concepts/wearer-speech-recognition.md` — added BCS-guided enhancement + ASR row to approaches table
+  - `wiki/synthesis/multimodal-bc-speech-enhancement.md` — rewrote §2.7 (Industry Deployment) with the paper's empirical results, extended §3.1 (bandwidth thrift), added §4 benchmark row
+  - `wiki/sources/heitkaemper-2026-bcs-speech-enhancement-earbuds.md` — added backlink to the ICASSP publication
+  - `wiki/index.md`, `wiki/sources/index.md` — added 1 source entry; statistics updated

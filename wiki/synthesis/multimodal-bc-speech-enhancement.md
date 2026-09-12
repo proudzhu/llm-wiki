@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-22
-updated: 2026-08-15
+updated: 2026-09-12
 sources:
   - wiki/sources/tagliasacchi-2020-seanet.md
   - wiki/sources/zhang-2022-bone-conducted-speech-dissertation.md
@@ -11,6 +11,7 @@ sources:
   - wiki/sources/liu-2025-robust-fusion-bc-ac-attention.md
   - wiki/sources/dai-2026-speech-preserving-deep-anc.md
   - wiki/sources/heitkaemper-2026-bcs-speech-enhancement-earbuds.md
+  - wiki/sources/heitkaemper-2025-bcs-speech-enhancement-earbuds.md
   - wiki/sources/han-2026-quality-aware-earable-se.md
   - wiki/sources/lugo-2026-diffvqe.md
   - zotero://select/items/0_B92ER5KS (Khanagha 2026: Conditional Diffusion)
@@ -97,9 +98,11 @@ Shifts from predicting clean speech to **generating** it using BC signals as gui
     - **Decoder Conditioning (DC)**: Injects BC features directly into the decoder's upsampling layers, providing superior speech naturalness (POLQA/PESQ) at the cost of higher latency.
 - **Contrastive Learning (Li, 2025)**: Uses twin-tower networks to minimize the embedding distance between AC and BC modalities, improving cross-modal feature alignment.
 
-### 2.7 Industry Deployment: BCS-Guided ASR (2026)
+### 2.7 Industry Deployment: BCS-Guided ASR (2025–2026)
 
-- **[[sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. (Google, US Patent 2026)]]**: Proposes a BCS-guided speech enhancement pipeline for earbuds targeting voice assistants. Uses a [[concepts/bcs-guided-speech-enhancement|VAD-gated dual-path]] architecture where BC signals control when enhancement activates, and the system falls back to raw AC when no BC speech is detected. Demonstrates that BCS guidance improves ASR accuracy in noisy conditions by reducing false triggering and preserving speech during silence intervals.
+- **[[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds|Heitkaemper et al. (Google, ICASSP 2025)]]**: The published version of the [[sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|US patent 2026]] system — a streaming Conformer mask estimator for earbud voice assistants that fuses a single-channel ACS with a band-limited BCS (downsampled to 500 Hz and upscaled by a feed-forward projection, cutting earbud-to-device transmission bandwidth to 6.25% for off-device enhancement on the phone). Trained with ASR-loss + SI-SNR ($\lambda_{\text{ASR}} = 10^{-4}$) on 50k h simulated data (BCS simulated by 47-tap FIR low-pass at 500 Hz), then finetuned on only ~6 h of real earbud recordings. Key results on real earbud test sets:
+  - A pretrained VAD applied to the BCS **hard-bypasses the enhancer for uninformative BCS** (~30% of realistic recordings, mostly wind) — for examples with <60% detected keyword-BCS activity (~40% of the Hard set), enhancement *degrades* the ACS below unprocessed WER. This is an inference-time modality-validity gate, complementary to Liu 2025's training-time modality dropout (§3.4).
+  - At RTF 0.01, outperforms a state-of-the-art multi-channel enhancer (TfCleanformer) finetuned for earbuds on 3 of 4 test sets; beats the 39× costlier large variant on the Dynamic set (WER 10.9 vs 16.4). >15% relative WER reduction under the hardest conditions (noise or wind ≥ 6 m/s).
 
 ### 2.8 Quality-Aware Fusion: Addressing Modality Imbalance (2026)
 
@@ -117,7 +120,7 @@ Shifts from predicting clean speech to **generating** it using BC signals as gui
 
 ### 3.1 The Bandwidth Gap (Super-Resolution)
 
-Because BC speech is missing frequencies above 2 kHz, multimodal systems must perform **Guided Super-Resolution**. Generative models (GANs and Diffusion) excel here by hallucinating plausible high-frequency details that match the low-frequency "skeleton" provided by the BC sensor.
+Because BC speech is missing frequencies above 2 kHz, multimodal systems must perform **Guided Super-Resolution**. Generative models (GANs and Diffusion) excel here by hallucinating plausible high-frequency details that match the low-frequency "skeleton" provided by the BC sensor. The converse also holds for transmission: Heitkaemper et al. 2025 exploit the low-pass characteristic to **discard** the BC signal above 500 Hz before transmission from the earbuds (restoring dimensionality with a learned upscaling projection), paying <1.5% absolute WER for 6.25% of the bandwidth — bandwidth thrift rather than bandwidth extension.
 
 ### 3.2 Real-time Implementation & Latency
 
@@ -144,6 +147,7 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 | **VibOmni** | 2023 | — | +21% PESQ | Low-latency on-device (IMU) |
 | **DenGCAN (Kuang)** | 2024 | 1.03M | +1.870 wb-PESQ | Minimum compute on ARM |
 | **ATFA (Liu)** | 2025 | 1.6M | +0.2 PESQ | Robust to sensor failure |
+| **BCS-guided SE (Heitkaemper)** | 2025 | — | >15% rel. WER | Voice-assistant ASR on earbuds; RTF 0.01, off-device |
 | **BCDM (Khanagha)** | 2026 | — | **High** | Extreme noise (-10 dB SNR) |
 | **QuaSE (Han)** | 2026 | — | +9.35% PESQ | Quality-varying in-ear modality |
 
@@ -173,6 +177,7 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 - [[sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]]
 - [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 - [[sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2026: BCS-Guided SE for Earbuds]]
+- [[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2025: BCS-Guided Speech Enhancement for Voice Assistant on Earbuds]] — ICASSP publication of the patent system, with WER/RTF evaluation (§2.7, §3.1, §4)
 - [[sources/han-2026-quality-aware-earable-se|Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone SE]]
 - [[sources/lugo-2026-diffvqe|Lugo et al. 2026: DiffVQE]] — single-step hybrid diffusion evidence for real-time generative SE (§3.2)
 

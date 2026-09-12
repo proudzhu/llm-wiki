@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-06
-updated: 2026-05-06
+updated: 2026-09-12
 tags:
   - researcher
   - speech-processing
@@ -17,7 +17,9 @@ tags:
 ## Key Contributions
 
 - BCS-guided speech enhancement for earbud voice assistants (US Patent US20260073929A1, 2026)
+- Co-authored "Bone Conducted Signal Guided Speech Enhancement for Voice Assistant on Earbuds" (ICASSP 2025) — [[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2025]]
 
 ## Related Sources
 
 - [[sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Earbuds]]
+- [[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2025: BCS-Guided Speech Enhancement for Voice Assistant on Earbuds]]

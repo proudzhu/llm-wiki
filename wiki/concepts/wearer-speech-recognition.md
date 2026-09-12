@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-08-22
-updated: 2026-08-22
+updated: 2026-09-12
 sources:
   - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
   - raw/papers/lin-2024-agadir-array-geometry-agnostic-speech-recognition/full-text.md
   - raw/papers/feng-2025-directional-source-separation-smart-glasses/full-text.md
+  - raw/papers/heitkaemper-2025-bcs-speech-enhancement-earbuds/full-text.txt
 tags:
   - speech-recognition
   - smart-glasses
@@ -33,6 +34,7 @@ Smart-glasses microphones operate in **open-field conditions**, unlike close-tal
 | Directional source separation + ASR | [[sources/feng-2025-directional-source-separation-smart-glasses\|Feng et al. 2025]] | Neural source separation as frontend to ASR |
 | [[concepts/differential-asr\|Differential ASR]] | [[sources/yang-2025-mc-differential-asr-smart-glasses\|Yang et al. 2025]] | Multiple complementary frontends (beamformer + close-mic + STD embedding) fused into a streaming RNN-T |
 | Multi-microphone Whisper (MMW) with side-talk rejection | Yang Liu et al. 2025 (ref [23] in Yang 2025) | Whisper LLM robust to side-talk via multi-mic |
+| BCS-guided enhancement + ASR | [[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds\|Heitkaemper et al. 2025]] | Earbuds: streaming Conformer mask estimator guided by the accelerometer BCS (band-limited to 500 Hz), with a VAD gate bypassing the enhancer for uninformative BCS |
 
 ## Evaluation Methodology
 
@@ -53,3 +55,4 @@ Yang et al. 2025 introduced a **HATS (head and torso simulator)** real-recorded 
 - [[sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition|Lin et al. 2024: AGADIR]]
 - [[sources/feng-2025-directional-source-separation-smart-glasses|Feng et al. 2025: Directional Source Separation for Smart Glasses]]
 - [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]]
+- [[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2025: BCS-Guided Speech Enhancement for Voice Assistant on Earbuds]] — earbud WSR via BCS-guided enhancement

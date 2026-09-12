@@ -1300,6 +1300,7 @@
 | [[sources/grinstein-2025-tiny-param-mwf\|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] | NeuralPMWF — a tiny DNN (164.9k params, 24.95 MMACs/s) fully controls the PMWF: mask-derived covariances with learned smoothing and SPP-driven dynamic β, beating end-to-end baselines on smartglasses MCSE | 2026-09-11 |
 | [[sources/li-2022-embedding-beamforming\|Li, Liu, Zheng & Li 2022: Embedding and Beamforming]] | EaBNet: all-neural causal framewise beamformer — implicit spectral-spatial embedding replaces explicit SCM and surpasses oracle-mask MVDR | 2026-09-11 |
 | [[sources/zhang-2021-adl-mvdr\|Zhang et al. 2021: ADL-MVDR]] | All deep learning MVDR beamformer for target speech separation: GRU-Nets replace matrix inversion and eigenvalue decomposition, enabling stable joint training and frame-level beamforming weights | 2026-09-12 |
+| [[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds\|Heitkaemper et al. 2025: BCS-Guided Speech Enhancement for Voice Assistant on Earbuds]] | ICASSP publication of the Google patent: streaming Conformer mask estimator fusing ACS with band-limited BCS (500 Hz, 6.25% bandwidth); VAD-gated bypass for uninformative BCS; beats multi-channel enhancer at RTF 0.01 | 2026-09-12 |
 
 ---
 
@@ -1353,10 +1354,10 @@
 
 ## Statistics
 
-- **Total pages**: 1302
+- **Total pages**: 1303
 - **Entities**: 560
 - **Concepts**: 505
-- **Sources**: 207
+- **Sources**: 208
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-09-12

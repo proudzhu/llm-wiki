@@ -26,6 +26,7 @@ tags:
 **Published**: 2026-03-12
 **URL**: [Google Patents](https://patents.google.com/patent/US20260073929A1/en)
 **Zotero**: [Q833LYDX](zotero://select/items/0_Q833LYDX)
+**Related**: The same system was published at ICASSP 2025 with full experimental evaluation — [[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2025: BCS-Guided Speech Enhancement for Voice Assistant on Earbuds]]
 
 ## Summary
 

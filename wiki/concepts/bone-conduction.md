@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-05-16
+updated: 2026-09-12
 sources:
   - wiki/sources/kuang-2024-lightweight-speech-enhancement-bone-air.md
   - wiki/sources/liu-2025-robust-fusion-bc-ac-attention.md
   - wiki/sources/wang-2022-fusing-bc-ac-complex-domain-se.md
+  - wiki/sources/heitkaemper-2025-bcs-speech-enhancement-earbuds.md
 tags:
 - acoustics
 - audio-processing
@@ -45,6 +46,9 @@ A practical concern with wearable BC sensors is intermittent invalidity (loose c
 ### 6. Ear Canal Deformation and In-Ear Speech Quality
 In-ear microphones capture bone-conducted speech through the sealed ear canal. However, [[concepts/ear-canal-deformation|Ear Canal Deformation (ECD)]] induced by articulatory gestures alters air pressure inside the sealed cavity, degrading in-ear speech quality via a stuck-at-low microphone fault. Han et al. (2026) address this with [[concepts/quality-aware-speech-enhancement|Quality-Aware Speech Enhancement (QuaSE)]], which dynamically weights in-ear features based on self-assessed quality before fusion with airborne speech.
 
+### 7. BCS Transmission Bandwidth Reduction
+The low-pass characteristic of the bone conduction transfer function can be exploited to cut the bandwidth that must be transmitted from earbuds to a connected recognition device: [[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2025]] show that limiting the BCS to frequencies below 500 Hz (with anti-aliasing downsampling plus a learned feed-forward upscaling of the band-limited signal) costs less than 1.5% absolute WER while using only 6.25% of the original transmission bandwidth.
+
 ## Related Concepts
 
 - [[concepts/ear-canal-occlusion-effect|Ear Canal Occlusion Effect]]
@@ -64,3 +68,4 @@ In-ear microphones capture bone-conducted speech through the sealed ear canal. H
 - [[sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
 - [[sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]]
 - [[sources/han-2026-quality-aware-earable-se|Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone SE]]
+- [[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2025: BCS-Guided Speech Enhancement for Voice Assistant on Earbuds]]

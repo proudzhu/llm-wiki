@@ -1,0 +1,557 @@
+Bone Conducted Signal Guided Speech
+Enhancement For V oice Assistant on Earbuds
+Jens Heitkaemper, Joe Caroselli, Max McKinnon, Arun Narayanan, Nathan Howard
+Google LLC, U.S.A
+heitkaemper@google.com
+Abstract—In this work we present a multi-modal, streaming
+enhancement network to improve speech recognition for voice
+assistants on earbuds. The proposed model is guided by a bone
+conducted signal (BCS) to separate the interfering sources from
+the target speaker signal. We train the model on a simulated
+speech enhancement training set with a simulated BCS and
+ﬁnetune it on a small earbuds speciﬁc training set, consisting
+of about 6 hours of speech. To account for distorted BCS the
+enhancement module is complemented by a voice activity-based
+decision to discard the enhanced output for BCS without speech
+information. A possibility to preprocess the BCS to account for
+the low-pass characteristic of the bone conduction is evaluated to
+lower the required transmission bandwidth from the earbuds to
+the recognition device. The results show that the BCS bandwidth
+can be reduced to 500 Hz with only small losses in word error
+rate. In comparison with a larger state-of-the-art multi-channel
+enhancement method, the systems, with and without bandwidth
+reduction, demonstrate superior performance on most of the
+considered realistic test sets.
+Index Terms—Speech enhancement, Bone conducted speech
+I. I NTRODUCTION
+V oice commands on earbuds is an increasingly common in-
+teraction with digital assistants. This development is supported
+by the improved performance of today’s automatic speech
+recognition (ASR) systems. However, recognition performance
+still suffers in low signal-to-noise ratio (SNR) environments
+and in scenarios with overlapping speech. Reducing the impact
+of both environmental noise and overlapping speech on the
+ASR performance has been a focus of research in recent years.
+One distinction between the approaches currently focused
+on by research is whether auxiliary information is used for
+enhancement. In other words, whether the systems perform
+enhancement only using the input microphone signal [1] or
+whether the approach utilizes additional information that is not
+presented to the ASR system. Examples for such information
+are speaker embeddings [2], enrollment utterances [3], noise
+information [4] or multi-channel input [5] or, in the case of
+earbuds, the bone conducted signal (BCS) [6].
+On enhancement method speciﬁc for buds uses BCSs
+recorded by an accelerometer for speech enhancement [7],
+[8], [9], [10]. The BCS directly captures the target speech
+by recording the speaker’s skull vibration caused by the vocal
+chord activity. Therefore, the signal is less affected by inter-
+fering environmental sounds [11]. In [12] and [13] the target
+speech is regenerated from the BCS by artiﬁcial bandwidth
+extension. However, most research focuses on combining BCS
+with an air conducted signal (ACS) recorded at the outer mics
+of the earbuds [7], [8], [9], [11], [14]. A majority of the
+research mentioned above focuses on on-device enhancement
+[8], [11]. However, the considered use-case of a voice assistant
+should be device independent. Therefore, this work assumes
+that the enhancement is performed on a connected device,
+e.g., a phone. Running the algorithm on a separate device
+increases the possibility for more computationally complex
+models at the cost of potentially reducing the number of
+available signals, since each additional signal sent from the
+earbuds increases the required transmission bandwidth.
+In this work a multi-modal enhancement system guided
+by the BCS and optimized to improve ASR performance for
+voice assistants is presented. Different from [15] we propose a
+modular approach enhancing the ACS prior to the ASR model.
+[9] and [16] propose time domain multi-modal enhancement
+networks for earbuds. However, [17] has shown the beneﬁt of
+frequency domain enhancement models. Therefore, we focus
+on a short-time Fourier transform (STFT) domain model with
+an architecture similar to [18] for mask estimation. In contrast
+to [8], [14], [16] we propose to use different input pipelines for
+the BCS and ACS by adding a preprocessing step limiting the
+BCS frequency range, thereby utilizing the low-pass charac-
+teristic of the bone conduction. While this preprocessing step
+substantially reduces the required transmission bandwidth, it
+only slightly increases the word error rate (WER).
+Previous research assumes mostly clean BCSs [8], [11].
+However, in realistic scenarios, especially under windy con-
+ditions, the BCS can be uninformative. Therefore, this work
+combines the enhancement network with a neural network
+(NN)-based voice activity detection (V AD) system on the BCS
+to ensure that the enhancement is only applied for informative
+BCSs. Realistic recordings, performed for this work, show
+that roughly 30 % of earbuds data includes uninformative
+BCSs, emphasizing the need for a solution. The proposed
+model is evaluated on earbuds data, recorded in different noise
+scenarios. An ablation study is performed to emphasize the
+beneﬁts of some of the design decisions. Additionally, the
+model is shown to outperform a state-of-the-art multi-channel
+enhancement model [18], ﬁnetuned for the earbuds task.
+The rest of the paper is structured as follows. Section II
+introduces the proposed enhancement network and Section III
+discusses solutions to deal with distorted BCSs. In Section IV
+both the training and evaluation data sets are described. The
+evaluation results are presented in Section V. Finally, the paper
+concludes in Section VI with a short summary and discussion.
+ICASSP 2025 - 2025 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) | 979-8-3503-6874-1/25/$31.00 ©2025 IEEE | DOI: 10.1109/ICASSP49660.2025.10889416
+Authorized licensed use limited to: BEIHANG UNIVERSITY. Downloaded on July 01,2025 at 02:48:24 UTC from IEEE Xplore.  Restrictions apply. 
+
+STFT
+STFT
+Mask
+Estimator
+ ISTFT
+yt
+bt
+Y𝓁,f
+B𝓁,f
+ˆM𝓁,f
+ ˆxt
+Fig. 1. Block diagram of the proposed BCS guided speech enhancement
+system. The green blocks do not include trainable parameters, the blue blocks
+are pretrained on simulated data and then ﬁne-tuned on real earbuds data and
+the red block is only trained on real earbuds data.
+II. BCS-G UIDED ENHANCER
+Many earbud devices record signals with multiple micro-
+phones while only one channel is sent to the ASR system in
+most applications. Therefore, we focus on the single chan-
+nel use-case where the frequency representation Y𝓁,f of the
+recorded signal yt (t as the sample index) at time frame 𝓁
+and frequency bin f is represented by (using the convolutive
+transfer function approximation [19]):
+Y𝓁,f =H𝓁,f∗S𝓁,f +N𝓁,f =X𝓁,f +N𝓁,f, (1)
+where S𝓁,f and N𝓁,f represent the STFT coefﬁcients of the
+clean target speech signal and the noise signal.H𝓁,f is a vector
+of STFT coefﬁcients of the transfer function from the target
+speaker to the microphone and ∗ is the convolution operator.
+The STFT coefﬁcients B𝓁,f of the BCS signal bt recorded
+by an accelerometer can be represented as:
+B𝓁,f =G𝓁,f∗S𝓁,f +GN
+𝓁,f∗N𝓁,f +U𝓁,f, (2)
+with G𝓁,f as the bone conduction transfer function, GN
+𝓁,f as
+the noise leakage function of the bone conduction channel, and
+U𝓁,f as the microphone noise. Note, that in many applications
+GN
+𝓁,f∗N𝓁,f and U𝓁,f are assumed to be negligible [20]. G𝓁,f
+exhibits a low pass characteristic suppressing most of the target
+speech for higher frequencies [11].
+The proposed BCS guided enhancement system displayed in
+Fig. 1 consists of three types of building blocks. Those without
+trainable parameters (green), those pretrained on simulated
+data and ﬁnetuned on real earbuds recordings (blue) and those
+only trained during ﬁnetuning (red). The non-trainable blocks
+consists of a downsampling block, with an anti-aliasing ﬁlter,
+which reduces the sampling rate to 2·f BCS
+max . This block prevents
+the model from using frequency bins that do not include
+speech information due to the low pass characteristic of G𝓁,f .
+The band-limited signal is upscaled to the original number
+of frequency bins by a simple feed forward (FF) projection
+layer. Preliminary experiments have shown that training this
+upscaling layer without pretraining leads to improved results.
+Finally, the upscaled BCS and the ACS are concatenated
+and fed to a conformer layer. This combination of BCS and
+ACS is similar to the early-fusion described in [8]. This type
+of fusion was chosen, since it achieved competitive results in
+[8] and allows for streaming processing. Finally, a FF with
+BCS-guided
+enhancer
+ASR
+V AD
+yt
+bt
+ˆxt
+Fig. 2. Blockdiagram of the full system, in which only the orange block is
+trained using the described methodology. The yellow blocks are pre-trained
+independently and not adapted in this work.
+Sigmoid activation processes the conformer output to estimate
+a mask which is applied to the ACS.
+During pretraining and ﬁnetuning the model is trained using
+the ASR-loss described in [21] and the scale invariant (SI)-
+SNR loss [22]. To equalize the scale of the two losses the
+ASR-loss is scaled with a weight λASR.
+III. D ISTORTED BONE CONDUCTED SIGNALS
+As stated above, prior research in speech enhancement on
+BCSs assumes that the bone conduction leads to a clean speech
+signal with low-pass characteristic [11]. Some of the published
+BCS databases even take care to prevent or remove examples
+with distorted BCSs [15], [23]. However, in realistic scenarios
+those distortions exist and may mask the speech information,
+which can lead enhancement systems trained only on clean
+BCSs to further degrade the ACS. In those cases using the
+enhancement system may lead to a higher error rate compared
+to directly transcribing the ACS. We found that roughly 30 %
+of our recorded earbuds data included uninformative BCSs.
+Here, uninformative means that the BCS does not contain
+discernible speech patterns, despite speech activity in the ACS.
+There are multiple solutions to deal with distorted BCSs.
+One is to add noise to the BCS during training of the enhance-
+ment system. However, this may lead to worse performance
+on clean BCSs and does not help if the BCS does not contain
+speech information. Therefore, this work focuses on detecting
+those uninformative BCSs and only applying the enhancer for
+informative BCSs. We propose to apply a pretrained V AD
+system, designed to detect speech in an ACS, on the BCS
+to detect uninformative BCSs. This solution has the beneﬁt
+of being independent of earbuds speciﬁc training data and
+allowing streaming processing. Preliminary experiments show
+that the V AD results are highly correlated with our subjective
+assessment of speech presence in the BCS signal.
+The ﬁnal system consisting of the enhancer, the V AD and
+the ASR system is displayed in Fig. 2. In case of voice
+assistant queries the uninformative BCS detection can be
+applied to the keyword BCS to reduce potential latency.
+IV. D ATABASE
+The following section describes the training data for the
+enhancement system and the evaluation data. All data in this
+work is sampled at 16 kHz. Both the V AD and ASR block in
+Fig. 2 are used without retraining on earbuds speciﬁc data and
+are therefore not addressed in the training data discussion.
+Authorized licensed use limited to: BEIHANG UNIVERSITY. Downloaded on July 01,2025 at 02:48:24 UTC from IEEE Xplore.  Restrictions apply. 
+
+A. Training
+1) Pretraining set: To pretrain the model, approximately
+50k hours of speech from Librispeech [24], Librivox [25],
+and internal vendor-collected utterances were used. Librivox
+was segmented to create 18M utterances with length from
+3 to 15 seconds. These were combined with the 281k Lib-
+rispeech utterances and 1.9M from the vendor-collected set.
+Reverberation and noise were added to these utterances using
+a room simulator [26] to model a single channel ACS. Noise
+was applied from internally collected sets from conditions
+including cars, cafes, and kitchens as well as from the freely
+available noise sources Getty [27] and YouTube Audio Library
+[28]. In addition, randomly selected speech from the training
+sets was selected to emulate multi-talker conditions. The
+applied SNR ranges from -10 to 30 dB while reverberation
+T60 times from 0 to 900 ms are used.
+The BCS is generated by passing the reverberant speech
+(without added noise) through a low-pass ﬁlter. The low-pass
+ﬁlter is a ﬁnite-impulse response ﬁlter designed using the
+window method with 47 coefﬁcients and a corner frequency
+of 500 Hz. The low-pass signal is attenuated between 7 and
+13 dB to generate the simulated BCS. Values for the ﬁlter
+parameters and attenuation were empirically selected.
+2) Finetuning set: The ﬁnetuning set consists of internally
+made earbuds recordings in clean scenarios. These recordings
+are corrupted by adding realistic noise, e.g. wind noise, that
+has been recorded with earbuds. Note that no noise is added
+to the BCS since the model is only applied for clean BCSs, as
+discussed above. The set consists of 5 k utterances recorded
+by 45 speakers. The average utterance length is around 4 s
+to match the short commands expected by a voice assistant,
+leading to an approximate total of 6 hours of audio.
+B. Evaluation
+Evaluation is performed on more than 5 hours of inter-
+nally recorded real earbuds speech, simulating voice assistant
+queries. It includes audio from more than 30 speakers with
+roughly 70 % male and 30 % female speakers. The data
+includes both native and non-native English speakers, aged
+between 20 and 50 years.
+To create realistic scenarios different environmental noises
+are played at sound pressure levels between 30 and 80 dBA
+during the recordings. Environmental noise includes indoor
+recordings from a cafe, a bar with music, a marketplace, and
+a train station, all with background chatter. Two additional
+environmental dimensions may be added in: wind and non-user
+non-stationary speech. Since earbud recordings may include
+distortions due to windy weather, wind at 0- 6 m/s measured
+at the earbud is generated by a wind machine as an additional
+challenge during some of the recordings. As another challenge
+some recordings include a person walking around the earbud
+wearer while talking, pretending to have a phone call, to
+simulate overlapping speech.
+The recorded evaluation data was split into four non-
+overlapping subsets. One with and three sets without the
+interfering speaker. An overview of the data sets is displayed
+TABLE I
+OVERVIEW OVER THE EARBUDS TEST SETS USED TO EVALUATE THE
+ENHANCEMENT MODELS .
+Dataset Duration Noise SPL Wind speed Multi talkerin hours in dBA in m/s
+Easy 0.94   
+Moderate 2.10 30-50 0-3 
+Hard 1.40 30-80 0-6 
+Dynamic 0.74 30-80 0-6 
+in Table I. Note, that examples are added to the hard set if
+either their sound pressure level (SPL) is at or above 70 dBA
+or the wind speed is at or above 6 m/s. Therefore, the hard
+set may include examples without wind if the SPL of the
+environmental noise is above this threshold.
+V. E VALUATION
+In this section, the proposed system is evaluated on the
+data described in Section IV-B. Since the model is speciﬁ-
+cally designed to improve voice assistants, the model and its
+components are evaluated in terms of WER. The V AD system
+presented in [29] and the ASR model described in [30] are
+chosen for this work. To quantify the inference speed the real
+time factor (RTF) is reported for all models. Here, the RTF is
+deﬁned as the number of seconds required to process a signal
+divided by the duration of that signal. The RTF is calculated on
+a single core of a CPU, Intel(R) Xeon(R) CPU @ 2.20 GHz.
+All BCS guided networks are pretrained for 500 k steps
+on the simulated set described in Section IV-A1 and ﬁne-
+tuned for 50 k steps on the more realistic set introduced in
+Section IV-A2. The models are optimized using the well-
+know ADAM algorithm with gradient clipping and learning
+rate decay. For all models the ASR-loss weight is ﬁxed at
+λASR = 1e− 4 and a window size 32 ms and shift 16 ms
+are used in the ACS STFT with size 512. For the BCS, while
+window size and shift stay the same, the STFT size is reduced
+by the factor 8 kHz/f BCS
+max due to the reduced sampling rate.
+A. BCS frequency range reduction
+Other published enhancement networks, which rely on BCS
+to estimate a mask for the ACS use either a time-domain input
+[16] or the full spectrum of the BCS as input [8]. To reduce
+the bandwidth this work evaluates the impact of reducing the
+BCS to frequencies below f BCS
+max on the WER. The sampling
+rate is 16 kHz sof BCS
+max of 8 kHz corresponds to full bandwidth.
+In Fig. 3 the WER on the full hard test set for for different
+f BCS
+max with and without the upscaling module are shown. Note,
+that these results are calculated on the full set without special
+treatment for distorted BCSs.
+Utilizing the upscaling module leads to an increased per-
+formance across the considered range of f BCS
+max with the ex-
+ception of 1 kHz. This result implies that despite the low-pass
+characteristic of the BCS the model still beneﬁts from the
+information in the higher frequency bands. The model with
+f BCS
+max = 500 Hz and the upscaling module shows the best ratio
+between bandwidth reduction and WER increase, with less
+than 1.5 % absolute WER increase and a bandwidth reduction
+to 6.25 % of the original bandwidth.
+Authorized licensed use limited to: BEIHANG UNIVERSITY. Downloaded on July 01,2025 at 02:48:24 UTC from IEEE Xplore.  Restrictions apply. 
+
+0.25 0.5 1 2 4 8
+14
+16
+18
+f BCS
+max in kHz
+WER in %
+Disable Upscale
+Enable Upscale
+Fig. 3. WER results after BCS-guides enhancer for different f BCS
+max on the full
+Hard test set without V AD.
+0.0 0.2 0.4 0.6 0.8 1.0
+16
+18
+20
+22
+0
+20
+40
+60
+80
+100
+Lmax
+i in %
+WER in %
+|Si| /|S| in %
+Noisy
+Enhanced 500 Hz
+Enhanced 8 kHz
+Fig. 4. WER results on subsets Si of the hard eval set with different BCS
+quality. The black dashed line symbolizes the share of all examples in the
+hard set that is contained in each subset.
+B. Inﬂuence of VAD estimation
+In this section the impact of the distorted BCS on enhance-
+ment is evaluated. To this end, the hard test set S is split
+into I overlapping subsets Si with different quality of BCS.
+The quality of the BCSs is determined by generating a per
+frame V AD estimation on the BCS. Each subset Si consists
+of examples for which activity is detected in less than Lmax
+i
+percentage of the frames in the keyword BCS.
+The results are depicted in Fig. 4. There is a clear correlation
+between BCS quality symbolized byLmax
+i and the WER. These
+results suggests, that the enhancement distorts the noisy signal
+further, increasing the WER, for examples with less than 60 %
+detected activity in the keyword BCS. In other words, for
+around 40 % of the hard set the enhancement does not lead
+to improvements and it is beneﬁcial to run the WER on the
+unprocessed ACS instead. However, this optimal threshold is
+dependent on the data set and the exact number of frames in
+the keyword might not be known. Therefore, we decided to set
+the threshold to Lmax
+i = 0.0, which means we assume that the
+input signal leads to a better performance than the enhanced
+signal if no activity was detected in the keyword BCS.
+The WER performance with and without limiting the en-
+hancement to BCS with detected speech are displayed in
+Table II. The proposed approach leads to gains for both models
+for both the Hard and Moderate set. However, the results
+slightly degrade for the Dynamic set. These results suggest
+that using the V AD is beneﬁcial, since the gains are larger than
+the degradation on the Dynamic set. Also note that when using
+detection for uninformative BCS the performance gap between
+the 0.5 kHz versus full bandwidth model falls to 0.8 %.
+TABLE II
+WER RESULTS WITH THE PROPOSED ENHANCEMENT MODELS WITH AND
+WITHOUT THE VAD TO DETECT DISTORTED BCS. T HE BEST RESULTS PER
+SET ARE SHADED GRAY .
+System V AD WER / %
+Easy Mod. Hard Dynamic
+Unprocessed – 6.4 5.9 18 .1 17 .2
+Proposed 500 Hz  6.2 6 .8 16 .8 10 .6
+ 6.2 6 .2 15 .8 10 .9
+Proposed 8 kHz  6.3 6 .8 15 .6 10.5
+ 6.3 6 .2 15.0 10 .8
+TABLE III
+COMPARISON OF WER FOR THE PROPOSED ENHANCER WITH A
+MULTI -CHANNEL ENHANCEMENT ALGORITHM FINETUNED ON EARBUDS
+DATA. T HE CELLS WITH THE BEST VALUES PER SET ARE SHADED GRAY .
+System RTF WER / %
+Easy Mod. Hard Dynamic
+Unprocessed 0.00 6 .4 5.9 18 .1 17 .2
+McEnhancer S 0.01 6 .4 6 .5 17 .2 15 .3
+McEnhancer L 0.39 7 .5 7 .2 13.9 16 .4
+Proposed 500 Hz 0.01 6.2 6 .2 15 .8 10 .9
+Proposed 8 kHz 0.01 6 .3 6 .2 15 .0 10.8
+C. Comparison to a Multi-Channel Enhancer
+In this section the proposed algorithm is compared with a
+state-of-the-art model. The multi-channel enhancement system
+introduced in [18], from now on called McEnhancer, is used
+as a baseline. We compare with both the largest (L) and
+smallest (S) variant of McEnhancer since the smallest version
+is closer in size and speed to the considered enhancement
+model architecture. These baseline models are trained on an
+earbuds independent dataset and ﬁnetuned to the speciﬁc task
+for 50 k steps on the set described in Section IV-A2. The input
+to the model is two channels of ACS from microphones on
+the exterior of the earbuds. The V AD-based decision whether
+or not to run the enhancement is only used for the proposed
+model and not for McEnhancer, which does not use the BCS.
+The models are compared in terms of WER and RTF.
+The results are presented in Table III. Both the models with
+f BCS
+max = 500 Hz and f BCS
+max = 8 kHz show more consistent
+results than the McEnhancer. Especially on the dynamic set
+both models signiﬁcantly outperform the larger McEnhancer
+model. The larger enhancer only leads to clear improvements
+over the proposed models on the hard set, indicating some
+room for improvement by increasing the complexity of the
+proposed model.
+VI. C ONCLUSION
+In this work a novel BCS-guided enhancement network
+for voice assistants on earbuds was presented. In the most
+difﬁcult cases with interfering noise sources or wind of at least
+6 m/s, a reduction in relative WER of more than 15 % was
+demonstrated. It was shown that compliance with challenging
+transmission bandwidth requirements can be achieved through
+selection of an appropriate upper frequency and the addition of
+an upscaling module resulting in small impact on WER. The
+proposed network is shown to outperform a signiﬁcantly more
+computational-complex multi-channel enhancement networks
+ﬁnetuned on earbuds. In future work, other approaches to
+recognize distorted BCS signals should be evaluated and the
+correlation of those distortions to wind speed will be analyzed.
+Authorized licensed use limited to: BEIHANG UNIVERSITY. Downloaded on July 01,2025 at 02:48:24 UTC from IEEE Xplore.  Restrictions apply. 
+
+REFERENCES
+[1] K. Kinoshita, T. Ochiai, M. Delcroix, and T. Nakatani, “Improving
+Noise Robust Automatic Speech Recognition with Single-Channel Time-
+Domain Enhancement Network,” in Proc. IEEE ICASSP , 2020.
+[2] Q. Wang, H. Muckenhirn, K. Wilson, P. Sridhar, Z. Wu, J. R. Hershey,
+R. A. Saurous, R. J. Weiss, Y . Jia, and I. Lopez Moreno, “V oiceFilter:
+Targeted voice separation by speaker-conditioned spectrogram masking,”
+in Proc. InterSpeech, 2019.
+[3] K. ˇZmol´ıkov´a, M. Delcroix, K. Kinoshita, T. Ochiai, T. Nakatani,
+L. Burget, and J. ˇCernock´y, “SpeakerBeam: Speaker Aware Neural
+Network for Target Speaker Extraction in Speech Mixtures,” IEEE
+Journal of Selected Topics in Signal Processing , vol. 13, no. 4, 2019.
+[4] J. Caroselli, A. Narayanan, N. Howard, and T. O’Malley, “Cleanformer:
+A Multichannel Array Conﬁguration-Invariant Neural Enhancement
+Frontend for ASR in Smart Speakers,” in Proc. IEEE ICASSP , 2023.
+[5] S. Araki, T. Hayashi, M. Delcroix, M. Fujimoto, K. Takeda, and
+T. Nakatani, “Exploring multi-channel features for denoising-
+autoencoder-based speech enhancement,” in Proc. IEEE ICASSP), 2015.
+[6] X. Sun, J. Xiong, C. Feng, H. Li, Y . Wu, D. Fang, and X. Chen,
+“EarSSR: Silent Speech Recognition via Earphones,” IEEE Transactions
+on Mobile Computing , vol. 23, no. 8, 2024.
+[7] Y . Zhou, Y . Chen, Y . Ma, and H. Liu, “A real-time dual-microphone
+speech enhancement algorithm assisted by bone conduction sensor,”
+Sensors, vol. 20, no. 18, 2020.
+[8] H. Wang, X. Zhang, and D. Wang, “Fusing Bone-Conduction and
+Air-Conduction Sensors for Complex-Domain Speech Enhancement,”
+IEEE/ACM Transactions on Audio, Speech, and Language Processing ,
+vol. 30, 2022.
+[9] M. Wang, J. Chen, X. Zhang, Z. Huang, and S. Rahardja, “Multi-modal
+speech enhancement with bone-conducted speech in time domain,”
+Applied Acoustics, vol. 200, 2022.
+[10] Lixing He, Haozheng Hou, Shuyao Shi, Xian Shuai, and Zhenyu
+Yan, “Towards bone-conducted vibration speech enhancement on head-
+mounted wearables,” in Proceedings MobiSys, 2023.
+[11] H. S. Shin, H.-G. Kang, and T. Fingscheidt, “Survey of speech
+enhancement supported by a bone conduction microphone,” in Proc.
+ITG Symposium, 2012.
+[12] R. E. Bouserhal, T. H. Falk, and J. V oix, “In-ear microphone speech
+quality enhancement via adaptive ﬁltering and artiﬁcial bandwidth
+extension,” The Journal of the Acoustical Society of America , vol. 141,
+no. 3, 2017.
+[13] J. Hauret, T. Joubaud, V . Zimpfer, and ´E. Bavu, “Conﬁgurable eben: Ex-
+treme bandwidth extension network to enhance body-conducted speech
+capture,” IEEE/ACM Transactions on Audio, Speech, and Language
+Processing, vol. 31, 2023.
+[14] Li Y . Misiunas K. Roblek D. Tagliasacchi, M., “SEANet: A Multi-modal
+Speech Enhancement Network,” in Proc. InterSpeech, 2020.
+[15] M. Wang, J. Chen, X.-L. Zhang, and S. Rahardja, “End-to-End Multi-
+Modal Speech Recognition on an Air and Bone Conducted Speech
+Corpus,” IEEE/ACM Transactions on Audio, Speech, and Language
+Processing, vol. 31, 2023.
+[16] C. Yu, K.-H. Hung, S.-S. Wang, Y . Tsao, and J. Hung, “Time-domain
+multi-modal bone/air conducted speech enhancement,” IEEE Signal
+Processing Letters, vol. 27, pp. 1035–1039, 2020.
+[17] Jens Heitkaemper, Darius Jakobeit, Christoph Boeddeker, Lukas Drude,
+and Reinhold Haeb-Umbach, “Demystifying tasnet: A dissecting ap-
+proach,” in Proc. IEEE ICASSP , 2020.
+[18] J. Heitkaemper, J. Caroselli, A. Narayanan, and N. Howard, “TfClean-
+former: A streaming, array-agnostic, full- and sub-band modeling front-
+end for robust ASR,” in Proc. InterSpeech, 2024.
+[19] R. Talmon, I. Cohen, and S. Gannot, “Relative Transfer Function
+Identiﬁcation Using Convolutive Transfer Function Approximation,”
+IEEE Transactions on Audio, Speech, and Language Processing , vol.
+17, no. 4, pp. 546–555, 2009.
+[20] H. S. Shin, T. Fingscheidt, and H.-G. Kang, “A Priori SNR Estimation
+Using Air- and Bone-Conduction Microphones,” IEEE/ACM Transac-
+tions on Audio, Speech, and Language Processing, vol. 23, no. 11, 2015.
+[21] N. Howard, A. Park, T. Z. Shabestary, A. Gruenstein, and R. Prab-
+havalkar, “A neural acoustic echo canceller optimized using an automatic
+speech recognizer and large scale synthetic data,” inProc. IEEE ICASSP,
+2021.
+[22] Jonathan Le Roux, Scott Wisdom, Hakan Erdogan, and John R Hershey,
+“SDR–half-baked or well done?,” in Proc. IEEE ICASSP , 2019.
+[23] J. Hauret, M. Olivier, T. Joubaud, C. Langrenne, S. Poir ´ee, V . Zimpfer,
+and ´E Bavu, “Vibravox: A Dataset of French Speech Captured with
+Body-conduction Audio Sensors,” arXiv preprint: 2407.11828 , 2024.
+[24] V . Panayotov, G. Chen, D. Povey, and S. Khudanpur, “Librispeech:
+An ASR corpus based on public domain audio books,” in Proc. IEEE
+ICASSP, 2015.
+[25] J. Kearns, “Librivox: Free public domain audiobooks,” Reference
+Reviews, 2014.
+[26] C. Kim, A. Misra, K. Chin, T. Hughes, A. Narayanan, T. N. Sainath, and
+M. Bacchiani, “Generation of large-scale simulated utterances in virtual
+rooms to train deep-neural networks for far-ﬁeld speech recognition in
+Google Home,” in Proc. InterSpeech, 2017.
+[27] Getty Images, “Getty Images Music,”
+https://www.gettyimages.com/about-music, Oct. 2022.
+[28] YouTube, “YouTube Studio Audio Library,”
+https://youtube.com/audiolibrary, Oct. 2022.
+[29] S. Bijwadia, S. Chang, B. Li, T. Sainath, C. Zhang, and Y . He, “Uniﬁed
+End-to-End Speech Recognition and Endpointing for Fast and Efﬁcient
+Speech Systems,” in Proc. IEEE SLT , 2022.
+[30] T. N. Sainath, Y . R. He, A. Narayanan, R. Botros, R. Pang, D. J.
+Rybach, C. Allauzen, E. Variani, J. Qin, A. Gruenstein, et al., “An
+Efﬁcient Streaming Non-Recurrent On-Device End-to-End Model with
+Improvements to Rare-Word Modeling,” in Proc. Interspeech, 2021.
+Authorized licensed use limited to: BEIHANG UNIVERSITY. Downloaded on July 01,2025 at 02:48:24 UTC from IEEE Xplore.  Restrictions apply. 

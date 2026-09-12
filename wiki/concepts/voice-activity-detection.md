@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-09-09
+updated: 2026-09-12
 sources:
   - raw/papers/liu-2025-pcen-mask-vad-speech-enhancement/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
@@ -10,6 +10,7 @@ sources:
   - raw/papers/kim-2014-doa-based-snr-estimation/full-text.txt
   - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
   - raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt
+  - raw/papers/heitkaemper-2025-bcs-speech-enhancement-earbuds/full-text.txt
 tags:
 - audio-processing
 - machine-learning
@@ -92,6 +93,10 @@ Apostolidis et al. (2026) train a [[concepts/convolutional-recurrent-network|CRN
 
 Kim & Kim (2014) embed a **statistical model-based log-likelihood ratio test** (Sohn et al. 1999) as the speech-activity decision inside their [[concepts/doa-based-snr-estimation|DOA-based SNR estimator]]: per time-frequency bin, the LRT decides target-speech presence, and the noise-side power estimate is updated by recursive smoothing only under speech absence. This is a third VAD role beyond inference-time gating and training-time loss conditioning — a *component-level* soft machinery inside a classical statistical estimator, replacing the binary T-F masking decisions that cause musical noise. See also [[concepts/speech-presence-probability|Speech Presence Probability]] for the per-bin soft-decision generalization.
 
+## VAD on Bone-Conducted Signals as Enhancer Quality Gate
+
+[[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2025]] apply a **pretrained ACS-style neural VAD to the BCS** not to detect speech in general, but to detect *uninformative BCS*: realistic earbud recordings contain ~30% BCS without discernible speech patterns (mostly wind corruption), and an enhancer trained only on clean BCS *degrades* the ACS below unprocessed performance on exactly those examples (WER increases below 60% detected keyword-BCS activity, covering ~40% of their Hard test set). The VAD output gates the [[concepts/bcs-guided-speech-enhancement|BCS-guided enhancer]] with a hard bypass — if no speech is detected in the keyword BCS, ASR receives the raw ACS instead of the enhanced output. This is a fourth VAD role: an inference-time **modality-validity gate** that decides whether an auxiliary-signal-guided processor should run at all, chosen over training-time BCS noise augmentation because that would hurt clean-BCS performance and cannot help when the BCS carries no speech information.
+
 ## Related Concepts
 
 - [[concepts/minimum-statistics|Minimum Statistics]]
@@ -110,6 +115,7 @@ Kim & Kim (2014) embed a **statistical model-based log-likelihood ratio test** (
 - [[sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]]
 - [[sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
 - [[sources/heitkaemper-2026-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2026: BCS-Guided Speech Enhancement for Earbuds]]
+- [[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2025: BCS-Guided Speech Enhancement for Voice Assistant on Earbuds]] — VAD on the BCS as a modality-validity gate for enhancer bypass
 - [[sources/martin-2001-noise-psd-estimation-optimal-smoothing|Martin 2001: Noise PSD Estimation via Optimal Smoothing and Minimum Statistics]]
 - [[sources/liu-2025-pcen-mask-vad-speech-enhancement|Liu et al. 2025: PCEN-Based Mask Thresholding and VAD for DNN Speech Enhancement Training]] — training-time PCEN-VAD that gates an asymmetric loss
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — energy-based binary VAD with minimum-energy tracking used as a binary gate for spatial-filter model adaptation
