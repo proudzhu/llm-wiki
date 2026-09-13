@@ -25,8 +25,14 @@ Auto-staged (detected via git status, not required in --entities/--concepts/
   edited to add cross-references back to the new source). This prevents the
   recurring bug where Step 8 edits to existing concept pages are silently
   dropped from the commit because the operator forgot to list them.
+
+Build-skip: if build_check.py (Step 12c) passed within the last hour and no
+build input (wiki/, raw/papers/, mkdocs.yml, plugins/, hooks.py) has been
+modified since, the pre-commit hook's duplicate ~60 s mkdocs build is
+skipped automatically (detected via the .tmp_build_ok marker). Any doubt
+falls back to running the hook.
 """
-import argparse, os, subprocess, sys
+import argparse, glob, os, subprocess, sys, time
 
 # Force UTF-8 stdout/stderr so non-ASCII characters in paper titles, author
 # names (e.g., "Østergaard"), and git output don't trip Windows cp1252 consoles.
@@ -35,6 +41,9 @@ for _s in (sys.stdout, sys.stderr):
         _s.reconfigure(encoding='utf-8')
     except (AttributeError, ValueError):
         pass
+
+BUILD_OK_MARKER = '.tmp_build_ok'
+BUILD_OK_MAX_AGE = 3600  # seconds — a marker older than 1 h is stale
 
 
 def git(args, check=True):
@@ -50,6 +59,40 @@ def git(args, check=True):
         print(f"git {' '.join(args)} failed:\n{result.stderr}", file=sys.stderr)
         sys.exit(result.returncode)
     return result
+
+
+def build_is_fresh():
+    """True if build_check.py passed recently AND no build input changed since.
+
+    Step 12c (build_check.py) and the pre-commit hook both run the same
+    ~60 s `mkdocs build --strict`. If 12c just passed and nothing it read
+    has been modified since (wiki/, raw/, mkdocs config, plugins, hooks),
+    the hook's rebuild is guaranteed to produce the same result — skip it
+    with --no-verify. Any doubt (missing/stale marker, newer file) falls
+    back to running the hook.
+    """
+    if not os.path.exists(BUILD_OK_MARKER):
+        return False
+    marker_mtime = os.path.getmtime(BUILD_OK_MARKER)
+    if time.time() - marker_mtime > BUILD_OK_MAX_AGE:
+        return False
+
+    # Build inputs: everything mkdocs reads. Keep the pattern list in sync
+    # with mkdocs.yml (docs_dir=wiki, custom plugins/hooks) and the
+    # fix_obsidian_escapes raw/ embed resolution.
+    patterns = [
+        'mkdocs.yml',
+        'wiki/**/*.md',
+        'raw/papers/*/*',       # full-text + figures (embeds resolve here)
+        'plugins/**/*.py',
+        'hooks.py',
+        'overrides/**/*',
+    ]
+    for pattern in patterns:
+        for path in glob.glob(pattern, recursive=True):
+            if os.path.isfile(path) and os.path.getmtime(path) > marker_mtime:
+                return False
+    return True
 
 
 def main():
@@ -155,6 +198,11 @@ def main():
     # Commit
     commit_cmd = ['commit']
     if args.no_verify:
+        pass  # explicit user request — always honor
+    elif build_is_fresh():
+        print("NOTE: build_check.py passed recently and no build inputs changed"
+              " since — skipping the pre-commit hook's duplicate build"
+              " (equivalent to --no-verify).")
         commit_cmd.append('--no-verify')
     commit_cmd += ['-m', args.message]
     result = git(commit_cmd, check=False)

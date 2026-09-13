@@ -67,8 +67,9 @@ Exact invocations for every script (all prefixed with `uv run python .agents/ski
 | 3c | `extract_mineru.py --slug SLUG [--language en --model vlm --timeout 600]` |
 | 3d | `extract_pdftotext.py --slug SLUG` |
 | 3e | `map_figures.py --slug SLUG` |
+| 6 | `update_entities.py --slug SLUG --entities author1 author2 [--note "..."] [--role "First author of"]` — existing authors only |
 | 9 | `triage_synthesis.py --slug SLUG` |
-| 10 | `update_indexes.py add --category CAT --slug SLUG --display "..." --summary "..." --date YYYY-MM-DD` then `update_indexes.py stats` — or `update_indexes.py batch --manifest .tmp_ingest_manifest.yaml --stats` |
+| 10 | `update_indexes.py source --slug SLUG` (derives display/summary/date from the source page + runs stats — use for the source-page row) · `update_indexes.py add --category CAT --slug SLUG --display "..." --summary "..." --date YYYY-MM-DD` then `stats` (entities/concepts) · `update_indexes.py batch --manifest .tmp_ingest_manifest.yaml --stats` |
 | 11 | `append_log.py --op ingest --title "..." --body "..."` (or `--file .tmp_log_entry.md`) — strictly flags, no positionals |
 | 12a | `verify_wikilinks.py --slug SLUG` |
 | 12b | `check_backlinks.py --slug SLUG` |
@@ -209,6 +210,15 @@ For re-ingestion: overwrite the existing source page with updated comprehensive 
 
 For each author not already in `wiki/entities/`, create a new page. For existing authors, make **append-only** edits (update `updated:`, append a bullet to `## Key Contributions`, do not touch `created:` or rewrite existing bullets). Load [`references/page-templates.md`](references/page-templates.md) for the full template and the append-only update rules. **Check first**: LS `wiki/entities` and scan the filenames for the author slug (entity pages don't contain their own slug, so a content Grep gives false "missing").
 
+**For existing authors, use the script** — it performs the mechanical append-only pattern (frontmatter `updated:`, Key/Notable Contributions bullet, Related Sources bullet) on all listed pages in one call, idempotently:
+
+```bash
+uv run python .agents/skills/paper-reader/scripts/update_entities.py \
+    --slug SLUG --entities author1 author2 [--note "contribution description"] [--role "First author of"]
+```
+
+It derives title/venue/year/authors from the source page's H1 and `**Venue**:` line. After running, review the appended bullets and polish the Key Contributions wording with one sequential Edit per file (e.g., a paper-specific description — the `--note` flag covers this at insert time). New-author pages are still created by hand from the template.
+
 ### Step 7: Create Missing Concept Pages
 
 For each key concept referenced via wikilink in the source page but lacking a dedicated page, create `wiki/concepts/{concept-name}.md`. Load [`references/page-templates.md`](references/page-templates.md) for the template and **concept-page threshold** (novelty / distinctive formulation / central-to-contribution). Do **not** create pages for generic ML/DL primitives (Adam, ReLU, dropout, gradient clipping) — link them as plain text.
@@ -275,7 +285,15 @@ uv run python .agents/skills/paper-reader/scripts/triage_synthesis.py --slug SLU
 
 **Do not hand-edit index tables for new entries** — use the scripts below. Hand-editing is the known cause of lost rows: in the Sun 2024 ingest, four parallel manual edits to `wiki/index.md` all reported success but only the Statistics edit survived, leaving the three new slugs unindexed (caught by the mandatory Grep check below and `check_index_drift.py`). The scripts write rows atomically and recompute statistics; hand-edits are acceptable only for *modifying* an existing row's summary/date.
 
-For ingests creating **multiple pages** (typical: 1 source + 2–4 entities + 5–15 concepts), **prefer `batch`** with a YAML manifest:
+**For the source-page row, use the `source` subcommand** — it derives all fields from the source page (display from the H1, summary from the first sentence of `## Summary`, date from `created:`) and runs `stats` automatically, so there is nothing to type and no `add`-then-forget-`stats` hazard (`pitfalls.md` #7):
+
+```bash
+uv run python .agents/skills/paper-reader/scripts/update_indexes.py source --slug SLUG
+```
+
+Use `--summary "..."` to override the derived first sentence if it is too long or vague. Review the printed `Derived:` line before accepting.
+
+For entity/concept rows (and re-ingests), use `add` then `stats`, or for ingests creating **multiple pages** (typical: 2–4 entities + 5–15 concepts), **prefer `batch`** with a YAML manifest:
 
 ```yaml
 # .tmp_ingest_manifest.yaml
@@ -306,6 +324,14 @@ Grep pattern: "new-slug-1|new-slug-2|new-slug-3"
 ```
 
 Each new slug must appear in **two** files: `wiki/index.md` and `wiki/{category}/index.md`. If a slug is missing from either, add the row before proceeding.
+
+**Verify statistics** (one cheap call — the `stats` recount writes numbers, this proves they match reality):
+
+```bash
+uv run python .agents/skills/wiki-lint/scripts/check_statistics.py
+```
+
+Exit 0 = stated counts match actual file counts for every category.
 
 ### Step 11: Update Log
 
@@ -380,6 +406,10 @@ uv run python .agents/skills/paper-reader/scripts/commit_ingest.py \
 ```
 
 Stages `raw/papers/{slug}/`, `wiki/sources/{slug}.md`, all index files, `wiki/log.md`, and the specified entity/concept/synthesis pages. Verifies no `paper.pdf` is staged. **Auto-stages** any other modified/untracked file under `wiki/` (catches Step 8 edits to existing concept/entity pages that would otherwise be dropped) — pass `--strict` to disable. Use `--no-verify` only if the pre-commit hook has environment issues unrelated to your changes.
+
+**Duplicate-build skip (automatic)**: if Step 12c's `build_check.py` passed within the last hour and no build input (`wiki/`, `raw/papers/`, `mkdocs.yml`, `plugins/`, `hooks.py`) has been modified since, the script commits with `--no-verify` itself and prints a `NOTE:` — the pre-commit hook's ~60 s rebuild is guaranteed redundant. If you edit anything after 12c, the script detects it and runs the hook normally.
+
+**Expected post-commit noise**: `WARN: uncommitted changes remain after commit` listing `.obsidian/*` files is normal — Obsidian config is deliberately not part of ingests. Only investigate if a `wiki/` or `raw/` path appears in the remaining list.
 
 ## Important Notes
 

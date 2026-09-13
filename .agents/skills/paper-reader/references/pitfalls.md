@@ -14,7 +14,7 @@ Concrete lessons from prior ingests. Skim before starting an ingest; consult whe
 
 6. **MinerU figure filenames are deterministic hashes** — Do not guess filenames. Always `LS` the `figures/` directory after extraction to discover actual names before writing embed wikilinks.
 
-7. **`update_indexes.py stats` is mandatory after `add`** — The `add` subcommand inserts rows but does not recompute the `## Statistics` section. Use `batch --stats` (does both in one call), or run `stats` after all `add` calls.
+7. **`update_indexes.py stats` is mandatory after `add`** — The `add` subcommand inserts rows but does not recompute the `## Statistics` section. Use `batch --stats` (does both in one call), or run `stats` after all `add` calls. The `source` subcommand (added 2026-09-13, for source-page rows) runs `stats` automatically and derives display/summary/date from the source page, eliminating this hazard and the CLI-signature friction for the most common row type.
 
 8. **Build hook INFO messages are not errors** — `mkdocs build --strict` may emit `INFO - Doc file 'log.md' contains an unrecognized relative link` for pre-existing issues in `log.md`. These do not fail the build (exit 0).
 

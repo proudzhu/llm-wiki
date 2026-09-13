@@ -2,16 +2,18 @@
 """Step 10: Add rows to index files and update statistics.
 
 Subcommands:
+  source  Insert a row for a source page, deriving display/summary/date from
+          wiki/sources/{slug}.md (H1, ## Summary, created:), then run stats.
   add     Insert a row into wiki/index.md (correct section) and wiki/{category}/index.md.
   batch   Insert multiple rows from a YAML manifest (entities/concepts/sources/synthesis/queries).
   stats   Recount all categories and rewrite the ## Statistics section in wiki/index.md.
 
 Usage:
+  uv run python .agents/skills/paper-reader/scripts/update_indexes.py source --slug paper-slug
+  uv run python .agents/skills/paper-reader/scripts/update_indexes.py source --slug paper-slug --summary "override"
   uv run python .agents/skills/paper-reader/scripts/update_indexes.py add \
       --category entities --slug author-name --display "Author Name" \
       --summary "..." --date 2026-07-10
-  uv run python .agents/skills/paper-reader/scripts/update_indexes.py add \
-      --category sources --slug paper-slug --display "Title" --summary "..." --date 2026-07-10
   uv run python .agents/skills/paper-reader/scripts/update_indexes.py batch \
       --manifest .tmp_ingest_manifest.yaml
   uv run python .agents/skills/paper-reader/scripts/update_indexes.py stats
@@ -37,13 +39,97 @@ Batch manifest format (YAML):
 Categories: entities, concepts, sources, synthesis, queries.
 Skips insertion if the slug already exists in the target index.
 """
-import argparse, os, re, sys
+import argparse, datetime, os, re, sys
 
 sys.stdout.reconfigure(encoding='utf-8')
 
 CATEGORIES = ('entities', 'concepts', 'sources', 'synthesis', 'queries')
 DATE_HEADER = {'entities': 'Created', 'concepts': 'Created', 'sources': 'Date',
                'synthesis': 'Date', 'queries': 'Date'}
+
+# Words whose trailing period is an abbreviation, not a sentence end
+# (e.g. "e.g.", "et al.", "Fig."). Used by first_sentence() when deriving
+# a summary from the source page's ## Summary section.
+_ABBREV_WORDS = {
+    'e.g', 'i.e', 'et', 'al', 'cf', 'vs', 'fig', 'figs', 'eq', 'eqs', 'sec',
+    'pp', 'no', 'vol', 'dr', 'prof', 'mr', 'mrs', 'ms', 'st', 'approx', 'ca',
+    'jan', 'feb', 'mar', 'apr', 'jun', 'jul', 'aug', 'sep', 'sept', 'oct',
+    'nov', 'dec',
+}
+
+
+def strip_inline_markdown(text):
+    """Reduce wikilinks/math/markdown links/emphasis to plain text."""
+    text = re.sub(r'\[\[[^\]|]+\|([^\]]+)\]\]', r'\1', text)   # [[a|b]] -> b
+    text = re.sub(r'\[\[([^\]]+)\]\]', r'\1', text)            # [[a]] -> a
+    text = re.sub(r'\[([^\]]+)\]\([^)]*\)', r'\1', text)       # [t](url) -> t
+    text = re.sub(r'\$([^$]+)\$', r'\1', text)                 # $x$ -> x
+    text = text.replace('**', '').replace('*', '')
+    return text.strip()
+
+
+def first_sentence(text):
+    """Return the first sentence of text, skipping abbreviation periods."""
+    for m in re.finditer(r'\.\s+', text):
+        prefix = text[:m.start()]
+        wm = re.search(r'([\w\-]+)$', prefix)
+        w = (wm.group(1) if wm else '').lower()
+        if w in _ABBREV_WORDS or re.fullmatch(r'[a-z]', w):
+            continue
+        return text[:m.start() + 1].strip()
+    return text.strip()
+
+
+def derive_source_fields(slug, summary_override=None, display_override=None,
+                         date_override=None):
+    """Derive (display, summary, date) from wiki/sources/{slug}.md.
+
+    - display: H1 text before the first ':' (e.g. "Souden, Chen, Benesty & Affes 2011")
+    - summary: first sentence of ## Summary, stripped of inline markup
+    - date:    frontmatter created: value
+    """
+    path = os.path.join('wiki', 'sources', f'{slug}.md')
+    if not os.path.isfile(path):
+        print(f"ERROR: source page not found: {path}", file=sys.stderr)
+        sys.exit(1)
+
+    with open(path, encoding='utf-8') as f:
+        text = f.read()
+
+    # H1 -> display ("Authors Year: Title" -> "Authors Year")
+    display = display_override
+    if display is None:
+        h1 = next((l for l in text.splitlines() if l.startswith('# ')), None)
+        if h1 is None:
+            print(f"ERROR: no H1 heading in {path}", file=sys.stderr)
+            sys.exit(1)
+        display = h1[2:].split(':', 1)[0].strip()
+        if not display:
+            print(f"ERROR: H1 in {path} has no ':' separator "
+                  f"(expected 'Authors Year: Title')", file=sys.stderr)
+            sys.exit(1)
+
+    # ## Summary -> first sentence
+    summary = summary_override
+    if summary is None:
+        m = re.search(r'^## Summary\s*\n(.*?)(?=^## |\Z)', text,
+                      re.DOTALL | re.MULTILINE)
+        if not m:
+            print(f"ERROR: no '## Summary' section in {path}", file=sys.stderr)
+            sys.exit(1)
+        first_para = next((p.strip() for p in m.group(1).split('\n\n') if p.strip()), '')
+        summary = first_sentence(strip_inline_markdown(first_para))
+
+    # frontmatter created: -> date
+    date = date_override
+    if date is None:
+        fm = re.search(r'^created:\s*(\S+)', text, re.MULTILINE)
+        if not fm:
+            print(f"ERROR: no 'created:' in frontmatter of {path}", file=sys.stderr)
+            sys.exit(1)
+        date = fm.group(1)
+
+    return display, summary, date
 
 
 def find_section_range(lines, category):
@@ -142,6 +228,30 @@ def _insert_entry(category, slug, display, summary, date):
     if added_main or added_sub:
         print(f"Added: {category}/{slug}")
     return added_main, added_sub
+
+
+def cmd_source(args):
+    """Derive fields from the source page, insert the row, then run stats.
+
+    Fixes pitfall #7 for the common case: the `add` subcommand alone does
+    not recompute statistics, but `source` always runs `stats` afterward.
+    """
+    display, summary, date = derive_source_fields(
+        args.slug,
+        summary_override=args.summary,
+        display_override=args.display,
+        date_override=args.date,
+    )
+    print(f"Derived: display={display!r}\n         date={date}")
+    print(f"         summary={summary!r}")
+    try:
+        _insert_entry('sources', args.slug, display, summary, date)
+    except (ValueError, RuntimeError) as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        sys.exit(1)
+    if not args.no_stats:
+        print("\nRunning stats...")
+        cmd_stats(args)
 
 
 def cmd_add(args):
@@ -266,6 +376,21 @@ def main():
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest='command', required=True)
+
+    pu = sub.add_parser('source',
+                        help='Add a source-page row, deriving fields from '
+                             'wiki/sources/{slug}.md, then run stats')
+    pu.add_argument('--slug', required=True,
+                    help='Source page slug (reads wiki/sources/{slug}.md)')
+    pu.add_argument('--display', default=None,
+                    help='Override the derived display text (default: H1 before ":")')
+    pu.add_argument('--summary', default=None,
+                    help='Override the derived summary (default: first sentence of ## Summary)')
+    pu.add_argument('--date', default=None,
+                    help='Override the derived date (default: frontmatter created:)')
+    pu.add_argument('--no-stats', action='store_true',
+                    help='Skip the automatic stats run afterward')
+    pu.set_defaults(func=cmd_source)
 
     pa = sub.add_parser('add', help='Add a row to index files')
     pa.add_argument('--category', required=True, choices=CATEGORIES)
