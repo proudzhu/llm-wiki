@@ -5,18 +5,18 @@ updated: 2026-09-12
 sources:
   - raw/papers/benslimane-2026-rt-tango-binaural-speech-enhancement/full-text.md
   - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
-- zotero://select/items/0_WLMRLH9W
-- zotero://select/items/0_5SFJK2MD
-- zotero://select/items/0_76XGXYSM
-- zotero://select/items/0_N8MHRKXP
-- zotero://select/items/0_BACCUUCC
-- zotero://select/items/0_TXVFFJPG
-- zotero://select/items/0_FN59JY3C
-- zotero://select/items/0_NUV4VYRE
-- raw/papers/wang-2025-adaptive-convolution-cnn-speech-enhancement/full-text.md
-- raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
-- raw/papers/jiang-2026-lightweight-speech-enhancement-ssm-dsc/full-text.md
-- raw/papers/timcheck-2023-intel-neuromorphic-dns-challenge/full-text.md
+  - zotero://select/items/0_WLMRLH9W
+  - zotero://select/items/0_5SFJK2MD
+  - zotero://select/items/0_76XGXYSM
+  - zotero://select/items/0_N8MHRKXP
+  - zotero://select/items/0_BACCUUCC
+  - zotero://select/items/0_TXVFFJPG
+  - zotero://select/items/0_FN59JY3C
+  - zotero://select/items/0_NUV4VYRE
+  - raw/papers/wang-2025-adaptive-convolution-cnn-speech-enhancement/full-text.md
+  - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
+  - raw/papers/jiang-2026-lightweight-speech-enhancement-ssm-dsc/full-text.md
+  - raw/papers/timcheck-2023-intel-neuromorphic-dns-challenge/full-text.md
 tags:
   - lightweight-speech-enhancement
   - computational-complexity
@@ -30,7 +30,7 @@ tags:
   - quantization
   - model-compression
 aliases:
-- Computational and Memory Efficiency in Adaptive Systems
+  - Computational and Memory Efficiency in Adaptive Systems
 ---
 
 # Computational Efficiency in ANC: From O(N²) to GPU-Accelerated DSP

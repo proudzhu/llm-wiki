@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-08-30
-updated: 2026-09-03
+updated: 2026-09-13
 sources:
+  - raw/papers/souden-2010-pmwf/full-text.md
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
   - raw/papers/braun-2015-residual-noise-control/full-text.md
   - raw/papers/li-2020-residual-noise-control/full-text.md
@@ -35,6 +36,10 @@ $$\boldsymbol{h}_{\text{optim}} = \left[\Phi_{xx}(\omega) + \beta \Phi_{vv}(\ome
 - **特例统一**：TF-GSC 对应 $\mathrm{E}\{|\varepsilon_x|^2\} = 0$ 约束；SDW-MWF 最小化加权误差 $\mathrm{E}\{|\varepsilon_v|^2\} + \mu\mathrm{E}\{|\varepsilon_x|^2\}$；GSC 失配时相当于 $\beta = 1$。
 - 该框架是 [[concepts/multi-channel-wiener-filter|MWF]]（$\beta = \mu = 1$）的一般化，也与 [[concepts/variable-span-linear-filter|VSLF]] 的 tradeoff 参数同源。
 
+## 原始推导（Souden et al. 2010）
+
+该规划及其闭式解的原始出处是 [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010]]（频率域非因果形式，推导见上文）。该文进一步证明：由于 $\Phi_{xx}$ 秩一，拉格朗日乘数法给出的解可简化为仅依赖信号统计量的形式（分母为 $\beta + \lambda(\omega)$，$\lambda$ 为 $\Phi_{vv}^{-1}\Phi_{xx}$ 的唯一非零特征值，也等于滤波器输出 SNR），并给出失真界与权重的显式关系 $\beta \leq \frac{\tilde{\sigma}(\omega)}{1-\tilde{\sigma}(\omega)}\lambda(\omega)$，以及闭式性能测度（失真指数 $\beta^2/(\beta+\lambda)^2$、降噪因子 $(\beta+\lambda)^2/(\mathrm{SNR}\cdot\lambda)$、输出 SNR $=\lambda$）——后者说明整个参数化滤波族共享同一输出 SNR，$\beta$ 只在失真与降噪因子之间权衡。
+
 ## 实际实现难点
 
 $\Phi_{vv}$ 可在语音间歇段估计，但 $\Phi_{xx} = \Phi_{yy} - \Phi_{vv}$ 中两项不在同一时段估计，噪声非平稳性越高越难估计准确——这是实际算法逼近理论最优解的主要障碍，也是约束语音损伤在实践中难以精确实现的原因。完美降噪与语音无损相互牵制，实用算法（如 [[concepts/atf-gsc|ATF-GSC]]）通过放松约束换取综合性能。
@@ -65,6 +70,7 @@ $$\mathbf{h}_Z = (\Phi_{xx} + \mu\Phi_{vv})^{-1}(\Phi_{xx}\mathbf{e}_1 + \mu\Phi
 
 ## Related Sources
 
+- [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010]] — 原始推导：频域非因果闭式解 + 闭式性能测度
 - [[sources/yan-2014-dual-mic-bt-noise-reduction|Yan, Qiu & Lu 2014]] — 以该框架统一两类双传声器算法并对比实验
 - [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015]] — 将目标推广为"语音 + 期望残留噪声"，得到 $(1-c)\mathbf{h}_X + c\mathbf{e}_1$ 插值形式
 - [[sources/li-2020-residual-noise-control|Li et al. 2020]] — 将该约束规划推广为监督学习的广义损失函数（训练时残留噪声控制）

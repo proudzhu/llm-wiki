@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-30
-updated: 2026-07-09
+updated: 2026-09-13
 tags:
   - researcher
   - array-processing
@@ -25,6 +25,7 @@ tags:
 - Co-author of *Microphone Arrays* (Springer, 2023)
 - Co-author of *Fundamentals of Signal Enhancement and Array Signal Processing* (Wiley-IEEE Press, 2018)
 - Foundational work on multichannel Wiener filter theory
+- Co-author of the foundational PMWF paper "On Optimal Frequency-Domain Multichannel Linear Filtering for Noise Reduction" (IEEE TASLP 2010), unifying MVDR/GSC/Wiener filters in one statistics-only framework — [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010]]
 - Differential beamforming with high directivity factors
 - Dimensionality reduction for STFT-domain beamforming
 - Joint learning of covariance estimation and WNG for robust MVDR beamforming (Deng et al. 2026)
@@ -44,3 +45,4 @@ tags:
 
 - [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
 - [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026: Joint Covariance and WNG Learning for Robust MVDR]]
+- [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010: On Optimal Frequency-Domain Multichannel Linear Filtering for Noise Reduction]]

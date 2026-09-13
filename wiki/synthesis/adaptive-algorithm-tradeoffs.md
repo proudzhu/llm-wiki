@@ -3,20 +3,20 @@ type: synthesis
 created: 2026-04-12
 updated: 2026-08-10
 sources:
-- zotero://select/items/0_IZATI7ZF
-- zotero://select/items/0_9KNF4YUC
-- zotero://select/items/0_FERIFUEJ
-- zotero://select/items/0_NEWLEZ9B
-- zotero://select/items/0_QVJMFTWC
-- raw/papers/guo-2024-anc-saturation-survey/full-text.md
+  - zotero://select/items/0_IZATI7ZF
+  - zotero://select/items/0_9KNF4YUC
+  - zotero://select/items/0_FERIFUEJ
+  - zotero://select/items/0_NEWLEZ9B
+  - zotero://select/items/0_QVJMFTWC
+  - raw/papers/guo-2024-anc-saturation-survey/full-text.md
 tags:
-- adaptive-algorithms
-- algorithm-selection
-- convergence
-- trade-off-analysis
-- variable-step-size
-- output-constraint-algorithms
-- output-saturation
+  - adaptive-algorithms
+  - algorithm-selection
+  - convergence
+  - trade-off-analysis
+  - variable-step-size
+  - output-constraint-algorithms
+  - output-saturation
 ---
 
 # Adaptive Algorithm Trade-offs: A Decision Framework

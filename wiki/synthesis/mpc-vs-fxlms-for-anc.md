@@ -4,11 +4,11 @@ created: 2026-04-12
 updated: 2026-04-19
 sources:
 tags:
-- constraint-handling
-- model-predictive-control
-- quadratic-programming
-- real-time
-- state-space
+  - constraint-handling
+  - model-predictive-control
+  - quadratic-programming
+  - real-time
+  - state-space
 ---
 
 # MPC vs Traditional ANC: Two Paths to Optimal Control

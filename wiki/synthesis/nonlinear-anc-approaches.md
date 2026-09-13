@@ -3,17 +3,17 @@ type: synthesis
 created: 2026-04-12
 updated: 2026-08-27
 sources:
-- zotero://select/items/0_N8MHRKXP
-- zotero://select/items/0_FERIFUEJ
-- raw/papers/guo-2024-anc-saturation-survey/full-text.md
-- raw/papers/rafaely-2000-constrained-fdlms/full-text.md
+  - zotero://select/items/0_N8MHRKXP
+  - zotero://select/items/0_FERIFUEJ
+  - raw/papers/guo-2024-anc-saturation-survey/full-text.md
+  - raw/papers/rafaely-2000-constrained-fdlms/full-text.md
 tags:
-- flnn
-- kernel
-- nonlinear-anc
-- spline
-- volterra
-- output-saturation
+  - flnn
+  - kernel
+  - nonlinear-anc
+  - spline
+  - volterra
+  - output-saturation
 ---
 
 # Nonlinear ANC: When Linear Filters Aren't Enough

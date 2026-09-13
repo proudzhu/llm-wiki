@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-12
+updated: 2026-09-13
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
@@ -11,6 +11,7 @@ sources:
   - raw/papers/hu-2026-abse-net/full-text.md
   - raw/papers/li-2022-embedding-beamforming/full-text.md
   - raw/papers/zhang-2021-adl-mvdr/full-text.md
+  - raw/papers/souden-2010-pmwf/full-text.md
   - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
   - raw/papers/deng-2026-joint-covariance-wng-mvdr/full-text.md
   - raw/papers/farmani-2026-virtual-mic-beamforming-hearing-aid/full-text.txt
@@ -75,7 +76,7 @@ The **binaural MVDR (BMVDR)** extends the classical MVDR to the binaural hearing
 
 ## MVDR as the β = 0 Endpoint of the PMWF
 
-The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-wiener-filter|PMWF]] family: setting the trade-off parameter $\beta = 0$ in the PMWF closed form recovers the MVDR, while $\beta = 1$ gives the MWF. [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019]] benchmark this continuum on a 4-mic circular array (TIMIT speech, babble/pink interference, $T_{60}=300$ ms): the MWF consistently beats MVDR on ΔSINR, ΔSegSNR, and noise reduction at the expected cost of nonzero speech distortion, and an [[concepts/multi-channel-speech-presence-probability|MC-SPP]]-controlled $\beta$ (plus an MMSE output blend) improves further over the fixed-parameter MWF. This matches the structural intuition that MVDR's distortionless constraint leaves noise-reduction headroom on the table. [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025]] exploit this continuum dynamically: their NeuralPMWF drives $\beta$ per T-F bin from a mask-derived SPP proxy, continuously sliding between the MVDR ($\beta = 0$) and MWF ($\beta = 1$) endpoints, with the dynamic $\beta$ contributing the largest single gain in their ablation.
+The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-wiener-filter|PMWF]] family: setting the trade-off parameter $\beta = 0$ in the PMWF closed form recovers the MVDR, while $\beta = 1$ gives the MWF. This was formally established in the PMWF origin paper, [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010]], by switching the constraint and objective of the classical parameterized program (minimize residual noise subject to a distortion bound, rather than the reverse) — the $\sigma(\omega) = 0$ case reproduces the MVDR optimization exactly, and the resulting closed forms differ only in the denominator ($\beta + \lambda(\omega)$ vs. $\lambda(\omega)$), with $\lambda(\omega) = \mathrm{tr}\{\Phi_{vv}^{-1}\Phi_{yy}\} - N$ the unique positive eigenvalue of $\Phi_{vv}^{-1}\Phi_{xx}$. Notably, all filters in this family (MVDR, Wiener, GSC, ML, max-SNR — equal up to a frequency-dependent scaling) share the same local output SNR $\lambda(\omega)$, and the MVDR's statistics-only form $\mathbf{h}_{\mathrm{MVDR}} = \frac{\Phi_{vv}^{-1}\Phi_{xx}}{\lambda}\mathbf{u}_{n_0}$ requires no channel transfer functions, steering vector, or array geometry — only the speech and noise PSD matrices. [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019]] benchmark this continuum on a 4-mic circular array (TIMIT speech, babble/pink interference, $T_{60}=300$ ms): the MWF consistently beats MVDR on ΔSINR, ΔSegSNR, and noise reduction at the expected cost of nonzero speech distortion, and an [[concepts/multi-channel-speech-presence-probability|MC-SPP]]-controlled $\beta$ (plus an MMSE output blend) improves further over the fixed-parameter MWF. This matches the structural intuition that MVDR's distortionless constraint leaves noise-reduction headroom on the table. [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025]] exploit this continuum dynamically: their NeuralPMWF drives $\beta$ per T-F bin from a mask-derived SPP proxy, continuously sliding between the MVDR ($\beta = 0$) and MWF ($\beta = 1$) endpoints, with the dynamic $\beta$ contributing the largest single gain in their ablation.
 
 ## Neural Beamformers Surpassing Oracle-Mask MVDR (Li et al. 2022)
 
@@ -113,6 +114,7 @@ The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-
 ## Related Sources
 
 - [[sources/lorenz-2005-robust-minimum-variance-beamforming|Lorenz & Boyd 2005: Robust Minimum Variance Beamforming]]
+- [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010: On Optimal Frequency-Domain Multichannel Linear Filtering for Noise Reduction]] — MVDR = PMWF-0; statistics-only closed form; shared output SNR $\lambda(\omega)$ across the filter family
 - [[sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
 - [[sources/lee-2026-spatial-magnifier-spatial-upsampling|Lee et al. 2026: Spatial-Magnifier]]

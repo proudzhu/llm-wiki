@@ -570,6 +570,8 @@
 | [[entities/zhuohuang-zhang\|Zhuohuang Zhang]] | Columbia University — first author of ADL-MVDR; neural beamforming and speech separation | 2026-09-12 |
 | [[entities/shi-xiong-zhang\|Shi-Xiong Zhang]] | Ohio State University — speech separation, far-field speech recognition | 2026-09-12 |
 | [[entities/lianwu-chen\|Lianwu Chen]] | Amazon Alexa — speech processing, noise robustness | 2026-09-12 |
+| [[entities/mehrez-souden\|Mehrez Souden]] | Researcher at Universite du Quebec (INRS-EMT); signal processing for wireless communications and speech enhancement; first author of the PMWF origin paper | 2026-09-13 |
+| [[entities/sofienne-affes\|Sofiene Affes]] | Professor at INRS-EMT, Montreal; wireless communications, statistical signal processing; co-author of the PMWF origin paper | 2026-09-13 |
 
 ---
 
@@ -1301,6 +1303,7 @@
 | [[sources/li-2022-embedding-beamforming\|Li, Liu, Zheng & Li 2022: Embedding and Beamforming]] | EaBNet: all-neural causal framewise beamformer — implicit spectral-spatial embedding replaces explicit SCM and surpasses oracle-mask MVDR | 2026-09-11 |
 | [[sources/zhang-2021-adl-mvdr\|Zhang et al. 2021: ADL-MVDR]] | All deep learning MVDR beamformer for target speech separation: GRU-Nets replace matrix inversion and eigenvalue decomposition, enabling stable joint training and frame-level beamforming weights | 2026-09-12 |
 | [[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds\|Heitkaemper et al. 2025: BCS-Guided Speech Enhancement for Voice Assistant on Earbuds]] | ICASSP publication of the Google patent: streaming Conformer mask estimator fusing ACS with band-limited BCS (500 Hz, 6.25% bandwidth); VAD-gated bypass for uninformative BCS; beats multi-channel enhancer at RTF 0.01 | 2026-09-12 |
+| [[sources/souden-2010-pmwf\|Souden, Benesty & Affes 2010]] | Origin paper of the PMWF: parameterized SD-constrained filter (beta=0 MVDR, beta=1 MWF), closed-form performance measures, statistics-only GSC | 2026-09-13 |
 
 ---
 
@@ -1354,10 +1357,10 @@
 
 ## Statistics
 
-- **Total pages**: 1303
-- **Entities**: 560
+- **Total pages**: 1306
+- **Entities**: 562
 - **Concepts**: 505
-- **Sources**: 208
+- **Sources**: 209
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-12
+- **Last updated**: 2026-09-13

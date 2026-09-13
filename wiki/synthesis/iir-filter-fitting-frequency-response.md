@@ -3,23 +3,23 @@ type: synthesis
 created: 2026-04-12
 updated: 2026-04-29
 sources:
-- zotero://select/items/0_TAXBEPC7
-- zotero://select/items/0_5SFJK2MD
-- zotero://select/items/0_2LKM9QRI
+  - zotero://select/items/0_TAXBEPC7
+  - zotero://select/items/0_5SFJK2MD
+  - zotero://select/items/0_2LKM9QRI
 tags:
-- frequency-response
-- iir-fitting
-- model-reduction
-- state-space
-- system-identification
-- vector-fitting
-- parameterized-modeling
-- curve-fitting
-- optimization
+  - frequency-response
+  - iir-fitting
+  - model-reduction
+  - state-space
+  - system-identification
+  - vector-fitting
+  - parameterized-modeling
+  - curve-fitting
+  - optimization
 aliases:
-- IIR 滤波器拟合频响曲线
-- Vector Fitting
-- 参数化 IIR 曲线拟合
+  - IIR 滤波器拟合频响曲线
+  - Vector Fitting
+  - 参数化 IIR 曲线拟合
 ---
 
 # IIR 滤波器拟合频响曲线：从测量到状态空间模型

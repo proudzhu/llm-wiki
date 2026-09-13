@@ -3,16 +3,16 @@ type: synthesis
 created: 2026-04-12
 updated: 2026-04-29
 tags:
-- active-noise-control
-- bone-conduction
-- conversation-detect
-- transparency-mode
-- whisphone
-- open-ear-anc
-- multi-modal-interaction
+  - active-noise-control
+  - bone-conduction
+  - conversation-detect
+  - transparency-mode
+  - whisphone
+  - open-ear-anc
+  - multi-modal-interaction
 sources:
-- zotero://select/items/0_BPH79CM5 (DeepPEM-AFC)
-- zotero://select/items/0_AMKNDVMJ (Toyooka 2026)
+  - zotero://select/items/0_BPH79CM5 (DeepPEM-AFC)
+  - zotero://select/items/0_AMKNDVMJ (Toyooka 2026)
 ---
 
 # Modern Headphone ANC Systems: Beyond Noise Cancellation

@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-09-12
+updated: 2026-09-13
 sources:
+  - raw/papers/souden-2010-pmwf/full-text.md
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
   - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
@@ -37,6 +38,16 @@ $$\mathbf{w}_a = \mathbf{R}_n^{-1} \mathbf{r}_{qn}$$
 where:
 - $\mathbf{R}_n = \mathbf{B}^H \hat{\mathbf{R}}_y \mathbf{B}$: Noise correlation matrix in the blocking subspace
 - $\mathbf{r}_{qn} = \mathbf{B}^H \hat{\mathbf{R}}_y \mathbf{w}_q$: Cross-correlation vector
+
+## Statistics-Only GSC (Souden et al. 2010)
+
+[[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010]] reformulate all three GSC components so they depend on the speech and noise PSD matrices only — no array geometry, source location, TDOA estimation, GEV decomposition, or transfer-function-ratio fitting:
+
+- **Fixed beamformer (matched filter)**: $\mathbf{f} = \frac{\Phi_{xx}}{\mathrm{tr}\{\Phi_{xx}\}}\mathbf{u}_{n_0}$ — distortionless by construction, unlike the delay-and-sum branch which ignores attenuation and reverberation.
+- **Blocking matrix**: spans the subspace orthogonal to $\boldsymbol{\chi} = \Phi_{xx}\mathbf{u}_{n_0}$, which is collinear with the channel transfer vector $\mathbf{g}$ — theoretically equivalent to using the true transfer-function ratios (as in the TFR-GSC) but obtained for free from the speech PSD matrix.
+- **Noise canceller**: $\mathbf{n} = [\mathbf{B}^H\Phi_{vv}\mathbf{B}]^{-1}\mathbf{B}^H\Phi_{vv}\mathbf{f}$.
+
+On simulations (white Gaussian noise, $T_{60} \approx 0$ and 270 ms), this statistics-only GSC clearly outperforms the GEV-GSC of Warsitz et al. on speech distortion (e.g., $v_{\mathrm{sd}} = -18.22$ dB vs. $-4.17$ dB at 0 dB input SNR, anechoic), because the GEV-GSC's delay-and-sum first branch is sensitive to TDOA estimation errors and far-field assumptions; the ideal TFR-GSC (with known transfer functions) achieves the lowest distortion but rests on an impractical assumption. The GSC remains theoretically equivalent to the MVDR (= PMWF-0) and reaches the same output SNR $\lambda(\omega)$.
 
 ## WNG-Constrained GSC (Mittal et al. 2026)
 
@@ -81,6 +92,7 @@ Taseska et al. develop the [[concepts/informed-gsc|informed GSC]], where the FBF
 
 ## Related Sources
 
+- [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010: On Optimal Frequency-Domain Multichannel Linear Filtering for Noise Reduction]] — statistics-only GSC: matched-filter branch, PSD-derived blocking matrix; outperforms GEV-GSC on distortion
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] — informed GSC with bin-wise detector-controlled FBF/BM/NC and RLS noise canceller (Ch 5)
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
 - [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]]

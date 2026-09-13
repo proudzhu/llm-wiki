@@ -3,11 +3,11 @@ type: synthesis
 created: 2026-04-19
 updated: 2026-04-19
 tags:
-- evolution
-- optimization
-- personal-sound-zones
-- robust-control
-- socp
+  - evolution
+  - optimization
+  - personal-sound-zones
+  - robust-control
+  - socp
 sources: []
 ---
 # Personal Sound Zones: Evolution and Optimization

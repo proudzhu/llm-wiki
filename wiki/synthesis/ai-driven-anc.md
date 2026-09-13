@@ -3,10 +3,10 @@ type: synthesis
 created: 2026-04-17
 updated: 2026-09-05
 tags:
-- active-noise-control
-- adaptive-filtering
-- deep-learning
-- generative-models
+  - active-noise-control
+  - adaptive-filtering
+  - deep-learning
+  - generative-models
 sources:
   - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
   - raw/papers/bai-2026-feedback-guided-anc/full-text.md

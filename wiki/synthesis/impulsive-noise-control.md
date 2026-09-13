@@ -3,29 +3,29 @@ type: synthesis
 created: 2026-04-12
 updated: 2026-04-29
 sources:
-- zotero://select/items/0_QKJ2PV93
-- zotero://select/items/0_FV5SBLPI
-- zotero://select/items/0_XIBFSW3Y
-- zotero://select/items/0_NCKN38JM
-- zotero://select/items/0_XAZIKCJU
-- zotero://select/items/0_LJDPCZ9G
-- zotero://select/items/0_3AHG6GXW
-- zotero://select/items/0_64FSB2AU
+  - zotero://select/items/0_QKJ2PV93
+  - zotero://select/items/0_FV5SBLPI
+  - zotero://select/items/0_XIBFSW3Y
+  - zotero://select/items/0_NCKN38JM
+  - zotero://select/items/0_XAZIKCJU
+  - zotero://select/items/0_LJDPCZ9G
+  - zotero://select/items/0_3AHG6GXW
+  - zotero://select/items/0_64FSB2AU
 tags:
-- filtered-x-lms-algorithm
-- fxlms-f
-- impulsive-noise
-- stable-distribution
-- versoria
-- correntropy
-- generalized-maximum-correntropy-criterion
-- information-theoretic-learning
-- robust-filtering
-- adaptive-filtering
-- robust-control
+  - filtered-x-lms-algorithm
+  - fxlms-f
+  - impulsive-noise
+  - stable-distribution
+  - versoria
+  - correntropy
+  - generalized-maximum-correntropy-criterion
+  - information-theoretic-learning
+  - robust-filtering
+  - adaptive-filtering
+  - robust-control
 aliases:
-- Robust ANC: From Correntropy to GMCC
-- Robust ANC: Impulsive and Non-Stationary Environments
+  - Robust ANC: From Correntropy to GMCC
+  - Robust ANC: Impulsive and Non-Stationary Environments
 ---
 
 # Robust ANC for Impulsive and Non-Gaussian Noise

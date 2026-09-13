@@ -3,12 +3,12 @@ type: synthesis
 created: 2026-04-18
 updated: 2026-09-12
 tags:
-- active-noise-control
-- deep-learning
-- kalman-filter
-- signal-processing
-- virtual-sensing
-- adjoint-lms
+  - active-noise-control
+  - deep-learning
+  - kalman-filter
+  - signal-processing
+  - virtual-sensing
+  - adjoint-lms
 sources:
   - raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md
   - raw/papers/lu-2021-survey-active-noise-control-linear/full-text.md

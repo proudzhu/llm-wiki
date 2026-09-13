@@ -5,35 +5,35 @@ updated: 2026-04-17
 title: 'Advanced State Estimation in Acoustic Environments: A Detailed Review of Kalman
   Filtering Theory, Robust Extensions, and Neural Hybrids'
 authors:
-- Gemini CLI
+  - Gemini CLI
 tags:
-- active-noise-control
-- kalman-filter
-- neural-kalman
-- review-paper
-- robust-estimation
-- speech-enhancement
-- state-space
+  - active-noise-control
+  - kalman-filter
+  - neural-kalman
+  - review-paper
+  - robust-estimation
+  - speech-enhancement
+  - state-space
 sources:
-- zotero://select/items/0_64FSB2AU
-- zotero://select/items/0_UCQRBZUX
-- zotero://select/items/0_TAXBEPC7
-- zotero://select/items/0_QU9NZUUG
-- zotero://select/items/0_J5CZZBZ2
-- zotero://select/items/0_THI6KPAC
-- zotero://select/items/0_R4CBVLP2
-- zotero://select/items/0_H8H993BR
-- zotero://select/items/0_FAY5V256
-- zotero://select/items/0_55VM6G9C
-- zotero://select/items/0_WX2XSXDA
-- zotero://select/items/0_QTMLUN4W
-- zotero://select/items/0_JPXSPZU2
-- zotero://select/items/0_B7E4N3F3
-- zotero://select/items/0_M77TYZR5
-- zotero://select/items/0_4CMVZD7M
-- zotero://select/items/0_CBHM7A3F
-- zotero://select/items/0_G6BB8RJL
-- zotero://select/items/0_ILJW385X
+  - zotero://select/items/0_64FSB2AU
+  - zotero://select/items/0_UCQRBZUX
+  - zotero://select/items/0_TAXBEPC7
+  - zotero://select/items/0_QU9NZUUG
+  - zotero://select/items/0_J5CZZBZ2
+  - zotero://select/items/0_THI6KPAC
+  - zotero://select/items/0_R4CBVLP2
+  - zotero://select/items/0_H8H993BR
+  - zotero://select/items/0_FAY5V256
+  - zotero://select/items/0_55VM6G9C
+  - zotero://select/items/0_WX2XSXDA
+  - zotero://select/items/0_QTMLUN4W
+  - zotero://select/items/0_JPXSPZU2
+  - zotero://select/items/0_B7E4N3F3
+  - zotero://select/items/0_M77TYZR5
+  - zotero://select/items/0_4CMVZD7M
+  - zotero://select/items/0_CBHM7A3F
+  - zotero://select/items/0_G6BB8RJL
+  - zotero://select/items/0_ILJW385X
 ---
 
 # Advanced State Estimation in Acoustic Environments: A Detailed Review

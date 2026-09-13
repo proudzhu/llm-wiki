@@ -564,4 +564,6 @@
 | [[entities/zhuohuang-zhang\|Zhuohuang Zhang]] | Columbia University — first author of ADL-MVDR; neural beamforming and speech separation | 2026-09-12 |
 | [[entities/shi-xiong-zhang\|Shi-Xiong Zhang]] | Ohio State University — speech separation, far-field speech recognition | 2026-09-12 |
 | [[entities/lianwu-chen\|Lianwu Chen]] | Amazon Alexa — speech processing, noise robustness | 2026-09-12 |
+| [[entities/mehrez-souden\|Mehrez Souden]] | Researcher at Universite du Quebec (INRS-EMT); signal processing for wireless communications and speech enhancement; first author of the PMWF origin paper | 2026-09-13 |
+| [[entities/sofienne-affes\|Sofiene Affes]] | Professor at INRS-EMT, Montreal; wireless communications, statistical signal processing; co-author of the PMWF origin paper | 2026-09-13 |
 

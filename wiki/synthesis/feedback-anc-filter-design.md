@@ -5,31 +5,31 @@ updated: 2026-09-12
 sources:
   - raw/papers/schepker-2016-sdp-minmax-acoustic-feedback/full-text.md
   - zotero://select/items/0_2LKM9QRI
-- zotero://select/items/0_XLZPIW68
-- zotero://select/items/0_VRSLTC2L
-- zotero://select/items/0_846A4RH7
-- zotero://select/items/0_Vaudrey2003
-- zotero://select/items/0_BPH79CM5
-- zotero://select/items/0_D2BV74LJ
-- zotero://select/items/0_Z7FUV6LL
-- zotero://select/items/0_IA5SPUL5
-- zotero://select/items/0_97XR3LJ7
-- zotero://select/items/0_T3GXM3RI
+  - zotero://select/items/0_XLZPIW68
+  - zotero://select/items/0_VRSLTC2L
+  - zotero://select/items/0_846A4RH7
+  - zotero://select/items/0_Vaudrey2003
+  - zotero://select/items/0_BPH79CM5
+  - zotero://select/items/0_D2BV74LJ
+  - zotero://select/items/0_Z7FUV6LL
+  - zotero://select/items/0_IA5SPUL5
+  - zotero://select/items/0_97XR3LJ7
+  - zotero://select/items/0_T3GXM3RI
 tags:
-- constrained-lms
-- feedback-anc
-- filter-design
-- robust-control
-- stability
-- waterbed-effect
-- acoustic-feedback-cancellation
-- deep-learning
-- step-size-control
-- variable-step-size
-- uncertainty-modeling
+  - constrained-lms
+  - feedback-anc
+  - filter-design
+  - robust-control
+  - stability
+  - waterbed-effect
+  - acoustic-feedback-cancellation
+  - deep-learning
+  - step-size-control
+  - variable-step-size
+  - uncertainty-modeling
 aliases:
-- Feedback ANC and Acoustic Feedback Cancellation
-- Adaptive Step-Size Control in Feedback ANC
+  - Feedback ANC and Acoustic Feedback Cancellation
+  - Adaptive Step-Size Control in Feedback ANC
 ---
 
 # Feedback ANC Filter Design: Stability, Robustness, and Performance Trade-offs

@@ -3,18 +3,18 @@ type: synthesis
 created: 2026-04-12
 updated: 2026-09-07
 sources:
-- zotero://select/items/0_M2F5PSAU
-- zotero://select/items/0_TVS87FW6
-- zotero://select/items/0_BQ3P7LZJ
-- zotero://select/items/0_WBAA4H6N
-- raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
+  - zotero://select/items/0_M2F5PSAU
+  - zotero://select/items/0_TVS87FW6
+  - zotero://select/items/0_BQ3P7LZJ
+  - zotero://select/items/0_WBAA4H6N
+  - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
 tags:
-- application-specific-anc
-- drone-anc
-- hearing-aids
-- multi-channel-anc
-- open-ear-anc
-- selective-attenuation
+  - application-specific-anc
+  - drone-anc
+  - hearing-aids
+  - multi-channel-anc
+  - open-ear-anc
+  - selective-attenuation
 ---
 
 # Application-Specific ANC: Form Factor Drives Architecture

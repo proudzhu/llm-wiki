@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-08-25
-updated: 2026-09-11
+updated: 2026-09-13
 sources:
+  - raw/papers/souden-2010-pmwf/full-text.md
   - raw/papers/bagheri-2019-pmwf-spp/full-text.md
   - raw/papers/braun-2015-residual-noise-control/full-text.md
   - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
@@ -24,6 +25,14 @@ With $\mathbf{h}_i(\ell,k)$ the filter estimating the speech component at refere
 $$\mathbf{h}_i(\ell,k) = \frac{\boldsymbol{\Phi}_{vv}^{-1} \boldsymbol{\Phi}_{yy} - \mathbf{I}_N}{\beta(\ell,k) + \mathrm{tr}\{\boldsymbol{\Phi}_{vv}^{-1} \boldsymbol{\Phi}_{yy}\} - N}\, \mathbf{u}_i$$
 
 requiring only the input PSD matrix $\boldsymbol{\Phi}_{yy}$ and the noise PSD matrix $\boldsymbol{\Phi}_{vv}$. The multi-channel a priori SNR $\xi(\ell,k) = \mathrm{tr}\{\boldsymbol{\Phi}_{vv}^{-1}\boldsymbol{\Phi}_{yy}\} - N$ in the denominator is also the theoretical output SNR of the filter. Souden et al. (2010) unified MVDR, GSC, and PMWF in this common frequency-domain framework. An equivalent form in terms of speech and noise covariances (used by Grinstein et al. 2025) is $\mathbf{h}[t,w] = \boldsymbol{\gamma}[t,w][:,0] / (\beta[t,w] + \mathrm{trace}\,\boldsymbol{\gamma}[t,w])$ with $\boldsymbol{\gamma} = \mathbf{\Phi}_{nn}^{-1}\mathbf{\Phi}_{ss}$.
+
+## Closed-Form Performance Measures (Origin Paper)
+
+[[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010]] derive, from the rank-one property of $\Phi_{xx} = \phi_{ss}\mathbf{g}\mathbf{g}^H$ and the Woodbury identity, closed-form local performance measures for the PMWF-$\beta$ in terms of $\beta$ and the unique positive eigenvalue $\lambda(\omega)$ of $\Phi_{vv}^{-1}\Phi_{xx}$:
+
+$$v_{\mathrm{sd}} = \frac{\beta^2}{[\beta + \lambda(\omega)]^2}, \qquad \xi_{\mathrm{nr}} = \frac{[\beta + \lambda(\omega)]^2}{\mathrm{SNR}(\omega)\,\lambda(\omega)}, \qquad \mathrm{SNR}_o = \lambda(\omega)$$
+
+Three structural consequences: (i) the **output SNR is independent of $\beta$** — Wiener, MVDR, GSC, maximum-likelihood, and maximum-SNR filters all coincide up to a frequency-dependent scaling and achieve the same local output SNR; $\beta$ trades the distortion index against the noise-reduction *factor* only. (ii) The distortion bound $\sigma$ and the tuning parameter are linked by $\beta \leq \frac{\tilde{\sigma}}{1-\tilde{\sigma}}\lambda$, enabling psychoacoustic frequency-dependent distortion control. (iii) An MSC-based proof establishes $\mathrm{SNR}_o \geq \mathrm{SNR}$ for the whole family. For spatially incoherent noise, $\lambda = \mathrm{SNR}[1 + R_{n_0}]$ with $R_{n_0} = \sum_{n \neq n_0}|G_n|^2/|G_{n_0}|^2$, so adding microphones monotonically improves output SNR and reduces distortion, and $\mathbf{h}_{\mathrm{MVDR}} = \frac{1+\lambda}{\lambda}\mathbf{h}_{\mathrm{W}}$ — Wiener and MVDR converge in behavior at high input SNR or many microphones. With mixed coherent + incoherent noise ($\Phi_{vv} = \mathbf{c}\mathbf{c}^H + \delta\mathbf{I}$), $\lambda = \frac{\phi_{ss}\|\mathbf{g}\|^2}{\delta}(1-\alpha)$ where $\alpha$ grows with the collinearity between the coherent-noise and target propagation vectors — a noise source physically near the speaker is the hard case.
 
 ## Practical Implementation via MC-SPP (Bagheri & Giacobello 2019)
 
@@ -72,6 +81,7 @@ On a 4-mic circular array (TIMIT speech, babble/pink NOISEX-92 interference, $T_
 
 ## Related Sources
 
+- [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010: On Optimal Frequency-Domain Multichannel Linear Filtering for Noise Reduction]] — origin paper: PMWF/MVDR/GSC unified, statistics-only expressions, closed-form performance measures
 - [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]]
 - [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015: Residual Noise Control PMWF]]
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]]
