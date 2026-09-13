@@ -55,6 +55,26 @@ Rules:
 - `defuddle` CLI (`npm install -g defuddle`) for arXiv HTML extraction
 - All scripts run from the **project root** via `uv run python .agents/skills/paper-reader/scripts/<script>.py`
 
+## Script Command Quick Reference
+
+Exact invocations for every script (all prefixed with `uv run python .agents/skills/paper-reader/scripts/`). **In sessions resumed from a summary, consult this table before each script's first invocation** — handoff summaries preserve step order but lose exact CLI signatures: `update_indexes.py --slug SLUG` (missing the mandatory subcommand) and `append_log.py ingest "Title"` (positional args) both exit 2 (`pitfalls.md` #50, #51).
+
+| Step | Command |
+|------|---------|
+| 1-2 | `zotero_fetch.py search "3-5 WORDS"` → `zotero_fetch.py metadata KEY` |
+| 3a | `prepare_paper.py --slug SLUG --pdf-key PDF_KEY` |
+| 3b | `extract_arxiv_html.py --arxiv-id ID --slug SLUG` |
+| 3c | `extract_mineru.py --slug SLUG [--language en --model vlm --timeout 600]` |
+| 3d | `extract_pdftotext.py --slug SLUG` |
+| 3e | `map_figures.py --slug SLUG` |
+| 9 | `triage_synthesis.py --slug SLUG` |
+| 10 | `update_indexes.py add --category CAT --slug SLUG --display "..." --summary "..." --date YYYY-MM-DD` then `update_indexes.py stats` — or `update_indexes.py batch --manifest .tmp_ingest_manifest.yaml --stats` |
+| 11 | `append_log.py --op ingest --title "..." --body "..."` (or `--file .tmp_log_entry.md`) — strictly flags, no positionals |
+| 12a | `verify_wikilinks.py --slug SLUG` |
+| 12b | `check_backlinks.py --slug SLUG` |
+| 12c | `build_check.py` (wraps `mkdocs build --strict`) |
+| 13 | `commit_ingest.py --slug SLUG --message "ingest: Short Title (Author Year)" --entities ... --concepts ... --synthesis ...` |
+
 ## References (load on demand)
 
 | Reference | When to load |
@@ -249,7 +269,7 @@ uv run python .agents/skills/paper-reader/scripts/triage_synthesis.py --slug SLU
 
 **Verify synthesis edits landed (mandatory)**: after the *last* edit to each synthesis page, Grep the file for the new slug and confirm it appears in **both** places you intended — the frontmatter `sources:` list *and* the Sources Synthesized table row (plus any insight paragraph). The frontmatter edit is the one most often lost: it is the first of the sequential edits and produces no visible change in the rendered page. In the ADL-MVDR ingest, an entire synthesis update (frontmatter + row) was believed complete but never landed in `deep-speech-enhancement.md` — caught only because this Grep was re-run at the start of the *next* session (`pitfalls.md` #49).
 
-**Resumed sessions: re-verify before Step 10.** When a conversation continues from a summary (context was compacted), treat every "completed" edit claim as unverified: Grep each synthesis page (and any concept page claimed updated) for the new slug before moving on. A handoff summary can describe an edit that was never actually applied, or an edit that raced and was silently dropped.
+**Resumed sessions: re-verify before Step 10.** When a conversation continues from a summary (context was compacted), treat every "completed" edit claim as unverified: Grep each synthesis page (and any concept page claimed updated) for the new slug before moving on. A handoff summary can describe an edit that was never applied, or an edit that raced and was silently dropped. This has now bitten twice — ADL-MVDR and Souden 2011, where the summary claimed the synthesis frontmatter was already updated while the re-verify Grep found no trace of the slug in the file (`pitfalls.md` #49). The subtlety: a summary can be accurate about what *remains* while wrong about what is *done* — only the Grep distinguishes them.
 
 ### Step 10: Update Indexes
 
