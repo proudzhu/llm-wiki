@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-30
-updated: 2026-07-09
+updated: 2026-09-13
 tags:
   - researcher
   - array-processing
@@ -28,6 +28,8 @@ tags:
 - SCM reconstruction method for multi-source speech enhancement (Liu et al. 2026)
 - Joint learning of covariance estimation and WNG for robust MVDR beamforming (Deng et al. 2026)
 
+- Co-author of "An Integrated Solution for Online Multichannel Noise Tracking and Reduction" (IEEE TASLP 2011) — practical MC-SPP implementation and multichannel MCRA noise PSD matrix tracking — [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011]]
+
 ## Affiliations
 
 - Northwestern Polytechnical University (NWPU), Xi'an, China
@@ -42,3 +44,4 @@ tags:
 
 - [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
 - [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026: Joint Covariance and WNG Learning for Robust MVDR]]
+- [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011: An Integrated Solution for Online Multichannel Noise Tracking and Reduction]]

@@ -29,6 +29,7 @@ tags:
 - Differential beamforming with high directivity factors
 - Dimensionality reduction for STFT-domain beamforming
 - Joint learning of covariance estimation and WNG for robust MVDR beamforming (Deng et al. 2026)
+- Co-author of "An Integrated Solution for Online Multichannel Noise Tracking and Reduction" (IEEE TASLP 2011) — online noise PSD matrix tracking by generalizing MCRA to the multichannel case, combined with the MC-SPP and PMWF-family filters — [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011]]
 
 ## Affiliations
 
@@ -46,3 +47,4 @@ tags:
 - [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
 - [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026: Joint Covariance and WNG Learning for Robust MVDR]]
 - [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010: On Optimal Frequency-Domain Multichannel Linear Filtering for Noise Reduction]]
+- [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011: An Integrated Solution for Online Multichannel Noise Tracking and Reduction]]

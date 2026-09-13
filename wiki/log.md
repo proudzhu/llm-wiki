@@ -5282,3 +5282,9 @@ Follow-up to today's high-confidence pass: batch-processed all 76 remaining audi
 ## [2026-09-13] ingest | On Optimal Frequency-Domain Multichannel Linear Filtering for Noise Reduction (Souden, Benesty & Affes 2010)
 
 Ingested the PMWF origin paper from Zotero (MinerU extraction, 4 figures mapped). Created 3 new pages: source [[sources/souden-2010-pmwf]], entities [[entities/mehrez-souden]], [[entities/sofienne-affes]]. Updated 6 existing pages: [[entities/jacob-benesty]] (key contribution), [[concepts/parametric-multi-channel-wiener-filter]] (closed-form performance measures from origin paper), [[concepts/mvdr-beamformer]] (beta=0 endpoint proof), [[concepts/gsc-beamformer]] (statistics-only GSC), [[concepts/multi-channel-wiener-filter]] (origin closed forms), [[concepts/speech-distortion-constrained-noise-reduction]] (original derivation). Updated [[synthesis/multi-channel-speech-enhancement]] with the origin-paper row and Insight 4 paragraph establishing covariances as sufficient statistic for the distortion-suppression trade-off. Also fixed pre-existing YAML frontmatter indentation corruption in 15 synthesis pages. Statistics: 1306 total (562 entities, 505 concepts, 209 sources, 23 synthesis, 7 queries), verified by check_statistics.py.
+
+---
+
+## [2026-09-13] ingest | Souden, Chen, Benesty & Affes 2011: An Integrated Solution for Online Multichannel Noise Tracking and Reduction
+
+Ingested from Zotero via MinerU extraction. Created source page; updated 4 author entities (Souden, Chen, Benesty, Affes), 7 concept pages (MC-SPP, multichannel MCRA, MWF, SPP, MVDR, PMWF, MCSE) and the MCSE synthesis page (Insight 4: online companion to the 2010 PMWF framework). Statistics: 1307 total, 210 sources.

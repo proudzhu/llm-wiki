@@ -20,12 +20,16 @@ tags:
 
 - Co-author of "On Optimal Frequency-Domain Multichannel Linear Filtering for Noise Reduction" (IEEE TASLP 2010) — the foundational [[concepts/parametric-multi-channel-wiener-filter|PMWF]] paper — [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010]]
 - Signal subspace tracking algorithm for microphone array processing of speech (with Y. Grenier, IEEE Trans. Speech Audio Process. 1997)
+- Co-author of "An Integrated Solution for Online Multichannel Noise Tracking and Reduction" (IEEE TASLP 2011) — online multichannel noise PSD matrix tracking driven by the MC-SPP, integrated with PMWF-family noise-reduction filters — [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011]]
 
 ## Related Concepts
 
 - [[concepts/parametric-multi-channel-wiener-filter|Parametric Multi-Channel Wiener Filter (PMWF)]]
 - [[concepts/beamforming|Beamforming]]
+- [[concepts/multi-channel-speech-presence-probability|Multi-Channel Speech Presence Probability (MC-SPP)]]
+- [[concepts/multichannel-mcra|Multichannel MCRA]]
 
 ## Related Sources
 
 - [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010: On Optimal Frequency-Domain Multichannel Linear Filtering for Noise Reduction]]
+- [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011: An Integrated Solution for Online Multichannel Noise Tracking and Reduction]]

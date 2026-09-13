@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-08-15
-updated: 2026-09-11
+updated: 2026-09-13
 sources:
+  - raw/papers/souden-2011-online-noise-tracking/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/bagheri-2019-pmwf-spp/full-text.md
   - raw/papers/ke-2021-low-complexity-artificial-noise-suppression/full-text.md
@@ -52,7 +53,7 @@ MS and SPP-based NE are complementary: SPP gives faster tracking in truly non-st
 
 ## Multi-Channel Extension (MC-SPP)
 
-The Gaussian-model **multi-channel SPP** (Souden et al. 2010) replaces the scalar a priori SNR with the multi-channel statistics $\xi(\ell,k) = \mathrm{tr}\{\boldsymbol{\Phi}_{vv}^{-1}\boldsymbol{\Phi}_{yy}\} - N$ and a quadratic-form a posteriori term, computing the posterior from the whole observation vector — see [[concepts/multi-channel-speech-presence-probability|Multi-Channel Speech Presence Probability]]. [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019]] use MC-SPP for the same soft-combined recursive noise update as Eq. (2), generalized to the noise PSD *matrix* with effective smoothing $\tilde{\alpha}_v = \alpha_v + (1-\alpha_v)\,p(\ell,k)$, and additionally to control a PMWF trade-off parameter and an MMSE output blend.
+The Gaussian-model **multi-channel SPP** (Souden et al. 2010) replaces the scalar a priori SNR with the multi-channel statistics $\xi(\ell,k) = \mathrm{tr}\{\boldsymbol{\Phi}_{vv}^{-1}\boldsymbol{\Phi}_{yy}\} - N$ and a quadratic-form a posteriori term, computing the posterior from the whole observation vector — see [[concepts/multi-channel-speech-presence-probability|Multi-Channel Speech Presence Probability]]. The first practical online implementation ([[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011]]) estimates the a priori SAP multivariately from the instantaneous and long-term multichannel a posteriori SNRs (Hotelling's $T^2$ and scaled-$F$ distributed under speech absence, thresholds at significance level $\epsilon = 0.01$), combining local, global, and frame-wise soft decisions — the multichannel counterpart of Cohen's single-channel soft-decision SAP framework. [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019]] use MC-SPP for the same soft-combined recursive noise update as Eq. (2), generalized to the noise PSD *matrix* with effective smoothing $\tilde{\alpha}_v = \alpha_v + (1-\alpha_v)\,p(\ell,k)$, and additionally to control a PMWF trade-off parameter and an MMSE output blend.
 
 ## SPP as Input to a DNN-Output Postfilter (Ke et al. 2021)
 
@@ -81,5 +82,6 @@ All three add only 0.0098–0.016 MFLOPs/frame on top of the DNN, and the *choic
 
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — uses SPP for the low-frequency NE stage and as the speech-absence gate for the multi-channel coherence stage
 - [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]] — multi-channel Gaussian-model extension driving noise PSD matrix tracking, PMWF trade-off, and MMSE output
+- [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011: An Integrated Solution for Online Multichannel Noise Tracking and Reduction]] — first practical online MC-SPP implementation with a multivariate a priori SAP estimator
 - [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke, Li, Zheng, Peng & Li 2021: Low-Complexity Artificial Noise Suppression]] — three re-designed SPP inputs (noisy spectrum, DNN gain, adaptive prior) that un-freeze noise tracking on DNN artificial residual noise
 - [[sources/gerkmann-2012-mmse-noise-psd-tracking|Gerkmann & Hendriks 2012: Improved MMSE-Based Noise PSD Tracking Using Temporal Cepstrum Smoothing]] — the same authors' presence-decision-free MMSE-based noise tracker, contrasted here as the third single-channel NE family

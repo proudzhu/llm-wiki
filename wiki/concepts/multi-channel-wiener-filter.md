@@ -11,6 +11,7 @@ sources:
   - raw/papers/braun-2015-residual-noise-control/full-text.md
   - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
   - raw/papers/souden-2010-pmwf/full-text.md
+  - raw/papers/souden-2011-online-noise-tracking/full-text.md
 tags:
   - speech-enhancement
   - wiener-filter
@@ -71,6 +72,14 @@ The MWF is one endpoint of a parameterized family: the [[concepts/parametric-mul
 
 [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025]] push this to the extreme where a tiny neural network *fully controls* the PMWF (**NeuralPMWF**): a 164.9k-parameter network (24.95 MMACs/s, 16 ms algorithmic latency) estimates a multi-channel complex mask from which speech and noise SCMs are derived by exponential smoothing with learned, frequency-dependent smoothing speeds, while $\beta$ is driven dynamically per T-F bin by an SPP proxy computed from the mask — the SPP-driven dynamic $\beta$ contributing the largest single gain in their ablation on a 5-microphone smart-glasses scenario.
 
+## SPP-Driven Modified MWF (Souden et al. 2011)
+
+[[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011]] introduce a heuristic modification that exploits the [[concepts/multi-channel-speech-presence-probability|MC-SPP]] explicitly: $\mathbf{h}_{\mathrm{mW}} = \Omega(\ell,k)\,\mathbf{h}_{\mathrm{MVDR}}$ with
+
+$$\Omega(\ell,k) = \left\{1 - \left[\frac{1}{1+\hat{\xi}(\ell,k)}\right]^{\hat{p}(\ell,k)}\right\}^{1/\hat{p}(\ell,k)}$$
+
+which applies extra suppression in noise-only segments (small SPP) and converges to Wiener-like behavior when speech is present. On a reverberant room ($T_{60} = 210$ ms, 4 mics, babble noise), the modified Wiener attains 19.27 dB output SINR versus 15.20 (MVDR) and 17.14 (Wiener), at a modest distortion increase concentrated on weak speech components — the SPP-driven post-processor amplifies the effect of speech miss-detections. The same paper supplies the online noise PSD matrix tracking ([[concepts/multichannel-mcra|multichannel MCRA]]) that makes all three filters implementable online.
+
 ## Related Concepts
 
 - [[concepts/wiener-filter|Wiener Filter]]
@@ -91,6 +100,7 @@ The MWF is one endpoint of a parameterized family: the [[concepts/parametric-mul
 
 - [[sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
 - [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010: On Optimal Frequency-Domain Multichannel Linear Filtering for Noise Reduction]] — MWF = PMWF-1 in the origin paper's statistics-only framework
+- [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011: An Integrated Solution for Online Multichannel Noise Tracking and Reduction]] — SPP-driven modified MWF on top of the MVDR, with online multichannel MCRA noise tracking
 - [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] — the FxMWF extension of the MWF
 - [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]

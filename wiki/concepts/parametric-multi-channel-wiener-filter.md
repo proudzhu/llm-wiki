@@ -4,6 +4,7 @@ created: 2026-08-25
 updated: 2026-09-13
 sources:
   - raw/papers/souden-2010-pmwf/full-text.md
+  - raw/papers/souden-2011-online-noise-tracking/full-text.md
   - raw/papers/bagheri-2019-pmwf-spp/full-text.md
   - raw/papers/braun-2015-residual-noise-control/full-text.md
   - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
@@ -33,6 +34,10 @@ requiring only the input PSD matrix $\boldsymbol{\Phi}_{yy}$ and the noise PSD m
 $$v_{\mathrm{sd}} = \frac{\beta^2}{[\beta + \lambda(\omega)]^2}, \qquad \xi_{\mathrm{nr}} = \frac{[\beta + \lambda(\omega)]^2}{\mathrm{SNR}(\omega)\,\lambda(\omega)}, \qquad \mathrm{SNR}_o = \lambda(\omega)$$
 
 Three structural consequences: (i) the **output SNR is independent of $\beta$** — Wiener, MVDR, GSC, maximum-likelihood, and maximum-SNR filters all coincide up to a frequency-dependent scaling and achieve the same local output SNR; $\beta$ trades the distortion index against the noise-reduction *factor* only. (ii) The distortion bound $\sigma$ and the tuning parameter are linked by $\beta \leq \frac{\tilde{\sigma}}{1-\tilde{\sigma}}\lambda$, enabling psychoacoustic frequency-dependent distortion control. (iii) An MSC-based proof establishes $\mathrm{SNR}_o \geq \mathrm{SNR}$ for the whole family. For spatially incoherent noise, $\lambda = \mathrm{SNR}[1 + R_{n_0}]$ with $R_{n_0} = \sum_{n \neq n_0}|G_n|^2/|G_{n_0}|^2$, so adding microphones monotonically improves output SNR and reduces distortion, and $\mathbf{h}_{\mathrm{MVDR}} = \frac{1+\lambda}{\lambda}\mathbf{h}_{\mathrm{W}}$ — Wiener and MVDR converge in behavior at high input SNR or many microphones. With mixed coherent + incoherent noise ($\Phi_{vv} = \mathbf{c}\mathbf{c}^H + \delta\mathbf{I}$), $\lambda = \frac{\phi_{ss}\|\mathbf{g}\|^2}{\delta}(1-\alpha)$ where $\alpha$ grows with the collinearity between the coherent-noise and target propagation vectors — a noise source physically near the speaker is the hard case.
+
+## Online Implementability (Souden et al. 2011)
+
+The PMWF closed form needs only $\boldsymbol{\Phi}_{yy}$ and $\boldsymbol{\Phi}_{vv}$ — but online operation additionally requires tracking $\boldsymbol{\Phi}_{vv}$ through speech activity. [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011]] close this gap with an [[concepts/multi-channel-speech-presence-probability|MC-SPP]]-driven [[concepts/multichannel-mcra|multichannel MCRA]] tracker (two-iteration refinement per frame), and demonstrate the full pipeline with the PMWF endpoints MVDR ($\beta = 0$) and Wiener ($\beta = 1$) plus an SPP-driven modified Wiener filter — reporting output-SINR gains up to ~9 dB over single-channel OM-LSA in babble noise (4 microphones, anechoic room).
 
 ## Practical Implementation via MC-SPP (Bagheri & Giacobello 2019)
 
@@ -82,6 +87,7 @@ On a 4-mic circular array (TIMIT speech, babble/pink NOISEX-92 interference, $T_
 ## Related Sources
 
 - [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010: On Optimal Frequency-Domain Multichannel Linear Filtering for Noise Reduction]] — origin paper: PMWF/MVDR/GSC unified, statistics-only expressions, closed-form performance measures
+- [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011: An Integrated Solution for Online Multichannel Noise Tracking and Reduction]] — online noise PSD matrix tracking that makes the PMWF family implementable online
 - [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]]
 - [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015: Residual Noise Control PMWF]]
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]]

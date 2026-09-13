@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-08-16
-updated: 2026-08-25
+updated: 2026-09-13
 sources:
+  - raw/papers/souden-2011-online-noise-tracking/full-text.md
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
   - raw/papers/bagheri-2019-pmwf-spp/full-text.md
 tags:
@@ -17,6 +18,14 @@ tags:
 # Multichannel MCRA
 
 **Multichannel MCRA** (Minima-Controlled Recursive Averaging) extends single-channel MCRA to estimate the noise Power Spectral Density (PSD) *matrix* $\boldsymbol{\Phi}_{\mathbf{v}}(t,k)$ from multi-microphone signals using a Speech Presence Probability (SPP)-controlled recursive averager. The noise PSD matrix is updated only at TF bins where speech is likely absent, with the averaging controlled by the a posteriori SPP. Taseska & Habets (IEEE/ACM TASLP 2017) showed that an **ML formulation** of the multichannel noise-PSD/SPP estimation problem yields the same structure as multichannel MCRA, with a specific a priori Speech Absence Probability (SAP) and a specific recursive averaging parameter.
+
+## Origin: SPP-Controlled Matrix Tracking (Souden et al. 2011)
+
+[[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011]] gave the first generalization of single-channel MCRA to the noise PSD *matrix*: under $H_0$ the matrix updates by recursive averaging, under $H_1$ it is frozen, and both cases combine into a single recursion with SPP-controlled smoothing
+
+$$\tilde{\alpha}_v(k,l) = \alpha_v + (1-\alpha_v)\,p(k,l)$$
+
+driven by the [[concepts/multi-channel-speech-presence-probability|MC-SPP]] (whose a priori SAP is estimated multivariately from Hotelling's $T^2$ / $F$-distributed SNR measures). Because the SPP itself requires a current noise PSD matrix, a **two-iteration procedure** refines both per frame; tracking halts during speech activity and resumes as speech energy decays, following nonstationary noise including the cross-PSD terms between microphones. This is the SNR/multivariate-statistics branch of multichannel a priori SAP control; the ML formulation below and the CDR-based SAP are alternative control signals.
 
 ## ML Formulation
 
@@ -56,3 +65,4 @@ The estimated $\boldsymbol{\Phi}_{\mathbf{v}}$ and SPP drive [[concepts/informed
 
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] (Chapter 3)
 - [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]] — practical MC-SPP-driven implementation with Woodbury inverse updates
+- [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011: An Integrated Solution for Online Multichannel Noise Tracking and Reduction]] — origin of the SPP-controlled noise PSD matrix tracking recursion

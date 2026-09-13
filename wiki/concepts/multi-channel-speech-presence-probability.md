@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-08-25
-updated: 2026-09-12
+updated: 2026-09-13
 sources:
+  - raw/papers/souden-2011-online-noise-tracking/full-text.md
   - raw/papers/bagheri-2019-pmwf-spp/full-text.md
   - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
   - raw/papers/braun-2015-residual-noise-control/full-text.md
@@ -36,6 +37,15 @@ $\xi$ is the multi-channel a priori SNR (also the theoretical output SNR of the 
 2. **PMWF trade-off control** — the smoothed SPP modulates the PMWF trade-off parameter $\beta(\ell,k)$ between low distortion (speech present) and strong noise reduction (speech absent).
 3. **MMSE output estimation** — per-bin blending of the filtered signal with a $G_{\min}$-gated reference channel.
 
+## Practical Implementation (Souden, Chen, Benesty & Affes 2011)
+
+[[sources/souden-2011-online-noise-tracking|Souden et al. 2011]] turn the Gaussian-model MC-SPP into a fully online estimator:
+
+- **Multivariate a priori SAP** — built from the instantaneous ($\psi = \mathbf{y}^H\hat{\boldsymbol{\Phi}}_{vv}^{-1}\mathbf{y}$, Hotelling's $T^2$-distributed under $H_0$) and long-term ($\tilde{\psi} = \mathrm{tr}\{\hat{\boldsymbol{\Phi}}_{vv}^{-1}\hat{\boldsymbol{\Phi}}_{yy}\}$, approximated by a scaled $F$ distribution) multichannel a posteriori SNRs, with false-alarm thresholds set at significance level $\epsilon = 0.01$; local, global (Hann-windowed over $2K_1+1$ neighboring bins), and frame-wise soft decisions are combined multiplicatively and capped at $q_{\max} = 0.99$.
+- **Two-iteration procedure** — resolves the chicken-and-egg dependency between the MC-SPP and the noise PSD matrix: a first pass computes the SPP and a first noise PSD matrix estimate from the previous frame's statistics; a second pass recomputes $\hat{\xi}, \hat{q}, \hat{\beta}$ from the refined estimate. No further improvement is observed beyond the second iteration.
+- **Safeguards** — SPP smoothing with $\alpha_p = 0.6$ and a noise-only initialization of $L_{\mathrm{init}} = 20$ frames.
+- **ROC evidence** — the second iteration sharpens detection, and the MC-SPP with 2 or 4 microphones clearly outperforms single-channel IMCRA-based SPP, with the largest gain in (highly nonstationary) babble noise; additional microphones help most where speech energy is weak.
+
 ## Practical Safeguards (Bagheri & Giacobello 2019)
 
 - Recursive smoothing of the SPP with coefficient $\alpha_p$ and clamping to $[p_{\min}, p_{\max}]$ (e.g., $[0.01, 0.99]$) to avoid stagnation.
@@ -68,6 +78,7 @@ The single-channel [[concepts/speech-presence-probability|SPP]] (e.g., Gerkmann 
 ## Related Sources
 
 - [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]]
+- [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011: An Integrated Solution for Online Multichannel Noise Tracking and Reduction]] — first practical online MC-SPP implementation: multivariate a priori SAP, two-iteration refinement, ROC gains over single-channel IMCRA
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]]
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin et al. 2017: Multi-channel Noise Reduction for Mobile Phones]] — single-channel SPP counterpart in an MVDR + post-filter pipeline
 - [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — mask-magnitude SPP proxy scheduling the PMWF distortion parameter
