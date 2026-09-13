@@ -21,6 +21,7 @@ sources:
   - raw/papers/richard-2023-audio-signal-processing-21st-century/full-text.md
   - raw/papers/zaidel-2026-linearly-constrained-deep-beamformer/full-text.md
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
+  - raw/papers/pandey-2025-ultra-low-compute/full-text.md
 tags:
   - beamforming
   - speech-enhancement
@@ -83,6 +84,10 @@ The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-
 
 [[sources/li-2022-embedding-beamforming|Li et al. 2022]] provide the sharpest evidence that the tandem mask-then-MVDR scheme is structurally limited: their all-neural causal beamformer [[concepts/eabnet|EaBNet]] (2.84M params, framewise weights) *surpasses an MB-MVDR beamformer driven by oracle ideal-ratio-mask SCMs* (avg. PESQ 3.52 vs. 3.10, ESTOI 85.91% vs. 83.57%, SDR 16.72 vs. 14.26 dB) on a simulated 9-channel DNS-Challenge setup — meaning even perfect mask estimation cannot rescue the decoupled statistical second stage. The EaBNet* variant, which reinserts explicit SCM computation from predicted speech/noise masks before the weight network, performs *worse* than the version with a purely learned spectral-spatial embedding, suggesting the second-order SCM itself (sparse, redundant) is the bottleneck rather than an aid in end-to-end neural beamformers.
 
+## Ultra-Low-Compute Hybrid Surpassing Oracle MVDR (Pandey & Azcarreta 2025)
+
+[[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025]] show the complementary regime: a *hybrid* DNN-guided system — their [[concepts/tinygru|TinyGRU]] estimating the reference-channel spectrum that drives an online [[concepts/multi-channel-wiener-filter|MCWF]] — outperforms the oracle Souden MVDR at both 16 ms (STOI 78.9 / NB-PESQ 2.38 vs 75.7 / 2.06) and 32 ms latency (81.7 / 2.55 vs 79.9 / 2.21) on a simulated 8-mic array, while remaining below the oracle MCWF only in STOI/SNR (it beats oracle MCWF in PESQ). This mirrors the Souden 2010 analysis (MVDR trades noise-reduction headroom for distortionlessness) from the DNN side: the MCWF-based hybrid exploits exactly the headroom the distortionless constraint leaves unused, at ~50 MMACs/s.
+
 ## All Deep Learning MVDR (Zhang et al. 2021)
 
 [[sources/zhang-2021-adl-mvdr|Zhang et al. 2021]]'s [[concepts/adl-mvdr|ADL-MVDR]] replaces the two matrix operations inside the MVDR closed form — the noise-covariance inversion and the PCA of the speech covariance for the steering vector — with two GRU-based networks, yielding **frame-level** beamforming weights trained jointly with the front-end cRF estimator. This attacks both residual noise (utterance-level weights are frame-suboptimal) and the numerical instability of matrix inversion under joint NN training (which otherwise needs [[concepts/diagonal-loading|diagonal loading]]). On a 15-channel Mandarin corpus it beats mask-based MVDR by ~17% PESQ (3.42 vs. 2.92) and multi-tap MVDR baselines on all objective metrics while cutting WER to 12.73%. Cross-source nuance vs. [[concepts/eabnet|EaBNet]] (Li et al. 2022): EaBNet found reinserting explicit SCM computation into an all-neural beamformer *hurts*, while ADL-MVDR keeps explicit SCMs as RNN inputs and wins — together suggesting the closed-form inversion/eigendecomposition, not the SCM itself, is the limiting stage.
@@ -136,4 +141,5 @@ The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard, Smaragdis, Gannot, Naylor, Makino, Kellermann & Sugiyama 2023: Audio Signal Processing in the 21st Century]]
 - [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel, Engel, Engel & Gannot 2026: Linearly Constrained Deep Beamformer for Multi-Speaker Scenarios]]
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova, Delcroix & Ochiai 2023: Neural Target Speech Extraction: An Overview]]
+- [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — hybrid TinyGRU + MCWF beats oracle MVDR at ~50 MMACs/s
 

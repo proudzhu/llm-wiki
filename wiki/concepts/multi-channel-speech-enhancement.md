@@ -12,6 +12,7 @@ sources:
   - raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt
   - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
   - raw/papers/li-2022-embedding-beamforming/full-text.md
+  - raw/papers/pandey-2025-ultra-low-compute/full-text.md
 tags:
   - speech-enhancement
   - multi-channel
@@ -48,6 +49,8 @@ tags:
 - **[[concepts/neuralpmwf|NeuralPMWF]] (Grinstein et al. 2025)**: Hybrid method where a tiny DNN (164.9k params, 24.95 MMACs/s, 16 ms latency) fully controls the [[concepts/parametric-multi-channel-wiener-filter|PMWF]] — mask-derived covariances with learned frequency-dependent exponential smoothing, and SPP-proxy-driven dynamic distortion parameter $\beta$. Beats comparably-sized hybrid baselines (TinyGRU+MWF, GTCRN+MWF, MCCRN+MWF) on all metrics in a 5-mic smart-glasses simulation; the largest ablation gain comes from the dynamic $\beta$ (+4.5 STOI), showing the suppression/distortion trade-off itself is best scheduled per T-F bin rather than fixed.
 
 - **Integrated online noise tracking + reduction (Souden et al. 2011)**: Classical statistical-model MCSE combining [[concepts/multi-channel-speech-presence-probability|MC-SPP]] detection, [[concepts/multichannel-mcra|multichannel MCRA]] noise PSD matrix tracking, and PMWF-family filters (MVDR / Wiener / SPP-driven modified Wiener) in one online system — the practical counterpart of the PMWF framework, with output-SINR gains up to ~9 dB over single-channel OM-LSA (4 mics, babble noise)
+
+- **[[concepts/tinygru|TinyGRU]] (Pandey & Azcarreta 2025)**: Ultra-low-compute hybrid — a tiny DNN performs complex spectral masking on the reference channel, its estimated spectrum drives an online closed-form [[concepts/multi-channel-wiener-filter|MCWF]] (cumulative covariances + Sherman-Morrison-Woodbury inversion), and a second TinyGRU post-filters the beamformed output. At 50–54 MMACs/s for 8 channels it beats the oracle MVDR and the GTCRN-based baselines, and exceeds oracle MCWF in PESQ — the first complex-spectrum (phase-aware) enhancement at the compute budget previously reachable only by ERB magnitude-only models.
 
 - **[[concepts/eabnet|EaBNet]] (Li et al. 2022)**: End-to-end data-driven causal framewise beamformer — an Embedding Module learns a 3-D spectral-spatial embedding tensor (never computing an explicit SCM) and a Beamforming Module directly regresses complex filter weights applied via filter-and-sum, with a GaGNet PostNet for residual noise. On a simulated 9-channel DNS-Challenge setup (4 cm spacing, RT60 0.05–0.7 s), it beats FasNet+TAC, MC-ConvTasNet, MIMO-UNet by large margins (avg. PESQ 3.52 vs. 2.67 for the best baseline) and even an oracle-IRM MB-MVDR (3.10), at 2.84M params / RTF 0.59. Its EaBNet* ablation (explicit SCM reinsertion degrades results) argues the learned embedding captures higher-order spatial statistics than the second-order SCM.
 
@@ -109,3 +112,4 @@ tags:
 - [[sources/grumiaux-2022-ssl-deep-learning-survey|Grumiaux, Kitić, Girin & Guérin 2022: A Survey of Sound Source Localization with Deep Learning Methods]] — six-axis taxonomy of 156 DL-based SSL systems (2011–2021); the DL-DoA field upstream of beamforming-based MCSE
 - [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — hybrid tiny-NN-controlled PMWF for smart glasses
 - [[sources/li-2022-embedding-beamforming|Li et al. 2022: Embedding and Beamforming]] — EaBNet all-neural causal framewise beamformer; implicit spectral-spatial embedding beats oracle-mask MVDR
+- [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — TinyGRU + MCWF hybrid: complex spectral masking at ~50 MMACs/s, beating oracle MVDR

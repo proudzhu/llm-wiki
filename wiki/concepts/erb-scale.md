@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-06-07
-updated: 2026-08-14
+updated: 2026-09-13
 sources:
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
   - raw/papers/harma-2000-frequency-warped-signal-processing/full-text.md
   - raw/papers/jiang-2026-lightweight-speech-enhancement-ssm-dsc/full-text.md
   - raw/papers/buthe-2025-blind-wideband-to-fullband-extension/full-text.md
+  - raw/papers/pandey-2025-ultra-low-compute/full-text.md
 tags:
   - psychoacoustics
   - speech-enhancement
@@ -54,6 +55,10 @@ Both [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|RT-Tango]] a
 
 [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang et al. 2026]]'s [[concepts/auditory-inspired-spectral-compressor|Auditory-Inspired Spectral Compressor (AISC)]] applies a **perceptually-motivated low/high split**: low frequencies below 1.5 kHz are preserved at full resolution (where cochlear sensitivity is highest for harmonics/formants), while high frequencies above 1.5 kHz are projected onto the ERB scale via a fixed triangular filter bank $W_{\mathrm{ERB}} \in \mathbb{R}^{F_{\mathrm{ERB}} \times F_H}$. The decoder inverts the projection via $W_{\mathrm{ERB}}^T$. This parameter-free module delivers a **2.6× MACs reduction** (1.32 → 0.50 G) with only 0.04 PESQ loss vs. full-resolution processing. Distinctive vs. GTCRN/AdaptCRN (which use a hard 2 kHz split with full low-res preservation): AISC explicitly frames the split as a cochlea-motivated design choice (low frequencies need fine resolution; high frequencies are perceived via critical-band energy integration), and applies ERB compression only to the high-frequency branch.
 
+## Usage in TinyGRU (Pandey & Azcarreta 2025)
+
+[[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025]]'s [[concepts/tinygru|TinyGRU]] applies the ERB filter bank only to the **reference channel** of the multichannel STFT, as a compact feature branch that is linearly transformed and combined with the output of the spatial processing block (which itself operates at full spectral resolution on all channels). This is a milder use than GTCRN-family band merging: the ERB features supplement rather than replace the full-resolution path, and the per-frame mean of the ERB features is removed. Their ablation shows the ERB branch yields a marginal improvement (removing it drops STOI 69.6 → 69.3 standalone) — and, critically, the magnitude-only ERB masking of the MC-CRN baseline is what makes it *incompatible* with MCWF integration, motivating TinyGRU's full-resolution complex masking instead.
+
 ## Usage in BBWENet (Büthe & Valin 2025)
 
 [[sources/buthe-2025-blind-wideband-to-fullband-extension|Büthe & Valin 2025]]'s blind bandwidth-extension model uses a **32-band ERB-scale log-magnitude spectrogram** as part of its 72-dimensional input features (computed from a 20 ms Hanning-window STFT with 10 ms hop), alongside **complex phase differences** for the first 40 STFT bins — phase differences that proved sufficient for high-accuracy pitch estimation (Subramani et al. ICASSP 2024). The ERB-scale features provide the spectral-envelope information that drives the feature encoder, which in turn steers the [[concepts/adaconv|AdaConv]] pre/post-filters and [[concepts/adashape|AdaShape]] extension weights. This is a *feature-compression* use of the ERB scale (like PercepNet/DeepFilterNet) rather than a filter-bank gain-prediction use.
@@ -86,6 +91,7 @@ The ERB scale provides finer frequency resolution at low frequencies compared to
 - [[concepts/adaptcrn|AdaptCRN]] — reuses GTCRN's ERB spectral compression scheme
 - [[concepts/auditory-inspired-spectral-compressor|Auditory-Inspired Spectral Compressor (AISC)]] — Jiang et al. 2026's perceptually-motivated low/high split + ERB compression on high band
 - [[concepts/blind-bandwidth-extension|Blind Bandwidth Extension]] — BBWENet's feature encoder uses a 32-band ERB log-magnitude spectrogram + phase differences
+- [[concepts/tinygru|TinyGRU]] — ERB features of the reference channel as a supplementary full-resolution branch
 
 ## Related Sources
 
@@ -99,3 +105,4 @@ The ERB scale provides finer frequency resolution at low frequencies compared to
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — AdaptCRN's spectral compression uses ERB band merging (65 low + 64 ERB)
 - [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight SE with SSM and DSConv]] — AISC uses 1.5 kHz perceptual split + ERB compression on the high-frequency branch
 - [[sources/buthe-2025-blind-wideband-to-fullband-extension|Büthe & Valin 2025: A Lightweight and Robust Method for Blind Wideband-to-Fullband Extension of Speech]] — 32-band ERB log-magnitude + phase-difference features drive the BWE feature encoder
+- [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — reference-channel ERB branch in TinyGRU; magnitude-only ERB masking shown incompatible with MCWF

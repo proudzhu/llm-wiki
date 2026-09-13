@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-16
-updated: 2026-09-06
+updated: 2026-09-13
 sources:
   - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
+  - raw/papers/pandey-2025-ultra-low-compute/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -42,6 +43,7 @@ $$L = \|S_r - \hat{S}_r\|_1 + \|S_i - \hat{S}_i\|_1 + \||S| - |\hat{S}|\|_1$$
 - **DC-CRN (Wang 2022)**: Densely-connected CRN with complex RI inputs/outputs + pointwise skip connections
 - **DCCRN (Hu 2020)**: Deep complex CRN with complex LSTM in bottleneck
 - **FullSubNet (Hao 2021)**: Full-band + sub-band CSM with attention
+- **TinyGRU (Pandey & Azcarreta 2025)**: the complex-domain (masking rather than direct RI mapping) counterpart at the ultra-low-compute multichannel frontier — 8-channel complex spectral masking with MCWF integration at ~50 MMACs/s; see [[concepts/complex-ratio-mask|Complex Ratio Mask]] for the masking-vs-mapping distinction
 
 ## Related Concepts
 
@@ -53,3 +55,4 @@ $$L = \|S_r - \hat{S}_r\|_1 + \|S_i - \hat{S}_i\|_1 + \||S| - |\hat{S}|\|_1$$
 
 - [[sources/wang-2022-fusing-bc-ac-complex-domain-se|Wang, Zhang & Wang 2022: Fusing BC and AC for Complex-Domain SE]]
 - [[sources/wang-2021-magnitude-phase-compensation|Wang, Wichern & Le Roux 2021: On the Compensation Between Magnitude and Phase in Speech Separation]] — analyzes the RI loss's implicit magnitude-phase compensation
+- [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — complex-domain masking brought to the ~50 MMACs/s multichannel regime via TinyGRU

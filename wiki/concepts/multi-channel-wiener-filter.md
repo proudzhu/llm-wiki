@@ -12,6 +12,7 @@ sources:
   - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
   - raw/papers/souden-2010-pmwf/full-text.md
   - raw/papers/souden-2011-online-noise-tracking/full-text.md
+  - raw/papers/pandey-2025-ultra-low-compute/full-text.md
 tags:
   - speech-enhancement
   - wiener-filter
@@ -72,6 +73,10 @@ The MWF is one endpoint of a parameterized family: the [[concepts/parametric-mul
 
 [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025]] push this to the extreme where a tiny neural network *fully controls* the PMWF (**NeuralPMWF**): a 164.9k-parameter network (24.95 MMACs/s, 16 ms algorithmic latency) estimates a multi-channel complex mask from which speech and noise SCMs are derived by exponential smoothing with learned, frequency-dependent smoothing speeds, while $\beta$ is driven dynamically per T-F bin by an SPP proxy computed from the mask — the SPP-driven dynamic $\beta$ contributing the largest single gain in their ablation on a 5-microphone smart-glasses scenario.
 
+## DNN-Estimated-Target MCWF (Pandey & Azcarreta 2025)
+
+[[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025]] derive MCWF weights directly from a DNN-estimated single-channel signal: their [[concepts/tinygru|TinyGRU]] network estimates the enhanced complex spectrum $\hat{\mathbf{S}}_r$ at the reference microphone, and the weights follow from online cumulative empirical covariances, $\mathbf{W}(t,f) = \mathbb{E}[\mathbf{Y}\mathbf{Y}^H]^{-1}\mathbb{E}[\mathbf{Y}\hat{\mathbf{S}}_r^H]$, with the matrix inverse maintained online at $\mathcal{O}(N^2)$ complexity via the iterative Sherman-Morrison-Woodbury algorithm (Gannot et al. 2017). Unlike the NeuralPMWF approach of estimating speech/noise SCMs from masks, this variant needs only the cross-correlation between the observations and the estimated target — a cheap streaming statistic. The full two-stage TGRU + MCWF + TGRU pipeline (50–54 MMACs/s for 8 channels) outperforms the oracle MVDR and beats the oracle MCWF in PESQ, with a second TGRU post-filtering the beamformed output. Their ablation shows complex ratio masking only realizes its advantage over magnitude masking once the MCWF supplies spatial information for phase estimation — and that magnitude-only ERB masking (MC-CRN) actually *degrades* when paired with MCWF.
+
 ## SPP-Driven Modified MWF (Souden et al. 2011)
 
 [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011]] introduce a heuristic modification that exploits the [[concepts/multi-channel-speech-presence-probability|MC-SPP]] explicitly: $\mathbf{h}_{\mathrm{mW}} = \Omega(\ell,k)\,\mathbf{h}_{\mathrm{MVDR}}$ with
@@ -95,6 +100,7 @@ which applies extra suppression in noise-only segments (small SPP) and converges
 - [[concepts/multi-channel-speech-presence-probability|Multi-Channel Speech Presence Probability (MC-SPP)]]
 - [[concepts/noise-attenuation-control|Noise Attenuation Control]]
 - [[concepts/filtered-x-mwf|Filtered-x MWF (FxMWF)]] — MWF on secondary-path-filtered references; joint NR + ANC for hearing aids
+- [[concepts/tinygru|TinyGRU]] — DNN whose estimated reference-channel spectrum drives the MCWF weights online
 
 ## Related Sources
 
@@ -109,3 +115,4 @@ which applies extra suppression in noise-only segments (small SPP) and converges
 - [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019: Exploiting MC-SPP in Parametric Multi-Channel Wiener Filter]] — MC-SPP-controlled PMWF with direct inverse noise PSD updates
 - [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015: Residual Noise Control PMWF]] — target-signal redefinition yielding direct control of maximum noise reduction
 - [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — NeuralPMWF: a 164.9k-parameter network fully controls the PMWF, including an SPP-proxy-driven dynamic $\beta$
+- [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — TinyGRU-estimated target spectrum drives online MCWF weights; beats oracle MVDR at ~50 MMACs/s

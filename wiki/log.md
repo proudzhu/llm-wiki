@@ -5288,3 +5288,9 @@ Ingested the PMWF origin paper from Zotero (MinerU extraction, 4 figures mapped)
 ## [2026-09-13] ingest | Souden, Chen, Benesty & Affes 2011: An Integrated Solution for Online Multichannel Noise Tracking and Reduction
 
 Ingested from Zotero via MinerU extraction. Created source page; updated 4 author entities (Souden, Chen, Benesty, Affes), 7 concept pages (MC-SPP, multichannel MCRA, MWF, SPP, MVDR, PMWF, MCSE) and the MCSE synthesis page (Insight 4: online companion to the 2010 PMWF framework). Statistics: 1307 total, 210 sources.
+
+---
+
+## [2026-09-13] ingest | Ultra low-compute complex spectral masking for multichannel speech enhancement (Pandey & Azcarreta 2025)
+
+Ingested Pandey & Azcarreta 2025 (TinyGRU). Created source page pandey-2025-ultra-low-compute plus concept pages tinygru and spatial-convolution. Updated entity pages for both authors and 10 existing concept pages (multi-channel-wiener-filter, complex-ratio-mask, splitgru, gtcrn, mvdr-beamformer, erb-scale, dns-challenge, complex-spectral-mapping, multi-channel-speech-enhancement, convolutional-recurrent-network). Extended synthesis multi-channel-speech-enhancement: added source to frontmatter, Sources Synthesized table, hybrid-design table, and Insight 4 with the DNN-estimated-target MCWF variant. Statistics: 1310 total pages (562 entities, 507 concepts, 211 sources, 23 synthesis, 7 queries).

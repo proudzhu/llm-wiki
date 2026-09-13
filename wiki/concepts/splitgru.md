@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-11
-updated: 2026-09-11
+updated: 2026-09-13
 sources:
   - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
+  - raw/papers/pandey-2025-ultra-low-compute/full-text.md
 tags:
   - neural-network
   - recurrent
@@ -17,6 +18,8 @@ tags:
 
 In [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025]]'s NeuralPMWF, the temporal block uses 3 causal SplitGRU layers with 96 hidden units and 2 splits each — a key ingredient of the system's 164.9k-parameter / 24.95 MMACs/s budget for multi-channel speech enhancement.
 
+[[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025]]'s [[concepts/tinygru|TinyGRU]] uses the same configuration (3 layers, 96 hidden units, split factor 2) as its temporal block, preceded by a [[concepts/spatial-convolution|MIMO spatial convolution]] front-end on the multichannel STFT — the SplitGRU stack is what keeps the whole complex-masking model at 18–20 MMACs/s for 8-channel input.
+
 SplitGRU belongs to the same family of "grouped/split" recurrent efficiency tricks as the [[concepts/grouped-recurrent-neural-network|Grouped Recurrent Neural Network (GRNN)]] used in RT-Tango (partitioning hidden state into $G$ groups for $O(H^2/G)$ complexity) — both trade intra-layer full connectivity for parallel smaller recurrences with cross-layer information recombination.
 
 ## Related Concepts
@@ -25,7 +28,9 @@ SplitGRU belongs to the same family of "grouped/split" recurrent efficiency tric
 - [[concepts/grouped-recurrent-neural-network|Grouped Recurrent Neural Network (GRNN)]]
 - [[concepts/recurrent-neural-network|Recurrent Neural Network]]
 - [[concepts/neuralpmwf|NeuralPMWF]]
+- [[concepts/tinygru|TinyGRU]]
 
 ## Related Sources
 
 - [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]]
+- [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — TinyGRU's temporal block

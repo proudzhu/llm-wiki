@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-24
-updated: 2026-09-11
+updated: 2026-09-13
+sources:
+  - raw/papers/pandey-2025-ultra-low-compute/full-text.md
 tags:
   - neural-network
   - speech-enhancement
@@ -76,6 +78,8 @@ Huang et al. (2026) reuse GTCRN not as a standalone enhancer but as a **lightwei
 
 [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025]] adapted GTCRN to multi-channel input for smart-glasses speech enhancement by concatenating the input channels and increasing the number of input filters ("GTCRN+MWF", 26.5k params, 91 MMACs/s, paired with a Wang et al. 2023 MWF formulation). It reached STOI 72.7 / SI-SDR 4.66 / NB-PESQ 2.01 — competitive on quality but at notably higher MMACs than their proposed [[concepts/neuralpmwf|NeuralPMWF]] (24.95 MMACs/s, STOI 74.3), illustrating that single-channel lightweight designs do not transfer cost-efficiently to multichannel spatial processing without dedicated spatial blocks.
 
+[[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025]] compare against a multichannel-adapted GTCRN at 32 ms latency on a simulated 8-mic circular array (DNS Challenge data): standalone GTCRN needs 70 MMACs/s for STOI 70.9 / NB-PESQ 2.11, while their [[concepts/tinygru|TinyGRU]] reaches STOI 71.2 / NB-PESQ 2.10 with only 20 MMACs/s; in the two-stage + MCWF configuration the gap widens further (GTCRN+MCWF+GTCRN 140 MMACs/s, STOI 80.4 / PESQ 2.54 vs. TGRU+MCWF+TGRU 54 MMACs/s, STOI 81.7 / PESQ 2.55). They note the runtime trade-off: GTCRN's temporal dilated convolutions demand large runtime memory for the receptive field, whereas a GRU-based model stores only the previous frame's state — relevant because on-device performance depends more on compute/memory footprint than on raw parameter count (GTCRN: 29–59k params vs. TGRU's 310–625k).
+
 ## Related Concepts
 
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
@@ -98,6 +102,7 @@ Huang et al. (2026) reuse GTCRN not as a standalone enhancer but as a **lightwei
 - [[concepts/cie-mdptnet|CIE-mDPTNet]]
 - [[concepts/munet|μNet]]
 - [[concepts/neuralpmwf|NeuralPMWF]]
+- [[concepts/tinygru|TinyGRU]] — beats multichannel-adapted GTCRN at 2.6× lower MMACs in the two-stage MCWF configuration
 
 ## Related Sources
 
@@ -110,3 +115,4 @@ Huang et al. (2026) reuse GTCRN not as a standalone enhancer but as a **lightwei
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — uses GTCRN as a baseline and reuses its ERB/SFE/grouped-DPRNN design patterns in AdaptCRN
 - [[sources/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction|Huang et al. 2026: Lightweight Speech Enhancement Guided TSE in Noisy Multi-Speaker Scenarios]] — reuses GTCRN as a pluggable denoiser front-end for noise-agnostic enrollment guidance in TSE
 - [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — multichannel GTCRN adaptation as a low-compute baseline
+- [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — 32 ms-latency baseline comparison vs. TinyGRU
