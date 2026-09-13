@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-07
-updated: 2026-08-08
+updated: 2026-09-13
 sources:
   - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
+  - raw/papers/zhang-2024-enhanced-hybrid-ahs/full-text.md
   - raw/papers/mounir-2025-robust-early-howling-detection-sparsity/full-text.md
   - raw/papers/williams-2014-acoustic-feedback-elimination/full-text.md
   - raw/papers/gil-cacho-2009-regularized-adaptive-notch-filters/full-text.md
@@ -60,6 +61,10 @@ When the feedback path $F$ and forward path $G$ are known (e.g., in simulated da
 - **Music vs. speech** — HD is harder for music, whose tonal components resemble howling; all features perform poorly on early music HD.
 - **Threshold sensitivity** — some features (e.g., IMSD) are extremely sensitive to the detection threshold, making deployment fragile. Normalized features (IPMP, NINOS²-T) with $[0,1]$ ranges facilitate signal-independent thresholding.
 
+### Howling Detection as a Training-Time Guard (Zhang et al. 2024)
+
+Beyond its front-end role in NHS, howling detection serves a second, **training-time** role in [[concepts/recursive-training|recursive training]] for NN-based AHS: when the microphone amplitude exceeds a threshold for ~100 consecutive samples during closed-loop training, processing of the utterance is halted and the loss is computed on the already-processed prefix only. This prevents the energy explosion (NaN gradients) that a non-suppressing model triggers inside the self-reinforcing loop, making recursive training converge ([[sources/zhang-2024-enhanced-hybrid-ahs|Zhang et al. 2024]]). Here HD is a simple amplitude-persistence criterion rather than a spectral feature.
+
 ## Related Concepts
 
 - [[concepts/notch-filter-based-howling-suppression|Notch-Filter-Based Howling Suppression (NHS)]] — the solution scheme HD serves
@@ -78,3 +83,4 @@ When the feedback path $F$ and forward path $G$ are known (e.g., in simulated da
 - [[sources/mounir-2025-robust-early-howling-detection-sparsity|Mounir, Bernardi & van Waterschoot 2025]] — proposes NINOS²-T, the full-grid PR-based evaluation, and an automatically annotated dataset
 - [[sources/williams-2014-acoustic-feedback-elimination|Williams 2014]] — Harman patent (US 8,634,575 B2) instantiating candidate-based HD with ballistics and closed-loop trial-and-verify
 - [[sources/gil-cacho-2009-regularized-adaptive-notch-filters|Gil-Cacho et al. 2009]] — ANF-based convergence detection paradigm (RANF): three signed-regularization ANFs whose coefficient agreement detects howling without power-spectrum analysis
+- [[sources/zhang-2024-enhanced-hybrid-ahs|Zhang, Zhang, Yu & Yu 2024]] — amplitude-persistence HD as a training-time guard for recursive AHS training

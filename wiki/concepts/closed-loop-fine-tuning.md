@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-07-01
-updated: 2026-07-01
+updated: 2026-09-13
+sources:
+  - raw/papers/zhang-2024-enhanced-hybrid-ahs/full-text.md
 tags:
   - deep-learning
   - training-strategy
@@ -42,12 +44,16 @@ This strategy is applicable to any system where:
 - Deployment operates in a closed-loop or feedback configuration
 - The mismatch between training and deployment conditions degrades performance
 
+The same two-stage pattern appears in [[concepts/recursive-training|recursive training]] for acoustic howling suppression ([[sources/zhang-2024-enhanced-hybrid-ahs|Zhang et al. 2024]]): an offline teacher-forced model (HybridAHS_v1) initializes the NN, and closed-loop recursive training then fine-tunes it on signals generated through the acoustic loop — the paper explicitly describes v2 training as "recursive fine-tuning" of v1.
+
 ## Related Concepts
 
 - [[concepts/deep-marginal-feedback-cancellation|Deep Marginal Feedback Cancellation]]
 - [[concepts/hearing-aid-feedback-cancellation|Hearing Aid Feedback Cancellation]]
 - [[concepts/maximum-stable-gain|Maximum Stable Gain]]
+- [[concepts/recursive-training|Recursive Training]] — the AHS instance of the same two-stage pattern
 
 ## Related Sources
 
 - [[sources/hao-2025-l3c-deepmfc|Hao et al. 2025: L3C-DeepMFC]]
+- [[sources/zhang-2024-enhanced-hybrid-ahs|Zhang, Zhang, Yu & Yu 2024: Enhanced Acoustic Howling Suppression]] — offline-model initialization + closed-loop recursive fine-tuning for AHS

@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-15
-updated: 2026-05-15
+updated: 2026-09-13
 sources:
   - raw/papers/zhang-2023-hybrid-ahs/full-text.txt
+  - raw/papers/zhang-2024-enhanced-hybrid-ahs/full-text.md
 tags:
   - deep-learning
   - recurrent-neural-networks
@@ -32,6 +33,8 @@ The final SARNN stage in the paper contains:
 
 This architecture estimates a three-channel enhancement filter that is applied through deep filtering.
 
+The TASLP journal version ([[sources/zhang-2024-enhanced-hybrid-ahs|Zhang et al. 2024]]) replaces the SARNN with a 2-layer LSTM (300 units, 8 ms frames, magnitude-only features) to keep latency deployment-feasible, with [[concepts/recursive-training|recursive training]] compensating for the smaller model — suggesting the SARNN's capacity was not the decisive factor in the hybrid design.
+
 ## Why It Helps
 
 - Recurrent layers track frame-to-frame evolution of feedback and speech
@@ -48,3 +51,4 @@ This architecture estimates a three-channel enhancement filter that is applied t
 ## Related Sources
 
 - [[sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]
+- [[sources/zhang-2024-enhanced-hybrid-ahs|Zhang, Zhang, Yu & Yu 2024: Enhanced Acoustic Howling Suppression]] — journal version swaps SARNN for a 2-layer LSTM with recursive training

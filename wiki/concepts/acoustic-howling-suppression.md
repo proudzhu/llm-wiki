@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-02
-updated: 2026-09-02
+updated: 2026-09-13
 sources:
   - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
+  - raw/papers/zhang-2024-enhanced-hybrid-ahs/full-text.md
   - raw/papers/zhang-2024-neural-kalman-howling/full-text.txt
   - raw/papers/zhang-2023-hybrid-ahs/full-text.txt
   - raw/papers/ashur-2026-acoustic-howling-suppression-fine-tuning/full-text.md
@@ -51,8 +52,8 @@ Use adaptive filters (e.g., Kalman filter, FxLMS) to estimate and subtract the f
 ### Deep Learning Approaches
 - **DeepMFC**: Trains neural networks exclusively on offline-generated synthetic howling data, primarily to stabilize the feedback loop. Establishes feasibility of learning-based AHS but is later surpassed by hybrid and recursive methods.
 - **DeepAHS**: Teacher-forcing strategy with streaming inference
-- **HybridAHS**: Cascades FDKF and SARNN, using Kalman-preprocessed signals as auxiliary neural inputs
-- **NeuralKalmanAHS**: NN modules integrated into FDKF for reference refinement and covariance estimation
+- **HybridAHS**: Cascades FDKF and SARNN, using Kalman-preprocessed signals as auxiliary neural inputs; the TASLP journal version (Zhang et al. 2024) retrains the cascade with a lightweight 2-layer LSTM (8 ms frames) via [[concepts/recursive-training|recursive training]] — HybridAHS_v2 with a complex ratio mask (cRM2) is the only method with positive SDR at G=3 (2.11 dB vs −6.32 for DeepAHS), and masking the raw microphone rather than the Kalman output preserves speech quality better
+- **NeuralKalmanAHS**: NN modules integrated into FDKF for reference refinement and covariance estimation; the journal version's ablation shows reference estimation contributes more than learned covariances, and its AFC-style recursive subtraction gives the lowest speech distortion (best WER) at some cost in suppression power versus HybridAHS
 - **Denoiser fine-tuning (Ashur & Cohen 2026)**: A pretrained real-time speech-enhancement ([[concepts/denoiser-network|Denoiser Network (DEMUCS)]]) is fine-tuned by mixing offline-generated howling samples with the original noise-reduction training data. Unlike dedicated AHS models, this approach explicitly **preserves speech-enhancement capabilities** while gaining AHS robustness — the 60-40 mixing ratio achieves state-of-the-art PESQ stability across gains (only ~0.05 PESQ drop from G=1.5 to G=3 vs. 0.5–0.6 for HybridAHS/NKal-AHS), with <1% noise-reduction degradation. No architectural modification or recursive training required.
 
 ### Object-Identity Gating (Inter-Terminal Conferencing Howling)
@@ -72,6 +73,7 @@ Training-inference mismatch: offline training without AHS processing differs fro
 - [[concepts/acoustic-feedback|Acoustic Feedback]] — the feedback phenomenon that causes howling
 - [[concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]] — NN-based AHS methods
 - [[concepts/teacher-forcing|Teacher Forcing]] — training strategy for recursive AHS models (used by DeepAHS/HybridAHS, not by the Denoiser fine-tuning approach)
+- [[concepts/recursive-training|Recursive Training]] — closed-loop training that eliminates the training-inference mismatch (Zhang et al. 2024)
 - [[concepts/self-attentive-recurrent-neural-network|Self-Attentive Recurrent Neural Network]] — Hybrid AHS neural backbone
 - [[concepts/denoiser-network|Denoiser Network (DEMUCS)]] — pretrained speech-enhancement backbone fine-tuned for AHS in Ashur & Cohen 2026
 - [[concepts/speech-enhancement|Speech Enhancement]] — the original task that fine-tuned Denoiser preserves alongside AHS
@@ -87,6 +89,7 @@ Training-inference mismatch: offline training without AHS processing differs fro
 
 - [[sources/vanwaterschoot-2011-fifty-years-afc|van Waterschoot & Moonen 2011]] — the canonical five-decade survey; formalizes the four-category taxonomy of acoustic feedback control (PM, gain reduction, spatial filtering, room modeling) and the comparative evaluation of PFC, NHS, and AFC that structures the AHS field
 - [[sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]
+- [[sources/zhang-2024-enhanced-hybrid-ahs|Zhang, Zhang, Yu & Yu 2024: Enhanced Acoustic Howling Suppression via Hybrid Kalman Filter and Deep Learning]] — TASLP journal version; recursive training, cRM2 masking, WER trade-off, robustness tests
 - [[sources/zhang-2024-neural-kalman-howling|Zhang 2024: Neural Network Augmented Kalman Filter for AHS]]
 - [[sources/ashur-2026-acoustic-howling-suppression-fine-tuning|Ashur & Cohen 2026: AHS by Fine-Tuning Deep Speech Enhancement Networks]]
 - [[sources/mounir-2025-robust-early-howling-detection-sparsity|Mounir, Bernardi & van Waterschoot 2025]] — NINOS²-T sparsity-based HD feature for early-howling detection in NHS

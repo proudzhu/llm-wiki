@@ -1,7 +1,7 @@
 ---
 type: review
 created: 2026-04-17
-updated: 2026-04-17
+updated: 2026-09-13
 title: 'Advanced State Estimation in Acoustic Environments: A Detailed Review of Kalman
   Filtering Theory, Robust Extensions, and Neural Hybrids'
 authors:
@@ -161,6 +161,7 @@ This enables the network to learn optimal transition dynamics $A(\theta)$ and ob
 - **NeuralKalman (Zhang 2024 / Xue 2021)**: ([H8H993BR](zotero://select/items/0_H8H993BR)) The model uses a deep recurrent network to estimate the time-varying state-space matrices ($A_k, C_k$) at each sample. The resulting hybrid system outperforms purely CNN-based speech enhancers in noisy conditions by maintaining higher temporal continuity of speech envelopes.
 - **DFANC-EKF (Fareedha 2025)**: ([M77TYZR5](zotero://select/items/0_M77TYZR5)) Integrates a 2D CNN as a "front-end" feature extractor for the EKF. The CNN identifies noise patterns (e.g., siren harmonics, wind noise), and the EKF uses these features to dynamically modulate the filter's $Q$ (process noise) matrix. This hybrid achieved **22% faster convergence** during siren pass-by tests.
 - **Hybrid AHS (Zhang 2023)**: ([ILJW385X](zotero://select/items/0_ILJW385X)) Used for howling suppression. A Kalman Filter estimates the path gain, and a Self-Attentive RNN removes non-linear artifacts. This configuration allows for higher closed-loop stability margins (gain before howling) compared to deep models alone, as the KF structure acts as a "physical regulator" for the neural network output.
+- **Enhanced Hybrid/Neural AHS (Zhang 2024, TASLP)**: [[sources/zhang-2024-enhanced-hybrid-ahs|Zhang, Zhang, Yu & Yu 2024]] — the journal version unifies the cascade (HybridAHS) and embedded (NeuralKalmanAHS) topologies and trains both with [[concepts/recursive-training|recursive training]] inside the closed loop. Its ablation isolates *which* KF components benefit from neural estimation: the learned reference signal contributes more than learned covariance matrices (SDR 2.28 vs 1.38 at G=2, from a −10.33 Kalman-only baseline; 2.65 joint), with all three modules trained jointly through the KF recursion without ground truth for the intermediate outputs. The cascade-vs-embedded comparison adds a suppression-vs-distortion axis to this frontier: direct NN estimation suppresses howling more (only positive SDR at G=3), while KF-style recursive subtraction distorts speech less (best WER).
 
 ---
 

@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-15
-updated: 2026-09-08
+updated: 2026-09-13
 sources:
   - raw/papers/zhang-2023-hybrid-ahs/full-text.txt
+  - raw/papers/zhang-2024-enhanced-hybrid-ahs/full-text.md
   - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
   - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
 tags:
@@ -28,6 +29,8 @@ In [[acoustic-howling-suppression|Acoustic Howling Suppression]], teacher forcin
 $$y(t) = s(t) + n(t) + h(t) * NL[s(t-\Delta t) \cdot G]$$
 
 This makes offline training tractable while still exposing the model to playback contamination. In Hybrid AHS, the teacher-forced microphone signal is paired with a Kalman-preprocessed signal to train the neural module.
+
+The TASLP journal version ([[sources/zhang-2024-enhanced-hybrid-ahs|Zhang et al. 2024]]) makes the limitation explicit: the teacher-forced signal $y^{*}(t)$ still differs from the inference signal generated from the model's own output, and because howling is self-reinforcing the residual mismatch compounds recursively — the offline-trained HybridAHS_v1 collapses beyond loop gain $G \approx 2.2$. The remedy is [[concepts/recursive-training|recursive training]], which replaces the teacher with the model itself inside the loop and eliminates the mismatch by construction.
 
 ## Role in Magnitude-Domain Training Targets
 
@@ -57,5 +60,6 @@ Teacher forcing introduces a mismatch between offline training and streaming inf
 ## Related Sources
 
 - [[sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]
+- [[sources/zhang-2024-enhanced-hybrid-ahs|Zhang, Zhang, Yu & Yu 2024: Enhanced AHS via Hybrid Kalman Filter and Deep Learning]] — shows teacher forcing's residual mismatch compounds at high loop gain; superseded by recursive training
 - [[sources/wang-2021-magnitude-phase-compensation|Wang, Wichern & Le Roux 2021: On the Compensation Between Magnitude and Phase in Speech Separation]] — MSA as teacher forcing with target phase
 - [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024: Lightweight Hybrid Multi-Channel Speech Extraction with DVAD]] — GT-DVAD and GT-guided GSC during post-filter training

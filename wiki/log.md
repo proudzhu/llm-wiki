@@ -5294,3 +5294,27 @@ Ingested from Zotero via MinerU extraction. Created source page; updated 4 autho
 ## [2026-09-13] ingest | Ultra low-compute complex spectral masking for multichannel speech enhancement (Pandey & Azcarreta 2025)
 
 Ingested Pandey & Azcarreta 2025 (TinyGRU). Created source page pandey-2025-ultra-low-compute plus concept pages tinygru and spatial-convolution. Updated entity pages for both authors and 10 existing concept pages (multi-channel-wiener-filter, complex-ratio-mask, splitgru, gtcrn, mvdr-beamformer, erb-scale, dns-challenge, complex-spectral-mapping, multi-channel-speech-enhancement, convolutional-recurrent-network). Extended synthesis multi-channel-speech-enhancement: added source to frontmatter, Sources Synthesized table, hybrid-design table, and Insight 4 with the DNN-estimated-target MCWF variant. Statistics: 1310 total pages (562 entities, 507 concepts, 211 sources, 23 synthesis, 7 queries).
+
+---
+
+## [2026-09-13] ingest | Zhang, Zhang, Yu & Yu 2024: Enhanced Acoustic Howling Suppression via Hybrid Kalman Filter and Deep Learning
+
+- **Source**: `raw/papers/zhang-2024-enhanced-hybrid-ahs/full-text.md` (Zotero: BFCUSHRY)
+- **Authors**: Hao Zhang, Yixuan Zhang, Meng Yu, Dong Yu
+- **Published**: IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 32, 2024
+- **DOI**: 10.1109/TASLP.2024.3402565
+- **Summary**: TASLP journal version unifying the HybridAHS cascade (v1 offline teacher-forced, v2 recursive closed-loop training) and NeuralKalmanAHS (NN modules for reference + covariance estimation inside the FDKF). Recursive training eliminates the NN-AHS training-inference mismatch (trainability via howling-detection halting and v1 initialization); cRM2 masking is the only method with positive SDR at G=3 (2.11 dB); NeuralKalmanAHS trades suppression for lowest distortion (best WER).
+- **Pages created**:
+  - `raw/papers/zhang-2024-enhanced-hybrid-ahs/full-text.md` — extracted via MinerU VLM (12 figures mapped)
+  - `wiki/sources/zhang-2024-enhanced-hybrid-ahs.md` — source page with NN model documentation (mermaid diagrams + 4 network spec tables), training losses, Tables I–IV
+  - `wiki/concepts/recursive-training.md` — the paper's central training paradigm
+- **Pages updated**:
+  - `wiki/entities/hao-zhang.md`, `wiki/entities/yixuan-zhang.md`, `wiki/entities/meng-yu.md`, `wiki/entities/dong-yu.md` — added journal-version contribution bullets
+  - `wiki/concepts/acoustic-howling-suppression.md` — extended HybridAHS/NeuralKalmanAHS entries with journal findings; added recursive-training cross-ref and source
+  - `wiki/concepts/teacher-forcing.md` — added the mismatch-compounding limitation and recursive-training successor
+  - `wiki/concepts/frequency-domain-kalman-filter.md` — added reference-vs-covariance ablation and microphone-masking finding
+  - `wiki/concepts/howling-detection.md` — added training-time guard subsection
+  - `wiki/concepts/closed-loop-fine-tuning.md` — linked recursive training as the AHS instance of the two-stage pattern
+  - `wiki/concepts/complex-ratio-mask.md` — added cRM2 input-design finding
+  - `wiki/concepts/self-attentive-recurrent-neural-network.md` — noted journal switch to lightweight LSTM
+  - `wiki/synthesis/kalman-filter-theory-and-application.md` — added journal version to Neural-Kalman Key Implementations (section 4.3)

@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-02
-updated: 2026-09-12
+updated: 2026-09-13
 sources:
   - raw/papers/zhang-2024-neural-kalman-howling/full-text.txt
+  - raw/papers/zhang-2024-enhanced-hybrid-ahs/full-text.md
   - raw/papers/zhang-2023-hybrid-ahs/full-text.txt
   - raw/papers/scarpiniti-2027-physics-informed-adaptive-filtering-aec/full-text.md
 tags:
@@ -60,6 +61,8 @@ Recent work extends FDKF in two complementary directions:
 
 Key insight: FDKF remains a strong adaptive backbone, while neural components are most useful when they compensate for nonlinear distortion, reference mismatch, or poorly modeled covariance terms.
 
+The TASLP journal version ([[sources/zhang-2024-enhanced-hybrid-ahs|Zhang et al. 2024]]) systematizes these directions with a lightweight LSTM backbone (2 layers × 300 units, 8 ms frames) and recursive closed-loop training. Its ablations show reference-signal estimation contributes more than learned covariance matrices (SDR 2.28 vs 1.38 at G=2, from a −10.33 Kalman baseline) and the two are complementary (2.65 joint); the cascade variant additionally finds that masking the raw microphone — not the Kalman error — preserves speech quality better, because the Kalman filter can distort the target while suppressing howling and such distortion is hard for the NN to invert.
+
 Physics-informed regularization is a complementary direction: [[sources/scarpiniti-2027-physics-informed-adaptive-filtering-aec|Scarpiniti et al. 2027]]'s PI-NLMS adds an FFT-based spectral-smoothness prior on the echo-path estimate (the costliest of its five physical priors, at $\mathcal{O}(L \log L)$), and the framework is designed to integrate into the partitioned-block frequency-domain adaptive filtering implementations used for long room impulse responses in practical AEC — the same long-RIR regime where FDKF operates.
 
 ## Related Concepts
@@ -74,4 +77,5 @@ Physics-informed regularization is a complementary direction: [[sources/scarpini
 
 - [[sources/zhang-2023-hybrid-ahs|Zhang 2023: Hybrid AHS]]
 - [[sources/zhang-2024-neural-kalman-howling|Zhang 2024: Neural Network Augmented Kalman Filter for AHS]]
+- [[sources/zhang-2024-enhanced-hybrid-ahs|Zhang, Zhang, Yu & Yu 2024: Enhanced Acoustic Howling Suppression]] — TASLP journal version; reference > covariance ablation, LSTM backbone, recursive training
 - [[sources/scarpiniti-2027-physics-informed-adaptive-filtering-aec|Scarpiniti et al. 2027: Physics-informed adaptive filtering for AEC]] — FFT-based spectral-smoothness prior; integrates into partitioned-block frequency-domain adaptive filtering for long RIRs
