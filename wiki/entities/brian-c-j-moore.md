@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-07-01
-updated: 2026-07-01
+updated: 2026-09-13
 tags:
   - researcher
   - hearing-aids
@@ -22,12 +22,16 @@ tags:
 - Evaluation of deep marginal feedback cancellation using speech and music (Trends in Hearing 2023)
 - CAMEQ2-HF: Method for deriving initial hearing aid fittings with multi-channel compression (IJA 2010)
 - NAL-NL2 prescription procedure for hearing aids (Audiology Research 2011)
+- Co-authored "JointDFC — Joint Deep Feedback Control for Hearing Aids" (ICASSP 2026) — first deep learning joint optimization of adaptive feedback cancellation and residual feedback suppression for hearing aids — [[sources/zhan-2026-joint-afc-rfs|Zhan, Moore, Li & Zheng 2026]]
+
 
 ## Related Sources
 
 - [[sources/hao-2025-l3c-deepmfc|Hao et al. 2025: L3C-DeepMFC]]
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]]
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]]
+- [[sources/zhan-2026-joint-afc-rfs|Zhan, Moore, Li & Zheng 2026: JointDFC — Joint Deep Feedback Control for Hearing Aids]]
+
 
 ## Related Concepts
 

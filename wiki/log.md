@@ -5318,3 +5318,17 @@ Ingested Pandey & Azcarreta 2025 (TinyGRU). Created source page pandey-2025-ultr
   - `wiki/concepts/complex-ratio-mask.md` — added cRM2 input-design finding
   - `wiki/concepts/self-attentive-recurrent-neural-network.md` — noted journal switch to lightweight LSTM
   - `wiki/synthesis/kalman-filter-theory-and-application.md` — added journal version to Neural-Kalman Key Implementations (section 4.3)
+
+---
+
+## [2026-09-13] ingest | Deep learning-based joint optimization of adaptive feedback cancellation and residual feedback suppression for hearing aids (Zhan et al. 2026)
+
+- **Source**: `raw/papers/zhan-2026-joint-afc-rfs/full-text.md` (Zotero: LIM45NG2)
+- **Authors**: Xiaofan Zhan, Brian C. J. Moore, Xiaodong Li, Chengshi Zheng
+- **Published**: ICASSP 2026
+- **DOI**: 10.1109/ICASSP55912.2026.11463154
+- **Summary**: JointDFC — first deep learning joint optimization of adaptive feedback cancellation (LFCNet = DeepPEM-AFC) and residual feedback suppression (RFSNet: full-sub-band + global causal T-F attention); three-step closed-loop training; 0.396M params / 0.227 G MACs/s / 8 ms latency; dominates DeepPEM-AFC and DeepAFS baselines at high excess gain (WB-PESQ > 4.0 at 11 dB over canceler-free MSG) and under feedback-path changes.
+- **Pages created**: `wiki/sources/zhan-2026-joint-afc-rfs.md`; `wiki/concepts/jointdfc.md`
+- **Pages updated**: `wiki/entities/xiaofan-zhan.md`, `wiki/entities/brian-c-j-moore.md`, `wiki/entities/xiaodong-li.md`, `wiki/entities/chengshi-zheng.md` (Key Contributions + Related Sources); `wiki/concepts/hearing-aid-feedback-cancellation.md` (new Joint Cancellation + Suppression section); `wiki/concepts/adaptive-feedback-cancellation.md` (Hybrid AFC bullet: JointDFC realizes the 2011 survey's joint-design prediction); `wiki/concepts/prediction-error-method.md` (PEM-AFC as a stage in joint frameworks); `wiki/concepts/maximum-stable-gain.md` (excess-gain evaluation protocol); `wiki/concepts/deep-marginal-feedback-cancellation.md` (DeepAFS/DeepAFC paradigm positioning); `wiki/concepts/closed-loop-fine-tuning.md` (three-step cascade extension); `wiki/concepts/normalized-euclidean-system-distance.md` (composite loss usage); `wiki/concepts/complex-spectral-mapping.md` (RFSNet architecture entry); `wiki/concepts/acoustic-howling-suppression.md` (JointDFC in DL approaches list)
+- **Synthesis**: none updated — triage found only single broad-tag overlaps
+- **Indexes**: [[sources/zhan-2026-joint-afc-rfs|Zhan 2026: JointDFC]] and [[concepts/jointdfc|JointDFC]] added to main + subdirectory indexes; statistics updated to 1314 total pages

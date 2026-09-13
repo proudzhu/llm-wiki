@@ -1089,6 +1089,7 @@
 | [[concepts/tinygru\|TinyGRU]] | Ultra-low-compute multichannel masking DNN: spatial convolution front-end + SplitGRU temporal layers estimating complex masks; two-stage TGRU + online MCWF pipeline for edge devices | 2026-09-13 |
 | [[concepts/spatial-convolution\|Spatial Convolution]] | Per-frequency MIMO convolution across microphone channels that mimics frequency-domain filter-and-sum beamforming in the real domain; TinyGRU's multichannel front-end | 2026-09-13 |
 | [[concepts/recursive-training\|Recursive Training]] | Training strategy for NNs deployed inside feedback loops: training signals are generated recursively through the model being trained, eliminating the training-inference mismatch by construction (made trainable via howling-detection halting and offline-model initialization) | 2026-09-13 |
+| [[concepts/jointdfc\|JointDFC]] | Two-stage deep feedback control for hearing aids: deep PEM-AFC cancellation stage + full-sub-band residual suppression stage with global causal time-frequency attention, trained via a three-step closed-loop strategy | 2026-09-13 |
 
 ---
 
@@ -1310,6 +1311,7 @@
 | [[sources/souden-2011-online-noise-tracking\|Souden, Chen, Benesty & Affes 2011]] | Integrated online multichannel noise tracking and reduction: practical MC-SPP, multichannel MCRA noise PSD matrix tracking, SPP-driven modified MWF | 2026-09-13 |
 | [[sources/pandey-2025-ultra-low-compute\|Pandey & Azcarreta 2025]] | This paper presents TinyGRU (TGRU), an ultra-low-compute DNN for complex spectral masking on multichannel input, integrated with a Multi-Channel Wiener Filter (MCWF) in a two-stage framework for edge devices such as smart glasses and hearables. | 2026-09-13 |
 | [[sources/zhang-2024-enhanced-hybrid-ahs\|Zhang, Zhang, Yu & Yu 2024: Enhanced Acoustic Howling Suppression via Hybrid Kalman Filter and Deep Learning]] | TASLP journal version unifying HybridAHS (offline + recursive training) and NeuralKalmanAHS; recursive closed-loop training eliminates the NN-AHS training-inference mismatch; cRM2 masking; suppression-vs-distortion (WER) trade-off | 2026-09-13 |
+| [[sources/zhan-2026-joint-afc-rfs\|Zhan, Moore, Li & Zheng 2026: JointDFC — Joint Deep Feedback Control for Hearing Aids]] | First deep learning joint optimization of adaptive feedback cancellation (LFCNet = DeepPEM-AFC) and residual feedback suppression (RFSNet FSB + global cTFA); 0.396M params, 0.227 G MACs/s, 8 ms latency; dominates at high excess gain and feedback-path changes | 2026-09-13 |
 
 ---
 
@@ -1363,10 +1365,10 @@
 
 ## Statistics
 
-- **Total pages**: 1312
+- **Total pages**: 1314
 - **Entities**: 562
-- **Concepts**: 508
-- **Sources**: 212
+- **Concepts**: 509
+- **Sources**: 213
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-09-13

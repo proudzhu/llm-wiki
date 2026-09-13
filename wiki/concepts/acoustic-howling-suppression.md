@@ -12,6 +12,7 @@ sources:
   - raw/papers/williams-2014-acoustic-feedback-elimination/full-text.md
   - raw/papers/gil-cacho-2009-regularized-adaptive-notch-filters/full-text.md
   - raw/papers/hoshuyama-2026-sound-object-echo-control/full-text.md
+  - raw/papers/zhan-2026-joint-afc-rfs/full-text.md
 tags:
   - acoustic-howling
   - feedback-cancellation
@@ -55,6 +56,7 @@ Use adaptive filters (e.g., Kalman filter, FxLMS) to estimate and subtract the f
 - **HybridAHS**: Cascades FDKF and SARNN, using Kalman-preprocessed signals as auxiliary neural inputs; the TASLP journal version (Zhang et al. 2024) retrains the cascade with a lightweight 2-layer LSTM (8 ms frames) via [[concepts/recursive-training|recursive training]] — HybridAHS_v2 with a complex ratio mask (cRM2) is the only method with positive SDR at G=3 (2.11 dB vs −6.32 for DeepAHS), and masking the raw microphone rather than the Kalman output preserves speech quality better
 - **NeuralKalmanAHS**: NN modules integrated into FDKF for reference refinement and covariance estimation; the journal version's ablation shows reference estimation contributes more than learned covariances, and its AFC-style recursive subtraction gives the lowest speech distortion (best WER) at some cost in suppression power versus HybridAHS
 - **Denoiser fine-tuning (Ashur & Cohen 2026)**: A pretrained real-time speech-enhancement ([[concepts/denoiser-network|Denoiser Network (DEMUCS)]]) is fine-tuned by mixing offline-generated howling samples with the original noise-reduction training data. Unlike dedicated AHS models, this approach explicitly **preserves speech-enhancement capabilities** while gaining AHS robustness — the 60-40 mixing ratio achieves state-of-the-art PESQ stability across gains (only ~0.05 PESQ drop from G=1.5 to G=3 vs. 0.5–0.6 for HybridAHS/NKal-AHS), with <1% noise-reduction degradation. No architectural modification or recursive training required.
+- **JointDFC (Zhan et al. 2026)**: the first deep joint cancellation + suppression framework for hearing aids — a deep PEM-AFC stage (LFCNet) followed by a full-sub-band suppression network (RFSNet) with global causal time-frequency attention, trained with a three-step closed-loop strategy; dominates single-paradigm methods at high excess gain and after feedback-path changes ([[concepts/jointdfc|JointDFC]])
 
 ### Object-Identity Gating (Inter-Terminal Conferencing Howling)
 
@@ -96,3 +98,4 @@ Training-inference mismatch: offline training without AHS processing differs fro
 - [[sources/williams-2014-acoustic-feedback-elimination|Williams 2014]] — Harman patent (US 8,634,575 B2) instantiating NHS with [[concepts/ballistics-based-howling-detection|ballistics-based HD]] and [[concepts/trial-and-verify-notch-insertion|trial-and-verify notch insertion]] for PA systems
 - [[sources/gil-cacho-2009-regularized-adaptive-notch-filters|Gil-Cacho et al. 2009]] — the ANF-based one-stage NHS variant RANF with signed-regularization convergence detection for PA systems
 - [[sources/hoshuyama-2026-sound-object-echo-control|Hoshuyama 2026]] — sound-object-based echo control: default-mute object-identity gating for inter-terminal howling in multi-terminal conferencing
+- [[sources/zhan-2026-joint-afc-rfs|Zhan, Moore, Li & Zheng 2026: JointDFC]] — first deep joint feedback cancellation + suppression framework for hearing aids (DeepAFS + DeepAFC paradigms unified)

@@ -512,4 +512,5 @@
 | [[concepts/tinygru\|TinyGRU]] | Ultra-low-compute multichannel masking DNN: spatial convolution front-end + SplitGRU temporal layers estimating complex masks; two-stage TGRU + online MCWF pipeline for edge devices | 2026-09-13 |
 | [[concepts/spatial-convolution\|Spatial Convolution]] | Per-frequency MIMO convolution across microphone channels that mimics frequency-domain filter-and-sum beamforming in the real domain; TinyGRU's multichannel front-end | 2026-09-13 |
 | [[concepts/recursive-training\|Recursive Training]] | Training strategy for NNs deployed inside feedback loops: training signals are generated recursively through the model being trained, eliminating the training-inference mismatch by construction (made trainable via howling-detection halting and offline-model initialization) | 2026-09-13 |
+| [[concepts/jointdfc\|JointDFC]] | Two-stage deep feedback control for hearing aids: deep PEM-AFC cancellation stage + full-sub-band residual suppression stage with global causal time-frequency attention, trained via a three-step closed-loop strategy | 2026-09-13 |
 

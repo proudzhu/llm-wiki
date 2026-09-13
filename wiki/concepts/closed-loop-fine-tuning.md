@@ -4,6 +4,7 @@ created: 2026-07-01
 updated: 2026-09-13
 sources:
   - raw/papers/zhang-2024-enhanced-hybrid-ahs/full-text.md
+  - raw/papers/zhan-2026-joint-afc-rfs/full-text.md
 tags:
   - deep-learning
   - training-strategy
@@ -46,6 +47,8 @@ This strategy is applicable to any system where:
 
 The same two-stage pattern appears in [[concepts/recursive-training|recursive training]] for acoustic howling suppression ([[sources/zhang-2024-enhanced-hybrid-ahs|Zhang et al. 2024]]): an offline teacher-forced model (HybridAHS_v1) initializes the NN, and closed-loop recursive training then fine-tunes it on signals generated through the acoustic loop — the paper explicitly describes v2 training as "recursive fine-tuning" of v1.
 
+[[concepts/jointdfc|JointDFC]] (Zhan et al. 2026) extends the pattern from a single network to a **two-module cascade**: LFCNet (deep PEM-AFC) is first pre-trained closed-loop with a frozen denoising network standing in for RFSNet; the frozen pre-trained LFCNet then generates (residual feedback + noise, clean) pairs from the closed loop for open-loop RFSNet training; finally both modules are jointly fine-tuned closed-loop. Skipping the joint stage costs up to ~5 dB SI-SDR — coordination between modules, not just closed-loop exposure, is what the fine-tuning buys.
+
 ## Related Concepts
 
 - [[concepts/deep-marginal-feedback-cancellation|Deep Marginal Feedback Cancellation]]
@@ -57,3 +60,4 @@ The same two-stage pattern appears in [[concepts/recursive-training|recursive tr
 
 - [[sources/hao-2025-l3c-deepmfc|Hao et al. 2025: L3C-DeepMFC]]
 - [[sources/zhang-2024-enhanced-hybrid-ahs|Zhang, Zhang, Yu & Yu 2024: Enhanced Acoustic Howling Suppression]] — offline-model initialization + closed-loop recursive fine-tuning for AHS
+- [[sources/zhan-2026-joint-afc-rfs|Zhan, Moore, Li & Zheng 2026: JointDFC]] — three-step strategy extending closed-loop fine-tuning to a two-module cancellation + suppression cascade

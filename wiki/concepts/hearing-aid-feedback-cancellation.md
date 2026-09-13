@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-15
-updated: 2026-09-12
+updated: 2026-09-13
 sources:
   - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/zhan-2025-deeppem-afc/full-text.txt
   - raw/papers/lydaki-2026-deep-feedback-cancellation-hearing-aids/full-text.md
   - raw/papers/schepker-2016-sdp-minmax-acoustic-feedback/full-text.md
+  - raw/papers/zhan-2026-joint-afc-rfs/full-text.md
 tags:
   - hearing-aids
   - feedback-cancellation
@@ -63,6 +64,9 @@ Recent work integrates deep learning for automatic step-size control or direct I
 - Maintains stability at high gains where AFC methods struggle
 - Can be integrated with AFC for further improvement
 
+### Joint Cancellation + Suppression (JointDFC)
+[[concepts/jointdfc|JointDFC]] (Zhan, Moore, Li & Zheng 2026) is the first deep learning framework to jointly optimize both paradigms: a deep PEM-AFC stage (LFCNet, from [[sources/zhan-2025-deeppem-afc|DeepPEM-AFC]]) cancels the linear feedback, and a compact full-sub-band suppression network (RFSNet) removes residual feedback and noise via complex spectral mapping. A three-step training strategy (closed-loop pre-training → parallel-data generation → joint closed-loop fine-tuning) makes the cascade trainable. It dominates both single paradigms at high excess gain (WB-PESQ > 4.0 at 11 dB above the canceler-free MSG) and under feedback-path changes, at 0.396M params / 0.227 G MACs/s / 8 ms latency.
+
 ## Metrics
 
 - **NESD** (Normalized Euclidean System Distance): Filter estimation accuracy
@@ -90,5 +94,6 @@ A parameter-reduction approach specific to multi-microphone or multi-condition h
 - [[sources/hao-2025-l3c-deepmfc|Hao et al. 2025: L3C-DeepMFC]] — Low-latency low-complexity deep marginal feedback cancellation
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC
 - [[sources/schepker-2016-sdp-minmax-acoustic-feedback|Schepker & Doclo 2016]] — common part decomposition with min-max SDP optimization for MSG maximization and faster AFC convergence
+- [[sources/zhan-2026-joint-afc-rfs|Zhan, Moore, Li & Zheng 2026: JointDFC]] — first deep learning joint optimization of feedback cancellation (LFCNet) and residual feedback suppression (RFSNet)
 - [[sources/vanwaterschoot-2011-fifty-years-afc|van Waterschoot & Moonen 2011: Fifty Years of Acoustic Feedback Control]] — canonical survey; closed-loop Nyquist model, method taxonomy, first unified comparative evaluation
 - Spriet et al. 2008: Feedback control in hearing aids

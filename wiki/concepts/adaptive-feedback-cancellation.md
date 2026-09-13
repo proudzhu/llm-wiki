@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-08-07
-updated: 2026-09-12
+updated: 2026-09-13
 sources:
   - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/schepker-2016-sdp-minmax-acoustic-feedback/full-text.md
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
+  - raw/papers/zhan-2026-joint-afc-rfs/full-text.md
 tags:
   - acoustic-feedback
   - adaptive-filters
@@ -77,7 +78,7 @@ AFC-PF (PEM-AFROW) is the practical state of the art: ~9 dB mean / ~12 dB max Δ
 
 - **Computational complexity**: even with NLMS, the high filter order (e.g., 2048–2646 taps) and high sampling rate for audio make real-time single-channel AFC demanding. IIR / pole-zero or orthogonal-basis (Laguerre, Kautz) feedback-path models — exploiting time-invariant room resonance frequencies — are proposed but unexplored in AFC.
 - **Multichannel AFC**: complexity scales with $S \times L$ (microphones × loudspeakers). Shared-denominator IIR models and identifiability under correlated loudspeaker signals are open problems (analogous to multichannel AEC).
-- **Hybrid AFC**: combining AFC with postfiltering, gain reduction (ANF/AEQ/NHS), or beamforming. The survey argues existing hybrids are *suboptimal* because the components are designed independently; **joint estimation** of AFC + postfilter / gain-reduction / beamformer coefficients is expected to outperform decoupled designs.
+- **Hybrid AFC**: combining AFC with postfiltering, gain reduction (ANF/AEQ/NHS), or beamforming. The survey argues existing hybrids are *suboptimal* because the components are designed independently; **joint estimation** of AFC + postfilter / gain-reduction / beamformer coefficients is expected to outperform decoupled designs. This prediction is borne out in the deep learning era by [[concepts/jointdfc|JointDFC]] (Zhan et al. 2026), which jointly fine-tunes a deep PEM-AFC cancellation stage with a residual feedback suppression network and shows that joint training — not just cascading — drives the gains (removing it costs up to ~5 dB SI-SDR at low excess gain).
 
 ## Common Part Decomposition for Parameter Reduction
 
@@ -103,4 +104,5 @@ A complementary approach to reduce the number of adaptive parameters is [[concep
 - [[sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]] — IMU-based step-size control for HA-AFC
 - [[sources/schepker-2016-sdp-minmax-acoustic-feedback|Schepker & Doclo 2016: SDP Min-max Common Part Estimation]] — common part decomposition with min-max SDP optimization for MSG maximization and faster AFC convergence
 - [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]]
+- [[sources/zhan-2026-joint-afc-rfs|Zhan, Moore, Li & Zheng 2026: JointDFC]] — deep realization of the survey's joint-cancellation+suppression prediction; deep PEM-AFC stage jointly fine-tuned with a residual suppression network
 

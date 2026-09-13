@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-15
-updated: 2026-09-12
+updated: 2026-09-13
 sources:
   - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/schepker-2016-sdp-minmax-acoustic-feedback/full-text.md
@@ -9,6 +9,7 @@ sources:
   - raw/papers/lydaki-2026-deep-feedback-cancellation-hearing-aids/full-text.md
   - raw/papers/mounir-2025-robust-early-howling-detection-sparsity/full-text.md
   - raw/papers/hao-2025-l3c-deepmfc/full-text.md
+  - raw/papers/zhan-2026-joint-afc-rfs/full-text.md
 tags:
   - hearing-aids
   - feedback-cancellation
@@ -67,6 +68,10 @@ where F̂(k,l) is the estimated feedback path.
 
 While most AFC methods aim to minimize the misalignment (filter estimation error) as a proxy for increasing MSG, [[entities/henning-schepker|Schepker]] & [[entities/simon-doclo|Doclo]] (2016) proposed directly maximizing the MSG by formulating the common part estimation as a [[concepts/min-max-common-part-estimation|min-max optimization problem solved via semidefinite programming]]. This approach minimizes the worst-case output-error across all frequencies and paths (rather than the sum of squared errors), yielding 2–5 dB MSG improvement over least-squares optimization. The trade-off is a 1–4 dB increase in misalignment — acceptable since MSG directly determines the applicable hearing aid gain, while misalignment does not.
 
+## Excess-Gain Evaluation Protocol
+
+[[concepts/jointdfc|JointDFC]] (Zhan et al. 2026) evaluates feedback control at gains defined as **excess over the MSG without a canceler** (5–11 dB), exposing the regime where steady-state path estimation alone is insufficient: DeepPEM-AFC collapses beyond 9 dB excess gain (SI-SDR −1.85 dB at 11 dB on the single-user set), while the joint cancellation + suppression framework keeps WB-PESQ above 4.0 — residual suppression, not just path estimation, extends the effective stable-gain region.
+
 ## Related Concepts
 
 - [[concepts/hearing-aid-feedback-cancellation|Hearing Aid Feedback Cancellation]]
@@ -84,4 +89,5 @@ While most AFC methods aim to minimize the misalignment (filter estimation error
 - [[sources/mounir-2025-robust-early-howling-detection-sparsity|Mounir, Bernardi & van Waterschoot 2025]] — uses MSG to normalize feedback paths and define the time-varying gain profile (MSG−6 dB → MSG) that triggers howling onset in the HD dataset; the howling frequency is predicted from the Nyquist criterion at $G=\mathrm{MSG}$
 - [[sources/schepker-2016-sdp-minmax-acoustic-feedback|Schepker & Doclo 2016]] — directly maximizes MSG via min-max SDP optimization of common part, yielding 2–5 dB improvement over least-squares
 - [[sources/hao-2025-l3c-deepmfc|Hao, Moore, Zhang, Li & Zheng 2025: L3C-DeepMFC for Hearing Aid Feedback Cancellation]]
+- [[sources/zhan-2026-joint-afc-rfs|Zhan, Moore, Li & Zheng 2026: JointDFC]] — evaluates at 5–11 dB excess gain over the canceler-free MSG; joint cancellation + suppression keeps WB-PESQ > 4.0 where AFC-only collapses
 

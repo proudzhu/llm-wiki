@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-15
-updated: 2026-09-11
+updated: 2026-09-13
 tags:
   - researcher
   - hearing-aids
@@ -26,6 +26,8 @@ tags:
 - Co-authored "A Supervised Speech Enhancement Approach with Residual Noise Control for Voice Communication" (Applied Sciences 2020) — [[sources/li-2020-residual-noise-control|Li et al. 2020]]: [[concepts/generalized-loss-function|generalized loss function]] with residual noise control for supervised SE (corresponding author; conceptualization, methodology, review and editing)
 - Co-authored "Low-complexity artificial noise suppression methods for deep learning-based speech enhancement algorithms" (EURASIP Journal on Audio, Speech, and Music Processing 2021) — [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke et al. 2021]]: MMSE/SPP postfilter suppressing [[concepts/artificial-residual-noise|artificial residual noise]] of DNN front-ends
 - Co-authored "Embedding and Beamforming: All-Neural Causal Beamformer for Multichannel Speech Enhancement" (ICASSP 2022) — [[sources/li-2022-embedding-beamforming|Li et al. 2022]]: [[concepts/eabnet|EaBNet]] all-neural causal framewise beamformer; implicit embedding beats explicit SCM and surpasses oracle-mask MVDR
+- Co-authored "JointDFC — Joint Deep Feedback Control for Hearing Aids" (ICASSP 2026, corresponding author) — first deep learning joint optimization of adaptive feedback cancellation and residual feedback suppression for hearing aids — [[sources/zhan-2026-joint-afc-rfs|Zhan, Moore, Li & Zheng 2026]]
+
 
 ## Related Sources
 
@@ -36,6 +38,8 @@ tags:
 - [[sources/li-2020-residual-noise-control|Li et al. 2020: Supervised Speech Enhancement with Residual Noise Control]]
 - [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke et al. 2021: Low-Complexity Artificial Noise Suppression]]
 - [[sources/li-2022-embedding-beamforming|Li et al. 2022: Embedding and Beamforming]]
+- [[sources/zhan-2026-joint-afc-rfs|Zhan, Moore, Li & Zheng 2026: JointDFC — Joint Deep Feedback Control for Hearing Aids]]
+
 
 ## Related Concepts
 

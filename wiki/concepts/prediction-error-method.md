@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-15
-updated: 2026-08-20
+updated: 2026-09-13
 sources:
   - raw/papers/vanwaterschoot-2011-fifty-years-afc/full-text.md
   - raw/papers/zhan-2025-deeppem-afc/full-text.txt
   - raw/papers/schepker-2016-sdp-minmax-acoustic-feedback/full-text.md
+  - raw/papers/zhan-2026-joint-afc-rfs/full-text.md
 tags:
   - adaptive-filtering
   - system-identification
@@ -72,6 +73,10 @@ where Q is the overlap-save matrix. This reduces complexity significantly, makin
 
 PEM-based AFC can be combined with [[concepts/common-part-decomposition|common part decomposition]] to reduce the number of adaptive parameters. Schepker & Doclo (2016) used PEM-AFC with a pre-estimated common part (pole-zero filter) and a shorter adaptive variable part (24 taps instead of 36), demonstrating increased initial convergence speed and faster reconvergence after feedback path changes, while maintaining similar steady-state performance. The common part was estimated offline using [[concepts/min-max-common-part-estimation|min-max SDP optimization]] from measured free-field impulse responses.
 
+## PEM-AFC as a Stage in Joint Frameworks
+
+[[concepts/jointdfc|JointDFC]] (Zhan et al. 2026) reuses the deep PEM-AFC ([[sources/zhan-2025-deeppem-afc|DeepPEM-AFC]]) as its first stage (LFCNet): PEM whitening plus GRU-predicted per-T-F-bin step sizes cancel the linear feedback, after which a neural suppression network (RFSNet) removes the residual feedback and noise. The PEM stage preserves the target signal while removing most feedback, letting the second stage specialize in residual components — and its steady-state accuracy and fast convergence are why it was chosen over direct suppression as the cancellation engine.
+
 ## Related Concepts
 
 - [[concepts/acoustic-feedback|Acoustic Feedback]]
@@ -88,4 +93,5 @@ PEM-based AFC can be combined with [[concepts/common-part-decomposition|common p
 - [[sources/lydaki-2026-deep-feedback-cancellation-hearing-aids|Lydaki 2026: Deep Feedback Cancellation]] — DFC as alternative to PEM-based approaches
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — Deep learning-based PEM-AFC with GRU step-size prediction
 - [[sources/schepker-2016-sdp-minmax-acoustic-feedback|Schepker & Doclo 2016]] — PEM-AFC integrated with common part decomposition, showing faster convergence with fewer adaptive parameters
+- [[sources/zhan-2026-joint-afc-rfs|Zhan, Moore, Li & Zheng 2026: JointDFC]] — deep PEM-AFC (DeepPEM-AFC) as the first stage of a joint cancellation + suppression framework
 - Spriet et al. 2005: Adaptive feedback cancellation in hearing aids with linear prediction of the desired signal

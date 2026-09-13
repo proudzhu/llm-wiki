@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-07-01
-updated: 2026-07-01
+updated: 2026-09-13
+sources:
+  - raw/papers/zhan-2026-joint-afc-rfs/full-text.md
 tags:
   - hearing-aids
   - feedback-cancellation
@@ -54,6 +56,10 @@ The [[sources/hao-2025-l3c-deepmfc|L3C-DeepMFC]] variant addresses the latency a
 | Computational cost | Low (adaptive filter) | Higher (DNN inference) |
 | Integration | Standalone | Can combine with AFC |
 
+## Position in the DeepAFS Paradigm
+
+Zhan et al. (2026) classify DeepMFC-style direct suppression as **DeepAFS** (deep acoustic feedback suppression), contrasted with **DeepAFC** (deep enhancement of adaptive cancellation, e.g. step-size control or direct coefficient prediction). DeepAFS methods are robust at high gain but computationally heavy; DeepAFC methods converge fast but degrade when the feedback path changes. [[concepts/jointdfc|JointDFC]] unifies the two paradigms, using a compact 1-layer full-sub-band suppression network (RFSNet) as the second stage after deep PEM-AFC cancellation — matching DeepAFS robustness at 0.227 G MACs/s while inheriting AFC's fast convergence. In its evaluation, a standalone DeepAFS baseline (2-layer FSB, 0.319 G MACs/s) showed better scene generalization than DeepPEM-AFC but no advantage at high gain.
+
 ## Related Concepts
 
 - [[concepts/hearing-aid-feedback-cancellation|Hearing Aid Feedback Cancellation]]
@@ -66,3 +72,4 @@ The [[sources/hao-2025-l3c-deepmfc|L3C-DeepMFC]] variant addresses the latency a
 
 - [[sources/hao-2025-l3c-deepmfc|Hao et al. 2025: L3C-DeepMFC]]
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]]
+- [[sources/zhan-2026-joint-afc-rfs|Zhan, Moore, Li & Zheng 2026: JointDFC]] — situates DeepMFC-style suppression in the DeepAFS paradigm and integrates a compact FSB suppression stage (RFSNet) with deep PEM-AFC

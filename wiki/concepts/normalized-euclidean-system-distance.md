@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-06-10
-updated: 2026-06-10
+updated: 2026-09-13
 sources:
   - raw/papers/lydaki-2026-deep-feedback-cancellation-hearing-aids/full-text.md
   - raw/papers/zhan-2025-deeppem-afc/full-text.txt
+  - raw/papers/zhan-2026-joint-afc-rfs/full-text.md
 tags:
   - metrics
   - system-identification
@@ -30,6 +31,7 @@ NESD is used as a training loss for deep learning-based feedback cancellation me
 
 - **[[concepts/deep-feedback-cancellation|DFC]]**: NESD loss with temporal smoothing (average pooling N=50, exponential smoothing α=0.5) to resolve the convergence/steady-state trade-off
 - **DeepPEM-AFC**: NESD loss for training the GRU-based step-size predictor
+- **[[concepts/jointdfc|JointDFC]]**: NESD term (weight 0.2) in a composite loss with a log-compressed magnitude + complex-spectrum MSE term (weight 5) for the suppression stage
 
 ## Temporal Smoothing
 
@@ -51,3 +53,4 @@ Without smoothing: the model achieves lower steady-state NESD but much slower co
 
 - [[sources/lydaki-2026-deep-feedback-cancellation-hearing-aids|Lydaki 2026: Deep Feedback Cancellation]] — NESD as loss and evaluation metric
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — NESD for step-size prediction training
+- [[sources/zhan-2026-joint-afc-rfs|Zhan, Moore, Li & Zheng 2026: JointDFC]] — NESD term (weight 0.2) in a composite loss with the RFSNet spectral loss
