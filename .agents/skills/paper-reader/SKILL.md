@@ -48,6 +48,23 @@ Rules:
 3. **Verify after a suspected race**: Grep the file for the expected new content (e.g. the new slug). If missing, re-read the target region before re-applying — a *prefix-matching* `old_string` can match text that already contains your addition and duplicate it.
 4. Prefer scripts over hand-edits wherever one exists (`update_indexes.py`, `append_log.py`, `commit_ingest.py`) — they are immune to the race by construction.
 
+## Terminal Output Black Hole (RunCommand recovery)
+
+Sometimes RunCommand **executes a command successfully but its output never comes back**: the tool result reports `command_id not found`, a redirected output file is never created, or a PowerShell pipe capture (`git log | Set-Content file`) truncates to a single line. The command *did* run — side effects (files written, commits made) are real; only the output channel is broken. This has now consumed whole sessions twice in a row (Zotero search in the pre-summary session, then every script call in the Zhu 2025 ingest — ~10 wasted turns of retries before the workaround was adopted).
+
+Rules:
+
+1. **Switch after the first failure — do not retry.** If one RunCommand call loses its output, assume the channel is broken for the rest of the session. Retrying the same call, adding `Start-Sleep` waits, or re-running with different syntax all waste turns. (The flip side also holds: don't *stop* running commands — verification via `Test-Path`/marker files confirms they execute fine.)
+2. **Recovery wrapper**: route the command through `capture.py`, which captures stdout/stderr (UTF-8, exit code) to `.tmp_capture_out.txt`; then Read that file.
+
+   ```powershell
+   uv run python .agents/skills/paper-reader/scripts/capture.py -- git status --porcelain
+   uv run python .agents/skills/paper-reader/scripts/capture.py -- uv run python .agents/skills/paper-reader/scripts/append_log.py --op ingest --title "..." --body "..."
+   ```
+
+3. **Keep using the skill scripts through the wrapper** — do not fall back to hand-editing `wiki/index.md`/`wiki/log.md` or raw `git commit` just because the terminal is broken. Hand-edited index tables are the known cause of lost rows (`pitfalls.md` #35); raw git bypasses `commit_ingest.py`'s guards (`pitfalls.md` #48). The wrapper restores full script output, so the normal Steps 10–13 scripts remain usable.
+4. **If wrapper-invoked `uv run` calls hang for minutes**: an earlier `uv run` probably died holding the uv lock. List hung processes via the wrapper (`capture.py -- tasklist /FI "IMAGENAME eq uv.exe"`), `Stop-Process -Id <PID>` the stale one, then retry through `uv run` as usual. **Always invoke Python via `uv run python`** (per `pitfalls.md` #18) — it guarantees the environment matches `pyproject.toml`/`uv.lock`; direct `.venv\Scripts\python.exe` invocation is a last resort only when uv remains hung *after* the stale process was killed, and must be noted in the session summary.
+
 ## Prerequisites
 
 - Zotero running with "Allow other applications" enabled
@@ -75,6 +92,7 @@ Exact invocations for every script (all prefixed with `uv run python .agents/ski
 | 12b | `check_backlinks.py --slug SLUG` |
 | 12c | `build_check.py` (wraps `mkdocs build --strict`) |
 | 13 | `commit_ingest.py --slug SLUG --message "ingest: Short Title (Author Year)" --entities ... --concepts ... --synthesis ...` |
+| any | `uv run python .agents/skills/paper-reader/scripts/capture.py -- <command>` — terminal black-hole recovery; output lands in `.tmp_capture_out.txt` (see "Terminal Output Black Hole" section) |
 
 ## References (load on demand)
 
