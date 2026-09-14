@@ -1,0 +1,69 @@
+---
+type: concept
+created: 2026-09-14
+updated: 2026-09-14
+sources:
+  - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
+tags:
+  - beamforming
+  - microphone-arrays
+  - robustness
+  - fixed-beamformer
+---
+
+# Superdirective Beamforming
+
+**Category**: Fixed Beamforming / Array Signal Processing
+
+## Definition
+
+Superdirective (SD) beamforming designs a fixed beamformer that **maximizes the directivity factor (DF)** under a distortionless constraint in the look direction — providing high spatial selectivity that effectively suppresses spatially isotropic (diffuse) noise in speech communication and far-field pickup. For a filter $\mathbf{h}(\omega)$ applied to an $M$-microphone array with steering vector $\mathbf{d}_{\theta_s}(\omega)$:
+
+$$\mathcal{D}[\mathbf{h}] = \frac{|\mathbf{h}^H \mathbf{d}_{\theta_s}|^2}{\mathbf{h}^H \boldsymbol{\Gamma} \mathbf{h}}, \qquad \mathbf{h}^H \mathbf{d}_{\theta_s} = 1$$
+
+where $\boldsymbol{\Gamma}(\omega)$ is the normalized isotropic noise covariance matrix, $[\boldsymbol{\Gamma}]_{ij} = \sin(\omega\delta_{ij}/c)/(\omega\delta_{ij}/c)$.
+
+## Optimal Solution
+
+The superdirective beamformer is the MVDR-type solution against the diffuse noise field:
+
+$$\mathbf{h}_{\mathrm{SD}} = \frac{\boldsymbol{\Gamma}^{-1}\mathbf{d}_{\theta_s}}{\mathbf{d}_{\theta_s}^H \boldsymbol{\Gamma}^{-1}\mathbf{d}_{\theta_s}}$$
+
+with directivity factor $\mathcal{D} = \mathbf{d}_{\theta_s}^H \boldsymbol{\Gamma}^{-1}\mathbf{d}_{\theta_s}$, which approaches $M^2$ as the inter-element spacing $\delta$ becomes small (Lotter & Vary 2006).
+
+## The Robustness Problem
+
+Superdirective beamformers are **highly sensitive to array imperfections** — sensor gain/phase mismatch and self-noise — because maximizing DF drives the [[concepts/white-noise-gain|white noise gain (WNG)]] strongly negative, especially at low frequencies where the array is acoustically small. This limits practical application.
+
+### Robust Superdirective (RSD) via Diagonal Loading
+
+The most widely used remedy applies [[concepts/diagonal-loading|diagonal loading]] to $\boldsymbol{\Gamma}$:
+
+$$\mathbf{h}_{\mathrm{RSD}} = \frac{[\boldsymbol{\Gamma} + \epsilon \mathbf{I}_M]^{-1}\mathbf{d}_{\theta_s}}{\mathbf{d}_{\theta_s}^H [\boldsymbol{\Gamma} + \epsilon \mathbf{I}_M]^{-1}\mathbf{d}_{\theta_s}}$$
+
+The loading factor $\epsilon \geq 0$ trades DF against WNG: larger $\epsilon$ raises WNG (more robust) but lowers DF. $\epsilon$ can be fixed per design, or found per frequency bin by bisection to meet a target WNG.
+
+Other robust design families include subspace-based designs, Krylov-subspace formulations, quadratic-eigenvalue approaches, and combined beamforming + post-filtering (see Zhu et al. 2025 for a survey in the introduction).
+
+## Efficiency Problem at Scale
+
+As $M$ grows, an RSD beamformer stores $M$ complex parameters per frequency bin ($(K/2{+}1)M$ for a $K$-point STFT) and requires $M \times M$ matrix inversions — parameter redundancy that limits embedded and large-array deployments. Low-rank approaches such as [[concepts/kronecker-product-beamforming|Kronecker product beamforming]] address this by decomposing the long filter into short filters.
+
+## Relation to Other Fixed Beamformers
+
+Superdirective designs belong to the [[concepts/fixed-beamformer|fixed beamformer]] family: coefficients are precomputed and stored, giving stable performance and low run-time cost. They generalize [[concepts/differential-microphone-array|differential microphone arrays]] (DMAs give frequency-invariant patterns with the same low-frequency WNG amplification issue) and relate to the WNG–DF trade-off faced by compact arrays (see the [[concepts/fixed-beamformer|fixed beamformer]] page).
+
+## Related Concepts
+
+- [[concepts/kronecker-product-beamforming|Kronecker Product Beamforming]]
+- [[concepts/white-noise-gain|White Noise Gain]]
+- [[concepts/diagonal-loading|Diagonal Loading]]
+- [[concepts/fixed-beamformer|Fixed Beamformer]]
+- [[concepts/differential-microphone-array|Differential Microphone Array]]
+- [[concepts/directivity-pattern|Directivity Pattern]]
+- [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
+- [[concepts/beamforming|Beamforming]]
+
+## Related Sources
+
+- [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]]

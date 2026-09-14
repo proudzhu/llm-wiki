@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-12
+updated: 2026-09-14
 sources:
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
   - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
   - raw/papers/li-2022-embedding-beamforming/full-text.md
   - raw/papers/zhang-2021-adl-mvdr/full-text.md
+  - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
 tags:
   - array-processing
   - spatial-statistics
@@ -63,6 +64,10 @@ $$
 $$
 
 which recovers the secondary-only contribution exactly when the components are mutually independent — **without ever silencing the primary source**. [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang et al. 2026]] use the resulting auto-covariance $\boldsymbol{\Phi}_{\mathrm{RR}}^{(\mathrm{Sec})}$ and cross-covariance $\boldsymbol{\Phi}_{\mathrm{FR}}^{(\mathrm{Sec})}$ between two microphone groups to estimate a [[concepts/relative-transfer-matrix|Relative Transfer Matrix]] for acoustic-feedback neutralization in multichannel ANC. Their ablation shows the subtraction is decisive rather than cosmetic: estimating the same matrix from total-field SCMs collapses noise reduction to ≈ −2 dB, because the persistent primary field dominates the pseudo-inverse $\boldsymbol{\Phi}_{\mathrm{FR}}^{(\mathrm{Sec})^{\dagger}}$.
+
+## Analytic Diffuse-Field SCM in Fixed Beamformer Design
+
+Not every SCM in beamforming is *estimated* from data: fixed [[concepts/superdirective-beamforming|superdirective beamformers]] are designed against the **analytic isotropic (diffuse) noise covariance matrix** $\boldsymbol{\Gamma}$ with $[\boldsymbol{\Gamma}]_{ij} = \sin(\omega\delta_{ij}/c)/(\omega\delta_{ij}/c)$ — a known function of array geometry and frequency (Zhu et al. 2025). The beamformer $\boldsymbol{\Gamma}^{-1}\mathbf{d}_{\theta_s}$ then maximizes the directivity factor by construction, and in [[concepts/kronecker-product-beamforming|Kronecker product]] low-rank designs the small block matrices $\bar{\boldsymbol{\Gamma}}_n$ are *derived* from $\boldsymbol{\Gamma}$ during alternating iterations rather than estimated.
 
 ## Frame-Level SCMs via cRF, Inverted by GRU Networks (Zhang et al. 2021)
 

@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-04
+updated: 2026-09-14
 sources:
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
+  - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
 tags:
   - differential-microphone-array
   - beamforming

@@ -1,0 +1,1470 @@
+文章编号：1003-0530（2025）09-1478-16
+第 41 卷 第 9 期
+2025 年 9 月
+信 号 处 理
+Journal of Signal Processing
+Vol. 41 No. 9
+Sep. 2025
+基于多维 Kronecker 积的低秩稳健超指向性
+波束形成方法
+朱瑜杰 1 赵坤龙 1 罗雪琴 2 靳姬鲁 2 黄公平*1，3 陈景东 2
+（1. 武汉大学电子信息学院 ，湖北武汉 430072；2. 西北工业大学航海学院智能声学与临境通信研究中心 ，
+陕西西安 710072；3. 武汉大学深圳研究院 ，广东深圳 518057）
+摘 要：超指向性波束形成器凭借其高空间指向性 ，能够有效抑制空间各向同性噪声 ，在语音通信 、远场拾音等场
+景中发挥了重要作用 。然而，其稳健性较差 ，对阵元不一致性和自噪声的敏感性限制了实际应用 。为提高稳健性 ，
+通常需在高指向性与稳健性之间做出权衡 ，如使用对角加载因子约束白噪声增益 。然而随着麦克风阵列规模的扩
+大，传统优化设计的波束形成器因参数冗余导致效率降低 。基于 Kronecker 积的波束形成是一种计算高效的解决
+方案，能够在降低参数规模的同时 ，提高波束形成器的稳健性 。但现有研究多局限于二维分解形式 ，对更高维度的
+分解结构的研究较少 ，尚未充分探讨比较不同的分解模式对波束形成器性能的影响 。针对上述问题 ，本文将现有
+的二维 Kronecker 积方法推广至多维形式 ，提出了一种基于多维 Kronecker 积形式的低秩稳健超指向性波束形成方
+法。该方法通过将波束形成器分解为多组短滤波器的 Kronecker 积形式，提升设计灵活性 。在不失真约束下 ，以最
+大化指向性因子为目标 ，交替迭代求解多组短滤波器 。实验结果表明 ，对于不同阵列结构 ，所提方法在不同分解模
+式下均能以更少的参数  （滤波器系数个数）和更低的矩阵求逆维度实现与传统方法相当的性能 ，因此在实际系统中
+具有更高的效率 。进一步地 ，通过分析不同分解方式对波束形成性能的影响 ，验证了所提方法的有效性与计算
+优势。
+关键词：麦克风阵列；超指向性波束形成 ；低秩波束形成；白噪声增益；指向性因子
+中图分类号 ：TN912.35   文献标识码 ：A   DOI：10.12466/xhcl.2025.09.003
+引用格式 ：朱瑜杰 , 赵坤龙 , 罗雪琴 , 等 . 基于多维 Kronecker 积的低秩稳健超指向性波束形成方法 [J]. 信号处理 , 
+2025, 41(9): 1478-1493. DOI: 10.12466/xhcl.2025.09.003.
+Reference format : ZHU Yujie, ZHAO Kunlong , LUO Xueqin , et al. Low-rank robust superdirective beamforming using 
+multidimensional Kronecker products[J]. Journal of Signal Processing,  2025, 41(9): 1478-1493. DOI: 10.12466/xhcl.2025.
+09.003.
+Low-Rank Robust Superdirective Beamforming Using Multidimensional 
+Kronecker Products
+ZHU Yujie1 ZHAO Kunlong 1 LUO Xueqin2 JIN Jilu2 HUANG Gongping *1，3 CHEN Jingdong 2
+（1. School of Electronic Information， Wuhan University， Wuhan， Hubei 430072， China； 
+2. Center of Intelligent Acoustics and Immersive Communications ， School of Marine Science and Technology ， 
+Northwestern Polytechnical University ， Xi’an， Shaanxi 710072， China；
+3. Shenzhen Research Institute， Wuhan University， Shenzhen， Guangdong 518057， China）
+收稿日期：2025-05-14；修回日期：2025-07-17
+*通信作者：黄公平 gongpinghuang@whu .edu.cn  *Corresponding Author ：HUANG Gongping ， gongpinghuang@whu .edu.cn
+基金项目：国家自然科学基金（62471340） ；广东省基础与应用基础研究基金（2025A1515010226）
+Foundation Items ：The National Natural Science Foundation of China （62471340） ；Guangdong Basic and Applied Basic Research Foundation 
+（2025A1515010226）
+
+第 9 期 朱瑜杰 等： 基于多维 Kronecker 积的低秩稳健超指向性波束形成方法
+Abstract: Superdirective beamformers exhibit high spatial directivity and can therefore effectively suppress spatially iso ‐
+tropic noise， playing a key role in speech communication ， far-field pickup ， and other scenarios . However， because they 
+are highly sensitive to array imperfections and self-noise ， the lack of robustness limits their practical applications . To im‐
+prove their robustness ， a trade-off between high directivity and robustness is typically required ， such as using diagonal 
+loading factors to constrain white noise gain . However， as the number of microphones increases ， conventional robust su ‐
+perdirective beamformers become less efficient owing to excessive parameter redundancy . Kronecker product beamform ‐
+ing offers a computationally efficient solution that enhances the robustness of beamformers while reducing parameter 
+size. Existing studies ， however ， are mostly constrained to two-dimensional formulations ， with limited research on 
+higher-dimensional decomposition structures and the effects of different decomposition modes on beamformer perfor ‐
+mance. To address the above issues ， we extend the existing two-dimensional Kronecker product method to a multidimen ‐
+sional form and propose a low-rank robust superdirective beamforming method based on multidimensional Kronecker 
+product. This method improves design flexibility by decomposing the beamformer into a Kronecker product form of mul ‐
+tiple sets of short filters . Under a distortionless constraint ， the method alternately iterates to solve for the multiple sets of 
+short filters with the goal of maximizing the directivity factor . Experimental results show that for different array struc ‐
+tures， the proposed method achieves comparable performance to traditional methods with fewer parameters （number of 
+filter coefficients） and lower matrix inversion dimensions across different decomposition modes . Therefore ， it exhibits 
+higher efficiency in practical systems . Furthermore ， by analyzing the impact of different decomposition approaches on 
+beamforming performance ， the effectiveness and computational advantages of the proposed method were verified .
+Key words: microphone arrays；superdirective beamformer；low-rank beamforming；white noise gain；directivity factor
+1　引言
+在语音通信和语音交互等各种声学应用中 ，麦
+克风传感器在拾取所感兴趣的声音时不可避免地
+会接收到其他声信号 ，包括背景噪声 、混响和干扰
+等［1-4］。为了从含有噪声的观测信号中提取并增强
+目标信号，人们提出了许多方法［5-9］，其中，基于麦克
+风阵列的波束形成技术受到广泛关注 ［10-13］。由于语
+音信号具有宽带特性 ，如何在宽带范围内增强目标
+信号 ，同时不引入过多失真 ，是麦克风阵列波束形
+成技术面临的一个挑战［14-16］。超指向性波束形成约
+束期望方向信号不失真并最大化指向性因子 （Di‐
+rectivity Factor ， DF） ，可 以 有 效 抑 制 各 向 同 性 噪
+声［17-19］，并且超指向性波束形成器属于固定波束形
+成器，滤波器系数可以预先计算并存储在嵌入式系
+统中，具有性能稳定 、计算复杂度低 、易于实时实现
+等优点［20-23］。
+虽然超指向性波束形成器在处理各向同性噪
+声时能取得显著效果 ，但其稳健性较差 ，对阵列的
+自噪声和不一致性非常敏感 ［24-26］，这在很大程度上
+限制了它在实际系统中的应用 。为了提高超指向
+性波束形成的稳健性 ，一种常用的方法是使用对角
+加 载 因 子 约 束 白 噪 声 增 益（White Noise Gain ， 
+WNG） ，得到基于对角加载的稳健超指向性  （Ro‐
+bust Superdirective ， RSD）波束形成器［27］。此外，基
+于子空间的超指向性波束形成器也是一种有效的
+稳健设计方法［28］，通过合理构造子空间和相应的代
+价函数 ，从而实现指向性因子和白噪声增益的折
+中。同样还可以使用信号和各向同性噪声信号协
+方差矩阵的联合对角化矩阵替代各向同性噪声的
+归一化协方差矩阵 ，例如基于 Krylov 子空间的超指
+向性波束形成 ［29］。其他提升超指向性波束形成器
+的稳健性的方法包括基于二次特征值的超指向性
+波束形成［30］和组合波束形成［31］等。
+然而，随着阵列中麦克风数目增加 ，传统稳健超
+指向性波束形成器通常面临参数规模增加的问题 ，
+但这些参数并未得到有效利用 。基于 Kronecker 积
+的波束形成方法通过将全局波束形成器分解为多个
+子波束形成器的 Kronecker 积形式［32-33］，这种方法不
+仅可有效降低参数规模和矩阵维度 ，还提高了波束
+形成器的稳健性。现有研究大致经历了从面向特定
+几何结构（如矩形或规则二维阵列 ）的 Kronecker 积
+分解方法［34］，逐步扩展到可适用于任意几何结构阵
+列的分解方法［35］，从而提升了其在实际应用中的灵
+活性和适应性 。然而，现有研究多局限于固定分解
+模式［36］（如二维分解） ，未能充分挖掘其在高维结构
+下的潜力，且未充分探讨比较不同的分解模式 。
+针对上述问题 ，本文在现有的二维 Kronecker
+积分解方法的基础上进行扩展 ，提出了一种基于多
+维 Kronecker 积 的 低 秩 稳 健 超 指 向 性（Low-Rank 
+Robust Superdirective Beamforming ， LR-RSD）波束
+形成方法 。本文从张量分解的角度 ，将长滤波器构
+1479
+
+信 号 处 理 第 41 卷
+造成一系列基于多维 Kronecker 积形式的短滤波
+器。利用 Kronecker 积的性质 ，将优化单个长滤波
+器的问题转化成为优化多个短滤波器 ，并通过交替
+迭代优化求解短滤波器 。相比传统超指向性波束
+形成方法 ，这种低秩稳健超指向性波束形成的参数
+（滤波器系数个数）更少，并且在求解过程中需要求
+逆的矩阵的维数更小 ，因此能提高计算效率并能在
+实际应用（如嵌入式系统 ）中更节省存储空间 。此
+外，本文还探究了不同的分解方式对所设计的低秩
+稳健超指向性波束形成器的影响 。
+2　信号模型和评价指标
+假设空间中有一个由 M 个麦克风组成的平面
+阵列 ，以阵列中心为二维笛卡尔坐标系的原点 ，逆
+时针从 x 轴测量方位角 。第 m 个（m= 12⋯M）麦
+克风的坐标为 rm =(rm cos ψm rm sin ψm )，其中 rm 和 ψm
+分别是麦克风到坐标系原点的距离和方位角 。在
+远场条件下，对于入射角 θ，导向矢量可写为［37］：
+dθ (ω) =[e
+jωr1 /c cos ( )θ- ψ1
+ e
+jωr2 /c cos ( )θ- ψ2
+ ⋯ e
+jωrM /c cos ( )θ- ψM
+]Τ  （1）
+其中上标 T 表示对矩阵或向量的转置 ，j 是虚数单
+位，ω= 2πf 是角频率，f> 0 是时间频率。
+假设期望声源信号来自方向 θs，则麦克风阵列
+的观测信号向量可写为［1］：
+y(ω)= [ ]Y1 ( )ω Y2 ( )ω ⋯ YM ( )ω
+T
+= dθs
+(ω)X (ω)+ v(ω) （2）
+其中 Ym (ω) 是第 m 个麦克风观测信号 ， dθs (ω) 表示
+θs 方向上的导向矢量 ，X (ω) 是期望信号 ， v (ω) =
+[ V1 ( )ω V2 ( )ω ⋯ VM ( )ω ]
+T
+是 噪 声 信 号 向 量，
+Vm (ω)是第 m 个麦克风接收到的噪声信号 。
+波束形成过程就是对每个麦克风的输出用复数
+权值系数H *
+m (ω)进行加权，其中上标 * 表示共轭运算，
+然后将加权后的输出相加作为波束形成器的输出：
+Z (ω) = ∑
+m= 1
+M
+H *
+m (ω)Ym ( )ω
+= hH
+(ω) y (ω)
+= hH
+(ω) dθs (ω) X (ω) + hH
+(ω) v (ω) （3）
+其中 Z (ω) 是对期望信号 X (ω) 的估计 ，上标 H 表示
+对矩阵或向量的共轭转置 ，
+h (ω) = [ H1 ( )ω H2 ( )ω ⋯ HM ( )ω ]
+T
+（4）
+是长为 M 的滤波器 。波束形成通常在期望方向上
+有无失真约束 ，即
+hH
+(ω) dθs (ω) = 1 （5）
+对于固定波束形成器 ，通常考虑以下三个性能
+评价指标：
+（1）波束图：
+B [ h (ω) θ ] = hH
+(ω) dθ (ω)
+= ∑
+m= 1
+M
+H *
+m (ω) e
+jωrm /c cos ( )θ- ψm
+（6）
+（2）白噪声增益（WNG）［38］：
+W [ h (ω) ] = || hH
+( )ω dθs ( )ω
+2
+hH
+( )ω h ( )ω （7）
+（3）指向性因子（DF）［38］：
+D [ h (ω) ] = || hH
+( )ω dθs ( )ω
+2
+hH
+( )ω Γ ( )ω h ( )ω （8）
+其中 Γ (ω)是各向同性噪声情况下的归一化噪声协
+方差矩阵，其大小为 M´ M，第(ij)个元素为：
+[ Γ (ω) ]
+ij
+=
+sin ( )ωδij /c
+ωδij /c （9）
+ij= 12⋯M，δij 表示麦克风 i 和麦克风 j 之间的距
+离，c 表示声速。
+3　超指向性波束形成器
+通过约束期望方向信号不失真并最大化指向
+性因子，可以得到超指向性波束形成器［17］：
+hSD (ω) = Γ-1
+( )ω dθs ( )ω
+dH
+θs ( )ω Γ-1
+( )ω dθs ( )ω （10）
+其指向性因子为 D [ hSD (ω) ] = dH
+θs (ω) Γ-1 ( )ω dθs ( )ω 。
+当麦克风间距 δ 足够小时 ，理论上该值接近 M 2。但
+超指向性波束形成器通常面临白噪声放大的问题 。
+为此 ，人们研究了多种稳健超指向性波束形成器 。
+其中，使用最广泛的是基于对角加载的稳健超指向
+性波束形成器［17，26］：
+hRSD (ω) = [ ]Γ ( )ω + ϵIM
+-1
+dθs ( )ω
+dH
+θs ( )ω [ ]Γ ( )ω + ϵIM
+-1
+dθs ( )ω
+（11）
+其中 ϵ ≥ 0 是对角加载因子 ，IM 是大小为 M´ M 的单
+位矩阵 。通过调节对角加载因子 ϵ 的大小 ，来实现
+指向性因子和白噪声增益之间的折中 ，通常 ϵ 越大
+白噪声增益就越大 ，同时指向性因子就越小 。
+然而 ，当麦克风的数量较大时 ，传统稳健超指
+向性波束形成器的参数规模增大 ，导致其效率降
+低。本文提出一种多维 Kronecker 积设计的低秩稳
+健超指向性波束形成器 ，并展示其相对于传统稳健
+超指向性波束形成器的优势 。为了避免公式过长
+显得繁琐，在接下来的章节中省略符号 ω。
+1480
+
+第 9 期 朱瑜杰 等： 基于多维 Kronecker 积的低秩稳健超指向性波束形成方法
+4　低秩稳健超指向性波束形成器
+本文提出一种低秩的稳健超指向性波束形成
+器，将长度为 M 的滤波器写成 N 组短滤波器的 Kro‐
+necker 积的形式［39］：
+hP = ∑
+p= 1
+P
+hNp ⊗ hN- 1p ⊗ ⋯ ⊗ h1p （12）
+其中 hnp，n= 12⋯N，p= 12⋯P，是长度为 Ln 的
+短滤波器 ，且满足 M= ∏
+n= 1
+N
+Ln，P 是 Kronecker 积的阶
+数，符号 ⊗ 表示 Kronecker 积。
+基于式（12） ，低秩稳健超指向性波束形成器的
+设计问题可以写为 ：
+hP = arg min
+hP
+hH
+P ΓhP （13a）
+其中hH
+P dθs
+= 1 （13b）
+hP = ∑
+p= 1
+P
+hNp ⊗ hN- 1p ⊗ ⋯ ⊗ h1p （13c）
+接下来推导 hP 的求解 。对于 Kronecker 积，有以下
+性质：
+   hNp ⊗ hN- 1p ⊗ ⋯ ⊗ h1p
+=(hNp ⊗ hN- 1p ⊗ ⋯ ⊗ h2p ⊗ IL1
+)h1p （14a）
+=(hNp ⊗ hN- 1p ⊗ ⋯ ⊗ IL2
+⊗ h1p )h2p （14b）
+⋮
+=(ILN
+⊗ hN- 1p ⊗ ⋯ ⊗ h2p ⊗ h1p )hNp （14c）
+其中 ILn
+，n= 12⋯N，是大小为 Ln ´ Ln 的单位矩阵。
+将式（14a）至（14c）代入到式（13c） ，可以得到
+hP = ∑
+p= 1
+P
+hNp ⊗ hN- 1p ⊗ ⋯ ⊗ h1p
+= ∑
+p= 1
+P
+H1p h1p （15a）
+= ∑
+p= 1
+P
+H2p h2p （15b）
+⋮
+= ∑
+p= 1
+P
+HNp hNp
+（15c）
+其中
+H1p = hNp ⊗ hN- 1p ⊗ ⋯ ⊗ h2p ⊗ IL1
+H2p = hNp ⊗ hN- 1p ⊗ ⋯ ⊗ IL2
+⊗ h1p
+ ⋮
+HNp = ILN
+⊗ hN- 1p ⊗ ⋯ ⊗ h2p ⊗ h1p
+分别是大小 M´ L1，M´ L2，⋯，M´ LN 的矩阵。
+为了求解 PN 个短滤波器 hnp，n= 12⋯N，p=
+12⋯P，将式（15a）代入式（13b）可以得到：
+hH
+P dθs
+= (∑
+p= 1
+P
+hNp ⊗ hN- 1p ⊗ ⋯ ⊗ h1p
+)
+H
+dθs
+= (∑
+p= 1
+P
+H1p h1p
+)
+H
+dθs
+= ∑
+p= 1
+P
+hH
+1p H H
+1p dθs
+= ∑
+p= 1
+P
+hH
+1p d1pθs
+= -h
+H
+1 -d 1θs
+（16）
+其中
+-h 1 = [ hT
+11 hT
+12 ⋯ hT
+1P ]
+T
+d1pθs
+= H H
+1p dθs
+ p= 12⋯P
+-d 1θs
+=[d T
+11θs
+  dT
+12θs
+ ⋯  dT
+1Pθs
+]T
+=[d T
+θs
+H *
+11  dT
+θs
+H *
+12 ⋯  dT
+θs
+H *
+1P ]T
+然后，将式（15a）代入式（13a） ，得到：
+hH
+P ΓhP = (∑
+p= 1
+P
+H1p h1p
+)
+H
+Γ (∑
+p= 1
+P
+H1p h1p
+)
+= (∑
+p= 1
+P
+hH
+1p H H
+1p
+) Γ (∑
+p= 1
+P
+H1p h1p
+)
+= -h
+H
+1 -Γ 1 -h 1 （17）
+其中
+-Γ 1 =
+é
+ë
+ê
+ê
+ê
+êêê
+ê
+ê
+ê
+ê ù
+û
+ú
+ú
+ú
+úúú
+ú
+ú
+ú
+úΓ111  Γ112 ⋯  Γ11P
+Γ121  Γ122 ⋯  Γ12P
+⋮ ⋮ ⋱ ⋮
+Γ1P1  Γ1P2 ⋯  Γ1PP
+是 大 小 为PL1 ´ PL1 的 矩 阵，Γ1ij = H H
+1i ΓH1j，i=
+12⋯P，j= 12⋯P，是大小为 L1 ´ L1 的矩阵。
+以相似的方式 ，通过将式（15b）至式（15c）分别
+代入到式（13b）和式（13a） ，得到：
+hH
+P dθs
+= ( )∑
+p= 1
+P
+hNp ⊗ hN- 1p ⊗ ⋯ ⊗ h1p
+H
+dθs
+= ( )∑
+p= 1
+P
+H2p h2p
+H
+dθs
+= -h
+H
+2 -d 2θs
+ （18a）
+⋮
+=(∑
+p= 1
+P
+HNp hNp )H dθs
+= -h
+H
+N -d Nθs
+（18b）
+hH
+P ΓhP = (∑
+p= 1
+P
+hH
+2p H H
+2p
+) Γ (∑
+p= 1
+P
+H2p h2p
+)
+              = -h
+H
+2 -Γ 2 -h 2 （19a）
+1481
+
+信 号 处 理 第 41 卷
+⋮
+= (∑
+p= 1
+P
+hH
+Np H H
+Np
+) Γ (∑
+p= 1
+P
+HNp hNp
+)
+= -h
+H
+N -Γ N -h N （19b）
+其中
+-h n = [ hT
+n1 hT
+n2 ⋯ hT
+nP ]
+T
+-d nθs
+= [ d T
+θs
+H *
+n1 d T
+θs
+H *
+n2 ⋯ d T
+θs
+H *
+nP ]
+T
+n= 12⋯N，均是长度为 PLn 的向量，
+-Γ n =
+é
+ë
+ê
+ê
+ê
+êêê
+ê
+ê
+ê
+ê ù
+û
+ú
+ú
+ú
+úúú
+ú
+ú
+ú
+úΓn11  Γn12 ⋯  Γn1P
+Γn21  Γn22 ⋯  Γn2P
+⋮ ⋮ ⋱ ⋮
+ΓnP1  ΓnP2 ⋯  ΓnPP
+是大小为 PLn ´ PLn 的矩阵 ，其中 Γnij = H H
+nj ΓHnj，i=
+12⋯P，j= 12⋯P，是大小为 Ln ´ Ln 的矩阵。
+接下来，本文用交替迭代的方法求解上述滤波
+器。为了计算 -h 1，先对其他滤波器 -h
+(0)
+n ，n= 12⋯N，
+进行初始化，接着计算 H(0)
+1p，p= 12⋯P，然后计算相
+应的向量 -d
+(0)
+1θs
+和矩阵 -Γ
+(0)
+1 。这里使用 (0) 表示第 0 步，
+即初始化步骤 ，并且在后续步骤中采用类似的表示
+方法。计算 -h
+(1)
+1 的优化问题可以表示为 ：
+min
+-h 1
+(-h
+(1)
+1 )
+H
+-Γ
+(0)
+1 -h
+(1)
+1 ，其中(-h
+(1)
+1 )
+H
+-d
+(0)
+1θs
+= 1 （20）
+通过引入拉格朗日乘子 ，可以将式（20）中带约
+束的优化问题写为 ：
+J (-h
+(1)
+1 |-h
+(0)
+2 ⋯ -h
+(0)
+N )
+= (-h
+(1)
+1 )
+H
+-Γ
+(0)
+1 -h
+(1)
+1 + μ ((-h
+(1)
+1 )
+H
+-d
+(0)
+1θs
+- 1) （21）
+其中，μ> 0 是一个常数因子 。式（21）的解为：
+-h
+(1)
+1 = ( )-Γ
+(0)
+1
+-1
+-d
+(0)
+1θs
+( )-d
+(0)
+nθs
+H
+( )-Γ
+(0)
+1
+-1
+-d
+(0)
+1θs
+（22）
+同样 ，当除了 -h n，n= 2⋯N，其他滤波器都固
+定时，带有拉格朗日乘子的优化问题可写为
+J (-h
+(1)
+n |-h
+(1)
+1 ⋯ -h
+(1)
+n- 1  -h
+(0)
+n+ 1 ⋯ -h
+(0)
+N )
+= (-h
+(1)
+n )
+H
+-Γ
+(0)
+n -h
+(1)
+n + μ ((-h
+(1)
+n )
+H
+-d
+(0)
+nθs
+- 1) （23）
+其中 ，-d
+(0)
+nθs
+和 -Γ
+(0)
+n 的计算方式与 -d
+(0)
+1θs
+和 -Γ
+(0)
+1 的类似 。
+式（23）的解为：
+-h
+(1)
+n = ( )-Γ
+(0)
+n
+-1
+-d
+(0)
+nθs
+( )-d
+(0)
+nθs
+H
+( )-Γ
+(0)
+n
+-1
+-d
+(0)
+nθs
+（24）
+迭代 t 次得到 -h n（其中 n= 2⋯N）的最终解：
+-h
+(t)
+n = ( )-Γ
+(t- 1)
+n
+-1
+-d
+(t- 1)
+nθs
+( )-d
+(t- 1)
+nθs
+H
+( )-Γ
+(t- 1)
+n
+-1
+-d
+(t- 1)
+nθs
+（25）
+其中 ，-d
+(t- 1)
+nθs
+和 -Γ
+(t- 1)
+n 的计算方式也与 -d
+(0)
+nθs
+和 -Γ
+(0)
+n 的相
+似。在实际计算中 ，将矩阵 -Γ
+(t- 1)
+n 对角加载为 -Γ
+(t- 1)
+n +
+ϵΙPLn
+，其中 ϵ ≥ 0 是对角加载因子 ，ΙPLn
+，n= 1，2，⋯N，
+是大小为 PLn ´ PLn 的单位矩阵。
+对于一些嵌入式系统 ，超指向性波束形成器的
+滤波器系数可以预先计算并存储到系统中 ，其中传
+统的稳健超指向性波束形成器需要保存 M 个参数，
+而所提出的方法只需要保存 P∑
+n= 1
+N
+Ln 个参数 。如果
+麦克风的数量 M 很大，那么滤波器的参数量可以显
+著减少 。因此所提出的低秩稳健超指向性波束形
+成器有更高的存储效率 。
+5　仿真实验
+5.1　低秩超指向性波束形成器性能评价
+本节通过仿真实验评估所提出的低秩稳健超
+指向性波束形成器的性能 。实验首先使用一个均
+匀线形麦克风阵列 ，其中麦克风的数目 M= 8，间距
+为 1.0 cm。期望信号的方向为 θs = 0°。利用 3 阶张
+量分解来设计低秩稳健超指向性波束形成器 ，参数
+分别设置为 L1 = L2 = L3 = 2，ϵ= 10-6。图 1 和图 2 展示
+了在 P= 1 2 3 4 的条件下 ，低秩稳健超指向性波
+束形成器的波束图 、指向性因子和白噪声增益随频
+率的变化 。从图中可以观察到 ，波束图在期望的方
+向上始终有最大响应 ，且在期望频率范围内基本能
+保持一致的响应 。随着阶数 P 增加，波束图期望方
+向的主瓣宽度逐渐变窄 ，对非期望方向以外具有更
+好的抑制效果 ，同时指向性因子的值逐渐增大 ，而
+白噪声增益的值则相应地减小 。
+接下来 ，本节进一步采用一个麦克风数目 M=
+64 的均匀线形阵列 ，间距仍为 1.0 cm。同样采用
+3 阶张量分解来设计低秩稳健超指向性波束形成
+器，其中 L1 = L2 = L3 = 4，其他参数和设计过程与前
+面实验保持一致 。图 3 和图 4 展示了在 P= 1 2 3 4
+的情况下低秩稳健超指向性波束形成器的波束图 、
+指向性因子和白噪声增益随频率的变化情况 。可
+以观察到 ，随着秩 P 的增加 ，波束图的主瓣宽度变
+窄，旁瓣等级变低 ，这说明波束形成器的指向性得
+到提升 。图 4 更为清楚地展示了随着秩 P 的增加 ，
+指向性因子的值上升 ，然而白噪声增益的值则减
+小，这意味着系统的稳健性变差 。
+1482
+
+第 9 期 朱瑜杰 等： 基于多维 Kronecker 积的低秩稳健超指向性波束形成方法
+除此之外 ，本节还研究了所提出的低秩稳健超
+指向性波束形成 器在同心圆环阵列结构下的性能 。
+仿真中使用的同心圆环麦克风阵列包含 5 个环形阵
+列 ，从 外 到 内 的 半 径 分 别 为15 cm ，12 cm ，8 cm ，
+5 cm，2 cm，0 cm （只含有一个麦克风 ） 。每个环形
+阵列上的麦克风数量分别为 24，15，12，8，4，1。低秩
+稳健超指向性波束形成器仍然采用 3 阶张量分解设
+计，其中 L1 = L2 = L3 = 4，ϵ= 5´ 10-10。图 5 和图 6 展示
+了在不同秩 P= 1 2 3 4 的情况下，低秩稳健波束形
+成器的波束图 、指向性因子和白噪声增益 。可以发
+现，随着秩 P 的增加，指向性因子增加而白噪声增益
+减小，表明此时尽管波束形成器抑制干扰及噪声的
+能力有所提高 ，但其稳健性变差 。通过改变秩的大
+小，能在指向性因子和白噪声增益之间取得很好的
+折中，这也表明了提出的低秩稳健超指向性波束形
+成器实现了稳健超指向性波束形成器的功能。
+从图 6 中还可以看出 ，低秩稳健超指向性波束
+形成器同样存在白噪声放大方面的问题 ，特别是在
+低频的情况下 。为了改善这一问题 ，可以减小阶数
+P，或者增大对角加载因子 ϵ，在指向性因子和白噪
+声增益之间取得更好的折中 。
+同时，本小节将所提出的低秩稳健超指向性波
+0 0.5 1 1.5 2 2.5 3 3.5 4
+频率/kHz
+0
+5
+10
+15
+20DF/dB
+0 0.5 1 1.5 2 2.5 3 3.5 4
+频率/kHz
+-100
+-80
+-60
+-40
+-20
+0
+20
+WNG/dB
+(a)指向性因子 (b)白噪声增益
+P=1
+P=2
+P=3
+P=4
+P=1
+P=2
+P=3
+P=4
+图 2　低秩稳健超指向性波束形成器的性能 . 实验条件：均匀线形阵列 ，M= 8，L1 = L2 = L3 = 2
+Fig. 2　Performance of the LR-RSD beamformer . Experimental conditions ：： Uniform linear array ， M= 8，L1 = L2 = L3 = 2
+图 3　低秩稳健超指向性波束形成器的波束图 . 实验条件：均匀线形阵列 ，M= 64，L1 = L2 = L3 = 4
+Fig. 3　Beampatterns of the LR-RSD beamformer . Experimental conditions ：： Uniform linear array ， M= 64，L1 = L2 = L3 = 4
+图 1　低秩稳健超指向性波束形成器的波束图 . 实验条件：均匀线形阵列 ，M= 8，L1 = L2 = L3 = 2
+Fig. 1　Beampatterns of the LR-RSD beamformer . Experimental conditions ：： Uniform linear array ， M= 8，L1 = L2 = L3 = 2
+1483
+
+信 号 处 理 第 41 卷
+束形成器与传统的稳健超指向性波束形成器在计
+算复杂度和参数量上进行了比较 。在实际系统中 ，
+通常在短时傅里叶变换 （Short-time Fourier Trans ‐
+form， STFT）域中进行波束形成 。选择的傅里叶变
+换的窗长度为 K，将时域信号通过 K 点快速傅里叶
+变换（Fast Fourier Transform ， FFT） ，然后在考虑对
+称性质的前提下 ，在 K 2 + 1 个子频带中做波束形
+成，所以对于传统的稳健超指向性波束形成器 ，总
+共需要保存的复参数数量为 (K 2 + 1)M。相比之
+下，所提出的低秩稳健超指向性波束形成器需要保
+存 (K 2 + 1)P∑
+n= 1
+N
+Ln 个复参数 。当 P 的值较小时 ，需
+要保存的参数量可以显著减少 。此外，由于所提出
+的低秩稳健超指向性波束形成器在求逆过程中的
+矩阵维度显著减小 ，因此计算复杂度也相应降低 。
+表 1 对传统的稳健超指向性波束形成器和低秩稳健
+超指向性波束形成器的复参数数量和计算复杂度（矩
+阵求逆最大尺寸）进行了比较。假设L1 ≥ L2 ≥ ⋯ ≥ LN，
+并进行 P 阶张量分解。在示例中，参数分别设置为 ：
+M= 64，K= 256。从表 1 中可以观察到 ，低秩稳健超
+指向性波束形成器在复参数数量和计算复杂度方
+图 4　低秩稳健超指向性波束形成器的性能 . 实验条件：均匀线形阵列 ，M= 64，L1 = L2 = L3 = 4
+Fig. 4　Performance of the LR-RSD beamformer . Experimental conditions ：： Uniform linear array ， M= 64，L1 = L2 = L3 = 4
+图 6　低秩稳健超指向性波束形成器的性能 . 实验条件：同心圆环阵列 ，M= 64，L1 = L2 = L3 = 4
+Fig. 6　Performance of the LR-RSD beamformer . Experimental conditions ：： Concentric circular array ， M= 64，L1 = L2 = L3 = 4
+图 5　低秩稳健超指向性波束形成器的波束图 . 实验条件：同心圆环阵列 ，M= 64，L1 = L2 = L3 = 4
+Fig. 5　Beampatterns of the LR-RSD beamformer . Experimental conditions ：： Concentric circular array ， M= 64，L1 = L2 = L3 = 4
+1484
+
+第 9 期 朱瑜杰 等： 基于多维 Kronecker 积的低秩稳健超指向性波束形成方法
+面 展 现 出 明 显 优 势，其 中P=2 时 ，复 参 数 量 降 低
+62.5%，矩阵求逆的最大尺寸降低了 87.5%。此外，
+随着秩 P 值的上升 ，低秩稳健超指向性波束形成器
+的复参数数量和计算复杂度也随之上升 ，这说明 P
+是低秩稳健超指向性波束形成器性能与参数量之
+间的权衡因素 。
+最后，本小节研究了所提的低秩稳健超指向性
+波束形成方法在不同迭代次数下的稳健性 。实验
+条 件 为M= 64 的 均 匀 线 形 阵 列，阵 元 间 距 为
+0.01 m，分解参数设置为 L1 = L2 = L3 = 4，在不同迭代
+次数下评估指向性因子和白噪声增益 。从表 2 和
+表 3 中可以看出 ，当迭代次数 N= 18 时，指向性因子
+和白噪声增益已经达到了稳定 ，这表明所提方法此
+时已经收敛。
+5.2　不同分解方式下性能对比
+此外，本小节探究不同的分解方式对于所提出
+的低秩稳健超指向性波束形成器的影响 。实验采
+用由 64 个麦克风所组成的均匀线形阵列 ，阵元间距
+为 1 cm。首先，固定短滤波器组数量 N 为 3，探究短
+滤波器组长度对低秩稳健超指向性波束形成器的
+性能的影响 ，分解方式与参数如表 4 所示 。阶数 P
+统一设置为 2。为了确保对比的 公平性，使用二分
+法 在 每 个 频 点 上 寻 找 合 适 的 对 角 加 载 因 子，将
+WNG 统一约束在 0 dB。图 7 和图 8 展示 了所设计
+的低秩稳健超指向性波束形成器的波束图 、指向性
+因子以及白噪声增益随频率的变化 。可以发现 ，这
+三种分解模式设计的低秩稳健超指向性波束形成
+器的性能几乎是相同的 ，且均能在参数量明显更少
+的情况下逼近传统稳健超指向性波束形成器的性
+能。相比之下 ，采用 LR-RSD-I 的均匀分解模式所
+设计的波束形成器在复参数量和计算复杂度方面
+更具优势，因而具有更好的实用性 。
+表 1　低秩稳健超指向性波束形成器的复参数数量（L1 ≥ L2 ≥ ⋯ ≥ LN）
+Tab. 1　Number of complex parameters of the LR-RSD beamformer （L1 ≥ L2 ≥ ⋯ ≥ LN）
+RSD
+LR-RSD
+示例：M= 64，K= 256，N= 3，L1 = L2 = L3 = 4
+RSD
+LR-RSD (P= 1)
+LR-RSD (P= 2)
+LR-RSD (P= 4)
+每个频点的参数量
+M
+P∑
+n= 1
+N
+Ln
+64
+12
+24
+48
+总参数量
+(K 2 + 1)M
+(K 2 + 1)P∑
+n= 1
+N
+Ln
+8256
+1548
+3096
+6192
+矩阵求逆的最大尺寸
+M
+PL1
+64
+4
+8
+16
+表 2　指向性因子（DF）随迭代次数的变化
+Tab. 2　Directivity factor versus number of iterations
+LR-RSD (P= 1)
+LR-RSD (P= 2)
+LR-RSD (P= 3)
+LR-RSD (P= 4)
+1
+30.376
+30.467
+30.522
+30.536
+2
+30.549
+30.511
+30.599
+30.491
+3
+30.552
+30.548
+30.564
+30.547
+……
+……
+……
+……
+……
+18
+30.546
+30.546
+30.546
+30.546
+19
+30.546
+30.546
+30.546
+30.546
+20
+30.546
+30.546
+30.546
+30.546
+……
+……
+……
+……
+……
+50
+30.546
+30.546
+30.546
+30.546
+表 3　白噪声增益（WNG）随迭代次数的变化
+Tab. 3　White noise gain versus number of iterations
+LR-RSD (P= 1)
+LR-RSD (P= 2)
+LR-RSD (P= 3)
+LR-RSD (P= 4)
+1
+0.410
+2.038
+0.296
+2.1386
+2
+0.239
+0.248
+0.221
+0.252
+3
+0.235
+0.236
+0.232
+0.237
+……
+……
+……
+……
+……
+18
+0.236
+0.236
+0.236
+0.236
+19
+0.236
+0.236
+0.236
+0.236
+20
+0.236
+0.236
+0.236
+0.236
+……
+……
+……
+……
+……
+50
+0.236
+0.236
+0.236
+0.236
+1485
+
+信 号 处 理 第 41 卷
+其次，本节进一步对比当短滤波器组的数量 N
+不相同时 ，低秩稳健超指向性波束形成器的性能
+变化 。分解方式全部采用均匀分解方式 ，具体参
+数如表 5 所示 。图 9 和图 10 展示了所设计的低秩
+稳健超指向性波束形成器的波束图 、指向性因子
+以及白噪声增益随频率的变化 。实验结果表明 ，
+这几种分解模式设计的低秩稳健超指向性波束形
+成器的性能差异并不明显 。但随着短滤波器组数
+图 7　低秩稳健超指向性波束形成器的波束图 . 实验条件：均匀线形阵列 ，M= 64，P= 2
+Fig. 7　Beampatterns of the LR-RSD beamformer . Experimental conditions ：： Uniform linear array ， M= 64，P= 2
+表 5　低秩稳健超指向性波束形成器在短滤波器组数量不同下的参数设置
+Tab. 5　Parameter settings of the LR-RSD beamformer with varying numbers of short filters
+LR-RSD (P= 2N= 2)
+LR-RSD (P= 2N= 3)
+LR-RSD (P= 2N= 4)
+LR-RSD (P= 2N= 5)
+LR-RSD (P= 2N= 6)
+各组短滤波器长度
+L1 = L2 = 8
+L1 = L2 = L3 = 4
+L1 = L2 = 4L3 = L4 = 2
+L1 = 4L2 = L3 = L4 = L5 = 2
+L1 = L2 = L3 = L4 = L5 = L6 = 2
+表 4　低秩稳健超指向性波束形成器在短滤波器组数量固定下的参数设置
+Tab. 4　Parameter settings of the LR-RSD beamformer with a fixed number of short filters
+LR-RSD-I (P= 2N= 2)
+LR-RSD-II (P= 2N= 2)
+LR-RSD-III (P= 2N= 2)
+各组短滤波器长度
+L1 = L2 = L3 = 4
+L1 = 8L2 = 4L3 = 2
+L1 = 16L2 = L3 = 4
+图 8　低秩稳健超指向性波束形成器在不同分解参数下的性能 . 实验条件：均匀线形阵列 ，M= 64，P= 2
+Fig. 8　Performance of the LR-RSD beamformer for different decomposition parameters . Experimental conditions ：： Uniform linear 
+array， M= 64，P= 2
+1486
+
+第 9 期 朱瑜杰 等： 基于多维 Kronecker 积的低秩稳健超指向性波束形成方法
+量 N 的增加 ，低秩稳健超指向性波束形成器的复参
+数量和矩阵求逆的最大维度均有所降低 。这说明
+通过适当增加短滤波器组数量 N，可以在保持波束
+形成性能稳定的前提下 ，有效降低系统需要存储
+的参数量 。
+5.3　语音增强性能评价
+本小节基于实际语音信号对所设计的波束形
+成器的性能进行评估 。使用二分法在每个频点上
+寻找合适的对角加载因子 ，将两种波束形成器的
+WNG 统一约束到不低于 −10 dB。考虑三种阵列结
+构：均匀线形阵列 （M= 8，麦克风间距为 1.0 cm） ；
+均匀线形阵列 （M= 64，麦克风间距为 1.0 cm） ；同
+心圆环阵列（M= 64，含 5 个环形阵列 ，从外到内的
+半径分别为 15 cm，12 cm，8 cm，5 cm，2 cm，0 cm，
+图 9　低秩稳健超指向性波束形成器的波束图 . 实验条件：均匀线形阵列 ，M= 64，P= 2
+Fig. 9　Beampatterns of the LR-RSD beamformer . Experimental conditions ：： Uniform linear array ， M= 64，P= 2
+图 10　低秩稳健超指向性波束形成器在不同分解参数下的性能 . 实验条件：均匀线形阵列 ，M= 64，P= 2
+Fig. 10　Performance of the LR-RSD beamformer for different decomposition parameters . Experimental conditions ：： Uniform 
+linear array， M= 64，P= 2
+1487
+
+信 号 处 理 第 41 卷
+每个环形阵列上的麦克风数量分别为 24，15，12，
+8，4，1） 。期望声源来自方向 θs =0°，与麦克风阵列
+中心的距离在 1 m 到 2 m 间变化 ，同时在麦克风阵
+列 的135°到 225°方 向 上 有 随 机 一 到 两 个 干 扰 声
+源，与阵列中心的距离也在 1 m 到 2 m 间变化 。采
+用镜像模型的方法产生房间冲激响应 ，房间大小
+为 8 m× 5 m× 3 m ，混 响 时 间T60 随 机 在200 ms 到
+800 ms 之间变化 。实际语音数据选自 TIMIT 数据
+集，每一次实验中从数据集中随机选取音频作为
+期望声源信号和干扰声源信号 ，重复 200 次。麦克
+风观测信号包含期望声源信号和干扰声源信号分
+别卷积上各自对应的房间冲激响应 ，其中干扰信
+号与期望信号的强度相同 ，以及扩散噪声和白噪
+声，信噪比分别设置为 10 dB 到 20 dB 和 20 dB 到
+30 dB 。 波 束 形 成 过 程 在STFT 域 中 进 行，其 中
+STFT 变换的帧长为 256，重叠率为 75%，窗函数为
+Kaiser 窗（其中 β= 1.9π） 。处理完成后将信号变换
+回时域进行处理 。
+在时域内计算全频带信噪比 （Signal-to-Noise 
+Ratio， SNR） 、信 干 比（Signal-to-Interference Ratio ， 
+SIR）和短时客观可懂度（Short-Time Objective Intel ‐
+ligibility， STOI）对波束进行性能评价 。表 6 展示了
+最终的实验结果 ，从表中数据可以很明显地看到在
+三种阵列结构下不同的波束形成器都给观测信号
+带来了语音质量上的提升 ，并且低秩稳健超指向性
+波束形成器在使用更少参数量的情况下达到了与
+传统稳健超指向性波束形成器基本一致甚至更优
+的性能，这进一步证明了所提出方法的有效性和优
+越性 。这不仅表明低秩稳健超指向性波束形成器
+在性能与效率之间取得了良好的平衡 ，还进一步印
+证了其在资源受限环境或大规模阵列系统中具有
+较高的实用价值和推广潜力 ，从而充分体现出其有
+效性与优越性 。
+最后 ，本小节在实测数据上对所提出的低秩
+表 6　传统稳健超指向性波束形成器和所提低秩稳健超指向性波束形成器的性能在不同阵列下的对比
+Tab. 6　Performance comparison between the conventional RSD beamformer and the proposed LR-RSD beamformer for 
+different array configurations
+实验条件
+均匀线形阵列(M= 8)
+均匀线形阵列(M= 64)
+同心圆环阵列(M= 64)
+方法
+观测信号
+RSD
+LR-RSD (P= 1)
+LR-RSD (P= 2)
+LR-RSD (P= 3)
+LR-RSD (P= 4)
+观测信号
+RSD
+LR-RSD (P= 1)
+LR-RSD (P= 2)
+LR-RSD (P= 3)
+LR-RSD (P= 4)
+观测信号
+RSD
+LR-RSD (P= 1)
+LR-RSD (P= 2)
+LR-RSD (P= 3)
+LR-RSD (P= 4)
+SNR/dB
+−0.661
+5.582
+5.560
+5.508
+5.472
+5.456
+1.097
+11.183
+11.484
+11.441
+11.377
+11.321
+0.433
+9.450
+9.258
+9.744
+9.911
+9.937
+SIR/dB
+−7.265
+2.916
+3.073
+2.780
+2.713
+2.761
+−6.647
+10.897
+10.336
+10.841
+10.862
+10.935
+−5.440
+8.117
+6.077
+7.371
+7.676
+7.751
+STOI
+0.447
+0.642
+0.624
+0.638
+0.638
+0.638
+0.469
+0.826
+0.823
+0.825
+0.827
+0.827
+0.461
+0.759
+0.724
+0.745
+0.753
+0.758
+1488
+
+第 9 期 朱瑜杰 等： 基于多维 Kronecker 积的低秩稳健超指向性波束形成方法
+稳健超指向性波束形成器进行了测试 。采用 8 阵
+元均匀线形阵列 （麦克风间距为 0.03 m）在全消声
+室（11.8 m×4.2 m×3.8 m）中进行测试 。实验中将测
+试阵列固定于高度 1.2 m 的电动旋转平台 ，采用标
+准测试扬声器作为声源 ，其中心与阵列中心保持
+同一水平高度且水平距离为 2 m。实验过程中 ，旋
+转平台旋转 360 次，每次旋转 1°并停留 6 s。在该
+6 s 时间段内 ，扬声器持续播放窄带信号 。阵列连
+接到数字信号处理器 ，其中模拟阵列信号首先转
+换为采样频率为 16 kHz 的数字信号 ，随后经短时
+傅里叶变换变换为频域信号 。帧长设置为 512 个
+采样点 ，帧移为 128 个采样点 ，分析窗函数采用参
+数为 1.9π 的 Kaiser 窗。然后提取对应窄带频率的
+子带信号 ，施加窄带波束形成器并计算滤波后每
+个方向上输出信号的平均功率 ，从而得到波束形
+成器在 θÎ[0° 360°]上的空间响应 。实验分别评估
+了传统稳健超指向性波束形成器和所提出的低秩
+稳健超指向性波束形成器在频率为 f= 1 kHz 和 f= 
+2 kHz 时的性能 ，结果如图 11 和图 12 所示 ，可以看
+出，实际测量的波束图与理论波束图非常接近 ，尤
+其 是 在 主 瓣 区 域。该 结果 验 证 了 所 提 方 法 的 有
+效性。
+图 11　传统稳健超指向性波束形成器与低秩稳健超指向性波束形成器的理论与测量波束图 . 实验条件：均匀线形阵列 ，M= 8，
+f= 1 kHz
+Fig. 11　Theoretical and measured beampatterns of the conventional RSD and LR-RSD beamformers . Experimental conditions ： 
+Uniform linear array ， M= 8，f= 1 kHz
+1489
+
+信 号 处 理 第 41 卷
+6　结论
+超指向性波束形成器广泛应用在声信号拾取
+中，但通常存在稳健性低的问题 ，对阵列的自噪
+声和不一致性非常敏感 。同时 ，随着麦克风数目
+的 增 加，计 算 效 率 往 往 会 降 低。 为 解 决 这 些 问
+题 ，本 研 究 基 于 多 维Kronecker 积 分 解 提 出 了 一
+种新的低秩稳健超指向性波束形成器 ，将超指向
+性 波 束 形 成 器 定 义 为 一 系 列 短 滤 波 器 的Kro ‐
+necker 积，并通过交替迭代优化求解 ，从而将传统
+方 法 中 优 化 一 个 长 滤 波 器 的 问 题 转 化 为 优 化 多
+个短滤波器 。相比传统方法 ，所提方法能够在指
+向性因子和白噪声增益直接取得很好的折中 ，而
+且具有更少的参数量 （滤波器系数个数 ）和更低
+的 矩 阵 求 逆 维 数，在 实 际 系 统 中 具 有 更 高 的 效
+率。此外 ，本研究还探讨了不同分解方式对低秩
+超指向性波束形成器的影响 ，验证了所提方法的
+有效性 。
+参考文献
+［1］ BENESTY J ， CHEN Jingdong ， HUANG Yiteng . Mi ‐
+crophone Array Signal Processing ［M］. Berlin ， Ger ‐
+many： Springer-Verlag， 2008.
+［2］ BENESTY J， HUANG Gongping， CHEN Jingdong， et al. 
+Microphone Arrays［M］. Cham， Switzerland： Springer， 2024.
+［3］ HUANG Gongping， JENSEN J R， CHEN Jingdong， et al. 
+图 12　传统稳健超指向性波束形成器与低秩稳健超指向性波束形成器的理论与测量波束图 . 实验条件：均匀线形阵列 ，M= 8，
+f= 2 kHz
+Fig. 12　Theoretical and measured beampatterns of the conventional RSD and LR-RSD beamformers . Experimental conditions ： 
+Uniform linear array ， M= 8，f= 2 kHz
+1490
+
+第 9 期 朱瑜杰 等： 基于多维 Kronecker 积的低秩稳健超指向性波束形成方法
+Advances in microphone array processing and multi chan‐
+nel speech enhancement［C］//ICASSP 2025 - 2025 IEEE In ‐
+ternational Conference on Acoustics ， Speech and Signal 
+Processing （ICASSP）. Hyderabad， India. IEEE， 2025： 1-5.
+［4］ 鄢社锋 ， 马远良 . 传感器阵列波束优化设计及应用
+［M］. 北京： 科学出版社， 2009.
+YAN Shefeng ， MA Yuanliang . Sensor Array Beampat ‐
+tern Optimization ： Theory with Applications ［M］. Bei ‐
+jing： Science Press， 2009. （in Chinese）
+［5］ HUANG Gongping ， BENESTY J ， CHEN Jingdong . 
+On the design of frequency-invariant beampatterns with 
+uniform circular microphone arrays ［J］. IEEE/ACM 
+Transactions on Audio ， Speech， and Language Process ‐
+ing， 2017， 25（5） ： 1140-1153.
+［6］ ZHAO Xudong ， HUANG Gongping ， CHEN Jingdong ， 
+et al . Design of 2D and 3D differential microphone ar ‐
+rays with a multistage framework［J］. IEEE/ACM Trans ‐
+actions on Audio ， Speech ， and Language Processing ， 
+2023， 31： 2016-2031.
+［7］ LUO Xueqin， ZHAO Xudong， HUANG Gongping， et al. 
+Design of fully steerable broadband beamformers with 
+concentric circular superarrays ［J］. The Journal of the 
+Acoustical Society of America， 2023， 154（4） ： 1996-2009.
+［8］ LUO Xueqin ， JIN Jilu ， HUANG Gongping ， et al . De ‐
+sign of fully steerable differential beamformers with lin ‐
+ear superarrays［J］. IEEE/ACM Transactions on Audio ， 
+Speech， and Language Processing， 2024， 32： 3076-3089.
+［9］ HUANG Gongping ， CHEN Jingdong ， BENESTY J . In‐
+sights into frequency-invariant beamforming with con ‐
+centric circular microphone arrays［J］. IEEE/ACM Trans‐
+actions on Audio ， Speech ， and Language Processing ， 
+2018， 26（12） ： 2305-2318.
+［10］ 潘超， 黄公平， 陈景东 . 面向语音通信与交互的麦克风
+阵列波束形成方法［J］. 信号处理， 2020， 36（6） ： 804-815.
+PAN Chao， HUANG Gongping ， CHEN Jingdong . Mi ‐
+crophone array beamforming ： An overview［J］. Journal 
+of Signal Processing， 2020， 36（6） ： 804-815. （in Chinese）
+［11］ 鄢社锋 ， 马远良 . 基于二阶锥规划的任意传感器阵列
+时域恒定束宽波束形成 ［J］. 声学学报 ， 2005， 30（4） ： 
+309-316.
+YAN Shefeng ， MA Yuanliang . Broadband constant 
+beamwidth beamforming for arbitrary sensor arrays in 
+time domain via second-order cone programming ［J］. 
+Acta Acustica， 2005， 30（4） ： 309-316. （in Chinese）
+［12］ 任维怡 ， 陈华伟 ， 鲍彧 . 稳健宽带波束形成器设计的
+低阶统计量法［J］. 应用声学， 2015， 34（5） ： 413-424.
+REN Weiyi， CHEN Huawei ， BAO Yu. Design of robust 
+broadband beamformers based on lower-order statistics 
+method［J］. Journal of Applied Acoustics， 2015， 34（5） ： 
+413-424. （in Chinese）
+［13］ JIN Jilu ， BENESTY J ， CHEN Jingdong ， et al . Differ ‐
+ential beamforming from a geometric perspective ［J］. 
+IEEE/ACM Transactions on Audio ， Speech ， and Lan ‐
+guage Processing ， 2023， 31： 3042-3054.
+［14］ HUANG Gongping ， BENESTY J ， CHEN Jingdong . 
+Fundamental approaches to robust differential beam ‐
+forming with high directivity factors ［J］. IEEE/ACM 
+Transactions on Audio ， Speech， and Language Process ‐
+ing， 2022， 30： 3074-3088.
+［15］ 汪勇， 杨益新， 马远良，等 . 圆环形阵列理论最优指向
+性研究［J］. 声学技术， 2013， 32（S1） ： 115-116.
+WANG Yong， YANG Yixin， MA Yuanliang， et al . Opti‐
+mal directivity of circular sensor arrays ［J］. Technical 
+Acoustics， 2013， 32（S1） ： 115-116. （in Chinese）
+［16］ 鄢社锋 ， 马远良 ， 孙超 . 任意几何形状和阵元指向性
+的 传 感 器 阵 列 优 化 波 束 形 成 方 法［J］. 声 学 学 报， 
+2005， 30（3） ： 264-270.
+YAN Shefeng ， MA Yuanliang ， SUN Chao . Beampat ‐
+tern optimization for sensor arrays of arbitrary geometry 
+and element directivity［J］. Acta Acustica， 2005， 30（3） ： 
+264-270. （in Chinese）
+［17］ LOTTER T， V ARY P. Dual-channel speech enhancement 
+by superdirective beamforming ［J］. EURASIP Journal 
+on Advances in Signal Processing ， 2006， 2006： 1-14.
+［18］ BOUCHARD C ， HAVELOCK D I ， BOUCHARD M . 
+Beamforming with microphone arrays for directional 
+sources［J］. The Journal of the Acoustical Society of 
+America， 2009， 125（4） ： 2098-2104.
+［19］ 彭科，卢晶，徐柏龄 . 自适应频域波束形成技术的小话
+筒阵列应用［J］. 南京大学学报（自然科学） ， 2004， 40
+（4） ：446-453.
+PENG Ke， LU Jing， XU Boling. Robust adaptive beam ‐
+forming in the frequency domain by using a small micro ‐
+phone array ［J］. Journal of Nanjing University （Natural 
+1491
+
+信 号 处 理 第 41 卷
+Science） ， 2004， 40（4） ： 446-453. （in Chinese）
+［20］ YAN Shefeng . Optimal design of modal beamformers 
+for circular arrays［J］. The Journal of the Acoustical So ‐
+ciety of America， 2015， 138（4） ： 2140-2151.
+［21］ STEFANAKIS N. Efficient implementation of superdirective 
+beamforming in a half-space environment［J］. The Journal 
+of the Acoustical Society of America， 2019， 145（3） ： 1293.
+［22］ WANG Yong， YANG Yixin， HE Zhengyao ， et al . Ro ‐
+bust superdirective frequency-invariant beamforming 
+for circular sensor arrays ［J］. IEEE Signal Processing 
+Letters， 2017， 24（8） ： 1193-1197.
+［23］ GRECO D， TRUCCO A. Superdirective robust algorithms’ 
+comparison for linear arrays［J］. Acoustics， 2020， 2（3） ： 
+707-718.
+［24］ CROCCO M ， TRUCCO A . The synthesis of robust 
+broadband beamformers for equally-spaced linear arrays
+［J］. The Journal of the Acoustical Society of America ， 
+2010， 128（2） ： 691-701.
+［25］ CROCCO M ， TRUCCO A. Stochastic and analytic opti ‐
+mization of sparse aperiodic arrays and broadband beam ‐
+formers with robust superdirective patterns ［J］. IEEE 
+Transactions on Audio ， Speech， and Language Process ‐
+ing， 2012， 20（9） ： 2433-2447.
+［26］ NONGPIUR R C . Design of minimax broadband beam ‐
+formers that are robust to microphone gain ， phase ， and 
+position errors［J］. IEEE/ACM Transactions on Audio ， 
+Speech， and Language Processing， 2014， 22（6） ： 1013-1022.
+［27］ MABANDE E ， SCHAD A ， KELLERMANN W . De ‐
+sign of robust superdirective beamformers as a convex 
+optimization problem［C］//2009 IEEE International Con ‐
+ference on Acoustics ， Speech and Signal Processing . 
+Taipei， China. IEEE， 2009： 77-80.
+［28］ WANG Yong， YANG Yixin， MA Yuanliang， et al . Ro ‐
+bust high-order superdirectivity of circular sensor arrays
+［J］. The Journal of the Acoustical Society of America ， 
+2014， 136（4） ： 1712-1724.
+［29］ HUANG Gongping ， BENESTY J， CHEN Jingdong . Su‐
+perdirective beamforming based on the Krylov matrix
+［J］. IEEE/ACM Transactions on Audio ， Speech ， and 
+Language Processing ， 2016， 24（12） ： 2531-2543.
+［30］ CHEN Xi ， BENESTY J ， HUANG Gongping ， et al . On 
+the robustness of the superdirective beamformer ［J］. 
+IEEE/ACM Transactions on Audio ， Speech ， and Lan ‐
+guage Processing ， 2021， 29： 838-849.
+［31］ Y ANG Xiaoran， HUANG Gongping， JIN Jilu， et al . De ‐
+sign and optimization of superdirective beamforming and  
+post-filtering for speech enhancement［C］//ICASSP 2025 - 
+2025 IEEE International Conference on Acoustics， Speech 
+and Signal Processing （ICASSP）. Hyderabad， India. IEEE， 
+2025： 1-5.
+［32］ COHEN I ， BENESTY J ， CHEN Jingdong . Differential 
+Kronecker product beamforming ［J］. IEEE/ACM Trans ‐
+actions on Audio ， Speech ， and Language Processing ， 
+2019， 27（5） ： 892-902.
+［33］ WANG Xuehan， BENESTY J ， CHEN Jingdong ， et al . 
+Beamforming with cube microphone arrays via Kro ‐
+necker product decompositions［J］. IEEE/ACM Transac ‐
+tions on Audio ， Speech ， and Language Processing ， 
+2021， 29： 1774-1784.
+［34］ HUANG Gongping ， COHEN I ， BENESTY J ， et al . 
+Kronecker product beamforming with multiple differen ‐
+tial microphone arrays ［C］//2020 IEEE 11th Sensor Ar ‐
+ray and Multichannel Signal Processing Workshop 
+（SAM）. Hangzhou， China. IEEE， 2020： 1-5.
+［35］ PEI Hanchen ， CHEN Kang ， HUANG Gongping ， et al . 
+On the design of low-rank differential beamformers with 
+nonuniform linear microphone arrays ［C］//ICASSP 
+2025 - 2025 IEEE International Conference on Acous ‐
+tics， Speech and Signal Processing （ICASSP）. Hyder ‐
+abad， India. IEEE， 2025： 1-5.
+［36］ HUANG Gongping ， BENESTY J ， CHEN Jingdong ， et 
+al. Robust and steerable Kronecker product differential 
+beamforming with rectangular microphone arrays ［C］//
+ICASSP 2020 - 2020 IEEE International Conference on 
+Acoustics， Speech and Signal Processing （ICASSP）. 
+Barcelona， Spain. IEEE， 2020： 211-215.
+［37］ VAN TREES H L . Optimum Array Processing ： Part IV 
+of Detection ， Estimation ， and Modulation Theory ［M］. 
+New York， John Wiley Sons， Inc： 2002.
+［38］ BRANDSTEIN M and WARD D . Microphone Arrays ： 
+Signal Processing Techniques and Applications ［M］. 
+New York： Springer， 2001.
+［39］ KOLDA T G， BADER B W. Tensor decompositions and 
+applications［J］. SIAM Review ， 2009， 51（3） ： 455-500.
+1492
+
+第 9 期 朱瑜杰 等： 基于多维 Kronecker 积的低秩稳健超指向性波束形成方法
+作者简介
+朱瑜杰 男，2003 年生，江西人 。武
+汉大学电子信息学院 ，硕士研究生 ，主要
+研究方向包括麦克风阵列信号处理 、语音
+增强、去混响。
+E-mail：yujiezhu@whu.edu.cn
+赵坤龙 男，2000 年生，河南人 。武
+汉大学电子信息学院 ，博士研究生 ，主要
+研究方向包括麦克风阵列信号处理 、语音
+增强。
+E-mail：kunlongzhao@whu .edu.cn
+罗雪琴 女，1997 年生，湖南人 。西
+北工业大学航海学院 ，博士研究生 ，主要
+研究方向为阵列信号处理和语音增强 。
+E-mail：xueqinluo@outlook .com
+靳姬鲁 男，1996 年生，山东人 。西
+北工业大学航海学院 ，博士研究生 ，主要
+研究方向为阵列信号处理 、语音信号处
+理等。
+E-mail：jilu.jin@mail.nwpu.edu.cn
+黄公平 男，1988 年生，湖北人 。武
+汉大学教授 ，博士生导师 。主要研究方向
+为声信号感知理论与技术 、麦克风阵列 、
+语音增强、音频生成、声源定位等。
+E-mail：gongpinghuang@whu .edu.cn
+陈景东 男，1970 年生，陕西人 。西
+北工业大学教授 ，博士生导师 。主要研究
+方向为智能声信号处理 、阵列设计与处
+理、MIMO 信号处理、人工智能等。
+E-mail：jingdongchen@ieee .org
+（责任编辑：边熙淳）
+1493

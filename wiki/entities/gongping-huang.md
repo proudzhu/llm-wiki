@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-30
-updated: 2026-07-09
+updated: 2026-09-14
 tags:
   - researcher
   - microphone-arrays
@@ -27,6 +27,7 @@ tags:
 - Advances in microphone array processing (ICASSP 2025 overview)
 - SCM reconstruction method for multi-source speech enhancement (Liu et al. 2026)
 - Joint learning of covariance estimation and WNG for robust MVDR beamforming (Deng et al. 2026)
+- Corresponding author of "Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products" (Journal of Signal Processing 2025) — extends Kronecker product beamforming to multidimensional (N-way, rank-P) decomposition — [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025]]
 
 ## Affiliations
 
@@ -42,3 +43,4 @@ tags:
 
 - [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
 - [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026: Joint Covariance and WNG Learning for Robust MVDR]]
+- [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]]

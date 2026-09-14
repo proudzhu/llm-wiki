@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-12
+updated: 2026-09-14
 sources:
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
   - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
+  - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
 tags:
   - directivity-pattern
   - spatial-audio

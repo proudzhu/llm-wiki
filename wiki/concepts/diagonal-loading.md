@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-06-21
+updated: 2026-09-14
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
+  - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
 tags:
   - beamforming
   - robustness
@@ -67,6 +68,10 @@ Diagonal loading is a *regularization* approach to robustness: it stabilizes the
 
 For **isotropic** uncertainty, the RMVB coincides (up to scale) with the diagonal-loading regularized beamformer for the proper choice of $\mu$. For anisotropic uncertainty, the RMVB strictly dominates: it achieves 15.63 dB worst-case SINR versus 1.85 dB for point-mainbeam constraints in the Lorenz–Boyd 10-element ULA experiment, while regularization-based methods remain sensitive to the $\mu$ choice.
 
+## Diagonal Loading inside Iterative Low-Rank Design
+
+Zhu et al. (2025) apply diagonal loading at two levels in [[concepts/superdirective-beamforming|robust superdirective]] design: (i) classically, $\mathbf{h}_{\mathrm{RSD}} = [\boldsymbol{\Gamma} + \epsilon\mathbf{I}_M]^{-1}\mathbf{d}_{\theta_s} / (\cdot)$ trades directivity factor against WNG via a fixed $\epsilon$; and (ii) inside their [[concepts/kronecker-product-beamforming|Kronecker product]] alternating iterations, every per-group subproblem inverts the *loaded* $PL_n$-dimensional block matrix $\bar{\boldsymbol{\Gamma}}_n + \epsilon\mathbf{I}_{PL_n}$, so robustness is enforced at every iteration rather than only at the end. When a hard WNG target is required, $\epsilon$ is found per frequency bin by **bisection** — a simpler alternative to the Kantorovich-based closed-form loading of Mittal et al. (2026), at the cost of iterative search.
+
 ## Related Concepts
 
 - [[white-noise-gain|White Noise Gain (WNG)]]
@@ -77,10 +82,13 @@ For **isotropic** uncertainty, the RMVB coincides (up to scale) with the diagona
 - [[robust-minimum-variance-beamforming|Robust Minimum Variance Beamforming (RMVB)]]
 - [[ellipsoidal-uncertainty-modeling|Ellipsoidal Uncertainty Modeling]]
 - [[gsc-beamformer|Generalized Sidelobe Canceller]]
-- [[gershgorin-circle-theorem|Gershgorin Circle Theorem]]
-- [[beamforming|Beamforming]]
+- [[concepts/gershgorin-circle-theorem|Gershgorin Circle Theorem]]
+- [[concepts/beamforming|Beamforming]]
+- [[concepts/superdirective-beamforming|Superdirective Beamforming]]
+- [[concepts/kronecker-product-beamforming|Kronecker Product Beamforming]]
 
 ## Related Sources
 
 - [[sources/lorenz-2005-robust-minimum-variance-beamforming|Lorenz & Boyd 2005: Robust Minimum Variance Beamforming]]
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
+- [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]] — DL inside alternating Kronecker subproblems; per-frequency bisection on $\epsilon$ to meet a WNG target

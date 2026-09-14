@@ -572,6 +572,10 @@
 | [[entities/lianwu-chen\|Lianwu Chen]] | Amazon Alexa — speech processing, noise robustness | 2026-09-12 |
 | [[entities/mehrez-souden\|Mehrez Souden]] | Researcher at Universite du Quebec (INRS-EMT); signal processing for wireless communications and speech enhancement; first author of the PMWF origin paper | 2026-09-13 |
 | [[entities/sofienne-affes\|Sofiene Affes]] | Professor at INRS-EMT, Montreal; wireless communications, statistical signal processing; co-author of the PMWF origin paper | 2026-09-13 |
+| [[entities/yujie-zhu\|Yujie Zhu]] | Wuhan University — first author of the multidimensional Kronecker product low-rank superdirective beamforming paper | 2026-09-14 |
+| [[entities/kunlong-zhao\|Kunlong Zhao]] | Wuhan University — microphone array signal processing; co-author of the Kronecker superdirective beamforming paper | 2026-09-14 |
+| [[entities/xueqin-luo\|Xueqin Luo]] | Northwestern Polytechnical University (CIAIC) — steerable broadband/differential superarray beamformers; co-author of the Kronecker superdirective beamforming paper | 2026-09-14 |
+| [[entities/jilu-jin\|Jilu Jin]] | Northwestern Polytechnical University (CIAIC) — geometric differential beamforming; co-author of the Kronecker superdirective beamforming paper | 2026-09-14 |
 
 ---
 
@@ -1090,6 +1094,8 @@
 | [[concepts/spatial-convolution\|Spatial Convolution]] | Per-frequency MIMO convolution across microphone channels that mimics frequency-domain filter-and-sum beamforming in the real domain; TinyGRU's multichannel front-end | 2026-09-13 |
 | [[concepts/recursive-training\|Recursive Training]] | Training strategy for NNs deployed inside feedback loops: training signals are generated recursively through the model being trained, eliminating the training-inference mismatch by construction (made trainable via howling-detection halting and offline-model initialization) | 2026-09-13 |
 | [[concepts/jointdfc\|JointDFC]] | Two-stage deep feedback control for hearing aids: deep PEM-AFC cancellation stage + full-sub-band residual suppression stage with global causal time-frequency attention, trained via a three-step closed-loop strategy | 2026-09-13 |
+| [[concepts/superdirective-beamforming\|Superdirective Beamforming]] | Fixed beamformer maximizing the directivity factor against diffuse noise; Γ⁻¹d MVDR-type solution, WNG-robustness trade-off, diagonal-loading remedy | 2026-09-14 |
+| [[concepts/kronecker-product-beamforming\|Kronecker Product Beamforming]] | Decomposes a length-M filter into Kronecker products of short filters (N-way, rank-P); alternating closed-form MVDR updates with embedded diagonal loading cut parameters and inversion dimension | 2026-09-14 |
 
 ---
 
@@ -1312,6 +1318,7 @@
 | [[sources/pandey-2025-ultra-low-compute\|Pandey & Azcarreta 2025]] | This paper presents TinyGRU (TGRU), an ultra-low-compute DNN for complex spectral masking on multichannel input, integrated with a Multi-Channel Wiener Filter (MCWF) in a two-stage framework for edge devices such as smart glasses and hearables. | 2026-09-13 |
 | [[sources/zhang-2024-enhanced-hybrid-ahs\|Zhang, Zhang, Yu & Yu 2024: Enhanced Acoustic Howling Suppression via Hybrid Kalman Filter and Deep Learning]] | TASLP journal version unifying HybridAHS (offline + recursive training) and NeuralKalmanAHS; recursive closed-loop training eliminates the NN-AHS training-inference mismatch; cRM2 masking; suppression-vs-distortion (WER) trade-off | 2026-09-13 |
 | [[sources/zhan-2026-joint-afc-rfs\|Zhan, Moore, Li & Zheng 2026: JointDFC — Joint Deep Feedback Control for Hearing Aids]] | First deep learning joint optimization of adaptive feedback cancellation (LFCNet = DeepPEM-AFC) and residual feedback suppression (RFSNet FSB + global cTFA); 0.396M params, 0.227 G MACs/s, 8 ms latency; dominates at high excess gain and feedback-path changes | 2026-09-13 |
+| [[sources/zhu-2025-kronecker-superdirective-beamforming\|Zhu, Zhao, Luo, Jin, Huang & Chen 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]] | LR-RSD: N-way rank-P Kronecker decomposition of the superdirective filter with alternating closed-form MVDR updates and embedded diagonal loading; at M=64, rank P=2 cuts parameters 62.5% and inversion dimension 87.5% with matched performance, validated by anechoic-chamber measurements | 2026-09-14 |
 
 ---
 
@@ -1365,10 +1372,10 @@
 
 ## Statistics
 
-- **Total pages**: 1314
-- **Entities**: 562
-- **Concepts**: 509
-- **Sources**: 213
+- **Total pages**: 1321
+- **Entities**: 566
+- **Concepts**: 511
+- **Sources**: 214
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-13
+- **Last updated**: 2026-09-14

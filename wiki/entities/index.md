@@ -566,4 +566,8 @@
 | [[entities/lianwu-chen\|Lianwu Chen]] | Amazon Alexa — speech processing, noise robustness | 2026-09-12 |
 | [[entities/mehrez-souden\|Mehrez Souden]] | Researcher at Universite du Quebec (INRS-EMT); signal processing for wireless communications and speech enhancement; first author of the PMWF origin paper | 2026-09-13 |
 | [[entities/sofienne-affes\|Sofiene Affes]] | Professor at INRS-EMT, Montreal; wireless communications, statistical signal processing; co-author of the PMWF origin paper | 2026-09-13 |
+| [[entities/yujie-zhu\|Yujie Zhu]] | Wuhan University — first author of the multidimensional Kronecker product low-rank superdirective beamforming paper | 2026-09-14 |
+| [[entities/kunlong-zhao\|Kunlong Zhao]] | Wuhan University — microphone array signal processing; co-author of the Kronecker superdirective beamforming paper | 2026-09-14 |
+| [[entities/xueqin-luo\|Xueqin Luo]] | Northwestern Polytechnical University (CIAIC) — steerable broadband/differential superarray beamformers; co-author of the Kronecker superdirective beamforming paper | 2026-09-14 |
+| [[entities/jilu-jin\|Jilu Jin]] | Northwestern Polytechnical University (CIAIC) — geometric differential beamforming; co-author of the Kronecker superdirective beamforming paper | 2026-09-14 |
 

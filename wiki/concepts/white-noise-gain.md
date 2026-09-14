@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-07-09
+updated: 2026-09-14
 tags:
   - beamforming
   - robustness
   - microphone-arrays
 sources:
   - raw/papers/deng-2026-joint-covariance-wng-mvdr/full-text.md
+  - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
 ---
 
 # White Noise Gain (WNG)
@@ -47,6 +48,10 @@ This maps the desired WNG bound to a maximum allowable condition number $\kappa_
 
 A typical choice is $W_{\min} = 10\log_{10}(M) - 3$ dB, allowing 3 dB of WNG degradation from the delay-and-sum maximum in exchange for adaptive interference nulling.
 
+## WNG in Fixed Superdirective Design
+
+For fixed [[concepts/superdirective-beamforming|superdirective beamformers]], WNG is the robustness metric traded against the directivity factor: maximizing DF drives WNG strongly negative at low frequencies (white-noise amplification). Two loading-based control mechanisms appear in the literature (Zhu et al. 2025): (i) a fixed diagonal loading factor $\epsilon$ in $[\boldsymbol{\Gamma} + \epsilon\mathbf{I}]^{-1}$, and (ii) a **per-frequency bisection** on $\epsilon$ that pins WNG to an explicit target (e.g., 0 dB or −10 dB) at every bin. In [[concepts/kronecker-product-beamforming|Kronecker product beamforming]], the decomposition rank $P$ provides an additional WNG knob: larger $P$ raises DF but lowers WNG.
+
 ## Data-Driven WNG Estimation
 
 Conventionally, the WNG lower bound $W_{\min}$ is a fixed hyperparameter tuned manually (e.g., $10\log_{10}(M) - 3$ dB for all frequencies). Deng et al. (2026) introduce a **frequency-adaptive learnable WNG** scheme where a neural network predicts a per-frequency-bin WNG threshold $\mathcal{W}_0(k)$ jointly with T-F masks for [[concepts/spatial-covariance-matrix|SCM]] estimation. The WNG prediction is implicitly supervised via the beamforming reconstruction loss rather than requiring explicit WNG labels, enabling the network to discover optimal frequency-dependent robustness tradeoffs automatically. This approach outperforms fixed-threshold baselines by +1.4–1.8 dB SNR gain under both matched and mismatched array conditions.
@@ -61,8 +66,11 @@ Conventionally, the WNG lower bound $W_{\min}$ is a fixed hyperparameter tuned m
 - [[concepts/beamforming|Beamforming]]
 - [[concepts/robust-minimum-variance-beamforming|Robust Minimum Variance Beamforming]]
 - [[concepts/neural-beamforming|Neural Beamforming]]
+- [[concepts/superdirective-beamforming|Superdirective Beamforming]]
+- [[concepts/kronecker-product-beamforming|Kronecker Product Beamforming]]
 
 ## Related Sources
 
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
 - [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026: Joint Covariance and WNG Learning for Robust MVDR]]
+- [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]] — WNG as the robustness metric in superdirective design; per-frequency bisection on the loading factor to hit a WNG target; rank-P as a WNG knob

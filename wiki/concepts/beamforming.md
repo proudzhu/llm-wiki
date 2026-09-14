@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-08-28
+updated: 2026-09-14
 sources:
   - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.txt
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
   - raw/papers/kim-2014-doa-based-snr-estimation/full-text.txt
+  - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
 tags:
 - acoustics
 - antenna-theory
@@ -39,6 +40,7 @@ Modern ANC headphones use beamforming for several critical tasks:
 - **[[lcmv-beamformer|LCMV (Linearly Constrained Minimum Variance)]]**: Generalizes MVDR to multiple linear constraints for simultaneous target preservation and null steering.
 - **Neural Beamforming**: Using deep learning models (e.g., U-Nets or LSTMs) to perform spatial filtering in complex, multi-path environments.
 - **Difference-Maximizing Beamformer (Back-to-Back Array)**: Tashev et al. (2008) propose a two-beam beamformer for [[concepts/back-to-back-microphone-array|back-to-back unidirectional microphone arrays]] whose optimization criterion is **maximizing the front-back energy ratio** rather than the usual minimum-variance / maximum-SNR criteria. The front beam is optimized to maximize the ratio of integrated energy in the desired $\pm\Delta\theta$ cone to that in the opposite cone, subject to unity-gain and zero-phase-shift constraints enforced via punishing functions. This objective fits the back-to-back geometry (where the rear capsule is *designed* to face away from the source) and pairs naturally with a [[concepts/probability-based-spatial-filter|probability-based non-linear spatial filter]] that consumes the front/rear beam outputs.
+- **Superdirective / Low-Rank Kronecker Beamforming**: [[concepts/superdirective-beamforming|Superdirective beamforming]] maximizes the directivity factor against diffuse noise (a fixed, precomputable design), and its large-array efficiency can be boosted by [[concepts/kronecker-product-beamforming|Kronecker product decomposition]] into short filters — Zhu et al. (2025) generalize this to multidimensional (N-way, rank-P) decompositions, cutting parameters by 62.5% and inversion dimension by 87.5% at $M = 64$ with matched performance.
 
 ## Robustness and Diagonal Loading
 
@@ -106,9 +108,12 @@ Kim & Kim (2014) quantify a fundamental small-array limitation: the spatial dire
 - [[concepts/probability-based-spatial-filter|Probability-Based Spatial Filter]]
 - [[concepts/target-to-non-target-directional-signal-ratio|Target-to-Non-target Directional Signal Ratio (TNR)]] — DSB/BM power-ratio estimator
 - [[concepts/doa-based-snr-estimation|DOA-Based SNR Estimation]] — consumer of the DSB/BM ratio trick
+- [[concepts/superdirective-beamforming|Superdirective Beamforming]]
+- [[concepts/kronecker-product-beamforming|Kronecker Product Beamforming]]
 
 ## Related Sources
 
+- [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]]
 - [[sources/lorenz-2005-robust-minimum-variance-beamforming|Lorenz & Boyd 2005: Robust Minimum Variance Beamforming]]
 - [[sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]]
 - [[sources/frank-2026-low-latency-roi-beamforming|Frank & Cohen 2026: Low-latency Audio Front-end ROI Beamforming for Smart Glasses]]
