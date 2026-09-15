@@ -96,23 +96,109 @@ def run_defuddle(url, out_path):
     print(f"Wrote: {out_path}")
 
 
+# Matches markdown image links: ![alt](url), including defuddle's
+# '[[Uncaptioned image]]' nested-bracket alt form for images without alt
+# text in the source HTML (a plain [^\]]* alt group silently skips those).
+IMG_PATTERN = re.compile(r'!\[(?:\[[^\]]*\]|[^\]]*)\]\((https?://[^)]+)\)')
+
+BROWSER_HEADERS = {
+    'User-Agent': ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
+                   'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 '
+                   'Safari/537.36'),
+    'Accept': 'image/avif,image/webp,image/png,image/*,*/*;q=0.8',
+}
+
+
+def _looks_like_image(data):
+    """True if the body plausibly is an image.
+
+    Some CDN blocks return an HTML challenge page with HTTP 200; reject
+    bodies that are too small or start with HTML markup.
+    """
+    if len(data) < 64:
+        return False
+    head = data[:512].lstrip().lower()
+    return not (head.startswith(b'<!doctype') or head.startswith(b'<html')
+                or head.startswith(b'<head'))
+
+
+def _fetch_via_curl(url, timeout=60):
+    """Fetch url bytes via curl and return them; raise on any failure.
+
+    curl's TLS fingerprint differs from Python-urllib's, which matters:
+    arXiv's CDN intermittently rejects urllib with HTTP 406 even when the
+    same URL succeeds via curl in the same minute (observed in the Kim
+    2021 ingest: 2 of 3 figures downloaded, the 3rd 406'd; retries with
+    browser headers still 406'd, curl succeeded).
+    """
+    exe = shutil.which('curl')
+    if exe is None:
+        raise RuntimeError('curl not found on PATH')
+    marker = b'\n__CURL_STATUS__'
+    result = subprocess.run(
+        [exe, '-sS', '-L', '--max-time', str(timeout),
+         '-w', marker.decode() + '%{http_code}', url],
+        capture_output=True,
+    )
+    out = result.stdout
+    if marker not in out:
+        err = result.stderr.decode('utf-8', 'replace').strip()
+        raise RuntimeError(f'curl failed: {err or "no output"}')
+    body, _, status = out.rpartition(marker)
+    code = status.decode('ascii', 'replace').strip()
+    if not code.startswith('2'):
+        raise RuntimeError(f'HTTP {code}')
+    return body
+
+
+def fetch_image_bytes(url, referer):
+    """Download an image robustly against arXiv CDN 406 challenges.
+
+    Strategy: urllib with browser headers first (fast path, no external
+    dependency), then a curl fallback (different TLS fingerprint). Raises
+    RuntimeError describing both attempts on total failure.
+    """
+    headers = dict(BROWSER_HEADERS)
+    if referer:
+        headers['Referer'] = referer
+    last_err = None
+    try:
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            data = resp.read()
+        if _looks_like_image(data):
+            return data
+        last_err = f'non-image body ({len(data)} bytes, likely CDN block page)'
+    except Exception as e:
+        last_err = str(e)
+    try:
+        return _fetch_via_curl(url)
+    except Exception as e:
+        raise RuntimeError(f'urllib: {last_err}; curl fallback: {e}')
+
+
 def download_figures(md_path, arxiv_id, figures_dir):
     """Download remote images referenced in markdown to figures/."""
     os.makedirs(figures_dir, exist_ok=True)
     with open(md_path, encoding='utf-8') as f:
         content = f.read()
 
-    # Match markdown image links: ![alt](url) and bare URLs to arxiv html images
-    img_pattern = re.compile(r'!\[([^\]]*)\]\((https?://[^)]+)\)')
     downloaded = {}
+    referer = f"https://arxiv.org/html/{arxiv_id}"
 
-    for m in img_pattern.finditer(content):
-        alt, url = m.group(1), m.group(2)
-        if 'arxiv.org' not in url and not url.startswith('/'):
-            # Only handle arxiv-hosted images; skip others
+    for m in IMG_PATTERN.finditer(content):
+        url = m.group(1)
+        if 'arxiv.org' not in url:
             if not url.startswith('/'):
+                # Only handle arxiv-hosted images; skip others
                 continue
             url = f"https://arxiv.org{url}"
+
+        if url in downloaded:
+            # The same URL may be referenced several times (e.g. once as
+            # '![alt](url)' and once as defuddle's '[[Uncaptioned image]]'
+            # form); download it once and reuse the local name.
+            continue
 
         # Derive a local filename
         ext = os.path.splitext(url)[1] or '.png'
@@ -121,7 +207,9 @@ def download_figures(md_path, arxiv_id, figures_dir):
         local_path = os.path.join(figures_dir, local_name)
 
         try:
-            urllib.request.urlretrieve(url, local_path)
+            data = fetch_image_bytes(url, referer)
+            with open(local_path, 'wb') as f:
+                f.write(data)
             downloaded[url] = local_name
             print(f"  Downloaded: {url} -> figures/{local_name}")
         except Exception as e:
@@ -136,13 +224,22 @@ def replace_image_links(md_path, downloaded, slug):
         content = f.read()
 
     for url, local_name in downloaded.items():
-        # Replace ![alt](url) with ![[raw/papers/{slug}/figures/{name}|alt]]
+        # Alt group tolerates defuddle's '![[Uncaptioned image]](url)'
+        # nested-bracket form. Both alternatives are bounded (they cannot
+        # cross a ']'), so the match cannot span from one image into a
+        # later one and swallow the text between them.
         escaped = re.escape(url)
-        content = re.sub(
-            rf'!\[([^\]]*)\]\({escaped}\)',
-            lambda m, ln=local_name: f'![[raw/papers/{slug}/figures/{ln}|{m.group(1)}]]',
-            content,
-        )
+        pattern = rf'!\[(\[[^\]]*\]|[^\]]*)\]\({escaped}\)'
+
+        def _repl(m, ln=local_name):
+            alt = m.group(1).strip()
+            # Brackets/pipes in an alias would break the embed wikilink
+            # (pipe-escaping in the build chain), so drop such aliases.
+            if not alt or '[' in alt or ']' in alt or '|' in alt:
+                return f'![[raw/papers/{slug}/figures/{ln}]]'
+            return f'![[raw/papers/{slug}/figures/{ln}|{alt}]]'
+
+        content = re.sub(pattern, _repl, content)
 
     with open(md_path, 'w', encoding='utf-8') as f:
         f.write(content)
