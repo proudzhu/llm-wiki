@@ -570,4 +570,8 @@
 | [[entities/kunlong-zhao\|Kunlong Zhao]] | Wuhan University — microphone array signal processing; co-author of the Kronecker superdirective beamforming paper | 2026-09-14 |
 | [[entities/xueqin-luo\|Xueqin Luo]] | Northwestern Polytechnical University (CIAIC) — steerable broadband/differential superarray beamformers; co-author of the Kronecker superdirective beamforming paper | 2026-09-14 |
 | [[entities/jilu-jin\|Jilu Jin]] | Northwestern Polytechnical University (CIAIC) — geometric differential beamforming; co-author of the Kronecker superdirective beamforming paper | 2026-09-14 |
+| [[entities/jianan-li\|Jianan Li]] | Researcher in real-time music source separation and embedded DSP deployment; first author of the first MSS system demonstrated on a commercial low-power audio DSP. | 2026-09-15 |
+| [[entities/li-liu\|Li Liu]] | Researcher in real-time music source separation and embedded DSP deployment; co-author of the first MSS system demonstrated on a commercial low-power audio DSP. | 2026-09-15 |
+| [[entities/ken-malsky\|Ken Malsky]] | Researcher in real-time music source separation and embedded DSP deployment; co-author of the first MSS system demonstrated on a commercial low-power audio DSP. | 2026-09-15 |
+| [[entities/gabby-yi\|Gabby Yi]] | Researcher in real-time music source separation and embedded DSP deployment; co-author of the first MSS system demonstrated on a commercial low-power audio DSP. | 2026-09-15 |
 

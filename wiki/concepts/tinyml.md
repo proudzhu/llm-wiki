@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-09
-updated: 2026-08-11
+updated: 2026-09-15
 sources:
   - raw/papers/lin-2020-mcunet/full-text.md
+  - raw/papers/li-2026-realtime-music-separation-dsp/full-text.md
   - raw/papers/lin-2021-mcunetv2/full-text.md
   - raw/papers/lin-2023-tinyml-progress-futures/full-text.md
   - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
@@ -58,6 +59,14 @@ MCUNetV3 (NeurIPS 2022, surveyed in [[sources/lin-2023-tinyml-progress-futures\|
 
 The survey also identifies three structural impediments to TinyML's rapid development: (1) **extreme resource constraints** (< 1 MB Flash, small SRAM); (2) **hardware/software heterogeneity** (solutions must be tweaked per device, unlike cross-platform PyTorch/TensorFlow on GPUs); (3) **lack of standard datasets** matching the data characteristics produced by edge-device external sensors.
 
+## Beyond MCUs: DSP-Class Audio Deployment
+
+[[sources/li-2026-realtime-music-separation-dsp|Li et al. 2026]] demonstrate a music source separator on a commercial audio DSP (Analog Devices SHARC-FX: 2 MB on-chip L2, 2.07 GMAC/s measured sustained) rather than an MCU, and their measurements qualify two TinyML tenets for this hardware class:
+
+- **Peak is not deployable rate.** A hand-scheduled floating-point runtime sustained only 26% of the 8 GMAC/s float peak; a TFLite-Micro port on the same part spent ~90% of its time moving data — direct evidence for the code-generation-over-interpretation argument on DSPs, where no allocation, cache refill, or data-dependent branch is tolerable in the frame path (10.43 ms mean / 10.44 ms worst case against an 11.6 ms deadline).
+- **Memory and compute are two independent budgets.** Deployability requires *both* weight memory ($W \cdot b \leq M_{\mathrm{L2}}$) and per-frame MACs ($C_{\mathrm{frame}} \cdot f_s/H \leq R$) against measured rate, and the two constraints eliminate different architectures (see [[concepts/weight-reuse-factor|weight reuse factor]]). Parameter count predicts neither: no published real-time music separator fit the budget, and the 16–51 M parameter family failed on memory while the 383 K-parameter RT-STT failed on compute.
+- The DSP sits at the *favourable* end of this class (14.43 AudioMark/MHz vs 3.63 for Cortex-M55, 0.76 for Cortex-M4), so the verdict only hardens on M-class targets. Recurrent state carried indefinitely stays 32-bit because it is an accumulator where reduced precision would accumulate error — precision is confined to non-accumulating buffers (16-bit float convolution ring caches).
+
 ## Related Concepts
 
 - [[concepts/tinynas\|TinyNAS]] — resource-constrained NAS for MCUs
@@ -84,3 +93,4 @@ The survey also identifies three structural impediments to TinyML's rapid develo
 - [[sources/lin-2023-tinyml-progress-futures|Lin et al. 2023: TinyML — Progress and Futures]]
 - [[sources/liu-2024-lightweight-dl-survey|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] — broader survey that frames TinyML as a future frontier alongside lightweight LLMs; catalogs CMSIS-NN, CMIX-NN, MicroNet alongside the MCUNet family
 - [[sources/le-2026-efficient-nn-tinyml-review|Lê, Wolinski & Arbel 2026: Efficient NNs for TinyML — A Comprehensive Review]] — bridges methodological and application TinyML surveys; introduces the runtime-vs-transcompiler framework taxonomy (TFLM vs NNoM/Edge Impulse/μTVM) covered in [[concepts/tinymlops|TinyMLOps]]; surveys the five model-compression methods with a unifying [[concepts/bayesian-compression|Bayesian compression]] synthesis; targets the extreme-low-power regime (<8 kB SRAM, Cortex-M0+/eDMPv1); provides per-dataset Flash-size-vs-accuracy landscapes overlaid with Cortex-M0+/M4/M7 memory thresholds for MNIST, ImageNet, VWW, and Google Speech Commands v2-12
+- [[sources/li-2026-realtime-music-separation-dsp|Li, Liu, Malsky & Yi 2026: Real-Time Music Source Separation on a Low-Power Audio DSP]] — DSP-class audio deployment beyond MCUs: two-constraint budget (memory + measured MAC rate, see [[concepts/weight-reuse-factor|weight reuse factor]]), hand-scheduled runtime at 26% of peak vs. TFLite-Micro spending ~90% of time on data movement

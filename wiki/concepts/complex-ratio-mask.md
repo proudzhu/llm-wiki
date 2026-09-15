@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-20
-updated: 2026-09-13
+updated: 2026-09-15
 sources:
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
+  - raw/papers/li-2026-realtime-music-separation-dsp/full-text.md
   - raw/papers/zhang-2021-adl-mvdr/full-text.md
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
   - raw/papers/zhang-2024-enhanced-hybrid-ahs/full-text.md
@@ -24,6 +25,8 @@ A **complex ratio filter (cRF)** — the multi-tap T-F generalization of the cRM
 [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025]] provide two findings for the low-compute multichannel regime. First, a **simplified complex multiplication** — applying the real and imaginary parts of the mask separately to the corresponding parts of the noisy spectrum, $\hat{\mathbf{S}}_r = \Re(\mathbf{Y}_r)\cdot\Re(\mathbf{M}) + j\,\Im(\mathbf{Y}_r)\cdot\Im(\mathbf{M})$ — performs on par with full complex multiplication at lower computational cost. Second, the cRM's advantage over magnitude masking **emerges only when a multichannel Wiener filter is in the loop**: standalone, their TinyGRU performs comparably across sigmoid/softplus magnitude and complex masking, but with MCWF integration complex masking pulls clearly ahead (STOI 73.9 vs 71.7), indicating the spatial information enables more precise phase estimation. Conversely, the ERB magnitude-masking MC-CRN baseline *degrades* when paired with MCWF.
 
 [[sources/zhang-2024-enhanced-hybrid-ahs|Zhang et al. 2024]] contribute an acoustic-howling-suppression data point on cRM **input design**: with a small 2-layer LSTM (8 ms frames, magnitude-only features), a complex ratio mask whose input concatenates magnitude and complex spectrograms (cRM2: $[|\mathbf{Y}|, |\mathbf{E}|, \mathbf{Y}_r, \mathbf{Y}_i]$) beats the purely complex input (cRM1) and all magnitude-only masks (RM, PSM) in SDR, resolving the mild residual howling (continuous horizontal spectrogram lines) left by magnitude-only estimation — at a slight PESQ cost, and with slightly *worse* WER than plain RM, plausibly because the small network cannot support the higher complexity of complex-domain estimation.
+
+[[sources/li-2026-realtime-music-separation-dsp|Li et al. 2026]] use a cRM as the backbone output of a streaming music separator on an embedded DSP, chosen for a *streaming* property rather than separation quality: a mask on the input spectrum maps silence to exactly silence, so the idle noise floor is zero by construction rather than by training — important for a device with no reset path. The cRM estimate is then blended with a [[concepts/deep-filtering|deep filter]] output through a learned per-source gate, the first causal, gated use of DF.
 
 ## Related Concepts
 
@@ -47,3 +50,4 @@ A **complex ratio filter (cRF)** — the multi-tap T-F generalization of the cRM
 - [[sources/zhang-2021-adl-mvdr|Zhang et al. 2021: ADL-MVDR]] — multi-channel cRM vs. cRF comparison; cRF wins consistently
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — simplified Re/Im complex multiplication; cRM advantage emerges only with MCWF integration
 - [[sources/zhang-2024-enhanced-hybrid-ahs|Zhang, Zhang, Yu & Yu 2024: Enhanced Acoustic Howling Suppression]] — cRM2 (magnitude + complex input) resolves residual howling where magnitude masks fail, at a WER cost for small networks
+- [[sources/li-2026-realtime-music-separation-dsp|Li, Liu, Malsky & Yi 2026: Real-Time Music Source Separation on a Low-Power Audio DSP]] — cRM as streaming backbone output (idle noise floor zero by construction), gated-blended with a causal deep filter

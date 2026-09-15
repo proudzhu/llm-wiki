@@ -5344,3 +5344,15 @@ Ingested Pandey & Azcarreta 2025 (TinyGRU). Created source page pandey-2025-ultr
 - **Pages updated**: `wiki/entities/gongping-huang.md`, `wiki/entities/jingdong-chen.md` (Key Contributions + Related Sources); `wiki/concepts/fixed-beamformer.md` (Low-Rank Superdirective FBFs section); `wiki/concepts/white-noise-gain.md` (WNG in fixed superdirective design); `wiki/concepts/diagonal-loading.md` (diagonal loading inside iterative low-rank design); `wiki/concepts/beamforming.md` (superdirective/Kronecker entry in techniques list); `wiki/concepts/spatial-covariance-matrix.md` (analytic diffuse-field SCM section); `wiki/concepts/directivity-pattern.md`, `wiki/concepts/differential-microphone-array.md` (source additions)
 - **Synthesis**: none updated — triage found zero tag overlap across 22 synthesis pages
 - **Indexes**: [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025]], 4 entity pages, and 2 concept pages added to main + subdirectory indexes; statistics updated to 1321 total pages
+
+---
+
+## [2026-09-15] ingest | Real-time music source separation on a low-power audio DSP (Li et al. 2026)
+
+- **Source**: `raw/papers/li-2026-realtime-music-separation-dsp/full-text.md` (Zotero: 3ZHQXR54, arXiv 2609.12201)
+- **Authors**: Jianan Li, Li Liu, Ken Malsky, Gabby Yi
+- **Published**: arXiv preprint, 2026-09-10
+- **Summary**: Shows no published real-time music source separator fits a commercial low-power audio DSP (2 MB SRAM, 2.07 GMAC/s measured) — memory and compute eliminate different architecture families, and the weight-reuse factor explains why parameter count predicts neither — then builds one that fits (4.70 dB cSDR on MUSDB18-HQ, 10.43 ms of an 11.6 ms hop) using continuous-context training and a gated causal deep filter.
+- **Pages created**: `wiki/sources/li-2026-realtime-music-separation-dsp.md`; entities `wiki/entities/jianan-li.md`, `li-liu.md`, `ken-malsky.md`, `gabby-yi.md`; concepts `wiki/concepts/music-source-separation.md`, `tfc-tdf-unet.md`, `continuous-context-training.md`, `weight-reuse-factor.md`
+- **Pages updated**: `wiki/concepts/deep-filtering.md` (causal gated DF as latency knob), `complex-ratio-mask.md` (streaming silence-to-silence property, gated DF blend), `gated-recurrent-unit.md` (bounded state for indefinite DSP streaming), `tinyml.md` (DSP-class audio deployment beyond MCUs)
+- **Synthesis**: triage found no tag overlap with the 23 existing synthesis pages — none updated

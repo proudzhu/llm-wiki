@@ -576,6 +576,10 @@
 | [[entities/kunlong-zhao\|Kunlong Zhao]] | Wuhan University — microphone array signal processing; co-author of the Kronecker superdirective beamforming paper | 2026-09-14 |
 | [[entities/xueqin-luo\|Xueqin Luo]] | Northwestern Polytechnical University (CIAIC) — steerable broadband/differential superarray beamformers; co-author of the Kronecker superdirective beamforming paper | 2026-09-14 |
 | [[entities/jilu-jin\|Jilu Jin]] | Northwestern Polytechnical University (CIAIC) — geometric differential beamforming; co-author of the Kronecker superdirective beamforming paper | 2026-09-14 |
+| [[entities/jianan-li\|Jianan Li]] | Researcher in real-time music source separation and embedded DSP deployment; first author of the first MSS system demonstrated on a commercial low-power audio DSP. | 2026-09-15 |
+| [[entities/li-liu\|Li Liu]] | Researcher in real-time music source separation and embedded DSP deployment; co-author of the first MSS system demonstrated on a commercial low-power audio DSP. | 2026-09-15 |
+| [[entities/ken-malsky\|Ken Malsky]] | Researcher in real-time music source separation and embedded DSP deployment; co-author of the first MSS system demonstrated on a commercial low-power audio DSP. | 2026-09-15 |
+| [[entities/gabby-yi\|Gabby Yi]] | Researcher in real-time music source separation and embedded DSP deployment; co-author of the first MSS system demonstrated on a commercial low-power audio DSP. | 2026-09-15 |
 
 ---
 
@@ -1096,6 +1100,10 @@
 | [[concepts/jointdfc\|JointDFC]] | Two-stage deep feedback control for hearing aids: deep PEM-AFC cancellation stage + full-sub-band residual suppression stage with global causal time-frequency attention, trained via a three-step closed-loop strategy | 2026-09-13 |
 | [[concepts/superdirective-beamforming\|Superdirective Beamforming]] | Fixed beamformer maximizing the directivity factor against diffuse noise; Γ⁻¹d MVDR-type solution, WNG-robustness trade-off, diagonal-loading remedy | 2026-09-14 |
 | [[concepts/kronecker-product-beamforming\|Kronecker Product Beamforming]] | Decomposes a length-M filter into Kronecker products of short filters (N-way, rank-P); alternating closed-form MVDR updates with embedded diagonal loading cut parameters and inversion dimension | 2026-09-14 |
+| [[concepts/music-source-separation\|Music Source Separation]] | Decomposing a mixed music recording into stems (vocals/drums/bass/other) on MUSDB18-HQ; real-time embedded MSS was shown infeasible for all prior published systems and first demonstrated on a commercial audio DSP in 2026. | 2026-09-15 |
+| [[concepts/tfc-tdf-unet\|TFC-TDF U-Net]] | Spectrogram-domain U-Net for music separation with time-frequency convolution and time-distributed frequency blocks; causal depthwise-separable streaming variant deployed on a 2 MB audio DSP. | 2026-09-15 |
+| [[concepts/continuous-context-training\|Continuous-Context Training]] | Training streaming causal models on single continuous segments with no internal padding; fixes the block-padded-training collapse where a 3.93 dB model falls silent within 2 s of frame-by-frame inference. | 2026-09-15 |
+| [[concepts/weight-reuse-factor\|Weight Reuse Factor]] | Ratio of per-frame MACs to parameter count, spanning 1x (dense/recurrent) to 345x (frequency-convolution); explains why parameter count cannot predict embedded deployability. | 2026-09-15 |
 
 ---
 
@@ -1319,6 +1327,7 @@
 | [[sources/zhang-2024-enhanced-hybrid-ahs\|Zhang, Zhang, Yu & Yu 2024: Enhanced Acoustic Howling Suppression via Hybrid Kalman Filter and Deep Learning]] | TASLP journal version unifying HybridAHS (offline + recursive training) and NeuralKalmanAHS; recursive closed-loop training eliminates the NN-AHS training-inference mismatch; cRM2 masking; suppression-vs-distortion (WER) trade-off | 2026-09-13 |
 | [[sources/zhan-2026-joint-afc-rfs\|Zhan, Moore, Li & Zheng 2026: JointDFC — Joint Deep Feedback Control for Hearing Aids]] | First deep learning joint optimization of adaptive feedback cancellation (LFCNet = DeepPEM-AFC) and residual feedback suppression (RFSNet FSB + global cTFA); 0.396M params, 0.227 G MACs/s, 8 ms latency; dominates at high excess gain and feedback-path changes | 2026-09-13 |
 | [[sources/zhu-2025-kronecker-superdirective-beamforming\|Zhu, Zhao, Luo, Jin, Huang & Chen 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]] | LR-RSD: N-way rank-P Kronecker decomposition of the superdirective filter with alternating closed-form MVDR updates and embedded diagonal loading; at M=64, rank P=2 cuts parameters 62.5% and inversion dimension 87.5% with matched performance, validated by anechoic-chamber measurements | 2026-09-14 |
+| [[sources/li-2026-realtime-music-separation-dsp\|Li, Liu, Malsky & Yi 2026]] | This paper asks whether any published real-time music source separation (MSS) system fits the embedded audio hardware the task ultimately targets, and answers no: on a commercial audio DSP (Analog Devices SHARC-FX, 2 MB on-chip L2 SRAM, 2.07 GMAC/s measured sustained), weight memory rules out the 16–51 M parameter TasNet/X-UMX family while per-frame compute rules out RT-STT, which needs 5.5× the available MAC rate. | 2026-09-15 |
 
 ---
 
@@ -1372,10 +1381,10 @@
 
 ## Statistics
 
-- **Total pages**: 1321
-- **Entities**: 566
-- **Concepts**: 511
-- **Sources**: 214
+- **Total pages**: 1330
+- **Entities**: 570
+- **Concepts**: 515
+- **Sources**: 215
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-14
+- **Last updated**: 2026-09-15
