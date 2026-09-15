@@ -5356,3 +5356,15 @@ Ingested Pandey & Azcarreta 2025 (TinyGRU). Created source page pandey-2025-ultr
 - **Pages created**: `wiki/sources/li-2026-realtime-music-separation-dsp.md`; entities `wiki/entities/jianan-li.md`, `li-liu.md`, `ken-malsky.md`, `gabby-yi.md`; concepts `wiki/concepts/music-source-separation.md`, `tfc-tdf-unet.md`, `continuous-context-training.md`, `weight-reuse-factor.md`
 - **Pages updated**: `wiki/concepts/deep-filtering.md` (causal gated DF as latency knob), `complex-ratio-mask.md` (streaming silence-to-silence property, gated DF blend), `gated-recurrent-unit.md` (bounded state for indefinite DSP streaming), `tinyml.md` (DSP-class audio deployment beyond MCUs)
 - **Synthesis**: triage found no tag overlap with the 23 existing synthesis pages — none updated
+
+---
+
+## [2026-09-15] ingest | KUIELab-MDX-Net: A Two-Stream Neural Network for Music Demixing (Kim et al. 2021)
+
+- **Source**: raw/papers/kim-2021-kuielab-mdx-net/full-text.md (Zotero: X3Q2EYUX, arXiv:2111.12203)
+- **Authors**: Minseok Kim, Woosung Choi, Jaehwa Chung, Daewon Lee, Soonyoung Jung
+- **Published**: MDX Workshop @ ISMIR 2021
+- **DOI**: 10.48550/arXiv.2111.12203
+- **Summary**: Two-stream music demixing system — four TFC-TDF U-Net v2 models plus a 1x1-conv Mixer blended with a frozen pretrained time-domain Demucs; best MUSDB18 SDR on vocals/drums/other among compared systems under the MDX Challenge compute limit (2nd LB A, 3rd LB B).
+- **Pages created**: [[sources/kim-2021-kuielab-mdx-net|source page]], [[concepts/kuielab-mdx-net|KUIELab-MDX-Net]], entities [[entities/minseok-kim|minseok-kim]], [[entities/woosung-choi|woosung-choi]], [[entities/jaehwa-chung|jaehwa-chung]], [[entities/daewon-lee|daewon-lee]], [[entities/soonyoung-jung|soonyoung-jung]]
+- **Pages updated**: [[concepts/tfc-tdf-unet|tfc-tdf-unet]] (v2 efficiency modifications + TDF weight figure), [[concepts/music-source-separation|music-source-separation]] (performance-compute trade-off section); statistics now 1337 total pages (575 entities, 516 concepts, 216 sources, 23 synthesis, 7 queries).

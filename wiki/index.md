@@ -580,6 +580,11 @@
 | [[entities/li-liu\|Li Liu]] | Researcher in real-time music source separation and embedded DSP deployment; co-author of the first MSS system demonstrated on a commercial low-power audio DSP. | 2026-09-15 |
 | [[entities/ken-malsky\|Ken Malsky]] | Researcher in real-time music source separation and embedded DSP deployment; co-author of the first MSS system demonstrated on a commercial low-power audio DSP. | 2026-09-15 |
 | [[entities/gabby-yi\|Gabby Yi]] | Researcher in real-time music source separation and embedded DSP deployment; co-author of the first MSS system demonstrated on a commercial low-power audio DSP. | 2026-09-15 |
+| [[entities/minseok-kim\|Minseok Kim]] | Korea University (KUIELab) — co-first author of KUIELab-MDX-Net (ISMIR 2021 MDX Workshop) | 2026-09-15 |
+| [[entities/woosung-choi\|Woosung Choi]] | Queen Mary University of London / KUIELab (Korea University PhD) — co-first author of KUIELab-MDX-Net; TFC-TDF-U-Net v1 and LaSAFT author | 2026-09-15 |
+| [[entities/jaehwa-chung\|Jaehwa Chung]] | Korea National Open University — co-author of KUIELab-MDX-Net (ISMIR 2021 MDX Workshop) | 2026-09-15 |
+| [[entities/daewon-lee\|Daewon Lee]] | Seokyeong University — co-author of KUIELab-MDX-Net (ISMIR 2021 MDX Workshop) | 2026-09-15 |
+| [[entities/soonyoung-jung\|Soonyoung Jung]] | Korea University (KUIELab PI) — corresponding author of KUIELab-MDX-Net (ISMIR 2021 MDX Workshop) | 2026-09-15 |
 
 ---
 
@@ -1104,6 +1109,7 @@
 | [[concepts/tfc-tdf-unet\|TFC-TDF U-Net]] | Spectrogram-domain U-Net for music separation with time-frequency convolution and time-distributed frequency blocks; causal depthwise-separable streaming variant deployed on a 2 MB audio DSP. | 2026-09-15 |
 | [[concepts/continuous-context-training\|Continuous-Context Training]] | Training streaming causal models on single continuous segments with no internal padding; fixes the block-padded-training collapse where a 3.93 dB model falls silent within 2 s of frame-by-frame inference. | 2026-09-15 |
 | [[concepts/weight-reuse-factor\|Weight Reuse Factor]] | Ratio of per-frame MACs to parameter count, spanning 1x (dense/recurrent) to 345x (frequency-convolution); explains why parameter count cannot predict embedded deployability. | 2026-09-15 |
+| [[concepts/kuielab-mdx-net\|KUIELab-MDX-Net]] | Two-stream music demixing system (ISMIR 2021): four TFC-TDF U-Net v2 models + Mixer blended with frozen pretrained Demucs; best MUSDB18 SDR on vocals/drums/other at challenge compute limits | 2026-09-15 |
 
 ---
 
@@ -1328,6 +1334,7 @@
 | [[sources/zhan-2026-joint-afc-rfs\|Zhan, Moore, Li & Zheng 2026: JointDFC — Joint Deep Feedback Control for Hearing Aids]] | First deep learning joint optimization of adaptive feedback cancellation (LFCNet = DeepPEM-AFC) and residual feedback suppression (RFSNet FSB + global cTFA); 0.396M params, 0.227 G MACs/s, 8 ms latency; dominates at high excess gain and feedback-path changes | 2026-09-13 |
 | [[sources/zhu-2025-kronecker-superdirective-beamforming\|Zhu, Zhao, Luo, Jin, Huang & Chen 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]] | LR-RSD: N-way rank-P Kronecker decomposition of the superdirective filter with alternating closed-form MVDR updates and embedded diagonal loading; at M=64, rank P=2 cuts parameters 62.5% and inversion dimension 87.5% with matched performance, validated by anechoic-chamber measurements | 2026-09-14 |
 | [[sources/li-2026-realtime-music-separation-dsp\|Li, Liu, Malsky & Yi 2026]] | This paper asks whether any published real-time music source separation (MSS) system fits the embedded audio hardware the task ultimately targets, and answers no: on a commercial audio DSP (Analog Devices SHARC-FX, 2 MB on-chip L2 SRAM, 2.07 GMAC/s measured sustained), weight memory rules out the 16–51 M parameter TasNet/X-UMX family while per-frame compute rules out RT-STT, which needs 5.5× the available MAC rate. | 2026-09-15 |
+| [[sources/kim-2021-kuielab-mdx-net\|Kim, Choi, Chung, Lee & Jung 2021]] | KUIELab-MDX-Net is a two-stream neural network for four-stem music demixing (vocals/drums/bass/other) that balances separation quality against the compute/time constraints of the ISMIR 2021 Music Demixing (MDX) Challenge. | 2026-09-15 |
 
 ---
 
@@ -1381,10 +1388,10 @@
 
 ## Statistics
 
-- **Total pages**: 1330
-- **Entities**: 570
-- **Concepts**: 515
-- **Sources**: 215
+- **Total pages**: 1337
+- **Entities**: 575
+- **Concepts**: 516
+- **Sources**: 216
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-09-15

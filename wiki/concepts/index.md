@@ -519,4 +519,5 @@
 | [[concepts/tfc-tdf-unet\|TFC-TDF U-Net]] | Spectrogram-domain U-Net for music separation with time-frequency convolution and time-distributed frequency blocks; causal depthwise-separable streaming variant deployed on a 2 MB audio DSP. | 2026-09-15 |
 | [[concepts/continuous-context-training\|Continuous-Context Training]] | Training streaming causal models on single continuous segments with no internal padding; fixes the block-padded-training collapse where a 3.93 dB model falls silent within 2 s of frame-by-frame inference. | 2026-09-15 |
 | [[concepts/weight-reuse-factor\|Weight Reuse Factor]] | Ratio of per-frame MACs to parameter count, spanning 1x (dense/recurrent) to 345x (frequency-convolution); explains why parameter count cannot predict embedded deployability. | 2026-09-15 |
+| [[concepts/kuielab-mdx-net\|KUIELab-MDX-Net]] | Two-stream music demixing system (ISMIR 2021): four TFC-TDF U-Net v2 models + Mixer blended with frozen pretrained Demucs; best MUSDB18 SDR on vocals/drums/other at challenge compute limits | 2026-09-15 |
 

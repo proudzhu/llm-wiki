@@ -574,4 +574,9 @@
 | [[entities/li-liu\|Li Liu]] | Researcher in real-time music source separation and embedded DSP deployment; co-author of the first MSS system demonstrated on a commercial low-power audio DSP. | 2026-09-15 |
 | [[entities/ken-malsky\|Ken Malsky]] | Researcher in real-time music source separation and embedded DSP deployment; co-author of the first MSS system demonstrated on a commercial low-power audio DSP. | 2026-09-15 |
 | [[entities/gabby-yi\|Gabby Yi]] | Researcher in real-time music source separation and embedded DSP deployment; co-author of the first MSS system demonstrated on a commercial low-power audio DSP. | 2026-09-15 |
+| [[entities/minseok-kim\|Minseok Kim]] | Korea University (KUIELab) — co-first author of KUIELab-MDX-Net (ISMIR 2021 MDX Workshop) | 2026-09-15 |
+| [[entities/woosung-choi\|Woosung Choi]] | Queen Mary University of London / KUIELab (Korea University PhD) — co-first author of KUIELab-MDX-Net; TFC-TDF-U-Net v1 and LaSAFT author | 2026-09-15 |
+| [[entities/jaehwa-chung\|Jaehwa Chung]] | Korea National Open University — co-author of KUIELab-MDX-Net (ISMIR 2021 MDX Workshop) | 2026-09-15 |
+| [[entities/daewon-lee\|Daewon Lee]] | Seokyeong University — co-author of KUIELab-MDX-Net (ISMIR 2021 MDX Workshop) | 2026-09-15 |
+| [[entities/soonyoung-jung\|Soonyoung Jung]] | Korea University (KUIELab PI) — corresponding author of KUIELab-MDX-Net (ISMIR 2021 MDX Workshop) | 2026-09-15 |
 

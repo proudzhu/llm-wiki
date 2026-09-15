@@ -2,6 +2,8 @@
 type: concept
 created: 2026-09-15
 updated: 2026-09-15
+sources:
+  - raw/papers/kim-2021-kuielab-mdx-net/full-text.md
 tags:
   - music-source-separation
   - source-separation
@@ -11,6 +13,10 @@ tags:
 # Music Source Separation
 
 Music source separation (MSS) is the task of decomposing a mixed music recording into its constituent stems — conventionally vocals, drums, bass, and other — on MUSDB18(-HQ), the standard benchmark corpus. Unlike speech enhancement, MSS must produce four *correlated* outputs and a decoder that reconstructs every stem, making it harder at a given compute budget than speech-oriented separation.
+
+## Performance–Compute Trade-off in Offline MSS
+
+Compute constraints on offline MSS predate embedded deployment. The ISMIR 2021 Music Demixing Challenge enforced a separation-time limit that accuracy-focused state-of-the-art systems (LaSAFT-Net) could not meet; [[sources/kim-2021-kuielab-mdx-net|Kim et al. 2021]]'s [[concepts/kuielab-mdx-net|KUIELab-MDX-Net]] (2nd place Leaderboard A) was explicitly designed for this budget: a downsized [[concepts/tfc-tdf-unet|TFC-TDF U-Net]] v2 ensemble blended with a frozen pretrained time-domain Demucs. Despite the downsizing it achieved the best BSSEval-v4 median SDR of all compared systems on vocals (9.00), drums (7.33), and other (5.95 dB) on MUSDB18 — an early demonstration that the accuracy frontier of offline MSS is not reserved for the largest models, and that frequency-domain and waveform-domain errors are complementary enough to profit from simple weighted-average blending.
 
 ## Real-Time and Embedded MSS
 
@@ -26,6 +32,7 @@ MSS quality metrics are not uniform across papers: cSDR (median over 1 s windows
 
 - [[concepts/blind-source-separation|Blind Source Separation]]
 - [[concepts/tfc-tdf-unet|TFC-TDF U-Net]]
+- [[concepts/kuielab-mdx-net|KUIELab-MDX-Net]]
 - [[concepts/deep-filtering|Deep Filtering]]
 - [[concepts/weight-reuse-factor|Weight Reuse Factor]]
 - [[concepts/complex-ratio-mask|Complex Ratio Mask]]
@@ -33,3 +40,4 @@ MSS quality metrics are not uniform across papers: cSDR (median over 1 s windows
 ## Related Sources
 
 - [[sources/li-2026-realtime-music-separation-dsp|Li, Liu, Malsky & Yi 2026: Real-Time Music Source Separation on a Low-Power Audio DSP]]
+- [[sources/kim-2021-kuielab-mdx-net|Kim, Choi, Chung, Lee & Jung 2021: KUIELab-MDX-Net — A Two-Stream Neural Network for Music Demixing]]
