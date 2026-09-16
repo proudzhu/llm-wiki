@@ -5380,3 +5380,15 @@ Ingested Pandey & Azcarreta 2025 (TinyGRU). Created source page pandey-2025-ultr
 - **Summary**: Band-split RNN (BSRNN) — frequency-domain MSS model with instrument-specific non-uniform band splitting and interleaved band/sequence-level BLSTM modeling; outperforms all MDX Challenge 2021 top systems on vocals/drums/other; semi-supervised self-boosting finetuning improves all four stems.
 - **Pages created**: `wiki/sources/luo-2022-band-split-rnn.md`, `wiki/concepts/band-split-rnn.md`
 - **Pages updated**: `wiki/entities/yi-luo.md`, `wiki/entities/jianwei-yu.md` (new contribution bullets); `wiki/concepts/music-source-separation.md` (new Band-Split Frequency-Domain Modeling section); `wiki/concepts/dprnn.md` (frequency-axis dual-path variant section); `wiki/concepts/grouped-recurrent-neural-network.md` (order-sensitive band-level RNN contrast); `wiki/concepts/kuielab-mdx-net.md` (BSRNN comparison data point); index files and statistics.
+
+---
+
+## [2026-09-16] ingest | Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario (Wen et al. 2025)
+
+- **Source**: `raw/papers/wen-2025-neural-directed-speech-enhancement/full-text.md` (Zotero: 75V6G22B)
+- **Authors**: Wen Wen, Qiang Zhou, Yu Xi, Haoyu Li, Ziqi Gong, Kai Yu
+- **Published**: ICASSP 2025
+- **DOI**: 10.1109/ICASSP49660.2025.10889345
+- **Summary**: Proposes CDUNet, a 74.4K-parameter causal-directed U-Net for dual-microphone directed speech enhancement, steered by a novel triple-steering spatial selection method (target + two width-derived edge steering vectors) with the enhancement width as a runtime input; best front-end PESQ and downstream ASR WER at 0-5 dB SNR.
+- **Pages created**: `wiki/sources/wen-2025-neural-directed-speech-enhancement.md`, `wiki/entities/wen-wen.md`, `wiki/entities/qiang-zhou.md`, `wiki/entities/yu-xi.md`, `wiki/entities/haoyu-li.md`, `wiki/entities/ziqi-gong.md`, `wiki/entities/kai-yu.md`, `wiki/concepts/cdunet.md`, `wiki/concepts/triple-steering-spatial-selection.md`
+- **Pages updated**: `wiki/concepts/multi-channel-speech-enhancement.md`, `wiki/concepts/neural-beamforming.md`, `wiki/concepts/spatially-selective-nonlinear-filter.md`, `wiki/concepts/target-speaker-extraction.md` (added source + findings); `wiki/synthesis/multi-channel-speech-enhancement.md` (added to Sources Synthesized, Insight 3 paragraph on steered beams as neural conditioning, and Insight 7 on-device dual-mic application row); index files updated

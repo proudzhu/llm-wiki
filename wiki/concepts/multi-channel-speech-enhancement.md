@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-13
+updated: 2026-09-16
 sources:
   - raw/papers/souden-2011-online-noise-tracking/full-text.md
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
@@ -13,6 +13,7 @@ sources:
   - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
   - raw/papers/li-2022-embedding-beamforming/full-text.md
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
+  - raw/papers/wen-2025-neural-directed-speech-enhancement/full-text.md
 tags:
   - speech-enhancement
   - multi-channel
@@ -59,6 +60,8 @@ tags:
 - **DL-based [[concepts/sound-source-localization|SSL]] as the spatial-cue front end (Grumiaux et al. 2022)**: Where classical MCSE derives the target direction from inter-channel phase differences, the deep-learning SSL literature — taxonomized by the Grumiaux et al. 2022 survey (156 systems, 2011–2021) along six axes (environment, source configuration, architecture, input feature, output strategy, data/learning) — estimates [[concepts/direction-of-arrival-estimation|DoA]] directly from multichannel features (GCC-PHAT, [[concepts/relative-transfer-function|RTF]], IPD/ILD, [[concepts/ambisonics|Ambisonics]]). Its output-strategy split — classification over a spatial pseudo-spectrum vs. regression (increasingly the [[concepts/activity-coupled-cartesian-doa|ACCDOA]] representation) — parallels the SE community's own target evolution from masks to filters, and such DL-DoA outputs are the natural upstream provider of steering information for beamforming-based MCSE pipelines.
 
 - **ANC-integrated MWF for open-fitting hearing aids (Serizel et al. 2010)**: In hearing aids with an open fitting, MWF-based NR must additionally contend with the unprocessed [[concepts/open-fitting-noise-leakage|noise leakage]] and the secondary-path attenuation — the [[concepts/filtered-x-mwf|Filtered-x MWF]] integrates multichannel NR with feedforward ANC in one filter set, gaining ~12 dB intelligibility-weighted SNR improvement where standard MWF-NR degrades at low amplification gains.
+
+- **[[concepts/cdunet|CDUNet]] (Wen et al. 2025)**: Minimal-footprint directed enhancement with only **two** microphones — a causal U-Net (74.4K params) consumes three beamformer outputs steered at the target and two width-derived edge angles ([[concepts/triple-steering-spatial-selection|triple-steering spatial selection]]), with the enhancement width as a runtime input. Beats DAS/GSC/JNF and un-steered U-Net baselines on PESQ at 0–5 dB SNR (2.50/2.82 fixed-target avg.) and on downstream NeMo ASR WER (4.35%/3.11%), and — unlike fixed-area models that collapse when the target moves (U-Net 1.56) — stays consistent across target directions (2.47–2.60) without retraining.
 
 ## Related Concepts
 
@@ -113,3 +116,4 @@ tags:
 - [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — hybrid tiny-NN-controlled PMWF for smart glasses
 - [[sources/li-2022-embedding-beamforming|Li et al. 2022: Embedding and Beamforming]] — EaBNet all-neural causal framewise beamformer; implicit spectral-spatial embedding beats oracle-mask MVDR
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — TinyGRU + MCWF hybrid: complex spectral masking at ~50 MMACs/s, beating oracle MVDR
+- [[sources/wen-2025-neural-directed-speech-enhancement|Wen et al. 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] — CDUNet: 74.4K-param causal U-Net steered by triple steering vectors with runtime enhancement width; best front-end PESQ and downstream ASR WER on a dual-mic array

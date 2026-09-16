@@ -521,4 +521,6 @@
 | [[concepts/weight-reuse-factor\|Weight Reuse Factor]] | Ratio of per-frame MACs to parameter count, spanning 1x (dense/recurrent) to 345x (frequency-convolution); explains why parameter count cannot predict embedded deployability. | 2026-09-15 |
 | [[concepts/kuielab-mdx-net\|KUIELab-MDX-Net]] | Two-stream music demixing system (ISMIR 2021): four TFC-TDF U-Net v2 models + Mixer blended with frozen pretrained Demucs; best MUSDB18 SDR on vocals/drums/other at challenge compute limits | 2026-09-15 |
 | [[concepts/band-split-rnn\|Band-Split RNN (BSRNN)]] | Frequency-domain MSS architecture splitting the spectrogram into instrument-specific non-uniform subbands with interleaved sequence/band-level BLSTM modeling (Luo & Yu 2022). | 2026-09-16 |
+| [[concepts/cdunet\|CDUNet]] | Causal-directed U-Net — 74.4K-param dual-microphone directed speech enhancement model steered by triple steering vectors with runtime enhancement width | 2026-09-16 |
+| [[concepts/triple-steering-spatial-selection\|Triple-Steering Spatial Selection]] | Spatial selection method using three steering vectors (target + width-derived edge angles) to guide enhancement and determine the enhancement range | 2026-09-16 |
 

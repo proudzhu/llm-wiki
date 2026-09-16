@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-20
-updated: 2026-09-12
+updated: 2026-09-16
 sources:
   - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
   - raw/papers/li-2022-embedding-beamforming/full-text.md
   - raw/papers/zhang-2021-adl-mvdr/full-text.md
   - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
+  - raw/papers/wen-2025-neural-directed-speech-enhancement/full-text.md
 tags:
   - beamforming
   - deep-learning
@@ -42,6 +43,7 @@ The beamforming operation is embedded as a differentiable layer (e.g., a filter-
 - **Differentiable robust MVDR**: Closed-form WNG-constrained MVDR solution embedded as a differentiable layer with learnable frequency-dependent WNG thresholds (Deng et al. 2026)
 - **[[concepts/adl-mvdr|ADL-MVDR]]** (Zhang et al. 2021): keeps the MVDR closed form but replaces its two matrix operations — noise-covariance inversion and speech-covariance PCA — with two GRU networks that recursively produce **frame-level** weights, jointly trained with a cRF front-end. First study deriving the MVDR solution via RNNs; resolves the joint-training instability of matrix inversion while cutting the residual noise of utterance-level mask-based MVDR (~17% PESQ gain, WER 12.73 vs. 15.91%).
 - **BEAMNET**: Fully learned spatial filtering with no explicit signal model
+- **[[concepts/cdunet|CDUNet]]** (Wen et al. 2025): beamforming as a *steerable feature provider* rather than a learnable stage — three classical beams at the target angle and two width-derived edge angles are computed from steering vectors and concatenated (magnitude + phase) with the raw dual-mic spectra as input to a 74.4K-parameter causal U-Net. The enhancement width $\varphi_{width}$ is a runtime input, so one model covers all steering directions and enhancement regions (avg. PESQ 2.50 at 0 dB vs. 2.43 for the identical U-Net without the steered inputs; 2.52 variable-target where un-steered U-Net collapses to 1.56). Notably, feeding inter-microphone phase difference (IPD) instead *degraded* performance, while the explicit beamformer outputs were the effective spatial cue.
 - **[[concepts/neuralpmwf|NeuralPMWF]]** (Grinstein et al. 2025): a tiny MaskDNN (164.9k params, 24.95 MMACs/s, 16 ms latency) fully controls the differentiable [[concepts/parametric-multi-channel-wiener-filter|PMWF]] — the network produces the mask from which speech/noise covariances are smoothed, and schedules the distortion trade-off $\beta$ per T-F bin from a mask-derived SPP proxy. Beyond plugging learned statistics into a fixed formula, the *control parameters of the filter itself* (smoothing speeds, distortion schedule) are learned end-to-end, and the SPP-driven dynamic $\beta$ contributes +4.5 STOI over any static setting.
 - **[[concepts/eabnet|EaBNet]]** (Li et al. 2022): an all-neural *causal framewise* beamformer that removes the statistical stage entirely — an Embedding Module produces a 3-D spectral-spatial embedding tensor (no explicit [[concepts/spatial-covariance-matrix|SCM]]), and a Beamforming Module (R-BF: LayerNorm → 2 uni-directional LSTMs → FC) directly regresses complex filter weights for filter-and-sum. On a simulated 9-channel DNS setup it beats an oracle-IRM MB-MVDR (avg. PESQ 3.52 vs. 3.10) at 2.84M params / RTF 0.59. Critically, its EaBNet* ablation shows that *reinserting* explicit SCM computation (masks → covariances → concatenation) degrades performance vs. the purely implicit embedding — evidence that the SCM bottleneck, not just mask error, limits tandem mask-then-MVDR systems.
 
@@ -76,4 +78,5 @@ Neural beamformers are often trained jointly with downstream models:
 - [[sources/li-2022-embedding-beamforming|Li et al. 2022: Embedding and Beamforming]] — all-neural causal framewise beamformer whose implicit embedding beats explicit SCM computation
 - [[sources/zhang-2021-adl-mvdr|Zhang et al. 2021: ADL-MVDR]] — GRU networks replace the matrix inversion and PCA inside the MVDR closed form for stable joint training
 - [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023: Insights Into Deep Non-linear Filters for Improved Multi-channel Speech Enhancement]]
+- [[sources/wen-2025-neural-directed-speech-enhancement|Wen et al. 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] — classical steered beams (target + width-derived edges) as runtime-tunable input features for a compact causal U-Net
 

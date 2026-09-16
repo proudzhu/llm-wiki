@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-08-22
+updated: 2026-09-16
 sources:
   - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
   - raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md
+  - raw/papers/wen-2025-neural-directed-speech-enhancement/full-text.md
 tags:
   - deep-learning
   - spatial-filtering
@@ -50,6 +51,10 @@ The SSF comprises two LSTM layers:
 ### Geometry-Conditioned SSF (GC-SSF)
 
 The [[concepts/geometry-conditioned-ssf|GC-SSF]] addresses the geometry dependency by adding a [[concepts/film-layer|FiLM]]-based conditioning branch driven by [[concepts/doa-microphone-positional-encoding|DOA-MPE]] features. This enables a single model trained on random arrays to generalise across circular, ULA, and random geometries.
+
+### Dual-Microphone Directed Variant (CDUNet)
+
+[[concepts/cdunet|CDUNet]] (Wen et al. 2025) pursues the same DOA-steered spatial filtering goal under the tightest array constraint — two microphones — and adds a second control dimension: alongside the target angle, an **enhancement width** $\varphi_{width}$ is supplied at inference via [[concepts/triple-steering-spatial-selection|triple-steering spatial selection]] (three steering vectors at the target and two edge angles). Where SSF conditions on DOA through the F-LSTM cell state, CDUNet feeds three explicit beamformer outputs into a 74.4K-parameter causal U-Net, achieving steering-invariant enhancement (avg. PESQ 2.52 at 0 dB across target directions) and demonstrating that runtime-tunable selectivity — not just a steerable look direction — is attainable with minimal hardware.
 
 ## Multi-Speaker Separation (Tesch & Gerkmann 2024)
 
@@ -108,3 +113,4 @@ A [[concepts/doa-informed-direct-separation|DoA-informed DS variant (iDS)]] that
 - [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023: Insights Into Deep Non-linear Filters for Improved Multi-channel Speech Enhancement]] — origin of the FT-JNF backbone and the F-LSTM cell-state observation that controls spatial selectivity [22]
 - [[sources/tesch-2024-spatially-selective-nonlinear-filters|Tesch & Gerkmann 2024: Multi-channel Speech Separation Using Spatially Selective Deep Non-linear Filters]]
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
+- [[sources/wen-2025-neural-directed-speech-enhancement|Wen et al. 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] — dual-microphone directed variant (CDUNet) with a runtime enhancement-width input

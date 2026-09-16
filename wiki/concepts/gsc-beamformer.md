@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-09-13
+updated: 2026-09-16
 sources:
   - raw/papers/souden-2010-pmwf/full-text.md
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
   - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
+  - raw/papers/wen-2025-neural-directed-speech-enhancement/full-text.md
 tags:
   - beamforming
   - adaptive-filtering
@@ -98,4 +99,5 @@ Taseska et al. develop the [[concepts/informed-gsc|informed GSC]], where the FBF
 - [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]]
 - [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024: Lightweight Hybrid Multi-Channel Speech Extraction with DVAD]] — DVAD-gated ABM/AIC adaptation
 - [[sources/lorenz-2005-robust-minimum-variance-beamforming|Lorenz & Boyd 2005: Robust Minimum Variance Beamforming]]
+- [[sources/wen-2025-neural-directed-speech-enhancement|Wen et al. 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] — GSC as the best classical baseline on a dual-mic array (avg. PESQ 2.12 at 0 dB vs. 2.09 for delay-and-sum), still far below the steered neural alternatives
 

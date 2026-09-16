@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-09-12
+updated: 2026-09-16
 sources:
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
   - raw/papers/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction/full-text.md
@@ -9,6 +9,7 @@ sources:
   - raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md
   - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
   - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
+  - raw/papers/wen-2025-neural-directed-speech-enhancement/full-text.md
 tags:
   - speech-processing
   - source-separation
@@ -38,6 +39,7 @@ tags:
 - **[[concepts/geometry-conditioned-ssf|Geometry-Conditioned SSF (GC-SSF)]]**: SSF extended with explicit geometry conditioning for robustness across array configurations
 - **[[concepts/spatially-selective-anc|Spatially Selective ANC]]**: Control-theoretic approach for hearables combining ANC with spatial discrimination
 - **Hybrid GSC + neural post-filter**: [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024]] extract a zone-constrained target (video-conferencing scenario, 6-mic circular array) with a [[concepts/directional-vad|DVAD]]-gated robust GSC followed by a DPCRN post-filter conditioned on per-zone speaker activity — 0.87M params / 1.82 GMACs/s (~90% MACs below the end-to-end FT-JNF baseline) with better real-world DNSMOS generalization, evidence that classical spatial filtering plus a compact PF can substitute for joint non-linear filters on edge devices
+- **[[concepts/cdunet|CDUNet]]** (Wen et al. 2025): ultra-compact spatial-clue extraction with a **dual microphone array** — a 74.4K-parameter causal U-Net steered by [[concepts/triple-steering-spatial-selection|three steering vectors]] (target + width-derived edge angles), with the enhancement width as a runtime input. Achieves steering-invariant extraction (avg. PESQ 2.52 at 0 dB across target directions, where fixed-area baselines collapse to ~1.5) and improves backend ASR WER (4.35%/3.11% at 0/5 dB), targeting on-device streaming
 
 ### Enrolment-Based Methods
 
@@ -127,4 +129,5 @@ The TSE framework naturally extends to:
 - [[sources/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction|Huang et al. 2026: Lightweight Speech Enhancement Guided TSE in Noisy Multi-Speaker Scenarios]]
 - [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024: A Lightweight Hybrid Multi-Channel Speech Extraction System with Directional Voice Activity Detection]]
 - [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023: Insights Into Deep Non-linear Filters for Improved Multi-channel Speech Enhancement]]
+- [[sources/wen-2025-neural-directed-speech-enhancement|Wen et al. 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] — CDUNet: dual-mic spatial-clue extraction with a runtime enhancement width
 

@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-08-19
-updated: 2026-08-20
+updated: 2026-09-16
 sources:
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
   - raw/papers/ansari-2023-ai-bss-survey/full-text.md
+  - raw/papers/wen-2025-neural-directed-speech-enhancement/full-text.md
 tags:
   - speech-processing
   - psychoacoustics
@@ -52,3 +53,4 @@ Although TSE is engineering-motivated, it is closely connected to the cognitive 
 
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova et al. 2023: Neural Target Speech Extraction: An Overview]]
 - [[sources/ansari-2023-ai-bss-survey|Ansari et al. 2023: AI Approaches in BSS Survey]] — lists the cocktail-party problem as one of the canonical BSS motivations.
+- [[sources/wen-2025-neural-directed-speech-enhancement|Wen et al. 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] — targets the cocktail-party problem with a spatial-clue approach: a dual-microphone directional enhancer steered by the target angle plus a runtime enhancement width.

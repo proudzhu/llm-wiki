@@ -585,6 +585,12 @@
 | [[entities/jaehwa-chung\|Jaehwa Chung]] | Korea National Open University — co-author of KUIELab-MDX-Net (ISMIR 2021 MDX Workshop) | 2026-09-15 |
 | [[entities/daewon-lee\|Daewon Lee]] | Seokyeong University — co-author of KUIELab-MDX-Net (ISMIR 2021 MDX Workshop) | 2026-09-15 |
 | [[entities/soonyoung-jung\|Soonyoung Jung]] | Korea University (KUIELab PI) — corresponding author of KUIELab-MDX-Net (ISMIR 2021 MDX Workshop) | 2026-09-15 |
+| [[entities/wen-wen\|Wen Wen]] | Researcher at Shanghai Jiao Tong University (X-LANCE Lab); first author of CDUNet directed dual-microphone speech enhancement | 2026-09-16 |
+| [[entities/qiang-zhou\|Qiang Zhou]] | Researcher at Shanghai Jiao Tong University / AISpeech; co-author of CDUNet directed dual-microphone speech enhancement | 2026-09-16 |
+| [[entities/yu-xi\|Yu Xi]] | Researcher at Shanghai Jiao Tong University (X-LANCE Lab) working on keyword spotting and speech processing | 2026-09-16 |
+| [[entities/haoyu-li\|Haoyu Li]] | Researcher at Shanghai Jiao Tong University (X-LANCE Lab) working on keyword spotting and speech processing | 2026-09-16 |
+| [[entities/ziqi-gong\|Ziqi Gong]] | Researcher at AISpeech; co-author of CDUNet directed dual-microphone speech enhancement | 2026-09-16 |
+| [[entities/kai-yu\|Kai Yu]] | Professor at Shanghai Jiao Tong University (X-LANCE Lab) working on speech processing and recognition; corresponding author of CDUNet | 2026-09-16 |
 
 ---
 
@@ -1111,6 +1117,8 @@
 | [[concepts/weight-reuse-factor\|Weight Reuse Factor]] | Ratio of per-frame MACs to parameter count, spanning 1x (dense/recurrent) to 345x (frequency-convolution); explains why parameter count cannot predict embedded deployability. | 2026-09-15 |
 | [[concepts/kuielab-mdx-net\|KUIELab-MDX-Net]] | Two-stream music demixing system (ISMIR 2021): four TFC-TDF U-Net v2 models + Mixer blended with frozen pretrained Demucs; best MUSDB18 SDR on vocals/drums/other at challenge compute limits | 2026-09-15 |
 | [[concepts/band-split-rnn\|Band-Split RNN (BSRNN)]] | Frequency-domain MSS architecture splitting the spectrogram into instrument-specific non-uniform subbands with interleaved sequence/band-level BLSTM modeling (Luo & Yu 2022). | 2026-09-16 |
+| [[concepts/cdunet\|CDUNet]] | Causal-directed U-Net — 74.4K-param dual-microphone directed speech enhancement model steered by triple steering vectors with runtime enhancement width | 2026-09-16 |
+| [[concepts/triple-steering-spatial-selection\|Triple-Steering Spatial Selection]] | Spatial selection method using three steering vectors (target + width-derived edge angles) to guide enhancement and determine the enhancement range | 2026-09-16 |
 
 ---
 
@@ -1337,6 +1345,7 @@
 | [[sources/li-2026-realtime-music-separation-dsp\|Li, Liu, Malsky & Yi 2026]] | This paper asks whether any published real-time music source separation (MSS) system fits the embedded audio hardware the task ultimately targets, and answers no: on a commercial audio DSP (Analog Devices SHARC-FX, 2 MB on-chip L2 SRAM, 2.07 GMAC/s measured sustained), weight memory rules out the 16–51 M parameter TasNet/X-UMX family while per-frame compute rules out RT-STT, which needs 5.5× the available MAC rate. | 2026-09-15 |
 | [[sources/kim-2021-kuielab-mdx-net\|Kim, Choi, Chung, Lee & Jung 2021]] | KUIELab-MDX-Net is a two-stream neural network for four-stem music demixing (vocals/drums/bass/other) that balances separation quality against the compute/time constraints of the ISMIR 2021 Music Demixing (MDX) Challenge. | 2026-09-15 |
 | [[sources/luo-2022-band-split-rnn\|Luo & Yu 2022]] | Band-split RNN (BSRNN) is a frequency-domain music source separation model that explicitly splits the mixture spectrogram into subbands with instrument-specific bandwidths and performs interleaved band-level and sequence-level modeling with residual BLSTMs. | 2026-09-16 |
+| [[sources/wen-2025-neural-directed-speech-enhancement\|Wen, Zhou, Xi, Li, Gong & Yu 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] | CDUNet — a 74.4K-param causal U-Net steered by triple steering vectors with a runtime enhancement width for directed dual-microphone speech enhancement | 2026-09-16 |
 
 ---
 
@@ -1390,10 +1399,10 @@
 
 ## Statistics
 
-- **Total pages**: 1339
-- **Entities**: 575
-- **Concepts**: 517
-- **Sources**: 217
+- **Total pages**: 1348
+- **Entities**: 581
+- **Concepts**: 519
+- **Sources**: 218
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-09-16

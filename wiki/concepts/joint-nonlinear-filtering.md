@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-08
+updated: 2026-09-16
 sources:
   - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
   - raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md
@@ -9,6 +9,7 @@ sources:
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
   - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
   - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
+  - raw/papers/wen-2025-neural-directed-speech-enhancement/full-text.md
 tags:
   - neural-network
   - spatial-audio
@@ -77,3 +78,4 @@ NDF+ extends FT-JNF with:
 - [[sources/huang-2025-steerable-neural-directional-filtering|Huang et al. 2025: Steerable Neural Directional Filtering]] — steering-direction conditioning of the F-BiLSTM initial states
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
 - [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024: Lightweight Hybrid Multi-Channel Speech Extraction with DVAD]] — causalized FT-JNF as baseline; hybrid GSC+DPCRN matches it at ~90% lower MACs
+- [[sources/wen-2025-neural-directed-speech-enhancement|Wen et al. 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] — JNF (~1M params, 3-mic circular array) as baseline; the 74.4K-parameter CDUNet surpasses it on a dual-mic array in PESQ and downstream ASR WER

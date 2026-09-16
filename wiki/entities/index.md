@@ -579,4 +579,10 @@
 | [[entities/jaehwa-chung\|Jaehwa Chung]] | Korea National Open University — co-author of KUIELab-MDX-Net (ISMIR 2021 MDX Workshop) | 2026-09-15 |
 | [[entities/daewon-lee\|Daewon Lee]] | Seokyeong University — co-author of KUIELab-MDX-Net (ISMIR 2021 MDX Workshop) | 2026-09-15 |
 | [[entities/soonyoung-jung\|Soonyoung Jung]] | Korea University (KUIELab PI) — corresponding author of KUIELab-MDX-Net (ISMIR 2021 MDX Workshop) | 2026-09-15 |
+| [[entities/wen-wen\|Wen Wen]] | Researcher at Shanghai Jiao Tong University (X-LANCE Lab); first author of CDUNet directed dual-microphone speech enhancement | 2026-09-16 |
+| [[entities/qiang-zhou\|Qiang Zhou]] | Researcher at Shanghai Jiao Tong University / AISpeech; co-author of CDUNet directed dual-microphone speech enhancement | 2026-09-16 |
+| [[entities/yu-xi\|Yu Xi]] | Researcher at Shanghai Jiao Tong University (X-LANCE Lab) working on keyword spotting and speech processing | 2026-09-16 |
+| [[entities/haoyu-li\|Haoyu Li]] | Researcher at Shanghai Jiao Tong University (X-LANCE Lab) working on keyword spotting and speech processing | 2026-09-16 |
+| [[entities/ziqi-gong\|Ziqi Gong]] | Researcher at AISpeech; co-author of CDUNet directed dual-microphone speech enhancement | 2026-09-16 |
+| [[entities/kai-yu\|Kai Yu]] | Professor at Shanghai Jiao Tong University (X-LANCE Lab) working on speech processing and recognition; corresponding author of CDUNet | 2026-09-16 |
 
