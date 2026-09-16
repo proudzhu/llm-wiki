@@ -1,13 +1,15 @@
 ---
 type: concept
 created: 2026-09-15
-updated: 2026-09-15
+updated: 2026-09-16
 sources:
   - raw/papers/kim-2021-kuielab-mdx-net/full-text.md
+  - raw/papers/luo-2022-band-split-rnn/full-text.md
 tags:
   - music-source-separation
   - source-separation
   - real-time-processing
+  - band-split
 ---
 
 # Music Source Separation
@@ -17,6 +19,10 @@ Music source separation (MSS) is the task of decomposing a mixed music recording
 ## Performance–Compute Trade-off in Offline MSS
 
 Compute constraints on offline MSS predate embedded deployment. The ISMIR 2021 Music Demixing Challenge enforced a separation-time limit that accuracy-focused state-of-the-art systems (LaSAFT-Net) could not meet; [[sources/kim-2021-kuielab-mdx-net|Kim et al. 2021]]'s [[concepts/kuielab-mdx-net|KUIELab-MDX-Net]] (2nd place Leaderboard A) was explicitly designed for this budget: a downsized [[concepts/tfc-tdf-unet|TFC-TDF U-Net]] v2 ensemble blended with a frozen pretrained time-domain Demucs. Despite the downsizing it achieved the best BSSEval-v4 median SDR of all compared systems on vocals (9.00), drums (7.33), and other (5.95 dB) on MUSDB18 — an early demonstration that the accuracy frontier of offline MSS is not reserved for the largest models, and that frequency-domain and waveform-domain errors are complementary enough to profit from simple weighted-average blending.
+
+## Band-Split Frequency-Domain Modeling
+
+[[sources/luo-2022-band-split-rnn|Luo & Yu 2022]]'s [[concepts/band-split-rnn|BSRNN]] marked the point where MSS architectures were designed around music-signal characteristics rather than imported from speech or vision: the mixture spectrogram is split into subbands with instrument-specific, non-uniform bandwidths (fine 100 Hz bands below 1 kHz for vocals, 50 Hz bands below 500 Hz for bass) and modeled by interleaved sequence-level and band-level residual BLSTMs. Trained only on MUSDB18-HQ, it outperformed every MDX Challenge 2021 top system on vocals (10.01 vs. 8.97 cSDR for KUIELab-MDX-Net), drums, and other; a semi-supervised self-boosting finetuning pipeline on 1750 unlabeled songs lifted vocals to 10.47 dB cSDR and added ~1 dB cSDR on bass and drums. The band-split bandwidth schedule itself is a first-class design lever — uniform 1 kHz splitting plateaus at ~8.1 dB vocal uSDR while fine low-frequency splitting reaches 10.04 dB — and the design migrated back into speech processing (full-band and personalized speech enhancement, BSDB-Net).
 
 ## Real-Time and Embedded MSS
 
@@ -31,6 +37,7 @@ MSS quality metrics are not uniform across papers: cSDR (median over 1 s windows
 ## Related Concepts
 
 - [[concepts/blind-source-separation|Blind Source Separation]]
+- [[concepts/band-split-rnn|Band-Split RNN]]
 - [[concepts/tfc-tdf-unet|TFC-TDF U-Net]]
 - [[concepts/kuielab-mdx-net|KUIELab-MDX-Net]]
 - [[concepts/deep-filtering|Deep Filtering]]
@@ -41,3 +48,4 @@ MSS quality metrics are not uniform across papers: cSDR (median over 1 s windows
 
 - [[sources/li-2026-realtime-music-separation-dsp|Li, Liu, Malsky & Yi 2026: Real-Time Music Source Separation on a Low-Power Audio DSP]]
 - [[sources/kim-2021-kuielab-mdx-net|Kim, Choi, Chung, Lee & Jung 2021: KUIELab-MDX-Net — A Two-Stream Neural Network for Music Demixing]]
+- [[sources/luo-2022-band-split-rnn|Luo & Yu 2022: Music Source Separation with Band-Split RNN]]

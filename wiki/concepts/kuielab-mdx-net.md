@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-09-15
-updated: 2026-09-15
+updated: 2026-09-16
+sources:
+  - raw/papers/luo-2022-band-split-rnn/full-text.md
 tags:
   - music-source-separation
   - neural-networks
@@ -30,11 +32,15 @@ The three TFC-TDF-U-Net v2 efficiency modifications (multiplicative instead of c
 
 Ablations: v2 alone reaches 8.81/6.52/7.65/5.70; adding the Mixer gives up to +0.55 dB (drums); blending with Demucs up to +0.46 dB (bass); the full system adds both.
 
+The compute-constrained frontier did not last long at the top of the quality ladder: [[sources/luo-2022-band-split-rnn|Luo & Yu 2022]]'s [[concepts/band-split-rnn|BSRNN]], trained only on MUSDB18-HQ, surpassed KUIELab-MDX-Net's cSDR on vocals (10.01 vs. 8.97), drums (9.01 vs. 7.20), and other (6.70 vs. 5.90) — while remaining slightly behind on bass (7.22 vs. 7.83) — establishing band-split modeling as the stronger frequency-domain design when compute is unconstrained.
+
 ## Related Concepts
 
 - [[concepts/tfc-tdf-unet|TFC-TDF U-Net]]
 - [[concepts/music-source-separation|Music Source Separation]]
+- [[concepts/band-split-rnn|Band-Split RNN]]
 
 ## Related Sources
 
 - [[sources/kim-2021-kuielab-mdx-net|Kim, Choi, Chung, Lee & Jung 2021: KUIELab-MDX-Net — A Two-Stream Neural Network for Music Demixing]]
+- [[sources/luo-2022-band-split-rnn|Luo & Yu 2022: Music Source Separation with Band-Split RNN]]

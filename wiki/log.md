@@ -5368,3 +5368,15 @@ Ingested Pandey & Azcarreta 2025 (TinyGRU). Created source page pandey-2025-ultr
 - **Summary**: Two-stream music demixing system — four TFC-TDF U-Net v2 models plus a 1x1-conv Mixer blended with a frozen pretrained time-domain Demucs; best MUSDB18 SDR on vocals/drums/other among compared systems under the MDX Challenge compute limit (2nd LB A, 3rd LB B).
 - **Pages created**: [[sources/kim-2021-kuielab-mdx-net|source page]], [[concepts/kuielab-mdx-net|KUIELab-MDX-Net]], entities [[entities/minseok-kim|minseok-kim]], [[entities/woosung-choi|woosung-choi]], [[entities/jaehwa-chung|jaehwa-chung]], [[entities/daewon-lee|daewon-lee]], [[entities/soonyoung-jung|soonyoung-jung]]
 - **Pages updated**: [[concepts/tfc-tdf-unet|tfc-tdf-unet]] (v2 efficiency modifications + TDF weight figure), [[concepts/music-source-separation|music-source-separation]] (performance-compute trade-off section); statistics now 1337 total pages (575 entities, 516 concepts, 216 sources, 23 synthesis, 7 queries).
+
+---
+
+## [2026-09-16] ingest | Music Source Separation with Band-Split RNN (Luo & Yu 2022)
+
+- **Source**: `raw/papers/luo-2022-band-split-rnn/full-text.md` (Zotero: S88QEMKK; arXiv 2209.15174, MinerU VLM extraction)
+- **Authors**: Yi Luo, Jianwei Yu
+- **Published**: arXiv 2022; IEEE/ACM TASLP, vol. 31, pp. 1893-1901, 2023
+- **DOI**: 10.1109/TASLP.2023.3271145
+- **Summary**: Band-split RNN (BSRNN) — frequency-domain MSS model with instrument-specific non-uniform band splitting and interleaved band/sequence-level BLSTM modeling; outperforms all MDX Challenge 2021 top systems on vocals/drums/other; semi-supervised self-boosting finetuning improves all four stems.
+- **Pages created**: `wiki/sources/luo-2022-band-split-rnn.md`, `wiki/concepts/band-split-rnn.md`
+- **Pages updated**: `wiki/entities/yi-luo.md`, `wiki/entities/jianwei-yu.md` (new contribution bullets); `wiki/concepts/music-source-separation.md` (new Band-Split Frequency-Domain Modeling section); `wiki/concepts/dprnn.md` (frequency-axis dual-path variant section); `wiki/concepts/grouped-recurrent-neural-network.md` (order-sensitive band-level RNN contrast); `wiki/concepts/kuielab-mdx-net.md` (BSRNN comparison data point); index files and statistics.

@@ -1110,6 +1110,7 @@
 | [[concepts/continuous-context-training\|Continuous-Context Training]] | Training streaming causal models on single continuous segments with no internal padding; fixes the block-padded-training collapse where a 3.93 dB model falls silent within 2 s of frame-by-frame inference. | 2026-09-15 |
 | [[concepts/weight-reuse-factor\|Weight Reuse Factor]] | Ratio of per-frame MACs to parameter count, spanning 1x (dense/recurrent) to 345x (frequency-convolution); explains why parameter count cannot predict embedded deployability. | 2026-09-15 |
 | [[concepts/kuielab-mdx-net\|KUIELab-MDX-Net]] | Two-stream music demixing system (ISMIR 2021): four TFC-TDF U-Net v2 models + Mixer blended with frozen pretrained Demucs; best MUSDB18 SDR on vocals/drums/other at challenge compute limits | 2026-09-15 |
+| [[concepts/band-split-rnn\|Band-Split RNN (BSRNN)]] | Frequency-domain MSS architecture splitting the spectrogram into instrument-specific non-uniform subbands with interleaved sequence/band-level BLSTM modeling (Luo & Yu 2022). | 2026-09-16 |
 
 ---
 
@@ -1335,6 +1336,7 @@
 | [[sources/zhu-2025-kronecker-superdirective-beamforming\|Zhu, Zhao, Luo, Jin, Huang & Chen 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]] | LR-RSD: N-way rank-P Kronecker decomposition of the superdirective filter with alternating closed-form MVDR updates and embedded diagonal loading; at M=64, rank P=2 cuts parameters 62.5% and inversion dimension 87.5% with matched performance, validated by anechoic-chamber measurements | 2026-09-14 |
 | [[sources/li-2026-realtime-music-separation-dsp\|Li, Liu, Malsky & Yi 2026]] | This paper asks whether any published real-time music source separation (MSS) system fits the embedded audio hardware the task ultimately targets, and answers no: on a commercial audio DSP (Analog Devices SHARC-FX, 2 MB on-chip L2 SRAM, 2.07 GMAC/s measured sustained), weight memory rules out the 16–51 M parameter TasNet/X-UMX family while per-frame compute rules out RT-STT, which needs 5.5× the available MAC rate. | 2026-09-15 |
 | [[sources/kim-2021-kuielab-mdx-net\|Kim, Choi, Chung, Lee & Jung 2021]] | KUIELab-MDX-Net is a two-stream neural network for four-stem music demixing (vocals/drums/bass/other) that balances separation quality against the compute/time constraints of the ISMIR 2021 Music Demixing (MDX) Challenge. | 2026-09-15 |
+| [[sources/luo-2022-band-split-rnn\|Luo & Yu 2022]] | Band-split RNN (BSRNN) is a frequency-domain music source separation model that explicitly splits the mixture spectrogram into subbands with instrument-specific bandwidths and performs interleaved band-level and sequence-level modeling with residual BLSTMs. | 2026-09-16 |
 
 ---
 
@@ -1388,10 +1390,10 @@
 
 ## Statistics
 
-- **Total pages**: 1337
+- **Total pages**: 1339
 - **Entities**: 575
-- **Concepts**: 516
-- **Sources**: 216
+- **Concepts**: 517
+- **Sources**: 217
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-15
+- **Last updated**: 2026-09-16

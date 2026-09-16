@@ -1,12 +1,15 @@
 ---
 type: concept
 created: 2026-05-16
-updated: 2026-07-22
+updated: 2026-09-16
+sources:
+  - raw/papers/luo-2022-band-split-rnn/full-text.md
 tags:
   - neural-network
   - speech-separation
   - speech-enhancement
   - rnn
+  - music-source-separation
 ---
 
 # Dual-Path RNN (DPRNN)
@@ -51,15 +54,22 @@ In [[sources/he-2025-vibomni|VibOmni]], DPRNN is used as the core separator modu
 ### Grouped DPRNN (G-DPRNN)
 
 Used in [[concepts/gtcrn|GTCRN (Rong et al. 2024)]], G-DPRNN combines grouped RNN (GRNN) with DPRNN to further reduce parameters. Both input features and hidden states are split into 2 groups, each processed by a recurrent layer with 2× fewer parameters. Intra-frame modeling uses grouped bidirectional GRU, while inter-frame modeling uses grouped unidirectional GRU to maintain causality.
+
+### Frequency-Axis Dual-Path: BSRNN
+
+[[concepts/band-split-rnn|BSRNN]] (Luo & Yu 2022) transplants dual-path-style interleaved modeling to music source separation with the second dimension being **frequency bands** instead of time chunks: a sequence-level RNN shared across subbands models time, and a band-level RNN models cross-band dependencies per frame. Because it operates on a large-window STFT (2048/512) rather than small time-domain frames, the original chunking motivation is absent — the authors found that replacing the plain BLSTM with a dual-path RNN in the sequence module yields no performance gain, so BSRNN keeps full-sequence temporal modeling and spends its second path on the frequency axis.
+
 ## Related Concepts
 
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
 - [[concepts/self-attentive-recurrent-neural-network|Self-Attentive Recurrent Neural Network]]
 - [[concepts/neural-networks|Neural Networks]]
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[concepts/band-split-rnn|Band-Split RNN]]
 
 ## Related Sources
 
 - [[sources/he-2025-vibomni|He, Guo, Hou & Yan 2025: VibOmni]]
 - [[sources/rong-2024-gtcrn-speech-enhancement-ultralow|Rong et al. 2024: GTCRN — Ultralightweight Speech Enhancement]]
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — [[concepts/adaptcrn|AdaptCRN]] uses a 2-block grouped DPRNN bottleneck (2 groups, frequency dim 33, intra-frame GRU hidden 8, inter-frame GRU hidden 16) between its adaptive-block encoder and decoder; the representation rearrangement after grouped RNN is removed since the following FC layer performs equivalent inter-group fusion.
+- [[sources/luo-2022-band-split-rnn|Luo & Yu 2022: Music Source Separation with Band-Split RNN]] — frequency-axis instantiation of interleaved two-dimension RNN modeling

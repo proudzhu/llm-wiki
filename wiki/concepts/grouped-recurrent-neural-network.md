@@ -1,15 +1,17 @@
 ---
 type: concept
 created: 2026-07-10
-updated: 2026-07-22
+updated: 2026-09-16
 sources:
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
+  - raw/papers/luo-2022-band-split-rnn/full-text.md
 tags:
   - neural-network
   - recurrent
   - efficiency
   - speech-enhancement
   - grouped-convolution
+  - music-source-separation
 ---
 
 # Grouped Recurrent Neural Network (GRNN)
@@ -56,6 +58,7 @@ Key findings:
 ## Relationship to Other Grouped Architectures
 
 - [[concepts/gtcrn|GTCRN]] applies grouped RNN within a Dual-Path RNN (G-DPRNN) bottleneck, splitting features and hidden states into 2 groups.
+- [[concepts/band-split-rnn|BSRNN]] (Luo & Yu 2022) contrasts with GRNN's design philosophy: group splitting was designed for time-domain features without frequency structure, so its intra-group dependency module ignores sub-band order. BSRNN instead performs explicit, non-uniform frequency band splitting (instrument-specific bandwidths) and uses an **order-sensitive** band-level RNN to capture cross-band dependencies — because different musical instruments occupy distinct frequency ranges with characteristic harmonic patterns. Like the group-communication models, it shares the sequence-modeling layer across all subbands for parameter efficiency and parallelism.
 - [[concepts/adaptcrn|AdaptCRN]] (Wang et al. 2025) inherits GTCRN's grouped-DPRNN pattern verbatim (2 groups, intra-frame grouped GRU hidden 8, inter-frame grouped GRU hidden 16) for its bottleneck — and goes further by removing the representation rearrangement after the grouped RNN, noting that the subsequent FC layer inherently performs inter-group fusion and rearrangement is mathematically equivalent to permuting the FC weight rows. This is a useful simplification for ultra-lightweight models where every parameter counts.
 - GRNN as used in RT-Tango and MN-TANGO originates from the group recurrent networks of Gao et al. (2018) for efficient sequence learning.
 
@@ -67,6 +70,7 @@ Key findings:
 - [[concepts/quantization-aware-training|Quantization-Aware Training (QAT)]]
 - [[concepts/gtcrn|GTCRN]]
 - [[concepts/adaptcrn|AdaptCRN]]
+- [[concepts/band-split-rnn|Band-Split RNN]]
 - [[concepts/depthwise-separable-convolution|Depthwise Separable Convolution]]
 - [[concepts/erb-scale|ERB Scale]]
 
@@ -75,3 +79,4 @@ Key findings:
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]
 - [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]]
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — AdaptCRN's grouped-DPRNN bottleneck (with rearrangement removed)
+- [[sources/luo-2022-band-split-rnn|Luo & Yu 2022: Music Source Separation with Band-Split RNN]] — order-sensitive band-level alternative to group communication
