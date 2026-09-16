@@ -44,22 +44,34 @@ def resolve_defuddle():
 
 
 def check_arxiv_html(arxiv_id):
-    """Return True if arXiv HTML version exists.
+    """Return the first arXiv HTML URL that exists, or None.
 
-    Tries the unversioned URL first (canonical), then falls back to the v1
-    URL — arXiv sometimes only serves the versioned HTML page for very recent
-    submissions. Returns the resolved URL via the second tuple element so the
-    caller can use the working URL for defuddle.
+    Tries the unversioned URL first (canonical), then versioned URLs
+    (v1, v2, v3) — older papers sometimes only serve the versioned HTML
+    page (Luo 2022 ingest: /html/2209.15174 returned 406 while
+    /html/2209.15174v1 returned 200).
+
+    A browser User-Agent is mandatory: arXiv's CDN rejects urllib's
+    default UA with HTTP 406 even for URLs that exist — the same behavior
+    documented at _fetch_via_curl for figure downloads (Kim 2021 ingest).
+    Without it, BOTH probe URLs 406 and the script wrongly reports the
+    paper as having no HTML, falling back to MinerU unnecessarily.
     """
-    for url in (f"https://arxiv.org/html/{arxiv_id}",
-                f"https://arxiv.org/html/{arxiv_id}v1"):
+    candidates = [f"https://arxiv.org/html/{arxiv_id}"]
+    candidates += [f"https://arxiv.org/html/{arxiv_id}v{i}" for i in (1, 2, 3)]
+    last_err = None
+    for url in candidates:
         try:
-            req = urllib.request.Request(url, method='HEAD')
+            req = urllib.request.Request(url, method='HEAD',
+                                         headers=HTML_PROBE_HEADERS)
             with urllib.request.urlopen(req, timeout=15) as resp:
                 if resp.status == 200:
                     return url
-        except Exception:
+        except Exception as e:
+            last_err = e
             continue
+    if last_err is not None:
+        print(f"  WARN: last probe error: {last_err}", file=sys.stderr)
     return None
 
 
@@ -100,6 +112,16 @@ def run_defuddle(url, out_path):
 # '[[Uncaptioned image]]' nested-bracket alt form for images without alt
 # text in the source HTML (a plain [^\]]* alt group silently skips those).
 IMG_PATTERN = re.compile(r'!\[(?:\[[^\]]*\]|[^\]]*)\]\((https?://[^)]+)\)')
+
+# Headers for probing /html/ pages. Browser UA is required — arXiv's CDN
+# 406-rejects urllib's default UA (see check_arxiv_html docstring). A
+# text/html Accept is used rather than BROWSER_HEADERS' image Accept.
+HTML_PROBE_HEADERS = {
+    'User-Agent': ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
+                   'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 '
+                   'Safari/537.36'),
+    'Accept': 'text/html,application/xhtml+xml,*/*;q=0.8',
+}
 
 BROWSER_HEADERS = {
     'User-Agent': ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
@@ -262,7 +284,8 @@ def main():
     print(f"Checking arXiv HTML for {args.arxiv_id} ...")
     html_url = check_arxiv_html(args.arxiv_id)
     if html_url is None:
-        print(f"arXiv HTML not available for {args.arxiv_id} (404).")
+        print(f"arXiv HTML not available for {args.arxiv_id} "
+              f"(all probe URLs failed; see WARN above for the last error).")
         print("FALLBACK: Use extract_mineru.py instead.")
         sys.exit(2)
 
