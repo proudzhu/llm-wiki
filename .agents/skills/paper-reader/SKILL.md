@@ -62,8 +62,10 @@ Rules:
    uv run python .agents/skills/paper-reader/scripts/capture.py -- uv run python .agents/skills/paper-reader/scripts/append_log.py --op ingest --title "..." --body "..."
    ```
 
-3. **Keep using the skill scripts through the wrapper** — do not fall back to hand-editing `wiki/index.md`/`wiki/log.md` or raw `git commit` just because the terminal is broken. Hand-edited index tables are the known cause of lost rows (`pitfalls.md` #35); raw git bypasses `commit_ingest.py`'s guards (`pitfalls.md` #48). The wrapper restores full script output, so the normal Steps 10–13 scripts remain usable.
-4. **If wrapper-invoked `uv run` calls hang for minutes**: an earlier `uv run` probably died holding the uv lock. List hung processes via the wrapper (`capture.py -- tasklist /FI "IMAGENAME eq uv.exe"`), `Stop-Process -Id <PID>` the stale one, then retry through `uv run` as usual. **Always invoke Python via `uv run python`** (per `pitfalls.md` #18) — it guarantees the environment matches `pyproject.toml`/`uv.lock`; direct `.venv\Scripts\python.exe` invocation is a last resort only when uv remains hung *after* the stale process was killed, and must be noted in the session summary.
+3. **Poll via the completion marker — never blind-sleep on long commands.** `.tmp_capture_out.txt` is only written *after* the wrapped command finishes, so mid-run it still holds the *previous* run's output — you cannot tell "still running" from "done" by reading it (the Wang 2021 ingest burned ~4 blind `Start-Sleep` rounds waiting on a 110 s mkdocs build). `capture.py` now deletes `.tmp_capture_done` at start and writes it (containing `exit=N`) at end. Protocol: after launching a wrapped command, Read `.tmp_capture_done` — **"File does not exist" = still running** (one short `Start-Sleep` 10–20 s, re-check), **file exists = done** → Read `.tmp_capture_out.txt` for the output. The `.tmp_capture_done` Read can even share a message with other work.
+
+4. **Keep using the skill scripts through the wrapper** — do not fall back to hand-editing `wiki/index.md`/`wiki/log.md` or raw `git commit` just because the terminal is broken. Hand-edited index tables are the known cause of lost rows (`pitfalls.md` #35); raw git bypasses `commit_ingest.py`'s guards (`pitfalls.md` #48). The wrapper restores full script output, so the normal Steps 10–13 scripts remain usable.
+5. **If wrapper-invoked `uv run` calls hang for minutes**: an earlier `uv run` probably died holding the uv lock. List hung processes via the wrapper (`capture.py -- tasklist /FI "IMAGENAME eq uv.exe"`), `Stop-Process -Id <PID>` the stale one, then retry through `uv run` as usual. **Always invoke Python via `uv run python`** (per `pitfalls.md` #18) — it guarantees the environment matches `pyproject.toml`/`uv.lock`; direct `.venv\Scripts\python.exe` invocation is a last resort only when uv remains hung *after* the stale process was killed, and must be noted in the session summary.
 
 ## Prerequisites
 
@@ -91,6 +93,7 @@ Exact invocations for every script (all prefixed with `uv run python .agents/ski
 | 12a | `verify_wikilinks.py --slug SLUG` |
 | 12b | `check_backlinks.py --slug SLUG` |
 | 12c | `build_check.py` (wraps `mkdocs build --strict`) |
+| 12 (all) | `verify_all.py --slug SLUG` — runs 12a→12b→12c in one call, fail-fast; preferred over three separate calls (one black-hole recovery cycle instead of three) |
 | 13 | `commit_ingest.py --slug SLUG --message "ingest: Short Title (Author Year)" --entities ... --concepts ... --synthesis ...` |
 | any | `uv run python .agents/skills/paper-reader/scripts/capture.py -- <command>` — terminal black-hole recovery; output lands in `.tmp_capture_out.txt` (see "Terminal Output Black Hole" section) |
 
@@ -235,7 +238,7 @@ uv run python .agents/skills/paper-reader/scripts/update_entities.py \
     --slug SLUG --entities author1 author2 [--note "contribution description"] [--role "First author of"]
 ```
 
-It derives title/venue/year/authors from the source page's H1 and `**Venue**:` line. After running, review the appended bullets and polish the Key Contributions wording with one sequential Edit per file (e.g., a paper-specific description — the `--note` flag covers this at insert time). New-author pages are still created by hand from the template.
+It derives title/venue/year/authors from the source page's H1 and `**Venue**:` line. Entity pages that use a bold inline label (`**Key Contributions**:` + bullets) instead of a `## Key Contributions` heading are supported transparently (the Wang 2021 ingest had to hand-fix `israel-cohen.md` for exactly this). After running, review the appended bullets and polish the Key Contributions wording with one sequential Edit per file (e.g., a paper-specific description — the `--note` flag covers this at insert time). New-author pages are still created by hand from the template.
 
 ### Step 7: Create Missing Concept Pages
 
@@ -386,6 +389,14 @@ For re-ingestion, use `ingest (re)` in `--title`.
 **Link format in log bodies** (`pitfalls.md` #40): reference wiki pages with vault-absolute wikilinks (`[[sources/slug|Title]]`) or backticked plain paths (`wiki/sources/slug.md`) — **never** `../`-relative markdown links like `[Title](../sources/slug.md)`, which do not resolve from `wiki/log.md` and abort `mkdocs build --strict`. `append_log.py` validates the body and rejects such links (exit 2) before appending.
 
 ### Step 12: Build Verification
+
+**Preferred: one call runs all three checks** (wikilinks → backlinks → mkdocs build), fail-fast with a consolidated report:
+
+```bash
+uv run python .agents/skills/paper-reader/scripts/verify_all.py --slug SLUG
+```
+
+Under the terminal-black-hole recovery wrapper this costs **one** capture/sleep/Read cycle instead of three (each separate script call is 2–3 turns); the mkdocs build alone takes ~2 minutes, so batch the wait. If any check fails, the later checks are skipped — fix and re-run. The individual checks below remain available for targeted re-runs after fixing a failure (e.g., re-run only `build_check.py` once a broken link is fixed).
 
 **Step 12a — Wikilink verification** (fast pre-check, catches broken links before the build):
 

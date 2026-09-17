@@ -6,8 +6,12 @@ the source page (wiki/sources/{slug}.md) and applies the append-only update
 pattern from page-templates.md automatically:
 
   1. frontmatter `updated:` -> today
-  2. new bullet under `## Key Contributions` (or `## Notable Contributions`):
-     - Co-author of "Short Title" (Venue, Year) [-- note] — [[sources/{slug}|Authors Year]]
+  2. new bullet under `## Key Contributions` (or `## Notable Contributions`).
+     Pages using a bold inline label instead of a heading —
+     `**Key Contributions**:` followed by bullets (e.g. israel-cohen.md) —
+     are also supported; the bullet is appended after the last bullet of the
+     label's block.
+     - Co-author of "Short Title" (Venue, Year) [--note] — [[sources/{slug}|Authors Year]]
   3. new bullet under `## Related Sources`:
      - [[sources/{slug}|Authors Year: Full Title]]
 
@@ -35,6 +39,12 @@ import argparse, datetime, os, re, sys
 sys.stdout.reconfigure(encoding='utf-8')
 
 CONTRIB_HEADINGS = ('## Key Contributions', '## Notable Contributions')
+
+# Some entity pages use a bold inline label followed by bullets instead of a
+# level-2 heading, e.g. israel-cohen.md: `**Key Contributions**:` then `- ...`
+# bullets. The Wang 2021 ingest silently skipped such a page (bullet never
+# added) because find_heading_section only matched `##` headings.
+BOLD_LABEL_RE = re.compile(r'^\*\*(Key Contributions|Notable Contributions)\*\*:?\s*$')
 
 
 def read_source_page(slug):
@@ -105,18 +115,43 @@ def find_heading_section(lines, headings):
     return start, end
 
 
+def find_bold_label_section(lines):
+    """Return (start, end) for a `**Key Contributions**:`-style block.
+
+    start = label line index; end = index just after the last bullet of the
+    block. Bullets separated by blank lines still belong to the block; the
+    block ends at the next `## ` heading or bold label. Returns (None, None)
+    if no such label exists.
+    """
+    start = None
+    for i, line in enumerate(lines):
+        if BOLD_LABEL_RE.match(line.strip()):
+            start = i
+            break
+    if start is None:
+        return None, None
+    last_bullet = None
+    for i in range(start + 1, len(lines)):
+        stripped = lines[i].strip()
+        if stripped.startswith('## ') or BOLD_LABEL_RE.match(stripped):
+            break
+        if stripped.startswith('- '):
+            last_bullet = i
+    if last_bullet is None:
+        return start, start + 1  # label present but no bullets yet
+    return start, last_bullet + 1
+
+
 def append_bullet(lines, start, end, bullet):
     """Insert bullet at the end of the section [start, end), before trailing
     blank lines. Returns the new lines list."""
     insert_at = end
     while insert_at > start + 1 and lines[insert_at - 1].strip() == '':
         insert_at -= 1
-    # Ensure exactly one blank line before the bullet if content precedes it
-    prefix = [] if insert_at == start + 1 and lines[insert_at - 1].strip() == '' else []
-    new_lines = lines[:insert_at] + prefix + [bullet + '\n', '\n'] + lines[insert_at:]
-    # Avoid double blank line before the next heading
-    if new_lines[insert_at + 1].strip() == '' and insert_at + 2 < len(new_lines) \
-            and new_lines[insert_at + 2].startswith('## '):
+    new_lines = lines[:insert_at] + [bullet + '\n', '\n'] + lines[insert_at:]
+    # Avoid double blank line: drop our inserted blank line if the original
+    # text at the insertion point already starts with one.
+    if insert_at + 2 < len(new_lines) and new_lines[insert_at + 2].strip() == '':
         del new_lines[insert_at + 1]
     return new_lines
 
@@ -150,8 +185,12 @@ def update_entity(path, slug, display, title, venue, year, role, note, today):
 
     start, end = find_heading_section(lines, CONTRIB_HEADINGS)
     if start is None:
-        print(f"WARN: no {' or '.join(CONTRIB_HEADINGS)} section in {path}; "
-              f"bullet not added", file=sys.stderr)
+        # Fallback: bold inline label variant (`**Key Contributions**:`)
+        start, end = find_bold_label_section(lines)
+    if start is None:
+        print(f"WARN: no {' or '.join(CONTRIB_HEADINGS)} section and no "
+              f"'**Key Contributions**:' label in {path}; bullet not added",
+              file=sys.stderr)
     else:
         lines = append_bullet(lines, start, end, contrib_bullet)
 
