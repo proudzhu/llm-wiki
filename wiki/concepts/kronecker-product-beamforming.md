@@ -5,6 +5,7 @@ updated: 2026-09-17
 sources:
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
   - raw/papers/wang-2021-kronecker-adaptive-beamforming/full-text.txt
+  - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
 tags:
   - beamforming
   - microphone-arrays
@@ -23,7 +24,7 @@ Kronecker product beamforming decomposes a global (long) beamforming filter of l
 
 ## Development
 
-- **Differential Kronecker product beamforming** (Cohen, Benesty & Chen 2019, IEEE/ACM TASLP): the original formulation linking Kronecker decompositions to [[concepts/differential-microphone-array|differential microphone arrays]].
+- **Differential Kronecker product beamforming** ([[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019]], IEEE/ACM TASLP): the original formulation linking Kronecker decompositions to [[concepts/differential-microphone-array|differential microphone arrays]]. For arrays with $M = M_1 M_2$ microphones whose steering vector factorizes as $\mathbf{d} = \mathbf{d}_1 \otimes \mathbf{d}_2$ (two virtual ULAs), the differential beamformer is decomposed as $\mathbf{h} = \mathbf{h}_1 \otimes \mathbf{h}_2$ ($M_1 + M_2$ coefficients instead of $M_1 M_2$). The global beampattern and [[concepts/white-noise-gain|WNG]] factorize as products of the virtual-array quantities, but the directivity factor and front-to-back ratio do not ($\boldsymbol{\Gamma} \neq \boldsymbol{\Gamma}_1 \otimes \boldsymbol{\Gamma}_2$) — motivating alternating iterations for the KP hypercardioid (DF maximization, ~5 iterations) and KP supercardioid (FBR maximization, ~3 iterations), alongside closed-form KP cardioid and dipole designs.
 - **Specific geometries** (rectangular arrays, cube arrays): 2-D/3-D Kronecker decompositions matched to regular array structures.
 - **Arbitrary geometries** ([[sources/wang-2021-kronecker-adaptive-beamforming|Wang et al. 2021]], APSIPA-ASC): the first generalization to arbitrary 3-D array geometries — the filter is represented as a **sum of $P$ Kronecker products** of subfilters (a property of the filter, not the array), with the iterative [[concepts/kmvdr-beamformer|KMVDR]] algorithm deriving the MVDR beamformer under this representation.
 - **Low-rank differential beamforming with nonuniform linear arrays** (Pei et al. 2025, ICASSP).
@@ -60,5 +61,6 @@ The same Kronecker decomposition idea appears in multichannel active noise contr
 
 ## Related Sources
 
+- [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]] — the original formulation: two-virtual-array decomposition, KP cardioid/dipole/hypercardioid/supercardioid
 - [[sources/wang-2021-kronecker-adaptive-beamforming|Wang et al. 2021: Kronecker Product Adaptive Beamforming for Microphone Arrays]]
 - [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]]

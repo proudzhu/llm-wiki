@@ -1,0 +1,1606 @@
+892 IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 27, NO. 5, MA Y 2019
+Differential Kronecker Product Beamforming
+Israel Cohen , Fellow, IEEE, Jacob Benesty , and Jingdong Chen , Senior Member , IEEE
+Abstract—Differential beamformers have attracted much inter-
+est over the past few decades. In this paper, we introduce differ-
+ential Kronecker product beamformers that exploit the structure
+of the steering vector to perform beamforming differently from
+the well-known and studied conventional approach. We consider a
+class of microphone arrays that enable to decompose the steering
+vector as a Kronecker product of two steering vectors of smaller
+virtual arrays. In the proposed approach, instead of directly de-
+signing the differential beamformer, we break it down following the
+decomposition of the steering vector, and show how to derive dif-
+ferential beamformers using the Kronecker product formulation.
+As demonstrated, the Kronecker product decomposition facilitates
+further ﬂexibility in the design of differential beamformers and in
+the tradeoff control between the directivity factor and the white
+noise gain.
+Index Terms —Differential beamforming, Kronecker product,
+microphone array, superdirective beamforming, beampattern,
+white noise gain, directivity factor, front-to-back ratio.
+I. I NTRODUCTION
+K
+RONECKER product decompositions have been recently
+investigated in the context of acoustic imaging [1],
+[2], linear system identiﬁcation [3], [4], and beamforming
+[5], [6]. Ribeiro and Nascimento [1] considered the problem
+of acoustic imaging using planar microphone arrays. They
+introduced the Kronecker array transform, which enables the
+acceleration of acoustic imaging techniques, essentially by
+reorganizing the matrix-vector multiplication structure for a
+special case of separable arrays. They showed that for planar
+arrays with a rectangular grid of microphones, the Kronecker
+array transform enables to reconstruct acoustic images more
+accurately and with higher resolutions than standard methods.
+This transform, which was originally designed for acoustic
+camera applications, was later generalized for compressive
+beamforming by Nascimento et al. [2].
+Recently, Paleologu et al. [4] addressed the problem of linear
+system identiﬁcation by using approximate Kronecker product
+Manuscript received September 8, 2018; revised December 25, 2018; ac-
+cepted January 20, 2019. Date of publication January 24, 2019; date of current
+version March 28, 2019. This work was supported in part by the Israel Science
+Foundation under Grant 576/16 and in part by the ISF-NSFC joint research
+program under Grants 2514/17 and 61761146001. The associate editor coordi-
+nating the review of this manuscript and approving it for publication was Dr.
+Richard Christian Hendriks. (Corresponding author: Israel Cohen.)
+I. Cohen is with the Andrew and Erna Viterby Faculty of Electrical Engineer-
+ing, Technion—Israel Institute of Technology, Haifa 3200003, Israel (e-mail: ,
+icohen@ee.technion.ac.il).
+J. Benesty is with the INRS-EMT, University of Quebec, Montreal, QC H5A
+1K6, Canada (e-mail:,benesty@emt.inrs.ca).
+J. Chen is with the Northwestern Polytechnical University, Xi’an 710072,
+China (e-mail:,jingdongchen@ieee.org).
+Digital Object Identiﬁer 10.1109/TASLP .2019.2895241
+(KP) decompositions of the impulse response. They proposed
+to estimate optimal KP decompositions of the impulse response
+based on an iterative Wiener ﬁlter, which compared to the con-
+ventional Wiener ﬁlter, is computationally more efﬁcient and
+yields better performances using less amount of data to estimate
+the statistics. They showed that ﬁnding an optimal KP decompo-
+sition of the impulse response is generally useful for real-world
+acoustic echo cancellation applications.
+Differential beamformers [7]–[9] are a particular important
+class of ﬁxed beamformers, which yield the highest gains in dif-
+fuse noise. Differential microphone arrays are generally small
+in size, and their beampatterns are almost frequency invari-
+ant, which is critical when we deal with broadband signals
+such as speech. Consequently, optimal designs of differential
+beamformers have attracted much interest over the past few
+decades.
+In this paper, we introduce differential KP beamformers that
+take advantage of the steering vector structure to perform beam-
+forming differently from the well-known and studied conven-
+tional approach. The conventional way of doing beamforming
+is by applying in the frequency domain a complex-valued linear
+ﬁlter, h, of length M to the observation signal vector, where
+M is the number of microphones in the array. With the conven-
+tional beamforming approach, M coefﬁcients of h need to be
+estimated for each frequency bin. We consider a particular class
+of microphone arrays that enable to decompose the steering vec-
+tor as a Kronecker product of two steering vectors of smaller
+virtual arrays [1], [5], [10]. That is, arrays of M = M1M2 mi-
+crophones that can be conﬁgured from replications of one virtual
+array (containing M1 microphones) to the microphone positions
+of the other virtual array (containing M2 microphones). In this
+case, the steering vector (of length M ) can be decomposed as
+d = d1 ⊗ d2, (1)
+where ⊗ is the Kronecker product, d1 is the steering vector (of
+length M1 ) corresponding to a virtual array ofM1 microphones,
+andd2 is the steering vector (of lengthM2 ) corresponding to an-
+other virtual array of M2 microphones. Note that (1) is satisﬁed
+whenever the physical array can be obtained from replications
+of one virtual array to the microphone positions of the other
+virtual array (see e.g., Fig. 1).
+In the proposed approach, instead of directly designing the
+ﬁlter h of length M , we break it down following the decompo-
+sition of the global steering vector as
+h = h1 ⊗ h2, (2)
+where h1 and h2 are two complex-valued linear ﬁlters of
+lengths M1 and M2 , respectively. With this method, we need to
+2329-9290 © 2019 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission.
+See http://www.ieee.org/publications standards/publications/rights/index.html for more information.
+
+COHEN et al.: DIFFERENTIAL KRONECKER PRODUCT BEAMFORMING 893
+Fig. 1. Illustration of ULA 1 with M1 microphones and an interelement
+spacing equal to M2 δ, ULA 2 with M2 microphones and an interelement
+spacing equal to δ, and global ULA with M = M1 M2 microphones and an
+interelement spacing equal to δ.
+estimate M1 + M2 coefﬁcients [ M1 for h1 and M2 for h2 ]i n -
+stead of M = M1M2 for the conventional technique. This gen-
+erally implies smaller matrices to invert (increasing robustness)
+[8], [11].
+There are many ways to optimize the coefﬁcients of h1 and
+h2 depending on what we want and the application at hand.
+We introduce differential KP beamformers, and show how to
+derive such beamformers, as well as new approaches through
+the designs of h1 and h2 . We show that using the KP decompo-
+sition, the global beampattern can be expressed as the product
+of the beampatterns of the two virtual arrays. Also, the white
+noise gain of the global array can be expressed as the product
+of the white noise gains of the two virtual arrays, while the
+directivity factor and the front-to-back ratio of the global array
+cannot be factorized. We demonstrate designs of very ﬂexi-
+ble differential KP beamformers by exploiting these interesting
+properties.
+The rest of the paper is organized as follows. In Section II,
+we introduce the KP decomposition of a physical array into
+two virtual arrays and present the signal model. In Section III,
+we formulate the problem of KP beamforming. In Section IV,
+we deﬁne some important performance measures by using KP
+ﬁlters. Then, in Section V, we show how to derive differential
+beamformers using the KP formulation.
+II. S IGNAL MODEL
+We consider two different virtual uniform linear arrays
+(ULAs) on the same line denoted 1 and 2. ULA 1 has M1
+microphones and an interelement spacing equal to M2δ, where
+δ is some unit spacing, and ULA 2 has M2 microphones and
+an interelement spacing equal to δ (see Fig. 1). Assume that a
+desired source signal (plane wave), in the farﬁeld, propagates
+from the azimuth angle, θ, in an anechoic acoustic environ-
+ment at the speed of sound, i.e., c = 340 m/s, and impinges on
+the above described virtual arrays. In this scenario, the corre-
+sponding steering vectors (of lengths M1 and M2 , respectively)
+are [12]
+d1,θ (ω)=
+[
+1 e−jM 2 ϖ cos θ ··· e−j(M 1 −1)M 2 ϖ cos θ ]T
+, (3)
+d2,θ (ω)=
+[
+1 e−jϖ cos θ ) ··· e−j(M 2 −1)ϖ cos θ ]T
+, (4)
+where the superscript T is the transpose operator, j is the imag-
+inary unit,
+ϖ = ωδ
+c , (5)
+ω =2 πf is the angular frequency, and f> 0 is the temporal
+frequency. In this study, we are interested in the physical linear
+array whose associated steering vector is of the form:
+dθ (ω)= d1,θ (ω) ⊗ d2,θ (ω) . (6)
+The corresponding physical ULA consists of M = M1M2 mi-
+crophones with an interelement spacing equal to δ. We will
+refer to this array as the global or whole ULA. We consider
+doing beamforming with small values of δ [7], [8], [13], where
+the main lobe is at the angle θ =0 (endﬁre direction) and the
+desired signal propagates from the same angle. Beamforming
+under these conditions has the potential to lead to large array
+gains. Our objective is to study differential beamforming with
+the proposed ULAs.
+Since the source propagates from the angle θ =0 , the obser-
+vation signal vector of length M1M2 can be expressed in the
+frequency domain as [11], [14]
+y (ω)=
+[
+Y1 (ω) Y2 (ω) ··· YM (ω)
+]T
+= x (ω)+ v (ω)
+= d0 (ω) X (ω)+ v (ω), (7)
+where Ym (ω) is the mth microphone signal, x (ω)=
+d0 (ω)X (ω), X (ω) is the zero-mean desired source signal,
+d0 (ω)= d1,0 (ω) ⊗ d2,0 (ω) is the steering vector atθ =0 (di-
+rection of the desired source), v (ω) is the zero-mean additive
+noise signal vector deﬁned similarly to y (ω), and X (ω) and
+v (ω) are uncorrelated. In the rest, in order to simplify the nota-
+tion, we drop the dependence on the angular frequency, ω. So,
+for example, (7) is written asy = d0X + v. We deduce that the
+covariance matrix of y is
+Φy = E
+(
+yyH )
+= Φx + Φv, (8)
+where E(·) denotes mathematical expectation, the superscript
+H is the conjugate-transpose operator,
+Φx = φX d0dH
+0
+= φX (d1,0 ⊗ d2,0 )(d1,0 ⊗ d2,0 )H
+= φX
+(
+d1,0dH
+1,0
+)
+⊗
+(
+d2,0dH
+2,0
+)
+(9)
+is the covariance matrix of x, with φX = E
+(
+|X|2
+)
+being the
+variance of X, and Φv = E
+(
+vvH )
+is the covariance matrix of
+v. Assuming that the ﬁrst microphone is the reference, we can
+express (8) as
+Φy = φX d0dH
+0 + φV1 Γv, (10)
+where φV1 = E
+(
+|V1 |2
+)
+is the variance of the noise at the ref-
+erence microphone and Γv = Φv/φV1 is the pseudo-coherence
+matrix of the noise. In the case of the spherically isotropic
+(diffuse) noise ﬁeld, which will often be assumed here, (10)
+becomes
+Φy = φX d0dH
+0 + φΓ, (11)
+
+894 IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 27, NO. 5, MA Y 2019
+where φ is the variance of the diffuse noise and
+Γ = 1
+2
+∫ π
+0
+dθdH
+θ sin θdθ. (12)
+It can be veriﬁed that the elements of the M × M matrix Γ (ω)
+are
+[Γ (ω)]mn = sin [(m − n)ϖ ]
+(m − n)ϖ
+=s i n c [ (m − n)ϖ ], (13)
+with [Γ (ω)]mm =1 ,m =1 , 2,...,M .
+One of our main objectives in this study is to take advantage
+of the global ULA steering vector structure in the particular
+case of M = M1M2 to perform beamforming differently from
+the well-known and studied conventional approach. It will be
+demonstrated that the new technique is very ﬂexible.
+III. K RONECKER PRODUCT BEAMFORMING
+The conventional way of doing beamforming is by applying
+a complex-valued linear ﬁlter, h, of length M to the observation
+signal vector, y. This processing is [11]
+Z = hH y, (14)
+where Z is the estimate of the desired signal, X. In order to
+fully exploit the structure of the global steering vector, let us
+consider the complex-valued ﬁlters having the form:
+h = h1 ⊗ h2, (15)
+whereh1 andh2 are two complex-valued linear ﬁlters of lengths
+M1 and M2 , respectively. In other words, the global beam-
+former,h, follows the decomposition of the global steering vec-
+tor, dθ . In the proposed approach, beamforming is performed
+by applying h [as deﬁned in (15)] to y [from (7)]. We get
+Z = hH y
+= hH d0X + hH v
+= Xfd + Vrn , (16)
+where Z is the estimate of the desired signal, X,
+Xfd =( h1 ⊗ h2 )H (d1,0 ⊗ d2,0 ) X
+=
+(
+hH
+1 d1,0
+)(
+hH
+2 d2,0
+)
+X (17)
+is the ﬁltered desired signal, and
+Vrn =( h1 ⊗ h2 )H v (18)
+is the residual noise. We deduce that the variance of Z is
+φZ = φX
+⏐⏐hH
+1 d1,0
+⏐⏐2 ⏐⏐hH
+2 d2,0
+⏐⏐2
++ φV1 (h1 ⊗ h2 )H Γv (h1 ⊗ h2 ) . (19)
+We see that with this method, we only need to estimate M1 +
+M2 coefﬁcients ( M1 for h1 and M2 for h2 ) instead of M1M2
+for the conventional technique. This generally implies smaller
+matrices to invert (increasing robustness) [8], [11]. Notice that
+this way of doing beamforming may not be completely new.
+A similar approach was proposed in [5], but in the context of
+multiple-input and multiple-output (MIMO) radar applications.
+In our context, the distortionless constraint in the direction of
+the desired source, i.e., θ =0 , is often required, i.e.,
+hH d0 =
+(
+hH
+1 d1,0
+)(
+hH
+2 d2,0
+)
+=1 . (20)
+Therefore, we may choose hH
+1 d1,0 = hH
+2 d2,0 =1 , so that (20)
+is satisﬁed. [In some applications, it may be useful to design
+h1 and h2 such that hH
+1 d1,0 varies as a function of frequency,
+while (20) is still satisﬁed, but we do not consider this here.]
+IV . PERFORMANCE MEASURES
+In this section, we deﬁne some important performance mea-
+sures by using KP ﬁlters.
+The ﬁrst useful measure discussed in this section is the beam-
+pattern or directivity pattern, which describes the sensitivity of
+the beamformer to a plane wave (source signal) impinging on the
+global ULA from the direction θ. Mathematically, it is deﬁned
+as
+Bθ (h)= dH
+θ h
+=
+(
+dH
+1,θ h1
+)(
+dH
+2,θ h2
+)
+= B1,θ (h1 ) ×B 2,θ (h2 ) , (21)
+where
+Bi,θ (hi )= dH
+i,θ hi
+=
+Mi∑
+m =1
+Hi,m ej(m −1)ϖ i cos θ (22)
+for i =1 , 2 are the beampatterns of the virtual ULAs, with
+ϖ 1 = M2ϖ , ϖ 2 = ϖ , and Hi,m ,m =1 , 2,...,M i being the
+coefﬁcients of hi .L e t Zi = ejϖ i cos θ for i =1 , 2, we can ex-
+press the global beampattern as a polynomial in two variables,
+which is the product of two polynomials (of degrees M1 − 1
+and M2 − 1) in one variable each, i.e.,
+B (Z1, Z2 )= B1 (Z1 ) ×B 2 (Z2 )
+=
+( M 1∑
+m 1 =1
+H1,m 1 Zm 1 −1
+1
+)( M 2∑
+m 2 =1
+H2,m 2 Zm 2 −1
+2
+)
+.
+(23)
+From this perspective, we can see that this beampattern has
+at most M1 + M2 − 2 distinct nulls (between 0 and π), while
+the beampattern with the conventional approach has at most
+M1M2 − 1 distinct nulls (between 0 and π). The fact that the
+global beampattern, Bθ (h), can be expressed as the product of
+two beamformer beampatterns is an interesting property that can
+be exploited in the design of very ﬂexible global beamformers.
+Given that the ﬁrst microphone is the reference, we can de-
+ﬁne the input signal-to-noise ratio (SNR) with respect to this
+reference as
+iSNR = φX
+φV1
+. (24)
+
+COHEN et al.: DIFFERENTIAL KRONECKER PRODUCT BEAMFORMING 895
+The output SNR is deﬁned [from the variance of Z, see (19)] as
+oSNR (h)= φX
+⏐⏐hH d0
+⏐⏐2
+hH Φvh
+= φX
+φV1
+×
+⏐⏐hH d0
+⏐⏐2
+hH Γvh . (25)
+The deﬁnition of the gain in SNR is obtained from the previous
+deﬁnitions, i.e.,
+G (h)= oSNR (h)
+iSNR
+=
+⏐⏐hH d0
+⏐⏐2
+hH Γvh . (26)
+One convenient way to evaluate the sensitivity of the global
+ULA to some of its imperfections (e.g., sensor noise, small
+deviations of the microphone characteristics and positions) is
+via the so-called white noise gain (WNG), which is deﬁned
+by taking Γv = IM in (26), where IM is the M × M identity
+matrix, i.e.,
+W (h)=
+⏐⏐hH d0
+⏐⏐2
+hH h
+=
+⏐⏐hH
+1 d1,0
+⏐⏐2
+hH
+1 h1
+×
+⏐⏐hH
+2 d2,0
+⏐⏐2
+hH
+2 h2
+= W1 (h1 ) ×W 2 (h2 ) , (27)
+where
+Wi (hi )=
+⏐⏐hH
+i di, 0
+⏐⏐2
+hH
+i hi
+(28)
+for i =1 , 2. Obviously, the WNG of the global ULA is simply
+the product of the WNGs of the ﬁrst and second ULAs described
+in Section II. It is easy to check that
+W (h) ≤ M1M2, ∀h. (29)
+Another important measure, which quantiﬁes how the micro-
+phone array performs in the presence of reverberation (which
+can be assumed as diffuse noise) is the directivity factor (DF).
+Considering the spherically isotropic (diffuse) noise ﬁeld, the
+DF is deﬁned by taking Γv = Γ in (26):
+D (h)=
+⏐⏐hH d0
+⏐⏐2
+hH Γh , (30)
+where Γ is deﬁned in (12). It is clear that
+D (h) ≤ dH
+0 Γ−1d0, ∀h. (31)
+We observe that contrary to the beampattern and the WNG, the
+DF of the global ULA cannot be factorized as the product of the
+DFs of the two virtual ULAs, i.e.,
+D (h) ⁄= D1 (h1 ) ×D 2 (h2 ) , (32)
+where
+Di (hi )=
+⏐⏐hH
+i di, 0
+⏐⏐2
+hH
+i Γihi
+, (33)
+with
+Γi = 1
+2
+∫ π
+0
+di,θ dH
+i,θ sinθdθ, (34)
+for i =1 , 2. The elements of the Mi × Mi matrix Γi (ω) are
+given by
+[Γi (ω)]mn =s i n c [ (m − n)ϖi ] (35)
+with [Γi (ω)]mm =1 ,m =1 , 2,...,M i . In fact, one can verify
+that Γ ⁄= Γ1 ⊗ Γ2 , that is why (32) is true in general.
+One can check that
+h1 ⊗ h2 =( h1 ⊗ IM 2 )h2 (36)
+=( IM 1 ⊗ h2 )h1, (37)
+where IMi is the identity matrix of size Mi × Mi (i =1 , 2).
+Basically, the previous expressions, which separate h2 and h1
+into matrix-vector products, are very helpful and convenient
+to use in the derivations of hypercardioid and supercardioid
+beamformers (see Sections V -C and V -D). When h2 is ﬁxed,
+given, and satisﬁes the distortionless constraint, i.e., hH
+2 d2,0 =
+1; then, thanks to (37), we can write the DF as
+D (h1 |h2 )= |B1,0 (h1 )|2
+hH
+1 Γh2 h1
+=
+⏐⏐hH
+1 d1,0
+⏐⏐2
+hH
+1 Γh2 h1
+, (38)
+where
+Γh2 = 1
+2
+∫ π
+0
+d1,θ dH
+1,θ |B2,θ (h2 )|2 sin θdθ
+=( IM 1 ⊗ h2 )H Γ (IM 1 ⊗ h2 ) . (39)
+In the same way, when h1 is ﬁxed, given, and satisﬁes the
+distortionless constraint, i.e., hH
+1 d1,0 =1 ; then, thanks to (36),
+we can express the DF as
+D (h2 |h1 )= |B2,0 (h2 )|2
+hH
+2 Γh1 h2
+=
+⏐⏐hH
+2 d2,0
+⏐⏐2
+hH
+2 Γh1 h2
+, (40)
+where
+Γh1 = 1
+2
+∫ π
+0
+d2,θ dH
+2,θ |B1,θ (h1 )|2 sin θdθ
+=( h1 ⊗ IM 2 )H Γ (h1 ⊗ IM 2 ) . (41)
+Another measure of interest in this study is the front-to-back
+ratio (FBR), which is deﬁned as the ratio of the power of the
+output of the array to signals propagating from the front-half
+plane to the output power for signals arriving from the rear-
+half plane [15]. This ratio, for the spherically isotropic (diffuse)
+
+896 IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 27, NO. 5, MA Y 2019
+noise ﬁeld, is mathematically deﬁned as [15]
+F (h)=
+∫ π/ 2
+0
+|Bθ (h)|2 sin θdθ
+∫ π
+π/ 2
+|Bθ (h)|2 sin θdθ
+=
+∫ π/ 2
+0
+|B1,θ (h1 )|2 |B2,θ (h2 )|2 sinθdθ
+∫ π
+π/ 2
+|B1,θ (h1 )|2 |B2,θ (h2 )|2 sinθdθ
+= hH Γf h
+hH Γbh, (42)
+where
+Γf =
+∫ π/ 2
+0
+dθdH
+θ sinθdθ, (43)
+Γb =
+∫ π
+π/ 2
+dθdH
+θ sinθdθ. (44)
+It can be veriﬁed that the elements of the M × M matrices
+Γf (ω) and Γb (ω) are given, respectively, by
+[Γf (ω)]mn = ej(n −m )ϖ − 1
+j(n − m)ϖ (45)
+and
+[Γb (ω)]mn = 1 − e−j(n −m )ϖ
+j(n − m)ϖ , (46)
+with [Γf (ω)]mm =[ Γb (ω)]mm =1 ,m =1 , 2,...,M . Same
+as the DF, the FBR of the global ULA is not equal to the product
+of the FBRs of the two virtual ULAs, i.e.,
+F (h) ⁄= F1 (h1 ) ×F 2 (h2 ) , (47)
+where
+Fi (hi )=
+∫ π/ 2
+0
+|Bi,θ (hi )|2 sin θdθ
+∫ π
+π/ 2
+|Bi,θ (hi )|2 sin θdθ
+= hH
+i Γf,i hi
+hH
+i Γb,ihi
+, (48)
+with
+Γf,i =
+∫ π/ 2
+0
+di,θ dH
+i,θ sin θdθ, (49)
+Γb,i =
+∫ π
+π/ 2
+di,θ dH
+i,θ sinθdθ, (50)
+for i =1 , 2. The elements of theMi × Mi matricesΓf,i (ω) and
+Γb,i (ω) are given by
+[Γf,i (ω)]mn = ej(n −m )ϖ i − 1
+j(n − m)ϖi
+, (51)
+[Γb,i (ω)]mn = 1 − e−j(n −m )ϖ i
+j(n − m)ϖi
+, (52)
+with [Γf,i (ω)]mm =[ Γb,i (ω)]mm =1 ,m =1 , 2,...,M i .
+When h2 is ﬁxed and given, and thanks to (37), we can write
+the FBR as
+F (h1 |h2 )= hH
+1 Γf,h2 h1
+hH
+1 Γb,h2 h1
+, (53)
+where
+Γf,h2 =
+∫ π/ 2
+0
+d1,θ dH
+1,θ |B2,θ (h2 )|2 sin θdθ (54)
+=( IM 1 ⊗ h2 )H Γf (IM 1 ⊗ h2 ),
+Γb,h2 =
+∫ π
+π/ 2
+d1,θ dH
+1,θ |B2,θ (h2 )|2 sin θdθ
+=( IM 1 ⊗ h2 )H Γb (IM 1 ⊗ h2 ) . (55)
+In the same way, whenh1 is ﬁxed and given, and thanks to (36),
+we can write the FBR as
+F (h2 |h1 )= hH
+2 Γf,h1 h2
+hH
+2 Γb,h1 h2
+, (56)
+where
+Γf,h1 =
+∫ π/ 2
+0
+d2,θ dH
+2,θ |B1,θ (h1 )|2 sin θdθ (57)
+=( h1 ⊗ IM 2 )H Γf (h1 ⊗ IM 2 ),
+Γb,h1 =
+∫ π
+π/ 2
+d2,θ dH
+2,θ |B1,θ (h1 )|2 sin θdθ
+=( h1 ⊗ IM 2 )H Γb (h1 ⊗ IM 2 ) . (58)
+V. D IFFERENTIAL BEAMFORMERS
+In this section, we derive some useful examples of differen-
+tial KP beamformers. Of course, many more can be deduced
+depending on the applications at hand.
+A. Cardioid
+The (M2 − 1) th-order cardioid has a unique null of multi-
+plicity M2 − 1 in the direction π. Therefore, the ith derivative,
+with i =0 , 1,...,M 2 − 2, of the beampattern of h2 with re-
+spect to cos θ is equal to 0 at cos π = −1, i.e.,
+di B2,θ (h2 )
+d cosi θ
+⏐⏐⏐⏐
+cos θ =−1
+= B[i]
+2,π (h2 )=0 , (59)
+with
+B[0]
+2,π (h2 )= B2,π (h2 ) .
+We easily ﬁnd that
+B[i]
+2,π (h2 )= ( jωδ/c)i (
+Σid2,π
+)H
+h2, (60)
+where
+Σ = diag (0, 1,...,M 2 − 1) (61)
+
+COHEN et al.: DIFFERENTIAL KRONECKER PRODUCT BEAMFORMING 897
+Fig. 2. Performances of the traditional third-order cardioid, h2, C , (solid line
+with circles) and the third-order KP cardioid, hC , as a function of frequency
+for δ =1 cm, M2 =4 , and several values of M1 : M1 =2 (dashed line with
+asterisks), M1 =3 (dotted line with squares), and M1 =4 (dash-dot line with
+triangles). (a) DF. (b) WNG.
+is a diagonal matrix of size M2 × M2 . Combining the distor-
+tionless constraint, i.e.,
+B2,0 (h2 )= dH
+2,0h2 =1 , (62)
+with the M2 − 1 equations from (59), we obtain a linear system
+of M2 equations with M2 unknowns:
+DH
+2,π h2 = i, (63)
+where
+DH
+2,π =
+⎡
+⎢⎢⎢⎢⎢⎢⎢⎢⎣
+dH
+2,0
+(
+Σ0d2,π
+)H
+(
+Σ1d2,π
+)H
+...(
+ΣM 2 −2d2,π
+)H
+⎤
+⎥⎥⎥⎥⎥⎥⎥⎥⎦
+(64)
+and i is the ﬁrst column of IM 2 . Therefore, the cardioid of order
+M2 − 1 at the second ULA is
+h2,C = D−H
+2,π i. (65)
+For the ﬁrst ﬁlter, we may take the DS beamformer, i.e.,
+h1,DS = d1,0
+M1
+, (66)
+which maximizes the WNG. As a result, the (M2 − 1) th-order
+KP cardioid is
+hC = h1,DS ⊗ h2,C. (67)
+Figure 2 shows plots of the DFs and WNGs of the traditional
+third-order cardioid, h2,C , and the third-order KP cardioid, hC ,
+as a function of frequency for δ =1 cm, M2 =4 , and several
+values of M1 . We observe that the DFs and WNGs of the KP
+cardioids are higher than those of the traditional cardioid. Fur-
+thermore, the DFs and WNGs of the KP cardioids increase as
+we increase the numbers of microphones in ULA 1.
+Fig. 3. Performances of different types of third-order cardioids as a function
+of frequency for δ =1 cm: traditional cardioid with M =4 (solid line with
+circles), MN cardioid with M =1 6 (dashed line with asterisks), KP cardioid
+with M1 = M2 =4 (dotted line with squares), and KP cardioid with M1 =2
+and M2 =8 (dash-dot line with triangles). (a) DF. (b) WNG.
+Fig. 4. Beampatterns of different types of third-order cardioids: (a) traditional
+cardioid with M =4 , (b) MN cardioid with M =1 6 , (c) KP cardioid with
+M1 = M2 =4 , and (d) KP cardioid with M1 =2 and M2 =8 . Conditions:
+δ =1 cm and f =3 kHz.
+Clearly, the increase in both the DF and WNG is achieved at
+the expense of increasing M , the total number of microphones
+in the array. Therefore, we also compare the KP cardioids to
+the minimum-norm (MN) cardioid [8], [11], which employs
+M microphones ( M>M 2 ) to design an (M2 − 1) th-order
+cardioid. Figure 3 shows plots of the DFs and WNGs of the
+third-order MN cardioid with M =1 6, third-order KP cardioid
+with M1 = M2 =4 , and third-order KP cardioid with M1 =2
+and M2 =8 . Figure 4 displays the patterns of the corresponding
+third-order cardioids for f =3 kHz. We observe that the MN
+cardioid achieves the maximum WNG, but for low frequencies
+its DF drops even below the traditional cardioid (which employs
+
+898 IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 27, NO. 5, MA Y 2019
+Fig. 5. Performance of the third-order robust KP cardioid, hC,ϵ2 , as a function
+of frequency for δ =1 cm, M1 =4 , M2 =4 , and several values of ϵ2 : ϵ2 =
+0.001 (solid line with circles), ϵ2 =0 .01 (dashed line with asterisks), ϵ2 =0 .1
+(dotted line with squares), and ϵ2 =1 (dash-dot line with triangles). (a) DF.
+(b) WNG.
+only M =4 microphones). The KP cardioids, on the other hand,
+provide a more moderate increase in the WNG compared with
+the traditional cardioid, while also increasing the DF. Compared
+with the MN cardioid, the KP cardioids enable more ﬂexibility
+in compromising the trade-off between WNG and DF.
+To get a more robust beamformer, with higher WNG, we may
+optimize
+min
+h2
+hH
+2
+(
+D′
+2,π D′H
+2,π + ϵ2IM 2
+)
+h2 subject to CH
+2,π h2 = ic,
+(68)
+where
+D′
+2,π =
+[
+Σ1d2,π Σ2d2,π ··· ΣM 2 −2d2,π
+]
+(69)
+is a matrix of size M2 × (M2 − 2), ϵ2 ≥ 0 is the regularization
+parameter,
+CH
+2,π =
+[
+dH
+2,0
+dH
+2,π
+]
+(70)
+is the constraint matrix of size 2 × M2 , and
+ic =
+[
+10
+]T
+(71)
+is a vector of length 2. We see that with C2,π , the two main
+constraints are fulﬁlled, i.e., the distortionless one and a null in
+the direction π. We ﬁnd that the optimal ﬁlter is
+h2,C,ϵ2 =
+(
+D′
+2,π D′H
+2,π + ϵ2IM 2
+) −1
+C2,π
+×
+[
+CH
+2,π
+(
+D′
+2,π D′H
+2,π + ϵ2IM 2
+) −1
+C2,π
+] −1
+ic. (72)
+Therefore, the robust KP cardioid is
+hC,ϵ2 = h1,DS ⊗ h2,C,ϵ2 . (73)
+Figure 5 shows plots of the DFs and WNGs of the third-
+order robust KP cardioid, hC,ϵ2 , as a function of frequency
+for δ =1 cm, M1 =4 , M2 =4 , and several values of ϵ2 .W e
+observe that the WNG increases as we increase ϵ2 ,b u tt h eD F
+decreases.
+B. Dipole
+The design of the KP dipole is a bit different from the design
+of the KP cardioid as explained below.
+The dipole of order M2 − 1 has also a unique null of multi-
+plicityM2 − 1 but in the directionπ/2. Since we have a null with
+maximum multiplicity, theith (i =0 , 1,...,M 2 − 2) derivative
+of the beampattern of h2 with respect to cos θ is equal to 0 at
+cos(π/2) = 0 , i.e.,
+di B2,θ (h2 )
+d cosi θ
+⏐⏐⏐⏐
+cos θ =0
+= B[i]
+2,π/ 2 (h2 )=0 , (74)
+with
+B[0]
+2,π/ 2 (h2 )= B2,π/ 2 (h2 ) .
+We get
+B[i]
+2,π/ 2 (h2 )= ( jωδ/c)i (
+Σid2,π/ 2
+)H
+h2, (75)
+where Σ is deﬁned in (61). Combining the distortionless con-
+straint with the M2 − 1 constraints from (74), we have
+DH
+2,π/ 2h2 = i, (76)
+where
+DH
+2,π/ 2 =
+⎡
+⎢⎢⎢⎢⎢⎢⎢⎣
+dH
+2,0
+(
+Σ0d2,π/ 2
+)H
+(
+Σ1d2,π/ 2
+)H
+...(
+ΣM 2 −2d2,π/ 2
+)H
+⎤
+⎥⎥⎥⎥⎥⎥⎥⎦
+. (77)
+As a result, the dipole of order M2 − 1 at the second ULA is
+h2,D = D−H
+2,π/ 2i. (78)
+Another feature of the dipole is that it has a 1 in the direction
+π. To ensure that the global beampattern has als oa1a t π,w e
+must add this constraint in the design of the ﬁrst ﬁlter. We deduce
+that the constraint equation for h1 is
+CH
+1,π h1 =
+[ 1
+1
+]
+, (79)
+where
+CH
+1,π =
+[ dH
+1,0
+dH
+1,π
+]
+(80)
+is the constraint matrix of size 2 × M1 . Since we want to max-
+imize the WNG of h1 subject to (79), we ﬁnd the MN beam-
+former:
+h1,MN = C1,π
+(
+CH
+1,π C1,π
+) −1
+[
+1
+1
+]
+. (81)
+Now, that the two ﬁlters are derived, we deduce that the robust
+(M2 − 1) th-order KP dipole is
+hD = h1,MN ⊗ h2,D . (82)
+
+COHEN et al.: DIFFERENTIAL KRONECKER PRODUCT BEAMFORMING 899
+Fig. 6. Performances of different types of robust second-order dipoles as a
+function of frequency for δ =1 cm: traditional dipole, h2, D,ϵ2 , with M =3
+(solid line with circles), MN dipole with M =1 2 (dashed line with asterisks),
+KP dipole, hD,ϵ2 , with M1 =4 and M2 =3 (dotted line with squares), and
+KP dipole with M1 =2 and M2 =6 (dash-dot line with triangles). (a) DF.
+(b) WNG.
+As we did for the cardioid, we can derive a robust KP dipole:
+hD,ϵ2 = h1,MN ⊗ h2,D,ϵ2 , (83)
+where
+h2,D,ϵ2 =
+(
+D′
+2,π/ 2D′H
+2,π/ 2 + ϵ2IM 2
+) −1
+C2,π/ 2
+×
+[
+CH
+2,π/ 2
+(
+D′
+2,π/ 2D′H
+2,π/ 2 + ϵ2IM 2
+) −1
+C2,π/ 2
+] −1
+ic,
+(84)
+with
+D′
+2,π/ 2 =
+[
+Σ1d2,π/ 2 Σ2d2,π/ 2 ··· ΣM 2 −2d2,π/ 2
+]
+(85)
+and
+CH
+2,π/ 2 =
+[ dH
+2,0
+dH
+2,π/ 2
+]
+. (86)
+Figure 6 shows plots of the DFs and WNGs of different types
+of robust second-order dipoles as a function of frequency forδ =
+1 cm and ϵ2 =1 0−8 , including the traditional dipole, h2,D,ϵ2 ,
+with M =3 , MN dipole with M =1 2 [8], [11], KP dipole,
+hD,ϵ2 , with M1 =4 and M2 =3 , and KP dipole with M1 =2
+and M2 =6 . Figure 7 displays the patterns of the corresponding
+robust second-order dipoles for f =3 kHz. We observe that
+the MN dipole achieves the maximum WNG, but its DF for
+low frequencies is the worst. Compared with the traditional
+dipole, the KP dipoles provide a more moderate increase in
+the WNG than the MN dipole, and different variations of the
+DFs as a function of frequency, which may be useful in some
+applications.
+Fig. 7. Beampatterns of different types of robust second-order dipoles: (a) tra-
+ditional dipole with M =3 , (b) MN dipole with M =1 2 , (c) KP dipole with
+M1 =4 and M2 =3 , and (d) KP dipole with M1 =2 and M2 =6 . Condi-
+tions: δ =1 cm and f =3 kHz.
+C. Hypercardioid
+The hypercardioid is usually obtained by maximizing D (h)
+in (30). But this DF cannot be maximized directly and an itera-
+tive algorithm is needed.
+We start by taking the hypercardioid of order M2 − 1 at the
+second ULA, i.e.,
+h(0)
+2 = Γ−1
+2 d2,0
+dH
+2,0Γ−1
+2 d2,0
+. (87)
+Substituting h(0)
+2 into (39), we get
+Γh(0)
+2
+=
+(
+IM 1 ⊗ h(0)
+2
+) H
+Γ
+(
+IM 1 ⊗ h(0)
+2
+)
+. (88)
+Now, substituting this expression into the DF in (38), we obtain
+at iteration 1:
+D
+(
+h(1)
+1 |h(0)
+2
+)
+=
+⏐⏐⏐⏐
+(
+h(1)
+1
+) H
+d1,0
+⏐⏐⏐⏐
+2
+(
+h(1)
+1
+) H
+Γh(0)
+2
+h(1)
+1
+. (89)
+The maximization of D
+(
+h(1)
+1 |h(0)
+2
+)
+with respect to h(1)
+1 gives
+h(1)
+1 =
+Γ−1
+h(0)
+2
+d1,0
+dH
+1,0Γ−1
+h(0)
+2
+d1,0
+. (90)
+Using h(1)
+1 in (41), we get
+Γh(1)
+1
+=
+(
+h(1)
+1 ⊗ IM 2
+) H
+Γ
+(
+h(1)
+1 ⊗ IM 2
+)
+. (91)
+
+900 IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 27, NO. 5, MA Y 2019
+Fig. 8. Performance of the KP hypercardioid, h(n )
+H , as a function of frequency
+for M1 = M2 =3 , δ =5 mm, and several values of n: n =1 (solid line with
+circles), n =2 (dashed line with asterisks), n =3 (dotted line with squares),
+and n =1 0 (dash-dot line with triangles). (a) DF. (b) WNG.
+As a result, the DF in (40) is
+D
+(
+h(1)
+2 |h(1)
+1
+)
+=
+⏐⏐⏐⏐
+(
+h(1)
+2
+) H
+d2,0
+⏐⏐⏐⏐
+2
+(
+h(1)
+2
+) H
+Γh(1)
+1
+h(1)
+2
+, (92)
+whose maximization with respect to h(1)
+2 gives
+h(1)
+2 =
+Γ−1
+h(1)
+1
+d2,0
+dH
+2,0Γ−1
+h(1)
+1
+d2,0
+. (93)
+Continuing the iterations up to the iteration n, we easily get
+for the ﬁrst ﬁlter:
+h(n )
+1 =
+Γ−1
+h(n −1)
+2
+d1,0
+dH
+1,0Γ−1
+h(n −1)
+2
+d1,0
+, (94)
+with
+Γh(n −1)
+2
+=
+(
+IM 1 ⊗ h(n −1)
+2
+) H
+Γ
+(
+IM 1 ⊗ h(n −1)
+2
+)
+, (95)
+and for the second ﬁlter:
+h(n )
+2 =
+Γ−1
+h(n )
+1
+d2,0
+dH
+2,0Γ−1
+h(n )
+1
+d2,0
+, (96)
+with
+Γh(n )
+1
+=
+(
+h(n )
+1 ⊗ IM 2
+) H
+Γ
+(
+h(n )
+1 ⊗ IM 2
+)
+. (97)
+Finally, we deduce that the KP hypercardioid is at iteration n:
+h(n )
+H = h(n )
+1 ⊗ h(n )
+2 . (98)
+Figure 8 shows plots of the DFs and WNGs of the KP hyper-
+cardioid, h(n )
+H , as a function of frequency for M1 = M2 =3 ,
+δ =5 mm, and several values of n. We observe that the DF of
+the KP hypercardioid increases at each iteration, and roughly
+converges after ﬁve iterations, while the WNG decreases at each
+iteration.
+D. Supercardioid
+The supercardioid is obtained by maximizing the FBR. To
+fully maximize the FBR in (42), we need to derive an iterative
+algorithm.
+At iteration 0, we may take the supercardioid of orderM2 − 1
+at the second ULA, i.e.,
+h(0)
+2 = t2
+dH
+2,0t2
+, (99)
+where t2 is the eigenvector corresponding to the maximum
+eigenvalue of the matrix Γ−1
+b,2Γf,2 . Substituting h(0)
+2 into (54)
+and (55), we get
+Γf,h(0)
+2
+=
+(
+IM 1 ⊗ h(0)
+2
+) H
+Γf
+(
+IM 1 ⊗ h(0)
+2
+)
+, (100)
+Γb,h(0)
+2
+=
+(
+IM 1 ⊗ h(0)
+2
+) H
+Γb
+(
+IM 1 ⊗ h(0)
+2
+)
+. (101)
+Now, plugging these expressions into the FBR in (53), we obtain
+at iteration 1:
+F
+(
+h(1)
+1 |h(0)
+2
+)
+=
+(
+h(1)
+1
+) H
+Γf,h(0)
+2
+h(1)
+1
+(
+h(1)
+1
+) H
+Γb,h(0)
+2
+h(1)
+1
+. (102)
+The maximization of F
+(
+h(1)
+1 |h(0)
+2
+)
+with respect of h(1)
+1 leads
+to
+h(1)
+1 = t(0)
+1
+dH
+1,0t(0)
+1
+, (103)
+where t(0)
+1 is the eigenvector corresponding to the maximum
+eigenvalue of the matrix Γ−1
+b,h(0)
+2
+Γf,h(0)
+2
+.U s i n gh(1)
+1 in (57) and
+(58), we get
+Γf,h(1)
+1
+=
+(
+h(1)
+1 ⊗ IM 2
+) H
+Γf
+(
+h(1)
+1 ⊗ IM 2
+)
+, (104)
+Γb,h(1)
+1
+=
+(
+h(1)
+1 ⊗ IM 2
+) H
+Γb
+(
+h(1)
+1 ⊗ IM 2
+)
+. (105)
+As a result, the FBR in (56) is
+F
+(
+h(1)
+2 |h(1)
+1
+)
+=
+(
+h(1)
+2
+) H
+Γf,h(1)
+1
+h(1)
+2
+(
+h(1)
+2
+) H
+Γb,h(1)
+1
+h(1)
+2
+, (106)
+whose maximization with respect to h(1)
+2 gives
+h(1)
+2 = t(1)
+2
+dH
+2,0t(1)
+2
+, (107)
+where t(1)
+2 is the eigenvector corresponding to the maximum
+eigenvalue of the matrix Γ−1
+b,h(1)
+1
+Γf,h(1)
+1
+.
+
+COHEN et al.: DIFFERENTIAL KRONECKER PRODUCT BEAMFORMING 901
+Fig. 9. Performance of the KP supercardioid, h(n )
+S , as a function of frequency
+for M1 = M2 =2 , δ =5 mm, and several values of n: n =1 (solid line with
+circles), n =2 (dashed line with asterisks), n =3 (dotted line with squares),
+and n =1 0 (dash-dot line with triangles). (a) DF. (b) WNG. (c) FBR.
+Continuing to iterate up to iteration n, we easily get for the
+ﬁrst ﬁlter:
+h(n )
+1 = t(n −1)
+1
+dH
+1,0t(n −1)
+1
+, (108)
+where t(n −1)
+1 is the eigenvector corresponding to the maximum
+eigenvalue of the matrix Γ−1
+b,h(n −1)
+2
+Γf,h(n −1)
+2
+, with
+Γf,h(n −1)
+2
+=
+(
+IM 1 ⊗ h(n −1)
+2
+) H
+Γf
+(
+IM 1 ⊗ h(n −1)
+2
+)
+, (109)
+Γb,h(n −1)
+2
+=
+(
+IM 1 ⊗ h(n −1)
+2
+) H
+Γb
+(
+IM 1 ⊗ h(n −1)
+2
+)
+, (110)
+and for the second ﬁlter:
+h(n )
+2 = t(n )
+2
+dH
+2,0t(n )
+2
+, (111)
+where t(n )
+2 is the eigenvector corresponding to the maximum
+eigenvalue of the matrix Γ−1
+b,h(n )
+1
+Γf,h(n )
+1
+, with
+Γf,h(n )
+1
+=
+(
+h(n )
+1 ⊗ IM 2
+) H
+Γf
+(
+h(n )
+1 ⊗ IM 2
+)
+, (112)
+Γb,h(n )
+1
+=
+(
+h(n )
+1 ⊗ IM 2
+) H
+Γb
+(
+h(n )
+1 ⊗ IM 2
+)
+. (113)
+Finally, we deduce that the KP supercardioid is at iteration n:
+h(n )
+S = h(n )
+1 ⊗ h(n )
+2 . (114)
+Figure 9 shows plots of the DFs, WNGs, and FBRs of the KP
+supercardioid, h(n )
+S , as a function of frequency for M1 = M2 =
+2, δ =5 mm, and several values of n. We observe that the FBR
+of the KP supercardioid increases at each iteration, and roughly
+converges after three iterations, while the DF also increases at
+each iteration and the WNG remains almost the same.
+VI. C ONCLUSION
+We have introduced differential Kronecker product beam-
+forming based on Kronecker product decompositions of a
+physical array into two virtual arrays. We deﬁned performance
+measures by using Kronecker product ﬁlters, and showed how
+to derive some useful examples of differential beamformers,
+namely the cardioid, dipole, hypercardioid, and supercardioid,
+using the Kronecker product formulation. We showed that the
+beampattern and the WNG of the global array can be expressed
+as the product of the counterparts of the two virtual arrays; but
+the DF and FBR cannot be factorized into a similar form and
+as a result these two measures cannot be maximized directly.
+Accordingly, we developed iterative algorithms for their maxi-
+mization. The proposed approach enables much more ﬂexibility
+in the design of differential beamformers, compared to the
+well-known and studied conventional approach. Furthermore,
+the proposed approach can be extended to other array structures
+and other beamformers, depending on the application at hand.
+ACKNOWLEDGMENT
+The authors would like to thank the associate editor and the
+anonymous reviewers for their constructive comments and use-
+ful suggestions.
+REFERENCES
+[1] F. P . Ribeiro and V . H. Nascimento, “Fast transforms for acoustic imaging–
+Part I: Theory,”IEEE Trans. Image Process., vol. 20, no. 8, pp. 2229–2240,
+Aug. 2011.
+[2] V . H. Nascimento, M. C. Silva, and B. S. Masiero, “Acoustic image esti-
+mation using fast transforms,” in Proc. IEEE Sensor Array Multichannel
+Signal Process., Rio de Janerio, Brazil, Jul. 2016, pp. 1–5.
+[3] L. N. Ribeiro, A. L. F. de Almeida, and J. C. M. Mota, “Identiﬁcation
+of separable systems using trilinear ﬁltering,” in Proc. IEEE 6th Int.
+Workshop Comput. Adv. Multi-Sensor Adapt. Process. , Cancun, Mexico,
+Dec. 2015, pp. 189–192.
+[4] C. Paleologu, J. Benesty, and S. Ciochin ˘a, “Linear system identiﬁcation
+based on a Kronecker product decomposition,” IEEE/ACM Trans. Audio,
+Speech, Lang. Process., vol. 26, no. 10, pp. 1793–1808, Oct. 2018.
+[5] Y . I. Abramovich, G. J. Frazer, and B. A. Johnson, “Iterative adaptive Kro-
+necker MIMO radar beamformer: Description and convergence analysis,”
+IEEE Trans. Signal Process., vol. 58, no. 7, pp. 33 681–3691, Jul. 2010.
+[6] L. N. Ribeiro, A. L. F. de Almeida, and J. C. M. Mota, “Tensor beam-
+forming for multilinear translation invariant arrays,” in Proc. IEEE Int.
+Conf. Acoust., Speech Signal Process. , Shanghai, China, Mar. 2016,
+pp. 2966–2970.
+[7] G. W. Elko, “Superdirectional microphone arrays,” in Acoustic Signal
+Processing for Telecommunication, S. L. Gay and J. Benesty, Eds. Boston,
+MA, USA: Kluwer, 2000, pp. 181–237, ch. 10.
+[8] J. Benesty and J. Chen, Study and Design of Differential Microphone
+Arrays. Berlin, Germany: Springer-V erlag, 2012.
+[9] J. Benesty, J. Chen, and I. Cohen, Design of Circular Differential Micro-
+phone Arrays. Switzerland: Springer-V erlag, 2015.
+[10] B. Masiero and V . H. Nascimento, “Revisiting the Kronecker array trans-
+form,” IEEE Signal Process. Lett., vol. 24, no. 5, pp. 525–529, May 2017.
+[11] J. Benesty, I. Cohen, and J. Chen, Fundamentals of Signal Enhancement
+and Array Signal Processing. Singapore: Wiley–IEEE Press, 2018.
+[12] D. H. Johnson and D. E. Dudgeon, Array Signal Processing: Concepts
+and Techniques (Signal Processing Series). Englewood Cliffs, NJ, USA:
+Prentice-Hall, 1993.
+
+902 IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 27, NO. 5, MA Y 2019
+[13] G. W. Elko and J. Meyer, “Microphone arrays,” in Springer Handbook of
+Speech Processing, J. Benesty, M. M. Sondhi, and Y . Huang, Eds. Berlin,
+Germany: Springer-V erlag, 2008, pp. 1021–1041, ch. 50.
+[14] J. Benesty, J. Chen, and Y . Huang, Microphone Array Signal Processing.
+Berlin, Germany: Springer-V erlag, 2008.
+[15] R. N. Marshall and W. R. Harry, “A new microphone providing uni-
+form directivity over an extended frequency range,” J. Acoust. Soc. Amer .,
+vol. 12, pp. 481–497, 1941.
+Israel Cohen (M’01–SM’03–F’15) received the
+B.Sc. (summa cum laude ), M.Sc., and Ph.D. degrees
+in electrical engineering from the Technion–Israel
+Institute of Technology, Haifa, Israel, in 1990, 1993,
+and 1998, respectively.
+He is currently a Professor in electrical engineer-
+ing at the Technion–Israel Institute of Technology. He
+is also a Visiting Professor at Northwestern Polytech-
+nical University, Xian, China. From 1990 to 1998,
+he was a Research Scientist with RAFAEL Research
+Laboratories, Haifa, Israel Ministry of Defense. From
+1998 to 2001, he was a Postdoctoral Research Associate with the Computer Sci-
+ence Department, Y ale University, New Haven, CT, USA. In 2001, he joined
+the Electrical Engineering Department, Technion. He is a co-editor of the Mul-
+tichannel Speech Processing Section of the Springer Handbook of Speech Pro-
+cessing (Springer, 2008), and the coauthor of Fundamentals of Signal Enhance-
+ment and Array Signal Processing (Wiley-IEEE Press, 2018). His research
+interests are array processing, statistical signal processing, analysis and mod-
+eling of acoustic signals, speech enhancement, noise estimation, microphone
+arrays, source localization, blind source separation, system identiﬁcation, and
+adaptive ﬁltering.
+Dr. Cohen is as Associate Member of the IEEE Audio and Acoustic Signal
+Processing Technical Committee and the Distinguished Lecturer of the IEEE
+Signal Processing Society. He was an Associate Editor for the IEEE T RANS-
+ACTIONS ON AUDIO,S PEECH, AND LANGUAGE PROCESSING and IEEE S IGNAL
+PROCESSING LETTERS and a Member of the IEEE Audio and Acoustic Signal
+Processing Technical Committee and the IEEE Speech and Language Process-
+ing Technical Committee. He was the recipient of the Norman Seiden Prize
+for Academic Excellence (2017), the SPS Signal Processing Letters Best Paper
+Award (2014), the Alexander Goldberg Prize for Excellence in Research (2010),
+and the Muriel and David Jacknow Award for Excellence in Teaching (2009).
+Jacob Benesty received the Master degree in mi-
+crowaves from Pierre & Marie Curie University,
+Paris, France, in 1987, and the Ph.D. degree in con-
+trol and signal processing from Orsay University,
+Orsay, France, in April 1991. During the Ph.D. (from
+November 1989 to April 1991), he worked on adap-
+tive ﬁlters and fast algorithms at the Centre National
+d’Etudes des Telecomunications, Paris, France. From
+January 1994 to July 1995, he worked at Telecom
+Paris University on multichannel adaptive ﬁlters and
+acoustic echo cancelation. From October 1995 to
+May 2003, he was ﬁrst a Consultant and then a Member of the Technical Staff at
+Bell Laboratories, Murray Hill, NJ, USA. In May 2003, he joined the University
+of Quebec, INRS-EMT, in Montreal, Quebec, Canada, as a Professor. He is also
+a Visiting Professor at the Technion, Haifa, Israel, an Adjunct Professor at Aal-
+borg University, Denmark, and a Guest Professor at Northwestern Polytechnical
+University, Xi’an, China. He is the inventor of many important technologies. In
+particular, he was the lead researcher at Bell Labs who conceived and designed
+the world-ﬁrst real-time hands-free full-duplex stereophonic teleconferencing
+system. Also, he conceived and designed the world-ﬁrst PC-based multi-party
+hands-free full-duplex stereo conferencing system over IP networks. He is the
+editor of the book series Springer Topics in Signal Processing. He has co-
+authored and co-edited/co-authored numerous books in the area of acoustic
+signal processing. His research interests are in signal processing, acoustic sig-
+nal processing, and multimedia communications.
+Dr. Benesty was the General Chair and Technical Chair for many interna-
+tional conferences and a member of several IEEE technical committees. Four of
+his journal papers were awarded by the IEEE Signal processing Society and in
+2010 he was the recipient of the Gheorghe Cartianu Award from the Romanian
+Academy.
+Jingdong Chen (M’99–SM’09) received the Ph.D.
+degree in pattern recognition and intelligence con-
+trol from the Chinese Academy of Sciences, Beijing,
+China, in 1998.
+From 1998 to 1999, he was with A TR Inter-
+preting Telecommunications Research Laboratories,
+Kyoto, Japan, where he conducted research on speech
+synthesis, speech analysis, as well as objective
+measurements for evaluating speech synthesis. He
+then joined the Grifﬁth University, Brisbane, QLD,
+Australia, where he engaged in research on robust
+speech recognition and signal processing. From 2000 to 2001, he worked at
+A TR Spoken Language Translation Research Laboratories on robust speech
+recognition and speech enhancement. From 2001 to 2009, he was a Member of
+Technical Staff at Bell Laboratories, Murray Hill, NJ, USA, working on acous-
+tic signal processing for telecommunications. He subsequently joined WeV oice,
+Inc., in New Jersey, serving as the Chief Scientist. He is currently a Professor at
+the Northwestern Polytechnical University, Xi’an, China. His research interests
+include acoustic signal processing, adaptive signal processing, speech enhance-
+ment, adaptive noise/echo control, microphone array signal processing, signal
+separation, and speech communication.
+Dr. Chen was an Associate Editor for the IEEE T RANSACTIONS ON AUDIO,
+SPEECH, AND LANGUAGE PROCESSING from 2008 to 2014 and as a Technical
+Committee (TC) member of the IEEE Signal Processing Society (SPS) TC on
+Audio and Electroacoustics from 2007 to 2009. He is currently a Member of
+the IEEE SPS TC on Audio and Acoustic Signal Processing, and a member of
+the editorial advisory board of the Open Signal Processing Journal. He was the
+General Co-Chair of ACM WUWNET 2018 and IW AENC 2016, the Technical
+Program Chair of IEEE TENCON 2013, the Technical Program Co-Chair of
+IEEE W ASPAA 2009, IEEE ChinaSIP 2014, IEEE ICSPCC 2014, and IEEE IC-
+SPCC 2015, and helped in organizing many other conferences. He co-authored
+12 monograph books includingFundamentals of Signal Enhancement and Array
+Signal Processing (Wiley, 2017), Design of Circular Differential Microphone
+Arrays (Springer, 2015), Study and Design of Differential Microphone Arrays
+(Springer, 2013), Noise Reduction in Speech Processing (Springer, 2009), Mi-
+crophone Array Signal Processing(Springer, 2008), and Acoustic MIMO Signal
+Processing (Springer, 2006). He was the recipient of the 2008 Best Paper Award
+from the IEEE Signal Processing Society (with Benesty, Huang, and Doclo), the
+Best Paper Award from the IEEE Workshop on Applications of Signal Process-
+ing to Audio and Acoustics in 2011 (with Benesty), the Bell Labs Role Model
+Teamwork Award twice, respectively, in 2009 and 2007, the NASA Tech Brief
+Award twice, respectively, in 2010 and 2009, and the Y oung Author Best Paper
+Award at the 5th National Conference on Man-Machine Speech Communica-
+tions in 1998. He is the co-author of a paper for which C. Pan received the IEEE
+R10 (Asia-Paciﬁc Region) Distinguished Student Paper Award (First Prize) in
+2016. He was also the recipient of the Japan Trust International Research Grant
+from the Japan Key Technology Center in 1998 and the “Distinguished Y oung
+Scientists Fund” from the National Natural Science Foundation of China in
+2014.

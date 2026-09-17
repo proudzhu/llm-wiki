@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-14
-updated: 2026-09-14
+updated: 2026-09-17
 sources:
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
+  - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
 tags:
   - beamforming
   - microphone-arrays
@@ -47,7 +48,7 @@ Other robust design families include subspace-based designs, Krylov-subspace for
 
 ## Efficiency Problem at Scale
 
-As $M$ grows, an RSD beamformer stores $M$ complex parameters per frequency bin ($(K/2{+}1)M$ for a $K$-point STFT) and requires $M \times M$ matrix inversions — parameter redundancy that limits embedded and large-array deployments. Low-rank approaches such as [[concepts/kronecker-product-beamforming|Kronecker product beamforming]] address this by decomposing the long filter into short filters.
+As $M$ grows, an RSD beamformer stores $M$ complex parameters per frequency bin ($(K/2{+}1)M$ for a $K$-point STFT) and requires $M \times M$ matrix inversions — parameter redundancy that limits embedded and large-array deployments. Low-rank approaches such as [[concepts/kronecker-product-beamforming|Kronecker product beamforming]] address this by decomposing the long filter into short filters. The line began with differential Kronecker product beamforming ([[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019]]), whose alternating maximization of the (non-factorizable) directivity factor over two virtual-array subfilters is the precursor of later alternating-iteration Kronecker superdirective algorithms (Zhu et al. 2025).
 
 ## Relation to Other Fixed Beamformers
 
@@ -66,4 +67,5 @@ Superdirective designs belong to the [[concepts/fixed-beamformer|fixed beamforme
 
 ## Related Sources
 
+- [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]] — alternating DF/FBR maximization over Kronecker subfilters
 - [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]]

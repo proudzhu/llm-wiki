@@ -5404,3 +5404,15 @@ Ingested Pandey & Azcarreta 2025 (TinyGRU). Created source page pandey-2025-ultr
 - **Summary**: First Kronecker product beamforming framework applicable to arbitrary array geometries — the beamforming filter is represented as a sum of rank-P Kronecker products of short subfilters, and the Kronecker MVDR (KMVDR) beamformer is derived via alternating closed-form MVDR-like subfilter updates; simulations show KMVDR outperforms conventional MVDR in output SINR under limited snapshots and dynamic interference (best at P=1).
 - **Pages created**: `wiki/sources/wang-2021-kronecker-adaptive-beamforming.md`; `wiki/concepts/kmvdr-beamformer.md`; `wiki/entities/xuehan-wang.md`
 - **Pages updated**: `wiki/concepts/kronecker-product-beamforming.md` (arbitrary-geometry lineage corrected: credited to Wang et al. 2021, not Pei et al. 2025; KMVDR links added); `wiki/concepts/mvdr-beamformer.md` (KMVDR section); `wiki/sources/zhu-2025-kronecker-superdirective-beamforming.md` (predecessor cross-reference); `wiki/synthesis/multi-channel-speech-enhancement.md` (structural-regularization axis added to Insight 2, Sources table row, Takeaway 7 and geometry-robustness open question refined); entity pages for Huang, Cohen, Benesty, Chen (appended)
+
+---
+
+## [2026-09-17] ingest | Differential Kronecker Product Beamforming (Cohen, Benesty & Chen 2019)
+
+- **Source**: `raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt` (Zotero: QVUNYXL6)
+- **Authors**: Israel Cohen, Jacob Benesty, Jingdong Chen
+- **Published**: IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 27, no. 5, pp. 892–902, May 2019
+- **DOI**: 10.1109/TASLP.2019.2895241
+- **Summary**: Introduces differential Kronecker product beamformers — for arrays with $M = M_1 M_2$ microphones whose steering vector factorizes into two virtual-array steering vectors, the differential beamformer decomposes as $\mathbf{h} = \mathbf{h}_1 \otimes \mathbf{h}_2$ ($M_1 + M_2$ coefficients instead of $M_1 M_2$). Beampattern and WNG factorize across the virtual arrays; DF and FBR do not, leading to alternating iterations for the KP hypercardioid and supercardioid alongside closed-form KP cardioid and dipole designs.
+- **Pages created**: `wiki/sources/cohen-2019-differential-kronecker-beamforming.md`
+- **Pages updated**: `wiki/entities/israel-cohen.md`, `wiki/entities/jacob-benesty.md`, `wiki/entities/jingdong-chen.md` (appended contribution); `wiki/concepts/kronecker-product-beamforming.md` (original formulation expanded), `wiki/concepts/differential-microphone-array.md` (KP differential beamforming section), `wiki/concepts/white-noise-gain.md` (WNG factorization), `wiki/concepts/superdirective-beamforming.md` (lineage origin), `wiki/concepts/directivity-pattern.md` (KP beampattern factorization), `wiki/concepts/fixed-beamformer.md` (lineage note); `wiki/synthesis/multi-channel-speech-enhancement.md` (Kronecker line origin in Insight 2); `wiki/index.md`, `wiki/sources/index.md` (new row + statistics)

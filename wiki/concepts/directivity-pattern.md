@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-14
+updated: 2026-09-17
 sources:
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
   - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
+  - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
 tags:
   - directivity-pattern
   - spatial-audio
@@ -47,6 +48,14 @@ $$\Lambda(\theta,\phi)=\left(0.5+0.5(\sin\phi\sin\phi_s\cos(\theta-\theta_s)+\co
 
 where $(\theta_s,\phi_s)$ specifies the target look direction.
 
+## Kronecker Product Beampatterns
+
+For a Kronecker filter $\mathbf{h} = \mathbf{h}_1 \otimes \mathbf{h}_2$ over two virtual arrays, the global pattern factorizes (Cohen, Benesty & Chen 2019):
+
+$$\mathcal{B}_\theta(\mathbf{h}) = \mathcal{B}_{1,\theta}(\mathbf{h}_1) \times \mathcal{B}_{2,\theta}(\mathbf{h}_2)$$
+
+As a polynomial in two variables, it has at most $M_1 + M_2 - 2$ distinct nulls, versus $M_1 M_2 - 1$ for a conventional filter of the same length — a structural restriction that is also the source of the design's robustness. The first-order pattern families (cardioid, dipole, hypercardioid, supercardioid) each have Kronecker product realizations; see [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019]] and [[concepts/kronecker-product-beamforming|Kronecker Product Beamforming]].
+
 ## Related Concepts
 
 - [[concepts/virtual-directional-microphone|Virtual Directional Microphone]]
@@ -56,6 +65,7 @@ where $(\theta_s,\phi_s)$ specifies the target look direction.
 
 ## Related Sources
 
+- [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]] — beampattern factorization under Kronecker filters
 - [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — R-th order DMA pattern formulation and neural realization
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
 - [[sources/huang-2025-steerable-neural-directional-filtering|Huang, Halimeh, Chetupalli, Thiergart & Habets 2025: Steerable Neural Directional Filtering]]

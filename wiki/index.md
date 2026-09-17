@@ -1349,6 +1349,7 @@
 | [[sources/luo-2022-band-split-rnn\|Luo & Yu 2022]] | Band-split RNN (BSRNN) is a frequency-domain music source separation model that explicitly splits the mixture spectrogram into subbands with instrument-specific bandwidths and performs interleaved band-level and sequence-level modeling with residual BLSTMs. | 2026-09-16 |
 | [[sources/wen-2025-neural-directed-speech-enhancement\|Wen, Zhou, Xi, Li, Gong & Yu 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] | CDUNet — a 74.4K-param causal U-Net steered by triple steering vectors with a runtime enhancement width for directed dual-microphone speech enhancement | 2026-09-16 |
 | [[sources/wang-2021-kronecker-adaptive-beamforming\|Wang, Huang, Cohen, Benesty & Chen 2021]] | First Kronecker product beamforming framework for arbitrary array geometries: the filter is a sum of rank-P Kronecker products of short subfilters, solved by alternating closed-form MVDR updates (KMVDR), beating conventional MVDR in output SINR under limited snapshots and dynamic interference | 2026-09-17 |
+| [[sources/cohen-2019-differential-kronecker-beamforming\|Cohen, Benesty & Chen 2019]] | The original Kronecker product beamforming formulation: decomposes differential beamformers into two virtual-array subfilters (KP cardioid/dipole/hypercardioid/supercardioid) for more flexible DF–WNG tradeoffs. | 2026-09-17 |
 
 ---
 
@@ -1402,10 +1403,10 @@
 
 ## Statistics
 
-- **Total pages**: 1351
+- **Total pages**: 1352
 - **Entities**: 582
 - **Concepts**: 520
-- **Sources**: 219
+- **Sources**: 220
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-09-17

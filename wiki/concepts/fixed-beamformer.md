@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-14
+updated: 2026-09-17
 sources:
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
   - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
+  - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
 tags:
   - fixed-beamformer
   - spatial-audio
@@ -35,7 +36,7 @@ Empirically, a least-squares FBF designed for a minimum WNG of −15 dB on a 4-m
 
 ## Low-Rank Superdirective FBFs
 
-For large arrays, the parameter count of a fixed beamformer scales with $M$ per frequency bin. [[concepts/superdirective-beamforming|Superdirective]] designs can be made **low-rank** via [[concepts/kronecker-product-beamforming|Kronecker product decomposition]] (Zhu et al. 2025): the length-$M$ filter becomes a rank-$P$ sum of Kronecker products of short filters, cutting stored parameters by up to 62.5% and inversion dimension by 87.5% ($M = 64$, $P = 2$) while matching the conventional robust superdirective beamformer — attractive for embedded systems where FBF coefficients are precomputed and stored.
+For large arrays, the parameter count of a fixed beamformer scales with $M$ per frequency bin. [[concepts/superdirective-beamforming|Superdirective]] designs can be made **low-rank** via [[concepts/kronecker-product-beamforming|Kronecker product decomposition]] (Zhu et al. 2025): the length-$M$ filter becomes a rank-$P$ sum of Kronecker products of short filters, cutting stored parameters by up to 62.5% and inversion dimension by 87.5% ($M = 64$, $P = 2$) while matching the conventional robust superdirective beamformer — attractive for embedded systems where FBF coefficients are precomputed and stored. The lineage starts with differential Kronecker product beamforming ([[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019]]), which decomposes differential (cardioid/dipole/hypercardioid/supercardioid) fixed designs into two virtual-array subfilters for more flexible DF–WNG tradeoffs.
 
 ## Related Concepts
 
@@ -48,6 +49,7 @@ For large arrays, the parameter count of a fixed beamformer scales with $M$ per 
 
 ## Related Sources
 
+- [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]] — Kronecker-decomposed differential fixed beamformers
 - [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — LS fixed beamformer baseline results
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
 - [[sources/huang-2025-steerable-neural-directional-filtering|Huang, Halimeh, Chetupalli, Thiergart & Habets 2025: Steerable Neural Directional Filtering]]

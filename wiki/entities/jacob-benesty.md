@@ -31,6 +31,7 @@ tags:
 - Joint learning of covariance estimation and WNG for robust MVDR beamforming (Deng et al. 2026)
 - Co-author of "An Integrated Solution for Online Multichannel Noise Tracking and Reduction" (IEEE TASLP 2011) — online noise PSD matrix tracking by generalizing MCRA to the multichannel case, combined with the MC-SPP and PMWF-family filters — [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011]]
 - Co-author of "Kronecker Product Adaptive Beamforming for Microphone Arrays" (APSIPA Annual Summit and Conference 2021 (APSIPA-ASC), Tokyo, Japan, Dec. 14–17, 2021, pp. 50–54, 2021) — co-introduced the sum-of-Kronecker-products beamformer representation for arbitrary array geometries and the KMVDR beamformer — [[sources/wang-2021-kronecker-adaptive-beamforming|Wang, Huang, Cohen, Benesty & Chen 2021]]
+- Co-author of "Differential Kronecker Product Beamforming" (IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 27, no. 5, pp. 892–902, 2019) — introduced differential Kronecker product beamformers (KP cardioid/dipole/hypercardioid/supercardioid) — [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019]]
 
 
 ## Affiliations
@@ -51,3 +52,4 @@ tags:
 - [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010: On Optimal Frequency-Domain Multichannel Linear Filtering for Noise Reduction]]
 - [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011: An Integrated Solution for Online Multichannel Noise Tracking and Reduction]]
 - [[sources/wang-2021-kronecker-adaptive-beamforming|Wang, Huang, Cohen, Benesty & Chen 2021: Kronecker Product Adaptive Beamforming for Microphone Arrays]]
+- [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]]
