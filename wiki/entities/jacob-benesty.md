@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-30
-updated: 2026-09-13
+updated: 2026-09-17
 tags:
   - researcher
   - array-processing
@@ -30,6 +30,8 @@ tags:
 - Dimensionality reduction for STFT-domain beamforming
 - Joint learning of covariance estimation and WNG for robust MVDR beamforming (Deng et al. 2026)
 - Co-author of "An Integrated Solution for Online Multichannel Noise Tracking and Reduction" (IEEE TASLP 2011) — online noise PSD matrix tracking by generalizing MCRA to the multichannel case, combined with the MC-SPP and PMWF-family filters — [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011]]
+- Co-author of "Kronecker Product Adaptive Beamforming for Microphone Arrays" (APSIPA Annual Summit and Conference 2021 (APSIPA-ASC), Tokyo, Japan, Dec. 14–17, 2021, pp. 50–54, 2021) — co-introduced the sum-of-Kronecker-products beamformer representation for arbitrary array geometries and the KMVDR beamformer — [[sources/wang-2021-kronecker-adaptive-beamforming|Wang, Huang, Cohen, Benesty & Chen 2021]]
+
 
 ## Affiliations
 
@@ -48,3 +50,4 @@ tags:
 - [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026: Joint Covariance and WNG Learning for Robust MVDR]]
 - [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010: On Optimal Frequency-Domain Multichannel Linear Filtering for Noise Reduction]]
 - [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011: An Integrated Solution for Online Multichannel Noise Tracking and Reduction]]
+- [[sources/wang-2021-kronecker-adaptive-beamforming|Wang, Huang, Cohen, Benesty & Chen 2021: Kronecker Product Adaptive Beamforming for Microphone Arrays]]

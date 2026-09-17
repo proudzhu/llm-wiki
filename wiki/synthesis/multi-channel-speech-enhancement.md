@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-16
-updated: 2026-09-16
+updated: 2026-09-17
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
@@ -40,6 +40,7 @@ sources:
   - raw/papers/souden-2011-online-noise-tracking/full-text.md
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
   - raw/papers/wen-2025-neural-directed-speech-enhancement/full-text.md
+  - raw/papers/wang-2021-kronecker-adaptive-beamforming/full-text.txt
 tags:
   - multi-channel-speech-enhancement
   - beamforming
@@ -109,6 +110,7 @@ The distinction: this synthesis is about **spatial filtering** (beamforming, coh
 | [[sources/grinstein-2025-tiny-param-mwf\|Grinstein et al. 2025 (NeuralPMWF)]] | 2025 | Hybrid | Tiny DNN (164.9k params, 24.95 MMACs/s) fully controls the PMWF: mask-derived covariances with learned frequency-dependent smoothing + SPP-scheduled dynamic $\beta$ |
 | [[sources/li-2022-embedding-beamforming\|Li et al. 2022 (EaBNet)]] | 2022 | Estimate what | All-neural causal framewise beamformer; implicit spectral-spatial embedding beats explicit SCM reinsertion and surpasses oracle-IRM MB-MVDR |
 | [[sources/zhang-2021-adl-mvdr\|Zhang et al. 2021 (ADL-MVDR)]] | 2021 | Hybrid | All-deep-learning MVDR: GRU-Nets replace the matrix inversion and PCA inside the MVDR closed form; frame-level weights; joint training stabilized where closed-form inversion was not |
+| [[sources/wang-2021-kronecker-adaptive-beamforming\|Wang et al. 2021 (KMVDR)]] | 2021 | Robustness | Sum-of-Kronecker-products MVDR for arbitrary array geometries: alternating closed-form subfilter updates on reduced-dimension block covariances; implicit low-rank regularization beats conventional MVDR in oSINR under limited snapshots/dynamic interferers (best at $P{=}1$) |
 | [[sources/bagheri-2019-pmwf-spp\|Bagheri & Giacobello 2019]] | 2019 | Trade-off control | MC-SPP-controlled PMWF: SPP-driven recursive noise PSD update with direct inverse rank-1 update, per-bin $\beta(\ell,k)$ trade-off control, and SPP-blended MMSE output — the SPP-controlled $\beta$ lineage that Grinstein 2025's NeuralPMWF later neuralized |
 | [[sources/zmolikova-2023-neural-target-speech-extraction-overview\|Zmolikova et al. 2023]] | 2023 | Estimate what | Overview of neural TSE: unified clue-encoder + mixture-encoder + fusion + extractor framework with audio/visual/spatial clue variants — situates speaker-conditioned extraction relative to the beamforming-centric methods on this page |
 | [[sources/pandey-2025-ultra-low-compute\|Pandey & Azcarreta 2025 (TinyGRU)]] | 2025 | Hybrid | DNN-estimated-target MCWF: two-stage [[concepts/tinygru\|TinyGRU]] + online MCWF at ~21.5 MMACs/s for 8 mics, surpassing oracle MVDR; complex (not magnitude-only) masking is what makes the hybrid work |
@@ -153,6 +155,8 @@ The required diagonal loading $\mu[i] = \max(0, (\lambda_{\max} - \kappa_{\max}\
 [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026]] make the WNG threshold itself **learnable and frequency-dependent**: a dual-branch network jointly predicts T-F noise masks (for SCM estimation) and per-frequency-bin WNG thresholds $\mathcal{W}_0(k)$, integrated via a differentiable robust MVDR layer. No explicit WNG supervision is needed — the reconstruction loss naturally balances directivity vs. robustness. Results: +1.4–1.8 dB SNR gain and +1.9–2.2 dB SDR over optimally-tuned fixed-WNG baselines, with the advantage **growing under array mismatch** (unseen 1 cm / 3 cm spacings).
 
 **The pattern**: Era 1 specified the uncertainty set at design time. Era 2 derived the loading analytically from the data at run time. Era 3 learned the optimal robustness level end-to-end. Each era subsumes the previous as a special case (Era 3 with fixed thresholds → Era 2; Era 2 with isotropic uncertainty → Era 1's diagonal-loading equivalence), but the 2026 data-driven approach is the first to make robustness **frequency-adaptive** — a degree of freedom the analytical frameworks structurally cannot exploit.
+
+**An orthogonal axis — structural regularization of the filter itself**: all three eras regularize the *optimization* (constraint sets or loading) while leaving the filter free to be any length-$M$ vector. [[sources/wang-2021-kronecker-adaptive-beamforming|Wang et al. 2021]]'s [[concepts/kmvdr-beamformer|KMVDR]] instead restricts the *representable* filter space: the beamformer is a sum of $P$ Kronecker products of short subfilters, solved by alternating closed-form MVDR updates on reduced-dimension block covariances. On a 16-mic array with limited snapshots and dynamic interferers KMVDR beats conventional MVDR in output SINR — with the **best** performance at $P = 1$, so the tighter the structural constraint the stronger the regularization. This is robustness by construction (the same mechanism Zhu et al. 2025's LR-RSD exploits for superdirective filters), and it also resolves the "geometry-conditioned robustness" open question below in the classical direction: the Kronecker representation is geometry-independent *and* regularizing simultaneously — no learned geometry, no tuned loading.
 
 ## Insight 3: The "Estimate What" Spectrum — A Relaxation Chain
 
@@ -286,11 +290,11 @@ The corpus shows that **form factor and use case, not algorithmic novelty, are t
 
 6. **Application constraints, not algorithmic novelty, drive deployed architecture.** Hearing aids → classical CDR/GMC; mobile phones → level-difference post-filters; smart glasses → time-domain ROI beamforming; ASR → spatial features as DNN input. The "best" method is the one that fits the form-factor constraint, not the one with the highest benchmark score.
 
-7. **MVDR remains the connective tissue.** Every era engages MVDR: classical implementations (Lorenz, Schwarz, Tashev, Jin, Löllmann), robustness research (Mittal, Deng), hybrid systems (HVSF exposes MVDR as a VSLF special case, Farmani's virtual mics feed MVDR, Apostolidis wraps MPDR). The 2026 work refines MVDR's *parameterization* (SCM estimation, WNG control, output-based steering) rather than replacing it.
+7. **MVDR remains the connective tissue.** Every era engages MVDR: classical implementations (Lorenz, Schwarz, Tashev, Jin, Löllmann), robustness research (Mittal, Deng), hybrid systems (HVSF exposes MVDR as a VSLF special case, Farmani's virtual mics feed MVDR, Apostolidis wraps MPDR). The 2026 work refines MVDR's *parameterization* (SCM estimation, WNG control, output-based steering) rather than replacing it — and the Kronecker line (Wang 2021, Zhu 2025) refines its *structure*, restricting the filter to low-rank sums of short subfilters for built-in robustness.
 
 ## Open Questions / Future Synthesis Candidates
 
 - **Classical-vs-neural head-to-head on shared benchmarks**: the corpus lacks a direct comparison of, e.g., GMC-based CDR (Löllmann 2020) vs. NDF+ (Huang 2026) on the same binaural HA setup. A controlled benchmark would clarify where classical methods still win.
-- **Geometry-conditioned robustness**: no source jointly addresses array-geometry generalization (Insight 6) and MVDR robustness (Insight 2). Geo-DConv assumes the geometry is known exactly; combining it with Mittal's Kantorovich loading or Deng's data-driven WNG is an open frontier.
+- **Geometry-conditioned robustness**: Wang 2021's KMVDR shows the classical route exists (geometry-independent representation + structural regularization jointly), but no source yet combines the *learned* geometry axis (Insight 6: Geo-DConv, GC-SSF) with MVDR robustness control (Insight 2: Kantorovich loading, data-driven WNG) or Kronecker structural regularization. A geometry-conditioned KMVDR — or KMVDR-style structural regularization inside a geometry-conditioned neural beamformer — is an open frontier.
 - **Output-based selection beyond beamforming**: Apostolidis 2026 demonstrates the paradigm for MPDR; extending it to VSLF span dimension, NDF directivity order, or R-MWF variance-ratio constraints is unexplored.
 - **Cross-source synthesis on virtual microphone methods**: Farmani 2026 (power-function RTF), UniArray (virtual mic estimation), and NDF+ (virtual directional microphone) share a "synthesize channels you don't have" theme but use very different mechanisms — a dedicated synthesis would clarify when each applies.

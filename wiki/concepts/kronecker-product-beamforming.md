@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-14
-updated: 2026-09-14
+updated: 2026-09-17
 sources:
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
+  - raw/papers/wang-2021-kronecker-adaptive-beamforming/full-text.txt
 tags:
   - beamforming
   - microphone-arrays
@@ -23,9 +24,10 @@ Kronecker product beamforming decomposes a global (long) beamforming filter of l
 ## Development
 
 - **Differential Kronecker product beamforming** (Cohen, Benesty & Chen 2019, IEEE/ACM TASLP): the original formulation linking Kronecker decompositions to [[concepts/differential-microphone-array|differential microphone arrays]].
-- **Specific geometries** (rectangular arrays, cube arrays — Wang et al. 2021): 2-D/3-D Kronecker decompositions matched to regular array structures.
-- **Arbitrary geometries** (Pei et al. 2025, ICASSP): low-rank differential beamformers with nonuniform linear arrays.
-- **Multidimensional generalization** (Zhu et al. 2025): extends the mostly two-dimensional formulations to **N-way, rank-P** decompositions applicable to arbitrary array geometries, with a systematic comparison of decomposition modes.
+- **Specific geometries** (rectangular arrays, cube arrays): 2-D/3-D Kronecker decompositions matched to regular array structures.
+- **Arbitrary geometries** ([[sources/wang-2021-kronecker-adaptive-beamforming|Wang et al. 2021]], APSIPA-ASC): the first generalization to arbitrary 3-D array geometries — the filter is represented as a **sum of $P$ Kronecker products** of subfilters (a property of the filter, not the array), with the iterative [[concepts/kmvdr-beamformer|KMVDR]] algorithm deriving the MVDR beamformer under this representation.
+- **Low-rank differential beamforming with nonuniform linear arrays** (Pei et al. 2025, ICASSP).
+- **Multidimensional generalization** (Zhu et al. 2025): extends the mostly two-dimensional formulations to **N-way, rank-P** decompositions applicable to arbitrary array geometries, with a systematic comparison of decomposition modes — building on the arbitrary-geometry framework of Wang et al. 2021.
 
 ## Multidimensional, Rank-P Formulation (LR-RSD)
 
@@ -47,6 +49,7 @@ The same Kronecker decomposition idea appears in multichannel active noise contr
 
 ## Related Concepts
 
+- [[concepts/kmvdr-beamformer|KMVDR Beamformer]]
 - [[concepts/superdirective-beamforming|Superdirective Beamforming]]
 - [[concepts/white-noise-gain|White Noise Gain]]
 - [[concepts/diagonal-loading|Diagonal Loading]]
@@ -57,4 +60,5 @@ The same Kronecker decomposition idea appears in multichannel active noise contr
 
 ## Related Sources
 
+- [[sources/wang-2021-kronecker-adaptive-beamforming|Wang et al. 2021: Kronecker Product Adaptive Beamforming for Microphone Arrays]]
 - [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]]

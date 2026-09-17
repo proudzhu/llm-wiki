@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-30
-updated: 2026-09-14
+updated: 2026-09-17
 tags:
   - researcher
   - array-processing
@@ -31,6 +31,8 @@ tags:
 - Co-author of "An Integrated Solution for Online Multichannel Noise Tracking and Reduction" (IEEE TASLP 2011) — practical MC-SPP implementation and multichannel MCRA noise PSD matrix tracking — [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011]]
 
 - Co-author of "Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products" (Journal of Signal Processing 2025) — multidimensional Kronecker product decomposition for parameter- and computation-efficient robust superdirective beamforming — [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025]]
+- Co-author of "Kronecker Product Adaptive Beamforming for Microphone Arrays" (APSIPA Annual Summit and Conference 2021 (APSIPA-ASC), Tokyo, Japan, Dec. 14–17, 2021, pp. 50–54, 2021) — co-introduced the sum-of-Kronecker-products beamformer representation for arbitrary array geometries and the KMVDR beamformer — [[sources/wang-2021-kronecker-adaptive-beamforming|Wang, Huang, Cohen, Benesty & Chen 2021]]
+
 
 ## Affiliations
 
@@ -48,3 +50,4 @@ tags:
 - [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026: Joint Covariance and WNG Learning for Robust MVDR]]
 - [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011: An Integrated Solution for Online Multichannel Noise Tracking and Reduction]]
 - [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]]
+- [[sources/wang-2021-kronecker-adaptive-beamforming|Wang, Huang, Cohen, Benesty & Chen 2021: Kronecker Product Adaptive Beamforming for Microphone Arrays]]

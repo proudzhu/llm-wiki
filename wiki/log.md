@@ -5392,3 +5392,15 @@ Ingested Pandey & Azcarreta 2025 (TinyGRU). Created source page pandey-2025-ultr
 - **Summary**: Proposes CDUNet, a 74.4K-parameter causal-directed U-Net for dual-microphone directed speech enhancement, steered by a novel triple-steering spatial selection method (target + two width-derived edge steering vectors) with the enhancement width as a runtime input; best front-end PESQ and downstream ASR WER at 0-5 dB SNR.
 - **Pages created**: `wiki/sources/wen-2025-neural-directed-speech-enhancement.md`, `wiki/entities/wen-wen.md`, `wiki/entities/qiang-zhou.md`, `wiki/entities/yu-xi.md`, `wiki/entities/haoyu-li.md`, `wiki/entities/ziqi-gong.md`, `wiki/entities/kai-yu.md`, `wiki/concepts/cdunet.md`, `wiki/concepts/triple-steering-spatial-selection.md`
 - **Pages updated**: `wiki/concepts/multi-channel-speech-enhancement.md`, `wiki/concepts/neural-beamforming.md`, `wiki/concepts/spatially-selective-nonlinear-filter.md`, `wiki/concepts/target-speaker-extraction.md` (added source + findings); `wiki/synthesis/multi-channel-speech-enhancement.md` (added to Sources Synthesized, Insight 3 paragraph on steered beams as neural conditioning, and Insight 7 on-device dual-mic application row); index files updated
+
+---
+
+## [2026-09-17] ingest | Kronecker Product Adaptive Beamforming for Microphone Arrays (Wang et al. 2021)
+
+- **Source**: `raw/papers/wang-2021-kronecker-adaptive-beamforming/full-text.txt` (Zotero: 47M4ZPJH)
+- **Authors**: Xuehan Wang, Gongping Huang, Israel Cohen, Jacob Benesty, Jingdong Chen
+- **Published**: APSIPA Annual Summit and Conference 2021 (APSIPA-ASC), Tokyo, Japan, pp. 50–54
+- **DOI**: 10.23919/APSIPAASC52927.2021.9689635
+- **Summary**: First Kronecker product beamforming framework applicable to arbitrary array geometries — the beamforming filter is represented as a sum of rank-P Kronecker products of short subfilters, and the Kronecker MVDR (KMVDR) beamformer is derived via alternating closed-form MVDR-like subfilter updates; simulations show KMVDR outperforms conventional MVDR in output SINR under limited snapshots and dynamic interference (best at P=1).
+- **Pages created**: `wiki/sources/wang-2021-kronecker-adaptive-beamforming.md`; `wiki/concepts/kmvdr-beamformer.md`; `wiki/entities/xuehan-wang.md`
+- **Pages updated**: `wiki/concepts/kronecker-product-beamforming.md` (arbitrary-geometry lineage corrected: credited to Wang et al. 2021, not Pei et al. 2025; KMVDR links added); `wiki/concepts/mvdr-beamformer.md` (KMVDR section); `wiki/sources/zhu-2025-kronecker-superdirective-beamforming.md` (predecessor cross-reference); `wiki/synthesis/multi-channel-speech-enhancement.md` (structural-regularization axis added to Insight 2, Sources table row, Takeaway 7 and geometry-robustness open question refined); entity pages for Huang, Cohen, Benesty, Chen (appended)

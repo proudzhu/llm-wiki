@@ -523,4 +523,5 @@
 | [[concepts/band-split-rnn\|Band-Split RNN (BSRNN)]] | Frequency-domain MSS architecture splitting the spectrogram into instrument-specific non-uniform subbands with interleaved sequence/band-level BLSTM modeling (Luo & Yu 2022). | 2026-09-16 |
 | [[concepts/cdunet\|CDUNet]] | Causal-directed U-Net — 74.4K-param dual-microphone directed speech enhancement model steered by triple steering vectors with runtime enhancement width | 2026-09-16 |
 | [[concepts/triple-steering-spatial-selection\|Triple-Steering Spatial Selection]] | Spatial selection method using three steering vectors (target + width-derived edge angles) to guide enhancement and determine the enhancement range | 2026-09-16 |
+| [[concepts/kmvdr-beamformer\|KMVDR Beamformer]] | Kronecker MVDR beamformer: MVDR under a sum-of-Kronecker-products filter representation, applicable to arbitrary array geometries via alternating closed-form subfilter updates | 2026-09-17 |
 

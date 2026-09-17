@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-13
+updated: 2026-09-17
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
@@ -22,6 +22,7 @@ sources:
   - raw/papers/zaidel-2026-linearly-constrained-deep-beamformer/full-text.md
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
+  - raw/papers/wang-2021-kronecker-adaptive-beamforming/full-text.txt
 tags:
   - beamforming
   - speech-enhancement
@@ -92,6 +93,10 @@ The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-
 
 [[sources/zhang-2021-adl-mvdr|Zhang et al. 2021]]'s [[concepts/adl-mvdr|ADL-MVDR]] replaces the two matrix operations inside the MVDR closed form — the noise-covariance inversion and the PCA of the speech covariance for the steering vector — with two GRU-based networks, yielding **frame-level** beamforming weights trained jointly with the front-end cRF estimator. This attacks both residual noise (utterance-level weights are frame-suboptimal) and the numerical instability of matrix inversion under joint NN training (which otherwise needs [[concepts/diagonal-loading|diagonal loading]]). On a 15-channel Mandarin corpus it beats mask-based MVDR by ~17% PESQ (3.42 vs. 2.92) and multi-tap MVDR baselines on all objective metrics while cutting WER to 12.73%. Cross-source nuance vs. [[concepts/eabnet|EaBNet]] (Li et al. 2022): EaBNet found reinserting explicit SCM computation into an all-neural beamformer *hurts*, while ADL-MVDR keeps explicit SCMs as RNN inputs and wins — together suggesting the closed-form inversion/eigendecomposition, not the SCM itself, is the limiting stage.
 
+## Kronecker MVDR for Arbitrary Geometries (Wang et al. 2021)
+
+[[sources/wang-2021-kronecker-adaptive-beamforming|Wang et al. 2021]] derive the [[concepts/kmvdr-beamformer|KMVDR beamformer]] by restricting the MVDR filter to a **sum of $P$ Kronecker products** of shorter subfilters — the first Kronecker beamformer applicable to arbitrary 3-D array geometries. With one subfilter family fixed, the MVDR optimization reduces to a closed-form update on the other stacked subfilter, with block covariances of size $PM_1 \times PM_1$ / $PM_2 \times PM_2$ instead of $M \times M$; the subfilters alternate until convergence. On a 16-microphone array with limited snapshots, KMVDR beats the conventional MVDR in output SINR (both static and dynamic interferers), with the strongest performance at rank $P = 1$ — the Kronecker structure implicitly regularizes the covariance-based estimate.
+
 ## Related Concepts
 
 - [[concepts/beamforming|Beamforming]]
@@ -116,6 +121,8 @@ The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-
 - [[concepts/parametric-multi-channel-wiener-filter|Parametric Multi-Channel Wiener Filter (PMWF)]] — MVDR is the $\beta = 0$ distortionless endpoint
 - [[concepts/eabnet|EaBNet]] — all-neural causal beamformer that surpasses oracle-mask MB-MVDR
 - [[concepts/adl-mvdr|ADL-MVDR]] — GRU networks replace the matrix inversion and PCA inside the MVDR solution for frame-level weights
+- [[concepts/kmvdr-beamformer|KMVDR Beamformer]] — MVDR under a sum-of-Kronecker-products filter representation, applicable to arbitrary geometries
+- [[concepts/kronecker-product-beamforming|Kronecker Product Beamforming]]
 
 ## Related Sources
 
@@ -142,4 +149,5 @@ The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-
 - [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel, Engel, Engel & Gannot 2026: Linearly Constrained Deep Beamformer for Multi-Speaker Scenarios]]
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova, Delcroix & Ochiai 2023: Neural Target Speech Extraction: An Overview]]
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — hybrid TinyGRU + MCWF beats oracle MVDR at ~50 MMACs/s
+- [[sources/wang-2021-kronecker-adaptive-beamforming|Wang et al. 2021: Kronecker Product Adaptive Beamforming for Microphone Arrays]] — KMVDR: MVDR under a sum-of-Kronecker-products representation for arbitrary geometries
 

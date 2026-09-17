@@ -155,3 +155,7 @@ With 12–48 instead of 64 parameters per bin, LR-RSD matches or exceeds RSD on 
 - [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
 - [[concepts/directivity-pattern|Directivity Pattern]]
 - [[concepts/differential-microphone-array|Differential Microphone Array]]
+
+## Related Sources
+
+- [[sources/wang-2021-kronecker-adaptive-beamforming|Wang et al. 2021: Kronecker Product Adaptive Beamforming for Microphone Arrays]] — the predecessor that first generalized Kronecker product beamforming to arbitrary geometries via a sum of rank-$P$ Kronecker products; this paper extends that framework to $N$-way decompositions for superdirective beamforming

@@ -591,6 +591,7 @@
 | [[entities/haoyu-li\|Haoyu Li]] | Researcher at Shanghai Jiao Tong University (X-LANCE Lab) working on keyword spotting and speech processing | 2026-09-16 |
 | [[entities/ziqi-gong\|Ziqi Gong]] | Researcher at AISpeech; co-author of CDUNet directed dual-microphone speech enhancement | 2026-09-16 |
 | [[entities/kai-yu\|Kai Yu]] | Professor at Shanghai Jiao Tong University (X-LANCE Lab) working on speech processing and recognition; corresponding author of CDUNet | 2026-09-16 |
+| [[entities/xuehan-wang\|Xuehan Wang]] | Researcher at NWPU CIAIC; first author of the Kronecker product adaptive beamforming paper introducing the KMVDR beamformer for arbitrary array geometries | 2026-09-17 |
 
 ---
 
@@ -1119,6 +1120,7 @@
 | [[concepts/band-split-rnn\|Band-Split RNN (BSRNN)]] | Frequency-domain MSS architecture splitting the spectrogram into instrument-specific non-uniform subbands with interleaved sequence/band-level BLSTM modeling (Luo & Yu 2022). | 2026-09-16 |
 | [[concepts/cdunet\|CDUNet]] | Causal-directed U-Net — 74.4K-param dual-microphone directed speech enhancement model steered by triple steering vectors with runtime enhancement width | 2026-09-16 |
 | [[concepts/triple-steering-spatial-selection\|Triple-Steering Spatial Selection]] | Spatial selection method using three steering vectors (target + width-derived edge angles) to guide enhancement and determine the enhancement range | 2026-09-16 |
+| [[concepts/kmvdr-beamformer\|KMVDR Beamformer]] | Kronecker MVDR beamformer: MVDR under a sum-of-Kronecker-products filter representation, applicable to arbitrary array geometries via alternating closed-form subfilter updates | 2026-09-17 |
 
 ---
 
@@ -1346,6 +1348,7 @@
 | [[sources/kim-2021-kuielab-mdx-net\|Kim, Choi, Chung, Lee & Jung 2021]] | KUIELab-MDX-Net is a two-stream neural network for four-stem music demixing (vocals/drums/bass/other) that balances separation quality against the compute/time constraints of the ISMIR 2021 Music Demixing (MDX) Challenge. | 2026-09-15 |
 | [[sources/luo-2022-band-split-rnn\|Luo & Yu 2022]] | Band-split RNN (BSRNN) is a frequency-domain music source separation model that explicitly splits the mixture spectrogram into subbands with instrument-specific bandwidths and performs interleaved band-level and sequence-level modeling with residual BLSTMs. | 2026-09-16 |
 | [[sources/wen-2025-neural-directed-speech-enhancement\|Wen, Zhou, Xi, Li, Gong & Yu 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] | CDUNet — a 74.4K-param causal U-Net steered by triple steering vectors with a runtime enhancement width for directed dual-microphone speech enhancement | 2026-09-16 |
+| [[sources/wang-2021-kronecker-adaptive-beamforming\|Wang, Huang, Cohen, Benesty & Chen 2021]] | First Kronecker product beamforming framework for arbitrary array geometries: the filter is a sum of rank-P Kronecker products of short subfilters, solved by alternating closed-form MVDR updates (KMVDR), beating conventional MVDR in output SINR under limited snapshots and dynamic interference | 2026-09-17 |
 
 ---
 
@@ -1399,10 +1402,10 @@
 
 ## Statistics
 
-- **Total pages**: 1348
-- **Entities**: 581
-- **Concepts**: 519
-- **Sources**: 218
+- **Total pages**: 1351
+- **Entities**: 582
+- **Concepts**: 520
+- **Sources**: 219
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-16
+- **Last updated**: 2026-09-17

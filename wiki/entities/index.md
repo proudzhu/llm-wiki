@@ -585,4 +585,5 @@
 | [[entities/haoyu-li\|Haoyu Li]] | Researcher at Shanghai Jiao Tong University (X-LANCE Lab) working on keyword spotting and speech processing | 2026-09-16 |
 | [[entities/ziqi-gong\|Ziqi Gong]] | Researcher at AISpeech; co-author of CDUNet directed dual-microphone speech enhancement | 2026-09-16 |
 | [[entities/kai-yu\|Kai Yu]] | Professor at Shanghai Jiao Tong University (X-LANCE Lab) working on speech processing and recognition; corresponding author of CDUNet | 2026-09-16 |
+| [[entities/xuehan-wang\|Xuehan Wang]] | Researcher at NWPU CIAIC; first author of the Kronecker product adaptive beamforming paper introducing the KMVDR beamformer for arbitrary array geometries | 2026-09-17 |
 

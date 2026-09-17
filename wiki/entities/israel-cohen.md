@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-28
-updated: 2026-07-03
+updated: 2026-09-17
 tags:
   - researcher
   - signal-processing
@@ -20,6 +20,7 @@ tags:
 **Key Contributions**:
 - Co-developed unified formulation for time-domain and STFT-domain region-of-interest (LDMG) beamformers for smart glasses, establishing time-domain superiority for low-latency wearable audio front-ends (Frank & Cohen 2026).
 - Co-authored an investigation of acoustic howling suppression enhancement by fine-tuning a pretrained deep speech enhancement (Denoiser) network with offline-generated howling samples (Ashur & Cohen 2026). The work demonstrates that a 60-40 howling/noise mixing ratio during fine-tuning achieves state-of-the-art perceptual speech quality (PESQ stability across gains) while preserving noise-reduction performance — without architectural modification or recursive training.
+- Co-authored "Kronecker Product Adaptive Beamforming for Microphone Arrays" (APSIPA-ASC 2021) — co-introduced the sum-of-Kronecker-products beamformer representation for arbitrary array geometries and the KMVDR beamformer — [[sources/wang-2021-kronecker-adaptive-beamforming|Wang, Huang, Cohen, Benesty & Chen 2021]]
 
 Israel Cohen is a well-known researcher in the speech processing community with extensive contributions to speech enhancement and spatial filtering.
 
@@ -27,6 +28,8 @@ Israel Cohen is a well-known researcher in the speech processing community with 
 
 - [[sources/frank-2026-low-latency-roi-beamforming|Frank & Cohen 2026: Low-latency Audio Front-end ROI Beamforming for Smart Glasses]]
 - [[sources/ashur-2026-acoustic-howling-suppression-fine-tuning|Ashur & Cohen 2026: AHS by Fine-Tuning Deep Speech Enhancement Networks]]
+- [[sources/wang-2021-kronecker-adaptive-beamforming|Wang, Huang, Cohen, Benesty & Chen 2021: Kronecker Product Adaptive Beamforming for Microphone Arrays]]
+
 
 ## Related Entities
 
