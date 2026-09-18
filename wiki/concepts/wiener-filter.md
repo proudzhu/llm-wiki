@@ -109,6 +109,7 @@ where the $k$-th element of $\hat{\bm{h}}(t)$ approximates the optimal Wiener ga
 - [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026: Microphone Array Self-Awareness via a Residual Model of the Covariance Matrix]] — the self-awareness Wiener filter for unknown new sources, gated by $1 - \max_n H_n(t)$
 
 - [[sources/welch-2006-kalman-filter-intro|Welch & Bishop 2006: Introduction to the Kalman Filter]]
+- [[sources/elisei-iliescu-2019-low-rank-rls|Elisei-Iliescu et al. 2019: Recursive Least-Squares Algorithms for the Identification of Low-Rank Systems]] — the authors' earlier iterative Wiener filter with nearest Kronecker product decomposition is the time-invariant predecessor of the adaptive [[concepts/rls-nkp|RLS-NKP]]
 - [[sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]]
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — uses the Wiener gain as an offline supervised target for tuning a probability-based spatial filter's parameters

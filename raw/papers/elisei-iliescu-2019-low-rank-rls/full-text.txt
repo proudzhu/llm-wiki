@@ -1,0 +1,2962 @@
+2329-9290 (c) 2018 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission. See http://www.ieee.org/publications_standards/publications/rights/index.html for more information.
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication. Citation information: DOI 10.1109/TASLP.2019.2903276, IEEE/ACM
+Transactions on Audio, Speech, and Language Processing
+IEEE/A
+CM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. XX, NO. YY , XXXX XXXX 1
+Recursive Least-Squares Algorithms for the
+Identiﬁcation of Low-Rank Systems
+Camelia Elisei-Iliescu, Constantin Paleologu, Member , IEEE, Jacob Benesty, Cristian Stanciu, Cristian Anghel,
+and Silviu Ciochin ˘a, Senior Member , IEEE
+Abstract—The recursive least-squares (RLS) adaptive ﬁlter is
+an appealing choice in many system identiﬁcation problems.
+The main reason behind its popularity is its fast convergence
+rate. However, this algorithm is computationally very complex,
+which may make it useless for the identiﬁcation of long length
+impulse responses, like in echo cancellation. Computationally
+efﬁcient versions of the RLS algorithm, like those based on
+the dichotomous coordinate descent (DCD) iterations or QR
+decomposition techniques, reduce the complexity, but still have
+to face the challenges related to long length adaptive ﬁlters
+(e.g., convergence/tracking capabilities). In this paper, we focus
+on a different approach to improve the efﬁciency of the RLS
+algorithm. The basic idea is to exploit the impulse response
+decomposition based on the nearest Kronecker product and low-
+rank approximation. In other words, a high-dimension system
+identiﬁcation problem is reformulated in terms of low-dimension
+problems, which are combined together . This approach was re-
+cently addressed in terms of the Wiener ﬁlter, showing appealing
+features for the identiﬁcation of low-rank systems, like real-world
+echo paths. In this paper, besides the development of the RLS
+algorithm based on this approach, we also propose a variable
+regularized version of this algorithm (using the DCD method to
+reduce the complexity), with improved robustness to double-talk.
+Simulations are performed in the context of echo cancellation and
+the results indicate the good performance of these algorithms.
+Index Terms—Adaptive ﬁlter, echo cancellation, low-rank ap-
+proximation, nearest Kronecker product, recursive least-squares
+(RLS) algorithm, regularization, system identiﬁcation.
+I. I NTRODUCTION
+In many system identiﬁcation problems, the unknown sys-
+tem can be modeled as a ﬁnite impulse response ﬁlter with
+a large number of coefﬁcients, which raises additional chal-
+lenges for the adaptive ﬁlter used for this purpose. In this con-
+text, the echo cancellation application [1]– [3] represents one
+of the most popular examples. In both network and acoustic
+echo cancellation scenarios, the echo paths can have excessive
+lengths in time (e.g., up to hundreds of milliseconds), which
+further involves long length adaptive ﬁlters, with hundreds (or
+even thousands) of coefﬁcients. Moreover, the echo paths may
+rapidly change during the connection, which further implies
+to model and track time-varying systems. All these aspects
+inﬂuence the convergence rate and tracking of the adaptive
+ﬁlter that models the echo path.
+C. Elisei-Iliescu, C. Paleologu, C. Stanciu, C. Anghel, and S.
+Ciochin˘a are with University Politehnica of Bucharest, Romania, e-mail:
+camelia.elisei@romatsa.ro, {pale, cristian, canghel, silviu }@comm.pub.ro.
+J. Benesty is with INRS-EMT, University of Quebec, Montreal, Quebec,
+H5A 1K6, Canada, e-mail: benesty@emt.inrs.ca.
+Manuscript received August 25, 2018; revised January 5, 2019 and February
+27, 2019.
+In terms of the convergence features, the recursive least-
+squares (RLS) algorithm [4], [5] could represent an appealing
+choice. However, its main limitation is related to the high
+computational complexity, which becomes prohibitive in case
+of long length adaptive ﬁlters. Several methods to reduce the
+computational amount of the RLS algorithm can be found
+in the literature, which lead to the so-called fast or efﬁcient
+versions. Among them, the dichotomous coordinate descent
+(DCD) algorithm [6]– [8] proposed by Zakharov and co-
+authors represents one of the most interesting and useful
+approaches. Due to its good performance and moderate com-
+putational complexity, the resulting RLS-DCD algorithm was
+successfully applied in the context of different applications,
+e.g., [9]– [17], including echo cancellation. Another appealing
+category of fast RLS algorithms is the family based on QR
+decomposition (QRD) techniques. Here, we can mention the
+QRD-based least-squares lattice (QRD-LSL) algorithm [4] and
+different versions of it [18], which are numerically stable and
+match the performance of the regular RLS algorithm.
+Nevertheless, even if the computational complexity of the
+fast RLS algorithms is moderate and could be suitable for
+practical implementations, the problem of dealing with long
+length adaptive ﬁlters is still a critical issue in system identi-
+ﬁcation contexts like echo cancellation. In this framework, it
+would be highly interesting and useful to take advantage of
+the characteristics of the impulse response. The ﬁnal goal is
+to transform a high-dimension system identiﬁcation problem
+into “smaller” problems (i.e., shorter ﬁlters) that can be further
+combined to match the original purpose. The expected gain
+would be twofold, i.e., in terms of both performance and
+complexity. It is well known that the echo paths are sparse in
+nature, i.e., only a relatively small percentage of the impulse
+response components have a signiﬁcant magnitude while the
+rest are zero or small. This property inspired the development
+of the so-called proportionate algorithms, e.g., see [19]– [25]
+and the references therein. However, as will be shown in the
+following, our approach is not only limited to the sparseness
+characteristic of the impulse response, but it is more related to
+an efﬁcient way to perform its decomposition. In other words,
+the sparsity could help but it is not the only factor.
+In our work, we propose to address the previous idea based
+on a Kronecker product decomposition [26] together with
+low-rank approximation. These techniques were previously
+exploited in different frameworks. Most often, they are related
+to the processing of bilinear/trilinear forms based on tensor
+decomposition and modelling [27]– [46]. Consequently, they
+led to appealing solutions within a wide range of important
+
+2329-9290 (c) 2018 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission. See http://www.ieee.org/publications_standards/publications/rights/index.html for more information.
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication. Citation information: DOI 10.1109/TASLP.2019.2903276, IEEE/ACM
+Transactions on Audio, Speech, and Language Processing
+IEEE/A
+CM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. XX, NO. YY , XXXX XXXX 2
+applications, like big data, machine learning, and source
+separation among others. However, the adaptive algorithms
+developed in this context, e.g., [33], [34], [43], [44], did not
+involve low-rank approximations. Therefore, they face a major
+limitation related to the particular (quasi-periodic) form of the
+impulse response to be identiﬁed. While this form resembles
+(to some extent) a channel with echoes, it is far from the very
+different natures of realistic echo paths.
+Recently, in [45], we proposed an iterative Wiener ﬁlter
+based on an optimal (low-rank) approximation that involves
+the Kronecker product decomposition. Basically, the linear
+system identiﬁcation problem was addressed by exploiting
+the impulse response decomposition using the nearest Kro-
+necker product [26]. Then, we took advantage of the low-
+rank approximation of this model, which ﬁts very well for
+the identiﬁcation of low-rank systems. Thus, a problem of
+high dimension was reformulated and low-dimension problems
+were combined together. Due to this feature, the proposed
+iterative Wiener ﬁlter is able to obtain accurate results using
+less amount of data. The results presented in [45] indicate
+that this solution is generally applicable for the identiﬁcation
+of different impulse responses, like real-world network and
+acoustic echo paths. In this context, we should mention that
+such low-rank systems can be encountered in many other
+frameworks, like digital TV transmission [47], satellite-linked
+communications [48], radar systems and underwater com-
+munications [17], [49], beamformers and microphone arrays
+[46], [50] among others. However, due to its limitations (e.g.,
+estimation of the statistics, matrix inversion, time-invariant
+framework), the Wiener ﬁlter is not a practical solution in
+real-time applications and time-variant environments, where
+adaptive ﬁlters are the ideal choice.
+In this paper, we make a ﬁrst step toward this direction
+by proposing RLS-based algorithms using the decomposition
+approach presented in [45]. At this point, the main goal is
+not to derive a “fast” RLS-based algorithm, but to outline and
+exploit the features of the proposed approach, i.e., impulse re-
+sponse decomposition and low-rank approximation. Therefore,
+in the current work, we mainly illustrate this idea following the
+line of the conventional RLS algorithm. Nevertheless, in future
+works, it would be highly interesting and useful to explore this
+approach in the framework of the fast versions, like the RLS-
+DCD and QRD-LSL algorithms. However, in this case, we
+should take into account the particular structure of the input
+data and the additional related challenges.
+Following this introduction, the rest of the paper is or-
+ganized as follows. Section II summarizes the background
+from [45], which is required for the upcoming developments.
+The RLS algorithm based on the nearest Kronecker product
+decomposition is derived in Section III; some parts of this
+section were introduced in [51]. In Section IV, a variable reg-
+ularized version of this algorithm is presented, with improved
+robustness to double-talk (which is a critical issue in echo
+cancellation); this algorithm also involves the DCD iterations
+to reduce the computational complexity related to the matrix
+inversion operation. Simulation results are provided in Sec-
+tion V, in the context of echo cancellation. Finally, Section VI
+concludes this work and outlines several perspectives.
+II. L INEAR SYSTEM IDENTIFICATION BASED ON A
+KRONECKER PRODUCT DECOMPOSITION
+In this section, we brieﬂy outline the background from [45],
+which represents the framework of our approach. Let h be a
+real-valued impulse response of length L = L1L2. Without
+loss of generality, we may assume that L1 ≥ L2. Hence, the
+impulse response can be decomposed as
+h =
+[ sT
+1 sT
+2 . . . sT
+L2
+]T
+, (1)
+where sl, l = 1, 2, . . . , L2 are L2 short impulse responses of
+length L1 each and the superscript T is the transpose operator.
+In [45], it was shown how well h can be approximated by
+h2⊗h1, where h1 and h2 are two impulse responses of lengths
+L1 and L2, respectively, and ⊗ is the Kronecker product. To
+this purpose, let us deﬁne the normalized misalignment [26]:
+M (h1, h2) = ∥h − h2 ⊗ h1∥2
+∥h∥2
+, (2)
+where ∥·∥2 denotes
+the Euclidean norm. Also, we can reorga-
+nize the components of h into a matrix of size L1 × L2:
+H =
+[ s1 s2 . . . sL2
+]
+, (3)
+so that (2) is identical to
+M (h1, h2) =
+H − h1hT
+2
+
+F
+∥H∥F
+, (4)
+where ∥·∥F denotes
+the Frobenius norm. To ﬁnd the optimal
+values of h1 and h2, we need to minimize M (h1, h2).
+Alternatively, minimizing this quantity is equivalent to ﬁnding
+the nearest rank-1 matrix to H [26], which has the well-known
+singular value decomposition (SVD) solution [52].
+Thus, using the SVD, the matrix H can be factorized as
+H = U1UT
+2 =
+L2∑
+l=1
+σlu1;luT
+2;l, (5)
+where U1 and U2 are two orthogonal matrices of sizes L1×L1
+and L2 × L2, respectively, and  is an L1 × L2 rectangular
+diagonal matrix with nonnegative real numbers on its main
+diagonal. The columns of U1 (resp. U2) are the left-singular
+(resp. right-singular) vectors of H, while the diagonal entries
+σl, l = 1, 2, . . . , L2 of  represent the singular values of H,
+with σ1 ≥ σ2 ≥ · · · ≥ σL2 ≥ 0. In this context, the optimal
+impulse responses that minimize M (h1, h2) are
+h1 = √σ1u1;1,
+h2 = √σ1u2;1,
+where u1;1 (resp. u2;1)
+is the ﬁrst column of U1 (resp. U2).
+Hence, the optimal approximation of h is
+h = h2 ⊗ h1. (6)
+At
+this point, it should be noticed that there is no unique set
+of solutions, since h2 ⊗ h1 = ηh2 ⊗ (1/η)h1,
+where η ̸= 0 is
+a real-valued number. Hence, in this context, the pair (1/η)h1
+and ηh2 is
+equivalent to the pair h1 and h2.
+However, the
+global impulse response h results
+with no scaling ambiguity.
+
+2329-9290 (c) 2018 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission. See http://www.ieee.org/publications_standards/publications/rights/index.html for more information.
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication. Citation information: DOI 10.1109/TASLP.2019.2903276, IEEE/ACM
+Transactions on Audio, Speech, and Language Processing
+IEEE/A
+CM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. XX, NO. YY , XXXX XXXX 3
+In the more general case (i.e., when the short impulse
+responses sl, l = 1, 2, . . . , L2 may not be that linearly
+dependent), we can approximate h as
+h ≈
+P∑
+p=1
+h2;p ⊗ h1;p = vec
+(
+H1HT
+2
+)
+, (7)
+where P ≤ L2, h1;p and h2;p are impulse responses of
+lengths L1 and L2, respectively, vec(·) denotes the vector-
+ization operation (i.e., conversion of a matrix into a vector
+[53]), and H1 =
+[ h1;1 h1;2 . . . h1;P
+]
+and H2 =[ h2;1 h2;2 . . . h2;P
+]
+are matrices of sizes L1 × P and
+L2 × P , respectively. Therefore, the problem is to minimize
+M (H1, H2) =
+H − H1HT
+2
+
+F
+∥H∥F
+, (8)
+which
+leads to the optimal solutions:
+H1 =
+[
+h1;1 h1;2 .
+. . h1;P
+]
+(9)
+=
+[ √σ1u1;1
+√σ2u1;2 .
+. . √σP u1;P
+]
+,
+H2 =
+[
+h2;1 h2;2 .
+. . h2;P
+]
+(10)
+=
+[ √σ1u2;1
+√σ2u2;2 .
+. . √σP u2;P
+]
+,
+where u1;p,
+p = 1, 2, . . . , P (resp. u2;p, p = 1, 2, . . . , P)
+are the ﬁrst P columns of U1 (resp. U2). Consequently, the
+optimal approximation of h is
+h(P )
+=
+P∑
+p=1
+h2;p ⊗ h1;p =
+P∑
+p=1
+σpu2;p ⊗ u1;p, (11)
+while
+for P = L2, we have the exact decomposition h =∑L2
+l=1 σlu2;l ⊗ u1;l. As outlined before, there is no unique set
+of solutions related to (11) [or to (9)–(10)], since ∑P
+p=1 h2;p ⊗
+h1;p = ∑P
+p=1 ηh2;p ⊗ (1/η)h1;p,
+where η is a real-valued
+scaling parameter. Nevertheless, the impulse response h(P ) is
+obtained
+without any scaling ambiguity.
+Concluding, if for P ≪ L2, the approximation in (11) is
+a good one, we can take advantage of this decomposition for
+system identiﬁcation problems. In other words, if the rank of
+the matrix H is equal to P ≪ L2, then we can estimate h at
+least as well as in the conventional approach. This framework
+ﬁts very well in the context of echo cancellation, where this
+matrix is never really full rank (because of the redundancies
+due to the reﬂections and/or sparseness in the system).
+For example, let us consider a typical echo path deﬁned
+by the impulse response, h, of length L = L1L2. Let P be
+a positive integer (with P ≤ L2), which is involved in the
+optimal approximation from (11). Hence, the objective is to
+evaluate how h(P ) approximates h for
+different values of P .
+In this context, we can deﬁne the approximation error related
+to (11), which results in e(P ) = h−h(P )
+= ∑L2
+i=P +1 σiu2;i⊗
+u1;i. In order to evaluate the validity of (11), we could use
+a performance measure based on the Euclidean norm of this
+error vector (normalized to the Euclidean norm of the true
+impulse response), which is also known as the normalized
+misalignment:
+M
+[
+h(P )
+]
+= ∥e(P )∥2
+∥h∥2
+=
+h − h(P )
+
+2
+∥h∥2
+. (12)
+Clearly , M
+[
+h(L2)
+]
+= 0. If for a reasonable value of P < L 2,
+we get a reasonable attenuation of the misalignment, then we
+can use the proposed approach to model the echo path.
+Finally, at this point, a legitimate question could be: why
+not using a multidimensional decomposition of the impulse
+response, with more than two components? Nevertheless, the
+standard SVD solution presented before (related to the nearest
+rank-1 matrix problem) is valid only for the two-dimensional
+case, while a higher-order extension would be a more difﬁcult
+problem [26], [37], [54]. Therefore, a higher-order decompo-
+sition, though highly interesting (and potentially useful), is
+beyond the scope of this paper.
+III. RLS A LGORITHM BASED ON THE NEAREST
+KRONECKER PRODUCT DECOMPOSITION
+To ﬁnd the optimal ﬁlters required in (11), an iterative
+Wiener ﬁlter was proposed in [45]. However, the Wiener ﬁlter
+may not always be very efﬁcient or convenient to use in
+practice, due to its inherent limitations, e.g., estimation of
+the statistics, matrix inversion operation, and time-invariant
+system framework. Consequently, in this section, we derive an
+RLS algorithm based on the approach presented in Section II.
+Let us consider the signal model speciﬁc to a system
+identiﬁcation problem:
+d(t) = hT x(t) + w(t) = y(t) + w(t), (13)
+where d(t) is the zero-mean desired (or reference) sig-
+nal at the discrete-time index t, h is the impulse re-
+sponse of the unknown system (of length L), x(t) =[ x(t) x(t − 1) · · · x(t − L + 1) ]T
+is a vector contain-
+ing the most recent L time samples of the zero-mean input
+signal x(t), and w(t) is the zero-mean additive noise. It is
+assumed that all the data is real valued and x(t) and w(t)
+are uncorrelated. In the context of echo cancellation, the
+unknown system h is the echo path (from the loudspeaker
+to the microphone), y(t) represents the echo signal, and w(t)
+is the background noise captured by the microphone 1. From
+(13), we can deﬁne the signal-to-noise ratio (SNR) as
+SNR = σ2
+y
+σ2w
+, (14)
+where σ2
+y = E
+[
+y2(t)
+]
+and σ2
+w = E
+[
+w2(t)
+]
+are
+the variances
+of y(t) and w(t), respectively, with E[·] denoting mathematical
+expectation. At this point, the goal is to estimate h with an
+adaptive ﬁlter, bh(t), of length L. Thus, we can deﬁne the error
+signal between the desired signal, d(t), and the output of the
+adaptive ﬁlter (i.e., the estimated signal), by(t), as
+e(t) = d(t) − by(t) = d(t) − bhT (t − 1)x(t). (15)
+As explained in Section II, let us assume that L = L1L2
+(with L1 ≥ L2) and rank (H) = P < L 2, where H is deﬁned
+in (3), so that the impulse response can be decomposed as in
+1In a double-talk scenario, the microphone also captures the near-end
+speech, as will be explained and analyzed in Sections IV and V.
+
+2329-9290 (c) 2018 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission. See http://www.ieee.org/publications_standards/publications/rights/index.html for more information.
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication. Citation information: DOI 10.1109/TASLP.2019.2903276, IEEE/ACM
+Transactions on Audio, Speech, and Language Processing
+IEEE/A
+CM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. XX, NO. YY , XXXX XXXX 4
+(11). As a consequence, we can also choose to decompose the
+adaptive ﬁlter as
+bh(t) =
+P∑
+p=1
+bh2;p(t) ⊗ bh1;p(t), (16)
+where bh1;p(t) and bh2;p(t) are ﬁlters of lengths L1 and L2,
+respectively. Using the following relationships [53]:
+bh2;p(t) ⊗ bh1;p(t) =
+[
+bh2;p(t) ⊗ IL1
+]
+bh1;p(t) (17)
+=
+[
+IL2 ⊗ bh1;p(t)
+]
+bh2;p(t), (18)
+where IL1 and IL2 are the identity matrices of sizes L1 × L1
+and L2 × L2, respectively, into (16), the error signal in (15)
+can be expressed into two equivalent forms:
+e1(t) = d(t) −
+P∑
+p=1
+bhT
+1;p(t − 1)
+[
+bh2;p(t − 1) ⊗ IL1
+]T
+x(t)
+= d(t) −
+P∑
+p=1
+bhT
+1;p(t − 1)x2;p(t) = d(t) − bh
+T
+1 (t − 1)x2(t),
+(19)
+e2(t)
+= d(t) −
+P∑
+p=1
+bhT
+2;p(t − 1)
+[
+IL2 ⊗ bh1;p(t − 1)
+]T
+x(t)
+= d(t) −
+P∑
+p=1
+bhT
+2;p(t − 1)x1;p(t) = d(t) − bh
+T
+2 (t − 1)x1(t),
+(20)
+where
+x2;p(t)
+=
+[
+bh2;p(t − 1) ⊗ IL1
+]T
+x(t),
+bh1(t)
+=
+[
+bhT
+1;1(t) bhT
+1;2(t) · · · bhT
+1;P (t)
+]T
+,
+x2(t)
+=
+[ xT
+2;1(t) xT
+2;2(t) · · · xT
+2;P (t) ]T
+,
+x1;p(t) =
+[
+IL2 ⊗ bh1;p(t − 1)
+]T
+x(t),
+bh2(t)
+=
+[
+bhT
+2;1(t) bhT
+2;2(t) · · · bhT
+2;P (t)
+]T
+,
+x1(t)
+=
+[ xT
+1;1(t) xT
+1;2(t) · · · xT
+1;P (t) ]T
+.
+As we can notice, the system identiﬁcation problem can be
+reformulated in terms of two shorter ﬁlters, bh1(t) and bh2(t),
+of
+lengths P L1 and P L2, respectively. Their coefﬁcients are
+combined according to (16) to obtain an estimate of the
+global impulse response, bh(t), of length L = L1L2. As
+explained in Section II, for a reasonable value of P < L 2,
+this decomposition could lead to important advantages.
+Following the previous idea and based on the least-squares
+(LS) error criterion [4], the cost functions of the proposed
+algorithm are deﬁned as
+Jbh2
+[
+bh1(t)
+]
+=
+t∑
+i=1
+λt i
+1
+[
+d(i) − bh
+T
+1 (t)x2(i)
+]2
+, (21)
+Jbh1
+[
+bh2(t)
+]
+=
+t∑
+i=1
+λt i
+2
+[
+d(i) − bh
+T
+2 (t)x1(i)
+]2
+, (22)
+where λ1 (0 ≪ λ1 < 1) and λ2 (0 ≪ λ2 < 1) are the
+forgetting factors. As we can notice in (21), x2(i) (with i =
+1, 2,
+. . . , t) includes the contribution of bh2(i − 1),
+while in
+(22), x1(i) contains
+the elements of bh1(i − 1).
+Hence, the
+cost function Jbh2
+[
+bh1(t)
+]
+in
+(21) [which is designed for bh1(t)]
+also
+depends on bh2(t − 1), bh2(t − 2),
+. . . , bh2(0).
+Nevertheless,
+this dependence is attenuated by the presence of the forgetting
+factor λ1 [i.e., λt i
+1 , with i = 1, 2, . . . , t]. A similar discussion
+is valid for Jbh1
+[
+bh2(t)
+]
+in
+(22) [designed for bh2(t)]
+and its
+dependence on bh1(i − 1),
+i = 1, 2, . . . , t, which is attenuated
+by the forgetting factor λ2.
+At this point, we can follow a procedure similar to a bilinear
+optimization strategy [26], [55]. In our case, one of the systems
+is considered ﬁxed (for all the previous time indices) within
+the optimization criterion of the other one (at the current time
+index). In other words, based on the previous discussion, in the
+optimization criterion for bh1(t) [based
+on (21)], we assume
+that all bh2(i − 1),
+i = 1, 2, . . . , t, are ﬁxed. Similarly, bh2(t)
+is
+obtained based on (22), assuming that all bh1(i − 1),
+i =
+1, 2, . . . , t, are ﬁxed.
+Similar optimization strategies can be found in literature,
+e.g., see [27]– [29], [33], [34], [43]. However, in these works,
+the global impulse response of the system is considered to
+be perfectly separable (i.e., h = h2 ⊗ h1), without involving
+the nearest rank-1 problem and the related low-rank approx-
+imation. Hence, the resulting algorithms are applicable only
+for a particular (quasi-periodic) form of the impulse response.
+On the other hand, our solution can be used to identify more
+general (and realistic) forms of impulse responses.
+As one of the reviewers suggested, a more rigorous way
+to construct the optimization criteria could involve a block
+technique, where all the vectors x2(i) and x1(i) (with i =
+1, 2,
+. . . , t) are recomputed after each update of bh1(t) and
+bh2(t),
+respectively. Of course, such a procedure would not
+be very attractive from a complexity point of view. On the
+other hand, as shown in the following, the resulting algorithm
+based on (21)–(22) is stable and performs well in simulations.
+Under these considerations, the cost function from (21) can
+be developed as
+Jbh2
+[
+bh1(t)
+]
+= ξd;1(t) − 2bh
+T
+1 (t)p2(t)
++ bh
+T
+1 (t)R2(t)bh1(t),
+(23)
+where ξd;1(t)
+= ∑t
+i=1 λt i
+1 d2(i), p2(t)
+=∑t
+i=1 λt i
+1 x2(i)d(i),
+and R2(t)
+= ∑t
+i=1 λt i
+1 x2(i)xT
+2 (i).
+The
+last two terms can be recursively evaluated as
+p2(t)
+= λ1p2(t − 1)
++ x2(t)d(t), (24)
+R2(t)
+= λ1R2(t − 1)
++ x2(t)xT
+2 (t). (25)
+Similarly
+, the cost function from (22) results in
+Jbh1
+[
+bh2(t)
+]
+= ξd;2(t) − 2bh
+T
+2 (t)p1(t)
++ bh
+T
+2 (t)R1(t)bh2(t),
+(26)
+where ξd;2(t)
+= ∑t
+i=1 λt i
+2 d2(i), p1(t)
+=∑t
+i=1 λt i
+2 x1(i)d(i),
+and R1(t)
+= ∑t
+i=1 λt i
+2 x1(i)xT
+1 (i).
+
+2329-9290 (c) 2018 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission. See http://www.ieee.org/publications_standards/publications/rights/index.html for more information.
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication. Citation information: DOI 10.1109/TASLP.2019.2903276, IEEE/ACM
+Transactions on Audio, Speech, and Language Processing
+IEEE/A
+CM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. XX, NO. YY , XXXX XXXX 5
+Also, we can recursively evaluate
+p1(t)
+= λ2p1(t − 1)
++ x1(t)d(t), (27)
+R1(t)
+= λ2R1(t − 1)
++ x1(t)xT
+1 (t). (28)
+The
+minimization of Jbh2
+[
+bh1(t)
+]
+and Jbh1
+[
+bh2(t)
+]
+with
+respect
+to bh1(t) and bh2(t),
+respectively, lead to the well-
+known normal equations [4]:
+R2(t)bh1(t)
+= p2(t), (29)
+R1(t)bh2(t)
+= p1(t). (30)
+Also,
+based on the matrix inversion lemma [4] [applied in (25)
+and (28)], the updates of R 1
+2 (t) and R 1
+1 (t) result
+in
+R 1
+2 (t)
+= λ 1
+1
+[
+IP L1 − k2(t)xT
+2 (t)
+]
+R 1
+2 (t − 1), (31)
+R 1
+1 (t)
+= λ 1
+2
+[
+IP L2 − k1(t)xT
+1 (t)
+]
+R 1
+1 (t − 1), (32)
+where IP
+L1 and IP L2 denote the identity matrices of sizes
+P L1 ×P L1 and P L2 ×P L2, respectively, and k2(t) and k1(t)
+are the so-called Kalman gain vectors, which are evaluated as
+k2(t) = R 1
+2 (t − 1)x2(t)
+λ1 + xT
+2 (t)R 1
+2 (t − 1)x2(t) , (33)
+k1(t)
+= R 1
+1 (t − 1)x1(t)
+λ2 + xT
+1 (t)R 1
+1 (t − 1)x1(t) . (34)
+From
+the previous equations, it is straightforward to derive
+the RLS algorithm based on the nearest Kronecker product
+decomposition, namely RLS-NKP . This algorithm is deﬁned
+by the updates:
+bh1(t)
+= bh1(t − 1)
++ R 1
+2 (t)x2(t)e1(t)
+= bh1(t − 1)
++ k2(t)e1(t), (35)
+bh2(t)
+= bh2(t − 1)
++ R 1
+1 (t)x1(t)e2(t)
+= bh2(t − 1)
++ k1(t)e2(t), (36)
+where e1(t) and e2(t) are deﬁned in (19) and (20), respec-
+tively. As explained before (related to the optimization criteria
+and the cost functions), it can be noticed that bh1(t) depends
+on
+both bh1(t − 1) and bh2(t − 1),
+while bh2(t) also
+depends on
+both ﬁlters from the previous time index.
+A simple and reasonable mechanism to evaluate the conver-
+gence of the RLS-based algorithms is related to the conversion
+factor [4], [5]. Here, based on the cost function from (21), we
+can deﬁne the a posteriori error related to the ﬁlter bh1(t) as
+ε1(t)
+= d(t) − bh
+T
+1 (t)x2(t). (37)
+Using
+the update (35) in (37) and taking (19) into account,
+we obtain
+ε1(t) =
+[
+1 − kT
+2 (t)x2(t)
+]
+e1(t)
+= γ1(t)e1(t), (38)
+where γ1(t) = 1 − kT
+2 (t)x2(t) represents
+the conversion
+factor associated to the ﬁlter bh1(t).
+Replacing (33) into the
+expression of this conversion factor, it results in
+γ1(t) = 1
+1
++ λ 1
+1 xT
+2 (t)R 1
+2 (t − 1)x2(t) . (39)
+T
+ABLE I
+RLS-NKP A LGORITHM .
+Initialization:
+bh1;p(0)
+=
+[ ϵ 0 · · · 0 ]T , p = 1, 2, . . . , P (0 < ϵ ≤ 1)
+bh2;p(0) =
+[ ϵ 0 · · · 0 ]T , p = 1, 2, . . . , P (0 < ϵ ≤ 1)
+bh1(0)
+=
+[
+bhT
+1;1(0) bhT
+1;2(0) · · · bhT
+1;P (0)
+]T
+bh2(0)
+=
+[
+bhT
+2;1(0) bhT
+2;2(0) · · · bhT
+2;P (0)
+]T
+R 1
+2 (0)
+= δ 1
+1 IP L1 , R 1
+1 (0)
+= δ 1
+2 IP L2 , δ 1 > 0, δ 2 > 0
+λ1 = 1 − 1/(KP L1), λ 2 = 1 − 1/(KP L2), K ≥ 1
+For t = 1, 2, . . .
+x2;p(t) =
+[
+bh2;p(t − 1) ⊗ IL1
+]T
+x(t), p = 1, 2, . . . , P
+x1;p(t) =
+[
+IL2 ⊗ bh1;p(t − 1)
+]T
+x(t), p = 1, 2, . . . , P
+x2(t)
+=
+[
+xT
+2;1(t) xT
+2;2(t) · · · xT
+2;P (t)
+]T
+x1(t)
+=
+[
+xT
+1;1(t) xT
+1;2(t) · · · xT
+1;P (t)
+]T
+u2(t) = R 1
+2 (t − 1)x2(t), u1(t)
+= R 1
+1 (t − 1)x1(t)
+k2(t)
+= u2(t)
+λ1 + xT
+2 (t)u2(t) , k1(t)
+= u1(t)
+λ2 + xT
+1 (t)u1(t)
+e(t)
+= d(t) − bh
+T
+1 (t − 1)x2(t)
+= d(t) − bh
+T
+2 (t − 1)x1(t)
+bh1(t)
+= bh1(t − 1)
++ k2(t)e(t)
+=
+[
+bhT
+1;1(t) bhT
+1;2(t) · · · bhT
+1;P (t)
+]T
+bh2(t)
+= bh2(t − 1)
++ k1(t)e(t)
+=
+[
+bhT
+2;1(t) bhT
+2;2(t) · · · bhT
+2;P (t)
+]T
+bh(t) =
+P∑
+p=1
+bh2;p(t) ⊗ bh1;p(t)
+R 1
+2 (t)
+= λ 1
+1
+[
+R 1
+2 (t − 1) − k2(t)uT
+2 (t)
+]
+R 1
+1 (t)
+= λ 1
+2
+[
+R 1
+1 (t − 1) − k1(t)uT
+1 (t)
+]
+Since R 1
+2 (t − 1) is
+a positive-deﬁnite matrix, we have
+xT
+2 (t)R 1
+2 (t − 1)x2(t) ≥ 0.
+Consequently, 0 < γ 1(t) ≤ 1,
+so that |ε1(t)| ≤ |e 1(t)|. Similarly, following (22), we can
+process the a posteriori error for the second ﬁlter, i.e.,
+ε2(t) = d(t) − bh
+T
+2 (t)x1(t)
+=
+[
+1 − kT
+1 (t)x1(t)
+]
+e2(t)
+= γ2(t)e2(t), (40)
+where γ2(t) = 1 − kT
+1 (t)x1(t) is
+the conversion factor
+associated to the ﬁlter bh2(t),
+which can be expressed as
+γ2(t) = 1
+1
++ λ 1
+2 xT
+1 (t)R 1
+1 (t − 1)x1(t) . (41)
+Also,
+since xT
+1 (t)R 1
+1 (t−1)x1(t) ≥ 0,
+we have 0 < γ 2(t) ≤ 1
+and |ε2(t)| ≤ | e2(t)|. Hence, the algorithm is convergent.
+The proposed RLS-NKP algorithm is summarized in Ta-
+ble I, in a form that facilitates its implementation and evalu-
+ation of the computational complexity. As we can notice, the
+RLS-NKP algorithm involves matrices of size P L1 × P L1
+and P L2 × P L2, while the regular RLS algorithm would
+involve matrices of size L1L2 × L1L2. Basically, a system
+
+2329-9290 (c) 2018 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission. See http://www.ieee.org/publications_standards/publications/rights/index.html for more information.
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication. Citation information: DOI 10.1109/TASLP.2019.2903276, IEEE/ACM
+Transactions on Audio, Speech, and Language Processing
+IEEE/A
+CM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. XX, NO. YY , XXXX XXXX 6
+identiﬁcation problem of size L = L1L2 is transformed into
+two smaller problems of size P L1 and P L2, respectively.
+Consequently, when P ≪ L2 ≤ L1, it is much more
+convenient to use the proposed RLS-NKP algorithm instead
+of the regular RLS algorithm. In this context, in order to
+maximize the gain in terms of complexity, it is reasonable
+to select the value of L1 close to the value of L2, such that
+the sum L1 + L2 should be as small as possible as compared
+to the product L1L2 [45], [51]. Besides, since the proposed
+RLS-NKP algorithm uses two shorter ﬁlters of lengths P L1
+and P L2, improved convergence and tracking capabilities are
+expected (as compared to the regular RLS algorithm, which
+uses a longer adaptive ﬁlter). Simulation results provided in
+Section V support this aspect.
+Finally, we should outline that the RLS-NKP algorithm
+developed in this section is based on the line of the standard
+RLS algorithm. Thus, in this form, the proposed solution
+cannot be regarded as a “fast” RLS algorithm, since its
+computational complexity is still proportional to the square of
+the ﬁlters’ lengths (even if they are shorter as compared to the
+length of the standard algorithm). As mentioned in Section I,
+the main goal of this paper is not to proposed a fast RLS-based
+algorithm, but to outline the features of the decomposition
+approach and low-rank approximation. However, it would be
+highly interesting to extend these ideas in case of the fast
+RLS versions, like the RLS-DCD or QRD-LSL algorithms.
+Nevertheless, there are several additional challenges related to
+this purpose. For example, the tap-delay line structure (or the
+time-shift property) of x1(t) and x2(t) is
+not applicable within
+the RLS-NKP algorithm. Therefore, the approach cannot be
+straightforwardly extended based on the line of the RLS-
+DCD algorithm, where the time-shift property plays a key role
+in reducing the computational complexity [7]. Hence, further
+investigations are needed toward this goal; some potential hints
+can be found in [13].
+IV. V ARIABLE REGULARIZED RLS-NKP A LGORITHM
+A very important issue in echo cancellation is the double-
+talk robustness provided by the adaptive algorithm [1], [2].
+In a double-talk scenario, the talkers on both sides speak
+simultaneously, so that the near-end speech acts like a large
+level disturbance to the adaptive ﬁlter. For this purpose, the
+RLS-based algorithms should use a value of the forgetting
+factor very close to 1 [56]. On the other hand, a high value of
+the forgetting factor signiﬁcantly affects the tracking capability
+of the algorithm. However, the double-talk robustness of
+the RLS algorithm can also be controlled in terms of the
+regularization parameter [14], [57].
+At ﬁrst glance, the regularization term is required in matrix
+inversion when this matrix is ill-conditioned, especially in the
+initialization stage of the algorithm. For example, as we can
+notice in Table I, the RLS-NKP algorithm uses regularization
+constants only in the initialization stage, but the inﬂuence
+of these terms is negligible (for t large enough) due to the
+forgetting factors. Nevertheless, the role of the regularization
+parameters could be of great importance in practice, since
+regularization is a must in all ill-posed problems, especially in
+the presence of additive noise (or the near-end signal, in the
+context of echo cancellation) [58]– [60].
+In this section, we focus on the regularized RLS algo-
+rithm [5] and develop a version based on the nearest Kronecker
+product decomposition. Also, following the idea from [60],
+a method to select the optimal regularization parameters is
+presented, so that the algorithm could behave well in noisy
+conditions and especially during double-talk. Moreover, using
+a proper estimation of the SNR, the ﬁnal solution results in
+the form of a variable regularized algorithm. Finally, in order
+to reduce the computational amount required by the matrix
+inversion operation, the DCD algorithm [6], [7] is involved.
+Let us consider the regularized LS criterion [5], so that the
+cost functions from (21)–(22) become
+eJbh2
+[
+bh1(t)
+]
+= Jbh2
+[
+bh1(t)
+]
++ δ1
+bh1(t)
+
+2
+, (42)
+eJbh1
+[
+bh2(t)
+]
+= Jbh1
+[
+bh2(t)
+]
++ δ2
+bh2(t)
+
+2
+, (43)
+where δ1 and δ2 are
+the regularization parameters. Based on
+these cost functions, the updates of the regularized RLS-NKP
+(R-RLS-NKP) algorithm result in
+bh1(t)
+= bh1(t − 1)
++ [R2(t)
++ δ1IP L1] 1 x2(t)e1(t), (44)
+bh2(t)
+= bh2(t − 1)
++ [R1(t)
++ δ2IP L2] 1 x1(t)e2(t), (45)
+where R2(t) and R1(t) are
+deﬁned in (25) and (28), respec-
+tively, while the error signal is given in (19)–(20).
+It can be noticed that the update equations of the R-RLS-
+NKP algorithm can be rewritten as
+bh1(t)
+= P2(t)bh1(t − 1)
++ eh1(t), (46)
+bh2(t)
+= P1(t)bh2(t − 1)
++ eh2(t), (47)
+where P2(t)
+= IP L1 − [R2(t)
++ δ1IP L1 ] 1 x2(t)xT
+2 (t),
+P1(t)
+= IP L2 − [R1(t)
++ δ2IP L2] 1 x1(t)xT
+1 (t),
+and
+eh1(t)
+= [R2(t)
++ δ1IP L1 ] 1 x2(t)d(t), (48)
+eh2(t)
+= [R1(t)
++ δ2IP L2 ] 1 x1(t)d(t). (49)
+The
+terms in (48)–(49) are the correction components of the
+algorithm, which depend on the new observation d(t). In this
+context, we can notice that P2(t) and P1(t) ha
+ve a weak
+dependence on the noise signal [only through x2(t) and x1(t)];
+also, P2(t)bh1(t − 1) and P1(t)bh2(t − 1) [in
+(46) and (47),
+respectively] can be seen as good initializations of the adaptive
+ﬁlters. In fact, (48) and (49) are the solutions of the noisy linear
+systems of equations:
+[R2(t)
++ δ1IP L1 ] eh1(t)
+= x2(t)d(t), (50)
+[R1(t)
++ δ2IP L2 ] eh2(t)
+= x1(t)d(t). (51)
+Let
+us deﬁne
+ee1(t) = d(t) − eh
+T
+1 (t)x2(t), (52)
+ee2(t)
+= d(t) − eh
+T
+2 (t)x1(t), (53)
+the
+error signals between the desired signal and the estimated
+signals obtained from the ﬁlters optimized in (48) and (49),
+respectively. In the context of real-world system identiﬁcation
+problems (like echo cancellation), the goal is to recover the
+
+2329-9290 (c) 2018 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission. See http://www.ieee.org/publications_standards/publications/rights/index.html for more information.
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication. Citation information: DOI 10.1109/TASLP.2019.2903276, IEEE/ACM
+Transactions on Audio, Speech, and Language Processing
+IEEE/A
+CM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. XX, NO. YY , XXXX XXXX 7
+noise signal from the error of the adaptive ﬁlter. Consequently,
+we could ﬁnd δ1 and δ2 in such a way that the expected values
+of ee2
+1(t) and ee2
+2(t) are equal to the variance of the noise, i.e.,
+E
+[
+ee2
+1(t)
+]
+= σ2
+w, (54)
+E
+[
+ee2
+2(t)
+]
+= σ2
+w. (55)
+Similar conditions can be found in the context of different
+adaptive algorithms with variable step-size or variable forget-
+ting factor, e.g., [61], [62].
+In the following, toward the purpose of deriving a variable
+regularized algorithm, it will be necessary to approximate sev-
+eral quantities in order to simplify the developments. Although
+some of the approximations could look exaggerated (except in
+some particular cases), the resulting regularization parameters
+work well in practice, as will be supported in Section V.
+Before developing (54)–(55), let us focus on the matrices
+R2(t) and R1(t).
+Based on (25) and (28), and for t large
+enough, it is reasonable to consider the approximations:
+R2(t) ≈ (1 − λ1) 1 E
+[
+x2(t)xT
+2 (t)
+]
+, (56)
+R1(t) ≈ (1 − λ2) 1 E
+[
+x1(t)xT
+1 (t)
+]
+. (57)
+The
+next step is to process the matrices E
+[
+x2(t)xT
+2 (t)
+]
+and
+E
+[
+x1(t)xT
+1 (t)
+]
+.
+As we can notice, each of these matrices (of
+size P L1 × P L1 and P L2 × P L2, respectively) contain P 2
+matrices of size L1 × L1 and L2 × L2, respectively. At this
+point, let us assume that the covariance matrix of the input
+signal is close to a diagonal one, i.e., E
+[
+x(t)xT (t)
+]
+≈ σ2
+xIL,
+where σ2
+x = E
+[
+x2(t)
+]
+is the variance of x(t). This assumption
+on the character of the input signal could look quite restrictive,
+even if it was widely used in many developments in the context
+of adaptive ﬁltering [4], [5]. However, despite this assumption,
+the R-RLS-NKP algorithm still uses the full matrices R2(t)
+and R1(t) in
+the updates (44) and (45), respectively; thus,
+it inherits the good performance features of the RLS-based
+algorithms in case of correlated inputs. In this context, taking
+into account the deﬁnition of x2(t),
+we can write that
+E
+[
+x2(t)xT
+2 (t)
+]
+≈ (58)
+σ2
+x
+
+
+#2;11(t   1)IL1 #2;12(t   1)IL1 
+  #2;1P (t   1)IL1
+#2;21(t   1)IL1 #2;22(t   1)IL1    #2;2P (t   1)IL1
+...
+...
+. . .
+...
+#2;P 1(t   1)IL1 #2;P 2(t   1)IL1    #2;P P (t   1)IL1
+
+,
+where ϑ2;ij(t−1) = E
+[bh2;i(t − 1) ⊙ bh2;j(t − 1)
+
+2
+]
+, i, j =
+1, 2, . . . , P and ⊙ denotes the Hadamard product. Similarly,
+based on the deﬁnition of x1(t),
+we obtain
+E
+[
+x1(t)xT
+1 (t)
+]
+≈ (59)
+σ2
+x
+
+
+#1;11(t   1)IL2 #1;12(t   1)IL2 
+  #1;1P (t   1)IL2
+#1;21(t   1)IL2 #1;22(t   1)IL2    #1;2P (t   1)IL2
+...
+...
+. . .
+...
+#1;P 1(t   1)IL2 #1;P 2(t   1)IL2    #1;P P (t   1)IL2
+
+,
+where ϑ1;ij(t−1) = E
+[bh1;i(t − 1) ⊙ bh1;j(t − 1)
+
+2
+]
+, i, j =
+1, 2, . . . , P.
+As we can notice from (58) and (59), each of these matrices
+contains P 2 diagonal matrices (of size L1 × L1 and L2 × L2,
+respectively). On the other hand, using the assumption that the
+short impulse responses composing bh2(t) and bh1(t) are nearly
+(statistically) independent, we can consider that the dominant
+parts in (58)–(59) are the diagonal matrices from their main
+diagonals, i.e., ϑ2;ii(t − 1)IL1 = E
+[bh2;i(t − 1)
+
+2
+2
+]
+IL1 and
+ϑ1;ii(t − 1)IL2 = E
+[bh1;i(t − 1)
+
+2
+2
+]
+IL2 , respectively, with
+i = 1, 2, . . . , P. This is also a quite strong but needed assump-
+tion, in order to obtain computable values for the regularization
+parameters; in addition, the simulations results support the
+good behavior of the resulting algorithm. In other words,
+we can further approximate the matrices in (58) and (59)
+as block diagonal matrices. Moreover, we can consider that
+the components of the impulse responses have approximately
+the same norm, i.e.,
+bh2;i(t − 1)
+
+2
+2
+≈ (1/P )
+bh2(t − 1)
+
+2
+2
+and
+bh1;i(t − 1)
+
+2
+2
+≈ (1/P )
+bh1(t − 1)
+
+2
+2
+,
+respectively, with
+i = 1, 2, . . . , P. Therefore, we can ﬁnally write that
+E
+[
+x2(t)xT
+2 (t)
+]
+≈ 1
+P E
+[bh2(t − 1)
+
+2
+2
+]
+σ2
+xIP
+L1 , (60)
+E
+[
+x1(t)xT
+1 (t)
+]
+≈ 1
+P E
+[bh1(t − 1)
+
+2
+2
+]
+σ2
+xIP
+L2 . (61)
+As shown in the following, the previously used assumptions
+(even quite strong) could signiﬁcantly simplify the devel-
+opments and the resulting expressions of the regularization
+parameters. Besides, we should take into account that the
+values of the regularization parameters should not be always
+very accurate in practice; usually, an approximate value (to
+some extent) could perform reasonably well.
+In this framework, based on (56)–(57) and (60)–(61), and
+considering that the forgetting factors λ1 and λ2 are on the
+orders of 1−1/(P L1) and 1−1/(P L2), respectively, we have
+R2(t)
++ δ1IP L1 ≈
+{
+L1E
+[bh2(t − 1)
+
+2
+2
+]
+σ2
+x + δ1
+}
+IP
+L1,
+R1(t)
++ δ2IP L2 ≈
+{
+L2E
+[bh1(t − 1)
+
+2
+2
+]
+σ2
+x + δ2
+}
+IP
+L2.
+Next, squaring and taking the expectations on both sides of
+(52)–(53), then developing (54)–(55) based on the previous
+relations, we obtain the quadratic equations:
+δ2
+1 − 2 α1
+SNR δ1 − α2
+1
+SNR =
+0, (62)
+δ2
+2 − 2 α2
+SNR δ2 − α2
+2
+SNR =
+0, (63)
+where α1 = L1E
+[bh2(t − 1)
+
+2
+2
+]
+σ2
+x and α2 =
+L2E
+[bh1(t − 1)
+
+2
+2
+]
+σ2
+x.
+Hence, the obvious solutions
+of the regularization parameters are
+δ1 = α1
+(
+1 +
+√
+1
++ SNR
+)
+SNR , (64)
+δ2 = α2
+(
+1
++
+√
+1
++ SNR
+)
+SNR , (65)
+where
+the SNR is deﬁned in (14).
+
+2329-9290 (c) 2018 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission. See http://www.ieee.org/publications_standards/publications/rights/index.html for more information.
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication. Citation information: DOI 10.1109/TASLP.2019.2903276, IEEE/ACM
+Transactions on Audio, Speech, and Language Processing
+IEEE/A
+CM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. XX, NO. YY , XXXX XXXX 8
+The regularization parameters from (64)–(65) depend on
+several elements: i) the lengths L1 and L2, ii) the norms of the
+estimated impulse responses (in terms of their expectation), iii)
+the variance of the input signal, and iv) the SNR. Among these,
+the most problematic term is the SNR, taking into account
+that in real-world echo cancellation scenarios the background
+noise could be nonstationary and the near-end speech could
+be present. However, using a proper evaluation of the SNR,
+the algorithm should own good robustness features against the
+near-end signal variations, like double-talk.
+To this purpose, let us assume that the adaptive ﬁlter
+has converged to a certain degree, so that we can use the
+approximation y(t) ≈ by(t). Thus,
+σ2
+y ≈ σ2
+by, (66)
+where σ2
+by = E
+[
+by2(t)
+]
+is the variance of the estimated signal
+by(t). Hence, in this context, a simple and reliable estimate of
+the noise power is [63]
+σ2
+w ≈ σ2
+d − σ2
+by. (67)
+where σ2
+d = E
+[
+d2(t)
+]
+is the variance of the desired signal.
+The power estimates can be recursively evaluated as
+bσ2
+d(t) = βbσ2
+d(t − 1) + (1 − β)d2(t), (68)
+bσ2
+by(t) = βbσ2
+by(t − 1) + (1 − β)by2(t), (69)
+where β = 1 − 1/(κL) is a weighting parameter (with κ > 1)
+and bσ2
+d(0) = bσ2
+by(0) = 0. Therefore, using (66) and (67) into
+(14), an estimation of the SNR is obtained as
+dSNR(t) =
+bσ2
+by(t)bσ2
+d(t) − bσ2
+by(t)
+
+. (70)
+Also,
+since bh1(t − 1) and bh2(t − 1) are
+available at time index
+t, we can omit the expectation operator in α1 and α2. Thus,
+the regularization parameters from (64)–(65) result in
+δ1(t) = L1
+bh2(t − 1)
+
+2
+2
+s(t)σ2
+x, (71)
+δ2(t)
+= L2
+bh1(t − 1)
+
+2
+2
+s(t)σ2
+x, (72)
+where s(t)
+=
+[
+1 +
+√
+1
++ dSNR(t)
+]
+/ dSNR(t). Thus, we obtain
+a variable regularized RLS-NKP algorithm, with the updates:
+bh1(t)
+= bh1(t − 1)
++ [R2(t)
++ δ1(t)IP L1] 1 x2(t)e1(t),
+(73)
+bh2(t)
+= bh2(t − 1)
++ [R1(t)
++ δ2(t)IP L2] 1 x1(t)e2(t),
+(74)
+where R2(t) and R1(t) are
+recursively evaluated according
+to (25) and (28), respectively, and the variable regularization
+parameters are computed based on (68)–(72).
+Related to the SNR estimate, some practical issues should
+be outlined. The absolute values in (70) prevent any minor
+deviations (due to the use of power estimates) from the true
+values, which can make the denominator negative. The main
+drawback is due to the approximation in (66). This assumption
+will be biased in the initial convergence phase or when there
+is a change of the unknown system. Concerning the initial
+convergence, we can use constant regularization parameters in
+the ﬁrst steps of the algorithm (e.g., in the ﬁrst L iterations).
+It can be noticed that the computational complexity of
+the variable regularized RLS-NKP algorithm is cubic, since
+matrix inversion operations are involved in (73) and (74). Due
+to the presence of the regularization parameters within the
+algorithm, the matrix inversion lemma cannot be applied here
+(as in the case of the RLS-NKP algorithm from Section III).
+However, we can use the DCD algorithm [6], [7] to reduce
+the computational complexity in this step up to the square of
+the ﬁlters’ lengths 2.
+Toward this purpose, the problem can be interpreted in terms
+of solving the normal equations [5]:
+eR2(t)bh1(t)
+= p2(t), (75)
+eR1(t)bh2(t)
+= p1(t), (76)
+where eR2(t)
+= R2(t)
++ δ1(t)IP L1 , eR1(t)
+= R1(t)
++
+δ2(t)IP L2 , and p2(t) and p1(t) are
+given in (24) and (27),
+respectively. As an alternative to the classical approaches [4],
+[5], the normal equations (75)–(76) can be recursively solved
+using the DCD method [6], [7]. Following the development
+from [7], the basic idea is to express the problem in terms of
+auxiliary normal equations with respect to increments of the
+ﬁlter weights. In our case, we need to solve
+eR2(t)△bh1(t)
+= ep2(t), (77)
+eR2(t)△bh2(t)
+= ep1(t), (78)
+where △bh1(t)
+= bh1(t) − bh1(t − 1) and △bh2(t)
+= bh2(t) −
+bh2(t − 1) are
+the increments of the ﬁlter weights and
+ep2(t)
+= λ1r1(t − 1)
++ x2(t)e1(t), (79)
+ep1(t)
+= λ2r2(t − 1)
++ x1(t)e2(t), (80)
+with
+r1(t − 1)
+= p2(t − 1) − eR2(t − 1)bh1(t − 1), (81)
+r2(t − 1)
+= p1(t − 1) − eR1(t − 1)bh2(t − 1) (82)
+representing
+the residual vectors associated to the solutions.
+The derivation behind (79)–(82) is not detailed here for the
+sake of brevity; the procedure is similar to that used in [7].
+In this work, the auxiliary normal equations from (75)–
+(76) are solved by using the DCD algorithm with a leading
+element [7]. This algorithm does not need multiplications or
+divisions (these operations are simply replaced by bit-shifts),
+but only additions, so that it is well-suited for hardware im-
+plementation. The method has “unsuccessful” iterations (i.e.,
+without updates of the solutions) and “successful” iterations,
+when the increments △bh1(t) and △bh2(t) are
+updated, and
+the residual vectors r1(t) and r2(t) are
+adjusted to reﬂect
+the changes in the solution vectors. The maximum number
+of allowed updates or “successful” iterations, denoted by Nu,
+has to be a priori selected. In practice, the value of Nu is much
+2As explained in the end of Section III, a further complexity reduction (up
+to a linear dependence with the ﬁlters’ lengths) is difﬁcult due to the particular
+structure of the vectors x1(t) and x2(t).
+
+2329-9290 (c) 2018 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission. See http://www.ieee.org/publications_standards/publications/rights/index.html for more information.
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication. Citation information: DOI 10.1109/TASLP.2019.2903276, IEEE/ACM
+Transactions on Audio, Speech, and Language Processing
+IEEE/A
+CM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. XX, NO. YY , XXXX XXXX 9
+TABLE II
+VR-RLS-NKP-DCD A LGORITHM .
+Initialization:
+bh1;p(0)
+=
+[ ϵ 0 · · · 0 ]T , p = 1, 2, . . . , P (0 < ϵ ≤ 1)
+bh2;p(0) =
+[ ϵ 0 · · · 0 ]T , p = 1, 2, . . . , P (0 < ϵ ≤ 1)
+bh1(0)
+=
+[
+bhT
+1;1(0) bhT
+1;2(0) · · · bhT
+1;P (0)
+]T
+bh2(0)
+=
+[
+bhT
+2;1(0) bhT
+2;2(0) · · · bhT
+2;P (0)
+]T
+R2(0)
+= 0P L1P L1 , R1(0)
+= 0P L2P L2
+r1(0)
+= 0P L11, r2(0)
+= 0P L21
+bσ2
+d(0) = 0 , bσ2
+by(0) = 0 , β = 1 − 1/(κL), κ > 1
+σ2
+x = variance of the input signal (known or estimated)
+λ1 = 1 − 1/(KP L1), λ 2 = 1 − 1/(KP L2), K ≥ 1
+For t = 1, 2, . . .
+x2;p(t) =
+[
+bh2;p(t − 1) ⊗ IL1
+]T
+x(t), p = 1, 2, . . . , P
+x1;p(t) =
+[
+IL2 ⊗ bh1;p(t − 1)
+]T
+x(t), p = 1, 2, . . . , P
+x2(t)
+=
+[
+xT
+2;1(t) xT
+2;2(t) · · · xT
+2;P (t)
+]T
+x1(t)
+=
+[
+xT
+1;1(t) xT
+1;2(t) · · · xT
+1;P (t)
+]T
+R2(t)
+= λ1R2(t − 1)
++ x2(t)xT
+2 (t)
+R1(t)
+= λ2R1(t − 1)
++ x1(t)xT
+1 (t)
+by(t)
+= bh
+T
+1 (t − 1)x2(t)
+= bh
+T
+2 (t − 1)x1(t)
+e(t)
+= d(t) − by(t)
+bσ2
+d(t) = βbσ2
+d(t − 1) + (1 − β)d2(t)
+bσ2
+by(t) = βbσ2
+by(t − 1) + (1 − β)by2(t)
+dSNR(t) =
+bσ2
+by(t)
+bσ2
+d(t) − bσ2
+by(t)
+
+s(t)
+=
+1 +
+√
+1
++ dSNR(t)
+dSNR(t)
+δ1(t)
+= L1
+bh2(t − 1)
+
+2
+s(t)σ2
+x
+δ2(t)
+= L2
+bh1(t − 1)
+
+2
+s(t)σ2
+x
+eR2(t)
+= R2(t)
++ δ1(t)IP L1
+eR1(t)
+= R1(t)
++ δ2(t)IP L2
+ep2(t)
+= λ1r1(t − 1)
++ x2(t)e(t)
+ep1(t)
+= λ2r2(t − 1)
++ x1(t)e(t)
+eR2(t)△bh1(t)
+= ep2(t) ⇒
+△bh1(t), r1(t)
+()
+eR1(t)△bh2(t)
+= ep1(t) ⇒
+△bh2(t), r2(t)
+()
+[() to be solved with DCD iterations]
+bh1(t)
+= bh1(t − 1)
++ △bh1(t)
+=
+[
+bhT
+1;1(t) bhT
+1;2(t) ·
+· · bhT
+1;P (t)
+]T
+bh2(t)
+= bh2(t − 1)
++ △bh2(t)
+=
+[
+bhT
+2;1(t) bhT
+2;2(t) ·
+· · bhT
+2;P (t)
+]T
+bh(t) =
+P∑
+p=1
+bh2;p(t) ⊗ bh1;p(t)
+smaller
+as compared to the length of the ﬁlter. For example, as
+shown in [12], even with one successful update (i.e., Nu = 1)
+P
+10 20 30
+Multiplications
+× 106
+0
+1
+2
+3
+4
+(b)
+RLS
+RLS-NKP
+VR-RLS-NKP-DCD
+P
+2 4 6 8 10
+Multiplications
+× 104
+0
+2
+4
+6
+(d)
+RLS-DCD
+QRD-LSL
+VR-RLS-NKP-DCD
+P
+5 10 15 20
+Multiplications
+× 105
+0
+2
+4
+6
+8
+(a)
+RLS
+RLS-NKP
+VR-RLS-NKP-DCD
+P
+2 4 6 8
+Multiplications
+× 104
+0
+0.5
+1
+1.5
+2
+(c)
+RLS-DCD
+QRD-LSL
+VR-RLS-NKP-DCD
+Fig.
+1. Number of multiplications (per iteration) required by the algorithms
+from Table III, as a function of P . The RLS-NKP and VR-RLS-NKP-DCD
+algorithms use two shorter ﬁlters of lengths P L1 and P L2 (with P ≤ L2),
+while the length of the other RLS-based ﬁlters is L = L1L2. (a) L1 = 25 ,
+L2 = 20 , and L = 500 ; (b) L1 = L2 = 32 and L = 1024 ; (c) L1 = 25 ,
+L2 = 20, and L = 500; (d) L1 = L2 = 32 and L = 1024.
+accurate results can be obtained. Insightful implementation
+details about the DCD algorithm can be found in [8].
+Summarizing, the variable regularized RLS-NKP algorithm
+using the DCD iterations, namely VR-RLS-NKP-DCD, is
+provided in Table II. The steps that involve the DCD algorithm
+are marked with (). Also, the computational complexities
+of the proposed RLS-NKP algorithms and other benchmark
+algorithms are detailed in Table III; besides the regular RLS
+ﬁlter, we included here two fast algorithms, i.e., RLS-DCD
+[7] and QRD-LSL [4]. The speciﬁc parameter Mb represents
+the number of predeﬁned values (within a certain amplitude
+range) for the step-size of the DCD algorithms [6], [7].
+As we can notice, when P ≪ L2, the computational
+complexity of the RLS-NKP algorithm is much lower as
+compared to the regular RLS algorithm. In case of the VR-
+RLS-NKP-DCD algorithm, the most expensive operations
+are related to the update of the matrices eR2(t) and eR1(t)
+[see
+also (25) and (28), respectively]. On the other hand,
+the update terms x2(t)xT
+2 (t) and x1(t)xT
+1 (t) are
+symmetric
+block Toeplitz matrices. Moreover, each of them contains P 2
+symmetric matrices of size L1 × L1 and L2 × L2, respec-
+tively. Due to these properties, there is a reduction factor of
+P (P + 1)/(4P 2) in terms of complexity, as compared to the
+full computational effort [i.e., (P L1)2 + (P L2)2], as shown in
+Table III. Clearly, the RLS-DCD algorithm [7] rules in terms
+of its low computational complexity.
+For a better visualization, the computational complexity
+is also illustrated in Fig. 1, in terms of the number of
+multiplications (per iteration) required by the algorithms from
+Table III. In this example, two lengths of the impulse response
+are considered, i.e., L = 500 and 1024. In the ﬁrst case, the
+decomposition is performed using L1 = 25 and L2 = 20
+[45], while in the second case we use L1 = L2 = 32
+[51]. As we can notice from Fig. 1(a), where L = 500 and
+L2 = 20, the computational complexity of the RLS-NKP
+algorithm exceeds its RLS counterpart for P ≥ 16. Also,
+
+2329-9290 (c) 2018 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission. See http://www.ieee.org/publications_standards/publications/rights/index.html for more information.
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication. Citation information: DOI 10.1109/TASLP.2019.2903276, IEEE/ACM
+Transactions on Audio, Speech, and Language Processing
+IEEE/A
+CM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. XX, NO. YY , XXXX XXXX 10
+TABLE III
+COMPUTATIONAL COMPLEXITY OF THE DIFFERENT RLS A LGORITHMS .
+Algorithms × + ÷ √
+RLS 2L2 +
+2L 2L2 + L +
+1 1 0
+RLS-NKP (P +
+2)L+2(P L1)2+2(P L2)2+2P L1+
+3P L2
+(P +
+1)L−(L1 +L2)+2(P L1)2 +2(P L2)2 +P L2 +3 2 0
+VR-RLS-NKP-DCD (P +
+2)L + P (P + 1)/(4P 2)[(P L1)2 +
+(P L2)2] + 3P L1 + 4P L2 + 11
+(P +
+1)L − (L1 + L2) + P (P + 1) /(4P 2) ×
+[(P L1)2 + ( P L2)2] + 4 P L1 + 5 P L2 + 4 +
+max [2(P L1 + P L2 + 1)Nu + 2Mb]
+2 1
+RLS-DCD
+[7] 5L max [(2L +
+1)Nu + Mb] 0 0
+QRD-LSL
+[4] 25L +
+11 8L +
+3 4L +
+2 4L +
+2
+as
+shown in Fig. 1(b), where L = 1024 and L2 = 32, the
+same conclusion is valid for P ≥ 23. On the other hand,
+as illustrated in the experiments reported in Section V, the
+RLS-NKP algorithm using P ≪ L2 performs very well for
+the identiﬁcation of typical echo paths. As we can notice,
+the VR-RLS-NKP-DCD algorithm is much more advantageous
+in terms of computational complexity, being less complex as
+compared to the regular RLS algorithm even for large values
+of P . However, as outlined before, the VR-RLS-NKP-DCD
+cannot be considered a “fast” RLS algorithm. Nevertheless,
+for P ≪ L2, its computational complexity is comparable
+to the QRD-LSL algorithm, as we can notice in Figs. 1(c)
+and (d). None of the algorithms can outperform the RLS-
+DCD algorithm in terms of the computational efﬁciency.
+However, as shown in the next section, the proposed RLS-
+NKP algorithms could obtain improved convergence/tracking
+performance as compared to the standard algorithms.
+V. S IMULATION RESULTS
+In this section, simulation results are provided in order to
+support the performance of the RLS-NKP algorithms devel-
+oped in Sections III and IV. First, the experimental framework
+is detailed, outlining the backgrounds provided in Section II.
+Then, the behavior of the proposed algorithms is analyzed in
+the context of echo cancellation.
+In [45], the approach summarized in Section II was analyzed
+from a system identiﬁcation perspective, in terms of the
+Wiener ﬁlter. In this context, the features and the limitations
+of this framework were outlined. As shown in [45], this
+decomposition approach ﬁts very well for the identiﬁcation
+of low-rank systems, like in echo cancellation scenarios. To
+support this aspect, we follow the experimental framework
+from [45] and consider six impulse responses of lengths
+L = 500 or 1024, which are denoted by h(a), h(b), h(c), h(d),
+h(e), and h(f), as depicted in Fig. 2. The plot in Fig. 2(a)
+shows the ﬁrst impulse response from G168 Recommendation
+[64] (i.e., a cluster of 64 coefﬁcients padded with zeros). Also,
+the second impulse response depicted in Fig. 2(b) is obtained
+by concatenating the ﬁrst and ﬁfth impulse responses from
+G168 Recommendation [64] (i.e., two clusters of 64 and 96
+coefﬁcients, respectively, which are padded with zeros). The
+burst impulse response from Fig. 2(c) contains a cluster of
+64 random taps (with Gaussian distribution), while the rest
+are zeros. Next, the burst impulse response from Fig. 1(d)
+contains two clusters of 64 and 32 random taps. In Figs. 2(a)–
+(d), the length of the impulse responses is L = 500 . Finally,
+Samples
+0 100 200 300 400 500
+Amplitude-0.1
+0
+0.1
+0.2
+(a)
+Samples
+0 100 200 300 400 500
+Amplitude-0.2
+0
+0.2
+(b)
+Samples
+0 100 200 300 400 500
+Amplitude-2
+0
+2
+(c)
+Samples
+0 100 200 300 400 500
+Amplitude-2
+0
+2
+(d)
+Samples
+0 500 1000
+Amplitude-0.01
+0
+0.01
+0.02
+(e)
+Samples
+0 500 1000
+Amplitude-0.01
+0
+0.01
+(f)
+Fig.
+2. Impulse responses used in simulations: (a) the ﬁrst impulse response
+from G168 Recommendation [64], with L = 500 and ξ12
+(
+h(a)
+)
+= 0.8957;
+(b) the ﬁrst and the ﬁfth impulse responses (concatenated) from G168
+Recommendation [64], with L = 500 and ξ12
+(
+h(b)
+)
+= 0 .8080; (c) burst
+impulse response (one cluster of random taps with Gaussian distribution),
+with L = 500 and ξ12
+(
+h(c)
+)
+= 0. 7549; (d) burst impulse response (two
+clusters of random taps with Gaussian distribution), with L = 500 and
+ξ12
+(
+h(d)
+)
+= 0 .6867; (e) acoustic impulse response, with L = 1024 and
+ξ12
+(
+h(e)
+)
+= 0.6523; and (f) acoustic impulse response, with L = 1024 and
+ξ12
+(
+h(f)
+)
+= 0.6475.
+the impulse responses from Figs. 2(e) and (f) represent two
+measured acoustic echo paths, with L = 1024.
+These impulse responses have different sparseness degrees
+(indicated in the caption of Fig. 2), which can be evaluated
+using a sparseness measure based on the ℓ1 and ℓ2 norms [23]:
+ξ12 (h) = L
+L −
+√
+L
+(
+1 − ∥h∥1√
+L∥h∥2
+)
+, (83)
+where ∥h∥1 = ∑L
+l=1 |hl| is
+the ℓ1 norm of the vector
+h =
+[ h1 h2 · · · hL
+]T
+. The closer the measure from
+(83) is to 1, the sparser is the impulse response. On the
+contrary, the closer the measure is to 0, the denser or less
+sparse is the impulse response. Usually, the network echo paths
+are sparser as compared to acoustic impulse responses. As we
+can notice, the relation between the sparseness measure of the
+impulse responses from Fig. 2 is ξ12
+(
+h(a)
+)
+> ξ 12
+(
+h(b)
+)
+>
+ξ12
+(
+h(c)
+)
+> ξ 12
+(
+h(d)
+)
+> ξ 12
+(
+h(e)
+)
+> ξ 12
+(
+h(f)
+)
+. However,
+as will be shown in simulations, the sparsity of the system
+helps (by reducing the rank of the matrix H), but it is not the
+only factor. The main issue is related to the decomposition
+and low-rank approximation of the impulse response.
+To support this aspect, the singular values of H (normalized
+with respect to the maximum one) are depicted in Fig. 3. The
+
+2329-9290 (c) 2018 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission. See http://www.ieee.org/publications_standards/publications/rights/index.html for more information.
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication. Citation information: DOI 10.1109/TASLP.2019.2903276, IEEE/ACM
+Transactions on Audio, Speech, and Language Processing
+IEEE/A
+CM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. XX, NO. YY , XXXX XXXX 11
+Index (l)
+5 10 15 20
+0
+0.5
+1
+(a)
+Index (l)
+5 10 15 20
+0
+0.5
+1
+(b)
+Index (l)
+5 10 15 20
+0
+0.5
+1
+(c)
+Index (l)
+5 10 15 20
+0
+0.5
+1
+(d)
+Index (l)
+10 20 30
+0
+0.5
+1
+(e)
+Index (l)
+10 20 30
+0
+0.5
+1
+(f)
+Fig.
+3. Singular values (normalized with respect to the maximum one) of the
+matrix H for the corresponding impulse responses from Fig. 2. The size of
+matrix H is L1 ×L2. (a)–(d) L1 = 25 and L2 = 20; (e)–(f) L1 = L2 = 32.
+P
+2 4 6 8 10 12 14 16 18 20
+Misalignment (dB)
+-100
+-50
+0
+(a)
+h(a)
+h(b)
+h(c)
+h(d)
+P
+5 10 15 20 25 30
+Misalignment (dB)
+-100
+-50
+0
+(b)
+h(e)
+h(f)
+Fig.
+4. Normalized misalignment of the impulse responses from Fig. 2
+[evaluated based on (12)] for different values of P . (a) L = 500 with L1 =
+25 and L2 = 20; (b) L = 1024 with L1 = L2 = 32.
+faster these values decrease to zero, the better is the approx-
+imation that leads to (11). We can notice that the singular
+values decrease quite fast in case of the impulse responses
+from Figs. 2(a) and (b); hence, a good approximation of these
+two impulse responses is expected for a small value of P .
+The burst impulse responses from Figs. 2(c) and (d) are less
+sparse as compared to the network echo paths from Figs. 2(a)
+and (b). Nevertheless, based on the evolution of the singular
+values, a good approximation of these burst impulse response
+could be obtained even for a value of P much smaller than
+L2, since the rank of the matrix H is also low in this case. On
+the other hand, a larger value of P could be required in case
+of the acoustic impulse responses from Figs. 2(e) and (f).
+It is also interesting to evaluate the normalized misalignment
+deﬁned in (12) for the six impulse responses from Fig. 2. The
+results are provided in Fig. 4; for a better visualization, the
+plot representation is limited to −100 dB. As we can notice
+in Fig. 4(a), the network echo paths deﬁned by the impulse
+responses from Figs. 2(a) and (b) can be very well approxi-
+mated even for a small value of P . The same conclusion is
+valid for the burst impulse responses from Figs. 2(c) and (d);
+even if they are less sparse as compared to the network echo
+paths from Figs. 2(a) and (b), the rank of the matrix H is
+also much smaller as compared to L2. In case of the acoustic
+impulse responses from Figs. 2(e) and (f), a larger value of
+P is required as compared to the previous cases (for a good
+approximation). As we can notice in Fig. 4(b), even if the
+impulse response h(f) is less sparse as compared to h(e) (based
+on ξ12), a better approximation is expected for h(f).
+For the acoustic channels, there is not a generally applicable
+physical property that underpins the low-rank approximation
+(with P ≪ L2). However, even in this case, a reasonable
+attenuation of the misalignment [e.g., around −20 dB in
+Fig. 4(b)] can be obtained using a relatively small value of P
+(as compared to L2). Overall, these preliminary results validate
+the approximation behind (11) and justify the motivation that
+led to the development of the proposed RLS-NKP algorithms.
+The following simulations are performed in the context of
+echo cancellation, using the impulse responses from Fig. 2.
+In the experiments involving the impulse responses from
+Figs. 2(a)–(d) we set L1 = 25 and L2 = 20, while for
+the acoustic impulse responses from Figs. 2(e) and (f) we
+choose L1 = L2 = 32 (see the discussion from the end of
+Section III, which is also explained in [45], [51]). The input
+signal x(t) is either an AR(1) process [which is generated by
+ﬁltering a white Gaussian noise through a ﬁrst-order system
+1/
+(
+1 − 0.9z 1)
+] or a speech sequence; the sampling rate is
+8 kHz. The additive noise w(t) (which corrupts the output of
+the unknown system) is white and Gaussian, such that SNR =
+20 dB. The performance measure is the normalized misalign-
+ment (in dB), deﬁned as 20log10
+[h − bh(t)
+
+2
+/ ∥h∥2
+]
+; the
+results are averaged over 20 independent trials.
+In the ﬁrst set of experiments, the input signal is an AR(1)
+process. The proposed RLS-NKP algorithm from Section III
+is compared to the regular RLS algorithm [4] and the RLS-
+DCD algorithm [7]; the RLS-DCD algorithm uses Mb = 16
+and Nu = 1 (i.e., only one “successful” update [7], [12]),
+which is sufﬁcient to match the performance of the regular
+RLS algorithm. At this point, we should outline that the RLS-
+NKP algorithm involves two adaptive ﬁlters of length P L1 and
+P L2, respectively, while the RLS and RLS-DCD algorithm
+involve one adaptive ﬁlter of length L = L1L2. The main
+parameter that controls the performance of the RLS-based
+algorithm is the forgetting factor. Usually, this parameter is set
+according to the length of the ﬁlter, based on the following
+rule of thumb:
+forgetting factor = 1 − 1
+K × (length
+of the ﬁlter) , (84)
+with K ≥ 1. Hence, the longer the ﬁlter, the closer the forget-
+ting factor is to one. Based on (84), the forgetting factors of the
+RLS-NKP algorithm could be set to λ1 = 1 − 1/[K(P L1)]
+and λ2 = 1 − 1/[K(P L2)], while the RLS and RLS-DCD
+algorithms could use the forgetting factor λ = 1 − 1/(KL).
+These values will be involved in most of the experiments, us-
+ing K = 10. However, for a more detailed comparison in terms
+of the main performance criteria (i.e., convergence/tracking
+versus misadjustment), we will also use different values of
+the forgetting factors in some of the experiments.
+First, the impulse responses from Figs. 2(a) and (b) are
+
+2329-9290 (c) 2018 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission. See http://www.ieee.org/publications_standards/publications/rights/index.html for more information.
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication. Citation information: DOI 10.1109/TASLP.2019.2903276, IEEE/ACM
+Transactions on Audio, Speech, and Language Processing
+IEEE/A
+CM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. XX, NO. YY , XXXX XXXX 12
+Time (seconds)
+0 1 2 3 4 5 6 7 8 9
+Normalized misalignment (dB)
+-30
+-25
+-20
+-15
+-10
+-5
+0
+5
+10 RLS
+RLS-DCD
+RLS-NKP, P = 3
+RLS-NKP, P = 5
+RLS-NKP, P = 8
+Fig.
+5. Normalized misalignment of the RLS, RLS-DCD, and RLS-NKP
+algorithms, for the identiﬁcation of the impulse responses from Figs. 2(a)
+and (b). The impulse response changes at times 3 and 6 seconds. The input
+signal is an AR(1) process, L = 500, and SNR = 20 dB. The RLS-NKP
+algorithm uses L1 = 25, L2 = 20, and different values of P . The forgetting
+factors are set according to (84), with K = 10.
+Time (seconds)
+0 1 2 3 4 5 6 7 8 9
+Normalized misalignment (dB)
+-35
+-30
+-25
+-20
+-15
+-10
+-5
+0
+5
+10
+RLS, λ = 0.999
+RLS-DCD, λ = 0.999
+RLS, λ = 0.9998
+RLS-DCD, λ = 0.9998
+RLS-NKP, P = 5, λ1 = λ2 = 0.9998
+RLS-NKP, P = 8, λ1 = λ2 = 0.9998
+Fig.
+6. Normalized misalignment of the RLS, RLS-DCD, and RLS-
+NKP algorithms (using different values of the forgetting factors), for the
+identiﬁcation of the impulse responses from Figs. 2(a) and (b). The impulse
+response changes at times 3 and 6 seconds. The input signal is an AR(1)
+process, L = 500 , and SNR = 20 dB. The RLS-NKP algorithm uses
+L1 = 25, L2 = 20, and different values of P .
+involved in the experiments. In order to test the tracking ca-
+pabilities of the algorithms, two abrupt changes of the impulse
+response are introduced, as follows: the impulse response from
+Fig. 2(a) is shifted to the right by 12 samples after 3 seconds;
+then, at time 6 seconds, the impulse response from Fig. 2(b)
+is used. As we can notice in the ﬁrst two parts of Fig. 5, the
+RLS-NKP algorithm using P ≥ 3 achieves a similar initial
+convergence rate and steady-state misalignment as the RLS
+and RLS-DCD algorithms, but it performs better in terms of
+tracking. Similar conclusions result from the last part of Fig. 5,
+for the impulse response from Fig. 2(b). However, since the
+rank of the matrix H is higher in this case, the value of P
+should be larger; thus, the RLS-NKP algorithm using P = 3
+leads to a higher misalignment level.
+In the previous experiment, the forgetting factors of the
+algorithms were set according to (84), using the same value of
+K. In this case, all the algorithms reach similar misalignment
+Time (seconds)
+0 1 2 3 4 5 6 7 8 9
+Normalized misalignment (dB)
+-25
+-20
+-15
+-10
+-5
+0
+5
+10
+RLS
+RLS-DCD
+RLS-NKP, P = 3
+RLS-NKP, P = 5
+RLS-NKP, P = 8
+Fig.
+7. Normalized misalignment of the RLS, RLS-DCD, and RLS-NKP
+algorithms, for the identiﬁcation of the impulse responses from Figs. 2(c)
+and (d). The impulse response changes at times 3 and 6 seconds. The input
+signal is an AR(1) process, L = 500 , and SNR = 20 dB. The RLS-NKP
+algorithm uses L1 = 25, L2 = 20, and different values of P . The forgetting
+factors are set according to (84), with K = 10.
+Time (seconds)
+0 1 2 3 4 5 6 7 8 9
+Normalized misalignment (dB)
+-30
+-25
+-20
+-15
+-10
+-5
+0
+5
+10 RLS-DCD, λ = 0.999
+RLS-DCD, λ = 0.9998
+RLS-NKP, P = 8, λ1 = λ2 = 0.9998
+Fig.
+8. Normalized misalignment of the RLS-DCD and RLS-NKP algorithms
+(using different values of the forgetting factors), for the identiﬁcation of the
+impulse responses from Figs. 2(c) and (d). The impulse response changes at
+times 3 and 6 seconds. The input signal is an AR(1) process, L = 500, and
+SNR = 20 dB. The RLS-NKP algorithm uses L1 = 25 and L2 = 20.
+levels, but the RLS-NKP algorithm tracks faster, since it uses
+a combination of two shorter ﬁlters. This aspect could further
+imply two strategies: i) to increase the forgetting factors of the
+RLS-NKP algorithm in order to obtain a lower misalignment
+level (paying with a slower tracking reaction) and ii) to reduce
+the forgetting factor of the RLS and RLS-DCD algorithms
+in order to improve their tracking capabilities (but paying
+with a higher misalignment level). We illustrate both these ap-
+proaches in Fig. 6, which proves that the proposed RLS-NKP
+algorithm could achieve a much lower misalignment level
+(as compared to its regular counterparts), while its tracking
+reaction is similar to the RLS and RLS-DCD algorithms using
+a smaller forgetting factor. As mentioned before, a higher value
+of P is recommended for the identiﬁcation of the impulse
+response from Fig. 2(b).
+Similar conclusions result from Figs. 7 and 8, where the
+impulse response from Figs. 2(c) and (d) are identiﬁed. In
+these simulations, an abrupt change of the impulse response
+
+2329-9290 (c) 2018 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission. See http://www.ieee.org/publications_standards/publications/rights/index.html for more information.
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication. Citation information: DOI 10.1109/TASLP.2019.2903276, IEEE/ACM
+Transactions on Audio, Speech, and Language Processing
+IEEE/A
+CM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. XX, NO. YY , XXXX XXXX 13
+Time (seconds)
+0 2 4 6 8 10 12 14 16 18
+Normalized misalignment (dB)
+-25
+-20
+-15
+-10
+-5
+0
+5
+10
+RLS-DCD, λ = 0.999
+RLS-DCD, λ = 0.9999
+RLS-NKP, P = 10
+RLS-NKP, P = 12
+RLS-NKP, P = 15
+Fig.
+9. Normalized misalignment of the RLS-DCD and RLS-NKP algo-
+rithms, for the identiﬁcation of the impulse response from Fig. 2(e). The
+impulse response changes at times 6 and 12 seconds. The input signal is an
+AR(1) process, L = 1024, and SNR = 20 dB. The RLS-NKP algorithm uses
+L1 = L2 = 32 and different values of P . The RLS-DCD algorithm uses
+different values of the forgetting factor, including λ = 1 −1/(KL) = 0 .9999.
+The forgetting factors of the RLS-NKP algorithm are set according to (84),
+with K = 10.
+Time (seconds)
+0 2 4 6 8 10 12 14 16 18
+Normalized misalignment (dB)
+-25
+-20
+-15
+-10
+-5
+0
+5
+10
+RLS-DCD, λ = 0.999
+RLS-DCD, λ = 0.9999
+RLS-NKP, P = 10
+RLS-NKP, P = 12
+RLS-NKP, P = 15
+Fig.
+10. Normalized misalignment of the RLS-DCD and RLS-NKP algo-
+rithms, for the identiﬁcation of the impulse response from Fig. 2(f). The
+impulse response changes at times 6 and 12 seconds. Other conditions are
+the same as in Fig. 9.
+from Fig. 2(c) is introduced after 3 seconds, by changing the
+sign of the coefﬁcients; also, at time 6 seconds, the impulse
+response from Fig. 2(d) is involved. As we can notice, the
+results follow a similar pattern, even if these impulse responses
+are less sparse as compared to the network echo paths from
+Figs. 2(a) and (b) [based on the sparseness measure ξ12 from
+(83)]. Most important, the same better tracking reaction can be
+noticed in case of the RLS-NKP algorithm as compared to its
+regular counterparts. As expected (and supported in Fig. 4), the
+RLS-NKP algorithm using P = 3 cannot obtain an accurate
+result when identifying the impulse response from Fig. 2(d)
+(see the last part of Fig. 7). For the sake of brevity, only the
+RLS-DCD algorithm is involved in Fig. 8, since it achieves
+very similar performance as compared to the RLS algorithm
+(as supported before in Figs. 5–7).
+As we can notice in the previous experiments, the RLS and
+RLS-DCD algorithms perform very similarly, so that we could
+use only the RLS-DCD algorithm as a benchmark. Under this
+circumstance, the acoustic impulse responses from Figs. 2(e)
+and (f) are involved in the experiments; the results are reported
+in Figs. 9 and 10, respectively. Two abrupt changes of the
+echo path are considered, by shifting the impulse response
+to the right by 12 samples after 6 and 12 seconds. In case
+of the acoustic impulse responses, the matrix H is close to
+full-rank, so that we obtain an approximative solution when
+P < L 2. As we can notice, the RLS-DCD algorithm reaches
+a lower misalignment level as compared to the RLS-NKP
+algorithm when the forgetting factors are set according to
+(84), using the same K = 10 ; in case of the RLS-DCD
+algorithm, this value is λ = 1 − 1/(KL) = 0 .9999. However,
+a reasonable attenuation of the misalignment is achieved for
+a reasonable low value of P = 10 (as compared to L2 = 32).
+Moreover, the tracking capabilities of the RLS-NKP algorithm
+are better as compared to its regular counterpart. The RLS-
+DCD algorithm should use a smaller value of the forgetting
+factor (e.g., λ = 0.999) to achieve a similar tracking reaction
+with the RLS-NKP algorithm; on the other hand, the steady-
+state misalignment of the RLS-DCD algorithm is higher in
+this case. Finally, we can notice that a better approximation
+is obtained for the impulse response from Fig. 2(f), even if it
+is less sparse (based on ξ12) as compared to its counterpart
+from Fig. 2(e). This supports the result from Fig. 4(b) and the
+discussion related to the importance of the decomposition.
+In the second set of experiments, we investigate the per-
+formance of the regularized versions of the RLS-NKP al-
+gorithm. As outlined in Section IV, the advantages of the
+variable regularized algorithm could become more apparent
+in noisy environments and especially during double-talk. In
+the following, the performances of the RLS-NKP , R-RLS-
+NKP , and VR-RLS-NKP-DCD algorithms are compared. As
+a theoretical benchmark, we consider the “ideal” version of
+the R-RLS-NKP algorithm, which uses the updates (44)–(45)
+and the optimal regularization parameters from (64)–(65), but
+assuming that the true value of the SNR is known. Also,
+the matrix inversion operation is directly evaluated in (44)–
+(45). On the other hand, the VR-RLS-NKP-DCD algorithm
+iteratively estimates the SNR according to (70), which is much
+more convenient in practice; besides, the matrix inversion
+operation is avoided based on the DCD algorithm. Therefore,
+the reason behind the comparison with the “ideal” R-RLS-
+NKP algorithm is twofold, verifying both the validity of the
+SNR estimate and the efﬁciency of the DCD technique.
+In the following simulations, the input signal is a speech
+sequence. The forgetting factors of the algorithms are set
+according to (84), using K = 10. Simulations that are not
+shown here indicate that only one “successful” update (i.e.,
+Nu = 1) is sufﬁcient for the VR-RLS-NKP-DCD algorithm,
+in order to match the performance of the “ideal” R-RLS-NKP
+counterpart. Hence, the speciﬁc parameters of the VR-RLS-
+NKP-DCD algorithm are set to Nu = 1 and Mb = 16 [7],
+[12]. Only the impulse responses from Figs. 2(a), (b), (e), and
+(f) are involved in the following simulations, since they can
+be considered typical network and acoustic echo paths.
+In Fig. 11, the impulse response from Fig. 2(a) is identiﬁed
+based on the RLS-NKP , R-RLS-NKP , and VR-RLS-NKP-
+DCD algorithms using P = 3. An abrupt change of the echo
+
+2329-9290 (c) 2018 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission. See http://www.ieee.org/publications_standards/publications/rights/index.html for more information.
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication. Citation information: DOI 10.1109/TASLP.2019.2903276, IEEE/ACM
+Transactions on Audio, Speech, and Language Processing
+IEEE/A
+CM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. XX, NO. YY , XXXX XXXX 14
+Time (seconds)
+0 1 2 3 4 5 6
+Normalized misalignment (dB)
+-25
+-20
+-15
+-10
+-5
+0
+5
+10
+RLS-NKP
+R-RLS-NKP
+VR-RLS-NKP-DCD
+Fig.
+11. Normalized misalignment of the RLS-NKP , R-RLS-NKP and VR-
+RLS-NKP-DCD algorithms, for the identiﬁcation of the network impulse
+response from Fig. 2(a) (with L = 500 ). The algorithms use L1 = 25 ,
+L2 = 20 , and P = 3 . The input signal is a speech sequence and
+SNR = 20 dB. The impulse response changes after 3 seconds.
+Time (seconds)
+0 1 2 3 4 5 6
+Normalized misalignment (dB)
+-20
+-10
+0
+10
+20
+30
+40
+RLS-NKP
+R-RLS-NKP
+VR-RLS-NKP-DCD
+Fig.
+12. Normalized misalignment of the RLS-NKP , R-RLS-NKP and VR-
+RLS-NKP-DCD algorithms, for the identiﬁcation of the network impulse
+response from Fig. 2(a) (with L = 500 ). The algorithms use L1 = 25 ,
+L2 = 20 , and P = 3 . The input signal is a speech sequence and
+SNR = 20 dB. The near-end speech appears between times 3 and 4 seconds
+(double-talk scenario).
+path is introduced after 3 seconds, by shifting the impulse
+response to the right by 12 samples. As we can notice, the
+regularized versions achieve a lower misalignment level as
+compared to the RLS-NKP algorithm. The VR-RLS-NKP-
+DCD algorithm has a slower tracking reaction due to the
+approximation from (66). Otherwise, it performs very similarly
+to the “ideal” R-RLS-NKP algorithm.
+In Fig. 12, a double-talk scenario is considered; the near-
+end speech appears between times 3 and 4 seconds. In this
+case, the VR-RLS-NKP-DCD algorithms clearly outperforms
+its counterparts in terms of robustness. This is due to the
+estimate from (70), which also includes the contribution of
+the near-end speech within the term from the denominator.
+Even if the true SNR value (considering only the background
+noise) is available for the “ideal” R-RLS-NKP algorithm, it
+cannot cope with the presence of the near-end speech.
+As we can notice in Figs. 11 and 12, the initial convergence
+rate is not a relevant feature in case of the RLS-based
+Time (seconds)
+3 4 5 6 7 8 9
+Normalized misalignment (dB)
+-20
+-15
+-10
+-5
+0
+5
+10
+15
+20
+25
+30
+35
+RLS-NKP
+R-RLS-NKP
+VR-RLS-NKP-DCD
+Fig.
+13. Normalized misalignment of the RLS-NKP , R-RLS-NKP and VR-
+RLS-NKP-DCD algorithms, for the identiﬁcation of the network impulse
+response from Fig. 2(b) (with L = 500 ). The algorithms use L1 = 25 ,
+L2 = 20 , and P = 5 . The input signal is a speech sequence and
+SNR = 20 dB. The near-end speech appears between times 3 and 4 seconds
+(double-talk scenario). The impulse response changes after 6 seconds.
+Time (seconds)
+3 4 5 6 7 8 9
+Normalized misalignment (dB)
+-20
+-10
+0
+10
+20
+30
+40
+50
+60
+RLS-NKP
+R-RLS-NKP
+VR-RLS-NKP-DCD
+Fig.
+14. Normalized misalignment of the RLS-NKP , R-RLS-NKP and VR-
+RLS-NKP-DCD algorithms, for the identiﬁcation of the acoustic impulse
+response from Fig. 2(e) (with L = 1024). The algorithms use L1 = L2 = 32,
+and P = 10. The input signal is a speech sequence and SNR = 20 dB. The
+near-end speech appears between times 3 and 4 seconds (double-talk scenario).
+The impulse response changes after 6 seconds.
+algorithms [12]. More important and relevant is the tracking
+reaction of the algorithms and the double-talk robustness.
+Hence, for a better visualization, in the last three experiments,
+we focus only on these performance criteria (without showing
+the initial convergence rate).
+In Figs. 13–15, the RLS-NKP , R-RLS-NKP , and VR-RLS-
+NKP-DCD algorithms are used for the identiﬁcation of the
+echo paths from Figs. 2(b), (e), and (f), using P = 5 (in
+Fig. 13) and P = 10 (in Figs. 14 and 15). Two scenarios
+are considered in each simulation. First, the near-end speech
+appears at time 3 seconds for a period of one second. Then, an
+abrupt change of the echo path is introduced after 6 seconds
+(by shifting the impulse response to the right by 12 samples).
+Concluding, the VR-RLS-NKP-DCD algorithm is much more
+robust during double-talk as compared to its counterparts.
+
+2329-9290 (c) 2018 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission. See http://www.ieee.org/publications_standards/publications/rights/index.html for more information.
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication. Citation information: DOI 10.1109/TASLP.2019.2903276, IEEE/ACM
+Transactions on Audio, Speech, and Language Processing
+IEEE/A
+CM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. XX, NO. YY , XXXX XXXX 15
+Time (seconds)
+3 4 5 6 7 8 9
+Normalized misalignment (dB)
+-20
+-10
+0
+10
+20
+30
+40
+50
+60
+RLS-NKP
+R-RLS-NKP
+VR-RLS-NKP-DCD
+Fig.
+15. Normalized misalignment of the RLS-NKP , R-RLS-NKP and VR-
+RLS-NKP-DCD algorithms, for the identiﬁcation of the acoustic impulse
+response from Fig. 2(f) (with L = 1024). Other conditions are the same
+as in Fig. 14.
+VI. C ONCLUSIONS AND FUTURE WORKS
+The system identiﬁcation problems become more chal-
+lenging in case of long length impulse responses, like in
+echo cancellation. In terms of the performance criteria, these
+challenges mainly refer to the convergence rate, tracking, and
+complexity. Even the fast (i.e., low-complexity) versions of
+the RLS algorithm have to cope with the convergence/tracking
+issues associated with long length adaptive ﬁlters.
+In this paper, we have addressed these challenges from a dif-
+ferent perspective, by exploiting an efﬁcient decomposition of
+the impulse response based on the nearest Kronecker product
+and the related low-rank approximation. The idea was recently
+presented in [45], in terms of the Wiener ﬁlter. In order to
+provide a more practical solution for low-rank system identi-
+ﬁcation problems, we have proposed in this work several RLS-
+based algorithms following this approach, namely RLS-NKP .
+Besides the basic version of this algorithm, we have developed
+a variable regularized RLS-NKP algorithm, which also uses
+DCD iterations to avoid matrix inversion operations (namely
+VR-RLS-NKP-DCD). As shown in simulations, the RLS-NKP
+algorithm outperforms its regular RLS-based counterparts in
+terms of tracking capabilities; this is due to the fact that the
+RLS-NKP algorithm uses two shorter ﬁlter of length P L1 and
+P L2 (with P < L 2), while the length of the regular RLS-based
+ﬁlters is L = L1L2. Besides, for P ≪ L2 (which is usually the
+case), the computational complexity of the RLS-NKP is lower
+as compared to the regular RLS algorithm. In addition, the VR-
+RLS-NKP-DCD provides improved robustness to double-talk,
+due to the practical estimate of the SNR within the algorithm.
+Moreover, its computational complexity is lower as compared
+to the RLS-NKP algorithm and almost similar (for P ≪ L2)
+to other fast versions, like the QRD-LSL algorithm.
+Due to the lack of space, a detailed theoretical analysis (in
+terms of convergence and stability) of the proposed algorithms
+is beyond the scope of the paper and it will be explored
+in future works. In this context, it would be interesting to
+interpret the problem in terms of a combination of adaptive
+ﬁlters. Thus, a further analysis could reveal important aspects
+that should be taken into account when setting the parameters
+of these two ﬁlters, in order to improve the overall behavior.
+In perspective, it would be highly interesting to apply the
+proposed approach in case of other versions of the RLS algo-
+rithm (in this paper, only the classical form was considered).
+For example, we can focus on the fast versions of the RLS
+algorithm, e.g., following the lines of the RLS-DCD and QRD-
+LSL algorithms. Nevertheless, in this framework, we should
+take into account the speciﬁc challenges related to the particu-
+lar structure of the input data. On the other hand, a fast RLS-
+NKP algorithm would represent a very useful ﬁnding, since
+it could inherit the performance features of the decomposition
+approach, together with the low complexity speciﬁc to the
+fast versions. Also, it would be useful to extend these ideas
+for multichannel algorithms, targeting speciﬁc applications
+like stereophonic acoustic echo cancellation. Besides, the
+Kronecker product decomposition could be further exploited in
+this context, generalizing the approach for higher dimensions
+(i.e., more than two ﬁlters). Finally, even if the performances
+of the proposed RLS-NKP algorithms were illustrated in the
+context of echo cancellation, it would be interesting to evaluate
+their behavior in the framework of different other applications
+that require the identiﬁcation of low-rank systems.
+ACKNOWLEDGMENT
+The authors would like to thank the Associate Editor and
+the reviewers for the valuable comments and suggestions.
+REFERENCES
+[1] S. L. Gay and J. Benesty, Eds., Acoustic Signal Processing for Telecom-
+munication. Boston, MA: Kluwer Academic Publisher, 2000.
+[2] J. Benesty, T. G ¨ansler, D. R. Morgan, M. M. Sondhi, and S. L. Gay,
+Advances in Network and Acoustic Echo Cancellation. Berlin, Germany:
+Springer-V erlag, 2001.
+[3] J. Benesty and Y . Huang, Eds., Adaptive Signal Processing–Applications
+to Real-World Problems. Berlin, Germany: Springer-V erlag, 2003.
+[4] S. Haykin, Adaptive Filter Theory . Fourth Edition, Upper Saddle River,
+NJ: Prentice-Hall, 2002.
+[5] A. H. Sayed, Adaptive Filters. New Y ork, NY: Wiley, 2008.
+[6] Y . V . Zakharov and T. C. Tozer, “Multiplication-free iterative algorithm
+for LS problem,” IEE Electronics Lett. , vol. 40, pp. 567–569, Apr. 2004.
+[7] Y . V . Zakharov, G. P . White, and J. Liu, “Low-complexity RLS algo-
+rithms using dichotomous coordinate descent iterations,” IEEE Trans.
+Signal Processing , vol. 56, pp. 3150–3161, July 2008.
+[8] J. Liu, Y . V . Zakharov, and B. Weaver, “Architecture and FPGA design
+of dichotomous coordinate descent algorithms,” IEEE Trans. Circuits
+and Systems I: Regular Papers , vol. 56, pp. 2425–2438, Nov. 2009.
+[9] F. Albu, “Leading element dichotomous coordinate descent exponential
+recursive least squares algorithm for multichannel active noise control,”
+in Proc. AAS Acoustics, 2012, pp. 1–4.
+[10] C. Stanciu, J. Benesty, C. Paleologu, T. G ¨ansler, and S. Ciochin ˘a, “A
+widely linear model for stereophonic acoustic echo cancellation,” Signal
+Processing, vol. 93, pp. 511–516, Feb. 2013.
+[11] K. Nishikawa, Y . Ogawa, and F. Albu, “Fixed order implementation
+of kernel RLS-DCD adaptive ﬁlters,” in Proc. IEEE APSIPA , 2013 (6
+pages).
+[12] Y . V . Zakharov and V . H. Nascimento, “DCD-RLS adaptive ﬁlters with
+penalties for sparse identiﬁcation,” IEEE Trans. Signal Processing, vol.
+61, pp. 3198–3213, June 2013.
+[13] R. Claser, V . H. Nascimento, and Y . V . Zakharov, “A low-complexity
+RLS-DCD algorithm for V olterra system identiﬁcation,” in Proc. EU-
+SIPCO, 2016, pp. 6–10.
+[14] C. Elisei-Iliescu, C. Stanciu, C. Paleologu, J. Benesty, C. Anghel, and S.
+Ciochin˘a, “Robust variable regularized RLS algorithms,” in Proc. IEEE
+HSCMA, 2017, pp. 171–175.
+
+2329-9290 (c) 2018 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission. See http://www.ieee.org/publications_standards/publications/rights/index.html for more information.
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication. Citation information: DOI 10.1109/TASLP.2019.2903276, IEEE/ACM
+Transactions on Audio, Speech, and Language Processing
+IEEE/A
+CM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. XX, NO. YY , XXXX XXXX 16
+[15] L. Liu, Y . Zhang, and D. Sun, “VFF ℓ1-norm penalised WL-RLS al-
+gorithm using DCD iterations for underwater acoustic communication,”
+IET Communications, pp. 615–621, May 2017.
+[16] G. Kim, H. Lee, J. Chung, and J. Lee, “A delay relaxed RLS-DCD
+algorithm for real-time implementation,” IEEE Trans. Circuits and
+Systems II: Express Briefs , vol. 65, pp. 61–65, Jan. 2018.
+[17] Y . Zhang, Y . V . Zakharov, and J. Li, “Soft-decision-driven sparse chan-
+nel estimation and turbo equalization for MIMO underwater acoustic
+communications,” IEEE Access, vol. 6, pp. 4955–4973, Jan. 2018.
+[18] J. A. Apolin ´ario Jr., Ed., QRD-RLS Adaptive Filtering . New Y ork:
+Springer-V erlag, 2009.
+[19] D. L. Duttweiler, “Proportionate normalized least-mean-squares adapta-
+tion in echo cancelers,” IEEE Trans. Speech, Audio Processing, vol. 8,
+pp. 508–518, Sept. 2000.
+[20] J. Benesty and S. L. Gay, “An improved PNLMS algorithm,” in Proc.
+IEEE ICASSP , 2002, pp. II-1881–II-1884.
+[21] H. Deng and M. Doroslova ˇcki, “Proportionate adaptive algorithms for
+network echo cancellation,” IEEE Trans. Signal Processing , vol. 54, pp.
+1794–1803, May 2006.
+[22] P . Loganathan, A. W. Khong, and P . Naylor, “A class of sparseness-
+controlled algorithms for echo cancellation,” IEEE Trans. Audio, Speech,
+Language Processing, vol. 17, pp. 1591–1601, Nov. 2009.
+[23] C. Paleologu, J. Benesty, and S. Ciochin ˘a, Sparse Adaptive Filters for
+Echo Cancellation . Morgan & Claypool Publishers, 2010.
+[24] Z. Y ang, Y . R. Zheng, and S. L. Grant, “Proportionate afﬁne projection
+sign algorithms for network echo cancellation,” IEEE Trans. Audio,
+Speech, Language Processing, vol. 19, pp. 2273–2284, Nov. 2011.
+[25] J. Liu and S. L. Grant, “Proportionate adaptive ﬁltering for block-sparse
+system identiﬁcation,” IEEE/ACM Trans. Audio, Speech, Language
+Processing, vol. 24, pp. 623–630, Apr. 2016.
+[26] C. F. V an Loan, “The ubiquitous Kronecker product,” J. Computational
+Applied Mathematics , vol. 123, pp. 85–100, 2000.
+[27] D. Gesbert and P . Duhamel, “Robust blind joint data/channel estimation
+based on bilinear optimization,” in Proc. IEEE WSSAP, 1996, pp. 168–
+171.
+[28] A. Stenger, W. Kellermann, and R. Rabenstein, “Adaptation of acoustic
+echo cancellers incorporating a memoryless nonlinearity,” in Proc. IEEE
+IWAENC, 1999 (4 pages).
+[29] A. Stenger and W. Kellermann, “Adaptation of a memoryless prepro-
+cessor for nonlinear acoustic echo cancelling,” Signal Processing , vol.
+80, pp. 1747–1760, Sept. 2000.
+[30] R. Abrahamsson, S. M. Kay, and P . Stoica, “Estimation of the parameters
+of a bilinear model with applications to submarine detection and system
+identiﬁcation,” Digital Signal Processing , vol. 17, pp. 756–773, July
+2007.
+[31] N. V ervliet, O. Debals, L. Sorber, and L. De Lathauwer, “Breaking the
+curse of dimensionality using decompositions of incomplete tensors:
+Tensor-based scientiﬁc computing in big data analysis,” IEEE Signal
+Processing Mag., vol. 31, pp. 71–79, Sept. 2014.
+[32] A. Cichocki, D. Mandic, L. De Lathauwer, G. Zhou, Q. Zhao, C.
+Caiafa, and A. H. Phan, “Tensor decompositions for signal processing
+applications: From two-way to multiway component analysis,” IEEE
+Signal Processing Mag., vol. 32, pp. 145–163, Mar. 2015.
+[33] M. Rupp and S. Schwarz, “A tensor LMS algorithm,” in Proc. IEEE
+ICASSP, 2015, pp. 3347–3351.
+[34] M. Rupp and S. Schwarz, “Gradient-based approaches to learn tensor
+products,” in Proc. EUSIPCO, 2015, pp. 2486–2490.
+[35] L. N. Ribeiro, A. L. F. de Almeida, and J. C. M. Mota, “Identiﬁcation
+of separable systems using trilinear ﬁltering,” in Proc. IEEE CAMSAP ,
+2015, pp. 189–192.
+[36] F. C. Pinheiro and C. G. Lopes, “Newton-like nonlinear adaptive ﬁlters
+via simple multilinear functionals,” in Proc. EUSIPCO, 2016, pp. 1603–
+1607.
+[37] A. P . da Silva, P . Comon, and A. L. F. de Almeida, “A ﬁnite algorithm to
+compute rank-1 tensor approximations,” IEEE Signal Processing Lett. ,
+vol. 23, pp. 959–963, July 2016.
+[38] M. Bousse, O. Debals, and L. De Lathauwer, “A tensor-based method
+for large-scale blind source separation using segmentation,” IEEE Trans.
+Signal Processing, vol. 65, pp. 346–358, Jan. 2017.
+[39] J. Benesty, C. Paleologu, and S. Ciochin ˘a, “On the identiﬁcation of
+bilinear forms with the Wiener ﬁlter,” IEEE Signal Processing Lett. ,
+vol. 24, pp. 653–657, May 2017.
+[40] N. Sidiropoulos, L. De Lathauwer, X. Fu, K. Huang, E. Papalexakis, and
+C. Faloutsos, “Tensor decomposition for signal processing and machine
+learning,” IEEE Trans. Signal Processing, vol. 65, pp. 3551–3582, July
+2017.
+[41] L. N. Ribeiro, S. Schwarz, M. Rupp, A. L. F. de Almeida, and J. C. M.
+Mota, “A low-complexity equalizer for massive MIMO systems based
+on array separability,” in Proc. EUSIPCO , 2017, pp. 2522–2526.
+[42] M. N. da Costa, G. Favier, and J. M. T. Romano, “Tensor modelling
+of MIMO communication systems with performance analysis and Kro-
+necker receivers,” Signal Processing, vol. 145, pp. 304–316, Apr. 2018.
+[43] C. Paleologu, J. Benesty, and S. Ciochin ˘a, “Adaptive ﬁltering for the
+identiﬁcation of bilinear forms,” Digital Signal Processing , vol. 75, pp.
+153–167, Apr. 2018.
+[44] C. Elisei-Iliescu, C. Stanciu, C. Paleologu, J. Benesty, C. Anghel,
+and S. Ciochin ˘a, “Efﬁcient recursive least-squares algorithms for the
+identiﬁcation of bilinear forms,” Digital Signal Processing , vol. 83, pp.
+280–296, Dec. 2018.
+[45] C. Paleologu, J. Benesty, and S. Ciochin ˘a, “Linear system identiﬁcation
+based on a Kronecker product decomposition,” IEEE/ACM Trans. Audio,
+Speech, Language Processing, vol. 26, pp. 1793–1808, Oct. 2018.
+[46] L. N. Ribeiro, A. L. F. de Almeida, and J. C. M. Mota, “Separable lin-
+early constrained minimum variance beamformers,” Signal Processing,
+vol. 158, pp. 15–25, May 2019.
+[47] W. F. Schreiber, “Advanced television systems for terrestrial broadcast-
+ing: Some problems and some proposed solutions,” Proc. IEEE, vol. 83,
+pp. 958–981, June 1995.
+[48] A. Steingass, A. Lehner, F. Perez-Fontan, E. Kubista, and B. Arbesser-
+Rastburg, “Characterization of the aeronautical satellite navigation chan-
+nel through high-resolution measurement and physical optics simula-
+tion,” Int. J. Satellite Communications Networks , vol. 26, pp. 1–30, 2008.
+[49] Y . Buchris, A. Amar, J. Benesty, and I. Cohen, “Incoherent synthesis of
+sparse arrays for frequency-invariant beamforming,” IEEE/ACM Trans.
+Audio, Speech, Language Processing, vol. 27, pp. 482–495, Mar. 2019.
+[50] I. Cohen, J. Benesty, and J. Chen, “Differential Kronecker product
+beamforming,” IEEE/ACM Trans. Audio, Speech, Language Processing,
+to appear.
+[51] C. Elisei-Iliescu, C. Paleologu, J. Benesty, and S. Ciochin ˘a, “A recursive
+least-squares algorithm based on the nearest Kronecker product decom-
+position,” in Proc. IEEE ICASSP, 2019, to appear.
+[52] G. H. Golub and C. F. V an Loan, Matrix Computations, 3rd Edition.
+Baltimore, MD: The John Hopkins University Press, 1996.
+[53] D. A. Harville, Matrix Algebra From a Statistician’s Perspective. New
+Y ork: Springer-V erlag, 1997.
+[54] S. Friedland and V . Tammali, “Low-rank approximation of tensors,”
+in Numerical Algebra, Matrix Theory, Differential-Algebraic Equations
+and Control Theory , pp. 377–411, P . Benner et al., Eds. Cham, Switzer-
+land: Springer, 2015.
+[55] D. P . Bertsekas, Nonlinear Programming . Second Edition, Belmont,
+Massachusetts: Athena Scientiﬁc, 1999.
+[56] S. Ciochin ˘a, C. Paleologu, J. Benesty, and A. A. Enescu, “On the
+inﬂuence of the forgetting factor of the RLS adaptive ﬁlter in system
+identiﬁcation,” in Proc. IEEE ISSCS , 2009, pp. 205–208.
+[57] T. van Waterschoot, G. Rombouts, and M. Moonen, “Optimally regular-
+ized adaptive ﬁltering algorithms for room acoustic signal enhancement,”
+Signal Processing , vol. 88, pp. 594–611, Mar. 2008.
+[58] P . C. Hansen, Rank-Deﬁcient and Discrete Ill-Posed Problems: Numer-
+ical Aspects of Linear Inversion. Philadelphia, PA: SIAM, 1998.
+[59] J. Benesty, C. Paleologu, and S. Ciochin ˘a, “On regularization in adaptive
+ﬁltering,” IEEE Trans. Audio, Speech, Language Processing, vol. 19, pp.
+1734–1742, Aug. 2011.
+[60] J. Benesty, C. Paleologu, and S. Ciochin ˘a, “Regularization of the RLS
+algorithm,” IEICE Trans. Fundamentals, vol. E94-A, pp. 1628–1629,
+Aug. 2011.
+[61] J. Benesty, H. Rey, L. Rey V ega, and S. Tressens, “A non-parametric
+VSS NLMS algorithm,” IEEE Signal Processing Lett. , vol. 13, pp. 581–
+584, Oct. 2006.
+[62] C. Paleologu, J. Benesty, and S. Ciochin ˘a, “A robust variable forgetting
+factor recursive least-squares algorithm for system identiﬁcation,” IEEE
+Signal Processing Lett. , vol. 15, pp. 597–600, 2008.
+[63] C. Paleologu, S. Ciochin ˘a, and J. Benesty, “V ariable step-size NLMS
+algorithm for under-modeling acoustic echo cancellation,” IEEE Signal
+Processing Lett. , vol. 15, pp. 5–8, 2008.
+[64] Digital Network Echo Cancellers, ITU-T Recommendations G.168,
+2002.

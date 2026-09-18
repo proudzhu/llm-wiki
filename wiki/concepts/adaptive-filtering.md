@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-18
-updated: 2026-07-22
+updated: 2026-09-18
 sources:
 tags:
 - signal-processing
@@ -20,6 +20,7 @@ Adaptive filtering algorithms adjust their parameters in real-time to minimize a
 | [[momentum-lms\|Momentum LMS]] | LMS + momentum | Faster convergence, $\beta = 1/(1-\alpha)$ rate multiplier |
 | FxLMS | Modified LMS for ANC | Compensates for secondary path |
 | RLS | Recursive least squares | Fast convergence, high complexity |
+| [[concepts/rls-nkp\|RLS-NKP]] | Low-rank RLS | Nearest Kronecker product decomposition: two coupled short filters, faster tracking of long echo paths |
 | [[kalman-filter\|Kalman Filter]] | Optimal recursive estimator | Minimum MSE, requires state-space model |
 | [[extended-kalman-filter\|EKF]] | Nonlinear Kalman | Handles nonlinear dynamics via Jacobians |
 
@@ -44,3 +45,4 @@ The Kalman filter can be viewed as an adaptive filter with an optimal (minimum M
 
 - [[sources/welch-2006-kalman-filter-intro|Welch & Bishop 2006: Introduction to the Kalman Filter]]
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method]] — Frequency-domain adaptive algorithm for overall path identification in ANC
+- [[sources/elisei-iliescu-2019-low-rank-rls|Elisei-Iliescu et al. 2019: Recursive Least-Squares Algorithms for the Identification of Low-Rank Systems]] — introduces RLS-NKP: low-rank RLS via nearest Kronecker product decomposition

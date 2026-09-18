@@ -5432,6 +5432,12 @@ Ingested Pandey & Azcarreta 2025 (TinyGRU). Created source page pandey-2025-ultr
 
 ---
 
+## [2026-09-18] ingest | Recursive Least-Squares Algorithms for the Identification of Low-Rank Systems
+
+Ingested Elisei-Iliescu, Paleologu, Benesty, Stanciu, Anghel & Ciochina 2019 (IEEE/ACM TASLP, DOI 10.1109/TASLP.2019.2903276). Created source page plus concepts rls-nkp and nearest-kronecker-product; created entity pages for the five Bucharest authors and updated Jacob Benesty. Updated 9 concept pages (kronecker-product, kronecker-product-beamforming, singular-value-decomposition, eckart-young-theorem, adaptive-filtering, acoustic-echo-cancellation, system-identification, wiener-filter, robust-adaptive-filtering). Synthesis triage: no updates needed. Extraction used pypdf plain-text fallback after MinerU failures.
+
+---
+
 ## [2026-09-19] ingest | Design of the Wiener gain in noisy and reverberant environments (Xiang, Chen, Benesty, Lei & Pan 2025)
 
 Ingested Xiang et al. 2025. Created source page xiang-2025-wiener-gain-reverberant, concept snr-cdr-wiener-gain, and entity pages for Qian Xiang, Tao Lei, and Chao Pan. Updated 6 concept pages (wiener-filter, coherent-to-diffuse-power-ratio, multi-channel-wiener-filter, superdirective-beamforming, decision-directed-a-priori-snr, dereverberation) and entity pages for Jingdong Chen and Jacob Benesty. Extended multi-channel-speech-enhancement synthesis with the SNR-CDR Wiener gain in the Trade-off control column and CDR lineage. Statistics: 1357 total pages (585 entities, 521 concepts, 221 sources, 23 synthesis, 7 queries).

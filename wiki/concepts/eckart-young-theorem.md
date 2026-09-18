@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-07-12
-updated: 2026-07-12
+updated: 2026-09-18
 sources:
   - raw/papers/stewart-1993-early-history-svd/full-text.md
 tags:
@@ -48,6 +48,7 @@ The theorem transforms the SVD from a mere factorization into the definitive too
 - **Principal component analysis**: The connection between SVD and PCA is a direct consequence.
 - **Denoising**: Truncating small singular values suppresses noise under the assumption that signal energy is concentrated in large singular values.
 - **Numerical rank determination**: The spectral-norm gap $\sigma_{k+1}$ quantifies how close $\mathbf{A}$ is to a rank-$k$ matrix.
+- **Nearest Kronecker product**: the best rank-$P$ Kronecker approximation of a long impulse response (reshaped into an $L_1 \times L_2$ matrix) is a direct application — the foundation of the [[concepts/rls-nkp|RLS-NKP]] low-rank adaptive filters for echo-path identification ([[sources/elisei-iliescu-2019-low-rank-rls|Elisei-Iliescu et al. 2019]]; see [[concepts/nearest-kronecker-product|Nearest Kronecker Product]]).
 
 ## References
 

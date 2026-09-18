@@ -35,6 +35,7 @@ tags:
 - Co-author of "Design of the Wiener Gain in Noisy and Reverberant Environments" (Applied Acoustics, 2025 (article 110491), 2025) — joint SNR/CDR Wiener gain design for noisy and reverberant environments — [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025]]
 - Author of "On Multichannel Coherent-to-Diffuse Power Ratio Estimation" (IEEE Sensors Journal, 2024, 2024) — multichannel (M>2) DOA-free CDR estimation via weighted-average subarray fusion and array-manifold joint diagonalization (IEEE Sensors Journal 2024) — [[sources/xiang-2024-multichannel-cdr-estimation|Xiang, Lei, Pan, Chen & Benesty 2024]]
 - Co-authored "An Approach to Microphone Array Self-Awareness Through a Residual Model of the Covariance Matrix" (IEEE TASLP 2026) — defines interferences and background noise via coherence matrices and extracts unknown new sources from the covariance-matrix residual — [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026]]
+- Co-author of "Recursive Least-Squares Algorithms for the Identification of Low-Rank Systems" (IEEE/ACM TASLP 2019) — RLS-NKP family of low-rank adaptive filters for echo-path identification, with variable regularization and DCD-based solving — [[sources/elisei-iliescu-2019-low-rank-rls|Elisei-Iliescu et al. 2019]]
 
 
 ## Affiliations
@@ -59,3 +60,4 @@ tags:
 - [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]]
 - [[sources/xiang-2024-multichannel-cdr-estimation|Xiang, Lei, Pan, Chen & Benesty 2024: On Multichannel Coherent-to-Diffuse Power Ratio Estimation]]
 - [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026: Microphone Array Self-Awareness via a Residual Model of the Covariance Matrix]]
+- [[sources/elisei-iliescu-2019-low-rank-rls|Elisei-Iliescu et al. 2019: Recursive Least-Squares Algorithms for the Identification of Low-Rank Systems]]

@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-06-06
-updated: 2026-09-02
+updated: 2026-09-18
 sources:
   - raw/papers/hoshuyama-2026-sound-object-echo-control/full-text.md
 tags:
@@ -31,6 +31,7 @@ The goal is to estimate and subtract the echo component, or equivalently learn a
 | **Adaptive filtering (NLMS, RLS)** | Estimates echo path impulse response | Requires double-talk detection |
 | **Linear echo canceller (LAEC)** | DSP-based adaptive filter | Foundation for hybrid systems |
 | **Delay compensation** | Aligns mic and far-end signals | Critical for AEC performance |
+| **Low-rank RLS ([[concepts/rls-nkp\|RLS-NKP]])** | Rank-$P$ nearest Kronecker product decomposition of the echo path | Two short filters instead of one long one — faster tracking; VR-RLS-NKP-DCD variant handles double-talk via online-SNR variable regularization without a DTD |
 
 ## Deep Learning Approaches
 
@@ -119,3 +120,4 @@ EchoFree achieves DeepVQE-S-comparable single-talk performance at ~10× lower co
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023: Audio Signal Processing in the 21st Century]] — 25-year retrospective of the AEC field and the IWAENC workshop series
 - [[sources/wung-2011-residual-echo-suppression-system|Wung et al. 2011: A System Approach to RES]] — robust AEC with ERN + batch adaptation (DTD-free) feeding a system-level residual echo estimate and psychoacoustic postfilter
 - [[sources/hoshuyama-2026-sound-object-echo-control|Hoshuyama 2026: Sound-Object-Based Echo Control]] — shifts echo control from path estimation to sound object identification for inter-terminal loops
+- [[sources/elisei-iliescu-2019-low-rank-rls|Elisei-Iliescu et al. 2019: Recursive Least-Squares Algorithms for the Identification of Low-Rank Systems]] — low-rank RLS (RLS-NKP) identification of long echo paths, with a double-talk-robust variable-regularized variant

@@ -52,7 +52,7 @@ For an $M = 64$ array with $K = 256$ (3-way uniform decomposition, $L_n = 4$), r
 
 ## Related Domains
 
-The same Kronecker decomposition idea appears in multichannel active noise control for reducing the parameter space of large controller matrices (e.g., two-layer Kronecker product decomposition-based robust recursive adaptive filtering), and in adaptive filtering (nearest Kronecker product decomposition for subband adaptive filters).
+The same Kronecker decomposition idea appears in multichannel active noise control for reducing the parameter space of large controller matrices (e.g., two-layer Kronecker product decomposition-based robust recursive adaptive filtering), and in adaptive filtering — most prominently the [[concepts/rls-nkp|RLS-NKP]] family of low-rank recursive least-squares algorithms for echo-path identification, whose bilinear fix-one-filter-optimize-the-other strategy is the two-factor, adaptive special case of the alternating iterations above.
 
 ## Related Concepts
 
@@ -73,3 +73,4 @@ The same Kronecker decomposition idea appears in multichannel active noise contr
 - [[sources/wang-2021-kronecker-adaptive-beamforming|Wang et al. 2021: Kronecker Product Adaptive Beamforming for Microphone Arrays]]
 - [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]]
 - [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — review tracing the lineage from two-stage cascade designs to the general Kronecker task-decomposition framework; flat-subfilter trick converts low-frequency degrees of freedom into WNG
+- [[sources/elisei-iliescu-2019-low-rank-rls|Elisei-Iliescu et al. 2019: Recursive Least-Squares Algorithms for the Identification of Low-Rank Systems]] — the system-identification counterpart: rank-$P$ NKP with bilinear alternating RLS updates

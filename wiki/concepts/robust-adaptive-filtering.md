@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-09-12
+updated: 2026-09-18
 sources:
   for active noise control.md
 tags:
@@ -33,6 +33,9 @@ Applying nonlinearities to the input or error signals before they reach the adap
 ### 3. Variable Step Size (VSS)
 Automatically reducing the step size $\mu$ when a large error is detected, assuming it's an outlier.
 
+### 4. Variable Regularization
+Adapting the regularization parameter of a least-squares update online rather than modifying the cost function: Elisei-Iliescu et al. (2019) derive closed-form variable regularization parameters from an online SNR estimate, $\widehat{\mathrm{SNR}}(t) = \hat{\sigma}_y^2(t) / |\hat{\sigma}_d^2(t) - \hat{\sigma}_y^2(t)|$, which absorbs near-end speech into the "noise" term — yielding double-talk robustness without a double-talk detector (see [[concepts/rls-nkp|RLS-NKP]]).
+
 ## Comparison of Score Functions
 
 The **score function** $f(e)$ determines the weight update in the form: $w(n+1) = w(n) + \mu f(e) x(n)$.
@@ -62,4 +65,5 @@ A key goal in robust filtering is achieving **Zero POD**. This means that no mat
 - [[sources/chen-2016-generalized-correntropy-robust-adaptive-filtering|Chen 2016: Generalized Correntropy for Robust Adaptive Filtering]]
 - [[sources/zhu-2020-robust-gmcc-anc-paper-reading-note|Zhu 2020: Robust GMCC for ANC Paper Reading Note]]
 - [[sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Active Noise Control Using Feedback. Fixed and Adaptive Controllers]]
+- [[sources/elisei-iliescu-2019-low-rank-rls|Elisei-Iliescu et al. 2019: Recursive Least-Squares Algorithms for the Identification of Low-Rank Systems]] — variable regularization from an online SNR estimate for double-talk robustness
 

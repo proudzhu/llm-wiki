@@ -49,7 +49,7 @@ Therefore $\mathbf{AXB} = \mathbf{C}$ has a unique solution iff $\mathbf{A}$ and
 
 ## Nearest Kronecker Product
 
-A matrix given only numerically rarely factorizes exactly. Finding $\mathbf{A}, \mathbf{B}$ minimizing $\lVert \mathbf{M} - \mathbf{A} \otimes \mathbf{B} \rVert$ is the **nearest Kronecker product** problem, solvable exactly via the [[concepts/singular-value-decomposition|SVD]] (Van Loan & Pitsianis 1992). Optimally splitting into **more than two** factors is harder and is treated as a tensor-decomposition problem — the setting that reappears as the rank-$P$, N-way decompositions in Kronecker product beamforming.
+A matrix given only numerically rarely factorizes exactly. Finding $\mathbf{A}, \mathbf{B}$ minimizing $\lVert \mathbf{M} - \mathbf{A} \otimes \mathbf{B} \rVert$ is the **nearest Kronecker product** problem, solvable exactly via the [[concepts/singular-value-decomposition|SVD]] (Van Loan & Pitsianis 1992); see the dedicated page [[concepts/nearest-kronecker-product|Nearest Kronecker Product]] for the solution, its rank-$P$ generalization, and its signal-processing applications. Optimally splitting into **more than two** factors is harder and is treated as a tensor-decomposition problem — the setting that reappears as the rank-$P$, N-way decompositions in Kronecker product beamforming.
 
 ## Role in This Wiki
 
@@ -57,7 +57,7 @@ Kronecker products are the algebraic backbone of **structured, low-rank filter r
 
 - [[concepts/kronecker-product-beamforming|Kronecker Product Beamforming]] — a length-$M$ filter is written as a sum of $P$ Kronecker products of $N$ short filters ($M = \prod_n L_n$), cutting the parameter count from $M$ to $\sum_n L_n$ and the matrix-inversion dimension from $M$ to $L_n$, while the low-rank structure often *improves* robustness.
 - In [[concepts/differential-microphone-array|differential microphone arrays]], the two-factor case $\mathbf{h} = \mathbf{h}_1 \otimes \mathbf{h}_2$ corresponds to two virtual ULAs ($M = M_1 M_2$), where the beampattern and [[concepts/white-noise-gain|WNG]] factorize but the directivity factor and front-to-back ratio do not.
-- The SVD-based nearest-Kronecker-product decomposition also appears in adaptive filtering (e.g. subband adaptive filters) and in parameter reduction for multichannel active noise control controllers.
+- The SVD-based nearest-Kronecker-product decomposition also appears in adaptive filtering — most prominently the [[concepts/rls-nkp|RLS-NKP]] family of low-rank recursive least-squares algorithms for echo-path identification — and in parameter reduction for multichannel active noise control controllers.
 
 ## Related Operations
 
@@ -79,3 +79,4 @@ The **Tracy–Singh product** (pairwise Kronecker products over blocks of partit
 - [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]]
 - [[sources/wang-2021-kronecker-adaptive-beamforming|Wang et al. 2021: Kronecker Product Adaptive Beamforming for Microphone Arrays]]
 - [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]]
+- [[sources/elisei-iliescu-2019-low-rank-rls|Elisei-Iliescu et al. 2019: Recursive Least-Squares Algorithms for the Identification of Low-Rank Systems]] — rank-$P$ NKP decomposition as the foundation of low-rank adaptive identification

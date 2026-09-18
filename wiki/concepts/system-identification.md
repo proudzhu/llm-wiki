@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-04-17
+updated: 2026-09-18
 sources:
   - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
   - in active noise and vibration control.md
@@ -25,6 +25,7 @@ In [[active-noise-control|Active Noise Control]] and [[active-vibration-control|
 2. **Transfer Function Fitting**: Measuring the frequency response and fitting a rational function (poles and zeros).
 3. **Vector Fitting**: A robust iterative algorithm for fitting high-order state-space models to frequency domain data. Used in Liang (2026) to generate 15th-order models for ANC.
 4. **Subspace Identification**: Algorithms like N4SID that estimate state-space matrices directly from time-series data.
+5. **Low-Rank Kronecker Decomposition**: modeling a long impulse response ($L = L_1 L_2$ taps) as a sum of $P$ Kronecker products of two short filters, identified online with the [[concepts/rls-nkp|RLS-NKP]] algorithm — lower complexity and markedly faster tracking for long echo paths, since two short filters adapt instead of one long one.
 
 ## Challenges in ANC
 
@@ -47,3 +48,4 @@ In [[active-noise-control|Active Noise Control]] and [[active-vibration-control|
 - [[sources/liang-2026-delayed-mpc-anc-paper-reading-note|Liang 2026: Delayed MPC for ANC Paper Reading Note]]
 - [[sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]
 - [[sources/jiang-2025-ai-driven-avnc-review|Jiang et al. 2025: AI-Driven AVNC Review]]
+- [[sources/elisei-iliescu-2019-low-rank-rls|Elisei-Iliescu et al. 2019: Recursive Least-Squares Algorithms for the Identification of Low-Rank Systems]] — low-rank Kronecker decomposition method (RLS-NKP) for long echo paths

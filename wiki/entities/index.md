@@ -589,4 +589,9 @@
 | [[entities/qian-xiang\|Qian Xiang]] | Researcher (SUST) — first author of the joint SNR–CDR Wiener gain design for noisy and reverberant environments | 2026-09-18 |
 | [[entities/tao-lei\|Tao Lei]] | Researcher (SUST) — co-author of the joint SNR–CDR Wiener gain design | 2026-09-18 |
 | [[entities/chao-pan\|Chao Pan]] | Researcher (NWPU) — robust superdirective beamforming, RIR simulation, time-varying variance estimation for arrays | 2026-09-18 |
+| [[entities/camelia-elisei-iliescu\|Camelia Elisei-Iliescu]] | University Politehnica of Bucharest — first author of the RLS-NKP low-rank adaptive filtering paper. | 2026-09-18 |
+| [[entities/constantin-paleologu\|Constantin Paleologu]] | University Politehnica of Bucharest — adaptive filtering and low-rank echo-path identification. | 2026-09-18 |
+| [[entities/cristian-stanciu\|Cristian Stanciu]] | University Politehnica of Bucharest — co-author of the RLS-NKP low-rank adaptive filtering paper. | 2026-09-18 |
+| [[entities/cristian-anghel\|Cristian Anghel]] | University Politehnica of Bucharest — co-author of the RLS-NKP low-rank adaptive filtering paper. | 2026-09-18 |
+| [[entities/silviu-ciochina\|Silviu Ciochină]] | University Politehnica of Bucharest — adaptive filtering, variable step-size and regularization control. | 2026-09-18 |
 
