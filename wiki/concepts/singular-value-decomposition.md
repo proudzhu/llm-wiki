@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-07-12
-updated: 2026-07-12
+updated: 2026-09-18
 sources:
   - raw/papers/stewart-1993-early-history-svd/full-text.md
 tags:
@@ -61,6 +61,7 @@ The SVD was discovered independently at least three times between 1873 and 1907,
 - **Pseudoinverse**: $\mathbf{A}^+ = \mathbf{V}\boldsymbol{\Sigma}^+\mathbf{U}^{\mathrm{T}}$ (Moore 1920, Penrose 1955) — the minimum-norm least-squares solution to $\mathbf{A}\mathbf{x} = \mathbf{b}$.
 - **Total least squares**: SVD of the augmented data matrix.
 - **Signal processing and statistics**: Subspace methods, canonical correlations (Hotelling 1936).
+- **Nearest [[concepts/kronecker-product|Kronecker product]]**: splitting a matrix into the Kronecker product of two smaller factors, $\min_{\mathbf{A},\mathbf{B}} \|\mathbf{M} - \mathbf{A} \otimes \mathbf{B}\|$, is solved exactly via the SVD (Van Loan & Pitsianis 1992; see [[sources/wikipedia-kronecker-product|Wikipedia: Kronecker Product]]).
 
 ## Related Concepts
 

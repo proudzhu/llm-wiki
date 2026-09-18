@@ -4907,7 +4907,6 @@ Ingested the IEEE Access 2025 paper proposing a real-time extension of the ILRMA
 - **Pages updated**: `wiki/concepts/acoustic-howling-suppression.md` (added object-identity gating section for inter-terminal howling), `wiki/concepts/acoustic-echo-cancellation.md` (added "Beyond Path Estimation" section), `wiki/concepts/acoustic-feedback.md` (added inter-terminal loops + object-identity gating subsection)
 
 ---
----
 
 ## [2026-09-03] ingest | A Comparison of Generative and Discriminative Methods for Speech Enhancement
 
@@ -5114,8 +5113,6 @@ Ingested "A Comparison of Generative and Discriminative Methods for Speech Enhan
 
 ---
 
----
-
 ## [2026-09-09] ingest | A Survey of Sound Source Localization with Deep Learning Methods (Grumiaux et al. 2022)
 
 - **Source**: [[sources/grumiaux-2022-ssl-deep-learning-survey|Grumiaux, Kitić, Girin & Guérin 2022: A Survey of Sound Source Localization with Deep Learning Methods]] (JASA 152(1), review article)
@@ -5255,6 +5252,8 @@ Created source page zhang-2021-adl-mvdr, concept pages adl-mvdr and numerical-st
   - `wiki/sources/heitkaemper-2026-bcs-speech-enhancement-earbuds.md` — added backlink to the ICASSP publication
   - `wiki/index.md`, `wiki/sources/index.md` — added 1 source entry; statistics updated
 
+---
+
 ## [2026-09-12] lint | One-way backlink audit — fixed 16 confirmed omissions (11 sources → 16 target pages)
 
 Ran a partial-reciprocation audit that flags concept/synthesis pages curating ≥50% of their source in-linkers but omitting specific tag-overlapping ones (the "Wang 2022 missing from bcs-guided-speech-enhancement" pattern). From 92 filtered candidates, fixed the 16 most confirmed omissions (frontmatter source + body wikilink + Related Sources entry on each target page):
@@ -5272,6 +5271,8 @@ Ran a partial-reciprocation audit that flags concept/synthesis pages curating �
 - `wiki/concepts/physics-informed-neural-network.md`, `wiki/concepts/frequency-domain-kalman-filter.md` ← Scarpiniti 2027 (PI-NLMS non-PDE physics-informed branch)
 
 Remaining 76 audit candidates are lower-confidence (hub pages, loose curation, broad surveys) — left unfixed by design. Verified: audit count 92→76 (all 16 cleared), broken-links check 0 truly broken, `uv run mkdocs build --strict` clean.
+
+---
 
 ## [2026-09-12] lint | One-way backlink audit — batch-fixed remaining 76 low-confidence omissions
 
@@ -5332,6 +5333,8 @@ Ingested Pandey & Azcarreta 2025 (TinyGRU). Created source page pandey-2025-ultr
 - **Pages updated**: `wiki/entities/xiaofan-zhan.md`, `wiki/entities/brian-c-j-moore.md`, `wiki/entities/xiaodong-li.md`, `wiki/entities/chengshi-zheng.md` (Key Contributions + Related Sources); `wiki/concepts/hearing-aid-feedback-cancellation.md` (new Joint Cancellation + Suppression section); `wiki/concepts/adaptive-feedback-cancellation.md` (Hybrid AFC bullet: JointDFC realizes the 2011 survey's joint-design prediction); `wiki/concepts/prediction-error-method.md` (PEM-AFC as a stage in joint frameworks); `wiki/concepts/maximum-stable-gain.md` (excess-gain evaluation protocol); `wiki/concepts/deep-marginal-feedback-cancellation.md` (DeepAFS/DeepAFC paradigm positioning); `wiki/concepts/closed-loop-fine-tuning.md` (three-step cascade extension); `wiki/concepts/normalized-euclidean-system-distance.md` (composite loss usage); `wiki/concepts/complex-spectral-mapping.md` (RFSNet architecture entry); `wiki/concepts/acoustic-howling-suppression.md` (JointDFC in DL approaches list)
 - **Synthesis**: none updated — triage found only single broad-tag overlaps
 - **Indexes**: [[sources/zhan-2026-joint-afc-rfs|Zhan 2026: JointDFC]] and [[concepts/jointdfc|JointDFC]] added to main + subdirectory indexes; statistics updated to 1314 total pages
+
+---
 
 ## [2026-09-14] ingest | Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products (Zhu et al. 2025)
 
@@ -5419,6 +5422,16 @@ Ingested Pandey & Azcarreta 2025 (TinyGRU). Created source page pandey-2025-ultr
 
 ---
 
+## [2026-09-18] ingest | Kronecker Product (Wikipedia)
+
+- **Source**: `raw/articles/wikipedia-kronecker-product.md` — https://en.wikipedia.org/wiki/Kronecker_product (retrieved 2026-09-18; CC BY-SA 4.0)
+- **Type**: Encyclopedia article (general mathematics reference)
+- **Summary**: Reference for the Kronecker product $\mathbf{A} \otimes \mathbf{B}$ as a block matrix and specialization of the tensor product. Catalogues the core identities (bilinearity/associativity, non-commutativity and the commutation matrix, mixed-product, inverse/pseudoinverse, transpose, Hadamard, determinant, Kronecker sum and exponentiation, vectorization, outer product), the abstract properties (eigenvalue/spectrum products, singular-value products, rank multiplicativity, monoidal-category and graph-product relations), the "vec trick" linearization of $\mathbf{AXB} = \mathbf{C}$, applications (Lyapunov equation, 2-D image processing, radix-2 FFT/Fast Walsh–Hadamard, hand–eye calibration), the SVD-solvable nearest-Kronecker-product problem, and related Tracy–Singh / Khatri–Rao / face-splitting products.
+- **Pages created**: `wiki/sources/wikipedia-kronecker-product.md`; `wiki/concepts/kronecker-product.md` (general mathematical concept: definition, identities, nearest-Kronecker-product problem, role in the wiki's structured/low-rank beamforming line)
+- **Pages updated**: `wiki/concepts/kronecker-product-beamforming.md` (links the underlying matrix operation, new source in frontmatter and Related Sources); `wiki/concepts/singular-value-decomposition.md` (nearest-Kronecker-product application); `wiki/index.md` + `wiki/concepts/index.md` + `wiki/sources/index.md` (new rows + statistics)
+
+---
+
 ## [2026-09-19] ingest | Design of the Wiener gain in noisy and reverberant environments (Xiang, Chen, Benesty, Lei & Pan 2025)
 
 Ingested Xiang et al. 2025. Created source page xiang-2025-wiener-gain-reverberant, concept snr-cdr-wiener-gain, and entity pages for Qian Xiang, Tao Lei, and Chao Pan. Updated 6 concept pages (wiener-filter, coherent-to-diffuse-power-ratio, multi-channel-wiener-filter, superdirective-beamforming, decision-directed-a-priori-snr, dereverberation) and entity pages for Jingdong Chen and Jacob Benesty. Extended multi-channel-speech-enhancement synthesis with the SNR-CDR Wiener gain in the Trade-off control column and CDR lineage. Statistics: 1357 total pages (585 entities, 521 concepts, 221 sources, 23 synthesis, 7 queries).
@@ -5427,7 +5440,8 @@ Ingested Xiang et al. 2025. Created source page xiang-2025-wiener-gain-reverbera
 
 ## [2026-09-19] ingest | On Multichannel Coherent-to-Diffuse Power Ratio Estimation (Xiang et al. 2024)
 
-- **Source**: aw/papers/xiang-2024-multichannel-cdr-estimation/full-text.md (Zotero: HKC82V92); extracted with MinerU (VLM), 5 figures mapped.- **Authors**: Qian Xiang, Tao Lei, Chao Pan, Jingdong Chen, Jacob Benesty- **Published**: IEEE Sensors Journal, 2024; DOI 10.1109/JSEN.2024.3469548- **Summary**: Two DOA-free multichannel (M > 2) CDR estimators — weighted-average fusion of two-sensor-subarray pairwise CDRs (softmax weights, zeta = 0.1) and array-manifold estimation via joint diagonalization (GEVD of the diffuse-noise-whitened observation coherence) — integrated into a parametric Wiener-type postfilter after a delay-and-sum beamformer; outperform two-channel Schwarz, averaged-coherence, GMSC, and ERANK in mse/kurtosis, SNR gain, LSD, and DRR, with the margin growing in M (validated to 16 mics and on real MARDY RIRs).- **Pages created**: [[sources/xiang-2024-multichannel-cdr-estimation|source page]]; [[concepts/multichannel-cdr-estimation|Multichannel CDR Estimation]].- **Pages updated**: entities qian-xiang, tao-lei, chao-pan, jingdong-chen, jacob-benesty (contributions + related sources); [[concepts/coherent-to-diffuse-power-ratio|CDR]] (multichannel estimator section); [[concepts/generalized-eigenvalue-decomposition|GEVD]] (application in multichannel CDR estimation); [[concepts/generalized-magnitude-coherence|GMC]] (benchmark cross-ref); [[concepts/snr-cdr-wiener-gain|SNR-CDR Wiener Gain]] (predecessor cross-ref); [[synthesis/multi-channel-speech-enhancement|MCSE synthesis]] (CDR-lineage table row for 2024, Sources Synthesized row, Insight 1 paragraph, Takeaway 1).
+- **Source**: 
+aw/papers/xiang-2024-multichannel-cdr-estimation/full-text.md (Zotero: HKC82V92); extracted with MinerU (VLM), 5 figures mapped.- **Authors**: Qian Xiang, Tao Lei, Chao Pan, Jingdong Chen, Jacob Benesty- **Published**: IEEE Sensors Journal, 2024; DOI 10.1109/JSEN.2024.3469548- **Summary**: Two DOA-free multichannel (M > 2) CDR estimators — weighted-average fusion of two-sensor-subarray pairwise CDRs (softmax weights, zeta = 0.1) and array-manifold estimation via joint diagonalization (GEVD of the diffuse-noise-whitened observation coherence) — integrated into a parametric Wiener-type postfilter after a delay-and-sum beamformer; outperform two-channel Schwarz, averaged-coherence, GMSC, and ERANK in mse/kurtosis, SNR gain, LSD, and DRR, with the margin growing in M (validated to 16 mics and on real MARDY RIRs).- **Pages created**: [[sources/xiang-2024-multichannel-cdr-estimation|source page]]; [[concepts/multichannel-cdr-estimation|Multichannel CDR Estimation]].- **Pages updated**: entities qian-xiang, tao-lei, chao-pan, jingdong-chen, jacob-benesty (contributions + related sources); [[concepts/coherent-to-diffuse-power-ratio|CDR]] (multichannel estimator section); [[concepts/generalized-eigenvalue-decomposition|GEVD]] (application in multichannel CDR estimation); [[concepts/generalized-magnitude-coherence|GMC]] (benchmark cross-ref); [[concepts/snr-cdr-wiener-gain|SNR-CDR Wiener Gain]] (predecessor cross-ref); [[synthesis/multi-channel-speech-enhancement|MCSE synthesis]] (CDR-lineage table row for 2024, Sources Synthesized row, Insight 1 paragraph, Takeaway 1).
 
 ---
 
@@ -5458,3 +5472,10 @@ Ingested Pan 2025 tutorial (arXiv 2508.21470) via arXiv HTML extraction. Created
 ## [2026-09-19] ingest | Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction
 
 Chinese-language review (Journal of Signal Processing 36(6): 804-815) unifying six beamforming families (delay-and-sum, superdirective, differential, orthogonal-series-expansion, Kronecker, adaptive) under the DF-WNG-frequency-invariance triad. Created source page pan-2020-microphone-array-beamforming plus concept pages frequency-invariant-beamforming and orthogonal-series-expansion-beamforming; updated 7 concept pages (beamforming, differential-microphone-array, superdirective-beamforming, kronecker-product-beamforming, white-noise-gain, mvdr-beamformer, fixed-beamformer), 3 entity pages (chao-pan, gongping-huang, jingdong-chen), and the multi-channel-speech-enhancement synthesis page (new Taxonomy row + MVDR-degeneration refinement in takeaway 7). Content extracted via pdftotext after two MinerU server-side failures.
+# Wiki Log
+
+> **Purpose**: Chronological, append-only record of what happened and when.
+> **Format**: `## [YYYY-MM-DD] operation | Description`
+> **Operations**: `ingest`, `query`, `lint`
+
+---

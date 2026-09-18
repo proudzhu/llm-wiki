@@ -533,4 +533,5 @@
 | [[concepts/speaker-verification\|Speaker Verification]] | Verification as detection on voiceprint embeddings; verification/identification/diarization tasks | 2026-09-19 |
 | [[concepts/frequency-invariant-beamforming\|Frequency-Invariant Beamforming]] | Design paradigm holding the beampattern constant across frequency to avoid spectral distortion of broadband speech; the shared goal of the differential, orthogonal-series-expansion, and Kronecker families. | 2026-09-19 |
 | [[concepts/orthogonal-series-expansion-beamforming\|Orthogonal Series Expansion Beamforming]] | Fixed beamformer design that approximates a target beampattern with orthogonal series (Chebyshev, Legendre, Jacobi, spherical harmonics); a loading parameter trades pattern accuracy for WNG robustness. | 2026-09-19 |
+| [[concepts/kronecker-product\|Kronecker Product]] | Block-matrix generalization of the tensor product (mixed-product, inverse, transpose, determinant, spectrum and rank identities, vec-trick linearization, SVD-solvable nearest-Kronecker-product problem); algebraic backbone of Kronecker product beamforming | 2026-09-18 |
 

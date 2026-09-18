@@ -7,6 +7,7 @@ sources:
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
   - raw/papers/wang-2021-kronecker-adaptive-beamforming/full-text.txt
   - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
+  - raw/articles/wikipedia-kronecker-product.md
 tags:
   - beamforming
   - microphone-arrays
@@ -21,7 +22,7 @@ tags:
 
 ## Definition
 
-Kronecker product beamforming decomposes a global (long) beamforming filter of length $M$ into a product of short filters via the Kronecker product, exploiting the factorization $M = \prod_{n=1}^{N} L_n$. This reduces the parameter count from $M$ to $\sum_{n=1}^{N} L_n$ per factor group and shrinks the matrix inversions needed in the design from $M \times M$ to $L_n \times L_n$ — while often *improving* robustness, since the low-rank structure regularizes the filter.
+Kronecker product beamforming decomposes a global (long) beamforming filter of length $M$ into a product of short filters via the Kronecker product, exploiting the factorization $M = \prod_{n=1}^{N} L_n$. This reduces the parameter count from $M$ to $\sum_{n=1}^{N} L_n$ per factor group and shrinks the matrix inversions needed in the design from $M \times M$ to $L_n \times L_n$ — while often *improving* robustness, since the low-rank structure regularizes the filter. For the underlying matrix operation (mixed-product, inverse, spectrum and rank identities, and the nearest-Kronecker-product approximation), see [[concepts/kronecker-product|Kronecker Product]].
 
 ## Development
 
@@ -55,6 +56,7 @@ The same Kronecker decomposition idea appears in multichannel active noise contr
 
 ## Related Concepts
 
+- [[concepts/kronecker-product|Kronecker Product]]
 - [[concepts/kmvdr-beamformer|KMVDR Beamformer]]
 - [[concepts/superdirective-beamforming|Superdirective Beamforming]]
 - [[concepts/white-noise-gain|White Noise Gain]]
@@ -66,6 +68,7 @@ The same Kronecker decomposition idea appears in multichannel active noise contr
 
 ## Related Sources
 
+- [[sources/wikipedia-kronecker-product|Wikipedia: Kronecker Product]] — general mathematical reference for the underlying matrix operation
 - [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]] — the original formulation: two-virtual-array decomposition, KP cardioid/dipole/hypercardioid/supercardioid
 - [[sources/wang-2021-kronecker-adaptive-beamforming|Wang et al. 2021: Kronecker Product Adaptive Beamforming for Microphone Arrays]]
 - [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]]

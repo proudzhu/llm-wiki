@@ -1133,6 +1133,7 @@
 | [[concepts/speaker-verification\|Speaker Verification]] | Verification as detection on voiceprint embeddings; verification/identification/diarization tasks | 2026-09-19 |
 | [[concepts/frequency-invariant-beamforming\|Frequency-Invariant Beamforming]] | Design paradigm holding the beampattern constant across frequency to avoid spectral distortion of broadband speech; the shared goal of the differential, orthogonal-series-expansion, and Kronecker families. | 2026-09-19 |
 | [[concepts/orthogonal-series-expansion-beamforming\|Orthogonal Series Expansion Beamforming]] | Fixed beamformer design that approximates a target beampattern with orthogonal series (Chebyshev, Legendre, Jacobi, spherical harmonics); a loading parameter trades pattern accuracy for WNG robustness. | 2026-09-19 |
+| [[concepts/kronecker-product\|Kronecker Product]] | Block-matrix generalization of the tensor product (mixed-product, inverse, transpose, determinant, spectrum and rank identities, vec-trick linearization, SVD-solvable nearest-Kronecker-product problem); algebraic backbone of Kronecker product beamforming | 2026-09-18 |
 
 ---
 
@@ -1367,6 +1368,7 @@
 | [[sources/pan-2026-array-self-awareness\|Pan, Chen & Benesty 2026]] | This paper inverts the classical source-extraction paradigm: instead of defining the desired source (by direction, RTF, or coherence matrix) and treating everything else as noise, it defines the interferences and background noise through their a priori coherence matrices and treats everything that does not match them as the desired source. | 2026-09-19 |
 | [[sources/pan-2025-data-driven-acoustics\|Pan 2025]] | This tutorial systematically summarizes the principles and methods of data-driven (deep-learning-based) acoustic signal processing under a single unifying taxonomy: every technique is cast as signal detection, signal estimation/filtering, or signal transformation. | 2026-09-19 |
 | [[sources/pan-2020-microphone-array-beamforming\|Pan, Huang & Chen 2020]] | This is a Chinese-language overview of microphone array beamforming for immersive speech communication (临境语音通信) and intelligent voice interaction (智能语音交互), both of which face the problem of far-field, high-fidelity sound acquisition in complex acoustic environments. | 2026-09-19 |
+| [[sources/wikipedia-kronecker-product\|Wikipedia: Kronecker Product]] | Encyclopedia reference for the Kronecker product: definition as a block matrix, core algebraic identities (mixed-product, inverse, transpose, determinant, spectrum, rank), the vec-trick for matrix equations, and related Tracy–Singh/Khatri–Rao/face-splitting products | 2026-09-18 |
 
 ---
 
@@ -1420,10 +1422,10 @@
 
 ## Statistics
 
-- **Total pages**: 1369
+- **Total pages**: 1371
 - **Entities**: 585
-- **Concepts**: 529
-- **Sources**: 225
+- **Concepts**: 530
+- **Sources**: 226
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-19
+- **Last updated**: 2026-09-20
