@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-08-28
+updated: 2026-09-18
 sources:
   Controllers.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
+  - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
   - raw/papers/kim-2014-doa-based-snr-estimation/full-text.txt
 tags:
 - mathematics
@@ -52,9 +53,22 @@ computed from separately recorded clean speech $X$ and noise $N$ (the mixture is
 
 In dual-microphone speech enhancement, Kim & Kim (2014) drive the Wiener spectral gain $G = \hat{\xi}/(1+\hat{\xi})$ with an a priori SNR estimated from **spatial cues** rather than from a noise-variance estimate: the phase difference between the time-aligned channels is first converted into a [[concepts/target-to-non-target-directional-signal-ratio|TNR]] estimate ($\cot^2(\Delta\tilde\psi/2)$), which a statistical model-based LRT speech-activity decision and two decision-directed updates then turn into the final SNR (see [[concepts/doa-based-snr-estimation|DOA-based SNR estimation]]). This decouples the Wiener gain from unreliable noise-variance tracking in adverse noise, and the resulting system outperforms single-channel Wiener filtering and dual-channel beamformer/post-filter baselines in SDR and PESQ at 0–20 dB SNR. A Wiener-filtering step is also used *inside* the estimator to obtain the speech-side power for the DOA-based SNR.
 
+## Joint SNR–CDR Wiener Gain (Xiang et al. 2025)
+
+Xiang, Chen, Benesty, Lei & Pan 2025 observe that classical Wiener gain formulations are driven by either the SNR alone (noise-only environments) or the CDR alone (reverberation-only environments), and unify the two degenerate gains into a single post-filter for environments where both interferers coexist (see [[concepts/snr-cdr-wiener-gain|SNR–CDR Wiener gain]]):
+
+$$
+G(n,k) = \frac{1}{1 + \beta_1\frac{\alpha_R(k)}{\mathrm{CDR}(n,k)} + \beta_2\frac{\alpha_V(k)}{\mathrm{SNR}(n,k)}}
+$$
+
+where $\alpha_R(k)$ and $\alpha_V(k)$ are the coherence-weighted leakage of reverberation and noise through the spatial filter, and the two hyperparameters $\beta_1, \beta_2$ separately govern reverberation suppression (DRR) and noise reduction (SNR gain) — decoupling the two suppression axes that single-ratio gains conflate. Setting $\beta_2 = 0$ recovers a CDR-style gain, $\beta_1 = 0$ an SNR-style gain. Applied after a robust superdirective beamformer, the joint gain achieves the best SNR gain (11.4 dB) and DRR (9.3 dB) and ties the best LSD against SNR-, CDR-, TSNR-, HRNR-based, and WPE-based baselines, and — unlike AWPE — degrades gracefully as input SNR drops. The gain floor $G \leftarrow \max\{G, G_{\min}\}$ controls musical noise; a kurtosis-ratio analysis identifies $G_{\min} = 0.1$ as a stable operating point.
+
 ## Related Concepts
 
-- [[active-noise-control|Active Noise Control]]
+- [[concepts/snr-cdr-wiener-gain|SNR–CDR Wiener Gain]] — joint formulation unifying the SNR and CDR degenerate gains
+- [[concepts/coherent-to-diffuse-power-ratio|Coherent-to-Diffuse Power Ratio]]
+- [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
+- [[concepts/active-noise-control|Active Noise Control]]
 - [[feedback-anc|Feedback ANC]]
 - [[internal-model-control|Internal Model Control]]
 - [[minimum-variance-control|Minimum Variance Control]]
@@ -68,3 +82,4 @@ In dual-microphone speech enhancement, Kim & Kim (2014) drive the Wiener spectra
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — uses the Wiener gain as an offline supervised target for tuning a probability-based spatial filter's parameters
 - [[sources/kim-2014-doa-based-snr-estimation|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] — Wiener spectral gain driven by a spatial-cue (DOA-based) SNR estimate instead of a noise-variance-based one
+- [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]] — joint SNR–CDR Wiener gain with two trade-off hyperparameters

@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-30
-updated: 2026-09-17
+updated: 2026-09-18
 tags:
   - researcher
   - array-processing
@@ -33,6 +33,7 @@ tags:
 - Co-author of "Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products" (Journal of Signal Processing 2025) — multidimensional Kronecker product decomposition for parameter- and computation-efficient robust superdirective beamforming — [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025]]
 - Co-author of "Kronecker Product Adaptive Beamforming for Microphone Arrays" (APSIPA Annual Summit and Conference 2021 (APSIPA-ASC), Tokyo, Japan, Dec. 14–17, 2021, pp. 50–54, 2021) — co-introduced the sum-of-Kronecker-products beamformer representation for arbitrary array geometries and the KMVDR beamformer — [[sources/wang-2021-kronecker-adaptive-beamforming|Wang, Huang, Cohen, Benesty & Chen 2021]]
 - Co-author of "Differential Kronecker Product Beamforming" (IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 27, no. 5, pp. 892–902, 2019) — introduced differential Kronecker product beamformers (KP cardioid/dipole/hypercardioid/supercardioid) — [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019]]
+- Co-author of "Design of the Wiener Gain in Noisy and Reverberant Environments" (Applied Acoustics, 2025 (article 110491), 2025) — joint SNR/CDR Wiener gain design for noisy and reverberant environments — [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025]]
 
 
 ## Affiliations
@@ -53,3 +54,4 @@ tags:
 - [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]]
 - [[sources/wang-2021-kronecker-adaptive-beamforming|Wang, Huang, Cohen, Benesty & Chen 2021: Kronecker Product Adaptive Beamforming for Microphone Arrays]]
 - [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]]
+- [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]]

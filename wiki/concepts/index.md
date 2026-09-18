@@ -524,4 +524,5 @@
 | [[concepts/cdunet\|CDUNet]] | Causal-directed U-Net — 74.4K-param dual-microphone directed speech enhancement model steered by triple steering vectors with runtime enhancement width | 2026-09-16 |
 | [[concepts/triple-steering-spatial-selection\|Triple-Steering Spatial Selection]] | Spatial selection method using three steering vectors (target + width-derived edge angles) to guide enhancement and determine the enhancement range | 2026-09-16 |
 | [[concepts/kmvdr-beamformer\|KMVDR Beamformer]] | Kronecker MVDR beamformer: MVDR under a sum-of-Kronecker-products filter representation, applicable to arbitrary array geometries via alternating closed-form subfilter updates | 2026-09-17 |
+| [[concepts/snr-cdr-wiener-gain\|SNR–CDR Wiener Gain]] | Joint Wiener post-filter driven by both SNR and CDR, with two hyperparameters separating noise reduction from reverberation suppression (Xiang et al. 2025) | 2026-09-18 |
 

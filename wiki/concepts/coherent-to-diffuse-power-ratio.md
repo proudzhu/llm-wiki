@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-27
-updated: 2026-09-12
+updated: 2026-09-18
 sources:
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
   - raw/papers/richard-2023-audio-signal-processing-21st-century/full-text.md
+  - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
 tags:
   - signal-processing
   - spatial-audio
@@ -57,6 +58,14 @@ where:
 
 | Proposed 4 (Schwarz) | $\widehat{CDR} = \frac{\text{Im}\{\hat\Gamma_x\}}{\text{Im}\{\tilde\Gamma_s\} - \text{Im}\{\hat\Gamma_x\}}$ | Unbiased, requires TDOA $\neq$ 0 |
 
+### Noise-aware DOA-independent (Xiang et al. 2025)
+
+Xiang, Chen, Benesty, Lei & Pan 2025 extend the pairwise Schwarz & Kellermann estimator to **noisy** reverberant fields: given the SNR (from a decision-directed estimator), the observed-coherence term is corrected by the noise coherence,
+
+$$e_{i,j} = [\boldsymbol{\Gamma}_Y]_{i,j} + \frac{[\boldsymbol{\Gamma}_Y]_{i,j} - [\boldsymbol{\Gamma}_V]_{i,j}}{\mathrm{SNR}}$$
+
+and the unit-diagonal constraint on the source coherence matrix yields a closed-form CDR per sensor pair, averaged over all $M(M-1)/2$ pairs. Because existing CDR estimators ignore additive noise, they are biased when noise and reverberation coexist; the noise-aware variant shows lower estimation error at $M = 4$, $T_{60} = 500$ ms, input SNR 20 dB. A practical consequence: the DRR of the resulting Wiener post-filter stays nearly constant across input SNRs, since CDR estimation is barely influenced by the background noise level.
+
 ## Geometric Interpretation
 
 The signal coherence $\Gamma_s$, noise coherence $\Gamma_n$, and mixed coherence $\Gamma_x$ all lie on a straight line in the complex plane. $\Gamma_s$ lies on the unit circle, $\Gamma_n$ on the real axis, and $\Gamma_x$ lies between them at a position determined by the CDR. This geometric view enables intuitive understanding of estimator behavior and bias.
@@ -94,6 +103,7 @@ Taseska & Habets use the CDR not as a post-filter gain, but as a **control signa
 - [[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence Noise Estimation]] — global MMSE coherence-based noise variance decomposition (Jin et al. 2017)
 - [[concepts/informed-spatial-filter|Informed Spatial Filter (ISF)]] — CDR used as a priori SAP control for informed MVDR/MWF (Taseska & Habets 2018)
 - [[concepts/multichannel-mcra|Multichannel MCRA]] — CDR-controlled a priori SAP for noise PSD matrix estimation
+- [[concepts/snr-cdr-wiener-gain|SNR–CDR Wiener Gain]] — the post-filter that consumes the noise-aware CDR estimate
 
 ## Key Sources
 
@@ -102,6 +112,7 @@ Taseska & Habets use the CDR not as a post-filter gain, but as a **control signa
 - [[sources/schwarz-2019-dereverberation-spatial-coherence|Schwarz 2019: Dereverberation and Robust Speech Recognition]] — comprehensive treatment of CDR methods
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — global MMSE coherence-based noise variance decomposition with adaptive coherence model
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] — CDR as a priori SAP control for multichannel MCRA noise PSD matrix estimation (Ch 3)
+- [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]] — noise-aware DOA-independent pairwise CDR estimator
 
 ## Related Sources
 

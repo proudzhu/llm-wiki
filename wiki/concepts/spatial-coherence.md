@@ -8,6 +8,7 @@ sources:
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
   - raw/papers/richard-2023-audio-signal-processing-21st-century/full-text.md
+  - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
 tags:
   - signal-processing
   - multichannel
@@ -42,6 +43,8 @@ Coherence-to-Diffuse Ratio (CDR) 是从空间相干性估计中推导的功率�
 $$\text{CDR} = \frac{|\Gamma_{x_1 x_2}|^2 - |\Gamma_{\text{diff}}|^2}{1 - |\Gamma_{x_1 x_2}|^2}$$
 
 CDR > 0 表示相干分量（直达声）占主导，CDR < 0 表示扩散分量（混响）占主导。
+
+经典 CDR 估计器假设声场无加性噪声，在噪声+混响共存环境下有偏。[[sources/xiang-2025-wiener-gain-reverberant|Xiang et al. 2025]] 将噪声相干性与判决引导 SNR 折入 Schwarz & Kellermann 的 DOA 无关成对估计器，得到**噪声感知**的 CDR 估计，并据此驱动 [[concepts/snr-cdr-wiener-gain|SNR–CDR 联合维纳增益]]，在鲁棒超指向波束形成器之后同时抑制噪声与混响。
 
 ## 自适应相干性模型
 
@@ -79,5 +82,6 @@ Löllmann et al. (2020) 将基于相干性的信号增强从麦克风对推广�
 - [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026]] — 利用扩散声场相干矩阵 $\Gamma_d$ 作为预定义基，通过方差比估计重建 SCM
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin et al. 2017]] — 将 sinc 扩散场相干性作为初始化，在语音缺席帧自适应更新相干函数，用于多通道噪声 PSD 估计与分频点选择
 - [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement|Löllmann et al. 2020]] — N 通道广义幅度相干（GMC）：相干矩阵特征值分解估计 CDR，主特征向量隐式选择增强通道
+- [[sources/xiang-2025-wiener-gain-reverberant|Xiang et al. 2025]] — 噪声感知 DOA 无关 CDR 估计：将噪声相干性与 SNR 折入成对估计器，驱动 SNR–CDR 联合维纳增益
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard, Smaragdis, Gannot, Naylor, Makino, Kellermann & Sugiyama 2023: Audio Signal Processing in the 21st Century]]
 

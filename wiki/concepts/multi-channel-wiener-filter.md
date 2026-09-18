@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-13
+updated: 2026-09-18
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
+  - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/bagheri-2019-pmwf-spp/full-text.md
@@ -67,6 +68,8 @@ For open-fitting hearing aids, [[sources/serizel-2010-integrated-anc-nr-hearing-
 
 Simmer et al. [14] showed that the broadband MMSE-optimal multi-channel NR can be factored as a single-channel Wiener filter applied to the output of an [[concepts/mvdr-beamformer|MVDR beamformer]]. Jin et al. (2017) adopt this factorization for hands-free mobile-phone voice communication: the MVDR provides the distortionless spatial filter, and a single-channel Wiener post-filter (driven by the [[concepts/adaptive-coherence-noise-estimation|adaptive coherence noise estimator]]) applies the spectral gain. The contribution of Jin et al. lives entirely in the noise PSD estimate that feeds the Wiener gain — the MWF structure itself is the classical rank-1 case. This factorization is computationally lighter than a full MWF and decouples spatial filtering (MVDR) from noise PSD estimation (post-filter), which is attractive for real-time mobile-phone implementations.
 
+[[sources/xiang-2025-wiener-gain-reverberant|Xiang et al. 2025]] push the same factorization into environments where noise *and* reverberation coexist: the spatial stage is a robust superdirective beamformer (diagonal loading $\epsilon = 10^{-3}$) against the diffuse-field reverberation coherence, and the post-filter is a [[concepts/snr-cdr-wiener-gain|joint SNR–CDR Wiener gain]] that weights each interferer by its leakage $\alpha_R, \alpha_V$ through that beamformer, with hyperparameters $\beta_1, \beta_2$ controlling reverberation suppression and noise reduction separately. The Wiener-beamformer decomposition (spatial filter + gain) thus generalizes from the noise-only setting of the classical factorization to the joint noise-plus-reverberation setting.
+
 ## Parametric MWF (PMWF)
 
 The MWF is one endpoint of a parameterized family: the [[concepts/parametric-multi-channel-wiener-filter|PMWF]] (Souden, Benesty & Affes 2010) derives from a constrained optimization (maximize noise reduction subject to a distortion bound) with trade-off parameter $\beta$, where $\beta = 1$ recovers the conventional MWF and $\beta = 0$ the MVDR. In the origin paper ([[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010]]), the non-causal MWF appears as the PMWF-1 in its statistics-only form $\mathbf{h}_{\mathrm{W}} = \frac{\Phi_{vv}^{-1}\Phi_{xx}}{1 + \lambda}\mathbf{u}_{n_0}$, and its closed-form performance measures follow from the rank-one structure of $\Phi_{xx}$: the output SNR equals $\lambda(\omega)$ regardless of $\beta$, while the distortion index $\beta^2/(\beta+\lambda)^2$ and noise-reduction factor $(\beta+\lambda)^2/(\mathrm{SNR}\cdot\lambda)$ trade off against each other — the multichannel MWF attains lower distortion than its single-channel counterpart at equal noise reduction because $\lambda$ grows with the number of microphones. [[sources/bagheri-2019-pmwf-spp|Bagheri & Giacobello 2019]] show a practical implementation in which the [[concepts/multi-channel-speech-presence-probability|MC-SPP]] controls $\beta$ per time-frequency bin, updates the noise PSD matrix by SPP-weighted recursive averaging (with a Woodbury rank-1 update of its inverse), and blends the output with a $G_{\min}$-floored reference channel — improving ΔSINR, ΔSegSNR, and noise reduction over both MVDR and the fixed-$\beta$ MWF at nearly unchanged speech distortion.
@@ -101,6 +104,8 @@ which applies extra suppression in noise-only segments (small SPP) and converges
 - [[concepts/noise-attenuation-control|Noise Attenuation Control]]
 - [[concepts/filtered-x-mwf|Filtered-x MWF (FxMWF)]] — MWF on secondary-path-filtered references; joint NR + ANC for hearing aids
 - [[concepts/tinygru|TinyGRU]] — DNN whose estimated reference-channel spectrum drives the MCWF weights online
+- [[concepts/snr-cdr-wiener-gain|SNR–CDR Wiener Gain]] — post-filter of the factorization in jointly noisy and reverberant environments
+- [[concepts/superdirective-beamforming|Superdirective Beamforming]] — the robust spatial front-end of the Xiang et al. factorization
 
 ## Related Sources
 
@@ -116,3 +121,4 @@ which applies extra suppression in noise-only segments (small SPP) and converges
 - [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015: Residual Noise Control PMWF]] — target-signal redefinition yielding direct control of maximum noise reduction
 - [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — NeuralPMWF: a 164.9k-parameter network fully controls the PMWF, including an SPP-proxy-driven dynamic $\beta$
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — TinyGRU-estimated target spectrum drives online MCWF weights; beats oracle MVDR at ~50 MMACs/s
+- [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]] — factorization generalized to joint noise + reverberation with an SNR–CDR Wiener post-filter

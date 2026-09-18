@@ -586,4 +586,7 @@
 | [[entities/ziqi-gong\|Ziqi Gong]] | Researcher at AISpeech; co-author of CDUNet directed dual-microphone speech enhancement | 2026-09-16 |
 | [[entities/kai-yu\|Kai Yu]] | Professor at Shanghai Jiao Tong University (X-LANCE Lab) working on speech processing and recognition; corresponding author of CDUNet | 2026-09-16 |
 | [[entities/xuehan-wang\|Xuehan Wang]] | Researcher at NWPU CIAIC; first author of the Kronecker product adaptive beamforming paper introducing the KMVDR beamformer for arbitrary array geometries | 2026-09-17 |
+| [[entities/qian-xiang\|Qian Xiang]] | Researcher (SUST) — first author of the joint SNR–CDR Wiener gain design for noisy and reverberant environments | 2026-09-18 |
+| [[entities/tao-lei\|Tao Lei]] | Researcher (SUST) — co-author of the joint SNR–CDR Wiener gain design | 2026-09-18 |
+| [[entities/chao-pan\|Chao Pan]] | Researcher (NWPU) — robust superdirective beamforming, RIR simulation, time-varying variance estimation for arrays | 2026-09-18 |
 

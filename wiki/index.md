@@ -592,6 +592,9 @@
 | [[entities/ziqi-gong\|Ziqi Gong]] | Researcher at AISpeech; co-author of CDUNet directed dual-microphone speech enhancement | 2026-09-16 |
 | [[entities/kai-yu\|Kai Yu]] | Professor at Shanghai Jiao Tong University (X-LANCE Lab) working on speech processing and recognition; corresponding author of CDUNet | 2026-09-16 |
 | [[entities/xuehan-wang\|Xuehan Wang]] | Researcher at NWPU CIAIC; first author of the Kronecker product adaptive beamforming paper introducing the KMVDR beamformer for arbitrary array geometries | 2026-09-17 |
+| [[entities/qian-xiang\|Qian Xiang]] | Researcher (SUST) — first author of the joint SNR–CDR Wiener gain design for noisy and reverberant environments | 2026-09-18 |
+| [[entities/tao-lei\|Tao Lei]] | Researcher (SUST) — co-author of the joint SNR–CDR Wiener gain design | 2026-09-18 |
+| [[entities/chao-pan\|Chao Pan]] | Researcher (NWPU) — robust superdirective beamforming, RIR simulation, time-varying variance estimation for arrays | 2026-09-18 |
 
 ---
 
@@ -1121,6 +1124,7 @@
 | [[concepts/cdunet\|CDUNet]] | Causal-directed U-Net — 74.4K-param dual-microphone directed speech enhancement model steered by triple steering vectors with runtime enhancement width | 2026-09-16 |
 | [[concepts/triple-steering-spatial-selection\|Triple-Steering Spatial Selection]] | Spatial selection method using three steering vectors (target + width-derived edge angles) to guide enhancement and determine the enhancement range | 2026-09-16 |
 | [[concepts/kmvdr-beamformer\|KMVDR Beamformer]] | Kronecker MVDR beamformer: MVDR under a sum-of-Kronecker-products filter representation, applicable to arbitrary array geometries via alternating closed-form subfilter updates | 2026-09-17 |
+| [[concepts/snr-cdr-wiener-gain\|SNR–CDR Wiener Gain]] | Joint Wiener post-filter driven by both SNR and CDR, with two hyperparameters separating noise reduction from reverberation suppression (Xiang et al. 2025) | 2026-09-18 |
 
 ---
 
@@ -1350,6 +1354,7 @@
 | [[sources/wen-2025-neural-directed-speech-enhancement\|Wen, Zhou, Xi, Li, Gong & Yu 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] | CDUNet — a 74.4K-param causal U-Net steered by triple steering vectors with a runtime enhancement width for directed dual-microphone speech enhancement | 2026-09-16 |
 | [[sources/wang-2021-kronecker-adaptive-beamforming\|Wang, Huang, Cohen, Benesty & Chen 2021]] | First Kronecker product beamforming framework for arbitrary array geometries: the filter is a sum of rank-P Kronecker products of short subfilters, solved by alternating closed-form MVDR updates (KMVDR), beating conventional MVDR in output SINR under limited snapshots and dynamic interference | 2026-09-17 |
 | [[sources/cohen-2019-differential-kronecker-beamforming\|Cohen, Benesty & Chen 2019]] | The original Kronecker product beamforming formulation: decomposes differential beamformers into two virtual-array subfilters (KP cardioid/dipole/hypercardioid/supercardioid) for more flexible DF–WNG tradeoffs. | 2026-09-17 |
+| [[sources/xiang-2025-wiener-gain-reverberant\|Xiang, Chen, Benesty, Lei & Pan 2025]] | Traditional Wiener gain formulations are based solely on either the SNR (targeting additive noise) or the coherent-to-diffuse ratio (CDR, targeting reverberation), rendering them suboptimal when noise and reverberation coexist. | 2026-09-18 |
 
 ---
 
@@ -1403,10 +1408,10 @@
 
 ## Statistics
 
-- **Total pages**: 1352
-- **Entities**: 582
-- **Concepts**: 520
-- **Sources**: 220
+- **Total pages**: 1357
+- **Entities**: 585
+- **Concepts**: 521
+- **Sources**: 221
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-17
+- **Last updated**: 2026-09-18

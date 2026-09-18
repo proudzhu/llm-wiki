@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-27
-updated: 2026-08-08
+updated: 2026-09-18
+sources:
+  - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
 tags:
   - signal-processing
   - speech-enhancement
@@ -30,6 +32,8 @@ $$G(l,f) = \max\left\{G_{\min}, 1 - \sqrt{\frac{\mu}{\widehat{CDR}(l,f) + 1}}\ri
 
 Key advantages: can operate blindly without DOA knowledge, requires only two microphones, computationally efficient.
 
+Classical CDR estimators, however, ignore additive noise and are therefore biased in noisy reverberant fields. [[sources/xiang-2025-wiener-gain-reverberant|Xiang et al. 2025]] address this with a **noise-aware, DOA-independent pairwise estimator** — folding the noise coherence and the (decision-directed) SNR into the Schwarz & Kellermann pairwise formulation — and drive a [[concepts/snr-cdr-wiener-gain|joint SNR–CDR Wiener gain]] after a robust superdirective beamformer, with hyperparameters separating the reverberation-suppression and noise-reduction axes. The approach outperforms AWPE (the WPE-style baseline) precisely in jointly noisy and reverberant environments, where AWPE's SRMR degrades rapidly as input SNR drops.
+
 ## Other Approaches
 
 | Method | Description | Key Property |
@@ -57,6 +61,7 @@ Key advantages: can operate blindly without DOA knowledge, requires only two mic
 - [[concepts/complex-convolving-mask|Complex Convolving Mask]]
 - [[concepts/trunet|Tiny Recurrent U-Net (TRU-Net)]]
 - [[concepts/phase-aware-beta-sigmoid-mask|Phase-aware β-sigmoid Mask (PHM)]]
+- [[concepts/snr-cdr-wiener-gain|SNR–CDR Wiener Gain]] — noise-aware CDR-driven dereverberation gain
 
 ## Key Sources
 
@@ -65,3 +70,4 @@ Key advantages: can operate blindly without DOA knowledge, requires only two mic
 - [[sources/indenbom-2023-deepvqe|Indenbom et al. 2023: DeepVQE]]
 - [[sources/choi-2021-trunet-real-time-speech-enhancement|Choi et al. 2021: TRU-Net — Real-Time Denoising and Dereverberation with Tiny Recurrent U-Net]]
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023: Audio Signal Processing in the 21st Century]] — 25-year retrospective positioning WPE and the dereverberation field
+- [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]] — noise-aware CDR estimation + joint SNR–CDR Wiener gain; outperforms AWPE in noise + reverberation
