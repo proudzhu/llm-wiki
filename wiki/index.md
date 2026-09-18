@@ -1125,6 +1125,7 @@
 | [[concepts/triple-steering-spatial-selection\|Triple-Steering Spatial Selection]] | Spatial selection method using three steering vectors (target + width-derived edge angles) to guide enhancement and determine the enhancement range | 2026-09-16 |
 | [[concepts/kmvdr-beamformer\|KMVDR Beamformer]] | Kronecker MVDR beamformer: MVDR under a sum-of-Kronecker-products filter representation, applicable to arbitrary array geometries via alternating closed-form subfilter updates | 2026-09-17 |
 | [[concepts/snr-cdr-wiener-gain\|SNR–CDR Wiener Gain]] | Joint Wiener post-filter driven by both SNR and CDR, with two hyperparameters separating noise reduction from reverberation suppression (Xiang et al. 2025) | 2026-09-18 |
+| [[concepts/multichannel-cdr-estimation\|Multichannel CDR Estimation]] | Extension of CDR estimation to arrays with more than two microphones: GMSC, ERANK, weighted-average subarray fusion, and array-manifold (GEVD) estimators. | 2026-09-19 |
 
 ---
 
@@ -1355,6 +1356,7 @@
 | [[sources/wang-2021-kronecker-adaptive-beamforming\|Wang, Huang, Cohen, Benesty & Chen 2021]] | First Kronecker product beamforming framework for arbitrary array geometries: the filter is a sum of rank-P Kronecker products of short subfilters, solved by alternating closed-form MVDR updates (KMVDR), beating conventional MVDR in output SINR under limited snapshots and dynamic interference | 2026-09-17 |
 | [[sources/cohen-2019-differential-kronecker-beamforming\|Cohen, Benesty & Chen 2019]] | The original Kronecker product beamforming formulation: decomposes differential beamformers into two virtual-array subfilters (KP cardioid/dipole/hypercardioid/supercardioid) for more flexible DF–WNG tradeoffs. | 2026-09-17 |
 | [[sources/xiang-2025-wiener-gain-reverberant\|Xiang, Chen, Benesty, Lei & Pan 2025]] | Traditional Wiener gain formulations are based solely on either the SNR (targeting additive noise) or the coherent-to-diffuse ratio (CDR, targeting reverberation), rendering them suboptimal when noise and reverberation coexist. | 2026-09-18 |
+| [[sources/xiang-2024-multichannel-cdr-estimation\|Xiang, Lei, Pan, Chen & Benesty 2024: On Multichannel Coherent-to-Diffuse Power Ratio Estimation]] | Two DOA-free multichannel (M > 2) CDR estimators — weighted-average subarray fusion and array-manifold joint diagonalization — outperform two-channel Schwarz, averaged-coherence, GMSC, and ERANK with a parametric Wiener postfilter. | 2026-09-19 |
 
 ---
 
@@ -1408,10 +1410,10 @@
 
 ## Statistics
 
-- **Total pages**: 1357
+- **Total pages**: 1359
 - **Entities**: 585
-- **Concepts**: 521
-- **Sources**: 221
+- **Concepts**: 522
+- **Sources**: 222
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-18
+- **Last updated**: 2026-09-19

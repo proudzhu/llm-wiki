@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-27
-updated: 2026-09-18
+updated: 2026-09-19
 sources:
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
   - raw/papers/richard-2023-audio-signal-processing-21st-century/full-text.md
   - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
+  - raw/papers/xiang-2024-multichannel-cdr-estimation/full-text.md
 tags:
   - signal-processing
   - spatial-audio
@@ -66,6 +67,14 @@ $$e_{i,j} = [\boldsymbol{\Gamma}_Y]_{i,j} + \frac{[\boldsymbol{\Gamma}_Y]_{i,j} 
 
 and the unit-diagonal constraint on the source coherence matrix yields a closed-form CDR per sensor pair, averaged over all $M(M-1)/2$ pairs. Because existing CDR estimators ignore additive noise, they are biased when noise and reverberation coexist; the noise-aware variant shows lower estimation error at $M = 4$, $T_{60} = 500$ ms, input SNR 20 dB. A practical consequence: the DRR of the resulting Wiener post-filter stays nearly constant across input SNRs, since CDR estimation is barely influenced by the background noise level.
 
+### Multichannel (M > 2) estimators (Xiang et al. 2024)
+
+Xiang, Lei, Pan, Chen & Benesty 2024 extend CDR estimation beyond two microphones with two DOA-free estimators. **Weighted-average estimation** partitions the array into groups of two-sensor subarrays with consistent spacing and orientation, applies any two-channel estimator per group, and fuses the group CDRs with softmax-style weights. **Array manifold information-based estimation** jointly diagonalizes $\boldsymbol{\Gamma}_{\mathbf{y}}$ and $\boldsymbol{\Gamma}_{\mathrm{dn}}$ (GEVD of $\boldsymbol{\Gamma}_{\mathrm{dn}}^{-1}\boldsymbol{\Gamma}_{\mathbf{y}}$), takes the principal eigenvector as the scaled manifold vector $\widehat{\mathbf{d}}$, and solves the closed form
+
+$$\hat{\beta} = \frac{\widehat{\mathbf{d}}^{\mathrm{H}} \boldsymbol{\Gamma}_{\mathbf{y}} \widehat{\mathbf{d}} - \widehat{\mathbf{d}}^{\mathrm{H}} \boldsymbol{\Gamma}_{\mathrm{dn}} \widehat{\mathbf{d}}}{M^2 - \widehat{\mathbf{d}}^{\mathrm{H}} \boldsymbol{\Gamma}_{\mathbf{y}} \widehat{\mathbf{d}}}$$
+
+Both outperform the two-channel Schwarz method, averaged-coherence, GMSC, and ERANK baselines in estimation accuracy (mse, error kurtosis), SNR gain, LSD, and DRR, with the advantage growing with the number of microphones (validated up to $M = 16$). See [[concepts/multichannel-cdr-estimation|Multichannel CDR Estimation]] for the full method landscape.
+
 ## Geometric Interpretation
 
 The signal coherence $\Gamma_s$, noise coherence $\Gamma_n$, and mixed coherence $\Gamma_x$ all lie on a straight line in the complex plane. $\Gamma_s$ lies on the unit circle, $\Gamma_n$ on the real axis, and $\Gamma_x$ lies between them at a position determined by the CDR. This geometric view enables intuitive understanding of estimator behavior and bias.
@@ -104,6 +113,7 @@ Taseska & Habets use the CDR not as a post-filter gain, but as a **control signa
 - [[concepts/informed-spatial-filter|Informed Spatial Filter (ISF)]] — CDR used as a priori SAP control for informed MVDR/MWF (Taseska & Habets 2018)
 - [[concepts/multichannel-mcra|Multichannel MCRA]] — CDR-controlled a priori SAP for noise PSD matrix estimation
 - [[concepts/snr-cdr-wiener-gain|SNR–CDR Wiener Gain]] — the post-filter that consumes the noise-aware CDR estimate
+- [[concepts/multichannel-cdr-estimation|Multichannel CDR Estimation]] — extension of pairwise estimation to arrays with more than two sensors (Xiang et al. 2024)
 
 ## Key Sources
 
@@ -113,6 +123,7 @@ Taseska & Habets use the CDR not as a post-filter gain, but as a **control signa
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — global MMSE coherence-based noise variance decomposition with adaptive coherence model
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] — CDR as a priori SAP control for multichannel MCRA noise PSD matrix estimation (Ch 3)
 - [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]] — noise-aware DOA-independent pairwise CDR estimator
+- [[sources/xiang-2024-multichannel-cdr-estimation|Xiang, Lei, Pan, Chen & Benesty 2024: On Multichannel Coherent-to-Diffuse Power Ratio Estimation]] — multichannel (M > 2) CDR estimators: weighted-average subarray fusion and array-manifold joint diagonalization
 
 ## Related Sources
 

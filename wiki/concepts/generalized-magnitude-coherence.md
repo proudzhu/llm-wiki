@@ -55,3 +55,4 @@ $$\gamma_x(l,f) = |\Gamma_{x_1,x_2}(l,f)|$$
 ## Key Sources
 
 - [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement|Löllmann, Brendel & Kellermann 2020: Generalized Coherence-Based Signal Enhancement]]
+- [[sources/xiang-2024-multichannel-cdr-estimation|Xiang, Lei, Pan, Chen & Benesty 2024: On Multichannel Coherent-to-Diffuse Power Ratio Estimation]] — benchmarks the GMC-based CDR estimator against weighted-average and array-manifold multichannel estimators

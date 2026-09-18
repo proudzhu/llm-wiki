@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-09-18
+updated: 2026-09-19
 sources:
   - raw/papers/lollmann-2020-generalized-coherence-based-signal-enhancement/full-text.md
   - raw/papers/schwarz-2015-coherent-to-diffuse-power-ratio/full-text.md
@@ -9,6 +9,7 @@ sources:
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
   - raw/papers/richard-2023-audio-signal-processing-21st-century/full-text.md
   - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
+  - raw/papers/xiang-2024-multichannel-cdr-estimation/full-text.md
 tags:
   - signal-processing
   - multichannel

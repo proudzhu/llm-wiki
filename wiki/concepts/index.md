@@ -525,4 +525,5 @@
 | [[concepts/triple-steering-spatial-selection\|Triple-Steering Spatial Selection]] | Spatial selection method using three steering vectors (target + width-derived edge angles) to guide enhancement and determine the enhancement range | 2026-09-16 |
 | [[concepts/kmvdr-beamformer\|KMVDR Beamformer]] | Kronecker MVDR beamformer: MVDR under a sum-of-Kronecker-products filter representation, applicable to arbitrary array geometries via alternating closed-form subfilter updates | 2026-09-17 |
 | [[concepts/snr-cdr-wiener-gain\|SNR–CDR Wiener Gain]] | Joint Wiener post-filter driven by both SNR and CDR, with two hyperparameters separating noise reduction from reverberation suppression (Xiang et al. 2025) | 2026-09-18 |
+| [[concepts/multichannel-cdr-estimation\|Multichannel CDR Estimation]] | Extension of CDR estimation to arrays with more than two microphones: GMSC, ERANK, weighted-average subarray fusion, and array-manifold (GEVD) estimators. | 2026-09-19 |
 

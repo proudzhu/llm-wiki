@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-27
-updated: 2026-09-18
+updated: 2026-09-19
 sources:
   - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
+  - raw/papers/xiang-2024-multichannel-cdr-estimation/full-text.md
 tags:
   - signal-processing
   - speech-enhancement

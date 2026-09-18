@@ -61,6 +61,7 @@ Applied after a robust superdirective beamformer (4-mic ULA, 2 cm, image-method 
 
 - [[concepts/wiener-filter|Wiener Filter]] — the optimal-filter root and the degenerate noise-only gain
 - [[concepts/coherent-to-diffuse-power-ratio|Coherent-to-Diffuse Power Ratio]] — the reverberation-side ratio and its noise-aware estimation
+- [[concepts/multichannel-cdr-estimation|Multichannel CDR Estimation]] — the same group's $M > 2$ extension of pairwise CDR estimation (weighted-average subarrays, array-manifold joint diagonalization)
 - [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]] — the beamformer + Wiener gain decomposition this post-filter completes
 - [[concepts/superdirective-beamforming|Superdirective Beamforming]] — the adopted spatial filter
 - [[concepts/decision-directed-a-priori-snr|Decision-Directed a Priori SNR]] — the SNR estimation stage
@@ -69,3 +70,4 @@ Applied after a robust superdirective beamformer (4-mic ULA, 2 cm, image-method 
 ## Related Sources
 
 - [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]] — introduces the formulation, the noise-aware CDR estimator, and the two-hyperparameter trade-off study
+- [[sources/xiang-2024-multichannel-cdr-estimation|Xiang, Lei, Pan, Chen & Benesty 2024: On Multichannel Coherent-to-Diffuse Power Ratio Estimation]] — the same group's predecessor: multichannel (M > 2) CDR estimation via weighted-average subarray fusion and array-manifold joint diagonalization
