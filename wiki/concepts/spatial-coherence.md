@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-09-12
+updated: 2026-09-18
 sources:
   - raw/papers/lollmann-2020-generalized-coherence-based-signal-enhancement/full-text.md
   - raw/papers/schwarz-2015-coherent-to-diffuse-power-ratio/full-text.md
@@ -18,70 +18,69 @@ tags:
 
 # Spatial Coherence
 
-**Spatial Coherence** (空间相干性) 描述了多通道信号之间的空间相关性程度，是区分相干声源（直达声）和扩散声场（混响、噪声）的关键工具。
+**Spatial coherence** describes the degree of spatial correlation between multichannel signals, and is a key tool for distinguishing coherent sound sources (direct sound) from diffuse sound fields (reverberation, noise).
 
-## 定义
+## Definition
 
-两个传感器信号之间的空间相干性定义为互功率谱密度的归一化形式：
+The spatial coherence between two sensor signals is defined as the normalized form of the cross power spectral density:
 
 $$\Gamma_{x_1 x_2}(\omega) = \frac{S_{x_1 x_2}(\omega)}{\sqrt{S_{x_1 x_1}(\omega) \cdot S_{x_2 x_2}(\omega)}}$$
 
-其中 $S_{x_1 x_2}$ 是互功率谱密度，$S_{x_1 x_1}$ 和 $S_{x_2 x_2}$ 是自功率谱密度。
+where $S_{x_1 x_2}$ is the cross power spectral density, and $S_{x_1 x_1}$ and $S_{x_2 x_2}$ are the auto power spectral densities.
 
-## 扩散声场的相干性模型
+## Coherence Model of the Diffuse Sound Field
 
-对于各向同性扩散声场（晚期混响），两个全向麦克风之间的理论相干性为：
+For an isotropic diffuse sound field (late reverberation), the theoretical coherence between two omnidirectional microphones is:
 
 $$\Gamma_{\text{diff}}(\omega) = \frac{\sin(kd)}{kd}$$
 
-其中 $k = \omega/c$ 是波数，$d$ 是麦克风间距。这一可预测的模式使得仅从相干性测量就能区分直达声和混响。
+where $k = \omega/c$ is the wavenumber and $d$ is the microphone spacing. This predictable pattern makes it possible to distinguish direct sound from reverberation using coherence measurements alone.
 
-## 相干-扩散比 (CDR)
+## Coherence-to-Diffuse Ratio (CDR)
 
-Coherence-to-Diffuse Ratio (CDR) 是从空间相干性估计中推导的功率比：
+The Coherence-to-Diffuse Ratio (CDR) is a power ratio derived from the spatial coherence estimate:
 
 $$\text{CDR} = \frac{|\Gamma_{x_1 x_2}|^2 - |\Gamma_{\text{diff}}|^2}{1 - |\Gamma_{x_1 x_2}|^2}$$
 
-CDR > 0 表示相干分量（直达声）占主导，CDR < 0 表示扩散分量（混响）占主导。
+CDR > 0 indicates that the coherent component (direct sound) dominates, while CDR < 0 indicates that the diffuse component (reverberation) dominates.
 
-经典 CDR 估计器假设声场无加性噪声，在噪声+混响共存环境下有偏。[[sources/xiang-2025-wiener-gain-reverberant|Xiang et al. 2025]] 将噪声相干性与判决引导 SNR 折入 Schwarz & Kellermann 的 DOA 无关成对估计器，得到**噪声感知**的 CDR 估计，并据此驱动 [[concepts/snr-cdr-wiener-gain|SNR–CDR 联合维纳增益]]，在鲁棒超指向波束形成器之后同时抑制噪声与混响。
+Classical CDR estimators assume a noise-free sound field and are therefore biased in environments where noise and reverberation coexist. [[sources/xiang-2025-wiener-gain-reverberant|Xiang et al. 2025]] fold the noise coherence and the decision-directed SNR into the Schwarz & Kellermann DOA-independent pairwise estimator, yielding a **noise-aware** CDR estimate that drives the [[concepts/snr-cdr-wiener-gain|joint SNR–CDR Wiener gain]] after a robust superdirective beamformer, suppressing noise and reverberation simultaneously.
 
-## 自适应相干性模型
+## Adaptive Coherence Model
 
-理论上扩散声场的相干性由 sinc 函数给出 (Eq. $\Gamma_{\text{diff}}$)，但在实际移动设备上，麦克风的非全向特性和设备外壳的反射会使实测相干性偏离理论模型。Jin et al. (2017) 在多通道噪声估计中提出将 sinc 模型作为**初始化**，并在语音缺席帧（SPP $\rho < 0.1$）自适应更新相干函数：
+In theory, the coherence of a diffuse sound field is given by the sinc function (Eq. $\Gamma_{\text{diff}}$), but on real mobile devices, the non-omnidirectional characteristics of microphones and reflections from the device housing cause measured coherence to deviate from the theoretical model. In multichannel noise estimation, Jin et al. (2017) proposed using the sinc model as an **initialization**, and adaptively updating the coherence function during speech-absent frames (SPP $\rho < 0.1$):
 
 $$\gamma_{pq}(\tau, \omega) = \alpha_\gamma \gamma_{pq}(\tau - 1, \omega) + (1 - \alpha_\gamma) \frac{\Phi_{pq}}{\sqrt{\Phi_{pp} \Phi_{qq}}}, \quad \rho < 0.1$$
 
-其中 $\alpha_\gamma = 0.9$。这种自适应方案使噪声相干模型能够跟踪时变噪声场，而非依赖静态的完全扩散或完全不相干假设（Zelinski/McCowan 的局限）。更新的相干函数同时用于：(i) 通过最小二乘全局求解噪声方差的 MMSE 分解（相干-扩散分量 $\sigma_c^2$ 与不相干分量 $\sigma_w^2$）；(ii) 自适应地确定单/多通道噪声估计的分频点（$|\gamma|^2 = 0.5$ 的频率）。详见 [[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence Noise Estimation]]。
+where $\alpha_\gamma = 0.9$. This adaptive scheme allows the noise coherence model to track time-varying noise fields rather than relying on static assumptions of a fully diffuse or fully incoherent field (the limitation of Zelinski/McCowan). The updated coherence function is used both: (i) in a least-squares global solution of an MMSE decomposition of noise variances (coherent-diffuse component $\sigma_c^2$ and incoherent component $\sigma_w^2$); and (ii) to adaptively determine the crossover frequency between single- and multichannel noise estimation (the frequency where $|\gamma|^2 = 0.5$). See [[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence Noise Estimation]].
 
-## 多通道广义化：GMC
+## Multichannel Generalization: GMC
 
-Löllmann et al. (2020) 将基于相干性的信号增强从麦克风对推广到 $N$ 个通道：通过 $N \times N$ 相干矩阵的特征值分解计算**广义幅度相干（GMC）**，并以此估计各通道的 CDR。增强对象是"最合适"的麦克风信号——由主特征向量隐式选择，无需 DOA 估计。在 4 麦克风双耳助听器场景中，该方案一致优于 Schwarz/Thiergart 等人的 DOA 无关双通道 CDR 估计器，见 [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement|Löllmann et al. 2020]]。
+Löllmann et al. (2020) generalized coherence-based signal enhancement from microphone pairs to $N$ channels: the **Generalized Magnitude Coherence (GMC)** is computed via an eigendecomposition of the $N \times N$ coherence matrix, and is used to estimate the per-channel CDR. The signal to be enhanced is the "most suitable" microphone signal — implicitly selected by the principal eigenvector, without DOA estimation. In a 4-microphone binaural hearing-aid scenario, this scheme consistently outperforms the DOA-independent two-channel CDR estimators of Schwarz/Thiergart et al., see [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement|Löllmann et al. 2020]].
 
-## 应用
+## Applications
 
-| 应用 | 原理 |
+| Application | Principle |
 |------|------|
-| **去混响** | 利用扩散声场相干性模型估计晚期混响功率，构建谱增益 |
-| **噪声 reduction** | 区分相干目标源和扩散噪声 |
-| **鲁棒 ASR** | 从短时相干性提取空间特征向量作为 DNN 输入 |
-| **波束形成辅助** | CDR 估计可作为 MVDR/MWF 的后滤波器 |
-| **双传声器降噪** | 实测相干函数（或扣除噪声互谱的 CPSD 形式）直接作为谱增益——语音相关噪声导致性能下降，噪声互谱估计是关键，见 [[concepts/coherence-based-noise-reduction|Coherence-Based Noise Reduction]] |
+| **Dereverberation** | Use diffuse-field coherence models to estimate late reverberation power and construct a spectral gain |
+| **Noise reduction** | Distinguish coherent target sources from diffuse noise |
+| **Robust ASR** | Extract spatial feature vectors from short-time coherence as DNN input |
+| **Beamforming assistance** | CDR estimation can serve as a post-filter for MVDR/MWF |
+| **Two-microphone noise reduction** | Measured coherence functions (or CPSD forms with the noise cross-spectrum subtracted) serve directly as spectral gains — speech-correlated noise degrades performance, and noise cross-spectrum estimation is critical, see [[concepts/coherence-based-noise-reduction|Coherence-Based Noise Reduction]] |
 
-## 与其他概念的关系
+## Relationship to Other Concepts
 
-- [[beamforming|Beamforming]]：空间滤波，与相干性估计互补
-- [[wiener-filter|Wiener Filter]]：CDR 可构建多通道维纳滤波器的后滤波增益
-- [[mclp|MCLP]]：不同的去混响范式——MCLP 做线性预测，相干性做谱掩蔽
-- [[deep-learning-for-signal-processing|Deep Learning for Signal Processing]]：空间特征作为 DNN 输入
+- [[beamforming|Beamforming]]: spatial filtering, complementary to coherence estimation
+- [[wiener-filter|Wiener Filter]]: CDR can construct the post-filter gain of a multichannel Wiener filter
+- [[mclp|MCLP]]: a different dereverberation paradigm — MCLP performs linear prediction, coherence performs spectral masking
+- [[deep-learning-for-signal-processing|Deep Learning for Signal Processing]]: spatial features as DNN input
 
-## 关键文献
+## Key Literature
 
-- [[sources/schwarz-2015-coherent-to-diffuse-power-ratio|Schwarz & Kellermann 2015]] — CDR 估计的奠基性工作，提出无偏 CDR 估计器和 DOA 无关去混响系统
-- [[sources/schwarz-2019-dereverberation-spatial-coherence|Schwarz 2019]] — 博士论文，系统研究空间相干性模型在去混响和 ASR 中的应用
-- [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026]] — 利用扩散声场相干矩阵 $\Gamma_d$ 作为预定义基，通过方差比估计重建 SCM
-- [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin et al. 2017]] — 将 sinc 扩散场相干性作为初始化，在语音缺席帧自适应更新相干函数，用于多通道噪声 PSD 估计与分频点选择
-- [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement|Löllmann et al. 2020]] — N 通道广义幅度相干（GMC）：相干矩阵特征值分解估计 CDR，主特征向量隐式选择增强通道
-- [[sources/xiang-2025-wiener-gain-reverberant|Xiang et al. 2025]] — 噪声感知 DOA 无关 CDR 估计：将噪声相干性与 SNR 折入成对估计器，驱动 SNR–CDR 联合维纳增益
+- [[sources/schwarz-2015-coherent-to-diffuse-power-ratio|Schwarz & Kellermann 2015]] — foundational work on CDR estimation, proposing the unbiased CDR estimator and the DOA-independent dereverberation system
+- [[sources/schwarz-2019-dereverberation-spatial-coherence|Schwarz 2019]] — doctoral thesis systematically studying spatial coherence models for dereverberation and ASR
+- [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026]] — uses the diffuse-field coherence matrix $\Gamma_d$ as a predefined basis, reconstructing the SCM via variance-ratio estimation
+- [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin et al. 2017]] — uses the sinc diffuse-field coherence as an initialization, adaptively updating the coherence function during speech-absent frames, for multichannel noise PSD estimation and crossover-frequency selection
+- [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement|Löllmann et al. 2020]] — N-channel Generalized Magnitude Coherence (GMC): CDR estimated via eigendecomposition of the coherence matrix, with the principal eigenvector implicitly selecting the enhanced channel
+- [[sources/xiang-2025-wiener-gain-reverberant|Xiang et al. 2025]] — noise-aware DOA-independent CDR estimation: folds noise coherence and SNR into the pairwise estimator, driving the joint SNR–CDR Wiener gain
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard, Smaragdis, Gannot, Naylor, Makino, Kellermann & Sugiyama 2023: Audio Signal Processing in the 21st Century]]
-
