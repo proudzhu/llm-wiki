@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-17
+updated: 2026-09-19
 sources:
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
   - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
   - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
+  - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
 tags:
   - directivity-pattern
   - spatial-audio
@@ -66,6 +67,7 @@ As a polynomial in two variables, it has at most $M_1 + M_2 - 2$ distinct nulls,
 ## Related Sources
 
 - [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]] — beampattern factorization under Kronecker filters
+- [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — Chinese-language review elevating beampattern frequency invariance to a co-equal design axis with DF and WNG across six beamforming families
 - [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — R-th order DMA pattern formulation and neural realization
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
 - [[sources/huang-2025-steerable-neural-directional-filtering|Huang, Halimeh, Chetupalli, Thiergart & Habets 2025: Steerable Neural Directional Filtering]]

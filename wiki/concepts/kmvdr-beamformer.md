@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-17
-updated: 2026-09-17
+updated: 2026-09-19
 sources:
   - raw/papers/wang-2021-kronecker-adaptive-beamforming/full-text.txt
+  - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
 tags:
   - beamforming
   - microphone-arrays
@@ -48,3 +49,4 @@ where $\boldsymbol{\Lambda}_{\mathbf{y}_1}, \boldsymbol{\Lambda}_{\mathbf{y}_2}$
 
 - [[sources/wang-2021-kronecker-adaptive-beamforming|Wang et al. 2021: Kronecker Product Adaptive Beamforming for Microphone Arrays]]
 - [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]]
+- [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — review of the fixed Kronecker-product family (two-stage cascade lineage, adaptive covariance-inversion splitting) that KMVDR later generalized to adaptive beamforming on arbitrary geometries

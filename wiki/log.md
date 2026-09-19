@@ -5452,3 +5452,9 @@ Ingested from Zotero (IEEE TASLPRO 2026, DOI 10.1109/TASLPRO.2026.3653137). Extr
 ## [2026-09-19] ingest | Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation (Pan 2025)
 
 Ingested Pan 2025 tutorial (arXiv 2508.21470) via arXiv HTML extraction. Created source page pan-2025-data-driven-acoustics, 3 new concept pages (si-sdr, sound-event-detection, speaker-verification), updated entity page chao-pan and 11 existing concept pages (deep-learning-for-signal-processing, sound-source-localization, activity-coupled-cartesian-doa, speech-enhancement, wiener-filter, permutation-invariant-training, tf-mask-estimation, deep-clustering-speech-separation, speaker-embedding, diffusion-models-for-speech, neural-networks). Refined the loss-choice takeaway in synthesis/deep-speech-enhancement with the three-level loss hierarchy and SI-SDR-correlation equivalence. Statistics: 1366 total pages (585 entities, 527 concepts, 224 sources, 23 synthesis, 7 queries).
+
+---
+
+## [2026-09-19] ingest | Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction
+
+Chinese-language review (Journal of Signal Processing 36(6): 804-815) unifying six beamforming families (delay-and-sum, superdirective, differential, orthogonal-series-expansion, Kronecker, adaptive) under the DF-WNG-frequency-invariance triad. Created source page pan-2020-microphone-array-beamforming plus concept pages frequency-invariant-beamforming and orthogonal-series-expansion-beamforming; updated 7 concept pages (beamforming, differential-microphone-array, superdirective-beamforming, kronecker-product-beamforming, white-noise-gain, mvdr-beamformer, fixed-beamformer), 3 entity pages (chao-pan, gongping-huang, jingdong-chen), and the multi-channel-speech-enhancement synthesis page (new Taxonomy row + MVDR-degeneration refinement in takeaway 7). Content extracted via pdftotext after two MinerU server-side failures.

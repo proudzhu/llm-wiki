@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-09-17
+updated: 2026-09-19
 tags:
   - beamforming
   - robustness
   - microphone-arrays
 sources:
+  - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/deng-2026-joint-covariance-wng-mvdr/full-text.md
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
   - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
@@ -49,6 +50,10 @@ This maps the desired WNG bound to a maximum allowable condition number $\kappa_
 
 A typical choice is $W_{\min} = 10\log_{10}(M) - 3$ dB, allowing 3 dB of WNG degradation from the delay-and-sum maximum in exchange for adaptive interference nulling.
 
+## Practical Threshold Rule of Thumb
+
+[[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020]] state a practical system-level rule: since most microphone sensors' self-noise lies in the 20–35 dBA range, a WNG above **−20 dB** generally prevents white-noise amplification problems in real systems (i.e., yields good robustness). The exact WNG level required depends on the sensors' self-noise and inter-sensor mismatch — lower self-noise tolerates lower WNG for the same robustness.
+
 ## WNG in Fixed Superdirective Design
 
 For fixed [[concepts/superdirective-beamforming|superdirective beamformers]], WNG is the robustness metric traded against the directivity factor: maximizing DF drives WNG strongly negative at low frequencies (white-noise amplification). Two loading-based control mechanisms appear in the literature (Zhu et al. 2025): (i) a fixed diagonal loading factor $\epsilon$ in $[\boldsymbol{\Gamma} + \epsilon\mathbf{I}]^{-1}$, and (ii) a **per-frequency bisection** on $\epsilon$ that pins WNG to an explicit target (e.g., 0 dB or −10 dB) at every bin. In [[concepts/kronecker-product-beamforming|Kronecker product beamforming]], the decomposition rank $P$ provides an additional WNG knob: larger $P$ raises DF but lowers WNG.
@@ -78,3 +83,4 @@ Conventionally, the WNG lower bound $W_{\min}$ is a fixed hyperparameter tuned m
 - [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026: Joint Covariance and WNG Learning for Robust MVDR]]
 - [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]] — WNG as the robustness metric in superdirective design; per-frequency bisection on the loading factor to hit a WNG target; rank-P as a WNG knob
 - [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]] — WNG factorization $W = W_1 \times W_2$ under Kronecker filters; $\epsilon_2$ regularization knob
+- [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — practical rule of thumb: sensor self-noise 20–35 dBA implies WNG > −20 dB is generally safe

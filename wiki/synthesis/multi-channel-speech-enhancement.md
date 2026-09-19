@@ -45,6 +45,7 @@ sources:
   - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
   - raw/papers/xiang-2024-multichannel-cdr-estimation/full-text.md
   - raw/papers/pan-2026-array-self-awareness/full-text.md
+  - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
 tags:
   - multi-channel-speech-enhancement
   - array-self-awareness
@@ -125,6 +126,7 @@ The distinction: this synthesis is about **spatial filtering** (beamforming, coh
 | [[sources/pandey-2025-ultra-low-compute\|Pandey & Azcarreta 2025 (TinyGRU)]] | 2025 | Hybrid | DNN-estimated-target MCWF: two-stage [[concepts/tinygru\|TinyGRU]] + online MCWF at ~21.5 MMACs/s for 8 mics, surpassing oracle MVDR; complex (not magnitude-only) masking is what makes the hybrid work |
 | [[sources/wen-2025-neural-directed-speech-enhancement\|Wen et al. 2025 (CDUNet)]] | 2025 | Hybrid | Triple-steering spatial selection: three classical steered beams (target + width-derived edge angles) as conditioning inputs to a 74.4K-param causal U-Net with a runtime enhancement width; directed enhancement on a dual-mic array, best front-end PESQ and downstream ASR WER |
 | [[sources/pan-2026-array-self-awareness\|Pan, Chen & Benesty 2026]] | 2026 | Estimate what | [[concepts/array-self-awareness\|Array self-awareness]]: invert the paradigm — define the *background* (interferences + noise via a priori coherence matrices), recover the unknown new source's coherence from the [[concepts/covariance-matrix-residual-model\|residual]] of $\Phi_{\mathbf{y}}$; moving sources, sporadic events, count uncertainty handled with no target prior; reverberation *helps*; offline ILRMA supplies the a priori blindly |
+| [[sources/pan-2020-microphone-array-beamforming\|Pan, Huang & Chen 2020]] | 2020 | Taxonomy | Chinese-language review unifying six beamforming families (delay-and-sum, superdirective, differential, orthogonal-series-expansion, Kronecker, adaptive) under the three-axis framework — DF, WNG, [[concepts/frequency-invariant-beamforming\|frequency invariance]] — and showing MVDR degenerating to DSBF / superdirective / robust diagonally-loaded superdirective under white / isotropic / mixed noise fields; codifies the WNG > −20 dB practical threshold and the fixed-filter $M^2$ DF upper bound as an open problem |
 
 ## Insight 1: The Classical Coherence/CDR Lineage — DOA-Independence as the Key Relaxation
 
@@ -304,7 +306,7 @@ The corpus shows that **form factor and use case, not algorithmic novelty, are t
 
 6. **Application constraints, not algorithmic novelty, drive deployed architecture.** Hearing aids → classical CDR/GMC; mobile phones → level-difference post-filters; smart glasses → time-domain ROI beamforming; ASR → spatial features as DNN input. The "best" method is the one that fits the form-factor constraint, not the one with the highest benchmark score.
 
-7. **MVDR remains the connective tissue.** Every era engages MVDR: classical implementations (Lorenz, Schwarz, Tashev, Jin, Löllmann), robustness research (Mittal, Deng), hybrid systems (HVSF exposes MVDR as a VSLF special case, Farmani's virtual mics feed MVDR, Apostolidis wraps MPDR). The 2026 work refines MVDR's *parameterization* (SCM estimation, WNG control, output-based steering) rather than replacing it — and the Kronecker line (Cohen 2019, Wang 2021, Zhu 2025) refines its *structure*, restricting the filter to low-rank sums of short subfilters for built-in robustness.
+7. **MVDR remains the connective tissue.** Every era engages MVDR: classical implementations (Lorenz, Schwarz, Tashev, Jin, Löllmann), robustness research (Mittal, Deng), hybrid systems (HVSF exposes MVDR as a VSLF special case, Farmani's virtual mics feed MVDR, Apostolidis wraps MPDR). The 2026 work refines MVDR's *parameterization* (SCM estimation, WNG control, output-based steering) rather than replacing it — and the Kronecker line (Cohen 2019, Wang 2021, Zhu 2025) refines its *structure*, restricting the filter to low-rank sums of short subfilters for built-in robustness. The Pan, Huang & Chen 2020 review makes the degeneration explicit from the other direction: under white noise MVDR collapses to delay-and-sum, under isotropic noise to superdirective, and under mixed noise fields to robust diagonally-loaded superdirective — i.e., the fixed beamformers surveyed in that review are not alternatives to MVDR but its noise-field-conditioned special cases, and its three-axis framework (DF, WNG, frequency invariance) supplies the common trade-off surface on which both classical and learned designs (e.g. Deng 2026's frequency-adaptive WNG) are positioned.
 
 ## Open Questions / Future Synthesis Candidates
 

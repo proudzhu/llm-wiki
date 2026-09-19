@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-17
+updated: 2026-09-19
 sources:
+  - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
@@ -34,6 +35,15 @@ A differential microphone array (DMA) is a fixed beamformer that uses spatial di
 
 [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019]] introduced **differential Kronecker product beamformers**: when the physical array decomposes into two virtual ULAs ($M = M_1 M_2$, steering vector $\mathbf{d} = \mathbf{d}_1 \otimes \mathbf{d}_2$), the differential filter follows the same decomposition $\mathbf{h} = \mathbf{h}_1 \otimes \mathbf{h}_2$. This adds a new design axis to classical differential beamforming: the KP cardioid/dipole/hypercardioid/supercardioid achieve higher DF and WNG than the traditional designs with $M_2$ microphones, and occupy a more favorable DF–WNG tradeoff than minimum-norm designs with the same total $M$ — see [[concepts/kronecker-product-beamforming|Kronecker Product Beamforming]].
 
+## Null-Constraint Design and Robustness
+
+[[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020]] survey the design space beyond the traditional multistage cascade (an $N$th-order DMA as the difference of two $(N{-}1)$th-order DMAs, $N{+}1$ pressure microphones, fixed structure):
+
+- **Null-constraint design** (Benesty & Chen): write the desired beampattern's null positions plus a distortionless constraint as a linear system $\mathbf{C}^T(\omega)\mathbf{h}(\omega) = \mathbf{g}_1$; solving it yields classical patterns (dipole, cardioid, hypercardioid, supercardioid, Chebyshev) without pre-specifying a target pattern. With $M > N{+}1$ microphones, the remaining degrees of freedom **maximize WNG** — so adding microphones directly attacks the white-noise amplification bottleneck (the $N$th-order minimum null position has a lower bound).
+- **Multistage-cascade theory**: the cascade is equivalent to linear-constraint DMAs; adjacent stages can merge; the overall beampattern is the product of stage beampatterns; a robust DMA decomposes into a differential stage plus a robustness stage. Excess sensors introduce high-frequency extra nulls, so the differential order must be constrained to preserve frequency invariance.
+- **Beyond integer order and linear geometry**: fractional-order DMAs (order computed from a target DF or WNG threshold); circular DMAs via Jacobi-series beampattern approximation; concentric circular arrays for high-frequency frequency invariance and robustness; planar and time-domain generalizations.
+- **Steering limitation**: linear DMAs are end-fire by construction; steering off end-fire can yield negative gain, motivating circular/spherical geometries.
+
 ## Limitations
 
 - Restricted to low-order patterns with compact arrays
@@ -59,10 +69,13 @@ For very small baselines where delay-based features become unreliable (Tashev et
 - [[concepts/white-noise-gain|White Noise Gain]]
 - [[concepts/virtual-directional-microphone|Virtual Directional Microphone]]
 - [[concepts/back-to-back-microphone-array|Back-to-Back Microphone Array]] — a related small-baseline geometry that uses unidirectional capsules (rather than omni) and front-back level differences
+- [[concepts/frequency-invariant-beamforming|Frequency-Invariant Beamforming]] — the design goal DMAs achieve by measuring the differential field
+- [[concepts/orthogonal-series-expansion-beamforming|Orthogonal Series Expansion Beamforming]] — beampattern-approximation design family closely related to null-constraint DMA design
 
 ## Related Sources
 
 - [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]] — Kronecker-decomposed differential beamformers (KP cardioid/dipole/hypercardioid/supercardioid)
+- [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — survey of DMA design space: null-constraint and max-WNG designs, multistage-cascade theory, fractional orders, circular/concentric geometries, steering limits
 - [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — neural directional filtering surpasses the order-per-microphone limit: a 3rd-order DMA pattern (6-mic CDMA classically) realized with 4 microphones
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — back-to-back unidirectional variant (9.6 mm baseline)

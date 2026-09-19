@@ -1,15 +1,16 @@
 ---
 type: concept
 created: 2026-05-26
-updated: 2026-09-12
+updated: 2026-09-19
 sources:
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
-  - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
+  - raw/papers/xiao-2023-spatially-selective-anc/full-text.txt
   - raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
   - raw/papers/li-2022-embedding-beamforming/full-text.md
   - raw/papers/richard-2023-audio-signal-processing-21st-century/full-text.md
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
+  - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
 tags:
   - spatial-filtering
   - beamforming
@@ -110,4 +111,5 @@ to subtract loudspeaker leakage from the reference microphones ahead of FxLMS. E
 - [[sources/li-2022-embedding-beamforming|Li, Liu, Zheng & Li 2022: Embedding and Beamforming]]
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard, Smaragdis, Gannot, Naylor, Makino, Kellermann & Sugiyama 2023: Audio Signal Processing in the 21st Century]]
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]]
+- [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — review positioning RTF-based steering-vector replacement as the standard remedy for steering mismatch in MVDR/GSC-type adaptive beamforming, with estimation difficulty in nonstationary reverberant scenes as the limiting factor
 

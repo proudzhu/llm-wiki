@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-17
+updated: 2026-09-19
 sources:
+  - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
   - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
@@ -21,9 +22,10 @@ A fixed beamformer (FBF) applies predetermined, time-invariant weights to microp
 
 | Type | Description | Characteristics |
 |------|-------------|-----------------|
-| Delay-and-Sum | Aligns signals by time delay, then sums | Simple, robust, limited directivity |
+| Delay-and-Sum | Aligns signals by time delay, then sums | Simple, robust (max WNG), limited directivity |
 | Differential Microphone Array (DMA) | Uses spatial differences between microphones | Frequency-invariant patterns, low-frequency noise amplification |
 | Superdirective | Maximizes directivity factor | High directivity, sensitive to noise |
+| Orthogonal Series Expansion | Approximates a target beampattern via an orthogonal series (Chebyshev, Legendre, Jacobi, spherical harmonics) | Flexible pattern design, relaxed sensor placement; robustness/pattern-accuracy trade-off via a loading parameter |
 
 ## Limitations
 
@@ -31,6 +33,7 @@ Conventional FBFs are fundamentally limited by:
 - Compact array with small aperture
 - Limited number of microphones
 - Low white noise gain (WNG) at low frequencies for higher-order patterns
+- **Directivity upper bound**: for fixed beamformers the directivity is capped at the square of the sensor count ($M^2$), so small arrays cannot reach the directivity many far-field applications need — breaking this limit is listed as an open problem by [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020]]
 
 Empirically, a least-squares FBF designed for a minimum WNG of −15 dB on a 4-microphone, 3 cm array approximates a 1st-order cardioid well but cannot approximate a 3rd-order DMA pattern (negative SDRs), and its performance is dominated by white-noise amplification ([[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024]]).
 
@@ -46,8 +49,12 @@ For large arrays, the parameter count of a fixed beamformer scales with $M$ per 
 - [[concepts/beamforming|Beamforming]]
 - [[concepts/superdirective-beamforming|Superdirective Beamforming]]
 - [[concepts/kronecker-product-beamforming|Kronecker Product Beamforming]]
+- [[concepts/orthogonal-series-expansion-beamforming|Orthogonal Series Expansion Beamforming]]
+- [[concepts/frequency-invariant-beamforming|Frequency-Invariant Beamforming]]
 
 ## Related Sources
+
+- [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — review of the fixed-beamforming families and their DF–WNG–frequency-invariance trade-offs; $M^2$ directivity upper bound
 
 - [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]] — Kronecker-decomposed differential fixed beamformers
 - [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — LS fixed beamformer baseline results

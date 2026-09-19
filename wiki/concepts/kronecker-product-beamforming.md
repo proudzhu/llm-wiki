@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-09-14
-updated: 2026-09-17
+updated: 2026-09-19
 sources:
+  - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
   - raw/papers/wang-2021-kronecker-adaptive-beamforming/full-text.txt
   - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
@@ -29,6 +30,10 @@ Kronecker product beamforming decomposes a global (long) beamforming filter of l
 - **Arbitrary geometries** ([[sources/wang-2021-kronecker-adaptive-beamforming|Wang et al. 2021]], APSIPA-ASC): the first generalization to arbitrary 3-D array geometries — the filter is represented as a **sum of $P$ Kronecker products** of subfilters (a property of the filter, not the array), with the iterative [[concepts/kmvdr-beamformer|KMVDR]] algorithm deriving the MVDR beamformer under this representation.
 - **Low-rank differential beamforming with nonuniform linear arrays** (Pei et al. 2025, ICASSP).
 - **Multidimensional generalization** (Zhu et al. 2025): extends the mostly two-dimensional formulations to **N-way, rank-P** decompositions applicable to arbitrary array geometries, with a systematic comparison of decomposition modes — building on the arbitrary-geometry framework of Wang et al. 2021.
+
+## Task-Decomposition View (Pan, Huang & Chen 2020)
+
+[[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020]] present Kronecker product beamforming as the generalization of **task decomposition**: when the steering vector factorizes as $\mathbf{d} = \mathbf{d}_1 \otimes \mathbf{d}_2$, the overall filter $\mathbf{h} = \mathbf{h}_1 \otimes \mathbf{h}_2$ makes the array beampattern the **product** of the two subarray beampatterns. One subfilter (small-aperture subarray) designs the target frequency-invariant pattern while the other is constrained **flat** (a spatial all-pass) so it can absorb WNG improvement without disturbing the pattern. The key theoretical point: the flat constraint costs no degrees of freedom at low frequencies, so the low-frequency redundancy of the array is fully converted into robustness. For adaptive variants, the decomposition splits the design into a small-aperture adaptive subfilter (exploiting noise correlation) and a large-aperture DSBF subfilter (where noise correlation is weak anyway), reducing covariance dimension, speeding up estimation, and improving robustness. The review traces the lineage from two-stage cascade superdirective/DMA designs to this general framework, and notes extensions to arbitrary-count uniform linear arrays and flexibly steerable planar arrays.
 
 ## Multidimensional, Rank-P Formulation (LR-RSD)
 
@@ -64,3 +69,4 @@ The same Kronecker decomposition idea appears in multichannel active noise contr
 - [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]] — the original formulation: two-virtual-array decomposition, KP cardioid/dipole/hypercardioid/supercardioid
 - [[sources/wang-2021-kronecker-adaptive-beamforming|Wang et al. 2021: Kronecker Product Adaptive Beamforming for Microphone Arrays]]
 - [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]]
+- [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — review tracing the lineage from two-stage cascade designs to the general Kronecker task-decomposition framework; flat-subfilter trick converts low-frequency degrees of freedom into WNG

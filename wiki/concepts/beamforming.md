@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-09-14
+updated: 2026-09-19
 sources:
+  - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.txt
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
@@ -41,6 +42,19 @@ Modern ANC headphones use beamforming for several critical tasks:
 - **Neural Beamforming**: Using deep learning models (e.g., U-Nets or LSTMs) to perform spatial filtering in complex, multi-path environments.
 - **Difference-Maximizing Beamformer (Back-to-Back Array)**: Tashev et al. (2008) propose a two-beam beamformer for [[concepts/back-to-back-microphone-array|back-to-back unidirectional microphone arrays]] whose optimization criterion is **maximizing the front-back energy ratio** rather than the usual minimum-variance / maximum-SNR criteria. The front beam is optimized to maximize the ratio of integrated energy in the desired $\pm\Delta\theta$ cone to that in the opposite cone, subject to unity-gain and zero-phase-shift constraints enforced via punishing functions. This objective fits the back-to-back geometry (where the rear capsule is *designed* to face away from the source) and pairs naturally with a [[concepts/probability-based-spatial-filter|probability-based non-linear spatial filter]] that consumes the front/rear beam outputs.
 - **Superdirective / Low-Rank Kronecker Beamforming**: [[concepts/superdirective-beamforming|Superdirective beamforming]] maximizes the directivity factor against diffuse noise (a fixed, precomputable design), and its large-array efficiency can be boosted by [[concepts/kronecker-product-beamforming|Kronecker product decomposition]] into short filters — Zhu et al. (2025) generalize this to multidimensional (N-way, rank-P) decompositions, cutting parameters by 62.5% and inversion dimension by 87.5% at $M = 64$ with matched performance.
+
+## Design-Philosophy Taxonomy (Pan, Huang & Chen 2020)
+
+The review by [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020]] organizes microphone array beamforming into six families by design philosophy, unified by a three-axis performance framework — directivity factor, [[white-noise-gain|white noise gain]], and [[frequency-invariant-beamforming|beampattern frequency invariance]]:
+
+1. **Delay-and-sum** — coherent summation of time-aligned target components (max WNG, poor low-frequency directivity);
+2. **[[superdirective-beamforming|Superdirective]]** — maximize directivity factor against isotropic noise (DF up to $M^2$, low WNG);
+3. **[[differential-microphone-array|Differential]]** — measure the differential sound field (frequency-invariant directivity, white-noise amplification);
+4. **[[orthogonal-series-expansion-beamforming|Orthogonal series expansion]]** — approximate a target beampattern via orthogonal series (flexible, analytic relations);
+5. **[[kronecker-product-beamforming|Kronecker product]]** — task decomposition into subarray subfilters (pattern design + WNG improvement in separate stages);
+6. **Adaptive** (MVDR / [[lcmv-beamformer|LCMV]] / [[gsc-beamformer|GSC]]) — optimization against the actual noise statistics (optimal suppression, hard parameter estimation).
+
+The review's unifying observations: superdirective beamforming is simultaneously a special case of differential beamforming and the isotropic-noise MVDR; classical robustness remedies (e.g., [[diagonal-loading|diagonal loading]]) trade WNG against frequency invariance; and fixed beamformers' directivity is upper-bounded by the square of the sensor count — one of the field's open problems.
 
 ## Robustness and Diagonal Loading
 
@@ -110,8 +124,12 @@ Kim & Kim (2014) quantify a fundamental small-array limitation: the spatial dire
 - [[concepts/doa-based-snr-estimation|DOA-Based SNR Estimation]] — consumer of the DSB/BM ratio trick
 - [[concepts/superdirective-beamforming|Superdirective Beamforming]]
 - [[concepts/kronecker-product-beamforming|Kronecker Product Beamforming]]
+- [[concepts/frequency-invariant-beamforming|Frequency-Invariant Beamforming]]
+- [[concepts/orthogonal-series-expansion-beamforming|Orthogonal Series Expansion Beamforming]]
 
 ## Related Sources
+
+- [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — review unifying six method families via the DF–WNG–frequency-invariance framework
 
 - [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]]
 - [[sources/lorenz-2005-robust-minimum-variance-beamforming|Lorenz & Boyd 2005: Robust Minimum Variance Beamforming]]

@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-17
+updated: 2026-09-19
 sources:
+  - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
@@ -48,6 +49,19 @@ Capon's MVB assumes the array manifold $a(\theta)$ is known exactly. In practice
 ## Learned WNG Thresholds (Deng et al. 2026)
 
 Classical remedies diagonal-load heuristically, and [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026]] derive the loading from a Kantorovich-bounded WNG→condition-number mapping (see [[concepts/condition-number|Condition Number]]). [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026]] make the WNG constraint *learned*: a dual-branch network jointly estimates time-frequency noise masks (for the noise covariance) and frequency-dependent WNG thresholds, which feed a differentiable robust MVDR layer trained end-to-end without explicit WNG supervision — outperforming fixed-threshold baselines particularly under array mismatch.
+
+## Degeneration Cases (Pan, Huang & Chen 2020)
+
+[[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020]] tabulate how the MVDR beamformer **degenerates into fixed beamformers** under specific noise fields, unifying the two families:
+
+| Noise field | MVDR degenerates to |
+|---|---|
+| Spatially white noise | Delay-and-sum beamformer |
+| Isotropic (diffuse) noise | Superdirective beamformer |
+| Isotropic + white noise mixture | Robust (diagonal-loaded) superdirective beamformer |
+| Point-source interference | Strong connections to LCMV and differential beamformers |
+
+The review also stresses the practical bottleneck: in multi-source, nonstationary, strongly reverberant, time-varying scenes, estimating the parameters MVDR needs (DOA, steering vector, interference/noise covariance) is very hard, and estimation errors degrade suppression and cause target self-cancellation — motivating [[concepts/relative-transfer-function|RTF-based steering]] and multichannel-filtering reformulations. The [[concepts/gsc-beamformer|GSC]] is an equivalent unconstrained implementation of MVDR (identical at convergence).
 
 ## Relationship to LCMV
 
@@ -150,4 +164,5 @@ The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova, Delcroix & Ochiai 2023: Neural Target Speech Extraction: An Overview]]
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — hybrid TinyGRU + MCWF beats oracle MVDR at ~50 MMACs/s
 - [[sources/wang-2021-kronecker-adaptive-beamforming|Wang et al. 2021: Kronecker Product Adaptive Beamforming for Microphone Arrays]] — KMVDR: MVDR under a sum-of-Kronecker-products representation for arbitrary geometries
+- [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — review tabulating MVDR's degeneration into DSBF/superdirective under specific noise fields; parameter-estimation bottleneck in nonstationary scenes
 

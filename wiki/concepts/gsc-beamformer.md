@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-09-16
+updated: 2026-09-19
 sources:
   - raw/papers/souden-2010-pmwf/full-text.md
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
@@ -9,6 +9,7 @@ sources:
   - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/wen-2025-neural-directed-speech-enhancement/full-text.md
+  - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
 tags:
   - beamforming
   - adaptive-filtering
@@ -100,4 +101,5 @@ Taseska et al. develop the [[concepts/informed-gsc|informed GSC]], where the FBF
 - [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024: Lightweight Hybrid Multi-Channel Speech Extraction with DVAD]] — DVAD-gated ABM/AIC adaptation
 - [[sources/lorenz-2005-robust-minimum-variance-beamforming|Lorenz & Boyd 2005: Robust Minimum Variance Beamforming]]
 - [[sources/wen-2025-neural-directed-speech-enhancement|Wen et al. 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] — GSC as the best classical baseline on a dual-mic array (avg. PESQ 2.12 at 0 dB vs. 2.09 for delay-and-sum), still far below the steered neural alternatives
+- [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — surveys GSC within the adaptive family: equivalent to MVDR at convergence but unconstrained in form (fixed beamformer + blocking filter + adaptive noise canceller), hence a robust implementation; parameter estimation in nonstationary reverberant scenes is the bottleneck
 

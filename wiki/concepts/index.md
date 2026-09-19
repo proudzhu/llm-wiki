@@ -531,4 +531,6 @@
 | [[concepts/si-sdr\|SI-SDR]] | Scale-invariant signal-to-distortion ratio; equivalent to maximizing the squared correlation between target and estimate | 2026-09-19 |
 | [[concepts/sound-event-detection\|Sound Event Detection]] | Detection task: identify sound events and their temporal bounds; BCE/Dice losses for class imbalance | 2026-09-19 |
 | [[concepts/speaker-verification\|Speaker Verification]] | Verification as detection on voiceprint embeddings; verification/identification/diarization tasks | 2026-09-19 |
+| [[concepts/frequency-invariant-beamforming\|Frequency-Invariant Beamforming]] | Design paradigm holding the beampattern constant across frequency to avoid spectral distortion of broadband speech; the shared goal of the differential, orthogonal-series-expansion, and Kronecker families. | 2026-09-19 |
+| [[concepts/orthogonal-series-expansion-beamforming\|Orthogonal Series Expansion Beamforming]] | Fixed beamformer design that approximates a target beampattern with orthogonal series (Chebyshev, Legendre, Jacobi, spherical harmonics); a loading parameter trades pattern accuracy for WNG robustness. | 2026-09-19 |
 
