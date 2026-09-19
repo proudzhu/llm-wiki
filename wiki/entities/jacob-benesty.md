@@ -34,6 +34,7 @@ tags:
 - Co-author of "Differential Kronecker Product Beamforming" (IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 27, no. 5, pp. 892–902, 2019) — introduced differential Kronecker product beamformers (KP cardioid/dipole/hypercardioid/supercardioid) — [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019]]
 - Co-author of "Design of the Wiener Gain in Noisy and Reverberant Environments" (Applied Acoustics, 2025 (article 110491), 2025) — joint SNR/CDR Wiener gain design for noisy and reverberant environments — [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025]]
 - Author of "On Multichannel Coherent-to-Diffuse Power Ratio Estimation" (IEEE Sensors Journal, 2024, 2024) — multichannel (M>2) DOA-free CDR estimation via weighted-average subarray fusion and array-manifold joint diagonalization (IEEE Sensors Journal 2024) — [[sources/xiang-2024-multichannel-cdr-estimation|Xiang, Lei, Pan, Chen & Benesty 2024]]
+- Co-authored "An Approach to Microphone Array Self-Awareness Through a Residual Model of the Covariance Matrix" (IEEE TASLP 2026) — defines interferences and background noise via coherence matrices and extracts unknown new sources from the covariance-matrix residual — [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026]]
 
 
 ## Affiliations
@@ -57,3 +58,4 @@ tags:
 - [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]]
 - [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]]
 - [[sources/xiang-2024-multichannel-cdr-estimation|Xiang, Lei, Pan, Chen & Benesty 2024: On Multichannel Coherent-to-Diffuse Power Ratio Estimation]]
+- [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026: Microphone Array Self-Awareness via a Residual Model of the Covariance Matrix]]

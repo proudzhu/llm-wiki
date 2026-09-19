@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-08-19
-updated: 2026-09-12
+updated: 2026-09-19
 sources:
+  - raw/papers/pan-2026-array-self-awareness/full-text.md
   - raw/papers/sawada-2019-bss-ilrma-review/full-text.md
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
   - raw/papers/kang-2019-low-complexity-permutation-alignment/full-text.md
@@ -87,6 +88,8 @@ All updates are multiplicative and monotonic — they never increase $\mathcal{J
 - **Low-SNR behavior**: at extremely low SNR (−20 dB), removing the projection-back amplitude adjustment *improves* ILRMA's performance, and ILRMA's NMF source modeling keeps it the strongest baseline under sparse interference — though the extraction-only method [[concepts/ogive|OGIVEa_NG]] reaches comparable results while modeling only the target ([[sources/ruan-2024-speech-extraction-low-snr|Ruan et al. 2024]]).
 - **Speed vs. alignment-based ICA**: ILRMA achieved the best SIR/PESQ in most conditions of the Kang et al. 2019 benchmark, but is neither the cheapest nor universally best — it was inferior to ICA + permutation alignment on some source configurations (e.g., sources 1, 2, 5) and took 29.8 s versus 10.3 s for ICA + low-complexity [[concepts/permutation-alignment|permutation alignment]] in the 4-source runtime test ([[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019]]).
 
+- **As a blind a-priori estimator for parametric extraction**: offline ILRMA on past observations yields a demixing matrix from which the source-to-sensor impulse responses — and hence the coherence matrices of the interferences — can be extracted; [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026]] feed these into their [[concepts/covariance-matrix-residual-model|covariance matrix residual model]] for real-time extraction of unknown new sources, with recursive ILRMA itself serving as the slower-to-reconverge baseline (needing >5 s after a source switch, versus near-instant adaptation, at an 8× longer window).
+
 ## Variants and Successors
 
 - **Determined ILRMA** (original Kitamura et al. 2016) — the form surveyed in [[sources/sawada-2019-bss-ilrma-review|Sawada et al. 2019]].
@@ -109,6 +112,7 @@ ILRMA sits at the intersection: IVA's spatial model + MNMF's spectrogram model, 
 ## Related Concepts
 
 - [[concepts/blind-source-separation|Blind Source Separation]]
+- [[concepts/array-self-awareness|Array Self-Awareness]] — uses offline ILRMA to estimate the interference coherence matrices blindly
 - [[concepts/permutation-alignment|Permutation Alignment]]
 - [[concepts/independent-vector-analysis|Independent Vector Analysis]]
 - [[concepts/multichannel-nmf|Multichannel NMF]]
@@ -119,6 +123,8 @@ ILRMA sits at the intersection: IVA's spatial model + MNMF's spectrogram model, 
 - [[concepts/fast-demixing-matrix-estimation|Fast Demixing Matrix Estimation (FastVCD / FastIP)]]
 
 ## Related Sources
+
+- [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026: Microphone Array Self-Awareness via a Residual Model of the Covariance Matrix]] — offline ILRMA estimates interference coherence matrices; recursive ILRMA is the re-convergence baseline
 
 - [[sources/sawada-2019-bss-ilrma-review|Sawada et al. 2019: BSS/ILRMA Review]]
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]

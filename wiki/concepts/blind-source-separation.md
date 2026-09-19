@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-05-21
-updated: 2026-08-26
+updated: 2026-09-19
 sources:
+  - raw/papers/pan-2026-array-self-awareness/full-text.md
   - raw/papers/guo-2023-iva-survey/full-text.md
   - raw/papers/dong-2026-spatially-regularized-switching-iva/full-text.md
   - raw/papers/richard-2023-audio-signal-processing-21st-century/full-text.md
@@ -75,6 +76,10 @@ The survey benchmarks these methods across audio, speech, music, voice, and sour
 - Robot audition
 - Music source separation
 
+## BSS as A Priori Estimator for Model-Based Extraction
+
+The division between BSS and model-based multichannel filtering blurs when BSS is used offline to *supply* the model: [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026]] estimate the required interference coherence matrices blindly by running offline ILRMA on the first seconds of observations (the source-to-sensor impulse responses are embedded in the demixing matrix), then switch to their [[concepts/array-self-awareness|array self-awareness]] framework for real-time extraction. In a source-switching experiment, recursive AuxIVA and ILRMA (window length 2048) needed more than 5 seconds to re-converge after the desired source changed, while the model-based approach adapted almost immediately with an 8× smaller window (256) — BSS provides the a priori statistics; the parametric method provides the tracking and the low latency.
+
 ## Historical Context
 
 [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023]] trace the 25-year evolution of audio BSS along two branches. The **determined case** moved from frequency-domain ICA (with its permutation/scaling ambiguities resolved by spatial and spectral source information) through TRINICON (an information-theoretic cost exploiting nonwhiteness, nongaussianity, and nonstationarity), IVA, ILRMA (combining ICA spatial info with NMF spectral structure), to the DNN-augmented multichannel VAE (MVAE). The **monophonic / underdetermined case** moved from trained NMF dictionaries, through W-disjoint-orthogonality binary masking and deep clustering, to discriminative mask-prediction networks (now dominant, spanning on-device enhancers and offline music-separation models used in award-winning Beatles restorations). Open questions highlighted by the retrospective include universal separators, limited-data learning, and out-of-distribution generalization.
@@ -91,10 +96,13 @@ The survey benchmarks these methods across audio, speech, music, voice, and sour
 - [[concepts/independent-low-rank-matrix-analysis|Independent Low-Rank Matrix Analysis]]
 - [[concepts/fastmnmf|FastMNMF]]
 - [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
+- [[concepts/array-self-awareness|Array Self-Awareness]] — model-based extraction whose a priori coherence matrices can be supplied by offline BSS
 - [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
 - [[concepts/cross-talk-reduction|Cross-Talk Reduction]]
 
 ## Related Sources
+
+- [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026: Microphone Array Self-Awareness via a Residual Model of the Covariance Matrix]] — offline BSS as the a priori estimator for real-time model-based extraction
 
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
 - [[sources/nishikori-2026-fast-multichannel-nmf-block-diagonal-scm-bss|Nishikori et al. 2026: Distributed FastMNMF for BSS]]

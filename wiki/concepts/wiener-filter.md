@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-09-18
+updated: 2026-09-19
 sources:
+  - raw/papers/pan-2026-array-self-awareness/full-text.md
   Controllers.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
@@ -63,9 +64,26 @@ $$
 
 where $\alpha_R(k)$ and $\alpha_V(k)$ are the coherence-weighted leakage of reverberation and noise through the spatial filter, and the two hyperparameters $\beta_1, \beta_2$ separately govern reverberation suppression (DRR) and noise reduction (SNR gain) — decoupling the two suppression axes that single-ratio gains conflate. Setting $\beta_2 = 0$ recovers a CDR-style gain, $\beta_1 = 0$ an SNR-style gain. Applied after a robust superdirective beamformer, the joint gain achieves the best SNR gain (11.4 dB) and DRR (9.3 dB) and ties the best LSD against SNR-, CDR-, TSNR-, HRNR-based, and WPE-based baselines, and — unlike AWPE — degrades gracefully as input SNR drops. The gain floor $G \leftarrow \max\{G, G_{\min}\}$ controls musical noise; a kurtosis-ratio analysis identifies $G_{\min} = 0.1$ as a stable operating point.
 
+## Self-Awareness Wiener Filter (Pan et al. 2026)
+
+In multichannel source extraction with coherence-matrix-defined components, each source is extracted by the Wiener gain $H_n(t) = \phi_{X,n}(t)/\sum_i \phi_{X,i}(t)$ built from its estimated variance. [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026]] derive the Wiener filter for an *unknown, newly emerging* source,
+
+$$
+H_{\xi}(t) = \frac{\phi_{\xi}(t)}{\phi_{\xi}(t) + \sum_{n=1}^{N+1}\phi_{X,n}(t)},
+$$
+
+where $\phi_{\xi}(t)$ follows from the [[concepts/covariance-matrix-residual-model|residual model]] of the covariance matrix, and gate it with an a priori term from the first estimation stage:
+
+$$
+H_{\mathrm{SA}}(t) = H_{\xi}(t)\left(1 - \max_{n} H_n(t)\right)
+$$
+
+The gate suppresses onset false alarms caused by direct-path and early-reflection leakage of known sources into the residual model; $H_{\mathrm{SA}}(t) \in [0,1]$ behaves as a per-time-frequency-bin detection probability for the new source while doubling as its extraction gain (see [[concepts/array-self-awareness|Array Self-Awareness]]).
+
 ## Related Concepts
 
 - [[concepts/snr-cdr-wiener-gain|SNR–CDR Wiener Gain]] — joint formulation unifying the SNR and CDR degenerate gains
+- [[concepts/array-self-awareness|Array Self-Awareness]] — the Wiener filter for an unknown new source, gated by an a priori term from the known sources' filters
 - [[concepts/coherent-to-diffuse-power-ratio|Coherent-to-Diffuse Power Ratio]]
 - [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
 - [[concepts/active-noise-control|Active Noise Control]]
@@ -76,6 +94,8 @@ where $\alpha_R(k)$ and $\alpha_V(k)$ are the coherence-weighted leakage of reve
 - [[kalman-filter|Kalman Filter]]
 
 ## Related Sources
+
+- [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026: Microphone Array Self-Awareness via a Residual Model of the Covariance Matrix]] — the self-awareness Wiener filter for unknown new sources, gated by $1 - \max_n H_n(t)$
 
 - [[sources/welch-2006-kalman-filter-intro|Welch & Bishop 2006: Introduction to the Kalman Filter]]
 - [[sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]]

@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-08-22
-updated: 2026-08-24
+updated: 2026-09-19
 sources:
+  - raw/papers/pan-2026-array-self-awareness/full-text.md
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
   - raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md
 tags:
@@ -33,6 +34,10 @@ Since identifying the BG $\mathbf{z}_{ij} = \mathbf{B}_i\mathbf{x}_{ij}$ is not 
 
 At extremely low SNR (e.g., −20 dB), separation algorithms that model *all* sources can waste capacity modeling the dominant noise, while BSE methods that model only the SOI (with a simple Gaussian BG model) and choose the right optimization parameter stay robust — the central finding of [[sources/ruan-2024-speech-extraction-low-snr|Ruan et al. 2024]].
 
+## Extraction by Defining the Background
+
+A further inversion of the extraction paradigm: instead of modeling the source of interest, define the *background* — interferences and noise, through their a priori coherence matrices — and extract everything that deviates from it. [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026]]'s [[concepts/array-self-awareness|array self-awareness]] recovers an unknown new source's coherence matrix from the [[concepts/covariance-matrix-residual-model|residual]] of the observation covariance matrix, requiring no clue, no enrollment, and no prior observation of the target — blind even to the target's spatial characteristics — at the cost of requiring the background's coherence matrices to be known (estimable, e.g., by offline ILRMA).
+
 ## Related Concepts
 
 - [[concepts/blind-source-separation|Blind Source Separation]]
@@ -40,8 +45,12 @@ At extremely low SNR (e.g., −20 dB), separation algorithms that model *all* so
 - [[concepts/ogive|OGIVE]]
 - [[concepts/fast-independent-vector-extraction|Fast Independent Vector Extraction]]
 - [[concepts/target-speaker-extraction|Target Speaker Extraction]]
+- [[concepts/array-self-awareness|Array Self-Awareness]] — extraction by defining the background instead of the target
+- [[concepts/covariance-matrix-residual-model|Covariance Matrix Residual Model]]
 
 ## Related Sources
+
+- [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026: Microphone Array Self-Awareness via a Residual Model of the Covariance Matrix]] — extraction by defining the background's coherence matrices instead of the target
 
 - [[sources/ruan-2024-speech-extraction-low-snr|Ruan, Liao, Chen & Lu 2024: Speech Extraction Under Extremely Low SNR Conditions]]
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova et al. 2023: Neural Target Speech Extraction Overview]]

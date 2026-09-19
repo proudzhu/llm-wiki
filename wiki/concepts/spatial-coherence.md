@@ -3,6 +3,7 @@ type: concept
 created: 2026-04-25
 updated: 2026-09-19
 sources:
+  - raw/papers/pan-2026-array-self-awareness/full-text.md
   - raw/papers/lollmann-2020-generalized-coherence-based-signal-enhancement/full-text.md
   - raw/papers/schwarz-2015-coherent-to-diffuse-power-ratio/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
@@ -59,6 +60,10 @@ where $\alpha_\gamma = 0.9$. This adaptive scheme allows the noise coherence mod
 
 Löllmann et al. (2020) generalized coherence-based signal enhancement from microphone pairs to $N$ channels: the **Generalized Magnitude Coherence (GMC)** is computed via an eigendecomposition of the $N \times N$ coherence matrix, and is used to estimate the per-channel CDR. The signal to be enhanced is the "most suitable" microphone signal — implicitly selected by the principal eigenvector, without DOA estimation. In a 4-microphone binaural hearing-aid scenario, this scheme consistently outperforms the DOA-independent two-channel CDR estimators of Schwarz/Thiergart et al., see [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement|Löllmann et al. 2020]].
 
+## Coherence Matrices as Source Definitions
+
+Recent work uses the full $M \times M$ coherence matrix not merely as a noise model but as the *definition* of a source: if the coherence matrices of the interferences and background noise are known a priori (estimable from several seconds of past observations, or blindly from BSS demixing matrices), the time-varying source variances follow efficiently under the maximum-likelihood principle. [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026]] push this to [[concepts/array-self-awareness|array self-awareness]]: the coherence matrix of a *never-seen* source is recovered from the [[concepts/covariance-matrix-residual-model|residual model]] of the observation covariance matrix after the known components are subtracted, letting the array detect and extract new, moving, or sporadic sources in real time. A notable counterintuitive finding: reverberation *helps* this discrimination — reflections enrich the coherence matrices and make sources easier to distinguish, shrinking the failure region relative to anechoic conditions.
+
 ## Applications
 
 | Application | Principle |
@@ -84,4 +89,5 @@ Löllmann et al. (2020) generalized coherence-based signal enhancement from micr
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin et al. 2017]] — uses the sinc diffuse-field coherence as an initialization, adaptively updating the coherence function during speech-absent frames, for multichannel noise PSD estimation and crossover-frequency selection
 - [[sources/lollmann-2020-generalized-coherence-based-signal-enhancement|Löllmann et al. 2020]] — N-channel Generalized Magnitude Coherence (GMC): CDR estimated via eigendecomposition of the coherence matrix, with the principal eigenvector implicitly selecting the enhanced channel
 - [[sources/xiang-2025-wiener-gain-reverberant|Xiang et al. 2025]] — noise-aware DOA-independent CDR estimation: folds noise coherence and SNR into the pairwise estimator, driving the joint SNR–CDR Wiener gain
+- [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026]] — coherence matrices as source definitions: the coherence matrix of a never-seen source is recovered from the covariance-matrix residual, enabling real-time detection of new, moving, and sporadic sources
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard, Smaragdis, Gannot, Naylor, Makino, Kellermann & Sugiyama 2023: Audio Signal Processing in the 21st Century]]

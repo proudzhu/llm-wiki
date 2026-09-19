@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-14
+updated: 2026-09-19
 sources:
+  - raw/papers/pan-2026-array-self-awareness/full-text.md
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
   - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
   - raw/papers/li-2022-embedding-beamforming/full-text.md
@@ -65,6 +66,10 @@ $$
 
 which recovers the secondary-only contribution exactly when the components are mutually independent — **without ever silencing the primary source**. [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang et al. 2026]] use the resulting auto-covariance $\boldsymbol{\Phi}_{\mathrm{RR}}^{(\mathrm{Sec})}$ and cross-covariance $\boldsymbol{\Phi}_{\mathrm{FR}}^{(\mathrm{Sec})}$ between two microphone groups to estimate a [[concepts/relative-transfer-matrix|Relative Transfer Matrix]] for acoustic-feedback neutralization in multichannel ANC. Their ablation shows the subtraction is decisive rather than cosmetic: estimating the same matrix from total-field SCMs collapses noise reduction to ≈ −2 dB, because the persistent primary field dominates the pseudo-inverse $\boldsymbol{\Phi}_{\mathrm{FR}}^{(\mathrm{Sec})^{\dagger}}$.
 
+## Residual Model for Unknown Sources
+
+Where [[concepts/covariance-subtraction|covariance subtraction]] isolates a *measured* component by differencing two measurements, the residual model of [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026]] isolates an *unknown, newly emerging* source. The known interference-plus-noise contributions are compressed into a single term $\phi_X(t)\Gamma_{\mathbf{x}}$ (a Wiener-filter-weighted sum of the known coherence matrices), and the residual $\phi_{\xi}(t)\Gamma_{\xi} = \Phi_{\mathbf{y}}(t) - \phi_X(t)\Gamma_{\mathbf{x}}$ is fitted with an amplitude–phase separated parametric model in the eigenbasis of $\Gamma_{\mathbf{x}}$, recovering the new source's coherence matrix $\Gamma_{\xi}$ from a single frame's recursive covariance estimate $\Phi_{\mathbf{y}}(t) = \alpha\Phi_{\mathbf{y}}(t-1) + (1-\alpha)\mathbf{y}(t)\mathbf{y}^{H}(t)$ (see [[concepts/covariance-matrix-residual-model|Covariance Matrix Residual Model]]). This turns the SCM from a statistic to be *estimated* into a vehicle for *discovering* sources never observed before — the basis of [[concepts/array-self-awareness|array self-awareness]].
+
 ## Analytic Diffuse-Field SCM in Fixed Beamformer Design
 
 Not every SCM in beamforming is *estimated* from data: fixed [[concepts/superdirective-beamforming|superdirective beamformers]] are designed against the **analytic isotropic (diffuse) noise covariance matrix** $\boldsymbol{\Gamma}$ with $[\boldsymbol{\Gamma}]_{ij} = \sin(\omega\delta_{ij}/c)/(\omega\delta_{ij}/c)$ — a known function of array geometry and frequency (Zhu et al. 2025). The beamformer $\boldsymbol{\Gamma}^{-1}\mathbf{d}_{\theta_s}$ then maximizes the directivity factor by construction, and in [[concepts/kronecker-product-beamforming|Kronecker product]] low-rank designs the small block matrices $\bar{\boldsymbol{\Gamma}}_n$ are *derived* from $\boldsymbol{\Gamma}$ during alternating iterations rather than estimated.
@@ -91,12 +96,16 @@ Not every SCM in beamforming is *estimated* from data: fixed [[concepts/superdir
 - [[concepts/asymmetric-stft|Asymmetric STFT]]
 - [[concepts/rank-constrained-spatial-covariance-matrix-estimation|Rank-Constrained Spatial Covariance Matrix Estimation (RCSCME)]]
 - [[concepts/covariance-subtraction|Covariance Subtraction]] — using SCM additivity as a subtraction operator for system identification
+- [[concepts/covariance-matrix-residual-model|Covariance Matrix Residual Model]] — isolating unknown new sources from the SCM residual
+- [[concepts/array-self-awareness|Array Self-Awareness]] — real-time detection and extraction of new sources from coherence-defined interferences
 - [[concepts/relative-transfer-matrix|Relative Transfer Matrix (ReTM)]] — estimated from primary-only vs total-field SCM differences
 - [[concepts/neuralpmwf|NeuralPMWF]] — mask-derived SCMs with learned frequency-dependent exponential smoothing
 - [[concepts/eabnet|EaBNet]] — learned spectral-spatial embedding that empirically beats explicit SCM computation
 - [[concepts/adl-mvdr|ADL-MVDR]] — frame-level cRF-derived SCMs whose inversion/PCA is replaced by GRU networks
 
 ## Related Sources
+
+- [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026: Microphone Array Self-Awareness via a Residual Model of the Covariance Matrix]] — models the SCM residual to recover an unknown new source's coherence matrix
 
 - [[sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
 - [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]
