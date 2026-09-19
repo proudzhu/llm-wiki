@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-09-18
-updated: 2026-09-18
+updated: 2026-09-19
 sources:
   - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
 tags:
@@ -55,7 +55,7 @@ and solving the unit-diagonal constraint on the source coherence matrix for the 
 
 ## Empirical behavior
 
-Applied after a robust superdirective beamformer (4-mic ULA, 2 cm, image-method rooms), the joint gain achieved the best SNR gain (11.4 dB) and DRR (9.3 dB) and tied the best LSD (7.2 dB) against SD-SNR, SD-CDR, SD-TSNR, SD-HRNR, and AWPE baselines (input SNR 5 dB, $T_{60} \approx 500$ ms, $\beta_1 = 5$, $\beta_2 = 3$). AWPE degrades rapidly as input SNR drops, while the joint gain — whose SNR-driven term tracks the noise level — remains robust in jointly noisy and reverberant conditions.
+Applied after a robust superdirective beamformer (4-mic ULA, 2 cm, image-method rooms), the joint gain achieved the best SNR gain (11.4 dB) and DRR (9.3 dB) and tied the best LSD (7.2 dB) against SD-SNR, SD-CDR, SD-TSNR, SD-HRNR, and AWPE baselines (input SNR 5 dB, $T_{60} \approx 500$ ms, $\beta_1 = 5$, $\beta_2 = 3$). AWPE degrades rapidly as input SNR drops, while the joint gain — whose SNR-driven term tracks the noise level — remains robust in jointly noisy and reverberant conditions. The published version adds a PESQ evaluation (best score in all four $T_{60}$/SNR conditions) and **real-classroom experiments** with measured impulse responses (12.6 × 9.5 × 4 m room, $T_{60} \approx 675$ ms, input SNR 10 dB): the joint gain dominates every metric there (SNR gain 14.88 dB, LSD 7.78 dB, DRR 8.98 dB, PESQ 1.74), even though SD-CDR becomes a markedly stronger baseline with real RIRs (13.26 dB SNR gain vs. 8.6 dB in simulation).
 
 ## Related Concepts
 

@@ -10,7 +10,7 @@ tags:
 
 # Qian Xiang
 
-**Affiliation**: School of Electrical and Control Engineering, Shaanxi University of Science and Technology, Xi'an, China
+**Affiliation**: Anhui Research Center of Generic Technology in Photovoltaic Industry, Fuyang Normal University, Fuyang; School of Electrical and Control Engineering, Shaanxi University of Science and Technology, Xi'an, China
 **Role**: Researcher
 **Research Focus**: Microphone array speech enhancement, Wiener gain design, dereverberation and noise suppression.
 
