@@ -528,4 +528,7 @@
 | [[concepts/multichannel-cdr-estimation\|Multichannel CDR Estimation]] | Extension of CDR estimation to arrays with more than two microphones: GMSC, ERANK, weighted-average subarray fusion, and array-manifold (GEVD) estimators. | 2026-09-19 |
 | [[concepts/array-self-awareness\|Array Self-Awareness]] | Paradigm inversion for source extraction: define the background (interferences + noise via a priori coherence matrices) and extract any source deviating from the known model — moving sources, sporadic events, and count uncertainty handled with no target prior. | 2026-09-19 |
 | [[concepts/covariance-matrix-residual-model\|Covariance Matrix Residual Model]] | Parametric model of the covariance residual after subtracting modeled interference-plus-noise: amplitude and phase separated in the eigenbasis of the known coherence matrix, recovering an unknown source's coherence matrix in a single frame. | 2026-09-19 |
+| [[concepts/si-sdr\|SI-SDR]] | Scale-invariant signal-to-distortion ratio; equivalent to maximizing the squared correlation between target and estimate | 2026-09-19 |
+| [[concepts/sound-event-detection\|Sound Event Detection]] | Detection task: identify sound events and their temporal bounds; BCE/Dice losses for class imbalance | 2026-09-19 |
+| [[concepts/speaker-verification\|Speaker Verification]] | Verification as detection on voiceprint embeddings; verification/identification/diarization tasks | 2026-09-19 |
 

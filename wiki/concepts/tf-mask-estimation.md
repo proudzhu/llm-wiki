@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-08-16
-updated: 2026-08-20
+updated: 2026-09-19
 sources:
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
   - raw/papers/ansari-2023-ai-bss-survey/full-text.md
+  - raw/papers/pan-2025-data-driven-acoustics/full-text.md
 tags:
   - blind-source-separation
   - speech-enhancement
@@ -34,6 +35,16 @@ tags:
 
 The TF masks update each source's PSD matrix $\boldsymbol{\Phi}_{\mathbf{s}_j}$ (rank-one, via the RTF vector), and the undesired-signal PSD matrix for each source's ISF is the sum of all *other* sources' PSD matrices plus the noise PSD matrix. Informed MVDR or MWF filters then extract each source. Incorporating SDR-based SPP estimation provides simultaneous noise PSD matrix estimation and noise reduction.
 
+## Transform-Domain Separation Framework (Pan 2025)
+
+[[sources/pan-2025-data-driven-acoustics|Pan 2025]] presents mask estimation as the core of the transform-domain **analysis–separation–reconstruction** framework: for each time slice, $\overleftarrow{\bm{x}}(t) = \bm{W}^{T}\bm{x}(t)$ (STFT), per-source masks $\hat{\bm{h}}_{j}(t) = \mathcal{S}_{j} \circ g[\tilde{\bm{x}}(t)]$ (only output layers differ per source), masked spectra, then inverse STFT. Training targets are **ideal masks** built from the relative source powers at each TF point,
+
+$$
+\bm{h}_{i}(t) = \frac{|{\bm{s}}^{(j)}(t)|^{2}}{\epsilon_{0} + \sum_{i=1}^{J}|{\bm{s}}^{(i)}(t)|^{2}},
+$$
+
+combined with [[concepts/permutation-invariant-training|PIT]] and magnitude-spectral losses, $\mathcal{J}_{1} = \min_{\bm{p} \in \mathcal{P}} \sum_{j} \||\overleftarrow{\bm{x}}(t)| \odot \hat{\bm{h}}_{j}(t) - |\overleftarrow{\bm{s}}^{(p_j)}(t)|\|^{2}$. Input features may be single-frame or multi-frame magnitudes, log-magnitudes, or real/imaginary parts.
+
 ## Open Challenge
 
 A "large gap" remains between ISFs using *oracle* TF masks and those using *estimated* masks — motivating integration of spectral features and DNN-based mask estimation.
@@ -47,8 +58,10 @@ A "large gap" remains between ISFs using *oracle* TF masks and those using *esti
 - [[concepts/multi-channel-wiener-filter|Multichannel Wiener Filter]]
 - [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]]
 - [[concepts/voice-activity-detection|Voice Activity Detection]]
+- [[concepts/permutation-invariant-training|Permutation Invariant Training (PIT)]]
 
 ## Related Sources
 
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] (Chapters 7–8)
 - [[sources/ansari-2023-ai-bss-survey|Ansari et al. 2023: AI Approaches in BSS Survey]] — surveys DNN-based mask prediction (Refs. [124, 126, 133, 160, 167]) as a deep-learning BSS sub-area
+- [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — transform-domain analysis–separation–reconstruction framework with ideal-mask targets (Section 8.3–8.4)

@@ -1,16 +1,29 @@
 ---
 type: concept
 created: 2026-04-17
-updated: 2026-07-19
+updated: 2026-09-19
 tags:
 - deep-learning
 - machine-learning
 - signal-processing
 sources:
+  - raw/papers/pan-2025-data-driven-acoustics/full-text.md
 ---
 # Deep Learning for Signal Processing
 
 **Deep Learning for Signal Processing** is an emerging field that replaces or augments traditional hand-crafted signal processing algorithms with data-driven neural networks.
+
+## Task Taxonomy (Pan 2025)
+
+[[sources/pan-2025-data-driven-acoustics|Pan 2025]] organizes all data-driven acoustic signal processing under three task types, each dictating its own **objective-function construction** — the defining choice, more than network architecture:
+
+| Task type | Goal | Typical losses | Acoustic instances |
+|:----------|:-----|:---------------|:-------------------|
+| **Detection** | Identify existence of target information + its time/location | BCE, Dice loss, softmax CE, AUC | DOA localization, sound event detection, speaker verification |
+| **Estimation/Filtering** | Extract/separate source signals from observations | MSE, robust losses, [[si-sdr\|SI-SDR]], spectral distances | Noise reduction, source separation |
+| **Transformation** | Convert signals to a more suitable domain | Contrastive losses, density alignment (adversarial, optimal transport) | Voiceprint extraction, feature learning, generative models |
+
+The same tutorial expresses arbitrary architectures in a compact **composite-function notation** — $\mathcal{C}$ (CNN), $\mathcal{G}$ (gated recurrent), $\mathcal{R}$ (residual), $\mathcal{U}$ (U-Net), $\mathcal{E}$/$\mathcal{D}$ (encoder/decoder), $\mathcal{A}$ (feature fusion), $\mathcal{F}$ (fully connected), $\mathcal{T}$ (transformer), $\mathcal{S}$ (output layer) — so that a full network reads $f(\bm{x}) = \mathcal{S} \circ \mathcal{F}_{3} \circ \cdots \circ \mathcal{C}_{1}(\bm{x})$ (see [[concepts/neural-networks|Neural Networks]]).
 
 ## Core Concepts
 
@@ -54,3 +67,4 @@ In traditional signal processing (TSP), algorithms like the **[[wiener-filter]]*
 - [[sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]]
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — GRU-based step-size prediction for adaptive feedback cancellation
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys the migration from statistical/heuristic signal-processing methods to deep-learning architectures across a 60-year horizon
+- [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — tutorial unifying data-driven acoustic signal processing under the detection/estimation/transformation task taxonomy

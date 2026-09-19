@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-09-16
+updated: 2026-09-19
 sources:
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
   - raw/papers/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction/full-text.md
@@ -10,6 +10,7 @@ sources:
   - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
   - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
   - raw/papers/wen-2025-neural-directed-speech-enhancement/full-text.md
+  - raw/papers/pan-2025-data-driven-acoustics/full-text.md
 tags:
   - speech-processing
   - source-separation
@@ -130,4 +131,5 @@ The TSE framework naturally extends to:
 - [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024: A Lightweight Hybrid Multi-Channel Speech Extraction System with Directional Voice Activity Detection]]
 - [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023: Insights Into Deep Non-linear Filters for Improved Multi-channel Speech Enhancement]]
 - [[sources/wen-2025-neural-directed-speech-enhancement|Wen et al. 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] — CDUNet: dual-mic spatial-clue extraction with a runtime enhancement width
+- [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — situates speaker-related tasks in the detection/estimation/transformation taxonomy (voiceprint extraction as transformation, separation as estimation)
 

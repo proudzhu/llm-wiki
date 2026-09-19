@@ -1128,6 +1128,9 @@
 | [[concepts/multichannel-cdr-estimation\|Multichannel CDR Estimation]] | Extension of CDR estimation to arrays with more than two microphones: GMSC, ERANK, weighted-average subarray fusion, and array-manifold (GEVD) estimators. | 2026-09-19 |
 | [[concepts/array-self-awareness\|Array Self-Awareness]] | Paradigm inversion for source extraction: define the background (interferences + noise via a priori coherence matrices) and extract any source deviating from the known model — moving sources, sporadic events, and count uncertainty handled with no target prior. | 2026-09-19 |
 | [[concepts/covariance-matrix-residual-model\|Covariance Matrix Residual Model]] | Parametric model of the covariance residual after subtracting modeled interference-plus-noise: amplitude and phase separated in the eigenbasis of the known coherence matrix, recovering an unknown source's coherence matrix in a single frame. | 2026-09-19 |
+| [[concepts/si-sdr\|SI-SDR]] | Scale-invariant signal-to-distortion ratio; equivalent to maximizing the squared correlation between target and estimate | 2026-09-19 |
+| [[concepts/sound-event-detection\|Sound Event Detection]] | Detection task: identify sound events and their temporal bounds; BCE/Dice losses for class imbalance | 2026-09-19 |
+| [[concepts/speaker-verification\|Speaker Verification]] | Verification as detection on voiceprint embeddings; verification/identification/diarization tasks | 2026-09-19 |
 
 ---
 
@@ -1360,6 +1363,7 @@
 | [[sources/xiang-2025-wiener-gain-reverberant\|Xiang, Chen, Benesty, Lei & Pan 2025]] | Traditional Wiener gain formulations are based solely on either the SNR (targeting additive noise) or the coherent-to-diffuse ratio (CDR, targeting reverberation), rendering them suboptimal when noise and reverberation coexist. | 2026-09-18 |
 | [[sources/xiang-2024-multichannel-cdr-estimation\|Xiang, Lei, Pan, Chen & Benesty 2024: On Multichannel Coherent-to-Diffuse Power Ratio Estimation]] | Two DOA-free multichannel (M > 2) CDR estimators — weighted-average subarray fusion and array-manifold joint diagonalization — outperform two-channel Schwarz, averaged-coherence, GMSC, and ERANK with a parametric Wiener postfilter. | 2026-09-19 |
 | [[sources/pan-2026-array-self-awareness\|Pan, Chen & Benesty 2026]] | This paper inverts the classical source-extraction paradigm: instead of defining the desired source (by direction, RTF, or coherence matrix) and treating everything else as noise, it defines the interferences and background noise through their a priori coherence matrices and treats everything that does not match them as the desired source. | 2026-09-19 |
+| [[sources/pan-2025-data-driven-acoustics\|Pan 2025]] | This tutorial systematically summarizes the principles and methods of data-driven (deep-learning-based) acoustic signal processing under a single unifying taxonomy: every technique is cast as signal detection, signal estimation/filtering, or signal transformation. | 2026-09-19 |
 
 ---
 
@@ -1413,10 +1417,10 @@
 
 ## Statistics
 
-- **Total pages**: 1362
+- **Total pages**: 1366
 - **Entities**: 585
-- **Concepts**: 524
-- **Sources**: 223
+- **Concepts**: 527
+- **Sources**: 224
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-09-19

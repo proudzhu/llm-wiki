@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-04-18
-updated: 2026-05-21
+updated: 2026-09-19
 sources:
   - raw/papers/kim-2021-broadcasted-residual-learning/full-text.md
   - raw/papers/cai-2024-tf-sepnet/full-text.md
+  - raw/papers/pan-2025-data-driven-acoustics/full-text.md
 tags:
   - neural-networks
   - deep-learning
@@ -22,6 +23,8 @@ Computational systems inspired by biological neural networks, organized into thr
 ## ANN Fundamentals
 
 Rate-based neuron: $r = f(Wu + b)$, where $f$ is a nonlinear activation function.
+
+**Composite-function notation** (Pan 2025): express any architecture as a composition of module functions — $\mathcal{C}$ (CNN), $\mathcal{G}$ (gated recurrent), $\mathcal{R}$ (residual), $\mathcal{U}$ (U-Net), $\mathcal{E}$/$\mathcal{D}$ (encoder/decoder), $\mathcal{A}$ (feature fusion), $\mathcal{F}$ (fully connected), $\mathcal{T}$ (transformer), $\mathcal{S}$ (output layer) — e.g., $f(\bm{x}) = \mathcal{S} \circ \mathcal{F}_{3} \circ \mathcal{F}_{2} \circ \mathcal{F}_{1} \circ \mathcal{A} \circ \mathcal{C}_{3} \circ \mathcal{C}_{2} \circ \mathcal{C}_{1}(\bm{x})$, with $f_{\not{\mathcal{S}}}(\bm{x})$ denoting the network with the output layer removed. A neuron is interpretable as a **template matcher**: $\sigma[\bm{w} \bullet \bm{x}(t) + b]$ measures the similarity between the input slice and learned template $\bm{w}$.
 
 Key architectures:
 - **CNNs**: Weight sharing for grid-like data such as images and spectrograms; efficient audio variants include [[concepts/bc-resnet|BC-ResNet]] and [[concepts/broadcasted-residual-learning|Broadcasted Residual Learning]]
@@ -55,3 +58,4 @@ ANN-to-SNN conversion bridges the gap: train with backpropagation, deploy as spi
 - [[sources/yamazaki-2022-spiking-nn-review|Yamazaki 2022: Spiking Neural Networks Review]]
 - [[sources/kim-2021-broadcasted-residual-learning|Kim, Chang, Lee & Sung 2021: Broadcasted Residual Learning]]
 - [[sources/cai-2024-tf-sepnet|Cai, Zhang & Li 2024: TF-SepNet]]
+- [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — composite-function notation and DSP-perspective module explanations (Sections 1–2)

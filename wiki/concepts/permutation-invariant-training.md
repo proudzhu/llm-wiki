@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-06-01
-updated: 2026-06-01
+updated: 2026-09-19
+sources:
+  - raw/papers/pan-2025-data-driven-acoustics/full-text.md
 tags:
   - speech-separation
   - speaker-separation
@@ -21,6 +23,16 @@ In standard DNN-based speaker separation, each output of the network is tied to 
 
 PIT unties DNN outputs from speaker identity. The cost function is computed for all possible permutations of output-to-speaker assignments, and the minimum error is used for backpropagation.
 
+## Formulation (Pan 2025)
+
+[[sources/pan-2025-data-driven-acoustics|Pan 2025]] explains the failure mode PIT fixes as a **one-to-many mapping**: if two mixture samples contain the same source pair with swapped label order, the first output head is trained toward $\bm{s}^{(1)}$ in one sample and $\bm{s}^{(2)}$ in the other — preventing convergence. PIT replaces forced matching with **optimal matching** over the permutation set $\mathcal{P}$ (with $J!$ elements for $J$ sources: 2 for two sources, 6 for three, 24 for four):
+
+$$
+\mathcal{J} = \min_{\bm{p} \in \mathcal{P}} \sum_{j=1}^{J} d\left[\hat{\bm{s}}^{(j)}, \bm{s}^{(p_j)}\right]
+$$
+
+where $d[\cdot,\cdot]$ is typically a waveform distance such as [[concepts/si-sdr|SI-SDR]]. In the shared-network separation framework, only the per-source output layers $\mathcal{S}_{j}$ differ; the feature extractor $g(\cdot)$ is shared.
+
 ## Key Properties
 
 - **Speaker-independent**: DNN outputs are not tied to any specific speaker
@@ -35,7 +47,9 @@ PIT offers a simpler alternative to [[concepts/deep-clustering-speech-separation
 - [[concepts/deep-clustering-speech-separation|Deep Clustering for Speech Separation]]
 - [[concepts/ideal-binary-mask|Ideal Binary Mask (IBM)]]
 - [[concepts/ideal-ratio-mask|Ideal Ratio Mask (IRM)]]
+- [[concepts/si-sdr|SI-SDR]] — the usual per-source distance inside the PIT minimization
 
 ## Related Sources
 
 - [[sources/wang-2018-supervised-speech-separation-deep-learning-overview|Wang & Chen 2018: Supervised Speech Separation Based on Deep Learning: An Overview]]
+- [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — the one-to-many label problem and PIT as optimal matching (Section 8.2)

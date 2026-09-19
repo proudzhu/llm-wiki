@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-09
-updated: 2026-09-09
+updated: 2026-09-19
 sources:
   - raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt
+  - raw/papers/pan-2025-data-driven-acoustics/full-text.md
 tags:
   - sel-d
   - sound-event-detection
@@ -18,7 +19,7 @@ SELD is the joint task of sound event detection (SED — in practice, classifica
 
 ## Architecture Pattern
 
-The vast majority of SELD systems (notably DCASE Challenge candidates) follow a multi-task pattern: a common feature-extraction module (typically CRNN layers over FOA or microphone-array features) followed by two task-specific branches — one for SED, one for SSL. The shared representation is assumed to benefit both tasks. From 2021 onward, the [[concepts/activity-coupled-cartesian-doa|ACCDOA]] output representation allowed joint SED+SSL processing up to the very last model layer.
+The vast majority of SELD systems (notably DCASE Challenge candidates) follow a multi-task pattern: a common feature-extraction module (typically CRNN layers over FOA or microphone-array features) followed by two task-specific branches — one for SED, one for SSL. The shared representation is assumed to benefit both tasks. From 2021 onward, the [[concepts/activity-coupled-cartesian-doa|ACCDOA]] output representation allowed joint SED+SSL processing up to the very last model layer. [[sources/pan-2025-data-driven-acoustics|Pan 2025]] frames SELD as the canonical example of a *joint detection + localization* cost: the $3 \times L$ label matrix couples event occurrence probabilities (column magnitudes) with direction vectors (normalized columns), so detection and estimation are trained in a single regression loss rather than two branches.
 
 ## DCASE Challenge
 
@@ -33,3 +34,4 @@ The SELD task of the DCASE Challenge (2019, 2020, 2021) standardized datasets an
 ## Related Sources
 
 - [[sources/grumiaux-2022-ssl-deep-learning-survey|Grumiaux et al. 2022: A Survey of SSL with Deep Learning Methods]]
+- [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — joint detection+localization cost formulation (ACCDOA label matrix)

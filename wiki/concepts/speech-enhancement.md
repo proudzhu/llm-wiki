@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-09-03
+updated: 2026-09-19
 sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/shetu-2026-generative-discriminative-comparison/full-text.md
   - raw/papers/li-2020-residual-noise-control/full-text.md
+  - raw/papers/pan-2025-data-driven-acoustics/full-text.md
 tags:
   - speech-processing
   - audio-enhancement
@@ -21,6 +22,16 @@ Speech enhancement (SE) is the task of improving the perceptual quality and inte
 - $Given clean speech $x \in \mathbb{R}^T$, noisy observation $y$, and additive noise $n$: $y = x + n$$
 - $SE systems estimate $\hat{x}$ from $y$$
 - $Common approaches include spectral mapping, masking (e.g., complex ratio mask), and time-domain wave-to-wave regression$
+
+## Loss-Level Hierarchy for Noise Reduction (Pan 2025)
+
+[[sources/pan-2025-data-driven-acoustics|Pan 2025]] frames noise reduction as **analysis–filter–reconstruction** in the STFT domain (framing under the perfect-reconstruction constraint $\bm{A}\bm{\psi} = \bm{1}$), and organizes the training objective by the level at which the distance is measured:
+
+1. **Between filters** — BCE between the network output and the optimal [[concepts/wiener-filter|Wiener gain]] (a real value in $[0,1]$ per band);
+2. **Between spectra** — $\|\hat{\bm{h}}(t) \odot |\bm{y}(t)| - |\bm{s}(t)|\|^{2}$, approximating the ideal mask then refining against spectral amplitudes;
+3. **Between waveforms** — the scale-invariant loss, i.e., [[concepts/si-sdr|SI-SDR]], shown there to be equivalent to maximizing the frame-wise correlation coefficient.
+
+Worked example: concatenating $2Q{+}1$ log-magnitude spectra (161 frequency points, $Q=5$ → 1771-dim input) into three FC layers (1600 units, ReLU) with a 161-dim sigmoid output estimating the Wiener gain — a 5-frame-lookahead frequency-domain estimator.
 
 ## Sub-areas
 
@@ -61,3 +72,4 @@ Speech enhancement (SE) is the task of improving the perceptual quality and inte
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — classical statistical-model multi-channel SE for small devices (10.43 dB SNR / 0.39 PESQ-MOS on a 9.6 mm back-to-back array)
 - [[sources/shetu-2026-generative-discriminative-comparison|Shetu, Habets & Brendel 2026: Generative vs. Discriminative SE]] — 14-model controlled comparison of generative and discriminative training paradigms
 - [[sources/li-2020-residual-noise-control|Li, Peng, Zheng & Li 2020: Supervised Speech Enhancement with Residual Noise Control]] — generalized loss function embedding residual noise control in training
+- [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — noise reduction as analysis–filter–reconstruction with the three-level loss hierarchy (Section 7)

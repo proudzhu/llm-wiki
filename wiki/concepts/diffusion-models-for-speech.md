@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-03
-updated: 2026-09-03
+updated: 2026-09-19
 sources:
   - raw/papers/xu-2026-drifting-models-speech-enhancement/full-text.md
   - raw/papers/lugo-2026-diffvqe/full-text.md
   - raw/papers/shetu-2026-generative-discriminative-comparison/full-text.md
+  - raw/papers/pan-2025-data-driven-acoustics/full-text.md
 tags:
   - speech-enhancement
   - generative-models
@@ -62,6 +63,10 @@ A complementary route to 1-NFE diffusion is a **hybrid discriminative+generative
 
 See [[concepts/generative-vs-discriminative-speech-enhancement|Generative vs. Discriminative Speech Enhancement]] for the full paradigm comparison.
 
+## Variational Diffusion Formulation (Pan 2025)
+
+[[sources/pan-2025-data-driven-acoustics|Pan 2025]] gives a compact derivation of the variational diffusion model underlying speech applications: a forward Gaussian degradation $q(\bm{x}^{(t)}|\bm{x}^{(t-1)}) = \mathcal{N}[\bm{x}^{(t)}; \sqrt{\alpha_t}\bm{x}^{(t-1)}, (1-\alpha_t)\bm{I}]$ with closed-form marginals $q(\bm{x}^{(t)}|\bm{x}^{(0)}) = \mathcal{N}[\bm{x}^{(t)}; \sqrt{\breve{\alpha}_t}\bm{x}^{(0)}, (1-\breve{\alpha}_t)\bm{I}]$, $\breve{\alpha}_t = \prod_{i=1}^{t}\alpha_i$; the generative direction follows from Bayes' theorem, $q[\bm{x}^{(t-1)}|\bm{x}^{(t)},\bm{x}^{(0)}] = q[\bm{x}^{(t)}|\bm{x}^{(t-1)}]q[\bm{x}^{(t-1)}|\bm{x}^{(0)}]/q[\bm{x}^{(t)}|\bm{x}^{(0)}]$, which is again Gaussian — "from signal to noise, from noise to signal."
+
 ## Related Concepts
 
 - [[concepts/drifting-models|Drifting Models]]
@@ -77,3 +82,4 @@ See [[concepts/generative-vs-discriminative-speech-enhancement|Generative vs. Di
 - [[sources/xu-2026-drifting-models-speech-enhancement|Xu et al. 2026: Speech Enhancement Based on Drifting Models]]
 - [[sources/lugo-2026-diffvqe|Lugo et al. 2026: DiffVQE]] — first reproducible diffusion-based AEC; single-step hybrid Cond/Score framework (EffDiffSE lineage)
 - [[sources/shetu-2026-generative-discriminative-comparison|Shetu, Habets & Brendel 2026: Generative vs. Discriminative SE]] — controlled comparison of six diffusion/flow/consistency models against GAN and discriminative training
+- [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — compact variational-diffusion derivation (Section 9.4)

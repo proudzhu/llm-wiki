@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-08-19
+updated: 2026-09-19
 sources:
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
   - raw/papers/zhu-2026-g-map-se-guided-speech-enhancement/full-text.md
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
+  - raw/papers/pan-2025-data-driven-acoustics/full-text.md
 tags:
   - speaker-recognition
   - representation-learning
@@ -44,6 +45,10 @@ Zmolikova et al. 2023 [[sources/zmolikova-2023-neural-target-speech-extraction-o
 
 A common middle ground is to **pre-train then fine-tune** a NN-based encoder jointly with the TSE task, or to use **multi-task training** that adds a speaker-discriminative auxiliary loss on the embeddings [46]. The review notes that, to its knowledge, pure fine-tuning of a pre-trained encoder for TSE has not been thoroughly explored at the time of writing.
 
+## Voiceprint Extraction as Transformation (Pan 2025)
+
+[[sources/pan-2025-data-driven-acoustics|Pan 2025]] frames voiceprint extraction as a **signal transformation** task (not detection): because usage-time speakers differ from training speakers (users won't upload their data), the extractor $g(\cdot)$ must generalize across distributions — the **domain mismatch** problem. Two learning strategies: (i) **classification** — train with a softmax head + cross-entropy over $L$ training speakers, then discard the head (larger, more diverse speaker sets reduce mismatch); (ii) **contrastive/clustering** — minimize same-speaker $\|\bm{z}_n - \bm{z}_i\|^{2}$, hinge-truncate different-speaker distances at $\zeta_0$. The canonical extractor is the **TDNN x-vector** network: five 1-D conv layers over 24-dim MFCC slices (kernels 5/5/7/1/1 with dilated time context, channels 512/512/512/512/1500) → statistics pooling (mean + std, 3000-dim) → FC to a 512-dim embedding. See [[concepts/speaker-verification|Speaker Verification]] for the detection-flavored applications built on these embeddings.
+
 ## Related Concepts
 
 - [[concepts/ecapa-tdnn|ECAPA-TDNN]]
@@ -55,9 +60,11 @@ A common middle ground is to **pre-train then fine-tune** a NN-based encoder joi
 - [[concepts/mamba-mingru|Mamba-MinGRU]]
 - [[concepts/target-speaker-extraction|Target Speaker Extraction (TSE)]]
 - [[concepts/target-speaker-vad|Target-Speaker VAD (TS-VAD)]]
+- [[concepts/speaker-verification|Speaker Verification]] — the detection-flavored application family built on embeddings
 
 ## Related Sources
 
 - [[sources/ostergaard-2026-own-voice-cancellation|Østergaard et al. 2026: Don't Listen to Me — Own-Voice Cancellation]]
 - [[sources/zhu-2026-g-map-se-guided-speech-enhancement|G-MaP-SE: Guided Speech Enhancement via GMM-Based Prior Matching (Interspeech 2026)]]
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova et al. 2023: Neural Target Speech Extraction: An Overview]]
+- [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — voiceprint extraction as signal transformation; TDNN x-vector architecture details (Section 6)

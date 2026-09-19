@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-04
-updated: 2026-09-12
+updated: 2026-09-19
 sources:
   - raw/papers/tan-2018-convolutional-recurrent-network-speech-enhancement/full-text.md
   - raw/papers/pandey-2019-cnn-speech-enhancement-time-domain/full-text.md
@@ -25,6 +25,7 @@ sources:
   - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
   - raw/papers/li-2022-embedding-beamforming/full-text.md
   - raw/papers/zhang-2021-adl-mvdr/full-text.md
+  - raw/papers/pan-2025-data-driven-acoustics/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -73,6 +74,7 @@ The thesis here is that the field's progress is **not a single replacement story
 | [[sources/ostergaard-2026-own-voice-cancellation\|Østergaard et al. 2026 (OVC)]] | 2026 | Conditioning | Inverts PSE: remove the enrolled speaker; Mamba-MinGRU at 2 ms |
 | [[sources/shetu-2026-munet\|Shetu et al. 2026 (μNet)]] | 2026 | Efficiency | 46K params / 90 KB static / int8 on HiFi 4 DSP; 4–16 ms latency; [[concepts/noise-attenuation-control\|noise attenuation control]] |
 | [[sources/shetu-2026-generative-discriminative-comparison\|Shetu, Habets & Brendel 2026]] | 2026 | Training paradigm | 14-model controlled comparison of discriminative / GAN / diffusion training; same NCSN++ backbone under three objectives |
+| [[sources/pan-2025-data-driven-acoustics\|Pan 2025]] | 2025 | Training objective (taxonomy) | Tutorial framing SE as *estimation*; three-level loss hierarchy (filter gain → spectrum → waveform) with SI-SDR–correlation equivalence |
 
 ## Insight 1: The Training Target Evolved from Pointwise Masks to Neighborhood Filters
 
@@ -199,7 +201,7 @@ The canonical survey for the TSE half of this complementarity is [[sources/zmoli
 ## Cross-Cutting Takeaways
 
 1. **Progress is a Cartesian product, not a ladder.** A 2026 system picks one option per axis: target (DF/CCM), domain (hybrid loss), backbone (Mamba/linear RNN), efficiency technique (grouped + adaptive conv), multi-channel strategy (array-invariant), conditioning (PSE/OVC), training paradigm (discriminative / GAN / diffusion). The seven axes are near-orthogonal, so most combinations are unexplored.
-2. **Loss choice often dominates architecture choice.** Pandey & Wang 2019 (frequency loss for time-domain nets) and the DCCRN(SNR) variant both show that the training signal can outweigh backbone tweaks. [[sources/li-2020-residual-noise-control\|Li et al. 2020]] is the corpus's earliest same-architecture loss comparison (2020, one U-Net × four losses), adding the caveat that objective metrics can miss the differences listeners hear — the residual-noise-control advantage appeared in listening tests, not in PESQ/SDR. [[sources/shetu-2026-generative-discriminative-comparison\|Shetu 2026]] makes this controlled: the *same* NCSN++ backbone ranks differently under discriminative, GAN, and diffusion objectives — the objective, not the architecture, decides robustness, convergence speed, and cost. PCEN-based mask thresholding ([[sources/liu-2025-pcen-mask-vad-speech-enhancement\|Liu 2025]]) and [[concepts/perceptual-contrast-stretching\|PCS]] post-processing extend this into the training-data / post-processing regime. [[sources/zhao-2026-spectrally-adaptive-loss\|Zhao & Madhu 2026]] add the spectral-weighting dimension: three losses on the *same* [[concepts/hyst-net\|HyST-Net]] backbone differ only in how the phase-aware term is weighted (scalar vs. frequency-sigmoid vs. signal-dependent), and the differences appear exclusively in band-conditional metrics.
+2. **Loss choice often dominates architecture choice.** Pandey & Wang 2019 (frequency loss for time-domain nets) and the DCCRN(SNR) variant both show that the training signal can outweigh backbone tweaks. [[sources/li-2020-residual-noise-control\|Li et al. 2020]] is the corpus's earliest same-architecture loss comparison (2020, one U-Net × four losses), adding the caveat that objective metrics can miss the differences listeners hear — the residual-noise-control advantage appeared in listening tests, not in PESQ/SDR. [[sources/shetu-2026-generative-discriminative-comparison\|Shetu 2026]] makes this controlled: the *same* NCSN++ backbone ranks differently under discriminative, GAN, and diffusion objectives — the objective, not the architecture, decides robustness, convergence speed, and cost. PCEN-based mask thresholding ([[sources/liu-2025-pcen-mask-vad-speech-enhancement\|Liu 2025]]) and [[concepts/perceptual-contrast-stretching\|PCS]] post-processing extend this into the training-data / post-processing regime. [[sources/zhao-2026-spectrally-adaptive-loss\|Zhao & Madhu 2026]] add the spectral-weighting dimension: three losses on the *same* [[concepts/hyst-net\|HyST-Net]] backbone differ only in how the phase-aware term is weighted (scalar vs. frequency-sigmoid vs. signal-dependent), and the differences appear exclusively in band-conditional metrics. [[sources/pan-2025-data-driven-acoustics\|Pan 2025]] supplies the unifying tutorial frame: noise reduction is an *estimation/filtering* task whose loss can be constructed at three levels — the filter gain itself, the spectrum, or the waveform — and the SI-SDR loss is mathematically equivalent to maximizing the squared correlation coefficient between target and estimate, explaining *why* each loss level shapes a different aspect of the output (see [[concepts/si-sdr\|SI-SDR]]).
 3. **The efficiency frontier is technique-composition, not model-shrinking.** GTCRN's 750× reduction is the product of four orthogonal techniques; CoFi-Lite and AdaptCRN extend it by adding path-decoupling and dynamic convolution rather than shrinking the backbone further.
 4. **2026 inverts input-centric assumptions.** Output-based SE (evaluate outputs, not inputs) and array-invariant SE (condition on geometry, not array-specific SCM) both move the decision from the input side to the output / context side.
 

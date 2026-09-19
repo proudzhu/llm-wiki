@@ -8,6 +8,7 @@ sources:
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
   - raw/papers/kim-2014-doa-based-snr-estimation/full-text.txt
+  - raw/papers/pan-2025-data-driven-acoustics/full-text.md
 tags:
 - mathematics
 - signal-processing
@@ -80,6 +81,16 @@ $$
 
 The gate suppresses onset false alarms caused by direct-path and early-reflection leakage of known sources into the residual model; $H_{\mathrm{SA}}(t) \in [0,1]$ behaves as a per-time-frequency-bin detection probability for the new source while doubling as its extraction gain (see [[concepts/array-self-awareness|Array Self-Awareness]]).
 
+## Data-Driven Wiener Gain Estimation (Pan 2025)
+
+[[sources/pan-2025-data-driven-acoustics|Pan 2025]] treats the Wiener gain as the **supervised target of a neural network** within the STFT analysis–filter–reconstruction framework: since the optimal gain is a real number in $[0,1]$ per frequency band, the network output $\hat{\bm{h}}(t)$ (sigmoid layer) can be trained against it directly with **binary cross-entropy**,
+
+$$
+\mathcal{J}_{1} = -\sum_{t}\left\{\bm{h}^{T}(t)\ln\hat{\bm{h}}(t) + [1-\bm{h}^{T}(t)]\ln[1-\hat{\bm{h}}(t)]\right\},
+$$
+
+where the $k$-th element of $\hat{\bm{h}}(t)$ approximates the optimal Wiener gain of the $k$-th band. The tutorial's worked example (Han et al. 2015): $2Q{+}1$ concatenated log-magnitude frames (16 kHz, 20 ms window, 161 bands, $Q=5$ → 1771-dim input) → three FC layers with 1600 units and ReLU → 161-dim sigmoid — estimating the Wiener gain from multi-frame context at the cost of a $Q$-frame algorithmic delay.
+
 ## Related Concepts
 
 - [[concepts/snr-cdr-wiener-gain|SNR–CDR Wiener Gain]] — joint formulation unifying the SNR and CDR degenerate gains
@@ -103,3 +114,4 @@ The gate suppresses onset false alarms caused by direct-path and early-reflectio
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — uses the Wiener gain as an offline supervised target for tuning a probability-based spatial filter's parameters
 - [[sources/kim-2014-doa-based-snr-estimation|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] — Wiener spectral gain driven by a spatial-cue (DOA-based) SNR estimate instead of a noise-variance-based one
 - [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]] — joint SNR–CDR Wiener gain with two trade-off hyperparameters
+- [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — the Wiener gain as a BCE-trained supervised target of a neural network (Section 7.2.1)
