@@ -5485,3 +5485,8 @@ Chinese-language review (Journal of Signal Processing 36(6): 804-815) unifying s
 > **Operations**: `ingest`, `query`, `lint`
 
 ---
+---
+
+## [2026-09-20] ingest | Directivity-Conditioned Low-Latency Neural Filtering for Speech Enhancement in Hearing Aids (Uphaus et al. 2026)
+
+Extracted from arXiv HTML to raw/papers/uphaus-2026-directivity-low-latency/ (full text + 3 figures). Created source page, entities (lennart-uphaus, andre-merboldt, markus-hofbauer), and concepts (film-osn, ipd-preservation-loss). Updated entity timo-gerkmann; concepts neural-directional-filtering, joint-nonlinear-filtering, film-layer, mamba, directivity-pattern, audio-latency; synthesis pages joint-multitask-ultra-low-latency-se, multi-channel-speech-enhancement, deep-speech-enhancement. Key findings: FiLM-OSN achieves 10 ms-latency steerable binaural NDF via FiLM-conditioned OSN with Mamba narrow-band blocks (700k params); IPD preservation loss is essential for realizing the conditioned directivity pattern.

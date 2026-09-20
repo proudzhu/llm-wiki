@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-07-16
-updated: 2026-09-06
+updated: 2026-09-20
 sources:
   - raw/papers/indenbom-2023-deepvqe/full-text.md
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
@@ -17,6 +17,7 @@ sources:
   - raw/papers/larraza-2026-fast-ulcnet-speech-enhancement/full-text.md
   - raw/papers/shetu-2026-munet/full-text.md
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
+  - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
 tags:
   - speech-enhancement
   - multi-task
@@ -56,6 +57,7 @@ Neither trend is independently novel. The **new insight** from the 2025–2026 c
 | [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement\|RT-Tango (Benslimane)]] | 2026 | Distributed binaural SE | **8 ms** | 35 MMACs/s | ERB + GRNN + FRS + asymmetric STFT |
 | [[sources/rath-2026-minimum-delay-block-size\|Rath & Geier]] | 2026 | Theoretical lower bound | — | O(1) closed form | $\Delta = b_\text{plugin} - \gcd(b_\text{host}, b_\text{plugin})$ |
 | [[sources/larraza-2026-fast-ulcnet-speech-enhancement\|Fast-ULCNet (Larraza)]] | 2026 | NS (single-task) | 16 ms (hop) | **0.338M params, 1.69 MMACs**, RTF 0.60 ARM | GRU→FastGRNN replacement + Comfi-FastGRNN drift correction |
+| [[sources/uphaus-2026-directivity-low-latency\|FiLM-OSN (Uphaus)]] | 2026 | NDF (steerable directivity) + binaural SE | **10 ms** | 0.7M params | FiLM-conditioned OnlineSpatialNet (Mamba narrow-band SSM) |
 
 ## Insight 1: Multi-Task Fusion Strategies Form a Spectrum
 

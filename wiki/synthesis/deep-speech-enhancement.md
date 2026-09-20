@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-04
-updated: 2026-09-19
+updated: 2026-09-20
 sources:
   - raw/papers/tan-2018-convolutional-recurrent-network-speech-enhancement/full-text.md
   - raw/papers/pandey-2019-cnn-speech-enhancement-time-domain/full-text.md
@@ -26,6 +26,7 @@ sources:
   - raw/papers/li-2022-embedding-beamforming/full-text.md
   - raw/papers/zhang-2021-adl-mvdr/full-text.md
   - raw/papers/pan-2025-data-driven-acoustics/full-text.md
+  - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -70,6 +71,7 @@ The thesis here is that the field's progress is **not a single replacement story
 | [[sources/xu-2026-drifting-models-speech-enhancement\|Xu et al. 2026 (DriftSE)]] | 2026 | Backbone | Drifting models: one-step generative SE without any trajectory |
 | [[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement\|Yang et al. 2026 (CoFi-Lite)]] | 2026 | Efficiency | Dual coarse/fine-path CRN; beats GTCRN at 40% of its MACs |
 | [[sources/liu-2026-array-invariant-speech-enhancement\|Liu et al. 2026 (Geo-DConv)]] | 2026 | Multi-channel | Geometry-conditioned dynamic conv → array-invariant SE backbones |
+| [[sources/uphaus-2026-directivity-low-latency\|Uphaus et al. 2026 (FiLM-OSN)]] | 2026 | Multi-channel | Directivity-conditioned low-latency (10 ms) binaural NDF for hearing aids — FiLM steering of a Mamba-based OSN backbone |
 | [[sources/apostolidis-2026-listen-first-output-based-multi-microphone\|Apostolidis 2026]] | 2026 | Multi-channel | Output-based SE: select MPDR output by Glimpse Proportion, not input features |
 | [[sources/ostergaard-2026-own-voice-cancellation\|Østergaard et al. 2026 (OVC)]] | 2026 | Conditioning | Inverts PSE: remove the enrolled speaker; Mamba-MinGRU at 2 ms |
 | [[sources/shetu-2026-munet\|Shetu et al. 2026 (μNet)]] | 2026 | Efficiency | 46K params / 90 KB static / int8 on HiFi 4 DSP; 4–16 ms latency; [[concepts/noise-attenuation-control\|noise attenuation control]] |

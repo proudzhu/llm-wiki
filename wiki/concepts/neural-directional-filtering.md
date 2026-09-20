@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-05
+updated: 2026-09-20
 sources:
   - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
   - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
+  - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
 tags:
   - neural-directional-filtering
   - virtual-directional-microphone
@@ -42,10 +43,15 @@ where $\Lambda(\theta,\phi)$ is the desired directivity pattern, and $H_{\mathrm
 | Dual-mask NDF (NDF+) | Extended FT-JNF with two parallel mask branches | Joint coherent/diffuse estimation |
 | SHONDC | Steerable high-order neural directional coding | Supports steerable directivity patterns |
 | UNDF | NDF with user-defined directivity patterns | Flexible directivity configuration |
+| FiLM-OSN | Low-latency NDF for binaural BTE hearing aids (Uphaus et al. 2026) | FiLM conditioning + Mamba-based OSN backbone; 10 ms total latency; binaural output |
 
 ## Steerable Extension (SNDF)
 
 [[concepts/steerable-neural-directional-filtering|SNDF]] (Huang et al., Euronoise 2025) removes NDF's restriction to a static, fixed-look-direction pattern per model: the steering direction $\theta_s$ is one-hot encoded and injected as the initial states of the F-BiLSTM, so one trained model renders the learned pattern at any direction — with steering-invariant pattern quality and consistent SDR across directions, and 6th-order patterns learned from only 4 microphones.
+
+## Low-Latency Binaural Extension (FiLM-OSN)
+
+[[concepts/film-osn|FiLM-OSN]] (Uphaus et al. 2026) brings NDF to behind-the-ear hearing devices: realistic constraints include dynamic scenarios, microphone positions varying with head diameter and hearing-aid placement, head shadow, and a strict ≤ 10 ms total latency (prior NDF: 40–50 ms). It conditions a Mamba-based OnlineSpatialNet on a directivity-pattern vector via [[concepts/film-layer|FiLM]], outputs a **binaural** (left/right) signal rather than a single-channel VDM, and reduces — rather than eliminates — interferers to preserve spatial awareness. An [[concepts/ipd-preservation-loss|IPD preservation loss]] is required for the estimated pattern to actually follow the conditioned target; a plain $\mathcal{L}_1$ model attains better quality metrics yet ignores the pattern entirely.
 
 ## Architecture
 
@@ -62,6 +68,7 @@ The FT-JNF-based NDF architecture processes concatenated real/imaginary STFT coe
 - [[concepts/fixed-beamformer|Fixed Beamformer]]
 - [[concepts/differential-microphone-array|Differential Microphone Array]]
 - [[concepts/joint-nonlinear-filtering|Joint Nonlinear Filtering]]
+- [[concepts/film-osn|FiLM-OSN]]
 
 ## Related Sources
 
@@ -69,3 +76,4 @@ The FT-JNF-based NDF architecture processes concatenated real/imaginary STFT coe
 - [[sources/huang-2025-steerable-neural-directional-filtering|Huang et al. 2025: Steerable Neural Directional Filtering]] — extends NDF to steerable patterns with a single conditioned model
 - [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023: Insights Into Deep Non-linear Filters for Improved Multi-channel Speech Enhancement]] — origin of the FT-JNF backbone used by NDF [22]
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
+- [[sources/uphaus-2026-directivity-low-latency|Uphaus et al. 2026: Directivity-Conditioned Low-Latency Neural Filtering]] — hearing-aid-grade low-latency (10 ms) binaural NDF via FiLM-OSN

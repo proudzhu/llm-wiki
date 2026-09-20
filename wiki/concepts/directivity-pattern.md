@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-19
+updated: 2026-09-20
 sources:
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
   - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
   - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
+  - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
 tags:
   - directivity-pattern
   - spatial-audio
@@ -57,6 +58,17 @@ $$\mathcal{B}_\theta(\mathbf{h}) = \mathcal{B}_{1,\theta}(\mathbf{h}_1) \times \
 
 As a polynomial in two variables, it has at most $M_1 + M_2 - 2$ distinct nulls, versus $M_1 M_2 - 1$ for a conventional filter of the same length — a structural restriction that is also the source of the design's robustness. The first-order pattern families (cardioid, dipole, hypercardioid, supercardioid) each have Kronecker product realizations; see [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019]] and [[concepts/kronecker-product-beamforming|Kronecker Product Beamforming]].
 
+## Cosine-Based Pattern with Configurable Main-Lobe Width
+
+For hearing-device NDF, Uphaus et al. 2026 replace DMA-pattern training objectives (whose main-lobe width cannot be specified angularly) with a cosine-based pattern whose main-lobe width $W$ is configurable and whose maximum attenuation is capped at $M$ to preserve spatial awareness:
+
+$$
+\Lambda(\theta)=\begin{cases}\left|\cos\!\left(\frac{\pi}{W}\angle e^{j(\theta-\theta_{d})}\right)\right|,& |\angle e^{j(\theta-\theta_{d})}|\le\frac{W}{2}\\
+M,& \text{else}\end{cases}
+$$
+
+with orientation $\theta_d$ relative to the head; $M=-20$ dB and $W=90°$ in their experiments.
+
 ## Related Concepts
 
 - [[concepts/virtual-directional-microphone|Virtual Directional Microphone]]
@@ -71,4 +83,5 @@ As a polynomial in two variables, it has at most $M_1 + M_2 - 2$ distinct nulls,
 - [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — R-th order DMA pattern formulation and neural realization
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
 - [[sources/huang-2025-steerable-neural-directional-filtering|Huang, Halimeh, Chetupalli, Thiergart & Habets 2025: Steerable Neural Directional Filtering]]
+- [[sources/uphaus-2026-directivity-low-latency|Uphaus et al. 2026: Directivity-Conditioned Low-Latency Neural Filtering]] — cosine-based pattern with configurable main-lobe width $W$ and capped attenuation $M$ for hearing devices
 

@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-16
-updated: 2026-09-19
+updated: 2026-09-20
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
@@ -46,6 +46,7 @@ sources:
   - raw/papers/xiang-2024-multichannel-cdr-estimation/full-text.md
   - raw/papers/pan-2026-array-self-awareness/full-text.md
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
+  - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
 tags:
   - multi-channel-speech-enhancement
   - array-self-awareness
@@ -112,6 +113,7 @@ The distinction: this synthesis is about **spatial filtering** (beamforming, coh
 | [[sources/farmani-2026-virtual-mic-beamforming-hearing-aid\|Farmani et al. 2026]] | 2026 | Hybrid | Virtual microphone synthesis via power-function RTF model; +3–4 dB ISNR from 2 mics + 2 VMs on HA |
 | [[sources/zaidel-2026-linearly-constrained-deep-beamformer\|Zaidel et al. 2026]] | 2026 | Hybrid | Linearly-constrained deep beamformer: DNN predicts weights, augmented-Lagrangian loss enforces distortionless + null constraints |
 | [[sources/huang-2026-ndf-joint-neural-directional-filtering\|Huang et al. 2026 (NDF+)]] | 2026 | Hybrid | Dual-mask neural directional filtering: jointly estimate coherent + diffuse components → controllable VDM directivity |
+| [[sources/uphaus-2026-directivity-low-latency\|Uphaus et al. 2026 (FiLM-OSN)]] | 2026 | Hybrid | Low-latency binaural NDF for BTE hearing aids: FiLM-conditioned OnlineSpatialNet (Mamba) at 10 ms total latency — matches the 32 ms FiLM-JNF baseline at 0.7M params; cosine-based directivity pattern with configurable main-lobe width and capped attenuation; IPD preservation loss required for pattern fidelity (a plain $\mathcal{L}_1$ model scores well on quality metrics yet ignores the pattern entirely) |
 | [[sources/apostolidis-2026-listen-first-output-based-multi-microphone\|Apostolidis et al. 2026]] | 2026 | Where | Output-based MPDR: select candidate output by Glimpse Proportion, not input features; rehabilitates MPDR |
 | [[sources/li-2026-geometry-conditioned-ssanc\|Li et al. 2026 (GC-SSF)]] | 2026 | Geometry | FiLM + DOA-MPE conditioning for target-speaker extraction across array geometries |
 | [[sources/liu-2026-array-invariant-speech-enhancement\|Liu et al. 2026 (Geo-DConv)]] | 2026 | Geometry | TACT + dynamic convolution converts fixed-array backbones to array-invariant; ~10× fewer MACs than USES2-comp |

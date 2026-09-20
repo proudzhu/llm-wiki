@@ -1,12 +1,14 @@
 ---
 type: concept
 created: 2026-07-07
-updated: 2026-07-07
+updated: 2026-09-20
 tags:
   - audio-signal-processing
   - realtime-processing
+  - hearing-aids
 sources:
   - raw/papers/rath-2026-minimum-delay-block-size/full-text.txt
+  - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
 ---
 
 # Audio Latency
@@ -29,3 +31,16 @@ In block-based digital audio systems, latency accumulates from several sources:
 - Smaller block sizes → lower latency, but higher CPU overhead (more frequent function calls, worse cache efficiency)
 - Larger block sizes → better CPU efficiency, but higher latency
 - [[concepts/block-size-adaptation|Block size mismatches]] between host and plugins add extra latency on top of the base block delay, quantifiable via the GCD formula
+
+## Hearing-Device Latency Constraints
+
+Hearing aids impose a strict total latency limit of **≤ 10 ms** (Stone & Moore 2003). For STFT-based algorithms the latency decomposes into:
+
+- **Algorithmic latency** — the STFT synthesis window length (the signal is only fully reconstructable after one window);
+- **Processing latency** — the time to process one segment, which must not exceed the STFT hop size for real-time operation.
+
+This constraint is a key obstacle for [[concepts/neural-directional-filtering|neural directional filtering]]: prior NDF approaches carry 40–50 ms total latency. [[concepts/film-osn|FiLM-OSN]] (Uphaus et al. 2026) meets the hearing-aid budget with an 8 ms window and 2 ms hop (10 ms total), showing that a Mamba-based backbone tolerates such short windows where an LSTM-based FT-JNF loses 0.38 PESQ and 1.7 dB SI-SDR.
+
+## Related Sources
+
+- [[sources/uphaus-2026-directivity-low-latency|Uphaus et al. 2026: Directivity-Conditioned Low-Latency Neural Filtering]] — 10 ms-latency NDF for hearing aids

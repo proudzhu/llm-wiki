@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-08-22
-updated: 2026-09-11
+updated: 2026-09-20
 tags:
   - researcher
   - speech-enhancement
@@ -29,3 +29,9 @@ tags:
 - Co-author of "Nonlinear spatial filtering in multichannel speech enhancement" (IEEE/ACM TASLP 2021) [21] — statistical MMSE analysis showing non-linear joint spatial and tempo-spectral filtering outperforms linear spatial filters in non-Gaussian interference; received the ITG VDE award 2022.
 - Co-author of "Unbiased MMSE-based noise power estimation with low complexity and low tracking delay" (IEEE Trans. Audio, Speech, Language Proc. 2012) [44] — widely cited unbiased noise PSD estimator used in many subsequent DNN-based speech-enhancement and separation pipelines.
 - Co-author of "Improved mmse-based noise PSD tracking using temporal cepstrum smoothing" (ICASSP 2012) — [[sources/gerkmann-2012-mmse-noise-psd-tracking|Gerkmann & Hendriks 2012]]. Replaced the two speech-PSD estimates of the MMSE-based noise tracker with a single [[concepts/temporal-cepstrum-smoothing|temporal-cepstrum-smoothing]] estimate, removing the explicit bias-compensation branch and improving noise tracking (~1 dB segmental SNR in babble noise at 0 dB input SNR).
+- Senior author of "Directivity-Conditioned Low-Latency Neural Filtering" (2026) — First hearing-aid-grade neural directional filter (FiLM-OSN, 10 ms latency) with IPD preservation loss; applies his group's NDF line to binaural BTE hearing devices — [[sources/uphaus-2026-directivity-low-latency|Uphaus, Merboldt, Hofbauer & Gerkmann 2026]]
+
+
+## Related Sources
+
+- [[sources/uphaus-2026-directivity-low-latency|Uphaus, Merboldt, Hofbauer & Gerkmann 2026: Directivity-Conditioned Low-Latency Neural Filtering]]

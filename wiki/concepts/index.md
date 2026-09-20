@@ -536,4 +536,6 @@
 | [[concepts/kronecker-product\|Kronecker Product]] | Block-matrix generalization of the tensor product (mixed-product, inverse, transpose, determinant, spectrum and rank identities, vec-trick linearization, SVD-solvable nearest-Kronecker-product problem); algebraic backbone of Kronecker product beamforming | 2026-09-18 |
 | [[concepts/nearest-kronecker-product\|Nearest Kronecker Product]] | Best Kronecker-product factorization of a matrix/vector, solved exactly by the SVD (Eckart–Young); rank-P generalization underlies low-rank filter representations. | 2026-09-18 |
 | [[concepts/rls-nkp\|RLS-NKP]] | Recursive least-squares family built on the rank-P nearest Kronecker product decomposition — two coupled short filters identify a long low-rank echo path with faster tracking. | 2026-09-18 |
+| [[concepts/film-osn\|FiLM-OSN]] | Directivity-conditioned 10 ms-latency neural directional filter for binaural hearing aids — FiLM-steered OnlineSpatialNet with Mamba narrow-band blocks | 2026-09-20 |
+| [[concepts/ipd-preservation-loss\|IPD Preservation Loss]] | Magnitude-weighted cosine loss on interaural phase difference, essential for realizing conditioned directivity patterns in binaural NDF | 2026-09-20 |
 

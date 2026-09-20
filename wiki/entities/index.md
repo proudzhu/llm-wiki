@@ -594,4 +594,7 @@
 | [[entities/cristian-stanciu\|Cristian Stanciu]] | University Politehnica of Bucharest — co-author of the RLS-NKP low-rank adaptive filtering paper. | 2026-09-18 |
 | [[entities/cristian-anghel\|Cristian Anghel]] | University Politehnica of Bucharest — co-author of the RLS-NKP low-rank adaptive filtering paper. | 2026-09-18 |
 | [[entities/silviu-ciochina\|Silviu Ciochină]] | University Politehnica of Bucharest — adaptive filtering, variable step-size and regularization control. | 2026-09-18 |
+| [[entities/lennart-uphaus\|Lennart Uphaus]] | University of Hamburg — first author of FiLM-OSN, 10 ms steerable neural directional filtering for hearing aids | 2026-09-20 |
+| [[entities/andre-merboldt\|André Merboldt]] | Audatic GmbH — co-author of Uphaus et al. 2026 (FiLM-OSN) | 2026-09-20 |
+| [[entities/markus-hofbauer\|Markus Hofbauer]] | Sonova — co-author of Uphaus et al. 2026 (FiLM-OSN) | 2026-09-20 |
 

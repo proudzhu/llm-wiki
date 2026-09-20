@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-08-19
+updated: 2026-09-20
 sources:
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
+  - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
 tags:
   - deep-learning
   - neural-networks
@@ -45,6 +46,10 @@ where $\mathbf{P}$ is the conditioning feature (e.g., [[concepts/doa-microphone-
 
 In [[concepts/geometry-conditioned-ssf|GC-SSF]], FiLM layers modulate the intermediate features of a [[concepts/spatially-selective-nonlinear-filter|spatially selective filter]] based on array geometry encoded via [[concepts/doa-microphone-positional-encoding|DOA-MPE]]. This enables a single model to generalise across different microphone array configurations.
 
+### Directivity-Pattern Conditioning (Neural Directional Filtering)
+
+In [[concepts/film-osn|FiLM-OSN]] (Uphaus et al. 2026), FiLM is the steering mechanism of a low-latency neural directional filter for hearing aids: a 72-dimensional directivity-pattern vector (sampled at 5° intervals) is linearly mapped to the channel dimension ($C=96$), conditioning the narrow-band blocks toward the desired pattern so that the directivity can be adjusted freely at inference. The same mechanism was introduced for FT-JNF by the FiLM-JNF (Huang, Chetupalli & Habets 2025, arXiv:2510.20253), which Uphaus et al. use as their baseline.
+
 ### Visual Reasoning (Original Application)
 
 FiLM was originally proposed for visual question answering, where image features are conditioned on natural language questions.
@@ -78,6 +83,7 @@ The review reports that, in TSE settings, the choice of fusion layer has "rather
 - [[concepts/doa-microphone-positional-encoding|DOA-Microphone Positional Encoding (DOA-MPE)]]
 - [[concepts/spatially-selective-nonlinear-filter|Spatially Selective Non-Linear Filter (SSF)]]
 - [[concepts/target-speaker-extraction|Target Speaker Extraction (TSE)]]
+- [[concepts/film-osn|FiLM-OSN]]
 - [[concepts/td-speakerbeam|TD-SpeakerBeam]]
 - [[concepts/angle-feature|Angle Feature]]
 
@@ -85,3 +91,4 @@ The review reports that, in TSE settings, the choice of fusion layer has "rather
 
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova et al. 2023: Neural Target Speech Extraction: An Overview]]
+- [[sources/uphaus-2026-directivity-low-latency|Uphaus et al. 2026: Directivity-Conditioned Low-Latency Neural Filtering]] — FiLM steers directivity patterns in the 10 ms-latency FiLM-OSN

@@ -600,6 +600,9 @@
 | [[entities/cristian-stanciu\|Cristian Stanciu]] | University Politehnica of Bucharest — co-author of the RLS-NKP low-rank adaptive filtering paper. | 2026-09-18 |
 | [[entities/cristian-anghel\|Cristian Anghel]] | University Politehnica of Bucharest — co-author of the RLS-NKP low-rank adaptive filtering paper. | 2026-09-18 |
 | [[entities/silviu-ciochina\|Silviu Ciochină]] | University Politehnica of Bucharest — adaptive filtering, variable step-size and regularization control. | 2026-09-18 |
+| [[entities/lennart-uphaus\|Lennart Uphaus]] | University of Hamburg — first author of FiLM-OSN, 10 ms steerable neural directional filtering for hearing aids | 2026-09-20 |
+| [[entities/andre-merboldt\|André Merboldt]] | Audatic GmbH — co-author of Uphaus et al. 2026 (FiLM-OSN) | 2026-09-20 |
+| [[entities/markus-hofbauer\|Markus Hofbauer]] | Sonova — co-author of Uphaus et al. 2026 (FiLM-OSN) | 2026-09-20 |
 
 ---
 
@@ -1141,6 +1144,8 @@
 | [[concepts/kronecker-product\|Kronecker Product]] | Block-matrix generalization of the tensor product (mixed-product, inverse, transpose, determinant, spectrum and rank identities, vec-trick linearization, SVD-solvable nearest-Kronecker-product problem); algebraic backbone of Kronecker product beamforming | 2026-09-18 |
 | [[concepts/nearest-kronecker-product\|Nearest Kronecker Product]] | Best Kronecker-product factorization of a matrix/vector, solved exactly by the SVD (Eckart–Young); rank-P generalization underlies low-rank filter representations. | 2026-09-18 |
 | [[concepts/rls-nkp\|RLS-NKP]] | Recursive least-squares family built on the rank-P nearest Kronecker product decomposition — two coupled short filters identify a long low-rank echo path with faster tracking. | 2026-09-18 |
+| [[concepts/film-osn\|FiLM-OSN]] | Directivity-conditioned 10 ms-latency neural directional filter for binaural hearing aids — FiLM-steered OnlineSpatialNet with Mamba narrow-band blocks | 2026-09-20 |
+| [[concepts/ipd-preservation-loss\|IPD Preservation Loss]] | Magnitude-weighted cosine loss on interaural phase difference, essential for realizing conditioned directivity patterns in binaural NDF | 2026-09-20 |
 
 ---
 
@@ -1377,6 +1382,7 @@
 | [[sources/pan-2020-microphone-array-beamforming\|Pan, Huang & Chen 2020]] | This is a Chinese-language overview of microphone array beamforming for immersive speech communication (临境语音通信) and intelligent voice interaction (智能语音交互), both of which face the problem of far-field, high-fidelity sound acquisition in complex acoustic environments. | 2026-09-19 |
 | [[sources/wikipedia-kronecker-product\|Wikipedia: Kronecker Product]] | Encyclopedia reference for the Kronecker product: definition as a block matrix, core algebraic identities (mixed-product, inverse, transpose, determinant, spectrum, rank), the vec-trick for matrix equations, and related Tracy–Singh/Khatri–Rao/face-splitting products | 2026-09-18 |
 | [[sources/elisei-iliescu-2019-low-rank-rls\|Elisei-Iliescu, Paleologu, Benesty, Stanciu, Anghel & Ciochină 2019]] | This paper develops recursive least-squares (RLS) adaptive filters for identifying long, low-rank systems such as network and acoustic echo paths. | 2026-09-18 |
+| [[sources/uphaus-2026-directivity-low-latency\|Uphaus, Merboldt, Hofbauer & Gerkmann 2026]] | Existing neural directional filtering (NDF) methods can adapt directivity patterns at inference but disregard real-world hearing-device constraints: dynamic scenarios, microphone positions varying with head diameter and hearing-aid placement, head shadow, and strict latency limits (≤ 10 ms — prior NDF approaches need 40–50 ms). | 2026-09-20 |
 
 ---
 
@@ -1430,10 +1436,10 @@
 
 ## Statistics
 
-- **Total pages**: 1379
-- **Entities**: 590
-- **Concepts**: 532
-- **Sources**: 227
+- **Total pages**: 1385
+- **Entities**: 593
+- **Concepts**: 534
+- **Sources**: 228
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-09-20

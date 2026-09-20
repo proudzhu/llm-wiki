@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-08-03
-updated: 2026-09-12
+updated: 2026-09-20
 sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/jiang-2026-lightweight-speech-enhancement-ssm-dsc/full-text.md
+  - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
 tags:
   - neural-network
   - state-space-model
@@ -77,11 +78,14 @@ Most parameters live in the linear projections, while the inner SSM is parameter
 
 [[concepts/semamba|SEMamba]] (Chao et al., IEEE SLT 2024) is the **first work to apply Mamba to speech enhancement**. It deploys Mamba in both a basic magnitude-mapping architecture and an advanced magnitude-phase architecture (replacing MP-SENet's Conformer), achieving a new state-of-the-art PESQ of 3.69 on the VoiceBank-DEMAND benchmark. See [[concepts/semamba|SEMamba]] for details.
 
+In multi-channel processing, [[concepts/film-osn|FiLM-OSN]] (Uphaus et al. 2026) deploys Mamba in the narrow-band blocks of a low-latency (10 ms total) neural directional filter for binaural hearing aids. Replacing the FT-JNF's temporal LSTM with a Mamba SSM — together with replacing the spectral BiLSTM with frequency convolutions — is what makes the architecture degrade gracefully at short 8 ms STFT windows, where the FiLM-JNF baseline drops from PESQ 2.10 to 1.72.
+
 ## Related Concepts
 
 - [[concepts/state-space-model|State-Space Model]] — the broader SSM family
 - [[concepts/s4nd|S4ND]] — predecessor structured SSM (no selection)
 - [[concepts/semamba|SEMamba]] — first Mamba-based speech enhancement system
+- [[concepts/film-osn|FiLM-OSN]] — Mamba-based low-latency neural directional filter for hearing aids
 - [[concepts/mamba-mingru|Mamba-MinGRU]] — Mamba + MinGRU hybrid for own-voice cancellation
 - [[concepts/long-short-term-memory|LSTM]] — recurrent baseline with input-dependent gating
 - [[concepts/linear-recurrent-unit|Linear Recurrent Unit]] — linear-recurrence alternative
@@ -91,4 +95,5 @@ Most parameters live in the linear projections, while the inner SSM is parameter
 
 - [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]]
 - [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight Speech Enhancement with State-Space Model and Depthwise Separable Convolution]]
+- [[sources/uphaus-2026-directivity-low-latency|Uphaus et al. 2026: Directivity-Conditioned Low-Latency Neural Filtering]] — Mamba narrow-band blocks enable 10 ms-latency neural directional filtering
 
