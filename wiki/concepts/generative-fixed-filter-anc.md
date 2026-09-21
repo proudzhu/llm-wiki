@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-05-04
-updated: 2026-09-05
+updated: 2026-09-21
 sources:
   - raw/papers/yang-2026-transformer-e2e-cfg-anc/full-text.md
   - raw/papers/luo-2026-hybrid-gfanc-fxnlms/full-text.md
   - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
   - raw/papers/bai-2026-feedback-guided-anc/full-text.md
   - raw/papers/he-2026-neural-projection-filter-anc/full-text.md
+  - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
 tags:
   - active-noise-control
   - fixed-filter-anc
@@ -47,6 +48,10 @@ Replaces the decomposition-recombination paradigm with **direct control-filter g
 
 [[concepts/condition-aware-projection-filtering|CAPF]] (He et al. 2026) applies the neural-filter-generation idea to a different stage: instead of generating the *control* filter, CAPFNet generates **projection filters** that compress many correlated references into a few decorrelated projected references for a conventional adaptive controller. This keeps the control loop fully adaptive (unlike fixed-filter GFANC variants) while confining neural inference to block rate — 48× cheaper online than point-wise neural reference projection.
 
+### Direction-Conditioned Full-Bank Generation (Yang 2026)
+
+[[concepts/direction-preserving-anc|DP-ANC]] (Yang et al. 2026) pushes direct filter generation further along the conditioning axis: a FiLM-conditioned convolutional network outputs the **complete multichannel FIR control-filter bank** ($K \times L_w$ real coefficients) from a 0.5 s mixed-reference observation plus the desired direction, with frequency-domain (one-sided spectrum) parameterization decoded via IFFT. Unlike GFANC/E2E-CFG, which target noise attenuation alone, the differentiable training objective adds an explicit desired-signal preservation term, and the estimated filters run in a conventional feedforward ANC path. One filter-bank estimate costs 0.00946 GMACs.
+
 ## Comparison: SFANC vs. GFANC vs. E2E-CFG
 
 | Aspect | SFANC | GFANC | E2E-CFG |
@@ -79,6 +84,7 @@ where $\alpha_n$ follows a forgetting-factor scheme ($\lambda = 0.999$).
 - [[concepts/end-to-end-differentiable-anc|End-to-End Differentiable ANC]] — training paradigm for unsupervised GFANC and E2E-CFG
 - [[concepts/feedback-guided-controller-fusion|Feedback-guided Controller Fusion]] — extension that fuses per-path pre-trained FIR experts using residual-error feedback
 - [[concepts/condition-aware-projection-filtering|Condition-Aware Projection Filtering (CAPF)]] — neural filter generation applied to the reference (projection) path rather than the control path
+- [[concepts/direction-preserving-anc|Direction-Preserving ANC (DP-ANC)]] — direction-conditioned generation of the full filter bank with an explicit preservation objective
 
 ## Related Sources
 

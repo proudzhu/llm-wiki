@@ -9,6 +9,7 @@ sources:
   - raw/papers/zhang-2014-causality-feedforward-anc-headset/full-text.md
   - raw/papers/bai-2026-feedback-guided-anc/full-text.md
   - raw/papers/yang-2026-transformer-e2e-cfg-anc/full-text.md
+  - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
 tags:
   - active-noise-control
   - fixed-filter-anc
@@ -92,4 +93,5 @@ A contrasting framework rather than a SFANC variant: [[feedback-guided-controlle
 - [[sources/yin-2023-selective-fixed-filter-anc-headphones|Yin 2023: Selective Fixed-Filter ANC Based on Frequency Response Matching in Headphones]] — FRM-SFANC algorithm
 - [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — foundational work establishing direction-dependent causality in feedforward ANC headsets
 - [[sources/yang-2026-transformer-e2e-cfg-anc|Yang, Luo, Zou, Wang, Huang & Gan 2026: Transformer-based E2E-CFG for ANC]]
+- [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC]] — beyond filter selection/generation for attenuation: conditions the whole filter bank on the desired direction with an explicit preservation objective
 

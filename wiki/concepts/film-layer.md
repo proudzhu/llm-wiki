@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-09-20
+updated: 2026-09-21
 sources:
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
   - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
+  - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
 tags:
   - deep-learning
   - neural-networks
@@ -50,6 +51,10 @@ In [[concepts/geometry-conditioned-ssf|GC-SSF]], FiLM layers modulate the interm
 
 In [[concepts/film-osn|FiLM-OSN]] (Uphaus et al. 2026), FiLM is the steering mechanism of a low-latency neural directional filter for hearing aids: a 72-dimensional directivity-pattern vector (sampled at 5° intervals) is linearly mapped to the channel dimension ($C=96$), conditioning the narrow-band blocks toward the desired pattern so that the directivity can be adjusted freely at inference. The same mechanism was introduced for FT-JNF by the FiLM-JNF (Huang, Chetupalli & Habets 2025, arXiv:2510.20253), which Uphaus et al. use as their baseline.
 
+### Direction-Conditioned Control-Filter Estimation (ANC)
+
+In [[concepts/direction-preserving-anc|DP-ANC]] (Yang et al. 2026), FiLM steers a control-filter **estimation** network rather than a signal filter: a periodic code $[\cos\theta_d, \sin\theta_d]^T$ of the user-specified desired direction is embedded by a small MLP, and a per-block FiLM head maps that embedding to channel-wise $(\gamma_\ell, \beta_\ell)$ that modulate each of three Conv–BN blocks of the acoustic encoder — $h_\ell = \mathrm{ReLU}[(1+\gamma_\ell)\odot u_\ell + \beta_\ell]$ — before the decoder emits the full multichannel FIR ANC control-filter bank. Zero-initializing the FiLM heads makes the initial modulation an identity mapping. This extends FiLM's steering role from neural directional filtering (FiLM-OSN) into active noise control, where the conditioned output is a filter bank rather than an audio signal.
+
 ### Visual Reasoning (Original Application)
 
 FiLM was originally proposed for visual question answering, where image features are conditioned on natural language questions.
@@ -92,3 +97,4 @@ The review reports that, in TSE settings, the choice of fusion layer has "rather
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova et al. 2023: Neural Target Speech Extraction: An Overview]]
 - [[sources/uphaus-2026-directivity-low-latency|Uphaus et al. 2026: Directivity-Conditioned Low-Latency Neural Filtering]] — FiLM steers directivity patterns in the 10 ms-latency FiLM-OSN
+- [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC]] — FiLM conditions control-filter estimation on the desired direction

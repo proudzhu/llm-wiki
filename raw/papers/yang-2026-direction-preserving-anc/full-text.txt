@@ -1,0 +1,1380 @@
+1
+Direction-Preserving Active Noise Control with a
+Conditional Control-Filter Estimation Network
+Ziyi Yang, Zhengding Luo, Boxiang Wang, Libin Zhang, and Woon-Seng Gan
+Abstract—Conventional active noise control (ANC) minimizes
+the total disturbance at the error microphone without distin-
+guishing desired sound from noise. Direction-preserving ANC
+(DP-ANC) instead aims to attenuate a noise component arriving
+from a direction other than the specified desired direction while
+preserving sound naturally arriving from that direction. Existing
+approaches typically either require analytical optimization to be
+repeated for each new observation or estimate and reproduce
+the desired component through a hear-through secondary-source
+path. To address these limitations, this paper formulates DP-ANC
+as a direction-conditioned cancellation–preservation optimiza-
+tion problem. A component-separated objective jointly penalizes
+residual noise energy and the control response induced by the
+desired component, with a scalar weighting parameter controlling
+the cancellation–preservation trade-off. A convolutional network
+conditioned on the specified desired direction through feature-
+wise linear modulation (FiLM) is trained using a differentiable
+secondary-path-aware forward model. At deployment, the net-
+work estimates the complete multichannel finite impulse response
+(FIR) control-filter bank directly from a mixed-reference obser-
+vation and the specified desired direction in a single forward
+pass, while retaining the conventional feedforward ANC signal
+path. Over 3300 evaluation cases, the selected operating point
+achieves 22.8 dB mean noise reduction with a desired-signal
+distortion of −11.4 dB. Validation using measured in-ear-device
+transfer functions further demonstrates consistent performance
+under measured acoustic configurations.
+Index Terms—Active noise control, control-filter estimation,
+desired-signal preservation, feature-wise linear modulation, fixed-
+filter active noise control.
+I. INTRODUCTION
+Conventional active noise control (ANC) minimizes the
+total disturbance without distinguishing desired sound from
+noise [1]–[4]. Adaptive feedforward implementations, includ-
+ing multichannel FxLMS variants, realize this objective by
+minimizing the residual error [5]–[9]. On head-mounted de-
+vices, achievable attenuation also depends on feedforward
+causality, the secondary-path response, and source direction
+[10], [11]. In personal listening applications, however, it is
+often necessary to suppress interference arriving from direc-
+tions other than a specified desired direction while preserving
+informative sound naturally arriving from that direction [12]–
+This work was supported by the Ministry of Education, Singapore, through
+Academic Research Fund Tier 2 under Grant MOE-T2EP20224-0010.
+Ziyi Yang, Zhengding Luo, Boxiang Wang, and Woon-Seng Gan are
+with the Smart Nation TRANS Lab, School of Electrical and Electronic
+Engineering, Nanyang Technological University, Singapore (email:{ziyi016,
+luoz0021, boxiang001}@e.ntu.edu.sg; ewsgan@ntu.edu.sg). Zhengding Luo
+is the corresponding author.
+Audio demo: https://yzyzieee.github.io/DP-ANC-Demo/. Source code will
+be released at https://github.com/yzyzieee/DP-ANC.
+[14]. This need motivates direction-preserving ANC (DP-
+ANC).
+Desired-signal preservation methods differ in whether they
+specify the desired sound by its signal content or by its
+physical direction of arrival. Signal-component-based methods
+estimate a target component, such as speech, and reproduce the
+enhanced signal through the device receiver [15]–[19]. The as-
+sociated processing may introduce algorithmic delay [15], [16]
+or modify binaural cues [17]–[19]. Direction-based methods
+instead define all sound arriving from a specified direction as
+desired. Directional hear-through systems extract this sound by
+beamforming and reproduce it through secondary sources [12],
+[13]. Rather than reconstructing the desired signal, spatially
+selective ANC (SSANC) imposes a desired-direction response
+constraint within the ANC optimization, thereby preserving the
+naturally arriving physical sound [14], [20]. A soft-constrained
+variant trades noise reduction against speech distortion through
+a scalar parameter while retaining a prescribed desired-
+response model [21]. Across these formulations, performance
+depends on the prescribed target response, delay, relative
+impulse-response model, and regularization [14], [20]–[22].
+The need to recompute a matrix solution for each new mixed-
+reference observation in analytical formulations [14], [21] mo-
+tivates offline control-filter estimation. Efficient multichannel
+control-filter estimation using structured formulations, such as
+Kronecker-product decomposition, has also been investigated
+[23], [24].
+Neural-network-based ANC methods can be broadly
+grouped by whether the network directly generates the control
+signal or provides a control filter for a conventional feedfor-
+ward path. Deep ANC exemplifies direct signal generation
+and has been studied for broadband and nonlinear control
+[25]–[27]. Filter-oriented methods include selective fixed-filter
+ANC, which selects from a bank of pre-trained filters and has
+been extended with source-direction information [28]–[32];
+generative fixed-filter ANC (GFANC), which estimates control
+filters from reference signals [33] and has been extended to
+incorporate spatial-frequency cues in reverberant environments
+[34]; and hybrid approaches that combine learned filter initial-
+ization with subsequent adaptive filtering or joint secondary-
+path modeling [35]–[38]. Most of these methods target noise
+attenuation alone. None jointly trains a direction-conditioned
+control-filter estimation network with an explicit cancellation–
+preservation objective.
+Selective fixed-filter ANC chooses from a predesigned
+control-filter bank but does not generate new filters for unseen
+conditions or incorporate a preservation objective. GFANC
+estimates a new control filter from the reference observa-
+arXiv:2609.07173v1  [eess.AS]  7 Sep 2026
+
+2
+tion but has been applied to noise attenuation without an
+explicit preservation term. Analytical SSANC enforces a pre-
+scribed desired-direction response through a matrix solution
+recomputed for each new observation, while beamformer
+hear-through extracts and reproduces the desired component
+through the secondary-source path. Taken together, none of
+these approaches produces a control-filter bank that explicitly
+balances noise cancellation and desired-signal preservation
+without relying on a predesigned control-filter bank, repeated
+analytical optimization, or desired-signal reconstruction.
+To address this gap, this paper proposes a data-driven
+DP-ANC method that suppresses the noise component while
+limiting the control response to sound arriving from a spec-
+ified desired direction. The framework employs a direction-
+conditioned neural network to estimate a complete multichan-
+nel finite impulse response (FIR) control-filter bank from a
+short mixed-reference observation. The desired direction is
+encoded using a periodic representation and injected into each
+convolutional block through feature-wise linear modulation
+(FiLM) [39], which has also been applied to secondary-path
+conditioning in ANC [40]. During offline training, the esti-
+mated filters are evaluated through a differentiable secondary-
+path-aware forward model using separated desired and noise
+components. At deployment, only the mixed-reference obser-
+vation and the specified desired direction are required, while
+the estimated filters operate within a conventional feedforward
+ANC structure. The proposed framework is evaluated using
+both a simulated circular-array configuration and a separately
+trained model based on measured transfer functions from the
+Hearpiece in-ear-device database [41].
+The main contributions are summarized as follows:
+•We formulate direction-preserving ANC as a direction-
+conditioned cancellation–preservation optimization prob-
+lem, where a scalar weighting parameter continuously
+balances noise cancellation and desired-signal preser-
+vation without imposing a prescribed desired-direction
+response constraint.
+•We develop an offline-trained convolutional network that
+maps a short mixed-reference observation and the speci-
+fied desired direction directly to the complete multichan-
+nel FIR control-filter bank in a single forward pass, while
+retaining the conventional feedforward ANC signal path.
+•We characterize the achievable cancellation–preservation
+region of direction-preserving ANC and show that it
+is shaped by the spatial separability of the reference
+array, with consistent trends observed for both learning-
+based and analytical control-filter designs in simulated
+and measured acoustic configurations.
+II. SIGNALMODEL ANDDP-ANC FORMULATION
+A. Multichannel Feedforward ANC Model
+Consider a feedforward ANC system withKreference mi-
+crophones, one secondary source, and one error microphone.
+For an FIR control-filter lengthL w, let
+xk(n) = [xk(n),xk(n−1),...,x k(n−L w + 1)]T,(1)
+denote the tapped vector of thek-th reference signal, and let
+wk∈R Lw denote its control filter. Stacking these vectors as
+x(n)andwgives the secondary-source driving signal
+y(n) =
+KX
+k=1
+wT
+k xk(n) =w Tx(n).(2)
+Letg(n)denote theL g-tap causal secondary-path impulse
+response andd(n)the primary disturbance at the error mi-
+crophone. Define the secondary-path-filtered references by
+˜xk(n) =g(n)∗x k(n), where∗denotes linear convolution,
+and form their tapped and stacked vector ˜x(n)in the same
+manner asx(n). The residual error is then
+e(n) =d(n) +w T˜x(n),(3)
+wherew T˜x(n)denotes the secondary-path-filtered control
+contribution designed to destructively interfere withd(n).
+For a segment ofNsamples, letd,e∈R N denote the
+disturbance and residual vectors, and let ˜X∈R N×KL w denote
+the secondary-path-filtered reference matrix. Thus,
+e=d+ ˜Xw.(4)
+Conventional feedforward ANC minimizes the residual energy
+[2], [42]
+min
+w
+d+ ˜Xw
+
+2
+2
+.(5)
+Withℓ 2 regularization, the corresponding least-squares solu-
+tion is
+wLS =−
+
+˜XT ˜X+µI
+−1
+˜XTd,(6)
+whereµ≥0is a regularization parameter.
+B. Directional Signal Decomposition
+The conventional objective in (5) suppresses the total dis-
+turbance without distinguishing desired sound from noise. To
+formulate the direction-selective objective, we decompose the
+disturbance and reference signals into directional components.
+The separated components are used for offline objective eval-
+uation, whereas the deployed control-filter estimation network
+uses only the mixed-reference observation and specified de-
+sired direction. This work considers one desired source and
+one noise source. Letθ d andθ n denote their directions,
+respectively.
+For a source signalu(n)arriving from directionθ, the
+reference signal at thek-th microphone and the primary
+disturbance at the error microphone are modeled as
+x(θ)
+k (n) =q k(θ,n)∗u(n), d (θ)(n) =p(θ,n)∗u(n),(7)
+whereq k(θ,n)andp(θ,n)are the corresponding acoustic
+paths.
+For the two-source case,
+d=d n +dd, ˜X= ˜Xn + ˜Xd,(8)
+where the subscriptsnandddenote the noise and desired
+components. Hereafter,d n together with ˜Xn is referred to as
+
+3
+the noise component, andd d together with ˜Xd as the desired
+component. By linearity,
+e=
+
+dn + ˜Xnw
+
+| {z }
+residual noise component
++
+
+dd + ˜Xdw
+
+| {z }
+desired component after control
+.(9)
+Noise attenuation requires
+dn + ˜Xnw≈0,(10)
+whereas desired-signal preservation requires
+dd + ˜Xdw≈d d,or equivalently ˜Xdw≈0.(11)
+Thus, the same control-filter bank must cancel the noise
+component while generating little secondary response to the
+desired component.
+C. Cancellation–Preservation Objective
+The two requirements are incorporated into a component-
+separated objective. Imposing the exact broadband equality
+˜Xdw=0can substantially reduce the filter degrees of
+freedom available for noise cancellation. We therefore penalize
+the energy of the desired-induced control response rather than
+constraining it to zero, yielding a continuous trade-off without
+prescribing a target response or delay.
+To reduce dependence on source level, define
+αn =∥d n∥2
+2 +ϵ, α d =∥d d∥2
+2 +ϵ,(12)
+and
+¯dn = dn
+√αn
+, ¯Xn =
+˜Xn
+√αn
+, ¯Xd =
+˜Xd
+√αd
+,(13)
+whereϵis a small positive constant. All terms are evaluated
+after restriction to the processing band.
+The normalized noise-reduction (NR) term is
+LNR(w) =
+¯dn + ¯Xnw
+2
+2,(14)
+and the desired-signal preservation term is
+LPR(w) =
+ ¯Xdw
+2
+2.(15)
+The training objective is
+LDP(w) =L NR(w) +λL PR(w),(16)
+whereλ≥0controls the trade-off. Larger values place
+more weight on limiting the desired-induced control response,
+whereas smaller values permit more aggressive cancellation.
+Related weighted noise-reduction and distortion trade-offs ap-
+pear in speech-distortion-weighted multichannel Wiener filter-
+ing [43]–[45]. Soft-constrained SSANC likewise uses a scalar
+parameter to trade noise reduction against speech distortion
+while retaining a prescribed desired-response model and ob-
+taining the control filters through an analytical matrix solution
+[21]. In contrast, (16) forms its cancellation and preservation
+terms from separated noise and desired components at the
+ANC error microphone, with the control responses evaluated
+through the secondary path. The preservation term penalizes
+the desired-induced control response rather than deviation
+from a prescribed desired-direction response.
+Analytical SSANC minimizes total output power while en-
+forcing a prescribed desired-direction response through either
+a hard constraint or a soft penalty. Its performance depends
+on the target response, delay, path model, covariance estimate,
+and regularization [14], [20]–[22]. The formulations therefore
+define their operating trade-offs differently, motivating the
+frontier comparison in Section V-B.
+A regularized closed-form counterpart of (16) clarifies how
+the preservation term shapes the control-filter solution. Con-
+sider
+JDP(w) =L NR(w) +λL PR(w) +µ∥w∥ 2
+2.(17)
+Its normal equation is
+  ¯XT
+n ¯Xn +λ ¯XT
+d ¯Xd +µI
+
+w=− ¯XT
+n ¯dn,(18)
+which gives, when the matrix is nonsingular,
+w⋆
+λ =−
+  ¯XT
+n ¯Xn +λ ¯XT
+d ¯Xd +µI
+−1 ¯XT
+n ¯dn.(19)
+Because it depends on the desired direction, the second Gram
+matrix acts as a quadratic regularizer that penalizes filters
+producing a strong control response to the desired component.
+Direct evaluation of (19) requires the separated components
+and a new solution of the normal equations for each input ob-
+servation. The learning-based realization in the next subsection
+instead uses (16) withµ= 0for direct training. Section IV-C
+gives the optimization settings.
+III. PROPOSEDDP-ANC FRAMEWORK
+A. Framework Overview
+Fig. 1 summarizes the learning-based realization of the
+component-separated objective. LetX∈R K×N obs denote
+a mixed-reference observation comprisingKtime-domain
+channels. Its complex short-time Fourier transform (STFT)
+forms the network inputX in defined in Section III-B. Given
+Xand the specified desired direction, the estimation network
+produces the complete feedforward control-filter bank:
+ˆW=F Θ(X,θd)∈R K×L w.(20)
+The network does not receive the noise directionθ n explicitly.
+The multichannel magnitude and phase relationships inX in
+encode the incident spatial structure, whileθ d identifies the
+component whose control response is to be limited. The
+desired direction is supplied as an external input because
+direction-of-arrival estimation is not part of the present net-
+work.
+The separated components required by (16) are available in
+the generated training scenes and are used only to evaluate the
+offline objective. The network parameters are obtained as
+Θ⋆ = arg min
+Θ
+ET [LDP (FΘ(X,θd))],(21)
+whereTdenotes the distribution of training scenes over
+directions, paths, source levels, and waveform realizations.
+Minimizing this expectation learns a single mapping shared
+across these training scenes, replacing the matrix solve that
+would otherwise be repeated for each deployment observation.
+
+4
+STFT
+e(n)y(n)
+Desired direction
+(to be preserved)
+Noise direction
+(to be attenuated)
+Time frames T
+Channels
+（2K）
+Freq-bins F
+θd
+User-specified 
+desired direction
+STFT reference features Xin
+Time domain control filters
+x1(n)
+x2(n)
+xK(n)
+…
+ +
+Secondary 
+Path
+ +
+d(n)
+Error microphone 
+embedding
+IFFT
+Directional Acoustic Scene
+DP-ANC Filter Estimation Network ( Frame-rate )
+Run-Time Feedforward ANC Control  ( Sample-rate )
+K channel 
+reference 
+microphone 
+array
+Direction
+Encoder
+(MLP)
+FiLM 
+Head 1
+FiLM 
+Head 2
+FiLM 
+Head 3
+zθ
+Pool
++
+Flatten
+Fully Connected 
+Decoder
+x1(n), …, xK(n)
+𝑊𝑊1(𝑧𝑧)
+𝑊𝑊𝐾𝐾(𝑧𝑧)
+𝑊𝑊2(𝑧𝑧)
+Disturbance
+Frame-rate update
+Conv 3×3, stride 2 → BN → FiLM → ReLU (×3)
+Framing
+…
+…
+…
+ …
+Frequency domain 
+control filters 
+Fig. 1. Overview of the proposed DP-ANC framework. During offline training, multichannel reference features and the specified desired direction are mapped
+to a feedforward control-filter bank and evaluated through a differentiable secondary-path-aware forward model. At runtime, the estimated filters are used in
+the retained feedforward ANC structure to attenuate the noise component while limiting the control response to the desired component.
+The convolutional encoder is followed by adaptive pooling,
+allowing the same model to accept different observation du-
+rations. Once the control-filter bank is available, the control
+signal is
+y(n) =
+KX
+k=1
+ˆwT
+k xk(n),(22)
+and is reproduced through the secondary source. Deployment
+therefore requires neither separated desired and noise compo-
+nents nor an explicit noise-direction label.
+B. Direction-Conditioned Control-Filter Estimation Network
+The real and imaginary parts of theKreference-microphone
+STFTs are stacked to form
+Xin∈R 2K×n f×T,(23)
+wheren f andTdenote the number of frequency bins and
+frames. Retaining the complex multichannel representation
+preserves the inter-microphone phase relationships required for
+directional discrimination [46].
+The desired direction is represented by the periodic code
+c(θd) = [cosθd,sinθ d]T,(24)
+and embedded by a two-layer direction encoder,
+zθ =E d(c(θd))∈R 32,(25)
+where both linear layers have 32 outputs and use sigmoid
+linear unit (SiLU) activations.
+Convolution (Conv), batch normalization (BN), layer nor-
+malization (LN), and rectified linear unit (ReLU) are ab-
+breviated below and in Table I. Letu ℓ denote the output
+of convolution and batch normalization in acoustic encoder
+blockℓ. A block-specific FiLM head [39] maps the direction
+embedding to channel-wise modulation parameters:
+[γT
+ℓ,β T
+ℓ ]T =A ℓ(zθ).(26)
+For a block withC ℓ output channels, bothγ ℓ andβ ℓ belong
+toR Cℓ. They are broadcast over frequency and time, and the
+block output is
+hℓ = ReLU[(1+γ ℓ)⊙u ℓ +βℓ].(27)
+The modulation in (27) is applied after BN and before ReLU
+in each of the three convolutional blocks. All weights and
+biases inA ℓ are initialized to zero, so thatγ ℓ =β ℓ =0at
+initialization and the initial modulation is an identity mapping.
+After the third FiLM block, adaptive pooling and flattening
+produce the acoustic representationz x∈R 2048. The decoder
+maps this representation to the normalized real and imaginary
+coefficients of allKcontrol filters:
+ˆHnorm =D w(zx)∈R 2Kn f.(28)
+The architecture is summarized in Table I. Adaptive pooling to
+8×4retains a compact frequency–time description, while the
+output layer provides separate coefficients for each frequency
+bin and reference channel. The parameter count for each
+acoustic encoder block includes its FiLM head.
+The estimated coefficients are de-normalized using training-
+set statistics and reshaped intoKone-sided complex spectra.
+
+5
+TABLE I
+LAYER-WISE ARCHITECTURE OF THEFILM-CONDITIONED CONTROL-FILTER ESTIMATION NETWORK. THE MAIN SIMULATED CONFIGURATION USES
+K= 6,n f = 129,ANDL w = 256,WITHTDENOTING THE NUMBER OFSTFTFRAMES.
+Stage Layer Configuration Output shape Parameters
+Input STFT (real/imaginary)256-point transform, hop64 12×129×T–
+Direction encoder (Ed) Linear–SiLU2→32 3296
+Linear–SiLU32→32 321,056
+Acoustic encoder
+Conv–BN–FiLM–ReLU3×3, stride 2,C 1 = 16 16×65×⌈T/2⌉2,832
+Conv–BN–FiLM–ReLU3×3, stride 2,C 2 = 32 32×33×⌈T/4⌉6,816
+Conv–BN–FiLM–ReLU3×3, stride 2,C 3 = 64 64×17×⌈T/8⌉22,848
+Adaptive average pooling8×4 64×8×4–
+Flatten –2048–
+Decoder (Dw) Linear–LN–ReLU–Dropout2048→256,p= 0.15 256525,056
+Linear256→2n fK1548397,836
+Reconstruction de-normalization + inverse transform Hermitian completion,256-point IFFT6×256–
+Total – – – 956,540
+Each spectrum is Hermitian-completed to 256 bins and trans-
+formed into a real causal FIR filter:
+ˆwk = IFFT256{ ˆHk}∈R Lw, k= 1,...,K.(29)
+Here, ˆHk ∈C 256 denotes the Hermitian-completed spec-
+trum andL w = 256. Thus, the transform directly yields
+the complete FIR filter without truncation. Frequency-domain
+estimation is used only as a compact filter parameterization,
+while runtime control remains time-domain feedforward con-
+volution.
+C. Differentiable Training with Independent Signal Realiza-
+tions
+Each training sample uses a mixed-reference observation for
+filter estimation (realization A) and independent signals for
+loss evaluation (realization B). The two realizations share the
+same source directions and acoustic paths but use independent
+source waveforms. This separation encourages the estimated
+filters to remain effective beyond the particular waveforms
+used for filter estimation.
+During training, the differentiable secondary-path-aware
+forward model applies the vectorized estimated control-filter
+bank ˆwseparately to the secondary-path-filtered noise and
+desired-component matrices ˜Xn and ˜Xd formed from the inde-
+pendent signals used for loss evaluation. After band limitation
+and the normalization in (13), the resulting control responses
+enter the cancellation and desired-signal preservation terms
+in (14) and (15). Their gradients are propagated through the
+control filters and secondary path.
+IV. EXPERIMENTALSETUP
+A. Main Simulated Acoustic Configuration
+The main experiments use the multichannel feedforward
+arrangement in Fig. 2. Six reference microphones form a
+uniform circle around the central error microphone, with
+one secondary source located nearby. Horizontal plane-wave
+propagation is modeled by direction-dependent delays across
+the circular array [46], [47]. These delays are implemented
+Noise direction
+Desired 
+direction
+𝜽𝜽𝒅𝒅
+𝜽𝜽𝒏𝒏
+Ref mic 1
+(0°)
+Ref mic 2
+(60°)
+Ref mic 3
+(120°)
+Ref mic 4
+(180°) 0°
+90°
+180°
+270°
+Ref mic 5
+(240°)
+Ref mic 6
+(300°)
+Secondary source
+210°, 0.06 m
+Error mic 
+(at center)
+x
+y
+(Top view)
+Fig. 2. Main simulated acoustic configuration. Six reference microphones
+surround the center error microphone, and one secondary source is located at
+210◦ and a radius of0.06m.
+using fractional-delay FIR filters [48]. The sampling rate is
+8 kHz, the processing band is 20–2500 Hz, and each filter
+estimate uses a 0.5 s reference observation.
+The control filters contain 256 taps per reference channel,
+and the secondary path is represented by a 16-tap causal
+response that is treated as known and held fixed in training and
+evaluation. In the main evaluation, independent band-limited
+sensor noise is added to all reference and error-microphone
+channels. Its level is set independently in each channel to yield
+a 30 dB sensor SNR relative to the local observed mixture.
+The evaluation uses a pre-control SNR of −10 dB at the
+error microphone and angular separations∆θ≥15 ◦. Table II
+summarizes the acoustic and optimization settings.
+To provide a geometry-based reference for the main sepa-
+ration criterion and the near-direction experiment, we charac-
+terize the spatial separability of the circular reference array.
+Its far-field response at microphonekis
+Qk(θ,f) = exp [−jκrcos(θ−ϕ k)], κ= 2πf
+c ,(30)
+whereris the array radius,ϕ k = 2π(k−1)/K, and
+cis the speed of sound [46], [47]. Definingq(θ,f) =
+[Q1(θ,f),...,Q K(θ,f)] T, the normalized manifold coher-
+
+6
+ence is
+η(f,∆θ) =
+qH(θd,f)q(θ n,f)
+
+∥q(θd,f)∥ 2∥q(θn,f)∥ 2
+≈
+J0
+
+2κrsin ∆θ
+2
+,
+(31)
+whereθ n =θ d + ∆θand the second line is the continuous-
+circular-aperture approximation [47]. For unit-norm responses,
+1−η 2 is the fraction of the noise-response energy orthogonal
+to the desired-response direction. Large coherence therefore
+limits the simultaneous achievement of high NR and low
+desired-signal distortion.
+Under the conventional half-power coherence criterion,
+η2 = 1/2[47], the corresponding angular separation is
+∆θ3dB(f) = 2 sin−1
+1.126c
+4πfr
+
+,(32)
+where 1.126 is the first positive solution ofJ 0(x) = 1/
+√
+2.
+Forr= 0.20m, the approximation gives frequency-dependent
+resolution scales of about36 ◦,18◦,12◦, and9◦ at 500, 1000,
+1500, and 2000 Hz. At high frequencies, finite six-sensor
+sampling and discrete-array spatial aliasing also influence the
+response [46]. These scales provide an interpretive reference
+for the angular-resolution experiment, but the∆θ≥15 ◦ main-
+evaluation criterion is not a frequency-independent physical
+resolution boundary.
+B. Data Generation and Directional Sampling
+Each training scene contains one desired source and one
+noise source. Their azimuthsθ d andθ n are drawn indepen-
+dently from continuous uniform distributions over[0 ◦,360◦)
+and remain fixed within each 0.5 s realization.
+The desired waveform is a band-limited Gaussian sequence
+that provides broadband excitation. The held-out experiments
+in Section IV-F test generalization to recorded desired signals.
+The noise class is sampled with equal probability between
+a band-limited Gaussian sequence and an UrbanSound8K
+recording [49]. Non-overlapping recording splits are used
+for training and validation. All recordings are resampled,
+normalized, and restricted to the processing band before spatial
+rendering.
+During training, the pre-control SNR at the error mi-
+crophone is sampled independently for each scene from
+U[−15,5]dB. The independent-signal protocol in Sec-
+tion III-C is used throughout training, validation, and evalua-
+tion, with separate waveform realizations for filter estimation
+and loss or metric computation.
+C. Network Training
+We train separate instances of the 956,540-parameter esti-
+mation network in Table I forλ∈{0,0.03,0.1,0.3,1}. For
+each model, we select the training epoch that yields the lowest
+LDP on a fixed validation set of 1024 synthetically generated
+scenes. All models use the same validation set, generated using
+the training-scene protocol with separate recordings. After
+selecting the best-performing epoch for each model, NR and
+−Ddes are independently min–max normalized across the five
+candidates. The candidate with the smallest Euclidean distance
+to the ideal normalized point(1,1)defines the representative
+operating point, yieldingλ= 0.1.
+AdamW [50] optimizes each model using the hyperparam-
+eters summarized in Table II.
+D. Compared Methods
+1) ANC Off:The uncontrolled error-microphone signal
+defines the NR reference at 0 dB.
+2) Conventional Wiener ANC:The unconstrained Wiener
+solution minimizes the total error-microphone energy without
+distinguishing desired and noise components. It represents the
+maximum-cancellation endpoint of the conventional objective.
+3) Beamformer Hear-Through:We adapt the hear-through
+signal flow in [12] to the present array. A 384-tap least-squares
+beamformer with a 4.0 ms target delay extracts and reproduces
+the desired-direction signal through the secondary source after
+ANC attenuation.
+4) Analytical SSANC:For each evaluation case, we re-
+compute the analytical control filters from its 0.5 s mixed-
+reference observation following the optimal spatially con-
+strained SSANC formulation in [14], [20]. The control fil-
+ters are obtained using the mixed-reference observation and
+desired-direction path information, without separated source
+waveforms. The desired response is defined at the error
+microphone with zero additional delay. Let ex(n)be the
+secondary-path-filtered tapped-reference vector andR ˜x˜x=
+E{ex(n)exT(n)}its covariance. With the block secondary-path
+matrixGand desired-direction relative-response matrixH,
+define
+Φ˜x˜x=R ˜x˜x+β SI,Q=H TGΦ−1
+˜x˜xGTH.(33)
+The covariance and constraint loadings are normalized by the
+largest eigenvalues of the matrices before the corresponding
+diagonal loading is added:
+βS = λmax(R˜x˜x)
+rβ
+, ρ S = λmax(Q)
+rf
+,(34)
+whereQ+ρ SIis the regularized constraint matrix, andr β
+andr f are dimensionless loading ratios. We fixr β = 10 4
+and sweepr f over 13 values spanning2to50,000to form
+the SSANC cancellation–preservation frontier. The same 0.5 s
+observation, 256-tap control filter per channel, and processing
+band are used at every point. Table III and Fig. 3 use the
+representative settingr β =r f = 104, and method-level trade-
+off comparison uses the complete frontier.
+5) DP-ANC (Proposed):The proposed estimation network
+produces the complete control-filter bank from the mixed-
+reference observation and specified desired direction. The
+network does not require a new matrix solution for each
+observation. Its estimated filters operate in the conventional
+feedforward control path.
+Computational setup.Operation counts in Section V-E refer
+to one control-filter bank obtained from the common 0.5 s
+observation. For DP-ANC, we count the multiply–accumulate
+operations (MACs) of the convolutional and fully connected
+layers. For analytical SSANC, the floating-point operation
+
+7
+TABLE II
+MAIN ACOUSTIC AND OPTIMIZATION SETTINGS.
+Acoustic configuration Optimization configuration
+Parameter Value Parameter Value
+Array geometryK= 6,r= 0.20m, error mic at center Preservation weights{0,0.03,0.1,0.3,1}
+Secondary source210 ◦,r= 0.06m Optimizer AdamW
+Sampling rate / band8kHz /20–2500Hz Initial learning rate / schedule2×10 −4 / cosine decay
+Reference-signal duration0.5s Weight decay5×10 −4
+Filter lengthsL w = 256,L g = 16Batch size128
+Training / evaluation SNRU[−15,5]dB / −10 dB Gradient clipping0.5
+Sensor SNR (per channel)30dB Validation-set size1024scenes
+Desired/noise training azimuths IndependentU[0 ◦,360 ◦)draws Representative preservation weightλ= 0.1
+Note:Sensor SNR is computed independently in each channel from the standard-deviation ratio of the local observed mixture to the added sensor noise.
+counts of the eigendecompositions and matrix inversions are
+converted to MACs using one MAC equal to two floating-point
+operations.
+E. Evaluation Metrics
+Noise reduction is defined as
+NR = 10 log10
+P
+nd2
+n(n)P
+ne2n(n),(35)
+whered n(n)ande n(n)are the noise components before and
+after control. Desired-signal distortion is
+Ddes = 10 log10
+P
+n[ed(n)−d d(n)]2
+P
+nd2
+d(n) ,(36)
+whered d(n)ande d(n)are the desired components before
+and after control. Consistent with the preservation require-
+ment in (11),D des measures the energy of the desired-
+induced control response normalized by the naturally arriving
+desired-component energy and should not be interpreted as
+a perceptual distortion score. More negative values indicate
+a weaker response, whereas 0 dB indicates equal energies
+without distinguishing cancellation, reinforcement, or phase
+alteration. The output SNR is
+SNRout = 10 log10
+P
+ne2
+d(n)P
+ne2n(n).(37)
+It measures the energy balance between the controlled desired
+component and residual noise, but does not by itself measure
+waveform fidelity. We therefore interpretD des andSNR out
+jointly with the component-resolved time–frequency and en-
+velope comparison in Fig. 3. In radial plots of preservation,
+−Ddes is used only to make a larger radius indicate a weaker
+desired-induced control response. For hear-through, delay is
+estimated by cross-correlation, and desired-component corre-
+lation is computed after temporal alignment.
+F . Evaluation Protocol
+The main evaluation contains 3300 cases in 11 balanced
+content groups. Six groups pair Gaussian desired signals with
+recorded noise from six held-out Freesound Dataset 50K
+(FSD50K) categories [51]. The remaining five groups use
+Gaussian signals, FSD50K alarm, car-horn, or siren record-
+ings, or LibriSpeech test-clean speech [52] as the desired con-
+tent, each paired with independently selected recorded noise.
+The recorded evaluation clips are excluded from network
+training.
+All cases use the main geometry, a −10 dB pre-control
+SNR calibrated at the error microphone over 20–2500 Hz, and
+angular separations∆θ≥15 ◦. The estimation network uses a
+0.5 s mixed-reference observation to estimate the filter, while
+all reported metrics use an independent 0.5 s signal realization
+with the same source directions and acoustic paths. The energy
+sums in (35)–(37) are evaluated over the complete evaluation
+record after a common 20–2500 Hz analysis filter.
+Independent sensor noise is added to the filter-estimation
+observation and the evaluation signals. DP-ANC and all
+baselines share the same noisy observation and independent
+evaluation signals. NR andSNR out include source noise and
+sensor noise in the non-desired component, whereasD des is
+computed from the separately rendered desired component.
+Table entries report the mean and standard deviation of the
+per-case metrics in dB.
+The angular-resolution experiment in Fig. 5 retains the
+−10 dB main-evaluation SNR and includes both DP-ANC and
+analytical SSANC at two trade-off settings. The full-azimuth
+coverage experiment in Fig. 6 uses a common −5 dB pre-
+control SNR and 30 dB sensor-noise level for the simulated-
+array and Hearpiece configurations, and additionally reports
+frequency-resolved results in four analysis bands centered at
+200, 500, 1000, and 2000 Hz. Each radial value corresponds
+to a control-filter bank estimated for that noise direction while
+the desired direction is fixed. Each broadband “Overall” value
+is the arithmetic mean of the per-case 20–2500 Hz energy
+ratios expressed in dB, evaluated over all 48 noise directions
+with four independent signals per direction.
+G. Measured Hearpiece-Path Validation
+A separate experiment uses the Hearpiece database [41]
+to evaluate the method with measured head-mounted primary
+transfer functions. We use Knowles Electronics Manikin for
+Acoustic Research (KEMAR) measurements at 48 horizontal
+azimuths and train a four-reference model for this microphone
+geometry.
+
+8
+0
+500
+1000
+1500
+2000
+2500
+ANC off
+10
+ 0 10
+Time (ms)0
+1
+Delay: 0.0 ms
+Desired component
+Conventional Wiener
+Distortion: -0.1 dB 
+10
+ 0 10
+Time (ms)0
+1
+Delay: N/A
+Beamformer hear-through
+Distortion: +4.9 dB 
+10
+ 0 10
+Time (ms)0
+1
+Delay: 4.1 ms
+Analytical SSANC
+Distortion: -19.3 dB 
+10
+ 0 10
+Time (ms)0
+1
+Delay: 0.0 ms
+DP-ANC (proposed)
+Distortion: -18.1 dB 
+10
+ 0 10
+Time (ms)0
+1
+Delay: 0.0 ms
+0
+500
+1000
+1500
+2000
+2500
+Uncontrolled noise
+Residual noise
+NR: +27.1 dB 
+ NR: +19.6 dB 
+ NR: +18.5 dB 
+ NR: +24.2 dB 
+0.0 0.5 1.0 1.5 2.0
+time (s)
+0
+500
+1000
+1500
+2000
+2500
+Output SNR: -10.0 dB 
+Total error
+0.0 0.5 1.0 1.5 2.0
+time (s)
+Output SNR: -7.1 dB 
+0.0 0.5 1.0 1.5 2.0
+time (s)
+Output SNR: +8.3 dB 
+0.0 0.5 1.0 1.5 2.0
+time (s)
+Output SNR: +7.7 dB 
+0.0 0.5 1.0 1.5 2.0
+time (s)
+Output SNR: +14.9 dB 
+50
+40
+30
+20
+10
+0
+STFT
+(dB)
+Frequency (Hz)
+Reference desired envelope Controlled desired envelope
+Fig. 3. Illustrative fixed-record comparison using a tonal alarm at0 ◦ and air-conditioner noise at90 ◦, with a pre-control SNR of −10 dB. Control filters are
+estimated from the first 0.5 s, and the complete 2.0 s record provides the displayed signals.
+The external references are the left and right concha and
+entrance microphones. The right-ear eardrum response defines
+the error position, and the right outer driver is the secondary
+source. Primary paths are used directly from the database. The
+secondary path is represented by a minimum-phase response
+with the measured magnitude. Signals are resampled to 8 kHz
+and processed over 20–2500 Hz using 256-tap control filters.
+We train a separate Hearpiece model under a discrete
+measured-path protocol. Desired and noise directions are sam-
+pled from these measured azimuths with∆θ≥15 ◦. Training
+SNR is sampled from[−10,10]dB, and both desired and
+noise content are varied using Gaussian and UrbanSound8K
+signals with non-overlapping training and evaluation splits
+[49]. The Hearpiece model usesλ= 0.1. Independent sensor
+noise is added to each of the four reference channels and
+the error-microphone channel. Its level is set independently
+in each channel to yield a 30 dB sensor SNR relative to
+the local mixture. Filter estimation and evaluation follow
+the independent-signal protocol in Section III-C. Directional
+evaluation fixes the desired direction at0 ◦, uses a pre-control
+SNR of −5 dB, and sweeps the noise over all 48 measured
+azimuths. Each filter is evaluated on four independent 0.5 s
+signals.
+V. RESULTS ANDDISCUSSION
+A. Average Cancellation and Desired-Signal Preservation
+Figure 4 shows that DP-ANC achieves higher mean noise
+reduction than analytical SSANC at matched mean desired-
+signal distortion across the five evaluated settings, with im-
+provements ranging from 0.68 to 3.06 dB.
+/uni00000015/uni00000014
+/uni00000014/uni0000001b
+/uni00000014/uni00000018
+/uni00000014/uni00000015
+/uni0000001c
+/uni00000019
+/uni00000016
+/uni00000013
+/uni00000027/uni00000048/uni00000056/uni0000004c/uni00000055/uni00000048/uni00000047/uni00000010/uni00000056/uni0000004c/uni0000004a/uni00000051/uni00000044/uni0000004f/uni00000003/uni00000047/uni0000004c/uni00000056/uni00000057/uni00000052/uni00000055/uni00000057/uni0000004c/uni00000052/uni00000051/uni0000000f/uni00000003Ddes/uni00000003/uni0000000b/uni00000047/uni00000025/uni0000000c
+/uni00000014/uni0000001b
+/uni00000015/uni00000013
+/uni00000015/uni00000015
+/uni00000015/uni00000017
+/uni00000015/uni00000019/uni00000031/uni00000052/uni0000004c/uni00000056/uni00000048/uni00000003/uni00000055/uni00000048/uni00000047/uni00000058/uni00000046/uni00000057/uni0000004c/uni00000052/uni00000051/uni00000003/uni0000000b/uni00000047/uni00000025/uni0000000c
+/uni00000027/uni00000033/uni00000010/uni00000024/uni00000031/uni00000026
+/uni00000024/uni00000051/uni00000044/uni0000004f/uni0000005c/uni00000057/uni0000004c/uni00000046/uni00000044/uni0000004f/uni00000003/uni00000036/uni00000036/uni00000024/uni00000031/uni00000026
+= 0
+= 0.03
+= 0.1
+= 0.3
+= 1
+rf = 2
+rf = 100
+rf = 300
+rf = 1000
+rf = 50000
+Fig. 4. Cancellation–preservation operating frontiers over the 3300 evaluation
+cases. Each marker corresponds to a separately trained or configured operating
+point.
+TABLE III
+AVERAGE PERFORMANCE OVER3300EVALUATION CASES UNDER THE
+MAIN SIMULATED-ARRAY CONFIGURATION AT A PRE-CONTROLSNROF
+−10DB. VALUES ARE MEAN±STANDARD DEVIATION. THE ANALYTICAL
+SSANCROW USESr β =rf = 10 4.
+Method NR (dB)↑D des (dB)↓SNR out (dB)↑
+ANC off0.00±0.00–−10.00±0.01
+Conventional Wiener24.86±2.43−0.32±0.65−6.91±5.51
+Beamformer hear-through15.19±4.04 1.35±1.10 1.13±4.22
+Analytical SSANC18.28±3.64−19.14±4.12 7.94±3.55
+DP-ANC (λ= 0.1)22.82±2.68−11.41±3.67 12.52±3.36
+Table III complements the frontier comparison by reporting
+all three component metrics at representative fixed settings.
+
+9
+/uni00000013/uni00000014/uni00000013/uni00000015/uni00000013/uni00000016/uni00000013/uni00000017/uni00000018/uni00000019/uni00000013/uni0000001a/uni00000018/uni0000001c/uni00000013
+/uni00000024/uni00000051/uni0000004a/uni00000058/uni0000004f/uni00000044/uni00000055/uni00000003/uni00000056/uni00000048/uni00000053/uni00000044/uni00000055/uni00000044/uni00000057/uni0000004c/uni00000052/uni00000051/uni00000003/uni00000003/uni0000000b/uni00000047/uni00000048/uni0000004a/uni0000000c
+/uni00000018
+/uni00000014/uni00000013
+/uni00000014/uni00000018
+/uni00000015/uni00000013
+/uni00000015/uni00000018/uni00000031/uni00000052/uni0000004c/uni00000056/uni00000048/uni00000003/uni00000055/uni00000048/uni00000047/uni00000058/uni00000046/uni00000057/uni0000004c/uni00000052/uni00000051/uni00000003/uni0000000b/uni00000047/uni00000025/uni0000000c
+/uni0000000b/uni00000044/uni0000000c/uni00000003/uni00000031/uni00000052/uni0000004c/uni00000056/uni00000048/uni00000003/uni00000055/uni00000048/uni00000047/uni00000058/uni00000046/uni00000057/uni0000004c/uni00000052/uni00000051
+/uni00000013/uni00000014/uni00000013/uni00000015/uni00000013/uni00000016/uni00000013/uni00000017/uni00000018/uni00000019/uni00000013/uni0000001a/uni00000018/uni0000001c/uni00000013
+/uni00000024/uni00000051/uni0000004a/uni00000058/uni0000004f/uni00000044/uni00000055/uni00000003/uni00000056/uni00000048/uni00000053/uni00000044/uni00000055/uni00000044/uni00000057/uni0000004c/uni00000052/uni00000051/uni00000003/uni00000003/uni0000000b/uni00000047/uni00000048/uni0000004a/uni0000000c
+/uni00000015/uni00000013
+/uni00000014/uni00000018
+/uni00000014/uni00000013
+/uni00000018
+/uni00000013
+/uni00000027/uni00000048/uni00000056/uni0000004c/uni00000055/uni00000048/uni00000047/uni00000010/uni00000056/uni0000004c/uni0000004a/uni00000051/uni00000044/uni0000004f/uni00000003/uni00000047/uni0000004c/uni00000056/uni00000057/uni00000052/uni00000055/uni00000057/uni0000004c/uni00000052/uni00000051/uni0000000f/uni00000003Ddes/uni00000003/uni0000000b/uni00000047/uni00000025/uni0000000c
+ /uni0000000b/uni00000045/uni0000000c/uni00000003/uni00000027/uni00000048/uni00000056/uni0000004c/uni00000055/uni00000048/uni00000047/uni00000010/uni00000056/uni0000004c/uni0000004a/uni00000051/uni00000044/uni0000004f/uni00000003/uni00000047/uni0000004c/uni00000056/uni00000057/uni00000052/uni00000055/uni00000057/uni0000004c/uni00000052/uni00000051
+/uni00000027/uni00000033/uni00000010/uni00000024/uni00000031/uni00000026/uni00000003/uni0000000b= 0.1/uni0000000c
+/uni00000036/uni00000036/uni00000024/uni00000031/uni00000026/uni00000003/uni0000000brf = 1000/uni0000000c/uni00000027/uni00000033/uni00000010/uni00000024/uni00000031/uni00000026/uni00000003/uni0000000b= 1/uni0000000c
+/uni00000036/uni00000036/uni00000024/uni00000031/uni00000026/uni00000003/uni0000000brf = 10000/uni0000000c
+Fig. 5. Angular-resolution comparison of DP-ANC and analytical SSANC at two cancellation–preservation settings as desired–noise separation varies from
+0◦ to90 ◦. Each point averages 64 independent cases.
+The analytical SSANC setting is more preservation-oriented,
+with a meanD des approximately 8 dB lower than DP-ANC,
+whereas DP-ANC provides higher NR and the highest output
+SNR among all methods.
+As contextual endpoints, conventional Wiener ANC
+achieves the highest NR but itsD des near 0 dB indicates
+a desired-induced control response nearly as energetic as
+the desired component itself. Although the beamformer hear-
+through baseline achieves a desired-component correlation of
+0.96 after temporal alignment, it introduces approximately
+4.0 ms of delay, shifting the reproduced desired sound relative
+to its natural arrival time. The delayed reproduction may
+interfere with residual direct sound and introduce distortion.
+Figure 3 illustrates the desired and noise components before
+and after control for one example scene.
+B. Effect of the Preservation Weightλ
+Figure 4 shows that increasing the preservation weight
+reduces desired-signal distortion at the expense of noise re-
+duction. As the weight increases from 0 to 1, mean noise
+reduction decreases from 25.1 to 18.8 dB, while mean desired-
+signal distortion decreases from −2.2 to −20.1 dB. The weight
+therefore controls the balance between noise cancellation and
+desired-signal preservation across separately trained models.
+C. Angular Resolution and Directional Selectivity
+Using the array-separability analysis in Section IV-A as an
+interpretive reference, Fig. 5 compares DP-ANC and analytical
+SSANC as the desired–noise angular separation varies from
+0◦ to90 ◦. Two cancellation–preservation pairs are shown,
+comprising a moderate setting (λ= 0.1versusr f = 1000) and
+a preservation-oriented setting (λ= 1versusr f = 10,000).
+The parameters are selected so that each pair reaches similar
+Ddes levels at large separations.
+When the desired and noise directions coincide, their spatial
+responses are indistinguishable, so noise cancellation also
+affects the desired component. For the first pair of settings
+in Fig. 5, increasing the angular separation from0 ◦ to30 ◦
+improves both noise cancellation and desired-signal preserva-
+tion: DP-ANC noise reduction increases from 21.5 to 23.3 dB,
+while its desired-signal distortion decreases from −0.6 to
+−9.4 dB. Analytical SSANC follows a similar trend, and both
+methods approach their respective operating levels at larger
+separations.
+The full-azimuth experiment fixes the desired source and
+specified desired direction at0 ◦ and sweeps the noise source
+over 48 azimuths. Fig. 6 uses theλ= 0.1DP-ANC model
+trained separately for each microphone configuration. Because
+every azimuth is evaluated with a control-filter bank estimated
+for that noise direction, the figure is a directional-coverage
+map rather than a fixed-filter beampattern.
+For the simulated circular array, bandwise NR remains
+broadly high across azimuth, yielding 22.6 dB broadband
+overall NR. Preservation is more angle dependent. At the
+coincident0 ◦ direction,−D des is only about 1–3 dB across
+the displayed bands, whereas it increases after the two source
+directions separate, consistent with Fig. 5. The NR and−D des
+panels therefore show where cancellation remains available
+and whether that cancellation is separated from the desired-
+direction control response.
+Directional coverage alone does not show whether changing
+only the specified desired direction can exchange the roles
+assigned to sources in a fixed observation. Fig. 7 therefore
+holds the acoustic scene and mixed-reference observation fixed
+and sweeps only the specified desired direction.
+When the specified desired direction is aligned with either
+physical source direction, the aligned source achieves approx-
+imately −10 dBD des while the other source is attenuated
+by over 24 dB. The source-wise responses vary continuously
+as the specified direction sweeps between the two sources,
+demonstrating that the network redistributes cancellation and
+preservation according to the directional input.
+D. Validation on Measured Hearpiece Primary Paths
+The separately trained Hearpiece model maintains both
+noise cancellation and desired-signal preservation with a dif-
+
+10
+0 ∘
+45 ∘
+90 ∘
+135 ∘
+180 ∘
+225 ∘
+270 ∘
+315 ∘
+0
+10
+20
+30(a)
+Overall NR = 22.6 dB
+0 ∘
+45 ∘
+90 ∘
+135 ∘
+180 ∘
+225 ∘
+270 ∘
+315 ∘
+0
+10
+20
+30
+(b)
+Overall −Ddes = 9.6 dB
+0 ∘
+45 ∘
+90 ∘
+135 ∘
+180 ∘
+225 ∘
+270 ∘
+315 ∘
+0
+10
+20
+30(c)
+Overall NR = 16.6 dB
+0 ∘
+45 ∘
+90 ∘
+135 ∘
+180 ∘
+225 ∘
+270 ∘
+315 ∘
+0
+10
+20
+30
+(d)
+Overall −Ddes = 7.7 dB
+NR (dB) −Ddes (dB) NR (dB) −Ddes (dB)
+Simulated circular array Hearpiece database configuration
+200 Hz 500 Hz 1000 Hz 2000 Hz
+Fig. 6. Directional coverage of theλ= 0.1DP-ANC models for the simulated circular array (left pair) and Hearpiece configuration (right pair). The desired
+direction is fixed at0 ◦, while the noise source sweeps 48 azimuths. Each “Overall” value averages four independent broadband evaluations per azimuth, while
+bandwise curves use a three-point circular moving average.
+-180 -120 -60 0 60 120 180
+Specified desired direction, 3 d (deg)
+-15
+-10
+-5
+0
+Desired-signal distortion, Ddes (dB)
+0
+10
+20
+30
+Noise reduction (dB)
+Ddes, 0° source
+Ddes, 135° source
+NR, 0° source
+NR, 135° source
+Fig. 7. Sensitivity to the specified desired direction, averaged over 32
+fixed equal-power two-source scenes at0 ◦ and135 ◦. Within each scene,
+only the specified desired direction changes, while the acoustic scene and
+mixed observation remain fixed. Vertical dotted lines mark the physical source
+directions.
+ferent microphone configuration and measured primary re-
+sponses. As shown in Fig. 6(c) and (d), it achieves 16.6 dB
+broadband noise reduction with a desired-signal distortion
+of −7.7 dB. These results support the applicability of the
+proposed framework to measured acoustic paths and different
+microphone-array configurations.
+E. Computational Comparison
+Table IV compares the operation counts required to obtain
+one control-filter bank. DP-ANC requires 0.00946 GMACs,
+compared with approximately 29.4 GMACs for analytical
+SSANC. Both counts exclude the subsequent sample-by-
+sample FIR filtering.
+TABLE IV
+OPERATION COUNT REQUIRED TO OBTAIN ONE CONTROL-FILTER BANK.
+Method Operation count (GMACs)
+DP-ANC0.00946
+Analytical SSANC≈29.4
+F . Limitations
+The evaluation focuses on static scenes containing one de-
+sired source and one noise source. Extending the component-
+separated objective to multiple simultaneous sources is a
+natural next step. The main configuration is anechoic. The
+Hearpiece validation introduces measured primary responses.
+Reverberation, moving sources, path mismatch, and closed-
+loop hardware implementation remain for future work. The
+network currently operates on a 0.5 s observation block and is
+trained for a specific microphone geometry, motivating stream-
+ing updates and cross-device adaptation. Its near-direction
+behavior remains governed by the spatial separability of the
+reference array, as characterized in Fig. 5.
+VI. CONCLUSION
+This work developed a component-separated soft objective
+and a direction-conditioned control-filter estimation network
+for direction-preserving ANC. The network estimates the
+complete control-filter bank in a single forward pass while
+retaining the conventional feedforward ANC signal path. In
+the simulated evaluation, the proposed method achieved higher
+mean noise reduction than analytical SSANC at matched
+mean desired-signal distortion. The angular-resolution results
+show how reference-array spatial separability shapes the
+cancellation–preservation trade-off. Validation with a sepa-
+rately trained Hearpiece model further demonstrates that the
+same architecture can balance noise cancellation and desired-
+signal preservation under measured primary-path conditions.
+Future work will extend the component-separated objective
+to multi-source and time-varying scenes and develop streaming
+
+11
+updates and cross-device adaptation for continuously changing
+acoustic environments.
+ACKNOWLEDGMENT
+The authors would like to thank Dr. Tong Xiao for sharing
+the source code associated with his prior work on spatially
+selective active noise control.
+REFERENCES
+[1] S. J. Elliott and P. A. Nelson, “Active noise control,”IEEE Signal
+Process. Mag., vol. 10, no. 4, pp. 12–35, 1993.
+[2] S. M. Kuo and D. R. Morgan,Active Noise Control Systems: Algorithms
+and DSP Implementations. Hoboken, NJ, USA: Wiley, 1996.
+[3] Y . Kajikawa, W.-S. Gan, and S. M. Kuo, “Recent advances on active
+noise control: Open issues and innovative applications,”APSIPA Trans.
+Signal Inf. Process., vol. 1, Art. no. e3, 2012.
+[4] W. Zhang, C. Hofmann, M. Buerger, T. D. Abhayapala, and W. Keller-
+mann, “Spatial noise-field control with online secondary path modeling:
+A wave-domain approach,”IEEE/ACM Trans. Audio, Speech, Lang.
+Process., vol. 26, no. 12, pp. 2355–2370, 2018.
+[5] J. C. Burgess, “Active adaptive sound control in a duct: A computer
+simulation,”J. Acoust. Soc. Amer., vol. 70, no. 3, pp. 715–726, 1981.
+[6] S. J. Elliott, I. M. Stothers, and P. A. Nelson, “A multiple error
+LMS algorithm and its application to the active control of sound and
+vibration,”IEEE Trans. Acoust., Speech, Signal Process., vol. 35, no. 10,
+pp. 1423–1434, 1987.
+[7] D. R. Morgan, “History, applications, and subsequent development of the
+FXLMS algorithm [DSP history],”IEEE Signal Process. Mag., vol. 30,
+no. 3, pp. 172–176, 2013.
+[8] Y . Zhou, H. Zhao, D. Liu, and H. Zhang, “Adaptive narrowband active
+noise control trained by genetic algorithm,”IEEE Trans. Instrum. Meas.,
+vol. 73, Art. no. 2520511, 2024.
+[9] S. Lian, T. Li, S. Sun, S. Wang, and J. Lu, “A computational-efficient
+adaptive algorithm based on frequency point selection in multichannel
+active noise control systems,”Mech. Syst. Signal Process., vol. 238, Art.
+no. 113176, 2025.
+[10] B. Rafaely and M. Jones, “Combined feedback–feedforward active
+noise-reducing headset—the effect of the acoustics on broadband per-
+formance,”J. Acoust. Soc. Amer., vol. 112, no. 3, pp. 981–989, 2002.
+[11] L. Zhang and X. Qiu, “Causality study on a feedforward active noise
+control headset with different noise coming directions in free field,”
+Appl. Acoust., vol. 80, pp. 36–44, 2014.
+[12] V . Patel, J. Cheer, and S. Fontana, “Design and implementation of an
+active noise control headphone with directional hear-through capability,”
+IEEE Trans. Consum. Electron., vol. 66, no. 1, pp. 32–40, 2020.
+[13] H. Zhang, J. Zhang, F. Ma, P. N. Samarasinghe, and H. Sun, “A time-
+domain multi-channel directional active noise control system,” inProc.
+Eur. Signal Process. Conf. (EUSIPCO), 2023, pp. 376–380.
+[14] T. Xiao, B. Xu, and C. Zhao, “Spatially selective active noise control
+systems,”J. Acoust. Soc. Amer., vol. 153, no. 5, pp. 2733–2744, 2023.
+[15] D. Dalga and S. Doclo, “Combined feedforward–feedback noise reduc-
+tion schemes for open-fitting hearing aids,” inProc. IEEE Workshop
+Appl. Signal Process. Audio Acoust. (WASPAA), 2011, pp. 185–188.
+[16] R. Serizel, M. Moonen, J. Wouters, and S. H. Jensen, “Binaural
+integrated active noise control and noise reduction in hearing aids,”IEEE
+Trans. Audio, Speech, Lang. Process., vol. 21, no. 5, pp. 1113–1123,
+2013.
+[17] S. Doclo, W. Kellermann, S. Makino, and S. Nordholm, “Multichannel
+signal enhancement algorithms for assisted listening devices: Exploiting
+spatial diversity using multiple microphones,”IEEE Signal Process.
+Mag., vol. 32, no. 2, pp. 18–30, 2015.
+[18] T. Van den Bogaert, S. Doclo, J. Wouters, and M. Moonen, “Speech
+enhancement with multichannel wiener filter techniques in multimicro-
+phone binaural hearing aids,”J. Acoust. Soc. Amer., vol. 125, no. 1, pp.
+360–371, 2009.
+[19] B. Cornelis, S. Doclo, T. Van den Bogaert, M. Moonen, and J. Wouters,
+“Theoretical analysis of binaural multimicrophone noise reduction tech-
+niques,”IEEE Trans. Audio, Speech, Lang. Process., vol. 18, no. 2, pp.
+342–355, 2010.
+[20] T. Xiao and S. Doclo, “Effect of target signals and delays on spatially
+selective active noise control for open-fitting hearables,” inProc. IEEE
+Int. Conf. Acoust., Speech Signal Process. (ICASSP), 2024, pp. 1056–
+1060.
+[21] T. Xiao, R. Roden, M. Blau, and S. Doclo, “Soft-constrained spatially
+selective active noise control for open-fitting hearables,” inProc. IEEE
+Workshop Appl. Signal Process. Audio Acoust. (WASPAA), 2025, pp.
+1–5.
+[22] T. Xiao and S. Doclo, “Spatially selective active noise control for
+open-fitting hearables with acausal optimization,” inProc. Forum Acus-
+ticum/Euronoise, 2025, pp. 117–124.
+[23] H. Lee and Y . Park, “Control filter estimation for multichannel active
+noise control using kronecker product decomposition,”IET Signal
+Process., vol. 2025, Art. no. 2128989, 2025.
+[24] L. Li, S. Wang, S. S. Bhattacharjee, J. R. Jensen, and M. G. Christensen,
+“Nearest kronecker product decomposition based multichannel filtered-x
+affine projection algorithm for active noise control,”Mech. Syst. Signal
+Process., vol. 224, Art. no. 112055, 2025.
+[25] H. Zhang and D. Wang, “Deep anc: A deep learning approach to active
+noise control,”Neural Netw., vol. 141, pp. 1–10, 2021.
+[26] ——, “Deep mcanc: A deep learning approach to multi-channel active
+noise control,”Neural Netw., vol. 158, pp. 318–327, 2023.
+[27] L. Bai, S. Lian, M. Li, Y . He, L. Rao, X. Zeng, R. Sun, K. Chen, and
+J. Lu, “Wavenet-volterra neural network for active noise control: A fully
+causal approach,”Mech. Syst. Signal Process., vol. 241, Art. no. 113486,
+2025.
+[28] D. Shi, W.-S. Gan, B. Lam, and S. Wen, “Feedforward selective fixed-
+filter active noise control: Algorithm and implementation,”IEEE/ACM
+Trans. Audio, Speech, Lang. Process., vol. 28, pp. 1479–1492, 2020.
+[29] L. Yin, Z. Zhang, M. Wu, S. Zhou, J. Guo, J. Yang, and J. Zhang,
+“Selective fixed-filter active noise control based on frequency response
+matching in headphones,”Appl. Acoust., vol. 211, Art. no. 109505, 2023.
+[30] Z. Luo, D. Shi, J. Ji, X. Shen, and W.-S. Gan, “Real-time implementation
+and explainable ai analysis of delayless cnn-based selective fixed-filter
+active noise control,”Mech. Syst. Signal Process., vol. 214, Art. no.
+111364, 2024.
+[31] B. Wang, Z. Luo, H. Li, D. Shi, J. Ji, Z. Yang, and W.-S. Gan,
+“Directional selective fixed-filter active noise control based on a convolu-
+tional neural network in reverberant environments,” inProc. Asia-Pacific
+Signal Inf. Process. Assoc. Annu. Summit Conf. (APSIPA ASC), 2025,
+pp. 364–369.
+[32] X. Shen, D. Shi, W.-S. Gan, and S. Peksi, “Adaptive-gain algorithm on
+the fixed filters applied for active noise control headphone,”Mech. Syst.
+Signal Process., vol. 169, Art. no. 108641, 2022.
+[33] Z. Luo, D. Shi, X. Shen, J. Ji, and W.-S. Gan, “Deep generative fixed-
+filter active noise control,” inProc. IEEE Int. Conf. Acoust., Speech
+Signal Process. (ICASSP), 2023, pp. 1–5.
+[34] B. Wang, H. Li, D. Shi, J. Ji, Z. Yang, Z. Luo, and W.-S. Gan, “Spatial-
+frequency cued generative fixed-filter active noise control based on deep
+learning in reverberant environments,”Signal Process., vol. 247, Art. no.
+110682, 2026.
+[35] Z. Luo, H. Ma, B. Wang, Z. Yang, D. Shi, and W.-S. Gan, “A stabilized
+hybrid active noise control algorithm of GFANC and FxNLMS with
+online clustering,” inProc. IEEE Int. Conf. Acoust., Speech Signal
+Process. (ICASSP), 2026, pp. 14 912–14 916.
+[36] Z. Yang, L. Rao, Z. Luo, D. Shi, Q. Huang, and W.-S. Gan, “Co-
+initialization of control filter and secondary path via meta-learning for
+active noise control,” inProc. IEEE Int. Conf. Acoust., Speech Signal
+Process. (ICASSP), 2026, pp. 15 297–15 301.
+[37] A. Aboutiman, K. S. A. Maamoun, H. R. Karimi, and F. Ripamonti,
+“Hybrid deep learning–based active noise control for encapsulated
+structures with openings,”Expert Syst. Appl., vol. 309, Art. no. 131247,
+2026.
+[38] Fareedha, Vasundhara, A. Kar, and M. G. Christensen, “Joint deep
+secondary path estimation and adaptive control for active noise can-
+cellation,” inProc. IEEE Int. Conf. Acoust., Speech Signal Process.
+(ICASSP), 2026, pp. 15 177–15 181.
+[39] E. Perez, F. Strub, H. de Vries, V . Dumoulin, and A. Courville, “FiLM:
+Visual reasoning with a general conditioning layer,” inProc. AAAI Conf.
+Artif. Intell., vol. 32, no. 1, 2018, pp. 3942–3951.
+[40] K. Yuan, F. Y . Liu, T. Xiao, Y . Song, C. Shen, S. Bhutani, J. Chan, and
+S. Kumar, “Active noise cancellation on open-ear smart glasses,”arXiv
+preprint arXiv:2604.05519, 2026.
+[41] F. Denk and B. Kollmeier, “The hearpiece database of individual transfer
+functions of an in-the-ear earpiece for hearing device research,”Acta
+Acust., vol. 5, Art. no. 2, 2021.
+[42] S. J. Elliott,Signal Processing for Active Control. San Diego, CA,
+USA: Academic Press, 2000.
+[43] A. Spriet, M. Moonen, and J. Wouters, “Spatially pre-processed speech
+distortion weighted multi-channel wiener filtering for noise reduction,”
+Signal Process., vol. 84, no. 12, pp. 2367–2387, 2004.
+
+12
+[44] S. Doclo and M. Moonen, “On the output SNR of the speech-distortion
+weighted multichannel wiener filter,”IEEE Signal Process. Lett., vol. 12,
+no. 12, pp. 809–811, 2005.
+[45] S. Doclo, A. Spriet, J. Wouters, and M. Moonen, “Frequency-domain
+criterion for the speech distortion weighted multichannel wiener filter
+for robust noise reduction,”Speech Commun., vol. 49, no. 7–8, pp. 636–
+656, 2007.
+[46] A. M. Torres, M. Cobos, B. Pueo, and J. J. Lopez, “Robust acoustic
+source localization based on modal beamforming and time-frequency
+processing using circular microphone arrays,”J. Acoust. Soc. Amer.,
+vol. 132, no. 3, pp. 1511–1520, 2012.
+[47] E. Tiana-Roig, F. Jacobsen, and E. Fern ´andez Grande, “Beamforming
+with a circular microphone array for localization of environmental noise
+sources,”J. Acoust. Soc. Amer., vol. 128, no. 6, pp. 3535–3542, 2010.
+[48] T. I. Laakso, V . V ¨alim¨aki, M. Karjalainen, and U. K. Laine, “Splitting
+the unit delay: Tools for fractional delay filter design,”IEEE Signal
+Process. Mag., vol. 13, no. 1, pp. 30–60, 1996.
+[49] J. Salamon, C. Jacoby, and J. P. Bello, “A dataset and taxonomy for
+urban sound research,” inProc. 22nd ACM Int. Conf. Multimedia, 2014,
+pp. 1041–1044.
+[50] I. Loshchilov and F. Hutter, “Decoupled weight decay regularization,”
+inProc. Int. Conf. Learn. Represent. (ICLR), 2019.
+[51] E. Fonseca, X. Favory, J. Pons, F. Font, and X. Serra, “FSD50K: An
+open dataset of human-labeled sound events,”IEEE/ACM Trans. Audio,
+Speech, Lang. Process., vol. 30, pp. 829–852, 2022.
+[52] V . Panayotov, G. Chen, D. Povey, and S. Khudanpur, “LibriSpeech: An
+ASR corpus based on public domain audio books,” inProc. IEEE Int.
+Conf. Acoust., Speech Signal Process. (ICASSP), 2015, pp. 5206–5210.

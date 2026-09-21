@@ -12,6 +12,7 @@ sources:
   - raw/papers/bai-2026-feedback-guided-anc/full-text.md
   - raw/papers/he-2026-neural-projection-filter-anc/full-text.md
   - raw/papers/veluri-2023-semantic-hearing/full-text.md
+  - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
 ---
 # AI-Driven Active Noise Control
 
@@ -65,6 +66,10 @@ A fifth architectural pattern: **neural processing of the reference path** rathe
 
 A sixth architectural pattern — the network occupies neither the control path (2.1–2.4, 2.5) nor the reference path (2.6) but the **playback path**. [[concepts/semantic-hearing|Semantic hearing]] (Veluri et al. 2023) exploits commercial ANC headphones (Sony WH-1000XM4) as an "acoustic clean slate" that attenuates *all* external sound, then reintroduces only user-selected sound classes: a binaural [[concepts/target-sound-extraction|target sound extraction]] network (modified [[concepts/waveformer|Waveformer]], jointly processing both ears, 0.52 M params) extracts the chosen classes from the binaural microphones in **6.56 ms per 10 ms chunk** on a smartphone while preserving [[concepts/interaural-time-difference|ITD]]/[[concepts/interaural-level-difference|ILD]] spatial cues. This decouples the neural stage from the ANC loop: an end-to-end experiment showed the semantic-hearing playback coexisting with adaptive feedforward ANC, though residual-noise-aware playback adaptation (feeding the ANC residual back into the extraction) remains open — and would tighten the latency budget further.
 
+### 2.8 Direction-Conditioned Filter Generation with Preservation (Yang 2026)
+
+A seventh architectural pattern: **direction-conditioned generation of the complete control-filter bank with an explicit preservation objective**. [[concepts/direction-preserving-anc|DP-ANC]] (Yang et al. 2026) generates all $K \times L_w$ FIR coefficients in one forward pass from a 0.5 s mixed-reference observation *plus the user-specified desired direction* (injected via FiLM into every conv block), and is trained through a differentiable secondary-path-aware forward model on a component-separated loss — residual noise + $\lambda$-weighted desired-induced control response. This adds a third comparison axis to Sections 2.5–2.6: **what the control objective preserves** — none of the earlier patterns (SFANC, GFANC, Deep ANC, DeepSPE, Bai 2026, CAPF) train with a preservation term; DP-ANC is the first filter-estimation network to do so, dominating the analytical SSANC frontier by 0.7–3.1 dB NR at matched distortion at ≈1/3000 of the per-observation compute.
+
 ---
 
 ## 3. The Efficiency Frontier: Real-Time Implementation
@@ -80,6 +85,7 @@ The primary hurdle for AI-driven ANC is the computational cost of deep networks 
 | **Feedback-guided MoE fusion** (Bai 2026) | Moderate (672.83 MMac/s, 28.57k params) | Robust to acoustic-path mismatch; no online adaptation; 19 dB avg NR (50 Hz–5 kHz) | Headphones |
 | **Neural reference projection** (He 2026) | Moderate (374.0 MMAC/s, 500k params) | Compresses 42 correlated references to 4; keeps adaptive back end; +2.6 dBA over FDFxNLMS | Automotive road noise |
 | **Semantic hearing** (Veluri 2023) | Moderate (240 MFLOPS, 0.52M params, 6.56 ms/chunk on smartphone) | Reintroduces user-selected sound classes on top of the ANC clean slate, preserving spatial cues | ANC headphones + phone |
+| **Direction-conditioned filter generation** (Yang 2026) | Low per estimate (0.00946 GMACs/filter bank, 956k params, 0.5 s block) | Cancels non-desired directions while preserving desired-direction sound; 22.8 dB NR at −11.4 dB desired-response distortion | Hearables / in-ear devices |
 
 ### 3.1 Neural Stability and Robustness
 Recent research focuses on using RNNs as "stability observers." By predicting the innovative whiteness of the error signal, the network can dynamically adjust the step-size of a traditional FxLMS filter, preventing divergence during impulsive events without the full overhead of an end-to-end neural controller.
@@ -110,3 +116,4 @@ Recent research focuses on using RNNs as "stability observers." By predicting th
 - [[sources/jiang-2025-ai-driven-avnc-review|Jiang et al. 2025: AI-Driven AVNC Review]] — comprehensive review classifying AI-AVNC into four technical paths
 - [[sources/he-2026-neural-projection-filter-anc|He et al. 2026: Neural Projection Filter Generation for Multi-Reference ANC]] — neural reference-projection front end (CAPF) with conventional adaptive back end
 - [[sources/veluri-2023-semantic-hearing|Veluri et al. 2023: Semantic Hearing]] — sixth pattern: neural processing on the playback path (ANC clean slate + class-selective binaural reinsertion)
+- [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC with a Conditional Control-Filter Estimation Network]] — direction-conditioned full-bank generation with cancellation–preservation objective

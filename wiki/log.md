@@ -5485,11 +5485,22 @@ Chinese-language review (Journal of Signal Processing 36(6): 804-815) unifying s
 > **Operations**: `ingest`, `query`, `lint`
 
 ---
----
 
 ## [2026-09-20] ingest | Directivity-Conditioned Low-Latency Neural Filtering for Speech Enhancement in Hearing Aids (Uphaus et al. 2026)
 
 Extracted from arXiv HTML to raw/papers/uphaus-2026-directivity-low-latency/ (full text + 3 figures). Created source page, entities (lennart-uphaus, andre-merboldt, markus-hofbauer), and concepts (film-osn, ipd-preservation-loss). Updated entity timo-gerkmann; concepts neural-directional-filtering, joint-nonlinear-filtering, film-layer, mamba, directivity-pattern, audio-latency; synthesis pages joint-multitask-ultra-low-latency-se, multi-channel-speech-enhancement, deep-speech-enhancement. Key findings: FiLM-OSN achieves 10 ms-latency steerable binaural NDF via FiLM-conditioned OSN with Mamba narrow-band blocks (700k params); IPD preservation loss is essential for realizing the conditioned directivity pattern.
+
+---
+
+## [2026-09-21] ingest | Direction-Preserving ANC with a Conditional Control-Filter Estimation Network (Yang et al. 2026)
+
+- **Source**: `raw/papers/yang-2026-direction-preserving-anc/full-text.txt` (Zotero: B4CII6T4; arXiv 2609.07173, MinerU failed twice → pypdf fallback, no figures)
+- **Authors**: Ziyi Yang, Zhengding Luo (corresponding), Boxiang Wang, Libin Zhang, Woon-Seng Gan
+- **Published**: arXiv preprint (eess.AS), 7 Sep 2026
+- **DOI**: arXiv:2609.07173
+- **Summary**: Formulates direction-preserving ANC (DP-ANC) as a direction-conditioned cancellation–preservation optimization (L_NR + λ·L_PR on separated noise/desired components); a FiLM-conditioned CNN (956k params) estimates the complete multichannel FIR control-filter bank from a 0.5 s mixed observation + desired direction in one forward pass (0.00946 GMACs vs ≈29.4 for the analytical SSANC solve). Over 3300 cases: 22.8 dB NR, −11.4 dB desired-response distortion; Hearpiece/KEMAR validation 16.6 dB NR, −7.7 dB.
+- **Pages created**: `wiki/sources/yang-2026-direction-preserving-anc.md`, `wiki/concepts/direction-preserving-anc.md`, `wiki/entities/libin-zhang.md`
+- **Pages updated**: `wiki/concepts/spatially-selective-anc.md` (learned DP-ANC section + frontier comparison), `wiki/concepts/film-layer.md` (direction-conditioned filter estimation application), `wiki/concepts/generative-fixed-filter-anc.md` (full-bank generation pattern), `wiki/concepts/end-to-end-differentiable-anc.md` (component-separated objective + independent-realization training), `wiki/concepts/active-noise-control.md` (DP-ANC bullet), `wiki/concepts/feedforward-anc.md` (DOA-selective extension), `wiki/synthesis/ai-driven-anc.md` (Section 2.7 sixth architectural pattern + efficiency-frontier row), entity pages for ziyi-yang, zhengding-luo, boxiang-wang, woon-seng-gan, and both levels of index files
 
 ---
 
@@ -5538,3 +5549,5 @@ Ingested the IEEE Signal Processing Magazine overview article contrasting **mode
 - **Summary**: Low-Frequency Harmonic Control (LFHC) — a low-complexity post-filter (single-tap FIR comb filter, τ = τ0/2.5, plus moving-average LPF with Fc = 5f0 and group-delay compensation) that suppresses the speech fundamental and emphasizes the 2nd/3rd harmonics, improving open-ear headphone playback intelligibility in noise without volume increase; α = 0.6 improved 3/6 utterances at −5 dB(A) SNR, with benefit correlating −0.93 with the pre-processing low-order-harmonic energy ratio.
 - **Pages created**: `wiki/sources/watanabe-2026-low-frequency-harmonic-control.md`, `wiki/concepts/low-frequency-harmonic-control.md`, `wiki/concepts/open-ear-headphones.md`, `wiki/entities/yuki-watanabe.md`, `wiki/entities/hironobu-chiba.md`, `wiki/entities/yutaka-kamamoto.md`, `wiki/entities/tatsuya-kako.md`
 - **Pages updated**: `wiki/concepts/hearables.md` (open-ear playback intelligibility application), `wiki/concepts/psychoacoustic-postfilter.md` (masking-aware counterpart relation), `wiki/synthesis/application-specific-anc.md` (signal-side alternative in open-ear section), `wiki/synthesis/modern-headphone-anc-systems.md` (§5.1 signal-adaptation bullet)
+
+---

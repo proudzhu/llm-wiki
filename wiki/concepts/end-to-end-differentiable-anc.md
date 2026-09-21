@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-04
-updated: 2026-09-12
+updated: 2026-09-21
 sources:
   - raw/papers/yang-2026-transformer-e2e-cfg-anc/full-text.md
   - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
+  - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
 tags:
   - active-noise-control
   - deep-learning
@@ -51,9 +52,13 @@ CNN co-processor generates combination weights for sub-filter recombination with
 ### E2E-CFG (Yang et al. 2026)
 Transformer co-processor directly generates full control-filter coefficients within a differentiable ANC system, removing the decomposition-recombination stage.
 
+### DP-ANC (Yang et al. 2026)
+[[concepts/direction-preserving-anc|DP-ANC]] extends the differentiable-forward-model recipe to a **component-separated objective**: a secondary-path-aware forward model applies the estimated filter bank separately to noise and desired-component matrices, so the loss $\mathcal{L}_{\mathrm{NR}} + \lambda\mathcal{L}_{\mathrm{PR}}$ penalizes residual noise *and* the desired-induced control response, with gradients flowing through both. Training additionally uses **independent signal realizations** — filters estimated from realization A are scored on realization B (same directions/paths, new waveforms) — a generalization guard not present in single-realization E2E-CFG.
+
 ## Related Concepts
 
 - [[concepts/generative-fixed-filter-anc|Generative Fixed-Filter ANC]] — GFANC methods using this training paradigm
+- [[concepts/direction-preserving-anc|Direction-Preserving ANC (DP-ANC)]] — component-separated cancellation–preservation objective trained through a secondary-path-aware forward model
 - [[concepts/active-noise-control|Active Noise Control]] — parent domain
 - [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] — traditional adaptive alternative
 
@@ -62,4 +67,5 @@ Transformer co-processor directly generates full control-filter coefficients wit
 - [[sources/yang-2026-transformer-e2e-cfg-anc|Yang 2026: Transformer-based E2E-CFG for ANC]] — direct filter generation in differentiable ANC
 - [[sources/luo-2026-hybrid-gfanc-fxnlms|Luo 2026: Hybrid GFANC-FxNLMS]] — unsupervised GFANC with differentiable training
 - [[sources/jiang-2025-ai-driven-avnc-review|Jiang, Xue, Yue et al. 2025: AI-Driven Active Vibration and Noise Control Review]]
+- [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC]] — component-separated objective with independent-signal training through a secondary-path-aware forward model
 

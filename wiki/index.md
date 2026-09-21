@@ -618,6 +618,7 @@
 | [[entities/hironobu-chiba\|Hironobu Chiba]] | NTT researcher; pitch-adaptive post-filtering for CELP coders (2014); co-author of LFHC (ICASSP 2026) | 2026-09-27 |
 | [[entities/yutaka-kamamoto\|Yutaka Kamamoto]] | NTT researcher; speech coding and post-filtering; co-author of LFHC (ICASSP 2026) | 2026-09-27 |
 | [[entities/tatsuya-kako\|Tatsuya Kako]] | NTT researcher; speech and audio processing for wearable devices; co-author of LFHC (ICASSP 2026) | 2026-09-27 |
+| [[entities/libin-zhang\|Libin Zhang]] | Researcher; co-author of DP-ANC (Yang et al. 2026) | 2026-09-21 |
 
 ---
 
@@ -1177,6 +1178,7 @@
 | [[concepts/hearables\|Hearables]] | Ear-worn audio devices with sensing and computation; 20-50 ms latency budget, on-device binaural processing constraints. | 2026-09-27 |
 | [[concepts/low-frequency-harmonic-control\|Low-Frequency Harmonic Control (LFHC)]] | Low-complexity post-filter suppressing f0 and emphasizing 2nd/3rd harmonics to improve open-ear playback intelligibility (Watanabe 2026) | 2026-09-27 |
 | [[concepts/open-ear-headphones\|Open-Ear Headphones]] | Unoccluded wearable audio: high acoustic transparency but weak low-frequency output and free noise ingress; intelligibility challenges and remedies | 2026-09-27 |
+| [[concepts/direction-preserving-anc\|Direction-Preserving ANC (DP-ANC)]] | ANC that attenuates noise from non-desired directions while preserving sound naturally arriving from a specified desired direction; component-separated cancellation-preservation objective with FiLM-conditioned filter estimation | 2026-09-21 |
 
 ---
 
@@ -1418,6 +1420,7 @@
 | [[sources/haeb-umbach-2024-microphone-array-deep-learning\|Haeb-Umbach, Nakatani, Delcroix, Boeddeker & Ochiai 2024]] | This magazine article contrasts model-based, data-driven, and hybrid approaches to multichannel speech enhancement — noise reduction, source separation, and dereverberation with compact microphone arrays — with the beamforming pipeline as its running example. | 2026-09-26 |
 | [[sources/veluri-2023-semantic-hearing\|Veluri, Itani, Chan, Yoshioka & Gollakota 2023]] | This paper introduces semantic hearing, a new capability for hearable devices that lets users programmatically attend to or block specific real-world sound classes in real time (e.g., hear bird chirps but block street chatter) while preserving the spatial cues of the kept sounds. | 2026-09-27 |
 | [[sources/watanabe-2026-low-frequency-harmonic-control\|Watanabe, Chiba, Kamamoto & Kako 2026]] | This paper presents Low-Frequency Harmonic Control (LFHC), a low-complexity post-filter that improves the intelligibility of speech played back through open-ear headphones in noisy environments without amplifying volume. | 2026-09-27 |
+| [[sources/yang-2026-direction-preserving-anc\|Yang, Luo, Wang, Zhang & Gan 2026: Direction-Preserving ANC with a Conditional Control-Filter Estimation Network]] | DP-ANC as direction-conditioned cancellation-preservation optimization; FiLM-conditioned network estimates full FIR control-filter bank in one forward pass (22.8 dB NR, -11.4 dB distortion, ~3000x cheaper than analytical SSANC) | 2026-09-21 |
 
 ---
 
@@ -1471,10 +1474,10 @@
 
 ## Statistics
 
-- **Total pages**: 1420
-- **Entities**: 608
-- **Concepts**: 550
-- **Sources**: 232
+- **Total pages**: 1423
+- **Entities**: 609
+- **Concepts**: 551
+- **Sources**: 233
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-27
+- **Last updated**: 2026-09-28

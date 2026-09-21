@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-09-07
+updated: 2026-09-21
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
+  - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
 tags:
 - active-noise-control
 - signal-processing
@@ -51,7 +52,7 @@ Feedforward ANC is inherently dependent on the direction of arrival (DOA) of the
 - **200 Hz – 1 kHz**: Moderate variability (1–2 dB magnitude, 10–20° phase for 50% of directions)
 - **Above 1 kHz**: Severe variability with resonance effects → feedforward ANC highly DOA-dependent
 
-This motivates [[hybrid-anc|Hybrid ANC]] architectures where the [[feedback-anc|Feedback ANC]] component (DOA-independent) compensates for feedforward degradation at non-nominal DOAs. It also motivates direction-selective approaches such as SFANC/GFANC.
+This motivates [[hybrid-anc|Hybrid ANC]] architectures where the [[feedback-anc|Feedback ANC]] component (DOA-independent) compensates for feedforward degradation at non-nominal DOAs. It also motivates direction-selective approaches such as SFANC/GFANC, and [[concepts/direction-preserving-anc|DP-ANC]] (Yang et al. 2026), which keeps the feedforward signal path but estimates its control-filter bank from direction information — attenuating noise from non-desired directions while leaving desired-direction sound naturally intact.
 
 ## Hearing-Aid Feedforward ANC
 
@@ -89,3 +90,4 @@ Open-fitting hearing aids apply feedforward ANC to cancel the noise component of
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method for Feedforward ANC]]
 - [[sources/ma-2027-robust-ffanc-online-path-modeling|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] — extends the basic FFANC of Kuo 1999 with simultaneous online SP/FBP modeling and a second supporting filter, achieving near-ideal-benchmark NRP under time-varying paths
+- [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC]] — retains the feedforward control path while a network estimates its filter bank conditioned on the desired direction

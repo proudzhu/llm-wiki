@@ -9,6 +9,7 @@ sources:
   - raw/papers/bai-2026-feedback-guided-anc/full-text.md
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
   - raw/papers/veluri-2023-semantic-hearing/full-text.md
+  - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
 aliases:
 - Active Noise Control
 tags:
@@ -59,6 +60,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - **[[concepts/physics-informed-neural-network|PINN]]-assisted ANC** (Zhang 2024): A PINN interpolates the soundfield at virtual microphone positions from monitoring microphones placed outside the ROI, using the acoustic wave equation as a PDE residual loss. The interpolated signals drive a multi-channel FxLMS controller, achieving better noise reduction at the ear than a conventional multiple-point ANC system.
 - **E2E-CFG**: End-to-End Control-Filter Generation directly generates control filters via Transformer co-processor in a differentiable ANC system, trained unsupervised on residual error
 - **[[concepts/semantic-hearing|Semantic hearing]]** (Veluri et al. 2023): inverts the ANC paradigm — modern noise-canceling headsets (e.g., Sony WH-1000XM4) provide an "acoustic clean slate" by attenuating *all* external sounds, and a real-time binaural target-sound-extraction network reintroduces only user-chosen sound classes while preserving their spatial cues. An end-to-end experiment showed the semantic-hearing playback coexisting with adaptive feedforward ANC; residual-noise-aware playback adaptation remains open.
+- **[[direction-preserving-anc|DP-ANC]]** (Yang 2026): Direction-conditioned network estimates the full multichannel FIR control-filter bank in one forward pass (FiLM-conditioned, differentiable secondary-path-aware training), cancelling noise from non-desired directions while preserving desired-direction sound naturally — 22.8 dB NR at −11.4 dB desired-response distortion over 3300 cases, ≈3000× cheaper per filter bank than the analytical SSANC solve
 
 ### Performance Comparison (Dai 2026, RT60=0.3s)
 
@@ -131,6 +133,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] — ANC integrated with noise reduction for open-fitting hearing aids; see also [[concepts/filtered-x-mwf|Filtered-x MWF]] and [[concepts/open-fitting-noise-leakage|Open-Fitting Noise Leakage]]
 - [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] — multichannel feedforward ANC with ReTM-based feedback subtraction ahead of a normalized frequency-domain FxLMS controller
 - [[sources/veluri-2023-semantic-hearing|Veluri et al. 2023: Semantic Hearing]] — uses ANC as an acoustic clean slate and reintroduces user-selected sound classes in real time; demonstrates coexistence with adaptive feedforward ANC on commercial headphones
+- [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC with a Conditional Control-Filter Estimation Network]] — FiLM-conditioned network estimates the full control-filter bank; cancels non-desired directions while preserving desired-direction sound
 
 ## Related Entities
 

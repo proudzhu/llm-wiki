@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-09-12
+updated: 2026-09-21
 sources:
   - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
   - raw/papers/hu-2026-abse-net/full-text.md
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
+  - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
 tags:
   - active-noise-control
   - hearables
@@ -64,6 +65,10 @@ balancing noise reduction against speech distortion via a positive scalar $\beta
 
 SSANC is closer in spirit to combining beamforming and ANC than to spectral methods: the **objective itself** encodes the desired spatial response.
 
+## Learned Alternative: DP-ANC (Yang 2026)
+
+[[concepts/direction-preserving-anc|DP-ANC]] (Yang et al. 2026) replaces the per-observation analytical solve with an offline-trained, direction-conditioned network that estimates the complete FIR control-filter bank in a single forward pass. Two formulation differences are notable: (i) the preservation term penalizes the **desired-induced control response** $\tilde{\mathbf{X}}_d\mathbf{w}$ itself, rather than deviation from a prescribed desired-direction response (no ReIR model or target delay); (ii) the cancellation and preservation terms are built from **separated noise/desired components** at the error microphone, evaluated through the secondary path during differentiable training. Over 3300 simulated cases, the learned frontier dominates the analytical SSANC frontier by 0.7–3.1 dB NR at matched mean distortion, with one filter-bank estimate costing 0.00946 vs ≈29.4 GMACs — though the analytical setting reaches lower absolute distortion at its most preservation-oriented operating points. Both designs share the same physical limit: the achievable cancellation–preservation region is bounded by the reference array's spatial separability (manifold coherence).
+
 ## Relation to Active Binaural Speech Enhancement
 
 A closely related but distinct line targets **open-fit hearing aids**, where the vent that relieves the [[concepts/ear-canal-occlusion-effect|occlusion effect]] also lets noise leak into the ear canal. There the enemy is not non-target *directions* but the leakage component $d_L$ itself, and the objective is to preserve the target's binaural cues (ILD/IPD) while cancelling leakage. [[concepts/abse-net|ABSE-NET]] (Hu et al. 2026) represents the neural, error-microphone-free variant of this idea: a binaural MVDR front-end followed by a lightweight network that synthesizes the anti-leakage signal, achieving the best spatial-cue preservation ($\Delta$ILD 3.047) among compared methods while remaining robust to 15° DOA/ATF mismatch.
@@ -96,6 +101,7 @@ A closely related but distinct line targets **open-fit hearing aids**, where the
 - [[concepts/spatially-selective-nonlinear-filter|Spatially Selective Non-Linear Filter (SSF)]]
 - [[concepts/active-binaural-speech-enhancement|Active Binaural Speech Enhancement]]
 - [[concepts/abse-net|ABSE-NET]]
+- [[concepts/direction-preserving-anc|Direction-Preserving ANC (DP-ANC)]]
 
 ## Related Sources
 
@@ -103,4 +109,5 @@ A closely related but distinct line targets **open-fit hearing aids**, where the
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
 - [[sources/hu-2026-abse-net|Hu et al. 2026: ABSE-NET — Active Binaural Speech Enhancement for Open-Fit Hearing Aids]]
 - [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]]
+- [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC with a Conditional Control-Filter Estimation Network]] — learned frontier comparison against analytical SSANC
 

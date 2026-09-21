@@ -14,6 +14,7 @@ sources:
   - raw/papers/toyooka-2026-hybrid-anc-virtual-sensing/full-text.txt
   - raw/papers/xiao-2026-robust-spatially-selective-anc/full-text.txt
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
+  - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
 tags:
 - active-noise-control
 - signal-processing
@@ -90,4 +91,5 @@ In hearing aids the secondary path is the propagation from the device loudspeake
 - [[sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026: Hybrid Active Noise Control System for Remote Microphone Based Virtual Sensing with Two Compensation Filters]]
 - [[sources/xiao-2026-robust-spatially-selective-anc|Xiao, Roden, Blau & Doclo 2026: Robust Soft-Constrained Spatially Selective ANC for Hearables under Secondary Path Variations]]
 - [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]]
+- [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC]] — assumes a known, fixed secondary path and folds it into the differentiable forward model for filter-estimation-network training
 

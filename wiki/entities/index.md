@@ -612,4 +612,5 @@
 | [[entities/hironobu-chiba\|Hironobu Chiba]] | NTT researcher; pitch-adaptive post-filtering for CELP coders (2014); co-author of LFHC (ICASSP 2026) | 2026-09-27 |
 | [[entities/yutaka-kamamoto\|Yutaka Kamamoto]] | NTT researcher; speech coding and post-filtering; co-author of LFHC (ICASSP 2026) | 2026-09-27 |
 | [[entities/tatsuya-kako\|Tatsuya Kako]] | NTT researcher; speech and audio processing for wearable devices; co-author of LFHC (ICASSP 2026) | 2026-09-27 |
+| [[entities/libin-zhang\|Libin Zhang]] | Researcher; co-author of DP-ANC (Yang et al. 2026) | 2026-09-21 |
 
