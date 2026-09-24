@@ -2,9 +2,9 @@
 """Step 12 one-call verification: wikilinks + backlinks + mkdocs --strict.
 
 Runs the three Step 12 checks sequentially and reports a single consolidated
-result, so the terminal-black-hole recovery path (capture.py -> sleep -> Read)
-costs one cycle instead of three. Fail-fast: if an early check fails, later
-checks are skipped (fix broken links before paying for a 60-110 s build).
+result — one blocking invocation instead of three separate calls. Fail-fast:
+if an early check fails, later checks are skipped (fix broken links before
+paying for a 60-110 s build).
 
 Usage:
   uv run python .agents/skills/paper-reader/scripts/verify_all.py --slug SLUG

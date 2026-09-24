@@ -54,18 +54,12 @@ Sometimes RunCommand **executes a command successfully but its output never come
 
 Rules:
 
-1. **Switch after the first failure — do not retry.** If one RunCommand call loses its output, assume the channel is broken for the rest of the session. Retrying the same call, adding `Start-Sleep` waits, or re-running with different syntax all waste turns. (The flip side also holds: don't *stop* running commands — verification via `Test-Path`/marker files confirms they execute fine.)
-2. **Recovery wrapper**: route the command through `capture.py`, which captures stdout/stderr (UTF-8, exit code) to `.tmp_capture_out.txt`; then Read that file.
+1. **Switch after the first failure — do not retry.** If one RunCommand call loses its output, assume the channel is broken for the rest of the session. Retrying the same call, adding `Start-Sleep` waits, or re-running with different syntax all waste turns.
+2. **Verify via the filesystem, not the terminal.** Every skill script's effect lands in a file you can check with Read/Grep/Glob: index rows (`Grep <slug> wiki/index.md`), log entries (`Grep wiki/log.md`), extracted text (`Glob raw/papers/{slug}/full-text.*`), commits (`Glob .git/refs/heads` timestamps, or just proceed — `commit_ingest.py` refuses on failure). Drive Steps 10–13 to completion by checking files, not by reading command output.
+3. **Run long commands blocking — never background + poll.** Launch every skill script (including long ones: `extract_mineru.py`, `verify_all.py`, `build_check.py`) as a **blocking foreground call** with the tool timeout set to cover it (max 600000 ms; keep MinerU's `--timeout` at or below ~550 s so the whole call fits the window). When the call returns, the output is final. Do NOT use `run_in_background` + task polling: background task handles can be lost even when the job runs fine (De Sena 2012 — `TaskOutput` returned "task not found" while the MinerU extraction completed successfully), and blind `Start-Sleep` polling of intermediate state wastes turns (`pitfalls.md` #57).
 
-   ```powershell
-   uv run python .agents/skills/paper-reader/scripts/capture.py -- git status --porcelain
-   uv run python .agents/skills/paper-reader/scripts/capture.py -- uv run python .agents/skills/paper-reader/scripts/append_log.py --op ingest --title "..." --body "..."
-   ```
-
-3. **Poll via the completion marker — never blind-sleep on long commands.** `.tmp_capture_out.txt` is only written *after* the wrapped command finishes, so mid-run it still holds the *previous* run's output — you cannot tell "still running" from "done" by reading it (the Wang 2021 ingest burned ~4 blind `Start-Sleep` rounds waiting on a 110 s mkdocs build). `capture.py` now deletes `.tmp_capture_done` at start and writes it (containing `exit=N`) at end. Protocol: after launching a wrapped command, Read `.tmp_capture_done` — **"File does not exist" = still running** (one short `Start-Sleep` 10–20 s, re-check), **file exists = done** → Read `.tmp_capture_out.txt` for the output. The `.tmp_capture_done` Read can even share a message with other work.
-
-4. **Keep using the skill scripts through the wrapper** — do not fall back to hand-editing `wiki/index.md`/`wiki/log.md` or raw `git commit` just because the terminal is broken. Hand-edited index tables are the known cause of lost rows (`pitfalls.md` #35); raw git bypasses `commit_ingest.py`'s guards (`pitfalls.md` #48). The wrapper restores full script output, so the normal Steps 10–13 scripts remain usable.
-5. **If wrapper-invoked `uv run` calls hang for minutes**: an earlier `uv run` probably died holding the uv lock. List hung processes via the wrapper (`capture.py -- tasklist /FI "IMAGENAME eq uv.exe"`), `Stop-Process -Id <PID>` the stale one, then retry through `uv run` as usual. **Always invoke Python via `uv run python`** (per `pitfalls.md` #18) — it guarantees the environment matches `pyproject.toml`/`uv.lock`; direct `.venv\Scripts\python.exe` invocation is a last resort only when uv remains hung *after* the stale process was killed, and must be noted in the session summary.
+4. **Keep using the skill scripts** — do not fall back to hand-editing `wiki/index.md`/`wiki/log.md` or raw `git commit` just because the terminal is broken. Hand-edited index tables are the known cause of lost rows (`pitfalls.md` #35); raw git bypasses `commit_ingest.py`'s guards (`pitfalls.md` #48). The scripts' effects remain verifiable per rule 2, so the normal Steps 10–13 scripts remain usable.
+5. **If `uv run` calls hang for minutes**: an earlier `uv run` probably died holding the uv lock. List hung processes (`tasklist /FI "IMAGENAME eq uv.exe"`), `Stop-Process -Id <PID>` the stale one, then retry through `uv run` as usual. **Always invoke Python via `uv run python`** (per `pitfalls.md` #18) — it guarantees the environment matches `pyproject.toml`/`uv.lock`; direct `.venv\Scripts\python.exe` invocation is a last resort only when uv remains hung *after* the stale process was killed, and must be noted in the session summary.
 
 ## Prerequisites
 
@@ -93,9 +87,8 @@ Exact invocations for every script (all prefixed with `uv run python .agents/ski
 | 12a | `verify_wikilinks.py --slug SLUG` |
 | 12b | `check_backlinks.py --slug SLUG` |
 | 12c | `build_check.py` (wraps `mkdocs build --strict`) |
-| 12 (all) | `verify_all.py --slug SLUG` — runs 12a→12b→12c in one call, fail-fast; preferred over three separate calls (one black-hole recovery cycle instead of three) |
+| 12 (all) | `verify_all.py --slug SLUG` — runs 12a→12b→12c in one call, fail-fast; preferred over three separate calls (one blocking call instead of three; the mkdocs build alone is 60–110 s) |
 | 13 | `commit_ingest.py --slug SLUG --message "ingest: Short Title (Author Year)" --entities ... --concepts ... --synthesis ...` |
-| any | `uv run python .agents/skills/paper-reader/scripts/capture.py -- <command>` — terminal black-hole recovery; output lands in `.tmp_capture_out.txt` (see "Terminal Output Black Hole" section) |
 
 ## References (load on demand)
 
@@ -181,6 +174,7 @@ uv run python .agents/skills/paper-reader/scripts/extract_mineru.py --slug SLUG 
 ```
 
 - `--model vlm` (default, layout analysis) or `--model pipeline` (zero-hallucination). Token required: `mineru-open-api auth`.
+- **Run it blocking** — foreground call with tool timeout 600000 ms and `--timeout` at or below ~550 so the whole call fits the blocking window. Never `run_in_background` + poll (see "Terminal Output Black Hole" rule 3).
 - **Language codes** (MinerU convention, NOT ISO 639 — `zh` is INVALID, use `ch`): `ch` (Chinese), `en` (English), `chinese_cht`, `japan`, `korean`, `latin`, `arabic`, `cyrillic`, `east_slavic`, `devanagari`, `ta`/`te`/`ka`. Script validates locally; invalid codes exit 2 with the valid list.
 - Post-processing: `images/` → `figures/`, refs updated in `full-text.md`.
 - Verify quality: Read first 200 + last 100 lines. Mermaid code blocks for diagrams are normal.
@@ -396,7 +390,7 @@ For re-ingestion, use `ingest (re)` in `--title`.
 uv run python .agents/skills/paper-reader/scripts/verify_all.py --slug SLUG
 ```
 
-Under the terminal-black-hole recovery wrapper this costs **one** capture/sleep/Read cycle instead of three (each separate script call is 2–3 turns); the mkdocs build alone takes ~2 minutes, so batch the wait. If any check fails, the later checks are skipped — fix and re-run. The individual checks below remain available for targeted re-runs after fixing a failure (e.g., re-run only `build_check.py` once a broken link is fixed).
+Collapsing the three Step 12 checks into one call means **one** blocking invocation instead of three separate calls (2–3 turns each under black-hole conditions); the mkdocs build alone takes ~2 minutes, so run it blocking with a generous timeout. If any check fails, the later checks are skipped — fix and re-run. The individual checks below remain available for targeted re-runs after fixing a failure (e.g., re-run only `build_check.py` once a broken link is fixed).
 
 **Step 12a — Wikilink verification** (fast pre-check, catches broken links before the build):
 
