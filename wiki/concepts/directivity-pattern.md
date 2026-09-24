@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-20
+updated: 2026-09-24
 sources:
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
+  - raw/papers/desena-2012-higher-order-differential/full-text.md
   - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
   - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
@@ -34,6 +35,10 @@ $$\mathrm{DI}=10\log_{10}\left(\frac{\Lambda_{\max}}{\frac{1}{4\pi}\int_0^{2\pi}
 | Hypercardioid | - | 6.0 | Narrower front lobe |
 | Supercardioid | - | 5.7 | Maximum front-to-back ratio |
 | 6th-order Cardioid | 6th | 11.14 | Highly directional |
+
+## Sector-Based Design of the Cardioid Family
+
+[[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012]] unify the classical first-order family as minimizers of a single two-parameter cost function — a convex combination of out-of-sector/in-sector energy ratio and in-sector non-uniformity, parameterized by sector width $\alpha$ and weight $\lambda$: the omnidirectional pattern is $(\lambda,\alpha)=(0,\pi)$, the supercardioid $(1,\pi/2)$ (maximum front–back ratio), the hypercardioid $(1,\alpha\to 0)$ (maximum directivity factor), the subcardioid $\approx(0.5, 2.247\ \mathrm{rad})$, and the cardioid $\approx(1,\pi)$. Higher-order cardioid-A/B patterns also fit with errors from −43 dB to $\ll -100$ dB. See [[concepts/sector-directivity-design|Sector-Based Directivity Design]].
 
 ## R-th Order DMA Pattern
 
@@ -72,6 +77,7 @@ with orientation $\theta_d$ relative to the head; $M=-20$ dB and $W=90°$ in the
 ## Related Concepts
 
 - [[concepts/virtual-directional-microphone|Virtual Directional Microphone]]
+- [[concepts/sector-directivity-design|Sector-Based Directivity Design]]
 - [[concepts/neural-directional-filtering|Neural Directional Filtering]]
 - [[concepts/white-noise-gain|White Noise Gain]]
 - [[concepts/beamforming|Beamforming]]
@@ -81,6 +87,7 @@ with orientation $\theta_d$ relative to the head; $M=-20$ dB and $W=90°$ in the
 - [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]] — beampattern factorization under Kronecker filters
 - [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — Chinese-language review elevating beampattern frequency invariance to a co-equal design axis with DF and WNG across six beamforming families
 - [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — R-th order DMA pattern formulation and neural realization
+- [[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012: On the Design and Implementation of Higher Order Differential Microphones]] — (α, λ) optimization unifying the standard pattern family as special cases
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
 - [[sources/huang-2025-steerable-neural-directional-filtering|Huang, Halimeh, Chetupalli, Thiergart & Habets 2025: Steerable Neural Directional Filtering]]
 - [[sources/uphaus-2026-directivity-low-latency|Uphaus et al. 2026: Directivity-Conditioned Low-Latency Neural Filtering]] — cosine-based pattern with configurable main-lobe width $W$ and capped attenuation $M$ for hearing devices

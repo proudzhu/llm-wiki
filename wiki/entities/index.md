@@ -597,4 +597,7 @@
 | [[entities/lennart-uphaus\|Lennart Uphaus]] | University of Hamburg — first author of FiLM-OSN, 10 ms steerable neural directional filtering for hearing aids | 2026-09-20 |
 | [[entities/andre-merboldt\|André Merboldt]] | Audatic GmbH — co-author of Uphaus et al. 2026 (FiLM-OSN) | 2026-09-20 |
 | [[entities/markus-hofbauer\|Markus Hofbauer]] | Sonova — co-author of Uphaus et al. 2026 (FiLM-OSN) | 2026-09-20 |
+| [[entities/enzo-de-sena\|Enzo De Sena]] | King's College London — audio signal processing, microphone arrays, spatial audio; first author of the (α,λ) directivity design framework | 2026-09-24 |
+| [[entities/huseyin-hacihabiboglu\|Hüseyin Hacihabiboglu]] | METU / King's College London — audio signal processing, room acoustics, multichannel audio, microphone arrays | 2026-09-24 |
+| [[entities/zoran-cvetkovic\|Zoran Cvetkovic]] | King's College London — signal processing theory, source coding, audio and speech technology | 2026-09-24 |
 

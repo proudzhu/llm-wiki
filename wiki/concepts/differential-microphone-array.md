@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-19
+updated: 2026-09-24
 sources:
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
   - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
+  - raw/papers/desena-2012-higher-order-differential/full-text.md
 tags:
   - differential-microphone-array
   - beamforming
@@ -44,6 +45,10 @@ A differential microphone array (DMA) is a fixed beamformer that uses spatial di
 - **Beyond integer order and linear geometry**: fractional-order DMAs (order computed from a target DF or WNG threshold); circular DMAs via Jacobi-series beampattern approximation; concentric circular arrays for high-frequency frequency invariance and robustness; planar and time-domain generalizations.
 - **Steering limitation**: linear DMAs are end-fire by construction; steering off end-fire can yield negative gain, motivating circular/spherical geometries.
 
+## Complex-Root Patterns and Sector-Based Design (De Sena et al. 2012)
+
+[[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012]] identify a structural restriction of the conventional cascade: since each first-order stage contributes a real-root factor $(1-\beta_i) + \beta_i\cos\theta$, cascaded DMAs can only realize trigonometric polynomials with **real** roots — yet optimal patterns for most design criteria (including their [[concepts/sector-directivity-design|sector-based (α, λ) design framework]], which unifies omni/subcardioid/cardioid/hypercardioid/supercardioid as special cases) have complex-conjugate roots. Their [[concepts/complex-root-differential-array|complex-root differential array]] lifts the restriction with three omnidirectional microphones and a central branch filter, matching the conventional structure in filter complexity and WNG. The same paper derives the operational band $[\gamma c/2\pi d,\ c/4d]$ (WNG lower bound / Taylor-approximation upper bound) and shows how multi-spacing sub-arrays with crossover filters extend it — e.g., a measured third-order pattern over 5 octaves.
+
 ## Limitations
 
 - Restricted to low-order patterns with compact arrays
@@ -71,6 +76,8 @@ For very small baselines where delay-based features become unreliable (Tashev et
 - [[concepts/back-to-back-microphone-array|Back-to-Back Microphone Array]] — a related small-baseline geometry that uses unidirectional capsules (rather than omni) and front-back level differences
 - [[concepts/frequency-invariant-beamforming|Frequency-Invariant Beamforming]] — the design goal DMAs achieve by measuring the differential field
 - [[concepts/orthogonal-series-expansion-beamforming|Orthogonal Series Expansion Beamforming]] — beampattern-approximation design family closely related to null-constraint DMA design
+- [[concepts/sector-directivity-design|Sector-Based Directivity Design]] — (α, λ) framework whose optimal patterns frequently require complex roots
+- [[concepts/complex-root-differential-array|Complex-Root Differential Array]] — three-mic second-order structure realizing complex-root patterns
 
 ## Related Sources
 
@@ -79,3 +86,4 @@ For very small baselines where delay-based features become unreliable (Tashev et
 - [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — neural directional filtering surpasses the order-per-microphone limit: a 3rd-order DMA pattern (6-mic CDMA classically) realized with 4 microphones
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — back-to-back unidirectional variant (9.6 mm baseline)
+- [[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012: On the Design and Implementation of Higher Order Differential Microphones]] — (α, λ) design framework unifying standard patterns; complex-root array structure; WNG/bandwidth analysis

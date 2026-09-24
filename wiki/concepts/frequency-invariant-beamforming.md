@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-19
-updated: 2026-09-19
+updated: 2026-09-24
 sources:
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
+  - raw/papers/desena-2012-higher-order-differential/full-text.md
 tags:
   - beamforming
   - microphone-arrays
@@ -34,6 +35,8 @@ The review also lists frequency invariance as an open problem: there is (as of 2
 
 A complementary classical approach in the wider array-processing literature (not the focus of Pan et al.'s review) is constant-beamwidth design, e.g., via Farrow-structure wideband beamformers.
 
+For DMAs, frequency invariance holds only inside an explicitly quantifiable band: [[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012]] bound it below by $f_{\min} = \gamma c/2\pi d$ (below which [[concepts/white-noise-gain|WNG]] is unacceptable) and above by $f_{\max} = c/4d$ (beyond which the Taylor approximation underpinning the frequency-independent pattern breaks down) — a single spacing covers roughly 2.5+ octaves, and wider bands require interleaved sub-arrays with different spacings merged by crossover filters.
+
 ## Related Concepts
 
 - [[concepts/differential-microphone-array|Differential Microphone Array]]
@@ -47,3 +50,4 @@ A complementary classical approach in the wider array-processing literature (not
 ## Related Sources
 
 - [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — review that elevates frequency invariance to one of the field's three unifying performance axes
+- [[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012: On the Design and Implementation of Higher Order Differential Microphones]] — explicit DMA operational band $[\gamma c/2\pi d,\ c/4d]$ and multi-spacing bandwidth extension

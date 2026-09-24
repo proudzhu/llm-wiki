@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-09-19
+updated: 2026-09-24
 tags:
   - beamforming
   - robustness
@@ -11,6 +11,7 @@ sources:
   - raw/papers/deng-2026-joint-covariance-wng-mvdr/full-text.md
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
   - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
+  - raw/papers/desena-2012-higher-order-differential/full-text.md
 ---
 
 # White Noise Gain (WNG)
@@ -64,6 +65,14 @@ Under a Kronecker filter $\mathbf{h} = \mathbf{h}_1 \otimes \mathbf{h}_2$, the W
 
 Conventionally, the WNG lower bound $W_{\min}$ is a fixed hyperparameter tuned manually (e.g., $10\log_{10}(M) - 3$ dB for all frequencies). Deng et al. (2026) introduce a **frequency-adaptive learnable WNG** scheme where a neural network predicts a per-frequency-bin WNG threshold $\mathcal{W}_0(k)$ jointly with T-F masks for [[concepts/spatial-covariance-matrix|SCM]] estimation. The WNG prediction is implicitly supervised via the beamforming reconstruction loss rather than requiring explicit WNG labels, enabling the network to discover optimal frequency-dependent robustness tradeoffs automatically. This approach outperforms fixed-threshold baselines by +1.4–1.8 dB SNR gain under both matched and mismatched array conditions.
 
+## WNG of Differential Microphone Arrays
+
+For second-order DMAs, [[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012]] derive closed-form look-direction WNGs for both the conventional (real-root) cascade and their complex-root structure: both depend on the pattern coefficients $(a_1, a_2)$ only through a product with $kd$ ($k$ = wave number, $d$ = spacing), and take very similar values in their respective regions of the $(a_1,a_2)$ plane. WNG collapses as $kd$ shrinks — at $kd=0.25$, second-order patterns sit around −20 to −30 dB (hypercardioid −29.9 dB, cardioid-A −20 dB), and at $kd=0.1$ both structures are nearly unusable without very low-noise capsules. This yields an explicit operational band for a DMA:
+
+$$f_{\min} = \frac{\gamma c}{2\pi d} \quad (\text{WNG bound, } \gamma = \text{smallest acceptable } kd), \qquad f_{\max} = \frac{c}{4d} \quad (\text{Taylor-approximation bound})$$
+
+which is the quantitative form of the familiar "differential arrays amplify noise at low frequencies" limitation. Multi-spacing sub-arrays merged with crossover filters extend the band because WNG is a function of the product $kd$ alone.
+
 ## Related Concepts
 
 - [[concepts/diagonal-loading|Diagonal Loading]]
@@ -75,6 +84,7 @@ Conventionally, the WNG lower bound $W_{\min}$ is a fixed hyperparameter tuned m
 - [[concepts/robust-minimum-variance-beamforming|Robust Minimum Variance Beamforming]]
 - [[concepts/neural-beamforming|Neural Beamforming]]
 - [[concepts/superdirective-beamforming|Superdirective Beamforming]]
+- [[concepts/differential-microphone-array|Differential Microphone Array]]
 - [[concepts/kronecker-product-beamforming|Kronecker Product Beamforming]]
 
 ## Related Sources
@@ -84,3 +94,4 @@ Conventionally, the WNG lower bound $W_{\min}$ is a fixed hyperparameter tuned m
 - [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]] — WNG as the robustness metric in superdirective design; per-frequency bisection on the loading factor to hit a WNG target; rank-P as a WNG knob
 - [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]] — WNG factorization $W = W_1 \times W_2$ under Kronecker filters; $\epsilon_2$ regularization knob
 - [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — practical rule of thumb: sensor self-noise 20–35 dBA implies WNG > −20 dB is generally safe
+- [[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012: On the Design and Implementation of Higher Order Differential Microphones]] — closed-form WNG of second-order DMA structures; WNG as a function of $kd$ defining the operational band $[\gamma c/2\pi d,\ c/4d]$

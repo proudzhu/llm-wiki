@@ -5490,3 +5490,15 @@ Chinese-language review (Journal of Signal Processing 36(6): 804-815) unifying s
 ## [2026-09-20] ingest | Directivity-Conditioned Low-Latency Neural Filtering for Speech Enhancement in Hearing Aids (Uphaus et al. 2026)
 
 Extracted from arXiv HTML to raw/papers/uphaus-2026-directivity-low-latency/ (full text + 3 figures). Created source page, entities (lennart-uphaus, andre-merboldt, markus-hofbauer), and concepts (film-osn, ipd-preservation-loss). Updated entity timo-gerkmann; concepts neural-directional-filtering, joint-nonlinear-filtering, film-layer, mamba, directivity-pattern, audio-latency; synthesis pages joint-multitask-ultra-low-latency-se, multi-channel-speech-enhancement, deep-speech-enhancement. Key findings: FiLM-OSN achieves 10 ms-latency steerable binaural NDF via FiLM-conditioned OSN with Mamba narrow-band blocks (700k params); IPD preservation loss is essential for realizing the conditioned directivity pattern.
+
+---
+
+## [2026-09-24] ingest | On the Design and Implementation of Higher Order Differential Microphones (De Sena et al. 2012)
+
+- **Source**: `raw/papers/desena-2012-higher-order-differential/full-text.md` (Zotero: QX5MBZMB)
+- **Authors**: Enzo De Sena, Hüseyin Hacihabiboglu, Zoran Cvetkovic
+- **Published**: IEEE Transactions on Audio, Speech, and Language Processing, vol. 20, no. 1, pp. 162–174, Jan. 2012
+- **DOI**: 10.1109/TASL.2011.2159204
+- **Summary**: Systematic (α, λ) design framework for higher-order differential microphone directivity patterns (unifying omni/subcardioid/cardioid/hypercardioid/supercardioid as special cases), plus a three-mic complex-root second-order DMA structure, closed-form WNG analysis, and a measured third-order array matching its pattern over 5 octaves.
+- **Pages created**: `wiki/sources/desena-2012-higher-order-differential.md`; entities `enzo-de-sena`, `huseyin-hacihabiboglu`, `zoran-cvetkovic`; concepts `sector-directivity-design`, `complex-root-differential-array`
+- **Pages updated**: concepts `differential-microphone-array` (complex-root section), `directivity-pattern` (sector-based unification section), `white-noise-gain` (DMA WNG + operational band), `frequency-invariant-beamforming` (DMA operational band); synthesis `multi-channel-speech-enhancement` (sources row + realizability sentence in Insight 2); main + subdirectory indexes, statistics

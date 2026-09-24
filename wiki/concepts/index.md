@@ -538,4 +538,6 @@
 | [[concepts/rls-nkp\|RLS-NKP]] | Recursive least-squares family built on the rank-P nearest Kronecker product decomposition — two coupled short filters identify a long low-rank echo path with faster tracking. | 2026-09-18 |
 | [[concepts/film-osn\|FiLM-OSN]] | Directivity-conditioned 10 ms-latency neural directional filter for binaural hearing aids — FiLM-steered OnlineSpatialNet with Mamba narrow-band blocks | 2026-09-20 |
 | [[concepts/ipd-preservation-loss\|IPD Preservation Loss]] | Magnitude-weighted cosine loss on interaural phase difference, essential for realizing conditioned directivity patterns in binaural NDF | 2026-09-20 |
+| [[concepts/sector-directivity-design\|Sector-Based Directivity Design]] | (α,λ) optimization framework unifying omni/subcardioid/cardioid/hypercardioid/supercardioid as special cases (De Sena 2012) | 2026-09-24 |
+| [[concepts/complex-root-differential-array\|Complex-Root Differential Array]] | Three-mic second-order DMA structure realizing trigonometric polynomials with complex roots at conventional filter complexity (De Sena 2012) | 2026-09-24 |
 

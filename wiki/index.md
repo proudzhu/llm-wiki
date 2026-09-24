@@ -603,6 +603,9 @@
 | [[entities/lennart-uphaus\|Lennart Uphaus]] | University of Hamburg — first author of FiLM-OSN, 10 ms steerable neural directional filtering for hearing aids | 2026-09-20 |
 | [[entities/andre-merboldt\|André Merboldt]] | Audatic GmbH — co-author of Uphaus et al. 2026 (FiLM-OSN) | 2026-09-20 |
 | [[entities/markus-hofbauer\|Markus Hofbauer]] | Sonova — co-author of Uphaus et al. 2026 (FiLM-OSN) | 2026-09-20 |
+| [[entities/enzo-de-sena\|Enzo De Sena]] | King's College London — audio signal processing, microphone arrays, spatial audio; first author of the (α,λ) directivity design framework | 2026-09-24 |
+| [[entities/huseyin-hacihabiboglu\|Hüseyin Hacihabiboglu]] | METU / King's College London — audio signal processing, room acoustics, multichannel audio, microphone arrays | 2026-09-24 |
+| [[entities/zoran-cvetkovic\|Zoran Cvetkovic]] | King's College London — signal processing theory, source coding, audio and speech technology | 2026-09-24 |
 
 ---
 
@@ -1146,6 +1149,8 @@
 | [[concepts/rls-nkp\|RLS-NKP]] | Recursive least-squares family built on the rank-P nearest Kronecker product decomposition — two coupled short filters identify a long low-rank echo path with faster tracking. | 2026-09-18 |
 | [[concepts/film-osn\|FiLM-OSN]] | Directivity-conditioned 10 ms-latency neural directional filter for binaural hearing aids — FiLM-steered OnlineSpatialNet with Mamba narrow-band blocks | 2026-09-20 |
 | [[concepts/ipd-preservation-loss\|IPD Preservation Loss]] | Magnitude-weighted cosine loss on interaural phase difference, essential for realizing conditioned directivity patterns in binaural NDF | 2026-09-20 |
+| [[concepts/sector-directivity-design\|Sector-Based Directivity Design]] | (α,λ) optimization framework unifying omni/subcardioid/cardioid/hypercardioid/supercardioid as special cases (De Sena 2012) | 2026-09-24 |
+| [[concepts/complex-root-differential-array\|Complex-Root Differential Array]] | Three-mic second-order DMA structure realizing trigonometric polynomials with complex roots at conventional filter complexity (De Sena 2012) | 2026-09-24 |
 
 ---
 
@@ -1383,6 +1388,7 @@
 | [[sources/wikipedia-kronecker-product\|Wikipedia: Kronecker Product]] | Encyclopedia reference for the Kronecker product: definition as a block matrix, core algebraic identities (mixed-product, inverse, transpose, determinant, spectrum, rank), the vec-trick for matrix equations, and related Tracy–Singh/Khatri–Rao/face-splitting products | 2026-09-18 |
 | [[sources/elisei-iliescu-2019-low-rank-rls\|Elisei-Iliescu, Paleologu, Benesty, Stanciu, Anghel & Ciochină 2019]] | This paper develops recursive least-squares (RLS) adaptive filters for identifying long, low-rank systems such as network and acoustic echo paths. | 2026-09-18 |
 | [[sources/uphaus-2026-directivity-low-latency\|Uphaus, Merboldt, Hofbauer & Gerkmann 2026]] | Existing neural directional filtering (NDF) methods can adapt directivity patterns at inference but disregard real-world hearing-device constraints: dynamic scenarios, microphone positions varying with head diameter and hearing-aid placement, head shadow, and strict latency limits (≤ 10 ms — prior NDF approaches need 40–50 ms). | 2026-09-20 |
+| [[sources/desena-2012-higher-order-differential\|De Sena, Hacihabiboglu & Cvetkovic 2012]] | This paper proposes a systematic design framework for the directivity patterns of higher order differential microphones: patterns are obtained by minimizing a cost function that is a convex combination of a within/out-of-sector energy ratio and a uniformity term inside a frontal sector of interest, controlled by two physically meaningful parameters — the sector width \alpha and the convex combination factor \lambda. | 2026-09-24 |
 
 ---
 
@@ -1436,10 +1442,10 @@
 
 ## Statistics
 
-- **Total pages**: 1385
-- **Entities**: 593
-- **Concepts**: 534
-- **Sources**: 228
+- **Total pages**: 1391
+- **Entities**: 596
+- **Concepts**: 536
+- **Sources**: 229
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-20
+- **Last updated**: 2026-09-24

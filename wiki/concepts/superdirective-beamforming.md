@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-09-14
-updated: 2026-09-19
+updated: 2026-09-24
 sources:
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
   - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
   - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
+  - raw/papers/desena-2012-higher-order-differential/full-text.md
 tags:
   - beamforming
   - microphone-arrays
@@ -54,6 +55,8 @@ The RSD beamformer also serves as the fixed spatial front-end of post-filter pip
 
 [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020]] give the superdirective beamformer two additional readings: it is a **special case of differential beamforming** (both respond to the differential sound field — DMAs measure the differential field, superdirective arrays effectively do the same), and it is the **MVDR beamformer specialized to isotropic noise** (constrained-distortionless minimization of output power with $\boldsymbol{\Gamma}$ as the noise covariance). The review also documents the robustness/frequency-invariance tension explicitly: with $\epsilon = 10^{-3}$ diagonal loading on an $M=8$, 1 cm-spacing ULA, the loaded design's beampattern loses frequency consistency — WNG is purchased at the price of frequency invariance. A **two-stage cascade** design (beamformer = convolution of two subfilters; beampattern = product of sub-patterns; one stage maximizes DF, the other improves WNG) preserves frequency consistency while boosting WNG — this cascade is the direct ancestor of [[concepts/kronecker-product-beamforming|Kronecker product beamforming]].
 
+[[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012]] place the two classical optimality targets in one family: their [[concepts/sector-directivity-design|(α, λ) directivity design framework]] has the max-DF hypercardioid at $(\lambda, \alpha) = (1, \alpha \to 0)$ and the max-FBR supercardioid at $(1, \pi/2)$ as corner solutions, with intermediate pairs trading directivity against in-sector uniformity — a design-space view of the same DF-vs-rejection tension that superdirective design navigates via the loading factor.
+
 ## Efficiency Problem at Scale
 
 As $M$ grows, an RSD beamformer stores $M$ complex parameters per frequency bin ($(K/2{+}1)M$ for a $K$-point STFT) and requires $M \times M$ matrix inversions — parameter redundancy that limits embedded and large-array deployments. Low-rank approaches such as [[concepts/kronecker-product-beamforming|Kronecker product beamforming]] address this by decomposing the long filter into short filters. The line began with differential Kronecker product beamforming ([[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019]]), whose alternating maximization of the (non-factorizable) directivity factor over two virtual-array subfilters is the precursor of later alternating-iteration Kronecker superdirective algorithms (Zhu et al. 2025).
@@ -81,3 +84,4 @@ Superdirective designs belong to the [[concepts/fixed-beamformer|fixed beamforme
 - [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — superdirective as special case of both DMA and isotropic-noise MVDR; robustness-vs-frequency-invariance tension; two-stage cascade ancestor of Kronecker beamforming
 - [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]]
 - [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]] — RSD ($\epsilon = 10^{-3}$) as the spatial front-end of a joint SNR–CDR Wiener post-filter
+- [[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012: On the Design and Implementation of Higher Order Differential Microphones]] — (α, λ) framework with max-DF hypercardioid and max-FBR supercardioid as corner solutions
