@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-18
+updated: 2026-09-26
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
@@ -14,6 +14,7 @@ sources:
   - raw/papers/souden-2010-pmwf/full-text.md
   - raw/papers/souden-2011-online-noise-tracking/full-text.md
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
+  - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
 tags:
   - speech-enhancement
   - wiener-filter
@@ -88,6 +89,10 @@ $$\Omega(\ell,k) = \left\{1 - \left[\frac{1}{1+\hat{\xi}(\ell,k)}\right]^{\hat{p
 
 which applies extra suppression in noise-only segments (small SPP) and converges to Wiener-like behavior when speech is present. On a reverberant room ($T_{60} = 210$ ms, 4 mics, babble noise), the modified Wiener attains 19.27 dB output SINR versus 15.20 (MVDR) and 17.14 (Wiener), at a modest distortion increase concentrated on weak speech components — the SPP-driven post-processor amplifies the effect of speech miss-detections. The same paper supplies the online noise PSD matrix tracking ([[concepts/multichannel-mcra|multichannel MCRA]]) that makes all three filters implementable online.
 
+## The Multi-Frame WF Inside TF-GridNet (Haeb-Umbach et al. 2024)
+
+[[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024]] highlight the MWF's role in the prototypical Class-3 hybrid: [[concepts/tf-gridnet|TF-GridNet]] aggregates spatial information "both by DNNs with multi-channel input and by a beamformer, a **multi-frame Wiener filter**, that is sandwiched between two DNNs (DNN–BF–DNN structure)" — the model-based spatial operation embedded inside the neural enhancement operation for joint denoising, dereverberation, and separation. This is the multichannel counterpart of the end-to-end-trained differentiable MWF idea (see above): the Wiener stage is retained not as a parameter-estimation target but as an inductive spatial-processing bias inside the network.
+
 ## Related Concepts
 
 - [[concepts/wiener-filter|Wiener Filter]]
@@ -122,3 +127,4 @@ which applies extra suppression in noise-only segments (small SPP) and converges
 - [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — NeuralPMWF: a 164.9k-parameter network fully controls the PMWF, including an SPP-proxy-driven dynamic $\beta$
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — TinyGRU-estimated target spectrum drives online MCWF weights; beats oracle MVDR at ~50 MMACs/s
 - [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]] — factorization generalized to joint noise + reverberation with an SNR–CDR Wiener post-filter
+- [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — the multi-frame Wiener filter realized inside TF-GridNet's inner DNN layer

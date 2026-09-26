@@ -5502,3 +5502,16 @@ Extracted from arXiv HTML to raw/papers/uphaus-2026-directivity-low-latency/ (fu
 - **Summary**: Systematic (α, λ) design framework for higher-order differential microphone directivity patterns (unifying omni/subcardioid/cardioid/hypercardioid/supercardioid as special cases), plus a three-mic complex-root second-order DMA structure, closed-form WNG analysis, and a measured third-order array matching its pattern over 5 octaves.
 - **Pages created**: `wiki/sources/desena-2012-higher-order-differential.md`; entities `enzo-de-sena`, `huseyin-hacihabiboglu`, `zoran-cvetkovic`; concepts `sector-directivity-design`, `complex-root-differential-array`
 - **Pages updated**: concepts `differential-microphone-array` (complex-root section), `directivity-pattern` (sector-based unification section), `white-noise-gain` (DMA WNG + operational band), `frequency-invariant-beamforming` (DMA operational band); synthesis `multi-channel-speech-enhancement` (sources row + realizability sentence in Insight 2); main + subdirectory indexes, statistics
+
+---
+
+## [2026-09-26] ingest | Microphone Array Signal Processing and Deep Learning for Speech Enhancement (Haeb-Umbach et al. 2024)
+
+Ingested the IEEE Signal Processing Magazine overview article contrasting **model-based, data-driven, and hybrid approaches** to multichannel speech enhancement (noise reduction, source separation, dereverberation with compact microphone arrays), with the beamforming pipeline as its running example.
+
+- Source page: [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach, Nakatani, Delcroix, Boeddeker & Ochiai 2024]]
+- New concept pages: [[concepts/hybrid-speech-enhancement|Hybrid Speech Enhancement]] (three-class taxonomy + two-operation framing), [[concepts/guided-source-separation|Guided Source Separation]], [[concepts/weighted-prediction-error|Weighted Prediction Error]], [[concepts/tf-gridnet|TF-GridNet]]
+- New entity pages: [[entities/reinhold-haeb-umbach|Reinhold Haeb-Umbach]], [[entities/tomohiro-nakatani|Tomohiro Nakatani]], [[entities/christoph-boeddeker|Christoph Boeddeker]]
+- Updated 12 existing concept pages — e.g. MVDR sufficient statistic under Gaussian noise vs. non-Gaussian failure ([[concepts/mvdr-beamformer|MVDR Beamformer]]), the forgetting-factor-to-attention accumulation view ([[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]), why denoising needs no PIT ([[concepts/permutation-invariant-training|PIT]]), RI stacking for spatial cues ([[concepts/complex-spectral-mapping|Complex Spectral Mapping]]), model-as-regularizer ([[concepts/beamforming|Beamforming]])
+- Updated 2 synthesis pages: [[synthesis/deep-speech-enhancement|Deep Speech Enhancement]] (Insight 6: the taxonomy naming the multi-channel arc) and [[synthesis/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]] (Insight 4: the taxonomy organizing the hybrid cluster)
+- Full text and figures at `raw/papers/haeb-umbach-2024-microphone-array-deep-learning/`

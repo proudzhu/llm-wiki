@@ -600,4 +600,7 @@
 | [[entities/enzo-de-sena\|Enzo De Sena]] | King's College London — audio signal processing, microphone arrays, spatial audio; first author of the (α,λ) directivity design framework | 2026-09-24 |
 | [[entities/huseyin-hacihabiboglu\|Hüseyin Hacihabiboglu]] | METU / King's College London — audio signal processing, room acoustics, multichannel audio, microphone arrays | 2026-09-24 |
 | [[entities/zoran-cvetkovic\|Zoran Cvetkovic]] | King's College London — signal processing theory, source coding, audio and speech technology | 2026-09-24 |
+| [[entities/reinhold-haeb-umbach\|Reinhold Haeb-Umbach]] | Paderborn University — hybrid model-based/data-driven speech enhancement; IEEE SPM 2024 overview co-author | 2026-09-26 |
+| [[entities/tomohiro-nakatani\|Tomohiro Nakatani]] | Kyoto University / NTT Fellow — data-driven dereverberation (WPE), GSS, and unified speech enhancement frameworks | 2026-09-26 |
+| [[entities/christoph-boeddeker\|Christoph Boeddeker]] | Paderborn University (HSA Project Group) — data-driven beamforming; guided source separation (GSS) | 2026-09-26 |
 

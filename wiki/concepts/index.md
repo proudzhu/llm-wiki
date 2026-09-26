@@ -540,4 +540,8 @@
 | [[concepts/ipd-preservation-loss\|IPD Preservation Loss]] | Magnitude-weighted cosine loss on interaural phase difference, essential for realizing conditioned directivity patterns in binaural NDF | 2026-09-20 |
 | [[concepts/sector-directivity-design\|Sector-Based Directivity Design]] | (α,λ) optimization framework unifying omni/subcardioid/cardioid/hypercardioid/supercardioid as special cases (De Sena 2012) | 2026-09-24 |
 | [[concepts/complex-root-differential-array\|Complex-Root Differential Array]] | Three-mic second-order DMA structure realizing trigonometric polynomials with complex roots at conventional filter complexity (De Sena 2012) | 2026-09-24 |
+| [[concepts/hybrid-speech-enhancement\|Hybrid Speech Enhancement]] | The three-class taxonomy of model-based/data-driven hybrids: every system = parameter estimation + enhancement operation (Haeb-Umbach et al. 2024) | 2026-09-26 |
+| [[concepts/guided-source-separation\|Guided Source Separation (GSS)]] | Diarization-guided iterative source separation: TS-VAD output constrains EM updates for speech/noise SCMs (Boeddeker et al.) | 2026-09-26 |
+| [[concepts/weighted-prediction-error\|Weighted Prediction Error (WPE)]] | STFT-domain multichannel linear prediction dereverberation; power-weighted least squares with a prediction lag Δ | 2026-09-26 |
+| [[concepts/tf-gridnet\|TF-GridNet]] | DNN–BF–DNN architecture with full-band and sub-band temporal modeling; the Class-3 hybrid prototype (Wang et al. 2023) | 2026-09-26 |
 

@@ -606,6 +606,9 @@
 | [[entities/enzo-de-sena\|Enzo De Sena]] | King's College London — audio signal processing, microphone arrays, spatial audio; first author of the (α,λ) directivity design framework | 2026-09-24 |
 | [[entities/huseyin-hacihabiboglu\|Hüseyin Hacihabiboglu]] | METU / King's College London — audio signal processing, room acoustics, multichannel audio, microphone arrays | 2026-09-24 |
 | [[entities/zoran-cvetkovic\|Zoran Cvetkovic]] | King's College London — signal processing theory, source coding, audio and speech technology | 2026-09-24 |
+| [[entities/reinhold-haeb-umbach\|Reinhold Haeb-Umbach]] | Paderborn University — hybrid model-based/data-driven speech enhancement; IEEE SPM 2024 overview co-author | 2026-09-26 |
+| [[entities/tomohiro-nakatani\|Tomohiro Nakatani]] | Kyoto University / NTT Fellow — data-driven dereverberation (WPE), GSS, and unified speech enhancement frameworks | 2026-09-26 |
+| [[entities/christoph-boeddeker\|Christoph Boeddeker]] | Paderborn University (HSA Project Group) — data-driven beamforming; guided source separation (GSS) | 2026-09-26 |
 
 ---
 
@@ -1151,6 +1154,10 @@
 | [[concepts/ipd-preservation-loss\|IPD Preservation Loss]] | Magnitude-weighted cosine loss on interaural phase difference, essential for realizing conditioned directivity patterns in binaural NDF | 2026-09-20 |
 | [[concepts/sector-directivity-design\|Sector-Based Directivity Design]] | (α,λ) optimization framework unifying omni/subcardioid/cardioid/hypercardioid/supercardioid as special cases (De Sena 2012) | 2026-09-24 |
 | [[concepts/complex-root-differential-array\|Complex-Root Differential Array]] | Three-mic second-order DMA structure realizing trigonometric polynomials with complex roots at conventional filter complexity (De Sena 2012) | 2026-09-24 |
+| [[concepts/hybrid-speech-enhancement\|Hybrid Speech Enhancement]] | The three-class taxonomy of model-based/data-driven hybrids: every system = parameter estimation + enhancement operation (Haeb-Umbach et al. 2024) | 2026-09-26 |
+| [[concepts/guided-source-separation\|Guided Source Separation (GSS)]] | Diarization-guided iterative source separation: TS-VAD output constrains EM updates for speech/noise SCMs (Boeddeker et al.) | 2026-09-26 |
+| [[concepts/weighted-prediction-error\|Weighted Prediction Error (WPE)]] | STFT-domain multichannel linear prediction dereverberation; power-weighted least squares with a prediction lag Δ | 2026-09-26 |
+| [[concepts/tf-gridnet\|TF-GridNet]] | DNN–BF–DNN architecture with full-band and sub-band temporal modeling; the Class-3 hybrid prototype (Wang et al. 2023) | 2026-09-26 |
 
 ---
 
@@ -1389,6 +1396,7 @@
 | [[sources/elisei-iliescu-2019-low-rank-rls\|Elisei-Iliescu, Paleologu, Benesty, Stanciu, Anghel & Ciochină 2019]] | This paper develops recursive least-squares (RLS) adaptive filters for identifying long, low-rank systems such as network and acoustic echo paths. | 2026-09-18 |
 | [[sources/uphaus-2026-directivity-low-latency\|Uphaus, Merboldt, Hofbauer & Gerkmann 2026]] | Existing neural directional filtering (NDF) methods can adapt directivity patterns at inference but disregard real-world hearing-device constraints: dynamic scenarios, microphone positions varying with head diameter and hearing-aid placement, head shadow, and strict latency limits (≤ 10 ms — prior NDF approaches need 40–50 ms). | 2026-09-20 |
 | [[sources/desena-2012-higher-order-differential\|De Sena, Hacihabiboglu & Cvetkovic 2012]] | This paper proposes a systematic design framework for the directivity patterns of higher order differential microphones: patterns are obtained by minimizing a cost function that is a convex combination of a within/out-of-sector energy ratio and a uniformity term inside a frontal sector of interest, controlled by two physically meaningful parameters — the sector width \alpha and the convex combination factor \lambda. | 2026-09-24 |
+| [[sources/haeb-umbach-2024-microphone-array-deep-learning\|Haeb-Umbach, Nakatani, Delcroix, Boeddeker & Ochiai 2024]] | This magazine article contrasts model-based, data-driven, and hybrid approaches to multichannel speech enhancement — noise reduction, source separation, and dereverberation with compact microphone arrays — with the beamforming pipeline as its running example. | 2026-09-26 |
 
 ---
 
@@ -1442,10 +1450,10 @@
 
 ## Statistics
 
-- **Total pages**: 1391
-- **Entities**: 596
-- **Concepts**: 536
-- **Sources**: 229
+- **Total pages**: 1399
+- **Entities**: 599
+- **Concepts**: 540
+- **Sources**: 230
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-24
+- **Last updated**: 2026-09-26

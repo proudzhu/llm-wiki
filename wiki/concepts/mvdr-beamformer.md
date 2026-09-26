@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-19
+updated: 2026-09-26
 sources:
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
@@ -24,6 +24,7 @@ sources:
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
   - raw/papers/wang-2021-kronecker-adaptive-beamforming/full-text.txt
+  - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
 tags:
   - beamforming
   - speech-enhancement
@@ -107,6 +108,19 @@ The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-
 
 [[sources/zhang-2021-adl-mvdr|Zhang et al. 2021]]'s [[concepts/adl-mvdr|ADL-MVDR]] replaces the two matrix operations inside the MVDR closed form — the noise-covariance inversion and the PCA of the speech covariance for the steering vector — with two GRU-based networks, yielding **frame-level** beamforming weights trained jointly with the front-end cRF estimator. This attacks both residual noise (utterance-level weights are frame-suboptimal) and the numerical instability of matrix inversion under joint NN training (which otherwise needs [[concepts/diagonal-loading|diagonal loading]]). On a 15-channel Mandarin corpus it beats mask-based MVDR by ~17% PESQ (3.42 vs. 2.92) and multi-tap MVDR baselines on all objective metrics while cutting WER to 12.73%. Cross-source nuance vs. [[concepts/eabnet|EaBNet]] (Li et al. 2022): EaBNet found reinserting explicit SCM computation into an all-neural beamformer *hurts*, while ADL-MVDR keeps explicit SCMs as RNN inputs and wins — together suggesting the closed-form inversion/eigendecomposition, not the SCM itself, is the limiting stage.
 
+## Sufficient Statistic Under Gaussian Noise — and Why It Fails for Non-Gaussian Distortions (Haeb-Umbach et al. 2024)
+
+[[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024]] give the MVDR its clearest theoretical positioning in the model-based vs. data-driven debate. In the statistics-only form (their Eq. 8),
+
+$$\mathbf{w}_f^{\mathrm{MVDR}} = \frac{(\boldsymbol{\Phi}_{\mathbf{n},f})^{-1}\boldsymbol{\Phi}_{\mathbf{x},f}}{\operatorname{tr}\{(\boldsymbol{\Phi}_{\mathbf{n},f})^{-1}\boldsymbol{\Phi}_{\mathbf{x},f}\}}\,\mathbf{u}_1,$$
+
+the beamformer needs only the speech and noise SCMs. Two results then bracket the "all-neural" question:
+
+- **Under Gaussian noise**, the MVDR output is a **sufficient statistic** for estimating clean speech: $p(s \mid \mathbf{y}) = p(s \mid \hat{x}^{\mathrm{MVDR}})$ (Balan & Rosca 2002) — linear spatial filtering provably loses no information, so a cascade of MVDR + spectral post-filter is the right decomposition.
+- **Under non-Gaussian distortions** (e.g., competing speakers), Hendriks et al. (2009) showed the MMSE-optimal speech estimator is a **nonlinear, jointly spatial-spectral filter** that *cannot* be decomposed into a cascade of spatial and spectral stages. This optimal processor is too complex to implement model-based — the theoretical justification for replacing the beamformer with a DNN (as in [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023]]'s nonlinear filters).
+
+The article also notes the distortionless property itself has no known DNN counterpart: model-based beamforming can choose among objective functions including the MVDR's constrained (distortion-free) criterion, whereas "no such distortion-less criterion is known for DNNs".
+
 ## Kronecker MVDR for Arbitrary Geometries (Wang et al. 2021)
 
 [[sources/wang-2021-kronecker-adaptive-beamforming|Wang et al. 2021]] derive the [[concepts/kmvdr-beamformer|KMVDR beamformer]] by restricting the MVDR filter to a **sum of $P$ Kronecker products** of shorter subfilters — the first Kronecker beamformer applicable to arbitrary 3-D array geometries. With one subfilter family fixed, the MVDR optimization reduces to a closed-form update on the other stacked subfilter, with block covariances of size $PM_1 \times PM_1$ / $PM_2 \times PM_2$ instead of $M \times M$; the subfilters alternate until convergence. On a 16-microphone array with limited snapshots, KMVDR beats the conventional MVDR in output SINR (both static and dynamic interferers), with the strongest performance at rank $P = 1$ — the Kronecker structure implicitly regularizes the covariance-based estimate.
@@ -164,5 +178,6 @@ The MVDR is the distortionless limit of the [[concepts/parametric-multi-channel-
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova, Delcroix & Ochiai 2023: Neural Target Speech Extraction: An Overview]]
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — hybrid TinyGRU + MCWF beats oracle MVDR at ~50 MMACs/s
 - [[sources/wang-2021-kronecker-adaptive-beamforming|Wang et al. 2021: Kronecker Product Adaptive Beamforming for Microphone Arrays]] — KMVDR: MVDR under a sum-of-Kronecker-products representation for arbitrary geometries
+- [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — MVDR as a sufficient statistic for Gaussian noise (Balan & Rosca) vs. its loss of optimality under non-Gaussian distortions like reverberation
 - [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — review tabulating MVDR's degeneration into DSBF/superdirective under specific noise fields; parameter-estimation bottleneck in nonstationary scenes
 

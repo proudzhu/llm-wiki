@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-06-01
-updated: 2026-09-19
+updated: 2026-09-26
 sources:
   - raw/papers/pan-2025-data-driven-acoustics/full-text.md
+  - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
 tags:
   - speech-separation
   - speaker-separation
@@ -33,6 +34,10 @@ $$
 
 where $d[\cdot,\cdot]$ is typically a waveform distance such as [[concepts/si-sdr|SI-SDR]]. In the shared-network separation framework, only the per-source output layers $\mathcal{S}_{j}$ differ; the feature extractor $g(\cdot)$ is shared.
 
+## Why Denoising Needs No PIT (Haeb-Umbach et al. 2024)
+
+[[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024]] pinpoint when the permutation ambiguity arises: for **denoising**, a DNN predicts separate speech and noise masks, and "since the two have distinct spectral patterns, a DNN can learn easily which of its outputs corresponds to the speech and which to the noise masks." For **speaker separation**, per-speaker masks must be output for signals with *similar* spectral patterns — the mapping between DNN outputs and sources is arbitrary, and PIT (computing the training loss under the optimal permutation) is the standard circumvention, used in most DNN-based speech separation approaches.
+
 ## Key Properties
 
 - **Speaker-independent**: DNN outputs are not tied to any specific speaker
@@ -53,3 +58,4 @@ PIT offers a simpler alternative to [[concepts/deep-clustering-speech-separation
 
 - [[sources/wang-2018-supervised-speech-separation-deep-learning-overview|Wang & Chen 2018: Supervised Speech Separation Based on Deep Learning: An Overview]]
 - [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — the one-to-many label problem and PIT as optimal matching (Section 8.2)
+- [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — why single-target speech enhancement (denoising) needs no PIT, while separation does

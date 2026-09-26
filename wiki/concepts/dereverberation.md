@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-27
-updated: 2026-09-19
+updated: 2026-09-26
 sources:
   - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
   - raw/papers/xiang-2024-multichannel-cdr-estimation/full-text.md
+  - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
 tags:
   - signal-processing
   - speech-enhancement
@@ -50,6 +51,10 @@ Classical CDR estimators, however, ignore additive noise and are therefore biase
 
 [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023]] position dereverberation as a blind estimation problem (no anechoic reference) that matured from a sparse late-1990s literature into a flourishing field, marked by Naylor's dedicated dereverberation book (2010) and the community-wide REVERB Challenge. In their 25-year TC-AASP retrospective, the **weighted prediction error (WPE)** method is highlighted as the dominant blind multichannel-linear-prediction approach — it introduced a nonstationary Gaussian source model and delayed prediction that protects inherent source correlations from being whitened — with subsequent work shifting toward DNN-based spectral mapping and an expected continuation toward model-based + data-driven hybrids.
 
+## WPE and the Hybrid Perspective (Haeb-Umbach et al. 2024)
+
+[[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024]] present the two model-based pillars alongside their hybrid extensions: (i) a **state-space view** of the convolutive transfer function model, dereverberated by an EM algorithm whose E-step is a Kalman filter (Schwartz, Gannot & Habets 2014); and (ii) [[concepts/weighted-prediction-error|WPE]], which models late reverberation as an auto-regressive process over past frames with prediction lag $\Delta$ (protecting speech's own AR structure from whitening) and a zero-mean complex-Gaussian early component with time-varying variance $\lambda_{t,f}$. On the hybrid side, the iterative alternation of AR parameters and $\lambda_{t,f}$ can be short-circuited by a **neural PSD estimator** for $\lambda_{t,f}$ (Kinoshita et al. 2017) — a canonical Class-2 (combined parameter estimation) hybrid — and neural source models similarly couple to IVA/IVE for joint dereverberation and separation. The article cites WPE + the spatial mixture model as the CHiME-6/7 baseline choices, evidencing model-based robustness under extreme acoustics.
+
 ## Related Concepts
 
 - [[concepts/coherent-to-diffuse-power-ratio|Coherent-to-Diffuse Power Ratio (CDR)]]
@@ -72,3 +77,4 @@ Classical CDR estimators, however, ignore additive noise and are therefore biase
 - [[sources/choi-2021-trunet-real-time-speech-enhancement|Choi et al. 2021: TRU-Net — Real-Time Denoising and Dereverberation with Tiny Recurrent U-Net]]
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023: Audio Signal Processing in the 21st Century]] — 25-year retrospective positioning WPE and the dereverberation field
 - [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]] — noise-aware CDR estimation + joint SNR–CDR Wiener gain; outperforms AWPE in noise + reverberation
+- [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — WPE in the hybrid taxonomy: neural PSD estimation for model-based dereverberation (see [[concepts/weighted-prediction-error|WPE]])

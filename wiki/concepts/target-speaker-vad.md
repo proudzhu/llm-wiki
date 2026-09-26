@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-08-19
-updated: 2026-09-08
+updated: 2026-09-26
 sources:
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
   - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
+  - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
 tags:
   - speech-processing
   - voice-activity-detection
@@ -52,6 +53,10 @@ Estimating a binary activity mask is strictly simpler than estimating the target
 
 [[concepts/directional-vad|Directional VAD (DVAD)]] (Sun et al. 2024) is the spatial-clue counterpart of TS-VAD: instead of conditioning the activity decision on a speaker embedding (enrollment), it conditions on the **target's angular zone** around the microphone array and outputs activity probabilities for all $N$ zones simultaneously. DVAD needs no enrollment utterance but presumes a known talker direction (e.g., video conferencing). It serves both as a runtime gate (controlling robust-GSC adaptation) and as a soft feature fed to the TSE post-filter.
 
+## TS-VAD as the Diarization Front-End of Guided Source Separation (Haeb-Umbach et al. 2024)
+
+[[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024]] describe TS-VAD's role in [[concepts/guided-source-separation|guided source separation (GSS)]]: as a "particularly powerful" neural diarizer that "can identify the speakers active in a segment of overlapped speech," it produces time-resolution activities $m_{k,t}$ that then constrain ("guide") the EM refinement of a spatial mixture model down to TF resolution — the resulting masks driving the beamformers of the top CHiME-6/7 systems. In this pipeline TS-VAD is exactly the data-driven half of a Class-2 hybrid parameter estimator.
+
 ## Limitations and Open Issues
 
 - **Inactive target speaker**: TS-VAD must reliably output "silent" when the target is absent from the mixture, which most TSE systems are not explicitly trained to do [57].
@@ -70,3 +75,4 @@ Estimating a binary activity mask is strictly simpler than estimating the target
 
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova et al. 2023: Neural Target Speech Extraction: An Overview]]
 - [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024: Lightweight Hybrid Multi-Channel Speech Extraction with DVAD]] — introduces the spatially-conditioned DVAD variant
+- [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — TS-VAD as the diarization front-end whose output constrains GSS's EM updates

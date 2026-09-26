@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-16
+updated: 2026-09-26
 sources:
   - raw/papers/souden-2011-online-noise-tracking/full-text.md
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
@@ -14,6 +14,7 @@ sources:
   - raw/papers/li-2022-embedding-beamforming/full-text.md
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
   - raw/papers/wen-2025-neural-directed-speech-enhancement/full-text.md
+  - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
 tags:
   - speech-enhancement
   - multi-channel
@@ -62,6 +63,10 @@ tags:
 - **ANC-integrated MWF for open-fitting hearing aids (Serizel et al. 2010)**: In hearing aids with an open fitting, MWF-based NR must additionally contend with the unprocessed [[concepts/open-fitting-noise-leakage|noise leakage]] and the secondary-path attenuation — the [[concepts/filtered-x-mwf|Filtered-x MWF]] integrates multichannel NR with feedforward ANC in one filter set, gaining ~12 dB intelligibility-weighted SNR improvement where standard MWF-NR degrades at low amplification gains.
 
 - **[[concepts/cdunet|CDUNet]] (Wen et al. 2025)**: Minimal-footprint directed enhancement with only **two** microphones — a causal U-Net (74.4K params) consumes three beamformer outputs steered at the target and two width-derived edge angles ([[concepts/triple-steering-spatial-selection|triple-steering spatial selection]]), with the enhancement width as a runtime input. Beats DAS/GSC/JNF and un-steered U-Net baselines on PESQ at 0–5 dB SNR (2.50/2.82 fixed-target avg.) and on downstream NeMo ASR WER (4.35%/3.11%), and — unlike fixed-area models that collapse when the target moves (U-Net 1.56) — stays consistent across target directions (2.47–2.60) without retraining.
+
+## The Hybrid Taxonomy Perspective (Haeb-Umbach et al. 2024)
+
+[[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024]] organize the entire MCSE method space by *where* model-based and data-driven components meet (see [[concepts/hybrid-speech-enhancement|Hybrid Speech Enhancement]]): Class 1 — DNNs estimate parameters of model-based enhancement (DNN masks → MVDR; attention-tracked SCMs for moving speakers); Class 2 — combined parameter estimation (DNN priors refined by EM; [[concepts/guided-source-separation|GSS]] diarization-guided EM, the CHiME-6/7 workhorse; neural PSD estimation inside [[concepts/weighted-prediction-error|WPE]]); Class 3 — joint enhancement ([[concepts/tf-gridnet|TF-GridNet]]'s DNN–beamformer–DNN structure for joint denoising, dereverberation, and separation). The article's verdict on the all-neural trend: purely data-driven systems are increasingly competitive, but the model-based component acts as a **regularizer** that anchors robustness under train-test mismatch — so hybrids dominate when diverse, mismatched conditions matter. Earlier wiki evidence is consistent: EaBNet and ADL-MVDR (all-neural) top single-corpus comparisons, while GSS and the neural-PSD WPE hybrids carry the hardest real-world campaigns (CHiME dinner parties).
 
 ## Related Concepts
 
@@ -117,3 +122,4 @@ tags:
 - [[sources/li-2022-embedding-beamforming|Li et al. 2022: Embedding and Beamforming]] — EaBNet all-neural causal framewise beamformer; implicit spectral-spatial embedding beats oracle-mask MVDR
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — TinyGRU + MCWF hybrid: complex spectral masking at ~50 MMACs/s, beating oracle MVDR
 - [[sources/wen-2025-neural-directed-speech-enhancement|Wen et al. 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] — CDUNet: 74.4K-param causal U-Net steered by triple steering vectors with runtime enhancement width; best front-end PESQ and downstream ASR WER on a dual-mic array
+- [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — the field-defining overview: two-operation framing (parameter estimation + enhancement operation) and the three-class model-based/data-driven hybrid taxonomy

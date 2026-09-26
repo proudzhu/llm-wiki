@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-04
-updated: 2026-09-20
+updated: 2026-09-26
 sources:
   - raw/papers/tan-2018-convolutional-recurrent-network-speech-enhancement/full-text.md
   - raw/papers/pandey-2019-cnn-speech-enhancement-time-domain/full-text.md
@@ -27,6 +27,7 @@ sources:
   - raw/papers/zhang-2021-adl-mvdr/full-text.md
   - raw/papers/pan-2025-data-driven-acoustics/full-text.md
   - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
+  - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -77,6 +78,7 @@ The thesis here is that the field's progress is **not a single replacement story
 | [[sources/shetu-2026-munet\|Shetu et al. 2026 (μNet)]] | 2026 | Efficiency | 46K params / 90 KB static / int8 on HiFi 4 DSP; 4–16 ms latency; [[concepts/noise-attenuation-control\|noise attenuation control]] |
 | [[sources/shetu-2026-generative-discriminative-comparison\|Shetu, Habets & Brendel 2026]] | 2026 | Training paradigm | 14-model controlled comparison of discriminative / GAN / diffusion training; same NCSN++ backbone under three objectives |
 | [[sources/pan-2025-data-driven-acoustics\|Pan 2025]] | 2025 | Training objective (taxonomy) | Tutorial framing SE as *estimation*; three-level loss hierarchy (filter gain → spectrum → waveform) with SI-SDR–correlation equivalence |
+| [[sources/haeb-umbach-2024-microphone-array-deep-learning\|Haeb-Umbach et al. 2024]] | 2024 | Multi-channel (taxonomy) | IEEE SPM overview codifying the model-based/data-driven hybrid landscape: two-operation framing (parameter estimation + enhancement operation), three hybrid classes, and the model-as-regularizer argument |
 
 ## Insight 1: The Training Target Evolved from Pointwise Masks to Neighborhood Filters
 
@@ -172,6 +174,8 @@ The multi-channel arc has three phases, each relaxing an assumption of the previ
 
 The conceptual move from phase 2 to phase 3 is from "learn the beamformer" to "condition a backbone on geometry." A parallel reframing appears in [[sources/apostolidis-2026-listen-first-output-based-multi-microphone\|Apostolidis 2026]]'s [[concepts/output-based-speech-enhancement\|output-based SE]]: instead of extracting features from the noisy input to predict a filter, evaluate the SI/SQ of *candidate outputs* and select the best — outperforming input-based MVDR especially at low SNR. Both 2026 works invert a long-standing assumption: the relevant signal is the *output* (or the geometry), not the input spectrum.
 
+**The taxonomy that names this arc (Haeb-Umbach et al. 2024)**: the multi-channel phases above receive their canonical formulation in [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024]]'s IEEE SPM overview — the two-operation framing (every enhancement system = parameter estimation + enhancement operation) and a three-class hybrid taxonomy: Class 1, data-driven parameter estimation for model-based enhancement (Neural VSLF; [[concepts/weighted-prediction-error\|WPE]] with neural PSD estimates); Class 2, combined model-based + data-driven estimation ([[concepts/guided-source-separation\|GSS]]'s diarization-constrained EM); Class 3, joint enhancement ([[concepts/tf-gridnet\|TF-GridNet]]'s DNN–BF–DNN). The overview also supplies both theoretical bookends of the arc: MVDR is a *sufficient statistic* when the noise is Gaussian (Balan & Rosca 2002) — the formal sense in which phase-1 hybrids lose nothing — while non-Gaussian distortions (reverberation, interfering speech) make the optimal filter a non-decomposable nonlinear MMSE estimator, the regime where phase-2/3 end-to-end networks win. Its **model-as-regularizer** argument — classical structure keeps data-driven components within physically reasonable behavior on unexpected inputs — explains why hybrid systems keep outperforming their end-to-end rivals in deployment and robustness studies (Sun 2024's real-world transfer; R-MWF's no-DNN win) even when benchmarks favor all-neural systems. See [[concepts/hybrid-speech-enhancement\|Hybrid Speech Enhancement]].
+
 ## Insight 7: Generative SE Crossed the One-Step Barrier in 2026 — but Discriminative Still Competes
 
 [[concepts/diffusion-models-for-speech\|Diffusion models]] established SOTA SE quality via score-based reverse dynamics, but their iterative inference (10–100 NFE) was a real-time blocker. The 2026 corpus shows the one-step barrier finally crossed:
@@ -230,7 +234,7 @@ The canonical survey for the TSE half of this complementarity is [[sources/zmoli
 - [[concepts/time-domain-speech-enhancement|Time-Domain Speech Enhancement]] · [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]] — domain choice
 - [[concepts/dprnn|Dual-Path RNN]] · [[concepts/mp-senet|MP-SENet]] · [[concepts/semamba|SEMamba]] · [[concepts/mamba-mingru|Mamba-MinGRU]] · [[concepts/sse-net|SSE-Net]] — backbone lineage
 - [[concepts/gtcrn|GTCRN]] · [[concepts/cofi-lite|CoFi-Lite]] · [[concepts/adaptcrn|AdaptCRN]] · [[concepts/igcrn|IGCRN]] · [[concepts/iccrn|ICCRN]] · [[concepts/sicrn|SICRN]] — efficiency frontier
-- [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]] · [[concepts/neural-beamforming|Neural Beamforming]] · [[concepts/array-invariant-speech-enhancement|Array-Invariant SE]] · [[concepts/geometry-aware-dynamic-convolution|Geo-DConv]] · [[concepts/output-based-speech-enhancement|Output-based SE]]
+- [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]] · [[concepts/neural-beamforming|Neural Beamforming]] · [[concepts/array-invariant-speech-enhancement|Array-Invariant SE]] · [[concepts/geometry-aware-dynamic-convolution|Geo-DConv]] · [[concepts/output-based-speech-enhancement|Output-Based SE]] · [[concepts/hybrid-speech-enhancement|Hybrid Speech Enhancement]]
 - [[concepts/personalized-speech-enhancement|Personalized SE]] · [[concepts/target-speaker-extraction|Target Speaker Extraction]] · [[concepts/own-voice-cancellation|Own-Voice Cancellation]] · [[concepts/prior-matching|Prior Matching]]
 - [[concepts/diffusion-models-for-speech|Diffusion Models for Speech]] · [[concepts/drifting-models|Drifting Models]] · [[concepts/generative-vs-discriminative-speech-enhancement|Generative vs. Discriminative Speech Enhancement]] · [[concepts/speech-enhancement-hallucination|Speech Enhancement Hallucination]] · [[concepts/one-step-generative-models|One-Step Generative Models]]
 - [[concepts/generalized-loss-function|Generalized Loss Function]] · [[concepts/frequency-domain-loss|Frequency-Domain Loss]] · [[concepts/noise-attenuation-control|Noise Attenuation Control]] · [[concepts/artificial-residual-noise|Artificial Residual Noise]] — training-objective / noise-control lineage

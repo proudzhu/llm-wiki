@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-04-17
-updated: 2026-09-19
+updated: 2026-09-26
 tags:
 - deep-learning
 - machine-learning
 - signal-processing
 sources:
   - raw/papers/pan-2025-data-driven-acoustics/full-text.md
+  - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
 ---
 # Deep Learning for Signal Processing
 
@@ -24,6 +25,14 @@ sources:
 | **Transformation** | Convert signals to a more suitable domain | Contrastive losses, density alignment (adversarial, optimal transport) | Voiceprint extraction, feature learning, generative models |
 
 The same tutorial expresses arbitrary architectures in a compact **composite-function notation** — $\mathcal{C}$ (CNN), $\mathcal{G}$ (gated recurrent), $\mathcal{R}$ (residual), $\mathcal{U}$ (U-Net), $\mathcal{E}$/$\mathcal{D}$ (encoder/decoder), $\mathcal{A}$ (feature fusion), $\mathcal{F}$ (fully connected), $\mathcal{T}$ (transformer), $\mathcal{S}$ (output layer) — so that a full network reads $f(\bm{x}) = \mathcal{S} \circ \mathcal{F}_{3} \circ \cdots \circ \mathcal{C}_{1}(\bm{x})$ (see [[concepts/neural-networks|Neural Networks]]).
+
+## Model-Based vs. Data-Driven vs. Hybrid (Haeb-Umbach et al. 2024)
+
+[[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024]] provide the field's sharpest framing of this page's central tension, for multichannel speech enhancement:
+
+- **Every enhancement system = parameter estimation + enhancement operation**; model-based methods estimate parameters from the signal itself (no training stage, no train-test mismatch, proven optimality under assumptions, explainability), while data-driven methods estimate them in a training stage (no simplifying assumptions, top performance, but data-hungry and mismatch-sensitive).
+- **Hybrids blend at either stage** — three classes: data-driven parameter estimation for model-based enhancement; combined model-based + data-driven parameter estimation; joint model-based + data-driven enhancement (see [[concepts/hybrid-speech-enhancement|Hybrid Speech Enhancement]] for the taxonomy).
+- **The "model as regularizer" thesis**: physical knowledge embedded in model-based components prevents data-driven components from deviating too far from physically reasonable behavior on unexpected inputs — the argument for keeping signal-processing structure inside neural systems rather than replacing it wholesale.
 
 ## Core Concepts
 
@@ -68,3 +77,4 @@ In traditional signal processing (TSP), algorithms like the **[[wiener-filter]]*
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — GRU-based step-size prediction for adaptive feedback cancellation
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys the migration from statistical/heuristic signal-processing methods to deep-learning architectures across a 60-year horizon
 - [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — tutorial unifying data-driven acoustic signal processing under the detection/estimation/transformation task taxonomy
+- [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — the model-based vs. data-driven vs. hybrid framing for multichannel speech enhancement

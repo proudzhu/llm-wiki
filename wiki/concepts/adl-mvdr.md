@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-12
-updated: 2026-09-12
+updated: 2026-09-26
 sources:
   - raw/papers/zhang-2021-adl-mvdr/full-text.md
+  - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
 tags:
   - beamforming
   - mvdr
@@ -50,6 +51,10 @@ On a 15-channel Mandarin audio-visual corpus (~200 h, 205.5k clips, T60 = 0.05�
 - Tension with [[concepts/eabnet|EaBNet]] (Li et al. 2022): EaBNet's ablation found that reinserting explicit SCM computation into an all-neural beamformer *hurts*, while ADL-MVDR keeps explicit SCMs as RNN inputs and wins. Together these suggest the closed-form matrix inversion/eigendecomposition — not the [[concepts/spatial-covariance-matrix|SCM]] itself — is the unstable or limiting stage in end-to-end beamforming.
 - A journal extension, "Multi-Channel Multi-Frame ADL-MVDR" (IEEE/ACM TASLP 2021), generalizes the framework.
 
+## Position in the All-Neural Progression (Haeb-Umbach et al. 2024)
+
+[[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024]] position ADL-MVDR as the second step in the field's progressive replacement of model-based beamforming components: after DNN mask estimation + model-based MVDR (Class 1 hybrid), RNN-estimated SCMs were "found to be more reliable, in particular in the presence of time-varying statistics" — with subsequent steps going further (direct neural estimation of beamformer coefficients, largely unsuccessful; learnable filterbanks replacing the STFT; and abandoning beamforming for nonlinear neural filters, [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023]]). See [[concepts/hybrid-speech-enhancement|Hybrid Speech Enhancement]] for the full progression and its theoretical backdrop.
+
 ## Related Concepts
 
 - [[concepts/mvdr-beamformer|MVDR Beamformer]]
@@ -65,3 +70,4 @@ On a 15-channel Mandarin audio-visual corpus (~200 h, 205.5k clips, T60 = 0.05�
 ## Related Sources
 
 - [[sources/zhang-2021-adl-mvdr|Zhang et al. 2021: ADL-MVDR]]
+- [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — positions ADL-MVDR in the all-neural progression of the hybrid taxonomy

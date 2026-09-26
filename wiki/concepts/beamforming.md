@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-09-19
+updated: 2026-09-26
 sources:
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.txt
@@ -10,6 +10,7 @@ sources:
   - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
   - raw/papers/kim-2014-doa-based-snr-estimation/full-text.txt
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
+  - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
 tags:
 - acoustics
 - antenna-theory
@@ -99,6 +100,10 @@ Yang et al. (2025) introduce [[concepts/differential-asr|differential ASR]], a d
 
 Kim & Kim (2014) quantify a fundamental small-array limitation: the spatial directivity patterns of beamformers are constrained by the number of microphones, so a **dual-microphone super-directive beamformer (SDB)** underperforms masking-based methods (PEF, ASBM) in SDR — SDB was consistently the worst method in their benchmark across scenarios, SNRs, and RT60s. GSC followed by a post Wiener filter (GSC-PW) fared little better. Conversely, they *reuse* beamforming machinery analytically: the delay-and-sum beamformer and blocking-matrix transfer functions, evaluated on the time-aligned dual-microphone signals, yield the [[concepts/target-to-non-target-directional-signal-ratio|TNR]] as their power ratio — turning two beamformers into a spatial-cue estimator that feeds [[concepts/doa-based-snr-estimation|DOA-based SNR estimation]] instead of producing the enhancement output directly.
 
+## The All-Neural Challenge and the Model-as-Regularizer Argument (Haeb-Umbach et al. 2024)
+
+[[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024]] use beamforming as the case study for the trend of replacing model-based components with learnable ones: DNN mask estimation + model-based MVDR → RNN-estimated SCMs ([[concepts/adl-mvdr|ADL-MVDR]]) → direct neural beamformer-coefficient estimation (unsuccessful) → learnable filterbanks with time-domain beamforming → abandoning beamforming for nonlinear neural spatial-spectral filters ([[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023]]). The theoretical license is that MVDR optimality is conditional on Gaussian noise (where it is a sufficient statistic); non-Gaussian distortions call for non-decomposable nonlinear filters that DNNs approximate. The counter-argument — the article's central reservation — is that a model-based component "introduces valid physical knowledge to the system, serving as a kind of **regularizer**" against out-of-domain inputs, and that beamforming-derived systems (via [[concepts/guided-source-separation|GSS]]) remain the robustness benchmark on CHiME dinner-party data. See [[concepts/hybrid-speech-enhancement|Hybrid Speech Enhancement]].
+
 ## Related Concepts
 
 - [[transparency-mode|Transparency Mode]]
@@ -142,3 +147,4 @@ Kim & Kim (2014) quantify a fundamental small-array limitation: the spatial dire
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev, Mihov, Gleghorn & Acero 2008: Sound Capture System and Spatial Filter for Small Devices]] — difference-maximizing front/back beamformer for back-to-back unidirectional microphone arrays
 - [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] — adjusted MVDR as one of three complementary frontends in differential ASR
 - [[sources/kim-2014-doa-based-snr-estimation|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] — dual-mic SDB/GSC-PW outperformed by spatial-cue masking methods; DSB/BM transfer-function ratio reused as a TNR estimator
+- [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — the all-neural challenge to beamforming and the model-as-regularizer argument for retaining beamforming structure

@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-19
+updated: 2026-09-26
 sources:
   - raw/papers/pan-2026-array-self-awareness/full-text.md
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
@@ -9,6 +9,7 @@ sources:
   - raw/papers/li-2022-embedding-beamforming/full-text.md
   - raw/papers/zhang-2021-adl-mvdr/full-text.md
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
+  - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
 tags:
   - array-processing
   - spatial-statistics
@@ -78,6 +79,14 @@ Not every SCM in beamforming is *estimated* from data: fixed [[concepts/superdir
 
 [[sources/zhang-2021-adl-mvdr|Zhang et al. 2021]]'s [[concepts/adl-mvdr|ADL-MVDR]] estimates **frame-level** SCMs — deliberately *not* summing over time, so each frame keeps its own statistics — from complex ratio filters (3×3 cRF) applied to the multi-channel mixture, with the cRF center mask used for normalization. The inversion of the noise SCM and the PCA of the speech SCM (steering-vector extraction) are then replaced by two GRU networks that recursively accumulate covariance information across frames without heuristic updating factors. This resolves the numerical instability of closed-form matrix inversion during joint NN training. Read together with [[sources/li-2022-embedding-beamforming|Li et al. 2022]]'s EaBNet finding (explicit SCM *computation* reinserted into an all-neural beamformer hurts), ADL-MVDR's success suggests the unstable or limiting stage is the closed-form inversion/eigendecomposition — not the SCM as an input representation, which ADL-MVDR retains and exploits.
 
+## Unified Accumulation View: From Forgetting Factor to Attention (Haeb-Umbach et al. 2024)
+
+[[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024]] observe that the mask-based SCM estimates, the recursive tracker, and attention-based tracking are all instances of one weighted-accumulation operator. With instantaneous SCMs $\hat{\boldsymbol{\Psi}}_{\mathbf{x}_k,t,f} = m_{k,t,f}\,\mathbf{y}_{t,f}\mathbf{y}_{t,f}^{\mathsf{H}}$:
+
+- **Block averaging** (Eq. 12) accumulates uniformly over $T$ frames;
+- **Recursive tracking** for moving sources uses a first-order filter with forgetting factor $0 < \beta < 1$, $\hat{\boldsymbol{\Phi}}_{\mathbf{x}_k,t,f} = \beta\,\hat{\boldsymbol{\Phi}}_{\mathbf{x}_k,t-1,f} + \hat{\boldsymbol{\Psi}}_{\mathbf{x}_k,t,f}$ — but the optimal $\beta$ depends on how fast the acoustic environment changes;
+- The general form $\hat{\boldsymbol{\Phi}}_{\mathbf{x}_k,t,f} = \sum_{t'} c_{\mathbf{x}_k,t,t'}\,\hat{\boldsymbol{\Psi}}_{\mathbf{x}_k,t',f}$ has the structure of a **(self-)attention mechanism** — so attention networks can *learn* the accumulation weights $c$ for SCM estimation in dynamic acoustic environments (Ochiai, Delcroix, Nakatani & Araki 2023), replacing the hard-coded forgetting factor.
+
 ## Related Concepts
 
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
@@ -117,3 +126,4 @@ Not every SCM in beamforming is *estimated* from data: fixed [[concepts/superdir
 - [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — mask-derived SCM estimation with learned per-frequency exponential smoothing
 - [[sources/li-2022-embedding-beamforming|Li et al. 2022: Embedding and Beamforming]] — implicit spectral-spatial embedding empirically beats explicit SCM computation in end-to-end neural beamforming
 - [[sources/zhang-2021-adl-mvdr|Zhang et al. 2021: ADL-MVDR]] — frame-level SCMs estimated from cRF filters; inversion and PCA replaced by GRU networks
+- [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — the unified accumulation view: from recursive forgetting-factor updates to attention-based SCM tracking

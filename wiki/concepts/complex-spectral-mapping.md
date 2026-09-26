@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-16
-updated: 2026-09-13
+updated: 2026-09-26
 sources:
   - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
   - raw/papers/zhan-2026-joint-afc-rfs/full-text.md
+  - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -47,6 +48,10 @@ $$L = \|S_r - \hat{S}_r\|_1 + \|S_i - \hat{S}_i\|_1 + \||S| - |\hat{S}|\|_1$$
 - **TinyGRU (Pandey & Azcarreta 2025)**: the complex-domain (masking rather than direct RI mapping) counterpart at the ultra-low-compute multichannel frontier — 8-channel complex spectral masking with MCWF integration at ~50 MMACs/s; see [[concepts/complex-ratio-mask|Complex Ratio Mask]] for the masking-vs-mapping distinction
 - **RFSNet (Zhan et al. 2026)**: full-sub-band CSM for residual hearing-aid feedback suppression — maps compressed RI features of the cancellation-stage output plus the microphone signal to the clean spectrum, with global causal time-frequency attention; 0.396M params, 0.227 G MACs/s, 8 ms latency ([[concepts/jointdfc|JointDFC]])
 
+## Multichannel Extension: RI Stacking for Spatial Cues (Haeb-Umbach et al. 2024)
+
+Real-valued DNNs are natively poor at both phase and spatial information: on a compact array, spatial diversity manifests as **inter-channel phase differences**, i.e., again a phase quantity. [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024]] trace the remedies: explicit IPD features appended to spectral features, and — decisively — the **same RI-stacking trick** that fixed phase for single-channel CSM, applied across channels: the multichannel input becomes a (time × frequency × channel × RI) tensor in which real and imaginary parts of all $D$ channels are stacked. This enables **multi-microphone complex spectral mapping** (Wang, Wang & Wang 2021) for utterance-wise and continuous speech separation, and is the input representation of alternating full-/sub-band architectures such as [[concepts/tf-gridnet|TF-GridNet]].
+
 ## Related Concepts
 
 - [[concepts/bone-conduction|Bone Conduction]]
@@ -59,3 +64,4 @@ $$L = \|S_r - \hat{S}_r\|_1 + \|S_i - \hat{S}_i\|_1 + \||S| - |\hat{S}|\|_1$$
 - [[sources/wang-2021-magnitude-phase-compensation|Wang, Wichern & Le Roux 2021: On the Compensation Between Magnitude and Phase in Speech Separation]] — analyzes the RI loss's implicit magnitude-phase compensation
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — complex-domain masking brought to the ~50 MMACs/s multichannel regime via TinyGRU
 - [[sources/zhan-2026-joint-afc-rfs|Zhan, Moore, Li & Zheng 2026: JointDFC]] — RFSNet: full-sub-band CSM for residual hearing-aid feedback suppression
+- [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — the multichannel extension: RI stacking across channels for joint magnitude–phase–spatial-cue preservation
