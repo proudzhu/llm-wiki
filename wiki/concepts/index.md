@@ -552,4 +552,6 @@
 | [[concepts/interaural-level-difference\|Interaural Level Difference (ILD)]] | Level difference between the ears from head shadowing; high-frequency localization cue; scale-sensitive losses needed to preserve it. | 2026-09-27 |
 | [[concepts/head-related-transfer-function\|Head-Related Transfer Function (HRTF)]] | Direction- and listener-dependent transfer function to each eardrum; basis of ITD/ILD cues and of binaural training-data synthesis (CIPIC + BRIRs). | 2026-09-27 |
 | [[concepts/hearables\|Hearables]] | Ear-worn audio devices with sensing and computation; 20-50 ms latency budget, on-device binaural processing constraints. | 2026-09-27 |
+| [[concepts/low-frequency-harmonic-control\|Low-Frequency Harmonic Control (LFHC)]] | Low-complexity post-filter suppressing f0 and emphasizing 2nd/3rd harmonics to improve open-ear playback intelligibility (Watanabe 2026) | 2026-09-27 |
+| [[concepts/open-ear-headphones\|Open-Ear Headphones]] | Unoccluded wearable audio: high acoustic transparency but weak low-frequency output and free noise ingress; intelligibility challenges and remedies | 2026-09-27 |
 

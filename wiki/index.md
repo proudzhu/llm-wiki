@@ -614,6 +614,10 @@
 | [[entities/justin-chan\|Justin Chan]] | UW researcher; semantic hearing and Waveformer co-author; smartphone hearing screening. | 2026-09-27 |
 | [[entities/takuya-yoshioka\|Takuya Yoshioka]] | Microsoft researcher; semantic hearing, Waveformer, SoundBeam, personalized speech enhancement. | 2026-09-27 |
 | [[entities/shyamnath-gollakota\|Shyamnath Gollakota]] | UW professor; senior author of semantic hearing, Waveformer, ClearBuds; wireless systems and mobile health sensing. | 2026-09-27 |
+| [[entities/yuki-watanabe\|Yuki Watanabe]] | NTT researcher; first author of LFHC for open-ear intelligibility (ICASSP 2026); acoustic transparency of wearable audio (CHI 2025) | 2026-09-27 |
+| [[entities/hironobu-chiba\|Hironobu Chiba]] | NTT researcher; pitch-adaptive post-filtering for CELP coders (2014); co-author of LFHC (ICASSP 2026) | 2026-09-27 |
+| [[entities/yutaka-kamamoto\|Yutaka Kamamoto]] | NTT researcher; speech coding and post-filtering; co-author of LFHC (ICASSP 2026) | 2026-09-27 |
+| [[entities/tatsuya-kako\|Tatsuya Kako]] | NTT researcher; speech and audio processing for wearable devices; co-author of LFHC (ICASSP 2026) | 2026-09-27 |
 
 ---
 
@@ -1171,6 +1175,8 @@
 | [[concepts/interaural-level-difference\|Interaural Level Difference (ILD)]] | Level difference between the ears from head shadowing; high-frequency localization cue; scale-sensitive losses needed to preserve it. | 2026-09-27 |
 | [[concepts/head-related-transfer-function\|Head-Related Transfer Function (HRTF)]] | Direction- and listener-dependent transfer function to each eardrum; basis of ITD/ILD cues and of binaural training-data synthesis (CIPIC + BRIRs). | 2026-09-27 |
 | [[concepts/hearables\|Hearables]] | Ear-worn audio devices with sensing and computation; 20-50 ms latency budget, on-device binaural processing constraints. | 2026-09-27 |
+| [[concepts/low-frequency-harmonic-control\|Low-Frequency Harmonic Control (LFHC)]] | Low-complexity post-filter suppressing f0 and emphasizing 2nd/3rd harmonics to improve open-ear playback intelligibility (Watanabe 2026) | 2026-09-27 |
+| [[concepts/open-ear-headphones\|Open-Ear Headphones]] | Unoccluded wearable audio: high acoustic transparency but weak low-frequency output and free noise ingress; intelligibility challenges and remedies | 2026-09-27 |
 
 ---
 
@@ -1411,6 +1417,7 @@
 | [[sources/desena-2012-higher-order-differential\|De Sena, Hacihabiboglu & Cvetkovic 2012]] | This paper proposes a systematic design framework for the directivity patterns of higher order differential microphones: patterns are obtained by minimizing a cost function that is a convex combination of a within/out-of-sector energy ratio and a uniformity term inside a frontal sector of interest, controlled by two physically meaningful parameters — the sector width \alpha and the convex combination factor \lambda. | 2026-09-24 |
 | [[sources/haeb-umbach-2024-microphone-array-deep-learning\|Haeb-Umbach, Nakatani, Delcroix, Boeddeker & Ochiai 2024]] | This magazine article contrasts model-based, data-driven, and hybrid approaches to multichannel speech enhancement — noise reduction, source separation, and dereverberation with compact microphone arrays — with the beamforming pipeline as its running example. | 2026-09-26 |
 | [[sources/veluri-2023-semantic-hearing\|Veluri, Itani, Chan, Yoshioka & Gollakota 2023]] | This paper introduces semantic hearing, a new capability for hearable devices that lets users programmatically attend to or block specific real-world sound classes in real time (e.g., hear bird chirps but block street chatter) while preserving the spatial cues of the kept sounds. | 2026-09-27 |
+| [[sources/watanabe-2026-low-frequency-harmonic-control\|Watanabe, Chiba, Kamamoto & Kako 2026]] | This paper presents Low-Frequency Harmonic Control (LFHC), a low-complexity post-filter that improves the intelligibility of speech played back through open-ear headphones in noisy environments without amplifying volume. | 2026-09-27 |
 
 ---
 
@@ -1464,10 +1471,10 @@
 
 ## Statistics
 
-- **Total pages**: 1413
-- **Entities**: 604
-- **Concepts**: 548
-- **Sources**: 231
+- **Total pages**: 1420
+- **Entities**: 608
+- **Concepts**: 550
+- **Sources**: 232
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-09-27

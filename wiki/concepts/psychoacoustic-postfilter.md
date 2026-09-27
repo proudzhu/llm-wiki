@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-08
-updated: 2026-08-08
+updated: 2026-09-27
 sources:
   - raw/papers/wung-2011-residual-echo-suppression-system/full-text.md
+  - raw/papers/watanabe-2026-low-frequency-harmonic-control/full-text.md
 tags:
   - psychoacoustic-postfilter
   - residual-echo-suppression
@@ -40,7 +41,9 @@ Because the masking threshold rises during double talk (loud near-end speech mas
 
 - [[concepts/residual-echo-suppression|Residual Echo Suppression]] — the postfilter is the perceptually motivated gain stage of RES.
 - [[concepts/acoustic-echo-cancellation|Acoustic Echo Cancellation]] — the upstream stage whose error signal the postfilter cleans.
+- [[concepts/low-frequency-harmonic-control|Low-Frequency Harmonic Control]] — the masking-aware counterpart for playback intelligibility: instead of suppressing noise up to the masking threshold, it reallocates the desired signal's harmonic energy into less-masked bands (open-ear headphone scenario).
 
 ## Related Sources
 
-- [[sources/wung-2011-residual-echo-suppression-system|Wung et al. 2011]] — uses the psychoacoustic postfilter [4] (Gustafsson, Martin, Jax & Vary, 2002) with MPEG-1 Model 2 masking on top of the proposed residual echo estimate.
+- [[sources/wung-2011-residual-echo-suppression-system|Wung et al. 2011]] — uses the psychoacoustic postfilter [4] (Gustafsson, Martin, Jax & Vary, 2002) with MPEG-1 Model 2 masking on top of the proposed residual-echo estimate.
+- [[sources/watanabe-2026-low-frequency-harmonic-control|Watanabe et al. 2026]] — shares the masking-aware post-filtering principle, applied to playback intelligibility rather than residual-noise suppression.

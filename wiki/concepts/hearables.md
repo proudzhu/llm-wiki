@@ -4,6 +4,7 @@ created: 2026-09-27
 updated: 2026-09-27
 sources:
   - raw/papers/veluri-2023-semantic-hearing/full-text.md
+  - raw/papers/watanabe-2026-low-frequency-harmonic-control/full-text.md
 tags:
   - hearables
   - audio-signal-processing
@@ -26,6 +27,7 @@ Hearable audio processing is among the most constrained real-time signal-process
 
 - **[[concepts/semantic-hearing|Semantic hearing]]** (Veluri et al. 2023): program the acoustic scene by sound class on a noise-canceling headset.
 - Speech enhancement for telephony (e.g., ClearBuds binaural earbuds, 44.8 ms lookahead, 109 ms latency — too slow for in-ear augmented audio).
+- **Open-ear playback intelligibility** ([[sources/watanabe-2026-low-frequency-harmonic-control|Watanabe et al. 2026]]): [[concepts/open-ear-headphones|open-ear headphones]] have weak low-frequency output and let noise in freely; [[concepts/low-frequency-harmonic-control|LFHC]] post-filtering improves playback intelligibility with a handful of filter taps.
 - Health sensing (blood pressure, ear-based activity) and interaction (ultrasonic head tracking, on-face touch).
 
 ## Related Concepts
@@ -34,7 +36,10 @@ Hearable audio processing is among the most constrained real-time signal-process
 - [[concepts/active-noise-control|Active Noise Control]]
 - [[concepts/audio-latency|Audio Latency]]
 - [[concepts/binaural-target-sound-extraction|Binaural Target Sound Extraction]]
+- [[concepts/open-ear-headphones|Open-Ear Headphones]]
+- [[concepts/low-frequency-harmonic-control|Low-Frequency Harmonic Control]]
 
 ## Related Sources
 
 - [[sources/veluri-2023-semantic-hearing|Veluri et al. 2023: Semantic Hearing]]
+- [[sources/watanabe-2026-low-frequency-harmonic-control|Watanabe et al. 2026: Low-Frequency Harmonic Control]]

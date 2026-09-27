@@ -608,4 +608,8 @@
 | [[entities/justin-chan\|Justin Chan]] | UW researcher; semantic hearing and Waveformer co-author; smartphone hearing screening. | 2026-09-27 |
 | [[entities/takuya-yoshioka\|Takuya Yoshioka]] | Microsoft researcher; semantic hearing, Waveformer, SoundBeam, personalized speech enhancement. | 2026-09-27 |
 | [[entities/shyamnath-gollakota\|Shyamnath Gollakota]] | UW professor; senior author of semantic hearing, Waveformer, ClearBuds; wireless systems and mobile health sensing. | 2026-09-27 |
+| [[entities/yuki-watanabe\|Yuki Watanabe]] | NTT researcher; first author of LFHC for open-ear intelligibility (ICASSP 2026); acoustic transparency of wearable audio (CHI 2025) | 2026-09-27 |
+| [[entities/hironobu-chiba\|Hironobu Chiba]] | NTT researcher; pitch-adaptive post-filtering for CELP coders (2014); co-author of LFHC (ICASSP 2026) | 2026-09-27 |
+| [[entities/yutaka-kamamoto\|Yutaka Kamamoto]] | NTT researcher; speech coding and post-filtering; co-author of LFHC (ICASSP 2026) | 2026-09-27 |
+| [[entities/tatsuya-kako\|Tatsuya Kako]] | NTT researcher; speech and audio processing for wearable devices; co-author of LFHC (ICASSP 2026) | 2026-09-27 |
 

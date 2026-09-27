@@ -14,6 +14,7 @@ sources:
   - zotero://select/items/0_BPH79CM5 (DeepPEM-AFC)
   - zotero://select/items/0_AMKNDVMJ (Toyooka 2026)
   - raw/papers/veluri-2023-semantic-hearing/full-text.md
+  - raw/papers/watanabe-2026-low-frequency-harmonic-control/full-text.md
 ---
 
 # Modern Headphone ANC Systems: Beyond Noise Cancellation
@@ -185,6 +186,7 @@ The rise of Open-Ear (OWS) devices creates a new ANC challenge: the primary nois
 
 - **Hybrid ANC with Dual Compensation**: As analyzed by [[sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026]], open-ear systems require dual compensation filters to reconstruct target signals accurately in dynamic environments where multiple noise sources (external vs. internal) compete.
 - **Preserve instead of reconstruct**: [[sources/xiao-2023-spatially-selective-anc|Xiao, Xu & Zhao 2023]] show on open-fitting AR glasses that a Frost-type spatial constraint on the hybrid ANC cost function leaves the desired-direction physical wave unaltered at the error microphone — avoiding the latency, energy (~50× more secondary-source energy for reconstruct-based systems), and binaural-cue loss of synthetic reconstruction ([[concepts/spatially-selective-anc|Spatially Selective ANC]]).
+- **Signal adaptation before control**: [[sources/watanabe-2026-low-frequency-harmonic-control|Watanabe et al. 2026]] sidestep the leakage problem entirely — instead of anti-noise, their [[concepts/low-frequency-harmonic-control|LFHC]] post-filter reallocates speech harmonic energy away from the masked, output-limited low frequencies (suppress $f_0$, emphasize the 2nd/3rd harmonics via a single-tap comb filter), improving open-ear playback intelligibility at −5 dB(A) SNR — orders of magnitude cheaper than the dual-compensation or spatial-constraint approaches above.
 - **SoC Convergence**: Hardware platforms (e.g., BES6100) are now integrating dedicated NPUs and ISP pipelines to manage multi-modal sensing in real-time, moving computation from the cloud to the device edge.
 
 ### 5.2 The Future: Multi-Modal Acoustic Computing
@@ -251,6 +253,7 @@ This requires a dedicated DSP (e.g., Qualcomm QCC5141, ~200 MIPS capability).
 - [[sources/xiao-2023-spatially-selective-anc|Xiao, Xu & Zhao 2023: Spatially Selective Active Noise Control Systems]]
 - [[sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
 - [[sources/veluri-2023-semantic-hearing|Veluri et al. 2023: Semantic Hearing]] — class-selective binaural reinsertion on top of the ANC clean slate; the headphone as a programmable acoustic scene platform
+- [[sources/watanabe-2026-low-frequency-harmonic-control|Watanabe et al. 2026: Low-Frequency Harmonic Control]] — open-ear playback intelligibility via signal adaptation (harmonic energy reallocation) rather than noise control
 
 ## Related Synthesis
 

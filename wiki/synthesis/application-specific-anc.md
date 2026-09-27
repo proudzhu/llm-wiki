@@ -1,13 +1,14 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-09-07
+updated: 2026-09-27
 sources:
   - zotero://select/items/0_M2F5PSAU
   - zotero://select/items/0_TVS87FW6
   - zotero://select/items/0_BQ3P7LZJ
   - zotero://select/items/0_WBAA4H6N
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
+  - raw/papers/watanabe-2026-low-frequency-harmonic-control/full-text.md
 tags:
   - application-specific-anc
   - drone-anc
@@ -95,6 +96,8 @@ Yuan et al.'s key innovation: since the ear is **open**, you cannot measure the 
 **Performance**: 9.6 dB noise reduction (no calibration), 11.2 dB (with user-specific calibration). Tested across 8 environments × 11 users.
 
 **Key challenge**: The open-ear design means anti-noise leaks away and ambient sound enters freely. The neural network must model this complex acoustic coupling in real-time.
+
+**A signal-side alternative (Watanabe et al. 2026)**: instead of controlling the noise, adapt the *playback signal* to the same open-ear constraints — weak low-frequency speaker output and freely-entering low-frequency environmental noise. [[sources/watanabe-2026-low-frequency-harmonic-control|Watanabe et al. 2026]]'s [[concepts/low-frequency-harmonic-control|LFHC]] post-filter suppresses the speech fundamental and emphasizes the 2nd/3rd harmonics, moving energy out of the masked, output-limited band. Where Yuan et al.'s virtual in-ear perception needs a neural network updating every 200 ms plus a 4-channel 2048-tap DSP pipeline, LFHC needs one comb-filter tap plus a short moving-average low-pass. The form factor again drives the architecture — but toward DSP-minimal *signal adaptation* rather than noise control, trading what ANC cannot achieve in an open field (noise reduction) for what it can (intelligibility gain at −5 dB(A) SNR without volume increase).
 
 ---
 
@@ -232,3 +235,5 @@ The specific implementation of each step differs, but the **sense-act-adapt loop
 - [[concepts/hybrid-anc|Hybrid ANC]]
 
 ## Related Sources
+
+- [[sources/watanabe-2026-low-frequency-harmonic-control|Watanabe et al. 2026: Low-Frequency Harmonic Control for Speech Intelligibility in Open-Ear Headphones]] — signal-side alternative to open-ear ANC: reallocate harmonic energy instead of canceling noise
