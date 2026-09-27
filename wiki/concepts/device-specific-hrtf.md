@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-05
-updated: 2026-05-05
+updated: 2026-09-27
 sources:
   - wiki/sources/liebich-2018-doa-dependency-anc-headphones.md
+  - raw/papers/veluri-2023-semantic-hearing/full-text.md
 tags:
   - acoustics
   - hrtf
@@ -44,6 +45,10 @@ The DOA dependency is analogous to how human hearing perceives sound differently
 
 Since [[feedforward-anc|Feedforward ANC]] relies on the primary path $P(z)$ to compute the optimal filter, DHRTF variations directly impact ANC performance. [[feedback-anc|Feedback ANC]] depends only on the secondary path $G(z)$ (between loudspeaker and inner microphone), which is DOA-independent due to the fixed positions of these components.
 
+## Cross-User HRTF Generalization
+
+Whereas DHRTF captures the device's transfer paths for ANC design, hearable applications that *synthesize* audio must generalize across the user's own HRTF. Semantic hearing (Veluri et al. 2023) trains on binaural data synthesized from the CIPIC per-subject HRTs augmented with measured (SBSBRIR, RRBRIR) and simulated (CATT RIR) binaural room impulse responses, split across subjects and rooms — achieving generalization to unseen users' HRTFs and real reverberation without any data collected on the target hardware. See [[concepts/head-related-transfer-function|Head-Related Transfer Function]].
+
 ## Related Concepts
 
 - [[primary-path-variability|Primary Path Variability]]
@@ -55,3 +60,4 @@ Since [[feedforward-anc|Feedforward ANC]] relies on the primary path $P(z)$ to c
 ## Related Sources
 
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
+- [[sources/veluri-2023-semantic-hearing|Veluri et al. 2023: Semantic Hearing]] — cross-user HRTF generalization for hearable binaural synthesis via CIPIC + BRIR training data

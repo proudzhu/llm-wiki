@@ -603,4 +603,9 @@
 | [[entities/reinhold-haeb-umbach\|Reinhold Haeb-Umbach]] | Paderborn University — hybrid model-based/data-driven speech enhancement; IEEE SPM 2024 overview co-author | 2026-09-26 |
 | [[entities/tomohiro-nakatani\|Tomohiro Nakatani]] | Kyoto University / NTT Fellow — data-driven dereverberation (WPE), GSS, and unified speech enhancement frameworks | 2026-09-26 |
 | [[entities/christoph-boeddeker\|Christoph Boeddeker]] | Paderborn University (HSA Project Group) — data-driven beamforming; guided source separation (GSS) | 2026-09-26 |
+| [[entities/bandhav-veluri\|Bandhav Veluri]] | UW researcher; co-first author of semantic hearing (UIST 2023); first author of Waveformer (ICASSP 2023). | 2026-09-27 |
+| [[entities/malek-itani\|Malek Itani]] | UW researcher; co-first author of semantic hearing (UIST 2023); hearable systems and spatial audio. | 2026-09-27 |
+| [[entities/justin-chan\|Justin Chan]] | UW researcher; semantic hearing and Waveformer co-author; smartphone hearing screening. | 2026-09-27 |
+| [[entities/takuya-yoshioka\|Takuya Yoshioka]] | Microsoft researcher; semantic hearing, Waveformer, SoundBeam, personalized speech enhancement. | 2026-09-27 |
+| [[entities/shyamnath-gollakota\|Shyamnath Gollakota]] | UW professor; senior author of semantic hearing, Waveformer, ClearBuds; wireless systems and mobile health sensing. | 2026-09-27 |
 

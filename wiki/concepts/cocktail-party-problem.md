@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-08-19
-updated: 2026-09-16
+updated: 2026-09-27
 sources:
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
   - raw/papers/ansari-2023-ai-bss-survey/full-text.md
   - raw/papers/wen-2025-neural-directed-speech-enhancement/full-text.md
+  - raw/papers/veluri-2023-semantic-hearing/full-text.md
 tags:
   - speech-processing
   - psychoacoustics
@@ -42,6 +43,8 @@ The TSE formulation is the engineering response that most directly mirrors the h
 
 Although TSE is engineering-motivated, it is closely connected to the cognitive cocktail-party mechanism. Both humans and TSE systems use auxiliary cues to disambiguate the target; the difference is that engineering systems are not constrained to mimic biological auditory processing. Recent extensions of TSE explore semantic and brain-signal clues (e.g., EEG-guided TSE [61]) that move closer to high-level human attention.
 
+The idea extends beyond speech: [[concepts/semantic-hearing|semantic hearing]] (Veluri et al. 2023) realizes class-based selective listening on hearables — the user names a sound *class* (birds, sirens, speech) rather than a specific speaker, and a binaural network extracts it while preserving spatial cues. This is the environmental-sound analog of the TSE formulation, with speech demoted to one class among twenty.
+
 ## Related Concepts
 
 - [[concepts/target-speaker-extraction|Target Speaker Extraction (TSE)]]
@@ -53,4 +56,5 @@ Although TSE is engineering-motivated, it is closely connected to the cognitive 
 
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova et al. 2023: Neural Target Speech Extraction: An Overview]]
 - [[sources/ansari-2023-ai-bss-survey|Ansari et al. 2023: AI Approaches in BSS Survey]] — lists the cocktail-party problem as one of the canonical BSS motivations.
-- [[sources/wen-2025-neural-directed-speech-enhancement|Wen et al. 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] — targets the cocktail-party problem with a spatial-clue approach: a dual-microphone directional enhancer steered by the target angle plus a runtime enhancement width.
+- [[sources/wen-2025-neural-directed-speech-enhancement|Wen et al. 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] — targets the cocktail-party problem with a spatial-clue approach: a dual-microphone directional enhancer steered by the target angle plus a runtime enhancement width
+- [[sources/veluri-2023-semantic-hearing|Veluri et al. 2023: Semantic Hearing]] — extends selective listening from a target *speaker* to arbitrary sound *classes* on binaural hearables, preserving spatial cues in real time.

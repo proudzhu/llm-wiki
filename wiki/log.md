@@ -5515,3 +5515,15 @@ Ingested the IEEE Signal Processing Magazine overview article contrasting **mode
 - Updated 12 existing concept pages — e.g. MVDR sufficient statistic under Gaussian noise vs. non-Gaussian failure ([[concepts/mvdr-beamformer|MVDR Beamformer]]), the forgetting-factor-to-attention accumulation view ([[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]), why denoising needs no PIT ([[concepts/permutation-invariant-training|PIT]]), RI stacking for spatial cues ([[concepts/complex-spectral-mapping|Complex Spectral Mapping]]), model-as-regularizer ([[concepts/beamforming|Beamforming]])
 - Updated 2 synthesis pages: [[synthesis/deep-speech-enhancement|Deep Speech Enhancement]] (Insight 6: the taxonomy naming the multi-channel arc) and [[synthesis/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]] (Insight 4: the taxonomy organizing the hybrid cluster)
 - Full text and figures at `raw/papers/haeb-umbach-2024-microphone-array-deep-learning/`
+
+---
+
+## [2026-09-27] ingest | Semantic Hearing: Programming Acoustic Scenes with Binaural Hearables (Veluri et al. 2023)
+
+- **Source**: `raw/papers/veluri-2023-semantic-hearing/full-text.md` (Zotero: JN3SKC4V)
+- **Authors**: Bandhav Veluri, Malek Itani, Justin Chan, Takuya Yoshioka, Shyamnath Gollakota
+- **Published**: ACM UIST 2023, San Francisco, CA, USA
+- **DOI**: 10.1145/3586183.3606779
+- **Summary**: Introduces semantic hearing — real-time class-selective listening on binaural hearables with spatial-cue preservation; first binaural target sound extraction neural network (modified Waveformer, 6.56 ms/chunk on smartphone, 7.17 dB SI-SNRi over 20 classes) plus an HRTF/BRIR-synthesis training methodology that generalizes to unseen users, rooms, and hardware.
+- **Pages created**: wiki/sources/veluri-2023-semantic-hearing.md; wiki/entities/bandhav-veluri.md, malek-itani.md, justin-chan.md, takuya-yoshioka.md, shyamnath-gollakota.md; wiki/concepts/semantic-hearing.md, binaural-target-sound-extraction.md, target-sound-extraction.md, waveformer.md, interaural-time-difference.md, interaural-level-difference.md, head-related-transfer-function.md, hearables.md
+- **Pages updated**: wiki/concepts/active-noise-control.md (semantic-hearing bullet + source), audio-latency.md (hearable 20–50 ms budget, 6.56 ms runtime), cocktail-party-problem.md (class-based selective listening extension), sound-event-detection.md (relation to sound extraction), device-specific-hrtf.md (cross-user HRTF generalization); wiki/synthesis/ai-driven-anc.md (new §2.7 playback-path pattern + efficiency row), modern-headphone-anc-systems.md (§5.2 semantic selectivity), deep-speech-enhancement.md (Sources table row, Insight 6 channel-wiring datapoint, Insight 8 class-query conditioning); index files + statistics

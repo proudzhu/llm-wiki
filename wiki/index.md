@@ -609,6 +609,11 @@
 | [[entities/reinhold-haeb-umbach\|Reinhold Haeb-Umbach]] | Paderborn University — hybrid model-based/data-driven speech enhancement; IEEE SPM 2024 overview co-author | 2026-09-26 |
 | [[entities/tomohiro-nakatani\|Tomohiro Nakatani]] | Kyoto University / NTT Fellow — data-driven dereverberation (WPE), GSS, and unified speech enhancement frameworks | 2026-09-26 |
 | [[entities/christoph-boeddeker\|Christoph Boeddeker]] | Paderborn University (HSA Project Group) — data-driven beamforming; guided source separation (GSS) | 2026-09-26 |
+| [[entities/bandhav-veluri\|Bandhav Veluri]] | UW researcher; co-first author of semantic hearing (UIST 2023); first author of Waveformer (ICASSP 2023). | 2026-09-27 |
+| [[entities/malek-itani\|Malek Itani]] | UW researcher; co-first author of semantic hearing (UIST 2023); hearable systems and spatial audio. | 2026-09-27 |
+| [[entities/justin-chan\|Justin Chan]] | UW researcher; semantic hearing and Waveformer co-author; smartphone hearing screening. | 2026-09-27 |
+| [[entities/takuya-yoshioka\|Takuya Yoshioka]] | Microsoft researcher; semantic hearing, Waveformer, SoundBeam, personalized speech enhancement. | 2026-09-27 |
+| [[entities/shyamnath-gollakota\|Shyamnath Gollakota]] | UW professor; senior author of semantic hearing, Waveformer, ClearBuds; wireless systems and mobile health sensing. | 2026-09-27 |
 
 ---
 
@@ -1158,6 +1163,14 @@
 | [[concepts/guided-source-separation\|Guided Source Separation (GSS)]] | Diarization-guided iterative source separation: TS-VAD output constrains EM updates for speech/noise SCMs (Boeddeker et al.) | 2026-09-26 |
 | [[concepts/weighted-prediction-error\|Weighted Prediction Error (WPE)]] | STFT-domain multichannel linear prediction dereverberation; power-weighted least squares with a prediction lag Δ | 2026-09-26 |
 | [[concepts/tf-gridnet\|TF-GridNet]] | DNN–BF–DNN architecture with full-band and sub-band temporal modeling; the Class-3 hybrid prototype (Wang et al. 2023) | 2026-09-26 |
+| [[concepts/semantic-hearing\|Semantic Hearing]] | Hearable capability (Veluri 2023): attend to or block specific sound classes in real time while preserving spatial cues, using ANC as an acoustic clean slate. | 2026-09-27 |
+| [[concepts/binaural-target-sound-extraction\|Binaural Target Sound Extraction]] | Extracting target sound classes from a two-ear mixture while preserving ITD/ILD spatial cues; first real-time neural network by Veluri et al. 2023. | 2026-09-27 |
+| [[concepts/target-sound-extraction\|Target Sound Extraction]] | Separating cued target sounds (any class, via audio/image/text/one-hot clues) from a mixture — the class-general sibling of target speech extraction. | 2026-09-27 |
+| [[concepts/waveformer\|Waveformer]] | Streaming encoder-decoder architecture for real-time target sound extraction (Veluri 2023, ICASSP); dilated-causal-conv encoder + transformer decoder, extended to binaural in semantic hearing. | 2026-09-27 |
+| [[concepts/interaural-time-difference\|Interaural Time Difference (ITD)]] | Arrival-time difference between the ears; primary low-frequency localization cue that binaural extraction must preserve (ΔITD metric). | 2026-09-27 |
+| [[concepts/interaural-level-difference\|Interaural Level Difference (ILD)]] | Level difference between the ears from head shadowing; high-frequency localization cue; scale-sensitive losses needed to preserve it. | 2026-09-27 |
+| [[concepts/head-related-transfer-function\|Head-Related Transfer Function (HRTF)]] | Direction- and listener-dependent transfer function to each eardrum; basis of ITD/ILD cues and of binaural training-data synthesis (CIPIC + BRIRs). | 2026-09-27 |
+| [[concepts/hearables\|Hearables]] | Ear-worn audio devices with sensing and computation; 20-50 ms latency budget, on-device binaural processing constraints. | 2026-09-27 |
 
 ---
 
@@ -1397,6 +1410,7 @@
 | [[sources/uphaus-2026-directivity-low-latency\|Uphaus, Merboldt, Hofbauer & Gerkmann 2026]] | Existing neural directional filtering (NDF) methods can adapt directivity patterns at inference but disregard real-world hearing-device constraints: dynamic scenarios, microphone positions varying with head diameter and hearing-aid placement, head shadow, and strict latency limits (≤ 10 ms — prior NDF approaches need 40–50 ms). | 2026-09-20 |
 | [[sources/desena-2012-higher-order-differential\|De Sena, Hacihabiboglu & Cvetkovic 2012]] | This paper proposes a systematic design framework for the directivity patterns of higher order differential microphones: patterns are obtained by minimizing a cost function that is a convex combination of a within/out-of-sector energy ratio and a uniformity term inside a frontal sector of interest, controlled by two physically meaningful parameters — the sector width \alpha and the convex combination factor \lambda. | 2026-09-24 |
 | [[sources/haeb-umbach-2024-microphone-array-deep-learning\|Haeb-Umbach, Nakatani, Delcroix, Boeddeker & Ochiai 2024]] | This magazine article contrasts model-based, data-driven, and hybrid approaches to multichannel speech enhancement — noise reduction, source separation, and dereverberation with compact microphone arrays — with the beamforming pipeline as its running example. | 2026-09-26 |
+| [[sources/veluri-2023-semantic-hearing\|Veluri, Itani, Chan, Yoshioka & Gollakota 2023]] | This paper introduces semantic hearing, a new capability for hearable devices that lets users programmatically attend to or block specific real-world sound classes in real time (e.g., hear bird chirps but block street chatter) while preserving the spatial cues of the kept sounds. | 2026-09-27 |
 
 ---
 
@@ -1450,10 +1464,10 @@
 
 ## Statistics
 
-- **Total pages**: 1399
-- **Entities**: 599
-- **Concepts**: 540
-- **Sources**: 230
+- **Total pages**: 1413
+- **Entities**: 604
+- **Concepts**: 548
+- **Sources**: 231
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-26
+- **Last updated**: 2026-09-27

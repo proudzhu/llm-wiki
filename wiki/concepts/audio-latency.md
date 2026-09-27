@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-07-07
-updated: 2026-09-20
+updated: 2026-09-27
 tags:
   - audio-signal-processing
   - realtime-processing
@@ -9,6 +9,7 @@ tags:
 sources:
   - raw/papers/rath-2026-minimum-delay-block-size/full-text.txt
   - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
+  - raw/papers/veluri-2023-semantic-hearing/full-text.md
 ---
 
 # Audio Latency
@@ -41,6 +42,9 @@ Hearing aids impose a strict total latency limit of **≤ 10 ms** (Stone & Moore
 
 This constraint is a key obstacle for [[concepts/neural-directional-filtering|neural directional filtering]]: prior NDF approaches carry 40–50 ms total latency. [[concepts/film-osn|FiLM-OSN]] (Uphaus et al. 2026) meets the hearing-aid budget with an 8 ms window and 2 ms hop (10 ms total), showing that a Mamba-based backbone tolerates such short windows where an LSTM-based FT-JNF loses 0.38 PESQ and 1.7 dB SI-SDR.
 
+For [[concepts/hearables|hearables]] with live playback to the ear (augmented audio), the budget loosens to **20–50 ms** end-to-end so output stays synced with the user's visual senses. Within that budget, semantic hearing (Veluri et al. 2023) decomposes its latency into: microphone buffer (chunk) duration + algorithmic lookahead + network processing time + OS audio I/O (~4 ms on iOS). Its binaural extraction network processes 10 ms chunks (416 samples at 44.1 kHz, stride 32, lookahead 0.7 ms → ~10.1 ms algorithmic latency) in **6.56 ms** on a smartphone (0.52 M params, 240 MFLOPS), and degrades gracefully down to 1.4 ms algorithmic latency (6.59 vs 7.42 dB SI-SNRi), suggesting ASIC implementations could reach ultra-low-latency operation.
+
 ## Related Sources
 
 - [[sources/uphaus-2026-directivity-low-latency|Uphaus et al. 2026: Directivity-Conditioned Low-Latency Neural Filtering]] — 10 ms-latency NDF for hearing aids
+- [[sources/veluri-2023-semantic-hearing|Veluri et al. 2023: Semantic Hearing]] — 20–50 ms hearable latency budget; 6.56 ms on-smartphone binaural extraction of 10 ms chunks, graceful degradation to 1.4 ms algorithmic latency

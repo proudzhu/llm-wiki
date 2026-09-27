@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-04-29
+updated: 2026-09-27
 tags:
   - active-noise-control
   - bone-conduction
@@ -13,6 +13,7 @@ tags:
 sources:
   - zotero://select/items/0_BPH79CM5 (DeepPEM-AFC)
   - zotero://select/items/0_AMKNDVMJ (Toyooka 2026)
+  - raw/papers/veluri-2023-semantic-hearing/full-text.md
 ---
 
 # Modern Headphone ANC Systems: Beyond Noise Cancellation
@@ -190,6 +191,7 @@ The rise of Open-Ear (OWS) devices creates a new ANC challenge: the primary nois
 
 1. **Acoustic Transparency as an AI Pipeline**: Transparency is no longer a static filter; it is an AI-driven reconstruction that filters, enhances, or modifies the external soundscape based on user intent (e.g., selective attenuation).
 2. **Hardware-Algorithm Co-Design**: Future ANC designs will not be algorithm-first (e.g., picking FXLMS vs. MPC), but form-factor-first (e.g., prioritizing sensor placement for VAD/Bone Conduction alongside primary error microphones).
+3. **Semantic Selectivity, Not Just Attenuation**: [[concepts/semantic-hearing|Semantic hearing]] (Veluri et al. 2023) makes the "selective attenuation" vision concrete — ANC provides the acoustic clean slate, and a real-time binaural network reintroduces only user-chosen sound *classes* (speech, sirens, birds — 20 classes selectable, LLM-mapped natural-language queries in the prototype UI) while preserving their spatial cues. This is the class-aware generalization of the awareness layer (§2): instead of a VAD deciding *whether* to be transparent, a class query decides *what* to be transparent to. Its 20–50 ms end-to-end budget and 6.56 ms smartphone inference fit the per-chunk compute regime of §6.3; wireless form factors would need the extraction moved onto the headset SoC.
 
 ---
 
@@ -248,6 +250,7 @@ This requires a dedicated DSP (e.g., Qualcomm QCC5141, ~200 MIPS capability).
 - [[sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026: Hybrid ANC with Dual Compensation]]
 - [[sources/xiao-2023-spatially-selective-anc|Xiao, Xu & Zhao 2023: Spatially Selective Active Noise Control Systems]]
 - [[sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
+- [[sources/veluri-2023-semantic-hearing|Veluri et al. 2023: Semantic Hearing]] — class-selective binaural reinsertion on top of the ANC clean slate; the headphone as a programmable acoustic scene platform
 
 ## Related Synthesis
 

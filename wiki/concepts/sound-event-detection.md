@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-19
-updated: 2026-09-19
+updated: 2026-09-27
 sources:
   - raw/papers/pan-2025-data-driven-acoustics/full-text.md
+  - raw/papers/veluri-2023-semantic-hearing/full-text.md
 tags:
   - sound-event-detection
   - audio-processing
@@ -37,6 +38,10 @@ With many event types and sparse occurrence, most training slices are negative, 
 - **Fully convolutional network**: 4 conv blocks (channels 32/64/128/128, $3\times3$ time-frequency kernels, BN + ReLU) + $1\times1$ conv to $L$ channels + sigmoid; frequency dimension averaged, then aggregated.
 - **CRNN**: convolutional feature extraction followed by a gated recurrent layer and a multiple-sigmoid output head — the standard shape for frame-level SED (e.g., the CRNN baseline of the DCASE challenges).
 
+## Relation to Sound Extraction
+
+SED classifies *when* and *what* events occur but produces no isolated waveform. [[concepts/target-sound-extraction|Target sound extraction]] is the waveform-producing counterpart: given a class label (like a SED class), it outputs the isolated event audio. Semantic hearing (Veluri et al. 2023) couples the two ideas operationally — a user-selected class query drives real-time binaural extraction on hearables, and its dataset construction (20 target + 141 interfering classes selected from the AudioSet ontology) is a class-taxonomy design problem familiar from SED.
+
 ## Related Concepts
 
 - [[concepts/sel-d|SELD]] — joint sound event localization and detection
@@ -49,3 +54,4 @@ With many event types and sparse occurrence, most training slices are negative, 
 ## Related Sources
 
 - [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — Sections 3.1 and 5 formulate SED as detection with aggregation and class-imbalance handling
+- [[sources/veluri-2023-semantic-hearing|Veluri et al. 2023: Semantic Hearing]] — real-time class-conditioned binaural sound extraction on hearables; AudioSet-ontology class taxonomy (20 target + 141 interfering classes)

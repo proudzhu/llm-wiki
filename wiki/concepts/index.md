@@ -544,4 +544,12 @@
 | [[concepts/guided-source-separation\|Guided Source Separation (GSS)]] | Diarization-guided iterative source separation: TS-VAD output constrains EM updates for speech/noise SCMs (Boeddeker et al.) | 2026-09-26 |
 | [[concepts/weighted-prediction-error\|Weighted Prediction Error (WPE)]] | STFT-domain multichannel linear prediction dereverberation; power-weighted least squares with a prediction lag Δ | 2026-09-26 |
 | [[concepts/tf-gridnet\|TF-GridNet]] | DNN–BF–DNN architecture with full-band and sub-band temporal modeling; the Class-3 hybrid prototype (Wang et al. 2023) | 2026-09-26 |
+| [[concepts/semantic-hearing\|Semantic Hearing]] | Hearable capability (Veluri 2023): attend to or block specific sound classes in real time while preserving spatial cues, using ANC as an acoustic clean slate. | 2026-09-27 |
+| [[concepts/binaural-target-sound-extraction\|Binaural Target Sound Extraction]] | Extracting target sound classes from a two-ear mixture while preserving ITD/ILD spatial cues; first real-time neural network by Veluri et al. 2023. | 2026-09-27 |
+| [[concepts/target-sound-extraction\|Target Sound Extraction]] | Separating cued target sounds (any class, via audio/image/text/one-hot clues) from a mixture — the class-general sibling of target speech extraction. | 2026-09-27 |
+| [[concepts/waveformer\|Waveformer]] | Streaming encoder-decoder architecture for real-time target sound extraction (Veluri 2023, ICASSP); dilated-causal-conv encoder + transformer decoder, extended to binaural in semantic hearing. | 2026-09-27 |
+| [[concepts/interaural-time-difference\|Interaural Time Difference (ITD)]] | Arrival-time difference between the ears; primary low-frequency localization cue that binaural extraction must preserve (ΔITD metric). | 2026-09-27 |
+| [[concepts/interaural-level-difference\|Interaural Level Difference (ILD)]] | Level difference between the ears from head shadowing; high-frequency localization cue; scale-sensitive losses needed to preserve it. | 2026-09-27 |
+| [[concepts/head-related-transfer-function\|Head-Related Transfer Function (HRTF)]] | Direction- and listener-dependent transfer function to each eardrum; basis of ITD/ILD cues and of binaural training-data synthesis (CIPIC + BRIRs). | 2026-09-27 |
+| [[concepts/hearables\|Hearables]] | Ear-worn audio devices with sensing and computation; 20-50 ms latency budget, on-device binaural processing constraints. | 2026-09-27 |
 
