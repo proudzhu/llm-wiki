@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-09-11
+updated: 2026-09-28
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
+  - raw/papers/rout-2012-pso-anc-without-secondary-path/full-text.txt
 tags:
 - adaptive-algorithms
 - lms
@@ -74,10 +75,16 @@ FxLMS assumes the reference signal is a clean measurement of the primary noise. 
 
 The remedy can be applied *outside* the adaptation law: subtract an estimate of the loudspeaker leakage from the reference before it enters FxLMS. [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang et al. 2026]] use a [[concepts/relative-transfer-matrix|Relative Transfer Matrix]] for this, replacing both the filtered reference $\mathbf{M}_{\mathrm{R}}^{\prime}$ in the weight update (Eq. 16) and the power estimate $\hat{\mathbf{P}}$ in the normalization (Eq. 18) with their feedback-subtracted versions — the normalized frequency-domain FxLMS of [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo & Morgan 1999]] then runs unmodified. Note that the quantity fed to the controller is not the clean primary reference but $\mathbf{P}_{\mathrm{R}} - \mathbf{R}_{\mathrm{RF}}^{(\mathrm{Sec})}\mathbf{P}_{\mathrm{F}}$, so feedback neutralization alters the effective primary path as well as removing the leakage.
 
+## Gradient-Free Escape: Population-Based Alternatives
+
+The dependence on $\hat{S}(z)$ and the gradient update are structural properties of FxLMS, not tunable ones. [[sources/rout-2012-pso-anc-without-secondary-path|Rout, Das & Panda 2012]] replace the gradient descent entirely with particle swarm optimization: $P$ parallel candidate filters are evaluated on consecutive blocks of the live noise stream (via a MUX/DMUX round-robin), so no secondary path estimate ever enters the adaptation. On a static path the PSO-trained weights converge **exactly** to the FxLMS optimum (computed with an exact $\hat{S}$), but unlike FxLMS the scheme keeps converging after abrupt secondary-path changes that would destabilize the filtered-x update. The price is update granularity — weights change once per generation ($M \times P$ samples) rather than every sample — plus the cost of evaluating a $P$-filter population; see [[concepts/conditional-reinitialized-pso|CRPSO]] and [[concepts/heuristic-anc-algorithms|Heuristic ANC Algorithms]].
+
 ## Related Concepts
 
 - [[concepts/active-noise-control|Active Noise Control]]
 - [[concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]]
+- [[concepts/heuristic-anc-algorithms|Heuristic ANC Algorithms]] — population-based, secondary-path-free alternatives
+- [[concepts/conditional-reinitialized-pso|Conditional Reinitialized PSO (CRPSO)]] — online PSO-ANC robust to abrupt path changes
 - [[concepts/simplified-adaptive-feedback-anc|Simplified Adaptive Feedback ANC]]
 - [[concepts/online-secondary-path-estimation|Online Secondary Path Estimation]]
 - [[concepts/subband-adaptive-filter|Subband Adaptive Filter]]
@@ -97,3 +104,4 @@ The remedy can be applied *outside* the adaptation law: subtract an estimate of 
 - [[sources/ma-2027-robust-ffanc-online-path-modeling|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] — modifies the FXLMS update to use the second SF output $y_2(n)$ instead of the residual error $e(n)$, reducing the influence of additive noise and injected AWGN
 - [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024: ANC Algorithms Overcoming Output Saturation]] — uses FxLMS as the baseline for the output-saturation analysis and complexity comparison of saturation-mitigation algorithms
 - [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] — keeps the normalized frequency-domain FxLMS update intact and makes the reference feedback-free upstream; documents the step-size/spacing region where unmitigated multichannel FxLMS diverges
+- [[sources/rout-2012-pso-anc-without-secondary-path|Rout, Das & Panda 2012: PSO-Based ANC Without Secondary Path Identification]] — replaces the gradient FxLMS update with PSO; converges to the exact FxLMS optimum on static paths without any $\hat{S}(z)$

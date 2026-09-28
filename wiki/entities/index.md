@@ -613,4 +613,7 @@
 | [[entities/yutaka-kamamoto\|Yutaka Kamamoto]] | NTT researcher; speech coding and post-filtering; co-author of LFHC (ICASSP 2026) | 2026-09-27 |
 | [[entities/tatsuya-kako\|Tatsuya Kako]] | NTT researcher; speech and audio processing for wearable devices; co-author of LFHC (ICASSP 2026) | 2026-09-27 |
 | [[entities/libin-zhang\|Libin Zhang]] | Researcher; co-author of DP-ANC (Yang et al. 2026) | 2026-09-21 |
+| [[entities/nirmal-kumar-rout\|Nirmal Kumar Rout]] | KIIT University — first author of the PSO-based ANC algorithm without secondary path identification | 2026-09-28 |
+| [[entities/debi-prasad-das\|Debi Prasad Das]] | CSIR-IMMT Bhubaneswar — co-author, filtered-s LMS researcher | 2026-09-28 |
+| [[entities/ganapati-panda\|Ganapati Panda]] | IIT Bhubaneswar — co-author, filtered-s LMS and comprehensive-learning PSO researcher | 2026-09-28 |
 

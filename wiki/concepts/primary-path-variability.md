@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-05
-updated: 2026-08-27
+updated: 2026-09-28
 sources:
   - wiki/sources/liebich-2018-doa-dependency-anc-headphones.md
   - wiki/sources/guldenschuh-2014-secondary-path-irregularities.md
+  - raw/papers/rout-2012-pso-anc-without-secondary-path/full-text.txt
 tags:
   - active-noise-control
   - direction-of-arrival
@@ -45,6 +46,10 @@ Since the optimal feedforward filter is $\hat{W}_{\text{opt}}(z) = P(z)/G(z)$, a
 | 200 Hz – 1 kHz | Moderate | Some DOAs show degraded performance |
 | > 1 kHz | Severe | Feedforward ANC highly DOA-dependent; resonance effects |
 
+## Abrupt Primary-Path Changes
+
+DOA variability is gradual and continuous; the complementary case is an **abrupt** primary-path change — e.g., a door or window suddenly opening in a room or vehicle cabin — which invalidates a converged controller instantly. A gradient-based controller can re-track the new path, but a converged population-based optimizer has lost its diversity and remains stuck at the old optimum. The [[concepts/conditional-reinitialized-pso|conditional reinitialized PSO]] of [[sources/rout-2012-pso-anc-without-secondary-path|Rout, Das & Panda 2012]] addresses exactly this case: the gbest squared-error jump triggers re-randomization of the swarm, recovering the global minimum after every change (verified over ten independent runs).
+
 ## Comparison: In-Ear vs. On-Ear
 
 In-ear headphones show less primary path variability than on-ear headphones (cf. Guldenschuh), because:
@@ -62,8 +67,10 @@ Primary-path variability is DOA-driven and attacks **high frequencies** (>1 kHz,
 - [[feedforward-anc|Feedforward ANC]]
 - [[uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
 - [[secondary-path-variability|Secondary Path Variability]]
+- [[concepts/conditional-reinitialized-pso|Conditional Reinitialized PSO]] — handles abrupt (not DOA-driven) primary-path changes
 
 ## Related Sources
 
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
 - [[sources/guldenschuh-2014-secondary-path-irregularities|Guldenschuh & de Callafon 2014: Detection of Secondary-Path Irregularities in ANC Headphones]]
+- [[sources/rout-2012-pso-anc-without-secondary-path|Rout, Das & Panda 2012: PSO-Based ANC Without Secondary Path Identification]] — abrupt (door/cabin) primary-path changes handled by CRPSO reinitialization

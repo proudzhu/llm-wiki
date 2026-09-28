@@ -619,6 +619,9 @@
 | [[entities/yutaka-kamamoto\|Yutaka Kamamoto]] | NTT researcher; speech coding and post-filtering; co-author of LFHC (ICASSP 2026) | 2026-09-27 |
 | [[entities/tatsuya-kako\|Tatsuya Kako]] | NTT researcher; speech and audio processing for wearable devices; co-author of LFHC (ICASSP 2026) | 2026-09-27 |
 | [[entities/libin-zhang\|Libin Zhang]] | Researcher; co-author of DP-ANC (Yang et al. 2026) | 2026-09-21 |
+| [[entities/nirmal-kumar-rout\|Nirmal Kumar Rout]] | KIIT University — first author of the PSO-based ANC algorithm without secondary path identification | 2026-09-28 |
+| [[entities/debi-prasad-das\|Debi Prasad Das]] | CSIR-IMMT Bhubaneswar — co-author, filtered-s LMS researcher | 2026-09-28 |
+| [[entities/ganapati-panda\|Ganapati Panda]] | IIT Bhubaneswar — co-author, filtered-s LMS and comprehensive-learning PSO researcher | 2026-09-28 |
 
 ---
 
@@ -1179,6 +1182,7 @@
 | [[concepts/low-frequency-harmonic-control\|Low-Frequency Harmonic Control (LFHC)]] | Low-complexity post-filter suppressing f0 and emphasizing 2nd/3rd harmonics to improve open-ear playback intelligibility (Watanabe 2026) | 2026-09-27 |
 | [[concepts/open-ear-headphones\|Open-Ear Headphones]] | Unoccluded wearable audio: high acoustic transparency but weak low-frequency output and free noise ingress; intelligibility challenges and remedies | 2026-09-27 |
 | [[concepts/direction-preserving-anc\|Direction-Preserving ANC (DP-ANC)]] | ANC that attenuates noise from non-desired directions while preserving sound naturally arriving from a specified desired direction; component-separated cancellation-preservation objective with FiLM-conditioned filter estimation | 2026-09-21 |
+| [[concepts/conditional-reinitialized-pso\|Conditional Reinitialized PSO]] | PSO variant that detects abrupt primary/secondary path changes via gbest error jumps and reinitializes the particle population | 2026-09-28 |
 
 ---
 
@@ -1421,6 +1425,7 @@
 | [[sources/veluri-2023-semantic-hearing\|Veluri, Itani, Chan, Yoshioka & Gollakota 2023]] | This paper introduces semantic hearing, a new capability for hearable devices that lets users programmatically attend to or block specific real-world sound classes in real time (e.g., hear bird chirps but block street chatter) while preserving the spatial cues of the kept sounds. | 2026-09-27 |
 | [[sources/watanabe-2026-low-frequency-harmonic-control\|Watanabe, Chiba, Kamamoto & Kako 2026]] | This paper presents Low-Frequency Harmonic Control (LFHC), a low-complexity post-filter that improves the intelligibility of speech played back through open-ear headphones in noisy environments without amplifying volume. | 2026-09-27 |
 | [[sources/yang-2026-direction-preserving-anc\|Yang, Luo, Wang, Zhang & Gan 2026: Direction-Preserving ANC with a Conditional Control-Filter Estimation Network]] | DP-ANC as direction-conditioned cancellation-preservation optimization; FiLM-conditioned network estimates full FIR control-filter bank in one forward pass (22.8 dB NR, -11.4 dB distortion, ~3000x cheaper than analytical SSANC) | 2026-09-21 |
+| [[sources/rout-2012-pso-anc-without-secondary-path\|Rout, Das & Panda 2012]] | This paper develops a systematic online particle swarm optimization (PSO) training scheme for linear feedforward ANC that requires no secondary path identification whatsoever. | 2026-09-28 |
 
 ---
 
@@ -1474,10 +1479,10 @@
 
 ## Statistics
 
-- **Total pages**: 1423
-- **Entities**: 609
-- **Concepts**: 551
-- **Sources**: 233
+- **Total pages**: 1428
+- **Entities**: 612
+- **Concepts**: 552
+- **Sources**: 234
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-09-28

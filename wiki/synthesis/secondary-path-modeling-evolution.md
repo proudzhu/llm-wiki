@@ -1,9 +1,10 @@
 ---
 type: synthesis
 created: 2026-04-25
-updated: 2026-05-17
+updated: 2026-09-28
 sources:
   - zotero://select/items/0_QVJMFTWC
+  - raw/papers/rout-2012-pso-anc-without-secondary-path/full-text.txt
 tags:
   - anc
   - secondary-path
@@ -62,10 +63,12 @@ ANC 运行时注入低功率辅助噪声 $v(n)$，同时辨识 $\hat{S}(z)$。
 | 方法 | 原理 | 代价 |
 |------|------|------|
 | **SPR 条件**（Zhou 2007） | 严格正实条件保证稳定性，无需 $\hat{S}(z)$ | 条件苛刻，实际难以满足 |
-| **进化搜索**（GA/PSO） | 遗传算法/粒子群直接搜索最优 $W(z)$ | 计算量极大，不适合实时 |
+| **进化搜索**（GA/PSO） | 遗传算法/粒子群直接搜索最优 $W(z)$ | 种群计算开销大（如 $P=200$ 个并行滤波器），更新粒度为代而非样本 |
 | **Careful Control**（Lopes 2022） | 双控制框架交替最小二乘 | 收敛慢，但无需 $\hat{S}(z)$ |
 | **元学习初始化**（Yang 2026） | MAML 预训练 $W(z)$ 初始值 | 需要大量离线数据 |
 | **MPC**（Liang 2026, Wills 2008） | 状态空间模型内嵌 $S(z)$，QP 求解绕过显式辨识 | 需要精确的植物模型 |
+
+进化搜索并非不能实时：Rout (2012) 的在线 PSO-ANC 方案用 MUX/DMUX 将实时参考信号轮流路由到种群中的各个滤波器（每代每滤波器获取 $M \ge 2N$ 个新鲜样本），以块均方误差为适应度，在真实噪声流上实时运行，全程无需 $\hat{S}(z)$。其 [[concepts/conditional-reinitialized-pso|CRPSO]] 变体通过检测 gbest 误差的跳变来发现 $S(z)$ 或 $P(z)$ 的突变并重初始化种群，10/10 次运行均在突变后恢复全局最优——这正是梯度类方法最脆弱的场景。代价依然存在：种群规模（$P=200$）带来显著的滤波器开销，且权重更新以代为粒度，无法做到 FxLMS 那样的逐样本自适应。
 
 Liang (2026) 的延迟 MPC 是一个有趣的案例：MPC 的状态空间模型需要 $S(z)$ 的参数化形式（通过向量拟合获得），但一旦模型建立，QP 求解器直接输出最优控制信号，不再需要 $\hat{S}(z)$ 滤波参考信号这一步。**$S(z)$ 从"每样本使用的滤波器"退化为"一次性标定的模型参数"**。
 
@@ -97,7 +100,7 @@ Kuo (1999) 的经典结论：慢自适应条件下 FXLMS 可容忍 ~90° 相位�
 1. **从离线到在线**：可穿戴设备驱动，$S(z)$ 时变成为常态
 2. **从显式到隐式**：MPC、元学习等方法将 $S(z)$ 内嵌到模型中，避免每样本滤波
 3. **从单一到混合**：Luo (2026) 的 GFANC-FxNLMS 用生成模型提供初始滤波器，FxNLMS 在线微调——$\hat{S}(z)$ 的精度要求被降低
-4. **从辨识到绕过**：终极目标是完全消除对 $\hat{S}(z)$ 的依赖，但目前只有 MPC 在特定条件下接近这一目标
+4. **从辨识到绕过**：终极目标是完全消除对 $\hat{S}(z)$ 的依赖——进化搜索（Rout 2012 的在线 PSO/CRPSO）从梯度自由的角度实现它，MPC 则在特定条件下接近这一目标
 5. **从迭代到深度学习**：Fareedha (2026) 的 [[concepts/deep-secondary-path-estimation|DeepSPE]] 用 Conv1D + BiLSTM + Attention 替代迭代自适应，帧级推理达到 −16.27 dB NMSE，比 Akhtar VSS-LMS 提升 3.92 dB
 
 ## 相关页面
@@ -108,5 +111,6 @@ Kuo (1999) 的经典结论：慢自适应条件下 FXLMS 可容忍 ~90° 相位�
 - [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
 - [[concepts/variable-step-size-lms|Variable Step Size LMS]]
 - [[concepts/deep-secondary-path-estimation|Deep Secondary Path Estimation]]
+- [[concepts/conditional-reinitialized-pso|Conditional Reinitialized PSO]]
 - [[synthesis/mpc-vs-fxlms-for-anc|MPC vs Traditional ANC]]
 - [[queries/how-to-estimate-secondary-path|如何估计次级通道]]

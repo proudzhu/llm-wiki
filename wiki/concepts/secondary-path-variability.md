@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-27
-updated: 2026-08-27
+updated: 2026-09-28
 sources:
   - raw/papers/guldenschuh-2014-secondary-path-irregularities/full-text.md
+  - raw/papers/rout-2012-pso-anc-without-secondary-path/full-text.txt
 tags:
   - active-noise-control
   - secondary-path
@@ -28,6 +29,7 @@ tags:
 1. **Adaptation instability**: a phase deviation >90° between $\hat{G}$ and $G$ makes the FxLMS/NFxLMS adaptation diverge — requires the [[leaky-fxlms-algorithm|leaky FxLMS]]
 2. **Feedback instability**: the low-frequency magnitude drop of $G$ forces low-frequency poles outward; the resulting poles outside the unit circle cause ringing. Since $|W(\hat{G} - G)|$ first violates unity gain **below 300 Hz**, the instability manifests at low frequencies
 3. **Detection opportunity**: because the adaptive filter $W$ identifies $G^{-1}$, a low-frequency drop in $G$ shows up as **DC-gain growth in $W$** — the basis of the [[dc-gain-stability-constraint|DC-gain stability constraint]]
+4. **Gradient-free immunity**: population-based controllers sidestep the estimate entirely — the [[concepts/conditional-reinitialized-pso|CRPSO]]-based ANC of [[sources/rout-2012-pso-anc-without-secondary-path|Rout, Das & Panda 2012]] never identifies $S(z)$; instead it detects the abrupt change itself from a jump in the swarm's global-best squared error (after a converged plateau) and re-randomizes the particle population to re-converge to the new optimum
 
 ## Contrast with Primary Path Variability
 
@@ -45,8 +47,10 @@ tags:
 - [[concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]] — the tracking alternative
 - [[concepts/uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
 - [[concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]] — adaptation-stability remedy
+- [[concepts/conditional-reinitialized-pso|Conditional Reinitialized PSO]] — gradient-free population-based remedy that never estimates $S(z)$
 
 ## Related Sources
 
 - [[sources/guldenschuh-2014-secondary-path-irregularities|Guldenschuh & de Callafon 2014: Detection of Secondary-Path Irregularities in ANC Headphones]]
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]] — complementary primary-path variability measurements
+- [[sources/rout-2012-pso-anc-without-secondary-path|Rout, Das & Panda 2012: PSO-Based ANC Without Secondary Path Identification]] — detects abrupt secondary-path changes via the gbest squared-error jump and re-randomizes the PSO population instead of estimating $S(z)$

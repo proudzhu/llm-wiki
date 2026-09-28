@@ -555,4 +555,5 @@
 | [[concepts/low-frequency-harmonic-control\|Low-Frequency Harmonic Control (LFHC)]] | Low-complexity post-filter suppressing f0 and emphasizing 2nd/3rd harmonics to improve open-ear playback intelligibility (Watanabe 2026) | 2026-09-27 |
 | [[concepts/open-ear-headphones\|Open-Ear Headphones]] | Unoccluded wearable audio: high acoustic transparency but weak low-frequency output and free noise ingress; intelligibility challenges and remedies | 2026-09-27 |
 | [[concepts/direction-preserving-anc\|Direction-Preserving ANC (DP-ANC)]] | ANC that attenuates noise from non-desired directions while preserving sound naturally arriving from a specified desired direction; component-separated cancellation-preservation objective with FiLM-conditioned filter estimation | 2026-09-21 |
+| [[concepts/conditional-reinitialized-pso\|Conditional Reinitialized PSO]] | PSO variant that detects abrupt primary/secondary path changes via gbest error jumps and reinitializes the particle population | 2026-09-28 |
 

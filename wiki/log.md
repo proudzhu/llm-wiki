@@ -5551,3 +5551,8 @@ Ingested the IEEE Signal Processing Magazine overview article contrasting **mode
 - **Pages updated**: `wiki/concepts/hearables.md` (open-ear playback intelligibility application), `wiki/concepts/psychoacoustic-postfilter.md` (masking-aware counterpart relation), `wiki/synthesis/application-specific-anc.md` (signal-side alternative in open-ear section), `wiki/synthesis/modern-headphone-anc-systems.md` (§5.1 signal-adaptation bullet)
 
 ---
+---
+
+## [2026-09-28] ingest | PSO-Based ANC Without Secondary Path Identification (Rout 2012)
+
+Ingested Rout, Das & Panda 2012 (IEEE TIM 61(2):554-563). Key contribution: [[concepts/conditional-reinitialized-pso|CRPSO]] — an online PSO-ANC scheme using MUX/DMUX routing that requires no secondary path identification and survives abrupt P(z)/S(z) changes. Created source page [[sources/rout-2012-pso-anc-without-secondary-path|Rout 2012]], entities for the three authors, and concept page for CRPSO. Updated [[concepts/heuristic-anc-algorithms]], [[concepts/filtered-x-lms-algorithm]], [[concepts/secondary-path-variability]], [[concepts/primary-path-variability]], [[concepts/secondary-path-modeling]]. Refined [[synthesis/secondary-path-modeling-evolution]] Route 4 claim on evolutionary search and positioned CRPSO in [[synthesis/ai-driven-anc]] as the pre-deep-learning non-gradient branch.

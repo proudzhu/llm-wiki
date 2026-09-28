@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-05-18
-updated: 2026-05-18
+updated: 2026-09-28
 sources:
+  - raw/papers/rout-2012-pso-anc-without-secondary-path/full-text.txt
 aliases:
 - Heuristic ANC
 - Evolutionary ANC
@@ -25,6 +26,7 @@ tags:
 |:-----|:----------|:------------|:-----------------|
 | 1994 | **Genetic Algorithm (GA)** | Darwinian evolution | First heuristic for ANC; adaptive GA + interior-point method (IPM) |
 | 2006 | **Particle Swarm Optimisation (PSO)** | Bird flocking | Cooperation/competition; works with $\tanh\{\cdot\}$ saturation models |
+| 2012 | **Conditional Reinitialized PSO (CRPSO)** | Bird flocking + change detection | Online linear ANC; no secondary path estimate; survives abrupt path changes |
 | 2010s | **Backtracking Search (BSA)** | Evolutionary algorithm | Population-based EA + sequential quadratic programming |
 | 2010s | **Bacterial Foraging Optimisation (BFO)** | *E. coli* chemotaxis | ~5 dB better steady-state vs GA-ANC |
 | — | **Firefly (FF)** | Firefly luminescence | Cascades FLANN+FIR with FF coefficient search |
@@ -67,8 +69,10 @@ tags:
 - [[filtered-x-lms-algorithm|Filtered-x LMS]]
 - [[remote-microphone-technique|Remote Microphone Technique]]
 - [[secondary-path-modeling|Secondary Path Modeling]]
+- [[concepts/conditional-reinitialized-pso|Conditional Reinitialized PSO]]
 
 ## Related Sources
 
 - [[../sources/lu-2021-anc-survey-nonlinear|Lu et al. 2021: Survey on ANC — Part II (Nonlinear)]]
+- [[sources/rout-2012-pso-anc-without-secondary-path|Rout, Das & Panda 2012: PSO-Based ANC Without Secondary Path Identification]] — systematic online PSO-ANC with the CRPSO change-detection/reinitialization mechanism
 - [[../sources/yang-2014-cuckoo-search-review|Yang 2014: Cuckoo Search Review]] — Related metaheuristic

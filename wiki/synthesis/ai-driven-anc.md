@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-17
-updated: 2026-09-27
+updated: 2026-09-28
 tags:
   - active-noise-control
   - adaptive-filtering
@@ -13,6 +13,7 @@ sources:
   - raw/papers/he-2026-neural-projection-filter-anc/full-text.md
   - raw/papers/veluri-2023-semantic-hearing/full-text.md
   - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
+  - raw/papers/rout-2012-pso-anc-without-secondary-path/full-text.txt
 ---
 # AI-Driven Active Noise Control
 
@@ -26,6 +27,8 @@ Classical ANC (e.g., FxLMS) is inherently linear and relies on the stationary no
 - **Nonlinear distortions**: Present in low-cost speakers or high-SPL scenarios where the linear superposition principle fails.
 
 Deep learning approaches move toward **data-driven ANC**, formulating the problem as supervised learning where a network (e.g., CRN) encodes optimal control parameters for diverse environments.
+
+A precursor to this shift predates deep learning: **evolutionary computation**. [[concepts/conditional-reinitialized-pso|CRPSO]] (Rout et al. 2012) already replaced gradient descent with population-based search — an online PSO-ANC scheme using MUX/DMUX routing to evaluate a population of FIR controllers on live noise, requiring no secondary-path estimate and surviving abrupt path changes that destabilize FxLMS. Its convergence to exactly the FxLMS optimum on static paths shows these methods search the same solution space by non-gradient means, at the price of population-level compute and generation-granular updates — the same cost/robustness trade-off that later motivated neural controllers.
 
 ---
 
@@ -105,6 +108,8 @@ Recent research focuses on using RNNs as "stability observers." By predicting th
 - [[concepts/deep-learning-for-signal-processing]]
 - [[concepts/secondary-path-modeling]]
 - [[concepts/deep-secondary-path-estimation]]
+- [[concepts/conditional-reinitialized-pso]]
+- [[concepts/heuristic-anc-algorithms]]
 
 ## Related Sources
 
@@ -117,3 +122,4 @@ Recent research focuses on using RNNs as "stability observers." By predicting th
 - [[sources/he-2026-neural-projection-filter-anc|He et al. 2026: Neural Projection Filter Generation for Multi-Reference ANC]] — neural reference-projection front end (CAPF) with conventional adaptive back end
 - [[sources/veluri-2023-semantic-hearing|Veluri et al. 2023: Semantic Hearing]] — sixth pattern: neural processing on the playback path (ANC clean slate + class-selective binaural reinsertion)
 - [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC with a Conditional Control-Filter Estimation Network]] — direction-conditioned full-bank generation with cancellation–preservation objective
+- [[sources/rout-2012-pso-anc-without-secondary-path|Rout et al. 2012: PSO-Based ANC Without Secondary Path Identification]] — pre-deep-learning evolutionary branch: online CRPSO control with no secondary-path estimate

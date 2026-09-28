@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-17
-updated: 2026-09-12
+updated: 2026-09-28
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/fareedha-2026-joint-deep-spe-anc/full-text.txt
@@ -15,6 +15,7 @@ sources:
   - raw/papers/xiao-2026-robust-spatially-selective-anc/full-text.txt
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
   - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
+  - raw/papers/rout-2012-pso-anc-without-secondary-path/full-text.txt
 tags:
 - active-noise-control
 - signal-processing
@@ -56,6 +57,10 @@ Conducted during ANC operation. This is necessary when the secondary path is tim
 ### 3. [[deep-secondary-path-estimation|Deep Secondary Path Estimation]]
 Uses deep neural networks (Conv1D + BiLSTM + Attention) to predict $S(z)$ from ANC input-output pairs in a single forward pass, replacing iterative adaptation with frame-level inference. Achieves −16.27 dB NMSE, outperforming the best classical method (Akhtar's VSS-LMS) by 3.92 dB (Fareedha et al. 2026).
 
+### 4. Avoiding the Estimate Entirely
+
+Two families of methods sidestep $S(z)$ identification rather than performing it: the [[concepts/simultaneous-equations-method|simultaneous equations method]] ([[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006]]) solves for the optimal filter through an auxiliary overall-path filter, and [[concepts/heuristic-anc-algorithms|population-based heuristic controllers]] such as the [[concepts/conditional-reinitialized-pso|PSO/CRPSO]] training of [[sources/rout-2012-pso-anc-without-secondary-path|Rout, Das & Panda 2012]] optimize directly on block-averaged residual error, making them immune to secondary-path time variation (at the cost of generation-granular updates and a $P$-filter population).
+
 ## Impact of Modeling Errors
 
 The [[filtered-x-lms-algorithm|Filtered-x LMS Algorithm]] can tolerate a phase error of up to **$\pm 90^\circ$** between the true secondary path and its estimate $\hat{S}(z)$. If the error exceeds this limit, the algorithm will diverge.
@@ -77,6 +82,7 @@ In hearing aids the secondary path is the propagation from the device loudspeake
 - [[auxiliary-noise-scaling|Auxiliary Noise Scaling]] — AWGN power scheduling strategies for OSPM
 - [[concepts/filtered-x-mwf|Filtered-x MWF (FxMWF)]]
 - [[concepts/open-fitting-noise-leakage|Open-Fitting Noise Leakage]]
+- [[concepts/conditional-reinitialized-pso|Conditional Reinitialized PSO]] — trains the controller without any $S(z)$ model
 
 ## Related Sources
 
@@ -92,4 +98,5 @@ In hearing aids the secondary path is the propagation from the device loudspeake
 - [[sources/xiao-2026-robust-spatially-selective-anc|Xiao, Roden, Blau & Doclo 2026: Robust Soft-Constrained Spatially Selective ANC for Hearables under Secondary Path Variations]]
 - [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]]
 - [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC]] — assumes a known, fixed secondary path and folds it into the differentiable forward model for filter-estimation-network training
+- [[sources/rout-2012-pso-anc-without-secondary-path|Rout, Das & Panda 2012: PSO-Based ANC Without Secondary Path Identification]] — the avoidance route: population-based training on block-averaged residual error, immune to secondary-path time variation
 

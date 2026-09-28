@@ -1,0 +1,826 @@
+554 IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 61, NO. 2, FEBRUARY 2012
+Particle Swarm Optimization Based Active Noise
+Control Algorithm Without Secondary
+Path Identiﬁcation
+Nirmal Kumar Rout, Debi Prasad Das, Member , IEEE, and Ganapati Panda, Senior Member , IEEE
+Abstract—In this paper, particle swarm optimization (PSO)
+algorithm, which is a nongradient but simple evolutionary
+computing-type algorithm, is proposed for developing an efﬁcient
+active noise control (ANC) system. The ANC is conventionally used
+to control low-frequency acoustic noise by employing a gradient-
+optimization-based ﬁltered-X least mean square (FXLMS) algo-
+rithm. Hence, there is a possibility that the performance of the
+ANC may be trapped by local minima problem. In addition,
+the conventional FXLMS algorithm needs prior identiﬁcation of
+the secondary path. The proposed PSO-based ANC algorithm
+does not require the estimation of secondary path transfer func-
+tion unlike FXLMS algorithm and, hence, is immune to time-
+varying nature of the secondary path. In this investigation, a small
+modiﬁcation is incorporated in the conventional PSO algorithm
+to develop a conditional reinitialized PSO algorithm to suit to
+the time-varying plants of the ANC system. Systematic computer
+simulation studies are carried out to evaluate the performance of
+the new PSO-based ANC algorithm.
+Index Terms —Active noise control (ANC), adaptive ﬁltering,
+conditional reinitialized PSO (CRPSO), optimization, particle
+swarm optimization (PSO).
+I. I NTRODUCTION
+T
+HE PROBLEMS associated with acoustic noise in indus-
+try are increasing day by day, and hence, their control has
+been an important topic of the present-day research. The noise
+sources may be due to automobiles, engines, compressors, or
+electric drives. Excessive noise induces hearing loss, aggravates
+health issue, degrades occupational performance, and, above
+all, interferes in communication. There are two approaches
+to control acoustic noise: passive and active. The traditional
+approach to control acoustic noise employs passive techniques,
+such as enclosures, barriers, and silencers. These methods
+Manuscript received January 26, 2011; revised July 7, 2011; accepted
+August 17, 2011. Date of publication October 26, 2011; date of current version
+January 5, 2012. The Associate Editor coordinating the review process for this
+paper was Dr. John Sheppard.
+N. K. Rout is with the School of Electronics Engineering, Kalinga Insti-
+tute of Industrial Technology University, Bhubaneswar 751024, India (e-mail:
+routnirmal@rediffmail.com).
+D. P . Das is with the Process Engineering and Instrumentation Cell, CSIR-
+Institute of Minerals and Materials Technology, Council of Scientiﬁc and
+Industrial Research, Bhubaneswar 751013, India (e-mail: debi_das_debi@
+yahoo.com; dpdas@immt.res.in).
+G. Panda is with the School of Electrical Sciences, Indian Institute of Tech-
+nology Bhubaneswar, Bhubaneswar 751013, India (e-mail: ganapati.panda@
+gmail.com; gpanda@iitbbs.ac.in).
+Color versions of one or more of the ﬁgures in this paper are available online
+at http://ieeexplore.ieee.org.
+Digital Object Identiﬁer 10.1109/TIM.2011.2169180
+are very costly for achieving high attenuation over a wide
+frequency range and also ineffective at low frequencies. Active
+noise control (ANC) has been an alternative to this, particularly
+for low-frequency noise control. The ANC is an electroacoustic
+or electromechanical system which cancels an acoustic noise
+based on the principle of destructive interference with another
+noise produced by the controller generating the same amplitude
+and frequency as that of original noise but opposite in phase. A
+schematic diagram of a single-channel ANC system is shown
+in Fig. 1(a). In an ANC system, a reference microphone is
+used to feed the reference noise signal to the controller of the
+ANC system, which is usually an adaptive ﬁlter. The output of
+the adaptive ﬁlter is used to generate the antinoise through a
+loudspeaker system. An error microphone is used to sense the
+residual noise which, in turn, is used to tune the ANC controller.
+The acoustical path from the noise source to the point of
+noise cancellation is called the primary path, and the path
+from the output of the adaptive ﬁlter through the loudspeaker
+system and the acoustical path between the loudspeaker and
+the error microphone up to the received signal through the
+microphone system is named the secondary path. Fig. 1(b)
+shows the block diagram of a commonly used ﬁltered-X least
+mean square (FXLMS) algorithm-based ANC system [1]. The
+FXLMS algorithm uses the ofﬂine estimate of the secondary
+path. The reference signal x(n), which acoustically propagates
+toward the cancellation point through the primary path [denoted
+as P(z) in Fig. 1(b)], transformed to d(n).T h ex(n) is received
+by the reference microphone and fed to the ANC ﬁlter W(z).
+The output of the ANC algorithm travels through a secondary
+path. The secondary path is an electroacoustic path consisting
+of a digital-to-analog converter, reconstruction ﬁlter, power
+ampliﬁer, loudspeaker, acoustic path between the canceling
+loudspeaker and the error microphone, preampliﬁer, antialias-
+ing ﬁlter, and analog-to-digital converter [1]. The secondary
+path is required to be estimated prior to running the FXLMS-
+based ANC algorithm. From the derivation of the FXLMS
+algorithm presented in [1], it can be found that the weights of
+the ANC ﬁlter W(z) are updated using the error microphone
+signal e(n) and a ﬁltered reference signal x′(n). The ﬁltered
+reference signal is the reference signal x(n) ﬁltered through
+the estimated secondary path ˆS(z). The estimated secondary
+path ˆS(z) is a mathematical model (often represented by a
+digital ﬁlter) of the actual secondary path S(z) shown in
+Fig. 1(a) and (b). The FXLMS algorithm assumes that S(z)
+is equal to ˆS(z). Error in the estimate of the secondary path
+0018-9456/$26.00 © 2011 IEEE
+
+ROUT et al.: PSO BASED ANC ALGORITHM WITHOUT SECONDARY P ATH IDENTIFICATION 555
+Fig. 1. Single-channel ANC system. (a) Schematic diagram. (b) Block diagram using FXLMS algorithm as the ANC algorithm.
+leads to degraded performance of the ANC algorithm. Different
+variants of FXLMS algorithms have been proposed to cir-
+cumvent different issues linked with the ANC. In [2], the
+computational issue is addressed, and a fast version of FXLMS
+algorithm is proposed. The FXLMS algorithm is modiﬁed
+by using nonlinear adaptive ﬁlters in [3], [4] to address the
+nonlinear noise processes. All these algorithms employ the
+pre-estimated secondary path transfer function and may lead
+to divergence of the algorithm due to estimation error. Fur-
+thermore, in practical situations, it is often observed that the
+secondary path behaves as a time-varying system. In addition
+to this, the FXLMS algorithm may also lead to local minima
+problem as it uses gradient method to update the coefﬁcient of
+the adaptive ﬁlter of the ANC. The genetic algorithms (GAs) [5]
+have been used as an alternative learning algorithm to develop
+an ANC without the use of secondary path estimation. The GA-
+based ANC using IIR ﬁlter [6] and nonlinear V olterra ﬁlters
+[7]–[9] is proposed for ANC applications. The authors have
+shown that the GA-based approach is superior to the FXLMS
+algorithm as the former does not use secondary path estimate
+for its adaptation. Recently, particle swarm optimization (PSO)
+has been proposed as a useful alternative to GA and has been
+applied to many practical problems. The PSO is originally
+proposed by Kennedy et al. in [10]–[12] as an optimization
+tool. The same is modiﬁed and applied as adaptive ﬁlter algo-
+rithms by Krusienski and Jenkins in [13]–[16]. Adaptive noise
+canceler based on PSO algorithm is proposed in [17]. A PSO-
+based adaptation of the weights of multilayer neural network
+as a nonlinear ANC algorithm has been proposed in [18]. The
+performance of the PSO-based adaptation in a linear ANC
+system is presented in [19] where the algorithm uses the models
+of primary path and secondary path to generate the ANC con-
+troller. The comprehensive learning PSO, an improved version
+of the PSO algorithm, has been proposed recently for a system
+identiﬁcation [20].
+In this paper, we develop a systematic algorithm for PSO-
+based ANC system. The PSO and other evolutionary computa-
+tion algorithms are often used as ofﬂine optimization tools as
+the ﬁtness value of these algorithms depends on a number of
+input samples instead of a single sample. This is because the
+average of errors over certain time duration (set of samples)
+is a better performance criterion for evolutionary algorithms
+compared to a single error that is generated in every sample
+of input signal. However, the conventional ANC parameters are
+updated on a sample-by-sample basis. In this paper, a scheme
+for using the PSO algorithm to run on a sample-by-sample
+manner is proposed for the design of ANC. Through simulation
+experiments, it is shown that the basic PSO algorithm fails to
+adapt properly for time-varying primary and secondary paths.
+Therefore, a new scheme is proposed to reinitialize the particle
+vectors of the PSO algorithm, when it tends to be trapped in lo-
+cal minima situation. The proposed scheme has been shown to
+outperform the basic PSO-based algorithm for the ANC while
+trying to combat noise with abruptly time-varying primary and
+secondary paths.
+This paper is organized as follows. Section II describes the
+proposed scheme of using the basic PSO-based algorithm for
+the ANC system and the new particle reinitialization scheme
+for time-varying primary and secondary paths. Section III
+presents the results obtained from computer simulations. Fi-
+nally, in Section IV, the conclusion of the investigation is
+presented.
+II. P ROPOSED PSO-B ASED ANC S YSTEM
+In the ANC system, the electrical control signal is generated
+in a sample-by-sample basis and is converted to acoustic signal
+(antinoise) using a loudspeaker system. The control signal is
+generated by passing the reference microphone signal through
+the ANC system. A linear ANC system consists of a ﬁnite
+impulse response (FIR) ﬁlter. The objective of the tuning algo-
+rithm in an ANC system is to optimize the FIR ﬁlter coefﬁcients
+of the ANC system such that the received signal in the error
+microphone is minimized [refer to Fig. 1(a)]. The evolutionary
+algorithm like the GA or the PSO cannot be directly used in the
+ANC system as the performance of the algorithm depends on
+a set of error samples (the error microphone signal samples for
+a certain duration of time) and not on the instantaneous value
+(single sample value) of the error microphone. In addition, in
+the conventional PSO- or GA-based optimization, the same
+data set is used to update the particles or the chromosomes,
+respectively, in every generation. However, in a practical ANC
+system, there is no scope for providing the same set of noise
+
+556 IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 61, NO. 2, FEBRUARY 2012
+samples to the adaptive algorithm, as noise is generated from a
+continuous dynamical system.
+A. Proposed Scheme of Online ANC Adaptation
+It is often felt that the GA-based [7]–[9] or PSO-based
+[18], [19] ANC algorithms are used to detect global minimum
+values, without the prior knowledge of the secondary paths,
+and they are more robust than traditional algorithms. However,
+their real-time adaptability is questionable in a large number of
+applications. It is to be noted here that the GA- or PSO-based
+algorithm uses P -sets of adaptive ﬁlter as opposed to the one in
+the case of the FXLMS algorithm. In real-time algorithm, only
+one of the P adaptive ﬁlters should be used at a time. As the
+ANC algorithm trains its control parameters using a real noise
+source, we do not have control over sending the same noise
+source to all the adaptive ﬁlters to ﬁnd out their ﬁtness values.
+Therefore, the proposed implementation scheme is dedicated
+toward real-time adaptability of the PSO algorithm which relies
+on a continuously generating noise source. Like conventional
+ANC, the noise source propagates through the primary path
+on a real-time basis. The noise so generated is captured by the
+reference microphone and is sent to one of the P adaptive ﬁlters
+via a demultiplexer (DMUX). The select signal input of the
+multiplexer (MUX) and DMUX (in Fig. 2) allows one of the P
+adaptive ﬁlters to get the input signal and generate the output,
+which is then fed to the loudspeaker system to generate the
+antinoise. The noise and antinoise superimpose in the acoustic
+environment generating residual noise signal that is captured by
+the PSO processor by the error microphone. The select signal
+is used to provide equal numbers of noise samples to each
+adaptive ﬁlter in each generation. The PSO processor controls
+the repeated production of the select signal, acquisition of the
+residual noise signal, and the updating of the ﬁlter weights in
+every generation.
+The original noise generated by the noise source acoustically
+traveling through the primary path to the point of cancellation,
+denoted here as d(n), acoustically superimposes with the anti-
+noise ˆd(n) to produce the residual noise and is captured by
+the error microphone as e(n). In this process, a set of error
+signal samples is stored in the PSO processor for one adaptive
+ﬁlter. The process is repeated by changing the select signal
+so that the noise passes through each adaptive ﬁlter one by
+one. It is to be noted that the same set of noise samples need
+not be sent to other adaptive ﬁlters. Hence, running the noise
+source and selecting P adaptive ﬁlters would store P -mean
+square errors in the PSO processor. These P -mean square errors
+are used to update the weights of the adaptive ﬁlters using
+the PSO-based algorithm as presented in the next section. In
+a GA- or a PSO-based algorithm, a generation is deﬁned as
+a time where the populations carry out genetic or swarming
+operations, respectively, to go to the next generation. In here, at
+every generation, all the P adaptive ﬁlters are used to generate
+antinoise and update themselves using a PSO algorithm. Since
+it is an online adaptive algorithm, the weight adaptation process
+continues until the ANC is in operation unlike the conventional
+GA-based algorithm where there is a stopping criterion at
+which the adaptation of weights is suspended but the ANC keep
+producing the antinoise with its ﬁxed weights. Advantage of
+continuous adaptation is to match the ANC ﬁlter to any change
+that occurs in the primary and secondary paths. Hence, there
+is no stopping criterion as in the conventional GA and PSO
+applications.
+B. PSO-Based ANC Algorithm
+The objective of the aforementioned scheme of the online
+ANC algorithm is to minimize the mean square error that is
+sensed by the error microphone. To apply the PSO algorithm to
+such an optimization problem, let us consider a coefﬁcient vec-
+tor of P adaptive ﬁlters as population which is represented as a
+set of particles in the PSO terminology. The PSO algorithm is
+an evolutionary computation technique developed by Kennedy
+and Eberhart [10], which is inspired by social behavior of
+swarms. The PSO is initialized with a population of random
+solutions like other evolutionary algorithms. In this case, the
+coefﬁcient vectors of the P adaptive ﬁlters are used as the initial
+random solutions. Let this set be represented as
+W =
+
+
+w1
+1 w2
+1 ··· wP
+1
+w1
+2 w2
+2 ··· wP
+2
+... ... ··· ...
+w1
+N w2
+N ··· wP
+N
+
+ . (1)
+Each column of the W in (1) is a potential initial solution and
+is called a particle. Referring to the block diagram in Fig. 2,
+each column of W in (1) represents the coefﬁcient vector of
+one of the P adaptive ﬁlters. The noise signal received by
+the reference microphone is fed to each of these ﬁlters which
+produce y1(n),y 2(n),...,y P (n) as output at different time
+frames. The P outputs act as the control signal in the ANC,
+which pass through the loudspeaker system to generate the
+antinoise signal set represented as { ˆd1(n), ˆd2(n),..., ˆdP (n)}.
+It is clariﬁed here that the set {y1(n),y 2(n),...,y P (n)} con-
+sists of electrical signals whereas { ˆd1(n), ˆd2(n),..., ˆdP (n)}
+represents the acoustical signal. A set of residual error signals
+{e1(n),e 2(n),...,e P (n)} is received by the error microphone.
+These error signal set is a result of the acoustical superposi-
+tion of { ˆd1(n), ˆd2(n),..., ˆdP (n)} with the noise signal at the
+canceling point, i.e., d(n), at different time intervals. Thus, the
+error signals generated are given by
+ep(n)= d(n)+ ˆdp(n) (2)
+where p =1 ,2,3,...,P ,n denotes the sample index of the
+input signal which ranges from 1 to M and M is the total
+number of samples used in each generation. The mean square
+error of each of these P errors, which represents the ﬁtness of
+each particle (adaptive ﬁlter), is stored in the PSO processor.
+In the PSO terminologies, the particle is ﬂown through the
+problem space with a velocity which is dynamically updated
+by using an update equation. The update equation is derived
+using the ﬂying experiences of its own and that of the other
+members of its generation. The position of the ith particle and
+its velocity in the kth iteration (generation) are denoted by
+Wi(k) and Vi(k), respectively. The position of the ith particle
+
+ROUT et al.: PSO BASED ANC ALGORITHM WITHOUT SECONDARY P ATH IDENTIFICATION 557
+Fig. 2. Block diagram of PSO-based training of an ANC system for scheme-II.
+with smallest mean square error in the previous position is
+recorded and represented by the symbol pbesti (personal best),
+and its position is represented as Wpbesti . The best among all
+the particles is represented by the symbol gbest (global best),
+and its position is represented as Wgbest . The PSO algorithm
+updates the velocity and the position of each particle toward
+its Wpbest and Wgbest positions at each step according to the
+following update equations:
+Vi(k)= Vi(k − 1) + r1[ Wpbesti − Wi(k)]
++ r2[ Wgbest − Wi(k)] (3)
+Wi(k)= Wi(k − 1) + Vi(k) (4)
+where r1 and r2 are two random numbers that are generated in-
+dependently in the range [0, 1]. In [21], the basic PSO algorithm
+uses two random vectors for r1 and r2; however, we use r1
+and r2 as random numbers instead, due to reduced complexity.
+Equation (3) calculates a new velocity for each particle (po-
+tential solution) based on its previous velocity Vi(k − 1),t h e
+particle’s position at which the best ﬁtness has been achieved
+Wpbesti , and the best positions of each particle achieved so
+far among the neighbors Wgbest . Equation (4) updates each
+particle’s position in the solution hyperspace. This process is
+continued on a real-time basis.
+C. Modiﬁed PSO-Based ANC Algorithm for Time-V arying
+Primary and Secondary Paths
+Dynamic environment might be either a slow or an abrupt
+change in environment. The PSO algorithm fails to achieve
+global optimization when adapting a dynamic environment
+and is suitably modiﬁed to cope with the slow change in the
+environment by utilizing the experience of the particles of the
+old environment in the new situation [21]–[23]. However, dy-
+namic environment in ANC system refers to an abrupt change
+in the primary and/or secondary paths with respect to time.
+They are also referred as time-varying primary and secondary
+paths. Primary path can change due to the change in acoustic
+environment. The secondary path can change due to the change
+in both acoustic and electric components. Since these changes
+are abrupt in nature, the PSO algorithms proposed in [21]–
+[23] are not suitable. It is shown through simulation study (in
+Section III) that the basic PSO-based ANC algorithm mini-
+mizes the error for ﬁxed primary- and secondary-path cases.
+The performance criterion, i.e., the squared error, is minimized
+to its achievable minimum value. If the primary or secondary
+path is changed after all the particles stabilize to their optimum
+values, they cannot adapt to the change and remain in their
+local minima (see the dotted curve in Fig. 6). The reason for
+this is the randomness of the particle initialization that gets lost
+after it is fully optimized. At optimized stage, all the particles
+converge to the same value, and hence, there is a need for a
+reinitialization of the particles once this change in primary or
+secondary path is detected. It is seen (in Figs. 6 and 9) that
+the square error value of the gbest particle gives an indication
+of the change in the primary or secondary path. This square
+error value E2
+gbest shows a sudden change if the primary or
+the secondary path is abruptly changed (see the dotted curve in
+Fig. 6). The E2
+gbest value remains almost constant if it is fully
+optimized. The following piece of the conditional algorithm
+was inserted with the conventional PSO algorithm to reinitialize
+the particles to make them suitable to adapt to any change in
+primary or secondary path
+If
+⏐⏐E2
+gbest(n − 1) − E2
+gbest(n − 2)
+⏐⏐≤ k1
+&
+⏐⏐E2
+gbest(n) − E2
+gbest(n − 1)
+⏐⏐≥ k2 then
+Reinitialize V and W (5)
+where k1 <k 2, k1 is a very small quantity close to zero, and k2
+can be found by experiment using a trial-and-error method. It
+shows that the particle and the velocity vectors are required to
+
+558 IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 61, NO. 2, FEBRUARY 2012
+be reinitialized (randomized), if the errors in previous genera-
+tions are negligible and the errors in the present generation are
+signiﬁcantly high.
+D. Comparison of PSO- and FXLMS-Based ANC Systems
+In the FXLMS algorithm, the ANC ﬁlter coefﬁcients are up-
+dated at every sample, whereas in PSO-based algorithm, these
+are updated after each generation. Each generation consists of
+M × P samples, where P is the population count and M is the
+number of samples used for evaluating the performance crite-
+rion. Since FXLMS algorithm is a gradient-based algorithm, it
+is highly susceptible to initialization of the parameter. A wrong
+initialization may lead to local minima. In addition to this,
+the FXLMS algorithm employs the pre-estimated secondary
+path transfer function to update the ANC ﬁlter coefﬁcients.
+The FXLMS fails miserably if the secondary path changes
+signiﬁcantly from its estimated value [1]. However, the PSO-
+based algorithm, being an evolutionary algorithm, has got less
+chance of falling into local minima if it is randomly initialized.
+In addition to this, the proposed modiﬁed PSO algorithm has
+a high likelihood of achieving global optimization as it in-
+corporates the reinitialization of weights at appropriate time.
+The high likelihoodness is tested with random trials in the
+simulation section. The proposed algorithm does not require the
+estimation of secondary path transfer function, and hence, it is
+immune to the change in the secondary path.
+E. Comparison of PSO- and GA-Based ANC Systems
+The works reported in [8] and [9] propose a GA and an adap-
+tive GA-based nonlinear ANC system without employing sec-
+ondary path estimate. However, no speciﬁc scheme for weight
+update, like the one given in this paper, has been outlined. Fur-
+thermore, these papers do not consider the time-varying nature
+of the primary and the secondary paths. The GA-based ANC
+used in those papers uses a binary-coded string for each weight
+of the adaptive ﬁlter. The GA also involves slow convergence,
+and it requires many operations in a generation as shown later in
+the simulation section (Fig. 12). The slow convergence is due
+to the fact that, in the GA, the binary-coded ﬁlter coefﬁcients
+are kept in a string format and are termed as chromosome. The
+chromosomes undergo single-point crossover and mutation,
+generation by generation. Due to single-point crossover, many
+weight parameters remain untouched, and it takes a lot of
+generation to be updated. In contrast, in the proposed PSO-
+based ANC system, all ﬁlter coefﬁcients are updated using a
+systematic and simple update equations presented in (3) and
+(4). Hence, the PSO is expected to achieve faster convergence
+compared to its GA counterpart. In addition to this, PSO does
+not require any binary coding and decoding which also reduces
+computational complexity. However, the scheme presented here
+to implement PSO algorithm for ANC system can also be
+used to implement other evolutionary computational algorithm-
+based ANC systems.
+III. S IMULA TION EXPERIMENTS
+To evaluate the performance of the proposed PSO-based
+ANC algorithm, a number of simulation experiments are con-
+ducted. In all these experiments, the transfer functions of
+primary path and the secondary path are chosen as P(z)=
+z−5 +0 .2z−6 +0 .5z−7 − 0.9z−8 and S(z)= z−1 +1 .5z−2 −
+z−3, respectively, unless otherwise stated in the speciﬁc exper-
+iment. The primary noise signal is considered to be a uniform
+white noise signal with a zero mean.
+A. Experiment 1: Effect of Order of ANC Filter
+The order of the ANC ﬁlter refers to the length of the FIR
+ﬁlter of the ANC. At the outset, the order of the ANC ﬁlter is
+not known. Simulation experiments are conducted by varying
+the length of the adaptive ﬁlter N from 5 to 40. The PSO-
+based ANC ﬁlters are updated by using 20 error sample points.
+A population size of P = 200 is considered. The convergence
+of the square error of the gbest particle is plotted in Fig. 3. It
+is observed that, if the length of the adaptive ﬁlter is increased
+beyond N =1 0, the convergence performance degrades. There
+could be two reasons for this. First, there is a model mismatch if
+the ANC ﬁlter length increases beyond ten. Second, the higher
+length of the ANC ﬁlter demands more number of parameters to
+be optimized which, in turn, demands a higher population size
+P . It is also studied by reducing the length from N =1 0.I f
+the length is reduced from N =1 0,t h eE2
+gbest converges faster
+until N =8 , but the steady-state error stabilizes with higher
+values as seen in the zoomed portion in Fig. 3. Therefore, an
+ANC with N =1 0 is chosen for the rest of the experiments.
+B. Experiment 2: Effect of the Number of Error Sample Points
+Required for Evaluating the Cost Function
+The cost function or the ﬁtness function that represents the
+performance criteria is very important in every evolutionary
+computing algorithm. In this algorithm, the average of the
+square error value over a number of sample points is chosen
+as the cost function. The number of sample point is a vari-
+able which can be set depending on the performance. Higher
+number of sample points to ﬁnd the average would give better
+performance over the lower number of sample values. However,
+a higher number would pose higher computational complexity.
+To ﬁnd the optimum value of such a number, a series of experi-
+ments is conducted by varying M from 10 to 60. The population
+size P = 200 and the ANC order N =1 0 are chosen in all the
+simulation runs. The convergence plots are shown in Fig. 4. It
+is seen that the convergence with M =2 0 onward is almost
+identical with respect to convergence speed and the steady-state
+error. However, for M =1 0, the convergence speed and the
+steady-state error performance are degraded. Therefore, in the
+rest of the experiments, M is set as equal to 20. It is also felt
+that the number of sample points should be at least double of
+the ﬁlter length.
+
+ROUT et al.: PSO BASED ANC ALGORITHM WITHOUT SECONDARY P ATH IDENTIFICATION 559
+Fig. 3. Convergence characteristic of online PSO-based ANC for different ANC orders N . P = 200 and M =2 0.
+Fig. 4. Convergence characteristic of online PSO-based ANC for different M ’s withP = 200 and N =1 0.
+C. Experiment 3: Effect of the Population Size
+To study the effect of population size on the optimization of
+the ANC controller, the length of the ANC adaptive ﬁlter is
+ﬁxed at N =1 0. Twenty sample points are used to evaluate the
+performance criteria. The algorithm is run for 100 generations,
+and the E2
+gbest for each generation is plotted to see the conver-
+gence characteristic for different population sizes. Population
+size is referred here as the number of particles present in the
+population and represented as P .T h e P is varied from 10 to
+200. It is found from Fig. 5 that the increase in population size
+guarantees faster convergence and a lower steady-state value of
+E2
+gbest . It is found that, for this ANC setup, P = 200 is ideal,
+and hence, for the rest of the experiments, this value is ﬁxed.
+D. Experiment 4: Time-V arying Primary Path
+The conventional basic PSO algorithm is tested for a time-
+varying primary path. In a practical application, if the ANC
+is in operation inside a room or a vehicle cabin and the door
+Fig. 5. Effect of population size for M =2 0 and N =1 0.
+is suddenly opened or closed, the acoustic environment is
+changed. This leads to an abrupt change in the primary and/or
+the secondary path. In this experiment, such an abrupt change
+
+560 IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 61, NO. 2, FEBRUARY 2012
+Fig. 6. PSO performance with time-varying primary path: In the reinitialized
+PSO, the W and V are reset to random values knowingly at generation count
+200.
+in the primary path is chosen. The primary path is chosen
+as P(z)= z−5 +0 .2z−6 +0 .5z−7 − 0.9z−8 up to 200 gener-
+ations, and after that, the primary path is abruptly changed to
+P(z)= z−5 +0 .2z−6 − 0.5z−7 − 0.9z−8. The secondary path
+remains constant throughout this experiment. The population
+size P = 200, order of ANC N =1 0, and the number of
+sample points used in each generation M =2 0 are set for this
+experiment. Fig. 6 shows the convergence plot, which clearly
+depicts that the conventional PSO-based ANC is not able to
+converge to its global minima after 200th generation. It can
+be seen that, since all the particles in the PSO are stabilized
+by adapting to particular primary- and secondary-path cases, it
+needs a randomization or reinitialization of the particles in the
+population set to cope with this dynamic environment. To test
+this, all the particles are reinitialized at generation count 200
+when the primary path is changed. It is found in Fig. 6 that the
+reinitialized PSO is capable of converging to its global optimum
+value.
+To automatically identify such abrupt change in primary
+or secondary paths and reinitialize the velocity and the po-
+sition vector of each particle in the population, the modi-
+ﬁed PSO algorithm proposed in this paper was used. Fig. 7
+shows the performance of the proposed conditional reinitial-
+ized PSO (CRPSO) algorithm compared to the conventional
+PSO algorithm. To further evaluate the convergence perfor-
+mance of the CRPSO algorithm, the primary path transfer
+function is changed at generation count 200 and again made
+it back to the original transfer function at generation count
+300. The convergence characteristic shown in Fig. 8 shows the
+effectiveness of the CRPSO algorithm over the conventional
+PSO algorithm.
+E. Experiment 5: Time-V arying Secondary Path
+Similar to the study of the time-varying primary path, the
+time-varying secondary path is studied independently in this
+experiment. In this experiment, the secondary path is chosen as
+S(z)= z−1 +1 .5z−2 − z−3 up to 200 generations, and after
+that, the same is abruptly changed to S(z)= z−1 +0 .5z−2.
+The primary path remains intact throughout this experiment
+Fig. 7. Performance of CRPSO with time-varying primary path: Primary path
+changes at generation count 200.
+Fig. 8. Performance of the proposed CRPSO with time-varying primary path:
+The primary path is changed at generation count 200 and returned to original at
+generation count 300.
+as P(z)= z−5 +0 .2z−6 +0 .5z−7 − 0.9z−8. The PSO param-
+eters were ﬁxed as used in Experiment 4. The convergence
+characteristic of the E2
+gbest with respect to the generation is
+plotted in Fig. 9. The proposed CRPSO is shown to outperform
+the conventional PSO in terms of achieving global minima
+even after the abrupt change in the secondary path. At this
+point, it may be noted that the FXLMS would have failed even
+miserably if the secondary path and its estimates are differ-
+ent which happens in the case of the time-varying secondary
+path [1].
+F . Experiment 6: Performance Guarantee of the CRPSO
+Algorithm Under Time-V arying Primary and Secondary Paths
+It is well known that the performance of the PSO-based
+algorithms, namely, conventional and the proposed CRPSO,
+depends on the particle initialization. Since the particles are
+randomly initialized, they show different performances at dif-
+ferent run times. To evaluate the performance guarantee of the
+proposed CRPSO with respect to the conventional PSO-based
+ANC algorithms with a time-varying primary path as used in
+Experiment 4, E2
+gbest of ten independent runs is plotted in
+Fig. 10 with the same random input signal using the random
+seed equal to “zero.” The conventional PSO did not achieve the
+
+ROUT et al.: PSO BASED ANC ALGORITHM WITHOUT SECONDARY P ATH IDENTIFICATION 561
+Fig. 9. Performance of CRPSO with time-varying secondary path.
+Fig. 10. Performance of CRPSO with time-varying primary path for ten
+independent runs with random seed equal to zero.
+global minimum in most of the cases after the abrupt change in
+the primary path at generation count 200, whereas the proposed
+CRPSO achieves the global minimum steady-state square error
+for every case.
+Similarly, the secondary path is abruptly varied as in Experi-
+ment 5, and E2
+gbest for ten independent runs is plotted in Fig. 11.
+This experiment also conﬁrms the convergence performance of
+the CRPSO to achieve the minimum steady-state square error
+under abrupt change in the secondary path.
+G. Experiment 7: Comparison of the GA- and the
+CRPSO-Based ANC Algorithms
+Since the GA and PSO are the same class of algorithms
+applied to the ANC application, comparison of the convergence
+performance and the optimum weight vector obtained in both
+these algorithms is conducted. The type of GA used in [8] was
+chosen for comparison. The population size of GA was chosen
+as either 600 or 100; however, the population size of the PSO
+was chosen as 100. The GA used 8-b binary conversion as
+used in [8]. The ANC ﬁlter uses ten coefﬁcients in both GA
+and PSO algorithms. The convergence of the square error of
+the best chromosome in each generation of the GA is plotted
+with the square error of the gbest of the CRPSO algorithm
+Fig. 11. Performance of CRPSO with time-varying secondary path for ten
+independent runs with random seed equal to zero.
+Fig. 12. Comparison of convergence performances of the GA- and CRPSO-
+based ANC algorithms.
+Fig. 13. Comparison of optimized weight vectors of ANC ﬁlter using the
+FXLMS, GA-based, and CRPSO-based ANC algorithms.
+for comparison in Fig. 12. From Fig. 12, it can be conﬁrmed
+that the PSO converges faster than the GA. The GA with a
+population size of 600 [8] converges faster than the GA with a
+
+562 IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 61, NO. 2, FEBRUARY 2012
+population size of 100. Higher population size incurs additional
+computational load. To further compare the performances of
+the GA and the PSO algorithms (with a population size of
+100), the optimum weight vector of the ANC adaptive ﬁlter
+(obtained after 200 generations) is plotted with respect to the
+weight vector obtained using FXLMS algorithm (with exact
+estimation of secondary path) in Fig. 13. It can be seen in
+Fig. 13 that the PSO-optimized ANC ﬁlter coefﬁcients exactly
+match with the weights obtained in FXLMS algorithm, but the
+weights obtained with the GA-based optimization do not match.
+It may be noted here that the FXLMS algorithm when using
+the exact estimated secondary path can converge to a minimum
+solution, and hence, comparison of the proposed algorithm is
+made with this. However, if there is a secondary path estimation
+error, the FXLMS shows very poor performance [1], but the
+proposed algorithm converges to the minimum without the use
+of secondary path estimate.
+IV . CONCLUSION
+This paper has presented a new online ANC algorithm using
+PSO-based training. The conventional PSO-based algorithm is
+shown to be ineffective to regain convergence in the case of
+occurrence of an abrupt change in primary and/or secondary
+paths. To cope with the abrupt change in the primary and the
+secondary paths, the conventional PSO algorithm is modiﬁed
+to introduce a new CRPSO algorithm. A number of computer
+simulation experiments are carried out to show the usefulness of
+the proposed new PSO algorithm. Analytical discussion is made
+for the effectiveness of the proposed algorithm over the FXLMS
+and GA-based ANC algorithms. The proposed algorithm does
+not use secondary path identiﬁcation and, hence, is immune
+to the change in secondary path. The algorithm is also simple
+to implement unlike binary-coded GA-algorithm-based ANC.
+A new online implementation scheme of the PSO-based ANC
+algorithm is proposed in this paper.
+ACKNOWLEDGMENT
+The authors would like to thank the anonymous reviewers for
+their constructive comments which have improved the quality
+of this paper.
+REFERENCES
+[ 1 ] S .M .K u oa n dD .R .M o r g a n ,Active Noise Control Systems—Algorithms
+and DSP Implementations. New Y ork: Wiley, 1996.
+[2] S. C. Douglas, “Fast implementations of the ﬁltered-X LMS and LMS
+algorithms for multichannel active noise control,” IEEE Trans. Speech
+Audio Process., vol. 7, no. 4, pp. 454–465, Jul. 1999.
+[3] D. P . Das and G. Panda, “Active mitigation of nonlinear noise processes
+using a novel ﬁltered-s LMS algorithm,” IEEE Trans. Speech Audio
+Process., vol. 12, no. 3, pp. 313–322, May 2004.
+[4] D. P . Das, S. Mahopatra, A. Routray, and T. K. Basu, “Filtered-s LMS
+algorithm for multichannel active control of nonlinear noise processes,”
+IEEE Trans. Audio, Speech, Lang. Process., vol. 14, no. 5, pp. 1875–1880,
+Sep. 2006.
+[5] K. S. Tang, K. F. Man, S. Kwong, and Q. He, “Genetic algorithms and
+their applications,” IEEE Signal Process. Mag., vol. 13, no. 6, pp. 22–37,
+Nov. 1996.
+[6] K. H. Yim, J. B. Kim, T. P . Lee, and D. S. Ahn, “Genetic adaptive IIR
+ﬁltering algorithm for active noise control,” in Proc. IEEE Int. Conf. Fuzzy
+Syst., Aug. 22–25, 1999, pp. 1723–1728.
+[7] F. Russo and G. L. Sicuranza, “Genetic optimization in nonlinear systems
+for active noise control: Accuracy and performance evaluation,” in Proc.
+IEEE IMTC, Sorrento, Italy, Apr. 24–27, 2006, pp. 1512–1517.
+[8] F. Russo and G. L. Sicuranza, “Accuracy and performance evaluation in
+the genetic optimization of nonlinear systems for active noise control,”
+IEEE Trans. Instrum. Meas., vol. 56, no. 4, pp. 1443–1450, Aug. 2007.
+[9] C. Y . Chang and D. R. Chen, “Active noise cancellation without secondary
+path identiﬁcation by using an adaptive genetic algorithm,” IEEE Trans.
+Instrum. Meas., vol. 59, no. 9, pp. 2315–2327, Sep. 2010.
+[10] J. Kennedy and R. C. Eberhart, “Particle swarm optimization,” in Proc.
+IEEE Int. Conf. Neural Netw., 1995, pp. 1942–1948.
+[11] J. Kennedy and R. Mendes, “Population structure and particle swarm
+performance,” in Proc. IEEE Congr . Evol. Comput., Honolulu, HI, 2002,
+pp. 1671–1676.
+[12] M. Clerc and J. Kennedy, “The particle swarm-explosion, stability and
+convergence in a multidimensional complex space,” IEEE Trans. Evol.
+Comput., vol. 6, no. 1, pp. 58–73, Feb. 2002.
+[13] D. J. Krusienski and W. K. Jenkins, “Particle swarm optimization for
+adaptive IIR ﬁlter structures,” in Proc. Congr . Evol. Comput., 2004, vol. 1,
+pp. 965–970.
+[14] D. J. Krusienski and W. K. Jenkins, “Adaptive ﬁltering via particle swarm
+optimization,” in Conf. Rec. 37th Asilomar Conf. Signals, Syst., Comput. ,
+2003, vol. 1, pp. 571–575.
+[15] D. J. Krusienski and W. K. Jenkins, “A modiﬁed particle swarm optimiza-
+tion algorithm for adaptive ﬁltering,” in Proc. IEEE Int. Symp. Circuits
+Syst., 2006, pp. 137–140.
+[16] D. J. Krusienski and W. K. Jenkins, “A particle swarm optimization-
+least mean squares algorithm for adaptive ﬁltering,” in Conf. Rec. 38th
+Asilomar Conf. Signals, Syst., Comput. , 2004, vol. 1, pp. 241–245.
+[17] L. Xia, G. Hui, and L. Jinfeng, “Adaptive noise canceller based on PSO
+algorithm,” in Proc. IEEE Int. Conf. Autom. Logist., 2008, pp. 1759–1762.
+[18] H. Modares, A. Ahmadyfard, and M. Hadadzarif, “A PSO approach for
+non-linear active noise cancellation,” in Proc. 6th WSEAS Int. Conf.
+Simul., Modelling Optim., Lisbon, Portugal, 2006, pp. 492–497.
+[19] N. K. Rout, D. P . Das, and G. Panda, “Performance evaluation of particle
+swarm optimization based active noise control algorithm,” in Proc. Int.
+Conf. SEMCCO, Dec. 2010, vol. 6466, pp. 531–536.
+[20] B. Majhi and G. Panda, “Identiﬁcation of IIR systems using comprehen-
+sive learning particle swarm optimization,” Int. J. Power Energy Convers.,
+vol. 1, no. 1, pp. 105–124, 2009.
+[21] L. Liu, S. Y ang, and D. Wang, “Particle swarm optimization with compos-
+ite particles in dynamic environments,” IEEE Trans. Syst., Man, Cybern.
+B, Cybern., vol. 40, no. 6, pp. 1634–1648, Dec. 2010.
+[22] T. Blackwell and J. Branke, “Multiswarms, exclusion, and anti-
+convergence in dynamic environments,” IEEE Trans. Evol. Comput. ,
+vol. 10, no. 4, pp. 459–472, Aug. 2006.
+[23] S. Y ang and C. Li, “A clustering particle swarm optimizer for locating and
+tracking multiple optima in dynamic environments,” IEEE Trans. Evol.
+Comput., vol. 14, no. 6, pp. 959–974, Dec. 2010.
+Nirmal Kumar Rout received the B.E. degree in
+electronics and telecommunication engineering from
+the University College of Engineering (presently
+known as V eer Surendra Sai University of Technol-
+ogy), Sambalpur University, Burla, India, in 1991
+and the M.Tech. degree in computer science from
+the Utkal University, Bhubaneshwar, India, in 2001.
+He is currently working toward the Ph.D. degree at
+the Kalinga Institute of Industrial Technology (KIIT)
+University, Bhubaneshwar.
+From 1993 to 2002, he was a Lecturer with the De-
+partment of Electronics and Communication Engineering, Orissa Engineering
+College, Bhubaneswar. He also served as a Faculty Member of the Institute of
+Chartered Financial Analysts of India (ICFAI) Institute of Science Technology
+(ICFAITech), Hyderabad, India, from 2002 to 2007. He is currently an Asso-
+ciate Professor with the School of Electronics Engineering, KIIT University. He
+has published four research papers in various refereed international conferences
+and Indian journals. His current research interests include active noise control,
+adaptive signal processing, soft computing, and evolutionary computing.
+
+ROUT et al.: PSO BASED ANC ALGORITHM WITHOUT SECONDARY P ATH IDENTIFICATION 563
+Debi Prasad Das (M’10) received the B.Sc.
+(Hons.) degree in physics from Utkal University,
+Bhubaneswar, India, in 1996, the M.Sc. degree in
+electronics from Sambalpur University, Burla, India,
+in 1998, and the Ph.D. degree in electronics and
+instrumentation engineering from the National Insti-
+tute of Technology, Rourkela, India, in 2004.
+From 2003 to 2004, he was an Assistant Profes-
+sor and the Head of the Department of Electronics,
+Silicon Institute of Technology, Bhubaneswar. From
+2004 to 2005, he was a Postdoctoral Research As-
+sociate with the Indian Institute of Technology Kharagpur, Kharagpur, India.
+From April 2005 to May 2008, he was a Scientist with the Central Electronics
+Engineering Research Institute, Council of Scientiﬁc and Industrial Research
+(CSIR), Pilani, India. Since May 2008, he has been a Scientist with the
+Process Engineering and Instrumentation Cell, CSIR-Institute of Minerals
+and Materials Technology, Bhubaneswar. During 2010–2011, he visited the
+University of Adelaide, Adelaide, Australia, for postdoctoral research in the
+area of active noise control. His current research interests include active noise
+control, adaptive signal processing, computationally efﬁcient and hardware-
+suitable algorithms, microcontroller-based system development, and image
+processing for the mineral industry.
+Dr. Das was a recipient of the Orissa Y oung Scientists Award in 2004 by the
+Government of Orissa, India; CSIR Y oung Scientist Award in 2009 by CSIR,
+India; and Better Opportunities for Y oung Scientists in Chosen Areas of Science
+and Technology Fellowship from 2009 to 2010 by Department of Science and
+Technology, Government of India.
+Ganapati Panda (M’94–SM’97) received the B.Sc.
+degree in electrical engineering and the M.Sc. Eng.
+degree in communication systems from Sambalpur
+University, Burla, India, in 1971 and 1977, respec-
+tively, and the Ph.D. degree in electronics and com-
+munication engineering from the Indian Institute
+of Technology (IIT) Kharagpur, Kharagpur, India,
+in 1981.
+From 1984 to 1986, he was a Postdoctoral
+Researcher with The University of Edinburgh,
+Edinburgh, U.K. He was the Founder Head of the
+School of Electrical Sciences, IIT Bhubaneswar, Bhubaneswar, India, as well as
+the Founder Head of the Electronics and Communication Engineering Depart-
+ment, National Institute of Technology (NIT), Rourkela, India. He also acted
+as a Coordinator for World Bank Project with NIT, Rourkela. He has served
+38 years in teaching and research in leading technical institutions of India.
+He also served as the Director of the NIT, Jamshedpur, India. He is currently
+a Deputy Director and Professor with the School of Electrical Sciences, IIT
+Bhubaneswar. Prior to this, he was the Dean (Academic Affairs) with IIT
+Bhubaneswar and the Dean (Administration) with the NIT, Rourkela. He has
+already guided 21 Ph.D. students in the ﬁeld of signal processing, communica-
+tion, and soft computing and has published more than 300 research papers in
+various refereed international and Indian journals and conferences. Most of his
+research papers are extensively cited. He has successfully completed a number
+of research projects from All India Council for Technical Education, Ministry of
+Human Resource Development, Indian Space Research Organization, Defence
+Research and Development Organization, Department of Science and Technol-
+ogy, and British Council, U.K. He has also edited two books in the area of DSP .
+His research interests are digital signal processing, digital communication, soft
+computing, intelligent instrumentation, evolutionary computing, computational
+ﬁnance, sensor networks, and distributed signal processing.
+Prof. Panda is a Fellow of the National Academy of Engineering, India, in
+2000, and a Fellow of The National Academy of Sciences, India, in 2003, for his
+signiﬁcant research contribution to signal processing and telecommunication.
+He is a Fellow of the Institution of Electronics and Telecommunication Engi-
+neers, Fellow of the Institution of Engineers, life member of Computer Society
+of India, life member of Indian Society for Technical Education, and life mem-
+ber of System Society. He is a regular Reviewer of many international journals
+including IEEE, Institution of Engineering and Technology, and Elsevier. He
+has chaired and delivered keynote addresses in many international conferences
+in India and abroad. He was a recipient of the Samanta Chandra Sekhar Award
+in 1993 from the Department of Science and Technology, Government of
+Orissa, for his high-quality research work in the ﬁeld of engineering.
