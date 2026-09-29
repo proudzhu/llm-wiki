@@ -13,97 +13,97 @@ tags:
   - offline-modeling
 ---
 
-# 次级通道建模：从离线辨识到免建模演进
+# Secondary Path Modeling: From Offline Identification to Model-Free Evolution
 
-## 核心矛盾
+## The Core Tension
 
-次级通道 $S(z)$ 是 FXLMS 算法的命脉——参考信号必须经 $\hat{S}(z)$ 滤波后才能更新权重。但 $S(z)$ 本身是时变的（耳机佩戴位移、温度漂移、气流变化），而建模过程又与 ANC 运行相互干扰。**整个次级通道建模领域都在解决一个矛盾：如何在不干扰降噪的前提下，持续跟踪一个不断变化的传递函数。**
+The secondary path $S(z)$ is the lifeblood of the FXLMS algorithm — the reference signal must be filtered through $\hat{S}(z)$ before the weights can be updated. But $S(z)$ itself is time-varying (earphone placement shifts, temperature drift, airflow changes), and the modeling process interferes with ANC operation. **The entire field of secondary path modeling is devoted to resolving one tension: how to continuously track a constantly changing transfer function without disturbing noise control.**
 
-## 四条技术路线
+## Four Technical Routes
 
-### 路线 1：离线建模 → 定期重校
+### Route 1: Offline Modeling → Periodic Recalibration
 
-最简单的方案：ANC 停机 → 注入白噪声 → LMS 辨识 → 固定 $\hat{S}(z)$ → 启动 ANC。
+The simplest scheme: shut down ANC → inject white noise → LMS identification → fix $\hat{S}(z)$ → restart ANC.
 
-| 优势 | 劣势 |
+| Advantage | Disadvantage |
 |------|------|
-| 实现简单，无干扰 | 时变环境下很快过时 |
-| 辨识精度高（无信号污染） | 需要停机，用户体验差 |
+| Simple to implement, no interference | Quickly becomes outdated in time-varying environments |
+| High identification accuracy (no signal contamination) | Requires downtime, poor user experience |
 
-**适用**：固定安装（管道、建筑），$S(z)$ 准静态。
+**Applicable to**: fixed installations (ducts, buildings) where $S(z)$ is quasi-static.
 
-Kuo (1999) 给出离线 LMS 辨识的标准流程，收敛后 $\hat{S}(z)$ 固定。Benois (2020) 的 FPGA 原型也采用离线预标定，但指出耳机场景下佩戴变化导致 $\hat{S}(z)$ 偏差是主要性能瓶颈。
+Kuo (1999) gives the standard offline LMS identification procedure; once converged, $\hat{S}(z)$ is fixed. Benois (2020)'s FPGA prototype also uses offline pre-calibration, but notes that in earphone scenarios, $\hat{S}(z)$ deviation caused by fitting changes is the main performance bottleneck.
 
-### 路线 2：加性噪声在线建模
+### Route 2: Additive-Noise Online Modeling
 
-ANC 运行时注入低功率辅助噪声 $v(n)$，同时辨识 $\hat{S}(z)$。
+Inject a low-power auxiliary noise $v(n)$ during ANC operation while simultaneously identifying $\hat{S}(z)$.
 
-**核心困难**：$v(n)$ 必须足够大才能辨识，但太大会被用户听到。Kuo (1999) 分析了收敛速度与 $\sigma_d^2 / \sigma_v^2$ 的关系——在线建模比离线慢该比值倍。
+**Core difficulty**: $v(n)$ must be loud enough for identification, but too loud and the user hears it. Kuo (1999) analyzed the relationship between convergence speed and $\sigma_d^2 / \sigma_v^2$ — online modeling is slower than offline by this ratio.
 
-**改进方向**：
-- **Eriksson (1989)**：基本两滤波器加性噪声结构，$v(n)$ 出现在残余误差中，约束其功率
-- **Zhang (2001)**：三滤波器交叉更新法，在经典方法中性能最佳
-- **Akhtar (2006)**：两滤波器 + MFxLMS + [[concepts/variable-step-size-lms|VSS LMS]]（逆步长策略），以更少滤波器达到更好性能，−12.35 dB NMSE
-- **自适应噪声消除**：用辅助滤波器消除 $d(n)$ 对辨识的干扰，加速 ~30 倍
-- **RMFxLMS**（Yang 2026）：鲁棒多通道变体，处理多通道场景下的交叉耦合
+**Improvement directions**:
+- **Eriksson (1989)**: the basic two-filter additive-noise structure, where $v(n)$ appears in the residual error, constraining its power
+- **Zhang (2001)**: the three-filter cross-updated method, the best performer among classical approaches
+- **Akhtar (2006)**: two filters + MFxLMS + [[concepts/variable-step-size-lms|VSS LMS]] (inverse step-size strategy), achieving better performance with fewer filters, −12.35 dB NMSE
+- **Adaptive noise cancellation**: uses an auxiliary filter to remove the interference of $d(n)$ on identification, speeding it up by ~30×
+- **RMFxLMS** (Yang 2026): a robust multichannel variant that handles cross-coupling in multichannel scenarios
 
-### 路线 3：免辅助噪声建模
+### Route 3: Auxiliary-Noise-Free Modeling
 
-不注入额外信号，仅利用 ANC 运行中已有的信号辨识 $\hat{S}(z)$。
+No extra signal is injected; $\hat{S}(z)$ is identified using only the signals already present during ANC operation.
 
-- **联立方程法**（Jin 2007, Fujii 1999）：对输入输出信号做差分，建立代数方程联立求解 $\hat{S}(z)$，无需 $v(n)$
-- **系数更新法**：利用 FxLMS 权重更新方程中的隐含信息反推 $\hat{S}(z)$
+- **Simultaneous equation method** (Jin 2007, Fujii 1999): forms algebraic equations by differencing the input-output signals and solves them jointly for $\hat{S}(z)$, with no need for $v(n)$
+- **Coefficient update method**: back-infers $\hat{S}(z)$ from the implicit information in the FxLMS weight update equations
 
-**代价**：收敛更慢、稳定性更差，且对信噪比敏感。
+**Cost**: slower convergence, worse stability, and sensitivity to SNR.
 
-### 路线 4：绕过 $S(z)$ 辨识
+### Route 4: Bypassing $S(z)$ Identification
 
-最激进的路线——完全不建模 $\hat{S}(z)$，从算法层面消除对它的依赖。
+The most radical route — do not model $\hat{S}(z)$ at all, and eliminate the dependence on it at the algorithm level.
 
-| 方法 | 原理 | 代价 |
+| Method | Principle | Cost |
 |------|------|------|
-| **SPR 条件**（Zhou 2007） | 严格正实条件保证稳定性，无需 $\hat{S}(z)$ | 条件苛刻，实际难以满足 |
-| **进化搜索**（GA/PSO） | 遗传算法/粒子群直接搜索最优 $W(z)$ | 种群计算开销大（如 $P=200$ 个并行滤波器），更新粒度为代而非样本 |
-| **Careful Control**（Lopes 2022） | 双控制框架交替最小二乘 | 收敛慢，但无需 $\hat{S}(z)$ |
-| **元学习初始化**（Yang 2026） | MAML 预训练 $W(z)$ 初始值 | 需要大量离线数据 |
-| **MPC**（Liang 2026, Wills 2008） | 状态空间模型内嵌 $S(z)$，QP 求解绕过显式辨识 | 需要精确的植物模型 |
+| **SPR condition** (Zhou 2007) | Strictly positive-real condition guarantees stability without $\hat{S}(z)$ | The condition is stringent and hard to satisfy in practice |
+| **Evolutionary search** (GA/PSO) | Genetic algorithm / particle swarm directly searches for the optimal $W(z)$ | Large population computational overhead (e.g., $P=200$ parallel filters); update granularity is per generation, not per sample |
+| **Careful Control** (Lopes 2022) | Dual-control framework with alternating least squares | Slow convergence, but no need for $\hat{S}(z)$ |
+| **Meta-learning initialization** (Yang 2026) | MAML pre-trains the initial $W(z)$ | Requires large amounts of offline data |
+| **MPC** (Liang 2026, Wills 2008) | State-space model embeds $S(z)$; QP solving bypasses explicit identification | Requires an accurate plant model |
 
-进化搜索并非不能实时：Rout (2012) 的在线 PSO-ANC 方案用 MUX/DMUX 将实时参考信号轮流路由到种群中的各个滤波器（每代每滤波器获取 $M \ge 2N$ 个新鲜样本），以块均方误差为适应度，在真实噪声流上实时运行，全程无需 $\hat{S}(z)$。其 [[concepts/conditional-reinitialized-pso|CRPSO]] 变体通过检测 gbest 误差的跳变来发现 $S(z)$ 或 $P(z)$ 的突变并重初始化种群，10/10 次运行均在突变后恢复全局最优——这正是梯度类方法最脆弱的场景。代价依然存在：种群规模（$P=200$）带来显著的滤波器开销，且权重更新以代为粒度，无法做到 FxLMS 那样的逐样本自适应。
+Evolutionary search is not inherently incapable of real-time operation: Rout (2012)'s online PSO-ANC scheme uses MUX/DMUX to route the real-time reference signal to each filter in the population in turn (each filter gets $M \ge 2N$ fresh samples per generation), uses block mean-square error as the fitness, and runs in real time on the actual noise stream, with no need for $\hat{S}(z)$ at any point. Its [[concepts/conditional-reinitialized-pso|CRPSO]] variant detects abrupt changes in $S(z)$ or $P(z)$ by detecting jumps in the gbest error and reinitializes the population; 10/10 runs recovered the global optimum after the change — precisely the scenario where gradient-based methods are most fragile. The costs remain, however: the population size ($P=200$) imposes significant filter overhead, and weight updates are generation-granular, unable to achieve the per-sample adaptivity of FxLMS.
 
-Liang (2026) 的延迟 MPC 是一个有趣的案例：MPC 的状态空间模型需要 $S(z)$ 的参数化形式（通过向量拟合获得），但一旦模型建立，QP 求解器直接输出最优控制信号，不再需要 $\hat{S}(z)$ 滤波参考信号这一步。**$S(z)$ 从"每样本使用的滤波器"退化为"一次性标定的模型参数"**。
+Liang (2026)'s delayed MPC is an interesting case: the MPC state-space model requires a parameterized form of $S(z)$ (obtained via vector fitting), but once the model is built, the QP solver directly outputs the optimal control signal — the step of filtering the reference signal through $\hat{S}(z)$ is no longer needed. **$S(z)$ degrades from "a filter used every sample" to "a model parameter calibrated once."**
 
-## 决策矩阵
+## Decision Matrix
 
-| 场景 | 推荐路线 | 理由 |
+| Scenario | Recommended route | Rationale |
 |------|---------|------|
-| 固定安装，$S(z)$ 准静态 | 路线 1（离线） | 简单可靠，无需在线开销 |
-| 耳机/可穿戴，$S(z)$ 缓变 | 路线 2（加性噪声） | 平衡精度与实时性 |
-| 对辅助噪声敏感（助听器） | 路线 3（免辅助噪声） | 不引入可听噪声 |
-| 耳机，$S(z)$ 突变（泄漏/摘下） | 路线 5（约束检查） | 6 MAC 检测 + 平滑回退，无需辅助噪声 |
-| 非线性/非平稳严重 | 路线 4（MPC 或元学习） | 绕过 $S(z)$ 辨识瓶颈 |
+| Fixed installation, quasi-static $S(z)$ | Route 1 (offline) | Simple and reliable, no online overhead |
+| Earphones/wearables, slowly varying $S(z)$ | Route 2 (additive noise) | Balances accuracy and real-time operation |
+| Sensitive to auxiliary noise (hearing aids) | Route 3 (auxiliary-noise-free) | Introduces no audible noise |
+| Earphones, abrupt $S(z)$ changes (leakage/removal) | Route 5 (constraint checking) | 6-MAC detection + smooth fallback, no auxiliary noise needed |
+| Severe nonlinearity/nonstationarity | Route 4 (MPC or meta-learning) | Bypasses the $S(z)$ identification bottleneck |
 
-## 建模误差的影响链
+## The Impact Chain of Modeling Error
 
-$\hat{S}(z)$ 误差通过以下链条影响系统：
+$\hat{S}(z)$ error affects the system through the following chain:
 
 ```
-相位误差 > 90° → FXLMS 发散（失稳）
-相位误差 40°-90° → 收敛速度下降，稳态残余增大
-幅度误差 → 步长等效缩放，收敛变慢但不失稳
-时变偏差 → 周期性振荡，需在线跟踪
+Phase error > 90° → FXLMS diverges (instability)
+Phase error 40°-90° → reduced convergence speed, increased steady-state residual
+Magnitude error → equivalent step-size scaling, slower convergence but no instability
+Time-varying deviation → periodic oscillation, requires online tracking
 ```
 
-Kuo (1999) 的经典结论：慢自适应条件下 FXLMS 可容忍 ~90° 相位误差，40° 以内几乎不影响收敛。这意味着**粗略的 $\hat{S}(z)$ 通常够用**，但时变环境下"粗略"本身也在恶化。
+Kuo (1999)'s classic result: under slow-adaptation conditions, FXLMS can tolerate ~90° of phase error, and errors within 40° have almost no effect on convergence. This means **a rough $\hat{S}(z)$ is usually good enough** — but in time-varying environments, "rough" itself is continually degrading.
 
-## 演进趋势
+## Evolution Trends
 
-1. **从离线到在线**：可穿戴设备驱动，$S(z)$ 时变成为常态
-2. **从显式到隐式**：MPC、元学习等方法将 $S(z)$ 内嵌到模型中，避免每样本滤波
-3. **从单一到混合**：Luo (2026) 的 GFANC-FxNLMS 用生成模型提供初始滤波器，FxNLMS 在线微调——$\hat{S}(z)$ 的精度要求被降低
-4. **从辨识到绕过**：终极目标是完全消除对 $\hat{S}(z)$ 的依赖——进化搜索（Rout 2012 的在线 PSO/CRPSO）从梯度自由的角度实现它，MPC 则在特定条件下接近这一目标
-5. **从迭代到深度学习**：Fareedha (2026) 的 [[concepts/deep-secondary-path-estimation|DeepSPE]] 用 Conv1D + BiLSTM + Attention 替代迭代自适应，帧级推理达到 −16.27 dB NMSE，比 Akhtar VSS-LMS 提升 3.92 dB
+1. **From offline to online**: driven by wearable devices, time-varying $S(z)$ becomes the norm
+2. **From explicit to implicit**: methods such as MPC and meta-learning embed $S(z)$ into the model, avoiding per-sample filtering
+3. **From single to hybrid**: Luo (2026)'s GFANC-FxNLMS uses a generative model to provide the initial filter, with FxNLMS fine-tuning online — the accuracy requirement on $\hat{S}(z)$ is thereby lowered
+4. **From identification to bypass**: the ultimate goal is to eliminate the dependence on $\hat{S}(z)$ entirely — evolutionary search (Rout 2012's online PSO/CRPSO) achieves it from a gradient-free angle, while MPC approaches this goal under specific conditions
+5. **From iterative to deep learning**: Fareedha (2026)'s [[concepts/deep-secondary-path-estimation|DeepSPE]] replaces iterative adaptation with Conv1D + BiLSTM + Attention, achieving −16.27 dB NMSE with frame-level inference, a 3.92 dB improvement over Akhtar's VSS-LMS
 
-## 相关页面
+## Related Pages
 
 - [[concepts/secondary-path-modeling|Secondary Path Modeling]]
 - [[concepts/online-secondary-path-modeling|Online Secondary-Path Modeling]]
