@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-09-26
+updated: 2026-09-30
 sources:
+  - raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.txt
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
@@ -104,8 +105,17 @@ Kim & Kim (2014) quantify a fundamental small-array limitation: the spatial dire
 
 [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024]] use beamforming as the case study for the trend of replacing model-based components with learnable ones: DNN mask estimation + model-based MVDR → RNN-estimated SCMs ([[concepts/adl-mvdr|ADL-MVDR]]) → direct neural beamformer-coefficient estimation (unsuccessful) → learnable filterbanks with time-domain beamforming → abandoning beamforming for nonlinear neural spatial-spectral filters ([[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023]]). The theoretical license is that MVDR optimality is conditional on Gaussian noise (where it is a sufficient statistic); non-Gaussian distortions call for non-decomposable nonlinear filters that DNNs approximate. The counter-argument — the article's central reservation — is that a model-based component "introduces valid physical knowledge to the system, serving as a kind of **regularizer**" against out-of-domain inputs, and that beamforming-derived systems (via [[concepts/guided-source-separation|GSS]]) remain the robustness benchmark on CHiME dinner-party data. See [[concepts/hybrid-speech-enhancement|Hybrid Speech Enhancement]].
 
+## Robustness by Constraining the Adaptive Stages (Hoshuyama et al. 1999)
+
+A route to robustness that avoids the covariance domain entirely is to constrain the coefficients of the **adaptive stages** of a [[concepts/gsc-beamformer|GSC]]. [[sources/hoshuyama-1999-robust-adaptive-beamformer-ccaf|Hoshuyama, Sugiyama & Hirano 1999]] clamp each tap of every [[concepts/adaptive-blocking-matrix|adaptive blocking matrix]] branch to an individual interval derived from the target-minimizing coefficients over a chosen DOA sector — a [[concepts/coefficient-constrained-adaptive-filter|coefficient-constrained adaptive filter]] — while the multiple-input canceller uses a [[concepts/norm-constrained-adaptive-filter|norm constraint]]. The result inverts the usual robustness/interference-reduction trade-off: because the constrained blocking matrix cannot converge to the interference-minimizing solution, it *preserves* interference at the canceller's reference inputs, so tolerating up to 20° of target-direction error costs no degrees of freedom for interference reduction (30 dB anechoic suppression at $\theta = \pm 30°$; 19 dB interference reduction in a $T_{60} \approx 0.3$ s room on four microphones; 3.8 MOS). The approach is matrix-free, needs no [[concepts/spatial-covariance-matrix|covariance estimate]], and makes the tolerable [[concepts/steering-vector-error|steering-vector error]] an explicit design parameter — the time-domain adaptive counterpart of what [[concepts/diagonal-loading|diagonal loading]] and WNG constraints achieve for the statistics-based beamformers described above.
+
 ## Related Concepts
 
+- [[concepts/coefficient-constrained-adaptive-filter|Coefficient-Constrained Adaptive Filter (CCAF)]]
+- [[concepts/adaptive-blocking-matrix|Adaptive Blocking Matrix (ABM)]]
+- [[concepts/norm-constrained-adaptive-filter|Norm-Constrained Adaptive Filter (NCAF)]]
+- [[concepts/target-signal-cancellation|Target-Signal Cancellation]]
+- [[concepts/steering-vector-error|Steering-Vector Error]]
 - [[transparency-mode|Transparency Mode]]
 - [[voice-activity-detection|Voice Activity Detection]]
 - [[active-noise-control|Active Noise Control]]
@@ -134,6 +144,7 @@ Kim & Kim (2014) quantify a fundamental small-array limitation: the spatial dire
 
 ## Related Sources
 
+- [[sources/hoshuyama-1999-robust-adaptive-beamformer-ccaf|Hoshuyama, Sugiyama & Hirano 1999: A Robust Adaptive Beamformer with a Blocking Matrix Using Constrained Adaptive Filters]] — robustness by constraining the GSC's adaptive stages rather than the covariance
 - [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — review unifying six method families via the DF–WNG–frequency-invariance framework
 
 - [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]]

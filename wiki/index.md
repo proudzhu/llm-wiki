@@ -622,6 +622,7 @@
 | [[entities/nirmal-kumar-rout\|Nirmal Kumar Rout]] | KIIT University — first author of the PSO-based ANC algorithm without secondary path identification | 2026-09-28 |
 | [[entities/debi-prasad-das\|Debi Prasad Das]] | CSIR-IMMT Bhubaneswar — co-author, filtered-s LMS researcher | 2026-09-28 |
 | [[entities/ganapati-panda\|Ganapati Panda]] | IIT Bhubaneswar — co-author, filtered-s LMS and comprehensive-learning PSO researcher | 2026-09-28 |
+| [[entities/akihiro-hirano\|Akihiro Hirano]] | NEC Corporation (to 1998) / Kanazawa University researcher — co-author of the 1999 CCAF-based robust adaptive beamformer | 2026-09-30 |
 
 ---
 
@@ -1183,6 +1184,11 @@
 | [[concepts/open-ear-headphones\|Open-Ear Headphones]] | Unoccluded wearable audio: high acoustic transparency but weak low-frequency output and free noise ingress; intelligibility challenges and remedies | 2026-09-27 |
 | [[concepts/direction-preserving-anc\|Direction-Preserving ANC (DP-ANC)]] | ANC that attenuates noise from non-desired directions while preserving sound naturally arriving from a specified desired direction; component-separated cancellation-preservation objective with FiLM-conditioned filter estimation | 2026-09-21 |
 | [[concepts/conditional-reinitialized-pso\|Conditional Reinitialized PSO]] | PSO variant that detects abrupt primary/secondary path changes via gbest error jumps and reinitializes the particle population | 2026-09-28 |
+| [[concepts/coefficient-constrained-adaptive-filter\|Coefficient-Constrained Adaptive Filter (CCAF)]] | Adaptive filter with every tap clamped to its own interval $[\psi_n, \phi_n]$; the box region is shaped from the target-minimizing coefficients to bound target-DOA tracking | 2026-09-30 |
+| [[concepts/adaptive-blocking-matrix\|Adaptive Blocking Matrix (ABM)]] | GSC blocking matrix whose coefficients adapt to the true target direction; must track the target without adapting toward interference | 2026-09-30 |
+| [[concepts/norm-constrained-adaptive-filter\|Norm-Constrained Adaptive Filter (NCAF)]] | Adaptive filter rescaled when its total tap norm exceeds a threshold; restrains target cancellation at the cost of interference reduction | 2026-09-30 |
+| [[concepts/target-signal-cancellation\|Target-Signal Cancellation]] | Unwanted suppression of the desired source by an adaptive beamformer that mistakes it for interference; the dominant failure mode of adaptive microphone arrays | 2026-09-30 |
+| [[concepts/steering-vector-error\|Steering-Vector Error]] | Mismatch between the assumed array steering vector and the true transfer function; target-direction error dominates in practice | 2026-09-30 |
 
 ---
 
@@ -1426,6 +1432,7 @@
 | [[sources/watanabe-2026-low-frequency-harmonic-control\|Watanabe, Chiba, Kamamoto & Kako 2026]] | This paper presents Low-Frequency Harmonic Control (LFHC), a low-complexity post-filter that improves the intelligibility of speech played back through open-ear headphones in noisy environments without amplifying volume. | 2026-09-27 |
 | [[sources/yang-2026-direction-preserving-anc\|Yang, Luo, Wang, Zhang & Gan 2026: Direction-Preserving ANC with a Conditional Control-Filter Estimation Network]] | DP-ANC as direction-conditioned cancellation-preservation optimization; FiLM-conditioned network estimates full FIR control-filter bank in one forward pass (22.8 dB NR, -11.4 dB distortion, ~3000x cheaper than analytical SSANC) | 2026-09-21 |
 | [[sources/rout-2012-pso-anc-without-secondary-path\|Rout, Das & Panda 2012]] | This paper develops a systematic online particle swarm optimization (PSO) training scheme for linear feedforward ANC that requires no secondary path identification whatsoever. | 2026-09-28 |
+| [[sources/hoshuyama-1999-robust-adaptive-beamformer-ccaf\|Hoshuyama, Sugiyama & Hirano 1999]] | Robust GSC with a coefficient-constrained adaptive blocking matrix and a norm-constrained canceller - 20 deg target-direction-error tolerance with no loss of interference-reduction degrees of freedom; 19 dB IRR and 3.8 MOS at 0.3-s reverberation | 2026-09-30 |
 
 ---
 
@@ -1479,10 +1486,10 @@
 
 ## Statistics
 
-- **Total pages**: 1428
-- **Entities**: 612
-- **Concepts**: 552
-- **Sources**: 234
+- **Total pages**: 1435
+- **Entities**: 613
+- **Concepts**: 557
+- **Sources**: 235
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-28
+- **Last updated**: 2026-09-30

@@ -5551,8 +5551,37 @@ Ingested the IEEE Signal Processing Magazine overview article contrasting **mode
 - **Pages updated**: `wiki/concepts/hearables.md` (open-ear playback intelligibility application), `wiki/concepts/psychoacoustic-postfilter.md` (masking-aware counterpart relation), `wiki/synthesis/application-specific-anc.md` (signal-side alternative in open-ear section), `wiki/synthesis/modern-headphone-anc-systems.md` (§5.1 signal-adaptation bullet)
 
 ---
----
 
 ## [2026-09-28] ingest | PSO-Based ANC Without Secondary Path Identification (Rout 2012)
 
 Ingested Rout, Das & Panda 2012 (IEEE TIM 61(2):554-563). Key contribution: [[concepts/conditional-reinitialized-pso|CRPSO]] — an online PSO-ANC scheme using MUX/DMUX routing that requires no secondary path identification and survives abrupt P(z)/S(z) changes. Created source page [[sources/rout-2012-pso-anc-without-secondary-path|Rout 2012]], entities for the three authors, and concept page for CRPSO. Updated [[concepts/heuristic-anc-algorithms]], [[concepts/filtered-x-lms-algorithm]], [[concepts/secondary-path-variability]], [[concepts/primary-path-variability]], [[concepts/secondary-path-modeling]]. Refined [[synthesis/secondary-path-modeling-evolution]] Route 4 claim on evolutionary search and positioned CRPSO in [[synthesis/ai-driven-anc]] as the pre-deep-learning non-gradient branch.
+
+---
+
+## [2026-09-30] ingest | A Robust Adaptive Beamformer for Microphone Arrays with a Blocking Matrix Using Constrained Adaptive Filters (Hoshuyama, Sugiyama & Hirano 1999)
+
+- **Source**: `raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md` (Zotero: DEHT62WU)
+- **Authors**: Osamu Hoshuyama, Akihiko Sugiyama, Akihiro Hirano
+- **Published**: IEEE Transactions on Signal Processing, vol. 47, no. 10, pp. 2677–2684, Oct. 1999
+- **DOI**: 10.1109/78.790650
+- **Summary**: Robust generalized sidelobe canceller whose adaptive blocking matrix is built from coefficient-constrained adaptive filters (CCAFs) — every tap clamped to an interval derived from the target-minimizing coefficients over a chosen DOA sector — with a norm-constrained multiple-input canceller (after Cox et al. 1987). Tolerates up to 20° of target-direction error *without* spending degrees of freedom for interference reduction: 30 dB anechoic suppression at ±30°, 19 dB interference-reduction ratio and 3.8 MOS in a 0.3-s reverberation room on four microphones (vs. 9 dB / 2.6 for the norm-constrained method).
+- **Pages created**:
+  - `wiki/sources/hoshuyama-1999-robust-adaptive-beamformer-ccaf.md`
+  - `wiki/entities/akihiro-hirano.md`
+  - `wiki/concepts/coefficient-constrained-adaptive-filter.md`
+  - `wiki/concepts/adaptive-blocking-matrix.md`
+  - `wiki/concepts/norm-constrained-adaptive-filter.md`
+  - `wiki/concepts/target-signal-cancellation.md`
+  - `wiki/concepts/steering-vector-error.md`
+- **Pages updated**:
+  - `wiki/entities/osamu-hoshuyama.md` — added the 1999 paper, NEC affiliation from 1999, beamforming research focus, new links
+  - `wiki/entities/akihiko-sugiyama.md` — added the 1999 paper, affiliation detail, adaptive-filter research focus, new links
+  - `wiki/concepts/gsc-beamformer.md` — new "CCAF-Based Robust GSC (Hoshuyama, Sugiyama & Hirano 1999)" section
+  - `wiki/concepts/adaptive-filtering.md` — new "Constrained Adaptation" section (leakage / noise injection / norm / per-coefficient box)
+  - `wiki/concepts/fixed-beamformer.md` — new "The FBF Inside a Robust GSC" section (FBF output as common reference)
+  - `wiki/concepts/beamforming.md` — new section on robustness by constraining the adaptive stages
+  - `wiki/concepts/mvdr-beamformer.md` — new section on the coefficient-constrained GSC as a non-covariance robustness route
+  - `wiki/synthesis/multi-channel-speech-enhancement.md` — added the source row and a fourth (parameter-domain) robustness axis to Insight 2
+  - `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — index rows + statistics
+
+---

@@ -616,4 +616,5 @@
 | [[entities/nirmal-kumar-rout\|Nirmal Kumar Rout]] | KIIT University — first author of the PSO-based ANC algorithm without secondary path identification | 2026-09-28 |
 | [[entities/debi-prasad-das\|Debi Prasad Das]] | CSIR-IMMT Bhubaneswar — co-author, filtered-s LMS researcher | 2026-09-28 |
 | [[entities/ganapati-panda\|Ganapati Panda]] | IIT Bhubaneswar — co-author, filtered-s LMS and comprehensive-learning PSO researcher | 2026-09-28 |
+| [[entities/akihiro-hirano\|Akihiro Hirano]] | NEC Corporation (to 1998) / Kanazawa University researcher — co-author of the 1999 CCAF-based robust adaptive beamformer | 2026-09-30 |
 

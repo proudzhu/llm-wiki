@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-09-19
+updated: 2026-09-30
 sources:
+  - raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md
   - raw/papers/souden-2010-pmwf/full-text.md
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
@@ -80,8 +81,22 @@ Taseska et al. develop the [[concepts/informed-gsc|informed GSC]], where the FBF
 
 [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024]] control the ABM and AIC adaptation with a [[concepts/directional-vad|directional VAD]] label instead of an SNR estimate or a single-speaker VAD: the binarized target-zone DVAD $\delta(l)$ gates the ABM's NLMS update (update during target-active frames, so the ABM learns to block the target from the noise reference), while its complement $\bar{\delta}(l)$ gates the AIC's update (update during target-silent frames, when the noise reference is free of target leakage). This makes the adaptation control **multi-speaker-safe** — prior VAD-assisted ABMs assume a single speaker and degrade with interfering speakers. The GSC output feeds a DPCRN post-filter that also receives the soft full-zone DVAD, yielding a lightweight (0.87M params, 1.82 GMACs/s) multi-channel TSE system that matches the end-to-end FT-JNF baseline on simulated data and beats it on real-world recordings.
 
+## CCAF-Based Robust GSC (Hoshuyama, Sugiyama & Hirano 1999)
+
+[[sources/hoshuyama-1999-robust-adaptive-beamformer-ccaf|Hoshuyama, Sugiyama & Hirano 1999]] replace the fixed (Griffiths–Jim) blocking matrix with an **adaptive** one built from [[concepts/coefficient-constrained-adaptive-filter|coefficient-constrained adaptive filters (CCAFs)]]: each branch is an adaptive noise canceller that takes the **fixed-beamformer output** as a common reference and subtracts it from a delayed microphone signal, with every tap clamped to its own interval $[\psi_{m,n}, \phi_{m,n}]$ after the NLMS update. The interval is derived as the envelope of the optimal target-minimizing coefficient vectors over a chosen DOA sector, which makes the **maximum allowable target-direction error an explicit design parameter** (4°–20° demonstrated) — see [[concepts/adaptive-blocking-matrix|Adaptive Blocking Matrix]].
+
+The inversion of the classical trade-off is the paper's structural insight. Earlier robustness fixes (leakage, noise injection, [[concepts/norm-constrained-adaptive-filter|norm constraint]] in the canceller) buy direction-error tolerance by *restraining* the canceller, which also restrains interference reduction. Constraining the blocking matrix instead means the CCAF cannot converge to the interference-minimizing solution either, so a **large residual interference** survives at the canceller's reference inputs — exactly the signal the canceller needs. Robustness is therefore obtained without spending the array's degrees of freedom for interference reduction, and the design scales down to four microphones. The multiple-input canceller keeps the norm-constrained adaptive filters of Cox et al. (1987) as a second safety net against residual target leakage, which is unavoidable in a reverberant room (complete blocking would need more than 1000 taps per branch).
+
+Two operational details generalize beyond this paper: the blocking matrix and the canceller must adapt under **opposite** SIR conditions (BM during high SIR, canceller during low SIR — the double-talk analogue, later replaced by a [[concepts/directional-vad|directional VAD]] gate in Sun et al. 2024), and the architecture is matrix-free, costing about twice the multiplications of the norm-constrained method. On real data with $T_{60} \approx 0.3$ s it reaches 19 dB interference reduction (3 dB for the FBF, 9 dB for the norm-constrained method) with ~2 dB target cancellation, and 3.8 MOS vs. 2.6 for the previous robust beamformer. Its principal limitation is spectrum dependence: the useful direction-error sector calibrated on white signals widens with colored signals, because blocking capability is frequency dependent.
+
 ## Related Concepts
 
+- [[concepts/adaptive-blocking-matrix|Adaptive Blocking Matrix (ABM)]]
+- [[concepts/coefficient-constrained-adaptive-filter|Coefficient-Constrained Adaptive Filter (CCAF)]]
+- [[concepts/norm-constrained-adaptive-filter|Norm-Constrained Adaptive Filter (NCAF)]]
+- [[concepts/target-signal-cancellation|Target-Signal Cancellation]]
+- [[concepts/steering-vector-error|Steering-Vector Error]]
+- [[concepts/fixed-beamformer|Fixed Beamformer]]
 - [[mpdr-beamformer|MPDR Beamformer]]
 - [[mvdr-beamformer|MVDR Beamformer]]
 - [[diagonal-loading|Diagonal Loading]]
@@ -94,6 +109,7 @@ Taseska et al. develop the [[concepts/informed-gsc|informed GSC]], where the FBF
 
 ## Related Sources
 
+- [[sources/hoshuyama-1999-robust-adaptive-beamformer-ccaf|Hoshuyama, Sugiyama & Hirano 1999: A Robust Adaptive Beamformer with a Blocking Matrix Using Constrained Adaptive Filters]] — CCAF-based adaptive blocking matrix: bounded target tracking with no loss of interference-reduction degrees of freedom
 - [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010: On Optimal Frequency-Domain Multichannel Linear Filtering for Noise Reduction]] — statistics-only GSC: matched-filter branch, PSD-derived blocking matrix; outperforms GEV-GSC on distortion
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] — informed GSC with bin-wise detector-controlled FBF/BM/NC and RLS noise canceller (Ch 5)
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]

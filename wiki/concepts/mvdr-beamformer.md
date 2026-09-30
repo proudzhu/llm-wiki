@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-26
+updated: 2026-09-30
 sources:
+  - raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
@@ -125,8 +126,15 @@ The article also notes the distortionless property itself has no known DNN count
 
 [[sources/wang-2021-kronecker-adaptive-beamforming|Wang et al. 2021]] derive the [[concepts/kmvdr-beamformer|KMVDR beamformer]] by restricting the MVDR filter to a **sum of $P$ Kronecker products** of shorter subfilters — the first Kronecker beamformer applicable to arbitrary 3-D array geometries. With one subfilter family fixed, the MVDR optimization reduces to a closed-form update on the other stacked subfilter, with block covariances of size $PM_1 \times PM_1$ / $PM_2 \times PM_2$ instead of $M \times M$; the subfilters alternate until convergence. On a 16-microphone array with limited snapshots, KMVDR beats the conventional MVDR in output SINR (both static and dynamic interferers), with the strongest performance at rank $P = 1$ — the Kronecker structure implicitly regularizes the covariance-based estimate.
 
+## Coefficient-Constrained GSC as an Alternative Robustness Route (Hoshuyama et al. 1999)
+
+The MVDR/GSC equivalence also frames a different answer to steering-vector mismatch than covariance conditioning. Where MVDR robustness is usually bought with [[concepts/diagonal-loading|diagonal loading]], WNG constraints, or uncertainty-set optimization, [[sources/hoshuyama-1999-robust-adaptive-beamformer-ccaf|Hoshuyama, Sugiyama & Hirano 1999]] attack the mismatch inside the GSC's **blocking matrix**: a [[concepts/coefficient-constrained-adaptive-filter|coefficient-constrained adaptive filter]] per branch is clamped to a box region derived from the target-minimizing coefficients over a chosen DOA sector, so the maximum tolerable [[concepts/steering-vector-error|steering-vector (direction) error]] becomes a design parameter (up to 20°) while the array's degrees of freedom for interference reduction are preserved. The robustness mechanism is thus spatial-structural rather than covariance-regularizing, and it requires no matrix inversion — relevant where the statistics-based MVDR forms are limited by covariance estimation rather than by the steering model.
+
 ## Related Concepts
 
+- [[concepts/coefficient-constrained-adaptive-filter|Coefficient-Constrained Adaptive Filter (CCAF)]]
+- [[concepts/steering-vector-error|Steering-Vector Error]]
+- [[concepts/target-signal-cancellation|Target-Signal Cancellation]]
 - [[concepts/beamforming|Beamforming]]
 - [[concepts/robust-minimum-variance-beamforming|Robust Minimum Variance Beamforming (RMVB)]]
 - [[concepts/ellipsoidal-uncertainty-modeling|Ellipsoidal Uncertainty Modeling]]
@@ -154,6 +162,7 @@ The article also notes the distortionless property itself has no known DNN count
 
 ## Related Sources
 
+- [[sources/hoshuyama-1999-robust-adaptive-beamformer-ccaf|Hoshuyama, Sugiyama & Hirano 1999: A Robust Adaptive Beamformer with a Blocking Matrix Using Constrained Adaptive Filters]] — coefficient-constrained GSC blocking matrix as a non-covariance route to steering-error robustness
 - [[sources/lorenz-2005-robust-minimum-variance-beamforming|Lorenz & Boyd 2005: Robust Minimum Variance Beamforming]]
 - [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010: On Optimal Frequency-Domain Multichannel Linear Filtering for Noise Reduction]] — MVDR = PMWF-0; statistics-only closed form; shared output SNR $\lambda(\omega)$ across the filter family
 - [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011: An Integrated Solution for Online Multichannel Noise Tracking and Reduction]] — makes the statistics-only MVDR online via MC-SPP-driven noise PSD matrix tracking
