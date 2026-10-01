@@ -1189,6 +1189,8 @@
 | [[concepts/norm-constrained-adaptive-filter\|Norm-Constrained Adaptive Filter (NCAF)]] | Adaptive filter rescaled when its total tap norm exceeds a threshold; restrains target cancellation at the cost of interference reduction | 2026-09-30 |
 | [[concepts/target-signal-cancellation\|Target-Signal Cancellation]] | Unwanted suppression of the desired source by an adaptive beamformer that mistakes it for interference; the dominant failure mode of adaptive microphone arrays | 2026-09-30 |
 | [[concepts/steering-vector-error\|Steering-Vector Error]] | Mismatch between the assumed array steering vector and the true transfer function; target-direction error dominates in practice | 2026-09-30 |
+| [[concepts/gsvd-based-optimal-filtering\|GSVD-Based Optimal Filtering]] | Doclo & Moonen's time-domain spatio-temporal Wiener filter from the GSVD of VAD-segmented speech/noise data matrices — beamforming behavior with no steering vector or array calibration; ancestor of GEVD spatial filtering. | 2026-10-01 |
+| [[concepts/signal-subspace-speech-enhancement\|Signal Subspace Speech Enhancement]] | Family of methods enhancing speech by decomposing the signal subspace (SVD/KLT/GSVD) and applying a diagonal gain to speech-dominant components; taxonomy along signal/noise subspace choice, gain rule, and filter structure. | 2026-10-01 |
 
 ---
 
@@ -1433,6 +1435,7 @@
 | [[sources/yang-2026-direction-preserving-anc\|Yang, Luo, Wang, Zhang & Gan 2026: Direction-Preserving ANC with a Conditional Control-Filter Estimation Network]] | DP-ANC as direction-conditioned cancellation-preservation optimization; FiLM-conditioned network estimates full FIR control-filter bank in one forward pass (22.8 dB NR, -11.4 dB distortion, ~3000x cheaper than analytical SSANC) | 2026-09-21 |
 | [[sources/rout-2012-pso-anc-without-secondary-path\|Rout, Das & Panda 2012]] | This paper develops a systematic online particle swarm optimization (PSO) training scheme for linear feedforward ANC that requires no secondary path identification whatsoever. | 2026-09-28 |
 | [[sources/hoshuyama-1999-robust-adaptive-beamformer-ccaf\|Hoshuyama, Sugiyama & Hirano 1999]] | Robust GSC with a coefficient-constrained adaptive blocking matrix and a norm-constrained canceller - 20 deg target-direction-error tolerance with no loss of interference-reduction degrees of freedom; 19 dB IRR and 3.8 MOS at 0.3-s reverberation | 2026-09-30 |
+| [[sources/doclo-2002-gsvd-optimal-filtering\|Doclo & Moonen 2002]] | This paper proposes a generalized singular value decomposition (GSVD) based algorithm for enhancing multimicrophone speech signals degraded by additive colored noise, unifying single-microphone signal subspace techniques and multichannel optimal filtering in one framework. | 2026-10-01 |
 
 ---
 
@@ -1486,10 +1489,10 @@
 
 ## Statistics
 
-- **Total pages**: 1435
+- **Total pages**: 1438
 - **Entities**: 613
-- **Concepts**: 557
-- **Sources**: 235
+- **Concepts**: 559
+- **Sources**: 236
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-09-30
+- **Last updated**: 2026-10-01

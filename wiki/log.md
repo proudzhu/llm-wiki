@@ -5585,3 +5585,14 @@ Ingested Rout, Das & Panda 2012 (IEEE TIM 61(2):554-563). Key contribution: [[co
   - `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — index rows + statistics
 
 ---
+---
+
+## [2026-10-01] ingest | GSVD-Based Optimal Filtering for Single and Multimicrophone Speech Enhancement (Doclo & Moonen 2002)
+
+- Source page: `wiki/sources/doclo-2002-gsvd-optimal-filtering.md` (raw: `raw/papers/doclo-2002-gsvd-optimal-filtering/full-text.md`, MinerU VLM extraction, 8 figures embedded)
+- Zotero key: Q8A6MGV4 — S. Doclo and M. Moonen, "GSVD-based optimal filtering for single and multimicrophone speech enhancement," IEEE Trans. Signal Processing, vol. 50, no. 9, pp. 2230–2244, Sep. 2002. DOI 10.1109/TSP.2002.801937
+- New concept pages: `wiki/concepts/gsvd-based-optimal-filtering.md`, `wiki/concepts/signal-subspace-speech-enhancement.md`
+- Entities updated: simon-doclo, marc-moonen
+- Concepts updated: multi-channel-wiener-filter, gevd-spatial-filtering, gsc-beamformer, singular-value-decomposition, speech-distortion-constrained-noise-reduction, voice-activity-detection, beamforming
+- Synthesis updated: multi-channel-speech-enhancement (Sources Synthesized table row; Insight 3 paragraph on the time-domain subspace origin of the "estimate-what" Step-4 position; Insight 4 Souden-2010 covariance-sufficiency claim amended to credit the 2002 time-domain antecedent)
+- Indexes updated: wiki/index.md, wiki/sources/index.md, wiki/concepts/index.md; statistics recounted (total=1438)

@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-08-30
-updated: 2026-09-13
+updated: 2026-10-01
 sources:
   - raw/papers/souden-2010-pmwf/full-text.md
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
   - raw/papers/braun-2015-residual-noise-control/full-text.md
   - raw/papers/li-2020-residual-noise-control/full-text.md
+  - raw/papers/doclo-2002-gsvd-optimal-filtering/full-text.md
 tags:
   - speech-enhancement
   - multi-channel
@@ -40,6 +41,14 @@ $$\boldsymbol{h}_{\text{optim}} = \left[\Phi_{xx}(\omega) + \beta \Phi_{vv}(\ome
 
 该规划及其闭式解的原始出处是 [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010]]（频率域非因果形式，推导见上文）。该文进一步证明：由于 $\Phi_{xx}$ 秩一，拉格朗日乘数法给出的解可简化为仅依赖信号统计量的形式（分母为 $\beta + \lambda(\omega)$，$\lambda$ 为 $\Phi_{vv}^{-1}\Phi_{xx}$ 的唯一非零特征值，也等于滤波器输出 SNR），并给出失真界与权重的显式关系 $\beta \leq \frac{\tilde{\sigma}(\omega)}{1-\tilde{\sigma}(\omega)}\lambda(\omega)$，以及闭式性能测度（失真指数 $\beta^2/(\beta+\lambda)^2$、降噪因子 $(\beta+\lambda)^2/(\mathrm{SNR}\cdot\lambda)$、输出 SNR $=\lambda$）——后者说明整个参数化滤波族共享同一输出 SNR，$\beta$ 只在失真与降噪因子之间权衡。
 
+## 时域先例（Doclo & Moonen 2002）
+
+该参数化族的时域时空版本先于频域形式出现于 [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 2002]]：在语音失真能量受限（$\epsilon_v^2 \le T$）下最小化残留噪声能量得到
+
+$$\mathbf{W} = (\mathbf{R}_{xx} + \mu\mathbf{R}_{vv})^{-1}\mathbf{R}_{xx} = \bar{\mathbf{Q}}^{-T}\,\mathrm{diag}\left\{\frac{\bar{\sigma}_i^2 - \bar{\eta}_i^2}{\bar{\sigma}_i^2 + (\mu - 1)\bar{\eta}_i^2}\right\}\bar{\mathbf{Q}}^{T}$$
+
+$\mu = 1$ 即 MSE（维纳）解。该文进一步指出所有信号子空间估计器共享"分析滤波器组 + 增益函数 + 合成滤波器组"的一般形式，并证明滤波矩阵的 centrosymmetric 对称性（中列为线性相位滤波器）。见 [[concepts/signal-subspace-speech-enhancement|Signal Subspace Speech Enhancement]] 与 [[concepts/gsvd-based-optimal-filtering|GSVD-Based Optimal Filtering]]。
+
 ## 实际实现难点
 
 $\Phi_{vv}$ 可在语音间歇段估计，但 $\Phi_{xx} = \Phi_{yy} - \Phi_{vv}$ 中两项不在同一时段估计，噪声非平稳性越高越难估计准确——这是实际算法逼近理论最优解的主要障碍，也是约束语音损伤在实践中难以精确实现的原因。完美降噪与语音无损相互牵制，实用算法（如 [[concepts/atf-gsc|ATF-GSC]]）通过放松约束换取综合性能。
@@ -58,6 +67,8 @@ $$\mathbf{h}_Z = (\Phi_{xx} + \mu\Phi_{vv})^{-1}(\Phi_{xx}\mathbf{e}_1 + \mu\Phi
 
 ## Related Concepts
 
+- [[concepts/gsvd-based-optimal-filtering|GSVD-Based Optimal Filtering]] — 时域时空先例（μ 参数化增益函数）
+- [[concepts/signal-subspace-speech-enhancement|Signal Subspace Speech Enhancement]] — 共享"分析滤波器组 + 增益 + 合成滤波器组"形式的估计器族
 - [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
 - [[concepts/wiener-filter|Wiener Filter]]
 - [[concepts/gsc-beamformer|GSC]]
@@ -70,6 +81,7 @@ $$\mathbf{h}_Z = (\Phi_{xx} + \mu\Phi_{vv})^{-1}(\Phi_{xx}\mathbf{e}_1 + \mu\Phi
 
 ## Related Sources
 
+- [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 2002]] — 时域时空先例：μ 参数化增益与一般估计器形式
 - [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010]] — 原始推导：频域非因果闭式解 + 闭式性能测度
 - [[sources/yan-2014-dual-mic-bt-noise-reduction|Yan, Qiu & Lu 2014]] — 以该框架统一两类双传声器算法并对比实验
 - [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015]] — 将目标推广为"语音 + 期望残留噪声"，得到 $(1-c)\mathbf{h}_X + c\mathbf{e}_1$ 插值形式

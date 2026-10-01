@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-26
+updated: 2026-10-01
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
@@ -15,6 +15,7 @@ sources:
   - raw/papers/souden-2011-online-noise-tracking/full-text.md
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
   - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
+  - raw/papers/doclo-2002-gsvd-optimal-filtering/full-text.md
 tags:
   - speech-enhancement
   - wiener-filter
@@ -32,6 +33,14 @@ Given noisy observation $y = x + n$, the MWF weights are:
 $$h_{\text{MWF}} = \Phi_y^{-1} \Phi_x i_1 = (\Phi_x + \Phi_n)^{-1} \Phi_x i_1$$
 
 where $\Phi_x$ is the clean-speech spatial covariance matrix and $\Phi_n$ is the noise spatial covariance matrix.
+
+## Time-Domain Spatio-Temporal MWF (Doclo & Moonen 2002)
+
+The MWF predates its frequency-domain/STFT formulation: [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 2002]] derive it as an $M \times M$ matrix filter ($M = LN$) on time-domain stacked data vectors, with the unobservable desired response handled by VAD-segmented statistics,
+
+$$\mathbf{W}_{WF} = \mathbf{R}_{yy}^{-1}\left(\mathbf{R}_{yy} - \mathbf{R}_{vv}\right)$$
+
+computed via the [[concepts/gsvd-based-optimal-filtering|GSVD]] of a speech and a noise data matrix — extending single-channel [[concepts/signal-subspace-speech-enhancement|signal subspace]] enhancement to the spatio-temporal domain. The paper already contains the $\mu$-parameterized distortion/residual-noise trade-off later formalized in the frequency domain (see [[concepts/speech-distortion-constrained-noise-reduction|Speech-Distortion-Constrained Noise Reduction]]), proves symmetry properties implying a linear-phase middle column (the recommended practical filter), and shows the time-domain MWF outperforms GSC-type adaptive beamforming for all reverberation times without source-position or calibration assumptions. The joint-diagonalization implementation survives in the STFT domain as [[concepts/gevd-spatial-filtering|GEVD-based spatial filtering]].
 
 ## Relationship to VSLF
 
@@ -95,6 +104,7 @@ which applies extra suppression in noise-only segments (small SPP) and converges
 
 ## Related Concepts
 
+- [[concepts/gsvd-based-optimal-filtering|GSVD-Based Optimal Filtering]] — the time-domain spatio-temporal MWF via joint diagonalization of speech/noise data matrices (Doclo & Moonen 2002)
 - [[concepts/wiener-filter|Wiener Filter]]
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
 - [[concepts/variable-span-linear-filter|Variable Span Linear Filter]]
@@ -114,6 +124,7 @@ which applies extra suppression in noise-only segments (small SPP) and converges
 
 ## Related Sources
 
+- [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 2002: GSVD-Based Optimal Filtering for Single and Multimicrophone Speech Enhancement]] — the time-domain spatio-temporal MWF, its symmetry properties, and the GSC comparison
 - [[sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
 - [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010: On Optimal Frequency-Domain Multichannel Linear Filtering for Noise Reduction]] — MWF = PMWF-1 in the origin paper's statistics-only framework
 - [[sources/souden-2011-online-noise-tracking|Souden, Chen, Benesty & Affes 2011: An Integrated Solution for Online Multichannel Noise Tracking and Reduction]] — SPP-driven modified MWF on top of the MVDR, with online multichannel MCRA noise tracking

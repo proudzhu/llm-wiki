@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-09-30
+updated: 2026-10-01
 sources:
   - raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
@@ -12,6 +12,7 @@ sources:
   - raw/papers/kim-2014-doa-based-snr-estimation/full-text.txt
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
   - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
+  - raw/papers/doclo-2002-gsvd-optimal-filtering/full-text.md
 tags:
 - acoustics
 - antenna-theory
@@ -42,6 +43,7 @@ Modern ANC headphones use beamforming for several critical tasks:
 - **[[concepts/nlcmv-beamforming|NLCMV (Non-Linearly Constrained Minimum Variance)]]**: Extends MVDR with explicit white-noise-gain and null-direction constraints; used in AGADIR for smart-glasses directional ASR (Lin et al. 2024).
 - **[[lcmv-beamformer|LCMV (Linearly Constrained Minimum Variance)]]**: Generalizes MVDR to multiple linear constraints for simultaneous target preservation and null steering.
 - **Neural Beamforming**: Using deep learning models (e.g., U-Nets or LSTMs) to perform spatial filtering in complex, multi-path environments.
+- **Subspace-Based (GSVD) Optimal Filtering**: Not a beamformer by design, but [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 2002]]'s [[concepts/gsvd-based-optimal-filtering|GSVD-based optimal filter]] exhibits beamforming behavior — for localized sources it autonomously maximizes gain toward the speech direction and nulls noise directions with no steering information or array calibration, and it outperforms delay-and-sum and GSC for all reverberation times.
 - **Difference-Maximizing Beamformer (Back-to-Back Array)**: Tashev et al. (2008) propose a two-beam beamformer for [[concepts/back-to-back-microphone-array|back-to-back unidirectional microphone arrays]] whose optimization criterion is **maximizing the front-back energy ratio** rather than the usual minimum-variance / maximum-SNR criteria. The front beam is optimized to maximize the ratio of integrated energy in the desired $\pm\Delta\theta$ cone to that in the opposite cone, subject to unity-gain and zero-phase-shift constraints enforced via punishing functions. This objective fits the back-to-back geometry (where the rear capsule is *designed* to face away from the source) and pairs naturally with a [[concepts/probability-based-spatial-filter|probability-based non-linear spatial filter]] that consumes the front/rear beam outputs.
 - **Superdirective / Low-Rank Kronecker Beamforming**: [[concepts/superdirective-beamforming|Superdirective beamforming]] maximizes the directivity factor against diffuse noise (a fixed, precomputable design), and its large-array efficiency can be boosted by [[concepts/kronecker-product-beamforming|Kronecker product decomposition]] into short filters — Zhu et al. (2025) generalize this to multidimensional (N-way, rank-P) decompositions, cutting parameters by 62.5% and inversion dimension by 87.5% at $M = 64$ with matched performance.
 

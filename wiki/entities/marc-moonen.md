@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-08-07
-updated: 2026-09-07
+updated: 2026-10-01
 tags:
   - researcher
   - acoustic-feedback
@@ -23,9 +23,11 @@ tags:
 - Contributions to AFC regularization (Tikhonov / Levenberg–Marquardt RLS/APA/NLMS), proactive notch filtering, and frequency-domain adaptive filtering for AFC
 - Co-authored "Regularized Adaptive Notch Filters for Acoustic Howling Suppression" (EUSIPCO 2009) — introduced the [[concepts/regularized-adaptive-notch-filter|RANF]] signed-regularization howling-detection method for NHS in PA systems, an early work in the KU Leuven acoustic-feedback research line — [[sources/gil-cacho-2009-regularized-adaptive-notch-filters|Gil-Cacho, van Waterschoot, Moonen & Jensen 2009]]
 - Co-authored "Integrated Active Noise Control and Noise Reduction in Hearing Aids" (IEEE Trans. Audio, Speech, Lang. Process. 2010) — supervisor of Serizel's PhD work on the FxMWF scheme integrating noise reduction and ANC for open-fitting hearing aids — [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010]]
+- Co-authored "GSVD-Based Optimal Filtering for Single and Multimicrophone Speech Enhancement" (IEEE Trans. Signal Processing 2002) — with his PhD student [[entities/simon-doclo|Simon Doclo]]; the time-domain spatio-temporal extension of signal subspace speech enhancement, outperforming GSC-type beamforming for all reverberation times — [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 2002]]
 
 ## Related Sources
 
 - [[sources/vanwaterschoot-2011-fifty-years-afc|van Waterschoot & Moonen 2011]]
 - [[sources/gil-cacho-2009-regularized-adaptive-notch-filters|Gil-Cacho et al. 2009: Regularized Adaptive Notch Filters for AHS]]
 - [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]]
+- [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 2002: GSVD-Based Optimal Filtering for Single and Multimicrophone Speech Enhancement]]

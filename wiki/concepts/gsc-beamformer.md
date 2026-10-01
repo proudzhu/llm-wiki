@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-09-30
+updated: 2026-10-01
 sources:
   - raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md
   - raw/papers/souden-2010-pmwf/full-text.md
@@ -11,6 +11,7 @@ sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/wen-2025-neural-directed-speech-enhancement/full-text.md
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
+  - raw/papers/doclo-2002-gsvd-optimal-filtering/full-text.md
 tags:
   - beamforming
   - adaptive-filtering
@@ -89,8 +90,13 @@ The inversion of the classical trade-off is the paper's structural insight. Earl
 
 Two operational details generalize beyond this paper: the blocking matrix and the canceller must adapt under **opposite** SIR conditions (BM during high SIR, canceller during low SIR — the double-talk analogue, later replaced by a [[concepts/directional-vad|directional VAD]] gate in Sun et al. 2024), and the architecture is matrix-free, costing about twice the multiplications of the norm-constrained method. On real data with $T_{60} \approx 0.3$ s it reaches 19 dB interference reduction (3 dB for the FBF, 9 dB for the norm-constrained method) with ~2 dB target cancellation, and 3.8 MOS vs. 2.6 for the previous robust beamformer. Its principal limitation is spectrum dependence: the useful direction-error sector calibrated on white signals widens with colored signals, because blocking capability is frequency dependent.
 
+## GSVD-Based Optimal Filtering Comparison (Doclo & Moonen 2002)
+
+In the comparison of [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 2002]] (4-microphone linear array, 5 cm spacing, reverberation up to $T_{60} = 1500$ ms, 0 dB input SNR), the GSC (NLMS, step size 0.2, 800-tap canceller, no adaptation during speech) is outperformed by the subspace-based [[concepts/gsvd-based-optimal-filtering|GSVD optimal filter]] for **all** reverberation times when the filter length is large enough. The structural reason: the GSC relies on correlated noise components across microphones, so its advantage shrinks as reverberation makes the noise diffuse and uncorrelated, whereas the GSVD filter exploits the full spatio-temporal statistics. The GSC is also more sensitive to deviations from the nominal situation — speech-position errors, microphone displacement, gain mismatch — because the quiescent vector and blocking matrix encode a priori array geometry; the GSVD filter makes no such assumptions and is provably insensitive to microphone gain/phase variations. The two techniques share a VAD failure mode: speech wrongly classified as noise causes signal cancellation (in the GSC, speech leakage into the noise references with the same effect).
+
 ## Related Concepts
 
+- [[concepts/gsvd-based-optimal-filtering|GSVD-Based Optimal Filtering]] — the calibration-free subspace alternative that outperforms the GSC for all reverberation times
 - [[concepts/adaptive-blocking-matrix|Adaptive Blocking Matrix (ABM)]]
 - [[concepts/coefficient-constrained-adaptive-filter|Coefficient-Constrained Adaptive Filter (CCAF)]]
 - [[concepts/norm-constrained-adaptive-filter|Norm-Constrained Adaptive Filter (NCAF)]]
@@ -109,6 +115,7 @@ Two operational details generalize beyond this paper: the blocking matrix and th
 
 ## Related Sources
 
+- [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 2002: GSVD-Based Optimal Filtering for Single and Multimicrophone Speech Enhancement]] — GSVD subspace filter outperforms the GSC for all reverberation times and deviates more gracefully under array mismatch
 - [[sources/hoshuyama-1999-robust-adaptive-beamformer-ccaf|Hoshuyama, Sugiyama & Hirano 1999: A Robust Adaptive Beamformer with a Blocking Matrix Using Constrained Adaptive Filters]] — CCAF-based adaptive blocking matrix: bounded target tracking with no loss of interference-reduction degrees of freedom
 - [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010: On Optimal Frequency-Domain Multichannel Linear Filtering for Noise Reduction]] — statistics-only GSC: matched-filter branch, PSD-derived blocking matrix; outperforms GEV-GSC on distortion
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] — informed GSC with bin-wise detector-controlled FBF/BM/NC and RLS noise canceller (Ch 5)

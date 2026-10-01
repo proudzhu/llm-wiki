@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-09-12
+updated: 2026-10-01
 sources:
   - raw/papers/liu-2025-pcen-mask-vad-speech-enhancement/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
@@ -11,6 +11,7 @@ sources:
   - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
   - raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt
   - raw/papers/heitkaemper-2025-bcs-speech-enhancement-earbuds/full-text.txt
+  - raw/papers/doclo-2002-gsvd-optimal-filtering/full-text.md
 tags:
 - audio-processing
 - machine-learning
@@ -39,6 +40,8 @@ In the context of ANC headphones, VAD is often split into two categories (Masila
 - **Spectral Slope/Flux**: Analyzing changes in the frequency domain.
 
 A simple, classical instance is the **energy-based binary VAD with minimum-energy tracking** used by Tashev et al. (2008) for their small-device sound-capture system: a state machine with two thresholds ("noise" and "voice" states) gates whether the current frame updates the noise-only statistical models or the speech-direction statistical models of the post-filter. The VAD itself is not the contribution; it is a binary gate for the [[concepts/probability-based-spatial-filter|probability-based spatial filter]]'s model adaptation.
+
+The same gating role appears in classical subspace enhancement: [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 2002]]'s [[concepts/gsvd-based-optimal-filtering|GSVD-based optimal filter]] relies on a VAD to route stacked data vectors into a speech data matrix (speech-and-noise periods) or a noise data matrix (noise-only periods), from which the filter is computed. The asymmetry of the two error modes is notable: speech wrongly classified as noise contaminates the noise statistics and causes **signal cancellation**, whereas noise wrongly classified as speech merely reduces noise reduction — the same asymmetry as signal leakage in GSC noise references.
 
 ### 2. Machine Learning Approaches
 - **GMMs and HMMs**: Traditional statistical models for speech.

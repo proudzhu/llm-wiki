@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-07-12
-updated: 2026-09-18
+updated: 2026-10-01
 sources:
   - raw/papers/stewart-1993-early-history-svd/full-text.md
+  - raw/papers/doclo-2002-gsvd-optimal-filtering/full-text.md
 tags:
   - linear-algebra
   - matrix-decomposition
@@ -62,6 +63,7 @@ The SVD was discovered independently at least three times between 1873 and 1907,
 - **Total least squares**: SVD of the augmented data matrix.
 - **Signal processing and statistics**: Subspace methods, canonical correlations (Hotelling 1936).
 - **Nearest [[concepts/kronecker-product|Kronecker product]]**: splitting a matrix into the Kronecker product of two smaller factors, $\min_{\mathbf{A},\mathbf{B}} \|\mathbf{M} - \mathbf{A} \otimes \mathbf{B}\|$, is solved exactly via the SVD (Van Loan & Pitsianis 1992; see [[concepts/nearest-kronecker-product|Nearest Kronecker Product]] and [[sources/wikipedia-kronecker-product|Wikipedia: Kronecker Product]]). The rank-$P$ generalization underlies low-rank adaptive filters for long echo paths ([[concepts/rls-nkp|RLS-NKP]]).
+- **Signal subspace speech enhancement**: the **generalized** SVD (GSVD) of a speech and a noise data matrix yields the optimal multimicrophone enhancement filter — the joint diagonalization of the two empirical correlation matrices — as introduced by [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 2002]] (see [[concepts/gsvd-based-optimal-filtering|GSVD-Based Optimal Filtering]] and [[concepts/signal-subspace-speech-enhancement|Signal Subspace Speech Enhancement]]).
 
 ## Related Concepts
 

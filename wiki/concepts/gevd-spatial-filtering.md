@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-10-01
 sources:
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
+  - raw/papers/doclo-2002-gsvd-optimal-filtering/full-text.md
 tags:
   - speech-enhancement
   - spatial-filtering
@@ -37,6 +38,14 @@ where $U$ is the matrix of generalized eigenvectors and $\Lambda_x$, $\Lambda_n$
 
 The rank-constrained SDW-MWF is the formulation used in Serizel et al. (2014) and is the **inference-time spatial filter in TANGO, RT-Tango, and MN-TANGO**.
 
+## Time-Domain Origin (Doclo & Moonen 2002)
+
+The joint-diagonalization principle originates in [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 2002]]'s time-domain multimicrophone speech enhancement: the optimal filter matrix
+
+$$\mathbf{W}_{WF} \simeq \mathbf{Q}^{-T}\,\mathrm{diag}\left\{1 - \frac{p}{q}\frac{\eta_i^2}{\sigma_i^2}\right\}\mathbf{Q}^{T}$$
+
+is computed from the GSVD of a speech data matrix and a noise data matrix (segmented by VAD), exploiting the low-rank speech model in the spatio-temporal domain. The motivations for the STFT-domain GEVD filter above — low-rank truncation for robustness against estimation noise, reduced inversion cost, rank-deficient speech SCMs — are already present there; the difference is the domain (per-T-F-bin SCMs vs. sample-domain data matrices). See [[concepts/gsvd-based-optimal-filtering|GSVD-Based Optimal Filtering]].
+
 ## Use in TANGO-Family Frameworks
 
 In the [[concepts/tango-framework|Tango]] two-stage architecture and its variants, the GEVD-based SDW-MWF appears twice:
@@ -58,6 +67,7 @@ A central finding of [[sources/benslimane-2026-tango-quantized-distributed|Bensl
 
 ## Related Concepts
 
+- [[concepts/gsvd-based-optimal-filtering|GSVD-Based Optimal Filtering]] — the time-domain origin of the joint-diagonalization principle
 - [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
 - [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
 - [[concepts/tango-framework|Tango Framework]]
@@ -67,5 +77,6 @@ A central finding of [[sources/benslimane-2026-tango-quantized-distributed|Bensl
 
 ## Related Sources
 
+- [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 2002: GSVD-Based Optimal Filtering for Single and Multimicrophone Speech Enhancement]] — the time-domain origin of the joint-diagonalization spatial filter
 - [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]]
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]

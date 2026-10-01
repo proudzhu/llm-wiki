@@ -561,4 +561,6 @@
 | [[concepts/norm-constrained-adaptive-filter\|Norm-Constrained Adaptive Filter (NCAF)]] | Adaptive filter rescaled when its total tap norm exceeds a threshold; restrains target cancellation at the cost of interference reduction | 2026-09-30 |
 | [[concepts/target-signal-cancellation\|Target-Signal Cancellation]] | Unwanted suppression of the desired source by an adaptive beamformer that mistakes it for interference; the dominant failure mode of adaptive microphone arrays | 2026-09-30 |
 | [[concepts/steering-vector-error\|Steering-Vector Error]] | Mismatch between the assumed array steering vector and the true transfer function; target-direction error dominates in practice | 2026-09-30 |
+| [[concepts/gsvd-based-optimal-filtering\|GSVD-Based Optimal Filtering]] | Doclo & Moonen's time-domain spatio-temporal Wiener filter from the GSVD of VAD-segmented speech/noise data matrices — beamforming behavior with no steering vector or array calibration; ancestor of GEVD spatial filtering. | 2026-10-01 |
+| [[concepts/signal-subspace-speech-enhancement\|Signal Subspace Speech Enhancement]] | Family of methods enhancing speech by decomposing the signal subspace (SVD/KLT/GSVD) and applying a diagonal gain to speech-dominant components; taxonomy along signal/noise subspace choice, gain rule, and filter structure. | 2026-10-01 |
 
