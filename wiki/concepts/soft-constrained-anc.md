@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-09-08
+updated: 2026-10-01
 sources:
   - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
+  - raw/papers/cheng-2026-anc-gain-constraint/full-text.txt
 tags:
   - active-noise-control
   - optimization
@@ -48,6 +49,8 @@ Soft formulations are particularly attractive when the "constraint" is a quality
 
 - **Robust soft-constrained ANC** — averages the soft cost over a set of $J$ secondary path estimates $\{\mathbf{G}_j\}$ to obtain a single robust control filter ([[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026]]).
 
+- **Frequency-response gain constraints (ANC-FRC)** — [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026]] combine a **hard** ∞-norm gain limit on the low-frequency DFT bins of a fixed control filter with a **soft** ℓ2 term $\lambda\|\mathbf{F}_{h+1}(\mathbf{w} - \mathbf{w}_o)\|_2^2$ anchoring the remaining band to the unconstrained Wiener optimum $\mathbf{w}_o$; the soft term suppresses the Gibbs oscillations the hard constraint alone induces at the band boundary. The combined problem is a convex QP (see [[concepts/frequency-response-constrained-anc|ANC-FRC]]).
+
 ## Choice of $\beta$
 
 The trade-off parameter $\beta$ has a clear operational meaning:
@@ -71,3 +74,4 @@ The regularisation term $\mathbf{w}^T \mathbf{B} \mathbf{w}$ is itself a soft co
 ## Related Sources
 
 - [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]]
+- [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026: Active Noise Control With a Gain Constraint for Micro-Loudspeakers]] — hard ∞-norm gain constraint combined with a soft ℓ2 anchor to the Wiener optimum (ANC-FRC)

@@ -1,0 +1,441 @@
+Interspeech 2026
+27 September - 1 October 2026, Sydney, Australia
+
+
+
+        Active Noise Control With a Gain Constraint for Micro-Loudspeakers
+
+                      Zhenhua Cheng ID , Yi Zhou ID , Yin Liu ID , Yu Zhao ID , Liming Shi ID ∗∗
+
+                         School of Communications and Information Engineering,
+                  Chongqing University of Posts and Telecommunications, Chongqing, China
+              zhcheng2023@stu.cqupt.edu.cn, {zhouy, liuyin, zhaoyu, shilim}@cqupt.edu.cn
+
+
+
+
+                            Abstract                                    restricted low-frequency capability [13, 14]. Moreover, given
+                                                                        the divergence risk and high computational cost of adaptive al-
+The fixed-filter methods are widely employed in active noise            gorithms, fixed-filter methods are more practical and widely
+control (ANC) systems due to their computational efficiency.            adopted in commercial products [15, 16]. A simple clipping
+They are typically designed to minimize the mean squared                approach may produce many high-frequency components [17].
+sound pressure at the error microphone, thereby attenuating             Cascading a band-stop filter before or after the fixed filter can
+disturbance components across the entire frequency spectrum.            suppress low-frequency output power, but the added group de-
+Due to the limited low-frequency reproduction capability of mi-         lay increases the electronic latency of the ANC system, leading
+cro loudspeakers, this approach is prone to causing mechanical          to a lower NR upperbound.
+over-excursion. One solution is to cascade a high-pass filter
+                                                                             In this paper, we focus on micro loudspeakers in ANC
+before or after the control filter to limit the power of the out-
+                                                                        systems, which are prone to low-frequency mechanical over-
+put signal. But the group delay introduced by this filter in-
+                                                                        excursion. To address this issue, a low-frequency gain con-
+creases the electronic latency. This paper proposes an ANC
+                                                                        straint is introduced for training the fixed filter, referred to as
+method with frequency-response gain constraints, where gain
+                                                                        the ANC method with low-frequency frequency-response con-
+constraints are imposed on both the low-frequency range and
+                                                                        straint (ANC-LF-FRC). This method ensures that the output
+the target noise reduction (NR) frequency range of the control
+                                                                        signal remains within the low-frequency gain limit without in-
+filter’s frequency response. Simulation and experimental results
+                                                                        creasing the group delay. However, experimental results show
+confirm the effectiveness of our proposed method in terms of
+                                                                        that applying the constraint solely in the low-frequency range
+NR performance.
+                                                                        induces the Gibbs phenomenon at discontinuities in the desired
+Index Terms: Active Noise Control, fixed-filter, mechanical             frequency response, thereby degrading NR performance. To
+over-excursion, frequency-response gain constraint                      mitigate this issue, an additional constraint is imposed on other
+                                                                        frequencies within the target NR band. This method is here-
+                      1. Introduction                                   after referred to as the ANC method with frequency-response
+Active noise control (ANC) exploits the principle of signal su-         constraint (ANC-FRC). This work represents a new idea for
+perposition by generating an anti-noise signal from a secondary         pre-training fixed filters considering gain constraints, which can
+source that has the same amplitude but opposite phase as the un-        guarantee that the dynamic range is utilized where the micro-
+wanted noise [1, 2, 3], thereby attenuating it. ANC is widely ap-       loudspeaker is physically capable of cancelling noise.
+plied in devices such as ventilation ducts [4], headphones [5, 6],           The remaining parts of this paper are organized as follows:
+and automotive cabins [7, 8].                                           Section 2 presents the ANC methods, including the uncon-
+     With the growing demand for portability, smart devices             strained Wiener-Hopf method and the ANC method consider-
+such as smartphones and smart glasses have limited the allow-           ing the frequency response constraint. Evaluation metrics and
+able size of micro loudspeakers. The limited low-frequency              experimental results are shown in Section 3. Finally, Section 4
+response of micro loudspeakers makes compact ANC devices                concludes this paper.
+prone to mechanical over-excursion and nonlinear distortion
+when the output exceeds physical limits [9]. Although nonlin-               2. ANC With a Frequency-response Gain
+ear adaptive algorithms have been proposed to mitigate such                    Constraint for Micro-Loudspeakers
+distortions, once the control signal amplitude substantially ex-
+ceeds the threshold, neither linear nor nonlinear ANC algo-             We first review the application of the Wiener–Hopf equation in
+rithms can deliver sufficient power or mechanical momentum to           ANC systems, which forms the basis of the proposed method.
+cancel the disturbance [10]. An unconstrained filter inherently         Second, the ANC-LF-FRC method is used to prevent low-
+provides excessively high gain at low frequencies, which com-           frequency output saturation. Third, to alleviate the Gibbs phe-
+presses the available dynamic range within the effective can-           nomenon caused by the low-frequency constraint, the ANC-
+cellation band and tends to cause mechanical over-excursion             FRC method is further introduced.
+[11]. A frequency-domain adaptive ANC method with gain
+constraints has been proposed to reduce the control filter re-          2.1. The Wiener-Hopf Equation
+sponse in frequency regions where the gain constraint is vio-
+lated [12]. However, conventional full-band output constraints          Figure 1 illustrates the block diagram of a single-channel feed-
+are also unsuitable, since micro-speakers exhibit particularly          forward ANC system, which consists of a secondary loud-
+                                                                        speaker, a reference microphone, and an error microphone. The
+  ** indicates the corresponding author.                                reference signal x(n) is processed by the control filter w to gen-
+
+
+
+
+                                                                     4940                              10.21437/Interspeech.2026-2202
+             x ( n)                           d ( n)        + Error Microphone                               20
+Reference                          p ( n)                          Residual e( n)
+Microphone    Reference Signal                Disturbance
+                                                                                                               0
+                                                             +    Error Noise
+                                                       y s ( n)
+
+
+
+
+                                                                                           Magnitude (dB)
+                                          Secondary                                                          -20
+                                           Speaker
+                                 y ( n)
+                        w                                   s (n)                                            -40
+
+                                                                                                             -60
+Figure 1: Block diagram of the single channel feedforward ANC
+                                                                                                             -80
+system.
+                                                                                                            -100
+                                                                                                               10 0     10 1            10 2        10 3   10 4
+                                                                                                                                   Frequency (Hz)
+erate the anti-noise signal y(n). Then, y(n) is fed to the sec-
+ondary loudspeaker and propagates through the secondary path                               Figure 2: The frequency response of the micro loudspeaker.
+s(n) to cancel the disturbance signal d(n) at the error micro-
+phone. Due to the significant impact of electric circuits (e.g.,
+delay) on NR performance, the secondary path is usually de-                            its derivative w.r.t. w equal to zero, leading to the well-known
+fined as the transfer function between the controller input and                        Wiener-Hopf solution [21]
+the error microphone [18]. The error signal e(n) can be mathe-
+matically expressed as                                                                                                              −1
+                                                                                                                           wopt = −Rx′ rdx′ ,                     (7)
+                                    L−1
+                                    X                                                  which is the optimal solution without considering the output
+              e(n) =d(n) +                  wT x(n − l)s(l)
+                                                                                       capability of the micro loudspeakers.
+                                    l=0
+                                                                                           Although the Wiener filter is theoretically optimal in the
+                       =d(n) + wT x′ (n)                                      (1)      least-squares sense, in practice, to cancel the noise signal with
+                                                                                       higher energy present in the low frequency range (e.g. pink
+where s(l) denotes the l-th coefficient of the secondary path                          noise), it leads to a higher gain in the low frequency region
+s(n):                                                                                  of the control filter. The frequency response of the micro
+                                                                                       loudspeaker is presented in Figure 2, which suffers from low-
+              s(n) = [s(0), x(1), . . . , s(L − 1)]T ,                        (2)      frequency roll-off and thus results in low reproduction effi-
+                                                                                       ciency. These observations motivate us to impose constraints
+in which (·)T denotes the transpose operation. x′ (n) = x(n) ∗                         on the low-frequency range when designing the control filter.
+s(n) represents the filtered input signal, ∗ stands for the convo-
+lution operator, and the reference signal x(n) with the dimen-
+                                                                                       2.2. The ANC-LF-FRC Method
+sion of N is given by
+                                                                                       In practical ANC systems, the NR performance is closely de-
+        x(n) = [x(n), x(n − 1), . . . , x(n − N + 1)]T ,                      (3)      pendent on the reproduction capability of loudspeakers. A key
+                                                                                       challenge arises from the limited capability of micro loudspeak-
+and the control filter is stated to                                                    ers to reproduce low-frequency components, especially in com-
+                                                                                       pact devices. Excessive input in this range may cause hardware
+              w = [w(0), w(1), . . . , w(N − 1)]T .                           (4)
+                                                                                       overload or signal distortion. Consequently, the constraints are
+    In ANC applications, the objective is to minimize the sound                        imposed on the low-frequency range of the control filter to avoid
+pressure at the error microphone. Therefore, the Wiener solu-                          excessive amplification at specific frequencies. The noise sup-
+tion for the control filter w can be obtained by minimizing the                        pression problem under output constraints can be formulated as
+mean squared error (MSE), given by                                                     an optimization problem:
+
+                            J = E{e2 (n)}                                     (5)                                     minimize E{e2 (n)}
+                                                                                                                          w
+
+                                                                                                                      subject to    ∥Fh w∥∞ ≤ δth ,               (8)
+where E{·} represents the statistical expectation operator. Sub-
+stituting (1) into (5), the objective function can be written as
+                                                                                       where ∥(·)∥∞ represents infinity norm, Fh ∈ CH×N denotes
+             J =E{e2 (n)}                                                              the discrete Fourier transform (DFT) matrix for the frequency
+                                                                                       bin from the DC to h, δth represents the gain limit correspond-
+                =E{d2 (n)} + 2E{d(n)wT x′ (n)}                                         ing to the frequency band of the filter.
+                      + E{wT x′ (n)x′T (n)w}                                                According to (8), the constraint employs the infinity norm
+                                                                                       to ensure that the maximum gain at low-frequency bins does
+                =σd2 + 2wT rdx′ + wT Rx′ w,                                   (6)      not exceed δth . However, since this strict constraint is imposed
+                                                                                       in the frequency domain, it restricts specific frequency points,
+in which σd2 = E{d2 (n)} denotes the power of disturbance,                             which may induce the Gibbs phenomenon and degrade the NR
+rdx′ = E[d(n)x′ (n)] and Rx′ = E[x′ (n)x′T (n)] represent                              performance [22, 23], as demonstrated in Section 3.2.
+the cross-correlation vector between the disturbance signal and
+the filtered reference signal and the auto-correlation matrix of
+                                                                                       2.3. The ANC-FRC Method
+the filtered reference signal, respectively. Due to the filtered
+input signal which typically comprises incoherent measurement                          When constraints are imposed on the low-frequency response
+noise and ensuring Rx′ is a positive definite matrix [19, 20].                         during the filter design process, the optimization tends to en-
+Therefore, the MSE cost function (6) is minimized by setting                           force a transition at the boundary of the constrained region.
+
+
+
+
+                                                                                    4941
+Since the filter is of finite length, its frequency response can-
+not perfectly realize such abrupt changes, which inevitably in-
+troduces oscillations in the unconstrained frequency bands. To
+alleviate the performance degradation caused by the Gibbs phe-
+nomenon, a ℓ2 norm regularization term is introduced:
+
+                 min    ∥Fh+1 w − Fh+1 wopt ∥2                  (9)
+                                                                                                  0.75m
+where ∥·∥2 denotes the ℓ2 norm, wopt represents the optimal
+Wiener solution obtained without any frequency constraints,                                                         Micro Speaker
+and Fh+1 denotes the DFT matrix for the frequency bin from
+h + 1 to the Nyquist frequency.
+     Clearly, (9) is a soft constraint that can be incorporated into
+the objective function as a regularization term to make the so-
+lution as close as possible to the optimal Wiener solution in the
+unconstrained frequency band. The final objective function is
+thus expressed as:
+                                                                                                                           Reference
+                         2                                                                                                microphone
+        minimize E{e (n)} + λ∥Fh+1 (w − wopt )∥2
+             w
+
+       subject to    ∥Fh w∥∞ ≤ δth ,                           (10)
+                                                                                    Figure 3: The setup of experimental system.
+where λ denotes a regularization factor and λ > 0.
+     In (10), the first term E{e2 (n)} represents the MSE of the          3.1. Experimental setup
+residual signal, which is typically a quadratic function. Assum-
+ing the system is linear and the error is a linear function of w,         Figure 3 shows the schematic diagram of the experimental sys-
+this term becomes a convex quadratic function with respect to             tem in an anechoic chamber. The dummy head (Brüel & Kjær
+w. The second term, λ∥FH (w − wopt )∥2 , is an ℓ2 norm and                4100-D) is placed 0.75 m away from a primary loudspeaker
+therefore convex as well. The linear inequality constraint de-            (KEF X300A), which generates the disturbance signals. The
+fines a convex feasible set. Therefore, the entire optimization           error microphone, embedded in the artificial ear, and the refer-
+problem is convex, guaranteeing a unique global minimum so-               ence microphone on the smartphone are connected to an RME
+lution wopt [24].                                                         sound card for data acquisition, with a sampling rate of 48 kHz.
+     Similarly to (6), the first term on the right-hand side of (10)      The regularization factor λ and gain limit δth are set to 0.2 and
+can be rewritten as                                                       10 dB, respectively.
+                                                                              The NR level in frequency-domain is calculated by
+           E{e2 (n)} =σd2 + wT Rx′ w + 2wT rdx′ ,              (11)                                               Sd (f )
+                                                                                             N R(f ) = 10log10            ,              (13)
+                                                                                                                  Se (f )
+in which σd2 > 0, thus the objective function (10) can be refor-
+mulated as                                                                where Sd (f ) and Se (f ) denote the power spectral densities
+                                                                          (PSD) of the noise signals measured at the error microphone be-
+   minimize wT Rx′ w + 2wT rdx′ + λ∥FH (w − wo )∥2                        fore and after applying the ANC method, respectively. A larger
+       w                                                                  value of NR level indicates a well NR performance.
+   subject to    ∥Fh w∥∞ ≤ δth .                               (12)
+                                                                          3.2. The simulated performance of the ANC-FRC method
+     The constraint is particularly important when the output             Simulation experiments are conducted to illustrate the Gibbs
+signal, after control filtering, drives the micro loudspeaker, as it      phenomenon caused by the ANC-LF-FRC method. The sec-
+can prevent low-frequency overload while maintaining a com-               ondary path is set to [1, 0]T , while the primary path is de-
+parable NR performance to the Wiener filter for the uncon-                signed using the frequency sampling method implemented by
+strained frequency range.                                                 the fir2 function in MATLAB. For simplicity, the sampling rate
+     Owing to the convexity of the optimization problem in (8)            in the simulation is set to 16 kHz. The frequency response
+and (12), a global optimal solution can be obtained using stan-           is specified with non-uniform amplitude requirements across
+dard convex optimization solvers such as CVX [25, 26].                    the spectrum. The normalized frequency vector is defined as
+                                                                          [0, 0.0375, 0.0625, 0.0875, 0.1625, 0.25, 0.5, 1]T , correspond-
+                       3. Experiments                                     ing to the digital frequency range from DC to the Nyquist fre-
+                                                                          quency. The desired magnitude response at these frequency
+Some comparison experiments are conducted using white noise               points is set to [12, 10, 7, 3, 1, 1, 2, 1]T , representing the gain
+and train noise to evaluate the efficacy of the proposed meth-            requirements in different frequency bands. The simulated mag-
+ods. The test noise signals include both stationary and non-              nitude response is used to approximate the frequency character-
+stationary components. Specifically, white noise, obtained from           istics of a micro-speaker.
+the Noisex-92 database [27], serves as a representative station-               In Figure 4, it is observed that the ANC-LF-FRC method
+ary source, whereas train noise, recorded in a real-world envi-           exhibits a Gibbs phenomenon because the constraint is applied
+ronment, represents a non-stationary source.                              only to the low-frequency components of the control filter, re-
+
+
+
+
+                                                                       4942
+                                                                                                                 40
+                 40
+                                                                                                                 30
+                 20
+ SPL (dB)
+
+
+
+
+                                                                                                 Magnitude(dB)
+                  0                                                                                              20
+                             ANC off                                                                             10
+             -20
+                             ANC-LF-FRC
+             -40             ANC-FRC                                                                               0
+                                                                                                                                ANC-Wiener
+                  0.025             Normalized Frequency (      rad/sample)   0.5        1                                      ANC-LF-FRC
+                                                                                                                 -10
+                                                      (a)                                                                       ANC-FRC
+                                                                                                                 -20
+                 20                              4                                                                 10 2                              Frequency(Hz)               10 3
+Magnitude (dB)
+
+
+
+
+                                                 2
+                                                 0
+                 10
+                                                -2                                               Figure 6: The frequency response of control filter used in differ-
+                             ANC-Wiener                                                          ent ANC methods.
+                  0
+                             ANC-LF-FRC
+                             ANC-FRC
+                  0.025             Normalized Frequency (      rad/sample)   0.5        1       Table 1: Average NR performance of different methods under
+                                                      (b)                                        different noise
+
+Figure 4: The unnormalized SPL and NR results of different                                                                                                           Frequency band
+                                                                                                                       Method          Noise type
+ANC methods: (a) The NR level of ANC methods; (b) The fre-                                                                                             100-500 Hz    500-1000 Hz        1000-2000 Hz
+quency response of the corresponding control filters.                                                                                  Train noise       4.0756        17.7700            20.6563
+                                                                                                          ANC-Wiener method
+                                                                                                                                      White noise        4.0557        17.8185            21.3636
+                   ANC off      ANC-Wiener      ANC-Highpass        ANC-LF-FRC      ANC-FRC                                            Train noise      -1.8496        6.0539             18.6060
+                  10                                                                                             High-pass method
+                                                                                                                                      White noise       -1.8596        6.0542             19.0473
+                      0
+                                                                                                                                       Train noise      -0.1300        11.0092            15.6842
+                                                                                                       ANC-LF-FRC method
+       SPL (dB)
+
+
+
+
+                  -10
+                                                                                                                                      White noise       -0.1383        11.0322            16.0917
+                  -20
+                                                                                                                                       Train noise       1.5464        13.9615            18.5460
+                                                                                                                 ANC-FRC method
+                  -30
+                                                                                                                                      White noise        1.5356        14.0626            19.2252
+                  -40
+                                              Frequency (Hz)           10 3
+                                                     (a)
+                      0
+                                                                                                      To better illustrate the NR performance of ANC methods,
+                  -10
+                                                                                                 the NR levels in different frequency bands are obtained by av-
+       SPL (dB)
+
+
+
+
+                  -20                                                                            eraging the results over 10 independent Monte Carlo experi-
+                  -30
+                                                                                                 ments. A comparative analysis of the average NR performance
+                                                                                                 across three methods is summarized in Table 1. Among them,
+                  -40
+                                                                                                 ANC-Wiener is an unconstrained method that provides suffi-
+                      10 2                     Frequency (Hz)          10 3
+                                                     (b)                                         cient gain at low frequencies to achieve anti-noise cancellation.
+                                                                                                 However, due to the limited low-frequency output capability of
+Figure 5: The unnormalized SPL of different ANC methods on                                       micro loudspeakers in practice, this method leads to mechan-
+(a) Train noise and (b) White noise.                                                             ical overdrive, thereby degrading the service life of the loud-
+                                                                                                 speakers. It is found that the ANC-Highpass method degrades
+                                                                                                 NR performance outside the constrained frequency band, which
+sulting in degraded NR performance. In contrast, the ANC-FRC                                     is attributed to the group delay. The additional group delay at
+method mitigates this issue by applying constraints over the en-                                 low-frequencies results in phase distortion, which accounts for
+tire target NR band.                                                                             the limited ANC performance achieved by the ANC-Highpass
+                                                                                                 method. Therefore, to avoid the adverse impact of group de-
+3.3. The experimental performance of the ANC-FRC                                                 lay on noise reduction, constraining the low-frequency response
+method                                                                                           during filter design offers a valid solution. Moreover, the ANC-
+                                                                                                 FRC method achieves the best overall performance across a
+Experiments are conducted with different real-world noises to                                    wide frequency range. The results remain consistent across both
+evaluate the noise attenuation performance of the proposed                                       train and white noise types, confirming the robustness and effi-
+ANC method. To protect the loudspeaker’s lifespan, the con-                                      cacy of the ANC-FRC method.
+trol signal must be processed before being fed into it. Conven-
+tional methods such as cascading a highpass filter after the con-
+trol filter are used due to its convenience. This highpass filter
+                                                                                                                                         4. Conclusion
+is implemented as a first-order Butterworth filter with a cutoff                                 Considering the practical limitations of micro loudspeakers in
+frequency of 400 Hz.                                                                             applications, the proposed gain constraint is designed to pre-
+     The NR curves for two noise types are presented in Fig-                                     vent low-frequency overload while maintaining satisfactory NR
+ure 5. Among the methods, the proposed ANC-FRC method                                            performance. However, experimental results show that apply-
+demonstrates superior NR performance. Figure 6 shows the fre-                                    ing the gain constraint only in the low-frequency range may
+quency response of the control filter trained by different ANC                                   cause Gibbs phenomenon, thereby degrading NR performance.
+methods. It can be observed that the frequency response of the                                   In contrast, the proposed ANC-FRC method achieves superior
+control filter trained by the ANC-FRC method is more similar                                     NR performance while avoiding mechanical over-excursion at
+to that of the ANC-Wiener method within the 400–2000 Hz fre-                                     low frequencies. Both simulation and experimental results fur-
+quency band, due to the ℓ2 norm regularization term of (9).                                      ther confirm its effectiveness.
+
+
+
+
+                                                                                              4943
+                   5. Acknowledgments                                         [15] C.-R. Huang, C.-Y. Chang, and S. M. Kuo, “Time-shift modeling-
+                                                                                   based hear-through system for in-ear headphones,” IEEE Transac-
+This research was supported in part by the National                                tions on Consumer Electronics, vol. 68, no. 3, pp. 273–280, 2022.
+Key Research & Development (R&D) Program of China
+                                                                              [16] L. Yin, Z. Zhang, M. Wu, S. Zhou, J. Guo, J. Yang, and J. Zhang,
+(2024QY2630), National Natural Science Foundation of China                         “Selective fixed-filter active noise control based on frequency re-
+under Grant 62301096 and the Natural Science Foundation of                         sponse matching in headphones,” Applied Acoustics, vol. 211, p.
+Chongqing, China under Grant CSTB2023NSCQMSX0659.                                  109505, 2023.
+                                                                              [17] X. Qiu and C. H. Hansen, “A study of time-domain fxlms algo-
+       6. Use of Generative AI Disclosure                                          rithms with control output constraint,” The Journal of the Acous-
+                                                                                   tical Society of America, vol. 109, no. 6, pp. 2815–2823, 2001.
+Generative AI tools were used solely to support language pol-
+                                                                              [18] C.-Y. Chang, S. M. Kuo, and C.-W. Huang, “Secondary path
+ishing in this work. No generative AI was used for idea genera-                    modeling for narrowband active noise control systems,” Applied
+tion, data analysis, drawing conclusions, or any substantive as-                   Acoustics, vol. 131, pp. 154–164, 2018.
+pect of the research/work. The authors have reviewed and taken
+                                                                              [19] D. Shi, W.-S. Gan, B. Lam, S. Wen, and X. Shen, “Optimal
+full responsibility for all content presented in this document.                    output-constrained active noise control based on inverse adaptive
+                                                                                   modeling leak factor estimate,” IEEE/ACM Transactions on Au-
+                         7. References                                             dio, Speech, and Language Processing, vol. 29, pp. 1256–1269,
+                                                                                   2021.
+ [1] S. J. Elliott and P. A. Nelson, “Active noise control,” IEEE Signal
+                                                                              [20] X. Shen, D. Shi, W.-S. Gan, and S. Peksi, “Adaptive-gain algo-
+     Processing Magazine, vol. 10, no. 4, pp. 12–35, 1993.
+                                                                                   rithm on the fixed filters applied for active noise control head-
+ [2] Y. Kajikawa, W.-S. Gan, and S. M. Kuo, “Recent advances on ac-                phone,” Mechanical Systems and Signal Processing, vol. 169, p.
+     tive noise control: open issues and innovative applications,” AP-             108641, 2022.
+     SIPA Transactions on Signal and Information Processing, vol. 1,
+                                                                              [21] S. S. Haykin, Adaptive filter theory.    Pearson Education India,
+     p. e3, 2012.
+                                                                                   2002.
+ [3] S. Koyama, J. Brunnström, H. Ito, N. Ueno, and H. Saruwatari,
+                                                                              [22] I. W. Selesnick, M. Lang, and C. S. Burrus, “Constrained least
+     “Spatial active noise control based on kernel interpolation of
+                                                                                   square design of fir filters without specified transition bands,”
+     sound field,” IEEE/ACM Transactions on Audio, Speech, and Lan-
+                                                                                   IEEE Transactions on Signal Processing, vol. 44, no. 8, pp. 1879–
+     guage Processing, vol. 29, pp. 3052–3063, 2021.
+                                                                                   1892, 2002.
+ [4] X. Qiu, “Recent advances on active control of sound transmission         [23] X. Li, Y. Li, X. Yin, W. Zhou, H. Zhang, J. Ren, X. Jiang, and
+     through ventilation windows,” in 24th International Congress on               Z. Wen, “Reducing gibbs effect of interferometric microwave ra-
+     Sound and Vibration, ICSV 2017, 2017.                                         diometer in coastal areas using visibility phase adjustment,” IEEE
+ [5] C.-Y. Ho, K.-K. Shyu, C.-Y. Chang, and S. M. Kuo, “Integrated                 Transactions on Geoscience and Remote Sensing, pp. 1–1, 2025.
+     active noise control for open-fit hearing aids with customized fil-      [24] S. P. Boyd and L. Vandenberghe, Convex optimization.         Cam-
+     ter,” Applied Acoustics, vol. 137, pp. 1–8, 2018.                             bridge university press, 2004.
+ [6] X. Shen, D. Shi, and W.-S. Gan, “A wireless reference active noise       [25] M. C. Grant and S. P. Boyd, “Graph implementations for non-
+     control headphone using coherence based selection technique,” in              smooth convex programs,” in Recent advances in learning and
+     ICASSP 2021-2021 IEEE International Conference on Acoustics,                  control. Springer, 2008, pp. 95–110.
+     Speech and Signal Processing (ICASSP). IEEE, 2021, pp. 7983–
+     7987.                                                                    [26] M. Grant, S. Boyd, and Y. Ye, “Cvx: Matlab software for disci-
+                                                                                   plined convex programming, version 2.0 beta,” 2013.
+ [7] X. Qiu, An introduction to virtual sound barriers.      CRC Press,
+     2019.                                                                    [27] A. Varga and H. J. Steeneken, “Assessment for automatic speech
+                                                                                   recognition: Ii. noisex-92: A database and an experiment to
+ [8] L. Yin, Z. Zhang, M. Wu, Z. Wang, C. Ma, S. Zhou, and J. Yang,                study the effect of additive noise on speech recognition systems,”
+     “Adaptive parallel filter method for active cancellation of road              Speech communication, vol. 12, no. 3, pp. 247–251, 1993.
+     noise inside vehicles,” Mechanical Systems and Signal Process-
+     ing, vol. 193, p. 110274, 2023.
+ [9] Chengpu, Sun, Fengyan, Bilong, Liu, and Sibing, “The prediction
+     of nonlinear resistance and distortion for a miniature loudspeaker
+     with vented cavities.” The Journal of the Acoustical Society of
+     America, vol. 146, no. 6, pp. 4315–4315, 2019.
+[10] D. Shi, W.-S. Gan, B. Lam, and X. Shen, “A frequency-domain
+     output-constrained active noise control algorithm based on an in-
+     tuitive circulant convolutional penalty factor,” IEEE/ACM Trans-
+     actions on Audio, Speech, and Language Processing, vol. 31, pp.
+     1318–1332, 2023.
+[11] S. Elliott, Signal processing for active control.   Elsevier, 2000.
+[12] W. J. Kozacky and T. Ogunfunmi, “An active noise control al-
+     gorithm with gain and power constraints on the adaptive filter,”
+     Journal on Advances in Signal Processing, vol. 2013, no. 1, p. 17,
+     2013.
+[13] K.-H. Park, Z.-X. Jiang, and S.-M. Hwang, “Design and analysis
+     of a novel microspeaker with enhanced low-frequency spl and size
+     reduction,” Applied Sciences, vol. 10, no. 24, p. 8902, 2020.
+[14] C. Gazzola, A. Corigliano, and V. Zega, “Total harmonic distor-
+     tion estimation in piezoelectric micro-electro-mechanical-system
+     loudspeakers via a fem-assisted reduced-order-model,” Mechani-
+     cal Systems and Signal Processing, vol. 222, p. 111762, 2025.
+
+
+
+
+                                                                           4944
+

@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-09-27
+updated: 2026-10-01
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md
@@ -10,6 +10,7 @@ sources:
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
   - raw/papers/veluri-2023-semantic-hearing/full-text.md
   - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
+  - raw/papers/cheng-2026-anc-gain-constraint/full-text.txt
 aliases:
 - Active Noise Control
 tags:
@@ -77,6 +78,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - **Predictability**: Performance depends on how predictable the primary noise is; narrow-band noise works better than broadband noise
 - **Nonlinear distortion**: Low-cost speakers and high-SPL scenarios introduce nonlinearities that linear algorithms cannot model
 - **[[output-saturation-effect|Output saturation]]**: When the secondary-path amplifier is driven beyond its rated output, the control signal is clipped and unconstrained adaptive filters (linear and nonlinear) diverge. Mitigated by [[output-constraint-anc-algorithms|output constraint algorithms]] or [[nonlinear-active-noise-control|nonlinear adaptive algorithms]] depending on the saturation regime (Guo 2024)
+- **Micro-loudspeaker mechanical over-excursion**: The rolled-off low-frequency response of micro-loudspeakers in compact devices, combined with the high low-frequency gain of unconstrained (Wiener) control filters, drives the diaphragm beyond its mechanical limits — a transducer-side limit distinct from amplifier saturation. Mitigated at design time by [[concepts/frequency-response-constrained-anc|frequency-response gain constraints]] on the fixed control filter (Cheng 2026), which avoid the group-delay penalty of runtime high-pass cascades
 - **Speech cancellation**: Traditional "cancel everything" approach damages useful speech signals in mixed sound fields
 - **DOA dependency**: The primary path $P(z)$ varies with sound direction, degrading feedforward ANC at non-nominal DOAs (Liebich 2018)
 - **Acoustic feedback in multichannel arrays**: loudspeaker-to-reference coupling grows with channel count, so the closed loop sets the usable step size. In a $(J_{\mathrm{R}}, J_{\mathrm{F}}, L, R) = (8, 8, 2, 2)$ array, plain multichannel FxLMS diverges once the secondary sources are spread beyond ~0.3 m, and the primary noise cannot be switched off to measure the feedback paths offline (Zhang 2026)
@@ -134,6 +136,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] — multichannel feedforward ANC with ReTM-based feedback subtraction ahead of a normalized frequency-domain FxLMS controller
 - [[sources/veluri-2023-semantic-hearing|Veluri et al. 2023: Semantic Hearing]] — uses ANC as an acoustic clean slate and reintroduces user-selected sound classes in real time; demonstrates coexistence with adaptive feedforward ANC on commercial headphones
 - [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC with a Conditional Control-Filter Estimation Network]] — FiLM-conditioned network estimates the full control-filter bank; cancels non-desired directions while preserving desired-direction sound
+- [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026: Active Noise Control With a Gain Constraint for Micro-Loudspeakers]] — design-time frequency-response gain constraint on fixed control filters to prevent micro-loudspeaker mechanical over-excursion
 
 ## Related Entities
 

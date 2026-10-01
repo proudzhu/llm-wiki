@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-09-21
+updated: 2026-10-01
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
+  - raw/papers/cheng-2026-anc-gain-constraint/full-text.txt
 tags:
 - active-noise-control
 - signal-processing
@@ -43,6 +44,7 @@ Used for periodic noise from rotating machinery (e.g., engines, fans).
 - **Causality Constraint**: The total electrical delay (processing + DAC + ADC + filters) must be less than the acoustic travel time from the reference mic to the speaker. If the system is non-causal, broad-band performance is severely limited.
 - **[[acoustic-feedback|Acoustic Feedback]]**: Antinoise from the speaker can travel back to the reference microphone, creating a feedback loop that may lead to instability. Solutions include neutralization filters or adaptive IIR filters.
 - **Secondary Path Effects**: The transfer function of the electronics and transducers (the "secondary path") must be compensated for, typically using the [[filtered-x-lms-algorithm|Filtered-x LMS Algorithm]].
+- **Loudspeaker protection vs. delay**: For micro-loudspeakers with rolled-off low-frequency response, the conventional protection of cascading a high-pass filter after the control filter adds group delay that increases electrical latency and causes phase distortion, degrading NR outside the constrained band (Cheng 2026). Constraining the low-frequency gain at filter-design time ([[concepts/frequency-response-constrained-anc|ANC-FRC]]) avoids the added delay entirely.
 
 ## DOA Dependency
 
@@ -91,3 +93,4 @@ Open-fitting hearing aids apply feedforward ANC to cancel the noise component of
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method for Feedforward ANC]]
 - [[sources/ma-2027-robust-ffanc-online-path-modeling|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] — extends the basic FFANC of Kuo 1999 with simultaneous online SP/FBP modeling and a second supporting filter, achieving near-ideal-benchmark NRP under time-varying paths
 - [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC]] — retains the feedforward control path while a network estimates its filter bank conditioned on the desired direction
+- [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026: Active Noise Control With a Gain Constraint for Micro-Loudspeakers]] — single-channel feedforward ANC whose fixed control filter is pre-trained under a low-frequency gain constraint for micro-loudspeakers

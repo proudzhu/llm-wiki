@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-08-27
-updated: 2026-08-27
+updated: 2026-10-01
 sources:
   - raw/papers/rafaely-2000-constrained-fdlms/full-text.md
   - raw/papers/guldenschuh-2014-secondary-path-irregularities/full-text.md
+  - raw/papers/cheng-2026-anc-gain-constraint/full-text.txt
 tags:
   - adaptive-filtering
   - frequency-domain
@@ -58,6 +59,8 @@ Unlike the **leaky LMS**, whose leak factor $\gamma$ penalizes filter gain at *a
 
 Constrained FDLMS is the frequency-domain antecedent of the later time-domain [[concepts/output-constraint-anc-algorithms|output constraint ANC algorithm]] family: it was arguably the first to formulate adaptive-filter output/gain constraints as an online penalty-function optimization rather than a fixed leak, and it influenced subsequent work on gain-limited frequency-domain adaptive filters (e.g. Kozacky & Ogunfunmi 2009).
 
+The idea also has a **fixed-filter, design-time descendant**: [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026]] impose per-band gain limits on a *pre-trained* control filter — an ∞-norm constraint on the low-frequency DFT bins plus an ℓ2 anchor to the Wiener solution elsewhere (see [[concepts/frequency-response-constrained-anc|ANC-FRC]]) — solved as a convex QP rather than adapted online. The frequency-selective philosophy survives: only the violating band is constrained, and the free band is explicitly preserved.
+
 ## Cost Benchmark
 
 [[sources/guldenschuh-2014-secondary-path-irregularities|Guldenschuh & de Callafon 2014]] benchmark the constrained FDLMS (12-tap $W$, 2×24-pt FFTs + IFFT) against their own [[concepts/dc-gain-stability-constraint|DC-gain stability constraint]] on ANC headphones:
@@ -82,3 +85,4 @@ The result illustrates the frequency-selective advantage of penalty-function con
 ## Related Sources
 
 - [[sources/rafaely-2000-constrained-fdlms|Rafaely & Elliott 2000: Computationally Efficient Frequency-Domain LMS with Constraints]]
+- [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026: Active Noise Control With a Gain Constraint for Micro-Loudspeakers]] — design-time fixed-filter descendant: per-band gain limits solved as a convex QP

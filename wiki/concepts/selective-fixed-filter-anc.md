@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-30
-updated: 2026-09-12
+updated: 2026-10-01
 sources:
   - raw/papers/wang-2026-predictive-dsfanc-crnn/full-text.md
   - raw/papers/yin-2023-selective-fixed-filter-anc-headphones/full-text.md
@@ -10,6 +10,7 @@ sources:
   - raw/papers/bai-2026-feedback-guided-anc/full-text.md
   - raw/papers/yang-2026-transformer-e2e-cfg-anc/full-text.md
   - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
+  - raw/papers/cheng-2026-anc-gain-constraint/full-text.txt
 tags:
   - active-noise-control
   - fixed-filter-anc
@@ -73,6 +74,10 @@ A contrasting framework rather than a SFANC variant: [[feedback-guided-controlle
 | **PD-SFANC** | Predicted DoA | **Yes** | **Fully learned** | **Robust** | — |
 | GFANC | Generated filter | No | N/A | No | — |
 
+## Constraint-Aware Pre-Training
+
+Fixed-filter libraries are typically pre-trained with unconstrained Wiener/FxLMS solutions. For micro-loudspeakers, such filters carry low-frequency gain that exceeds the transducer's mechanical limits ([[concepts/mechanical-over-excursion|mechanical over-excursion]]). [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026]] show the pre-training stage itself can enforce an ∞-norm frequency-response gain constraint — with an ℓ2 anchor to the Wiener solution preserving the free band (see [[concepts/frequency-response-constrained-anc|ANC-FRC]]) — guaranteeing every pre-trained filter is load-safe without adding runtime group delay. This is complementary to the selection/generation mechanisms above: it changes how each library filter is *designed*, not how it is *chosen*.
+
 ## Related Concepts
 
 - [[concepts/active-noise-control|Active Noise Control]] — parent domain
@@ -94,4 +99,5 @@ A contrasting framework rather than a SFANC variant: [[feedback-guided-controlle
 - [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — foundational work establishing direction-dependent causality in feedforward ANC headsets
 - [[sources/yang-2026-transformer-e2e-cfg-anc|Yang, Luo, Zou, Wang, Huang & Gan 2026: Transformer-based E2E-CFG for ANC]]
 - [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC]] — beyond filter selection/generation for attenuation: conditions the whole filter bank on the desired direction with an explicit preservation objective
+- [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026: Active Noise Control With a Gain Constraint for Micro-Loudspeakers]] — constraint-aware pre-training: gain-limited fixed filters that are load-safe for micro-loudspeakers
 

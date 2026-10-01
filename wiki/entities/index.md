@@ -617,4 +617,9 @@
 | [[entities/debi-prasad-das\|Debi Prasad Das]] | CSIR-IMMT Bhubaneswar — co-author, filtered-s LMS researcher | 2026-09-28 |
 | [[entities/ganapati-panda\|Ganapati Panda]] | IIT Bhubaneswar — co-author, filtered-s LMS and comprehensive-learning PSO researcher | 2026-09-28 |
 | [[entities/akihiro-hirano\|Akihiro Hirano]] | NEC Corporation (to 1998) / Kanazawa University researcher — co-author of the 1999 CCAF-based robust adaptive beamformer | 2026-09-30 |
+| [[entities/zhenhua-cheng\|Zhenhua Cheng]] | CQUPT — first author of ANC-FRC (Interspeech 2026): design-time frequency-response gain constraint for micro-loudspeakers. | 2026-10-01 |
+| [[entities/yi-zhou\|Yi Zhou]] | CQUPT — co-author of ANC-FRC (Interspeech 2026): design-time frequency-response gain constraint for micro-loudspeakers. | 2026-10-01 |
+| [[entities/yin-liu\|Yin Liu]] | CQUPT — co-author of ANC-FRC (Interspeech 2026): design-time frequency-response gain constraint for micro-loudspeakers. | 2026-10-01 |
+| [[entities/yu-zhao\|Yu Zhao]] | CQUPT — co-author of ANC-FRC (Interspeech 2026): design-time frequency-response gain constraint for micro-loudspeakers. | 2026-10-01 |
+| [[entities/liming-shi\|Liming Shi]] | CQUPT — corresponding author of ANC-FRC (Interspeech 2026): design-time frequency-response gain constraint for micro-loudspeakers. | 2026-10-01 |
 

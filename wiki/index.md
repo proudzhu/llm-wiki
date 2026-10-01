@@ -623,6 +623,11 @@
 | [[entities/debi-prasad-das\|Debi Prasad Das]] | CSIR-IMMT Bhubaneswar — co-author, filtered-s LMS researcher | 2026-09-28 |
 | [[entities/ganapati-panda\|Ganapati Panda]] | IIT Bhubaneswar — co-author, filtered-s LMS and comprehensive-learning PSO researcher | 2026-09-28 |
 | [[entities/akihiro-hirano\|Akihiro Hirano]] | NEC Corporation (to 1998) / Kanazawa University researcher — co-author of the 1999 CCAF-based robust adaptive beamformer | 2026-09-30 |
+| [[entities/zhenhua-cheng\|Zhenhua Cheng]] | CQUPT — first author of ANC-FRC (Interspeech 2026): design-time frequency-response gain constraint for micro-loudspeakers. | 2026-10-01 |
+| [[entities/yi-zhou\|Yi Zhou]] | CQUPT — co-author of ANC-FRC (Interspeech 2026): design-time frequency-response gain constraint for micro-loudspeakers. | 2026-10-01 |
+| [[entities/yin-liu\|Yin Liu]] | CQUPT — co-author of ANC-FRC (Interspeech 2026): design-time frequency-response gain constraint for micro-loudspeakers. | 2026-10-01 |
+| [[entities/yu-zhao\|Yu Zhao]] | CQUPT — co-author of ANC-FRC (Interspeech 2026): design-time frequency-response gain constraint for micro-loudspeakers. | 2026-10-01 |
+| [[entities/liming-shi\|Liming Shi]] | CQUPT — corresponding author of ANC-FRC (Interspeech 2026): design-time frequency-response gain constraint for micro-loudspeakers. | 2026-10-01 |
 
 ---
 
@@ -1191,6 +1196,8 @@
 | [[concepts/steering-vector-error\|Steering-Vector Error]] | Mismatch between the assumed array steering vector and the true transfer function; target-direction error dominates in practice | 2026-09-30 |
 | [[concepts/gsvd-based-optimal-filtering\|GSVD-Based Optimal Filtering]] | Doclo & Moonen's time-domain spatio-temporal Wiener filter from the GSVD of VAD-segmented speech/noise data matrices — beamforming behavior with no steering vector or array calibration; ancestor of GEVD spatial filtering. | 2026-10-01 |
 | [[concepts/signal-subspace-speech-enhancement\|Signal Subspace Speech Enhancement]] | Family of methods enhancing speech by decomposing the signal subspace (SVD/KLT/GSVD) and applying a diagonal gain to speech-dominant components; taxonomy along signal/noise subspace choice, gain rule, and filter structure. | 2026-10-01 |
+| [[concepts/frequency-response-constrained-anc\|Frequency-Response Constrained ANC (ANC-FRC)]] | Pre-training fixed ANC control filters under an ∞-norm low-frequency gain constraint plus an ℓ2 anchor to the Wiener optimum, preventing micro-loudspeaker over-excursion without added group delay. | 2026-10-01 |
+| [[concepts/mechanical-over-excursion\|Mechanical Over-Excursion]] | Transducer-side limit of (micro-)loudspeakers: diaphragm displacement beyond mechanical limits, triggered by high low-frequency gain of unconstrained ANC control filters against rolled-off low-frequency response. | 2026-10-01 |
 
 ---
 
@@ -1436,6 +1443,7 @@
 | [[sources/rout-2012-pso-anc-without-secondary-path\|Rout, Das & Panda 2012]] | This paper develops a systematic online particle swarm optimization (PSO) training scheme for linear feedforward ANC that requires no secondary path identification whatsoever. | 2026-09-28 |
 | [[sources/hoshuyama-1999-robust-adaptive-beamformer-ccaf\|Hoshuyama, Sugiyama & Hirano 1999]] | Robust GSC with a coefficient-constrained adaptive blocking matrix and a norm-constrained canceller - 20 deg target-direction-error tolerance with no loss of interference-reduction degrees of freedom; 19 dB IRR and 3.8 MOS at 0.3-s reverberation | 2026-09-30 |
 | [[sources/doclo-2002-gsvd-optimal-filtering\|Doclo & Moonen 2002]] | This paper proposes a generalized singular value decomposition (GSVD) based algorithm for enhancing multimicrophone speech signals degraded by additive colored noise, unifying single-microphone signal subspace techniques and multichannel optimal filtering in one framework. | 2026-10-01 |
+| [[sources/cheng-2026-anc-gain-constraint\|Cheng, Zhou, Liu, Zhao & Shi 2026]] | This paper proposes ANC-FRC, a method for pre-training fixed ANC control filters under a frequency-response gain constraint, so that the control signal stays within the limited low-frequency reproduction capability of micro-loudspeakers without adding group delay. | 2026-10-01 |
 
 ---
 
@@ -1489,10 +1497,10 @@
 
 ## Statistics
 
-- **Total pages**: 1438
-- **Entities**: 613
-- **Concepts**: 559
-- **Sources**: 236
+- **Total pages**: 1446
+- **Entities**: 618
+- **Concepts**: 561
+- **Sources**: 237
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-10-01

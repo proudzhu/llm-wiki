@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-08-10
-updated: 2026-08-27
+updated: 2026-10-01
 sources:
   - raw/papers/guo-2024-anc-saturation-survey/full-text.md
   - raw/papers/rafaely-2000-constrained-fdlms/full-text.md
+  - raw/papers/cheng-2026-anc-gain-constraint/full-text.txt
 tags:
   - active-noise-control
   - adaptive-filtering
@@ -73,6 +74,10 @@ Compared with the [[nonlinear-active-noise-control|nonlinear adaptive]] family:
 
 Output constraint algorithms are required whenever the disturbance level pushes the amplifier into its **severe saturation** region, i.e. when the fundamental component cannot be fully attenuated. Under **mild saturation** (only harmonics remain), [[nonlinear-active-noise-control|nonlinear adaptive algorithms]] are advantageous because their pre-distortion strategy can cancel the harmonics that output constraint leaves behind.
 
+## Design-Time Counterpart: Frequency-Response Gain Constraints
+
+The families above limit **output power or amplitude online**, protecting the amplifier. A complementary line of work constrains the **frequency-response gain at filter-design time**, protecting the loudspeaker's mechanical limits: [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026]] impose an ∞-norm gain limit $\|\mathbf{F}_h \mathbf{w}\|_\infty \le \delta_{\mathrm{th}}$ on the low-frequency DFT bins of a *fixed* control filter, plus an ℓ2 anchor to the Wiener solution in the free band (see [[concepts/frequency-response-constrained-anc|ANC-FRC]]), preventing [[concepts/mechanical-over-excursion|mechanical over-excursion]] of micro-loudspeakers with zero runtime cost. Where the online families trade cancellation for amplifier stability, the design-time family trades low-frequency gain for transducer safety — the unconstrained Wiener optimum is unreachable either way, but the fixed-filter formulation needs no per-sample constraint logic.
+
 ## Related Concepts
 
 - [[concepts/output-saturation-effect|Output Saturation Effect]]
@@ -89,3 +94,4 @@ Output constraint algorithms are required whenever the disturbance level pushes 
 
 - [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024: ANC Algorithms Overcoming Output Saturation]]
 - [[sources/rafaely-2000-constrained-fdlms|Rafaely & Elliott 2000: Computationally Efficient Frequency-Domain LMS with Constraints]] — frequency-domain penalty-function precursor of the family
+- [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026: Active Noise Control With a Gain Constraint for Micro-Loudspeakers]] — design-time counterpart: ∞-norm frequency-response gain constraint on the fixed control filter, protecting the loudspeaker rather than the amplifier

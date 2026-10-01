@@ -5596,3 +5596,16 @@ Ingested Rout, Das & Panda 2012 (IEEE TIM 61(2):554-563). Key contribution: [[co
 - Concepts updated: multi-channel-wiener-filter, gevd-spatial-filtering, gsc-beamformer, singular-value-decomposition, speech-distortion-constrained-noise-reduction, voice-activity-detection, beamforming
 - Synthesis updated: multi-channel-speech-enhancement (Sources Synthesized table row; Insight 3 paragraph on the time-domain subspace origin of the "estimate-what" Step-4 position; Insight 4 Souden-2010 covariance-sufficiency claim amended to credit the 2002 time-domain antecedent)
 - Indexes updated: wiki/index.md, wiki/sources/index.md, wiki/concepts/index.md; statistics recounted (total=1438)
+
+---
+
+## [2026-10-01] ingest | Active Noise Control With a Gain Constraint for Micro-Loudspeakers (Cheng et al. 2026)
+
+- **Source**: `raw/papers/cheng-2026-anc-gain-constraint/full-text.txt` (Zotero: 9JVU9SEU; extracted via pdftotext after MinerU timeout)
+- **Authors**: Zhenhua Cheng, Yi Zhou, Yin Liu, Yu Zhao, Liming Shi
+- **Published**: Interspeech 2026, Sydney, Australia, pp. 4940–4944
+- **DOI**: 10.21437/Interspeech.2026-2202
+- **Summary**: Proposes ANC-FRC — pre-training fixed ANC control filters under an ∞-norm low-frequency frequency-response gain constraint (plus an ℓ2 anchor to the Wiener optimum that suppresses the induced Gibbs phenomenon), preventing micro-loudspeaker mechanical over-excursion without the group-delay penalty of high-pass cascades. Best practical band-wise NR in anechoic-chamber experiments.
+- **Pages created**: `wiki/sources/cheng-2026-anc-gain-constraint.md`; entities `wiki/entities/{zhenhua-cheng, yi-zhou, yin-liu, yu-zhao, liming-shi}.md`; concepts `wiki/concepts/frequency-response-constrained-anc.md`, `wiki/concepts/mechanical-over-excursion.md`
+- **Pages updated**: [[concepts/active-noise-control|Active Noise Control]] (new Key Challenges bullet: micro-loudspeaker over-excursion), [[concepts/feedforward-anc|Feedforward ANC]] (loudspeaker protection vs. delay), [[concepts/output-constraint-anc-algorithms|Output Constraint ANC Algorithms]] (design-time counterpart section), [[concepts/output-saturation-effect|Output Saturation Effect]] (transducer-side distinction), [[concepts/constrained-fdlms|Constrained FDLMS]] (design-time descendant), [[concepts/soft-constrained-anc|Soft-Constrained ANC]] (ANC-FRC as hard+soft example), [[concepts/wiener-filter|Wiener Filter]] (constrained anchor role), [[concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] (constraint-aware pre-training section)
+- **Synthesis**: triaged 5 candidates, all sharing only the broad `active-noise-control` tag — none updated

@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-10
-updated: 2026-08-10
+updated: 2026-10-01
 sources:
   - raw/papers/guo-2024-anc-saturation-survey/full-text.md
+  - raw/papers/cheng-2026-anc-gain-constraint/full-text.txt
 tags:
   - active-noise-control
   - nonlinear-systems
@@ -60,6 +61,10 @@ The mitigation strategies split into two complementary families, each addressing
 
 The two families correspond to distinct operating regimes: NANC is advantageous under **mild saturation** (only harmonics remain), while output constraint is required under **severe saturation** (fundamental not fully cancelable; unconstrained filters diverge).
 
+## Transducer-Side Distinction
+
+The saturation analysed here originates in the **power amplifier**. A distinct transducer-side limit — [[concepts/mechanical-over-excursion|mechanical over-excursion]] of micro-loudspeakers, triggered by the high low-frequency gain of unconstrained control filters against the speaker's rolled-off low-frequency response — is highlighted by [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026]], who mitigate it with a design-time frequency-response gain constraint ([[concepts/frequency-response-constrained-anc|ANC-FRC]]) rather than online output-power limits.
+
 ## Related Concepts
 
 - [[concepts/active-noise-control|Active Noise Control]]
@@ -73,3 +78,4 @@ The two families correspond to distinct operating regimes: NANC is advantageous 
 ## Related Sources
 
 - [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024: ANC Algorithms Overcoming Output Saturation]]
+- [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026: Active Noise Control With a Gain Constraint for Micro-Loudspeakers]] — distinguishes the transducer-side mechanical over-excursion limit from this amplifier-side saturation
