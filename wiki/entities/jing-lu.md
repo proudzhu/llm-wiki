@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-24
-updated: 2026-09-08
+updated: 2026-10-02
 tags:
   - researcher
   - speech-enhancement
@@ -26,3 +26,9 @@ tags:
 - Corresponding author of "Speech extraction under extremely low SNR conditions" (Applied Acoustics 2024) — OGIVE convergence-region analysis on real speech plus natural-gradient variants (OGIVEa_NG/OGIVEw_NG), NSFC 12274221 — [[sources/ruan-2024-speech-extraction-low-snr|Ruan et al. 2024]]
 - Co-author of "基于双传声器的蓝牙耳机降噪算法" ("Two microphone based noise suppression algorithms for Bluetooth headsets", 应用声学 2014) — dual-mic coherence-based vs spatial-pre-separation comparison with SD-constrained optimal filter analysis — [[sources/yan-2014-dual-mic-bt-noise-reduction|Yan et al. 2014]]
 - Last author of "A Lightweight Hybrid Multi-Channel Speech Extraction System with Directional Voice Activity Detection" (ICASSP 2024) — hybrid robust GSC + DPCRN post-filter with [[concepts/directional-vad|directional VAD]], NSFC 12274221 — [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024]]
+- Co-author of "Causal Reference-Enhanced Keep-Speech Active Noise Control" (Interspeech 2026, Sydney, Australia, pp. 4966–4970, 2026) — causal WaveNet-based reference enhancement for keep-speech ANC with a conventional FIR control filter — [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026]]
+
+
+## Related Sources
+
+- [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]]

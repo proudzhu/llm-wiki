@@ -1,10 +1,14 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-09-08
+updated: 2026-10-01
 sources:
   - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
   - raw/papers/hu-2026-abse-net/full-text.md
+  - raw/papers/rao-2026-keep-speech-anc/full-text.txt
+aliases:
+  - Keep-Speech ANC
+  - KSANC
 tags:
   - active-noise-control
   - speech-processing
@@ -52,6 +56,10 @@ Speech-preserving ANC is fundamentally different from traditional Speech Enhance
 - Speech-preserving loss function drives selective cancellation
 - Validated in reverberant environments (Dai 2026)
 
+### Reference Enhancement (zero-delay)
+- [[sources/rao-2026-keep-speech-anc|Rao et al. 2026]] (who use the term "keep-speech ANC, KSANC" for this goal) keep the control filter **conventional** and place a causal time-domain WaveNet on the **reference path** instead: the network ([[concepts/reference-signal-enhancement|RSE]]) suppresses speech in the speech-plus-noise reference, and an RLS-adapted FIR filter cancels only the noise — adding zero algorithmic delay, unlike the CRN approaches above whose frame-level latency violates headphone causality margins
+- Trained with an error-domain loss $E[d + s \ast w \ast g_\phi]^2$ (Wiener-optimal control filter substituted) that jointly encodes noise suppression and speech preservation, the method improves both STOI and DNSMOS over Unprocessed / Conventional ANC / DeepANC on measured headphone IRs, and generalizes to unseen SNRs, noise types, and source directions
+
 ### Spatial Selectivity
 - [[concepts/spatially-selective-anc|Spatially selective ANC]] (Xiao et al. 2023) preserves the desired sound **spatially**: a Frost-type ReIR constraint on the hybrid ANC cost function leaves the desired-direction physical wave unaltered at the error microphone while noise from other directions is minimized — SNR improved from −13.9 to 15.2 dB (NR 29.1 dB, SDI −25.1 dB) on an AR-glasses array, with ~2% of the secondary-source energy of reconstruct-based systems and natural binaural cues preserved ([[sources/xiao-2023-spatially-selective-anc|Xiao 2023]])
 - The robust soft-constrained SSANC formulation in [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026]] handles secondary-path variations across users by averaging the cost over a measured set of plant estimates
@@ -92,6 +100,7 @@ The system conservatively reduces noise for Babble (5.30 dB) to protect speech, 
 - [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 - [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]]
 - [[sources/hu-2026-abse-net|Hu et al. 2026: ABSE-NET — Active Binaural Speech Enhancement for Open-Fit Hearing Aids]]
+- [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — KSANC via zero-delay reference enhancement; the control filter stays conventional
 
 ## Related Synthesis
 

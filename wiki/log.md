@@ -5609,3 +5609,16 @@ Ingested Rout, Das & Panda 2012 (IEEE TIM 61(2):554-563). Key contribution: [[co
 - **Pages created**: `wiki/sources/cheng-2026-anc-gain-constraint.md`; entities `wiki/entities/{zhenhua-cheng, yi-zhou, yin-liu, yu-zhao, liming-shi}.md`; concepts `wiki/concepts/frequency-response-constrained-anc.md`, `wiki/concepts/mechanical-over-excursion.md`
 - **Pages updated**: [[concepts/active-noise-control|Active Noise Control]] (new Key Challenges bullet: micro-loudspeaker over-excursion), [[concepts/feedforward-anc|Feedforward ANC]] (loudspeaker protection vs. delay), [[concepts/output-constraint-anc-algorithms|Output Constraint ANC Algorithms]] (design-time counterpart section), [[concepts/output-saturation-effect|Output Saturation Effect]] (transducer-side distinction), [[concepts/constrained-fdlms|Constrained FDLMS]] (design-time descendant), [[concepts/soft-constrained-anc|Soft-Constrained ANC]] (ANC-FRC as hard+soft example), [[concepts/wiener-filter|Wiener Filter]] (constrained anchor role), [[concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] (constraint-aware pre-training section)
 - **Synthesis**: triaged 5 candidates, all sharing only the broad `active-noise-control` tag — none updated
+
+---
+
+## [2026-10-02] ingest | A Causal Reference-Enhanced Keep-Speech Active Noise Control Method (Rao et al. 2026)
+
+- **Source**: `raw/papers/rao-2026-keep-speech-anc/full-text.txt` (Zotero: H8H75VZM)
+- **Authors**: Li Rao, Xiaobin Rong, Yu Sun, Yiming He, Kai Chen, Haishan Zou, Jing Lu
+- **Published**: Interspeech 2026, Sydney, Australia, pp. 4966–4970
+- **DOI**: 10.21437/Interspeech.2026-1608
+- **Summary**: Causal keep-speech ANC — a zero-delay causal WaveNet suppresses speech in the reference signal while a conventional RLS-adapted FIR control filter cancels only noise; error-domain training loss (Wiener filter substituted) beats reference-domain noise extraction.
+- **Pages created**: [[sources/rao-2026-keep-speech-anc|source page]], [[entities/li-rao|Li Rao]], [[concepts/reference-signal-enhancement|Reference Signal Enhancement]]
+- **Pages updated**: entities xiaobin-rong, yu-sun, yiming-he, kai-chen, haishan-zou, jing-lu (new contribution bullets); concepts speech-preserving-anc (KSANC alias + reference-enhancement approach), active-noise-control (RSE bullet in Deep Learning Approaches), causality (new solution pattern 5), feedforward-anc (speech-contaminated reference challenge), convolutional-recurrent-network (DeepANC latency note), wiener-filter (training-time substitute role); synthesis ai-driven-anc (new pattern 2.9 + efficiency-frontier row), modern-headphone-anc-systems (keep-speech paradigm vs transparency modes)
+- **Extraction note**: MinerU timed out twice (vlm and pipeline); fell back to pdftotext with pdfimages, figure captions mapped via PyMuPDF bboxes; smask-derived PPMs converted to JPEG and dropped.

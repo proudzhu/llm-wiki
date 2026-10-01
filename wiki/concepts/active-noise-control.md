@@ -11,6 +11,7 @@ sources:
   - raw/papers/veluri-2023-semantic-hearing/full-text.md
   - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
   - raw/papers/cheng-2026-anc-gain-constraint/full-text.txt
+  - raw/papers/rao-2026-keep-speech-anc/full-text.txt
 aliases:
 - Active Noise Control
 tags:
@@ -56,6 +57,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 
 - **[[convolutional-recurrent-network|CRN]]-based Deep ANC**: End-to-end anti-noise generation using encoder-LSTM-decoder architecture with [[complex-spectrum-mapping|Complex Spectrum Mapping]] for precise phase control
 - **[[speech-preserving-anc|Speech-Preserving ANC]]**: Uses a modified loss function that algebraically cancels speech components, training the network to cancel only noise while leaving speech transparent
+- **[[concepts/reference-signal-enhancement|Reference Signal Enhancement]] (Rao et al. 2026)**: keep-speech ANC without touching the controller — a causal time-domain WaveNet (zero algorithmic delay) suppresses the speech contaminating the reference microphone signal, and a conventional RLS-adapted FIR control filter cancels only the noise; improves STOI/DNSMOS over Unprocessed, Conventional ANC, and DeepANC on measured headphone IRs, where DeepANC's frame-level CRN latency violates causality
 - SFANC/GFANC: Selective/Generative Fixed-Filter ANC uses CNNs for filter selection or generation, enabling instant response to changing noise types
 - **[[feedback-guided-controller-fusion|Feedback-guided Controller Fusion]]** (Bai 2026): Hybrid WaveNet + mixture-of-experts of FIR experts, where the MoE gating network consumes reference + control + **delayed residual-error** signals — closing the loop on the actual acoustic condition (unlike SFANC/GFANC, which use reference-side features only). 19.00 dB avg NR (50 Hz–5 kHz) on CCF-AATC headphone ANC with negligible 1–8 kHz amplification; 32.69k params / 672.93 MMac/s for the 10-expert streaming model.
 - **[[concepts/physics-informed-neural-network|PINN]]-assisted ANC** (Zhang 2024): A PINN interpolates the soundfield at virtual microphone positions from monitoring microphones placed outside the ROI, using the acoustic wave equation as a PDE residual loss. The interpolated signals drive a multi-channel FxLMS controller, achieving better noise reduction at the ear than a conventional multiple-point ANC system.
@@ -137,6 +139,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - [[sources/veluri-2023-semantic-hearing|Veluri et al. 2023: Semantic Hearing]] — uses ANC as an acoustic clean slate and reintroduces user-selected sound classes in real time; demonstrates coexistence with adaptive feedforward ANC on commercial headphones
 - [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC with a Conditional Control-Filter Estimation Network]] — FiLM-conditioned network estimates the full control-filter bank; cancels non-desired directions while preserving desired-direction sound
 - [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026: Active Noise Control With a Gain Constraint for Micro-Loudspeakers]] — design-time frequency-response gain constraint on fixed control filters to prevent micro-loudspeaker mechanical over-excursion
+- [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — keep-speech ANC with a causal WaveNet on the reference path and a conventional RLS FIR controller; zero added delay, improves STOI/DNSMOS over all baselines on measured headphone IRs
 
 ## Related Entities
 

@@ -1,0 +1,353 @@
+Interspeech 2026
+27 September - 1 October 2026, Sydney, Australia
+
+
+
+     A Causal Reference-Enhanced Keep-Speech Active Noise Control Method
+
+ Li Rao ID 1 , Xiaobin Rong ID 1,2 , Yu Sun3 , Yiming He1 , Kai Chen1 , Haishan Zou ID 1,∗∗ , Jing Lu ID 1,2
+        1
+        Key Laboratory of Modern Acoustics, Institute of Acoustics, Nanjing University, China
+ 2
+     NJU-Horizon Intelligent Audio Lab, Nanjing Institute of Advanced Artificial Intelligence, China
+                         3
+                           R&D Centre, Samsung Electronics (China), China
+                                           li.rao@smail.nju.edu.cn,hszou@nju.edu.cn
+
+
+
+                            Abstract                                       the same direction, and its performance strongly depends on the
+                                                                           beamforming quality.
+This paper proposes a causal, low-latency reference-enhanced                    In 2020, Niu et al. conducted listening experiments with
+keep-speech active noise control (KSANC) method, in which                  human-subjects in an anechoic chamber and showed that ANC
+a deep neural network is used to enhance the reference signal              enabled on earplugs and earmuffs improves speech recognition
+by suppressing speech components while retaining noise. As                 accuracy under simultaneous noise and speech conditions [10].
+a result, speech components in the error signal can be effec-              A natural implication of this observation is that, if ANC sup-
+tively preserved after control. The proposed method is vali-               presses noise exclusively without affecting speech, the speech
+dated through experiments using measured headphone impulse                 intelligibility and quality of the error signal could be further
+responses. The results demonstrate that the proposed approach              improved. This concept is referred to as keep-speech ANC
+improves speech intelligibility and speech quality in noisy con-           (KSANC) in this paper.
+versational scenarios for headphone applications, compared                      KSANC was first explored in the DeepANC [11], where
+with all baselines. Moreover, the method exhibits robustness to            a convolutional recurrent network (CRN) was used to replace
+different speech signals and directions, noise types and direc-            the control filter in a conventional ANC system. This approach
+tions, as well as varying signal-to-noise ratios. Listening exam-          enables noise attenuation while preserving speech, resulting in
+ples are available at https://github.com/RaoLi666/                         improved speech intelligibility and quality in the error signal.
+RSE_KSANC.git.                                                             However, CRN-based approaches inevitably introduce frame-
+Index Terms: keep-speech active noise control, reference en-               level latency, making it difficult to satisfy the strict causality
+hancement, speech intelligibility, speech quality improvement              constraints in practical applications such as headphones.
+                                                                                To improve the causality margin of KSANC, this paper pro-
+                      1. Introduction                                      poses a reference signal enhancement (RSE) method, which
+Noise pollution detrimentally affects human comfort and health.            uses a neural network to enhance the reference signal, while the
+While passive control is often ineffective in certain scenarios            control filter remains a conventional FIR filter. The method in-
+due to constraints on material volume and weight, active noise             troduces no additional delay and preserves low system latency,
+control (ANC) has been widely adopted in applications such as              leading to an increased causality margin.
+headphones, automobiles, and aircraft, due to its ease of imple-
+mentation, lightweight structure, and effectiveness in attenuat-                                   2. Method
+ing low-frequency noise [1, 2, 3, 4]. Noise also degrades the
+                                                                           2.1. Overall system
+quality of speech communication; however, neither passive nor
+active noise control techniques inherently distinguish between             Figure 1 illustrates the schematic diagram of the proposed RSE-
+noise and speech. Consequently, noise attenuation inevitably               based KSANC using a headphone system as an example. x(n)
+compromises speech quality. For instance, the reference mi-                and vr (n) denote the noise and speech components at the ref-
+crophone in ANC headphones captures both ambient noise and                 erence microphone, and xv (n) represents the original reference
+speech. Speech components is suppressed at the ear by the ANC              signal, given by
+system, which combined with the passive attenuation of the
+headphone shell, significantly degrades communication quality.                                 xv (n) = x(n) + vr (n).                   (1)
+     In conversational scenarios, in addition to turning ANC
+off, hear-through schemes based on high-pass filtering and gain            The error signal is denoted by e(n) and defined as
+compensation of external microphone signals have been em-
+ployed to compensate for passive attenuation, aiming to achieve                            e(n) = d(n) + ve (n) + y(n),                  (2)
+acoustically transparent listening [5, 6, 7, 8]. Nevertheless, it is
+evident that noise is also admitted “transparently”. Patel et al.          where d(n) and ve (n) denote the noise and speech components
+integrated superdirective microphone array beamforming with                at the error microphone, and y(n) denotes the anti-noise signal.
+multi-reference feedforward ANC to develop a directional hear-             In conventional ANC methods, the original reference xv (n) is
+through headphone system [9]. In this system, ambient sound                directly used to generate the control signal, which causes the
+is first attenuated by ANC, after which the beamformed signal              anti-noise signal y(n) to contain speech components and con-
+is injected into the ear to facilitate spatially selective listening.      sequently leads to speech suppression in the error signal.
+However, this approach fails when speech and noise arrive from                  To address this issue, a neural network (NN) is employed
+                                                                           to enhance the reference signal. The NN takes the original ref-
+  ** indicates the corresponding author.                                   erence signal xv (n) and the estimated noisy speech at the error
+
+
+
+
+                                                                        4966                             10.21437/Interspeech.2026-1608
+                                                                                   Figure 2: The neural network architecture.
+
+
+                                                                              The employed network architecture is illustrated in Fig-
+                                                                         ure 2. The overall structure follows the original WaveNet frame-
+                                                                         work, with several modifications introduced after the skip con-
+                                                                         nections to better accommodate the RSE task. Specifically, the
+                                                                         1×1 convolution after the skip connections is replaced by the
+                                                                         causal convolution, and the activation function is changed from
+                                                                         ReLU to tanh. The architecture employs an initial causal con-
+                                                                         volution with a kernel size of 32 and 128 channels, followed
+                                                                         by four stacks, each consisting of 12 layers with 128 channels
+                                                                         and a kernel size of 5. The output head comprises three causal
+Figure 1: Schematic diagram of the proposed RSE-based                    convolution layers with channel dimensions of 128 → 64 → 32
+KSANC framework.                                                         → 1 and kernel sizes of 5, 5, and 256. Using the loss function
+                                                                         Lenh (detailed below) as an example, the modified architecture
+                                                                         reduced the validation loss from 6.9 × 10−5 to 5.9 × 10−5
+microphone dˆv (n) as inputs, where dˆv (n) is an estimate of            compared with the original model, demonstrating the effective-
+                                                                         ness of the modifications. The modified model contains approx-
+                    dv (n) = d(n) + ve (n).                     (3)      imately 9.53 M parameters and requires approximately 38.12 G
+                                                                         MACs to process one second of reference signal. The network
+The estimate dˆv (n) is obtained as
+                                                                         was trained for 100 epochs using the Adam optimizer with an
+                  dˆv (n) = e(n) − ŝ ∗ u(n),                   (4)      initial learning rate of 5 × 10−5 . The learning rate was decayed
+                                                                         by a factor of 0.9 every 10 epochs.
+where ŝ denotes the estimate of the secondary path s, i.e., the
+transfer function from the headphone loudspeaker to the error            2.3. Loss functions
+microphone, and u(n) denotes the control signal. The NN out-
+put is the enhanced reference signal x̂(n), expressed as                 To suppress the noise component d(n) in the error signal while
+                                                                         preserving the speech component ve (n), the two loss functions
+                        x̂ = gφ (xv , dˆv ),                    (5)      for enhancing the reference signal are:
+
+where g(·) denotes the neural network and φ represents its pa-                   Lenh = E [d(n) + s ∗ w ∗ gφ (x + vr , d + ve )]2      (9)
+rameters. The enhanced reference x̂ is filtered by the control                                                            2
+                                                                               Lrefsep = E [x(n) − gφ (x + vr , d + ve )] ,           (10)
+filter w to generate the control signal
+                      u(n) = w ∗ x̂(n),                         (6)      where Lenh evaluates the KSANC performance at the error mi-
+                                                                         crophone by jointly considering noise suppression and speech
+which is then propagated through the secondary path s to pro-            preservation, while Lrefsep evaluates the noise extraction perfor-
+duce the anti-noise signal                                               mance at the reference microphone. For training with Lenh , the
+                                                                         optimal Wiener solution of the control filter w is computed fol-
+                       y(n) = s ∗ u(n).                         (7)
+                                                                         lowing [13, pp. 130–131] and substituted into Eq. 9 to evaluate
+By substituting Eqs. 5–7 into Eq. 2, and assuming that the sec-          Lenh , which is then minimized to optimize the network param-
+ondary path estimate is unbiased, we obtain                              eters φ. In contrast, training with Lrefsep directly minimizes the
+                                                                         mean squared error between the network output and the noise
+  e(n) = d(n) + ve (n) + s ∗ w ∗ gφ (x + vr , d + ve ) .        (8)      component x(n) at the reference microphone to optimize the
+                                                                         network parameters φ.
+2.2. RSE Network
+WaveNet [12] is a causal fully convolutional model that oper-                          3. Experimental settings
+ates directly in the time domain, making it well suited for ANC
+                                                                         3.1. Measured Headphone Impulse Responses
+tasks. When implemented with a convolution stride of 1 and
+causal padding, the network introduces no additional algorith-           We measured headphone impulse responses for experiment.
+mic delay. Motivated by these properties, we build upon and tai-         Figure 3 illustrates the experimental setup used for the trans-
+lor the WaveNet framework to the RSE task under strict causal-           fer function measurements. The 0◦ azimuth corresponds to the
+ity constraints.                                                         front of the head, while 90◦ corresponds to the right side. Loud-
+
+
+
+
+                                                                      4967
+                                                                                       (a)                               (b)
+
+                                                                         Figure 5: (a) Measured impulse responses of the loudspeaker
+                                                                         located at 45◦ and 1.0 m to microphones. (b) Measured sec-
+                                                                         ondary path.
+
+               Figure 3: Measurement diagram.
+                                                                         noise direction was randomly selected from all eight directions.
+
+                                                                         3.2. Noise and speech datasets
+                                                                         Following Shi et al. [14] and Luo et al. [15], band-limited noise
+                                                                         signals were generated by partitioning the full frequency band
+                                                                         (0–4000 Hz) into multiple subbands with different bandwidths.
+                                                                         The training set consisted of 31 frequency bands obtained us-
+                                                                         ing bandwidths of 4000, 2000, 1000, 500, and 250 Hz. The
+                                                                         validation and test sets were each constructed using 7 disjoint
+                                                                         frequency bands, with bandwidths and spectral locations dis-
+                                                                         tinct from those in the training set and from each other. For
+                                                                         each frequency band, 100 random noise signals of 10 s duration
+                                                                         were generated at a sampling rate of 8 kHz. To further evaluate
+                                                                         performance under real-world noise conditions, additional test
+                                                                         signals were generated using noise recordings from the DCASE
+              (a)                                (b)                     datasets [16, 17], including fan, engine, bearing, and gearbox
+                                                                         noises. For each noise type, 700 segments of 10 s duration were
+Figure 4: Photos. (a) Measurement environment. (b) Head-                 randomly selected and used for evaluation.
+phone details.                                                                The speech data were drawn from the LibriTTS corpus [18].
+                                                                         We randomly selected 200, 50, and 50 speakers for the training,
+                                                                         validation, and test sets, ensuring no speaker overlap and a bal-
+speakers were arranged at of 45◦ intervals and placed at dis-            anced gender distribution. The recordings were segmented into
+tances of 0.6 m and 1.0 m from the center of the head. The               10 s utterances, from which 3100, 700, and 700 samples were
+loudspeaker at 0.6 m was used to simulate a talker and repro-            randomly selected to match the corresponding noise datasets.
+duce speech signals, whereas the loudspeaker at 1.0 m was used                During experiments, the energy of the speech driving sig-
+to simulate a noise source and reproduce noise signals. Fig-             nal was adjusted such that a specified signal-to-noise ratio
+ure 4a shows the measurement environment with a loudspeaker              (SNR) was achieved hP at the reference   microphone,
+                                                                                                                          i     defined as
+                                                                                                N             PN
+located at 0◦ and 0.6 m, while Figure 4b details the headphone           SNR = 10 log10         n=1  vr
+                                                                                                       2
+                                                                                                         (n)/  n=1  x2
+                                                                                                                       (n)  . During train-
+configuration. The reverberation time T60 of the measurement             ing and validation, the SNR was randomly selected from −5,
+room was approximately 0.25 s.                                           5, and 15 dB. During testing, experiments were conducted at
+     The left and right earpieces of the headphones can be               SNRs of −5, 0, 5, 10, and 15 dB.
+treated as independent channels; thus, only the right earpiece
+was considered. Impulse responses from the loudspeakers to the
+reference and error microphones were measured with a length
+                                                                                        4. Experimental results
+of 256 taps at 8 kHz. Figure 5a shows the measured impulse               In the experiments, the ANC control filter was adaptively up-
+responses for the loudspeaker located at 45◦ and 1.0 m. The              dated using the Recursive Least Squares (RLS) algorithm with
+measured secondary path from the headphone loudspeaker to                a forgetting factor of 0.99999 and an initial covariance matrix of
+the error microphone is shown in Figure 5b. Since the tail co-           0.01 I. Speech intelligibility and quality were evaluated using
+efficients are relatively small, the secondary path was truncated        STOI and the non-intrusive metric DNSMOS (OVRL) [19], re-
+to 128 taps to reduce computational complexity.                          spectively, computed from the error signal over the last 3 s after
+     In typical conversational scenarios, the talker is usually lo-      the system reached steady state. Since conventional ANC may
+cated in front of the listener, whereas noise may arrive from ar-        suppress speech components, DNSMOS was adopted to assess
+bitrary directions. Accordingly, during training and validation,         perceptual speech quality.
+the talker direction was randomly selected from 270◦ , 0◦ , and               Table 1 reports the mean coherence between different refer-
+90◦ , while the noise direction was randomly selected from 0◦ ,          ence signals and the primary noise component d(n), as well
+90◦ , 180◦ , and 270◦ . During testing, the talker direction was         as the corresponding STOI and DNSMOS values. “Unpro-
+randomly selected from 270◦ , 315◦ , 0◦ , 45◦ , and 90◦ , and the        cessed” denotes the case without ANC. “Ideal KSANC” repre-
+
+
+
+
+                                                                      4968
+          Table 1: Mean coherence and STOI/DNSMOS of the error signals obtained using different methods at various SNRs.
+
+ Evaluation metrics                            Mean Coherence                                    STOI (in %)                                       DNSMOS
+ SNR (dB)                             -5        0    5     10             15       -5         0      5       10           15         -5       0       5    10             15
+ Unprocessed                           -        -    -      -              -      76.71     81.90 86.89 91.22            94.59      1.60    1.80     2.10 2.40           2.62
+ Ideal KSANC                         0.96     0.96 0.96 0.96             0.96     93.88     95.80 97.14 98.04            98.60      2.61    2.67     2.72 2.74           2.76
+ Conventional ANC                    0.84     0.73 0.58 0.42             0.26     75.17     74.25 72.53 70.90            70.51      1.72    1.71     1.69 1.69           1.73
+ DeepANC                               -        -    -      -              -      74.44     80.02 85.11 89.41            92.70      1.59    1.81     2.10 2.40           2.61
+ RSE-based KSANC (Lrefsep )          0.85     0.84 0.79 0.71             0.60     74.90     80.44 83.84 85.77            87.13      1.58    1.83     2.01 2.13           2.18
+ RSE-based KSANC (Lenh )             0.81     0.78 0.72 0.62             0.49     77.99     84.46 88.67 91.94            94.64      1.81    2.11     2.36 2.50           2.62
+
+      Table 2: Mean STOI and DNSMOS of the error signals obtained using different methods under real-world noise conditions.
+
+ Evaluation metrics                                      STOI (in %)                                                                 DNSMOS
+ SNR (dB)                                   -5                                    5                                   -5                                      5
+ Noise type                 fan    engine    bearing   gearbox    fan    engine   bearing   gearbox   fan    engine   bearing    gearbox   fan     engine     bearing   gearbox
+ Unprocessed               59.99    57.70     59.24     58.44    80.23    77.62     79.45    78.62    1.10    1.16      1.08       1.16    1.76     1.92        1.52      1.87
+ Ideal KSANC               91.08    87.57     90.88     89.50    95.94    93.90     95.74    95.15    2.63    2.55      2.63       2.58    2.68     2.65        2.67      2.66
+ Conventional ANC          63.90    59.43     64.60     64.52    58.96    55.16     60.15    60.46    1.31    1.18      1.31       1.38    1.27     1.10        1.31      1.35
+ DeepANC                   59.53    57.66     58.93     58.21    79.25    77.27     78.61    77.86    1.10    1.16      1.08       1.16    1.76     1.92        1.52      1.87
+ RSE-based KSANC (Lenh )   67.58    62.31     65.33     67.32    84.88    80.29     84.48    83.88    1.39    1.36      1.33       1.51    2.22     2.11        2.19      2.22
+
+
+
+
+sents ANC using the pure noise signal x(n) as the reference and
+serves as a theoretical upper performance bound, which is prac-
+tically unrealizable in real-world applications. “Conventional
+ANC” corresponds to ANC using the original reference sig-
+nal xv (n), while “RSE-based KSANC” denotes the proposed
+method. Taking the enhanced reference as an example, the co-
+herence is defined as
+                              s
+                                  |Sx̂d (f )|2
+                  γx̂d (f ) =                      ,       (11)
+                                Sx̂x̂ (f )Sdd (f )
+
+where Sx̂d (f ) is the cross power spectral density, and Sx̂x̂ (f )
+and Sdd (f ) are the corresponding auto power spectral densities.
+     As shown in Table 1, the RSE-based KSANC trained with
+                                                                                                             (a)                                            (b)
+Lenh achieves the best overall STOI and DNSMOS performance
+across a wide SNR range, consistently outperforming the Un-
+                                                                                            Figure 6: (a) Time-domain waveforms and (b) time–frequency
+processed case, Conventional ANC, DeepANC and the RSE-
+                                                                                            representations of a fan-noise sample at NSR = 5 dB.
+based KSANC trained with Lrefsep . The inferior performance
+of DeepANC is mainly due to to its larger processing delay,
+which violates the causality constraint. Although the Lrefsep -
+trained model yields higher coherence between the enhanced                                  multaneously suppressing noise and preserving speech, the pro-
+reference and target noise, this does not translate into improved                           posed method consistently outperforms all baselines. Figure 6
+STOI or DNSMOS, as its optimization is less aligned with the                                illustrates a representative fan-noise example at SNR = −5 dB,
+downstream ANC objective of jointly attenuating noise and pre-                              showing that the proposed method effectively attenuates noise
+serving speech. In contrast, Lenh is more directly tailored to                              while preserving speech, leading to higher STOI and DNSMOS.
+KSANC, resulting in superior perceptual performance. The
+slightly lower coherence of Lenh compared with Conventional                                                            5. Discussion
+ANC at SNR = −5 dB arises primarily above 2 kHz and has
+negligible perceptual impact, as ANC is predominantly effec-                                This paper presented a reference-enhanced active noise control
+tive at low frequencies.                                                                    method based on a time-domain WaveNet architecture with a
+     Compared with the Unprocessed case, Conventional ANC                                   large causality margin. The proposed method with two dis-
+provides only marginal DNSMOS improvement at SNR =                                          tinct training strategies was validated through experiments us-
+−5 dB, with no consistent STOI gains or benefits at higher                                  ing measured headphone impulse responses. Results show that
+SNRs. This limited improvement is attributed to the stationary                              the training strategy relying solely on the reference signal is
+band-limited white noise used, which minimally affects intelli-                             insufficient, whereas the error-domain training strategy effec-
+gibility, while Conventional ANC may suppress speech compo-                                 tively suppresses noise while preserving speech, leading to con-
+nents.                                                                                      sistent improvements in both speech intelligibility and percep-
+     Results under real-world noise conditions are summarized                               tual quality in noisy conversational scenarios. In addition, the
+in Table 2. In high-SNR scenarios, Conventional ANC performs                                proposed method demonstrates robust generalization to unseen
+worse than the Unprocessed case, as it suppresses speech com-                               conditions, including novel SNRs, speech signals, noise types,
+ponents together with the relatively weak noise. In contrast, in                            and source directions. Given the relatively high parameter count
+low-SNR scenarios where noise severely degrades the STOI and                                of the current WaveNet-based model, future work will focus
+DNSMOS of the speech, Conventional ANC improves perfor-                                     on model optimization and parameter reduction to facilitate de-
+mance by attenuating the dominant noise components. By si-                                  ployment on resource-constrained devices such as headphones.
+
+
+
+
+                                                                                      4969
+                  6. Acknowledgments                                          [16] K. Dohi, K. Imoto, N. Harada, D. Niizumi, Y. Koizumi,
+                                                                                   T. Nishida, H. Purohit, T. Endo, M. Yamamoto, and
+This work is supported by National Natural Science Foundation                      Y. Kawaguchi, “Description and discussion on DCASE 2022 chal-
+of China with Grant No. 12274221.                                                  lenge task 2: Unsupervised anomalous sound detection for ma-
+                                                                                   chine condition monitoring applying domain generalization tech-
+                                                                                   niques,” arXiv preprint, 2022.
+         7. Generative AI Use Disclosure
+                                                                              [17] L. Bondi, S. Ghaffarzadegan, S. Damiano, A. Kumar, H.-H.
+Generative AI tools were used solely for language editing                          Wu, W.-C. Lin, S. Das, H.-G. Horst, and T. van Waterschoot,
+and polishing to improve the clarity and readability of the                        “DCASE 2024 challenge task 10 development dataset: Acoustic-
+manuscript. All technical content, experimental design, results,                   based traffic monitoring,” Zenodo, 2024. [Online]. Available:
+and conclusions were produced and verified by the authors, who                     https://doi.org/10.5281/zenodo.10700792
+take full responsibility for the content of this paper.                       [18] H. Zen, V. Dang, R. Clark, Y. Zhang, R. J. Weiss, Y. Jia, Z. Chen,
+                                                                                   and Y. Wu, “LibriTTS: A corpus derived from LibriSpeech for
+                                                                                   text-to-speech,” arXiv preprint, 2019.
+                        8. References
+                                                                              [19] C. K. A. Reddy, V. Gopal, and R. Cutler, “DNSMOS P.835: A
+ [1] S. M. Kuo, S. Mitra, and W.-S. Gan, “Active noise control system              non-intrusive perceptual objective speech quality metric to evalu-
+     for headphone applications,” IEEE Trans. Control Systems Tech-                ate noise suppressors,” in Proc. IEEE Int. Conf. Acoust., Speech
+     nology, vol. 14, no. 2, pp. 331–335, 2006.                                    Signal Process. (ICASSP), 2022, pp. 886–890.
+ [2] W. Jung, S. J. Elliott, and J. Cheer, “Local active control of road
+     noise inside a vehicle,” Mechanical Systems and Signal Process-
+     ing, vol. 121, pp. 144–157, 2019.
+ [3] C.-Y. Chang, C.-T. Chuang, S. M. Kuo, and C.-H. Lin, “Multi-
+     functional active noise control system on headrest of airplane
+     seat,” Mechanical Systems and Signal Processing, vol. 167, p.
+     108552, 2022.
+ [4] C.-Y. Chang, A. Siswanto, C.-Y. Ho, T.-K. Yeh, Y.-R. Chen, and
+     S. M. Kuo, “Listening in a noisy environment: Integration of ac-
+     tive noise control in audio products,” IEEE Consumer Electronics
+     Magazine, vol. 5, no. 4, pp. 34–43, 2016.
+ [5] N. Lezzoum, G. Gagnon, and J. Voix, “Voice activity detection
+     system for smart earphones,” IEEE Trans. Consumer Electronics,
+     vol. 60, no. 4, pp. 737–744, 2015.
+ [6] V. Välimäki, A. Franck, J. Rämö, H. Gamper, and L. Savioja,
+     “Assisted listening using a headset: Enhancing audio perception
+     in real, augmented, and virtual environments,” IEEE Signal Pro-
+     cessing Magazine, vol. 32, no. 2, pp. 92–99, 2015.
+ [7] S. Liebich, R. Brandis, J. Fabry, P. Jax, and P. Vary, “Active
+     occlusion cancellation with hear-through equalization for head-
+     phones,” in Proc. IEEE Int. Conf. Acoust., Speech Signal Process.
+     (ICASSP), 2018, pp. 241–245.
+ [8] R. Gupta, R. Ranjan, J. He, and W.-S. Gan, “Parametric hear-
+     through equalization for augmented reality audio,” in Proc. IEEE
+     Int. Conf. Acoust., Speech Signal Process. (ICASSP), 2019, pp.
+     1587–1591.
+ [9] V. Patel, J. Cheer, and S. Fontana, “Design and implementation of
+     an active noise control headphone with directional hear-through
+     capability,” IEEE Trans. Consumer Electronics, vol. 66, no. 1, pp.
+     32–40, 2019.
+[10] F. Niu, X. Qiu, and D. Zhang, “Effects of active noise cancelling
+     headphones on speech recognition,” Applied Acoustics, vol. 165,
+     p. 107335, 2020.
+[11] H. Zhang and D. Wang, “Deep ANC: A deep learning approach to
+     active noise control,” Neural Networks, vol. 141, pp. 1–10, 2021.
+[12] A. van den Oord, S. Dieleman, H. Zen, K. Simonyan, O. Vinyals,
+     A. Graves, N. Kalchbrenner, A. Senior, and K. Kavukcuoglu,
+     “WaveNet: A generative model for raw audio,” arXiv preprint,
+     2016.
+[13] S. J. Elliott, Signal Processing for Active Control. London: Aca-
+     demic Press, 2001.
+[14] D. Shi, B. Lam, K. Ooi, X. Shen, and W.-S. Gan, “Selective fixed-
+     filter active noise control based on convolutional neural network,”
+     Signal Processing, vol. 190, p. 108317, 2022.
+[15] Z. Luo, D. Shi, J. Ji, X. Shen, and W.-S. Gan, “Real-time imple-
+     mentation and explainable AI analysis of delayless CNN-based
+     selective fixed-filter active noise control,” Mechanical Systems
+     and Signal Processing, vol. 214, p. 111364, 2024.
+
+
+
+
+                                                                           4970
+

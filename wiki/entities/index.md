@@ -622,4 +622,5 @@
 | [[entities/yin-liu\|Yin Liu]] | CQUPT — co-author of ANC-FRC (Interspeech 2026): design-time frequency-response gain constraint for micro-loudspeakers. | 2026-10-01 |
 | [[entities/yu-zhao\|Yu Zhao]] | CQUPT — co-author of ANC-FRC (Interspeech 2026): design-time frequency-response gain constraint for micro-loudspeakers. | 2026-10-01 |
 | [[entities/liming-shi\|Liming Shi]] | CQUPT — corresponding author of ANC-FRC (Interspeech 2026): design-time frequency-response gain constraint for micro-loudspeakers. | 2026-10-01 |
+| [[entities/li-rao\|Li Rao]] | Nanjing University researcher; lead author of causal reference-enhanced keep-speech ANC (Interspeech 2026). | 2026-10-01 |
 

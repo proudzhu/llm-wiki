@@ -10,6 +10,7 @@ sources:
   - raw/papers/kim-2014-doa-based-snr-estimation/full-text.txt
   - raw/papers/pan-2025-data-driven-acoustics/full-text.md
   - raw/papers/cheng-2026-anc-gain-constraint/full-text.txt
+  - raw/papers/rao-2026-keep-speech-anc/full-text.txt
 tags:
 - mathematics
 - signal-processing
@@ -36,6 +37,7 @@ Where:
 In **[[active-noise-control|Active Noise Control]]**, the Wiener filter represents the theoretical optimal controller for a given acoustic path.
 - **Feedforward ANC**: The optimal $W(z) = P(z)/S(z)$, which is a Wiener filter that models the primary path while compensating for the secondary path.
 - **Constrained anchor (Cheng 2026)**: When the unconstrained Wiener–Hopf solution $\mathbf{w}_{\mathrm{opt}} = -\mathbf{R}_{x'}^{-1}\mathbf{r}_{dx'}$ demands more low-frequency gain than a micro-loudspeaker can reproduce (driving it toward mechanical over-excursion), it can still serve as the **regularization target**: [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026]] constrain the filter's low-frequency response with an ∞-norm gain limit while an ℓ2 term pulls the unconstrained band toward $\mathbf{w}_{\mathrm{opt}}$ (see [[concepts/frequency-response-constrained-anc|ANC-FRC]]) — the Wiener optimum remains the reference even when it is not implementable.
+- **Training-time substitute (Rao 2026)**: In neural reference enhancement for keep-speech ANC, [[sources/rao-2026-keep-speech-anc|Rao et al. 2026]] compute the **Wiener-optimal control filter** for the current network state and substitute it into the error-domain training loss, so the enhancement network is optimized against the best possible closed loop — a training-time role for the Wiener solution, with an RLS-adapted FIR filter running at inference.
 - **Feedback ANC**: The optimal controller for minimizing the variance of the error signal can be derived as a Wiener filter using the **Internal Model Control (IMC)** structure (Pawelczyk 1997).
 
 ## Limitations
@@ -119,3 +121,4 @@ where the $k$-th element of $\hat{\bm{h}}(t)$ approximates the optimal Wiener ga
 - [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]] — joint SNR–CDR Wiener gain with two trade-off hyperparameters
 - [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — the Wiener gain as a BCE-trained supervised target of a neural network (Section 7.2.1)
 - [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026: Active Noise Control With a Gain Constraint for Micro-Loudspeakers]] — the unconstrained Wiener optimum as ℓ2 regularization anchor when gain constraints make it unimplementable
+- [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — Wiener-optimal control filter substituted into the error-domain loss to train the reference-enhancement network against the best closed loop

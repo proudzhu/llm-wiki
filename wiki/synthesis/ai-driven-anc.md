@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-17
-updated: 2026-09-28
+updated: 2026-10-01
 tags:
   - active-noise-control
   - adaptive-filtering
@@ -14,6 +14,7 @@ sources:
   - raw/papers/veluri-2023-semantic-hearing/full-text.md
   - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
   - raw/papers/rout-2012-pso-anc-without-secondary-path/full-text.txt
+  - raw/papers/rao-2026-keep-speech-anc/full-text.txt
 ---
 # AI-Driven Active Noise Control
 
@@ -73,6 +74,12 @@ A sixth architectural pattern — the network occupies neither the control path 
 
 A seventh architectural pattern: **direction-conditioned generation of the complete control-filter bank with an explicit preservation objective**. [[concepts/direction-preserving-anc|DP-ANC]] (Yang et al. 2026) generates all $K \times L_w$ FIR coefficients in one forward pass from a 0.5 s mixed-reference observation *plus the user-specified desired direction* (injected via FiLM into every conv block), and is trained through a differentiable secondary-path-aware forward model on a component-separated loss — residual noise + $\lambda$-weighted desired-induced control response. This adds a third comparison axis to Sections 2.5–2.6: **what the control objective preserves** — none of the earlier patterns (SFANC, GFANC, Deep ANC, DeepSPE, Bai 2026, CAPF) train with a preservation term; DP-ANC is the first filter-estimation network to do so, dominating the analytical SSANC frontier by 0.7–3.1 dB NR at matched distortion at ≈1/3000 of the per-observation compute.
 
+### 2.9 Neural Reference Enhancement for Keep-Speech ANC (Rao 2026)
+
+An eighth architectural pattern: **neural enhancement of the reference signal itself**, rather than compression (CAPF, §2.6) or control (§2.1–2.5, §2.8). [[concepts/reference-signal-enhancement|Rao et al. 2026]] address conversational ANC, where the reference microphone captures speech along with noise and conventional ANC suppresses both: a causal time-domain WaveNet (stride 1, causal padding → **zero additional algorithmic delay**) suppresses the speech component of the reference, and a conventional RLS-adapted FIR control filter cancels only the noise. On the stage axis of §2.6 this occupies the reference path like CAPF but with the opposite purpose — *de-speaking* the reference (making ANC speech-aware) vs. decorrelating/compressing references (making multi-reference adaptation tractable); on the objective axis of §2.8 it trains with a preservation term, like DP-ANC, but the error-domain loss $E[d + s \ast w \ast g_\phi]^2$ (Wiener-optimal control filter substituted during training) preserves *speech in the error signal* rather than a desired spatial direction.
+
+The empirical contrast with §2.3 is instructive: on measured headphone IRs, DeepANC's frame-level CRN latency violates causality and degrades it to near-unprocessed STOI/DNSMOS, while the zero-delay RSE variant improves both metrics over all baselines (STOI 77.99 vs. 76.71 unprocessed / 75.17 conventional ANC at −5 dB SNR; DNSMOS 1.81 vs. 1.60 / 1.72), and a reference-domain noise-extraction loss underperforms the error-domain loss despite *higher* reference-to-noise coherence — optimizing the reference fidelity alone does not serve the closed-loop objective. The reported 9.53 M parameters / 38.12 GMACs per second leave model reduction for headphone deployment as future work.
+
 ---
 
 ## 3. The Efficiency Frontier: Real-Time Implementation
@@ -89,6 +96,7 @@ The primary hurdle for AI-driven ANC is the computational cost of deep networks 
 | **Neural reference projection** (He 2026) | Moderate (374.0 MMAC/s, 500k params) | Compresses 42 correlated references to 4; keeps adaptive back end; +2.6 dBA over FDFxNLMS | Automotive road noise |
 | **Semantic hearing** (Veluri 2023) | Moderate (240 MFLOPS, 0.52M params, 6.56 ms/chunk on smartphone) | Reintroduces user-selected sound classes on top of the ANC clean slate, preserving spatial cues | ANC headphones + phone |
 | **Direction-conditioned filter generation** (Yang 2026) | Low per estimate (0.00946 GMACs/filter bank, 956k params, 0.5 s block) | Cancels non-desired directions while preserving desired-direction sound; 22.8 dB NR at −11.4 dB desired-response distortion | Hearables / in-ear devices |
+| **Reference enhancement for KSANC** (Rao 2026) | High (38.12 GMAC/s, 9.53M params — reduction is future work) | Zero-delay speech-aware ANC: de-speeched reference + conventional RLS FIR controller; STOI/DNSMOS gains over all baselines; large causality margin | Headphones (conversational scenarios) |
 
 ### 3.1 Neural Stability and Robustness
 Recent research focuses on using RNNs as "stability observers." By predicting the innovative whiteness of the error signal, the network can dynamically adjust the step-size of a traditional FxLMS filter, preventing divergence during impulsive events without the full overhead of an end-to-end neural controller.
@@ -123,3 +131,4 @@ Recent research focuses on using RNNs as "stability observers." By predicting th
 - [[sources/veluri-2023-semantic-hearing|Veluri et al. 2023: Semantic Hearing]] — sixth pattern: neural processing on the playback path (ANC clean slate + class-selective binaural reinsertion)
 - [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC with a Conditional Control-Filter Estimation Network]] — direction-conditioned full-bank generation with cancellation–preservation objective
 - [[sources/rout-2012-pso-anc-without-secondary-path|Rout et al. 2012: PSO-Based ANC Without Secondary Path Identification]] — pre-deep-learning evolutionary branch: online CRPSO control with no secondary-path estimate
+- [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — eighth pattern: zero-delay neural reference enhancement (de-speaking) with a conventional RLS FIR controller; keep-speech ANC with a large causality margin

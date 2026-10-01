@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-09-03
+updated: 2026-10-01
 sources:
+  - raw/papers/rao-2026-keep-speech-anc/full-text.txt
 tags:
   - deep-learning
   - neural-network-architecture
@@ -44,7 +45,7 @@ The CRN follows an **encoder-decoder** structure with a recurrent bottleneck:
 
 ## Applications
 
-- **Deep ANC**: End-to-end anti-noise generation (Zhang & Wang 2021, Dai 2026)
+- **Deep ANC**: End-to-end anti-noise generation (Zhang & Wang 2021, Dai 2026) — note that the STFT frame structure of CRN controllers introduces frame-level algorithmic latency, which violates the strict causality margins of headphone ANC (Rao et al. 2026 observed DeepANC degrading to near-unprocessed STOI/DNSMOS on measured headphone IRs for exactly this reason, motivating their zero-delay [[concepts/reference-signal-enhancement|reference-enhancement]] alternative)
 - **Speech Enhancement**: Real-time noise suppression (Tan & Wang 2018)
 - **DCCRN**: Deep Complex CRN won 1st place in Interspeech 2020 Deep Noise Suppression Challenge
 - **Attention Recurrent Network (ARN)**: CRN variant with attention for lower latency (Zhang et al. 2023)
@@ -77,3 +78,4 @@ The CRN follows an **encoder-decoder** structure with a recurrent bottleneck:
 - [[sources/zhao-2024-sicrn|Zhao, He & Zhang 2024: SICRN]] — inplace CRN variant with a state-space (S4ND) global branch; near-FullSubNet quality on DNS Challenge at 0.38× params, 0.14× MACs, 0 ms look-ahead
 - [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke et al. 2021: Low-Complexity Artificial Noise Suppression]] — CRN as postfiltering front-end baseline; SPP-based postfilter lifts CRN PESQ 2.59 → 2.74
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — compares the MC-CRN multichannel extension as low-compute baseline
+- [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — shows the CRN (DeepANC) controller's frame-level latency violating headphone ANC causality, motivating a zero-delay time-domain alternative

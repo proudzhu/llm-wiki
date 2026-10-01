@@ -628,6 +628,7 @@
 | [[entities/yin-liu\|Yin Liu]] | CQUPT — co-author of ANC-FRC (Interspeech 2026): design-time frequency-response gain constraint for micro-loudspeakers. | 2026-10-01 |
 | [[entities/yu-zhao\|Yu Zhao]] | CQUPT — co-author of ANC-FRC (Interspeech 2026): design-time frequency-response gain constraint for micro-loudspeakers. | 2026-10-01 |
 | [[entities/liming-shi\|Liming Shi]] | CQUPT — corresponding author of ANC-FRC (Interspeech 2026): design-time frequency-response gain constraint for micro-loudspeakers. | 2026-10-01 |
+| [[entities/li-rao\|Li Rao]] | Nanjing University researcher; lead author of causal reference-enhanced keep-speech ANC (Interspeech 2026). | 2026-10-01 |
 
 ---
 
@@ -1198,6 +1199,7 @@
 | [[concepts/signal-subspace-speech-enhancement\|Signal Subspace Speech Enhancement]] | Family of methods enhancing speech by decomposing the signal subspace (SVD/KLT/GSVD) and applying a diagonal gain to speech-dominant components; taxonomy along signal/noise subspace choice, gain rule, and filter structure. | 2026-10-01 |
 | [[concepts/frequency-response-constrained-anc\|Frequency-Response Constrained ANC (ANC-FRC)]] | Pre-training fixed ANC control filters under an ∞-norm low-frequency gain constraint plus an ℓ2 anchor to the Wiener optimum, preventing micro-loudspeaker over-excursion without added group delay. | 2026-10-01 |
 | [[concepts/mechanical-over-excursion\|Mechanical Over-Excursion]] | Transducer-side limit of (micro-)loudspeakers: diaphragm displacement beyond mechanical limits, triggered by high low-frequency gain of unconstrained ANC control filters against rolled-off low-frequency response. | 2026-10-01 |
+| [[concepts/reference-signal-enhancement\|Reference Signal Enhancement]] | Neural network on the ANC reference path that suppresses speech while a conventional FIR controller cancels the noise — zero added delay, large causality margin (Rao 2026). | 2026-10-01 |
 
 ---
 
@@ -1444,6 +1446,7 @@
 | [[sources/hoshuyama-1999-robust-adaptive-beamformer-ccaf\|Hoshuyama, Sugiyama & Hirano 1999]] | Robust GSC with a coefficient-constrained adaptive blocking matrix and a norm-constrained canceller - 20 deg target-direction-error tolerance with no loss of interference-reduction degrees of freedom; 19 dB IRR and 3.8 MOS at 0.3-s reverberation | 2026-09-30 |
 | [[sources/doclo-2002-gsvd-optimal-filtering\|Doclo & Moonen 2002]] | This paper proposes a generalized singular value decomposition (GSVD) based algorithm for enhancing multimicrophone speech signals degraded by additive colored noise, unifying single-microphone signal subspace techniques and multichannel optimal filtering in one framework. | 2026-10-01 |
 | [[sources/cheng-2026-anc-gain-constraint\|Cheng, Zhou, Liu, Zhao & Shi 2026]] | This paper proposes ANC-FRC, a method for pre-training fixed ANC control filters under a frequency-response gain constraint, so that the control signal stays within the limited low-frequency reproduction capability of micro-loudspeakers without adding group delay. | 2026-10-01 |
+| [[sources/rao-2026-keep-speech-anc\|Rao, Rong, Sun, He, Chen, Zou & Lu 2026]] | Causal keep-speech ANC: a zero-delay WaveNet de-speeches the reference while a conventional RLS FIR filter cancels only noise; error-domain loss beats reference-domain. | 2026-10-01 |
 
 ---
 
@@ -1497,10 +1500,10 @@
 
 ## Statistics
 
-- **Total pages**: 1446
-- **Entities**: 618
-- **Concepts**: 561
-- **Sources**: 237
+- **Total pages**: 1449
+- **Entities**: 619
+- **Concepts**: 562
+- **Sources**: 238
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-10-01
+- **Last updated**: 2026-10-02

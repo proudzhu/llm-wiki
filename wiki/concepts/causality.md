@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-09-12
+updated: 2026-10-01
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
+  - raw/papers/rao-2026-keep-speech-anc/full-text.txt
   - wiki/sources/shen-2023-advanced-anc.md
   - raw/papers/zhang-2014-causality-feedforward-anc-headset/full-text.md
   - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
@@ -81,6 +82,7 @@ The reported results sidestep this because evaluation is offline simulation: the
 2. **Reduce loop delay**: Faster ADCs/DACs, shorter filter lengths, efficient DSP implementations
 3. **Prediction-based approaches**: Use signal predictability to compensate for delay (effective for periodic noise)
 4. **Multiple reference microphones**: Place additional reference microphones on the headset to ensure causal reference for noise from any direction (Zhang & Qiu 2014)
+5. **Zero-delay neural reference enhancement** (Rao 2026): keep the conventional FIR control filter inside the loop (its delay budget unchanged) and place a fully causal, stride-1 time-domain WaveNet on the **reference path** to enhance the signal before it reaches the filter — the network adds no algorithmic delay, so the causality margin is preserved while the DNN handles what linear filters cannot (speech/noise separation in the reference). This contrasts with DeepANC-style CRN controllers, whose frame-based analysis–synthesis latency consumes the margin; empirically, DeepANC's delay reduced it to near-unprocessed performance, whereas the RSE-based KSANC retained its gains
 
 ## Related Concepts
 
@@ -100,4 +102,5 @@ The reported results sidestep this because evaluation is offline simulation: the
 - [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] — degree of causality in hearing aids; two-sample realistic margin
 - [[sources/hu-2026-abse-net|Hu et al. 2026: ABSE-NET]] — neural ABSE whose STFT pipeline (≥ 20–40 ms delay) violates the hearing-aid causality margin; offline simulation defers rather than solves the constraint
 - [[sources/xiao-2023-spatially-selective-anc|Xiao, Xu & Zhao 2023: Spatially Selective Active Noise Control Systems]]
+- [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — zero-delay causal WaveNet on the reference path so the FIR controller's delay budget is preserved; DeepANC's frame-level CRN latency degrades it to near-unprocessed performance
 

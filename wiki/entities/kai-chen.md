@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-08-21
-updated: 2026-09-05
+updated: 2026-10-02
 tags:
   - researcher
   - active-noise-control
@@ -25,3 +25,9 @@ tags:
 - Co-author of "Neural Projection Filter Generation for Multi-Reference Active Noise Control" (IEEE Signal Processing Letters 2026) — condition-aware projection filtering (CAPF/CAPFNet) for multi-reference ANC — [[sources/he-2026-neural-projection-filter-anc|He et al. 2026]]
 - Co-author of "A neural reference projection-based method for multi-reference active noise control (L)" (J. Acoust. Soc. Am. 2026, vol. 159(5), pp. 4482–4486) — neural reference projection for multi-reference ANC
 - Co-author of "Speech extraction under extremely low SNR conditions" (Applied Acoustics 2024) — low-SNR blind source extraction via natural-gradient OGIVE — [[sources/ruan-2024-speech-extraction-low-snr|Ruan et al. 2024]]
+- Co-author of "Causal Reference-Enhanced Keep-Speech Active Noise Control" (Interspeech 2026, Sydney, Australia, pp. 4966–4970, 2026) — causal WaveNet-based reference enhancement for keep-speech ANC with a conventional FIR control filter — [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026]]
+
+
+## Related Sources
+
+- [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]]

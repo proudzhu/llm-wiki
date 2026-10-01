@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-09-27
+updated: 2026-10-01
 tags:
   - active-noise-control
   - bone-conduction
@@ -15,6 +15,7 @@ sources:
   - zotero://select/items/0_AMKNDVMJ (Toyooka 2026)
   - raw/papers/veluri-2023-semantic-hearing/full-text.md
   - raw/papers/watanabe-2026-low-frequency-harmonic-control/full-text.md
+  - raw/papers/rao-2026-keep-speech-anc/full-text.txt
 ---
 
 # Modern Headphone ANC Systems: Beyond Noise Cancellation
@@ -194,6 +195,7 @@ The rise of Open-Ear (OWS) devices creates a new ANC challenge: the primary nois
 1. **Acoustic Transparency as an AI Pipeline**: Transparency is no longer a static filter; it is an AI-driven reconstruction that filters, enhances, or modifies the external soundscape based on user intent (e.g., selective attenuation).
 2. **Hardware-Algorithm Co-Design**: Future ANC designs will not be algorithm-first (e.g., picking FXLMS vs. MPC), but form-factor-first (e.g., prioritizing sensor placement for VAD/Bone Conduction alongside primary error microphones).
 3. **Semantic Selectivity, Not Just Attenuation**: [[concepts/semantic-hearing|Semantic hearing]] (Veluri et al. 2023) makes the "selective attenuation" vision concrete — ANC provides the acoustic clean slate, and a real-time binaural network reintroduces only user-chosen sound *classes* (speech, sirens, birds — 20 classes selectable, LLM-mapped natural-language queries in the prototype UI) while preserving their spatial cues. This is the class-aware generalization of the awareness layer (§2): instead of a VAD deciding *whether* to be transparent, a class query decides *what* to be transparent to. Its 20–50 ms end-to-end budget and 6.56 ms smartphone inference fit the per-chunk compute regime of §6.3; wireless form factors would need the extraction moved onto the headset SoC.
+4. **Keep-Speech ANC as an Alternative to Transparency Modes**: [[sources/rao-2026-keep-speech-anc|Rao et al. 2026]] show a third route to conversation awareness that requires neither mode switching (§2's VAD-triggered transparency) nor synthetic reinsertion (§3 above): make the ANC itself speech-aware. A zero-delay causal WaveNet suppresses the speech contaminating the reference microphone, so the conventional FIR controller cancels only noise and the *physical* speech wave arrives at the eardrum naturally — no transparency reconstruction, no binaural synthesis, and no VAD gating. On measured headphone IRs this improves both STOI and DNSMOS over conventional ANC across SNRs (conventional ANC even drops *below* unprocessed at 5 dB SNR with real-world noise because it cancels speech), and it generalizes to unseen SNRs, directions, and noise types. The current cost (9.53 M params, 38.12 GMACs/s) exceeds the ~170 MIPS budget of §6.3, so deployment awaits the model-reduction work the authors identify as future work.
 
 ---
 
@@ -254,6 +256,7 @@ This requires a dedicated DSP (e.g., Qualcomm QCC5141, ~200 MIPS capability).
 - [[sources/miran-2026-imu-feedback-cancellation|Miran 2026: IMU-Based Acoustic Feedback Cancellation]]
 - [[sources/veluri-2023-semantic-hearing|Veluri et al. 2023: Semantic Hearing]] — class-selective binaural reinsertion on top of the ANC clean slate; the headphone as a programmable acoustic scene platform
 - [[sources/watanabe-2026-low-frequency-harmonic-control|Watanabe et al. 2026: Low-Frequency Harmonic Control]] — open-ear playback intelligibility via signal adaptation (harmonic energy reallocation) rather than noise control
+- [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — conversation awareness without transparency mode: zero-delay reference de-speaking keeps the physical speech wave while ANC cancels only noise
 
 ## Related Synthesis
 
