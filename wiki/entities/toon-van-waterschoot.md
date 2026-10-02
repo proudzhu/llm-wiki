@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-08-07
-updated: 2026-08-08
+updated: 2026-10-02
 tags:
   - researcher
   - acoustic-feedback
@@ -22,9 +22,11 @@ tags:
 - Co-authored "Comparative evaluation of howling detection criteria in notch-filter-based howling suppression" (J. Audio Eng. Soc., 2010) — the reference survey of state-of-the-art HD features that this paper builds upon and benchmarks against
 - Acquired funding for the NINOS²-T research (KU Leuven Internal Funds; ERC Consolidator Grant SONORA, no. 773268)
 - Co-authored "Regularized Adaptive Notch Filters for Acoustic Howling Suppression" (EUSIPCO 2009) — an early KU Leuven contribution introducing the [[concepts/regularized-adaptive-notch-filter|RANF]] signed-regularization howling-detection method for NHS in PA systems, predating the 2010 JAES HD-feature survey and the 2011 *Proc. IEEE* survey (cited here as the 2008 ESAT-SISTA technical report) — [[sources/gil-cacho-2009-regularized-adaptive-notch-filters|Gil-Cacho, van Waterschoot, Moonen & Jensen 2009]]
+- Co-author of "Steered Response Power for Sound Source Localization — a Tutorial Review" (EURASIP Journal on Audio, Speech, and Music Processing 2024(1):59, 2024) — the tutorial review of 200+ SRP papers and variants, introducing the X-SRP modular framework and Python library — [[sources/grinstein-2024-srp-tutorial-review|Grinstein, Tengan, Çakmak et al. 2024]]
 
 ## Related Sources
 
 - [[sources/vanwaterschoot-2011-fifty-years-afc|van Waterschoot & Moonen 2011]]
 - [[sources/mounir-2025-robust-early-howling-detection-sparsity|Mounir, Bernardi & van Waterschoot 2025]]
 - [[sources/gil-cacho-2009-regularized-adaptive-notch-filters|Gil-Cacho et al. 2009: Regularized Adaptive Notch Filters for AHS]]
+- [[sources/grinstein-2024-srp-tutorial-review|Grinstein, Tengan, Çakmak et al. 2024: Steered Response Power for Sound Source Localization — a Tutorial Review]]

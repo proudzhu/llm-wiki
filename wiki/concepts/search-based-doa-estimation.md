@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-22
-updated: 2026-08-22
+updated: 2026-10-02
 sources:
   - raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md
+  - raw/papers/grinstein-2024-srp-tutorial-review/full-text.md
 tags:
   - direction-of-arrival
   - multi-channel
@@ -14,7 +15,7 @@ tags:
 
 # Search-based DoA Estimation (for SSF)
 
-**Search-based DoA estimation** for the [[concepts/spatially-selective-nonlinear-filter|Spatially Selective Filter (SSF)]] is a blind-localization strategy proposed by Tesch & Gerkmann (2024): evaluate the SSF on a grid of candidate target directions, compute the energy of each filtered output, and detect speaker locations as peaks in the resulting energy curve. It exploits the SSF's inherent spatial selectivity to turn the filter itself into a localizer, at the cost of one SSF forward pass per candidate direction.
+**Search-based DoA estimation** for the [[concepts/spatially-selective-nonlinear-filter|Spatially Selective Filter (SSF)]] is a blind-localization strategy proposed by Tesch & Gerkmann (2024): evaluate the SSF on a grid of candidate target directions, compute the energy of each filtered output, and detect speaker locations as peaks in the resulting energy curve. It exploits the SSF's inherent spatial selectivity to turn the filter itself into a localizer, at the cost of one SSF forward pass per candidate direction. The classical archetype of this trade-off is [[concepts/steered-response-power|SRP]], whose literature offers a large toolbox for reducing exactly this cost (volumetric pooling, iterative grid refinement, stochastic region contraction) — surveyed systematically by [[sources/grinstein-2024-srp-tutorial-review|Grinstein et al. 2024]].
 
 ## Procedure
 
@@ -54,7 +55,9 @@ JNF-SSF yields tighter localization than McNet-SSF — JNF's stronger spatial se
 - [[concepts/joint-nonlinear-filtering|Joint Nonlinear Filtering (JNF)]]
 - [[concepts/mcnet|McNet]]
 - [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]]
+- [[concepts/steered-response-power|Steered-Response Power]] — the classical grid-search localizer archetype and its complexity-reduction toolbox
 
 ## Related Sources
 
 - [[sources/tesch-2024-spatially-selective-nonlinear-filters|Tesch & Gerkmann 2024: Multi-channel Speech Separation Using Spatially Selective Deep Non-linear Filters]]
+- [[sources/grinstein-2024-srp-tutorial-review|Grinstein et al. 2024: SRP for Sound Source Localization — a Tutorial Review]] — the SRP grid-search cost-reduction toolbox (volumetric pooling, iterative refinement, region contraction)

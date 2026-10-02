@@ -10,6 +10,7 @@ sources:
   - raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt
   - raw/papers/tervo-2009-sound-intensity-direction/full-text.md
   - raw/articles/wikipedia-steered-response-power.md
+  - raw/papers/grinstein-2024-srp-tutorial-review/full-text.md
 tags:
   - signal-processing
   - array-processing
@@ -27,6 +28,8 @@ DoA estimation exploits the spatial diversity of microphone arrays to determine 
 
 - **Classical methods**: Beamforming-based scanning (delay-and-sum, e.g. [[concepts/steered-response-power|SRP/SRP-PHAT]]), MVDR spatial spectrum, MUSIC, ESPRIT, and [[concepts/intensity-vector-doa-estimation|intensity-vector methods]] that read direction off the physical energy flow measured by a compact [[concepts/sound-intensity-vector|sound intensity]] probe
 - **Data-driven methods**: Neural networks (CNN, CRNN) trained to classify or regress DoA from multichannel spectrograms
+
+[[sources/grinstein-2024-srp-tutorial-review|Grinstein et al. 2024]] give the beamforming-scanning branch's canonical taxonomy: DOA estimation is the far-field (compact-array) limit of position SSL, where the range is not identifiable and only azimuth/elevation grids are searched; under high SNR and inter-microphone-independent reverberation, the SRP scan equals the maximum-likelihood SSL estimator.
 
 ## DoA for ANC
 
@@ -97,3 +100,4 @@ Before the DL era, [[sources/tervo-2009-sound-intensity-direction|Tervo (EUSIPCO
 - [[sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation|Görtz et al. 2026: Blind DDAP Estimation Using Smart Glasses]] — head rotation exploited for direction-dependent parameter estimation
 - [[sources/tervo-2009-sound-intensity-direction|Tervo 2009: Direction Estimation Based on Sound Intensity Vectors]] — conventional intensity-vector DoA estimators compared on real concert-hall data
 - [[sources/wikipedia-steered-response-power|Wikipedia: Steered-Response Power]] — reference formulation of the SRP-PHAT classical baseline
+- [[sources/grinstein-2024-srp-tutorial-review|Grinstein et al. 2024: SRP for Sound Source Localization — a Tutorial Review]] — far-field DOE/SSL distinction, SRP ≡ ML reduction, and the SRP-variant taxonomy

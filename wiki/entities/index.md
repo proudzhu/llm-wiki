@@ -623,4 +623,9 @@
 | [[entities/yu-zhao\|Yu Zhao]] | CQUPT — co-author of ANC-FRC (Interspeech 2026): design-time frequency-response gain constraint for micro-loudspeakers. | 2026-10-01 |
 | [[entities/liming-shi\|Liming Shi]] | CQUPT — corresponding author of ANC-FRC (Interspeech 2026): design-time frequency-response gain constraint for micro-loudspeakers. | 2026-10-01 |
 | [[entities/li-rao\|Li Rao]] | Nanjing University researcher; lead author of causal reference-enhanced keep-speech ANC (Interspeech 2026). | 2026-10-01 |
+| [[entities/elisa-tengan\|Elisa Tengan]] | KU Leuven (ESAT-STADIUS) researcher; co-author of the SRP tutorial review and X-SRP library | 2026-10-02 |
+| [[entities/bilgesu-cakmak\|Bilgesu Çakmak]] | KU Leuven (ESAT-STADIUS) researcher; co-author of the SRP tutorial review and X-SRP library | 2026-10-02 |
+| [[entities/thomas-dietzen\|Thomas Dietzen]] | KU Leuven (ESAT-PSI) researcher; co-author of the SRP tutorial review and X-SRP library | 2026-10-02 |
+| [[entities/leonardo-nunes\|Leonardo Nunes]] | Microsoft Research researcher; co-author of the SRP tutorial review and X-SRP library | 2026-10-02 |
+| [[entities/mike-brookes\|Mike Brookes]] | Imperial College London researcher; speech processing; co-author of the SRP tutorial review | 2026-10-02 |
 

@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-08-08
-updated: 2026-08-08
+updated: 2026-10-02
 sources:
   - raw/papers/richard-2023-audio-signal-processing-21st-century/full-text.md
 tags:
@@ -25,6 +25,7 @@ tags:
 - Co-authored Acoustic SLAM for microphone-equipped devices exploring/interacting with sound sources (IEEE/ACM TASLP 2018, cited as [14])
 - Co-authored "Theory and Applications of Spherical Microphone Array Processing" (Springer, 2017, cited as [15])
 - Co-led the ACE challenge for blind room-acoustic-parameter estimation
+- Co-author of "Steered Response Power for Sound Source Localization — a Tutorial Review" (EURASIP Journal on Audio, Speech, and Music Processing 2024(1):59, 2024) — the tutorial review of 200+ SRP papers and variants, introducing the X-SRP modular framework and Python library — [[sources/grinstein-2024-srp-tutorial-review|Grinstein, Tengan, Çakmak et al. 2024]]
 
 ## Related Concepts
 
@@ -37,3 +38,4 @@ tags:
 ## Related Sources
 
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023: Audio Signal Processing in the 21st Century]]
+- [[sources/grinstein-2024-srp-tutorial-review|Grinstein, Tengan, Çakmak et al. 2024: Steered Response Power for Sound Source Localization — a Tutorial Review]]

@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-09
-updated: 2026-09-09
+updated: 2026-10-02
 sources:
   - raw/papers/tervo-2009-sound-intensity-direction/full-text.md
+  - raw/papers/grinstein-2024-srp-tutorial-review/full-text.md
 tags:
   - doa-estimation
   - sound-intensity
@@ -47,7 +48,7 @@ Key lessons:
 
 ## Relation to Other DOA Families
 
-Unlike [[concepts/search-based-doa-estimation|search-based methods]] (SRP-PHAT, MUSIC) that scan a spatial grid of delay-and-sum or subspace spectra, intensity-vector methods read direction off a physical energy-flow quantity measured by a compact probe — no steering, no grid, small apertures. The [[sources/grumiaux-2022-ssl-deep-learning-survey|Grumiaux et al. 2022 survey]] notes classical intensity methods degrade quickly under reflections; Tervo's concert-hall data quantifies that degradation and shows mixture-model fitting recovers a substantial part of it. In modern DNN systems, intensity vectors survive as **input features** (FOA active/reactive intensity in SELD/ACCDOA) rather than as the estimator itself.
+Unlike [[concepts/search-based-doa-estimation|search-based methods]] (SRP-PHAT, MUSIC) that scan a spatial grid of delay-and-sum or subspace spectra, intensity-vector methods read direction off a physical energy-flow quantity measured by a compact probe — no steering, no grid, small apertures. The [[sources/grumiaux-2022-ssl-deep-learning-survey|Grumiaux et al. 2022 survey]] notes classical intensity methods degrade quickly under reflections; Tervo's concert-hall data quantifies that degradation and shows mixture-model fitting recovers a substantial part of it. In modern DNN systems, intensity vectors survive as **input features** (FOA active/reactive intensity in SELD/ACCDOA) rather than as the estimator itself. For spherical arrays, the SRP tutorial review of [[sources/grinstein-2024-srp-tutorial-review|Grinstein et al. 2024]] surveys evidence that augmented-intensity-vector (AIV) methods outperform both pseudo-intensity-vector and SRP approaches for well-separated sources (≥30°), whereas SRP degrades for three or more sources separated by less than ~45°.
 
 ## Related Concepts
 
@@ -62,3 +63,4 @@ Unlike [[concepts/search-based-doa-estimation|search-based methods]] (SRP-PHAT, 
 
 - [[sources/tervo-2009-sound-intensity-direction|Tervo 2009: Direction Estimation Based on Sound Intensity Vectors]] — the five-method comparison defining this page's taxonomy
 - [[sources/grumiaux-2022-ssl-deep-learning-survey|Grumiaux et al. 2022: A Survey of SSL with Deep Learning Methods]] — positions intensity methods among conventional SSL approaches and DL feature families
+- [[sources/grinstein-2024-srp-tutorial-review|Grinstein et al. 2024: SRP for Sound Source Localization — a Tutorial Review]] — AIV vs SRP comparison evidence for spherical arrays

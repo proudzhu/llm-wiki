@@ -629,6 +629,11 @@
 | [[entities/yu-zhao\|Yu Zhao]] | CQUPT — co-author of ANC-FRC (Interspeech 2026): design-time frequency-response gain constraint for micro-loudspeakers. | 2026-10-01 |
 | [[entities/liming-shi\|Liming Shi]] | CQUPT — corresponding author of ANC-FRC (Interspeech 2026): design-time frequency-response gain constraint for micro-loudspeakers. | 2026-10-01 |
 | [[entities/li-rao\|Li Rao]] | Nanjing University researcher; lead author of causal reference-enhanced keep-speech ANC (Interspeech 2026). | 2026-10-01 |
+| [[entities/elisa-tengan\|Elisa Tengan]] | KU Leuven (ESAT-STADIUS) researcher; co-author of the SRP tutorial review and X-SRP library | 2026-10-02 |
+| [[entities/bilgesu-cakmak\|Bilgesu Çakmak]] | KU Leuven (ESAT-STADIUS) researcher; co-author of the SRP tutorial review and X-SRP library | 2026-10-02 |
+| [[entities/thomas-dietzen\|Thomas Dietzen]] | KU Leuven (ESAT-PSI) researcher; co-author of the SRP tutorial review and X-SRP library | 2026-10-02 |
+| [[entities/leonardo-nunes\|Leonardo Nunes]] | Microsoft Research researcher; co-author of the SRP tutorial review and X-SRP library | 2026-10-02 |
+| [[entities/mike-brookes\|Mike Brookes]] | Imperial College London researcher; speech processing; co-author of the SRP tutorial review | 2026-10-02 |
 
 ---
 
@@ -1201,6 +1206,8 @@
 | [[concepts/mechanical-over-excursion\|Mechanical Over-Excursion]] | Transducer-side limit of (micro-)loudspeakers: diaphragm displacement beyond mechanical limits, triggered by high low-frequency gain of unconstrained ANC control filters against rolled-off low-frequency response. | 2026-10-01 |
 | [[concepts/reference-signal-enhancement\|Reference Signal Enhancement]] | Neural network on the ANC reference path that suppresses speech while a conventional FIR controller cancels the noise — zero added delay, large causality margin (Rao 2026). | 2026-10-01 |
 | [[concepts/steered-response-power\|Steered-Response Power (SRP)]] | Acoustic source localization by maximizing the output of a steered delay-and-sum beamformer over a candidate-position grid; SRP-PHAT adds phase-transform (whitened GCC) weighting for reverberation robustness, and the Cobos et al. 2011 modification accumulates GCCs over TDOA-gradient-derived delay ranges. | 2026-10-02 |
+| [[concepts/x-srp\|X-SRP (eXtensible Steered Response Power)]] | Modular, generalized formulation of the SRP algorithm from Grinstein et al. 2024, with a Python library | 2026-10-02 |
+| [[concepts/gcc-phat\|GCC-PHAT]] | Phase-transform whitened cross-correlation for TDOA estimation; the correlation underlying SRP-PHAT | 2026-10-02 |
 
 ---
 
@@ -1449,6 +1456,7 @@
 | [[sources/cheng-2026-anc-gain-constraint\|Cheng, Zhou, Liu, Zhao & Shi 2026]] | This paper proposes ANC-FRC, a method for pre-training fixed ANC control filters under a frequency-response gain constraint, so that the control signal stays within the limited low-frequency reproduction capability of micro-loudspeakers without adding group delay. | 2026-10-01 |
 | [[sources/rao-2026-keep-speech-anc\|Rao, Rong, Sun, He, Chen, Zou & Lu 2026]] | Causal keep-speech ANC: a zero-delay WaveNet de-speeches the reference while a conventional RLS FIR filter cancels only noise; error-domain loss beats reference-domain. | 2026-10-01 |
 | [[sources/wikipedia-steered-response-power\|Wikipedia: Steered-Response Power]] | Encyclopedia reference for SRP/SRP-PHAT source localization: delay-and-sum SRP objective, decomposition into pairwise generalized cross-correlations, PHAT whitening, grid-search localization, and the modified SRP-PHAT with TDOA-gradient accumulation limits (Cobos et al. 2011). | 2026-10-02 |
+| [[sources/grinstein-2024-srp-tutorial-review\|Grinstein, Tengan, Çakmak et al. 2024]] | This tutorial review surveys over 200 papers on the Steered Response Power (SRP) method and its variants, with emphasis on SRP-PHAT, and provides the field's first centralized resource for SRP research. | 2026-10-02 |
 
 ---
 
@@ -1502,10 +1510,10 @@
 
 ## Statistics
 
-- **Total pages**: 1451
-- **Entities**: 619
-- **Concepts**: 563
-- **Sources**: 239
+- **Total pages**: 1459
+- **Entities**: 624
+- **Concepts**: 565
+- **Sources**: 240
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-10-02

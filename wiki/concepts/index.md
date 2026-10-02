@@ -567,4 +567,6 @@
 | [[concepts/mechanical-over-excursion\|Mechanical Over-Excursion]] | Transducer-side limit of (micro-)loudspeakers: diaphragm displacement beyond mechanical limits, triggered by high low-frequency gain of unconstrained ANC control filters against rolled-off low-frequency response. | 2026-10-01 |
 | [[concepts/reference-signal-enhancement\|Reference Signal Enhancement]] | Neural network on the ANC reference path that suppresses speech while a conventional FIR controller cancels the noise — zero added delay, large causality margin (Rao 2026). | 2026-10-01 |
 | [[concepts/steered-response-power\|Steered-Response Power (SRP)]] | Acoustic source localization by maximizing the output of a steered delay-and-sum beamformer over a candidate-position grid; SRP-PHAT adds phase-transform (whitened GCC) weighting for reverberation robustness, and the Cobos et al. 2011 modification accumulates GCCs over TDOA-gradient-derived delay ranges. | 2026-10-02 |
+| [[concepts/x-srp\|X-SRP (eXtensible Steered Response Power)]] | Modular, generalized formulation of the SRP algorithm from Grinstein et al. 2024, with a Python library | 2026-10-02 |
+| [[concepts/gcc-phat\|GCC-PHAT]] | Phase-transform whitened cross-correlation for TDOA estimation; the correlation underlying SRP-PHAT | 2026-10-02 |
 

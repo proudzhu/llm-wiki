@@ -5633,3 +5633,14 @@ Ingested Rout, Das & Panda 2012 (IEEE TIM 61(2):554-563). Key contribution: [[co
 - **Pages created**: [[sources/wikipedia-steered-response-power|source page]], [[concepts/steered-response-power|Steered-Response Power (SRP)]]
 - **Pages updated**: [[concepts/sound-source-localization|Sound Source Localization]] (SRP-PHAT power maps now wikilinked; new related concept/source entries), [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]] (classical-methods and Kim & Kim mentions now link the SRP concept; new related concept/source entries)
 - **Index updates**: `wiki/index.md` (concepts + sources rows, statistics 1449→1451), `wiki/concepts/index.md`, `wiki/sources/index.md`
+
+---
+
+## [2026-10-02] ingest | Steered Response Power for Sound Source Localization: a Tutorial Review (Grinstein et al. 2024)
+
+- Source: `raw/papers/grinstein-2024-srp-tutorial-review/full-text.md` (Zotero: `7FFQJGSP`)
+- Authors: Eric Grinstein, Elisa Tengan, Bilgesu Çakmak, Thomas Dietzen, Leonardo Nunes, Toon van Waterschoot, Mike Brookes, Patrick A. Naylor
+- Published: EURASIP Journal on Audio, Speech, and Music Processing 2024(1):59, DOI [10.1186/s13636-024-00377-z](https://doi.org/10.1186/s13636-024-00377-z)
+- Summary: Tutorial review surveying 200+ papers on Steered Response Power (SRP) for sound source localization. Covers the signal model, GCC-PHAT and its partial whitening, time- and frequency-domain SRP formulations, the SRP ≡ maximum-likelihood SSL reduction, complexity O(ML log L + GPL) and its reduction (volumetric V-SRP/M-SRP, iterative quadtree/SRC/branch-and-bound, W-SRP), multi-source strategies (source cancellation, clustering, sparsity), and neural variants (Deep-GCC, Neural-SRP). Introduces the **X-SRP** modular framework that reformulates existing variants as compositions of six modules (candidate grid, signal features, SRP map, grid search, and their updates).
+- Pages created: [[sources/grinstein-2024-srp-tutorial-review|source]], [[entities/elisa-tengan]], [[entities/bilgesu-cakmak]], [[entities/thomas-dietzen]], [[entities/leonardo-nunes]], [[entities/mike-brookes]], [[concepts/x-srp|X-SRP]], [[concepts/gcc-phat|GCC-PHAT]]
+- Pages updated: [[entities/eric-grinstein]], [[entities/toon-van-waterschoot]], [[entities/patrick-a-naylor]], [[concepts/steered-response-power]], [[concepts/sound-source-localization]], [[concepts/direction-of-arrival-estimation]], [[concepts/search-based-doa-estimation]], [[concepts/intensity-vector-doa-estimation]]
