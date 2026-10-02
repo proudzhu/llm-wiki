@@ -5622,3 +5622,14 @@ Ingested Rout, Das & Panda 2012 (IEEE TIM 61(2):554-563). Key contribution: [[co
 - **Pages created**: [[sources/rao-2026-keep-speech-anc|source page]], [[entities/li-rao|Li Rao]], [[concepts/reference-signal-enhancement|Reference Signal Enhancement]]
 - **Pages updated**: entities xiaobin-rong, yu-sun, yiming-he, kai-chen, haishan-zou, jing-lu (new contribution bullets); concepts speech-preserving-anc (KSANC alias + reference-enhancement approach), active-noise-control (RSE bullet in Deep Learning Approaches), causality (new solution pattern 5), feedforward-anc (speech-contaminated reference challenge), convolutional-recurrent-network (DeepANC latency note), wiener-filter (training-time substitute role); synthesis ai-driven-anc (new pattern 2.9 + efficiency-frontier row), modern-headphone-anc-systems (keep-speech paradigm vs transparency modes)
 - **Extraction note**: MinerU timed out twice (vlm and pipeline); fell back to pdftotext with pdfimages, figure captions mapped via PyMuPDF bboxes; smask-derived PPMs converted to JPEG and dropped.
+
+---
+
+## [2026-10-02] ingest | Steered-response power (Wikipedia)
+
+- **Source**: `raw/articles/wikipedia-steered-response-power.md` (URL: https://en.wikipedia.org/wiki/Steered-response_power; defuddle timed out, fetched via WebFetch and transcribed to markdown with LaTeX math)
+- **Type**: Encyclopedia article (Wikipedia), CC BY-SA 4.0, retrieved 2026-10-02
+- **Summary**: Reference formulation of SRP/SRP-PHAT acoustic source localization — the delay-and-sum SRP objective in time and frequency domains, its decomposition into pairwise generalized cross-correlations evaluated at each pair's TDOA, the PHAT phase-whitening weighting for reverberation robustness (DiBiase 2000; Silverman et al. 2005), grid-search localization, and the modified SRP-PHAT of Cobos, Marti & Lopez 2011 that accumulates GCCs over TDOA-gradient-derived delay ranges for scalable spatial sampling.
+- **Pages created**: [[sources/wikipedia-steered-response-power|source page]], [[concepts/steered-response-power|Steered-Response Power (SRP)]]
+- **Pages updated**: [[concepts/sound-source-localization|Sound Source Localization]] (SRP-PHAT power maps now wikilinked; new related concept/source entries), [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]] (classical-methods and Kim & Kim mentions now link the SRP concept; new related concept/source entries)
+- **Index updates**: `wiki/index.md` (concepts + sources rows, statistics 1449→1451), `wiki/concepts/index.md`, `wiki/sources/index.md`

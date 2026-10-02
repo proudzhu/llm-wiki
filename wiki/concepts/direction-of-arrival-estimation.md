@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-30
-updated: 2026-09-09
+updated: 2026-10-02
 sources:
   - raw/papers/wang-2026-predictive-dsfanc-crnn/full-text.md
   - raw/papers/wang-2026-directional-sfanc-reverberant/full-text.md
@@ -9,6 +9,7 @@ sources:
   - raw/papers/kim-2014-doa-based-snr-estimation/full-text.txt
   - raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt
   - raw/papers/tervo-2009-sound-intensity-direction/full-text.md
+  - raw/articles/wikipedia-steered-response-power.md
 tags:
   - signal-processing
   - array-processing
@@ -24,7 +25,7 @@ tags:
 
 DoA estimation exploits the spatial diversity of microphone arrays to determine the azimuth and/or elevation of sound sources. Common approaches include:
 
-- **Classical methods**: Beamforming-based scanning (delay-and-sum), MVDR spatial spectrum, MUSIC, ESPRIT, and [[concepts/intensity-vector-doa-estimation|intensity-vector methods]] that read direction off the physical energy flow measured by a compact [[concepts/sound-intensity-vector|sound intensity]] probe
+- **Classical methods**: Beamforming-based scanning (delay-and-sum, e.g. [[concepts/steered-response-power|SRP/SRP-PHAT]]), MVDR spatial spectrum, MUSIC, ESPRIT, and [[concepts/intensity-vector-doa-estimation|intensity-vector methods]] that read direction off the physical energy flow measured by a compact [[concepts/sound-intensity-vector|sound intensity]] probe
 - **Data-driven methods**: Neural networks (CNN, CRNN) trained to classify or regress DoA from multichannel spectrograms
 
 ## DoA for ANC
@@ -54,7 +55,7 @@ The CRNN achieves >90% DoA classification accuracy at SNR ≥ 20 dB with only 0.
 
 ## DOA as a Cue for SNR Estimation (Kim & Kim 2014)
 
-Beyond localization and filter selection, DOA information can serve directly as an **SNR cue** for speech enhancement. Kim & Kim (2014) assume the target DOA (TDOA) is known a priori for a dual-microphone array, time-align the channels accordingly, and convert the residual phase difference into a [[concepts/target-to-non-target-directional-signal-ratio|TNR]] and then a [[concepts/doa-based-snr-estimation|DOA-based SNR]] for a Wiener-filter speech enhancer. Their DOA-error analysis shows the enhancement performance is best near zero target-DOA error and degrades outside a small window — but since GCC/SRP-PHAT localization is reliable within that window, the cue is practical. A super-directive beamformer's broadside dual-microphone directivity is by contrast nearly DOA-error-invariant. The approach fails when target and interference share a DOA, the fundamental ambiguity of DOA cues.
+Beyond localization and filter selection, DOA information can serve directly as an **SNR cue** for speech enhancement. Kim & Kim (2014) assume the target DOA (TDOA) is known a priori for a dual-microphone array, time-align the channels accordingly, and convert the residual phase difference into a [[concepts/target-to-non-target-directional-signal-ratio|TNR]] and then a [[concepts/doa-based-snr-estimation|DOA-based SNR]] for a Wiener-filter speech enhancer. Their DOA-error analysis shows the enhancement performance is best near zero target-DOA error and degrades outside a small window — but since GCC/[[concepts/steered-response-power|SRP-PHAT]] localization is reliable within that window, the cue is practical. A super-directive beamformer's broadside dual-microphone directivity is by contrast nearly DOA-error-invariant. The approach fails when target and interference share a DOA, the fundamental ambiguity of DOA cues.
 
 ## Key Considerations
 
@@ -86,6 +87,7 @@ Before the DL era, [[sources/tervo-2009-sound-intensity-direction|Tervo (EUSIPCO
 - [[concepts/doa-based-snr-estimation|DOA-Based SNR Estimation]] — DOA as a cue for SNR rather than filter selection
 - [[concepts/sound-intensity-vector|Sound Intensity Vector]] — the physical energy-flow quantity measured by p–p probes and B-format arrays
 - [[concepts/intensity-vector-doa-estimation|Intensity-Vector DOA Estimation]] — averaging vs. mixture-model estimators on intensity-vector azimuths
+- [[concepts/steered-response-power|Steered-Response Power]] — beamforming-based grid-search scanning for source localization
 
 ## Related Sources
 
@@ -94,3 +96,4 @@ Before the DL era, [[sources/tervo-2009-sound-intensity-direction|Tervo (EUSIPCO
 - [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — foundational work showing direction-dependent causality in feedforward ANC
 - [[sources/goetz-2026-blind-direction-dependent-acoustic-parameter-estimation|Görtz et al. 2026: Blind DDAP Estimation Using Smart Glasses]] — head rotation exploited for direction-dependent parameter estimation
 - [[sources/tervo-2009-sound-intensity-direction|Tervo 2009: Direction Estimation Based on Sound Intensity Vectors]] — conventional intensity-vector DoA estimators compared on real concert-hall data
+- [[sources/wikipedia-steered-response-power|Wikipedia: Steered-Response Power]] — reference formulation of the SRP-PHAT classical baseline

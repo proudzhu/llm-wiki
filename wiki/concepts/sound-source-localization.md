@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-09-09
-updated: 2026-09-19
+updated: 2026-10-02
 sources:
   - raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt
   - raw/papers/tervo-2009-sound-intensity-direction/full-text.md
   - raw/papers/pan-2025-data-driven-acoustics/full-text.md
+  - raw/articles/wikipedia-steered-response-power.md
 tags:
   - sound-source-localization
   - doa-estimation
@@ -23,7 +24,7 @@ Each microphone signal is the source signal convolved with a position-dependent 
 
 ## Conventional vs. DL-based Methods
 
-- **Conventional**: TDoA/GCC-PHAT, SRP-PHAT power maps, sound intensity ([[concepts/sound-intensity-vector|intensity vectors]] — quantitatively compared for a real concert hall by [[sources/tervo-2009-sound-intensity-direction|Tervo 2009]]: mixture-model fitting of the azimuth histogram beats simple circular averaging, but all variants degrade under strong reverberation), subspace methods (MUSIC, ESPRIT), GMM/GMR generative models, Bayesian inference, compressive sensing, ICA. Perform poorly in noisy, reverberant, multi-source conditions; DNN systems have shown large gains (e.g., 2x accuracy over SRP-PHAT at low SNR; 50% angular-error reduction vs. MUSIC).
+- **Conventional**: TDoA/GCC-PHAT, [[concepts/steered-response-power|SRP-PHAT]] power maps, sound intensity ([[concepts/sound-intensity-vector|intensity vectors]] — quantitatively compared for a real concert hall by [[sources/tervo-2009-sound-intensity-direction|Tervo 2009]]: mixture-model fitting of the azimuth histogram beats simple circular averaging, but all variants degrade under strong reverberation), subspace methods (MUSIC, ESPRIT), GMM/GMR generative models, Bayesian inference, compressive sensing, ICA. Perform poorly in noisy, reverberant, multi-source conditions; DNN systems have shown large gains (e.g., 2x accuracy over SRP-PHAT at low SNR; 50% angular-error reduction vs. MUSIC).
 - **DL-based**: a feature extraction module (or raw waveforms) feeding a DNN (FFNN → CNN → RNN → CRNN → residual → attention → encoder-decoder, in historical order) that outputs a DoA estimate — via classification (spatial pseudo-spectrum) or regression (coordinates, ACCDOA).
 
 ## Key Configurations
@@ -39,6 +40,7 @@ Each microphone signal is the source signal convolved with a position-dependent 
 ## Related Concepts
 
 - [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]]
+- [[concepts/steered-response-power|Steered-Response Power (SRP)]] — the beamforming-based grid-search localizer behind SRP-PHAT power maps
 - [[concepts/relative-transfer-function|Relative Transfer Function (RTF)]]
 - [[concepts/ambisonics|Ambisonics]]
 - [[concepts/sel-d|SELD]]
@@ -48,5 +50,6 @@ Each microphone signal is the source signal convolved with a position-dependent 
 ## Related Sources
 
 - [[sources/grumiaux-2022-ssl-deep-learning-survey|Grumiaux et al. 2022: A Survey of SSL with Deep Learning Methods]]
+- [[sources/wikipedia-steered-response-power|Wikipedia: Steered-Response Power]] — reference formulation of the SRP/SRP-PHAT conventional baseline
 - [[sources/tervo-2009-sound-intensity-direction|Tervo 2009: Direction Estimation Based on Sound Intensity Vectors]] — empirical comparison of five conventional intensity-vector DoA estimators on concert-hall data
 - [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — detection-based formulation of localization with loss-construction options and typical networks (Section 4)
