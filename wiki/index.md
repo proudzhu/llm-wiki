@@ -1509,15 +1509,16 @@
 | [[queries/far-field-speech-enhancement\|Far-Field Speech Enhancement]] | 综合回答：波束形成、MWF、去混响、BSS、深度学习等方法体系、最新论文进展与开放问题 | 2026-05-26 |
 | [[queries/how-ai-impacts-coding\|How AI Impacts Coding]] | RCT evidence: AI +80% productivity on skilled tasks but −17% mastery when learning new skills; 6 interaction patterns | 2026-04-11 |
 | [[queries/adaptive-filtering-variable-step-size-algorithms\|Adaptive Filtering Variable Step Size]] | 9 篇 Zotero 论文综述：Versiera/Versoria、噪声功率估计、误差自相关、动量扰动、凸组合 FxLMS/F | 2026-04-12 |
+| [[queries/ndf-sndf-ndbf-comparison\|NDF、SNDF、NDBF 三代神经方向滤波方法对比]] | NDF (Wechsler 2024)、SNDF (Huang 2025)、NDBF (Huang & Habets 2026) 的网络结构、损失函数、训练设置与结果的逐项对比。 | 2026-10-03 |
 
 ---
 
 ## Statistics
 
-- **Total pages**: 1463
+- **Total pages**: 1464
 - **Entities**: 624
 - **Concepts**: 567
 - **Sources**: 242
 - **Synthesis**: 23
-- **Queries**: 7
+- **Queries**: 8
 - **Last updated**: 2026-10-03

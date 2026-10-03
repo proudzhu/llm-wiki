@@ -5668,3 +5668,9 @@ Ingested Rout, Das & Panda 2012 (IEEE TIM 61(2):554-563). Key contribution: [[co
 - **Summary**: Neural differential beamformer (NDBF) for a dual-microphone linear array — a JNF-SSF backbone whose single-channel mask is replaced by a vector of complex beamforming weights, achieving steerable (0°–180°), high-order, frequency-invariant DMA beampatterns with only two 3 cm-spaced omni mics, plus X-Y stereo recording via two parallel steered models.
 - **Pages created**: `wiki/sources/huang-2026-dual-mic-steerable-neural-beamformer.md`; `wiki/concepts/neural-differential-beamformer.md`
 - **Pages updated**: `wiki/entities/weilong-huang.md`, `wiki/entities/emanuel-habets.md` (new contribution bullets); `wiki/concepts/neural-directional-filtering.md` (NDBF row in Key Approaches), `wiki/concepts/steerable-neural-directional-filtering.md` (dual-mic linear-array extension section), `wiki/concepts/steerable-ldma.md` (neural counterpart section), `wiki/concepts/differential-microphone-array.md` (neural differential beamforming section), `wiki/concepts/frequency-invariant-beamforming.md` (learned-steering paragraph), `wiki/concepts/virtual-directional-microphone.md` (NDBF row + stereo note), `wiki/concepts/spatially-selective-nonlinear-filter.md` (masks-to-weights extension section) — all with frontmatter sources and related-links updates; `wiki/synthesis/multi-channel-speech-enhancement.md` (NDBF row in Sources Synthesized, refined Jin 2021 steerability claim); `wiki/index.md`, `wiki/sources/index.md`, `wiki/concepts/index.md` (new rows, stats recount)
+
+---
+
+## [2026-10-03] query | NDF、SNDF、NDBF 三代神经方向滤波方法对比
+
+Created [[queries/ndf-sndf-ndbf-comparison|NDF/SNDF/NDBF 对比查询页]] — 逐项对比三代方法的基本信息、网络结构、损失函数（SA-ε-tSDR → 归一化 L1）、训练设置（场景复用、DOA 网格、数据集）与目标图/结果，并给出演进主线。
