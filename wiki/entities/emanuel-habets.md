@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-05
-updated: 2026-09-05
+updated: 2026-10-03
 tags:
   - researcher
   - acoustic-parameter-estimation
@@ -31,6 +31,7 @@ tags:
 - Hybrid low-complexity joint acoustic echo and noise reduction (IWAENC 2024) — [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024]]
 - Co-authored "Residual noise control using a parametric multichannel Wiener filter" (ICASSP 2015) — generalized PMWF with direct control of maximum noise reduction, valid for higher-rank desired signals — [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015]]
 - Co-authored "A comparison of generative and discriminative methods for speech enhancement: robustness, complexity, and hallucination" (arXiv 2026) — 14-model controlled comparison showing GAN-trained NCSN++ beats diffusion at 1/100th the compute — [[sources/shetu-2026-generative-discriminative-comparison|Shetu et al. 2026]]
+- Co-authored "Dual-Microphone Steerable High-Order Neural Differential Beamformer" (arXiv 2026) — [[concepts/neural-differential-beamformer|NDBF]]: steerable high-order neural differential beamforming with a dual-microphone array — [[sources/huang-2026-dual-mic-steerable-neural-beamformer|Huang & Habets 2026]]
 
 ## Related Sources
 
@@ -45,3 +46,4 @@ tags:
 - [[sources/shetu-2026-munet|Shetu et al. 2026: μNet]]
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]]
 - [[sources/shetu-2026-generative-discriminative-comparison|Shetu et al. 2026: Generative vs. Discriminative SE]]
+- [[sources/huang-2026-dual-mic-steerable-neural-beamformer|Huang & Habets 2026: Dual-Microphone Steerable High-Order Neural Differential Beamformer]]

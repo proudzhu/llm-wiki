@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-20
+updated: 2026-10-03
 sources:
   - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
   - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
   - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
+  - raw/papers/huang-2026-dual-mic-steerable-neural-beamformer/full-text.md
 tags:
   - neural-directional-filtering
   - virtual-directional-microphone
@@ -43,6 +44,7 @@ where $\Lambda(\theta,\phi)$ is the desired directivity pattern, and $H_{\mathrm
 | Dual-mask NDF (NDF+) | Extended FT-JNF with two parallel mask branches | Joint coherent/diffuse estimation |
 | SHONDC | Steerable high-order neural directional coding | Supports steerable directivity patterns |
 | UNDF | NDF with user-defined directivity patterns | Flexible directivity configuration |
+| NDBF | Neural differential beamformer (Huang & Habets 2026) | Replaces the single-channel mask with a vector of complex beamforming weights; dual-microphone **linear** array; steerable high-order patterns; stereo X-Y recording |
 | FiLM-OSN | Low-latency NDF for binaural BTE hearing aids (Uphaus et al. 2026) | FiLM conditioning + Mamba-based OSN backbone; 10 ms total latency; binaural output |
 
 ## Steerable Extension (SNDF)
@@ -68,6 +70,7 @@ The FT-JNF-based NDF architecture processes concatenated real/imaginary STFT coe
 - [[concepts/fixed-beamformer|Fixed Beamformer]]
 - [[concepts/differential-microphone-array|Differential Microphone Array]]
 - [[concepts/joint-nonlinear-filtering|Joint Nonlinear Filtering]]
+- [[concepts/neural-differential-beamformer|Neural Differential Beamformer]]
 - [[concepts/film-osn|FiLM-OSN]]
 
 ## Related Sources
@@ -76,4 +79,5 @@ The FT-JNF-based NDF architecture processes concatenated real/imaginary STFT coe
 - [[sources/huang-2025-steerable-neural-directional-filtering|Huang et al. 2025: Steerable Neural Directional Filtering]] — extends NDF to steerable patterns with a single conditioned model
 - [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023: Insights Into Deep Non-linear Filters for Improved Multi-channel Speech Enhancement]] — origin of the FT-JNF backbone used by NDF [22]
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
+- [[sources/huang-2026-dual-mic-steerable-neural-beamformer|Huang & Habets 2026: Dual-Microphone Steerable High-Order Neural Differential Beamformer]] — mask-to-weights extension for dual-mic linear arrays: steerable high-order DMA patterns with complex beamforming weights
 - [[sources/uphaus-2026-directivity-low-latency|Uphaus et al. 2026: Directivity-Conditioned Low-Latency Neural Filtering]] — hearing-aid-grade low-latency (10 ms) binaural NDF via FiLM-OSN

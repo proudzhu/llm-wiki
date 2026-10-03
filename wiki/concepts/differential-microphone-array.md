@@ -10,6 +10,7 @@ sources:
   - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
   - raw/papers/desena-2012-higher-order-differential/full-text.md
   - raw/papers/jin-2021-steering-study-ldma/full-text.txt
+  - raw/papers/huang-2026-dual-mic-steerable-neural-beamformer/full-text.md
 tags:
   - differential-microphone-array
   - beamforming
@@ -61,6 +62,10 @@ A differential microphone array (DMA) is a fixed beamformer that uses spatial di
 
 See [[concepts/steerable-ldma|Steerable LDMA]] for the full conditions and design procedure.
 
+## Neural Differential Beamforming (Huang & Habets 2026)
+
+The [[concepts/neural-differential-beamformer|neural differential beamformer (NDBF)]] lifts the dual-microphone DMA to **steerable high-order** patterns: a DNN estimates complex beamforming weights from two 3 cm-spaced omnidirectional microphones, realizing frequency-invariant 1st- and 3rd-order cardioid patterns that stay shape-invariant across look directions 0°–180° — where classical dual-mic DMAs are first-order-only, non-steerable, white-noise-amplifying at low frequencies, and aliasing above 5.7 kHz. It outperforms classical DMA (−0.99 dB SDR first-order), a parametric spatial filter (13.77 dB), and a mask-based NDF retrained on the same array (25.85 dB), reaching 25.93 dB (first-order) and 23.24 dB (third-order).
+
 ## Limitations
 
 - Restricted to low-order patterns with compact arrays
@@ -91,6 +96,7 @@ For very small baselines where delay-based features become unreliable (Tashev et
 - [[concepts/sector-directivity-design|Sector-Based Directivity Design]] — (α, λ) framework whose optimal patterns frequently require complex roots
 - [[concepts/complex-root-differential-array|Complex-Root Differential Array]] — three-mic second-order structure realizing complex-root patterns
 - [[concepts/steerable-ldma|Steerable LDMA]] — steering conditions and null-constrained design for LDMAs off endfire
+- [[concepts/neural-differential-beamformer|Neural Differential Beamformer]] — learned beamformer that realizes steerable high-order DMA patterns with a dual-microphone array
 
 ## Related Sources
 
@@ -101,3 +107,4 @@ For very small baselines where delay-based features become unreliable (Tashev et
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — back-to-back unidirectional variant (9.6 mm baseline)
 - [[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012: On the Design and Implementation of Higher Order Differential Microphones]] — (α, λ) design framework unifying standard patterns; complex-root array structure; WNG/bandwidth analysis
 - [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021: Steering Study of Linear Differential Microphone Arrays]] — first-order non-steerability proof, Nth-order steering conditions, null-constrained SLDMA design
+- [[sources/huang-2026-dual-mic-steerable-neural-beamformer|Huang & Habets 2026: Dual-Microphone Steerable High-Order Neural Differential Beamformer]] — neural dual-mic DMA: steerable high-order frequency-invariant patterns without white-noise amplification or aliasing

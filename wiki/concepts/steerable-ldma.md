@@ -4,6 +4,7 @@ created: 2026-10-03
 updated: 2026-10-03
 sources:
   - raw/papers/jin-2021-steering-study-ldma/full-text.txt
+  - raw/papers/huang-2026-dual-mic-steerable-neural-beamformer/full-text.md
 tags:
   - differential-microphone-array
   - beamforming
@@ -51,6 +52,10 @@ with $\zeta_{N,n}$ the elementary symmetric polynomials in the nulls $x_1, \ldot
 - Minimum-norm solutions with extra microphones raise WNG but can introduce extra high-frequency nulls, so the effective order may exceed the specified order at high frequencies.
 - Validated experimentally with an 8-microphone (1.1 cm spacing) prototype in an anechoic chamber: measured steered patterns match the designs.
 
+## Neural Counterpart
+
+The steerability limits above apply to **any classical beamforming method** — but not to learned beamformers: the [[concepts/neural-differential-beamformer|neural differential beamformer (NDBF)]] (Huang & Habets 2026) realizes steerable 1st- and 3rd-order patterns with a dual-omni linear array over the full 0°–180° semicircle, a geometry in which classical designs are first-order-only and provably non-steerable. NDBF replaces the null-position conditions with training-data supervision and a steering-direction conditioning input.
+
 ## Related Concepts
 
 - [[concepts/differential-microphone-array|Differential Microphone Array]]
@@ -64,3 +69,4 @@ with $\zeta_{N,n}$ the elementary symmetric polynomials in the nulls $x_1, \ldot
 - [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021: Steering Study of Linear Differential Microphone Arrays]] — the introducing paper (proofs, conditions, design method, experiments)
 - [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — surveys the endfire limitation that this paper resolves
 - [[sources/huang-2025-steerable-neural-directional-filtering|Huang et al. 2025: Steerable Neural Directional Filtering]] — neural counterpart: steering a learned directivity pattern by conditioning rather than null constraints
+- [[sources/huang-2026-dual-mic-steerable-neural-beamformer|Huang & Habets 2026: Dual-Microphone Steerable High-Order Neural Differential Beamformer]] — neural steerability attained in the geometry where classical steerability is provably impossible (two omni mics)

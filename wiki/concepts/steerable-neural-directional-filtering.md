@@ -5,6 +5,7 @@ updated: 2026-10-03
 sources:
   - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
   - raw/papers/jin-2021-steering-study-ldma/full-text.txt
+  - raw/papers/huang-2026-dual-mic-steerable-neural-beamformer/full-text.md
 tags:
   - neural-directional-filtering
   - steerable-filtering
@@ -38,9 +39,14 @@ The steering direction $\theta_s$ is one-hot encoded (over $M = 360°/\vartheta$
 - **Order beyond microphone count**: a 6th-order DMA pattern is learned with a 4-microphone array (3-mic UCA ring), where classical differential beamforming is bounded by $\lfloor Q/2 \rfloor$.
 - A speech-trained model suppresses a music interferer in the null direction and supports mid-inference steering changes.
 
+## Dual-Microphone Linear-Array Extension (NDBF)
+
+The steering-conditioning recipe of SNDF carries over from circular to **linear** arrays with a dual-microphone NDBF (Huang & Habets 2026, [[sources/huang-2026-dual-mic-steerable-neural-beamformer|source page]]): the same one-hot → linear-layer → LSTM-initial-states conditioning drives a JNF-SSF backbone whose output is modified from a single-channel mask to a vector of complex beamforming weights. On a 3 cm dual-omni linear array it attains steerable 1st- and 3rd-order cardioid patterns over the semicircular plane (0°–180°) — where classical LDMAs are first-order-only and non-steerable — with SDR essentially flat across steering directions (25.93 dB 1st-order, 23.24 dB 3rd-order) and stronger null suppression than a mask-based NDF retrained on the same data. See [[concepts/neural-differential-beamformer|Neural Differential Beamformer]].
+
 ## Related Concepts
 
 - [[concepts/neural-directional-filtering|Neural Directional Filtering]]
+- [[concepts/neural-differential-beamformer|Neural Differential Beamformer]] — the dual-microphone linear-array steerable extension
 - [[concepts/virtual-directional-microphone|Virtual Directional Microphone]]
 - [[concepts/joint-nonlinear-filtering|Joint Nonlinear Filtering]]
 - [[concepts/spatially-selective-nonlinear-filter|Spatially Selective Non-Linear Filter]]
@@ -54,3 +60,4 @@ The steering direction $\theta_s$ is one-hot encoded (over $M = 360°/\vartheta$
 - [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — the fixed-pattern predecessor
 - [[sources/tesch-2024-spatially-selective-nonlinear-filters|Tesch & Gerkmann 2024: Spatially Selective Deep Non-linear Filters]] — origin of the conditioning mechanism
 - [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021: Steering Study of Linear Differential Microphone Arrays]] — classical LDMA steering limits that SNDF transcends
+- [[sources/huang-2026-dual-mic-steerable-neural-beamformer|Huang & Habets 2026: Dual-Microphone Steerable High-Order Neural Differential Beamformer]] — the steering mechanism applied to a dual-mic linear array with a beamforming-weight output

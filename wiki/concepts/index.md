@@ -570,4 +570,5 @@
 | [[concepts/x-srp\|X-SRP (eXtensible Steered Response Power)]] | Modular, generalized formulation of the SRP algorithm from Grinstein et al. 2024, with a Python library | 2026-10-02 |
 | [[concepts/gcc-phat\|GCC-PHAT]] | Phase-transform whitened cross-correlation for TDOA estimation; the correlation underlying SRP-PHAT | 2026-10-02 |
 | [[concepts/steerable-ldma\|Steerable LDMA]] | Conditions and null-constrained design for steering linear DMA mainlobes off endfire; first-order LDMAs provably non-steerable, Nth-order partially steerable (Jin et al. 2021) | 2026-10-03 |
+| [[concepts/neural-differential-beamformer\|Neural Differential Beamformer]] | DNN-based differential beamformer estimating complex beamforming weights (not a single-channel mask) for steerable high-order DMA beampatterns from a dual-microphone linear array. | 2026-10-03 |
 

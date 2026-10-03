@@ -1209,6 +1209,7 @@
 | [[concepts/x-srp\|X-SRP (eXtensible Steered Response Power)]] | Modular, generalized formulation of the SRP algorithm from Grinstein et al. 2024, with a Python library | 2026-10-02 |
 | [[concepts/gcc-phat\|GCC-PHAT]] | Phase-transform whitened cross-correlation for TDOA estimation; the correlation underlying SRP-PHAT | 2026-10-02 |
 | [[concepts/steerable-ldma\|Steerable LDMA]] | Conditions and null-constrained design for steering linear DMA mainlobes off endfire; first-order LDMAs provably non-steerable, Nth-order partially steerable (Jin et al. 2021) | 2026-10-03 |
+| [[concepts/neural-differential-beamformer\|Neural Differential Beamformer]] | DNN-based differential beamformer estimating complex beamforming weights (not a single-channel mask) for steerable high-order DMA beampatterns from a dual-microphone linear array. | 2026-10-03 |
 
 ---
 
@@ -1459,6 +1460,7 @@
 | [[sources/wikipedia-steered-response-power\|Wikipedia: Steered-Response Power]] | Encyclopedia reference for SRP/SRP-PHAT source localization: delay-and-sum SRP objective, decomposition into pairwise generalized cross-correlations, PHAT whitening, grid-search localization, and the modified SRP-PHAT with TDOA-gradient accumulation limits (Cobos et al. 2011). | 2026-10-02 |
 | [[sources/grinstein-2024-srp-tutorial-review\|Grinstein, Tengan, Çakmak et al. 2024]] | This tutorial review surveys over 200 papers on the Steered Response Power (SRP) method and its variants, with emphasis on SRP-PHAT, and provides the field's first centralized resource for SRP research. | 2026-10-02 |
 | [[sources/jin-2021-steering-study-ldma\|Jin, Huang, Wang, Chen, Benesty & Cohen 2021]] | LDMA steerability settled: first-order provably non-steerable, Nth-order partially steerable under closed-form null conditions; null-constrained SLDMA design validated on an 8-mic prototype | 2026-10-03 |
+| [[sources/huang-2026-dual-mic-steerable-neural-beamformer\|Huang & Habets 2026: Dual-Microphone Steerable High-Order Neural Differential Beamformer]] | NDBF: a DNN estimates complex beamforming weights for a dual-mic linear array, realizing steerable high-order frequency-invariant DMA patterns and X-Y stereo recording with two omni microphones. | 2026-10-03 |
 
 ---
 
@@ -1512,10 +1514,10 @@
 
 ## Statistics
 
-- **Total pages**: 1461
+- **Total pages**: 1463
 - **Entities**: 624
-- **Concepts**: 566
-- **Sources**: 241
+- **Concepts**: 567
+- **Sources**: 242
 - **Synthesis**: 23
 - **Queries**: 7
 - **Last updated**: 2026-10-03
