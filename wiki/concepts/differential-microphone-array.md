@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-24
+updated: 2026-10-03
 sources:
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
@@ -9,9 +9,11 @@ sources:
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
   - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
   - raw/papers/desena-2012-higher-order-differential/full-text.md
+  - raw/papers/jin-2021-steering-study-ldma/full-text.txt
 tags:
   - differential-microphone-array
   - beamforming
+  - beam-steering
   - spatial-audio
 ---
 
@@ -43,11 +45,21 @@ A differential microphone array (DMA) is a fixed beamformer that uses spatial di
 - **Null-constraint design** (Benesty & Chen): write the desired beampattern's null positions plus a distortionless constraint as a linear system $\mathbf{C}^T(\omega)\mathbf{h}(\omega) = \mathbf{g}_1$; solving it yields classical patterns (dipole, cardioid, hypercardioid, supercardioid, Chebyshev) without pre-specifying a target pattern. With $M > N{+}1$ microphones, the remaining degrees of freedom **maximize WNG** — so adding microphones directly attacks the white-noise amplification bottleneck (the $N$th-order minimum null position has a lower bound).
 - **Multistage-cascade theory**: the cascade is equivalent to linear-constraint DMAs; adjacent stages can merge; the overall beampattern is the product of stage beampatterns; a robust DMA decomposes into a differential stage plus a robustness stage. Excess sensors introduce high-frequency extra nulls, so the differential order must be constrained to preserve frequency invariance.
 - **Beyond integer order and linear geometry**: fractional-order DMAs (order computed from a target DF or WNG threshold); circular DMAs via Jacobi-series beampattern approximation; concentric circular arrays for high-frequency frequency invariance and robustness; planar and time-domain generalizations.
-- **Steering limitation**: linear DMAs are end-fire by construction; steering off end-fire can yield negative gain, motivating circular/spherical geometries.
+- **Steering limitation**: linear DMAs are end-fire by construction; steering off end-fire can yield negative gain, motivating circular/spherical geometries. Refined by [[sources/jin-2021-steering-study-ldma|Jin et al. 2021]]: the limitation is order-dependent — see [[concepts/steerable-ldma|Steerable LDMA]] below.
 
 ## Complex-Root Patterns and Sector-Based Design (De Sena et al. 2012)
 
 [[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012]] identify a structural restriction of the conventional cascade: since each first-order stage contributes a real-root factor $(1-\beta_i) + \beta_i\cos\theta$, cascaded DMAs can only realize trigonometric polynomials with **real** roots — yet optimal patterns for most design criteria (including their [[concepts/sector-directivity-design|sector-based (α, λ) design framework]], which unifies omni/subcardioid/cardioid/hypercardioid/supercardioid as special cases) have complex-conjugate roots. Their [[concepts/complex-root-differential-array|complex-root differential array]] lifts the restriction with three omnidirectional microphones and a central branch filter, matching the conventional structure in filter complexity and WNG. The same paper derives the operational band $[\gamma c/2\pi d,\ c/4d]$ (WNG lower bound / Taylor-approximation upper bound) and shows how multi-spacing sub-arrays with crossover filters extend it — e.g., a measured third-order pattern over 5 octaves.
+
+## Mainlobe Steering (Jin et al. 2021)
+
+[[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021]] settle when a linear DMA can be steered off endfire, via the **ideal function** $P_N(x) = a_{N,N}\prod_{n=1}^{N}(x - x_n)$, $x = \cos\theta$:
+
+- **First-order LDMAs are provably non-steerable** — the extrema of $P_1$ can only occur at $x = \pm 1$ (endfire), regardless of the beamforming method.
+- **Nth-order ($N \geq 2$) LDMAs are partially steerable**: distortionless and bounded response at any $\theta_s$ is achievable when the nulls satisfy a closed-form condition (second order: $x_1 + x_2 = 2x_s$; general order: an equation in the elementary symmetric polynomials of the nulls). The pattern varies with $\theta_s$ rather than rotating, which is the best linear arrays can do.
+- A null-constrained design method fixes $N{-}1$ nulls per application needs and solves the condition for the last; the minimum-norm solution with extra microphones restores WNG. Validated with an 8-mic, 1.1 cm-spaced prototype in an anechoic chamber.
+
+See [[concepts/steerable-ldma|Steerable LDMA]] for the full conditions and design procedure.
 
 ## Limitations
 
@@ -78,6 +90,7 @@ For very small baselines where delay-based features become unreliable (Tashev et
 - [[concepts/orthogonal-series-expansion-beamforming|Orthogonal Series Expansion Beamforming]] — beampattern-approximation design family closely related to null-constraint DMA design
 - [[concepts/sector-directivity-design|Sector-Based Directivity Design]] — (α, λ) framework whose optimal patterns frequently require complex roots
 - [[concepts/complex-root-differential-array|Complex-Root Differential Array]] — three-mic second-order structure realizing complex-root patterns
+- [[concepts/steerable-ldma|Steerable LDMA]] — steering conditions and null-constrained design for LDMAs off endfire
 
 ## Related Sources
 
@@ -87,3 +100,4 @@ For very small baselines where delay-based features become unreliable (Tashev et
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — back-to-back unidirectional variant (9.6 mm baseline)
 - [[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012: On the Design and Implementation of Higher Order Differential Microphones]] — (α, λ) design framework unifying standard patterns; complex-root array structure; WNG/bandwidth analysis
+- [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021: Steering Study of Linear Differential Microphone Arrays]] — first-order non-steerability proof, Nth-order steering conditions, null-constrained SLDMA design

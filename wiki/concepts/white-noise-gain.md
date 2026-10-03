@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-09-24
+updated: 2026-10-03
 tags:
   - beamforming
   - robustness
@@ -12,6 +12,7 @@ sources:
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
   - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
   - raw/papers/desena-2012-higher-order-differential/full-text.md
+  - raw/papers/jin-2021-steering-study-ldma/full-text.txt
 ---
 
 # White Noise Gain (WNG)
@@ -73,6 +74,8 @@ $$f_{\min} = \frac{\gamma c}{2\pi d} \quad (\text{WNG bound, } \gamma = \text{sm
 
 which is the quantitative form of the familiar "differential arrays amplify noise at low frequencies" limitation. Multi-spacing sub-arrays merged with crossover filters extend the band because WNG is a function of the product $kd$ alone.
 
+For **steered** DMAs, the same minimum-norm remedy applies: [[sources/jin-2021-steering-study-ldma|Jin et al. 2021]] show that the WNG of their [[concepts/steerable-ldma|steerable LDMAs]] improves monotonically as the microphone count grows (second-order design with $M = 3 \to 15$ at $\delta = 1$ cm), at the cost of extra high-frequency nulls — i.e., the effective DMA order of the minimum-norm filter can exceed the specified order at high frequencies. WNG also varies with the steering angle $\theta_s$, alongside the DF (which peaks at endfire).
+
 ## Related Concepts
 
 - [[concepts/diagonal-loading|Diagonal Loading]]
@@ -86,6 +89,7 @@ which is the quantitative form of the familiar "differential arrays amplify nois
 - [[concepts/superdirective-beamforming|Superdirective Beamforming]]
 - [[concepts/differential-microphone-array|Differential Microphone Array]]
 - [[concepts/kronecker-product-beamforming|Kronecker Product Beamforming]]
+- [[concepts/steerable-ldma|Steerable LDMA]]
 
 ## Related Sources
 
@@ -95,3 +99,4 @@ which is the quantitative form of the familiar "differential arrays amplify nois
 - [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]] — WNG factorization $W = W_1 \times W_2$ under Kronecker filters; $\epsilon_2$ regularization knob
 - [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — practical rule of thumb: sensor self-noise 20–35 dBA implies WNG > −20 dB is generally safe
 - [[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012: On the Design and Implementation of Higher Order Differential Microphones]] — closed-form WNG of second-order DMA structures; WNG as a function of $kd$ defining the operational band $[\gamma c/2\pi d,\ c/4d]$
+- [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021: Steering Study of Linear Differential Microphone Arrays]] — WNG of steerable LDMAs: minimum-norm improvement with microphone count, steering-angle dependence, high-frequency extra-null caveat

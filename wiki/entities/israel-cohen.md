@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-28
-updated: 2026-09-17
+updated: 2026-10-03
 tags:
   - researcher
   - signal-processing
@@ -22,6 +22,7 @@ tags:
 - Co-authored an investigation of acoustic howling suppression enhancement by fine-tuning a pretrained deep speech enhancement (Denoiser) network with offline-generated howling samples (Ashur & Cohen 2026). The work demonstrates that a 60-40 howling/noise mixing ratio during fine-tuning achieves state-of-the-art perceptual speech quality (PESQ stability across gains) while preserving noise-reduction performance — without architectural modification or recursive training.
 - Co-authored "Kronecker Product Adaptive Beamforming for Microphone Arrays" (APSIPA-ASC 2021) — co-introduced the sum-of-Kronecker-products beamformer representation for arbitrary array geometries and the KMVDR beamformer — [[sources/wang-2021-kronecker-adaptive-beamforming|Wang, Huang, Cohen, Benesty & Chen 2021]]
 - Co-author of "Differential Kronecker Product Beamforming" (IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 27, no. 5, pp. 892–902, 2019) — introduced differential Kronecker product beamformers (KP cardioid/dipole/hypercardioid/supercardioid) — [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019]]
+- Co-author of "Steering Study of Linear Differential Microphone Arrays" (IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 29, pp. 158–170, 2021) — proved first-order LDMAs non-steerable, derived Nth-order steering conditions, and proposed null-constrained steerable LDMA design — [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021]]
 
 Israel Cohen is a well-known researcher in the speech processing community with extensive contributions to speech enhancement and spatial filtering.
 
@@ -31,6 +32,7 @@ Israel Cohen is a well-known researcher in the speech processing community with 
 - [[sources/ashur-2026-acoustic-howling-suppression-fine-tuning|Ashur & Cohen 2026: AHS by Fine-Tuning Deep Speech Enhancement Networks]]
 - [[sources/wang-2021-kronecker-adaptive-beamforming|Wang, Huang, Cohen, Benesty & Chen 2021: Kronecker Product Adaptive Beamforming for Microphone Arrays]]
 - [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]]
+- [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021: Steering Study of Linear Differential Microphone Arrays]]
 
 
 ## Related Entities

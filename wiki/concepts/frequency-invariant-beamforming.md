@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-09-19
-updated: 2026-09-24
+updated: 2026-10-03
 sources:
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/desena-2012-higher-order-differential/full-text.md
+  - raw/papers/jin-2021-steering-study-ldma/full-text.txt
 tags:
   - beamforming
   - microphone-arrays
@@ -37,6 +38,8 @@ A complementary classical approach in the wider array-processing literature (not
 
 For DMAs, frequency invariance holds only inside an explicitly quantifiable band: [[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012]] bound it below by $f_{\min} = \gamma c/2\pi d$ (below which [[concepts/white-noise-gain|WNG]] is unacceptable) and above by $f_{\max} = c/4d$ (beyond which the Taylor approximation underpinning the frequency-independent pattern breaks down) — a single spacing covers roughly 2.5+ octaves, and wider bands require interleaved sub-arrays with different spacings merged by crossover filters.
 
+Frequency invariance survives **steering**: the [[concepts/steerable-ldma|steerable LDMAs]] of [[sources/jin-2021-steering-study-ldma|Jin et al. 2021]] hold their broadband beampatterns constant across frequency at every look direction $\theta_s$ (second- through fourth-order designs, $\delta = 1$ cm) — steering changes the pattern's shape but not its frequency consistency. One caveat: with the minimum-norm solution and $M > N{+}1$ microphones, extra nulls appear at high frequencies, so the *effective* order can exceed the specified order at the top of the band.
+
 ## Related Concepts
 
 - [[concepts/differential-microphone-array|Differential Microphone Array]]
@@ -46,8 +49,10 @@ For DMAs, frequency invariance holds only inside an explicitly quantifiable band
 - [[concepts/directivity-pattern|Directivity Pattern]]
 - [[concepts/white-noise-gain|White Noise Gain]]
 - [[concepts/fixed-beamformer|Fixed Beamformer]]
+- [[concepts/steerable-ldma|Steerable LDMA]]
 
 ## Related Sources
 
 - [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — review that elevates frequency invariance to one of the field's three unifying performance axes
 - [[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012: On the Design and Implementation of Higher Order Differential Microphones]] — explicit DMA operational band $[\gamma c/2\pi d,\ c/4d]$ and multi-spacing bandwidth extension
+- [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021: Steering Study of Linear Differential Microphone Arrays]] — steered LDMA beampatterns remain frequency invariant at every look direction

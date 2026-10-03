@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-30
-updated: 2026-09-19
+updated: 2026-10-03
 tags:
   - researcher
   - array-processing
@@ -37,6 +37,7 @@ tags:
 - Author of "On Multichannel Coherent-to-Diffuse Power Ratio Estimation" (IEEE Sensors Journal, 2024, 2024) — multichannel (M>2) DOA-free CDR estimation via weighted-average subarray fusion and array-manifold joint diagonalization (IEEE Sensors Journal 2024) — [[sources/xiang-2024-multichannel-cdr-estimation|Xiang, Lei, Pan, Chen & Benesty 2024]]
 - Co-authored "An Approach to Microphone Array Self-Awareness Through a Residual Model of the Covariance Matrix" (IEEE TASLP 2026) — defines interferences and background noise via coherence matrices and extracts unknown new sources from the covariance-matrix residual — [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026]]
 - Co-author of "Microphone Array Beamforming Methods for Speech Communication and Interaction" (信号处理 (Journal of Signal Processing), Vol. 36, No. 6, pp. 804–815, 2020) — Chinese-language overview of microphone array beamforming (six method families unified by the DF-WNG-frequency-invariance framework) — [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020]]
+- Co-author of "Steering Study of Linear Differential Microphone Arrays" (IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 29, pp. 158–170, 2021) — proved first-order LDMAs non-steerable, derived Nth-order steering conditions, and proposed null-constrained steerable LDMA design — [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021]]
 
 
 ## Affiliations
@@ -61,3 +62,4 @@ tags:
 - [[sources/xiang-2024-multichannel-cdr-estimation|Xiang, Lei, Pan, Chen & Benesty 2024: On Multichannel Coherent-to-Diffuse Power Ratio Estimation]]
 - [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026: Microphone Array Self-Awareness via a Residual Model of the Covariance Matrix]]
 - [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]]
+- [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021: Steering Study of Linear Differential Microphone Arrays]]

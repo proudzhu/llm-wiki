@@ -1208,6 +1208,7 @@
 | [[concepts/steered-response-power\|Steered-Response Power (SRP)]] | Acoustic source localization by maximizing the output of a steered delay-and-sum beamformer over a candidate-position grid; SRP-PHAT adds phase-transform (whitened GCC) weighting for reverberation robustness, and the Cobos et al. 2011 modification accumulates GCCs over TDOA-gradient-derived delay ranges. | 2026-10-02 |
 | [[concepts/x-srp\|X-SRP (eXtensible Steered Response Power)]] | Modular, generalized formulation of the SRP algorithm from Grinstein et al. 2024, with a Python library | 2026-10-02 |
 | [[concepts/gcc-phat\|GCC-PHAT]] | Phase-transform whitened cross-correlation for TDOA estimation; the correlation underlying SRP-PHAT | 2026-10-02 |
+| [[concepts/steerable-ldma\|Steerable LDMA]] | Conditions and null-constrained design for steering linear DMA mainlobes off endfire; first-order LDMAs provably non-steerable, Nth-order partially steerable (Jin et al. 2021) | 2026-10-03 |
 
 ---
 
@@ -1457,6 +1458,7 @@
 | [[sources/rao-2026-keep-speech-anc\|Rao, Rong, Sun, He, Chen, Zou & Lu 2026]] | Causal keep-speech ANC: a zero-delay WaveNet de-speeches the reference while a conventional RLS FIR filter cancels only noise; error-domain loss beats reference-domain. | 2026-10-01 |
 | [[sources/wikipedia-steered-response-power\|Wikipedia: Steered-Response Power]] | Encyclopedia reference for SRP/SRP-PHAT source localization: delay-and-sum SRP objective, decomposition into pairwise generalized cross-correlations, PHAT whitening, grid-search localization, and the modified SRP-PHAT with TDOA-gradient accumulation limits (Cobos et al. 2011). | 2026-10-02 |
 | [[sources/grinstein-2024-srp-tutorial-review\|Grinstein, Tengan, Çakmak et al. 2024]] | This tutorial review surveys over 200 papers on the Steered Response Power (SRP) method and its variants, with emphasis on SRP-PHAT, and provides the field's first centralized resource for SRP research. | 2026-10-02 |
+| [[sources/jin-2021-steering-study-ldma\|Jin, Huang, Wang, Chen, Benesty & Cohen 2021]] | LDMA steerability settled: first-order provably non-steerable, Nth-order partially steerable under closed-form null conditions; null-constrained SLDMA design validated on an 8-mic prototype | 2026-10-03 |
 
 ---
 
@@ -1510,10 +1512,10 @@
 
 ## Statistics
 
-- **Total pages**: 1459
+- **Total pages**: 1461
 - **Entities**: 624
-- **Concepts**: 565
-- **Sources**: 240
+- **Concepts**: 566
+- **Sources**: 241
 - **Synthesis**: 23
 - **Queries**: 7
-- **Last updated**: 2026-10-02
+- **Last updated**: 2026-10-03

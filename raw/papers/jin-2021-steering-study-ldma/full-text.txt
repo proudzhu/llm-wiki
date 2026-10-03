@@ -1,0 +1,902 @@
+158                                                                  IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 29, 2021
+
+
+
+
+                          Steering Study of Linear Differential
+                                  Microphone Arrays
+                   Jilu Jin , Student Member, IEEE, Gongping Huang , Student Member, IEEE,
+           Xuehan Wang , Student Member, IEEE, Jingdong Chen , Senior Member, IEEE, Jacob Benesty ,
+                                        and Israel Cohen , Fellow, IEEE
+
+
+   Abstract—Differential microphone arrays (DMAs) can achieve                                                I. INTRODUCTION
+high directivity and frequency-invariant spatial response with
+                                                                                              ICROPHONE arrays combined with proper beamform-
+small apertures; they also have a great potential to be used in a
+wide spectrum of applications for high-fidelity sound acquisition.
+Although many efforts have been made to address the design of
+                                                                                     M        ing algorithms have been widely used in speech com-
+                                                                                     munication and human-machine interface systems to extract
+linear DMAs (LDMAs), most developed methods so far only work                         the speech signals of interest from unwanted noise and in-
+for the situation where the source of interest is incident from the
+endfire direction. This paper studies the steering problem of dif-
+                                                                                     terference. Many beamforming methods have been developed
+ferential beamformers with linear microphone arrays. We present                      over the last few decades, including the delay-and-sum [1], [2],
+new insights into beam steering of LDMAs and propose a series                        filter-and-sum and broadband [3]–[6], modal [7]–[11], superdi-
+of steerable differential beamformers. The major contributions of                    rective [12]–[21], differential [22]–[32], and adaptive [33]–[51]
+this paper are as follows. 1) A series of ideal functions are defined                beamformers, etc. Among those, the so-called differential beam-
+to describe the ideal, target beampatterns of LDMAs. 2) We prove
+that first-order differential beamformers with linear microphone
+                                                                                     former has attracted much research interest since it is able to
+arrays are not steerable and their mainlobes can only be at the                      form frequency-invariant beampatterns and has the potential to
+endfire directions. 3) We deduce the fundamental conditions for                      attain high directional gains with small size arrays [13], [25],
+designing steerable differential beamformers with LDMAs. 4) We                       [26], [52]–[55].
+develop a method to design steerable beamformers with LDMAs                              The principle of differential beamforming can be traced back
+using null constraints. Simulations and experiments validate the
+properties of the developed method.
+                                                                                     to the 1940s when directional microphones were invented [56],
+                                                                                     [57], but it was not introduced into the regime of microphone
+   Index Terms—Microphone arrays, uniform linear arrays,                             arrays until the 1990s [22], [23], [52]. The earliest differential
+differential beamforming, frequency-invariant beamformer,                            beamforming method is implicitly embedded in the so-called
+beampattern, beam steering.
+                                                                                     differential microphone arrays (DMAs), which are designed
+                                                                                     to measure the spatial derivatives of the sound pressure field.
+                                                                                     Basically, a first-order DMA consists of two closely spaced om-
+                                                                                     nidirectional microphones and its output is the subtraction of one
+   Manuscript received August 19, 2020; revised October 27, 2020; accepted           sensor’s output from that of the other. The two omnidirectional
+November 3, 2020. Date of publication November 17, 2020; date of current             microphones measure the sound pressure field, each from its own
+version December 7, 2020. This work was supported in part by the National Key        viewpoint. Since they are closely spaced, the difference between
+Research and Development Program of China under Grant 2018AAA0102200,
+in part by the Key Program of National Science Foundation of China (NSFC)            their outputs approximates very well the spatial derivative of
+under Grant 61831019, and in part by the NSFC and Israel Science Foundation          the sound pressure field along the axis that connects the two
+(ISF) Joint Research Program under Grant 61761146001. The associate editor           sensors. So, this simple subtraction operation gives a differential
+coordinating the review of this manuscript and approving it for publication was
+Prof. Sven Erik Nordholm. (Corresponding author: Jingdong Chen.)                     beamformer that is responsive to the first-order differential of
+   Jilu Jin and Jingdong Chen are with the Center of Intelligent Acous-              the acoustic pressure field. Similarly, one can construct second-
+tics and Immersive Communications, Northwestern Polytechnical Univer-                and higher-order DMAs. Generally, an N th-order DMA, which
+sity, Xi’an, Shaanxi 710072, China (e-mail: charles.jilu.jin@gmail.com;
+jingdongchen@ieee.org).                                                              uses a total of N + 1 omnidirectional microphones, is formed
+   Gongping Huang and Israel Cohen are with the Andrew and Erna Viterby              by subtractively combining the outputs of two DMAs of order
+Faculty of Electrical Engineering, Technion—Israel Institute of Technol-             N − 1 [23], [25], [52]. This seemingly simple way of construct-
+ogy, Haifa 3200003, Israel (e-mail: gongpinghuang@gmail.com; icohen@
+ee.technion.ac.il).                                                                  ing microphone arrays lays out the foundation for differential
+   Xuehan Wang is with the Center of Intelligent Acoustics and Immersive Com-        beamforming and, interestingly, the resulting beampattern is
+munications, Northwestern Polytechnical University, Xi’an, Shaanxi 710072,           frequency independent, which is an algebraic polynomial of
+China, and also with the Andrew and Erna Viterby Faculty of Electrical Engi-
+neering, Technion – Israel Institute of Technology, Haifa 3200003, Israel (e-mail:   the cosine function of the azimuth angle. The order of this
+wangxuehan.123@mail.nwpu.edu.cn).                                                    polynomial is equal to the order of the differential beamformer,
+   Jacob Benesty is with the INRS-EMT, University of Quebec, 800                     which in turn measures the same order of the differential pressure
+de la Gauchetiere Ouest, Montreal QC H5A 1K6, Canada (e-mail:
+benesty@emt.inrs.ca).                                                                field. From a beampattern perspective, a higher-order differential
+   Digital Object Identifier 10.1109/TASLP.2020.3038566                              beamformer generally has narrower beamwidth and a higher
+
+                          2329-9290 © 2020 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission.
+                                        See https://www.ieee.org/publications/rights/index.html for more information.
+
+
+
+
+      Authorized licensed use limited to: University of Gothenburg. Downloaded on December 19,2020 at 06:50:15 UTC from IEEE Xplore. Restrictions apply.
+JIN et al.: STEERING STUDY OF LINEAR DIFFERENTIAL MICROPHONE ARRAYS                                                                                        159
+
+
+
+directivity factor (DF), which measures how directive a beam-
+pattern is. As a result, one would want to go with as high order as
+possible in practical applications for sufficient spatial noise and
+interference suppression. However, this way of doing differential
+beamforming amplifies significantly spatial white noise, par-
+ticularly at low frequencies, making the beamformer sensitive
+to array imperfections such as the sensors’ self noise, sensors
+placement errors, and mismatch among different sensors. The
+higher the order, the more serious is white noise amplification.
+   Inspired by the frequency-independent polynomial form of
+the DMA beampatterns, approximation-based approaches to dif-
+ferential beamforming were developed in the short-time Fourier
+transform (STFT) domain, which design the beamforming filter
+in such a way that the resulting beampattern resembles the
+ideal, target DMA beampattern. If the mainlobe is pointed to
+the endfire direction, which is assumed to be true in most
+differential beamforming methods with linear arrays, a DMA
+beampattern is uniquely determined by its nulls. Based on this                  Fig. 1. Illustration of an LDMA integrated into a smart television. This LDMA
+fact, a null-constrained approach was developed in [25], [26],                  is mounted at the bottom side to form a directivity pattern in the broadside.
+where the differential beamformer is designed in each STFT
+subband by solving a linear system of equations constructed
+from constraints on the nulls’ directions of the target directivity             direction is different from the one at 0◦ . 3) Non-steerable: the
+pattern. A prominent advantage of this approach is that one can                 beampattern has a gain of 1 at the look direction, but also gains
+maximize the so-called white noise gain (WNG) by increasing                     greater than 1 at some other directions. Differential beamformers
+the number of microphones with a given order of the DMA                         with LDMAs have limited steering flexibility, which means
+beampattern, leading to an optimal way in dealing with the                      that the steerable case cannot happen and the best case that is
+problem of white noise amplification. Alternatively, one can                    achievable is the second one; though, in many other scenarios the
+also design differential beamformers using a series expansion                   beamformer may not be partially steerable at all. Consequently,
+technique, which approximates the beamformer’s beampattern                      it is important to study under what conditions a differential
+using, e.g., the Jacobi-Anger expansion and then identifies the                 beamformer becomes partially steerable and how to steer it to a
+beamforming coefficients using the relationship between the                     specified look direction if it can be steered, which is the main
+beamformer’s beampattern and the target directivity pattern [10],               focus of this work.
+[11]. While it provides a better way to control the designed                       There have been some efforts in the literature to address the
+beampattern so that it closely matches the target beampattern as                problem of steerable DMAs, which can be classified into two
+compared to the null-constrained method, the series expansion                   categories. The first one addresses how to steer beamformers
+approach needs to know the target beampattern as well as its                    with LDMAs [22], [58]–[60], but they focus only on first-
+analytic form as the a priori information, which may not be                     or second-order DMAs. Besides, not much analysis has been
+accessible in real-world applications.                                          provided whether the steering is successful or not. The second
+   Although, a great deal of efforts have been devoted to differ-               group attempts to use two or three dimensional microphone
+ential beamforming with linear DMAs (LDMAs), most methods                       arrays, e.g., circular arrays [10], [29], square arrays [31], [61],
+developed so far assume that the mainlobe is at the endfire                     [62], concentric circular arrays [11], and spherical arrays [7],
+direction, i.e., 0◦ . The major reasons for this include: 1) differen-          [8], [63]–[67]. However, in many applications, such as the one
+tial beamformers with LDMAs generally achieve the maximum                       illustrated in Fig. 1, linear arrays are preferable and widely used.
+DF at the endfire directions so it is natural to assume that the                   Apparently, there is a great need to study the problem of
+look direction is at 0◦ , and 2) differential beamformers with                  beam steering with LDMAs, which is the focus of this paper.
+LDMAs have limited steering flexibility. In applications such                   By analyzing the polynomial form of an N th-order LDMA, we
+as hearing aids and bluetooth headsets, the endfire assumption                  prove that the mainlobe of a first-order LDMA can only be at
+holds true and steering is not really needed. But in many other                 the endfire direction. We then deduce the fundamental condi-
+applications, such as smart televisions as the one illustrated in               tions for designing steerable second- and third-order LDMAs.
+Fig. 1, steering is desired as the source position can vary. In the             These results are subsequently generalized to the general case
+context of LDMAs, when one attempts to steer the mainlobe                       of N th-order LDMAs. Based on the analysis of the fundamental
+of a differential beamformer to a different look direction other                conditions, we propose a method to design N th-order steerable
+than 0◦ , three cases can happen. 1) Steerable: in this case, the               LDMAs (SLDMAs) using null constraints.
+resulting beampattern is simply a rotation of the beampattern                      The remainder of this paper is organized as follows. In
+at 0◦ . 2) Partially steerable: in this case, the beampattern has a             Section II, we present the signal model, problem formulation,
+gain of 1 at the look direction and gains of less than or equal                 and performance metrics. We then briefly describe the null-
+to 1 at other directions, but the beampattern steered to the look               constrained DMA design method in Section III. In Section IV,
+
+
+
+      Authorized licensed use limited to: University of Gothenburg. Downloaded on December 19,2020 at 06:50:15 UTC from IEEE Xplore. Restrictions apply.
+160                                                               IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 29, 2021
+
+
+
+
+                                                                                 where the superscript H is the conjugate-transpose operator. The
+                                                                                 distortionless constraint in the desired (assumed to be the look)
+                                                                                 direction is generally needed, i.e.,
+                                                                                                        hH (ω) d (ω, cos θs ) = 1.                         (4)
+                                                                                 So, the problem of differential beamforming is to find an optimal
+                                                                                 beamforming filter subject to the distortionless constraint in (4).
+                                                                                 The optimality is generally evaluated using three performance
+                                                                                 measures: beampattern, DF, and WNG.
+                                                                                    The beampattern describes the sensitivity of a beamformer to
+Fig. 2. Illustration of a uniform LDMA consisting of M omnidirectional           a plane wave impinging on the array from the direction θ. It is
+microphones, where δ is the interelement spacing and θ denotes the incidence     defined as [13], [25]
+azimuth angle.
+                                                                                                                    
+                                                                                                 Bθs [h (ω) , θ] = hH (ω) d (ω, cos θ) .                   (5)
+we introduce the ideal function of DMAs and deduce the condi-                    One can check that with a ULA as illustrated in Fig. 2, the
+tions for designing steerable LDMAs. In Section V, we propose a                  beampattern is symmetric with respect to the endfire directions,
+method to design steerable LDMAs with null constraints. Some                     i.e.,
+simulations and design examples are presented in Section VI
+to validate the proposed method for the design of SLDMAs.                                          Bθs [h (ω) , θ] = Bθs [h (ω) , −θ] .                    (6)
+Finally, conclusions are given in Section VII.                                   In the context of steerable DMAs, we have the following three
+                                                                                 scenarios.
+       II. SIGNAL MODEL, PROBLEM FORMULATION, AND                                   1) Steerable. In this case, for any given θs ∈ [0◦ , 180◦ ], we
+                   PERFORMANCE METRICS                                                 expect to have |Bθs [h(ω), θs ]|2 = 1, |Bθs [h(ω), θ]|2 ≤ 1,
+   Consider a plane wave, in the farfield, that propagates in                          and Bθs [h(ω), θ] is a rotation of B0 [h(ω), θ] by θs . This
+an anechoic acoustic environment at the speed of sound, i.e.,                          case cannot be achieved with LDMAs.
+c = 340 m/s, and impinges on a uniform linear array (ULA)                           2) Partially steerable. In this case, for any given θs ∈
+consisting of M omnidirectional microphones with an interele-                          [0◦ , 180◦ ], we expect to have |Bθs [h(ω), θs ]|2 = 1,
+ment spacing δ, as illustrated in Fig. 2. If the incidence angle                       |Bθs [h(ω), θ]|2 ≤ 1, but Bθs [h(ω), θ] varies with θs and
+is parameterized by θ, then the corresponding phase vector (of                         may not be a rotation of B0 [h(ω), θ] by θs . This is the best
+length M ) is given by [68]                                                            we can do with LDMAs. This scenario is studied in this
+                                                    T                               paper.
+    d (ω, cos θ) = 1 e−j cos θ · · · e−j(M −1) cos θ , (1)                        3) Non-steerable. In this case, for a given θs ∈ [0◦ , 180◦ ],
+where j is the imaginary unit, with j2 = −1,  = ωδ/c, with                            we have |Bθs [h(ω), θs ]|2 = 1, but |Bθs [h(ω), θ]|2 ≥ 1 for
+ω = 2πf being the angular frequency and f > 0 the temporal                             some angles. Therefore, the beampattern is not a valid one
+frequency, and the superscript T is the transpose operator. The                        and the corresponding beamformer may amplify noise and
+acoustic wavelength is λ = c/f . In this paper, we consider small                      interference. We will discuss later how to avoid this from
+values of the interelement spacing, i.e., δ is much smaller than                       happening.
+the smallest wavelength in the frequency band of interest, such                     Note that in the rest of this paper, we will drop the subscript
+that the acoustic pressure differentials can be approximated by                  θs from Bθs [h(ω), θ] to simplify the notation, which should not
+finite differences of the microphones outputs.                                   lead to any confusion.
+   Considering the general case where the signal of interest (i.e.,                 The WNG, which evaluates the sensitivity of a microphone
+the desired signal) comes from the direction θs , we can express                 array to some of its imperfections, is defined as [25]
+the frequency-domain observation signal vector of length M                                                     H                   2
+                                                                                                              
+                                                                                                           h (ω) d (ω, cos θs )
+                                                                                                                                    
+as [2]                                                                                         W [h (ω)] =          H
+                                                                                                                                       .          (7)
+                                                                                                                   h (ω) h (ω)
+                                                T
+              y (ω) = Y1 (ω) Y2 (ω) · · · YM (ω)
+                                                                                    The DF, which quantifies the spatial gain of a beamformer in
+                       = d (ω, cos θs ) X (ω) + v (ω) ,                   (2)    a spherical isotropic noise field, is defined as [13], [25], [69]
+where X(ω) is the zero-mean source signal of interest and v(ω)                                                          |B [h (ω) , θs ]|2
+is the zero-mean additive noise signal vector defined similarly                               D [h (ω)] =           π                              ,      (8)
+                                                                                                               1
+to y(ω).                                                                                                                 |B [h (ω) , θ]|2 sin θdθ
+                                                                                                               2    0
+   Beamforming is a process to design a spatial filter, h(ω), that
+we apply to the observation vector in order to obtain a good                     which can be rewritten as
+                                                                                                                    H                  
+estimate of X(ω). The output of the beamformer is                                                                  h (ω) d (ω, cos θs )2
+                                                                                                 D [h (ω)] =                                   ,           (9)
+                        Z (ω) = hH (ω) y (ω) ,                            (3)                                       hH (ω) Γd (ω) h (ω)
+
+
+
+      Authorized licensed use limited to: University of Gothenburg. Downloaded on December 19,2020 at 06:50:15 UTC from IEEE Xplore. Restrictions apply.
+JIN et al.: STEERING STUDY OF LINEAR DIFFERENTIAL MICROPHONE ARRAYS                                                                                          161
+
+
+
+where the (i, j)th element (for i, j = 1, 2, . . . , M ) of Γd (ω) is                    If we have more than N + 1 microphones, i.e., M > N + 1,
+                                                                                         then the minimum-norm solution of (14) can be derived, i.e.,
+                                        sin [ω(j − i)δ/c]
+                    [Γd (ω)]ij =                          ,                     (10)                                                       −1
+                                           ω(j − i)δ/c                                      hMN (ω) = DH (ω, xN ) D (ω, xN ) DH (ω, xN )         i1 .
+with [Γd (ω)]ii = 1.                                                                                                                               (18)
+                                                                                         It has been shown that this solution yields an N th-order DMA
+              III. CONVENTIONAL DESIGN OF LDMAS                                          while improving the WNG, which increases with the number of
+  The ideal spatial response to the N th-order derivative of the                         microphones [25], [26]. In conventional methods with LDMAs,
+sound pressure field is of the following form [23], [25]:                                it is generally assumed that the look direction is at the endfire,
+                                                                                         i.e., θs = 0◦ , which greatly restricts their practical applications.
+                              
+                              N
+                                                                                         Therefore, it is important to study under what conditions a
+               BN (θ) =             aN,n cosn θ = aTN p (θ) ,                   (11)
+                                                                                         differential beamformer can be steered to a desired look direction
+                              n=0
+                                                                                         other than the endfire, which will be studied in the next section.
+where aN,n , n = 0, 1, . . . , N are real coefficients and
+                                                T                                            IV. MAINLOBE STEERING CONDITIONS OF LDMAS
+               aN = aN,0 aN,1 · · · aN,N ,                                      (12)
+                                              T                                           Taking x = cos θ, the ideal beampattern in (11) can be rewrit-
+             p (θ) = 1 cos θ · · · cosN θ .                                     (13)     ten as an algebraic polynomial of order N with respect to x as
+So, the problem of designing an N th-order LDMA becomes one                                                               
+                                                                                                                          N
+of designing the beamforming filter so that the corresponding                                                 PN (x) =          aN,n xn .                   (19)
+beampattern is as close as possible to BN (θ). Therefore, we can                                                          n=0
+call BN (θ) the N th-order ideal (or target) beampattern. Taking                         Since an N th-order polynomial has N zeros, (19) can be rewrit-
+(11) as the target beampattern, one way to design the differential                       ten as
+beamformer is to optimize the filter, h(ω), such that its beam-
+                                                                                                                            N
+pattern is as close as possible to the target one. A representative                                                      1
+                                                                                                           PN (x) =            (x − xn ) ,                  (20)
+method is to design the differential beamformer using the null                                                          ξN n=1
+information. Generally, an N th-order DMA beampattern has N                                           
+nulls. So, a straightforward way to find the filter is by building                       where ξN = N    n=0 (xs − xn ) is a normalization factor to satisfy
+the relationship between the nulls of the beamformer’s beam-                             the distortionless constraint in the desired look direction. By
+pattern and those of the target beampattern [25], which can be                           comparing (20) and (19), it is not difficult to check that
+viewed as an extension of the traditional multistage subtraction                                                     1
+method [28].                                                                                                           = aN,N .                             (21)
+                                                                                                                    ξN
+   Let us assume that the N th-order DMA target beampattern
+has N distinct nulls1 at θ1 , θ2 , . . . , θN . Combining these con-                     So, (20) can be rewritten as
+straints with the distortionless one given in (4), we can form the                                                           N
+following linear system of equations [25], [26]:                                                          PN (x) = aN,N           (x − xn ) .               (22)
+                                                                                                                            n=1
+                           D (ω, xN ) h (ω) = i1 ,                              (14)
+                                                                                         Since the function (22) is directly derived from the ideal beam-
+where                                                                                    pattern, in our context, we name PN (x) as the N th-order ideal
+                                           T
+                         xN = xs x1 · · · xN ,                                  (15)     function.
+                                                                                            Now, let us study the relationship between the ideal function
+with xs = cos θs and xn = cos θn , n = 1, 2, . . . , N ,                                 and the ideal beampattern. It can be checked that the phase vector
+                            ⎡ H            ⎤
+                               d (ω, xs )                                                with respect to x is periodic, i.e.,
+                            ⎢ dH (ω, x1 ) ⎥                                                                                           
+                            ⎢              ⎥                                                                                      2kπ
+               D (ω, xN ) = ⎢        ..    ⎥,                                   (16)                       d (ω, x) = d ω, x +            ,              (23)
+                            ⎣         .    ⎦                                                                                       
+                                           dH (ω, xN )                                                                                       c
+                                                                                         where k is an integer number and the period is         . Then, from
+and i1 = [ 1 0 · · · 0 ]T .                                                                                                                 fδ
+                                                                                         (5) and (23), the beampattern is also periodic with respect to x,
+   To design an N th-order LDMA, at least N + 1 microphones
+                                                                                         i.e.,
+are needed. If the number of microphones M is equal to N + 1,                                                                              
+then the solution of (14) is                                                                                                            c
+                                                                                                        B [h (ω) , x] = B h (ω) , x +         .          (24)
+                                                                                                                                       fδ
+                        hE (ω) = D−1 (ω, xN ) i1 .                              (17)
+                                                                                         For small-size LDMAs, we have c  f δ. So, only the part of
+   1 If there are multiple nulls occurring in the same direction, we invite the reader
+                                                                                         the beampattern in the interval −1 ≤ x ≤ 1 can be seen and is
+to see [26] Thus, the method discussed in this paper can be easily extended to           responsible for sound acquisition. Therefore, for ideal functions,
+such cases.                                                                              we define the “visible zone” of which the boundary consists of
+
+
+
+       Authorized licensed use limited to: University of Gothenburg. Downloaded on December 19,2020 at 06:50:15 UTC from IEEE Xplore. Restrictions apply.
+162                                                                  IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 29, 2021
+
+
+
+
+Fig. 3. First-order ideal function, P1 (x), and the corresponding first-order ideal beampattern, B1 (θ). The dashed line is the boundary of the visible zone, and the
+part of the ideal function outside the visible zone is invisible in the ideal beampattern. The values of the null are respectively: (a.1) (b.1) dipole, x1 = cos(90◦ );
+(a.2) (b.2) hypercardioid, x1 = cos(120◦ ); (a.3) (b.3) cardioid, x1 = cos(180◦ ); and (a.4) (b.4) subcardioid, x1 = −1.5.
+
+
+
+
+x = ±1 and PN (x) = ±1. The part of the ideal function inside                        cannot be steered to other directions regardless of what method
+the visible zone corresponds to the ideal beampattern BN (θ) in                      is used.
+0 ≤ θ ≤ π.                                                                              It is easy to check that
+   We first consider the simplest case with N = 1. Then, the
+                                                                                                     dPN (x)                 dPN (x)
+first-order ideal function is                                                                                 = − 1 − x2 ×             .        (27)
+                                                                                                        dθ                       dx
+                          P1 (x) = a1,1 x + a1,0 ,                          (25)
+                                                                                     Therefore, in the range of −1 < x < 1, analyzing dPdθ   N (x)
+                                                                                                                                                   is
+with a1,1 = 0, which is a linear function of x. For the conven-                                             dPN (x)
+                                                                                     equivalent to analyzing dx . So, in the rest part of this paper,
+tional first-order LDMA, the mainlobe direction is set to the                        we study the beam steering problem by directly analyzing the
+endfire direction, i.e., θs = 0◦ , so we have P1 (1) = 1. Then,                      derivative of PN (x) with respect to x.
+P1 (x) is uniquely determined by the single null at x1 . To see                        The second-order ideal function is
+more clearly, we present the following four scenarios.
+   1) First-order dipole: x1 = 0, and a1,1 = 1, a1,0 = 0.                                                P2 (x) = a2,2 x2 + a2,1 x + a2,0                        (28)
+   2) First-order hypercardioid: x1 = −1/2, and a1,1 = 2/3,                          and its derivative with respect to x is
+       a1,0 = 1/3.
+   3) First-order cardioid: x1 = −1, and a1,1 = 1/2, a1,0 =                                                  dP2 (x)
+                                                                                                                     = 2a2,2 x + a2,1 .                          (29)
+       1/2.                                                                                                    dx
+   4) First-order subcardioid: x1 = −3/2, and a1,1 = 2/5,                            Since P2 (xs ) must be a maximum, the derivative of P2 (x)
+       a1,0 = 3/5.                                                                   should be equal to 0 at xs . It follows immediately that
+   For LDMAs, the role of the invisible part cannot be neglected.                                                            −a2,1
+Fig. 3 plots the first-order ideal functions and their corresponding                                                 xs =          .                             (30)
+                                                                                                                             2a2,2
+ideal beampatterns. In particular, Fig. 3(a.4) and (b.4) illustrate
+that the invisible null can also be used to design LDMAs.                            If −1 < xs < 1, P2 (x) corresponds to the ideal beampattern of
+   The derivative of P1 (x) with respect to θ is                                     a second-order DMA. To achieve the mainlobe steering, a core
+                                                                                    issue in the design is how to reasonably set the null constraints. In
+                     dP1 (x)
+                               = −a1,1 1 − x2 .                 (26)                 other words, to steer a second-order DMA, the steering direction,
+                        dθ                                                           xs , and the values of the nulls, x1 and x2 , must satisfy certain
+This derivative is equal to 0 if and only if x = ±1 since a1,1 = 0.                 conditions.
+Therefore, the maximum and minimum of P1 (x) in the range of                            From (22), the second-order ideal function can be written as
+−1 ≤ x ≤ 1 can only appear at x = ±1. Consequently, the look
+direction of the first-order LDMA can only be at 0◦ or 180◦ and                             P2 (x) = a2,2 x2 − a2,2 (x1 + x2 ) x + a2,2 x1 x2 .                  (31)
+
+
+
+      Authorized licensed use limited to: University of Gothenburg. Downloaded on December 19,2020 at 06:50:15 UTC from IEEE Xplore. Restrictions apply.
+JIN et al.: STEERING STUDY OF LINEAR DIFFERENTIAL MICROPHONE ARRAYS                                                                                        163
+
+
+
+Comparing (28) with (31), one can have                                         To find the maximum of the beampattern, the derivative in (40)
+                                  a2,1                                         is set to zero. Then, substituting (47) into (40), we get the
+                    x1 + x2 = −        .                              (32)     fundamental condition for constructing an N th-order steerable
+                                  a2,2
+                                                                               ideal function as
+Substituting (32) into (30), the relationship among xs , x1 , and
+x2 can be expressed as                                                                             
+                                                                                                   N
+                                                                                                         n(−1)N −n ζN,n xn−1
+                                                                                                                         s   = 0.                         (48)
+                            x1 + x2 = 2xs ,                           (33)                         n=1
+
+which is the fundamental condition for designing steerable                                      V. DESIGN OF STEERABLE LDMAS
+second-order LDMAs.
+  Similarly, from (19), the third-order ideal function is                          Having studied the conditions for SLDMAs, we are now ready
+                                                                               to discuss how to design an SLDMA. According to (17) and
+           P3 (x) = a3,3 x3 + a3,2 x2 + a3,1 x + a3,0 .               (34)     (18), we need N + 1 parameters to determine the beamforming
+                                                                               filter for an N -order SLDMA, i.e., the steering direction and
+The derivative of P3 (x) with respect to x is
+                                                                               the directions for the N nulls. For the problem at hand, the
+              dP3 (x)                                                          steering direction can be assumed to be given. Then, the design
+                      = 3a3,3 x2 + 2a3,2 x + a3,1 .                   (35)
+                dx                                                             problem becomes one of determining the N nulls. Without loss
+Let the derivative of P3 (x) at xs be equal to 0, we get                       of generality, let us assume that the N nulls are arranged in
+                                                                               an ascending order. One straightforward way to determine the
+                           a3,2       a3,1
+                  3x2s + 2      xs +       = 0.                       (36)     directions of the N nulls is to set the locations of the first N − 1
+                           a3,3       a3,3                                     nulls according to the requirements of the practical application
+By comparing (22) with (34), it can be deduced that                            and then determine the last null according to the condition in
+               a3,2                                                            (48).
+                    = −x1 − x2 − x3 ,                                 (37)         1) In the case that xs = 0, i.e., θs = 90◦ , (clearly, xn =
+               a3,3
+                                                                                      0, n = 1, 2, . . . , N ), the fundamental condition in (48)
+               a3,1                                                                   can be rewritten as
+                    = x1 x2 + x1 x3 + x2 x3 .                         (38)
+               a3,3
+                                                                                                                    ζN,1 = 0.                             (49)
+Substituting (37) and (38) into (36), one can obtain the funda-
+mental condition to design steerable third-order LDMAs:                               From the definition of ζN,1 , the last null to control steering
+                                                                                      is deduced as
+                 
+                 3
+     3x2s − 2          xn xs + x1 x2 + x2 x3 + x1 x3 = 0.             (39)                                             −1
+                                                                                                        xN = N −1              .                (50)
+                 n=1
+                                                                                                                     n=1 1/xn
+   For the N th-order ideal function, its derivative with respect
+                                                                                  2) In the case that xs = 0, we define the following vector:
+to x is
+                                                                                                                             T
+                     dPN (x) 
+                               N                                                                     qN (x) = 1 x · · · xN ,                (51)
+                            =     naN,n xn−1 .                        (40)
+                       dx     n=1
+                                                                                      where x ∈ {xs , x1 , x2 , . . . , xN }. Setting the derivative of
+                                                                                      the ideal function at xs to 0 gives
+By expanding the N th-order ideal function (20), we have
+                                                                                                             qTN (xs ) ΣN aN = 0,                         (52)
+                                 
+                                 N
+                                              N −n
+             PN (x) = aN,N             (−1)               n
+                                                     ζN,n x ,         (41)            where ΣN = diag(0, 1, . . . , N ) is a diagonal matrix.
+                                 n=0
+                                                                                      If the ideal function has distinct nulls, the coefficients vec-
+where                                                                                 tor, aN , defined in (12) can be derived from the following
+                                                                                      linear system of equations according to the study in [25]:
+        ζN,N = 1,                                                     (42)
+      ζN,N −1 = x1 + x2 + · · · + xN ,                                (43)                                      Q(x)aN = i1 ,                             (53)
+
+      ζN,N −2 = x1 x2 + x1 x3 + · · · + xN −1 xN ,                    (44)            where
+                                                                                                                    ⎡          ⎤
+                ..                                                                                                  qTN (xs )
+                 .                                                                                              ⎢ qTN (xs ) ΣN ⎥
+                                                                                                                ⎢              ⎥
+                                                                                                                ⎢     T        ⎥
+         ζN,1 = x1 x2 · · · xN −1 + · · · + x2 x3 · · · xN ,          (45)                               Q(x) = ⎢ qN (x1 ) ⎥ .                            (54)
+                                                                                                                ⎢       ..     ⎥
+                                                                                                                ⎣        .     ⎦
+         ζN,0 = x1 x2 · · · xN −1 xN .                                (46)
+                                                                                                                        qTN (xN −1 )
+  From (19) and (41), we can obtain
+                                                                                      For high order LDMAs, multiple nulls may occur in the
+                           aN,n                                                       same direction. If the ideal function PN (x) has P (1 ≤
+         ζN,n (−1)N −n =        , n = 0, 1, . . . , N.                (47)
+                           aN,N                                                       P ≤ N ) nulls at the same direction, i.e., xn = xn+1 =
+
+
+
+     Authorized licensed use limited to: University of Gothenburg. Downloaded on December 19,2020 at 06:50:15 UTC from IEEE Xplore. Restrictions apply.
+164                                                               IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 29, 2021
+
+
+
+                               TABLE I
+               PARAMETERS OF THE SECOND-ORDER SLDMAS
+
+
+
+
+       · · · = xn+P −1 (in other words, xn is a null with multi-
+       plicity of P ), we need to construct Q(x) according to the
+       method proposed in [26] as
+                               ⎡                ⎤
+                                     qTN (xs )
+                               ⎢ qTN (xs ) ΣN ⎥
+                               ⎢                ⎥
+                               ⎢     qTN (x1 )  ⎥
+                               ⎢                ⎥
+                               ⎢           ..   ⎥
+                               ⎢            .   ⎥
+                               ⎢                ⎥
+                               ⎢ qTN (xn ) ⎥
+                               ⎢ T              ⎥
+                               ⎢                ⎥
+                       Q(x) = ⎢ qN (xn ) ΣN ⎥ .              (55)
+                               ⎢         ..     ⎥
+                               ⎢          .     ⎥
+                               ⎢                ⎥
+                               ⎢ qT (xn ) ΣP −1 ⎥
+                               ⎢ N            N ⎥
+                               ⎢ qT (xn+P ) ⎥
+                               ⎢ N              ⎥
+                               ⎢          ..    ⎥
+                               ⎣           .    ⎦
+                                        qTN (xN −1 )
+  The solution for aN is
+                                                                                 Fig. 4. The ideal functions and beampatterns of the second-order SLDMAs:
+                            aN = Q−1 (x)i1 .                            (56)     (a.1) (b.1) (c.1) SSLDMA-I and (a.2) (b.2) (c.2) SSLDMA-II. (a.1) and (a.2)
+                                                                                 are the ideal functions; (b.1) and (b.2) are the beampatterns at f = 1 kHz; and
+Assume that the last two elements of aN are aN,N −1 and aN,N ,                   (c.1) and (c.2) are the broadband beampatterns versus frequency, f . Conditions
+then the last null, xN , can be determined from the definition of                of simulation: M = 3 and δ = 1 cm.
+ζN −1,N in (47) and (43) as
+                                         N −1
+                                aN,N −1 
+                                                                                                                TABLE II
+                                                                                                 PARAMETERS OF THE THIRD-ORDER SLDMAS
+                     xN = −            −      xn .                      (57)
+                                 aN,N    n=1
+
+As a result, the vector xN is subsequently obtained according
+to (15). Finally, by substituting the determined null vector, xN ,
+into the linear system in (14) and solving the optimal filter by
+(17) or (18), we obtain the beamforming filter of the N th-order
+steerable LDMAs.                                                                 that the beampatterns are frequency invariant, which is an im-
+                                                                                 portant property of differential beamformers for high-fidelity
+                            VI. SIMULATIONS                                      sound acquisition. Fig. 5 plots the DFs and WNGs of the two
+                                                                                 beamformers. Not surprisingly, the DF and WNG vary with
+  In this section, we study the performance of the proposed
+                                                                                 the steering angle, θs . Comparing the results in Fig. 5 with
+method for designing steerable LDMAs.
+                                                                                 those in [25], one can see that a second-order SLDMA has its
+                                                                                 maximum DF at the endfire directions, which explains why most
+A. SLDMA Design With Distinct Nulls                                              works on LDMA assume the steering direction at 0◦ .
+   We first study the performance of second-order SLDMA                             Now, we study the design of third-order SLDMAs with four
+beamformers with three microphones, where the interelement                       microphones. We still consider two cases: TSLDMA-I and
+spacing, δ, is set to 1 cm. We consider two cases: SSLDMA-I and                  TSLDMA-II, with the mainlobes being at, respectively, 70◦
+SSLDMA-II, whose mainlobes are at, respectively, 90◦ and 75◦ .                   and 45◦ . Similarly, we assume that x1 and x2 are pre-specified
+We assume that one null x1 is pre-specified and the other null x2                but the last null x3 is determined according to (39). These
+is obtained from (33). The parameters for the two beamformers                    parameters are listed in Table II. Fig. 6 plots the ideal functions
+are shown in Table I. Fig. 4 plots the ideal functions, designed                 and beampatterns. Again, it is seen that the steering is successful.
+beampatterns at 1 kHz, and broadband beampatterns versus                         Fig. 7 plots the DFs and WNGs of the third-order SLDMAs.
+frequency. As seen, steering is achieved successfully.                           One can see that the DF is higher but the WNG is lower than the
+   The ideal functions of the second-order SLDMAs are parabo-                    second-order SLDMA shown in the previous simulation.
+las and the nulls are symmetrically distributed on both sides                       In this simulation, we study the performance of fourth-order
+of xs , which is clear from Fig. 4. It is also seen from Fig. 4                  SLDMAs with five microphones. We consider four different
+
+
+
+      Authorized licensed use limited to: University of Gothenburg. Downloaded on December 19,2020 at 06:50:15 UTC from IEEE Xplore. Restrictions apply.
+JIN et al.: STEERING STUDY OF LINEAR DIFFERENTIAL MICROPHONE ARRAYS                                                                                           165
+
+
+
+
+Fig. 5. DFs and WNGs of the second-order SLDMAs as a function of
+frequency, f : (a) DF and (b) WNG. Conditions of simulation: M = 3 and            Fig. 7. DFs and WNGs of the third-order SLDMAs as a function of frequency,
+δ = 1 cm.                                                                         f : (a) DF and (b) WNG. Conditions of simulation: M = 4 and δ = 1 cm.
+
+
+
+
+Fig. 6. The ideal functions and beampatterns of the third-order SLDMAs:
+(a.1) (b.1) (c.1) TSLDMA-I and (a.2) (b.2) (c.2) TSLDMA-II. (a.1) and (a.2)
+are the ideal functions; (b.1) and (b.2) are the beampatterns at f = 1 kHz; and
+(c.1) and (c.2) are the broadband beampatterns versus frequency, f . Conditions
+of simulation: M = 4 and δ = 1 cm.
+
+
+
+
+cases: FSLDMA-I, FSLDMA-II, FSLDMA-III, and FSLDMA-
+IV, where the coefficients vector, aN , and null, x4 , are computed               Fig. 8. The ideal functions and beampatterns of the fourth-order SLDMAs:
+                                                                                  (a.1) (b.1) FSLDMA-I; (a.2) (b.2) FSLDMA-II; (a.3) (b.3) FSLDMA-III; and
+according to (56) and (57), respectively. All the parameters are                  (a.4) (b.4) FSLDMA-IV. (a.1) (a.2) (a.3) (a.4) are the ideal functions and (b.1)
+shown in Table III. Fig. 8 plots the beampatterns and Fig. 9 plots                (b.2) (b.3) (b.4) are the beampatterns at f = 1 kHz. Conditions of simulation:
+the broadband beampatterns versus frequency. It is clearly seen                   M = 5 and δ = 1 cm.
+
+
+
+
+      Authorized licensed use limited to: University of Gothenburg. Downloaded on December 19,2020 at 06:50:15 UTC from IEEE Xplore. Restrictions apply.
+166                                                               IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 29, 2021
+
+
+
+                                                                       TABLE III
+                                                        PARAMETERS OF THE FOURTH-ORDER SLDMAS
+
+
+
+
+                                                                 TABLE IV
+                                   PARAMETERS FOR TSLDMA-I AND FSLDMA-II (BOTH HAVE A NULL OF MULTIPLICITY)
+
+
+
+
+Fig. 9. Broadband beampatterns versus frequency of the fourth-order SLD-
+MAs: (a) FSLDMA-I, (b) FSLDMA-II, (c) FSLDMA-III, and (d) FSLDMA-IV.
+Conditions of simulation: M = 5 and δ = 1 cm.
+
+
+that the designed beamformers achieve mainlobe steering and
+the beampatterns are frequency invariant.
+                                                                                 Fig. 10. The ideal functions and beampatterns of TSLDMA-I and FSLDMA-II
+B. Design SLDMA Consisting of Nulls With Multiplicity                            (both have a null of multiplicity of 2): (a.1) (b.1) (c.1) TSLDMA-I and (a.2) (b.2)
+                                                                                 (c.2) FSLDMA-II. (a.1) and (a.2) are the ideal functions; (b.1) and (b.2) are the
+   In this subsection, we investigate two cases: TSLDMA-I and                    beampatterns at f = 1 kHz; and (c.1) and (c.2) are the broadband beampatterns
+                                                                                 versus frequency, f . Conditions of simulation: TSLDMA-I M = 4, FSLDMA-
+FSLDMA-II. Their look directions are at 60◦ , and they both                      II M = 5, and δ = 1 cm.
+have a null at cos(135◦ ) with multiplicity of 2 and 3, respec-
+tively. In this situation, the coefficients vector, aN , is solved
+according to (55) and (56). The parameters of both TSLDMA-I
+and FSLDMA-II are shown in Table IV. Fig. 10 plots the ideal
+functions and beampatterns. It is seen that both TSLDMA-I and                    broadband beampatterns and DF and WNG. Clearly, steering is
+FSLDMA-II have successfully achieved mainlobe steering.                          successful, which validates the developed method. As seen, the
+                                                                                 WNG improves as the number of microphones increase. This is
+                                                                                 the advantage of the minimum-norm method, which improves
+C. Robust SLDMA Design                                                           the robustness of the designed SLDMA. But one can notice
+  In this part of simulations, we show that the WNG of SLDMA                     from Fig. 11 that this method may introduce extra nulls into the
+can also be improved by increasing the number of micro-                          beampattern, particularly at high frequencies. In other words,
+phones. We consider to design a second-order SLDMA with                          at high frequencies, the order of the designed DMA with the
+xs = cos(90◦ ), x1 = cos(0◦ ), and x2 = cos(180◦ ), using 3, 7,                  minimum-norm method may exceed the specified order. How
+11, and 15 microphones. Figs. 11 and 12 plot, respectively, the                  to design SLDMA with the minimum-norm method to achieve
+
+
+
+      Authorized licensed use limited to: University of Gothenburg. Downloaded on December 19,2020 at 06:50:15 UTC from IEEE Xplore. Restrictions apply.
+JIN et al.: STEERING STUDY OF LINEAR DIFFERENTIAL MICROPHONE ARRAYS                                                                                        167
+
+
+
+
+                                                                                Fig. 13. A photo of the designed linear microphone array consisting of eight
+                                                                                electret microphones.
+
+
+
+
+Fig. 11. Broadband beampatterns versus frequency of a second-order SLDMA        Fig. 14.   A photo of measurements with the designed linear microphone array.
+designed with different numbers of microphones: (a) M = 3, (b) M = 7,
+(c) M = 11, and (d) M = 15.
+
+
+
+
+                                                                                Fig. 15. The designed and measured beampatterns of TSLDMA-I and
+                                                                                TSLDMA-II (at 3.5 kHz): (a.1) (a.2) TSLDMA-I; (b.1) (b.2) TSLDMA-II.
+                                                                                (a.1) (b.1) are the designed beampatterns; and (a.2) (b.2) are the measured
+                                                                                beampatterns.
+
+
+
+                                                                                of different beamformers are implemented into the designed
+                                                                                array system. The real beampatterns are measured in an anechoic
+                                                                                chamber of size 11.8 m × 4.2 m × 3.8 m. The microphone array
+                                                                                is placed on a rotating platform and a loudspeaker is placed 2
+                                                                                meters away from the array center. Both the array and the loud-
+                                                                                speaker are on a same horizontal plane, which is 60 cm above
+Fig. 12. DF and WNG of a second-order SLDMA as a function of frequency,         the sound absorption floor, as shown in Fig. 14. The loudspeaker
+f : (a) DF and (b) WNG. Conditions of simulation: δ = 1 cm.                     plays back a narrowband signal of a specified frequency. The
+                                                                                rotating platform is configured to rotate the microphone array
+                                                                                every 5 seconds with a step size of 1◦ . The gain in every rotated
+frequency-invariant beampattern is an interesting topic, which                  direction is computed based on the beamformer’s output, thereby
+is however beyond the main thrust of this paper.                                giving the measured beampattern. In the following, we present
+                                                                                some measured results.
+                                                                                   The implemented differential beamformers are
+D. Experiments                                                                     1) TSLDMA-I: a third-order SLDMA with xs = cos(60◦ ),
+   In this subsection, we carry out some experiments to further                        x1 = cos(120◦ ), x2 = cos(180◦ ) and x3 = 1.1000; and
+evaluate the performance of the proposed SLDMAs. To perform                        2) TSLDMA-II: a third-order SLDMA with xs = cos(45◦ ),
+the experiments, we designed a microphone array, which con-                            x1 = cos(90◦ ), x2 = cos(150◦ ) and x3 = 1.1949.
+sists of eight electret microphones (omnidirectional) with the                     The designed beampatterns of the two SLDMAs are plotted,
+spacing between two neighboring microphones being 1.1 cm. A                     respectively, in Fig. 15(a.1) and Fig. 15(b.1). The subplots of
+photo of this designed array is shown in Fig. 13. A number                      (a.2) and (b.2) in Fig. 15 show, respectively, the measured
+
+
+
+      Authorized licensed use limited to: University of Gothenburg. Downloaded on December 19,2020 at 06:50:15 UTC from IEEE Xplore. Restrictions apply.
+168                                                                 IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 29, 2021
+
+
+
+beampatterns of TSLDMA-I and TSLDMA-II at 3.5 kHz. It can                           [13] G. W. Elko, “Superdirectional microphone arrays,” in Acoustic Signal
+be clearly seen that the steering is successfully achieved and the                       Process. Telecommunication, S. L. Gay and J. Benesty, eds., pp. 181–237,
+                                                                                         Berlin, Germany: Springer-Verlag, 2000.
+measured beampatterns agree very much with the designed ones.                       [14] S. Doclo and M. Moonen, “Superdirective beamforming robust against
+There are some difference between the designed beampattern                               microphone mismatch,” IEEE Trans. Acoust., Speech, Signal Process.,
+and the measured one, which is caused by array imperfections                             vol. 15, no. 2, pp. 617–631, Feb. 2007.
+                                                                                    [15] R. M. Derkx and K. Janse, “Theoretical analysis of a first-order azimuth-
+as well as measurement errors. However, this difference is                               steerable superdirective microphone array,” IEEE Trans. Audio, Speech,
+negligible.                                                                              Lang. Process., vol. 17, no. 1, pp. 150–162, Jan. 2009.
+                                                                                    [16] E. Mabande, A. Schad, and W. Kellermann, “Design of robust superdirec-
+                                                                                         tive beamformers as a convex optimization problem,” in Proc. IEEE Int.
+                            VII. CONCLUSION                                              Conf. Acoustics, Speech, Signal Process., pp. 77–80, 2009.
+                                                                                    [17] M. Crocco and A. Trucco, “Design of robust superdirective arrays with
+   This paper studied the steering problem of LDMAs. By an-                              a tunable tradeoff between directivity and frequency-invariance,” IEEE
+                                                                                         Trans. Signal Process., vol. 59, no. 5, pp. 2169–2181, May 2011.
+alyzing the ideal function of the differential beampatterns, we                     [18] Y. Wang, Y. Yang, Y. Ma, and Z. He, “Robust high-order superdirec-
+first proved that first-order LDMAs are non-steerable regard-                            tivity of circular sensor arrays,” J. Acoust. Soc. Amer., vol. 136, no. 4,
+less of what beamforming method is used and the mainlobe                                 pp. 1712–1724, 2014.
+                                                                                    [19] G. Huang, J. Benesty, and J. Chen, “Superdirective beamforming based
+of a first-order LDMA can only be at the endfire directions.                             on the Krylov matrix,” IEEE/ACM Trans. Audio, Speech, Lang. Process.,
+Then, we deduced the fundamental conditions for the design                               vol. 24, pp. 2531–2543, Dec. 2016.
+of N th-order (N > 1) steerable differential beamformers, i.e.,                     [20] S. Markovich-Golan, D. Y. Levin, and S. Gannot, “Performance analysis
+                                                                                         of a dual microphone superdirective beamformer and approximate expres-
+the null position should satisfy a particular equation. Based on                         sions for the near-field propagation regime,” in Proc. IEEE Int. Workshop
+those fundamental conditions, a method was proposed to design                            Acoustic Signal Enhancement, pp. 1–5, 2016.
+steerable differential beamformers with LDMAs. With any spec-                       [21] N. Stefanakis, “Efficient implementation of superdirective beamforming
+                                                                                         in a half-space environment,” J. Acoust. Soc. Amer., vol. 145, no. 3,
+ified look direction, we first set its N − 1 nulls according to the                      pp. 1293–1302, 2019.
+practical needs, and the last null is then determined according                     [22] G. W. Elko and A.-T. N. Pong, “A steerable and variable first-order
+to the fundamental condition. The beamforming filter is finally                          differential microphone array,” in Proc. IEEE Int. Conf. Acoustics, Speech,
+                                                                                         Signal Process., vol. 1, pp. 223–226, 1997.
+computed by solving a linear system of equations constructed                        [23] G. W. Elko, “Differential microphone arrays,” in Audio Signal Process.
+by the null constraints. Simulation and experimental results                             for Next-Generation Multimedia Commun. Syst., Y. Huang and J. Benesty,
+validated that the proposed method can successfully achieve                              eds., pp. 11–65, Berlin, Germany: Springer-Verlag, 2004.
+                                                                                    [24] E. D. Sena, H. Hacihabiboglu, and Z. Cvetkovic, “On the design and
+beam steering with LDMAs.                                                                implementation of higher-order differential microphones,” IEEE Trans.
+                                                                                         Audio, Speech, Lang. Process., vol. 20, pp. 162–174, Jan. 2012.
+                                                                                    [25] J. Benesty and J. Chen, Study and Design of Differential Microphone
+                                   REFERENCES                                            Arrays. Berlin, Germany: Springer-Verlag, 2012.
+                                                                                    [26] J. Chen, J. Benesty, and C. Pan, “On the design and implementation of
+ [1] M. Brandstein and D. B. Ward, Microphone Arrays: Signal Processing                  linear differential microphone arrays,” J. Acoust. Soc. Amer., vol. 136,
+     Techniques and Applications. Berlin, Germany: Springer-Verlag, 2001.                pp. 3097–3113, Dec. 2014.
+ [2] J. Benesty, J. Chen, and Y. Huang, Microphone Array Signal Processing.         [27] Y. Buchris, I. Cohen, and J. Benesty, “Frequency-domain design of asym-
+     Berlin, Germany: Springer-Verlag, 2008.                                             metric circular differential microphone arrays,” IEEE/ACM Trans. Audio,
+ [3] O. L. Frost III, “An algorithm for linearly constrained adaptive array              Speech, Lang. Process., vol. 26, no. 4, pp. 760–773, Apr. 2018.
+     processing,” Proc. IEEE, vol. 60, pp. 926–935, Aug. 1972.                      [28] C. Pan, J. Chen, and J. Benesty, “Theoretical analysis of differential
+ [4] M. M. Goodwin and G. W. Elko, “Constant beamwidth beamforming,”                     microphone array beamforming and an improved solution,” IEEE/ACM
+     in Proc. IEEE Int. Conf. Acoustics, Speech, Signal Process., vol. 1,                Trans. Audio, Speech, Lang. Process., vol. 23, no. 11, pp. 2093–2105,
+     pp. 169–172, 1993.                                                                  Nov. 2015.
+ [5] D. B. Ward, R. C. Williamson, and R. A. Kennedy, “Broadband micro-             [29] J. Benesty, J. Chen, and I. Cohen, Design of Circular Differential Micro-
+     phone arrays for speech acquisition,” Acoust. Australia, vol. 26, pp. 17–20,        phone Arrays. Berlin, Germany: Springer-Verlag, 2015.
+     Apr. 1998.                                                                     [30] G. Huang, J. Benesty, I. Cohen, and J. Chen, “A simple theory and
+ [6] J. Benesty, J. Chen, Y. Huang, and J. Dmochowski, “On microphone-                   new method of differential beamforming with uniform linear microphone
+     array beamforming from a MIMO acoustic signal processing perspective,”              arrays,” IEEE/ACM Trans. Audio, Speech, Lang. Process., vol. 28, no. 1,
+     IEEE Trans. Audio, Speech, Lang. Process., vol. 15, no. 3, pp. 1053–1065,           pp. 1079–1093, 2020.
+     Mar. 2007.                                                                     [31] G. Huang, J. Benesty, I. Cohen, and J. Chen, “Differential beamforming on
+ [7] J. Meyer and G. W. Elko, “A highly scalable spherical microphone array              graphs,” IEEE/ACM Trans. Audio, Speech, Lang. Process., vol. 28, no. 1,
+     based on an orthonormal decomposition of the soundfield,” in Proc. IEEE             pp. 901–913, 2020.
+     Int. Conf. Acoustics, Speech, Signal Process., vol. 2, pp. 1781–1784,          [32] F. Borra, A. Bernardini, F. Antonacci, and A. Sarti, “Efficient implemen-
+     2002.                                                                               tations of first-order steerable differential microphone arrays with arbi-
+ [8] J. Meyer and G. W. Elko, “Spherical harmonic modal beamforming for an               trary planar geometry,” IEEE/ACM Trans. Audio, Speech, Lang. Process.,
+     augmented circular microphone array,” in Proc. IEEE Int. Conf. Acoustics,           vol. 28, pp. 1755–1766, 2020.
+     Speech, Signal Process., pp. 5280–5283, 2008.                                  [33] S. Gannot, D. Burshtein, and E. Weinstein, “Signal enhancement using
+ [9] S. Yan, “Optimal design of modal beamformers for circular arrays,” J.               beamforming and nonstationarity with applications to speech,” IEEE
+     Acoust. Soc. Amer., vol. 138, no. 4, pp. 2140–2151, 2015.                           Trans. Signal Process., vol. 49, no. 8, pp. 1614–1626, Aug. 2001.
+[10] G. Huang, J. Benesty, and J. Chen, “On the design of frequency-invariant       [34] J. Li, P. Stoica, and Z. Wang, “On robust Capon beamforming and diagonal
+     beampatterns with uniform circular microphone arrays,” IEEE/ACM                     loading,” IEEE Trans. Signal Process., vol. 51, no. 7, pp. 1702–1715,
+     Trans. Audio, Speech, Lang. Process., vol. 25, no. 5, pp. 1140–1153,                Jul. 2003.
+     May 2017.                                                                      [35] N. Stefanakis, S. Delikaris-Manias, and A. Mouchtaris, “Acoustic beam-
+[11] G. Huang, J. Chen, and J. Benesty, “Insights into frequency-invariant               forming in front of a reflective plane,” in Proc. IEEE EUSIPCO, pp. 26–30,
+     beamforming with concentric circular microphone arrays,” IEEE/ACM                   IEEE, 2018.
+     Trans. Audio, Speech, Lang. Process., vol. 26, no. 12, pp. 2305–2318,          [36] J. Capon, “High-resolution frequency-wavenumber spectrum analysis,”
+     Dec. 2018.                                                                          Proc. IEEE, vol. 57, pp. 1408–1418, Aug. 1969.
+[12] H. Cox, R. M. Zeskind, and T. Kooij, “Practical supergain,” IEEE               [37] H. Cox, R. M. Zeskind, and M. M. Owen, “Robust adaptive beamforming,”
+     Trans. Acoust., Speech, Signal Process., vol. 34, no. 3, pp. 393–398,               IEEE Trans. Acoust., Speech, Signal Process., vol. 35, pp. 1365–1376,
+     Jun. 1986.                                                                          Oct. 1987.
+
+
+
+      Authorized licensed use limited to: University of Gothenburg. Downloaded on December 19,2020 at 06:50:15 UTC from IEEE Xplore. Restrictions apply.
+JIN et al.: STEERING STUDY OF LINEAR DIFFERENTIAL MICROPHONE ARRAYS                                                                                                169
+
+
+
+[38] J. L. Flanagan, D. A. Berkley, G. W. Elko, J. E. West, and M. M.               [63] B. Rafaely, Fundamentals of Spherical Array Processing. Berlin, Ger-
+     Sondhi, “Autodirective microphone systems,” Acustica, vol. 73, pp. 58–71,           many: Springer-Verlag, 2015.
+     Feb. 1991.                                                                     [64] B. Rafaely, “Analysis and design of spherical microphone arrays,” IEEE
+[39] W. Kellermann, “A self-steering digital microphone array,” in Proc. IEEE            Trans. Speech, Audio Process., vol. 13, pp. 135–142, Jan. 2005.
+     Int. Conf. Acoustics, Speech, Signal Process., vol. 5, pp. 3581–3584, 1991.    [65] Y. Peled and B. Rafaely, “Linearly-constrained minimum-variance method
+[40] L. J. Griffiths and C. W. Jim, “An alternative approach to linearly con-            for spherical microphone arrays based on plane-wave decomposition of
+     strained adaptive beamforming,” IEEE Trans. Antennas Propag., vol. 30,              the sound field,” IEEE Trans. Audio, Speech, Lang. Process., vol. 21,
+     no. 1, pp. 27–34, Jan. 1982.                                                        pp. 2532–2540, Dec. 2013.
+[41] J. Flanagan, J. Johnston, R. Zahn, and G. W. Elko, “Computer-steered           [66] G. Huang, J. Chen, and J. Benesty, “A flexible high directivity beamformer
+     microphone arrays for sound transduction in large rooms,” J. Acoust. Soc.           with spherical microphone arrays,” J. Acoust. Soc. Amer., vol. 143, no. 5,
+     Amer., vol. 78, no. 5, pp. 1508–1518, 1985.                                         pp. 3024–3035, 2018.
+[42] M. M. Sondhi and G. W. Elko, “Adaptive optimization of microphone              [67] S. Yan, Y. Ma, and C. Hou, “Optimal array pattern synthesis for broadband
+     arrays under a nonlinear constraint,” in Proc. IEEE Int. Conf. Acoustics,           arrays,” J. Acoust. Soc. Am., vol. 122, no. 5, pp. 2686–2696, 2007.
+     Speech, Signal Process., vol. 11, pp. 981–984, 1986.                           [68] B. D. Van Veen and K. M. Buckley, “Beamforming: A versatile approach to
+[43] O. Hoshuyama, A. Sugiyama, and A. Hirano, “A robust adaptive                        spatial filtering,” IEEE Amer. Soc. Saf. Professionals Mag., vol. 5, pp. 4–24,
+     beamformer for microphone arrays with a blocking matrix using con-                  Apr. 1988.
+     strained adaptive filters,” IEEE Trans. Signal Process., vol. 47, no. 10,      [69] L. L. Beranek, Acoustics. Woodbury, New York, NY, USA: The Acoustic
+     pp. 2677–2684, Oct. 1999.                                                           Society of America, through the American Institute of Physics, Inc., 1986.
+[44] W. Herbordt and W. Kellermann, “Adaptive beamforming for audio sig-
+     nal acquisition,” in Adapt. Signal Processing - Application Real-World
+     Problem, J. Benesty and Y. Huang, eds., pp. 155–194, Berlin, Germany:
+     Springer-Verlag, 2003.
+[45] S. Werner, J. A. Apolinário Jr., and M. L. R. de Campos, “On the
+     equivalence of RLS implementations of LCMV and GSC processors,”
+     IEEE Signal Process. Lett., vol. 10, pp. 356–359, Dec. 2003.
+[46] B. R. Breed and J. Strauss, “A short proof of the equivalence of LCMV and
+     GSC beamforming,” IEEE Signal Process. Lett., vol. 9, no. 6, pp. 168–169,
+     Jun. 2002.
+[47] J. Bitzer, K. U. Simmer, and K.-D. Kammeyer, “Theoretical noise re-
+     duction limits of the generalized sidelobe canceller (GSC) for speech
+     enhancement,” in Proc. IEEE Int. Conf. Acoustics, Speech, Signal Process.,
+     vol. 5, pp. 2965–2968, 1999.                                                                              Jilu Jin (Student Member, IEEE) received the
+[48] I. Cohen, “Analysis of two-channel generalized sidelobe canceller (GSC)                                   bachelor’s degree in electronic and information en-
+     with post-filtering,” IEEE Trans. Audio, Speech, Lang. Process., vol. 11,                                 gineering from the Northwestern Polytechnical Uni-
+     no. 6, pp. 684–699, Nov. 2003.                                                                            versity (NPU), Xi’an, China, in 2018. He is currently
+[49] Y. Huang, J. Benesty, and J. Chen, Acoustic MIMO Signal Processing.                                       working toward the master’s degree in signal and
+     Berlin, Germany: Springer-Verlag, 2006.                                                                   information processing with the Center of Intelligent
+[50] S. Markovich-Golan, S. Gannot, and W. Kellermann, “Combined LCMV-                                         Acoustics and Immersive Communications, NPU,
+     TRINICON beamforming for separating multiple speech sources in noisy                                      Xi’an, China. His research interests include audio and
+     and reverberant environments,” IEEE/ACM Trans. Audio, Speech, Lang.                                       speech processing, microphone arrays, and speech
+     Process., vol. 25, no. 2, pp. 320–332, Feb. 2017.                                                         enhancement.
+[51] B. Laufer-Goldshtein, R. Talmon, and S. Gannot, “Global and local
+     simplex representations for multichannel source separation,” IEEE/ACM
+     Trans. Audio, Speech, Lang. Process., vol. 28, pp. 914–928, 2020.
+[52] G. W. Elko and J. Meyer, “Microphone arrays,” in Springer Hand-
+     book of Speech Process., J. Benesty, M. Sondhi, and Y. Huang, eds.,
+     pp. 1021–1041, Berlin, Germany: Springer-Verlag, 2008.
+[53] J. Benesty, J. Chen, and C. Pan, Fundamentals of Differential Beamform-
+     ing. Berlin, Germany: Springer-Verlag, 2016.
+[54] J. Benesty, I. Cohen, and J. Chen, Fundamentals of Signal Enhancement
+     and Array Signal Processing. Singapore: Wiley, 2018.
+[55] G. Huang, J. Chen, and J. Benesty, “On the design of differential beam-
+     formers with arbitrary planar microphone array,” J. Acoust. Soc. Amer.,
+     vol. 144, no. 1, pp. EL66–EL70, 2018.
+[56] H. F. Olson, “Gradient microphones,” J. Acoust. Soc. Amer., vol. 17, no. 3,
+     pp. 192–198, 1946.                                                                                        Gongping Huang (Student Member, IEEE) received
+[57] G. Sessler and J. West, “Directional transducers,” IEEE Trans. Audio,                                     the bachelor’s degree in electronics and information
+     Elect., vol. 19, no. 1, pp. 19–23, Mar. 1971.                                                             engineering and the Ph.D. degree in information and
+[58] F. Borra, A. Bernardini, F. Antonacci, and A. Sarti, “Uniform linear                                      communication engineering from the Northwestern
+     arrays of first-order steerable differential microphones,” IEEE/ACM Trans.                                Polytechnical University, Xi’an, China, in 2012 and
+     Audio, Speech, Lang. Process., vol. 27, no. 12, pp. 1906–1918, Dec. 2019.                                 2019, respectively. He is a Postdoctoral Research
+[59] Q. Tu and H. Chen, “On mainlobe orientation of the first-and second-order                                 Fellow of Electrical Engineering with the Technion –
+     differential microphone arrays,” IEEE/ACM Trans. Audio, Speech, Lang.                                     Israel Institute of Technology, Haifa, Israel. From
+     Process., vol. 27, no. 12, pp. 2025–2040, Dec. 2019.                                                      2015 to 2017, he was a Visiting Researcher with the
+[60] J. Byun, Y. C. Park, and S. W. Park, “Continuously steerable second-order                                 University of Quebec, INRS-EMT, Montreal, QC,
+     differential microphone arrays,” J. Acoust. Soc. Amer., vol. 143, no. 3,                                  Canada. His research interests include speech en-
+     pp. EL225–EL230, 2018.                                                         hancement, audio and speech processing, microphone arrays, and graph sig-
+[61] X. Wu and H. Chen, “Directivity factors of the first-order steerable differ-   nal processing. He was the recipient of the Andrew and Erna Finci Viterbi
+     ential array with microphone mismatches: Deterministic and worst-case          Postdoctoral Fellowship’s award (2019). He is a reviewer for many scien-
+     analysis,” IEEE/ACM Trans. Audio, Speech, Lang. Process., vol. 24, no. 2,      tific journals including the IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH,
+     pp. 300–315, Feb. 2016.                                                        AND LANGUAGE PROCESSING, IEEE TRANSACTIONS ON SIGNAL PROCESSING,
+[62] A. Bernardini, M. D. Aria, R. Sannino, and A. Sarti, “Efficient continuous     IEEE SIGNAL PROCESSING LETTER, JOURNAL OF THE ACOUSTICAL SOCIETY
+     beam steering for planar arrays of differential microphones,” IEEE Signal      OF AMERICA, IEEE TRANSACTIONS ON VEHICULAR TECHNOLOGY, SPEECH
+     Process. Lett., vol. 24, no. 6, pp. 794–798, Jun. 2017.                        COMMUNICATION, etc.
+
+
+
+
+       Authorized licensed use limited to: University of Gothenburg. Downloaded on December 19,2020 at 06:50:15 UTC from IEEE Xplore. Restrictions apply.
+170                                                                  IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING, VOL. 29, 2021
+
+
+
+                           Xuehan Wang (Student Member, IEEE) received the                                       Jacob Benesty received the master’s degree in mi-
+                           bachelor’s degree in electronics and information en-                                  crowaves from Pierre & Marie Curie University,
+                           gineering from the Northwestern Polytechnical Uni-                                    Paris, France, in 1987, and the Ph.D. degree in control
+                           versity (NPU), Xi’an, China, in 2016. She is currently                                and signal processing from Orsay University, Orsay,
+                           working toward the Ph.D. degree with the Center                                       France, in April 1991. During his Ph.D. (from Nov.
+                           of Intelligent Acoustics and Immersive Communi-                                       1989 to Apr. 1991), he worked on adaptive filters and
+                           cations, NPU, Xi’an, China. She a Visiting Ph.D.                                      fast algorithms with the Centre National d’Etudes des
+                           student with the Department of Electrical Engineer-                                   Telecomunications, Paris, France. From January 1994
+                           ing, Technion – Israel Institute of Technology, Israel.                               to July 1995, he was with the Telecom Paris Univer-
+                           Her research interests include speech enhancement,                                    sity on multichannel adaptive filters and acoustic echo
+                           audio signal processing, and microphone array signal                                  cancellation. From October 1995 to May 2003, he was
+processing.                                                                          first a Consultant and then a Member of the Technical Staff at Bell Laboratories,
+                                                                                     Murray Hill, NJ, USA. In May 2003, he was with the University of Quebec,
+                                                                                     INRS-EMT, in Montreal, QC, Canada, as a Professor. He is also a Visiting
+                                                                                     Professor with the Technion, Haifa, Israel, an Adjunct Professor with Aalborg
+                                                                                     University, Denmark, and a Guest Professor with Northwestern Polytechnical
+                                                                                     University, Xi’an, China. He is the editor of the book series Springer Topics
+                                                                                     in Signal Processing (Springer). He has coauthored and coedited/coauthored
+                           Jingdong Chen (Senior Member, IEEE) received              numerous books in the area of acoustic signal processing. His research interests
+                           the Ph.D. degree in pattern recognition and intelli-      include signal processing, acoustic signal processing, and multimedia communi-
+                           gence control from the Chinese Academy of Sciences,       cations. He is the inventor of many important technologies. In particular, he was
+                           Beijing, China, in 1998. From 1998 to 1999, he was        the lead Researcher at Bell Labs who conceived and designed the world-first
+                           with ATR Interpreting Telecommunications Research         real-time hands-free full-duplex stereophonic teleconferencing system. Also,
+                           Laboratories, Kyoto, Japan, where he conducted re-        he conceived and designed the world-first PC-based multiparty hands-free
+                           search on speech synthesis, speech analysis, as well as   full-duplex stereo conferencing system over IP networks. He was the general
+                           objective measurements for evaluating speech synthe-      chair and technical chair of many international conferences and a member of
+                           sis. He then joined the Griffith University, Brisbane,    several IEEE Technical Committees. Four of his journal papers were awarded
+                           Australia, where he engaged in research on robust         by the IEEE Signal processing Society and in 2010 he received the Gheorghe
+                           speech recognition and signal processing. From 2000       Cartianu Award from the Romanian Academy.
+to 2001, he was with ATR Spoken Language Translation Research Laboratories
+on robust speech recognition and speech enhancement. From 2001 to 2009, he
+was a Member of Technical Staff at Bell Laboratories, Murray Hill, New Jersey,
+working on acoustic signal processing for telecommunications. He subsequently
+joined WeVoice Inc. in New Jersey, serving as the Chief Scientist. He is currently
+a Professor with the Northwestern Polytechnical University, Xi’an, China.
+He coauthored 12 monograph books including Array Processing–Kronecker
+Product Beamforming, (Springer, 2019), Fundamentals of Signal Enhancement                                        Israel Cohen (Fellow, IEEE) received the B.Sc.
+and Array Signal Processing, (Wiley, 2018), Fundamentals of Differential                                         (summa cum laude), M.Sc., and Ph.D. degrees in elec-
+Beamforming, (Springer, 2016), Design of Circular Differential Microphone                                        trical engineering from the Technion – Israel Institute
+Arrays (Springer, 2015), Noise Reduction in Speech Processing (Springer, 2009),                                  of Technology, Haifa, Israel, in 1990, 1993, and 1998,
+Microphone Array Signal Processing (Springer, 2008), and Acoustic MIMO                                           respectively. He is a Professor of electrical engineer-
+Signal Processing (Springer, 2006), etc. His research interests include array                                    ing at the Technion – Israel Institute of Technology.
+signal processing, adaptive signal processing, speech enhancement, adaptive                                      He is also a Visiting Professor with Northwestern
+noise/echo control, signal separation, speech communication, and artificial                                      Polytechnical University, Xi’an, China.
+intelligence.                                                                                                       From 1990 to 1998, he was a Research Scientist
+   Dr. Chen was an Associate Editor for the IEEE TRANSACTIONS ON AUDIO,                                          with RAFAEL Research Laboratories, Haifa, Israel
+SPEECH, AND LANGUAGE PROCESSING from 2008 to 2014 and as a technical                                             Ministry of Defense. From 1998 to 2001, he was
+committee (TC) member of the IEEE Signal Processing Society (SPS) TC on              a Postdoctoral Research Associate with the Computer Science Department,
+Audio and Electroacoustics from 2007 to 2009. He is currently the Chair of           Yale University, New Haven, CT, USA. In 2001, he was with the Electrical
+IEEE Xi’an Section and a member of the IEEE SPS TC on Audio and Acoustic             Engineering Department of the Technion. He is a coeditor of the Multichannel
+Signal Processing. He was the General Co-Chair of ACM WUWNET 2018                    Speech Processing Section of the Springer Handbook of Speech Processing
+and IWAENC 2016, the Technical Program Chair of IEEE TENCON 2013, a                  (Springer, 2008), and a coauthor of Fundamentals of Signal Enhancement
+Technical Program Co-Chair of IEEE WASPAA 2009, IEEE ChinaSIP 2014,                  and Array Signal Processing (Wiley-IEEE Press, 2018). His research interests
+IEEE ICSPCC 2014, and IEEE ICSPCC 2015, and helped organize many other               include array processing, statistical signal processing, analysis and modeling
+conferences.                                                                         of acoustic signals, speech enhancement, noise estimation, microphone arrays,
+   He received the 2008 Best Paper Award from the IEEE Signal Processing             source localization, blind source separation, system identification, and adaptive
+Society (with Benesty, Huang, and Doclo), the Best Paper Award from the IEEE         filtering.
+Workshop on Applications of Signal Processing to Audio and Acoustics in 2011             Dr. Cohen was awarded the Norman Seiden Prize for Academic Excellence
+(with Benesty), the Bell Labs Role Model Teamwork Award twice, respectively,         (2017), the SPS Signal Processing Letters Best Paper Award (2014), the Alexan-
+in 2009 and 2007, the NASA Tech Brief Award twice, respectively, in 2010 and         der Goldberg Prize for Excellence in Research (2010), and the Muriel and David
+2009, and the Young Author Best Paper Award from the 5th National Conference         Jacknow Award for Excellence in Teaching (2009). He is an Associate Member
+on Man-Machine Speech Communications in 1998. He is a coauthor of a paper            for the IEEE Audio and Acoustic Signal Processing Technical Committee, and
+for which C. Pan received the IEEE R10 (Asia-Pacific Region) Distinguished           as Distinguished Lecturer of the IEEE Signal Processing Society. He was an
+Student Paper Award (First Prize) in 2016. He was also a recipient of the Japan      Associate Editor for the IEEE TRANSACTIONS ON AUDIO, SPEECH, AND LAN-
+Trust International Research Grant from the Japan Key Technology Center in           GUAGE PROCESSING and IEEE SIGNAL PROCESSING LETTERS, and as Member
+1998 and the “Distinguished Young Scientists Fund” from the National Natural         of the IEEE Audio and Acoustic Signal Processing Technical Committee and
+Science Foundation of China in 2014.                                                 the IEEE Speech and Language Processing Technical Committee.
+
+
+
+
+      Authorized licensed use limited to: University of Gothenburg. Downloaded on December 19,2020 at 06:50:15 UTC from IEEE Xplore. Restrictions apply.
+

@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-24
+updated: 2026-10-03
 sources:
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
   - raw/papers/desena-2012-higher-order-differential/full-text.md
@@ -10,6 +10,7 @@ sources:
   - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
+  - raw/papers/jin-2021-steering-study-ldma/full-text.txt
 tags:
   - directivity-pattern
   - spatial-audio
@@ -49,6 +50,8 @@ S[\vartheta, f] = \sum_{r=0}^{R} a_r \cos^{r}(\vartheta - \vartheta_0) \quad \fo
 
 i.e., frequency-invariant by construction. Examples from [[concepts/neural-directional-filtering|NDF]]: a 1st-order cardioid ($a_0 = a_1 = \frac{1}{2}$, realizable as a 3-microphone CDMA) and a 3rd-order pattern ($a_0 = 0,\ a_1 = \frac{1}{6},\ a_2 = \frac{1}{2},\ a_3 = \frac{1}{3}$, realizable as a 6-microphone CDMA).
 
+A caveat for **linear** arrays: the rotated form $\cos^r(\vartheta - \vartheta_0)$ presumes full steerability, which [[sources/jin-2021-steering-study-ldma|Jin et al. 2021]] prove is unachievable with LDMAs — first-order linear DMAs cannot leave endfire at all, and Nth-order ($N \geq 2$) designs are only partially steerable (the pattern deforms with the look direction instead of rotating). See [[concepts/steerable-ldma|Steerable LDMA]].
+
 ## J-th Order Cardioid
 
 $$\Lambda(\theta,\phi)=\left(0.5+0.5(\sin\phi\sin\phi_s\cos(\theta-\theta_s)+\cos\phi\cos\phi_s)\right)^J$$
@@ -81,6 +84,7 @@ with orientation $\theta_d$ relative to the head; $M=-20$ dB and $W=90°$ in the
 - [[concepts/neural-directional-filtering|Neural Directional Filtering]]
 - [[concepts/white-noise-gain|White Noise Gain]]
 - [[concepts/beamforming|Beamforming]]
+- [[concepts/steerable-ldma|Steerable LDMA]]
 
 ## Related Sources
 
@@ -91,4 +95,5 @@ with orientation $\theta_d$ relative to the head; $M=-20$ dB and $W=90°$ in the
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
 - [[sources/huang-2025-steerable-neural-directional-filtering|Huang, Halimeh, Chetupalli, Thiergart & Habets 2025: Steerable Neural Directional Filtering]]
 - [[sources/uphaus-2026-directivity-low-latency|Uphaus et al. 2026: Directivity-Conditioned Low-Latency Neural Filtering]] — cosine-based pattern with configurable main-lobe width $W$ and capped attenuation $M$ for hearing devices
+- [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021: Steering Study of Linear Differential Microphone Arrays]] — LDMA steerability limits on the rotated $\cos^r(\vartheta - \vartheta_0)$ pattern form
 

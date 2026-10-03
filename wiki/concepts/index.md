@@ -569,4 +569,5 @@
 | [[concepts/steered-response-power\|Steered-Response Power (SRP)]] | Acoustic source localization by maximizing the output of a steered delay-and-sum beamformer over a candidate-position grid; SRP-PHAT adds phase-transform (whitened GCC) weighting for reverberation robustness, and the Cobos et al. 2011 modification accumulates GCCs over TDOA-gradient-derived delay ranges. | 2026-10-02 |
 | [[concepts/x-srp\|X-SRP (eXtensible Steered Response Power)]] | Modular, generalized formulation of the SRP algorithm from Grinstein et al. 2024, with a Python library | 2026-10-02 |
 | [[concepts/gcc-phat\|GCC-PHAT]] | Phase-transform whitened cross-correlation for TDOA estimation; the correlation underlying SRP-PHAT | 2026-10-02 |
+| [[concepts/steerable-ldma\|Steerable LDMA]] | Conditions and null-constrained design for steering linear DMA mainlobes off endfire; first-order LDMAs provably non-steerable, Nth-order partially steerable (Jin et al. 2021) | 2026-10-03 |
 
