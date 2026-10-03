@@ -77,7 +77,7 @@ Exact invocations for every script (all prefixed with `uv run python .agents/ski
 | 1-2 | `zotero_fetch.py search "3-5 WORDS"` → `zotero_fetch.py metadata KEY` |
 | 3a | `prepare_paper.py --slug SLUG --pdf-key PDF_KEY` |
 | 3b | `extract_arxiv_html.py --arxiv-id ID --slug SLUG` |
-| 3c | `extract_mineru.py --slug SLUG [--language en --model vlm --timeout 600]` |
+| 3c | `extract_mineru.py --slug SLUG [--language en --model vlm --timeout 600 --pending-timeout 120]` — streams output + watchdog aborts early on `failed`/stuck-`pending`/timeout; on stuck-`pending` abort, retry once, then use 3d |
 | 3d | `extract_pdftotext.py --slug SLUG` |
 | 3e | `map_figures.py --slug SLUG` |
 | 6 | `update_entities.py --slug SLUG --entities author1 author2 [--note "..."] [--role "First author of"]` — existing authors only |
@@ -170,11 +170,13 @@ Auto-creates `raw/papers/{slug}/`. Falls back to MinerU (exit code 2) if HTML 40
 #### 3c. MinerU (non-arXiv papers or arXiv fallback)
 
 ```bash
-uv run python .agents/skills/paper-reader/scripts/extract_mineru.py --slug SLUG [--language en --model vlm --timeout 600]
+uv run python .agents/skills/paper-reader/scripts/extract_mineru.py --slug SLUG [--language en --model vlm --timeout 600 --pending-timeout 120]
 ```
 
 - `--model vlm` (default, layout analysis) or `--model pipeline` (zero-hallucination). Token required: `mineru-open-api auth`.
 - **Run it blocking** — foreground call with tool timeout 600000 ms and `--timeout` at or below ~550 so the whole call fits the blocking window. Never `run_in_background` + poll (see "Terminal Output Black Hole" rule 3).
+- **Early abort on errors (built in)** — the script streams `mineru-open-api extract -v` live and runs a watchdog thread that polls the batch-results API (token from `~/.mineru/config.yaml`, never printed). It kills the CLI immediately when: a fatal `Error:` line appears, the server-side batch state is `failed`, the batch stays queued (`pending`/`waiting-file`) longer than `--pending-timeout` (default 120 s; the MinerU queue silently drops batches — they sit in `pending` forever, which cost a full 540 s blind wait in the Low 2004 ingest), or the overall `--timeout` is reached. `--pending-timeout 0` disables the stuck-queue abort.
+- **If it aborts with "stuck in 'pending'"**: re-run the same command once — a fresh submission often succeeds; if it sticks again, fall back to Step 3d.
 - **Language codes** (MinerU convention, NOT ISO 639 — `zh` is INVALID, use `ch`): `ch` (Chinese), `en` (English), `chinese_cht`, `japan`, `korean`, `latin`, `arabic`, `cyrillic`, `east_slavic`, `devanagari`, `ta`/`te`/`ka`. Script validates locally; invalid codes exit 2 with the valid list.
 - Post-processing: `images/` → `figures/`, refs updated in `full-text.md`.
 - Verify quality: Read first 200 + last 100 lines. Mermaid code blocks for diagrams are normal.
