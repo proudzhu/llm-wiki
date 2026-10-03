@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-10-03
+updated: 2026-10-04
 sources:
+  - raw/papers/li-2020-geometrically-constrained-iva/full-text.md
   - raw/papers/low-2004-hybrid-bss-anc/full-text.txt
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
@@ -68,6 +69,7 @@ Worked example: concatenating $2Q{+}1$ log-magnitude spectra (161 frequency poin
 
 ## Related Sources
 
+- [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020: Geometrically Constrained IVA for Directional Speech Enhancement]] — dual-microphone directional SE via geometrically constrained BSS
 - [[sources/low-2004-hybrid-bss-anc|Low & Nordholm 2004: A Hybrid Speech Enhancement System Employing BSS and Adaptive Noise Cancellation]] — subband BSS + kurtosis selection + ANC cascade; 8.7–20.6 dB SNR improvement with 2–5 microphones
 
 - [[sources/zhu-2026-g-map-se-guided-speech-enhancement|G-MaP-SE: Guided Speech Enhancement via GMM-Based Prior Matching (Interspeech 2026)]]

@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-30
-updated: 2026-10-02
+updated: 2026-10-04
 sources:
+  - raw/papers/li-2020-geometrically-constrained-iva/full-text.md
   - raw/papers/wang-2026-predictive-dsfanc-crnn/full-text.md
   - raw/papers/wang-2026-directional-sfanc-reverberant/full-text.md
   - raw/papers/zhang-2014-causality-feedforward-anc-headset/full-text.md
@@ -81,6 +82,10 @@ The survey reports representative gains of DL over conventional DoA methods: a C
 
 Before the DL era, [[sources/tervo-2009-sound-intensity-direction|Tervo (EUSIPCO 2009)]] provided one of the few systematic comparisons of conventional [[concepts/intensity-vector-doa-estimation|intensity-vector DoA estimators]] on real concert-hall data (RT ≈ 2.1 s, SNR 0–40 dB). Fitting two-component wrapped mixture distributions (von Mises / wrapped Gaussian) to the per-frame azimuth histogram of [[concepts/sound-intensity-vector|sound intensity vectors]] outperformed simple circular averaging, and von Mises mixtures were the most noise-robust of the five methods tested; energy-weighted averaging (MCA) was clearly worst, showing that radial-magnitude weighting lets reverberation- and noise-dominated bins dominate the estimate. All methods stayed under 4° circular bias, but anomaly rates remained high at low SNR — quantifying the "degrade quickly under reflections" behavior that the Grumiaux survey attributes to classical intensity methods.
 
+## BSS Directivity Nulls as DOA Estimates (Li & Koishida 2020)
+
+A BSS demixing system can be interpreted as a set of adaptive null-beamformers, so its directional nulls themselves carry DOA information. [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020]] read DOAs off the AuxIVA demixing filters by scanning the response power $\sum_{\omega \le \Omega/2}|\boldsymbol{w}_j^{\mathsf{H}}(\omega)\boldsymbol{d}(\omega,\theta)|$ over a 5°-resolution grid: after only **3 AuxIVA iterations**, more than 60% of estimates fall within ±20° of the true DOA under both RT60 = 200 ms and 470 ms. The estimate is accurate enough to steer a null constraint in their [[concepts/geometrically-constrained-iva|geometrically constrained IVA]] dual-microphone enhancer — where the AuxIVA-estimated interference DOA in fact slightly *outperformed* the oracle DOA, plausibly because the BSS null points at the direction containing the most statistically independent components.
+
 ## Related Concepts
 
 - [[concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — DoA drives filter selection in D-SFANC/PD-SFANC
@@ -91,9 +96,11 @@ Before the DL era, [[sources/tervo-2009-sound-intensity-direction|Tervo (EUSIPCO
 - [[concepts/sound-intensity-vector|Sound Intensity Vector]] — the physical energy-flow quantity measured by p–p probes and B-format arrays
 - [[concepts/intensity-vector-doa-estimation|Intensity-Vector DOA Estimation]] — averaging vs. mixture-model estimators on intensity-vector azimuths
 - [[concepts/steered-response-power|Steered-Response Power]] — beamforming-based grid-search scanning for source localization
+- [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA]] — BSS directivity nulls double as DOA estimates that steer its null constraints
 
 ## Related Sources
 
+- [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020: Geometrically Constrained IVA for Directional Speech Enhancement]] — AuxIVA directivity-null DOA estimation (3 iterations, 5° grid, >60% within ±20°)
 - [[sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]] — CRNN-based next-frame DoA prediction for ANC
 - [[sources/wang-2026-directional-sfanc-reverberant|Wang 2026: Directional SFANC in Reverberant Environments]] — CNN-based multi-task DoA estimation for reverberant conditions
 - [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — foundational work showing direction-dependent causality in feedforward ANC

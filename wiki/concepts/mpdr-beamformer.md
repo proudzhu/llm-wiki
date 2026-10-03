@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-09-12
+updated: 2026-10-04
 sources:
+  - raw/papers/li-2020-geometrically-constrained-iva/full-text.md
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
 tags:
   - beamforming
@@ -54,6 +55,10 @@ where $\mu[i]$ is computed at each frame to guarantee $W \geq W_{\min}$.
 
 Apostolidis et al. (2026) show that MPDR's notorious sensitivity to steering-vector (RTF) mismatch can be circumvented inside an [[concepts/output-based-speech-enhancement|output-based processing]] wrapper. Instead of committing to a single (potentially mismatched) RTF, the system constructs $N$ candidate MPDR beamformers from a pre-enrolled RTF dictionary $\{\mathbf{d}_{\theta_1}, \ldots, \mathbf{d}_{\theta_N}\}$ and selects the candidate whose output maximizes a [[concepts/glimpse-proportion|Glimpse Proportion]] score. Because MPDR uses the noisy covariance $\mathbf{C}_{\mathbf{X}}$ directly, no VAD-based noise statistics are needed to *construct* any candidate — making it a natural fit for output-based selection. The resulting system significantly outperforms an input-based [[concepts/mvdr-beamformer|MVDR]] baseline in SNR, ESTOI, and PESQ, especially at low input SNR, and retains its advantage under coarse (15° spaced) or non-individualized (HATS-measured) RTF dictionaries.
 
+## MPDR vs. Geometrically Constrained BSS (Li & Koishida 2020)
+
+When prior directional information is available, an alternative to fixing the MPDR weights is to let a BSS system adapt under directional constraints. [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020]] compare a far-field-steering-vector MPDR against [[concepts/geometrically-constrained-iva|geometrically constrained IVA]] (GCAV-IVA) on a 5 cm dual-microphone array with reverberant speech plus DEMAND diffuse noise: the MPDR baseline manages only 3.82 dB SDR (RT60 200 ms, 2-speaker), barely above the 1.46 dB unprocessed level and *below* unprocessed in the 1-speaker case, whereas GCAV-IVA reaches 8.80 dB — the adaptive statistical model of BSS, merely anchored by null constraints, is far more robust than the fixed-steering MPDR in this small-array regime.
+
 ## Related Concepts
 
 - [[mvdr-beamformer|MVDR Beamformer]]
@@ -61,6 +66,7 @@ Apostolidis et al. (2026) show that MPDR's notorious sensitivity to steering-vec
 - [[diagonal-loading|Diagonal Loading]]
 - [[white-noise-gain|White Noise Gain]]
 - [[beamforming|Beamforming]]
+- [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA]]
 - [[spatial-covariance-matrix|Spatial Covariance Matrix]]
 - [[output-based-speech-enhancement|Output-based Speech Enhancement]]
 - [[glimpse-proportion|Glimpse Proportion]]
@@ -68,6 +74,7 @@ Apostolidis et al. (2026) show that MPDR's notorious sensitivity to steering-vec
 
 ## Related Sources
 
+- [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020: Geometrically Constrained IVA for Directional Speech Enhancement]] — MPDR as the beamforming baseline, beaten by a wide margin on a dual-mic array
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
 - [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis et al. 2026: Listen first — output-based multi-microphone speech enhancement]]
 - [[sources/lorenz-2005-robust-minimum-variance-beamforming|Lorenz & Boyd 2005: Robust Minimum Variance Beamforming]]

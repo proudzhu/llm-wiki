@@ -636,6 +636,8 @@
 | [[entities/mike-brookes\|Mike Brookes]] | Imperial College London researcher; speech processing; co-author of the SRP tutorial review | 2026-10-02 |
 | [[entities/siow-yong-low\|Siow Yong Low]] | Researcher (UWA/WATRI); blind source separation and speech enhancement; first author of the hybrid BSS+ANC system (NORSIG 2004). | 2026-10-03 |
 | [[entities/sven-nordholm\|Sven Nordholm]] | Researcher (UWA/WATRI); microphone array signal processing and subband beamforming; co-author of the hybrid BSS+ANC system and soft-constrained subband beamforming. | 2026-10-03 |
+| [[entities/li-li\|Li Li]] | Researcher (University of Tsukuba); first author of Geometrically Constrained IVA for directional speech enhancement (ICASSP 2020). | 2026-10-04 |
+| [[entities/kazuhito-koishida\|Kazuhito Koishida]] | Researcher (Microsoft Corporation); co-author of Geometrically Constrained IVA for directional speech enhancement (ICASSP 2020). | 2026-10-04 |
 
 ---
 
@@ -1216,6 +1218,7 @@
 | [[concepts/data-dependent-directivity-metrics\|Data-Dependent Directivity Metrics]] | Evaluation metrics for masking-based neural directional filtering: power-pattern estimation (mask applied to direct-path components) and directivity-factor estimation from reverberant components. | 2026-10-03 |
 | [[concepts/hybrid-bss-anc-speech-enhancement\|Hybrid BSS-ANC Speech Enhancement]] | Subband cascade (Low & Nordholm 2004): BSS separates spatially, kurtosis selects the speech-dominant output, and an ANC reuses the L-1 interference outputs as references for temporal cancellation. | 2026-10-03 |
 | [[concepts/kurtosis-based-output-selection\|Kurtosis-Based Output Selection]] | Higher-order-statistical test identifying the speech-dominant BSS output: speech is supergaussian (positive kurtosis) while diffuse interference is Gaussian-like (near-zero kurtosis). | 2026-10-03 |
+| [[concepts/geometrically-constrained-iva\|Geometrically Constrained IVA]] | GCIVA augments the IVA blind-separation objective with LCMV-style linear far-field response constraints (nulls or distortionless responses); the GCAV-IVA algorithm solves it with convergence-guaranteed closed-form updates via the auxiliary-function approach and vectorwise coordinate descent. | 2026-10-04 |
 
 ---
 
@@ -1469,6 +1472,7 @@
 | [[sources/huang-2026-dual-mic-steerable-neural-beamformer\|Huang & Habets 2026: Dual-Microphone Steerable High-Order Neural Differential Beamformer]] | NDBF: a DNN estimates complex beamforming weights for a dual-mic linear array, realizing steerable high-order frequency-invariant DMA patterns and X-Y stereo recording with two omni microphones. | 2026-10-03 |
 | [[sources/huang-2026-neural-directional-filtering\|Huang, Chetupalli, Halimeh, Thiergart & Habets 2026]] | This is the comprehensive journal-style treatment of neural directional filtering (NDF), extending the preliminary IWAENC 2024 study. | 2026-10-03 |
 | [[sources/low-2004-hybrid-bss-anc\|Low & Nordholm 2004]] | This paper presents a hybrid speech enhancement scheme that cascades subband blind source separation (BSS) with an adaptive noise canceller (ANC): BSS exploits spatial diversity to separate the target speech from interference, and the ANC — fed with the BSS's own interference-dominant outputs as reference signals — performs further temporal decorrelation on the speech-dominant output. | 2026-10-03 |
+| [[sources/li-2020-geometrically-constrained-iva\|Li & Koishida 2020]] | This paper proposes geometrically constrained independent vector analysis (GCIVA), which augments the IVA blind-separation objective with linear constraints on the far-field responses of the demixing filters, combining BSS separation performance with beamforming-style directional control. | 2026-10-04 |
 
 ---
 
@@ -1523,10 +1527,10 @@
 
 ## Statistics
 
-- **Total pages**: 1472
-- **Entities**: 626
-- **Concepts**: 571
-- **Sources**: 244
+- **Total pages**: 1476
+- **Entities**: 628
+- **Concepts**: 572
+- **Sources**: 245
 - **Synthesis**: 23
 - **Queries**: 8
-- **Last updated**: 2026-10-03
+- **Last updated**: 2026-10-04

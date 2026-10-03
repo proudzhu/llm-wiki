@@ -5697,3 +5697,14 @@ Created [[queries/ndf-sndf-ndbf-comparison|NDF/SNDF/NDBF 对比查询页]] — �
 - **Pages created**: [[entities/siow-yong-low|siow-yong-low]], [[entities/sven-nordholm|sven-nordholm]], [[concepts/hybrid-bss-anc-speech-enhancement|hybrid-bss-anc-speech-enhancement]], [[concepts/kurtosis-based-output-selection|kurtosis-based-output-selection]], `wiki/sources/low-2004-hybrid-bss-anc.md`
 - **Pages updated**: [[concepts/blind-source-separation|blind-source-separation]] (permutation-avoidance route, hybrid application, links); [[concepts/speech-enhancement|speech-enhancement]] (hybrid BSS+ANC sub-area); [[concepts/subband-adaptive-filter|subband-adaptive-filter]] (BSS post-processor application); [[concepts/permutation-alignment|permutation-alignment]] (initialization-based avoidance); [[concepts/natural-gradient|natural-gradient]] (early subband InfoMax use); [[synthesis/multi-channel-speech-enhancement|multi-channel-speech-enhancement]] (table row; geometry-axis BSS route as original geometry-blind approach; 2004 ancestor of output-based selection)
 - **Notes**: MinerU extraction timed out; fell back to pdftotext (plain text, no figures). Zotero metadata listed the venue only as conferencePaper — full proceedings citation (NORSIG 2004, pp. 204–207) recovered from the PDF header.
+
+---
+
+## [2026-10-04] ingest | Geometrically Constrained Independent Vector Analysis for Directional Speech Enhancement (Li & Koishida 2020)
+
+- **Source**: `raw/papers/li-2020-geometrically-constrained-iva/full-text.md` (Zotero: 468U4XYN)
+- **Authors**: Li Li, Kazuhito Koishida
+- **Published**: ICASSP 2020, DOI 10.1109/ICASSP40776.2020.9053649
+- **Summary**: GCIVA augments the IVA objective with LCMV-style linear far-field response constraints; the GCAV-IVA algorithm gives convergence-guaranteed closed-form updates (auxiliary function + VCD), and a dual-mic system with AuxIVA-based DOA estimation beats MPDR and AuxIVA in SDR/SIR.
+- **Pages created**: `wiki/sources/li-2020-geometrically-constrained-iva.md`, `wiki/concepts/geometrically-constrained-iva.md`, `wiki/entities/li-li.md`, `wiki/entities/kazuhito-koishida.md`
+- **Pages updated**: [[concepts/independent-vector-analysis|independent-vector-analysis]] (GCAV-IVA optimization paragraph + links), [[concepts/blind-source-separation|blind-source-separation]] (new "Geometrically Constrained BSS" section), [[concepts/spatial-regularization|spatial-regularization]] (GCIVA as constraint-based variant), [[concepts/mpdr-beamformer|mpdr-beamformer]] (MPDR vs. GCAV-IVA comparison), [[concepts/direction-of-arrival-estimation|direction-of-arrival-estimation]] (BSS directivity-null DOA section), [[concepts/multi-channel-speech-enhancement|multi-channel-speech-enhancement]] (dual-mic GCIVA technique bullet), [[concepts/speech-enhancement|speech-enhancement]] (source cross-ref)

@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-26
+updated: 2026-10-04
 sources:
+  - raw/papers/li-2020-geometrically-constrained-iva/full-text.md
   - raw/papers/souden-2011-online-noise-tracking/full-text.md
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
@@ -60,6 +61,8 @@ tags:
 
 - **DL-based [[concepts/sound-source-localization|SSL]] as the spatial-cue front end (Grumiaux et al. 2022)**: Where classical MCSE derives the target direction from inter-channel phase differences, the deep-learning SSL literature — taxonomized by the Grumiaux et al. 2022 survey (156 systems, 2011–2021) along six axes (environment, source configuration, architecture, input feature, output strategy, data/learning) — estimates [[concepts/direction-of-arrival-estimation|DoA]] directly from multichannel features (GCC-PHAT, [[concepts/relative-transfer-function|RTF]], IPD/ILD, [[concepts/ambisonics|Ambisonics]]). Its output-strategy split — classification over a spatial pseudo-spectrum vs. regression (increasingly the [[concepts/activity-coupled-cartesian-doa|ACCDOA]] representation) — parallels the SE community's own target evolution from masks to filters, and such DL-DoA outputs are the natural upstream provider of steering information for beamforming-based MCSE pipelines.
 
+- **[[concepts/geometrically-constrained-iva|Geometrically Constrained IVA]] (Li & Koishida 2020)**: Classical statistical-model dual-microphone directional SE that anchors blind separation with LCMV-style response constraints — the interference channel is nulled toward the known target DOA (blocking-matrix behavior) and the target channel toward an interference DOA estimated from a separate AuxIVA run's directivity nulls. Beats a far-field MPDR beamformer and oracle-channel AuxIVA in SDR/SIR (8.80 vs. 7.12 dB SDR, 2-speaker, RT60 200 ms) with a convergence-guaranteed closed-form update requiring no step-size tuning.
+
 - **ANC-integrated MWF for open-fitting hearing aids (Serizel et al. 2010)**: In hearing aids with an open fitting, MWF-based NR must additionally contend with the unprocessed [[concepts/open-fitting-noise-leakage|noise leakage]] and the secondary-path attenuation — the [[concepts/filtered-x-mwf|Filtered-x MWF]] integrates multichannel NR with feedforward ANC in one filter set, gaining ~12 dB intelligibility-weighted SNR improvement where standard MWF-NR degrades at low amplification gains.
 
 - **[[concepts/cdunet|CDUNet]] (Wen et al. 2025)**: Minimal-footprint directed enhancement with only **two** microphones — a causal U-Net (74.4K params) consumes three beamformer outputs steered at the target and two width-derived edge angles ([[concepts/triple-steering-spatial-selection|triple-steering spatial selection]]), with the enhancement width as a runtime input. Beats DAS/GSC/JNF and un-steered U-Net baselines on PESQ at 0–5 dB SNR (2.50/2.82 fixed-target avg.) and on downstream NeMo ASR WER (4.35%/3.11%), and — unlike fixed-area models that collapse when the target moves (U-Net 1.56) — stays consistent across target directions (2.47–2.60) without retraining.
@@ -84,6 +87,7 @@ tags:
 - [[concepts/output-based-speech-enhancement|Output-based Speech Enhancement]]
 - [[concepts/glimpse-proportion|Glimpse Proportion]]
 - [[concepts/mpdr-beamformer|MPDR Beamformer]]
+- [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA]]
 - [[concepts/array-invariant-speech-enhancement|Array-Invariant Speech Enhancement]]
 - [[concepts/geometry-aware-dynamic-convolution|Geometry-Aware Dynamic Convolution (Geo-DConv)]]
 - [[concepts/topology-aware-coordinate-transformer|Topology-Aware Coordinate Transformer (TACT)]]
@@ -102,6 +106,7 @@ tags:
 
 ## Related Sources
 
+- [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020: Geometrically Constrained IVA for Directional Speech Enhancement]] — dual-mic directional SE combining BSS adaptation with null constraints
 - [[sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
 - [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] — MWF-NR in the open-fitting hearing-aid context; leakage and secondary-path effects
 - [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]

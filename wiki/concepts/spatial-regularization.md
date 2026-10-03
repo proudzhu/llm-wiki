@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-06-04
-updated: 2026-08-19
+updated: 2026-10-04
+sources:
+  - raw/papers/li-2020-geometrically-constrained-iva/full-text.md
 tags:
   - blind-source-separation
   - independent-vector-analysis
@@ -49,7 +51,7 @@ Steering vectors $\mathbf{a}_n(f)$ are typically estimated from:
 Spatial regularization has been integrated into various IVA frameworks:
 - Standard IVA with DOA constraints
 - [[concepts/switching-independent-vector-analysis|Switching IVA]] (SR-SwIVA)
-- Geometrically constrained IVA
+- [[concepts/geometrically-constrained-iva|Geometrically constrained IVA]] — a constraint-based variant that replaces proximity penalties with hard LCMV-style linear response constraints ($|\boldsymbol{w}_j^{\mathsf{H}}\boldsymbol{d}_j - c_j|^2$ with $c_j \approx 0$ for nulls), solvable in closed form within the auxiliary-function framework ([[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020]])
 
 ### Spatially Regularized ILRMA (SR-ILRMA / NSR-ILRMA)
 
@@ -88,6 +90,7 @@ The SRSS-init strategy typically provides the best separation performance by ini
 - [[concepts/independent-vector-analysis|Independent Vector Analysis]]
 - [[concepts/blind-source-separation|Blind Source Separation]]
 - [[concepts/switching-independent-vector-analysis|Switching Independent Vector Analysis]]
+- [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA]]
 - [[concepts/iterative-source-steering|Iterative Source Steering]]
 - [[concepts/independent-low-rank-matrix-analysis|Independent Low-Rank Matrix Analysis (ILRMA)]]
 - [[concepts/fast-demixing-matrix-estimation|Fast Demixing Matrix Estimation (FastVCD / FastIP)]]
@@ -95,6 +98,7 @@ The SRSS-init strategy typically provides the best separation performance by ini
 
 ## Related Sources
 
+- [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020: Geometrically Constrained IVA for Directional Speech Enhancement]]
 - [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
 - [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025: Real-Time RCSCME-based Speech Extraction]]
