@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-09-19
+updated: 2026-10-03
 sources:
+  - raw/papers/low-2004-hybrid-bss-anc/full-text.txt
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/shetu-2026-generative-discriminative-comparison/full-text.md
@@ -37,6 +38,7 @@ Worked example: concatenating $2Q{+}1$ log-magnitude spectra (161 frequency poin
 
 - Personalized speech enhancement (conditioning on speaker embeddings)
 - Multi-channel speech enhancement (beamforming, spatial filtering)
+- Hybrid BSS+ANC spatio-temporal enhancement — blind spatial separation cascaded with an adaptive noise canceller that reuses the BSS interference outputs as references (e.g., [[concepts/hybrid-bss-anc-speech-enhancement|Hybrid BSS-ANC Speech Enhancement]])
 - Bone-conduction speech enhancement
 - Real-time low-latency enhancement
 - Low-complexity enhancement for embedded devices (e.g., [[concepts/ulcnet|ULCNet]])
@@ -62,8 +64,11 @@ Worked example: concatenating $2Q{+}1$ log-magnitude spectra (161 frequency poin
 - [[concepts/speech-enhancement-hallucination|Speech Enhancement Hallucination]]
 - [[concepts/diffusion-models-for-speech|Diffusion Models for Speech Enhancement]]
 - [[concepts/generalized-loss-function|Generalized Loss Function]]
+- [[concepts/hybrid-bss-anc-speech-enhancement|Hybrid BSS-ANC Speech Enhancement]]
 
 ## Related Sources
+
+- [[sources/low-2004-hybrid-bss-anc|Low & Nordholm 2004: A Hybrid Speech Enhancement System Employing BSS and Adaptive Noise Cancellation]] — subband BSS + kurtosis selection + ANC cascade; 8.7–20.6 dB SNR improvement with 2–5 microphones
 
 - [[sources/zhu-2026-g-map-se-guided-speech-enhancement|G-MaP-SE: Guided Speech Enhancement via GMM-Based Prior Matching (Interspeech 2026)]]
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]]

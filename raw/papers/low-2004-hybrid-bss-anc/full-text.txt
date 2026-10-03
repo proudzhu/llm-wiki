@@ -1,0 +1,391 @@
+  Proceedings of the 6th Nordic Signal Processing Symposium - NORSIG 2004
+  June 9 - 11, 2004
+  Espoo, Finland
+
+
+
+         A HYBRID SPEECH ENHANCEMENT SYSTEM EMPLOYING BLIND SOURCE
+                  SEPARATION AND ADAPTIVE NOISE CANCELLATION
+
+                                                  Siow Yong Low and Sven Nordholm
+
+                                        The University of Western Australia
+                        Western Australian Telecommunications Research Institute(WATRI) ∗
+                                         Crawley, Western Australia 6009
+                                                  AUSTRALIA
+                                      E-mail: {siowyong,sven}@watri.org.au
+                                              URL: www.watri.org.au
+
+
+                             ABSTRACT                                                Basically, the scheme makes use of the BSS to separate the tar-
+                                                                                  get signal from the interference. If there are L microphones and
+This paper presents a new hybrid speech enhancement scheme em-                    assuming that the algorithm converges then it is expected that there
+ploying the blind source separation (BSS) and the adaptive noise                  will be one speech dominant output and L − 1 remaining interfer-
+cancellers (ANC). Since BSS primarily exploits spatial informa-                   ence dominant outputs from the BSS. With this in mind, the sepa-
+tion, it has its limitation in its separation quality. To compensate              rated target signal can be further enhanced temporally by an adap-
+for that, the ANC acts as a temporal decorrelator to perform further              tive noise canceller (ANC) using the interference dominant out-
+noise cancellation. Initially, the BSS separates the target signal                puts as references. A higher order statistical method is proposed
+from the interference using the L observed inputs. A higher order                 to distinguish the speech dominant output from the available BSS
+statistical method is then used to distinguish the speech dominant                outputs. Finally, the ANC performs further temporal enhancement
+signal from the L BSS output(s). The remaining L − 1 (inter-                      in the target dominant BSS output. The motivation behind the use
+ference dominant) outputs will serve as the reference signals for                 of ANC as a post processor for the scheme can be understood by
+the ANC to perform further interference reduction on the speech                   the fact that BSS exploits mainly spatial diversity (BSS only im-
+dominant output. The novel structure bypasses a priori informa-                   poses spatial independence among the sources). Therefore there
+tion such as the array geometry and source localisation needed by                 is room for improvement temporally. Here, the ANC performs
+conventional beamforming based methods. Results show that the                     temporal decorrelation by cancelling any components that are cor-
+structure offers impressive enhancement capability with only a few                related with its references. One can view the hybrid system as a
+microphones.                                                                      spatio-temporal processor with the BSS looking across the sensors
+                                                                                  (spatial) and the ANC looking across the time (temporal).
+                                                                                     The major advantage of the proposed hybrid system is that it
+                       1. INTRODUCTION                                            does not need any a priori information such as the array geom-
+                                                                                  etry model or source localisation. This offers great flexibility
+Speech acquisition in adverse environments is a very challenging                  and avoids the deleterious effects of steering vector errors. Also,
+problem. The issue is not simply to achieve the maximum noise                     all processing is made in subbands which yields an efficient fre-
+suppression possible, but also to maintain good signal integrity.                 quency spatio-temporal processing. Evaluations in both room and
+Countless speech enhancement methods have been proposed over                      car hands-free situation reveal that even with a few microphones
+the years, many of which employ microphone arrays [1]. This is                    (two to five), the proposed structure manages to achieve a very
+because microphone arrays provide the invaluable spatial diversity.               good enhancement level.
+A common method to perform spatial filtering (or beamforming)
+is to make use of the array geometry to form a beam towards the
+target signal. This technique has been widely studied and con-                                  2. THE PROPOSED STRUCTURE
+siderable interference suppression is reported in [1, 2]. However,
+beamforming based methods rely on a priori information about the                  Figure 1 illustrates the proposed hybrid system. Throughout the
+array geometry and the source location. A promising alternative to                paper, we assume an L-element array. Each of the main blocks in
+beamforming is the blind source separation (BSS) [3]. With BSS,                   the proposed structure is explained in the following sections.
+all the a priori information needed by conventional beamforming
+is not required at all. It uses independence as the adaptation crite-             2.1. Analysis & Synthesis Filter Banks
+rion and one can view BSS as an approach that relies entirely on
+                                                                                  A uniform over-sampled analysis DFT filter bank is employed
+spatial diversity in the sense that different sensors receive different
+                                                                                  to decompose each of the L microphone input signals into M
+mixtures of the sources.
+                                                                                  subbands with a decimation factor of M    2
+                                                                                                                              . The purpose of over-
+   ∗ WATRI is a joint venture between The University of Western Australia         sampling is to reduce the aliasing effects between the adjacent sub-
+and Curtin University of Technology. The work has also been sponsored             bands and to ensure the sufficiency of data samples. The subbands
+by the Australian Research Council (ARC) under grant no. DP0451111.               are created in such a way that a prototype filter with a low pass
+
+
+
+
+  ©2004 NORSIG 2004                                                         204
+                                                                                                                                  z (0) (k )
+                              x1(0) (k )                  y1(0) (k )
+                                                                                            (0)
+                                                                                           yspeech (k )                                                                       simplifies to
+                                                                                                                       -
+
+
+
+
+                                                                                                                                                   SYNTHESIS FILTER
+                                                                                                                                                                                                    x(m) (k) = H(m) s(m) (k),
+        ANALYSIS FILTER
+
+
+                              xL(0) (k )                  yL(0) (k )                   #                                                                                                                                                            (3)
+
+                                            SUBBAND BSS
+                                                                                                         L-1 Reference signals
+
+
+
+
+                                                                            KURTOSIS
+                                                                                                                                                                                       (m)           (m)
+                                                                                                                                                                              where x (k) and s (k) are the mth subband transformations
+
+
+
+
+                                                                                                                                                        BANK
+                                                                                                                #
+             BANK
+
+
+
+
+  #                       x
+                               #
+                           ( M 1)
+                                     (k )                 y
+                                                              #
+                                                           ( M 1)
+                                                                     (k )                  y   ( M 1)
+                                                                                                         (k )
+                                                                                                                                  z ( M 1) (k )                              of x(n) and s(n) respectively. H(m) is a matrix containing the
+                                                                                                                                 -                                           elements (scalar) of the mixing filters Hconv at the mth subband
+                           1                               1                                   speech
+
+
+
+                          xL( M 1) (k )                  yL( M 1) (k )               #                 L-1 Reference signals                                                and k is the sample index.
+L microphones                                                                                                                                                                    Assuming that the mth subband of the mixing matrix is invert-
+                                                                                                                                                                             ible, then the unmixing process is
+                                                                                           #
+                                                                                                                                                                                                   y(m) (k) = V(m) x(m) (k),                        (4)
+                                                                                                                #
+                                                                                                                                                                             where V(m) is the desired unmixing matrix and y(m) (k) =
+                                                                                           #                                                                                    (m)          (m)
+                                                                                                                                                                              [y1 (k) · · · yL (k)]T is the estimated source vector. Here, the
+                                                                                                                                                                              unmixing matrix is determined such that the sources in the out-
+                                                                                           Adaptive Noise Canceller                                                           put vector are mutually independent. To find V(m) , we employ
+                                                                                                                                                                              the information maximization approach using the natural gradient
+      Fig. 1. The proposed hybrid system with L microphones.                                                                                                                  update [4],
+                                                                                                                                                                                                                              
+                                                                                                                                                                                     ∆V(m) ∝ η I − 2ϕ(y(m) (k))(y(m) (k))H V(m) , (5)
+characteristics also forms the response of the mth subband. In this
+case, the prototype filter is designed using a Hamming window                                                                                                                 where (.)H is the Hermitian transpose and η is the learning fac-
+                            π
+with a cut off frequency M    . Likewise, a synthesis filter bank is                                                                                                          tor. The non-linear function ϕ is central to the update function
+used to reconstruct the subband signals into fullband representa-                                                                                                             as it minimizes the mutual information among the outputs if it is
+tion. Both filter banks are designed with minimum transformation                                                                                                              matched to the input probability density function (pdf) [4]. In other
+and reconstruction aliasing effects.                                                                                                                                          words, the non-linear function should approximate as close as pos-
+                                                                                                                                                                              sible the cumulative distribution of the input. For speech signal, it
+2.2. Blind Source Separation                                                                                                                                                  is generally chosen as [5],
+
+The goal of blind source separation is to recover sources from the                                                                                                                            ϕ(·) = tanh ((·)) + j tanh ((·)) ,                  (6)
+observed mixtures using only the assumption of statistical inde-
+                                                                                                                                                                              where (·) and (·) represent the real and imaginary parts of a
+pendence among the sources [3]. The simplest BSS assumes an in-
+                                                                                                                                                                              complex number respectively.
+stantaneous mixing case, meaning that no time delays are present.
+                                                                                                                                                                                  Unfortunately, it is inherent in BSS to have scaling and permu-
+In this case, N independent signals represented by the N × 1 vec-
+                                                                                                                                                                              tation ambiguities. The scaling invariance causes different scaling
+tor s(n) = [s1 (n) · · · sN (n)]T are linearly mixed such that the
+                                                                                                                                                                             for each subband and this results in spectral deformation during
+observation of L number of mixtures is xi (n) = N     j=1 hij sj (n),                                                                                                         the reconstruction process. To resolve that, we force the determi-
+for i = 1, · · · , L where hij is a scalar and [.]T denotes transpo-                                                                                                          nant of the unmixing matrices to unity [5]. This effectively ensures
+sition. Without loss of generality, the observation signals can be                                                                                                            volume conservation for every subband. The permutation invari-
+expressed as                                                                                                                                                                  ance on the other hand, results in a serious separation performance
+                        x(n) = Hinst s(n),                        (1)                                                                                                         loss. This is because if the unmixing matrices do not have the same
+where x(n) is a N × 1 vector and Hinst is a L × N matrix con-                                                                                                                 permutation for all subbands, then the reconstructed signal will re-
+taining the mixture coefficients. The objective here is to identify                                                                                                           main mixed. We avoid this problem by designing an initial value
+the inverse of the mixing matrix so that the sources can be recov-                                                                                                            for the unmixing matrix [6]. Since the BSS acts like a beamformer,
+ered1 . Much success has been reported using this simple model                                                                                                                we can make a sharp null towards an arbitrary jammer direction.
+[4]. However, due to the multipath/reverberant environment, the                                                                                                               Thus the initial value for the mth subband is
+sources are convolutively mixed as                                                                                                                                                           ⎡                                                     ⎤−1
+                                                                                                                                                                                               exp( 2πf
+                                                                                                                                                                                                      M
+                                                                                                                                                                                                       s m d1 sinθ1
+                                                                                                                                                                                                               c
+                                                                                                                                                                                                                    ) · · · exp( 2πf
+                                                                                                                                                                                                                                   M
+                                                                                                                                                                                                                                    s m d1 sinθL
+                                                                                                                                                                                                                                            c
+                                                                                                                                                                                                                                                 )
+                                                                                                                                                                                             ⎢                                                     ⎥
+                                                              x(n) = Hconv ∗ s(n),                                                                                            Vinitial=⎢                                                           ⎥
+                                                                                                                                                                  (2)            (m)                     ..                            ..
+                                                                                                                                                                                                                       ..
+                                                                                                                                                                                             ⎣            .               .             .          ⎦
+                                                                                                                                                                                                    2πfs m dL sinθ1             2πfs m dL sinθL
+where Hconv is a L × N mixing filter matrix in which each el-                                                                                                                                  exp( M          c
+                                                                                                                                                                                                                    ) · · · exp( M          c
+                                                                                                                                                                                                                                                 )
+ement of the matrix is a finite impulse response (FIR) filter and                                                                                                                                                                                    (7)
+∗ denotes the convolutive operator. The complicated inversion of                                                                                                              where fs is the sampling frequency, d1 , · · · , dL are the dis-
+the FIR matrix (Eqn. 2) can be bypassed by transforming the prob-                                                                                                             tances of the lth element from the centre of the array respectively.
+lem into the frequency domain [5, 6]. By doing so, the problem is                                                                                                             θ1 , · · · , θL are the angles of arrival of the sources which in this
+then elegantly reverted to the simple instantaneous case. Neverthe-                                                                                                           case are arbitrarily set. The outputs from the subband BSS are then
+less, the number of subbands in the filter bank must be sufficiently                                                                                                          fed into the temporal processing blocks for further enhancement.
+large for the convolutive mixture to be accurately modelled as in-
+stantaneous mixing in each of the subbands. Thus, equation (2)                                                                                                                2.3. Kurtosis
+    1 Note that the only information available is the mixed observation vec-                                                                                                  Since there are L outputs from the BSS, there is no telling which
+tor x(n).                                                                                                                                                                     is speech dominant or interference dominant. To resolve that, we
+
+
+
+
+                                                                                                                                                                        205
+propose to use the kurtosis. The kurtosis or the fourth order statis-
+                                                                                                                 INTERFERENCE                         SOURCE
+tics is commonly used as a quantitative measure of non-gaussianity
+of a signal. It can be shown that the kurtosis of a Gaussian distri-
+bution is zero whereas the kurtosis of a supergaussian distribution                                                                     0.4m
+is positive. Thus, a smaller value of kurtosis indicates that the                                                                 90o       60o
+distribution tends towards gaussian and a higher value kurtosis in-                                                            -50o              INTERFERENCE
+                                                                                                                            -20o               30o
+dicates that the distribution tends towards supergaussian. It is well
+known from Central Limit Theorem that the sum of several distri-                                                 4 × 5 × 3 m3     "
+butions will tend towards Gaussian. In practice, the interference is
+assumed to be spatially diffused, thus, it tends towards a Gaussian-
+                                                                                                      Fig. 2. Experimental setup for the multi-babble scenario.
+like distribution. Since speech signal has a Laplacian distribution,
+it belongs to the supergaussian case which has a positive kurtosis
+value.                                                                                            estimate of the output signal power z (m) (k) that adjusts the step
+    Having said so, we propose that the BSS output with the highest                               size according to the target signal level. It is built upon the fact
+kurtosis value will be the speech dominant output and the remain-                                 that excess MSE increases with both the step size and the target
+ing L − 1 outputs will serve as reference signals for the ANC.                                    signal [7]. When this happens, the function in (12) will effectively
+To calculate the complex kurtosis, we calculate the mean of the                                   reduce the step size. Here, the output signal power is estimated
+kurtosis of the lth output ξl , for all the M subband signals as                                  using the square of vector norm of length K. This estimate is then
+                                                                                                  exponentially averaged as
+        ξl =
+       M −1        (m)                     (m)                     (m)
+                                                                                                        σ̂z2(m) (k) = (1 − λ)σ̂z2(m) (k − 1) + λσ̂z2(m) (k),           (13)
+  1     E[|yl            (k)|4 ]−2E2 [|yl (k)|2 ]−|E2 [(yl                  (k))2 ]|
+                                                                                       .          where λ is the smoothing parameter. Quite simply, the method ex-
+  M m=0                                σ 4(m)
+                                           yl    (k)                                              ploits intervals of weak and strong of the target signal like a energy
+                                                                  (8)                             detector. In addition, since the processing is made in subbands,
+E[·] denotes the statistical operator of expectation and | · | repre-                             very short filter (in the order of 1 to 5 taps) can be employed in the
+                                       (m)
+sents the absolute value operator. yl (k) is one of the outputs                                   ANC. Finally, the output of the ANC is given by
+                                                    (m)
+from the BSS and σ 2(m)        is the variance of yl (k). Nota-                                                                       L−1
+                            yl   (k)                                                                                 (m)                       (m)H        (m)
+tionally, the output that has the highest value of kurtosis will be                                   z (m) (k) = y(speech) (k) −           wl        (k)yl,ref (k).   (14)
+              (m)
+labelled as yspeech (k) and the remaining L − 1 outputs will be                                                                       l=1
+
+                (m)
+denoted as yl,ref (k) with l = 1, · · · , L − 1.
+                                                                                                                           3. EVALUATIONS
+2.4. The Adaptive Noise Canceller
+                                                                                                  3.1. Car and Room Environments
+The ANC is employed to cancel any components that are corre-
+            (m)             (m)                                                                   The performance evaluation of the proposed structure were made
+lated to yl,ref (k) from yspeech (k) for each of the M subbands.
+                                                                                                  in a real hands-free car situation and in a room (4 × 5 × 3 m3 ). For
+For ease of computation, the least mean square (LMS) algorithm is
+                                                                                                  the car environment, the source was 30 cm from the centre of the
+used to update the coefficients in the subband adaptive filters. Re-                              array. The array was mounted on the visor at the passenger side
+grettably, the price to pay for the simplicity of the LMS algorithm                               in a Volvo station wagon. Data was gathered on a multi-channel
+is that its steady-state excess mean square error (MSE) increases                                 DAT-recorder with a sampling rate of 12 kHz and the car was mov-
+linearly with target signal power [7]. To remedy the problem, the                                 ing at a constant speed of 110 km/h. As for the room environment,
+following modified subband leaky LMS algorithm based on [7] for                                   it was created using the image model method [8] with a reverbera-
+the mth subband is used instead                                                                   tion time of 100 ms and the speech source was located 40 cm from
+wl
+  (m)
+        (k + 1) = (1 − β)wl
+                                  (m)                            (m)
+                                        (k) + (z (m)∗ (k)yl,ref (k)fl
+                                                                 (k),
+                                                                               (m)                the array at an angle 60◦ . The setup consisted of a few directional
+                                                                   (9)                            babble sources in the background as shown in Figure 2. The inten-
+for l = 1, · · · , L − 1, (·)∗ is the conjugation operator and the lth                            tion of using babble background (as opposed to white noise) was
+weights are                                                                                       to test how robust the scheme was to interference with a character-
+                                                                                                  istics similar to speech. Note also that from the experimental setup
+         (m)               (m)          (m)                (m)                                    in Figure 2, the target signal was placed at an angle rather than di-
+        wl     (k) = [wl,1 (k) wl,2 (k) · · · wl,K (k)]T .                           (10)
+                                                                                                  rectly in front of the array. The babble source were intentionally
+The lth reference signal is                                                                       put close to the source to test the robustness of the structure. The
+                                                                                                  inter-element distance for both environments was 5 cm. All simu-
+ (m)               (m)           (m)                       (m)
+yl,ref (k) = [yl,ref (k) yl,ref (k − 1) · · · yl,ref (k − K + 1)]T ,                              lations were performed with 64 subbands and the number of taps
+                                                               (11)                               in the adaptive filters was 1 and 5 for the car and room scenarios
+                               (m)
+and the non-linear function fl (k) is given as                                                    respectively. The parameters α and the leaky factor β were set to
+                                                                                                  0.05 and 10−5 respectively.
+                                          α
+        fl (k) =                          L−1           (m)
+                                                                        .            (12)
+                   K[σ̂z2(m) (k) + α                  yl,ref (k)2 ]                             3.2. Results
+                                                l=1
+                                                                                                  Figure 3 shows the spectrograms of the original target signal, the
+The constants β and α are the leaky factor and the step size respec-
+                                                                                                  corrupted signal and the processed output for the real car environ-
+tively. K is the order of the filter and σ̂z2(m) (k), is a time-varying
+
+
+
+
+                                                                                            206
+                                      Clean target signal                                                            Clean target signal
+                                                                                                    4000
+                3000
+    Frequency
+
+
+
+
+                                                                                        Frequency
+                2000                                                                                2000
+                1000
+                                                                                                      0
+                       0      0.5        1          1.5       2         2.5                            0   1     2            3                4       5
+                                          Noisy signal                                                                   Noisy signal
+                3000                                                                                3000
+    Frequency
+
+
+
+
+                                                                                        Frequency
+                2000                                                                                2000
+
+                                                                                                    1000
+                1000
+                                                                                                      0
+                       0      0.5        1            1.5     2         2.5                            0   1     2           3             4       5       6
+                                             Output                                                                        Output
+                3000                                                                                3000
+    Frequency
+
+
+
+
+                                                                                        Frequency
+                2000                                                                                2000
+
+                                                                                                    1000
+                1000
+                                                                                                      0
+                       0     0.5         1         1.5       2      2.5                                0   1     2             3           4       5       6
+                                                Time(s)                                                                      Time
+
+
+Fig. 3. Spectrograms of the clean target signal, noisy signal and                   Fig. 4. Spectrograms of the clean target signal, noisy signal and
+processed output for the car environment using four elements.                       processed output for the room environment using four elements.
+
+
+ment using four elements. The signal to noise ratio (SNR) of the                    the hybrid system makes full use of both the spatial (BSS) and
+corrupted signal was measured to be -7 dB. The SNRs were calcu-                     temporal (ANC) domains. The structure does not require a pri-
+lated using the segments of the speech/non-speech signals. From                     ori information such as the array geometry or source localisation.
+the spectrograms, it is clear that even with such adverse condition,                Really, it is just reusing the information from the BSS to achieve
+the noise is removed significantly whilst maintaining good target                   further enhancement in the ANC. Results show impressive inter-
+signal integrity.                                                                   ference suppression whilst maintaining good speech intelligibility.
+   The spectrograms of the original target signal, the corrupted sig-
+nal and the processed output for the room environment using four
+                                                                                                               5. REFERENCES
+elements are shown in Figure 4. The noisy target signal in this
+case has a SNR of 0 dB. Evidently, the spectrograms show that the                   [1] O. Hoshuyama, A. Sugiyama, and A. Hirano, “A robust adap-
+“drowned” target signal in the sea of interference has been “res-                       tive beamformer for microphone arrays with a blocking ma-
+cued”. The results demonstrate that even when the target speech                         trix using constrained adaptive filters,” IEEE Trans. on Signal
+signal is not in the centre of the array and in close proximity with                    Process., vol. 47, no. 10, pp. 2677–2684, Jun. 1999.
+the other babble sources, the proposed structure still manages to
+pick it up correctly.                                                               [2] N. Grbić and S. Nordholm, “Soft constrained subband beam-
+                                                                                        forming for handsfree speech enhancement,” IEEE Int. Conf.
+                                                                                        on Acoust., Speech and Signal Process., vol. 1, pp. 885–888,
+                       No. Microphones.       Car Env.      Room Env.                   2002.
+                              2                8.7 dB        11.6 dB                [3] J. F. Cardoso, “Blind signal separation: Statistical principles,”
+                              3               13.4 dB        15.6 dB                    Proc. of the IEEE, vol. 86, no. 10, pp. 2009–2025, Oct. 1998.
+                              4               15.5 dB        17.7 dB
+                              5               17.2 dB        20.6 dB                [4] A. Bell and T. Sejnowski, “An information maximization ap-
+                                                                                        proach to blind separation and blind deconvolution,” Neural
+                                                                                        Computing, vol. 7, pp. 1129–1159, Nov. 1995.
+Table 1. The SNRs (dB) of the processed signal using different
+number of microphones in both car and room environments.                            [5] P. Smaragdis, “Efficient blind separation of convolved sound
+                                                                                        mixtures,” Proc. IEEE Apps. of Signal Process. to Audio and
+                                                                                        Acoust., pp. 19–22, 1997.
+    Numerically, the SNRs of the processed output for both the car
+and room scenarios using different number of microphones are                        [6] S. Araki, S. Makino, R. Aichner, T. Nishikawa, and
+tabulated in Table 1. As expected, the more microphones the struc-                      H.Saruwatari, “Subband based blind source separation for
+ture employs, the better the SNR is. However, even with as little as                    convolutive mixtures of speech,” IEEE Int. Conf. on Acoust.,
+two microphones, the structure still manages to achieve an impres-                      Speech and Signal Process., vol. 5, pp. 509–512, Apr. 2003.
+sive SNR improvement of more than 10 dB. An improvement of                          [7] J. E. Greenberg, “Modified LMS algorithms for speech pro-
+SNR up to 20 dB is registered for the case of 5 elements. Informal                      cessing with an adaptive noise canceller,” IEEE Trans. on
+listening tests suggest a very good output quality.                                     Speech and Audio Process., vol. 6, no. 4, pp. 338–350, Jul.
+                                                                                        1998.
+                                    4. CONCLUSIONS                                  [8] P. M. Peterson, “Simulating the response of multiple micro-
+                                                                                        phones to a single acoustic source in a reverberant room,”
+A novel speech enhancement scheme has been presented. The sub-                          Journal of Acoust. Soc. America, vol. 80, no. 5, pp. 1527–
+band based design integrates the powerful BSS and a simple ANC                          1529, Nov. 1986.
+with improved algorithm as an efficient hybrid system. As such,
+
+
+
+
+                                                                              207
+

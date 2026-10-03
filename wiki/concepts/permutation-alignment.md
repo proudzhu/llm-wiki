@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-08-26
-updated: 2026-08-26
+updated: 2026-10-03
 sources:
+  - raw/papers/low-2004-hybrid-bss-anc/full-text.txt
   - raw/papers/kang-2019-low-complexity-permutation-alignment/full-text.md
 tags:
   - blind-source-separation
@@ -52,6 +53,7 @@ Result: separation quality on par with Sawada/MBMC (SIR/PESQ within ~0.1 dB / 0.
 - **Built-in resolution**: [[concepts/independent-vector-analysis|IVA]], [[concepts/independent-low-rank-matrix-analysis|ILRMA]], and [[concepts/fastmnmf|FastMNMF]] avoid post-hoc alignment entirely by modeling source vectors jointly across frequency.
 - **Learned resolution**: [[concepts/permutation-invariant-training|permutation invariant training]] is the deep-learning analog — it makes the *training loss* invariant to output permutation rather than aligning frequency bins.
 - **Alternative regularizer**: [[concepts/spatial-regularization|spatial regularization]] uses DOA priors inside BSS optimization to keep permutations consistent, sidestepping the alignment problem from within the cost function.
+- **Initialization-based avoidance**: [[sources/low-2004-hybrid-bss-anc|Low & Nordholm 2004]] sidestep post-hoc alignment by initializing every subband unmixing matrix as a beamformer-like null toward an arbitrary jammer direction, so the adaptation starts from — and preserves — a consistently ordered solution across subbands.
 
 ## Related Concepts
 
@@ -63,6 +65,7 @@ Result: separation quality on par with Sawada/MBMC (SIR/PESQ within ~0.1 dB / 0.
 
 ## Related Sources
 
+- [[sources/low-2004-hybrid-bss-anc|Low & Nordholm 2004: A Hybrid Speech Enhancement System Employing BSS and Adaptive Noise Cancellation]] — initialization-based avoidance of the permutation problem
 - [[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019: A Low-Complexity Permutation Alignment Method for Frequency-Domain BSS]]
 - [[sources/sawada-2019-bss-ilrma-review|Sawada et al. 2019: BSS/ILRMA Review]] — treats the permutation problem as a central motivation for the IVA/ILRMA route
 - [[sources/ansari-2023-ai-bss-survey|Ansari et al. 2023: AI Approaches in BSS Survey]]

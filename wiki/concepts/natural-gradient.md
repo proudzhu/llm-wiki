@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-08-22
-updated: 2026-08-22
+updated: 2026-10-03
 sources:
+  - raw/papers/low-2004-hybrid-bss-anc/full-text.txt
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
 tags:
   - optimization-algorithms
@@ -27,6 +28,8 @@ $$\Delta\mathbf{w}_i = \mathbf{w}_i - \frac{1}{J}\mathbf{W}_i^{\mathrm{H}}\mathb
 
 and symmetrically for the mixing vector with $\mathbf{A}_i\mathbf{A}_i^{\mathrm{H}}$.
 
+The update also has a long history in subband frequency-domain ICA for speech: [[sources/low-2004-hybrid-bss-anc|Low & Nordholm 2004]] train per-subband unmixing matrices with the InfoMax natural-gradient rule $\Delta\mathbf{V}^{(m)} \propto \eta[\mathbf{I} - 2\varphi(\mathbf{y}^{(m)})(\mathbf{y}^{(m)})^{H}]\mathbf{V}^{(m)}$, where $\varphi = \tanh(\Re\,\cdot) + j\tanh(\Im\,\cdot)$ matches the supergaussian (Laplacian) distribution of subband speech.
+
 ## Practical Benefits (vs. ordinary gradient)
 
 - **No matrix inversion** — the $(\hat{\mathbf{C}}_{\mathbf{x}}^i)^{-1}$ term of ordinary-gradient OGIVEa is absorbed, improving efficiency and numerical stability.
@@ -43,4 +46,5 @@ Within the IVA optimization-family taxonomy (see [[concepts/independent-vector-a
 
 ## Related Sources
 
+- [[sources/low-2004-hybrid-bss-anc|Low & Nordholm 2004: A Hybrid Speech Enhancement System Employing BSS and Adaptive Noise Cancellation]] — early subband InfoMax natural-gradient ICA for speech enhancement
 - [[sources/ruan-2024-speech-extraction-low-snr|Ruan, Liao, Chen & Lu 2024: Speech Extraction Under Extremely Low SNR Conditions]]

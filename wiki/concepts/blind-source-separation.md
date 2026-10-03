@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-05-21
-updated: 2026-09-19
+updated: 2026-10-03
 sources:
+  - raw/papers/low-2004-hybrid-bss-anc/full-text.txt
   - raw/papers/pan-2026-array-self-awareness/full-text.md
   - raw/papers/guo-2023-iva-survey/full-text.md
   - raw/papers/dong-2026-spatially-regularized-switching-iva/full-text.md
@@ -64,7 +65,7 @@ The survey benchmarks these methods across audio, speech, music, voice, and sour
 
 ## Key Challenges
 
-- **Permutation ambiguity**: Each frequency bin is solved independently in ICA, so source ordering may differ across bins. Post-hoc [[concepts/permutation-alignment|permutation alignment]] resolves it — and can be made cheap: a confidence-thresholded local-first scheme matches state-of-the-art alignment quality at 4–5× lower runtime ([[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019]]); IVA/ILRMA-class methods avoid the problem by construction.
+- **Permutation ambiguity**: Each frequency bin is solved independently in ICA, so source ordering may differ across bins. Post-hoc [[concepts/permutation-alignment|permutation alignment]] resolves it — and can be made cheap: a confidence-thresholded local-first scheme matches state-of-the-art alignment quality at 4–5× lower runtime ([[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019]]); IVA/ILRMA-class methods avoid the problem by construction; [[sources/low-2004-hybrid-bss-anc|Low & Nordholm 2004]] instead avoid misalignment at the source, initializing every subband unmixing matrix as a beamformer-like null toward an arbitrary jammer direction so that adaptation starts from a consistently ordered solution (with scaling fixed by a unit-determinant/volume-conservation constraint).
 - **Scaling ambiguity**: Source magnitudes are not identifiable without additional constraints.
 - **Underdetermined mixtures**: When sources outnumber microphones ($N > M$), full separation requires sparse/structured priors.
 - **Computational cost**: Joint optimization over all frequency bins is expensive; efficient update rules (IP, ISS, AuxIVA) are critical — for single-source extraction, FIVE's global auxiliary-function minimization reaches peak performance in a handful of iterations (Scheibler & Ono 2020).
@@ -75,6 +76,7 @@ The survey benchmarks these methods across audio, speech, music, voice, and sour
 - Hearing aids and hearables
 - Robot audition
 - Music source separation
+- Hands-free speech enhancement front-ends — hybrid BSS+ANC cascades where the BSS's interference-dominant outputs are reused as adaptive-noise-canceller references ([[sources/low-2004-hybrid-bss-anc|Low & Nordholm 2004]])
 
 ## BSS as A Priori Estimator for Model-Based Extraction
 
@@ -99,9 +101,12 @@ The division between BSS and model-based multichannel filtering blurs when BSS i
 - [[concepts/array-self-awareness|Array Self-Awareness]] — model-based extraction whose a priori coherence matrices can be supplied by offline BSS
 - [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]]
 - [[concepts/cross-talk-reduction|Cross-Talk Reduction]]
+- [[concepts/hybrid-bss-anc-speech-enhancement|Hybrid BSS-ANC Speech Enhancement]]
+- [[concepts/kurtosis-based-output-selection|Kurtosis-Based Output Selection]]
 
 ## Related Sources
 
+- [[sources/low-2004-hybrid-bss-anc|Low & Nordholm 2004: A Hybrid Speech Enhancement System Employing BSS and Adaptive Noise Cancellation]] — hybrid BSS+ANC cascade with kurtosis-based output selection; permutation avoided via beamformer-like initialization, scaling via unit-determinant constraint
 - [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026: Microphone Array Self-Awareness via a Residual Model of the Covariance Matrix]] — offline BSS as the a priori estimator for real-time model-based extraction
 
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]

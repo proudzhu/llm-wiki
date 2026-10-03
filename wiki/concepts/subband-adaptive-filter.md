@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-17
-updated: 2026-05-17
+updated: 2026-10-03
+sources:
+  - raw/papers/low-2004-hybrid-bss-anc/full-text.txt
 tags:
   - active-noise-control
   - adaptive-filtering
@@ -33,12 +35,18 @@ A delayless SAF avoids the aliasing and delay problems of traditional subband pr
 - Suitable for multi-channel and MIMO ANC systems
 - GPU-accelerated implementations for parallel subband processing
 
+## Application in Speech Enhancement (BSS Post-Processor)
+
+Beyond active noise control, subband adaptive filters serve as adaptive noise cancellers in speech enhancement: [[sources/low-2004-hybrid-bss-anc|Low & Nordholm 2004]] use a modified leaky subband LMS (Greenberg-style, power-normalized step size that shrinks during strong-speech intervals) as the temporal post-processor of a BSS front-end, where the references are the BSS's own interference-dominant outputs. Because processing is per subband, very short filters (1–5 taps) suffice.
+
 ## Related Concepts
 
 - [[concepts/active-noise-control|Active Noise Control]]
 - [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
-- [[concepts/frequency-domain-anc|Frequency-domain ANC]]
+- [[concepts/frequency-domain-anc|Frequency-Domain ANC]]
+- [[concepts/hybrid-bss-anc-speech-enhancement|Hybrid BSS-ANC Speech Enhancement]]
 
 ## Related Sources
 
+- [[sources/low-2004-hybrid-bss-anc|Low & Nordholm 2004: A Hybrid Speech Enhancement System Employing BSS and Adaptive Noise Cancellation]]
 - [[sources/lu-2021-survey-active-noise-control-linear|Lu et al. 2021: Survey on ANC — Part I: Linear Systems]]

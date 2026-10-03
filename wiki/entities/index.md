@@ -628,4 +628,6 @@
 | [[entities/thomas-dietzen\|Thomas Dietzen]] | KU Leuven (ESAT-PSI) researcher; co-author of the SRP tutorial review and X-SRP library | 2026-10-02 |
 | [[entities/leonardo-nunes\|Leonardo Nunes]] | Microsoft Research researcher; co-author of the SRP tutorial review and X-SRP library | 2026-10-02 |
 | [[entities/mike-brookes\|Mike Brookes]] | Imperial College London researcher; speech processing; co-author of the SRP tutorial review | 2026-10-02 |
+| [[entities/siow-yong-low\|Siow Yong Low]] | Researcher (UWA/WATRI); blind source separation and speech enhancement; first author of the hybrid BSS+ANC system (NORSIG 2004). | 2026-10-03 |
+| [[entities/sven-nordholm\|Sven Nordholm]] | Researcher (UWA/WATRI); microphone array signal processing and subband beamforming; co-author of the hybrid BSS+ANC system and soft-constrained subband beamforming. | 2026-10-03 |
 
