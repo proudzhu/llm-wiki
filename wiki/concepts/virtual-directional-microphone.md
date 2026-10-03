@@ -6,6 +6,7 @@ sources:
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
   - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
   - raw/papers/huang-2026-dual-mic-steerable-neural-beamformer/full-text.md
+  - raw/papers/huang-2026-neural-directional-filtering/full-text.md
 tags:
   - virtual-directional-microphone
   - spatial-audio
@@ -38,6 +39,17 @@ Z_{\mathrm{VDM}}[f,t] = \sum_{n=1}^{N} S[\vartheta_n, f]\, H_{\mathbf{p}_{\mathr
 $$
 
 where $\vartheta_n$ is the DOA of the $n$-th source and $H_{\mathbf{p}_{\mathrm{VDM}},n}[f]$ its direct-path transfer function to the VDM position. This is the training target of the founding [[concepts/neural-directional-filtering|NDF]] study, realized with a DNN-estimated complex mask applied to a reference microphone.
+
+## Reverberant VDM Formulation (Huang et al. 2026)
+
+In reverberant environments, **every propagation path is weighted by the directivity gain at its angle of arrival**:
+
+$$
+H_{\mathbf{p}_{\textrm{VDM}},\mathbf{p}_{n}}[f,\Lambda]=\sum_{i=1}^{\infty}\Lambda(\theta_{i},\phi_{i})\,\rho^{(i)}_{\mathbf{p}_{\textrm{VDM}},\mathbf{p}_{n}}[f], \qquad
+Z[f,t]=\sum_{n=1}^{N}H_{\mathbf{p}_{\textrm{VDM}},\mathbf{p}_{n}}[f,\Lambda]\,X_{n}[f,t],
+$$
+
+so the pattern applies not only to direct paths but to each reflection. Training NDF on reverberant data simulated with this target (R-Model) outperforms anechoic training (A-Model) at all reverberation times, and the R-Model's estimated directivity factor approaches the target VDM's DF.
 
 ## VDM Signal Decomposition
 
@@ -72,6 +84,7 @@ where $\beta=10^{-\frac{\mathrm{DI}}{20}}$ is determined by the directivity inde
 - [[concepts/diffuse-sound-extraction|Diffuse Sound Extraction]]
 - [[concepts/differential-microphone-array|Differential Microphone Array]]
 - [[concepts/white-noise-gain|White Noise Gain]]
+- [[concepts/film-jnf|FiLM-JNF]]
 
 ## Related Sources
 
@@ -79,3 +92,4 @@ where $\beta=10^{-\frac{\mathrm{DI}}{20}}$ is determined by the directivity inde
 - [[sources/huang-2025-steerable-neural-directional-filtering|Huang et al. 2025: Steerable Neural Directional Filtering]] — steerable VDM with mid-inference direction switching
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
 - [[sources/huang-2026-dual-mic-steerable-neural-beamformer|Huang & Habets 2026: Dual-Microphone Steerable High-Order Neural Differential Beamformer]] — steered NDBF pairs reproduce X-Y stereo VDM outputs (incl. inter-channel level differences) with two closely spaced omni microphones
+- [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026: Neural Directional Filtering with a Compact Microphone Array]] — reverberant VDM formulation (per-path directivity weighting) and stereo recording with two steered cardioid VDMs

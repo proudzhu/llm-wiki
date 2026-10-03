@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-20
+updated: 2026-10-03
 sources:
   - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
   - raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md
   - raw/papers/huang-2026-ndf-joint-neural-directional-filtering/full-text.md
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
   - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
+  - raw/papers/huang-2026-neural-directional-filtering/full-text.md
   - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
   - raw/papers/wen-2025-neural-directed-speech-enhancement/full-text.md
 tags:
@@ -56,6 +57,10 @@ NDF+ extends FT-JNF with:
 
 [[concepts/steerable-neural-directional-filtering|SNDF]] (Huang et al. 2025) reuses the single-mask FT-JNF unchanged for mask estimation but adds a steering branch: the desired steering direction is one-hot encoded, mapped through a linear layer, and used to initialize the forward/backward states of the F-BiLSTM per time frame — the same conditioning mechanism Tesch & Gerkmann use for angular-region conditioning in the SSF. This turns the fixed-look-direction NDF into a model steerable to any direction at inference.
 
+## FiLM-Conditioned Extension (FiLM-JNF)
+
+[[concepts/film-jnf|FiLM-JNF]] (Huang et al. 2026; companion study arXiv:2510.20253) inserts a [[concepts/film-layer|FiLM]] layer between the F-BiLSTM and the T-UniLSTM, conditioned on a sinusoidal embedding of the continuous steering angle ($d_{\mathrm{emb}}=72$, affine parameters $\boldsymbol{\alpha},\boldsymbol{\beta}\in\mathbb{R}^{512}$) — replacing the one-hot initial-state conditioning with **continuous** steering (948 K parameters, 14.121 GMACs/s, 32 ms algorithmic latency).
+
 ## Low-Latency Limitation of FT-JNF (Uphaus et al. 2026)
 
 Shortening the STFT window to meet hearing-aid latency (≤ 10 ms total) breaks the FT-JNF backbone: the reduced frequency resolution yields a much shorter sequence for the spectral (wide-band) LSTM, and FiLM-JNF drops from PESQ 2.10 / SI-SDR 4.70 dB (32 ms window) to 1.72 / 2.98 dB (8 ms window). Uphaus et al.'s [[concepts/film-osn|FiLM-OSN]] keeps the FiLM steering but replaces the FT-JNF core with OnlineSpatialNet (frequency convolutions + [[concepts/mamba|Mamba]] narrow-band SSM), recovering baseline-level performance at 8 ms windows — evidence that the failure mode is the spectral-LSTM sequence length, not the FiLM conditioning itself.
@@ -71,6 +76,7 @@ Shortening the STFT window to meet hearing-aid latency (≤ 10 ms total) breaks 
 - [[concepts/direct-separation|Direct Separation (DS)]]
 - [[concepts/neural-directional-filtering|Neural Directional Filtering]]
 - [[concepts/steerable-neural-directional-filtering|Steerable Neural Directional Filtering]]
+- [[concepts/film-jnf|FiLM-JNF]]
 - [[concepts/film-osn|FiLM-OSN]]
 - [[concepts/virtual-directional-microphone|Virtual Directional Microphone]]
 - [[concepts/diffuse-sound-extraction|Diffuse Sound Extraction]]
@@ -81,6 +87,7 @@ Shortening the STFT window to meet hearing-aid latency (≤ 10 ms total) breaks 
 - [[sources/tesch-2024-spatially-selective-nonlinear-filters|Tesch & Gerkmann 2024: Multi-channel Speech Separation Using Spatially Selective Deep Non-linear Filters]]
 - [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — first application of the single-mask FT-JNF to directivity-pattern learning
 - [[sources/huang-2025-steerable-neural-directional-filtering|Huang et al. 2025: Steerable Neural Directional Filtering]] — steering-direction conditioning of the F-BiLSTM initial states
+- [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026: Neural Directional Filtering with a Compact Microphone Array]] — FiLM-JNF: continuous-angle FiLM conditioning between F-BiLSTM and T-UniLSTM; batch-aggregated normalized $\mathcal{L}_1$ loss
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
 - [[sources/uphaus-2026-directivity-low-latency|Uphaus et al. 2026: Directivity-Conditioned Low-Latency Neural Filtering]] — FT-JNF's spectral-LSTM failure at 8 ms windows; FiLM-OSN remedy
 - [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024: Lightweight Hybrid Multi-Channel Speech Extraction with DVAD]] — causalized FT-JNF as baseline; hybrid GSC+DPCRN matches it at ~90% lower MACs

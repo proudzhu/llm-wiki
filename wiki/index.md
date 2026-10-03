@@ -1210,6 +1210,8 @@
 | [[concepts/gcc-phat\|GCC-PHAT]] | Phase-transform whitened cross-correlation for TDOA estimation; the correlation underlying SRP-PHAT | 2026-10-02 |
 | [[concepts/steerable-ldma\|Steerable LDMA]] | Conditions and null-constrained design for steering linear DMA mainlobes off endfire; first-order LDMAs provably non-steerable, Nth-order partially steerable (Jin et al. 2021) | 2026-10-03 |
 | [[concepts/neural-differential-beamformer\|Neural Differential Beamformer]] | DNN-based differential beamformer estimating complex beamforming weights (not a single-channel mask) for steerable high-order DMA beampatterns from a dual-microphone linear array. | 2026-10-03 |
+| [[concepts/film-jnf\|FiLM-JNF]] | FT-JNF backbone with a FiLM conditioning layer for continuous steering: sinusoidal angle embedding injected between F-BiLSTM and T-UniLSTM enables off-grid steering and user-defined directivity patterns. | 2026-10-03 |
+| [[concepts/data-dependent-directivity-metrics\|Data-Dependent Directivity Metrics]] | Evaluation metrics for masking-based neural directional filtering: power-pattern estimation (mask applied to direct-path components) and directivity-factor estimation from reverberant components. | 2026-10-03 |
 
 ---
 
@@ -1461,6 +1463,7 @@
 | [[sources/grinstein-2024-srp-tutorial-review\|Grinstein, Tengan, Çakmak et al. 2024]] | This tutorial review surveys over 200 papers on the Steered Response Power (SRP) method and its variants, with emphasis on SRP-PHAT, and provides the field's first centralized resource for SRP research. | 2026-10-02 |
 | [[sources/jin-2021-steering-study-ldma\|Jin, Huang, Wang, Chen, Benesty & Cohen 2021]] | LDMA steerability settled: first-order provably non-steerable, Nth-order partially steerable under closed-form null conditions; null-constrained SLDMA design validated on an 8-mic prototype | 2026-10-03 |
 | [[sources/huang-2026-dual-mic-steerable-neural-beamformer\|Huang & Habets 2026: Dual-Microphone Steerable High-Order Neural Differential Beamformer]] | NDBF: a DNN estimates complex beamforming weights for a dual-mic linear array, realizing steerable high-order frequency-invariant DMA patterns and X-Y stereo recording with two omni microphones. | 2026-10-03 |
+| [[sources/huang-2026-neural-directional-filtering\|Huang, Chetupalli, Halimeh, Thiergart & Habets 2026]] | This is the comprehensive journal-style treatment of neural directional filtering (NDF), extending the preliminary IWAENC 2024 study. | 2026-10-03 |
 
 ---
 
@@ -1515,10 +1518,10 @@
 
 ## Statistics
 
-- **Total pages**: 1464
+- **Total pages**: 1467
 - **Entities**: 624
-- **Concepts**: 567
-- **Sources**: 242
+- **Concepts**: 569
+- **Sources**: 243
 - **Synthesis**: 23
 - **Queries**: 8
 - **Last updated**: 2026-10-03

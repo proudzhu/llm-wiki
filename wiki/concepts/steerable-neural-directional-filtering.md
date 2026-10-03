@@ -6,6 +6,7 @@ sources:
   - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
   - raw/papers/jin-2021-steering-study-ldma/full-text.txt
   - raw/papers/huang-2026-dual-mic-steerable-neural-beamformer/full-text.md
+  - raw/papers/huang-2026-neural-directional-filtering/full-text.md
 tags:
   - neural-directional-filtering
   - steerable-filtering
@@ -25,6 +26,10 @@ The classical beamforming counterpart is the [[concepts/steerable-ldma|steerable
 ## Steering Mechanism
 
 The steering direction $\theta_s$ is one-hot encoded (over $M = 360°/\vartheta$ classes at angular resolution $\vartheta$), passed through a linear layer, and used to initialize the forward and backward initial states of the F-BiLSTM of the FT-JNF backbone for each time frame — the conditioning scheme of the [[concepts/spatially-selective-nonlinear-filter|spatially selective filter]] (Tesch & Gerkmann 2023). No architectural changes to the mask-estimation path are required.
+
+## Continuous Steering (FiLM-JNF)
+
+The journal-style NDF paper (Huang et al. 2026) removes the discrete-grid restriction of the one-hot mechanism: the steering angle is embedded with a **sinusoidal encoding** ($d_{\mathrm{emb}}=72$) and injected through a [[concepts/film-layer|FiLM]] layer between the F-BiLSTM and the T-UniLSTM ([[concepts/film-jnf|FiLM-JNF]], 948 K parameters). The model steers to **continuous, off-grid directions** (e.g., 32.5° and 67.5°, unseen on the 5° training grid) with steering- and frequency-invariant patterns and consistent SDR across directions (e.g., 25.73–26.25 dB for the 6th-order pattern).
 
 ## Steerability-Oriented Training Strategy
 
@@ -53,6 +58,7 @@ The steering-conditioning recipe of SNDF carries over from circular to **linear*
 - [[concepts/directivity-pattern|Directivity Pattern]]
 - [[concepts/differential-microphone-array|Differential Microphone Array]]
 - [[concepts/steerable-ldma|Steerable LDMA]] — the classical null-constrained counterpart and its LDMA steerability limits
+- [[concepts/film-jnf|FiLM-JNF]] — the continuous-steering successor architecture
 
 ## Related Sources
 
@@ -61,3 +67,4 @@ The steering-conditioning recipe of SNDF carries over from circular to **linear*
 - [[sources/tesch-2024-spatially-selective-nonlinear-filters|Tesch & Gerkmann 2024: Spatially Selective Deep Non-linear Filters]] — origin of the conditioning mechanism
 - [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021: Steering Study of Linear Differential Microphone Arrays]] — classical LDMA steering limits that SNDF transcends
 - [[sources/huang-2026-dual-mic-steerable-neural-beamformer|Huang & Habets 2026: Dual-Microphone Steerable High-Order Neural Differential Beamformer]] — the steering mechanism applied to a dual-mic linear array with a beamforming-weight output
+- [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026: Neural Directional Filtering with a Compact Microphone Array]] — continuous steering via FiLM-JNF, superseding the one-hot grid restriction

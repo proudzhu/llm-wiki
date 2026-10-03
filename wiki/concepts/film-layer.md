@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-09-21
+updated: 2026-10-03
 sources:
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
   - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
   - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
+  - raw/papers/huang-2026-neural-directional-filtering/full-text.md
 tags:
   - deep-learning
   - neural-networks
@@ -49,7 +50,7 @@ In [[concepts/geometry-conditioned-ssf|GC-SSF]], FiLM layers modulate the interm
 
 ### Directivity-Pattern Conditioning (Neural Directional Filtering)
 
-In [[concepts/film-osn|FiLM-OSN]] (Uphaus et al. 2026), FiLM is the steering mechanism of a low-latency neural directional filter for hearing aids: a 72-dimensional directivity-pattern vector (sampled at 5° intervals) is linearly mapped to the channel dimension ($C=96$), conditioning the narrow-band blocks toward the desired pattern so that the directivity can be adjusted freely at inference. The same mechanism was introduced for FT-JNF by the FiLM-JNF (Huang, Chetupalli & Habets 2025, arXiv:2510.20253), which Uphaus et al. use as their baseline.
+In [[concepts/film-osn|FiLM-OSN]] (Uphaus et al. 2026), FiLM is the steering mechanism of a low-latency neural directional filter for hearing aids: a 72-dimensional directivity-pattern vector (sampled at 5° intervals) is linearly mapped to the channel dimension ($C=96$), conditioning the narrow-band blocks toward the desired pattern so that the directivity can be adjusted freely at inference. The same mechanism underlies [[concepts/film-jnf|FiLM-JNF]] — introduced for FT-JNF in the companion study (Huang, Chetupalli & Habets 2025, arXiv:2510.20253) and used for **continuous steering** in the journal-style NDF paper ([[sources/huang-2026-neural-directional-filtering|Huang et al. 2026]]), where a sinusoidal embedding of the steering angle ($d_{\mathrm{emb}}=72$) is mapped by two linear layers to per-feature affine parameters $\boldsymbol{\alpha},\boldsymbol{\beta}\in\mathbb{R}^{512}$. Uphaus et al. use FiLM-JNF as their baseline.
 
 ### Direction-Conditioned Control-Filter Estimation (ANC)
 
@@ -89,6 +90,7 @@ The review reports that, in TSE settings, the choice of fusion layer has "rather
 - [[concepts/spatially-selective-nonlinear-filter|Spatially Selective Non-Linear Filter (SSF)]]
 - [[concepts/target-speaker-extraction|Target Speaker Extraction (TSE)]]
 - [[concepts/film-osn|FiLM-OSN]]
+- [[concepts/film-jnf|FiLM-JNF]]
 - [[concepts/td-speakerbeam|TD-SpeakerBeam]]
 - [[concepts/angle-feature|Angle Feature]]
 
@@ -97,4 +99,5 @@ The review reports that, in TSE settings, the choice of fusion layer has "rather
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova et al. 2023: Neural Target Speech Extraction: An Overview]]
 - [[sources/uphaus-2026-directivity-low-latency|Uphaus et al. 2026: Directivity-Conditioned Low-Latency Neural Filtering]] — FiLM steers directivity patterns in the 10 ms-latency FiLM-OSN
+- [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026: Neural Directional Filtering with a Compact Microphone Array]] — FiLM-JNF: sinusoidal angle embedding mapped to per-feature affine parameters for continuous steering
 - [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC]] — FiLM conditions control-filter estimation on the desired direction

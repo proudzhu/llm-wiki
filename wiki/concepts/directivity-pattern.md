@@ -11,6 +11,7 @@ sources:
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
   - raw/papers/jin-2021-steering-study-ldma/full-text.txt
+  - raw/papers/huang-2026-neural-directional-filtering/full-text.md
 tags:
   - directivity-pattern
   - spatial-audio
@@ -77,11 +78,16 @@ $$
 
 with orientation $\theta_d$ relative to the head; $M=-20$ dB and $W=90°$ in their experiments.
 
+## Data-Dependent Pattern Estimation
+
+For masking-based neural filters there is no fixed weight vector, so the pattern cannot be read off filter coefficients. [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026]] estimate it data-dependently: apply the estimated mask separately to each source's **direct-path** component at the reference microphone, and average the masked/unmasked power ratios over all test sources per direction to obtain narrowband/wideband power-pattern estimates; a complementary directivity-factor estimate uses the **reverberant** components. See [[concepts/data-dependent-directivity-metrics|Data-Dependent Directivity Metrics]].
+
 ## Related Concepts
 
 - [[concepts/virtual-directional-microphone|Virtual Directional Microphone]]
 - [[concepts/sector-directivity-design|Sector-Based Directivity Design]]
 - [[concepts/neural-directional-filtering|Neural Directional Filtering]]
+- [[concepts/data-dependent-directivity-metrics|Data-Dependent Directivity Metrics]]
 - [[concepts/white-noise-gain|White Noise Gain]]
 - [[concepts/beamforming|Beamforming]]
 - [[concepts/steerable-ldma|Steerable LDMA]]
@@ -96,4 +102,5 @@ with orientation $\theta_d$ relative to the head; $M=-20$ dB and $W=90°$ in the
 - [[sources/huang-2025-steerable-neural-directional-filtering|Huang, Halimeh, Chetupalli, Thiergart & Habets 2025: Steerable Neural Directional Filtering]]
 - [[sources/uphaus-2026-directivity-low-latency|Uphaus et al. 2026: Directivity-Conditioned Low-Latency Neural Filtering]] — cosine-based pattern with configurable main-lobe width $W$ and capped attenuation $M$ for hearing devices
 - [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021: Steering Study of Linear Differential Microphone Arrays]] — LDMA steerability limits on the rotated $\cos^r(\vartheta - \vartheta_0)$ pattern form
+- [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026: Neural Directional Filtering with a Compact Microphone Array]] — data-dependent power-pattern and DF estimation for masking-based filters; higher-order DMA patterns as powers of the first-order pattern
 

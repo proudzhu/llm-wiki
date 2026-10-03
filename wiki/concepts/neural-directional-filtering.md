@@ -8,6 +8,7 @@ sources:
   - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
   - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
   - raw/papers/huang-2026-dual-mic-steerable-neural-beamformer/full-text.md
+  - raw/papers/huang-2026-neural-directional-filtering/full-text.md
 tags:
   - neural-directional-filtering
   - virtual-directional-microphone
@@ -55,6 +56,10 @@ where $\Lambda(\theta,\phi)$ is the desired directivity pattern, and $H_{\mathrm
 
 [[concepts/film-osn|FiLM-OSN]] (Uphaus et al. 2026) brings NDF to behind-the-ear hearing devices: realistic constraints include dynamic scenarios, microphone positions varying with head diameter and hearing-aid placement, head shadow, and a strict ≤ 10 ms total latency (prior NDF: 40–50 ms). It conditions a Mamba-based OnlineSpatialNet on a directivity-pattern vector via [[concepts/film-layer|FiLM]], outputs a **binaural** (left/right) signal rather than a single-channel VDM, and reduces — rather than eliminates — interferers to preserve spatial awareness. An [[concepts/ipd-preservation-loss|IPD preservation loss]] is required for the estimated pattern to actually follow the conditioned target; a plain $\mathcal{L}_1$ model attains better quality metrics yet ignores the pattern entirely.
 
+## Comprehensive Journal Treatment (Huang et al. 2026)
+
+The journal-style extension ([[sources/huang-2026-neural-directional-filtering|Huang et al. 2026]]) consolidates the NDF line and adds: **continuous steerability** via [[concepts/film-jnf|FiLM-JNF]] (sinusoidal angle embedding + FiLM conditioning, steering to off-grid directions such as 32.5° on a 5° training grid); **frequency invariance above the spatial aliasing frequency** when broadband spectral context is available (a 7 kHz band alone aliases, but 7 kHz plus all content below the 5.6 kHz aliasing limit does not — evidence of frequency-dependent processing); a **batch-aggregated normalized $\mathcal{L}_1$ loss** outperforming the founding study's tSDR loss; **reverberant training** (reverberant-trained R-Models beat anechoic-trained A-Models at all RT60s, e.g. 22.12 vs 19.43 dB SDR for 1st-order at RT60 = 0.2 s); generalization to unseen non-speech (WHAM!) sources and to moving sources; user-defined pattern shapes; [[concepts/data-dependent-directivity-metrics|data-dependent directivity metrics]] for evaluating any masking-based method; and a stereo-recording application (two steered cardioids at 45°/135°, 16 dB measured L/R amplitude difference).
+
 ## Architecture
 
 The FT-JNF-based NDF architecture processes concatenated real/imaginary STFT coefficients $[B,T,F,2Q]$ through:
@@ -72,6 +77,8 @@ The FT-JNF-based NDF architecture processes concatenated real/imaginary STFT coe
 - [[concepts/joint-nonlinear-filtering|Joint Nonlinear Filtering]]
 - [[concepts/neural-differential-beamformer|Neural Differential Beamformer]]
 - [[concepts/film-osn|FiLM-OSN]]
+- [[concepts/film-jnf|FiLM-JNF]]
+- [[concepts/data-dependent-directivity-metrics|Data-Dependent Directivity Metrics]]
 
 ## Related Sources
 
@@ -81,3 +88,4 @@ The FT-JNF-based NDF architecture processes concatenated real/imaginary STFT coe
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
 - [[sources/huang-2026-dual-mic-steerable-neural-beamformer|Huang & Habets 2026: Dual-Microphone Steerable High-Order Neural Differential Beamformer]] — mask-to-weights extension for dual-mic linear arrays: steerable high-order DMA patterns with complex beamforming weights
 - [[sources/uphaus-2026-directivity-low-latency|Uphaus et al. 2026: Directivity-Conditioned Low-Latency Neural Filtering]] — hearing-aid-grade low-latency (10 ms) binaural NDF via FiLM-OSN
+- [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026: Neural Directional Filtering with a Compact Microphone Array]] — comprehensive journal-style treatment: FiLM-JNF continuous steering, spatial-aliasing analysis, reverberant training, user-defined patterns, evaluation methodology

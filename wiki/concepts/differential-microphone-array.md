@@ -11,6 +11,7 @@ sources:
   - raw/papers/desena-2012-higher-order-differential/full-text.md
   - raw/papers/jin-2021-steering-study-ldma/full-text.txt
   - raw/papers/huang-2026-dual-mic-steerable-neural-beamformer/full-text.md
+  - raw/papers/huang-2026-neural-directional-filtering/full-text.md
 tags:
   - differential-microphone-array
   - beamforming
@@ -32,7 +33,7 @@ A differential microphone array (DMA) is a fixed beamformer that uses spatial di
 ## Key Properties
 
 - **Frequency invariance**: Directivity pattern remains constant across frequency
-- **Order limitation**: Maximum order is limited by number of microphones
+- **Order limitation**: Maximum order is limited by number of microphones — for a circular DMA, the highest achievable order is $\lfloor(M-1)/2\rfloor$, i.e., 1st-order for $M=4$ microphones ([[sources/huang-2026-neural-directional-filtering|Huang et al. 2026]]), which NDF surpasses by learning 6th-order patterns on a 4-mic array
 - **White noise gain**: Low WNG at low frequencies leads to noise amplification
 
 ## Kronecker Product Differential Beamforming
@@ -103,6 +104,7 @@ For very small baselines where delay-based features become unreliable (Tashev et
 - [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]] — Kronecker-decomposed differential beamformers (KP cardioid/dipole/hypercardioid/supercardioid)
 - [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — survey of DMA design space: null-constraint and max-WNG designs, multistage-cascade theory, fractional orders, circular/concentric geometries, steering limits
 - [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — neural directional filtering surpasses the order-per-microphone limit: a 3rd-order DMA pattern (6-mic CDMA classically) realized with 4 microphones
+- [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026: Neural Directional Filtering with a Compact Microphone Array]] — circular-DMA order bound $\lfloor(M-1)/2\rfloor$; 1st/3rd/6th-order cardioid patterns learned on a 4-mic array; NDF's low-SNR white-noise amplification analogue
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — back-to-back unidirectional variant (9.6 mm baseline)
 - [[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012: On the Design and Implementation of Higher Order Differential Microphones]] — (α, λ) design framework unifying standard patterns; complex-root array structure; WNG/bandwidth analysis

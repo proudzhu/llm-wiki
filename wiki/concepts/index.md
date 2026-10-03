@@ -571,4 +571,6 @@
 | [[concepts/gcc-phat\|GCC-PHAT]] | Phase-transform whitened cross-correlation for TDOA estimation; the correlation underlying SRP-PHAT | 2026-10-02 |
 | [[concepts/steerable-ldma\|Steerable LDMA]] | Conditions and null-constrained design for steering linear DMA mainlobes off endfire; first-order LDMAs provably non-steerable, Nth-order partially steerable (Jin et al. 2021) | 2026-10-03 |
 | [[concepts/neural-differential-beamformer\|Neural Differential Beamformer]] | DNN-based differential beamformer estimating complex beamforming weights (not a single-channel mask) for steerable high-order DMA beampatterns from a dual-microphone linear array. | 2026-10-03 |
+| [[concepts/film-jnf\|FiLM-JNF]] | FT-JNF backbone with a FiLM conditioning layer for continuous steering: sinusoidal angle embedding injected between F-BiLSTM and T-UniLSTM enables off-grid steering and user-defined directivity patterns. | 2026-10-03 |
+| [[concepts/data-dependent-directivity-metrics\|Data-Dependent Directivity Metrics]] | Evaluation metrics for masking-based neural directional filtering: power-pattern estimation (mask applied to direct-path components) and directivity-factor estimation from reverberant components. | 2026-10-03 |
 

@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-09-30
+updated: 2026-10-03
 sources:
   - raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
@@ -10,6 +10,7 @@ sources:
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
   - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
   - raw/papers/desena-2012-higher-order-differential/full-text.md
+  - raw/papers/huang-2026-neural-directional-filtering/full-text.md
 tags:
   - fixed-beamformer
   - spatial-audio
@@ -37,7 +38,7 @@ Conventional FBFs are fundamentally limited by:
 - Low white noise gain (WNG) at low frequencies for higher-order patterns
 - **Directivity upper bound**: for fixed beamformers the directivity is capped at the square of the sensor count ($M^2$), so small arrays cannot reach the directivity many far-field applications need — breaking this limit is listed as an open problem by [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020]]
 
-Empirically, a least-squares FBF designed for a minimum WNG of −15 dB on a 4-microphone, 3 cm array approximates a 1st-order cardioid well but cannot approximate a 3rd-order DMA pattern (negative SDRs), and its performance is dominated by white-noise amplification ([[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024]]).
+Empirically, a least-squares FBF designed for a minimum WNG of −15 dB on a 4-microphone, 3 cm array approximates a 1st-order cardioid well but cannot approximate a 3rd-order DMA pattern (negative SDRs), and its performance is dominated by white-noise amplification ([[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024]]). The journal-style NDF study ([[sources/huang-2026-neural-directional-filtering|Huang et al. 2026]]) confirms the failure mode on the same array: the LS beamformer reaches only 10.32 dB SDR (1st-order) versus 27.70 dB for NDF, exhibits spatial aliasing at high frequencies (above 5.6 kHz for a 6 cm array) and a widened low-frequency mainlobe, and for a circular array the highest achievable DMA order is $\lfloor(M-1)/2\rfloor$ — 1st-order for $M=4$ microphones.
 
 On the design side, [[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012]] give fixed differential designs a two-parameter user interface — the $(\alpha, \lambda)$ [[concepts/sector-directivity-design|sector-based directivity design]] — and a [[concepts/complex-root-differential-array|complex-root array structure]] showing that the pattern class a fixed differential structure can realize is itself a design decision, not just the weights.
 
@@ -70,6 +71,7 @@ The FBF is not merely a target-enhancing pre-filter in a [[concepts/gsc-beamform
 
 - [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]] — Kronecker-decomposed differential fixed beamformers
 - [[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024: Neural Directional Filtering]] — LS fixed beamformer baseline results
+- [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026: Neural Directional Filtering with a Compact Microphone Array]] — LS beamformer aliasing/mainlobe failure modes and the circular-DMA order bound on the same array
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
 - [[sources/huang-2025-steerable-neural-directional-filtering|Huang, Halimeh, Chetupalli, Thiergart & Habets 2025: Steerable Neural Directional Filtering]]
 - [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]] — low-rank superdirective FBF via Kronecker decomposition

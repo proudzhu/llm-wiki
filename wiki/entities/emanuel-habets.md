@@ -32,6 +32,7 @@ tags:
 - Co-authored "Residual noise control using a parametric multichannel Wiener filter" (ICASSP 2015) — generalized PMWF with direct control of maximum noise reduction, valid for higher-rank desired signals — [[sources/braun-2015-residual-noise-control|Braun, Kowalczyk & Habets 2015]]
 - Co-authored "A comparison of generative and discriminative methods for speech enhancement: robustness, complexity, and hallucination" (arXiv 2026) — 14-model controlled comparison showing GAN-trained NCSN++ beats diffusion at 1/100th the compute — [[sources/shetu-2026-generative-discriminative-comparison|Shetu et al. 2026]]
 - Co-authored "Dual-Microphone Steerable High-Order Neural Differential Beamformer" (arXiv 2026) — [[concepts/neural-differential-beamformer|NDBF]]: steerable high-order neural differential beamforming with a dual-microphone array — [[sources/huang-2026-dual-mic-steerable-neural-beamformer|Huang & Habets 2026]]
+- Co-authored "Neural Directional Filtering with a Compact Microphone Array" (arXiv 2026) — the comprehensive journal-style NDF paper: FiLM-JNF continuous steering, data-dependent directivity metrics, reverberant training, user-defined patterns — [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026]]
 
 ## Related Sources
 
@@ -47,3 +48,4 @@ tags:
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]]
 - [[sources/shetu-2026-generative-discriminative-comparison|Shetu et al. 2026: Generative vs. Discriminative SE]]
 - [[sources/huang-2026-dual-mic-steerable-neural-beamformer|Huang & Habets 2026: Dual-Microphone Steerable High-Order Neural Differential Beamformer]]
+- [[sources/huang-2026-neural-directional-filtering|Huang, Chetupalli, Halimeh, Thiergart & Habets 2026: Neural Directional Filtering with a Compact Microphone Array]]

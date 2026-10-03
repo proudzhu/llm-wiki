@@ -5674,3 +5674,13 @@ Ingested Rout, Das & Panda 2012 (IEEE TIM 61(2):554-563). Key contribution: [[co
 ## [2026-10-03] query | NDF、SNDF、NDBF 三代神经方向滤波方法对比
 
 Created [[queries/ndf-sndf-ndbf-comparison|NDF/SNDF/NDBF 对比查询页]] — 逐项对比三代方法的基本信息、网络结构、损失函数（SA-ε-tSDR → 归一化 L1）、训练设置（场景复用、DOA 网格、数据集）与目标图/结果，并给出演进主线。
+
+---
+
+## [2026-10-03] ingest | Neural Directional Filtering Using a Compact Microphone Array (Huang et al. 2026)
+
+- **Source**: [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026, "Neural Directional Filtering Using a Compact Microphone Array"]] (arXiv 2511.07185, v4 2026-03-23)
+- **Authors**: Weilong Huang, Srikanth Raj Chetupalli, Mhd Modar Halimeh, Oliver Thiergart, Emanuel A. P. Habets
+- **Summary**: Comprehensive journal-style treatment of neural directional filtering (NDF) on a 4-mic 3 cm circular array. Introduces FiLM-JNF (FT-JNF backbone + FiLM conditioning on a *continuous* steering angle via sinusoidal embedding — also introduced in the companion study arXiv:2510.20253, not yet ingested), enabling off-grid steering (32.5°/67.5°), user-defined patterns, and frequency-invariant patterns above the 5.6 kHz spatial-aliasing frequency (6th-order cardioid at 27.31 dB SDR vs the classical circular-DMA bound of 1st-order for M=4). Key findings: reverberant-trained R-Model beats anechoic A-Model; batch-aggregated normalized L1 loss beats tSDR; LS beamformer baseline reaches only 10.32 dB vs NDF 27.70 dB; generalizes to non-speech (WHAM!) and moving sources; two steered models give stereo recording (16 dB L/R difference). Also proposes data-dependent directivity metrics (power-pattern and DF estimation) applicable to any masking-based method.
+- **Pages created**: `wiki/concepts/film-jnf.md`, `wiki/concepts/data-dependent-directivity-metrics.md`
+- **Pages updated**: source page; entities `weilong-huang`, `srikanth-raj-chetupalli`, `mhd-modar-halimeh`, `oliver-thiergart`, `emanuel-habets`; concepts `neural-directional-filtering`, `steerable-neural-directional-filtering`, `virtual-directional-microphone`, `directivity-pattern`, `joint-nonlinear-filtering`, `film-layer`, `fixed-beamformer`, `differential-microphone-array`; synthesis `multi-channel-speech-enhancement` (new NDF frontier row, continuous-steering refinement, classical-vs-neural head-to-head data point)
