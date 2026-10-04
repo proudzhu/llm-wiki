@@ -7,6 +7,8 @@ sources:
   - raw/papers/goto-2022-offline-iss-gciva/full-text.md
   - raw/papers/goto-2022-iss-gciva/full-text.md
   - raw/papers/scheibler-2021-log-quadratically-penalized-iva/full-text.md
+  - raw/papers/ono-2011-stable-fast-update-rules-iva/full-text.md
+  - raw/papers/scheibler-2020-fast-stable-bss-rank-1-updates/full-text.md
 tags:
   - optimization-algorithms
   - blind-source-separation
@@ -20,7 +22,7 @@ tags:
 
 ## Overview
 
-Traditional IVA optimization methods like Iterative Projection (IP) require matrix inversions at each iteration and frequency bin, leading to:
+Traditional IVA optimization methods like [[concepts/iterative-projection|Iterative Projection (IP)]] ([[sources/ono-2011-stable-fast-update-rules-iva|Ono 2011]]) require matrix inversions at each iteration and frequency bin, leading to:
 - High computational complexity: $O(M^3)$ per source per frequency bin
 - Potential numerical instability
 - Slow convergence in practice
@@ -89,11 +91,14 @@ ISS has been successfully applied to:
 - [[concepts/switching-independent-vector-analysis|Switching Independent Vector Analysis]]
 - [[concepts/spatial-regularization|Spatial Regularization]]
 - [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA]]
+- [[concepts/iterative-projection|Iterative Projection]]
 - [[concepts/iterative-projection-with-adjustment|Iterative Projection with Adjustment]]
 
 ## Related Sources
 
 - [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]
+- [[sources/ono-2011-stable-fast-update-rules-iva|Ono 2011: Stable and Fast Update Rules for Independent Vector Analysis Based on Auxiliary Function Technique]] — the founding AuxIVA paper whose IP update ISS accelerates; also the origin of the sequential one-row-at-a-time schedule ISS inherits
+- [[sources/scheibler-2020-fast-stable-bss-rank-1-updates|Scheibler & Ono 2020: Fast and Stable Blind Source Separation with Rank-1 Updates]] — the original ISS paper: inverse-free rank-1 demixing-matrix updates (steering-vector updates), O(FM²N) per iteration with separation quality identical to IP
 - [[sources/scheibler-2021-log-quadratically-penalized-iva|Scheibler 2021: Independent Vector Analysis via Log-Quadratically Penalized Quadratic Minimization]] — IPA: blends IP's filter replacement with an ISS-style rank-1 adjustment of all other filters; >2x faster convergence than IP/ISS/IP2 for 4-5 sources
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
 - [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025: Real-Time Speech Extraction via RCSCME + SR-ILRMA with Fast Demixing]] — real-time framework exceeding Online IVA-IP/ISS; derives accelerated FastIP/FastVCD updates

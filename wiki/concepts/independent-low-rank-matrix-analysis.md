@@ -9,6 +9,8 @@ sources:
   - raw/papers/kang-2019-low-complexity-permutation-alignment/full-text.md
   - raw/papers/ishikawa-2025-real-time-speech-extraction/full-text.md
   - raw/papers/scheibler-2021-log-quadratically-penalized-iva/full-text.md
+  - raw/papers/ono-2011-stable-fast-update-rules-iva/full-text.md
+  - raw/papers/scheibler-2020-fast-stable-bss-rank-1-updates/full-text.md
 tags:
   - blind-source-separation
   - independent-vector-analysis
@@ -63,7 +65,7 @@ The ILRMA cost (negative log-likelihood, up to constants) is
 
 $$\mathcal{J}_{\mathrm{ILRMA}} = 2Z\sum_k \log|\det\mathbf{W}^{(k)}| + \sum_{n,k,z}\left[\log\hat{y}_{nz}^{(k)} + \frac{|y_n^{(k)}[z]|^2}{\hat{y}_{nz}^{(k)}}\right].$$
 
-It is minimized by the **majorization-minimization (MM) algorithm with auxiliary functions** (Ono 2011; Kitamura et al. 2016). The closed-form updates are:
+It is minimized by the **majorization-minimization (MM) algorithm with auxiliary functions** ([[sources/ono-2011-stable-fast-update-rules-iva|Ono 2011]]; Kitamura et al. 2016). The closed-form updates are:
 
 - **Unmixing matrix** $\mathbf{W}^{(k)}$ (per source row $\mathbf{w}_n^{(k)}$, Iterative Projection):
 
@@ -134,3 +136,5 @@ ILRMA sits at the intersection: IVA's spatial model + MNMF's spectrogram model, 
 - [[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019: A Low-Complexity Permutation Alignment Method for Frequency-Domain BSS]] — benchmarks ILRMA against ICA + alignment on SIR, PESQ, and runtime
 - [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025: Real-Time Speech Extraction via RCSCME + SR-ILRMA with Fast Demixing]] — blockwise real-time ILRMA with spatial regularization and FastVCD/FastIP updates
 - [[sources/scheibler-2021-log-quadratically-penalized-iva|Scheibler 2021: Independent Vector Analysis via Log-Quadratically Penalized Quadratic Minimization]] — flags IPA updates (joint filter replacement + adjustment via LQPQM) as a candidate to accelerate ILRMA's demixing-matrix stage, since ILRMA reuses the IP/ISS machinery
+- [[sources/ono-2011-stable-fast-update-rules-iva|Ono 2011: Stable and Fast Update Rules for Independent Vector Analysis Based on Auxiliary Function Technique]] — origin of the auxiliary-function MM scheme and the IP update that ILRMA's demixing-matrix stage inherits
+- [[sources/scheibler-2020-fast-stable-bss-rank-1-updates|Scheibler & Ono 2020: Fast and Stable Blind Source Separation with Rank-1 Updates]] — the inverse-free ISS rank-1 updates applicable to ILRMA's demixing-matrix stage, cutting per-iteration cost to O(FM²N)

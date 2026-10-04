@@ -22,8 +22,10 @@ tags:
 - Co-author of OverIVA, overdetermined IVA for arrays with more microphones than sources (IEEE WASPAA 2019) — the direct predecessor of FIVE, sharing the same cost function.
 - Co-creator of **pyroomacoustics**, the Python package for room-acoustics simulation and array processing (ICASSP 2018) — the experimental platform used by FIVE and widely across the array-processing community.
 - Sole author of "Independent Vector Analysis via Log-Quadratically Penalized Quadratic Minimization" (IEEE Transactions on Signal Processing, 2021) — AuxIVA-IPA: joint demixing-filter update via rank-2 multiplicative perturbation, solved globally through the new LQPQM problem (largest zero of a secular equation); >2x faster convergence than IP/ISS/IP2 for 4-5 sources — [[sources/scheibler-2021-log-quadratically-penalized-iva|Scheibler 2021]]
+- First author of "Fast and Stable Blind Source Separation with Rank-1 Updates" (IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), Barcelona, Spain, 2020, pp. 236–240) — AuxIVA-ISS: inverse-free rank-1 updates of the demixing matrix (equivalently, steering-vector updates), reducing per-iteration complexity from O(FM^3 max(M,N)) to O(FM^2N) with identical separation quality — [[sources/scheibler-2020-fast-stable-bss-rank-1-updates|Scheibler & Ono 2020]]
 
 ## Related Sources
 
 - [[sources/scheibler-2020-fast-independent-vector-extraction|Scheibler & Ono 2020: Fast Independent Vector Extraction]]
 - [[sources/scheibler-2021-log-quadratically-penalized-iva|Scheibler 2021: Independent Vector Analysis via Log-Quadratically Penalized Quadratic Minimization]]
+- [[sources/scheibler-2020-fast-stable-bss-rank-1-updates|Scheibler & Ono 2020: Fast and Stable Blind Source Separation with Rank-1 Updates]]

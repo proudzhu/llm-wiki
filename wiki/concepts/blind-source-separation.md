@@ -15,6 +15,8 @@ sources:
   - raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md
   - raw/papers/kang-2019-low-complexity-permutation-alignment/full-text.md
   - raw/papers/scheibler-2021-log-quadratically-penalized-iva/full-text.md
+  - raw/papers/ono-2011-stable-fast-update-rules-iva/full-text.md
+  - raw/papers/scheibler-2020-fast-stable-bss-rank-1-updates/full-text.md
 tags:
   - signal-processing
   - audio-source-separation
@@ -75,7 +77,7 @@ Instead of treating spatial information as a post-hoc selection or alignment cue
 - **Permutation ambiguity**: Each frequency bin is solved independently in ICA, so source ordering may differ across bins. Post-hoc [[concepts/permutation-alignment|permutation alignment]] resolves it — and can be made cheap: a confidence-thresholded local-first scheme matches state-of-the-art alignment quality at 4–5× lower runtime ([[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019]]); IVA/ILRMA-class methods avoid the problem by construction; [[sources/low-2004-hybrid-bss-anc|Low & Nordholm 2004]] instead avoid misalignment at the source, initializing every subband unmixing matrix as a beamformer-like null toward an arbitrary jammer direction so that adaptation starts from a consistently ordered solution (with scaling fixed by a unit-determinant/volume-conservation constraint).
 - **Scaling ambiguity**: Source magnitudes are not identifiable without additional constraints.
 - **Underdetermined mixtures**: When sources outnumber microphones ($N > M$), full separation requires sparse/structured priors.
-- **Computational cost**: Joint optimization over all frequency bins is expensive; efficient update rules (IP, ISS, AuxIVA) are critical — for single-source extraction, FIVE's global auxiliary-function minimization reaches peak performance in a handful of iterations (Scheibler & Ono 2020).
+- **Computational cost**: Joint optimization over all frequency bins is expensive; efficient update rules ([[concepts/iterative-projection|IP]], [[concepts/iterative-source-steering|ISS]], AuxIVA) are critical — for single-source extraction, FIVE's global auxiliary-function minimization reaches peak performance in a handful of iterations (Scheibler & Ono 2020).
 
 ## Applications
 
@@ -100,6 +102,7 @@ The division between BSS and model-based multichannel filtering blurs when BSS i
 - [[concepts/blind-source-extraction|Blind Source Extraction]]
 - [[concepts/switching-independent-vector-analysis|Switching Independent Vector Analysis]]
 - [[concepts/iterative-source-steering|Iterative Source Steering]]
+- [[concepts/iterative-projection|Iterative Projection]]
 - [[concepts/spatial-regularization|Spatial Regularization]]
 - [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA]]
 - [[concepts/multichannel-nmf|Multichannel NMF]]
@@ -128,4 +131,6 @@ The division between BSS and model-based multichannel filtering blurs when BSS i
 - [[sources/ansari-2023-ai-bss-survey|Ansari et al. 2023: AI Approaches in BSS Survey]] — three-way taxonomy of AI-based BSS (Classical ML / DL / Evolutionary) complementing the statistical lineage above
 - [[sources/scheibler-2020-fast-independent-vector-extraction|Scheibler & Ono 2020: Fast Independent Vector Extraction]] — fast single-source extraction via iterative SINR maximization
 - [[sources/scheibler-2021-log-quadratically-penalized-iva|Scheibler 2021: Independent Vector Analysis via Log-Quadratically Penalized Quadratic Minimization]] — AuxIVA-IPA: joint update of one demixing filter plus adjustment of all others (solved globally via LQPQM), cutting BSS convergence time more than half for 4-5 sources
+- [[sources/ono-2011-stable-fast-update-rules-iva|Ono 2011: Stable and Fast Update Rules for Independent Vector Analysis Based on Auxiliary Function Technique]] — founding paper of AuxIVA: monotonic, tuning-free auxiliary-function updates (IP rule) for frequency-domain BSS
+- [[sources/scheibler-2020-fast-stable-bss-rank-1-updates|Scheibler & Ono 2020: Fast and Stable Blind Source Separation with Rank-1 Updates]] — AuxIVA-ISS: inverse-free rank-1 updates making BSS solvers scalable to many sources
 - [[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019: A Low-Complexity Permutation Alignment Method for Frequency-Domain BSS]] — makes the post-hoc alignment route computationally competitive with permutation-free methods
