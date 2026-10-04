@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-30
+updated: 2026-10-04
 sources:
   - raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
@@ -26,6 +26,7 @@ sources:
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
   - raw/papers/wang-2021-kronecker-adaptive-beamforming/full-text.txt
   - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
+  - raw/papers/yamaoka-2021-bin-wise-beamformer-combination/full-text.md
 tags:
   - beamforming
   - speech-enhancement
@@ -130,6 +131,10 @@ The article also notes the distortionless property itself has no known DNN count
 
 The MVDR/GSC equivalence also frames a different answer to steering-vector mismatch than covariance conditioning. Where MVDR robustness is usually bought with [[concepts/diagonal-loading|diagonal loading]], WNG constraints, or uncertainty-set optimization, [[sources/hoshuyama-1999-robust-adaptive-beamformer-ccaf|Hoshuyama, Sugiyama & Hirano 1999]] attack the mismatch inside the GSC's **blocking matrix**: a [[concepts/coefficient-constrained-adaptive-filter|coefficient-constrained adaptive filter]] per branch is clamped to a box region derived from the target-minimizing coefficients over a chosen DOA sector, so the maximum tolerable [[concepts/steering-vector-error|steering-vector (direction) error]] becomes a design parameter (up to 20°) while the array's degrees of freedom for interference reduction are preserved. The robustness mechanism is thus spatial-structural rather than covariance-regularizing, and it requires no matrix inversion — relevant where the statistics-based MVDR forms are limited by covariance estimation rather than by the steering model.
 
+## Underdetermined Extension via TF-Bin-Wise Combination (Yamaoka et al. 2021)
+
+The MVDR beamformer with $M$ microphones can suppress at most $M-1$ interferers, so its noise reduction collapses in underdetermined situations ($M < N$). [[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021]] extend it by combining $K$ MVDR-type beamformers per TF bin, each designed on its own masked covariance — the masking (minimum output power per bin) clusters TF bins by their dominant interferer set, turning each cluster's sub-problem back into a (over)determined MVDR design. The result, [[concepts/tflc-beamformer|TFLC beamforming]], reduces exactly to the conventional MVDR at $K=1$ and provably preserves the distortionless property for any convex combination of distortionless filters. In the distortionless-property experiment (SRDR metric, 1000 trials), the restricted RTFLC variant gains +5.9 dB SDR over a single MVDR at only −2.2 dB SRDR in the $M=2$, $N=3$ case. The paper also quantifies the MVDR's known RTF sensitivity from the informed-filtering side: performance of all variants degrades rapidly once the RTF estimate's SNR falls below ~40 dB.
+
 ## Related Concepts
 
 - [[concepts/coefficient-constrained-adaptive-filter|Coefficient-Constrained Adaptive Filter (CCAF)]]
@@ -158,6 +163,7 @@ The MVDR/GSC equivalence also frames a different answer to steering-vector misma
 - [[concepts/eabnet|EaBNet]] — all-neural causal beamformer that surpasses oracle-mask MB-MVDR
 - [[concepts/adl-mvdr|ADL-MVDR]] — GRU networks replace the matrix inversion and PCA inside the MVDR solution for frame-level weights
 - [[concepts/kmvdr-beamformer|KMVDR Beamformer]] — MVDR under a sum-of-Kronecker-products filter representation, applicable to arbitrary geometries
+- [[concepts/tflc-beamformer|TFLC Beamforming]] — TF-bin-wise combination of MVDR filters for underdetermined situations; MVDR is the $K=1$ case
 - [[concepts/kronecker-product-beamforming|Kronecker Product Beamforming]]
 
 ## Related Sources
@@ -188,5 +194,6 @@ The MVDR/GSC equivalence also frames a different answer to steering-vector misma
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — hybrid TinyGRU + MCWF beats oracle MVDR at ~50 MMACs/s
 - [[sources/wang-2021-kronecker-adaptive-beamforming|Wang et al. 2021: Kronecker Product Adaptive Beamforming for Microphone Arrays]] — KMVDR: MVDR under a sum-of-Kronecker-products representation for arbitrary geometries
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — MVDR as a sufficient statistic for Gaussian noise (Balan & Rosca) vs. its loss of optimality under non-Gaussian distortions like reverberation
+- [[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021: TF-Bin-Wise Linear Combination of Beamformers]] — underdetermined extension by combining K MVDR filters per TF bin; RTF-accuracy requirement quantified
 - [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — review tabulating MVDR's degeneration into DSBF/superdirective under specific noise fields; parameter-estimation bottleneck in nonstationary scenes
 

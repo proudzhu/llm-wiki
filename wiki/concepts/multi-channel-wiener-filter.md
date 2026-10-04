@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-10-01
+updated: 2026-10-04
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
@@ -16,6 +16,7 @@ sources:
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
   - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
   - raw/papers/doclo-2002-gsvd-optimal-filtering/full-text.md
+  - raw/papers/yamaoka-2021-bin-wise-beamformer-combination/full-text.md
 tags:
   - speech-enhancement
   - wiener-filter
@@ -102,6 +103,10 @@ which applies extra suppression in noise-only segments (small SPP) and converges
 
 [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024]] highlight the MWF's role in the prototypical Class-3 hybrid: [[concepts/tf-gridnet|TF-GridNet]] aggregates spatial information "both by DNNs with multi-channel input and by a beamformer, a **multi-frame Wiener filter**, that is sandwiched between two DNNs (DNN–BF–DNN structure)" — the model-based spatial operation embedded inside the neural enhancement operation for joint denoising, dereverberation, and separation. This is the multichannel counterpart of the end-to-end-trained differentiable MWF idea (see above): the Wiener stage is retained not as a parameter-estimation target but as an inductive spatial-processing bias inside the network.
 
+## The Distortion Tradeoff from the Combination Side (Yamaoka et al. 2021)
+
+[[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021]] position the MWF family against their [[concepts/tflc-beamformer|TFLC beamforming]] as two answers to the same underdetermined tradeoff: SDW-MWF spans distortionless MVDR ($\mu = 0$) to maximum noise reduction/distortion ($\mu \to \infty$), and the time-varying full-rank MWF (TV-MWF) works well in underdetermined cases — but no MWF setting guarantees the distortionless response. In their 1000-trial SRDR experiment (same setup, oracle interferer covariances given to TV-MWF for fairness), TV-MWF attains the highest SDR (MMSE-optimality) but limited SRDR, while RTFLC achieves +17.4 dB SRDR over TV-MWF at only −0.6 dB SDR — i.e., near-distortionless output at nearly the same noise reduction.
+
 ## Related Concepts
 
 - [[concepts/gsvd-based-optimal-filtering|GSVD-Based Optimal Filtering]] — the time-domain spatio-temporal MWF via joint diagonalization of speech/noise data matrices (Doclo & Moonen 2002)
@@ -121,6 +126,7 @@ which applies extra suppression in noise-only segments (small SPP) and converges
 - [[concepts/tinygru|TinyGRU]] — DNN whose estimated reference-channel spectrum drives the MCWF weights online
 - [[concepts/snr-cdr-wiener-gain|SNR–CDR Wiener Gain]] — post-filter of the factorization in jointly noisy and reverberant environments
 - [[concepts/superdirective-beamforming|Superdirective Beamforming]] — the robust spatial front-end of the Xiang et al. factorization
+- [[concepts/tflc-beamformer|TFLC Beamforming]] — distortionless alternative in the same underdetermined tradeoff space
 
 ## Related Sources
 
@@ -139,3 +145,4 @@ which applies extra suppression in noise-only segments (small SPP) and converges
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — TinyGRU-estimated target spectrum drives online MCWF weights; beats oracle MVDR at ~50 MMACs/s
 - [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]] — factorization generalized to joint noise + reverberation with an SNR–CDR Wiener post-filter
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — the multi-frame Wiener filter realized inside TF-GridNet's inner DNN layer
+- [[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021: TF-Bin-Wise Linear Combination of Beamformers]] — MWF family as the tradeoff contrast: TV-MWF highest SDR but no distortionless guarantee; RTFLC +17.4 dB SRDR at −0.6 dB SDR

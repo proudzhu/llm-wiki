@@ -5807,3 +5807,9 @@ Created [[queries/ndf-sndf-ndbf-comparison|NDF/SNDF/NDBF 对比查询页]] — �
 - **Pages created**: `wiki/sources/scheibler-2020-fast-stable-bss-rank-1-updates.md`
 - **Pages updated**: `wiki/entities/robin-scheibler.md` (first-author ICASSP 2020 ISS contribution), `wiki/entities/nobutaka-ono.md` (co-author contribution), `wiki/concepts/independent-vector-analysis.md` (ISS founding-paper link), `wiki/concepts/iterative-source-steering.md` (original-paper backlink, founding context), `wiki/concepts/blind-source-separation.md` (backlinks)
 - **Notes**: MinerU extraction with figure embeds (3 figures). Synthesis triage: no tag matches, Step 9 skipped. IP2 (Ono 2018, ASJ Spring Meeting, Japanese only, no public PDF) was not ingested — covered via secondary citations on the IP/IVA/ISS pages.
+
+---
+
+## [2026-10-04] ingest | TF-Bin-Wise Linear Combination of Beamformers for Distortionless Signal Enhancement (Yamaoka, Ono & Makino 2021)
+
+Ingested from Zotero (IEEE/ACM TASLP vol. 29, pp. 3461-3475, Nov. 2021; TAF Telecom System Technology Student Award). Created source page, 3 new concept pages (tflc-beamformer, w-disjoint-orthogonality, signal-to-reconstruction-distortion-ratio), updated entity pages for Yamaoka/Ono/Makino, extended 5 existing concept pages (mvdr-beamformer, relative-transfer-function, multi-channel-wiener-filter, ideal-binary-mask, beamforming), and added the Underdetermined axis row plus Insight 4 trade-off-control extension to synthesis/multi-channel-speech-enhancement.

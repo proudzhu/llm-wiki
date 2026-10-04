@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-10-01
+updated: 2026-10-04
 sources:
   - raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
@@ -13,6 +13,7 @@ sources:
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
   - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
   - raw/papers/doclo-2002-gsvd-optimal-filtering/full-text.md
+  - raw/papers/yamaoka-2021-bin-wise-beamformer-combination/full-text.md
 tags:
 - acoustics
 - antenna-theory
@@ -111,6 +112,10 @@ Kim & Kim (2014) quantify a fundamental small-array limitation: the spatial dire
 
 A route to robustness that avoids the covariance domain entirely is to constrain the coefficients of the **adaptive stages** of a [[concepts/gsc-beamformer|GSC]]. [[sources/hoshuyama-1999-robust-adaptive-beamformer-ccaf|Hoshuyama, Sugiyama & Hirano 1999]] clamp each tap of every [[concepts/adaptive-blocking-matrix|adaptive blocking matrix]] branch to an individual interval derived from the target-minimizing coefficients over a chosen DOA sector — a [[concepts/coefficient-constrained-adaptive-filter|coefficient-constrained adaptive filter]] — while the multiple-input canceller uses a [[concepts/norm-constrained-adaptive-filter|norm constraint]]. The result inverts the usual robustness/interference-reduction trade-off: because the constrained blocking matrix cannot converge to the interference-minimizing solution, it *preserves* interference at the canceller's reference inputs, so tolerating up to 20° of target-direction error costs no degrees of freedom for interference reduction (30 dB anechoic suppression at $\theta = \pm 30°$; 19 dB interference reduction in a $T_{60} \approx 0.3$ s room on four microphones; 3.8 MOS). The approach is matrix-free, needs no [[concepts/spatial-covariance-matrix|covariance estimate]], and makes the tolerable [[concepts/steering-vector-error|steering-vector error]] an explicit design parameter — the time-domain adaptive counterpart of what [[concepts/diagonal-loading|diagonal loading]] and WNG constraints achieve for the statistics-based beamformers described above.
 
+## Underdetermined Enhancement by Combining Beamformers (Yamaoka et al. 2021)
+
+The dual-microphone limit above — masking methods beating small-array beamforming in underdetermined scenes — is answered from the beamforming side by [[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021]]: keep $K$ distortionless [[concepts/mvdr-beamformer|MVDR]]-type beamformers, each nulling a different $M-1$ subset of interferers, and *switch or linearly combine them per TF bin* ([[concepts/tflc-beamformer|TFLC beamforming]]). The per-bin selection acts as a clustering of dominant interferers, so each beamformer is designed on a (over)determined sub-problem; the convex combination provably retains the distortionless response. On SiSEC underdetermined data the restricted RTFLC variant attains masking-level noise reduction (+5.9 dB SDR over single MVDR) with only a 2.2 dB SRDR decline — at the cost of requiring a precise target RTF (~40 dB accuracy).
+
 ## Related Concepts
 
 - [[concepts/coefficient-constrained-adaptive-filter|Coefficient-Constrained Adaptive Filter (CCAF)]]
@@ -143,6 +148,7 @@ A route to robustness that avoids the covariance domain entirely is to constrain
 - [[concepts/kronecker-product-beamforming|Kronecker Product Beamforming]]
 - [[concepts/frequency-invariant-beamforming|Frequency-Invariant Beamforming]]
 - [[concepts/orthogonal-series-expansion-beamforming|Orthogonal Series Expansion Beamforming]]
+- [[concepts/tflc-beamformer|TFLC Beamforming]] — per-TF-bin switching/combination of multiple distortionless beamformers for underdetermined scenes
 
 ## Related Sources
 
@@ -161,3 +167,4 @@ A route to robustness that avoids the covariance domain entirely is to constrain
 - [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] — adjusted MVDR as one of three complementary frontends in differential ASR
 - [[sources/kim-2014-doa-based-snr-estimation|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] — dual-mic SDB/GSC-PW outperformed by spatial-cue masking methods; DSB/BM transfer-function ratio reused as a TNR estimator
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — the all-neural challenge to beamforming and the model-as-regularizer argument for retaining beamforming structure
+- [[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021: TF-Bin-Wise Linear Combination of Beamformers]] — combines K distortionless beamformers per TF bin to break the M−1-interferer limit in underdetermined situations

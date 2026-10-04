@@ -31,6 +31,7 @@ tags:
 - Co-author of "Online Directional Speech Enhancement Using Geometrically Constrained IVA" (Interspeech 2020) — real-time online extension of GCAV-IVA via autoregressive auxiliary variables — [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020]]
 - Co-author of "Accelerating Online GC-IVA with Iterative Source Steering" (APSIPA ASC 2022) — online GC-AuxIVA-ISS, an inverse-free online geometrically constrained IVA with MUSIC-based interference DOA estimation — [[sources/goto-2022-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022]]
 - Co-author of "GC-IVA with Auxiliary Function Approach and Iterative Source Steering" (30th European Signal Processing Conference (EUSIPCO 2022), 2022) — first derivation of the inverse-free offline GC-AuxIVA-ISS algorithm (ISS rank-1 updates with geometric constraints in the closed-form coefficients), showing block-permutation avoidance and 34-53% per-iteration runtime reduction over GC-AuxIVA-VCD — [[sources/goto-2022-offline-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022]]
+- Co-authored "TF-Bin-Wise Linear Combination of Beamformers" (IEEE/ACM TASLP 2021) — TFLC/RTFLC beamforming framework for distortionless enhancement in underdetermined situations — [[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021]]
 
 ## Affiliations
 
@@ -50,3 +51,4 @@ tags:
 - [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020: Online Directional Speech Enhancement Using Geometrically Constrained IVA]]
 - [[sources/goto-2022-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022: Accelerating Online GC-IVA with Iterative Source Steering]]
 - [[sources/goto-2022-offline-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022: GC-IVA with Auxiliary Function Approach and Iterative Source Steering]]
+- [[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021: TF-Bin-Wise Linear Combination of Beamformers]]

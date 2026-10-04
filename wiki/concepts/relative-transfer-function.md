@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-26
-updated: 2026-09-19
+updated: 2026-10-04
 sources:
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
   - raw/papers/xiao-2023-spatially-selective-anc/full-text.txt
@@ -11,6 +11,7 @@ sources:
   - raw/papers/richard-2023-audio-signal-processing-21st-century/full-text.md
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
+  - raw/papers/yamaoka-2021-bin-wise-beamformer-combination/full-text.md
 tags:
   - spatial-filtering
   - beamforming
@@ -88,6 +89,10 @@ $$
 
 to subtract loudspeaker leakage from the reference microphones ahead of FxLMS. Estimation follows the same covariance template as the RTF, but with a different interference-removal device: instead of [[concepts/spatial-covariance-matrix|SCM]] **whitening** against noise-only frames — unavailable here, because the interfering field is the persistent primary noise and cannot be paused — the secondary-only covariances are isolated by [[concepts/covariance-subtraction|covariance subtraction]], $\boldsymbol{\Phi}^{(\mathrm{Sec})} = \boldsymbol{\Phi}^{(\mathrm{Tot})} - \boldsymbol{\Phi}^{(\mathrm{Pri})}$, before computing $\mathbf{R} \approx \boldsymbol{\Phi}_{\mathrm{RR}}^{(\mathrm{Sec})}\boldsymbol{\Phi}_{\mathrm{FR}}^{(\mathrm{Sec})^{\dagger}}$. As with RTF-based beamforming, the matrix is signal-independent once identified — it depends only on the acoustic transfer structure.
 
+## Required RTF Precision for Distortionless Combination Beamforming
+
+[[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021]] assume a known target RTF as the steering information for their [[concepts/tflc-beamformer|TFLC beamforming]] framework and quantify how precise it must be: contaminating the target impulse response with additive white Gaussian noise at controlled SNR, the enhancement performance (tracking the MVDR's) degrades rapidly once the RTF SNR falls below **40 dB**. The proposed methods therefore *require* a precise RTF, making RTF estimation a coupled essential problem — one reason the framework sits in the informed-spatial-filter family rather than blind separation.
+
 ## Related Concepts
 
 - [[concepts/lcmv-beamformer|LCMV Beamformer]]
@@ -101,6 +106,7 @@ to subtract loudspeaker leakage from the reference microphones ahead of FxLMS. E
 - [[concepts/output-based-speech-enhancement|Output-based Speech Enhancement]]
 - [[concepts/relative-transfer-matrix|Relative Transfer Matrix (ReTM)]] — the multi-source, multi-reference generalization
 - [[concepts/covariance-subtraction|Covariance Subtraction]] — interference removal for RTF/ReTM estimation when no noise-only segment exists
+- [[concepts/tflc-beamformer|TFLC Beamforming]] — distortionless combination beamforming whose required RTF precision (~40 dB) this framework quantifies
 
 ## Related Sources
 
@@ -112,4 +118,5 @@ to subtract loudspeaker leakage from the reference microphones ahead of FxLMS. E
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard, Smaragdis, Gannot, Naylor, Makino, Kellermann & Sugiyama 2023: Audio Signal Processing in the 21st Century]]
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]]
 - [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — review positioning RTF-based steering-vector replacement as the standard remedy for steering mismatch in MVDR/GSC-type adaptive beamforming, with estimation difficulty in nonstationary reverberant scenes as the limiting factor
+- [[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021: TF-Bin-Wise Linear Combination of Beamformers]] — quantifies the ~40 dB RTF-accuracy requirement of distortionless combination beamforming
 
