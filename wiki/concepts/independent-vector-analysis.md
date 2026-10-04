@@ -7,6 +7,7 @@ sources:
   - raw/papers/li-2020-online-gciva/full-text.md
   - raw/papers/guo-2023-iva-survey/full-text.md
   - raw/papers/dong-2026-spatially-regularized-switching-iva/full-text.md
+  - raw/papers/nakatani-2022-switching-iva/full-text.md
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
   - raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md
   - raw/papers/kang-2019-low-complexity-permutation-alignment/full-text.md
@@ -66,6 +67,8 @@ Beyond the six unconstrained families, IVA can be steered directionally by augme
 
 ## Relationship to ILRMA and FastMNMF
 
+IVA can also be extended along the *time-varying* axis: when the microphone surplus $M - N$ is small in diffuse noise, the determined point-source simplification fails and IVA's accuracy seriously degrades. [[concepts/switching-independent-vector-analysis|Switching IVA]] ([[sources/nakatani-2022-switching-iva|Nakatani et al. 2022]]) restores accuracy with 2–3 microphones by clustering time frames into groups, each handled by its own separation matrix, with matrices and switches jointly optimized by ML; its convolutional extension [[concepts/switching-civa|swCIVA]] adds jointly optimized switching WPE dereverberation.
+
 IVA combined with Nonnegative Matrix Factorization gives **[[concepts/independent-low-rank-matrix-analysis|Independent Low-Rank Matrix Analysis (ILRMA)]]**, which uses NMF to model source spectral structure. [[concepts/multichannel-nmf|MNMF]] generalizes the rank-1 spatial model of ILRMA to a full-rank per-source spatial property matrix, and [[concepts/fastmnmf|FastMNMF]] further imposes joint diagonalizability of these spatial covariances for computational efficiency. The dual derivation of ILRMA from the IVA cost function (this page) and the MNMF Gaussian likelihood is unified in [[sources/sawada-2019-bss-ilrma-review|Sawada et al. 2019]].
 
 ## Related Concepts
@@ -96,6 +99,7 @@ IVA combined with Nonnegative Matrix Factorization gives **[[concepts/independen
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
 - [[sources/nishikori-2026-fast-multichannel-nmf-block-diagonal-scm-bss|Nishikori et al. 2026: Distributed FastMNMF for BSS]]
 - [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]
+- [[sources/nakatani-2022-switching-iva|Nakatani et al. 2022: Switching IVA and Its Extension to Blind and Spatially Guided Convolutional Beamforming]] — the original swIVA/swCIVA: switching mechanism for few-microphone BSS with joint dereverberation
 - [[sources/sawada-2019-bss-ilrma-review|Sawada et al. 2019: BSS/ILRMA Review]]
 - [[sources/ruan-2024-speech-extraction-low-snr|Ruan, Liao, Chen & Lu 2024: Speech Extraction Under Extremely Low SNR Conditions]]
 - [[sources/scheibler-2020-fast-independent-vector-extraction|Scheibler & Ono 2020: Fast Independent Vector Extraction]]

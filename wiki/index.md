@@ -641,6 +641,9 @@
 | [[entities/kana-goto\|Kana Goto]] | University of Tsukuba — online/offline GC-AuxIVA-ISS, geometrically constrained IVA with iterative source steering | 2026-10-04 |
 | [[entities/tetsuya-ueda\|Tetsuya Ueda]] | Waseda University — GC-AuxIVA-ISS, geometrically constrained IVA with iterative source steering | 2026-10-04 |
 | [[entities/takeshi-yamada\|Takeshi Yamada]] | University of Tsukuba — co-author of online GC-AuxIVA-ISS | 2026-10-04 |
+| [[entities/rintaro-ikeshita\|Rintaro Ikeshita]] | NTT researcher — blind source separation, IVE, swWPE; co-author of switching IVA/CIVA | 2026-10-04 |
+| [[entities/naoyuki-kamo\|Naoyuki Kamo]] | NTT researcher — BSS, guided source separation, microphone arrays; co-author of switching IVA/CIVA | 2026-10-04 |
+| [[entities/shoko-araki\|Shoko Araki]] | NTT senior researcher — BSS, microphone arrays, underdetermined separation via spatial clustering; co-author of switching IVA/CIVA | 2026-10-04 |
 
 ---
 
@@ -1223,6 +1226,8 @@
 | [[concepts/kurtosis-based-output-selection\|Kurtosis-Based Output Selection]] | Higher-order-statistical test identifying the speech-dominant BSS output: speech is supergaussian (positive kurtosis) while diffuse interference is Gaussian-like (near-zero kurtosis). | 2026-10-03 |
 | [[concepts/geometrically-constrained-iva\|Geometrically Constrained IVA]] | GCIVA augments the IVA blind-separation objective with LCMV-style linear far-field response constraints (nulls or distortionless responses); the GCAV-IVA algorithm solves it with convergence-guaranteed closed-form updates via the auxiliary-function approach and vectorwise coordinate descent. | 2026-10-04 |
 | [[concepts/online-iva\|Online IVA]] | Real-time frame-wise IVA updates via autoregressive auxiliary-variable recursion (forgetting factor); online blockwise alternative to batch and blockwise BSS | 2026-10-04 |
+| [[concepts/switching-civa\|Switching CIVA (swCIVA)]] | Blind convolutional beamforming algorithm integrating swIVA and switching WPE in a jointly optimal way; factorized switching model with separate switches for MCLP filters and separation matrices | 2026-10-04 |
+| [[concepts/coarse-fine-source-model\|Coarse-Fine Source Model]] | Hybrid source model for swIVA/swCIVA — frequency-independent (coarse) variance for separation-matrix updates, frequency-dependent (fine) for MCLP filters and switches | 2026-10-04 |
 
 ---
 
@@ -1480,6 +1485,7 @@
 | [[sources/li-2020-online-gciva\|Li, Koishida & Makino 2020]] | Extends offline GCAV-IVA to a real-time online algorithm (oGCAV-IVA) via an autoregressive approximation of the auxiliary variables; a dual-mic directional speech enhancement system runs < 16 ms/frame and beats online AuxIVA for fixed and moving interference. | 2026-10-04 |
 | [[sources/goto-2022-iss-gciva\|Goto, Ueda, Li, Yamada & Makino 2022]] | This paper derives online GC-AuxIVA-ISS, an alternative online algorithm for geometrically constrained IVA that replaces the vectorwise coordinate descent (VCD) update of online GC-AuxIVA-VCD with iterative source steering (ISS), eliminating the per-source, per-frequency matrix inversions and yielding an inverse-free, numerically stable rank-1 update. | 2026-10-04 |
 | [[sources/goto-2022-offline-iss-gciva\|Goto, Ueda, Li, Yamada & Makino 2022]] | This paper derives GC-AuxIVA-ISS, an offline (batch) algorithm for geometrically constrained IVA that replaces the vectorwise-coordinate-descent (VCD) updates of GCAV-IVA — which require a per-source, per-frequency matrix inversion — with iterative source steering (ISS) rank-1 updates, folding the geometric constraints directly into the closed-form ISS coefficients. | 2026-10-04 |
+| [[sources/nakatani-2022-switching-iva\|Nakatani et al. 2022: Switching IVA and Its Extension to Blind and Spatially Guided Convolutional Beamforming]] | Proposes swIVA and swCIVA: switching mechanisms that keep IVA/CIVA blind separation and dereverberation accurate with only 2–3 microphones; factorized switching model, coarse-fine source model, and inter-state-permutation-safe initialization. | 2026-10-04 |
 
 ---
 
@@ -1534,10 +1540,10 @@
 
 ## Statistics
 
-- **Total pages**: 1483
-- **Entities**: 631
-- **Concepts**: 573
-- **Sources**: 248
+- **Total pages**: 1489
+- **Entities**: 634
+- **Concepts**: 575
+- **Sources**: 249
 - **Synthesis**: 23
 - **Queries**: 8
 - **Last updated**: 2026-10-04

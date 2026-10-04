@@ -7,6 +7,7 @@ sources:
   - raw/papers/li-2020-online-gciva/full-text.md
   - raw/papers/goto-2022-offline-iss-gciva/full-text.md
   - raw/papers/goto-2022-iss-gciva/full-text.md
+  - raw/papers/nakatani-2022-switching-iva/full-text.md
 tags:
   - blind-source-separation
   - independent-vector-analysis
@@ -72,7 +73,7 @@ The **online extension (oGC-AuxIVA-ISS)**, [[sources/goto-2022-iss-gciva|Goto et
 
 ## Relation to Other Spatially Guided BSS
 
-GCIVA belongs to the broader family of methods that inject prior spatial information into BSS, alongside [[concepts/spatial-regularization|spatial regularization]] (penalizing demixing-vector distance from DOA-derived steering vectors, used in SR-ILRMA/SR-SwIVA) and spatially informed MAP priors on demixing matrices (Brendel et al. 2019). Its distinguishing feature is that the constraints are **hard linear response constraints** in the LCMV sense rather than quadratic proximity penalties, and that they enable deliberate spatial shaping (nulls, distortionless responses) of specific output channels — including blocking-matrix behavior for interference reference generation.
+GCIVA belongs to the broader family of methods that inject prior spatial information into BSS, alongside [[concepts/spatial-regularization|spatial regularization]] (penalizing demixing-vector distance from DOA-derived steering vectors, used in SR-ILRMA/SR-SwIVA) and spatially informed MAP priors on demixing matrices (Brendel et al. 2019). Its distinguishing feature is that the constraints are **hard linear response constraints** in the LCMV sense rather than quadratic proximity penalties, and that they enable deliberate spatial shaping (nulls, distortionless responses) of specific output channels — including blocking-matrix behavior for interference reference generation. A further member of the family is the **spatially guided initialization** of [[concepts/switching-independent-vector-analysis|swIVA]]/[[concepts/switching-civa|swCIVA]] ([[sources/nakatani-2022-switching-iva|Nakatani et al. 2022]]), where NN-mask-estimated ATFs initialize per-state MPDR beamformers — spatial information enters only through initialization rather than as a constraint or penalty on the blind objective.
 
 ## Related Concepts
 

@@ -635,4 +635,7 @@
 | [[entities/kana-goto\|Kana Goto]] | University of Tsukuba — online/offline GC-AuxIVA-ISS, geometrically constrained IVA with iterative source steering | 2026-10-04 |
 | [[entities/tetsuya-ueda\|Tetsuya Ueda]] | Waseda University — GC-AuxIVA-ISS, geometrically constrained IVA with iterative source steering | 2026-10-04 |
 | [[entities/takeshi-yamada\|Takeshi Yamada]] | University of Tsukuba — co-author of online GC-AuxIVA-ISS | 2026-10-04 |
+| [[entities/rintaro-ikeshita\|Rintaro Ikeshita]] | NTT researcher — blind source separation, IVE, swWPE; co-author of switching IVA/CIVA | 2026-10-04 |
+| [[entities/naoyuki-kamo\|Naoyuki Kamo]] | NTT researcher — BSS, guided source separation, microphone arrays; co-author of switching IVA/CIVA | 2026-10-04 |
+| [[entities/shoko-araki\|Shoko Araki]] | NTT senior researcher — BSS, microphone arrays, underdetermined separation via spatial clustering; co-author of switching IVA/CIVA | 2026-10-04 |
 

@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-10-04
 sources:
   - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
+  - raw/papers/nakatani-2022-switching-iva/full-text.md
 tags:
   - dereverberation
   - speech-enhancement
@@ -38,6 +39,7 @@ WPE is derived as maximum-likelihood estimation under the assumption that $\math
 - Model-based: parameters estimated from the signal being enhanced, no training stage, adapts within seconds — but iterative/batch by default (online variants exist).
 - **Neural PSD estimation** (Class 2 hybrid): the iterative estimation of $\lambda_{t,f}$ can be replaced by a neural network, avoiding the alternating loop (Kinoshita et al. 2017) — one of the canonical examples of joint model-based + data-driven parameter estimation in Haeb-Umbach et al. 2024.
 - Related multichannel-linear-prediction dereverberation via a state-space/Kalman EM view (Schwartz, Gannot & Habets 2014) treats the same CTF model with a Kalman filter E-step.
+- **Switching WPE (swWPE)**: a bank of time-invariant prediction filters with a switch selecting one dereverberated output per TF point (Ikeshita et al. 2021, mixture-of-WPE-models); consistently outperforms WPE in diffuse noise and underdetermined conditions. swWPE is one of the two jointly optimized components of [[concepts/switching-civa|swCIVA]], where the fine (frequency-dependent) source model is essential for the MCLP-filter and switch updates ([[sources/nakatani-2022-switching-iva|Nakatani et al. 2022]]).
 - The wiki's [[concepts/mclp|MCLP]] page covers the multi-channel linear prediction family; WPE is its best-known instance.
 
 ## Related Concepts
@@ -53,3 +55,4 @@ WPE is derived as maximum-likelihood estimation under the assumption that $\math
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — formulation (Eqs. 18–20), CHiME baseline evidence, neural-PSD hybrid extension
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023: Audio Signal Processing in the 21st Century]] — positions WPE as the dominant blind MCLP approach
 - [[sources/xiang-2025-wiener-gain-reverberant|Xiang et al. 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]] — AWPE (the WPE-style baseline) outperformed in jointly noisy and reverberant conditions
+- [[sources/nakatani-2022-switching-iva|Nakatani et al. 2022: Switching IVA and Its Extension to Blind and Spatially Guided Convolutional Beamforming]] — switching WPE integrated with switching IVA in the jointly optimized swCIVA convolutional beamformer
