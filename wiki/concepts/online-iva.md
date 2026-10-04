@@ -1,0 +1,51 @@
+---
+type: concept
+created: 2026-10-04
+updated: 2026-10-04
+sources:
+  - raw/papers/li-2020-online-gciva/full-text.md
+tags:
+  - blind-source-separation
+  - independent-vector-analysis
+  - online-processing
+  - speech-enhancement
+---
+
+# Online IVA
+
+**Online IVA** refers to frame-wise, real-time updates of the [[concepts/independent-vector-analysis|IVA]] demixing matrices, as opposed to **blockwise** updates over multi-frame blocks. Online updates are preferred in low-delay scenarios (hearing aids, teleconference systems, real-time speech recognition interfaces) because estimation delay grows with block size, but they suffer from insufficient statistics — the per-frame data is far too little to estimate the IVA auxiliary statistics well. The standard resolution is the **online blockwise** scheme: compute statistics from the arrived current frame plus several past frames.
+
+## Autoregressive Auxiliary Variables
+
+The key mechanism, introduced for AuxIVA by Taniguchi et al. (2014, HSCMA) and adopted by [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020]] for geometrically constrained IVA, is a recursion on the auxiliary weighted covariance. The blockwise statistic over the latest $L$ frames,
+
+$$
+\boldsymbol{V}_j(\omega,t) = \frac{1}{L}\sum_{\tau=t-L+1}^{t} \frac{G_R'(r_j(t))}{r_j(t)}\,\boldsymbol{x}(\omega,t)\boldsymbol{x}^{\mathsf{H}}(\omega,t),
+$$
+
+is replaced by the autoregressive recursion
+
+$$
+\boldsymbol{V}_j(\omega,t) = \alpha\,\boldsymbol{V}_j(\omega,t-L) + (1-\alpha)\,\frac{1}{L}\sum_{\tau=t-L+1}^{t} \frac{G_R'(r_j(t))}{r_j(t)}\,\boldsymbol{x}(\omega,t)\boldsymbol{x}^{\mathsf{H}}(\omega,t),
+$$
+
+with forgetting factor $0 \le \alpha < 1$ ($\alpha = 0$ recovers the blockwise version). This keeps sufficient statistics at small $L$ without retaining long observation histories: the recursion carries the past forward implicitly, so each new block costs only the summation over its own $L$ frames.
+
+**Forgetting-factor trade-off**: a large $\alpha$ weighs long-range statistics (better for spatially fixed sources); a small $\alpha$ lets the blockwise term react quickly to source movement. In Li, Koishida & Makino 2020, $\alpha = 0.96$ with $L = 1$ worked for both stationary and moving interference.
+
+## Properties
+
+- Inherits the auxiliary-function (majorize-minimize) framework's stable, step-size-free updates — unlike gradient-based online ICA, no learning-rate tuning is required.
+- Because only the statistics $\boldsymbol{V}_j$ depend on all observations, the online modification is confined to this single quantity; the per-row demixing updates are unchanged.
+- Demonstrated real-time capability: < 16 ms per 16 ms frame for the online GCAV-IVA dual-microphone system on a desktop CPU (Intel i7-7800X).
+
+## Related Concepts
+
+- [[concepts/independent-vector-analysis|Independent Vector Analysis]]
+- [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA]]
+- [[concepts/blind-source-separation|Blind Source Separation]]
+- [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+
+## Related Sources
+
+- [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020: Online Directional Speech Enhancement Using Geometrically Constrained IVA]] — online GCAV-IVA (oGCAV-IVA) and online AuxIVA baseline, both using the autoregressive auxiliary-variable recursion

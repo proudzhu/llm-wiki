@@ -4,6 +4,7 @@ created: 2026-05-21
 updated: 2026-10-04
 sources:
   - raw/papers/li-2020-geometrically-constrained-iva/full-text.md
+  - raw/papers/li-2020-online-gciva/full-text.md
   - raw/papers/guo-2023-iva-survey/full-text.md
   - raw/papers/dong-2026-spatially-regularized-switching-iva/full-text.md
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
@@ -59,7 +60,7 @@ Six main families of update rules have been developed for IVA:
 
 AuxIVA (Ono 2011) is the most widely adopted baseline due to its guaranteed monotonic convergence without tuning parameters.
 
-Beyond the six unconstrained families, IVA can be steered directionally by augmenting the objective with geometric constraints: [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA (GCIVA)]] adds LCMV-style linear penalties on the far-field responses of the demixing filters. [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020]] show that the resulting constrained stationarity equation is no longer solvable as a HEAD problem, but a closed-form, monotonic AuxIVA-style update (GCAV-IVA) exists via the vectorwise-coordinate-descent cofactor expansion — reducing exactly to AuxIVA at zero constraint weight and retaining its no-step-size-tuning property, while forcing designated output channels toward a target direction or a spatial null.
+Beyond the six unconstrained families, IVA can be steered directionally by augmenting the objective with geometric constraints: [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA (GCIVA)]] adds LCMV-style linear penalties on the far-field responses of the demixing filters. [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020]] show that the resulting constrained stationarity equation is no longer solvable as a HEAD problem, but a closed-form, monotonic AuxIVA-style update (GCAV-IVA) exists via the vectorwise-coordinate-descent cofactor expansion — reducing exactly to AuxIVA at zero constraint weight and retaining its no-step-size-tuning property, while forcing designated output channels toward a target direction or a spatial null. The same authors with Makino extend GCAV-IVA to a real-time **online** algorithm (oGCAV-IVA) via an [[concepts/online-iva|autoregressive approximation of the auxiliary variables]] ([[sources/li-2020-online-gciva|Li, Koishida & Makino 2020]]), updating per frame at < 16 ms per 16 ms frame and outperforming online AuxIVA in both stationary and moving-interference conditions.
 
 ## Relationship to ILRMA and FastMNMF
 
@@ -82,10 +83,12 @@ IVA combined with Nonnegative Matrix Factorization gives **[[concepts/independen
 - [[concepts/iterative-source-steering|Iterative Source Steering]]
 - [[concepts/spatial-regularization|Spatial Regularization]]
 - [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA]]
+- [[concepts/online-iva|Online IVA]]
 
 ## Related Sources
 
 - [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020: Geometrically Constrained IVA for Directional Speech Enhancement]] — GCAV-IVA: AuxIVA-style closed-form updates under linear geometric constraints
+- [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020: Online Directional Speech Enhancement Using Geometrically Constrained IVA]] — oGCAV-IVA: real-time online GCAV-IVA via autoregressive auxiliary variables
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
 - [[sources/nishikori-2026-fast-multichannel-nmf-block-diagonal-scm-bss|Nishikori et al. 2026: Distributed FastMNMF for BSS]]
 - [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]

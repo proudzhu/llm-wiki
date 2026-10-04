@@ -1219,6 +1219,7 @@
 | [[concepts/hybrid-bss-anc-speech-enhancement\|Hybrid BSS-ANC Speech Enhancement]] | Subband cascade (Low & Nordholm 2004): BSS separates spatially, kurtosis selects the speech-dominant output, and an ANC reuses the L-1 interference outputs as references for temporal cancellation. | 2026-10-03 |
 | [[concepts/kurtosis-based-output-selection\|Kurtosis-Based Output Selection]] | Higher-order-statistical test identifying the speech-dominant BSS output: speech is supergaussian (positive kurtosis) while diffuse interference is Gaussian-like (near-zero kurtosis). | 2026-10-03 |
 | [[concepts/geometrically-constrained-iva\|Geometrically Constrained IVA]] | GCIVA augments the IVA blind-separation objective with LCMV-style linear far-field response constraints (nulls or distortionless responses); the GCAV-IVA algorithm solves it with convergence-guaranteed closed-form updates via the auxiliary-function approach and vectorwise coordinate descent. | 2026-10-04 |
+| [[concepts/online-iva\|Online IVA]] | Real-time frame-wise IVA updates via autoregressive auxiliary-variable recursion (forgetting factor); online blockwise alternative to batch and blockwise BSS | 2026-10-04 |
 
 ---
 
@@ -1473,6 +1474,7 @@
 | [[sources/huang-2026-neural-directional-filtering\|Huang, Chetupalli, Halimeh, Thiergart & Habets 2026]] | This is the comprehensive journal-style treatment of neural directional filtering (NDF), extending the preliminary IWAENC 2024 study. | 2026-10-03 |
 | [[sources/low-2004-hybrid-bss-anc\|Low & Nordholm 2004]] | This paper presents a hybrid speech enhancement scheme that cascades subband blind source separation (BSS) with an adaptive noise canceller (ANC): BSS exploits spatial diversity to separate the target speech from interference, and the ANC — fed with the BSS's own interference-dominant outputs as reference signals — performs further temporal decorrelation on the speech-dominant output. | 2026-10-03 |
 | [[sources/li-2020-geometrically-constrained-iva\|Li & Koishida 2020]] | This paper proposes geometrically constrained independent vector analysis (GCIVA), which augments the IVA blind-separation objective with linear constraints on the far-field responses of the demixing filters, combining BSS separation performance with beamforming-style directional control. | 2026-10-04 |
+| [[sources/li-2020-online-gciva\|Li, Koishida & Makino 2020]] | Extends offline GCAV-IVA to a real-time online algorithm (oGCAV-IVA) via an autoregressive approximation of the auxiliary variables; a dual-mic directional speech enhancement system runs < 16 ms/frame and beats online AuxIVA for fixed and moving interference. | 2026-10-04 |
 
 ---
 
@@ -1527,10 +1529,10 @@
 
 ## Statistics
 
-- **Total pages**: 1476
+- **Total pages**: 1478
 - **Entities**: 628
-- **Concepts**: 572
-- **Sources**: 245
+- **Concepts**: 573
+- **Sources**: 246
 - **Synthesis**: 23
 - **Queries**: 8
 - **Last updated**: 2026-10-04

@@ -5708,3 +5708,15 @@ Created [[queries/ndf-sndf-ndbf-comparison|NDF/SNDF/NDBF 对比查询页]] — �
 - **Summary**: GCIVA augments the IVA objective with LCMV-style linear far-field response constraints; the GCAV-IVA algorithm gives convergence-guaranteed closed-form updates (auxiliary function + VCD), and a dual-mic system with AuxIVA-based DOA estimation beats MPDR and AuxIVA in SDR/SIR.
 - **Pages created**: `wiki/sources/li-2020-geometrically-constrained-iva.md`, `wiki/concepts/geometrically-constrained-iva.md`, `wiki/entities/li-li.md`, `wiki/entities/kazuhito-koishida.md`
 - **Pages updated**: [[concepts/independent-vector-analysis|independent-vector-analysis]] (GCAV-IVA optimization paragraph + links), [[concepts/blind-source-separation|blind-source-separation]] (new "Geometrically Constrained BSS" section), [[concepts/spatial-regularization|spatial-regularization]] (GCIVA as constraint-based variant), [[concepts/mpdr-beamformer|mpdr-beamformer]] (MPDR vs. GCAV-IVA comparison), [[concepts/direction-of-arrival-estimation|direction-of-arrival-estimation]] (BSS directivity-null DOA section), [[concepts/multi-channel-speech-enhancement|multi-channel-speech-enhancement]] (dual-mic GCIVA technique bullet), [[concepts/speech-enhancement|speech-enhancement]] (source cross-ref)
+
+---
+
+## [2026-10-04] ingest | Online Directional Speech Enhancement Using Geometrically Constrained IVA (Li, Koishida & Makino 2020)
+
+- **Source**: `raw/papers/li-2020-online-gciva/full-text.md` (Zotero: 8GP29RZG)
+- **Authors**: Li Li, Kazuhito Koishida, Shoji Makino
+- **Published**: Interspeech 2020
+- **DOI**: 10.21437/Interspeech.2020-1484
+- **Summary**: Online (real-time) extension of GCAV-IVA via autoregressive approximation of the auxiliary variables; dual-mic directional speech enhancement system with three interference-DOA variants, running < 16 ms/frame and outperforming online AuxIVA for both fixed and moving interference.
+- **Pages created**: `wiki/sources/li-2020-online-gciva.md`, `wiki/concepts/online-iva.md`
+- **Pages updated**: `wiki/entities/li-li.md`, `wiki/entities/kazuhito-koishida.md`, `wiki/entities/shoji-makino.md` (new contribution bullets; added Makino's Tsukuba affiliation), `wiki/concepts/geometrically-constrained-iva.md` (new Online Extension section), `wiki/concepts/independent-vector-analysis.md`, `wiki/concepts/direction-of-arrival-estimation.md` (online BSS-directivity DOA findings), `wiki/concepts/blind-source-separation.md`, `wiki/concepts/multi-channel-speech-enhancement.md`, `wiki/concepts/speech-enhancement.md`, `wiki/index.md`, `wiki/sources/index.md`, `wiki/concepts/index.md`

@@ -4,6 +4,7 @@ created: 2026-04-30
 updated: 2026-10-04
 sources:
   - raw/papers/li-2020-geometrically-constrained-iva/full-text.md
+  - raw/papers/li-2020-online-gciva/full-text.md
   - raw/papers/wang-2026-predictive-dsfanc-crnn/full-text.md
   - raw/papers/wang-2026-directional-sfanc-reverberant/full-text.md
   - raw/papers/zhang-2014-causality-feedforward-anc-headset/full-text.md
@@ -84,7 +85,7 @@ Before the DL era, [[sources/tervo-2009-sound-intensity-direction|Tervo (EUSIPCO
 
 ## BSS Directivity Nulls as DOA Estimates (Li & Koishida 2020)
 
-A BSS demixing system can be interpreted as a set of adaptive null-beamformers, so its directional nulls themselves carry DOA information. [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020]] read DOAs off the AuxIVA demixing filters by scanning the response power $\sum_{\omega \le \Omega/2}|\boldsymbol{w}_j^{\mathsf{H}}(\omega)\boldsymbol{d}(\omega,\theta)|$ over a 5°-resolution grid: after only **3 AuxIVA iterations**, more than 60% of estimates fall within ±20° of the true DOA under both RT60 = 200 ms and 470 ms. The estimate is accurate enough to steer a null constraint in their [[concepts/geometrically-constrained-iva|geometrically constrained IVA]] dual-microphone enhancer — where the AuxIVA-estimated interference DOA in fact slightly *outperformed* the oracle DOA, plausibly because the BSS null points at the direction containing the most statistically independent components.
+A BSS demixing system can be interpreted as a set of adaptive null-beamformers, so its directional nulls themselves carry DOA information. [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020]] read DOAs off the AuxIVA demixing filters by scanning the response power $\sum_{\omega \le \Omega/2}|\boldsymbol{w}_j^{\mathsf{H}}(\omega)\boldsymbol{d}(\omega,\theta)|$ over a 5°-resolution grid: after only **3 AuxIVA iterations**, more than 60% of estimates fall within ±20° of the true DOA under both RT60 = 200 ms and 470 ms. The estimate is accurate enough to steer a null constraint in their [[concepts/geometrically-constrained-iva|geometrically constrained IVA]] dual-microphone enhancer — where the AuxIVA-estimated interference DOA in fact slightly *outperformed* the oracle DOA, plausibly because the BSS null points at the direction containing the most statistically independent components. The online follow-up ([[sources/li-2020-online-gciva|Li, Koishida & Makino 2020]]) shows the same trick works with a **parallel online AuxIVA** feeding a real-time GCAV-IVA system: for fixed sources the estimated DOA beats the true DOA by > 4 dB SDR, but for **moving sources** the online DOA estimates fail often enough that the constraint degrades performance below the unconstrained variant — quantifying the tracking limit of BSS-directivity DOA estimation.
 
 ## Related Concepts
 
@@ -101,6 +102,7 @@ A BSS demixing system can be interpreted as a set of adaptive null-beamformers, 
 ## Related Sources
 
 - [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020: Geometrically Constrained IVA for Directional Speech Enhancement]] — AuxIVA directivity-null DOA estimation (3 iterations, 5° grid, >60% within ±20°)
+- [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020: Online Directional Speech Enhancement Using Geometrically Constrained IVA]] — online BSS-directivity DOA estimation; fixed-source gains but moving-source failures
 - [[sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]] — CRNN-based next-frame DoA prediction for ANC
 - [[sources/wang-2026-directional-sfanc-reverberant|Wang 2026: Directional SFANC in Reverberant Environments]] — CNN-based multi-task DoA estimation for reverberant conditions
 - [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — foundational work showing direction-dependent causality in feedforward ANC

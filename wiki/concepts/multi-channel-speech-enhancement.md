@@ -4,6 +4,7 @@ created: 2026-04-29
 updated: 2026-10-04
 sources:
   - raw/papers/li-2020-geometrically-constrained-iva/full-text.md
+  - raw/papers/li-2020-online-gciva/full-text.md
   - raw/papers/souden-2011-online-noise-tracking/full-text.md
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
@@ -107,6 +108,7 @@ tags:
 ## Related Sources
 
 - [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020: Geometrically Constrained IVA for Directional Speech Enhancement]] — dual-mic directional SE combining BSS adaptation with null constraints
+- [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020: Online Directional Speech Enhancement Using Geometrically Constrained IVA]] — real-time (< 16 ms/frame) dual-mic directional SE via online GCAV-IVA
 - [[sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
 - [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] — MWF-NR in the open-fitting hearing-aid context; leakage and secondary-path effects
 - [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]

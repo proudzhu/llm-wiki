@@ -4,6 +4,7 @@ created: 2026-05-21
 updated: 2026-10-04
 sources:
   - raw/papers/li-2020-geometrically-constrained-iva/full-text.md
+  - raw/papers/li-2020-online-gciva/full-text.md
   - raw/papers/low-2004-hybrid-bss-anc/full-text.txt
   - raw/papers/pan-2026-array-self-awareness/full-text.md
   - raw/papers/guo-2023-iva-survey/full-text.md
@@ -66,7 +67,7 @@ The survey benchmarks these methods across audio, speech, music, voice, and sour
 
 ## Geometrically Constrained BSS
 
-Instead of treating spatial information as a post-hoc selection or alignment cue, **geometrically constrained BSS** builds it directly into the optimization: beamforming-derived linear constraints on the far-field responses of the demixing filters (steering-vector inner products pushed toward unity for distortionless response or toward zero for spatial nulls) are added to the BSS objective. This lets a designer control the spatial and frequency responses of the separated outputs, e.g., guaranteeing which channel extracts the target and dedicating another channel to an interference/noise reference. [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020]] instantiate this with IVA (see [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA]]), deriving a convergence-guaranteed auxiliary-function algorithm so the constraints come at no cost to AuxIVA's stability, and demonstrating that a two-microphone geometrically constrained system beats both an MPDR beamformer and oracle-selected AuxIVA in SDR/SIR. Related spatial-guidance mechanisms are surveyed under [[concepts/spatial-regularization|spatial regularization]].
+Instead of treating spatial information as a post-hoc selection or alignment cue, **geometrically constrained BSS** builds it directly into the optimization: beamforming-derived linear constraints on the far-field responses of the demixing filters (steering-vector inner products pushed toward unity for distortionless response or toward zero for spatial nulls) are added to the BSS objective. This lets a designer control the spatial and frequency responses of the separated outputs, e.g., guaranteeing which channel extracts the target and dedicating another channel to an interference/noise reference. [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020]] instantiate this with IVA (see [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA]]), deriving a convergence-guaranteed auxiliary-function algorithm so the constraints come at no cost to AuxIVA's stability, and demonstrating that a two-microphone geometrically constrained system beats both an MPDR beamformer and oracle-selected AuxIVA in SDR/SIR. The follow-up ([[sources/li-2020-online-gciva|Li, Koishida & Makino 2020]]) makes the constrained algorithm **online** (real-time, frame-wise updates via an [[concepts/online-iva|autoregressive auxiliary-variable recursion]]) and shows the geometric constraints are what keep it robust where unconstrained online BSS fails — in an underdetermined noisy condition, online GCAV-IVA reaches 6.86 dB SDR while online AuxIVA nearly fails at 1.70 dB. Related spatial-guidance mechanisms are surveyed under [[concepts/spatial-regularization|spatial regularization]].
 
 ## Key Challenges
 
@@ -113,6 +114,7 @@ The division between BSS and model-based multichannel filtering blurs when BSS i
 ## Related Sources
 
 - [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020: Geometrically Constrained IVA for Directional Speech Enhancement]] — beamforming-style linear response constraints built into the IVA objective
+- [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020: Online Directional Speech Enhancement Using Geometrically Constrained IVA]] — real-time online geometrically constrained BSS; robust where unconstrained online BSS fails
 - [[sources/low-2004-hybrid-bss-anc|Low & Nordholm 2004: A Hybrid Speech Enhancement System Employing BSS and Adaptive Noise Cancellation]] — hybrid BSS+ANC cascade with kurtosis-based output selection; permutation avoided via beamformer-like initialization, scaling via unit-determinant constraint
 - [[sources/pan-2026-array-self-awareness|Pan, Chen & Benesty 2026: Microphone Array Self-Awareness via a Residual Model of the Covariance Matrix]] — offline BSS as the a priori estimator for real-time model-based extraction
 

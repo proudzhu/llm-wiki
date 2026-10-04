@@ -4,12 +4,14 @@ created: 2026-10-04
 updated: 2026-10-04
 sources:
   - raw/papers/li-2020-geometrically-constrained-iva/full-text.md
+  - raw/papers/li-2020-online-gciva/full-text.md
 tags:
   - blind-source-separation
   - independent-vector-analysis
   - beamforming
   - speech-enhancement
   - direction-of-arrival
+  - online-processing
 ---
 
 # Geometrically Constrained IVA
@@ -54,6 +56,10 @@ With only two microphones, null constraints ($c_j \approx 0$) are practical:
 
 On VCC2018 speech with image-method RIRs (RT60 200/470 ms), DEMAND diffuse noise, and a 5 cm two-microphone array, this dual-mic GCAV-IVA system outperformed both an [[concepts/mpdr-beamformer|MPDR beamformer]] and oracle-channel-selected AuxIVA in SDR/SIR (e.g., 8.80 dB SDR / 11.69 dB SIR vs. AuxIVA's 7.12 / 8.98 in the 2-speaker, 200 ms condition). Constraining both channels beat constraining one, and the AuxIVA-estimated interference DOA slightly outperformed the oracle DOA.
 
+### Online Extension (oGCAV-IVA)
+
+[[sources/li-2020-online-gciva|Li, Koishida & Makino 2020]] extend GCAV-IVA to a **real-time online algorithm** by replacing the full-sample expectation in the auxiliary weighted covariance $\boldsymbol{V}_j$ with an [[concepts/online-iva|autoregressive recursion]] over short blocks ($L = 1$ frame, forgetting factor $\alpha = 0.96$); since the geometric constraints are linear, they pass through this modification unchanged. In the dual-microphone system the online algorithm runs at < 16 ms per 16 ms frame on a desktop CPU (≈ 5 ms without, ≈ 15 ms with the parallel online-AuxIVA DOA estimator) and outperforms online AuxIVA for both fixed and moving interference — including an underdetermined noisy condition where online AuxIVA nearly fails (SDR 6.86 dB vs. 1.70 dB). For fixed sources, the system with AuxIVA-estimated interference DOA beats the one using the *true* DOA by more than 4 dB, but for moving sources the reverse holds: online DOA estimation degrades (the paper shows failure examples), and an inappropriate constraint then hurts more than no target-channel constraint at all — making the unconstrained variant (a) the safer choice under source motion.
+
 ## Relation to Other Spatially Guided BSS
 
 GCIVA belongs to the broader family of methods that inject prior spatial information into BSS, alongside [[concepts/spatial-regularization|spatial regularization]] (penalizing demixing-vector distance from DOA-derived steering vectors, used in SR-ILRMA/SR-SwIVA) and spatially informed MAP priors on demixing matrices (Brendel et al. 2019). Its distinguishing feature is that the constraints are **hard linear response constraints** in the LCMV sense rather than quadratic proximity penalties, and that they enable deliberate spatial shaping (nulls, distortionless responses) of specific output channels — including blocking-matrix behavior for interference reference generation.
@@ -68,7 +74,9 @@ GCIVA belongs to the broader family of methods that inject prior spatial informa
 - [[concepts/mpdr-beamformer|MPDR Beamformer]]
 - [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]]
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[concepts/online-iva|Online IVA]]
 
 ## Related Sources
 
 - [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020: Geometrically Constrained IVA for Directional Speech Enhancement]]
+- [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020: Online Directional Speech Enhancement Using Geometrically Constrained IVA]] — real-time online extension (oGCAV-IVA) and the three interference-DOA system variants

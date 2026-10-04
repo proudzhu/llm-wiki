@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-09-30
-updated: 2026-09-30
+updated: 2026-10-04
 sources:
   - raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md
   - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
+  - raw/papers/li-2020-online-gciva/full-text.md
 tags:
   - beamforming
   - adaptive-filtering
@@ -34,6 +35,8 @@ The coefficients $H_m(k)$ are updated by NLMS with a **per-coefficient clamp** t
 
 **RTF-form ABM (informed GSC).** The RTF-based blocking-matrix form is estimated online per time-frequency bin, under the control of a narrowband signal detector — see [[concepts/informed-gsc|Informed GSC]]. A pre-modeled (non-adaptive) RTF blocking matrix is the alternative when the source–array geometry is quasi-fixed, as in Bluetooth headsets ([[concepts/atf-gsc|ATF-GSC]]).
 
+**Geometric null as fixed BM (BSS side).** A fixed blocking matrix can also be produced inside a BSS objective: [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020]] constrain the interference channel of their online geometrically constrained IVA with a null ($c_j \approx 0$) toward the known target DOA, so that channel outputs an interference/noise reference — the blocking-matrix role played by a geometric constraint rather than adaptive filters.
+
 ## Adaptation Control
 
 Because the target is the signal the ABM *wants* to cancel, the ABM must adapt under the opposite condition to the canceller: **high target-to-interference ratio** for the ABM (or, equivalently, target-active frames), and **low** SIR for the canceller. Hoshuyama et al. draw the explicit analogy to double-talk detection in [[concepts/acoustic-echo-cancellation|acoustic echo cancellation]]; Sun et al. replace the SIR estimate with a directional VAD, which is what makes the scheme robust to interfering speakers rather than just to one target.
@@ -61,3 +64,4 @@ Because the target is the signal the ABM *wants* to cancel, the ABM must adapt u
 - [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024: A Lightweight Hybrid Multi-Channel Speech Extraction System with Directional VAD]] — DVAD-gated NLMS adaptation of the ABM/AIC pair
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] — detector-controlled RTF-based blocking matrix
 - [[sources/yan-2014-dual-mic-bt-noise-reduction|Yan, Qiu & Lu 2014: Dual-Mic Noise Suppression for Bluetooth Headsets]] — pre-modeled RTF blocking matrix
+- [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020: Online Directional Speech Enhancement Using Geometrically Constrained IVA]] — geometric null constraint on the interference channel plays the fixed-BM role inside a BSS objective
