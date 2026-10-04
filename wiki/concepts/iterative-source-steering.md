@@ -4,6 +4,7 @@ created: 2026-06-04
 updated: 2026-10-04
 sources:
   - raw/papers/ishikawa-2025-real-time-speech-extraction/full-text.md
+  - raw/papers/goto-2022-offline-iss-gciva/full-text.md
   - raw/papers/goto-2022-iss-gciva/full-text.md
 tags:
   - optimization-algorithms
@@ -75,7 +76,7 @@ $$\mathbf{y}(f, t) \leftarrow \mathbf{y}(f, t) - \mathbf{v}_j(f)y_j(f, t)$$
 ISS has been successfully applied to:
 - Standard IVA for speech separation
 - [[concepts/switching-independent-vector-analysis|Switching IVA]] (SR-SwIVA-ISS)
-- Geometrically constrained IVA: [[sources/goto-2022-iss-gciva|Goto et al. 2022]] fold the geometric (far-field response) constraints directly into the closed-form ISS coefficients — the steering-vector response $g_{jf\theta n} = \boldsymbol{w}_{jfn}^{\mathsf{H}}\boldsymbol{d}_{f\theta}$ appears in the off-diagonal update $v_{ijfn}$ and in the scalars $p_{jfn}$, $q_{jfn}$ of the diagonal update — yielding the inverse-free online GC-AuxIVA-ISS with 25–75% runtime reduction over the VCD-based variant at equal enhancement quality. The time-varying look-direction set $\Theta_n$ lets the constraints track estimated DOAs of moving sources.
+- Geometrically constrained IVA: [[sources/goto-2022-offline-iss-gciva|Goto et al. 2022 (EUSIPCO)]] first folded the geometric (far-field response) constraints directly into the closed-form ISS coefficients — the steering-vector response $g_{jf\theta} = \boldsymbol{w}_{jf}^{\mathsf{H}}\boldsymbol{d}_{f\theta}$ appears in the off-diagonal update $v_{ijf}$ and in the scalars $\alpha_j$, $\beta_j$ of the diagonal update — yielding the inverse-free **offline GC-AuxIVA-ISS**, which matches or beats the matrix-inversion-based GC-AuxIVA-VCD in SDR/SIR while running at the cost of unconstrained AuxIVA-ISS (34–53% faster; less than half of VCD's runtime at 4 channels), avoiding the block permutation failure of plain AuxIVA-ISS, and achieving 100% output-order accuracy. [[sources/goto-2022-iss-gciva|Goto et al. 2022 (APSIPA ASC)]] extended it online with 25–75% runtime reduction over the VCD-based online variant at equal enhancement quality. The time-varying look-direction set $\Theta_n$ in the online version lets the constraints track estimated DOAs of moving sources.
 - Online source extraction: the real-time RCSCME+SR-ILRMA framework of [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025]] exceeds conventional Online IVA-IP/ISS in SDR/SIR under diffuse noise, and derives accelerated FastIP/FastVCD updates by the same algebraic-transformation philosophy applied to the IP rule
 
 ## Related Concepts
@@ -91,4 +92,5 @@ ISS has been successfully applied to:
 - [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
 - [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025: Real-Time Speech Extraction via RCSCME + SR-ILRMA with Fast Demixing]] — real-time framework exceeding Online IVA-IP/ISS; derives accelerated FastIP/FastVCD updates
+- [[sources/goto-2022-offline-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022: GC-IVA with Auxiliary Function Approach and Iterative Source Steering]] — offline GC-AuxIVA-ISS: geometric constraints folded into the ISS closed-form coefficients; block-permutation avoidance; runtime of unconstrained AuxIVA-ISS
 - [[sources/goto-2022-iss-gciva|Goto et al. 2022: Accelerating Online GC-IVA with Iterative Source Steering]] — geometric constraints folded into the ISS closed-form coefficients; online GC-AuxIVA-ISS

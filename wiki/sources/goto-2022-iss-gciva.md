@@ -85,7 +85,7 @@ The geometric-constraint terms enter the off-diagonal numerator/denominator of $
 
 ### Related Work
 
-- The authors' **offline GC-AuxIVA-ISS** (Goto et al., EUSIPCO 2022) already replaced VCD with ISS offline, achieving comparable enhancement with 35–50% execution-time reduction; the present work extends it online.
+- The authors' **offline GC-AuxIVA-ISS** ([[sources/goto-2022-offline-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022, EUSIPCO]]) already replaced VCD with ISS offline, achieving comparable or better enhancement with 34–53% per-iteration runtime reduction; the present work extends it online.
 - **Online AuxIVA-ISS** (Nakashima & Ono, APSIPA 2022) performs the offline-to-online ISS extension without geometric constraints; the proposed method can be viewed as online AuxIVA-ISS plus geometric constraints.
 
 ### Interference DOA Estimation with MUSIC

@@ -5732,3 +5732,15 @@ Created [[queries/ndf-sndf-ndbf-comparison|NDF/SNDF/NDBF 对比查询页]] — �
 - **Summary**: Derives online GC-AuxIVA-ISS — an inverse-free online algorithm for geometrically constrained IVA obtained by replacing VCD with iterative source steering (constraints enter the closed-form ISS coefficients directly) — plus MUSIC-based interference DOA estimation on projection-back source images; matches oGC-AuxIVA-VCD quality with 25–75% runtime reduction, with smoothed DOA estimates ("MUSIC smooth") tracking moving interference best.
 - **Pages created**: `wiki/sources/goto-2022-iss-gciva.md`, `wiki/entities/kana-goto.md`, `wiki/entities/tetsuya-ueda.md`, `wiki/entities/takeshi-yamada.md`
 - **Pages updated**: `wiki/entities/li-li.md` (new contribution + NTT affiliation), `wiki/entities/shoji-makino.md` (new contribution), `wiki/concepts/geometrically-constrained-iva.md` (new oGC-AuxIVA-ISS section), `wiki/concepts/iterative-source-steering.md` (GC-IVA application detail), `wiki/concepts/online-iva.md` (inverse-free ISS section), `wiki/concepts/direction-of-arrival-estimation.md` (MUSIC-on-source-images section)
+
+---
+
+## [2026-10-04] ingest | GC-IVA with Auxiliary Function Approach and Iterative Source Steering (Goto et al. 2022)
+
+- **Source**: `raw/papers/goto-2022-offline-iss-gciva/full-text.md` (Zotero: M4TBPPAI)
+- **Authors**: Kana Goto, Tetsuya Ueda, Li Li, Takeshi Yamada, Shoji Makino
+- **Published**: EUSIPCO 2022, pp. 762–766
+- **DOI**: 10.23919/EUSIPCO55093.2022.9909912
+- **Summary**: Derives offline (batch) GC-AuxIVA-ISS — the inverse-free ISS rank-1 update for geometrically constrained IVA, with constraints absorbed into the closed-form coefficients ($v_{ijf}$, $\alpha_j$, $\beta_j$) — the predecessor of the already-ingested online version ([[sources/goto-2022-iss-gciva|Goto et al. 2022, APSIPA ASC]]). Matches or beats GC-AuxIVA-VCD in SDR/SIR at essentially the runtime of unconstrained AuxIVA-ISS (34–53% faster, < half of VCD at 4 ch), achieves 100% output-order accuracy, and beam-pattern evidence shows the constraints prevent AuxIVA-ISS's block permutation failure.
+- **Pages created**: `wiki/sources/goto-2022-offline-iss-gciva.md`
+- **Pages updated**: `wiki/entities/kana-goto.md`, `wiki/entities/tetsuya-ueda.md`, `wiki/entities/li-li.md`, `wiki/entities/takeshi-yamada.md`, `wiki/entities/shoji-makino.md` (new contribution bullets), `wiki/concepts/geometrically-constrained-iva.md` (restructured ISS section: offline + online), `wiki/concepts/iterative-source-steering.md` (offline GC-IVA application), `wiki/concepts/independent-vector-analysis.md` (offline→online ISS chain), `wiki/concepts/permutation-alignment.md` (block-permutation prevention bullet), `wiki/concepts/online-iva.md` (offline predecessor cross-ref), `wiki/sources/goto-2022-iss-gciva.md` (wikilink to offline predecessor), `wiki/index.md`, `wiki/sources/index.md`

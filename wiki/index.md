@@ -1479,6 +1479,7 @@
 | [[sources/li-2020-geometrically-constrained-iva\|Li & Koishida 2020]] | This paper proposes geometrically constrained independent vector analysis (GCIVA), which augments the IVA blind-separation objective with linear constraints on the far-field responses of the demixing filters, combining BSS separation performance with beamforming-style directional control. | 2026-10-04 |
 | [[sources/li-2020-online-gciva\|Li, Koishida & Makino 2020]] | Extends offline GCAV-IVA to a real-time online algorithm (oGCAV-IVA) via an autoregressive approximation of the auxiliary variables; a dual-mic directional speech enhancement system runs < 16 ms/frame and beats online AuxIVA for fixed and moving interference. | 2026-10-04 |
 | [[sources/goto-2022-iss-gciva\|Goto, Ueda, Li, Yamada & Makino 2022]] | This paper derives online GC-AuxIVA-ISS, an alternative online algorithm for geometrically constrained IVA that replaces the vectorwise coordinate descent (VCD) update of online GC-AuxIVA-VCD with iterative source steering (ISS), eliminating the per-source, per-frequency matrix inversions and yielding an inverse-free, numerically stable rank-1 update. | 2026-10-04 |
+| [[sources/goto-2022-offline-iss-gciva\|Goto, Ueda, Li, Yamada & Makino 2022]] | This paper derives GC-AuxIVA-ISS, an offline (batch) algorithm for geometrically constrained IVA that replaces the vectorwise-coordinate-descent (VCD) updates of GCAV-IVA — which require a per-source, per-frequency matrix inversion — with iterative source steering (ISS) rank-1 updates, folding the geometric constraints directly into the closed-form ISS coefficients. | 2026-10-04 |
 
 ---
 
@@ -1533,10 +1534,10 @@
 
 ## Statistics
 
-- **Total pages**: 1482
+- **Total pages**: 1483
 - **Entities**: 631
 - **Concepts**: 573
-- **Sources**: 247
+- **Sources**: 248
 - **Synthesis**: 23
 - **Queries**: 8
 - **Last updated**: 2026-10-04

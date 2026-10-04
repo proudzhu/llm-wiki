@@ -42,7 +42,7 @@ with forgetting factor $0 \le \alpha < 1$ ($\alpha = 0$ recovers the blockwise v
 
 ## Inverse-Free Online Updates via ISS
 
-The per-row update rules above (IP or VCD style) require matrix inversions per frequency, source, and iteration. Replacing them with [[concepts/iterative-source-steering|ISS]] rank-1 updates removes the inversions entirely: [[sources/goto-2022-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022]] derive online GC-AuxIVA-ISS this way, keeping the autoregressive covariance recursion untouched (the ISS update operates on $\boldsymbol{W}_{fn}$, not on the statistics) and cutting the runtime of the geometrically constrained online system by 25–75% at equal enhancement quality. ISS-based online updates also handle moving sources efficiently, since only the demixing filters whose steering changed need updating (Nakashima & Ono 2022).
+The per-row update rules above (IP or VCD style) require matrix inversions per frequency, source, and iteration. Replacing them with [[concepts/iterative-source-steering|ISS]] rank-1 updates removes the inversions entirely: [[sources/goto-2022-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022]] derive online GC-AuxIVA-ISS this way (extending their offline GC-AuxIVA-ISS, [[sources/goto-2022-offline-iss-gciva|Goto et al. EUSIPCO 2022]]), keeping the autoregressive covariance recursion untouched (the ISS update operates on $\boldsymbol{W}_{fn}$, not on the statistics) and cutting the runtime of the geometrically constrained online system by 25–75% at equal enhancement quality. ISS-based online updates also handle moving sources efficiently, since only the demixing filters whose steering changed need updating (Nakashima & Ono 2022).
 
 ## Related Concepts
 
