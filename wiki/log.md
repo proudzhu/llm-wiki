@@ -5720,3 +5720,15 @@ Created [[queries/ndf-sndf-ndbf-comparison|NDF/SNDF/NDBF 对比查询页]] — �
 - **Summary**: Online (real-time) extension of GCAV-IVA via autoregressive approximation of the auxiliary variables; dual-mic directional speech enhancement system with three interference-DOA variants, running < 16 ms/frame and outperforming online AuxIVA for both fixed and moving interference.
 - **Pages created**: `wiki/sources/li-2020-online-gciva.md`, `wiki/concepts/online-iva.md`
 - **Pages updated**: `wiki/entities/li-li.md`, `wiki/entities/kazuhito-koishida.md`, `wiki/entities/shoji-makino.md` (new contribution bullets; added Makino's Tsukuba affiliation), `wiki/concepts/geometrically-constrained-iva.md` (new Online Extension section), `wiki/concepts/independent-vector-analysis.md`, `wiki/concepts/direction-of-arrival-estimation.md` (online BSS-directivity DOA findings), `wiki/concepts/blind-source-separation.md`, `wiki/concepts/multi-channel-speech-enhancement.md`, `wiki/concepts/speech-enhancement.md`, `wiki/index.md`, `wiki/sources/index.md`, `wiki/concepts/index.md`
+
+---
+
+## [2026-10-04] ingest | Accelerating Online Algorithm Using Geometrically Constrained IVA with Iterative Source Steering (Goto et al. 2022)
+
+- **Source**: `raw/papers/goto-2022-iss-gciva/full-text.md` (Zotero: IABC9JVN)
+- **Authors**: Kana Goto, Tetsuya Ueda, Li Li, Takeshi Yamada, Shoji Makino
+- **Published**: APSIPA Annual Summit and Conference 2022 (APSIPA ASC 2022)
+- **DOI**: 10.23919/APSIPAASC55919.2022.9980301
+- **Summary**: Derives online GC-AuxIVA-ISS — an inverse-free online algorithm for geometrically constrained IVA obtained by replacing VCD with iterative source steering (constraints enter the closed-form ISS coefficients directly) — plus MUSIC-based interference DOA estimation on projection-back source images; matches oGC-AuxIVA-VCD quality with 25–75% runtime reduction, with smoothed DOA estimates ("MUSIC smooth") tracking moving interference best.
+- **Pages created**: `wiki/sources/goto-2022-iss-gciva.md`, `wiki/entities/kana-goto.md`, `wiki/entities/tetsuya-ueda.md`, `wiki/entities/takeshi-yamada.md`
+- **Pages updated**: `wiki/entities/li-li.md` (new contribution + NTT affiliation), `wiki/entities/shoji-makino.md` (new contribution), `wiki/concepts/geometrically-constrained-iva.md` (new oGC-AuxIVA-ISS section), `wiki/concepts/iterative-source-steering.md` (GC-IVA application detail), `wiki/concepts/online-iva.md` (inverse-free ISS section), `wiki/concepts/direction-of-arrival-estimation.md` (MUSIC-on-source-images section)

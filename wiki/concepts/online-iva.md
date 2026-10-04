@@ -4,6 +4,7 @@ created: 2026-10-04
 updated: 2026-10-04
 sources:
   - raw/papers/li-2020-online-gciva/full-text.md
+  - raw/papers/goto-2022-iss-gciva/full-text.md
 tags:
   - blind-source-separation
   - independent-vector-analysis
@@ -39,13 +40,19 @@ with forgetting factor $0 \le \alpha < 1$ ($\alpha = 0$ recovers the blockwise v
 - Because only the statistics $\boldsymbol{V}_j$ depend on all observations, the online modification is confined to this single quantity; the per-row demixing updates are unchanged.
 - Demonstrated real-time capability: < 16 ms per 16 ms frame for the online GCAV-IVA dual-microphone system on a desktop CPU (Intel i7-7800X).
 
+## Inverse-Free Online Updates via ISS
+
+The per-row update rules above (IP or VCD style) require matrix inversions per frequency, source, and iteration. Replacing them with [[concepts/iterative-source-steering|ISS]] rank-1 updates removes the inversions entirely: [[sources/goto-2022-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022]] derive online GC-AuxIVA-ISS this way, keeping the autoregressive covariance recursion untouched (the ISS update operates on $\boldsymbol{W}_{fn}$, not on the statistics) and cutting the runtime of the geometrically constrained online system by 25–75% at equal enhancement quality. ISS-based online updates also handle moving sources efficiently, since only the demixing filters whose steering changed need updating (Nakashima & Ono 2022).
+
 ## Related Concepts
 
 - [[concepts/independent-vector-analysis|Independent Vector Analysis]]
 - [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA]]
+- [[concepts/iterative-source-steering|Iterative Source Steering]]
 - [[concepts/blind-source-separation|Blind Source Separation]]
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
 
 ## Related Sources
 
 - [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020: Online Directional Speech Enhancement Using Geometrically Constrained IVA]] — online GCAV-IVA (oGCAV-IVA) and online AuxIVA baseline, both using the autoregressive auxiliary-variable recursion
+- [[sources/goto-2022-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022: Accelerating Online GC-IVA with Iterative Source Steering]] — inverse-free online GC-AuxIVA-ISS via ISS rank-1 updates; 25–75% runtime reduction over the VCD-based online variant

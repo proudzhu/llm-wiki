@@ -13,6 +13,7 @@ sources:
   - raw/papers/tervo-2009-sound-intensity-direction/full-text.md
   - raw/articles/wikipedia-steered-response-power.md
   - raw/papers/grinstein-2024-srp-tutorial-review/full-text.md
+  - raw/papers/goto-2022-iss-gciva/full-text.md
 tags:
   - signal-processing
   - array-processing
@@ -87,6 +88,10 @@ Before the DL era, [[sources/tervo-2009-sound-intensity-direction|Tervo (EUSIPCO
 
 A BSS demixing system can be interpreted as a set of adaptive null-beamformers, so its directional nulls themselves carry DOA information. [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020]] read DOAs off the AuxIVA demixing filters by scanning the response power $\sum_{\omega \le \Omega/2}|\boldsymbol{w}_j^{\mathsf{H}}(\omega)\boldsymbol{d}(\omega,\theta)|$ over a 5°-resolution grid: after only **3 AuxIVA iterations**, more than 60% of estimates fall within ±20° of the true DOA under both RT60 = 200 ms and 470 ms. The estimate is accurate enough to steer a null constraint in their [[concepts/geometrically-constrained-iva|geometrically constrained IVA]] dual-microphone enhancer — where the AuxIVA-estimated interference DOA in fact slightly *outperformed* the oracle DOA, plausibly because the BSS null points at the direction containing the most statistically independent components. The online follow-up ([[sources/li-2020-online-gciva|Li, Koishida & Makino 2020]]) shows the same trick works with a **parallel online AuxIVA** feeding a real-time GCAV-IVA system: for fixed sources the estimated DOA beats the true DOA by > 4 dB SDR, but for **moving sources** the online DOA estimates fail often enough that the constraint degrades performance below the unconstrained variant — quantifying the tracking limit of BSS-directivity DOA estimation.
 
+### MUSIC on Separated Source Images for Moving Interference (Goto et al. 2022)
+
+[[sources/goto-2022-iss-gciva|Goto et al. 2022]] replace the BSS-directivity heuristic with a subspace method: classic **MUSIC** is applied to the projection-back source images $\tilde{\boldsymbol{y}}_{jfn} = \boldsymbol{W}_f^{-1}\boldsymbol{e}_j\, y_{jfn}$ (each separated signal converted back to a multichannel image), using the 500–4000 Hz averaged spatial spectrum; the DOAs except the one nearest the known target DOA are taken as interference DOAs. For a moving interference (arc 90° → 150°), **temporal smoothing is decisive**: a 5-frame moving average ("MUSIC smooth") beats per-frame ("normal") and 5-frame blockwise estimates by > 0.7 dB SDR / 0.6 dB SIR downstream, because per-frame/blockwise estimates jitter frame-to-frame and the geometric constraints follow that jitter. Smoothed MUSIC estimates bring the online GC-AuxIVA-ISS system close to its correct-DOA upper bound — the subspace approach tracks moving sources where the BSS-directivity approach of Li et al. 2020 failed.
+
 ## Related Concepts
 
 - [[concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — DoA drives filter selection in D-SFANC/PD-SFANC
@@ -103,6 +108,7 @@ A BSS demixing system can be interpreted as a set of adaptive null-beamformers, 
 
 - [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020: Geometrically Constrained IVA for Directional Speech Enhancement]] — AuxIVA directivity-null DOA estimation (3 iterations, 5° grid, >60% within ±20°)
 - [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020: Online Directional Speech Enhancement Using Geometrically Constrained IVA]] — online BSS-directivity DOA estimation; fixed-source gains but moving-source failures
+- [[sources/goto-2022-iss-gciva|Goto et al. 2022: Accelerating Online GC-IVA with Iterative Source Steering]] — MUSIC on projection-back source images for interference DOA; smoothed estimates track moving sources
 - [[sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]] — CRNN-based next-frame DoA prediction for ANC
 - [[sources/wang-2026-directional-sfanc-reverberant|Wang 2026: Directional SFANC in Reverberant Environments]] — CNN-based multi-task DoA estimation for reverberant conditions
 - [[sources/zhang-2014-causality-feedforward-anc-headset|Zhang 2014: Causality Study on Feedforward ANC Headset]] — foundational work showing direction-dependent causality in feedforward ANC

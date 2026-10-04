@@ -638,6 +638,9 @@
 | [[entities/sven-nordholm\|Sven Nordholm]] | Researcher (UWA/WATRI); microphone array signal processing and subband beamforming; co-author of the hybrid BSS+ANC system and soft-constrained subband beamforming. | 2026-10-03 |
 | [[entities/li-li\|Li Li]] | Researcher (University of Tsukuba); first author of Geometrically Constrained IVA for directional speech enhancement (ICASSP 2020). | 2026-10-04 |
 | [[entities/kazuhito-koishida\|Kazuhito Koishida]] | Researcher (Microsoft Corporation); co-author of Geometrically Constrained IVA for directional speech enhancement (ICASSP 2020). | 2026-10-04 |
+| [[entities/kana-goto\|Kana Goto]] | University of Tsukuba — online/offline GC-AuxIVA-ISS, geometrically constrained IVA with iterative source steering | 2026-10-04 |
+| [[entities/tetsuya-ueda\|Tetsuya Ueda]] | Waseda University — GC-AuxIVA-ISS, geometrically constrained IVA with iterative source steering | 2026-10-04 |
+| [[entities/takeshi-yamada\|Takeshi Yamada]] | University of Tsukuba — co-author of online GC-AuxIVA-ISS | 2026-10-04 |
 
 ---
 
@@ -1475,6 +1478,7 @@
 | [[sources/low-2004-hybrid-bss-anc\|Low & Nordholm 2004]] | This paper presents a hybrid speech enhancement scheme that cascades subband blind source separation (BSS) with an adaptive noise canceller (ANC): BSS exploits spatial diversity to separate the target speech from interference, and the ANC — fed with the BSS's own interference-dominant outputs as reference signals — performs further temporal decorrelation on the speech-dominant output. | 2026-10-03 |
 | [[sources/li-2020-geometrically-constrained-iva\|Li & Koishida 2020]] | This paper proposes geometrically constrained independent vector analysis (GCIVA), which augments the IVA blind-separation objective with linear constraints on the far-field responses of the demixing filters, combining BSS separation performance with beamforming-style directional control. | 2026-10-04 |
 | [[sources/li-2020-online-gciva\|Li, Koishida & Makino 2020]] | Extends offline GCAV-IVA to a real-time online algorithm (oGCAV-IVA) via an autoregressive approximation of the auxiliary variables; a dual-mic directional speech enhancement system runs < 16 ms/frame and beats online AuxIVA for fixed and moving interference. | 2026-10-04 |
+| [[sources/goto-2022-iss-gciva\|Goto, Ueda, Li, Yamada & Makino 2022]] | This paper derives online GC-AuxIVA-ISS, an alternative online algorithm for geometrically constrained IVA that replaces the vectorwise coordinate descent (VCD) update of online GC-AuxIVA-VCD with iterative source steering (ISS), eliminating the per-source, per-frequency matrix inversions and yielding an inverse-free, numerically stable rank-1 update. | 2026-10-04 |
 
 ---
 
@@ -1529,10 +1533,10 @@
 
 ## Statistics
 
-- **Total pages**: 1478
-- **Entities**: 628
+- **Total pages**: 1482
+- **Entities**: 631
 - **Concepts**: 573
-- **Sources**: 246
+- **Sources**: 247
 - **Synthesis**: 23
 - **Queries**: 8
 - **Last updated**: 2026-10-04

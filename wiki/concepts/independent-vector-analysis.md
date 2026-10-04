@@ -11,6 +11,7 @@ sources:
   - raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md
   - raw/papers/kang-2019-low-complexity-permutation-alignment/full-text.md
   - raw/papers/ansari-2023-ai-bss-survey/full-text.md
+  - raw/papers/goto-2022-iss-gciva/full-text.md
 tags:
   - blind-source-separation
   - audio-source-separation
@@ -60,7 +61,7 @@ Six main families of update rules have been developed for IVA:
 
 AuxIVA (Ono 2011) is the most widely adopted baseline due to its guaranteed monotonic convergence without tuning parameters.
 
-Beyond the six unconstrained families, IVA can be steered directionally by augmenting the objective with geometric constraints: [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA (GCIVA)]] adds LCMV-style linear penalties on the far-field responses of the demixing filters. [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020]] show that the resulting constrained stationarity equation is no longer solvable as a HEAD problem, but a closed-form, monotonic AuxIVA-style update (GCAV-IVA) exists via the vectorwise-coordinate-descent cofactor expansion — reducing exactly to AuxIVA at zero constraint weight and retaining its no-step-size-tuning property, while forcing designated output channels toward a target direction or a spatial null. The same authors with Makino extend GCAV-IVA to a real-time **online** algorithm (oGCAV-IVA) via an [[concepts/online-iva|autoregressive approximation of the auxiliary variables]] ([[sources/li-2020-online-gciva|Li, Koishida & Makino 2020]]), updating per frame at < 16 ms per 16 ms frame and outperforming online AuxIVA in both stationary and moving-interference conditions.
+Beyond the six unconstrained families, IVA can be steered directionally by augmenting the objective with geometric constraints: [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA (GCIVA)]] adds LCMV-style linear penalties on the far-field responses of the demixing filters. [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020]] show that the resulting constrained stationarity equation is no longer solvable as a HEAD problem, but a closed-form, monotonic AuxIVA-style update (GCAV-IVA) exists via the vectorwise-coordinate-descent cofactor expansion — reducing exactly to AuxIVA at zero constraint weight and retaining its no-step-size-tuning property, while forcing designated output channels toward a target direction or a spatial null. The same authors with Makino extend GCAV-IVA to a real-time **online** algorithm (oGCAV-IVA) via an [[concepts/online-iva|autoregressive approximation of the auxiliary variables]] ([[sources/li-2020-online-gciva|Li, Koishida & Makino 2020]]), updating per frame at < 16 ms per 16 ms frame and outperforming online AuxIVA in both stationary and moving-interference conditions. The online update can be made **inverse-free** by replacing VCD with [[concepts/iterative-source-steering|ISS]] rank-1 updates, with the geometric constraints entering the closed-form ISS coefficients directly (oGC-AuxIVA-ISS, [[sources/goto-2022-iss-gciva|Goto et al. 2022]] — 25–75% runtime reduction at equal enhancement quality).
 
 ## Relationship to ILRMA and FastMNMF
 
@@ -89,6 +90,7 @@ IVA combined with Nonnegative Matrix Factorization gives **[[concepts/independen
 
 - [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020: Geometrically Constrained IVA for Directional Speech Enhancement]] — GCAV-IVA: AuxIVA-style closed-form updates under linear geometric constraints
 - [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020: Online Directional Speech Enhancement Using Geometrically Constrained IVA]] — oGCAV-IVA: real-time online GCAV-IVA via autoregressive auxiliary variables
+- [[sources/goto-2022-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022: Accelerating Online GC-IVA with Iterative Source Steering]] — oGC-AuxIVA-ISS: inverse-free online GC-IVA via ISS rank-1 updates
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
 - [[sources/nishikori-2026-fast-multichannel-nmf-block-diagonal-scm-bss|Nishikori et al. 2026: Distributed FastMNMF for BSS]]
 - [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]

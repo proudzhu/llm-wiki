@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-06-04
-updated: 2026-09-12
+updated: 2026-10-04
 sources:
   - raw/papers/ishikawa-2025-real-time-speech-extraction/full-text.md
+  - raw/papers/goto-2022-iss-gciva/full-text.md
 tags:
   - optimization-algorithms
   - blind-source-separation
@@ -74,7 +75,7 @@ $$\mathbf{y}(f, t) \leftarrow \mathbf{y}(f, t) - \mathbf{v}_j(f)y_j(f, t)$$
 ISS has been successfully applied to:
 - Standard IVA for speech separation
 - [[concepts/switching-independent-vector-analysis|Switching IVA]] (SR-SwIVA-ISS)
-- Geometrically constrained IVA
+- Geometrically constrained IVA: [[sources/goto-2022-iss-gciva|Goto et al. 2022]] fold the geometric (far-field response) constraints directly into the closed-form ISS coefficients — the steering-vector response $g_{jf\theta n} = \boldsymbol{w}_{jfn}^{\mathsf{H}}\boldsymbol{d}_{f\theta}$ appears in the off-diagonal update $v_{ijfn}$ and in the scalars $p_{jfn}$, $q_{jfn}$ of the diagonal update — yielding the inverse-free online GC-AuxIVA-ISS with 25–75% runtime reduction over the VCD-based variant at equal enhancement quality. The time-varying look-direction set $\Theta_n$ lets the constraints track estimated DOAs of moving sources.
 - Online source extraction: the real-time RCSCME+SR-ILRMA framework of [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025]] exceeds conventional Online IVA-IP/ISS in SDR/SIR under diffuse noise, and derives accelerated FastIP/FastVCD updates by the same algebraic-transformation philosophy applied to the IP rule
 
 ## Related Concepts
@@ -83,9 +84,11 @@ ISS has been successfully applied to:
 - [[concepts/blind-source-separation|Blind Source Separation]]
 - [[concepts/switching-independent-vector-analysis|Switching Independent Vector Analysis]]
 - [[concepts/spatial-regularization|Spatial Regularization]]
+- [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA]]
 
 ## Related Sources
 
 - [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
 - [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025: Real-Time Speech Extraction via RCSCME + SR-ILRMA with Fast Demixing]] — real-time framework exceeding Online IVA-IP/ISS; derives accelerated FastIP/FastVCD updates
+- [[sources/goto-2022-iss-gciva|Goto et al. 2022: Accelerating Online GC-IVA with Iterative Source Steering]] — geometric constraints folded into the ISS closed-form coefficients; online GC-AuxIVA-ISS

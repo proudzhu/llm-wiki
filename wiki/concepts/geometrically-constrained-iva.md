@@ -5,6 +5,7 @@ updated: 2026-10-04
 sources:
   - raw/papers/li-2020-geometrically-constrained-iva/full-text.md
   - raw/papers/li-2020-online-gciva/full-text.md
+  - raw/papers/goto-2022-iss-gciva/full-text.md
 tags:
   - blind-source-separation
   - independent-vector-analysis
@@ -60,6 +61,10 @@ On VCC2018 speech with image-method RIRs (RT60 200/470 ms), DEMAND diffuse noise
 
 [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020]] extend GCAV-IVA to a **real-time online algorithm** by replacing the full-sample expectation in the auxiliary weighted covariance $\boldsymbol{V}_j$ with an [[concepts/online-iva|autoregressive recursion]] over short blocks ($L = 1$ frame, forgetting factor $\alpha = 0.96$); since the geometric constraints are linear, they pass through this modification unchanged. In the dual-microphone system the online algorithm runs at < 16 ms per 16 ms frame on a desktop CPU (≈ 5 ms without, ≈ 15 ms with the parallel online-AuxIVA DOA estimator) and outperforms online AuxIVA for both fixed and moving interference — including an underdetermined noisy condition where online AuxIVA nearly fails (SDR 6.86 dB vs. 1.70 dB). For fixed sources, the system with AuxIVA-estimated interference DOA beats the one using the *true* DOA by more than 4 dB, but for moving sources the reverse holds: online DOA estimation degrades (the paper shows failure examples), and an inappropriate constraint then hurts more than no target-channel constraint at all — making the unconstrained variant (a) the safer choice under source motion.
 
+### Inverse-Free Online Updates via ISS (oGC-AuxIVA-ISS)
+
+The VCD-based updates (offline and online) require a matrix inversion $\boldsymbol{D}_{jf}^{-1}$ per frequency, source, and iteration. [[sources/goto-2022-iss-gciva|Goto et al. 2022]] replace VCD with [[concepts/iterative-source-steering|iterative source steering]]: the whole demixing matrix receives a rank-1 update $\boldsymbol{W}_{fn} \leftarrow \boldsymbol{W}_{fn} - \boldsymbol{v}_{jfn}\boldsymbol{w}_{jfn}^{\mathsf{H}}$ per source, and the geometric constraints enter the closed-form ISS coefficients directly — through the response $g_{jf\theta n} = \boldsymbol{w}_{jfn}^{\mathsf{H}}\boldsymbol{d}_{f\theta}$ in the off-diagonal update $v_{ijfn}$, and through the scalars $p_{jfn}$, $q_{jfn}$ in the diagonal update $v_{jjfn}$ — so **no matrix inversion appears anywhere**. The look directions $\Theta_n$ may be time-varying, letting the constraints track estimated DOAs of moving sources. On a fixed-target/moving-interference task (ATR speech, 2 mics, RT60 200 ms), online GC-AuxIVA-ISS matched online GC-AuxIVA-VCD in SDR/SIR (with 100% output-order accuracy) while cutting execution time by 25–75%, depending on how often DOAs are estimated. The interference DOAs themselves are estimated by MUSIC applied to projection-back source images, with a 5-frame moving average ("MUSIC smooth") beating per-frame and blockwise estimates by > 0.7 dB SDR.
+
 ## Relation to Other Spatially Guided BSS
 
 GCIVA belongs to the broader family of methods that inject prior spatial information into BSS, alongside [[concepts/spatial-regularization|spatial regularization]] (penalizing demixing-vector distance from DOA-derived steering vectors, used in SR-ILRMA/SR-SwIVA) and spatially informed MAP priors on demixing matrices (Brendel et al. 2019). Its distinguishing feature is that the constraints are **hard linear response constraints** in the LCMV sense rather than quadratic proximity penalties, and that they enable deliberate spatial shaping (nulls, distortionless responses) of specific output channels — including blocking-matrix behavior for interference reference generation.
@@ -80,3 +85,4 @@ GCIVA belongs to the broader family of methods that inject prior spatial informa
 
 - [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020: Geometrically Constrained IVA for Directional Speech Enhancement]]
 - [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020: Online Directional Speech Enhancement Using Geometrically Constrained IVA]] — real-time online extension (oGCAV-IVA) and the three interference-DOA system variants
+- [[sources/goto-2022-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022: Accelerating Online GC-IVA with Iterative Source Steering]] — inverse-free online GC-AuxIVA-ISS (ISS rank-1 updates with constraints in the closed-form coefficients) and MUSIC-based interference DOA estimation

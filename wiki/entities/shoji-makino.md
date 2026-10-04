@@ -29,6 +29,7 @@ tags:
 - SR-SwIVA-ISS: Fast optimization for spatially regularized switching IVA (Dong et al. 2026)
 - Co-authored "Audio Signal Processing in the 21st Century" (IEEE Signal Processing Magazine 2023) — TC-AASP 25-year retrospective; the determined-separation subsection traces IVA/ILRMA/MVAE lineage — [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023]]
 - Co-author of "Online Directional Speech Enhancement Using Geometrically Constrained IVA" (Interspeech 2020) — real-time online extension of GCAV-IVA via autoregressive auxiliary variables — [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020]]
+- Co-author of "Accelerating Online GC-IVA with Iterative Source Steering" (APSIPA ASC 2022) — online GC-AuxIVA-ISS, an inverse-free online geometrically constrained IVA with MUSIC-based interference DOA estimation — [[sources/goto-2022-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022]]
 
 ## Affiliations
 
@@ -46,3 +47,4 @@ tags:
 - [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023: Audio Signal Processing in the 21st Century]]
 - [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020: Online Directional Speech Enhancement Using Geometrically Constrained IVA]]
+- [[sources/goto-2022-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022: Accelerating Online GC-IVA with Iterative Source Steering]]

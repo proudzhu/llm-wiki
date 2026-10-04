@@ -632,4 +632,7 @@
 | [[entities/sven-nordholm\|Sven Nordholm]] | Researcher (UWA/WATRI); microphone array signal processing and subband beamforming; co-author of the hybrid BSS+ANC system and soft-constrained subband beamforming. | 2026-10-03 |
 | [[entities/li-li\|Li Li]] | Researcher (University of Tsukuba); first author of Geometrically Constrained IVA for directional speech enhancement (ICASSP 2020). | 2026-10-04 |
 | [[entities/kazuhito-koishida\|Kazuhito Koishida]] | Researcher (Microsoft Corporation); co-author of Geometrically Constrained IVA for directional speech enhancement (ICASSP 2020). | 2026-10-04 |
+| [[entities/kana-goto\|Kana Goto]] | University of Tsukuba — online/offline GC-AuxIVA-ISS, geometrically constrained IVA with iterative source steering | 2026-10-04 |
+| [[entities/tetsuya-ueda\|Tetsuya Ueda]] | Waseda University — GC-AuxIVA-ISS, geometrically constrained IVA with iterative source steering | 2026-10-04 |
+| [[entities/takeshi-yamada\|Takeshi Yamada]] | University of Tsukuba — co-author of online GC-AuxIVA-ISS | 2026-10-04 |
 

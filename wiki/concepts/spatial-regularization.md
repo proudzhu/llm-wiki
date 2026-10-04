@@ -5,6 +5,7 @@ updated: 2026-10-04
 sources:
   - raw/papers/li-2020-geometrically-constrained-iva/full-text.md
   - raw/papers/li-2020-online-gciva/full-text.md
+  - raw/papers/goto-2022-iss-gciva/full-text.md
 tags:
   - blind-source-separation
   - independent-vector-analysis
@@ -52,7 +53,7 @@ Steering vectors $\mathbf{a}_n(f)$ are typically estimated from:
 Spatial regularization has been integrated into various IVA frameworks:
 - Standard IVA with DOA constraints
 - [[concepts/switching-independent-vector-analysis|Switching IVA]] (SR-SwIVA)
-- [[concepts/geometrically-constrained-iva|Geometrically constrained IVA]] — a constraint-based variant that replaces proximity penalties with hard LCMV-style linear response constraints ($|\boldsymbol{w}_j^{\mathsf{H}}\boldsymbol{d}_j - c_j|^2$ with $c_j \approx 0$ for nulls), solvable in closed form within the auxiliary-function framework ([[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020]]); its online real-time extension oGCAV-IVA updates per frame via an autoregressive auxiliary-variable recursion ([[sources/li-2020-online-gciva|Li, Koishida & Makino 2020]])
+- [[concepts/geometrically-constrained-iva|Geometrically constrained IVA]] — a constraint-based variant that replaces proximity penalties with hard LCMV-style linear response constraints ($|\boldsymbol{w}_j^{\mathsf{H}}\boldsymbol{d}_j - c_j|^2$ with $c_j \approx 0$ for nulls), solvable in closed form within the auxiliary-function framework ([[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020]]); its online real-time extension oGCAV-IVA updates per frame via an autoregressive auxiliary-variable recursion ([[sources/li-2020-online-gciva|Li, Koishida & Makino 2020]]), and the inverse-free oGC-AuxIVA-ISS variant folds the same constraints into [[concepts/iterative-source-steering|ISS]] rank-1 updates whose constraint directions are estimated online by MUSIC on projection-back source images ([[sources/goto-2022-iss-gciva|Goto et al. 2022]])
 
 ### Spatially Regularized ILRMA (SR-ILRMA / NSR-ILRMA)
 
@@ -101,6 +102,7 @@ The SRSS-init strategy typically provides the best separation performance by ini
 
 - [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020: Geometrically Constrained IVA for Directional Speech Enhancement]]
 - [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020: Online Directional Speech Enhancement Using Geometrically Constrained IVA]] — online (real-time) GCAV-IVA with the constraint framework intact
+- [[sources/goto-2022-iss-gciva|Goto et al. 2022: Accelerating Online GC-IVA with Iterative Source Steering]] — inverse-free online GC-IVA (ISS) with MUSIC-estimated constraint directions
 - [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
 - [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025: Real-Time RCSCME-based Speech Extraction]]
