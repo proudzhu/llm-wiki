@@ -5756,3 +5756,15 @@ Created [[queries/ndf-sndf-ndbf-comparison|NDF/SNDF/NDBF 对比查询页]] — �
 - **Summary**: Proposes swIVA and swCIVA — switching-mechanism extensions of IVA/CIVA enabling accurate blind denoising, dereverberation, and source separation with only 2–3 microphones; introduces the factorized switching model, coarse-fine source model, separation matrix-wise switching, and two initialization schemes (blind single-state, spatially guided) solving the inter-state permutation problem.
 - **Pages created**: [[sources/nakatani-2022-switching-iva|source page]], [[concepts/switching-civa|switching-civa]], [[concepts/coarse-fine-source-model|coarse-fine-source-model]], [[entities/rintaro-ikeshita|rintaro-ikeshita]], [[entities/naoyuki-kamo|naoyuki-kamo]], [[entities/shoko-araki|shoko-araki]]
 - **Pages updated**: [[concepts/switching-independent-vector-analysis|switching-independent-vector-analysis]] (added original Nakatani 2022 formulation alongside SR-SwIVA content), [[concepts/independent-vector-analysis|independent-vector-analysis]] (few-microphone limitation + switching axis), [[concepts/weighted-prediction-error|weighted-prediction-error]] (swWPE bullet), [[concepts/mclp|mclp]] (switching MCLP filters section), [[entities/tomohiro-nakatani|tomohiro-nakatani]], [[entities/keisuke-kinoshita|keisuke-kinoshita]], [[entities/hiroshi-sawada|hiroshi-sawada]]
+
+---
+
+## [2026-10-04] ingest | Spatially-Regularized Switching IVA with ISS (Dong et al. 2026) (re)
+
+- **Source**: `raw/papers/dong-2026-spatially-regularized-switching-iva/full-text.md` (Zotero: GMZWLILS)
+- **Authors**: Haonan Dong, Wei Liu, Xuemai Xie, Shoji Makino
+- **Published**: Journal of Signal Processing, vol. 30, no. 4, 2026 (2026-07-01); DOI: 10.2299/jsp.30.123
+- **Summary**: Re-ingest of the published journal version. Content verified identical to the 2026-06-04 preprint ingest (same abstract, Table 1, Fig. 2, references), so the existing MinerU extraction was kept; this pass updated publication metadata, added figure embeds, and expanded related-source links.
+- **Pages updated**:
+  - `wiki/sources/dong-2026-spatially-regularized-switching-iva.md` — Type → Journal Article; added Venue/DOI; embedded Fig. 1 and Fig. 2; added related sources (Nakatani 2022, Goto 2022, Li 2020)
+  - `wiki/index.md` and `wiki/sources/index.md` — updated source row (venue note, date 2026-10-04)

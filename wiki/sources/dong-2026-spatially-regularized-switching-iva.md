@@ -1,7 +1,7 @@
 ---
 type: source
 created: 2026-06-04
-updated: 2026-06-04
+updated: 2026-10-04
 sources:
   - raw/papers/dong-2026-spatially-regularized-switching-iva/full-text.md
   - zotero://select/items/0_GMZWLILS
@@ -18,7 +18,9 @@ tags:
 
 **Authors**: [[entities/haonan-dong|Haonan Dong]], [[entities/wei-liu|Wei Liu]], [[entities/xuemai-xie|Xuemai Xie]] & [[entities/shoji-makino|Shoji Makino]]
 **Institutions**: Waseda University, Japan; Wuhan University, China
-**Type**: Conference Paper
+**Type**: Journal Article
+**Venue**: Journal of Signal Processing, vol. 30, no. 4, 2026 (published 2026-07-01)
+**DOI**: [10.2299/jsp.30.123](https://doi.org/10.2299/jsp.30.123)
 **Year**: 2026
 **Zotero**: [GMZWLILS](zotero://select/items/0_GMZWLILS)
 
@@ -93,6 +95,10 @@ $$\mathbf{y}(f, t) \leftarrow \mathbf{y}(f, t) - \mathbf{v}_j(f)y_j(f, t)$$
 | Sampling rate | 16 kHz |
 | Metrics | SDRi, SIRi, computational time per iteration |
 
+![[raw/papers/dong-2026-spatially-regularized-switching-iva/figures/65ada77175146477e2bcebc9ae34ccd2814d8c1aa6f7591b5683e7eabfa73772.jpg|Figure 1: Spatial configuration of the microphone array and sound sources]]
+
+*Figure 1: Spatial configuration of the microphone array (3-element ULA, $M_1$–$M_3$) and the three speech sources; DOAs were drawn from $\{10°, 30°, 50°, \ldots, 170°\}$ with a minimum angular separation of $40°$.*
+
 ### Initialization Strategies
 
 1. **Simple-init**: Identity matrix initialization
@@ -122,6 +128,10 @@ Average computational time per iteration for updating demixing matrix $\mathbf{W
 | SPG-init | 14.0 ms | 2.0 ms | 7.0× |
 | SRSS-init | 11.0 ms | 2.0 ms | 5.5× |
 
+![[raw/papers/dong-2026-spatially-regularized-switching-iva/figures/f254c17424dd23eee7738b90342a0819d8b1c7ea5317003a744b70c7dabdbd75.jpg|Figure 2: Average run time under different initialization setups]]
+
+*Figure 2: Average run time per iteration under different initialization setups — SR-SwIVA-ISS consistently requires less computation time than SR-SwIVA for all initialization conditions.*
+
 ### Key Findings
 
 1. SR-SwIVA-ISS achieves comparable or slightly better separation performance than SR-SwIVA across all initialization strategies
@@ -146,6 +156,9 @@ Average computational time per iteration for updating demixing matrix $\mathbf{W
 
 ## Related Sources
 
+- [[sources/nakatani-2022-switching-iva|Nakatani et al. 2022: Switching IVA and Its Extension to Blind and Spatially Guided Convolutional Beamforming]] — the swIVA framework and initialization strategies this paper builds on (ref. [6])
+- [[sources/goto-2022-offline-iss-gciva|Goto et al. 2022: GC-IVA with Auxiliary Function Approach and Iterative Source Steering]] — prior work folding geometric constraints into closed-form ISS coefficients (ref. [11])
+- [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020: Geometrically Constrained IVA for Directional Speech Enhancement]] — spatial-regularization origins in IVA (ref. [10])
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
 
 ## Related Synthesis
