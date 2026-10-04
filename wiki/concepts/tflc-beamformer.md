@@ -4,6 +4,7 @@ created: 2026-10-04
 updated: 2026-10-04
 sources:
   - raw/papers/yamaoka-2021-bin-wise-beamformer-combination/full-text.md
+  - raw/papers/zhao-2025-robust-fusion-differential-beamformers/full-text.md
 tags:
   - beamforming
   - speech-enhancement
@@ -55,6 +56,7 @@ with each filter distortionless toward the target RTF: $\boldsymbol{w}_k^{\maths
 - Measured with [[concepts/signal-to-reconstruction-distortion-ratio|SRDR]], RTFLC-N gains +5.9 dB SDR over MVDR at only −2.2 dB SRDR, and +17.4 dB SRDR over TV-MWF at −0.6 dB SDR — high noise reduction and near-distortionless output simultaneously.
 - Requires a precise target [[concepts/relative-transfer-function|RTF]]: performance degrades rapidly when the RTF estimate's SNR falls below ~40 dB.
 - Neural successor: Chen et al. (ICASSP 2026) replace the iterative mask optimization with a neural network for underdetermined target source extraction.
+- **Statistics-free DMA counterpart**: [[sources/zhao-2025-robust-fusion-differential-beamformers|Zhao et al. 2025]]'s [[concepts/af-dma-beamformer|AF-DMA]] applies the same principle — convex combination of distortionless beamformers with minimum-variance selection — to a fixed bank of null-constrained DMAs plus MWNG, replacing the covariance-based mask optimization with per-frame selection of the minimum-instantaneous-energy output (Jensen-relaxed to an LP). Where TFLC optimizes filters and masks jointly from estimated covariances, AF-DMA fixes the filters and needs no statistics at all.
 
 ## Related Concepts
 
@@ -63,8 +65,10 @@ with each filter distortionless toward the target RTF: $\boldsymbol{w}_k^{\maths
 - [[concepts/w-disjoint-orthogonality|W-Disjoint Orthogonality]] — sparsity assumption, generalized to P-DO by this framework
 - [[concepts/signal-to-reconstruction-distortion-ratio|Signal-to-Reconstruction Distortion Ratio (SRDR)]] — metric defined to verify the distortionless property
 - [[concepts/multi-channel-wiener-filter|Multi-Channel Wiener Filter]] — the distortion/noise-reduction tradeoff alternative
+- [[concepts/af-dma-beamformer|AF-DMA]] — statistics-free fixed-DMA counterpart of the TFS selection principle
 - [[concepts/beamforming|Beamforming]]
 
 ## Related Sources
 
 - [[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021: TF-Bin-Wise Linear Combination of Beamformers]] — origin paper (TASLP 2021)
+- [[sources/zhao-2025-robust-fusion-differential-beamformers|Zhao, Luo, Jin, Jin & Huang 2025: Robust Fusion of Differential Beamformers]] — AF-DMA: the same minimum-variance selection applied to a fixed DMA bank without statistics

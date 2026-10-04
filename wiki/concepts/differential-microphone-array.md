@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-10-03
+updated: 2026-10-04
 sources:
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
+  - raw/papers/zhao-2025-robust-fusion-differential-beamformers/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
@@ -67,6 +68,10 @@ See [[concepts/steerable-ldma|Steerable LDMA]] for the full conditions and desig
 
 The [[concepts/neural-differential-beamformer|neural differential beamformer (NDBF)]] lifts the dual-microphone DMA to **steerable high-order** patterns: a DNN estimates complex beamforming weights from two 3 cm-spaced omnidirectional microphones, realizing frequency-invariant 1st- and 3rd-order cardioid patterns that stay shape-invariant across look directions 0°–180° — where classical dual-mic DMAs are first-order-only, non-steerable, white-noise-amplifying at low frequencies, and aliasing above 5.7 kHz. It outperforms classical DMA (−0.99 dB SDR first-order), a parametric spatial filter (13.77 dB), and a mask-based NDF retrained on the same array (25.85 dB), reaching 25.93 dB (first-order) and 23.24 dB (third-order).
 
+## Adaptive Fusion in Dynamic Interference (Zhao et al. 2025)
+
+A single fixed DMA cannot handle multiple or moving interferers, and covariance-based adaptive designs risk distortion when their statistics are misestimated. [[sources/zhao-2025-robust-fusion-differential-beamformers|Zhao et al. 2025]] bridge this gap at the **output level**: pre-design a bank of $K$ null-constrained DMAs (nulls at candidate interference directions) plus a maximum-WNG beamformer, then fuse the bank outputs online by minimizing the instantaneous output variance over the simplex. Jensen's inequality reduces the fusion to selecting the minimum-energy output per TF bin — no statistics, no gradient adaptation, distortionless by construction. The resulting [[concepts/af-dma-beamformer|AF-DMA]] outperforms NLMS-based adaptive DMAs and adaptive convex combination (ACC-DMA) with a moving + fixed interferer pair (7.66 dB SIR vs 4.49 dB for ACC-DMA at $T_{60} \approx 300$ ms).
+
 ## Limitations
 
 - Restricted to low-order patterns with compact arrays
@@ -98,6 +103,7 @@ For very small baselines where delay-based features become unreliable (Tashev et
 - [[concepts/complex-root-differential-array|Complex-Root Differential Array]] — three-mic second-order structure realizing complex-root patterns
 - [[concepts/steerable-ldma|Steerable LDMA]] — steering conditions and null-constrained design for LDMAs off endfire
 - [[concepts/neural-differential-beamformer|Neural Differential Beamformer]] — learned beamformer that realizes steerable high-order DMA patterns with a dual-microphone array
+- [[concepts/af-dma-beamformer|AF-DMA]] — online output-level fusion of a null-constrained DMA bank for dynamic interference
 
 ## Related Sources
 
@@ -109,4 +115,5 @@ For very small baselines where delay-based features become unreliable (Tashev et
 - [[sources/tashev-2008-sound-capture-spatial-filter|Tashev et al. 2008: Sound Capture System and Spatial Filter for Small Devices]] — back-to-back unidirectional variant (9.6 mm baseline)
 - [[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012: On the Design and Implementation of Higher Order Differential Microphones]] — (α, λ) design framework unifying standard patterns; complex-root array structure; WNG/bandwidth analysis
 - [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021: Steering Study of Linear Differential Microphone Arrays]] — first-order non-steerability proof, Nth-order steering conditions, null-constrained SLDMA design
+- [[sources/zhao-2025-robust-fusion-differential-beamformers|Zhao, Luo, Jin, Jin & Huang 2025: Robust Fusion of Differential Beamformers]] — AF-DMA: online fusion of a null-constrained DMA bank for moving/multiple interferers
 - [[sources/huang-2026-dual-mic-steerable-neural-beamformer|Huang & Habets 2026: Dual-Microphone Steerable High-Order Neural Differential Beamformer]] — neural dual-mic DMA: steerable high-order frequency-invariant patterns without white-noise amplification or aliasing

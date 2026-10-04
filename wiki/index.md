@@ -644,6 +644,7 @@
 | [[entities/rintaro-ikeshita\|Rintaro Ikeshita]] | NTT researcher — blind source separation, IVE, swWPE; co-author of switching IVA/CIVA | 2026-10-04 |
 | [[entities/naoyuki-kamo\|Naoyuki Kamo]] | NTT researcher — BSS, guided source separation, microphone arrays; co-author of switching IVA/CIVA | 2026-10-04 |
 | [[entities/shoko-araki\|Shoko Araki]] | NTT senior researcher — BSS, microphone arrays, underdetermined separation via spatial clustering; co-author of switching IVA/CIVA | 2026-10-04 |
+| [[entities/danqi-jin\|Danqi Jin]] | Researcher on microphone array beamforming and speech enhancement; co-author of AF-DMA (Zhao et al. 2025). | 2026-10-04 |
 
 ---
 
@@ -1234,6 +1235,7 @@
 | [[concepts/tflc-beamformer\|TFLC Beamformer]] | Time-frequency-bin-wise linear combination of distortionless beamformers (TFS/TFLC/RTFLC variants) for underdetermined signal enhancement — convex combinations of K MVDR-type filters remain distortionless by Proposition 1, with K = C(N-1, M-1) beamformers each nulling a different interferer subset under an M-DO sparsity prior. | 2026-10-04 |
 | [[concepts/w-disjoint-orthogonality\|W-Disjoint Orthogonality]] | Sparsity assumption that sources are disjoint in the time-frequency domain (at most one source active per TF bin), generalizable to P-DO (at most P-1 of P sources active) — the foundation of DUET-style BSS and of Yamaoka 2021's M-DO justification for TF-bin-wise beamformer combination. | 2026-10-04 |
 | [[concepts/signal-to-reconstruction-distortion-ratio\|Signal-to-Reconstruction Distortion Ratio]] | Metric introduced by Yamaoka et al. 2021 isolating algorithmic reconstruction distortion (filter-induced target distortion) from suppression performance, complementing SDR when comparing distortionless-constrained enhancement methods. | 2026-10-04 |
+| [[concepts/af-dma-beamformer\|AF-DMA (Adaptive Fusion of Differential Beamformers)]] | Statistics-free online fusion of a fixed bank of null-constrained DMAs plus MWNG via per-TF-bin minimum instantaneous output energy (Jensen-relaxed LP). | 2026-10-04 |
 
 ---
 
@@ -1496,6 +1498,7 @@
 | [[sources/ono-2011-stable-fast-update-rules-iva\|Ono 2011]] | This is the founding paper of AuxIVA: it derives stable and fast update rules for IVA based on the auxiliary function technique (a majorization-minimization scheme extending EM), replacing the step-size-dependent natural gradient updates that dominated IVA until then. | 2026-10-04 |
 | [[sources/scheibler-2020-fast-stable-bss-rank-1-updates\|Scheibler & Ono 2020]] | This paper introduces AuxIVA-ISS, an alternative to the ubiquitous AuxIVA-IP (Ono 2011) that minimizes exactly the same cost function but replaces row-by-row demixing-matrix updates with a sequence of rank-1 updates of the whole matrix. | 2026-10-04 |
 | [[sources/yamaoka-2021-bin-wise-beamformer-combination\|Yamaoka, Ono & Makino 2021]] | This paper proposes the time-frequency-bin-wise linear combination (TFLC) beamformer, which achieves distortionless signal enhancement in underdetermined situations (M < N) by combining K MVDR-type beamformers per TF bin — each suppressing a different set of M-1 interferers — with weights c_k(f,t) optimized jointly with the filters under a unified minimum variance criterion. | 2026-10-04 |
+| [[sources/zhao-2025-robust-fusion-differential-beamformers\|Zhao, Luo, Jin, Jin & Huang 2025]] | This letter proposes AF-DMA (adaptive fusion of differential microphone arrays): a bank of K null-constrained differential beamformers (each placing a null at a different candidate interference direction) plus a maximum-white-noise-gain (MWNG) beamformer are pre-designed, and their outputs are fused online per time-frequency bin by minimizing the instantaneous output variance over the simplex. | 2026-10-04 |
 
 ---
 
@@ -1550,10 +1553,10 @@
 
 ## Statistics
 
-- **Total pages**: 1499
-- **Entities**: 634
-- **Concepts**: 581
-- **Sources**: 253
+- **Total pages**: 1502
+- **Entities**: 635
+- **Concepts**: 582
+- **Sources**: 254
 - **Synthesis**: 23
 - **Queries**: 8
 - **Last updated**: 2026-10-04

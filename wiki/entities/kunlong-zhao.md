@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-09-14
-updated: 2026-09-14
+updated: 2026-10-04
 tags:
   - researcher
   - microphone-arrays
@@ -19,6 +19,7 @@ tags:
 ## Key Contributions
 
 - Co-authored "Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products" (Journal of Signal Processing 2025) — [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025]]
+- First author of "Robust Fusion of Differential Beamformers" (IEEE Signal Processing Letters (2025)) — statistics-free online fusion of a null-constrained DMA bank via instantaneous minimum-variance selection — [[sources/zhao-2025-robust-fusion-differential-beamformers|Zhao, Luo, Jin, Jin & Huang 2025]]
 
 ## Affiliations
 
@@ -27,3 +28,4 @@ tags:
 ## Related Sources
 
 - [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]]
+- [[sources/zhao-2025-robust-fusion-differential-beamformers|Zhao, Luo, Jin, Jin & Huang 2025: Robust Fusion of Differential Beamformers]]

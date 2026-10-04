@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-30
-updated: 2026-10-03
+updated: 2026-10-04
 tags:
   - researcher
   - microphone-arrays
@@ -31,6 +31,7 @@ tags:
 - Co-author of "Kronecker Product Adaptive Beamforming for Microphone Arrays" (APSIPA Annual Summit and Conference 2021 (APSIPA-ASC), Tokyo, Japan, Dec. 14–17, 2021, pp. 50–54, 2021) — co-introduced the sum-of-Kronecker-products beamformer representation for arbitrary array geometries and the KMVDR beamformer — [[sources/wang-2021-kronecker-adaptive-beamforming|Wang, Huang, Cohen, Benesty & Chen 2021]]
 - Co-author of "Microphone Array Beamforming Methods for Speech Communication and Interaction" (信号处理 (Journal of Signal Processing), Vol. 36, No. 6, pp. 804–815, 2020) — Chinese-language overview of microphone array beamforming (six method families unified by the DF-WNG-frequency-invariance framework) — [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020]]
 - Co-author of "Steering Study of Linear Differential Microphone Arrays" (IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 29, pp. 158–170, 2021) — proved first-order LDMAs non-steerable, derived Nth-order steering conditions, and proposed null-constrained steerable LDMA design — [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021]]
+- Co-author of "Robust Fusion of Differential Beamformers" (IEEE Signal Processing Letters (2025)) — statistics-free online fusion of a null-constrained DMA bank via instantaneous minimum-variance selection — [[sources/zhao-2025-robust-fusion-differential-beamformers|Zhao, Luo, Jin, Jin & Huang 2025]]
 
 
 ## Affiliations
@@ -51,3 +52,4 @@ tags:
 - [[sources/wang-2021-kronecker-adaptive-beamforming|Wang, Huang, Cohen, Benesty & Chen 2021: Kronecker Product Adaptive Beamforming for Microphone Arrays]]
 - [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]]
 - [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021: Steering Study of Linear Differential Microphone Arrays]]
+- [[sources/zhao-2025-robust-fusion-differential-beamformers|Zhao, Luo, Jin, Jin & Huang 2025: Robust Fusion of Differential Beamformers]]

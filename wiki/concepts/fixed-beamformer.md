@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-10-03
+updated: 2026-10-04
 sources:
   - raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md
+  - raw/papers/zhao-2025-robust-fusion-differential-beamformers/full-text.md
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
   - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
@@ -50,6 +51,10 @@ For large arrays, the parameter count of a fixed beamformer scales with $M$ per 
 
 The FBF is not merely a target-enhancing pre-filter in a [[concepts/gsc-beamformer|GSC]] — it is a functional part of the robustness mechanism. [[sources/hoshuyama-1999-robust-adaptive-beamformer-ccaf|Hoshuyama, Sugiyama & Hirano 1999]] feed the FBF output as the **common reference signal** to every branch of their [[concepts/adaptive-blocking-matrix|adaptive blocking matrix]], and show that the FBF's coherent target enhancement is what makes the target-minimizing filter coefficients differ strongly across target directions. That spread is what a [[concepts/coefficient-constrained-adaptive-filter|coefficient-constrained adaptive filter]] exploits: the constraint box can be drawn to contain the target-minimizing solutions over a chosen sector while excluding the interference-minimizing ones, so the blocking matrix tracks the target across the sector and leaves interference intact for the canceller. With a single microphone — no target enhancement — the two coefficient sets become nearly indistinguishable and the mechanism has nothing to work with. Their FBF is the simplest possible one, an unweighted delay-and-sum $d(k) = \frac{1}{M}\sum_m x_m(k)$, so the effect is attributable to coherent summation itself rather than to any beamformer design sophistication.
 
+## Making a Fixed Bank Adaptive via Output Fusion
+
+The fixed/adaptive dichotomy can be bridged without adapting any filter coefficients: [[sources/zhao-2025-robust-fusion-differential-beamformers|Zhao et al. 2025]] pre-design a bank of fixed differential beamformers (nulls at candidate interference directions) plus an MWNG beamformer, then **fuse the outputs online** by picking the minimum-instantaneous-energy member per TF bin ([[concepts/af-dma-beamformer|AF-DMA]]). All bank members stay fixed and distortionless; adaptivity enters only through the per-frame selection weights, so the method inherits fixed-beamformer robustness (no covariance misestimation, no gradient lag) while tracking moving interferers.
+
 ## Related Concepts
 
 - [[concepts/gsc-beamformer|Generalized Sidelobe Canceller (GSC)]]
@@ -63,10 +68,12 @@ The FBF is not merely a target-enhancing pre-filter in a [[concepts/gsc-beamform
 - [[concepts/kronecker-product-beamforming|Kronecker Product Beamforming]]
 - [[concepts/orthogonal-series-expansion-beamforming|Orthogonal Series Expansion Beamforming]]
 - [[concepts/frequency-invariant-beamforming|Frequency-Invariant Beamforming]]
+- [[concepts/af-dma-beamformer|AF-DMA]] — output-level fusion that makes a fixed DMA bank adaptive
 
 ## Related Sources
 
 - [[sources/hoshuyama-1999-robust-adaptive-beamformer-ccaf|Hoshuyama, Sugiyama & Hirano 1999: A Robust Adaptive Beamformer with a Blocking Matrix Using Constrained Adaptive Filters]] — the FBF output as the common reference that makes the coefficient-constraint region effective
+- [[sources/zhao-2025-robust-fusion-differential-beamformers|Zhao, Luo, Jin, Jin & Huang 2025: Robust Fusion of Differential Beamformers]] — AF-DMA: online output-level fusion of a fixed DMA bank
 - [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — review of the fixed-beamforming families and their DF–WNG–frequency-invariance trade-offs; $M^2$ directivity upper bound
 
 - [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]] — Kronecker-decomposed differential fixed beamformers

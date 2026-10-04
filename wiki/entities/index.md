@@ -638,4 +638,5 @@
 | [[entities/rintaro-ikeshita\|Rintaro Ikeshita]] | NTT researcher — blind source separation, IVE, swWPE; co-author of switching IVA/CIVA | 2026-10-04 |
 | [[entities/naoyuki-kamo\|Naoyuki Kamo]] | NTT researcher — BSS, guided source separation, microphone arrays; co-author of switching IVA/CIVA | 2026-10-04 |
 | [[entities/shoko-araki\|Shoko Araki]] | NTT senior researcher — BSS, microphone arrays, underdetermined separation via spatial clustering; co-author of switching IVA/CIVA | 2026-10-04 |
+| [[entities/danqi-jin\|Danqi Jin]] | Researcher on microphone array beamforming and speech enhancement; co-author of AF-DMA (Zhao et al. 2025). | 2026-10-04 |
 

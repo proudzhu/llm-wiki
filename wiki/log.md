@@ -5813,3 +5813,15 @@ Created [[queries/ndf-sndf-ndbf-comparison|NDF/SNDF/NDBF 对比查询页]] — �
 ## [2026-10-04] ingest | TF-Bin-Wise Linear Combination of Beamformers for Distortionless Signal Enhancement (Yamaoka, Ono & Makino 2021)
 
 Ingested from Zotero (IEEE/ACM TASLP vol. 29, pp. 3461-3475, Nov. 2021; TAF Telecom System Technology Student Award). Created source page, 3 new concept pages (tflc-beamformer, w-disjoint-orthogonality, signal-to-reconstruction-distortion-ratio), updated entity pages for Yamaoka/Ono/Makino, extended 5 existing concept pages (mvdr-beamformer, relative-transfer-function, multi-channel-wiener-filter, ideal-binary-mask, beamforming), and added the Underdetermined axis row plus Insight 4 trade-off-control extension to synthesis/multi-channel-speech-enhancement.
+
+---
+
+## [2026-10-04] ingest | Robust Fusion of Differential Beamformers for Speech Enhancement in Dynamic Interference Conditions (Zhao et al. 2025)
+
+- **Source**: `raw/papers/zhao-2025-robust-fusion-differential-beamformers/full-text.md` (Zotero: ZKPSATXE)
+- **Authors**: Kunlong Zhao, Xueqin Luo, Jilu Jin, Danqi Jin, Gongping Huang
+- **Published**: IEEE Signal Processing Letters 2025
+- **DOI**: 10.1109/LSP.2025.3612336
+- **Summary**: AF-DMA — statistics-free online fusion of a fixed bank of null-constrained differential beamformers plus MWNG; per-TF-bin minimum instantaneous output energy via Jensen-relaxed LP; 7.66 dB SIR vs 4.49 dB (ACC-DMA) with moving + fixed interferers.
+- **Pages created**: `wiki/sources/zhao-2025-robust-fusion-differential-beamformers.md`, `wiki/concepts/af-dma-beamformer.md`, `wiki/entities/danqi-jin.md`
+- **Pages updated**: `wiki/entities/{kunlong-zhao,xueqin-luo,jilu-jin,gongping-huang}.md` (contribution bullets); `wiki/concepts/differential-microphone-array.md` (new "Adaptive Fusion in Dynamic Interference" section); `wiki/concepts/white-noise-gain.md` (MWNG as fusion anchor); `wiki/concepts/fixed-beamformer.md` (output-fusion section, fixed/adaptive bridge); `wiki/concepts/tflc-beamformer.md` (statistics-free DMA counterpart finding); `wiki/synthesis/multi-channel-speech-enhancement.md` (table row + "statistics-free DMA sibling" insight linking Yamaoka TFS / AF-DMA / Apostolidis output-based selection)

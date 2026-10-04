@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-10-03
+updated: 2026-10-04
 tags:
   - beamforming
   - robustness
   - microphone-arrays
 sources:
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
+  - raw/papers/zhao-2025-robust-fusion-differential-beamformers/full-text.md
   - raw/papers/deng-2026-joint-covariance-wng-mvdr/full-text.md
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
   - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
@@ -76,6 +77,8 @@ which is the quantitative form of the familiar "differential arrays amplify nois
 
 For **steered** DMAs, the same minimum-norm remedy applies: [[sources/jin-2021-steering-study-ldma|Jin et al. 2021]] show that the WNG of their [[concepts/steerable-ldma|steerable LDMAs]] improves monotonically as the microphone count grows (second-order design with $M = 3 \to 15$ at $\delta = 1$ cm), at the cost of extra high-frequency nulls — i.e., the effective DMA order of the minimum-norm filter can exceed the specified order at high frequencies. WNG also varies with the steering angle $\theta_s$, alongside the DF (which peaks at endfire).
 
+The **MWNG (maximum WNG) beamformer** also serves as a robustness anchor inside multi-beamformer fusion: [[sources/zhao-2025-robust-fusion-differential-beamformers|Zhao et al. 2025]] include it as the $(K{+}1)$-th member of their [[concepts/af-dma-beamformer|AF-DMA]] bank alongside $K$ null-constrained DMAs, so the online minimum-energy selection can fall back to the max-robustness output when no null direction matches the actual interference.
+
 ## Related Concepts
 
 - [[concepts/diagonal-loading|Diagonal Loading]]
@@ -100,3 +103,4 @@ For **steered** DMAs, the same minimum-norm remedy applies: [[sources/jin-2021-s
 - [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — practical rule of thumb: sensor self-noise 20–35 dBA implies WNG > −20 dB is generally safe
 - [[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012: On the Design and Implementation of Higher Order Differential Microphones]] — closed-form WNG of second-order DMA structures; WNG as a function of $kd$ defining the operational band $[\gamma c/2\pi d,\ c/4d]$
 - [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021: Steering Study of Linear Differential Microphone Arrays]] — WNG of steerable LDMAs: minimum-norm improvement with microphone count, steering-angle dependence, high-frequency extra-null caveat
+- [[sources/zhao-2025-robust-fusion-differential-beamformers|Zhao, Luo, Jin, Jin & Huang 2025: Robust Fusion of Differential Beamformers]] — MWNG beamformer as the robustness anchor of the AF-DMA fusion bank
