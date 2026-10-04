@@ -6,6 +6,7 @@ sources:
   - raw/papers/ishikawa-2025-real-time-speech-extraction/full-text.md
   - raw/papers/goto-2022-offline-iss-gciva/full-text.md
   - raw/papers/goto-2022-iss-gciva/full-text.md
+  - raw/papers/scheibler-2021-log-quadratically-penalized-iva/full-text.md
 tags:
   - optimization-algorithms
   - blind-source-separation
@@ -29,6 +30,8 @@ ISS addresses these issues by using rank-one updates that:
 - Reduce computational complexity to $O(M^2)$
 - Maintain numerical stability
 - Achieve comparable or better separation performance
+
+ISS's rank-1 machinery also feeds back into faster BCD updates: [[concepts/iterative-projection-with-adjustment|Iterative Projection with Adjustment (IPA)]] ([[sources/scheibler-2021-log-quadratically-penalized-iva|Scheibler 2021]]) combines IP's complete replacement of one demixing filter with an ISS-style rank-1 adjustment of *all other* filters along the current source direction, so no source stays frozen during an update. Each IPA step is solved exactly via the [[concepts/log-quadratically-penalized-quadratic-minimization|LQPQM]] secular equation, and the resulting AuxIVA-IPA converges more than twice as fast as IP, ISS, and IP2 for four and five sources.
 
 ## Mathematical Formulation
 
@@ -86,10 +89,12 @@ ISS has been successfully applied to:
 - [[concepts/switching-independent-vector-analysis|Switching Independent Vector Analysis]]
 - [[concepts/spatial-regularization|Spatial Regularization]]
 - [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA]]
+- [[concepts/iterative-projection-with-adjustment|Iterative Projection with Adjustment]]
 
 ## Related Sources
 
 - [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]
+- [[sources/scheibler-2021-log-quadratically-penalized-iva|Scheibler 2021: Independent Vector Analysis via Log-Quadratically Penalized Quadratic Minimization]] — IPA: blends IP's filter replacement with an ISS-style rank-1 adjustment of all other filters; >2x faster convergence than IP/ISS/IP2 for 4-5 sources
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
 - [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025: Real-Time Speech Extraction via RCSCME + SR-ILRMA with Fast Demixing]] — real-time framework exceeding Online IVA-IP/ISS; derives accelerated FastIP/FastVCD updates
 - [[sources/goto-2022-offline-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022: GC-IVA with Auxiliary Function Approach and Iterative Source Steering]] — offline GC-AuxIVA-ISS: geometric constraints folded into the ISS closed-form coefficients; block-permutation avoidance; runtime of unconstrained AuxIVA-ISS

@@ -5768,3 +5768,16 @@ Created [[queries/ndf-sndf-ndbf-comparison|NDF/SNDF/NDBF 对比查询页]] — �
 - **Pages updated**:
   - `wiki/sources/dong-2026-spatially-regularized-switching-iva.md` — Type → Journal Article; added Venue/DOI; embedded Fig. 1 and Fig. 2; added related sources (Nakatani 2022, Goto 2022, Li 2020)
   - `wiki/index.md` and `wiki/sources/index.md` — updated source row (venue note, date 2026-10-04)
+
+---
+
+## [2026-10-04] ingest | Independent Vector Analysis via Log-Quadratically Penalized Quadratic Minimization (Scheibler 2021)
+
+- **Source**: `raw/papers/scheibler-2021-log-quadratically-penalized-iva/full-text.md` (Zotero: YUQG9IYI, arXiv 2008.10048)
+- **Authors**: Robin Scheibler
+- **Published**: IEEE Transactions on Signal Processing, 2021
+- **DOI**: 10.1109/TSP.2021.3072228
+- **Summary**: Proposes IPA (iterative projection with adjustment) updates for AuxIVA — one demixing filter replaced while all others are jointly adjusted via a multiplicative rank-2 perturbation — with each step solved exactly through the newly introduced LQPQM problem, whose non-convex global minimum is proven to be the largest zero of a secular equation (Newton-Raphson + cubic seed). On reverberant speech mixtures, AuxIVA-IPA converges faster than IP/ISS/IP2 in both iterations and runtime, more than twice as fast for 4-5 sources.
+- **Pages created**: `wiki/sources/scheibler-2021-log-quadratically-penalized-iva.md`, `wiki/concepts/iterative-projection-with-adjustment.md`, `wiki/concepts/log-quadratically-penalized-quadratic-minimization.md`
+- **Pages updated**: `wiki/entities/robin-scheibler.md` (new sole-author TSP 2021 contribution), `wiki/concepts/independent-vector-analysis.md` (BCD-family paragraph: IPA vs IP/IP2/ISS; related links), `wiki/concepts/iterative-source-steering.md` (IPA as IP+ISS blend; related links)
+- **Notes**: arXiv HTML extraction (defuddle); Figs. 1-4 are vector graphics not extractable as images, no figure embeds. Synthesis triage: no tag matches, Step 9 skipped.

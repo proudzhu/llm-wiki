@@ -6,6 +6,7 @@ sources:
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
   - raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md
   - raw/papers/nakatani-2022-switching-iva/full-text.md
+  - raw/papers/scheibler-2021-log-quadratically-penalized-iva/full-text.md
 tags:
   - blind-source-extraction
   - independent-vector-analysis
@@ -60,4 +61,5 @@ IVE methods are typically formulated and evaluated at moderate SNR (−5 to 5 dB
 - [[sources/ruan-2024-speech-extraction-low-snr|Ruan, Liao, Chen & Lu 2024: Speech Extraction Under Extremely Low SNR Conditions]]
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
 - [[sources/scheibler-2020-fast-independent-vector-extraction|Scheibler & Ono 2020: Fast Independent Vector Extraction]]
+- [[sources/scheibler-2021-log-quadratically-penalized-iva|Scheibler 2021: Independent Vector Analysis via Log-Quadratically Penalized Quadratic Minimization]] — contrasts IVE/FIVE's globally solvable special case with the general determined-separation problem, where the new IPA updates reach exact per-step minimization via LQPQM
 - [[sources/nakatani-2022-switching-iva|Nakatani et al. 2022: Switching IVA and Its Extension to Blind and Spatially Guided Convolutional Beamforming]] — positions IVE as the extraction-targeted IVA variant for noisy overdetermined mixtures, and cites the CIVA extensions incorporating IVE ([36]–[38]) that work well when $M \gg N$; the switching framework instead tackles the small-$M-N$ regime

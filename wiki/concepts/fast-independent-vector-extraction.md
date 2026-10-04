@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-10-04
 sources:
   - raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md
+  - raw/papers/scheibler-2021-log-quadratically-penalized-iva/full-text.md
 tags:
   - blind-source-extraction
   - independent-vector-extraction
@@ -66,5 +67,6 @@ Two instantiations of the weight function:
 ## Related Sources
 
 - [[sources/scheibler-2020-fast-independent-vector-extraction|Scheibler & Ono 2020: Fast Independent Vector Extraction]]
+- [[sources/scheibler-2021-log-quadratically-penalized-iva|Scheibler 2021: Independent Vector Analysis via Log-Quadratically Penalized Quadratic Minimization]] — the same author's follow-up that brings per-iteration global subproblem minimization to *full* AuxIVA separation: IPA updates solve each step exactly via the LQPQM secular equation, >2x faster convergence than IP/ISS/IP2 for 4-5 sources
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]] — benchmarks FIVE among IVA/IVE optimization families
 - [[sources/ruan-2024-speech-extraction-low-snr|Ruan, Liao, Chen & Lu 2024: Speech Extraction Under Extremely Low SNR Conditions]]

@@ -14,6 +14,7 @@ sources:
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
   - raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md
   - raw/papers/kang-2019-low-complexity-permutation-alignment/full-text.md
+  - raw/papers/scheibler-2021-log-quadratically-penalized-iva/full-text.md
 tags:
   - signal-processing
   - audio-source-separation
@@ -126,4 +127,5 @@ The division between BSS and model-based multichannel filtering blurs when BSS i
 - [[sources/sawada-2019-bss-ilrma-review|Sawada et al. 2019: BSS/ILRMA Review]] — unified tutorial of the ICA and NMF routes converging at ILRMA
 - [[sources/ansari-2023-ai-bss-survey|Ansari et al. 2023: AI Approaches in BSS Survey]] — three-way taxonomy of AI-based BSS (Classical ML / DL / Evolutionary) complementing the statistical lineage above
 - [[sources/scheibler-2020-fast-independent-vector-extraction|Scheibler & Ono 2020: Fast Independent Vector Extraction]] — fast single-source extraction via iterative SINR maximization
+- [[sources/scheibler-2021-log-quadratically-penalized-iva|Scheibler 2021: Independent Vector Analysis via Log-Quadratically Penalized Quadratic Minimization]] — AuxIVA-IPA: joint update of one demixing filter plus adjustment of all others (solved globally via LQPQM), cutting BSS convergence time more than half for 4-5 sources
 - [[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019: A Low-Complexity Permutation Alignment Method for Frequency-Domain BSS]] — makes the post-hoc alignment route computationally competitive with permutation-free methods

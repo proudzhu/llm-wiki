@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-08-19
-updated: 2026-09-19
+updated: 2026-10-04
 sources:
   - raw/papers/pan-2026-array-self-awareness/full-text.md
   - raw/papers/sawada-2019-bss-ilrma-review/full-text.md
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
   - raw/papers/kang-2019-low-complexity-permutation-alignment/full-text.md
   - raw/papers/ishikawa-2025-real-time-speech-extraction/full-text.md
+  - raw/papers/scheibler-2021-log-quadratically-penalized-iva/full-text.md
 tags:
   - blind-source-separation
   - independent-vector-analysis
@@ -132,3 +133,4 @@ ILRMA sits at the intersection: IVA's spatial model + MNMF's spectrogram model, 
 - [[sources/ruan-2024-speech-extraction-low-snr|Ruan, Liao, Chen & Lu 2024: Speech Extraction Under Extremely Low SNR Conditions]] — uses ILRMA as the strongest separation baseline at −20 dB SNR
 - [[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019: A Low-Complexity Permutation Alignment Method for Frequency-Domain BSS]] — benchmarks ILRMA against ICA + alignment on SIR, PESQ, and runtime
 - [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025: Real-Time Speech Extraction via RCSCME + SR-ILRMA with Fast Demixing]] — blockwise real-time ILRMA with spatial regularization and FastVCD/FastIP updates
+- [[sources/scheibler-2021-log-quadratically-penalized-iva|Scheibler 2021: Independent Vector Analysis via Log-Quadratically Penalized Quadratic Minimization]] — flags IPA updates (joint filter replacement + adjustment via LQPQM) as a candidate to accelerate ILRMA's demixing-matrix stage, since ILRMA reuses the IP/ISS machinery
