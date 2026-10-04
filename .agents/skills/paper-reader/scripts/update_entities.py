@@ -156,6 +156,29 @@ def append_bullet(lines, start, end, bullet):
     return new_lines
 
 
+def format_venue_year(venue, year):
+    """Format the '(Venue, Year)' parenthetical for contribution bullets.
+
+    Zotero venue strings frequently already embed the publication year,
+    either bare ('IEEE Transactions on Signal Processing, 2021') or before
+    a page range ('..., New Paltz, NY, 2011, pp. 189-192'). Appending
+    ', {year}' unconditionally produced '(..., 2021, 2021)' and
+    '(..., NY, 2011, pp. 189-192, 2011)' in the Scheibler 2021 / Ono 2011 /
+    Scheibler 2020 ingests, each requiring a hand-fix Edit (pitfalls.md #59).
+    When the year already appears in the venue, keep the venue verbatim
+    instead of appending it again.
+    """
+    if venue and year:
+        if re.search(rf'\b{re.escape(year)}\b', venue):
+            return f'({venue})'
+        return f'({venue}, {year})'
+    if venue:
+        return f'({venue})'
+    if year:
+        return f'({year})'
+    return ''
+
+
 def update_entity(path, slug, display, title, venue, year, role, note, today):
     """Apply the append-only update pattern to one entity page."""
     if not os.path.isfile(path):
@@ -178,8 +201,7 @@ def update_entity(path, slug, display, title, venue, year, role, note, today):
               file=sys.stderr)
 
     # Key/Notable Contributions bullet
-    venue_year = f'({venue}, {year})' if venue and year else \
-                 (f'({venue})' if venue else (f'({year})' if year else ''))
+    venue_year = format_venue_year(venue, year)
     note_part = f' — {note}' if note else ''
     contrib_bullet = f'- {role} "{title}" {venue_year}{note_part} — [[sources/{slug}|{display}]]'
 

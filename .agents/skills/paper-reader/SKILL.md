@@ -143,6 +143,8 @@ Note the **Zotero key** (e.g., `8ZWV2E4T`) and **PDF attachment key** (e.g., `5H
 
 **Keep search terms short (3–5 distinctive words)** — searching with the full paper title times out (Sun 2024 ingest: the complete title timed out; `"directional voice activity detection"` found it instantly, `pitfalls.md` #45).
 
+**Never parallelize Zotero API calls** — the Zotero local HTTP API (localhost:23119) serves requests serially; three concurrent `zotero_fetch.py search` calls in a dual ingest all timed out with `TimeoutError`, and sequential retries succeeded immediately (`pitfalls.md` #60). Issue every Zotero-touching call (`zotero_fetch.py search`/`metadata`, `prepare_paper.py --pdf-key`) one at a time, even in a multi-paper ingest where searches for different papers look independent.
+
 If the paper has an arXiv ID but is not in Zotero, note the arXiv ID and proceed to Step 3b directly (skip `prepare_paper.py`).
 
 **Multiple attachments**: Zotero items often have both an HTML attachment and a PDF attachment (e.g., IEEE Xplore saves both). Always pick the **PDF attachment** (`application/pdf`) for `prepare_paper.py` — HTML attachments from publisher sites are typically cluttered with navigation/ads and not suitable for extraction. The `zotero_fetch.py metadata` output lists all attachments with their MIME types; choose the one whose type is `application/pdf`.
