@@ -5781,3 +5781,29 @@ Created [[queries/ndf-sndf-ndbf-comparison|NDF/SNDF/NDBF 对比查询页]] — �
 - **Pages created**: `wiki/sources/scheibler-2021-log-quadratically-penalized-iva.md`, `wiki/concepts/iterative-projection-with-adjustment.md`, `wiki/concepts/log-quadratically-penalized-quadratic-minimization.md`
 - **Pages updated**: `wiki/entities/robin-scheibler.md` (new sole-author TSP 2021 contribution), `wiki/concepts/independent-vector-analysis.md` (BCD-family paragraph: IPA vs IP/IP2/ISS; related links), `wiki/concepts/iterative-source-steering.md` (IPA as IP+ISS blend; related links)
 - **Notes**: arXiv HTML extraction (defuddle); Figs. 1-4 are vector graphics not extractable as images, no figure embeds. Synthesis triage: no tag matches, Step 9 skipped.
+
+---
+
+## [2026-10-04] ingest | Stable and Fast Update Rules for Independent Vector Analysis Based on Auxiliary Function Technique (Ono 2011)
+
+- **Source**: `raw/papers/ono-2011-stable-fast-update-rules-iva/full-text.md` (Zotero: 4354E22N)
+- **Authors**: Nobutaka Ono
+- **Published**: IEEE Workshop on Applications of Signal Processing to Audio and Acoustics (WASPAA), 2011
+- **DOI**: 10.1109/ASPAA.2011.6082320
+- **Summary**: The founding paper of AuxIVA — derives stable and fast update rules for IVA based on the auxiliary function technique (a majorization-minimization scheme extending EM), replacing the step-size-dependent natural gradient updates that dominated IVA until then. The joint update across sources reduces to a HEAD problem (Yeredor 2009) with no closed form, motivating the sequential Iterative Projection (IP) rule: each demixing filter is replaced in closed form via (W V_k)^{-1} e_k plus normalization, with guaranteed monotonic convergence and no step sizes. On 2- and 3-source reverberant speech mixtures, AuxIVA converges faster and more robustly than natural-gradient IVA, and ISS-style source-sequence updates bring further speedups.
+- **Pages created**: `wiki/sources/ono-2011-stable-fast-update-rules-iva.md`, `wiki/concepts/iterative-projection.md`
+- **Pages updated**: `wiki/entities/nobutaka-ono.md` (sole-author WASPAA 2011 founding-paper contribution), `wiki/concepts/independent-vector-analysis.md` (AuxIVA/IP links in optimization-family section), `wiki/concepts/iterative-source-steering.md` (IP founding-paper context), `wiki/concepts/natural-gradient.md` (AuxIVA displacing natural-gradient IVA), `wiki/concepts/blind-source-separation.md` (IP link, backlinks)
+- **Notes**: MinerU extraction with figure embeds (2 figure panels). Synthesis triage: no tag matches, Step 9 skipped.
+
+---
+
+## [2026-10-04] ingest | Fast and Stable Blind Source Separation with Rank-1 Updates (Scheibler & Ono 2020)
+
+- **Source**: `raw/papers/scheibler-2020-fast-stable-bss-rank-1-updates/full-text.md` (Zotero: ZLH97EHW)
+- **Authors**: Robin Scheibler, Nobutaka Ono
+- **Published**: IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), Barcelona, Spain, 2020
+- **DOI**: 10.1109/ICASSP40776.2020.9053556
+- **Summary**: Introduces AuxIVA-ISS, an alternative to the ubiquitous AuxIVA-IP (Ono 2011) that minimizes exactly the same cost function but replaces row-by-row demixing-matrix updates with a sequence of rank-1 updates of the whole matrix — equivalently, updates of the source steering vectors via the Sherman-Morrison formula. The update vector has a closed form (Theorem 1), requires no matrix inversions, and cuts per-iteration complexity from O(FM^3 max(M,N)) to O(FM^2N). On 2-10 source pyroomacoustics simulations (100 rooms), separation quality is identical to AuxIVA-IP while runtime scales far better with the number of sources.
+- **Pages created**: `wiki/sources/scheibler-2020-fast-stable-bss-rank-1-updates.md`
+- **Pages updated**: `wiki/entities/robin-scheibler.md` (first-author ICASSP 2020 ISS contribution), `wiki/entities/nobutaka-ono.md` (co-author contribution), `wiki/concepts/independent-vector-analysis.md` (ISS founding-paper link), `wiki/concepts/iterative-source-steering.md` (original-paper backlink, founding context), `wiki/concepts/blind-source-separation.md` (backlinks)
+- **Notes**: MinerU extraction with figure embeds (3 figures). Synthesis triage: no tag matches, Step 9 skipped. IP2 (Ono 2018, ASJ Spring Meeting, Japanese only, no public PDF) was not ingested — covered via secondary citations on the IP/IVA/ISS pages.

@@ -1230,6 +1230,7 @@
 | [[concepts/coarse-fine-source-model\|Coarse-Fine Source Model]] | Hybrid source model for swIVA/swCIVA — frequency-independent (coarse) variance for separation-matrix updates, frequency-dependent (fine) for MCLP filters and switches | 2026-10-04 |
 | [[concepts/iterative-projection-with-adjustment\|Iterative Projection with Adjustment (IPA)]] | AuxIVA update rule (Scheibler 2021) that replaces one demixing filter while jointly adjusting all others via a rank-2 multiplicative perturbation; each step solved exactly as an LQPQM; >2x faster convergence than IP/ISS/IP2 for 4-5 sources | 2026-10-04 |
 | [[concepts/log-quadratically-penalized-quadratic-minimization\|Log-Quadratically Penalized Quadratic Minimization (LQPQM)]] | Non-convex problem class introduced by Scheibler 2021: quadratic cost minus log-quadratic penalty; global minimum provably equals the largest zero of a secular equation, computable in a few Newton-Raphson iterations from a cubic-polynomial seed | 2026-10-04 |
+| [[concepts/iterative-projection\|Iterative Projection]] | The row-by-row block coordinate descent update at the core of AuxIVA (Ono 2011): each demixing filter is replaced in closed form via (W V_k)^{-1} e_k plus normalization, with monotonic convergence and no step sizes. | 2026-10-04 |
 
 ---
 
@@ -1489,6 +1490,8 @@
 | [[sources/goto-2022-offline-iss-gciva\|Goto, Ueda, Li, Yamada & Makino 2022]] | This paper derives GC-AuxIVA-ISS, an offline (batch) algorithm for geometrically constrained IVA that replaces the vectorwise-coordinate-descent (VCD) updates of GCAV-IVA — which require a per-source, per-frequency matrix inversion — with iterative source steering (ISS) rank-1 updates, folding the geometric constraints directly into the closed-form ISS coefficients. | 2026-10-04 |
 | [[sources/nakatani-2022-switching-iva\|Nakatani et al. 2022: Switching IVA and Its Extension to Blind and Spatially Guided Convolutional Beamforming]] | Proposes swIVA and swCIVA: switching mechanisms that keep IVA/CIVA blind separation and dereverberation accurate with only 2–3 microphones; factorized switching model, coarse-fine source model, and inter-state-permutation-safe initialization. | 2026-10-04 |
 | [[sources/scheibler-2021-log-quadratically-penalized-iva\|Scheibler 2021]] | This paper proposes iterative projection with adjustment (IPA), a new update rule for auxiliary-function-based independent vector analysis (AuxIVA) that updates one demixing filter while jointly adjusting all the others along its current direction — unlike IP, IP2, and ISS, which freeze the remaining filters until later updates. | 2026-10-04 |
+| [[sources/ono-2011-stable-fast-update-rules-iva\|Ono 2011]] | This is the founding paper of AuxIVA: it derives stable and fast update rules for IVA based on the auxiliary function technique (a majorization-minimization scheme extending EM), replacing the step-size-dependent natural gradient updates that dominated IVA until then. | 2026-10-04 |
+| [[sources/scheibler-2020-fast-stable-bss-rank-1-updates\|Scheibler & Ono 2020]] | This paper introduces AuxIVA-ISS, an alternative to the ubiquitous AuxIVA-IP (Ono 2011) that minimizes exactly the same cost function but replaces row-by-row demixing-matrix updates with a sequence of rank-1 updates of the whole matrix. | 2026-10-04 |
 
 ---
 
@@ -1543,10 +1546,10 @@
 
 ## Statistics
 
-- **Total pages**: 1492
+- **Total pages**: 1495
 - **Entities**: 634
-- **Concepts**: 577
-- **Sources**: 250
+- **Concepts**: 578
+- **Sources**: 252
 - **Synthesis**: 23
 - **Queries**: 8
 - **Last updated**: 2026-10-04
