@@ -80,7 +80,7 @@ Exact invocations for every script (all prefixed with `uv run python .agents/ski
 | 3c | `extract_mineru.py --slug SLUG [--language en --model vlm --timeout 600 --pending-timeout 120]` — streams output + watchdog aborts early on `failed`/stuck-`pending`/timeout; on stuck-`pending` abort, retry once, then use 3d |
 | 3d | `extract_pdftotext.py --slug SLUG` |
 | 3e | `map_figures.py --slug SLUG` |
-| 6 | `update_entities.py --slug SLUG --entities author1 author2 [--note "..."] [--role "First author of"]` — existing authors only |
+| 6 | `update_entities.py --slug SLUG --entities first-author co-author1 co-author2 [--note "..."] [--role "First author of"]` — existing authors only; `--role` applies to the **first** listed entity only, the rest get "Co-author of" (pitfall #61) — list the first author first |
 | 9 | `triage_synthesis.py --slug SLUG` |
 | 10 | `update_indexes.py source --slug SLUG` (derives display/summary/date from the source page + runs stats — use for the source-page row) · `update_indexes.py add --category CAT --slug SLUG --display "..." --summary "..." --date YYYY-MM-DD` then `stats` (entities/concepts) · `update_indexes.py batch --manifest .tmp_ingest_manifest.yaml --stats` |
 | 11 | `append_log.py --op ingest --title "..." --body "..."` (or `--file .tmp_log_entry.md`) — strictly flags, no positionals |
@@ -233,10 +233,13 @@ For each author not already in `wiki/entities/`, create a new page. For existing
 
 ```bash
 uv run python .agents/skills/paper-reader/scripts/update_entities.py \
-    --slug SLUG --entities author1 author2 [--note "contribution description"] [--role "First author of"]
+    --slug SLUG --entities first-author co-author1 co-author2 \
+    [--note "contribution description"] [--role "First author of"]
 ```
 
-It derives title/venue/year/authors from the source page's H1 and `**Venue**:` line. Entity pages that use a bold inline label (`**Key Contributions**:` + bullets) instead of a `## Key Contributions` heading are supported transparently (the Wang 2021 ingest had to hand-fix `israel-cohen.md` for exactly this). After running, review the appended bullets and polish the Key Contributions wording with one sequential Edit per file (e.g., a paper-specific description — the `--note` flag covers this at insert time). New-author pages are still created by hand from the template.
+**List the first author first**: `--role` applies only to the **first** listed entity; every subsequent entity gets "Co-author of" (pitfall #61 — in the Yamaoka 2021 ingest, `--role "First author of"` relabeled co-authors Ono and Makino as first authors, requiring three hand-fix Edits). For co-first-author papers, run with the default role and hand-polish the equal-contribution wording afterward.
+
+It derives title/venue/year/authors from the source page's H1 and `**Venue**:` line. Entity pages that use a bold inline label (`**Key Contributions**:` + bullets) instead of a `## Key Contributions` heading are supported transparently (the Wang 2021 ingest had to hand-fix `israel-cohen.md` for exactly this). After running, review the appended bullets — the script prints the applied role per entity — and polish the Key Contributions wording with one sequential Edit per file (e.g., a paper-specific description — the `--note` flag covers this at insert time). New-author pages are still created by hand from the template.
 
 ### Step 7: Create Missing Concept Pages
 

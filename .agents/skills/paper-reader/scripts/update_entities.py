@@ -19,16 +19,22 @@ This removes the most error-prone manual-edit batch of the ingest (4-6
 entity pages x 2-3 edits each) while preserving the agent's role: run the
 script for the guaranteed-consistent skeleton, then polish the Key
 Contributions bullet wording (e.g., a paper-specific description via
---note, or "First author of" via --role) if desired.
+--note) if desired.
+
+Role semantics (pitfalls.md #61): --role applies ONLY to the FIRST listed
+entity (conventionally the paper's first author); every subsequent entity
+gets "Co-author of". This prevents the Yamaoka 2021 failure mode where
+--role "First author of" relabeled co-authors Ono and Makino as first
+authors, each needing a hand-fix Edit.
 
 New authors (no page yet) are NOT handled — those are created by hand per
 the Step 6 template. This script only updates existing pages.
 
 Usage:
   uv run python .agents/skills/paper-reader/scripts/update_entities.py \
-      --slug paper-slug --entities author1 author2 \
+      --slug paper-slug --entities first-author co-author-1 co-author-2 \
       [--note "paper-specific contribution description"] \
-      [--role "Co-author of"]
+      [--role "First author of"]  # first entity only; rest get "Co-author of"
 
 Idempotent: any entity page already referencing sources/{slug} is skipped.
 
@@ -232,7 +238,7 @@ def update_entity(path, slug, display, title, venue, year, role, note, today):
 
     with open(path, 'w', encoding='utf-8') as f:
         f.writelines(lines)
-    print(f"Updated: {path}")
+    print(f"Updated: {path} (role: {role})")
     return True
 
 
@@ -245,8 +251,10 @@ def main():
     p.add_argument('--note', default=None,
                    help='Paper-specific description inserted before the source wikilink')
     p.add_argument('--role', default='Co-author of',
-                   help='Bullet verb phrase (default: "Co-author of"; '
-                        'e.g. "First author of")')
+                   help='Bullet verb phrase applied to the FIRST listed '
+                        'entity only (default: "Co-author of"; e.g. '
+                        '"First author of"); all subsequent entities get '
+                        '"Co-author of" (pitfalls.md #61)')
     args = p.parse_args()
 
     display, title, venue, year = read_source_page(args.slug)
@@ -255,10 +263,13 @@ def main():
     print(f"Venue:  {venue} {year}\n")
 
     ok = True
-    for eslug in args.entities:
+    for idx, eslug in enumerate(args.entities):
         path = os.path.join('wiki', 'entities', f'{eslug}.md')
+        # --role applies to the first listed entity only (the paper's first
+        # author by convention); every other entity is a co-author.
+        role = args.role if idx == 0 else 'Co-author of'
         if not update_entity(path, args.slug, display, title, venue, year,
-                             args.role, args.note, today):
+                             role, args.note, today):
             ok = False
 
     if not ok:
