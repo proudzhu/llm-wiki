@@ -12,6 +12,10 @@ pattern from page-templates.md automatically:
      are also supported; the bullet is appended after the last bullet of the
      label's block.
      - Co-author of "Short Title" (Venue, Year) [--note] — [[sources/{slug}|Authors Year]]
+     Known conference venues are abbreviated automatically, e.g.
+     "IEEE International Conference on Acoustics, Speech and Signal
+     Processing (ICASSP), 2020" -> "(ICASSP 2020)" (pitfalls.md #62);
+     journals, preprints, and unrecognized venues pass through verbatim.
   3. new bullet under `## Related Sources`:
      - [[sources/{slug}|Authors Year: Full Title]]
 
@@ -51,6 +55,73 @@ CONTRIB_HEADINGS = ('## Key Contributions', '## Notable Contributions')
 # bullets. The Wang 2021 ingest silently skipped such a page (bullet never
 # added) because find_heading_section only matched `##` headings.
 BOLD_LABEL_RE = re.compile(r'^\*\*(Key Contributions|Notable Contributions)\*\*:?\s*$')
+
+# --- Venue abbreviation (pitfalls.md #62) ---
+# Zotero stores proceedings under verbose titles like "IEEE International
+# Conference on Acoustics, Speech and Signal Processing (ICASSP), 2020";
+# written verbatim into entity bullets this bloats the pages. Known
+# conferences are abbreviated to their standard acronym + year ("ICASSP
+# 2020"); journals, arXiv preprints, and unrecognized venues pass through
+# unchanged (whitelist-keyed, so a journal parenthetical like "(IMWUT)" or
+# "(article number)" is never mistaken for a conference acronym).
+#
+# Keys are UPPERCASED candidate tokens; values are the canonical display form.
+KNOWN_CONFERENCE_ABBRS = {
+    'ICASSP': 'ICASSP',
+    'WASPAA': 'WASPAA',
+    'EUSIPCO': 'EUSIPCO',
+    'IWAENC': 'IWAENC',
+    'INTERSPEECH': 'Interspeech',
+    'NORSIG': 'NORSIG',
+    'APSIPA': 'APSIPA ASC',
+    'APSIPA ASC': 'APSIPA ASC',
+    'HSCMA': 'HSCMA',
+    'ICCE-ASIA': 'ICCE-Asia',
+    'AICIT': 'AICIT',
+    'EURONOISE': 'Euronoise',
+    'ISMIR': 'ISMIR',
+    'NEURIPS': 'NeurIPS',
+}
+
+# "(ICASSP)", "(WASPAA)", "(EUSIPCO 2022)", "(APSIPA ASC 2022)", "(NORSIG 2004)"
+ABBR_PAREN_RE = re.compile(
+    r'\(([A-Za-z][A-Za-z0-9-]{1,11})((?:\sASC)?(?:\s20\d\d)?)\)')
+# "ICASSP 2024 - ...", "Proc. IEEE ICASSP 2025", "Interspeech 2019"
+ABBR_PREFIX_RE = re.compile(
+    r'^(?:proc\.?\s+)?(?:ieee\s+|acm\s+)?'
+    r'([A-Za-z][A-Za-z0-9-]{1,11})(?:\s+(20\d\d))?', re.IGNORECASE)
+
+
+def abbreviate_venue(venue):
+    """Return (abbr, year) for a known conference venue, else (None, None).
+
+    Two tiers, both whitelist-keyed against KNOWN_CONFERENCE_ABBRS so that
+    journals and preprints can never be caught:
+
+      1. Parenthesized acronym, optionally followed by "ASC" and/or a year:
+         "...Signal Processing (ICASSP), 2020", "(EUSIPCO 2022)",
+         "(APSIPA ASC 2022)", "(NORSIG 2004)".
+      2. Acronym prefix with optional year:
+         "ICASSP 2024 - ...", "Proc. IEEE ICASSP 2025", "Interspeech 2019".
+
+    The returned year is the one embedded in the acronym's parenthetical
+    (tier 1) or prefix (tier 2), or None if the venue string puts the year
+    elsewhere (the caller then falls back to the H1-derived year).
+    """
+    if not venue:
+        return None, None
+    m = ABBR_PAREN_RE.search(venue)
+    if m:
+        token, rest = m.group(1), m.group(2)
+        ym = re.search(r'(20\d\d)', rest)
+        key = (token + re.sub(r'\s20\d\d', '', rest)).upper()
+        if key in KNOWN_CONFERENCE_ABBRS:
+            return KNOWN_CONFERENCE_ABBRS[key], ym.group(1) if ym else None
+        return None, None
+    m = ABBR_PREFIX_RE.match(venue)
+    if m and m.group(1).upper() in KNOWN_CONFERENCE_ABBRS:
+        return KNOWN_CONFERENCE_ABBRS[m.group(1).upper()], m.group(2)
+    return None, None
 
 
 def read_source_page(slug):
@@ -165,15 +236,24 @@ def append_bullet(lines, start, end, bullet):
 def format_venue_year(venue, year):
     """Format the '(Venue, Year)' parenthetical for contribution bullets.
 
-    Zotero venue strings frequently already embed the publication year,
-    either bare ('IEEE Transactions on Signal Processing, 2021') or before
-    a page range ('..., New Paltz, NY, 2011, pp. 189-192'). Appending
-    ', {year}' unconditionally produced '(..., 2021, 2021)' and
+    Known conference venues are abbreviated first (pitfalls.md #62):
+    'IEEE International Conference on Acoustics, Speech and Signal
+    Processing (ICASSP), 2020' becomes '(ICASSP 2020)' — comma-free — using
+    the year embedded in the venue when present, else the H1-derived year.
+
+    Zotero venue strings for journals/preprints frequently already embed the
+    publication year, either bare ('IEEE Transactions on Signal Processing,
+    2021') or before a page range ('..., New Paltz, NY, 2011, pp. 189-192').
+    Appending ', {year}' unconditionally produced '(..., 2021, 2021)' and
     '(..., NY, 2011, pp. 189-192, 2011)' in the Scheibler 2021 / Ono 2011 /
     Scheibler 2020 ingests, each requiring a hand-fix Edit (pitfalls.md #59).
     When the year already appears in the venue, keep the venue verbatim
     instead of appending it again.
     """
+    abbr, venue_year = abbreviate_venue(venue)
+    if abbr:
+        y = venue_year or year
+        return f'({abbr} {y})' if y else f'({abbr})'
     if venue and year:
         if re.search(rf'\b{re.escape(year)}\b', venue):
             return f'({venue})'
@@ -260,7 +340,8 @@ def main():
     display, title, venue, year = read_source_page(args.slug)
     today = datetime.date.today().isoformat()
     print(f"Source: {display}: {title}")
-    print(f"Venue:  {venue} {year}\n")
+    print(f"Venue:  {venue} {year}")
+    print(f"        -> bullets will use: {format_venue_year(venue, year)}\n")
 
     ok = True
     for idx, eslug in enumerate(args.entities):
