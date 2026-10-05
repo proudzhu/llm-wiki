@@ -647,6 +647,7 @@
 | [[entities/danqi-jin\|Danqi Jin]] | Researcher on microphone array beamforming and speech enhancement; co-author of AF-DMA (Zhao et al. 2025). | 2026-10-04 |
 | [[entities/ziyi-hu\|Ziyi Hu]] | Researcher at Hunan ChipHearing Semiconductor (Changsha, China); first author of the independent industrial reproduction and realistic-environment evaluation of GC-AuxIVA-ISS. | 2026-10-05 |
 | [[entities/wang-chen\|Wang Chen]] | Researcher at Hunan ChipHearing Semiconductor (Changsha, China); corresponding author of the independent industrial reproduction and realistic-environment evaluation of GC-AuxIVA-ISS. | 2026-10-05 |
+| [[entities/thomas-haubner\|Thomas Haubner]] | FAU researcher — co-author of spatially guided IVA (MAP spatial prior over demixing matrices, ICASSP 2020) | 2026-10-05 |
 
 ---
 
@@ -1238,6 +1239,7 @@
 | [[concepts/w-disjoint-orthogonality\|W-Disjoint Orthogonality]] | Sparsity assumption that sources are disjoint in the time-frequency domain (at most one source active per TF bin), generalizable to P-DO (at most P-1 of P sources active) — the foundation of DUET-style BSS and of Yamaoka 2021's M-DO justification for TF-bin-wise beamformer combination. | 2026-10-04 |
 | [[concepts/signal-to-reconstruction-distortion-ratio\|Signal-to-Reconstruction Distortion Ratio]] | Metric introduced by Yamaoka et al. 2021 isolating algorithmic reconstruction distortion (filter-induced target distortion) from suppression performance, complementing SDR when comparing distortionless-constrained enhancement methods. | 2026-10-04 |
 | [[concepts/af-dma-beamformer\|AF-DMA (Adaptive Fusion of Differential Beamformers)]] | Statistics-free online fusion of a fixed bank of null-constrained DMAs plus MWNG via per-TF-bin minimum instantaneous output energy (Jensen-relaxed LP). | 2026-10-04 |
+| [[concepts/spatially-guided-iva\|Spatially Guided IVA]] | MAP generalization of IVA with a DOA-uncertainty-aware Gaussian prior over the demixing matrices (Brendel et al. 2020); solves the outer permutation problem while retaining AuxIVA-speed MM convergence | 2026-10-05 |
 
 ---
 
@@ -1502,6 +1504,7 @@
 | [[sources/yamaoka-2021-bin-wise-beamformer-combination\|Yamaoka, Ono & Makino 2021]] | This paper proposes the time-frequency-bin-wise linear combination (TFLC) beamformer, which achieves distortionless signal enhancement in underdetermined situations (M < N) by combining K MVDR-type beamformers per TF bin — each suppressing a different set of M-1 interferers — with weights c_k(f,t) optimized jointly with the filters under a unified minimum variance criterion. | 2026-10-04 |
 | [[sources/zhao-2025-robust-fusion-differential-beamformers\|Zhao, Luo, Jin, Jin & Huang 2025]] | This letter proposes AF-DMA (adaptive fusion of differential microphone arrays): a bank of K null-constrained differential beamformers (each placing a null at a different candidate interference direction) plus a maximum-white-noise-gain (MWNG) beamformer are pre-designed, and their outputs are fused online per time-frequency bin by minimizing the instantaneous output variance over the simplex. | 2026-10-04 |
 | [[sources/hu-2023-gc-auxiva-iss-realistic\|Hu & Chen 2023]] | This paper is an independent industrial reproduction and real-world evaluation of GC-AuxIVA-ISS (Goto et al. 2022), the inverse-free geometrically constrained IVA algorithm, motivated by hearing-aid applications. | 2026-10-05 |
+| [[sources/brendel-2020-spatially-guided-iva\|Brendel, Haubner & Kellermann 2020]] | This paper presents a Maximum A Posteriori (MAP) derivation of IVA that augments the blind separation objective with a spatial prior over the demixing matrices, resolving the outer permutation ambiguity and guiding the algorithm toward a desired solution in adverse acoustic conditions. | 2026-10-05 |
 
 ---
 
@@ -1556,10 +1559,10 @@
 
 ## Statistics
 
-- **Total pages**: 1505
-- **Entities**: 637
-- **Concepts**: 582
-- **Sources**: 255
+- **Total pages**: 1508
+- **Entities**: 638
+- **Concepts**: 583
+- **Sources**: 256
 - **Synthesis**: 23
 - **Queries**: 8
 - **Last updated**: 2026-10-05

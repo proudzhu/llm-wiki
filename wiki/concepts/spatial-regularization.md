@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-06-04
-updated: 2026-10-04
+updated: 2026-10-05
 sources:
   - raw/papers/li-2020-geometrically-constrained-iva/full-text.md
   - raw/papers/li-2020-online-gciva/full-text.md
   - raw/papers/goto-2022-iss-gciva/full-text.md
+  - raw/papers/brendel-2020-spatially-guided-iva/full-text.md
 tags:
   - blind-source-separation
   - independent-vector-analysis
@@ -53,6 +54,7 @@ Steering vectors $\mathbf{a}_n(f)$ are typically estimated from:
 Spatial regularization has been integrated into various IVA frameworks:
 - Standard IVA with DOA constraints
 - [[concepts/switching-independent-vector-analysis|Switching IVA]] (SR-SwIVA)
+- [[concepts/spatially-guided-iva|Spatially guided IVA]] — the probabilistic sibling that reframes the proximity penalty as a Gaussian MAP prior on the demixing matrices, with the prior variance $\tilde{\sigma}_f^2$ encoding DOA-estimate uncertainty and a Tikhonov term controlling filter energy ([[sources/brendel-2020-spatially-guided-iva|Brendel, Haubner & Kellermann 2020]])
 - [[concepts/geometrically-constrained-iva|Geometrically constrained IVA]] — a constraint-based variant that replaces proximity penalties with hard LCMV-style linear response constraints ($|\boldsymbol{w}_j^{\mathsf{H}}\boldsymbol{d}_j - c_j|^2$ with $c_j \approx 0$ for nulls), solvable in closed form within the auxiliary-function framework ([[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020]]); its online real-time extension oGCAV-IVA updates per frame via an autoregressive auxiliary-variable recursion ([[sources/li-2020-online-gciva|Li, Koishida & Makino 2020]]), and the inverse-free oGC-AuxIVA-ISS variant folds the same constraints into [[concepts/iterative-source-steering|ISS]] rank-1 updates whose constraint directions are estimated online by MUSIC on projection-back source images ([[sources/goto-2022-iss-gciva|Goto et al. 2022]])
 
 ### Spatially Regularized ILRMA (SR-ILRMA / NSR-ILRMA)
@@ -93,6 +95,7 @@ The SRSS-init strategy typically provides the best separation performance by ini
 - [[concepts/blind-source-separation|Blind Source Separation]]
 - [[concepts/switching-independent-vector-analysis|Switching Independent Vector Analysis]]
 - [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA]]
+- [[concepts/spatially-guided-iva|Spatially Guided IVA]]
 - [[concepts/iterative-source-steering|Iterative Source Steering]]
 - [[concepts/independent-low-rank-matrix-analysis|Independent Low-Rank Matrix Analysis (ILRMA)]]
 - [[concepts/fast-demixing-matrix-estimation|Fast Demixing Matrix Estimation (FastVCD / FastIP)]]
@@ -106,3 +109,4 @@ The SRSS-init strategy typically provides the best separation performance by ini
 - [[sources/dong-2026-spatially-regularized-switching-iva|Dong et al. 2026: Spatially-Regularized Switching IVA with ISS]]
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
 - [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025: Real-Time RCSCME-based Speech Extraction]]
+- [[sources/brendel-2020-spatially-guided-iva|Brendel, Haubner & Kellermann 2020: Spatially Guided Independent Vector Analysis]] — the Gaussian MAP-prior formulation of spatial guidance, with DOA-estimate uncertainty as the prior variance

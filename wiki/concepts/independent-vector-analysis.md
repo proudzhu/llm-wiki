@@ -18,6 +18,7 @@ sources:
   - raw/papers/scheibler-2021-log-quadratically-penalized-iva/full-text.md
   - raw/papers/ono-2011-stable-fast-update-rules-iva/full-text.md
   - raw/papers/scheibler-2020-fast-stable-bss-rank-1-updates/full-text.md
+  - raw/papers/brendel-2020-spatially-guided-iva/full-text.md
 tags:
   - blind-source-separation
   - audio-source-separation
@@ -71,6 +72,8 @@ Within the BCD family, the update rules differ in how much of the demixing matri
 
 Beyond the six unconstrained families, IVA can be steered directionally by augmenting the objective with geometric constraints: [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA (GCIVA)]] adds LCMV-style linear penalties on the far-field responses of the demixing filters. [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020]] show that the resulting constrained stationarity equation is no longer solvable as a HEAD problem, but a closed-form, monotonic AuxIVA-style update (GCAV-IVA) exists via the vectorwise-coordinate-descent cofactor expansion — reducing exactly to AuxIVA at zero constraint weight and retaining its no-step-size-tuning property, while forcing designated output channels toward a target direction or a spatial null. The same authors with Makino extend GCAV-IVA to a real-time **online** algorithm (oGCAV-IVA) via an [[concepts/online-iva|autoregressive approximation of the auxiliary variables]] ([[sources/li-2020-online-gciva|Li, Koishida & Makino 2020]]), updating per frame at < 16 ms per 16 ms frame and outperforming online AuxIVA in both stationary and moving-interference conditions. The update can be made **inverse-free** by replacing VCD with [[concepts/iterative-source-steering|ISS]] rank-1 updates, with the geometric constraints entering the closed-form ISS coefficients directly — first offline (GC-AuxIVA-ISS, [[sources/goto-2022-offline-iss-gciva|Goto et al. 2022, EUSIPCO]] — equal-or-better separation than GCAV-IVA at the runtime of unconstrained AuxIVA-ISS, and beam-pattern evidence that the constraints prevent AuxIVA-ISS's block permutation failure), then online (oGC-AuxIVA-ISS, [[sources/goto-2022-iss-gciva|Goto et al. 2022, APSIPA ASC]] — 25–75% runtime reduction at equal enhancement quality). The GC-AuxIVA-ISS line was subsequently reproduced and validated on **real recordings** (anechoic, outdoor, and RT60 ≈ 600 ms meeting-room scenes) by [[sources/hu-2023-gc-auxiva-iss-realistic|Hu & Chen 2023]], confirming its separation and output-order-control behavior in low-reverberation conditions and exposing its failure boundary under combined strong reverberation and diffuse noise — where the IVA maximum-likelihood criterion can no longer ignore the noise because it is "not Gaussian enough".
 
+A complementary soft-probabilistic route to the same goal is [[concepts/spatially-guided-iva|spatially guided IVA]] ([[sources/brendel-2020-spatially-guided-iva|Brendel, Haubner & Kellermann 2020]]): a MAP generalization of IVA that places a DOA-uncertainty-aware Gaussian prior directly on the demixing matrices. Because the prior is quadratic, it simply adds to the AuxIVA weighted covariance ($\mathbf{V} + \mathbf{P}$) and the MM update rules retain AuxIVA's stepsize-free monotonic convergence — on measured RIRs the constrained algorithm converges at nearly identical speed to plain AuxIVA, reaches higher SIR than the gradient-based GC-IVA of Khan et al. 2015 in all tested conditions, and resolves the outer permutation problem algorithmically, where unconstrained IVA needs an oracle to do so.
+
 ## Relationship to ILRMA and FastMNMF
 
 IVA can also be extended along the *time-varying* axis: when the microphone surplus $M - N$ is small in diffuse noise, the determined point-source simplification fails and IVA's accuracy seriously degrades. [[concepts/switching-independent-vector-analysis|Switching IVA]] ([[sources/nakatani-2022-switching-iva|Nakatani et al. 2022]]) restores accuracy with 2–3 microphones by clustering time frames into groups, each handled by its own separation matrix, with matrices and switches jointly optimized by ML; its convolutional extension [[concepts/switching-civa|swCIVA]] adds jointly optimized switching WPE dereverberation.
@@ -97,6 +100,7 @@ IVA combined with Nonnegative Matrix Factorization gives **[[concepts/independen
 - [[concepts/log-quadratically-penalized-quadratic-minimization|Log-Quadratically Penalized Quadratic Minimization]]
 - [[concepts/spatial-regularization|Spatial Regularization]]
 - [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA]]
+- [[concepts/spatially-guided-iva|Spatially Guided IVA]]
 - [[concepts/online-iva|Online IVA]]
 
 ## Related Sources
@@ -118,4 +122,5 @@ IVA combined with Nonnegative Matrix Factorization gives **[[concepts/independen
 - [[sources/scheibler-2020-fast-stable-bss-rank-1-updates|Scheibler & Ono 2020: Fast and Stable Blind Source Separation with Rank-1 Updates]] — AuxIVA-ISS: inverse-free rank-1 updates cutting per-iteration cost to O(FM²N)
 - [[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019: A Low-Complexity Permutation Alignment Method for Frequency-Domain BSS]] — the per-bin-ICA alternative to IVA, with alignment cost largely eliminated
 - [[sources/ansari-2023-ai-bss-survey|Ansari, Alatrany, Alnajjar et al. 2023: A Survey of AI Approaches in BSS]]
+- [[sources/brendel-2020-spatially-guided-iva|Brendel, Haubner & Kellermann 2020: Spatially Guided Independent Vector Analysis]] — MAP generalization of IVA with a DOA-uncertainty-aware spatial prior; AuxIVA-speed MM updates; outer permutation resolution
 

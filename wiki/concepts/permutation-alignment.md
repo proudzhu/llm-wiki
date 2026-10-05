@@ -7,6 +7,7 @@ sources:
   - raw/papers/kang-2019-low-complexity-permutation-alignment/full-text.md
   - raw/papers/goto-2022-offline-iss-gciva/full-text.md
   - raw/papers/hu-2023-gc-auxiva-iss-realistic/full-text.md
+  - raw/papers/brendel-2020-spatially-guided-iva/full-text.md
 tags:
   - blind-source-separation
   - audio-source-separation
@@ -57,6 +58,7 @@ Result: separation quality on par with Sawada/MBMC (SIR/PESQ within ~0.1 dB / 0.
 - **Alternative regularizer**: [[concepts/spatial-regularization|spatial regularization]] uses DOA priors inside BSS optimization to keep permutations consistent, sidestepping the alignment problem from within the cost function.
 - **Constraint-based prevention of block permutation**: even IVA-family methods are not immune to residual misalignment in the form of **block permutation** — different frequency *blocks* assigned to different sources (as opposed to per-bin permutation in ICA). [[sources/goto-2022-offline-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022]] show beam-pattern evidence that AuxIVA-ISS suffers block permutation between the low- and high-frequency bands in reverberant 4-source mixtures, and that adding geometric (far-field response) constraints eliminates it — an in-cost-function fix analogous in spirit to spatial regularization. The related **outer order permutation** problem (which of the N output channels carries which source, undetermined even when bins are internally aligned) is what these constraints definitively pin down: [[sources/hu-2023-gc-auxiva-iss-realistic|Hu & Chen 2023]] confirm on real recordings that rearranging the constraint DoA set $\Theta$ swaps exactly the designated output channels — with the caveat that the DoA estimates the constraints rely on fail under strong reverberation plus diffuse noise.
 - **Initialization-based avoidance**: [[sources/low-2004-hybrid-bss-anc|Low & Nordholm 2004]] sidestep post-hoc alignment by initializing every subband unmixing matrix as a beamformer-like null toward an arbitrary jammer direction, so the adaptation starts from — and preserves — a consistently ordered solution across subbands.
+- **Probabilistic prior-based resolution**: [[concepts/spatially-guided-iva|spatially guided IVA]] ([[sources/brendel-2020-spatially-guided-iva|Brendel, Haubner & Kellermann 2020]]) resolves the **outer order permutation** — which broadband output channel carries which source — by placing a DOA-uncertainty-aware Gaussian prior on the demixing matrices that favors spatial nulls toward given directions; K−1 such priors disambiguate K sources, and the prior variance can absorb the confidence of a DOA tracker. On measured RIRs this resolves the output order algorithmically (where plain auxIVA needs oracle permutation knowledge) without impairing AuxIVA convergence speed.
 
 ## Related Concepts
 
@@ -65,6 +67,7 @@ Result: separation quality on par with Sawada/MBMC (SIR/PESQ within ~0.1 dB / 0.
 - [[concepts/independent-low-rank-matrix-analysis|Independent Low-Rank Matrix Analysis]]
 - [[concepts/permutation-invariant-training|Permutation Invariant Training]]
 - [[concepts/spatial-regularization|Spatial Regularization]]
+- [[concepts/spatially-guided-iva|Spatially Guided IVA]]
 
 ## Related Sources
 
@@ -74,3 +77,4 @@ Result: separation quality on par with Sawada/MBMC (SIR/PESQ within ~0.1 dB / 0.
 - [[sources/hu-2023-gc-auxiva-iss-realistic|Hu & Chen 2023: The Performance of GC-AuxIVA-ISS Method in a Realistic Environment]] — real-recording confirmation that geometric constraints pin the outer order permutation (DoA-dependent, fails under strong reverberation + diffuse noise)
 - [[sources/sawada-2019-bss-ilrma-review|Sawada et al. 2019: BSS/ILRMA Review]] — treats the permutation problem as a central motivation for the IVA/ILRMA route
 - [[sources/ansari-2023-ai-bss-survey|Ansari et al. 2023: AI Approaches in BSS Survey]]
+- [[sources/brendel-2020-spatially-guided-iva|Brendel, Haubner & Kellermann 2020: Spatially Guided Independent Vector Analysis]] — probabilistic prior-based resolution of the outer order permutation

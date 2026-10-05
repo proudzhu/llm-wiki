@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-10-04
-updated: 2026-10-04
+updated: 2026-10-05
 sources:
   - raw/papers/ono-2011-stable-fast-update-rules-iva/full-text.md
+  - raw/papers/brendel-2020-spatially-guided-iva/full-text.md
 tags:
   - optimization-algorithms
   - blind-source-separation
@@ -59,6 +60,8 @@ Minimizing $\mathcal{L}_2$ over **all** rows of $\boldsymbol{W}_f$ simultaneousl
 
 Because IP's machinery is reused by many source-model extensions — most prominently [[concepts/independent-low-rank-matrix-analysis|ILRMA]], but also IDLMA and VAE-based models — any faster or stabler variant of these updates propagates to the whole family.
 
+The IP rule also extends transparently to **constrained IVA objectives**: in [[concepts/spatially-guided-iva|spatially guided IVA]] ([[sources/brendel-2020-spatially-guided-iva|Brendel, Haubner & Kellermann 2020]]), the quadratic spatial MAP prior simply adds to the weighted covariance ($\boldsymbol{V}_{kf} \to \boldsymbol{V}_{kf} + \boldsymbol{P}_{f}$), so spatially constrained rows update with the same closed form $(\boldsymbol{W}_f[\boldsymbol{V}_{kf}+\boldsymbol{P}_f])^{-1}\boldsymbol{e}_k$ — preserving IP's tuning-free monotonic convergence while forcing spatial nulls toward given DOAs.
+
 ## Related Concepts
 
 - [[concepts/independent-vector-analysis|Independent Vector Analysis]] — the parent framework
@@ -74,3 +77,4 @@ Because IP's machinery is reused by many source-model extensions — most promin
 - [[sources/scheibler-2020-fast-stable-bss-rank-1-updates|Scheibler & Ono 2020: Fast and Stable BSS with Rank-1 Updates]] — ISS as the inverse-free replacement
 - [[sources/scheibler-2021-log-quadratically-penalized-iva|Scheibler 2021: IVA via LQPQM]] — IPA, which removes the frozen-others limitation
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]] — surveys the family
+- [[sources/brendel-2020-spatially-guided-iva|Brendel, Haubner & Kellermann 2020: Spatially Guided Independent Vector Analysis]] — IP with a quadratic spatial prior added to the weighted covariance for constrained rows

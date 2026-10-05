@@ -9,6 +9,7 @@ sources:
   - raw/papers/goto-2022-iss-gciva/full-text.md
   - raw/papers/nakatani-2022-switching-iva/full-text.md
   - raw/papers/hu-2023-gc-auxiva-iss-realistic/full-text.md
+  - raw/papers/brendel-2020-spatially-guided-iva/full-text.md
 tags:
   - blind-source-separation
   - independent-vector-analysis
@@ -78,13 +79,14 @@ The **online extension (oGC-AuxIVA-ISS)**, [[sources/goto-2022-iss-gciva|Goto et
 
 ## Relation to Other Spatially Guided BSS
 
-GCIVA belongs to the broader family of methods that inject prior spatial information into BSS, alongside [[concepts/spatial-regularization|spatial regularization]] (penalizing demixing-vector distance from DOA-derived steering vectors, used in SR-ILRMA/SR-SwIVA) and spatially informed MAP priors on demixing matrices (Brendel et al. 2019). Its distinguishing feature is that the constraints are **hard linear response constraints** in the LCMV sense rather than quadratic proximity penalties, and that they enable deliberate spatial shaping (nulls, distortionless responses) of specific output channels — including blocking-matrix behavior for interference reference generation. A further member of the family is the **spatially guided initialization** of [[concepts/switching-independent-vector-analysis|swIVA]]/[[concepts/switching-civa|swCIVA]] ([[sources/nakatani-2022-switching-iva|Nakatani et al. 2022]]), where NN-mask-estimated ATFs initialize per-state MPDR beamformers — spatial information enters only through initialization rather than as a constraint or penalty on the blind objective.
+GCIVA belongs to the broader family of methods that inject prior spatial information into BSS, alongside [[concepts/spatial-regularization|spatial regularization]] (penalizing demixing-vector distance from DOA-derived steering vectors, used in SR-ILRMA/SR-SwIVA) and the DOA-uncertainty-aware MAP priors on the demixing matrices of [[concepts/spatially-guided-iva|spatially guided IVA]] ([[sources/brendel-2020-spatially-guided-iva|Brendel, Haubner & Kellermann 2020]]) — a soft, probabilistic alternative whose Gaussian spatial-null prior also solves the outer permutation problem, and which likewise retains AuxIVA's fast MM convergence (the authors also label their algorithm "GC auxIVA"; despite the shared name it uses a quadratic prior penalty, not GCAV-IVA's hard linear response constraints). Its distinguishing feature is that the constraints are **hard linear response constraints** in the LCMV sense rather than quadratic proximity penalties, and that they enable deliberate spatial shaping (nulls, distortionless responses) of specific output channels — including blocking-matrix behavior for interference reference generation. A further member of the family is the **spatially guided initialization** of [[concepts/switching-independent-vector-analysis|swIVA]]/[[concepts/switching-civa|swCIVA]] ([[sources/nakatani-2022-switching-iva|Nakatani et al. 2022]]), where NN-mask-estimated ATFs initialize per-state MPDR beamformers — spatial information enters only through initialization rather than as a constraint or penalty on the blind objective.
 
 ## Related Concepts
 
 - [[concepts/independent-vector-analysis|Independent Vector Analysis]]
 - [[concepts/blind-source-separation|Blind Source Separation]]
 - [[concepts/spatial-regularization|Spatial Regularization]]
+- [[concepts/spatially-guided-iva|Spatially Guided IVA]]
 - [[concepts/beamforming|Beamforming]]
 - [[concepts/lcmv-beamformer|LCMV Beamformer]]
 - [[concepts/mpdr-beamformer|MPDR Beamformer]]
@@ -99,3 +101,4 @@ GCIVA belongs to the broader family of methods that inject prior spatial informa
 - [[sources/goto-2022-offline-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022: GC-IVA with Auxiliary Function Approach and Iterative Source Steering]] — offline (batch) GC-AuxIVA-ISS: inverse-free ISS rank-1 updates with constraints in the closed-form coefficients; block-permutation avoidance evidence
 - [[sources/goto-2022-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022: Accelerating Online GC-IVA with Iterative Source Steering]] — inverse-free online GC-AuxIVA-ISS (ISS rank-1 updates with constraints in the closed-form coefficients) and MUSIC-based interference DOA estimation
 - [[sources/hu-2023-gc-auxiva-iss-realistic|Hu & Chen 2023: The Performance of GC-AuxIVA-ISS Method in a Realistic Environment]] — independent industrial reproduction; first real-recording validation (anechoic / meeting room / outdoor) and the noisy-reverberant failure boundary
+- [[sources/brendel-2020-spatially-guided-iva|Brendel, Haubner & Kellermann 2020: Spatially Guided Independent Vector Analysis]] — the soft-probabilistic sibling: DOA-uncertainty-aware Gaussian MAP prior on the demixing matrices (also named "GC auxIVA" by its authors), with AuxIVA-speed MM convergence

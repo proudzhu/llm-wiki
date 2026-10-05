@@ -641,4 +641,5 @@
 | [[entities/danqi-jin\|Danqi Jin]] | Researcher on microphone array beamforming and speech enhancement; co-author of AF-DMA (Zhao et al. 2025). | 2026-10-04 |
 | [[entities/ziyi-hu\|Ziyi Hu]] | Researcher at Hunan ChipHearing Semiconductor (Changsha, China); first author of the independent industrial reproduction and realistic-environment evaluation of GC-AuxIVA-ISS. | 2026-10-05 |
 | [[entities/wang-chen\|Wang Chen]] | Researcher at Hunan ChipHearing Semiconductor (Changsha, China); corresponding author of the independent industrial reproduction and realistic-environment evaluation of GC-AuxIVA-ISS. | 2026-10-05 |
+| [[entities/thomas-haubner\|Thomas Haubner]] | FAU researcher — co-author of spatially guided IVA (MAP spatial prior over demixing matrices, ICASSP 2020) | 2026-10-05 |
 

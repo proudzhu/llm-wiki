@@ -5838,3 +5838,14 @@ Ingested from Zotero (IEEE/ACM TASLP vol. 29, pp. 3461-3475, Nov. 2021; TAF Tele
 - **Pages created**: `wiki/sources/hu-2023-gc-auxiva-iss-realistic.md`, `wiki/entities/ziyi-hu.md`, `wiki/entities/wang-chen.md`
 - **Pages updated**: `wiki/concepts/geometrically-constrained-iva.md` (new "Realistic-Environment Validation" section), `wiki/concepts/iterative-source-steering.md` (GC applications note + source), `wiki/concepts/independent-vector-analysis.md` (GC-IVA paragraph extension + source), `wiki/concepts/blind-source-separation.md` (GC-BSS real-world checkpoint + source), `wiki/concepts/direction-of-arrival-estimation.md` (new "BSS-Directivity DOA on Real Recordings" section), `wiki/concepts/multi-channel-speech-enhancement.md` (GC-IVA technique bullet extension + source), `wiki/index.md`, `wiki/entities/index.md`, `wiki/sources/index.md`
 - **Notes**: No new concept pages (reproduction study, no novel concepts). Synthesis triage: all 6 candidates shared only 1 broad tag — skipped per workflow. Fig. 7 (outdoor order-control spectrograms) not embedded — no raster extracted by MinerU. Noted Table I metric-label discrepancy (table header SIR/SAR vs. body text "SDR and SIR") — table values used.
+
+---
+
+## [2026-10-05] ingest | Spatially Guided Independent Vector Analysis (Brendel, Haubner & Kellermann 2020)
+
+- **Source**: `raw/papers/brendel-2020-spatially-guided-iva/full-text.md` (Zotero: Q355DBZI)
+- **Authors**: Andreas Brendel, Thomas Haubner, Walter Kellermann
+- **Published**: ICASSP 2020, DOI 10.1109/ICASSP40776.2020.9052905
+- **Summary**: MAP derivation of IVA with a DOA-uncertainty-aware Gaussian spatial prior over the demixing matrices; the quadratic prior adds to the AuxIVA weighted covariance so MM convergence speed is unimpaired, resolving the outer permutation problem. On measured RIRs (T60 50–400 ms), higher SIR than gradient-based GC-IVA (Khan et al. 2015) in all scenarios at lower total cost.
+- **Pages created**: `wiki/sources/brendel-2020-spatially-guided-iva.md`, `wiki/concepts/spatially-guided-iva.md`, `wiki/entities/thomas-haubner.md`
+- **Pages updated**: `wiki/entities/andreas-brendel.md` and `wiki/entities/walter-kellermann.md` (contribution bullets via script); `wiki/concepts/independent-vector-analysis.md` (MAP soft-prior paragraph, related lists); `wiki/concepts/geometrically-constrained-iva.md` (Brendel plain-text ref → wikilinks, soft-vs-hard constraint distinction); `wiki/concepts/permutation-alignment.md` (probabilistic prior-based outer-permutation resolution); `wiki/concepts/spatial-regularization.md` (MAP-prior sibling entry)
