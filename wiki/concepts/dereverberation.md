@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-27
-updated: 2026-09-26
+updated: 2026-10-05
 sources:
   - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
   - raw/papers/xiang-2024-multichannel-cdr-estimation/full-text.md
   - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
+  - raw/papers/ueda-2024-online-joint-optimization/full-text.md
 tags:
   - signal-processing
   - speech-enhancement
@@ -46,6 +47,7 @@ Classical CDR estimators, however, ignore additive noise and are therefore biase
 | **PHM quadrilateral (TRU-Net)** | Two pairs of phase-aware β-sigmoid masks form a quadrilateral in the complex STFT domain; the reverberation mask is uniquely determined by the other three sides | Single-stage joint denoising + dereverberation, 0.38 M params, 0 ms lookahead |
 | **Joint AEC+NS+DR (DeepVQE)** | Unified model with CCM for simultaneous echo/noise/reverb removal | Over 10 dB SRR improvement, real-time |
 | **Beamforming + postfilter** | Spatial filtering combined with postfiltering | Multi-channel required |
+| **Online joint WPE+separation (online-WPE×IVE)** | WPE and IVE separation optimized per frame under one ML criterion in a [[concepts/convolutional-beamformer\|convolutional beamformer]] | STFT frames (8 ms) can be far shorter than RT60; 10.01 ms total delay |
 
 ## Historical Context
 
@@ -68,6 +70,7 @@ Classical CDR estimators, however, ignore additive noise and are therefore biase
 - [[concepts/trunet|Tiny Recurrent U-Net (TRU-Net)]]
 - [[concepts/phase-aware-beta-sigmoid-mask|Phase-aware β-sigmoid Mask (PHM)]]
 - [[concepts/snr-cdr-wiener-gain|SNR–CDR Wiener Gain]] — noise-aware CDR-driven dereverberation gain
+- [[concepts/online-joint-optimization|Online Joint Optimization (online-WPE×IVE)]] — per-frame joint dereverberation and separation
 
 ## Key Sources
 
@@ -78,3 +81,4 @@ Classical CDR estimators, however, ignore additive noise and are therefore biase
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023: Audio Signal Processing in the 21st Century]] — 25-year retrospective positioning WPE and the dereverberation field
 - [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]] — noise-aware CDR estimation + joint SNR–CDR Wiener gain; outperforms AWPE in noise + reverberation
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — WPE in the hybrid taxonomy: neural PSD estimation for model-based dereverberation (see [[concepts/weighted-prediction-error|WPE]])
+- [[sources/ueda-2024-online-joint-optimization|Ueda, Nakatani, Ikeshita, Kinoshita, Araki & Makino 2024: Blind and Spatially-Regularized Online Joint Optimization]] — first blind online joint optimization of dereverberation and separation (online-WPE×IVE) under a single ML criterion; 8 ms algorithmic delay, 10.01 ms total

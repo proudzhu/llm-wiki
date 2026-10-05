@@ -7,6 +7,7 @@ sources:
   - raw/papers/li-2020-online-gciva/full-text.md
   - raw/papers/goto-2022-iss-gciva/full-text.md
   - raw/papers/brendel-2020-spatially-guided-iva/full-text.md
+  - raw/papers/ueda-2024-online-joint-optimization/full-text.md
 tags:
   - blind-source-separation
   - independent-vector-analysis
@@ -66,6 +67,16 @@ Spatial regularization has been integrated into various IVA frameworks:
 
 Both variants are paired with the [[concepts/fast-demixing-matrix-estimation|FastVCD / FastIP]] fast update rules for real-time operation, and feed into the [[concepts/rank-constrained-spatial-covariance-matrix-estimation|RCSCME]] framework.
 
+### Scale Regularization: Making unit/null Robust to IVE's Scale Ambiguity (Ueda et al. 2024)
+
+[[sources/ueda-2024-online-joint-optimization|Ueda et al. 2024]] integrate the regularization sub-terms of previous work into one term with three weighted components,
+
+$$
+\mathcal{J}_{\mathrm{SR}} = \sum_{f}\sum_{n=1}^{N} \big( \underbrace{\lambda^{\text{unit}}\,|\boldsymbol{w}_n^{\mathsf{H}}\boldsymbol{a}_n - 1|^2}_{\text{unit: respond 1 to target}} + \underbrace{\lambda^{\text{null}} \sum_{i \neq n} |\boldsymbol{w}_n^{\mathsf{H}}\boldsymbol{a}_i|^2}_{\text{null: null interferers}} + \underbrace{\lambda^{\text{scale}}\,\boldsymbol{w}_n^{\mathsf{H}}\boldsymbol{w}_n}_{\text{scale: penalize filter power}} \big),
+$$
+
+and reveal that **scale is indispensable** for the other two: because the IVE likelihood is invariant to the filter scale, the filter power $\|\boldsymbol{w}_n\|_2^2$ can grow arbitrarily large. A unit-regularized filter with $\|\boldsymbol{w}_n\|_2^2 \gg 1$ then *enhances the space orthogonal to the target* (RMSN 2773 without scale vs 0.93 with it), and a null-dominated objective disables IVE's source grouping so that alignment is decided solely by reverberation-corrupted DOA nulls — failing exactly in the low-frequency region where DOA steering vectors deviate most from the oracle. Penalizing filter power restores the intended behavior of both terms; with scale, unit and null reduce the permutation error of online-SRIVE and online-WPE×SRIVE to **0%**, and null + scale even improves SDRi/SIRi over no regularization. The same paper derives the first online spatially-regularized IVE (**online-SRIVE**, **online-WPE×SRIVE**) via the VCD/IP update on the regularized covariance $\boldsymbol{\Pi}_n = \boldsymbol{\Sigma}_n + \lambda^{\text{scale}}\boldsymbol{I} + \sum_i \lambda_{ni}\boldsymbol{a}_i\boldsymbol{a}_i^{\mathsf{H}}$ — at zero additional computational cost.
+
 ### Spatially-Guided Initialization
 
 Spatial regularization can also guide initialization strategies:
@@ -100,6 +111,7 @@ The SRSS-init strategy typically provides the best separation performance by ini
 - [[concepts/independent-low-rank-matrix-analysis|Independent Low-Rank Matrix Analysis (ILRMA)]]
 - [[concepts/fast-demixing-matrix-estimation|Fast Demixing Matrix Estimation (FastVCD / FastIP)]]
 - [[concepts/rank-constrained-spatial-covariance-matrix-estimation|Rank-Constrained Spatial Covariance Matrix Estimation (RCSCME)]]
+- [[concepts/online-joint-optimization|Online Joint Optimization (online-WPE×IVE)]]
 
 ## Related Sources
 
@@ -110,3 +122,4 @@ The SRSS-init strategy typically provides the best separation performance by ini
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]]
 - [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025: Real-Time RCSCME-based Speech Extraction]]
 - [[sources/brendel-2020-spatially-guided-iva|Brendel, Haubner & Kellermann 2020: Spatially Guided Independent Vector Analysis]] — the Gaussian MAP-prior formulation of spatial guidance, with DOA-estimate uncertainty as the prior variance
+- [[sources/ueda-2024-online-joint-optimization|Ueda, Nakatani, Ikeshita, Kinoshita, Araki & Makino 2024: Blind and Spatially-Regularized Online Joint Optimization]] — integrates unit, null, and scale regularization into one weighted term, showing scale regularization is indispensable for robust DOA-based alignment of online IVE (0% permutation error)

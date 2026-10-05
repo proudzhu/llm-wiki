@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-09-26
-updated: 2026-10-04
+updated: 2026-10-05
 sources:
   - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
   - raw/papers/nakatani-2022-switching-iva/full-text.md
+  - raw/papers/ueda-2024-online-joint-optimization/full-text.md
 tags:
   - dereverberation
   - speech-enhancement
@@ -41,6 +42,7 @@ WPE is derived as maximum-likelihood estimation under the assumption that $\math
 - Related multichannel-linear-prediction dereverberation via a state-space/Kalman EM view (Schwartz, Gannot & Habets 2014) treats the same CTF model with a Kalman filter E-step.
 - **Switching WPE (swWPE)**: a bank of time-invariant prediction filters with a switch selecting one dereverberated output per TF point (Ikeshita et al. 2021, mixture-of-WPE-models); consistently outperforms WPE in diffuse noise and underdetermined conditions. swWPE is one of the two jointly optimized components of [[concepts/switching-civa|swCIVA]], where the fine (frequency-dependent) source model is essential for the MCLP-filter and switch updates ([[sources/nakatani-2022-switching-iva|Nakatani et al. 2022]]).
 - The wiki's [[concepts/mclp|MCLP]] page covers the multi-channel linear prediction family; WPE is its best-known instance.
+- **Online joint optimization (online-WPE×IVE)**: in the online extension of the joint WPE×IVE framework ([[sources/ueda-2024-online-joint-optimization|Ueda et al. 2024]]), the WPE filters update per frame via a Kalman-gain (matrix-inversion-lemma) recursion with **source-wise factorization** (per-source filters $\boldsymbol{G}_n = \boldsymbol{R}_n^{-1}\boldsymbol{P}_n$; the shared $\boldsymbol{G}$ is never formed), and WPE keeps a much *slower* forgetting factor ($\beta = 0.9999$) than the separation block ($\alpha = 0.99$) — its large $ML \times ML$ statistics need more averaging, and forcing them to IVE's pace destabilizes the optimization. Joint optimization lets STFT frames (8 ms) be far shorter than the reverberation time, achieving a 10.01 ms total processing delay.
 
 ## Related Concepts
 
@@ -49,6 +51,8 @@ WPE is derived as maximum-likelihood estimation under the assumption that $\math
 - [[concepts/kalman-filter|Kalman Filter]]
 - [[concepts/hybrid-speech-enhancement|Hybrid Speech Enhancement]]
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
+- [[concepts/online-joint-optimization|Online Joint Optimization (online-WPE×IVE)]]
+- [[concepts/convolutional-beamformer|Convolutional Beamformer]]
 
 ## Related Sources
 
@@ -56,3 +60,4 @@ WPE is derived as maximum-likelihood estimation under the assumption that $\math
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023: Audio Signal Processing in the 21st Century]] — positions WPE as the dominant blind MCLP approach
 - [[sources/xiang-2025-wiener-gain-reverberant|Xiang et al. 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]] — AWPE (the WPE-style baseline) outperformed in jointly noisy and reverberant conditions
 - [[sources/nakatani-2022-switching-iva|Nakatani et al. 2022: Switching IVA and Its Extension to Blind and Spatially Guided Convolutional Beamforming]] — switching WPE integrated with switching IVA in the jointly optimized swCIVA convolutional beamformer
+- [[sources/ueda-2024-online-joint-optimization|Ueda, Nakatani, Ikeshita, Kinoshita, Araki & Makino 2024: Blind and Spatially-Regularized Online Joint Optimization]] — online joint WPE×IVE: WPE filters updated per frame via a Kalman-gain recursion with source-wise factorization, using a much slower forgetting factor (beta = 0.9999) than the separation block (alpha = 0.99)

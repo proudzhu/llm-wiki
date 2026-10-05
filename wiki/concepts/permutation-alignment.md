@@ -8,6 +8,7 @@ sources:
   - raw/papers/goto-2022-offline-iss-gciva/full-text.md
   - raw/papers/hu-2023-gc-auxiva-iss-realistic/full-text.md
   - raw/papers/brendel-2020-spatially-guided-iva/full-text.md
+  - raw/papers/ueda-2024-online-joint-optimization/full-text.md
 tags:
   - blind-source-separation
   - audio-source-separation
@@ -59,6 +60,7 @@ Result: separation quality on par with Sawada/MBMC (SIR/PESQ within ~0.1 dB / 0.
 - **Constraint-based prevention of block permutation**: even IVA-family methods are not immune to residual misalignment in the form of **block permutation** — different frequency *blocks* assigned to different sources (as opposed to per-bin permutation in ICA). [[sources/goto-2022-offline-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022]] show beam-pattern evidence that AuxIVA-ISS suffers block permutation between the low- and high-frequency bands in reverberant 4-source mixtures, and that adding geometric (far-field response) constraints eliminates it — an in-cost-function fix analogous in spirit to spatial regularization. The related **outer order permutation** problem (which of the N output channels carries which source, undetermined even when bins are internally aligned) is what these constraints definitively pin down: [[sources/hu-2023-gc-auxiva-iss-realistic|Hu & Chen 2023]] confirm on real recordings that rearranging the constraint DoA set $\Theta$ swaps exactly the designated output channels — with the caveat that the DoA estimates the constraints rely on fail under strong reverberation plus diffuse noise.
 - **Initialization-based avoidance**: [[sources/low-2004-hybrid-bss-anc|Low & Nordholm 2004]] sidestep post-hoc alignment by initializing every subband unmixing matrix as a beamformer-like null toward an arbitrary jammer direction, so the adaptation starts from — and preserves — a consistently ordered solution across subbands.
 - **Probabilistic prior-based resolution**: [[concepts/spatially-guided-iva|spatially guided IVA]] ([[sources/brendel-2020-spatially-guided-iva|Brendel, Haubner & Kellermann 2020]]) resolves the **outer order permutation** — which broadband output channel carries which source — by placing a DOA-uncertainty-aware Gaussian prior on the demixing matrices that favors spatial nulls toward given directions; K−1 such priors disambiguate K sources, and the prior variance can absorb the confidence of a DOA tracker. On measured RIRs this resolves the output order algorithmically (where plain auxIVA needs oracle permutation knowledge) without impairing AuxIVA convergence speed.
+- **Scale-regularized resolution (online)**: [[sources/ueda-2024-online-joint-optimization|Ueda et al. 2024]] give the outer order problem its operational name — **source permutation alignment**, distinguished from *source grouping* (the across-frequency grouping that IVA/IVE already perform) — and show that DOA-based [[concepts/spatial-regularization|spatial regularization]] (unit/null) aligns the permutation reliably *only if* the filter power is penalized by a **scale regularization** term: without it, IVE's scale ambiguity lets the filter norm blow up (RMSN in the thousands), so unit suppresses its own target and null dominates the objective, misaligning exactly the low-frequency bins where DOA-based steering vectors are least accurate. With scale, online-SRIVE and [[concepts/online-joint-optimization|online-WPE×SRIVE]] reach 0% permutation error in both car and office environments.
 
 ## Related Concepts
 
@@ -68,6 +70,7 @@ Result: separation quality on par with Sawada/MBMC (SIR/PESQ within ~0.1 dB / 0.
 - [[concepts/permutation-invariant-training|Permutation Invariant Training]]
 - [[concepts/spatial-regularization|Spatial Regularization]]
 - [[concepts/spatially-guided-iva|Spatially Guided IVA]]
+- [[concepts/online-joint-optimization|Online Joint Optimization (online-WPE×IVE)]]
 
 ## Related Sources
 
@@ -78,3 +81,4 @@ Result: separation quality on par with Sawada/MBMC (SIR/PESQ within ~0.1 dB / 0.
 - [[sources/sawada-2019-bss-ilrma-review|Sawada et al. 2019: BSS/ILRMA Review]] — treats the permutation problem as a central motivation for the IVA/ILRMA route
 - [[sources/ansari-2023-ai-bss-survey|Ansari et al. 2023: AI Approaches in BSS Survey]]
 - [[sources/brendel-2020-spatially-guided-iva|Brendel, Haubner & Kellermann 2020: Spatially Guided Independent Vector Analysis]] — probabilistic prior-based resolution of the outer order permutation
+- [[sources/ueda-2024-online-joint-optimization|Ueda, Nakatani, Ikeshita, Kinoshita, Araki & Makino 2024: Blind and Spatially-Regularized Online Joint Optimization]] — names the outer order problem "source permutation alignment" and shows scale regularization makes DOA-based unit/null alignment robust to IVE's scale ambiguity (0% permutation error online)

@@ -5849,3 +5849,14 @@ Ingested from Zotero (IEEE/ACM TASLP vol. 29, pp. 3461-3475, Nov. 2021; TAF Tele
 - **Summary**: MAP derivation of IVA with a DOA-uncertainty-aware Gaussian spatial prior over the demixing matrices; the quadratic prior adds to the AuxIVA weighted covariance so MM convergence speed is unimpaired, resolving the outer permutation problem. On measured RIRs (T60 50–400 ms), higher SIR than gradient-based GC-IVA (Khan et al. 2015) in all scenarios at lower total cost.
 - **Pages created**: `wiki/sources/brendel-2020-spatially-guided-iva.md`, `wiki/concepts/spatially-guided-iva.md`, `wiki/entities/thomas-haubner.md`
 - **Pages updated**: `wiki/entities/andreas-brendel.md` and `wiki/entities/walter-kellermann.md` (contribution bullets via script); `wiki/concepts/independent-vector-analysis.md` (MAP soft-prior paragraph, related lists); `wiki/concepts/geometrically-constrained-iva.md` (Brendel plain-text ref → wikilinks, soft-vs-hard constraint distinction); `wiki/concepts/permutation-alignment.md` (probabilistic prior-based outer-permutation resolution); `wiki/concepts/spatial-regularization.md` (MAP-prior sibling entry)
+
+---
+
+## [2026-10-05] ingest | Ueda et al. 2024: Blind and Spatially-Regularized Online Joint Optimization of Source Separation, Dereverberation, and Noise Reduction
+
+Ingested [[sources/ueda-2024-online-joint-optimization|Ueda et al. 2024: Blind and Spatially-Regularized Online Joint Optimization of Source Separation, Dereverberation, and Noise Reduction]] (IEEE/ACM TASLP, vol. 32) — first blind online joint optimization of source separation, dereverberation, and noise reduction under a single forgetting-factor ML criterion (online-WPE×IVE), with scale-regularized spatial alignment (online-WPE×SRIVE) reaching 0% permutation error at 8 ms algorithmic delay (10.01 ms total).
+
+- New concept pages: [[concepts/online-joint-optimization|Online Joint Optimization (online-WPE×IVE)]], [[concepts/convolutional-beamformer|Convolutional Beamformer (CBF)]]
+- Updated concepts: [[concepts/online-iva|Online IVA]], [[concepts/independent-vector-extraction|Independent Vector Extraction]], [[concepts/weighted-prediction-error|Weighted Prediction Error]], [[concepts/spatial-regularization|Spatial Regularization]], [[concepts/permutation-alignment|Permutation Alignment]], [[concepts/iterative-projection|Iterative Projection]], [[concepts/independent-vector-analysis|Independent Vector Analysis]], [[concepts/dereverberation|Dereverberation]]
+- Updated entities: [[entities/tetsuya-ueda|Tetsuya Ueda]], [[entities/tomohiro-nakatani|Tomohiro Nakatani]], [[entities/rintaro-ikeshita|Rintaro Ikeshita]], [[entities/keisuke-kinoshita|Keisuke Kinoshita]], [[entities/shoko-araki|Shoko Araki]], [[entities/shoji-makino|Shoji Makino]]
+- Updated synthesis: [[synthesis/joint-multitask-ultra-low-latency-se|Joint Multi-Task Speech Enhancement & Ultra-Low-Latency Realtime Paradigm]] (blind model-based counterpart at 8 ms)

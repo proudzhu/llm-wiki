@@ -5,6 +5,7 @@ updated: 2026-10-05
 sources:
   - raw/papers/ono-2011-stable-fast-update-rules-iva/full-text.md
   - raw/papers/brendel-2020-spatially-guided-iva/full-text.md
+  - raw/papers/ueda-2024-online-joint-optimization/full-text.md
 tags:
   - optimization-algorithms
   - blind-source-separation
@@ -62,6 +63,8 @@ Because IP's machinery is reused by many source-model extensions — most promin
 
 The IP rule also extends transparently to **constrained IVA objectives**: in [[concepts/spatially-guided-iva|spatially guided IVA]] ([[sources/brendel-2020-spatially-guided-iva|Brendel, Haubner & Kellermann 2020]]), the quadratic spatial MAP prior simply adds to the weighted covariance ($\boldsymbol{V}_{kf} \to \boldsymbol{V}_{kf} + \boldsymbol{P}_{f}$), so spatially constrained rows update with the same closed form $(\boldsymbol{W}_f[\boldsymbol{V}_{kf}+\boldsymbol{P}_f])^{-1}\boldsymbol{e}_k$ — preserving IP's tuning-free monotonic convergence while forcing spatial nulls toward given DOAs.
 
+IP also runs **online** without changing its closed form: in [[sources/ueda-2024-online-joint-optimization|Ueda et al. 2024]], the weighted covariance itself is propagated by a forgetting-factor recursion ($\boldsymbol{\Sigma}_n(t) \leftarrow \beta\boldsymbol{\Sigma}_n(t{-}1) + (1-\beta)\,\boldsymbol{y}\boldsymbol{y}^{\mathsf{H}}/v_n$, inverted via the matrix inversion lemma) and $\boldsymbol{W}^{-\mathsf{H}}$ is maintained incrementally — by rank-1 updates after single-column IP updates, and by a **block-matrix-inversion** formula after IVE's multi-column noise-row update. For the spatially regularized objective the same absorption pattern applies with $\boldsymbol{\Sigma}_n \to \boldsymbol{\Pi}_n = \boldsymbol{\Sigma}_n + \lambda^{\text{scale}}\boldsymbol{I} + \sum_i \lambda_{ni}\boldsymbol{a}_i\boldsymbol{a}_i^{\mathsf{H}}$ (IP when $\lambda^{\text{unit}} = 0$, VCD otherwise) — the [[concepts/spatial-regularization|spatial-regularization]] analogue of the $\boldsymbol{V} + \boldsymbol{P}$ construction above.
+
 ## Related Concepts
 
 - [[concepts/independent-vector-analysis|Independent Vector Analysis]] — the parent framework
@@ -70,6 +73,7 @@ The IP rule also extends transparently to **constrained IVA objectives**: in [[c
 - [[concepts/iterative-projection-with-adjustment|Iterative Projection with Adjustment]] — the joint-update extension
 - [[concepts/generalized-eigenvalue-decomposition|Generalized Eigenvalue Decomposition]] — the two-source closed form
 - [[concepts/blind-source-separation|Blind Source Separation]]
+- [[concepts/online-joint-optimization|Online Joint Optimization (online-WPE×IVE)]]
 
 ## Related Sources
 
@@ -78,3 +82,4 @@ The IP rule also extends transparently to **constrained IVA objectives**: in [[c
 - [[sources/scheibler-2021-log-quadratically-penalized-iva|Scheibler 2021: IVA via LQPQM]] — IPA, which removes the frozen-others limitation
 - [[sources/guo-2023-iva-survey|Guo, Luo & Li 2023: IVA Survey]] — surveys the family
 - [[sources/brendel-2020-spatially-guided-iva|Brendel, Haubner & Kellermann 2020: Spatially Guided Independent Vector Analysis]] — IP with a quadratic spatial prior added to the weighted covariance for constrained rows
+- [[sources/ueda-2024-online-joint-optimization|Ueda, Nakatani, Ikeshita, Kinoshita, Araki & Makino 2024: Blind and Spatially-Regularized Online Joint Optimization]] — IP runs online with forgetting-factor recursive statistics; rank-1 updates and block-matrix inversion keep the closed-form per-row updates intact in online-WPE×IVE

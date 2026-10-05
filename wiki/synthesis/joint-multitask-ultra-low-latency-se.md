@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-07-16
-updated: 2026-09-20
+updated: 2026-10-05
 sources:
   - raw/papers/indenbom-2023-deepvqe/full-text.md
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
@@ -18,6 +18,7 @@ sources:
   - raw/papers/shetu-2026-munet/full-text.md
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
   - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
+  - raw/papers/ueda-2024-online-joint-optimization/full-text.md
 tags:
   - speech-enhancement
   - multi-task
@@ -58,6 +59,7 @@ Neither trend is independently novel. The **new insight** from the 2025–2026 c
 | [[sources/rath-2026-minimum-delay-block-size\|Rath & Geier]] | 2026 | Theoretical lower bound | — | O(1) closed form | $\Delta = b_\text{plugin} - \gcd(b_\text{host}, b_\text{plugin})$ |
 | [[sources/larraza-2026-fast-ulcnet-speech-enhancement\|Fast-ULCNet (Larraza)]] | 2026 | NS (single-task) | 16 ms (hop) | **0.338M params, 1.69 MMACs**, RTF 0.60 ARM | GRU→FastGRNN replacement + Comfi-FastGRNN drift correction |
 | [[sources/uphaus-2026-directivity-low-latency\|FiLM-OSN (Uphaus)]] | 2026 | NDF (steerable directivity) + binaural SE | **10 ms** | 0.7M params | FiLM-conditioned OnlineSpatialNet (Mamba narrow-band SSM) |
+| [[sources/ueda-2024-online-joint-optimization\|online-WPE×IVE (Ueda)]] | 2024 | SS + DR + NR (blind joint) | **8 ms** (10.01 ms total, < 12 ms ICC budget) | O(F(N+1)M²L²)/frame, real-time on desktop CPU | Forgetting-factor online joint optimization in a [[concepts/convolutional-beamformer\|convolutional beamformer]] (model-based, no neural network) |
 
 ## Insight 1: Multi-Task Fusion Strategies Form a Spectrum
 
@@ -101,6 +103,8 @@ Instead of bolting tasks onto a shared backbone, **reframe** the task so a pretr
 | C. Distributed multi-stage | Constrained by inter-node comm | Pipeline of specialized stages | RT-Tango (8 ms) |
 
 **Key takeaway**: Strategy B is the most latency-friendly because it adds zero architectural overhead. Strategy A is most flexible for joint optimization but pays the backbone's latency cost. Strategy C is forced by physical deployment constraints (separated earpieces) and adds an inter-node bandwidth dimension.
+
+**The blind model-based counterpart (Ueda et al. 2024)**: the corpus's task-dissolution and sub-10 ms stories are otherwise entirely neural, but [[sources/ueda-2024-online-joint-optimization|Ueda et al. 2024]] reach the same joint objective — separation + dereverberation + noise reduction in **one** optimization problem — with no trained network at all: a single forgetting-factor ML criterion whose per-frame updates (rank-1 iterative-projection/steering updates for IVE, Kalman-gain recursion for WPE) are orchestrated inside a [[concepts/convolutional-beamformer|convolutional beamformer]]. Its 8 ms algorithmic delay comes purely from the STFT frame size (frames can be far shorter than RT60 because the model is blind), landing it in Tier 2 of the latency hierarchy alongside RT-Tango — evidence that the joint-multitask + sub-10 ms co-design insight is a property of the *problem*, not of neural architectures. Its distinctive failure mode is also model-based: IVE's scale ambiguity breaks DOA-based spatial alignment unless a scale regularization penalizes filter power (RMSN 2773 → 0.93, permutation error to 0%).
 
 ## Insight 2: The Latency Budget Drives a New Algorithmic Hierarchy
 

@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-30
-updated: 2026-10-04
+updated: 2026-10-05
 tags:
   - researcher
   - speech-enhancement
@@ -32,6 +32,7 @@ tags:
 - Co-author of "Accelerating Online GC-IVA with Iterative Source Steering" (APSIPA ASC 2022) — online GC-AuxIVA-ISS, an inverse-free online geometrically constrained IVA with MUSIC-based interference DOA estimation — [[sources/goto-2022-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022]]
 - Co-author of "GC-IVA with Auxiliary Function Approach and Iterative Source Steering" (30th European Signal Processing Conference (EUSIPCO 2022), 2022) — first derivation of the inverse-free offline GC-AuxIVA-ISS algorithm (ISS rank-1 updates with geometric constraints in the closed-form coefficients), showing block-permutation avoidance and 34-53% per-iteration runtime reduction over GC-AuxIVA-VCD — [[sources/goto-2022-offline-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022]]
 - Co-authored "TF-Bin-Wise Linear Combination of Beamformers" (IEEE/ACM TASLP 2021) — TFLC/RTFLC beamforming framework for distortionless enhancement in underdetermined situations — [[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021]]
+- Co-author of "Blind and Spatially-Regularized Online Joint Optimization of Source Separation, Dereverberation, and Noise Reduction" (IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 32, 2024) — first blind online joint optimization of source separation, dereverberation, and noise reduction under a single ML criterion (online-WPE×IVE), extended with scale-regularized spatial alignment (online-WPE×SRIVE) achieving 0% permutation error at 8 ms algorithmic delay — [[sources/ueda-2024-online-joint-optimization|Ueda, Nakatani, Ikeshita, Kinoshita, Araki & Makino 2024]]
 
 ## Affiliations
 
@@ -52,3 +53,4 @@ tags:
 - [[sources/goto-2022-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022: Accelerating Online GC-IVA with Iterative Source Steering]]
 - [[sources/goto-2022-offline-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022: GC-IVA with Auxiliary Function Approach and Iterative Source Steering]]
 - [[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021: TF-Bin-Wise Linear Combination of Beamformers]]
+- [[sources/ueda-2024-online-joint-optimization|Ueda, Nakatani, Ikeshita, Kinoshita, Araki & Makino 2024: Blind and Spatially-Regularized Online Joint Optimization of Source Separation, Dereverberation, and Noise Reduction]]

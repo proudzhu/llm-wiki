@@ -1240,6 +1240,8 @@
 | [[concepts/signal-to-reconstruction-distortion-ratio\|Signal-to-Reconstruction Distortion Ratio]] | Metric introduced by Yamaoka et al. 2021 isolating algorithmic reconstruction distortion (filter-induced target distortion) from suppression performance, complementing SDR when comparing distortionless-constrained enhancement methods. | 2026-10-04 |
 | [[concepts/af-dma-beamformer\|AF-DMA (Adaptive Fusion of Differential Beamformers)]] | Statistics-free online fusion of a fixed bank of null-constrained DMAs plus MWNG via per-TF-bin minimum instantaneous output energy (Jensen-relaxed LP). | 2026-10-04 |
 | [[concepts/spatially-guided-iva\|Spatially Guided IVA]] | MAP generalization of IVA with a DOA-uncertainty-aware Gaussian prior over the demixing matrices (Brendel et al. 2020); solves the outer permutation problem while retaining AuxIVA-speed MM convergence | 2026-10-05 |
+| [[concepts/online-joint-optimization\|Online Joint Optimization (online-WPE×IVE)]] | Frame-wise blind joint optimization of WPE dereverberation and IVE separation under a single forgetting-factor ML criterion; 8 ms algorithmic delay via rank-1/block-matrix-inversion updates. | 2026-10-05 |
+| [[concepts/convolutional-beamformer\|Convolutional Beamformer (CBF)]] | Multichannel filter integrating WPE dereverberation and separation/beamforming in one convolutional structure; the shared framework for offline and online joint optimization algorithms. | 2026-10-05 |
 
 ---
 
@@ -1505,6 +1507,7 @@
 | [[sources/zhao-2025-robust-fusion-differential-beamformers\|Zhao, Luo, Jin, Jin & Huang 2025]] | This letter proposes AF-DMA (adaptive fusion of differential microphone arrays): a bank of K null-constrained differential beamformers (each placing a null at a different candidate interference direction) plus a maximum-white-noise-gain (MWNG) beamformer are pre-designed, and their outputs are fused online per time-frequency bin by minimizing the instantaneous output variance over the simplex. | 2026-10-04 |
 | [[sources/hu-2023-gc-auxiva-iss-realistic\|Hu & Chen 2023]] | This paper is an independent industrial reproduction and real-world evaluation of GC-AuxIVA-ISS (Goto et al. 2022), the inverse-free geometrically constrained IVA algorithm, motivated by hearing-aid applications. | 2026-10-05 |
 | [[sources/brendel-2020-spatially-guided-iva\|Brendel, Haubner & Kellermann 2020]] | This paper presents a Maximum A Posteriori (MAP) derivation of IVA that augments the blind separation objective with a spatial prior over the demixing matrices, resolving the outer permutation ambiguity and guiding the algorithm toward a desired solution in adverse acoustic conditions. | 2026-10-05 |
+| [[sources/ueda-2024-online-joint-optimization\|Ueda, Nakatani, Ikeshita, Kinoshita, Araki & Makino 2024]] | This paper proposes online-WPE×IVE, the first blind online joint optimization algorithm that performs source separation, dereverberation, and noise reduction under a single maximum-likelihood criterion, by introducing a forgetting factor into the joint log-likelihood of WPE dereverberation and IVE separation and deriving computationally efficient updates for it. | 2026-10-05 |
 
 ---
 
@@ -1559,10 +1562,10 @@
 
 ## Statistics
 
-- **Total pages**: 1508
+- **Total pages**: 1511
 - **Entities**: 638
-- **Concepts**: 583
-- **Sources**: 256
+- **Concepts**: 585
+- **Sources**: 257
 - **Synthesis**: 23
 - **Queries**: 8
 - **Last updated**: 2026-10-05

@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-09-26
-updated: 2026-10-04
+updated: 2026-10-05
 tags:
   - researcher
   - speech-enhancement
@@ -23,8 +23,10 @@ tags:
 - Integrating DNN-based and spatial-clustering-based mask estimation for robust MVDR beamforming (ICASSP 2017) — the Class-2 hybrid combining DNN mask priors with EM refinement.
 - Blind and neural-network-guided convolutional beamformer for joint denoising, dereverberation, and source separation (ICASSP 2021) — neural source model coupled with model-based convolutional beamforming.
 - Proposed switching IVA (swIVA) and switching CIVA (swCIVA): switching-mechanism extensions of IVA/CIVA for accurate blind separation and dereverberation with only 2–3 microphones (IEEE/ACM TASLP 2022) — [[sources/nakatani-2022-switching-iva|Nakatani et al. 2022: Switching IVA and Its Extension to Blind and Spatially Guided Convolutional Beamforming]].
+- Co-author of "Blind and Spatially-Regularized Online Joint Optimization of Source Separation, Dereverberation, and Noise Reduction" (IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 32, 2024) — first blind online joint optimization of source separation, dereverberation, and noise reduction under a single ML criterion (online-WPE×IVE), extended with scale-regularized spatial alignment (online-WPE×SRIVE) achieving 0% permutation error at 8 ms algorithmic delay — [[sources/ueda-2024-online-joint-optimization|Ueda, Nakatani, Ikeshita, Kinoshita, Araki & Makino 2024]]
 
 ## Related Sources
 
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]]
 - [[sources/nakatani-2022-switching-iva|Nakatani, Ikeshita, Kinoshita, Sawada, Kamo & Araki 2022: Switching IVA and Its Extension to Blind and Spatially Guided Convolutional Beamforming]]
+- [[sources/ueda-2024-online-joint-optimization|Ueda, Nakatani, Ikeshita, Kinoshita, Araki & Makino 2024: Blind and Spatially-Regularized Online Joint Optimization of Source Separation, Dereverberation, and Noise Reduction]]

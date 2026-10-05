@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-08-22
-updated: 2026-10-04
+updated: 2026-10-05
 sources:
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
   - raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md
   - raw/papers/nakatani-2022-switching-iva/full-text.md
   - raw/papers/scheibler-2021-log-quadratically-penalized-iva/full-text.md
+  - raw/papers/ueda-2024-online-joint-optimization/full-text.md
 tags:
   - blind-source-extraction
   - independent-vector-analysis
@@ -39,6 +40,9 @@ normalized each iteration so $J^{-1}\sum_j s_{ij}\varphi_i(\mathbf{s}_j) = 1$ at
 | OverIVE | Overdetermined IVE (more mics than sources) | Scheibler & Ono 2019 |
 | [[concepts/fast-independent-vector-extraction\|FIVE]] | Iterative SINR maximization; auxiliary function globally minimized at every iteration | Scheibler & Ono 2020 |
 | Supervised IVE | Guided by speaker identification (x-vectors) | Malek et al. 2022 |
+| Online IVE | Forgetting-factor likelihood + closed-form noise-row updates; first online IVE for *multi-source* extraction | Ueda et al. 2024 |
+
+[[sources/ueda-2024-online-joint-optimization|Ueda et al. 2024]] derive **online-IVE** by dropping the WPE part from their [[concepts/online-joint-optimization|online WPE×IVE joint optimization]]: the spatial covariance matrices propagate by a forgetting-factor recursion, source rows update by the IP rule, and all noise rows $\boldsymbol{W}_{\mathrm{Z}}$ update together in closed form (with a block-matrix-inversion update of $\boldsymbol{W}^{-\mathsf{H}}$, since the multi-column update defeats the rank-1 inversion lemma). They also identify a failure mode specific to IVE when spatial regularization is added: the likelihood is invariant to filter scale, so [[concepts/spatial-regularization|DOA-based regularization]] terms misbehave unless the filter power is itself penalized (scale regularization).
 
 ## SNR-Dependent Design Choice
 
@@ -55,6 +59,7 @@ IVE methods are typically formulated and evaluated at moderate SNR (−5 to 5 dB
 - [[concepts/ogive|OGIVE]]
 - [[concepts/fast-independent-vector-extraction|Fast Independent Vector Extraction]]
 - [[concepts/natural-gradient|Natural Gradient]]
+- [[concepts/online-joint-optimization|Online Joint Optimization (online-WPE×IVE)]]
 
 ## Related Sources
 
@@ -63,3 +68,4 @@ IVE methods are typically formulated and evaluated at moderate SNR (−5 to 5 dB
 - [[sources/scheibler-2020-fast-independent-vector-extraction|Scheibler & Ono 2020: Fast Independent Vector Extraction]]
 - [[sources/scheibler-2021-log-quadratically-penalized-iva|Scheibler 2021: Independent Vector Analysis via Log-Quadratically Penalized Quadratic Minimization]] — contrasts IVE/FIVE's globally solvable special case with the general determined-separation problem, where the new IPA updates reach exact per-step minimization via LQPQM
 - [[sources/nakatani-2022-switching-iva|Nakatani et al. 2022: Switching IVA and Its Extension to Blind and Spatially Guided Convolutional Beamforming]] — positions IVE as the extraction-targeted IVA variant for noisy overdetermined mixtures, and cites the CIVA extensions incorporating IVE ([36]–[38]) that work well when $M \gg N$; the switching framework instead tackles the small-$M-N$ regime
+- [[sources/ueda-2024-online-joint-optimization|Ueda, Nakatani, Ikeshita, Kinoshita, Araki & Makino 2024: Blind and Spatially-Regularized Online Joint Optimization]] — the online-IVE special case: frame-wise IVE updates via forgetting-factor weighted statistics with per-source filter extraction; also exposes the scale-ambiguity failure mode of blind online IVE, fixed by scale regularization
