@@ -4196,9 +4196,9 @@ Synthesizes 16 sources (Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zh
 
 ## [2026-08-10] ingest | Guo et al. 2024: A Survey on Adaptive ANC Algorithms Overcoming the Output Saturation Effect
 
-- **Source**: `raw/papers/guo-2024-anc-saturation-survey/full-text.md` (MinerU extraction from arXiv 2403.17xxx PDF; Zotero item key `2R4HUK5R`)
-- **Authors**: Yu Guo, Xiaoyi Shen, Junwei Ji (NTU DSP Lab); Dongxing Li, Tao Jiang, Xiaojun Qiu
-- **Published**: 2024 (arXiv preprint)
+- **Source**: `raw/papers/guo-2024-anc-saturation-survey/full-text.md` (MinerU extraction from ResearchGate preprint PDF, Dec 2023; Zotero item key `V7CFUJY4`)
+- **Authors**: Yu Guo, Dongyuan Shi, Xiaoyi Shen, Junwei Ji, Woon-Seng Gan (Nanyang Technological University)
+- **Published**: Signal Processing, Vol. 225, Article 109525, 2024; DOI 10.1016/j.sigpro.2024.109525
 - **Summary**: Survey organising saturation-mitigation ANC algorithms into two families — (1) **output-constraint** algorithms that bound the actuator output to keep the amplifier linear (2-GD FxLMS, Re-scaling FxLMS, Leaky FxLMS, MOV FxLMS, MOV-Modified FxLMS, OLFxLMS, FxlogLMS), and (2) **nonlinear-adaptive** algorithms that model the saturation nonlinearity directly (2nd-VFxLMS, BFxLMS, FLANN-FsLMS, THF-FxLMS, MLPNN-FxLMS). Derives the saturated-output divergence proof, gives the QCQP formulation unifying the constraint family, and provides per-algorithm computational-complexity tables. Key finding: under **severe** saturation the constraint family preserves stability while NLANC diverges; under **mild** saturation NLANC can match the constraint family at higher cost.
 - **Pages created**:
   - `wiki/sources/guo-2024-anc-saturation-survey.md` — source summary with taxonomy, problem formulation, methodology, applications survey, key contributions, and limitations
