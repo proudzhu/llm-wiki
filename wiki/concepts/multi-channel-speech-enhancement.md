@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-10-04
+updated: 2026-10-05
 sources:
+  - raw/papers/hu-2023-gc-auxiva-iss-realistic/full-text.md
   - raw/papers/li-2020-geometrically-constrained-iva/full-text.md
   - raw/papers/li-2020-online-gciva/full-text.md
   - raw/papers/souden-2011-online-noise-tracking/full-text.md
@@ -62,7 +63,7 @@ tags:
 
 - **DL-based [[concepts/sound-source-localization|SSL]] as the spatial-cue front end (Grumiaux et al. 2022)**: Where classical MCSE derives the target direction from inter-channel phase differences, the deep-learning SSL literature — taxonomized by the Grumiaux et al. 2022 survey (156 systems, 2011–2021) along six axes (environment, source configuration, architecture, input feature, output strategy, data/learning) — estimates [[concepts/direction-of-arrival-estimation|DoA]] directly from multichannel features (GCC-PHAT, [[concepts/relative-transfer-function|RTF]], IPD/ILD, [[concepts/ambisonics|Ambisonics]]). Its output-strategy split — classification over a spatial pseudo-spectrum vs. regression (increasingly the [[concepts/activity-coupled-cartesian-doa|ACCDOA]] representation) — parallels the SE community's own target evolution from masks to filters, and such DL-DoA outputs are the natural upstream provider of steering information for beamforming-based MCSE pipelines.
 
-- **[[concepts/geometrically-constrained-iva|Geometrically Constrained IVA]] (Li & Koishida 2020)**: Classical statistical-model dual-microphone directional SE that anchors blind separation with LCMV-style response constraints — the interference channel is nulled toward the known target DOA (blocking-matrix behavior) and the target channel toward an interference DOA estimated from a separate AuxIVA run's directivity nulls. Beats a far-field MPDR beamformer and oracle-channel AuxIVA in SDR/SIR (8.80 vs. 7.12 dB SDR, 2-speaker, RT60 200 ms) with a convergence-guaranteed closed-form update requiring no step-size tuning.
+- **[[concepts/geometrically-constrained-iva|Geometrically Constrained IVA]] (Li & Koishida 2020)**: Classical statistical-model dual-microphone directional SE that anchors blind separation with LCMV-style response constraints — the interference channel is nulled toward the known target DOA (blocking-matrix behavior) and the target channel toward an interference DOA estimated from a separate AuxIVA run's directivity nulls. Beats a far-field MPDR beamformer and oracle-channel AuxIVA in SDR/SIR (8.80 vs. 7.12 dB SDR, 2-speaker, RT60 200 ms) with a convergence-guaranteed closed-form update requiring no step-size tuning. Its inverse-free ISS descendant (GC-AuxIVA-ISS) was the first in this family validated on **real recordings** ([[sources/hu-2023-gc-auxiva-iss-realistic|Hu & Chen 2023]]): hearing-aid-relevant small arrays (3–3.5 cm spacing) in anechoic, outdoor, and meeting-room scenes — good separation and DoA-driven output-order control where reverberation is low, failure of DoA estimation and order control at RT60 ≈ 600 ms with 70 dBA diffuse noise, prompting the conclusion that BSS-based MCSE needs dereverberation/denoise companions in realistic hearing-aid deployments.
 
 - **ANC-integrated MWF for open-fitting hearing aids (Serizel et al. 2010)**: In hearing aids with an open fitting, MWF-based NR must additionally contend with the unprocessed [[concepts/open-fitting-noise-leakage|noise leakage]] and the secondary-path attenuation — the [[concepts/filtered-x-mwf|Filtered-x MWF]] integrates multichannel NR with feedforward ANC in one filter set, gaining ~12 dB intelligibility-weighted SNR improvement where standard MWF-NR degrades at low amplification gains.
 
@@ -109,6 +110,7 @@ tags:
 
 - [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020: Geometrically Constrained IVA for Directional Speech Enhancement]] — dual-mic directional SE combining BSS adaptation with null constraints
 - [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020: Online Directional Speech Enhancement Using Geometrically Constrained IVA]] — real-time (< 16 ms/frame) dual-mic directional SE via online GCAV-IVA
+- [[sources/hu-2023-gc-auxiva-iss-realistic|Hu & Chen 2023: The Performance of GC-AuxIVA-ISS Method in a Realistic Environment]] — real-recording validation of GC-AuxIVA-ISS with hearing-aid-relevant arrays; boundary at RT60 ≈ 600 ms + 70 dBA diffuse noise
 - [[sources/oviste-2026-neural-vslf-speech-enhancement|Oviste 2026: Neural VSLF for Speech Enhancement]]
 - [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] — MWF-NR in the open-fitting hearing-aid context; leakage and secondary-path effects
 - [[sources/liu-2026-scm-reconstruction-speech-enhancement|Liu 2026: SCM Reconstruction for Speech Enhancement]]

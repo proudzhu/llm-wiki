@@ -639,4 +639,6 @@
 | [[entities/naoyuki-kamo\|Naoyuki Kamo]] | NTT researcher — BSS, guided source separation, microphone arrays; co-author of switching IVA/CIVA | 2026-10-04 |
 | [[entities/shoko-araki\|Shoko Araki]] | NTT senior researcher — BSS, microphone arrays, underdetermined separation via spatial clustering; co-author of switching IVA/CIVA | 2026-10-04 |
 | [[entities/danqi-jin\|Danqi Jin]] | Researcher on microphone array beamforming and speech enhancement; co-author of AF-DMA (Zhao et al. 2025). | 2026-10-04 |
+| [[entities/ziyi-hu\|Ziyi Hu]] | Researcher at Hunan ChipHearing Semiconductor (Changsha, China); first author of the independent industrial reproduction and realistic-environment evaluation of GC-AuxIVA-ISS. | 2026-10-05 |
+| [[entities/wang-chen\|Wang Chen]] | Researcher at Hunan ChipHearing Semiconductor (Changsha, China); corresponding author of the independent industrial reproduction and realistic-environment evaluation of GC-AuxIVA-ISS. | 2026-10-05 |
 

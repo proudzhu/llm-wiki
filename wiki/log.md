@@ -5825,3 +5825,16 @@ Ingested from Zotero (IEEE/ACM TASLP vol. 29, pp. 3461-3475, Nov. 2021; TAF Tele
 - **Summary**: AF-DMA — statistics-free online fusion of a fixed bank of null-constrained differential beamformers plus MWNG; per-TF-bin minimum instantaneous output energy via Jensen-relaxed LP; 7.66 dB SIR vs 4.49 dB (ACC-DMA) with moving + fixed interferers.
 - **Pages created**: `wiki/sources/zhao-2025-robust-fusion-differential-beamformers.md`, `wiki/concepts/af-dma-beamformer.md`, `wiki/entities/danqi-jin.md`
 - **Pages updated**: `wiki/entities/{kunlong-zhao,xueqin-luo,jilu-jin,gongping-huang}.md` (contribution bullets); `wiki/concepts/differential-microphone-array.md` (new "Adaptive Fusion in Dynamic Interference" section); `wiki/concepts/white-noise-gain.md` (MWNG as fusion anchor); `wiki/concepts/fixed-beamformer.md` (output-fusion section, fixed/adaptive bridge); `wiki/concepts/tflc-beamformer.md` (statistics-free DMA counterpart finding); `wiki/synthesis/multi-channel-speech-enhancement.md` (table row + "statistics-free DMA sibling" insight linking Yamaoka TFS / AF-DMA / Apostolidis output-based selection)
+
+---
+
+## [2026-10-05] ingest | The Performance of GC-AuxIVA-ISS Method in a Realistic Environment (Hu & Chen 2023)
+
+- **Source**: `raw/papers/hu-2023-gc-auxiva-iss-realistic/full-text.md` (Zotero: 6EQ7692Y)
+- **Authors**: Ziyi Hu, Wang Chen
+- **Published**: AICIT 2023 (IEEE), September 2023
+- **DOI**: 10.1109/AICIT59054.2023.10277765
+- **Summary**: Independent industrial reproduction and first real-recording evaluation of GC-AuxIVA-ISS across anechoic chamber, reverberant meeting room (RT60 ≈ 600 ms, 70 dBA bubble noise), and outdoor scenes — simulation behavior carries over to low-reverberation conditions (DoA within ~1°, exact output-order control, SIR 11.09 → 14.82 dB from null constraints), while the noisy reverberant meeting room breaks DoA estimation and order control, concluding that BSS needs dereverberation/denoise companions in realistic hearing-aid deployments.
+- **Pages created**: `wiki/sources/hu-2023-gc-auxiva-iss-realistic.md`, `wiki/entities/ziyi-hu.md`, `wiki/entities/wang-chen.md`
+- **Pages updated**: `wiki/concepts/geometrically-constrained-iva.md` (new "Realistic-Environment Validation" section), `wiki/concepts/iterative-source-steering.md` (GC applications note + source), `wiki/concepts/independent-vector-analysis.md` (GC-IVA paragraph extension + source), `wiki/concepts/blind-source-separation.md` (GC-BSS real-world checkpoint + source), `wiki/concepts/direction-of-arrival-estimation.md` (new "BSS-Directivity DOA on Real Recordings" section), `wiki/concepts/multi-channel-speech-enhancement.md` (GC-IVA technique bullet extension + source), `wiki/index.md`, `wiki/entities/index.md`, `wiki/sources/index.md`
+- **Notes**: No new concept pages (reproduction study, no novel concepts). Synthesis triage: all 6 candidates shared only 1 broad tag — skipped per workflow. Fig. 7 (outdoor order-control spectrograms) not embedded — no raster extracted by MinerU. Noted Table I metric-label discrepancy (table header SIR/SAR vs. body text "SDR and SIR") — table values used.

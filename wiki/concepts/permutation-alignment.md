@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-08-26
-updated: 2026-10-04
+updated: 2026-10-05
 sources:
   - raw/papers/low-2004-hybrid-bss-anc/full-text.txt
   - raw/papers/kang-2019-low-complexity-permutation-alignment/full-text.md
   - raw/papers/goto-2022-offline-iss-gciva/full-text.md
+  - raw/papers/hu-2023-gc-auxiva-iss-realistic/full-text.md
 tags:
   - blind-source-separation
   - audio-source-separation
@@ -54,7 +55,7 @@ Result: separation quality on par with Sawada/MBMC (SIR/PESQ within ~0.1 dB / 0.
 - **Built-in resolution**: [[concepts/independent-vector-analysis|IVA]], [[concepts/independent-low-rank-matrix-analysis|ILRMA]], and [[concepts/fastmnmf|FastMNMF]] avoid post-hoc alignment entirely by modeling source vectors jointly across frequency.
 - **Learned resolution**: [[concepts/permutation-invariant-training|permutation invariant training]] is the deep-learning analog — it makes the *training loss* invariant to output permutation rather than aligning frequency bins.
 - **Alternative regularizer**: [[concepts/spatial-regularization|spatial regularization]] uses DOA priors inside BSS optimization to keep permutations consistent, sidestepping the alignment problem from within the cost function.
-- **Constraint-based prevention of block permutation**: even IVA-family methods are not immune to residual misalignment in the form of **block permutation** — different frequency *blocks* assigned to different sources (as opposed to per-bin permutation in ICA). [[sources/goto-2022-offline-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022]] show beam-pattern evidence that AuxIVA-ISS suffers block permutation between the low- and high-frequency bands in reverberant 4-source mixtures, and that adding geometric (far-field response) constraints eliminates it — an in-cost-function fix analogous in spirit to spatial regularization.
+- **Constraint-based prevention of block permutation**: even IVA-family methods are not immune to residual misalignment in the form of **block permutation** — different frequency *blocks* assigned to different sources (as opposed to per-bin permutation in ICA). [[sources/goto-2022-offline-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022]] show beam-pattern evidence that AuxIVA-ISS suffers block permutation between the low- and high-frequency bands in reverberant 4-source mixtures, and that adding geometric (far-field response) constraints eliminates it — an in-cost-function fix analogous in spirit to spatial regularization. The related **outer order permutation** problem (which of the N output channels carries which source, undetermined even when bins are internally aligned) is what these constraints definitively pin down: [[sources/hu-2023-gc-auxiva-iss-realistic|Hu & Chen 2023]] confirm on real recordings that rearranging the constraint DoA set $\Theta$ swaps exactly the designated output channels — with the caveat that the DoA estimates the constraints rely on fail under strong reverberation plus diffuse noise.
 - **Initialization-based avoidance**: [[sources/low-2004-hybrid-bss-anc|Low & Nordholm 2004]] sidestep post-hoc alignment by initializing every subband unmixing matrix as a beamformer-like null toward an arbitrary jammer direction, so the adaptation starts from — and preserves — a consistently ordered solution across subbands.
 
 ## Related Concepts
@@ -70,5 +71,6 @@ Result: separation quality on par with Sawada/MBMC (SIR/PESQ within ~0.1 dB / 0.
 - [[sources/low-2004-hybrid-bss-anc|Low & Nordholm 2004: A Hybrid Speech Enhancement System Employing BSS and Adaptive Noise Cancellation]] — initialization-based avoidance of the permutation problem
 - [[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019: A Low-Complexity Permutation Alignment Method for Frequency-Domain BSS]]
 - [[sources/goto-2022-offline-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022: GC-IVA with Auxiliary Function Approach and Iterative Source Steering]] — geometric constraints prevent the block permutation failure of AuxIVA-ISS
+- [[sources/hu-2023-gc-auxiva-iss-realistic|Hu & Chen 2023: The Performance of GC-AuxIVA-ISS Method in a Realistic Environment]] — real-recording confirmation that geometric constraints pin the outer order permutation (DoA-dependent, fails under strong reverberation + diffuse noise)
 - [[sources/sawada-2019-bss-ilrma-review|Sawada et al. 2019: BSS/ILRMA Review]] — treats the permutation problem as a central motivation for the IVA/ILRMA route
 - [[sources/ansari-2023-ai-bss-survey|Ansari et al. 2023: AI Approaches in BSS Survey]]

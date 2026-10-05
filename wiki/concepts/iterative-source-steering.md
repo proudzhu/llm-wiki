@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-06-04
-updated: 2026-10-04
+updated: 2026-10-05
 sources:
+  - raw/papers/hu-2023-gc-auxiva-iss-realistic/full-text.md
   - raw/papers/ishikawa-2025-real-time-speech-extraction/full-text.md
   - raw/papers/goto-2022-offline-iss-gciva/full-text.md
   - raw/papers/goto-2022-iss-gciva/full-text.md
@@ -81,7 +82,7 @@ $$\mathbf{y}(f, t) \leftarrow \mathbf{y}(f, t) - \mathbf{v}_j(f)y_j(f, t)$$
 ISS has been successfully applied to:
 - Standard IVA for speech separation
 - [[concepts/switching-independent-vector-analysis|Switching IVA]] (SR-SwIVA-ISS)
-- Geometrically constrained IVA: [[sources/goto-2022-offline-iss-gciva|Goto et al. 2022 (EUSIPCO)]] first folded the geometric (far-field response) constraints directly into the closed-form ISS coefficients — the steering-vector response $g_{jf\theta} = \boldsymbol{w}_{jf}^{\mathsf{H}}\boldsymbol{d}_{f\theta}$ appears in the off-diagonal update $v_{ijf}$ and in the scalars $\alpha_j$, $\beta_j$ of the diagonal update — yielding the inverse-free **offline GC-AuxIVA-ISS**, which matches or beats the matrix-inversion-based GC-AuxIVA-VCD in SDR/SIR while running at the cost of unconstrained AuxIVA-ISS (34–53% faster; less than half of VCD's runtime at 4 channels), avoiding the block permutation failure of plain AuxIVA-ISS, and achieving 100% output-order accuracy. [[sources/goto-2022-iss-gciva|Goto et al. 2022 (APSIPA ASC)]] extended it online with 25–75% runtime reduction over the VCD-based online variant at equal enhancement quality. The time-varying look-direction set $\Theta_n$ in the online version lets the constraints track estimated DOAs of moving sources.
+- Geometrically constrained IVA: [[sources/goto-2022-offline-iss-gciva|Goto et al. 2022 (EUSIPCO)]] first folded the geometric (far-field response) constraints directly into the closed-form ISS coefficients — the steering-vector response $g_{jf\theta} = \boldsymbol{w}_{jf}^{\mathsf{H}}\boldsymbol{d}_{f\theta}$ appears in the off-diagonal update $v_{ijf}$ and in the scalars $\alpha_j$, $\beta_j$ of the diagonal update — yielding the inverse-free **offline GC-AuxIVA-ISS**, which matches or beats the matrix-inversion-based GC-AuxIVA-VCD in SDR/SIR while running at the cost of unconstrained AuxIVA-ISS (34–53% faster; less than half of VCD's runtime at 4 channels), avoiding the block permutation failure of plain AuxIVA-ISS, and achieving 100% output-order accuracy. [[sources/goto-2022-iss-gciva|Goto et al. 2022 (APSIPA ASC)]] extended it online with 25–75% runtime reduction over the VCD-based online variant at equal enhancement quality. The time-varying look-direction set $\Theta_n$ in the online version lets the constraints track estimated DOAs of moving sources. An independent industrial reproduction ([[sources/hu-2023-gc-auxiva-iss-realistic|Hu & Chen 2023]]) confirmed the offline algorithm's behavior on real recordings: in simulation and low-reverberation real scenes (anechoic chamber, outdoor) the ISS-based GC method delivered its published SIR gain and exact output-order control, while the noisy reverberant meeting room (RT60 ≈ 600 ms, 70 dBA) broke the upstream DoA estimation — delineating where the ISS-constrained pipeline holds up in practice.
 - Online source extraction: the real-time RCSCME+SR-ILRMA framework of [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025]] exceeds conventional Online IVA-IP/ISS in SDR/SIR under diffuse noise, and derives accelerated FastIP/FastVCD updates by the same algebraic-transformation philosophy applied to the IP rule
 
 ## Related Concepts
@@ -104,3 +105,4 @@ ISS has been successfully applied to:
 - [[sources/ishikawa-2025-real-time-speech-extraction|Ishikawa et al. 2025: Real-Time Speech Extraction via RCSCME + SR-ILRMA with Fast Demixing]] — real-time framework exceeding Online IVA-IP/ISS; derives accelerated FastIP/FastVCD updates
 - [[sources/goto-2022-offline-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022: GC-IVA with Auxiliary Function Approach and Iterative Source Steering]] — offline GC-AuxIVA-ISS: geometric constraints folded into the ISS closed-form coefficients; block-permutation avoidance; runtime of unconstrained AuxIVA-ISS
 - [[sources/goto-2022-iss-gciva|Goto et al. 2022: Accelerating Online GC-IVA with Iterative Source Steering]] — geometric constraints folded into the ISS closed-form coefficients; online GC-AuxIVA-ISS
+- [[sources/hu-2023-gc-auxiva-iss-realistic|Hu & Chen 2023: The Performance of GC-AuxIVA-ISS Method in a Realistic Environment]] — independent reproduction of GC-AuxIVA-ISS with real-recording validation across three realistic scenes

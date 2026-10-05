@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-10-04
-updated: 2026-10-04
+updated: 2026-10-05
 sources:
   - raw/papers/li-2020-geometrically-constrained-iva/full-text.md
   - raw/papers/li-2020-online-gciva/full-text.md
   - raw/papers/goto-2022-offline-iss-gciva/full-text.md
   - raw/papers/goto-2022-iss-gciva/full-text.md
   - raw/papers/nakatani-2022-switching-iva/full-text.md
+  - raw/papers/hu-2023-gc-auxiva-iss-realistic/full-text.md
 tags:
   - blind-source-separation
   - independent-vector-analysis
@@ -71,6 +72,10 @@ The **offline (batch) GC-AuxIVA-ISS** ([[sources/goto-2022-offline-iss-gciva|Got
 
 The **online extension (oGC-AuxIVA-ISS)**, [[sources/goto-2022-iss-gciva|Goto et al. 2022, APSIPA ASC]], adds the frame index and an autoregressive covariance recursion; the look directions $\Theta_n$ may be time-varying, letting the constraints track estimated DOAs of moving sources. On a fixed-target/moving-interference task (ATR speech, 2 mics, RT60 200 ms), online GC-AuxIVA-ISS matched online GC-AuxIVA-VCD in SDR/SIR (with 100% output-order accuracy) while cutting execution time by 25–75%, depending on how often DOAs are estimated. The interference DOAs themselves are estimated by MUSIC applied to projection-back source images, with a 5-frame moving average ("MUSIC smooth") beating per-frame and blockwise estimates by > 0.7 dB SDR.
 
+### Realistic-Environment Validation (Hu & Chen 2023)
+
+[[sources/hu-2023-gc-auxiva-iss-realistic|Hu & Chen 2023]] (hearing-chip industry, Hunan ChipHearing) independently reproduced GC-AuxIVA-ISS and validated it on **real recordings** for the first time, across three daily scenes with small linear arrays (3–3.5 cm spacing, hearing-aid-relevant): an anechoic chamber, an outdoor open ground, and a meeting room (RT60 ≈ 600 ms, 70 dBA bubble noise). Simulation behavior (SIR gain from the null constraint, 11.09 → 14.82 dB; exact output-order control by rearranging $\Theta$) carried over to the low-reverberation real scenes — anechoic DoA estimates landed within ~1° of the physical arrangement, and outdoors the separation was "clean and clear" with fully controllable output order. The meeting room, however, marks the **boundary of applicability**: with two speakers plus diffuse noise, the AuxIVA-ISS DoA estimates failed (only the louder voice localized), so order control was impossible, and the separated outputs stayed contaminated — the authors attribute this to the real noise being "not Gaussian enough" for the ML criterion to ignore (cf. Scheibler & Ono 2019), and conclude that realistic deployments need dereverberation and denoising pre/post-processing around the BSS stage.
+
 ## Relation to Other Spatially Guided BSS
 
 GCIVA belongs to the broader family of methods that inject prior spatial information into BSS, alongside [[concepts/spatial-regularization|spatial regularization]] (penalizing demixing-vector distance from DOA-derived steering vectors, used in SR-ILRMA/SR-SwIVA) and spatially informed MAP priors on demixing matrices (Brendel et al. 2019). Its distinguishing feature is that the constraints are **hard linear response constraints** in the LCMV sense rather than quadratic proximity penalties, and that they enable deliberate spatial shaping (nulls, distortionless responses) of specific output channels — including blocking-matrix behavior for interference reference generation. A further member of the family is the **spatially guided initialization** of [[concepts/switching-independent-vector-analysis|swIVA]]/[[concepts/switching-civa|swCIVA]] ([[sources/nakatani-2022-switching-iva|Nakatani et al. 2022]]), where NN-mask-estimated ATFs initialize per-state MPDR beamformers — spatial information enters only through initialization rather than as a constraint or penalty on the blind objective.
@@ -93,3 +98,4 @@ GCIVA belongs to the broader family of methods that inject prior spatial informa
 - [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020: Online Directional Speech Enhancement Using Geometrically Constrained IVA]] — real-time online extension (oGCAV-IVA) and the three interference-DOA system variants
 - [[sources/goto-2022-offline-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022: GC-IVA with Auxiliary Function Approach and Iterative Source Steering]] — offline (batch) GC-AuxIVA-ISS: inverse-free ISS rank-1 updates with constraints in the closed-form coefficients; block-permutation avoidance evidence
 - [[sources/goto-2022-iss-gciva|Goto, Ueda, Li, Yamada & Makino 2022: Accelerating Online GC-IVA with Iterative Source Steering]] — inverse-free online GC-AuxIVA-ISS (ISS rank-1 updates with constraints in the closed-form coefficients) and MUSIC-based interference DOA estimation
+- [[sources/hu-2023-gc-auxiva-iss-realistic|Hu & Chen 2023: The Performance of GC-AuxIVA-ISS Method in a Realistic Environment]] — independent industrial reproduction; first real-recording validation (anechoic / meeting room / outdoor) and the noisy-reverberant failure boundary
