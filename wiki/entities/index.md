@@ -642,4 +642,5 @@
 | [[entities/ziyi-hu\|Ziyi Hu]] | Researcher at Hunan ChipHearing Semiconductor (Changsha, China); first author of the independent industrial reproduction and realistic-environment evaluation of GC-AuxIVA-ISS. | 2026-10-05 |
 | [[entities/wang-chen\|Wang Chen]] | Researcher at Hunan ChipHearing Semiconductor (Changsha, China); corresponding author of the independent industrial reproduction and realistic-environment evaluation of GC-AuxIVA-ISS. | 2026-10-05 |
 | [[entities/thomas-haubner\|Thomas Haubner]] | FAU researcher — co-author of spatially guided IVA (MAP spatial prior over demixing matrices, ICASSP 2020) | 2026-10-05 |
+| [[entities/peter-vary\|Peter Vary]] | Professor (Life Fellow, IEEE), RWTH Aachen; speech coding, joint source-channel coding, speech enhancement, OEC | 2026-10-07 |
 

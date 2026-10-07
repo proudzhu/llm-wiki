@@ -5860,3 +5860,15 @@ Ingested [[sources/ueda-2024-online-joint-optimization|Ueda et al. 2024: Blind a
 - Updated concepts: [[concepts/online-iva|Online IVA]], [[concepts/independent-vector-extraction|Independent Vector Extraction]], [[concepts/weighted-prediction-error|Weighted Prediction Error]], [[concepts/spatial-regularization|Spatial Regularization]], [[concepts/permutation-alignment|Permutation Alignment]], [[concepts/iterative-projection|Iterative Projection]], [[concepts/independent-vector-analysis|Independent Vector Analysis]], [[concepts/dereverberation|Dereverberation]]
 - Updated entities: [[entities/tetsuya-ueda|Tetsuya Ueda]], [[entities/tomohiro-nakatani|Tomohiro Nakatani]], [[entities/rintaro-ikeshita|Rintaro Ikeshita]], [[entities/keisuke-kinoshita|Keisuke Kinoshita]], [[entities/shoko-araki|Shoko Araki]], [[entities/shoji-makino|Shoji Makino]]
 - Updated synthesis: [[synthesis/joint-multitask-ultra-low-latency-se|Joint Multi-Task Speech Enhancement & Ultra-Low-Latency Realtime Paradigm]] (blind model-based counterpart at 8 ms)
+
+---
+
+## [2026-10-07] ingest | Occlusion Effect Cancellation in Headphones and Hearing Devices (Liebich & Vary 2022)
+
+- **Source**: `raw/papers/liebich-2022-occlusion-effect-cancellation/full-text.md` (Zotero: U2BVZM66)
+- **Authors**: Stefan Liebich, Peter Vary
+- **Published**: IEEE/ACM Transactions on Audio, Speech, and Language Processing (TASLP), vol. 30, 2022
+- **DOI**: 10.1109/TASLP.2021.3130966
+- **Summary**: Joint treatment of occlusion effect cancellation (OEC) and ANC: combined feedforward-feedback control with a correction filter Ĝ(z) = G(z) that decouples hear-through and feedback designs, adaptive factor α, and ANC/OEC mode switching; validated by a 23-participant listening test (Δη = 1.67) and objective occlusion-function measurements.
+- **Pages created**: `wiki/sources/liebich-2022-occlusion-effect-cancellation.md`, `wiki/concepts/occlusion-effect-cancellation.md`, `wiki/entities/peter-vary.md`
+- **Pages updated**: `wiki/entities/stefan-liebich.md` (TASLP 2022 bullet, research focus, Vary link); `wiki/concepts/ear-canal-occlusion-effect.md` (OEC section, audiological/technical distinction); `wiki/concepts/transparency-mode.md` (hear-through filter design with feedback decoupling); `wiki/concepts/hybrid-anc.md` (correction-filter hybrid, mode switching; also removed a stray corrupted sources line); `wiki/concepts/sensitivity-function.md` (OEC design target as inverse occlusion function); `wiki/concepts/waterbed-effect.md` (1.5–4 kHz OEC amplification data point); `wiki/concepts/anc-attenuation-bounds.md` (journal contour version, amplitude-underestimation observation); `wiki/concepts/primary-path-variability.md` (multiplicative-uncertainty formalization); `wiki/concepts/robust-control.md` (H∞ mixed-sensitivity for OEC); `wiki/synthesis/modern-headphone-anc-systems.md` (occlusion-transparency conflict actively resolvable); `wiki/synthesis/application-specific-anc.md` (sealed-fitting alternative to open-fitting trade-off); `wiki/index.md` and subdirectory indexes (3 new rows, stats 1514).

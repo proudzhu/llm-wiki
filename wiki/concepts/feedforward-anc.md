@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-10-01
+updated: 2026-10-07
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
   - raw/papers/cheng-2026-anc-gain-constraint/full-text.txt
   - raw/papers/rao-2026-keep-speech-anc/full-text.txt
+  - raw/papers/liebich-2022-occlusion-effect-cancellation/full-text.md
 tags:
 - active-noise-control
 - signal-processing
@@ -62,6 +63,10 @@ This motivates [[hybrid-anc|Hybrid ANC]] architectures where the [[feedback-anc|
 
 Open-fitting hearing aids apply feedforward ANC to cancel the noise component of the [[concepts/open-fitting-noise-leakage|leakage]] at the tympanic membrane, with the BTE microphone array as reference and an ear-canal microphone as error sensor (technically feasible on the eartip, though absent from commercial devices). Because the microphone–loudspeaker distance is a few centimeters, the causality margin is only a few samples — see [[concepts/causality|Causality in ANC]]. The [[concepts/filtered-x-mwf|FxMWF]] of [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel et al. 2010]] shows how to combine this feedforward ANC with NR without the NR delay consuming the margin. Only the leakage's noise component is canceled, preserving its speech component for localization cues.
 
+## Hear-Through Path in Occlusion Effect Cancellation
+
+In [[concepts/occlusion-effect-cancellation|Occlusion Effect Cancellation (OEC)]] (Liebich & Vary 2022), the hear-through filter is the feedforward component of a hybrid structure: $W(z) = (P(z)S(z) - z^{-\tau})/G(z)$ passes the outside world to the ear canal while the feedback controller $K(z)$ simultaneously attenuates body-conducted occlusion. An internal correction filter $\hat{G}(z) = G(z)$ fed by the hear-through signal (rather than the loudspeaker signal, as in Kuo's hybrid ANC) decouples the feedforward and feedback designs, so $W(z)$ can be derived offline via Wiener-Hopf optimization without affecting closed-loop stability. See [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022]].
+
 ## Comparison with feedback ANC
 
 | Feature | Feedforward | Feedback |
@@ -97,3 +102,4 @@ Open-fitting hearing aids apply feedforward ANC to cancel the noise component of
 - [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC]] — retains the feedforward control path while a network estimates its filter bank conditioned on the desired direction
 - [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026: Active Noise Control With a Gain Constraint for Micro-Loudspeakers]] — single-channel feedforward ANC whose fixed control filter is pre-trained under a low-frequency gain constraint for micro-loudspeakers
 - [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — feedforward headphone ANC whose reference is de-speeched by a zero-delay causal WaveNet so the FIR filter cancels only noise
+- [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]] — hear-through filter as the feedforward component, decoupled from the OEC feedback loop via the Ĝ(z) correction filter

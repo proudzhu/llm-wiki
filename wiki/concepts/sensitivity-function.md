@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-05-13
+updated: 2026-10-07
+sources:
+  - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
 tags:
   - control-theory
   - feedback
@@ -26,13 +28,16 @@ where $C$ is the controller and $P$ is the plant (secondary path).
 
 - **Design objective**: Minimize $|S|$ in the control band (typically < 1kHz for ANC)
 - **Constraint**: Limit maximum $|S|$ (e.g., 3dB) to control noise boosting outside the control band
+- **OEC design target**: In [[concepts/occlusion-effect-cancellation|occlusion effect cancellation]], $S(z)$ should approximate the *inverse occlusion function*, attenuating 50–700 Hz where the occlusion effect amplifies body-conducted sound, while accepting the waterbed amplification at 1.5–4 kHz (compensated in the hear-through filter design). An adaptive factor $\alpha$ scales the effective loop gain: $S_\alpha = \frac{1}{1 + G\alpha K}$ (Liebich & Vary 2022).
 
 ## Related Concepts
 
 - [[concepts/feedback-anc|Feedback ANC]]
 - [[concepts/waterbed-effect|Waterbed Effect]]
 - [[concepts/robust-control|Robust Control]]
+- [[concepts/occlusion-effect-cancellation|Occlusion Effect Cancellation]]
 
 ## Related Sources
 
 - [[sources/seo-2016-feedback-anc-constrained-optimization|Seo et al. 2016: Feedback ANC via Constrained Optimization]]
+- [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]]

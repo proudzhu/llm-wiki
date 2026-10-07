@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-09-27
+updated: 2026-10-07
 sources:
   - zotero://select/items/0_M2F5PSAU
   - zotero://select/items/0_TVS87FW6
@@ -9,6 +9,7 @@ sources:
   - zotero://select/items/0_WBAA4H6N
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/watanabe-2026-low-frequency-harmonic-control/full-text.md
+  - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
 tags:
   - application-specific-anc
   - drone-anc
@@ -16,6 +17,7 @@ tags:
   - multi-channel-anc
   - open-ear-anc
   - selective-attenuation
+  - occlusion-effect-cancellation
 ---
 
 # Application-Specific ANC: Form Factor Drives Architecture
@@ -175,6 +177,8 @@ Uniquely among these applications, the hearing aid must run ANC *jointly* with n
 
 **Key challenge**: The open fitting trades the occlusion effect for leakage — the exact inversion of the sealed-earbud assumption. Combined with the few-sample causality margin, this makes the hearing aid the most constraint-bound ANC application in this comparison.
 
+**The sealed-fitting alternative**: [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022]] show the trade-off can be taken in the other direction — keep the sealed fitting and remove the occlusion effect *actively*. Their [[concepts/occlusion-effect-cancellation|OEC]] uses the same inner+outer microphone pair as the FxMWF hearing aid, but with $\mathcal{H}_\infty$ feedback control attenuating the amplified body-conducted low frequencies (50–700 Hz) and a hear-through feedforward filter restoring the attenuated air-conducted high frequencies, decoupled via a correction filter $\hat{G}(z) = G(z)$. A 23-participant listening test confirms restored own-voice naturalness (Δη = 1.67), and the same hardware switches between ANC and OEC modes by exchanging filter coefficients — an operation-mode dimension none of the other applications in this comparison needs.
+
 ---
 
 ## 6. Cross-Application Comparison
@@ -233,7 +237,9 @@ The specific implementation of each step differs, but the **sense-act-adapt loop
 - [[concepts/beamforming|Beamforming]]
 - [[concepts/feedback-anc|Feedback ANC]]
 - [[concepts/hybrid-anc|Hybrid ANC]]
+- [[concepts/occlusion-effect-cancellation|Occlusion Effect Cancellation]]
 
 ## Related Sources
 
 - [[sources/watanabe-2026-low-frequency-harmonic-control|Watanabe et al. 2026: Low-Frequency Harmonic Control for Speech Intelligibility in Open-Ear Headphones]] — signal-side alternative to open-ear ANC: reallocate harmonic energy instead of canceling noise
+- [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]] — sealed-fitting alternative to the open-fitting trade-off: active OEC restores own-voice naturalness on closed hardware

@@ -1,14 +1,16 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-09-06
+updated: 2026-10-07
 sources:
   - wiki/sources/han-2026-quality-aware-earable-se.md
   - raw/papers/hu-2026-abse-net/full-text.md
+  - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
 tags:
 - acoustics
 - biology
 - headphone
+- occlusion-effect-cancellation
 ---
 
 # Ear Canal Occlusion Effect
@@ -35,7 +37,12 @@ In high-end ANC headphones, the occlusion effect can be unpleasant for users dur
 - **Vented Design**: Including a small acoustic vent to allow low-frequency pressure to escape (at the cost of some passive isolation).
 - **Active Mitigation**: Using the feedback microphone and speaker to actively cancel the "booming" sound of the user's own voice.
 
-### 3. Open-Fit Hearing Aids: Trading Occlusion for Leakage
+### 3. Active Occlusion Effect Cancellation (OEC)
+[[concepts/occlusion-effect-cancellation|Occlusion Effect Cancellation (OEC)]] (Liebich & Vary 2022) actively compensates **both** symptoms with combined feedforward-feedback control: a feedback controller attenuates the amplified body-conducted low frequencies (50–700 Hz) via the inner microphone, while a hear-through feedforward filter restores the attenuated air-conducted high frequencies via the outer microphone. In a 23-participant listening test, the individually tuned combination significantly improved own-voice naturalness (Δη = 1.67 over the passive earplug), whereas feedback control alone was only marginally better than passive (Δη = 0.37) — both symptoms must be addressed.
+
+The paper also distinguishes the **audiological** understanding of the occlusion effect (only the low-frequency amplification of body-conducted sound) from the **technical** understanding (which additionally includes the attenuation of air-conducted sound), and defines the measurable occlusion function $\widetilde{OE} = |E|/|X|$ from simultaneous inner/outer microphone recordings.
+
+### 4. Open-Fit Hearing Aids: Trading Occlusion for Leakage
 Open-fit (vented) hearing aids bypass the occlusion effect by leaving the ear canal open, at the cost of **acoustic leakage**: external noise enters the canal through the vent and corrupts the enhanced signal played by the hearing-aid loudspeaker. [[sources/hu-2026-abse-net|Hu et al. 2026]] show a binaural MVDR beamformer loses most of its gain under leakage (SI-SDR 5.216 → 0.878 dB) and address it with active binaural speech enhancement ([[concepts/abse-net|ABSE-NET]]).
 
 ## Relationship to Ear Canal Deformation (ECD)
@@ -47,12 +54,14 @@ While the occlusion effect is a *static* phenomenon that *amplifies* bone-conduc
 - [[concepts/bone-conduction|Bone Conduction]]
 - [[concepts/ear-canal-deformation|Ear Canal Deformation]]
 - [[concepts/quality-aware-speech-enhancement|Quality-Aware Speech Enhancement]]
-- [[sources/fukumoto-2025-whisphone-paper-reading-note|Whisphone]]
+- [[concepts/occlusion-effect-cancellation|Occlusion Effect Cancellation]]
 - [[concepts/transparency-mode|Transparency Mode]]
 - [[concepts/active-binaural-speech-enhancement|Active Binaural Speech Enhancement]]
+- [[sources/fukumoto-2025-whisphone-paper-reading-note|Whisphone]]
 
 ## Related Sources
 
 - [[sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
 - [[sources/han-2026-quality-aware-earable-se|Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone SE]]
 - [[sources/hu-2026-abse-net|Hu et al. 2026: ABSE-NET — Active Binaural Speech Enhancement for Open-Fit Hearing Aids]]
+- [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]]

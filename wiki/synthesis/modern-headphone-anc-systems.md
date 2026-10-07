@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-10-01
+updated: 2026-10-07
 tags:
   - active-noise-control
   - bone-conduction
@@ -10,12 +10,14 @@ tags:
   - whisphone
   - open-ear-anc
   - multi-modal-interaction
+  - occlusion-effect-cancellation
 sources:
   - zotero://select/items/0_BPH79CM5 (DeepPEM-AFC)
   - zotero://select/items/0_AMKNDVMJ (Toyooka 2026)
   - raw/papers/veluri-2023-semantic-hearing/full-text.md
   - raw/papers/watanabe-2026-low-frequency-harmonic-control/full-text.md
   - raw/papers/rao-2026-keep-speech-anc/full-text.txt
+  - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
 ---
 
 # Modern Headphone ANC Systems: Beyond Noise Cancellation
@@ -179,6 +181,8 @@ Modern in-ear and over-ear ANC systems face a fundamental design trade-off:
 - **Occlusion Effect**: Providing high-quality ANC and noise isolation causes the "occlusion effect" (low-frequency resonance of the listener's own voice), which degrades naturalness.
 - **Transparency**: High-quality ANC requires a sealed ear canal, making "transparency mode" a synthetic reconstruction of the external sound field.
 
+[[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022]] show this conflict is not a static trade-off but can be **actively resolved on sealed hardware**: [[concepts/occlusion-effect-cancellation|occlusion effect cancellation (OEC)]] uses the hybrid FF-FB ANC machinery — feedback control for the amplified body-conducted low frequencies, hear-through for the attenuated air-conducted high frequencies — to "digitally open the ear." A correction filter $\hat{G}(z) = G(z)$ decouples the two designs, and the same hardware switches between ANC and OEC by exchanging filter coefficients. Listening tests (23 participants) show naturalness improves significantly (Δη = 1.67 over the passive earplug) — and, importantly, feedback control *alone* is nearly useless (Δη = 0.37): hear-through must be part of the solution. OEC is thus the missing "own-voice naturalness layer" of the integrated architecture in §4 — complementary to the awareness layer (§2) and input layer (§3).
+
 The industry is moving beyond basic "on/off" transparency toward **context-aware acoustic computing**.
 
 ### 5.1 Open-Ear ANC
@@ -241,6 +245,7 @@ This requires a dedicated DSP (e.g., Qualcomm QCC5141, ~200 MIPS capability).
 - [[concepts/beamforming|Beamforming]]
 - [[concepts/bone-conduction|Bone Conduction]]
 - [[concepts/ear-canal-occlusion-effect|Ear Canal Occlusion Effect]]
+- [[concepts/occlusion-effect-cancellation|Occlusion Effect Cancellation]]
 - [[concepts/whispering-speech-recognition|Whispering Speech Recognition]]
 - [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
 - [[concepts/minimum-variance-control|Minimum Variance Control]]
@@ -257,6 +262,7 @@ This requires a dedicated DSP (e.g., Qualcomm QCC5141, ~200 MIPS capability).
 - [[sources/veluri-2023-semantic-hearing|Veluri et al. 2023: Semantic Hearing]] — class-selective binaural reinsertion on top of the ANC clean slate; the headphone as a programmable acoustic scene platform
 - [[sources/watanabe-2026-low-frequency-harmonic-control|Watanabe et al. 2026: Low-Frequency Harmonic Control]] — open-ear playback intelligibility via signal adaptation (harmonic energy reallocation) rather than noise control
 - [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — conversation awareness without transparency mode: zero-delay reference de-speaking keeps the physical speech wave while ANC cancels only noise
+- [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]] — the own-voice naturalness layer: OEC resolves the occlusion-transparency conflict on sealed hardware via FF (hear-through) + FB control with correction-filter decoupling
 
 ## Related Synthesis
 

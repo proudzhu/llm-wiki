@@ -1,12 +1,14 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-04-17
+updated: 2026-10-07
 sources:
+  - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
 tags:
   - active-noise-control
   - headphone
   - audio-processing
+  - hear-through
 ---
 
 # Transparency Mode
@@ -34,6 +36,13 @@ Processing the external sound so it feels natural and originates from its actual
 ### 4. Media Handling
 During transparency mode, background media (music, podcasts) may be lowered in volume (**ducking**) or processed to remove vocals to improve conversation clarity.
 
+### 5. Hear-Through Filter Design with Feedback Decoupling
+When transparency is combined with feedback control — as in [[concepts/occlusion-effect-cancellation|occlusion effect cancellation]] — the hear-through filter must be designed *around* the feedback loop. Liebich & Vary (2022) target transparent transmission $E/X = z^{-\tau}$ with
+
+$$W(z) = \frac{P(z)S(z) - z^{-\tau}}{G(z)}$$
+
+and decouple the hear-through design from the feedback controller $K(z)$ via a correction filter $\hat{G}(z) = G(z)$ driven by the hear-through signal and added to the feedback controller input. The resulting filter qualitatively inverts the primary path, re-amplifying the high frequencies attenuated by the earpiece.
+
 ## Implementation Challenges
 
 - **Latency**: The path from microphone to speaker must be extremely fast (typically < 100 $\mu$s) to avoid comb-filtering effects with sound that leaks through the headphones naturally.
@@ -46,6 +55,7 @@ During transparency mode, background media (music, podcasts) may be lowered in v
 - [[voice-activity-detection|Voice Activity Detection]]
 - [[beamforming|Beamforming]]
 - [[ear-canal-occlusion-effect|Ear Canal Occlusion Effect]]
+- [[concepts/occlusion-effect-cancellation|Occlusion Effect Cancellation]]
 - [[sources/fukumoto-2025-whisphone-paper-reading-note|Whisphone]]
 
 ## Related Sources
@@ -54,3 +64,4 @@ During transparency mode, background media (music, podcasts) may be lowered in v
 - [[sources/fukumoto-2025-whisphone-paper-reading-note|Fukumoto 2025: Whisphone Paper Reading Note]]
 - [[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
 - [[sources/lu-2024-headphone-speech-listening-ambient-noise|Lu 2024: Headphone Speech Listening]]
+- [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]]

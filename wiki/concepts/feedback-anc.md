@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-22
-updated: 2026-09-12
+updated: 2026-10-07
 sources:
   - wiki/sources/kuo-1999-active-noise-control-tutorial-review.md
   - wiki/sources/pawelczyk-1997-anc-feedback-fixed-adaptive.md
@@ -12,6 +12,7 @@ sources:
   - raw/papers/fujii-2006-simultaneous-equations-anc/full-text.md
   - raw/papers/guldenschuh-2014-secondary-path-irregularities/full-text.md
   - raw/papers/xiao-2026-robust-spatially-selective-anc/full-text.txt
+  - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
 tags:
   - active-noise-control
   - control-theory
@@ -87,6 +88,10 @@ Liebich et al. (2018) confirmed this experimentally: feedback ANC showed consist
 | **Waterbed Effect** | Negligible | **Dominant** |
 | **Typical App** | Duct/Open Room | Headphones/In-ear |
 
+## 6. Application: Occlusion Effect Cancellation
+
+Feedback control also underpins [[concepts/occlusion-effect-cancellation|Occlusion Effect Cancellation (OEC)]] in sealed headphones and hearing devices. Liebich & Vary (2022) design the feedback controller $K(z)$ via $\mathcal{H}_\infty$ mixed-sensitivity synthesis so that the sensitivity function approximates the inverse occlusion function in the 50–700 Hz band, actively attenuating the amplified body-conducted components of the wearer's own voice. An internal correction filter $\hat{G}(z) = G(z)$, fed by the hear-through signal rather than the loudspeaker signal, decouples the feedback loop from the hear-through filter design, and an adaptive factor $\alpha$ (normalized cross-correlation, $0 \leq \alpha \leq 2$) trades stability ($\alpha < 1$) against performance ($\alpha > 1$). The same hardware switches between ANC and OEC simply by exchanging filter coefficients — see [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022]].
+
 ## Related
 - [[wiki/concepts/adaptive-feedback-control]]
 - [[wiki/concepts/internal-model-control]]
@@ -109,6 +114,7 @@ Liebich et al. (2018) confirmed this experimentally: feedback ANC showed consist
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii, Yamaguchi, Hashimoto, Fujita & Muneyasu 2006: Verification of Simultaneous Equations Method by an Experimental Active Noise Control System]]
 - [[sources/guldenschuh-2014-secondary-path-irregularities|Guldenschuh & de Callafon 2014: Detection of Secondary-Path Irregularities in ANC Headphones]]
 - [[sources/xiao-2026-robust-spatially-selective-anc|Xiao, Roden, Blau & Doclo 2026: Robust Soft-Constrained Spatially Selective ANC for Hearables under Secondary Path Variations]]
+- [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]]
 
 ## Related Concepts
 

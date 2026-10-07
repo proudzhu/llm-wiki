@@ -1,15 +1,15 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-09-12
+updated: 2026-10-07
 sources:
   - raw/papers/lu-2021-survey-active-noise-control-linear/full-text.md
   - raw/papers/shen-2023-advanced-anc/full-text.txt
   - raw/papers/toyooka-2026-hybrid-anc-virtual-sensing/full-text.txt
   - raw/papers/xiao-2026-robust-spatially-selective-anc/full-text.txt
-  to Headphones.md
   - raw/papers/bai-2026-feedback-guided-anc/full-text.md
   - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
+  - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
 tags:
 - active-noise-control
 - hybrid-systems
@@ -46,6 +46,9 @@ A more integrated approach proposed by Benois (2020) for headphones, where FF, M
 ### 4. Spatially Constrained Hybrid (Xiao 2023)
 [[concepts/spatially-selective-anc|Spatially selective ANC]] is derived directly on the hybrid architecture: the stacked input $\mathbf{x}(n)$ contains the $K-1$ reference signals **and** the estimated disturbance $\hat{d}(n)$ recovered from the error signal (the feedback path), so both reference and error signals serve the ANC and the spatial (Frost/ReIR) constraint simultaneously. A fully coupled design like this is natural for open-fitting devices such as AR glasses, where all microphones observe the disturbance ([[sources/xiao-2023-spatially-selective-anc|Xiao 2023]]).
 
+### 5. Correction-Filter Hybrid for OEC (Liebich & Vary 2022)
+[[concepts/occlusion-effect-cancellation|Occlusion effect cancellation]] re-instantiates the hybrid topology with a different objective — natural own-voice perception instead of silence. The feedback controller (inner microphone) attenuates amplified body-conducted sound below 700 Hz; the feedforward path is a hear-through equalizer (outer microphone) restoring attenuated air-conducted sound. The distinctive element is a **correction filter** $\hat{G}(z) = G(z)$ driven by the *feedforward* output and added to the feedback controller input, which decouples the two filter designs — unlike Kuo's hybrid, where the correction filter is driven by the control signal $u(n)$ and alters the feedback loop. The same hardware switches between ANC and OEC modes by exchanging filter coefficients.
+
 ## DOA Robustness
 
 A key advantage of hybrid ANC is its robustness to direction-of-arrival (DOA) variations. Liebich et al. (2018) showed experimentally that:
@@ -70,12 +73,14 @@ Most modern high-end ANC headphones use a hybrid approach:
 - [[minimum-variance-control|Minimum Variance Control]]
 - [[acoustic-feedback|Acoustic Feedback]]
 - [[feedback-guided-controller-fusion|Feedback-guided Controller Fusion]] — controller-level FF+FB hybrid (Bai 2026)
+- [[concepts/occlusion-effect-cancellation|Occlusion Effect Cancellation]] — hybrid topology for own-voice naturalness
 
 ## Related Sources
 
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
 - [[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
+- [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]] — correction-filter hybrid with ANC/OEC mode switching
 - [[sources/bai-2026-feedback-guided-anc|Bai 2026: Feedback-guided DNN-based Controller Fusion for Robust Fixed-Parameter ANC]] — controller-level FF+FB hybrid (WaveNet + feedback-guided MoE)
 - [[sources/xiao-2023-spatially-selective-anc|Xiao 2023: Spatially Selective Active Noise Control Systems]] — fully coupled spatially constrained hybrid (AR glasses)
 - [[sources/lu-2021-survey-active-noise-control-linear|Lu Lu, Kai-Li Yin, Rodrigo C. de Lamare, Zongsheng Zheng, Yi Yu, Xiaomin Yang & Badong Chen 2021: A Survey on Active Noise Control Techniques — Part I: Linear Systems]]

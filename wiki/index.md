@@ -648,6 +648,7 @@
 | [[entities/ziyi-hu\|Ziyi Hu]] | Researcher at Hunan ChipHearing Semiconductor (Changsha, China); first author of the independent industrial reproduction and realistic-environment evaluation of GC-AuxIVA-ISS. | 2026-10-05 |
 | [[entities/wang-chen\|Wang Chen]] | Researcher at Hunan ChipHearing Semiconductor (Changsha, China); corresponding author of the independent industrial reproduction and realistic-environment evaluation of GC-AuxIVA-ISS. | 2026-10-05 |
 | [[entities/thomas-haubner\|Thomas Haubner]] | FAU researcher — co-author of spatially guided IVA (MAP spatial prior over demixing matrices, ICASSP 2020) | 2026-10-05 |
+| [[entities/peter-vary\|Peter Vary]] | Professor (Life Fellow, IEEE), RWTH Aachen; speech coding, joint source-channel coding, speech enhancement, OEC | 2026-10-07 |
 
 ---
 
@@ -1242,6 +1243,7 @@
 | [[concepts/spatially-guided-iva\|Spatially Guided IVA]] | MAP generalization of IVA with a DOA-uncertainty-aware Gaussian prior over the demixing matrices (Brendel et al. 2020); solves the outer permutation problem while retaining AuxIVA-speed MM convergence | 2026-10-05 |
 | [[concepts/online-joint-optimization\|Online Joint Optimization (online-WPE×IVE)]] | Frame-wise blind joint optimization of WPE dereverberation and IVE separation under a single forgetting-factor ML criterion; 8 ms algorithmic delay via rank-1/block-matrix-inversion updates. | 2026-10-05 |
 | [[concepts/convolutional-beamformer\|Convolutional Beamformer (CBF)]] | Multichannel filter integrating WPE dereverberation and separation/beamforming in one convolutional structure; the shared framework for offline and online joint optimization algorithms. | 2026-10-05 |
+| [[concepts/occlusion-effect-cancellation\|Occlusion Effect Cancellation]] | Active compensation of the occlusion effect via hybrid FF-FB control: hear-through restores AC sound, feedback attenuates BC sound, decoupled by correction filter | 2026-10-07 |
 
 ---
 
@@ -1508,6 +1510,7 @@
 | [[sources/hu-2023-gc-auxiva-iss-realistic\|Hu & Chen 2023]] | This paper is an independent industrial reproduction and real-world evaluation of GC-AuxIVA-ISS (Goto et al. 2022), the inverse-free geometrically constrained IVA algorithm, motivated by hearing-aid applications. | 2026-10-05 |
 | [[sources/brendel-2020-spatially-guided-iva\|Brendel, Haubner & Kellermann 2020]] | This paper presents a Maximum A Posteriori (MAP) derivation of IVA that augments the blind separation objective with a spatial prior over the demixing matrices, resolving the outer permutation ambiguity and guiding the algorithm toward a desired solution in adverse acoustic conditions. | 2026-10-05 |
 | [[sources/ueda-2024-online-joint-optimization\|Ueda, Nakatani, Ikeshita, Kinoshita, Araki & Makino 2024]] | This paper proposes online-WPE×IVE, the first blind online joint optimization algorithm that performs source separation, dereverberation, and noise reduction under a single maximum-likelihood criterion, by introducing a forgetting factor into the joint log-likelihood of WPE dereverberation and IVE separation and deriving computationally efficient updates for it. | 2026-10-05 |
+| [[sources/liebich-2022-occlusion-effect-cancellation\|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]] | Joint OEC/ANC treatment: correction-filter decoupling, adaptive factor α, ANC/OEC mode switching; 23-participant listening test (Δη = 1.67) | 2026-10-07 |
 
 ---
 
@@ -1562,10 +1565,10 @@
 
 ## Statistics
 
-- **Total pages**: 1511
-- **Entities**: 638
-- **Concepts**: 585
-- **Sources**: 257
+- **Total pages**: 1514
+- **Entities**: 639
+- **Concepts**: 586
+- **Sources**: 258
 - **Synthesis**: 23
 - **Queries**: 8
-- **Last updated**: 2026-10-05
+- **Last updated**: 2026-10-07

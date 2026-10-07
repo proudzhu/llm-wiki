@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-05
-updated: 2026-05-05
+updated: 2026-10-07
 sources:
   - wiki/sources/liebich-2018-doa-dependency-anc-headphones.md
+  - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
 tags:
   - active-noise-control
   - control-theory
@@ -42,6 +43,7 @@ $$\Delta A_{\text{rel}} = \cos(\Delta\phi) \pm \sqrt{\cos^2(\Delta\phi) - (1 - \
 2. **High attenuation demands extreme precision**: 20 dB attenuation requires <0.83 dB amplitude error and <5.76° phase error
 3. **Time delay compounds phase error**: A constant time delay $\Delta t$ translates to increasing phase deviation with frequency ($\Delta\phi = 2\pi f \Delta t$), making high-frequency attenuation increasingly difficult
 4. **Frequency independence**: The bound is independent of $\omega$ for tonal signals; the frequency dependence enters only through the time-delay-to-phase conversion
+5. **Amplitude underestimation is forgiving**: With the amplitude *underestimated* ($\Delta A_{\mathrm{rel}} < 0$ dB), attenuation is still achieved for phase deviations beyond 60°; conversely, with perfect phase, amplitude deviation up to ~6 dB still attenuates (Liebich & Vary 2022, contour version of the bound)
 
 ## Implications for ANC Design
 
@@ -60,3 +62,4 @@ $$\Delta A_{\text{rel}} = \cos(\Delta\phi) \pm \sqrt{\cos^2(\Delta\phi) - (1 - \
 ## Related Sources
 
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
+- [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]] — journal version with the contour presentation

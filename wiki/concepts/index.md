@@ -589,4 +589,5 @@
 | [[concepts/spatially-guided-iva\|Spatially Guided IVA]] | MAP generalization of IVA with a DOA-uncertainty-aware Gaussian prior over the demixing matrices (Brendel et al. 2020); solves the outer permutation problem while retaining AuxIVA-speed MM convergence | 2026-10-05 |
 | [[concepts/online-joint-optimization\|Online Joint Optimization (online-WPE×IVE)]] | Frame-wise blind joint optimization of WPE dereverberation and IVE separation under a single forgetting-factor ML criterion; 8 ms algorithmic delay via rank-1/block-matrix-inversion updates. | 2026-10-05 |
 | [[concepts/convolutional-beamformer\|Convolutional Beamformer (CBF)]] | Multichannel filter integrating WPE dereverberation and separation/beamforming in one convolutional structure; the shared framework for offline and online joint optimization algorithms. | 2026-10-05 |
+| [[concepts/occlusion-effect-cancellation\|Occlusion Effect Cancellation]] | Active compensation of the occlusion effect via hybrid FF-FB control: hear-through restores AC sound, feedback attenuates BC sound, decoupled by correction filter | 2026-10-07 |
 
