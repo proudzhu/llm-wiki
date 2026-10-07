@@ -592,4 +592,5 @@
 | [[concepts/occlusion-effect-cancellation\|Occlusion Effect Cancellation]] | Active compensation of the occlusion effect via hybrid FF-FB control: hear-through restores AC sound, feedback attenuates BC sound, decoupled by correction filter | 2026-10-07 |
 | [[concepts/as-se\|Auxiliary-Sensor Speech Enhancement (AS-SE)]] | Speech enhancement using an outer microphone plus an auxiliary body-conduction sensor (typically an in-ear microphone) as input; training configurations for in-ear noise/interferer modeling. | 2026-10-07 |
 | [[concepts/pas-se\|PAS-SE]] | Personalized auxiliary-sensor speech enhancement: combines enrollment-based PSE conditioning with in-ear-microphone AS-SE input; best results with in-ear enrollments. | 2026-10-07 |
+| [[concepts/directivity-factor\|Directivity Factor (DF)]] | Array gain against diffuse noise; ROI-generalized by Itzhak & Cohen 2025 and maximized by the LD-MDF beamformer | 2026-10-07 |
 

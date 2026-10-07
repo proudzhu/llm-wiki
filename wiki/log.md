@@ -5899,3 +5899,25 @@ Ingested [[sources/ueda-2024-online-joint-optimization|Ueda et al. 2024: Blind a
   - `wiki/concepts/roi-beamforming.md` — fixed LDMG objective notation (Γ_Ω/Γ_v), latency to ⌊Ly/2⌋, added MTF attribution, prefixed bare wikilinks
   - `wiki/concepts/beamforming.md` — enriched ROI section (unified formulation, MTF attribution), prefixed roi-beamforming wikilink
   - `wiki/index.md` — statistics recomputed
+
+---
+
+## [2026-10-07] ingest | STFT-Domain Least-Distortion Region-of-Interest Beamforming (Itzhak & Cohen 2025)
+
+- **Source**: `raw/papers/itzhak-2025-stft-roi-beamforming/full-text.md` (Zotero: XN7MFAWM)
+- **Authors**: Gal Itzhak, Israel Cohen
+- **Published**: IEEE Transactions on Audio, Speech, and Language Processing, 2025
+- **DOI**: 10.1109/TASLPRO.2025.3580986
+- **Summary**: Introduces the STFT-domain least-distortion ROI beamformers LD-MWNG and LD-MDF — maximizing ROI-averaged WNG/DF subject to an ROI-distortion constraint derived from ROI-averaged steering statistics, with the eigenvector-truncation parameter K trading array gain against average distortion; validated on a 31-mic UCCA+ULA with superior STOI/DNSMOS and miscalibration robustness under large DOA deviations.
+- **Pages created**:
+  - `wiki/sources/itzhak-2025-stft-roi-beamforming.md`
+  - `wiki/entities/gal-itzhak.md`
+  - `wiki/concepts/directivity-factor.md`
+- **Pages updated**:
+  - `wiki/entities/israel-cohen.md` — appended contribution bullet, source, and entity cross-ref
+  - `wiki/concepts/roi-beamforming.md` — added STFT-domain origin section (LD-MWNG/LD-MDF, K semantics) and source
+  - `wiki/concepts/white-noise-gain.md` — added ROI-averaged WNG section and source
+  - `wiki/concepts/beamforming.md` — extended ROI section with origin reference, frontmatter source, Related Sources entry
+  - `wiki/sources/frank-2026-low-latency-roi-beamforming.md` — upgraded plain-text Itzhak & Cohen 2025 mention to wikilink
+  - `wiki/synthesis/multi-channel-speech-enhancement.md` — added Itzhak & Cohen 2025 row to Sources Synthesized and extended Insight 6 (ROI line as application-constraint illustration)
+  - `wiki/index.md`, `wiki/{sources,entities,concepts}/index.md` — added rows, recomputed statistics

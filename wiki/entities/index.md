@@ -646,4 +646,5 @@
 | [[entities/mattes-ohlenbusch\|Mattes Ohlenbusch]] | Researcher (Oldenburg / Bose internship); first author of PAS-SE; own-voice enhancement for hearables with in-ear microphones. | 2026-10-07 |
 | [[entities/mikolaj-kegler\|Mikolaj Kegler]] | Researcher at Bose; co-author of PAS-SE and two-step knowledge distillation for tiny speech enhancement. | 2026-10-07 |
 | [[entities/marko-stamenovic\|Marko Stamenovic]] | Researcher at Bose; co-author of PAS-SE, TinyLSTMs, and two-step knowledge distillation for tiny speech enhancement. | 2026-10-07 |
+| [[entities/gal-itzhak\|Gal Itzhak]] | Technion researcher; first author of the STFT-domain least-distortion ROI beamforming line | 2026-10-07 |
 

@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-10-04
+updated: 2026-10-07
 tags:
   - beamforming
   - robustness
@@ -14,6 +14,7 @@ sources:
   - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
   - raw/papers/desena-2012-higher-order-differential/full-text.md
   - raw/papers/jin-2021-steering-study-ldma/full-text.txt
+  - raw/papers/itzhak-2025-stft-roi-beamforming/full-text.md
 ---
 
 # White Noise Gain (WNG)
@@ -79,6 +80,16 @@ For **steered** DMAs, the same minimum-norm remedy applies: [[sources/jin-2021-s
 
 The **MWNG (maximum WNG) beamformer** also serves as a robustness anchor inside multi-beamformer fusion: [[sources/zhao-2025-robust-fusion-differential-beamformers|Zhao et al. 2025]] include it as the $(K{+}1)$-th member of their [[concepts/af-dma-beamformer|AF-DMA]] bank alongside $K$ null-constrained DMAs, so the online minimum-energy selection can fall back to the max-robustness output when no null direction matches the actual interference.
 
+## ROI-Averaged WNG
+
+[[sources/itzhak-2025-stft-roi-beamforming|Itzhak & Cohen 2025]] generalize the WNG to a **region-of-interest** (ROI) $\Omega$: the numerator averages the squared response over all steering directions in the region rather than evaluating a single look direction,
+
+$$
+\mathcal{W}_\Omega[\mathbf{h}] = \frac{\mathbf{h}^H \boldsymbol{\Gamma}_{\mathbf{d},\Omega}\, \mathbf{h}}{\mathbf{h}^H \mathbf{h}}
+$$
+
+with subband and broadband variants. Their **LD-MWNG** (least-distortion maximum WNG) beamformer maximizes this measure subject to an ROI-distortion constraint; an eigenvector-truncation parameter $K$ trades WNG against average distortion across the ROI (decreasing $K$ raises WNG). For a single-DOA ROI, LD-MWNG reduces to the delay-and-sum beamformer — consistent with delay-and-sum being the maximum-WNG beamformer. Notably, the ROI setting shows LD-MWNG-type designs are markedly more robust to array miscalibration (position offsets, gain skews) than classical and recent ROI-agnostic baselines under DOA deviation.
+
 ## Related Concepts
 
 - [[concepts/diagonal-loading|Diagonal Loading]]
@@ -104,3 +115,4 @@ The **MWNG (maximum WNG) beamformer** also serves as a robustness anchor inside 
 - [[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012: On the Design and Implementation of Higher Order Differential Microphones]] — closed-form WNG of second-order DMA structures; WNG as a function of $kd$ defining the operational band $[\gamma c/2\pi d,\ c/4d]$
 - [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021: Steering Study of Linear Differential Microphone Arrays]] — WNG of steerable LDMAs: minimum-norm improvement with microphone count, steering-angle dependence, high-frequency extra-null caveat
 - [[sources/zhao-2025-robust-fusion-differential-beamformers|Zhao, Luo, Jin, Jin & Huang 2025: Robust Fusion of Differential Beamformers]] — MWNG beamformer as the robustness anchor of the AF-DMA fusion bank
+- [[sources/itzhak-2025-stft-roi-beamforming|Itzhak & Cohen 2025: STFT-Domain Least-Distortion Region-of-Interest Beamforming]] — ROI-averaged WNG generalization and the LD-MWNG beamformer; robustness to array miscalibration under DOA deviation

@@ -44,7 +44,7 @@ $$
 
 where $d_m(t)$ is a noncausal infinite impulse response filter relative to Microphone 1. The objective is to estimate $x_1(t)$ from $\{y_m(t)\}_{m=1}^{M}$.
 
-Two ROI beamforming approaches were proposed in 2025 — a time-domain implementation (Frank & Cohen, IEEE/ACM TASLP 2025) and an STFT-domain implementation (Itzhak & Cohen, IEEE/ACM TASLP 2025). Each starts from the signal model but adopts a different approximation:
+Two ROI beamforming approaches were proposed in 2025 — a time-domain implementation (Frank & Cohen, IEEE/ACM TASLP 2025) and an STFT-domain implementation ([[sources/itzhak-2025-stft-roi-beamforming|Itzhak & Cohen 2025]]). Each starts from the signal model but adopts a different approximation:
 
 - **STFT-domain**: Under the multiplicative transfer function (MTF) approximation, $x_m(k, r) = d_m(k)\, x_1(k, r)$ with a complex scalar $d_m(k)$ per frequency bin. The steering vector $\mathbf{d}(k)$ has length $M$. Without MTF, $x_m(k,r)$ depends on neighboring frequency/time bins; neglecting these terms yields a suboptimal estimate.
 - **Time-domain**: Each $d_m(t)$ is approximated by a noncausal FIR filter of length $L_d$ with $\Delta$ noncausal coefficients. The observation vector has length $M L_y$ (frame of $L_y$ samples per channel) and the time-domain steering matrix $\mathbf{D}$ is $M L_y \times L$ with $L = L_d + L_y - 1$.

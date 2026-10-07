@@ -4,6 +4,7 @@ created: 2026-04-28
 updated: 2026-10-07
 sources:
   - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.md
+  - raw/papers/itzhak-2025-stft-roi-beamforming/full-text.md
 tags:
   - beamforming
   - spatial-filtering
@@ -51,6 +52,15 @@ with a final normalization so the average desired-signal reduction factor equals
 - **K**: Number of eigenvectors of $\Gamma_v^{-1} \Gamma_\Omega$ retained (decreasing K improves array gain but degrades distortion)
 - **μ**: Regularization constant (increasing μ improves robustness but degrades distortion)
 
+## STFT-Domain Origin: LD-MWNG and LD-MDF
+
+The STFT-domain instance of this formulation was introduced by [[sources/itzhak-2025-stft-roi-beamforming|Itzhak & Cohen 2025]] as two beamformers, each maximizing a different array-gain measure under the ROI-distortion constraint $\boldsymbol{\Gamma}_{\mathbf{d},\Omega}(k)\, \mathbf{h}(k) = \mathbf{d}_\Omega(k)$:
+
+- **LD-MWNG** (least-distortion maximum WNG): EVD of $\boldsymbol{\Gamma}_{\mathbf{d},\Omega}$; maximizes the ROI-averaged [[concepts/white-noise-gain|WNG]]; reduces to the delay-and-sum beamformer for a single-DOA ROI
+- **LD-MDF** (least-distortion maximum DF): GEVD of $(\boldsymbol{\Gamma}_{\mathbf{d},\Omega}, \boldsymbol{\Gamma}_0)$ with the diffuse-noise pseudo-correlation; maximizes the ROI-averaged [[concepts/directivity-factor|DF]]; reduces to the classical maximum-DF (superdirective) beamformer for a single-DOA ROI
+
+Both use the eigenvector-truncation parameter $K$ alone (no $\mu$): $K = 1$ recovers the unconstrained maximum-gain solution with minimal ROI-average distortion, $K = P$ (rank of $\boldsymbol{\Gamma}_{\mathbf{d},\Omega}$) gives the least-distortion solution. The larger the ROI, the higher the rank and the larger the usable $K$ (eigenvalue analysis suggests $K \leq 3$ for a $\pm 30°$ azimuth ROI, $K \leq 7$ for the largest ROI tested); empirically the best $K$ grows with the actual DOA deviation. Frank & Cohen 2026 unified both implementations under the LDMG framework with $K$ and a regularization $\mu$.
+
 ## Time-Domain vs STFT-Domain Implementation
 
 | Aspect | Time-Domain | STFT-Domain |
@@ -75,9 +85,12 @@ with a final normalization so the average desired-signal reduction factor equals
 ## Related Concepts
 
 - [[concepts/beamforming|Beamforming]]
+- [[concepts/white-noise-gain|White Noise Gain]]
+- [[concepts/directivity-factor|Directivity Factor]]
 - [[concepts/signal-processing|Signal Processing]]
 - [[concepts/active-noise-control|Active Noise Control]]
 
 ## Related Sources
 
 - [[sources/frank-2026-low-latency-roi-beamforming|Frank & Cohen 2026: Low-latency Audio Front-end ROI Beamforming for Smart Glasses]]
+- [[sources/itzhak-2025-stft-roi-beamforming|Itzhak & Cohen 2025: STFT-Domain Least-Distortion Region-of-Interest Beamforming]] — the original STFT-domain least-distortion ROI formulation (LD-MWNG / LD-MDF) that the LDMG framework unifies

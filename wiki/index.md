@@ -652,6 +652,7 @@
 | [[entities/mattes-ohlenbusch\|Mattes Ohlenbusch]] | Researcher (Oldenburg / Bose internship); first author of PAS-SE; own-voice enhancement for hearables with in-ear microphones. | 2026-10-07 |
 | [[entities/mikolaj-kegler\|Mikolaj Kegler]] | Researcher at Bose; co-author of PAS-SE and two-step knowledge distillation for tiny speech enhancement. | 2026-10-07 |
 | [[entities/marko-stamenovic\|Marko Stamenovic]] | Researcher at Bose; co-author of PAS-SE, TinyLSTMs, and two-step knowledge distillation for tiny speech enhancement. | 2026-10-07 |
+| [[entities/gal-itzhak\|Gal Itzhak]] | Technion researcher; first author of the STFT-domain least-distortion ROI beamforming line | 2026-10-07 |
 
 ---
 
@@ -1249,6 +1250,7 @@
 | [[concepts/occlusion-effect-cancellation\|Occlusion Effect Cancellation]] | Active compensation of the occlusion effect via hybrid FF-FB control: hear-through restores AC sound, feedback attenuates BC sound, decoupled by correction filter | 2026-10-07 |
 | [[concepts/as-se\|Auxiliary-Sensor Speech Enhancement (AS-SE)]] | Speech enhancement using an outer microphone plus an auxiliary body-conduction sensor (typically an in-ear microphone) as input; training configurations for in-ear noise/interferer modeling. | 2026-10-07 |
 | [[concepts/pas-se\|PAS-SE]] | Personalized auxiliary-sensor speech enhancement: combines enrollment-based PSE conditioning with in-ear-microphone AS-SE input; best results with in-ear enrollments. | 2026-10-07 |
+| [[concepts/directivity-factor\|Directivity Factor (DF)]] | Array gain against diffuse noise; ROI-generalized by Itzhak & Cohen 2025 and maximized by the LD-MDF beamformer | 2026-10-07 |
 
 ---
 
@@ -1517,6 +1519,7 @@
 | [[sources/ueda-2024-online-joint-optimization\|Ueda, Nakatani, Ikeshita, Kinoshita, Araki & Makino 2024]] | This paper proposes online-WPE×IVE, the first blind online joint optimization algorithm that performs source separation, dereverberation, and noise reduction under a single maximum-likelihood criterion, by introducing a forgetting factor into the joint log-likelihood of WPE dereverberation and IVE separation and deriving computationally efficient updates for it. | 2026-10-05 |
 | [[sources/liebich-2022-occlusion-effect-cancellation\|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]] | Joint OEC/ANC treatment: correction-filter decoupling, adaptive factor α, ANC/OEC mode switching; 23-participant listening test (Δη = 1.67) | 2026-10-07 |
 | [[sources/ohlenbusch-2026-pas-se\|Ohlenbusch, Kegler & Stamenovic 2026]] | This paper systematically benchmarks two strategies for resolving the target/interferer ambiguity in hearable voice pickup — personalized speech enhancement (PSE), which conditions on enrollment utterances, and auxiliary-sensor speech enhancement (AS-SE), which adds an in-ear microphone input — and combines them into PAS-SE. | 2026-10-07 |
+| [[sources/itzhak-2025-stft-roi-beamforming\|Itzhak & Cohen 2025: STFT-Domain Least-Distortion Region-of-Interest Beamforming]] | LD-MWNG/LD-MDF ROI beamformers maximizing WNG/DF under an ROI-distortion constraint; parameter K trades gain vs distortion | 2026-10-07 |
 
 ---
 
@@ -1571,10 +1574,10 @@
 
 ## Statistics
 
-- **Total pages**: 1520
-- **Entities**: 642
-- **Concepts**: 588
-- **Sources**: 259
+- **Total pages**: 1523
+- **Entities**: 643
+- **Concepts**: 589
+- **Sources**: 260
 - **Synthesis**: 23
 - **Queries**: 8
 - **Last updated**: 2026-10-07

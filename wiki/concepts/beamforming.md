@@ -6,6 +6,7 @@ sources:
   - raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.md
+  - raw/papers/itzhak-2025-stft-roi-beamforming/full-text.md
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
@@ -83,7 +84,7 @@ Frank & Cohen (2026) developed a unified formulation for **least-distortion maxi
 - **Trade-off**: Time-domain requires M Ly² real multiplications vs O(M Ly log₂ Ly) for STFT-domain
 - **Conclusion**: When low latency is critical and modest additional on-device computing power is available, time-domain ROI beamforming is preferred for smart-glasses front ends
 
-See [[concepts/roi-beamforming|Region-of-Interest Beamforming]] for details.
+See [[concepts/roi-beamforming|Region-of-Interest Beamforming]] for details. The STFT-domain implementation compared there originates from [[sources/itzhak-2025-stft-roi-beamforming|Itzhak & Cohen 2025]], who derived the LD-MWNG and LD-MDF beamformers from an ROI-distortion constraint and showed their eigenvector-truncation parameter $K$ trades array gain (WNG/DF) against average distortion over the region — with superior intelligibility (STOI) and miscalibration robustness over classical and ROI-agnostic baselines when the DOA deviates significantly.
 
 ## Maximum Radial Energy (max-rE) Beamformer
 
@@ -160,6 +161,7 @@ The dual-microphone limit above — masking methods beating small-array beamform
 - [[sources/lorenz-2005-robust-minimum-variance-beamforming|Lorenz & Boyd 2005: Robust Minimum Variance Beamforming]]
 - [[sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]]
 - [[sources/frank-2026-low-latency-roi-beamforming|Frank & Cohen 2026: Low-latency Audio Front-end ROI Beamforming for Smart Glasses]]
+- [[sources/itzhak-2025-stft-roi-beamforming|Itzhak & Cohen 2025: STFT-Domain Least-Distortion Region-of-Interest Beamforming]] — LD-MWNG/LD-MDF ROI beamformers with gain-distortion parameter K
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
 - [[sources/lin-2024-agadir-array-geometry-agnostic-speech-recognition|Lin et al. 2024: AGADIR — NLCMV Beamforming for Directional ASR]]
 - [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]]

@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-16
-updated: 2026-10-04
+updated: 2026-10-07
 sources:
   - raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md
   - raw/papers/low-2004-hybrid-bss-anc/full-text.txt
@@ -28,6 +28,7 @@ sources:
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
   - raw/papers/li-2026-geometry-conditioned-ssanc/full-text.md
   - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.txt
+  - raw/papers/itzhak-2025-stft-roi-beamforming/full-text.md
   - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
   - raw/papers/ruan-2024-speech-extraction-low-snr/full-text.md
   - raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md
@@ -134,6 +135,7 @@ The distinction: this synthesis is about **spatial filtering** (beamforming, coh
 | [[sources/li-2026-geometry-conditioned-ssanc\|Li et al. 2026 (GC-SSF)]] | 2026 | Geometry | FiLM + DOA-MPE conditioning for target-speaker extraction across array geometries |
 | [[sources/liu-2026-array-invariant-speech-enhancement\|Liu et al. 2026 (Geo-DConv)]] | 2026 | Geometry | TACT + dynamic convolution converts fixed-array backbones to array-invariant; ~10× fewer MACs than USES2-comp |
 | [[sources/frank-2026-low-latency-roi-beamforming\|Frank & Cohen 2026]] | 2026 | Application | Time-domain vs STFT-domain ROI beamforming for smart glasses: 2× lower latency, higher DF, at higher compute |
+| [[sources/itzhak-2025-stft-roi-beamforming\|Itzhak & Cohen 2025]] | 2025 | Robustness | STFT-domain least-distortion ROI beamforming (LD-MWNG/LD-MDF): ROI-distortion constraint from ROI-averaged steering statistics; eigenvector-truncation parameter $K$ trades array gain (WNG/DF) against average ROI distortion; superior STOI/DNSMOS and miscalibration robustness over MDF/DS/SCCA/Vorobyov baselines under large DOA deviations |
 | [[sources/grinstein-2025-tiny-param-mwf\|Grinstein et al. 2025 (NeuralPMWF)]] | 2025 | Hybrid | Tiny DNN (164.9k params, 24.95 MMACs/s) fully controls the PMWF: mask-derived covariances with learned frequency-dependent smoothing + SPP-scheduled dynamic $\beta$ |
 | [[sources/li-2022-embedding-beamforming\|Li et al. 2022 (EaBNet)]] | 2022 | Estimate what | All-neural causal framewise beamformer; implicit spectral-spatial embedding beats explicit SCM reinsertion and surpasses oracle-IRM MB-MVDR |
 | [[sources/zhang-2021-adl-mvdr\|Zhang et al. 2021 (ADL-MVDR)]] | 2021 | Hybrid | All-deep-learning MVDR: GRU-Nets replace the matrix inversion and PCA inside the MVDR closed form; frame-level weights; joint training stabilized where closed-form inversion was not |
@@ -341,7 +343,7 @@ The corpus shows that **form factor and use case, not algorithmic novelty, are t
 
 5. **Array geometry went fixed → agnostic → conditioned.** Phase 3 (geometry-conditioned) recovers the geometry cue that Phase 2 (array-agnostic) threw away, via Fourier PE + Transformer conditioning. The payoff is both quality (closes gap to fixed-array) and efficiency (~10× fewer MACs than USES2-comp).
 
-6. **Application constraints, not algorithmic novelty, drive deployed architecture.** Hearing aids → classical CDR/GMC; mobile phones → level-difference post-filters; smart glasses → time-domain ROI beamforming; ASR → spatial features as DNN input. The "best" method is the one that fits the form-factor constraint, not the one with the highest benchmark score.
+6. **Application constraints, not algorithmic novelty, drive deployed architecture.** Hearing aids → classical CDR/GMC; mobile phones → level-difference post-filters; smart glasses → time-domain ROI beamforming; ASR → spatial features as DNN input. The "best" method is the one that fits the form-factor constraint, not the one with the highest benchmark score. The ROI line illustrates the point twice over: [[sources/itzhak-2025-stft-roi-beamforming|Itzhak & Cohen 2025]] built the STFT-domain formulation around a single interpretable knob ($K$: array gain vs average distortion over the region, tuned by the expected DOA deviation), and [[sources/frank-2026-low-latency-roi-beamforming|Frank & Cohen 2026]] showed the smart-glasses latency budget then favors re-implementing the same ROI principle in the time domain despite the higher compute.
 
 7. **MVDR remains the connective tissue.** Every era engages MVDR: classical implementations (Lorenz, Schwarz, Tashev, Jin, Löllmann), robustness research (Mittal, Deng), hybrid systems (HVSF exposes MVDR as a VSLF special case, Farmani's virtual mics feed MVDR, Apostolidis wraps MPDR). The 2026 work refines MVDR's *parameterization* (SCM estimation, WNG control, output-based steering) rather than replacing it — and the Kronecker line (Cohen 2019, Wang 2021, Zhu 2025) refines its *structure*, restricting the filter to low-rank sums of short subfilters for built-in robustness. The Pan, Huang & Chen 2020 review makes the degeneration explicit from the other direction: under white noise MVDR collapses to delay-and-sum, under isotropic noise to superdirective, and under mixed noise fields to robust diagonally-loaded superdirective — i.e., the fixed beamformers surveyed in that review are not alternatives to MVDR but its noise-field-conditioned special cases, and its three-axis framework (DF, WNG, frequency invariance) supplies the common trade-off surface on which both classical and learned designs (e.g. Deng 2026's frequency-adaptive WNG) are positioned.
 

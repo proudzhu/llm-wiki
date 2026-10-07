@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-09-14
-updated: 2026-09-24
+updated: 2026-10-07
 sources:
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
   - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
   - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
   - raw/papers/desena-2012-higher-order-differential/full-text.md
+  - raw/papers/itzhak-2025-stft-roi-beamforming/full-text.md
 tags:
   - beamforming
   - microphone-arrays
@@ -34,6 +35,8 @@ The superdirective beamformer is the MVDR-type solution against the diffuse nois
 $$\mathbf{h}_{\mathrm{SD}} = \frac{\boldsymbol{\Gamma}^{-1}\mathbf{d}_{\theta_s}}{\mathbf{d}_{\theta_s}^H \boldsymbol{\Gamma}^{-1}\mathbf{d}_{\theta_s}}$$
 
 with directivity factor $\mathcal{D} = \mathbf{d}_{\theta_s}^H \boldsymbol{\Gamma}^{-1}\mathbf{d}_{\theta_s}$, which approaches $M^2$ as the inter-element spacing $\delta$ becomes small (Lotter & Vary 2006).
+
+[[sources/itzhak-2025-stft-roi-beamforming|Itzhak & Cohen 2025]] generalize this design to a **region-of-interest**: their LD-MDF beamformer maximizes the ROI-averaged DF (steering outer product averaged over the region) subject to an ROI-distortion constraint, recovered via generalized eigendecomposition of $(\boldsymbol{\Gamma}_{\mathbf{d},\Omega}, \boldsymbol{\Gamma})$; for a single-DOA ROI it reduces exactly to the classical distortionless max-DF solution above, and an eigenvector-truncation parameter $K$ trades DF against average distortion over the region.
 
 ## The Robustness Problem
 
@@ -85,3 +88,4 @@ Superdirective designs belong to the [[concepts/fixed-beamformer|fixed beamforme
 - [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]]
 - [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]] — RSD ($\epsilon = 10^{-3}$) as the spatial front-end of a joint SNR–CDR Wiener post-filter
 - [[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012: On the Design and Implementation of Higher Order Differential Microphones]] — (α, λ) framework with max-DF hypercardioid and max-FBR supercardioid as corner solutions
+- [[sources/itzhak-2025-stft-roi-beamforming|Itzhak & Cohen 2025: STFT-Domain Least-Distortion Region-of-Interest Beamforming]] — LD-MDF: the max-DF design generalized to a region-of-interest, reducing to the classical superdirective solution for single-DOA regions
