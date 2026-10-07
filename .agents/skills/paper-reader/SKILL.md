@@ -259,12 +259,12 @@ Scan the returned filenames for each candidate. Candidates absent from the list 
 
 For each existing concept page touched by this paper: add the paper to `sources:` in frontmatter, update `updated:` date, add new sections with findings, extend `## Related Concepts` and `## Related Sources` with new wikilinks.
 
-**Identify existing concept pages to update** from the same Step 7 LS listing — the candidates that *did* appear in `wiki/concepts` are the existing pages to update here. No separate existence check needed.
+**Identify existing concept pages to update** from the same Step 7 LS listing — the candidates that *did* appear in `wiki/concepts` are the existing pages to update here. No separate existence check needed. **Additionally**, union that set with every `[[concepts/...]]` wikilink in the just-created source page (Related Concepts section and body) — the source page's own links define the *minimum* backlink set, and a concept it links without a reciprocal reference will fail Step 12b's `check_backlinks.py` (pitfall #64). Every concept the source page links to should gain the frontmatter `sources:` entry + a body mention + a `## Related Sources` wikilink by the end of this step.
 
 **Efficient batched-update pattern** (when updating >2 existing concept pages in one ingest):
 
 1. **Read all target pages in parallel** — one Read per file in a single message (different files, safe). Typical ingest touches 4–8 existing concept pages.
-2. **Round 1 — frontmatter edits in parallel** — one Edit per file (different files, safe).
+2. **Round 1 — frontmatter edits in parallel** — one Edit per file (different files, safe). Construct each `old_string` **verbatim from that file's own Read output** — frontmatter key order varies across pages (some put `tags:` before `sources:`), so never rebuild the block from the template's canonical order, especially in a resumed session (pitfall #63).
 3. **Round 2 — content additions in parallel** — one Edit per file.
 4. **Round 3 — `## Related Concepts` / `## Related Sources` extensions in parallel** — one Edit per file.
 
