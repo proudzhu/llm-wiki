@@ -1,9 +1,9 @@
 ---
 type: concept
 created: 2026-04-28
-updated: 2026-04-28
+updated: 2026-10-07
 sources:
-  - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.txt
+  - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.md
 tags:
   - beamforming
   - spatial-filtering
@@ -28,42 +28,43 @@ ROI beamforming defines a spatial region Ω (set of polar and azimuthal angles) 
 
 ## LDMG ROI Beamformer
 
-The **Least-Distortion Maximum-Gain (LDMG)** ROI beamformer solves:
+The **Least-Distortion Maximum-Gain (LDMG)** ROI beamformer (Frank & Cohen 2026) maximizes the average array gain over the ROI subject to a minimum-distortion constraint:
 
 ```
-max  hH h / (hH Rv h)   subject to h = d
+max_h  h^H Γ_Ω h / (h^H Γ_v h)   subject to  Γ_Ω h = d_Ω
 ```
 
 where:
-- h is the beamformer weight vector
-- Rv is the noise covariance matrix
-- d is the ROI-averaged steering vector/matrix
+- **h** is the beamformer weight vector (real, length $M L_y$ for time-domain; complex, length $M$ per frequency bin for STFT-domain)
+- **Γ_Ω** and **d_Ω** are the ROI-averaged steering outer product and steering vector/matrix
+- **Γ_v** is the (normalized) noise covariance matrix
 
 ### Solution via Generalized Eigenvalue Decomposition
 
 ```
-h_K,ε = Σ_{p=1}^{K} (tp tpH / (λp + ε)) d
+h_K,μ = [ Σ_{p=1}^{K} (t_p t_p^H / (λ_p + μ)) ] d_Ω
 ```
 
-with final normalization so the average desired signal reduction factor equals 1.
+with a final normalization so the average desired-signal reduction factor equals 1.
 
 **Parameters**:
-- **K**: Number of eigenvectors (decreasing K improves array gain but degrades distortion)
-- **ε**: Regularization constant (increasing ε improves robustness but degrades distortion)
+- **K**: Number of eigenvectors of $\Gamma_v^{-1} \Gamma_\Omega$ retained (decreasing K improves array gain but degrades distortion)
+- **μ**: Regularization constant (increasing μ improves robustness but degrades distortion)
 
 ## Time-Domain vs STFT-Domain Implementation
 
 | Aspect | Time-Domain | STFT-Domain |
 |--------|-------------|-------------|
-| **Latency** | Ly/2 samples | Ly samples |
-| **Complexity** | M Ly² real multiplications | O(M Ly log₂ Ly) |
-| **Steering** | Real matrix D (M Ly × L) | Complex vector d(k) (M × 1) |
-| **Approximation** | Noncausal FIR of length Ld | Multiplicative Transfer Function (MTF) |
+| **Latency** | $\lfloor L_y/2 \rfloor$ samples (center-sample target) | $L_y$ samples (full frame accumulation) |
+| **Complexity** | $M L_y^2$ real multiplications | $\mathcal{O}(M L_y \log_2 L_y)$ |
+| **Steering** | Real matrix D ($M L_y \times L$) | Complex vector d(k) ($M \times 1$) |
+| **Approximation** | Noncausal FIR of length $L_d$ | Multiplicative Transfer Function (MTF) |
 
 ### Key Trade-offs
 
-- **Time-domain**: 2x lower latency, higher performance, but higher computation
-- **STFT-domain**: Lower computation, but higher latency and slightly degraded performance due to windowing and MTF approximation
+- **Time-domain**: 2× lower latency, higher performance, but higher computation
+- **STFT-domain**: Lower computation, but higher latency and slightly degraded performance due to windowing and the MTF approximation
+- **Why time-domain wins**: it filters the waveform directly (spatiotemporal filtering), whereas the STFT implementation relies on the MTF approximation, which is inaccurate when the frame length is shorter than the effective support of the relative impulse responses
 
 ## Applications
 
@@ -73,9 +74,9 @@ with final normalization so the average desired signal reduction factor equals 1
 
 ## Related Concepts
 
-- [[beamforming|Beamforming]]
-- [[signal-processing|Signal Processing]]
-- [[active-noise-control|Active Noise Control]]
+- [[concepts/beamforming|Beamforming]]
+- [[concepts/signal-processing|Signal Processing]]
+- [[concepts/active-noise-control|Active Noise Control]]
 
 ## Related Sources
 

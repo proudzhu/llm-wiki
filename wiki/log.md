@@ -5884,3 +5884,18 @@ Ingested [[sources/ueda-2024-online-joint-optimization|Ueda et al. 2024: Blind a
 - **Pages created**: `wiki/sources/ohlenbusch-2026-pas-se.md`; entities `wiki/entities/mattes-ohlenbusch.md`, `wiki/entities/mikolaj-kegler.md`, `wiki/entities/marko-stamenovic.md`; concepts `wiki/concepts/as-se.md`, `wiki/concepts/pas-se.md`
 - **Pages updated**: concepts `personalized-speech-enhancement`, `target-speaker-extraction`, `joint-nonlinear-filtering`, `td-speakerbeam`, `hearables`, `bone-conduction`, `dns-challenge`, `speaker-embedding` (findings + cross-refs); synthesis `multimodal-bc-speech-enhancement` (new §2.9 PAS-SE, benchmarks row)
 - **Notes**: arXiv HTML figures were inline SVGs — Fig. 1/2 rendered from the Zotero PDF via coordinate-based crops (pymupdf) since pypdf found no raster images.
+
+---
+
+## [2026-10-07] ingest | Re-ingest: Low-latency Audio Front-end Region-of-Interest Beamforming for Smart Glasses (Frank & Cohen 2026)
+
+- **Source**: `raw/papers/frank-2026-low-latency-roi-beamforming/full-text.md` (Zotero: DE8N9LJ7)
+- **Authors**: Ariel Frank, Israel Cohen
+- **Published**: ICASSP 2026, pp. 14727–14731
+- **DOI**: 10.1109/ICASSP55912.2026.11462987
+- **Summary**: Re-ingest of the April pdftotext extraction via MinerU: adds the Fig. 1 results figure (DF/WNG/OV vs frame length), proper LaTeX for the unified LDMG formulation (average-distortion constraint, GEVD solution, final normalization), parameter-estimation details (1° rotation campaign, Hamming/biorthogonal windows at 75% overlap, diagonal loading, SI-SDR=14.9 dB tuning), and the MTF-inaccuracy attribution for the time-domain advantage.
+- **Pages updated**:
+  - `wiki/sources/frank-2026-low-latency-roi-beamforming.md` — comprehensive rewrite: LaTeX formulation, Fig. 1 embed, Related Synthesis section, links [[concepts/roi-beamforming|ROI Beamforming]]
+  - `wiki/concepts/roi-beamforming.md` — fixed LDMG objective notation (Γ_Ω/Γ_v), latency to ⌊Ly/2⌋, added MTF attribution, prefixed bare wikilinks
+  - `wiki/concepts/beamforming.md` — enriched ROI section (unified formulation, MTF attribution), prefixed roi-beamforming wikilink
+  - `wiki/index.md` — statistics recomputed

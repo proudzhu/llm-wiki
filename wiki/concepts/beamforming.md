@@ -1,11 +1,11 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-10-04
+updated: 2026-10-07
 sources:
   - raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
-  - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.txt
+  - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.md
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
   - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
@@ -78,11 +78,12 @@ Masilamani (2024) proposes a system that adjusts the beamforming aperture based 
 Frank & Cohen (2026) developed a unified formulation for **least-distortion maximum-gain (LDMG) ROI beamformers** for smart glasses, comparing time-domain and STFT-domain implementations:
 
 - **ROI beamforming** preserves signals from a spatial region rather than a single DOA, accommodating head motion and DOA uncertainty
-- **Time-domain implementation** delivers 2x lower algorithmic latency (Ly/2 vs Ly samples) and higher performance across all metrics (DF, WNG, own-voice suppression)
+- **Unified formulation** makes each domain's modeling approximation explicit: noncausal FIR filtering (time) vs the multiplicative transfer function approximation (STFT)
+- **Time-domain implementation** delivers 2x lower algorithmic latency (⌊Ly/2⌋ vs Ly samples) and higher performance across all metrics (DF, WNG, own-voice suppression); the advantage is attributed to direct spatiotemporal filtering of the waveform, whereas the MTF approximation is inaccurate at frame lengths shorter than the effective support of the relative impulse responses
 - **Trade-off**: Time-domain requires M Ly² real multiplications vs O(M Ly log₂ Ly) for STFT-domain
 - **Conclusion**: When low latency is critical and modest additional on-device computing power is available, time-domain ROI beamforming is preferred for smart-glasses front ends
 
-See [[roi-beamforming|Region-of-Interest Beamforming]] for details.
+See [[concepts/roi-beamforming|Region-of-Interest Beamforming]] for details.
 
 ## Maximum Radial Energy (max-rE) Beamformer
 
