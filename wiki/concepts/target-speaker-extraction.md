@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-09-19
+updated: 2026-10-07
 sources:
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
+  - raw/papers/ohlenbusch-2026-pas-se/full-text.md
   - raw/papers/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction/full-text.md
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
   - raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md
@@ -51,6 +52,8 @@ Enrollment-based TSE uses a reference utterance from the target speaker to condi
 - **Hybrid** — combine explicit embeddings with direct interaction for richer guidance.
 
 A key failure mode in noisy multi-speaker scenarios is **noise contamination of the enrollment guidance**: when the context interaction is computed against the noisy mixture, noise leaks into the target-speaker representation and misleads the backbone. [[concepts/noise-agnostic-enrollment-guidance|Noise-agnostic enrollment guidance]] (LGTSE, Huang et al. 2026) addresses this by denoising the mixture before context interaction; [[concepts/distortion-aware-training|distortion-aware training]] (D-LGTSE) further exploits the denoiser's residual distortion as a training signal.
+
+**PSE as the own-voice special case**: when the target is always the device user, enrollment-conditioned TSE becomes [[concepts/personalized-speech-enhancement|personalized speech enhancement]] for hearable voice pickup. Ohlenbusch et al. 2026 [[sources/ohlenbusch-2026-pas-se|(Ohlenbusch 2026)]] show enrollment clues and auxiliary in-ear sensors are complementary — their [[concepts/pas-se|PAS-SE]] combination reaches 8.34 dB cross-dataset interferer SI-SDR vs. 7.20 dB for the sensor-only system.
 
 - **Speaker beam**: Uses enrolment utterances to extract speaker embeddings that condition the extraction network
 - **Time-domain audio-visual separation**: Combines speaker embeddings with visual cues
@@ -120,6 +123,8 @@ The TSE framework naturally extends to:
 - [[concepts/personalized-speech-enhancement|Personalized Speech Enhancement]]
 - [[concepts/speaker-embedding|Speaker Embedding]]
 - [[concepts/directional-vad|Directional VAD (DVAD)]]
+- [[concepts/as-se|Auxiliary-Sensor Speech Enhancement (AS-SE)]]
+- [[concepts/pas-se|PAS-SE]]
 
 ## Related Sources
 
@@ -132,4 +137,5 @@ The TSE framework naturally extends to:
 - [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023: Insights Into Deep Non-linear Filters for Improved Multi-channel Speech Enhancement]]
 - [[sources/wen-2025-neural-directed-speech-enhancement|Wen et al. 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] — CDUNet: dual-mic spatial-clue extraction with a runtime enhancement width
 - [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — situates speaker-related tasks in the detection/estimation/transformation taxonomy (voiceprint extraction as transformation, separation as estimation)
+- [[sources/ohlenbusch-2026-pas-se|Ohlenbusch, Kegler & Stamenovic 2026: PAS-SE]] — enrollment clues and auxiliary in-ear sensors as complementary TSE clues for own-voice pickup
 

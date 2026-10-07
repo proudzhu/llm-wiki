@@ -643,4 +643,7 @@
 | [[entities/wang-chen\|Wang Chen]] | Researcher at Hunan ChipHearing Semiconductor (Changsha, China); corresponding author of the independent industrial reproduction and realistic-environment evaluation of GC-AuxIVA-ISS. | 2026-10-05 |
 | [[entities/thomas-haubner\|Thomas Haubner]] | FAU researcher — co-author of spatially guided IVA (MAP spatial prior over demixing matrices, ICASSP 2020) | 2026-10-05 |
 | [[entities/peter-vary\|Peter Vary]] | Professor (Life Fellow, IEEE), RWTH Aachen; speech coding, joint source-channel coding, speech enhancement, OEC | 2026-10-07 |
+| [[entities/mattes-ohlenbusch\|Mattes Ohlenbusch]] | Researcher (Oldenburg / Bose internship); first author of PAS-SE; own-voice enhancement for hearables with in-ear microphones. | 2026-10-07 |
+| [[entities/mikolaj-kegler\|Mikolaj Kegler]] | Researcher at Bose; co-author of PAS-SE and two-step knowledge distillation for tiny speech enhancement. | 2026-10-07 |
+| [[entities/marko-stamenovic\|Marko Stamenovic]] | Researcher at Bose; co-author of PAS-SE, TinyLSTMs, and two-step knowledge distillation for tiny speech enhancement. | 2026-10-07 |
 

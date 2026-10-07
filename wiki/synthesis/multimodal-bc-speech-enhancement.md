@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-22
-updated: 2026-09-12
+updated: 2026-10-07
 sources:
   - wiki/sources/tagliasacchi-2020-seanet.md
   - wiki/sources/zhang-2022-bone-conducted-speech-dissertation.md
@@ -14,6 +14,7 @@ sources:
   - wiki/sources/heitkaemper-2025-bcs-speech-enhancement-earbuds.md
   - wiki/sources/han-2026-quality-aware-earable-se.md
   - wiki/sources/lugo-2026-diffvqe.md
+  - wiki/sources/ohlenbusch-2026-pas-se.md
   - zotero://select/items/0_B92ER5KS (Khanagha 2026: Conditional Diffusion)
   - zotero://select/items/0_NIIDMA7J (Contrastive Learning for BC)
 tags:
@@ -114,6 +115,13 @@ Shifts from predicting clean speech to **generating** it using BC signals as gui
   - **Key result**: +9.35% PESQ, +17.68% SI-SDR over best baseline (EarSpeech); QA module is modular and improves EarSpeech by up to +5.48% PESQ
   - **Distinction from Liu 2025 ATFA**: While ATFA handles *binary* sensor failure via random dropout, QuaSE handles *continuous* quality variations via dynamic quality-weighted fusion — a finer-grained approach to modality robustness
 
+### 2.9 Personalization as a Third Clue: PAS-SE (2026)
+
+- **[[sources/ohlenbusch-2026-pas-se|Ohlenbusch, Kegler & Stamenovic (ICASSP 2026) — PAS-SE]]**: Adds **speaker enrollment** to the fusion mix — an FT-JNF mask network taking OM + in-ear-microphone magnitude STFTs ([[concepts/as-se|AS-SE]]) is multiplicatively conditioned on a 128-dim embedding from a jointly-trained SpeakerBeam-style encoder (1.810M params). Key contributions to the BC-fusion lineage:
+  - **Training-config augmentation**: with no recorded in-ear interferer data, approximating the in-ear interferer as an attenuated OM interferer ($a \cdot V_o$, $a \in [0.001,1]$) during training enables cross-device generalization — the array-transfer-function analogue of VibOmni's BCF augmentation (§2.3) and Heitkaemper's FIR-simulated BCS (§2.7). Skipping in-ear noise modeling entirely (config A) collapses the AS-SE system.
+  - **Enrollment-sensor choice**: recording the enrollment utterance with the acoustically shielded in-ear microphone retains personalization benefits down to −10 dB enrollment SNR, while OM enrollment breaks below 0 dB — a sensor-selection insight paralleling QuaSE's quality-aware weighting.
+  - **Key result**: cross-dataset interferer SI-SDR 8.34 dB (PAS-SE with in-ear enrollment) vs. 7.20 dB AS-SE-only — outperforming even AS-SE baselines trained fully in-domain on the evaluation dataset.
+
 ---
 
 ## 3. Core Technical Challenges
@@ -150,6 +158,7 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 | **BCS-guided SE (Heitkaemper)** | 2025 | — | >15% rel. WER | Voice-assistant ASR on earbuds; RTF 0.01, off-device |
 | **BCDM (Khanagha)** | 2026 | — | **High** | Extreme noise (-10 dB SNR) |
 | **QuaSE (Han)** | 2026 | — | +9.35% PESQ | Quality-varying in-ear modality |
+| **PAS-SE (Ohlenbusch)** | 2026 | 3.2M | 8.34 dB SI-SDR (V, cross-dataset) | Interferer suppression; cross-device generalization; enrollment as third clue |
 
 ---
 
@@ -180,6 +189,7 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 - [[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2025: BCS-Guided Speech Enhancement for Voice Assistant on Earbuds]] — ICASSP publication of the patent system, with WER/RTF evaluation (§2.7, §3.1, §4)
 - [[sources/han-2026-quality-aware-earable-se|Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone SE]]
 - [[sources/lugo-2026-diffvqe|Lugo et al. 2026: DiffVQE]] — single-step hybrid diffusion evidence for real-time generative SE (§3.2)
+- [[sources/ohlenbusch-2026-pas-se|Ohlenbusch, Kegler & Stamenovic 2026: PAS-SE]] — enrollment as third clue; in-ear enrollment robustness (§2.9)
 
 ## Related Synthesis
 

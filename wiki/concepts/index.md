@@ -590,4 +590,6 @@
 | [[concepts/online-joint-optimization\|Online Joint Optimization (online-WPE×IVE)]] | Frame-wise blind joint optimization of WPE dereverberation and IVE separation under a single forgetting-factor ML criterion; 8 ms algorithmic delay via rank-1/block-matrix-inversion updates. | 2026-10-05 |
 | [[concepts/convolutional-beamformer\|Convolutional Beamformer (CBF)]] | Multichannel filter integrating WPE dereverberation and separation/beamforming in one convolutional structure; the shared framework for offline and online joint optimization algorithms. | 2026-10-05 |
 | [[concepts/occlusion-effect-cancellation\|Occlusion Effect Cancellation]] | Active compensation of the occlusion effect via hybrid FF-FB control: hear-through restores AC sound, feedback attenuates BC sound, decoupled by correction filter | 2026-10-07 |
+| [[concepts/as-se\|Auxiliary-Sensor Speech Enhancement (AS-SE)]] | Speech enhancement using an outer microphone plus an auxiliary body-conduction sensor (typically an in-ear microphone) as input; training configurations for in-ear noise/interferer modeling. | 2026-10-07 |
+| [[concepts/pas-se\|PAS-SE]] | Personalized auxiliary-sensor speech enhancement: combines enrollment-based PSE conditioning with in-ear-microphone AS-SE input; best results with in-ear enrollments. | 2026-10-07 |
 

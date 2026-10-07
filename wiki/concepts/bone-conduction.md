@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-09-12
+updated: 2026-10-07
 sources:
   - wiki/sources/kuang-2024-lightweight-speech-enhancement-bone-air.md
   - wiki/sources/liu-2025-robust-fusion-bc-ac-attention.md
   - wiki/sources/wang-2022-fusing-bc-ac-complex-domain-se.md
   - wiki/sources/heitkaemper-2025-bcs-speech-enhancement-earbuds.md
+  - raw/papers/ohlenbusch-2026-pas-se/full-text.md
 tags:
 - acoustics
 - audio-processing
@@ -49,6 +50,10 @@ In-ear microphones capture bone-conducted speech through the sealed ear canal. H
 ### 7. BCS Transmission Bandwidth Reduction
 The low-pass characteristic of the bone conduction transfer function can be exploited to cut the bandwidth that must be transmitted from earbuds to a connected recognition device: [[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2025]] show that limiting the BCS to frequencies below 500 Hz (with anti-aliasing downsampling plus a learned feed-forward upscaling of the band-limited signal) costs less than 1.5% absolute WER while using only 6.25% of the original transmission bandwidth.
 
+### 8. Auxiliary-Sensor Speech Enhancement
+
+The user's own voice reaches an occluded in-ear microphone predominantly through body conduction, while environmental noise and interfering talkers are acoustically shielded by the device — an own-voice SNR advantage exploited by [[concepts/as-se|auxiliary-sensor speech enhancement (AS-SE)]]. Ohlenbusch et al. 2026 [[sources/ohlenbusch-2026-pas-se|(Ohlenbusch 2026)]] show that in-ear noise/interferer leakage must be modeled during training for cross-device generalization (approximating the in-ear interferer as an attenuated outer-microphone interferer), and that PSE enrollment recorded with the in-ear microphone retains personalization benefits down to −10 dB enrollment SNR — see [[concepts/pas-se|PAS-SE]].
+
 ## Related Concepts
 
 - [[concepts/ear-canal-occlusion-effect|Ear Canal Occlusion Effect]]
@@ -59,6 +64,8 @@ The low-pass characteristic of the bone conduction transfer function can be expl
 - [[concepts/transparency-mode|Transparency Mode]]
 - [[concepts/complex-spectral-mapping|Complex Spectral Mapping]]
 - [[sources/fukumoto-2025-whisphone-paper-reading-note|Whisphone]]
+- [[concepts/as-se|Auxiliary-Sensor Speech Enhancement (AS-SE)]]
+- [[concepts/pas-se|PAS-SE]]
 
 ## Related Sources
 
@@ -69,3 +76,4 @@ The low-pass characteristic of the bone conduction transfer function can be expl
 - [[sources/masilamani-2024-headphone-conversation-detect-paper-reading-note|Masilamani 2024: Headphone Conversation Detect]]
 - [[sources/han-2026-quality-aware-earable-se|Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone SE]]
 - [[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2025: BCS-Guided Speech Enhancement for Voice Assistant on Earbuds]]
+- [[sources/ohlenbusch-2026-pas-se|Ohlenbusch, Kegler & Stamenovic 2026: PAS-SE]] — in-ear microphone as auxiliary sensor; in-ear enrollment robustness

@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-07-10
-updated: 2026-08-19
+updated: 2026-10-07
 sources:
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
+  - raw/papers/ohlenbusch-2026-pas-se/full-text.md
 tags:
   - neural-network
   - speech-enhancement
@@ -62,6 +63,10 @@ The Zmolikova et al. 2023 overview [[sources/zmolikova-2023-neural-target-speech
 
 The original SpeakerBeam (Delcroix et al., Interspeech 2017 [30]; ICASSP 2018 [25]) is also cited as one of the first neural enrollment-conditioned TSE systems, alongside VoiceFilter [11] and SpEx/SpEx+ [31].
 
+## Cross-Dataset Generalization Limit (Ohlenbusch et al. 2026)
+
+Trained on Vibravox (close-talk outer microphone) and evaluated on the Oldenburg dataset (device outer-face microphone), the time-domain SpeakerBeam PSE baseline fails — SI-SDR falls below the noisy input — while a magnitude-STFT FT-JNF PSE trained identically transfers [[sources/ohlenbusch-2026-pas-se|(Ohlenbusch 2026)]]. The authors attribute this to SpeakerBeam's time-domain learnable filterbanks being prone to dataset-specific biases. The same paper reuses the SpeakerBeam encoder design (learnable filterbank → 1-D conv block → temporal averaging → 128-dim embedding, Asteroid implementation, 1.810M params) as the conditioning branch of its [[concepts/pas-se|PAS-SE]] system.
+
 ## Related Concepts
 
 - [[concepts/target-speaker-extraction|Target Speaker Extraction (TSE)]]
@@ -71,8 +76,10 @@ The original SpeakerBeam (Delcroix et al., Interspeech 2017 [30]; ICASSP 2018 [2
 - [[concepts/time-domain-speech-enhancement|Time-Domain Speech Enhancement]]
 - [[concepts/angle-feature|Angle Feature]]
 - [[concepts/film-layer|FiLM Layer]]
+- [[concepts/pas-se|PAS-SE]]
 
 ## Related Sources
 
 - [[sources/ostergaard-2026-own-voice-cancellation|Østergaard et al. 2026: Don't Listen to Me — Own-Voice Cancellation]]
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova et al. 2023: Neural Target Speech Extraction: An Overview]]
+- [[sources/ohlenbusch-2026-pas-se|Ohlenbusch, Kegler & Stamenovic 2026: PAS-SE]] — SpeakerBeam as baseline (cross-dataset failure) and as the PAS-SE conditioning-branch design

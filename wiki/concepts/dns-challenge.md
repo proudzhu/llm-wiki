@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-09-13
+updated: 2026-10-07
 sources:
   - raw/papers/shetu-2026-generative-discriminative-comparison/full-text.md
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
+  - raw/papers/ohlenbusch-2026-pas-se/full-text.md
 tags:
   - dataset
   - challenge
@@ -21,6 +22,8 @@ The DNS Challenge corpus is also the basis for large controlled training regimes
 
 [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025]] use the Interspeech 2020 DNS Challenge corpus (85/5/10 split) to generate multichannel training pairs for an 8-microphone circular array simulated with Pyroomacoustics — SNR [−10, 10] dB, SIR [−5, 15] dB, 1–10 noise sources plus babble from 8–16 interfering talkers — for their ultra-low-compute TinyGRU multichannel enhancement model.
 
+The fifth DNS Challenge noise set was used by [[sources/ohlenbusch-2026-pas-se|Ohlenbusch et al. 2026]] to spatialize the Oldenburg cross-dataset evaluation of hearable own-voice enhancement: noise signals convolved with per-user impulse responses measured from 8 evenly spaced loudspeakers in a circle around the device user yield multi-channel spatialized noise.
+
 ## Related Concepts
 
 - [[concepts/voicebank-demand|VoiceBank+DEMAND (VBD)]]
@@ -36,3 +39,4 @@ The DNS Challenge corpus is also the basis for large controlled training regimes
 - [[sources/liu-2026-sse-net|Liu et al. 2026: SSE-Net]] — SNN-based SE trained/evaluated on WSJ0-SI84 + DNS-Challenge noise (causal setup) and VoiceBank+DEMAND; benchmarked against Intel N-DNS Challenge power-proxy metrics (0.44 G/s MACs, 19.70 M Ops/s power proxy)
 - [[sources/shetu-2026-generative-discriminative-comparison|Shetu, Habets & Brendel 2026: Generative vs. Discriminative SE]] — ~1000-h DNS-derived high/low-SNR training sets and non-reverb test set for the 14-model paradigm comparison
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — DNS 2020 corpus + simulated 8-mic array for TinyGRU training
+- [[sources/ohlenbusch-2026-pas-se|Ohlenbusch, Kegler & Stamenovic 2026: PAS-SE]] — DNS-5 noise spatialized for the Oldenburg cross-dataset evaluation

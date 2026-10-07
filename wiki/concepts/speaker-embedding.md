@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-09-19
+updated: 2026-10-07
 sources:
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
   - raw/papers/zhu-2026-g-map-se-guided-speech-enhancement/full-text.md
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
   - raw/papers/pan-2025-data-driven-acoustics/full-text.md
+  - raw/papers/ohlenbusch-2026-pas-se/full-text.md
 tags:
   - speaker-recognition
   - representation-learning
@@ -32,6 +33,8 @@ In enrollment-conditioned tasks ([[concepts/target-speaker-extraction|TSE]], [[c
 | Linear RNN-based | Bidirectional [[concepts/mingru|MinGRU]] / Mamba blocks | ~0.26 GMAC/s | Better SDR on full-mixture condition at ~6× lower compute |
 
 Østergaard et al. (2026) showed that linear RNN auxiliary encoders provide better speaker representations than ConvTasNet-based ones for speaker conditioning in OVC, while substantially reducing compute.
+
+Ohlenbusch et al. 2026 [[sources/ohlenbusch-2026-pas-se|(Ohlenbusch 2026)]] use a jointly-trained SpeakerBeam-style encoder (learnable filterbank → 1-D conv block → temporal averaging, 1.810M params) producing a 128-dim embedding applied by multiplicative conditioning on the enhancement network's F-LSTM output — and show that the enrollment *sensor* matters as much as the encoder: in-ear-microphone enrollments (acoustically shielded) preserve conditioning benefits down to −10 dB enrollment SNR, while outer-microphone enrollments break down below 0 dB.
 
 ## Audio Clue Encoder Families in TSE
 
@@ -61,6 +64,7 @@ A common middle ground is to **pre-train then fine-tune** a NN-based encoder joi
 - [[concepts/target-speaker-extraction|Target Speaker Extraction (TSE)]]
 - [[concepts/target-speaker-vad|Target-Speaker VAD (TS-VAD)]]
 - [[concepts/speaker-verification|Speaker Verification]] — the detection-flavored application family built on embeddings
+- [[concepts/pas-se|PAS-SE]]
 
 ## Related Sources
 
@@ -68,3 +72,4 @@ A common middle ground is to **pre-train then fine-tune** a NN-based encoder joi
 - [[sources/zhu-2026-g-map-se-guided-speech-enhancement|G-MaP-SE: Guided Speech Enhancement via GMM-Based Prior Matching (Interspeech 2026)]]
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova et al. 2023: Neural Target Speech Extraction: An Overview]]
 - [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — voiceprint extraction as signal transformation; TDNN x-vector architecture details (Section 6)
+- [[sources/ohlenbusch-2026-pas-se|Ohlenbusch, Kegler & Stamenovic 2026: PAS-SE]] — jointly-trained 128-dim embedding; enrollment-sensor robustness analysis
