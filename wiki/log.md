@@ -5950,3 +5950,21 @@ Ingested Heymann, Drude & Haeb-Umbach 2016 (ICASSP, DOI 10.1109/ICASSP.2016.7471
 ## [2026-10-11] ingest | Improved MVDR Beamforming Using Single-Channel Mask Prediction Networks (Erdogan et al. 2016)
 
 Ingested [[sources/erdogan-2016-improved-mvdr-mask-prediction|Erdogan, Hershey, Watanabe, Mandel & Le Roux 2016]] (Interspeech 2016) — one of the three founding papers of neural [[concepts/mask-based-beamforming|mask-based beamforming]]. Single-channel LSTM mask-prediction networks (MSA loss, trained on CHiME-3 CH5 single-channel data only) drive the noise SCM of the statistics-only Souden-form [[concepts/mvdr-beamformer|MVDR]] — no steering vector or array geometry needed. Key findings: a single max-combined mask beats per-channel multi-masks (partially-observed spatial vectors destabilize the SCM); minfloor-0.3 post-masking works best; beats WDAS beamforming on mismatched-ASR WER (34.78 vs 36.19 on real-test). Created [[concepts/mask-based-beamforming|Mask-Based Beamforming]] concept page and entity pages for [[entities/john-hershey|John Hershey]], [[entities/shinji-watanabe|Shinji Watanabe]], and [[entities/michael-mandel|Michael Mandel]]; updated [[entities/hakan-erdogan|Hakan Erdogan]] and [[entities/jonathan-le-roux|Jonathan Le Roux]]. Updated concepts: [[concepts/mvdr-beamformer|MVDR beamformer]], [[concepts/neural-beamforming|neural beamforming]], [[concepts/tf-mask-estimation|T-F mask estimation]], [[concepts/spatial-covariance-matrix|spatial covariance matrix]], [[concepts/phase-sensitive-mask|phase-sensitive mask]]. Updated synthesis: [[synthesis/multi-channel-speech-enhancement|multi-channel speech enhancement]] and [[synthesis/deep-speech-enhancement|deep speech enhancement]] (Erdogan 2016 as concurrent phase-1 origin with the MSA-vs-BCE training-objective fork).
+
+---
+
+## [2026-10-11] ingest | Blind Acoustic Beamforming Based on Generalized Eigenvalue Decomposition (Warsitz & Haeb-Umbach 2007)
+
+**Source**: [[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007]] (IEEE TASL, DOI 10.1109/TASL.2007.898454; Zotero FL9G9KX2)
+
+**What was added**:
+
+- New source page with full analysis: problem formulation (Rayleigh-quotient max-SNR criterion, GEV solution, GMVDR scalar equivalence), methodology (BAN/BSN post-filter derivations, gradient-ascent eigenvector tracking, VAD-gated statistics), experimental setup (5-mic linear array, 4 cm spacing, 12 kHz, PSM metric, $T_{60}$ sweep), and results with 8 embedded figures
+- New entity: [[entities/ernst-warsitz|Ernst Warsitz]] (Paderborn)
+- New concepts: [[concepts/blind-analytical-normalization|BAN]] (closed-form magnitude post-filter) and [[concepts/blind-statistical-normalization|BSN]] (response-as-pdf statistical post-filter)
+- Updated [[concepts/gev-beamformer|GEV beamformer]] with the true 2007 origin (previously credited only to Heymann 2016), GMVDR equivalence, and BAN/BSN normalization sections
+- Updated 10 existing concept pages (mvdr-beamformer, mask-based-beamforming, generalized-eigenvalue-decomposition, gsc-beamformer, voice-activity-detection, gevd-spatial-filtering, gsvd-based-optimal-filtering, superdirective-beamforming, beamforming, gev-beamformer) with Warsitz-2007 relations
+- Updated [[entities/reinhold-haeb-umbach|Reinhold Haeb-Umbach]] entity page
+- Updated [[synthesis/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]] synthesis: new "classical kernel of GEV+BAN" data point in Insight 4 — the 2016 mask-based systems replaced exactly one component (VAD-derived statistics) of the 2007 system, keeping beamformer and BAN unchanged
+
+**Key insight**: This ingest corrects a provenance gap — the GEV+BAN front-end adopted by Heymann 2016 / Boeddeker 2018 originates here, nine years before the neural masks, including the BAN post-filter that those systems kept verbatim.

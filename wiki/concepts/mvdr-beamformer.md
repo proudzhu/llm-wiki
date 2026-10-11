@@ -30,6 +30,7 @@ sources:
   - raw/papers/wang-2021-kronecker-adaptive-beamforming/full-text.txt
   - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
   - raw/papers/yamaoka-2021-bin-wise-beamformer-combination/full-text.md
+  - raw/papers/warsitz-2007-blind-gev-beamforming/full-text.md
 tags:
   - beamforming
   - speech-enhancement
@@ -47,6 +48,10 @@ $$h_{\text{MVDR}} = \frac{\Phi_n^{-1} a}{a^H \Phi_n^{-1} a}$$
 where $a$ is the steering vector for the target direction and $\Phi_n$ is the noise spatial covariance matrix. When the sample covariance $R_y$ is used in place of $\Phi_n$ (so that the minimized power includes the desired signal), the solution is
 
 $$w_{\text{mv}} = \frac{R_y^{-1} a(\theta)}{a(\theta)^* R_y^{-1} a(\theta)}$$
+
+## GMVDR Equivalence of the Max-SNR Beamformer (Warsitz & Haeb-Umbach 2007)
+
+[[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007]] prove that the [[concepts/gev-beamformer|GEV (max-SNR) beamformer]] — the principal generalized eigenvector of $(\boldsymbol{\Phi}_{\mathbf{XX}}, \boldsymbol{\Phi}_{\mathbf{NN}})$ — equals the **transfer-function-generalized MVDR** (GMVDR, which constrains a distortionless response $\mathbf{F}^{\mathrm{H}}\mathbf{H} = 1$ through *arbitrary* acoustic transfer functions $\mathbf{H}$, cf. Gannot et al. 2001) **up to one complex scalar per frequency bin**: $\mathbf{F}_{\mathrm{GMVDR}}(k) = w(k)\,\mathbf{F}_{\mathrm{SNR}}(k)$. With anechoic far-field propagation the GMVDR further reduces to the classical Frost MVDR. This gives the MVDR family's "equal up to a per-bin scale" property its blind instantiation: the max-SNR beamformer becomes usable for broadband speech once the scalar is repaired by a single-channel post-filter — their [[concepts/blind-analytical-normalization|BAN]] / [[concepts/blind-statistical-normalization|BSN]] normalizations — without estimating $\mathbf{H}$, the DoA, or the array geometry at all.
 
 ## Sensitivity to Array-Manifold Mismatch
 
@@ -215,4 +220,5 @@ The MVDR beamformer with $M$ microphones can suppress at most $M-1$ interferers,
 - [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018: Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition]] — statistics-only MVDR with mask-estimated SCMs; offline SNR-maximizing vs. online fixed reference selection; MVDR+BAN best configuration
 - [[sources/erdogan-2016-improved-mvdr-mask-prediction|Erdogan, Hershey, Watanabe, Mandel & Le Roux 2016: Improved MVDR Beamforming Using Single-Channel Mask Prediction Networks]] — founding mask-driven statistics-only MVDR; single max-combined mask and minimum-floor post-mask design analysis; beats WDAS on mismatched-ASR WER
 - [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016: Neural Network Based Spectral Mask Estimation for Acoustic Beamforming]] — explicit-inversion fragility under sparse masks (vs. GEV) and principal-component steering from the speech PSD
+- [[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007: Blind Acoustic Beamforming Based on Generalized Eigenvalue Decomposition]] — GEV = GMVDR up to a per-bin scalar; blind BAN/BSN post-filters repair the max-SNR beamformer's distortion
 

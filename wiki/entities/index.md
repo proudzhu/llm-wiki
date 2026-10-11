@@ -653,4 +653,5 @@
 | [[entities/john-hershey\|John Hershey]] | Google Research (2016: MERL) — machine learning and speech processing researcher; co-author of the mask-prediction MVDR beamforming paper (Interspeech 2016), known for deep clustering and speech separation work | 2026-10-11 |
 | [[entities/shinji-watanabe\|Shinji Watanabe]] | Carnegie Mellon University LTI (2016: MERL) — speech processing researcher; co-author of the mask-prediction MVDR beamforming paper (Interspeech 2016), known for multichannel end-to-end ASR, ESPnet, and the CHiME challenges | 2026-10-11 |
 | [[entities/michael-mandel\|Michael Mandel]] | Brooklyn College, City University of New York — machine listening researcher; co-author of the mask-prediction MVDR beamforming paper (Interspeech 2016), known for ideal ratio mask binaural separation | 2026-10-11 |
+| [[entities/ernst-warsitz\|Ernst Warsitz]] | Paderborn University — statistical signal processing and microphone arrays; first author of the GEV (max-SNR) beamformer origin paper (2007, with Haeb-Umbach) | 2026-10-11 |
 

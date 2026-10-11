@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-10-01
+updated: 2026-10-11
 sources:
   - raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md
   - raw/papers/souden-2010-pmwf/full-text.md
@@ -12,6 +12,7 @@ sources:
   - raw/papers/wen-2025-neural-directed-speech-enhancement/full-text.md
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/doclo-2002-gsvd-optimal-filtering/full-text.md
+  - raw/papers/warsitz-2007-blind-gev-beamforming/full-text.md
 tags:
   - beamforming
   - adaptive-filtering
@@ -94,6 +95,10 @@ Two operational details generalize beyond this paper: the blocking matrix and th
 
 In the comparison of [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 2002]] (4-microphone linear array, 5 cm spacing, reverberation up to $T_{60} = 1500$ ms, 0 dB input SNR), the GSC (NLMS, step size 0.2, 800-tap canceller, no adaptation during speech) is outperformed by the subspace-based [[concepts/gsvd-based-optimal-filtering|GSVD optimal filter]] for **all** reverberation times when the filter length is large enough. The structural reason: the GSC relies on correlated noise components across microphones, so its advantage shrinks as reverberation makes the noise diffuse and uncorrelated, whereas the GSVD filter exploits the full spatio-temporal statistics. The GSC is also more sensitive to deviations from the nominal situation — speech-position errors, microphone displacement, gain mismatch — because the quiescent vector and blocking matrix encode a priori array geometry; the GSVD filter makes no such assumptions and is provably insensitive to microphone gain/phase variations. The two techniques share a VAD failure mode: speech wrongly classified as noise causes signal cancellation (in the GSC, speech leakage into the noise references with the same effect).
 
+## GSC Signal Cancellation as Motivation for Blind Beamforming (Warsitz & Haeb-Umbach 2007)
+
+[[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007]] motivate their blind [[concepts/gev-beamformer|GEV (max-SNR) beamformer]] by the GSC's central failure mode: target-signal cancellation when speech leaks into the noise references — through steering/TDOA errors in the quiescent vector and blocking matrix, or through VAD misclassification. Their alternative dispenses with the explicit constraint structure entirely, deriving the filter per frequency bin as the principal generalized eigenvector of the speech-plus-noise/noise SCM pair (estimated with VAD-gated statistics) and repairing the resulting arbitrary scalar with the [[concepts/blind-analytical-normalization|BAN]] / [[concepts/blind-statistical-normalization|BSN]] post-filters. The GEV-GSC that Souden et al. 2010 evaluate above is the GSC-structured variant of this criterion, not the pure eigenvector beamformer.
+
 ## Related Concepts
 
 - [[concepts/gsvd-based-optimal-filtering|GSVD-Based Optimal Filtering]] — the calibration-free subspace alternative that outperforms the GSC for all reverberation times
@@ -118,6 +123,7 @@ In the comparison of [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 
 - [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 2002: GSVD-Based Optimal Filtering for Single and Multimicrophone Speech Enhancement]] — GSVD subspace filter outperforms the GSC for all reverberation times and deviates more gracefully under array mismatch
 - [[sources/hoshuyama-1999-robust-adaptive-beamformer-ccaf|Hoshuyama, Sugiyama & Hirano 1999: A Robust Adaptive Beamformer with a Blocking Matrix Using Constrained Adaptive Filters]] — CCAF-based adaptive blocking matrix: bounded target tracking with no loss of interference-reduction degrees of freedom
 - [[sources/souden-2010-pmwf|Souden, Benesty & Affes 2010: On Optimal Frequency-Domain Multichannel Linear Filtering for Noise Reduction]] — statistics-only GSC: matched-filter branch, PSD-derived blocking matrix; outperforms GEV-GSC on distortion
+- [[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007: Blind Acoustic Beamforming Based on Generalized Eigenvalue Decomposition]] — GSC signal cancellation as the motivation for the blind GEV beamformer; the GEV-GSC evaluated by Souden et al. 2010 is the GSC-structured variant of this criterion
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]] — informed GSC with bin-wise detector-controlled FBF/BM/NC and RLS noise canceller (Ch 5)
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
 - [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]]

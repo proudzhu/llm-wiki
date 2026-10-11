@@ -3,6 +3,7 @@ type: concept
 created: 2026-10-11
 updated: 2026-10-11
 sources:
+  - raw/papers/warsitz-2007-blind-gev-beamforming/full-text.md
   - raw/papers/heymann-2016-neural-spectral-mask-beamforming/full-text.md
   - raw/papers/boeddeker-2018-neural-mask-beamforming/full-text.md
 tags:
@@ -14,6 +15,10 @@ tags:
 # GEV Beamformer
 
 The **Generalized Eigenvalue (GEV) beamformer** (also **max-SNR beamformer**) selects beamforming coefficients $\mathbf{w}_f$ that maximize the output signal-to-noise ratio at each frequency bin. Along with the [[concepts/mvdr-beamformer|MVDR beamformer]], it is one of the two standard beamformers driven by mask-estimated [[concepts/spatial-covariance-matrix|spatial covariance matrices]] in neural mask-based beamforming, and it was part of the front-ends of CHiME challenge winning systems.
+
+## Origin
+
+The GEV beamformer for broadband speech enhancement was introduced by [[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007]], which transferred the narrowband max-SNR criterion — long avoided for speech because of its uncontrolled distortion — to microphone arrays by (i) proving the resulting beamformer equals the transfer-function-generalized MVDR up to a scalar per frequency bin and (ii) repairing that scalar with the blind post-filters [[concepts/blind-analytical-normalization|BAN]] / [[concepts/blind-statistical-normalization|BSN]]. In the original system the SCMs came from a VAD (noise PSD tracked in speech pauses), adaptation ran even under strong directional noise, and a novel single-stage gradient-ascent algorithm tracked the dominant generalized eigenvector per bin ($\mathcal{O}(M^2)$, faster than Morgan's SG tracker, more robust to speech-absent frames than RLS). In diffuse noise it achieves the low-frequency SNR gain typical of superdirective designs. Neural mask-based beamforming (2016–) replaced the VAD statistics with DNN masks but kept the beamformer and BAN unchanged.
 
 ## Formulation
 
@@ -29,7 +34,8 @@ which is given by the **principal generalized eigenvector** of the speech/noise 
 
 The GEV solution is defined only up to an arbitrary complex scale per frequency bin, so its raw output has an arbitrary magnitude *and* phase response. Two normalization filters compensate:
 
-- **Blind Analytic Normalization (BAN)** — a post-filter that fixes the arbitrary magnitude response analytically from the SCMs.
+- **[[concepts/blind-analytical-normalization|Blind Analytical Normalization (BAN)]]** — a closed-form post-filter that fixes the arbitrary magnitude response from the GEV filter vector and the noise SCM; introduced together with the beamformer in [[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007]].
+- **[[concepts/blind-statistical-normalization|Blind Statistical Normalization (BSN)]]** — the statistical alternative from the same paper (spatial-response-as-pdf); more robust during adaptation and at higher reverberation, but costlier (angular integral).
 - **Group delay normalization** — equalizes the arbitrary phase/group-delay response, important for ASR features that are sensitive to phase misalignment across frequency.
 
 ## Relation to Other Beamformers
@@ -52,8 +58,11 @@ In [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka
 - [[concepts/neural-beamforming|Neural Beamforming]] — the differentiable, mask-driven beamforming framework the GEV belongs to
 - [[concepts/beamforming|Beamforming]] — parent topic
 - [[concepts/gevd-spatial-filtering|GEVD Spatial Filtering]] — related GEVD-of-SCM technique for SDW-MWF design
+- [[concepts/blind-analytical-normalization|Blind Analytical Normalization (BAN)]] — magnitude post-filter from the origin paper
+- [[concepts/blind-statistical-normalization|Blind Statistical Normalization (BSN)]] — statistical post-filter from the origin paper
 
 ## Related Sources
 
+- [[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007: Blind Acoustic Beamforming Based on Generalized Eigenvalue Decomposition]] — origin paper: VAD-gated SCMs, GMVDR scalar equivalence, BAN/BSN post-filters, gradient-ascent eigenvector tracking
 - [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016: Neural Network Based Spectral Mask Estimation for Acoustic Beamforming]] — origin of the front-end; GEV consistently beats MVDR under sparse masks (condition-number analysis), CHiME-3 WER halved
 - [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018: Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition]] — GEV with BAN + group delay normalization as one of two mask-driven beamformers in a practical far-field ASR evaluation

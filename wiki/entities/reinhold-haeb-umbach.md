@@ -22,9 +22,11 @@ tags:
 - Co-author of the CHiME-5 dinner-party front-end processing paper introducing guided source separation (Boeddeker et al. 2018).
 - Co-author of "Speech Processing for Digital Home Assistance: Combining Signal Processing with Deep-Learning Techniques" (IEEE Signal Processing Magazine 2019).
 - Co-author of "Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition" (ICASSP 2018) — practical evaluation of neural mask-based beamforming for far-field ASR (two arrays, two acoustic models, feature-level LogMel MSE loss, online variants) — [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018]]
+- Co-author of "Blind Acoustic Beamforming Based on Generalized Eigenvalue Decomposition" (IEEE TASLP 2007, with Ernst Warsitz) — [[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007]]; origin of the GEV (max-SNR) beamformer with BAN/BSN post-filters and the gradient-ascent generalized-eigenvector tracking algorithm — the classical kernel his later 2016/2018 papers drove with neural masks
 
 ## Related Sources
 
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]]
 - [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016: Neural Network Based Spectral Mask Estimation for Acoustic Beamforming]]
 - [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018: Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition]]
+- [[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007: Blind Acoustic Beamforming Based on Generalized Eigenvalue Decomposition]]

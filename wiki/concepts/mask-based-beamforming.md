@@ -6,6 +6,7 @@ sources:
   - raw/papers/erdogan-2016-improved-mvdr-mask-prediction/full-text.md
   - raw/papers/heymann-2016-neural-spectral-mask-beamforming/full-text.md
   - raw/papers/boeddeker-2018-neural-mask-beamforming/full-text.md
+  - raw/papers/warsitz-2007-blind-gev-beamforming/full-text.md
 tags:
   - beamforming
   - speech-enhancement
@@ -25,6 +26,8 @@ Three concurrent 2016 papers founded the field:
 - **[[sources/erdogan-2016-improved-mvdr-mask-prediction|Erdogan et al. 2016]]**: single-channel LSTM enhancement networks trained on CH5 data only supply the noise SCM (via $\hat{v}_{i,t,f} = (1-\hat{a}_{i,t,f})\,y_{i,t,f}$) for the statistics-only Souden-form MVDR. Signal-domain MSA loss.
 - **[[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann et al. 2016]]**: per-channel networks estimate speech and noise masks consolidated by a **median**, driving GEV+BAN or MVDR with principal-component steering. Mask-domain loss with binary targets.
 - Higuchi et al. 2016: robust MVDR using time-frequency masks for online/offline ASR in noise (not yet ingested).
+
+The classical kernel predates the masks by nine years: the [[concepts/gev-beamformer|GEV beamformer]] with [[concepts/blind-analytical-normalization|BAN]] was introduced by [[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007]], where the speech and noise SCMs it feeds on were estimated with a **VAD** (noise PSD recursively tracked in speech pauses, adaptation during speech). Mask-based beamforming is precisely the substitution of DNN-predicted T-F masks for that VAD segmentation — the beamformer formula, the blindness to array geometry, and the BAN post-filter all carry over unchanged.
 
 ## Design Space (Erdogan et al. 2016)
 
@@ -71,3 +74,4 @@ accumulated over the utterance ([[sources/boeddeker-2018-neural-mask-beamforming
 - [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016: Neural Network Based Spectral Mask Estimation for Acoustic Beamforming]] — founding paper; median consolidation, GEV/MVDR comparison
 - [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018: Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition]] — practical refinement and online variants
 - [[sources/li-2022-embedding-beamforming|Li et al. 2022: Embedding and Beamforming]] — oracle-mask comparison exposing the tandem scheme's structural limit
+- [[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007: Blind Acoustic Beamforming Based on Generalized Eigenvalue Decomposition]] — classical kernel (GEV+BAN with VAD-estimated SCMs) that the 2016 founding papers re-drove with neural masks

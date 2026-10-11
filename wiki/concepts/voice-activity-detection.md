@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-10-01
+updated: 2026-10-11
 sources:
   - raw/papers/liu-2025-pcen-mask-vad-speech-enhancement/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
@@ -12,6 +12,7 @@ sources:
   - raw/papers/grumiaux-2022-ssl-deep-learning-survey/full-text.txt
   - raw/papers/heitkaemper-2025-bcs-speech-enhancement-earbuds/full-text.txt
   - raw/papers/doclo-2002-gsvd-optimal-filtering/full-text.md
+  - raw/papers/warsitz-2007-blind-gev-beamforming/full-text.md
 tags:
 - audio-processing
 - machine-learning
@@ -42,6 +43,8 @@ In the context of ANC headphones, VAD is often split into two categories (Masila
 A simple, classical instance is the **energy-based binary VAD with minimum-energy tracking** used by Tashev et al. (2008) for their small-device sound-capture system: a state machine with two thresholds ("noise" and "voice" states) gates whether the current frame updates the noise-only statistical models or the speech-direction statistical models of the post-filter. The VAD itself is not the contribution; it is a binary gate for the [[concepts/probability-based-spatial-filter|probability-based spatial filter]]'s model adaptation.
 
 The same gating role appears in classical subspace enhancement: [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 2002]]'s [[concepts/gsvd-based-optimal-filtering|GSVD-based optimal filter]] relies on a VAD to route stacked data vectors into a speech data matrix (speech-and-noise periods) or a noise data matrix (noise-only periods), from which the filter is computed. The asymmetry of the two error modes is notable: speech wrongly classified as noise contaminates the noise statistics and causes **signal cancellation**, whereas noise wrongly classified as speech merely reduces noise reduction — the same asymmetry as signal leakage in GSC noise references.
+
+The same statistics-gating role drives the original [[concepts/gev-beamformer|GEV (max-SNR) beamformer]]: [[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007]] use a two-threshold scheme (with an explicit "don't know" state between the noise and voice thresholds) to separate speech-plus-noise frames from noise-only frames, tracking the noise SCM by recursive averaging ($\epsilon \approx 0.99$) during speech pauses and the speech-plus-noise SCM instantaneously. The gradient-ascent eigenvector tracker adapts only on confidently classified frames, which keeps it stable when speech is absent.
 
 ### 2. Machine Learning Approaches
 - **GMMs and HMMs**: Traditional statistical models for speech.
@@ -126,3 +129,4 @@ Kim & Kim (2014) embed a **statistical model-based log-likelihood ratio test** (
 - [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] — STD model as a role-conditional VAD frontend
 - [[sources/kim-2014-doa-based-snr-estimation|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] — statistical model-based LRT as the embedded speech-activity decision inside a DOA-based SNR estimator
 - [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024: Lightweight Hybrid Multi-Channel Speech Extraction with DVAD]] — directional VAD as per-zone spatial activity detection
+- [[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007: Blind Acoustic Beamforming Based on Generalized Eigenvalue Decomposition]] — two-threshold ("don't know" state) VAD gating the noise/speech-plus-noise SCM estimation of the GEV beamformer

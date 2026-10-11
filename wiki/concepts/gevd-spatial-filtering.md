@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-07-16
-updated: 2026-10-01
+updated: 2026-10-11
 sources:
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
   - raw/papers/doclo-2002-gsvd-optimal-filtering/full-text.md
+  - raw/papers/warsitz-2007-blind-gev-beamforming/full-text.md
 tags:
   - speech-enhancement
   - spatial-filtering
@@ -46,6 +47,10 @@ $$\mathbf{W}_{WF} \simeq \mathbf{Q}^{-T}\,\mathrm{diag}\left\{1 - \frac{p}{q}\fr
 
 is computed from the GSVD of a speech data matrix and a noise data matrix (segmented by VAD), exploiting the low-rank speech model in the spatio-temporal domain. The motivations for the STFT-domain GEVD filter above — low-rank truncation for robustness against estimation noise, reduced inversion cost, rank-deficient speech SCMs — are already present there; the difference is the domain (per-T-F-bin SCMs vs. sample-domain data matrices). See [[concepts/gsvd-based-optimal-filtering|GSVD-Based Optimal Filtering]].
 
+## Contrast: The Principal Eigenvector as the Beamformer
+
+[[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007]] use the same GEVD of speech/noise SCMs but take only its **principal generalized eigenvector** as the beamformer itself — the [[concepts/gev-beamformer|GEV (max-SNR) beamformer]] — a rank-one spatial filter with no Wiener gain function, whose arbitrary per-bin scalar is repaired by the [[concepts/blind-analytical-normalization|BAN]] / [[concepts/blind-statistical-normalization|BSN]] post-filters. The distinction from the rank-constrained SDW-MWF above: the eigenproblem here solves a max-SNR criterion per bin (with VAD-derived statistics), not a speech-distortion/residual-noise trade-off, and no reference-microphone selection vector appears.
+
 ## Use in TANGO-Family Frameworks
 
 In the [[concepts/tango-framework|Tango]] two-stage architecture and its variants, the GEVD-based SDW-MWF appears twice:
@@ -78,5 +83,6 @@ A central finding of [[sources/benslimane-2026-tango-quantized-distributed|Bensl
 ## Related Sources
 
 - [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 2002: GSVD-Based Optimal Filtering for Single and Multimicrophone Speech Enhancement]] — the time-domain origin of the joint-diagonalization spatial filter
+- [[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007: Blind Acoustic Beamforming Based on Generalized Eigenvalue Decomposition]] — the principal generalized eigenvector as the beamformer itself, vs. the rank-truncated SDW-MWF parameterization above
 - [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]]
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane et al. 2026: RT-Tango]]

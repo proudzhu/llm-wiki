@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-10-01
-updated: 2026-10-01
+updated: 2026-10-11
 sources:
   - raw/papers/doclo-2002-gsvd-optimal-filtering/full-text.md
+  - raw/papers/warsitz-2007-blind-gev-beamforming/full-text.md
 tags:
   - speech-enhancement
   - multi-channel
@@ -144,6 +145,8 @@ A full GSVD costs $17M^3 + 3pM^2$ operations; recursive Jacobi-type GSVD updatin
 
 The joint-diagonalization idea survives in the STFT domain as [[concepts/gevd-spatial-filtering|GEVD-based spatial filtering]], where the generalized eigendecomposition of speech/noise spatial covariance matrices yields rank-constrained SDW-MWF filters (e.g., in the [[concepts/tango-framework|Tango]] family of distributed binaural enhancement frameworks). The GSVD-of-data-matrices and GEVD-of-SCMs formulations are the time-domain and frequency-domain expressions of the same principle.
 
+[[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007]] — writing in the STFT domain — position their blind [[concepts/gev-beamformer|GEV beamformer]] relative to this time-domain GSVD line (Doclo & Moonen): both exploit a generalized eigenproblem of speech/noise statistics without steering information, but Warsitz & Haeb-Umbach take the principal generalized eigenvector per frequency bin as the beamformer (max-SNR criterion), rather than a Wiener gain applied in the generalized-eigenvector transform domain.
+
 ## Related Concepts
 
 - [[concepts/signal-subspace-speech-enhancement|Signal Subspace Speech Enhancement]] — the single-microphone family this technique extends
@@ -157,3 +160,4 @@ The joint-diagonalization idea survives in the STFT domain as [[concepts/gevd-sp
 ## Related Sources
 
 - [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 2002: GSVD-Based Optimal Filtering for Single and Multimicrophone Speech Enhancement]] — origin paper: formulation, symmetry properties, averaging suboptimality, GSC comparison, robustness, complexity
+- [[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007: Blind Acoustic Beamforming Based on Generalized Eigenvalue Decomposition]] — STFT-domain related work citing this GSVD line; principal eigenvector (max-SNR) vs. Wiener gain in the generalized-eigenvector transform domain

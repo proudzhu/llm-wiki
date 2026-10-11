@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-09-14
-updated: 2026-10-07
+updated: 2026-10-11
 sources:
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
@@ -9,6 +9,7 @@ sources:
   - raw/papers/cohen-2019-differential-kronecker-beamforming/full-text.txt
   - raw/papers/desena-2012-higher-order-differential/full-text.md
   - raw/papers/itzhak-2025-stft-roi-beamforming/full-text.md
+  - raw/papers/warsitz-2007-blind-gev-beamforming/full-text.md
 tags:
   - beamforming
   - microphone-arrays
@@ -68,6 +69,8 @@ As $M$ grows, an RSD beamformer stores $M$ complex parameters per frequency bin 
 
 Superdirective designs belong to the [[concepts/fixed-beamformer|fixed beamformer]] family: coefficients are precomputed and stored, giving stable performance and low run-time cost. They generalize [[concepts/differential-microphone-array|differential microphone arrays]] (DMAs give frequency-invariant patterns with the same low-frequency WNG amplification issue) and relate to the WNG–DF trade-off faced by compact arrays (see the [[concepts/fixed-beamformer|fixed beamformer]] page).
 
+A data-driven counterpart: the blind [[concepts/gev-beamformer|GEV (max-SNR) beamformer]] of [[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007]] is not designed against an isotropic noise model, but when the noise field *is* diffuse its VAD-estimated noise SCM plays the role of $\boldsymbol{\Gamma}$, and the measured output SNR gain exhibits the low-frequency emphasis typical of superdirective designs — the eigenproblem rediscovers superdirective behavior from estimated statistics rather than from a noise-field model.
+
 ## Related Concepts
 
 - [[concepts/kronecker-product-beamforming|Kronecker Product Beamforming]]
@@ -89,3 +92,4 @@ Superdirective designs belong to the [[concepts/fixed-beamformer|fixed beamforme
 - [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]] — RSD ($\epsilon = 10^{-3}$) as the spatial front-end of a joint SNR–CDR Wiener post-filter
 - [[sources/desena-2012-higher-order-differential|De Sena, Hacihabiboglu & Cvetkovic 2012: On the Design and Implementation of Higher Order Differential Microphones]] — (α, λ) framework with max-DF hypercardioid and max-FBR supercardioid as corner solutions
 - [[sources/itzhak-2025-stft-roi-beamforming|Itzhak & Cohen 2025: STFT-Domain Least-Distortion Region-of-Interest Beamforming]] — LD-MDF: the max-DF design generalized to a region-of-interest, reducing to the classical superdirective solution for single-DOA regions
+- [[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007: Blind Acoustic Beamforming Based on Generalized Eigenvalue Decomposition]] — blind GEV beamformer achieving superdirective-typical low-frequency SNR gain in diffuse noise from estimated statistics

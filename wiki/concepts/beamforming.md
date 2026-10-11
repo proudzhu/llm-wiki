@@ -16,6 +16,7 @@ sources:
   - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
   - raw/papers/doclo-2002-gsvd-optimal-filtering/full-text.md
   - raw/papers/yamaoka-2021-bin-wise-beamformer-combination/full-text.md
+  - raw/papers/warsitz-2007-blind-gev-beamforming/full-text.md
 tags:
 - acoustics
 - antenna-theory
@@ -43,6 +44,7 @@ Modern ANC headphones use beamforming for several critical tasks:
 - **[[mpdr-beamformer|MPDR (Minimum Power Distortionless Response)]]**: Minimizes total output power while maintaining a constant gain in the target direction.
 - **[[mvdr-beamformer|MVDR (Minimum Variance Distortionless Response)]]**: Minimizes interference-plus-noise power while maintaining a constant gain in the target direction.
 - **[[gsc-beamformer|GSC (Generalized Sidelobe Canceller)]]**: A structure that splits the beamformer into a fixed path and an adaptive interference-cancellation path.
+- **[[concepts/gev-beamformer|GEV (Generalized Eigenvalue / max-SNR)]]**: Maximizes the output SNR per frequency bin — the principal generalized eigenvector of the speech-plus-noise/noise SCM pair, needing no steering vector or array geometry. Introduced for broadband speech enhancement by Warsitz & Haeb-Umbach 2007 together with the BAN/BSN post-filters that repair its arbitrary per-bin scalar; the classical kernel later adopted unchanged by neural mask-based beamforming.
 - **[[concepts/nlcmv-beamforming|NLCMV (Non-Linearly Constrained Minimum Variance)]]**: Extends MVDR with explicit white-noise-gain and null-direction constraints; used in AGADIR for smart-glasses directional ASR (Lin et al. 2024).
 - **[[lcmv-beamformer|LCMV (Linearly Constrained Minimum Variance)]]**: Generalizes MVDR to multiple linear constraints for simultaneous target preservation and null steering.
 - **Neural Beamforming**: Using deep learning models (e.g., U-Nets or LSTMs) to perform spatial filtering in complex, multi-path environments.
@@ -177,3 +179,4 @@ The dual-microphone limit above — masking methods beating small-array beamform
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — the all-neural challenge to beamforming and the model-as-regularizer argument for retaining beamforming structure
 - [[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021: TF-Bin-Wise Linear Combination of Beamformers]] — combines K distortionless beamformers per TF bin to break the M−1-interferer limit in underdetermined situations
 - [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018: Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition]] — mask-based MVDR/GEV beamforming validated at commercial scale across two arrays and two acoustic models, with online variants
+- [[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007: Blind Acoustic Beamforming Based on Generalized Eigenvalue Decomposition]] — origin of the GEV (max-SNR) beamformer with BAN/BSN normalization; the classical kernel later adopted unchanged by neural mask-based beamforming

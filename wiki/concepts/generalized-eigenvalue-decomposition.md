@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-19
+updated: 2026-10-11
 sources:
   - raw/papers/scheibler-2020-fast-independent-vector-extraction/full-text.md
   - raw/papers/xiang-2024-multichannel-cdr-estimation/full-text.md
+  - raw/papers/warsitz-2007-blind-gev-beamforming/full-text.md
 tags:
   - linear-algebra
   - eigenvalue-problem
@@ -39,6 +40,10 @@ The generalized eigenvalues $\Lambda$ (ordered decreasingly) determine the span 
 
 Xiang et al. 2024 estimate the array manifold vector for [[concepts/multichannel-cdr-estimation|multichannel CDR estimation]] by jointly diagonalizing the observation and diffuse-noise pseudo-coherence matrices: $\boldsymbol{\Gamma}_{\mathrm{dn}} = \mathbf{U}\mathbf{U}^{\mathrm{H}}$ and $\boldsymbol{\Gamma}_{\mathbf{y}} = \mathbf{U}\boldsymbol{\Lambda}\mathbf{U}^{\mathrm{H}}$, where the columns of $\mathbf{U}$ are the eigenvectors of $\boldsymbol{\Gamma}_{\mathrm{dn}}^{-1}\boldsymbol{\Gamma}_{\mathbf{y}}$ and $\lambda_1 \geq \cdots \geq \lambda_M$ its eigenvalues. The principal eigenvector, scaled as $\widehat{\mathbf{d}} = \frac{\sqrt{M}}{\|\mathbf{u}_1\|_2}\mathbf{u}_1$, serves as the manifold-vector estimate, yielding a DOA-free closed-form coherent-to-diffuse power ratio.
 
+## Application in GEV Beamforming
+
+[[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007]] made the **principal generalized eigenvector** of the speech-plus-noise / noise SCM pair the beamformer itself — the [[concepts/gev-beamformer|GEV (max-SNR) beamformer]] — rather than using the full decomposition to parameterize a Wiener-type filter. Maximizing the output SNR (a Rayleigh quotient) per frequency bin yields the dominant generalized eigenvector, which they tracked online with a single-stage gradient-ascent algorithm at $\mathcal{O}(M^2)$ cost per bin. This is the narrowest GEVD-based spatial filter — rank one, in contrast to the rank-$Q$ truncations of VSLF — and the kernel later adopted unchanged by neural mask-based beamforming.
+
 ## Related Concepts
 
 - [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]]
@@ -54,3 +59,4 @@ Xiang et al. 2024 estimate the array manifold vector for [[concepts/multichannel
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
 - [[sources/scheibler-2020-fast-independent-vector-extraction|Scheibler & Ono 2020: Fast Independent Vector Extraction]]
 - [[sources/xiang-2024-multichannel-cdr-estimation|Xiang, Lei, Pan, Chen & Benesty 2024: On Multichannel Coherent-to-Diffuse Power Ratio Estimation]] — joint diagonalization for array manifold estimation in multichannel CDR estimation
+- [[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007: Blind Acoustic Beamforming Based on Generalized Eigenvalue Decomposition]] — the principal generalized eigenvector as the beamformer itself (GEV/max-SNR), tracked online by gradient ascent
