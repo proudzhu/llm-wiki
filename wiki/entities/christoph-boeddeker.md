@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-10-11
 tags:
   - researcher
   - speech-enhancement
@@ -20,7 +20,9 @@ tags:
 - Co-author of "Microphone Array Signal Processing and Deep Learning for Speech Enhancement" (IEEE Signal Processing Magazine 2024) — [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024]].
 - First author of "Front-end processing for the CHiME-5 dinner party scenario" (Boeddeker et al. 2018) — the guided source separation (GSS) front-end combining diarization with model-based EM mask estimation, adopted by most top CHiME-6/7 systems.
 - Convolutive transfer function invariant SDR training criteria for multi-channel reverberant speech separation (Boeddeker et al. 2021) — end-to-end training with backpropagation through the differentiable beamforming operation.
+- First author of "Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition" (ICASSP 2018) — practical evaluation of neural mask-based beamforming for far-field ASR (two arrays, two acoustic models, feature-level LogMel MSE loss, online variants) — [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018]]
 
 ## Related Sources
 
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]]
+- [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018: Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition]]

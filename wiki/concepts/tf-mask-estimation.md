@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-08-16
-updated: 2026-09-26
+updated: 2026-10-11
 sources:
+  - raw/papers/boeddeker-2018-neural-mask-beamforming/full-text.md
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
   - raw/papers/ansari-2023-ai-bss-survey/full-text.md
   - raw/papers/pan-2025-data-driven-acoustics/full-text.md
@@ -55,6 +56,10 @@ combined with [[concepts/permutation-invariant-training|PIT]] and magnitude-spec
 
 **Integration patterns** (the Class-2 hybrid): (i) DNN masks serve as the *a priori* probability of the spatial mixture model, refined by EM as the posterior — unsupervised adaptation of DNN masks on the test utterance (Nakatani et al. 2017); (ii) conversely, mixture-model posteriors serve as *training targets* for the DNN, improving separation and even enabling single-channel separation learned from multi-channel recordings (Drude et al. 2019; Tzinis et al. 2019); (iii) a DNN diarization front-end (e.g., [[concepts/target-speaker-vad|TS-VAD]]) constrains the EM refinement to TF resolution — the [[concepts/guided-source-separation|guided source separation (GSS)]] formulation used by top CHiME-6/7 systems.
 
+## Per-Channel Mask Networks, Median Consolidation, and Feature-Level Training (Boeddeker et al. 2018)
+
+[[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018]] give the canonical DNN-mask front-end of the CHiME-winning beamformers: an LSTM-based mask network (input splice ±3 frames → utterance-based batch normalization → unidirectional LSTM 513 → 2×FC 513 ReLU → FC 1026 sigmoid) runs **once per microphone channel**, and the $K$ per-channel speech/noise mask pairs are consolidated per T-F bin by a **median** operation into single masks that weight the SCM accumulation. Training criteria: conventional BCE against ideal binary masks, or the paper's new **feature-level** [[concepts/logmel-mse-loss|LogMel MSE]] — MSE between the beamformed and clean log-mel ASR features, backpropagated through the beamformer (~8% rel. WER better offline, but BCE favored in fully online operation; see [[concepts/online-mask-based-beamforming|online mask-based beamforming]]).
+
 ## Open Challenge
 
 A "large gap" remains between ISFs using *oracle* TF masks and those using *estimated* masks — motivating integration of spectral features and DNN-based mask estimation.
@@ -76,3 +81,4 @@ A "large gap" remains between ISFs using *oracle* TF masks and those using *esti
 - [[sources/ansari-2023-ai-bss-survey|Ansari et al. 2023: AI Approaches in BSS Survey]] — surveys DNN-based mask prediction (Refs. [124, 126, 133, 160, 167]) as a deep-learning BSS sub-area
 - [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — transform-domain analysis–separation–reconstruction framework with ideal-mask targets (Section 8.3–8.4)
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — spatial mixture model EM vs. DNN mask estimation, and their hybrid integration
+- [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018: Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition]] — per-channel LSTM mask networks with median consolidation; BCE vs. feature-level LogMel MSE training criteria

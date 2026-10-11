@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-09-26
+updated: 2026-10-11
 sources:
+  - raw/papers/boeddeker-2018-neural-mask-beamforming/full-text.md
   - raw/papers/pan-2026-array-self-awareness/full-text.md
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
   - raw/papers/grinstein-2025-tiny-param-mwf/full-text.md
@@ -40,6 +41,16 @@ SCMs can be estimated via:
 - DNN-based prediction (e.g., HVSF architecture)
 - Voice activity detection-guided updates
 - **Mask-derived estimates with learned smoothing** ([[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025]]): a tiny DNN estimates a multi-channel complex T-F mask $\mathbf{G}$; the masked observation $\hat{\mathbf{S}}_0=\mathbf{G}\odot\mathbf{Y}$ and its complement $\hat{\mathbf{N}}_0=\mathbf{Y}-\hat{\mathbf{S}}_0$ feed per-bin outer products accumulated by exponential smoothing, $\Phi_{ss}[t,w]=(1-\alpha_{ss}[w])\Phi_{ss}[t-1,w]+\alpha_{ss}[w]\hat{\mathbf{S}}_0\hat{\mathbf{S}}_0^H$ (likewise for $\Phi_{nn}$), with the smoothing speeds $\alpha_{ss}, \alpha_{nn}$ *learned per frequency* during end-to-end training and fixed at inference. The learned values satisfy $\alpha_{ss}>\alpha_{nn}$, recovering the classical assumption that speech statistics change faster than noise, and trained frequency-dependent smoothing marginally beat SPP-driven and fixed alternatives.
+
+## Mask-Weighted SCM Estimation and the Recursive Online Form (Boeddeker et al. 2018)
+
+[[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018]] give the canonical mask-weighted SCM estimate of neural mask-based beamforming: with DNN-predicted speech/noise masks $M_{f,t}^{\nu}$ and multi-channel STFT frames $\mathbf{Y}_{f,t}$,
+
+$$
+\boldsymbol{\Phi}_{\nu\nu f} = \frac{1}{\sum_{t} M_{f,t}^{\nu}} \sum_{t} M_{f,t}^{\nu} \mathbf{Y}_{f,t} \mathbf{Y}_{f,t}^{\mathrm{H}}, \quad \nu \in \{\mathbf{X}, \mathbf{N}\},
+$$
+
+accumulated over the whole utterance. Per-channel mask networks are consolidated by a **median** across the $K$ channels before weighting. For [[concepts/online-mask-based-beamforming|online beamforming]], the accumulation is replaced by a **recursive SCM estimate with a burn-in period** $T_{\mathrm{init}}$ (≈0.64 s), which prevents the noise SCM from becoming singular before enough masked evidence has accumulated; after burn-in the recursion updates with zero latency.
 
 ## SCM Reconstruction via Normalized Decomposition
 
@@ -127,3 +138,4 @@ Not every SCM in beamforming is *estimated* from data: fixed [[concepts/superdir
 - [[sources/li-2022-embedding-beamforming|Li et al. 2022: Embedding and Beamforming]] — implicit spectral-spatial embedding empirically beats explicit SCM computation in end-to-end neural beamforming
 - [[sources/zhang-2021-adl-mvdr|Zhang et al. 2021: ADL-MVDR]] — frame-level SCMs estimated from cRF filters; inversion and PCA replaced by GRU networks
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — the unified accumulation view: from recursive forgetting-factor updates to attention-based SCM tracking
+- [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018: Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition]] — canonical mask-weighted SCM estimation (median-consolidated per-channel masks) and its recursive online form with burn-in period

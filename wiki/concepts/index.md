@@ -593,4 +593,7 @@
 | [[concepts/as-se\|Auxiliary-Sensor Speech Enhancement (AS-SE)]] | Speech enhancement using an outer microphone plus an auxiliary body-conduction sensor (typically an in-ear microphone) as input; training configurations for in-ear noise/interferer modeling. | 2026-10-07 |
 | [[concepts/pas-se\|PAS-SE]] | Personalized auxiliary-sensor speech enhancement: combines enrollment-based PSE conditioning with in-ear-microphone AS-SE input; best results with in-ear enrollments. | 2026-10-07 |
 | [[concepts/directivity-factor\|Directivity Factor (DF)]] | Array gain against diffuse noise; ROI-generalized by Itzhak & Cohen 2025 and maximized by the LD-MDF beamformer | 2026-10-07 |
+| [[concepts/gev-beamformer\|GEV Beamformer]] | Max-output-SNR beamformer: principal generalized eigenvector of the speech/noise SCM pair, with BAN (magnitude) and group delay (phase) normalization. | 2026-10-11 |
+| [[concepts/logmel-mse-loss\|LogMel MSE Loss]] | Feature-level training criterion for mask-based beamforming: MSE between beamformed and clean normalized log-mel ASR features, backpropagated through the differentiable beamformer. | 2026-10-11 |
+| [[concepts/online-mask-based-beamforming\|Online Mask-Based Beamforming]] | Causal operation of mask-based beamforming: frame-level (online/intra-frame normalization, recursive SCMs with burn-in, fixed reference) and segment-level streaming with exponentially weighted context. | 2026-10-11 |
 

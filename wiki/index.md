@@ -653,6 +653,7 @@
 | [[entities/mikolaj-kegler\|Mikolaj Kegler]] | Researcher at Bose; co-author of PAS-SE and two-step knowledge distillation for tiny speech enhancement. | 2026-10-07 |
 | [[entities/marko-stamenovic\|Marko Stamenovic]] | Researcher at Bose; co-author of PAS-SE, TinyLSTMs, and two-step knowledge distillation for tiny speech enhancement. | 2026-10-07 |
 | [[entities/gal-itzhak\|Gal Itzhak]] | Technion researcher; first author of the STFT-domain least-distortion ROI beamforming line | 2026-10-07 |
+| [[entities/hakan-erdogan\|Hakan Erdogan]] | Microsoft AI and Research — phase-sensitive mask, mask-prediction-network MVDR beamforming; co-author of the neural mask-based beamforming practical-aspects paper | 2026-10-11 |
 
 ---
 
@@ -1251,6 +1252,9 @@
 | [[concepts/as-se\|Auxiliary-Sensor Speech Enhancement (AS-SE)]] | Speech enhancement using an outer microphone plus an auxiliary body-conduction sensor (typically an in-ear microphone) as input; training configurations for in-ear noise/interferer modeling. | 2026-10-07 |
 | [[concepts/pas-se\|PAS-SE]] | Personalized auxiliary-sensor speech enhancement: combines enrollment-based PSE conditioning with in-ear-microphone AS-SE input; best results with in-ear enrollments. | 2026-10-07 |
 | [[concepts/directivity-factor\|Directivity Factor (DF)]] | Array gain against diffuse noise; ROI-generalized by Itzhak & Cohen 2025 and maximized by the LD-MDF beamformer | 2026-10-07 |
+| [[concepts/gev-beamformer\|GEV Beamformer]] | Max-output-SNR beamformer: principal generalized eigenvector of the speech/noise SCM pair, with BAN (magnitude) and group delay (phase) normalization. | 2026-10-11 |
+| [[concepts/logmel-mse-loss\|LogMel MSE Loss]] | Feature-level training criterion for mask-based beamforming: MSE between beamformed and clean normalized log-mel ASR features, backpropagated through the differentiable beamformer. | 2026-10-11 |
+| [[concepts/online-mask-based-beamforming\|Online Mask-Based Beamforming]] | Causal operation of mask-based beamforming: frame-level (online/intra-frame normalization, recursive SCMs with burn-in, fixed reference) and segment-level streaming with exponentially weighted context. | 2026-10-11 |
 
 ---
 
@@ -1520,6 +1524,7 @@
 | [[sources/liebich-2022-occlusion-effect-cancellation\|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]] | Joint OEC/ANC treatment: correction-filter decoupling, adaptive factor α, ANC/OEC mode switching; 23-participant listening test (Δη = 1.67) | 2026-10-07 |
 | [[sources/ohlenbusch-2026-pas-se\|Ohlenbusch, Kegler & Stamenovic 2026]] | This paper systematically benchmarks two strategies for resolving the target/interferer ambiguity in hearable voice pickup — personalized speech enhancement (PSE), which conditions on enrollment utterances, and auxiliary-sensor speech enhancement (AS-SE), which adds an in-ear microphone input — and combines them into PAS-SE. | 2026-10-07 |
 | [[sources/itzhak-2025-stft-roi-beamforming\|Itzhak & Cohen 2025: STFT-Domain Least-Distortion Region-of-Interest Beamforming]] | LD-MWNG/LD-MDF ROI beamformers maximizing WNG/DF under an ROI-distortion constraint; parameter K trades gain vs distortion | 2026-10-07 |
+| [[sources/boeddeker-2018-neural-mask-beamforming\|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018]] | This paper examines whether neural mask-based beamforming — the DNN-mask + MVDR/GEV front-end that dominated the CHiME challenges — transfers to practical far-field ASR scenarios such as voice-enabled home devices. | 2026-10-11 |
 
 ---
 
@@ -1574,10 +1579,10 @@
 
 ## Statistics
 
-- **Total pages**: 1523
-- **Entities**: 643
-- **Concepts**: 589
-- **Sources**: 260
+- **Total pages**: 1528
+- **Entities**: 644
+- **Concepts**: 592
+- **Sources**: 261
 - **Synthesis**: 23
 - **Queries**: 8
-- **Last updated**: 2026-10-07
+- **Last updated**: 2026-10-11

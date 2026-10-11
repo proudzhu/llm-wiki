@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-10-07
+updated: 2026-10-11
 sources:
+  - raw/papers/boeddeker-2018-neural-mask-beamforming/full-text.md
   - raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.md
@@ -118,6 +119,10 @@ A route to robustness that avoids the covariance domain entirely is to constrain
 
 The dual-microphone limit above — masking methods beating small-array beamforming in underdetermined scenes — is answered from the beamforming side by [[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021]]: keep $K$ distortionless [[concepts/mvdr-beamformer|MVDR]]-type beamformers, each nulling a different $M-1$ subset of interferers, and *switch or linearly combine them per TF bin* ([[concepts/tflc-beamformer|TFLC beamforming]]). The per-bin selection acts as a clustering of dominant interferers, so each beamformer is designed on a (over)determined sub-problem; the convex combination provably retains the distortionless response. On SiSEC underdetermined data the restricted RTFLC variant attains masking-level noise reduction (+5.9 dB SDR over single MVDR) with only a 2.2 dB SRDR decline — at the cost of requiring a precise target RTF (~40 dB accuracy).
 
+## Neural Mask-Based Beamforming for Commercial Far-Field ASR (Boeddeker et al. 2018)
+
+[[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018]] stress-test the CHiME-winning mask-based beamformer (DNN masks → [[concepts/spatial-covariance-matrix|SCMs]] → [[concepts/mvdr-beamformer|MVDR]]/[[concepts/gev-beamformer|GEV]]) in a commercial far-field ASR scenario: two microphone arrays (7-mic, 4.25 cm radius; 8-mic, 8 cm radius), two large-data acoustic models, 400 of 800 test utterances from moving speakers. The beamformer beats BeamformIt and even a well-engineered differential beamformer on the array it was tuned to, despite the mask network being trained on mismatched CHiME-3 simulated data — evidence that the components are modular (any device × beamformer × acoustic model). A feature-level [[concepts/logmel-mse-loss|LogMel MSE]] training criterion and two [[concepts/online-mask-based-beamforming|online processing]] schemes (frame-level and segment-level) are also introduced; segment-level streaming nearly matches offline WER with a far-field acoustic model.
+
 ## Related Concepts
 
 - [[concepts/coefficient-constrained-adaptive-filter|Coefficient-Constrained Adaptive Filter (CCAF)]]
@@ -171,3 +176,4 @@ The dual-microphone limit above — masking methods beating small-array beamform
 - [[sources/kim-2014-doa-based-snr-estimation|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] — dual-mic SDB/GSC-PW outperformed by spatial-cue masking methods; DSB/BM transfer-function ratio reused as a TNR estimator
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — the all-neural challenge to beamforming and the model-as-regularizer argument for retaining beamforming structure
 - [[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021: TF-Bin-Wise Linear Combination of Beamformers]] — combines K distortionless beamformers per TF bin to break the M−1-interferer limit in underdetermined situations
+- [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018: Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition]] — mask-based MVDR/GEV beamforming validated at commercial scale across two arrays and two acoustic models, with online variants

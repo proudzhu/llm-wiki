@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-10-11
 sources:
+  - raw/papers/boeddeker-2018-neural-mask-beamforming/full-text.md
   - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
 tags:
   - speech-enhancement
@@ -37,6 +38,8 @@ Model-based methods estimate parameters from the same signal being enhanced; dat
 
 A deficit of cascaded hybrids is that the DNN is optimized toward a criterion different from the model-based part. **End-to-end training** optimizes the entire chain (mask DNN → SCM computation → differentiable beamforming → inverse STFT) toward a single time-domain loss, backpropagating through the beamforming operation. Training against a downstream loss (e.g., ASR) also removes the need for paired enhancement data. Caveats: training from scratch may fail (curricula or fine-tuning of pretrained components are needed), and modularity is lost — a system tuned for one downstream engine may underperform with another.
 
+An early commercial-scale instance is [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018]]: the mask DNN → SCM → MVDR chain is trained with a feature-level [[concepts/logmel-mse-loss|LogMel MSE]] loss (normalized log-mel features of the beamformed vs. clean signal) via complex-valued algorithmic differentiation through the beamformer — ~8% relative WER over the mask-level BCE criterion. Notably, the paper *simultaneously demonstrates the modularity caveat's upside*: the same Class-1 system transfers across two microphone arrays and two acoustic models with mismatched training data, so end-to-end optimization of the criterion did not sacrifice component modularity here.
+
 ## The Trend Toward Purely Data-Driven ("All-Neural") Systems
 
 Using beamforming as the case study, the field shows progressive replacement of model-based components (each step cited by Haeb-Umbach et al. 2024):
@@ -70,3 +73,4 @@ A model-based component may be inferior to a learned module on the datasets that
 - [[sources/zhang-2021-adl-mvdr|Zhang et al. 2021: ADL-MVDR]] — step 2 of the all-neural progression
 - [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023: Insights into Deep Nonlinear Filters]] — step 5
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023: Audio Signal Processing in the 21st Century]] — predicted the model-based + data-driven hybrid turn
+- [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018: Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition]] — commercial-scale Class-1 validation with end-to-end feature-level training and cross-array/cross-AM modularity

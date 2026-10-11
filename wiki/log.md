@@ -5921,3 +5921,15 @@ Ingested [[sources/ueda-2024-online-joint-optimization|Ueda et al. 2024: Blind a
   - `wiki/sources/frank-2026-low-latency-roi-beamforming.md` — upgraded plain-text Itzhak & Cohen 2025 mention to wikilink
   - `wiki/synthesis/multi-channel-speech-enhancement.md` — added Itzhak & Cohen 2025 row to Sources Synthesized and extended Insight 6 (ROI line as application-constraint illustration)
   - `wiki/index.md`, `wiki/{sources,entities,concepts}/index.md` — added rows, recomputed statistics
+
+---
+
+## [2026-10-11] ingest | Neural Mask-Based Beamforming Practical Aspects (Boeddeker 2018)
+
+Ingested Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018 (ICASSP, DOI 10.1109/ICASSP.2018.8461669) from Zotero (MinerU extraction). Created source page [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018]] with full methodology (mask-NN spec tables, mermaid diagram, BCE vs. LogMel MSE losses, offline→online schemes), experimental setup and results tables.
+
+- Entities: created [[entities/hakan-erdogan|Hakan Erdogan]]; updated [[entities/christoph-boeddeker|Christoph Boeddeker]], [[entities/takuya-yoshioka|Takuya Yoshioka]], [[entities/reinhold-haeb-umbach|Reinhold Haeb-Umbach]].
+- Concepts created: [[concepts/gev-beamformer|GEV Beamformer]], [[concepts/logmel-mse-loss|LogMel MSE Loss]], [[concepts/online-mask-based-beamforming|Online Mask-Based Beamforming]].
+- Concepts updated: [[concepts/beamforming|Beamforming]], [[concepts/mvdr-beamformer|MVDR Beamformer]], [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]], [[concepts/neural-beamforming|Neural Beamforming]], [[concepts/tf-mask-estimation|TF Mask Estimation]], [[concepts/hybrid-speech-enhancement|Hybrid Speech Enhancement]].
+- Synthesis updated: [[synthesis/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]] (Insight 4 commercial-scale Class-1 validation), [[synthesis/deep-speech-enhancement|Deep Speech Enhancement]] (Insight 6 criterion-first phase transition).
+- Indexes updated (source + 1 entity + 3 concepts); statistics recounted (1528 total).

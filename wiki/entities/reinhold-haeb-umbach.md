@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-10-11
 tags:
   - researcher
   - speech-enhancement
@@ -21,7 +21,9 @@ tags:
 - Co-author of neural-network-based spectral mask estimation for acoustic beamforming (Heymann, Drude & Haeb-Umbach, ICASSP 2016) — an early Class-1 hybrid (DNN masks driving MVDR beamforming).
 - Co-author of the CHiME-5 dinner-party front-end processing paper introducing guided source separation (Boeddeker et al. 2018).
 - Co-author of "Speech Processing for Digital Home Assistance: Combining Signal Processing with Deep-Learning Techniques" (IEEE Signal Processing Magazine 2019).
+- Co-author of "Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition" (ICASSP 2018) — practical evaluation of neural mask-based beamforming for far-field ASR (two arrays, two acoustic models, feature-level LogMel MSE loss, online variants) — [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018]]
 
 ## Related Sources
 
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]]
+- [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018: Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition]]

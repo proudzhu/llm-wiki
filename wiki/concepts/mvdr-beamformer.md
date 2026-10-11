@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-10-04
+updated: 2026-10-11
 sources:
+  - raw/papers/boeddeker-2018-neural-mask-beamforming/full-text.md
   - raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
@@ -123,6 +124,10 @@ the beamformer needs only the speech and noise SCMs. Two results then bracket th
 
 The article also notes the distortionless property itself has no known DNN counterpart: model-based beamforming can choose among objective functions including the MVDR's constrained (distortion-free) criterion, whereas "no such distortion-less criterion is known for DNNs".
 
+## Statistics-Only MVDR Driven by Mask-Estimated SCMs (Boeddeker et al. 2018)
+
+[[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018]] use the statistics-only form $\mathbf{w}_f^{\mathrm{MVDR}} = \boldsymbol{\Phi}_{\mathbf{NN}f}^{-1} \boldsymbol{\Phi}_{\mathbf{XX}f} \mathbf{r} / \lambda$ (with $\lambda = \mathrm{tr}\{\boldsymbol{\Phi}_{\mathbf{NN}f}^{-1} \boldsymbol{\Phi}_{\mathbf{XX}f}\}$, $\mathbf{r}$ a unit vector selecting the reference microphone) with SCMs estimated from DNN-predicted T-F masks — the canonical Class-1 [[concepts/hybrid-speech-enhancement|hybrid]]. Practical findings: the **reference microphone can be chosen per frequency bin to maximize output SNR** offline, but must be **fixed** (first channel) in online operation so the output statistics stay stationary for the acoustic model; and while MVDR has built-in regularization capability, **MVDR followed by BAN** gave the best results. The system beat both BeamformIt and a well-engineered differential beamformer *on the 7-mic array the latter was tuned to*, across two arrays and two acoustic models, despite mask-network training on mismatched CHiME-3 simulated data — evidence for the modularity of the statistics-only form (no steering vector, no geometry, only SCMs).
+
 ## Kronecker MVDR for Arbitrary Geometries (Wang et al. 2021)
 
 [[sources/wang-2021-kronecker-adaptive-beamforming|Wang et al. 2021]] derive the [[concepts/kmvdr-beamformer|KMVDR beamformer]] by restricting the MVDR filter to a **sum of $P$ Kronecker products** of shorter subfilters — the first Kronecker beamformer applicable to arbitrary 3-D array geometries. With one subfilter family fixed, the MVDR optimization reduces to a closed-form update on the other stacked subfilter, with block covariances of size $PM_1 \times PM_1$ / $PM_2 \times PM_2$ instead of $M \times M$; the subfilters alternate until convergence. On a 16-microphone array with limited snapshots, KMVDR beats the conventional MVDR in output SINR (both static and dynamic interferers), with the strongest performance at rank $P = 1$ — the Kronecker structure implicitly regularizes the covariance-based estimate.
@@ -196,4 +201,5 @@ The MVDR beamformer with $M$ microphones can suppress at most $M-1$ interferers,
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — MVDR as a sufficient statistic for Gaussian noise (Balan & Rosca) vs. its loss of optimality under non-Gaussian distortions like reverberation
 - [[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021: TF-Bin-Wise Linear Combination of Beamformers]] — underdetermined extension by combining K MVDR filters per TF bin; RTF-accuracy requirement quantified
 - [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — review tabulating MVDR's degeneration into DSBF/superdirective under specific noise fields; parameter-estimation bottleneck in nonstationary scenes
+- [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018: Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition]] — statistics-only MVDR with mask-estimated SCMs; offline SNR-maximizing vs. online fixed reference selection; MVDR+BAN best configuration
 

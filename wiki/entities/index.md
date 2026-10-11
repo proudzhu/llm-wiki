@@ -647,4 +647,5 @@
 | [[entities/mikolaj-kegler\|Mikolaj Kegler]] | Researcher at Bose; co-author of PAS-SE and two-step knowledge distillation for tiny speech enhancement. | 2026-10-07 |
 | [[entities/marko-stamenovic\|Marko Stamenovic]] | Researcher at Bose; co-author of PAS-SE, TinyLSTMs, and two-step knowledge distillation for tiny speech enhancement. | 2026-10-07 |
 | [[entities/gal-itzhak\|Gal Itzhak]] | Technion researcher; first author of the STFT-domain least-distortion ROI beamforming line | 2026-10-07 |
+| [[entities/hakan-erdogan\|Hakan Erdogan]] | Microsoft AI and Research — phase-sensitive mask, mask-prediction-network MVDR beamforming; co-author of the neural mask-based beamforming practical-aspects paper | 2026-10-11 |
 
