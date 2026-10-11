@@ -4,6 +4,7 @@ created: 2026-08-16
 updated: 2026-10-11
 sources:
   - raw/papers/heymann-2016-neural-spectral-mask-beamforming/full-text.md
+  - raw/papers/erdogan-2016-improved-mvdr-mask-prediction/full-text.md
   - raw/papers/boeddeker-2018-neural-mask-beamforming/full-text.md
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
   - raw/papers/ansari-2023-ai-bss-survey/full-text.md
@@ -53,7 +54,7 @@ combined with [[concepts/permutation-invariant-training|PIT]] and magnitude-spec
 [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024]] contrast the two dominant mask estimators and show how to merge them:
 
 - **Spatial mixture model + EM** (model-based): a latent one-hot dominance variable $z_{k,t,f}$ (justified by speech sparseness / w-disjoint orthogonality in the STFT domain) is inferred via EM on a spatial mixture model $p(\mathbf{y}_{t,f}) = \sum_k \pi_k p(\mathbf{y}_{t,f};\boldsymbol{\theta}_k)$; the posterior $m_{k,t,f} = \mathbb{E}[z_{k,t,f}\mid\mathbf{y}_{t,f}]$ is the soft mask. It operates on each frequency bin independently — introducing a **frequency permutation problem** — but needs no training data and adapts per utterance.
-- **DNN mask estimation** (data-driven): trained with (binary) cross-entropy on dominance labels from the noisy signal; because all frequencies are seen jointly, it learns spectro-temporal patterns and avoids the frequency permutation problem ([[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann et al. 2016]]; Erdogan et al. 2016).
+- **DNN mask estimation** (data-driven): trained with (binary) cross-entropy on dominance labels from the noisy signal; because all frequencies are seen jointly, it learns spectro-temporal patterns and avoids the frequency permutation problem ([[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann et al. 2016]]; [[sources/erdogan-2016-improved-mvdr-mask-prediction|Erdogan et al. 2016]] — the latter with a signal-domain MSA loss rather than mask-domain cross-entropy, and the finding that a single mask max-combined across microphones beats per-channel masks when feeding SCM estimation).
 
 **Integration patterns** (the Class-2 hybrid): (i) DNN masks serve as the *a priori* probability of the spatial mixture model, refined by EM as the posterior — unsupervised adaptation of DNN masks on the test utterance (Nakatani et al. 2017); (ii) conversely, mixture-model posteriors serve as *training targets* for the DNN, improving separation and even enabling single-channel separation learned from multi-channel recordings (Drude et al. 2019; Tzinis et al. 2019); (iii) a DNN diarization front-end (e.g., [[concepts/target-speaker-vad|TS-VAD]]) constrains the EM refinement to TF resolution — the [[concepts/guided-source-separation|guided source separation (GSS)]] formulation used by top CHiME-6/7 systems.
 
@@ -79,6 +80,7 @@ A "large gap" remains between ISFs using *oracle* TF masks and those using *esti
 - [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]]
 - [[concepts/voice-activity-detection|Voice Activity Detection]]
 - [[concepts/permutation-invariant-training|Permutation Invariant Training (PIT)]]
+- [[concepts/mask-based-beamforming|Mask-Based Beamforming]] — where predicted masks feed SCM estimation and model-based beamformers
 
 ## Related Sources
 
@@ -87,3 +89,4 @@ A "large gap" remains between ISFs using *oracle* TF masks and those using *esti
 - [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — transform-domain analysis–separation–reconstruction framework with ideal-mask targets (Section 8.3–8.4)
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — spatial mixture model EM vs. DNN mask estimation, and their hybrid integration
 - [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018: Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition]] — per-channel LSTM mask networks with median consolidation; BCE vs. feature-level LogMel MSE training criteria
+- [[sources/erdogan-2016-improved-mvdr-mask-prediction|Erdogan, Hershey, Watanabe, Mandel & Le Roux 2016: Improved MVDR Beamforming Using Single-Channel Mask Prediction Networks]] — single-channel LSTM masks (signal-domain MSA loss) repurposed for noise SCM estimation; single max-combined mask beats per-channel masks

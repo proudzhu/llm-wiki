@@ -596,4 +596,5 @@
 | [[concepts/gev-beamformer\|GEV Beamformer]] | Max-output-SNR beamformer: principal generalized eigenvector of the speech/noise SCM pair, with BAN (magnitude) and group delay (phase) normalization. | 2026-10-11 |
 | [[concepts/logmel-mse-loss\|LogMel MSE Loss]] | Feature-level training criterion for mask-based beamforming: MSE between beamformed and clean normalized log-mel ASR features, backpropagated through the differentiable beamformer. | 2026-10-11 |
 | [[concepts/online-mask-based-beamforming\|Online Mask-Based Beamforming]] | Causal operation of mask-based beamforming: frame-level (online/intra-frame normalization, recursive SCMs with burn-in, fixed reference) and segment-level streaming with exponentially weighted context. | 2026-10-11 |
+| [[concepts/mask-based-beamforming\|Mask-Based Beamforming]] | Hybrid speech-enhancement paradigm where single-channel neural T-F mask predictions drive the covariance statistics (noise SCM, speech PSD) of a classical beamformer (MVDR/GEV) — no steering vector or array geometry required; founded concurrently in 2016 by Erdogan et al., Heymann et al., and Higuchi et al. | 2026-10-11 |
 

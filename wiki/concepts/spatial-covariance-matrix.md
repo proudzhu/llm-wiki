@@ -4,6 +4,7 @@ created: 2026-04-29
 updated: 2026-10-11
 sources:
   - raw/papers/heymann-2016-neural-spectral-mask-beamforming/full-text.md
+  - raw/papers/erdogan-2016-improved-mvdr-mask-prediction/full-text.md
   - raw/papers/boeddeker-2018-neural-mask-beamforming/full-text.md
   - raw/papers/pan-2026-array-self-awareness/full-text.md
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
@@ -46,6 +47,8 @@ SCMs can be estimated via:
 ## Mask-Weighted SCM Estimation and the Recursive Online Form (Boeddeker et al. 2018)
 
 The scheme originates with [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016]], who accumulate $\boldsymbol{\Phi}_{\nu\nu} = \sum_{t} M_{\nu}(t)\, \mathbf{Y}(t) \mathbf{Y}(t)^{\mathrm{H}}$ (unnormalized) from per-channel neural masks consolidated by a **median** across channels — the per-channel, single-frame-magnitude design makes the mask estimation independent of the number and geometric configuration of the microphones.
+
+[[sources/erdogan-2016-improved-mvdr-mask-prediction|Erdogan, Hershey, Watanabe, Mandel & Le Roux 2016]] (concurrent origin) estimate the *noise* SCM from the mask complement, $\hat{v}_{i,t,f} = (1-\hat{a}_{i,t,f})\,y_{i,t,f}$, and contribute the key consolidation finding: a **single mask max-combined across microphones** ($\hat{a}_{t,f} = \max_i \tilde{a}_{i,t,f}$) yields more reliable noise SCMs than per-channel multi-masks — per-channel masks can zero out some channels' noise estimates at a T-F bin while others stay high, so the accumulated spatial vectors are *partially observed* and the SCM estimate becomes unstable; taking the max retains only bins that all microphones agree are noise-only (fully observed). The noisy SCM is taken directly from the measurements, using $\Phi_{\mathrm{noisy}} = \Phi_{\mathrm{speech}} + \Phi_{\mathrm{noise}}$.
 
 [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018]] give the canonical mask-weighted SCM estimate of neural mask-based beamforming: with DNN-predicted speech/noise masks $M_{f,t}^{\nu}$ and multi-channel STFT frames $\mathbf{Y}_{f,t}$,
 
@@ -122,6 +125,7 @@ Not every SCM in beamforming is *estimated* from data: fixed [[concepts/superdir
 - [[concepts/covariance-matrix-residual-model|Covariance Matrix Residual Model]] — isolating unknown new sources from the SCM residual
 - [[concepts/array-self-awareness|Array Self-Awareness]] — real-time detection and extraction of new sources from coherence-defined interferences
 - [[concepts/relative-transfer-matrix|Relative Transfer Matrix (ReTM)]] — estimated from primary-only vs total-field SCM differences
+- [[concepts/mask-based-beamforming|Mask-Based Beamforming]] — mask-weighted SCM estimation as the front-end of model-based beamformers
 - [[concepts/neuralpmwf|NeuralPMWF]] — mask-derived SCMs with learned frequency-dependent exponential smoothing
 - [[concepts/eabnet|EaBNet]] — learned spectral-spatial embedding that empirically beats explicit SCM computation
 - [[concepts/adl-mvdr|ADL-MVDR]] — frame-level cRF-derived SCMs whose inversion/PCA is replaced by GRU networks
@@ -143,3 +147,4 @@ Not every SCM in beamforming is *estimated* from data: fixed [[concepts/superdir
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — the unified accumulation view: from recursive forgetting-factor updates to attention-based SCM tracking
 - [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018: Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition]] — canonical mask-weighted SCM estimation (median-consolidated per-channel masks) and its recursive online form with burn-in period
 - [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016: Neural Network Based Spectral Mask Estimation for Acoustic Beamforming]] — origin of the mask-weighted accumulation (unnormalized form) with per-channel networks and median consolidation; array-configuration-independent mask estimation
+- [[sources/erdogan-2016-improved-mvdr-mask-prediction|Erdogan, Hershey, Watanabe, Mandel & Le Roux 2016: Improved MVDR Beamforming Using Single-Channel Mask Prediction Networks]] — noise SCM from the mask complement; single max-combined mask retains fully-observed noise-only T-F bins

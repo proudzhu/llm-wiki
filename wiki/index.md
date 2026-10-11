@@ -656,6 +656,9 @@
 | [[entities/hakan-erdogan\|Hakan Erdogan]] | Microsoft AI and Research — phase-sensitive mask, mask-prediction-network MVDR beamforming; co-author of the neural mask-based beamforming practical-aspects paper | 2026-10-11 |
 | [[entities/jahn-heymann\|Jahn Heymann]] | Paderborn University / Apple — speech processing researcher; lead author of the neural network based spectral mask estimation paper for acoustic beamforming (ICASSP 2016) | 2026-10-11 |
 | [[entities/lukas-drude\|Lukas Drude]] | Paderborn University — machine learning and signal processing researcher; co-author of the neural mask-based beamforming paper (ICASSP 2016) | 2026-10-11 |
+| [[entities/john-hershey\|John Hershey]] | Google Research (2016: MERL) — machine learning and speech processing researcher; co-author of the mask-prediction MVDR beamforming paper (Interspeech 2016), known for deep clustering and speech separation work | 2026-10-11 |
+| [[entities/shinji-watanabe\|Shinji Watanabe]] | Carnegie Mellon University LTI (2016: MERL) — speech processing researcher; co-author of the mask-prediction MVDR beamforming paper (Interspeech 2016), known for multichannel end-to-end ASR, ESPnet, and the CHiME challenges | 2026-10-11 |
+| [[entities/michael-mandel\|Michael Mandel]] | Brooklyn College, City University of New York — machine listening researcher; co-author of the mask-prediction MVDR beamforming paper (Interspeech 2016), known for ideal ratio mask binaural separation | 2026-10-11 |
 
 ---
 
@@ -1257,6 +1260,7 @@
 | [[concepts/gev-beamformer\|GEV Beamformer]] | Max-output-SNR beamformer: principal generalized eigenvector of the speech/noise SCM pair, with BAN (magnitude) and group delay (phase) normalization. | 2026-10-11 |
 | [[concepts/logmel-mse-loss\|LogMel MSE Loss]] | Feature-level training criterion for mask-based beamforming: MSE between beamformed and clean normalized log-mel ASR features, backpropagated through the differentiable beamformer. | 2026-10-11 |
 | [[concepts/online-mask-based-beamforming\|Online Mask-Based Beamforming]] | Causal operation of mask-based beamforming: frame-level (online/intra-frame normalization, recursive SCMs with burn-in, fixed reference) and segment-level streaming with exponentially weighted context. | 2026-10-11 |
+| [[concepts/mask-based-beamforming\|Mask-Based Beamforming]] | Hybrid speech-enhancement paradigm where single-channel neural T-F mask predictions drive the covariance statistics (noise SCM, speech PSD) of a classical beamformer (MVDR/GEV) — no steering vector or array geometry required; founded concurrently in 2016 by Erdogan et al., Heymann et al., and Higuchi et al. | 2026-10-11 |
 
 ---
 
@@ -1528,6 +1532,7 @@
 | [[sources/itzhak-2025-stft-roi-beamforming\|Itzhak & Cohen 2025: STFT-Domain Least-Distortion Region-of-Interest Beamforming]] | LD-MWNG/LD-MDF ROI beamformers maximizing WNG/DF under an ROI-distortion constraint; parameter K trades gain vs distortion | 2026-10-07 |
 | [[sources/boeddeker-2018-neural-mask-beamforming\|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018]] | This paper examines whether neural mask-based beamforming — the DNN-mask + MVDR/GEV front-end that dominated the CHiME challenges — transfers to practical far-field ASR scenarios such as voice-enabled home devices. | 2026-10-11 |
 | [[sources/heymann-2016-neural-spectral-mask-beamforming\|Heymann, Drude & Haeb-Umbach 2016]] | This paper presents the neural network based spectral mask estimator for acoustic beamforming that originated the CHiME-challenge-winning front-end family: per-channel neural networks estimate speech and noise T-F masks, from which speech and noise PSD matrices are accumulated and beamformer coefficients (MVDR or GEV with BAN) are computed. | 2026-10-11 |
+| [[sources/erdogan-2016-improved-mvdr-mask-prediction\|Erdogan, Hershey, Watanabe, Mandel & Le Roux 2016]] | This paper is one of the three founding papers (with Heymann et al. 2016 and Higuchi et al. 2016) of neural mask-based beamforming: single-channel LSTM speech-enhancement networks — trained on single-channel data only — predict time-frequency masks that drive the noise spatial covariance estimation of an MVDR beamformer, steering it toward speech without any explicit steering vector or array geometry. | 2026-10-11 |
 
 ---
 
@@ -1582,10 +1587,10 @@
 
 ## Statistics
 
-- **Total pages**: 1531
-- **Entities**: 646
-- **Concepts**: 592
-- **Sources**: 262
+- **Total pages**: 1536
+- **Entities**: 649
+- **Concepts**: 593
+- **Sources**: 263
 - **Synthesis**: 23
 - **Queries**: 8
 - **Last updated**: 2026-10-11

@@ -650,4 +650,7 @@
 | [[entities/hakan-erdogan\|Hakan Erdogan]] | Microsoft AI and Research — phase-sensitive mask, mask-prediction-network MVDR beamforming; co-author of the neural mask-based beamforming practical-aspects paper | 2026-10-11 |
 | [[entities/jahn-heymann\|Jahn Heymann]] | Paderborn University / Apple — speech processing researcher; lead author of the neural network based spectral mask estimation paper for acoustic beamforming (ICASSP 2016) | 2026-10-11 |
 | [[entities/lukas-drude\|Lukas Drude]] | Paderborn University — machine learning and signal processing researcher; co-author of the neural mask-based beamforming paper (ICASSP 2016) | 2026-10-11 |
+| [[entities/john-hershey\|John Hershey]] | Google Research (2016: MERL) — machine learning and speech processing researcher; co-author of the mask-prediction MVDR beamforming paper (Interspeech 2016), known for deep clustering and speech separation work | 2026-10-11 |
+| [[entities/shinji-watanabe\|Shinji Watanabe]] | Carnegie Mellon University LTI (2016: MERL) — speech processing researcher; co-author of the mask-prediction MVDR beamforming paper (Interspeech 2016), known for multichannel end-to-end ASR, ESPnet, and the CHiME challenges | 2026-10-11 |
+| [[entities/michael-mandel\|Michael Mandel]] | Brooklyn College, City University of New York — machine listening researcher; co-author of the mask-prediction MVDR beamforming paper (Interspeech 2016), known for ideal ratio mask binaural separation | 2026-10-11 |
 

@@ -4,6 +4,7 @@ created: 2026-04-29
 updated: 2026-10-11
 sources:
   - raw/papers/heymann-2016-neural-spectral-mask-beamforming/full-text.md
+  - raw/papers/erdogan-2016-improved-mvdr-mask-prediction/full-text.md
   - raw/papers/boeddeker-2018-neural-mask-beamforming/full-text.md
   - raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
@@ -125,6 +126,10 @@ the beamformer needs only the speech and noise SCMs. Two results then bracket th
 
 The article also notes the distortionless property itself has no known DNN counterpart: model-based beamforming can choose among objective functions including the MVDR's constrained (distortion-free) criterion, whereas "no such distortion-less criterion is known for DNNs".
 
+## Statistics-Only MVDR Driven by Single-Channel LSTM Masks (Erdogan et al. 2016)
+
+[[sources/erdogan-2016-improved-mvdr-mask-prediction|Erdogan, Hershey, Watanabe, Mandel & Le Roux 2016]] — one of the three founding papers of [[concepts/mask-based-beamforming|mask-based beamforming]] — drive the statistics-only Souden form with masks from a single-channel LSTM enhancement network trained on CHiME-3 CH5 data only: the noise estimate $\hat{v}_{i,t,f} = (1-\hat{a}_{i,t,f})\,y_{i,t,f}$ accumulates the noise SCM, the noisy SCM comes from measurements, and no steering vector or array geometry is ever needed — the mask *is* the steering. The paper's design analysis: a **single mask max-combined across microphones beats per-channel multi-masks** for noise SCM estimation (real-dev WER 22.41 vs. 26.18), because per-channel masks can zero out some channels' noise contributions at a bin, leaving partially-observed spatial vectors that destabilize the covariance estimate; and a **post-mask with a minimum floor (0.3)** on the beamformed output avoids sharp-zero STFT artifacts and beats both no post-masking and direct application. The best configuration beats WDAS beamforming on mismatched-ASR WER (CHiME-3 real-test 34.78 vs. 36.19) and improves SDR by ~4 dB over the edge-mask baseline.
+
 ## Statistics-Only MVDR Driven by Mask-Estimated SCMs (Boeddeker et al. 2018)
 
 [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018]] use the statistics-only form $\mathbf{w}_f^{\mathrm{MVDR}} = \boldsymbol{\Phi}_{\mathbf{NN}f}^{-1} \boldsymbol{\Phi}_{\mathbf{XX}f} \mathbf{r} / \lambda$ (with $\lambda = \mathrm{tr}\{\boldsymbol{\Phi}_{\mathbf{NN}f}^{-1} \boldsymbol{\Phi}_{\mathbf{XX}f}\}$, $\mathbf{r}$ a unit vector selecting the reference microphone) with SCMs estimated from DNN-predicted T-F masks — the canonical Class-1 [[concepts/hybrid-speech-enhancement|hybrid]]. Practical findings: the **reference microphone can be chosen per frequency bin to maximize output SNR** offline, but must be **fixed** (first channel) in online operation so the output statistics stay stationary for the acoustic model; and while MVDR has built-in regularization capability, **MVDR followed by BAN** gave the best results. The system beat both BeamformIt and a well-engineered differential beamformer *on the 7-mic array the latter was tuned to*, across two arrays and two acoustic models, despite mask-network training on mismatched CHiME-3 simulated data — evidence for the modularity of the statistics-only form (no steering vector, no geometry, only SCMs).
@@ -174,6 +179,7 @@ The MVDR beamformer with $M$ microphones can suppress at most $M-1$ interferers,
 - [[concepts/adl-mvdr|ADL-MVDR]] — GRU networks replace the matrix inversion and PCA inside the MVDR solution for frame-level weights
 - [[concepts/kmvdr-beamformer|KMVDR Beamformer]] — MVDR under a sum-of-Kronecker-products filter representation, applicable to arbitrary geometries
 - [[concepts/tflc-beamformer|TFLC Beamforming]] — TF-bin-wise combination of MVDR filters for underdetermined situations; MVDR is the $K=1$ case
+- [[concepts/mask-based-beamforming|Mask-Based Beamforming]] — neural masks supply the SCMs of the statistics-only MVDR
 - [[concepts/kronecker-product-beamforming|Kronecker Product Beamforming]]
 
 ## Related Sources
@@ -207,5 +213,6 @@ The MVDR beamformer with $M$ microphones can suppress at most $M-1$ interferers,
 - [[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021: TF-Bin-Wise Linear Combination of Beamformers]] — underdetermined extension by combining K MVDR filters per TF bin; RTF-accuracy requirement quantified
 - [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — review tabulating MVDR's degeneration into DSBF/superdirective under specific noise fields; parameter-estimation bottleneck in nonstationary scenes
 - [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018: Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition]] — statistics-only MVDR with mask-estimated SCMs; offline SNR-maximizing vs. online fixed reference selection; MVDR+BAN best configuration
+- [[sources/erdogan-2016-improved-mvdr-mask-prediction|Erdogan, Hershey, Watanabe, Mandel & Le Roux 2016: Improved MVDR Beamforming Using Single-Channel Mask Prediction Networks]] — founding mask-driven statistics-only MVDR; single max-combined mask and minimum-floor post-mask design analysis; beats WDAS on mismatched-ASR WER
 - [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016: Neural Network Based Spectral Mask Estimation for Acoustic Beamforming]] — explicit-inversion fragility under sparse masks (vs. GEV) and principal-component steering from the speech PSD
 
