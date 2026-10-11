@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-09-12
+updated: 2026-10-11
 sources:
+  - raw/papers/heymann-2016-neural-spectral-mask-beamforming/full-text.md
   - raw/papers/deng-2026-joint-covariance-wng-mvdr/full-text.md
 tags:
   - mathematics
@@ -41,6 +42,8 @@ In adaptive beamforming, the sample SCM $\hat{\mathbf{R}}_y$ becomes ill-conditi
 2. The weight vector norm $\|\mathbf{w}\|^2$ to spike
 3. WNG collapse and target signal cancellation
 
+Beyond snapshot deficiency, **mask sparsity** is a second route to an ill-conditioned noise SCM: [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016]] show empirically (their Fig. 1) that when neural masks are very sparse for some frequencies, $\kappa(\boldsymbol{\Phi}_{\mathbf{NN}})$ rises and the MVDR's explicit inversion yields a *lower output SNR than the GEV beamformer*, which avoids inversion by solving a generalized eigenvalue problem — the first published diagnosis of why GEV-based front-ends dominated the CHiME challenges.
+
 ## Condition Number Control via Diagonal Loading
 
 Diagonal loading shifts all eigenvalues by $\mu$:
@@ -73,3 +76,4 @@ Where Mittal et al. derive the WNG→$\kappa_{\max}$ mapping deterministically, 
 
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
 - [[sources/deng-2026-joint-covariance-wng-mvdr|Deng et al. 2026: Joint Covariance and WNG Learning for Robust MVDR]] — learns frequency-dependent WNG thresholds end-to-end via a differentiable robust MVDR layer
+- [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016: Neural Network Based Spectral Mask Estimation for Acoustic Beamforming]] — mask sparsity (not just snapshot deficiency) drives $\kappa(\Phi_{NN})$ up; high $\kappa$ makes the MVDR's explicit inversion underperform the inversion-free GEV

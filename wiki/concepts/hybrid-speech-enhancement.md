@@ -3,6 +3,7 @@ type: concept
 created: 2026-09-26
 updated: 2026-10-11
 sources:
+  - raw/papers/heymann-2016-neural-spectral-mask-beamforming/full-text.md
   - raw/papers/boeddeker-2018-neural-mask-beamforming/full-text.md
   - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
 tags:
@@ -44,7 +45,7 @@ An early commercial-scale instance is [[sources/boeddeker-2018-neural-mask-beamf
 
 Using beamforming as the case study, the field shows progressive replacement of model-based components (each step cited by Haeb-Umbach et al. 2024):
 
-1. DNN mask estimation + model-based MVDR (Class 1 hybrid);
+1. DNN mask estimation + model-based MVDR (Class 1 hybrid) — originating with [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016]]: per-channel NN masks (median-consolidated) → PSD matrices → GEV/MVDR beamformer, with array-configuration-independent training and a clean-speech-only training regime;
 2. RNN-estimated [[concepts/spatial-covariance-matrix|SCMs]] ([[concepts/adl-mvdr|ADL-MVDR]]);
 3. Direct neural estimation of beamformer coefficients (largely unsuccessful, Xiao et al. 2016);
 4. Learnable filterbanks replacing the STFT with time-domain beamforming;
@@ -74,3 +75,4 @@ A model-based component may be inferior to a learned module on the datasets that
 - [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023: Insights into Deep Nonlinear Filters]] — step 5
 - [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023: Audio Signal Processing in the 21st Century]] — predicted the model-based + data-driven hybrid turn
 - [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018: Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition]] — commercial-scale Class-1 validation with end-to-end feature-level training and cross-array/cross-AM modularity
+- [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016: Neural Network Based Spectral Mask Estimation for Acoustic Beamforming]] — step 1 of the all-neural progression: the original Class-1 mask-then-beamform hybrid

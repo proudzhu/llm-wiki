@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-07-18
-updated: 2026-07-18
+updated: 2026-10-11
 sources:
+  - raw/papers/heymann-2016-neural-spectral-mask-beamforming/full-text.md
   - raw/papers/mienye-2024-rnn-comprehensive-review/full-text.md
 tags:
   - deep-learning
@@ -51,6 +52,8 @@ Other uses in the surveyed literature:
 - Financial forecasting (Luo et al. 2024 — attention-based CNN-BiLSTM)
 - ECG anomaly detection (Mini et al. 2023)
 
+Beyond the survey's scope, BLSTMs were the workhorse of early neural speech-enhancement front-ends: [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016]] use one (256 BLSTM units → 2×513 FF → sigmoid output) to estimate speech/noise spectral masks for acoustic beamforming, where temporal context lets it distinguish speech from high-energy stationary noise that fools per-frequency parametric estimators. Notably, a tiny feed-forward network (single hidden layer, single-frame input) nearly matched the BLSTM when both were trained on clean speech only — bidirectional temporal context matters most under noise-aware training.
+
 ## Distinction from Unidirectional LSTM
 
 BiLSTM should not be used when:
@@ -71,3 +74,4 @@ For streaming speech enhancement or AEC applications (e.g., [[concepts/percepnet
 ## Related Sources
 
 - [[sources/mienye-2024-rnn-comprehensive-review\|Mienye, Swart & Obaido 2024: RNN Comprehensive Review]] — surveys BiLSTM applications across sentiment analysis, bioinformatics, and anomaly detection
+- [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016: Neural Network Based Spectral Mask Estimation for Acoustic Beamforming]] — BLSTM spectral-mask estimation for beamforming; temporal context most valuable under noise-aware training

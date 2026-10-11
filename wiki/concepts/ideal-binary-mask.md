@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-06-01
-updated: 2026-10-04
+updated: 2026-10-11
 sources:
+  - raw/papers/heymann-2016-neural-spectral-mask-beamforming/full-text.md
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
   - raw/papers/yamaoka-2021-bin-wise-beamformer-combination/full-text.md
 tags:
@@ -27,6 +28,13 @@ where $SNR(t,f)$ is the local signal-to-noise ratio within the T-F unit, and $LC
 - **Intelligibility benefit**: IBM masking dramatically improves speech intelligibility for both normal-hearing and hearing-impaired listeners
 - **Cost function**: Cross-entropy is commonly used for IBM estimation
 
+## IBM as a Beamforming Training Target (Heymann et al. 2016)
+
+[[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016]] use IBM-style targets to train the mask network of a neural beamforming front-end, with two distinctive refinements:
+
+- **Frequency-dependent thresholds with a dead zone**: separate thresholds for the speech and noise labels, so a T-F bin is assigned to a source only when the instantaneous SNR is sufficiently high or low. Bins in between are labeled *neither* — a deliberate discard that keeps the false-acceptance rate low and the resulting PSD matrix estimates reliable.
+- **Clean-speech-only variant**: no noise references needed — T-F bins are sorted by their contribution to the signal power and retained until their summed contribution reaches 99%, forming the speech-mask target (noise mask $= 1 - M_{\mathbf{X}}$). This waives the requirement of separated speech+noise training data and any knowledge of the intended noise scenario.
+
 ## Role in Target Speech Extraction
 
 Zmolikova et al. 2023 [[sources/zmolikova-2023-neural-target-speech-extraction-overview|(Zmolikova 2023)]] use the IBM as the conceptual basis for the **time-frequency masking** target extractor in their general neural TSE framework. The motivation is the **sparseness assumption of speech**: different speakers rarely overlap in a single time-frequency bin of a mixture spectrum, so a mask indicating the bins where the target is dominant suffices to isolate it. The IBM is the idealized version of this mask, assigning each T-F bin entirely to one speaker; modern TSE systems relax this assumption by using **real-valued** or **complex-valued** masks estimated by a neural network $\mathrm{MaskNet}(\mathbf{Z}_{s})$, where $\mathbf{Z}_{s}$ is the mixture representation conditioned on the target clue.
@@ -50,3 +58,4 @@ The IBM multiplies each TF bin by 0/1 based on target dominance — excellent no
 - [[sources/wang-2018-supervised-speech-separation-deep-learning-overview|Wang & Chen 2018: Supervised Speech Separation Based on Deep Learning: An Overview]]
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova et al. 2023: Neural Target Speech Extraction: An Overview]]
 - [[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021: TF-Bin-Wise Linear Combination of Beamformers]] — IBM as high-SDR/low-SRDR baseline against distortionless beamformer switching
+- [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016: Neural Network Based Spectral Mask Estimation for Acoustic Beamforming]] — IBM targets with frequency-dependent thresholds (dead zone) and the 99%-power clean-speech-only variant for beamformer mask training

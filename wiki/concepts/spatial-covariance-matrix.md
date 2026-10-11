@@ -3,6 +3,7 @@ type: concept
 created: 2026-04-29
 updated: 2026-10-11
 sources:
+  - raw/papers/heymann-2016-neural-spectral-mask-beamforming/full-text.md
   - raw/papers/boeddeker-2018-neural-mask-beamforming/full-text.md
   - raw/papers/pan-2026-array-self-awareness/full-text.md
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
@@ -43,6 +44,8 @@ SCMs can be estimated via:
 - **Mask-derived estimates with learned smoothing** ([[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025]]): a tiny DNN estimates a multi-channel complex T-F mask $\mathbf{G}$; the masked observation $\hat{\mathbf{S}}_0=\mathbf{G}\odot\mathbf{Y}$ and its complement $\hat{\mathbf{N}}_0=\mathbf{Y}-\hat{\mathbf{S}}_0$ feed per-bin outer products accumulated by exponential smoothing, $\Phi_{ss}[t,w]=(1-\alpha_{ss}[w])\Phi_{ss}[t-1,w]+\alpha_{ss}[w]\hat{\mathbf{S}}_0\hat{\mathbf{S}}_0^H$ (likewise for $\Phi_{nn}$), with the smoothing speeds $\alpha_{ss}, \alpha_{nn}$ *learned per frequency* during end-to-end training and fixed at inference. The learned values satisfy $\alpha_{ss}>\alpha_{nn}$, recovering the classical assumption that speech statistics change faster than noise, and trained frequency-dependent smoothing marginally beat SPP-driven and fixed alternatives.
 
 ## Mask-Weighted SCM Estimation and the Recursive Online Form (Boeddeker et al. 2018)
+
+The scheme originates with [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016]], who accumulate $\boldsymbol{\Phi}_{\nu\nu} = \sum_{t} M_{\nu}(t)\, \mathbf{Y}(t) \mathbf{Y}(t)^{\mathrm{H}}$ (unnormalized) from per-channel neural masks consolidated by a **median** across channels — the per-channel, single-frame-magnitude design makes the mask estimation independent of the number and geometric configuration of the microphones.
 
 [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018]] give the canonical mask-weighted SCM estimate of neural mask-based beamforming: with DNN-predicted speech/noise masks $M_{f,t}^{\nu}$ and multi-channel STFT frames $\mathbf{Y}_{f,t}$,
 
@@ -139,3 +142,4 @@ Not every SCM in beamforming is *estimated* from data: fixed [[concepts/superdir
 - [[sources/zhang-2021-adl-mvdr|Zhang et al. 2021: ADL-MVDR]] — frame-level SCMs estimated from cRF filters; inversion and PCA replaced by GRU networks
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — the unified accumulation view: from recursive forgetting-factor updates to attention-based SCM tracking
 - [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018: Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition]] — canonical mask-weighted SCM estimation (median-consolidated per-channel masks) and its recursive online form with burn-in period
+- [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016: Neural Network Based Spectral Mask Estimation for Acoustic Beamforming]] — origin of the mask-weighted accumulation (unnormalized form) with per-channel networks and median consolidation; array-configuration-independent mask estimation

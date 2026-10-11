@@ -654,6 +654,8 @@
 | [[entities/marko-stamenovic\|Marko Stamenovic]] | Researcher at Bose; co-author of PAS-SE, TinyLSTMs, and two-step knowledge distillation for tiny speech enhancement. | 2026-10-07 |
 | [[entities/gal-itzhak\|Gal Itzhak]] | Technion researcher; first author of the STFT-domain least-distortion ROI beamforming line | 2026-10-07 |
 | [[entities/hakan-erdogan\|Hakan Erdogan]] | Microsoft AI and Research — phase-sensitive mask, mask-prediction-network MVDR beamforming; co-author of the neural mask-based beamforming practical-aspects paper | 2026-10-11 |
+| [[entities/jahn-heymann\|Jahn Heymann]] | Paderborn University / Apple — speech processing researcher; lead author of the neural network based spectral mask estimation paper for acoustic beamforming (ICASSP 2016) | 2026-10-11 |
+| [[entities/lukas-drude\|Lukas Drude]] | Paderborn University — machine learning and signal processing researcher; co-author of the neural mask-based beamforming paper (ICASSP 2016) | 2026-10-11 |
 
 ---
 
@@ -1525,6 +1527,7 @@
 | [[sources/ohlenbusch-2026-pas-se\|Ohlenbusch, Kegler & Stamenovic 2026]] | This paper systematically benchmarks two strategies for resolving the target/interferer ambiguity in hearable voice pickup — personalized speech enhancement (PSE), which conditions on enrollment utterances, and auxiliary-sensor speech enhancement (AS-SE), which adds an in-ear microphone input — and combines them into PAS-SE. | 2026-10-07 |
 | [[sources/itzhak-2025-stft-roi-beamforming\|Itzhak & Cohen 2025: STFT-Domain Least-Distortion Region-of-Interest Beamforming]] | LD-MWNG/LD-MDF ROI beamformers maximizing WNG/DF under an ROI-distortion constraint; parameter K trades gain vs distortion | 2026-10-07 |
 | [[sources/boeddeker-2018-neural-mask-beamforming\|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018]] | This paper examines whether neural mask-based beamforming — the DNN-mask + MVDR/GEV front-end that dominated the CHiME challenges — transfers to practical far-field ASR scenarios such as voice-enabled home devices. | 2026-10-11 |
+| [[sources/heymann-2016-neural-spectral-mask-beamforming\|Heymann, Drude & Haeb-Umbach 2016]] | This paper presents the neural network based spectral mask estimator for acoustic beamforming that originated the CHiME-challenge-winning front-end family: per-channel neural networks estimate speech and noise T-F masks, from which speech and noise PSD matrices are accumulated and beamformer coefficients (MVDR or GEV with BAN) are computed. | 2026-10-11 |
 
 ---
 
@@ -1579,10 +1582,10 @@
 
 ## Statistics
 
-- **Total pages**: 1528
-- **Entities**: 644
+- **Total pages**: 1531
+- **Entities**: 646
 - **Concepts**: 592
-- **Sources**: 261
+- **Sources**: 262
 - **Synthesis**: 23
 - **Queries**: 8
 - **Last updated**: 2026-10-11

@@ -5933,3 +5933,14 @@ Ingested Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018 (ICASSP, DOI 10.1109/IC
 - Concepts updated: [[concepts/beamforming|Beamforming]], [[concepts/mvdr-beamformer|MVDR Beamformer]], [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]], [[concepts/neural-beamforming|Neural Beamforming]], [[concepts/tf-mask-estimation|TF Mask Estimation]], [[concepts/hybrid-speech-enhancement|Hybrid Speech Enhancement]].
 - Synthesis updated: [[synthesis/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]] (Insight 4 commercial-scale Class-1 validation), [[synthesis/deep-speech-enhancement|Deep Speech Enhancement]] (Insight 6 criterion-first phase transition).
 - Indexes updated (source + 1 entity + 3 concepts); statistics recounted (1528 total).
+
+---
+
+## [2026-10-11] ingest | Neural Network Based Spectral Mask Estimation for Acoustic Beamforming (Heymann et al. 2016)
+
+Ingested Heymann, Drude & Haeb-Umbach 2016 (ICASSP, DOI 10.1109/ICASSP.2016.7471664) from Zotero (MinerU extraction). Created source page [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016]] with full methodology (BLSTM/FF spec tables, mermaid architecture diagram, IBM training-target equations, mask-weighted PSD accumulation, MVDR/GEV/BAN formulations), CHiME-3 experimental setup, WER results table and 3 figures.
+
+- Entities: created [[entities/jahn-heymann|Jahn Heymann]], [[entities/lukas-drude|Lukas Drude]]; updated [[entities/reinhold-haeb-umbach|Reinhold Haeb-Umbach]].
+- Concepts updated (9): [[concepts/tf-mask-estimation|TF Mask Estimation]] (joint-frequency neural masks + clean-speech-only training), [[concepts/neural-beamforming|Neural Beamforming]] (mask-based beamforming with learned statistics), [[concepts/gev-beamformer|GEV Beamformer]] (GEV beats MVDR under sparse masks), [[concepts/spatial-covariance-matrix|Spatial Covariance Matrix]] (unnormalized mask-weighted SCM + median consolidation), [[concepts/mvdr-beamformer|MVDR Beamformer]] (numerical stability vs. GEV), [[concepts/hybrid-speech-enhancement|Hybrid Speech Enhancement]] (origin of the all-neural progression's step 1), [[concepts/ideal-binary-mask|Ideal Binary Mask]] (IBM as beamforming training target), [[concepts/condition-number|Condition Number]] (mask-sparsity analysis), [[concepts/bidirectional-lstm|Bidirectional LSTM]] (speech-enhancement front-end application).
+- Synthesis updated: [[synthesis/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]] (Insight 4: origin of the Class-1 mask-then-beamform line), [[synthesis/deep-speech-enhancement|Deep Speech Enhancement]] (Insight 6: phase-1 origin of the multi-channel arc).
+- Indexes updated (source + 2 entities); statistics recounted (1531 total).

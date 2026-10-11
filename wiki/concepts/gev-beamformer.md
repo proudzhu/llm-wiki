@@ -3,6 +3,7 @@ type: concept
 created: 2026-10-11
 updated: 2026-10-11
 sources:
+  - raw/papers/heymann-2016-neural-spectral-mask-beamforming/full-text.md
   - raw/papers/boeddeker-2018-neural-mask-beamforming/full-text.md
 tags:
   - beamforming
@@ -39,6 +40,8 @@ The GEV solution is defined only up to an arbitrary complex scale per frequency 
 
 ## Practical Notes
 
+[[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016]] — where this front-end family originated — found the GEV **consistently better than the MVDR** despite their theoretical equivalence (GEV+BAN coincides with the MVDR under perfect distortion removal): with sparse neural masks the noise SCM becomes ill-conditioned, and the MVDR's explicit $\boldsymbol{\Phi}_{\mathbf{NN}}^{-1}$ then hurts, while the GEV's generalized eigenvalue problem stays numerically stable (see [[concepts/condition-number|Condition Number]]). All of their CHiME-3 results therefore use GEV — with BAN for PESQ evaluation, and *without* BAN for ASR, where a matched acoustic model compensates the GEV distortions slightly better than the post-filter does.
+
 In [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018]], the GEV+BAN+group-delay variant is evaluated alongside MVDR+BAN for far-field ASR; MVDR+BAN gave the best results in the authors' experiments and was used for most of them. The paper's feature-level [[concepts/logmel-mse-loss|LogMel MSE]] training criterion and [[concepts/online-mask-based-beamforming|online operation]] schemes apply to either beamformer.
 
 ## Related Concepts
@@ -52,4 +55,5 @@ In [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka
 
 ## Related Sources
 
+- [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016: Neural Network Based Spectral Mask Estimation for Acoustic Beamforming]] — origin of the front-end; GEV consistently beats MVDR under sparse masks (condition-number analysis), CHiME-3 WER halved
 - [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018: Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition]] — GEV with BAN + group delay normalization as one of two mask-driven beamformers in a practical far-field ASR evaluation

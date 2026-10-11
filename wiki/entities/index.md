@@ -648,4 +648,6 @@
 | [[entities/marko-stamenovic\|Marko Stamenovic]] | Researcher at Bose; co-author of PAS-SE, TinyLSTMs, and two-step knowledge distillation for tiny speech enhancement. | 2026-10-07 |
 | [[entities/gal-itzhak\|Gal Itzhak]] | Technion researcher; first author of the STFT-domain least-distortion ROI beamforming line | 2026-10-07 |
 | [[entities/hakan-erdogan\|Hakan Erdogan]] | Microsoft AI and Research — phase-sensitive mask, mask-prediction-network MVDR beamforming; co-author of the neural mask-based beamforming practical-aspects paper | 2026-10-11 |
+| [[entities/jahn-heymann\|Jahn Heymann]] | Paderborn University / Apple — speech processing researcher; lead author of the neural network based spectral mask estimation paper for acoustic beamforming (ICASSP 2016) | 2026-10-11 |
+| [[entities/lukas-drude\|Lukas Drude]] | Paderborn University — machine learning and signal processing researcher; co-author of the neural mask-based beamforming paper (ICASSP 2016) | 2026-10-11 |
 
