@@ -53,7 +53,7 @@ The fresh perturbation $c\boldsymbol{s}_t$ is re-injected at every step so that 
 
 In [[concepts/active-noise-control|Active Noise Control]], the objective is the block-summed squared error $J(\boldsymbol{w}) = \sum_{k=1}^{\lambda} e^2(k)$ measured at the error microphone, and the parameters are the control-filter coefficients. Because the gradient is *measured*, no secondary-path model $\hat{S}(z)$ and no filtered reference signal enter the adaptation — the defining property of [[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999]]'s secondary-path-free ANC. A duct experiment attenuated a 200 Hz sinusoid by ~25 dB (SP) and ~15 dB (TDSP).
 
-The approach was later extended at Kansai University into frequency-domain variants with variable perturbation (Kajikawa & Nomura 2000–2003) and improved stability/cancellation performance (Tokoro, Kajikawa & Nomura 2007).
+The approach was developed at Kansai University in two parallel lines: Maeda & Yoshida's time-domain version (ACTIVE 99), and Kajikawa & Nomura's closely related perturbation ANC (IEICE J82-A 1999; ISCAS 2000), later extended into frequency-domain variants with variable perturbation (Kajikawa & Nomura 2001–2003; Mori, Kajikawa & Nomura 2003) and improved stability/cancellation performance (Tokoro, Kajikawa & Nomura 2007).
 
 ## Relation to Other Gradient-Free Methods
 

@@ -1590,15 +1590,16 @@
 | [[queries/how-ai-impacts-coding\|How AI Impacts Coding]] | RCT evidence: AI +80% productivity on skilled tasks but −17% mastery when learning new skills; 6 interaction patterns | 2026-04-11 |
 | [[queries/adaptive-filtering-variable-step-size-algorithms\|Adaptive Filtering Variable Step Size]] | 9 篇 Zotero 论文综述：Versiera/Versoria、噪声功率估计、误差自相关、动量扰动、凸组合 FxLMS/F | 2026-04-12 |
 | [[queries/ndf-sndf-ndbf-comparison\|NDF、SNDF、NDBF 三代神经方向滤波方法对比]] | NDF (Wechsler 2024)、SNDF (Huang 2025)、NDBF (Huang & Habets 2026) 的网络结构、损失函数、训练设置与结果的逐项对比。 | 2026-10-03 |
+| [[queries/perturbation-anc-maeda-vs-kajikawa\|扰动 ANC 对比：Maeda 1999 SP/TDSP vs Kajikawa 2000-2003 FDSP]] | 算法细节对比：时域标量差分 vs 频域逐 bin 梯度、实数 vs 复数扰动、固定 vs 可变扰动幅度；澄清两线平行发展关系 | 2026-10-17 |
 
 ---
 
 ## Statistics
 
-- **Total pages**: 1544
+- **Total pages**: 1545
 - **Entities**: 652
 - **Concepts**: 596
 - **Sources**: 265
 - **Synthesis**: 23
-- **Queries**: 8
+- **Queries**: 9
 - **Last updated**: 2026-10-17

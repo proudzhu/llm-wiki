@@ -5986,3 +5986,9 @@ Ingested [[sources/erdogan-2016-improved-mvdr-mask-prediction|Erdogan, Hershey, 
   - `wiki/concepts/active-noise-control.md` — secondary-path-estimation challenge now notes the perturbation avoidance route
   - `wiki/concepts/adaptive-filtering.md` — added Simultaneous Perturbation row to the algorithm table
   - `wiki/synthesis/secondary-path-modeling-evolution.md` — added stochastic-perturbation row to Route 4, earliest-route prose, and trend-4 refinement
+
+---
+
+## [2026-10-17] query | 扰动 ANC 算法对比：Maeda 1999 SP/TDSP vs Kajikawa 2000-2003 FDSP/变扰动/FDTDSP
+
+对比分析保存至 [[queries/perturbation-anc-maeda-vs-kajikawa|扰动 ANC 对比]]。核心区别：时域标量差分 vs 频域逐 bin 梯度、实数 vs 复数扰动结构、固定 vs 可变扰动幅度（c=0.08 时收敛提速 >50 倍）；并澄清两线在关西大学平行发展而非继承关系。据此软化若干页面中的 earliest 表述（sources/maeda-1999、concepts/secondary-path-modeling、filtered-x-lms-algorithm、simultaneous-perturbation、synthesis/secondary-path-modeling-evolution）。

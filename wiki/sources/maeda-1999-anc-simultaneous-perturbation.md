@@ -151,7 +151,7 @@ About **15 dB attenuation at 200 Hz** — weaker than the two-measurement SP var
 2. **One-measurement variant**: brings the time-difference simultaneous perturbation method (one objective evaluation per iteration instead of two) into the ANC setting.
 3. **Block-interval objective**: replaces the unobservable $E[e^2]$ with a block-summed squared error $J(\boldsymbol{w}) = \sum_k e^2(k)$, defining the practical evaluation cadence (two blocks per SP update, one per TDSP update).
 4. **Real-time experimental validation**: implements both algorithms on a TMS320C30 DSP controlling a physical duct, achieving ~25 dB (SP) and ~15 dB (TDSP) attenuation of a 200 Hz sinusoid with a 5-tap FIR filter.
-5. **Origin of a research lineage**: the acknowledged discussions with Kajikawa and Nomura (Kansai University) foreshadow the subsequent Kansai line of perturbation-based ANC — frequency-domain and variable-perturbation variants (Kajikawa & Nomura 2000–2003; Tokoro, Kajikawa & Nomura 2007) — making this paper the earliest entry in the "bypass the secondary path entirely" route.
+5. **Parallel origin of a research lineage**: the acknowledged discussions with Kajikawa and Nomura (Kansai University) reflect that this paper and Kajikawa & Nomura's contemporaneous "ANC system without secondary path model" (IEICE Trans. J82-A; ISCAS 2000) were parallel works — together they originate the Kansai perturbation-ANC lineage that Kajikawa, Nomura, Mori and Tokoro later developed into frequency-domain and variable-perturbation variants (2001–2007), a founding entry in the "bypass the secondary path entirely" route.
 
 ## Related Concepts
 
