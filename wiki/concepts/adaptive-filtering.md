@@ -5,6 +5,7 @@ updated: 2026-10-17
 sources:
 - raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md
 - raw/papers/maeda-1999-anc-simultaneous-perturbation/full-text.md
+- raw/papers/kajikawa-2003-fdsp-variable-perturbation/full-text.md
 tags:
 - signal-processing
 - adaptive-filtering
@@ -67,4 +68,5 @@ The per-coefficient box is the most expressive of the three: because the interva
 - [[sources/welch-2006-kalman-filter-intro|Welch & Bishop 2006: Introduction to the Kalman Filter]]
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method]] — Frequency-domain adaptive algorithm for overall path identification in ANC
 - [[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999: ANC Using Simultaneous Perturbation]] — adapts an FIR control filter by perturbation-measured stochastic gradients, eliminating the secondary-path model from the adaptation
+- [[sources/kajikawa-2003-fdsp-variable-perturbation|Kajikawa & Nomura 2003: FDSP with Variable Perturbation]] — frequency-domain updating with error-scaled perturbation magnitude; ~75× larger step size, ~3× cheaper than FxLMS
 - [[sources/elisei-iliescu-2019-low-rank-rls|Elisei-Iliescu et al. 2019: Recursive Least-Squares Algorithms for the Identification of Low-Rank Systems]] — introduces RLS-NKP: low-rank RLS via nearest Kronecker product decomposition

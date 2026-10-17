@@ -662,6 +662,7 @@
 | [[entities/ernst-warsitz\|Ernst Warsitz]] | Paderborn University — statistical signal processing and microphone arrays; first author of the GEV (max-SNR) beamformer origin paper (2007, with Haeb-Umbach) | 2026-10-11 |
 | [[entities/yutaka-maeda\|Yutaka Maeda]] | Kansai University; pioneer of simultaneous perturbation learning rules for neural networks and their application to secondary-path-free ANC | 2026-10-17 |
 | [[entities/takao-yoshida\|Takao Yoshida]] | Kansai University; co-author of the 1999 simultaneous-perturbation ANC paper | 2026-10-17 |
+| [[entities/yasuo-nomura\|Yasuo Nomura]] | Kansai University; co-developed the perturbation-ANC line (ISCAS 2000, FDSP IEICE 2001, variable-perturbation ICASSP 2003) with Kajikawa | 2026-10-17 |
 
 ---
 
@@ -1541,6 +1542,7 @@
 | [[sources/erdogan-2016-improved-mvdr-mask-prediction\|Erdogan, Hershey, Watanabe, Mandel & Le Roux 2016]] | This paper is one of the three founding papers (with Heymann et al. 2016 and Higuchi et al. 2016) of neural mask-based beamforming: single-channel LSTM speech-enhancement networks — trained on single-channel data only — predict time-frequency masks that drive the noise spatial covariance estimation of an MVDR beamformer, steering it toward speech without any explicit steering vector or array geometry. | 2026-10-11 |
 | [[sources/warsitz-2007-blind-gev-beamforming\|Warsitz & Haeb-Umbach 2007]] | This is the origin paper of the GEV (max-SNR) beamformer with Blind Analytical Normalization (BAN) — the classical spatial filter that later became one of the two standard beamformers of neural mask-based beamforming. | 2026-10-11 |
 | [[sources/maeda-1999-anc-simultaneous-perturbation\|Maeda & Yoshida 1999: ANC Using Simultaneous Perturbation]] | Earliest secondary-path-free ANC: control filter adapted by simultaneous perturbation (SPSA-type stochastic gradient measured from one or two error-power observations); duct experiment ~25 dB (SP) / ~15 dB (TDSP) at 200 Hz | 2026-10-17 |
+| [[sources/kajikawa-2003-fdsp-variable-perturbation\|Kajikawa & Nomura 2003]] | This paper upgrades the Kansai line of secondary-path-model-free ANC with two ideas: (i) the frequency-domain simultaneous perturbation (FDSP) method — time-domain filtering, frequency-domain updating, with a perturbation filter added to the control filter for only half of each block so that both perturbed and unperturbed error vectors are measured within one block; and (ii) a variable perturbation magnitude that scales with the measured error power (c = \sqrt{\alpha P_{e2}/(G^2 P_x)}), permitting a step size ~75× larger than fixed-perturbation FDSP. | 2026-10-17 |
 
 ---
 
@@ -1596,10 +1598,10 @@
 
 ## Statistics
 
-- **Total pages**: 1545
-- **Entities**: 652
+- **Total pages**: 1547
+- **Entities**: 653
 - **Concepts**: 596
-- **Sources**: 265
+- **Sources**: 266
 - **Synthesis**: 23
 - **Queries**: 9
 - **Last updated**: 2026-10-17

@@ -4,6 +4,7 @@ created: 2026-10-17
 updated: 2026-10-17
 sources:
   - raw/papers/maeda-1999-anc-simultaneous-perturbation/full-text.md
+  - raw/papers/kajikawa-2003-fdsp-variable-perturbation/full-text.md
   - https://doi.org/10.1002/ecjc.10112
   - https://doi.org/10.1109/ICASSP.2003.1200036
 tags:
@@ -28,7 +29,7 @@ tags:
 | **优化域** | 时域；目标 $J(\boldsymbol{w})=\sum_{k=1}^{\lambda}e^2(k)$ 是一个**标量**（整块误差功率之和） | 频域；误差块做 FFT，$\mathrm{diag}[E^*]E$ 给出**每个频率 bin 的误差功率**（Kajikawa & Nomura 2001, IEICE E84-A） |
 | **每次更新的梯度信息量** | 1 个标量差分 $J(\boldsymbol{w}+c\boldsymbol{s})-J(\boldsymbol{w})$，所有系数共享，仅靠随机符号 $s_i$ 区分 | N 个独立复数梯度分量（每个 bin 一个），一次 block 处理即得整条梯度向量 |
 | **扰动结构** | 实数符号向量 $\boldsymbol{s}\in\{\pm1\}^n$，标量幅度 $c$ 加到所有时域 tap | 频域**复数**符号向量，实部/虚部独立取 $\pm1$（每个 bin 的幅度相位同时被随机扰动） |
-| **扰动幅度** | 固定 $c$ | **可变**：Mori 期刊版（Electron. Commun. Jpn.）报告 $c=0.08$ 时收敛提速 >50 倍 |
+| **扰动幅度** | 固定 $c$ | **可变**：ICASSP 2003 会议版用 $c=\sqrt{\alpha P_{e2}/(G^2 P_x)}$（$\alpha=0.5$；注意需已知次级通路**增益** $G$ 这一标量）；Mori 期刊版（Electron. Commun. Jpn.）报告 $c=0.08$ 时收敛提速 >50 倍 |
 | **每次更新的测量数** | SP 需 2 个 block；TDSP 需 1 个（时间差分 $J(\boldsymbol{w}_t)-J(\boldsymbol{w}_{t-1})$，含 $\pm\Delta w_{\max}$ 截断） | FDSP（ICASSP 2003）：扰动滤波器**半块叠加、半块移除**，扰动/未扰动两个误差向量在同一个 block 内测得，每块更新一次；后续 FDTDSP：扰动常叠加，改用相邻块时间差分（单测量） |
 | **实验/性能** | 5-tap FIR、200 Hz 正弦、TMS320C30 管道实验：SP ~25 dB、TDSP ~15 dB | 仿真为主（128-tap、白噪声、fs 2 kHz、S/N 20 dB）；ICASSP 版：步长可大 ~75×（$\mu=6.0\times10^{-5}$ vs $8.0\times10^{-7}$），300k 样本处次级通路突变后快速恢复；计算量 $2N^2+34N+16N\log_2N+4$，约为 FxLMS（$6N^2+2N$）的 1/3 |
 
@@ -49,9 +50,9 @@ $$
 
 其中 $\boldsymbol{E}_{m,n}$ 是误差块的 FFT，$\boldsymbol{S}_{lj,n}$ 是复数符号向量（实虚部独立 $\pm1$），$c_n$ 是可变扰动幅度。依赖频域自适应滤波特有的逐 bin 解耦近似，**一次 block 测量得到 N 个独立梯度分量**——这是收敛速度数量级提升的根本原因。
 
-## 变扰动幅度调度（Mori, Kajikawa & Nomura 2003）
+## 变扰动幅度调度（Kajikawa & Nomura ICASSP 2003；Mori, Kajikawa & Nomura 期刊版 2003）
 
-固定小 $c$ 时收敛极慢；固定大 $c$ 时扰动本身注入的可听噪声增大且 block 处理会不稳定。变扰动方案按误差大小自适应调节：误差大时 $c$ 大（远离最优点，快速逼近），误差小时 $c$ 小（接近最优点，精收敛 + 抑制扰动噪声），Mori 期刊版报告在 $c=0.08$ 场景下收敛提速 50 倍以上。这一思路与变步长 LMS 的调度逻辑同构（参见 [[queries/adaptive-filtering-variable-step-size-algorithms|变步长自适应滤波综述]]），只是把调度对象从步长换成了扰动幅度。
+固定小 $c$ 时收敛极慢；固定大 $c$ 时扰动本身注入的可听噪声增大且 block 处理会不稳定。变扰动方案按误差大小自适应调节：误差大时 $c$ 大（远离最优点，快速逼近），误差小时 $c$ 小（接近最优点，精收敛 + 抑制扰动噪声）。ICASSP 2003 会议版的调度式为 $c = \sqrt{\alpha P_{e2}/(G^2 P_x)}$（$\alpha$ 为常数，实测取 0.5；$P_{e2}$ 为无扰动半块测得的误差功率）——一个细节是它需要次级通路的**标量增益** $G$，因此"完全无次级通路信息"的声明在变扰动版本中略有限定。报告允许的步长比固定扰动大 ~75×（$\mu = 6.0\times10^{-5}$ vs $8.0\times10^{-7}$）；Mori 期刊版报告在 $c=0.08$ 场景下收敛提速 50 倍以上。这一思路与变步长 LMS 的调度逻辑同构（参见 [[queries/adaptive-filtering-variable-step-size-algorithms|变步长自适应滤波综述]]），只是把调度对象从步长换成了扰动幅度。
 
 ## FDTDSP 的组合逻辑
 
@@ -63,10 +64,15 @@ Mori/Kajikawa/Nomura 2002–2003 的 FDTDSP = **FDSP（频域逐 bin 梯度）+ 
 - **演化主干在 Kajikawa 一线**：2001 频域化（IEICE E84-A）→ 2003 变扰动（Mori 等, Electron. Commun. Jpn.; Kajikawa & Nomura, ICASSP 2003）→ FDTDSP → Tokoro 2007 稳定性改进。
 - **与联立方程法的关系**：Fujii 一系（关西大学同校）的 [[concepts/simultaneous-equations-method|联立方程法]] 同期也在规避次级通路估计，但走代数求解路线而非随机梯度测量路线。
 
+## 术语冲突提醒
+
+Kajikawa 论文中的 "TDSP" 指 **time-domain** simultaneous perturbation（时域同时扰动，Kajikawa–Nomura 时域方法，复杂度 $2N^2+2N+3$），而 Maeda 的 "TDSP" 指 **time-difference** simultaneous perturbation（时间差分同时扰动）——同名缩写、两种方法，阅读该谱系文献时需注意区分。
+
 ## Related Pages
 
 - [[concepts/simultaneous-perturbation|Simultaneous Perturbation]]
 - [[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999: ANC Using Simultaneous Perturbation]]
+- [[sources/kajikawa-2003-fdsp-variable-perturbation|Kajikawa & Nomura 2003: FDSP with Variable Perturbation]]
 - [[synthesis/secondary-path-modeling-evolution|Secondary Path Modeling: From Offline Identification to Model-Free Evolution]]
 - [[queries/how-to-estimate-secondary-path|如何估计次级通道]]
 - [[concepts/frequency-domain-anc|Frequency Domain ANC]]

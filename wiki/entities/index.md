@@ -656,4 +656,5 @@
 | [[entities/ernst-warsitz\|Ernst Warsitz]] | Paderborn University — statistical signal processing and microphone arrays; first author of the GEV (max-SNR) beamformer origin paper (2007, with Haeb-Umbach) | 2026-10-11 |
 | [[entities/yutaka-maeda\|Yutaka Maeda]] | Kansai University; pioneer of simultaneous perturbation learning rules for neural networks and their application to secondary-path-free ANC | 2026-10-17 |
 | [[entities/takao-yoshida\|Takao Yoshida]] | Kansai University; co-author of the 1999 simultaneous-perturbation ANC paper | 2026-10-17 |
+| [[entities/yasuo-nomura\|Yasuo Nomura]] | Kansai University; co-developed the perturbation-ANC line (ISCAS 2000, FDSP IEICE 2001, variable-perturbation ICASSP 2003) with Kajikawa | 2026-10-17 |
 

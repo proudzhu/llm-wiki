@@ -8,6 +8,7 @@ sources:
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
   - raw/papers/rout-2012-pso-anc-without-secondary-path/full-text.txt
   - raw/papers/maeda-1999-anc-simultaneous-perturbation/full-text.md
+  - raw/papers/kajikawa-2003-fdsp-variable-perturbation/full-text.md
 tags:
 - adaptive-algorithms
 - lms
@@ -80,7 +81,7 @@ The remedy can be applied *outside* the adaptation law: subtract an estimate of 
 
 The dependence on $\hat{S}(z)$ and the gradient update are structural properties of FxLMS, not tunable ones. [[sources/rout-2012-pso-anc-without-secondary-path|Rout, Das & Panda 2012]] replace the gradient descent entirely with particle swarm optimization: $P$ parallel candidate filters are evaluated on consecutive blocks of the live noise stream (via a MUX/DMUX round-robin), so no secondary path estimate ever enters the adaptation. On a static path the PSO-trained weights converge **exactly** to the FxLMS optimum (computed with an exact $\hat{S}$), but unlike FxLMS the scheme keeps converging after abrupt secondary-path changes that would destabilize the filtered-x update. The price is update granularity — weights change once per generation ($M \times P$ samples) rather than every sample — plus the cost of evaluating a $P$-filter population; see [[concepts/conditional-reinitialized-pso|CRPSO]] and [[concepts/heuristic-anc-algorithms|Heuristic ANC Algorithms]].
 
-The perturbation-based branch predates the population-based one: [[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999]] adapt the control filter by [[concepts/simultaneous-perturbation|simultaneous perturbation]] — random $\pm c$ sign perturbations of all taps estimate the gradient of the block error power from the error microphone alone, so neither $\hat{S}(z)$ nor a filtered reference ever enters the adaptation (~25 dB attenuation of a 200 Hz sinusoid on a TMS320C30 duct experiment with a 5-tap FIR; the one-measurement time-difference variant achieved ~15 dB).
+The perturbation-based branch predates the population-based one: [[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999]] adapt the control filter by [[concepts/simultaneous-perturbation|simultaneous perturbation]] — random $\pm c$ sign perturbations of all taps estimate the gradient of the block error power from the error microphone alone, so neither $\hat{S}(z)$ nor a filtered reference ever enters the adaptation (~25 dB attenuation of a 200 Hz sinusoid on a TMS320C30 duct experiment with a 5-tap FIR; the one-measurement time-difference variant achieved ~15 dB). Its frequency-domain successor [[sources/kajikawa-2003-fdsp-variable-perturbation|Kajikawa & Nomura 2003]] additionally undercuts FxLMS on cost: $2N^2 + 34N + 16N\log_2 N + 4$ multiplications per $2N$ samples versus FxLMS's $6N^2 + 2N$ (~3× cheaper at large $N$), since no reference filtering through $\hat{S}(z)$ is performed, while converging faster than fixed-perturbation FDSP thanks to an error-scaled variable perturbation magnitude.
 
 ## Related Concepts
 
@@ -110,3 +111,4 @@ The perturbation-based branch predates the population-based one: [[sources/maeda
 - [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] — keeps the normalized frequency-domain FxLMS update intact and makes the reference feedback-free upstream; documents the step-size/spacing region where unmitigated multichannel FxLMS diverges
 - [[sources/rout-2012-pso-anc-without-secondary-path|Rout, Das & Panda 2012: PSO-Based ANC Without Secondary Path Identification]] — replaces the gradient FxLMS update with PSO; converges to the exact FxLMS optimum on static paths without any $\hat{S}(z)$
 - [[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999: ANC Using Simultaneous Perturbation]] — an early gradient-free escape: adapts the control filter by simultaneous perturbation of all taps, requiring neither $\hat{S}(z)$ nor the filtered reference
+- [[sources/kajikawa-2003-fdsp-variable-perturbation|Kajikawa & Nomura 2003: FDSP with Variable Perturbation]] — frequency-domain successor: ~3× cheaper than FxLMS and converging faster than fixed-perturbation FDSP via error-scaled perturbation

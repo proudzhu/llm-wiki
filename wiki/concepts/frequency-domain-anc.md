@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-11
-updated: 2026-04-11
+updated: 2026-10-17
 sources:
+  - raw/papers/kajikawa-2003-fdsp-variable-perturbation/full-text.md
 tags:
 - active-noise-control
 - adaptive-filtering
@@ -43,6 +44,10 @@ $$W(k) = [W_0(k), W_1(k), \dots, W_{P-1}(k)]$$
 
 Each partition has its own delay line, and the outputs are summed. This trades a small amount of computation for significantly reduced latency.
 
+### Frequency-Domain Simultaneous Perturbation (FDSP)
+
+A distinct use of the frequency domain: [[sources/kajikawa-2003-fdsp-variable-perturbation|Kajikawa & Nomura 2003]] keep filtering in the time domain but perform the *weight update* in the frequency domain, estimating all $N$ gradient components per block from perturbed/unperturbed error-vector FFTs (see [[concepts/simultaneous-perturbation|Simultaneous Perturbation]]). This eliminates the secondary-path model entirely — no filtered reference $X_f(k)$ is needed — and costs $2N^2 + 34N + 16N\log_2 N + 4$ multiplications per $2N$ samples, about 3× less than the $6N^2 + 2N$ of filtered-x LMS. The block-halving schedule (perturbation on for half the block, off for the rest) measures both error vectors within one block.
+
 ## Advantages
 
 | Property | Time-Domain FxLMS | Block FxLMS | Partitioned BFXLMS |
@@ -75,7 +80,9 @@ Each partition has its own delay line, and the outputs are summed. This trades a
 - [[filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
 - [[multi-channel-anc|Multi-Channel ANC]]
 - [[subband-anc|Subband ANC]]
+- [[simultaneous-perturbation|Simultaneous Perturbation]] — frequency-domain *updating* without a secondary-path model
 
 ## Related Sources
 
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]]
+- [[sources/kajikawa-2003-fdsp-variable-perturbation|Kajikawa & Nomura 2003: FDSP with Variable Perturbation]] — time-domain filtering + frequency-domain perturbation-based updating, no secondary-path model

@@ -5992,3 +5992,20 @@ Ingested [[sources/erdogan-2016-improved-mvdr-mask-prediction|Erdogan, Hershey, 
 ## [2026-10-17] query | 扰动 ANC 算法对比：Maeda 1999 SP/TDSP vs Kajikawa 2000-2003 FDSP/变扰动/FDTDSP
 
 对比分析保存至 [[queries/perturbation-anc-maeda-vs-kajikawa|扰动 ANC 对比]]。核心区别：时域标量差分 vs 频域逐 bin 梯度、实数 vs 复数扰动结构、固定 vs 可变扰动幅度（c=0.08 时收敛提速 >50 倍）；并澄清两线在关西大学平行发展而非继承关系。据此软化若干页面中的 earliest 表述（sources/maeda-1999、concepts/secondary-path-modeling、filtered-x-lms-algorithm、simultaneous-perturbation、synthesis/secondary-path-modeling-evolution）。
+
+---
+
+## [2026-10-17] ingest | Active Noise Control Without a Secondary Path Model by Using a Frequency-Domain Simultaneous Perturbation Method with Variable Perturbation (Kajikawa & Nomura 2003)
+
+- **Source**: `raw/papers/kajikawa-2003-fdsp-variable-perturbation/full-text.md` (Zotero: 6L2DYW65)
+- **Authors**: Yoshinobu Kajikawa, Yasuo Nomura (Kansai University)
+- **Published**: ICASSP 2003, Hong Kong, pp. 580–583; DOI 10.1109/ICASSP.2003.1200036
+- **Summary**: FDSP ANC with variable perturbation — per-bin frequency-domain gradient estimation from perturbed/unperturbed half-block error FFTs; perturbation magnitude scaled to error power ($c=\sqrt{\alpha P_{e2}/G^2 P_x}$) permits a ~75× larger step size; $2N^2+34N+16N\log_2 N+4$ multiplications per 2N samples (~3× cheaper than FxLMS); recovers quickly from an abrupt secondary-path change. Caveat: variable perturbation needs the scalar secondary-path gain $G$.
+- **Pages created**: `wiki/sources/kajikawa-2003-fdsp-variable-perturbation.md`, `wiki/entities/yasuo-nomura.md`
+- **Pages updated**:
+  - `wiki/entities/yoshinobu-kajikawa.md` — appended ICASSP 2003 contribution bullet (via update_entities.py, hand-polished)
+  - `wiki/concepts/simultaneous-perturbation.md` — new FDSP section (update equations, variable perturbation, terminology-collision note) + lineage link
+  - `wiki/concepts/frequency-domain-anc.md` — new FDSP subsection (frequency-domain updating without secondary-path model)
+  - `wiki/concepts/secondary-path-modeling.md`, `wiki/concepts/filtered-x-lms-algorithm.md`, `wiki/concepts/adaptive-filtering.md`, `wiki/concepts/active-noise-control.md`, `wiki/concepts/simultaneous-equations-method.md` — cross-refs and complexity data points
+  - `wiki/synthesis/secondary-path-modeling-evolution.md` — new Route 4 row (FDSP + variable perturbation) + prose upgrade
+  - `wiki/queries/perturbation-anc-maeda-vs-kajikawa.md` — verified details against the actual paper (75× step size, $G$ caveat, half-block schedule), added terminology-collision section
