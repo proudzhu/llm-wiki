@@ -1,10 +1,11 @@
 ---
 type: synthesis
 created: 2026-04-25
-updated: 2026-09-28
+updated: 2026-10-17
 sources:
   - zotero://select/items/0_QVJMFTWC
   - raw/papers/rout-2012-pso-anc-without-secondary-path/full-text.txt
+  - raw/papers/maeda-1999-anc-simultaneous-perturbation/full-text.md
 tags:
   - anc
   - secondary-path
@@ -62,6 +63,7 @@ The most radical route — do not model $\hat{S}(z)$ at all, and eliminate the d
 
 | Method | Principle | Cost |
 |------|------|------|
+| **Stochastic perturbation** (Maeda 1999) | Random $\pm c$ sign perturbations of all taps measure the gradient of block error power from the error mic alone — one (TDSP) or two (SP) measurements per update | Perturbation noise in the output; block-granular convergence; demonstrated only on a 5-tap FIR / sinusoidal noise |
 | **SPR condition** (Zhou 2007) | Strictly positive-real condition guarantees stability without $\hat{S}(z)$ | The condition is stringent and hard to satisfy in practice |
 | **Evolutionary search** (GA/PSO) | Genetic algorithm / particle swarm directly searches for the optimal $W(z)$ | Large population computational overhead (e.g., $P=200$ parallel filters); update granularity is per generation, not per sample |
 | **Careful Control** (Lopes 2022) | Dual-control framework with alternating least squares | Slow convergence, but no need for $\hat{S}(z)$ |
@@ -69,6 +71,8 @@ The most radical route — do not model $\hat{S}(z)$ at all, and eliminate the d
 | **MPC** (Liang 2026, Wills 2008) | State-space model embeds $S(z)$; QP solving bypasses explicit identification | Requires an accurate plant model |
 
 Evolutionary search is not inherently incapable of real-time operation: Rout (2012)'s online PSO-ANC scheme uses MUX/DMUX to route the real-time reference signal to each filter in the population in turn (each filter gets $M \ge 2N$ fresh samples per generation), uses block mean-square error as the fitness, and runs in real time on the actual noise stream, with no need for $\hat{S}(z)$ at any point. Its [[concepts/conditional-reinitialized-pso|CRPSO]] variant detects abrupt changes in $S(z)$ or $P(z)$ by detecting jumps in the gbest error and reinitializes the population; 10/10 runs recovered the global optimum after the change — precisely the scenario where gradient-based methods are most fragile. The costs remain, however: the population size ($P=200$) imposes significant filter overhead, and weight updates are generation-granular, unable to achieve the per-sample adaptivity of FxLMS.
+
+The stochastic-perturbation entry is the earliest on this route: [[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999]] (ACTIVE 99) adapted the control filter with [[concepts/simultaneous-perturbation|simultaneous perturbation]] — a stochastic-approximation scheme from neuro-control (Spall's SPSA, Maeda's learning rules) that *measures* the error-surface gradient by perturbing all taps at once. Because the gradient is measured, neither $\hat{S}(z)$ nor a filtered reference is needed, and the one-measurement time-difference variant (TDSP) halves the evaluation cost (~25 dB vs ~15 dB at 200 Hz in their TMS320C30 duct experiment). The idea seeded a Kansai University lineage — frequency-domain and variable-perturbation extensions by Kajikawa & Nomura (2000–2003) and stability improvements by Tokoro, Kajikawa & Nomura (2007) — establishing the perturbation branch of Route 4 alongside the later population-based one.
 
 Liang (2026)'s delayed MPC is an interesting case: the MPC state-space model requires a parameterized form of $S(z)$ (obtained via vector fitting), but once the model is built, the QP solver directly outputs the optimal control signal — the step of filtering the reference signal through $\hat{S}(z)$ is no longer needed. **$S(z)$ degrades from "a filter used every sample" to "a model parameter calibrated once."**
 
@@ -100,7 +104,7 @@ Kuo (1999)'s classic result: under slow-adaptation conditions, FXLMS can tolerat
 1. **From offline to online**: driven by wearable devices, time-varying $S(z)$ becomes the norm
 2. **From explicit to implicit**: methods such as MPC and meta-learning embed $S(z)$ into the model, avoiding per-sample filtering
 3. **From single to hybrid**: Luo (2026)'s GFANC-FxNLMS uses a generative model to provide the initial filter, with FxNLMS fine-tuning online — the accuracy requirement on $\hat{S}(z)$ is thereby lowered
-4. **From identification to bypass**: the ultimate goal is to eliminate the dependence on $\hat{S}(z)$ entirely — evolutionary search (Rout 2012's online PSO/CRPSO) achieves it from a gradient-free angle, while MPC approaches this goal under specific conditions
+4. **From identification to bypass**: the ultimate goal is to eliminate the dependence on $\hat{S}(z)$ entirely — stochastic perturbation (Maeda 1999) achieved it first by *measuring* the gradient, evolutionary search (Rout 2012's online PSO/CRPSO) from a population-based gradient-free angle, while MPC approaches this goal under specific conditions
 5. **From iterative to deep learning**: Fareedha (2026)'s [[concepts/deep-secondary-path-estimation|DeepSPE]] replaces iterative adaptation with Conv1D + BiLSTM + Attention, achieving −16.27 dB NMSE with frame-level inference, a 3.92 dB improvement over Akhtar's VSS-LMS
 
 ## Related Pages
@@ -112,5 +116,6 @@ Kuo (1999)'s classic result: under slow-adaptation conditions, FXLMS can tolerat
 - [[concepts/variable-step-size-lms|Variable Step Size LMS]]
 - [[concepts/deep-secondary-path-estimation|Deep Secondary Path Estimation]]
 - [[concepts/conditional-reinitialized-pso|Conditional Reinitialized PSO]]
+- [[concepts/simultaneous-perturbation|Simultaneous Perturbation]] — the earliest Route 4 method (Maeda & Yoshida 1999)
 - [[synthesis/mpc-vs-fxlms-for-anc|MPC vs Traditional ANC]]
 - [[queries/how-to-estimate-secondary-path|如何估计次级通道]]

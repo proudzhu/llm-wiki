@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-18
-updated: 2026-09-30
+updated: 2026-10-17
 sources:
 - raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md
+- raw/papers/maeda-1999-anc-simultaneous-perturbation/full-text.md
 tags:
 - signal-processing
 - adaptive-filtering
@@ -20,6 +21,7 @@ Adaptive filtering algorithms adjust their parameters in real-time to minimize a
 | LMS | Gradient descent | Simple, low complexity |
 | [[momentum-lms\|Momentum LMS]] | LMS + momentum | Faster convergence, $\beta = 1/(1-\alpha)$ rate multiplier |
 | FxLMS | Modified LMS for ANC | Compensates for secondary path |
+| [[concepts/simultaneous-perturbation\|Simultaneous Perturbation]] | Stochastic gradient approximation | Measures the gradient via random $\pm c$ perturbations of all taps; ANC adaptation without a secondary-path model |
 | RLS | Recursive least squares | Fast convergence, high complexity |
 | [[concepts/rls-nkp\|RLS-NKP]] | Low-rank RLS | Nearest Kronecker product decomposition: two coupled short filters, faster tracking of long echo paths |
 | [[kalman-filter\|Kalman Filter]] | Optimal recursive estimator | Minimum MSE, requires state-space model |
@@ -55,6 +57,7 @@ The per-coefficient box is the most expressive of the three: because the interva
 - [[concepts/kalman-filter|Kalman Filter]]
 - [[concepts/extended-kalman-filter|Extended Kalman Filter]]
 - [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
+- [[concepts/simultaneous-perturbation|Simultaneous Perturbation]]
 - [[concepts/wiener-filter|Wiener Filter]]
 - [[concepts/adaptive-convolution|Adaptive Convolution]]
 
@@ -63,4 +66,5 @@ The per-coefficient box is the most expressive of the three: because the interva
 - [[sources/hoshuyama-1999-robust-adaptive-beamformer-ccaf|Hoshuyama, Sugiyama & Hirano 1999: A Robust Adaptive Beamformer with a Blocking Matrix Using Constrained Adaptive Filters]] — per-coefficient box constraints on adaptive-filter taps, shaped to bound target-DOA tracking
 - [[sources/welch-2006-kalman-filter-intro|Welch & Bishop 2006: Introduction to the Kalman Filter]]
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method]] — Frequency-domain adaptive algorithm for overall path identification in ANC
+- [[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999: ANC Using Simultaneous Perturbation]] — adapts an FIR control filter by perturbation-measured stochastic gradients, eliminating the secondary-path model from the adaptation
 - [[sources/elisei-iliescu-2019-low-rank-rls|Elisei-Iliescu et al. 2019: Recursive Least-Squares Algorithms for the Identification of Low-Rank Systems]] — introduces RLS-NKP: low-rank RLS via nearest Kronecker product decomposition

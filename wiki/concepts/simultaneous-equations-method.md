@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-05-23
+updated: 2026-10-17
+sources:
+  - raw/papers/maeda-1999-anc-simultaneous-perturbation/full-text.md
 tags:
   - active-noise-control
   - adaptive-filtering
@@ -59,6 +61,10 @@ $$
 
 The result is transformed back to the time domain via inverse FFT.
 
+## Relation to the Perturbation Approach
+
+Both the simultaneous equations method and the [[concepts/simultaneous-perturbation|simultaneous perturbation]] ANC of [[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999]] eliminate the secondary path model from feedforward ANC, but by opposite means: this method *solves* for the optimal filter algebraically through an auxiliary overall-path filter (requiring two different control-filter vectors and path identification), whereas the perturbation method *measures* the gradient of the block error power by perturbing all taps at once (requiring no auxiliary filter, at the cost of perturbation noise in the output and block-granular convergence).
+
 ## Related Concepts
 
 - [[concepts/feedforward-anc|Feedforward ANC]]
@@ -67,7 +73,9 @@ The result is transformed back to the time domain via inverse FFT.
 - [[concepts/secondary-path-modeling|Secondary Path Modeling]]
 - [[concepts/adaptive-filtering|Adaptive Filtering]]
 - [[concepts/frequency-domain-anc|Frequency Domain ANC]]
+- [[concepts/simultaneous-perturbation|Simultaneous Perturbation]] — the measurement-based route to the same secondary-path-model-free goal
 
 ## Related Sources
 
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method by an Experimental Active Noise Control System]]
+- [[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999: ANC Using Simultaneous Perturbation]] — the sibling secondary-path-free approach: gradient measured by perturbation instead of solved algebraically

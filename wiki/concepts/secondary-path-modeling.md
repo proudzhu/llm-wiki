@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-17
-updated: 2026-09-28
+updated: 2026-10-17
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/fareedha-2026-joint-deep-spe-anc/full-text.txt
@@ -16,6 +16,7 @@ sources:
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
   - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
   - raw/papers/rout-2012-pso-anc-without-secondary-path/full-text.txt
+  - raw/papers/maeda-1999-anc-simultaneous-perturbation/full-text.md
 tags:
 - active-noise-control
 - signal-processing
@@ -59,7 +60,7 @@ Uses deep neural networks (Conv1D + BiLSTM + Attention) to predict $S(z)$ from A
 
 ### 4. Avoiding the Estimate Entirely
 
-Two families of methods sidestep $S(z)$ identification rather than performing it: the [[concepts/simultaneous-equations-method|simultaneous equations method]] ([[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006]]) solves for the optimal filter through an auxiliary overall-path filter, and [[concepts/heuristic-anc-algorithms|population-based heuristic controllers]] such as the [[concepts/conditional-reinitialized-pso|PSO/CRPSO]] training of [[sources/rout-2012-pso-anc-without-secondary-path|Rout, Das & Panda 2012]] optimize directly on block-averaged residual error, making them immune to secondary-path time variation (at the cost of generation-granular updates and a $P$-filter population).
+Two families of methods sidestep $S(z)$ identification rather than performing it: the [[concepts/simultaneous-equations-method|simultaneous equations method]] ([[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006]]) solves for the optimal filter through an auxiliary overall-path filter, and [[concepts/heuristic-anc-algorithms|population-based heuristic controllers]] such as the [[concepts/conditional-reinitialized-pso|PSO/CRPSO]] training of [[sources/rout-2012-pso-anc-without-secondary-path|Rout, Das & Panda 2012]] optimize directly on block-averaged residual error, making them immune to secondary-path time variation (at the cost of generation-granular updates and a $P$-filter population). The earliest member of this avoidance family is the [[concepts/simultaneous-perturbation|simultaneous perturbation]] ANC of [[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999]]: all control-filter taps are perturbed simultaneously by a random $\pm c$ sign vector, and the gradient of the block error power is *measured* from one or two error-microphone observations — no $S(z)$ model, no filtered reference, no injected noise (a 1999 duct experiment on a TMS320C30 DSP achieved ~25 dB at 200 Hz; the one-measurement time-difference variant ~15 dB).
 
 ## Impact of Modeling Errors
 
@@ -83,6 +84,7 @@ In hearing aids the secondary path is the propagation from the device loudspeake
 - [[concepts/filtered-x-mwf|Filtered-x MWF (FxMWF)]]
 - [[concepts/open-fitting-noise-leakage|Open-Fitting Noise Leakage]]
 - [[concepts/conditional-reinitialized-pso|Conditional Reinitialized PSO]] — trains the controller without any $S(z)$ model
+- [[concepts/simultaneous-perturbation|Simultaneous Perturbation]] — measures the error-surface gradient via random coefficient perturbations; no $S(z)$ model
 
 ## Related Sources
 
@@ -99,4 +101,5 @@ In hearing aids the secondary path is the propagation from the device loudspeake
 - [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]]
 - [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC]] — assumes a known, fixed secondary path and folds it into the differentiable forward model for filter-estimation-network training
 - [[sources/rout-2012-pso-anc-without-secondary-path|Rout, Das & Panda 2012: PSO-Based ANC Without Secondary Path Identification]] — the avoidance route: population-based training on block-averaged residual error, immune to secondary-path time variation
+- [[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999: ANC Using Simultaneous Perturbation]] — the earliest avoidance-route method: perturbation-based stochastic gradient descent on block error power, no secondary-path estimate
 

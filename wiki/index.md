@@ -660,6 +660,8 @@
 | [[entities/shinji-watanabe\|Shinji Watanabe]] | Carnegie Mellon University LTI (2016: MERL) — speech processing researcher; co-author of the mask-prediction MVDR beamforming paper (Interspeech 2016), known for multichannel end-to-end ASR, ESPnet, and the CHiME challenges | 2026-10-11 |
 | [[entities/michael-mandel\|Michael Mandel]] | Brooklyn College, City University of New York — machine listening researcher; co-author of the mask-prediction MVDR beamforming paper (Interspeech 2016), known for ideal ratio mask binaural separation | 2026-10-11 |
 | [[entities/ernst-warsitz\|Ernst Warsitz]] | Paderborn University — statistical signal processing and microphone arrays; first author of the GEV (max-SNR) beamformer origin paper (2007, with Haeb-Umbach) | 2026-10-11 |
+| [[entities/yutaka-maeda\|Yutaka Maeda]] | Kansai University; pioneer of simultaneous perturbation learning rules for neural networks and their application to secondary-path-free ANC | 2026-10-17 |
+| [[entities/takao-yoshida\|Takao Yoshida]] | Kansai University; co-author of the 1999 simultaneous-perturbation ANC paper | 2026-10-17 |
 
 ---
 
@@ -1264,6 +1266,7 @@
 | [[concepts/mask-based-beamforming\|Mask-Based Beamforming]] | Hybrid speech-enhancement paradigm where single-channel neural T-F mask predictions drive the covariance statistics (noise SCM, speech PSD) of a classical beamformer (MVDR/GEV) — no steering vector or array geometry required; founded concurrently in 2016 by Erdogan et al., Heymann et al., and Higuchi et al. | 2026-10-11 |
 | [[concepts/blind-analytical-normalization\|Blind Analytical Normalization (BAN)]] | Closed-form magnitude post-filter fixing the GEV beamformer's arbitrary per-bin scale from the filter vector and noise SCM; adopted unchanged by neural mask-based beamforming | 2026-10-11 |
 | [[concepts/blind-statistical-normalization\|Blind Statistical Normalization (BSN)]] | Statistical GEV post-filter using the beamformer's own spatial response as a DoA pdf — robust during adaptation and at high reverberation, but costlier than BAN | 2026-10-11 |
+| [[concepts/simultaneous-perturbation\|Simultaneous Perturbation]] | Stochastic-approximation scheme estimating the gradient of an unknown objective from one or two perturbed function evaluations (SP, TDSP); enables ANC without secondary-path estimation | 2026-10-17 |
 
 ---
 
@@ -1537,6 +1540,7 @@
 | [[sources/heymann-2016-neural-spectral-mask-beamforming\|Heymann, Drude & Haeb-Umbach 2016]] | This paper presents the neural network based spectral mask estimator for acoustic beamforming that originated the CHiME-challenge-winning front-end family: per-channel neural networks estimate speech and noise T-F masks, from which speech and noise PSD matrices are accumulated and beamformer coefficients (MVDR or GEV with BAN) are computed. | 2026-10-11 |
 | [[sources/erdogan-2016-improved-mvdr-mask-prediction\|Erdogan, Hershey, Watanabe, Mandel & Le Roux 2016]] | This paper is one of the three founding papers (with Heymann et al. 2016 and Higuchi et al. 2016) of neural mask-based beamforming: single-channel LSTM speech-enhancement networks — trained on single-channel data only — predict time-frequency masks that drive the noise spatial covariance estimation of an MVDR beamformer, steering it toward speech without any explicit steering vector or array geometry. | 2026-10-11 |
 | [[sources/warsitz-2007-blind-gev-beamforming\|Warsitz & Haeb-Umbach 2007]] | This is the origin paper of the GEV (max-SNR) beamformer with Blind Analytical Normalization (BAN) — the classical spatial filter that later became one of the two standard beamformers of neural mask-based beamforming. | 2026-10-11 |
+| [[sources/maeda-1999-anc-simultaneous-perturbation\|Maeda & Yoshida 1999: ANC Using Simultaneous Perturbation]] | Earliest secondary-path-free ANC: control filter adapted by simultaneous perturbation (SPSA-type stochastic gradient measured from one or two error-power observations); duct experiment ~25 dB (SP) / ~15 dB (TDSP) at 200 Hz | 2026-10-17 |
 
 ---
 
@@ -1591,10 +1595,10 @@
 
 ## Statistics
 
-- **Total pages**: 1540
-- **Entities**: 650
-- **Concepts**: 595
-- **Sources**: 264
+- **Total pages**: 1544
+- **Entities**: 652
+- **Concepts**: 596
+- **Sources**: 265
 - **Synthesis**: 23
 - **Queries**: 8
-- **Last updated**: 2026-10-11
+- **Last updated**: 2026-10-17

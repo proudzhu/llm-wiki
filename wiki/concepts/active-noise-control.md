@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-10-01
+updated: 2026-10-17
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md
@@ -12,6 +12,7 @@ sources:
   - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
   - raw/papers/cheng-2026-anc-gain-constraint/full-text.txt
   - raw/papers/rao-2026-keep-speech-anc/full-text.txt
+  - raw/papers/maeda-1999-anc-simultaneous-perturbation/full-text.md
 aliases:
 - Active Noise Control
 tags:
@@ -75,7 +76,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 
 ## Key Challenges
 
-- **Secondary path estimation**: The path from loudspeaker to error sensor (including DAC, amplifier, speaker, acoustic path, ADC) must be estimated accurately
+- **Secondary path estimation**: The path from loudspeaker to error sensor (including DAC, amplifier, speaker, acoustic path, ADC) must be estimated accurately — or avoided entirely, e.g. by [[concepts/simultaneous-perturbation|simultaneous perturbation]] adaptation ([[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999]])
 - **Stability**: Phase shifts in the secondary path can cause negative feedback to become positive feedback
 - **Predictability**: Performance depends on how predictable the primary noise is; narrow-band noise works better than broadband noise
 - **Nonlinear distortion**: Low-cost speakers and high-SPL scenarios introduce nonlinearities that linear algorithms cannot model
@@ -131,6 +132,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - [[sources/holzmuller-2026-dtw-secondary-path-anc|Holzmüller & Sontacchi 2026: DTW for Secondary Path Interpolation in ANC]] — DTW-based interpolation extends stable frequency range for moving listeners
 - [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]] — PINN interpolates soundfield from outside-ROI monitoring microphones for improved ANC
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method]] — Experimental validation of secondary-path-model-free ANC
+- [[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999: ANC Using Simultaneous Perturbation]] — secondary-path-free ANC via perturbation-measured stochastic gradients; duct experiment on TMS320C30 DSP
 - [[sources/ma-2027-robust-ffanc-online-path-modeling|Ma 2027: Robust FFANC with Simultaneous OSPM and OFBPM]] — feedforward ANC with simultaneous online SP and FBP modeling; introduces a second supporting filter and SF-driven global AWGN scaling for robustness under time-varying paths
 - [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024: ANC Algorithms Overcoming Output Saturation]] — survey of adaptive ANC algorithms mitigating the output saturation effect, organising the field into output-constraint and nonlinear-adaptive families
 - [[sources/bai-2026-feedback-guided-anc|Bai 2026: Feedback-guided DNN-based Controller Fusion for Robust Fixed-Parameter ANC]] — hybrid WaveNet + feedback-guided MoE of FIR experts; 19 dB avg NR (50 Hz–5 kHz) on CCF-AATC headphone ANC with negligible 1–8 kHz amplification

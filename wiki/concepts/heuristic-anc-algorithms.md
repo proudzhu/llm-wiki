@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-18
-updated: 2026-09-28
+updated: 2026-10-17
 sources:
   - raw/papers/rout-2012-pso-anc-without-secondary-path/full-text.txt
+  - raw/papers/maeda-1999-anc-simultaneous-perturbation/full-text.md
 aliases:
 - Heuristic ANC
 - Evolutionary ANC
@@ -18,7 +19,7 @@ tags:
 
 ## Overview
 
-**Heuristic ANC algorithms** apply population-based, biologically inspired global optimisers to active noise control problems that are difficult for gradient-based methods — typically [[nonlinear-active-noise-control|NLANC]] settings where the secondary path is non-convex or NP-hard, and conventional adaptive filters get trapped in local minima. A distinctive practical advantage of many heuristic ANC algorithms is that they can operate **without explicit estimation of the secondary path $S(z)$**.
+**Heuristic ANC algorithms** apply population-based, biologically inspired global optimisers to active noise control problems that are difficult for gradient-based methods — typically [[nonlinear-active-noise-control|NLANC]] settings where the secondary path is non-convex or NP-hard, and conventional adaptive filters get trapped in local minima. A distinctive practical advantage of many heuristic ANC algorithms is that they can operate **without explicit estimation of the secondary path $S(z)$**. A non-population gradient-free relative is the [[concepts/simultaneous-perturbation|simultaneous perturbation]] method ([[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999]]), which estimates the error-surface gradient from one or two perturbed measurements along a single filter trajectory rather than a population — cheaper per step, but without global-search guarantees.
 
 ## Algorithm Catalogue
 
@@ -70,9 +71,11 @@ tags:
 - [[remote-microphone-technique|Remote Microphone Technique]]
 - [[secondary-path-modeling|Secondary Path Modeling]]
 - [[concepts/conditional-reinitialized-pso|Conditional Reinitialized PSO]]
+- [[concepts/simultaneous-perturbation|Simultaneous Perturbation]] — single-trajectory gradient-free optimization via random coefficient perturbations
 
 ## Related Sources
 
 - [[../sources/lu-2021-anc-survey-nonlinear|Lu et al. 2021: Survey on ANC — Part II (Nonlinear)]]
 - [[sources/rout-2012-pso-anc-without-secondary-path|Rout, Das & Panda 2012: PSO-Based ANC Without Secondary Path Identification]] — systematic online PSO-ANC with the CRPSO change-detection/reinitialization mechanism
 - [[../sources/yang-2014-cuckoo-search-review|Yang 2014: Cuckoo Search Review]] — Related metaheuristic
+- [[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999: ANC Using Simultaneous Perturbation]] — non-population gradient-free relative: perturbation-measured stochastic gradient, no secondary-path estimate

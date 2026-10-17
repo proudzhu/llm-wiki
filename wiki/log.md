@@ -5968,3 +5968,21 @@ Ingested [[sources/erdogan-2016-improved-mvdr-mask-prediction|Erdogan, Hershey, 
 - Updated [[synthesis/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]] synthesis: new "classical kernel of GEV+BAN" data point in Insight 4 — the 2016 mask-based systems replaced exactly one component (VAD-derived statistics) of the 2007 system, keeping beamformer and BAN unchanged
 
 **Key insight**: This ingest corrects a provenance gap — the GEV+BAN front-end adopted by Heymann 2016 / Boeddeker 2018 originates here, nine years before the neural masks, including the BAN post-filter that those systems kept verbatim.
+
+---
+
+## [2026-10-17] ingest | An Active Noise Control Without Estimation of Secondary-Path — ANC Using Simultaneous Perturbation (Maeda & Yoshida 1999)
+
+- **Source**: `raw/papers/maeda-1999-anc-simultaneous-perturbation/full-text.md` (Zotero: APFVMHY2)
+- **Authors**: Yutaka Maeda, Takao Yoshida (Kansai University)
+- **Published**: ACTIVE 99 — International Symposium on Active Control of Sound and Vibration, Fort Lauderdale, FL, USA, December 2–4, 1999
+- **Summary**: Earliest secondary-path-free ANC — the control filter is adapted by simultaneous perturbation (SPSA-type stochastic gradient *measured* from one or two block error-power observations at the error microphone) and its one-measurement time-difference variant (TDSP); no $\hat{S}(z)$, no filtered reference, no injected noise. TMS320C30 duct experiment: ~25 dB (SP) / ~15 dB (TDSP) attenuation at 200 Hz with a 5-tap FIR. Seeds the Kansai perturbation-ANC lineage (Kajikawa & Nomura 2000–2003, Tokoro 2007).
+- **Pages created**: `wiki/sources/maeda-1999-anc-simultaneous-perturbation.md`, `wiki/entities/yutaka-maeda.md`, `wiki/entities/takao-yoshida.md`, `wiki/concepts/simultaneous-perturbation.md`
+- **Pages updated**:
+  - `wiki/concepts/secondary-path-modeling.md` — added Maeda 1999 to the "Avoiding the Estimate Entirely" family
+  - `wiki/concepts/filtered-x-lms-algorithm.md` — added perturbation-based branch to "Gradient-Free Escape"
+  - `wiki/concepts/simultaneous-equations-method.md` — added "Relation to the Perturbation Approach" section
+  - `wiki/concepts/heuristic-anc-algorithms.md` — distinguished single-trajectory perturbation from population-based heuristics
+  - `wiki/concepts/active-noise-control.md` — secondary-path-estimation challenge now notes the perturbation avoidance route
+  - `wiki/concepts/adaptive-filtering.md` — added Simultaneous Perturbation row to the algorithm table
+  - `wiki/synthesis/secondary-path-modeling-evolution.md` — added stochastic-perturbation row to Route 4, earliest-route prose, and trend-4 refinement

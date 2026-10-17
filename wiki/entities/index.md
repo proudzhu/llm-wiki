@@ -654,4 +654,6 @@
 | [[entities/shinji-watanabe\|Shinji Watanabe]] | Carnegie Mellon University LTI (2016: MERL) — speech processing researcher; co-author of the mask-prediction MVDR beamforming paper (Interspeech 2016), known for multichannel end-to-end ASR, ESPnet, and the CHiME challenges | 2026-10-11 |
 | [[entities/michael-mandel\|Michael Mandel]] | Brooklyn College, City University of New York — machine listening researcher; co-author of the mask-prediction MVDR beamforming paper (Interspeech 2016), known for ideal ratio mask binaural separation | 2026-10-11 |
 | [[entities/ernst-warsitz\|Ernst Warsitz]] | Paderborn University — statistical signal processing and microphone arrays; first author of the GEV (max-SNR) beamformer origin paper (2007, with Haeb-Umbach) | 2026-10-11 |
+| [[entities/yutaka-maeda\|Yutaka Maeda]] | Kansai University; pioneer of simultaneous perturbation learning rules for neural networks and their application to secondary-path-free ANC | 2026-10-17 |
+| [[entities/takao-yoshida\|Takao Yoshida]] | Kansai University; co-author of the 1999 simultaneous-perturbation ANC paper | 2026-10-17 |
 
