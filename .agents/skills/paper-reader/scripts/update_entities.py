@@ -83,9 +83,10 @@ KNOWN_CONFERENCE_ABBRS = {
     'NEURIPS': 'NeurIPS',
 }
 
-# "(ICASSP)", "(WASPAA)", "(EUSIPCO 2022)", "(APSIPA ASC 2022)", "(NORSIG 2004)"
+# "(ICASSP)", "(WASPAA)", "(EUSIPCO 2022)", "(APSIPA ASC 2022)", "(NORSIG 2004)",
+# "(ICASSP '03)" — IEEE Xplore's apostrophe + two-digit-year form
 ABBR_PAREN_RE = re.compile(
-    r'\(([A-Za-z][A-Za-z0-9-]{1,11})((?:\sASC)?(?:\s20\d\d)?)\)')
+    r'\(([A-Za-z][A-Za-z0-9-]{1,11})((?:\sASC)?(?:\s?(?:20\d\d|\'\d\d))?)\)')
 # "ICASSP 2024 - ...", "Proc. IEEE ICASSP 2025", "Interspeech 2019"
 ABBR_PREFIX_RE = re.compile(
     r'^(?:proc\.?\s+)?(?:ieee\s+|acm\s+)?'
@@ -113,10 +114,16 @@ def abbreviate_venue(venue):
     m = ABBR_PAREN_RE.search(venue)
     if m:
         token, rest = m.group(1), m.group(2)
-        ym = re.search(r'(20\d\d)', rest)
-        key = (token + re.sub(r'\s20\d\d', '', rest)).upper()
+        ym = re.search(r'20\d\d', rest)
+        year = ym.group(0) if ym else None
+        if year is None:
+            am = re.search(r"'(\d\d)", rest)  # "'03" -> 2003, "'97" -> 1997
+            if am:
+                yy = int(am.group(1))
+                year = ('19' if yy >= 80 else '20') + am.group(1)
+        key = (token + re.sub(r"\s?(?:20\d\d|'\d\d)", '', rest)).upper()
         if key in KNOWN_CONFERENCE_ABBRS:
-            return KNOWN_CONFERENCE_ABBRS[key], ym.group(1) if ym else None
+            return KNOWN_CONFERENCE_ABBRS[key], year
         return None, None
     m = ABBR_PREFIX_RE.match(venue)
     if m and m.group(1).upper() in KNOWN_CONFERENCE_ABBRS:
