@@ -657,4 +657,5 @@
 | [[entities/yutaka-maeda\|Yutaka Maeda]] | Kansai University; pioneer of simultaneous perturbation learning rules for neural networks and their application to secondary-path-free ANC | 2026-10-17 |
 | [[entities/takao-yoshida\|Takao Yoshida]] | Kansai University; co-author of the 1999 simultaneous-perturbation ANC paper | 2026-10-17 |
 | [[entities/yasuo-nomura\|Yasuo Nomura]] | Kansai University; co-developed the perturbation-ANC line (ISCAS 2000, FDSP IEICE 2001, variable-perturbation ICASSP 2003) with Kajikawa | 2026-10-17 |
+| [[entities/aaron-wishnick\|Aaron Wishnick]] | iZotope researcher; time-varying digital filters for musical applications; proved SVF time-varying stability (DAFx-14). | 2026-10-18 |
 

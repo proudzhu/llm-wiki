@@ -663,6 +663,7 @@
 | [[entities/yutaka-maeda\|Yutaka Maeda]] | Kansai University; pioneer of simultaneous perturbation learning rules for neural networks and their application to secondary-path-free ANC | 2026-10-17 |
 | [[entities/takao-yoshida\|Takao Yoshida]] | Kansai University; co-author of the 1999 simultaneous-perturbation ANC paper | 2026-10-17 |
 | [[entities/yasuo-nomura\|Yasuo Nomura]] | Kansai University; co-developed the perturbation-ANC line (ISCAS 2000, FDSP IEICE 2001, variable-perturbation ICASSP 2003) with Kajikawa | 2026-10-17 |
+| [[entities/aaron-wishnick\|Aaron Wishnick]] | iZotope researcher; time-varying digital filters for musical applications; proved SVF time-varying stability (DAFx-14). | 2026-10-18 |
 
 ---
 
@@ -1268,6 +1269,8 @@
 | [[concepts/blind-analytical-normalization\|Blind Analytical Normalization (BAN)]] | Closed-form magnitude post-filter fixing the GEV beamformer's arbitrary per-bin scale from the filter vector and noise SCM; adopted unchanged by neural mask-based beamforming | 2026-10-11 |
 | [[concepts/blind-statistical-normalization\|Blind Statistical Normalization (BSN)]] | Statistical GEV post-filter using the beamformer's own spatial response as a DoA pdf — robust during adaptation and at high reverberation, but costlier than BAN | 2026-10-11 |
 | [[concepts/simultaneous-perturbation\|Simultaneous Perturbation]] | Stochastic-approximation scheme estimating the gradient of an unknown objective from one or two perturbed function evaluations (SP, TDSP); enables ANC without secondary-path estimation | 2026-10-17 |
+| [[concepts/state-variable-filter\|State Variable Filter]] | Second-order filter exposing LP/BP/HP outputs from its states; TDF-II trapezoidal discretization (K-Method) is time-varying stable and matches any biquad in closed form. | 2026-10-18 |
+| [[concepts/time-varying-filter\|Time-Varying Filter]] | Recursive filters whose coefficients change per sample; taxonomy (transient minimization vs stabilization vs stable structures) and the musical vs speech-coding goal conflict. | 2026-10-18 |
 
 ---
 
@@ -1543,6 +1546,7 @@
 | [[sources/warsitz-2007-blind-gev-beamforming\|Warsitz & Haeb-Umbach 2007]] | This is the origin paper of the GEV (max-SNR) beamformer with Blind Analytical Normalization (BAN) — the classical spatial filter that later became one of the two standard beamformers of neural mask-based beamforming. | 2026-10-11 |
 | [[sources/maeda-1999-anc-simultaneous-perturbation\|Maeda & Yoshida 1999: ANC Using Simultaneous Perturbation]] | Earliest secondary-path-free ANC: control filter adapted by simultaneous perturbation (SPSA-type stochastic gradient measured from one or two error-power observations); duct experiment ~25 dB (SP) / ~15 dB (TDSP) at 200 Hz | 2026-10-17 |
 | [[sources/kajikawa-2003-fdsp-variable-perturbation\|Kajikawa & Nomura 2003]] | This paper upgrades the Kansai line of secondary-path-model-free ANC with two ideas: (i) the frequency-domain simultaneous perturbation (FDSP) method — time-domain filtering, frequency-domain updating, with a perturbation filter added to the control filter for only half of each block so that both perturbed and unperturbed error vectors are measured within one block; and (ii) a variable perturbation magnitude that scales with the measured error power (c = \sqrt{\alpha P_{e2}/(G^2 P_x)}), permitting a step size ~75× larger than fixed-perturbation FDSP. | 2026-10-17 |
+| [[sources/wishnick-2014-time-varying-filters-musical\|Wishnick 2014]] | Proposes the TDF-II state variable filter for per-sample time-varying musical filtering; proves its time-varying stability, derives biquad-matching coefficients, and shows via MUSHRA that speech-coding transient minimization is wrong for music. | 2026-10-18 |
 
 ---
 
@@ -1598,10 +1602,10 @@
 
 ## Statistics
 
-- **Total pages**: 1547
-- **Entities**: 653
-- **Concepts**: 596
-- **Sources**: 266
+- **Total pages**: 1551
+- **Entities**: 654
+- **Concepts**: 598
+- **Sources**: 267
 - **Synthesis**: 23
 - **Queries**: 9
-- **Last updated**: 2026-10-17
+- **Last updated**: 2026-10-18

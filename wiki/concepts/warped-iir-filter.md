@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-07-23
-updated: 2026-07-23
+updated: 2026-10-18
 sources:
   - raw/papers/harma-2000-frequency-warped-signal-processing/full-text.md
+  - raw/papers/wishnick-2014-time-varying-filters-musical/full-text.md
 tags:
   - signal-processing
   - filter-design
@@ -30,6 +31,8 @@ A direct implementation of the WIIR contains **delay-free recursive loops** — 
 1. **Two-step technique**: The output is first computed using a modified difference equation, then the inner states are updated using the computed output value. This is computationally more expensive but necessary when coefficients are updated each sample.
 
 2. **Modified structure** (Fig. 13b): A coefficient transformation from $\alpha_i$ to $\sigma_i$ eliminates the delay-free loops, yielding a directly realizable filter. This is more efficient than the two-step approach when coefficients are held constant over several hundred sample periods.
+
+An alternative, structure-agnostic solution is the **K-Method** (Yeh; Borin, De Poli & Rocchesso): substituting the state-space system into a trapezoidal (bilinear) integration rule and solving the resulting linear system for the current state. [[sources/wishnick-2014-time-varying-filters-musical|Wishnick 2014]] applies it to the [[concepts/state-variable-filter|state variable filter]] — where the bilinear transform was long considered unusable precisely because of delay-free loops — yielding a per-sample time-varying-stable realization.
 
 The same delay-free loop issue and solution apply to the **WIIR lattice filter** (Fig. 14), where coefficients $c_i$ are computed from reflection coefficients $k_i$ via a recursive algorithm.
 
@@ -64,3 +67,4 @@ This is useful when designing a WIIR from an existing IIR specification.
 
 - [[sources/harma-2000-frequency-warped-signal-processing|Härmä et al. 2000: Frequency-Warped Signal Processing for Audio Applications]] — introduces the modified WIIR structures and surveys applications
 - [[sources/seo-2016-feedback-anc-constrained-optimization|Seo et al. 2016: Feedback ANC via Constrained Optimization]] — applies warped filter concepts to headphone ANC
+- [[sources/wishnick-2014-time-varying-filters-musical|Wishnick 2014: Time-Varying Filters for Musical Applications]] — solves the same delay-free loop problem generically via the K-Method instead of structure modification

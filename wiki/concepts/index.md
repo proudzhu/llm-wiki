@@ -600,4 +600,6 @@
 | [[concepts/blind-analytical-normalization\|Blind Analytical Normalization (BAN)]] | Closed-form magnitude post-filter fixing the GEV beamformer's arbitrary per-bin scale from the filter vector and noise SCM; adopted unchanged by neural mask-based beamforming | 2026-10-11 |
 | [[concepts/blind-statistical-normalization\|Blind Statistical Normalization (BSN)]] | Statistical GEV post-filter using the beamformer's own spatial response as a DoA pdf — robust during adaptation and at high reverberation, but costlier than BAN | 2026-10-11 |
 | [[concepts/simultaneous-perturbation\|Simultaneous Perturbation]] | Stochastic-approximation scheme estimating the gradient of an unknown objective from one or two perturbed function evaluations (SP, TDSP); enables ANC without secondary-path estimation | 2026-10-17 |
+| [[concepts/state-variable-filter\|State Variable Filter]] | Second-order filter exposing LP/BP/HP outputs from its states; TDF-II trapezoidal discretization (K-Method) is time-varying stable and matches any biquad in closed form. | 2026-10-18 |
+| [[concepts/time-varying-filter\|Time-Varying Filter]] | Recursive filters whose coefficients change per sample; taxonomy (transient minimization vs stabilization vs stable structures) and the musical vs speech-coding goal conflict. | 2026-10-18 |
 

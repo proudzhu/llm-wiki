@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-08-03
+updated: 2026-10-18
 sources:
   in active noise and vibration control.md
   control in active noise control systems.md
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/jiang-2026-lightweight-speech-enhancement-ssm-dsc/full-text.md
+  - raw/papers/wishnick-2014-time-varying-filters-musical/full-text.md
 tags:
 - control-theory
 - mathematics
@@ -40,6 +41,10 @@ In modern [[active-noise-control|Active Noise Control]] and [[active-vibration-c
 ## Model Extraction
 
 For ANC systems, state-space models are typically obtained via **[[system-identification|System Identification]]**. Methods like **Vector Fitting** (Liang 2026) are used to fit a high-order state-space representation (e.g., 15th to 30th order) to the measured frequency response of the primary and secondary paths.
+
+## Time-Varying Stability
+
+The state-space representation is also the natural framework for analyzing **time-varying** recursive filters: stability criteria (Laroche 2007) are stated on the state transition matrix $\mathbf{P}$ that maps the state from sample $n-1$ to $n$, optionally under a change of basis $\mathbf{T}\mathbf{P}\mathbf{T}^{-1}$. [[sources/wishnick-2014-time-varying-filters-musical|Wishnick 2014]] uses this to prove time-varying BIBO stability of the trapezoidally-integrated [[concepts/state-variable-filter|state variable filter]] — a filter whose state-space form is a 2×2 system with a single resonance parameter — and to show that its state is parameter-independent under steady DC input, so coefficient changes cause no switching transients.
 
 ## Deep-Learning State-Space Models
 
@@ -76,3 +81,4 @@ These deep-learning SSMs share the underlying state-space mathematics with the c
 - [[sources/zhao-2024-sicrn|Zhao, He & Zhang 2024: SICRN]] — applies S4ND (multidimensional deep-learning SSM) to monaural speech enhancement
 - [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] — first Mamba-based SE; SOTA PESQ 3.69 on VoiceBank-DEMAND
 - [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight SE with SSM and DSConv]] — introduces [[concepts/lights4|lightS4]] (diagonal-constrained S4); 0.50 G MACs vs. SEMamba's 32.73 G
+- [[sources/wishnick-2014-time-varying-filters-musical|Wishnick 2014: Time-Varying Filters for Musical Applications]] — proves time-varying stability of the 2×2 state-space SVF via the state transition matrix under a change of basis

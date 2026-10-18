@@ -6009,3 +6009,15 @@ Ingested [[sources/erdogan-2016-improved-mvdr-mask-prediction|Erdogan, Hershey, 
   - `wiki/concepts/secondary-path-modeling.md`, `wiki/concepts/filtered-x-lms-algorithm.md`, `wiki/concepts/adaptive-filtering.md`, `wiki/concepts/active-noise-control.md`, `wiki/concepts/simultaneous-equations-method.md` — cross-refs and complexity data points
   - `wiki/synthesis/secondary-path-modeling-evolution.md` — new Route 4 row (FDSP + variable perturbation) + prose upgrade
   - `wiki/queries/perturbation-anc-maeda-vs-kajikawa.md` — verified details against the actual paper (75× step size, $G$ caveat, half-block schedule), added terminology-collision section
+
+---
+
+## [2026-10-18] ingest | Time-Varying Filters for Musical Applications (Wishnick 2014)
+
+- **Source**: `raw/papers/wishnick-2014-time-varying-filters-musical/full-text.md` (Zotero: PVUD9TVS)
+- **Authors**: Aaron Wishnick (iZotope, Inc.)
+- **Published**: Proc. 17th Int. Conf. on Digital Audio Effects (DAFx-14), Erlangen, Germany, 2014
+- **Summary**: Proposes the TDF-II-discretized state variable filter as a general-purpose structure for per-sample time-varying musical filtering (LFO/envelope-modulated EQ). First proof of its time-varying BIBO stability (Laroche Criterion 2, change of basis), closed-form SVF coefficients for all standard EQ biquad shapes and for arbitrary z-domain biquads (making SVF a universal SOS implementation), ideal steady-state DC response (provable), and a MUSHRA listening test (21 subjects) showing speech-coding transient-minimization/output-switching methods are unsuitable for music — sideband energy (r = −0.59), not transient variance (r = 0.11), correlates with perceived quality.
+- **Pages created**: `wiki/sources/wishnick-2014-time-varying-filters-musical.md`, `wiki/entities/aaron-wishnick.md`, `wiki/concepts/state-variable-filter.md`, `wiki/concepts/time-varying-filter.md`
+- **Pages updated**: `wiki/concepts/state-space-model.md` (added Time-Varying Stability section, source cross-ref), `wiki/concepts/warped-iir-filter.md` (K-Method as alternative delay-free-loop solution, source cross-ref), `wiki/index.md` + subdirectory indexes (3 new rows + source row), statistics recounted (1551 total)
+- **Synthesis**: triaged — no relevant pages (only broad-tag `filter-design` overlap with feedback-anc-filter-design, topical coincidence)
