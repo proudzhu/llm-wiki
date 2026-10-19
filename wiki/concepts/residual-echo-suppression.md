@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-08-08
-updated: 2026-08-11
+updated: 2026-10-19
 sources:
+  - raw/papers/gustafsson-2002-psychoacoustic-aec-nr/full-text.md
   - raw/papers/wung-2011-residual-echo-suppression-system/full-text.md
   - raw/papers/fang-2020-robust-residual-echo-suppression/full-text.md
 tags:
@@ -34,7 +35,7 @@ The LSA filter is applied to the microphone signal $Y$ (treating the near-end $v
 
 ### Traditional Baselines
 
-Conventional RES estimates $\lambda_B$ from the equivalent transfer function (ETF) method and/or the coherence function (CF) method. Frequency-domain Wiener filtering based on these estimates is sensitive to SNR-estimation accuracy and may introduce near-end speech distortion or musical noise.
+Conventional RES estimates $\lambda_B$ from the equivalent transfer function (ETF) method and/or the coherence function (CF) method — the two estimators formalized by [[sources/gustafsson-2002-psychoacoustic-aec-nr|Gustafsson, Martin, Jax & Vary 2002]] (building on earlier Gustafsson/Martin work). The ETF method models the echo cancellation as a virtual real-valued transfer function $F(\Omega)$ between the echo and the residual echo (justified by the observation that $\arg B \approx \arg D$ at frequencies where attenuation matters), estimable from PSDs of *measurable* signals alone, giving $\hat\lambda_B = \left(\hat F/(1-\hat F)\right)^2 \lambda_{\hat d}$; the CF method scales the echo-canceled signal's PSD by the magnitude-squared coherence between the far-end and echo-canceled signals. Since the two fail in different ways, the final estimate is the conservative **minimum of both**. The same paper also extends the MMSE-LSA gain to *joint* residual echo and noise suppression by estimating separate SNRs against each interference and combining them via a parallel rule — the "conventional" baseline against which its psychoacoustic rule is evaluated. Frequency-domain Wiener filtering based on these estimates is sensitive to SNR-estimation accuracy and may introduce near-end speech distortion or musical noise.
 
 ### Statistical Normalized Correlation (Fang 2020)
 
@@ -55,5 +56,6 @@ where $r^{de}$ and $r^{dd}$ are recursively smoothed cross- and auto-PSDs. Becau
 
 ## Related Sources
 
+- [[sources/gustafsson-2002-psychoacoustic-aec-nr|Gustafsson, Martin, Jax & Vary 2002]] — origin of the ETF + coherence (min-combined) residual echo PSD estimators and of the separate-SNR MMSE-LSA extension for joint residual echo and noise suppression.
 - [[sources/wung-2011-residual-echo-suppression-system|Wung et al. 2011]] — system approach combining robust AEC, LSA-based residual echo estimation, and a psychoacoustic postfilter.
 - [[sources/fang-2020-robust-residual-echo-suppression|Fang 2020]] — VAD-free residual echo PSD estimation via statistical normalized correlation, robust during double talk.

@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-26
-updated: 2026-09-11
+updated: 2026-10-19
 sources:
   - raw/papers/jin-2017-multichannel-noise-reduction-mobile/full-text.md
   - raw/papers/gerkmann-2012-mmse-noise-psd-tracking/full-text.md
+  - raw/papers/gustafsson-2002-psychoacoustic-aec-nr/full-text.md
 tags:
   - noise-estimation
   - speech-enhancement
@@ -102,6 +103,10 @@ The third single-channel family, [[concepts/mmse-based-noise-psd-estimation|MMSE
 
 [[sources/gerkmann-2012-mmse-noise-psd-tracking|Gerkmann & Hendriks (ICASSP 2012)]] compare the two directly and confirm the trade-off that motivates the MMSE family: minimum statistics retains the **highest segmental speech SNR** of the evaluated estimators but delivers the **lowest amount of noise reduction**, i.e. it preserves speech by leaving more noise behind. The MMSE-based estimators — both the baseline and the temporal-cepstrum-smoothed variant — yield a better distortion-vs-noise-reduction trade-off, as indicated by a larger segmental-SNR gain, and a lower log noise-estimation error (LogErr). This matches the earlier finding of Taghia et al. (ICASSP 2011) that MMSE-based noise PSD tracking follows quickly changing noise fields faster than MS-based approaches, whose tracking delay scales with the minimum-search window.
 
+## Use in Combined Echo and Noise Postfiltering
+
+The minimum statistics method (in its original spectral-subtraction form, Martin EUSIPCO 1994) supplies the VAD-free noise PSD estimate of the combined residual echo and noise reduction postfilter in [[sources/gustafsson-2002-psychoacoustic-aec-nr|Gustafsson, Martin, Jax & Vary 2002]]. A hands-free system cannot rely on a voice activity detector during double talk, and the postfilter needs a stable noise floor both for its noise SNR estimates and for balancing the residual echo attenuation against the noise level (strong noise masks the echo, so less extra attenuation is applied).
+
 ## Related Concepts
 
 - [[concepts/voice-activity-detection|Voice Activity Detection (VAD)]]
@@ -115,6 +120,7 @@ The third single-channel family, [[concepts/mmse-based-noise-psd-estimation|MMSE
 
 ## Related Sources
 
+- [[sources/gustafsson-2002-psychoacoustic-aec-nr|Gustafsson, Martin, Jax & Vary 2002: A Psychoacoustic Approach to Combined AEC and Noise Reduction]] — uses minimum statistics as the VAD-free noise PSD front end of the combined residual echo and noise postfilter
 - [[sources/martin-2001-noise-psd-estimation-optimal-smoothing|Noise Power Spectral Density Estimation Based on Optimal Smoothing and Minimum Statistics (Martin 2001)]]
 - [[sources/jin-2017-multichannel-noise-reduction-mobile|Jin, Taghizadeh, Chen & Xiao 2017: Multi-channel Noise Reduction for Hands-free Voice Communication on Mobile Phones]] — cites minimum statistics (ref [5]) but uses SPP-based NE for the low-frequency stage to exploit SPP's dual role as speech-absence gate
 - [[sources/gerkmann-2012-mmse-noise-psd-tracking|Gerkmann & Hendriks 2012: Improved MMSE-Based Noise PSD Tracking Using Temporal Cepstrum Smoothing]] — uses MS as a baseline: MS wins on speech SNR, loses on noise reduction and LogErr

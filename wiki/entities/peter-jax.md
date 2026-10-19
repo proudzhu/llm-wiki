@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-26
-updated: 2026-05-05
+updated: 2026-10-19
 tags:
   - researcher
   - active-noise-control
@@ -20,11 +20,13 @@ tags:
 - Supervising research on data-driven uncertainty models (elliptic, convex hull) for robust feedback ANC in headphones
 - Co-author on the multi-disk uncertainty model (IWAENC 2022) and the extended journal version (JAES 2024)
 - Co-author on DOA dependency investigation of ANC headphones, showing feedforward ANC is DOA-dependent while feedback ANC is not (INTERNOISE 2018)
+- Co-author of "A Psychoacoustic Approach to Combined Acoustic Echo Cancellation and Noise Reduction" (IEEE Transactions on Speech and Audio Processing, vol. 10, no. 5, pp. 245–256, 2002) — joint residual echo and noise reduction via a psychoacoustically motivated postfilter weighting rule — [[sources/gustafsson-2002-psychoacoustic-aec-nr|Gustafsson, Martin, Jax & Vary 2002]]
 
 ## Related Sources
 
 - [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
+- [[sources/gustafsson-2002-psychoacoustic-aec-nr|Gustafsson, Martin, Jax & Vary 2002: A Psychoacoustic Approach to Combined Acoustic Echo Cancellation and Noise Reduction]]
 
 ## Related Concepts
 

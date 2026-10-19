@@ -658,4 +658,5 @@
 | [[entities/takao-yoshida\|Takao Yoshida]] | Kansai University; co-author of the 1999 simultaneous-perturbation ANC paper | 2026-10-17 |
 | [[entities/yasuo-nomura\|Yasuo Nomura]] | Kansai University; co-developed the perturbation-ANC line (ISCAS 2000, FDSP IEICE 2001, variable-perturbation ICASSP 2003) with Kajikawa | 2026-10-17 |
 | [[entities/aaron-wishnick\|Aaron Wishnick]] | iZotope researcher; time-varying digital filters for musical applications; proved SVF time-varying stability (DAFx-14). | 2026-10-18 |
+| [[entities/stefan-gustafsson\|Stefan Gustafsson]] | First author of the psychoacoustic combined AEC and noise reduction postfilter (RWTH Aachen, PhD 1999); later KPN Research | 2026-10-19 |
 

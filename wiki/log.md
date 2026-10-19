@@ -6021,3 +6021,15 @@ Ingested [[sources/erdogan-2016-improved-mvdr-mask-prediction|Erdogan, Hershey, 
 - **Pages created**: `wiki/sources/wishnick-2014-time-varying-filters-musical.md`, `wiki/entities/aaron-wishnick.md`, `wiki/concepts/state-variable-filter.md`, `wiki/concepts/time-varying-filter.md`
 - **Pages updated**: `wiki/concepts/state-space-model.md` (added Time-Varying Stability section, source cross-ref), `wiki/concepts/warped-iir-filter.md` (K-Method as alternative delay-free-loop solution, source cross-ref), `wiki/index.md` + subdirectory indexes (3 new rows + source row), statistics recounted (1551 total)
 - **Synthesis**: triaged — no relevant pages (only broad-tag `filter-design` overlap with feedback-anc-filter-design, topical coincidence)
+
+---
+
+## [2026-10-19] ingest | A Psychoacoustic Approach to Combined Acoustic Echo Cancellation and Noise Reduction (Gustafsson et al. 2002)
+
+- **Source**: `raw/papers/gustafsson-2002-psychoacoustic-aec-nr/full-text.md` (Zotero: TJ5JEH8W)
+- **Authors**: Stefan Gustafsson, Rainer Martin, Peter Jax, Peter Vary
+- **Published**: IEEE Transactions on Speech and Audio Processing, vol. 10, no. 5, pp. 245–256, July 2002
+- **DOI**: 10.1109/TSA.2002.800553
+- **Summary**: The original derivation of the psychoacoustic postfilter weighting rule for *joint* residual echo and noise reduction in hands-free telephony — echo canceler (deliberately under-modeled, half the room-response order) + sending-path frequency-domain postfilter; residual echo PSD via min(ETF, coherence); LSA baseline extended with separate per-interference SNRs; listening tests prefer the psychoacoustic rule in 97% (stationary double talk) / 75% (time-varying echo path) after parameter-matched instrumental parity.
+- **Pages created**: [[sources/gustafsson-2002-psychoacoustic-aec-nr|source page]]; [[entities/stefan-gustafsson|Stefan Gustafsson]] (entity)
+- **Pages updated**: [[entities/rainer-martin|Rainer Martin]], [[entities/peter-jax|Peter Jax]], [[entities/peter-vary|Peter Vary]] (contribution bullets via script); [[concepts/psychoacoustic-postfilter|Psychoacoustic Postfilter]] (added the original combined residual-echo+noise derivation, ζ attenuation factors, musical-noise immunity); [[concepts/residual-echo-suppression|Residual Echo Suppression]] (ETF/coherence estimator origin + separate-SNR LSA extension); [[concepts/acoustic-echo-cancellation|Acoustic Echo Cancellation]] (canonical combined structure, under-modeled canceler insight); [[concepts/decision-directed-a-priori-snr|Decision-Directed A Priori SNR]] (interference-specific smoothing α_b=0.90 / α_n=0.98); [[concepts/minimum-statistics|Minimum Statistics]] (noise PSD front end of the joint postfilter); [[concepts/echo-return-loss-enhancement|ERLE]] (ERLE_C / ERLE_CH two-stage decomposition); `wiki/index.md`, `wiki/sources/index.md`, `wiki/entities/index.md` (rows + stats)

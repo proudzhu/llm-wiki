@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-26
-updated: 2026-05-26
+updated: 2026-10-19
 tags:
   - researcher
   - speech-enhancement
@@ -30,7 +30,12 @@ tags:
 
 - **Noise PSD estimation based on minimum statistics** (IEEE T-SAP 2001) — seminal work on noise power spectral density estimation without a voice activity detector, deriving optimal time-varying smoothing parameters and bias compensation for minimum tracking
 - **Spectral subtraction based on minimum statistics** (EUSIPCO 1994) — early work establishing the minimum statistics approach for speech enhancement
+- Co-author of "A Psychoacoustic Approach to Combined Acoustic Echo Cancellation and Noise Reduction" (IEEE Transactions on Speech and Audio Processing, vol. 10, no. 5, pp. 245–256, 2002) — joint residual echo and noise reduction via a psychoacoustically motivated postfilter weighting rule — [[sources/gustafsson-2002-psychoacoustic-aec-nr|Gustafsson, Martin, Jax & Vary 2002]]
 
 ## Related Papers
 
 - [[sources/martin-2001-noise-psd-estimation-optimal-smoothing|Noise Power Spectral Density Estimation Based on Optimal Smoothing and Minimum Statistics]] (IEEE Trans. Speech and Audio Processing, 2001)
+
+## Related Sources
+
+- [[sources/gustafsson-2002-psychoacoustic-aec-nr|Gustafsson, Martin, Jax & Vary 2002: A Psychoacoustic Approach to Combined Acoustic Echo Cancellation and Noise Reduction]]

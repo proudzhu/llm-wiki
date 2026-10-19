@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-09-11
-updated: 2026-09-18
+updated: 2026-10-19
 sources:
   - raw/papers/gerkmann-2012-mmse-noise-psd-tracking/full-text.md
   - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
+  - raw/papers/gustafsson-2002-psychoacoustic-aec-nr/full-text.md
 tags:
   - speech-enhancement
   - signal-processing
@@ -36,6 +37,7 @@ Properties:
 - **Bias compensation in MMSE-based noise PSD estimation** — in Hendriks, Heusdens & Jensen (ICASSP 2010) the DD estimate is the *second* speech PSD estimate used purely to evaluate the analytic ML bias $B(\sigma_{\mathrm{S}}^2, \sigma_{\mathrm{N}}^2)$.
 - **Spatial SNR estimation** — [[concepts/doa-based-snr-estimation|DOA-based SNR estimation]] (Kim & Kim 2014) also uses decision-directed updates, there on a spatial TNR/LRT-derived estimate.
 - **Noise-aware CDR estimation** — [[sources/xiang-2025-wiener-gain-reverberant|Xiang et al. 2025]] use the DD approach (with minimum-tracking noise variance) as the SNR input of their noise-aware pairwise [[concepts/coherent-to-diffuse-power-ratio|CDR]] estimator and of the resulting [[concepts/snr-cdr-wiener-gain|joint SNR–CDR Wiener gain]].
+- **Interference-specific smoothing in joint echo + noise suppression** — [[sources/gustafsson-2002-psychoacoustic-aec-nr|Gustafsson et al. 2002]] estimate *separate* DD a priori SNRs against the residual echo (with $\alpha_b = 0.90$) and against the noise (with $\alpha_n = 0.98$), reflecting the different statistics of speech-like residual echo vs. stationary noise, and combine the two by a parallel ("resistor") rule $SNR_{b+n}^s = \big([SNR_b^s]^{-1} + [SNR_n^s]^{-1}\big)^{-1}$ to drive an MMSE-LSA gain for joint suppression.
 
 ## Related Concepts
 
@@ -48,5 +50,6 @@ Properties:
 
 ## Related Sources
 
+- [[sources/gustafsson-2002-psychoacoustic-aec-nr|Gustafsson, Martin, Jax & Vary 2002: A Psychoacoustic Approach to Combined AEC and Noise Reduction]] — interference-specific DD smoothing ($\alpha_b = 0.90$ for residual echo, $\alpha_n = 0.98$ for noise) feeding a parallel-combined LSA gain
 - [[sources/gerkmann-2012-mmse-noise-psd-tracking|Gerkmann & Hendriks 2012: Improved MMSE-Based Noise PSD Tracking Using Temporal Cepstrum Smoothing]] — uses DD with $\alpha_{\mathrm{dd}} = 0.98$ in the enhancement framework, and removes it from the noise-tracking branch
 - [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]] — DD-estimated SNR feeds the noise-aware CDR estimator and the joint Wiener gain

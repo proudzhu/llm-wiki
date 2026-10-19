@@ -664,6 +664,7 @@
 | [[entities/takao-yoshida\|Takao Yoshida]] | Kansai University; co-author of the 1999 simultaneous-perturbation ANC paper | 2026-10-17 |
 | [[entities/yasuo-nomura\|Yasuo Nomura]] | Kansai University; co-developed the perturbation-ANC line (ISCAS 2000, FDSP IEICE 2001, variable-perturbation ICASSP 2003) with Kajikawa | 2026-10-17 |
 | [[entities/aaron-wishnick\|Aaron Wishnick]] | iZotope researcher; time-varying digital filters for musical applications; proved SVF time-varying stability (DAFx-14). | 2026-10-18 |
+| [[entities/stefan-gustafsson\|Stefan Gustafsson]] | First author of the psychoacoustic combined AEC and noise reduction postfilter (RWTH Aachen, PhD 1999); later KPN Research | 2026-10-19 |
 
 ---
 
@@ -1547,6 +1548,7 @@
 | [[sources/maeda-1999-anc-simultaneous-perturbation\|Maeda & Yoshida 1999: ANC Using Simultaneous Perturbation]] | Earliest secondary-path-free ANC: control filter adapted by simultaneous perturbation (SPSA-type stochastic gradient measured from one or two error-power observations); duct experiment ~25 dB (SP) / ~15 dB (TDSP) at 200 Hz | 2026-10-17 |
 | [[sources/kajikawa-2003-fdsp-variable-perturbation\|Kajikawa & Nomura 2003]] | This paper upgrades the Kansai line of secondary-path-model-free ANC with two ideas: (i) the frequency-domain simultaneous perturbation (FDSP) method — time-domain filtering, frequency-domain updating, with a perturbation filter added to the control filter for only half of each block so that both perturbed and unperturbed error vectors are measured within one block; and (ii) a variable perturbation magnitude that scales with the measured error power (c = \sqrt{\alpha P_{e2}/(G^2 P_x)}), permitting a step size ~75× larger than fixed-perturbation FDSP. | 2026-10-17 |
 | [[sources/wishnick-2014-time-varying-filters-musical\|Wishnick 2014]] | Proposes the TDF-II state variable filter for per-sample time-varying musical filtering; proves its time-varying stability, derives biquad-matching coefficients, and shows via MUSHRA that speech-coding transient minimization is wrong for music. | 2026-10-18 |
+| [[sources/gustafsson-2002-psychoacoustic-aec-nr\|Gustafsson, Martin, Jax & Vary 2002]] | Original derivation of the psychoacoustic postfilter weighting rule for joint residual echo and noise reduction behind an under-modeled echo canceler | 2026-10-19 |
 
 ---
 
@@ -1602,10 +1604,10 @@
 
 ## Statistics
 
-- **Total pages**: 1551
-- **Entities**: 654
+- **Total pages**: 1553
+- **Entities**: 655
 - **Concepts**: 598
-- **Sources**: 267
+- **Sources**: 268
 - **Synthesis**: 23
 - **Queries**: 9
-- **Last updated**: 2026-10-18
+- **Last updated**: 2026-10-19

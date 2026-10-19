@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-08-11
-updated: 2026-08-11
+updated: 2026-10-19
 sources:
   - raw/papers/fang-2020-robust-residual-echo-suppression/full-text.md
+  - raw/papers/gustafsson-2002-psychoacoustic-aec-nr/full-text.md
 tags:
   - evaluation-metric
   - acoustic-echo-cancellation
@@ -24,6 +25,7 @@ where $y[n]$ is the original microphone signal (containing echo) and $e[n]$ is t
 
 - **True ERLE (tERLE)**: computed using the error signal with the near-end component removed, isolating the echo attenuation from near-end speech corruption. Used in [[sources/wung-2011-residual-echo-suppression-system|Wung et al. 2011]] to avoid the metric being inflated or depressed by near-end speech.
 - **Segmental ERLE**: computed frame-by-frame to track convergence over time, as plotted in [[sources/fang-2020-robust-residual-echo-suppression|Fang 2020]].
+- **Two-stage decomposition $ERLE_C$ / $ERLE_{CH}$**: [[sources/gustafsson-2002-psychoacoustic-aec-nr|Gustafsson et al. 2002]] report ERLE separately for the canceler alone ($ERLE_C$) and for canceler + postfilter ($ERLE_{CH}$); the postfilter's own contribution is the difference $ERLE_{CH} - ERLE_C$. The decomposition shows how a deliberately under-modeled canceler ($ERLE_C = 10$–$20$ dB at half the necessary filter order) plus a residual echo/noise postfilter still reaches ~40 dB total attenuation, with the postfilter applying *less* extra attenuation when noise or near-end speech already masks the residual echo.
 
 ### When ERLE Is Meaningful
 
@@ -41,5 +43,6 @@ ERLE is only well-defined when the near-end signal is absent (single talk). Duri
 
 ## Related Sources
 
+- [[sources/gustafsson-2002-psychoacoustic-aec-nr|Gustafsson et al. 2002]] — reports the two-stage $ERLE_C$ / $ERLE_{CH}$ decomposition isolating the postfilter's echo-attenuation contribution.
 - [[sources/fang-2020-robust-residual-echo-suppression|Fang 2020]] — uses segmental ERLE to compare AEC-only, baseline RES, and proposed RES.
 - [[sources/wung-2011-residual-echo-suppression-system|Wung et al. 2011]] — uses tERLE to evaluate a system-level RES approach.

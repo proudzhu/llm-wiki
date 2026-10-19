@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-06-06
-updated: 2026-09-18
+updated: 2026-10-19
 sources:
   - raw/papers/hoshuyama-2026-sound-object-echo-control/full-text.md
+  - raw/papers/gustafsson-2002-psychoacoustic-aec-nr/full-text.md
 tags:
   - speech-enhancement
   - echo-cancellation
@@ -83,6 +84,8 @@ EchoFree achieves DeepVQE-S-comparable single-talk performance at ~10× lower co
 
 [[sources/richard-2023-audio-signal-processing-21st-century|Richard et al. 2023]] trace AEC from its 1960s origins through the adaptive-filter generation already surveyed at the SPS 50th anniversary (RLS, affine projection, subband, and frequency-domain adaptive filters, plus double-talk detectors) that made hands-free telephony and modern videoconferencing possible. Subsequent advances tackled loudspeaker/microphone nonlinearities (including DNN-based nonlinear AEC), combined AEC + dereverberation + noise-reduction postfiltering, multichannel and MIMO/wave-domain AEC, and step-size control evolving from double-talk detection through Kalman-filter-based schemes to Kalman + deep-learning step-size optimization. The International Workshop on Acoustic Echo and Noise Control (IWAENC, 1989→, later renamed International Workshop on Acoustic Signal Enhancement) tracks the field.
 
+The canonical *combined* structure — a conventional NLMS echo canceler plus a frequency-domain postfilter in the sending path that jointly attenuates residual echo and noise — was established by [[sources/gustafsson-2002-psychoacoustic-aec-nr|Gustafsson, Martin, Jax & Vary 2002]]. Its key architectural insight is that the postfilter permits a deliberately **under-modeled** canceler (half the room-response filter order): the canceler converges faster, is more robust to noise and double talk, and the total complexity drops, while the postfilter (psychoacoustic or LSA-based) still lifts total echo attenuation to ~40 dB against ITU-T G.167's 45/30 dB targets.
+
 ## Related Concepts
 
 - [[concepts/cross-attention-alignment|Cross-Attention Alignment]]
@@ -110,6 +113,7 @@ EchoFree achieves DeepVQE-S-comparable single-talk performance at ~10× lower co
 
 ## Related Sources
 
+- [[sources/gustafsson-2002-psychoacoustic-aec-nr|Gustafsson, Martin, Jax & Vary 2002: A Psychoacoustic Approach to Combined AEC and Noise Reduction]] — canonical echo canceler + sending-path postfilter structure for joint residual echo and noise reduction
 - [[sources/indenbom-2023-deepvqe|Indenbom et al. 2023: DeepVQE]]
 - [[sources/lugo-2026-diffvqe|Lugo et al. 2026: DiffVQE]] — first reproducible diffusion-based AEC; beats DeepVQE on most metrics at ~10% of its FLOPS
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]]
