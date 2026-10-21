@@ -7,6 +7,7 @@ sources:
   - raw/papers/wang-2024-metric-learning-virtual-sensing/full-text.txt
   - raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md
   - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
+  - raw/papers/peled-2026-anc-ar-glasses-directional-robustness/full-text.md
 - zotero://select/items/0_LJDPCZ9G
 - zotero://select/items/0_WY4S7C6Z
 - zotero://select/items/0_WX2XSXDA
@@ -30,7 +31,7 @@ In many applications (e.g., headphones, vehicle headrests), the "quiet zone" nee
 ### Classical Feedforward VS Methods
 The three canonical virtual sensing methods for feedforward ANC systems, unified by the [[concepts/relative-path-virtual-sensing|RP-VS]] framework[^shi2020]:
 
-- **Auxiliary Filter VS (AF-VS)**: Trains an auxiliary filter $H(z)$ during tuning to preserve the optimal control filter information. Effective when secondary paths are invariant; can leverage online secondary path modeling.
+- **Auxiliary Filter VS (AF-VS)**: Trains an auxiliary filter $H(z)$ during tuning to preserve the optimal control filter information. Effective when secondary paths are invariant; can leverage online secondary path modeling. See [[concepts/auxiliary-filter-virtual-sensing|Auxiliary Filter Virtual Sensing (AF-VS)]] — Peled & Rafaely 2026 derive its DOA sensitivity ($\propto |\sin(\phi - \phi_0)|$, minimal along the reference–monitor axis) and propose a DOA-selected finite AF bank for directional robustness.
 - **Remote Microphone VS (RM-VS)**: Trains a relative primary path model $C_p(z)$ to estimate disturbance at the virtual location from monitoring mic measurements. Effective when primary paths are invariant.
 - **Relative Path VS (RP-VS)**: Trains both $C_p(z)$ and $C_s(z)$ (relative secondary path). Unifies AF-VS and RM-VS — degenerates to AF-VS under invariant secondary paths and to RM-VS under invariant primary paths. Offers the best average performance when both primary and secondary paths vary.
 
@@ -73,4 +74,5 @@ The three canonical virtual sensing methods for feedforward ANC systems, unified
 - [[sources/wang-2024-metric-learning-virtual-sensing|Wang 2024: Transferable Selective Virtual Sensing Active Noise Control Technique Based on Metric Learning]]
 - [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang, Ma, Abhayapala, Samarasinghe & Bastine 2024: An Active Noise Control System Based on Soundfield Interpolation Using a Physics-Informed Neural Network]]
 - [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — virtual in-ear sensing without any physical error microphone
+- [[sources/peled-2026-anc-ar-glasses-directional-robustness|Peled & Rafaely 2026: ANC for AR Glasses with Directional Robustness]]: Establishes VS as a requirement for AR-glasses ANC; AF directional sensitivity theory and DOA-selected AF bank.
 

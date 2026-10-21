@@ -1,7 +1,10 @@
 ---
 type: concept
 created: 2026-05-27
-updated: 2026-05-27
+updated: 2026-10-21
+sources:
+  - raw/papers/shi-2020-active-noise-control-casing-virtual-sensing/full-text.md
+  - raw/papers/peled-2026-anc-ar-glasses-directional-robustness/full-text.md
 tags:
   - active-noise-control
   - virtual-sensing
@@ -48,8 +51,10 @@ $$\mathbf{W}_{RP}(z) = \left[\mathbf{S}_{m'}^{(K \times J)}\right]^\dagger \math
 | Condition | RP-VS degenerates to |
 |-----------|---------------------|
 | Invariant secondary paths ($S_{m'} = S_m$) | [[concepts/remote-microphone-technique\|RM-VS]] ($W_{RP} \to W_{RM}$) |
-| Invariant primary paths ($P_{m'} = P_m$) | AF-VS ($W_{RP} \to W_{AF}$) |
+| Invariant primary paths ($P_{m'} = P_m$) | [[concepts/auxiliary-filter-virtual-sensing\|AF-VS]] ($W_{RP} \to W_{AF}$) |
 | No path changes | Optimal solution $W_o$ |
+
+The AF-VS degenerate case is analyzed for AR glasses by [[sources/peled-2026-anc-ar-glasses-directional-robustness|Peled & Rafaely 2026]], who derive its directional (DOA) sensitivity and mitigate it with a finite AF bank — a DOA change being one practical cause of "path change" between tuning and control.
 
 ## Advantages
 
@@ -68,6 +73,7 @@ $$\mathbf{W}_{RP}(z) = \left[\mathbf{S}_{m'}^{(K \times J)}\right]^\dagger \math
 
 - [[concepts/virtual-sensing|Virtual Sensing]]
 - [[concepts/remote-microphone-technique|Remote Microphone Technique]]
+- [[concepts/auxiliary-filter-virtual-sensing|Auxiliary Filter Virtual Sensing (AF-VS)]]
 - [[concepts/multi-channel-anc|Multi-Channel ANC]]
 - [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
 - [[concepts/active-noise-control|Active Noise Control]]
@@ -75,3 +81,4 @@ $$\mathbf{W}_{RP}(z) = \left[\mathbf{S}_{m'}^{(K \times J)}\right]^\dagger \math
 ## Related Sources
 
 - [[sources/shi-2020-active-noise-control-casing-virtual-sensing|Shi, Jia, Xie & Li 2020: ANC Casing with RP-VS]]
+- [[sources/peled-2026-anc-ar-glasses-directional-robustness|Peled & Rafaely 2026: ANC for AR Glasses with Directional Robustness]]

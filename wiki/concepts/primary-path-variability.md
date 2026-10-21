@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-05
-updated: 2026-10-07
+updated: 2026-10-21
 sources:
   - wiki/sources/liebich-2018-doa-dependency-anc-headphones.md
   - wiki/sources/guldenschuh-2014-secondary-path-irregularities.md
   - raw/papers/rout-2012-pso-anc-without-secondary-path/full-text.txt
   - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
+  - raw/papers/peled-2026-anc-ar-glasses-directional-robustness/full-text.md
 tags:
   - active-noise-control
   - direction-of-arrival
@@ -38,6 +39,8 @@ $$\Delta\angle P(z) = |\angle P_i(z) - \angle P_n(z)|$$
 ## Impact on ANC
 
 Since the optimal feedforward filter is $\hat{W}_{\text{opt}}(z) = P(z)/G(z)$, any change in $P(z)$ with DOA means a filter optimized for one direction will be suboptimal for others. The resulting magnitude and phase deviations in the anti-noise signal directly degrade attenuation, as quantified by the [[anc-attenuation-bounds|ANC Attenuation Bounds]].
+
+Primary-path variability also propagates into **virtual sensing**: the auxiliary filter of [[concepts/auxiliary-filter-virtual-sensing|AF-VS]] embeds the primary paths $P_m, P_v$ at calibration time, so a DOA change makes the fixed AF suboptimal. [[sources/peled-2026-anc-ar-glasses-directional-robustness|Peled & Rafaely 2026]] quantify this for AR glasses: the optimal AF's sensitivity to DOA is $\propto |\sin(\phi - \phi_0)|$ — minimal along the reference–monitor axis $\phi_0$ — and a DOA-selected bank of 5 AFs recovers mean attenuation to within 3.7 dB of per-DOA calibration.
 
 The journal extension ([[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022]]) reports percentile plots of the same 4608-direction DHRTF campaign and formalizes both primary- and secondary-path deviations as multiplicative uncertainties $P(z) = \Delta_P(z) P_n(z)$, $G(z) = \Delta_G(z) G_n(z)$, showing that attenuation requires $|1 - \Delta_G/\Delta_P| < |1/P|$ — i.e., the deviation *ratio* should approach 1 — and that the feedback controller reduces the deviation influence wherever $|S| < 1$.
 
@@ -78,3 +81,4 @@ Primary-path variability is DOA-driven and attacks **high frequencies** (>1 kHz,
 - [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]] — multiplicative-uncertainty formalization
 - [[sources/guldenschuh-2014-secondary-path-irregularities|Guldenschuh & de Callafon 2014: Detection of Secondary-Path Irregularities in ANC Headphones]]
 - [[sources/rout-2012-pso-anc-without-secondary-path|Rout, Das & Panda 2012: PSO-Based ANC Without Secondary Path Identification]] — abrupt (door/cabin) primary-path changes handled by CRPSO reinitialization
+- [[sources/peled-2026-anc-ar-glasses-directional-robustness|Peled & Rafaely 2026: ANC for AR Glasses with Directional Robustness]] — DOA-induced AF mismatch in virtual sensing; $|\sin(\phi-\phi_0)|$ sensitivity and AF-bank mitigation

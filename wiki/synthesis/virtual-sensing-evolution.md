@@ -13,6 +13,7 @@ sources:
   - raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md
   - raw/papers/lu-2021-survey-active-noise-control-linear/full-text.md
   - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
+  - raw/papers/peled-2026-anc-ar-glasses-directional-robustness/full-text.md
 ---
 # Evolution of Virtual Sensing in Active Noise Control
 
@@ -46,6 +47,8 @@ Uses an array of physical microphones to interpolate the sound pressure at the v
 
 ### 2.3 Auxiliary Filter Method
 Introduced to improve robustness by using an auxiliary filter to model the primary noise path difference. This is often combined with hybrid FF/FB structures[^2].
+
+Peled & Rafaely (2026)[^peled2026] extended the AF method along two axes. First, a **new application domain** — AR glasses (Project Aria geometry), where no physical ear microphone exists and simulation confirms virtual sensing is a requirement, not an enhancement: monitor-based NFxLMS falls far short of ear-position attenuation while AF-VS nearly matches ground-truth virtual control. Second, a **new variability axis** — noise-source DOA. Beyond the path-change taxonomy of Section 2.5, they show the *optimal* AF itself varies with source direction, with closed-form sensitivity $\propto |\sin(\phi - \phi_0)|$ (minimal along the reference–monitor axis, maximal at $\pm 90°$), and that a fixed AF calibrated on-axis tolerates markedly wider DOA mismatch. Their mitigation — a **finite bank of AFs selected by DOA** (5 filters: within 3.7 dB of per-DOA calibration, 29.1 dB → 25.3 dB mean attenuation over the causal range) — echoes the database-plus-selection philosophy of the RMT observation-filter databases in Section 2.1, applied to the AF instead, and connects to the selective/cognitive/metric-learning bank lineage.
 
 ---
 
@@ -125,6 +128,7 @@ Note: Secondary path interpolation (DTW-based) addresses the moving-listener pro
 
 [^1]: [[sources/a-review-of-virtual-sensing-algorithms-for-active-|A Review of Virtual Sensing Algorithms for Active Noise Control]] (Zotero: [items/0_LJDPCZ9G](zotero://select/items/0_LJDPCZ9G))
 [^2]: [[sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026: Hybrid ANC with Dual Compensation]] (Zotero: [items/0_AMKNDVMJ](zotero://select/items/0_AMKNDVMJ))
+[^peled2026]: [[sources/peled-2026-anc-ar-glasses-directional-robustness|Peled & Rafaely 2026: ANC for AR Glasses with Directional Robustness]] (Zotero: [items/0_X5D9KRGJ](zotero://select/items/0_X5D9KRGJ))
 [^3]: [[sources/petersen-2008-kalman-filter-virtual-sensing-anc|A Kalman filter approach to virtual sensing for active noise control]] (Zotero: [items/0_WX2XSXDA](zotero://select/items/0_WX2XSXDA))
 [^4]: [[sources/wang-2024-computation-efficient-virtual-sensing|Wang 2024: Computation-Efficient Virtual Sensing with MCALMS]] (Zotero: [items/0_YHFLXFQH](zotero://select/items/0_YHFLXFQH))
 [^5]: [[sources/holzmueller-2026-obs-tasnet-virtual-sensing|Holzmüller 2026: Obs-TasNet for Virtual Sensing]] (Zotero: [items/0_WY4S7C6Z](zotero://select/items/0_WY4S7C6Z))
@@ -159,6 +163,7 @@ Note: Secondary path interpolation (DTW-based) addresses the moving-listener pro
 - [[sources/wang-2024-metric-learning-virtual-sensing|Wang 2024: Transferable Selective Virtual Sensing]]
 - [[sources/holzmuller-2026-dtw-secondary-path-anc|Holzmüller & Sontacchi 2026: DTW for Secondary Path Interpolation in ANC]]
 - [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]]
+- [[sources/peled-2026-anc-ar-glasses-directional-robustness|Peled & Rafaely 2026: ANC for AR Glasses with Directional Robustness]]
 - [[sources/lu-2021-survey-active-noise-control-linear|Lu Lu, Kai-Li Yin, Rodrigo C. de Lamare, Zongsheng Zheng, Yi Yu, Xiaomin Yang & Badong Chen 2021: A Survey on Active Noise Control Techniques — Part I: Linear Systems]]
 - [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — virtual in-ear sensing: network-estimated control filters replace both the error microphone and the virtual error signal
 

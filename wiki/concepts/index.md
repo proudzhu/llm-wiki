@@ -604,4 +604,6 @@
 | [[concepts/time-varying-filter\|Time-Varying Filter]] | Recursive filters whose coefficients change per sample; taxonomy (transient minimization vs stabilization vs stable structures) and the musical vs speech-coding goal conflict. | 2026-10-18 |
 | [[concepts/virtual-in-ear-sensing\|Virtual In-Ear Sensing]] | A network estimates ANC control filters from frame microphones, replacing the in-ear error microphone on open-ear wearables | 2026-10-22 |
 | [[concepts/hybrid-partitioned-convolution\|Hybrid Partitioned Convolution]] | Direct head segment plus FFT partitioned blocks for microsecond-latency convolution of long FIR control filters | 2026-10-22 |
+| [[concepts/anc-for-ar-glasses\|ANC for AR Glasses]] | ANC on AR glasses: no ear microphone (virtual sensing required) and frame-fixed mics impose a ±90° causality constraint around the reference-monitor axis | 2026-10-21 |
+| [[concepts/auxiliary-filter-virtual-sensing\|Auxiliary Filter Virtual Sensing (AF-VS)]] | VS method correcting the monitoring-mic error so FxLMS converges to the virtual optimum; DOA sensitivity proportional to sin(φ−φ₀), mitigated by DOA-selected AF banks | 2026-10-21 |
 

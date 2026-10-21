@@ -5585,7 +5585,6 @@ Ingested Rout, Das & Panda 2012 (IEEE TIM 61(2):554-563). Key contribution: [[co
   - `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` — index rows + statistics
 
 ---
----
 
 ## [2026-10-01] ingest | GSVD-Based Optimal Filtering for Single and Multimicrophone Speech Enhancement (Doclo & Moonen 2002)
 
@@ -6036,8 +6035,22 @@ Ingested [[sources/erdogan-2016-improved-mvdr-mask-prediction|Erdogan, Hershey, 
 
 ---
 
+## [2026-10-21] ingest | Active Noise Control for Augmented Reality Glasses using Virtual Sensing with Directional Robustness (Peled & Rafaely 2026)
+
+- **Source**: `raw/papers/peled-2026-anc-ar-glasses-directional-robustness/full-text.md` (Zotero: X5D9KRGJ)
+- **Authors**: Nitay Peled, Boaz Rafaely
+- **Published**: EUSIPCO 2026
+- **URL**: https://www.eurasip.org/Proceedings/Eusipco/Eusipco2026/pdfs/0000966.pdf
+- **Summary**: Virtual sensing ANC for AR glasses (Project Aria geometry): monitor-based control falls far short at the ear, AF-VS nearly matches ground truth; theoretical DOA sensitivity of the optimal AF is proportional to |sin(φ−φ₀)| (minimal on the reference–monitor axis); a DOA-selected finite AF bank (5 filters) recovers mean attenuation to within 3.7 dB of per-DOA calibration (25.3 vs 29.1 dB).
+- **Pages created**: `wiki/sources/peled-2026-anc-ar-glasses-directional-robustness.md`; `wiki/entities/nitay-peled.md`; `wiki/concepts/anc-for-ar-glasses.md`; `wiki/concepts/auxiliary-filter-virtual-sensing.md`
+- **Pages updated**: `wiki/entities/boaz-rafaely.md` (new research area section); `wiki/concepts/virtual-sensing.md` (AF-VS bullet extended with sensitivity result); `wiki/concepts/relative-path-virtual-sensing.md` (AF-VS degenerate case linked); `wiki/concepts/auxiliary-filter.md` (terminology-collision disambiguation note); `wiki/concepts/primary-path-variability.md` (DOA-induced AF mismatch); `wiki/synthesis/virtual-sensing-evolution.md` (Section 2.3: AR-glasses domain + DOA variability axis + AF bank)
+
+---
+
 ## [2026-10-22] ingest | Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses
 
 Ingested "Active Noise Cancellation on Open-Ear Smart Glasses" (Yuan, Liu & Xiao 2026, arXiv 2604.05519) — the first working ANC system on open-ear wearables with no in-ear error microphone. A [[concepts/virtual-in-ear-sensing|virtual in-ear sensing]] network (U-Net + SE blocks + LSTM bottleneck, 4.2M params) maps 8 frame-microphone signals directly to 2048-tap FIR control filters every 200 ms, FiLM-conditioned on a ~512-byte per-user secondary-path estimate; a Bela DSP applies them via [[concepts/hybrid-partitioned-convolution|hybrid partitioned convolution]] at 113 µs end-to-end. Achieves 9.6 dB (uncalibrated) / 11.2 dB (calibrated) mean reduction over 100–1000 Hz across 11 unseen users × 8 unseen environments, within 4.3 dB of the 14.7 dB error-mic Wiener oracle.
 
 Created source page [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026]]; 6 new entity pages (Kuang Yuan, Freddy Yifei Liu, Yiwen Song, Chengyi Shen, Saksham Bhutani, Swarun Kumar) and 2 new concept pages ([[concepts/virtual-in-ear-sensing|virtual in-ear sensing]], [[concepts/hybrid-partitioned-convolution|hybrid partitioned convolution]]); updated 12 existing concept pages (FiLM layer, Wiener filter, RTF, multi-channel ANC, FxLMS, ANC, open-ear headphones, hearables, SSANC, semantic hearing, virtual sensing, RMT, secondary-path modeling, secondary-path variability); updated 3 synthesis pages ([[synthesis/application-specific-anc|application-specific ANC]], [[synthesis/modern-headphone-anc-systems|modern headphone ANC systems]], [[synthesis/virtual-sensing-evolution|virtual sensing evolution]]).
+
+---

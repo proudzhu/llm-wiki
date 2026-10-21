@@ -665,4 +665,5 @@
 | [[entities/chengyi-shen\|Chengyi Shen]] | CMU/ZJU — smart-glasses ANC prototype development | 2026-10-22 |
 | [[entities/saksham-bhutani\|Saksham Bhutani]] | CMU — smart-glasses ANC prototype development | 2026-10-22 |
 | [[entities/swarun-kumar\|Swarun Kumar]] | CMU professor, corresponding author — co-supervised open-ear ANC on smart glasses | 2026-10-22 |
+| [[entities/nitay-peled\|Nitay Peled]] | Researcher (Ben-Gurion University); first author of AR-glasses virtual sensing ANC with directional robustness (EUSIPCO 2026) | 2026-10-21 |
 

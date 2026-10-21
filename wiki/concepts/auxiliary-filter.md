@@ -11,6 +11,9 @@ tags:
 
 In feedforward active noise control ([[concepts/feedforward-anc|Feedforward ANC]]), an auxiliary filter is a filter that identifies the **overall path** from the noise control filter's input through the primary path, noise control filter, and secondary path, to the error microphone output.
 
+> [!note] Terminology collision
+> The **auxiliary filter** of the Simultaneous Equations Method (this page) is unrelated to the **auxiliary filter** of virtual sensing ANC, which corrects the monitoring-microphone error signal so FxLMS converges to the virtual-optimal control filter — see [[concepts/auxiliary-filter-virtual-sensing|Auxiliary Filter Virtual Sensing (AF-VS)]] ([[sources/peled-2026-anc-ar-glasses-directional-robustness|Peled & Rafaely 2026]] use the AF-VS sense).
+
 ## Role in the Simultaneous Equations Method
 
 In the [[concepts/simultaneous-equations-method|Simultaneous Equations Method]], the auxiliary filter $S(z)$ serves as a substitute for the secondary path filter used in the filtered-x algorithm. Its key characteristic is:
@@ -32,6 +35,7 @@ The auxiliary filter is updated adaptively (typically via frequency-domain adapt
 - [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
 - [[concepts/adaptive-filtering|Adaptive Filtering]]
 - [[concepts/system-identification|System Identification]]
+- [[concepts/auxiliary-filter-virtual-sensing|Auxiliary Filter Virtual Sensing (AF-VS)]] — namesake, different concept
 
 ## Related Sources
 

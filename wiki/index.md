@@ -671,6 +671,7 @@
 | [[entities/chengyi-shen\|Chengyi Shen]] | CMU/ZJU — smart-glasses ANC prototype development | 2026-10-22 |
 | [[entities/saksham-bhutani\|Saksham Bhutani]] | CMU — smart-glasses ANC prototype development | 2026-10-22 |
 | [[entities/swarun-kumar\|Swarun Kumar]] | CMU professor, corresponding author — co-supervised open-ear ANC on smart glasses | 2026-10-22 |
+| [[entities/nitay-peled\|Nitay Peled]] | Researcher (Ben-Gurion University); first author of AR-glasses virtual sensing ANC with directional robustness (EUSIPCO 2026) | 2026-10-21 |
 
 ---
 
@@ -1280,6 +1281,8 @@
 | [[concepts/time-varying-filter\|Time-Varying Filter]] | Recursive filters whose coefficients change per sample; taxonomy (transient minimization vs stabilization vs stable structures) and the musical vs speech-coding goal conflict. | 2026-10-18 |
 | [[concepts/virtual-in-ear-sensing\|Virtual In-Ear Sensing]] | A network estimates ANC control filters from frame microphones, replacing the in-ear error microphone on open-ear wearables | 2026-10-22 |
 | [[concepts/hybrid-partitioned-convolution\|Hybrid Partitioned Convolution]] | Direct head segment plus FFT partitioned blocks for microsecond-latency convolution of long FIR control filters | 2026-10-22 |
+| [[concepts/anc-for-ar-glasses\|ANC for AR Glasses]] | ANC on AR glasses: no ear microphone (virtual sensing required) and frame-fixed mics impose a ±90° causality constraint around the reference-monitor axis | 2026-10-21 |
+| [[concepts/auxiliary-filter-virtual-sensing\|Auxiliary Filter Virtual Sensing (AF-VS)]] | VS method correcting the monitoring-mic error so FxLMS converges to the virtual optimum; DOA sensitivity proportional to sin(φ−φ₀), mitigated by DOA-selected AF banks | 2026-10-21 |
 
 ---
 
@@ -1558,6 +1561,7 @@
 | [[sources/wishnick-2014-time-varying-filters-musical\|Wishnick 2014]] | Proposes the TDF-II state variable filter for per-sample time-varying musical filtering; proves its time-varying stability, derives biquad-matching coefficients, and shows via MUSHRA that speech-coding transient minimization is wrong for music. | 2026-10-18 |
 | [[sources/gustafsson-2002-psychoacoustic-aec-nr\|Gustafsson, Martin, Jax & Vary 2002]] | Original derivation of the psychoacoustic postfilter weighting rule for joint residual echo and noise reduction behind an under-modeled echo canceler | 2026-10-19 |
 | [[sources/yuan-2026-open-ear-anc-smart-glasses\|Yuan, Liu & Xiao 2026]] | Presents the first working ANC system for open-ear wearables (smart glasses, VR headsets, headbands) that requires no error microphone at the ear canal: a neural network performs virtual in-ear sensing, estimating 2048-tap FIR ANC filters per microphone-to-ear pair from eight MEMS microphones embedded in the glasses frame. | 2026-10-22 |
+| [[sources/peled-2026-anc-ar-glasses-directional-robustness\|Peled & Rafaely 2026]] | This paper applies virtual sensing ANC to augmented reality (AR) glasses, where no physical error microphone exists at the wearer's ear. | 2026-10-21 |
 
 ---
 
@@ -1613,10 +1617,10 @@
 
 ## Statistics
 
-- **Total pages**: 1562
-- **Entities**: 661
-- **Concepts**: 600
-- **Sources**: 269
+- **Total pages**: 1566
+- **Entities**: 662
+- **Concepts**: 602
+- **Sources**: 270
 - **Synthesis**: 23
 - **Queries**: 9
-- **Last updated**: 2026-10-22
+- **Last updated**: 2026-10-23
