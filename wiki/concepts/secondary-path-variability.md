@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-08-27
-updated: 2026-09-28
+updated: 2026-10-22
 sources:
   - raw/papers/guldenschuh-2014-secondary-path-irregularities/full-text.md
   - raw/papers/rout-2012-pso-anc-without-secondary-path/full-text.txt
+  - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
 tags:
   - active-noise-control
   - secondary-path
@@ -23,6 +24,10 @@ tags:
 - Increased leakage causes primarily a **low-frequency magnitude drop-off** of $G$ — the tight-fit response is lost first below a few hundred Hz
 - The additive uncertainty $U_{\max}(\omega)$ relative to the tight nominal model reaches **17.3 dB below 300 Hz** (dominated by the leaky paths, worst around 300 Hz)
 - The phase error exceeds 90° around 1300 Hz for open (lifted) headphones
+
+## Open-Ear Wearables: Anatomical Variability
+
+On open-ear devices the variability mechanism differs: there is no ear-cup to leak, but the secondary path (frame speaker → ear) varies with head geometry, ear shape, and glasses fit. [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026]] measured noticeably different secondary-path impulse responses across participants on smart glasses; a one-time ESS calibration improves mean reduction by 1.6 dB (9.6 → 11.2 dB) and cuts inter-user standard deviation from 1.5 dB to 0.4 dB. At the 100–1000 Hz operating band the long wavelengths make the system robust to glasses displacement (looking down, head shaking, removing/re-wearing: 10.7–11.3 dB vs 11.3 dB at rest) without recalibration. See [[concepts/virtual-in-ear-sensing|Virtual In-ear Sensing]].
 
 ## Consequences
 
@@ -48,9 +53,11 @@ tags:
 - [[concepts/uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]]
 - [[concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]] — adaptation-stability remedy
 - [[concepts/conditional-reinitialized-pso|Conditional Reinitialized PSO]] — gradient-free population-based remedy that never estimates $S(z)$
+- [[concepts/virtual-in-ear-sensing|Virtual In-ear Sensing]] — anatomical (fit-driven) variability on open-ear glasses, handled by one-time ESS calibration + FiLM conditioning
 
 ## Related Sources
 
 - [[sources/guldenschuh-2014-secondary-path-irregularities|Guldenschuh & de Callafon 2014: Detection of Secondary-Path Irregularities in ANC Headphones]]
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]] — complementary primary-path variability measurements
 - [[sources/rout-2012-pso-anc-without-secondary-path|Rout, Das & Panda 2012: PSO-Based ANC Without Secondary Path Identification]] — detects abrupt secondary-path changes via the gbest squared-error jump and re-randomizes the PSO population instead of estimating $S(z)$
+- [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — anatomical secondary-path variability on open-ear glasses; one-time ESS calibration +1.6 dB, inter-user std 1.5→0.4 dB

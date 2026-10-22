@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-26
-updated: 2026-10-04
+updated: 2026-10-22
 sources:
   - raw/papers/yan-2014-dual-mic-bt-noise-reduction/full-text.md
   - raw/papers/xiao-2023-spatially-selective-anc/full-text.txt
@@ -12,6 +12,7 @@ sources:
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/yamaoka-2021-bin-wise-beamformer-combination/full-text.md
+  - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
 tags:
   - spatial-filtering
   - beamforming
@@ -77,6 +78,10 @@ Apostolidis et al. (2026) construct a pre-enrolled dictionary of $N$ time-invari
 
 In the time domain, the RTF counterpart is the **relative impulse response (ReIR)**. [[sources/xiao-2023-spatially-selective-anc|Xiao, Xu & Zhao 2023]] use ReIRs as the building block of [[concepts/spatially-selective-anc|spatially selective ANC]]: $\mathbf{H}$ stacks the Toeplitz matrices of the ReIRs between each microphone and a reference microphone (closest to the desired source), and the constraint vector $\mathbf{f} = \mathbf{h}_K$ (the error-microphone ReIR) fixes the desired-direction response so the physical desired wave is preserved at the error microphone rather than reconstructed. Unlike beamforming-side RTF estimation, these ReIRs are design-time quantities (pre-measured per desired direction), and later soft-constrained SSANC variants use **acausal** ReIRs with a delayed-impulse target $\boldsymbol{\delta}_\Delta$.
 
+## Learned RTFs for Open-Ear ANC
+
+[[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026]] sidestep explicit RTF estimation on open-ear smart glasses: instead of estimating the (unknown, user-dependent) acoustic transfer from the 8 frame microphones to the blocked ear canal and then designing a controller around it, a neural network ([[concepts/virtual-in-ear-sensing|virtual in-ear sensing]]) learns the combined mapping — frame-microphone signals plus their IPDs/ILDs straight to the 2048-tap ANC control filters that minimize the *in-ear* residual. The user-dependent secondary path (speaker→ear) still enters explicitly, but as a conditioning signal (a FiLM embedding) rather than as an estimated transfer function; the frame-to-ear primary-field relative transfer is fully implicit in the learned filters. This is the "learned" extreme of an axis whose explicit extreme is covariance-whitening RTF estimation: wearable geometries where per-user acoustic measurement is impractical favor end-to-end learning of the relative transfer.
+
 ## Relative Transfer Matrix: The Multi-Source Generalization
 
 The RTF assumes a *single* source and a *single* reference channel. The **[[concepts/relative-transfer-matrix|Relative Transfer Matrix (ReTM)]]** relaxes both: it maps an entire auxiliary microphone group $\mathbf{M}_{\mathrm{F}} \in \mathbb{C}^{J_{\mathrm{F}}}$ onto a reference group $\mathbf{M}_{\mathrm{R}} \in \mathbb{C}^{J_{\mathrm{R}}}$ via $\mathbf{M}_{\mathrm{R}} = \mathbf{R}_{\mathrm{RF}}\mathbf{M}_{\mathrm{F}}$, with $\mathbf{R}_{\mathrm{RF}} \in \mathbb{C}^{J_{\mathrm{R}} \times J_{\mathrm{F}}}$. It is neither normalized to unity nor tied to one source, so it describes an arbitrary source set observed by two arrays.
@@ -106,7 +111,8 @@ to subtract loudspeaker leakage from the reference microphones ahead of FxLMS. E
 - [[concepts/output-based-speech-enhancement|Output-based Speech Enhancement]]
 - [[concepts/relative-transfer-matrix|Relative Transfer Matrix (ReTM)]] — the multi-source, multi-reference generalization
 - [[concepts/covariance-subtraction|Covariance Subtraction]] — interference removal for RTF/ReTM estimation when no noise-only segment exists
-- [[concepts/tflc-beamformer|TFLC Beamforming]] — distortionless combination beamforming whose required RTF precision (~40 dB) this framework quantifies
+- [[concepts/tflc-beamformer|TFLC Beamformer]] — distortionless combination beamforming whose required RTF precision (~40 dB) this framework quantifies
+- [[concepts/virtual-in-ear-sensing|Virtual In-Ear Sensing]] — the learned extreme where the frame-to-ear RTF is implicit in network-estimated control filters
 
 ## Related Sources
 
@@ -119,4 +125,5 @@ to subtract loudspeaker leakage from the reference microphones ahead of FxLMS. E
 - [[sources/taseska-2018-informed-spatial-filters|Taseska 2018: Informed Spatial Filters for Speech Enhancement]]
 - [[sources/pan-2020-microphone-array-beamforming|Pan, Huang & Chen 2020: Microphone Array Beamforming Methods for Speech Communication and Interaction]] — review positioning RTF-based steering-vector replacement as the standard remedy for steering mismatch in MVDR/GSC-type adaptive beamforming, with estimation difficulty in nonstationary reverberant scenes as the limiting factor
 - [[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021: TF-Bin-Wise Linear Combination of Beamformers]] — quantifies the ~40 dB RTF-accuracy requirement of distortionless combination beamforming
+- [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — the learned extreme: frame-to-ear RTF absorbed into network-estimated control filters, secondary path entering only as FiLM conditioning
 

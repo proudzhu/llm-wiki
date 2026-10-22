@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-23
-updated: 2026-09-08
+updated: 2026-10-22
 tags:
   - researcher
   - active-noise-control
@@ -23,11 +23,13 @@ tags:
 - Soft-constrained spatially selective ANC formulation that balances noise reduction with speech preservation via relative impulse responses (ReIRs)
 - Robust extension of soft-constrained SSANC that averages the cost over a measured set of secondary paths to handle plant variability without online identification
 - Real-time validation of SSANC algorithms on a dSPACE SCALEXIO + FPGA platform with closed-fitting KEMAR hearables
+- Co-first author of "Active Noise Cancellation on Open-Ear Smart Glasses" (arXiv preprint 2604.05519, 2026) — the first working ANC system on open-ear smart glasses without an in-ear error microphone — [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026]]
 
 ## Related Sources
 
 - [[sources/xiao-2023-spatially-selective-anc|Xiao 2023: Spatially Selective Active Noise Control Systems]]
 - [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]]
+- [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]]
 
 ## Related Concepts
 

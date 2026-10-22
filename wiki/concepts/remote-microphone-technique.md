@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-04-29
-updated: 2026-06-25
+updated: 2026-10-22
+sources:
+  - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
 tags:
   - virtual-sensing
   - anc
@@ -64,6 +66,8 @@ Recent advances replace the pre-computed filter bank with a neural network that 
 - **CNN-based** (Holzmuller & Sontacchi 2025): Encoder-decoder CNN takes GCC-PHAT features + virtual microphone coordinates as input, outputs FIR coefficients asynchronously (every 500ms)
 - **Obs-TasNet** (Holzmuller & Sontacchi 2026): Modified Conv-TasNet architecture reduces parameters by ~40% while improving estimation accuracy
 
+**Open-ear extreme** (Yuan, Liu & Xiao 2026): on open-ear smart glasses the virtual location (the unoccluded ear) can *never* host a physical error microphone, even during operation — the network estimates the ANC control filters themselves rather than an observation filter for the disturbance. The [[concepts/virtual-in-ear-sensing|virtual in-ear sensing]] network refreshes 2048-tap filters every 200 ms from eight frame microphones and conditions on the user's secondary path via a FiLM embedding, achieving 9.6–11.2 dB reduction across unseen users and environments.
+
 ## Related Concepts
 
 - [[concepts/virtual-sensing|Virtual Sensing]]
@@ -71,6 +75,7 @@ Recent advances replace the pre-computed filter bank with a neural network that 
 - [[concepts/active-noise-control|Active Noise Control]]
 - [[concepts/secondary-path-modeling|Secondary Path Modeling]]
 - [[concepts/neural-observation-filter|Neural Observation Filter]]
+- [[concepts/virtual-in-ear-sensing|Virtual In-ear Sensing]]
 
 ## Related Sources
 
@@ -78,3 +83,4 @@ Recent advances replace the pre-computed filter bank with a neural network that 
 - [[sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026: Hybrid ANC with Dual Compensation]]
 - [[sources/holzmuller-2025-deep-observation-filter-virtual-sensing-active-noise-control|Holzmuller & Sontacchi 2025: Deep Observation Filter for Virtual Sensing ANC]]
 - [[sources/holzmueller-2026-obs-tasnet-virtual-sensing|Holzmüller & Sontacchi 2026: Obs-TasNet for Virtual Sensing]]
+- [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — neural estimation of control filters for a virtual ear that can never host a physical mic

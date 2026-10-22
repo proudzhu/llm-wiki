@@ -659,4 +659,10 @@
 | [[entities/yasuo-nomura\|Yasuo Nomura]] | Kansai University; co-developed the perturbation-ANC line (ISCAS 2000, FDSP IEICE 2001, variable-perturbation ICASSP 2003) with Kajikawa | 2026-10-17 |
 | [[entities/aaron-wishnick\|Aaron Wishnick]] | iZotope researcher; time-varying digital filters for musical applications; proved SVF time-varying stability (DAFx-14). | 2026-10-18 |
 | [[entities/stefan-gustafsson\|Stefan Gustafsson]] | First author of the psychoacoustic combined AEC and noise reduction postfilter (RWTH Aachen, PhD 1999); later KPN Research | 2026-10-19 |
+| [[entities/kuang-yuan\|Kuang Yuan]] | Co-first author (University of Oldenburg) — virtual in-ear sensing network for open-ear ANC | 2026-10-22 |
+| [[entities/freddy-yifei-liu\|Freddy Yifei Liu]] | Co-first author (University of Oldenburg) — open-ear ANC on smart glasses | 2026-10-22 |
+| [[entities/yiwen-song\|Yiwen Song]] | CMU — smart-glasses ANC prototype development | 2026-10-22 |
+| [[entities/chengyi-shen\|Chengyi Shen]] | CMU/ZJU — smart-glasses ANC prototype development | 2026-10-22 |
+| [[entities/saksham-bhutani\|Saksham Bhutani]] | CMU — smart-glasses ANC prototype development | 2026-10-22 |
+| [[entities/swarun-kumar\|Swarun Kumar]] | CMU professor, corresponding author — co-supervised open-ear ANC on smart glasses | 2026-10-22 |
 

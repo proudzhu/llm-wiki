@@ -6,6 +6,7 @@ sources:
   - raw/papers/toyooka-2026-hybrid-anc-virtual-sensing/full-text.txt
   - raw/papers/wang-2024-metric-learning-virtual-sensing/full-text.txt
   - raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md
+  - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
 - zotero://select/items/0_LJDPCZ9G
 - zotero://select/items/0_WY4S7C6Z
 - zotero://select/items/0_WX2XSXDA
@@ -13,7 +14,7 @@ tags:
 - active-noise-control
 - control-theory
 - signal-processing
-updated: 2026-09-12
+updated: 2026-10-22
 ---
 # Virtual Sensing
 
@@ -39,6 +40,7 @@ The three canonical virtual sensing methods for feedforward ANC systems, unified
 - **[[concepts/physics-informed-neural-network|PINN]]-Based Soundfield Interpolation** (Zhang 2024): A PINN trained on monitoring microphone signals with the acoustic wave equation as a PDE residual interpolates the soundfield at virtual positions. Achieves ~8 dB better interpolation than SH methods with $Q = 8$ microphones, and the PINN-assisted ANC system reduces noise by −13 dB more than multiple-point ANC.
 - **Observer-Based Estimation**: Uses a **[[state-space-model|State-Space Model]]** and **[[kalman-filter|Kalman Filter]]** to estimate the virtual state based on available physical measurements.
 - **Neural Observation Filters**: Uses deep learning (e.g., Obs-TasNet) to estimate filters online for dynamic environments.
+- **[[concepts/virtual-in-ear-sensing|Virtual In-ear Sensing]]** (Yuan et al. 2026): A wearable variant for open-ear devices where no physical error microphone exists at all — a U-Net + LSTM network on smart glasses estimates the *ANC control filters* (not the ear signal) directly from eight frame microphones via IPD/ILD features, generalizing to unseen users and environments (9.6 dB without calibration, 11.2 dB with, vs 14.7 dB oracle Wiener with a physical in-ear mic).
 
 [^shi2020]: [[sources/shi-2020-active-noise-control-casing-virtual-sensing|Shi, Jia, Xie & Li 2020: ANC Casing with RP-VS]]
 
@@ -49,6 +51,7 @@ The three canonical virtual sensing methods for feedforward ANC systems, unified
 
 ## Related Concepts
 - [[active-noise-control|Active Noise Control]]
+- [[concepts/virtual-in-ear-sensing|Virtual In-ear Sensing]] — wearable open-ear variant estimating control filters from frame microphones
 - [[kalman-filter|Kalman Filter]]
 - [[state-space-model|State-Space Model]]
 - [[secondary-path-modeling|Secondary Path Modeling]]
@@ -69,4 +72,5 @@ The three canonical virtual sensing methods for feedforward ANC systems, unified
 - [[sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026: Hybrid Active Noise Control System for Remote Microphone Based Virtual Sensing with Two Compensation Filters]]
 - [[sources/wang-2024-metric-learning-virtual-sensing|Wang 2024: Transferable Selective Virtual Sensing Active Noise Control Technique Based on Metric Learning]]
 - [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang, Ma, Abhayapala, Samarasinghe & Bastine 2024: An Active Noise Control System Based on Soundfield Interpolation Using a Physics-Informed Neural Network]]
+- [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — virtual in-ear sensing without any physical error microphone
 

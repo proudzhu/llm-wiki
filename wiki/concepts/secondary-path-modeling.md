@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-17
-updated: 2026-10-17
+updated: 2026-10-22
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/fareedha-2026-joint-deep-spe-anc/full-text.txt
@@ -18,6 +18,7 @@ sources:
   - raw/papers/rout-2012-pso-anc-without-secondary-path/full-text.txt
   - raw/papers/maeda-1999-anc-simultaneous-perturbation/full-text.md
   - raw/papers/kajikawa-2003-fdsp-variable-perturbation/full-text.md
+  - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
 tags:
 - active-noise-control
 - signal-processing
@@ -47,6 +48,8 @@ Accurate knowledge of $S(z)$ is essential for the stability and convergence of a
 
 ### 1. [[offline-secondary-path-modeling|Offline Secondary-Path Modeling]]
 Conducted before the ANC system starts operating. A training signal (typically white noise) is played through the secondary source, and an adaptive filter (e.g., LMS) is used to identify the impulse response.
+
+On open-ear smart glasses, [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026]] estimate the 1024-tap secondary path offline with an exponential sine sweep (20 Hz–11 kHz, robust down to −20 dB calibration SNR) and use the estimate in two places: inside the training loss (residual computed through $\hat{S}$) and as a [[concepts/film-layer|FiLM]] conditioning input to the filter-estimation network (~512 bytes of per-user affine parameters instead of retraining). Without user calibration, a population-averaged path serves as fallback.
 
 ### 2. [[online-secondary-path-modeling|Online Secondary-Path Modeling]]
 Conducted during ANC operation. This is necessary when the secondary path is time-varying (e.g., movement of the user's head in headphones).
@@ -86,6 +89,7 @@ In hearing aids the secondary path is the propagation from the device loudspeake
 - [[concepts/open-fitting-noise-leakage|Open-Fitting Noise Leakage]]
 - [[concepts/conditional-reinitialized-pso|Conditional Reinitialized PSO]] — trains the controller without any $S(z)$ model
 - [[concepts/simultaneous-perturbation|Simultaneous Perturbation]] — measures the error-surface gradient via random coefficient perturbations; no $S(z)$ model
+- [[concepts/virtual-in-ear-sensing|Virtual In-ear Sensing]] — open-ear wearables use the offline estimate in the loss and as FiLM conditioning
 
 ## Related Sources
 
@@ -104,4 +108,5 @@ In hearing aids the secondary path is the propagation from the device loudspeake
 - [[sources/rout-2012-pso-anc-without-secondary-path|Rout, Das & Panda 2012: PSO-Based ANC Without Secondary Path Identification]] — the avoidance route: population-based training on block-averaged residual error, immune to secondary-path time variation
 - [[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999: ANC Using Simultaneous Perturbation]] — an early avoidance-route method: perturbation-based stochastic gradient descent on block error power, no secondary-path estimate
 - [[sources/kajikawa-2003-fdsp-variable-perturbation|Kajikawa & Nomura 2003: FDSP with Variable Perturbation]] — frequency-domain perturbation updating with error-scaled perturbation magnitude; keeps converging through secondary-path changes
+- [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — ESS-based offline estimate used in the training loss and as FiLM conditioning
 

@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-10-17
+updated: 2026-10-22
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
@@ -9,6 +9,7 @@ sources:
   - raw/papers/rout-2012-pso-anc-without-secondary-path/full-text.txt
   - raw/papers/maeda-1999-anc-simultaneous-perturbation/full-text.md
   - raw/papers/kajikawa-2003-fdsp-variable-perturbation/full-text.md
+  - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
 tags:
 - adaptive-algorithms
 - lms
@@ -83,6 +84,10 @@ The dependence on $\hat{S}(z)$ and the gradient update are structural properties
 
 The perturbation-based branch predates the population-based one: [[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999]] adapt the control filter by [[concepts/simultaneous-perturbation|simultaneous perturbation]] — random $\pm c$ sign perturbations of all taps estimate the gradient of the block error power from the error microphone alone, so neither $\hat{S}(z)$ nor a filtered reference ever enters the adaptation (~25 dB attenuation of a 200 Hz sinusoid on a TMS320C30 duct experiment with a 5-tap FIR; the one-measurement time-difference variant achieved ~15 dB). Its frequency-domain successor [[sources/kajikawa-2003-fdsp-variable-perturbation|Kajikawa & Nomura 2003]] additionally undercuts FxLMS on cost: $2N^2 + 34N + 16N\log_2 N + 4$ multiplications per $2N$ samples versus FxLMS's $6N^2 + 2N$ (~3× cheaper at large $N$), since no reference filtering through $\hat{S}(z)$ is performed, while converging faster than fixed-perturbation FDSP thanks to an error-scaled variable perturbation magnitude.
 
+## Fixed Filters from a Feedforward Network (No Adaptation Loop)
+
+Open-ear smart glasses remove the physical error microphone entirely, so no on-line FxLMS loop can close at the ear. [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026]] instead **generate** the control filters continuously but without adaptation: a U-Net estimates 2048-tap FIR filters every 200 ms from 8 frame microphones, and the DSP applies them via [[concepts/hybrid-partitioned-convolution|hybrid partitioned convolution]]. The secondary path enters only as (a) an ESS-measured estimate used in the training loss and as FiLM conditioning, and (b) the Tikhonov regularization $\beta_0 = 10^{-4}$ of the Wiener-form training target — the accuracy/stability burden that $\hat{S}(z)$ carries inside the FxLMS update is shifted entirely into training time.
+
 ## Related Concepts
 
 - [[concepts/active-noise-control|Active Noise Control]]
@@ -99,6 +104,8 @@ The perturbation-based branch predates the population-based one: [[sources/maeda
 - [[concepts/filtered-x-mwf|Filtered-x MWF (FxMWF)]] — closed-form, statistics-based filtered-x controller
 - [[concepts/acoustic-feedback|Acoustic Feedback]] — the phenomenon that corrupts the reference signal driving the update
 - [[concepts/relative-transfer-matrix|Relative Transfer Matrix (ReTM)]] — spatial-subtraction front end used to clean the reference
+- [[concepts/virtual-in-ear-sensing|Virtual In-Ear Sensing]] — replaces the adaptation loop entirely with network-generated fixed filters
+- [[concepts/hybrid-partitioned-convolution|Hybrid Partitioned Convolution]] — real-time engine applying the network-generated filters
 
 ## Related Sources
 
@@ -112,3 +119,4 @@ The perturbation-based branch predates the population-based one: [[sources/maeda
 - [[sources/rout-2012-pso-anc-without-secondary-path|Rout, Das & Panda 2012: PSO-Based ANC Without Secondary Path Identification]] — replaces the gradient FxLMS update with PSO; converges to the exact FxLMS optimum on static paths without any $\hat{S}(z)$
 - [[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999: ANC Using Simultaneous Perturbation]] — an early gradient-free escape: adapts the control filter by simultaneous perturbation of all taps, requiring neither $\hat{S}(z)$ nor the filtered reference
 - [[sources/kajikawa-2003-fdsp-variable-perturbation|Kajikawa & Nomura 2003: FDSP with Variable Perturbation]] — frequency-domain successor: ~3× cheaper than FxLMS and converging faster than fixed-perturbation FDSP via error-scaled perturbation
+- [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — no FxLMS loop is possible without an error mic; control filters are network-generated instead, with $\hat{S}(z)$ shifted into training-time FiLM conditioning

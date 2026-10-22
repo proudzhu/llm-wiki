@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-10-01
+updated: 2026-10-22
 sources:
   - raw/papers/pan-2026-array-self-awareness/full-text.md
   Controllers.md
@@ -11,6 +11,7 @@ sources:
   - raw/papers/pan-2025-data-driven-acoustics/full-text.md
   - raw/papers/cheng-2026-anc-gain-constraint/full-text.txt
   - raw/papers/rao-2026-keep-speech-anc/full-text.txt
+  - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
 tags:
 - mathematics
 - signal-processing
@@ -38,6 +39,7 @@ In **[[active-noise-control|Active Noise Control]]**, the Wiener filter represen
 - **Feedforward ANC**: The optimal $W(z) = P(z)/S(z)$, which is a Wiener filter that models the primary path while compensating for the secondary path.
 - **Constrained anchor (Cheng 2026)**: When the unconstrained Wiener–Hopf solution $\mathbf{w}_{\mathrm{opt}} = -\mathbf{R}_{x'}^{-1}\mathbf{r}_{dx'}$ demands more low-frequency gain than a micro-loudspeaker can reproduce (driving it toward mechanical over-excursion), it can still serve as the **regularization target**: [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026]] constrain the filter's low-frequency response with an ∞-norm gain limit while an ℓ2 term pulls the unconstrained band toward $\mathbf{w}_{\mathrm{opt}}$ (see [[concepts/frequency-response-constrained-anc|ANC-FRC]]) — the Wiener optimum remains the reference even when it is not implementable.
 - **Training-time substitute (Rao 2026)**: In neural reference enhancement for keep-speech ANC, [[sources/rao-2026-keep-speech-anc|Rao et al. 2026]] compute the **Wiener-optimal control filter** for the current network state and substitute it into the error-domain training loss, so the enhancement network is optimized against the best possible closed loop — a training-time role for the Wiener solution, with an RLS-adapted FIR filter running at inference.
+- **Oracle upper bound (Yuan 2026)**: In open-ear ANC without an in-ear error microphone, [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026]] use the regularized multichannel Wiener solution $\mathbf{w}_{\mathrm{opt}}=-(\bm{\Upphi}_{\mathbf{rr}}+\beta\mathbf{I})^{-1}\bm{\upphi}_{\mathbf{r}d}$ (with $\beta_0 = 10^{-4}$, computed from measured in-ear residuals) as the **oracle benchmark**: 14.7 dB mean attenuation over 100–1000 Hz, against which the deployed virtual-in-ear network's 11.2 dB (calibrated) sits within 4.3 dB — quantifying the price of removing the error microphone.
 - **Feedback ANC**: The optimal controller for minimizing the variance of the error signal can be derived as a Wiener filter using the **Internal Model Control (IMC)** structure (Pawelczyk 1997).
 
 ## Limitations
@@ -107,6 +109,7 @@ where the $k$-th element of $\hat{\bm{h}}(t)$ approximates the optimal Wiener ga
 - [[minimum-variance-control|Minimum Variance Control]]
 - [[filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
 - [[kalman-filter|Kalman Filter]]
+- [[concepts/virtual-in-ear-sensing|Virtual In-Ear Sensing]] — benchmarked against the regularized Wiener oracle in open-ear ANC
 
 ## Related Sources
 
@@ -122,3 +125,4 @@ where the $k$-th element of $\hat{\bm{h}}(t)$ approximates the optimal Wiener ga
 - [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — the Wiener gain as a BCE-trained supervised target of a neural network (Section 7.2.1)
 - [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026: Active Noise Control With a Gain Constraint for Micro-Loudspeakers]] — the unconstrained Wiener optimum as ℓ2 regularization anchor when gain constraints make it unimplementable
 - [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — Wiener-optimal control filter substituted into the error-domain loss to train the reference-enhancement network against the best closed loop
+- [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — the regularized multichannel Wiener solution as oracle upper bound (14.7 dB) for error-microphone-free open-ear ANC

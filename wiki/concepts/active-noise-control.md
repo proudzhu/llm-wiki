@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-10-17
+updated: 2026-10-22
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md
@@ -66,6 +66,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - **E2E-CFG**: End-to-End Control-Filter Generation directly generates control filters via Transformer co-processor in a differentiable ANC system, trained unsupervised on residual error
 - **[[concepts/semantic-hearing|Semantic hearing]]** (Veluri et al. 2023): inverts the ANC paradigm — modern noise-canceling headsets (e.g., Sony WH-1000XM4) provide an "acoustic clean slate" by attenuating *all* external sounds, and a real-time binaural target-sound-extraction network reintroduces only user-chosen sound classes while preserving their spatial cues. An end-to-end experiment showed the semantic-hearing playback coexisting with adaptive feedforward ANC; residual-noise-aware playback adaptation remains open.
 - **[[direction-preserving-anc|DP-ANC]]** (Yang 2026): Direction-conditioned network estimates the full multichannel FIR control-filter bank in one forward pass (FiLM-conditioned, differentiable secondary-path-aware training), cancelling noise from non-desired directions while preserving desired-direction sound naturally — 22.8 dB NR at −11.4 dB desired-response distortion over 3300 cases, ≈3000× cheaper per filter bank than the analytical SSANC solve
+- **[[concepts/virtual-in-ear-sensing|Virtual in-ear sensing]]** (Yuan 2026): the first working ANC on open-ear smart glasses *without* an in-ear error microphone — a U-Net + FiLM network maps 8 frame-microphone signals to 2048-tap FIR control filters every 200 ms, targeting the network-estimated in-ear residual rather than any physical error sensor (9.6 dB mean reduction 100–1000 Hz without calibration, 11.2 dB with ESS secondary-path calibration, vs 14.7 dB Wiener oracle), replayed on the DSP via [[concepts/hybrid-partitioned-convolution|hybrid partitioned convolution]] at 113 µs end-to-end
 
 ### Performance Comparison (Dai 2026, RT60=0.3s)
 
@@ -144,6 +145,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC with a Conditional Control-Filter Estimation Network]] — FiLM-conditioned network estimates the full control-filter bank; cancels non-desired directions while preserving desired-direction sound
 - [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026: Active Noise Control With a Gain Constraint for Micro-Loudspeakers]] — design-time frequency-response gain constraint on fixed control filters to prevent micro-loudspeaker mechanical over-excursion
 - [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — keep-speech ANC with a causal WaveNet on the reference path and a conventional RLS FIR controller; zero added delay, improves STOI/DNSMOS over all baselines on measured headphone IRs
+- [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — first working ANC on open-ear smart glasses without an in-ear error microphone; virtual in-ear sensing replaces the error sensor, 11.2 dB mean reduction (100–1000 Hz) with per-user secondary-path calibration
 
 ## Related Entities
 

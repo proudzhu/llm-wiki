@@ -665,6 +665,12 @@
 | [[entities/yasuo-nomura\|Yasuo Nomura]] | Kansai University; co-developed the perturbation-ANC line (ISCAS 2000, FDSP IEICE 2001, variable-perturbation ICASSP 2003) with Kajikawa | 2026-10-17 |
 | [[entities/aaron-wishnick\|Aaron Wishnick]] | iZotope researcher; time-varying digital filters for musical applications; proved SVF time-varying stability (DAFx-14). | 2026-10-18 |
 | [[entities/stefan-gustafsson\|Stefan Gustafsson]] | First author of the psychoacoustic combined AEC and noise reduction postfilter (RWTH Aachen, PhD 1999); later KPN Research | 2026-10-19 |
+| [[entities/kuang-yuan\|Kuang Yuan]] | Co-first author (University of Oldenburg) — virtual in-ear sensing network for open-ear ANC | 2026-10-22 |
+| [[entities/freddy-yifei-liu\|Freddy Yifei Liu]] | Co-first author (University of Oldenburg) — open-ear ANC on smart glasses | 2026-10-22 |
+| [[entities/yiwen-song\|Yiwen Song]] | CMU — smart-glasses ANC prototype development | 2026-10-22 |
+| [[entities/chengyi-shen\|Chengyi Shen]] | CMU/ZJU — smart-glasses ANC prototype development | 2026-10-22 |
+| [[entities/saksham-bhutani\|Saksham Bhutani]] | CMU — smart-glasses ANC prototype development | 2026-10-22 |
+| [[entities/swarun-kumar\|Swarun Kumar]] | CMU professor, corresponding author — co-supervised open-ear ANC on smart glasses | 2026-10-22 |
 
 ---
 
@@ -1272,6 +1278,8 @@
 | [[concepts/simultaneous-perturbation\|Simultaneous Perturbation]] | Stochastic-approximation scheme estimating the gradient of an unknown objective from one or two perturbed function evaluations (SP, TDSP); enables ANC without secondary-path estimation | 2026-10-17 |
 | [[concepts/state-variable-filter\|State Variable Filter]] | Second-order filter exposing LP/BP/HP outputs from its states; TDF-II trapezoidal discretization (K-Method) is time-varying stable and matches any biquad in closed form. | 2026-10-18 |
 | [[concepts/time-varying-filter\|Time-Varying Filter]] | Recursive filters whose coefficients change per sample; taxonomy (transient minimization vs stabilization vs stable structures) and the musical vs speech-coding goal conflict. | 2026-10-18 |
+| [[concepts/virtual-in-ear-sensing\|Virtual In-Ear Sensing]] | A network estimates ANC control filters from frame microphones, replacing the in-ear error microphone on open-ear wearables | 2026-10-22 |
+| [[concepts/hybrid-partitioned-convolution\|Hybrid Partitioned Convolution]] | Direct head segment plus FFT partitioned blocks for microsecond-latency convolution of long FIR control filters | 2026-10-22 |
 
 ---
 
@@ -1549,6 +1557,7 @@
 | [[sources/kajikawa-2003-fdsp-variable-perturbation\|Kajikawa & Nomura 2003]] | This paper upgrades the Kansai line of secondary-path-model-free ANC with two ideas: (i) the frequency-domain simultaneous perturbation (FDSP) method — time-domain filtering, frequency-domain updating, with a perturbation filter added to the control filter for only half of each block so that both perturbed and unperturbed error vectors are measured within one block; and (ii) a variable perturbation magnitude that scales with the measured error power (c = \sqrt{\alpha P_{e2}/(G^2 P_x)}), permitting a step size ~75× larger than fixed-perturbation FDSP. | 2026-10-17 |
 | [[sources/wishnick-2014-time-varying-filters-musical\|Wishnick 2014]] | Proposes the TDF-II state variable filter for per-sample time-varying musical filtering; proves its time-varying stability, derives biquad-matching coefficients, and shows via MUSHRA that speech-coding transient minimization is wrong for music. | 2026-10-18 |
 | [[sources/gustafsson-2002-psychoacoustic-aec-nr\|Gustafsson, Martin, Jax & Vary 2002]] | Original derivation of the psychoacoustic postfilter weighting rule for joint residual echo and noise reduction behind an under-modeled echo canceler | 2026-10-19 |
+| [[sources/yuan-2026-open-ear-anc-smart-glasses\|Yuan, Liu & Xiao 2026]] | Presents the first working ANC system for open-ear wearables (smart glasses, VR headsets, headbands) that requires no error microphone at the ear canal: a neural network performs virtual in-ear sensing, estimating 2048-tap FIR ANC filters per microphone-to-ear pair from eight MEMS microphones embedded in the glasses frame. | 2026-10-22 |
 
 ---
 
@@ -1604,10 +1613,10 @@
 
 ## Statistics
 
-- **Total pages**: 1553
-- **Entities**: 655
-- **Concepts**: 598
-- **Sources**: 268
+- **Total pages**: 1562
+- **Entities**: 661
+- **Concepts**: 600
+- **Sources**: 269
 - **Synthesis**: 23
 - **Queries**: 9
-- **Last updated**: 2026-10-19
+- **Last updated**: 2026-10-22

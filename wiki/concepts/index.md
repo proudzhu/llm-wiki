@@ -602,4 +602,6 @@
 | [[concepts/simultaneous-perturbation\|Simultaneous Perturbation]] | Stochastic-approximation scheme estimating the gradient of an unknown objective from one or two perturbed function evaluations (SP, TDSP); enables ANC without secondary-path estimation | 2026-10-17 |
 | [[concepts/state-variable-filter\|State Variable Filter]] | Second-order filter exposing LP/BP/HP outputs from its states; TDF-II trapezoidal discretization (K-Method) is time-varying stable and matches any biquad in closed form. | 2026-10-18 |
 | [[concepts/time-varying-filter\|Time-Varying Filter]] | Recursive filters whose coefficients change per sample; taxonomy (transient minimization vs stabilization vs stable structures) and the musical vs speech-coding goal conflict. | 2026-10-18 |
+| [[concepts/virtual-in-ear-sensing\|Virtual In-Ear Sensing]] | A network estimates ANC control filters from frame microphones, replacing the in-ear error microphone on open-ear wearables | 2026-10-22 |
+| [[concepts/hybrid-partitioned-convolution\|Hybrid Partitioned Convolution]] | Direct head segment plus FFT partitioned blocks for microsecond-latency convolution of long FIR control filters | 2026-10-22 |
 

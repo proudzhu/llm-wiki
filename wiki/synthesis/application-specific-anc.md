@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-10-07
+updated: 2026-10-22
 sources:
   - zotero://select/items/0_M2F5PSAU
   - zotero://select/items/0_TVS87FW6
@@ -9,6 +9,7 @@ sources:
   - zotero://select/items/0_WBAA4H6N
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/watanabe-2026-low-frequency-harmonic-control/full-text.md
+  - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
   - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
 tags:
   - application-specific-anc
@@ -76,30 +77,28 @@ Propeller noise ──→ Onboard mic ──→ FxLMS controller ──→ Anti-
 
 - **Noise source**: Ambient environmental noise, diffuse
 - **Acoustic environment**: **Open-ear** — the ear canal is not sealed; sound reaches the ear both through air and through the earbud
-- **Form factor**: Smart glasses with earbud speakers, 8-microphone array
-- **Constraints**: Must preserve situational awareness, limited compute (DSP on glasses frame)
+- **Form factor**: Smart glasses with open-ear speakers, 8-microphone array (4 per side), no in-ear error microphone
+- **Constraints**: Must preserve situational awareness, limited compute (CPU + DSP on glasses frame, 5–7 W)
 
-### Architecture: Virtual In-Ear Perception
+### Architecture: Virtual In-Ear Sensing
 
-Yuan et al.'s key innovation: since the ear is **open**, you cannot measure the in-ear acoustic field directly. Instead, they train a **neural network** to estimate the in-ear sound pressure from the 8-microphone array on the glasses frame:
+[[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026]]'s key innovation: since the ear is **open**, no physical error microphone exists to close an adaptation loop. Their [[concepts/virtual-in-ear-sensing|virtual in-ear sensing]] network instead learns the mapping from frame microphones directly to the ANC **control filters** (not merely the in-ear signal):
 
 ```
-8-mic array on glasses ──→ U-Net + LSTM + FiLM ──→ Estimate in-ear pressure
-                                                        ↓
-                                                 DSP anti-noise generation
-                                                        ↓
-                                                 4-channel FIR filter (2048-tap)
+4 mics per side ──→ STFT + IPD/ILD features (11 ch) ──→ U-Net + LSTM + FiLM ──→ 4 × 2048-tap FIR filters (200 ms refresh)
+                                        ↑ secondary-path embedding (FiLM)                    ↓ UDP
+                                                              DSP: hybrid partitioned convolution → open-ear speaker (113 μs)
 ```
 
 **Dual pipeline**:
-1. **Neural network** (CPU): Estimates virtual in-ear pressure, updates every 200ms
-2. **DSP pipeline** (dedicated): Generates anti-noise via hybrid convolution, 113μs end-to-end latency
+1. **Neural network** (Raspberry Pi 5 CPU): estimates 2048-tap FIR control filters every 200 ms (4.2M params, 5.3G MACs), trained with an L1 loss on the *in-ear residual*
+2. **DSP pipeline** (Bela): applies the filters via [[concepts/hybrid-partitioned-convolution|hybrid partitioned convolution]], 113 μs end-to-end latency
 
-**Performance**: 9.6 dB noise reduction (no calibration), 11.2 dB (with user-specific calibration). Tested across 8 environments × 11 users.
+**Performance**: 9.6 dB mean reduction over 100–1000 Hz (no calibration), 11.2 dB (with a ~512-byte ESS secondary-path calibration, +1.6 dB and inter-user std 1.5→0.4 dB) — within 4.3 dB of the 14.7 dB Wiener oracle that needs an actual in-ear microphone. Tested across 8 unseen environments × 11 unseen users; ANC + music playback shows no intelligibility penalty.
 
 **Key challenge**: The open-ear design means anti-noise leaks away and ambient sound enters freely. The neural network must model this complex acoustic coupling in real-time.
 
-**A signal-side alternative (Watanabe et al. 2026)**: instead of controlling the noise, adapt the *playback signal* to the same open-ear constraints — weak low-frequency speaker output and freely-entering low-frequency environmental noise. [[sources/watanabe-2026-low-frequency-harmonic-control|Watanabe et al. 2026]]'s [[concepts/low-frequency-harmonic-control|LFHC]] post-filter suppresses the speech fundamental and emphasizes the 2nd/3rd harmonics, moving energy out of the masked, output-limited band. Where Yuan et al.'s virtual in-ear perception needs a neural network updating every 200 ms plus a 4-channel 2048-tap DSP pipeline, LFHC needs one comb-filter tap plus a short moving-average low-pass. The form factor again drives the architecture — but toward DSP-minimal *signal adaptation* rather than noise control, trading what ANC cannot achieve in an open field (noise reduction) for what it can (intelligibility gain at −5 dB(A) SNR without volume increase).
+**A signal-side alternative (Watanabe et al. 2026)**: instead of controlling the noise, adapt the *playback signal* to the same open-ear constraints — weak low-frequency speaker output and freely-entering low-frequency environmental noise. [[sources/watanabe-2026-low-frequency-harmonic-control|Watanabe et al. 2026]]'s [[concepts/low-frequency-harmonic-control|LFHC]] post-filter suppresses the speech fundamental and emphasizes the 2nd/3rd harmonics, moving energy out of the masked, output-limited band. Where Yuan et al.'s virtual in-ear sensing needs a neural network updating every 200 ms plus a 4-channel 2048-tap DSP pipeline, LFHC needs one comb-filter tap plus a short moving-average low-pass. The form factor again drives the architecture — but toward DSP-minimal *signal adaptation* rather than noise control, trading what ANC cannot achieve in an open field (noise reduction) for what it can (intelligibility gain at −5 dB(A) SNR without volume increase).
 
 ---
 
@@ -238,8 +237,12 @@ The specific implementation of each step differs, but the **sense-act-adapt loop
 - [[concepts/feedback-anc|Feedback ANC]]
 - [[concepts/hybrid-anc|Hybrid ANC]]
 - [[concepts/occlusion-effect-cancellation|Occlusion Effect Cancellation]]
+- [[concepts/virtual-in-ear-sensing|Virtual In-Ear Sensing]] — the error-microphone-free enabler of the smart-glasses application
+- [[concepts/hybrid-partitioned-convolution|Hybrid Partitioned Convolution]] — real-time long-filter replay on wearables
+- [[concepts/open-ear-headphones|Open-Ear Headphones]] — the form-factor class driving the glasses constraint set
 
 ## Related Sources
 
 - [[sources/watanabe-2026-low-frequency-harmonic-control|Watanabe et al. 2026: Low-Frequency Harmonic Control for Speech Intelligibility in Open-Ear Headphones]] — signal-side alternative to open-ear ANC: reallocate harmonic energy instead of canceling noise
+- [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — first working open-ear ANC: virtual in-ear sensing + FiLM secondary-path conditioning, 11.2 dB with per-user calibration
 - [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]] — sealed-fitting alternative to the open-fitting trade-off: active OEC restores own-voice naturalness on closed hardware

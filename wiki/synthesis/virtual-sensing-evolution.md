@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-18
-updated: 2026-09-12
+updated: 2026-10-22
 tags:
   - active-noise-control
   - deep-learning
@@ -12,6 +12,7 @@ tags:
 sources:
   - raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md
   - raw/papers/lu-2021-survey-active-noise-control-linear/full-text.md
+  - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
 ---
 # Evolution of Virtual Sensing in Active Noise Control
 
@@ -101,6 +102,7 @@ The state-of-the-art is shifting toward data-driven, time-variant observation fi
 - **CNN Neural Observation Filter[^7]**: First demonstration of online observation filter estimation using an encoder-decoder CNN (367k params). Takes GCC-PHAT features between remote microphones plus virtual microphone coordinates as input. Enables asynchronous computation (2 Hz inference on co-processor, real-time filtering on DSP). Achieves −33.53 dB NMSE with accurate position data; position information alone accounts for ~20 dB improvement.
 - **Obs-TasNet[^5]**: Follow-up work replacing the CNN encoder-decoder with a modified Conv-TasNet, reducing parameters by ~40% while improving accuracy. Demonstrates adaptation to time-variant environments with moving listeners.
 - **Metric Learning[^6]**: Recent preprints suggest using metric learning to make virtual sensing transferable across different environments, reducing the need for site-specific training.
+- **Virtual In-Ear Sensing on Open-Ear Wearables (Yuan 2026)**: [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026]] take the neural paradigm to its most deployment-constrained setting yet — open-ear smart glasses with **no error microphone of any kind** (physical or virtual-location) — and make a structural change: the network ([[concepts/virtual-in-ear-sensing|virtual in-ear sensing]]) estimates the **ANC control filters** directly rather than the virtual error signal, trained with an L1 loss on the measured in-ear residual. User anatomy enters not as retraining but as FiLM conditioning on a ~512-byte secondary-path estimate, and the estimated 2048-tap filters replay on a wearable DSP via [[concepts/hybrid-partitioned-convolution|hybrid partitioned convolution]] (113 µs end-to-end, 200 ms filter refresh). Result: 11.2 dB mean reduction over 100–1000 Hz across 11 unseen users × 8 unseen environments, within 4.3 dB of the error-mic Wiener oracle — the first virtual-sensing ANC system demonstrated on untethered wearable hardware, and evidence that filter-domain estimation generalizes across users better than signal-domain reconstruction.
 
 ---
 
@@ -139,6 +141,7 @@ Note: Secondary path interpolation (DTW-based) addresses the moving-listener pro
 - [[concepts/kalman-filter|Kalman Filter]]
 - [[concepts/state-space-model|State-Space Model]]
 - [[concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
+- [[concepts/virtual-in-ear-sensing|Virtual In-Ear Sensing]] — filter-domain virtual sensing for error-mic-free wearables
 
 ## Related Synthesis
 
@@ -157,4 +160,5 @@ Note: Secondary path interpolation (DTW-based) addresses the moving-listener pro
 - [[sources/holzmuller-2026-dtw-secondary-path-anc|Holzmüller & Sontacchi 2026: DTW for Secondary Path Interpolation in ANC]]
 - [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]]
 - [[sources/lu-2021-survey-active-noise-control-linear|Lu Lu, Kai-Li Yin, Rodrigo C. de Lamare, Zongsheng Zheng, Yi Yu, Xiaomin Yang & Badong Chen 2021: A Survey on Active Noise Control Techniques — Part I: Linear Systems]]
+- [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — virtual in-ear sensing: network-estimated control filters replace both the error microphone and the virtual error signal
 

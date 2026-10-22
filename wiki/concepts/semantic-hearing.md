@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-27
-updated: 2026-09-27
+updated: 2026-10-22
 sources:
   - raw/papers/veluri-2023-semantic-hearing/full-text.md
+  - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
 tags:
   - target-sound-extraction
   - hearables
@@ -33,6 +34,7 @@ The system exploits modern [[concepts/active-noise-control|active noise cancella
 - Unlike speech enhancement systems that treat all non-speech sounds as noise, semantic hearing assigns semantics to *all* sound classes; speech is just one of 20 classes.
 - Unlike acoustic transparency or adaptive transparency (e.g., AirPods Pro loud-sound reduction), it lets the user pick which classes to hear, not merely reduce loudness.
 - [[concepts/binaural-target-sound-extraction|Binaural target sound extraction]] is the core enabling technology.
+- Open-ear devices such as smart glasses are a complementary platform: their passive acoustic transparency already admits all real-world sound, so the semantic-hearing problem inverts — attenuating *unwanted* sound. [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026]] supply the missing "attenuate" half on such hardware, demonstrating broadband ANC on open-ear glasses via [[concepts/virtual-in-ear-sensing|virtual in-ear sensing]], which could serve as the attenuation stage under a future open-ear semantic-hearing system.
 
 ## Open Issues
 
@@ -48,7 +50,9 @@ The system exploits modern [[concepts/active-noise-control|active noise cancella
 - [[concepts/active-noise-control|Active Noise Control]]
 - [[concepts/cocktail-party-problem|Cocktail-Party Problem]]
 - [[concepts/audio-latency|Audio Latency]]
+- [[concepts/virtual-in-ear-sensing|Virtual In-Ear Sensing]] — potential attenuation stage for a future open-ear semantic-hearing system
 
 ## Related Sources
 
 - [[sources/veluri-2023-semantic-hearing|Veluri et al. 2023: Semantic Hearing]]
+- [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — the attenuation stage for a potential open-ear counterpart of semantic hearing

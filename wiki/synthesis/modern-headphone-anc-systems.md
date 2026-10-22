@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-10-07
+updated: 2026-10-22
 tags:
   - active-noise-control
   - bone-conduction
@@ -17,6 +17,7 @@ sources:
   - raw/papers/veluri-2023-semantic-hearing/full-text.md
   - raw/papers/watanabe-2026-low-frequency-harmonic-control/full-text.md
   - raw/papers/rao-2026-keep-speech-anc/full-text.txt
+  - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
   - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
 ---
 
@@ -189,6 +190,7 @@ The industry is moving beyond basic "on/off" transparency toward **context-aware
 
 The rise of Open-Ear (OWS) devices creates a new ANC challenge: the primary noise path is never fully attenuated.
 
+- **Demonstrated open-ear ANC, no error mic**: [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026]] report the first working ANC on open-ear smart glasses — the ear stays unoccluded and there is no in-ear error microphone at all. [[concepts/virtual-in-ear-sensing|Virtual in-ear sensing]] replaces the error sensor with a network that regenerates 2048-tap control filters every 200 ms (FiLM-conditioned on a ~512-byte per-user secondary-path estimate), and [[concepts/hybrid-partitioned-convolution|hybrid partitioned convolution]] replays them on the DSP at 113 µs end-to-end — 11.2 dB mean reduction over 100–1000 Hz with calibration across 11 unseen users and 8 unseen environments, within 4.3 dB of the error-mic Wiener oracle. This upgrades open-ear ANC from a dual-compensation analysis problem to a demonstrated system, and supplies the attenuation stage that open-ear counterparts of the awareness (§2) and semantic-hearing (§5.2) layers would need.
 - **Hybrid ANC with Dual Compensation**: As analyzed by [[sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026]], open-ear systems require dual compensation filters to reconstruct target signals accurately in dynamic environments where multiple noise sources (external vs. internal) compete.
 - **Preserve instead of reconstruct**: [[sources/xiao-2023-spatially-selective-anc|Xiao, Xu & Zhao 2023]] show on open-fitting AR glasses that a Frost-type spatial constraint on the hybrid ANC cost function leaves the desired-direction physical wave unaltered at the error microphone — avoiding the latency, energy (~50× more secondary-source energy for reconstruct-based systems), and binaural-cue loss of synthetic reconstruction ([[concepts/spatially-selective-anc|Spatially Selective ANC]]).
 - **Signal adaptation before control**: [[sources/watanabe-2026-low-frequency-harmonic-control|Watanabe et al. 2026]] sidestep the leakage problem entirely — instead of anti-noise, their [[concepts/low-frequency-harmonic-control|LFHC]] post-filter reallocates speech harmonic energy away from the masked, output-limited low frequencies (suppress $f_0$, emphasize the 2nd/3rd harmonics via a single-tap comb filter), improving open-ear playback intelligibility at −5 dB(A) SNR — orders of magnitude cheaper than the dual-compensation or spatial-constraint approaches above.
@@ -249,6 +251,8 @@ This requires a dedicated DSP (e.g., Qualcomm QCC5141, ~200 MIPS capability).
 - [[concepts/whispering-speech-recognition|Whispering Speech Recognition]]
 - [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
 - [[concepts/minimum-variance-control|Minimum Variance Control]]
+- [[concepts/virtual-in-ear-sensing|Virtual In-Ear Sensing]] — error-microphone-free ANC for the open-ear form factor
+- [[concepts/hybrid-partitioned-convolution|Hybrid Partitioned Convolution]] — µs-latency replay of long network-generated control filters
 
 ## Related Sources
 
@@ -263,6 +267,7 @@ This requires a dedicated DSP (e.g., Qualcomm QCC5141, ~200 MIPS capability).
 - [[sources/watanabe-2026-low-frequency-harmonic-control|Watanabe et al. 2026: Low-Frequency Harmonic Control]] — open-ear playback intelligibility via signal adaptation (harmonic energy reallocation) rather than noise control
 - [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — conversation awareness without transparency mode: zero-delay reference de-speaking keeps the physical speech wave while ANC cancels only noise
 - [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]] — the own-voice naturalness layer: OEC resolves the occlusion-transparency conflict on sealed hardware via FF (hear-through) + FB control with correction-filter decoupling
+- [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — first demonstrated open-ear ANC without an in-ear error microphone; the attenuation layer for future open-ear acoustic-computing platforms
 
 ## Related Synthesis
 

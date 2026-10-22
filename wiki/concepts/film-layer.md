@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-10-03
+updated: 2026-10-22
 sources:
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
   - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
   - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
   - raw/papers/huang-2026-neural-directional-filtering/full-text.md
+  - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
 tags:
   - deep-learning
   - neural-networks
@@ -56,6 +57,10 @@ In [[concepts/film-osn|FiLM-OSN]] (Uphaus et al. 2026), FiLM is the steering mec
 
 In [[concepts/direction-preserving-anc|DP-ANC]] (Yang et al. 2026), FiLM steers a control-filter **estimation** network rather than a signal filter: a periodic code $[\cos\theta_d, \sin\theta_d]^T$ of the user-specified desired direction is embedded by a small MLP, and a per-block FiLM head maps that embedding to channel-wise $(\gamma_\ell, \beta_\ell)$ that modulate each of three Conv–BN blocks of the acoustic encoder — $h_\ell = \mathrm{ReLU}[(1+\gamma_\ell)\odot u_\ell + \beta_\ell]$ — before the decoder emits the full multichannel FIR ANC control-filter bank. Zero-initializing the FiLM heads makes the initial modulation an identity mapping. This extends FiLM's steering role from neural directional filtering (FiLM-OSN) into active noise control, where the conditioned output is a filter bank rather than an audio signal.
 
+### Secondary-Path Conditioning (Open-Ear ANC)
+
+In [[concepts/virtual-in-ear-sensing|virtual in-ear sensing]] ([[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026]]), FiLM makes the filter-estimation network user-adaptive without retraining: the wearer's 1024-tap secondary-path estimate (from an ESS sweep) is FFT-transformed and compressed by a small MLP into a 128-d embedding, from which a FiLM head produces the scale/bias pair $(\gamma, \beta)$ modulating the U-Net's LSTM bottleneck — the shared network weights stay fixed while the modulation tailors the estimated 2048-tap ANC control filters to each wearer's acoustic anatomy. The entire user-specific state is the ~512-byte secondary-path estimate, versus the ~16 MB of network weights that per-user retraining would require. With calibrated secondary paths the open-ear system gains +1.6 dB mean reduction and inter-user variability shrinks from 1.5 dB to 0.4 dB std.
+
 ### Visual Reasoning (Original Application)
 
 FiLM was originally proposed for visual question answering, where image features are conditioned on natural language questions.
@@ -93,6 +98,7 @@ The review reports that, in TSE settings, the choice of fusion layer has "rather
 - [[concepts/film-jnf|FiLM-JNF]]
 - [[concepts/td-speakerbeam|TD-SpeakerBeam]]
 - [[concepts/angle-feature|Angle Feature]]
+- [[concepts/virtual-in-ear-sensing|Virtual In-Ear Sensing]] — FiLM conditions filter estimation on the wearer's secondary-path embedding (~512 bytes/user instead of retraining)
 
 ## Related Sources
 
@@ -101,3 +107,4 @@ The review reports that, in TSE settings, the choice of fusion layer has "rather
 - [[sources/uphaus-2026-directivity-low-latency|Uphaus et al. 2026: Directivity-Conditioned Low-Latency Neural Filtering]] — FiLM steers directivity patterns in the 10 ms-latency FiLM-OSN
 - [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026: Neural Directional Filtering with a Compact Microphone Array]] — FiLM-JNF: sinusoidal angle embedding mapped to per-feature affine parameters for continuous steering
 - [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC]] — FiLM conditions control-filter estimation on the desired direction
+- [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — FiLM secondary-path conditioning: 1024-tap ESS estimate → MLP embedding → (γ, β) modulating the LSTM bottleneck, ~512 bytes/user vs ~16 MB retraining

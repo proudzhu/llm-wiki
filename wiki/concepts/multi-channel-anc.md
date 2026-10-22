@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-09-12
+updated: 2026-10-22
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/he-2026-neural-projection-filter-anc/full-text.md
@@ -9,6 +9,7 @@ sources:
   - raw/papers/lu-2021-survey-active-noise-control-linear/full-text.md
   - raw/papers/wang-2024-computation-efficient-virtual-sensing/full-text.txt
   - raw/papers/wang-2026-directional-sfanc-reverberant/full-text.md
+  - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
 tags:
 - active-noise-control
 - dsp
@@ -38,6 +39,10 @@ Single-channel ANC works well at a single point but cannot provide adequate nois
 ### Multiple-Channel Feedforward (MIMO)
 - Multiple reference sensors → multiple secondary sources → multiple error sensors
 - Uses the **multichannel FxLMS algorithm**
+
+### MISO with a Virtual Error Point (Open-Ear Wearables)
+
+[[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026]] run an 8-reference, single-secondary-source (MISO) feedforward system on open-ear smart glasses in which the error sensor is not physical at all: the control target is the *in-ear residual* at the blocked ear-canal entrance, estimated by a neural network from the frame microphones ([[concepts/virtual-in-ear-sensing|virtual in-ear sensing]]). With no in-ear error microphone, multichannel FxLMS cannot close its adaptation loop; instead the network regenerates 2048-tap FIR filters every 200 ms, applied on the DSP via [[concepts/hybrid-partitioned-convolution|hybrid partitioned convolution]] (113 µs end-to-end). This is the multi-channel extreme of the virtual-error-point idea — the entire multi-reference machinery serves a single, unobservable, user-dependent target.
 
 ## Multichannel FxLMS Algorithm
 
@@ -93,6 +98,8 @@ Every added secondary loudspeaker and reference microphone adds another loudspea
 - [[concepts/acoustic-feedback|Acoustic Feedback]] — loudspeaker-to-reference coupling, the MIMO stability limiter
 - [[concepts/relative-transfer-matrix|Relative Transfer Matrix (ReTM)]] — compresses the per-path feedback model into one group-to-group matrix
 - [[concepts/covariance-subtraction|Covariance Subtraction]] — identifies the mapping without silencing the primary noise
+- [[concepts/virtual-in-ear-sensing|Virtual In-Ear Sensing]] — MISO variant whose "error sensor" is a learned in-ear residual
+- [[concepts/hybrid-partitioned-convolution|Hybrid Partitioned Convolution]] — real-time replay of long network-generated control filters
 
 ## PINN-Assisted Multi-Channel ANC
 
@@ -108,4 +115,5 @@ In the PINN-assisted ANC system ([[sources/zhang-2024-active-noise-control-sound
 - [[sources/lu-2021-survey-active-noise-control-linear|Lu Lu, Kai-Li Yin, Rodrigo C. de Lamare, Zongsheng Zheng, Yi Yu, Xiaomin Yang & Badong Chen 2021: A Survey on Active Noise Control Techniques — Part I: Linear Systems]]
 - [[sources/wang-2024-computation-efficient-virtual-sensing|Wang, Ji, Shen, Shi & Gan 2024: Computation-Efficient Virtual Sensing with MCALMS]]
 - [[sources/wang-2026-directional-sfanc-reverberant|Wang, Luo, Li, Shi, Ji, Yang & Gan 2026: Directional Selective Fixed-Filter ANC Based on CNN in Reverberant Environments]]
+- [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — 8-reference MISO feedforward ANC with a virtual (network-estimated) error point at the ear
 

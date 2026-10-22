@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-09-21
+updated: 2026-10-22
 sources:
   - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
   - raw/papers/hu-2026-abse-net/full-text.md
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
   - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
+  - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
 tags:
   - active-noise-control
   - hearables
@@ -65,6 +66,10 @@ balancing noise reduction against speech distortion via a positive scalar $\beta
 
 SSANC is closer in spirit to combining beamforming and ANC than to spectral methods: the **objective itself** encodes the desired spatial response.
 
+## Complement: Non-Selective ANC on Open-Ear Glasses
+
+On the same open-ear hardware class (glasses with outer frame microphones, no in-ear error mic), [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026]] demonstrate the *non-selective* complement of SSANC: broadband cancellation of ambient noise toward a virtual point at the ear, with no directional preservation term. The two share the virtual-error-point trick — Yuan 2026's [[concepts/virtual-in-ear-sensing|virtual in-ear sensing]] network plays the role that the error microphone plays in SSANC — but differ in objective: SSANC constrains the desired-direction response, while Yuan 2026 cancels everything and delegates any desired-sound reintroduction to the open-ear device's natural acoustic transparency.
+
 ## Learned Alternative: DP-ANC (Yang 2026)
 
 [[concepts/direction-preserving-anc|DP-ANC]] (Yang et al. 2026) replaces the per-observation analytical solve with an offline-trained, direction-conditioned network that estimates the complete FIR control-filter bank in a single forward pass. Two formulation differences are notable: (i) the preservation term penalizes the **desired-induced control response** $\tilde{\mathbf{X}}_d\mathbf{w}$ itself, rather than deviation from a prescribed desired-direction response (no ReIR model or target delay); (ii) the cancellation and preservation terms are built from **separated noise/desired components** at the error microphone, evaluated through the secondary path during differentiable training. Over 3300 simulated cases, the learned frontier dominates the analytical SSANC frontier by 0.7–3.1 dB NR at matched mean distortion, with one filter-bank estimate costing 0.00946 vs ≈29.4 GMACs — though the analytical setting reaches lower absolute distortion at its most preservation-oriented operating points. Both designs share the same physical limit: the achievable cancellation–preservation region is bounded by the reference array's spatial separability (manifold coherence).
@@ -102,6 +107,7 @@ A closely related but distinct line targets **open-fit hearing aids**, where the
 - [[concepts/active-binaural-speech-enhancement|Active Binaural Speech Enhancement]]
 - [[concepts/abse-net|ABSE-NET]]
 - [[concepts/direction-preserving-anc|Direction-Preserving ANC (DP-ANC)]]
+- [[concepts/virtual-in-ear-sensing|Virtual In-Ear Sensing]] — the non-selective complement on open-ear glasses, with a network-estimated virtual error point
 
 ## Related Sources
 
@@ -110,4 +116,5 @@ A closely related but distinct line targets **open-fit hearing aids**, where the
 - [[sources/hu-2026-abse-net|Hu et al. 2026: ABSE-NET — Active Binaural Speech Enhancement for Open-Fit Hearing Aids]]
 - [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]]
 - [[sources/yang-2026-direction-preserving-anc|Yang et al. 2026: Direction-Preserving ANC with a Conditional Control-Filter Estimation Network]] — learned frontier comparison against analytical SSANC
+- [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — non-selective broadband ANC on the same open-ear hardware class, sharing the virtual-error-point idea
 
