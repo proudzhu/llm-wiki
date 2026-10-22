@@ -6,11 +6,15 @@ the source page (wiki/sources/{slug}.md) and applies the append-only update
 pattern from page-templates.md automatically:
 
   1. frontmatter `updated:` -> today
-  2. new bullet under `## Key Contributions` (or `## Notable Contributions`).
-     Pages using a bold inline label instead of a heading —
-     `**Key Contributions**:` followed by bullets (e.g. israel-cohen.md) —
-     are also supported; the bullet is appended after the last bullet of the
-     label's block.
+  2. new bullet under `## Key Contributions` (or `## Notable Contributions`,
+     or `## Research Contributions`). Pages using a bold inline label instead
+     of a heading — `**Key Contributions**:` followed by bullets (e.g.
+     israel-cohen.md) — are also supported; the bullet is appended after the
+     last bullet of the label's block. Pages organizing contributions into
+     `### N. Topic` subsections (e.g. boaz-rafaely.md's `## Research
+     Contributions`, pitfall #65) get a NEW numbered subsection titled after
+     the paper, so the bullet never lands under an unrelated topic:
+     ### N+1. Paper Title
      - Co-author of "Short Title" (Venue, Year) [--note] — [[sources/{slug}|Authors Year]]
      Known conference venues are abbreviated automatically, e.g.
      "IEEE International Conference on Acoustics, Speech and Signal
@@ -48,13 +52,21 @@ import argparse, datetime, os, re, sys
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-CONTRIB_HEADINGS = ('## Key Contributions', '## Notable Contributions')
+CONTRIB_HEADINGS = ('## Key Contributions', '## Notable Contributions',
+                    '## Research Contributions')
 
 # Some entity pages use a bold inline label followed by bullets instead of a
 # level-2 heading, e.g. israel-cohen.md: `**Key Contributions**:` then `- ...`
 # bullets. The Wang 2021 ingest silently skipped such a page (bullet never
 # added) because find_heading_section only matched `##` headings.
 BOLD_LABEL_RE = re.compile(r'^\*\*(Key Contributions|Notable Contributions)\*\*:?\s*$')
+
+# Some entity pages (e.g. boaz-rafaely.md) organize `## Research
+# Contributions` into numbered `### N. Topic` subsections. Appending a plain
+# bullet to the section end would land it under the LAST subsection —
+# mislabeling the paper's topic (pitfall #65). Instead, a new numbered
+# subsection is created for the bullet.
+SUBSECTION_RE = re.compile(r'^###\s+(\d+)')
 
 # --- Venue abbreviation (pitfalls.md #62) ---
 # Zotero stores proceedings under verbose titles like "IEEE International
@@ -240,6 +252,29 @@ def append_bullet(lines, start, end, bullet):
     return new_lines
 
 
+def append_contrib_subsection(lines, start, end, title, bullet):
+    """Append a new numbered `### N. {title}` subsection at the end of a
+    contributions section organized into `### N.` subsections (pitfall #65).
+    N continues from the highest existing subsection number. Returns lines.
+    """
+    last_num = 0
+    for i in range(start + 1, end):
+        m = SUBSECTION_RE.match(lines[i])
+        if m:
+            last_num = max(last_num, int(m.group(1)))
+    insert_at = end
+    while insert_at > start + 1 and lines[insert_at - 1].strip() == '':
+        insert_at -= 1
+    block = ['\n', f'### {last_num + 1}. {title}\n', '\n', bullet + '\n']
+    new_lines = lines[:insert_at] + block + lines[insert_at:]
+    # Separate the new bullet from the following content (e.g. the next
+    # '## ' heading) with a blank line.
+    j = insert_at + len(block)
+    if j < len(new_lines) and new_lines[j].strip() != '':
+        new_lines.insert(j, '\n')
+    return new_lines
+
+
 def format_venue_year(venue, year):
     """Format the '(Venue, Year)' parenthetical for contribution bullets.
 
@@ -306,6 +341,13 @@ def update_entity(path, slug, display, title, venue, year, role, note, today):
         print(f"WARN: no {' or '.join(CONTRIB_HEADINGS)} section and no "
               f"'**Key Contributions**:' label in {path}; bullet not added",
               file=sys.stderr)
+    elif any(SUBSECTION_RE.match(lines[i]) for i in range(start + 1, end)):
+        # Subsection-style page (pitfall #65): a plain bullet would land under
+        # the last `### N.` topic; create a new numbered subsection instead.
+        lines = append_contrib_subsection(lines, start, end, title, contrib_bullet)
+        print(f"NOTE: {path} organizes contributions into '### N.' subsections — "
+              f"added a new numbered subsection titled after the paper; "
+              f"polish its heading to a short topical title")
     else:
         lines = append_bullet(lines, start, end, contrib_bullet)
 
