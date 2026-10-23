@@ -666,4 +666,6 @@
 | [[entities/saksham-bhutani\|Saksham Bhutani]] | CMU — smart-glasses ANC prototype development | 2026-10-22 |
 | [[entities/swarun-kumar\|Swarun Kumar]] | CMU professor, corresponding author — co-supervised open-ear ANC on smart glasses | 2026-10-22 |
 | [[entities/nitay-peled\|Nitay Peled]] | Researcher (Ben-Gurion University); first author of AR-glasses virtual sensing ANC with directional robustness (EUSIPCO 2026) | 2026-10-21 |
+| [[entities/bong-ki-lee\|Bong-Ki Lee]] | Hanyang University researcher; first author of the first DNN-regression packet loss concealment algorithm (TASLP 2016). | 2026-10-23 |
+| [[entities/joon-hyuk-chang\|Joon-Hyuk Chang]] | Associate Professor at Hanyang University; speech coding, enhancement, recognition, and adaptive signal processing. | 2026-10-23 |
 

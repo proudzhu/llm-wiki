@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-08-14
-updated: 2026-09-12
+updated: 2026-10-23
 sources:
+  - raw/papers/lee-2016-dnn-plc/full-text.md
   - raw/papers/valin-2022-real-time-plc/full-text.md
   - raw/papers/valin-2018-lpcnet/full-text.md
 tags:
@@ -35,6 +36,7 @@ The traditional approach (Sanneck, Stenger, Younes & Girod, GLOBECOM 1996) repea
 
 Deep neural network (DNN) techniques have been investigated for PLC, including:
 
+- DNN regression on log-power spectra + phase — [[sources/lee-2016-dnn-plc|Lee & Chang 2016]], the earliest DNN-based PLC: two feed-forward DNNs regress the missing frame's spectral features from 11 preceding good frames (see [[concepts/dnn-regression-plc|DNN Regression PLC]])
 - End-to-end ConcealNet (Mohamed & Schuller, 2020)
 - Adaptive recurrent neural network speech prediction (Lotfidereshgi & Gournay, 2018)
 - WaveNetEQ — autoregressive WaveRNN-based PLC (Stimberg et al., Asilomar 2020)
@@ -79,5 +81,6 @@ The Interspeech 2022 Audio Deep Packet Loss Concealment Challenge ([Diener et al
 
 ## Related Sources
 
+- [[sources/lee-2016-dnn-plc|Lee & Chang 2016: DNN-Based Packet Loss Concealment]] — first DNN-regression PLC (log-power spectra + phase, RBM pre-training), evaluated on LSD/PESQ/MOS and network speech recognition
 - [[sources/valin-2022-real-time-plc|Valin et al. 2022: Real-Time Packet Loss Concealment With Mixed Generative and Predictive Model]] — hybrid generative + predictive architecture, 2nd place Interspeech 2022 PLC Challenge
 - [[sources/valin-2018-lpcnet|Valin & Skoglund 2018: LPCNet]] — the autoregressive neural vocoder whose excitation/LPC division of labor underlies the generative branch
