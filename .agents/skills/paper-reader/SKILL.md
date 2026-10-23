@@ -90,6 +90,26 @@ Exact invocations for every script (all prefixed with `uv run python .agents/ski
 | 12 (all) | `verify_all.py --slug SLUG` — runs 12a→12b→12c in one call, fail-fast; preferred over three separate calls (one blocking call instead of three; the mkdocs build alone is 60–110 s) |
 | 13 | `commit_ingest.py --slug SLUG --message "ingest: Short Title (Author Year)" --entities ... --concepts ... --synthesis ...` |
 
+**Shell quote-stripping (Windows)** — if a command with a quoted argument exits 2 with `unrecognized arguments:` naming the word after the first space, the shell wrapper has dropped the quote characters (both `"..."` and `'...'`; `pitfalls.md` #66). Do not hand-edit log/index files or fall back to raw git over this. Workarounds in order of preference: (i) **file-based flags** — payload in a file, only the filename on the command line (`append_log.py --file .tmp_log_entry.md`, `update_indexes.py batch --manifest .tmp_ingest_manifest.yaml`, `git commit -F .tmp_commit_msg.txt`) — why Step 10's `batch` and Step 11's `--file` need nothing special; (ii) **single-token arguments** — one distinctive word instead of a quoted phrase (`zotero_fetch.py search full-band`); (iii) for the flags that must carry spaces (`--title`, `--message`), a **temp `sys.argv` wrapper** — the argument list lives inside a Python file the shell never parses:
+
+```python
+# .tmp_run_commit.py  (delete after use)
+import sys, runpy
+sys.argv = ['commit_ingest.py',
+            '--slug', 'SLUG',
+            '--message', 'ingest: Short Title (Author Year)',
+            '--entities', 'author1', 'author2',
+            '--concepts', 'concept1', '--synthesis', 'synth1']
+runpy.run_path('.agents/skills/paper-reader/scripts/commit_ingest.py',
+               run_name='__main__')
+```
+
+```bash
+uv run python .tmp_run_commit.py   # command line carries no quoted payload
+```
+
+Verify the effect landed (Grep `wiki/log.md` / check `git log`), then delete the wrapper. Proven twice, first-try successes (Nguyen 2023 ingest: log append + commit).
+
 ## References (load on demand)
 
 | Reference | When to load |
@@ -141,7 +161,7 @@ uv run python .agents/skills/paper-reader/scripts/zotero_fetch.py metadata ZOTER
 
 Note the **Zotero key** (e.g., `8ZWV2E4T`) and **PDF attachment key** (e.g., `5H7GWRF3`).
 
-**Keep search terms short (3–5 distinctive words)** — searching with the full paper title times out (Sun 2024 ingest: the complete title timed out; `"directional voice activity detection"` found it instantly, `pitfalls.md` #45).
+**Keep search terms short (3–5 distinctive words)** — searching with the full paper title times out (Sun 2024 ingest: the complete title timed out; `"directional voice activity detection"` found it instantly, `pitfalls.md` #45). Under the current Windows shell this has a second dimension: quoted phrases are stripped into multiple arguments (`pitfalls.md` #66), so when the shell mangles quotes, fall back to a **single distinctive word** (`search full-band` found the Nguyen 2023 paper instantly).
 
 **Never parallelize Zotero API calls** — the Zotero local HTTP API (localhost:23119) serves requests serially; three concurrent `zotero_fetch.py search` calls in a dual ingest all timed out with `TimeoutError`, and sequential retries succeeded immediately (`pitfalls.md` #60). Issue every Zotero-touching call (`zotero_fetch.py search`/`metadata`, `prepare_paper.py --pdf-key`) one at a time, even in a multi-paper ingest where searches for different papers look independent.
 
@@ -373,6 +393,8 @@ uv run python .agents/skills/paper-reader/scripts/append_log.py --op ingest \
 
 The script takes **no positional arguments** — `--op`, `--title`, and one of `--body`/`--file`/`--stdin` are required flags. Calling it as `append_log.py ingest "Title" --details "..."` exits 2 with the usage message (`pitfalls.md` #50); check `--help` first if unsure of a script's signature.
 
+**Windows shell note**: `--title` (and an inline `--body`) carries spaces, so if the shell strips quotes (`unrecognized arguments:` naming the word after the first space), invoke via the temp `sys.argv` wrapper — template in the "Script Command Quick Reference" section (`pitfalls.md` #66). Prefer `--file` for the payload; only the title needs the wrapper.
+
 Entry body format (temp file):
 
 ```markdown
@@ -437,6 +459,8 @@ uv run python .agents/skills/paper-reader/scripts/commit_ingest.py \
 
 Stages `raw/papers/{slug}/`, `wiki/sources/{slug}.md`, all index files, `wiki/log.md`, and the specified entity/concept/synthesis pages. Verifies no `paper.pdf` is staged. **Auto-stages** any other modified/untracked file under `wiki/` (catches Step 8 edits to existing concept/entity pages that would otherwise be dropped) — pass `--strict` to disable. Use `--no-verify` only if the pre-commit hook has environment issues unrelated to your changes.
 
+**Windows shell note**: `--message` carries spaces; if the shell strips quotes (`unrecognized arguments:` after `--message`), invoke via the temp `sys.argv` wrapper — copy-paste template in the "Script Command Quick Reference" section (`pitfalls.md` #66). The wrapper runs the same script with the same guards; verify the commit landed (`git log --oneline -1`) and delete the wrapper afterward.
+
 **Duplicate-build skip (automatic)**: if Step 12c's `build_check.py` passed within the last hour and no build input (`wiki/`, `raw/papers/`, `mkdocs.yml`, `plugins/`, `hooks.py`) has been modified since, the script commits with `--no-verify` itself and prints a `NOTE:` — the pre-commit hook's ~60 s rebuild is guaranteed redundant. If you edit anything after 12c, the script detects it and runs the hook normally.
 
 **Expected post-commit noise**: `WARN: uncommitted changes remain after commit` listing `.obsidian/*` files is normal — Obsidian config is deliberately not part of ingests. Only investigate if a `wiki/` or `raw/` path appears in the remaining list.
@@ -446,5 +470,5 @@ Stages `raw/papers/{slug}/`, `wiki/sources/{slug}.md`, all index files, `wiki/lo
 - **`raw/` immutability exception**: replacing remote image URLs with local paths in `full-text.md` is allowed.
 - **Avoid `\bm{}` in LaTeX math** — MathJax does not load the `bm` package. Use `\mathbf{x}` or `\boldsymbol{x}` instead.
 - **Never put LaTeX math in a wikilink alias** — `[[concepts/foo|$\mathcal{L}$]]` breaks the `fix_obsidian_escapes` pipe-escaping and aborts `mkdocs build --strict` (`pitfalls.md` #44). Use a plain-text alias (`[[concepts/foo|Spectrally Adaptive Loss]]`) and keep the math outside the wikilink.
-- **Always commit via `commit_ingest.py`** — manual `git add`/`git commit` bypasses its guards: it refuses to stage `paper.pdf`, auto-stages all `wiki/` modifications, and avoids PowerShell quoting entirely (heredoc `<<'EOF'` is a parse error on PowerShell 5.1, `pitfalls.md` #37). If a manual commit is unavoidable: exclude `paper.pdf` and `.obsidian/`, and pass multi-paragraph messages as multiple `-m` flags — never a heredoc.
+- **Always commit via `commit_ingest.py`** — manual `git add`/`git commit` bypasses its guards: it refuses to stage `paper.pdf`, auto-stages all `wiki/` modifications, and avoids shell quoting entirely (heredoc `<<'EOF'` is a parse error on PowerShell 5.1, `pitfalls.md` #37). If a manual commit is unavoidable: exclude `paper.pdf` and `.obsidian/`, and pass the message via `git commit -F <file>` or multiple `-m` flags — never a heredoc. If quote-stripping blocks the script's own `--message` flag, the escape hatch is the temp `sys.argv` wrapper (pitfalls #66) — still *not* raw git, which loses the staging guards.
 - **Todo list structure**: one todo per workflow step (1–13), in numerical order. Treat Steps 3a–3e as a single "extract content" todo. Treat Step 12a–12c as a single "build verification" todo. If Step 9 triage finds no candidates, mark that todo `completed` with "none relevant — grep triage" rather than leaving it `pending`.
