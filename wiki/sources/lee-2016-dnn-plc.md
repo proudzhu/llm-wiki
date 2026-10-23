@@ -177,4 +177,4 @@ Weights are updated iteratively with learning rate $\lambda$: $(\mathbf{W}^l, \m
 
 ## Related Synthesis
 
-(No synthesis pages updated — triage found only a broad-tag coincidence (`speech-coding` with the neural-vocoder survey); the wiki has no cross-source synthesis page covering packet loss concealment or neural PLC yet. With both Lee & Chang 2016 and Valin et al. 2022 now ingested, a future synthesis page on the evolution of neural PLC — from frame-feature regression to generative vocoder hybrids — would have two anchor sources.)
+- [[synthesis/neural-packet-loss-concealment|Neural Packet Loss Concealment]] — evolution of neural PLC from frame-feature regression (this paper, the earliest anchor) to generative vocoder hybrids (Valin et al. 2022) and blind full-band prediction (Nguyen, Nguyen & Khong 2023)

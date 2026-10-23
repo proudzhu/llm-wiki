@@ -6059,3 +6059,15 @@ Created source page [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & X
 ## [2026-10-23] ingest | DNN-Based Packet Loss Concealment (Lee & Chang 2016)
 
 - **Source**: raw/papers/lee-2016-dnn-plc/full-text.md (Zotero: 5QKLI6JI)\n- **Authors**: Bong-Ki Lee, Joon-Hyuk Chang\n- **Published**: IEEE/ACM Transactions on Audio, Speech, and Language Processing, Feb. 2016\n- **DOI**: 10.1109/TASLP.2015.2509780\n- **Summary**: First DNN-regression PLC — two feed-forward DNNs (4x2048, RBM pre-trained) regress log-power spectra and phases of missing frames from 11 preceding good frames, with asymmetric overestimation-penalizing MMSE fine-tuning, recursive burst handling, and cross-fading; outperforms AMR-WB Appendix I and HMM-based PLC on LSD/PESQ/MOS and cuts ASR WER dramatically (87.8% to 61.6% at 30% loss).\n- **Pages created**: [[entities/bong-ki-lee|Bong-Ki Lee]], [[entities/joon-hyuk-chang|Joon-Hyuk Chang]], [[concepts/dnn-regression-plc|DNN Regression PLC]], [[sources/lee-2016-dnn-plc|Lee & Chang 2016]]\n- **Pages updated**: [[concepts/packet-loss-concealment|Packet Loss Concealment]] (added earliest neural-PLC entry, source backlink)\n- **Synthesis**: none — triage found only broad-tag coincidence; no neural-PLC synthesis page exists yet
+
+---
+
+## [2026-10-24] ingest | Full-Band Blind Packet-Loss Concealment With Predictive Network (Nguyen et al. 2023)
+
+- **Source**: `raw/papers/nguyen-2023-predictive-plc/full-text.md` (Zotero: NGUYEN2023)
+- **Authors**: Viet-Anh Nguyen, Anh H. T. Nguyen, Andy W. H. Khong
+- **Published**: ICASSP 2023, pp. 1–5
+- **DOI**: 10.1109/ICASSP49357.2023.10094303
+- **Summary**: Proposes the full-band recurrent network (FRN), a real-time blind PLC model for 48 kHz speech combining an STFT-domain encoder, a pre-trained LSTM predictor reusing the previous enhanced output, and a CNN joiner; beats the informed tPLCnet challenge winner on PLCMOS/LSD/STOI/PESQ.
+- **Pages created**: `wiki/sources/nguyen-2023-predictive-plc.md`; entities `wiki/entities/viet-anh-nguyen.md`, `wiki/entities/anh-h-t-nguyen.md`, `wiki/entities/andy-khong.md`; concept `wiki/concepts/full-band-recurrent-network.md`; synthesis `wiki/synthesis/neural-packet-loss-concealment.md` (first PLC synthesis page, anchored by Lee & Chang 2016 + Valin et al. 2022 + this paper).
+- **Pages updated**: `wiki/concepts/packet-loss-concealment.md` (informed-vs-blind section, FRN entry), `wiki/concepts/dnn-regression-plc.md` (recursive re-feeding → FRN predictor lineage), `wiki/concepts/frequency-domain-loss.md` (FRN trained with MR-STFT loss alone), `wiki/concepts/decision-directed-a-priori-snr.md` (FRN predictor as neural DD instantiation), `wiki/concepts/dprnn.md` (FRN encoder as ResMLP/dual-path hybrid), `wiki/concepts/recurrent-neural-network.md` (FRN application), `wiki/sources/lee-2016-dnn-plc.md` and `wiki/sources/valin-2022-real-time-plc.md` (Related Synthesis links to the new synthesis page).

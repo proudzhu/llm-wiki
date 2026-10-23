@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-07-18
-updated: 2026-07-18
+updated: 2026-10-24
 sources:
   - raw/papers/mienye-2024-rnn-comprehensive-review/full-text.md
+  - raw/papers/nguyen-2023-predictive-plc/full-text.md
 tags:
   - deep-learning
   - machine-learning
@@ -67,6 +68,7 @@ RNNs have been applied across seven major domains surveyed in [[sources/mienye-2
 - [[concepts/convolutional-recurrent-network\|Convolutional Recurrent Network (CRN)]] — CNN+RNN hybrid for speech enhancement
 - [[concepts/grouped-recurrent-neural-network\|Grouped RNN]] — partitioned hidden state for efficiency
 - [[concepts/self-attentive-recurrent-neural-network\|Self-Attentive RNN]] — attention-augmented RNN
+- [[concepts/full-band-recurrent-network\|FRN]] (Nguyen, Nguyen & Khong 2023) — inter-frame RNN encoder + LSTM predictor for real-time blind full-band packet loss concealment
 
 ## Related Concepts
 
@@ -88,3 +90,4 @@ RNNs have been applied across seven major domains surveyed in [[sources/mienye-2
 - [[sources/mienye-2024-rnn-comprehensive-review\|Mienye, Swart & Obaido 2024: RNN Comprehensive Review]] — the comprehensive review that anchors this concept page
 - [[sources/zucchet-2026-forward-propagation-errors-through-time\|Zucchet 2026: Forward Propagation of Errors Through Time]] — deeper analysis of BPTT alternatives
 - [[sources/valin-2021-percepnet-joint-echo-control\|Valin et al. 2021: PercepNet]] — RNN-based AEC system
+- [[sources/nguyen-2023-predictive-plc\|Nguyen, Nguyen & Khong 2023: Full-Band Blind Packet-Loss Concealment With Predictive Network]] — RNN-based encoder with an LSTM predictor branch for real-time blind PLC

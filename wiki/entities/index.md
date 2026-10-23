@@ -668,4 +668,7 @@
 | [[entities/nitay-peled\|Nitay Peled]] | Researcher (Ben-Gurion University); first author of AR-glasses virtual sensing ANC with directional robustness (EUSIPCO 2026) | 2026-10-21 |
 | [[entities/bong-ki-lee\|Bong-Ki Lee]] | Hanyang University researcher; first author of the first DNN-regression packet loss concealment algorithm (TASLP 2016). | 2026-10-23 |
 | [[entities/joon-hyuk-chang\|Joon-Hyuk Chang]] | Associate Professor at Hanyang University; speech coding, enhancement, recognition, and adaptive signal processing. | 2026-10-23 |
+| [[entities/viet-anh-nguyen\|Viet-Anh Nguyen]] | Crystalsound Team, NamiTech JSC — lead author of the FRN blind 48 kHz packet-loss-concealment model | 2026-10-24 |
+| [[entities/anh-h-t-nguyen\|Anh H. T. Nguyen]] | Crystalsound Team, NamiTech JSC — co-author of the FRN blind 48 kHz packet-loss-concealment model | 2026-10-24 |
+| [[entities/andy-khong\|Andy W. H. Khong]] | Nanyang Technological University — co-author of FRN; adaptive filtering, bandwidth extension, real-time neural PLC | 2026-10-24 |
 

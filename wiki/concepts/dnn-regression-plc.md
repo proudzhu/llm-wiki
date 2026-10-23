@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-10-23
-updated: 2026-10-23
+updated: 2026-10-24
 sources:
   - raw/papers/lee-2016-dnn-plc/full-text.md
+  - raw/papers/nguyen-2023-predictive-plc/full-text.md
 tags:
   - packet-loss-concealment
   - deep-neural-network
@@ -35,15 +36,17 @@ At concealment time the estimated spectrum is rebuilt as $\hat{X}^f(k) = e^{\hat
 
 ## Position in PLC Evolution
 
-DNN regression PLC predates the neural vocoder-based approaches ([[concepts/lpcnet|LPCNet]]-hybrid and WaveNetEQ-style generative PLC surveyed on the [[concepts/packet-loss-concealment|PLC concept page]]). Its frame-feature regression paradigm contrasts with the later generative + predictive decomposition: regression predicts deterministic acoustic features from a fixed causal context, which excels when the loss is short and the context is informative, but lacks a generative model's ability to synthesize plausible novel content during long bursts. The approach also has **no algorithmic delay** and was shown to serve as an effective front-end for network speech recognition (WER 87.8% → 61.6% at 30% loss vs. AMR-WB App. I).
+DNN regression PLC predates the neural vocoder-based approaches ([[concepts/lpcnet|LPCNet]]-hybrid and WaveNetEQ-style generative PLC surveyed on the [[concepts/packet-loss-concealment|PLC concept page]]). Its frame-feature regression paradigm contrasts with the later generative + predictive decomposition: regression predicts deterministic acoustic features from a fixed causal context, which excels when the loss is short and the context is informative, but lacks a generative model's ability to synthesize plausible novel content during long bursts. Its **recursive re-feeding** for burst losses — feeding the estimated features of a reconstructed frame back as input for the next missing frame — anticipates the dedicated predictor branch of [[concepts/full-band-recurrent-network|FRN]] ([[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023]]), which promotes the idea into a separately pre-trained network predicting the current frame from the previous *enhanced output*. The approach also has **no algorithmic delay** and was shown to serve as an effective front-end for network speech recognition (WER 87.8% → 61.6% at 30% loss vs. AMR-WB App. I).
 
 ## Related Concepts
 
 - [[concepts/packet-loss-concealment|Packet Loss Concealment]] — the umbrella task
 - [[concepts/pesq|PESQ]] — objective quality metric used to evaluate the method
 - [[concepts/lpcnet|LPCNet]] — later autoregressive vocoder used by generative PLC approaches
+- [[concepts/full-band-recurrent-network|Full-Band Recurrent Network (FRN)]] — blind full-band descendant whose predictor branch formalizes recursive re-feeding
 
 ## Related Sources
 
 - [[sources/lee-2016-dnn-plc|Lee & Chang 2016: DNN-Based Packet Loss Concealment]] — introduces the method
 - [[sources/valin-2022-real-time-plc|Valin et al. 2022: Real-Time PLC]] — later hybrid generative + predictive neural PLC for comparison
+- [[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023: Full-Band Blind PLC]] — blind 48 kHz PLC that turns recursive re-feeding into a pre-trained predictor branch

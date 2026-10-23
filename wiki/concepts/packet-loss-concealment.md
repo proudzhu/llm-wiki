@@ -1,13 +1,16 @@
 ---
 type: concept
 created: 2026-08-14
-updated: 2026-10-23
+updated: 2026-10-24
 sources:
   - raw/papers/lee-2016-dnn-plc/full-text.md
   - raw/papers/valin-2022-real-time-plc/full-text.md
   - raw/papers/valin-2018-lpcnet/full-text.md
+  - raw/papers/nguyen-2023-predictive-plc/full-text.md
 tags:
   - packet-loss-concealment
+  - blind-plc
+  - full-band
   - speech-synthesis
   - real-time
   - speech-coding
@@ -32,6 +35,10 @@ PLC is challenging for three reasons:
 
 The traditional approach (Sanneck, Stenger, Younes & Girod, GLOBECOM 1996) repeats pitch periods from the last received audio. This improves over zero-filling but introduces noticeable artifacts, especially during non-stationary segments (e.g., at the end of a syllable, the last feature vector represents energy centered 10 ms before the loss, so repetition causes an audible energy burst).
 
+### Informed vs. Blind PLC
+
+PLC algorithms divide into **informed** PLC, which receives prior information about which audio packets were lost (the loss mask), and **blind** PLC (audio in-painting), which recovers the lossy signal without loss traces (Kegler, Beckmann & Cernak, Interspeech 2020). Blind operation suits deployments where packet metadata may not be readily available, and — because it does not require alignment between the audio input and its packet stream — it handles **arbitrary packet sizes**. Most existing PLC methods, informed or blind, operate at 16 kHz; extending blind PLC to full-band 48 kHz with causal, real-time processing is the contribution of [[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023]] (FRN).
+
 ### Neural PLC
 
 Deep neural network (DNN) techniques have been investigated for PLC, including:
@@ -43,6 +50,7 @@ Deep neural network (DNN) techniques have been investigated for PLC, including:
 - Time-domain convolutional recurrent network (Lin et al., ICASSP 2021)
 - Adversarial auto-encoding for PLC (Pascual, Serrà & Pons, 2021)
 - Hybrid generative + predictive model — [[sources/valin-2022-real-time-plc|Valin et al. 2022]]
+- Full-band recurrent network (FRN) — [[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023]]: real-time *blind* PLC at 48 kHz whose predictor reuses the previous enhanced output (see [[concepts/full-band-recurrent-network|FRN]])
 
 ### Hybrid Generative + Predictive (Valin et al. 2022)
 
@@ -84,3 +92,4 @@ The Interspeech 2022 Audio Deep Packet Loss Concealment Challenge ([Diener et al
 - [[sources/lee-2016-dnn-plc|Lee & Chang 2016: DNN-Based Packet Loss Concealment]] — first DNN-regression PLC (log-power spectra + phase, RBM pre-training), evaluated on LSD/PESQ/MOS and network speech recognition
 - [[sources/valin-2022-real-time-plc|Valin et al. 2022: Real-Time Packet Loss Concealment With Mixed Generative and Predictive Model]] — hybrid generative + predictive architecture, 2nd place Interspeech 2022 PLC Challenge
 - [[sources/valin-2018-lpcnet|Valin & Skoglund 2018: LPCNet]] — the autoregressive neural vocoder whose excitation/LPC division of labor underlies the generative branch
+- [[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023: Full-Band Blind Packet-Loss Concealment With Predictive Network]] — real-time blind 48 kHz PLC with an RNN-transducer-style predictor that reuses the previous output

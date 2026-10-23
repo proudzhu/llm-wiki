@@ -607,4 +607,5 @@
 | [[concepts/anc-for-ar-glasses\|ANC for AR Glasses]] | ANC on AR glasses: no ear microphone (virtual sensing required) and frame-fixed mics impose a ±90° causality constraint around the reference-monitor axis | 2026-10-21 |
 | [[concepts/auxiliary-filter-virtual-sensing\|Auxiliary Filter Virtual Sensing (AF-VS)]] | VS method correcting the monitoring-mic error so FxLMS converges to the virtual optimum; DOA sensitivity proportional to sin(φ−φ₀), mitigated by DOA-selected AF banks | 2026-10-21 |
 | [[concepts/dnn-regression-plc\|DNN Regression PLC]] | Conceals lost speech packets by regressing the missing frame's log-power spectra and phases from preceding good frames with two feed-forward DNNs (Lee & Chang 2016). | 2026-10-23 |
+| [[concepts/full-band-recurrent-network\|Full-Band Recurrent Network (FRN)]] | Recurrent time-frequency architecture for blind 48 kHz PLC: encoder reconstructs the current frame, predictor infers its magnitude from the previous enhanced output, CNN joiner fuses them. | 2026-10-24 |
 

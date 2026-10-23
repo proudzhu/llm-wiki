@@ -242,4 +242,4 @@ On the dev set (15 listeners × 966 utterances, ACR MOS), the causal and non-cau
 
 ## Related Synthesis
 
-(No synthesis pages updated — triage in Step 9 found no existing synthesis page on packet loss concealment or neural PLC. This is the first PLC paper in the wiki.)
+- [[synthesis/neural-packet-loss-concealment|Neural Packet Loss Concealment]] — cross-paradigm comparison with Lee & Chang 2016 (DNN frame regression) and Nguyen, Nguyen & Khong 2023 (blind full-band FRN): this paper anchors the hybrid generative + predictive vocoder route, Opus integration, and long-burst fading

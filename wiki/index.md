@@ -674,6 +674,9 @@
 | [[entities/nitay-peled\|Nitay Peled]] | Researcher (Ben-Gurion University); first author of AR-glasses virtual sensing ANC with directional robustness (EUSIPCO 2026) | 2026-10-21 |
 | [[entities/bong-ki-lee\|Bong-Ki Lee]] | Hanyang University researcher; first author of the first DNN-regression packet loss concealment algorithm (TASLP 2016). | 2026-10-23 |
 | [[entities/joon-hyuk-chang\|Joon-Hyuk Chang]] | Associate Professor at Hanyang University; speech coding, enhancement, recognition, and adaptive signal processing. | 2026-10-23 |
+| [[entities/viet-anh-nguyen\|Viet-Anh Nguyen]] | Crystalsound Team, NamiTech JSC — lead author of the FRN blind 48 kHz packet-loss-concealment model | 2026-10-24 |
+| [[entities/anh-h-t-nguyen\|Anh H. T. Nguyen]] | Crystalsound Team, NamiTech JSC — co-author of the FRN blind 48 kHz packet-loss-concealment model | 2026-10-24 |
+| [[entities/andy-khong\|Andy W. H. Khong]] | Nanyang Technological University — co-author of FRN; adaptive filtering, bandwidth extension, real-time neural PLC | 2026-10-24 |
 
 ---
 
@@ -1286,6 +1289,7 @@
 | [[concepts/anc-for-ar-glasses\|ANC for AR Glasses]] | ANC on AR glasses: no ear microphone (virtual sensing required) and frame-fixed mics impose a ±90° causality constraint around the reference-monitor axis | 2026-10-21 |
 | [[concepts/auxiliary-filter-virtual-sensing\|Auxiliary Filter Virtual Sensing (AF-VS)]] | VS method correcting the monitoring-mic error so FxLMS converges to the virtual optimum; DOA sensitivity proportional to sin(φ−φ₀), mitigated by DOA-selected AF banks | 2026-10-21 |
 | [[concepts/dnn-regression-plc\|DNN Regression PLC]] | Conceals lost speech packets by regressing the missing frame's log-power spectra and phases from preceding good frames with two feed-forward DNNs (Lee & Chang 2016). | 2026-10-23 |
+| [[concepts/full-band-recurrent-network\|Full-Band Recurrent Network (FRN)]] | Recurrent time-frequency architecture for blind 48 kHz PLC: encoder reconstructs the current frame, predictor infers its magnitude from the previous enhanced output, CNN joiner fuses them. | 2026-10-24 |
 
 ---
 
@@ -1566,6 +1570,7 @@
 | [[sources/yuan-2026-open-ear-anc-smart-glasses\|Yuan, Liu & Xiao 2026]] | Presents the first working ANC system for open-ear wearables (smart glasses, VR headsets, headbands) that requires no error microphone at the ear canal: a neural network performs virtual in-ear sensing, estimating 2048-tap FIR ANC filters per microphone-to-ear pair from eight MEMS microphones embedded in the glasses frame. | 2026-10-22 |
 | [[sources/peled-2026-anc-ar-glasses-directional-robustness\|Peled & Rafaely 2026]] | This paper applies virtual sensing ANC to augmented reality (AR) glasses, where no physical error microphone exists at the wearer's ear. | 2026-10-21 |
 | [[sources/lee-2016-dnn-plc\|Lee & Chang 2016]] | This paper proposes the first (to the authors' knowledge) regression-based packet loss concealment (PLC) algorithm using deep neural networks: two separately trained feed-forward DNNs map the log-power spectra and phases of preceding good frames to those of the missing frame. | 2026-10-23 |
+| [[sources/nguyen-2023-predictive-plc\|Nguyen, Nguyen & Khong 2023]] | This paper proposes the full-band recurrent network (FRN), a real-time recurrent method for blind packet loss concealment (PLC) of 48 kHz speech that requires no prior knowledge of the loss mask or packet size. | 2026-10-24 |
 
 ---
 
@@ -1598,6 +1603,7 @@
 | [[synthesis/deep-speech-enhancement|Deep Speech Enhancement]] | Architectural/methodological evolution 2018→2026 along 6 axes: target (IBM→cIRM→CCM→DF), domain (hybrid time+freq loss), backbone (CRN→DPCRN→Conformer→Mamba/linear RNN/SNN), efficiency (~1000× via 4 orthogonal techniques), multi-channel (array-invariant Geo-DConv), conditioning (PSE/TSE/OVC) | Tan 2018, Pandey 2019, Schröter 2022, Indenbom 2023, Zheng 2023, Rong 2024, Chao 2024, Yang 2026, Liu 2026, Apostolidis 2026, Østergaard 2026 |
 | [[synthesis/multi-channel-speech-enhancement\|Multi-Channel Speech Enhancement]] | From coherence models to geometry-conditioned neural filters: 5 axes (estimate what, robustness, input/output, geometry, hybrid incl. DVAD-gated GSC) across sources 2005-2026 | 2026-09-08 |
 | [[synthesis/low-complexity-neural-vocoders\|Low-Complexity Neural Vocoders]] | Complexity-quality frontier from WaveRNN to FARGAN; each 5× reduction moves speech structure (envelope, periodicity) out of the network | 2026-08-30 |
+| [[synthesis/neural-packet-loss-concealment\|Neural Packet Loss Concealment]] | Cross-source synthesis of three neural PLC systems (2016–2023): DNN frame regression, hybrid generative + predictive vocoder, and blind full-band FRN. | 2026-10-24 |
 
 ---
 
@@ -1621,10 +1627,10 @@
 
 ## Statistics
 
-- **Total pages**: 1570
-- **Entities**: 664
-- **Concepts**: 603
-- **Sources**: 271
-- **Synthesis**: 23
+- **Total pages**: 1576
+- **Entities**: 667
+- **Concepts**: 604
+- **Sources**: 272
+- **Synthesis**: 24
 - **Queries**: 9
-- **Last updated**: 2026-10-23
+- **Last updated**: 2026-10-24

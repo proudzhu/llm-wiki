@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-09-06
+updated: 2026-10-24
 sources:
   - raw/papers/valin-2024-fargan/full-text.md
   - raw/papers/mustafa-2023-framewise-wavegan/full-text.md
   - raw/papers/li-2020-residual-noise-control/full-text.md
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
   - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
+  - raw/papers/nguyen-2023-predictive-plc/full-text.md
 tags:
   - loss-function
   - deep-learning
@@ -75,6 +76,8 @@ and the same spectral loss is retained alongside the adversarial terms during fi
 
 This recipe traces directly to FARGAN's predecessor [[concepts/framewise-wavegan|Framewise WaveGAN]] ([[sources/mustafa-2023-framewise-wavegan|Mustafa et al. 2023]]), the earliest instance in the wiki: six power-of-two FFT sizes 64–2048 at 75% overlap with a $sqrt$ magnitude non-linearity (chosen over $log$ for better early convergence) for spectral pre-training, followed by adversarial training with six UnivNet-style spectrogram discriminators under a least-squares GAN objective. FWGAN's authors report that time-domain discriminators (MelGAN, StyleMelGAN, HiFi-GAN styles) *failed to achieve stable training* on the framewise generator at all — the stronger form of the finding FARGAN later refined.
 
+A PLC instance appears in [[concepts/full-band-recurrent-network|FRN]] ([[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023]]): the entire encoder–predictor–joiner model is trained end-to-end with the multi-resolution STFT loss *alone* — compression $\alpha = 0.3$, auraloss default resolutions, spectral convergence + L1 magnitude terms, no adversarial or time-domain term — and the resulting blind 48 kHz PLC still beats an informed PLC-challenge top performer on PESQ/STOI/LSD.
+
 ## Why Frequency Loss Outperforms Time-Domain Loss
 
 1. **Structural clarity**: STFT magnitude has clearer temporal-spectral structure than raw waveform oscillations
@@ -109,3 +112,4 @@ This recipe traces directly to FARGAN's predecessor [[concepts/framewise-wavegan
 - [[sources/li-2020-residual-noise-control|Li, Peng, Zheng & Li 2020: Supervised Speech Enhancement with Residual Noise Control]] — generalizes mag-MSE with exponents γ, α and a residual-noise-control term targeting a preset noise floor
 - [[sources/zhao-2026-spectrally-adaptive-loss|Zhao & Madhu 2026: Spectrally Adaptive Loss for Streaming Speech Enhancement]] — spectrally weighted phase-aware STFT losses; HF-band C-RMSE/M-RMSE gains invisible to broadband metrics
 - [[sources/wang-2021-magnitude-phase-compensation|Wang, Wichern & Le Roux 2021: On the Compensation Between Magnitude and Phase in Speech Separation]] — the fundamental explanation of why magnitude terms improve perceptual metrics in RI/Wav losses
+- [[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023: Full-Band Blind Packet-Loss Concealment With Predictive Network]] — FRN trained end-to-end with the multi-resolution STFT loss alone ($\alpha = 0.3$ compression)

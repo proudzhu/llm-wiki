@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-16
-updated: 2026-09-16
+updated: 2026-10-24
 sources:
   - raw/papers/luo-2022-band-split-rnn/full-text.md
+  - raw/papers/nguyen-2023-predictive-plc/full-text.md
 tags:
   - neural-network
   - speech-separation
@@ -59,6 +60,10 @@ Used in [[concepts/gtcrn|GTCRN (Rong et al. 2024)]], G-DPRNN combines grouped RN
 
 [[concepts/band-split-rnn|BSRNN]] (Luo & Yu 2022) transplants dual-path-style interleaved modeling to music source separation with the second dimension being **frequency bands** instead of time chunks: a sequence-level RNN shared across subbands models time, and a band-level RNN models cross-band dependencies per frame. Because it operates on a large-window STFT (2048/512) rather than small time-domain frames, the original chunking motivation is absent — the authors found that replacing the plain BLSTM with a dual-path RNN in the sequence module yields no performance gain, so BSRNN keeps full-sequence temporal modeling and spends its second path on the frequency axis.
 
+### Full-Band PLC Encoder: FRN
+
+[[concepts/full-band-recurrent-network|FRN]] ([[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023]]) applies dual-path-style interleaved modeling to blind packet loss concealment at 48 kHz: within each of its 4 residual blocks an inter-frame RNN (state 384) models temporal correlation while intra-frame linear layers (hidden 768) model spectral structure, on flattened complex STFT frames projected from $2F = 960$ down to 384 dimensions for computational efficiency — an explicit hybrid of ResMLP and dual-path RNN.
+
 ## Related Concepts
 
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
@@ -66,6 +71,7 @@ Used in [[concepts/gtcrn|GTCRN (Rong et al. 2024)]], G-DPRNN combines grouped RN
 - [[concepts/neural-networks|Neural Networks]]
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
 - [[concepts/band-split-rnn|Band-Split RNN]]
+- [[concepts/full-band-recurrent-network|Full-Band Recurrent Network (FRN)]] — dual-path-style inter-/intra-frame hybrid in the PLC domain
 
 ## Related Sources
 
@@ -73,3 +79,4 @@ Used in [[concepts/gtcrn|GTCRN (Rong et al. 2024)]], G-DPRNN combines grouped RN
 - [[sources/rong-2024-gtcrn-speech-enhancement-ultralow|Rong et al. 2024: GTCRN — Ultralightweight Speech Enhancement]]
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — [[concepts/adaptcrn|AdaptCRN]] uses a 2-block grouped DPRNN bottleneck (2 groups, frequency dim 33, intra-frame GRU hidden 8, inter-frame GRU hidden 16) between its adaptive-block encoder and decoder; the representation rearrangement after grouped RNN is removed since the following FC layer performs equivalent inter-group fusion.
 - [[sources/luo-2022-band-split-rnn|Luo & Yu 2022: Music Source Separation with Band-Split RNN]] — frequency-axis instantiation of interleaved two-dimension RNN modeling
+- [[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023: Full-Band Blind Packet-Loss Concealment With Predictive Network]] — FRN encoder as a ResMLP/dual-path-RNN hybrid for real-time 48 kHz PLC
