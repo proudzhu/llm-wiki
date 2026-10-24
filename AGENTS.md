@@ -136,6 +136,7 @@ Periodically (when requested), health-check the wiki using the **wiki-lint skill
 
 ## Tips
 
+- **Python 必须通过 uv 运行**:`uv run python ...`、`uv run mkdocs build --strict` 等。不要裸调用 `python` —— 本机 PATH 中的 `python` 是 Microsoft Store 存根,静默返回退出码 49 且无任何输出
 - `raw/` is **immutable** — never edit source documents in place
 - This is a **git repo** — commit often
 - Suggest new questions and sources to investigate
