@@ -7,6 +7,7 @@ sources:
   - raw/papers/valin-2022-real-time-plc/full-text.md
   - raw/papers/nguyen-2023-predictive-plc/full-text.md
   - raw/papers/westhausen-2022-tplcnet/full-text.md
+  - raw/papers/mezza-2024-hybrid-plc/full-text.md
 tags:
   - packet-loss-concealment
   - real-time
@@ -15,11 +16,13 @@ tags:
   - lpcnet
   - blind-plc
   - full-band
+  - networked-music-performance
+  - hybrid-dsp-dnn
 ---
 
 # Neural Packet Loss Concealment
 
-> Cross-source synthesis of four neural PLC systems spanning 2016–2023: DNN frame-feature regression (Lee & Chang 2016), on-demand seq2one time-domain prediction (Westhausen & Meyer 2022), hybrid generative + predictive vocoder concealment (Valin et al. 2022), and blind full-band predictive concealment (Nguyen, Nguyen & Khong 2023). The papers trace the field's evolution along four axes — loss-metadata dependence, sample rate, inference regime (continuous vs. on-demand), and how each architecture exploits the model's *own previous output* during consecutive losses.
+> Cross-source synthesis of five neural PLC systems spanning 2016–2024: DNN frame-feature regression (Lee & Chang 2016), on-demand seq2one time-domain prediction (Westhausen & Meyer 2022), hybrid generative + predictive vocoder concealment (Valin et al. 2022), blind full-band predictive concealment (Nguyen, Nguyen & Khong 2023), and hybrid linear-AR + learned-residual concealment for networked music performance (Mezza et al. 2024). The papers trace the field's evolution along five axes — loss-metadata dependence, sample rate and signal domain (speech vs. music), inference regime (continuous vs. on-demand), what the network is asked to predict (waveform/features vs. a linear model's residual), and how each architecture exploits the model's *own previous output* during consecutive losses.
 
 ## The Problem
 
@@ -33,6 +36,7 @@ Voice packets lost in best-effort transport (RTP/UDP) must be concealed at the r
 | [[sources/valin-2022-real-time-plc\|Valin et al. 2022]] | 2022 | Informed | 16 kHz | Predictive GRU RNN estimates LPCNet features → causal LPCNet vocoder synthesizes samples; causal / non-causal (5 ms look-ahead) / Opus-codec modes | Linear decay of predicted $c_0$ after 100 ms, emulating a small room ($\mathrm{RT}_{60}=120$ ms) | 2.58 ms worst-case per 10-ms frame (i7-10810U); 13–14% of one CPU core steady-state |
 | [[sources/westhausen-2022-tplcnet\|Westhausen & Meyer 2022]] | 2022 | Informed | 16 kHz | Seq2one BGRU predicts the lost 10-ms frame from a 6-frame (60 ms) context buffer — triggered **only when a loss is detected**; Hann-windowing + overlap-add smooths loss edges | Predicted frame written back to the context buffer; no explicit long-burst fading | Small 2.96 M MACs / 0.57 ms → Large 26.18 M MACs / 3.95 ms per 10-ms frame (i5-7267U); FF baseline 2.49 M MACs / 0.47 ms — cost paid **only during losses** |
 | [[sources/nguyen-2023-predictive-plc\|Nguyen, Nguyen & Khong 2023]] | 2023 | **Blind** | **48 kHz full-band** | FRN: encoder (inter-frame RNN + intra-frame MLP on complex STFT) + LSTM predictor on log-Mel magnitude of the previous output + CNN joiner | Predictor reuses the previous *enhanced output* (pre-trained on clean targets); no explicit long-burst fading reported | 9.1M params; 4.1 ms per 10-ms chunk on one i9 3.0 GHz thread (RTF 0.41) |
+| [[sources/mezza-2024-hybrid-plc\|Mezza et al. 2024]] | 2024 | Informed (configured for 10% losses) | **32 kHz music** (piano) | [[concepts/parcnet\|PARCnet]]: online AR(128) predictor in parallel with a 416 k feed-forward information-bottleneck network predicting the AR **residual**; 16-sample fade-in envelope + 25% forecast overshoot with linear cross-fade | Not addressed (10% evenly spaced losses; 10 ms packets); the AR branch carries the first samples | 416 k params; 8.1 ms per 10-ms packet at 32 kHz in unoptimized Python/PyTorch on a Ryzen 5900HS |
 
 ## Insight 1: Four Architectural Paradigms in Seven Years
 
@@ -42,6 +46,8 @@ Voice packets lost in best-effort transport (RTP/UDP) must be concealed at the r
 - **Blind TF-domain reconstruction + prediction (2023)** — [[concepts/full-band-recurrent-network|FRN]] keeps everything in the complex STFT domain (no vocoder): an encoder branch reconstructs the current frame, a predictor branch predicts its magnitude from the previous output, and a joiner fuses the two. The RNN-transducer-inspired encoder/predictor/joiner split is the architectural descendant of both earlier ideas: regression (the predictor) and conditioning (the joiner).
 
 The trajectory: as loss-metadata assumptions weakened (informed → blind), sample rate rose (16 → 48 kHz), and the inference regime forked (continuous → on-demand), architectures gained explicit *branches* rather than growing a single monolithic mapper.
+
+A fifth paradigm appears once the *signal domain* changes rather than the metadata regime: **linear prediction + learned residual (2024)**. [[sources/mezza-2024-hybrid-plc|Mezza et al. 2024]] observe that music PLC is not speech PLC — sustained instrumental notes are quasi-harmonic, so a plain online $\mathrm{AR}(128)$ beats *every* deep baseline they tested (FRN, TF-GAN, PLAAE, LPCNet) on NMSE, PEAQ and PLCMOS at 32 kHz. The network's job then shrinks from waveform generation to residual estimation: PARCnet sums the AR forecast with a feed-forward prediction of the AR residual, using a 416 k-parameter network that runs in real time in unoptimized Python. In other words, the two branches of the 2022 hybrid are re-cut — not "generative synthesizer + predictive controller" but "linear predictor + nonlinear residual" — with the linear model taking the role LPCNet's excitation model used to play, and the network taking the role the spectral-envelope model used to play.
 
 ## Insight 2: Reusing the Previous Output Is the Field's Recurring Motif
 
@@ -74,9 +80,11 @@ FRN shows the vocoder-free route: a purely spectral complex-domain model trained
 
 tPLCnet marks the **discriminative extreme** of the no-vocoder route: a purely regression-based frame predictor with no generative component at all, whose feed-forward baseline already reaches PLC-MOS 3.81 (2.49 M MACs) — evidence that a large share of PLC quality comes from the framing/training setup rather than generative modeling, with the vocoder's "creativity" buying its margin on top of that floor.
 
+**The fork acquires a third option on music.** [[sources/mezza-2024-hybrid-plc|Mezza et al. 2024]] run the comparison in the opposite domain — 32 kHz piano instead of 16 kHz speech — and the ranking changes materially. LPCNet's PLC variant, retrained on the same corpus, is comfortably real time (7.1 ms per packet, optimized C) but only mid-pack on quality; a plain $\mathrm{AR}(128)$ predictor beats it on every metric; and the residual-learning hybrid beats *all* deep baselines by large margins (MUSHRA +21.7 points over $\mathrm{AR}(128)$, and the only method inside the "perceptible but not annoying" PEAQ band and above the PLCMOS 2.0 threshold). Two conclusions follow for this synthesis. First, the "vocoder vs. no-vocoder" question is domain-dependent: LPCNet's learned-excitation machinery is tuned to source–filter speech, and on quasi-harmonic instrumental signals the classical all-pole model already explains most of the structure. Second, the *feed-forward → seam-click* penalty documented above is not intrinsic to feed-forward models — it is intrinsic to feed-forward models that generate the waveform; summing a feed-forward residual onto a smooth linear forecast plus a 16-sample fade-in removes the click without giving up parallel inference.
+
 ## Cross-Paper Comparability Caveat
 
-The systems were **not all evaluated on a common benchmark**: Lee & Chang on a Korean/English speech corpus at 16 kHz against AMR-WB/HMM baselines; Valin et al. and Westhausen & Meyer on the *same* PLC Challenge blind test set (16 kHz, CMOS/WAcc — 2nd place, final score 0.835, vs. 3rd-tied, 0.790, so those two are directly comparable); Nguyen et al. on VCTK + challenge real traces (48 kHz). Numbers in the table above are indicative of each paper's *relative* findings, not a four-way ranking. A single-corpus, single-rate, single-trace comparison of regression / on-demand / hybrid-vocoder / blind-predictive architectures remains an open experiment.
+The systems were **not all evaluated on a common benchmark**: Lee & Chang on a Korean/English speech corpus at 16 kHz against AMR-WB/HMM baselines; Valin et al. and Westhausen & Meyer on the *same* PLC Challenge blind test set (16 kHz, CMOS/WAcc — 2nd place, final score 0.835, vs. 3rd-tied, 0.790, so those two are directly comparable); Nguyen et al. on VCTK + challenge real traces (48 kHz); Mezza et al. on a 28 h MAESTRO piano subset at 32 kHz with 10% evenly spaced losses and a MUSHRA test rather than CMOS/WAcc — a different corpus, rate, loss model *and* evaluation paradigm (subjective audio quality instead of intelligibility). Numbers in the table above are indicative of each paper's *relative* findings, not a five-way ranking. A single-corpus, single-rate, single-trace comparison of regression / on-demand / hybrid-vocoder / blind-predictive / linear-residual architectures remains an open experiment.
 
 ## Open Questions
 
@@ -84,6 +92,8 @@ The systems were **not all evaluated on a common benchmark**: Lee & Chang on a K
 2. **Long-burst behavior of blind predictors**: FRN's predictor-on-previous-output recursion is the same mechanism that motivated Valin's drift analysis. Does the pre-trained-on-clean-targets predictor drift during >100 ms bursts, and does it need a Valin-style fading rule?
 3. **Full-band vocoder PLC**: FRN avoids the vocoder at 48 kHz partly for efficiency; a full-band LPCNet-style hybrid would face 3× the sample rate. Is the vocoder route viable at 48 kHz within real-time budgets?
 4. **A shared benchmark**: re-evaluating all four paradigms on one corpus, one sample rate, and one loss-trace set (including the challenge traces) would settle the vocoder-vs-no-vocoder and continuous-vs-on-demand forks the way the AEC challenge settled AEC rankings.
+5. **Music PLC without a music corpus**: every music-PLC result so far comes from a single instrument family (MAESTRO piano). Do the linear-prediction and residual-learning claims hold for polyphonic mixtures, percussive onsets and attack transients, where the all-pole assumption is weakest and loss concealment is perceptually most exposed?
+6. **Objective metrics across domains**: speech-trained PLCMOS and codec-oriented PEAQ were both validated here against MUSHRA on *piano* signals (r = 0.899 and 0.957), while mel-spectral convergence failed to correlate at all — so which objective proxy should music-PLC work report, and does the speech-PLC convention of PLCMOS-only reporting survive at 32–48 kHz?
 
 ## Related Concepts
 
@@ -96,6 +106,11 @@ The systems were **not all evaluated on a common benchmark**: Lee & Chang on a K
 - [[concepts/frequency-domain-loss|Frequency Domain Loss]] — FRN's training objective
 - [[concepts/opus-codec|Opus Audio Codec]] — the stateful-codec integration target
 - [[concepts/burg-spectral-estimation|Burg Spectral Estimation]] — Valin's half-frame conditioning features
+- [[concepts/parcnet|PARCnet]] — the 2024 linear-AR + learned-residual paradigm
+- [[concepts/networked-music-performance|Networked Music Performance]] — the high-fidelity domain that reorders the paradigm ranking
+- [[concepts/mushra-listening-test|MUSHRA Listening Test]] — the music-PLC subjective protocol (replacing CMOS/WAcc)
+- [[concepts/peaq|PEAQ]] — objective perceptual audio metric that tracked MUSHRA best in the music study
+- [[concepts/plcmos|PLCMOS]] — the cross-domain constant metric in this comparison
 
 ## Related Sources
 
@@ -103,3 +118,4 @@ The systems were **not all evaluated on a common benchmark**: Lee & Chang on a K
 - [[sources/valin-2022-real-time-plc|Valin et al. 2022: Real-Time Packet Loss Concealment With Mixed Generative and Predictive Model]] — hybrid vocoder PLC, 2nd place Interspeech 2022 PLC Challenge, Opus integration
 - [[sources/westhausen-2022-tplcnet|Westhausen & Meyer 2022: tPLCnet — Real-Time Deep Packet Loss Concealment in the Time Domain]] — on-demand seq2one PLC, 3rd place (tied) in the same challenge; the informed baseline FRN benchmarks against
 - [[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023: Full-Band Blind Packet-Loss Concealment With Predictive Network]] — blind full-band FRN; beats informed tPLCnet without loss metadata
+- [[sources/mezza-2024-hybrid-plc|Mezza, Amerena, Bernardini & Sarti 2024: Hybrid Packet Loss Concealment for Real-Time Networked Music Applications]] — music/NMP PLC at 32 kHz; AR(128) beats every deep baseline and PARCnet learns its residual, winning MUSHRA by 21.7 points at 416 k params in real time

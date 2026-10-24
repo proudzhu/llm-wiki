@@ -673,4 +673,8 @@
 | [[entities/andy-khong\|Andy W. H. Khong]] | Nanyang Technological University — co-author of FRN; adaptive filtering, bandwidth extension, real-time neural PLC | 2026-10-24 |
 | [[entities/nils-l-westhausen\|Nils L. Westhausen]] | University of Oldenburg researcher; first author of tPLCnet (seq2one PLC, 3rd place Interspeech 2022 PLC Challenge) and co-author of DTLN. | 2026-10-24 |
 | [[entities/bernd-t-meyer\|Bernd T. Meyer]] | University of Oldenburg professor; co-author of tPLCnet (seq2one PLC) and DTLN; neural speech/audio processing and auditory modeling. | 2026-10-24 |
+| [[entities/alessandro-ilic-mezza\|Alessandro Ilic Mezza]] | Politecnico di Milano researcher; lead author of PARCnet, the hybrid linear-AR + neural-residual PLC method for real-time networked music performance | 2026-10-24 |
+| [[entities/matteo-amerena\|Matteo Amerena]] | Politecnico di Milano researcher; co-author of PARCnet (hybrid PLC for real-time networked music applications) | 2026-10-24 |
+| [[entities/alberto-bernardini\|Alberto Bernardini]] | Politecnico di Milano researcher; audio signal processing, physics-based sound synthesis, deep learning for audio; co-author of PARCnet | 2026-10-24 |
+| [[entities/augusto-sarti\|Augusto Sarti]] | Politecnico di Milano professor; sound analysis/synthesis and networked music performance; senior author of PARCnet and the NMP technologies overview | 2026-10-24 |
 

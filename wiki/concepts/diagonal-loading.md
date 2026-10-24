@@ -1,15 +1,17 @@
 ---
 type: concept
 created: 2026-05-07
-updated: 2026-09-14
+updated: 2026-10-24
 sources:
   - raw/papers/lorenz-2005-robust-minimum-variance-beamforming/full-text.md
   - raw/papers/zhu-2025-kronecker-superdirective-beamforming/full-text.txt
+  - raw/papers/mezza-2024-hybrid-plc/full-text.md
 tags:
   - beamforming
   - robustness
   - regularization
   - adaptive-filtering
+  - linear-prediction
 ---
 
 # Diagonal Loading
@@ -72,6 +74,10 @@ For **isotropic** uncertainty, the RMVB coincides (up to scale) with the diagona
 
 Zhu et al. (2025) apply diagonal loading at two levels in [[concepts/superdirective-beamforming|robust superdirective]] design: (i) classically, $\mathbf{h}_{\mathrm{RSD}} = [\boldsymbol{\Gamma} + \epsilon\mathbf{I}_M]^{-1}\mathbf{d}_{\theta_s} / (\cdot)$ trades directivity factor against WNG via a fixed $\epsilon$; and (ii) inside their [[concepts/kronecker-product-beamforming|Kronecker product]] alternating iterations, every per-group subproblem inverts the *loaded* $PL_n$-dimensional block matrix $\bar{\boldsymbol{\Gamma}}_n + \epsilon\mathbf{I}_{PL_n}$, so robustness is enforced at every iteration rather than only at the end. When a hard WNG target is required, $\epsilon$ is found per frequency bin by **bisection** — a simpler alternative to the Kantorovich-based closed-form loading of Mittal et al. (2026), at the cost of iterative search.
 
+## White-Noise Compensation in Linear-Prediction PLC
+
+The same conditioning idea appears outside beamforming, in the **online $\mathrm{AR}(p)$ fitting** of linear-prediction packet loss concealment. [[sources/mezza-2024-hybrid-plc|Mezza et al. 2024]] solve the Toeplitz normal equations of the autocorrelation method with Levinson–Durbin on a sliding 100 ms window, and add a positive term $\mu=10^{-3}$ to the *zeroth autocorrelation coefficient* (i.e. to $r[0]$, the signal energy lag) before the solve. In the spectral domain this is exactly adding a constant white-noise floor to the signal PSD — which is why Kabal calls it *white noise compensation*. The purpose is narrower than in robust beamforming: it bounds the eigenvalue spread of the autocorrelation matrix so Levinson–Durbin stays well-conditioned for high orders ($p=128$ in that work), rather than guaranteeing a white-noise-gain level.
+
 ## Related Concepts
 
 - [[white-noise-gain|White Noise Gain (WNG)]]
@@ -86,9 +92,12 @@ Zhu et al. (2025) apply diagonal loading at two levels in [[concepts/superdirect
 - [[concepts/beamforming|Beamforming]]
 - [[concepts/superdirective-beamforming|Superdirective Beamforming]]
 - [[concepts/kronecker-product-beamforming|Kronecker Product Beamforming]]
+- [[concepts/linear-prediction|Linear Prediction]] — DL applied to the autocorrelation matrix (white-noise compensation)
+- [[concepts/packet-loss-concealment|Packet Loss Concealment]] — the PLC context where that variant is used
 
 ## Related Sources
 
 - [[sources/lorenz-2005-robust-minimum-variance-beamforming|Lorenz & Boyd 2005: Robust Minimum Variance Beamforming]]
 - [[sources/mittal-2026-adaptive-diagonal-loading-beamforming|Mittal et al. 2026: Adaptive Diagonal Loading for Norm Constrained Beamforming]]
 - [[sources/zhu-2025-kronecker-superdirective-beamforming|Zhu et al. 2025: Low-Rank Robust Superdirective Beamforming Using Multidimensional Kronecker Products]] — DL inside alternating Kronecker subproblems; per-frequency bisection on $\epsilon$ to meet a WNG target
+- [[sources/mezza-2024-hybrid-plc|Mezza, Amerena, Bernardini & Sarti 2024: Hybrid Packet Loss Concealment for Real-Time Networked Music Applications]] — diagonal loading $\mu=10^{-3}$ on the zeroth autocorrelation coefficient to condition online AR(128) fitting in a PLC system (white-noise compensation, not beamforming robustness)

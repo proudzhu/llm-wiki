@@ -679,6 +679,10 @@
 | [[entities/andy-khong\|Andy W. H. Khong]] | Nanyang Technological University — co-author of FRN; adaptive filtering, bandwidth extension, real-time neural PLC | 2026-10-24 |
 | [[entities/nils-l-westhausen\|Nils L. Westhausen]] | University of Oldenburg researcher; first author of tPLCnet (seq2one PLC, 3rd place Interspeech 2022 PLC Challenge) and co-author of DTLN. | 2026-10-24 |
 | [[entities/bernd-t-meyer\|Bernd T. Meyer]] | University of Oldenburg professor; co-author of tPLCnet (seq2one PLC) and DTLN; neural speech/audio processing and auditory modeling. | 2026-10-24 |
+| [[entities/alessandro-ilic-mezza\|Alessandro Ilic Mezza]] | Politecnico di Milano researcher; lead author of PARCnet, the hybrid linear-AR + neural-residual PLC method for real-time networked music performance | 2026-10-24 |
+| [[entities/matteo-amerena\|Matteo Amerena]] | Politecnico di Milano researcher; co-author of PARCnet (hybrid PLC for real-time networked music applications) | 2026-10-24 |
+| [[entities/alberto-bernardini\|Alberto Bernardini]] | Politecnico di Milano researcher; audio signal processing, physics-based sound synthesis, deep learning for audio; co-author of PARCnet | 2026-10-24 |
+| [[entities/augusto-sarti\|Augusto Sarti]] | Politecnico di Milano professor; sound analysis/synthesis and networked music performance; senior author of PARCnet and the NMP technologies overview | 2026-10-24 |
 
 ---
 
@@ -1293,6 +1297,11 @@
 | [[concepts/dnn-regression-plc\|DNN Regression PLC]] | Conceals lost speech packets by regressing the missing frame's log-power spectra and phases from preceding good frames with two feed-forward DNNs (Lee & Chang 2016). | 2026-10-23 |
 | [[concepts/full-band-recurrent-network\|Full-Band Recurrent Network (FRN)]] | Recurrent time-frequency architecture for blind 48 kHz PLC: encoder reconstructs the current frame, predictor infers its magnitude from the previous enhanced output, CNN joiner fuses them. | 2026-10-24 |
 | [[concepts/tplcnet\|tPLCnet]] | Seq2one time-domain BGRU PLC model triggered only at loss time; predicts a lost 10 ms frame from a 6-frame context buffer; 3rd place Interspeech 2022 PLC Challenge. | 2026-10-24 |
+| [[concepts/parcnet\|PARCnet]] | Hybrid PLC architecture that predicts the nonlinear residual of an online AR(p) predictor with a 416 k feed-forward network; real-time at 32 kHz for networked music performance | 2026-10-24 |
+| [[concepts/networked-music-performance\|Networked Music Performance]] | Remote real-time musical collaboration over packet networks; fidelity-first PLC constraints (32-48 kHz, strict latency, quasi-harmonic instrumental signals) | 2026-10-24 |
+| [[concepts/mushra-listening-test\|MUSHRA Listening Test]] | ITU-R BS.1534 multiple-stimuli subjective test with hidden reference and anchors, the standard protocol for intermediate-quality audio and music PLC | 2026-10-24 |
+| [[concepts/peaq\|PEAQ (ITU-R BS.1387)]] | ITU perceptual audio quality standard producing an Objective Difference Grade; best-correlating objective metric (r=0.957) in the music-PLC MUSHRA study | 2026-10-24 |
+| [[concepts/plcmos\|PLCMOS]] | Convolutional-recurrent MOS estimator for packet-loss-degraded audio from the Interspeech 2022 PLC Challenge; speech-trained but still tracks MUSHRA on music | 2026-10-24 |
 
 ---
 
@@ -1575,6 +1584,7 @@
 | [[sources/lee-2016-dnn-plc\|Lee & Chang 2016]] | This paper proposes the first (to the authors' knowledge) regression-based packet loss concealment (PLC) algorithm using deep neural networks: two separately trained feed-forward DNNs map the log-power spectra and phases of preceding good frames to those of the missing frame. | 2026-10-23 |
 | [[sources/nguyen-2023-predictive-plc\|Nguyen, Nguyen & Khong 2023]] | This paper proposes the full-band recurrent network (FRN), a real-time recurrent method for blind packet loss concealment (PLC) of 48 kHz speech that requires no prior knowledge of the loss mask or packet size. | 2026-10-24 |
 | [[sources/westhausen-2022-tplcnet\|Westhausen & Meyer 2022]] | This paper introduces tPLCnet, a real-time time-domain neural network for packet loss concealment that predicts a lost frame from a short context buffer in a sequence-to-one (seq2one) fashion — the model is invoked only when a loss is actually detected, instead of running continuous inference on every incoming frame. | 2026-10-24 |
+| [[sources/mezza-2024-hybrid-plc\|Mezza, Amerena, Bernardini & Sarti 2024]] | This paper presents PARCnet, a hybrid packet loss concealment (PLC) method for real-time Networked Music Performance (NMP): it recasts PLC as predicting the residual of a linear autoregressive model rather than generating a coherent waveform from scratch. | 2026-10-24 |
 
 ---
 
@@ -1631,10 +1641,10 @@
 
 ## Statistics
 
-- **Total pages**: 1580
-- **Entities**: 669
-- **Concepts**: 605
-- **Sources**: 273
+- **Total pages**: 1590
+- **Entities**: 673
+- **Concepts**: 610
+- **Sources**: 274
 - **Synthesis**: 24
 - **Queries**: 9
 - **Last updated**: 2026-10-24

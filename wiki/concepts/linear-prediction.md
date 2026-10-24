@@ -1,14 +1,16 @@
 ---
 type: concept
 created: 2026-08-30
-updated: 2026-08-30
+updated: 2026-10-24
 sources:
   - raw/papers/valin-2018-lpcnet/full-text.md
+  - raw/papers/mezza-2024-hybrid-plc/full-text.md
 tags:
   - signal-processing
   - speech-coding
   - source-filter-model
   - hybrid-dsp-dnn
+  - packet-loss-concealment
 ---
 
 # Linear Prediction
@@ -47,8 +49,17 @@ Classical low-bitrate vocoders modeled the spectral envelope efficiently with li
 
 The same philosophy appears in CELP (code-excited linear prediction), where an analysis-by-synthesis search replaces the learned excitation; LPCNet's training-time noise injection is explicitly designed to mimic the error-minimizing behavior of analysis-by-synthesis.
 
+## Linear Prediction as a Residual-Prediction PLC Model
+
+PLC is the setting where linear prediction stops being merely a vocoder component and becomes a predictor in its own right. If a short-time signal follows $y[n]=\sum_{i=1}^{p}\varphi_i y[n-i]+\varepsilon[n]$, a receiver can fit $\{\varphi_i\}$ *online* on the received context (autocorrelation method + Levinson–Durbin over a sliding 100 ms window with 10 ms stride, conditioned by [[concepts/diagonal-loading|diagonal loading]]) and forecast the missing samples with $\varepsilon[n]=0$. Music is an unusually favourable case: sustained instrumental notes are quasi-harmonic outside attack transients, so a high-order all-pole model captures most of the short-time structure — [[sources/mezza-2024-hybrid-plc|Mezza et al. 2024]] find $\mathrm{AR}(128)$ alone beating every deep PLC baseline (FRN, TF-GAN, PLAAE, LPCNet) on NMSE, PEAQ and PLCMOS at 32 kHz, at ~1.8 ms per 10 ms packet.
+
+What the linear model cannot supply is the **residual**, which is far from white for a finite-memory predictor. That is precisely the division of labor of [[concepts/parcnet|PARCnet]]: a feed-forward neural network predicts $\varepsilon[n]$ from the past $N$ samples and the result is added to the linear forecast. This is the same LPC-plus-learned-excitation philosophy as [[concepts/lpcnet|LPCNet]], but transposed from *synthesis* (where the network generates the excitation sample by sample) to *concealment* (where a frame-wise network estimates the excitation of an unknown packet). Linear prediction also earns its keep at the seams: the AR forecast continues the signal smoothly from the first predicted sample, which is why it can carry the first samples while the neural contribution is faded in.
+
 ## Related Concepts
 
+- [[concepts/parcnet|PARCnet]] — PLC system whose learned branch models the linear predictor's residual
+- [[concepts/packet-loss-concealment|Packet Loss Concealment]] — online AR fitting as a standalone concealer (music/NMP)
+- [[concepts/diagonal-loading|Diagonal Loading]] — white-noise compensation that conditions high-order AR fitting
 - [[concepts/lpcnet|LPCNet]] — the WaveRNN + linear prediction hybrid vocoder
 - [[concepts/wavernn|WaveRNN]] — the neural backbone that learns the excitation
 - [[concepts/warped-linear-prediction|Warped Linear Prediction]] — frequency-warped LP variant approximating the Bark scale
@@ -57,4 +68,5 @@ The same philosophy appears in CELP (code-excited linear prediction), where an a
 
 ## Related Sources
 
+- [[sources/mezza-2024-hybrid-plc|Mezza, Amerena, Bernardini & Sarti 2024: Hybrid Packet Loss Concealment for Real-Time Networked Music Applications]] — online AR(32/64/128) PLC on music; AR(128) alone beats deep baselines, and its residual is learned by PARCnet
 - [[sources/valin-2018-lpcnet|Valin & Skoglund 2018: LPCNet]] — the paper that recombined linear prediction with WaveRNN for sub-3-GFLOPS speech synthesis

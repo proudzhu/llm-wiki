@@ -1,13 +1,16 @@
 ---
 type: concept
 created: 2026-08-14
-updated: 2026-08-31
+updated: 2026-10-24
 sources:
   - raw/papers/valin-2022-real-time-plc/full-text.md
   - raw/papers/valin-2018-lpcnet/full-text.md
   - raw/papers/valin-2024-fargan/full-text.md
   - raw/papers/mustafa-2023-framewise-wavegan/full-text.md
+  - raw/papers/mezza-2024-hybrid-plc/full-text.md
 tags:
+  - packet-loss-concealment
+  - networked-music-performance
   - neural-vocoder
   - speech-synthesis
   - lpcnet
@@ -54,6 +57,10 @@ Key adaptations for PLC:
 - **Sign randomization in training** — the sign of each training sequence is explicitly randomized so the algorithm works for any polarity of the speech signal.
 - **State seeding from known samples** — before synthesis, the LPCNet state is updated using known samples $\left[t-15\,\mathrm{ms},t-5\,\mathrm{ms}\right]$ alongside the most recent features, so the autoregressive model is conditioned on actual preceding audio.
 
+### LPCNet PLC Outside Speech
+
+LPCNet-PLC transfers to **music** with caveats. [[sources/mezza-2024-hybrid-plc|Mezza et al. 2024]] retrain it on 28 h of MAESTRO piano recordings at 32 kHz and run its optimized C inference as a baseline: it is the fastest deep method there (7.1 ms per 10 ms packet, real time) and lands mid-pack on quality (NMSE +0.3 dB, Mel-SC 0.202, PEAQ ODG −2.43, PLCMOS 1.93). Its autoregressive inference gives smooth packet seams — it avoids the click artifacts that sink the feed-forward baselines — but a plain online $\mathrm{AR}(128)$ predictor beats it on every metric, and the residual-prediction hybrid [[concepts/parcnet|PARCnet]] beats it by a wide margin on all four metrics while staying real time. This is the clearest published stress test of the assumption, baked into LPCNet's design, that the *source–filter* structure of speech is what makes learned excitation modeling pay off.
+
 ## Complexity
 
 The original model totals **≈2.8 GFLOPS** ($N_A=384$ sparse units at 10% density, $N_B=16$, $Q=256$ $\mu$-law levels at 16 kHz, including ≈0.5 GFLOPS of neglected terms) — versus ~10 GFLOPS estimated for the sparse mobile WaveRNN, ~16 GFLOPS for FFTNet, and ~50 GFLOPS estimated for SampleRNN. This enables real-time synthesis on a single Apple A8 (iPhone 6) core or on 20% of a 2.4 GHz Intel Broadwell core. In MUSHRA listening tests, LPCNet significantly exceeds an equivalent-complexity WaveRNN+ baseline (all improvements except LPC), confirming that the linear-prediction split — not the auxiliary tricks alone — drives the gain.
@@ -84,6 +91,7 @@ LPCNet generates speech samples; PercepNet filters an existing noisy/echoed sign
 - [[concepts/dual-fc-layer|DualFC Layer]] — the output layer introduced with LPCNet
 - [[concepts/structured-sparsity|Structured Sparsity]] — 16×1 block-sparse $\mathrm{GRU_{A}}$ with retained diagonal
 - [[concepts/packet-loss-concealment|Packet Loss Concealment]] — primary application of LPCNet in Valin 2022
+- [[concepts/parcnet|PARCnet]] — residual-prediction hybrid that outperforms LPCNet-PLC on music
 - [[concepts/percepnet|PercepNet]] — sibling Valin-lab hybrid system for speech enhancement / AEC
 - [[concepts/fargan|FARGAN]] — successor vocoder: same features, pitch prediction instead of LPC, adversarial training
 - [[concepts/framewise-wavegan|Framewise WaveGAN]] — GAN competitor on the same features that beat LPCNet per FLOP
@@ -97,4 +105,5 @@ LPCNet generates speech samples; PercepNet filters an existing noisy/echoed sign
 
 - [[sources/valin-2018-lpcnet|Valin & Skoglund 2018: LPCNet]] — the original paper: architecture, efficiency techniques, complexity analysis, and MUSHRA evaluation
 - [[sources/valin-2022-real-time-plc|Valin et al. 2022: Real-Time Packet Loss Concealment With Mixed Generative and Predictive Model]] — uses the improved low-complexity LPCNet variant with causal features
+- [[sources/mezza-2024-hybrid-plc|Mezza, Amerena, Bernardini & Sarti 2024: Hybrid Packet Loss Concealment for Real-Time Networked Music Applications]] — LPCNet-PLC retrained on piano at 32 kHz as a baseline; beats no linear predictor, and loses every metric to the residual-prediction hybrid PARCnet
 - [[sources/mustafa-2023-framewise-wavegan|Mustafa et al. 2023: Framewise WaveGAN]] — GAN-vocoder evaluation against End-to-End LPCNet (P.808, PMAE/VDE) on the same 18-BFCC features

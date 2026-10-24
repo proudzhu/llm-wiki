@@ -609,4 +609,9 @@
 | [[concepts/dnn-regression-plc\|DNN Regression PLC]] | Conceals lost speech packets by regressing the missing frame's log-power spectra and phases from preceding good frames with two feed-forward DNNs (Lee & Chang 2016). | 2026-10-23 |
 | [[concepts/full-band-recurrent-network\|Full-Band Recurrent Network (FRN)]] | Recurrent time-frequency architecture for blind 48 kHz PLC: encoder reconstructs the current frame, predictor infers its magnitude from the previous enhanced output, CNN joiner fuses them. | 2026-10-24 |
 | [[concepts/tplcnet\|tPLCnet]] | Seq2one time-domain BGRU PLC model triggered only at loss time; predicts a lost 10 ms frame from a 6-frame context buffer; 3rd place Interspeech 2022 PLC Challenge. | 2026-10-24 |
+| [[concepts/parcnet\|PARCnet]] | Hybrid PLC architecture that predicts the nonlinear residual of an online AR(p) predictor with a 416 k feed-forward network; real-time at 32 kHz for networked music performance | 2026-10-24 |
+| [[concepts/networked-music-performance\|Networked Music Performance]] | Remote real-time musical collaboration over packet networks; fidelity-first PLC constraints (32-48 kHz, strict latency, quasi-harmonic instrumental signals) | 2026-10-24 |
+| [[concepts/mushra-listening-test\|MUSHRA Listening Test]] | ITU-R BS.1534 multiple-stimuli subjective test with hidden reference and anchors, the standard protocol for intermediate-quality audio and music PLC | 2026-10-24 |
+| [[concepts/peaq\|PEAQ (ITU-R BS.1387)]] | ITU perceptual audio quality standard producing an Objective Difference Grade; best-correlating objective metric (r=0.957) in the music-PLC MUSHRA study | 2026-10-24 |
+| [[concepts/plcmos\|PLCMOS]] | Convolutional-recurrent MOS estimator for packet-loss-degraded audio from the Interspeech 2022 PLC Challenge; speech-trained but still tracks MUSHRA on music | 2026-10-24 |
 

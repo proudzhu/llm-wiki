@@ -8,8 +8,10 @@ sources:
   - raw/papers/valin-2018-lpcnet/full-text.md
   - raw/papers/nguyen-2023-predictive-plc/full-text.md
   - raw/papers/westhausen-2022-tplcnet/full-text.md
+  - raw/papers/mezza-2024-hybrid-plc/full-text.md
 tags:
   - packet-loss-concealment
+  - networked-music-performance
   - blind-plc
   - full-band
   - speech-synthesis
@@ -56,9 +58,21 @@ Deep neural network (DNN) techniques have been investigated for PLC, including:
 
 Two inference regimes exist within neural PLC: **continuous inference**, where the model processes every incoming frame to update its state (Lotfidereshgi & Gournay 2018; Lin et al. 2021; FRN), and **on-demand (seq2one) inference**, where the model is triggered only when a loss is actually detected and predicts the whole missing frame from a fixed context buffer (tPLCnet, [[sources/westhausen-2022-tplcnet|Westhausen & Meyer 2022]]). On-demand inference scales compute with the actual loss rate instead of the full audio stream, at the price of a bounded temporal context (6–7 frames suffice; longer buffers are detrimental).
 
+A third split cuts across that dichotomy: **what the network predicts**. Most systems predict the waveform (or its spectral features) directly; [[concepts/parcnet|PARCnet]] ([[sources/mezza-2024-hybrid-plc|Mezza et al. 2024]]) instead predicts only the nonlinear **residual of an online linear AR predictor**, leaving the quasi-harmonic short-time structure to the classical model. This keeps the network feed-forward, tiny (416 k parameters) and seam-smooth at the same time.
+
 ### Hybrid Generative + Predictive (Valin et al. 2022)
 
 The hybrid approach decouples synthesis across time scales: a *generative* autoregressive [[concepts/lpcnet|LPCNet]] ([[sources/valin-2018-lpcnet|Valin & Skoglund 2018]]) vocoder synthesizes the missing samples, while a *predictive* RNN estimates the acoustic features (BFCCs, pitch period, pitch correlation) that condition the vocoder. The principle: be "creative" in extending missing segments of a phoneme with plausible-sounding audio, but never invent new phonemes or words. This addresses the drift problem of purely autoregressive PLC while avoiding the artifacts of feature repetition.
+
+### Hybrid Linear Autoregressive + Neural Residual (PARCnet)
+
+Music-oriented PLC shifts the balance between model classes. Because sustained notes of a solo instrument are quasi-harmonic outside attack transients, a short-time music signal is well represented by an all-pole system of high order — so a plain $\mathrm{AR}(128)$ predictor fitted online (autocorrelation + Levinson–Durbin on a 100 ms sliding window, with [[concepts/diagonal-loading|diagonal loading]] for conditioning) outperforms every deep baseline in [[sources/mezza-2024-hybrid-plc|Mezza et al. 2024]] on NMSE, PEAQ and PLCMOS, at ~1.8 ms per 10 ms packet. The deep model's role therefore shrinks to what the linear model cannot express: [[concepts/parcnet|PARCnet]] predicts the AR residual with a 416 k-parameter feed-forward network and adds it to the linear forecast,
+
+$$
+\hat{\mathbf{y}}=\mathbf{y}_{\mathrm{AR}}+\mathbf{v}\odot f_\theta(\mathbf{x}),
+$$
+
+where the envelope $\mathbf{v}$ fades the neural term in over 16 samples so the seam between received and concealed audio stays continuous. This is the residual-prediction idea of Thyssen et al. (1994) revived with frame-wise inference: it runs in real time at 32 kHz (8.1 ms per 10 ms packet in unoptimized Python) and beats all deep baselines, including autoregressive vocoder PLC retrained on the same piano corpus. A related branch of the design space is *codec*-level hybridisation — LPCNet- and CELP-style systems where linear prediction shapes the spectral envelope and a neural network supplies the excitation.
 
 ## Long-Burst Handling
 
@@ -84,6 +98,9 @@ The Interspeech 2022 Audio Deep Packet Loss Concealment Challenge ([Diener et al
 
 ## Related Concepts
 
+- [[concepts/parcnet|PARCnet]] — hybrid linear-AR + neural-residual PLC for music
+- [[concepts/networked-music-performance|Networked Music Performance]] — fidelity-first PLC domain (32 kHz, strict latency)
+- [[concepts/mushra-listening-test|MUSHRA Listening Test]] — subjective protocol used for music PLC
 - [[concepts/lpcnet|LPCNet]] — autoregressive neural vocoder used for PLC synthesis
 - [[concepts/opus-codec|Opus Audio Codec]] — stateful codec integration target
 - [[concepts/burg-spectral-estimation|Burg Spectral Estimation]] — half-frame spectral features for short-time conditioning
@@ -93,6 +110,7 @@ The Interspeech 2022 Audio Deep Packet Loss Concealment Challenge ([Diener et al
 
 ## Related Sources
 
+- [[sources/mezza-2024-hybrid-plc|Mezza et al. 2024: Hybrid Packet Loss Concealment for Real-Time Networked Music Applications]] — music/NMP PLC; residual-prediction hybrid (linear AR + feed-forward residual network); shows AR(128) alone beating deep baselines at 32 kHz
 - [[sources/lee-2016-dnn-plc|Lee & Chang 2016: DNN-Based Packet Loss Concealment]] — first DNN-regression PLC (log-power spectra + phase, RBM pre-training), evaluated on LSD/PESQ/MOS and network speech recognition
 - [[sources/valin-2022-real-time-plc|Valin et al. 2022: Real-Time Packet Loss Concealment With Mixed Generative and Predictive Model]] — hybrid generative + predictive architecture, 2nd place Interspeech 2022 PLC Challenge
 - [[sources/valin-2018-lpcnet|Valin & Skoglund 2018: LPCNet]] — the autoregressive neural vocoder whose excitation/LPC division of labor underlies the generative branch
