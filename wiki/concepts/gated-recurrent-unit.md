@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-07-18
-updated: 2026-09-15
+updated: 2026-10-24
 sources:
   - raw/papers/mienye-2024-rnn-comprehensive-review/full-text.md
   - raw/papers/li-2026-realtime-music-separation-dsp/full-text.md
   - raw/papers/valin-2018-lpcnet/full-text.md
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
   - raw/papers/zhang-2021-adl-mvdr/full-text.md
+  - raw/papers/westhausen-2022-tplcnet/full-text.md
 tags:
   - deep-learning
   - recurrent-neural-network
@@ -62,6 +63,7 @@ Within the llm-wiki, GRU is the recurrent backbone in:
 - [[concepts/percepnet\|PercepNet]] (Valin et al. 2021) — 5-layer GRU neural post filter
 - [[concepts/nsnet2\|NSNet2]] — FC+GRU speech enhancement baseline
 - [[concepts/dtln\|DTLN]] — dual-path GRU for low-latency speech enhancement
+- [[concepts/tplcnet\|tPLCnet]] (Westhausen & Meyer 2022) — two **bidirectional** GRU layers over a short context buffer predict an entire lost 10 ms frame in one shot (seq2one); the final BGRU hidden state condenses the whole buffer into the frame prediction
 - [[concepts/convolutional-recurrent-network\|CRN]] — CNN+GRU for speech enhancement
 - [[concepts/mingru\|MinGRU]] — minimal gated GRU variant
 - [[concepts/hyst-net\|HyST-Net]] (Zhao & Madhu 2026) — GRU chosen for the *temporal* axis of the interleaved bottleneck precisely for its compact recurrent state: causal MHA with key-value caching costs memory/compute linear in context length, non-trivial for lightweight streaming on edge devices, while the GRU state stays constant (RTF 0.22 in strict frame-by-frame CPU streaming)
@@ -85,3 +87,4 @@ Within the llm-wiki, GRU is the recurrent backbone in:
 - [[sources/zhao-2026-spectrally-adaptive-loss\|Zhao & Madhu 2026: Spectrally Adaptive Loss for Streaming Speech Enhancement]] — GRU as temporal axis of HyST-Net's hybrid bottleneck
 - [[sources/zhang-2021-adl-mvdr\|Zhang et al. 2021: ADL-MVDR]] — GRU-Nets replace matrix inversion and PCA inside the MVDR solution, reviving classical RNN matrix-inversion results (Wang 1993; Zhang & Ge 2005) in an end-to-end speech separator
 - [[sources/li-2026-realtime-music-separation-dsp\|Li, Liu, Malsky & Yi 2026: Real-Time Music Source Separation on a Low-Power Audio DSP]] — GRU state bounded in $[-1,1]$ by construction for indefinite streaming on a DSP (vs. LSTM's unbounded cell state); state stays 32-bit float because it is an accumulator carried indefinitely
+- [[sources/westhausen-2022-tplcnet\|Westhausen & Meyer 2022: tPLCnet — Real-Time Deep Packet Loss Concealment in the Time Domain]] — bidirectional-GRU seq2one PLC; triggered on demand at loss time only

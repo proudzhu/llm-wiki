@@ -5,6 +5,7 @@ updated: 2026-10-24
 sources:
   - raw/papers/lee-2016-dnn-plc/full-text.md
   - raw/papers/nguyen-2023-predictive-plc/full-text.md
+  - raw/papers/westhausen-2022-tplcnet/full-text.md
 tags:
   - packet-loss-concealment
   - deep-neural-network
@@ -38,6 +39,8 @@ At concealment time the estimated spectrum is rebuilt as $\hat{X}^f(k) = e^{\hat
 
 DNN regression PLC predates the neural vocoder-based approaches ([[concepts/lpcnet|LPCNet]]-hybrid and WaveNetEQ-style generative PLC surveyed on the [[concepts/packet-loss-concealment|PLC concept page]]). Its frame-feature regression paradigm contrasts with the later generative + predictive decomposition: regression predicts deterministic acoustic features from a fixed causal context, which excels when the loss is short and the context is informative, but lacks a generative model's ability to synthesize plausible novel content during long bursts. Its **recursive re-feeding** for burst losses — feeding the estimated features of a reconstructed frame back as input for the next missing frame — anticipates the dedicated predictor branch of [[concepts/full-band-recurrent-network|FRN]] ([[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023]]), which promotes the idea into a separately pre-trained network predicting the current frame from the previous *enhanced output*. The approach also has **no algorithmic delay** and was shown to serve as an effective front-end for network speech recognition (WER 87.8% → 61.6% at 30% loss vs. AMR-WB App. I).
 
+The regression paradigm resurfaces in the time domain with tPLCnet ([[sources/westhausen-2022-tplcnet|Westhausen & Meyer 2022]], 3rd place Interspeech 2022 PLC Challenge): instead of regressing DFT-domain features, a seq2one BGRU predicts the raw 320-sample lost frame from a short context buffer — invoked on demand at loss time rather than continuously. Like Lee & Chang, tPLCnet finds a short context sufficient and long contexts detrimental, and its Hann-windowing/overlap-add pursues the same boundary-smoothing goal as Lee & Chang's cross-fading.
+
 ## Related Concepts
 
 - [[concepts/packet-loss-concealment|Packet Loss Concealment]] — the umbrella task
@@ -50,3 +53,4 @@ DNN regression PLC predates the neural vocoder-based approaches ([[concepts/lpcn
 - [[sources/lee-2016-dnn-plc|Lee & Chang 2016: DNN-Based Packet Loss Concealment]] — introduces the method
 - [[sources/valin-2022-real-time-plc|Valin et al. 2022: Real-Time PLC]] — later hybrid generative + predictive neural PLC for comparison
 - [[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023: Full-Band Blind PLC]] — blind 48 kHz PLC that turns recursive re-feeding into a pre-trained predictor branch
+- [[sources/westhausen-2022-tplcnet|Westhausen & Meyer 2022: tPLCnet]] — time-domain seq2one regression of lost frames; Hann-window/overlap-add boundary smoothing reprises Lee & Chang's cross-fading goal

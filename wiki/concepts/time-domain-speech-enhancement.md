@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-09-06
+updated: 2026-10-24
 sources:
   - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
+  - raw/papers/westhausen-2022-tplcnet/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -34,6 +35,7 @@ Time-domain methods sidestep both issues by generating the output waveform direc
 | DEMUCS | U-Net + LSTM bottleneck | Time + frequency | Défossez et al. 2020 |
 | FullSubNet+ | Full-band + sub-band fusion | Frequency | Chen et al. 2022 |
 | [[concepts/mamba-mingru\|Mamba-MinGRU]] | Mamba blocks + [[concepts/mingru\|MinGRU]] temporal mixing | Time (thresholded SDR) | Østergaard et al. 2026 |
+| [[concepts/tplcnet\|tPLCnet]] | FC+Conv1D+BGRU seq2one over a short context buffer | **Frequency (combined mag + complex MAE)** | Westhausen & Meyer 2022 |
 
 ## Loss Functions
 
@@ -70,4 +72,5 @@ The [[concepts/frequency-domain-loss|frequency domain loss for time-domain netwo
 
 - [[sources/pandey-2019-cnn-speech-enhancement-time-domain|Pandey & Wang 2019: CNN-Based Speech Enhancement in the Time Domain]]
 - [[sources/wang-2021-magnitude-phase-compensation|Wang, Wichern & Le Roux 2021: On the Compensation Between Magnitude and Phase in Speech Separation]] — why time-domain models evaluated with PESQ/STOI/WER should include a magnitude loss
+- [[sources/westhausen-2022-tplcnet|Westhausen & Meyer 2022: tPLCnet — Real-Time Deep Packet Loss Concealment in the Time Domain]] — time-domain PLC whose training-loss ablation again shows TF-domain losses beating waveform MAE (PLC-MOS 3.90 vs. 3.30)
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — companion survey to frequency-domain methods; notes that frequency-domain methods historically outperform time-domain methods (though partly because more research effort has been invested in frequency-domain methods)

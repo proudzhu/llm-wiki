@@ -9,6 +9,7 @@ sources:
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
   - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
   - raw/papers/nguyen-2023-predictive-plc/full-text.md
+  - raw/papers/westhausen-2022-tplcnet/full-text.md
 tags:
   - loss-function
   - deep-learning
@@ -76,6 +77,8 @@ and the same spectral loss is retained alongside the adversarial terms during fi
 
 This recipe traces directly to FARGAN's predecessor [[concepts/framewise-wavegan|Framewise WaveGAN]] ([[sources/mustafa-2023-framewise-wavegan|Mustafa et al. 2023]]), the earliest instance in the wiki: six power-of-two FFT sizes 64–2048 at 75% overlap with a $sqrt$ magnitude non-linearity (chosen over $log$ for better early convergence) for spectral pre-training, followed by adversarial training with six UnivNet-style spectrogram discriminators under a least-squares GAN objective. FWGAN's authors report that time-domain discriminators (MelGAN, StyleMelGAN, HiFi-GAN styles) *failed to achieve stable training* on the framewise generator at all — the stronger form of the finding FARGAN later refined.
 
+A PLC ablation appears in [[concepts/tplcnet|tPLCnet]] ([[sources/westhausen-2022-tplcnet|Westhausen & Meyer 2022]]): a purely time-domain BGRU model is trained with either a time-domain MAE, a magnitude MAE, or a combined magnitude + complex MAE $(1-\alpha)\big||\hat{X}|-|X|\big|+\alpha|\hat{X}-X|$ with $\alpha=0.1$ (32 ms STFT window, 50 % overlap). The TF-domain losses dominate decisively — PLC-MOS 3.88–3.90 vs. 3.30 for the time-domain MAE (PESQ 2.73–2.76 vs. 2.43) — and the magnitude-only variant matches the combined one, echoing the observation that a modest phase term adds little once magnitude is trained well.
+
 A PLC instance appears in [[concepts/full-band-recurrent-network|FRN]] ([[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023]]): the entire encoder–predictor–joiner model is trained end-to-end with the multi-resolution STFT loss *alone* — compression $\alpha = 0.3$, auraloss default resolutions, spectral convergence + L1 magnitude terms, no adversarial or time-domain term — and the resulting blind 48 kHz PLC still beats an informed PLC-challenge top performer on PESQ/STOI/LSD.
 
 ## Why Frequency Loss Outperforms Time-Domain Loss
@@ -113,3 +116,4 @@ A PLC instance appears in [[concepts/full-band-recurrent-network|FRN]] ([[source
 - [[sources/zhao-2026-spectrally-adaptive-loss|Zhao & Madhu 2026: Spectrally Adaptive Loss for Streaming Speech Enhancement]] — spectrally weighted phase-aware STFT losses; HF-band C-RMSE/M-RMSE gains invisible to broadband metrics
 - [[sources/wang-2021-magnitude-phase-compensation|Wang, Wichern & Le Roux 2021: On the Compensation Between Magnitude and Phase in Speech Separation]] — the fundamental explanation of why magnitude terms improve perceptual metrics in RI/Wav losses
 - [[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023: Full-Band Blind Packet-Loss Concealment With Predictive Network]] — FRN trained end-to-end with the multi-resolution STFT loss alone ($\alpha = 0.3$ compression)
+- [[sources/westhausen-2022-tplcnet|Westhausen & Meyer 2022: tPLCnet — Real-Time Deep Packet Loss Concealment in the Time Domain]] — loss/window ablation on a PLC task: TF-domain magnitude and combined losses beat time-domain MAE by a wide margin (PLC-MOS 3.90 vs. 3.30)

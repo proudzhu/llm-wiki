@@ -677,6 +677,8 @@
 | [[entities/viet-anh-nguyen\|Viet-Anh Nguyen]] | Crystalsound Team, NamiTech JSC — lead author of the FRN blind 48 kHz packet-loss-concealment model | 2026-10-24 |
 | [[entities/anh-h-t-nguyen\|Anh H. T. Nguyen]] | Crystalsound Team, NamiTech JSC — co-author of the FRN blind 48 kHz packet-loss-concealment model | 2026-10-24 |
 | [[entities/andy-khong\|Andy W. H. Khong]] | Nanyang Technological University — co-author of FRN; adaptive filtering, bandwidth extension, real-time neural PLC | 2026-10-24 |
+| [[entities/nils-l-westhausen\|Nils L. Westhausen]] | University of Oldenburg researcher; first author of tPLCnet (seq2one PLC, 3rd place Interspeech 2022 PLC Challenge) and co-author of DTLN. | 2026-10-24 |
+| [[entities/bernd-t-meyer\|Bernd T. Meyer]] | University of Oldenburg professor; co-author of tPLCnet (seq2one PLC) and DTLN; neural speech/audio processing and auditory modeling. | 2026-10-24 |
 
 ---
 
@@ -1290,6 +1292,7 @@
 | [[concepts/auxiliary-filter-virtual-sensing\|Auxiliary Filter Virtual Sensing (AF-VS)]] | VS method correcting the monitoring-mic error so FxLMS converges to the virtual optimum; DOA sensitivity proportional to sin(φ−φ₀), mitigated by DOA-selected AF banks | 2026-10-21 |
 | [[concepts/dnn-regression-plc\|DNN Regression PLC]] | Conceals lost speech packets by regressing the missing frame's log-power spectra and phases from preceding good frames with two feed-forward DNNs (Lee & Chang 2016). | 2026-10-23 |
 | [[concepts/full-band-recurrent-network\|Full-Band Recurrent Network (FRN)]] | Recurrent time-frequency architecture for blind 48 kHz PLC: encoder reconstructs the current frame, predictor infers its magnitude from the previous enhanced output, CNN joiner fuses them. | 2026-10-24 |
+| [[concepts/tplcnet\|tPLCnet]] | Seq2one time-domain BGRU PLC model triggered only at loss time; predicts a lost 10 ms frame from a 6-frame context buffer; 3rd place Interspeech 2022 PLC Challenge. | 2026-10-24 |
 
 ---
 
@@ -1571,6 +1574,7 @@
 | [[sources/peled-2026-anc-ar-glasses-directional-robustness\|Peled & Rafaely 2026]] | This paper applies virtual sensing ANC to augmented reality (AR) glasses, where no physical error microphone exists at the wearer's ear. | 2026-10-21 |
 | [[sources/lee-2016-dnn-plc\|Lee & Chang 2016]] | This paper proposes the first (to the authors' knowledge) regression-based packet loss concealment (PLC) algorithm using deep neural networks: two separately trained feed-forward DNNs map the log-power spectra and phases of preceding good frames to those of the missing frame. | 2026-10-23 |
 | [[sources/nguyen-2023-predictive-plc\|Nguyen, Nguyen & Khong 2023]] | This paper proposes the full-band recurrent network (FRN), a real-time recurrent method for blind packet loss concealment (PLC) of 48 kHz speech that requires no prior knowledge of the loss mask or packet size. | 2026-10-24 |
+| [[sources/westhausen-2022-tplcnet\|Westhausen & Meyer 2022]] | This paper introduces tPLCnet, a real-time time-domain neural network for packet loss concealment that predicts a lost frame from a short context buffer in a sequence-to-one (seq2one) fashion — the model is invoked only when a loss is actually detected, instead of running continuous inference on every incoming frame. | 2026-10-24 |
 
 ---
 
@@ -1627,10 +1631,10 @@
 
 ## Statistics
 
-- **Total pages**: 1576
-- **Entities**: 667
-- **Concepts**: 604
-- **Sources**: 272
+- **Total pages**: 1580
+- **Entities**: 669
+- **Concepts**: 605
+- **Sources**: 273
 - **Synthesis**: 24
 - **Queries**: 9
 - **Last updated**: 2026-10-24

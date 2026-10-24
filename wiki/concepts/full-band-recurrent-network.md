@@ -4,6 +4,7 @@ created: 2026-10-24
 updated: 2026-10-24
 sources:
   - raw/papers/nguyen-2023-predictive-plc/full-text.md
+  - raw/papers/westhausen-2022-tplcnet/full-text.md
 tags:
   - packet-loss-concealment
   - blind-plc
@@ -51,7 +52,7 @@ Training uses the **multi-resolution STFT loss** on compressed magnitudes $|\mat
 
 ## Results
 
-On the VCTK test set with simulated losses (10/20/40%) and real loss traces from the Interspeech 2022 PLC Challenge, FRN (9.1M parameters, 4.1 ms per 10-ms frame on one CPU thread, real-time factor 0.41) outperforms the **informed** tPLCnet (3rd place, Interspeech 2022 PLC Challenge) on PLCMOS, LSD, STOI, and PESQ at all loss rates, and beats the offline blind TFGAN on LSD/STOI/PESQ by ~250%/12%/30%. Ablation on the real-trace set shows the predictor branch's contribution: encoder-only LSD 1.081 → 0.946, STOI 0.862 → 0.889.
+On the VCTK test set with simulated losses (10/20/40%) and real loss traces from the Interspeech 2022 PLC Challenge, FRN (9.1M parameters, 4.1 ms per 10-ms frame on one CPU thread, real-time factor 0.41) outperforms the **informed** [[concepts/tplcnet|tPLCnet]] ([[sources/westhausen-2022-tplcnet|Westhausen & Meyer 2022]], 3rd place, Interspeech 2022 PLC Challenge) on PLCMOS, LSD, STOI, and PESQ at all loss rates, and beats the offline blind TFGAN on LSD/STOI/PESQ by ~250%/12%/30%. Ablation on the real-trace set shows the predictor branch's contribution: encoder-only LSD 1.081 → 0.946, STOI 0.862 → 0.889.
 
 ## Position in PLC Evolution
 
@@ -71,3 +72,4 @@ FRN is the **blind, full-band** entry in the neural PLC lineage: it extends the 
 - [[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023: Full-Band Blind Packet-Loss Concealment With Predictive Network]] — introduces the architecture
 - [[sources/lee-2016-dnn-plc|Lee & Chang 2016: DNN-Based Packet Loss Concealment]] — earlier regression PLC with recursive burst-loss re-feeding
 - [[sources/valin-2022-real-time-plc|Valin et al. 2022: Real-Time Packet Loss Concealment]] — contemporary hybrid generative + predictive PLC (informed, 16 kHz, vocoder-based)
+- [[sources/westhausen-2022-tplcnet|Westhausen & Meyer 2022: tPLCnet — Real-Time Deep Packet Loss Concealment in the Time Domain]] — the informed challenge baseline FRN benchmarks against

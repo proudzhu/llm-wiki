@@ -671,4 +671,6 @@
 | [[entities/viet-anh-nguyen\|Viet-Anh Nguyen]] | Crystalsound Team, NamiTech JSC — lead author of the FRN blind 48 kHz packet-loss-concealment model | 2026-10-24 |
 | [[entities/anh-h-t-nguyen\|Anh H. T. Nguyen]] | Crystalsound Team, NamiTech JSC — co-author of the FRN blind 48 kHz packet-loss-concealment model | 2026-10-24 |
 | [[entities/andy-khong\|Andy W. H. Khong]] | Nanyang Technological University — co-author of FRN; adaptive filtering, bandwidth extension, real-time neural PLC | 2026-10-24 |
+| [[entities/nils-l-westhausen\|Nils L. Westhausen]] | University of Oldenburg researcher; first author of tPLCnet (seq2one PLC, 3rd place Interspeech 2022 PLC Challenge) and co-author of DTLN. | 2026-10-24 |
+| [[entities/bernd-t-meyer\|Bernd T. Meyer]] | University of Oldenburg professor; co-author of tPLCnet (seq2one PLC) and DTLN; neural speech/audio processing and auditory modeling. | 2026-10-24 |
 

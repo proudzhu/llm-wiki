@@ -608,4 +608,5 @@
 | [[concepts/auxiliary-filter-virtual-sensing\|Auxiliary Filter Virtual Sensing (AF-VS)]] | VS method correcting the monitoring-mic error so FxLMS converges to the virtual optimum; DOA sensitivity proportional to sin(φ−φ₀), mitigated by DOA-selected AF banks | 2026-10-21 |
 | [[concepts/dnn-regression-plc\|DNN Regression PLC]] | Conceals lost speech packets by regressing the missing frame's log-power spectra and phases from preceding good frames with two feed-forward DNNs (Lee & Chang 2016). | 2026-10-23 |
 | [[concepts/full-band-recurrent-network\|Full-Band Recurrent Network (FRN)]] | Recurrent time-frequency architecture for blind 48 kHz PLC: encoder reconstructs the current frame, predictor infers its magnitude from the previous enhanced output, CNN joiner fuses them. | 2026-10-24 |
+| [[concepts/tplcnet\|tPLCnet]] | Seq2one time-domain BGRU PLC model triggered only at loss time; predicts a lost 10 ms frame from a 6-frame context buffer; 3rd place Interspeech 2022 PLC Challenge. | 2026-10-24 |
 

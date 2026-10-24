@@ -7,6 +7,7 @@ sources:
   - raw/papers/valin-2022-real-time-plc/full-text.md
   - raw/papers/valin-2018-lpcnet/full-text.md
   - raw/papers/nguyen-2023-predictive-plc/full-text.md
+  - raw/papers/westhausen-2022-tplcnet/full-text.md
 tags:
   - packet-loss-concealment
   - blind-plc
@@ -51,6 +52,9 @@ Deep neural network (DNN) techniques have been investigated for PLC, including:
 - Adversarial auto-encoding for PLC (Pascual, Serrà & Pons, 2021)
 - Hybrid generative + predictive model — [[sources/valin-2022-real-time-plc|Valin et al. 2022]]
 - Full-band recurrent network (FRN) — [[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023]]: real-time *blind* PLC at 48 kHz whose predictor reuses the previous enhanced output (see [[concepts/full-band-recurrent-network|FRN]])
+- tPLCnet — [[sources/westhausen-2022-tplcnet|Westhausen & Meyer 2022]]: seq2one on-demand time-domain BGRU predicting a lost 10 ms frame from a short context buffer, triggered only at loss time (3rd place Interspeech 2022 PLC Challenge; see [[concepts/tplcnet|tPLCnet]])
+
+Two inference regimes exist within neural PLC: **continuous inference**, where the model processes every incoming frame to update its state (Lotfidereshgi & Gournay 2018; Lin et al. 2021; FRN), and **on-demand (seq2one) inference**, where the model is triggered only when a loss is actually detected and predicts the whole missing frame from a fixed context buffer (tPLCnet, [[sources/westhausen-2022-tplcnet|Westhausen & Meyer 2022]]). On-demand inference scales compute with the actual loss rate instead of the full audio stream, at the price of a bounded temporal context (6–7 frames suffice; longer buffers are detrimental).
 
 ### Hybrid Generative + Predictive (Valin et al. 2022)
 
@@ -93,3 +97,4 @@ The Interspeech 2022 Audio Deep Packet Loss Concealment Challenge ([Diener et al
 - [[sources/valin-2022-real-time-plc|Valin et al. 2022: Real-Time Packet Loss Concealment With Mixed Generative and Predictive Model]] — hybrid generative + predictive architecture, 2nd place Interspeech 2022 PLC Challenge
 - [[sources/valin-2018-lpcnet|Valin & Skoglund 2018: LPCNet]] — the autoregressive neural vocoder whose excitation/LPC division of labor underlies the generative branch
 - [[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023: Full-Band Blind Packet-Loss Concealment With Predictive Network]] — real-time blind 48 kHz PLC with an RNN-transducer-style predictor that reuses the previous output
+- [[sources/westhausen-2022-tplcnet|Westhausen & Meyer 2022: tPLCnet — Real-Time Deep Packet Loss Concealment in the Time Domain]] — seq2one on-demand time-domain PLC, 3rd place in the Interspeech 2022 PLC Challenge
