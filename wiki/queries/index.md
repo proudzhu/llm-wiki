@@ -13,3 +13,4 @@
 | [[queries/far-field-speech-enhancement\|Far-Field Speech Enhancement]] | 综合回答：波束形成、MWF、去混响、BSS、深度学习等方法体系、最新论文进展与开放问题 | 2026-05-26 |
 | [[queries/ndf-sndf-ndbf-comparison\|NDF、SNDF、NDBF 三代神经方向滤波方法对比]] | NDF (Wechsler 2024)、SNDF (Huang 2025)、NDBF (Huang & Habets 2026) 的网络结构、损失函数、训练设置与结果的逐项对比。 | 2026-10-03 |
 | [[queries/perturbation-anc-maeda-vs-kajikawa\|扰动 ANC 对比：Maeda 1999 SP/TDSP vs Kajikawa 2000-2003 FDSP]] | 算法细节对比：时域标量差分 vs 频域逐 bin 梯度、实数 vs 复数扰动、固定 vs 可变扰动幅度；澄清两线平行发展关系 | 2026-10-17 |
+| [[queries/mbenet-vs-other-ac-bc-approaches\|MBENet 相比其他 AC+BC 方案的优点]] | 跨源分析:任务层面(首个 BC-AC 融合 TSE)、架构层面(带宽扩展辅助任务/共享 band-split/掩码只作用 AC)、性能层面(3.8M 参数、低 SNR 优势扩大)及局限 | 2026-10-24 |

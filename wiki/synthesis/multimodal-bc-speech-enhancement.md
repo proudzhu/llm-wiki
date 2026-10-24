@@ -132,6 +132,20 @@ Shifts from predicting clean speech to **generating** it using BC signals as gui
   - **Key results** (simulated ABCS-2Mix, Mandarin, SIR 0–2 dB + MUSAN noise −5…10 dB): causal 3.8M params beats pBSRNN/SpEx+/MMINet/CRN on SI-SDR, PESQ and DNSMOS at every SNR, with the PESQ margin *growing* as SNR drops (+2.74% at 10 dB → +6.03% at −5 dB); the BC cue beats a speaker-embedding AC-only ablation by +5.48 dB SI-SDR (16.67 vs 11.19 dB) — direct evidence that under strong noise a concurrent noise-immune observation of the target is more informative than a pre-recorded enrollment embedding.
   - **Distinction from the SE lineage**: MBENet's mask is applied to the **AC mixture only** (single output), unlike the dual-mask/dual-decoder designs of Liu 2025 and VibOmni — in TSE the BC channel is a *cue*, not an output to be enhanced.
 
+  **Baseline comparison (Table I averages, adapted baselines)** — no prior BC-AC TSE model existed, so classic TSE/SE models were re-purposed for the task:
+
+  | Method | Params (M) | Avg SI-SDR / PESQ | Adaptation for BC-AC TSE |
+  |---------|-----------:|-------------------:|--------------------------|
+  | CRN | 1.6 | 10.58 / 2.54 | SE model; magnitude prediction → mask branch, AC+BC concatenated input |
+  | SpEx+ | 11.1 | 15.06 / 2.91 | Time-domain TSE; BC replaces the enrollment utterance |
+  | MMINet | 5.2 | 15.81 / 2.92 | Time-domain AC-BC fusion SE |
+  | pBSRNN | 3.8 | 15.77 / 3.03 | T-F domain TSE; BC replaces the enrollment utterance |
+  | **MBENet** | **3.8** | **16.67 / 3.17** | — |
+
+  The parameter efficiency is the notable point: MBENet ties pBSRNN at 3.8M params (the gain comes from the auxiliary task + fusion design, not capacity) and leads SpEx+ by 1.6 dB with 1/3 the parameters. Full comparison in [[queries/mbenet-vs-other-ac-bc-approaches|the MBENet-vs-other-AC+BC query]].
+
+  **Limitations**: evaluated only on the simulated ABCS-2Mix benchmark (Mandarin, 100 speakers) — no real-device recordings or cross-lingual validation; no sensor-failure handling (unlike Liu 2025's Special Training or Heitkaemper 2025's VAD gating); no RTF/MACs figures despite the causality and efficiency claims, so compute cannot be compared against e.g. DenGCAN's 0.859 GMACs.
+
 ---
 
 ## 3. Core Technical Challenges

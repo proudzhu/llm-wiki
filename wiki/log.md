@@ -6138,3 +6138,11 @@ Created source page [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & X
 - **Summary**: MBENet — the first BC-AC fusion model for target speaker extraction; BC signal replaces the enrollment cue, bandwidth extension of the BC channel trained as an auxiliary task (γ = 15), shared-weight band-split fusion (31 subbands) + dual-axis LSTM mask extraction; causal 3.8M params, beats pBSRNN/SpEx+/MMINet/CRN on simulated ABCS-2Mix at every SNR with growing margins at low SNR.
 - **Pages created**: `wiki/sources/zhang-2025-mbenet.md`; entities `chen-zhang`, `linfeng-feng`, `zhi-liu`, `xiao-lei-zhang`, `xuelong-li`; concept `mbenet`
 - **Pages updated**: concepts `target-speaker-extraction` (BC clue row + significance), `bone-conduction` (new §9 MBENet section), `bcs-guided-speech-enhancement` (comparison-table row), `band-split-rnn` (shared-weight cross-modal migration note), `blind-bandwidth-extension` (auxiliary-task section), `convolutional-recurrent-network` (MBENet CRN module application), `cocktail-party-problem` (sensor-based clue class), `speaker-embedding` (embedding vs BC-cue ablation); synthesis `multimodal-bc-speech-enhancement` (new §2.10, §3.1 extension, §4 benchmark row)
+
+---
+
+## [2026-10-24] query | MBENet 相比其他 AC+BC 方案的优点
+
+- **Question**: MBENet 相比其他 AC+BC 方案的优点是什么
+- **Answer saved**: `wiki/queries/mbenet-vs-other-ac-bc-approaches.md`
+- **Sources**: [[sources/zhang-2025-mbenet|Zhang et al. 2025 MBENet]] 对比 [[sources/liu-2025-robust-fusion-bc-ac-attention|Liu 2025 ATFA]]、[[sources/wang-2022-fusing-bc-ac-complex-domain-se|Wang 2022]]、[[sources/he-2025-vibomni|VibOmni]]、[[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds|Heitkaemper 2025]]
