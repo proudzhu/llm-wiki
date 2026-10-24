@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-05
-updated: 2026-09-05
+updated: 2026-10-24
 sources:
   - raw/papers/he-2026-neural-projection-filter-anc/full-text.md
+  - raw/papers/chiba-2027-wideband-anc-coaxial-loudspeaker/full-text.txt
 tags:
   - active-noise-control
   - multi-channel
@@ -40,6 +41,8 @@ Fixed linear preconditioning captures only simple correlation structures, while 
 
 [[concepts/multi-channel-anc|Multi-channel ANC]] concerns the general MIMO problem of $M$ error sensors and $C$ secondary sources; multi-reference ANC stresses the *input* side (many correlated references). The two combine in road-noise systems (e.g., 42 references → 2 sources → 2 error microphones), where reference compression reduces the back-end controller from a $P$-input to a $Q$-input system (e.g., $Q = 4$), shortening the control filter and improving conditioning.
 
+A wearable-scale instance appears in open-ear headphone ANC: [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba et al. 2027]] use $R = 3$ reference microphones per ear distributed around the housing (front/side/rear) to capture noise from different directions, with reference-specific normalization in the FxNLMS update — the smallest end of the multi-reference spectrum, chosen to balance spatial coverage against wearable microphone-count limits.
+
 ## Related Concepts
 
 - [[concepts/condition-aware-projection-filtering|Condition-Aware Projection Filtering (CAPF)]]
@@ -52,3 +55,4 @@ Fixed linear preconditioning captures only simple correlation structures, while 
 
 - [[sources/he-2026-neural-projection-filter-anc|He et al. 2026: Neural Projection Filter Generation for Multi-Reference ANC]]
 - [[sources/zhang-2023-deep-mcanc|Zhang et al. 2023: Deep MCANC]]
+- [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba, Kamado, Kako & Noguchi 2027: Wideband ANC for Open-Ear Headphones with a Coaxial Loudspeaker]] — wearable-scale instance: 3 housing-mounted reference microphones per ear for open-ear feedforward ANC

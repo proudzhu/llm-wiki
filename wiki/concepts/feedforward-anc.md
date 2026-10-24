@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-10-07
+updated: 2026-10-24
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
   - raw/papers/cheng-2026-anc-gain-constraint/full-text.txt
   - raw/papers/rao-2026-keep-speech-anc/full-text.txt
   - raw/papers/liebich-2022-occlusion-effect-cancellation/full-text.md
+  - raw/papers/chiba-2027-wideband-anc-coaxial-loudspeaker/full-text.txt
 tags:
 - active-noise-control
 - signal-processing
@@ -48,6 +49,7 @@ Used for periodic noise from rotating machinery (e.g., engines, fans).
 - **Secondary Path Effects**: The transfer function of the electronics and transducers (the "secondary path") must be compensated for, typically using the [[filtered-x-lms-algorithm|Filtered-x LMS Algorithm]].
 - **Loudspeaker protection vs. delay**: For micro-loudspeakers with rolled-off low-frequency response, the conventional protection of cascading a high-pass filter after the control filter adds group delay that increases electrical latency and causes phase distortion, degrading NR outside the constrained band (Cheng 2026). Constraining the low-frequency gain at filter-design time ([[concepts/frequency-response-constrained-anc|ANC-FRC]]) avoids the added delay entirely.
 - **Speech-contaminated reference**: In conversational scenarios the reference microphone captures speech along with the noise, so conventional feedforward ANC suppresses speech at the ear and degrades communication (Niu et al. 2020 showed ANC on earplugs/earmuffs *helps* speech recognition only when speech is absent). [[concepts/reference-signal-enhancement|Reference signal enhancement]] (Rao 2026) suppresses the speech component of the reference with a zero-delay causal WaveNet while leaving the FIR filter — and hence the delay budget — untouched.
+- **Loudspeaker mechanical delay in the secondary path**: beyond the well-studied electronic delay, the loudspeaker's own group delay rises sharply near its fundamental resonance — and compact drivers resonate in the hundreds of Hz, consuming the causality margin exactly where environmental noise energy concentrates. For open-ear headphones, Chiba et al. 2027 attack this term *acoustically*: a [[concepts/coaxial-two-way-secondary-source|coaxial 2-way secondary source]] with [[concepts/delay-oriented-driver-allocation|delay-oriented driver allocation]] assigns each band to the driver (woofer/tweeter) whose delay budget is smaller there, extending the reachable bandwidth without touching the electronics.
 
 ## DOA Dependency
 
@@ -103,3 +105,4 @@ In [[concepts/occlusion-effect-cancellation|Occlusion Effect Cancellation (OEC)]
 - [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026: Active Noise Control With a Gain Constraint for Micro-Loudspeakers]] — single-channel feedforward ANC whose fixed control filter is pre-trained under a low-frequency gain constraint for micro-loudspeakers
 - [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — feedforward headphone ANC whose reference is de-speeched by a zero-delay causal WaveNet so the FIR filter cancels only noise
 - [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]] — hear-through filter as the feedforward component, decoupled from the OEC feedback loop via the Ĝ(z) correction filter
+- [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba, Kamado, Kako & Noguchi 2027: Wideband ANC for Open-Ear Headphones with a Coaxial Loudspeaker]] — reduces the secondary-path delay term itself (loudspeaker mechanical + acoustic) via a 2-way coaxial secondary source for wideband open-ear feedforward ANC

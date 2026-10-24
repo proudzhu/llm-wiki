@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-10-01
+updated: 2026-10-24
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/rao-2026-keep-speech-anc/full-text.txt
   - wiki/sources/shen-2023-advanced-anc.md
   - raw/papers/zhang-2014-causality-feedforward-anc-headset/full-text.md
   - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
+  - raw/papers/chiba-2027-wideband-anc-coaxial-loudspeaker/full-text.txt
 tags:
   - active-noise-control
   - control-theory
@@ -76,6 +77,10 @@ When ANC is combined with noise reduction, the *topology* determines whether the
 
 The reported results sidestep this because evaluation is offline simulation: the ear-canal sum $e_L = g_L\hat{u} + d_L$ is synthesized with sample-level time alignment, so the algorithm's latency never enters a real-time acoustic loop. The network learns a *predictive* mapping (target $-d_L/g_L$ implicitly pre-inverts the secondary path, as in DeepANC), which can only cancel the *predictable* component of the leakage — vent leakage is low-frequency dominated and NOISEX-92 noises are stationary, i.e., the narrowband/predictable-noise regime where delay is not the binding constraint. Whether the broadband leakage component (unforecastable over a 20–40 ms horizon) survives real-time deployment is untested; the paper cites Xiao & Doclo 2024 on delay effects in open-fitting hearables but performs no delay-budget analysis, and its cascaded BSE→ANC topology is exactly the structure Serizel et al. 2010 showed to collapse (~1 dB) at hearing-aid causality margins.
 
+## The Relaxed Boundary and Secondary-Path Decomposition (Chiba et al. 2027)
+
+[[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba et al. 2027]] refine the constraint in two ways for open-ear headphones. First, a **relaxed single-frequency boundary**: with excess delay $\Delta\tau(f) = \tau_S(f) - [\tau_P(f) - \tau_R(f)] > 0$, the optimal-amplitude residual is $\beta_{\min}(f) = 20\log_{10}|\sin(2\pi f \Delta\tau(f))|$, so *partial* positive noise reduction survives until the quarter-period margin $\Delta\tau_q(f) = 1/(4f)$ is exhausted — delaying reduction becomes progressively more critical with frequency, and the design goal becomes pushing the attenuation boundary upward rather than satisfying strict causality everywhere. Second, a **component decomposition** of the secondary-path delay as electronic + acoustic + mechanical. The underexplored mechanical term rises sharply near the driver's fundamental resonance (hundreds of Hz for compact drivers), consuming margin precisely in the control band — motivating their [[concepts/delay-oriented-driver-allocation|delay-oriented driver allocation]] between a [[concepts/coaxial-two-way-secondary-source|coaxial woofer/tweeter pair]], which acts on the *acoustic* side of the budget where most prior work targeted only the electronic side. Their delay sweep also shows a practical caveat: at added electronic delays ≥ ~190 µs, the mid-band (500 Hz–1 kHz) advantage largely collapses — allocation complements but cannot replace low-delay electronics.
+
 ## Solutions to Causality Violations
 
 1. **Wireless Reference ANC** (Shen 2023): Place reference microphones near noise sources and transmit wirelessly, providing "look-ahead" time
@@ -83,6 +88,7 @@ The reported results sidestep this because evaluation is offline simulation: the
 3. **Prediction-based approaches**: Use signal predictability to compensate for delay (effective for periodic noise)
 4. **Multiple reference microphones**: Place additional reference microphones on the headset to ensure causal reference for noise from any direction (Zhang & Qiu 2014)
 5. **Zero-delay neural reference enhancement** (Rao 2026): keep the conventional FIR control filter inside the loop (its delay budget unchanged) and place a fully causal, stride-1 time-domain WaveNet on the **reference path** to enhance the signal before it reaches the filter — the network adds no algorithmic delay, so the causality margin is preserved while the DNN handles what linear filters cannot (speech/noise separation in the reference). This contrasts with DeepANC-style CRN controllers, whose frame-based analysis–synthesis latency consumes the margin; empirically, DeepANC's delay reduced it to near-unprocessed performance, whereas the RSE-based KSANC retained its gains
+6. **Delay-oriented driver allocation** (Chiba 2027): reduce the secondary path's *physical* delay terms — assign control bands to woofer/tweeter drivers according to their measured mechanical group delay and source-to-ear acoustic offset (see [[concepts/delay-oriented-driver-allocation|Delay-Oriented Driver Allocation]])
 
 ## Related Concepts
 
@@ -103,4 +109,5 @@ The reported results sidestep this because evaluation is offline simulation: the
 - [[sources/hu-2026-abse-net|Hu et al. 2026: ABSE-NET]] — neural ABSE whose STFT pipeline (≥ 20–40 ms delay) violates the hearing-aid causality margin; offline simulation defers rather than solves the constraint
 - [[sources/xiao-2023-spatially-selective-anc|Xiao, Xu & Zhao 2023: Spatially Selective Active Noise Control Systems]]
 - [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — zero-delay causal WaveNet on the reference path so the FIR controller's delay budget is preserved; DeepANC's frame-level CRN latency degrades it to near-unprocessed performance
+- [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba, Kamado, Kako & Noguchi 2027: Wideband ANC for Open-Ear Headphones with a Coaxial Loudspeaker]] — relaxed quarter-period causality boundary and an electronic/acoustic/mechanical secondary-path delay budget; solves the constraint from the loudspeaker-design side
 

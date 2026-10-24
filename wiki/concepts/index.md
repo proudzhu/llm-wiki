@@ -614,4 +614,6 @@
 | [[concepts/mushra-listening-test\|MUSHRA Listening Test]] | ITU-R BS.1534 multiple-stimuli subjective test with hidden reference and anchors, the standard protocol for intermediate-quality audio and music PLC | 2026-10-24 |
 | [[concepts/peaq\|PEAQ (ITU-R BS.1387)]] | ITU perceptual audio quality standard producing an Objective Difference Grade; best-correlating objective metric (r=0.957) in the music-PLC MUSHRA study | 2026-10-24 |
 | [[concepts/plcmos\|PLCMOS]] | Convolutional-recurrent MOS estimator for packet-loss-degraded audio from the Interspeech 2022 PLC Challenge; speech-trained but still tracks MUSHRA on music | 2026-10-24 |
+| [[concepts/delay-oriented-driver-allocation\|Delay-Oriented Driver Allocation]] | Design principle assigning ANC control bands to loudspeaker drivers by their delay characteristics (mechanical group delay vs acoustic propagation) under a causality budget. | 2026-10-24 |
+| [[concepts/coaxial-two-way-secondary-source\|Coaxial Two-Way Secondary Source]] | Woofer plus forward-mounted tweeter secondary source for open-ear headphone ANC, exploiting complementary driver delays for wideband feedforward control. | 2026-10-24 |
 

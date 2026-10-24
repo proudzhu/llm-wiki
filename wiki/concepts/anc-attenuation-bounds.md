@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-05
-updated: 2026-10-07
+updated: 2026-10-24
 sources:
   - wiki/sources/liebich-2018-doa-dependency-anc-headphones.md
   - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
+  - raw/papers/chiba-2027-wideband-anc-coaxial-loudspeaker/full-text.txt
 tags:
   - active-noise-control
   - control-theory
@@ -45,6 +46,14 @@ $$\Delta A_{\text{rel}} = \cos(\Delta\phi) \pm \sqrt{\cos^2(\Delta\phi) - (1 - \
 4. **Frequency independence**: The bound is independent of $\omega$ for tonal signals; the frequency dependence enters only through the time-delay-to-phase conversion
 5. **Amplitude underestimation is forgiving**: With the amplitude *underestimated* ($\Delta A_{\mathrm{rel}} < 0$ dB), attenuation is still achieved for phase deviations beyond 60°; conversely, with perfect phase, amplitude deviation up to ~6 dB still attenuates (Liebich & Vary 2022, contour version of the bound)
 
+## Delay-Induced Phase Error Under Optimal Amplitude (Chiba et al. 2027)
+
+[[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba et al. 2027]] extend the tonal bound to the case where the phase deviation comes from **excess secondary-path delay**: with $\Delta\theta(f) = 2\pi f \Delta\tau(f)$ and optimal amplitude ratio $\Delta A^\star = \cos\Delta\theta$ (constrained to $\Delta A \geq 0$), the minimum residual over the first phase-error interval $0 \leq \Delta\theta < \pi/2$ is
+
+$$\beta_{\min}(f) = 20\log_{10}|\sin(2\pi f \Delta\tau(f))|$$
+
+which vanishes at the quarter-period boundary $\Delta\tau_q(f) = 1/(4f)$ — the "90° boundary" where positive attenuation disappears. This is the same mechanism as observation 3 above (time delay compounds phase error with frequency), now inverted into a *design target*: because $\Delta\tau_q$ shrinks with frequency, each µs of delay reduction buys bandwidth at the top of the control band, motivating delay-minimizing loudspeaker design (see [[concepts/delay-oriented-driver-allocation|Delay-Oriented Driver Allocation]]).
+
 ## Implications for ANC Design
 
 - The bound explains why [[feedforward-anc|Feedforward ANC]] is sensitive to [[primary-path-variability|Primary Path Variability]]: even moderate DOA-induced deviations in $P(z)$ can significantly reduce attenuation
@@ -63,3 +72,4 @@ $$\Delta A_{\text{rel}} = \cos(\Delta\phi) \pm \sqrt{\cos^2(\Delta\phi) - (1 - \
 
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
 - [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]] — journal version with the contour presentation
+- [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba, Kamado, Kako & Noguchi 2027: Wideband ANC for Open-Ear Headphones with a Coaxial Loudspeaker]] — optimal-amplitude residual under delay-induced phase error; quarter-period (90°) relaxed boundary as the design limit

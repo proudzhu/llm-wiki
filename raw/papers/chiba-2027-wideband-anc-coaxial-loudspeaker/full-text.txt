@@ -1,0 +1,2216 @@
+ 
+Contents lists available at ScienceDirect
+Applied Acoustics
+journal homepage: www.elsevier.com/locate/apacoust  
+Wideband active noise control for open-ear headphones via low-delay 
+acoustic design with a coaxial loudspeaker
+Hironobu Chiba∗, Noriyoshi Kamado, Tatsuya Kako, Kenichi Noguchi
+NTT, Inc., Tokyo, Japan
+H I G H L I G H T S
+• A delay budget separates electronic, acoustic, and mechanical terms for wideband ANC.
+• A coaxial woofer-tweeter source exploits complementary driver delay characteristics.
+• Measured-path offline evaluation quantifies pink-noise reduction over 100–2000 Hz.
+A R T I C L E  I N F O
+Keywords:
+Active noise control
+Open-ear headphones
+Feedforward ANC
+Secondary-path delay
+Group delay
+Coaxial loudspeaker
+Wearable audio devices
+A B S T R A C T
+Open-ear headphones preserve environmental awareness but provide little passive attenuation, so broadband 
+feedforward active noise control (ANC) is required. This paper presents a controlled measured-path offline study 
+of a wideband ANC design using one device in one dummy-head wearing configuration, based on a design-
+oriented secondary-path delay budget. A coaxial offset 2-way secondary source with a tweeter placed in front of 
+a woofer is used, and the control bands are assigned on the basis of frequency-dependent delay characteristics, 
+where the woofer is favored at low frequencies because of its smaller mechanical delay, while the tweeter is 
+favored at higher frequencies because of its shorter acoustic propagation delay. We investigated two implemen­
+tations: one for a dual-filter setup and the other for a single-filter setup. In this idealized linear measured-path 
+evaluation under controlled assumptions, the two-driver configurations increased band-limited noise-power re­
+duction for broadband pink noise relative to the unfiltered single-driver baselines. At the nominal controlled 
+virtual electronic delay of 104 µs, the background dual-filter condition Du-BpHp-Bg and the single-filter condi­
+tion Xo-BpHp achieved 8.01 and 7.58 dB reductions from 100Hz to2000 Hz , respectively, compared with 5.94 dB 
+for Wf-Bp and 5.02 dB for Tw-Bp. For the tested device and wearing configuration, these results indicate that 
+a design-oriented delay budget can support driver-band allocation for broadband feedforward ANC in open-ear 
+headphones. 
+1 . Introduction
+Open-ear headphones, which do not block the ear, have attracted 
+increasing attention as wearable audio devices that allow simultaneous 
+perception of reproduced audio and surrounding sounds [11]. Such de­
+vices are promising for Audio Augmented Reality (Audio AR), where 
+subjective evaluations have confirmed favorable perceptual impressions 
+[34]. Moreover, physical measurements have shown that open-ear de­
+signs achieve Pressure Division Ratio (PDR) values close to 0 dB with 
+high acoustic transparency [ 4]. Although their openness inevitably 
+causes sound leakage, recent enclosure designs based on opposite-phase 
+radiation have mitigated this limitation [ 3], and high wearing comfort 
+during prolonged use can be achieved through pinna-adapted device 
+design [36].
+The openness that gives these devices their advantages also makes 
+them highly susceptible to environmental noise. Users therefore tend 
+to increase playback volume to unsafe levels in noisy conditions, pos­
+ing a risk of noise-induced hearing loss [ 35]. Accordingly, active noise 
+control (ANC) is particularly important for open-ear headphones be­
+cause it is effective at low frequencies, where many environmental 
+noise sources contain substantial energy [ 6]. In headphone ANC, the 
+short acoustic path between the noise source and the ear imposes a 
+stringent causality constraint: when the electronic delay exceeds the 
+∗ Corresponding author.
+ Email address: hironobu.chiba@ntt.com (H. Chiba).
+https://doi.org/10.1016/j.apacoust.2026.111618
+Received 3 June 2026; Received in revised form 21 August 2026; Accepted 29 August 2026
+Applied Acoustics 257 (2027) 111618 
+Available online 16 October 2026 
+0003-682X/© 2026 Elsevier Ltd. All rights are reserved, including those for text and data mining, AI training, and similar technologies. 
+
+H. Chiba, N. Kamado, T. Kako et al.
+acoustic propagation delay, the system becomes non-causal and the 
+noise reduction bandwidth is severely restricted [ 19,20]. Conventional 
+feedback ANC addresses non-causality by adopting the internal model 
+control (IMC) structure [ 5,7]; however, the inherent one-step predic­
+tion in reference signal synthesis limits cancellation to predictable noise 
+components, leaving broadband noise such as white noise theoreti­
+cally intractable [ 17,33]. Accordingly, feedback ANC headsets have 
+been primarily designed for low-frequency predictable noise [ 10], and 
+a feedback ANC applied to lightweight open-type earphones demon­
+strated a reduction only over 1000–3200 Hz for stationary, harmonically 
+structured magnetic resonance imaging noise [18]. As an alternative ap­
+proach under non-causal conditions, prediction-based ANC that utilizes 
+the quasi-periodicity and harmonic structure of audio signals has been 
+proposed [13]. However, its reliance on speech-specific spectral char­
+acteristics precludes its application to broadband environmental noise. 
+Therefore, a feedforward architecture that satisfies the causality con­
+straint by design is indispensable for effective broadband noise control 
+[14].
+In feedforward ANC, the causality constraint requires that the sec­
+ondary path delay not exceed the acoustic propagation delay of the 
+primary path; violation of this condition degrades broadband cancella­
+tion as the controllable bandwidth narrows with increasing non-causal 
+delay [16]. This relationship has been confirmed for a single-channel 
+feedforward ANC headset, where both the noise reduction bandwidth 
+and maximum attenuation decrease with increasing non-causal delay 
+[37]. A substantial body of work has focused on reducing electronic 
+and algorithmic delays to satisfy this constraint. The latency of anti-
+aliasing and reconstruction filters in conventional ADC/DAC chains has 
+long been recognized as a significant delay contributor [ 14]. To elimi­
+nate it, sigma-delta modulation-based architectures that operate directly 
+on oversampled bitstream signals have been proposed [ 23,24]. Higher 
+sampling rates and multirate techniques have been utilized to reduce 
+per-sample delay [1,21,30,38]. Separately, the delayless subband archi­
+tecture achieves both fast convergence and low latency by generating 
+wideband anti-noise through a fullband filter while confining subband 
+decomposition to a background update path [27,28].
+While reducing electronic delay is essential, the total delay in head­
+phone ANC is also determined by acoustic and mechanical components, 
+both of which are comparably important. Acoustic delay, which is gov­
+erned by the physical arrangement of microphones and loudspeakers, 
+directly constrains causality. Several hardware-oriented strategies have 
+been explored to relax this constraint, including the use of contralateral 
+reference microphones in headphones to extend the effective primary-
+path delay [2], multiple head-mounted reference microphones to satisfy 
+causality for noise arriving from different directions [26], duct-like semi-
+open enclosure structures that achieve a long and direction-independent 
+primary path [ 29], and IoT-based relay nodes that provide additional 
+acoustic lead time for the reference signal [ 31]. However, the total de­
+lay is also influenced by mechanical delay in the transducers themselves. 
+Digital PDM MEMS microphones exhibit group delay determined by 
+the decimation filter, ranging from several hundred microseconds near 
+100 Hz to around 10 µs above 1 kHz [15]. In addition, the loudspeaker 
+group delay, although relatively underexplored in the ANC literature, 
+can be a dominant component of the secondary-path delay. Because 
+the mass–spring resonance of a loudspeaker concentrates group delay 
+near and below the fundamental resonant frequency [ 25,32], compact 
+loudspeakers with limited diaphragm area and enclosure volume gener­
+ally have elevated fundamental resonant frequencies, often in the range 
+of several hundred hertz, resulting in limited low-frequency radiation 
+capability [22]. Moreover, their group delay inherently increases from 
+around this frequency region, even within the low-frequency band. This 
+issue is particularly critical in open-ear devices, which typically rely on 
+compact drivers despite the fact that environmental noise often con­
+tains substantial low-frequency energy, where ANC is most needed. 
+Achieving acoustic transparency with a larger driver in open-ear de­
+vices generally requires a larger source-to-ear distance, which in turn 
+increases the acoustic delay of the secondary path. Although some ve­
+hicle ANC systems utilize loudspeaker arrays that include both woofer 
+and tweeter units, their main focus is spatial multi-channel control of 
+low-order engine noise, not delay-oriented band allocation. For example, 
+Ferrari et al. investigated engine-order cancellation up to 1 kHz using 
+multiple car-audio transducers in a multi-channel FxLMS framework, 
+but each secondary source operates over the same frequency range 
+without explicit band-split control based on driver delay character­
+istics [ 9]. To the best of our knowledge, no prior work has used a 
+design-oriented secondary-path delay budget that separates acoustic 
+propagation, mechanical group delay, and crossover-filter group delay 
+to allocate different frequency bands to distinct drivers for broadband 
+ANC.
+In this paper, we focus on open-ear headphones and systematically 
+revisit the delay components that limit broadband feedforward ANC, 
+with emphasis on the acoustic and mechanical delays of the loudspeaker 
+unit. We propose a coaxial loudspeaker unit comprising two drivers with 
+distinct frequency ranges and delay characteristics, and partition the 
+ANC control bandwidth so that each driver operates in the band where 
+its delay is minimal. Because open-ear headphones generally cannot sat­
+isfy the strict causality constraint over the full target bandwidth, we 
+formulate the design objective as minimizing the secondary-path group 
+delay to extend the frequency range over which partial noise reduction 
+remains achievable. This motivation differs from that of a conventional 
+audio 2-way crossover. Specifically, in many practical ANC applications, 
+the main control objective is concentrated in the lower-frequency re­
+gion, where a single low-frequency transducer is often sufficient and 
+there is less need to exploit a tweeter while jointly optimizing acous­
+tic and mechanical delays [ 6,10]. In contrast, the present open-ear 
+target extends into a wider band for which passive attenuation does 
+not relax the ANC requirement, so delay-oriented driver allocation be­
+comes essential rather than merely acoustically convenient [ 29]. The 
+proposed band-split coaxial architecture is designed to reduce the effec­
+tive secondary-path delay relative to single-driver operation across the 
+target bandwidth.
+2 . Feedforward ANC and secondary-path delay
+We first consider the single-reference feedforward ANC system 
+shown in Fig. 1, and then state how it is extended to the three-reference 
+implementation used in the experiment. The reference signal 𝑥(𝑛) is rep­
+resented by the tapped-delay-line vector 𝐱(𝑛) = [𝑥(𝑛),…, 𝑥(𝑛−𝑁+ 1)] T
+and filtered by the control filter 𝐰(𝑛) ∈ℝ 𝑁 to produce anti-noise 𝑦(𝑛) =
+𝐰T(𝑛)𝐱(𝑛). We use 𝐲(𝑛) = [𝑦(𝑛),…, 𝑦(𝑛−𝐿+ 1)] T to denote the tapped-
+delay-line output vector entering the secondary path 𝐬∈ℝ 𝐿, so the 
+error signal is 𝑒(𝑛) =𝑑(𝑛) −𝐬 T𝐲(𝑛). The control filter is updated by the 
+filtered-x normalized least mean square (FxNLMS) algorithm [20]:
+𝐰(𝑛+ 1) =𝐰(𝑛) +𝜇 𝑒(𝑛) ̃𝐱(𝑛)
+‖̃𝐱(𝑛)‖2 +𝛿 , (1)
+where ̃𝐱(𝑛) is the tapped-delay-line vector formed from the filtered-
+reference sequence obtained via the secondary-path model ̂𝐬, 𝜇 is the 
+step size, and 𝛿 is a regularization constant. Although the formulation 
+above is written for a single reference channel for notational clarity, the 
+actual implementation used 𝑅= 3  reference microphones per ear. Let 
+𝑥𝑟(𝑛) and 𝐱𝑟(𝑛) = [𝑥 𝑟(𝑛),…, 𝑥 𝑟(𝑛−𝑁+ 1)] T denote the 𝑟th reference sig­
+nal and its tapped-delay-line vector, where 𝑟= 1,…, 𝑅 . The standard 
+multi-reference extension produces the control output as
+𝑦(𝑛) =
+𝑅∑
+𝑟=1
+𝐰T
+𝑟 (𝑛)𝐱𝑟(𝑛), (2)
+and updates each reference-channel filter using reference-specific nor­
+malization as
+𝐰𝑟(𝑛+ 1) =𝐰 𝑟(𝑛) +𝜇 𝑒(𝑛) ̃𝐱𝑟(𝑛)
+‖̃𝐱𝑟(𝑛)‖2 +𝛿 ,
+𝑟= 1,…, 𝑅,
+(3)
+Applied Acoustics 257 (2027) 111618 
+2 
+
+H. Chiba, N. Kamado, T. Kako et al.
+Fig. 1. Block diagram of a single-channel feedforward ANC system. The refer­
+ence signal 𝑥(𝑛) is filtered by the control filter 𝐰(𝑛) to produce anti-noise 𝑦(𝑛), 
+which propagates through the secondary path to cancel the primary noise 𝑑(𝑛)
+at the error microphone. The secondary-path delay is approximated as the sum 
+of electronic, acoustic, and mechanical components.
+where ̃𝐱𝑟(𝑛) is the tapped-delay-line vector formed from the filtered-
+reference sequence obtained by filtering reference channel 𝑟 with the 
+same secondary-path model ̂𝐬. Each update is normalized by the power of 
+its own filtered-reference vector, while the error signal is common to all 
+reference-channel updates. Under the reference-specific normalization 
+adopted in this study, the reported 𝜇 denotes the per-reference imple­
+mentation value; no rescaling by 𝑅 was applied. The causality analysis 
+below remains a reference–error pair criterion; in the three-reference 
+implementation, it is interpreted for each reference microphone relative 
+to the same error microphone.
+For broadband noise control that does not rely on signal prediction 
+at frequency 𝑓, the system must satisfy the causality constraint [16,37]:
+𝜏S(𝑓)≤𝜏 P(𝑓) −𝜏 𝑅(𝑓), (4)
+where 𝜏P(𝑓) and 𝜏𝑅(𝑓) are the group delays from the noise source to 
+the error and reference microphones, respectively, and 𝜏S(𝑓) is the total 
+group delay of the secondary path. Eq. (4) represents a sufficient condi­
+tion for complete cancellation at frequency 𝑓. Following prior causality 
+studies, we use this condition here as a design criterion for broadband 
+feedforward ANC rather than as a claim that an exact point-by-point 
+causality margin can be extracted from every measured worn-device 
+transfer function. In an open-ear headphone, the primary and secondary 
+paths can contain non-minimum-phase components caused by the de­
+vice geometry, the pinna, and local reflections, so measured group delay 
+alone does not uniquely determine the geometric lead time. For this rea­
+son, we combine the standard causality framework with geometric delay 
+estimates and controlled virtual-delay perturbation in the measured-
+path offline evaluation. In practice, however, the secondary-path delay 
+in open-ear headphones often exceeds the causality margin at low fre­
+quencies, where the loudspeaker’s mechanical group delay is large. For 
+a sufficiently small violation of the strict condition, the attainable noise 
+reduction can degrade progressively while the resulting phase error re­
+mains within the valid range of the single-frequency model described 
+below. At a single frequency, let Δ𝐴≥0  denote the anti-noise-to-primary 
+amplitude ratio and let Δ𝜃 denote the phase error between the primary 
+noise and anti-noise. The residual level relative to the primary noise is 
+calculated as [11]
+𝛽= 10log 10
+[1 + (Δ𝐴)2 − 2Δ𝐴cos Δ𝜃 ]. (5)
+Here, 𝛽 is expressed in dB relative to the primary-noise power; therefore, 
+𝛽 <0  corresponds to attenuation, and the positive noise-reduction level 
+is −𝛽. When the strict condition is violated, the excess delay Δ𝜏(𝑓) =
+𝜏S(𝑓) − [𝜏P(𝑓) −𝜏 𝑅(𝑓)]>0  introduces the phase error Δ𝜃(𝑓) = 2𝜋𝑓Δ𝜏(𝑓) . 
+Within the first phase-error interval relevant to relaxing the strict causal­
+ity condition, 0≤Δ𝜃 < 𝜋∕2 , constrained minimization of ( 5) over 
+Δ𝐴≥0  yields the optimal amplitude Δ𝐴⋆ = cos Δ𝜃  and the minimum 
+residual level
+𝛽min(𝑓) = 20log 10
+|||sin(2𝜋𝑓Δ𝜏(𝑓) )|||. (6)
+Within this interval, the corresponding maximum attainable noise re­
+duction is −𝛽min(𝑓). As Δ𝜏(𝑓)  increases toward the first 90◦ phase-error 
+boundary, 𝛽min approaches 0 dB and the attainable positive noise reduc­
+tion vanishes. At and beyond this boundary, Eq. (6) is not extrapolated: 
+the practical optimum may instead provide no positive attenuation, rep­
+resented conservatively by Δ𝐴⋆ = 0  and 𝛽min = 0  dB. Accordingly, 
+within this first-boundary design interpretation, positive noise reduction 
+requires
+𝜏S(𝑓)< 𝜏 P(𝑓) −𝜏 𝑅(𝑓) + Δ𝜏 𝑞(𝑓),
+Δ𝜏𝑞(𝑓) = 1
+4𝑓 .
+(7)
+Eq. (7) is a relaxed counterpart of the strict condition in (4): while (4) re­
+quires the secondary-path delay to remain below the primary-reference 
+delay difference for complete cancellation, ( 7) permits the additional 
+quarter-period delay margin Δ𝜏𝑞(𝑓) before the first 90 ◦ boundary is 
+reached. Eqs. (5)–(7) are used as a single-frequency, optimal-amplitude 
+explanatory model for the effect of excess delay, not as a quantitative 
+predictor of broadband FxNLMS performance for every delay and fre­
+quency condition. The 90 ◦ boundary is exact for this simplified model 
+but should be interpreted as an approximate practical boundary under 
+measured broadband conditions. Because Δ𝜏𝑞 shrinks with frequency, 
+delay reduction becomes increasingly critical at higher frequencies. This 
+study therefore aims to minimize the secondary-path delay through 
+loudspeaker design, so as to push the achievable-attenuation boundary 
+to higher frequencies.
+For design interpretation, the total group delay 𝜏S is represented by 
+an approximate budget
+𝜏S(𝑓) =𝜏 E
+S (𝑓)
+⏟ ⏟ ⏟
+electronic
++𝜏 A
+S (𝑓)
+⏟ ⏟ ⏟
+acoustic
++𝜏 M
+S (𝑓)
+⏟ ⏟ ⏟
+mechanical
+, (8)
+where the electronic delay 𝜏E
+S (𝑓), which is dominated by ADC/DAC 
+latency, can now be reduced to tens of microseconds through oversam­
+pling and low-delay anti-aliasing and reconstruction techniques [23,24]. 
+This decomposition is used as an approximate design interpretation, 
+not as an exact physical separation for arbitrary non-minimum-phase 
+worn-device secondary paths. In the following sections, the acoustic and 
+mechanical terms are therefore estimated from geometry and isolated-
+driver measurements, whereas the worn-device secondary paths are 
+used as measured linear paths for the offline evaluation. In most head­
+phone applications the margin 𝜏P(𝑓) −𝜏 𝑅(𝑓) is only tens to hundreds 
+of microseconds, so every component of 𝜏S(𝑓) matters. The remain­
+ing bottleneck lies in the acoustic delay 𝜏A
+S (𝑓) ≈𝑙∕𝑐 , which is set 
+by the loudspeaker’s diaphragm to ear distance 𝑙, and the mechani­
+cal delay 𝜏M
+S (𝑓), which rises sharply near and below the loudspeaker’s 
+fundamental resonant frequency 𝑓0 [25,32].
+Open-ear headphones face a particular dilemma regarding these two 
+components. To preserve acoustic transparency, open-ear headphones 
+require compact drivers, which typically have a fundamental resonant 
+frequency 𝑓0 of several hundred hertz. As a result, 𝜏M
+S (𝑓) is elevated in 
+the low-frequency region, precisely where environmental noise energy 
+is concentrated and ANC is most needed. At the same time, placing the 
+driver at a distance from the ear canal to maintain openness increases 
+𝜏A
+S (𝑓). Unlike closed headphones whose passive attenuation above ap­
+proximately 1 kHz relaxes the ANC requirement [29], open-ear devices 
+demand noise control across a wider bandwidth, tightening the causality 
+budget at every frequency. Therefore, a single compact driver cannot si­
+multaneously achieve low 𝜏A
+S  and low 𝜏M
+S  over the full target bandwidth, 
+Applied Acoustics 257 (2027) 111618 
+3 
+
+H. Chiba, N. Kamado, T. Kako et al.
+and the strict causality condition ( 4) is generally violated in the low-
+frequency region. As discussed above, however, reducing 𝜏S(𝑓) remains 
+beneficial because it extends the bandwidth over which the phase error 
+stays within the relaxed boundary in (7). In the next section we address 
+this by introducing a coaxial 2-way secondary source whose woofer and 
+tweeter offer complementary delay advantages: the woofer provides low 
+𝜏M
+S (𝑓) at low frequencies owing to its lower 𝑓0, while the tweeter pro­
+vides low 𝜏A
+S (𝑓) at higher frequencies owing to its forward placement 
+closer to the ear.
+3 . Wideband ANC via delay-oriented coaxial loudspeaker 
+configurations
+3.1 . Coaxial offset 2-way secondary source
+To overcome the delay trade-off identified in Section 2, we intro­
+duce a coaxial offset 2-way secondary source comprising a woofer and 
+a tweeter arranged coaxially, with the tweeter mounted in front of the 
+woofer as shown in Fig. 2. In this arrangement, the tweeter is positioned 
+closer to the error microphone than the woofer, so that its acoustic de­
+lay 𝜏A
+S,T is smaller than the woofer’s 𝜏A
+S,W. At the same time, the woofer’s 
+larger diaphragm yields a lower fundamental resonant frequency 𝑓0,W, 
+resulting in smaller mechanical group delay 𝜏M
+S,W(𝑓) in the low-frequency 
+region where the tweeter’s mechanical delay 𝜏M
+S,T(𝑓) is elevated due to its 
+higher 𝑓0,T. The mechanical group delays of the two drivers, measured 
+in isolation using a JIS standard enclosure to exclude acoustic propaga­
+tion effects, confirm this complementary relationship and are presented 
+in Section 4.2.
+By allocating low-frequency control to the woofer and high-
+frequency control to the tweeter, the effective secondary-path delay 
+can be reduced across the target bandwidth. Although restricting each 
+driver to its intended frequency range may reduce distortion risk in a 
+physical implementation by avoiding inefficient out-of-band excitation, 
+this potential nonlinear benefit is outside the scope of the present linear 
+measured-path evaluation. The specific driver dimensions and distances 
+for the device used in this study, together with the measured paths used 
+in the offline evaluation, are described in Section 4.
+To achieve this delay-selective band allocation, we consider two 
+ways of placing the band-splitting filters in a two-driver ANC sys­
+tem. First, in the dual-filter configuration, independent adaptive-filter 
+branches are assigned to the woofer and tweeter, and the band-splitting 
+filters may be placed either in the background update path or in the 
+foreground output path. Second, in the single-filter configuration, one 
+adaptive-filter branch is followed by a fixed crossover network and a 
+gain-matching stage in the foreground path. These configurations are 
+described in the following subsections.
+Fig. 2. Coaxial offset 2-way secondary source. The tweeter is mounted in front of 
+the woofer, reducing the acoustic delay to the error microphone at the expense 
+of a higher fundamental resonant frequency.
+3.2 . Dual-filter configuration, background and foreground placements
+The dual-filter configuration assigns an independent adaptive-filter 
+branch to each driver, as illustrated in Fig. 3. For driver 𝑖∈ {W,T}
+and reference channel 𝑟= 1,…, 𝑅 , the branch contains the control filter 
+𝐰𝑖,𝑟(𝑛) and uses the driver-specific secondary-path model ̂𝐬𝑖. The branch 
+output is 𝑦𝑖(𝑛) = ∑𝑅
+𝑟=1 𝐰T
+𝑖,𝑟(𝑛)𝐱𝑟(𝑛), and the error signal is
+𝑒(𝑛) =𝑑(𝑛) −𝐬 T
+W𝐲W(𝑛) −𝐬 T
+T𝐲T(𝑛), (9)
+where 𝐬W ∈ℝ 𝐿 and 𝐬T ∈ℝ 𝐿 are the secondary-path impulse responses 
+for the woofer and tweeter, and 𝐲𝑖(𝑛) = [𝑦 𝑖(𝑛),…, 𝑦 𝑖(𝑛−𝐿+ 1)] T is the 
+tapped-delay-line output vector for driver 𝑖. Both driver branches are 
+updated by FxNLMS while sharing the same error signal 𝑒(𝑛).
+Since both filters minimize the same mean-square error, the steady-
+state optimum tends to concentrate the control effort at each frequency 
+on the driver whose secondary path offers more favorable amplitude, 
+phase, and group-delay characteristics. In practice, however, FxNLMS 
+is a stochastic-gradient algorithm whose coefficients approach this op­
+timum only gradually. At frequencies where a driver’s secondary-path 
+amplitude is low, the filtered-reference energy is correspondingly weak, 
+so the normalization term and regularization constant 𝛿 strongly influ­
+ence the update magnitude and can increase sensitivity to path-model 
+and gradient-estimation errors. Moreover, where the secondary-path 
+delay violates causality, the available phase relationship limits the at­
+tainable cancellation and can lead to large filter coefficients or control 
+outputs in frequency regions where the driver is inefficient. In a physi­
+cal implementation, such outputs may increase nonlinear-distortion risk, 
+which is not represented in the present linear evaluation.
+We therefore introduce band-limiting filters ℎW(𝑛) and ℎT(𝑛) to im­
+pose the intended band allocation and suppress adaptation through 
+unfavorable paths. As an ideal branch-allocation target, we define the 
+lower envelope of the two unfiltered driver delays as
+𝜏min(𝑓) = min (𝜏S,W(𝑓), 𝜏 S,T(𝑓) ). (10)
+This envelope is a design interpretation of ideal driver selection at each 
+frequency, not the exact group delay of the sum of two simultaneously 
+active branches. The difference between the two placements is whether 
+ℎW and ℎT are applied only in the background adaptation path or also 
+in the foreground output path.
+In the background placement, the band-limiting filters act only on 
+the error and filtered-reference signals used for gradient computation. 
+For every driver branch and reference channel, the filtered signals and 
+the corresponding update are 
+̃ 𝑒𝑖(𝑛) = (ℎ 𝑖 ∗𝑒)(𝑛), (11a)
+̃ 𝑥𝑖,𝑟(𝑛) = (ℎ 𝑖 ∗̂ 𝑠𝑖 ∗𝑥 𝑟)(𝑛), (11b)
+̃𝐱𝑖,𝑟(𝑛) = [̃ 𝑥𝑖,𝑟(𝑛),…, ̃ 𝑥𝑖,𝑟(𝑛−𝑁+ 1)] T, (11c)
+𝐰𝑖,𝑟(𝑛+ 1) =𝐰 𝑖,𝑟(𝑛) +𝜇 𝑖
+̃ 𝑒𝑖(𝑛) ̃𝐱𝑖,𝑟(𝑛)
+‖̃𝐱𝑖,𝑟(𝑛)‖2 +𝛿 . (11d)
+Here, 𝑖∈ {W,T}  and 𝑟= 1,…, 𝑅 . The same driver-specific filter ℎ𝑖
+is applied to the error signal and to every filtered-reference sequence 
+in branch 𝑖, while each reference-channel update retains the reference-
+specific normalization adopted in ( 3). Let 𝐻𝑖(𝑓) denote the frequency 
+response of ℎ𝑖. Because both ̃ 𝑒𝑖(𝑛) and ̃ 𝑥𝑖,𝑟(𝑛) are filtered by ℎ𝑖, fre­
+quency components outside its passband are attenuated rather than 
+removed exactly. Under the stationary expected-gradient interpretation, 
+the cross-spectrum in the update numerator contains 𝐻 ∗
+𝑖 (𝑓)𝐻 𝑖(𝑓) =
+|𝐻𝑖(𝑓)| 2. The denominator in ( 11d) is a positive scalar normalization 
+based on the filtered-reference energy. Because this random denomi­
+nator can be correlated with the numerator, 𝜇𝑖|𝐻𝑖(𝑓)| 2 is not an exact 
+effective step size. Under the mean-denominator approximation de­
+rived in Appendix E , normalization changes the common scale but 
+retains the relative frequency dependence imposed by |𝐻𝑖(𝑓)| 2, thereby 
+Applied Acoustics 257 (2027) 111618 
+4 
+
+H. Chiba, N. Kamado, T. Kako et al.
+Fig. 3. Block diagrams of the dual-filter configuration. Background placement, in which the band-limiting filters with responses 𝐻W and 𝐻T act only in the gradient 
+path. Foreground placement, in which the corresponding filters are inserted into the woofer and tweeter output branches.
+suppressing adaptation outside the intended passband. The nonzero 
+phase response of the Butterworth IIR filter affects both instantaneous 
+adaptation signals, while the common filter phase cancels only in the 
+stationary expected-gradient numerator described above. Because the 
+band-limiting filters are not applied to the control outputs 𝑦W(𝑛) and 
+𝑦T(𝑛), they do not add filter group delay to the foreground anti-noise 
+path. In this output-path sense, the background placement is delayless.
+Because no band-filter delay is added to the output secondary paths, 
+the ideal branch-delay envelope for the background placement is
+𝜏Bg
+env(𝑓) =𝜏 min(𝑓). (12)
+This design target is favorable under a limited causality margin, but it is 
+not an exact group-delay expression for the summed two-branch output. 
+The trade-off is that the control outputs themselves are not band-limited, 
+so anti-noise may still be radiated at frequencies outside the intended 
+adaptation band.
+In the foreground placement, the band-limiting filters are moved 
+into the output paths of the woofer and tweeter branches. The two fil­
+tered branches can then be interpreted through effective secondary paths 
+̃𝐬𝑖 =𝐡 𝑖 ∗𝐬 𝑖, so each output branch is directly band-weighted. This at­
+tenuates out-of-band anti-noise components according to the finite filter 
+response, but the band filters now contribute their own group delay to 
+the secondary paths. Under the ideal branch-dominance interpretation, 
+the corresponding delay envelope is
+𝜏Fg
+env(𝑓) = min (𝜏S,W(𝑓) +𝜏 𝐻W (𝑓), 𝜏 S,T(𝑓) +𝜏 𝐻T (𝑓) ), (13)
+so the foreground placement exchanges direct output band control for 
+additional delay consumption. As in the background case, this enve­
+lope is a design approximation rather than the exact group delay of the 
+summed branch response.
+When the strict causality condition ( 4) is violated but the phase er­
+ror remains within the valid range of the relaxed model, reducing the 
+effective delay remains beneficial because it reduces the phase error 
+in (6) and extends the bandwidth over which positive attenuation re­
+mains achievable. Independent step sizes 𝜇W and 𝜇T remain available in 
+both placements, although the experimental comparison used the same 
+value for all active branches.
+3.3 . Single-filter configuration
+The single-filter configuration retains one adaptive-filter branch and 
+delegates the band allocation to a fixed crossover network, as illustrated 
+in Fig. 4. In the single-reference notation, this structure halves the num­
+ber of adaptive-filter branches and secondary-path models relative to 
+the dual-filter configuration.
+A single control-filter branch 𝐰(𝑛) ∈ℝ 𝑁 produces anti-noise 𝑦(𝑛) =
+𝐰T(𝑛)𝐱(𝑛)  in the single-reference notation. In the actual 𝑅-reference im­
+plementation, this branch uses the multi-reference output in ( 2), with 
+one reference-channel filter for each reference microphone and one 
+composite secondary-path model shared across those reference-channel 
+updates. A crossover network comprising filters 𝐡W and 𝐡T with gain 
+coefficients 𝑔W and 𝑔T splits and scales 𝑦(𝑛), routing the resulting sig­
+nals to the woofer and tweeter, respectively. Since the crossover filters 
+and the secondary paths are all linear and time-invariant, the cascade 
+from the control-filter output to the error microphone reduces to a single 
+composite impulse response
+𝐬C =𝑔 W 𝐡W ∗𝐬 W +𝑔 T 𝐡T ∗𝐬 T, (14)
+where ∗ denotes linear convolution and 𝑔W, 𝑔 T are non-negative gain 
+coefficients that compensate for the amplitude difference between the 
+two secondary paths. The gain-matching factor utilized for the tweeter 
+branch is computed from the RMS magnitude ratio of the measured 
+woofer and tweeter secondary paths over a matching band Km, as
+𝑔m =
+√∑
+𝑘∈Km |𝑆W(𝑓𝑘)|2
+√∑
+𝑘∈Km |𝑆T(𝑓𝑘)|2
+. (15)
+Here Km denotes the set of discrete frequency bins 𝑘 whose frequencies 
+𝑓𝑘 lie in the matching band. Eq. (15) gives the ratio of the woofer and 
+tweeter RMS magnitudes in that band. The error signal is therefore
+𝑒(𝑛) =𝑑(𝑛) −𝐬 T
+C 𝐲(𝑛), (16)
+where 𝐲(𝑛) is the tapped-delay-line vector as the summed control output 
+with the same length of 𝐬C. The control filter is updated by FxNLMS as 
+in (1) with the secondary-path model ̂𝐬 replaced by ̂𝐬C. For the three-
+reference implementation, the update is the multi-reference update 
+in (3) with ̂𝐬 replaced by ̂𝐬C for all reference channels. Unlike the back­
+ground placement in the dual-filter configuration, the crossover filters in 
+the single-filter configuration are applied after the summed control out­
+put 𝑦(𝑛) is generated; therefore, they are not separate reference-channel 
+filters.
+Since the crossover filters and gain coefficients act directly on the 
+output branches, this structure is inherently a foreground implementa­
+tion. The group delay of the composite path, 𝜏S,C(𝑓), therefore depends 
+Applied Acoustics 257 (2027) 111618 
+5 
+
+H. Chiba, N. Kamado, T. Kako et al.
+Fig. 
+4. Block diagram of the single-filter configuration. The adaptive filter op­
+erates on the composite secondary path formed by the fixed crossover network, 
+the gain-matching coefficients, and the two loudspeaker paths.
+on the choice of crossover filters. When the woofer branch magnitude is 
+much larger than that of the tweeter branch,
+|
+𝑔W 𝐻W(𝑓 ) 𝑆W(𝑓 )| ≫ |𝑔T 𝐻T(𝑓 ) 𝑆T(𝑓 )|, (17)
+the 
+composite group delay approaches 𝜏S,W(𝑓 ) + 𝜏𝐻W (𝑓 ). Conversely, 
+when the tweeter branch dominates, 𝜏S,C(𝑓 ) approaches 𝜏S,T(𝑓 ) +𝜏𝐻T (𝑓 ). 
+Here 𝜏𝐻W (𝑓 ) and 𝜏𝐻T (𝑓 ) denote the group delays of the crossover filters 
+themselves. Since the convolution in (14) adds the crossover-filter group 
+delay to the secondary-path group delay, the filter order must be kept 
+low to avoid consuming the causality margin. In particular, when 𝐡W is 
+chosen as an identity filter (i.e., 𝐻W(𝑓 ) = 1  with 𝜏𝐻W (𝑓 ) = 0 ), the woofer 
+branch incurs no additional filter delay across the full bandwidth. In this 
+case, 𝐡T serves as a high-pass filter whose cutoff frequency 𝑓x determines 
+the transition between the woofer-dominated and tweeter-dominated re­
+gions of 𝐬C. In the present implementation, 𝑔W = 1 and 𝑔T = 𝑔m𝑔adj, 
+where 𝑔adj is an optional adjustment factor for sensitivity analysis.
+3.4 . Configuration comparison
+Table 1 compares the background dual-filter, foreground dual-filter, 
+and single-filter configurations. All three utilize a pair of band-splitting 
+filters, but they differ in where the filters are placed and how many 
+adaptive-filter branches are used in the single-reference notation. In the 
+background dual-filter configuration, the band splitting acts only on the 
+gradient signals, so no additional filter group delay is introduced into the 
+foreground anti-noise path. In the foreground dual-filter and single-filter 
+configurations, the band-splitting filters appear directly in the output 
+path and therefore add filter group delay to the secondary-path delay.
+When both band-splitting filters are identities, i.e., the bypass/bypass 
+case, the foreground dual-filter configuration reduces to the background 
+dual-filter configuration because 𝜏𝐻W (𝑓 ) = 𝜏𝐻T (𝑓 ) = 0 . More generally, 
+the foreground dual-filter and single-filter configurations share the same 
+root cause of delay penalty: both place filters in the anti-noise path. Their 
+difference is computational rather than structural. Specifically, the fore­
+ground dual-filter configuration retains two adaptive-filter branches and 
+preserves per-driver step-size control, whereas the single-filter configu­
+ration uses one adaptive-filter branch and one composite secondary-path 
+model.
+From a delay perspective, the background dual-filter configuration is 
+the most favorable of the three because it avoids added filter group delay 
+in the foreground anti-noise path. The foreground dual-filter configura­
+tion consumes additional causality margin through 𝜏𝐻W (𝑓 ) and 𝜏𝐻T (𝑓 ), 
+and the single-filter configuration is governed by the composite delay 
+Table 1 
+Comparison of the background dual-filter, foreground dual-filter, and single-filter 
+configurations. The final row reports control-output convolution MACs per out­
+put sample in the single-reference notation; the three-reference architecture-level 
+comparison is given in Table 2.
+Background 
+dual-filter
+Foreground 
+dual-filter
+Single
+-filter
+Adaptive-filter branches 2 2 1
+Secondary-path models 2 2 1
+Band-splitting applied to Gradient path Output paths Output 
+path
+Filter delay added No Yes Yes
+Delay descriptor 𝜏Bg
+env(
+𝑓 ) 𝜏Fg
+env(𝑓 ) 𝜏S,C(𝑓 )
+Control-output con­
+volution MACs per 
+sample
+≈ 2𝑁 ≈ 2𝑁 ≈ 𝑁
+𝜏S,C(
+𝑓 ) of (14). Within the valid range of the relaxed model, a smaller 
+effective delay reduces the phase error in (6) and widens the frequency 
+range over which attenuation remains achievable; outside that range, 
+the model is not used as a quantitative performance predictor. This de­
+lay difference therefore affects the attainable broadband ANC bandwidth 
+without implying a point-by-point prediction. On the other hand, the 
+single-filter configuration halves the control-output convolution count 
+relative to either dual-filter implementation for the same filter length 𝑁
+in the single-reference notation. Table 1 gives this compact architectural 
+comparison, while Table 2 gives the corresponding three-reference com­
+parison of output arithmetic, coefficient-vector commitment schedule, 
+and coefficient storage.
+Table 1  gives compact single-reference output counts, but the 
+three-reference implementation also requires an explicit rate-dependent 
+comparison. Table 2 therefore distinguishes the latency-critical control-
+output convolution, which is evaluated at every output sample, from 
+the coefficient-vector commitment, which is scheduled every 𝐵 sam­
+ples. Each commitment updates 𝑁 coefficient elements per control-filter 
+vector, giving aggregate rates of 2𝑅𝑁𝑓 𝑠∕𝐵 and 𝑅𝑁𝑓 𝑠∕𝐵 coefficient-
+element updates per second for the dual-filter and single-filter config­
+urations, respectively. These rates are schedule indicators rather than 
+processor MAC counts. In particular, the table does not convert the 
+within-block gradient formation and accumulation, filtered-reference 
+generation, low-order band filtering, scalar normalization, summation, 
+buffering, or platform-specific scheduling into a complete background 
+arithmetic rate. The output/commitment distinction used here describes 
+processing schedule and is independent of the Fg/Bg condition labels for 
+band-limiting-filter placement.
+This comparison shows that the single-filter configuration halves the 
+control-output convolution rate, coefficient-element commitment rate, 
+and stored coefficient count relative to the dual-filter configurations 
+for the same 𝑅, 𝑁, and 𝐿. It also clarifies the role of 𝐵: increas­
+ing the interval reduces the coefficient-vector commitment event rate 
+and aggregate coefficient-element update rate without changing the 
+sample-by-sample anti-noise generation. Appendix C complements this 
+architecture-level comparison with execution times measured for a con­
+ventional adaptive ANC workload on a specific DSP platform, showing 
+that a fixed low-delay frame schedule was sustained under a substantial 
+adaptive-processing load. 
+4 . Experiment
+4.1 . Experimental setup
+All primary and secondary path impulse responses were measured 
+in a room sized 6.0 m × 4.0 m × 2.6 m (ceiling height) with a rever­
+beration time of approximately 0.1 s. Four Genelec 8030C loudspeakers 
+served as spatially distributed primary noise sources, arranged symmet­
+rically around a dummy head (Southern Acoustics SAMREC 2600RS) at 
+a distance of approximately 2.0 m, as shown in Fig. 5. Impulse responses 
+Applied Acoustics 257 (2027) 111618 
+6 
+
+H. Chiba, N. Kamado, T. Kako et al.
+Table 2 
+Architecture-level processing and coefficient-storage comparison for the three-reference implementation. Numerical examples use 𝑅 = 3, 𝑁 = 1024, 𝐿 = 256, and 
+𝐵 = 10. All rates and coefficient counts are per-ear values; bilateral operation requires twice these values. Panel (a) separates the control-output convolution 
+rate from the coefficient-vector commitment schedule; the latter is reported as coefficient-element updates rather than processor MACs. Panel (b) includes 
+control-filter and secondary-path-model coefficients but excludes signal buffers, filter states, and program memory.
+(a) Processing workload and schedule
+Operation Dual-filter 
+workload/event
+Single-filter 
+workload/event
+Event rate 48 kHz
+dual-filter
+48 kHz
+single-filter
+24 kHz
+dual-filter
+24 kHz
+single-filter
+Control-output convolution 
+MMAC/s
+2𝑅𝑁 MAC 𝑅𝑁 MAC 𝑓𝑠 294.9 147.5 147.5 73.7
+Coefficient-vector 
+commitment million 
+coefficient-element updates/s
+2𝑅𝑁 coeff. 𝑅𝑁 coeff. 𝑓𝑠∕𝐵 29.5 14.7 14.7 7.4
+(b) Coefficient storage
+Quantity Dual-filter 
+expression
+Single-filter 
+expression
+Dual-filter value Single-filter value
+Control-filter coefficients 2𝑅𝑁 𝑅𝑁 6144 3072
+Secondary-path-model 
+coefficients
+2𝐿 𝐿 512 256
+Total 2𝑅𝑁 + 2𝐿 𝑅𝑁 + 𝐿 6656
+26.0 KiB at 32 bit
+3328
+13.0 KiB at 32 bit
+Fig. 5. Measurement environment. Four Genelec 8030C loudspeakers are ar­
+ranged around a dummy head at a distance of approximately 2.0 m. The room 
+measures 6.0 m × 4.0 m × 2.6 m with a reverberation time of approximately 
+0.1 s.
+were acquired by the time-stretched pulse (TSP) method using an expo­
+nential swept-sine signal of 218 samples at a sampling rate of 48 kHz. An 
+eight-channel audio interface (Roland OCTA-CAPTURE) was utilized for 
+simultaneous recording, with one channel allocated as an analog loop­
+back to measure and compensate for the round-trip latency of the audio 
+interface.
+The headphone under test was the nwm ONE, an open-ear headphone 
+equipped with a coaxial offset 2-way secondary source as described 
+in Section 3.1. It was adopted as a representative open-ear platform, 
+motivated by prior studies confirming the high acoustic transparency 
+of open-ear devices [ 4,34]. The woofer (dia. 35 mm) and tweeter 
+Fig. 6. Headphone hardware (nwm ONE) with microphone placement. Three 
+reference microphones per ear are attached to the headphone housing, and one 
+error microphone is mounted on the loudspeaker axis at the ear canal entrance. 
+The cross-sectional view (right) shows the coaxial offset arrangement of the 
+woofer (dia. 35 mm) and tweeter (dia. 12 mm).
+(dia. 12 mm) are mounted coaxially, with the tweeter positioned in front 
+of the woofer and closer to the ear canal. The device dimensions and 
+microphone placement are illustrated in Fig. 6. Three omnidirectional 
+electret condenser microphones (Hosiden KUB0623, dia. 4 mm) per 
+ear were attached to the headphone housing as reference microphones. 
+Their positions were distributed around the housing to obtain reference 
+signals for noise arriving from different directions, while keeping the 
+microphone count within a practical range for wearable ANC. The head­
+phone was modified to mount an error microphone of the same type on 
+the loudspeaker axis at the entrance of the ear canal. The nwm ONE 
+is designed to mitigate sound leakage by opposite-phase radiation [ 3]; 
+however, this design feature alone does not establish that secondary-
+to-reference acoustic feedback is negligible for feedforward adaptation. 
+The relevant signal-level comparison is the secondary-induced compo­
+nent at each reference microphone relative to the primary-reference 
+Applied Acoustics 257 (2027) 111618 
+7 
+
+H. Chiba, N. Kamado, T. Kako et al.
+signal, rather than the secondary-to-reference path relative to the 
+error-microphone secondary path alone. We therefore measured the 
+secondary-to-reference acoustic paths and retained their amplitude re­
+sponses as supporting path-level evidence in Appendix A. These paths 
+were excluded from the FxNLMS adaptation used for the main controlled 
+measured-path evaluation. To quantify the implication of this approxi­
+mation under the obtained uncoupled solutions, Appendix A also reports 
+a post-hoc estimate in which the simulated control outputs are filtered 
+through the measured secondary-to-reference paths and compared with 
+the primary-reference signals over 100–4000 Hz.
+Noise-reduction performance was evaluated offline using the mea­
+sured primary- and secondary-path impulse responses. This framework 
+is an idealized linear measured-path evaluation under controlled as­
+sumptions, designed to isolate the effects of secondary-path delay and 
+driver-band allocation. It does not constitute validation of a real-time 
+open-ear ANC system. Consequently, it does not represent loudspeaker 
+nonlinearities, secondary-path modeling error, microphone noise, cou­
+pled secondary-to-reference feedback during adaptation, finite process­
+ing precision, controller timing for the exact configurations evaluated 
+here, or wearing-position variation. As in prior causality-oriented feed­
+forward ANC studies based on measured-path analysis [ 16,37], the 
+measured-path framework is used to isolate delay-related behavior 
+rather than to replace subsequent physical-system validation. The eval­
+uation utilized time-domain feedforward FxNLMS at a sampling rate 
+of 48 kHz as formulated in Section 2, using all three reference micro­
+phones per ear (𝑅= 3 ), with the common parameters listed in Table 3. 
+The filtered-reference vectors from all three reference channels were in­
+cluded in the FxNLMS update, and each reference-channel update was 
+normalized by its own filtered-reference power as in ( 3). In the back­
+ground dual-filter conditions, the same branch-specific band-limiting fil­
+ter was applied to the common error signal and every filtered-reference 
+sequence in the corresponding driver branch; no reference-dependent 
+band-limiting filters were used. The control-filter coefficient vectors 
+were committed once every 𝐵= 10  samples using a block implementa­
+tion [8]. This commitment interval applies to the adaptation path, not to 
+the generation of the anti-noise sample, which was evaluated at the sam­
+pling rate. Thus, increasing 𝐵 reduces the commitment event rate and 
+aggregate coefficient-element update rate in Table 2, but it also slows 
+convergence and tracking. Each run lasted 10 s with four-channel un­
+correlated pink noise as the input noise source. To examine sensitivity 
+to electronic delay without treating it as a measured controller latency, 
+a controlled virtual electronic delay of 104 µs (5 samples at 48 kHz) 
+was prepended to both the secondary-path impulse responses and their 
+models; the effect of varying this delay is examined in Section 4.4 . 
+Appendix C reports a supplementary end-to-end pass-through impulse-
+response measurement of the wearable controller signal chain. Under 
+the pass-through processing condition, the detected impulse-response 
+peak was 83.3 µs. This peak-based measurement collectively includes 
+the ADC, I/O buffering, DSP frame cadence and pass-through computa­
+tion, DAC, reconstruction filtering, and output scheduling, but it does 
+not characterize sustained or worst-case controller timing under the full 
+three-reference adaptive-computation load. It is therefore used only as 
+partial evidence of the hardware-path latency scale under the measured 
+pass-through condition; it neither defines nor validates the independent 
+104 µs virtual delay and does not constitute a closed-loop real-time ANC 
+validation. Appendix C additionally reports execution times of a con­
+ventional adaptive ANC workload measured on the same DSP platform. 
+These measurements show that the low-delay frame schedule underly­
+ing the pass-through measurement was maintained under a substantial 
+adaptive-processing load; they are indirect, implementation-level evi­
+dence, not a real-time validation of the configurations evaluated here. 
+Note that, in a sample-by-sample time-domain implementation, the con­
+trol filter output is computed from the current and past reference signal 
+samples; however, the sequential processing of input acquisition, com­
+putation, and output update in a digital signal processor means that the 
+computed result can be reflected in the actual output only on the next 
+Table 3 
+Experimental parameters.
+Sampling rate 48 kHz
+Control-filter length 𝑁 1024 taps
+Secondary-path length 𝐿 256 taps
+Primary-path length 4096 taps
+Block interval for coefficient update 𝐵 10 samples
+Step size 𝜇 0.04 (all active adaptive-filter branches)
+Virtual electronic delay 5 samples (104 µs)
+Noise source Pink noise (4-ch, uncorrelated)
+Duration 10 s
+Ears evaluated Left and right
+Reference channels 𝑅 (per ear) 3
+Error microphone (per ear) 1
+Table 4 
+Comparison conditions. Placement indicates where the 
+band-splitting filter is applied. “equiv.” denotes that the 
+background and foreground implementations are struc­
+turally identical. HP denotes a first-order Butterworth 
+high-pass filter at 𝑓c = 500Hz . “Bp” (bypass) means 
+ℎ=𝛿  (no band limitation), and “Off” means the driver 
+is disabled (ℎ= 0 ).
+ID Config. Placement ℎW ℎT
+Wf-Bp Wf only equiv. Bp Off
+Tw-Bp Tw only equiv. Off Bp
+Tw-Hp-Fg Tw only Fg Off HP 500
+Tw-Hp-Bg Tw only Bg Off HP 500
+Du-BpBp Dual equiv. Bp Bp
+Du-BpHp-Fg Dual Fg Bp HP 500
+Du-BpHp-Bg Dual Bg Bp HP 500
+Xo-BpBp Single Fg only Bp Bp
+Xo-BpHp Single Fg only Bp HP 500
+sample instant at the earliest, introducing a one-sample input–output 
+implementation delay. This one-sample delay is inherent in the sample-
+by-sample implementation and is included in the algorithm separately 
+from the virtual electronic delay. The evaluation utilized impulse re­
+sponses measured on both the left and right ears of the dummy head; 
+results are reported for the two ears separately and, where stated, as 
+their average.
+We compared nine conditions to evaluate the effect of filter place­
+ment and the choice between the dual-filter and single-filter architec­
+tures, as summarized in Table 4. When explicit band limitation is used, 
+the tweeter branch is controlled by a first-order Butterworth high-pass 
+IIR filter with cutoff frequency 𝑓c = 500Hz . When bypass is specified, 
+the filter is a unit impulse ( ℎ=𝛿 ), i.e., no filtering is applied; when a 
+driver is designated “off,” the filter output is identically zero.
+Conditions Wf-Bp and Tw-Bp are single-driver baselines with by­
+pass, and the background and foreground placements are therefore 
+structurally identical. Conditions Tw-Hp-Bg and Tw-Hp-Fg isolate the 
+effect of filter placement for a tweeter-only high-pass implementation. 
+Conditions Du-BpBp, Du-BpHp-Bg, and Du-BpHp-Fg utilize the dual-
+filter architecture with two adaptive-filter branches, differing in whether 
+the band split is absent or imposed on the tweeter branch and whether 
+the filter is placed in the background or foreground path. Conditions Xo-
+BpBp and Xo-BpHp implement the single-filter architecture with a single 
+adaptive-filter branch.
+The nominal parameters were selected as common design settings 
+rather than optimized separately for each architecture. A first-order 
+Butterworth response was used because it is the lowest-order nontriv­
+ial high-pass response and therefore limits the output-path group delay 
+while suppressing inefficient low-frequency excitation of the tweeter. 
+Using the same order for all high-pass conditions also preserves a com­
+mon basis for the architecture comparison. The cutoff frequency 𝑓c =
+500Hz  was selected as a compromise that lies above the tweeter’s 
+Applied Acoustics 257 (2027) 111618 
+8 
+
+H. Chiba, N. Kamado, T. Kako et al.
+resonant region near 300 Hz, where its mechanical group delay is el­
+evated and its efficiency is poor, while keeping the transition frequency 
+low. For the single-filter conditions, the gain coefficients were set to 
+𝑔W = 1 and 𝑔T =𝑔 m𝑔adj. The gain-matching factor 𝑔m was computed us­
+ing (15) over the relatively flat common band between 500 and 2000 Hz, 
+yielding 𝑔m = 1.655  for the left ear and 𝑔m = 1.409  for the right ear; 
+𝑔adj = 1 in the main comparison. A common step size 𝜇= 0.04  was ap­
+plied to every active adaptive-filter branch to avoid architecture-specific 
+tuning. Appendix D reports one-factor-at-a-time sensitivity analyses for 
+𝑓c, the common step size, and the gain-matching band, and explains 
+the untested filter-order dependence. These analyses support the nomi­
+nal values as common comparison settings, but do not identify them as 
+universal or jointly optimized values.
+Noise reduction performance was evaluated using a frequency-
+resolved noise-reduction level, a 1/1-octave-band average, and an inte­
+grated band-limited noise-power reduction, together with a frequency-
+resolved spectral visualization. The first metric is the noise reduction 
+level 𝐿NR(𝑓), defined as
+𝐿NR(𝑓) = 1
+𝑇ev
+𝑇ev−1∑
+𝑡=0
+10log 10
+|𝐷(𝑓 , 𝑡)|2
+|𝐸(𝑓 , 𝑡)|2 , (18)
+where 𝐷(𝑓 , 𝑡) and 𝐸(𝑓 , 𝑡) are the short-time Fourier transform (STFT) 
+coefficients of the primary noise 𝑑(𝑛) and the error signal 𝑒(𝑛), respec­
+tively, and 𝑇ev is the number of time frames in the evaluation window. 
+For frequency-resolved visualization, the average power spectrum was 
+defined as
+𝑃𝑍 (𝑓) = 1
+𝑇ev
+𝑇ev−1∑
+𝑡=0
+10log 10|𝑍(𝑓 , 𝑡)|2,
+𝑍∈ {𝐷, 𝐸},
+(19)
+where 𝑃𝐷(𝑓) and 𝑃𝐸 (𝑓) denote the average power spectra of the ANC-off 
+and residual signals, respectively. Fig. 11 plots 𝑃𝐸 (𝑓) for all conditions 
+together with 𝑃𝐷(𝑓) as the ANC-off reference. The second metric is the 
+octave-band value 𝐿𝑏,rel, where 𝑏 denotes the 1/1-octave band index, 
+which is used for the octave-band comparison in Fig. 10 and for the 
+electronic-delay parametric study in Fig. 12. In the present implementa­
+tion, 𝐿𝑏,rel is obtained by octave-band averaging of 𝐿NR(𝑓) and is utilized 
+only for band-by-band comparison, not as a single broadband summary 
+value. Thus, the octave-band labels in Fig. 10 denote the center frequen­
+cies of the 1/1-octave bands, not single-frequency evaluation points. The 
+third metric is the band-limited noise-power reduction 𝐿BL(B), intro­
+duced to summarize the broadband pink-noise reduction over a specified 
+frequency range B:
+𝐿BL(B) = 10log 10
+∑
+𝑓𝑘∈B |𝐷(𝑓𝑘, 𝑡)|2
+∑
+𝑓𝑘∈B |𝐸(𝑓𝑘, 𝑡)|2
+, (20)
+where the overbar denotes averaging over the same steady-state evalu­
+ation frames as in (18). Unlike 𝐿𝑏,rel, 𝐿BL(B) is computed by integrating 
+linear power over the specified frequency range before conversion to dB; 
+it is therefore a band-limited power-ratio metric rather than an average 
+of dB-valued spectral reductions.
+The STFT was computed with a Hann window of length 4096 and 
+a hop size of 1024. The evaluation window covers the last 25% of 
+the frames, corresponding to approximately the final 2.5 s, to ensure 
+that the adaptive filter has converged to steady state. The time evo­
+lution of a blockwise residual-to-primary power ratio was checked for 
+all nine conditions, and this evaluation window was chosen after the 
+dominant transient had decayed. Representative left- and right-ear con­
+vergence curves for the main conditions are provided in Appendix B; 
+although only representative conditions are shown to avoid redundancy, 
+the same convergence check was carried out for all nine conditions. For 
+the octave-band comparisons, 𝐿𝑏,rel was averaged over 1/1 octave bands 
+Fig. 7. Sound pressure level (top) and group delay (bottom) of the woofer 
+(dia. 35 mm) and tweeter (dia. 12 mm), measured individually in a JIS C 5532 
+standard enclosure with a pressure microphone at 30 mm. The group-delay 
+curves are shown after 1/24-octave fractional-band smoothing for visual clarity, 
+and the sound-pressure-level curves are shown without smoothing. The dashed 
+horizontal line in the lower panel indicates the acoustic propagation delay for a 
+distance of 30 mm, approximately 88 µs.
+with center frequencies of 125, 250, 500, 1000, 2000, and 4000 Hz, us­
+ing band edges defined by IEC 61260 [ 12]. The lower and upper band 
+edges were clipped to 100 Hz and 4000 Hz, respectively; frequency com­
+ponents below 100 Hz and at or above 4000 Hz were excluded from 
+the evaluation. The band-limited ranges reported below use the same 
+evaluated frequency region.
+4.2 . Driver delay basis and secondary-path characteristics
+This subsection separates the delay evidence used for the design 
+rationale from the measured secondary paths utilized in the offline eval­
+uation. Fig. 7  shows the isolated driver responses measured using a 
+JIS standard enclosure. For this measurement, each loudspeaker was 
+mounted on the JIS C 5532 standard enclosure via a sub-baffle, and 
+the response was measured using an AP-525 analyzer, a CLASSIC PRO 
+CP400 amplifier, and an ACO TYPE-7013 pressure microphone with an 
+ACO TYPE-4012 preamplifier and TYPE-5001 power supply. The ex­
+citation signal was a 1-s logarithmic sweep from 20 Hz to 24 kHz at 
+100 mV, acquired at a sampling rate of 192 kHz with high-pass AC cou­
+pling below 10 Hz. The microphone was placed approximately 30 mm 
+in front of the diaphragm, so the acoustic propagation delay in this 
+measurement is approximately 88 µs and is nearly frequency indepen­
+dent, as indicated by the dashed reference line. The excess above this 
+line is used here as the isolated-driver mechanical group-delay basis, 
+rather than as a component extracted from the worn-device secondary
+path.
+The woofer has a fundamental resonant frequency of approximately 
+150 Hz, whereas the tweeter’s is near 300 Hz. Consequently, the woofer’s 
+group delay decreases rapidly above 150 Hz, while the tweeter’s group 
+delay remains elevated up to approximately 500 Hz before converg­
+ing to a similar level. These results support the mechanical-delay part 
+Applied Acoustics 257 (2027) 111618 
+9 
+
+H. Chiba, N. Kamado, T. Kako et al.
+Table 5 
+Design-oriented representative delay budget for the woofer and tweeter branches. The mechanical entries subtract the approximately 88 µs propagation delay 
+associated with the 30 mm JIS measurement distance from the representative total group delays in Fig. 7; this term is not subtracted from the independently 
+estimated source-to-ear acoustic propagation column. The branch-dependent subtotal is the sum of the acoustic propagation delay, corrected mechanical 
+group-delay basis, and crossover-filter group delay. The nominal design-budget total additionally includes the common 104 µs controlled virtual electronic 
+delay used in the offline evaluation. This electronic term is a controlled parameter, not a measured controller latency. The values are representative design 
+quantities, not an exact decomposition of the non-minimum-phase worn-device secondary paths.
+Frequency Condition Acoustic propagation
+delay [µs]
+Mechanical group delay after
+subtracting 88 µs [µs]
+Crossover-filter group
+delay [µs]
+Branch-dependent
+subtotal [µs]
+Nominal design-budget total
+including 104 µs [µs]
+500 Hz Wf-Bp ≈ 44 ≈ 162 (250 − 88) 0 ≈ 206 ≈ 310
+500 Hz Tw-Bp ≈ 6 ≈ 412 (500 − 88) 0 ≈ 418 ≈ 522
+500 Hz Tw-Hp-Bg ≈ 6 ≈ 412 (500 − 88) 0 ≈ 418 ≈ 522
+500 Hz Tw-Hp-Fg ≈ 6 ≈ 412 (500 − 88) ≈ 160 ≈ 578 ≈ 682
+1 kHz Wf-Bp ≈ 44 ≈ 62 (150 − 88) 0 ≈ 106 ≈ 210
+1 kHz Tw-Bp ≈ 6 ≈ 62 (150 − 88) 0 ≈ 68 ≈ 172
+1 kHz Tw-Hp-Bg ≈ 6 ≈ 62 (150 − 88) 0 ≈ 68 ≈ 172
+1 kHz Tw-Hp-Fg ≈ 6 ≈ 62 (150 − 88) ≈ 64 ≈ 132 ≈ 236
+of the proposed allocation: the woofer is more suitable in the low-
+frequency band, where the tweeter remains close to its resonant region, 
+while the tweeter becomes mechanically competitive near 1 kHz and 
+above. Table 5 summarizes the branch-level delay budget at 500 Hz 
+and 1 kHz. It distinguishes the branch-dependent subtotal of acoustic 
+propagation, mechanical group delay, and crossover-filter group delay 
+from the nominal design-budget total obtained by adding the common 
+104 µs controlled virtual electronic delay. The acoustic propagation 
+values are estimated from the geometry in Fig. 6: the tweeter-to-error-
+microphone distance is approximately 2 mm, whereas the woofer-
+to-error-microphone distance is approximately 15 mm, including the 
+13 mm coaxial offset. Using 𝑐= 340m s −1 gives acoustic propagation 
+delays of approximately 6 µs for the tweeter branch and 44 µs for the 
+woofer branch. The mechanical group-delay values are obtained by sub­
+tracting the approximately 88 µs acoustic propagation delay associated 
+with the 30 mm JIS measurement distance from the rounded represen­
+tative total group delays read from Fig. 7. This subtraction is applied 
+only to the isolated-driver mechanical basis; the source-to-ear acoustic 
+propagation column is estimated independently from the headphone ge­
+ometry. The crossover-filter group delay is the output-path group delay 
+of the first-order Butterworth high-pass filter at 500 Hz; it is approx­
+imately 160 µs at 500 Hz and 64 µs at 1 kHz. For the background 
+placement, this term is listed as zero because the high-pass filter is not 
+inserted into the output secondary path.
+Table 5 shows that the woofer branch has a smaller representative 
+budget at 500 Hz because the tweeter still carries a larger mechani­
+cal group delay near its resonant region. At 1 kHz, the two mechanical 
+group-delay terms become comparable, so the tweeter’s shorter acous­
+tic propagation delay becomes the dominant branch-level advantage. 
+For frequencies other than these representative points, the table should 
+be read only as a guide to the trend; interpretation should be made with 
+reference to the continuous isolated-driver group-delay curves in Fig. 7 
+and the frequency-dependent crossover-filter group delay, rather than 
+by interpolating the tabulated totals frequency by frequency. The same 
+branch budgets are distributed across the dual-filter and single-filter 
+configurations according to the formulations in Section 3 : the dual-
+filter background placement uses the tweeter high-pass filter only in 
+the adaptation path, the dual-filter foreground placement adds the filter 
+group delay to the tweeter output path, and the single-filter configura­
+tion forms the composite secondary path in (14). Therefore, Du and Xo 
+conditions are not listed as independent rows in the branch-level budget 
+table; they are interpreted by how the branch budgets are combined by 
+each architecture. The reference-to-error microphone spacing in Fig. 6 is 
+approximately 32–42 mm, depending on the reference-microphone po­
+sition, which corresponds to a direct geometric lead time on the order of 
+94µs to124µs for 𝑐= 340m s−1. This order of magnitude is comparable 
+to the nominal virtual electronic delay used in Section 4.4, illustrating 
+the tight causality budget even before electronic delay perturbation is 
+considered. At the two representative frequencies in Table 5, the ad­
+ditional quarter-period margin Δ𝜏𝑞(𝑓) = 1∕(4𝑓)  in Eq. (7) is 500 µs at 
+500 Hz and 250 µs at 1 kHz; these values are provided only as scale 
+references for the single-frequency relaxed model, not as point-by-point 
+performance thresholds for the measured broadband system.
+Figs. 8 and 9 show the secondary paths measured with the headphone 
+mounted on the dummy head and used in the offline simulation. These 
+worn-device secondary paths include the loudspeaker response, acous­
+tic propagation, headphone geometry, dummy-head ear geometry, and 
+local reflections. Therefore, their phase and group-delay curves are not 
+used here to decompose the worn-device paths into acoustic and me­
+chanical terms; instead, the impulse responses and amplitude responses 
+document the actual linear paths utilized in the measured-path evalu­
+ation. The impulse responses show that the tweeter path starts earlier 
+than the woofer path in both ears. In particular, the main peak of Tw-Bp 
+precedes that of Wf-Bp by approximately two samples, corresponding to 
+about 42 µs at 48 kHz, which is consistent in order of magnitude with 
+the geometric estimate above. The single-filter conditions exhibit more 
+oscillatory early responses because they combine the two branches, and 
+Xo-BpHp additionally reflects the output-side high-pass filtering of the 
+tweeter branch.
+The amplitude responses show that Wf-Bp is stronger than Tw-Bp 
+over much of the 100–4000 Hz range, while Tw-Hp-Fg suppresses the 
+inefficient low-frequency part of the tweeter branch and approaches the 
+unfiltered tweeter response at higher frequencies. For gain matching, a 
+relatively flat common band between 500 and 2000 Hz was selected, 
+where both Wf-Bp and Tw-Bp are sufficiently smooth and relevant to 
+the intended ANC control band. The resulting single-filter responses, 
+Xo-BpBp and Xo-BpHp, document both the effect of this gain match­
+ing and the transition-band amplitude dip inherent in the composite 
+path. Although the left and right ears exhibit quantitative differences, 
+the same qualitative tendencies appear in both, supporting the use of 
+the measured binaural paths in the offline evaluation.
+4.3 . Noise reduction comparison
+Fig. 10 summarizes the octave-band values of 𝐿𝑏,rel at the nominal 
+controlled virtual electronic delay of 5 samples (104 µs), and Fig. 11 
+shows the corresponding average residual spectra. The main point of 
+this comparison is to illustrate how each architecture distributes noise 
+reduction across frequencies while respecting the delay characteristics 
+identified in Section 4.2.
+The single-driver baselines first confirm the complementary behavior 
+of the two drivers. Wf-Bp is stronger at 125 and 250 Hz, giving 9.0 
+and 6.4 dB, whereas Tw-Bp gives 3.4 and 3.7 dB in the same bands. 
+Conversely, Tw-Bp is stronger at 1 and 4 kHz, giving 6.5 and 4.8 dB, 
+whereas Wf-Bp gives 4.4 and 2.1 dB. The two single-driver baselines are 
+close at 500 Hz, with 5.6 dB for Wf-Bp and 5.8 dB for Tw-Bp. Thus, 
+Applied Acoustics 257 (2027) 111618 
+10 
+
+H. Chiba, N. Kamado, T. Kako et al.
+Fig. 8. Measured secondary-path impulse responses at the error microphone for 
+the paths used in the offline evaluation. Columns correspond to the left and right 
+ears. From top to bottom, the rows show Wf-Bp, Tw-Bp, Tw-Hp-Fg, Xo-BpBp, and 
+Xo-BpHp. Only the first 30 samples are shown to emphasize the onset and early 
+ringing behavior.
+Fig. 9. Measured secondary-path amplitude responses at the error microphone 
+for the paths used in the offline evaluation. The top row shows the single-driver 
+conditions Wf-Bp, Tw-Bp, and Tw-Hp-Fg for the left and right ears, and the 
+bottom row shows the single-filter conditions Xo-BpBp and Xo-BpHp. These re­
+sponses are shown to document the measured paths used in the simulation and 
+to motivate the gain matching used for the single-filter configuration, not to 
+derive mechanical delay from the worn-device secondary path.
+the woofer mainly contributes to low-frequency attenuation, while the 
+tweeter becomes more favorable in the mid- and high-frequency bands.
+The tweeter-only high-pass conditions isolate the effect of filter 
+placement. Tw-Hp-Bg is lower than Tw-Bp at 125 Hz because the high-
+pass filter suppresses low-frequency tweeter drive, but it slightly exceeds 
+Tw-Bp at 500 Hz and 1 kHz by 0.6 and 0.3 dB, respectively. More im­
+portantly, Tw-Hp-Fg is lower than Tw-Hp-Bg by 3.9, 4.5, and 1.9 dB 
+at 250 Hz, 500 Hz, and 1 kHz, respectively. This difference directly 
+Fig. 10. Octave-band values of 𝐿𝑏,rel at the nominal controlled virtual electronic 
+delay of 5 samples (104 µs). The values are averaged over the left and right ears. 
+The frequency labels denote the center frequencies of the 1/1-octave bands, not 
+single-frequency evaluation points. The compared conditions are Wf-Bp, Tw-
+Bp, Tw-Hp-Fg, Tw-Hp-Bg, Du-BpBp, Du-BpHp-Fg, Du-BpHp-Bg, Xo-BpBp, and 
+Xo-BpHp.
+illustrates the cost of placing the high-pass filter in the foreground output 
+path, where its group delay is added to the effective secondary path. The 
+unfiltered Tw-Bp condition is useful as a lower-delay reference, but it 
+should not be interpreted as a practical recommendation because forc­
+ing the tweeter below its efficient operating range can increase distortion 
+and the risk of instability in a physical implementation.
+The dual-filter conditions show the benefit of using both drivers. 
+Du-BpBp gives the highest or near-highest value in several bands, but 
+this bypass/bypass condition is best regarded as a delay lower-bound 
+reference because it contains no practical tweeter band limitation. The 
+more implementation-relevant Du-BpHp-Bg condition still exceeds Wf-
+Bp in all octave bands, by 0.7, 1.2, 2.3, 3.2, 1.5, and 1.3 dB from 
+125 Hz to 4 kHz, respectively. It also exceeds Tw-Bp from 125 Hz to 
+2 kHz, with gains of 6.3, 3.8, 2.1, 1.0, and 1.4 dB, while Tw-Bp remains 
+slightly higher at 4 kHz. These octave-band values show that the dual-
+filter condition improves the low-to-mid-frequency range and reaches 
+the 2 kHz octave band, rather than providing a uniform improvement 
+Applied Acoustics 257 (2027) 111618 
+11 
+
+H. Chiba, N. Kamado, T. Kako et al.
+Fig. 11. Average ANC-off and residual noise power spectra at the nominal controlled virtual electronic delay of 5 samples (104 µs). In each panel, the residual 
+spectrum 𝑃𝐸 (𝑓) is plotted for the compared ANC conditions together with 𝑃𝐷(𝑓) as the ANC-off reference: (a) woofer-only conditions, (b) tweeter-only conditions, 
+(c) dual-filter conditions, and (d) single-filter conditions.
+at every high-frequency band. The band-limited power ratios in Table 6
+summarize this trend over the broader pink-noise bands. At this nomi­
+nal delay, Du-BpHp-Fg and Du-BpHp-Bg are close when averaged over 
+the left and right ears, indicating that the foreground/background differ­
+ence in the dual-filter case is smaller and more ear-dependent than in the 
+tweeter-only condition. This is expected because the two adaptive-filter 
+branches are jointly optimized under the same mean-square-error crite­
+rion, so the woofer branch and the branch allocation can partly mask the 
+delay penalty of placing the tweeter high-pass filter in the foreground 
+path.
+The single-filter conditions provide a computationally simpler im­
+plementation of the same two-driver idea. Xo-BpHp exceeds Wf-Bp 
+from 250 Hz upward, by 1.1, 1.8, 2.5, 1.3, and 1.4 dB from 250 Hz 
+to 4 kHz, respectively. It also exceeds Tw-Bp from 125 Hz to 2 kHz, 
+showing that a single adaptive-filter branch operating on a compos­
+ite secondary path can still broaden the attenuation bandwidth relative 
+to either single-driver baseline. Compared to Du-BpHp-Bg, Xo-BpHp is 
+lower by about 1.0 dB at 125 Hz and 0.7 dB at 1 kHz, while the other 
+bands are close. Thus, the dual-filter configuration is slightly advanta­
+geous in attenuation, whereas the single-filter configuration achieves 
+similar broadband behavior with approximately half the foreground con­
+volution and coefficient-storage cost, as summarized in Tables 1 and 2. 
+As with Du-BpBp, Xo-BpBp is interpreted as a delay reference for the 
+bypass/bypass composite path, and the practical single-filter discussion 
+centers on Xo-BpHp.
+The results in Fig. 11 support these band-level observations in the fre­
+quency domain. The woofer-only spectrum shows strong low-frequency 
+reduction but a clear limitation above approximately 1 kHz. The tweeter-
+only spectra show that Tw-Hp-Bg reduces the residual between 500 Hz 
+and 1 kHz more effectively than Tw-Hp-Fg, consistent with the fore­
+ground filter-delay penalty observed in Fig. 10. The dual-filter spectra 
+remain below the ANC-off reference over a broader frequency range than 
+either single-driver baseline, while the single-filter spectra show that the 
+single-filter composite-path implementation also provides broad attenu­
+ation. The spectral plots therefore complement the octave-band results 
+Table 6 
+Band-limited noise-power reduction 𝐿BL(B) at the nominal 
+controlled virtual electronic delay of 5 samples (104 µs). 
+Values are shown in dB and averaged over the left and right 
+ears.
+Condition 100–1000 Hz 100–2000 Hz 100–4000 Hz
+Wf-Bp 7.23 5.94 4.60
+Tw-Bp 4.92 5.02 4.31
+Tw-Hp-Fg 1.04 1.92 2.25
+Tw-Hp-Bg 2.61 3.25 3.22
+Du-BpBp 10.42 8.88 6.23
+Du-BpHp-Fg 8.77 7.92 5.88
+Du-BpHp-Bg 8.84 8.01 5.91
+Xo-BpBp 9.22 8.04 5.96
+Xo-BpHp 8.41 7.58 5.78
+by revealing where the differences between the conditions occur along 
+the continuous frequency axis.
+Table 6  reports 𝐿BL(B) for the broadband pink-noise input. The 
+100Hz to2000Hz  range is used as the main control-band summary 
+because it matches the upper edge of the stated control range while 
+aligning the lower edge with the clipped 125 Hz octave band used in 
+Fig. 10. The 100Hz to1000Hz range provides a low-to-mid-frequency 
+summary, and 100Hz to4000Hz summarizes the full evaluated band. 
+Over 100Hz to2000Hz , Du-BpHp-Bg and Xo-BpHp achieve 8.01 and 
+7.58 dB, respectively, exceeding both single-driver baselines, Wf-Bp 
+at 5.94 dB and Tw-Bp at 5.02 dB. The same two implementation-
+oriented 2-way conditions also exceed both single-driver baselines over 
+100Hz to4000Hz . Because 𝐿BL(B) is a band-integrated power ratio, 
+these values should not be interpreted as a uniform advantage at every 
+frequency within the band.
+4.4 . Effect of electronic delay
+Fig. 12 shows the dependence of the octave-band noise reduction on 
+the virtual electronic delay. Here, 𝑏 denotes the 1/1-octave band index, 
+Applied Acoustics 257 (2027) 111618 
+12 
+
+H. Chiba, N. Kamado, T. Kako et al.
+Fig. 12. Effect of virtual electronic delay on the octave-band value of 𝐿𝑏,rel, obtained by octave-band averaging of 𝐿NR(𝑓) and by averaging over the left and right 
+ears. The compared conditions are Wf-Bp, Tw-Bp, Tw-Hp-Fg, Tw-Hp-Bg, Du-BpBp, Du-BpHp-Fg, Du-BpHp-Bg, Xo-BpBp, and Xo-BpHp. The delay values are 𝑑= 0 , 3, 
+5, 7, 9, 11, and 13 samples, corresponding to 0, 63, 104, 146, 188, 229, and 271 µs at 48 kHz. The left panels show the absolute value of 𝐿𝑏,rel, and the right panels 
+show the normalized change 𝐿𝑏,rel(𝑑) −𝐿 𝑏,rel(0).
+so 𝐿𝑏,rel represents the octave-band value in band 𝑏. The left panels show 
+the absolute value of 𝐿𝑏,rel, which indicates how much noise reduction 
+remains at each delay. The right panels show the normalized change 
+𝐿𝑏,rel(𝑑) −𝐿 𝑏,rel(0), which highlights the sensitivity of each condition to 
+added delay. The normalized plots are useful for comparing degradation 
+patterns, but they are not a measure of absolute performance: a condi­
+tion with a low value at 𝑑= 0  can appear less degraded simply because 
+there is less attenuation to lose. The following discussion therefore uses 
+the absolute and normalized views together.
+The first important observation is that delay sensitivity is not con­
+fined to the highest evaluated bands. Although the phase-error model 
+in Section 2  predicts that a fixed excess delay becomes more se­
+vere as frequency increases, Fig. 12 shows strong degradation already 
+around 500 Hz and 1 kHz. This behavior is consistent with the com­
+pact headphone drivers used here. As shown in Fig. 7, the woofer and 
+tweeter have fundamental resonances in the low hundreds of hertz, so 
+resonance-related mechanical delay appears close to the ANC control 
+band. Consequently, the total secondary-path delay includes not only the 
+added electronic delay but also mechanical delay near the drivers’ res­
+onant regions, consuming the causality margin from below 500 Hz into 
+the mid-frequency range. Since the worn secondary paths also include 
+ear geometry and local reflections, their group delay is not utilized as 
+direct evidence of causality; rather, Fig. 12 is interpreted as a measured-
+path offline result that is consistent with the isolated-driver delay basis 
+in Fig. 7.
+The single-driver baselines clarify the different roles of the woofer 
+and tweeter. Wf-Bp preserves low-frequency attenuation better than Tw-
+Bp: even at 𝑑= 13 , Wf-Bp retains 6.0 dB at 125 Hz, whereas Tw-Bp gives 
+3.6 dB. However, Wf-Bp is not uniformly robust to delay: from 𝑑= 0  to 
+𝑑= 13 , its value decreases from 12.2 to −0.4 dB at 500 Hz and from 
+12.9 to −1.5 dB at 1 kHz, corresponding to normalized losses of 12.6 
+and 14.4 dB. Tw-Bp has a lower absolute low-frequency performance, 
+but its normalized losses over the same delay range are smaller in the 
+mid- and high-frequency regions, 7.0 dB at 500 Hz and 9.8 dB at 1 kHz. 
+At 4 kHz, Tw-Bp still gives about 0.6 dB at 𝑑= 13 , whereas Wf-Bp falls to 
+−0.8 dB. These results support the intended interpretation: the woofer 
+is useful for preserving low-frequency absolute attenuation, while the 
+tweeter may be relatively less sensitive to added delay in the upper part 
+of the control band, although the residual values at very large delays are 
+small.
+The tweeter-only high-pass comparison provides the clearest evi­
+dence of the foreground filter-delay penalty. At 𝑑= 0 , Tw-Hp-Bg exceeds 
+Tw-Hp-Fg by 4.2, 6.9, and 5.7 dB at 250 Hz, 500 Hz, and 1 kHz, respec­
+tively. At the nominal delay 𝑑= 5 , the corresponding differences remain 
+3.9, 4.5, and 1.9 dB. Thus, when the same high-pass characteristic is ap­
+plied to the tweeter-only branch, placing the filter in the background 
+adaptation path is clearly preferable from the delay viewpoint. At 𝑑= 9
+and above, the difference between Tw-Hp-Bg and Tw-Hp-Fg becomes 
+small because both conditions have already lost most of their mid-band 
+attenuation. This convergence should not be interpreted as evidence 
+that the filter-delay difference disappears; rather, the added electronic 
+delay has become large enough to mask the placement effect. As in 
+Section 4.3, Tw-Bp is treated as a lower-delay reference and not as a 
+practical tweeter-driving strategy below its efficient frequency range.
+For the dual-filter architecture, the foreground/background distinc­
+tion is more condition-dependent. Du-BpHp-Bg exceeds Du-BpHp-Fg 
+by 1.7 dB at 500 Hz and 1.3 dB at 1 kHz for 𝑑= 0 , but the dif­
+ference is nearly zero at 𝑑= 5  when averaged over the left and 
+right ears. At larger delays, Du-BpHp-Fg is slightly higher in some 
+low- and mid-frequency bands. This does not contradict the filter-delay 
+interpretation observed in the tweeter-only case, as the dual-filter so­
+lution is also affected by the woofer branch, the mean-square-error 
+allocation between the two adaptive-filter branches, the differences 
+between the left and right paths, and interference between the two 
+secondary paths. Therefore, the dual-filter comparison should not be 
+read as showing a universal foreground/background ranking. Therefore, 
+the safest conclusion is that the filter placement effect is clear for 
+the tweeter-only high-pass branch, whereas in the dual-filter architec­
+ture it is smaller and depends on the measured paths and adaptation
+outcome.
+The two-driver configurations nonetheless provide broader noise re­
+duction when the electronic delay is small to moderate. At 𝑑= 5 , 
+Du-BpHp-Bg exceeds Wf-Bp in every octave band from 125 Hz to 4 kHz, 
+by 0.7, 1.2, 2.3, 3.2, 1.5, and 1.3 dB, respectively. This confirms that the 
+Applied Acoustics 257 (2027) 111618 
+13 
+
+H. Chiba, N. Kamado, T. Kako et al.
+tweeter branch complements the bandwidth limitation of the woofer, es­
+pecially at and above 500 Hz. Du-BpHp-Bg also exceeds Tw-Bp from 
+125 Hz to 2 kHz, although Tw-Bp remains slightly higher at 4 kHz. 
+When the delay increases to 𝑑= 9 –13, however, the 500 Hz and 1 kHz 
+bands approach 0 dB or become negative for most conditions, and the 
+advantage of the dual-filter configuration largely collapses. Thus, two-
+way driver allocation cannot compensate for excessive electronic delay 
+by itself; low-delay electronics and low-delay secondary-path design are 
+both required.
+The single-filter configuration offers a similar but computationally 
+lighter compromise. Xo-BpHp exceeds Wf-Bp from 250 Hz upward at 
+𝑑= 5 , and it exceeds Tw-Bp from 125 Hz to 2 kHz. Compared to Du-
+BpHp-Bg, Xo-BpHp is lower by about 1.0 dB at 125 Hz and 0.7 dB at 
+1 kHz, while the other bands remain close. Since Xo-BpHp uses the 
+woofer and tweeter as one composite secondary path controlled by a 
+single adaptive-filter branch, this result indicates that much of the broad­
+band benefit of driver allocation can be retained with approximately half 
+the foreground convolution and coefficient-storage cost. The cost is that 
+the crossover filters are necessarily in the foreground path, so their delay 
+contributes directly to the composite secondary path. As with Du-BpBp, 
+Xo-BpBp is useful as a lower-delay bypass/bypass reference, whereas the 
+implementation-oriented single-filter condition is Xo-BpHp.
+Overall, Fig. 12 supports the relaxed-causality interpretation only 
+at the qualitative level intended in this paper and within the valid 
+phase-error range stated in Section 2. It does not provide a point-by-
+point validation of ( 6), but it does show that added secondary-path 
+delay strongly reduces the attainable attenuation in the bands where 
+the compact drivers’ mechanical delay and the electronic delay together 
+consume the causality margin. Under the tested measured-path condi­
+tions, the results also indicate that delay-oriented two-driver allocation 
+is beneficial only while the electronic delay remains sufficiently small, 
+reinforcing the need to reduce both the physical secondary-path delay 
+and the electronic implementation delay.
+5 . Discussion
+5.1 . Relationship between delay and noise reduction
+The results support the delay-oriented interpretation introduced in 
+Section 2, but this interpretation is not a point-by-point prediction of 
+the measured attenuation. Within its stated phase-error range, Eq. (6) 
+explains the basic trend that a fixed excess delay causes a phase error 
+proportional to frequency and therefore reduces the relaxed causality 
+margin more severely in the upper part of the control band. The delay 
+sweep in Fig. 12, however, also showed pronounced degradation around 
+500 Hz and 1 kHz. This observation is consistent with the isolated 
+driver measurements in Fig. 7, since the compact headphone drivers 
+have resonance-related mechanical delay in the low hundreds of hertz, 
+this mechanical component appears close to the ANC control band and 
+consumes the causality margin together with the electronic delay.
+This is the main reason for introducing the design-oriented delay 
+budget in Table 5. Reducing only the electronic delay is important, but it 
+is not sufficient when the loudspeaker’s mechanical delay is located near 
+the target control band. The woofer and tweeter provide complemen­
+tary advantages in this respect: the woofer reduces the mechanical-delay 
+burden in the low-frequency region, while the tweeter becomes useful 
+at higher frequencies after its resonance-related delay decreases and its 
+shorter acoustic propagation delay becomes beneficial. Thus, the pro­
+posed 2-way allocation should be understood not as an audio crossover 
+rule or an exact physical decomposition of a worn-device path, but as a 
+way to reduce the design budget of the effective secondary-path delay 
+under the strict causality constraint of open-ear feedforward ANC.
+At the same time, the evidence for this interpretation is deliber­
+ately separated. The isolated JIS-enclosure measurement in Fig. 7  is 
+used to define the mechanical group-delay basis in Table 5, the geom­
+etry in Fig. 6 is used to estimate the acoustic propagation delay, and 
+the high-pass-filter design gives the crossover-filter group delay. The 
+worn-device impulse and amplitude responses in Figs. 8 and 9 docu­
+ment the measured paths utilized in the offline evaluation. Since the 
+worn secondary paths include ear geometry and local reflections, their 
+group delay is not decomposed into acoustic and mechanical terms. 
+Similarly, Eq. (6) assumes a single-frequency sinusoid, nonnegative opti­
+mal amplitude matching, and a phase error below the first 90◦ boundary, 
+whereas the present evaluation uses finite-length adaptive filters, mea­
+sured paths, and broadband stochastic excitation. At or beyond that 
+boundary, Eq. (6) is not periodically extrapolated; the practical result 
+may instead be no positive attenuation. The model therefore serves as 
+an explanatory framework for the observed band dependence, not as a 
+quantitative predictor of every value in Figs. 10 and 12.
+5.2 . Architectural trade-offs and design guidance
+The results also clarify how the two proposed implementations 
+should be selected. From an output-path delay perspective, the back­
+ground dual-filter configuration is structurally favorable because the 
+band-limiting filters act only in the adaptation path and do not add 
+group delay to the anti-noise output path. This advantage is most 
+clearly isolated by the tweeter-only comparison: Tw-Hp-Bg outperforms 
+Tw-Hp-Fg in the mid-frequency bands, demonstrating that placing the 
+same high-pass filter in the foreground output path can consume a 
+substantial part of the causality margin. In the dual-filter architec­
+ture, however, the foreground/background difference is less systematic 
+because the woofer path, the MSE-based allocation between the two 
+adaptive-filter branches, the differences between the left and right 
+paths, and the path interference all affect the final solution. Thus, 
+the filter-placement effect is clear for the tweeter-only branch, but 
+is path-dependent in the full dual-filter architecture. The background 
+dual-filter placement should therefore be preferred primarily when pre­
+serving the output-path causality margin is the dominant design priority, 
+for example when a steeper band-limiting filter would otherwise in­
+troduce non-negligible output-path group delay. Under the first-order 
+filter used in the present evaluation, this structural delay advantage 
+does not necessarily produce a larger noise reduction averaged over 
+the left and right ears in every band or at every added electronic
+delay.
+The single-filter configuration offers a different compromise. It treats 
+the woofer and tweeter as one composite secondary path controlled 
+by a single adaptive-filter branch, thereby reducing the control-output 
+convolution rate, coefficient-element commitment rate, and coefficient 
+storage by approximately half compared with the dual-filter implemen­
+tation, as summarized in Tables 1  and 2. The trade-off is that the 
+crossover network is necessarily in the foreground output path, so its 
+filter group delay contributes directly to the composite secondary-path 
+delay. The comparison between Du-BpHp-Bg and Xo-BpHp therefore 
+indicates a useful design trade-off rather than a simple winner: the dual-
+filter configuration is slightly more favorable for attenuation, while the 
+single-filter configuration retains much of the broadband benefit with 
+lower foreground convolution and coefficient-storage cost.
+The bypass/bypass conditions, Du-BpBp and Xo-BpBp, should be in­
+terpreted as lower-delay references rather than practical optima. While 
+they are useful for demonstrating what can be obtained when no band-
+limiting filter delay is introduced, they do not suppress inefficient 
+tweeter drive below its intended operating range. Among the tested 
+conditions, the bypass/high-pass allocation is the more practical design 
+choice: it preserves the woofer’s low-frequency role, keeps the tweeter 
+away from its inefficient low-frequency region, and avoids adding un­
+necessary filtering to the woofer branch. This design guidance is specific 
+to the present drivers, geometry, and measured paths. A practical design 
+sequence is to identify the frequency range in which each driver pro­
+vides adequate amplitude response and lower mechanical group delay, 
+include the source-to-ear acoustic offset and crossover-filter and elec­
+tronic delays in the total delay budget, and then select the driver bands 
+and filter placement according to the remaining causality margin. If the 
+Applied Acoustics 257 (2027) 111618 
+14 
+
+H. Chiba, N. Kamado, T. Kako et al.
+output-path causality margin is the dominant constraint, background 
+dual-filter placement is structurally favorable; if computational load is 
+dominant and the crossover-filter delay is acceptable, the single-filter 
+configuration provides lower foreground convolution and coefficient 
+storage.
+5.3 . Limitations and scope
+Several limitations define the scope of the present study. First, the 
+evaluation used paths measured from one headphone device in one 
+dummy-head wearing configuration and was conducted offline to iso­
+late the effects of secondary-path delay and driver-band allocation under 
+controlled linear conditions. Accordingly, the virtual electronic delay 
+discussed in Section 4.4 should be interpreted as a controlled paramet­
+ric perturbation rather than as a measured ADC/DAC implementation, 
+and the present contribution should be read as an isolation study of 
+delay-related mechanisms rather than as a replacement for real-time im­
+plementation studies. The comparison in Table 2 should be interpreted 
+in the same way: it reports architecture-level control-output arithmetic, 
+coefficient-vector commitment schedule, and coefficient storage, not 
+a complete adaptation-operation count or a power analysis for head­
+phone hardware. Measured execution-time evidence is available only 
+at the indirect platform level reported in Appendix C; the exact config­
+urations evaluated here were not implemented and timed directly. In 
+particular, sample-by-sample anti-noise generation and coefficient com­
+mitment every 𝐵 samples have different latency implications. Increasing 
+𝐵 reduces the commitment event rate and aggregate coefficient-element 
+update rate but slows convergence and tracking. Power consumption 
+was not estimated because it depends on the target processor, its 
+clock and voltage settings, numerical precision, memory access, com­
+piler optimization, and implementation-specific scheduling; a MAC-rate 
+calculation alone does not provide a defensible platform-level power 
+value. A real implementation would additionally include secondary-
+path modeling error, microphone noise, finite processing precision, 
+input–output scheduling, controller timing for the exact configurations 
+evaluated here, and wearing-position variation. Loudspeaker nonlin­
+earity and the coupled influence of secondary-to-reference acoustic 
+feedback, discussed below, are also outside the validated scope. These 
+factors can alter convergence, stability, and the attained control solution 
+and are not represented by the present idealized linear measured-path
+evaluation.
+Second, loudspeaker nonlinearities were not included. The woofer 
+has a fundamental resonance near 150 Hz, and a large low-frequency 
+drive in a physical device may approach excursion limits and generate 
+distortion that is not represented in the linear measured-path model. 
+Similarly, the low-frequency values obtained under tweeter-only bypass 
+operation should not be interpreted as evidence that such operation is 
+physically desirable, as driving the tweeter below its efficient range can 
+increase distortion and instability risk. This is why the bypass conditions 
+are treated as delay references rather than practical recommendations.
+Third, the secondary-to-reference acoustic paths were excluded from 
+the FxNLMS adaptation. The path-level measurements in Appendix A 
+retain the approximately 11 dB local minimum separation reported in 
+the original analysis, but this path ratio alone does not account for the 
+control-output level or the primary-reference signal. The added post-
+hoc signal-level analysis addresses this limitation by comparing the 
+estimated secondary-induced component with the primary-reference sig­
+nal over 100–4000 Hz. Across all nine conditions and three reference 
+microphones, the largest L/R-averaged ratio was −20.77 dB, and the 
+largest mean across the three reference microphones was −22.40 dB. The 
+largest single-ear value was −19.88 dB. These values quantitatively sup­
+port the uncoupled modeling approximation under the present paths, 
+input signals, and converged control outputs, but they do not show 
+that acoustic feedback is uniformly negligible or that it cannot af­
+fect adaptation. Because the control outputs used in the estimate were 
+obtained without feedback coupling, the analysis does not allow the 
+feedback component to alter the reference signals, filtered-reference cor­
+relations, filter coefficients, or convergence behavior. It is therefore not 
+a coupled-path validation. Feedback cancellation based on identified 
+secondary-to-reference paths is a possible implementation measure, but 
+it was not evaluated in this study.
+Finally, Appendix D varies the cutoff frequency, common step size, 
+and gain-matching band one factor at a time. The results show that the 
+single-filter bypass/high-pass condition is insensitive to the tested cut­
+off frequencies and to gain-matching bands ending at or below 2 kHz, 
+whereas the dual-filter foreground/background ranking is more cutoff-
+dependent and the high-frequency-inclusive gain-matching stress cases 
+reduce the single-filter performance. The common-step-size sweep also 
+identifies non-attenuating dual-filter cases at the larger tested values. 
+These discrete sweeps do not constitute joint optimization. Filter or­
+der, separate woofer and tweeter step sizes, and interactions among 
+the parameters were not evaluated. Different driver units, enclosure ge­
+ometries, wearing conditions, or target noise spectra may therefore shift 
+the preferred allocation and parameter values. The contribution of this 
+paper is not a universal audio-crossover design rule, but rather a delay-
+minimizing driver-allocation principle for causality-limited broadband 
+feedforward ANC in open-ear headphones. The representative delay 
+budget in Table 5 should likewise be interpreted as a design aid for 
+this allocation, not as a measured end-to-end delay analysis or an ex­
+act component-wise decomposition of arbitrary worn-device secondary 
+paths.
+6 . Conclusion
+This paper presented a controlled, idealized linear measured-path 
+offline study of a wideband feedforward ANC design using one open-
+ear headphone device in one dummy-head wearing configuration. 
+The design uses a design-oriented secondary-path delay budget for 
+driver-band allocation. We introduced a coaxially offset 2-way sec­
+ondary source, in which the woofer is utilized for low-frequency 
+control owing to its smaller mechanical delay and the tweeter is 
+utilized for higher-frequency control owing to its shorter acoustic 
+path. Two implementations were formulated: a dual-filter configura­
+tion with independent adaptive-filter branches and both background 
+and foreground band-limiting placements, and a single-filter config­
+uration with a single adaptive-filter branch and a fixed crossover
+network.
+Isolated driver measurements confirmed the intended mechanical-
+delay complementarity: the woofer is more favorable below approxi­
+mately 500 Hz, while the tweeter becomes mechanically competitive 
+at higher frequencies. Under this measured-path condition and at the 
+nominal controlled virtual electronic delay of 104 µs, the proposed two-
+driver configurations increased the band-limited noise-power reduction 
+for broadband pink noise relative to the single-driver baselines. From 
+100Hz to2000Hz, Du-BpHp-Bg and Xo-BpHp achieved 8.01 and 7.58 dB, 
+respectively, compared with 5.94 dB for Wf-Bp and 5.02 dB for Tw-Bp. 
+The delay sweep also showed that the two-driver advantage is most pro­
+nounced in the low-to-mid-frequency range when the electronic delay 
+is small, which is consistent with the causality-based design rationale of 
+the paper.
+Under the tested conditions, these results support delay-oriented 
+driver allocation as a design approach for causality-limited broad­
+band feedforward ANC in open-ear headphones. For a new device, 
+driver and filter selection should first balance the measured ampli­
+tude response and mechanical group delay of each driver with the 
+source-to-ear acoustic offset, crossover-filter group delay, and avail­
+able electronic-delay budget. The architecture should then be selected 
+according to whether preserving the output-path causality margin or 
+reducing foreground computation and coefficient storage is the domi­
+nant constraint. Future work will include evaluation under nonlinear 
+Applied Acoustics 257 (2027) 111618 
+15 
+
+H. Chiba, N. Kamado, T. Kako et al.
+loudspeaker behavior, higher-order crossover designs and joint param­
+eter optimization across additional devices and wearing conditions, 
+coupled-path adaptation analysis, feedback cancellation based on iden­
+tified secondary-to-reference paths, and direct real-time implementation 
+and acoustic validation of the proposed configurations.
+CRediT authorship contribution statement
+Hironobu Chiba: Writing – review & editing, Writing – original 
+draft, Visualization, Validation, Software, Resources, Project admin­
+istration, Methodology, Investigation, Formal analysis, Data curation, 
+Conceptualization. Noriyoshi Kamado: Writing – review & editing, 
+Supervision, Resources. Tatsuya Kako: Writing – review & editing, 
+Supervision, Resources. Kenichi Noguchi: Writing – review & editing, 
+Supervision.
+Declaration of competing interest
+The authors declare the following financial interests/personal rela­
+tionships which may be considered as potential competing interests:
+Hironobu Chiba and Noriyoshi Kamado report a relationship with 
+Kansai University, Audio and Acoustic Signal Processing Laboratory that 
+includes funding grants and non-financial support. Noriyoshi Kamado 
+reports a relationship with The University of Electro-Communications, 
+Sound Media Laboratory that includes funding grants and non-financial 
+support. Noriyoshi Kamado reports a relationship with National Institute 
+of Informatics, S. Koyama’s Laboratory that includes funding grants 
+and non-financial support. If there are other authors, they declare that 
+they have no known competing financial interests or personal relation­
+ships that could have appeared to influence the work reported in this
+paper.
+Appendix A . Secondary-to-reference acoustic paths and post-hoc 
+reference-contamination estimate
+A.1 . Measured path-level characteristics
+Fig. 13  shows the measured amplitude responses of the error-
+microphone secondary path and the corresponding secondary-to-
+reference acoustic paths for the woofer and tweeter in both ears. The 
+solid black curve denotes the error-microphone secondary path, and 
+the gray dashed, dash-dotted, and dotted curves denote the front, side, 
+and rear reference microphones. Table 7  summarizes the arithmetic 
+mean, maximum, and minimum of the logarithmic path-level differ­
+ence over 100–4000 Hz. For the woofer, the mean difference ranges 
+from −22.84 to −27.70 dB across the two ears and three reference 
+microphones; for the tweeter, it ranges from −29.13 to −42.91 dB. 
+However, the separation is frequency-dependent, and the least sepa­
+rated cases approach 11 dB in a limited number of frequency bins 
+around a few kilohertz. This path-level comparison is retained as 
+supporting physical evidence, but it is not the signal-level quan­
+tity most directly relevant to feedforward adaptation because it in­
+cludes neither the control-output amplitude nor the primary-reference
+signal. 
+A.2 . Post-hoc signal-level estimate
+For reference microphone 𝑟, the secondary-induced component was 
+estimated from the control outputs of the uncoupled offline ANC solution 
+as
+𝑥sec,𝑟(𝑛) =
+𝐼∑
+𝑖=1
+(𝑓𝑖→𝑟 ∗𝑦 𝑖
+) (𝑛), (21)
+where 𝑦𝑖(𝑛) is the simulated output supplied to active driver 𝑖, 𝑓𝑖→𝑟(𝑛)
+is the measured path from that driver to reference microphone 𝑟, and 𝐼
+is the number of active drivers in the condition. The primary-reference 
+component already present at microphone 𝑟 is denoted by 𝑥𝑝,𝑟(𝑛). The 
+Fig. 13. Measured amplitude responses of the error-microphone secondary path 
+and the secondary-to-reference acoustic paths. Columns correspond to the left 
+and right ears, and rows correspond to the woofer and tweeter. The solid black 
+curve denotes the error-microphone secondary path, and the gray dashed, dash-
+dotted, and dotted curves denote the front, side, and rear reference microphones, 
+respectively.
+Table 7 
+Summary of the logarithmic spectral difference between the 
+secondary-to-reference acoustic path and the error-microphone 
+secondary path over 100–4000 Hz. Mean, maximum, and mini­
+mum are taken over FFT bins in this range.
+Driver Ear Ref. mic Mean [dB] Max [dB] Min [dB]
+Wf L Front −24.91 −16.07 −51.00
+Wf L Side −24.97 −11.59 −39.64
+Wf L Rear −22.84 −19.05 −28.71
+Wf R Front −25.81 −18.47 −45.18
+Wf R Side −27.70 −21.36 −45.43
+Wf R Rear −24.64 −20.30 −30.15
+Tw L Front −36.62 −11.15 −64.78
+Tw L Side −29.13 −13.78 −41.25
+Tw L Rear −33.79 −15.52 −43.19
+Tw R Front −42.91 −12.75 −60.39
+Tw R Side −37.86 −10.97 −61.44
+Tw R Rear −37.86 −18.44 −66.01
+band-integrated ratio was defined as
+𝐿cont,𝑟(B) = 10log 10
+∑
+𝑓𝑘∈B
+||𝑋sec,𝑟(𝑓𝑘, 𝑡)||
+2
+∑
+𝑓𝑘∈B
+|||𝑋𝑝,𝑟(𝑓𝑘, 𝑡)|||
+2
+, (22)
+where B= [100,4000)  Hz and the overbar denotes averaging over the 
+same steady-state STFT frames used for the main spectral evaluation. 
+Linear power was integrated over the band before conversion to dB. 
+Negative values therefore indicate that the estimated secondary-induced 
+component is below the primary-reference signal.
+Fig. 14 shows the results for all nine conditions. For each micro­
+phone position, the plotted value is the arithmetic mean of the left- 
+and right-ear dB ratios; the “Mean” bar is the arithmetic mean across 
+the front, side, and rear reference microphones. Across all conditions 
+Applied Acoustics 257 (2027) 111618 
+16 
+
+H. Chiba, N. Kamado, T. Kako et al.
+Fig. 14. Post-hoc estimate of the secondary-induced reference component relative to the primary-reference signal over 100–4000 Hz. The control outputs obtained 
+without acoustic feedback were filtered through the measured secondary-to-reference paths. Front, Side, and Rear denote the three reference-microphone positions. 
+Each microphone-position bar is the arithmetic mean of the left- and right-ear dB ratios, and mean denotes the arithmetic mean across the three reference microphones. 
+Negative values indicate that the estimated secondary-induced component is below the primary-reference signal. The estimate does not include the effect of acoustic 
+feedback on FxNLMS adaptation.
+and microphone positions, the largest L/R-averaged ratio was −20.77 dB 
+for the rear microphone in Du-BpBp, while the largest condition-level 
+mean across the three microphones was −22.40 dB, also for Du-BpBp. 
+For the implementation-oriented conditions Du-BpHp-Fg, Du-BpHp-Bg, 
+and Xo-BpHp, the three-microphone means were −23.98, −23.97, and 
+−23.91 dB, respectively; their largest individual-microphone values were 
+−21.07, −21.19, and −20.91 dB, respectively. The largest value be­
+fore L/R averaging was −19.88 dB for the left-ear rear microphone in
+Du-BpBp.
+These results provide a quantitative signal-level estimate of 
+the reference contamination omitted from the main analysis un­
+der the present uncoupled control solutions. They do not con­
+stitute a coupled-path simulation: the control outputs were ob­
+tained without allowing acoustic feedback to modify the refer­
+ence signals or FxNLMS adaptation. Consequently, the results sup­
+port the modeling approximation for the present controlled offline 
+comparison but do not establish that feedback is negligible un­
+der other paths, signals, wearing conditions, or coupled adaptation
+dynamics.
+Appendix B . Representative convergence curves
+Fig. 15 shows representative convergence behavior of the blockwise 
+residual-to-primary power ratio for the main conditions discussed in the 
+text, with the left and right ears shown separately. The plotted conditions 
+were selected to cover the single-driver baseline, the tweeter-only fore­
+ground/background comparison, the dual-filter foreground/background 
+comparison, and the practical single-filter condition: Wf-Bp, Tw-Hp-
+Fg, Tw-Hp-Bg, Du-BpHp-Fg, Du-BpHp-Bg, and Xo-BpHp. The omitted 
+conditions, Tw-Bp, Du-BpBp, and Xo-BpBp, were also checked during 
+the evaluation-window design, but are not repeated here because they 
+mainly serve as lower-delay bypass references and would add little 
+beyond the representative set.
+Unlike the STFT-based positive noise-reduction level 𝐿NR(𝑓) in (18), 
+the plots in Appendix B  are generated from blockwise time-domain 
+mean-square values. For block index 𝑚, the plotted quantity is defined 
+as
+𝑅EP(𝑚) = 10log 10
+̄ 𝑒2
+𝑚
+̄𝑑2
+𝑚
+,
+̄ 𝑒2
+𝑚 = 1
+𝑀
+(𝑚+1)𝑀−1∑
+𝑛=𝑚𝑀
+𝑒2(𝑛),
+̄𝑑2
+𝑚 = 1
+𝑀
+(𝑚+1)𝑀−1∑
+𝑛=𝑚𝑀
+𝑑2(𝑛).
+(23)
+where 𝑀 is the block length utilized for the running mean-square esti­
+mate, corresponding to 20 ms at 48 kHz in the present implementation. 
+This quantity follows the same sign convention as 𝛽 in ( 5): negative 
+values indicate attenuation, and values closer to 0 dB indicate poorer 
+cancellation.
+Across both ears and all plotted conditions, the dominant transient 
+decays in the early part of the 10-s run, and the final quarter of the record 
+corresponds to a near-steady-state regime. The lightly shaded region in 
+Fig. 15 marks this final 25% evaluation window, and the condition name 
+is printed inside each panel for direct identification. These results sup­
+port the evaluation-window choice described in Section 4.1. Note that 
+this appendix is intended only as supporting evidence for the conver­
+gence check and should not be interpreted as an additional primary 
+performance comparison beyond the octave-band and spectral results 
+in Section 4.3.
+Applied Acoustics 257 (2027) 111618 
+17 
+
+H. Chiba, N. Kamado, T. Kako et al.
+Fig. 15. Representative convergence behavior of the blockwise residual-to-primary power ratio defined in ( 23). The left and right columns correspond to the left 
+and right ears, respectively. From top to bottom, the pairs of panels correspond to Wf-Bp, Tw-Hp-Fg, Tw-Hp-Bg, Du-BpHp-Fg, Du-BpHp-Bg, and Xo-BpHp, with the 
+condition name printed in the lower-left corner of each panel. The lightly shaded region indicates the final 25% of the 10-s run used for steady-state evaluation in 
+Section 4.1.
+Appendix C . Supplementary pass-through delay and 
+execution-time measurements
+C.1 . Pass-through delay check
+To provide a compact latency check for the hardware path discussed 
+in Section 4.1, we measured a supplementary end-to-end pass-through 
+response of the wearable controller signal chain, which was built with 
+an ADSP-21569 DSP, an AK5736 ADC, and an AK4454 DAC. The im­
+plementation operated at 192 kHz in 8-sample frames, but the internal 
+processing signal rate was reduced to 24 kHz by 8-point moving-average 
+resampling to reduce computational cost. Accordingly, the pass-through 
+response identified in this appendix is represented at 24 kHz. For 
+this measurement, white noise was reproduced, the input and output 
+of the DSP device were directly connected, and the pass-through re­
+sponse was identified by adaptive-filter learning with a path length of 
+256 samples at 24 kHz. Fig. 16 shows the first 1.0 ms of the identi­
+fied response at 24 kHz together with the same response resampled to 
+192 kHz by band-limited resampling to show the corresponding peak
+location.
+The detected peak is located at 2 samples on the 24 kHz sam­
+ple grid, corresponding to 83.3 µs. In the 192 kHz resampled display, 
+the same peak position corresponds to 16 samples. This is a peak-
+based latency measure under the pass-through processing condition. 
+The measurement collectively includes the ADC, I/O buffering, DSP 
+frame cadence and pass-through computation, DAC, reconstruction fil­
+tering, and output scheduling, but it does not characterize sustained 
+or worst-case controller timing under the full three-reference adaptive-
+computation load; complementary execution-time measurements under 
+a conventional adaptive ANC workload are reported in the following 
+subsection.
+This pass-through measurement provides only partial evidence in re­
+sponse to the controller-latency question. The loudspeaker mechanical 
+response and acoustic propagation to the error microphone are not in­
+cluded in this electrically looped pass-through response; in the offline 
+evaluation, these physical components are contained in the measured 
+worn-device secondary paths.
+C.2 . Measured execution times under a conventional adaptive ANC 
+workload
+To complement the pass-through latency check, this subsection re­
+ports execution times measured on the same ADSP-21569 platform while 
+executing a conventional multichannel adaptive ANC workload with 
+adaptation active. This workload differs from the exact digital config­
+urations evaluated in Section 4; it is reported as indirect, platform-level 
+evidence showing that the fixed low-delay frame schedule described 
+above was sustained under a substantial adaptive-processing load.
+The firmware retains the frame structure of the pass-through mea­
+surement: 8-sample frames at 192 kHz with internal processing at 
+24 kHz. In each frame interrupt, a foreground process convolves a fully 
+connected multichannel controller with 8 input channels (six reference 
+microphones and two error microphones) and 2 output channels, i.e., 16 
+adaptive FIR filters of 1024 taps each, sample by sample at 24 kHz, to­
+gether with two 256-tap secondary-path models. A background process 
+executes a partitioned-block frequency-domain multichannel adaptive 
+update using 1024-point FFTs, with each 1024-tap control filter divided 
+into two 512-sample partitions. It commits the updated coefficients 
+Applied Acoustics 257 (2027) 111618 
+18 
+
+H. Chiba, N. Kamado, T. Kako et al.
+Fig. 16. Supplementary end-to-end pass-through impulse-response measure­
+ment of the wearable controller signal chain. Top: measured response at 24 kHz. 
+Bottom: the same response resampled to 192 kHz to show the corresponding 
+peak location. The gray dashed line indicates the detected peak position. Only 
+the first 1.0 ms is shown.
+Table 8 
+Ranges of the maximum elapsed times observed within 15 approximately 5 s 
+status-polling intervals during sustained operation of the conventional adap­
+tive ANC workload on the ADSP-21569 platform with adaptation active, to­
+gether with the corresponding scheduling deadlines. These interval maxima are 
+measurement-based and are not analytically established worst-case execution 
+times. The background value is the elapsed time per block, including preemption 
+by the foreground interrupts and the coefficient commitment. The largest fraction 
+of deadline is the upper end of the observed range divided by the corresponding 
+deadline.
+Process Observed time Deadline Largest fraction
+of deadline
+Foreground (per 8-sample 
+frame at 192 kHz)
+27.702–27.703 µs 41.667 µs 66.5%
+Background (per 512-sample 
+block at 24 kHz)
+16.586–17.002 ms 21.333 ms 79.7%
+once per 512-sample block at 24 kHz. During sustained operation, the 
+status was polled 15 times at approximately 5 s intervals. Each re­
+ported status value was the maximum elapsed time observed within 
+the corresponding polling interval. Table 8 summarizes the ranges of 
+these 15 interval maxima together with the scheduling deadlines. These 
+are measurement-based observed maxima, not analytically established 
+worst-case execution times. Both deadlines were met in all observed in­
+tervals: the foreground process used at most 66.5% of the frame interval, 
+and the background process, whose reported value is the elapsed time 
+per block including preemption by the foreground interrupts and the 
+coefficient commitment, used at most 79.7% of the block interval.
+This measurement connects the arithmetic rates in Table 2 to ex­
+ecution times measured on a specific DSP platform. The foreground 
+control-output convolution of the measured workload corresponds to ap­
+proximately 393 MMAC/s (16 × 1024 taps at 24 kHz), which exceeds the 
+bilateral control-output convolution rate of the single-filter configura­
+tion in Table 2 (2 × 147.5 = 294.9 MMAC/s at 48 kHz). This comparison 
+is limited to foreground convolution arithmetic; it is not intended to 
+designate the ADSP-21569 as a required target processor or to demon­
+strate every proposed configuration on one device. Rather, it provides 
+a concrete implementation example showing that one DSP sustained 
+a substantial adaptive ANC workload within a fixed low-delay frame 
+schedule. Under this schedule, the input–output latency is determined 
+by the frame structure rather than by the execution time, provided that 
+every deadline is met. Because both deadlines were met in all observa­
+tions, the measured operation sustained this adaptive-processing load 
+without lengthening the frame cadence underlying the pass-through la­
+tency reported above. This supports the practical achievability of an 
+electronic-delay condition of the scale assumed in the main text, while 
+the 104 µs value remains a controlled virtual parameter rather than a 
+directly measured loaded end-to-end latency.
+Three limitations apply. First, the background update of the mea­
+sured workload is a frequency-domain block implementation and differs 
+from the 48 kHz time-domain FxNLMS with the 𝐵= 10  commitment 
+schedule evaluated in this paper; the exact digital configurations eval­
+uated here were not directly implemented or timed, so the evidence is 
+indirect. Second, the execution times and the pass-through peak measure 
+different quantities and must not be added; neither constitutes an end-to-
+end latency measurement under adaptive operation. Third, no acoustic 
+noise-reduction performance of this workload is reported or claimed in 
+this paper.
+Appendix D . Sensitivity to fixed design and adaptation parameters
+The nominal values in Section 4.1 were common comparison settings 
+rather than architecture-specific optima. To examine whether the main 
+comparisons were determined by these values, the cutoff frequency, 
+common step size, and gain-matching band were varied one factor at 
+a time. Unless it was the swept parameter, the cutoff frequency was 
+500 Hz, the step size was 0.04, the filter was first-order Butterworth, 
+the gain-matching band was 500–2000 Hz, and the virtual electronic 
+delay was 5 samples. Each condition used the same 10 s input record 
+and evaluation procedure as the main experiment. The plotted and tab­
+ulated values are arithmetic means of the left- and right-ear values of 
+𝐿BL(B) in dB.
+D.1 . Cutoff-frequency sensitivity
+Fig. 17 shows the three main two-driver bypass/high-pass conditions 
+for 𝑓c = 100, 300, 500, 700, 1000, and 1500 Hz. Over 100Hz to2000Hz, 
+the full variation was 0.051 dB for Xo-BpHp, 0.315 dB for Du-BpHp-Fg, 
+and 1.361 dB for Du-BpHp-Bg. Thus, the single-filter result is insensitive 
+to the tested cutoff range, whereas the dual-filter background condition 
+is more dependent on the cutoff. The relative ordering of Du-BpHp-Bg 
+and Du-BpHp-Fg also changes with 𝑓c, so their ranking should not be 
+generalized independently of the cutoff. The nominal 500 Hz value is 
+therefore interpreted as the physically motivated compromise described 
+in Section 4.1, not as a performance-maximizing value.
+D.2 . Common-step-size sensitivity
+Fig. 18 shows the common-step-size sweep for all nine conditions. 
+For each dual-filter condition, the same value was applied to both ac­
+tive branches, i.e., 𝜇W =𝜇 T; the single-filter conditions have one active 
+adaptive-filter branch. An average over the left and right ears is plot­
+ted only when both ears retain positive 𝐿BL in all three reported bands. 
+All three dual-filter conditions satisfy this criterion through 𝜇= 0.06 , 
+whereas at 𝜇≥0.08  at least one ear is non-attenuating in at least one 
+reported band. Both single-filter conditions satisfy the criterion through 
+𝜇= 0.10 . Some 100–2000 Hz values are higher at 𝜇= 0.06  than at 0.04, 
+while the 100–4000 Hz values for the two dual-filter bypass/high-pass 
+conditions are maximized at 0.04 among the reported common values. 
+Accordingly, 𝜇= 0.04  is used as a conservative common setting with 
+margin from the non-attenuating dual-filter cases, not as a value that 
+maximizes every metric. Because each run is finite, the step-size trend 
+includes convergence-rate effects as well as the attained final-quarter 
+performance.
+D.3 . Gain-matching-band sensitivity
+Table 9  summarizes the gain-matching-band sweep for the 
+two single-filter conditions. Based on the unrounded values, the 
+Applied Acoustics 257 (2027) 111618 
+19 
+
+H. Chiba, N. Kamado, T. Kako et al.
+Fig. 17. Sensitivity of the left- and right-ear-averaged band-limited noise-power 
+reduction to the tweeter high-pass cutoff frequency: (a) 100–1000 Hz, (b) 
+100–2000 Hz, and (c) 100–4000 Hz. The other parameters are fixed at their 
+nominal values. The vertical dotted line indicates the nominal cutoff frequency 
+of 500 Hz.
+100–2000 Hz variation over the seven design bands ending at or below 
+2 kHz was 0.48 dB for Xo-BpBp and 0.16 dB for Xo-BpHp. For Xo-BpHp, 
+the nominal 500–2000 Hz band gave 7.58 dB, while the largest value in 
+this set, obtained with 1500–2000 Hz, was 7.63 dB; their difference was 
+less than 0.05 dB based on the unrounded values. The three starred stress 
+cases deliberately include the less-flat 3–4 kHz region. They increase 𝑔m
+substantially and reduce the Xo-BpHp 100–2000 Hz result to 6.85, 6.47, 
+and 6.21 dB for 500–3000, 500–4000, and 2000–4000 Hz, respectively. 
+Thus, the nominal result is insensitive to reasonable matching-band 
+choices within the intended control region, but not to arbitrary inclusion 
+of the upper evaluated frequencies.
+Fig. 18. Sensitivity of the left- and right-ear-averaged band-limited noise-power 
+reduction to the common step size: (a) 100–1000 Hz, (b) 100–2000 Hz, and (c) 
+100–4000 Hz. The vertical dotted line indicates the nominal value 𝜇= 0.04 . For 
+dual-filter conditions, the sweep follows 𝜇W =𝜇 T. A point is omitted when at 
+least one ear has nonpositive band-limited noise reduction in any of the three 
+reported bands.
+Filter-order sensitivity was not evaluated. The first-order 
+Butterworth high-pass filter was selected as the lowest-order non­
+trivial response that suppresses low-frequency tweeter excitation while 
+limiting the output-path group delay in the foreground dual-filter 
+and single-filter configurations. A higher order could provide stronger 
+low-frequency suppression, but it would also change the adaptation 
+weighting in the background placement and add more frequency-
+dependent group delay in the foreground paths. It could therefore 
+change the architecture ranking. Joint optimization of filter order 
+with the cutoff, branch-specific step sizes, and matching band remains 
+outside the present one-factor sensitivity analysis.
+Applied Acoustics 257 (2027) 111618 
+20 
+
+H. Chiba, N. Kamado, T. Kako et al.
+Table 9 
+Gain-matching-band sensitivity for the two single-filter conditions: (a) Xo-BpBp 
+and (b) Xo-BpHp. Band-limited noise-power reductions are in dB and are aver­
+aged over the left and right ears. Gain factors and noise-power reductions are 
+reported to three and two decimal places, respectively. The bold rows are the 
+nominal settings. Starred rows are high-frequency-inclusive stress cases.
+(a) Xo-BpBp
+Matching band (Hz) 𝑔m
+L 𝑔m
+R 100–1000 Hz 100–2000 Hz 100–4000 Hz
+100–2000 1.639 1.375 9.19 8.02 5.95
+300–2000 1.621 1.363 9.18 8.01 5.94
+500–1000 1.432 0.996 8.86 7.75 5.80
+500–1500 1.521 1.217 9.07 7.92 5.89
+500–2000 1.655 1.409 9.22 8.04 5.96
+1000–2000 1.756 1.669 9.41 8.17 6.02
+1500–2000 1.873 1.846 9.50 8.23 6.05
+500–3000∗ 4.514 3.855 9.07 7.95 5.95
+500–4000∗ 5.184 4.911 8.76 7.75 5.85
+2000–4000∗ 5.706 5.506 8.56 7.62 5.78
+(b) Xo-BpHp
+Matching band (Hz) 𝑔m
+L 𝑔m
+R 100–1000 Hz 100–2000 Hz 100–4000 Hz
+100–2000 1.639 1.375 8.41 7.58 5.77
+300–2000 1.621 1.363 8.41 7.57 5.77
+500–1000 1.432 0.996 8.37 7.46 5.68
+500–1500 1.521 1.217 8.41 7.54 5.74
+500–2000 1.655 1.409 8.41 7.58 5.78
+1000–2000 1.756 1.669 8.41 7.62 5.81
+1500–2000 1.873 1.846 8.39 7.63 5.83
+500–3000∗ 4.514 3.855 7.02 6.85 5.52
+500–4000∗ 5.184 4.911 6.50 6.47 5.32
+2000–4000∗ 5.706 5.506 6.15 6.21 5.17
+Appendix E . Mean-normalized spectral interpretation of 
+background band limiting
+This appendix states the approximation underlying the spectral in­
+terpretation of Eq. (11). Define the unbandlimited filtered-reference 
+sequence as
+𝑢𝑖,𝑟(𝑛) = (̂ 𝑠𝑖 ∗𝑥 𝑟)(𝑛), (24)
+and let 𝐮𝑖,𝑟(𝑛) be its tapped-delay-line vector, constructed identically to 
+̃𝐱𝑖,𝑟(𝑛). The random normalization denominators for the bandlimited and 
+unbandlimited updates are
+𝑞𝐻,𝑖,𝑟 (𝑛) =‖ ̃𝐱𝑖,𝑟(𝑛)‖2 +𝛿,
+𝑞0,𝑖,𝑟(𝑛) =‖𝐮 𝑖,𝑟(𝑛)‖2 +𝛿,
+(25)
+with means
+̄ 𝑞𝐻,𝑖,𝑟 =𝔼[𝑞 𝐻,𝑖,𝑟 (𝑛)], (26)
+̄ 𝑞0,𝑖,𝑟 =𝔼[𝑞 0,𝑖,𝑟(𝑛)]. (27)
+For a stationary mean-normalized interpretation, we use the explicit 
+approximation for an update numerator vector 𝐳(𝑛) and a positive scalar 
+denominator 𝑞(𝑛),
+𝔼
+[ 𝐳(𝑛)
+𝑞(𝑛)
+]
+≈ 𝔼[𝐳(𝑛)]
+𝔼[𝑞(𝑛)] . (28)
+The purpose of the following comparison is to determine how the 
+common band-limiting filter changes the frequency distribution of the 
+mean-normalized expected update relative to the corresponding unban­
+dlimited update. To express this change separately from the common 
+normalization scale, we introduce below the dimensionless relative 
+expected-update weighting Γ𝑖,𝑟(𝑓). Let 𝐺𝐻,𝑖,𝑟 (𝑓) denote the resulting 
+mean-normalized expected-gradient spectrum, and let 𝐺0,𝑖,𝑟(𝑓) denote 
+the analytical counterpart obtained by setting 𝐻𝑖(𝑓) = 1  while holding 
+𝑒(𝑛) and 𝑢𝑖,𝑟(𝑛) fixed. Since the same 𝐻𝑖(𝑓) filters both adaptation signals,
+𝐺𝐻,𝑖,𝑟 (𝑓) ≈𝜇 𝑖
+|𝐻𝑖(𝑓)| 2
+̄ 𝑞𝐻,𝑖,𝑟
+Φ𝑒𝑢𝑖,𝑟 (𝑓), (29)
+𝐺0,𝑖,𝑟(𝑓) ≈𝜇 𝑖
+1
+̄ 𝑞0,𝑖,𝑟
+Φ𝑒𝑢𝑖,𝑟 (𝑓). (30)
+Here, Φ𝑒𝑢𝑖,𝑟 (𝑓) is the cross-power spectral density of 𝑒(𝑛) and 𝑢𝑖,𝑟(𝑛). Thus, 
+within approximation (28),
+𝐺𝐻,𝑖,𝑟 (𝑓) = Γ 𝑖,𝑟(𝑓)𝐺 0,𝑖,𝑟(𝑓), (31)
+Γ𝑖,𝑟(𝑓) =|𝐻 𝑖(𝑓)| 2 ̄ 𝑞0,𝑖,𝑟
+̄ 𝑞𝐻,𝑖,𝑟
+. (32)
+Thus, Γ𝑖,𝑟(𝑓) is the frequency-dependent multiplier that relates the band-
+limited mean-normalized expected-gradient spectrum to its analytical 
+unbandlimited counterpart, with 𝑒(𝑛) and 𝑢𝑖,𝑟(𝑛) held fixed. It is not an 
+effective step size, an instantaneous-update identity, or a convergence-
+rate measure. The mean-denominator ratio is frequency independent. 
+Let F be the frequency range over which the spectra are defined, and 
+let Φ𝑢𝑖,𝑟𝑢𝑖,𝑟 (𝑓) be the power spectral density of 𝑢𝑖,𝑟(𝑛). Because the two 
+vectors have identical construction, stationarity gives
+̄ 𝑞𝐻,𝑖,𝑟 −𝛿
+̄ 𝑞0,𝑖,𝑟 −𝛿 =
+∫F |𝐻𝑖(𝑓)| 2Φ𝑢𝑖,𝑟𝑢𝑖,𝑟 (𝑓)d𝑓
+∫F Φ𝑢𝑖,𝑟𝑢𝑖,𝑟 (𝑓)d𝑓
+≡ ⟨|𝐻𝑖|2⟩
+𝑢𝑖,𝑟
+. (33)
+When 𝛿 is negligible relative to the mean filtered-reference energy, 
+Eq. (32) reduces to
+Γ𝑖,𝑟(𝑓) ≈ |𝐻𝑖(𝑓)| 2
+⟨|𝐻𝑖|2⟩
+𝑢𝑖,𝑟
+. (34)
+In this limit, normalization removes a common gain scale but retains 
+the relative spectral shape imposed by |𝐻𝑖(𝑓)| 2. Eqs. (28)–(33) are a 
+stationary mean-denominator interpretation, not an identity for the in­
+stantaneous normalized update, an exact frequency-dependent step size, 
+or a convergence proof. 
+Data availability
+The data that have been used are confidential.
+References
+[1] Bai MR, Lin Y, Lai J. Reduction of electronic delay in active noise control systems—
+a multirate signal processing approach. J Acoust Soc Am 2002;111:916–24. https:
+//doi.org/10.1121/1.1432980
+[2] Cheer J, Patel V, Fontana S. The application of a multi-reference control strategy 
+to noise cancelling headphones. J Acoust Soc Am 2019;145:3095–103. https://doi.
+org/10.1121/1.5109394
+[3] Chiba H, Kako T, Harada N. Designing an open-back enclosure to mitigate sound 
+leakage for open-ear headphones. IEEE Access 2026;14:5684–700. https://doi.org/
+10.1109/ACCESS.2025.3648340
+[4] Chiba H, Kako T, Watanabe Y, Noguchi K, Kamamoto Y, Nakamura F, Iida K. 
+Influence of acoustic coupling design in wearable audio devices on pressure divi­
+sion ratio and acoustic transparency. Acoust Sci Technol 2026;47:479–83. https:
+//doi.org/10.1250/ast.e26.27
+[5] Datta A, Ochoa J. Adaptive internal model control: design and stability analy­
+sis. Automatica 1996;32:261–6. https://doi.org/10.1016/0005-1098(96)85557-9. 
+https://www.sciencedirect.com/science/article/pii/0005109896855579. 
+[6] Elliott SJ, Nelson PA. Active noise control. IEEE Signal Process Mag 1993;10:12–35. 
+https://doi.org/10.1109/79.248551
+[7] Elliott SJ, Sutton TJ. Performance of feedforward and feedback systems for active 
+control. IEEE Trans Speech Audio Process 1996;4:214–23. https://doi.org/10.1109/
+89.496217
+[8] Farhang-Boroujeny B. Adaptive filters: theory and applications. John Wiley & Sons; 
+1999. https://api.semanticscholar.org/CorpusID:58688997. 
+[9] Ferrari CL, Cheer J, Mautone M. Investigation of an engine order noise cancellation 
+system in a super sports car. Acta Acust 2023;7:1. https://doi.org/10.1051/aacus/
+2022060
+[10] Gan WS, Mitra S, Kuo SM. Adaptive feedback active noise control headset: implemen­
+tation, evaluation and its extensions. IEEE Trans Consum Electron 2005;51:975–82. 
+https://doi.org/10.1109/TCE.2005.1510511
+Applied Acoustics 257 (2027) 111618 
+21 
+
+H. Chiba, N. Kamado, T. Kako et al.
+[11] Gupta R, He J, Ranjan R, Gan WS, Klein F, Schneiderwind C, Neidhardt A, 
+Brandenburg K, Välimäki V. Augmented/Mixed reality audio for hearables: sens­
+ing, control, and rendering. IEEE Signal Process Mag 2022;39:63–89. https://doi.
+org/10.1109/MSP.2021.3110108
+[12] International Electrotechnical Commission. Electroacoustics - octave-band and 
+fractional-octave-band filters - Part 1: Specifications. Standard IEC 61260-1:2014 
+Geneva, Switzerland: IEC; 2014. https://iec.ch. 
+[13] Iotov Y, Elofsson R, Nørholm SM, McCutcheon PJ, Christensen MG. Speech predic­
+tion in ANC headphones for improved attenuation: new methods and perceptual 
+study. IEEE Trans Audio Speech Lang Process 2025;33:3594–608. https://doi.org/
+10.1109/TASLPRO.2025.3598570
+[14] Kajikawa Y, Gan WS, Kuo SM. Recent advances on active noise control: open issues 
+and innovative applications. APSIPA Trans Signal Inf Process 2012;1:e3. https://doi.
+org/10.1017/ATSIP.2012.4
+[15] Knowles Electronics, LLC. Frequency response and latency of MEMS micro­
+phones: theory and practice. Technical Report AN22. Itasca, IL, USA: Knowles 
+Electronics, LLC; 2017. https://www.knowles.com/docs/default-source/default-
+document-library/frequency-response-and-latency-of-mems-microphones---theory-
+and-practice.pdf [accessed: 22 April 2026]. 
+[16] Kong X, Kuo SM. Study of causality constraint on feedforward active noise con­
+trol systems. IEEE Trans Circuits Syst II Analog Digit Signal Process 1999;46:183–6. 
+https://doi.org/10.1109/82.752950
+[17] Krishnamurthy N, Mansour M, Cole R. Implementation challenges for feedback ac­
+tive noise cancellation. In: 2012 IEEE international conference on acoustics, speech 
+and signal processing (ICASSP); 2012. p. 1649–52. https://doi.org/10.1109/ICASSP.
+2012.6288212
+[18] Kuo SM, Chen YR, Chang CY, Lai CW. Development and evaluation of light-
+weight active noise cancellation earphones. Appl Sci 2018;8:1178. https://doi.org/
+10.3390/app8071178. https://www.mdpi.com/2076-3417/8/7/1178. 
+[19] Kuo SM, Morgan DR. Active noise control systems: algorithms and DSP implemen­
+tations. New York: John Wiley & Sons; 1996.
+[20] Kuo SM, Morgan DR. Active noise control: a tutorial review. Proc IEEE 
+1999;87:943–73. https://doi.org/10.1109/5.763310
+[21] Lam B, Gan WS, Shi D, Nishimura M, Elliott S. Ten questions concerning active noise 
+control in the built environment. Build Environ 2021;200:107928. https://doi.org/
+10.1016/j.buildenv.2021.107928. https://www.sciencedirect.com/science/article/
+pii/S0360132321003322. 
+[22] Larsen E, Aarts RM. Reproducing low-pitched signals through small loudspeakers. J 
+Audio Eng Soc 2002;50:147–64.
+[23] Lopes PAC. Low-delay and low-cost Sigma-Delta adaptive controller for active noise 
+control. Circuits Syst Signal Process 2022;41:2988–99. https://doi.org/10.1007/
+s00034-021-01913-4
+[24] Lopes PAC, Gerald JAB. Low delay short word length sigma Delta active noise con­
+trol. IEEE Trans Circuits Syst I Regul Pap 2021;68:3746–57. https://doi.org/10.
+1109/TCSI.2021.3096180
+[25] Mäkivirta A, Liski J, Välimäki V. Effect of delay equalization on loudspeaker re­
+sponses. In: 144th audio engineering society international convention 2018. Audio 
+Engineering Society; 2018. p. 789–98. http://www.aes.org/e-lib/browse.cfm?elib=
+19515. 
+[26] Miyake T, Iwai K, Kajikawa Y. Head-mounted multi-channel feedforward active 
+noise control system for reducing noise arriving from various directions. IEEE Access 
+2023;11:6935–43. https://doi.org/10.1109/ACCESS.2023.3237812
+[27] Morgan DR, Thi JC. A delayless subband adaptive filter architecture. IEEE Trans 
+Signal Process 1995;43:1819–30. https://doi.org/10.1109/78.403341
+[28] Park SJ, Yun JH, Park YC, Youn DH. A delayless subband active noise control system 
+for wideband noise control. IEEE Trans Speech Audio Process 2001;9:892–9. https:
+//doi.org/10.1109/89.966092
+[29] Röschmann-Foudhaili H. Semi-open ANC headphone; 2016. https://aes.org/
+publications/elibrary-page/?id=18365. Presented at the 2016 AES International 
+Conference on Headphone Technology, Audio Engineering Society, paper 7-1, 
+published August 19, 2016. 
+[30] Rout NK, Das DP, Panda G. Computationally efficient algorithm for high 
+sampling-frequency operation of active noise control. Mech Syst Signal Process 
+2015;56–57:302–19. https://doi.org/10.1016/j.ymssp.2014.10.009. https://www.
+sciencedirect.com/science/article/pii/S0888327014004038. 
+[31] Shen S, Roy N, Guan J, Hassanieh H, Choudhury RR. MUTE: bringing IoT to noise 
+cancellation. In: Proceedings of the 2018 conference of the ACM special interest 
+group on data communication. New York, NY, USA: Association for Computing 
+Machinery; 2018. p. 282–96. https://doi.org/10.1145/3230543.3230550
+[32] Tan BTG. Fundamental resonant frequency of a loudspeaker. Am J Phys 
+1982;50:348–51. https://doi.org/10.1119/1.13040
+[33] Wang T, Gan WS. Stochastic analysis of FXLMS-based internal model control 
+feedback active noise control systems. Signal Process 2014;101:121–33. https:
+//doi.org/10.1016/j.sigpro.2014.01.025. https://www.sciencedirect.com/science/
+article/pii/S0165168414000437. 
+[34] Watanabe Y, Chiba H, Noguchi K, Itou H, Kako T. Effects of acoustic transparency of 
+wearable audio devices on audio AR. In: Proceedings of the 2025 CHI conference on 
+human factors in computing systems. New York, NY, USA: Association for Computing 
+Machinery; 2025. p. 1–15. https://doi.org/10.1145/3706598.3713907
+[35] World Health Organization, International Telecommunication Union. Safe listen­
+ing devices and systems: a WHO-ITU standard. Geneva, Switzerland: World Health 
+Organization; 2019. https://www.who.int/publications/i/item/9789241515276. 
+[36] Zhang B, Liu K, Zeng K, Yan Y, Wang H. Designing for comfort: OWS earphone 
+design based on external ear anthropometry and comfort analysis. In: Li Z, editor. 
+Ergonomics in design and Kansai engineering. AHFE open access, vol. 170. USA: 
+AHFE International; 2025. p. 95–105. https://doi.org/10.54941/ahfe1006171
+[37] Zhang L, Qiu X. Causality study on a feedforward active noise control headset with 
+different noise coming directions in free field. Appl Acoust 2014;80:36–44. https://
+doi.org/10.1016/j.apacoust.2014.01.004. https://www.sciencedirect.com/science/
+article/pii/S0003682X1400005X. 
+[38] Zhuang Y, Liu Y. An efficient low-delay polyphase implementation method for 
+active noise control systems. Appl Acoust 2025;227:110232. https://doi.org/
+10.1016/j.apacoust.2024.110232. https://www.sciencedirect.com/science/article/
+pii/S0003682X24003839. 
+Applied Acoustics 257 (2027) 111618 
+22 

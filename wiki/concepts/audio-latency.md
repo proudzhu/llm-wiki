@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-07-07
-updated: 2026-09-27
+updated: 2026-10-24
 tags:
   - audio-signal-processing
   - realtime-processing
@@ -10,6 +10,7 @@ sources:
   - raw/papers/rath-2026-minimum-delay-block-size/full-text.txt
   - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
   - raw/papers/veluri-2023-semantic-hearing/full-text.md
+  - raw/papers/chiba-2027-wideband-anc-coaxial-loudspeaker/full-text.txt
 ---
 
 # Audio Latency
@@ -44,7 +45,12 @@ This constraint is a key obstacle for [[concepts/neural-directional-filtering|ne
 
 For [[concepts/hearables|hearables]] with live playback to the ear (augmented audio), the budget loosens to **20–50 ms** end-to-end so output stays synced with the user's visual senses. Within that budget, semantic hearing (Veluri et al. 2023) decomposes its latency into: microphone buffer (chunk) duration + algorithmic lookahead + network processing time + OS audio I/O (~4 ms on iOS). Its binaural extraction network processes 10 ms chunks (416 samples at 44.1 kHz, stride 32, lookahead 0.7 ms → ~10.1 ms algorithmic latency) in **6.56 ms** on a smartphone (0.52 M params, 240 MFLOPS), and degrades gracefully down to 1.4 ms algorithmic latency (6.59 vs 7.42 dB SI-SNRi), suggesting ASIC implementations could reach ultra-low-latency operation.
 
+## ANC-Specific Latency: The Causality Budget
+
+In feedforward ANC the latency budget is far tighter than the perceptual budgets above — it is set by the [[concepts/causality|causality constraint]]: the total secondary-path delay must stay below the primary-minus-reference acoustic delay difference, typically tens to hundreds of µs in headphones. Within that budget, [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba et al. 2027]] decompose the delay as electronic + acoustic + mechanical and note that the **loudspeaker mechanical term** (group delay near the compact driver's fundamental resonance, hundreds of Hz) and the **acoustic propagation term** (diaphragm-to-ear distance) are delay sources specific to wearable ANC hardware — reducible by loudspeaker design ([[concepts/delay-oriented-driver-allocation|delay-oriented driver allocation]]) rather than by faster codecs or smaller blocks. Their ADSP-21569 platform evidence: 192 kHz / 8-sample frames with 24 kHz internal processing sustain an 83.3 µs pass-through peak, with foreground (27.7 µs of a 41.7 µs frame deadline) and background (≤ 79.7% of block deadline) processes both meeting deadlines under adaptive load.
+
 ## Related Sources
 
 - [[sources/uphaus-2026-directivity-low-latency|Uphaus et al. 2026: Directivity-Conditioned Low-Latency Neural Filtering]] — 10 ms-latency NDF for hearing aids
 - [[sources/veluri-2023-semantic-hearing|Veluri et al. 2023: Semantic Hearing]] — 20–50 ms hearable latency budget; 6.56 ms on-smartphone binaural extraction of 10 ms chunks, graceful degradation to 1.4 ms algorithmic latency
+- [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba, Kamado, Kako & Noguchi 2027: Wideband ANC for Open-Ear Headphones with a Coaxial Loudspeaker]] — µs-scale ANC causality budget decomposed into electronic/acoustic/mechanical terms; DSP frame-schedule and execution-time evidence at 83.3 µs pass-through

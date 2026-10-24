@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-10-22
+updated: 2026-10-24
 sources:
   - zotero://select/items/0_M2F5PSAU
   - zotero://select/items/0_TVS87FW6
@@ -10,6 +10,7 @@ sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/watanabe-2026-low-frequency-harmonic-control/full-text.md
   - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
+  - raw/papers/chiba-2027-wideband-anc-coaxial-loudspeaker/full-text.txt
   - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
 tags:
   - application-specific-anc
@@ -35,6 +36,7 @@ The physical form factor and acoustic environment of an ANC system determine its
 |-------------|---------------------|---------------------|-------------------|----------------|
 | **Drone** (Steiner 2026) | Propeller(s), co-located | Open field, outdoor | Broadband cancellation | Power, weight, nonstationary RPM |
 | **Smart glasses** (Yuan 2026) | Ambient, diffuse | Open-ear (unsealed) | Partial attenuation + awareness | Situational awareness, compute |
+| **Open-ear headphones** (Chiba 2027) | Ambient, broadband | Open-ear (unsealed) | Wideband noise reduction | Secondary-path delay budget; causality |
 | **Vehicle interior** (Yang 2026) | Engine, road, wind | Sealed 3D cavity, multi-passenger | Multi-zone cancellation | Multi-channel cross-coupling |
 | **Selective attenuation** (Huang 2026) | User-selected sources | Variable | Frequency-selective | User preference profile |
 | **Hearing aid** (Serizel 2010) | Leakage through open fitting | Open ear canal (tympanic membrane target) | SNR improvement (NR + leakage cancel) | Causality margin of a few samples; ear-canal error mic |
@@ -99,6 +101,8 @@ Propeller noise ──→ Onboard mic ──→ FxLMS controller ──→ Anti-
 **Key challenge**: The open-ear design means anti-noise leaks away and ambient sound enters freely. The neural network must model this complex acoustic coupling in real-time.
 
 **A signal-side alternative (Watanabe et al. 2026)**: instead of controlling the noise, adapt the *playback signal* to the same open-ear constraints — weak low-frequency speaker output and freely-entering low-frequency environmental noise. [[sources/watanabe-2026-low-frequency-harmonic-control|Watanabe et al. 2026]]'s [[concepts/low-frequency-harmonic-control|LFHC]] post-filter suppresses the speech fundamental and emphasizes the 2nd/3rd harmonics, moving energy out of the masked, output-limited band. Where Yuan et al.'s virtual in-ear sensing needs a neural network updating every 200 ms plus a 4-channel 2048-tap DSP pipeline, LFHC needs one comb-filter tap plus a short moving-average low-pass. The form factor again drives the architecture — but toward DSP-minimal *signal adaptation* rather than noise control, trading what ANC cannot achieve in an open field (noise reduction) for what it can (intelligibility gain at −5 dB(A) SNR without volume increase).
+
+**A hardware-side alternative (Chiba et al. 2027)**: attack the causality budget in the *acoustic domain* rather than the sensing or signal domain. [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba et al. 2027]]'s [[concepts/coaxial-two-way-secondary-source|coaxial 2-way secondary source]] (35 mm woofer + forward-offset 12 mm tweeter, nwm ONE headphone) applies [[concepts/delay-oriented-driver-allocation|delay-oriented driver allocation]] under an electronic/acoustic/mechanical delay budget: the woofer controls low frequencies (fundamental resonance ≈150 Hz → low mechanical group delay), the tweeter higher frequencies (≈6 µs vs ≈44 µs acoustic path). With a real error microphone at the ear-canal entrance and 3 housing reference microphones per ear, the measured-path offline evaluation reaches 8.01 dB over 100–2000 Hz (dual-filter background) / 7.58 dB (single-filter, at half the convolution and coefficient storage) versus 5.94 dB for the best single driver. The form factor drives the architecture a third way — into *loudspeaker design*: where Yuan et al. remove the error microphone and Watanabe et al. avoid ANC entirely, Chiba et al. keep conventional FxNLMS but reshape the secondary path itself.
 
 ---
 
@@ -240,9 +244,12 @@ The specific implementation of each step differs, but the **sense-act-adapt loop
 - [[concepts/virtual-in-ear-sensing|Virtual In-Ear Sensing]] — the error-microphone-free enabler of the smart-glasses application
 - [[concepts/hybrid-partitioned-convolution|Hybrid Partitioned Convolution]] — real-time long-filter replay on wearables
 - [[concepts/open-ear-headphones|Open-Ear Headphones]] — the form-factor class driving the glasses constraint set
+- [[concepts/coaxial-two-way-secondary-source|Coaxial Two-Way Secondary Source]] — loudspeaker-side answer to the open-ear delay dilemma
+- [[concepts/delay-oriented-driver-allocation|Delay-Oriented Driver Allocation]] — driver-band assignment by delay characteristics under a causality budget
 
 ## Related Sources
 
 - [[sources/watanabe-2026-low-frequency-harmonic-control|Watanabe et al. 2026: Low-Frequency Harmonic Control for Speech Intelligibility in Open-Ear Headphones]] — signal-side alternative to open-ear ANC: reallocate harmonic energy instead of canceling noise
 - [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — first working open-ear ANC: virtual in-ear sensing + FiLM secondary-path conditioning, 11.2 dB with per-user calibration
+- [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba, Kamado, Kako & Noguchi 2027: Wideband ANC for Open-Ear Headphones with a Coaxial Loudspeaker]] — hardware-side open-ear ANC: delay-budgeted woofer/tweeter band allocation, 8.01 dB over 100–2000 Hz in measured-path evaluation
 - [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]] — sealed-fitting alternative to the open-fitting trade-off: active OEC restores own-voice naturalness on closed hardware

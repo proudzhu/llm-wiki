@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-10-22
+updated: 2026-10-24
 tags:
   - active-noise-control
   - bone-conduction
@@ -18,6 +18,7 @@ sources:
   - raw/papers/watanabe-2026-low-frequency-harmonic-control/full-text.md
   - raw/papers/rao-2026-keep-speech-anc/full-text.txt
   - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
+  - raw/papers/chiba-2027-wideband-anc-coaxial-loudspeaker/full-text.txt
   - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
 ---
 
@@ -194,6 +195,7 @@ The rise of Open-Ear (OWS) devices creates a new ANC challenge: the primary nois
 - **Hybrid ANC with Dual Compensation**: As analyzed by [[sources/toyooka-2026-hybrid-anc-remote-sensing|Toyooka 2026]], open-ear systems require dual compensation filters to reconstruct target signals accurately in dynamic environments where multiple noise sources (external vs. internal) compete.
 - **Preserve instead of reconstruct**: [[sources/xiao-2023-spatially-selective-anc|Xiao, Xu & Zhao 2023]] show on open-fitting AR glasses that a Frost-type spatial constraint on the hybrid ANC cost function leaves the desired-direction physical wave unaltered at the error microphone — avoiding the latency, energy (~50× more secondary-source energy for reconstruct-based systems), and binaural-cue loss of synthetic reconstruction ([[concepts/spatially-selective-anc|Spatially Selective ANC]]).
 - **Signal adaptation before control**: [[sources/watanabe-2026-low-frequency-harmonic-control|Watanabe et al. 2026]] sidestep the leakage problem entirely — instead of anti-noise, their [[concepts/low-frequency-harmonic-control|LFHC]] post-filter reallocates speech harmonic energy away from the masked, output-limited low frequencies (suppress $f_0$, emphasize the 2nd/3rd harmonics via a single-tap comb filter), improving open-ear playback intelligibility at −5 dB(A) SNR — orders of magnitude cheaper than the dual-compensation or spatial-constraint approaches above.
+- **Loudspeaker design as the control enabler**: [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba et al. 2027]] widen the open-ear control band by reshaping the *secondary path itself*: a [[concepts/coaxial-two-way-secondary-source|coaxial 2-way secondary source]] (35 mm woofer + forward-mounted 12 mm tweeter) with [[concepts/delay-oriented-driver-allocation|delay-oriented driver allocation]] — woofer for low frequencies (resonance ≈150 Hz → low mechanical group delay), tweeter above (≈6 µs acoustic path) — under an electronic/acoustic/mechanical [[concepts/causality|delay budget]]. Measured-path offline evaluation on the nwm ONE: 8.01 dB over 100–2000 Hz (dual-filter, background band-splitting) / 7.58 dB (single-filter at ~half the convolution and coefficient storage) vs 5.94 dB best single driver; a real error microphone at the ear-canal entrance, 3 housing reference microphones per ear. This is the acoustic-domain complement to Yuan et al.'s sensing-domain solution: the same open-ear constraint set, solved in loudspeaker geometry rather than in neural networks.
 - **SoC Convergence**: Hardware platforms (e.g., BES6100) are now integrating dedicated NPUs and ISP pipelines to manage multi-modal sensing in real-time, moving computation from the cloud to the device edge.
 
 ### 5.2 The Future: Multi-Modal Acoustic Computing
@@ -253,6 +255,8 @@ This requires a dedicated DSP (e.g., Qualcomm QCC5141, ~200 MIPS capability).
 - [[concepts/minimum-variance-control|Minimum Variance Control]]
 - [[concepts/virtual-in-ear-sensing|Virtual In-Ear Sensing]] — error-microphone-free ANC for the open-ear form factor
 - [[concepts/hybrid-partitioned-convolution|Hybrid Partitioned Convolution]] — µs-latency replay of long network-generated control filters
+- [[concepts/coaxial-two-way-secondary-source|Coaxial Two-Way Secondary Source]] — loudspeaker-side wideband open-ear ANC
+- [[concepts/delay-oriented-driver-allocation|Delay-Oriented Driver Allocation]] — driver-band assignment by delay characteristics
 
 ## Related Sources
 
@@ -266,6 +270,7 @@ This requires a dedicated DSP (e.g., Qualcomm QCC5141, ~200 MIPS capability).
 - [[sources/veluri-2023-semantic-hearing|Veluri et al. 2023: Semantic Hearing]] — class-selective binaural reinsertion on top of the ANC clean slate; the headphone as a programmable acoustic scene platform
 - [[sources/watanabe-2026-low-frequency-harmonic-control|Watanabe et al. 2026: Low-Frequency Harmonic Control]] — open-ear playback intelligibility via signal adaptation (harmonic energy reallocation) rather than noise control
 - [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — conversation awareness without transparency mode: zero-delay reference de-speaking keeps the physical speech wave while ANC cancels only noise
+- [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba, Kamado, Kako & Noguchi 2027: Wideband ANC for Open-Ear Headphones with a Coaxial Loudspeaker]] — widens the open-ear control band from the loudspeaker side: delay-budgeted woofer/tweeter allocation on a coaxial 2-way secondary source (8.01 dB over 100–2000 Hz measured-path)
 - [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]] — the own-voice naturalness layer: OEC resolves the occlusion-transparency conflict on sealed hardware via FF (hear-through) + FB control with correction-filter decoupling
 - [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — first demonstrated open-ear ANC without an in-ear error microphone; the attenuation layer for future open-ear acoustic-computing platforms
 

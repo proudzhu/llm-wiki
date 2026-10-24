@@ -677,4 +677,6 @@
 | [[entities/matteo-amerena\|Matteo Amerena]] | Politecnico di Milano researcher; co-author of PARCnet (hybrid PLC for real-time networked music applications) | 2026-10-24 |
 | [[entities/alberto-bernardini\|Alberto Bernardini]] | Politecnico di Milano researcher; audio signal processing, physics-based sound synthesis, deep learning for audio; co-author of PARCnet | 2026-10-24 |
 | [[entities/augusto-sarti\|Augusto Sarti]] | Politecnico di Milano professor; sound analysis/synthesis and networked music performance; senior author of PARCnet and the NMP technologies overview | 2026-10-24 |
+| [[entities/noriyoshi-kamado\|Noriyoshi Kamado]] | NTT researcher; active noise control and acoustic design for wearable audio devices; co-author of the coaxial-loudspeaker wideband open-ear ANC design. | 2026-10-24 |
+| [[entities/kenichi-noguchi\|Kenichi Noguchi]] | NTT researcher; audio signal processing for wearable devices; co-author of the coaxial-loudspeaker wideband open-ear ANC design. | 2026-10-24 |
 
