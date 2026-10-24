@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-10-07
+updated: 2026-10-24
 sources:
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
   - raw/papers/zhu-2026-g-map-se-guided-speech-enhancement/full-text.md
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
   - raw/papers/pan-2025-data-driven-acoustics/full-text.md
   - raw/papers/ohlenbusch-2026-pas-se/full-text.md
+  - raw/papers/zhang-2025-mbenet/full-text.md
 tags:
   - speaker-recognition
   - representation-learning
@@ -35,6 +36,8 @@ In enrollment-conditioned tasks ([[concepts/target-speaker-extraction|TSE]], [[c
 Østergaard et al. (2026) showed that linear RNN auxiliary encoders provide better speaker representations than ConvTasNet-based ones for speaker conditioning in OVC, while substantially reducing compute.
 
 Ohlenbusch et al. 2026 [[sources/ohlenbusch-2026-pas-se|(Ohlenbusch 2026)]] use a jointly-trained SpeakerBeam-style encoder (learnable filterbank → 1-D conv block → temporal averaging, 1.810M params) producing a 128-dim embedding applied by multiplicative conditioning on the enhancement network's F-LSTM output — and show that the enrollment *sensor* matters as much as the encoder: in-ear-microphone enrollments (acoustically shielded) preserve conditioning benefits down to −10 dB enrollment SNR, while outer-microphone enrollments break down below 0 dB.
+
+Embedding-based cues also face competition from **sensor-derived cues**: on the ABCS-2Mix benchmark, the AC-only MBENet variant using a [[concepts/speaker-embedding|speaker-embedding]] clue reaches 11.19 dB SI-SDR / 2.68 PESQ, while the same backbone using the bone-conduction signal as clue reaches 16.67 dB / 3.17 (Zhang et al. 2025, [[sources/zhang-2025-mbenet|MBENet]]) — under strong noise (SNR −5…10 dB, SIR 0–2 dB), a concurrent noise-immune observation of the target is far more informative than a pre-recorded embedding. See [[concepts/bone-conduction|bone conduction]] as a TSE clue.
 
 ## Audio Clue Encoder Families in TSE
 
@@ -65,6 +68,7 @@ A common middle ground is to **pre-train then fine-tune** a NN-based encoder joi
 - [[concepts/target-speaker-vad|Target-Speaker VAD (TS-VAD)]]
 - [[concepts/speaker-verification|Speaker Verification]] — the detection-flavored application family built on embeddings
 - [[concepts/pas-se|PAS-SE]]
+- [[concepts/bone-conduction|Bone Conduction]] — sensor-derived cue competing with embeddings under noise
 
 ## Related Sources
 
@@ -73,3 +77,4 @@ A common middle ground is to **pre-train then fine-tune** a NN-based encoder joi
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova et al. 2023: Neural Target Speech Extraction: An Overview]]
 - [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — voiceprint extraction as signal transformation; TDNN x-vector architecture details (Section 6)
 - [[sources/ohlenbusch-2026-pas-se|Ohlenbusch, Kegler & Stamenovic 2026: PAS-SE]] — jointly-trained 128-dim embedding; enrollment-sensor robustness analysis
+- [[sources/zhang-2025-mbenet|Zhang, Feng, Liu, Zhang & Li 2025: MBENet]] — embedding cue vs. bone-conduction cue ablation under noise

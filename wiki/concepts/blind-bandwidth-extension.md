@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-08-14
-updated: 2026-08-14
+updated: 2026-10-24
+sources:
+  - raw/papers/zhang-2025-mbenet/full-text.md
 tags:
   - bandwidth-extension
   - speech-coding
@@ -48,6 +50,10 @@ Post-hoc linear decomposition of the output (Figure 3 of the paper) confirms the
 - Codec integration: pair the BWE with a wideband codec (e.g., Opus SILK) and compare against higher-bitrate or guided-BWE codecs (EVS) to quantify bitrate savings at equal quality.
 - The paper's key result: Opus 1.5 + blind BWE at 9 kb/s statistically matches EVS 9.6 kb/s and Opus 1.4 at 18 kb/s (45–50% bitrate reduction), showing blind BWE can match guided BWE quality.
 
+## BC-Speech Bandwidth Extension as an Auxiliary Task
+
+A related but distinct use of bandwidth extension arises in bone-conduction speech processing: the BC signal is band-limited (typically < 2 kHz), and extending it is a classic *blind enhancement* task (reconstructing wideband speech from BC-only input). [[concepts/mbenet|MBENet]] (Zhang et al. 2025) repurposes BC bandwidth extension as an **auxiliary training task** for BC-AC fusion target speaker extraction: a CRN-style module reconstructs the clean target-speech magnitude from the BC spectrogram (MSE loss, weight $\gamma = 15$), and its output feeds cross-modal fusion rather than being the final product. The bandwidth-extension target is thus the clean AC speech, not the BC signal itself — guided by the downstream task rather than blind with respect to it.
+
 ## Related Concepts
 
 - [[concepts/adaconv|AdaConv]] — adaptive convolution used for the pre/post-filtering in the hybrid approach
@@ -55,8 +61,10 @@ Post-hoc linear decomposition of the output (Figure 3 of the paper) confirms the
 - [[concepts/erb-scale|ERB Scale]] — perceptual features used to drive the extension network
 - [[concepts/percepnet|PercepNet]] — another Valin-lab low-complexity DSP/DNN hybrid (fullband speech enhancement)
 - [[concepts/speech-enhancement|Speech Enhancement]] — adjacent task (noise suppression) vs. BWE (bandwidth regeneration)
+- [[concepts/mbenet|MBENet]] — BC-speech bandwidth extension as an auxiliary task
 
 ## Related Sources
 
 - [[sources/buthe-2025-blind-wideband-to-fullband-extension|Büthe & Valin 2025: A Lightweight and Robust Method for Blind Wideband-to-Fullband Extension of Speech]] — the hybrid DSP/DNN BBWENet; the primary source for this page
 - [[sources/valin-2021-percepnet-joint-echo-control|Valin et al. 2021: PercepNet Joint Echo Control]] — hybrid DSP/DNN low-complexity design from the same lab lineage
+- [[sources/zhang-2025-mbenet|Zhang, Feng, Liu, Zhang & Li 2025: MBENet]] — BC-speech bandwidth extension as an auxiliary task for BC-AC fusion TSE

@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-10-07
+updated: 2026-10-24
 sources:
   - wiki/sources/kuang-2024-lightweight-speech-enhancement-bone-air.md
   - wiki/sources/liu-2025-robust-fusion-bc-ac-attention.md
   - wiki/sources/wang-2022-fusing-bc-ac-complex-domain-se.md
   - wiki/sources/heitkaemper-2025-bcs-speech-enhancement-earbuds.md
+  - wiki/sources/zhang-2025-mbenet.md
   - raw/papers/ohlenbusch-2026-pas-se/full-text.md
 tags:
 - acoustics
@@ -54,6 +55,10 @@ The low-pass characteristic of the bone conduction transfer function can be expl
 
 The user's own voice reaches an occluded in-ear microphone predominantly through body conduction, while environmental noise and interfering talkers are acoustically shielded by the device — an own-voice SNR advantage exploited by [[concepts/as-se|auxiliary-sensor speech enhancement (AS-SE)]]. Ohlenbusch et al. 2026 [[sources/ohlenbusch-2026-pas-se|(Ohlenbusch 2026)]] show that in-ear noise/interferer leakage must be modeled during training for cross-device generalization (approximating the in-ear interferer as an attenuated outer-microphone interferer), and that PSE enrollment recorded with the in-ear microphone retains personalization benefits down to −10 dB enrollment SNR — see [[concepts/pas-se|PAS-SE]].
 
+### 9. BC as a Target-Speaker-Extraction Cue (MBENet)
+
+Bone conduction filters out not only ambient noise but also other speakers' voices — the sensor records only the wearer's skull vibrations. [[sources/zhang-2025-mbenet|Zhang et al. 2025]] exploit this in [[concepts/mbenet|MBENet]] (ASRU 2025), the first BC-AC fusion model for [[concepts/target-speaker-extraction|target speaker extraction]]: the BC signal replaces the enrollment utterance as the speaker cue, is bandwidth-extended by a CRN-style module trained as an auxiliary task, and is fused with the noisy AC mixture through a shared-weight [[concepts/band-split-rnn|band-split]] module. On the simulated ABCS-2Mix benchmark the causal 3.8M-parameter model beats pBSRNN with growing margins as SNR drops (PESQ +6.03% at −5 dB), and the BC cue outperforms a speaker-embedding cue by +5.48 dB SI-SDR — see [[concepts/bcs-guided-speech-enhancement|BCS-guided speech enhancement]].
+
 ## Related Concepts
 
 - [[concepts/ear-canal-occlusion-effect|Ear Canal Occlusion Effect]]
@@ -66,6 +71,8 @@ The user's own voice reaches an occluded in-ear microphone predominantly through
 - [[sources/fukumoto-2025-whisphone-paper-reading-note|Whisphone]]
 - [[concepts/as-se|Auxiliary-Sensor Speech Enhancement (AS-SE)]]
 - [[concepts/pas-se|PAS-SE]]
+- [[concepts/mbenet|MBENet]]
+- [[concepts/target-speaker-extraction|Target Speaker Extraction]]
 
 ## Related Sources
 
@@ -77,3 +84,4 @@ The user's own voice reaches an occluded in-ear microphone predominantly through
 - [[sources/han-2026-quality-aware-earable-se|Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone SE]]
 - [[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2025: BCS-Guided Speech Enhancement for Voice Assistant on Earbuds]]
 - [[sources/ohlenbusch-2026-pas-se|Ohlenbusch, Kegler & Stamenovic 2026: PAS-SE]] — in-ear microphone as auxiliary sensor; in-ear enrollment robustness
+- [[sources/zhang-2025-mbenet|Zhang, Feng, Liu, Zhang & Li 2025: MBENet]] — BC-AC fusion extended from speech enhancement to target speaker extraction

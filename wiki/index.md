@@ -685,6 +685,11 @@
 | [[entities/augusto-sarti\|Augusto Sarti]] | Politecnico di Milano professor; sound analysis/synthesis and networked music performance; senior author of PARCnet and the NMP technologies overview | 2026-10-24 |
 | [[entities/noriyoshi-kamado\|Noriyoshi Kamado]] | NTT researcher; active noise control and acoustic design for wearable audio devices; co-author of the coaxial-loudspeaker wideband open-ear ANC design. | 2026-10-24 |
 | [[entities/kenichi-noguchi\|Kenichi Noguchi]] | NTT researcher; audio signal processing for wearable devices; co-author of the coaxial-loudspeaker wideband open-ear ANC design. | 2026-10-24 |
+| [[entities/chen-zhang\|Chen Zhang]] | First author of MBENet (ASRU 2025): first BC-AC fusion target speaker extraction | 2026-10-24 |
+| [[entities/linfeng-feng\|Linfeng Feng]] | Co-author of MBENet (ASRU 2025); NWPU / China Telecom TeleAI | 2026-10-24 |
+| [[entities/zhi-liu\|Zhi Liu]] | Co-author of MBENet (ASRU 2025); Shenzhen Huangli Technologies | 2026-10-24 |
+| [[entities/xiao-lei-zhang\|Xiao-Lei Zhang]] | Corresponding author of MBENet (ASRU 2025); NWPU professor, speech enhancement and TSE | 2026-10-24 |
+| [[entities/xuelong-li\|Xuelong Li]] | Corresponding author of MBENet (ASRU 2025); China Telecom TeleAI | 2026-10-24 |
 
 ---
 
@@ -1306,6 +1311,7 @@
 | [[concepts/plcmos\|PLCMOS]] | Convolutional-recurrent MOS estimator for packet-loss-degraded audio from the Interspeech 2022 PLC Challenge; speech-trained but still tracks MUSHRA on music | 2026-10-24 |
 | [[concepts/delay-oriented-driver-allocation\|Delay-Oriented Driver Allocation]] | Design principle assigning ANC control bands to loudspeaker drivers by their delay characteristics (mechanical group delay vs acoustic propagation) under a causality budget. | 2026-10-24 |
 | [[concepts/coaxial-two-way-secondary-source\|Coaxial Two-Way Secondary Source]] | Woofer plus forward-mounted tweeter secondary source for open-ear headphone ANC, exploiting complementary driver delays for wideband feedforward control. | 2026-10-24 |
+| [[concepts/mbenet\|MBENet]] | First BC-AC fusion model for target speaker extraction; bandwidth extension as auxiliary task (ASRU 2025) | 2026-10-24 |
 
 ---
 
@@ -1590,6 +1596,7 @@
 | [[sources/westhausen-2022-tplcnet\|Westhausen & Meyer 2022]] | This paper introduces tPLCnet, a real-time time-domain neural network for packet loss concealment that predicts a lost frame from a short context buffer in a sequence-to-one (seq2one) fashion — the model is invoked only when a loss is actually detected, instead of running continuous inference on every incoming frame. | 2026-10-24 |
 | [[sources/mezza-2024-hybrid-plc\|Mezza, Amerena, Bernardini & Sarti 2024]] | This paper presents PARCnet, a hybrid packet loss concealment (PLC) method for real-time Networked Music Performance (NMP): it recasts PLC as predicting the residual of a linear autoregressive model rather than generating a coherent waveform from scratch. | 2026-10-24 |
 | [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker\|Chiba, Kamado, Kako & Noguchi 2027]] | This paper proposes a design-oriented secondary-path delay budget for broadband feedforward ANC on open-ear headphones, decomposing the secondary-path delay into electronic, acoustic, and mechanical terms and allocating control bands to drivers according to their delay characteristics. | 2026-10-24 |
+| [[sources/zhang-2025-mbenet\|Zhang, Feng, Liu, Zhang & Li 2025]] | This paper proposes MBENet (Multi-modal Bone-conduction Enhancement Network), the first BC-AC fusion model applied to target speaker extraction (TSE). | 2026-10-24 |
 
 ---
 
@@ -1646,10 +1653,10 @@
 
 ## Statistics
 
-- **Total pages**: 1595
-- **Entities**: 675
-- **Concepts**: 612
-- **Sources**: 275
+- **Total pages**: 1602
+- **Entities**: 680
+- **Concepts**: 613
+- **Sources**: 276
 - **Synthesis**: 24
 - **Queries**: 9
 - **Last updated**: 2026-10-24

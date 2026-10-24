@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-16
-updated: 2026-09-16
+updated: 2026-10-24
 sources:
   - raw/papers/luo-2022-band-split-rnn/full-text.md
+  - raw/papers/zhang-2025-mbenet/full-text.md
 tags:
   - music-source-separation
   - source-separation
@@ -52,10 +53,13 @@ BSRNN ships with a finetuning pipeline that uses the pre-trained model $P$ as **
 
 BSRNN set a new MUSDB18-HQ state of the art (10.47 dB vocal uSDR with finetuning vs. 8.13 for Hybrid Demucs) and the band-split design migrated back into speech processing — e.g., high-fidelity full-band and personalized speech enhancement (Yu et al., Interspeech 2022) and band-split dual-branch models such as BSDB-Net (Fan et al., AAAI 2025). It is cited as the canonical example of "large and offline" MSS systems in real-time/embedded MSS analyses.
 
+A further migration is to **multi-modal target speaker extraction**: [[concepts/mbenet|MBENet]] (Zhang et al., ASRU 2025) adopts the band-split design with **shared weights across the AC and enhanced-BC modalities** — both spectrograms are split into 31 subbands by the same per-band linear + layer-norm projections before concatenation, followed by dual-axis (time/band) LSTM mask extraction and band merging. The shared-weight choice exploits the fact that both modalities are T-F representations of the same underlying speech event.
+
 ## Related Concepts
 
 - [[concepts/music-source-separation|Music Source Separation]]
 - [[concepts/dprnn|Dual-Path RNN (DPRNN)]]
+- [[concepts/mbenet|MBENet]] — band-split design with shared weights across AC/BC modalities
 - [[concepts/grouped-recurrent-neural-network|Grouped Recurrent Neural Network]]
 - [[concepts/complex-ratio-mask|Complex Ratio Mask]]
 - [[concepts/bidirectional-lstm|Bidirectional LSTM]]
@@ -63,3 +67,4 @@ BSRNN set a new MUSDB18-HQ state of the art (10.47 dB vocal uSDR with finetuning
 ## Related Sources
 
 - [[sources/luo-2022-band-split-rnn|Luo & Yu 2022: Music Source Separation with Band-Split RNN]]
+- [[sources/zhang-2025-mbenet|Zhang, Feng, Liu, Zhang & Li 2025: MBENet]] — shared-weight band-split fusion of AC and enhanced-BC spectrograms for TSE

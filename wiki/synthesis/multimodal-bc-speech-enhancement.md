@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-22
-updated: 2026-10-07
+updated: 2026-10-24
 sources:
   - wiki/sources/tagliasacchi-2020-seanet.md
   - wiki/sources/zhang-2022-bone-conducted-speech-dissertation.md
@@ -15,6 +15,7 @@ sources:
   - wiki/sources/han-2026-quality-aware-earable-se.md
   - wiki/sources/lugo-2026-diffvqe.md
   - wiki/sources/ohlenbusch-2026-pas-se.md
+  - wiki/sources/zhang-2025-mbenet.md
   - zotero://select/items/0_B92ER5KS (Khanagha 2026: Conditional Diffusion)
   - zotero://select/items/0_NIIDMA7J (Contrastive Learning for BC)
 tags:
@@ -27,6 +28,7 @@ tags:
   - attention-mechanism
   - sensor-failure-robustness
   - quality-aware-fusion
+  - target-speaker-extraction
 ---
 
 # Multimodal Smart Hearables: Bone-Conduction Aided Speech Enhancement
@@ -122,13 +124,21 @@ Shifts from predicting clean speech to **generating** it using BC signals as gui
   - **Enrollment-sensor choice**: recording the enrollment utterance with the acoustically shielded in-ear microphone retains personalization benefits down to −10 dB enrollment SNR, while OM enrollment breaks below 0 dB — a sensor-selection insight paralleling QuaSE's quality-aware weighting.
   - **Key result**: cross-dataset interferer SI-SDR 8.34 dB (PAS-SE with in-ear enrollment) vs. 7.20 dB AS-SE-only — outperforming even AS-SE baselines trained fully in-domain on the evaluation dataset.
 
+### 2.10 From Enhancement to Extraction: BC-Guided TSE (2025)
+
+- **[[sources/zhang-2025-mbenet|Zhang, Feng, Liu, Zhang & Li (ASRU 2025) — MBENet]]**: The first BC-AC fusion model for [[concepts/target-speaker-extraction|target speaker extraction]] — extending the lineage from speech enhancement to the TSE task, where the BC signal replaces the enrollment utterance as the speaker clue. The architecture:
+  - **Bone-conduction enhancement module** — a causal [[concepts/convolutional-recurrent-network|CRN]] (3 conv enc / GRU-64 bottleneck / 3 transposed-conv dec, dense skips) extends the BC bandwidth, trained as an **auxiliary task** (MSE on magnitude vs. clean target speech, weight $\gamma = 15$) alongside the SI-SDR extraction loss — multi-task learning in the same spirit as VibOmni's auxiliary decoder preventing modality collapse (§2.3), but aimed at spectral completeness.
+  - **Shared-weight [[concepts/band-split-rnn|band-split]] fusion** — AC and enhanced-BC spectrograms are split into 31 subbands by the *same* per-band linear + layer-norm projections (parameter sharing across modalities, echoing Liu 2025's shared-conv pre-fusion), then concatenated and processed by 6 dual-axis (time/band) LSTM blocks with band-merge mask decoding.
+  - **Key results** (simulated ABCS-2Mix, Mandarin, SIR 0–2 dB + MUSAN noise −5…10 dB): causal 3.8M params beats pBSRNN/SpEx+/MMINet/CRN on SI-SDR, PESQ and DNSMOS at every SNR, with the PESQ margin *growing* as SNR drops (+2.74% at 10 dB → +6.03% at −5 dB); the BC cue beats a speaker-embedding AC-only ablation by +5.48 dB SI-SDR (16.67 vs 11.19 dB) — direct evidence that under strong noise a concurrent noise-immune observation of the target is more informative than a pre-recorded enrollment embedding.
+  - **Distinction from the SE lineage**: MBENet's mask is applied to the **AC mixture only** (single output), unlike the dual-mask/dual-decoder designs of Liu 2025 and VibOmni — in TSE the BC channel is a *cue*, not an output to be enhanced.
+
 ---
 
 ## 3. Core Technical Challenges
 
 ### 3.1 The Bandwidth Gap (Super-Resolution)
 
-Because BC speech is missing frequencies above 2 kHz, multimodal systems must perform **Guided Super-Resolution**. Generative models (GANs and Diffusion) excel here by hallucinating plausible high-frequency details that match the low-frequency "skeleton" provided by the BC sensor. The converse also holds for transmission: Heitkaemper et al. 2025 exploit the low-pass characteristic to **discard** the BC signal above 500 Hz before transmission from the earbuds (restoring dimensionality with a learned upscaling projection), paying <1.5% absolute WER for 6.25% of the bandwidth — bandwidth thrift rather than bandwidth extension.
+Because BC speech is missing frequencies above 2 kHz, multimodal systems must perform **Guided Super-Resolution**. Generative models (GANs and Diffusion) excel here by hallucinating plausible high-frequency details that match the low-frequency "skeleton" provided by the BC sensor. The converse also holds for transmission: Heitkaemper et al. 2025 exploit the low-pass characteristic to **discard** the BC signal above 500 Hz before transmission from the earbuds (restoring dimensionality with a learned upscaling projection), paying <1.5% absolute WER for 6.25% of the bandwidth — bandwidth thrift rather than bandwidth extension. A third option is now demonstrated for extraction: MBENet (Zhang et al. 2025) makes BC bandwidth extension a **training-time auxiliary task** whose output feeds fusion — the extension quality matters only insofar as it helps the final extraction, sidestepping the hallucination risk of generative super-resolution while still closing the spectral gap (ablation: +0.55 dB SI-SDR / +0.14 PESQ over the no-extension variant).
 
 ### 3.2 Real-time Implementation & Latency
 
@@ -155,6 +165,7 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 | **VibOmni** | 2023 | — | +21% PESQ | Low-latency on-device (IMU) |
 | **DenGCAN (Kuang)** | 2024 | 1.03M | +1.870 wb-PESQ | Minimum compute on ARM |
 | **ATFA (Liu)** | 2025 | 1.6M | +0.2 PESQ | Robust to sensor failure |
+| **MBENet (Zhang)** | 2025 | 3.8M | 16.67 dB SI-SDR / 3.17 PESQ (ABCS-2Mix avg) | First BC-AC fusion **TSE**; causal; margin over pBSRNN grows as SNR drops |
 | **BCS-guided SE (Heitkaemper)** | 2025 | — | >15% rel. WER | Voice-assistant ASR on earbuds; RTF 0.01, off-device |
 | **BCDM (Khanagha)** | 2026 | — | **High** | Extreme noise (-10 dB SNR) |
 | **QuaSE (Han)** | 2026 | — | +9.35% PESQ | Quality-varying in-ear modality |
@@ -175,6 +186,8 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 - [[concepts/quality-aware-speech-enhancement|Quality-Aware Speech Enhancement]]
 - [[concepts/ear-canal-deformation|Ear Canal Deformation]]
 - [[concepts/dprnn|DPRNN]]
+- [[concepts/mbenet|MBENet]]
+- [[concepts/target-speaker-extraction|Target Speaker Extraction]]
 
 ## Related Sources
 
@@ -190,6 +203,7 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 - [[sources/han-2026-quality-aware-earable-se|Han et al. 2026: QuaSE — Quality-Aware Earable Dual-Microphone SE]]
 - [[sources/lugo-2026-diffvqe|Lugo et al. 2026: DiffVQE]] — single-step hybrid diffusion evidence for real-time generative SE (§3.2)
 - [[sources/ohlenbusch-2026-pas-se|Ohlenbusch, Kegler & Stamenovic 2026: PAS-SE]] — enrollment as third clue; in-ear enrollment robustness (§2.9)
+- [[sources/zhang-2025-mbenet|Zhang, Feng, Liu, Zhang & Li 2025: MBENet]] — first BC-AC fusion TSE; BC bandwidth extension as auxiliary task (§2.10, §3.1, §4)
 
 ## Related Synthesis
 

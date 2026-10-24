@@ -679,4 +679,9 @@
 | [[entities/augusto-sarti\|Augusto Sarti]] | Politecnico di Milano professor; sound analysis/synthesis and networked music performance; senior author of PARCnet and the NMP technologies overview | 2026-10-24 |
 | [[entities/noriyoshi-kamado\|Noriyoshi Kamado]] | NTT researcher; active noise control and acoustic design for wearable audio devices; co-author of the coaxial-loudspeaker wideband open-ear ANC design. | 2026-10-24 |
 | [[entities/kenichi-noguchi\|Kenichi Noguchi]] | NTT researcher; audio signal processing for wearable devices; co-author of the coaxial-loudspeaker wideband open-ear ANC design. | 2026-10-24 |
+| [[entities/chen-zhang\|Chen Zhang]] | First author of MBENet (ASRU 2025): first BC-AC fusion target speaker extraction | 2026-10-24 |
+| [[entities/linfeng-feng\|Linfeng Feng]] | Co-author of MBENet (ASRU 2025); NWPU / China Telecom TeleAI | 2026-10-24 |
+| [[entities/zhi-liu\|Zhi Liu]] | Co-author of MBENet (ASRU 2025); Shenzhen Huangli Technologies | 2026-10-24 |
+| [[entities/xiao-lei-zhang\|Xiao-Lei Zhang]] | Corresponding author of MBENet (ASRU 2025); NWPU professor, speech enhancement and TSE | 2026-10-24 |
+| [[entities/xuelong-li\|Xuelong Li]] | Corresponding author of MBENet (ASRU 2025); China Telecom TeleAI | 2026-10-24 |
 

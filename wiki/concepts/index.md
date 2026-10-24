@@ -616,4 +616,5 @@
 | [[concepts/plcmos\|PLCMOS]] | Convolutional-recurrent MOS estimator for packet-loss-degraded audio from the Interspeech 2022 PLC Challenge; speech-trained but still tracks MUSHRA on music | 2026-10-24 |
 | [[concepts/delay-oriented-driver-allocation\|Delay-Oriented Driver Allocation]] | Design principle assigning ANC control bands to loudspeaker drivers by their delay characteristics (mechanical group delay vs acoustic propagation) under a causality budget. | 2026-10-24 |
 | [[concepts/coaxial-two-way-secondary-source\|Coaxial Two-Way Secondary Source]] | Woofer plus forward-mounted tweeter secondary source for open-ear headphone ANC, exploiting complementary driver delays for wideband feedforward control. | 2026-10-24 |
+| [[concepts/mbenet\|MBENet]] | First BC-AC fusion model for target speaker extraction; bandwidth extension as auxiliary task (ASRU 2025) | 2026-10-24 |
 

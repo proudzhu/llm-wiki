@@ -1,17 +1,16 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-10-07
+updated: 2026-10-24
 sources:
-  - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
-  - raw/papers/ohlenbusch-2026-pas-se/full-text.md
-  - raw/papers/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction/full-text.md
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
   - raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md
-  - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
   - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
+  - raw/papers/sun-2024-lightweight-hybrid-speech-extraction/full-text.txt
   - raw/papers/wen-2025-neural-directed-speech-enhancement/full-text.md
-  - raw/papers/pan-2025-data-driven-acoustics/full-text.md
+  - raw/papers/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction/full-text.md
+  - raw/papers/ohlenbusch-2026-pas-se/full-text.md
+  - raw/papers/zhang-2025-mbenet/full-text.md
 tags:
   - speech-processing
   - source-separation
@@ -29,6 +28,7 @@ tags:
 |:---------|:------------|:---------|
 | **Spatial** | Direction or location of target | DOA, beamforming, [[concepts/spatially-selective-nonlinear-filter\|SSF]] |
 | **Enrolment** | Reference utterance from target | Speaker beam, speaker embeddings |
+| **Bone-conduction** | Concurrent sensor capturing only the target's skull vibration | [[concepts/mbenet\|MBENet]] (BC-AC fusion TSE) |
 | **Visual** | Lip movements, face video | Audio-visual separation |
 | **Textual** | Transcript or keywords | Speech recognition guided |
 
@@ -122,6 +122,8 @@ The TSE framework naturally extends to:
 - [[concepts/cie-mdptnet|CIE-mDPTNet]]
 - [[concepts/personalized-speech-enhancement|Personalized Speech Enhancement]]
 - [[concepts/speaker-embedding|Speaker Embedding]]
+- [[concepts/mbenet|MBENet]] — first BC-AC fusion TSE model
+- [[concepts/bone-conduction|Bone Conduction]] — BC as a TSE clue
 - [[concepts/directional-vad|Directional VAD (DVAD)]]
 - [[concepts/as-se|Auxiliary-Sensor Speech Enhancement (AS-SE)]]
 - [[concepts/pas-se|PAS-SE]]
@@ -138,4 +140,5 @@ The TSE framework naturally extends to:
 - [[sources/wen-2025-neural-directed-speech-enhancement|Wen et al. 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] — CDUNet: dual-mic spatial-clue extraction with a runtime enhancement width
 - [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — situates speaker-related tasks in the detection/estimation/transformation taxonomy (voiceprint extraction as transformation, separation as estimation)
 - [[sources/ohlenbusch-2026-pas-se|Ohlenbusch, Kegler & Stamenovic 2026: PAS-SE]] — enrollment clues and auxiliary in-ear sensors as complementary TSE clues for own-voice pickup
+- [[sources/zhang-2025-mbenet|Zhang, Feng, Liu, Zhang & Li 2025: MBENet]] — bone-conduction cue replaces enrollment embedding; first BC-AC fusion TSE
 

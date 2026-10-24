@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-05-06
-updated: 2026-09-12
+updated: 2026-10-24
 sources:
   - raw/patents/us20260073929a1/full-text.md
   - raw/papers/heitkaemper-2025-bcs-speech-enhancement-earbuds/full-text.txt
   - wiki/sources/liu-2025-robust-fusion-bc-ac-attention.md
   - wiki/sources/tagliasacchi-2020-seanet.md
   - wiki/sources/wang-2022-fusing-bc-ac-complex-domain-se.md
+  - wiki/sources/zhang-2025-mbenet.md
 tags:
   - speech-enhancement
   - bone-conduction
@@ -81,6 +82,7 @@ The ICASSP 2025 paper validates the architecture on >5 h of real earbud recordin
 | **BCS-guided SE** (Heitkaemper 2025) | Band-limited to 500 Hz, upscaled, concatenated with air STFT | Conformer | Ratio mask → iSTFT |
 | **DenGCAN** (Kuang 2024) | iAFF coarse-then-refined fusion of STFTs | Densely gated conv + sConformer | Complex ratio mask → iSTFT |
 | **ATFA Dual-Mask** (Liu 2025) | Shared-conv pre-fusion + concat | Dilated DenseNet + ATFA + AHA | Dual real masks (AC + BC) summed |
+| **MBENet** (Zhang 2025) | Bandwidth-extended BC (CRN module, multi-task) | Shared-weight band-split (31 bands) + dual-axis LSTM | Complex mask on AC (TSE) |
 | **VibOmni** (He 2025) | IMU vibration upscaled (BCF aug.) | Dual-encoder DPRNN | Spectrogram |
 | **Whisphone** (Fukumoto 2025) | In-ear MEMS captures occlusion BC | Separate channel | Direct voice input |
 | **OVAD** (Masilamani 2024) | Accelerometer for speech detection | VAD only | Binary speech flag |
@@ -111,6 +113,8 @@ For the *continuous* distortion case (wind-corrupted but present BCS), Heitkaemp
 - [[concepts/attention-gate|Attention Gate (AG)]]
 - [[concepts/adaptive-time-frequency-attention|Adaptive Temporal-Frequency Attention (ATFA)]]
 - [[concepts/sensor-failure-robust-fusion|Sensor-Failure Robust Multi-Modal Fusion]]
+- [[concepts/mbenet|MBENet]]
+- [[concepts/target-speaker-extraction|Target Speaker Extraction]]
 
 ## Related Sources
 
@@ -121,3 +125,4 @@ For the *continuous* distortion case (wind-corrupted but present BCS), Heitkaemp
 - [[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2025: BCS-Guided Speech Enhancement for Voice Assistant on Earbuds]]
 - [[sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]
 - [[sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]]
+- [[sources/zhang-2025-mbenet|Zhang, Feng, Liu, Zhang & Li 2025: MBENet]] — BCS-guided fusion applied to target speaker extraction with bandwidth extension as auxiliary task

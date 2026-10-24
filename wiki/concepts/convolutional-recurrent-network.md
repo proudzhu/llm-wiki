@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-10-01
+updated: 2026-10-24
 sources:
   - raw/papers/rao-2026-keep-speech-anc/full-text.txt
+  - raw/papers/zhang-2025-mbenet/full-text.md
 tags:
   - deep-learning
   - neural-network-architecture
@@ -57,6 +58,8 @@ The CRN follows an **encoder-decoder** structure with a recurrent bottleneck:
 - **[[concepts/sicrn|SICRN]]** (State-space + Inplace-Conv CRN, Zhao, He & Zhang 2024): extends the inplace-CRN line by replacing standard convolutions with the [[concepts/sic-block|SIC block]] (2D [[concepts/inplace-convolution|inplace conv]] + [[concepts/s4nd|S4ND]] global branch + sigmoid attention) and pairing it with a 2-layer LSTM bottleneck. Single-channel SE on the [[concepts/dns-challenge|DNS Challenge]] — reaches within ~0.05 WB-PESQ of FullSubNet at 0.38× params (2.16 M) and 0.14× MACs (4.24 G/s), with 0 ms look-ahead. First application of a multidimensional state space model (S4ND) to monaural SE.
 - **MC-CRN (Xu et al. 2024, FOVNet)**: multichannel CRN extension that modifies the reference channel's ERB features with a real gain, using K=20 maxDI fixed beamformers distributed in space as spatial front-end — the ultra-low-compute magnitude-only baseline that [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025]]'s [[concepts/tinygru|TinyGRU]] outperforms at equal compute while adding phase-aware complex masking.
 
+- **BC bandwidth extension for multi-modal TSE**: [[concepts/mbenet|MBENet]] (Zhang et al. 2025, ASRU) uses a causal CRN (3-layer conv encoder {16, 32, 64} channels, GRU-64 bottleneck with FC to 1984-dim, 3-layer transposed-conv decoder, BN+ELU, dense skip connections) as its bone-conduction enhancement module — extending the bandwidth of the band-limited BC spectrogram as an auxiliary task, with magnitude enhancement recombined with the original BC phase. Notably it swaps the CRN's typical LSTM bottleneck for a GRU.
+
 ## Related Concepts
 
 - [[deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
@@ -70,6 +73,7 @@ The CRN follows an **encoder-decoder** structure with a recurrent bottleneck:
 
 - [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 - [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement|Tan & Wang 2018: CRN for Real-Time Speech Enhancement (original proposal)]]
+- [[sources/zhang-2025-mbenet|Zhang, Feng, Liu, Zhang & Li 2025: MBENet]] — causal CRN as bone-conduction bandwidth-extension module for multi-modal TSE
 - [[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement|Yang et al. 2026: CoFi-Lite — Pushing the Limits of Ultra-Lightweight Speech Enhancement]] — dual coarse/fine-path CRN decoupling spectral modeling at 12.87M MACs/s
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys CRN family evolution (CRN → DCCRN → DPCRN → GCRN) and decoupling-style successors
 - [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis et al. 2026: Listen first — output-based multi-microphone speech enhancement]] — CRN used as audibility-estimating neural VAD for output-based MPDR selection
