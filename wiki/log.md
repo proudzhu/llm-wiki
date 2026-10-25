@@ -6146,3 +6146,18 @@ Created source page [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & X
 - **Question**: MBENet 相比其他 AC+BC 方案的优点是什么
 - **Answer saved**: `wiki/queries/mbenet-vs-other-ac-bc-approaches.md`
 - **Sources**: [[sources/zhang-2025-mbenet|Zhang et al. 2025 MBENet]] 对比 [[sources/liu-2025-robust-fusion-bc-ac-attention|Liu 2025 ATFA]]、[[sources/wang-2022-fusing-bc-ac-complex-domain-se|Wang 2022]]、[[sources/he-2025-vibomni|VibOmni]]、[[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds|Heitkaemper 2025]]
+
+---
+
+## [2026-10-25] ingest | Flexible Multi-Channel Target Speaker Extraction Using Geometry-Conditioned Spatially Selective Non-Linear Filters (Li, Middelberg & Doclo 2026) — targeted patch
+
+- **Source**: `raw/papers/li-2026-geometry-conditioned-ssanc/full-text.txt` (Zotero: D5LDQUHY, arXiv: 2605.18442)
+- **Type**: Targeted patch — paper version unchanged (same preprint v1); closed completeness gaps on the existing source page
+- **Changes to `wiki/sources/li-2026-geometry-conditioned-ssanc.md`**:
+  - Added all 4 figure embeds (system overview, simulation scenario, array geometries, DOA-error sensitivity) — previously 0 embeds despite figures having been extracted
+  - Added mandatory NN model documentation: **Model Structure, Inputs, and Outputs** section with mermaid architecture diagram (FiLM conditioning at the three POIs, DOA one-hot → F-LSTM cell state) and per-network spec tables (backbone + conditioning branch)
+  - Added **Training Losses** section with the combined time-domain + magnitude-spectrum L1 loss (β = 10) and full optimiser schedule (Adam, ×0.75 every 50 epochs, grad L2-clip 1)
+  - Expanded Experimental Setup table (sqrt-Hann window, data split hours, speaker placement, SIR range) and split DOA-error sensitivity analysis into its own Results subsection
+  - Fixed frontmatter `sources:` to reference `full-text.txt` (the extracted content; `full-text.md` is a broken 1-line file)
+- **Pages updated**: `wiki/sources/li-2026-geometry-conditioned-ssanc.md` only — concept/entity/synthesis/index pages verified complete from the 2026-05-23 ingest, no changes needed
+- **Verification**: `verify_wikilinks.py` 25/25 links resolve; `mkdocs build --strict` passed
