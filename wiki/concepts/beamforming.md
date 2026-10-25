@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-10-11
+updated: 2026-10-25
 sources:
   - raw/papers/boeddeker-2018-neural-mask-beamforming/full-text.md
   - raw/papers/hoshuyama-1999-robust-adaptive-beamformer-ccaf/full-text.md
@@ -158,6 +158,7 @@ The dual-microphone limit above — masking methods beating small-array beamform
 - [[concepts/frequency-invariant-beamforming|Frequency-Invariant Beamforming]]
 - [[concepts/orthogonal-series-expansion-beamforming|Orthogonal Series Expansion Beamforming]]
 - [[concepts/tflc-beamformer|TFLC Beamforming]] — per-TF-bin switching/combination of multiple distortionless beamformers for underdetermined scenes
+- [[concepts/target-steering-vector|Target Steering Vector (TSV) Feature]] — conjugate steering vectors handed to a neural network as a geometry-conditioning feature (Li & Doclo 2026)
 
 ## Related Sources
 
@@ -178,5 +179,6 @@ The dual-microphone limit above — masking methods beating small-array beamform
 - [[sources/kim-2014-doa-based-snr-estimation|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] — dual-mic SDB/GSC-PW outperformed by spatial-cue masking methods; DSB/BM transfer-function ratio reused as a TNR estimator
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — the all-neural challenge to beamforming and the model-as-regularizer argument for retaining beamforming structure
 - [[sources/yamaoka-2021-bin-wise-beamformer-combination|Yamaoka, Ono & Makino 2021: TF-Bin-Wise Linear Combination of Beamformers]] — combines K distortionless beamformers per TF bin to break the M−1-interferer limit in underdetermined situations
+- [[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026: Geometry-Conditioned Target Speaker Extraction with Spatial Features]] — the delay-and-sum phase-compensation view of the steering vector as a neural conditioning feature
 - [[sources/boeddeker-2018-neural-mask-beamforming|Boeddeker, Erdogan, Yoshioka & Haeb-Umbach 2018: Exploring Practical Aspects of Neural Mask-Based Beamforming for Far-Field Speech Recognition]] — mask-based MVDR/GEV beamforming validated at commercial scale across two arrays and two acoustic models, with online variants
 - [[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007: Blind Acoustic Beamforming Based on Generalized Eigenvalue Decomposition]] — origin of the GEV (max-SNR) beamformer with BAN/BSN normalization; the classical kernel later adopted unchanged by neural mask-based beamforming

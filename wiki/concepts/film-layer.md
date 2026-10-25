@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-10-22
+updated: 2026-10-25
 sources:
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
   - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
   - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
   - raw/papers/huang-2026-neural-directional-filtering/full-text.md
   - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
+  - raw/papers/li-2026-geometry-conditioned-tse/full-text.md
 tags:
   - deep-learning
   - neural-networks
@@ -47,7 +48,7 @@ where $\mathbf{P}$ is the conditioning feature (e.g., [[concepts/doa-microphone-
 
 ### Geometry-Conditioned Spatial Filtering
 
-In [[concepts/geometry-conditioned-ssf|GC-SSF]], FiLM layers modulate the intermediate features of a [[concepts/spatially-selective-nonlinear-filter|spatially selective filter]] based on array geometry encoded via [[concepts/doa-microphone-positional-encoding|DOA-MPE]]. This enables a single model to generalise across different microphone array configurations.
+In [[concepts/geometry-conditioned-ssf|GC-SSF]], FiLM layers modulate the intermediate features of a [[concepts/spatially-selective-nonlinear-filter|spatially selective filter]] based on array geometry encoded via [[concepts/doa-microphone-positional-encoding|DOA-MPE]]. This enables a single model to generalise across different microphone array configurations. The follow-up by Li & Doclo 2026 ([[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026]]) keeps the encoder + FiLM integration unchanged and swaps the conditioning feature to propagation-derived spatial features — the [[concepts/target-steering-vector|target steering vector]] or the [[concepts/gcc-phat-spatial-mask|GCC-PHAT spatial mask]] — showing that *what* is encoded (physics-based structure vs. abstract embeddings) matters more than the modulation mechanism itself: both explicit features outperform the abstract MPE embeddings on all metrics (+0.31 PESQ for TSV).
 
 ### Directivity-Pattern Conditioning (Neural Directional Filtering)
 
@@ -92,6 +93,8 @@ The review reports that, in TSE settings, the choice of fusion layer has "rather
 
 - [[concepts/geometry-conditioned-ssf|Geometry-Conditioned SSF (GC-SSF)]]
 - [[concepts/doa-microphone-positional-encoding|DOA-Microphone Positional Encoding (DOA-MPE)]]
+- [[concepts/target-steering-vector|Target Steering Vector (TSV) Feature]] — propagation-based conditioning input to a FiLM geometry-conditioning branch
+- [[concepts/gcc-phat-spatial-mask|GCC-PHAT Spatial Mask]] — signal-dependent conditioning input to a FiLM geometry-conditioning branch
 - [[concepts/spatially-selective-nonlinear-filter|Spatially Selective Non-Linear Filter (SSF)]]
 - [[concepts/target-speaker-extraction|Target Speaker Extraction (TSE)]]
 - [[concepts/film-osn|FiLM-OSN]]
@@ -103,6 +106,7 @@ The review reports that, in TSE settings, the choice of fusion layer has "rather
 ## Related Sources
 
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
+- [[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026: Geometry-Conditioned Target Speaker Extraction with Spatial Features]] — swaps the FiLM conditioning input from MPE embeddings to propagation-derived spatial features
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova et al. 2023: Neural Target Speech Extraction: An Overview]]
 - [[sources/uphaus-2026-directivity-low-latency|Uphaus et al. 2026: Directivity-Conditioned Low-Latency Neural Filtering]] — FiLM steers directivity patterns in the 10 ms-latency FiLM-OSN
 - [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026: Neural Directional Filtering with a Compact Microphone Array]] — FiLM-JNF: sinusoidal angle embedding mapped to per-feature affine parameters for continuous steering

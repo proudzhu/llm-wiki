@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-23
-updated: 2026-10-01
+updated: 2026-10-25
 tags:
   - researcher
   - professor
@@ -24,6 +24,7 @@ tags:
 - Co-author on the soft-constrained spatially selective ANC framework and its robust extension under secondary path variations
 - Co-author on geometry-conditioned spatially selective non-linear filter (GC-SSF) for robust target speaker extraction across array geometries
 - First author of "GSVD-Based Optimal Filtering for Single and Multimicrophone Speech Enhancement" (IEEE Trans. Signal Processing 2002) — the origin of his KU Leuven PhD line: a time-domain spatio-temporal signal subspace filter that outperforms GSC-type adaptive beamforming for all reverberation times — [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 2002]]
+- Co-author of "Geometry-Conditioned Target Speaker Extraction with Spatial Features" (arXiv 2026) — propagation-derived spatial features (target steering vector, GCC-PHAT mask) replace the GC-SSF's abstract positional encodings — [[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026]]
 
 ## Related Sources
 
@@ -31,6 +32,7 @@ tags:
 - [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]]
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
 - [[sources/doclo-2002-gsvd-optimal-filtering|Doclo & Moonen 2002: GSVD-Based Optimal Filtering for Single and Multimicrophone Speech Enhancement]]
+- [[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026: Geometry-Conditioned Target Speaker Extraction with Spatial Features]]
 
 ## Related Concepts
 

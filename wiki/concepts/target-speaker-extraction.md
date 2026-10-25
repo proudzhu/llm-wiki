@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-10-24
+updated: 2026-10-25
 sources:
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
   - raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md
@@ -11,6 +11,7 @@ sources:
   - raw/papers/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction/full-text.md
   - raw/papers/ohlenbusch-2026-pas-se/full-text.md
   - raw/papers/zhang-2025-mbenet/full-text.md
+  - raw/papers/li-2026-geometry-conditioned-tse/full-text.md
 tags:
   - speech-processing
   - source-separation
@@ -38,7 +39,7 @@ tags:
 
 - **[[concepts/beamforming|Beamforming]]**: Classical spatial filtering using array geometry
 - **[[concepts/spatially-selective-nonlinear-filter|Spatially Selective Non-Linear Filter (SSF)]]**: Deep learning-based mask estimation conditioned on target DOA — repeatedly steered to each speaker to recover individual sources in a multi-speaker separation task; systematically outperforms [[concepts/direct-separation|direct separation (DS) with PIT]] especially as the number of speakers grows (Tesch & Gerkmann 2024)
-- **[[concepts/geometry-conditioned-ssf|Geometry-Conditioned SSF (GC-SSF)]]**: SSF extended with explicit geometry conditioning for robustness across array configurations
+- **[[concepts/geometry-conditioned-ssf|Geometry-Conditioned SSF (GC-SSF)]]**: SSF extended with explicit geometry conditioning for robustness across array configurations; Li & Doclo 2026 ([[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026]]) further replace the abstract positional encodings with propagation-derived spatial features — the [[concepts/target-steering-vector|target steering vector]] (+0.31 PESQ over MPE encodings) and the [[concepts/gcc-phat-spatial-mask|GCC-PHAT spatial mask]] — a data point that physics-informed clue encoding beats learned abstract embeddings for spatial-clue TSE
 - **[[concepts/spatially-selective-anc|Spatially Selective ANC]]**: Control-theoretic approach for hearables combining ANC with spatial discrimination
 - **Hybrid GSC + neural post-filter**: [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024]] extract a zone-constrained target (video-conferencing scenario, 6-mic circular array) with a [[concepts/directional-vad|DVAD]]-gated robust GSC followed by a DPCRN post-filter conditioned on per-zone speaker activity — 0.87M params / 1.82 GMACs/s (~90% MACs below the end-to-end FT-JNF baseline) with better real-world DNSMOS generalization, evidence that classical spatial filtering plus a compact PF can substitute for joint non-linear filters on edge devices
 - **[[concepts/cdunet|CDUNet]]** (Wen et al. 2025): ultra-compact spatial-clue extraction with a **dual microphone array** — a 74.4K-parameter causal U-Net steered by [[concepts/triple-steering-spatial-selection|three steering vectors]] (target + width-derived edge angles), with the enhancement width as a runtime input. Achieves steering-invariant extraction (avg. PESQ 2.52 at 0 dB across target directions, where fixed-area baselines collapse to ~1.5) and improves backend ASR WER (4.35%/3.11% at 0/5 dB), targeting on-device streaming
@@ -113,6 +114,8 @@ The TSE framework naturally extends to:
 - [[concepts/spatially-selective-nonlinear-filter|Spatially Selective Non-Linear Filter (SSF)]]
 - [[concepts/geometry-conditioned-ssf|Geometry-Conditioned SSF (GC-SSF)]]
 - [[concepts/doa-microphone-positional-encoding|DOA-Microphone Positional Encoding (DOA-MPE)]]
+- [[concepts/target-steering-vector|Target Steering Vector (TSV) Feature]]
+- [[concepts/gcc-phat-spatial-mask|GCC-PHAT Spatial Mask]]
 - [[concepts/beamforming|Beamforming]]
 - [[concepts/spatially-selective-anc|Spatially Selective ANC]]
 - [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]]
@@ -133,6 +136,7 @@ The TSE framework naturally extends to:
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova et al. 2023: Neural Target Speech Extraction: An Overview]]
 - [[sources/tesch-2024-spatially-selective-nonlinear-filters|Tesch & Gerkmann 2024: Multi-channel Speech Separation Using Spatially Selective Deep Non-linear Filters]]
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
+- [[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026: Geometry-Conditioned Target Speaker Extraction with Spatial Features]] — propagation-derived spatial features (TSV, GCC-PHAT mask) as geometry-conditioning clues
 - [[sources/zaidel-2026-linearly-constrained-deep-beamformer|Zaidel et al. 2026: Linearly Constrained Deep Beamformer]]
 - [[sources/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction|Huang et al. 2026: Lightweight Speech Enhancement Guided TSE in Noisy Multi-Speaker Scenarios]]
 - [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024: A Lightweight Hybrid Multi-Channel Speech Extraction System with Directional Voice Activity Detection]]

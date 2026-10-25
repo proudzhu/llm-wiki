@@ -6161,3 +6161,22 @@ Created source page [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & X
   - Fixed frontmatter `sources:` to reference `full-text.txt` (the extracted content; `full-text.md` is a broken 1-line file)
 - **Pages updated**: `wiki/sources/li-2026-geometry-conditioned-ssanc.md` only — concept/entity/synthesis/index pages verified complete from the 2026-05-23 ingest, no changes needed
 - **Verification**: `verify_wikilinks.py` 25/25 links resolve; `mkdocs build --strict` passed
+
+---
+
+## [2026-10-25] ingest | Geometry-Conditioned TSE with Spatial Features (Li & Doclo 2026)
+
+- **Source**: `raw/papers/li-2026-geometry-conditioned-tse/full-text.md` (Zotero: 58N83GBE, arXiv: 2610.29778)
+- **Authors**: Jiatong Li, Simon Doclo
+- **Published**: arXiv preprint, October 2026
+- **DOI**: 10.48550/arXiv.2610.29778
+- **Summary**: Follow-up to the GC-SSF (Li, Middelberg & Doclo): replaces abstract MPE positional encodings in the geometry-conditioning branch with two propagation-derived spatial features — the target steering vector (TSV) and a GCC-PHAT spatial mask. Both beat the MPE baseline on all metrics; TSV is best (+1.66 dB SI-SDR, +0.31 PESQ on random arrays); advantage holds up to 20° target-DOA error.
+- **Pages created**: `wiki/sources/li-2026-geometry-conditioned-tse.md`, `wiki/concepts/target-steering-vector.md`, `wiki/concepts/gcc-phat-spatial-mask.md`
+- **Pages updated**: `wiki/entities/jiatong-li.md` (contribution bullet), `wiki/entities/simon-doclo.md` (contribution bullet), `wiki/concepts/geometry-conditioned-ssf.md` (new conditioning-feature evolution section + links), `wiki/concepts/spatially-selective-nonlinear-filter.md` (GC-SSF extension note + source), `wiki/concepts/doa-microphone-positional-encoding.md` (comparison with propagation-derived features + source), `wiki/concepts/gcc-phat.md` (instantaneous per-TF-bin variant application + source), `wiki/concepts/film-layer.md` (GC-SSF application update + links + source), `wiki/concepts/target-speaker-extraction.md` (spatial-methods update + links + source), `wiki/concepts/beamforming.md` (TSV feature link + source), `wiki/synthesis/multi-channel-speech-enhancement.md` (Insight 6 Phase-3 refinement, Sources row, takeaway 5, open-question nuance)
+- **Corrections**: `wiki/sources/li-2026-geometry-conditioned-ssanc.md` — fixed the loss-equation transcription (β=10 weights the *time-domain* term, per the original Tesch & Gerkmann 2024; the predecessor page had it on the frequency-domain term); removed the stub `full-text.md` from its frontmatter sources
+
+---
+
+## [2026-10-25] query | Why keep the SSF DOA one-hot branch when DOA-MPE already encodes DOA
+
+Answered from [[sources/li-2026-geometry-conditioned-ssanc|Li 2026 GC-SSF]] and [[concepts/spatially-selective-nonlinear-filter|SSF]]: the one-hot to F-LSTM cell-state path is the baseline's proven steering mechanism (spatial selectivity is controlled by the F-LSTM, per Tesch & Gerkmann), while p_DOA inside DOA-MPE feeds the FiLM branch as geometric context for cross-geometry generalization. Table 1 (P_MPE vs P_DOA-MPE, both keeping the one-hot branch) shows the two DOA inputs are complementary (~0.4-0.5 PESQ delta), not redundant. The reverse ablation - removing the one-hot branch and steering via FiLM alone - is not tested in the paper (open data gap).

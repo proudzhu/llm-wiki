@@ -617,4 +617,6 @@
 | [[concepts/delay-oriented-driver-allocation\|Delay-Oriented Driver Allocation]] | Design principle assigning ANC control bands to loudspeaker drivers by their delay characteristics (mechanical group delay vs acoustic propagation) under a causality budget. | 2026-10-24 |
 | [[concepts/coaxial-two-way-secondary-source\|Coaxial Two-Way Secondary Source]] | Woofer plus forward-mounted tweeter secondary source for open-ear headphone ANC, exploiting complementary driver delays for wideband feedforward control. | 2026-10-24 |
 | [[concepts/mbenet\|MBENet]] | First BC-AC fusion model for target speaker extraction; bandwidth extension as auxiliary task (ASRU 2025) | 2026-10-24 |
+| [[concepts/target-steering-vector\|Target Steering Vector (TSV) Feature]] | Conjugate far-field steering vectors stacked across frequency bins as a geometry-conditioning feature for the GC-SSF — purely geometric, signal-independent, multichannel; +0.31 PESQ over MPE encodings (Li & Doclo 2026) | 2026-10-25 |
+| [[concepts/gcc-phat-spatial-mask\|GCC-PHAT Spatial Mask]] | Per-TF-bin target-presence indicator from pairwise phase correlations of TDOA-compensated channels — the signal-dependent geometry-conditioning feature of Li & Doclo 2026; beats MPE encodings but trails the TSV | 2026-10-25 |
 

@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-09-12
+updated: 2026-10-25
 sources:
   - raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md
+  - raw/papers/li-2026-geometry-conditioned-tse/full-text.md
 tags:
   - deep-learning
   - spatial-filtering
@@ -45,6 +46,15 @@ The conditioning can be applied at three locations in the SSF pipeline:
 
 **Optimal configuration**: DOA-MPE at POI 2 achieves the highest PESQ scores.
 
+## Conditioning-Feature Evolution: From Abstract Encodings to Spatial Features
+
+Li & Doclo 2026 ([[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026]]) replaced the abstract MPE embeddings with two spatial features derived from acoustic propagation principles, keeping the encoder + [[concepts/film-layer|FiLM]] integration unchanged:
+
+- [[concepts/target-steering-vector|Target steering vector (TSV)]] — conjugate far-field steering vectors stacked across frequency bins; purely geometric, signal-independent, multichannel
+- [[concepts/gcc-phat-spatial-mask|GCC-PHAT spatial mask]] — per-TF-bin target-presence indicator from pairwise phase correlations of TDOA-compensated channels; signal-dependent but single-channel
+
+Both features outperform the MPE baseline on all metrics (random arrays: 9.43 dB / 2.27 PESQ for TSV vs. 7.77 dB / 1.96 for MPE), demonstrating that the network benefits from being *explicitly handed* the phase-DOA-geometry relationship rather than implicitly inferring it from abstract encodings. The trade-off: propagation-derived features degrade below the MPE baseline for target-DOA errors beyond 20°, since large errors introduce severe phase mismatches that explicitly mis-steer the network.
+
 ## Key Properties
 
 - **Geometry generalisation**: Trained on random arrays, GC-SSF achieves competitive performance on circular, ULA, and random geometries
@@ -64,6 +74,8 @@ The conditioning can be applied at three locations in the SSF pipeline:
 
 - [[concepts/spatially-selective-nonlinear-filter|Spatially Selective Non-Linear Filter (SSF)]]
 - [[concepts/doa-microphone-positional-encoding|DOA-Microphone Positional Encoding (DOA-MPE)]]
+- [[concepts/target-steering-vector|Target Steering Vector (TSV) Feature]]
+- [[concepts/gcc-phat-spatial-mask|GCC-PHAT Spatial Mask]]
 - [[concepts/film-layer|FiLM Layer]]
 - [[concepts/target-speaker-extraction|Target Speaker Extraction]]
 - [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]]
@@ -73,6 +85,7 @@ The conditioning can be applied at three locations in the SSF pipeline:
 ## Related Sources
 
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
+- [[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026: Geometry-Conditioned Target Speaker Extraction with Spatial Features]] — replaces MPE with propagation-derived spatial features (TSV, GCC-PHAT mask)
 - [[sources/liu-2026-array-invariant-speech-enhancement|Liu, Zhang, Li & Qian 2026: Array-Invariant SE via Geo-DConv]]
 - [[sources/tesch-2024-spatially-selective-nonlinear-filters|Tesch & Gerkmann 2024: Multi-channel Speech Separation Using Spatially Selective Deep Non-linear Filters]]
 

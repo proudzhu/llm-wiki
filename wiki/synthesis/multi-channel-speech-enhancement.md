@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-16
-updated: 2026-10-11
+updated: 2026-10-25
 sources:
   - raw/papers/boeddeker-2018-neural-mask-beamforming/full-text.md
   - raw/papers/erdogan-2016-improved-mvdr-mask-prediction/full-text.md
@@ -31,6 +31,7 @@ sources:
   - raw/papers/lin-2024-agadir-array-geometry-agnostic-speech-recognition/full-text.md
   - raw/papers/taseska-2018-informed-spatial-filters/full-text.md
   - raw/papers/li-2026-geometry-conditioned-ssanc/full-text.md
+  - raw/papers/li-2026-geometry-conditioned-tse/full-text.md
   - raw/papers/frank-2026-low-latency-roi-beamforming/full-text.txt
   - raw/papers/itzhak-2025-stft-roi-beamforming/full-text.md
   - raw/papers/yang-2025-mc-differential-asr-smart-glasses/full-text.md
@@ -141,6 +142,7 @@ The distinction: this synthesis is about **spatial filtering** (beamforming, coh
 | [[sources/uphaus-2026-directivity-low-latency\|Uphaus et al. 2026 (FiLM-OSN)]] | 2026 | Hybrid | Low-latency binaural NDF for BTE hearing aids: FiLM-conditioned OnlineSpatialNet (Mamba) at 10 ms total latency — matches the 32 ms FiLM-JNF baseline at 0.7M params; cosine-based directivity pattern with configurable main-lobe width and capped attenuation; IPD preservation loss required for pattern fidelity (a plain $\mathcal{L}_1$ model scores well on quality metrics yet ignores the pattern entirely) |
 | [[sources/apostolidis-2026-listen-first-output-based-multi-microphone\|Apostolidis et al. 2026]] | 2026 | Where | Output-based MPDR: select candidate output by Glimpse Proportion, not input features; rehabilitates MPDR |
 | [[sources/li-2026-geometry-conditioned-ssanc\|Li et al. 2026 (GC-SSF)]] | 2026 | Geometry | FiLM + DOA-MPE conditioning for target-speaker extraction across array geometries |
+| [[sources/li-2026-geometry-conditioned-tse\|Li & Doclo 2026 (GCSSF-TSV)]] | 2026 | Geometry | Replaces GC-SSF's abstract positional encodings with propagation-derived conditioning features (conjugate target steering vectors stacked over frequency; GCC-PHAT spatial mask); +1.66 dB SI-SDR / +0.31 PESQ over MPE on random arrays — physics-based features beat learned embeddings, degrading gracefully only beyond 20° DOA error |
 | [[sources/liu-2026-array-invariant-speech-enhancement\|Liu et al. 2026 (Geo-DConv)]] | 2026 | Geometry | TACT + dynamic convolution converts fixed-array backbones to array-invariant; ~10× fewer MACs than USES2-comp |
 | [[sources/frank-2026-low-latency-roi-beamforming\|Frank & Cohen 2026]] | 2026 | Application | Time-domain vs STFT-domain ROI beamforming for smart glasses: 2× lower latency, higher DF, at higher compute |
 | [[sources/itzhak-2025-stft-roi-beamforming\|Itzhak & Cohen 2025]] | 2025 | Robustness | STFT-domain least-distortion ROI beamforming (LD-MWNG/LD-MDF): ROI-distortion constraint from ROI-averaged steering statistics; eigenvector-truncation parameter $K$ trades array gain (WNG/DF) against average ROI distortion; superior STOI/DNSMOS and miscalibration robustness over MDF/DS/SCCA/Vorobyov baselines under large DOA deviations |
@@ -326,6 +328,8 @@ The 2026 frontier **re-injects explicit geometry** into array-invariant models:
 
 The conceptual move from Phase 2 to Phase 3: array-agnostic methods threw away geometry to gain invariance; Phase 3 methods **recover the geometry cue via conditioning** while keeping invariance. Geo-DConv's TACT consumes Fourier-encoded coordinates through a permutation-equivariant Transformer, producing a transformation matrix that linearly combines basis convolution kernels into geometry-specific weights. The permutation-equivariance guarantee (point-wise PE + MHSA) ensures stable outputs under arbitrary channel ordering — the property Phase 2 methods achieved only empirically.
 
+**What to condition on — abstract embeddings vs. propagation physics**: Li & Doclo 2026 ([[sources/li-2026-geometry-conditioned-tse|GCSSF-TSV]]) refine the Phase-3 design space with an ablation of the *conditioning representation itself*: keeping the GC-SSF backbone, encoder, and FiLM integration fixed and swapping only the feature, abstract sinusoidal positional encodings (DOA-MPE) lose to explicit acoustic-propagation features — conjugate [[concepts/target-steering-vector|target steering vectors]] stacked across frequency bins (9.43 vs. 7.77 dB SI-SDR, 2.27 vs. 1.96 PESQ on random arrays) and a [[concepts/gcc-phat-spatial-mask|GCC-PHAT spatial mask]] (8.45 dB / 2.10 PESQ). The lesson generalizes beyond GC-SSF: when the conditioning quantity has known physics (far-field phase differences), *handing the network the physics* (the delay-and-sum phase-compensation view of the steering vector) beats asking it to re-learn them from abstract coordinate embeddings. The trade-off mirrors the classical robustness literature (Insight 2): propagation-derived features inherit steering-vector error sensitivity — beyond 20° target-DOA error they drop below the abstract-encoding baseline, which has no alignment assumption to violate.
+
 **The efficiency payoff**: SpatialNet-Geo-DConv matches USES2-comp quality at ~10× fewer MACs (6.08 vs 70.26 G/s) on RealMAN — explicit geometry conditioning closes most of the gap to fixed-array upper bounds at a fraction of the compute. This makes geometry-conditioned approaches the practical choice for resource-constrained deployment where array-agnostic methods are too expensive.
 
 ## Insight 7: Application-Driven Constraints Drive Architecture
@@ -357,7 +361,7 @@ The corpus shows that **form factor and use case, not algorithmic novelty, are t
 
 4. **The input→output inversion (Apostolidis 2026) is structural, not parametric.** It generalizes beyond beamforming to any SE system with a discrete configuration space, and rehabilitates MPDR — a filter classical robustness analysis had sidelined.
 
-5. **Array geometry went fixed → agnostic → conditioned.** Phase 3 (geometry-conditioned) recovers the geometry cue that Phase 2 (array-agnostic) threw away, via Fourier PE + Transformer conditioning. The payoff is both quality (closes gap to fixed-array) and efficiency (~10× fewer MACs than USES2-comp).
+5. **Array geometry went fixed → agnostic → conditioned.** Phase 3 (geometry-conditioned) recovers the geometry cue that Phase 2 (array-agnostic) threw away, via Fourier PE + Transformer conditioning. The payoff is both quality (closes gap to fixed-array) and efficiency (~10× fewer MACs than USES2-comp). And within Phase 3, the *conditioning representation* matters: Li & Doclo 2026 show propagation-derived steering vectors beat abstract positional encodings by +1.66 dB SI-SDR in the same GC-SSF skeleton — the physics of the conditioning quantity should be handed to the network, not re-learned from coordinates.
 
 6. **Application constraints, not algorithmic novelty, drive deployed architecture.** Hearing aids → classical CDR/GMC; mobile phones → level-difference post-filters; smart glasses → time-domain ROI beamforming; ASR → spatial features as DNN input. The "best" method is the one that fits the form-factor constraint, not the one with the highest benchmark score. The ROI line illustrates the point twice over: [[sources/itzhak-2025-stft-roi-beamforming|Itzhak & Cohen 2025]] built the STFT-domain formulation around a single interpretable knob ($K$: array gain vs average distortion over the region, tuned by the expected DOA deviation), and [[sources/frank-2026-low-latency-roi-beamforming|Frank & Cohen 2026]] showed the smart-glasses latency budget then favors re-implementing the same ROI principle in the time domain despite the higher compute.
 
@@ -366,6 +370,6 @@ The corpus shows that **form factor and use case, not algorithmic novelty, are t
 ## Open Questions / Future Synthesis Candidates
 
 - **Classical-vs-neural head-to-head on shared benchmarks**: the corpus lacks a direct comparison of, e.g., GMC-based CDR (Löllmann 2020) vs. NDF+ (Huang 2026) on the same binaural HA setup. A controlled benchmark would clarify where classical methods still win. (Partially addressed for the fixed-beamformer case by [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026]]: an LS beamformer designed at its theoretical order limit reaches 10.32 dB SDR vs. 27.70 dB for NDF on the same 4-mic array — but the CDR-vs-NDF comparison remains open.)
-- **Geometry-conditioned robustness**: Wang 2021's KMVDR shows the classical route exists (geometry-independent representation + structural regularization jointly), but no source yet combines the *learned* geometry axis (Insight 6: Geo-DConv, GC-SSF) with MVDR robustness control (Insight 2: Kantorovich loading, data-driven WNG) or Kronecker structural regularization. A geometry-conditioned KMVDR — or KMVDR-style structural regularization inside a geometry-conditioned neural beamformer — is an open frontier.
+- **Geometry-conditioned robustness**: Wang 2021's KMVDR shows the classical route exists (geometry-independent representation + structural regularization jointly), but no source yet combines the *learned* geometry axis (Insight 6: Geo-DConv, GC-SSF) with MVDR robustness control (Insight 2: Kantorovich loading, data-driven WNG) or Kronecker structural regularization. A geometry-conditioned KMVDR — or KMVDR-style structural regularization inside a geometry-conditioned neural beamformer — is an open frontier. Li & Doclo 2026 add a sub-question: propagation-derived conditioning features inherit steering-vector error sensitivity (performance drops below abstract encodings beyond 20° DOA error), so robustness *of the conditioning representation itself* (e.g., partial-whitening or uncertainty-set features) is unexplored.
 - **Output-based selection beyond beamforming**: Apostolidis 2026 demonstrates the paradigm for MPDR; extending it to VSLF span dimension, NDF directivity order, or R-MWF variance-ratio constraints is unexplored.
 - **Cross-source synthesis on virtual microphone methods**: Farmani 2026 (power-function RTF), UniArray (virtual mic estimation), and NDF+ (virtual directional microphone) share a "synthesize channels you don't have" theme but use very different mechanisms — a dedicated synthesis would clarify when each applies.

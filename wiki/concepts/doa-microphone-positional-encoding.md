@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-07-27
+updated: 2026-10-25
+sources:
+  - raw/papers/li-2026-geometry-conditioned-tse/full-text.md
 tags:
   - positional-encoding
   - microphone-arrays
@@ -60,10 +62,16 @@ and $\theta$ is the target DOA defined relative to the same reference axis as th
 - [[concepts/direction-of-arrival-estimation|DOA estimation]] with geometry-invariant networks
 - Blind speaker separation with ad-hoc microphone arrays
 
+## Comparison with Propagation-Derived Spatial Features
+
+Li & Doclo 2026 ([[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026]]) show that MPE-style abstract encodings are not the last word in geometry conditioning: replacing $\mathbf{P}_{\text{MPE}}$ with the [[concepts/target-steering-vector|target steering vector]] (conjugate steering vectors stacked over frequency) improves the same GCSSF system from 7.77 to 9.43 dB SI-SDR (2.27 vs. 1.96 PESQ) on random arrays. The sinusoidal encoding provides coordinates but leaves the network to *implicitly learn* the phase-DOA-geometry relationship; the steering vector hands it over explicitly. The residual advantage of MPE: it degrades more gracefully under target-DOA errors beyond 20°, where propagation-derived features suffer severe phase mismatch.
+
 ## Related Concepts
 
 - [[concepts/geometry-conditioned-ssf|Geometry-Conditioned SSF (GC-SSF)]]
 - [[concepts/spatially-selective-nonlinear-filter|Spatially Selective Non-Linear Filter (SSF)]]
+- [[concepts/target-steering-vector|Target Steering Vector (TSV) Feature]] — the propagation-based alternative that empirically outperforms MPE
+- [[concepts/gcc-phat-spatial-mask|GCC-PHAT Spatial Mask]] — the signal-dependent alternative
 - [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]]
 - [[concepts/beamforming|Beamforming]]
 - [[concepts/topology-aware-coordinate-transformer|Topology-Aware Coordinate Transformer (TACT)]] — alternative microphone-coordinate encoding for SE (no DOA, Cartesian/spherical, Transformer-driven)
@@ -71,4 +79,5 @@ and $\theta$ is the target DOA defined relative to the same reference axis as th
 ## Related Sources
 
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
+- [[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026: Geometry-Conditioned Target Speaker Extraction with Spatial Features]] — benchmarks MPE against propagation-derived spatial features
 - [[sources/liu-2026-array-invariant-speech-enhancement|Liu, Zhang, Li & Qian 2026: Array-Invariant SE via Geo-DConv]]

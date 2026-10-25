@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-23
-updated: 2026-05-23
+updated: 2026-10-25
 tags:
   - researcher
   - signal-processing
@@ -18,10 +18,12 @@ tags:
 ## Key Contributions
 
 - Proposed the geometry-conditioned spatially selective non-linear filter (GC-SSF) with DOA-MPE feature for robust target speaker extraction across array geometries (IWAENC 2026 submission)
+- First author of "Geometry-Conditioned Target Speaker Extraction with Spatial Features" (arXiv 2026) — replaces the GC-SSF's abstract positional encodings with propagation-derived spatial features (target steering vector, GCC-PHAT mask), +0.31 PESQ over GCSSF-MPE — [[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026]]
 
 ## Related Sources
 
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
+- [[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026: Geometry-Conditioned Target Speaker Extraction with Spatial Features]]
 
 ## Related Concepts
 

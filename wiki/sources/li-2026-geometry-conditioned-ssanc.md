@@ -4,7 +4,6 @@ created: 2026-05-23
 updated: 2026-10-25
 sources:
   - raw/papers/li-2026-geometry-conditioned-ssanc/full-text.txt
-  - raw/papers/li-2026-geometry-conditioned-ssanc/full-text.md
   - https://arxiv.org/abs/2605.18442
   - zotero://select/items/0_D5LDQUHY
 tags:
@@ -126,9 +125,9 @@ Three injection points are investigated:
 
 All networks (GC-SSF and both SSF baselines) are trained to minimise a combined time-domain + frequency-domain loss following Tesch & Gerkmann 2024 [8]:
 
-$$\mathcal{L} = \frac{1}{N} \sum_{n=1}^{N} |x_1(n) - \hat{x}_1(n)| + \beta \cdot \frac{1}{TF} \sum_{t=1}^{T} \sum_{f=1}^{F} \big| |X_1(f,t)| - |\hat{X}_1(f,t)| \big|,$$
+$$\mathcal{L} = \frac{\beta}{N} \sum_{n=1}^{N} |x_1(n) - \hat{x}_1(n)| + \frac{1}{TF} \sum_{t=1}^{T} \sum_{f=1}^{F} \big| |X_1(f,t)| - |\hat{X}_1(f,t)| \big|,$$
 
-where $x_1(n)$ is the reverberant time-domain target speech at the reference microphone and $\hat{x}_1(n)$ its estimate (reconstructed via inverse STFT + overlap-add); the frequency-domain term compares **magnitude spectra**. The weighting factor is $\beta = 10$. The $L_1$ forms are the standard choice from the baseline SSF framework — kept unchanged here so that the geometry-conditioning branch is the only new variable. Training: Adam (initial lr 0.001), multi-step scheduler decaying lr by 0.75 every 50 epochs up to epoch 400, 500 epochs, batch size 16, gradient $l_2$-norm clipped to 1.
+where $x_1(n)$ is the reverberant time-domain target speech at the reference microphone and $\hat{x}_1(n)$ its estimate (reconstructed via inverse STFT + overlap-add); the frequency-domain term compares **magnitude spectra**. The weighting factor $\beta = 10$ scales the time-domain term to approximately equalize the contribution of either domain (per Tesch & Gerkmann 2024 [8]; corrected 2026-10-25 against the original — an earlier revision of this page had the weighting on the frequency-domain term). The $L_1$ forms are the standard choice from the baseline SSF framework — kept unchanged here so that the geometry-conditioning branch is the only new variable. Training: Adam (initial lr 0.001), multi-step scheduler decaying lr by 0.75 every 50 epochs up to epoch 400, 500 epochs, batch size 16, gradient $l_2$-norm clipped to 1.
 
 ## Experimental Setup
 

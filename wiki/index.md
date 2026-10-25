@@ -1312,6 +1312,8 @@
 | [[concepts/delay-oriented-driver-allocation\|Delay-Oriented Driver Allocation]] | Design principle assigning ANC control bands to loudspeaker drivers by their delay characteristics (mechanical group delay vs acoustic propagation) under a causality budget. | 2026-10-24 |
 | [[concepts/coaxial-two-way-secondary-source\|Coaxial Two-Way Secondary Source]] | Woofer plus forward-mounted tweeter secondary source for open-ear headphone ANC, exploiting complementary driver delays for wideband feedforward control. | 2026-10-24 |
 | [[concepts/mbenet\|MBENet]] | First BC-AC fusion model for target speaker extraction; bandwidth extension as auxiliary task (ASRU 2025) | 2026-10-24 |
+| [[concepts/target-steering-vector\|Target Steering Vector (TSV) Feature]] | Conjugate far-field steering vectors stacked across frequency bins as a geometry-conditioning feature for the GC-SSF — purely geometric, signal-independent, multichannel; +0.31 PESQ over MPE encodings (Li & Doclo 2026) | 2026-10-25 |
+| [[concepts/gcc-phat-spatial-mask\|GCC-PHAT Spatial Mask]] | Per-TF-bin target-presence indicator from pairwise phase correlations of TDOA-compensated channels — the signal-dependent geometry-conditioning feature of Li & Doclo 2026; beats MPE encodings but trails the TSV | 2026-10-25 |
 
 ---
 
@@ -1597,6 +1599,7 @@
 | [[sources/mezza-2024-hybrid-plc\|Mezza, Amerena, Bernardini & Sarti 2024]] | This paper presents PARCnet, a hybrid packet loss concealment (PLC) method for real-time Networked Music Performance (NMP): it recasts PLC as predicting the residual of a linear autoregressive model rather than generating a coherent waveform from scratch. | 2026-10-24 |
 | [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker\|Chiba, Kamado, Kako & Noguchi 2027]] | This paper proposes a design-oriented secondary-path delay budget for broadband feedforward ANC on open-ear headphones, decomposing the secondary-path delay into electronic, acoustic, and mechanical terms and allocating control bands to drivers according to their delay characteristics. | 2026-10-24 |
 | [[sources/zhang-2025-mbenet\|Zhang, Feng, Liu, Zhang & Li 2025]] | This paper proposes MBENet (Multi-modal Bone-conduction Enhancement Network), the first BC-AC fusion model applied to target speaker extraction (TSE). | 2026-10-24 |
+| [[sources/li-2026-geometry-conditioned-tse\|Li & Doclo 2026]] | Follow-up to the GC-SSF of Li, Middelberg & Doclo: instead of conditioning on abstract sinusoidal positional encodings (MPE), this paper feeds the geometry-conditioning branch of the GCSSF two explicit spatial features derived from acoustic propagation principles — the target steering vector (TSV, capturing inter-microphone phase differences) and a GCC-PHAT spatial mask (quantifying target presence per time-frequency bin). | 2026-10-25 |
 
 ---
 
@@ -1654,10 +1657,10 @@
 
 ## Statistics
 
-- **Total pages**: 1603
+- **Total pages**: 1606
 - **Entities**: 680
-- **Concepts**: 613
-- **Sources**: 276
+- **Concepts**: 615
+- **Sources**: 277
 - **Synthesis**: 24
 - **Queries**: 10
-- **Last updated**: 2026-10-24
+- **Last updated**: 2026-10-25

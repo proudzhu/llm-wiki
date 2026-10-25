@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-10-02
-updated: 2026-10-02
+updated: 2026-10-25
 sources:
   - raw/papers/grinstein-2024-srp-tutorial-review/full-text.md
+  - raw/papers/li-2026-geometry-conditioned-tse/full-text.md
 tags:
   - time-delay-estimation
   - sound-source-localization
@@ -36,14 +37,17 @@ with $\gamma$ for numerical stability (one proposal sets $\gamma$ to the minimum
 - **Neural replacements**: Deep-GCC networks regress an idealized single-peak correlation (Gaussian target at the true TDOA), using GCC-PHAT or spectrogram inputs.
 - **Alternative weightings and correlations**: kurtosis-based weighting, sum-of-Gaussians smoothing, multi-channel cross-correlation (MCCC), eigenvector-domain correlations, analytic-signal envelope (against sinc ripples), wavelet-based GCCs for outdoor conditions.
 - The role of GCC-PHAT inside SRP: each grid candidate samples the pair's GCC at its TDOA — see [[concepts/steered-response-power|Steered-Response Power]].
+- **Instantaneous (per-TF-bin) use as a neural conditioning feature**: the [[concepts/gcc-phat-spatial-mask|GCC-PHAT spatial mask]] of Li & Doclo 2026 computes the per-bin phase correlation between TDOA-compensated channels (no inverse FFT — no delay estimate is produced) and averages it over microphone pairs as a target-presence indicator for geometry-conditioned target speaker extraction. This repurposes the PHAT whitening idea from *estimating a delay* to *certifying alignment* toward a given DOA.
 
 ## Related Concepts
 
 - [[concepts/steered-response-power|Steered-Response Power (SRP)]]
 - [[concepts/sound-source-localization|Sound Source Localization]]
 - [[concepts/interaural-time-difference|Interaural Time Difference]] — the binaural special case of TDOA estimation
+- [[concepts/gcc-phat-spatial-mask|GCC-PHAT Spatial Mask]] — the instantaneous per-TF-bin variant used as a neural conditioning feature
 
 ## Related Sources
 
 - [[sources/grinstein-2024-srp-tutorial-review|Grinstein et al. 2024: SRP for Sound Source Localization — a Tutorial Review]] — the tutorial formulation and the partial-whitening synthesis on this page
 - [[sources/kim-2014-doa-based-snr-estimation|Kim & Kim 2014: DOA-based SNR Estimation]] — uses the GCC/SRP-PHAT reliability within the target-DOA error window
+- [[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026: Geometry-Conditioned Target Speaker Extraction with Spatial Features]] — instantaneous GCC-PHAT as a geometry-conditioning feature

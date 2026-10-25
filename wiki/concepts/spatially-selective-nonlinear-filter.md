@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-10-03
+updated: 2026-10-25
 sources:
   - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
   - raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md
   - raw/papers/wen-2025-neural-directed-speech-enhancement/full-text.md
   - raw/papers/huang-2026-dual-mic-steerable-neural-beamformer/full-text.md
+  - raw/papers/li-2026-geometry-conditioned-tse/full-text.md
 tags:
   - deep-learning
   - spatial-filtering
@@ -51,7 +52,7 @@ The SSF comprises two LSTM layers:
 
 ### Geometry-Conditioned SSF (GC-SSF)
 
-The [[concepts/geometry-conditioned-ssf|GC-SSF]] addresses the geometry dependency by adding a [[concepts/film-layer|FiLM]]-based conditioning branch driven by [[concepts/doa-microphone-positional-encoding|DOA-MPE]] features. This enables a single model trained on random arrays to generalise across circular, ULA, and random geometries.
+The [[concepts/geometry-conditioned-ssf|GC-SSF]] addresses the geometry dependency by adding a [[concepts/film-layer|FiLM]]-based conditioning branch driven by [[concepts/doa-microphone-positional-encoding|DOA-MPE]] features. This enables a single model trained on random arrays to generalise across circular, ULA, and random geometries. The follow-up by Li & Doclo 2026 swaps the conditioning feature to propagation-derived spatial features ([[concepts/target-steering-vector|target steering vector]], [[concepts/gcc-phat-spatial-mask|GCC-PHAT spatial mask]]) — both beat the abstract encodings across all metrics, with the TSV best overall (+1.66 dB SI-SDR over MPE on random arrays) at the cost of DOA-error sensitivity beyond 20°.
 
 ### Dual-Microphone Directed Variant (CDUNet)
 
@@ -118,5 +119,6 @@ A [[concepts/doa-informed-direct-separation|DoA-informed DS variant (iDS)]] that
 - [[sources/tesch-2023-insights-deep-nonlinear-filters|Tesch & Gerkmann 2023: Insights Into Deep Non-linear Filters for Improved Multi-channel Speech Enhancement]] — origin of the FT-JNF backbone and the F-LSTM cell-state observation that controls spatial selectivity [22]
 - [[sources/tesch-2024-spatially-selective-nonlinear-filters|Tesch & Gerkmann 2024: Multi-channel Speech Separation Using Spatially Selective Deep Non-linear Filters]]
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
+- [[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026: Geometry-Conditioned Target Speaker Extraction with Spatial Features]] — SSF backbone reused with propagation-derived conditioning features
 - [[sources/wen-2025-neural-directed-speech-enhancement|Wen et al. 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] — dual-microphone directed variant (CDUNet) with a runtime enhancement-width input
 - [[sources/huang-2026-dual-mic-steerable-neural-beamformer|Huang & Habets 2026: Dual-Microphone Steerable High-Order Neural Differential Beamformer]] — SSF backbone with the mask output replaced by complex beamforming weights
