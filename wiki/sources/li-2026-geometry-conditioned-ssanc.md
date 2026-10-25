@@ -121,6 +121,26 @@ Three injection points are investigated:
 
 **Best configuration**: DOA-MPE at POI 2 (highest PESQ on both Circ and Random).
 
+### Why Two DOA Pathways (Design Rationale)
+
+Since the proposed DOA-MPE feature already contains the target DOA ($\mathbf{p}_{\text{DOA}}$), it may seem redundant to keep the baseline SSF's one-hot DOA branch. The paper does not ablate this, but the design logic is that the two pathways serve different sub-problems:
+
+| | One-hot branch (baseline) | $\mathbf{p}_{\text{DOA}}$ in DOA-MPE (new) |
+|:--|:--|:--|
+| Form | 180-dim discrete one-hot (2° resolution) | Continuous sinusoidal encoding (Eq. 6), same framework as $\mathbf{P}_{\text{MPE}}$ |
+| Entry point | Linear projection → initialises F-LSTM cell state | Conv1d encoder → FiLM parameters $\mathbf{W}, \mathbf{B}$ (time-invariant) |
+| Role | **Steering signal**: which direction to extract | **Geometric context**: target–array relative geometry, for cross-geometry generalisation |
+
+Rationale:
+
+1. **Proven steering mechanism.** In the Tesch & Gerkmann SSF line, spatial selectivity is mainly controlled by the F-LSTM, and cell-state initialisation from the one-hot DOA is the validated steering mechanism (shown to outperform time-aligned input shifting). GC-SSF keeps it untouched and adds the missing geometric context on top.
+
+2. **Table 1 shows the two DOA inputs are complementary, not redundant.** The $\mathbf{P}_{\text{MPE}}$ vs $\mathbf{P}_{\text{DOA-MPE}}$ ablation runs with the one-hot branch present in both cases: giving the FiLM branch geometry alone reaches PESQ 1.7–2.1, adding the DOA column lifts it to 2.4–2.5 (~+0.4–0.5). The FiLM branch needs to know where the target is *relative to the array* to modulate correctly — the one-hot branch's presence does not substitute for that, and vice versa.
+
+3. **Contribution isolation.** All systems in Table 2 (SSF-Circ / SSF-Random / GC-SSF) share the same backbone, loss, and steering mechanism; the geometry-conditioning branch is the only new variable, keeping the comparison clean.
+
+**Open question**: whether FiLM conditioning alone (removing the one-hot branch) could carry steering is not tested. A time-invariant affine modulation and a recurrent cell-state initialisation influence the network differently, so the answer is not obvious. The follow-up work [[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026 (Geometry-Conditioned TSE with Spatial Features)]] continues this line with explicit spatial features (steering vector, GCC-PHAT mask) in the conditioning branch.
+
 ### Training Losses
 
 All networks (GC-SSF and both SSF baselines) are trained to minimise a combined time-domain + frequency-domain loss following Tesch & Gerkmann 2024 [8]:
@@ -216,4 +236,5 @@ Evaluated on the Circ array under target-DOA errors of 0–90°:
 
 ## Related Sources
 
+- [[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026: Geometry-Conditioned TSE with Spatial Features]] — follow-up replacing the sinusoidal positional encoding with explicit spatial features (target steering vector, GCC-PHAT mask)
 - [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]]
