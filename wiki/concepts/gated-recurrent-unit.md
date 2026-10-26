@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-07-18
-updated: 2026-10-24
+updated: 2026-10-26
 sources:
   - raw/papers/mienye-2024-rnn-comprehensive-review/full-text.md
   - raw/papers/li-2026-realtime-music-separation-dsp/full-text.md
@@ -9,6 +9,7 @@ sources:
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
   - raw/papers/zhang-2021-adl-mvdr/full-text.md
   - raw/papers/westhausen-2022-tplcnet/full-text.md
+  - raw/papers/perez-2018-film-visual-reasoning/full-text.md
 tags:
   - deep-learning
   - recurrent-neural-network
@@ -69,6 +70,7 @@ Within the llm-wiki, GRU is the recurrent backbone in:
 - [[concepts/hyst-net\|HyST-Net]] (Zhao & Madhu 2026) — GRU chosen for the *temporal* axis of the interleaved bottleneck precisely for its compact recurrent state: causal MHA with key-value caching costs memory/compute linear in context length, non-trivial for lightweight streaming on edge devices, while the GRU state stays constant (RTF 0.22 in strict frame-by-frame CPU streaming)
 - [[concepts/adl-mvdr|ADL-MVDR]] (Zhang et al. 2021) — two GRU-Nets *replace the matrix operations* of the MVDR solution: one regresses the steering vector (in place of PCA on the speech covariance), the other the inverse noise covariance (in place of matrix inversion), recursively accumulating statistics across frames. This revives the classical result that RNNs can solve matrix inversion in real time (Wang 1993; Zhang & Ge 2005) inside a modern end-to-end speech-separation system, and is what makes joint training with the front-end stable where closed-form inversion was not.
 - [[concepts/tfc-tdf-unet|TFC-TDF U-Net]] (Li et al. 2026) — GRU recurrence chosen over LSTM for *indefinite streaming stability*: the GRU state $h_t = (1-z_t)h_{t-1} + z_t\tilde{h}_t$ is a convex combination of bounded terms and stays in $[-1,1]$ by construction, whereas an LSTM cell state is an unbounded running sum (measured growing 399→962 over 120 s with no plateau), eventually saturating downstream activations and forcing periodic resets that reintroduce buffering latency. Six GRUs cost 4.37 ms of the 10.43 ms frame budget on the target DSP, and the state stays 32-bit float because it is an accumulator carried indefinitely.
+- [[concepts/film-layer|FiLM]] (Perez et al. 2018) — the FiLM generator that conditions a CNN on a question is a GRU with 4096 hidden units over 200-d word embeddings; its final hidden state is affine-projected to per-layer $(\gamma, \beta)$ modulation parameters. An early example of a GRU as a *conditioning encoder* rather than a sequence-to-sequence backbone
 
 ## Related Concepts
 
@@ -88,3 +90,4 @@ Within the llm-wiki, GRU is the recurrent backbone in:
 - [[sources/zhang-2021-adl-mvdr\|Zhang et al. 2021: ADL-MVDR]] — GRU-Nets replace matrix inversion and PCA inside the MVDR solution, reviving classical RNN matrix-inversion results (Wang 1993; Zhang & Ge 2005) in an end-to-end speech separator
 - [[sources/li-2026-realtime-music-separation-dsp\|Li, Liu, Malsky & Yi 2026: Real-Time Music Source Separation on a Low-Power Audio DSP]] — GRU state bounded in $[-1,1]$ by construction for indefinite streaming on a DSP (vs. LSTM's unbounded cell state); state stays 32-bit float because it is an accumulator carried indefinitely
 - [[sources/westhausen-2022-tplcnet\|Westhausen & Meyer 2022: tPLCnet — Real-Time Deep Packet Loss Concealment in the Time Domain]] — bidirectional-GRU seq2one PLC; triggered on demand at loss time only
+- [[sources/perez-2018-film-visual-reasoning\|Perez, Strub, de Vries, Dumoulin & Courville 2018: FiLM: Visual Reasoning with a General Conditioning Layer]] — GRU question encoder (4096 units) as the FiLM generator: final hidden state projected to per-layer (γ, β) feature-modulation parameters

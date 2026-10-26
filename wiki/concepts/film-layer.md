@@ -3,6 +3,7 @@ type: concept
 created: 2026-05-23
 updated: 2026-10-26
 sources:
+  - raw/papers/perez-2018-film-visual-reasoning/full-text.md
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
   - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
   - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
@@ -15,11 +16,12 @@ tags:
   - neural-networks
   - conditioning
   - feature-modulation
+  - visual-reasoning
 ---
 
 # FiLM Layer
 
-**Feature-wise Linear Modulation (FiLM)** is a conditioning mechanism that modulates intermediate feature maps of a neural network using learned scaling and bias parameters. Originally proposed for visual reasoning tasks (Perez et al. 2018), FiLM layers enable flexible conditioning of deep networks on auxiliary information without architectural changes to the base model.
+**Feature-wise Linear Modulation (FiLM)** is a conditioning mechanism that modulates intermediate feature maps of a neural network using learned scaling and bias parameters. Originally proposed for visual reasoning tasks ([[sources/perez-2018-film-visual-reasoning|Perez et al. 2018]]), FiLM layers enable flexible conditioning of deep networks on auxiliary information without architectural changes to the base model.
 
 ## Formulation
 
@@ -65,7 +67,22 @@ In [[concepts/virtual-in-ear-sensing|virtual in-ear sensing]] ([[sources/yuan-20
 
 ### Visual Reasoning (Original Application)
 
-FiLM was originally proposed for visual question answering, where image features are conditioned on natural language questions.
+FiLM was introduced by [[sources/perez-2018-film-visual-reasoning|Perez et al. 2018 (AAAI)]] for visual reasoning — answering multi-step questions about images. A [[concepts/gated-recurrent-unit|GRU]] question encoder (4096 hidden units) forms the FiLM generator: its final hidden state is projected to $(\boldsymbol{\gamma}, \boldsymbol{\beta})$ pairs, one per residual block of a CNN visual pipeline that classifies an answer over 28 candidates. In the paper's original notation:
+
+$$\mathrm{FiLM}(\mathbf{F}_{i,c} \mid \gamma_{i,c}, \beta_{i,c}) = \gamma_{i,c}\,\mathbf{F}_{i,c} + \beta_{i,c},$$
+
+with $\gamma_{i,c}, \beta_{i,c}$ predicted per feature map $c$ from the conditioning input $\mathbf{x}_i$. This roughly **halved the state-of-the-art error on the CLEVR benchmark** (4.5% → 2.3%, 97.7% accuracy, above human 92.6%) without program supervision or reasoning-specific architectures, beating modular networks (PG+EE) and Relation Networks.
+
+Key findings about the mechanism itself:
+- **γ dominates β**: replacing γ with training-mean values at test time costs 65.4% accuracy, β only 1.0%; unrestricted scaling (large magnitudes, negation, zeroing) is essential — bounding γ to (0,1) or (−1,1) hurts as much as removing conditioning.
+- **Selective feature-map gating**: γ histograms peak sharply at 0 (feature maps shut off), with a selective set of high-|γ| upregulated maps; 36% of γ and 76% of β values are negative, giving selective thresholding against the following ReLU.
+- **Emergent modularity**: t-SNE of (γ, β) clusters by reasoning function — low-level functions in the first FiLM layer, high-level in the last — a function-based modularity learned without any architectural prior.
+- **Implicit spatial attention**: globally-pooled classifier features localize on question-relevant objects; feature modulation indirectly yields spatial modulation (a plausible reason FiLM beats Stacked Attention by 21%).
+- **Decoupled from normalization**: FiLM works at many positions inside a residual block, not only right after a normalization layer — generalizing and relaxing Conditional Normalization (Conditional Instance Norm, Conditional Batch Norm, Adaptive Instance Norm), whose affine parameters are exactly FiLM with fixed placement.
+- **Resolution-independent cost**: two parameters per feature map, independent of image resolution — unlike attention or Relation Networks (quadratic in spatial resolution).
+- **Analogy-making in parameter space**: linear combinations of questions' (γ, β) vectors ("cyan spheres" + "brown cubes" − "brown spheres" ≈ "cyan cubes") enable zero-shot generalization to unseen attribute combinations.
+
+FiLM was later adopted as the standard conditioning mechanism in audio and speech processing — steering directivity patterns ([[concepts/film-osn|FiLM-OSN]], [[concepts/film-jnf|FiLM-JNF]]), conditioning extraction networks on speaker clues ([[concepts/target-speaker-extraction|TSE]] fusion layers), and adapting filter-estimation networks to users and directions ([[concepts/direction-preserving-anc|DP-ANC]], [[concepts/virtual-in-ear-sensing|virtual in-ear sensing]]).
 
 ## Comparison with Other Conditioning Methods
 
@@ -107,6 +124,7 @@ The review reports that, in TSE settings, the choice of fusion layer has "rather
 
 ## Related Sources
 
+- [[sources/perez-2018-film-visual-reasoning|Perez, Strub, de Vries, Dumoulin & Courville 2018: FiLM: Visual Reasoning with a General Conditioning Layer]] — the original paper introducing FiLM: formulation, CLEVR results (97.7%, halving SOTA error), γ/β analysis, ablations, and the zero-shot linear-combination method
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
 - [[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026: Geometry-Conditioned Target Speaker Extraction with Spatial Features]] — swaps the FiLM conditioning input from MPE embeddings to propagation-derived spatial features
 - [[sources/zmolikova-2023-neural-target-speech-extraction-overview|Zmolikova et al. 2023: Neural Target Speech Extraction: An Overview]]

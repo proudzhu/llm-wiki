@@ -690,6 +690,11 @@
 | [[entities/zhi-liu\|Zhi Liu]] | Co-author of MBENet (ASRU 2025); Shenzhen Huangli Technologies | 2026-10-24 |
 | [[entities/xiao-lei-zhang\|Xiao-Lei Zhang]] | Corresponding author of MBENet (ASRU 2025); NWPU professor, speech enhancement and TSE | 2026-10-24 |
 | [[entities/xuelong-li\|Xuelong Li]] | Corresponding author of MBENet (ASRU 2025); China Telecom TeleAI | 2026-10-24 |
+| [[entities/ethan-perez\|Ethan Perez]] | First author of the FiLM conditioning layer (AAAI 2018); visual reasoning and language-model alignment research | 2026-10-26 |
+| [[entities/florian-strub\|Florian Strub]] | Co-author of FiLM (AAAI 2018); visual reasoning, multimodal learning, deep RL | 2026-10-26 |
+| [[entities/harm-de-vries\|Harm de Vries]] | Co-author of FiLM (AAAI 2018); Conditional Batch Norm for VQA is among the methods FiLM generalizes | 2026-10-26 |
+| [[entities/vincent-dumoulin\|Vincent Dumoulin]] | Co-author of FiLM (AAAI 2018); Conditional Instance Norm for artistic style is among the methods FiLM generalizes | 2026-10-26 |
+| [[entities/aaron-courville\|Aaron Courville]] | Co-author of FiLM (AAAI 2018); MILA deep-learning researcher | 2026-10-26 |
 
 ---
 
@@ -1602,6 +1607,7 @@
 | [[sources/zhang-2025-mbenet\|Zhang, Feng, Liu, Zhang & Li 2025]] | This paper proposes MBENet (Multi-modal Bone-conduction Enhancement Network), the first BC-AC fusion model applied to target speaker extraction (TSE). | 2026-10-24 |
 | [[sources/li-2026-geometry-conditioned-tse\|Li & Doclo 2026]] | Follow-up to the GC-SSF of Li, Middelberg & Doclo: instead of conditioning on abstract sinusoidal positional encodings (MPE), this paper feeds the geometry-conditioning branch of the GCSSF two explicit spatial features derived from acoustic propagation principles — the target steering vector (TSV, capturing inter-microphone phase differences) and a GCC-PHAT spatial mask (quantifying target presence per time-frequency bin). | 2026-10-25 |
 | [[sources/huang-2026-undf-configurable-directivity\|Huang, Chetupalli & Habets 2026]] | This paper proposes UNDF — neural directional filtering with user-defined directivity patterns — enabling spatial filtering with directivity patterns that users can configure during inference, rather than one fixed pattern per trained model (NDF) or a fixed pattern shape that can only be steered (SNDF). | 2026-10-26 |
+| [[sources/perez-2018-film-visual-reasoning\|Perez et al. 2018: FiLM: Visual Reasoning with a General Conditioning Layer]] | Origin of Feature-wise Linear Modulation (FiLM): γF+β conditioning halves CLEVR visual-reasoning SOTA error (97.7%); ablations decouple FiLM from normalization and show γ dominates β | 2026-10-26 |
 
 ---
 
@@ -1635,6 +1641,7 @@
 | [[synthesis/multi-channel-speech-enhancement\|Multi-Channel Speech Enhancement]] | From coherence models to geometry-conditioned neural filters: 5 axes (estimate what, robustness, input/output, geometry, hybrid incl. DVAD-gated GSC) across sources 2005-2026 | 2026-09-08 |
 | [[synthesis/low-complexity-neural-vocoders\|Low-Complexity Neural Vocoders]] | Complexity-quality frontier from WaveRNN to FARGAN; each 5× reduction moves speech structure (envelope, periodicity) out of the network | 2026-08-30 |
 | [[synthesis/neural-packet-loss-concealment\|Neural Packet Loss Concealment]] | Cross-source synthesis of three neural PLC systems (2016–2023): DNN frame regression, hybrid generative + predictive vocoder, and blind full-band FRN. | 2026-10-24 |
+| [[synthesis/film-conditioning-across-domains\|FiLM Conditioning Across Domains]] | Cross-source synthesis of FiLM (2018–2026): one mechanism, nine papers, three domains — mechanism invariance, identity initialization, conditioning-input dominance, and the signal→filter-estimation drift | 2026-10-26 |
 
 ---
 
@@ -1659,10 +1666,10 @@
 
 ## Statistics
 
-- **Total pages**: 1608
-- **Entities**: 680
+- **Total pages**: 1615
+- **Entities**: 685
 - **Concepts**: 616
-- **Sources**: 278
-- **Synthesis**: 24
+- **Sources**: 279
+- **Synthesis**: 25
 - **Queries**: 10
 - **Last updated**: 2026-10-26

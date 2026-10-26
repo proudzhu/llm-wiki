@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-09-06
+updated: 2026-10-23
 sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
+  - raw/papers/lee-2016-dnn-plc/full-text.md
 tags:
   - evaluation-metric
   - speech-quality
@@ -44,3 +45,4 @@ PESQ first time-aligns the predicted signal with the reference segment-wise (for
 - [[sources/zhu-2026-g-map-se-guided-speech-enhancement|G-MaP-SE: Guided Speech Enhancement via GMM-Based Prior Matching (Interspeech 2026)]]
 - [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] — SOTA PESQ 3.69 with SEMamba + PCS
 - [[sources/wang-2021-magnitude-phase-compensation|Wang, Wichern & Le Roux 2021: On the Compensation Between Magnitude and Phase in Speech Separation]] — analyzes PESQ's magnitude-dominant behavior
+- [[sources/lee-2016-dnn-plc|Lee & Chang 2016: PLC Based on DNNs for Digital Speech Transmission]] — PESQ (with LSD and MOS) as the objective metric for DNN-regression PLC on AMR-WB at 5–30% packet loss

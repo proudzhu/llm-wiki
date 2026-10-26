@@ -684,4 +684,9 @@
 | [[entities/zhi-liu\|Zhi Liu]] | Co-author of MBENet (ASRU 2025); Shenzhen Huangli Technologies | 2026-10-24 |
 | [[entities/xiao-lei-zhang\|Xiao-Lei Zhang]] | Corresponding author of MBENet (ASRU 2025); NWPU professor, speech enhancement and TSE | 2026-10-24 |
 | [[entities/xuelong-li\|Xuelong Li]] | Corresponding author of MBENet (ASRU 2025); China Telecom TeleAI | 2026-10-24 |
+| [[entities/ethan-perez\|Ethan Perez]] | First author of the FiLM conditioning layer (AAAI 2018); visual reasoning and language-model alignment research | 2026-10-26 |
+| [[entities/florian-strub\|Florian Strub]] | Co-author of FiLM (AAAI 2018); visual reasoning, multimodal learning, deep RL | 2026-10-26 |
+| [[entities/harm-de-vries\|Harm de Vries]] | Co-author of FiLM (AAAI 2018); Conditional Batch Norm for VQA is among the methods FiLM generalizes | 2026-10-26 |
+| [[entities/vincent-dumoulin\|Vincent Dumoulin]] | Co-author of FiLM (AAAI 2018); Conditional Instance Norm for artistic style is among the methods FiLM generalizes | 2026-10-26 |
+| [[entities/aaron-courville\|Aaron Courville]] | Co-author of FiLM (AAAI 2018); MILA deep-learning researcher | 2026-10-26 |
 
