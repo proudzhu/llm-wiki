@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-10-25
+updated: 2026-10-26
 sources:
   - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
   - raw/papers/tesch-2024-spatially-selective-nonlinear-filters/full-text.md
   - raw/papers/wen-2025-neural-directed-speech-enhancement/full-text.md
   - raw/papers/huang-2026-dual-mic-steerable-neural-beamformer/full-text.md
   - raw/papers/li-2026-geometry-conditioned-tse/full-text.md
+  - raw/papers/huang-2026-undf-configurable-directivity/full-text.md
 tags:
   - deep-learning
   - spatial-filtering
@@ -98,6 +99,10 @@ A [[concepts/doa-informed-direct-separation|DoA-informed DS variant (iDS)]] that
 | [[concepts/geometry-conditioned-ssf\|GC-SSF]] | Target DOA + geometry | None | Explicit conditioning |
 | [[concepts/spatially-selective-anc\|SSANC]] | Target direction (ReIRs) | Typically offline | Explicit (control-theoretic) |
 
+## Pattern-Vector Conditioning (PV-JNF vs FiLM)
+
+[[sources/huang-2026-undf-configurable-directivity|Huang, Chetupalli & Habets 2026]] replace the SSF's one-hot **steering-angle** conditioning with a **pattern vector** — testing whether the initial-state injection mechanism generalizes from a direction cue to a full spatial-response cue. Their PV-JNF variant keeps the SSF recipe exactly (pattern vector → linear layer → F-BiLSTM initial states) and works for patterns seen in training, but degrades sharply on unseen ones (3rd-order: 10.40 dB SDR; −5 dB-scaled pattern: 8.11 dB). A [[concepts/film-layer|FiLM]] layer inserted between the F-BiLSTM and T-UniLSTM instead reaches 17.34 / 19.54 dB on the same patterns — evidence that for conditioning signals carrying **shape** information (not just an angle), additive modulation of intermediate features generalizes better than biasing the recurrent state. See [[concepts/undf|UNDF]] and [[concepts/film-jnf|FiLM-JNF]].
+
 ## Related Concepts
 
 - [[concepts/joint-nonlinear-filtering|Joint Nonlinear Filtering (JNF / FT-JNF)]]
@@ -109,6 +114,7 @@ A [[concepts/doa-informed-direct-separation|DoA-informed DS variant (iDS)]] that
 - [[concepts/geometry-conditioned-ssf|Geometry-Conditioned SSF (GC-SSF)]]
 - [[concepts/doa-microphone-positional-encoding|DOA-Microphone Positional Encoding (DOA-MPE)]]
 - [[concepts/film-layer|FiLM Layer]]
+- [[concepts/undf|UNDF]] — user-defined pattern conditioning via the SSF-style (PV-JNF) vs FiLM mechanisms
 - [[concepts/target-speaker-extraction|Target Speaker Extraction]]
 - [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]]
 - [[concepts/beamforming|Beamforming]]
@@ -122,3 +128,4 @@ A [[concepts/doa-informed-direct-separation|DoA-informed DS variant (iDS)]] that
 - [[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026: Geometry-Conditioned Target Speaker Extraction with Spatial Features]] — SSF backbone reused with propagation-derived conditioning features
 - [[sources/wen-2025-neural-directed-speech-enhancement|Wen et al. 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] — dual-microphone directed variant (CDUNet) with a runtime enhancement-width input
 - [[sources/huang-2026-dual-mic-steerable-neural-beamformer|Huang & Habets 2026: Dual-Microphone Steerable High-Order Neural Differential Beamformer]] — SSF backbone with the mask output replaced by complex beamforming weights
+- [[sources/huang-2026-undf-configurable-directivity|Huang, Chetupalli & Habets 2026: UNDF]] — SSF initial-state conditioning (PV-JNF) generalized from a DOA cue to a full directivity-pattern vector, and outperformed by FiLM conditioning

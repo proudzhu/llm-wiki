@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-05
-updated: 2026-10-03
+updated: 2026-10-26
 tags:
   - researcher
   - acoustic-parameter-estimation
@@ -33,6 +33,7 @@ tags:
 - Co-authored "A comparison of generative and discriminative methods for speech enhancement: robustness, complexity, and hallucination" (arXiv 2026) — 14-model controlled comparison showing GAN-trained NCSN++ beats diffusion at 1/100th the compute — [[sources/shetu-2026-generative-discriminative-comparison|Shetu et al. 2026]]
 - Co-authored "Dual-Microphone Steerable High-Order Neural Differential Beamformer" (arXiv 2026) — [[concepts/neural-differential-beamformer|NDBF]]: steerable high-order neural differential beamforming with a dual-microphone array — [[sources/huang-2026-dual-mic-steerable-neural-beamformer|Huang & Habets 2026]]
 - Co-authored "Neural Directional Filtering with a Compact Microphone Array" (arXiv 2026) — the comprehensive journal-style NDF paper: FiLM-JNF continuous steering, data-dependent directivity metrics, reverberant training, user-defined patterns — [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026]]
+- Co-authored "Neural directional filtering with configurable directivity pattern at inference" (arXiv 2510.20253, 2026) — introduces [[concepts/undf|UNDF]]: user-defined directivity patterns at inference via FiLM conditioning — [[sources/huang-2026-undf-configurable-directivity|Huang, Chetupalli & Habets 2026]]
 
 ## Related Sources
 
@@ -49,3 +50,4 @@ tags:
 - [[sources/shetu-2026-generative-discriminative-comparison|Shetu et al. 2026: Generative vs. Discriminative SE]]
 - [[sources/huang-2026-dual-mic-steerable-neural-beamformer|Huang & Habets 2026: Dual-Microphone Steerable High-Order Neural Differential Beamformer]]
 - [[sources/huang-2026-neural-directional-filtering|Huang, Chetupalli, Halimeh, Thiergart & Habets 2026: Neural Directional Filtering with a Compact Microphone Array]]
+- [[sources/huang-2026-undf-configurable-directivity|Huang, Chetupalli & Habets 2026: UNDF — Configurable Directivity Pattern at Inference]]

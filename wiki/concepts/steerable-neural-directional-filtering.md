@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-09-05
-updated: 2026-10-03
+updated: 2026-10-26
 sources:
   - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
   - raw/papers/jin-2021-steering-study-ldma/full-text.txt
@@ -19,7 +19,7 @@ tags:
 
 Steerable neural directional filtering (SNDF) extends [[concepts/neural-directional-filtering|neural directional filtering (NDF)]] so that a **single trained model** can render its learned directivity pattern steered towards any direction at inference time — including switching the steering direction mid-recording. It was introduced by Huang, Halimeh, Chetupalli, Thiergart & Habets at Euronoise 2025.
 
-Whereas the founding NDF study ([[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024]]) learns one fixed pattern with a fixed look direction per model, SNDF decouples *pattern shape* (fixed at training) from *steering direction* (a free conditioning input at inference). Pattern *shape* configurability at inference is addressed later by UNDF (FiLM-conditioned user-defined patterns) and NDF+ targets diffuse-sound control instead.
+Whereas the founding NDF study ([[sources/wechsler-2024-neural-directional-filtering|Wechsler et al. 2024]]) learns one fixed pattern with a fixed look direction per model, SNDF decouples *pattern shape* (fixed at training) from *steering direction* (a free conditioning input at inference). Pattern *shape* configurability at inference is addressed later by [[concepts/undf|UNDF]] (FiLM-conditioned user-defined patterns), while NDF+ targets diffuse-sound control instead.
 
 The classical beamforming counterpart is the [[concepts/steerable-ldma|steerable LDMA]] of Jin et al. 2021: for linear differential arrays, first-order patterns are provably non-steerable and Nth-order ($N \geq 2$) designs are only *partially* steerable (the pattern changes shape with $\theta_s$ rather than rotating), with steering enforced through null-position conditions. SNDF removes both restrictions — a single trained model steers to any direction with a steering-invariant pattern shape — at the cost of requiring training data and forgoing the closed-form guarantees.
 
@@ -68,3 +68,4 @@ The steering-conditioning recipe of SNDF carries over from circular to **linear*
 - [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021: Steering Study of Linear Differential Microphone Arrays]] — classical LDMA steering limits that SNDF transcends
 - [[sources/huang-2026-dual-mic-steerable-neural-beamformer|Huang & Habets 2026: Dual-Microphone Steerable High-Order Neural Differential Beamformer]] — the steering mechanism applied to a dual-mic linear array with a beamforming-weight output
 - [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026: Neural Directional Filtering with a Compact Microphone Array]] — continuous steering via FiLM-JNF, superseding the one-hot grid restriction
+- [[sources/huang-2026-undf-configurable-directivity|Huang, Chetupalli & Habets 2026: UNDF]] — the introducing study of the FiLM conditioning used for continuous steering; extends configurability from steering direction to the full pattern

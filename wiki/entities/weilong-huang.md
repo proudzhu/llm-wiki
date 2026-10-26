@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-13
-updated: 2026-10-03
+updated: 2026-10-26
 tags:
   - researcher
   - neural-directional-filtering
@@ -20,6 +20,7 @@ tags:
 - NDF+: joint neural directional filtering and diffuse sound extraction (arXiv 2026)
 - "Dual-Microphone Steerable High-Order Neural Differential Beamformer" (arXiv 2026) — first-author paper introducing the [[concepts/neural-differential-beamformer|NDBF]]: steerable high-order neural differential beamforming with a dual-microphone array — [[sources/huang-2026-dual-mic-steerable-neural-beamformer|Huang & Habets 2026]]
 - First author of "Neural Directional Filtering with a Compact Microphone Array" (arXiv 2026) — the comprehensive journal-style NDF paper: FiLM-JNF continuous steering, data-dependent directivity metrics, reverberant training, user-defined patterns — [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026]]
+- First author of "Neural directional filtering with configurable directivity pattern at inference" (arXiv 2510.20253, 2026) — introduces [[concepts/undf|UNDF]]: user-defined directivity patterns at inference via FiLM-conditioned FT-JNF; FiLM conditioning generalizes to unseen orders, scaling, and steering directions — [[sources/huang-2026-undf-configurable-directivity|Huang, Chetupalli & Habets 2026]]
 
 ## Related Sources
 
@@ -27,3 +28,4 @@ tags:
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
 - [[sources/huang-2026-dual-mic-steerable-neural-beamformer|Huang & Habets 2026: Dual-Microphone Steerable High-Order Neural Differential Beamformer]]
 - [[sources/huang-2026-neural-directional-filtering|Huang, Chetupalli, Halimeh, Thiergart & Habets 2026: Neural Directional Filtering with a Compact Microphone Array]]
+- [[sources/huang-2026-undf-configurable-directivity|Huang, Chetupalli & Habets 2026: UNDF — Configurable Directivity Pattern at Inference]]

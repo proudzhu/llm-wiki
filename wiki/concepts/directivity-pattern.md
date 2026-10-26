@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-10-03
+updated: 2026-10-26
 sources:
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
   - raw/papers/desena-2012-higher-order-differential/full-text.md
@@ -11,6 +11,7 @@ sources:
   - raw/papers/pan-2020-microphone-array-beamforming/full-text.txt
   - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
   - raw/papers/jin-2021-steering-study-ldma/full-text.txt
+  - raw/papers/huang-2026-undf-configurable-directivity/full-text.md
   - raw/papers/huang-2026-neural-directional-filtering/full-text.md
 tags:
   - directivity-pattern
@@ -59,6 +60,8 @@ $$\Lambda(\theta,\phi)=\left(0.5+0.5(\sin\phi\sin\phi_s\cos(\theta-\theta_s)+\co
 
 where $(\theta_s,\phi_s)$ specifies the target look direction.
 
+For user-defined neural directional filtering ([[concepts/undf|UNDF]]), Huang, Chetupalli & Habets 2026 use a simplified mainlobe-focused DMA pattern — $\Lambda(\theta)=\lvert\mu+(1-\mu)\cos(\theta-\theta_s)\rvert^{J}$ with $\mu\in[0,1]$ — which avoids negative polarity ($\Lambda\in[0,1]$) since users are primarily concerned with mainlobe control; together with the rectangular pattern ($\Lambda=1$ on $[\theta_{\text{start}},\theta_{\text{end}}]$, else $0$) and linear combinations thereof, these form the training recipes that teach the model the space of patterns.
+
 ## Kronecker Product Beampatterns
 
 For a Kronecker filter $\mathbf{h} = \mathbf{h}_1 \otimes \mathbf{h}_2$ over two virtual arrays, the global pattern factorizes (Cohen, Benesty & Chen 2019):
@@ -103,4 +106,5 @@ For masking-based neural filters there is no fixed weight vector, so the pattern
 - [[sources/uphaus-2026-directivity-low-latency|Uphaus et al. 2026: Directivity-Conditioned Low-Latency Neural Filtering]] — cosine-based pattern with configurable main-lobe width $W$ and capped attenuation $M$ for hearing devices
 - [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021: Steering Study of Linear Differential Microphone Arrays]] — LDMA steerability limits on the rotated $\cos^r(\vartheta - \vartheta_0)$ pattern form
 - [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026: Neural Directional Filtering with a Compact Microphone Array]] — data-dependent power-pattern and DF estimation for masking-based filters; higher-order DMA patterns as powers of the first-order pattern
+- [[sources/huang-2026-undf-configurable-directivity|Huang, Chetupalli & Habets 2026: UNDF]] — simplified mainlobe-focused DMA pattern ($|\mu+(1-\mu)\cos(\theta-\theta_s)|^J$) and rectangular patterns as the user-defined pattern space
 

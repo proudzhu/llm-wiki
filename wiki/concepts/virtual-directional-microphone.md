@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-13
-updated: 2026-10-03
+updated: 2026-10-26
 sources:
   - raw/papers/wechsler-2024-neural-directional-filtering/full-text.md
   - raw/papers/huang-2025-steerable-neural-directional-filtering/full-text.md
   - raw/papers/huang-2026-dual-mic-steerable-neural-beamformer/full-text.md
   - raw/papers/huang-2026-neural-directional-filtering/full-text.md
+  - raw/papers/huang-2026-undf-configurable-directivity/full-text.md
 tags:
   - virtual-directional-microphone
   - spatial-audio
@@ -67,6 +68,7 @@ where $\beta=10^{-\frac{\mathrm{DI}}{20}}$ is determined by the directivity inde
 | Superdirective beamforming | Maximizes directivity factor | Noise amplification at low frequencies |
 | NDF | Neural network-based VDM reconstruction | Requires training data; fixed pattern per model |
 | SNDF | Steerable NDF: pattern steerable to any direction with one model | Pattern shape fixed at training |
+| UNDF | User-defined NDF: the full pattern is a conditioning input at inference | Irregular/time-varying patterns; generalization beyond training patterns |
 | NDF+ | Joint VDM + diffuse sound extraction | Extended dual-task capability |
 | NDBF | Neural differential beamformer: complex weight vector on dual-mic linear array | Steerable high-order patterns with 2 mics; enables X-Y stereo recording (two steered models as left/right channels matching a VDM pair) |
 
@@ -93,3 +95,4 @@ where $\beta=10^{-\frac{\mathrm{DI}}{20}}$ is determined by the directivity inde
 - [[sources/huang-2026-ndf-joint-neural-directional-filtering|Huang et al. 2026: NDF+]]
 - [[sources/huang-2026-dual-mic-steerable-neural-beamformer|Huang & Habets 2026: Dual-Microphone Steerable High-Order Neural Differential Beamformer]] — steered NDBF pairs reproduce X-Y stereo VDM outputs (incl. inter-channel level differences) with two closely spaced omni microphones
 - [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026: Neural Directional Filtering with a Compact Microphone Array]] — reverberant VDM formulation (per-path directivity weighting) and stereo recording with two steered cardioid VDMs
+- [[sources/huang-2026-undf-configurable-directivity|Huang, Chetupalli & Habets 2026: UNDF]] — user-defined (and time-varying) pattern control of the VDM at inference via FiLM conditioning

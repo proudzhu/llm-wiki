@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-10-03
-updated: 2026-10-03
+updated: 2026-10-26
 sources:
+  - raw/papers/huang-2026-undf-configurable-directivity/full-text.md
   - raw/papers/huang-2026-neural-directional-filtering/full-text.md
 tags:
   - directivity-pattern
@@ -37,7 +38,7 @@ reflecting the mask's suppression of late reverberation (modelled as diffuse). A
 
 ## Usage
 
-Applied in [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026]] to compare anechoic-trained (A-Model) and reverberant-trained (R-Model) NDF: the R-Model's DF approaches or exceeds the target VDM's DF at RT60 = 0.6 s — revealing slight over-suppression of reverberation beyond the training range (max RT60 = 0.5 s). The power-pattern method generalizes the per-direction masked/unmasked power-ratio estimation already used for steerable NDF evaluation.
+Applied in [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026]] to compare anechoic-trained (A-Model) and reverberant-trained (R-Model) NDF: the R-Model's DF approaches or exceeds the target VDM's DF at RT60 = 0.6 s — revealing slight over-suppression of reverberation beyond the training range (max RT60 = 0.5 s). The power-pattern method generalizes the per-direction masked/unmasked power-ratio estimation already used for steerable NDF evaluation; the introducing companion study [[sources/huang-2026-undf-configurable-directivity|Huang, Chetupalli & Habets 2026]] uses the same wideband power-ratio form (applied to the full source components rather than the direct-path decomposition) to compare the estimated directivity patterns of PV-JNF and FiLM-JNF across conditioning mechanisms and training recipes.
 
 ## Related Concepts
 
@@ -49,3 +50,4 @@ Applied in [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026]]
 ## Related Sources
 
 - [[sources/huang-2026-neural-directional-filtering|Huang et al. 2026: Neural Directional Filtering with a Compact Microphone Array]] — the introducing paper
+- [[sources/huang-2026-undf-configurable-directivity|Huang, Chetupalli & Habets 2026: UNDF]] — earlier companion study using the wideband power-ratio pattern estimate for UNDF evaluation
