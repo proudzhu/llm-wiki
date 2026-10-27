@@ -689,4 +689,5 @@
 | [[entities/harm-de-vries\|Harm de Vries]] | Co-author of FiLM (AAAI 2018); Conditional Batch Norm for VQA is among the methods FiLM generalizes | 2026-10-26 |
 | [[entities/vincent-dumoulin\|Vincent Dumoulin]] | Co-author of FiLM (AAAI 2018); Conditional Instance Norm for artistic style is among the methods FiLM generalizes | 2026-10-26 |
 | [[entities/aaron-courville\|Aaron Courville]] | Co-author of FiLM (AAAI 2018); MILA deep-learning researcher | 2026-10-26 |
+| [[entities/min-sang-baek\|Min-Sang Baek]] | Hanyang University researcher; first author of GI-DOAEnet, Microphone Positional Encoding (MPE), and Complexity Gradual Training (CGT) | 2026-10-27 |
 

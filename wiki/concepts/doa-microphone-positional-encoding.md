@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-10-25
+updated: 2026-10-27
 sources:
+  - raw/papers/baek-2025-geometry-invariant-doa-estimation/full-text.md
   - raw/papers/li-2026-geometry-conditioned-tse/full-text.md
 tags:
   - positional-encoding
@@ -14,6 +15,20 @@ tags:
 # DOA-Microphone Positional Encoding
 
 **DOA-Microphone Positional Encoding (DOA-MPE)** is a feature representation that jointly encodes microphone array geometry and target direction-of-arrival (DOA) for neural network processing. It extends the Microphone Positional Encoding (MPE) scheme by appending a DOA-specific feature vector, enabling the network to learn spatial relationships between microphone positions and the target source.
+
+## Origin: MPE for Geometry-Invariant DOA Estimation (Baek, Chang & Cohen 2025)
+
+[[sources/baek-2025-geometry-invariant-doa-estimation|Baek, Chang & Cohen 2025]] introduced MPE to give a **geometry-invariant DOA network** explicit microphone coordinates without reverting to pair-wise SRP-PHAT/GCC-PHAT features. Their formulation is fully **three-dimensional and spherical** — each microphone contributes distance $r_c$, azimuth $\theta_c$ and elevation $\phi_c$ — and comes in two modulation variants, with $\mathbf{v} = \frac{4}{M}[0, 1, \ldots, \frac{M}{4}-1]^{\top} \in \mathbb{R}^{M/4}$:
+
+$$\mathcal{P}_c^{\mathrm{PM}} = \alpha r_c \begin{bmatrix} \cos(2\pi\beta\mathbf{v} + \theta_c) \\ \sin(2\pi\beta\mathbf{v} + \theta_c) \\ \cos(2\pi\beta\mathbf{v} + \phi_c) \\ \sin(2\pi\beta\mathbf{v} + \phi_c) \end{bmatrix}, \qquad
+\mathcal{P}_c^{\mathrm{FM}} = \alpha r_c \begin{bmatrix} \cos(\theta_c \beta \mathbf{v}) \\ \sin(\theta_c \beta \mathbf{v}) \\ \cos(\phi_c \beta \mathbf{v}) \\ \sin(\phi_c \beta \mathbf{v}) \end{bmatrix}$$
+
+- **PM** shifts the phase of the sinusoid by the angle; **FM** scales its oscillation rate by the angle; the distance $r_c$ acts as amplitude scaling.
+- Hyperparameters in the original system: $\alpha = 7$, $\beta = 4$, $M = 128$ (latent width), with $0 < \beta < M/8$ to avoid aliasing and keep positions distinguishable.
+- The Appendix proves a **linearity + relative-position property**: MPEs of two microphones are related by a block-diagonal transform built from rotation blocks $\boldsymbol{\Omega}_m = \frac{r_q}{r_p}\begin{bmatrix}\cos\omega_m & -\sin\omega_m \\ \sin\omega_m & \cos\omega_m\end{bmatrix}$ where $\omega_m = \theta_q - \theta_p$ (PM) or $\omega_m = (\theta_q-\theta_p)\beta v_m$ (FM) — i.e. the encoding depends on **relative** azimuth difference and distance ratio, not absolute position.
+- **Ablation evidence**: replacing MPE with a trainable linear encoder of the same width (MLE) diverges as soon as the array geometry becomes dynamic, and adding the raw coordinates to the first feature elements fails too — the fixed sinusoidal form, not merely the presence of coordinates, is what makes learning work.
+
+Downstream geometry-conditioned systems (see the SE-side formulation below) reuse the scheme in a reduced form: two polar coordinates $(\varphi_m, d_m)$, only the angular part for the target DOA, and a per-microphone vector of length $K$ rather than the four-way $M$-block of the original.
 
 ## Microphone Positional Encoding (MPE)
 
@@ -75,9 +90,12 @@ Li & Doclo 2026 ([[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026]]) s
 - [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]]
 - [[concepts/beamforming|Beamforming]]
 - [[concepts/topology-aware-coordinate-transformer|Topology-Aware Coordinate Transformer (TACT)]] — alternative microphone-coordinate encoding for SE (no DOA, Cartesian/spherical, Transformer-driven)
+- [[concepts/complexity-gradual-training|Complexity Gradual Training (CGT)]] — the training scheme that makes MPE-conditioned networks converge on mixed geometries
+- [[concepts/multi-stage-geometry-learning|Multi-Stage Geometry Learning (MSGL)]] — the fixed → dynamic → variable-count array curriculum
 
 ## Related Sources
 
 - [[sources/li-2026-geometry-conditioned-ssanc|Li 2026: Geometry-Conditioned Spatially Selective Non-Linear Filter]]
 - [[sources/li-2026-geometry-conditioned-tse|Li & Doclo 2026: Geometry-Conditioned Target Speaker Extraction with Spatial Features]] — benchmarks MPE against propagation-derived spatial features
 - [[sources/liu-2026-array-invariant-speech-enhancement|Liu, Zhang, Li & Qian 2026: Array-Invariant SE via Geo-DConv]]
+- [[sources/baek-2025-geometry-invariant-doa-estimation|Baek, Chang & Cohen 2025: DNN-Based Geometry-Invariant DOA Estimation]] — the origin of MPE: 3-D spherical PM/FM variants, linearity/relative-position proof, and the MLE divergence ablation

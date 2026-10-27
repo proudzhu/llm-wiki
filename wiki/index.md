@@ -695,6 +695,7 @@
 | [[entities/harm-de-vries\|Harm de Vries]] | Co-author of FiLM (AAAI 2018); Conditional Batch Norm for VQA is among the methods FiLM generalizes | 2026-10-26 |
 | [[entities/vincent-dumoulin\|Vincent Dumoulin]] | Co-author of FiLM (AAAI 2018); Conditional Instance Norm for artistic style is among the methods FiLM generalizes | 2026-10-26 |
 | [[entities/aaron-courville\|Aaron Courville]] | Co-author of FiLM (AAAI 2018); MILA deep-learning researcher | 2026-10-26 |
+| [[entities/min-sang-baek\|Min-Sang Baek]] | Hanyang University researcher; first author of GI-DOAEnet, Microphone Positional Encoding (MPE), and Complexity Gradual Training (CGT) | 2026-10-27 |
 
 ---
 
@@ -1320,6 +1321,10 @@
 | [[concepts/target-steering-vector\|Target Steering Vector (TSV) Feature]] | Conjugate far-field steering vectors stacked across frequency bins as a geometry-conditioning feature for the GC-SSF — purely geometric, signal-independent, multichannel; +0.31 PESQ over MPE encodings (Li & Doclo 2026) | 2026-10-25 |
 | [[concepts/gcc-phat-spatial-mask\|GCC-PHAT Spatial Mask]] | Per-TF-bin target-presence indicator from pairwise phase correlations of TDOA-compensated channels — the signal-dependent geometry-conditioning feature of Li & Doclo 2026; beats MPE encodings but trails the TSV | 2026-10-25 |
 | [[concepts/undf\|UNDF]] | Neural directional filtering with user-defined directivity patterns: the sampled pattern vector is a conditioning input, so directivity shape (not just look direction) is configurable at inference; FiLM conditioning generalizes to unseen orders, scalings, and steering directions. | 2026-10-26 |
+| [[concepts/complexity-gradual-training\|Complexity Gradual Training (CGT)]] | Training paradigm for geometry-invariant models: deeply supervised curriculum learning over label sharpness combined with staged geometry schedules | 2026-10-27 |
+| [[concepts/multi-stage-geometry-learning\|Multi-Stage Geometry Learning (MSGL)]] | Three-stage array curriculum — fixed array, dynamic positions, dynamic 4–12 channels — that makes geometry-invariant DOA training converge | 2026-10-27 |
+| [[concepts/deeply-supervised-curriculum-learning\|Deeply Supervised Curriculum Learning (DSCL)]] | Supervises every DOA output head with a soft spatial-spectrum label whose beamwidth anneals from wide to narrow over training | 2026-10-27 |
+| [[concepts/channel-wise-softmax-aggregation\|Channel-Wise Softmax Aggregation (CWSA)]] | Permutation-invariant channel collapse via channel-wise Softmax plus sum and standard deviation; keeps FLOPS linear in the microphone count | 2026-10-27 |
 
 ---
 
@@ -1608,6 +1613,7 @@
 | [[sources/li-2026-geometry-conditioned-tse\|Li & Doclo 2026]] | Follow-up to the GC-SSF of Li, Middelberg & Doclo: instead of conditioning on abstract sinusoidal positional encodings (MPE), this paper feeds the geometry-conditioning branch of the GCSSF two explicit spatial features derived from acoustic propagation principles — the target steering vector (TSV, capturing inter-microphone phase differences) and a GCC-PHAT spatial mask (quantifying target presence per time-frequency bin). | 2026-10-25 |
 | [[sources/huang-2026-undf-configurable-directivity\|Huang, Chetupalli & Habets 2026]] | This paper proposes UNDF — neural directional filtering with user-defined directivity patterns — enabling spatial filtering with directivity patterns that users can configure during inference, rather than one fixed pattern per trained model (NDF) or a fixed pattern shape that can only be steered (SNDF). | 2026-10-26 |
 | [[sources/perez-2018-film-visual-reasoning\|Perez et al. 2018: FiLM: Visual Reasoning with a General Conditioning Layer]] | Origin of Feature-wise Linear Modulation (FiLM): γF+β conditioning halves CLEVR visual-reasoning SOTA error (97.7%); ablations decouple FiLM from normalization and show γ dominates β | 2026-10-26 |
+| [[sources/baek-2025-geometry-invariant-doa-estimation\|Baek, Chang & Cohen 2025]] | This paper proposes GI-DOAEnet, a geometry-invariant DNN for azimuth DOA estimation that works on arbitrary microphone arrays without retraining. | 2026-10-27 |
 
 ---
 
@@ -1666,10 +1672,10 @@
 
 ## Statistics
 
-- **Total pages**: 1615
-- **Entities**: 685
-- **Concepts**: 616
-- **Sources**: 279
+- **Total pages**: 1621
+- **Entities**: 686
+- **Concepts**: 620
+- **Sources**: 280
 - **Synthesis**: 25
 - **Queries**: 10
-- **Last updated**: 2026-10-26
+- **Last updated**: 2026-10-27

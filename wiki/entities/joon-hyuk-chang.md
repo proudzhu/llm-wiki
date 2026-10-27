@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-10-23
-updated: 2026-10-23
+updated: 2026-10-27
 tags:
   - researcher
   - speech-processing
@@ -20,7 +20,9 @@ tags:
 ## Key Contributions
 
 - Co-authored "Packet Loss Concealment Based on Deep Neural Networks for Digital Speech Transmission" (IEEE/ACM TASLP 2016) — supervised the first DNN-regression approach to packet loss concealment — [[sources/lee-2016-dnn-plc|Lee & Chang 2016]]
+- Co-author of "DNN-Based Geometry-Invariant DOA Estimation With Microphone Positional Encoding and Complexity Gradual Training" (IEEE TASLPRO 2025) — introduced Microphone Positional Encoding (MPE), GI-DOAEnet, and Complexity Gradual Training (CGT) for geometry-invariant DOA estimation — [[sources/baek-2025-geometry-invariant-doa-estimation|Baek, Chang & Cohen 2025]]
 
 ## Related Sources
 
 - [[sources/lee-2016-dnn-plc|Lee & Chang 2016: DNN-Based Packet Loss Concealment]]
+- [[sources/baek-2025-geometry-invariant-doa-estimation|Baek, Chang & Cohen 2025: DNN-Based Geometry-Invariant DOA Estimation With Microphone Positional Encoding and Complexity Gradual Training]]

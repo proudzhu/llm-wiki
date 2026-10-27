@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-07-27
-updated: 2026-07-27
+updated: 2026-10-27
 sources:
+  - raw/papers/baek-2025-geometry-invariant-doa-estimation/full-text.md
   - raw/papers/liu-2026-array-invariant-speech-enhancement/full-text.md
 tags:
   - speech-enhancement
@@ -55,6 +56,16 @@ A defining property of robust array-invariant systems. Given a permutation matri
 - **CHiME-4** (6-mic real-world) — common cross-dataset generalization benchmark.
 - **Metrics**: SDR, SI-SDR, PESQ, STOI, DNSMOS (P808, SIG, BAK, OVRL).
 
+## The DOA-Side Counterpart (Baek, Chang & Cohen 2025)
+
+Array invariance for **localization** is the mirror image of array-invariant SE, with one structural difference: the output is a *spatial spectrum over directions*, so geometry is not merely a nuisance to be tolerated but the quantity being measured. [[sources/baek-2025-geometry-invariant-doa-estimation|Baek, Chang & Cohen 2025]] therefore keep the same architectural recipe as the SE-side methods — batch-wise (channel-independent) feature extraction, permutation-invariant mixing (channel-wise MHSA, [[concepts/channel-wise-softmax-aggregation|CWSA]]), and a channel-count-agnostic head — but add an explicit geometry channel: [[concepts/doa-microphone-positional-encoding|Microphone Positional Encodings]] (MPE).
+
+Three findings transfer to the SE setting:
+
+1. **Explicit geometry beats learned geometry encoders.** A trainable linear encoder of the same width diverges once arrays vary, i.e. the inductive bias of the fixed sinusoidal encoding does the work.
+2. **Geometry variance needs a training curriculum.** Training directly on mixed geometries does not converge; only [[concepts/complexity-gradual-training|CGT]] ([[concepts/multi-stage-geometry-learning|MSGL]] + [[concepts/deeply-supervised-curriculum-learning|DSCL]]) trains stably. Array-invariant SE papers report no analogous curriculum, which suggests an underexploited axis.
+3. **Channel-agnostic ≠ geometry-agnostic.** Permutation-invariant aggregation gives invariance to *ordering*; only an explicit coordinate encoding gives invariance to *layout*.
+
 ## Related Concepts
 
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
@@ -65,7 +76,10 @@ A defining property of robust array-invariant systems. Given a permutation matri
 - [[concepts/doa-microphone-positional-encoding|DOA-Microphone Positional Encoding]] — alternative coordinate encoding
 - [[concepts/mvdr-beamformer|MVDR Beamformer]] — classical geometry-explicit baseline
 - [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]]
+- [[concepts/channel-wise-softmax-aggregation|Channel-Wise Softmax Aggregation (CWSA)]] — attention + std channel collapse used in geometry-invariant DOA
+- [[concepts/complexity-gradual-training|Complexity Gradual Training (CGT)]] — curriculum over array geometries
 
 ## Related Sources
 
 - [[sources/liu-2026-array-invariant-speech-enhancement|Liu, Zhang, Li & Qian 2026: Array-Invariant SE via Geo-DConv]]
+- [[sources/baek-2025-geometry-invariant-doa-estimation|Baek, Chang & Cohen 2025: DNN-Based Geometry-Invariant DOA Estimation]] — the localization-side analogue: channel-independent extraction + permutation-invariant mixing + explicit MPE, with a geometry curriculum the SE-side literature lacks

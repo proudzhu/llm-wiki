@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-07-27
-updated: 2026-07-27
+updated: 2026-10-27
 sources:
+  - raw/papers/baek-2025-geometry-invariant-doa-estimation/full-text.md
   - raw/papers/liu-2026-array-invariant-speech-enhancement/full-text.md
 tags:
   - speech-enhancement
@@ -78,6 +79,20 @@ See [[concepts/dynamic-convolution|Dynamic Convolution]] for the CV ancestor and
 | TACT heads | 4 | MHSA heads |
 | Coordinate system | Spherical | $(r, \theta, \phi)$ |
 
+## Relation to Sinusoidal Geometry Encodings (Baek et al. 2025)
+
+Geo-DConv and [[concepts/doa-microphone-positional-encoding|MPE]] are the two live answers to "how should microphone coordinates enter a network", and they differ in *where* the geometry acts:
+
+| Aspect | MPE (Baek, Chang & Cohen 2025) | Geo-DConv (Liu et al. 2026) |
+|:-------|:-------------------------------|:----------------------------|
+| Mechanism | Fixed sinusoidal encoding **added to** latent features | Coordinates → TACT → basis-kernel **mix** → convolution weights |
+| Learnable wrt geometry | No | Yes (the basis bank) |
+| Where geometry acts | Every dual-path block (feature steering) | Every convolution layer |
+| Architecture coupling | Needs a channel-agnostic backbone | Works as an adapter on fixed-array backbones |
+| Task | DOA estimation (output is a spatial spectrum) | Multichannel speech enhancement |
+
+Both papers make the same negative point about alternatives: a *learnable* encoder of the raw coordinates is not a substitute. Baek et al. show a learnable linear coordinate encoder diverging under dynamic geometries where MPE converges, and the same motivation — coordinates as a cheap, annotation-free spatial prior — drives Geo-DConv. Baek et al. also note the noise-robustness argument that SE-side geometry conditioning inherits: at low SNR a coordinate-conditioned network keeps working where pair-wise phase features (SRP/GCC) collapse.
+
 ## Related Concepts
 
 - [[concepts/topology-aware-coordinate-transformer|Topology-Aware Coordinate Transformer (TACT)]] — produces the transformation matrix $\mathbf{M}$
@@ -92,3 +107,4 @@ See [[concepts/dynamic-convolution|Dynamic Convolution]] for the CV ancestor and
 ## Related Sources
 
 - [[sources/liu-2026-array-invariant-speech-enhancement|Liu, Zhang, Li & Qian 2026: Array-Invariant SE via Geo-DConv]]
+- [[sources/baek-2025-geometry-invariant-doa-estimation|Baek, Chang & Cohen 2025: DNN-Based Geometry-Invariant DOA Estimation]] — the parameter-free sinusoidal alternative to learnable geometry encoders (MPE), and its evidence that learnable coordinate encoders diverge under dynamic arrays

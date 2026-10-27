@@ -6204,3 +6204,31 @@ Answered from [[sources/li-2026-geometry-conditioned-ssanc|Li 2026 GC-SSF]] and 
 - **Summary**: Origin paper of [[concepts/film-layer|FiLM]] (Feature-wise Linear Modulation) — a general conditioning layer applying learned feature-wise affine transforms γF+β, predicted by a GRU-based FiLM generator from arbitrary conditioning input. Applied to visual reasoning: 97.7% CLEVR accuracy (halves SOTA error 4.5%→2.3%, above human 92.6%) without program supervision or reasoning-specific architecture; 75.9% on CLEVR-Humans after fine-tuning the linguistic pipeline alone; best compositional generalization on CLEVR-CoGenT, plus a novel zero-shot method composing unseen concepts by linear combination in (γ,β) parameter space. Ablations show γ dominates β (65.4% vs 1.0% test-time cost), unrestricted scaling is essential, conditioning is decoupled from normalization placement, and FiLM's cost is resolution-independent — which explains its later adoption across audio processing.
 - **Pages created**: [[sources/perez-2018-film-visual-reasoning|Perez et al. 2018 source page]]; entities [[entities/ethan-perez|Ethan Perez]], [[entities/florian-strub|Florian Strub]], [[entities/harm-de-vries|Harm de Vries]], [[entities/vincent-dumoulin|Vincent Dumoulin]], [[entities/aaron-courville|Aaron Courville]]; synthesis [[synthesis/film-conditioning-across-domains|FiLM Conditioning Across Domains]] (nine papers, 2018–2026: mechanism invariance, identity initialization, conditioning-input dominance, signal→filter-estimation drift)
 - **Pages updated**: [[concepts/film-layer|FiLM Layer]] (original-paper section: formulation, CLEVR results, γ/β analysis, ablation findings; source backlink), [[concepts/gated-recurrent-unit|GRU]] (FiLM generator as conditioning-encoder application), [[concepts/attention-mechanism|Attention Mechanism]] (FiLM-vs-attention comparison backlink)
+
+---
+
+## [2026-10-27] ingest | DNN-Based Geometry-Invariant DOA Estimation With Microphone Positional Encoding and Complexity Gradual Training (Baek, Chang & Cohen 2025)
+
+- **Source**: `raw/papers/baek-2025-geometry-invariant-doa-estimation/full-text.md` (Zotero: 96BTCAFQ)
+- **Authors**: Min-Sang Baek, Joon-Hyuk Chang, Israel Cohen
+- **Published**: IEEE Transactions on Audio, Speech, and Language Processing (TASLPRO), 2025
+- **DOI**: 10.1109/TASLPRO.2025.3577336
+- **Summary**: GI-DOAEnet — a geometry-invariant DNN for azimuth DOA estimation on arbitrary microphone arrays. Microphone Positional Encoding (MPE) modulates sinusoids with each microphone's spherical coordinates (PM/FM variants) to inject geometry without pair-wise features; permutation-invariant channel-wise MHSA plus Channel-Wise Softmax Aggregation (CWSA) shape deeply supervised spatial-spectrum heads. Complexity Gradual Training (CGT = DSCL soft-label curriculum + multi-stage geometry learning) is what makes training on mixed geometries converge. Best MAE among geometry-invariant methods on all six evaluation sets (RSL Eval 8.26° vs 17.00° for Neural-SRP) at 2.07 M parameters, with FLOPS/latency growing linearly in the channel count.
+- **Pages created**:
+  - `wiki/sources/baek-2025-geometry-invariant-doa-estimation.md`
+  - `wiki/concepts/complexity-gradual-training.md`
+  - `wiki/concepts/multi-stage-geometry-learning.md`
+  - `wiki/concepts/deeply-supervised-curriculum-learning.md`
+  - `wiki/concepts/channel-wise-softmax-aggregation.md`
+  - `wiki/entities/min-sang-baek.md`
+- **Pages updated**:
+  - `wiki/concepts/doa-microphone-positional-encoding.md` — new "Origin" section: this paper is where MPE comes from; 3-D spherical PM/FM formulation, α=7/β=4/M=128, linearity/relative-position proof, MLE-divergence evidence
+  - `wiki/concepts/direction-of-arrival-estimation.md` — new section on geometry-invariant neural DOA with the real-data MAE/ACC table
+  - `wiki/concepts/array-invariant-speech-enhancement.md` — DOA-side counterpart section (explicit geometry vs permutation invariance; curriculum as a missing SE-side ingredient)
+  - `wiki/concepts/permutation-invariant-training.md` — channel-axis permutation invariance (CW-MHSA + CWSA) contrasted with PIT's source-axis ambiguity
+  - `wiki/concepts/steered-response-power.md` — quantified SRP trade-off (quadratic FLOPS/latency, accuracy edge only above ~15 dB SNR)
+  - `wiki/concepts/moving-source-tracking.md` — Neural-SRP reused for static geometry-invariant DOA; memory/curriculum findings
+  - `wiki/concepts/geometry-aware-dynamic-convolution.md` — Geo-DConv vs MPE comparison table (where geometry acts, learnable or not)
+  - `wiki/synthesis/multi-channel-speech-enhancement.md` — Insight 6 Phase 3: MPE lineage, fixed-vs-learned encoder evidence, geometry curriculum as a second training axis, linear-vs-quadratic cost argument; Sources Synthesized row added
+  - `wiki/entities/joon-hyuk-chang.md`, `wiki/entities/israel-cohen.md` — contribution bullets and Related Sources
+- **Notes**: MPE was previously documented on the wiki only through its SE-side reuse (Li 2026 GC-SSF/DOA-MPE); this ingest records the original 3-D spherical formulation and the PM/FM variants.

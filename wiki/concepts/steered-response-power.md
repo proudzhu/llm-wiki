@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-10-02
-updated: 2026-10-02
+updated: 2026-10-27
 sources:
+  - raw/papers/baek-2025-geometry-invariant-doa-estimation/full-text.md
   - raw/articles/wikipedia-steered-response-power.md
   - raw/papers/grinstein-2024-srp-tutorial-review/full-text.md
 tags:
@@ -80,6 +81,19 @@ with lower/upper accumulation limits $L^{l}, L^{u}$ computed either exactly from
 - Compared to [[concepts/intensity-vector-doa-estimation|intensity-vector methods]], SRP estimates full 3-D positions (not only direction), but at the cost of an expensive grid search over candidate locations.
 - Its computational burden motivated hierarchical/coarse-to-fine searches, stochastic region contraction, and — as in the search-based DoA estimation of Tesch & Gerkmann 2024 — the general pattern of trading one filter evaluation per candidate direction against learned classifiers.
 
+## Neural Replacement Without Pair-Wise Features (Baek et al. 2025)
+
+[[sources/baek-2025-geometry-invariant-doa-estimation|Baek, Chang & Cohen 2025]] take the opposite route to the "SRP as neural input" family: they argue SRP-PHAT (and GCC-PHAT) is exactly what a geometry-invariant DOA network should **avoid**, because pair-wise features cost $\tfrac{C(C-1)}{2}$ operations and are the first thing to break when noise and reverberation destroy inter-channel phase coherence. Their GI-DOAEnet consumes only the channel-wise STFT plus [[concepts/doa-microphone-positional-encoding|MPE]] geometry embeddings, and reports:
+
+| System | FLOPS, 4 / 8 / 12 ch | GPU latency, 4 / 8 / 12 ch | Dynamic-set MAE |
+|:-------|:---------------------|:---------------------------|:----------------|
+| SRP-PHAT front end | 0.10 / 0.45 / 1.06 G | – (CPU only) | – |
+| Neural-SRP (GCC-PHAT pairs) | 1.81 / 8.38 / 19.72 G | 3.42 / 6.39 / 11.44 ms | 21.09° |
+| Unet on SRP-PHAT | 0.97 G (flat) | 0.49 ms (flat, excl. SRP) | 19.60° |
+| **GI-DOAEnet (no pair-wise features)** | **0.46 / 0.85 / 1.25 G** | **2.60 / 2.65 / 2.69 ms** | **14.59°** |
+
+The cost ordering flips with channel count: SRP-PHAT itself is cheapest at 4 channels, but its quadratic pair loop makes it the most expensive component at 8–12 channels, and the accuracy advantage of SRP-based systems survives only above ~15 dB SNR. This gives a concrete price tag to the classic SRP trade-off — robust, geometry-agnostic, but quadratic — and identifies the regime (low SNR, high RT60) where a learned, non-pair-wise localizer wins.
+
 ## Related Concepts
 
 - [[concepts/sound-source-localization|Sound Source Localization]]
@@ -89,6 +103,7 @@ with lower/upper accumulation limits $L^{l}, L^{u}$ computed either exactly from
 - [[concepts/x-srp|X-SRP]] — the modular reformulation of the algorithm and its variant space
 - [[concepts/interaural-time-difference|Interaural Time Difference]] — the two-microphone (binaural) special case of TDOA
 - [[concepts/search-based-doa-estimation|Search-based DoA Estimation]] — a grid-search localizer built on a learned spatially selective filter
+- [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]] — the umbrella DOA page, including the pair-wise-free DNN alternative
 
 ## Related Sources
 
@@ -96,3 +111,4 @@ with lower/upper accumulation limits $L^{l}, L^{u}$ computed either exactly from
 - [[sources/wikipedia-steered-response-power|Wikipedia: Steered-response power]] — the reference for the formulas on this page
 - [[sources/grumiaux-2022-ssl-deep-learning-survey|Grumiaux et al. 2022: A Survey of SSL with Deep Learning Methods]] — positions SRP-PHAT as the conventional baseline that DL methods improve upon
 - [[sources/kim-2014-doa-based-snr-estimation|Kim & Kim 2014: DOA-based SNR Estimation]] — notes GCC/SRP-PHAT reliability within the target-DOA error window
+- [[sources/baek-2025-geometry-invariant-doa-estimation|Baek, Chang & Cohen 2025: DNN-Based Geometry-Invariant DOA Estimation]] — quantifies the SRP trade-off: quadratic FLOPS/latency in the microphone count and an accuracy advantage only above ~15 dB SNR

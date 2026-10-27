@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-30
-updated: 2026-04-30
+updated: 2026-10-27
 sources:
+  - raw/papers/baek-2025-geometry-invariant-doa-estimation/full-text.md
   - raw/papers/wang-2026-predictive-dsfanc-crnn/full-text.md
 tags:
   - signal-processing
@@ -53,6 +54,14 @@ Su et al. (2025) use a factor graph for filter pre-selection. Requires manual pa
 - Proactive filter selection eliminates the reactive lag that degrades D-SFANC performance
 - The Doppler effect can be omitted when source speed ≪ speed of sound
 
+## Neural-SRP Reused for Static Geometry-Invariant DOA (Baek et al. 2025)
+
+Neural-SRP was designed for **moving-source tracking**, but its geometry-agnostic construction (GCC-PHAT features per microphone pair, batch-wise CNN/GRU processing, Cartesian pair coordinates concatenated as geometry, permutation-invariant summation) makes it the standard geometry-invariant baseline for *static* multi-speaker DOA too. [[sources/baek-2025-geometry-invariant-doa-estimation|Baek, Chang & Cohen 2025]] reimplement it with the regression head replaced by the same deeply supervised spatial-spectrum heads used by their GI-DOAEnet, so that training-strategy comparisons are apples-to-apples, and report three practical findings for tracking-oriented users:
+
+- **It needs the curriculum.** With [[concepts/complexity-gradual-training|CGT]] (DSCL, then MSGL) Neural-SRP improves on all six evaluation sets (RSL Eval MAE 18.15° → 14.39° with DSCL alone), so the training recipe travels independently of the architecture.
+- **Memory is the binding constraint**: 705 / 3276 / 7724 MB at 4 / 8 / 12 channels forced batch size 1, versus batch 16 for every other model.
+- **Tracking fidelity versus cost**: inference time grows quadratically in the channel count (86 → 1396 ms CPU, 3.4 → 11.4 ms GPU from 4 to 12 channels), the same pair-wise scaling that limits SRP/[[concepts/steered-response-power|SRP-PHAT]] moving-source trackers.
+
 ## Related Concepts
 
 - [[concepts/direction-of-arrival-estimation|Direction-of-Arrival Estimation]] — spatial information for tracking
@@ -63,3 +72,4 @@ Su et al. (2025) use a factor graph for filter pre-selection. Requires manual pa
 ## Related Sources
 
 - [[sources/wang-2026-predictive-dsfanc-crnn|Wang 2026: Predictive Directional SFANC via CRNN]] — CRNN-based predictive tracking for ANC
+- [[sources/baek-2025-geometry-invariant-doa-estimation|Baek, Chang & Cohen 2025: DNN-Based Geometry-Invariant DOA Estimation]] — reuses Neural-SRP as the geometry-invariant baseline for static multi-speaker DOA; documents its memory and quadratic-latency limits

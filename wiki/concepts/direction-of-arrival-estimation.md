@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-30
-updated: 2026-10-05
+updated: 2026-10-27
 sources:
+  - raw/papers/baek-2025-geometry-invariant-doa-estimation/full-text.md
   - raw/papers/hu-2023-gc-auxiva-iss-realistic/full-text.md
   - raw/papers/li-2020-geometrically-constrained-iva/full-text.md
   - raw/papers/li-2020-online-gciva/full-text.md
@@ -97,6 +98,23 @@ A BSS demixing system can be interpreted as a set of adaptive null-beamformers, 
 
 [[sources/hu-2023-gc-auxiva-iss-realistic|Hu & Chen 2023]] tested the BSS-directivity estimator ($\hat{\theta}_m = \operatorname{argmin}_\theta \sum_{\omega \le \Omega/2} |w_m^{\mathsf{H}}(\omega) d(\omega,\theta)|$, applied to AuxIVA-ISS outputs) outside simulation for the first time. On real recordings it is accurate where reverberation and noise are moderate — anechoic chamber estimates landed within ~1° of the physical loudspeaker directions (3° vs. ~4°, −31° vs. −32°) and outdoors the DoA peaks were unambiguous, successfully steering GC-AuxIVA-ISS output-order control in both scenes. In a meeting room (RT60 ≈ 600 ms, 70 dBA bubble noise), however, the estimator failed with two speakers: only the louder male voice was correctly localized, and no order control was possible — the real-world reverberation-plus-diffuse-noise regime where BSS-directivity DOA breaks down.
 
+## Geometry-Invariant Neural DOA (Baek, Chang & Cohen 2025)
+
+[[sources/baek-2025-geometry-invariant-doa-estimation|Baek, Chang & Cohen 2025]] attack the complement of the fixed-array DNN literature: a network that localizes on **arbitrary arrays** without retraining. Their GI-DOAEnet drops conventional pair-wise features entirely — a channel-independent feature extractor turns the channel-wise STFT into latents, and array geometry enters only through [[concepts/doa-microphone-positional-encoding|Microphone Positional Encodings]]. It then produces a per-frame azimuth **spatial spectrum** (360 bins, 1° resolution) through stacked channel-wise attention + frame-wise GRU blocks.
+
+Reported azimuth results (MAE° / ACC₁₀%) on real data:
+
+| Method | LOCATA (12 ch) | RSL Dev (4 ch) | RSL Eval (4 ch) |
+|:-------|:---------------|:---------------|:----------------|
+| MUSIC | 14.19 / 76.65 | 5.46 / 91.29 | 28.44 / 43.82 |
+| SRP-PHAT | 20.54 / 72.32 | 9.12 / 67.08 | 31.09 / 43.56 |
+| Fixed-array CRNN | 7.48 / 88.31 | 4.54 / 99.75 | 10.85 / 80.97 |
+| Neural-SRP (geometry-invariant) | 15.16 / 75.31 | 5.29 / 96.72 | 17.00 / 71.81 |
+| Unet + SRP-PHAT (geometry-invariant) | 11.20 / 85.56 | 4.62 / 98.48 | 20.21 / 71.78 |
+| **GI-DOAEnet^FM** | **7.22 / 85.67** | 4.58 / 97.34 | **8.26 / 86.83** |
+
+The take-aways that generalize beyond this system: (i) a geometry-invariant model trained on many random arrays can match or beat a fixed-array specialist on the *same* array it never trained on; (ii) avoiding pair-wise features keeps cost linear in the channel count, where SRP-PHAT and Neural-SRP grow as $C(C-1)/2$; (iii) the accuracy advantage concentrates **below ~15 dB SNR** and at high RT60 — the regime where phase coherence (and hence SRP/GCC features) breaks down.
+
 ## Related Concepts
 
 - [[concepts/selective-fixed-filter-anc|Selective Fixed-Filter ANC]] — DoA drives filter selection in D-SFANC/PD-SFANC
@@ -108,6 +126,8 @@ A BSS demixing system can be interpreted as a set of adaptive null-beamformers, 
 - [[concepts/intensity-vector-doa-estimation|Intensity-Vector DOA Estimation]] — averaging vs. mixture-model estimators on intensity-vector azimuths
 - [[concepts/steered-response-power|Steered-Response Power]] — beamforming-based grid-search scanning for source localization
 - [[concepts/geometrically-constrained-iva|Geometrically Constrained IVA]] — BSS directivity nulls double as DOA estimates that steer its null constraints
+- [[concepts/doa-microphone-positional-encoding|DOA-Microphone Positional Encoding]] — how a DNN learns DOA on arbitrary arrays
+- [[concepts/array-invariant-speech-enhancement|Array-Invariant Speech Enhancement]] — the enhancement-side analogue of geometry invariance
 
 ## Related Sources
 
@@ -122,3 +142,4 @@ A BSS demixing system can be interpreted as a set of adaptive null-beamformers, 
 - [[sources/tervo-2009-sound-intensity-direction|Tervo 2009: Direction Estimation Based on Sound Intensity Vectors]] — conventional intensity-vector DoA estimators compared on real concert-hall data
 - [[sources/wikipedia-steered-response-power|Wikipedia: Steered-Response Power]] — reference formulation of the SRP-PHAT classical baseline
 - [[sources/grinstein-2024-srp-tutorial-review|Grinstein et al. 2024: SRP for Sound Source Localization — a Tutorial Review]] — far-field DOE/SSL distinction, SRP ≡ ML reduction, and the SRP-variant taxonomy
+- [[sources/baek-2025-geometry-invariant-doa-estimation|Baek, Chang & Cohen 2025: DNN-Based Geometry-Invariant DOA Estimation]] — geometry-invariant DNN that dispenses with pair-wise features; beats MUSIC/SRP-PHAT and two DNN baselines across six datasets

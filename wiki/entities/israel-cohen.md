@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-28
-updated: 2026-10-07
+updated: 2026-10-27
 tags:
   - researcher
   - signal-processing
@@ -24,6 +24,7 @@ tags:
 - Co-author of "Differential Kronecker Product Beamforming" (IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 27, no. 5, pp. 892–902, 2019) — introduced differential Kronecker product beamformers (KP cardioid/dipole/hypercardioid/supercardioid) — [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019]]
 - Co-author of "Steering Study of Linear Differential Microphone Arrays" (IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 29, pp. 158–170, 2021) — proved first-order LDMAs non-steerable, derived Nth-order steering conditions, and proposed null-constrained steerable LDMA design — [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021]]
 - Co-author of "STFT-Domain Least-Distortion Region-of-Interest Beamforming" (IEEE Transactions on Audio, Speech, and Language Processing, 2025) — introduced the STFT-domain least-distortion ROI beamformers (LD-MWNG, LD-MDF) with the eigenvector-truncation parameter K — [[sources/itzhak-2025-stft-roi-beamforming|Itzhak & Cohen 2025]]
+- Co-author of "DNN-Based Geometry-Invariant DOA Estimation With Microphone Positional Encoding and Complexity Gradual Training" (IEEE TASLPRO 2025) — co-authored the geometry-invariant DOA estimator with Microphone Positional Encoding (MPE) and Complexity Gradual Training (CGT) — [[sources/baek-2025-geometry-invariant-doa-estimation|Baek, Chang & Cohen 2025]]
 
 Israel Cohen is a well-known researcher in the speech processing community with extensive contributions to speech enhancement and spatial filtering.
 
@@ -35,6 +36,7 @@ Israel Cohen is a well-known researcher in the speech processing community with 
 - [[sources/cohen-2019-differential-kronecker-beamforming|Cohen, Benesty & Chen 2019: Differential Kronecker Product Beamforming]]
 - [[sources/jin-2021-steering-study-ldma|Jin, Huang, Wang, Chen, Benesty & Cohen 2021: Steering Study of Linear Differential Microphone Arrays]]
 - [[sources/itzhak-2025-stft-roi-beamforming|Itzhak & Cohen 2025: STFT-Domain Least-Distortion Region-of-Interest Beamforming]]
+- [[sources/baek-2025-geometry-invariant-doa-estimation|Baek, Chang & Cohen 2025: DNN-Based Geometry-Invariant DOA Estimation With Microphone Positional Encoding and Complexity Gradual Training]]
 
 
 ## Related Entities

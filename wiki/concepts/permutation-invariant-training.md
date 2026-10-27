@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-06-01
-updated: 2026-09-26
+updated: 2026-10-27
 sources:
+  - raw/papers/baek-2025-geometry-invariant-doa-estimation/full-text.md
   - raw/papers/pan-2025-data-driven-acoustics/full-text.md
   - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
 tags:
@@ -47,6 +48,14 @@ where $d[\cdot,\cdot]$ is typically a waveform distance such as [[concepts/si-sd
 
 PIT offers a simpler alternative to [[concepts/deep-clustering-speech-separation|Deep Clustering]] with matching performance.
 
+## Permutation-Invariant Aggregation in Geometry-Invariant DOA (Baek et al. 2025)
+
+PIT removes the **output–source assignment** ambiguity; a related but distinct use of permutation invariance removes the **channel-order** ambiguity of ad-hoc microphone arrays. [[sources/baek-2025-geometry-invariant-doa-estimation|Baek, Chang & Cohen 2025]] build their geometry-invariant DOA estimator entirely from permutation-invariant operators: channel-wise MHSA (attention is invariant to the ordering of its input axis) plus [[concepts/channel-wise-softmax-aggregation|CWSA]], which computes a channel-wise Softmax, then the **sum** and the **standard deviation** across channels.
+
+The distinction worth keeping straight: sum/mean/std/Softmax are permutations *of the channel axis* and make the model's output independent of microphone order, while the geometry information that order would otherwise convey is supplied separately by [[concepts/doa-microphone-positional-encoding|MPE]] steering. In PIT the permutation-ambiguous axis is the *source* axis and the loss, not the architecture, handles it.
+
+Ablations show both permutation-invariant components are load-bearing: removing the std branch (2M → M features) or the Softmax weighting from CWSA degraded nearly every evaluation set, with the Softmax removal being the most damaging.
+
 ## Related Concepts
 
 - [[concepts/deep-clustering-speech-separation|Deep Clustering for Speech Separation]]
@@ -59,3 +68,4 @@ PIT offers a simpler alternative to [[concepts/deep-clustering-speech-separation
 - [[sources/wang-2018-supervised-speech-separation-deep-learning-overview|Wang & Chen 2018: Supervised Speech Separation Based on Deep Learning: An Overview]]
 - [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — the one-to-many label problem and PIT as optimal matching (Section 8.2)
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — why single-target speech enhancement (denoising) needs no PIT, while separation does
+- [[sources/baek-2025-geometry-invariant-doa-estimation|Baek, Chang & Cohen 2025: DNN-Based Geometry-Invariant DOA Estimation]] — channel-axis permutation invariance (CW-MHSA + CWSA) for ad-hoc arrays, contrasted with PIT's source-axis ambiguity
