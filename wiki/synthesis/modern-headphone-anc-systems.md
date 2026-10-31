@@ -21,6 +21,7 @@ sources:
   - raw/papers/chiba-2027-wideband-anc-coaxial-loudspeaker/full-text.txt
   - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
   - raw/papers/forster-2022-optimal-microphone-positioning/full-text.txt
+  - raw/papers/kuo-2006-anc-headphones/full-text.txt
 ---
 
 # Modern Headphone ANC Systems: Beyond Noise Cancellation
@@ -224,7 +225,7 @@ Modern headphones need at minimum:
 
 Total: **8 microphones + 2 bone conduction sensors** per headphone.
 
-For the feedforward part of the stack, *where* the external microphones sit is itself a design variable with a quantified answer: equipping a Bose QC25 with 10 additional MEMS microphones and selecting subsets under a causality-aware time-domain Wiener criterion, [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022]] find that distributing references **ipsilaterally** around the shell is worth ~9 dB of additional active gain over the single-mic baseline, while **contralateral** positions contribute essentially nothing — their optimal filters would be acausal (the around-the-head path exceeds the usable causality margin). Notably, the causality-blind multiple-coherence criterion would credit those contralateral positions, so placement should be validated with causal criteria (see [[concepts/reference-microphone-positioning|Reference Microphone Positioning]]). For the sensor stack this means extra reference microphones belong on the ipsilateral shell arc, not mirrored on the far side — a concrete instance of the form-factor-first design direction of §5.2.
+For the feedforward part of the stack, *where* the external microphones sit is itself a design variable with a quantified answer: equipping a Bose QC25 with 10 additional MEMS microphones and selecting subsets under a causality-aware time-domain Wiener criterion, [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022]] find that distributing references **ipsilaterally** around the shell is worth ~9 dB of additional active gain over the single-mic baseline, while **contralateral** positions contribute essentially nothing — their optimal filters would be acausal (the around-the-head path exceeds the usable causality margin). Notably, the causality-blind multiple-coherence criterion would credit those contralateral positions, so placement should be validated with causal criteria (see [[concepts/reference-microphone-positioning|Reference Microphone Positioning]]). For the sensor stack this means extra reference microphones belong on the ipsilateral shell arc, not mirrored on the far side — a concrete instance of the form-factor-first design direction of §5.2. The **error-microphone** position has a quantified answer too, and much earlier: [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006]] measured the secondary path at eight ear-pad locations on a KEMAR and picked the one with the flattest $|S(z)|$ (near the external auditory meatus — pinna anatomy, anterior vs posterior, grouped the responses), which simultaneously matched the ear-canal hearing position; with a flat secondary path, the IMC/FxLMS loop stayed stable across the full band and the prototype beat a Bose QC2 by up to 20 dB at low-frequency engine harmonics. Placement of *both* sensor types is thus an acoustic-transfer-function problem before it is a wiring- or ML-problem.
 
 ### 6.3 The Computational Load
 
@@ -278,6 +279,7 @@ This requires a dedicated DSP (e.g., Qualcomm QCC5141, ~200 MIPS capability).
 - [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]] — the own-voice naturalness layer: OEC resolves the occlusion-transparency conflict on sealed hardware via FF (hear-through) + FB control with correction-filter decoupling
 - [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — first demonstrated open-ear ANC without an in-ear error microphone; the attenuation layer for future open-ear acoustic-computing platforms
 - [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022: Optimal Microphone Positioning for Multi-Channel Feedforward ANC Headphones]] — quantitative placement rule for the sensor stack's reference microphones: ipsilateral distribution ~9 dB, contralateral positions causality-blocked
+- [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006: Active Noise Control System for Headphone Applications]] — the error-microphone counterpart: placement by flattest secondary-path magnitude response (pinna spectral filtering), with music-based identification calibration
 
 ## Related Synthesis
 

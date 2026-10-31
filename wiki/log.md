@@ -6243,3 +6243,27 @@ Answered from [[sources/li-2026-geometry-conditioned-ssanc|Li 2026 GC-SSF]] and 
 - **Summary**: Reference-microphone positioning for multi-channel feedforward ANC headphones. Proposes a causality-aware MSE time-domain cost function (MSE-TD CF) — a path-based multi-channel Wiener formulation for an approximated diffuse field whose FIR coefficients are causal — against the causality-blind frequency-domain Multiple Coherence Function (MCF). A greedy selection algorithm over DRIRs measured on a Bose QC25 fitted with 10 extra MEMS microphones (12 candidates, 5° azimuth resolution) shows ~9 dB additional active gain from ipsilateral reference placement; contralateral microphones contribute essentially nothing under the causal criterion (their filters would be acausal) while the MCF still credits them.
 - **Pages created**: [[sources/forster-2022-optimal-microphone-positioning|source page]], [[entities/jonas-forster|Jonas Forster (entity)]], [[concepts/mse-td-cost-function|MSE-TD Cost Function]], [[concepts/multiple-coherence-function|Multiple Coherence Function (MCF)]], [[concepts/reference-microphone-positioning|Reference Microphone Positioning]]
 - **Pages updated**: [[entities/peter-jax|Peter Jax]], [[entities/johannes-fabry|Johannes Fabry]] (new bullet + Elevear affiliation); concepts [[concepts/feedforward-anc|Feedforward ANC]], [[concepts/multi-reference-anc|Multi-Reference ANC]], [[concepts/multi-channel-anc|Multi-Channel ANC]], [[concepts/causality|Causality in ANC]], [[concepts/broad-band-feedforward-anc|Broad-Band Feedforward ANC]], [[concepts/wiener-filter|Wiener Filter]], [[concepts/device-specific-hrtf|Device-Specific HRTF]], [[concepts/secondary-path-variability|Secondary Path Variability]] (Forster 2022 cross-refs); synthesis [[synthesis/modern-headphone-anc-systems|Modern Headphone ANC Systems]] (sensor-stack placement rule), [[synthesis/multichannel-anc-efficiency-and-robustness|Multichannel ANC Efficiency and Robustness]] (§2.5 reference selection vs. projection)
+
+---
+
+## [2026-10-31] ingest | Active Noise Control System for Headphone Applications (Kuo, Mitra & Gan 2006)
+
+- **Source**: `raw/papers/kuo-2006-anc-headphones/full-text.txt` (Zotero: HFSVG5EP, IEEE TCST 2006; MinerU failed twice, pypdf fallback)
+- **Authors**: Sen M. Kuo, Sohini Mitra, Woon-Seng Gan
+- **Published**: IEEE Transactions on Control Systems Technology, Vol. 14, No. 2, March 2006, pp. 331–335
+- **DOI**: 10.1109/TCST.2005.863667
+- **Summary**: Design and real-time implementation of an adaptive feedback ANC (AFANC) headphone — error-microphone placement optimized for the flattest secondary-path magnitude response (8 locations, pinna spectral filtering), music-based secondary-path identification (comparable to white noise/chirp), TMS320C32 implementation at 8 kHz. Achieves 50+ dB sinusoidal cancellation up to 2 kHz and 16–27 dB on engine harmonics, beating a Bose QC2 especially at low frequencies (20.9 vs 0.7 dB at 61 Hz).
+- **Pages created**: `wiki/sources/kuo-2006-anc-headphones.md`, `wiki/entities/sohini-mitra.md`
+- **Pages updated**:
+  - `wiki/entities/sen-m-kuo.md` — added contribution bullet (Notable Work section)
+  - `wiki/entities/woon-seng-gan.md` — appended contribution bullet via update_entities.py
+  - `wiki/concepts/feedback-anc.md` — added "Physical Implementation Benchmark" subsection + Related Sources entry
+  - `wiki/concepts/filtered-x-lms-algorithm.md` — added "IMC-Based Feedback Structure (AFANC)" subsection + Related Sources entry
+  - `wiki/concepts/secondary-path-modeling.md` — added "Music as excitation" paragraph + Related Sources entry
+  - `wiki/concepts/adaptive-feedback-control.md`, `wiki/concepts/internal-model-control.md` — added sources + Related Sources entries
+  - `wiki/concepts/system-identification.md` — added "Musical excitation" identification method + Related Sources entry
+  - `wiki/concepts/head-related-transfer-function.md` — added "Pinna Spectral Filtering for Error-Microphone Placement" section + Related Sources entry
+  - `wiki/concepts/active-noise-control.md` — added Related Sources entry
+  - `wiki/synthesis/anc-architecture-evolution.md` — added §2.4 "The Complete Hardware Benchmark" + source row
+  - `wiki/synthesis/secondary-path-modeling-evolution.md` — added music-excitation note to Route 1 + source entry
+  - `wiki/synthesis/modern-headphone-anc-systems.md` — added error-mic placement paragraph to §6.2 + source entry

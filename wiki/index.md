@@ -697,6 +697,7 @@
 | [[entities/aaron-courville\|Aaron Courville]] | Co-author of FiLM (AAAI 2018); MILA deep-learning researcher | 2026-10-26 |
 | [[entities/min-sang-baek\|Min-Sang Baek]] | Hanyang University researcher; first author of GI-DOAEnet, Microphone Positional Encoding (MPE), and Complexity Gradual Training (CGT) | 2026-10-27 |
 | [[entities/jonas-forster\|Jonas Forster]] | RWTH Aachen — multi-channel feedforward ANC for headphones, reference microphone positioning (DAGA 2022) | 2026-10-31 |
+| [[entities/sohini-mitra\|Sohini Mitra]] | NIU researcher; first-author work on the AFANC headphone (error-mic placement, music-based S(z) identification). | 2026-10-31 |
 
 ---
 
@@ -1619,6 +1620,7 @@
 | [[sources/perez-2018-film-visual-reasoning\|Perez et al. 2018: FiLM: Visual Reasoning with a General Conditioning Layer]] | Origin of Feature-wise Linear Modulation (FiLM): γF+β conditioning halves CLEVR visual-reasoning SOTA error (97.7%); ablations decouple FiLM from normalization and show γ dominates β | 2026-10-26 |
 | [[sources/baek-2025-geometry-invariant-doa-estimation\|Baek, Chang & Cohen 2025]] | This paper proposes GI-DOAEnet, a geometry-invariant DNN for azimuth DOA estimation that works on arbitrary microphone arrays without retraining. | 2026-10-27 |
 | [[sources/forster-2022-optimal-microphone-positioning\|Forster, Fabry & Jax 2022]] | Causality-aware MSE time-domain cost function (vs. causality-blind multiple coherence) for reference-mic positioning; 12-mic Bose QC25 study: ~9 dB extra active gain from ipsilateral placement, contralateral mics causality-blocked | 2026-10-31 |
+| [[sources/kuo-2006-anc-headphones\|Kuo, Mitra & Gan 2006: Active Noise Control System for Headphone Applications]] | Adaptive feedback ANC headphone: error-mic placement by flattest secondary-path response, music-based identification, TMS320C32 prototype beating a Bose QC2. | 2026-10-31 |
 
 ---
 
@@ -1677,10 +1679,10 @@
 
 ## Statistics
 
-- **Total pages**: 1626
-- **Entities**: 687
+- **Total pages**: 1628
+- **Entities**: 688
 - **Concepts**: 623
-- **Sources**: 281
+- **Sources**: 282
 - **Synthesis**: 25
 - **Queries**: 10
 - **Last updated**: 2026-10-31

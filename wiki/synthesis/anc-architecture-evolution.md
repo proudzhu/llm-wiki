@@ -4,6 +4,7 @@ created: 2026-04-12
 updated: 2026-05-17
 sources:
   - zotero://select/items/0_QVJMFTWC
+  - raw/papers/kuo-2006-anc-headphones/full-text.txt
 tags:
   - anc-architecture
   - feedback
@@ -90,6 +91,12 @@ This trades noise reduction performance (3-5 dB less than IMC-based systems) for
 
 **The fundamental insight**: For many practical ANC scenarios, the performance loss from dropping IMC is acceptable given the simplicity gain.
 
+### 2.4 The Complete Hardware Benchmark (Kuo, Mitra & Gan 2006)
+
+[[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006]] is the canonical real-time instantiation of IMC-based AFANC on headphones: a Sennheiser HD 565 modified with one error mic per ear-cup, a 65-tap $\hat{S}(z)$ (step 0.05) for reference synthesis, a 110-tap FxLMS control filter ($\mu=0.3$), assembly-coded on a TMS320C32 at 8 kHz. It achieved 50+ dB sinusoidal cancellation up to 2 kHz and 16–27 dB on 2200/3700 rpm engine harmonics — beating a Bose QuietComfort 2, dramatically so at low frequencies (20.9 vs 0.7 dB at 61 Hz; 25.6 vs 7.0 dB at 116 Hz), which is exactly the band where commercial feedforward-heavy designs leave headroom. Two design lessons generalize beyond the architecture choice:
+1. **Flatten the secondary path before adapting** — the error microphone is placed (of eight candidates) where $|S(e^{j\omega})|$ has the fewest dips and peaks (near the external auditory meatus, guided by pinna spectral filtering), because $W^{opt}(z) = P(z)/S(z)$ is unstable wherever $|S| \approx 0$; that location also matched the KEMAR ear-canal response, the perceptual target.
+2. **Music as identification excitation** — the 65-tap $\hat{S}(z)$ can be identified with spectrally dense music ("O Fortuna", near-flat 0–4 kHz) as accurately as with white noise or chirp, removing the audible-calibration annoyance that Route 1 of [[secondary-path-modeling-evolution|Secondary Path Modeling Evolution]] accepts as its cost.
+
 ---
 
 ## 3. Hybrid ANC (Benois 2020)
@@ -175,3 +182,4 @@ All adaptive ANC systems face the same stability constraint: the phase error in 
 - [[sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii et al. 2006: Verification of Simultaneous Equations Method]] — Secondary-path-model-free feedforward ANC architecture using an auxiliary filter
 - [[sources/xiao-2023-spatially-selective-anc|Xiao, Xu & Zhao 2023: Spatially Selective Active Noise Control Systems]] — Frost-type spatial constraint on hybrid ANC: preserve desired-direction sound instead of cancel-and-reconstruct
+- [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006: Active Noise Control System for Headphone Applications]] — complete IMC-based AFANC headphone on TMS320C32; error-mic placement to flatten $|S(z)|$ and music-based secondary-path identification

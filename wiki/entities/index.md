@@ -691,4 +691,5 @@
 | [[entities/aaron-courville\|Aaron Courville]] | Co-author of FiLM (AAAI 2018); MILA deep-learning researcher | 2026-10-26 |
 | [[entities/min-sang-baek\|Min-Sang Baek]] | Hanyang University researcher; first author of GI-DOAEnet, Microphone Positional Encoding (MPE), and Complexity Gradual Training (CGT) | 2026-10-27 |
 | [[entities/jonas-forster\|Jonas Forster]] | RWTH Aachen — multi-channel feedforward ANC for headphones, reference microphone positioning (DAGA 2022) | 2026-10-31 |
+| [[entities/sohini-mitra\|Sohini Mitra]] | NIU researcher; first-author work on the AFANC headphone (error-mic placement, music-based S(z) identification). | 2026-10-31 |
 

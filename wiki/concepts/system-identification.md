@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-09-18
+updated: 2026-10-31
 sources:
   - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
+  - raw/papers/kuo-2006-anc-headphones/full-text.txt
   - in active noise and vibration control.md
   - control in active noise control systems.md
 tags:
@@ -26,6 +27,7 @@ In [[active-noise-control|Active Noise Control]] and [[active-vibration-control|
 3. **Vector Fitting**: A robust iterative algorithm for fitting high-order state-space models to frequency domain data. Used in Liang (2026) to generate 15th-order models for ANC.
 4. **Subspace Identification**: Algorithms like N4SID that estimate state-space matrices directly from time-series data.
 5. **Low-Rank Kronecker Decomposition**: modeling a long impulse response ($L = L_1 L_2$ taps) as a sum of $P$ Kronecker products of two short filters, identified online with the [[concepts/rls-nkp|RLS-NKP]] algorithm — lower complexity and markedly faster tracking for long echo paths, since two short filters adapt instead of one long one.
+6. **Musical excitation**: replacing white noise/chirp with spectrally dense music for adaptive identification — [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006]] show a 65-tap FIR model of the headphone secondary path identified with "O Fortuna" frames (near-flat 0–4 kHz) matches white-noise and chirp-identified models, removing the annoyance of audible calibration noise.
 
 ## Challenges in ANC
 
@@ -49,3 +51,4 @@ In [[active-noise-control|Active Noise Control]] and [[active-vibration-control|
 - [[sources/wills-2008-mpc-constraint-handling-anc-avc|Wills 2008: MPC Constraint Handling in ANC/AVC]]
 - [[sources/jiang-2025-ai-driven-avnc-review|Jiang et al. 2025: AI-Driven AVNC Review]]
 - [[sources/elisei-iliescu-2019-low-rank-rls|Elisei-Iliescu et al. 2019: Recursive Least-Squares Algorithms for the Identification of Low-Rank Systems]] — low-rank Kronecker decomposition method (RLS-NKP) for long echo paths
+- [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006: Active Noise Control System for Headphone Applications]] — music-based adaptive identification of the headphone secondary path

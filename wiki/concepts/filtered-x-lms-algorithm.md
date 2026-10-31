@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-10-22
+updated: 2026-10-31
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/jiang-2025-ai-driven-avnc-review/full-text.md
@@ -10,6 +10,7 @@ sources:
   - raw/papers/maeda-1999-anc-simultaneous-perturbation/full-text.md
   - raw/papers/kajikawa-2003-fdsp-variable-perturbation/full-text.md
   - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
+  - raw/papers/kuo-2006-anc-headphones/full-text.txt
 tags:
 - adaptive-algorithms
 - lms
@@ -62,6 +63,10 @@ For MIMO systems, a sufficient stability criterion is:
 $$\Re\left\{\text{eig}\left[\hat{\mathbf{G}}^H(\omega)\mathbf{G}(\omega)\right]\right\} > 0 \quad \forall\omega$$
 
 where $\mathbf{G}(\omega)$ and $\hat{\mathbf{G}}(\omega)$ are the Fourier transforms of the actual and estimated secondary paths. This underlines the need for accurate secondary path estimates — approaches like [[secondary-path-interpolation|Secondary Path Interpolation]] via [[dynamic-time-warping|DTW]] can extend the stable frequency range by improving phase accuracy of interpolated paths.
+
+### IMC-Based Feedback Structure (AFANC)
+
+When no reference microphone exists (headphones), the reference itself must be synthesized: the IMC-based adaptive feedback ANC of [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006]] reconstructs $\hat{x}(n) = e(n) + \hat{s}(n) * y(n)$ from the error signal and the secondary-path model, then runs the ordinary FxLMS update on the synthesized reference. The paper also notes the flat-magnitude design rule that follows from the stability condition: since $W^{opt}(z) = P(z)/S(z)$, FxLMS operates properly at all frequencies only when $|S(e^{j\omega})|$ is flat — hence error-microphone placement is chosen to flatten the measured secondary path.
 
 ## Variants
 
@@ -120,3 +125,4 @@ Open-ear smart glasses remove the physical error microphone entirely, so no on-l
 - [[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999: ANC Using Simultaneous Perturbation]] — an early gradient-free escape: adapts the control filter by simultaneous perturbation of all taps, requiring neither $\hat{S}(z)$ nor the filtered reference
 - [[sources/kajikawa-2003-fdsp-variable-perturbation|Kajikawa & Nomura 2003: FDSP with Variable Perturbation]] — frequency-domain successor: ~3× cheaper than FxLMS and converging faster than fixed-perturbation FDSP via error-scaled perturbation
 - [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — no FxLMS loop is possible without an error mic; control filters are network-generated instead, with $\hat{S}(z)$ shifted into training-time FiLM conditioning
+- [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006: Active Noise Control System for Headphone Applications]] — real-time AFANC headphone on TMS320C32: IMC reference synthesis + FxLMS (65-tap $\hat{S}$, 110-tap $W$, $\mu=0.3$), 50+ dB sinusoidal cancellation up to 2 kHz

@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-22
-updated: 2026-10-07
+updated: 2026-10-31
 sources:
   - wiki/sources/kuo-1999-active-noise-control-tutorial-review.md
   - wiki/sources/pawelczyk-1997-anc-feedback-fixed-adaptive.md
@@ -13,6 +13,7 @@ sources:
   - raw/papers/guldenschuh-2014-secondary-path-irregularities/full-text.md
   - raw/papers/xiao-2026-robust-spatially-selective-anc/full-text.txt
   - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
+  - raw/papers/kuo-2006-anc-headphones/full-text.txt
 tags:
   - active-noise-control
   - control-theory
@@ -78,6 +79,10 @@ A key advantage of feedback ANC is that it is independent of the direction of ar
 
 Liebich et al. (2018) confirmed this experimentally: feedback ANC showed consistent attenuation across all azimuth angles on the horizontal plane, while [[feedforward-anc|Feedforward ANC]] showed significant DOA-dependent degradation. This makes feedback ANC particularly valuable in [[hybrid-anc|Hybrid ANC]] systems, where it compensates for the feedforward component's DOA sensitivity.
 
+### Physical Implementation Benchmark (Kuo, Mitra & Gan 2006)
+
+The classic single-channel AFANC headphone: a Sennheiser HD 565 modified with one error microphone per ear-cup, IMC reference synthesis $\hat{x}(n) = e(n) + \hat{s}(n) * y(n)$ (65-tap $\hat{S}$, step 0.05) and a 110-tap FxLMS control filter ($\mu = 0.3$) at 8 kHz, assembly-coded on a TMS320C32. The design step this paper adds to the architecture is **error-microphone placement as a secondary-path optimization**: of eight candidate positions, the flattest $|S(e^{j\omega})|$ (fewest dips/peaks — near the external auditory meatus) is chosen, because $W^{opt}(z) = P(z)/S(z)$ is unstable where $|S| \approx 0$; that location also best matched the KEMAR ear-canal response. Real-time results: 50+ dB for sinusoids up to 2 kHz, and 16–27 dB on 2200/3700 rpm engine harmonics, outperforming a Bose QuietComfort 2 (which managed only 0.7 dB at 61 Hz vs 20.9 dB here). See [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006]].
+
 ## 5. Comparisons
 
 | Feature | Feedforward | Feedback |
@@ -115,6 +120,7 @@ Feedback control also underpins [[concepts/occlusion-effect-cancellation|Occlusi
 - [[sources/guldenschuh-2014-secondary-path-irregularities|Guldenschuh & de Callafon 2014: Detection of Secondary-Path Irregularities in ANC Headphones]]
 - [[sources/xiao-2026-robust-spatially-selective-anc|Xiao, Roden, Blau & Doclo 2026: Robust Soft-Constrained Spatially Selective ANC for Hearables under Secondary Path Variations]]
 - [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]]
+- [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006: Active Noise Control System for Headphone Applications]] — complete real-time AFANC headphone (TMS320C32) with error-mic placement chosen to flatten $|S(z)|$; benchmarks against a commercial Bose QC2
 
 ## Related Concepts
 

@@ -1,0 +1,412 @@
+IEEE TRANSACTIONS ON CONTROL SYSTEMS TECHNOLOGY , VOL. 14, NO. 2, MARCH 2006 331
+Active Noise Control System for Headphone Applications
+Sen M. Kuo, Senior Member, IEEE, Sohini Mitra, and Woon-Seng Gan, Senior Member, IEEE
+Abstract— This paper presents the design and implementation of
+an adaptive feedback active noise control (ANC) system for head-
+phone applications. The ideal position of the error microphone
+in the ear-cup was studied and determined experimentally, and
+music signals were used for adaptive system identiﬁcation of the
+secondary path. The designed ANC headphone was implemented
+using the TMS320C32 digital signal processor for real-time ex-
+periments. Performance has been evaluated and compared with
+a high-end commercial ANC headphone using the same set of
+primary noises including real-world engine noises. Experiment
+results show the proposed ANC headphone achieves higher noise
+cancellation, especially for low-frequency harmonics.
+Index Terms— Active noise control (ANC), adaptive feedback
+ANC systems, ANC headphones, error sensor optimization, sec-
+ondary path modeling.
+I. I NTRODUCTION
+W
+ITH the growth of technology and industry, acoustic
+noise problems have become more and more acute.
+Noise levels in human settings have come under scrutiny for
+reasons including health concerns and improvement of the
+quality of life. Common acoustic noises originate from the
+industrial products such as engines, blowers, fans, and trans-
+formers. For low-frequency noises, passive methods such as
+earmuffs are either ineffective or tend to be very expensive or
+bulky. Thus, the active noise control (ANC) systems [1]–[4],
+which efﬁciently attenuate low-frequency noises, have be-
+come an effective technique for designing ANC headphones
+to protect workers in noisy environments. The advent of fast
+computational devices such as digital signal processors has
+made the implementation of digital ANC headphone possible.
+ANC headphone cancels the primary noise by introducing a
+secondary “antinoise” of equal amplitude but opposite phase,
+thus attenuating undesired acoustic noises inside the ear-cups.
+In feedforward ANC headphones, a reference microphone is
+placed outside the ear-cup to pick up the primary noise. This ref-
+erence signal
+ is then processed by the ANC system to gen-
+erate the control signal
+ to drive a secondary loudspeaker in-
+side the ear-cup for producing antinoise. The error microphone
+monitors the performance of the ANC system by measuring the
+residual noise
+ , which will be minimized by the adaptive al-
+gorithm. In this paper, we develop the adaptive feedback ANC
+(AFANC) system which uses the internal model (the estimated
+secondary path) to synthesize the reference signal
+ instead
+Manuscript received January 5, 2003; revised September 14, 2005. Manu-
+script received in ﬁnal form November 1, 2005. Recommended by Associate
+Editor R. Rajamani.
+S. M. Kuo and S. Mitra are with the Center for Acoustics and Vibration,
+Department of Electrical Engineering, Northern Illinois University, DeKalb, IL
+60115 USA (e-mail: kuo@ceet.niu.edu).
+W.-S. Gan is with the School of Electrical and Electronics Engineering,
+Nanyang Technological University, Singapore 639798.
+Digital Object Identiﬁer 10.1109/TCST.2005.863667
+Fig. 1. Block diagram of adaptive feedback ANC system.
+of using a reference microphone. Thus, the AFANC system uses
+only one error microphone per ear-cup, and results in a low-cost
+and compact ANC headphone design [5]. A comparative study
+of various AFANC systems using four different adaptive algo-
+rithms for headset applications is reported in [6].
+In practical ANC systems, the secondary path
+ (see
+Fig. 1) includes the digital-to-analog converter (DAC), recon-
+struction ﬁlter, power ampliﬁer, loudspeaker, acoustic path
+from loudspeaker to error microphone, error microphone,
+preampliﬁer, antialiasing ﬁlter, and analog-to-digital converter
+(ADC). The ﬁltered-X least-mean-square (FXLMS) algorithm
+[7] places the secondary-path estimate in the reference signal
+path to the weight update of the algorithm. This secondary-path
+model is usually estimated by adaptive system identiﬁcation
+using white noise as an excitation signal, which is annoying for
+headphone applications. The robustness of AFANC headset can
+be improved by adding an analog feedback loop to handle large
+secondary path ﬂocculation [8]. In this paper, we study the
+feasibility of using music as an excitation signal for modeling
+secondary path and show it can achieve similar results as white
+noise and chirp signal.
+The performance of ANC systems is determined by the mag-
+nitude response of the secondary path, which can be affected by
+the placement of the error microphone. In this paper, the op-
+timum location of the error microphone is subject to the ﬂat
+magnitude response of the secondary path, is found by exper-
+iments, and explained by the spectral ﬁltering of pinna.
+An ANC headphone was built for experiments by inserting
+an error microphone inside each ear-cup of a commercial audio
+headphone with a built-in loudspeaker. The AFANC algorithm
+was coded in assembly program and implemented on the Spec-
+trum Signal Processing Inc. TMS320C32 processor board with
+16-bit ADC and DAC on the 4 Channel Analog I/O Board for
+analog interface. Each of the four input channels and two output
+channels are provided with third-order Butterworth anti-aliasing
+ﬁlters. The cutoff frequency of these ﬁlters is set at 3.38 kHz
+with ﬁlter parameters given in the user’s manual. The designed
+headphone was tested using sinusoidal noises generated by a
+1063-6536/$20.00 © 2006 IEEE
+
+332 IEEE TRANSACTIONS ON CONTROL SYSTEMS TECHNOLOGY , VOL. 14, NO. 2, MARCH 2006
+signal generator, and recorded engine noises for an engine run-
+ning at 2200 and 3700 rpm. The emphasis of this paper is on the
+design and experiment of the AFANC headphone in real time,
+with the goal to achieve higher noise cancellation as compared
+to high-end commercial ANC headphones.
+II. A DAPTIVE FEEDBACK ANC ALGORITHM
+An AFANC system using the FXLMS algorithm is illustrated
+in Fig. 1, where the secondary signal is generated as [9]
+(1)
+where
+ and are
+the coefﬁcient and signal vec-
+tors of
+ , respectively, and
+ is the ﬁlter order. The adap-
+tive ﬁlter minimizes the instantaneous squared error using the
+FXLMS algorithm
+(2)
+where
+ is the step size and
+(3)
+is the ﬁltered signal vector. In (3),
+ is the impulse response
+of the secondary-path estimationﬁlter
+ and
+ denotes linear
+convolution.
+The primary noise
+ may not be available during the ANC
+operation. Therefore, a crucial step is to estimate the primary
+noise
+ and to use it as the reference signal
+ for the ANC
+ﬁlter
+ [1]. In the AFANC algorithm, the secondary-path
+estimate
+ (see Fig. 1) is also used to synthesize the reference
+signal as
+(4)
+where
+ ,
+ are the coefﬁcients of the
+ th
+order ﬁnite impulse response (FIR) ﬁlter
+ used to estimate
+the secondary path
+ . The required model
+ can be esti-
+mated by adaptive system modeling techniques summarized in
+[2] using white noise. In this paper, we use music as an excita-
+tion signal for adaptive system identiﬁcation.
+For perfect cancellation, the error signal should become zero,
+which requires the adaptive ﬁlter to converge to the optimum
+transfer function expressed as
+(5)
+Therefore, the adaptiveﬁlter models the primary path
+ (see
+Fig. 1) and inversely models the secondary path
+ . However,
+the behavior and performance of the ANC system is mainly de-
+termined by the secondary path
+ , which is the target for
+optimization in this paper. Equation (5) shows that the ANC
+system is unstable if there is a frequency
+ such that
+. Therefore, the FXLMS algorithm works properly for all fre-
+quencies when the magnitude response of the secondary path is
+ﬂat. In this paper, we study the effects of the error microphone
+Fig. 2. Experimental setup for designing and testing AFANC headphone.
+location on the secondary-path magnitude response, and deter-
+mine the ideal location inside the ear-cup that achievesﬂat mag-
+nitude response.
+III. S ECONDARY PATH OPTIMIZATION AND MODELING
+Fig. 2 shows the experimental setup for designing and testing
+the AFANC headphone. An HP3563A Control Systems Ana-
+lyzer is used to measure the performance (spectra) and estimate
+the transfer function of the secondary path. Instead of building
+a new headphone, we modify the commercial audio headphone
+Sennheiser HD 565 Ovation by adding an error microphone into
+each ear-cup. As shown in Fig. 2, this headphone is mounted on
+a KEMAR (Knowles electronics mannequin for acoustics re-
+search) mannequin, which has a 1/2
+ Falcon range microphone
+type 4189 installed inside the ear cavity of the KEMAR. An
+ONKYO stereo ampli ﬁer is used to amplify the signal being
+fed to the loudspeaker inside the headphone. The error signal is
+picked up by an omni-directional Realistic tie-pin microphone
+embedded inside the ear-pad of the headphone. The error micro-
+phone signal is pre-ampliﬁed by a Symetrix SX202 dual pream-
+pliﬁer.
+A. Placement of Error Microphone
+The spectral ﬁltering of a sound source that is caused pri-
+marily by the outer ear (pinna) will affect the secondary-path
+transfer function
+ . The asymmetrical, complex construc-
+tion of the outer ears cause a unique set of delays, resonances,
+and diffractions that collectively translate into a unique transfer
+function for each microphone position [10]. Intensive experi-
+ments were conducted to ﬁnd the optimum location for the de-
+sign of the AFANC headphone. The sampling frequency chosen
+for the measurements is 8 kHz, and the frequency range of in-
+terest being between 0–3.38 kHz.
+As illustrated in Fig. 3, the secondary path estimation is con-
+ducted for eight different error microphone locations on the
+median plane around the ear-pad of the headphone. The po-
+sitions #6, #7, and #8 are clearly identi ﬁed (with arrows) in
+Fig. 2. For each microphone position, the corresponding sec-
+ondary-path transfer function is measured using the HP3563A
+
+IEEE TRANSACTIONS ON CONTROL SYSTEMS TECHNOLOGY , VOL. 14, NO. 2, MARCH 2006 333
+Fig. 3. Error microphone locations corresponding to the ear surface.
+analyzer. There was a marked dissimilarity between the fre-
+quency responses obtained for locations one to four and those
+obtained for locations ﬁve to eight, which corresponds to the
+posterior and frontal parts of the external ear, respectively. This
+is because these two parts of the external ear differ signiﬁcantly
+in the distribution of cartilaginous framework of elastic connec-
+tive tissue. The cartilage and skin in the frontal portion of the
+external ear appear in the form of multiple folds which forms
+a kind of hollow with the external auditory meatus extending
+from the pinna to the ear drum. On the other hand, the poste-
+rior portion of the external ear consists of a folded rim of skin
+and cartilage around most of the portion of the outer ear. It was
+observed that for error microphone locations ﬁve to eight, there
+was a marked similarity in the frequency responses.
+As expressed in (5), the optimum error microphone location
+for the ANC system was chosen based on the ﬂatness of the
+magnitude response measured at that location. It was observed
+that the system showed theﬂattest frequency response with least
+number of dips and peaks at the microphone locations #8. Fig. 4
+compares the magnitude response of the worst transfer function
+(position #2) with the best transfer function measured at posi-
+tion #8. Fig. 4 also shows the magnitude responses of positions
+#4 and #6 for reference. Since position #8 is near the external
+auditory meatus, the microphone could ﬁt in more easily inside
+the hollow in that location.
+Because the objective of ANC headphones is to reduce the
+noise that is heard by the ear, Fig. 5 shows that the magnitude
+response measured at location #8 matches with the microphone
+installed inside the ear cavity of the KEMAR. Thisﬁgure proves
+that the error microphone at location #8 will result in the best
+noise reduction in the ear hearing position as well. Therefore,
+position #8 is chosen to be the optimal error microphone loca-
+tion for the design of the AFANC headphone.
+B. Excitation Signals
+The excitation signals used for adaptive system identiﬁcation
+should ideally have a constant spectral density at all frequen-
+cies. The most commonly used training signals are white noise
+and chirp signals. However, it is desirable to use music since
+the training signal is heard for headphone applications. Music
+signals [11] are extremely variable in their complexity and may
+range from a near sine waveform of a single musical instrument
+or voice, to the highly complex mixed sound of a symphony
+orchestra. Two very common characteristics were observed for
+most of the music pieces analyzed. Pieces of music, which were
+rich in frequency contents, had a smaller frequency range. Those
+pieces, which had a wider frequency range, had a lower fre-
+quency density. For the pieces from “O Fortuna from Carmina
+Burana,” a number of consecutive frames were found to be rich
+in frequency contents, and it was almost ﬂat in the frequency
+range from 0–4 kHz.
+The effectiveness of the music piece as an excitation signal
+in adaptive system modeling was evaluated and compared with
+that of conventional training signals like white noise and chirp
+signal. Fig. 6 shows the magnitude responses of
+ and its
+estimate using music. As shown in the ﬁgure, the magnitude
+response is estimated using music signal and is closely matched
+to the system to be modeled.
+IV . REAL-TIME EXPERIMENTS
+A real-time experiment of the designed AFANC headphone
+was conducted in the Digital Signal Processing (DSP) lab at
+Northern Illinois University. The surrounding environment in
+the DSP lab (see Fig. 2) closely resembles real-life settings with
+sound re ﬂections from various objects in the room. Primary
+noises used for real-time experiments are sinusoidal noises at
+different frequencies and engine noises at 2200 rpm and 3700
+rpm. Performance of the ANC headphones was evaluated using
+the built-in microphone inside the ear canal of the KEMAR.
+Therefore, the measured noise cancellation would be very close
+to what would actually be perceived by the human ear in a
+real-life situation. The noise cancellation performance obtained
+was compared with that of a leading commercial headphone
+by mounting the commercial ANC headphone on the KEMAR
+under the identical testing parameters.
+As shown in Fig. 2, the headphone is mounted on a KEMAR
+mannequin, which is placed on a chair. The engine noise is
+played from a Sony Digital Audio Tape (DAT) deck. For all
+the experiments conducted, the primary loudspeaker is placed
+facing the KEMAR, 27 cm in front and 24 cm below. With the
+error microphone placed at the optimum location #8 (see Fig. 2),
+noise cancellation tests have been conducted for different pri-
+mary noises. The length of the ﬁlter
+ for modeling of the
+secondary path is 65, and the step size is 0.05. The length of the
+adaptive ﬁlter
+ used for the noise cancellation is 110, and
+the step-size
+ is 0.3.
+For the ﬁrst set of real-time experiments, sinusoidal noises in
+the range of 0 –2 kHz with the step of 100 Hz were generated
+using an HP 33120A signal generator. Fig. 7 depicts the noise
+cancellation results obtained in real time for sinusoidal frequen-
+cies at intervals of 100 Hz. It is observed that even though the
+net noise cancellation (the difference between ANC OFF and
+ON) decreases with increase in frequency, it is considerably
+high (more than 50-dB attenuation) for frequencies all the way
+up to 2 kHz.
+Real-time performance for the designed AFANC headphone
+was also tested for engine noises recorded at a ﬁxed 2200 rpm
+and 3700 rpm. The engine noise was played through the Sony
+
+334 IEEE TRANSACTIONS ON CONTROL SYSTEMS TECHNOLOGY , VOL. 14, NO. 2, MARCH 2006
+Fig. 4. Magnitude responses of /83/40/122/41at different microphone locations.
+Fig. 5. Magnitude responses of /83/40/122/41at microphone location #8 and inside the
+ear cavity.
+Fig. 6. Magnitude responses of /83/40/122/41and its estimate using music as excitation
+signals.
+DAT deck. The dotted line on Fig. 8 depicts the power spec-
+trum of the engine noise at 3700 rpm, and the solid line de-
+Fig. 7. Noise cancellation levels for sinusoidal primary noise at different
+frequencies.
+picts the residual noise obtained after cancellation. Note that
+both noises are measured from the built-in microphone inside
+the KEMAR’s ear. Fig. 8 shows considerable noise cancellation
+for the ﬁrst three harmonic components. The noise cancellation
+levels at 61, 122, and 183 Hz are 20.906, 18.387, and 16.293
+dB, respectively.
+The noise cancellation of the AFANC algorithm was repeated
+for the engine noise recorded at 2200 rpm, and its real-time
+performance is depicted in Fig. 9. The dotted line depicts the
+power spectrum of the engine noise, and the solid line depicts
+the residual noise obtained after cancellation. The noise cancel-
+lation levels for harmonic components at 76, 116, 156, and 196
+Hz are 14.371, 25.627, 26.767, and 13.197 dB, respectively.
+Finally, the performance of the AFANC headphone designed
+in this paper was compared to that of the leading commercial
+ANC headphone. In both cases, the noise cancellation was
+
+IEEE TRANSACTIONS ON CONTROL SYSTEMS TECHNOLOGY , VOL. 14, NO. 2, MARCH 2006 335
+Fig. 8. Power spectra for the original engine noise at 3700 rpm (dotted line)
+and the residual noise (solid line) after noise control.
+Fig. 9. Power spectra for engine noise at 2200 rpm (dotted line) and the
+residual noise (solid line) after ANC.
+monitored by the built-in microphone inside the KEMAR’s ear
+canal. As shown in Fig. 8, for engine noise at 3700 rpm, the
+noise cancellation levels for the designed Northern Illinois Uni-
+versity (NIU) ANC headphone are 20.906, 18.387, and 16.293
+dB for harmonics at 61, 122, and 183 Hz, respectively. This
+experiment is repeated by mounting the leading commercial
+ANC headphone on the KEMAR, and the spectral plot shown
+in Fig. 10 was obtained using the HP3563A analyzer. The noise
+cancellation levels using the commercial ANC headphone for
+those three harmonics are 0.685, 8.284, and 14.575 dB. Thus,
+the headphone designed in this paper has achieved a signiﬁcant
+improvement in noise cancellation for all three harmonics,
+especially at low frequencies.
+Similarly, this experiment was repeated for engine noise at
+2200 rpm. As shown in Fig. 9, the noise cancellation levels ob-
+tained for the designed AFANC headphone are 14.371, 25.627,
+26.767, and 13.197 dB for harmonics at 76, 116, 156, and 196
+Hz, respectively. Under the identical testing environment, the
+corresponding noise cancellation levels obtained using the com-
+mercial ANC headphone are 0.919, 6.955, 12.25,and 13.409 dB.
+Fig. 10. Power spectra for the original engine noise at 3700 rpm (dotted line)
+and the residual noise (solid line) for a Bose QuietComfort 2 ANC headphone.
+Again, we achieve a marked improvement in noise cancellation
+in comparison to the leading commercial ANC headphone.
+V. CONCLUSION
+In this paper, an adaptive feedback ANC headphone has been
+designed using the FXLMS algorithm. Conventional excitation
+signals such as white noise and chirp signal have been replaced
+by music signals for modeling the secondary-path transfer func-
+tion. The performance of the music piece as a training signal
+for adaptive system modeling was similar with that of white
+noise and chirp signal. The optimum error microphone location
+for the AFANC headphone has been studied and found exper-
+imentally. The designed AFANC headphone was implemented
+on the TMS320C32 using assembly program for real-time ex-
+periments. Higher noise cancellation has been achieved by com-
+paring with that of the high-end commercial ANC headphone.
+REFERENCES
+[1] S. M. Kuo and D. R. Morgan, “Active noise control: a tutorial review,”
+Proc. IEEE, vol. 8, no. 6, pp. 943–973, Jun. 1999.
+[2] , Active Noise Control Systems: Algorithms and DSP Implementa-
+tions. New York: Wiley, 1996.
+[3] P. A. Nelson and S. J. Elliott, Active Control of Sound. San Diego, CA:
+Academic, 1992.
+[4] S. J. Elliott, Signal Processing for Active Control . San Diego, CA:
+Academic, 2001.
+[5] W. S. Gan and S. M. Kuo, “An integrated audio and active noise control
+headsets,” IEEE Trans. Consum. Electron., vol. 48, no. 2, pp. 242–247,
+May 2002.
+[6] B. Siravara, M. Mansour, R. Cole, and N. Mogotra, “Comparative study
+of wideband single reference active noise cancellation algorithms on a
+ﬁxed-point DSP,” in Proc. ICASSP, 2003, pp. II-473–II-476.
+[7] D. R. Morgan, “An analysis of multiple correlation cancellation loops
+with a ﬁlter in the auxiliary path,” IEEE Trans. Acoust. Speech, Signal
+Process.,, vol. ASSP-28, no. 4, pp. 454–467, Aug. 1980.
+[8] Y . Song, Y . Gong, and S. M. Kuo,“A robust hybrid feedback active noise
+cancellation headset,” IEEE Trans. Speech Audio Process., vol. 13, no.
+4, pp. 607–617, Jul. 2005.
+[9] S. M. Kuo, X. Kong, and W. S. Gan, “Applications of adaptive feedback
+active noise control system,” IEEE Trans. Contr. Syst. Technol., vol. 11,
+no. 2, pp. 216–220, Mar. 2003.
+[10] D. R. Begault, 3-D Sound for Virtual Reality and Multimedia . San
+Diego, CA: Academic, 1994.
+[11] J. F. Alm and J. S. Walker, “Time frequency analysis of musical instru-
+ments,” Soc. Indust. Appl. Math., vol. 44, no. 3, pp. 457–476, 2002.

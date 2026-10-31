@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-17
-updated: 2026-10-22
+updated: 2026-10-31
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/fareedha-2026-joint-deep-spe-anc/full-text.txt
@@ -19,6 +19,7 @@ sources:
   - raw/papers/maeda-1999-anc-simultaneous-perturbation/full-text.md
   - raw/papers/kajikawa-2003-fdsp-variable-perturbation/full-text.md
   - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
+  - raw/papers/kuo-2006-anc-headphones/full-text.txt
 tags:
 - active-noise-control
 - signal-processing
@@ -50,6 +51,8 @@ Accurate knowledge of $S(z)$ is essential for the stability and convergence of a
 Conducted before the ANC system starts operating. A training signal (typically white noise) is played through the secondary source, and an adaptive filter (e.g., LMS) is used to identify the impulse response.
 
 On open-ear smart glasses, [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026]] estimate the 1024-tap secondary path offline with an exponential sine sweep (20 Hz–11 kHz, robust down to −20 dB calibration SNR) and use the estimate in two places: inside the training loss (residual computed through $\hat{S}$) and as a [[concepts/film-layer|FiLM]] conditioning input to the filter-estimation network (~512 bytes of per-user affine parameters instead of retraining). Without user calibration, a population-averaged path serves as fallback.
+
+**Music as excitation (Kuo, Mitra & Gan 2006)**: the annoyance of audible white-noise training is a headphone-specific problem — [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006]] show that a music piece (spectrally dense frames of "O Fortuna", near-flat over 0–4 kHz) identifies $\hat{S}(z)$ with accuracy comparable to white noise and chirp, turning the calibration signal into something the user would willingly listen to. A 65-tap FIR model with step size 0.05 sufficed for the 8 kHz system.
 
 ### 2. [[online-secondary-path-modeling|Online Secondary-Path Modeling]]
 Conducted during ANC operation. This is necessary when the secondary path is time-varying (e.g., movement of the user's head in headphones).
@@ -109,4 +112,5 @@ In hearing aids the secondary path is the propagation from the device loudspeake
 - [[sources/maeda-1999-anc-simultaneous-perturbation|Maeda & Yoshida 1999: ANC Using Simultaneous Perturbation]] — an early avoidance-route method: perturbation-based stochastic gradient descent on block error power, no secondary-path estimate
 - [[sources/kajikawa-2003-fdsp-variable-perturbation|Kajikawa & Nomura 2003: FDSP with Variable Perturbation]] — frequency-domain perturbation updating with error-scaled perturbation magnitude; keeps converging through secondary-path changes
 - [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — ESS-based offline estimate used in the training loss and as FiLM conditioning
+- [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006: Active Noise Control System for Headphone Applications]] — music-based offline identification of $S(z)$ for AFANC headphones; comparable accuracy to white noise/chirp without the annoyance
 

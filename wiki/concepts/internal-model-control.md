@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-04-26
+updated: 2026-10-31
 sources:
+  - raw/papers/kuo-2006-anc-headphones/full-text.txt
 tags:
 - active-noise-control
 - control-theory
@@ -71,3 +72,4 @@ The SimpAFB system eliminates the IMC's convolution step by using the error sign
 
 - [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Compares IMC-based system with the proposed simplified approach
 - [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]] — IMC-based fixed controller optimization with data-driven uncertainty models
+- [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006: Active Noise Control System for Headphone Applications]] — IMC-based adaptive feedback ANC headphone (TMS320C32): reference synthesized via $\hat{x}(n) = e(n) + \hat{s}(n)*y(n)$, 50+ dB cancellation up to 2 kHz

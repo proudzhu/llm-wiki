@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-10-22
+updated: 2026-10-31
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/zhang-2024-active-noise-control-soundfield-interpolation-pinn/full-text.md
@@ -14,6 +14,7 @@ sources:
   - raw/papers/rao-2026-keep-speech-anc/full-text.txt
   - raw/papers/maeda-1999-anc-simultaneous-perturbation/full-text.md
   - raw/papers/kajikawa-2003-fdsp-variable-perturbation/full-text.md
+  - raw/papers/kuo-2006-anc-headphones/full-text.txt
 aliases:
 - Active Noise Control
 tags:
@@ -146,6 +147,7 @@ Traditional ANC algorithms are limited by linear assumptions and cannot handle n
 - [[sources/cheng-2026-anc-gain-constraint|Cheng et al. 2026: Active Noise Control With a Gain Constraint for Micro-Loudspeakers]] — design-time frequency-response gain constraint on fixed control filters to prevent micro-loudspeaker mechanical over-excursion
 - [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — keep-speech ANC with a causal WaveNet on the reference path and a conventional RLS FIR controller; zero added delay, improves STOI/DNSMOS over all baselines on measured headphone IRs
 - [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — first working ANC on open-ear smart glasses without an in-ear error microphone; virtual in-ear sensing replaces the error sensor, 11.2 dB mean reduction (100–1000 Hz) with per-user secondary-path calibration
+- [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006: Active Noise Control System for Headphone Applications]] — classic real-time AFANC headphone (TMS320C32, FxLMS): error-mic placement to flatten $|S(z)|$ + music-based secondary-path identification; 50+ dB sinusoidal cancellation up to 2 kHz and 16–27 dB on engine harmonics, beating a Bose QC2
 
 ## Related Entities
 

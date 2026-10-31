@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-28
-updated: 2026-09-21
+updated: 2026-10-31
 tags:
   - researcher
   - active-noise-control
@@ -27,8 +27,10 @@ tags:
 - Co-authored Transformer-based End-to-End Control-Filter Generation (E2E-CFG) for ANC (arXiv 2026)
 - Co-authored "A Survey on Adaptive Active Noise Control Algorithms Overcoming the Output Saturation Effect" (Signal Processing 2024) — [[sources/guo-2024-anc-saturation-survey|Guo et al. 2024]] — organised saturation-mitigation ANC algorithms into output-constraint and nonlinear-adaptive families with computational complexity and stability comparison
 - Co-author of "Direction-Preserving Active Noise Control with a Conditional Control-Filter Estimation Network" (arXiv preprint 2609.07173 (eess.AS), 7 Sep 2026, 2026) — direction-conditioned FiLM control-filter estimation network for DP-ANC — [[sources/yang-2026-direction-preserving-anc|Yang, Luo, Wang, Zhang & Gan 2026]]
+- Co-author of "Active Noise Control System for Headphone Applications" (IEEE Transactions on Control Systems Technology, Vol. 14, No. 2, pp. 331–335, 2006) — designed and implemented the adaptive feedback ANC headphone with error-microphone placement optimization and music-based secondary-path identification — [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006]]
 
 
 ## Related Sources
 
 - [[sources/yang-2026-direction-preserving-anc|Yang, Luo, Wang, Zhang & Gan 2026: Direction-Preserving Active Noise Control with a Conditional Control-Filter Estimation Network]]
+- [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006: Active Noise Control System for Headphone Applications]]

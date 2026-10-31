@@ -1,12 +1,13 @@
 ---
 type: synthesis
 created: 2026-04-25
-updated: 2026-10-17
+updated: 2026-10-31
 sources:
   - zotero://select/items/0_QVJMFTWC
   - raw/papers/rout-2012-pso-anc-without-secondary-path/full-text.txt
   - raw/papers/maeda-1999-anc-simultaneous-perturbation/full-text.md
   - raw/papers/kajikawa-2003-fdsp-variable-perturbation/full-text.md
+  - raw/papers/kuo-2006-anc-headphones/full-text.txt
 tags:
   - anc
   - secondary-path
@@ -35,6 +36,8 @@ The simplest scheme: shut down ANC → inject white noise → LMS identification
 **Applicable to**: fixed installations (ducts, buildings) where $S(z)$ is quasi-static.
 
 Kuo (1999) gives the standard offline LMS identification procedure; once converged, $\hat{S}(z)$ is fixed. Benois (2020)'s FPGA prototype also uses offline pre-calibration, but notes that in earphone scenarios, $\hat{S}(z)$ deviation caused by fitting changes is the main performance bottleneck.
+
+**Route 1 also has an excitation-signal design problem**: white noise or chirp is audible and annoying during calibration. [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006]] resolve it on their AFANC headphone by identifying the 65-tap $\hat{S}(z)$ with **music** instead — spectrally dense frames of "O Fortuna" (near-flat 0–4 kHz; music pieces systematically trade frequency density against bandwidth) produce an estimate matching white-noise and chirp-identified models. This keeps Route 1's simplicity and accuracy while removing its "poor user experience" disadvantage, and the same idea generalizes to any wearable where the training signal is heard.
 
 ### Route 2: Additive-Noise Online Modeling
 
@@ -120,4 +123,5 @@ Kuo (1999)'s classic result: under slow-adaptation conditions, FXLMS can tolerat
 - [[concepts/conditional-reinitialized-pso|Conditional Reinitialized PSO]]
 - [[concepts/simultaneous-perturbation|Simultaneous Perturbation]] — the earliest Route 4 method (Maeda & Yoshida 1999)
 - [[synthesis/mpc-vs-fxlms-for-anc|MPC vs Traditional ANC]]
+- [[synthesis/anc-architecture-evolution|ANC Architecture Evolution]] — where the Kuo/Mitra/Gan AFANC headphone serves as the IMC hardware benchmark
 - [[queries/how-to-estimate-secondary-path|如何估计次级通道]]
