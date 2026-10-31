@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-10-24
+updated: 2026-10-31
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/rao-2026-keep-speech-anc/full-text.txt
@@ -9,6 +9,7 @@ sources:
   - raw/papers/zhang-2014-causality-feedforward-anc-headset/full-text.md
   - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
   - raw/papers/chiba-2027-wideband-anc-coaxial-loudspeaker/full-text.txt
+  - raw/papers/forster-2022-optimal-microphone-positioning/full-text.txt
 tags:
   - active-noise-control
   - control-theory
@@ -81,6 +82,10 @@ The reported results sidestep this because evaluation is offline simulation: the
 
 [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba et al. 2027]] refine the constraint in two ways for open-ear headphones. First, a **relaxed single-frequency boundary**: with excess delay $\Delta\tau(f) = \tau_S(f) - [\tau_P(f) - \tau_R(f)] > 0$, the optimal-amplitude residual is $\beta_{\min}(f) = 20\log_{10}|\sin(2\pi f \Delta\tau(f))|$, so *partial* positive noise reduction survives until the quarter-period margin $\Delta\tau_q(f) = 1/(4f)$ is exhausted — delaying reduction becomes progressively more critical with frequency, and the design goal becomes pushing the attenuation boundary upward rather than satisfying strict causality everywhere. Second, a **component decomposition** of the secondary-path delay as electronic + acoustic + mechanical. The underexplored mechanical term rises sharply near the driver's fundamental resonance (hundreds of Hz for compact drivers), consuming margin precisely in the control band — motivating their [[concepts/delay-oriented-driver-allocation|delay-oriented driver allocation]] between a [[concepts/coaxial-two-way-secondary-source|coaxial woofer/tweeter pair]], which acts on the *acoustic* side of the budget where most prior work targeted only the electronic side. Their delay sweep also shows a practical caveat: at added electronic delays ≥ ~190 µs, the mid-band (500 Hz–1 kHz) advantage largely collapses — allocation complements but cannot replace low-delay electronics.
 
+## Causality as a Placement Filter (Forster et al. 2022)
+
+Causality does not only constrain *when* the reference arrives relative to the disturbance — it also decides *which reference positions are worth having at all*. [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022]] compare, on a 12-candidate headphone prototype, the frequency-domain [[concepts/multiple-coherence-function|multiple coherence function]] (which bounds performance but ignores causality) against the time-domain Wiener [[concepts/mse-td-cost-function|MSE-TD CF]] (whose FIR filters are causal by construction). The two criteria agree on ipsilateral microphones (~9 dB additional active gain) but diverge on contralateral ones: the MCF still projects gains there, while the causal criterion shows the corresponding filters would have to be acausal to compensate the large group delay around the head — contralateral references contribute essentially nothing. Reference-microphone placement should therefore be validated with a causality-aware criterion (see [[concepts/reference-microphone-positioning|Reference Microphone Positioning]]).
+
 ## Solutions to Causality Violations
 
 1. **Wireless Reference ANC** (Shen 2023): Place reference microphones near noise sources and transmit wirelessly, providing "look-ahead" time
@@ -110,4 +115,5 @@ The reported results sidestep this because evaluation is offline simulation: the
 - [[sources/xiao-2023-spatially-selective-anc|Xiao, Xu & Zhao 2023: Spatially Selective Active Noise Control Systems]]
 - [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — zero-delay causal WaveNet on the reference path so the FIR controller's delay budget is preserved; DeepANC's frame-level CRN latency degrades it to near-unprocessed performance
 - [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba, Kamado, Kako & Noguchi 2027: Wideband ANC for Open-Ear Headphones with a Coaxial Loudspeaker]] — relaxed quarter-period causality boundary and an electronic/acoustic/mechanical secondary-path delay budget; solves the constraint from the loudspeaker-design side
+- [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022: Optimal Microphone Positioning for Multi-Channel Feedforward ANC Headphones]] — causality as a placement filter: contralateral references look useful to the MCF but are worthless under causal filters
 

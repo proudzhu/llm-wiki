@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-22
-updated: 2026-09-12
+updated: 2026-10-31
 sources:
   - zotero://select/items/0_GUY9IXKN (Kronecker Decomposition)
   - zotero://select/items/0_GLPRCTIK (Distributed ANC)
@@ -14,6 +14,7 @@ sources:
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
   - raw/papers/lu-2021-survey-active-noise-control-linear/full-text.md
   - raw/papers/wang-2024-computation-efficient-virtual-sensing/full-text.txt
+  - raw/papers/forster-2022-optimal-microphone-positioning/full-text.txt
 tags:
   - active-noise-control
   - multichannel-anc
@@ -48,6 +49,10 @@ The computational load in MC-ANC grows quadratically with the number of secondar
 
 ### 2.4 Reference Compression via Neural Projection (He 2026)
 Rather than optimizing the *controller* for many channels, [[concepts/condition-aware-projection-filtering|CAPF]] reduces the channel count itself: a neural front end generates block-wise FIR projection filters compressing 42 correlated references to 4 decorrelated projected references, shrinking the back-end adaptive controller and improving its conditioning (He et al. 2026, [[sources/he-2026-neural-projection-filter-anc|IEEE SPL 2026]]). On a measured 21 h in-vehicle road-noise dataset, CAPF-Newton reaches the offline-Wiener-level 8.52 dBA average attenuation at 374.0 MMAC/s — beating BCD-Newton by 1.19 dBA at 15% lower complexity, and the point-wise neural projection NRP-FxAP at a 48× complexity reduction. This complements Section 2.2's Kronecker/SVD decompositions: both reduce dimensionality, but the projection filters are *learned, condition-aware, and regenerable online* (every 8 STFT frames) rather than fixed linear transforms.
+
+### 2.5 Reference Selection vs. Reference Projection
+
+Compressing many references is not the only way to spend the reference budget — choosing *which physical microphones exist in the first place* is the upstream decision. [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022]] add a **placement/selection axis** to this design space: on a headphone with 12 candidate positions, a greedy search under the causality-aware path-based [[concepts/mse-td-cost-function|MSE-TD CF]] shows the six ipsilateral candidates carry essentially all the value (~9 dB over single-channel), while contralateral candidates — which the causality-blind [[concepts/multiple-coherence-function|multiple coherence function]] still credits — are worthless under causal filters. Where He 2026 *compresses* a given dense reference set learned online, Forster 2022 *curates* the physical array offline; both target the same back-end benefit (fewer, better-conditioned references), and both agree that raw channel count is the wrong objective (see [[concepts/reference-microphone-positioning|Reference Microphone Positioning]]).
 
 ---
 
@@ -86,6 +91,7 @@ The efficiency framing applies to the mitigation mechanism itself. Per-path feed
 | **Adjoint LMS** | Gradient Optimization | High-channel-count (Road Noise) | Optimized $O(L)$ |
 | **Neural reference projection** (He 2026) | Learned condition-aware FIR projection of references (42→4) | Correlated multi-reference road noise | 374.0 MMAC/s |
 | **Feedback-aware front end** (Zhang 2026) | Covariance-subtracted Relative Transfer Matrix subtracts loudspeaker leakage from the reference before FxLMS | Feedback-limited MIMO arrays | One $J_{\mathrm{R}} \times J_{\mathrm{F}}$ matrix, identified once |
+| **Greedy causal placement** (Forster 2022) | Offline selection of physical reference positions under a time-domain Wiener criterion with causality | Multi-mic wearable arrays (headphones) | $J - p$ evaluations per greedy step |
 
 ---
 
@@ -115,4 +121,5 @@ The efficiency framing applies to the mitigation mechanism itself. Per-path feed
 - [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]] — the acoustic-feedback axis of Section 4
 - [[sources/lu-2021-survey-active-noise-control-linear|Lu Lu, Kai-Li Yin, Rodrigo C. de Lamare, Zongsheng Zheng, Yi Yu, Xiaomin Yang & Badong Chen 2021: A Survey on Active Noise Control Techniques — Part I: Linear Systems]]
 - [[sources/wang-2024-computation-efficient-virtual-sensing|Wang, Ji, Shen, Shi & Gan 2024: Computation-Efficient Virtual Sensing with MCALMS]]
+- [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022: Optimal Microphone Positioning for Multi-Channel Feedforward ANC Headphones]] — the selection axis of Section 2.5: curating the physical reference array offline instead of compressing it online
 

@@ -696,6 +696,7 @@
 | [[entities/vincent-dumoulin\|Vincent Dumoulin]] | Co-author of FiLM (AAAI 2018); Conditional Instance Norm for artistic style is among the methods FiLM generalizes | 2026-10-26 |
 | [[entities/aaron-courville\|Aaron Courville]] | Co-author of FiLM (AAAI 2018); MILA deep-learning researcher | 2026-10-26 |
 | [[entities/min-sang-baek\|Min-Sang Baek]] | Hanyang University researcher; first author of GI-DOAEnet, Microphone Positional Encoding (MPE), and Complexity Gradual Training (CGT) | 2026-10-27 |
+| [[entities/jonas-forster\|Jonas Forster]] | RWTH Aachen — multi-channel feedforward ANC for headphones, reference microphone positioning (DAGA 2022) | 2026-10-31 |
 
 ---
 
@@ -1325,6 +1326,9 @@
 | [[concepts/multi-stage-geometry-learning\|Multi-Stage Geometry Learning (MSGL)]] | Three-stage array curriculum — fixed array, dynamic positions, dynamic 4–12 channels — that makes geometry-invariant DOA training converge | 2026-10-27 |
 | [[concepts/deeply-supervised-curriculum-learning\|Deeply Supervised Curriculum Learning (DSCL)]] | Supervises every DOA output head with a soft spatial-spectrum label whose beamwidth anneals from wide to narrow over training | 2026-10-27 |
 | [[concepts/channel-wise-softmax-aggregation\|Channel-Wise Softmax Aggregation (CWSA)]] | Permutation-invariant channel collapse via channel-wise Softmax plus sum and standard deviation; keeps FLOPS linear in the microphone count | 2026-10-27 |
+| [[concepts/mse-td-cost-function\|MSE-TD Cost Function]] | Causality-aware path-based time-domain Wiener criterion for multi-channel feedforward ANC; replaces the causality-blind MCF for reference-microphone positioning | 2026-10-31 |
+| [[concepts/multiple-coherence-function\|Multiple Coherence Function (MCF)]] | Multi-reference generalization of coherence bounding feedforward ANC attenuation at -10log10(1-η²); ignores causality, overestimating contralateral reference value | 2026-10-31 |
+| [[concepts/reference-microphone-positioning\|Reference Microphone Positioning]] | Where/how many external reference microphones to place on feedforward ANC devices; ipsilateral distribution pays (~9 dB), contralateral positions are causality-blocked | 2026-10-31 |
 
 ---
 
@@ -1614,6 +1618,7 @@
 | [[sources/huang-2026-undf-configurable-directivity\|Huang, Chetupalli & Habets 2026]] | This paper proposes UNDF — neural directional filtering with user-defined directivity patterns — enabling spatial filtering with directivity patterns that users can configure during inference, rather than one fixed pattern per trained model (NDF) or a fixed pattern shape that can only be steered (SNDF). | 2026-10-26 |
 | [[sources/perez-2018-film-visual-reasoning\|Perez et al. 2018: FiLM: Visual Reasoning with a General Conditioning Layer]] | Origin of Feature-wise Linear Modulation (FiLM): γF+β conditioning halves CLEVR visual-reasoning SOTA error (97.7%); ablations decouple FiLM from normalization and show γ dominates β | 2026-10-26 |
 | [[sources/baek-2025-geometry-invariant-doa-estimation\|Baek, Chang & Cohen 2025]] | This paper proposes GI-DOAEnet, a geometry-invariant DNN for azimuth DOA estimation that works on arbitrary microphone arrays without retraining. | 2026-10-27 |
+| [[sources/forster-2022-optimal-microphone-positioning\|Forster, Fabry & Jax 2022]] | Causality-aware MSE time-domain cost function (vs. causality-blind multiple coherence) for reference-mic positioning; 12-mic Bose QC25 study: ~9 dB extra active gain from ipsilateral placement, contralateral mics causality-blocked | 2026-10-31 |
 
 ---
 
@@ -1672,10 +1677,10 @@
 
 ## Statistics
 
-- **Total pages**: 1621
-- **Entities**: 686
-- **Concepts**: 620
-- **Sources**: 280
+- **Total pages**: 1626
+- **Entities**: 687
+- **Concepts**: 623
+- **Sources**: 281
 - **Synthesis**: 25
 - **Queries**: 10
-- **Last updated**: 2026-10-27
+- **Last updated**: 2026-10-31

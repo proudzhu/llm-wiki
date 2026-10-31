@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-04-26
-updated: 2026-10-19
+updated: 2026-10-31
 tags:
   - researcher
   - active-noise-control
@@ -21,12 +21,14 @@ tags:
 - Co-author on the multi-disk uncertainty model (IWAENC 2022) and the extended journal version (JAES 2024)
 - Co-author on DOA dependency investigation of ANC headphones, showing feedforward ANC is DOA-dependent while feedback ANC is not (INTERNOISE 2018)
 - Co-author of "A Psychoacoustic Approach to Combined Acoustic Echo Cancellation and Noise Reduction" (IEEE Transactions on Speech and Audio Processing, vol. 10, no. 5, pp. 245–256, 2002) — joint residual echo and noise reduction via a psychoacoustically motivated postfilter weighting rule — [[sources/gustafsson-2002-psychoacoustic-aec-nr|Gustafsson, Martin, Jax & Vary 2002]]
+- Co-author of "Optimal Microphone Positioning for Multi-Channel Feedforward ANC Headphones" (DAGA 2022) — causality-aware MSE-TD cost function and greedy reference-microphone selection for multi-channel feedforward ANC headphones — [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022]]
 
 ## Related Sources
 
 - [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
 - [[sources/gustafsson-2002-psychoacoustic-aec-nr|Gustafsson, Martin, Jax & Vary 2002: A Psychoacoustic Approach to Combined Acoustic Echo Cancellation and Noise Reduction]]
+- [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022: Optimal Microphone Positioning for Multi-Channel Feedforward ANC Headphones]]
 
 ## Related Concepts
 

@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-10-22
+updated: 2026-10-31
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/he-2026-neural-projection-filter-anc/full-text.md
@@ -10,6 +10,7 @@ sources:
   - raw/papers/wang-2024-computation-efficient-virtual-sensing/full-text.txt
   - raw/papers/wang-2026-directional-sfanc-reverberant/full-text.md
   - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
+  - raw/papers/forster-2022-optimal-microphone-positioning/full-text.txt
 tags:
 - active-noise-control
 - dsp
@@ -35,6 +36,7 @@ Single-channel ANC works well at a single point but cannot provide adequate nois
 ### Multiple Reference Inputs (MRI)
 - Multiple reference sensors, single secondary source, single error sensor
 - Example: multiple microphones placed upstream in a duct
+- Wearable-scale example: 12 reference candidates on a modified Bose QC25 evaluated by greedy selection under a causality-aware time-domain cost function — ~9 dB additional active gain from ipsilateral positions, none from contralateral ones ([[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022]]; see [[concepts/reference-microphone-positioning|Reference Microphone Positioning]])
 
 ### Multiple-Channel Feedforward (MIMO)
 - Multiple reference sensors → multiple secondary sources → multiple error sensors
@@ -116,4 +118,5 @@ In the PINN-assisted ANC system ([[sources/zhang-2024-active-noise-control-sound
 - [[sources/wang-2024-computation-efficient-virtual-sensing|Wang, Ji, Shen, Shi & Gan 2024: Computation-Efficient Virtual Sensing with MCALMS]]
 - [[sources/wang-2026-directional-sfanc-reverberant|Wang, Luo, Li, Shi, Ji, Yang & Gan 2026: Directional Selective Fixed-Filter ANC Based on CNN in Reverberant Environments]]
 - [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — 8-reference MISO feedforward ANC with a virtual (network-estimated) error point at the ear
+- [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022: Optimal Microphone Positioning for Multi-Channel Feedforward ANC Headphones]] — MISO reference-selection study on a 12-microphone headphone prototype
 

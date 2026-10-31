@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-05
-updated: 2026-09-27
+updated: 2026-10-31
 sources:
   - wiki/sources/liebich-2018-doa-dependency-anc-headphones.md
   - raw/papers/veluri-2023-semantic-hearing/full-text.md
@@ -20,7 +20,11 @@ tags:
 
 DHRTFs measure the acoustic transfer paths between the microphones embedded in a hearing device (e.g., the outer and inner microphones of an ANC headphone) as a function of sound direction. The key transfer function is the **primary path** $P(z)$, which describes the transmission from the outer (ambient-facing) microphone to the inner (eardrum-facing) microphone.
 
-## Measurement
+## Measurement (Forster et al. 2022 — DRIR variant)
+
+The same measurement philosophy extends to multi-microphone devices: [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022]] measure **device-related impulse responses (DRIRs)** — external-source-to-each-reference-microphone paths $Q_{\mathrm{ext},j}(\theta)$ and the source-to-error-mic path $Q_{\mathrm{int}}(\theta)$ — on a Bose QC25 carrying 10 extra MEMS microphones, using a HEAD acoustics HMS II.3 on a turntable with a single Neumann KH120A at 2 m playing exponential sweeps, 5° azimuth resolution, identified by spectral division. These per-DoA paths feed their path-based positioning cost function ([[concepts/mse-td-cost-function|MSE-TD CF]]) — diffuse-field performance is *simulated* from the DRIRs rather than measured acoustically. See [[concepts/reference-microphone-positioning|Reference Microphone Positioning]].
+
+## Measurement (Liebich et al. 2018)
 
 Liebich et al. (2018) measured DHRTFs using:
 - **Head Acoustics HMS II.3** dummyhead with ear simulator
@@ -61,3 +65,4 @@ Whereas DHRTF captures the device's transfer paths for ANC design, hearable appl
 
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
 - [[sources/veluri-2023-semantic-hearing|Veluri et al. 2023: Semantic Hearing]] — cross-user HRTF generalization for hearable binaural synthesis via CIPIC + BRIR training data
+- [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022: Optimal Microphone Positioning for Multi-Channel Feedforward ANC Headphones]] — per-DoA DRIR measurements on a 12-microphone headphone as the input to simulated diffuse-field evaluation

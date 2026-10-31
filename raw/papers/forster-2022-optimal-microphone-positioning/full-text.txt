@@ -1,0 +1,489 @@
+Presented at the 48th German Annual Conference on Acoustics (DAGA), 21. – 24. March 2022, Stuttgart, Germany. 1 / 4
+Optimal Microphone Positioning for Multi-Channel Feedforward ANC Headphones
+Jonas F¨ orster1, Johannes Fabry 2, Peter Jax 3
+1,3 R WTH Aachen University, Institute of Communication Systems, Germany, Email: {foerster,jax}@iks.rwth-aachen.de
+2 Elevear GmbH, Germany, Email: fabry@elevear-tech.com
+Introduction
+As more and more people live in urban areas, constant ex-
+posure to noise becomes an ever-growing problem. Typ-
+ical scenarios where people face noise pollution are, e.g.,
+means of transport, construction or industrial noise [1].
+In recent years, active noise cancellation (ANC) head-
+phones have become increasingly popular since they can
+eﬀectively attenuate unwanted noise over a broad fre-
+quency range. They typically comprise an internal er-
+ror microphone and an external reference microphone.
+The use of multiple external reference microphones in
+the feedforward ﬁlter structure promises an increase of
+active attenuation by exploiting the spatial properties of
+the incoming noise.
+However, when equipping a headphone with multiple ref-
+erence microphones, their positioning plays a crucial role.
+The positioning of the internal error microphone is well
+studied [2], but literature on reference microphone posi-
+tioning is sparse. Meng et al.[3] have analyzed three po-
+sitions of reference microphones in a single-channel feed-
+forward ANC system and related the results to particle-
+velocity measurements on the shell of an ANC head-
+phone. Alternative algorithms for microphone position
+selection are based on the multiple coherence function
+(MCF), which deﬁnes the theoretical upper bound of
+achievable performance [4], and have been proposed in
+patents [5, 6]. The MCF is derived in frequency domain
+and does therefore not account for system causality, an
+essential requirement for practical use.
+We propose the use of a multi-channel mean square error-
+based time-domain cost function (CF) (MSE-TD CF) for
+an approximated diﬀuse sound ﬁeld resulting in a multi-
+channel Wiener ﬁlter. In contrast to the MCF, the re-
+sulting FIR ﬁlter coeﬃcients are causal. In order to an-
+alyze a large number of possible microphone positions,
+we equip a commercially available ANC headphone with
+10 additional micro-electro-mechanical system (MEMS)
+microphones. Based on that, we compare the increase
+in performance due to these microphones in a simulated,
+approximated diﬀuse sound ﬁeld. As evaluation criteria
+(ECs) we use our proposed CF and the MCF based on
+path measurements in our audio lab.
+System Model
+Figure 1 illustrates the time-discrete system model
+for a multiple-input single-output (MISO) feedforward
+ANC headphone, which uses the reference microphones
+j∈J ={1, 2,...,J} for ﬁltering. We denote acoustic
+paths with (·)a.
+The external noise source, placed at azimuth angle θ,
+emits the signal Xsrc(z). This signal is transferred over
+the corresponding acoustic paths Qext,a,j (z,θ ) to gener-
+...
+...
+Figure 1: Top view of a measurement setup for multi-
+microphone feedforward ANC systems.
+ate the signals Uj(z,θ ) at the reference microphones and
+byQint,a(z,θ ) to generate the signal D(z,θ ) at the error
+microphone, respectively. The acoustic secondary path
+Sa(z) deﬁnes the path from the headphone speaker to
+the error microphone.
+The transfer functions Qext,j (z,θ ), Qint(z,θ ) and S(z)
+include the corresponding acoustic paths as well as the
+characteristics of the microphones, the loudspeaker, the
+analog-to-digital converters and digital-to-analog con-
+verters respectively, as seen from the digital signal pro-
+cessor (DSP) [7]. In the following we will only consider
+the left headphone without loss of generality and drop the
+z dependency for convenience. We denote all frequency-
+domain quantities in upper-case and time-domain quan-
+tities in lower-case letters.
+The feedforward ANC system aims to minimize the error
+signal, given by
+E(θ) =Xsrc
+
+Qint(θ)−
+∑
+j∈J
+Qext,j (θ)SWj(θ)
+
+, (1)
+whereWj(θ),j ∈J deﬁnes the optimal, possibly acausal,
+directional feedforward ﬁlter. This ﬁlter therefore creates
+an anti-phase estimate ofD(θ) taking the secondary path
+S into account.
+In real-world applications both S and Qint additionally
+depend on the ﬁt of the headphone [8, 9]. Nevertheless,
+we limit our signal model to mainly depend on the di-
+rection of arrival (DoA) in order to keep the focus on
+exploiting the spatial characteristics of the sound ﬁeld.
+We can determine the maximum achievable performance
+
+Presented at the 48th German Annual Conference on Acoustics (DAGA), 21. – 24. March 2022, Stuttgart, Germany. 2 / 4
+of the linear multi-channel feedforward system by the
+quotient of the power spectral density (PSD) at the er-
+ror microphone for the ﬁltered case Φ ee and the PSD at
+the error microphone without ﬁltering Φ dd
+Φee
+Φdd
+= 1− ΦH
+udΦ−1
+uuΦud
+Φdd
+= 1−η2
+ud, (2)
+where Φuu∈ RJ×J denotes the matrix of cross-PSDs
+(CPSDs) between all reference microphones,Φud∈ RJ×1
+the vector of CPSDs between each reference microphone
+and the error microphone and η2
+ud the MCF [4].
+In order to optimize the MCF and hence the maximum
+achievable performance, any additional reference mi-
+crophone should be correlated as little as possible with
+all previous reference microphones of the system but
+at the same time as much as possible with the error
+microphone [10].
+Filter Design for Diﬀuse Noise
+We now consider the general case of multiple noise
+sources placed in a horizontal ring conﬁguration around
+the headphone. Each of the M noise sources emits a
+signal xsrc,m(n), which results in the microphone signals
+uj(n) =
+M∑
+m=1
+qext,j (n,θm)∗xsrc,m(n), (3a)
+d(n) =
+M∑
+m=1
+qint(n,θm)∗xsrc,m(n), (3b)
+where ∗ denotes the convolution operator. We
+subsequently deﬁne the ﬁltered reference signal as
+rj(n) =uj(n)∗s(n) and write the signal at the error mi-
+crophone in vector notation as
+e = d−
+∑
+j∈J
+rj ˜wj∈ RLwr, (4)
+where we deﬁne ˜wj∈ RLw as the time-invariant MISO
+feedforward ﬁlter and L wr = Lw + Lr− 1. We assume
+that enough samples are available, s.t.xsrc,m(n) contains
+the statistical properties of white noise. We now express
+the ﬁltered reference signal as convolution matrix
+rj =
+
+
+rj(0) ... rj(Lr− 1) ... 0
+... ... ... ... ...
+0 ... r j(0) ... rj(Lr− 1)
+
+
+T
+∈ RLwr×Lw,
+and formulate the corresponding CF as
+C =
+‖‖‖‖‖‖
+d−
+∑
+j∈J
+rj ˜wj
+‖‖‖‖‖‖
+2
+. (5)
+Minimizing (5) with respect to ˜wj results in the recursive
+formulation of the feedforward ﬁlter for channel j
+˜wj =
+(
+rT
+j rj
+)−1
+
+rT
+j d− rT
+j
+∑
+ν∈J\j
+rν ˜wν
+
+, (6)
+aSince correlation is, strictly speaking, only deﬁned in the con-
+text of statistical signal processing, we use the term impulse corre-
+lation ϕE
+(·) for the correlation between impulse responses. [11]
+L6
+L3
+R1
+Figure 2: Modiﬁed Bose QC25 headphone with additional
+microphone positions L1-L5 and R1-R5.
+which can be solved, e.g., by an extended version of the
+Gauss-Jordan recursion.
+Let’s now have a closer look at the the correlation ma-
+trices ˜Ψrjrν = rT
+j rν whose entries are
+˜Ψrjrν =
+
+
+ϕrjrν(0) ... ϕrjrν(Lw− 1)
+... ... ...
+ϕrjrν(1− Lw) ... ϕ rjrν(0)
+
+∈ RLw×Lw.
+Thereby,ϕrjrν(λ) denotes the discrete cross-correlation
+between rj and rν at lag λ. We take a further look at
+every entry
+ϕrjrν(λ) =
+( M∑
+m=1
+xsrc,m(λ)∗ ˜sj(λ,θm)
+)
+⋆
+( M∑
+m=1
+xsrc,m(λ)∗ ˜sν(λ,θm)
+)
+, (7)
+with ⋆ denoting the correlation operator and
+˜sj(n,θm) =qext,j (n,θm)∗s(n) denoting the modi-
+ﬁed secondary path. We now approximate a diﬀuse
+sound ﬁeld by letting the noise sources be emitting
+mutually uncorrelated white Gaussian noise (WGN).
+Then, the term changes to
+ϕrjrν(λ) =
+M∑
+m=1
+ϕE
+˜sj ˜sν(λ). (8)
+Thus, for a diﬀuse sound ﬁeld only the impulse corre-
+lationa between the modiﬁed secondary paths is present.
+This holds in a similar way also for the correlation vector
+ϕrjd = rT
+j d, which leads to the path-based MSE-TD CF
+C =
+M∑
+m=1
+‖‖‖‖‖‖
+qint(θm)−
+∑
+j∈J
+˜sj(θm) ˜wj
+‖‖‖‖‖‖
+2
+. (9)
+This is a similar formulation as in [12], although it is
+derived in time domain here. The advantage of this
+formulation compared to (5) is that instead of having
+to measure the microphone signals in a diﬀuse sound
+ﬁeld, it is suﬃcient to measure the individual paths for
+a suﬃciently large number of DoAs in an audio lab or
+(semi-)anechoic chamber.
+Optimal Microphone Positions
+In order to evaluate the increase of ANC performance due
+to additional reference microphones we need the device-
+related impulse responses (DRIRs) or microphone sig-
+nals of a multi-microphone headphone. For this purpose,
+
+Presented at the 48th German Annual Conference on Acoustics (DAGA), 21. – 24. March 2022, Stuttgart, Germany. 3 / 4
+j,p = 1
+P = ∅
+Inputs:
+P,J
+returnP p≤P p =p + 1
+j = 1
+C(L =P∪J j)
+l = argmax(C(L))
+P =P∪ l
+J =J\ l
+j =j + 1 j≤ size(J )
+No
+Yes
+Yes No
+Figure 3: Greedy algorithm for the evaluation of the micro-
+phone positions.
+we equipped a Bose QC25 ANC headphone with 10 ad-
+ditional digital MEMS microphones on its outer shell.
+The microphone positions can be obtained from Figure 2,
+where the added MEMS microphones are labeled by the
+indices 1-5 and the built-in microphones are labeled with
+index 0. As electronic back end for the measurements we
+constructed a measurement and evaluation board con-
+sisting of two ADAU 1787 DSPs and a USB sound card,
+which is connected to each DSP via time-division multi-
+plexing.
+The measurements of the DRIRs were conducted in our
+audio lab, which follows the ITU-R BS.1116-2 recom-
+mendation [13]. The modiﬁed headphone was put on
+a HEAD acoustics HMS II.3 artiﬁcial head, which was
+mounted on a turntable, in two meters distance from a
+Neumann KH120A loudspeaker playing back exponential
+sweeps. We subsequently identiﬁed the secondary path
+S once, as well as the DRIRs Qint(θ) andQext,j (θ) of the
+headphone for all microphones in 5 ◦ azimuth resolution
+by spectral division based on their deﬁnition in (1).
+Algorithm Design
+A brute-force algorithm would require Obf(p) =
+(p
+J
+)
+cal-
+culations of the EC for a p-channel feedforward ﬁlter
+given J reference microphones. To reduce the number
+of calculations, we developed the greedy algorithm out-
+lined in Figure 3.
+This algorithm is initialized by the set of all available
+reference microphones J and the maximum number of
+microphones P of the resulting MISO feedforward ﬁlter.
+Subsequently, it picks the best performing microphone
+from the setJ in step p, removes it fromJ and puts it
+into set P. This is repeated until P contains P micro-
+phones. Instead of comparing all Obf(p) combinations in
+each step, only Ogreedy(p) =J−p combinations have to
+be compared by this algorithm.
+Figure 4 shows the number of evaluations for both al-
+gorithms for the given conﬁguration with J = 12 and
+P = 12. The greedy algorithm can drastically reduce
+2 4 6 8 10 120
+500
+1 000
+No. of Microphones
+No. of Evaluations
+Greedy
+Brute-Force
+Figure 4: Complexity of the greedy and the brute-force al-
+gorithms for P = 12 and J = 12.
+2 4 6 8 10 12−20
+−15
+−10
+−5
+0
+No. of Microphones
+Active Gain g [dB] MSE-TD CF
+MCF
+Figure 5: Active gain in the frequency range from 50 to
+4500 Hz, comparing the MCF and the MSE-TD CF as ECs.
+the number of necessary evaluations, which is especially
+useful for computational costly ECs. However, it is not
+optimal, i.e., the chain of microphones, which perform
+best, can diﬀer from the resulting chain obtained by the
+greedy algorithm. In our investigations, this diﬀerence
+was less than 1 dB in terms of (10).
+Simulation Results
+We now use the greedy algorithm from Figure 3 to evalu-
+ate the increase in performance for an increasing number
+of reference microphones P . As ECs, (2) and (9) were
+compared based on the one-third octave-band-smoothed
+active gain
+g = 10 log10
+(
+1
+K
+K∑
+κ=1
+(E(κ)
+D(κ)
+)2)
+dB (10)
+whereκ is the index deﬁning the corresponding one-third
+octave band. We only considered the one-third octave
+bands in the frequency range from 50 to 4500 Hz and used
+spatially uncorrelated WGN as source signals xsrc,m(n).
+For the calculation of the MCF, we used Welch’s method
+to compute the CPSDs and PSDs with a 8192 samples
+wide Hann window and an overlap width of 4096 sam-
+ples. The ﬁlter length for the MSE-TD CF was set to
+Lw = 1024 samples.
+Figure 5 shows the resulting active gains for 1 up to all
+12 available microphones. As shown by the results in
+Table 1, the microphone L2 is selected as the ﬁrst mi-
+crophone, as it has the strongest correlation to the er-
+ror microphone. The nearly similar active gain between
+both ECs indicates that the one-channel performance is
+mainly limited by the correlation instead of the causality
+constraint. For both ECs, the highest increase of perfor-
+mance by roughly 9 dB is due to the ipsilateral reference
+microphones compared to a conventional single-channel
+
+Presented at the 48th German Annual Conference on Acoustics (DAGA), 21. – 24. March 2022, Stuttgart, Germany. 4 / 4
+Order MSE-TD CF MCF
+1 L2 L2
+2 L3 L3
+3 L1 L1
+4 L0 L0
+5 L5 L5
+6 L4 L4
+7 R4 R3
+8 R1 R5
+9 R5 R4
+10 R0 R1
+11 R2 R2
+12 R3 R0
+T able 1: Order of the microphones chosen by the greedy
+algorithm for both ECs.
+system. It also appears that the performance estimate of
+the MCF diverges from that of the MSE-TD CF for the
+contralateral microphones. This can be explained by the
+fact that in the diﬀuse sound ﬁeld scenario the contralat-
+eral microphone signals are less correlated to the previous
+microphones simultaneously being also less correlated to
+the ipsilateral error microphone. As a result, the per-
+formance still increases even if the increase is smaller
+than for the ipsilateral microphones. Nevertheless, these
+contralateral ﬁlters would be required to be acausal to
+signiﬁcantly contribute to the performance. Therefore,
+the performance does not increase further when using
+the causality-constrained MSE-TD CF.
+As an interesting side note it appears that starting
+from microphone L2, the most distant microphone is
+consistently chosen from the remaining microphones by
+the MSE-TD CF. This can also be explained by the
+smaller cross-correlation to the previous microphone sig-
+nals while having strong correlation to the error micro-
+phone, which is in good agreement with the theoretical
+characteristics of a diﬀuse sound ﬁeld. Nevertheless, this
+trend is interrupted by the built-in microphone L0, which
+could be explained by its diﬀerent microphone character-
+istics.
+Conclusion
+In this work, we analyzed the optimal microphone po-
+sitions of a MISO ANC headphone prototype. We pre-
+sented a directional multi-channel ﬁlter design for feed-
+forward ANC and adapted this design to deduce a simu-
+lated, approximated diﬀuse sound ﬁeld consisting of mul-
+tiple mutually uncorrelated noise sources in a horizontal
+ring conﬁguration. In order to evaluate the potential
+increase of the ANC performance due to additional mi-
+crophones we equipped a commercially available head-
+phone with 10 additional MEMS microphones and com-
+pared the performance with the estimate by the MCF.
+The evaluation indicates that for the simulated scenario
+the active gain can be decreased by up to 9 dB when us-
+ing all ipsilateral microphones compared to using only
+one microphone. Contralateral microphones don’t sig-
+niﬁcantly contribute to the performance as they would
+require acausal ﬁlters to compensate for the large group
+delay.
+References
+[1] M. Basner et al., “Auditory and non-auditory eﬀects
+of noise on health,” The Lancet, vol. 383, no. 9925,
+pp. 1325–1332, Apr. 2014.
+[2] S. Kuo, S. Mitra, and Woon-Seng Gan, “Active
+noise control system for headphone applications,”
+IEEE Transactions on Control Systems Technology ,
+vol. 14, no. 2, pp. 331–335, Mar. 2006.
+[3] F. Meng, B. Arnhem, A. Yu, D. Plaza, and S. Road,
+“Sound leakage investigation of ANC headphones
+using particle velocity sensors,” Proceedings of In-
+ternational Congress and Exposition on Noise Con-
+trol Engineering, vol. 261, pp. 698–708, Oct. 2020.
+[4] P. Nelson and S. Elliott, Active Control of Sound .
+Elsevier Science, 1992, no. 3.
+[5] O. M. Nielsen, “Placement of Multiple Feedforward
+Microphones in an Active Noise Reduction (ANR)
+System,” U.S. Patent US010 665 220B1, May, 2020.
+[6] T. M. Jensen, S. Francisco, V. Bajic, and A. P.
+Bright, “Active Noise Cancellation Using Multiple
+Reference Microphone Signals,” U.S. Patent OO933
+0652(B2), May, 2016.
+[7] S. Liebich, J. Fabry, P. Jax, and P. Vary, “Acoustic
+Path Database for ANC In-Ear Headphone Devel-
+opment,” in Proceedings of the 23rd International
+Congress on Acoustics (ICA) , Aachen, Germany,
+Sep. 2019, pp. 4326–4333.
+[8] M. Guldenschuh, “New Approaches for Active Noise
+Control Headphones,” Dissertation, Institute of
+Electronic Music and Acoustics, University of Music
+and Performing Arts Graz, Graz, Jun. 2014.
+[9] S. Liebich, J. Fabry, P. Jax, and P. Vary, “Signal
+Processing Challenges for Active Noise Cancellation
+Headphones,” in ITG Conference on Speech Com-
+munication, 2018, pp. 1–5.
+[10] J. S. Bendat and A. G. Piersol, Random data: anal-
+ysis and measurement procedures, 4th ed., ser. Wiley
+series in probability and statistics. Hoboken, N.J:
+Wiley, 2010.
+[11] J.-R. Ohm and H. D. L¨ uke, Signal¨ ubertragung,
+12th ed., ser. Springer-Lehrbuch. Springer-Verlag
+Berlin Heidelberg, 2014.
+[12] S. J. Elliott and J. Cheer, “Modeling local active
+sound control with remote sensors in spatially ran-
+dom pressure ﬁelds,” The Journal of the Acoustical
+Society of America , vol. 137, no. 4, pp. 1936–1946,
+Apr. 2015.
+[13] “Methods for the subjective assessment of small im-
+pairments in audio systems including multichannel
+sound systems,” International Telecommunication
+Union, Geneva, CH, Standard ITU-R BS.1116-2,
+2014.

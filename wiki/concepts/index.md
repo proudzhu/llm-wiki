@@ -624,4 +624,7 @@
 | [[concepts/multi-stage-geometry-learning\|Multi-Stage Geometry Learning (MSGL)]] | Three-stage array curriculum — fixed array, dynamic positions, dynamic 4–12 channels — that makes geometry-invariant DOA training converge | 2026-10-27 |
 | [[concepts/deeply-supervised-curriculum-learning\|Deeply Supervised Curriculum Learning (DSCL)]] | Supervises every DOA output head with a soft spatial-spectrum label whose beamwidth anneals from wide to narrow over training | 2026-10-27 |
 | [[concepts/channel-wise-softmax-aggregation\|Channel-Wise Softmax Aggregation (CWSA)]] | Permutation-invariant channel collapse via channel-wise Softmax plus sum and standard deviation; keeps FLOPS linear in the microphone count | 2026-10-27 |
+| [[concepts/mse-td-cost-function\|MSE-TD Cost Function]] | Causality-aware path-based time-domain Wiener criterion for multi-channel feedforward ANC; replaces the causality-blind MCF for reference-microphone positioning | 2026-10-31 |
+| [[concepts/multiple-coherence-function\|Multiple Coherence Function (MCF)]] | Multi-reference generalization of coherence bounding feedforward ANC attenuation at -10log10(1-η²); ignores causality, overestimating contralateral reference value | 2026-10-31 |
+| [[concepts/reference-microphone-positioning\|Reference Microphone Positioning]] | Where/how many external reference microphones to place on feedforward ANC devices; ipsilateral distribution pays (~9 dB), contralateral positions are causality-blocked | 2026-10-31 |
 

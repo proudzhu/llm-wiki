@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-04-10
-updated: 2026-10-24
+updated: 2026-10-31
 sources:
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
   - raw/papers/chiba-2027-wideband-anc-coaxial-loudspeaker/full-text.txt
+  - raw/papers/forster-2022-optimal-microphone-positioning/full-text.txt
 tags:
 - active-noise-control
 - broad-band
@@ -60,6 +61,8 @@ NR_max(f) = -10·log₁₀[1 - γ²_xd(f)]
 
 High coherence at frequencies with significant disturbance energy is essential.
 
+The multi-reference generalization is the [[concepts/multiple-coherence-function|Multiple Coherence Function (MCF)]]: the fraction of disturbance power linearly explainable by all $J$ references, bounding attenuation at $-10\log_{10}(1-\eta_{ud}^2)$. [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022]] note that this bound ignores causality — on their 12-microphone headphone it credits contralateral references that causal filters cannot actually exploit (see [[concepts/reference-microphone-positioning|Reference Microphone Positioning]]).
+
 ## Feedback Problem
 
 The anti-noise radiates **upstream** to the reference microphone, corrupting the reference signal. Solutions include [[acoustic-feedback|Acoustic Feedback]] neutralization, adaptive IIR filters, or using a sufficiently high-order FIR filter.
@@ -75,12 +78,14 @@ For open-ear headphones — where passive attenuation does not relax the require
 - [[narrow-band-feedforward-anc|Narrow-Band Feedforward ANC]]
 - [[acoustic-feedback|Acoustic Feedback]]
 - [[multi-channel-anc|Multi-Channel ANC]]
+- [[concepts/multiple-coherence-function|Multiple Coherence Function (MCF)]]
 
 ## Related Sources
 
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section II: Broad-Band Feedforward ANC, FXLMS derivation
 - [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]]
 - [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba, Kamado, Kako & Noguchi 2027: Wideband ANC for Open-Ear Headphones with a Coaxial Loudspeaker]] — broadband feedforward reach as a secondary-path delay budget; driver-band allocation on a 2-way coaxial secondary source
+- [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022: Optimal Microphone Positioning for Multi-Channel Feedforward ANC Headphones]] — multi-reference coherence bound meets causality: MCF vs. MSE-TD CF as placement criteria
 
 ## Related Entities
 

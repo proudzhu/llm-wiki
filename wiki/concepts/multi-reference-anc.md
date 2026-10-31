@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-09-05
-updated: 2026-10-24
+updated: 2026-10-31
 sources:
   - raw/papers/he-2026-neural-projection-filter-anc/full-text.md
   - raw/papers/chiba-2027-wideband-anc-coaxial-loudspeaker/full-text.txt
+  - raw/papers/forster-2022-optimal-microphone-positioning/full-text.txt
 tags:
   - active-noise-control
   - multi-channel
@@ -43,6 +44,8 @@ Fixed linear preconditioning captures only simple correlation structures, while 
 
 A wearable-scale instance appears in open-ear headphone ANC: [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba et al. 2027]] use $R = 3$ reference microphones per ear distributed around the housing (front/side/rear) to capture noise from different directions, with reference-specific normalization in the FxNLMS update — the smallest end of the multi-reference spectrum, chosen to balance spatial coverage against wearable microphone-count limits.
 
+Positioning, not just count, decides the payoff at wearable scale: [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022]] equipped a Bose QC25 with 10 additional MEMS microphones and selected reference subsets greedily under a causality-aware time-domain cost function ([[concepts/mse-td-cost-function|MSE-TD CF]]). All six ipsilateral candidates were picked before any contralateral one, and the ipsilateral set alone adds ~9 dB active gain over the single-mic system — while contralateral microphones, which the causality-blind [[concepts/multiple-coherence-function|MCF]] still credits, contribute essentially nothing because their filters would have to be acausal (see [[concepts/reference-microphone-positioning|Reference Microphone Positioning]]).
+
 ## Related Concepts
 
 - [[concepts/condition-aware-projection-filtering|Condition-Aware Projection Filtering (CAPF)]]
@@ -50,9 +53,13 @@ A wearable-scale instance appears in open-ear headphone ANC: [[sources/chiba-202
 - [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
 - [[concepts/frequency-domain-anc|Frequency-Domain ANC]]
 - [[concepts/feedforward-anc|Feedforward ANC]]
+- [[concepts/reference-microphone-positioning|Reference Microphone Positioning]]
+- [[concepts/mse-td-cost-function|MSE-TD Cost Function]]
+- [[concepts/multiple-coherence-function|Multiple Coherence Function (MCF)]]
 
 ## Related Sources
 
 - [[sources/he-2026-neural-projection-filter-anc|He et al. 2026: Neural Projection Filter Generation for Multi-Reference ANC]]
 - [[sources/zhang-2023-deep-mcanc|Zhang et al. 2023: Deep MCANC]]
 - [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba, Kamado, Kako & Noguchi 2027: Wideband ANC for Open-Ear Headphones with a Coaxial Loudspeaker]] — wearable-scale instance: 3 housing-mounted reference microphones per ear for open-ear feedforward ANC
+- [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022: Optimal Microphone Positioning for Multi-Channel Feedforward ANC Headphones]] — placement study at wearable scale: greedy selection over 12 candidates shows only ipsilateral references pay off (~9 dB), contralateral ones are causality-blocked

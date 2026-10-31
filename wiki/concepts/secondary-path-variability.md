@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-08-27
-updated: 2026-10-22
+updated: 2026-10-31
 sources:
   - raw/papers/guldenschuh-2014-secondary-path-irregularities/full-text.md
   - raw/papers/rout-2012-pso-anc-without-secondary-path/full-text.txt
   - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
+  - raw/papers/forster-2022-optimal-microphone-positioning/full-text.txt
 tags:
   - active-noise-control
   - secondary-path
@@ -16,6 +17,8 @@ tags:
 # Secondary Path Variability
 
 **Secondary-path variability** refers to changes in the secondary-path transfer function $G(j\omega)$ (loudspeaker → error microphone inside the ear-cup) of an ANC headphone caused by fit changes: leaks between ear-cup and ear, lifting the headphones, or removing them entirely.
+
+In real-world applications both $S$ and $Q_{\mathrm{int}}$ additionally depend on the fit of the headphone (Guldenschuh; Liebich et al. 2018 — see [[sources/guldenschuh-2014-secondary-path-irregularities|Guldenschuh & de Callafon 2014]]). Positioning studies deliberately set fit variability aside to isolate the spatial dimension: [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022]] limit their reference-microphone positioning model to depend mainly on direction of arrival, explicitly excluding fit-induced changes of $S$ and $Q_{\mathrm{int}}$ to keep the focus on exploiting the spatial characteristics of the sound field.
 
 ## Key Finding: Leaks Attack the Low Frequencies
 
@@ -61,3 +64,4 @@ On open-ear devices the variability mechanism differs: there is no ear-cup to le
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]] — complementary primary-path variability measurements
 - [[sources/rout-2012-pso-anc-without-secondary-path|Rout, Das & Panda 2012: PSO-Based ANC Without Secondary Path Identification]] — detects abrupt secondary-path changes via the gbest squared-error jump and re-randomizes the PSO population instead of estimating $S(z)$
 - [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — anatomical secondary-path variability on open-ear glasses; one-time ESS calibration +1.6 dB, inter-user std 1.5→0.4 dB
+- [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022: Optimal Microphone Positioning for Multi-Channel Feedforward ANC Headphones]] — explicitly sets fit-driven $S/Q_{\mathrm{int}}$ variability aside so the positioning criterion isolates the DoA dimension

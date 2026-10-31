@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-10-24
+updated: 2026-10-31
 sources:
   - raw/papers/serizel-2010-integrated-anc-nr-hearing-aids/full-text.md
   - raw/papers/yang-2026-direction-preserving-anc/full-text.txt
@@ -9,6 +9,7 @@ sources:
   - raw/papers/rao-2026-keep-speech-anc/full-text.txt
   - raw/papers/liebich-2022-occlusion-effect-cancellation/full-text.md
   - raw/papers/chiba-2027-wideband-anc-coaxial-loudspeaker/full-text.txt
+  - raw/papers/forster-2022-optimal-microphone-positioning/full-text.txt
 tags:
 - active-noise-control
 - signal-processing
@@ -61,6 +62,10 @@ Feedforward ANC is inherently dependent on the direction of arrival (DOA) of the
 
 This motivates [[hybrid-anc|Hybrid ANC]] architectures where the [[feedback-anc|Feedback ANC]] component (DOA-independent) compensates for feedforward degradation at non-nominal DOAs. It also motivates direction-selective approaches such as SFANC/GFANC, and [[concepts/direction-preserving-anc|DP-ANC]] (Yang et al. 2026), which keeps the feedforward signal path but estimates its control-filter bank from direction information — attenuating noise from non-desired directions while leaving desired-direction sound naturally intact.
 
+## Multiple Reference Microphones and Positioning
+
+Adding external reference microphones promises additional attenuation by exploiting the spatial properties of the incoming noise, but *where* they are placed matters as much as how many. On a Bose QC25 fitted with 10 extra MEMS microphones, [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022]] show via a causality-aware time-domain cost function ([[concepts/mse-td-cost-function|MSE-TD CF]]) that distributing references **ipsilaterally** around the shell yields ~9 dB more active gain than the conventional single-mic system, while **contralateral** microphones contribute almost nothing — their useful filters would be acausal (see [[concepts/causality|Causality in ANC]]). The frequency-domain [[concepts/multiple-coherence-function|multiple coherence function]] overestimates these contralateral gains because it ignores causality. See [[concepts/reference-microphone-positioning|Reference Microphone Positioning]] and [[concepts/multi-reference-anc|Multi-Reference ANC]].
+
 ## Hearing-Aid Feedforward ANC
 
 Open-fitting hearing aids apply feedforward ANC to cancel the noise component of the [[concepts/open-fitting-noise-leakage|leakage]] at the tympanic membrane, with the BTE microphone array as reference and an ear-canal microphone as error sensor (technically feasible on the eartip, though absent from commercial devices). Because the microphone–loudspeaker distance is a few centimeters, the causality margin is only a few samples — see [[concepts/causality|Causality in ANC]]. The [[concepts/filtered-x-mwf|FxMWF]] of [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel et al. 2010]] shows how to combine this feedforward ANC with NR without the NR delay consuming the margin. Only the leakage's noise component is canceled, preserving its speech component for localization cues.
@@ -92,6 +97,7 @@ In [[concepts/occlusion-effect-cancellation|Occlusion Effect Cancellation (OEC)]
 - [[concepts/open-fitting-noise-leakage|Open-Fitting Noise Leakage]]
 - [[concepts/filtered-x-mwf|Filtered-x MWF (FxMWF)]]
 - [[concepts/causality|Causality in ANC]]
+- [[concepts/reference-microphone-positioning|Reference Microphone Positioning]]
 
 ## Related Sources
 
@@ -106,3 +112,4 @@ In [[concepts/occlusion-effect-cancellation|Occlusion Effect Cancellation (OEC)]
 - [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — feedforward headphone ANC whose reference is de-speeched by a zero-delay causal WaveNet so the FIR filter cancels only noise
 - [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]] — hear-through filter as the feedforward component, decoupled from the OEC feedback loop via the Ĝ(z) correction filter
 - [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba, Kamado, Kako & Noguchi 2027: Wideband ANC for Open-Ear Headphones with a Coaxial Loudspeaker]] — reduces the secondary-path delay term itself (loudspeaker mechanical + acoustic) via a 2-way coaxial secondary source for wideband open-ear feedforward ANC
+- [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022: Optimal Microphone Positioning for Multi-Channel Feedforward ANC Headphones]] — ~9 dB additional active gain available from ipsilateral reference placement; contralateral references would require acausal filters
