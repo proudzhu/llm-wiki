@@ -698,6 +698,10 @@
 | [[entities/min-sang-baek\|Min-Sang Baek]] | Hanyang University researcher; first author of GI-DOAEnet, Microphone Positional Encoding (MPE), and Complexity Gradual Training (CGT) | 2026-10-27 |
 | [[entities/jonas-forster\|Jonas Forster]] | RWTH Aachen — multi-channel feedforward ANC for headphones, reference microphone positioning (DAGA 2022) | 2026-10-31 |
 | [[entities/sohini-mitra\|Sohini Mitra]] | NIU researcher; first-author work on the AFANC headphone (error-mic placement, music-based S(z) identification). | 2026-10-31 |
+| [[entities/jihui-aimee-zhang\|Jihui Aimee Zhang]] | ANU researcher; first author of the JASA 2020 coherence-based multichannel ANC performance analysis | 2026-10-31 |
+| [[entities/naoki-murata\|Naoki Murata]] | Sony researcher; co-author of the JASA 2020 multichannel ANC NR-potential analysis | 2026-10-31 |
+| [[entities/yu-maeno\|Yu Maeno]] | Sony researcher; co-author of the JASA 2020 multichannel ANC NR-potential analysis | 2026-10-31 |
+| [[entities/yuki-mitsufuji\|Yuki Mitsufuji]] | Sony researcher (music source separation, MDX Challenge); co-author of the JASA 2020 multichannel ANC NR-potential analysis | 2026-10-31 |
 
 ---
 
@@ -1330,6 +1334,7 @@
 | [[concepts/mse-td-cost-function\|MSE-TD Cost Function]] | Causality-aware path-based time-domain Wiener criterion for multi-channel feedforward ANC; replaces the causality-blind MCF for reference-microphone positioning | 2026-10-31 |
 | [[concepts/multiple-coherence-function\|Multiple Coherence Function (MCF)]] | Multi-reference generalization of coherence bounding feedforward ANC attenuation at -10log10(1-η²); ignores causality, overestimating contralateral reference value | 2026-10-31 |
 | [[concepts/reference-microphone-positioning\|Reference Microphone Positioning]] | Where/how many external reference microphones to place on feedforward ANC devices; ipsilateral distribution pays (~9 dB), contralateral positions are causality-blocked | 2026-10-31 |
+| [[concepts/anc-nr-potential-decomposition\|ANC NR-Potential Decomposition]] | Algorithm-independent three-term decomposition of multichannel ANC residual energy (coherence / filter / null space), generalizing the single-channel coherence limit | 2026-10-31 |
 
 ---
 
@@ -1621,6 +1626,7 @@
 | [[sources/baek-2025-geometry-invariant-doa-estimation\|Baek, Chang & Cohen 2025]] | This paper proposes GI-DOAEnet, a geometry-invariant DNN for azimuth DOA estimation that works on arbitrary microphone arrays without retraining. | 2026-10-27 |
 | [[sources/forster-2022-optimal-microphone-positioning\|Forster, Fabry & Jax 2022]] | Causality-aware MSE time-domain cost function (vs. causality-blind multiple coherence) for reference-mic positioning; 12-mic Bose QC25 study: ~9 dB extra active gain from ipsilateral placement, contralateral mics causality-blocked | 2026-10-31 |
 | [[sources/kuo-2006-anc-headphones\|Kuo, Mitra & Gan 2006: Active Noise Control System for Headphone Applications]] | Adaptive feedback ANC headphone: error-mic placement by flattest secondary-path response, music-based identification, TMS320C32 prototype beating a Bose QC2. | 2026-10-31 |
+| [[sources/zhang-2020-coherence-mcanc-noise-reduction\|Zhang, Murata, Maeno, Samarasinghe, Abhayapala & Mitsufuji 2020]] | This paper develops an algorithm-independent method to compute the maximum noise reduction (NR) potential of an arbitrary multichannel feedforward ANC system with P reference microphones, L secondary sources, and Q error microphones. | 2026-10-31 |
 
 ---
 
@@ -1679,10 +1685,10 @@
 
 ## Statistics
 
-- **Total pages**: 1628
-- **Entities**: 688
-- **Concepts**: 623
-- **Sources**: 282
+- **Total pages**: 1634
+- **Entities**: 692
+- **Concepts**: 624
+- **Sources**: 283
 - **Synthesis**: 25
 - **Queries**: 10
 - **Last updated**: 2026-10-31

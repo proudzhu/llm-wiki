@@ -4,6 +4,7 @@ created: 2026-10-31
 updated: 2026-10-31
 sources:
   - raw/papers/forster-2022-optimal-microphone-positioning/full-text.txt
+  - raw/papers/zhang-2020-coherence-mcanc-noise-reduction/full-text.txt
 tags:
   - active-noise-control
   - multi-channel
@@ -13,7 +14,7 @@ tags:
 
 # Multiple Coherence Function (MCF)
 
-The **Multiple Coherence Function (MCF)** $\eta_{ud}^2$ is the multi-reference generalization of ordinary coherence: the fraction of the error-signal power that is *linearly explainable* by the full set of $J$ reference signals. In feedforward ANC it defines the **theoretical upper bound** of achievable attenuation (Nelson & Elliott, *Active Control of Sound*, 1992) and underlies patented multi-microphone placement algorithms (e.g., Nielsen 2020; Jensen et al. 2016).
+The **Multiple Coherence Function (MCF)** $\eta_{ud}^2$ is the multi-reference generalization of ordinary coherence: the fraction of the error-signal power that is *linearly explainable* by the full set of $J$ reference signals. In feedforward ANC it defines the **theoretical upper bound** of achievable attenuation (Nelson & Elliott, *Active Control of Sound*, 1992) and underlies patented multi-microphone placement algorithms (e.g., Nielsen 2020; Jensen et al. 2016). The MCF bounds a *single* error point; the fully multichannel (multi-reference, multi-source, multi-error) bound — which also isolates the uncontrollable null-space energy — is the [[concepts/anc-nr-potential-decomposition|ANC NR-potential decomposition]] of [[sources/zhang-2020-coherence-mcanc-noise-reduction|Zhang et al. 2020]], where $\sum_z C_{\hat{\mu}_r c_z}$ is exactly the multiple coherence of the projected primary signal on secondary-path eigen channel $r$ with respect to the eigen references.
 
 ## Definition
 
@@ -37,6 +38,7 @@ The MCF is derived in the frequency domain and therefore **does not account for 
 
 - [[concepts/mse-td-cost-function|MSE-TD Cost Function]] — the causality-aware replacement used for positioning
 - [[concepts/broad-band-feedforward-anc|Broad-Band Feedforward ANC]] — carries the single-reference version of the coherence bound
+- [[concepts/anc-nr-potential-decomposition|ANC NR-Potential Decomposition]] — the multichannel/multi-error generalization: per-eigen-channel multiple coherence plus the secondary-path null-space term
 - [[concepts/spatial-coherence|Spatial Coherence]] — the pairwise counterpart in speech-enhancement contexts
 - [[concepts/multi-reference-anc|Multi-Reference ANC]]
 - [[concepts/causality|Causality in ANC]]
@@ -44,3 +46,4 @@ The MCF is derived in the frequency domain and therefore **does not account for 
 ## Related Sources
 
 - [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022: Optimal Microphone Positioning for Multi-Channel Feedforward ANC Headphones]] — quantifies the MCF's causality blindness on a 12-microphone headphone
+- [[sources/zhang-2020-coherence-mcanc-noise-reduction|Zhang, Murata, Maeno, Samarasinghe, Abhayapala & Mitsufuji 2020: Coherence-Based Performance Analysis on Noise Reduction in Multichannel ANC]] — derives the per-eigen-channel multiple-coherence bound inside the $E_{T1}/E_{T2}/E_{T3}$ residual-energy decomposition, generalizing the MCF bound to multi-error systems

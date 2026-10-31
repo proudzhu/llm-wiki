@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-06-25
-updated: 2026-09-11
+updated: 2026-10-31
 tags:
   - researcher
   - anc
@@ -27,3 +27,8 @@ tags:
 - PINN for head-related transfer function upsampling (arXiv 2023)
 - SH-domain feedforward ANC using sparse decomposition (IEEE/ACM TASLP 2020)
 - Active noise control over 3D space with RMT in the wave domain (WASPAA 2021)
+- First author of "Coherence-Based Performance Analysis on Noise Reduction in Multichannel ANC Systems" (JASA 2020) — [[sources/zhang-2020-coherence-mcanc-noise-reduction|Zhang 2020]]: algorithm-independent three-term decomposition of the multichannel ANC residual energy (coherence / filter / null space), setting the maximum NR bound for any given system
+
+## Related Sources
+
+- [[sources/zhang-2020-coherence-mcanc-noise-reduction|Zhang 2020: Coherence-Based Performance Analysis on Noise Reduction in Multichannel ANC]]

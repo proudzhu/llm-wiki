@@ -692,4 +692,8 @@
 | [[entities/min-sang-baek\|Min-Sang Baek]] | Hanyang University researcher; first author of GI-DOAEnet, Microphone Positional Encoding (MPE), and Complexity Gradual Training (CGT) | 2026-10-27 |
 | [[entities/jonas-forster\|Jonas Forster]] | RWTH Aachen — multi-channel feedforward ANC for headphones, reference microphone positioning (DAGA 2022) | 2026-10-31 |
 | [[entities/sohini-mitra\|Sohini Mitra]] | NIU researcher; first-author work on the AFANC headphone (error-mic placement, music-based S(z) identification). | 2026-10-31 |
+| [[entities/jihui-aimee-zhang\|Jihui Aimee Zhang]] | ANU researcher; first author of the JASA 2020 coherence-based multichannel ANC performance analysis | 2026-10-31 |
+| [[entities/naoki-murata\|Naoki Murata]] | Sony researcher; co-author of the JASA 2020 multichannel ANC NR-potential analysis | 2026-10-31 |
+| [[entities/yu-maeno\|Yu Maeno]] | Sony researcher; co-author of the JASA 2020 multichannel ANC NR-potential analysis | 2026-10-31 |
+| [[entities/yuki-mitsufuji\|Yuki Mitsufuji]] | Sony researcher (music source separation, MDX Challenge); co-author of the JASA 2020 multichannel ANC NR-potential analysis | 2026-10-31 |
 

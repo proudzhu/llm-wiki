@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-05
-updated: 2026-10-24
+updated: 2026-10-31
 sources:
   - wiki/sources/liebich-2018-doa-dependency-anc-headphones.md
   - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
   - raw/papers/chiba-2027-wideband-anc-coaxial-loudspeaker/full-text.txt
+  - raw/papers/zhang-2020-coherence-mcanc-noise-reduction/full-text.txt
 tags:
   - active-noise-control
   - control-theory
@@ -60,6 +61,10 @@ which vanishes at the quarter-period boundary $\Delta\tau_q(f) = 1/(4f)$ — the
 - It motivates [[hybrid-anc|Hybrid ANC]] architectures where the [[feedback-anc|Feedback ANC]] component (which does not depend on $P(z)$) compensates for feedforward degradation
 - It provides a quantitative criterion for when adaptive or direction-dependent filter switching becomes necessary
 
+## Statistical/System-Level Bound (Zhang et al. 2020)
+
+The bounds above constrain the *signal-level* match between anti-noise and disturbance. Complementary to them, [[sources/zhang-2020-coherence-mcanc-noise-reduction|Zhang et al. 2020]] derive a **statistical system-level bound**: the minimum residual energy of a multichannel feedforward system decomposes into a coherence term, a filter term (zero at the optimum), and a null-space term — see [[concepts/anc-nr-potential-decomposition|ANC NR-Potential Decomposition]]. Where the Liebich/Chiba bounds ask "how precisely must the anti-noise match the disturbance at one point", the Zhang bound asks "how much of the disturbance field is reachable and predictable at all, given the transducer configuration".
+
 ## Related Concepts
 
 - [[primary-path-variability|Primary Path Variability]]
@@ -67,9 +72,11 @@ which vanishes at the quarter-period boundary $\Delta\tau_q(f) = 1/(4f)$ — the
 - [[feedback-anc|Feedback ANC]]
 - [[hybrid-anc|Hybrid ANC]]
 - [[device-specific-hrtf|Device-Specific HRTF (DHRTF)]]
+- [[concepts/anc-nr-potential-decomposition|ANC NR-Potential Decomposition]] — the statistical/system-level counterpart bound
 
 ## Related Sources
 
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
 - [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]] — journal version with the contour presentation
 - [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba, Kamado, Kako & Noguchi 2027: Wideband ANC for Open-Ear Headphones with a Coaxial Loudspeaker]] — optimal-amplitude residual under delay-induced phase error; quarter-period (90°) relaxed boundary as the design limit
+- [[sources/zhang-2020-coherence-mcanc-noise-reduction|Zhang, Murata, Maeno, Samarasinghe, Abhayapala & Mitsufuji 2020: Coherence-Based Performance Analysis on Noise Reduction in Multichannel ANC]] — the statistical counterpart: algorithm-independent maximum NR via residual-energy decomposition

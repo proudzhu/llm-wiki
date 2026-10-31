@@ -6267,3 +6267,30 @@ Answered from [[sources/li-2026-geometry-conditioned-ssanc|Li 2026 GC-SSF]] and 
   - `wiki/synthesis/anc-architecture-evolution.md` — added §2.4 "The Complete Hardware Benchmark" + source row
   - `wiki/synthesis/secondary-path-modeling-evolution.md` — added music-excitation note to Route 1 + source entry
   - `wiki/synthesis/modern-headphone-anc-systems.md` — added error-mic placement paragraph to §6.2 + source entry
+
+---
+
+## [2026-10-31] ingest | Coherence-based performance analysis on noise reduction in multichannel active noise control systems (Zhang et al. 2020)
+
+- **Source**: `raw/papers/zhang-2020-coherence-mcanc-noise-reduction/full-text.txt` (Zotero: 38MNGBSC; extracted via pypdf after two MinerU "parsing failed" errors)
+- **Authors**: Jihui Aimee Zhang, Naoki Murata, Yu Maeno, Prasanga N. Samarasinghe, Thushara D. Abhayapala, Yuki Mitsufuji
+- **Published**: Journal of the Acoustical Society of America 148(3), September 2020, pp. 1519–1528
+- **DOI**: 10.1121/10.0001938
+- **Summary**: Algorithm-independent maximum-NR analysis for arbitrary multichannel feedforward ANC — residual energy decomposed via SVD of the secondary path + eigendecomposition of the reference PSD matrix into coherence / filter / null-space terms, with a closed-form optimal filter; single-channel coherence limit (Kuo & Morgan) recovered as scalar special case.
+- **Pages created**:
+  - `wiki/sources/zhang-2020-coherence-mcanc-noise-reduction.md`
+  - `wiki/concepts/anc-nr-potential-decomposition.md`
+  - `wiki/entities/jihui-aimee-zhang.md`
+  - `wiki/entities/naoki-murata.md`
+  - `wiki/entities/yu-maeno.md`
+  - `wiki/entities/yuki-mitsufuji.md`
+- **Pages updated**:
+  - `wiki/entities/prasanga-n-samarasinghe.md` — Key Contributions + Related Sources bullets
+  - `wiki/entities/thushara-d-abhayapala.md` — Key Contributions + Related Sources bullets
+  - `wiki/concepts/multiple-coherence-function.md` — linked the per-eigen-channel multiple coherence of the Zhang 2020 decomposition; Related Concepts/Sources
+  - `wiki/concepts/anc-attenuation-bounds.md` — added "Statistical/System-Level Bound" section cross-referencing the signal-level vs system-level bounds
+  - `wiki/concepts/singular-value-decomposition.md` — added multichannel-ANC application bullet (SVD of secondary path as eigen-channel decomposition)
+  - `wiki/concepts/multi-channel-anc.md` — added "Fundamental Limits of a Given Configuration" section + cross-refs
+  - `wiki/concepts/broad-band-feedforward-anc.md` — extended the coherence-bound paragraph with the multichannel generalization
+  - `wiki/synthesis/multichannel-anc-efficiency-and-robustness.md` — new Section 5 "Fundamental-Limit Prediction" (trigger 4: new axis — fundamental-limit prediction vs efficiency/robustness), comparison-table row, Related Concepts/Sources; noted the ANU 2020→2026 lineage (this paper deferred acoustic feedback, which Zhang 2026 ReTM work closed)
+  - `wiki/index.md` + subdirectory indexes + statistics (1634 total)

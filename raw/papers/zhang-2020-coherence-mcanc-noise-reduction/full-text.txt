@@ -1,0 +1,1029 @@
+
+View
+Online
+
+Export
+Citation
+CrossMark
+SEPTEMBER 17 2020
+Coherence-based performance analysis on noise reduction
+in multichannel active noise control systems 
+Jihui Aimee Zhang 
+  ; Naoki Murata; Yu Maeno; Prasanga N. Samarasinghe 
+  ; Thushara D. Abhayapala;
+Yuki Mitsufuji 
+J. Acoust. Soc. Am. 148, 1519–1528 (2020)
+https://doi.org/10.1121/10.0001938
+ 10 January 2024 03:26:15
+
+
+Coherence-based performance analysis on noise reduction
+in multichannel active noise control systems
+Jihui Aimee Zhang,1,a) Naoki Murata,2,b) Yu Maeno,2,c) Prasanga N. Samarasinghe,1,d)
+Thushara D. Abhayapala,1,e) and Y ukiMitsufuji2,f)
+1Audio and Acoustic Signal Processing Group, The Australian National University, Canberra, Australian Central Territory 2601,
+Australia
+2R&D Center, Sony Corporation, 2-10-1 Osaki, Shinagawa, Tokyo 141-8610, Japan
+ABSTRACT:
+Active noise control (ANC) over an extended spatial region using multiple microphones and multiple loudspeakers
+has become an important problem. The maximum noise reduction (NR) potential over the control area is a critical
+evaluation variable as it indicates the fundamental limitation of a given ANC system. In this paper, a method to
+mathematically formulate the NR potential for any given multichannel ANC systems is developed. First, the residual
+error in the multichannel feedforward ANC system is formulated, and then the multiple-input-multiple-output
+problem is decomposed into the parallel-channel problem. The total energy of the residual error is further decom-
+posed into three different terms representing (i) the signal coherence between the reference signals and error signals,
+(ii) the ﬁlter, and (iii) the system null space. The experimental results validate the proposed evaluation method and
+illustrate the effectiveness on the maximum NR performance evaluation for given systems. Using the proposed ana-
+lyzing method, more insight into the contribution of each component to the NR potential can be achieved.
+VC 2020 Acoustical Society of America . https://doi.org/10.1121/10.0001938
+(Received 9 January 2020; revised 24 July 2020; accepted 24 August 2020; published online 17 September 2020)
+[Editor: Julien de Rosny] Pages: 1519–1528
+I. INTRODUCTION
+A. Motivation and scope
+Active noise control (ANC) utilises secondary sound sour-
+ces to cancel primary noise based on the principle of destructive
+interference and has the advantage of high ﬂexibility and easy
+adaptability. Multichannel ANC systems,1,2 equipped with mul-
+tiple sensors and multiple secondary sources, are applied to
+achieve noise cancellation over a spatially extended region.
+There are many aspects to evaluate the adaptive ANC perfor-
+mance such as maximum noise attenuation, convergence rate,3,4
+computational complexity,5–7 and stability and robustness.8 In
+this paper, we focus on the fundamental limits of the noise
+reduction (NR) level for a given multichannel ANC system.
+Since the NR level in the steady state varies with differ-
+ent adaptive algorithms, it is important to investigate the
+fundamental limitation of the maximum achievable perfor-
+mance. This method should be independent of any adaptive
+algorithms and has the capability to analyze the maximum
+NR in any arbitrary ANC system.
+B. Literature review
+In the literature, most performance evaluation frame-
+works are for speciﬁc ANC systems. 9–12 There are some
+investigations about the performance of different multichan-
+nel adaptive ANC algorithms. 13,14 In these investigations,
+either the reference signals are obtained directly from the
+electronic signal without the actual sensors 13 or the refer-
+ence signals on the reference sensors are assumed to be fully
+correlated with the primary signals on the error sensors, 12,14
+which are not applicable in many real applications.
+In some investigations, coherence has been taken into
+consideration. Buerger et al. investigated the coherence
+between two observation points in the noise ﬁeld evoked by
+given continuous source distributions, which can be applied
+to predict the upper bound of the ANC performance. 15 Kuo
+and Morgan investigated the relation between the minimum
+residual error and the coherence between the reference
+microphone and the error microphone, 16 which provided the
+solution in the single channel ANC systems. Bitzer et al.
+found that the complex coherence function of the noise ﬁeld
+for all sensors is a valuable tool to examine the theoretical
+limits of NR for speech recognition. 17 The complex coher-
+ence function is also valuable in ANC, although the authors
+only evaluated the complex function for speech recognition.
+Overall, to the best of our knowledge, the maximum NR
+performance of the multichannel ANC system for any arbitrary
+system has not been reported in the literature, and the coherence
+between sensors needs to be considered in the investigation.
+C. Our contributions
+In this paper, we investigate the maximum NR perfor-
+mance for a multichannel ANC system by investigating the
+a)Electronic mail: jihui.zhang@anu.edu.au, ORCID: 0000-0001-6817-139X.
+b)ORCID: 0000-0001-7418-5173.
+c)ORCID: 0000-0001-7754-0054.
+d)ORCID: 0000-0002-5589-4203.
+e)ORCID: 0000-0001-6937-7218.
+f)ORCID: 0000-0002-6806-6140.
+J. Acoust. Soc. Am. 148 (3), September 2020 VC 2020 Acoustical Society of America 15190001-4966/2020/148(3)/1519/10/$30.00
+ARTICLE...................................
+ 10 January 2024 03:26:15
+
+
+different factors that can inﬂuence the energy of the residual
+error. We derive the optimal ﬁlter statistically and incorpo-
+rate the coherence between the reference signals and the
+error signals to the maximum ANC performance analysis.
+We mathematically formulate the limitation for the NR in
+any given feedforward ANC system and analyze the three
+different terms in the energy of the residual signals. The the-
+ory developed in this paper can also be applied to the feed-
+back ANC system by replacing the reference signals with
+the synthesized reference signals. Experiments are con-
+ducted to validate the proposed formulation and illustrate
+the applications for different ANC systems. One example of
+the application is ANC in an ofﬁce room when the conﬁgu-
+rations of secondary loudspeakers and microphones have
+constraints on both the numbers and locations as shown in
+Fig. 1.
+The rest of the paper is organized as follows. Section II
+presents the problem formulation and Sec. III presents math-
+ematical derivations of the energy of the residual error and
+its different components. We demonstrate the experimental
+results to validate the proposed method and illustrate the
+potential application in Sec. IV and draw some conclusions
+in Sec. V.
+II. PROBLEM FORMULATION
+Consider a multichannel feedforward ANC system with
+Q error microphones, P reference microphones, and L sec-
+ondary sources. The residual signal at the qth error micro-
+phone is given by
+eqðkÞ¼ /C23 qðkÞþ sqðkÞ; (1)
+where k ¼ 2pf =c is the wavenumber, f is the frequency, c is
+the speed of sound propagation, /C23 qðkÞ and sqðkÞ are the pri-
+mary sound ﬁeld due to noise and the secondary sound ﬁeld
+generated by the secondary sources at the qth error micro-
+phone, respectively. We write Eq. (1) in vector form by
+deﬁning a vector of error signals at Q microphones as
+eðkÞ¼ mðkÞþ sðkÞ; (2)
+where eðkÞ¼½ e1ðkÞ;… ;eQðkÞ/C138T ; mðkÞ¼½ /C23 1ðkÞ;… ;/C23 QðkÞ/C138T ;
+sðkÞ¼½ s1ðkÞ;… ;sQðkÞ/C138T , and ½/C1/C138T is the transpose operator.
+Let xpðkÞ; p ¼ 1; … ; P, be the reference signal at the
+pth reference microphone. In feedforward ANC systems, the
+signals driving the secondary sources are generated by adap-
+tive ﬁltering of reference signals that is measured closer to
+the noise sources. Thus, the secondary sound ﬁeld at the qth
+error microphone can be represented as
+sqðkÞ¼
+XL
+‘¼1
+Gq‘ðkÞ
+XP
+p¼1
+w‘pðkÞxpðkÞ
+0
+@
+1
+A; (3)
+where w‘pðkÞ is the adaptive ﬁlter between the pth reference
+microphone and the ‘th secondary source, and Gq‘ðkÞ is the
+acoustic transfer function (ATF) from the ‘th secondary
+source to the qth error microphone. We rewrite Eq. (3) in
+vector form as
+sðkÞ¼ GðkÞWðkÞxðkÞ; (4)
+where GðkÞ is a Q /C2 L matrix with the ðq;‘ Þ element given
+by Gq‘ðkÞ; WðkÞ is an L /C2 P matrix of adaptive ﬁlters with
+the ð‘; pÞ element given by W‘pðkÞ, and xðkÞ¼½ x1ðkÞ;
+… ; xPðkÞ/C138T .
+We substitute Eq. (4) into Eq. (2) to express the error sig-
+nal vector in terms of the adaptive ﬁlter weights of secondary
+sources, reference signals, and secondary signal paths as
+eðkÞ¼ mðkÞþ GðkÞWðkÞxðkÞ: (5)
+In a typical adaptive ANC system, as illustrated in the
+block diagram of Fig. 2, the ﬁlter WðkÞ is updated itera-
+tively. For the rest of this paper, we omit the dependency k
+of all quantities for notational convenience.
+The aim of multichannel ANC systems is to minimise
+the residual signal at the error microphones. The total
+energy of Q error signals is
+FIG. 1. (Color online) An illustration
+of an ANC system in an ofﬁce room
+with a meeting table and a desk. The
+error microphones are placed on the
+table. Door, windows, and whiteboard
+are located in three sides of the walls.
+Due to the limited space, the conﬁgura-
+tions of the secondary loudspeakers
+and reference microphones have con-
+straints on both the numbers and loca-
+tions, and the proposed method can be
+used to analyze and optimize the con-
+ﬁgurations by predicting the contribu-
+tions of each component.
+1520 J. Acoust. Soc. Am. 148 (3), September 2020 Zhang et al.
+https://doi.org/10.1121/10.0001938
+ 10 January 2024 03:26:15
+
+
+ET ¼ E
+XQ
+q¼1
+jeqj2
+8
+<
+:
+9
+=
+;
+¼ EfeH eg
+¼ EfmH mgþ EfmH GWxgþ EfxH WH GH mg
+þ EfxH WH GH GWxg; (6)
+where Ef/C1g denotes the mathematical expectation, ½/C1/C138H
+denotes the complex conjugate transpose of a vector or
+matrix, and the last line is obtained by substituting for e
+from Eq. (5). Note that ET can be regarded as the sum of the
+power spectral density of Q error signals.
+In this paper, we seek to analyze the residual error ET
+given by Eq. (6). Particularly, we are interested in its depen-
+dency on the (i) coherence between reference signals at the
+reference microphones and primary signals at the error
+microphones, (ii) characteristics of the secondary channels
+between secondary sources and error microphones, and (iii)
+correlation between reference signals.
+III. ANAL YSIS OF RESIDUAL ERROR
+In this section, we ﬁrst analyze the secondary path G
+and the power spectral density of the reference signals Sxx
+in the eigen-domain to further investigate the representation
+of the total energy of the error signals in Eq. (6) and then
+discuss the different components of the representation. We
+also illustrate a special case, which links back to the conven-
+tional single channel case as reported in the literature. 16
+A. Singular value decomposition of the secondary
+path
+The secondary acoustic paths Gq‘; q ¼ 1; … ; Q;‘ ¼ 1;
+… ; L, are not necessarily independent of each other. To reveal
+the underlying structure, we express the ATF matrixG in terms
+of its singular value decomposition (SVD) form as
+G ¼ ARBH ; (7)
+where the Q /C2 Q matrix A contains the left-singular vectors,
+the L /C2 L matrix B contains the right-singular vectors, and
+the Q /C2 L rectangular diagonal matrix R contains the singu-
+lar values. Let the nonzero diagonal entries of R, denoted by
+rr, r ¼ 1; … ; R, where R ¼ rankðGÞ6minfQ; Lg is the num-
+ber of nonzero diagonal elements of R.
+Let aqq0 be the ðq; q0Þ element of A and b‘‘0 be the ð‘; ‘0Þ
+element of B. For convenience, we write A ¼½ a1; a2; … ; aQ/C138
+and B ¼½ b1; b2; … ; bL/C138, where aq ¼½ a1q; … ; aQq/C138T and b‘
+¼½ b1‘; … ; bL‘/C138T are the qth left and ‘ th right singular vec-
+tors, respectively. Also note that by the deﬁnition of SVD,
+AAH ¼ IQ and BBH ¼ IL, where IQ and IL are identity
+matrices with dimensions Q /C2 Q and L /C2 L, respectively.
+B. Eigen analysis of the reference signals
+For each frequency bin, the reference signals xp,
+p ¼ 1… ; P, could be correlated with each other due to the
+placement of the reference microphones, the acoustic envi-
+ronment, and any dependency between noise sources. The
+power spectral density matrix of the reference signals
+Sxx¢EfxxH g is generally ill-conditioned due to the linear
+relations between the channels. 18 To gain insights, we ana-
+lyze the power spectral density matrix of the reference sig-
+nals Sxx using the eigendecomposition as
+Sxx ¼ UKU/C0 1; (8)
+where U is the P /C2 P eigenvector matrix and K is a P /C2 P
+diagonal matrix of eigenvalues. We denote kz as the zth non-
+zero eigenvalue, z ¼ 1; … ; Z, where Z 6 P is the number of
+nonzero eigenvalues.
+Let upp0 be the ðp; p0Þ element of U, then U ¼½ u1; u2;
+… ; uP/C138 with the pth eigenvector given by up ¼½ u1p;
+… ; uPp/C138T . Here, the vectors u1; u2; … ; uP are written in order
+of descending eigenvalues in K.
+Since Sxx is a Hermitian matrix, all eigenvalues of K
+are real. Based on the spectral theorem, there exists an
+orthonormal basis U, consisting of eigenvectors of the
+Hermitian matrix Sxx, i.e., U/C0 1 ¼ UH, where ð/C1Þ /C0 1 denotes
+the matrix inverse. Then, Eq. (8) can be rewritten as
+Sxx ¼ UKUH : (9)
+Using the eigenvectors corresponding to Z nonzero eigen-
+values, we can construct a vector space that spans all refer-
+ence signals x for a given environment. Thus, we express
+the reference signal x in terms of these eigenvectors as
+x ¼
+XZ
+z¼1
+czuz (10)
+¼ ^Uc; (11)
+where ^U ¼½ u1; … ; uZ /C138; c ¼½ c1; … ; cZ /C138T is a vector of coef-
+ﬁcients of reference signal x, and each coefﬁcient
+cz ¼ uH
+z x: (12)
+The vector form can be represented as
+FIG. 2. Block diagram of a typical multichannel feedforward ANC system,
+where xðkÞ; mðkÞ, and eðkÞ denote the reference signals, primary signals,
+and error signals, respectively, WðkÞ denotes the ﬁlter, Pri ðkÞ and GðkÞ
+denote the primary path and secondary path, respectively, ^GðkÞ denotes the
+estimation of the secondary path, and LMS denotes the adaptive algorithm.
+J. Acoust. Soc. Am. 148 (3), September 2020 Zhang et al. 1521
+https://doi.org/10.1121/10.0001938
+ 10 January 2024 03:26:15
+
+
+c ¼ ^U
+H
+x: (13)
+Consider the correlation between cz
+EfccH g¼ Ef ^U
+H
+xð ^U
+H
+xÞH g¼ ^U
+H
+Sxx ^U ¼ K: (14)
+Thus, for z /C20 Z,
+Efc/C3
+z cz0 g¼ kz; z ¼ z0;
+0; z 6¼ z0;
+/C26
+(15)
+where kz 6¼ 0, and ½/C1/C138/C3 denotes the complex conjugate of a
+vector or matrix. Therefore, the components of c are mutu-
+ally orthogonal. Thus, using Eq. (13), we have transformed
+(possibly) correlated P reference signals x to Zð/C20 PÞ uncor-
+related signals c.
+By the SVD of the secondary path (Sec. III A) and the
+eigendecomposition of the reference signals (Sec. III B), we
+decompose the multiple-input-multiple-output processing
+[Fig. 3(a)] into parallel-channel processing [Fig. 3(b)].
+Thereafter, we represent the total energy of the error signals
+in the new transformed domain.
+C. Representation of total energy of the error signals
+For a given ANC system comprised of reference micro-
+phones, error microphones, and secondary sources in a given
+room environment with a particular set of noise sources, A,
+R, B, K, and U, can be estimated using the secondary acous-
+tic path matrix G and the measured correlation matrix of the
+reference signal Sxx.
+We substitute Eqs. (7) and (11) into Eq. (6) to obtain
+the total energy of the error signal as
+ET ¼ Ef^mH ^mgþ Ef^mH R ^Wcgþ EfcH ^W
+H
+RH ^mg
+þ EfcH ^W
+H
+RH R ^Wcg; (16)
+where ^m ¼ AHm and the L /C2 Z matrix
+^W ¼ BH W ^U: (17)
+Let ^/C23 r ; r ¼ 1; … ; R be the rth element of ^m, then
+^/C23 r ¼ aH
+r m: (18)
+Also, let ^w‘z be the ð‘; zÞ element of ^W, and then we deﬁne
+the vector ^w‘¢½ ^w‘1; … ; ^w‘Z /C138, such that ^W ¼½ ^w1; … ; ^wL/C138T .
+We now state the main result of the paper as a theorem.
+Theorem 1 . For a given ANC system, since both the
+correlation matrix between the error signal vector m and the
+reference signal vector x (Smx ¼ EfmxH g) and the power
+spectral density matrix of the error signal vector m
+(Smm ¼ EfmmHg) can be pre-measured, the total energy of
+the error signals can be represented by a sum over each
+eigen channel r of the secondary paths as
+ET ¼
+XR
+r¼1
+1 /C0 S^/C23 r c ^K
+/C0 1
+SH
+^/C23 r c
+S^/C23 r ^/C23 r
+ !
+S^/C23 r ^/C23 r
+ !
+|ﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄ{zﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄ}
+ET1
+þ
+XR
+r¼1
+jrr j2 ^wr þ S^/C23 r c
+rr
+^K
+/C0 1
+/C18/C19
+^K ^wr þ S^/C23 r c
+rr
+^K
+/C0 1
+/C18/C19 H
+"#
+|ﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄ{zﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄ}
+ET2
+þ
+XQ
+r¼Rþ1
+S^/C23 r ^/C23 r
+|ﬄﬄﬄﬄﬄﬄ{zﬄﬄﬄﬄﬄﬄ}
+ET3
+; (19)
+where ^K is a Z /C2 Z diagonal matrix whose diagonal ele-
+ments are the nonzero diagonal elements of K; S^/C23 r c
+¼ Ef^/C23 r cHg¼ aH
+r Smx ^U; S^/C23 r ^/C23 r ¼ Ef^/C23 r ^/C23 r H g¼ aH
+r Smm ar , rr is
+the rth non-singular value of the secondary path matrix, R is
+the number of non-singular values of the secondary path
+matrix, and Z is the number of nonzero eigenvalues of the
+power spectral density matrix Sxx of the reference signals.
+The proof of Eq. (19) is given in Appendix A. We have
+the following comments on the above expression on residual
+error for a given frequency k.
+1. Signal coherence
+Observe that the ﬁrst term in Eq. (19) is dependent on
+the correlation between various signal quantities. We can
+rewrite the ﬁrst term as
+ET1 ¼
+XR
+r¼1
+/C18
+1 /C0
+XZ
+z¼1
+C^/C23 r cz
+/C19
+S^/C23 r ^/C23 r ; (20)
+where
+C^/C23 r cz ¢ jjS^/C23 r cs jj2
+S^/C23 r ^/C23 r Scz cz
+¼ jjaH
+r Smxuzjj2
+aH
+r Smm ar kz
+(21)FIG. 3. Block diagram of multichannel feedforward ANC system (a) in the
+multichannel form and (b) decomposed into equivalent parallel channels.
+1522 J. Acoust. Soc. Am. 148 (3), September 2020 Zhang et al.
+https://doi.org/10.1121/10.0001938
+ 10 January 2024 03:26:15
+
+
+is the coherence between the transformed primary signal ^/C23 r
+and the eigen component cz of the reference signal.
+From Eq. (20), ET1 depends on the coherence between
+the transformed primary signals and the transformed refer-
+ence signals and the power spectral density of the trans-
+formed primary signals.
+2. Filter
+The second summation in Eq. (19) depends on the
+transformed ﬁlter ½ ^w1; … ; ^wR/C138T . If we set the second part of
+Eq. (19), ET2, to zero, then the ﬁlter ^W is optimized. The rth
+transformed optimal ﬁlter ^wo
+r can be represented as
+^wo
+r ¼ /C0 S^/C23 r c
+rr
+^K
+/C0 1
+¼/C0 aH
+r Smx ^U
+rr
+^K
+/C0 1
+: (22)
+This is equivalent to setting the differentiation of the energy
+of the error signal with respect to the ﬁlter W to zero. The
+proof is shown in Appendix B.
+Observe that ^wo
+r is a 1 /C2 Z vector for r ¼ 1; … ; R, i.e.,
+each element ^wo
+rz is the optimal weight for the corresponding
+eigen channel of the system. Therefore, the upper triangle
+elements of the transferred optimal ﬁlter in matrix form ^W
+o
+up
+can be represented by
+^W
+o
+up ¼
+^w1o
+..
+.
+^wRo
+2
+64
+3
+75
+R/C2 Z
+: (23)
+Let us denote ^B ¼½ b1; b2; … ; bR/C138 and ^U ¼½ u1; u2; … ; uZ/C138,
+which correspond to the nonzero elements of R and K,
+respectively.
+From Eq. (17), the optimal ﬁlter Wo can be represented by
+Wo ¼ ^B ^W
+o
+up ^U
+H
+: (24)
+Substituting Eq. (23) into Eq. (24), we can obtain the opti-
+mal ﬁlter Wo.
+3. System null space
+From Eq. (19), the third summation
+ET3 ¼
+XQ
+r¼Rþ1
+S^/C23 r ^/C23 r ; (25)
+where S^/C23 r ^/C23 r ¼ aH
+r Smm ^ar ; r ¼ R þ 1; … ; Q, i.e., ET3 is due to
+the components of the energy of the primary signal at the
+error microphones projected onto the null space of the sys-
+tem. This represents the noise ﬁeld component, which can-
+not be controlled as it is in the null space. It indicates the
+limitation of the NR for a given system.
+D. Special case: Single channel ANC system
+If the system has only a single reference microphone, a
+single secondary source, and a single error microphone, then
+all the vectors and matrices in Eq. (6) are scalar valued.
+Thus, Eq. (6) can be rewritten as
+ET ¼ Efe/C3 eg
+¼ Ef/C23 /C3 /C23 gþ Ef/C23 /C3 gwxgþ Efx/C3 w/C3 g/C3 /C23 g
+þ Efx/C3 w/C3 g/C3 gwxg
+¼ S/C23/C23 þ gwSxv þ w/C3 g/C3 S/C23 x þ w/C3 wg/C3 gSxx
+¼ 1 /C0 C/C23 x½/C138 S/C23/C23 þ
+/C12/C12/C12/C12gw þ S/C23 x
+Sxx
+/C12/C12/C12/C12
+2
+Sxx; (26)
+where C/C23 x ¼ð jS/C23 xj2Þ=ðSxxS/C23/C23 Þ is the coherence between the
+primary signal /C23 and the reference signal x.
+In Eq. (26), the ﬁrst term corresponds to the signal
+coherence and the second term corresponds to the ﬁlter.
+When the ﬁlter is optimized, wo ¼/C0 S/C23 x=ðgSxxÞ, the second
+term is equal to zero. Therefore, in a single channel ANC
+system, the minimum energy of the residual error only
+depends on the coherence of the primary signal and the ref-
+erence signal. This is consistent with the ﬁnding in the liter-
+ature.16 In the single channel ANC system, Eq. (26) is also a
+simpliﬁed version of Eq. (19), which demonstrates that Eq.
+(19) is a generalized formula for the maximum NR perfor-
+mance in an ANC system.
+IV . EXPERIMENTS
+In this section, we conduct experiments in reverberant
+environments to validate the proposed formulation and illus-
+trate the potential application to evaluate the ANC perfor-
+mance for given systems.
+A. Experiment setup
+1. Noise signals
+We use two uncorrelated primary noises in different
+locations. The noise signals from each primary source are
+broadband noise measured from two different engines in
+open space. From the frequency spectrum of the noise sig-
+nals, we can ﬁnd that the energy of the two noise signals are
+both dominant in low frequency bins ([50–500] Hz) as
+shown in Fig. 4. Therefore, the evaluated frequency range in
+this validation is [100–500] Hz. In this experiment, the sam-
+pling rate is 48 kHz. We adopt a blockwise operation and
+transform the microphone recordings into the time-
+frequency domain. In the short-time Fourier transform, the
+frame length and the fast Fourier transform (FFT) length are
+9216 samples. A Hann window with 50% overlaps is
+employed in the process.
+2. Evaluation variables
+We evaluate the ANC performance in terms of NR at
+the microphone locations and the contributions of different
+components (ET1; ET2, and ET3) in the energy of the residual
+signals.
+The NR at the microphone locations can be represented
+by
+J. Acoust. Soc. Am. 148 (3), September 2020 Zhang et al. 1523
+https://doi.org/10.1121/10.0001938
+ 10 January 2024 03:26:15
+
+
+NR ¼/C0 10 log 10
+ET
+Epri
+; (27)
+where Epri ¼ RQ
+q¼1Efj/C23 qj2g and Efj/C23 qj2g denotes the aver-
+age energy of the primary noise ﬁeld at the qth error micro-
+phone point.
+The contribution of the jth component can be repre-
+sented by
+COj ¼/C0 10 log 10
+ETj
+Epri
+; (28)
+where ETj; j ¼ 1; 2; 3 is each component in Eq. (19). For a
+given system setup, the lower the value of CO j, the higher
+the corresponding contribution to the energy of residual
+signals.
+3. ANC system setup
+The experimental ANC system has been set up in the audio
+laboratory of the Australian National University as shown in
+Fig. 5. TANNOY SYSTEM 600 ﬂoorstanding speakers
+(Tannoy Professional) have been used as primary sources and
+Grover Notting CR1 speakers (Classic Audio Designs Pty Ltd.)
+have been used as secondary sources. We use Dyton Audio
+EMM-6 Electret Measurement Microphones (Dayton Audio) to
+measure the reference signals, primary signals, and impulse
+responses from the secondary sources to the error microphones.
+The error microphones are placed at the center of the spherical
+loudspeaker array (30 small loudspeakers), where 4 loud-
+speakers in this loudspeaker array have been chosen as the sec-
+ondary sources. The reference microphones are located
+between the secondary sources and the primary sources.
+The experiment is conducted in three different cases. In
+case 1, the same number (four) of reference microphones,
+error microphones, and secondary sources are placed in the
+ANC system. Compared with case 1, there are ﬁve more
+error microphones in case 2 and three less reference micro-
+phones in case 3. In all cases, the locations of the primary
+sources (two large loudspeakers) and the secondary sources
+(four small loudspeakers) are the same.
+B. Validation of the formulation
+In this section, we validate the proposed formulation
+using case 2. Other than using the optimal ﬁlter Wo, we also
+evaluate the NR using the adaptive ﬁlter Wadp. The adaptive
+ﬁlter Wadp is obtained through the normalized FxLMS algo-
+rithm19 in the frequency domain. Both ﬁlter update and ﬁl-
+tering process are conducted in the frequency domain.
+Blockwise adaptation has been implemented, and each itera-
+tion is based on one frame of the noise signal.
+1. Maximum NR performance
+We ﬁrst examine the maximum NR level using the opti-
+mal ﬁlter in the proposed method Wo (red curves) and the
+NR level using the adaptive ﬁlter Wadp after 48 iterations
+(blue curves) as shown in Fig. 6.
+FIG. 4. (Color online) Spectrograms of the noise signals. (a) Noise signal 1 and (b) noise signal 2.
+FIG. 5. (Color online) ANC system setup, in which the error microphones
+(blue circle) are placed at the center of the secondary source array, and the
+reference microphones (purple capsule) are placed between the secondary
+source array and the primary sources (yellow stars).
+1524 J. Acoust. Soc. Am. 148 (3), September 2020 Zhang et al.
+https://doi.org/10.1121/10.0001938
+ 10 January 2024 03:26:15
+
+
+In theory, the proposed analysis method [Eq. (19)] should
+reach the same minimum residual error as the conventional ana-
+lyzing method [Eq. (6)] as long as we use the same ﬁlter W.
+This has been conﬁrmed in the experimental results, where two
+blue curves merge together and two red curves merge together.
+Using the optimal ﬁlter in the proposed method
+(W ¼ Wo), the NR level has comparable results to using the
+adaptive ﬁlter (W ¼ Wadp). We also notice that the NR level
+derived by the proposed optimal ﬁlter (red curves) is slightly
+higher than the NR using the adaptive ﬁlter (blue curves),
+which is the same as we expected. This is due to a number of
+factors in the adaptive ﬁler such as the adaptive algorithm,
+number of iterations, step size, stability of the noise signals,
+etc. Whereas maximum NR analysis using the proposed opti-
+mal ﬁlter provides a statistical estimation of the NR level for a
+given noise signal, ANC system, and acoustic environment.
+2. Contribution of different parts in the energy
+of residual signals
+Furthermore, we investigate the contributions of differ-
+ent components in the energy of the residual signals ( ET )a s
+shown in Fig. 7.
+ET1 (black curve) depends on the coherence between the
+transformed reference signals and the error signals Cm0 c,a n d
+ET3 is due to the noise signal in the system null space. As
+s h o w ni nF i g .7, ET1 has more contribution to the energy of the
+residual signals (red curve) compared toET3 (green curve).
+ET2 is based on the ﬁlter W. For the analysis based on
+the proposed optimal ﬁlter, ET2 ¼ 0. For the analysis based
+on the adaptive ﬁlter, the contribution of ET2 exists as the ﬁl-
+ter has not been optimized yet (pink curve).
+C. Potential application of this formulation
+In this section, we illustrate the potential application of
+the proposed formulation. We use the proposed formulation
+to analyze the ANC system in case 1, case 2, and case 3 in
+the experiment.
+We ﬁrst compare maximum NR at the error micro-
+phones in different cases as shown in Fig. 8. In case 1, since
+enough secondary sources have been applied to control all
+the error microphones, the maximum NR level (red curve) is
+higher than that in case 2 (blue curve) and case 3 (black
+curve). In case 3, as the reference microphone number is
+less than the number of error microphones and the number
+of secondary sources, the maximum NR level is much lower
+than the other two cases.
+Next, we compare the contributions of different parts of
+the minimum energy of the residual error in three different
+cases as shown in Fig. 9. We ignore the comparison of ET2 as
+ET2 ¼ 0 in all three different cases when the ﬁlters are opti-
+mized. In case 1 and case 3, rank R ¼ Q. As a consequence, in
+both case 1 and case 3, ET3 of Eq. (19) are all zero, and ET1 is
+the only contribution of the minimum energy of the residual
+error. In case 2, as the error microphone number [Eq. (9)]i s
+FIG. 6. (Color online) NR on the error microphones in case 2. FIG. 7. (Color online) Contribution of different parts to the energy of resid-
+ual signals in case 2 (dB).
+FIG. 8. (Color online) NR on the error microphones in cases 1, 2, and 3 in
+the experiment.
+J. Acoust. Soc. Am. 148 (3), September 2020 Zhang et al. 1525
+https://doi.org/10.1121/10.0001938
+ 10 January 2024 03:26:15
+
+
+more than the secondary sources number [Eq. (4)], the signals
+in the system null space (blue solid curve) have a signiﬁcant
+contribution in the energy of the residual error, which is com-
+parable with the contribution of coherence between error sig-
+nals and reference signals (blue star curve).
+V . CONCLUSIONS
+In this work, we proposed a method that statistically ana-
+lyzes the maximum NR performance for a multichannel ANC
+system. This is a powerful tool to theoretically analyze the fun-
+damental limitation of the NR performance and investigate the
+contributions of each component in the energy of residual sig-
+nals (1) component based on coherence between reference sig-
+nals and error signals, (2) component based on the ﬁlter, and
+(3) component based on the noise signals in the system null
+space. The experimental results show that using the proposed
+method, we can estimate the maximum NR performance for
+any given ANC system. In future work, one can (1) incorporate
+the effect of acoustic feedback from the secondary sources to
+the reference sensors to the performance evaluation and (2)
+investigate the NR performance over a large continuous region.
+ACKNOWLEDGMENTS
+This research was funded partially by ARC Discovery
+Project Grant No. DP180102375.
+APPENDIX A: PROOF OF THEOREM 1
+Proof. Using the deﬁnition S^/C23 r ^/C23 r ¼ Ef^/C23 r ^/C23 /C3
+r g, the ﬁrst
+term of Eq. (16) can be written as
+Ef^mH ^mg¼
+XR
+r¼1
+S^/C23 r ^/C23 r þ
+XQ
+r¼Rþ1
+S^/C23 r ^/C23 r : (A1)
+Since R is a rectangular diagonal matrix with R nonzero
+diagonal elements rr, r ¼ 1; … ; R, the second term of Eq.
+(16) can be written as
+Ef^mH R ^Wcg¼ E
+XR
+r¼1
+XZ
+z¼1
+^/C23 /C3
+r rr ^wrzcz
+()
+¼
+XR
+r¼1
+rr
+XZ
+z¼1
+^wrzEf^/C23 /C3
+r czg (A2)
+¼
+XR
+r¼1
+rr ^wr SH
+^/C23 r c; (A3)
+where ^wrz is the ( r, z) element of ^W; ^wr ¢½ ^wr1; … ; ^wrZ/C138,
+and the 1 /C2 Z correlation vector S^/C23 r c ¼ Ef^/C23 r cH g.
+Similarly, the third term in Eq. (16) can be written as
+EfcH ^W
+H
+RH ^mg¼
+XR
+r¼1
+r/C3
+r S^/C23 r c ^wH
+r : (A4)
+The fourth term in Eq. (16) can be expressed as
+EfcH ^W
+H
+RH R ^Wcg¼ E
+XR
+r¼1
+XZ
+z¼1
+XZ
+z0 ¼1
+c/C3
+z cz0 ^w/C3
+rz ^wrz0 r/C3
+r rr
+()
+¼
+XR
+r¼1
+XZ
+z¼1
+XZ
+z0 ¼1
+jrr j2 ^w/C3
+rz ^wrz0 Efc/C3
+z cz0 g
+¼
+XR
+r¼1
+jrr j2XZ
+z¼1
+^w/C3
+rzkz ^wrz
+¼
+XR
+r¼1
+jrr j2 ^wr ^K ^wH
+r ; (A5)
+where ^K is a Z /C2 Z diagonal matrix whose diagonal ele-
+ments are the nonzero diagonal elements of K.
+By substituting Eqs. (A1), (A3), (A4), and (A5) into Eq.
+(16), we obtain
+ET ¼
+XR
+r¼1
+/C16
+S^/C23 r ^/C23 r þ rr ^wr SH
+^/C23 r c þ r/C3
+r S^/C23 r c ^wH
+r
+þj rr j2 ^wr ^K ^wH
+r
+/C17
+þ
+XQ
+r¼Rþ1
+S^/C23 r ^/C23 r : (A6)
+Using the identity for completing squares for vectors, we
+further simplify Eq. (A6) as
+ET ¼
+XR
+r¼1
+S^/C23 r ^/C23 r /C0 S^/C23 r cK/C0 1SH
+^/C23 r c
+/C16/C17
+þ
+XR
+r¼1
+/C18
+jrr j2 ^wr þ S^/C23 r c
+rr
+^K
+/C0 1
+/C18/C19
+/C2 ^K ^wr þ S^/C23 r c
+rr
+^K
+/C0 1
+/C18/C19 H/C19
+þ
+XQ
+r¼Rþ1
+S^/C23 r ^/C23 r : (A7)
+Equation (A7) can be rearranged in the form of Eq. (19) in
+Theorem 1. (
+FIG. 9. (Color online) Contribution of ET1 and ET3 in different cases in the
+experiment.
+1526 J. Acoust. Soc. Am. 148 (3), September 2020 Zhang et al.
+https://doi.org/10.1121/10.0001938
+ 10 January 2024 03:26:15
+
+
+APPENDIX B: ALTERNATIVE PROOF OF THE OPTIMAL FILTER
+Since W is a complex matrix and W ¼< ðWÞþ i=ðWÞ, the differentiation of Eq. (6) can be written as 20
+@ET
+@W/C3 ¼ 1
+2
+@ET
+@<ðWÞ þ i @ET
+@=ðWÞ
+/C18/C19
+; (B1)
+where <f/C1g and =f/C1g denote the real part and imaginary part of a complex number, vector, or matrix, respectively.
+The derivative of the real part can be expanded as
+@ET
+@<ðWÞ ¼ @ EðmHmÞ
+/C2/C3
+@<ðWÞ þ @ EðmH GWxÞ
+/C2/C3
+@<ðWÞ þ @ EðxH WH GH mÞ
+/C2/C3
+@<ðWÞ þ @ EðxH WH GH GWxÞ
+/C2/C3
+@<ðWÞ
+¼ 0 þ @ EðmH G<ðWÞxÞ
+/C2/C3
+@<ðWÞ þ
+@ EðxH <ðWÞHGH mÞ
+hi
+@<ðWÞ þ/C1/C1/C1þ
+@ EðxH ð<ðWÞþ i=ðWÞÞHGH Gð<ðWÞþ i=ðWÞÞxÞ
+hi
+@<ðWÞ
+¼ EfGT m/C3 xT þ GHmxH þð GH GÞT <ðWÞx/C3 xT þð GH GÞ<ðWÞxxHgþ/C1/C1/C1
+þi
+@ EðxH <ðWÞH ðGH GÞ=ðWÞxÞ
+hi
+@<ðWÞ þ
+@ EðxH =ðWÞHGH G<ðWÞxÞ
+hi
+@<ðWÞ
+8
+<
+:
+9
+=
+;
+¼ EfGT m/C3 xT þ GHmxH þð GH GÞT <ðWÞx/C3 xT þ GH G<ðWÞxxH þ/C1/C1/C1þ iðGH G=ðWÞxxH /C0ð GHGÞT =ðWÞ/C3 x/C3 xT Þg:
+(B2)
+Similar to Eq. (B2), the derivative of the imaginary part can
+be represented by
+@ET
+@=ðWÞ ¼ Ei ðGT m/C3 xT /C0 GH mxH þ GT G/C3 <ðWÞx/C3 xT/C8
+/C0 GH G<ðWÞxxH Þþ/C1/C1/C1
+þGH G=ðWÞxxH þ GT ðGH ÞT =ðWÞx/C3 xT g:
+(B3)
+Substitute Eqs. (B2) and (B3) into Eq. (B1) and the differen-
+tiation can be represented by
+@ET
+@W/C3 ¼ 1
+2 E 2GH mxH þ 2GH GWxxHfg
+¼ EfGH mxH þ GHGWxxH g
+¼ GH Smx þ GHGWSxx: (B4)
+By setting
+@ET
+@W/C3 ¼ 0; (B5)
+we can obtain the optimal ﬁlter, which can be solved from
+GH Smx þ GH GWoSxx ¼ 0: (B6)
+Then, we represent each variable in the transformed
+domain. Substitute Eqs. (7), (11), (17),a n d (18) into Eq.
+(B6),t h e n
+ðARBH ÞH EfAm0ðUcÞH gþð ARBH ÞH ðARBH Þ
+/C2 B ^W
+o
+UH EfUccH UHg¼ 0;
+BRHAH ASm0 cUH þ BRH AHARBH B ^W
+o
+/C2 UH UEfccH gUH ¼ 0;
+BRHSm0cUH þ BRH R ^W
+o
+EfccH gUH ¼ 0: (B7)
+As B is a unitary matrix, left multiply BH for both sides and
+further simplify the result, and we can get
+RH Sm0 cUH þ RH R ^W
+o
+EfccHgUH ¼ 0: (B8)
+As U is a unitary matrix, right multiply U for both sides
+and further simplify the result, and we can get
+RH Sm0 c þ RH R ^W
+o
+EfccH g¼ 0: (B9)
+Substitute Eq. (15) into Eq. (B9), and we can simplify Eq.
+(B9) as
+RH Sm0 c þ RH R ^W
+o ^K ¼ 0: (B10)
+We write Eq. (B10) into element-wise calculation and sim-
+plify the result,
+r/C3
+r S/C23 0r cz þ ^wo
+rzjrr j2kz ¼ 0; 8r 2 1; R½/C138 ; 8z 2 1; Z½/C138 :
+(B11)
+Therefore,
+J. Acoust. Soc. Am. 148 (3), September 2020 Zhang et al. 1527
+https://doi.org/10.1121/10.0001938
+ 10 January 2024 03:26:15
+
+
+^wo
+rz ¼/C0 S/C23 0r cz
+rr kz
+; 8r 2 1; R½/C138 ; 8z 2 1; Z½/C138 : (B12)
+Equation (B12) is equivalent to Eq. (22), which completes
+the proof.
+1J. Cheer and S. J. Elliott, “Multichannel control systems for the attenua-
+tion of interior road noise in vehicles,” Mech. Syst. Signal Process. 60-61,
+753–769 (2015).
+2K. Iwai, S. Hase, and Y. Kajikawa, “Multichannel feedforward active
+noise control system with optimal reference microphone selector based on
+time difference of arrival,” Appl. Sci. 8, 2291 (2018).
+3Y. Xiao, “A new efﬁcient narrowband active noise control system and its
+performance analysis,” IEEE Trans. Audio, Speech, Language Process.
+19(7), 1865–1874 (2011).
+4J. Guo, F. Yang, and J. Yang, “Convergence analysis of the conventional
+ﬁltered-x afﬁne projection algorithm for active noise control,” Signal
+Process. 170, 107437 (2019).
+5D. P. Das, D. J. Moreau, and B. S. Cazzolato, “A computation-
+ally efﬁcient frequency-domain ﬁltered-X LMS algorithm for vir-
+tual microphone,” Mech. Syst. Signal Process. 37(1-2), 440–454
+(2013).
+6N. K. Rout, D. P. Das, and G. Panda, “Computationally efﬁcient algo-
+rithm for high sampling-frequency operation of active noise control,”
+Mech. Syst. Signal Process. 56-57, 302–319 (2015).
+7A. A. Milani, I. M. S. Panahi, and P. C. Loizou, “A new delayless sub-
+band adaptive ﬁltering algorithm for active noise control systems,” IEEE
+Trans. Audio, Speech, Lang. Proc. 17(5), 1038–1045 (2009).
+8P. A. C. Lopes, “Active noise control algorithms with reduced chan-
+nel count and their stability analysis,” Signal Process. 88(4), 811–821
+(2008).
+9L. Zhang, J. Tao, and X. Qiu, “Performance analysis of decentralized
+multi-channel feedback systems for active noise control in free space,”
+Appl. Acoust. 74(1), 181–188 (2013).
+10J. Zhang, T. D. Abhayapala, P. N. Samarasinghe, W. Zhang, and S. Jiang,
+“Multichannel active noise control for spatially sparse noise ﬁelds,”
+J. Acoust. Soc. Am. 140(6), EL510–EL516 (2016).
+11H. Chen, P. Samarasinghe, T. D. Abhayapala, and W. Zhang, “Spatial
+noise cancellation inside cars: Performance analysis and experimental
+results,” in 2015 IEEE Workshop on Applications of Signal Processing to
+Audio and Acoustics (WASPAA) , pp. 1–5.
+12I.-H. Yang, J.-E. Jeong, U.-C. Jeong, J.-S. Kim, and J.-E. Oh,
+“Improvement of noise reduction performance for a high-speed elevator
+using modiﬁed active noise control,” Appl. Acoust. 79, 58–68 (2014).
+13H. Chen, J. Zhang, P. N. Samarasinghe, and T. D. Abhayapala,
+“Evaluation of spatial active noise cancellation performance using spheri-
+cal harmonic analysis,” in 2016 IEEE International Workshop on
+Acoustic Signal Enhancement (IWAENC) , pp. 1–5.
+14M. De Diego and A. Gonzalez, “Performance evaluation of multichannel
+adaptive algorithms for local active noise control,” J. Sound Vib. 244(4),
+615–634 (2001).
+15M. Buerger, T. Abhayapala, C. Hofmann, H. Chen, and W. Kellermann,
+“The spatial coherence of noise ﬁelds evoked by continuous source distri-
+butions,” J. Acoust. Soc. Am. 142(5), 3025–3034 (2017).
+16S. M. Kuo and D. Morgan, Active Noise Control Systems: Algorithms and
+DSP Implementations (Wiley, New York, 1996).
+17J. Bitzer, K. U. Simmer, and K. Kammeyer, “Multichannel noise reduc-
+tion—Algorithms and theoretical limits,” in 9th European Signal
+Processing Conference (EUSIPCO) (1998), pp. 1–4.
+18S. Spors and H. Buchner, “Efﬁcient massive multichannel active noise
+control using wave-domain adaptive ﬁltering,” in 3rd International
+Symposium on Communications, Control and Signal Processing
+(ISCCSP) IEEE (2008), pp. 1480–1485.
+19T. Kosaka, S. J. Elliott, and C. C. Boucher, “A novel frequency domain
+ﬁltered-x LMS algorithm for active noise reduction,” in IEEE
+International Conference on Acoustics, Speech, and Signal Processing
+(1997), Vol. 1, pp. 403–406.
+20D. H. Brandwood, “A complex gradient operator and its application in
+adaptive array theory,” IEE Proc., Part H: Microwaves, Opt. Antennas
+130(1), 11–16 (1983).
+1528 J. Acoust. Soc. Am. 148 (3), September 2020 Zhang et al.
+https://doi.org/10.1121/10.0001938
+ 10 January 2024 03:26:15

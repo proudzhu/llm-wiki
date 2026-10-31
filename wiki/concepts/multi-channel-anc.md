@@ -11,11 +11,13 @@ sources:
   - raw/papers/wang-2026-directional-sfanc-reverberant/full-text.md
   - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
   - raw/papers/forster-2022-optimal-microphone-positioning/full-text.txt
+  - raw/papers/zhang-2020-coherence-mcanc-noise-reduction/full-text.txt
 tags:
 - active-noise-control
 - dsp
 - multi-channel
 - acoustic-feedback
+- performance-bounds
 ---
 
 # Multi-Channel ANC
@@ -66,6 +68,10 @@ For multi-channel systems, virtual sensing is more challenging than single-chann
 
 [^shi2020]: [[sources/shi-2020-active-noise-control-casing-virtual-sensing|Shi, Jia, Xie & Li 2020: ANC Casing with RP-VS]]
 
+## Fundamental Limits of a Given Configuration
+
+Beyond how fast, cheaply, or stably a multichannel controller can run, a third question is how much noise reduction is *achievable at all* for a given transducer configuration and noise field. [[sources/zhang-2020-coherence-mcanc-noise-reduction|Zhang et al. 2020]] answer it algorithm-independently: the residual energy decomposes into a coherence term (references cannot predict the primary field), a filter term (zero at the optimum), and a secondary-path null-space term (more error microphones than independent secondary directions) — see [[concepts/anc-nr-potential-decomposition|ANC NR-Potential Decomposition]]. Their experiments quantify two configuration rules of thumb: reference starvation (1 reference for 4 error mics) collapses the bound through the coherence term, while an error-mic surplus over sources surfaces the null-space term at a magnitude comparable to the coherence term.
+
 ## Computational Challenge
 
 The main challenge is the **explosive growth in computation**. For each error sensor n and each secondary source m, the reference signal must be convolved with Ŝ_{mn}(z). This motivates research into:
@@ -102,6 +108,7 @@ Every added secondary loudspeaker and reference microphone adds another loudspea
 - [[concepts/covariance-subtraction|Covariance Subtraction]] — identifies the mapping without silencing the primary noise
 - [[concepts/virtual-in-ear-sensing|Virtual In-Ear Sensing]] — MISO variant whose "error sensor" is a learned in-ear residual
 - [[concepts/hybrid-partitioned-convolution|Hybrid Partitioned Convolution]] — real-time replay of long network-generated control filters
+- [[concepts/anc-nr-potential-decomposition|ANC NR-Potential Decomposition]] — algorithm-independent maximum-NR bound from coherence / filter / null-space terms
 
 ## PINN-Assisted Multi-Channel ANC
 
@@ -110,6 +117,7 @@ In the PINN-assisted ANC system ([[sources/zhang-2024-active-noise-control-sound
 ## Related Sources
 
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial Review]] — Section V: Multiple-Channel ANC
+- [[sources/zhang-2020-coherence-mcanc-noise-reduction|Zhang, Murata, Maeno, Samarasinghe, Abhayapala & Mitsufuji 2020: Coherence-Based Performance Analysis on Noise Reduction in Multichannel ANC]] — maximum-NR formulation for arbitrary multichannel systems; generalizes the single-channel coherence limit to parallel eigen channels
 - [[sources/serizel-2010-integrated-anc-nr-hearing-aids|Serizel, Moonen, Wouters & Jensen 2010: Integrated ANC and NR in Hearing Aids]] — multichannel ANC combined with NR in open-fitting hearing aids
 - [[sources/zhang-2024-active-noise-control-soundfield-interpolation-pinn|Zhang et al. 2024: ANC with PINN-based Soundfield Interpolation]]
 - [[sources/he-2026-neural-projection-filter-anc|He et al. 2026: Neural Projection Filter Generation for Multi-Reference ANC]] — 42-reference road-noise system compressed to 4 projected references

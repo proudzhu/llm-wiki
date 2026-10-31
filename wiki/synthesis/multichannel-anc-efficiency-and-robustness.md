@@ -15,6 +15,7 @@ sources:
   - raw/papers/lu-2021-survey-active-noise-control-linear/full-text.md
   - raw/papers/wang-2024-computation-efficient-virtual-sensing/full-text.txt
   - raw/papers/forster-2022-optimal-microphone-positioning/full-text.txt
+  - raw/papers/zhang-2020-coherence-mcanc-noise-reduction/full-text.txt
 tags:
   - active-noise-control
   - multichannel-anc
@@ -22,6 +23,7 @@ tags:
   - distributed-control
   - meta-learning
   - acoustic-feedback
+  - performance-bounds
 ---
 
 # Multichannel ANC: Computational Efficiency and Spatial Robustness
@@ -81,7 +83,15 @@ The efficiency framing applies to the mitigation mechanism itself. Per-path feed
 
 ---
 
-## 5. Synthesis Comparison
+## 5. Fundamental-Limit Prediction: How Much NR Is Achievable at All
+
+Sections 2–4 ask how to make MC-ANC *cheap* (complexity) and *stable* (feedback). A logically prior question is how much noise reduction a given configuration can deliver at all — the fundamental limit that bounds every controller regardless of its implementation. [[sources/zhang-2020-coherence-mcanc-noise-reduction|Zhang et al. 2020]] answer this algorithm-independently: combining the SVD of the secondary-path matrix $\mathbf{G}$ with the eigendecomposition of the reference PSD matrix, the residual energy decomposes into a **coherence term** (how much of the primary field the references can linearly predict on each secondary-path eigen channel), a **filter term** (zero for the closed-form optimal filter), and a **null-space term** (primary energy in directions the secondary sources cannot reach — nonzero whenever $Q > \mathrm{rank}(\mathbf{G})$). See [[concepts/anc-nr-potential-decomposition|ANC NR-Potential Decomposition]].
+
+This adds a **prediction axis** to the design space above: instead of optimizing a deployed controller, the framework computes the maximum NR and its limiting factor from pre-measurable statistics ($\mathbf{S}_{mx}, \mathbf{S}_{mm}, \mathbf{S}_{xx}, \mathbf{G}$) *before* any hardware commitment. The experiments make the configuration trade-offs concrete — reference starvation (1 reference for 4 error microphones) collapses the bound through the coherence term, while an error-microphone surplus over secondary sources (9 vs 4) surfaces the null-space term at a magnitude comparable to the coherence term. Notably, the acoustic-feedback axis of Section 4 is exactly what this 2020 analysis deferred as future work, and the same ANU group later closed that gap with the ReTM neutralization of [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang et al. 2026]] — the fundamental-limit analysis (2020) and the feedback mitigation (2026) are complementary halves of one configuration-design pipeline.
+
+---
+
+## 6. Synthesis Comparison
 
 | Strategy | Key Mechanism | Best For | Complexity |
 | :--- | :--- | :--- | :--- |
@@ -92,10 +102,11 @@ The efficiency framing applies to the mitigation mechanism itself. Per-path feed
 | **Neural reference projection** (He 2026) | Learned condition-aware FIR projection of references (42→4) | Correlated multi-reference road noise | 374.0 MMAC/s |
 | **Feedback-aware front end** (Zhang 2026) | Covariance-subtracted Relative Transfer Matrix subtracts loudspeaker leakage from the reference before FxLMS | Feedback-limited MIMO arrays | One $J_{\mathrm{R}} \times J_{\mathrm{F}}$ matrix, identified once |
 | **Greedy causal placement** (Forster 2022) | Offline selection of physical reference positions under a time-domain Wiener criterion with causality | Multi-mic wearable arrays (headphones) | $J - p$ evaluations per greedy step |
+| **Statistical bound** (Zhang 2020) | SVD + eigendecomposition three-term residual-energy decomposition | Predicting maximum NR and its limiting factor before deployment | One SVD of $\mathbf{G}$ + pre-measured statistics |
 
 ---
 
-## 6. Future Directions
+## 7. Future Directions
 1. **Dynamic Topology**: Systems that can add/drop secondary nodes on-the-fly without retraining the entire control structure.
 2. **Hybrid Physics-Neural Models**: Using neural networks to predict time-varying secondary paths (as seen in recent Virtual Sensing papers) and using traditional FxLMS to perform the final cancellation, combining robustness with adaptivity.
 
@@ -113,6 +124,7 @@ The efficiency framing applies to the mitigation mechanism itself. Per-path feed
 - [[concepts/acoustic-feedback|Acoustic Feedback]] — the MIMO stability limiter treated in Section 4
 - [[concepts/relative-transfer-matrix|Relative Transfer Matrix (ReTM)]] — one-shot identification of the feedback mapping
 - [[concepts/covariance-subtraction|Covariance Subtraction]] — lets that identification run without a quiet window
+- [[concepts/anc-nr-potential-decomposition|ANC NR-Potential Decomposition]] — the coherence/filter/null-space bound of Section 5
 
 ## Related Sources
 
@@ -122,4 +134,5 @@ The efficiency framing applies to the mitigation mechanism itself. Per-path feed
 - [[sources/lu-2021-survey-active-noise-control-linear|Lu Lu, Kai-Li Yin, Rodrigo C. de Lamare, Zongsheng Zheng, Yi Yu, Xiaomin Yang & Badong Chen 2021: A Survey on Active Noise Control Techniques — Part I: Linear Systems]]
 - [[sources/wang-2024-computation-efficient-virtual-sensing|Wang, Ji, Shen, Shi & Gan 2024: Computation-Efficient Virtual Sensing with MCALMS]]
 - [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022: Optimal Microphone Positioning for Multi-Channel Feedforward ANC Headphones]] — the selection axis of Section 2.5: curating the physical reference array offline instead of compressing it online
+- [[sources/zhang-2020-coherence-mcanc-noise-reduction|Zhang, Murata, Maeno, Samarasinghe, Abhayapala & Mitsufuji 2020: Coherence-Based Performance Analysis on Noise Reduction in Multichannel ANC]] — the fundamental-limit axis of Section 5; the same ANU group's precursor to the 2026 feedback-mitigation paper
 

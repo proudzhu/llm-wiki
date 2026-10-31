@@ -4,6 +4,7 @@ created: 2026-04-10
 updated: 2026-10-31
 sources:
   - raw/papers/zhang-2026-feedback-path-mitigation-mcanc/full-text.md
+  - raw/papers/zhang-2020-coherence-mcanc-noise-reduction/full-text.txt
   - raw/papers/chiba-2027-wideband-anc-coaxial-loudspeaker/full-text.txt
   - raw/papers/forster-2022-optimal-microphone-positioning/full-text.txt
 tags:
@@ -63,6 +64,8 @@ High coherence at frequencies with significant disturbance energy is essential.
 
 The multi-reference generalization is the [[concepts/multiple-coherence-function|Multiple Coherence Function (MCF)]]: the fraction of disturbance power linearly explainable by all $J$ references, bounding attenuation at $-10\log_{10}(1-\eta_{ud}^2)$. [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022]] note that this bound ignores causality — on their 12-microphone headphone it credits contralateral references that causal filters cannot actually exploit (see [[concepts/reference-microphone-positioning|Reference Microphone Positioning]]).
 
+For the fully general multichannel case ($P$ references, $L$ sources, $Q$ error microphones), [[sources/zhang-2020-coherence-mcanc-noise-reduction|Zhang et al. 2020]] show the bound decomposes into parallel eigen channels: per channel, the multiple coherence between the projected primary signal and the reference eigen components sets the coherence floor $E_{T1}$, while the secondary-path rank adds a null-space floor $E_{T3}$ when $Q > \mathrm{rank}(\mathbf{G})$ — see [[concepts/anc-nr-potential-decomposition|ANC NR-Potential Decomposition]]. The single-channel formula above is the scalar special case.
+
 ## Feedback Problem
 
 The anti-noise radiates **upstream** to the reference microphone, corrupting the reference signal. Solutions include [[acoustic-feedback|Acoustic Feedback]] neutralization, adaptive IIR filters, or using a sufficiently high-order FIR filter.
@@ -79,6 +82,7 @@ For open-ear headphones — where passive attenuation does not relax the require
 - [[acoustic-feedback|Acoustic Feedback]]
 - [[multi-channel-anc|Multi-Channel ANC]]
 - [[concepts/multiple-coherence-function|Multiple Coherence Function (MCF)]]
+- [[concepts/anc-nr-potential-decomposition|ANC NR-Potential Decomposition]] — the multichannel closed form of the coherence limit
 
 ## Related Sources
 
@@ -86,6 +90,7 @@ For open-ear headphones — where passive attenuation does not relax the require
 - [[sources/zhang-2026-feedback-path-mitigation-mcanc|Zhang, Abhayapala, Samarasinghe & Bastine 2026: Acoustic Feedback Path Mitigation for Multichannel ANC]]
 - [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba, Kamado, Kako & Noguchi 2027: Wideband ANC for Open-Ear Headphones with a Coaxial Loudspeaker]] — broadband feedforward reach as a secondary-path delay budget; driver-band allocation on a 2-way coaxial secondary source
 - [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022: Optimal Microphone Positioning for Multi-Channel Feedforward ANC Headphones]] — multi-reference coherence bound meets causality: MCF vs. MSE-TD CF as placement criteria
+- [[sources/zhang-2020-coherence-mcanc-noise-reduction|Zhang, Murata, Maeno, Samarasinghe, Abhayapala & Mitsufuji 2020: Coherence-Based Performance Analysis on Noise Reduction in Multichannel ANC]] — proves the single-channel coherence limit is the scalar case of its three-term residual-energy decomposition
 
 ## Related Entities
 
