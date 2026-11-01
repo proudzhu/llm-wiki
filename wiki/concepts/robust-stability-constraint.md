@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-08-27
+updated: 2026-11-01
 sources:
   - raw/papers/rafaely-2000-constrained-fdlms/full-text.md
   - raw/papers/guldenschuh-2014-secondary-path-irregularities/full-text.md
+  - raw/papers/klatt-2025-laguerre-feedback-anc/full-text.md
 tags:
   - active-noise-control
   - robust-control
@@ -58,6 +59,10 @@ corresponds to **scaling** (by $|K_\mu|$) and **rotation** (by $\angle K_\mu$) o
 
 The non-convexity of the elliptic and convex hull constraints means that gradient-based optimization (e.g., interior-point methods) can only find local optima. Despite this, the local optima significantly outperform the global optima of the more conservative convex models.
 
+## Parameterization Choice Preserves Convexity
+
+Which model $Q$ is used matters for convexity just as much as which uncertainty model is used. In the IMC program, the plant enters the sensitivity as the product $Q_\mu \widehat{G}_\mu$ and the robust-stability constraint as $|Q_\mu \widehat{G}_\mu W_T^\chi|^2 < 1$. If $Q$ is parameterized **affinely** in the optimization variables, these constraints stay convex. Both FIR coefficients and [[concepts/laguerre-filter|Laguerre]] coefficients $\mathbf{q}$ satisfy this — the Laguerre frequency response $Q_\ell(\mathrm{e}^{\mathrm{j}\Omega_k}) = \mathbf{q}^{\mathsf{T}}\boldsymbol{\Lambda}(\mathrm{e}^{\mathrm{j}\Omega_k}, \alpha)$ is affine in $\mathbf{q}$ for fixed $\alpha$, so a low-order Laguerre $Q$ preserves the convexity of the constraint set while reducing order by an order of magnitude ([[sources/klatt-2025-laguerre-feedback-anc|Klatt & Martin 2025]]).
+
 ## Optimization Problem
 
 $$\min_q J(q) = \frac{1}{N_\Omega} \sum_{\mu=1}^{N_\Omega} |W_{1,\mu} \cdot [1 - G_\mu Q_\mu(q)]|^2$$
@@ -92,3 +97,4 @@ $$\sum_l w_l < \frac{1}{U_{\max}(0)}$$
 
 - [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
 - [[sources/rafaely-2000-constrained-fdlms|Rafaely & Elliott 2000: Computationally Efficient Frequency-Domain LMS with Constraints]] — adaptive online enforcement of the $|WGB|^2<1$ constraint
+- [[sources/klatt-2025-laguerre-feedback-anc|Klatt & Martin 2025: Laguerre Filter-based Robust Feedback Active Noise Control]] — Laguerre-Q parameterization keeping the constraint convex at order 17

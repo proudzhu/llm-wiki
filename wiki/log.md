@@ -6294,3 +6294,15 @@ Answered from [[sources/li-2026-geometry-conditioned-ssanc|Li 2026 GC-SSF]] and 
   - `wiki/concepts/broad-band-feedforward-anc.md` — extended the coherence-bound paragraph with the multichannel generalization
   - `wiki/synthesis/multichannel-anc-efficiency-and-robustness.md` — new Section 5 "Fundamental-Limit Prediction" (trigger 4: new axis — fundamental-limit prediction vs efficiency/robustness), comparison-table row, Related Concepts/Sources; noted the ANU 2020→2026 lineage (this paper deferred acoustic feedback, which Zhang 2026 ReTM work closed)
   - `wiki/index.md` + subdirectory indexes + statistics (1634 total)
+
+---
+
+## [2026-11-01] ingest | Laguerre Filter-based Robust Feedback Active Noise Control (Klatt & Martin 2025)
+
+- **Source**: `raw/papers/klatt-2025-laguerre-feedback-anc/full-text.md` (Zotero: WTD24SX6, MinerU VLM extraction)
+- **Authors**: Willem Alexander Klatt, Rainer Martin
+- **Published**: EUSIPCO 2025, pp. 386–390
+- **DOI**: 10.23919/EUSIPCO63237.2025.11226553
+- **Summary**: Replaces the FIR control filter Q in IMC-based feedback ANC with a Laguerre filter network — first Laguerre+IMC combination for FBANC. Order-17 Laguerre (α=0.92, 2+4M=70 MACs) matches order-255/501 FIR-IMC nominal attenuation, beats orders 63–255 at low frequencies, avoids out-of-band Q-gain blowup (24 dB less gain at 20 kHz), and stays robust across 100 augmented secondary paths (convex-set uncertainty model).
+- **Pages created**: [[entities/willem-alexander-klatt|Willem Alexander Klatt]] (entity), [[concepts/laguerre-filter|Laguerre Filter]] (concept), `wiki/sources/klatt-2025-laguerre-feedback-anc.md` (source)
+- **Pages updated**: [[entities/rainer-martin|Rainer Martin]] (new affiliation IKA RUB, ANC research focus, co-author bullet); [[concepts/feedback-anc|Feedback ANC]] (Laguerre-IMC design section); [[concepts/internal-model-control|Internal Model Control]] (Laguerre-Q parameterization section); [[concepts/warped-fir-filter|Warped FIR Filter]] (Laguerre relation section); [[concepts/q-parameterization|Q-Parameterization]] (Laguerre-basis application); [[concepts/sensitivity-function|Sensitivity Function]] (achievable bandwidths data point); [[concepts/uncertainty-modeling-for-anc|Uncertainty Modeling for ANC]] (dynamic convex-set model section); [[concepts/convex-hull-uncertainty-model|Convex Hull Uncertainty Model]] (related source); [[sources/seo-2016-feedback-anc-constrained-optimization|Seo 2016]] (successor-approach cross-ref); [[synthesis/feedback-anc-filter-design|Feedback ANC Filter Design]] (new §5b warping-vs-Laguerre comparison, decision-tree branch, design table row)

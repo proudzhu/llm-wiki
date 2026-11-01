@@ -696,4 +696,5 @@
 | [[entities/naoki-murata\|Naoki Murata]] | Sony researcher; co-author of the JASA 2020 multichannel ANC NR-potential analysis | 2026-10-31 |
 | [[entities/yu-maeno\|Yu Maeno]] | Sony researcher; co-author of the JASA 2020 multichannel ANC NR-potential analysis | 2026-10-31 |
 | [[entities/yuki-mitsufuji\|Yuki Mitsufuji]] | Sony researcher (music source separation, MDX Challenge); co-author of the JASA 2020 multichannel ANC NR-potential analysis | 2026-10-31 |
+| [[entities/willem-alexander-klatt\|Willem Alexander Klatt]] | Ruhr-Universität Bochum — robust feedback ANC, convex-set uncertainty models, Laguerre filter control design | 2026-11-01 |
 

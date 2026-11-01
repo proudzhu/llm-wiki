@@ -4,6 +4,7 @@ created: 2026-04-26
 updated: 2026-08-27
 sources:
   - raw/papers/guldenschuh-2014-secondary-path-irregularities/full-text.md
+  - raw/papers/klatt-2025-laguerre-feedback-anc/full-text.md
 tags:
   - active-noise-control
   - feedback-anc
@@ -67,6 +68,10 @@ From Hilgemann et al. (2024), using more accurate models in IMC-based optimizati
 
 The convex hull model achieves **18 dB more attenuation** at 300 Hz than the conventional disk model.
 
+## Dynamic Convex-Set Uncertainty (Klatt & Martin 2025)
+
+A further refinement: instead of pre-computing a fixed uncertainty region per frequency bin, the frequency-dependent convex sets are **computed dynamically during filter optimization**, surrounding the nominal open-loop response $L_0(\mathrm{e}^{\mathrm{j}\Omega_k}) = C(\mathrm{e}^{\mathrm{j}\Omega_k}; Q) \cdot \widehat{G}(\mathrm{e}^{\mathrm{j}\Omega_k})$, with the weight $W_T^{\chi}$ stemming from the final iteration of the algorithm. This dynamic convex-set model is the uncertainty backend of [[sources/klatt-2025-laguerre-feedback-anc|Klatt & Martin 2025]], used there to verify Laguerre-IMC robust stability across 100 augmented secondary paths.
+
 ## Related Concepts
 
 - [[concepts/feedback-anc|Feedback ANC]]
@@ -82,3 +87,4 @@ The convex hull model achieves **18 dB more attenuation** at 300 Hz than the con
 
 - [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
 - [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]]
+- [[sources/klatt-2025-laguerre-feedback-anc|Klatt & Martin 2025: Laguerre Filter-based Robust Feedback Active Noise Control]]

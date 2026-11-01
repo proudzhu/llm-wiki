@@ -628,4 +628,5 @@
 | [[concepts/multiple-coherence-function\|Multiple Coherence Function (MCF)]] | Multi-reference generalization of coherence bounding feedforward ANC attenuation at -10log10(1-η²); ignores causality, overestimating contralateral reference value | 2026-10-31 |
 | [[concepts/reference-microphone-positioning\|Reference Microphone Positioning]] | Where/how many external reference microphones to place on feedforward ANC devices; ipsilateral distribution pays (~9 dB), contralateral positions are causality-blocked | 2026-10-31 |
 | [[concepts/anc-nr-potential-decomposition\|ANC NR-Potential Decomposition]] | Algorithm-independent three-term decomposition of multichannel ANC residual energy (coherence / filter / null space), generalizing the single-channel coherence limit | 2026-10-31 |
+| [[concepts/laguerre-filter\|Laguerre Filter]] | IIR filter built on orthonormal Laguerre basis functions (all-pass chain + low-pass input); affine in coefficients, enabling low-order control filters that match high-order FIR | 2026-11-01 |
 

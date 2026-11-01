@@ -81,3 +81,4 @@ In Hilgemann et al. (2024), the convex hull model achieved:
 ## Related Sources
 
 - [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
+- [[sources/klatt-2025-laguerre-feedback-anc|Klatt & Martin 2025: Laguerre Filter-based Robust Feedback Active Noise Control]] — uses a related dynamic convex-set uncertainty model (computed during optimization rather than fixed a priori) to verify Laguerre-IMC robust stability

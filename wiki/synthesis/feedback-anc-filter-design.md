@@ -1,9 +1,10 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-09-12
+updated: 2026-11-01
 sources:
   - raw/papers/schepker-2016-sdp-minmax-acoustic-feedback/full-text.md
+  - raw/papers/klatt-2025-laguerre-feedback-anc/full-text.md
   - zotero://select/items/0_2LKM9QRI
   - zotero://select/items/0_XLZPIW68
   - zotero://select/items/0_VRSLTC2L
@@ -225,6 +226,23 @@ for some finite $L$. This ensures the feedback loop does not amplify errors.
 
 ---
 
+## 5b. Low-Order Filter Bases: Warping vs Laguerre (Seo 2016 / Klatt 2025)
+
+Two independent lineages attack the **order problem** — at $f_s = 48$ kHz an FIR $Q$ needs hundreds of taps to resolve a sub-1-kHz control band — by replacing the tapped-delay line with a frequency-selective basis:
+
+| Approach | Seo 2016 (WFIR) | Klatt & Martin 2025 (Laguerre) |
+|:---------|:----------------|:-------------------------------|
+| Basis | All-pass delays (warped domain) | Orthonormal Laguerre functions |
+| Pole parameter | Warping $\lambda = 0.85$ | Laguerre $\alpha = 0.92$ |
+| Reported equivalence | Order 16 ≈ FIR 128 | Order 17 ≈ FIR 255–501 |
+| Cost per sample | ~3–4× FIR per order, net gain ~5× | $2 + 4M = 70$ MACs vs 255 |
+| Convexity | Warped-domain SQP | **Preserved** (affine in $\mathbf{q}$) |
+| Out-of-band gain control | Needs care | Inherent (low-pass basis), 24 dB less gain at 20 kHz |
+
+The unifying insight: both exploit the **all-pass element** $\frac{z^{-1}-\alpha}{1-\alpha z^{-1}}$ whose pole near 1 reallocates spectral resolution to low frequencies. The Laguerre route's distinctive advantage is structural — the frequency response stays **affine in the coefficient vector**, so the entire convex IMC machinery (robust stability + nominal performance constraints, [[uncertainty-modeling-for-anc|uncertainty models]]) carries over unchanged. Both approaches are data points on the same efficiency frontier: Seo 2016 achieves ~19 dB max attenuation with 16 coefficients; Klatt & Martin 2025 match order-255 FIR nominal performance with 18 coefficients while verifying robustness over 100 augmented secondary paths.
+
+---
+
 ## 6. Feedback ANC vs. Acoustic Feedback Cancellation
 
 While historically separated into "noise control" and "hearing aid" silos, feedback ANC and AFC are fundamentally governed by the same stability constraints.
@@ -342,6 +360,11 @@ What type of feedback ANC do you need?
 │   → Stability: ‖Ŝ·W‖∞ < 1/δ
 │   → Uncertainty: Data-driven elliptic/convex hull models (Hilgemann 2024)
 │
+├─ Linear, uncertain plant, low order demanded → Laguerre-Q IMC (Klatt 2025)
+│   → Design: Laguerre-basis Q in the convex IMC program, α ≈ 0.92 near 1
+│   → Order: M = 17 Laguerre ≈ M = 255 FIR (2+4M = 70 MACs vs 255)
+│   → Stability: robust constraints with dynamic convex-set uncertainty
+│
 ├─ Nonlinear distortion → Reduced feedback FLNN
 │   → Design: Trigonometric expansion + periodic weight update
 │   → Stability: Lipschitz condition on FLNN output
@@ -385,6 +408,7 @@ Every feedback ANC design faces the same trade-off:
 | H∞ robust | ★★ | ★★★★★ | ★★★★★ |
 | Constrained LMS | ★★★ | ★★★★ | ★★★★ |
 | Reduced FLNN | ★★★★ (nonlinear) | ★★ | ★★★ |
+| Laguerre-Q IMC (Klatt 2025) | ★★★★ (matches FIR-255) | ★★★★ | ★★★★ |
 
 ---
 
@@ -394,6 +418,7 @@ Every feedback ANC design faces the same trade-off:
 - [[concepts/active-noise-control|Active Noise Control]]
 - [[concepts/acoustic-feedback|Acoustic Feedback]]
 - [[concepts/internal-model-control|Internal Model Control]]
+- [[concepts/laguerre-filter|Laguerre Filter]]
 - [[concepts/adaptive-feedback-control|Adaptive Feedback Control]]
 - [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
 - [[concepts/model-predictive-control|Model Predictive Control]]
@@ -416,4 +441,5 @@ Every feedback ANC design faces the same trade-off:
 
 - [[sources/lu-2021-survey-active-noise-control-linear|Lu et al. 2021: Survey on ANC — Part I: Linear Systems]]
 - [[sources/guldenschuh-2014-secondary-path-irregularities|Guldenschuh & de Callafon 2014: Detection of Secondary-Path Irregularities in ANC Headphones]]
+- [[sources/klatt-2025-laguerre-feedback-anc|Klatt & Martin 2025: Laguerre Filter-based Robust Feedback Active Noise Control]] — Laguerre-basis Q filter for the same convex IMC program (order-17 ≈ order-255 FIR)
 - [[sources/schepker-2016-sdp-minmax-acoustic-feedback|Schepker & Doclo 2016: SDP Min-Max Acoustic Feedback Cancellation]] — common-part decomposition with MSG-maximizing min-max SDP for hearing aids

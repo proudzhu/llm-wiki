@@ -125,3 +125,4 @@ The nominal plant $p_0(n)$ is obtained via ARMA modeling (15 AR + 15 MA coeffici
 
 - [[sources/kuo-1999-active-noise-control-tutorial-review|Kuo 1999: Active Noise Control Tutorial]]
 - [[sources/pawelczyk-1997-anc-feedback-fixed-adaptive|Pawelczyk 1997: ANC Feedback Fixed/Adaptive]]
+- [[sources/klatt-2025-laguerre-feedback-anc|Klatt & Martin 2025: Laguerre Filter-based Robust Feedback Active Noise Control]] — the Laguerre-basis successor approach: order-17 Laguerre ≈ order-255 FIR in the same IMC optimization framework

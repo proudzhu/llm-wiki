@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-20
-updated: 2026-10-07
+updated: 2026-11-01
 sources:
   - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
+  - raw/papers/klatt-2025-laguerre-feedback-anc/full-text.md
 tags:
   - control-theory
   - robust-control
@@ -18,6 +19,7 @@ Key concepts include:
 - **Complementary sensitivity function** $T = 1 - S$ — characterizes noise amplification and robustness
 - **Waterbed effect** — improvement in attenuation at one frequency band comes at the cost of amplification (boosting) at another
 - **Mixed-sensitivity $\mathcal{H}_\infty$ synthesis** — designing $K(z)$ against secondary-path uncertainty margins so stability holds for all plants covered by the uncertainty set; used for both ANC feedback controllers and the occlusion-effect-cancellation controller of Liebich & Vary 2022, whose $K(z)$ remains fixed while an adaptive factor $\alpha$ scales the loop gain for individual ears
+- **Convex-set uncertainty optimization** — instead of disk or $\mathcal{H}_\infty$ bounds, the uncertainty region can be described by frequency-dependent convex sets computed during the optimization, giving the designer explicit per-frequency stability margins at lower conservatism ([[sources/klatt-2025-laguerre-feedback-anc|Klatt & Martin 2025]])
 
 ## Related Concepts
 
@@ -33,3 +35,4 @@ Key concepts include:
 - [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
 - [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]]
 - [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]]
+- [[sources/klatt-2025-laguerre-feedback-anc|Klatt & Martin 2025: Laguerre Filter-based Robust Feedback Active Noise Control]] — constrained convex optimization with convex-set uncertainty; comparable gain/phase margins to FIR-IMC across 100 augmented secondary paths

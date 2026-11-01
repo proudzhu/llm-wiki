@@ -14,6 +14,7 @@ sources:
   - raw/papers/xiao-2026-robust-spatially-selective-anc/full-text.txt
   - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
   - raw/papers/kuo-2006-anc-headphones/full-text.txt
+  - raw/papers/klatt-2025-laguerre-feedback-anc/full-text.md
 tags:
   - active-noise-control
   - control-theory
@@ -67,6 +68,10 @@ Fixed feedback controllers can be optimized via constrained least-squares over $
 ### Constrained Optimization with Frequency Warping (Seo 2016)
 **Seo et al. (2016)** designed low-order feedback ANC filters using constrained optimization in the warped frequency domain. By combining [[concepts/q-parameterization|Q-parameterization]] with [[concepts/frequency-warping|frequency warping]], a 16th-order WFIR filter achieves ~19dB attenuation matching a 128th-order FIR at low frequencies. The warping parameter $\lambda$ provides a tunable trade-off between low-frequency resolution and noise boosting.
 
+### Laguerre-Filter IMC Design (Klatt & Martin 2025)
+
+A complementary route to low-order feedback controllers: replace the FIR $Q$ inside the IMC structure with a [[concepts/laguerre-filter|Laguerre filter]] network. Because the Laguerre frequency response is **affine in the coefficient vector** $\mathbf{q}$, the standard convex IMC optimization (robust stability + nominal performance constraints) applies unchanged. An order-17 Laguerre filter ($\alpha = 0.92$, $2+4M = 70$ MACs) matches the nominal attenuation of order-255/501 FIR-IMC designs and beats orders 63–255 at low frequencies, while inherently avoiding the out-of-band $Q$-gain blowup FIR designs suffer when approximating $\widehat{G}^{-1}$ (24 dB less gain at 20 kHz without any extra regularization). Verified robust across 100 augmented secondary paths with comparable gain/phase margins ([[sources/klatt-2025-laguerre-feedback-anc|Klatt & Martin 2025]]).
+
 ### Simplified Adaptive Feedback ANC (SimpAFB)
 Proposed by **Wu et al. (2014)**, this method uses the error signal $e(n)$ **directly** as the reference signal. It eliminates the expensive IMC convolution, but relies heavily on the [[wiki/concepts/leaky-fxlms-algorithm|Leaky FxLMS Algorithm]] for stability.
 
@@ -115,6 +120,7 @@ Feedback control also underpins [[concepts/occlusion-effect-cancellation|Occlusi
 - [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]]
 - [[sources/liebich-2018-doa-dependency-anc-headphones|Liebich 2018: DOA Dependency of ANC Headphones]]
 - [[sources/seo-2016-feedback-anc-constrained-optimization|Seo et al. 2016: Feedback ANC via Constrained Optimization]]
+- [[sources/klatt-2025-laguerre-feedback-anc|Klatt & Martin 2025: Laguerre Filter-based Robust Feedback Active Noise Control]]
 - [[sources/bai-2026-feedback-guided-anc|Bai, He, Nan, Chen & Lu 2026: Feedback-guided DNN-based Controller Fusion for Robust Fixed-Parameter ANC]]
 - [[sources/fujii-2006-simultaneous-equations-anc|Fujii, Yamaguchi, Hashimoto, Fujita & Muneyasu 2006: Verification of Simultaneous Equations Method by an Experimental Active Noise Control System]]
 - [[sources/guldenschuh-2014-secondary-path-irregularities|Guldenschuh & de Callafon 2014: Detection of Secondary-Path Irregularities in ANC Headphones]]

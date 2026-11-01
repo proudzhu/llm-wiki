@@ -4,6 +4,7 @@ created: 2026-04-10
 updated: 2026-10-31
 sources:
   - raw/papers/kuo-2006-anc-headphones/full-text.txt
+  - raw/papers/klatt-2025-laguerre-feedback-anc/full-text.md
 tags:
 - active-noise-control
 - control-theory
@@ -56,6 +57,10 @@ $$J(q) = \frac{1}{N_\Omega} \sum_{\mu=1}^{N_\Omega} |W_{1,\mu} \cdot [1 - G_\mu 
 
 subject to [[robust-stability-constraint|robust stability constraints]] derived from [[uncertainty-modeling-for-anc|uncertainty models]]. The IMC structure guarantees nominal stability for any $Q(z)$, simplifying the optimization to focus on performance and robust stability.
 
+## Laguerre-Q Parameterization (Klatt & Martin 2025)
+
+The $Q$ filter need not be FIR: [[sources/klatt-2025-laguerre-feedback-anc|Klatt & Martin 2025]] parameterize $Q$ as a [[concepts/laguerre-filter|Laguerre filter]] network $Q_\ell(z) = \mathbf{q}^{\mathsf{T}} \boldsymbol{\Lambda}(z, \alpha)$ with a fixed Laguerre parameter $\alpha \in (-1, 1)$. Because $Q_\ell(\mathrm{e}^{\mathrm{j}\Omega_k})$ is **affine in $\mathbf{q}$**, the convexity of the constrained IMC optimization is preserved exactly as in the FIR case. With $\alpha$ chosen close to 1 (low-pass-shaped basis matched to the sub-1-kHz ANC control band), an order-17 Laguerre filter matches order-255/501 FIR-IMC performance at $2+4M$ MACs per sample — and unlike FIR designs needs no additional regularization to keep the out-of-band gain of $Q$ bounded when approximating $\widehat{G}^{-1}$.
+
 ## Simplification: [[simplified-adaptive-feedback-anc|Simplified Adaptive Feedback ANC]]
 
 The SimpAFB system eliminates the IMC's convolution step by using the error signal directly as the reference signal: `X_sa(z) = E(z)`. This trades a small amount of noise reduction performance for significantly lower computation and easier implementation.
@@ -73,3 +78,4 @@ The SimpAFB system eliminates the IMC's convolution step by using the error sign
 - [[sources/wu-2014-simplified-adaptive-feedback-anc|Wu 2014: Simplified Adaptive Feedback ANC]] — Compares IMC-based system with the proposed simplified approach
 - [[sources/hilgemann-2024-data-driven-uncertainty-anc|Hilgemann 2024: Data-Driven Uncertainty Modeling for Robust Feedback ANC]] — IMC-based fixed controller optimization with data-driven uncertainty models
 - [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006: Active Noise Control System for Headphone Applications]] — IMC-based adaptive feedback ANC headphone (TMS320C32): reference synthesized via $\hat{x}(n) = e(n) + \hat{s}(n)*y(n)$, 50+ dB cancellation up to 2 kHz
+- [[sources/klatt-2025-laguerre-feedback-anc|Klatt & Martin 2025: Laguerre Filter-based Robust Feedback Active Noise Control]] — Laguerre-Q parameterization preserving convexity of the IMC optimization

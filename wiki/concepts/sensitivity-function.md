@@ -4,6 +4,7 @@ created: 2026-05-13
 updated: 2026-10-07
 sources:
   - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
+  - raw/papers/klatt-2025-laguerre-feedback-anc/full-text.md
 tags:
   - control-theory
   - feedback
@@ -28,6 +29,7 @@ where $C$ is the controller and $P$ is the plant (secondary path).
 
 - **Design objective**: Minimize $|S|$ in the control band (typically < 1kHz for ANC)
 - **Constraint**: Limit maximum $|S|$ (e.g., 3dB) to control noise boosting outside the control band
+- **Achievable bandwidths (Laguerre IMC, Klatt & Martin 2025)**: An order-17 Laguerre-based IMC controller achieves a ~700 Hz 3 dB attenuation bandwidth ($|S| < 0.707$) and a ~250 Hz 20 dB bandwidth at 48 kHz sampling, matching order-255 FIR-IMC designs
 - **OEC design target**: In [[concepts/occlusion-effect-cancellation|occlusion effect cancellation]], $S(z)$ should approximate the *inverse occlusion function*, attenuating 50–700 Hz where the occlusion effect amplifies body-conducted sound, while accepting the waterbed amplification at 1.5–4 kHz (compensated in the hear-through filter design). An adaptive factor $\alpha$ scales the effective loop gain: $S_\alpha = \frac{1}{1 + G\alpha K}$ (Liebich & Vary 2022).
 
 ## Related Concepts
@@ -41,3 +43,4 @@ where $C$ is the controller and $P$ is the plant (secondary path).
 
 - [[sources/seo-2016-feedback-anc-constrained-optimization|Seo et al. 2016: Feedback ANC via Constrained Optimization]]
 - [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]]
+- [[sources/klatt-2025-laguerre-feedback-anc|Klatt & Martin 2025: Laguerre Filter-based Robust Feedback Active Noise Control]]

@@ -702,6 +702,7 @@
 | [[entities/naoki-murata\|Naoki Murata]] | Sony researcher; co-author of the JASA 2020 multichannel ANC NR-potential analysis | 2026-10-31 |
 | [[entities/yu-maeno\|Yu Maeno]] | Sony researcher; co-author of the JASA 2020 multichannel ANC NR-potential analysis | 2026-10-31 |
 | [[entities/yuki-mitsufuji\|Yuki Mitsufuji]] | Sony researcher (music source separation, MDX Challenge); co-author of the JASA 2020 multichannel ANC NR-potential analysis | 2026-10-31 |
+| [[entities/willem-alexander-klatt\|Willem Alexander Klatt]] | Ruhr-Universität Bochum — robust feedback ANC, convex-set uncertainty models, Laguerre filter control design | 2026-11-01 |
 
 ---
 
@@ -1335,6 +1336,7 @@
 | [[concepts/multiple-coherence-function\|Multiple Coherence Function (MCF)]] | Multi-reference generalization of coherence bounding feedforward ANC attenuation at -10log10(1-η²); ignores causality, overestimating contralateral reference value | 2026-10-31 |
 | [[concepts/reference-microphone-positioning\|Reference Microphone Positioning]] | Where/how many external reference microphones to place on feedforward ANC devices; ipsilateral distribution pays (~9 dB), contralateral positions are causality-blocked | 2026-10-31 |
 | [[concepts/anc-nr-potential-decomposition\|ANC NR-Potential Decomposition]] | Algorithm-independent three-term decomposition of multichannel ANC residual energy (coherence / filter / null space), generalizing the single-channel coherence limit | 2026-10-31 |
+| [[concepts/laguerre-filter\|Laguerre Filter]] | IIR filter built on orthonormal Laguerre basis functions (all-pass chain + low-pass input); affine in coefficients, enabling low-order control filters that match high-order FIR | 2026-11-01 |
 
 ---
 
@@ -1627,6 +1629,7 @@
 | [[sources/forster-2022-optimal-microphone-positioning\|Forster, Fabry & Jax 2022]] | Causality-aware MSE time-domain cost function (vs. causality-blind multiple coherence) for reference-mic positioning; 12-mic Bose QC25 study: ~9 dB extra active gain from ipsilateral placement, contralateral mics causality-blocked | 2026-10-31 |
 | [[sources/kuo-2006-anc-headphones\|Kuo, Mitra & Gan 2006: Active Noise Control System for Headphone Applications]] | Adaptive feedback ANC headphone: error-mic placement by flattest secondary-path response, music-based identification, TMS320C32 prototype beating a Bose QC2. | 2026-10-31 |
 | [[sources/zhang-2020-coherence-mcanc-noise-reduction\|Zhang, Murata, Maeno, Samarasinghe, Abhayapala & Mitsufuji 2020]] | This paper develops an algorithm-independent method to compute the maximum noise reduction (NR) potential of an arbitrary multichannel feedforward ANC system with P reference microphones, L secondary sources, and Q error microphones. | 2026-10-31 |
+| [[sources/klatt-2025-laguerre-feedback-anc\|Klatt & Martin 2025]] | This paper replaces the FIR control filter of an Internal Model Control (IMC) feedback ANC controller with a Laguerre filter network — the first time Laguerre filters are combined with the IMC topology for FBANC (prior Laguerre-ANC work used non-IMC topologies). | 2026-11-01 |
 
 ---
 
@@ -1685,10 +1688,10 @@
 
 ## Statistics
 
-- **Total pages**: 1634
-- **Entities**: 692
-- **Concepts**: 624
-- **Sources**: 283
+- **Total pages**: 1637
+- **Entities**: 693
+- **Concepts**: 625
+- **Sources**: 284
 - **Synthesis**: 25
 - **Queries**: 10
-- **Last updated**: 2026-10-31
+- **Last updated**: 2026-11-01
