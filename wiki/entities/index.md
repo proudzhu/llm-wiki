@@ -697,4 +697,8 @@
 | [[entities/yu-maeno\|Yu Maeno]] | Sony researcher; co-author of the JASA 2020 multichannel ANC NR-potential analysis | 2026-10-31 |
 | [[entities/yuki-mitsufuji\|Yuki Mitsufuji]] | Sony researcher (music source separation, MDX Challenge); co-author of the JASA 2020 multichannel ANC NR-potential analysis | 2026-10-31 |
 | [[entities/willem-alexander-klatt\|Willem Alexander Klatt]] | Ruhr-Universität Bochum — robust feedback ANC, convex-set uncertainty models, Laguerre filter control design | 2026-11-01 |
+| [[entities/haoyin-yan\|Haoyin Yan]] | USTC NERC-SLIP researcher; first author of LiSenNet (ICASSP 2025) | 2026-11-01 |
+| [[entities/jie-zhang\|Jie Zhang]] | USTC NERC-SLIP researcher; co-first author of LiSenNet (ICASSP 2025); SDW-SWF single-channel Wiener filtering | 2026-11-01 |
+| [[entities/yeping-zhou\|Yeping Zhou]] | China Merchants Bank researcher; co-author of LiSenNet (ICASSP 2025) | 2026-11-01 |
+| [[entities/peiqi-liu\|Peiqi Liu]] | China Merchants Bank researcher; co-author of LiSenNet (ICASSP 2025) | 2026-11-01 |
 

@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-08-03
+updated: 2026-11-01
 sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
+  - raw/papers/yan-2025-lisennet/full-text.md
 tags:
   - dataset
   - speech-enhancement
@@ -44,8 +45,10 @@ The noisy baseline scores PESQ = 1.97, CSIG = 3.35, CBAK = 2.44, COVL = 2.63, ST
 - [[concepts/speech-enhancement|Speech Enhancement]]
 - [[concepts/pesq|PESQ]] — primary evaluation metric
 - [[concepts/semamba|SEMamba]] — current SOTA (PESQ 3.69)
+- [[concepts/lisennet|LiSenNet]] — lightweight-SE reference point on this benchmark: PESQ 3.07 / STOI 0.939 at 37k params, 56M MACs/s
 
 ## Related Sources
 
 - [[sources/zhu-2026-g-map-se-guided-speech-enhancement|G-MaP-SE: Guided Speech Enhancement via GMM-Based Prior Matching (Interspeech 2026)]]
 - [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] — SOTA PESQ 3.69 on VBD with SEMamba + PCS
+- [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025: LiSenNet]] — PESQ 3.07 / STOI 0.939 at 37k params and 56M MACs/s: the lightweight-SE operating point on this benchmark; also introduces the WSJ0+ESC50 instantaneous-noise dataset

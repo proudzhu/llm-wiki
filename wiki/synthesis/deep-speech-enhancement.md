@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-04
-updated: 2026-10-11
+updated: 2026-11-01
 sources:
   - raw/papers/boeddeker-2018-neural-mask-beamforming/full-text.md
   - raw/papers/erdogan-2016-improved-mvdr-mask-prediction/full-text.md
@@ -30,6 +30,7 @@ sources:
   - raw/papers/zhang-2021-adl-mvdr/full-text.md
   - raw/papers/pan-2025-data-driven-acoustics/full-text.md
   - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
+  - raw/papers/yan-2025-lisennet/full-text.md
   - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
   - raw/papers/veluri-2023-semantic-hearing/full-text.md
 tags:
@@ -78,6 +79,7 @@ The thesis here is that the field's progress is **not a single replacement story
 | [[sources/zhu-2026-g-map-se-guided-speech-enhancement\|Zhu et al. 2026 (G-MaP-SE)]] | 2026 | Conditioning | GMM prior matching refines noisy speaker embeddings for PSE |
 | [[sources/xu-2026-drifting-models-speech-enhancement\|Xu et al. 2026 (DriftSE)]] | 2026 | Backbone | Drifting models: one-step generative SE without any trajectory |
 | [[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement\|Yang et al. 2026 (CoFi-Lite)]] | 2026 | Efficiency | Dual coarse/fine-path CRN; beats GTCRN at 40% of its MACs |
+| [[sources/yan-2025-lisennet\|Yan et al. 2025 (LiSenNet)]] | 2025 | Efficiency | Sub-band conv + causal dual-path GRU + noise detector; 37k params / 56M MACs/s, PESQ 3.07 VBD |
 | [[sources/liu-2026-array-invariant-speech-enhancement\|Liu et al. 2026 (Geo-DConv)]] | 2026 | Multi-channel | Geometry-conditioned dynamic conv → array-invariant SE backbones |
 | [[sources/uphaus-2026-directivity-low-latency\|Uphaus et al. 2026 (FiLM-OSN)]] | 2026 | Multi-channel | Directivity-conditioned low-latency (10 ms) binaural NDF for hearing aids — FiLM steering of a Mamba-based OSN backbone |
 | [[sources/apostolidis-2026-listen-first-output-based-multi-microphone\|Apostolidis 2026]] | 2026 | Multi-channel | Output-based SE: select MPDR output by Glimpse Proportion, not input features |
@@ -159,14 +161,16 @@ Parameter counts for competitive monaural SE collapsed from ~18M (CRN, 2018) to 
 
 | Technique | Mechanism | Origin / exemplar |
 |-----------|-----------|-------------------|
-| Perceptual band compression | ERB / Bark-scale feature reduction (e.g. 192→64 bands) | DeepFilterNet, GTCRN, PercepNet |
+| Perceptual band compression | ERB / Bark-scale feature reduction (e.g. 192→64 bands) | DeepFilterNet, GTCRN, PercepNet, [[concepts/sub-band-convolution|LiSenNet's sub-band striding]] |
 | Grouped conv + grouped RNN | Split channels / hidden states into groups; ShuffleNet-style units | [[concepts/gtcrn\|GTCRN]] (G-DPRNN), [[concepts/cofi-lite\|CoFi-Lite]] |
 | Inplace convolution | Stride-1 freq-axis conv + channel-wise LSTM reused across bins | [[concepts/igcrn\|IGCRN]] → [[concepts/iccrn\|ICCRN]] → [[concepts/sicrn\|SICRN]] |
 | Adaptive (dynamic) convolution | Frame-wise kernels conditioned on input | [[concepts/adaptcrn\|AdaptCRN]] (135K params, PESQ 2.98) |
 
 The **inplace-CRN family** is its own lineage: [[concepts/igcrn\|IGCRN]] (2021, 1.4M, the founder) → [[concepts/iccrn\|ICCRN]] (2023, 0.46M, cepstral-space branch) → [[concepts/sicrn\|SICRN]] (2024, 2.16M, S4ND global branch). The throughline is preserving **per-bin spatial cues** via channel-wise LSTM (hidden 64 vs the conventional 1024) — IGCRN's downsampling ablation shows the inplace characteristic, not capacity, drives multi-channel SE performance.
 
-The 2026 efficiency frontier is **CoFi-Lite** ([[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement\|Yang 2026]]): it reuses GTCRN's ERB/SFE/TRA machinery but decouples spectral modeling into parallel coarse (full-band envelope, ×16 compression) and fine (low-frequency detail below 2 kHz, ×2 compression) paths bridged by Cross-Path Fusion. It **outperforms GTCRN** (PESQ 2.16 vs 2.07 on DNS3) at 40% of its MACs (12.87M vs 31.97M MACs/s) — trading a higher parameter count (83K vs 24K) for drastically lower compute. The same lab lineage (GTCRN → CoFi-Lite → AdaptCRN) shows the techniques compose.
+The 2026 efficiency frontier is **CoFi-Lite** ([[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement\|Yang 2026]]): it reuses GTCRN's ERB/SFE/TRA machinery but decouples spectral modeling into parallel coarse (full-band envelope, ×16 compression) and fine (low-frequency detail below 2 kHz, ×2 compression) paths bridged by Cross-Path Fusion. It **outperforms GTCRN** (PESQ 2.16 vs. 2.07 on DNS3) at 40% of its MACs (12.87M vs. 31.97M MACs/s) — trading a higher parameter count (83K vs. 24K) for drastically lower compute. The same lab lineage (GTCRN → CoFi-Lite → AdaptCRN) shows the techniques compose.
+
+Between GTCRN (2024) and CoFi-Lite (2026) sits **LiSenNet** ([[sources/yan-2025-lisennet\|Yan et al. 2025]], ICASSP): 37k params / 56M MACs/s at PESQ 3.07 on VoiceBank+DEMAND — beating FSPEN's PESQ by 0.10 with 47% of its parameters. Its distinctive techniques along the axis above: [[concepts/sub-band-convolution|sub-band convolutions]] (stride 1 below, stride 3 above — low-frequency resolution preserved by construction rather than by an ERB merging module), a [[concepts/convglu|ConvGLU]] channel mixer compensating tiny GRU states in a causal dual-path bottleneck, and — uniquely in the corpus — a [[concepts/noise-detector|noise detector]] front-end that makes compute *proportional to noise content* (15–70M MACs/s). LiSenNet subsequently became the standard second baseline (beside GTCRN) for 2026 lightweight-SE evaluations (AdaptCRN, CoFi-Lite, HALO, μNet, and the Laroche–Olsson redesign study).
 
 A second life for these ultralight models: [[sources/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction\|Huang 2026 (LGTSE)]] reuses GTCRN not as a standalone enhancer but as a **pluggable denoiser front-end** for target speech extraction, adding negligible overhead (6.08M → 6.13M params) while delivering +0.89 dB SI-SDR.
 
@@ -247,9 +251,14 @@ The clue axis also extends beyond speakers: [[sources/veluri-2023-semantic-heari
 - [[concepts/complex-ratio-mask|Complex Ratio Mask]] · [[concepts/complex-convolving-mask|Complex Convolving Mask]] · [[concepts/deep-filtering|Deep Filtering]] — target lineage
 - [[concepts/time-domain-speech-enhancement|Time-Domain Speech Enhancement]] · [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]] — domain choice
 - [[concepts/dprnn|Dual-Path RNN]] · [[concepts/mp-senet|MP-SENet]] · [[concepts/semamba|SEMamba]] · [[concepts/mamba-mingru|Mamba-MinGRU]] · [[concepts/sse-net|SSE-Net]] — backbone lineage
-- [[concepts/gtcrn|GTCRN]] · [[concepts/cofi-lite|CoFi-Lite]] · [[concepts/adaptcrn|AdaptCRN]] · [[concepts/igcrn|IGCRN]] · [[concepts/iccrn|ICCRN]] · [[concepts/sicrn|SICRN]] — efficiency frontier
+- [[concepts/gtcrn|GTCRN]] · [[concepts/lisennet|LiSenNet]] · [[concepts/cofi-lite|CoFi-Lite]] · [[concepts/adaptcrn|AdaptCRN]] · [[concepts/igcrn|IGCRN]] · [[concepts/iccrn|ICCRN]] · [[concepts/sicrn|SICRN]] — efficiency frontier
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]] · [[concepts/neural-beamforming|Neural Beamforming]] · [[concepts/array-invariant-speech-enhancement|Array-Invariant SE]] · [[concepts/geometry-aware-dynamic-convolution|Geo-DConv]] · [[concepts/output-based-speech-enhancement|Output-Based SE]] · [[concepts/hybrid-speech-enhancement|Hybrid Speech Enhancement]]
 - [[concepts/personalized-speech-enhancement|Personalized SE]] · [[concepts/target-speaker-extraction|Target Speaker Extraction]] · [[concepts/own-voice-cancellation|Own-Voice Cancellation]] · [[concepts/prior-matching|Prior Matching]]
 - [[concepts/diffusion-models-for-speech|Diffusion Models for Speech]] · [[concepts/drifting-models|Drifting Models]] · [[concepts/generative-vs-discriminative-speech-enhancement|Generative vs. Discriminative Speech Enhancement]] · [[concepts/speech-enhancement-hallucination|Speech Enhancement Hallucination]] · [[concepts/one-step-generative-models|One-Step Generative Models]]
 - [[concepts/generalized-loss-function|Generalized Loss Function]] · [[concepts/frequency-domain-loss|Frequency-Domain Loss]] · [[concepts/noise-attenuation-control|Noise Attenuation Control]] · [[concepts/artificial-residual-noise|Artificial Residual Noise]] — training-objective / noise-control lineage
 - [[concepts/spectrally-adaptive-loss|Spectrally Adaptive Loss]] · [[concepts/magnitude-phase-compensation-effect|Magnitude-Phase Compensation Effect]] · [[concepts/hyst-net|HyST-Net]] — loss-side compensation-effect remedy and its streaming backbone
+- [[concepts/lisennet|LiSenNet]] · [[concepts/noise-detector|Noise Detector]] · [[concepts/gla-phase-refinement|GLA Phase Refinement]] · [[concepts/sub-band-convolution|Sub-band Convolution]] — the 2025 lightweight-SE design point and its components
+
+## Related Sources
+
+- [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025 (LiSenNet)]] — sub-band conv + causal dual-path GRU + noise detector; the 37k/56M MACs/s operating point between GTCRN and CoFi-Lite

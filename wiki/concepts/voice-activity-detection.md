@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-10-11
+updated: 2026-11-01
 sources:
   - raw/papers/liu-2025-pcen-mask-vad-speech-enhancement/full-text.md
   - raw/papers/tashev-2008-sound-capture-spatial-filter/full-text.md
@@ -13,6 +13,7 @@ sources:
   - raw/papers/heitkaemper-2025-bcs-speech-enhancement-earbuds/full-text.txt
   - raw/papers/doclo-2002-gsvd-optimal-filtering/full-text.md
   - raw/papers/warsitz-2007-blind-gev-beamforming/full-text.md
+  - raw/papers/yan-2025-lisennet/full-text.md
 tags:
 - audio-processing
 - machine-learning
@@ -107,6 +108,7 @@ Kim & Kim (2014) embed a **statistical model-based log-likelihood ratio test** (
 
 - [[concepts/minimum-statistics|Minimum Statistics]]
 - [[concepts/speech-presence-probability|Speech Presence Probability (SPP)]] — soft-decision VAD generalization
+- [[concepts/noise-detector|Noise Detector]] — the complementary gate: detects *noise* rather than speech, routing only noisy frames into the SE back-end (LiSenNet)
 - [[concepts/adaptive-coherence-noise-estimation|Adaptive Coherence Noise Estimation]] — uses SPP as the speech-absence gate
 - [[concepts/side-talk-detection|Side-Talk Detection (STD)]] — three-class role-conditional VAD variant for smart-glasses WSR (Yang et al. 2025)
 - [[concepts/directional-vad|Directional VAD (DVAD)]] — per-zone spatially-conditioned activity map (Sun et al. 2024)
@@ -129,4 +131,5 @@ Kim & Kim (2014) embed a **statistical model-based log-likelihood ratio test** (
 - [[sources/yang-2025-mc-differential-asr-smart-glasses|Yang et al. 2025: Multi-Channel Differential ASR for Smart Glasses]] — STD model as a role-conditional VAD frontend
 - [[sources/kim-2014-doa-based-snr-estimation|Kim & Kim 2014: DOA-Based SNR Estimation for Dual-Microphone Speech Enhancement]] — statistical model-based LRT as the embedded speech-activity decision inside a DOA-based SNR estimator
 - [[sources/sun-2024-lightweight-hybrid-speech-extraction|Sun et al. 2024: Lightweight Hybrid Multi-Channel Speech Extraction with DVAD]] — directional VAD as per-zone spatial activity detection
+- [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025: LiSenNet]] — frame-level [[concepts/noise-detector|noise detector]] on 64-dim Mel features gating the SE back-end: compute becomes proportional to noise content (15–70M MACs/s)
 - [[sources/warsitz-2007-blind-gev-beamforming|Warsitz & Haeb-Umbach 2007: Blind Acoustic Beamforming Based on Generalized Eigenvalue Decomposition]] — two-threshold ("don't know" state) VAD gating the noise/speech-plus-noise SCM estimation of the GEV beamformer

@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-07-16
-updated: 2026-09-11
+updated: 2026-11-01
 sources:
   - raw/papers/li-2020-residual-noise-control/full-text.md
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
   - raw/papers/li-2022-embedding-beamforming/full-text.md
+  - raw/papers/yan-2025-lisennet/full-text.md
 tags:
   - signal-processing
   - speech-enhancement
@@ -25,6 +26,8 @@ where $\alpha \in (0, 1)$ is the compression factor (typically 0.3 in ULCNet-bas
 - Reduces the large dynamic range of speech spectra, making it easier for DNNs to learn
 - Preserves relative spectral structure while compressing large values
 - Avoids the information loss of logarithmic compression near zero
+
+[[concepts/lisennet|LiSenNet]] (Yan et al. 2025) uses $c = 0.3$ on the input magnitude — following Braun & Tashev's consolidated loss-function study — to "equalize the importance of quieter sounds relative to loud ones", and reports that the same exponent also appears in its compressed-magnitude and compressed-complex training losses ($\mathcal{L}_{\mathrm{mag}}$, $\mathcal{L}_{\mathrm{comp}}$).
 
 ## Trade-offs
 
@@ -57,6 +60,7 @@ A *loss-side* counterpart appears in the [[concepts/generalized-loss-function|ge
 - [[concepts/speech-enhancement|Speech Enhancement]]
 - [[concepts/adaptcrn|AdaptCRN]]
 - [[concepts/generalized-loss-function|Generalized Loss Function]]
+- [[concepts/lisennet|LiSenNet]]
 - [[concepts/magnitude-phase-compensation-effect|Magnitude-Phase Compensation Effect]] — interaction between compression and the phase-aware loss term
 - [[concepts/eabnet|EaBNet]] — phase-preserving multichannel compression rationale
 
@@ -68,3 +72,4 @@ A *loss-side* counterpart appears in the [[concepts/generalized-loss-function|ge
 - [[sources/li-2020-residual-noise-control|Li et al. 2020: Supervised Speech Enhancement with Residual Noise Control]] — loss-side spectral exponent α (≥1) with the opposite quality-vs-α direction
 - [[sources/zhao-2026-spectrally-adaptive-loss|Zhao & Madhu 2026: Spectrally Adaptive Loss for Streaming Speech Enhancement]] — compressed-domain (c=0.3) phase-aware loss and its compensation-effect interaction
 - [[sources/li-2022-embedding-beamforming|Li et al. 2022: Embedding and Beamforming]] — phase-preserving exponent-0.5 compression for multichannel beamforming; PESQ/ESTOI up, SDR mildly down
+- [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025: LiSenNet]] — $c=0.3$ on input magnitude and inside the compressed-magnitude / compressed-complex losses ($\lambda_1=0.9$, $\lambda_2=0.1$)

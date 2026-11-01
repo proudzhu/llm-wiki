@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-24
-updated: 2026-09-13
+updated: 2026-11-01
 sources:
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
+  - raw/papers/yan-2025-lisennet/full-text.md
 tags:
   - neural-network
   - speech-enhancement
@@ -84,6 +85,7 @@ Huang et al. (2026) reuse GTCRN not as a standalone enhancer but as a **lightwei
 
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
 - [[concepts/dprnn|Dual-Path RNN (DPRNN)]]
+- [[concepts/lisennet|LiSenNet]]
 - [[concepts/cofi-lite|CoFi-Lite]]
 - [[concepts/cross-path-fusion|Cross-Path Fusion (CPF)]]
 - [[concepts/depthwise-separable-convolution|Depthwise Separable Convolution]]
@@ -103,10 +105,12 @@ Huang et al. (2026) reuse GTCRN not as a standalone enhancer but as a **lightwei
 - [[concepts/munet|μNet]]
 - [[concepts/neuralpmwf|NeuralPMWF]]
 - [[concepts/tinygru|TinyGRU]] — beats multichannel-adapted GTCRN at 2.6× lower MMACs in the two-stage MCWF configuration
+- [[concepts/lisennet|LiSenNet]] — fellow ultra-lightweight SE model (37k params, 56M MACs/s) from the same year; the standard comparison point alongside GTCRN in CoFi-Lite/AdaptCRN/HALO evaluations
 
 ## Related Sources
 
 - [[sources/rong-2024-gtcrn-speech-enhancement-ultralow|Rong et al. 2024: GTCRN — A Speech Enhancement Model Requiring Ultralow Computational Resources]]
+- [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025: LiSenNet]] — contemporary ultra-lightweight SE model (37k/56M, PESQ 3.07 VBD); the two are the standard baseline pair for 2026 lightweight-SE evaluations
 - [[sources/shetu-2026-munet|Shetu et al. 2026: μNet]] — uses GTCRN as primary baseline
 - [[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement|Yang et al. 2026: CoFi-Lite — Pushing the Limits of Ultra-Lightweight Speech Enhancement]]
 - [[sources/schroter-2022-deepfilternet|Schröter et al. 2022: DeepFilterNet]]

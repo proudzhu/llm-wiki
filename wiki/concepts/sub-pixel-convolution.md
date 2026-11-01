@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-06-06
-updated: 2026-08-15
+updated: 2026-11-01
 sources:
   - raw/papers/li-2025-echofree-neural-aec/full-text.md
   - raw/papers/lugo-2026-diffvqe/full-text.md
+  - raw/papers/yan-2025-lisennet/full-text.md
 tags:
   - deep-learning
   - upsampling
@@ -38,13 +39,16 @@ Each upscaling is by factor 2 on the frequency axis.
 - Image super-resolution (original application)
 - Any encoder-decoder architecture requiring upsampling
 - Diffusion-based AEC ([[sources/lugo-2026-diffvqe|DiffVQE]]): sub-pixel convolution replaces transposed convolution in the Cond/Score U-Net decoder to alleviate aliasing phenomena
+- High-frequency sub-band upsampling in [[concepts/lisennet|LiSenNet]] ([[concepts/sub-band-convolution|sub-band US-Conv]]): SP-Conv2d with factor 3 restores the high-frequency resolution that the encoder's stride-3 DS-Conv compressed, mirroring the downsampling asymmetry
 
 ## Related Concepts
 
 - [[concepts/acoustic-echo-cancellation|Acoustic Echo Cancellation]]
 - [[concepts/complex-convolving-mask|Complex Convolving Mask]]
+- [[concepts/sub-band-convolution|Sub-band Convolution]]
 
 ## Related Sources
 
 - [[sources/indenbom-2023-deepvqe|Indenbom et al. 2023: DeepVQE]]
 - [[sources/lugo-2026-diffvqe|Lugo et al. 2026: DiffVQE]] — anti-aliasing replacement for transposed convolutions in the Cond/Score U-Net
+- [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025: LiSenNet]] — sub-band US-Conv applies SP-Conv2d with factor 3 to the high-frequency bands only

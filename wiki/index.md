@@ -703,6 +703,10 @@
 | [[entities/yu-maeno\|Yu Maeno]] | Sony researcher; co-author of the JASA 2020 multichannel ANC NR-potential analysis | 2026-10-31 |
 | [[entities/yuki-mitsufuji\|Yuki Mitsufuji]] | Sony researcher (music source separation, MDX Challenge); co-author of the JASA 2020 multichannel ANC NR-potential analysis | 2026-10-31 |
 | [[entities/willem-alexander-klatt\|Willem Alexander Klatt]] | Ruhr-Universität Bochum — robust feedback ANC, convex-set uncertainty models, Laguerre filter control design | 2026-11-01 |
+| [[entities/haoyin-yan\|Haoyin Yan]] | USTC NERC-SLIP researcher; first author of LiSenNet (ICASSP 2025) | 2026-11-01 |
+| [[entities/jie-zhang\|Jie Zhang]] | USTC NERC-SLIP researcher; co-first author of LiSenNet (ICASSP 2025); SDW-SWF single-channel Wiener filtering | 2026-11-01 |
+| [[entities/yeping-zhou\|Yeping Zhou]] | China Merchants Bank researcher; co-author of LiSenNet (ICASSP 2025) | 2026-11-01 |
+| [[entities/peiqi-liu\|Peiqi Liu]] | China Merchants Bank researcher; co-author of LiSenNet (ICASSP 2025) | 2026-11-01 |
 
 ---
 
@@ -1337,6 +1341,13 @@
 | [[concepts/reference-microphone-positioning\|Reference Microphone Positioning]] | Where/how many external reference microphones to place on feedforward ANC devices; ipsilateral distribution pays (~9 dB), contralateral positions are causality-blocked | 2026-10-31 |
 | [[concepts/anc-nr-potential-decomposition\|ANC NR-Potential Decomposition]] | Algorithm-independent three-term decomposition of multichannel ANC residual energy (coherence / filter / null space), generalizing the single-channel coherence limit | 2026-10-31 |
 | [[concepts/laguerre-filter\|Laguerre Filter]] | IIR filter built on orthonormal Laguerre basis functions (all-pass chain + low-pass input); affine in coefficients, enabling low-order control filters that match high-order FIR | 2026-11-01 |
+| [[concepts/lisennet\|LiSenNet]] | Lightweight SE model (37k params, 56M MACs/s, PESQ 3.07 VBD): sub-band conv + causal dual-path GRU + optional noise detector | 2026-11-01 |
+| [[concepts/noise-detector\|Noise Detector]] | Frame-level noise gate making SE compute proportional to noise content (15–70M MACs/s in LiSenNet+ND) | 2026-11-01 |
+| [[concepts/sub-band-convolution\|Sub-band Convolution]] | Asymmetric frequency-axis striding: low bands stride 1, high bands stride 3 (+SP-Conv2d ×3 up), preserving low-frequency resolution | 2026-11-01 |
+| [[concepts/convglu\|ConvGLU]] | Linear + depthwise conv + Mish channel mixer compensating small RNN states in LiSenNet's dual-path bottleneck | 2026-11-01 |
+| [[concepts/learnable-sigmoid-mask\|Learnable Sigmoid Mask]] | Mask activation with trainable per-frequency slope α and β=2 (MetricGAN+; LiSenNet mask head) | 2026-11-01 |
+| [[concepts/phase-difference-feature\|Phase Difference (PD) Feature]] | Frequency-axis and baseband temporal phase differences as magnitude-estimation input features (+0.08 PESQ, zero params) | 2026-11-01 |
+| [[concepts/gla-phase-refinement\|GLA Phase Refinement]] | Parameter-free 2-iteration Griffin–Lim post-processor refining phase from the estimated magnitude (+0.05 PESQ) | 2026-11-01 |
 
 ---
 
@@ -1630,6 +1641,7 @@
 | [[sources/kuo-2006-anc-headphones\|Kuo, Mitra & Gan 2006: Active Noise Control System for Headphone Applications]] | Adaptive feedback ANC headphone: error-mic placement by flattest secondary-path response, music-based identification, TMS320C32 prototype beating a Bose QC2. | 2026-10-31 |
 | [[sources/zhang-2020-coherence-mcanc-noise-reduction\|Zhang, Murata, Maeno, Samarasinghe, Abhayapala & Mitsufuji 2020]] | This paper develops an algorithm-independent method to compute the maximum noise reduction (NR) potential of an arbitrary multichannel feedforward ANC system with P reference microphones, L secondary sources, and Q error microphones. | 2026-10-31 |
 | [[sources/klatt-2025-laguerre-feedback-anc\|Klatt & Martin 2025]] | This paper replaces the FIR control filter of an Internal Model Control (IMC) feedback ANC controller with a Laguerre filter network — the first time Laguerre filters are combined with the IMC topology for FBANC (prior Laguerre-ANC work used non-IMC topologies). | 2026-11-01 |
+| [[sources/yan-2025-lisennet\|Yan, Zhang, Fan, Zhou & Liu 2025]] | LiSenNet is a lightweight speech enhancement network achieving competitive quality with only 37k parameters and 56M MACs/s — half the parameters of the then-SOTA lightweight FSPEN (79k) with 63% of its MACs, while improving PESQ by 0.10 (3.07 vs. 2.97 on VoiceBank+DEMAND). | 2026-11-01 |
 
 ---
 
@@ -1688,10 +1700,10 @@
 
 ## Statistics
 
-- **Total pages**: 1637
-- **Entities**: 693
-- **Concepts**: 625
-- **Sources**: 284
+- **Total pages**: 1649
+- **Entities**: 697
+- **Concepts**: 632
+- **Sources**: 285
 - **Synthesis**: 25
 - **Queries**: 10
 - **Last updated**: 2026-11-01

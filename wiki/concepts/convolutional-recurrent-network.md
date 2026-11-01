@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-10-24
+updated: 2026-11-01
 sources:
   - raw/papers/rao-2026-keep-speech-anc/full-text.txt
   - raw/papers/zhang-2025-mbenet/full-text.md
+  - raw/papers/yan-2025-lisennet/full-text.md
 tags:
   - deep-learning
   - neural-network-architecture
@@ -78,6 +79,7 @@ The CRN follows an **encoder-decoder** structure with a recurrent bottleneck:
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys CRN family evolution (CRN → DCCRN → DPCRN → GCRN) and decoupling-style successors
 - [[sources/apostolidis-2026-listen-first-output-based-multi-microphone|Apostolidis et al. 2026: Listen first — output-based multi-microphone speech enhancement]] — CRN used as audibility-estimating neural VAD for output-based MPDR selection
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — applies [[concepts/adaptive-convolution|adaptive convolution]] across the CRN family (DPCRN at 3 scales, DCCRN, GTCRN, LiSenNet); proposes [[concepts/adaptcrn|AdaptCRN]]
+- [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025: LiSenNet]] — lightweight CRN variant (37k params, 56M MACs/s) that augments the standard Conv-block encoder/decoder with [[concepts/sub-band-convolution|sub-band striding]] (low frequencies stride 1, high frequencies stride 3) and replaces the LSTM bottleneck with a causal dual-path GRU module; adds a [[concepts/noise-detector|noise detector]] front-end gating the back-end on noisy frames only
 - [[sources/liu-2023-iccrn|Liu & Zhang 2023: ICCRN]] — inplace CRN variant with a cepstral-space branch; competes with DPCRN/DCCRN/GCRN baselines on WSJ0 SI-84 at low SNR
 - [[sources/zhao-2024-sicrn|Zhao, He & Zhang 2024: SICRN]] — inplace CRN variant with a state-space (S4ND) global branch; near-FullSubNet quality on DNS Challenge at 0.38× params, 0.14× MACs, 0 ms look-ahead
 - [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke et al. 2021: Low-Complexity Artificial Noise Suppression]] — CRN as postfiltering front-end baseline; SPP-based postfilter lifts CRN PESQ 2.59 → 2.74

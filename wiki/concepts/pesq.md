@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-10-23
+updated: 2026-11-01
 sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
   - raw/papers/lee-2016-dnn-plc/full-text.md
+  - raw/papers/yan-2025-lisennet/full-text.md
 tags:
   - evaluation-metric
   - speech-quality
@@ -39,6 +40,7 @@ PESQ first time-aligns the predicted signal with the reference segment-wise (for
 - [[concepts/semamba|SEMamba]] — current SOTA PESQ 3.69
 - [[concepts/perceptual-contrast-stretching|Perceptual Contrast Stretching (PCS)]] — post-processing that boosts PESQ
 - [[concepts/magnitude-phase-compensation-effect|Magnitude-Phase Compensation Effect]] — why PESQ and SI-SDR respond oppositely to magnitude losses
+- [[concepts/lisennet|LiSenNet]] — uses PESQ not only as a metric but as a *training loss* (MetricGAN-style discriminator, λ₃ = 0.05)
 
 ## Related Sources
 
@@ -46,3 +48,4 @@ PESQ first time-aligns the predicted signal with the reference segment-wise (for
 - [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] — SOTA PESQ 3.69 with SEMamba + PCS
 - [[sources/wang-2021-magnitude-phase-compensation|Wang, Wichern & Le Roux 2021: On the Compensation Between Magnitude and Phase in Speech Separation]] — analyzes PESQ's magnitude-dominant behavior
 - [[sources/lee-2016-dnn-plc|Lee & Chang 2016: PLC Based on DNNs for Digital Speech Transmission]] — PESQ (with LSD and MOS) as the objective metric for DNN-regression PLC on AMR-WB at 5–30% packet loss
+- [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025: LiSenNet]] — includes a PESQ *loss* in the MetricGAN+ tradition (discriminator predicts PESQ scaled to (0,1); λ₃ = 0.05): worth +0.12 PESQ in ablation, the single largest contributor among LiSenNet's loss terms

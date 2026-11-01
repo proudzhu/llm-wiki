@@ -1,12 +1,13 @@
 ---
 type: synthesis
 created: 2026-07-16
-updated: 2026-10-05
+updated: 2026-11-01
 sources:
   - raw/papers/indenbom-2023-deepvqe/full-text.md
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
   - raw/papers/benslimane-2026-rt-tango-binaural-speech-enhancement/full-text.md
   - raw/papers/zhao-2026-halo-half-frame-rate-adaptive-operator/full-text.md
+  - raw/papers/yan-2025-lisennet/full-text.md
   - raw/papers/hao-2025-l3c-deepmfc/full-text.md
   - raw/papers/ashur-2026-acoustic-howling-suppression-fine-tuning/full-text.md
   - raw/papers/rath-2026-minimum-delay-block-size/full-text.txt
@@ -53,6 +54,7 @@ Neither trend is independently novel. The **new insight** from the 2025–2026 c
 | [[sources/hao-2025-l3c-deepmfc\|L3C-DeepMFC (Hao)]] | 2025 | Hearing-aid feedback cancellation | **4 ms** | 0.31M params, 0.43 G/s MACs | Gain-shape complex mapping + closed-loop FT |
 | [[sources/li-2025-echofree-neural-aec\|EchoFree (Li)]] | 2025 | AEC only (lightweight) | — | **0.28M params, 30 MMACs/s** | U-Net on Bark + two-stage WavLM SSL loss |
 | [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator\|HALO (Zhao)]] | 2026 | SE backbone accelerator (plug-in) | **0 ms added** | Halves internal frame rate (≈½ MACs) | Dynamic-conv frame-rate reduction |
+| [[sources/yan-2025-lisennet\|LiSenNet (Yan)]] | 2025 | NS + noise detection (optional front-end) | 16 ms (hop) | **37k params, 56M MACs/s**; with ND 15–70M | Sub-band conv + dual-path GRU + frame-level noise gating |
 | [[sources/ashur-2026-acoustic-howling-suppression-fine-tuning\|Ashur & Cohen]] | 2026 | NS + AHS (joint via fine-tuning) | **0 ms added** | Same as Denoiser baseline | Data-mixing fine-tuning (60-40 ratio) |
 | [[sources/ostergaard-2026-own-voice-cancellation\|OVC (Østergaard)]] | 2026 | OVC (target-speaker removal) | **2 ms** | 0.33 GMAC/s, RTF 0.82–1.69 | Mamba-MinGRU linear RNN |
 | [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement\|RT-Tango (Benslimane)]] | 2026 | Distributed binaural SE | **8 ms** | 35 MMACs/s | ERB + GRNN + FRS + asymmetric STFT |
@@ -180,12 +182,15 @@ Four independent sources spanning 2023–2026 converge on the same insight: **ad
 | Frame-Skip Prediction + PostNet | Chen 2023 | T-F feature inside backbone | Learned (1-layer GRU + convs) | 67K params, 15M MACs/s |
 | HALO rate reduction/restoration | Zhao 2026 | T-F feature inside backbone | Learned (dynamic conv) | Larger (adaptive gating) |
 | Fixed-Rate Skipping | Benslimane 2026 | Whole backbone invocation | None (fixed schedule) | 0 added params |
+| Content-adaptive noise gating | Yan 2025 (LiSenNet ND) | Whole backbone invocation | None (binary gate) | +18K params (detector) |
 
 **Why FRS beats learned skipping in RT-Tango**: learned skip gates introduce additional MACs to decide whether to skip, and their training signal is noisy. FRS commits to a fixed schedule, eliminating decision overhead.
 
 **Why Chen 2023 uses learned refinement despite RT-Tango's finding**: Chen compresses the **T-F feature** (so the backbone still runs on every frame, just on a shorter feature), whereas FRS skips the whole backbone. The two strategies operate at different levels and are in principle complementary — FRS can be applied on top of any backbone, including one that already uses frame-skip prediction + PostNet internally.
 
 **Combined implication**: HALO's frame-rate reduction, RT-Tango's FRS, and Chen's frame-skip prediction + PostNet are three points on a spectrum of temporal-redundancy exploitation. HALO compresses within the backbone with adaptive gating; Chen compresses within the backbone with fixed copy + learned refinement; FRS skips backbone invocation entirely. A combined HALO + FRS configuration is unexplored but predictably Pareto-improving. Chen + FRS combined would skip both backbone invocation and intra-backbone refinement — also unexplored.
+
+**A content-conditional fourth point (Yan et al. 2025)**: LiSenNet's [[concepts/noise-detector|noise detector]] adds a dimension the other three strategies lack — the gate is **signal-dependent rather than time-dependent**. FRS and HALO exploit *temporal* redundancy (adjacent frames are similar); the ND exploits *task sparsity* (frames containing no noise need no enhancement at all), which makes its savings depend on the input's noise proportion rather than on any schedule: 15M MACs/s in the all-clean extreme vs. 70M when every frame is noisy (RTF 0.020 vs. 0.028 without ND on WSJ0+ESC50). The trade-off is a small quality cost (PESQ 3.08 → 3.00) from detection imprecision and unprocessed-frame information loss — unlike schedule-based skipping, whose quality cost is bounded by the refinement module. Content-conditional gating is thus complementary to all three temporal strategies and could in principle be stacked on top of FRS (skip clean frames entirely, run FRS on the noisy span).
 
 ## Insight 5: Training Paradigm Innovations Match Architecture Innovations
 
@@ -333,3 +338,5 @@ For a practitioner choosing a multi-task SE architecture under a latency budget 
 - [[concepts/post-processing-network\|Post-Processing Network]]
 - [[concepts/hyst-net\|HyST-Net]]
 - [[concepts/spectrally-adaptive-loss\|Spectrally Adaptive Loss]]
+- [[concepts/lisennet|LiSenNet]]
+- [[concepts/noise-detector|Noise Detector]] — content-conditional gating (compute proportional to noise content)

@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-07-17
-updated: 2026-07-17
+updated: 2026-11-01
 sources:
   - raw/papers/seidel-2024-bark-scale-nn-residual-suppression/full-text.md
+  - raw/papers/yan-2025-lisennet/full-text.md
 tags:
   - speech-enhancement
   - signal-processing
@@ -52,8 +53,13 @@ STFT consistency is used together with the [[concepts/complex-compressed-mse\|CC
 - [[concepts/complex-compressed-mse\|Complex Compressed MSE (CCMSE)]]
 - [[concepts/nsnet2\|NSNet2]]
 - [[concepts/speech-enhancement\|Speech Enhancement]]
+- [[concepts/lisennet|LiSenNet]]
+- [[concepts/phase-difference-feature|Phase Difference (PD) Feature]]
+- [[concepts/gla-phase-refinement|GLA Phase Refinement]]
+- [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
 
 ## Related Sources
 
 - [[sources/seidel-2024-bark-scale-nn-residual-suppression|Seidel, Mowlaee & Fingscheidt 2024]] — uses STFT consistency in conjunction with CCMSE for training the Bark-scale postfilter
 - [[sources/liu-2023-iccrn|Liu & Zhang 2023: ICCRN]] — applies STFT consistency for the weighted L1 RI+amplitude loss in [[concepts/complex-spectrum-mapping|CSM]] training: the estimated complex spectrum is inverted to the time domain and re-transformed back to the TF domain before computing the loss
+- [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025: LiSenNet]] — the *inference-time* analogue: a 2-iteration Griffin–Lim projection onto the consistent STFT subspace refines the phase before synthesis (see [[concepts/gla-phase-refinement|GLA Phase Refinement]]), rather than enforcing consistency during training

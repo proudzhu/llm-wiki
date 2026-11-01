@@ -629,4 +629,11 @@
 | [[concepts/reference-microphone-positioning\|Reference Microphone Positioning]] | Where/how many external reference microphones to place on feedforward ANC devices; ipsilateral distribution pays (~9 dB), contralateral positions are causality-blocked | 2026-10-31 |
 | [[concepts/anc-nr-potential-decomposition\|ANC NR-Potential Decomposition]] | Algorithm-independent three-term decomposition of multichannel ANC residual energy (coherence / filter / null space), generalizing the single-channel coherence limit | 2026-10-31 |
 | [[concepts/laguerre-filter\|Laguerre Filter]] | IIR filter built on orthonormal Laguerre basis functions (all-pass chain + low-pass input); affine in coefficients, enabling low-order control filters that match high-order FIR | 2026-11-01 |
+| [[concepts/lisennet\|LiSenNet]] | Lightweight SE model (37k params, 56M MACs/s, PESQ 3.07 VBD): sub-band conv + causal dual-path GRU + optional noise detector | 2026-11-01 |
+| [[concepts/noise-detector\|Noise Detector]] | Frame-level noise gate making SE compute proportional to noise content (15–70M MACs/s in LiSenNet+ND) | 2026-11-01 |
+| [[concepts/sub-band-convolution\|Sub-band Convolution]] | Asymmetric frequency-axis striding: low bands stride 1, high bands stride 3 (+SP-Conv2d ×3 up), preserving low-frequency resolution | 2026-11-01 |
+| [[concepts/convglu\|ConvGLU]] | Linear + depthwise conv + Mish channel mixer compensating small RNN states in LiSenNet's dual-path bottleneck | 2026-11-01 |
+| [[concepts/learnable-sigmoid-mask\|Learnable Sigmoid Mask]] | Mask activation with trainable per-frequency slope α and β=2 (MetricGAN+; LiSenNet mask head) | 2026-11-01 |
+| [[concepts/phase-difference-feature\|Phase Difference (PD) Feature]] | Frequency-axis and baseband temporal phase differences as magnitude-estimation input features (+0.08 PESQ, zero params) | 2026-11-01 |
+| [[concepts/gla-phase-refinement\|GLA Phase Refinement]] | Parameter-free 2-iteration Griffin–Lim post-processor refining phase from the estimated magnitude (+0.05 PESQ) | 2026-11-01 |
 

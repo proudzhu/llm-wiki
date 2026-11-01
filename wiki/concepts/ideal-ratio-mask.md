@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-06-01
-updated: 2026-08-01
+updated: 2026-11-01
 sources:
   - raw/papers/liu-2025-pcen-mask-vad-speech-enhancement/full-text.md
+  - raw/papers/yan-2025-lisennet/full-text.md
 tags:
   - speech-separation
   - time-frequency-masking
@@ -39,6 +40,7 @@ The IRM emerged as one of the preferred training targets. Masking-based targets 
 
 - [[concepts/ideal-binary-mask|Ideal Binary Mask (IBM)]]
 - [[concepts/complex-ratio-mask|Complex Ratio Mask (cIRM)]]
+- [[concepts/learnable-sigmoid-mask|Learnable Sigmoid Mask]] — flexible-slope mask activation
 - [[concepts/permutation-invariant-training|Permutation Invariant Training (PIT)]]
 - [[concepts/per-channel-energy-normalization|Per-Channel Energy Normalization (PCEN)]] — used as a threshold oracle to zero the IRM on stationary-noise bands
 
@@ -46,4 +48,5 @@ The IRM emerged as one of the preferred training targets. Masking-based targets 
 
 - [[sources/wang-2018-supervised-speech-separation-deep-learning-overview|Wang & Chen 2018: Supervised Speech Separation Based on Deep Learning: An Overview]]
 - [[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement|Yang et al. 2026: CoFi-Lite]] — dual band-decoupled IRMs applied sequentially
+- [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025: LiSenNet]] — magnitude mask estimated via a [[concepts/learnable-sigmoid-mask|learnable Sigmoid]] with per-frequency slope, applied to the power-compressed magnitude before [[concepts/gla-phase-refinement|GLA phase refinement]]
 - [[sources/liu-2025-pcen-mask-vad-speech-enhancement|Liu et al. 2025: PCEN-Based Mask Thresholding and VAD]] — PCEN-thresholded IRM training target

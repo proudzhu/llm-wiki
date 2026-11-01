@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-16
-updated: 2026-10-24
+updated: 2026-11-01
 sources:
   - raw/papers/luo-2022-band-split-rnn/full-text.md
   - raw/papers/nguyen-2023-predictive-plc/full-text.md
+  - raw/papers/yan-2025-lisennet/full-text.md
 tags:
   - neural-network
   - speech-separation
@@ -64,6 +65,10 @@ Used in [[concepts/gtcrn|GTCRN (Rong et al. 2024)]], G-DPRNN combines grouped RN
 
 [[concepts/full-band-recurrent-network|FRN]] ([[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023]]) applies dual-path-style interleaved modeling to blind packet loss concealment at 48 kHz: within each of its 4 residual blocks an inter-frame RNN (state 384) models temporal correlation while intra-frame linear layers (hidden 768) model spectral structure, on flattened complex STFT frames projected from $2F = 960$ down to 384 dimensions for computational efficiency — an explicit hybrid of ResMLP and dual-path RNN.
 
+### Lightweight Causal Dual-Path: LiSenNet's DPR Module
+
+[[concepts/lisennet|LiSenNet]] (Yan et al., ICASSP 2025) instantiates the dual-path bottleneck in a **strictly causal** configuration: a **Bi-GRU (hidden 12) models the frequency axis** — bidirectionality along frequency is causal in time because all bins of a frame are available simultaneously — and a **unidirectional GRU (hidden 24) models the time axis**. To afford these small RNN sizes within a 56M MACs/s budget, a [[concepts/convglu|ConvGLU]] channel mixer (linear + depthwise conv + Mish) compensates the lost modeling capacity (+0.09 PESQ in ablation). The module is repeated N = 2 times — the ablation's sweet spot (N=1: PESQ 2.97; N=2: 3.07; N=3: 3.06 at more compute). The same frequency-Bi-GRU / temporal-uni-GRU causality pattern also appears in [[concepts/gtcrn|GTCRN]]'s grouped DPRNN.
+
 ## Related Concepts
 
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
@@ -72,10 +77,12 @@ Used in [[concepts/gtcrn|GTCRN (Rong et al. 2024)]], G-DPRNN combines grouped RN
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]]
 - [[concepts/band-split-rnn|Band-Split RNN]]
 - [[concepts/full-band-recurrent-network|Full-Band Recurrent Network (FRN)]] — dual-path-style inter-/intra-frame hybrid in the PLC domain
+- [[concepts/lisennet|LiSenNet]] — causal dual-path instantiation: frequency Bi-GRU + temporal uni-GRU with ConvGLU channel mixer, N=2 repetitions at 37k params
 
 ## Related Sources
 
 - [[sources/he-2025-vibomni|He, Guo, Hou & Yan 2025: VibOmni]]
+- [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025: LiSenNet]] — causal DPR module with ConvGLU channel mixer and tiny GRUs (24/12 hidden)
 - [[sources/rong-2024-gtcrn-speech-enhancement-ultralow|Rong et al. 2024: GTCRN — Ultralightweight Speech Enhancement]]
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — [[concepts/adaptcrn|AdaptCRN]] uses a 2-block grouped DPRNN bottleneck (2 groups, frequency dim 33, intra-frame GRU hidden 8, inter-frame GRU hidden 16) between its adaptive-block encoder and decoder; the representation rearrangement after grouped RNN is removed since the following FC layer performs equivalent inter-group fusion.
 - [[sources/luo-2022-band-split-rnn|Luo & Yu 2022: Music Source Separation with Band-Split RNN]] — frequency-axis instantiation of interleaved two-dimension RNN modeling
