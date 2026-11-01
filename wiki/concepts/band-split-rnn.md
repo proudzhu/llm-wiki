@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-09-16
-updated: 2026-10-24
+updated: 2026-11-01
 sources:
   - raw/papers/luo-2022-band-split-rnn/full-text.md
   - raw/papers/zhang-2025-mbenet/full-text.md
+  - raw/papers/ahn-2026-fastenhancer/full-text.md
 tags:
   - music-source-separation
   - source-separation
@@ -55,6 +56,8 @@ BSRNN set a new MUSDB18-HQ state of the art (10.47 dB vocal uSDR with finetuning
 
 A further migration is to **multi-modal target speaker extraction**: [[concepts/mbenet|MBENet]] (Zhang et al., ASRU 2025) adopts the band-split design with **shared weights across the AC and enhanced-BC modalities** — both spectrograms are split into 31 subbands by the same per-band linear + layer-norm projections before concatenation, followed by dual-axis (time/band) LSTM mask extraction and band merging. The shared-weight choice exploits the fact that both modalities are T-F representations of the same underlying speech event.
 
+A speech-enhancement re-implementation of BSRNN (Yu et al. 2023, high-fidelity SE with band-split RNN, 334k params / 245M MACs) appears as a heavyweight baseline in FastEnhancer's Voicebank-Demand evaluation (Ahn et al. 2026): despite its capacity, it runs at RTF 0.059 (Xeon) with PESQ 3.06 — beaten on both speed and quality by FastEnhancer-B (RTF 0.022, PESQ 3.13), again illustrating the per-band projections and band-level RNNs costing more wall-clock than their MAC counts suggest.
+
 ## Related Concepts
 
 - [[concepts/music-source-separation|Music Source Separation]]
@@ -68,3 +71,4 @@ A further migration is to **multi-modal target speaker extraction**: [[concepts/
 
 - [[sources/luo-2022-band-split-rnn|Luo & Yu 2022: Music Source Separation with Band-Split RNN]]
 - [[sources/zhang-2025-mbenet|Zhang, Feng, Liu, Zhang & Li 2025: MBENet]] — shared-weight band-split fusion of AC and enhanced-BC spectrograms for TSE
+- [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — SE re-implementation of BSRNN as heavyweight baseline: RTF 0.059, PESQ 3.06 — beaten on both axes by FastEnhancer-B

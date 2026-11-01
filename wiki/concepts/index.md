@@ -636,4 +636,5 @@
 | [[concepts/learnable-sigmoid-mask\|Learnable Sigmoid Mask]] | Mask activation with trainable per-frequency slope α and β=2 (MetricGAN+; LiSenNet mask head) | 2026-11-01 |
 | [[concepts/phase-difference-feature\|Phase Difference (PD) Feature]] | Frequency-axis and baseband temporal phase differences as magnitude-estimation input features (+0.08 PESQ, zero params) | 2026-11-01 |
 | [[concepts/gla-phase-refinement\|GLA Phase Refinement]] | Parameter-free 2-iteration Griffin–Lim post-processor refining phase from the estimated magnitude (+0.05 PESQ) | 2026-11-01 |
+| [[concepts/rnnformer\|RNNFormer]] | FastEnhancer's dual-path block: time-axis GRU + frequency-axis MHSA — recurrence for time, attention for frequency | 2026-11-01 |
 

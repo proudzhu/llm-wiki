@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-06
-updated: 2026-09-06
+updated: 2026-11-01
 sources:
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
+  - raw/papers/ahn-2026-fastenhancer/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -33,6 +34,8 @@ tags:
 
 HyST-Net matches FTF-Net's quality with 16.3% fewer MACs, 21% fewer parameters, and ~4.77× lower RTF (FTF-Net's recurrent spectral bottleneck serialises streaming inference); vs CRUSE it achieves similar RTF with 96% fewer parameters.
 
+FastEnhancer (Ahn et al., ICASSP 2026) independently converged on the **same axis assignment** — its [[concepts/rnnformer|RNNFormer]] block pairs a time-axis GRU with a frequency-axis 4-head MHSA, with identical justifications (no key-value caching for streaming time; all bins of a frame available simultaneously for frequency). FastEnhancer adds the dual ablation evidence HyST-Net lacks: DPRNN (freq-GRU) clearly degrades SISDR; DPT (time-MHSA, 31-frame lookbehind) explodes RTF. FastEnhancer also targets the RTF/quality Pareto frontier explicitly (RTF 0.012–0.313 on Xeon across T–L sizes) vs HyST-Net's sub-CRUSE complexity target.
+
 ## Related Concepts
 
 - [[concepts/spectrally-adaptive-loss|Spectrally Adaptive Loss]] — the loss functions HyST-Net was designed to evaluate
@@ -46,3 +49,4 @@ HyST-Net matches FTF-Net's quality with 16.3% fewer MACs, 21% fewer parameters, 
 ## Related Sources
 
 - [[sources/zhao-2026-spectrally-adaptive-loss|Zhao & Madhu 2026: Spectrally Adaptive Loss for Streaming Speech Enhancement]]
+- [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — RNNFormer's independent convergence on the same frequency-MHA + time-GRU assignment, with DPRNN/DPT ablations

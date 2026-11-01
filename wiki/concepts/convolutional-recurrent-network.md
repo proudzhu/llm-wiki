@@ -6,6 +6,7 @@ sources:
   - raw/papers/rao-2026-keep-speech-anc/full-text.txt
   - raw/papers/zhang-2025-mbenet/full-text.md
   - raw/papers/yan-2025-lisennet/full-text.md
+  - raw/papers/ahn-2026-fastenhancer/full-text.md
 tags:
   - deep-learning
   - neural-network-architecture
@@ -61,6 +62,8 @@ The CRN follows an **encoder-decoder** structure with a recurrent bottleneck:
 
 - **BC bandwidth extension for multi-modal TSE**: [[concepts/mbenet|MBENet]] (Zhang et al. 2025, ASRU) uses a causal CRN (3-layer conv encoder {16, 32, 64} channels, GRU-64 bottleneck with FC to 1984-dim, 3-layer transposed-conv decoder, BN+ELU, dense skip connections) as its bone-conduction enhancement module — extending the bandwidth of the band-limited BC spectrogram as an auxiliary task, with magnitude enhancement recombined with the original BC phase. Notably it swaps the CRN's typical LSTM bottleneck for a GRU.
 
+- **[[concepts/rnnformer|RNNFormer]] / FastEnhancer** (Ahn et al., ICASSP 2026): a deliberately *simple* CRN-style encoder-decoder whose bottleneck replaces both axes of the DPRNN with a time-GRU + frequency-MHSA hybrid. Its thesis inverts the lightweight-SE trend: instead of reducing params/MACs via sub-band tricks and grouped operations (which add memory operations and raise RTF), it optimizes real-world RTF — time-axis kernel size 1 everywhere, BN fused at inference, fixed filterbank bridges. FastEnhancer-B (92k params, 262M MACs, RTF 0.022) beats GTCRN, LiSenNet (streamable), FSPEN, and BSRNN on nearly every Voicebank-Demand metric at the lowest RTF.
+
 ## Related Concepts
 
 - [[deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
@@ -85,3 +88,4 @@ The CRN follows an **encoder-decoder** structure with a recurrent bottleneck:
 - [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke et al. 2021: Low-Complexity Artificial Noise Suppression]] — CRN as postfiltering front-end baseline; SPP-based postfilter lifts CRN PESQ 2.59 → 2.74
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — compares the MC-CRN multichannel extension as low-compute baseline
 - [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — shows the CRN (DeepANC) controller's frame-level latency violating headphone ANC causality, motivating a zero-delay time-domain alternative
+- [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — RNNFormer-hybrid CRN optimized for real-world RTF (time-kernel-1 convolutions, BN fusion); Pareto-dominates GTCRN/LiSenNet/FSPEN/BSRNN on Voicebank-Demand

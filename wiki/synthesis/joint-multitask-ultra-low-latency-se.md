@@ -20,6 +20,7 @@ sources:
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
   - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
   - raw/papers/ueda-2024-online-joint-optimization/full-text.md
+  - raw/papers/ahn-2026-fastenhancer/full-text.md
 tags:
   - speech-enhancement
   - multi-task
@@ -165,6 +166,8 @@ A recurring structural shift across 2026 sources: **linear RNNs and state-space 
 **Gap in existing synthesis**: [[synthesis/computational-efficiency-evolution\|Computational Efficiency Evolution]] discusses RNN BPTT vs. FEP memory bottlenecks in ANC but does not cover the SSM/linear-RNN replacement strategy. This synthesis fills that gap for SE.
 
 **A per-axis refinement (Zhao & Madhu 2026)**: [[concepts/hyst-net\|HyST-Net]] qualifies the replacement narrative — the right recurrent/attention choice depends on *which STFT axis* is being modelled. For the **frequency** axis, all bins of a frame are simultaneously available, so parallel MHA incurs no latency penalty and RNN-based spectral modelling (as in FTF-Net) serialises streaming inference (FTF-Net RTF 1.05 vs HyST-Net 0.22 at comparable quality). For the **time** axis, causal MHA with key-value caching still costs memory/compute linear in context length, so the GRU's constant-size recurrent state remains cheaper in lightweight streaming. The design rule is thus: *parallel modules for the inherently parallel axis, constant-state recurrence for the sequential axis* — a middle position between the full-RNN dual-path designs (DPCRN, FTF-Net) and the full linear-RNN replacement (OVC's Mamba-MinGRU).
+
+**Independent confirmation (Ahn et al. 2026)**: [[concepts/rnnformer\|RNNFormer]] / [[sources/ahn-2026-fastenhancer\|FastEnhancer (Ahn et al. 2026)]] arrives at the *same* per-axis rule from the opposite direction — designing for RTF rather than for architectural novelty — and supplies the ablation evidence HyST-Net lacks: replacing the frequency MHSA with a frequency GRU (making a DPRNN) clearly degrades SISDR (sequential modelling of global spectral structure is the bottleneck), while replacing the time GRU with time-MHSA (31-frame lookbehind, making a DPT) is *slower* despite fewer parameters (K-V caching dominates). FastEnhancer-T–L span RTF 0.012–0.313 on a Xeon thread with PESQ 2.99–3.26 on Voicebank-Demand. Two independent 2026 papers converging on "attention for frequency, recurrence for time" — with dual ablations on one side and RTF Pareto dominance on the other — elevates the design rule from a single-paper observation to a corpus-level pattern.
 
 ## Insight 4: Temporal Redundancy Is the New Efficiency Frontier
 
@@ -340,3 +343,4 @@ For a practitioner choosing a multi-task SE architecture under a latency budget 
 - [[concepts/spectrally-adaptive-loss\|Spectrally Adaptive Loss]]
 - [[concepts/lisennet|LiSenNet]]
 - [[concepts/noise-detector|Noise Detector]] — content-conditional gating (compute proportional to noise content)
+- [[concepts/rnnformer|RNNFormer]] — independent confirmation of the per-axis design rule (attention for frequency, recurrence for time), with DPRNN/DPT ablations

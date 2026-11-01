@@ -707,6 +707,10 @@
 | [[entities/jie-zhang\|Jie Zhang]] | USTC NERC-SLIP researcher; co-first author of LiSenNet (ICASSP 2025); SDW-SWF single-channel Wiener filtering | 2026-11-01 |
 | [[entities/yeping-zhou\|Yeping Zhou]] | China Merchants Bank researcher; co-author of LiSenNet (ICASSP 2025) | 2026-11-01 |
 | [[entities/peiqi-liu\|Peiqi Liu]] | China Merchants Bank researcher; co-author of LiSenNet (ICASSP 2025) | 2026-11-01 |
+| [[entities/sunghwan-ahn\|Sunghwan Ahn]] | SNU researcher; first author of FastEnhancer (ICASSP 2026) — RNNFormer dual-path block, RTF-first streaming SE | 2026-11-01 |
+| [[entities/jinmo-han\|Jinmo Han]] | SNU researcher; co-author of FastEnhancer (ICASSP 2026) | 2026-11-01 |
+| [[entities/beom-jun-woo\|Beom Jun Woo]] | SNU researcher; co-author of FastEnhancer (ICASSP 2026) | 2026-11-01 |
+| [[entities/nam-soo-kim\|Nam Soo Kim]] | SNU professor; senior author of FastEnhancer (ICASSP 2026) | 2026-11-01 |
 
 ---
 
@@ -1348,6 +1352,7 @@
 | [[concepts/learnable-sigmoid-mask\|Learnable Sigmoid Mask]] | Mask activation with trainable per-frequency slope α and β=2 (MetricGAN+; LiSenNet mask head) | 2026-11-01 |
 | [[concepts/phase-difference-feature\|Phase Difference (PD) Feature]] | Frequency-axis and baseband temporal phase differences as magnitude-estimation input features (+0.08 PESQ, zero params) | 2026-11-01 |
 | [[concepts/gla-phase-refinement\|GLA Phase Refinement]] | Parameter-free 2-iteration Griffin–Lim post-processor refining phase from the estimated magnitude (+0.05 PESQ) | 2026-11-01 |
+| [[concepts/rnnformer\|RNNFormer]] | FastEnhancer's dual-path block: time-axis GRU + frequency-axis MHSA — recurrence for time, attention for frequency | 2026-11-01 |
 
 ---
 
@@ -1642,6 +1647,7 @@
 | [[sources/zhang-2020-coherence-mcanc-noise-reduction\|Zhang, Murata, Maeno, Samarasinghe, Abhayapala & Mitsufuji 2020]] | This paper develops an algorithm-independent method to compute the maximum noise reduction (NR) potential of an arbitrary multichannel feedforward ANC system with P reference microphones, L secondary sources, and Q error microphones. | 2026-10-31 |
 | [[sources/klatt-2025-laguerre-feedback-anc\|Klatt & Martin 2025]] | This paper replaces the FIR control filter of an Internal Model Control (IMC) feedback ANC controller with a Laguerre filter network — the first time Laguerre filters are combined with the IMC topology for FBANC (prior Laguerre-ANC work used non-IMC topologies). | 2026-11-01 |
 | [[sources/yan-2025-lisennet\|Yan, Zhang, Fan, Zhou & Liu 2025]] | LiSenNet is a lightweight speech enhancement network achieving competitive quality with only 37k parameters and 56M MACs/s — half the parameters of the then-SOTA lightweight FSPEN (79k) with 63% of its MACs, while improving PESQ by 0.10 (3.07 vs. 2.97 on VoiceBank+DEMAND). | 2026-11-01 |
+| [[sources/ahn-2026-fastenhancer\|Ahn, Han, Woo & Kim 2026]] | FastEnhancer is a family of five streaming neural speech-enhancement models explicitly optimized for real-world inference speed (RTF on a single CPU thread) rather than the usual proxy metrics of parameter count or MACs. | 2026-11-01 |
 
 ---
 
@@ -1700,10 +1706,10 @@
 
 ## Statistics
 
-- **Total pages**: 1649
-- **Entities**: 697
-- **Concepts**: 632
-- **Sources**: 285
+- **Total pages**: 1655
+- **Entities**: 701
+- **Concepts**: 633
+- **Sources**: 286
 - **Synthesis**: 25
 - **Queries**: 10
 - **Last updated**: 2026-11-01

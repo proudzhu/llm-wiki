@@ -4,6 +4,7 @@ created: 2026-11-01
 updated: 2026-11-01
 sources:
   - raw/papers/yan-2025-lisennet/full-text.md
+  - raw/papers/ahn-2026-fastenhancer/full-text.md
 tags:
   - speech-enhancement
   - lightweight-model
@@ -47,6 +48,10 @@ On WSJ0+ESC50 (instantaneous-noise dataset), LiSenNet reaches RTF 0.028 on an In
 
 ## Role in the Lightweight-SE Lineage
 
+FastEnhancer (Ahn et al., ICASSP 2026) re-evaluates LiSenNet's position on a different axis — **real-world inference speed (RTF) rather than params/MACs**. In its Voicebank-Demand evaluation, the official LiSenNet is *not streamable* (input normalization + Griffin-Lim phase refinement); removing them to make a streaming variant costs PESQ 3.08 → 2.98 and SCOREQ 0.425 → 0.335. The streamable LiSenNet runs at RTF 0.034 (Xeon), while FastEnhancer-B (92k params, 262M MACs — more MACs than LiSenNet's 56M) reaches RTF 0.022 with PESQ 3.13 — i.e., FastEnhancer beats streamable LiSenNet on both speed and quality. LiSenNet remains a standard baseline, but its PESQ headline assumed non-streaming components.
+
+## Related Concepts
+
 LiSenNet (2025) sits between GTCRN (2024, 23.7k params, 31.97M MACs/s, DNS3 PESQ 2.07) and CoFi-Lite (2026, 83.12k, 12.87M, DNS3 PESQ 2.16) on the efficiency frontier, and became a **standard baseline** for subsequent lightweight-SE work:
 
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025]] use it as a backbone for [[concepts/adaptive-convolution|adaptive convolution]] (+0.12 PESQ, largest on lightweight models) and as an AdaptCRN comparison point.
@@ -74,4 +79,5 @@ LiSenNet (2025) sits between GTCRN (2024, 23.7k params, 31.97M MACs/s, DNS3 PESQ
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]]
 - [[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement|Yang et al. 2026: CoFi-Lite]]
 - [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator|Zhao et al. 2026: HALO]]
+- [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — re-evaluates LiSenNet on the RTF axis; streamable variant costs PESQ 3.08 → 2.98
 - Laroche & Olsson 2026 ("Beyond model size", arXiv:2609.29866 — not yet ingested)

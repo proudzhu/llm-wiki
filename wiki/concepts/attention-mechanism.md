@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-07-18
-updated: 2026-08-09
+updated: 2026-11-01
 sources:
   - raw/papers/mienye-2024-rnn-comprehensive-review/full-text.md
   - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
+  - raw/papers/ahn-2026-fastenhancer/full-text.md
 tags:
   - deep-learning
   - attention
@@ -94,3 +95,4 @@ Attention mechanisms appear throughout the llm-wiki:
 - [[sources/indenbom-2023-deepvqe\|Indenbom et al. 2023: DeepVQE]] — uses cross-attention for AEC
 - [[sources/liu-2024-lightweight-dl-survey\|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] — §2.3 surveys efficient transformers along three directions (efficient self-attention, token sparsing, lightweight hybrid); notes ViT inference on mobile devices is up to 40× slower than CNN, with MatMul and FFN layers as the bottlenecks
 - [[sources/perez-2018-film-visual-reasoning\|Perez et al. 2018: FiLM: Visual Reasoning with a General Conditioning Layer]] — shows [[concepts/film-layer\|FiLM]] conditioning can replace explicit attention: feature modulation implicitly yields spatial attention (beating Stacked Attention by 21% on CLEVR) at a cost independent of image resolution, vs. attention's quadratic scaling
+- [[sources/ahn-2026-fastenhancer\|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — axis-specialized attention in the RNNFormer block: MHSA over *frequency* (global spectral structure, no caching needed) while the time axis stays recurrent; ablations show frequency-attention beats frequency-GRU on SISDR and time-attention loses to time-GRU on streaming RTF

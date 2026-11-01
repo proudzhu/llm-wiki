@@ -5,6 +5,7 @@ updated: 2026-11-01
 sources:
   - raw/papers/seidel-2024-bark-scale-nn-residual-suppression/full-text.md
   - raw/papers/yan-2025-lisennet/full-text.md
+  - raw/papers/ahn-2026-fastenhancer/full-text.md
 tags:
   - speech-enhancement
   - signal-processing
@@ -48,6 +49,8 @@ STFT consistency is used together with the [[concepts/complex-compressed-mse\|CC
 - **Phase-aware losses**: When using complex (phase-aware) losses like CCMSE, evaluating on an inconsistent spectrum means the phase term is meaningless — the predicted phase may not correspond to any real signal. Consistency enforcement fixes this.
 - **Better convergence**: Empirically, consistency-constrained training yields faster and more stable convergence than direct mask-domain losses.
 
+FastEnhancer (Ahn et al. 2026) — uses a *training-time* consistency loss ($\mathcal{L}_{con} = \|\mathbf{Y}_c - \mathrm{STFT}_c(\hat{\mathbf{y}})\|_2^2$, weight 0.3) inside its five-term composite loss: the synthesized waveform's re-analyzed compressed spectrum is pulled toward the clean target, ensuring the mask output and the iSTFT output agree.
+
 ## Related Concepts
 
 - [[concepts/complex-compressed-mse\|Complex Compressed MSE (CCMSE)]]
@@ -63,3 +66,4 @@ STFT consistency is used together with the [[concepts/complex-compressed-mse\|CC
 - [[sources/seidel-2024-bark-scale-nn-residual-suppression|Seidel, Mowlaee & Fingscheidt 2024]] — uses STFT consistency in conjunction with CCMSE for training the Bark-scale postfilter
 - [[sources/liu-2023-iccrn|Liu & Zhang 2023: ICCRN]] — applies STFT consistency for the weighted L1 RI+amplitude loss in [[concepts/complex-spectrum-mapping|CSM]] training: the estimated complex spectrum is inverted to the time domain and re-transformed back to the TF domain before computing the loss
 - [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025: LiSenNet]] — the *inference-time* analogue: a 2-iteration Griffin–Lim projection onto the consistent STFT subspace refines the phase before synthesis (see [[concepts/gla-phase-refinement|GLA Phase Refinement]]), rather than enforcing consistency during training
+- [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — training-time consistency loss $\|\mathbf{Y}_c - \mathrm{STFT}_c(\hat{\mathbf{y}})\|_2^2$ (weight 0.3) inside the five-term composite loss

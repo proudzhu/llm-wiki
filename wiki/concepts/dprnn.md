@@ -6,6 +6,7 @@ sources:
   - raw/papers/luo-2022-band-split-rnn/full-text.md
   - raw/papers/nguyen-2023-predictive-plc/full-text.md
   - raw/papers/yan-2025-lisennet/full-text.md
+  - raw/papers/ahn-2026-fastenhancer/full-text.md
 tags:
   - neural-network
   - speech-separation
@@ -69,6 +70,10 @@ Used in [[concepts/gtcrn|GTCRN (Rong et al. 2024)]], G-DPRNN combines grouped RN
 
 [[concepts/lisennet|LiSenNet]] (Yan et al., ICASSP 2025) instantiates the dual-path bottleneck in a **strictly causal** configuration: a **Bi-GRU (hidden 12) models the frequency axis** — bidirectionality along frequency is causal in time because all bins of a frame are available simultaneously — and a **unidirectional GRU (hidden 24) models the time axis**. To afford these small RNN sizes within a 56M MACs/s budget, a [[concepts/convglu|ConvGLU]] channel mixer (linear + depthwise conv + Mish) compensates the lost modeling capacity (+0.09 PESQ in ablation). The module is repeated N = 2 times — the ablation's sweet spot (N=1: PESQ 2.97; N=2: 3.07; N=3: 3.06 at more compute). The same frequency-Bi-GRU / temporal-uni-GRU causality pattern also appears in [[concepts/gtcrn|GTCRN]]'s grouped DPRNN.
 
+### RNNFormer: Recurrence for Time, Attention for Frequency
+
+[[concepts/rnnformer|RNNFormer]] (Ahn et al., ICASSP 2026) keeps the dual-path *shape* but changes the operators per axis: a **unidirectional GRU models the time axis** (constant-size state, no key-value caching) while a **4-head MHSA models the frequency axis** (all bins of a frame are available simultaneously, so attention over frequency is causal in time by construction and needs no cache). The explicit critique of frequency-axis RNNs: they assume frequency bands have a *sequential* relationship, but spectral structure (e.g., harmonics) is **global**. FastEnhancer's dual ablation shows the axis assignment matters — replacing the frequency MHSA with a frequency GRU (making a DPRNN) clearly degrades SISDR, and replacing the time GRU with time-MHSA (31-frame lookbehind, making a DPT) explodes the RTF despite fewer parameters.
+
 ## Related Concepts
 
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
@@ -78,6 +83,7 @@ Used in [[concepts/gtcrn|GTCRN (Rong et al. 2024)]], G-DPRNN combines grouped RN
 - [[concepts/band-split-rnn|Band-Split RNN]]
 - [[concepts/full-band-recurrent-network|Full-Band Recurrent Network (FRN)]] — dual-path-style inter-/intra-frame hybrid in the PLC domain
 - [[concepts/lisennet|LiSenNet]] — causal dual-path instantiation: frequency Bi-GRU + temporal uni-GRU with ConvGLU channel mixer, N=2 repetitions at 37k params
+- [[concepts/rnnformer|RNNFormer]] — inverts the axis-operator assignment: time GRU + frequency MHSA; ablated against DPRNN and DPT in FastEnhancer
 
 ## Related Sources
 
@@ -87,3 +93,4 @@ Used in [[concepts/gtcrn|GTCRN (Rong et al. 2024)]], G-DPRNN combines grouped RN
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — [[concepts/adaptcrn|AdaptCRN]] uses a 2-block grouped DPRNN bottleneck (2 groups, frequency dim 33, intra-frame GRU hidden 8, inter-frame GRU hidden 16) between its adaptive-block encoder and decoder; the representation rearrangement after grouped RNN is removed since the following FC layer performs equivalent inter-group fusion.
 - [[sources/luo-2022-band-split-rnn|Luo & Yu 2022: Music Source Separation with Band-Split RNN]] — frequency-axis instantiation of interleaved two-dimension RNN modeling
 - [[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023: Full-Band Blind Packet-Loss Concealment With Predictive Network]] — FRN encoder as a ResMLP/dual-path-RNN hybrid for real-time 48 kHz PLC
+- [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — RNNFormer block as the dual-path bottleneck; frequency-attention/time-recurrence assignment ablated against both DPRNN and DPT alternatives

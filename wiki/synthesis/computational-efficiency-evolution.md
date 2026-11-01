@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-09-12
+updated: 2026-11-01
 sources:
   - raw/papers/benslimane-2026-rt-tango-binaural-speech-enhancement/full-text.md
   - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
@@ -17,6 +17,7 @@ sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/jiang-2026-lightweight-speech-enhancement-ssm-dsc/full-text.md
   - raw/papers/timcheck-2023-intel-neuromorphic-dns-challenge/full-text.md
+  - raw/papers/ahn-2026-fastenhancer/full-text.md
 tags:
   - lightweight-speech-enhancement
   - computational-complexity
@@ -219,6 +220,8 @@ Three approaches currently define the Pareto frontier:
 
 11. **[[concepts/munet|μNet (Shetu et al., arXiv 2026)]]**: Defines a **seventh axis — deployment-hardware co-design for integer DSPs** — arguing the efficiency frontier is measured in hardware cycles and bytes, not params/MACs. At **46K params / 28 MMACs / 90 KB static memory** with full int8 quantization and 4–16 ms latency, it beats GTCRN perceptually (MUSHRA 77.78 vs. 74.24; PESQ 2.27 vs. 2.26 with [[concepts/noise-attenuation-control|noise attenuation control]]) and runs real-time on a Cadence Tensilica HiFi 4 (NXP RT685, 70 MHz). Its two hardware-driven choices invert common assumptions: (i) it *reverts* ULCNet's depthwise separable convolutions to standard convolutions, because fragmented memory access makes depthwise separable convolutions slower on consumer DSPs than their MAC counts suggest (the opposite of the DSConv2D choice in Jiang et al. 2026, highlighting that the right convolution type is target-hardware-dependent); (ii) it shares one GRU across subbands and one linear projection across overlapping latent segments, keeping weights within the 90 KB budget. A deployment caveat mirrors MN-TANGO's quantization finding in reverse: int8 is free at 16 ms latency but degrades badly at 4 ms (ΔSI-SDR 0.50 dB), attributed to GRU state drift under frequent updates.
 
+12. **[[concepts/rnnformer|FastEnhancer / RNNFormer (Ahn et al., ICASSP 2026)]]**: Defines an **eighth axis — real-world RTF as the optimization target itself** — challenging the params/MACs proxy metrics that axes 1–7 share. Its central measurement: complexity-optimized designs (GTCRN at 40M MACs, RTF 0.060 Xeon; BSRNN-SE at 245M MACs, RTF 0.059) are *slower* in wall-clock than a deliberately simple encoder-decoder with more MACs (FastEnhancer-B: 262M MACs, RTF 0.022, PESQ 3.13) — because sub-band operations, grouped convolutions/RNNs, and channel-split-shuffle add memory operations whose cost the MAC count ignores. Three speed-oriented design choices with ablation evidence: time-axis kernel size 1 everywhere (kernel-3 variant: 2× params, +27–42% RTF, zero quality gain), BN-fused-at-inference (LayerNorm swap: +27% RTF at identical params/MACs), and fixed filterbank/interpolation bridges. The [[concepts/rnnformer|RNNFormer]] bottleneck assigns the GRU to time (constant state, no K-V caching) and 4-head MHSA to frequency (all bins available simultaneously, global spectral structure) — ablations show frequency-GRU (DPRNN) degrades SISDR and time-MHSA (DPT) explodes RTF. The FastEnhancer family spans RTF 0.012–0.313 (Xeon, T–L sizes), re-drawing the quality-vs-speed Pareto frontier as a *measured* curve rather than a params/MACs point.
+
 ### 5.3 The Open Question
 
 **Can neural/learned ANC controllers match traditional algorithms at lower computational cost?**
@@ -284,6 +287,7 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 - [[concepts/auditory-inspired-spectral-compressor|Auditory-Inspired Spectral Compressor (AISC)]] — parameter-free ERB-based psychoacoustic preprocessing
 - [[concepts/classifier-loss|Classifier Loss]] — auxiliary speaker-classification loss for vocal-interference suppression
 - [[concepts/erb-scale|ERB Scale]] — psychoacoustic basis for AISC and other spectral compressors
+- [[concepts/rnnformer|RNNFormer]] — RTF-first dual-path block: time GRU + frequency MHSA (eighth Pareto axis)
 
 ## Related Sources
 
@@ -299,6 +303,7 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 - [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] — [[concepts/semamba|SEMamba]] introduces the selective-SSM (Mamba) efficiency axis: replaces Conformer/Transformer at quality parity with 12–66% FLOPs reduction; SOTA PESQ 3.69 on VoiceBank-DEMAND with PCS
 - [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight SE with SSM and DSConv]] — introduces the sixth Pareto axis: diagonal-constrained [[concepts/lights4|lightS4]] + DSConv2D + [[concepts/auditory-inspired-spectral-compressor|AISC]] reaches PESQ 3.32 on VoiceBank+DEMAND at 0.50 G MACs / 1.65 M params / RTF 0.13, a ~60× MACs reduction vs. SEMamba at a 0.20 PESQ cost
 - [[sources/shetu-2026-munet|Shetu, Martinez Aponte, Rao, Vittappan, Thiergart & Habets 2026: μNet]] — introduces the seventh Pareto axis (deployment-hardware co-design): 46K params / 28 MMACs / 90 KB static / int8 / 4–16 ms on Cadence Tensilica HiFi 4; standard convolutions chosen over depthwise separable for DSP memory-access efficiency
+- [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — introduces the eighth Pareto axis (RTF-first design): memory operations, not MACs, dominate single-CPU-thread latency; GTCRN (40M MACs, RTF 0.060) vs FastEnhancer-B (262M MACs, RTF 0.022)
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane, Chouteau, Poreba, Auzanneau, Szczepanski, Chersi & Serizel 2026: RT-Tango]]
 - [[sources/liu-2024-lightweight-dl-survey|Liu, Galindo, Xie, Wong, Shuai, Li & Cheng 2024: Lightweight Deep Learning for Resource-Constrained Environments]]
 

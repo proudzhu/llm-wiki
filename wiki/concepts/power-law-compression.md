@@ -7,6 +7,7 @@ sources:
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
   - raw/papers/li-2022-embedding-beamforming/full-text.md
   - raw/papers/yan-2025-lisennet/full-text.md
+  - raw/papers/ahn-2026-fastenhancer/full-text.md
 tags:
   - signal-processing
   - speech-enhancement
@@ -51,6 +52,8 @@ A multichannel-specific argument for compression appears in [[sources/li-2022-em
 
 A *loss-side* counterpart appears in the [[concepts/generalized-loss-function|generalized loss function]] of [[sources/li-2020-residual-noise-control|Li et al. 2020]], where the spectral exponent $\alpha \ge 1$ is applied to the spectra inside the loss (and, analytically, inside the generalized Wiener gain $M = \left(\xi^{\alpha}/(\mu + \xi^{\alpha})\right)^{1/\alpha}$) rather than to input features. The suppression direction matches feature compression: raising $\alpha$ pushes the gain toward 1, reducing both noise attenuation and speech attenuation. The quality direction differs, however — Li et al. report PESQ/SDR *declining* as $\alpha$ goes from 1 to 2 (the preserved residual noise outweighs the reduced distortion), whereas Shetu et al. report quality gains from raising the feature-compression α. Li et al. also restrict $\alpha \ge 1$ because smaller exponents cause infinite gradients during backpropagation.
 
+FastEnhancer (Ahn et al. 2026) compresses its STFT input with $c = 0.3$ on magnitude (phase untouched), predicts a two-channel mask in the compressed domain, and decompresses $|\hat{\mathbf{Y}}_c|^{1/c}$ before iSTFT — the same exponent as LiSenNet and the ULCNet lineage, applied to a mask-based architecture whose losses ($\mathcal{L}_{mag}$, $\mathcal{L}_{comp}$) also operate on compressed spectra.
+
 ## Related Concepts
 
 - [[concepts/ulcnet|ULCNet]]
@@ -73,3 +76,4 @@ A *loss-side* counterpart appears in the [[concepts/generalized-loss-function|ge
 - [[sources/zhao-2026-spectrally-adaptive-loss|Zhao & Madhu 2026: Spectrally Adaptive Loss for Streaming Speech Enhancement]] — compressed-domain (c=0.3) phase-aware loss and its compensation-effect interaction
 - [[sources/li-2022-embedding-beamforming|Li et al. 2022: Embedding and Beamforming]] — phase-preserving exponent-0.5 compression for multichannel beamforming; PESQ/ESTOI up, SDR mildly down
 - [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025: LiSenNet]] — $c=0.3$ on input magnitude and inside the compressed-magnitude / compressed-complex losses ($\lambda_1=0.9$, $\lambda_2=0.1$)
+- [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — $c=0.3$ compressed-domain masking and losses; decompression $|\hat{\mathbf{Y}}_c|^{1/c}$ before iSTFT

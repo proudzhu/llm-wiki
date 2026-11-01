@@ -11,6 +11,7 @@ sources:
   - raw/papers/westhausen-2022-tplcnet/full-text.md
   - raw/papers/perez-2018-film-visual-reasoning/full-text.md
   - raw/papers/yan-2025-lisennet/full-text.md
+  - raw/papers/ahn-2026-fastenhancer/full-text.md
 tags:
   - deep-learning
   - recurrent-neural-network
@@ -81,6 +82,7 @@ Within the llm-wiki, GRU is the recurrent backbone in:
 - [[concepts/backpropagation-through-time\|Backpropagation Through Time]]
 - [[concepts/mingru\|MinGRU]] — minimal gated GRU variant
 - [[concepts/lisennet|LiSenNet]] — frequency-Bi-GRU + temporal-uni-GRU dual-path bottleneck
+- [[concepts/rnnformer|RNNFormer]] (Ahn et al. 2026) — GRU as the *time axis* of FastEnhancer's dual-path bottleneck, chosen for streaming: its constant-size state avoids the key-value caching that time-axis MHSA would need (ablation: DPT variant with 31-frame lookbehind is far slower despite fewer params). The frequency axis uses MHSA instead — the inverse of LiSenNet's frequency-GRU choice, with the RTF/SISDR curve favoring RNNFormer.
 
 ## Related Sources
 
@@ -94,3 +96,4 @@ Within the llm-wiki, GRU is the recurrent backbone in:
 - [[sources/li-2026-realtime-music-separation-dsp\|Li, Liu, Malsky & Yi 2026: Real-Time Music Source Separation on a Low-Power Audio DSP]] — GRU state bounded in $[-1,1]$ by construction for indefinite streaming on a DSP (vs. LSTM's unbounded cell state); state stays 32-bit float because it is an accumulator carried indefinitely
 - [[sources/westhausen-2022-tplcnet\|Westhausen & Meyer 2022: tPLCnet — Real-Time Deep Packet Loss Concealment in the Time Domain]] — bidirectional-GRU seq2one PLC; triggered on demand at loss time only
 - [[sources/perez-2018-film-visual-reasoning\|Perez, Strub, de Vries, Dumoulin & Courville 2018: FiLM: Visual Reasoning with a General Conditioning Layer]] — GRU question encoder (4096 units) as the FiLM generator: final hidden state projected to per-layer (γ, β) feature-modulation parameters
+- [[sources/ahn-2026-fastenhancer\|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — GRU as the time axis of the RNNFormer dual-path block; beats time-axis MHSA on streaming RTF in ablation

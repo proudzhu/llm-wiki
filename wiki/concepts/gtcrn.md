@@ -5,6 +5,7 @@ updated: 2026-11-01
 sources:
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
   - raw/papers/yan-2025-lisennet/full-text.md
+  - raw/papers/ahn-2026-fastenhancer/full-text.md
 tags:
   - neural-network
   - speech-enhancement
@@ -81,6 +82,10 @@ Huang et al. (2026) reuse GTCRN not as a standalone enhancer but as a **lightwei
 
 [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025]] compare against a multichannel-adapted GTCRN at 32 ms latency on a simulated 8-mic circular array (DNS Challenge data): standalone GTCRN needs 70 MMACs/s for STOI 70.9 / NB-PESQ 2.11, while their [[concepts/tinygru|TinyGRU]] reaches STOI 71.2 / NB-PESQ 2.10 with only 20 MMACs/s; in the two-stage + MCWF configuration the gap widens further (GTCRN+MCWF+GTCRN 140 MMACs/s, STOI 80.4 / PESQ 2.54 vs. TGRU+MCWF+TGRU 54 MMACs/s, STOI 81.7 / PESQ 2.55). They note the runtime trade-off: GTCRN's temporal dilated convolutions demand large runtime memory for the receptive field, whereas a GRU-based model stores only the previous frame's state — relevant because on-device performance depends more on compute/memory footprint than on raw parameter count (GTCRN: 29–59k params vs. TGRU's 310–625k).
 
+## The RTF Counterpoint (Ahn et al. 2026)
+
+FastEnhancer (Ahn et al., ICASSP 2026) positions GTCRN as the exemplar of a **complexity-optimized** design whose real-world speed suffers from its own sophistication: GTCRN's sub-band operations, grouped convolutions/RNNs, and channel-split-shuffle operations reduce params (24k) and MACs (40M) but increase memory operations — measured RTF 0.060 (Xeon) vs FastEnhancer-B's 0.022 with 6.5× the MACs (262M) and better quality (PESQ 3.13 vs 2.87). FastEnhancer-T matches GTCRN's quality at RTF 0.012 (5× faster). This is the clearest evidence yet in the wiki that params/MACs are poor proxies for CPU-thread latency in the lightweight-SE lineage.
+
 ## Related Concepts
 
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
@@ -120,3 +125,4 @@ Huang et al. (2026) reuse GTCRN not as a standalone enhancer but as a **lightwei
 - [[sources/huang-2026-lightweight-speech-enhancement-guided-target-speech-extraction|Huang et al. 2026: Lightweight Speech Enhancement Guided TSE in Noisy Multi-Speaker Scenarios]] — reuses GTCRN as a pluggable denoiser front-end for noise-agnostic enrollment guidance in TSE
 - [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — multichannel GTCRN adaptation as a low-compute baseline
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — 32 ms-latency baseline comparison vs. TinyGRU
+- [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — GTCRN as the exemplar of complexity-optimized lightweight SE whose RTF suffers; 5× slower than FastEnhancer-T at matched quality

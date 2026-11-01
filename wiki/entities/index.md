@@ -701,4 +701,8 @@
 | [[entities/jie-zhang\|Jie Zhang]] | USTC NERC-SLIP researcher; co-first author of LiSenNet (ICASSP 2025); SDW-SWF single-channel Wiener filtering | 2026-11-01 |
 | [[entities/yeping-zhou\|Yeping Zhou]] | China Merchants Bank researcher; co-author of LiSenNet (ICASSP 2025) | 2026-11-01 |
 | [[entities/peiqi-liu\|Peiqi Liu]] | China Merchants Bank researcher; co-author of LiSenNet (ICASSP 2025) | 2026-11-01 |
+| [[entities/sunghwan-ahn\|Sunghwan Ahn]] | SNU researcher; first author of FastEnhancer (ICASSP 2026) — RNNFormer dual-path block, RTF-first streaming SE | 2026-11-01 |
+| [[entities/jinmo-han\|Jinmo Han]] | SNU researcher; co-author of FastEnhancer (ICASSP 2026) | 2026-11-01 |
+| [[entities/beom-jun-woo\|Beom Jun Woo]] | SNU researcher; co-author of FastEnhancer (ICASSP 2026) | 2026-11-01 |
+| [[entities/nam-soo-kim\|Nam Soo Kim]] | SNU professor; senior author of FastEnhancer (ICASSP 2026) | 2026-11-01 |
 

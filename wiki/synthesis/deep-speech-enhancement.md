@@ -33,6 +33,7 @@ sources:
   - raw/papers/yan-2025-lisennet/full-text.md
   - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
   - raw/papers/veluri-2023-semantic-hearing/full-text.md
+  - raw/papers/ahn-2026-fastenhancer/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -89,6 +90,7 @@ The thesis here is that the field's progress is **not a single replacement story
 | [[sources/pan-2025-data-driven-acoustics\|Pan 2025]] | 2025 | Training objective (taxonomy) | Tutorial framing SE as *estimation*; three-level loss hierarchy (filter gain → spectrum → waveform) with SI-SDR–correlation equivalence |
 | [[sources/haeb-umbach-2024-microphone-array-deep-learning\|Haeb-Umbach et al. 2024]] | 2024 | Multi-channel (taxonomy) | IEEE SPM overview codifying the model-based/data-driven hybrid landscape: two-operation framing (parameter estimation + enhancement operation), three hybrid classes, and the model-as-regularizer argument |
 | [[sources/veluri-2023-semantic-hearing\|Veluri et al. 2023]] | 2023 | Multi-channel / conditioning / efficiency | First binaural target *sound* extraction network — joint two-channel latent masking, class-query conditioning, 0.52M params / 240 MFLOPS / 6.56 ms on smartphone |
+| [[sources/ahn-2026-fastenhancer\|Ahn, Han, Woo & Kim 2026 (FastEnhancer)]] | 2026 | Efficiency | RTF-first streaming SE: RNNFormer (time GRU + freq MHSA), time-kernel-1 convs, BN fusion — PESQ 3.13 at RTF 0.022; proves MACs ≠ real speed |
 
 ## Insight 1: The Training Target Evolved from Pointwise Masks to Neighborhood Filters
 
@@ -176,6 +178,8 @@ A second life for these ultralight models: [[sources/huang-2026-lightweight-spee
 
 The efficiency frontier also has a **deployment axis** that params/MACs tables hide: [[concepts/munet\|μNet (Shetu 2026)]] argues that once a model must run int8-quantized on a consumer DSP (Cadence Tensilica HiFi 4), the binding constraints become static memory (μNet: 90 KB) and memory-access patterns, not MAC counts. μNet *reverts* ULCNet's depthwise separable convolutions to standard convolutions precisely because fragmented memory access makes "cheaper" convolutions slower in wall-clock DSP cycles — the inverse of the DSConv2D choice in the lightS4 line, showing that the right convolution type is target-hardware-dependent, not a universal constant.
 
+[[sources/ahn-2026-fastenhancer\|FastEnhancer (Ahn 2026)]] generalizes that deployment argument from the DSP tier to the **single-CPU-thread tier** and turns it into the primary optimization target: its entire architecture — time-axis kernel size 1 (no frame caching), BN fused at inference, fixed filterbank bridges, and the [[concepts/rnnformer\|RNNFormer]] bottleneck (time GRU + frequency MHSA) — is chosen to minimize RTF, accepting *more* MACs (FastEnhancer-B: 262M vs GTCRN's 40M) in exchange for 3× lower wall-clock latency and better quality (PESQ 3.13 vs 2.87 on Voicebank-Demand). The μNet finding (memory-access patterns beat MAC counts on DSP) and the FastEnhancer finding (memory operations beat MAC counts on CPU) are the same lesson measured on two hardware tiers — params/MACs tables are deployment-blind, and the 2026 frontier is a *measured RTF curve* (FastEnhancer T–L spans RTF 0.012–0.313 on Xeon), not a complexity point.
+
 ## Insight 6: Multi-Channel SE Went "Estimate SCM → Beamform" → End-to-End → Array-Invariant
 
 The multi-channel arc has three phases, each relaxing an assumption of the previous:
@@ -258,7 +262,9 @@ The clue axis also extends beyond speakers: [[sources/veluri-2023-semantic-heari
 - [[concepts/generalized-loss-function|Generalized Loss Function]] · [[concepts/frequency-domain-loss|Frequency-Domain Loss]] · [[concepts/noise-attenuation-control|Noise Attenuation Control]] · [[concepts/artificial-residual-noise|Artificial Residual Noise]] — training-objective / noise-control lineage
 - [[concepts/spectrally-adaptive-loss|Spectrally Adaptive Loss]] · [[concepts/magnitude-phase-compensation-effect|Magnitude-Phase Compensation Effect]] · [[concepts/hyst-net|HyST-Net]] — loss-side compensation-effect remedy and its streaming backbone
 - [[concepts/lisennet|LiSenNet]] · [[concepts/noise-detector|Noise Detector]] · [[concepts/gla-phase-refinement|GLA Phase Refinement]] · [[concepts/sub-band-convolution|Sub-band Convolution]] — the 2025 lightweight-SE design point and its components
+- [[concepts/rnnformer|RNNFormer]] — RTF-first dual-path block (time GRU + frequency MHSA); FastEnhancer's bottleneck
 
 ## Related Sources
 
 - [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025 (LiSenNet)]] — sub-band conv + causal dual-path GRU + noise detector; the 37k/56M MACs/s operating point between GTCRN and CoFi-Lite
+- [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026 (FastEnhancer)]] — RTF-first streaming SE: RNNFormer bottleneck, time-kernel-1 convolutions, BN fusion; new quality-vs-speed Pareto frontier on Voicebank-Demand

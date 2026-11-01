@@ -5,6 +5,7 @@ updated: 2026-11-01
 sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/yan-2025-lisennet/full-text.md
+  - raw/papers/ahn-2026-fastenhancer/full-text.md
 tags:
   - dataset
   - speech-enhancement
@@ -39,6 +40,8 @@ The noisy baseline scores PESQ = 1.97, CSIG = 3.35, CBAK = 2.44, COVL = 2.63, ST
 | [[concepts/semamba|SEMamba]] | 3.55 | 2024 | [[concepts/mamba|Mamba]] replaces Conformer |
 | **[[concepts/semamba|SEMamba]] (+PCS)** | **3.69** | 2024 | + [[concepts/perceptual-contrast-stretching|PCS]] post-processing — SOTA |
 
+FastEnhancer (Ahn et al. 2026) — the FastEnhancer family (22k–1.1M params, RTF 0.012–0.313 on Xeon) establishes a new performance-vs-speed Pareto frontier on this benchmark: FastEnhancer-B reaches PESQ 3.13 / STOI 0.945 at RTF 0.022, and FastEnhancer-T matches GTCRN-quality at RTF 0.012. Notably, FastEnhancer-B has *higher* MACs (262M) than GTCRN (40M) yet ~3× lower RTF — evidence that on this benchmark MACs are a poor proxy for real speed.
+
 ## Related Concepts
 
 - [[concepts/dns-challenge|DNS Challenge (Deep Noise Suppression)]]
@@ -52,3 +55,4 @@ The noisy baseline scores PESQ = 1.97, CSIG = 3.35, CBAK = 2.44, COVL = 2.63, ST
 - [[sources/zhu-2026-g-map-se-guided-speech-enhancement|G-MaP-SE: Guided Speech Enhancement via GMM-Based Prior Matching (Interspeech 2026)]]
 - [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] — SOTA PESQ 3.69 on VBD with SEMamba + PCS
 - [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025: LiSenNet]] — PESQ 3.07 / STOI 0.939 at 37k params and 56M MACs/s: the lightweight-SE operating point on this benchmark; also introduces the WSJ0+ESC50 instantaneous-noise dataset
+- [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — new performance-vs-speed Pareto frontier: FastEnhancer-B at PESQ 3.13 / STOI 0.945 / RTF 0.022, FastEnhancer-T at RTF 0.012; shows MACs are a poor proxy for real speed on this benchmark
