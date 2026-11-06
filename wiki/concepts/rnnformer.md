@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-11-01
-updated: 2026-11-01
+updated: 2026-11-07
 sources:
   - raw/papers/ahn-2026-fastenhancer/full-text.md
+  - raw/papers/kim-2026-faster-enhancer/full-text.md
 tags:
   - neural-network-architecture
   - speech-enhancement
@@ -38,6 +39,10 @@ The assignment inverts the standard [[concepts/dprnn|DPRNN]] pattern (RNN on *bo
 
 [[concepts/hyst-net|HyST-Net]] (Zhao & Madhu 2026) independently converged on the **same axis assignment** — frequency-axis MHA + time-axis GRU in interleaved spectral-temporal blocks — motivated identically (parallel frequency axis, recurrent temporal axis for streaming). The two models differ in scope: HyST-Net targets DNS-Challenge-quality at sub-CRUSE complexity (~0.11M params); FastEnhancer explicitly optimizes the RTF/quality Pareto frontier with speed-oriented architecture-wide choices (time-kernel-1 convolutions, BN fusion, fixed filterbank bridges). RNNFormer adds the dual-path ablation evidence (vs DPRNN and DPT) that HyST-Net does not report.
 
+## Deployment as an int8 Runtime
+
+[[sources/kim-2026-faster-enhancer|Kim 2026]] ported FastEnhancer-Medium at 48 kHz to faster-enhancer.c, a dependency-free int8 C runtime, with architecture and weights untouched. The port validates the block's deployment profile from the systems side: the fused GRU kernel is the **largest per-frame compute bucket** (82.2 µs of a ~452 µs frame on an Apple M2, ahead of QKV projection at 36.3 µs), which is why the runtime fuses the GRU's two matrices, three gates, hidden update and fp16 state write into one kernel per SIMD tier so int32 accumulators never reach memory. Quantized to int8 with per-frame activation ranges, the block chain tracks fp32 to −0.006 PESQ over 824 VoiceBank-DEMAND utterances.
+
 ## Related Concepts
 
 - [[concepts/dprnn|Dual-Path RNN (DPRNN)]] — the recurrence-on-both-axes predecessor
@@ -51,3 +56,4 @@ The assignment inverts the standard [[concepts/dprnn|DPRNN]] pattern (RNN on *bo
 
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer — Speed-Optimized Streaming Neural Speech Enhancement]] — origin of the block; DPRNN/DPT ablations
 - [[sources/zhao-2026-spectrally-adaptive-loss|Zhao & Madhu 2026: Spectrally Adaptive Loss for Streaming Speech Enhancement]] — HyST-Net's independent frequency-MHA + time-GRU convergence
+- [[sources/kim-2026-faster-enhancer|Kim 2026: faster-enhancer.c]] — int8 runtime port of FastEnhancer-Medium; GRU kernel is the top compute bucket and gets the deepest fusion

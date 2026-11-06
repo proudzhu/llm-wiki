@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-07-18
-updated: 2026-11-01
+updated: 2026-11-07
 sources:
   - raw/papers/mienye-2024-rnn-comprehensive-review/full-text.md
   - raw/papers/li-2026-realtime-music-separation-dsp/full-text.md
@@ -12,6 +12,7 @@ sources:
   - raw/papers/perez-2018-film-visual-reasoning/full-text.md
   - raw/papers/yan-2025-lisennet/full-text.md
   - raw/papers/ahn-2026-fastenhancer/full-text.md
+  - raw/papers/kim-2026-faster-enhancer/full-text.md
 tags:
   - deep-learning
   - recurrent-neural-network
@@ -83,6 +84,7 @@ Within the llm-wiki, GRU is the recurrent backbone in:
 - [[concepts/mingru\|MinGRU]] — minimal gated GRU variant
 - [[concepts/lisennet|LiSenNet]] — frequency-Bi-GRU + temporal-uni-GRU dual-path bottleneck
 - [[concepts/rnnformer|RNNFormer]] (Ahn et al. 2026) — GRU as the *time axis* of FastEnhancer's dual-path bottleneck, chosen for streaming: its constant-size state avoids the key-value caching that time-axis MHSA would need (ablation: DPT variant with 31-frame lookbehind is far slower despite fewer params). The frequency axis uses MHSA instead — the inverse of LiSenNet's frequency-GRU choice, with the RTF/SISDR curve favoring RNNFormer.
+- [[concepts/faster-enhancer-c|faster-enhancer.c]] (Kim 2026) — the GRU's deployment profile from the systems side: it is the top per-frame compute bucket (82.2 µs of ~452 µs) in the int8 runtime port of FastEnhancer-Medium, so its two matrices + three gates + hidden update + fp16 state write are fused into one kernel per SIMD tier; the hidden state deliberately stays fp16 because int8 state would lose ~40 dB SNR through the decoder concat
 
 ## Related Sources
 
@@ -97,3 +99,4 @@ Within the llm-wiki, GRU is the recurrent backbone in:
 - [[sources/westhausen-2022-tplcnet\|Westhausen & Meyer 2022: tPLCnet — Real-Time Deep Packet Loss Concealment in the Time Domain]] — bidirectional-GRU seq2one PLC; triggered on demand at loss time only
 - [[sources/perez-2018-film-visual-reasoning\|Perez, Strub, de Vries, Dumoulin & Courville 2018: FiLM: Visual Reasoning with a General Conditioning Layer]] — GRU question encoder (4096 units) as the FiLM generator: final hidden state projected to per-layer (γ, β) feature-modulation parameters
 - [[sources/ahn-2026-fastenhancer\|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — GRU as the time axis of the RNNFormer dual-path block; beats time-axis MHSA on streaming RTF in ablation
+- [[sources/kim-2026-faster-enhancer\|Kim 2026: faster-enhancer.c]] — fused single-kernel int8 GRU with fp16 state; top compute bucket in the runtime's profile

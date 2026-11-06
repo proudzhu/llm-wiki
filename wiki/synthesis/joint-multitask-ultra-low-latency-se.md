@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-07-16
-updated: 2026-11-01
+updated: 2026-11-07
 sources:
   - raw/papers/indenbom-2023-deepvqe/full-text.md
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
@@ -21,6 +21,7 @@ sources:
   - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
   - raw/papers/ueda-2024-online-joint-optimization/full-text.md
   - raw/papers/ahn-2026-fastenhancer/full-text.md
+  - raw/papers/kim-2026-faster-enhancer/full-text.md
 tags:
   - speech-enhancement
   - multi-task
@@ -63,6 +64,7 @@ Neither trend is independently novel. The **new insight** from the 2025–2026 c
 | [[sources/larraza-2026-fast-ulcnet-speech-enhancement\|Fast-ULCNet (Larraza)]] | 2026 | NS (single-task) | 16 ms (hop) | **0.338M params, 1.69 MMACs**, RTF 0.60 ARM | GRU→FastGRNN replacement + Comfi-FastGRNN drift correction |
 | [[sources/uphaus-2026-directivity-low-latency\|FiLM-OSN (Uphaus)]] | 2026 | NDF (steerable directivity) + binaural SE | **10 ms** | 0.7M params | FiLM-conditioned OnlineSpatialNet (Mamba narrow-band SSM) |
 | [[sources/ueda-2024-online-joint-optimization\|online-WPE×IVE (Ueda)]] | 2024 | SS + DR + NR (blind joint) | **8 ms** (10.01 ms total, < 12 ms ICC budget) | O(F(N+1)M²L²)/frame, real-time on desktop CPU | Forgetting-factor online joint optimization in a [[concepts/convolutional-beamformer\|convolutional beamformer]] (model-based, no neural network) |
+| [[sources/kim-2026-faster-enhancer\|faster-enhancer.c (Kim)]] | 2026 | NS (single-task, runtime study) | 6.67 ms (hop) + 14.67 ms fixed alignment | 511k params, int8 q8 blob 0.57 MB; RTF 0.069 racing / 0.286 paced (M2) | Model-specialized int8 runtime; [[concepts/racing-vs-pacing-benchmark\|racing-vs-pacing benchmark]] |
 
 ## Insight 1: Multi-Task Fusion Strategies Form a Spectrum
 
@@ -168,6 +170,8 @@ A recurring structural shift across 2026 sources: **linear RNNs and state-space 
 **A per-axis refinement (Zhao & Madhu 2026)**: [[concepts/hyst-net\|HyST-Net]] qualifies the replacement narrative — the right recurrent/attention choice depends on *which STFT axis* is being modelled. For the **frequency** axis, all bins of a frame are simultaneously available, so parallel MHA incurs no latency penalty and RNN-based spectral modelling (as in FTF-Net) serialises streaming inference (FTF-Net RTF 1.05 vs HyST-Net 0.22 at comparable quality). For the **time** axis, causal MHA with key-value caching still costs memory/compute linear in context length, so the GRU's constant-size recurrent state remains cheaper in lightweight streaming. The design rule is thus: *parallel modules for the inherently parallel axis, constant-state recurrence for the sequential axis* — a middle position between the full-RNN dual-path designs (DPCRN, FTF-Net) and the full linear-RNN replacement (OVC's Mamba-MinGRU).
 
 **Independent confirmation (Ahn et al. 2026)**: [[concepts/rnnformer\|RNNFormer]] / [[sources/ahn-2026-fastenhancer\|FastEnhancer (Ahn et al. 2026)]] arrives at the *same* per-axis rule from the opposite direction — designing for RTF rather than for architectural novelty — and supplies the ablation evidence HyST-Net lacks: replacing the frequency MHSA with a frequency GRU (making a DPRNN) clearly degrades SISDR (sequential modelling of global spectral structure is the bottleneck), while replacing the time GRU with time-MHSA (31-frame lookbehind, making a DPT) is *slower* despite fewer parameters (K-V caching dominates). FastEnhancer-T–L span RTF 0.012–0.313 on a Xeon thread with PESQ 2.99–3.26 on Voicebank-Demand. Two independent 2026 papers converging on "attention for frequency, recurrence for time" — with dual ablations on one side and RTF Pareto dominance on the other — elevates the design rule from a single-paper observation to a corpus-level pattern.
+
+**The systems-side extension (Kim 2026)**: [[sources/kim-2026-faster-enhancer\|faster-enhancer.c]] carries the per-axis rule into the runtime itself — and shows it has a *deployment* corollary. The fused GRU kernel (the time axis) is the top per-frame compute bucket at 82.2 µs, so the runtime fuses its two matrices, three gates, hidden update and fp16 state write into one kernel per SIMD tier; the frequency MHSA's QKV projection follows at 36.3 µs. But the deeper addition to this synthesis is the [[concepts/racing-vs-pacing-benchmark\|racing-vs-pacing]] finding: under a real audio callback's 6.67 ms deadline, per-frame cost rises 4.2× (0.068 → 0.286 RTF) because the governor drops the clock between frames — **the RTF figures in the table above are racing numbers, i.e. floors on deployed cost** — yet pacing *saves 49% of the energy* (387 → 198 mJ per audio-second), and the cheapest placement (E-core, 101 mJ) misses 96% of its deadlines because timer coalescing delays the wake-up: the compute fits in 3.5 ms of the 6.67 ms budget; the wake-up does not. A phone deployment further shows a widening scheduler-driven tail over 30 minutes (p99 RTF 1.0139, 1.77% deadline misses) that short benchmarks never see. For the latency-tier logic of Insight 2, this means the budget must be defended at *deployment duration and duty cycle*, not at benchmark throughput.
 
 ## Insight 4: Temporal Redundancy Is the New Efficiency Frontier
 
@@ -344,3 +348,5 @@ For a practitioner choosing a multi-task SE architecture under a latency budget 
 - [[concepts/lisennet|LiSenNet]]
 - [[concepts/noise-detector|Noise Detector]] — content-conditional gating (compute proportional to noise content)
 - [[concepts/rnnformer|RNNFormer]] — independent confirmation of the per-axis design rule (attention for frequency, recurrence for time), with DPRNN/DPT ablations
+- [[concepts/faster-enhancer-c|faster-enhancer.c]] — the per-axis rule's runtime corollary: fused time-axis GRU kernel is the top compute bucket; racing-vs-pacing protocol
+- [[concepts/racing-vs-pacing-benchmark|Racing vs. Pacing Benchmark]] — deployed RTF is a duty cycle: 4.2× per-frame cost, −49% energy, deadline-miss rates hidden by racing benchmarks

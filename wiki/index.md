@@ -711,6 +711,7 @@
 | [[entities/jinmo-han\|Jinmo Han]] | SNU researcher; co-author of FastEnhancer (ICASSP 2026) | 2026-11-01 |
 | [[entities/beom-jun-woo\|Beom Jun Woo]] | SNU researcher; co-author of FastEnhancer (ICASSP 2026) | 2026-11-01 |
 | [[entities/nam-soo-kim\|Nam Soo Kim]] | SNU professor; senior author of FastEnhancer (ICASSP 2026) | 2026-11-01 |
+| [[entities/gyeongmin-kim\|Gyeongmin Kim]] | Hanyang University; sole author of faster-enhancer.c — int8 runtime specialization, racing-vs-pacing energy benchmarking for streaming SE | 2026-11-07 |
 
 ---
 
@@ -1353,6 +1354,10 @@
 | [[concepts/phase-difference-feature\|Phase Difference (PD) Feature]] | Frequency-axis and baseband temporal phase differences as magnitude-estimation input features (+0.08 PESQ, zero params) | 2026-11-01 |
 | [[concepts/gla-phase-refinement\|GLA Phase Refinement]] | Parameter-free 2-iteration Griffin–Lim post-processor refining phase from the estimated magnitude (+0.05 PESQ) | 2026-11-01 |
 | [[concepts/rnnformer\|RNNFormer]] | FastEnhancer's dual-path block: time-axis GRU + frequency-axis MHSA — recurrence for time, attention for frequency | 2026-11-01 |
+| [[concepts/faster-enhancer-c\|faster-enhancer.c]] | Dependency-free int8 C runtime for FastEnhancer-Medium at 48 kHz: six SIMD GEMM tiers, per-frame activation quantization, fused GRU, byte-identical output across tiers | 2026-11-07 |
+| [[concepts/per-frame-activation-quantization\|Per-Frame Activation Quantization]] | Calibration-free int8 scheme: activation ranges recomputed each frame — no calibration set, no outlier sensitivity; −0.006 PESQ on FastEnhancer-Medium | 2026-11-07 |
+| [[concepts/racing-vs-pacing-benchmark\|Racing vs. Pacing Benchmark]] | RTF as duty cycle, not latency: deadline pacing costs 4.2× per frame, saves 49% energy, and exposes deadline-miss rates that racing benchmarks hide | 2026-11-07 |
+| [[concepts/winograd-convolution\|Winograd Convolution]] | Minimal-filtering convolution algorithms (F(2,3)) cutting multiplies; faster-enhancer.c shows memory-layout savings dominate the arithmetic ones | 2026-11-07 |
 
 ---
 
@@ -1648,6 +1653,7 @@
 | [[sources/klatt-2025-laguerre-feedback-anc\|Klatt & Martin 2025]] | This paper replaces the FIR control filter of an Internal Model Control (IMC) feedback ANC controller with a Laguerre filter network — the first time Laguerre filters are combined with the IMC topology for FBANC (prior Laguerre-ANC work used non-IMC topologies). | 2026-11-01 |
 | [[sources/yan-2025-lisennet\|Yan, Zhang, Fan, Zhou & Liu 2025]] | LiSenNet is a lightweight speech enhancement network achieving competitive quality with only 37k parameters and 56M MACs/s — half the parameters of the then-SOTA lightweight FSPEN (79k) with 63% of its MACs, while improving PESQ by 0.10 (3.07 vs. 2.97 on VoiceBank+DEMAND). | 2026-11-01 |
 | [[sources/ahn-2026-fastenhancer\|Ahn, Han, Woo & Kim 2026]] | FastEnhancer is a family of five streaming neural speech-enhancement models explicitly optimized for real-world inference speed (RTF on a single CPU thread) rather than the usual proxy metrics of parameter count or MACs. | 2026-11-01 |
+| [[sources/kim-2026-faster-enhancer\|Kim 2026]] | This is an implementation and measurement study of what it costs to run a streaming speech enhancer on a CPU: the author ports FastEnhancer-Medium at 48 kHz to faster-enhancer.c, a C runtime with six int8 GEMM tiers selected at initialization, leaving architecture and weights untouched. | 2026-11-07 |
 
 ---
 
@@ -1706,10 +1712,10 @@
 
 ## Statistics
 
-- **Total pages**: 1655
-- **Entities**: 701
-- **Concepts**: 633
-- **Sources**: 286
+- **Total pages**: 1661
+- **Entities**: 702
+- **Concepts**: 637
+- **Sources**: 287
 - **Synthesis**: 25
 - **Queries**: 10
-- **Last updated**: 2026-11-01
+- **Last updated**: 2026-11-06

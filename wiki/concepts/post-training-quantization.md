@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-07-16
-updated: 2026-08-11
+updated: 2026-11-07
 sources:
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
   - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
   - raw/papers/le-2026-efficient-nn-tinyml-review/full-text.md
+  - raw/papers/kim-2026-faster-enhancer/full-text.md
 tags:
   - neural-network
   - quantization
@@ -63,9 +64,15 @@ In [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026]
 
 Weight-only QAT recovers essentially all of the FP32 quality, confirming that the LSTM activations are the bottleneck for DPTQ.
 
+## The GRU Case That Breaks the Rule
+
+[[sources/kim-2026-faster-enhancer|Kim 2026]] supplies the most striking counter-example to the "DPTQ degrades recurrent layers" pattern: faster-enhancer.c quantizes FastEnhancer-Medium's GRUs to W8A8 with architecture and weights untouched, and tracks the fp32 graph to −0.006 PESQ / −0.079 dB SNR over 824 utterances — versus −0.06 PESQ for the mixed FP16-INT8 scheme above. The difference is [[concepts/per-frame-activation-quantization|per-frame activation ranges]] (no calibration set to drift from) plus a runtime design that avoids the usual failure modes: the [−127, 127] clamp keeps int16 accumulation provably safe, the fused GRU kernel keeps int32 accumulators off the memory bus, and the *long-lived state* is deliberately kept in fp16 — int8 state would lose ~40 dB SNR through the decoder concat. The sensitive quantity is not the GRU's arithmetic but its *state precision*; keep the state wide and the gates quantize cleanly. The runtime cost of dynamic range recomputation is folded into the frame (part of why the engine runs at 45% of SDOT peak end-to-end while GEMM kernels alone hit 85–93%).
+
 ## Related Concepts
 
 - [[concepts/quantization-aware-training|Quantization-Aware Training (QAT)]]
+- [[concepts/per-frame-activation-quantization|Per-Frame Activation Quantization]] — calibration-free dynamic activation ranges
+- [[concepts/faster-enhancer-c|faster-enhancer.c]] — the runtime realizing the W8A8 GRU counter-example
 - [[concepts/mn-tango|MN-TANGO]]
 - [[concepts/tango-framework|Tango Framework]]
 - [[concepts/grouped-recurrent-neural-network|Grouped Recurrent Neural Network]]
@@ -75,3 +82,4 @@ Weight-only QAT recovers essentially all of the FP32 quality, confirming that th
 - [[sources/benslimane-2026-tango-quantized-distributed|Benslimane et al. 2026: Quantized TANGO / MN-TANGO]]
 - [[sources/liu-2024-lightweight-dl-survey|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] — surveys bit-width trade-offs on ResNet18/ImageNet (Table 5): 4-bit PTQ preserves accuracy (LLT: +0.6% / −0.3%); 2-bit causes 3–4% loss; 1-bit (XNOR-Net) causes 18% loss. Practical guidance: match quantization precision to hardware (MCUs/edge TPUs often require full integer); 8-bit int recommended for low-power CPUs; 16-bit float as starting point when hardware permits; TF-Lite achieves 4× size reduction and 3×+ inference speedup.
 - [[sources/le-2026-efficient-nn-tinyml-review|Lê, Wolinski & Arbel 2026: Efficient NNs for TinyML — A Comprehensive Review]] — surveys PTQ for ultra-low-power MCUs and concludes "we would favor uniform 8-bit PTQ due to its simplicity and acceptable results until we need lower-bit precision for more power footprint reduction." Notes that "the most widely used quantization method for MCUs is uniform affine PTQ to int8 because it is straightforward and supported by MCUs." Below 8 bits, "PTQ may lead to a more significant loss in accuracy" and QAT becomes preferable. Also flags a TinyML-specific sensitivity: "very small models, that can be found in TinyML, should be more sensitive to quantization" because the overparameterization that buffers larger models against quantization noise is precisely what TinyML lacks.
+- [[sources/kim-2026-faster-enhancer|Kim 2026: faster-enhancer.c]] — W8A8 DPTQ on FastEnhancer-Medium at −0.006 PESQ via per-frame activation ranges and fp16 (not int8) long-lived state; the GRU counter-example to the sensitivity pattern above

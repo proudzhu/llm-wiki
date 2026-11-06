@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-11-01
+updated: 2026-11-07
 sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/yan-2025-lisennet/full-text.md
   - raw/papers/ahn-2026-fastenhancer/full-text.md
+  - raw/papers/kim-2026-faster-enhancer/full-text.md
 tags:
   - dataset
   - speech-enhancement
@@ -42,6 +43,8 @@ The noisy baseline scores PESQ = 1.97, CSIG = 3.35, CBAK = 2.44, COVL = 2.63, ST
 
 FastEnhancer (Ahn et al. 2026) — the FastEnhancer family (22k–1.1M params, RTF 0.012–0.313 on Xeon) establishes a new performance-vs-speed Pareto frontier on this benchmark: FastEnhancer-B reaches PESQ 3.13 / STOI 0.945 at RTF 0.022, and FastEnhancer-T matches GTCRN-quality at RTF 0.012. Notably, FastEnhancer-B has *higher* MACs (262M) than GTCRN (40M) yet ~3× lower RTF — evidence that on this benchmark MACs are a poor proxy for real speed.
 
+A 48 kHz variant of the benchmark appears in [[sources/kim-2026-faster-enhancer|Kim 2026]]: the faster-enhancer.c port evaluates FastEnhancer-Medium on the 824-utterance test set **at its native 48 kHz** (upstream trains/evaluates at 16 kHz), reporting fp32 PESQ 3.060 / STOI 0.9512 / SNR 19.43 and the int8 port tracking to −0.006 PESQ / −0.079 dB SNR. The paper also notes a metric-band caveat specific to fullband use: PESQ is defined only up to 16 kHz (blind above 8 kHz) and STOI observes 0–5 kHz, so fullband evaluation leans on SNR, LSD and SIGMOS — and fullband paired test sets remain scarce (DNS fullband tracks publish no clean references).
+
 ## Related Concepts
 
 - [[concepts/dns-challenge|DNS Challenge (Deep Noise Suppression)]]
@@ -56,3 +59,4 @@ FastEnhancer (Ahn et al. 2026) — the FastEnhancer family (22k–1.1M params, R
 - [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] — SOTA PESQ 3.69 on VBD with SEMamba + PCS
 - [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025: LiSenNet]] — PESQ 3.07 / STOI 0.939 at 37k params and 56M MACs/s: the lightweight-SE operating point on this benchmark; also introduces the WSJ0+ESC50 instantaneous-noise dataset
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — new performance-vs-speed Pareto frontier: FastEnhancer-B at PESQ 3.13 / STOI 0.945 / RTF 0.022, FastEnhancer-T at RTF 0.012; shows MACs are a poor proxy for real speed on this benchmark
+- [[sources/kim-2026-faster-enhancer|Kim 2026: faster-enhancer.c]] — 48 kHz evaluation of FastEnhancer-Medium on the 824-utterance test set (fp32 PESQ 3.060); quantization-delta reference point (−0.006 PESQ) and metric-band caveats for fullband scoring

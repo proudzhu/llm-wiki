@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-11-01
+updated: 2026-11-07
 sources:
   - raw/papers/benslimane-2026-rt-tango-binaural-speech-enhancement/full-text.md
   - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
@@ -18,6 +18,7 @@ sources:
   - raw/papers/jiang-2026-lightweight-speech-enhancement-ssm-dsc/full-text.md
   - raw/papers/timcheck-2023-intel-neuromorphic-dns-challenge/full-text.md
   - raw/papers/ahn-2026-fastenhancer/full-text.md
+  - raw/papers/kim-2026-faster-enhancer/full-text.md
 tags:
   - lightweight-speech-enhancement
   - computational-complexity
@@ -222,6 +223,8 @@ Three approaches currently define the Pareto frontier:
 
 12. **[[concepts/rnnformer|FastEnhancer / RNNFormer (Ahn et al., ICASSP 2026)]]**: Defines an **eighth axis — real-world RTF as the optimization target itself** — challenging the params/MACs proxy metrics that axes 1–7 share. Its central measurement: complexity-optimized designs (GTCRN at 40M MACs, RTF 0.060 Xeon; BSRNN-SE at 245M MACs, RTF 0.059) are *slower* in wall-clock than a deliberately simple encoder-decoder with more MACs (FastEnhancer-B: 262M MACs, RTF 0.022, PESQ 3.13) — because sub-band operations, grouped convolutions/RNNs, and channel-split-shuffle add memory operations whose cost the MAC count ignores. Three speed-oriented design choices with ablation evidence: time-axis kernel size 1 everywhere (kernel-3 variant: 2× params, +27–42% RTF, zero quality gain), BN-fused-at-inference (LayerNorm swap: +27% RTF at identical params/MACs), and fixed filterbank/interpolation bridges. The [[concepts/rnnformer|RNNFormer]] bottleneck assigns the GRU to time (constant state, no K-V caching) and 4-head MHSA to frequency (all bins available simultaneously, global spectral structure) — ablations show frequency-GRU (DPRNN) degrades SISDR and time-MHSA (DPT) explodes RTF. The FastEnhancer family spans RTF 0.012–0.313 (Xeon, T–L sizes), re-drawing the quality-vs-speed Pareto frontier as a *measured* curve rather than a params/MACs point.
 
+13. **[[concepts/faster-enhancer-c|faster-enhancer.c (Kim 2026)]]**: Closes the loop on axis 8 by attacking the *runtime* side — and adds a **ninth axis: energy and duty cycle as deployment currencies**. The training-free int8 port of FastEnhancer-Medium (architecture and weights untouched, [[concepts/per-frame-activation-quantization|per-frame activation ranges]] instead of a calibration set) reaches RTF 0.069 on one Apple M2 core vs 0.230 for the fp32 ONNX graph (3.3×), tracking fp32 to −0.006 PESQ — an order of magnitude better than the −0.06 PESQ of prior mixed FP16-INT8 PTQ, validating quantization robustness *without* MN-TANGO's spatial-filter safety net. Two measurement contributions sharpen every axis above: (i) the best SIMD tier inverts between devices (DOTPROD vs I8MM on M2 vs Snapdragon 8 Gen 2), so runtime — not compile-time — tier selection is mandatory; (ii) [[concepts/racing-vs-pacing-benchmark|racing benchmarks misstate per-frame cost by 4.2×]] — deadline pacing drops the clock (0.068 → 0.286 RTF) yet *saves 49% of the energy* (387 → 198 mJ per audio-second), the E-core's cheaper energy is unreachable (96% deadline misses from timer coalescing), and 30-minute runs reveal a widening scheduler-driven tail that a phone crosses its deadline budget on — so deployment validation must run at deployment duration. The multiplies-are-not-the-currency lesson recurs at kernel level: [[concepts/winograd-convolution|Winograd F(2,3)]] cuts MACs 13% but saves 30% of runtime because it also avoids im2col traffic and a layout change.
+
 ### 5.3 The Open Question
 
 **Can neural/learned ANC controllers match traditional algorithms at lower computational cost?**
@@ -288,6 +291,10 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 - [[concepts/classifier-loss|Classifier Loss]] — auxiliary speaker-classification loss for vocal-interference suppression
 - [[concepts/erb-scale|ERB Scale]] — psychoacoustic basis for AISC and other spectral compressors
 - [[concepts/rnnformer|RNNFormer]] — RTF-first dual-path block: time GRU + frequency MHSA (eighth Pareto axis)
+- [[concepts/faster-enhancer-c|faster-enhancer.c]] — model-specialized int8 runtime: ninth Pareto axis (energy/duty cycle; racing vs pacing)
+- [[concepts/per-frame-activation-quantization|Per-Frame Activation Quantization]] — calibration-free dynamic activation ranges for streaming int8
+- [[concepts/racing-vs-pacing-benchmark|Racing vs. Pacing Benchmark]] — the protocol finding that racing misstates per-frame cost 4.2× and hides deadline-miss rates
+- [[concepts/winograd-convolution|Winograd Convolution]] — F(2,3) in faster-enhancer.c; multiplies-are-not-the-currency evidence
 
 ## Related Sources
 
@@ -304,6 +311,7 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 - [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight SE with SSM and DSConv]] — introduces the sixth Pareto axis: diagonal-constrained [[concepts/lights4|lightS4]] + DSConv2D + [[concepts/auditory-inspired-spectral-compressor|AISC]] reaches PESQ 3.32 on VoiceBank+DEMAND at 0.50 G MACs / 1.65 M params / RTF 0.13, a ~60× MACs reduction vs. SEMamba at a 0.20 PESQ cost
 - [[sources/shetu-2026-munet|Shetu, Martinez Aponte, Rao, Vittappan, Thiergart & Habets 2026: μNet]] — introduces the seventh Pareto axis (deployment-hardware co-design): 46K params / 28 MMACs / 90 KB static / int8 / 4–16 ms on Cadence Tensilica HiFi 4; standard convolutions chosen over depthwise separable for DSP memory-access efficiency
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — introduces the eighth Pareto axis (RTF-first design): memory operations, not MACs, dominate single-CPU-thread latency; GTCRN (40M MACs, RTF 0.060) vs FastEnhancer-B (262M MACs, RTF 0.022)
+- [[sources/kim-2026-faster-enhancer|Kim 2026: faster-enhancer.c]] — introduces the ninth Pareto axis (runtime specialization + energy/duty-cycle): training-free int8 port at −0.006 PESQ, 3.3× over fp32 ONNX Runtime, racing-vs-pacing protocol (4.2× cost, −49% energy), tier inversion across devices
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane, Chouteau, Poreba, Auzanneau, Szczepanski, Chersi & Serizel 2026: RT-Tango]]
 - [[sources/liu-2024-lightweight-dl-survey|Liu, Galindo, Xie, Wong, Shuai, Li & Cheng 2024: Lightweight Deep Learning for Resource-Constrained Environments]]
 

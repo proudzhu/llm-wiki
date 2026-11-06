@@ -637,4 +637,8 @@
 | [[concepts/phase-difference-feature\|Phase Difference (PD) Feature]] | Frequency-axis and baseband temporal phase differences as magnitude-estimation input features (+0.08 PESQ, zero params) | 2026-11-01 |
 | [[concepts/gla-phase-refinement\|GLA Phase Refinement]] | Parameter-free 2-iteration Griffin–Lim post-processor refining phase from the estimated magnitude (+0.05 PESQ) | 2026-11-01 |
 | [[concepts/rnnformer\|RNNFormer]] | FastEnhancer's dual-path block: time-axis GRU + frequency-axis MHSA — recurrence for time, attention for frequency | 2026-11-01 |
+| [[concepts/faster-enhancer-c\|faster-enhancer.c]] | Dependency-free int8 C runtime for FastEnhancer-Medium at 48 kHz: six SIMD GEMM tiers, per-frame activation quantization, fused GRU, byte-identical output across tiers | 2026-11-07 |
+| [[concepts/per-frame-activation-quantization\|Per-Frame Activation Quantization]] | Calibration-free int8 scheme: activation ranges recomputed each frame — no calibration set, no outlier sensitivity; −0.006 PESQ on FastEnhancer-Medium | 2026-11-07 |
+| [[concepts/racing-vs-pacing-benchmark\|Racing vs. Pacing Benchmark]] | RTF as duty cycle, not latency: deadline pacing costs 4.2× per frame, saves 49% energy, and exposes deadline-miss rates that racing benchmarks hide | 2026-11-07 |
+| [[concepts/winograd-convolution\|Winograd Convolution]] | Minimal-filtering convolution algorithms (F(2,3)) cutting multiplies; faster-enhancer.c shows memory-layout savings dominate the arithmetic ones | 2026-11-07 |
 
