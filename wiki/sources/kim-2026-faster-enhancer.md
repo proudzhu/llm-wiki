@@ -244,6 +244,7 @@ Profiling: the fused GRU kernel is the largest per-frame bucket at 82.2 µs, the
 ## Related Sources
 
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — the model ported here (architecture and weights untouched); its RNNFormer block is the runtime's compute hot spot
+- [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — the complementary NPU route to quantized speech enhancement: rather than a custom GRU runtime (per-frame ranges + fp16 state), it removes recurrence for the static int8 operator set of an MCU NPU (see [[concepts/mcu-npu-deployment|MCU NPU Deployment]])
 
 ## Related Synthesis
 

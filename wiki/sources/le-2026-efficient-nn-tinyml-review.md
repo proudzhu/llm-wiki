@@ -267,3 +267,4 @@ On Cortex-M4 vs Cortex-M7, the M4 has lower energy consumption but higher latenc
 - [[sources/liu-2024-lightweight-dl-survey|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] — broader survey framing TinyML as a future frontier alongside lightweight LLMs; catalogs CMSIS-NN, CMIX-NN, MicroNet
 - [[sources/lin-2020-mcunet|Lin et al. 2020: MCUNet]] — first 70% ImageNet top-1 on a commercial MCU; surveyed here as a key ImageNet frontier
 - [[sources/lin-2021-mcunetv2|Lin et al. 2021: MCUNetV2]] — patch-based inference and receptive field redistribution
+- [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — the review's "uniform 8-bit PTQ" guidance instantiated end-to-end for speech enhancement on a commercial MCU NPU (STM32N6 Neural-ART): operator-level co-design with bounded activations

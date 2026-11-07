@@ -706,4 +706,5 @@
 | [[entities/beom-jun-woo\|Beom Jun Woo]] | SNU researcher; co-author of FastEnhancer (ICASSP 2026) | 2026-11-01 |
 | [[entities/nam-soo-kim\|Nam Soo Kim]] | SNU professor; senior author of FastEnhancer (ICASSP 2026) | 2026-11-01 |
 | [[entities/gyeongmin-kim\|Gyeongmin Kim]] | Hanyang University; sole author of faster-enhancer.c — int8 runtime specialization, racing-vs-pacing energy benchmarking for streaming SE | 2026-11-07 |
+| [[entities/clement-laroche\|Clément Laroche]] | Researcher (GN Audio); first author of the NPU-compatible LiSenNet redesign for STM32N6 | 2026-11-07 |
 

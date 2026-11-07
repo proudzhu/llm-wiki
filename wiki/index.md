@@ -712,6 +712,7 @@
 | [[entities/beom-jun-woo\|Beom Jun Woo]] | SNU researcher; co-author of FastEnhancer (ICASSP 2026) | 2026-11-01 |
 | [[entities/nam-soo-kim\|Nam Soo Kim]] | SNU professor; senior author of FastEnhancer (ICASSP 2026) | 2026-11-01 |
 | [[entities/gyeongmin-kim\|Gyeongmin Kim]] | Hanyang University; sole author of faster-enhancer.c — int8 runtime specialization, racing-vs-pacing energy benchmarking for streaming SE | 2026-11-07 |
+| [[entities/clement-laroche\|Clément Laroche]] | Researcher (GN Audio); first author of the NPU-compatible LiSenNet redesign for STM32N6 | 2026-11-07 |
 
 ---
 
@@ -1358,6 +1359,10 @@
 | [[concepts/per-frame-activation-quantization\|Per-Frame Activation Quantization]] | Calibration-free int8 scheme: activation ranges recomputed each frame — no calibration set, no outlier sensitivity; −0.006 PESQ on FastEnhancer-Medium | 2026-11-07 |
 | [[concepts/racing-vs-pacing-benchmark\|Racing vs. Pacing Benchmark]] | RTF as duty cycle, not latency: deadline pacing costs 4.2× per frame, saves 49% energy, and exposes deadline-miss rates that racing benchmarks hide | 2026-11-07 |
 | [[concepts/winograd-convolution\|Winograd Convolution]] | Minimal-filtering convolution algorithms (F(2,3)) cutting multiplies; faster-enhancer.c shows memory-layout savings dominate the arithmetic ones | 2026-11-07 |
+| [[concepts/lisennet-npu\|LiSenNet-NPU]] | NPU-compatible LiSenNet redesign: conv mixers replace the dual-path GRU; int8 PESQ 3.01 at 4.83 ms/frame on the STM32N6 | 2026-11-07 |
+| [[concepts/mcu-npu-deployment\|MCU NPU Deployment]] | Running NN inference on MCU neural accelerators (Ethos-U, Neural-ART): the static int8 operator set as the binding constraint | 2026-11-07 |
+| [[concepts/stateful-streaming-inference\|Stateful Streaming Inference]] | FIFO state buffers between frames vs. receptive-field recomputation — 200× MACs apart; state can exceed the weights | 2026-11-07 |
+| [[concepts/relu6-quantization-robustness\|ReLU6 Quantization Robustness]] | Bounding activations to [0, 6] makes static int8 PTQ robust: 0.08 → 0.01 PESQ quantization loss | 2026-11-07 |
 
 ---
 
@@ -1654,6 +1659,7 @@
 | [[sources/yan-2025-lisennet\|Yan, Zhang, Fan, Zhou & Liu 2025]] | LiSenNet is a lightweight speech enhancement network achieving competitive quality with only 37k parameters and 56M MACs/s — half the parameters of the then-SOTA lightweight FSPEN (79k) with 63% of its MACs, while improving PESQ by 0.10 (3.07 vs. 2.97 on VoiceBank+DEMAND). | 2026-11-01 |
 | [[sources/ahn-2026-fastenhancer\|Ahn, Han, Woo & Kim 2026]] | FastEnhancer is a family of five streaming neural speech-enhancement models explicitly optimized for real-world inference speed (RTF on a single CPU thread) rather than the usual proxy metrics of parameter count or MACs. | 2026-11-01 |
 | [[sources/kim-2026-faster-enhancer\|Kim 2026]] | This is an implementation and measurement study of what it costs to run a streaming speech enhancer on a CPU: the author ports FastEnhancer-Medium at 48 kHz to faster-enhancer.c, a C runtime with six int8 GEMM tiers selected at initialization, leaving architecture and weights untouched. | 2026-11-07 |
+| [[sources/laroche-2026-lisenet-embedded\|Laroche & Olsson 2026]] | This paper redesigns LiSenNet — a 37k-parameter sub-band dual-path speech enhancer — for deployment on the STM32N6 microcontroller's Neural-ART NPU, showing that parameter and MAC counts do not predict deployed efficiency on restricted accelerators. | 2026-11-07 |
 
 ---
 
@@ -1712,10 +1718,10 @@
 
 ## Statistics
 
-- **Total pages**: 1661
-- **Entities**: 702
-- **Concepts**: 637
-- **Sources**: 287
+- **Total pages**: 1667
+- **Entities**: 703
+- **Concepts**: 641
+- **Sources**: 288
 - **Synthesis**: 25
 - **Queries**: 10
-- **Last updated**: 2026-11-06
+- **Last updated**: 2026-11-07

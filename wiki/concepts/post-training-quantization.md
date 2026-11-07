@@ -7,6 +7,7 @@ sources:
   - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
   - raw/papers/le-2026-efficient-nn-tinyml-review/full-text.md
   - raw/papers/kim-2026-faster-enhancer/full-text.md
+  - raw/papers/laroche-2026-lisenet-embedded/full-text.md
 tags:
   - neural-network
   - quantization
@@ -72,6 +73,7 @@ Weight-only QAT recovers essentially all of the FP32 quality, confirming that th
 
 - [[concepts/quantization-aware-training|Quantization-Aware Training (QAT)]]
 - [[concepts/per-frame-activation-quantization|Per-Frame Activation Quantization]] — calibration-free dynamic activation ranges
+- [[concepts/relu6-quantization-robustness|ReLU6 Quantization Robustness]] — the architectural route to static-PTQ robustness: bound the activations so the static scale is near-optimal (0.08 → 0.01 PESQ quantization loss, Laroche & Olsson 2026)
 - [[concepts/faster-enhancer-c|faster-enhancer.c]] — the runtime realizing the W8A8 GRU counter-example
 - [[concepts/mn-tango|MN-TANGO]]
 - [[concepts/tango-framework|Tango Framework]]
@@ -83,3 +85,4 @@ Weight-only QAT recovers essentially all of the FP32 quality, confirming that th
 - [[sources/liu-2024-lightweight-dl-survey|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] — surveys bit-width trade-offs on ResNet18/ImageNet (Table 5): 4-bit PTQ preserves accuracy (LLT: +0.6% / −0.3%); 2-bit causes 3–4% loss; 1-bit (XNOR-Net) causes 18% loss. Practical guidance: match quantization precision to hardware (MCUs/edge TPUs often require full integer); 8-bit int recommended for low-power CPUs; 16-bit float as starting point when hardware permits; TF-Lite achieves 4× size reduction and 3×+ inference speedup.
 - [[sources/le-2026-efficient-nn-tinyml-review|Lê, Wolinski & Arbel 2026: Efficient NNs for TinyML — A Comprehensive Review]] — surveys PTQ for ultra-low-power MCUs and concludes "we would favor uniform 8-bit PTQ due to its simplicity and acceptable results until we need lower-bit precision for more power footprint reduction." Notes that "the most widely used quantization method for MCUs is uniform affine PTQ to int8 because it is straightforward and supported by MCUs." Below 8 bits, "PTQ may lead to a more significant loss in accuracy" and QAT becomes preferable. Also flags a TinyML-specific sensitivity: "very small models, that can be found in TinyML, should be more sensitive to quantization" because the overparameterization that buffers larger models against quantization noise is precisely what TinyML lacks.
 - [[sources/kim-2026-faster-enhancer|Kim 2026: faster-enhancer.c]] — W8A8 DPTQ on FastEnhancer-Medium at −0.006 PESQ via per-frame activation ranges and fp16 (not int8) long-lived state; the GRU counter-example to the sensitivity pattern above
+- [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — static int8 PTQ (ONNX Runtime, percentile calibration) on a fully convolutional NPU graph: quantization loss cut from 0.08 to 0.01 PESQ by architectural bounding (ReLU6), answering the TinyML small-model sensitivity concern

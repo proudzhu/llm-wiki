@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-11-01
-updated: 2026-11-01
+updated: 2026-11-07
 sources:
   - raw/papers/yan-2025-lisennet/full-text.md
+  - raw/papers/laroche-2026-lisenet-embedded/full-text.md
 tags:
   - neural-network-architecture
   - convolution
@@ -55,3 +56,4 @@ The same principle recurs across the lightweight-SE line with different mechanis
 ## Related Sources
 
 - [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025: LiSenNet]]
+- [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — keeps LiSenNet's sub-band encoder/decoder (257 → 32 bins) intact through the NPU redesign; only the upsampling mechanism changes ([[concepts/sub-pixel-convolution|SP-Conv]] → transposed conv)

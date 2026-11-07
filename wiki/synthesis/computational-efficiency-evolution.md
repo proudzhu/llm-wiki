@@ -19,6 +19,7 @@ sources:
   - raw/papers/timcheck-2023-intel-neuromorphic-dns-challenge/full-text.md
   - raw/papers/ahn-2026-fastenhancer/full-text.md
   - raw/papers/kim-2026-faster-enhancer/full-text.md
+  - raw/papers/laroche-2026-lisenet-embedded/full-text.md
 tags:
   - lightweight-speech-enhancement
   - computational-complexity
@@ -225,6 +226,8 @@ Three approaches currently define the Pareto frontier:
 
 13. **[[concepts/faster-enhancer-c|faster-enhancer.c (Kim 2026)]]**: Closes the loop on axis 8 by attacking the *runtime* side — and adds a **ninth axis: energy and duty cycle as deployment currencies**. The training-free int8 port of FastEnhancer-Medium (architecture and weights untouched, [[concepts/per-frame-activation-quantization|per-frame activation ranges]] instead of a calibration set) reaches RTF 0.069 on one Apple M2 core vs 0.230 for the fp32 ONNX graph (3.3×), tracking fp32 to −0.006 PESQ — an order of magnitude better than the −0.06 PESQ of prior mixed FP16-INT8 PTQ, validating quantization robustness *without* MN-TANGO's spatial-filter safety net. Two measurement contributions sharpen every axis above: (i) the best SIMD tier inverts between devices (DOTPROD vs I8MM on M2 vs Snapdragon 8 Gen 2), so runtime — not compile-time — tier selection is mandatory; (ii) [[concepts/racing-vs-pacing-benchmark|racing benchmarks misstate per-frame cost by 4.2×]] — deadline pacing drops the clock (0.068 → 0.286 RTF) yet *saves 49% of the energy* (387 → 198 mJ per audio-second), the E-core's cheaper energy is unreachable (96% deadline misses from timer coalescing), and 30-minute runs reveal a widening scheduler-driven tail that a phone crosses its deadline budget on — so deployment validation must run at deployment duration. The multiplies-are-not-the-currency lesson recurs at kernel level: [[concepts/winograd-convolution|Winograd F(2,3)]] cuts MACs 13% but saves 30% of runtime because it also avoids im2col traffic and a layout change.
 
+14. **[[concepts/lisennet-npu|LiSenNet-NPU (Laroche & Olsson 2026)]]**: Opens the **tenth axis — MCU-NPU operator compatibility as a first-class design constraint** — the first corpus entry to deploy SE on a microcontroller *NPU* (STM32N6 Neural-ART) rather than a CPU/DSP. The measurement that motivates it: LiSenNet's 37k params are nominally MCU-suitable, yet its frequency Bi-GRU needs ~850 tensor-slice ops when unrolled (compiler stalls), LayerNorm/PReLU/Mish and reshape-based sub-pixel upsampling are simply not in the operator set — unsupported ops fall back to the Cortex-M55 host, whose scheduling and data-transfer overheads dominate the supported arithmetic. The redesigned model (DSConv frequency mixer k=11 + causal dilated TCN, foldable BN, ReLU6, transposed-conv upsampling) *exceeds the recurrent baseline after static int8 quantization* (PESQ 3.01 vs. 2.93) while running **4.83 ms per 16 ms frame (RTF 0.30)** — beating Conv-FSENet (1.45M params, 2.91, 4.40 ms) and dense NSNet2 (2.78M, 2.83, 22.94 ms — not real-time) with 31–60× fewer parameters. Two quantification contributions sharpen the axis: (i) bounded activations ([[concepts/relu6-quantization-robustness|ReLU6]]) cut static-PTQ loss from 0.08 to 0.01 PESQ — answering TinyML's small-model quantization sensitivity by architecture, not calibration; (ii) [[concepts/stateful-streaming-inference|stateful vs. stateless streaming]] — FIFO state costs 1.69 M MACs/frame vs. 336 M for receptive-field recomputation (200×; 4.88 vs. 127.16 ms — no stateless variant meets the 16 ms deadline), but the 154 KiB FIFO state exceeds the 45 KiB weights 3×, and a GRU hybrid variant carries 17 KiB state at 2.18 ms/frame — the state-computation-memory triangle that μNet saw on DSPs, measured on an NPU. Together with axes 7 (μNet/DSP), 8 (FastEnhancer/CPU), and 9 (faster-enhancer.c/runtime), the hardware-tier ladder is complete: **each tier redefines which "lightweight" means** — static memory on DSPs, memory operations on CPUs, operator set + state budget on NPUs.
+
 ### 5.3 The Open Question
 
 **Can neural/learned ANC controllers match traditional algorithms at lower computational cost?**
@@ -295,6 +298,9 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 - [[concepts/per-frame-activation-quantization|Per-Frame Activation Quantization]] — calibration-free dynamic activation ranges for streaming int8
 - [[concepts/racing-vs-pacing-benchmark|Racing vs. Pacing Benchmark]] — the protocol finding that racing misstates per-frame cost 4.2× and hides deadline-miss rates
 - [[concepts/winograd-convolution|Winograd Convolution]] — F(2,3) in faster-enhancer.c; multiplies-are-not-the-currency evidence
+- [[concepts/lisennet-npu|LiSenNet-NPU]] — MCU-NPU operator-compatibility axis: static int8 graph, RTF 0.30 on STM32N6 Neural-ART (tenth Pareto axis)
+- [[concepts/mcu-npu-deployment|MCU NPU Deployment]] — the operator-set constraint of MCU NPUs (Ethos-U, Neural-ART)
+- [[concepts/stateful-streaming-inference|Stateful Streaming Inference]] — FIFO state vs. RF recomputation: 200× MACs, state-exceeds-weights trade-off
 
 ## Related Sources
 
@@ -312,6 +318,7 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 - [[sources/shetu-2026-munet|Shetu, Martinez Aponte, Rao, Vittappan, Thiergart & Habets 2026: μNet]] — introduces the seventh Pareto axis (deployment-hardware co-design): 46K params / 28 MMACs / 90 KB static / int8 / 4–16 ms on Cadence Tensilica HiFi 4; standard convolutions chosen over depthwise separable for DSP memory-access efficiency
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — introduces the eighth Pareto axis (RTF-first design): memory operations, not MACs, dominate single-CPU-thread latency; GTCRN (40M MACs, RTF 0.060) vs FastEnhancer-B (262M MACs, RTF 0.022)
 - [[sources/kim-2026-faster-enhancer|Kim 2026: faster-enhancer.c]] — introduces the ninth Pareto axis (runtime specialization + energy/duty-cycle): training-free int8 port at −0.006 PESQ, 3.3× over fp32 ONNX Runtime, racing-vs-pacing protocol (4.2× cost, −49% energy), tier inversion across devices
+- [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — introduces the tenth Pareto axis (MCU-NPU operator compatibility): redesigns LiSenNet for the STM32N6 Neural-ART; int8 PESQ 3.01 at 4.83 ms/frame; ReLU6-bounded static PTQ (0.01 vs. 0.08 loss); stateful vs. stateless streaming quantified (200× MACs)
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane, Chouteau, Poreba, Auzanneau, Szczepanski, Chersi & Serizel 2026: RT-Tango]]
 - [[sources/liu-2024-lightweight-dl-survey|Liu, Galindo, Xie, Wong, Shuai, Li & Cheng 2024: Lightweight Deep Learning for Resource-Constrained Environments]]
 

@@ -7,6 +7,7 @@ sources:
   - raw/papers/yan-2025-lisennet/full-text.md
   - raw/papers/ahn-2026-fastenhancer/full-text.md
   - raw/papers/kim-2026-faster-enhancer/full-text.md
+  - raw/papers/laroche-2026-lisenet-embedded/full-text.md
 tags:
   - dataset
   - speech-enhancement
@@ -60,3 +61,4 @@ A 48 kHz variant of the benchmark appears in [[sources/kim-2026-faster-enhancer|
 - [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025: LiSenNet]] — PESQ 3.07 / STOI 0.939 at 37k params and 56M MACs/s: the lightweight-SE operating point on this benchmark; also introduces the WSJ0+ESC50 instantaneous-noise dataset
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — new performance-vs-speed Pareto frontier: FastEnhancer-B at PESQ 3.13 / STOI 0.945 / RTF 0.022, FastEnhancer-T at RTF 0.012; shows MACs are a poor proxy for real speed on this benchmark
 - [[sources/kim-2026-faster-enhancer|Kim 2026: faster-enhancer.c]] — 48 kHz evaluation of FastEnhancer-Medium on the 824-utterance test set (fp32 PESQ 3.060); quantization-delta reference point (−0.006 PESQ) and metric-band caveats for fullband scoring
+- [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — retrained LiSenNet baseline + 11 NPU variants evaluated on the full 824-utterance test set (16 kHz, CMGAN recipe), with PESQ reported both FP32 and int8

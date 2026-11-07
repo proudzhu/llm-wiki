@@ -13,6 +13,7 @@ sources:
   - raw/papers/yan-2025-lisennet/full-text.md
   - raw/papers/ahn-2026-fastenhancer/full-text.md
   - raw/papers/kim-2026-faster-enhancer/full-text.md
+  - raw/papers/laroche-2026-lisenet-embedded/full-text.md
 tags:
   - deep-learning
   - recurrent-neural-network
@@ -100,3 +101,4 @@ Within the llm-wiki, GRU is the recurrent backbone in:
 - [[sources/perez-2018-film-visual-reasoning\|Perez, Strub, de Vries, Dumoulin & Courville 2018: FiLM: Visual Reasoning with a General Conditioning Layer]] — GRU question encoder (4096 units) as the FiLM generator: final hidden state projected to per-layer (γ, β) feature-modulation parameters
 - [[sources/ahn-2026-fastenhancer\|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — GRU as the time axis of the RNNFormer dual-path block; beats time-axis MHSA on streaming RTF in ablation
 - [[sources/kim-2026-faster-enhancer\|Kim 2026: faster-enhancer.c]] — fused single-kernel int8 GRU with fp16 state; top compute bucket in the runtime's profile
+- [[sources/laroche-2026-lisenet-embedded\|Laroche & Olsson 2026: Beyond Model Size]] — the temporal GRU *can* run on an MCU NPU (hidden state as graph I/O, affine transforms as dense ops) but is replaced by a dilated TCN in the primary model: FIFO state flushes quantization errors out of the receptive field, whereas quantized recurrent state can accumulate them (and drift over long streams); the GRU variant is still the faster/lighter-state option (2.18 ms/frame, 17 KiB vs. 4.83 ms, 154 KiB)

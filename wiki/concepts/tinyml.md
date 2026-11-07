@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-08-09
-updated: 2026-09-15
+updated: 2026-11-07
 sources:
   - raw/papers/lin-2020-mcunet/full-text.md
   - raw/papers/li-2026-realtime-music-separation-dsp/full-text.md
@@ -9,6 +9,7 @@ sources:
   - raw/papers/lin-2023-tinyml-progress-futures/full-text.md
   - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
   - raw/papers/le-2026-efficient-nn-tinyml-review/full-text.md
+  - raw/papers/laroche-2026-lisenet-embedded/full-text.md
 tags:
   - tinyml
   - deep-learning
@@ -59,6 +60,10 @@ MCUNetV3 (NeurIPS 2022, surveyed in [[sources/lin-2023-tinyml-progress-futures\|
 
 The survey also identifies three structural impediments to TinyML's rapid development: (1) **extreme resource constraints** (< 1 MB Flash, small SRAM); (2) **hardware/software heterogeneity** (solutions must be tweaked per device, unlike cross-platform PyTorch/TensorFlow on GPUs); (3) **lack of standard datasets** matching the data characteristics produced by edge-device external sensors.
 
+### PTQ on MCU NPUs: static int8 with bounded activations
+
+[[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026]] deploy fully static int8 PTQ (ONNX Runtime; signed int8 activations, per-channel int8 weights, percentile calibration — no FP fallback to host) for speech enhancement on the STM32N6 Neural-ART. The TinyML-sensitivity warning above ("very small models should be more sensitive to quantization") is answered architecturally: bounding activations with ReLU6 ([[concepts/relu6-quantization-robustness|ReLU6 quantization robustness]]) cuts the quantization loss of a 36k-param model from 0.08 to 0.01 PESQ — and the bounded, fully-convolutional graph runs real-time on the NPU at 4.83 ms per 16 ms frame. This complements the MCU-deployment literature's focus on memory budgets: on NPUs the binding constraint is the **operator set**, not memory.
+
 ## Beyond MCUs: DSP-Class Audio Deployment
 
 [[sources/li-2026-realtime-music-separation-dsp|Li et al. 2026]] demonstrate a music source separator on a commercial audio DSP (Analog Devices SHARC-FX: 2 MB on-chip L2, 2.07 GMAC/s measured sustained) rather than an MCU, and their measurements qualify two TinyML tenets for this hardware class:
@@ -77,6 +82,7 @@ The survey also identifies three structural impediments to TinyML's rapid develo
 - [[concepts/quantization-aware-scaling\|Quantization-Aware Scaling (QAS)]] — MCUNetV3's hyperparameter-free gradient rescaling for int8 training
 - [[concepts/sparse-update\|Sparse Update]] — MCUNetV3's selective layer/tensor backpropagation
 - [[concepts/tiny-training-engine\|Tiny Training Engine (TTE)]] — MCUNetV3's compile-time training system (training-side sibling of TinyEngine)
+- [[concepts/mcu-npu-deployment\|MCU NPU Deployment]] — the operator-set (not memory) constraint of MCU NPUs, instantiated by the STM32N6 Neural-ART speech-enhancement port
 - [[concepts/neural-architecture-search\|Neural Architecture Search]]
 - [[concepts/post-training-quantization\|Post-Training Quantization]]
 - [[concepts/quantization-aware-training\|Quantization-Aware Training]]
@@ -85,6 +91,10 @@ The survey also identifies three structural impediments to TinyML's rapid develo
 - [[concepts/model-pruning\|Model Pruning]] — unstructured / structured / Bayesian pruning taxonomy
 - [[concepts/bayesian-compression\|Bayesian Compression]] — unifying framework for pruning + quantization via spike-and-slab / horseshoe / log-uniform priors
 - [[concepts/keyword-spotting\|Keyword Spotting]] — primary TinyML audio application
+
+### PTQ on MCU NPUs: static int8 with bounded activations
+
+[[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026]] deploy fully static int8 PTQ (ONNX Runtime; signed int8 activations, per-channel int8 weights, percentile calibration — no FP fallback to host) for speech enhancement on the STM32N6 Neural-ART. The TinyML-sensitivity warning above ("very small models should be more sensitive to quantization") is answered architecturally: bounding activations with ReLU6 ([[concepts/relu6-quantization-robustness|ReLU6 quantization robustness]]) cuts the quantization loss of a 36k-param model from 0.08 to 0.01 PESQ — and the bounded, fully-convolutional graph runs real-time on the NPU at 4.83 ms per 16 ms frame. This complements the MCU-deployment literature's focus on memory budgets: on NPUs the binding constraint is the **operator set**, not memory.
 
 ## Related Sources
 

@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-20
-updated: 2026-08-09
+updated: 2026-11-07
 sources:
   - raw/papers/kim-2021-broadcasted-residual-learning/full-text.md
   - raw/papers/li-2025-echofree-neural-aec/full-text.md
   - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
+  - raw/papers/laroche-2026-lisenet-embedded/full-text.md
 tags:
   - deep-learning
   - neural-networks
@@ -80,6 +81,10 @@ For a standard $3 \times 3$ kernel ($D_k = 3$) and large $C_{out}$, this yields 
 
 [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang et al. 2026]] uses DSConv2D as the core building block for both encoder (six cascaded blocks with progressive channel expansion) and decoder (alternating DSConv2D with transposed convolutions), alongside an **Atrous Spatial Pyramid Pooling (ASPP)** module of atrous DSConv2D (ADSConv2D) with dilation rates $\{2, 4, 8\}$ matched to speech spectro-temporal structure (harmonics, formants, syllabic context). The metric discriminator also uses spectrally-normalized DSConv2D for stability. Ablation shows DSConv2D slashes parameters ~5.8× (9.63 M → 1.65 M) and MACs ~9× (4.53 G → 0.50 G) vs. standard convolutions with negligible PESQ change (3.26 → 3.32), confirming the efficiency advantage of the factorization at this scale.
 
+## Usage as an NPU-Supported GRU Replacement
+
+[[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026]] replace [[concepts/lisennet|LiSenNet]]'s frequency-axis Bi-GRU with a depthwise-separable frequency mixer (symmetric depthwise conv, kernel 11, + pointwise conv) — the canonical example of DSConv as a **hardware-compatibility** substitute, not just an efficiency one: the GRU unroll requires ~850 tensor-slice ops that stall the NPU compiler, while the DSConv maps directly to the static int8 convolutional operators of the STM32N6 Neural-ART. Quality is preserved (int8 PESQ 2.93 → 3.01 after the full redesign). Symmetric frequency context adds no temporal look-ahead since the current frame's full spectrum is available at once.
+
 ## Related Concepts
 
 - [[concepts/neural-networks|Neural Networks]]
@@ -95,4 +100,5 @@ For a standard $3 \times 3$ kernel ($D_k = 3$) and large $C_{out}$, this yields 
 - [[sources/cai-2024-tf-sepnet|Cai, Zhang & Li 2024: TF-SepNet]]
 - [[sources/li-2025-echofree-neural-aec|Li et al. 2025: EchoFree]] — uses depthwise separable convolutions throughout the U-Net post filter encoder/decoder, contributing to the 278K / 30 MMACs/s budget
 - [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight SE with SSM and DSConv]] — DSConv2D encoder/decoder + ADSConv2D ASPP; 1.65 M params / 0.50 G MACs
+- [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — depthwise-separable frequency mixer (k=11) replaces a frequency Bi-GRU for NPU operator compatibility
 - [[sources/liu-2024-lightweight-dl-survey|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] — surveys DSConv as the foundational operation of the [[concepts/lightweight-cnn-families|MobileNet series]] and Xception; notes that DSConv is computation-saving but time-consuming due to high Memory Access Cost (MAC), motivating ShuffleNetV2's four design guidelines

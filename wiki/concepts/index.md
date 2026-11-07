@@ -641,4 +641,8 @@
 | [[concepts/per-frame-activation-quantization\|Per-Frame Activation Quantization]] | Calibration-free int8 scheme: activation ranges recomputed each frame — no calibration set, no outlier sensitivity; −0.006 PESQ on FastEnhancer-Medium | 2026-11-07 |
 | [[concepts/racing-vs-pacing-benchmark\|Racing vs. Pacing Benchmark]] | RTF as duty cycle, not latency: deadline pacing costs 4.2× per frame, saves 49% energy, and exposes deadline-miss rates that racing benchmarks hide | 2026-11-07 |
 | [[concepts/winograd-convolution\|Winograd Convolution]] | Minimal-filtering convolution algorithms (F(2,3)) cutting multiplies; faster-enhancer.c shows memory-layout savings dominate the arithmetic ones | 2026-11-07 |
+| [[concepts/lisennet-npu\|LiSenNet-NPU]] | NPU-compatible LiSenNet redesign: conv mixers replace the dual-path GRU; int8 PESQ 3.01 at 4.83 ms/frame on the STM32N6 | 2026-11-07 |
+| [[concepts/mcu-npu-deployment\|MCU NPU Deployment]] | Running NN inference on MCU neural accelerators (Ethos-U, Neural-ART): the static int8 operator set as the binding constraint | 2026-11-07 |
+| [[concepts/stateful-streaming-inference\|Stateful Streaming Inference]] | FIFO state buffers between frames vs. receptive-field recomputation — 200× MACs apart; state can exceed the weights | 2026-11-07 |
+| [[concepts/relu6-quantization-robustness\|ReLU6 Quantization Robustness]] | Bounding activations to [0, 6] makes static int8 PTQ robust: 0.08 → 0.01 PESQ quantization loss | 2026-11-07 |
 

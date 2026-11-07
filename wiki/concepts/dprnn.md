@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-16
-updated: 2026-11-01
+updated: 2026-11-07
 sources:
   - raw/papers/luo-2022-band-split-rnn/full-text.md
   - raw/papers/nguyen-2023-predictive-plc/full-text.md
   - raw/papers/yan-2025-lisennet/full-text.md
   - raw/papers/ahn-2026-fastenhancer/full-text.md
+  - raw/papers/laroche-2026-lisenet-embedded/full-text.md
 tags:
   - neural-network
   - speech-separation
@@ -94,3 +95,4 @@ Used in [[concepts/gtcrn|GTCRN (Rong et al. 2024)]], G-DPRNN combines grouped RN
 - [[sources/luo-2022-band-split-rnn|Luo & Yu 2022: Music Source Separation with Band-Split RNN]] — frequency-axis instantiation of interleaved two-dimension RNN modeling
 - [[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023: Full-Band Blind Packet-Loss Concealment With Predictive Network]] — FRN encoder as a ResMLP/dual-path-RNN hybrid for real-time 48 kHz PLC
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — RNNFormer block as the dual-path bottleneck; frequency-attention/time-recurrence assignment ablated against both DPRNN and DPT alternatives
+- [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — replaces the DPR bottleneck entirely with convolutional dual-path mixers (depthwise-sep frequency conv + dilated TCN) for MCU-NPU deployment; the dual-path *paradigm* survives, the RNN operators do not

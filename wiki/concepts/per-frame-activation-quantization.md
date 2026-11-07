@@ -38,3 +38,4 @@ Related: [[concepts/post-training-quantization|Post-Training Quantization]] — 
 ## Related Sources
 
 - [[sources/kim-2026-faster-enhancer|Kim 2026: faster-enhancer.c]]
+- [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — the architectural alternative: instead of recomputing activation ranges per frame, bound the activations (ReLU6) so a *static* scale is near-optimal — necessary on MCU NPUs where the operator set expects static quantization

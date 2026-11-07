@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-11-01
-updated: 2026-11-01
+updated: 2026-11-07
 sources:
   - raw/papers/yan-2025-lisennet/full-text.md
+  - raw/papers/laroche-2026-lisenet-embedded/full-text.md
   - raw/papers/ahn-2026-fastenhancer/full-text.md
 tags:
   - speech-enhancement
@@ -57,11 +58,12 @@ LiSenNet (2025) sits between GTCRN (2024, 23.7k params, 31.97M MACs/s, DNS3 PESQ
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025]] use it as a backbone for [[concepts/adaptive-convolution|adaptive convolution]] (+0.12 PESQ, largest on lightweight models) and as an AdaptCRN comparison point.
 - [[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement|Yang et al. 2026]] scale it down ("LiSenNet Small") and compare against CoFi-Lite on DNS3 (LiSenNet: 36.78k/55.77M, PESQ 2.17).
 - [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator|Zhao et al. 2026]] use it as a HALO backbone (55.77M MACs/s baseline, improving metrics at matched complexity via half-frame-rate processing).
-- Laroche & Olsson (2026, "Beyond model size: redesigning LiSenNet for embedded speech enhancement", arXiv:2609.29866 — not yet ingested) redesign LiSenNet for embedded deployment (Arduino Nicla Voice etc.), studying what model-size reduction does and does not cost.
+- [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026]] redesign it for MCU-NPU deployment: replacing the dual-path GRU bottleneck with conv mixers and unsupported operators with NPU-compatible ones ([[concepts/lisennet-npu|LiSenNet-NPU]], 46.2k params) *raises* int8 PESQ 2.93 → 3.01 while running real-time (4.83 ms/frame) on an STM32N6 Neural-ART NPU.
 
 ## Related Concepts
 
 - [[concepts/dprnn|Dual-Path RNN (DPRNN)]]
+- [[concepts/lisennet-npu|LiSenNet-NPU]] — the NPU-redesigned variant
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network (CRN)]]
 - [[concepts/sub-band-convolution|Sub-band Convolution]]
 - [[concepts/convglu|ConvGLU]]
@@ -80,4 +82,4 @@ LiSenNet (2025) sits between GTCRN (2024, 23.7k params, 31.97M MACs/s, DNS3 PESQ
 - [[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement|Yang et al. 2026: CoFi-Lite]]
 - [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator|Zhao et al. 2026: HALO]]
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — re-evaluates LiSenNet on the RTF axis; streamable variant costs PESQ 3.08 → 2.98
-- Laroche & Olsson 2026 ("Beyond model size", arXiv:2609.29866 — not yet ingested)
+- [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — NPU-compatible redesign ([[concepts/lisennet-npu|LiSenNet-NPU]]): int8 PESQ 2.93 → 3.01 at 4.83 ms/frame on the STM32N6
