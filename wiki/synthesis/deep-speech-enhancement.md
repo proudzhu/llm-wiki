@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-04
-updated: 2026-11-07
+updated: 2026-11-08
 sources:
   - raw/papers/boeddeker-2018-neural-mask-beamforming/full-text.md
   - raw/papers/erdogan-2016-improved-mvdr-mask-prediction/full-text.md
@@ -35,10 +35,16 @@ sources:
   - raw/papers/veluri-2023-semantic-hearing/full-text.md
   - raw/papers/ahn-2026-fastenhancer/full-text.md
   - raw/papers/laroche-2026-lisenet-embedded/full-text.md
+  - raw/papers/luo-2022-band-split-rnn/full-text.md
+  - raw/papers/liu-2023-iccrn/full-text.md
+  - raw/papers/zhao-2024-sicrn/full-text.md
+  - raw/papers/wang-2025-adaptive-convolution-cnn-speech-enhancement/full-text.md
 tags:
   - speech-enhancement
+  - single-channel
   - deep-learning
   - neural-network-architecture
+  - encoder-decoder
   - survey
   - evolution
 ---
@@ -55,7 +61,18 @@ tags:
 - **Joint multi-task (AEC+NS+DR+OVC+AHS) and sub-10 ms latency tiers** → [[synthesis/joint-multitask-ultra-low-latency-se|Joint Multi-Task SE & Ultra-Low-Latency Paradigm]]
 - **ANC computational efficiency / RNN memory bottlenecks** → [[synthesis/computational-efficiency-evolution|Computational Efficiency Evolution]]
 
-The thesis here is that the field's progress is **not a single replacement story** (e.g. "LSTM → Transformer") but the Cartesian product of six near-orthogonal axes, each of which has its own frontier. A 2026 state-of-the-art system is built by picking one point on each axis.
+The thesis here is that the field's progress is **not a single replacement story** (e.g. "LSTM → Transformer") but the Cartesian product of seven near-orthogonal axes, each of which has its own frontier. A 2026 state-of-the-art system is built by picking one point on each axis.
+
+A complementary way to read this page is as a **single-channel (single-microphone) dataflow walkthrough**: given one noisy signal, how do the insights compose into a concrete denoiser? The mapping:
+
+| Dataflow layer | Decision | Treated in |
+|----------------|----------|------------|
+| ① Input representation | Time-domain waveform / STFT complex spectrum / perceptual-band (Bark/ERB) features | Insight 2 (domain), Insight 5 (band compression) |
+| ② Output target & reconstruction | IBM→IRM→cIRM→complex mapping→CCM/DF; mask- vs mapping-style reconstruction | Insight 1, Insight 3 (decoupled output heads) |
+| ③ Encoder / decoder | How frequency resolution is compressed and restored: symmetric U-Net / band merge-split / inplace no-downsampling / coarse-fine dual path / dual decoders | **Insight 4a** |
+| ④ Backbone | LSTM/GRU → dual-path → Conformer → Mamba/SSM / linear RNN / SNN | Insight 4 |
+
+The single-channel representative-model matrix consolidating all four layers appears after Insight 8.
 
 ## Sources Synthesized
 
@@ -159,6 +176,41 @@ DNN (2014) → LSTM (2017) → CRN/CED+LSTM (2018) → complex CRN/DCCRN (2020)
 
 **Why Mamba/SSM wins in streaming**: parallel training via associative scan, long context that LSTMs handle poorly beyond ~100 steps, naturally causal, and small-state compute. This mirrors the linear-RNN replacement documented for joint multi-task SE in [[synthesis/joint-multitask-ultra-low-latency-se|Joint Multi-Task SE & Ultra-Low-Latency Paradigm]] (Insight 3).
 
+## Insight 4a: Encoder/Decoder Designs — Four Philosophies of Frequency-Resolution Handling
+
+The backbone succession above says nothing about *what* the sequence model reads and writes — the encoder/decoder that maps the T-F domain into the feature space and back. Single-channel designs cluster into four philosophies:
+
+### Template: the CRN symmetric encoder–decoder (Tan & Wang 2018)
+
+Convolutional encoder (frequency halved per layer, channels doubled) → recurrent bottleneck → transposed-convolution decoder whose final layer is **linear** (no activation) → U-Net skip connections preserving fine spectral detail (especially phase). Causality via past-only asymmetric padding; ELU preferred over ReLU because spectra contain negative values. See [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]].
+
+### Lineage A — Band-compressed encode, band-split decode ("compress then restore")
+
+- **GTCRN** ([[concepts/gtcrn|GTCRN]]): Band Merging before the encoder (192 high-frequency bins → 64 ERB bands; 65 low-frequency bins kept uncompressed = 129-dim), Band Splitting after the decoder; SFE modules on the skip connections enhance frequency information.
+- **CoFi-Lite** ([[concepts/cofi-lite|CoFi-Lite]]): decouples spectral modeling into parallel **coarse** (full-band envelope, ×16 compression) and **fine** (below-2 kHz detail, ×2 compression) paths bridged by Cross-Path Fusion — *more* parameters (83K vs 24K) but 40% of the MACs, and better quality.
+- **DeepFilterNet**: two stages inside one network — an ERB encoder/decoder (32 bands) predicts real-valued envelope gains, while a deep-filter head estimates per-bin complex FIR coefficients only up to $f_{DF}$ (periodic components concentrate at low frequencies); grouped linear/GRU layers enforce sparsity.
+
+### Lineage B — Inplace, no downsampling ("preserve per-bin resolution")
+
+The [[concepts/igcrn|IGCRN]] → [[concepts/iccrn|ICCRN]] → [[concepts/sicrn|SICRN]] family: stride-1 frequency-axis convolutions plus a channel-wise LSTM (hidden 64, not 1024) reused across all frequency bins. The frequency axis is never downsampled; IGCRN's downsampling ablation shows the *inplace characteristic*, not capacity, drives performance.
+
+### Lineage C — Non-uniform band allocation ("spend resolution where the signal is")
+
+- **BSRNN** ([[concepts/band-split-rnn|Band-Split RNN]]): signal-specific non-uniform bandwidths; for vocals, splitting only below 1 kHz into 100 Hz bands lifts uSDR from ~8.2 to 9.51 dB. Per-band norm + FC; dual-path modeling unfolded over (time × band).
+- **LiSenNet** ([[concepts/lisennet|LiSenNet]]): no merging module at all — [[concepts/sub-band-convolution|sub-band striding]] (stride 1 low, stride 3 high) preserves low-frequency resolution *by construction*.
+- **Sub-band + full-band division of labor** ([[concepts/sub-band-full-band-architecture|Kuang 2025]]): 32 ERB sub-band gains (coarse envelope) + full-band N=3 deep filtering (fine suppression) in separate encoder-decoder sets.
+
+### Lineage D — Decoupled output heads (decoder-level compensation-effect fix)
+
+- **MP-SENet / SEMamba**: after the TF blocks, *two separate decoders* — magnitude and phase — each a dilated DenseNet + deconvolution + 2D-conv head. The dual-decoder template carries the architectural decoupling of Insight 3 down to the decoder level.
+- **CTSNet / G2Net / TaylorSENet**: magnitude path + residual-complex path as two output heads.
+
+### Counterexample: discard the frequency-domain codec entirely
+
+Time-domain systems (Conv-TasNet lineage, OVC) use a **learned 1-D convolutional encoder** + masking network + convolutional decoder, bypassing the STFT and its window-length latency; OVC reaches 2 ms with kernel L=32 at 16 kHz. The [[concepts/asymmetric-stft|asymmetric STFT]] (RT-Tango) keeps the STFT but shortens analysis-vs-synthesis windows to reach 8 ms.
+
+**Cross-lineage principle**: low-frequency resolution deserves explicit design — BSRNN's 100 Hz low bands, LiSenNet's stride-1 low bands, GTCRN's 65 uncompressed low bins, and DeepFilterNet's low-frequency-only deep filtering are four engineering expressions of the same prior (F0 and the first harmonics live at low frequencies).
+
 ## Insight 5: The Efficiency Frontier Moved ~1000× via Four Orthogonal Techniques
 
 Parameter counts for competitive monaural SE collapsed from ~18M (CRN, 2018) to 23.7K (GTCRN, 2024) — roughly 750× — and compute kept falling through 2026. The collapse is the product of four largely independent techniques:
@@ -228,12 +280,31 @@ The canonical survey for the TSE half of this complementarity is [[sources/zmoli
 
 The clue axis also extends beyond speakers: [[sources/veluri-2023-semantic-hearing|Veluri et al. 2023]] condition extraction on a **sound-class query** (one-hot over 20 classes) rather than an enrollment embedding, and demonstrate the same preserve/suppress asymmetry operationally — for a speech target mixed with impulsive interference, *extracting the interference and subtracting it* beat extracting the speech directly by 0.91 MOS (avoiding over-attenuation dips), the class-query analog of OVC's inversion.
 
+## The Single-Channel Representative-Model Matrix
+
+Consolidating the four dataflow layers (input / output target / encoder-decoder / backbone) for the corpus's representative monaural denoisers:
+
+| Model (year) | Input | Output target | Encoder/decoder | Backbone | Scale / latency |
+|---|---|---|---|---|---|
+| CRN (2018) | Complex STFT (RI) | cRM | CED + transposed conv + skips | LSTM bottleneck | 17.58M |
+| DPCRN (2021) | Complex spectrum | Mask | Symmetric conv codec | Dual-path RNN | **0.72M / 0.77 GMAC/s** |
+| DeepFilterNet (2022) | ERB bands + complex (≤ f_DF) | ERB gains + Deep Filtering (N-th-order complex FIR) | ERB codec + DF head | Grouped conv/GRU | Ultralight; multi-latency |
+| MP-SENet (2023) | log1p magnitude + phase | Magnitude + phase (**dual decoders**) | DenseNet encoder + dual decoders | Conformer TF blocks | ~2.6M |
+| GTCRN (2024) | ERB-compressed 64 bands | cRM | Band-Merge/GT-Conv + Band-Split | G-DPRNN (grouped dual-path GRU) | **23.7K / 39.6 MMAC/s** |
+| LiSenNet (2025) | Sub-band-strided spectrum | Mask | Sub-band conv codec | Causal dual-path GRU + noise detector | 37k / 56M; PESQ 3.07 |
+| CoFi-Lite (2026) | Coarse/fine dual-path spectrum | Mask | Coarse (×16) / fine (×2) + CPF | GTCRN-style | 83K / **12.87M MACs/s** |
+| AdaptCRN (2025) | ERB-compressed spectrum | Mask | ConvNeXt/StarNet-style codec | Grouped DPRNN + dynamic conv | 135K / 41 MMAC/s |
+| SEMamba (2024) | log1p magnitude + phase | Magnitude + phase (dual decoders) | DenseNet + dual decoders | **TF-Mamba** | SOTA PESQ **3.69** (+PCS) |
+| FastEnhancer-B (2026) | ERB spectrum | Mask | Time-kernel-1 conv + BN fusion | RNNFormer | 92k / 262M / **RTF 0.022** |
+| OVC (2026) | Time-domain waveform (L=32) | Time-domain mask | Learned 1-D conv codec | Mamba-MinGRU | **2 ms** / 0.33 GMAC/s |
+
 ## Cross-Cutting Takeaways
 
 1. **Progress is a Cartesian product, not a ladder.** A 2026 system picks one option per axis: target (DF/CCM), domain (hybrid loss), backbone (Mamba/linear RNN), efficiency technique (grouped + adaptive conv), multi-channel strategy (array-invariant), conditioning (PSE/OVC), training paradigm (discriminative / GAN / diffusion). The seven axes are near-orthogonal, so most combinations are unexplored.
 2. **Loss choice often dominates architecture choice.** Pandey & Wang 2019 (frequency loss for time-domain nets) and the DCCRN(SNR) variant both show that the training signal can outweigh backbone tweaks. [[sources/li-2020-residual-noise-control\|Li et al. 2020]] is the corpus's earliest same-architecture loss comparison (2020, one U-Net × four losses), adding the caveat that objective metrics can miss the differences listeners hear — the residual-noise-control advantage appeared in listening tests, not in PESQ/SDR. [[sources/shetu-2026-generative-discriminative-comparison\|Shetu 2026]] makes this controlled: the *same* NCSN++ backbone ranks differently under discriminative, GAN, and diffusion objectives — the objective, not the architecture, decides robustness, convergence speed, and cost. PCEN-based mask thresholding ([[sources/liu-2025-pcen-mask-vad-speech-enhancement\|Liu 2025]]) and [[concepts/perceptual-contrast-stretching\|PCS]] post-processing extend this into the training-data / post-processing regime. [[sources/zhao-2026-spectrally-adaptive-loss\|Zhao & Madhu 2026]] add the spectral-weighting dimension: three losses on the *same* [[concepts/hyst-net\|HyST-Net]] backbone differ only in how the phase-aware term is weighted (scalar vs. frequency-sigmoid vs. signal-dependent), and the differences appear exclusively in band-conditional metrics. [[sources/pan-2025-data-driven-acoustics\|Pan 2025]] supplies the unifying tutorial frame: noise reduction is an *estimation/filtering* task whose loss can be constructed at three levels — the filter gain itself, the spectrum, or the waveform — and the SI-SDR loss is mathematically equivalent to maximizing the squared correlation coefficient between target and estimate, explaining *why* each loss level shapes a different aspect of the output (see [[concepts/si-sdr\|SI-SDR]]).
 3. **The efficiency frontier is technique-composition, not model-shrinking.** GTCRN's 750× reduction is the product of four orthogonal techniques; CoFi-Lite and AdaptCRN extend it by adding path-decoupling and dynamic convolution rather than shrinking the backbone further.
 4. **2026 inverts input-centric assumptions.** Output-based SE (evaluate outputs, not inputs) and array-invariant SE (condition on geometry, not array-specific SCM) both move the decision from the input side to the output / context side.
+5. **Low-frequency resolution deserves explicit design.** BSRNN's 100 Hz low bands (+1.3 dB uSDR from low-band splitting alone), LiSenNet's stride-1 low bands, GTCRN's 65 uncompressed low bins, and DeepFilterNet's low-frequency-only deep filtering are four engineering expressions of the same prior: F0 and the first harmonics live at low frequencies.
 
 ## Open Questions and Gaps
 
@@ -249,6 +320,7 @@ The clue axis also extends beyond speakers: [[sources/veluri-2023-semantic-heari
 - [[synthesis/multimodal-bc-speech-enhancement|Multimodal BC Speech Enhancement]] — BC integration evolution
 - [[synthesis/joint-multitask-ultra-low-latency-se|Joint Multi-Task SE & Ultra-Low-Latency Paradigm]] — task dissolution + latency tiers + linear-RNN replacement (the task/latency axis)
 - [[synthesis/computational-efficiency-evolution|Computational Efficiency Evolution]] — ANC efficiency + RNN BPTT vs FEP memory bottlenecks
+- [[synthesis/low-complexity-neural-vocoders|Low-Complexity Neural Vocoders]] — the shared "move structure out of the network" principle behind lightweight SE and vocoder design alike
 
 ## Related Concepts
 
@@ -258,6 +330,8 @@ The clue axis also extends beyond speakers: [[sources/veluri-2023-semantic-heari
 - [[concepts/time-domain-speech-enhancement|Time-Domain Speech Enhancement]] · [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]] — domain choice
 - [[concepts/dprnn|Dual-Path RNN]] · [[concepts/mp-senet|MP-SENet]] · [[concepts/semamba|SEMamba]] · [[concepts/mamba-mingru|Mamba-MinGRU]] · [[concepts/sse-net|SSE-Net]] — backbone lineage
 - [[concepts/gtcrn|GTCRN]] · [[concepts/lisennet|LiSenNet]] · [[concepts/cofi-lite|CoFi-Lite]] · [[concepts/adaptcrn|AdaptCRN]] · [[concepts/igcrn|IGCRN]] · [[concepts/iccrn|ICCRN]] · [[concepts/sicrn|SICRN]] — efficiency frontier
+- [[concepts/band-split-rnn|Band-Split RNN]] · [[concepts/sub-band-full-band-architecture|Sub-Band-Full-Band Architecture]] · [[concepts/erb-scale|ERB Scale]] · [[concepts/asymmetric-stft|Asymmetric STFT]] — encoder/decoder lineages (Insight 4a)
+- [[concepts/tf-mask-estimation|TF-Mask Estimation]] · [[concepts/power-law-compression|Power-Law Compression]] · [[concepts/per-channel-energy-normalization|Per-Channel Energy Normalization]] — input representation and masking
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]] · [[concepts/neural-beamforming|Neural Beamforming]] · [[concepts/array-invariant-speech-enhancement|Array-Invariant SE]] · [[concepts/geometry-aware-dynamic-convolution|Geo-DConv]] · [[concepts/output-based-speech-enhancement|Output-Based SE]] · [[concepts/hybrid-speech-enhancement|Hybrid Speech Enhancement]]
 - [[concepts/personalized-speech-enhancement|Personalized SE]] · [[concepts/target-speaker-extraction|Target Speaker Extraction]] · [[concepts/own-voice-cancellation|Own-Voice Cancellation]] · [[concepts/prior-matching|Prior Matching]]
 - [[concepts/diffusion-models-for-speech|Diffusion Models for Speech]] · [[concepts/drifting-models|Drifting Models]] · [[concepts/generative-vs-discriminative-speech-enhancement|Generative vs. Discriminative Speech Enhancement]] · [[concepts/speech-enhancement-hallucination|Speech Enhancement Hallucination]] · [[concepts/one-step-generative-models|One-Step Generative Models]]
