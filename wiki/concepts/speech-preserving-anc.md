@@ -6,6 +6,7 @@ sources:
   - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
   - raw/papers/hu-2026-abse-net/full-text.md
   - raw/papers/rao-2026-keep-speech-anc/full-text.txt
+  - raw/papers/huang-2026-integrated-anc-hear-through/full-text.md
 aliases:
   - Keep-Speech ANC
   - KSANC
@@ -68,6 +69,10 @@ Speech-preserving ANC is fundamentally different from traditional Speech Enhance
 ### Hearing-Aid Active Binaural Speech Enhancement
 - [[concepts/abse-net|ABSE-NET]] (Hu et al. 2026) extends the speech-preserving idea to **open-fit hearing aids**: the loudspeaker plays both the enhanced signal and a learned anti-leakage component that destructively interferes with vent leakage, while an SI-SDR + STOI loss preserves the target speech. It needs no in-ear error microphone at inference (training-only), and its 0.112M-parameter network preserves binaural spatial cues (ILD/IPD) while cancelling leakage.
 
+### Frequency-Band Allocation (fixed-filter, no learning)
+- [[sources/huang-2026-integrated-anc-hear-through|Huang, Chang & Kuo 2026]] achieve speech preservation *without any speech/noise discriminator*: low-frequency noise is suppressed by a conventional feedforward ANC branch, while the speech-relevant band (up to 4 kHz) is restored by a hear-through branch — the [[concepts/hear-through-frequency-band-allocation|band allocation]] itself, anchored to measured passive isolation, provides the spectral selectivity. Subjective clarity 0.88 vs. 0.60 for HT-only under aircraft-cabin noise; SRMR_norm 0.974 (exceeding open-ear-in-noise 0.878)
+- Fully classical DSP (offline FxLMS + balanced-truncation IIR): no training data, no generalization risk — but no adaptivity to spectrally overlapping speech/noise either
+
 ## Performance Characteristics
 
 From Dai 2026 (SNR = 5 dB, RT60 = 0.3s):
@@ -93,6 +98,8 @@ The system conservatively reduces noise for Babble (5.30 dB) to protect speech, 
 - [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
 - [[concepts/active-binaural-speech-enhancement|Active Binaural Speech Enhancement]]
 - [[concepts/abse-net|ABSE-NET]]
+- [[concepts/hear-through-frequency-band-allocation|Hear-Through Frequency-Band Allocation]]
+- [[concepts/acoustic-equalization-system|Acoustic Equalization System (AES)]]
 
 ## Related Sources
 
@@ -101,6 +108,7 @@ The system conservatively reduces noise for Babble (5.30 dB) to protect speech, 
 - [[sources/xiao-2026-robust-spatially-selective-anc|Xiao 2026: Robust Soft-Constrained SSANC for Hearables]]
 - [[sources/hu-2026-abse-net|Hu et al. 2026: ABSE-NET — Active Binaural Speech Enhancement for Open-Fit Hearing Aids]]
 - [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — KSANC via zero-delay reference enhancement; the control filter stays conventional
+- [[sources/huang-2026-integrated-anc-hear-through|Huang, Chang & Kuo 2026: Integrated ANC and Hear-Through for Speech Clarity]] — speech preservation via frequency-band allocation in a fixed-filter integrated ANC+HT system (no neural speech/noise discrimination)
 
 ## Related Synthesis
 

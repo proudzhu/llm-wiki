@@ -20,6 +20,7 @@ sources:
   - raw/papers/kajikawa-2003-fdsp-variable-perturbation/full-text.md
   - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
   - raw/papers/kuo-2006-anc-headphones/full-text.txt
+  - raw/papers/huang-2026-integrated-anc-hear-through/full-text.md
 tags:
 - active-noise-control
 - signal-processing
@@ -53,6 +54,8 @@ Conducted before the ANC system starts operating. A training signal (typically w
 On open-ear smart glasses, [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026]] estimate the 1024-tap secondary path offline with an exponential sine sweep (20 Hz–11 kHz, robust down to −20 dB calibration SNR) and use the estimate in two places: inside the training loss (residual computed through $\hat{S}$) and as a [[concepts/film-layer|FiLM]] conditioning input to the filter-estimation network (~512 bytes of per-user affine parameters instead of retraining). Without user calibration, a population-averaged path serves as fallback.
 
 **Music as excitation (Kuo, Mitra & Gan 2006)**: the annoyance of audible white-noise training is a headphone-specific problem — [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006]] show that a music piece (spectrally dense frames of "O Fortuna", near-flat over 0–4 kHz) identifies $\hat{S}(z)$ with accuracy comparable to white noise and chirp, turning the calibration signal into something the user would willingly listen to. A 65-tap FIR model with step size 0.05 sufficed for the 8 kHz system.
+
+**Dual-use of the offline estimate in integrated ANC+HT (Huang, Chang & Kuo 2026)**: in the [[concepts/acoustic-equalization-system|AES]], a single 400-tap offline $\hat{S}(z)$ estimate drives *both* offline FxLMS trainings — the ANC filter (toward $W^\circ(z) = P(z)/S(z)$) and the HT filter (toward $H(z) = \hat{T}(z) z^{-\Delta}/\hat{S}(z)$, whose delay $\Delta$ satisfies the broadband feedforward causality constraint). Acoustic feedback is neglected thanks to the in-ear headphone's strong passive isolation.
 
 ### 2. [[online-secondary-path-modeling|Online Secondary-Path Modeling]]
 Conducted during ANC operation. This is necessary when the secondary path is time-varying (e.g., movement of the user's head in headphones).
@@ -93,6 +96,7 @@ In hearing aids the secondary path is the propagation from the device loudspeake
 - [[concepts/conditional-reinitialized-pso|Conditional Reinitialized PSO]] — trains the controller without any $S(z)$ model
 - [[concepts/simultaneous-perturbation|Simultaneous Perturbation]] — measures the error-surface gradient via random coefficient perturbations; no $S(z)$ model
 - [[concepts/virtual-in-ear-sensing|Virtual In-ear Sensing]] — open-ear wearables use the offline estimate in the loss and as FiLM conditioning
+- [[concepts/acoustic-equalization-system|Acoustic Equalization System (AES)]]
 
 ## Related Sources
 
@@ -113,4 +117,5 @@ In hearing aids the secondary path is the propagation from the device loudspeake
 - [[sources/kajikawa-2003-fdsp-variable-perturbation|Kajikawa & Nomura 2003: FDSP with Variable Perturbation]] — frequency-domain perturbation updating with error-scaled perturbation magnitude; keeps converging through secondary-path changes
 - [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — ESS-based offline estimate used in the training loss and as FiLM conditioning
 - [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006: Active Noise Control System for Headphone Applications]] — music-based offline identification of $S(z)$ for AFANC headphones; comparable accuracy to white noise/chirp without the annoyance
+- [[sources/huang-2026-integrated-anc-hear-through|Huang, Chang & Kuo 2026: Integrated ANC and Hear-Through for Speech Clarity]] — one 400-tap offline $\hat{S}(z)$ driving both the ANC and HT filter trainings
 

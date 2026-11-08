@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-10-31
+updated: 2026-11-08
 tags:
   - active-noise-control
   - bone-conduction
@@ -11,6 +11,8 @@ tags:
   - open-ear-anc
   - multi-modal-interaction
   - occlusion-effect-cancellation
+  - hear-through
+  - speech-clarity
 sources:
   - zotero://select/items/0_BPH79CM5 (DeepPEM-AFC)
   - zotero://select/items/0_AMKNDVMJ (Toyooka 2026)
@@ -22,6 +24,7 @@ sources:
   - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
   - raw/papers/forster-2022-optimal-microphone-positioning/full-text.txt
   - raw/papers/kuo-2006-anc-headphones/full-text.txt
+  - wiki/sources/huang-2026-integrated-anc-hear-through.md
 ---
 
 # Modern Headphone ANC Systems: Beyond Noise Cancellation
@@ -206,6 +209,7 @@ The rise of Open-Ear (OWS) devices creates a new ANC challenge: the primary nois
 2. **Hardware-Algorithm Co-Design**: Future ANC designs will not be algorithm-first (e.g., picking FXLMS vs. MPC), but form-factor-first (e.g., prioritizing sensor placement for VAD/Bone Conduction alongside primary error microphones).
 3. **Semantic Selectivity, Not Just Attenuation**: [[concepts/semantic-hearing|Semantic hearing]] (Veluri et al. 2023) makes the "selective attenuation" vision concrete — ANC provides the acoustic clean slate, and a real-time binaural network reintroduces only user-chosen sound *classes* (speech, sirens, birds — 20 classes selectable, LLM-mapped natural-language queries in the prototype UI) while preserving their spatial cues. This is the class-aware generalization of the awareness layer (§2): instead of a VAD deciding *whether* to be transparent, a class query decides *what* to be transparent to. Its 20–50 ms end-to-end budget and 6.56 ms smartphone inference fit the per-chunk compute regime of §6.3; wireless form factors would need the extraction moved onto the headset SoC.
 4. **Keep-Speech ANC as an Alternative to Transparency Modes**: [[sources/rao-2026-keep-speech-anc|Rao et al. 2026]] show a third route to conversation awareness that requires neither mode switching (§2's VAD-triggered transparency) nor synthetic reinsertion (§3 above): make the ANC itself speech-aware. A zero-delay causal WaveNet suppresses the speech contaminating the reference microphone, so the conventional FIR controller cancels only noise and the *physical* speech wave arrives at the eardrum naturally — no transparency reconstruction, no binaural synthesis, and no VAD gating. On measured headphone IRs this improves both STOI and DNSMOS over conventional ANC across SNRs (conventional ANC even drops *below* unprocessed at 5 dB SNR with real-world noise because it cancels speech), and it generalizes to unseen SNRs, directions, and noise types. The current cost (9.53 M params, 38.12 GMACs/s) exceeds the ~170 MIPS budget of §6.3, so deployment awaits the model-reduction work the authors identify as future work.
+5. **Integrated ANC+HT via Frequency-Band Allocation — the fully classical route**: [[sources/huang-2026-integrated-anc-hear-through|Huang, Chang & Kuo 2026]] show that the "make the controller speech-aware" idea of route 4 does not require machine learning at all: their [[concepts/acoustic-equalization-system|AES]] runs a feedforward ANC branch below an adjustable crossover (300–700 Hz) and a hear-through branch above it (to 4 kHz) *simultaneously* on one reference signal, with user gains ($g_a$, $g_h$) replacing the mode manager entirely (see [[concepts/hear-through-frequency-band-allocation|band allocation]]). Under recorded aircraft-cabin noise the integrated mode beats both conventional modes and even open-ear listening: SRMR_norm 0.974 vs. 0.878 open-ear, subjective clarity 0.88 vs. 0.60 for HT-only (25 listeners, Friedman $p<0.001$) — and beats two commercial in-ear headphones in HT mode on low-frequency noise because commercial transparency leaves low-frequency noise unattenuated. The cost is trivially inside the §6.3 budget: offline FxLMS + [[concepts/balanced-truncation-model-reduction|balanced truncation]] to a 50th-order IIR gives ~6 M multiplications/s at 48 kHz with a 37 µs hardware path. The trade-off against routes 1–4: the band split is fixed per environment (crossover tunable, but no per-event classification), and spectral overlap of speech and noise inside a band cannot be resolved — the authors themselves flag adaptive bandwidth selection and speech enhancement as future work.
 
 ---
 
@@ -262,6 +266,9 @@ This requires a dedicated DSP (e.g., Qualcomm QCC5141, ~200 MIPS capability).
 - [[concepts/coaxial-two-way-secondary-source|Coaxial Two-Way Secondary Source]] — loudspeaker-side wideband open-ear ANC
 - [[concepts/delay-oriented-driver-allocation|Delay-Oriented Driver Allocation]] — driver-band assignment by delay characteristics
 - [[concepts/reference-microphone-positioning|Reference Microphone Positioning]] — where the feedforward reference microphones belong on the shell
+- [[concepts/acoustic-equalization-system|Acoustic Equalization System (AES)]] — simultaneous ANC + hear-through via frequency-band allocation
+- [[concepts/hear-through-frequency-band-allocation|Hear-Through Frequency-Band Allocation]] — passive-isolation-anchored band design for integrated ANC+HT
+- [[concepts/balanced-truncation-model-reduction|Balanced Truncation Model Reduction]] — offline FIR → low-order IIR for the classical integrated route
 
 ## Related Sources
 
@@ -280,6 +287,7 @@ This requires a dedicated DSP (e.g., Qualcomm QCC5141, ~200 MIPS capability).
 - [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — first demonstrated open-ear ANC without an in-ear error microphone; the attenuation layer for future open-ear acoustic-computing platforms
 - [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022: Optimal Microphone Positioning for Multi-Channel Feedforward ANC Headphones]] — quantitative placement rule for the sensor stack's reference microphones: ipsilateral distribution ~9 dB, contralateral positions causality-blocked
 - [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006: Active Noise Control System for Headphone Applications]] — the error-microphone counterpart: placement by flattest secondary-path magnitude response (pinna spectral filtering), with music-based identification calibration
+- [[sources/huang-2026-integrated-anc-hear-through|Huang, Chang & Kuo 2026: Integrated ANC and Hear-Through for Speech Clarity]] — the fully classical speech-clarity route: fixed band-allocated ANC+HT filters with user-tunable gains, beating HT-mode commercial headphones under aircraft-cabin noise
 
 ## Related Synthesis
 

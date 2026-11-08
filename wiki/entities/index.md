@@ -707,4 +707,6 @@
 | [[entities/nam-soo-kim\|Nam Soo Kim]] | SNU professor; senior author of FastEnhancer (ICASSP 2026) | 2026-11-01 |
 | [[entities/gyeongmin-kim\|Gyeongmin Kim]] | Hanyang University; sole author of faster-enhancer.c — int8 runtime specialization, racing-vs-pacing energy benchmarking for streaming SE | 2026-11-07 |
 | [[entities/clement-laroche\|Clément Laroche]] | Researcher (GN Audio); first author of the NPU-compatible LiSenNet redesign for STM32N6 | 2026-11-07 |
+| [[entities/chong-rui-huang\|Chong-Rui Huang]] | Postdoctoral researcher (CYCU, Taiwan); ANC, DSP, real-time implementation; first author of the integrated ANC+hear-through AES. | 2026-11-08 |
+| [[entities/cheng-yuan-chang\|Cheng-Yuan Chang]] | Distinguished Professor (CYCU, Taiwan); signal processing applications and ANC system design. | 2026-11-08 |
 

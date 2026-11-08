@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-10-07
+updated: 2026-11-08
 sources:
   - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
+  - raw/papers/huang-2026-integrated-anc-hear-through/full-text.md
 tags:
   - active-noise-control
   - headphone
@@ -43,6 +44,9 @@ $$W(z) = \frac{P(z)S(z) - z^{-\tau}}{G(z)}$$
 
 and decouple the hear-through design from the feedback controller $K(z)$ via a correction filter $\hat{G}(z) = G(z)$ driven by the hear-through signal and added to the feedback controller input. The resulting filter qualitatively inverts the primary path, re-amplifying the high frequencies attenuated by the earpiece.
 
+### 6. Integrated ANC+HT via Frequency-Band Allocation
+Rather than switching between transparency and ANC modes, [[concepts/acoustic-equalization-system|the AES]] of [[sources/huang-2026-integrated-anc-hear-through|Huang, Chang & Kuo 2026]] runs hear-through and feedforward ANC *simultaneously* on one reference signal: an LPF-confined ANC branch below an adjustable crossover (300–700 Hz) suppresses low-frequency noise, while a bandpass-shaped HT branch (up to 4 kHz) compensates passive isolation. Two user gains blend the trade-off continuously. See [[concepts/hear-through-frequency-band-allocation|Hear-Through Frequency-Band Allocation]] for the passive-isolation-anchored band design.
+
 ## Implementation Challenges
 
 - **Latency**: The path from microphone to speaker must be extremely fast (typically < 100 $\mu$s) to avoid comb-filtering effects with sound that leaks through the headphones naturally.
@@ -56,6 +60,8 @@ and decouple the hear-through design from the feedback controller $K(z)$ via a c
 - [[beamforming|Beamforming]]
 - [[ear-canal-occlusion-effect|Ear Canal Occlusion Effect]]
 - [[concepts/occlusion-effect-cancellation|Occlusion Effect Cancellation]]
+- [[concepts/acoustic-equalization-system|Acoustic Equalization System (AES)]]
+- [[concepts/hear-through-frequency-band-allocation|Hear-Through Frequency-Band Allocation]]
 - [[sources/fukumoto-2025-whisphone-paper-reading-note|Whisphone]]
 
 ## Related Sources
@@ -65,3 +71,4 @@ and decouple the hear-through design from the feedback controller $K(z)$ via a c
 - [[sources/benois-2020-hybrid-pseudo-cascaded-anc-headphones|Benois 2020: Hybrid and Pseudo-Cascaded ANC for Headphones]]
 - [[sources/lu-2024-headphone-speech-listening-ambient-noise|Lu 2024: Headphone Speech Listening]]
 - [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]]
+- [[sources/huang-2026-integrated-anc-hear-through|Huang, Chang & Kuo 2026: Integrated ANC and Hear-Through for Speech Clarity]] — simultaneous ANC + hear-through via frequency-band allocation with user-tunable gains, validated on a real-time DSP platform

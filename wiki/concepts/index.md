@@ -645,4 +645,7 @@
 | [[concepts/mcu-npu-deployment\|MCU NPU Deployment]] | Running NN inference on MCU neural accelerators (Ethos-U, Neural-ART): the static int8 operator set as the binding constraint | 2026-11-07 |
 | [[concepts/stateful-streaming-inference\|Stateful Streaming Inference]] | FIFO state buffers between frames vs. receptive-field recomputation — 200× MACs apart; state can exceed the weights | 2026-11-07 |
 | [[concepts/relu6-quantization-robustness\|ReLU6 Quantization Robustness]] | Bounding activations to [0, 6] makes static int8 PTQ robust: 0.08 → 0.01 PESQ quantization loss | 2026-11-07 |
+| [[concepts/acoustic-equalization-system\|Acoustic Equalization System (AES)]] | Integrated feedforward-ANC + hear-through headphone controller with frequency-band allocation and user-tunable gains (Huang, Chang & Kuo 2026). | 2026-11-08 |
+| [[concepts/hear-through-frequency-band-allocation\|Hear-Through Frequency-Band Allocation]] | Dividing the spectrum between ANC and HT branches anchored to measured passive isolation: ANC below ~500 Hz, HT 500 Hz-4 kHz, no compensation above. | 2026-11-08 |
+| [[concepts/balanced-truncation-model-reduction\|Balanced Truncation Model Reduction]] | Hankel-singular-value-ranked state truncation turning offline-trained FIR controllers into low-order IIR (SOS) filters for real-time ANC DSP. | 2026-11-08 |
 

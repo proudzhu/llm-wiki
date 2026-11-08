@@ -10,6 +10,7 @@ sources:
   - raw/papers/xiao-2023-spatially-selective-anc/full-text.md
   - raw/papers/chiba-2027-wideband-anc-coaxial-loudspeaker/full-text.txt
   - raw/papers/forster-2022-optimal-microphone-positioning/full-text.txt
+  - raw/papers/huang-2026-integrated-anc-hear-through/full-text.md
 tags:
   - active-noise-control
   - control-theory
@@ -94,6 +95,7 @@ Causality does not only constrain *when* the reference arrives relative to the d
 4. **Multiple reference microphones**: Place additional reference microphones on the headset to ensure causal reference for noise from any direction (Zhang & Qiu 2014)
 5. **Zero-delay neural reference enhancement** (Rao 2026): keep the conventional FIR control filter inside the loop (its delay budget unchanged) and place a fully causal, stride-1 time-domain WaveNet on the **reference path** to enhance the signal before it reaches the filter — the network adds no algorithmic delay, so the causality margin is preserved while the DNN handles what linear filters cannot (speech/noise separation in the reference). This contrasts with DeepANC-style CRN controllers, whose frame-based analysis–synthesis latency consumes the margin; empirically, DeepANC's delay reduced it to near-unprocessed performance, whereas the RSE-based KSANC retained its gains
 6. **Delay-oriented driver allocation** (Chiba 2027): reduce the secondary path's *physical* delay terms — assign control bands to woofer/tweeter drivers according to their measured mechanical group delay and source-to-ear acoustic offset (see [[concepts/delay-oriented-driver-allocation|Delay-Oriented Driver Allocation]])
+7. **Fixed-filter architecture with fast hardware** (Huang, Chang & Kuo 2026): remove the on-line adaptation loop entirely — offline FxLMS training + [[concepts/balanced-truncation-model-reduction|balanced truncation]] to a 50th-order IIR (25 SOSs, ~125 multiplications/sample) keeps the end-to-end ADC→DSP→DAC group delay at **37 μs** on a TMS320C6713, leaving the in-ear feedforward causality margin intact (the open-ear vs. in-ear acoustic time difference measured on their KEMAR setup was ~292 μs)
 
 ## Related Concepts
 
@@ -116,4 +118,5 @@ Causality does not only constrain *when* the reference arrives relative to the d
 - [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — zero-delay causal WaveNet on the reference path so the FIR controller's delay budget is preserved; DeepANC's frame-level CRN latency degrades it to near-unprocessed performance
 - [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba, Kamado, Kako & Noguchi 2027: Wideband ANC for Open-Ear Headphones with a Coaxial Loudspeaker]] — relaxed quarter-period causality boundary and an electronic/acoustic/mechanical secondary-path delay budget; solves the constraint from the loudspeaker-design side
 - [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022: Optimal Microphone Positioning for Multi-Channel Feedforward ANC Headphones]] — causality as a placement filter: contralateral references look useful to the MCF but are worthless under causal filters
+- [[sources/huang-2026-integrated-anc-hear-through|Huang, Chang & Kuo 2026: Integrated ANC and Hear-Through for Speech Clarity]] — offline-trained fixed filters + balanced-truncation IIR keep the DSP path at 37 μs group delay for in-ear feedforward control
 

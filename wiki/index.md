@@ -713,6 +713,8 @@
 | [[entities/nam-soo-kim\|Nam Soo Kim]] | SNU professor; senior author of FastEnhancer (ICASSP 2026) | 2026-11-01 |
 | [[entities/gyeongmin-kim\|Gyeongmin Kim]] | Hanyang University; sole author of faster-enhancer.c — int8 runtime specialization, racing-vs-pacing energy benchmarking for streaming SE | 2026-11-07 |
 | [[entities/clement-laroche\|Clément Laroche]] | Researcher (GN Audio); first author of the NPU-compatible LiSenNet redesign for STM32N6 | 2026-11-07 |
+| [[entities/chong-rui-huang\|Chong-Rui Huang]] | Postdoctoral researcher (CYCU, Taiwan); ANC, DSP, real-time implementation; first author of the integrated ANC+hear-through AES. | 2026-11-08 |
+| [[entities/cheng-yuan-chang\|Cheng-Yuan Chang]] | Distinguished Professor (CYCU, Taiwan); signal processing applications and ANC system design. | 2026-11-08 |
 
 ---
 
@@ -1363,6 +1365,9 @@
 | [[concepts/mcu-npu-deployment\|MCU NPU Deployment]] | Running NN inference on MCU neural accelerators (Ethos-U, Neural-ART): the static int8 operator set as the binding constraint | 2026-11-07 |
 | [[concepts/stateful-streaming-inference\|Stateful Streaming Inference]] | FIFO state buffers between frames vs. receptive-field recomputation — 200× MACs apart; state can exceed the weights | 2026-11-07 |
 | [[concepts/relu6-quantization-robustness\|ReLU6 Quantization Robustness]] | Bounding activations to [0, 6] makes static int8 PTQ robust: 0.08 → 0.01 PESQ quantization loss | 2026-11-07 |
+| [[concepts/acoustic-equalization-system\|Acoustic Equalization System (AES)]] | Integrated feedforward-ANC + hear-through headphone controller with frequency-band allocation and user-tunable gains (Huang, Chang & Kuo 2026). | 2026-11-08 |
+| [[concepts/hear-through-frequency-band-allocation\|Hear-Through Frequency-Band Allocation]] | Dividing the spectrum between ANC and HT branches anchored to measured passive isolation: ANC below ~500 Hz, HT 500 Hz-4 kHz, no compensation above. | 2026-11-08 |
+| [[concepts/balanced-truncation-model-reduction\|Balanced Truncation Model Reduction]] | Hankel-singular-value-ranked state truncation turning offline-trained FIR controllers into low-order IIR (SOS) filters for real-time ANC DSP. | 2026-11-08 |
 
 ---
 
@@ -1660,6 +1665,7 @@
 | [[sources/ahn-2026-fastenhancer\|Ahn, Han, Woo & Kim 2026]] | FastEnhancer is a family of five streaming neural speech-enhancement models explicitly optimized for real-world inference speed (RTF on a single CPU thread) rather than the usual proxy metrics of parameter count or MACs. | 2026-11-01 |
 | [[sources/kim-2026-faster-enhancer\|Kim 2026]] | This is an implementation and measurement study of what it costs to run a streaming speech enhancer on a CPU: the author ports FastEnhancer-Medium at 48 kHz to faster-enhancer.c, a C runtime with six int8 GEMM tiers selected at initialization, leaving architecture and weights untouched. | 2026-11-07 |
 | [[sources/laroche-2026-lisenet-embedded\|Laroche & Olsson 2026]] | This paper redesigns LiSenNet — a 37k-parameter sub-band dual-path speech enhancer — for deployment on the STM32N6 microcontroller's Neural-ART NPU, showing that parameter and MAC counts do not predict deployed efficiency on restricted accelerators. | 2026-11-07 |
+| [[sources/huang-2026-integrated-anc-hear-through\|Huang, Chang & Kuo 2026]] | This paper proposes an acoustic equalization system (AES) for in-ear headphones that integrates feedforward ANC and hear-through (HT) within a single control framework via frequency-band allocation, instead of treating them as mutually exclusive operating modes. | 2026-11-08 |
 
 ---
 
@@ -1718,10 +1724,10 @@
 
 ## Statistics
 
-- **Total pages**: 1667
-- **Entities**: 703
-- **Concepts**: 641
-- **Sources**: 288
+- **Total pages**: 1673
+- **Entities**: 705
+- **Concepts**: 644
+- **Sources**: 289
 - **Synthesis**: 25
 - **Queries**: 10
-- **Last updated**: 2026-11-07
+- **Last updated**: 2026-11-08

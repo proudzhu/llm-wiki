@@ -10,6 +10,7 @@ sources:
   - raw/papers/liebich-2022-occlusion-effect-cancellation/full-text.md
   - raw/papers/chiba-2027-wideband-anc-coaxial-loudspeaker/full-text.txt
   - raw/papers/forster-2022-optimal-microphone-positioning/full-text.txt
+  - raw/papers/huang-2026-integrated-anc-hear-through/full-text.md
 tags:
 - active-noise-control
 - signal-processing
@@ -74,6 +75,10 @@ Open-fitting hearing aids apply feedforward ANC to cancel the noise component of
 
 In [[concepts/occlusion-effect-cancellation|Occlusion Effect Cancellation (OEC)]] (Liebich & Vary 2022), the hear-through filter is the feedforward component of a hybrid structure: $W(z) = (P(z)S(z) - z^{-\tau})/G(z)$ passes the outside world to the ear canal while the feedback controller $K(z)$ simultaneously attenuates body-conducted occlusion. An internal correction filter $\hat{G}(z) = G(z)$ fed by the hear-through signal (rather than the loudspeaker signal, as in Kuo's hybrid ANC) decouples the feedforward and feedback designs, so $W(z)$ can be derived offline via Wiener-Hopf optimization without affecting closed-loop stability. See [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022]].
 
+## Band-Limited Feedforward in Integrated ANC+HT
+
+[[sources/huang-2026-integrated-anc-hear-through|Huang, Chang & Kuo 2026]] keep the classical feedforward topology ($W^\circ(z) = P(z)/S(z)$, FxLMS-trained offline) but deliberately **confine it to a low-frequency band** inside an [[concepts/acoustic-equalization-system|integrated ANC+HT system]]: a 1st-order LPF $L(z)$ (3 kHz cutoff) after the control filter, whose effective band is set by the HT crossover $f_L$ (300–700 Hz). The same reference signal feeds a parallel hear-through branch above the crossover, so the feedforward controller suppresses low-frequency noise while HT processing restores speech-relevant ambient sound — with two user gains ($g_a$, $g_h$) continuously blending the modes instead of switching them. For real-time feasibility the 3000-tap trained FIR is reduced to a 50th-order IIR (25 SOSs) via [[concepts/balanced-truncation-model-reduction|balanced truncation]] (~125 vs. ~3000 multiplications/sample).
+
 ## Comparison with feedback ANC
 
 | Feature | Feedforward | Feedback |
@@ -98,6 +103,8 @@ In [[concepts/occlusion-effect-cancellation|Occlusion Effect Cancellation (OEC)]
 - [[concepts/filtered-x-mwf|Filtered-x MWF (FxMWF)]]
 - [[concepts/causality|Causality in ANC]]
 - [[concepts/reference-microphone-positioning|Reference Microphone Positioning]]
+- [[concepts/acoustic-equalization-system|Acoustic Equalization System (AES)]]
+- [[concepts/balanced-truncation-model-reduction|Balanced Truncation Model Reduction]]
 
 ## Related Sources
 
@@ -113,3 +120,4 @@ In [[concepts/occlusion-effect-cancellation|Occlusion Effect Cancellation (OEC)]
 - [[sources/liebich-2022-occlusion-effect-cancellation|Liebich & Vary 2022: Occlusion Effect Cancellation in Headphones and Hearing Devices]] — hear-through filter as the feedforward component, decoupled from the OEC feedback loop via the Ĝ(z) correction filter
 - [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba, Kamado, Kako & Noguchi 2027: Wideband ANC for Open-Ear Headphones with a Coaxial Loudspeaker]] — reduces the secondary-path delay term itself (loudspeaker mechanical + acoustic) via a 2-way coaxial secondary source for wideband open-ear feedforward ANC
 - [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022: Optimal Microphone Positioning for Multi-Channel Feedforward ANC Headphones]] — ~9 dB additional active gain available from ipsilateral reference placement; contralateral references would require acausal filters
+- [[sources/huang-2026-integrated-anc-hear-through|Huang, Chang & Kuo 2026: Integrated ANC and Hear-Through for Speech Clarity]] — band-limited feedforward ANC (LPF-confined, offline FxLMS + balanced-truncation IIR) running simultaneously with a hear-through branch on the same reference

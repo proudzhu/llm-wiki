@@ -11,6 +11,7 @@ sources:
   - raw/papers/kajikawa-2003-fdsp-variable-perturbation/full-text.md
   - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
   - raw/papers/kuo-2006-anc-headphones/full-text.txt
+  - raw/papers/huang-2026-integrated-anc-hear-through/full-text.md
 tags:
 - adaptive-algorithms
 - lms
@@ -93,6 +94,10 @@ The perturbation-based branch predates the population-based one: [[sources/maeda
 
 Open-ear smart glasses remove the physical error microphone entirely, so no on-line FxLMS loop can close at the ear. [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026]] instead **generate** the control filters continuously but without adaptation: a U-Net estimates 2048-tap FIR filters every 200 ms from 8 frame microphones, and the DSP applies them via [[concepts/hybrid-partitioned-convolution|hybrid partitioned convolution]]. The secondary path enters only as (a) an ESS-measured estimate used in the training loss and as FiLM conditioning, and (b) the Tikhonov regularization $\beta_0 = 10^{-4}$ of the Wiener-form training target — the accuracy/stability burden that $\hat{S}(z)$ carries inside the FxLMS update is shifted entirely into training time.
 
+## Fixed Filters from Offline FxLMS Training (No Run-Time Adaptation)
+
+The same shift of the $\hat{S}(z)$ burden from run time to training time is available without any neural network: [[sources/huang-2026-integrated-anc-hear-through|Huang, Chang & Kuo 2026]] train both their ANC filter (toward $W^\circ(z) = P(z)/S(z)$) and their hear-through filter (toward $H(z) = \hat{T}(z)z^{-\Delta}/\hat{S}(z)$) with classical FxLMS on *offline-recorded* synchronized $x(n)$/$d(n)$ pairs, then freeze the results for real-time use — the ANC filter additionally [[concepts/balanced-truncation-model-reduction|reduced]] from 3000 taps to a 50th-order IIR. The approach trades on-line tracking ability (filters are static per deployment) for a 37 µs-delay, low-computation signal path suitable for compact in-ear feedforward control (see [[concepts/acoustic-equalization-system|AES]]).
+
 ## Related Concepts
 
 - [[concepts/active-noise-control|Active Noise Control]]
@@ -111,6 +116,8 @@ Open-ear smart glasses remove the physical error microphone entirely, so no on-l
 - [[concepts/relative-transfer-matrix|Relative Transfer Matrix (ReTM)]] — spatial-subtraction front end used to clean the reference
 - [[concepts/virtual-in-ear-sensing|Virtual In-Ear Sensing]] — replaces the adaptation loop entirely with network-generated fixed filters
 - [[concepts/hybrid-partitioned-convolution|Hybrid Partitioned Convolution]] — real-time engine applying the network-generated filters
+- [[concepts/balanced-truncation-model-reduction|Balanced Truncation Model Reduction]] — turns offline FxLMS-trained FIR filters into low-order IIRs for real-time use
+- [[concepts/acoustic-equalization-system|Acoustic Equalization System (AES)]]
 
 ## Related Sources
 
@@ -126,3 +133,4 @@ Open-ear smart glasses remove the physical error microphone entirely, so no on-l
 - [[sources/kajikawa-2003-fdsp-variable-perturbation|Kajikawa & Nomura 2003: FDSP with Variable Perturbation]] — frequency-domain successor: ~3× cheaper than FxLMS and converging faster than fixed-perturbation FDSP via error-scaled perturbation
 - [[sources/yuan-2026-open-ear-anc-smart-glasses|Yuan, Liu & Xiao 2026: Active Noise Cancellation on Open-Ear Smart Glasses]] — no FxLMS loop is possible without an error mic; control filters are network-generated instead, with $\hat{S}(z)$ shifted into training-time FiLM conditioning
 - [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006: Active Noise Control System for Headphone Applications]] — real-time AFANC headphone on TMS320C32: IMC reference synthesis + FxLMS (65-tap $\hat{S}$, 110-tap $W$, $\mu=0.3$), 50+ dB sinusoidal cancellation up to 2 kHz
+- [[sources/huang-2026-integrated-anc-hear-through|Huang, Chang & Kuo 2026: Integrated ANC and Hear-Through for Speech Clarity]] — offline FxLMS training of both the ANC and HT filters, frozen and IIR-reduced for a fixed-filter real-time in-ear system
