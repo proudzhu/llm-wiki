@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-22
-updated: 2026-10-24
+updated: 2026-11-08
 sources:
   - wiki/sources/tagliasacchi-2020-seanet.md
   - wiki/sources/zhang-2022-bone-conducted-speech-dissertation.md
@@ -16,6 +16,7 @@ sources:
   - wiki/sources/lugo-2026-diffvqe.md
   - wiki/sources/ohlenbusch-2026-pas-se.md
   - wiki/sources/zhang-2025-mbenet.md
+  - wiki/sources/kuang-2025-low-complexity-bc-speech-enhancement.md
   - zotero://select/items/0_B92ER5KS (Khanagha 2026: Conditional Diffusion)
   - zotero://select/items/0_NIIDMA7J (Contrastive Learning for BC)
 tags:
@@ -146,6 +147,14 @@ Shifts from predicting clean speech to **generating** it using BC signals as gui
 
   **Limitations**: evaluated only on the simulated ABCS-2Mix benchmark (Mandarin, 100 speakers) — no real-device recordings or cross-lingual validation; no sensor-failure handling (unlike Liu 2025's Special Training or Heitkaemper 2025's VAD gating); no RTF/MACs figures despite the causality and efficiency claims, so compute cannot be compared against e.g. DenGCAN's 0.859 GMACs.
 
+### 2.11 Band-Compression Meets BC Fusion (2025)
+
+- **[[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang (Applied Acoustics 2025) — Sub-Band + Full-Band]]**: The same group's successor to DenGCAN (§2.4) brings monaural band-compression efficiency (the PercepNet/DeepFilterNet/GTCRN lineage) into the BC-aided setting. The [[concepts/sub-band-full-band-architecture|two-step architecture]] pairs 32 full-range ERB sub-band gains (coarse spectral-envelope correction, ~2.5 MMACs) with full-band $N{=}3$ [[concepts/deep-filtering|deep filtering]] (fine suppression), each estimated by its own encoder-decoder set sharing a grouped-sConformer bottleneck, with early + intermediate [[concepts/iterative-attentional-feature-fusion|iAFF]] fusion of BC/AC at both granularities:
+  - **Key result**: best wb-PESQ (2.396 mid-SNR avg) and eSTOI among GTCRN, DeepFilterNet, DC-CRN, and DenGCAN at the lowest MACs (40.3 M) — DenGCAN needs 4× the compute for less quality
+  - **GTCRN-AC ablation**: the AC-only variant isolates the BC contribution (+0.61 wb-PESQ at [−15,−9] dB) — the sensor, not the architecture, is the dominant quality lever at very low SNR
+  - **RTF insight**: sConformer bottleneck parallelizes far better than GTCRN's DPRNN at equal MACs (RTF 0.159 vs. 0.446 on ARM), at the cost of Q/K cache memory — the params/MACs-vs-wall-clock lesson recurring in the multi-modal setting (§3.2)
+  - **Fusion finding**: iAFF beats cross attention on *both* cost and quality (40.26 vs. 44.21 MMACs; wb-PESQ 2.396 vs. 2.337)
+
 ---
 
 ## 3. Core Technical Challenges
@@ -180,6 +189,7 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 | **DenGCAN (Kuang)** | 2024 | 1.03M | +1.870 wb-PESQ | Minimum compute on ARM |
 | **ATFA (Liu)** | 2025 | 1.6M | +0.2 PESQ | Robust to sensor failure |
 | **MBENet (Zhang)** | 2025 | 3.8M | 16.67 dB SI-SDR / 3.17 PESQ (ABCS-2Mix avg) | First BC-AC fusion **TSE**; causal; margin over pBSRNN grows as SNR drops |
+| **Sub-band + full-band (Kuang)** | 2025 | 256.4K | 2.396 wb-PESQ (A4BS mid-SNR avg) | 40.3 MMACs; RTF 0.159 ARM — band-compression efficiency in BC-aided SE |
 | **BCS-guided SE (Heitkaemper)** | 2025 | — | >15% rel. WER | Voice-assistant ASR on earbuds; RTF 0.01, off-device |
 | **BCDM (Khanagha)** | 2026 | — | **High** | Extreme noise (-10 dB SNR) |
 | **QuaSE (Han)** | 2026 | — | +9.35% PESQ | Quality-varying in-ear modality |
@@ -218,6 +228,7 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 - [[sources/lugo-2026-diffvqe|Lugo et al. 2026: DiffVQE]] — single-step hybrid diffusion evidence for real-time generative SE (§3.2)
 - [[sources/ohlenbusch-2026-pas-se|Ohlenbusch, Kegler & Stamenovic 2026: PAS-SE]] — enrollment as third clue; in-ear enrollment robustness (§2.9)
 - [[sources/zhang-2025-mbenet|Zhang, Feng, Liu, Zhang & Li 2025: MBENet]] — first BC-AC fusion TSE; BC bandwidth extension as auxiliary task (§2.10, §3.1, §4)
+- [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement Leveraging Sub-Band and Full-Band Architecture]] — band-compression efficiency meets BC fusion (§2.11, §4)
 
 ## Related Synthesis
 

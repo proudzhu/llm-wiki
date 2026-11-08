@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-24
-updated: 2026-11-01
+updated: 2026-11-08
 sources:
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
   - raw/papers/yan-2025-lisennet/full-text.md
   - raw/papers/ahn-2026-fastenhancer/full-text.md
+  - raw/papers/kuang-2025-low-complexity-bc-speech-enhancement/full-text.md
 tags:
   - neural-network
   - speech-enhancement
@@ -86,6 +87,10 @@ Huang et al. (2026) reuse GTCRN not as a standalone enhancer but as a **lightwei
 
 FastEnhancer (Ahn et al., ICASSP 2026) positions GTCRN as the exemplar of a **complexity-optimized** design whose real-world speed suffers from its own sophistication: GTCRN's sub-band operations, grouped convolutions/RNNs, and channel-split-shuffle operations reduce params (24k) and MACs (40M) but increase memory operations — measured RTF 0.060 (Xeon) vs FastEnhancer-B's 0.022 with 6.5× the MACs (262M) and better quality (PESQ 3.13 vs 2.87). FastEnhancer-T matches GTCRN's quality at RTF 0.012 (5× faster). This is the clearest evidence yet in the wiki that params/MACs are poor proxies for CPU-thread latency in the lightweight-SE lineage.
 
+## Bone-Air Extension at Matched Complexity (Kuang et al. 2025)
+
+[[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025]] extend GTCRN to the bone-air fusion setting by inserting iAFF modules (ERB energies, full-band spectra, embedding space) into a [[concepts/sub-band-full-band-architecture|sub-band + full-band architecture]]: small ERB encoders/decoder estimate full-range sub-band gains while a large spectral encoder-decoder set estimates deep-filtering coefficients — replacing GTCRN's single compressed-spectrum path. On the A4BS corpus, this variant beats bone-air-adapted DeepFilterNet, DC-CRN, and DenGCAN on wb-PESQ/eSTOI at the lowest MACs (40.3 M vs. GTCRN's 42.8 M). Their GTCRN-AC ablation (AC-only input, 33.8 M) isolates the BC contribution: +0.61 wb-PESQ at [−15,−9] dB. Two GTCRN-specific findings emerge: (i) GTCRN's DPRNN bottleneck is hard to parallelize — near-identical MACs but RTF 0.446 vs. 0.159 (ARM) for the sConformer bottleneck of the proposed model; (ii) GTCRN's high-frequency band merging leaves narrowband high-frequency noise under-suppressed (visible in their spectrogram comparison), which the full-band deep-filtering stage addresses.
+
 ## Related Concepts
 
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
@@ -126,3 +131,4 @@ FastEnhancer (Ahn et al., ICASSP 2026) positions GTCRN as the exemplar of a **co
 - [[sources/grinstein-2025-tiny-param-mwf|Grinstein et al. 2025: Controlling the PMWF Using a Tiny Neural Network]] — multichannel GTCRN adaptation as a low-compute baseline
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — 32 ms-latency baseline comparison vs. TinyGRU
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — GTCRN as the exemplar of complexity-optimized lightweight SE whose RTF suffers; 5× slower than FastEnhancer-T at matched quality
+- [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement]] — bone-air extension replacing single-path band merging with sub-band/full-band encoder-decoder sets; GTCRN-AC ablation isolates the BC contribution

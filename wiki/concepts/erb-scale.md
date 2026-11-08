@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-06-07
-updated: 2026-09-13
+updated: 2026-11-08
 sources:
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
   - raw/papers/harma-2000-frequency-warped-signal-processing/full-text.md
   - raw/papers/jiang-2026-lightweight-speech-enhancement-ssm-dsc/full-text.md
   - raw/papers/buthe-2025-blind-wideband-to-fullband-extension/full-text.md
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
+  - raw/papers/kuang-2025-low-complexity-bc-speech-enhancement/full-text.md
 tags:
   - psychoacoustics
   - speech-enhancement
@@ -63,6 +64,10 @@ Both [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|RT-Tango]] a
 
 [[sources/buthe-2025-blind-wideband-to-fullband-extension|Büthe & Valin 2025]]'s blind bandwidth-extension model uses a **32-band ERB-scale log-magnitude spectrogram** as part of its 72-dimensional input features (computed from a 20 ms Hanning-window STFT with 10 ms hop), alongside **complex phase differences** for the first 40 STFT bins — phase differences that proved sufficient for high-accuracy pitch estimation (Subramani et al. ICASSP 2024). The ERB-scale features provide the spectral-envelope information that drives the feature encoder, which in turn steers the [[concepts/adaconv|AdaConv]] pre/post-filters and [[concepts/adashape|AdaShape]] extension weights. This is a *feature-compression* use of the ERB scale (like PercepNet/DeepFilterNet) rather than a filter-bank gain-prediction use.
 
+## Usage in Kuang et al. 2025 (Full-Range ERB Sub-Bands)
+
+[[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025]] band *both* AC and BC spectra into $B = 32$ full-range ERB sub-bands (energy features $e^{(k)} = \frac{1}{N_k}\sum_{f=f_{k,min}}^{f_{k,max}} |Y(f)|$), rather than compressing only the high frequencies GTCRN-style. These ERB energies drive the coarse stage of their [[concepts/sub-band-full-band-architecture|sub-band + full-band architecture]] — a small encoder-decoder set estimates the 32 sub-band gains (~2.5 MMACs) while a large full-band set estimates deep-filtering coefficients. Their band-strategy ablation is the direct comparison: replacing full-range ERB banding with GTCRN's high-frequency-only band merge (merging the two encoder-decoder sets into one, at comparable complexity) costs 0.146 average wb-PESQ and 1.64% eSTOI *at higher MACs* (44.3 vs. 40.3 M). The full-range ERB scale is thus not merely a compression device here — the granularity split between sub-band envelope and full-band fine filtering is itself the design contribution. The BC energies matter as much as the AC ones: both are fused by iAFF before encoding.
+
 ## Relationship to Other Scales
 
 | Scale | Formula | Bands | Application |
@@ -106,3 +111,4 @@ The ERB scale provides finer frequency resolution at low frequencies compared to
 - [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight SE with SSM and DSConv]] — AISC uses 1.5 kHz perceptual split + ERB compression on the high-frequency branch
 - [[sources/buthe-2025-blind-wideband-to-fullband-extension|Büthe & Valin 2025: A Lightweight and Robust Method for Blind Wideband-to-Fullband Extension of Speech]] — 32-band ERB log-magnitude + phase-difference features drive the BWE feature encoder
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — reference-channel ERB branch in TinyGRU; magnitude-only ERB masking shown incompatible with MCWF
+- [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement]] — full-range ERB sub-band gains (both AC and BC) as the coarse stage; beats GTCRN-style high-frequency-only band merging

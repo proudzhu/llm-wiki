@@ -709,4 +709,5 @@
 | [[entities/clement-laroche\|Clément Laroche]] | Researcher (GN Audio); first author of the NPU-compatible LiSenNet redesign for STM32N6 | 2026-11-07 |
 | [[entities/chong-rui-huang\|Chong-Rui Huang]] | Postdoctoral researcher (CYCU, Taiwan); ANC, DSP, real-time implementation; first author of the integrated ANC+hear-through AES. | 2026-11-08 |
 | [[entities/cheng-yuan-chang\|Cheng-Yuan Chang]] | Distinguished Professor (CYCU, Taiwan); signal processing applications and ANC system design. | 2026-11-08 |
+| [[entities/mou-wang\|Mou Wang]] | Researcher, Institute of Acoustics CAS — multi-modal bone-conducted speech enhancement (time-domain involution network 2022; sub-band/full-band architecture 2025) | 2026-11-08 |
 

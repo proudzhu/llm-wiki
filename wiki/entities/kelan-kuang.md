@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-16
-updated: 2026-05-16
+updated: 2026-11-08
 tags:
   - acoustics
   - speech-enhancement
@@ -20,7 +20,9 @@ tags:
 - Lightweight speech enhancement network fusing bone- and air-conducted speech (JASA 2024)
 - DenGCAN backbone — densely gated convolutional attention network with AG skip-connections and sConformer bottleneck
 - sConformer (squeezed Conformer) for efficient temporal dependency modeling, co-authored in GCAN (JASA 2023)
+- First author of "Low-Complexity BC-Aided Speech Enhancement Leveraging Sub-Band and Full-Band Architecture" (Applied Acoustics 2025) — low-complexity BC-aided speech enhancement with sub-band ERB gains + full-band deep filtering, 40.3 MMACs/s — [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025]]
 
 ## Related Sources
 
 - [[sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]] — first author
+- [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement Leveraging Sub-Band and Full-Band Architecture]]

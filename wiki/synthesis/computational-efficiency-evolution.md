@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-11-07
+updated: 2026-11-08
 sources:
   - raw/papers/benslimane-2026-rt-tango-binaural-speech-enhancement/full-text.md
   - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
@@ -20,6 +20,7 @@ sources:
   - raw/papers/ahn-2026-fastenhancer/full-text.md
   - raw/papers/kim-2026-faster-enhancer/full-text.md
   - raw/papers/laroche-2026-lisenet-embedded/full-text.md
+  - raw/papers/kuang-2025-low-complexity-bc-speech-enhancement/full-text.md
 tags:
   - lightweight-speech-enhancement
   - computational-complexity
@@ -228,7 +229,11 @@ Three approaches currently define the Pareto frontier:
 
 14. **[[concepts/lisennet-npu|LiSenNet-NPU (Laroche & Olsson 2026)]]**: Opens the **tenth axis — MCU-NPU operator compatibility as a first-class design constraint** — the first corpus entry to deploy SE on a microcontroller *NPU* (STM32N6 Neural-ART) rather than a CPU/DSP. The measurement that motivates it: LiSenNet's 37k params are nominally MCU-suitable, yet its frequency Bi-GRU needs ~850 tensor-slice ops when unrolled (compiler stalls), LayerNorm/PReLU/Mish and reshape-based sub-pixel upsampling are simply not in the operator set — unsupported ops fall back to the Cortex-M55 host, whose scheduling and data-transfer overheads dominate the supported arithmetic. The redesigned model (DSConv frequency mixer k=11 + causal dilated TCN, foldable BN, ReLU6, transposed-conv upsampling) *exceeds the recurrent baseline after static int8 quantization* (PESQ 3.01 vs. 2.93) while running **4.83 ms per 16 ms frame (RTF 0.30)** — beating Conv-FSENet (1.45M params, 2.91, 4.40 ms) and dense NSNet2 (2.78M, 2.83, 22.94 ms — not real-time) with 31–60× fewer parameters. Two quantification contributions sharpen the axis: (i) bounded activations ([[concepts/relu6-quantization-robustness|ReLU6]]) cut static-PTQ loss from 0.08 to 0.01 PESQ — answering TinyML's small-model quantization sensitivity by architecture, not calibration; (ii) [[concepts/stateful-streaming-inference|stateful vs. stateless streaming]] — FIFO state costs 1.69 M MACs/frame vs. 336 M for receptive-field recomputation (200×; 4.88 vs. 127.16 ms — no stateless variant meets the 16 ms deadline), but the 154 KiB FIFO state exceeds the 45 KiB weights 3×, and a GRU hybrid variant carries 17 KiB state at 2.18 ms/frame — the state-computation-memory triangle that μNet saw on DSPs, measured on an NPU. Together with axes 7 (μNet/DSP), 8 (FastEnhancer/CPU), and 9 (faster-enhancer.c/runtime), the hardware-tier ladder is complete: **each tier redefines which "lightweight" means** — static memory on DSPs, memory operations on CPUs, operator set + state budget on NPUs.
 
-### 5.3 The Open Question
+### 5.3 The Eleventh Axis: Multi-Modal Band Compression (Kuang et al. 2025)
+
+**[[concepts/sub-band-full-band-architecture|Sub-band + full-band architecture (Kuang et al. 2025)]]** extends the band-compression efficiency lineage (PercepNet → DeepFilterNet → GTCRN → CoFi-Lite) into the **multi-modal (bone-air fusion) setting** — previously the exclusive domain of full-resolution fusion models (DC-CRN, DenGCAN). The two-step design (32 full-range ERB sub-band gains for coarse envelope correction + full-band $N{=}3$ deep filtering for fine suppression, each with its own encoder-decoder set) reaches **40.3 MMACs/s with the best wb-PESQ (2.396 mid-SNR) among bone-air-adapted GTCRN, DeepFilterNet, DC-CRN, and DenGCAN** — the 231.3K-param model beats its own group's DenGCAN at 1/4 the MACs. Two measurements sharpen the axes above: (i) at near-identical MACs (40.3 vs. 42.8 M), the sConformer bottleneck runs **RTF 0.159 vs. GTCRN's 0.446 on ARM** — a 2.8× wall-clock gap invisible to MAC counts, echoing FastEnhancer's memory-operations lesson (axis 8) on the multi-modal side, at the cost of Q/K attention-cache memory (the state-computation-memory triangle of axes 7/10); (ii) a matched-complexity **GTCRN-AC ablation isolates the sensor contribution: +0.61 wb-PESQ at [−15,−9] dB** from adding the BC modality — the clearest quantification yet that modality choice can dominate architectural micro-optimization at very low SNR.
+
+### 5.4 The Open Question
 
 **Can neural/learned ANC controllers match traditional algorithms at lower computational cost?**
 
@@ -319,6 +324,7 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — introduces the eighth Pareto axis (RTF-first design): memory operations, not MACs, dominate single-CPU-thread latency; GTCRN (40M MACs, RTF 0.060) vs FastEnhancer-B (262M MACs, RTF 0.022)
 - [[sources/kim-2026-faster-enhancer|Kim 2026: faster-enhancer.c]] — introduces the ninth Pareto axis (runtime specialization + energy/duty-cycle): training-free int8 port at −0.006 PESQ, 3.3× over fp32 ONNX Runtime, racing-vs-pacing protocol (4.2× cost, −49% energy), tier inversion across devices
 - [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — introduces the tenth Pareto axis (MCU-NPU operator compatibility): redesigns LiSenNet for the STM32N6 Neural-ART; int8 PESQ 3.01 at 4.83 ms/frame; ReLU6-bounded static PTQ (0.01 vs. 0.08 loss); stateful vs. stateless streaming quantified (200× MACs)
+- [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement]] — eleventh Pareto axis: multi-modal band compression (ERB sub-band gains + full-band deep filtering, 40.3 MMACs); sConformer vs. DPRNN RTF gap (0.159 vs. 0.446 ARM) at equal MACs
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane, Chouteau, Poreba, Auzanneau, Szczepanski, Chersi & Serizel 2026: RT-Tango]]
 - [[sources/liu-2024-lightweight-dl-survey|Liu, Galindo, Xie, Wong, Shuai, Li & Cheng 2024: Lightweight Deep Learning for Resource-Constrained Environments]]
 

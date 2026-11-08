@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-04-12
-updated: 2026-10-24
+updated: 2026-11-08
 sources:
   - wiki/sources/kuang-2024-lightweight-speech-enhancement-bone-air.md
   - wiki/sources/liu-2025-robust-fusion-bc-ac-attention.md
   - wiki/sources/wang-2022-fusing-bc-ac-complex-domain-se.md
   - wiki/sources/heitkaemper-2025-bcs-speech-enhancement-earbuds.md
   - wiki/sources/zhang-2025-mbenet.md
+  - wiki/sources/kuang-2025-low-complexity-bc-speech-enhancement.md
   - raw/papers/ohlenbusch-2026-pas-se/full-text.md
 tags:
 - acoustics
@@ -59,6 +60,10 @@ The user's own voice reaches an occluded in-ear microphone predominantly through
 
 Bone conduction filters out not only ambient noise but also other speakers' voices — the sensor records only the wearer's skull vibrations. [[sources/zhang-2025-mbenet|Zhang et al. 2025]] exploit this in [[concepts/mbenet|MBENet]] (ASRU 2025), the first BC-AC fusion model for [[concepts/target-speaker-extraction|target speaker extraction]]: the BC signal replaces the enrollment utterance as the speaker cue, is bandwidth-extended by a CRN-style module trained as an auxiliary task, and is fused with the noisy AC mixture through a shared-weight [[concepts/band-split-rnn|band-split]] module. On the simulated ABCS-2Mix benchmark the causal 3.8M-parameter model beats pBSRNN with growing margins as SNR drops (PESQ +6.03% at −5 dB), and the BC cue outperforms a speaker-embedding cue by +5.48 dB SI-SDR — see [[concepts/bcs-guided-speech-enhancement|BCS-guided speech enhancement]].
 
+### 10. Band-Compression-Efficient BC Enhancement
+
+[[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025]] bring band-compression efficiency (previously monaural-only: PercepNet, DeepFilterNet, GTCRN) to the bone-air fusion setting: a [[concepts/sub-band-full-band-architecture|sub-band + full-band architecture]] estimates 32 ERB sub-band gains (coarse envelope) and full-band deep-filtering coefficients (fine suppression) from BC+AC input at 40.3 MMACs/s — the lowest among compared BC-aided models with the best wb-PESQ. A matched-complexity GTCRN-AC ablation shows the BC modality is worth +0.61 wb-PESQ at [−15,−9] dB SNR, and the band-compression design itself is validated against GTCRN-style high-frequency band merging (−0.146 wb-PESQ when merged).
+
 ## Related Concepts
 
 - [[concepts/ear-canal-occlusion-effect|Ear Canal Occlusion Effect]]
@@ -73,6 +78,7 @@ Bone conduction filters out not only ambient noise but also other speakers' voic
 - [[concepts/pas-se|PAS-SE]]
 - [[concepts/mbenet|MBENet]]
 - [[concepts/target-speaker-extraction|Target Speaker Extraction]]
+- [[concepts/sub-band-full-band-architecture|Sub-Band and Full-Band Architecture]]
 
 ## Related Sources
 
@@ -85,3 +91,4 @@ Bone conduction filters out not only ambient noise but also other speakers' voic
 - [[sources/heitkaemper-2025-bcs-speech-enhancement-earbuds|Heitkaemper et al. 2025: BCS-Guided Speech Enhancement for Voice Assistant on Earbuds]]
 - [[sources/ohlenbusch-2026-pas-se|Ohlenbusch, Kegler & Stamenovic 2026: PAS-SE]] — in-ear microphone as auxiliary sensor; in-ear enrollment robustness
 - [[sources/zhang-2025-mbenet|Zhang, Feng, Liu, Zhang & Li 2025: MBENet]] — BC-AC fusion extended from speech enhancement to target speaker extraction
+- [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement]] — band-compression efficiency brought to bone-air fusion (§10)

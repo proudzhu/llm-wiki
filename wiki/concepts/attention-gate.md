@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-16
-updated: 2026-06-18
+updated: 2026-11-08
 sources:
   - wiki/sources/kuang-2024-lightweight-speech-enhancement-bone-air.md
+  - wiki/sources/kuang-2025-low-complexity-bc-speech-enhancement.md
 tags:
   - attention
   - deep-learning
@@ -55,6 +56,10 @@ $$
 - Medical image segmentation (Attention U-Net)
 - Any U-Net style architecture where selective feature propagation improves efficiency
 
+## Reuse in the Sub-Band/Full-Band Successor (Kuang et al. 2025)
+
+[[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025]] retain the AG skip-connections in the small ERB encoder-decoder set of their [[concepts/sub-band-full-band-architecture|sub-band + full-band architecture]] (gain-estimation branch), while the large spectral encoder-decoder set (deep-filtering branch) uses cheaper pointwise-convolution skip-connections — a granularity-matched skip strategy: attention-gated skips where only 36 frequency features are reconstructed, PWConv skips for the 257-bin full-band path.
+
 ## Related Concepts
 
 - [[concepts/densely-gated-convolutional-attention-network|DenGCAN]]
@@ -64,4 +69,5 @@ $$
 ## Related Sources
 
 - [[sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]
+- [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement]] — AG skips retained in the ERB branch; PWConv skips in the full-band branch
 - [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator|Zhao et al. 2026: HALO — Gated dynamic convolution for adaptive frame-rate reduction]]

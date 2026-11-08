@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-16
-updated: 2026-05-16
+updated: 2026-11-08
 sources:
   - wiki/sources/kuang-2024-lightweight-speech-enhancement-bone-air.md
+  - wiki/sources/kuang-2025-low-complexity-bc-speech-enhancement.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -70,6 +71,10 @@ A lightweight variant of Conformer that uses self-attention to model long-term t
 - **Causal**: Yes (can operate with 30 ms input-output latency)
 - **Future context**: Optional — 0–160 ms additional latency improves wb-PESQ from 2.98 to 3.11
 
+## Relation to the 2025 Sub-Band/Full-Band Successor
+
+The same group's follow-up ([[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025]]) departs from DenGCAN's single-backbone cRM design: a [[concepts/sub-band-full-band-architecture|sub-band + full-band architecture]] replaces the dense blocks with two lightweight encoder-decoder sets (small ERB pair + large spectral pair, HardSwish activation, depthwise separable convolutions in decoders), estimating ERB sub-band gains + deep-filtering coefficients instead of a cRM. At matched-complexity comparison on A4BS (channels adjusted), the 2025 model delivers better wb-PESQ (2.396 vs. 2.143 avg mid-range) at ~1/4 of DenGCAN's MACs (40.3 vs. 162.9 M), with the RTF advantage also on the sConformer bottleneck side (0.159 vs. 0.291 ARM). DenGCAN remains the higher-capacity point when maximum suppression matters (its residual noise level is slightly lower).
+
 ## Related Concepts
 
 - [[concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
@@ -80,3 +85,4 @@ A lightweight variant of Conformer that uses self-attention to model long-term t
 ## Related Sources
 
 - [[sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]
+- [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement Leveraging Sub-Band and Full-Band Architecture]] — successor replacing the cRM backbone with sub-band gains + deep filtering at 1/4 the MACs

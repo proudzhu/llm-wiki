@@ -648,4 +648,5 @@
 | [[concepts/acoustic-equalization-system\|Acoustic Equalization System (AES)]] | Integrated feedforward-ANC + hear-through headphone controller with frequency-band allocation and user-tunable gains (Huang, Chang & Kuo 2026). | 2026-11-08 |
 | [[concepts/hear-through-frequency-band-allocation\|Hear-Through Frequency-Band Allocation]] | Dividing the spectrum between ANC and HT branches anchored to measured passive isolation: ANC below ~500 Hz, HT 500 Hz-4 kHz, no compensation above. | 2026-11-08 |
 | [[concepts/balanced-truncation-model-reduction\|Balanced Truncation Model Reduction]] | Hankel-singular-value-ranked state truncation turning offline-trained FIR controllers into low-order IIR (SOS) filters for real-time ANC DSP. | 2026-11-08 |
+| [[concepts/sub-band-full-band-architecture\|Sub-Band and Full-Band Architecture]] | Two-step enhancement design: ERB sub-band gains (coarse envelope) + full-band deep filtering (fine suppression) in separate encoder-decoder sets — 40.3 MMACs/s BC-aided SE | 2026-11-08 |
 

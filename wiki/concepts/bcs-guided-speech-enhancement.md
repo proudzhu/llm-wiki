@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-06
-updated: 2026-10-24
+updated: 2026-11-08
 sources:
   - raw/patents/us20260073929a1/full-text.md
   - raw/papers/heitkaemper-2025-bcs-speech-enhancement-earbuds/full-text.txt
@@ -9,6 +9,7 @@ sources:
   - wiki/sources/tagliasacchi-2020-seanet.md
   - wiki/sources/wang-2022-fusing-bc-ac-complex-domain-se.md
   - wiki/sources/zhang-2025-mbenet.md
+  - wiki/sources/kuang-2025-low-complexity-bc-speech-enhancement.md
 tags:
   - speech-enhancement
   - bone-conduction
@@ -81,6 +82,7 @@ The ICASSP 2025 paper validates the architecture on >5 h of real earbud recordin
 | **DC-CRN + AFF** (Wang 2022) | Attention mask soft-selects AC/BC, concatenated with originals | Densely-connected CRN + BLSTM | Complex spectral mapping |
 | **BCS-guided SE** (Heitkaemper 2025) | Band-limited to 500 Hz, upscaled, concatenated with air STFT | Conformer | Ratio mask → iSTFT |
 | **DenGCAN** (Kuang 2024) | iAFF coarse-then-refined fusion of STFTs | Densely gated conv + sConformer | Complex ratio mask → iSTFT |
+| **Sub-band + full-band** (Kuang 2025) | Early iAFF (ERB energies + full-band spectra) + intermediate iAFF (embeddings) | Small ERB enc-dec + large spectral enc-dec, grouped sConformer bottleneck | 32 ERB gains → deep filtering (two-step) |
 | **ATFA Dual-Mask** (Liu 2025) | Shared-conv pre-fusion + concat | Dilated DenseNet + ATFA + AHA | Dual real masks (AC + BC) summed |
 | **MBENet** (Zhang 2025) | Bandwidth-extended BC (CRN module, multi-task) | Shared-weight band-split (31 bands) + dual-axis LSTM | Complex mask on AC (TSE) |
 | **VibOmni** (He 2025) | IMU vibration upscaled (BCF aug.) | Dual-encoder DPRNN | Spectrogram |
@@ -115,6 +117,7 @@ For the *continuous* distortion case (wind-corrupted but present BCS), Heitkaemp
 - [[concepts/sensor-failure-robust-fusion|Sensor-Failure Robust Multi-Modal Fusion]]
 - [[concepts/mbenet|MBENet]]
 - [[concepts/target-speaker-extraction|Target Speaker Extraction]]
+- [[concepts/sub-band-full-band-architecture|Sub-Band and Full-Band Architecture]]
 
 ## Related Sources
 
@@ -126,3 +129,4 @@ For the *continuous* distortion case (wind-corrupted but present BCS), Heitkaemp
 - [[sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]
 - [[sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]]
 - [[sources/zhang-2025-mbenet|Zhang, Feng, Liu, Zhang & Li 2025: MBENet]] — BCS-guided fusion applied to target speaker extraction with bandwidth extension as auxiliary task
+- [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement Leveraging Sub-Band and Full-Band Architecture]] — 40.3 MMACs/s two-step (ERB gains + deep filtering) design; GTCRN-AC ablation isolating the BC benefit

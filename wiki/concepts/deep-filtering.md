@@ -5,6 +5,7 @@ updated: 2026-09-15
 sources:
   - raw/papers/zhang-2021-adl-mvdr/full-text.md
   - raw/papers/li-2026-realtime-music-separation-dsp/full-text.md
+  - raw/papers/kuang-2025-low-complexity-bc-speech-enhancement/full-text.md
 tags:
   - speech-enhancement
   - signal-processing
@@ -57,6 +58,10 @@ where $C$ are the complex coefficients of filter order $N$, $X$ is the input spe
 - CLCNet (Schröter et al., ICASSP 2020) — complex linear coding for hearing aid noise reduction
 - DCCRN+ (Lv et al., INTERSPEECH 2021) — channel-wise subband DCCRN with DF
 
+## DF vs. cRM at Ultra-Low Complexity (Kuang et al. 2025)
+
+[[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025]] use causal $N{=}3$ deep filtering as the fine stage of a [[concepts/sub-band-full-band-architecture|sub-band + full-band architecture]] for bone-conduction-aided enhancement, applied to the ERB-gain-enhanced AC spectrogram. Their ablation isolates DF vs. a full-band complex ratio mask (cRM, $N{=}1$ substitution) in the same system: DF wins on all metrics at slightly higher complexity (40.3 vs. 39.6 MMACs/s; wb-PESQ 2.396 vs. 2.322 in the mid-SNR range on the A4BS corpus). Removing DF entirely collapses quality to near-noisy levels (wb-PESQ 1.219 mid-range) — evidence that fine-grained full-band filtering, not just the coarse ERB envelope correction, carries most of the enhancement. Their spectrogram analysis shows ERB gains alone suppress broadband noise but leave harmonic noise (siren, ringing) residual, which DF removes.
+
 ## Related Concepts
 
 - [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
@@ -65,6 +70,7 @@ where $C$ are the complex coefficients of filter order $N$, $X$ is the input spe
 - [[concepts/trainable-frequency-compression|Trainable Frequency Compression]] — complementary axis: DF learns a per-band temporal filter, trainable frequency compression learns a per-band frequency filter
 
 - [[concepts/complex-ratio-mask|Complex Ratio Mask]] — pointwise 1×1 special case
+- [[concepts/sub-band-full-band-architecture|Sub-Band and Full-Band Architecture]] — Kuang et al. 2025 pair ERB gains with causal N=3 DF in separate encoder-decoder sets
 - [[concepts/adl-mvdr|ADL-MVDR]] — 2-D cRF used for frame-level covariance estimation in an all-deep-learning MVDR
 
 ## Related Sources

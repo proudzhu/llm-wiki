@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-05-16
-updated: 2026-05-16
+updated: 2026-11-08
 sources:
   - wiki/sources/kuang-2024-lightweight-speech-enhancement-bone-air.md
+  - wiki/sources/kuang-2025-low-complexity-bc-speech-enhancement.md
 tags:
   - feature-fusion
   - multi-modal
@@ -57,6 +58,10 @@ iAFF alleviates the "bottleneck of low-quality initial fusion" that can occur in
 - Audio-visual fusion
 - Any application requiring robust cross-modal attention weighting
 
+## Beyond Early Fusion: Early + Intermediate Placement (Kuang et al. 2025)
+
+[[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025]] deploy iAFF at three points in their [[concepts/sub-band-full-band-architecture|sub-band + full-band architecture]]: early fusion of ERB sub-band energies (output concatenated with both inputs), early fusion of full-band complex spectra (output concatenated with the AC spectrum only — a compute-saving asymmetry), and intermediate fusion of the two ERB-encoder embeddings. Their ablation on the A4BS corpus shows the effect is moderate but consistent: replacing all iAFFs with plain concatenation/addition drops wb-PESQ 2.396 → 2.376 (mid-SNR range) while leaving eSTOI essentially unchanged — iAFF modulates quality more than intelligibility. Notably, substituting iAFF with cross attention (BC as Query, AC as Key/Value) is both *more expensive* (44.21 vs. 40.26 MMACs/s) *and* worse (wb-PESQ 2.337), making iAFF the rare fusion module that dominates on both axes.
+
 ## Related Concepts
 
 - [[concepts/densely-gated-convolutional-attention-network|DenGCAN]]
@@ -66,3 +71,4 @@ iAFF alleviates the "bottleneck of low-quality initial fusion" that can occur in
 ## Related Sources
 
 - [[sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]
+- [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement Leveraging Sub-Band and Full-Band Architecture]] — three-point early + intermediate iAFF placement; dominates cross attention on both cost and quality

@@ -715,6 +715,7 @@
 | [[entities/clement-laroche\|Clément Laroche]] | Researcher (GN Audio); first author of the NPU-compatible LiSenNet redesign for STM32N6 | 2026-11-07 |
 | [[entities/chong-rui-huang\|Chong-Rui Huang]] | Postdoctoral researcher (CYCU, Taiwan); ANC, DSP, real-time implementation; first author of the integrated ANC+hear-through AES. | 2026-11-08 |
 | [[entities/cheng-yuan-chang\|Cheng-Yuan Chang]] | Distinguished Professor (CYCU, Taiwan); signal processing applications and ANC system design. | 2026-11-08 |
+| [[entities/mou-wang\|Mou Wang]] | Researcher, Institute of Acoustics CAS — multi-modal bone-conducted speech enhancement (time-domain involution network 2022; sub-band/full-band architecture 2025) | 2026-11-08 |
 
 ---
 
@@ -1368,6 +1369,7 @@
 | [[concepts/acoustic-equalization-system\|Acoustic Equalization System (AES)]] | Integrated feedforward-ANC + hear-through headphone controller with frequency-band allocation and user-tunable gains (Huang, Chang & Kuo 2026). | 2026-11-08 |
 | [[concepts/hear-through-frequency-band-allocation\|Hear-Through Frequency-Band Allocation]] | Dividing the spectrum between ANC and HT branches anchored to measured passive isolation: ANC below ~500 Hz, HT 500 Hz-4 kHz, no compensation above. | 2026-11-08 |
 | [[concepts/balanced-truncation-model-reduction\|Balanced Truncation Model Reduction]] | Hankel-singular-value-ranked state truncation turning offline-trained FIR controllers into low-order IIR (SOS) filters for real-time ANC DSP. | 2026-11-08 |
+| [[concepts/sub-band-full-band-architecture\|Sub-Band and Full-Band Architecture]] | Two-step enhancement design: ERB sub-band gains (coarse envelope) + full-band deep filtering (fine suppression) in separate encoder-decoder sets — 40.3 MMACs/s BC-aided SE | 2026-11-08 |
 
 ---
 
@@ -1666,6 +1668,7 @@
 | [[sources/kim-2026-faster-enhancer\|Kim 2026]] | This is an implementation and measurement study of what it costs to run a streaming speech enhancer on a CPU: the author ports FastEnhancer-Medium at 48 kHz to faster-enhancer.c, a C runtime with six int8 GEMM tiers selected at initialization, leaving architecture and weights untouched. | 2026-11-07 |
 | [[sources/laroche-2026-lisenet-embedded\|Laroche & Olsson 2026]] | This paper redesigns LiSenNet — a 37k-parameter sub-band dual-path speech enhancer — for deployment on the STM32N6 microcontroller's Neural-ART NPU, showing that parameter and MAC counts do not predict deployed efficiency on restricted accelerators. | 2026-11-07 |
 | [[sources/huang-2026-integrated-anc-hear-through\|Huang, Chang & Kuo 2026]] | This paper proposes an acoustic equalization system (AES) for in-ear headphones that integrates feedforward ANC and hear-through (HT) within a single control framework via frequency-band allocation, instead of treating them as mutually exclusive operating modes. | 2026-11-08 |
+| [[sources/kuang-2025-low-complexity-bc-speech-enhancement\|Kuang, Yang, Wang & Yang 2025]] | This paper presents a low-complexity bone-conduction-aided speech enhancement model that jointly utilizes sub-band and full-band features of BC and AC speech via a two-step (coarse-then-fine) enhancement procedure: first estimating ERB sub-band gains to enhance the spectral envelope of noisy AC speech, then estimating deep-filtering coefficients to suppress residual noise at fine spectral resolution. | 2026-11-08 |
 
 ---
 
@@ -1724,10 +1727,10 @@
 
 ## Statistics
 
-- **Total pages**: 1673
-- **Entities**: 705
-- **Concepts**: 644
-- **Sources**: 289
+- **Total pages**: 1676
+- **Entities**: 706
+- **Concepts**: 645
+- **Sources**: 290
 - **Synthesis**: 25
 - **Queries**: 10
 - **Last updated**: 2026-11-08
