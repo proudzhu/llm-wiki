@@ -1,7 +1,7 @@
 ---
 type: entity
 created: 2026-05-15
-updated: 2026-09-13
+updated: 2026-11-08
 tags:
   - researcher
   - hearing-aids
@@ -27,6 +27,7 @@ tags:
 - Co-authored "Low-complexity artificial noise suppression methods for deep learning-based speech enhancement algorithms" (EURASIP Journal on Audio, Speech, and Music Processing 2021) — [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke et al. 2021]]: MMSE/SPP postfilter suppressing [[concepts/artificial-residual-noise|artificial residual noise]] of DNN front-ends
 - Co-authored "Embedding and Beamforming: All-Neural Causal Beamformer for Multichannel Speech Enhancement" (ICASSP 2022) — [[sources/li-2022-embedding-beamforming|Li et al. 2022]]: [[concepts/eabnet|EaBNet]] all-neural causal framewise beamformer; implicit embedding beats explicit SCM and surpasses oracle-mask MVDR
 - Co-authored "JointDFC — Joint Deep Feedback Control for Hearing Aids" (ICASSP 2026, corresponding author) — first deep learning joint optimization of adaptive feedback cancellation and residual feedback suppression for hearing aids — [[sources/zhan-2026-joint-afc-rfs|Zhan, Moore, Li & Zheng 2026]]
+- Co-author (corresponding) of "DBMIF — A Deep Balanced Multimodal Iterative Fusion Framework for AC/BC Speech Enhancement" (Applied Intelligence 2026) — [[sources/wu-2026-dbmif-multimodal-fusion|Wu, Zheng, Zhang, Zhang, Zheng, Yang, Yan & Yin 2026]]
 
 
 ## Related Sources
@@ -39,6 +40,7 @@ tags:
 - [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke et al. 2021: Low-Complexity Artificial Noise Suppression]]
 - [[sources/li-2022-embedding-beamforming|Li et al. 2022: Embedding and Beamforming]]
 - [[sources/zhan-2026-joint-afc-rfs|Zhan, Moore, Li & Zheng 2026: JointDFC — Joint Deep Feedback Control for Hearing Aids]]
+- [[sources/wu-2026-dbmif-multimodal-fusion|Wu, Zheng, Zhang, Zhang, Zheng, Yang, Yan & Yin 2026: DBMIF — A Deep Balanced Multimodal Iterative Fusion Framework for AC/BC Speech Enhancement]]
 
 
 ## Related Concepts

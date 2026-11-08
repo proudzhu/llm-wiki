@@ -9,6 +9,7 @@ sources:
   - raw/papers/yan-2025-lisennet/full-text.md
   - raw/papers/ahn-2026-fastenhancer/full-text.md
   - raw/papers/laroche-2026-lisenet-embedded/full-text.md
+  - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
 tags:
   - evaluation-metric
   - speech-quality
@@ -55,3 +56,4 @@ FastEnhancer (Ahn et al. 2026) — uses a differentiable PESQ loss (torch-pesq) 
 - [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025: LiSenNet]] — includes a PESQ *loss* in the MetricGAN+ tradition (discriminator predicts PESQ scaled to (0,1); λ₃ = 0.05): worth +0.12 PESQ in ablation, the single largest contributor among LiSenNet's loss terms
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — differentiable torch-pesq loss with tiny weight λ₅ = 0.001 (Goodhart's-law guard); improved PESQ *and* other metrics; also documents a DNSMOS-vs-other-metrics disagreement case (FastEnhancer-M)
 - [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — on-device int8 PESQ 3.01 on VoiceBank-DEMAND (STM32N6 NPU): the deployment-domain PESQ comparison (quality after static quantization, measured against the FP32 graph)
+- [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — PESQ 2.70 for AC/BC fusion (best of nine), contrasted with DNSMOS 3.35 as the GAN-training effect

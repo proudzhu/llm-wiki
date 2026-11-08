@@ -649,4 +649,10 @@
 | [[concepts/hear-through-frequency-band-allocation\|Hear-Through Frequency-Band Allocation]] | Dividing the spectrum between ANC and HT branches anchored to measured passive isolation: ANC below ~500 Hz, HT 500 Hz-4 kHz, no compensation above. | 2026-11-08 |
 | [[concepts/balanced-truncation-model-reduction\|Balanced Truncation Model Reduction]] | Hankel-singular-value-ranked state truncation turning offline-trained FIR controllers into low-order IIR (SOS) filters for real-time ANC DSP. | 2026-11-08 |
 | [[concepts/sub-band-full-band-architecture\|Sub-Band and Full-Band Architecture]] | Two-step enhancement design: ERB sub-band gains (coarse envelope) + full-band deep filtering (fine suppression) in separate encoder-decoder sets — 40.3 MMACs/s BC-aided SE | 2026-11-08 |
+| [[concepts/pseudo-qmf-bank\|Pseudo-QMF Bank]] | M-channel cosine-modulated near-perfect-reconstruction filter bank used as a subband front-end for neural enhancement. | 2026-11-08 |
+| [[concepts/deep-iterative-attention-fusion\|Deep Iterative Attention Fusion (DIAF)]] | DBMIF's early fusion module: parameter-free sum refined by K rounds of channel attention conditioned on the evolving fusion. | 2026-11-08 |
+| [[concepts/cross-branch-gated-interaction\|Cross-Branch Gated Interaction (CBGI)]] | Bidirectional gating between AC, BC and fusion encoder branches; the largest single ablation contributor in DBMIF. | 2026-11-08 |
+| [[concepts/deep-balanced-interaction\|Deep Balanced Interaction (DBI)]] | Weight-tied fixed-point bottleneck that iteratively rebalances modality states and selects the most stable iterate. | 2026-11-08 |
+| [[concepts/modality-dominance\|Modality Dominance]] | Multimodal fusion failure where the easier (noise-immune) modality monopolises shared parameters and collapses the representation. | 2026-11-08 |
+| [[concepts/multi-scale-discriminator\|Multi-Scale Discriminator]] | Adversarial critic ensemble at multiple temporal resolutions; DBMIF adds dilated critics on PQMF subbands. | 2026-11-08 |
 

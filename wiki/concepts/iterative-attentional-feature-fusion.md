@@ -5,6 +5,7 @@ updated: 2026-11-08
 sources:
   - wiki/sources/kuang-2024-lightweight-speech-enhancement-bone-air.md
   - wiki/sources/kuang-2025-low-complexity-bc-speech-enhancement.md
+  - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
 tags:
   - feature-fusion
   - multi-modal
@@ -67,8 +68,11 @@ iAFF alleviates the "bottleneck of low-quality initial fusion" that can occur in
 - [[concepts/densely-gated-convolutional-attention-network|DenGCAN]]
 - [[concepts/attention-gate|Attention Gate (AG)]]
 - [[concepts/complex-ratio-mask|Complex Ratio Mask (cRM)]]
+- [[concepts/deep-iterative-attention-fusion|Deep Iterative Attention Fusion (DIAF)]] — the iterative-attention sibling: same soft-selection spirit, but iterated over the evolving fused estimate
+- [[concepts/cross-branch-gated-interaction|Cross-Branch Gated Interaction (CBGI)]] — stream-level bidirectional alternative
 
 ## Related Sources
 
+- [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — DIAF replaces iAFF with $K=3$ rounds of channel attention at the front end, learning frequency-selective AC/BC weights
 - [[sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]
 - [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement Leveraging Sub-Band and Full-Band Architecture]] — three-point early + intermediate iAFF placement; dominates cross attention on both cost and quality

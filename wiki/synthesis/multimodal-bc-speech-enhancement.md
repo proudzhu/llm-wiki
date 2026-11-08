@@ -17,6 +17,7 @@ sources:
   - wiki/sources/ohlenbusch-2026-pas-se.md
   - wiki/sources/zhang-2025-mbenet.md
   - wiki/sources/kuang-2025-low-complexity-bc-speech-enhancement.md
+  - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
   - zotero://select/items/0_B92ER5KS (Khanagha 2026: Conditional Diffusion)
   - zotero://select/items/0_NIIDMA7J (Contrastive Learning for BC)
 tags:
@@ -30,6 +31,8 @@ tags:
   - sensor-failure-robustness
   - quality-aware-fusion
   - target-speaker-extraction
+  - modality-balance
+  - gan
 ---
 
 # Multimodal Smart Hearables: Bone-Conduction Aided Speech Enhancement
@@ -155,6 +158,18 @@ Shifts from predicting clean speech to **generating** it using BC signals as gui
   - **RTF insight**: sConformer bottleneck parallelizes far better than GTCRN's DPRNN at equal MACs (RTF 0.159 vs. 0.446 on ARM), at the cost of Q/K cache memory — the params/MACs-vs-wall-clock lesson recurring in the multi-modal setting (§3.2)
   - **Fusion finding**: iAFF beats cross attention on *both* cost and quality (40.26 vs. 44.21 MMACs; wb-PESQ 2.396 vs. 2.337)
 
+### 2.12 Iterative Rebalancing: Attacking Modality Dominance (2026)
+
+- **[[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. (Applied Intelligence 2026) — DBMIF]]**: The first entry in this lineage to attack **[[concepts/modality-dominance|modality dominance]]** as a first-class training problem rather than as a sensor-failure or quality-variation issue. Their diagnosis: at low training SNR the AC channel's clean target is nearly unlearnable, so the noise-immune BC branch produces the larger immediate loss reduction, its gradients dominate the shared fusion stream, and the representation collapses onto the spectrally impoverished modality — after which single-stage fusion has no mechanism left to re-introduce the AC information. The response is a coarse-to-fine chain of three balancing mechanisms plus a frequency axis to balance along:
+  - **[[concepts/pseudo-qmf-bank|PQMF]] front-end** — 4 subbands ($L = 64$ prototype) for both modalities, so fusion weights can be frequency-selective. Verified: the learned weight is low in the lowest subband (pitch anchored on BC) and high in the upper subbands (AC supplies bandwidth), with the mid band the most dynamic.
+  - **[[concepts/deep-iterative-attention-fusion|DIAF]]** (early) — parameter-free sum initialisation refined by $K{=}3$ rounds of channel attention that condition on the evolving fusion, so the gate is not stuck with its first, noise-driven estimate; mean $w^{(3)}$ rises monotonically with SNR.
+  - **[[concepts/cross-branch-gated-interaction|CBGI]]** (every encoder scale) — bidirectional sigmoid gating: fusion→branch modulation plus branch→fusion feedback, closing the loop so dominance is renegotiated throughout the network. Largest ablation contributor (~6–7 absolute CER on both ASR backends); a standard GMU performed worse in preliminary experiments.
+  - **[[concepts/deep-balanced-interaction|DBI]]** (bottleneck) — weight-tied fixed-point iteration over three modality states with a best-equilibrium selection rule ($k^\star = \arg\min \delta_k$, $K_{\max}{=}50$, median $k^\star{=}5$), refining the balance at zero parameter cost.
+  - **Subband-aware adversarial supervision** — a full-band [[concepts/multi-scale-discriminator|discriminator]] plus three dilated critics on the same PQMF subbands, in the MelGAN feature-matching tradition ($\lambda = 1000$); DBMIF reports **no explicit reconstruction loss**, unlike every discriminative system in §2.1–2.11.
+  - **Key result**: best of nine systems on all five objective metrics — SI-SDR 12.42 dB, PESQ 2.70, STOI 0.90, ESTOI 0.85, DNSMOS 3.35 — and CER 15.84%/12.07% (Whisper/WeNet) vs. 19.46%/14.50% for DC-CRN, i.e. ≥2.5% absolute CER reduction. Ablation of branch count isolates the mechanism: single-branch (early fusion, shared encoder–decoder) SI-SDR 0.86 dB at −15 dB vs. 7.15 dB dual-branch vs. 9.27 dB three-branch — the payoff from keeping modalities separate grows exactly where dominance would bite.
+  - **Where it sits vs. the rest of this synthesis**: the same corpus (100-speaker ABCS) and the same baselines (DenGCAN, DC-CRN, MMINet, FCN, EBEN) as earlier entries, so its numbers are directly comparable — it beats DenGCAN by +1.67 dB SI-SDR and +0.72 PESQ at ~9× DenGCAN's parameter footprint class (DBMIF reports no params/MACs, a real gap). Unlike the quality-aware (§2.8) and sensor-failure (§3.4) strands, DBMIF assumes both sensors are healthy and instead fixes the *optimisation* imbalance; unlike the generative strand (§2.6), it is GAN-trained but not a generative *model* in the diffusion sense — it is a time-domain enhancer with an adversarial loss.
+  - **Limitations**: non-causal and computationally heavy (authors' own statement), no params/MACs/RTF reported, single Mandarin corpus, no sensor-failure handling, and no hallucination falsification test despite the purely adversarial objective.
+
 ---
 
 ## 3. Core Technical Challenges
@@ -177,6 +192,10 @@ Parallel AC-BC data is difficult to collect. **Semi-supervised frameworks** (usi
 
 When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC microphone clipping), naïvely-fused models suffer catastrophic performance drops. The **Special Training** strategy from Liu 2025 (random per-channel dropout during training) is the first principled solution, enabling graceful degradation. See [[concepts/sensor-failure-robust-fusion|Sensor-Failure Robust Multi-Modal Fusion]].
 
+### 3.5 Optimisation Imbalance (Distinct from Sensor Failure)
+
+§3.4 concerns a modality that *stops working*. A subtler and more pervasive problem is a modality that works but is *too easy*: at low SNR, BC's noise immunity means it alone reduces the loss, so its gradients crowd out the AC branch and the fused representation collapses toward BC's muffled spectrum. This is orthogonal to sensor health — both sensors can be perfectly good while the fusion is effectively unimodal — and it is invisible in aggregate metrics, showing up only as an unexplained ceiling on high-frequency quality. Wu et al. 2026 name it [[concepts/modality-dominance|modality dominance]] and treat it with iterative rebalancing (§2.12); the diagnostic signature is an *asymmetric* ablation in which removing the difficult modality barely changes performance, and a fusion weight that saturates at one extreme. Quality-aware fusion (§2.8) and quality-aware gating are complementary — they detect *bad* inputs, whereas dominance correction detects *good but over-weighted* ones.
+
 ---
 
 ## 4. Key Performance Benchmarks
@@ -194,6 +213,7 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 | **BCDM (Khanagha)** | 2026 | — | **High** | Extreme noise (-10 dB SNR) |
 | **QuaSE (Han)** | 2026 | — | +9.35% PESQ | Quality-varying in-ear modality |
 | **PAS-SE (Ohlenbusch)** | 2026 | 3.2M | 8.34 dB SI-SDR (V, cross-dataset) | Interferer suppression; cross-device generalization; enrollment as third clue |
+| **DBMIF (Wu)** | 2026 | — | 12.42 dB SI-SDR / 2.70 PESQ, CER 15.84% | Modality-dominance correction via iterative fusion (DIAF/CBGI/DBI); GAN-trained, non-causal |
 
 ---
 
@@ -212,6 +232,12 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 - [[concepts/dprnn|DPRNN]]
 - [[concepts/mbenet|MBENet]]
 - [[concepts/target-speaker-extraction|Target Speaker Extraction]]
+- [[concepts/modality-dominance|Modality Dominance]]
+- [[concepts/deep-iterative-attention-fusion|Deep Iterative Attention Fusion (DIAF)]]
+- [[concepts/cross-branch-gated-interaction|Cross-Branch Gated Interaction (CBGI)]]
+- [[concepts/deep-balanced-interaction|Deep Balanced Interaction (DBI)]]
+- [[concepts/pseudo-qmf-bank|Pseudo-QMF Bank]]
+- [[concepts/multi-scale-discriminator|Multi-Scale Discriminator]]
 
 ## Related Sources
 
@@ -229,6 +255,7 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 - [[sources/ohlenbusch-2026-pas-se|Ohlenbusch, Kegler & Stamenovic 2026: PAS-SE]] — enrollment as third clue; in-ear enrollment robustness (§2.9)
 - [[sources/zhang-2025-mbenet|Zhang, Feng, Liu, Zhang & Li 2025: MBENet]] — first BC-AC fusion TSE; BC bandwidth extension as auxiliary task (§2.10, §3.1, §4)
 - [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement Leveraging Sub-Band and Full-Band Architecture]] — band-compression efficiency meets BC fusion (§2.11, §4)
+- [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — iterative rebalancing against modality dominance (§2.12, §4)
 
 ## Related Synthesis
 

@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-10-24
+updated: 2026-11-08
 sources:
   - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
   - raw/papers/westhausen-2022-tplcnet/full-text.md
+  - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -67,9 +68,11 @@ The [[concepts/frequency-domain-loss|frequency domain loss for time-domain netwo
 - [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
 - [[concepts/deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
 - [[concepts/target-speaker-extraction|Target Speaker Extraction]]
+- [[concepts/pseudo-qmf-bank|Pseudo-QMF Bank]] — the subband time-domain front-end used by DBMIF
 
 ## Related Sources
 
+- [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — waveform-domain AC/BC fusion operating in 4 PQMF subbands, GAN-trained, 12.42 dB SI-SDR / 2.70 PESQ
 - [[sources/pandey-2019-cnn-speech-enhancement-time-domain|Pandey & Wang 2019: CNN-Based Speech Enhancement in the Time Domain]]
 - [[sources/wang-2021-magnitude-phase-compensation|Wang, Wichern & Le Roux 2021: On the Compensation Between Magnitude and Phase in Speech Separation]] — why time-domain models evaluated with PESQ/STOI/WER should include a magnitude loss
 - [[sources/westhausen-2022-tplcnet|Westhausen & Meyer 2022: tPLCnet — Real-Time Deep Packet Loss Concealment in the Time Domain]] — time-domain PLC whose training-loss ablation again shows TF-domain losses beating waveform MAE (PLC-MOS 3.90 vs. 3.30)

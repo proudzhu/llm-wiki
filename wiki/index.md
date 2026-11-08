@@ -716,6 +716,13 @@
 | [[entities/chong-rui-huang\|Chong-Rui Huang]] | Postdoctoral researcher (CYCU, Taiwan); ANC, DSP, real-time implementation; first author of the integrated ANC+hear-through AES. | 2026-11-08 |
 | [[entities/cheng-yuan-chang\|Cheng-Yuan Chang]] | Distinguished Professor (CYCU, Taiwan); signal processing applications and ANC system design. | 2026-11-08 |
 | [[entities/mou-wang\|Mou Wang]] | Researcher, Institute of Acoustics CAS — multi-modal bone-conducted speech enhancement (time-domain involution network 2022; sub-band/full-band architecture 2025) | 2026-11-08 |
+| [[entities/yilei-wu\|Yilei Wu]] | First author of DBMIF — three-branch iterative AC/BC fusion with DIAF, CBGI and a parameter-shared DBI bottleneck. | 2026-11-08 |
+| [[entities/changyan-zheng\|Changyan Zheng]] | Co-author of DBMIF; works on bone-conducted and throat-microphone speech enhancement with deep recurrent/attention models. | 2026-11-08 |
+| [[entities/xingyu-zhang\|Xingyu Zhang]] | Co-author of DBMIF; multimodal speech interfaces (audio/visual/EMG) and bone-conducted speech restoration. | 2026-11-08 |
+| [[entities/yakun-zhang\|Yakun Zhang]] | Co-author of DBMIF; multimodal speech processing and deep generative models for audio. | 2026-11-08 |
+| [[entities/shuang-yang\|Shuang Yang]] | Co-author of DBMIF; multimodal air/bone-conduction fusion for speech enhancement. | 2026-11-08 |
+| [[entities/ye-yan\|Ye Yan]] | Co-author of DBMIF; multimodal speech and audio processing, deep learning architectures for SE. | 2026-11-08 |
+| [[entities/erwei-yin\|Erwei Yin]] | Corresponding author of DBMIF; multimodal human–machine interaction, speech enhancement/recognition, BCIs. | 2026-11-08 |
 
 ---
 
@@ -1370,6 +1377,12 @@
 | [[concepts/hear-through-frequency-band-allocation\|Hear-Through Frequency-Band Allocation]] | Dividing the spectrum between ANC and HT branches anchored to measured passive isolation: ANC below ~500 Hz, HT 500 Hz-4 kHz, no compensation above. | 2026-11-08 |
 | [[concepts/balanced-truncation-model-reduction\|Balanced Truncation Model Reduction]] | Hankel-singular-value-ranked state truncation turning offline-trained FIR controllers into low-order IIR (SOS) filters for real-time ANC DSP. | 2026-11-08 |
 | [[concepts/sub-band-full-band-architecture\|Sub-Band and Full-Band Architecture]] | Two-step enhancement design: ERB sub-band gains (coarse envelope) + full-band deep filtering (fine suppression) in separate encoder-decoder sets — 40.3 MMACs/s BC-aided SE | 2026-11-08 |
+| [[concepts/pseudo-qmf-bank\|Pseudo-QMF Bank]] | M-channel cosine-modulated near-perfect-reconstruction filter bank used as a subband front-end for neural enhancement. | 2026-11-08 |
+| [[concepts/deep-iterative-attention-fusion\|Deep Iterative Attention Fusion (DIAF)]] | DBMIF's early fusion module: parameter-free sum refined by K rounds of channel attention conditioned on the evolving fusion. | 2026-11-08 |
+| [[concepts/cross-branch-gated-interaction\|Cross-Branch Gated Interaction (CBGI)]] | Bidirectional gating between AC, BC and fusion encoder branches; the largest single ablation contributor in DBMIF. | 2026-11-08 |
+| [[concepts/deep-balanced-interaction\|Deep Balanced Interaction (DBI)]] | Weight-tied fixed-point bottleneck that iteratively rebalances modality states and selects the most stable iterate. | 2026-11-08 |
+| [[concepts/modality-dominance\|Modality Dominance]] | Multimodal fusion failure where the easier (noise-immune) modality monopolises shared parameters and collapses the representation. | 2026-11-08 |
+| [[concepts/multi-scale-discriminator\|Multi-Scale Discriminator]] | Adversarial critic ensemble at multiple temporal resolutions; DBMIF adds dilated critics on PQMF subbands. | 2026-11-08 |
 
 ---
 
@@ -1669,6 +1682,7 @@
 | [[sources/laroche-2026-lisenet-embedded\|Laroche & Olsson 2026]] | This paper redesigns LiSenNet — a 37k-parameter sub-band dual-path speech enhancer — for deployment on the STM32N6 microcontroller's Neural-ART NPU, showing that parameter and MAC counts do not predict deployed efficiency on restricted accelerators. | 2026-11-07 |
 | [[sources/huang-2026-integrated-anc-hear-through\|Huang, Chang & Kuo 2026]] | This paper proposes an acoustic equalization system (AES) for in-ear headphones that integrates feedforward ANC and hear-through (HT) within a single control framework via frequency-band allocation, instead of treating them as mutually exclusive operating modes. | 2026-11-08 |
 | [[sources/kuang-2025-low-complexity-bc-speech-enhancement\|Kuang, Yang, Wang & Yang 2025]] | This paper presents a low-complexity bone-conduction-aided speech enhancement model that jointly utilizes sub-band and full-band features of BC and AC speech via a two-step (coarse-then-fine) enhancement procedure: first estimating ERB sub-band gains to enhance the spectral envelope of noisy AC speech, then estimating deep-filtering coefficients to suppress residual noise at fine spectral resolution. | 2026-11-08 |
+| [[sources/wu-2026-dbmif-multimodal-fusion\|Wu, Zheng, Zhang, Zhang, Zheng, Yang, Yan & Yin 2026]] | DBMIF is a three-branch, time-domain BC-aided speech enhancement framework that attacks one specific failure mode of AC/BC fusion: modality dominance. | 2026-11-08 |
 
 ---
 
@@ -1727,10 +1741,10 @@
 
 ## Statistics
 
-- **Total pages**: 1676
-- **Entities**: 706
-- **Concepts**: 645
-- **Sources**: 290
+- **Total pages**: 1690
+- **Entities**: 713
+- **Concepts**: 651
+- **Sources**: 291
 - **Synthesis**: 25
 - **Queries**: 10
 - **Last updated**: 2026-11-08

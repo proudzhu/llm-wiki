@@ -5,6 +5,7 @@ updated: 2026-11-08
 sources:
   - wiki/sources/kuang-2024-lightweight-speech-enhancement-bone-air.md
   - wiki/sources/kuang-2025-low-complexity-bc-speech-enhancement.md
+  - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
 tags:
   - attention
   - deep-learning
@@ -65,9 +66,12 @@ $$
 - [[concepts/densely-gated-convolutional-attention-network|DenGCAN]]
 - [[concepts/iterative-attentional-feature-fusion|Iterative Attentional Feature Fusion (iAFF)]]
 - [[concepts/dynamic-convolution|Dynamic Convolution]]
+- [[concepts/cross-branch-gated-interaction|Cross-Branch Gated Interaction (CBGI)]] — bidirectional gating between parallel branches rather than within skip connections
+- [[concepts/deep-iterative-attention-fusion|Deep Iterative Attention Fusion (DIAF)]] — channel attention iterated over a fusion estimate
 
 ## Related Sources
 
+- [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — sigmoid gating applied bidirectionally between AC, BC and fusion streams (CBGI), the largest ablation contributor
 - [[sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]]
 - [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement]] — AG skips retained in the ERB branch; PWConv skips in the full-band branch
 - [[sources/zhao-2026-halo-half-frame-rate-adaptive-operator|Zhao et al. 2026: HALO — Gated dynamic convolution for adaptive frame-rate reduction]]

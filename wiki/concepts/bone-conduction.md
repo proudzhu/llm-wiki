@@ -10,6 +10,7 @@ sources:
   - wiki/sources/zhang-2025-mbenet.md
   - wiki/sources/kuang-2025-low-complexity-bc-speech-enhancement.md
   - raw/papers/ohlenbusch-2026-pas-se/full-text.md
+  - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
 tags:
 - acoustics
 - audio-processing
@@ -79,6 +80,7 @@ Bone conduction filters out not only ambient noise but also other speakers' voic
 - [[concepts/mbenet|MBENet]]
 - [[concepts/target-speaker-extraction|Target Speaker Extraction]]
 - [[concepts/sub-band-full-band-architecture|Sub-Band and Full-Band Architecture]]
+- [[concepts/modality-dominance|Modality Dominance]] — BC as the "easier" modality whose gradients can dominate AC in joint training
 
 ## Related Sources
 
@@ -92,3 +94,4 @@ Bone conduction filters out not only ambient noise but also other speakers' voic
 - [[sources/ohlenbusch-2026-pas-se|Ohlenbusch, Kegler & Stamenovic 2026: PAS-SE]] — in-ear microphone as auxiliary sensor; in-ear enrollment robustness
 - [[sources/zhang-2025-mbenet|Zhang, Feng, Liu, Zhang & Li 2025: MBENet]] — BC-AC fusion extended from speech enhancement to target speaker extraction
 - [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement]] — band-compression efficiency brought to bone-air fusion (§10)
+- [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — modality dominance and three iterative-balancing countermeasures; GAN-trained on 4 PQMF subbands

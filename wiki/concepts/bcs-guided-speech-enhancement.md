@@ -10,6 +10,7 @@ sources:
   - wiki/sources/wang-2022-fusing-bc-ac-complex-domain-se.md
   - wiki/sources/zhang-2025-mbenet.md
   - wiki/sources/kuang-2025-low-complexity-bc-speech-enhancement.md
+  - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
 tags:
   - speech-enhancement
   - bone-conduction
@@ -101,6 +102,10 @@ Practical wearables suffer intermittent BC sensor invalidity (loose contact, jaw
 
 For the *continuous* distortion case (wind-corrupted but present BCS), Heitkaemper et al. 2025 take an inference-time route: VAD-based detection of uninformative BCS with hard bypass of the enhancer, rather than training-time robustness.
 
+### Modality dominance as a fusion-level failure
+
+A third robustness dimension appears in Wu et al. 2026: even when both sensors are healthy, fusion can collapse onto a single modality because at low SNR the BC branch is the *easier* optimisation target and its gradients dominate the shared stream. Their DBMIF framework counters this with three stages of [[concepts/modality-dominance|modality balancing]] — iterative channel-attention fusion ([[concepts/deep-iterative-attention-fusion|DIAF]]), bidirectional cross-branch gating ([[concepts/cross-branch-gated-interaction|CBGI]]), and a weight-tied equilibrium bottleneck ([[concepts/deep-balanced-interaction|DBI]]) — reaching 12.42 dB SI-SDR / 2.70 PESQ on the 100-speaker ABCS corpus against DenGCAN (10.75 / 1.98) and DC-CRN (10.18 / 2.62), with downstream CER of 15.84% (Whisper) and 12.07% (WeNet). Unlike the video-domain BCS-guided systems above, DBMIF is time-domain, GAN-trained, and operates on 4 [[concepts/pseudo-qmf-bank|PQMF]] subbands, so its fusion weights can be frequency-selective (BC for the lowest band, AC for the upper bands).
+
 ## Related Concepts
 
 - [[concepts/bone-conduction|Bone Conduction]]
@@ -117,6 +122,11 @@ For the *continuous* distortion case (wind-corrupted but present BCS), Heitkaemp
 - [[concepts/sensor-failure-robust-fusion|Sensor-Failure Robust Multi-Modal Fusion]]
 - [[concepts/mbenet|MBENet]]
 - [[concepts/target-speaker-extraction|Target Speaker Extraction]]
+- [[concepts/modality-dominance|Modality Dominance]]
+- [[concepts/deep-iterative-attention-fusion|Deep Iterative Attention Fusion (DIAF)]]
+- [[concepts/cross-branch-gated-interaction|Cross-Branch Gated Interaction (CBGI)]]
+- [[concepts/deep-balanced-interaction|Deep Balanced Interaction (DBI)]]
+- [[concepts/pseudo-qmf-bank|Pseudo-QMF Bank]]
 - [[concepts/sub-band-full-band-architecture|Sub-Band and Full-Band Architecture]]
 
 ## Related Sources
@@ -130,3 +140,4 @@ For the *continuous* distortion case (wind-corrupted but present BCS), Heitkaemp
 - [[sources/liu-2025-robust-fusion-bc-ac-attention|Liu, Chen & Yin 2025: Robust BC/AC Fusion with ATFA]]
 - [[sources/zhang-2025-mbenet|Zhang, Feng, Liu, Zhang & Li 2025: MBENet]] — BCS-guided fusion applied to target speaker extraction with bandwidth extension as auxiliary task
 - [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement Leveraging Sub-Band and Full-Band Architecture]] — 40.3 MMACs/s two-step (ERB gains + deep filtering) design; GTCRN-AC ablation isolating the BC benefit
+- [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — three-branch iterative fusion against modality dominance; 12.42 dB SI-SDR / 2.70 PESQ, lowest ASR CER among nine systems

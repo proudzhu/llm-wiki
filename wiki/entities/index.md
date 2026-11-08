@@ -710,4 +710,11 @@
 | [[entities/chong-rui-huang\|Chong-Rui Huang]] | Postdoctoral researcher (CYCU, Taiwan); ANC, DSP, real-time implementation; first author of the integrated ANC+hear-through AES. | 2026-11-08 |
 | [[entities/cheng-yuan-chang\|Cheng-Yuan Chang]] | Distinguished Professor (CYCU, Taiwan); signal processing applications and ANC system design. | 2026-11-08 |
 | [[entities/mou-wang\|Mou Wang]] | Researcher, Institute of Acoustics CAS — multi-modal bone-conducted speech enhancement (time-domain involution network 2022; sub-band/full-band architecture 2025) | 2026-11-08 |
+| [[entities/yilei-wu\|Yilei Wu]] | First author of DBMIF — three-branch iterative AC/BC fusion with DIAF, CBGI and a parameter-shared DBI bottleneck. | 2026-11-08 |
+| [[entities/changyan-zheng\|Changyan Zheng]] | Co-author of DBMIF; works on bone-conducted and throat-microphone speech enhancement with deep recurrent/attention models. | 2026-11-08 |
+| [[entities/xingyu-zhang\|Xingyu Zhang]] | Co-author of DBMIF; multimodal speech interfaces (audio/visual/EMG) and bone-conducted speech restoration. | 2026-11-08 |
+| [[entities/yakun-zhang\|Yakun Zhang]] | Co-author of DBMIF; multimodal speech processing and deep generative models for audio. | 2026-11-08 |
+| [[entities/shuang-yang\|Shuang Yang]] | Co-author of DBMIF; multimodal air/bone-conduction fusion for speech enhancement. | 2026-11-08 |
+| [[entities/ye-yan\|Ye Yan]] | Co-author of DBMIF; multimodal speech and audio processing, deep learning architectures for SE. | 2026-11-08 |
+| [[entities/erwei-yin\|Erwei Yin]] | Corresponding author of DBMIF; multimodal human–machine interaction, speech enhancement/recognition, BCIs. | 2026-11-08 |
 

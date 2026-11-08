@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-19
-updated: 2026-09-19
+updated: 2026-11-08
 sources:
   - raw/papers/pan-2025-data-driven-acoustics/full-text.md
+  - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
 tags:
   - loss-function
   - speech-enhancement
@@ -54,4 +55,5 @@ Minimizing SI-SDR loss is therefore **equivalent to maximizing the correlation c
 
 ## Related Sources
 
+- [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — SI-SDR as the headline quality metric (12.42 dB for AC/BC fusion at −15…5 dB)
 - [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — derives the SI-SDR–correlation-coefficient equivalence in Section 7.2.3

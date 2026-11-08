@@ -6,6 +6,7 @@ sources:
   - raw/papers/shetu-2026-generative-discriminative-comparison/full-text.md
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
   - raw/papers/ohlenbusch-2026-pas-se/full-text.md
+  - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
 tags:
   - dataset
   - challenge
@@ -40,3 +41,4 @@ The fifth DNS Challenge noise set was used by [[sources/ohlenbusch-2026-pas-se|O
 - [[sources/shetu-2026-generative-discriminative-comparison|Shetu, Habets & Brendel 2026: Generative vs. Discriminative SE]] — ~1000-h DNS-derived high/low-SNR training sets and non-reverb test set for the 14-model paradigm comparison
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — DNS 2020 corpus + simulated 8-mic array for TinyGRU training
 - [[sources/ohlenbusch-2026-pas-se|Ohlenbusch, Kegler & Stamenovic 2026: PAS-SE]] — DNS-5 noise spatialized for the Oldenburg cross-dataset evaluation
+- [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — DNS Challenge noise as training interference for AC/BC enhancement; DNSMOS as the non-intrusive evaluation metric
