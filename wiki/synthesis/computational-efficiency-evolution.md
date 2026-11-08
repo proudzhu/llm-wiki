@@ -21,6 +21,7 @@ sources:
   - raw/papers/kim-2026-faster-enhancer/full-text.md
   - raw/papers/laroche-2026-lisenet-embedded/full-text.md
   - raw/papers/kuang-2025-low-complexity-bc-speech-enhancement/full-text.md
+  - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
 tags:
   - lightweight-speech-enhancement
   - computational-complexity
@@ -233,6 +234,12 @@ Three approaches currently define the Pareto frontier:
 
 **[[concepts/sub-band-full-band-architecture|Sub-band + full-band architecture (Kuang et al. 2025)]]** extends the band-compression efficiency lineage (PercepNet → DeepFilterNet → GTCRN → CoFi-Lite) into the **multi-modal (bone-air fusion) setting** — previously the exclusive domain of full-resolution fusion models (DC-CRN, DenGCAN). The two-step design (32 full-range ERB sub-band gains for coarse envelope correction + full-band $N{=}3$ deep filtering for fine suppression, each with its own encoder-decoder set) reaches **40.3 MMACs/s with the best wb-PESQ (2.396 mid-SNR) among bone-air-adapted GTCRN, DeepFilterNet, DC-CRN, and DenGCAN** — the 231.3K-param model beats its own group's DenGCAN at 1/4 the MACs. Two measurements sharpen the axes above: (i) at near-identical MACs (40.3 vs. 42.8 M), the sConformer bottleneck runs **RTF 0.159 vs. GTCRN's 0.446 on ARM** — a 2.8× wall-clock gap invisible to MAC counts, echoing FastEnhancer's memory-operations lesson (axis 8) on the multi-modal side, at the cost of Q/K attention-cache memory (the state-computation-memory triangle of axes 7/10); (ii) a matched-complexity **GTCRN-AC ablation isolates the sensor contribution: +0.61 wb-PESQ at [−15,−9] dB** from adding the BC modality — the clearest quantification yet that modality choice can dominate architectural micro-optimization at very low SNR.
 
+### 5.3a The Counter-Example: Quality Bought With Compute (DBMIF, 2026)
+
+[[sources/wu-2026-dbmif-multimodal-fusion|DBMIF (Wu et al. 2026)]] is the deliberate **opposite end** of the same multi-modal lineage: it spends compute rather than compressing the model. The paper publishes no complexity figures, so the released code was run during ingest to measure it — **10.41 M generator params, 2.60 GMACs/s (2,599 M conv MACs per second of 16 kHz audio), RTF 0.085 on CPU**, from a 4-PQMF-band three-branch encoder-decoder with a deep-equilibrium bottleneck. Composition: encoder blocks 38.1%, decoder 28.6%, encoder fusions 19.1%, decoder fusions 6.4%, bridges 4.8%, latent DEQ 2.5%.
+
+Read against §5.3, the contrast is the useful datum: DBMIF costs **~64× Kuang 2025's MACs** (2.60 G vs. 40.3 M) and **~3000× DenGCAN's** (0.859 G) for +1.67 dB SI-SDR / +0.72 PESQ over DenGCAN, and it is not causal. This is a clean statement of the *shape* of the multi-modal Pareto frontier: the quality frontier of BC-fusion sits at multi-GMAC/s cost, while the efficiency frontier sits at tens of MMACs/s with a quality ceiling near wb-PESQ 2.4 — a **~65× compute gap** with no entry in between. It also illustrates why "the model uses a cheap subband front-end" does not imply a cheap model: DBMIF's PQMF bank is 256 frozen parameters and ~0 MACs, yet the CNN that consumes its 4 bands dominates. Two further cost lessons transfer to the audit of any published complexity claim: (i) a weight-tied DEQ bottleneck can hit its **full 50-iteration budget on every frame** when its internal convergence epsilon is unreachable — the released config does exactly this, so solver iterations, not convolutions, set latency; (ii) 6,342 instantiated parameters (`bridge_fusions[3]`) are **never called** in the forward pass — dead weight invisible to `sum(p.numel())`, relevant when re-deriving a parameter count from source.
+
 ### 5.4 The Open Question
 
 **Can neural/learned ANC controllers match traditional algorithms at lower computational cost?**
@@ -325,6 +332,7 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 - [[sources/kim-2026-faster-enhancer|Kim 2026: faster-enhancer.c]] — introduces the ninth Pareto axis (runtime specialization + energy/duty-cycle): training-free int8 port at −0.006 PESQ, 3.3× over fp32 ONNX Runtime, racing-vs-pacing protocol (4.2× cost, −49% energy), tier inversion across devices
 - [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — introduces the tenth Pareto axis (MCU-NPU operator compatibility): redesigns LiSenNet for the STM32N6 Neural-ART; int8 PESQ 3.01 at 4.83 ms/frame; ReLU6-bounded static PTQ (0.01 vs. 0.08 loss); stateful vs. stateless streaming quantified (200× MACs)
 - [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement]] — eleventh Pareto axis: multi-modal band compression (ERB sub-band gains + full-band deep filtering, 40.3 MMACs); sConformer vs. DPRNN RTF gap (0.159 vs. 0.446 ARM) at equal MACs
+- [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — the compute-heavy counter-example to §5.3: 10.41 M params / 2.60 GMACs/s / RTF 0.085 CPU, measured from the released code because the paper reports no complexity at all; ~64× Kuang 2025's MACs for the multi-modal quality frontier
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane, Chouteau, Poreba, Auzanneau, Szczepanski, Chersi & Serizel 2026: RT-Tango]]
 - [[sources/liu-2024-lightweight-dl-survey|Liu, Galindo, Xie, Wong, Shuai, Li & Cheng 2024: Lightweight Deep Learning for Resource-Constrained Environments]]
 

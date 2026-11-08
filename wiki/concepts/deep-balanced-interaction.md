@@ -41,6 +41,8 @@ with $K_{\max} = 50$. Batch and temporal dimensions are merged so each frame is 
 
 The empirical stopping distribution on the ABCS test set (DBMIF Fig. 10) has median $k^\star = 5$ and mean 6.89, i.e. roughly 7% of the $K_{\max}$ budget — the 50-iteration cap is a safeguard, not a typical cost. Because $\mathcal{F}$ is weight-tied, the *parameter* cost is one update map regardless of how many iterations run; the *compute* cost is proportional to $k^\star$, which is the standard deep-equilibrium trade (memory and parameters vs. inference time).
 
+**Verification caveat**: running the released code on speech-like input, the Broyden solver hits the full `fthresh = 50` iterations on essentially every frame (the internal `eps=1e-5` relative-change criterion is not met before the threshold) — 51 one-step evaluations per forward pass across three trials. So the paper's "median $k^\star = 5$" is **not reproduced** by the shipped configuration. This matters for inference cost: the solver, not the convolutions, becomes the latency driver when it always runs to the cap.
+
 ## Why "Balanced"
 
 The module targets [[concepts/modality-dominance|modality dominance]] from a different angle than gating. Gating changes how much of each modality reaches the fusion stream; DBI instead lets each modality's *state* be refined in the presence of the other, repeatedly, so that the representation that leaves the bottleneck is one where both modalities have had the chance to correct each other — a fixed point of mutual correction rather than a weighted average.

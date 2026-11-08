@@ -30,7 +30,9 @@ $$
 \mathrm{x}^{(k)} = \mathrm{w}^{(k)} \odot \mathrm{x}_a^{(0)} + \left(1-\mathrm{w}^{(k)}\right) \odot \mathrm{x}_b^{(0)}
 $$
 
-$\mathrm{w}^{(k)} \in \mathbb{R}^C$ is produced by global average pooling followed by a sigmoid, so each element is interpreted as the per-channel **confidence in the air-conducted (AC) modality**; $1-\mathrm{w}^{(k)}$ weights the bone-conducted (BC) modality. The final quality-aware fusion embedding is $\mathbf{x}_f^{(0)} = \mathbf{x}^{(K)}$; DBMIF uses $K = 3$.
+$\mathrm{w}^{(k)} \in \mathbb{R}^C$ is produced by a channel-attention module (local $1\times1$-conv branch plus a global-average-pooled branch, both BatchNorm'd) and is described in the paper as a sigmoid output, so each element is interpreted as the per-channel **confidence in the air-conducted (AC) modality**; $1-\mathrm{w}^{(k)}$ weights the bone-conducted (BC) modality. The final quality-aware fusion embedding is $\mathbf{x}_f^{(0)} = \mathbf{x}^{(K)}$; DBMIF uses $K = 3$.
+
+**Verification caveat**: the released code (`module/model/module/fusion/ChannelAttention.py`) sets `self.sigmoid = nn.Tanh()`, not a sigmoid. Empirically $\alpha$ spans roughly $[-0.93, +0.61]$, so the blend is affine rather than convex and a negative $w$ *subtracts* AC rather than merely de-emphasising it. The qualitative story (AC reliance grows with SNR; low subbands lean BC, high subbands lean AC) survives, but the "confidence in [0,1]" calibration claim does not. See [[sources/wu-2026-dbmif-multimodal-fusion#Code Verification|the source page's code verification]].
 
 ## Why Iterate
 

@@ -40,14 +40,14 @@ $$
 \hat{\mathrm{y}}[n] = \sum_{m=0}^{M-1}(\hat{\mathrm{s}}_m * g_m)[n]
 $$
 
-The prototype is typically a Kaiser-windowed sinc; DBMIF uses $M = 4$, $L = 64$, following EBEN (Hauret et al. 2023). "Pseudo" refers to the near-perfect-reconstruction approximation (Nguyen 1994) — aliasing between adjacent bands is cancelled by the analysis/synthesis pair rather than by ideal brick-wall filters.
+The prototype is typically a Kaiser-windowed sinc; DBMIF uses $M = 4$ with prototype length $L = 32$ in the released code (its method section states $L = 64$ — the code was verified against the paper during ingest; see [[sources/wu-2026-dbmif-multimodal-fusion#Code Verification|the DBMIF code verification]]). "Pseudo" refers to the near-perfect-reconstruction approximation (Nguyen 1994) — aliasing between adjacent bands is cancelled by the analysis/synthesis pair rather than by ideal brick-wall filters.
 
 ## Why Use It in a Neural Enhancer
 
 | Property | Consequence |
 |:---------|:------------|
 | Fixed, non-learned, linear-phase-ish decomposition | No adaptation cost; the network cannot "cheat" by re-learning a transform |
-| 4 bands ⇒ 4× temporal downsampling per band at matched total sample count | Each band is a shorter, lower-rate sequence — cheaper temporal modelling (the same logic as [[concepts/sub-band-full-band-architecture|sub-band architecture]]) |
+| 4 bands ⇒ 4× temporal downsampling per band at matched total sample count | Each band is a shorter, lower-rate sequence — cheaper temporal modelling at the *front end* (but with a 4-band CNN encoder-decoder the total MACs can still be several GMACs; see the DBMIF measurement below) |
 | Explicit band identity | The fusion mechanism can apply a *different* modality weighting per band (see [[concepts/deep-iterative-attention-fusion|DIAF]]: BC-anchored lows, AC-anchored highs) |
 | Reusable at the discriminator | The same bank decomposes real and generated speech for a [[concepts/multi-scale-discriminator|subband discriminator]], so spectral supervision is aligned with the generator's own representation |
 
@@ -63,4 +63,4 @@ It is the subband alternative to the STFT-based T-F domain: time-domain at the s
 
 ## Related Sources
 
-- [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — 4-band PQMF front-end with per-band fusion weights and subband discriminators
+- [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — 4-band PQMF front-end with per-band fusion weights and subband discriminators; released code measured at 10.41 M generator params / 2.60 GMACs/s, so the bank is cheap but does not make the *network* cheap

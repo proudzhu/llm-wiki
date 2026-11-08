@@ -26,7 +26,7 @@ tags:
 - **Year**: 2026 (received 9 Nov 2025, accepted 6 Feb 2026, published online 18 Mar 2026)
 - **Type**: Journal Article
 - **DOI**: [10.1007/s10489-026-07150-z](https://doi.org/10.1007/s10489-026-07150-z)
-- **Code**: [github.com/wyl516w/dbmif](https://github.com/wyl516w/dbmif)
+- **Code**: [github.com/wyl516w/dbmif](https://github.com/wyl516w/dbmif) — released (MIT); independently run to measure the model and cross-check the method section, see *Code Verification*
 - **Zotero**: [Open in Zotero](zotero://select/items/0_9WT5XNQU)
 
 ## Summary
@@ -34,6 +34,8 @@ tags:
 DBMIF is a three-branch, [[concepts/time-domain-speech-enhancement|time-domain]] [[concepts/bcs-guided-speech-enhancement|BC-aided speech enhancement]] framework that attacks one specific failure mode of AC/BC fusion: **modality dominance**. Under extreme noise the AC branch carries little usable information, so the noise-robust BC branch produces the larger immediate gradient and effectively collapses the fused representation onto a single modality; DBMIF counteracts this with a coarse-to-fine chain of three balancing mechanisms — an early [[concepts/deep-iterative-attention-fusion|iterative channel-attention fusion]] (DIAF), a multi-scale three-branch encoder–decoder with [[concepts/cross-branch-gated-interaction|bidirectional cross-branch gating]] (CBGI) at every scale, and a parameter-shared [[concepts/deep-balanced-interaction|fixed-point equilibrium bottleneck]] (DBI).
 
 The system operates on 4 subbands of a [[concepts/pseudo-qmf-bank|PQMF]] analysis bank and is trained adversarially against a [[concepts/multi-scale-discriminator|multi-resolution discriminator]] set that scores the full-band waveform plus the same 4 subbands under three dilation factors. On the 100-speaker ABCS corpus it reaches SI-SDR 12.42 dB, PESQ 2.70, STOI 0.90, ESTOI 0.85, DNSMOS 3.35, and cuts downstream ASR CER to 15.84% (Whisper) / 12.07% (WeNet) — the best of nine systems — with an ablation showing the gating module is worth ~6% absolute CER on its own.
+
+The paper reports no complexity figures at all, so the released code was run during ingest to supply them: **10.41 M generator params, 2.60 GMACs/s, CPU RTF 0.085** — roughly 6× DenGCAN's parameters and 3000× its MACs, making DBMIF the most expensive system in the BC-fusion comparison. The same code check also contradicted several details of the published method (PQMF prototype length, gate nonlinearity, hidden $L_1$ loss terms); see *Code Verification*.
 
 ## Problem Formulation
 
@@ -144,10 +146,11 @@ All discriminator convolutions use weight normalisation and Leaky-ReLU ($\alpha 
 | Item | Value |
 |:-----|:------|
 | Input | 1-second synchronised AC and BC waveform segments, 16 kHz, noise injected into the **AC channel only** |
-| Domain | Time domain (4 PQMF subbands, $M=4$, $L=64$) |
+| Domain | Time domain (4 PQMF subbands, $M=4$; prototype length $L=32$ in the released code) |
 | Output | Enhanced full-band waveform (PQMF-synthesised) |
-| Losses | Hinge adversarial + feature matching ($\lambda = 1000$) |
+| Losses | Hinge adversarial + feature matching ($\lambda = 1000$) + two $L_1$ reconstruction terms (code; see Code Verification) |
 | Training data | ABCS corpus (Wang et al. 2022): 100 speakers, 47,182 utterances, 42 h, 16 kHz |
+| **Size (measured from released code)** | **10.41 M generator params, 2.60 GMACs/s, CPU RTF 0.085** — see *Code Verification* |
 
 ### Training Losses
 
@@ -175,7 +178,7 @@ $$
 L_G = L_G^{\mathrm{adv}} + \lambda L_G^{\mathrm{fm}}, \qquad \lambda = 1000
 $$
 
-Notes: no explicit spectral or waveform reconstruction loss is reported — structural fidelity rests entirely on the discriminator stack plus feature matching, in the MelGAN tradition, with the subband discriminators supplying the fine spectral supervision that full-band discriminators under-provide. Generator and discriminator are updated **alternately** (not jointly in a single backward pass).
+Notes: the paper reports **no explicit spectral or waveform reconstruction loss** — structural fidelity would then rest entirely on the discriminator stack plus feature matching, in the MelGAN tradition, with the subband discriminators supplying the fine spectral supervision that full-band discriminators under-provide. Generator and discriminator are updated **alternately** (not jointly in a single backward pass). **The released code disagrees**: its generator loss adds two unmentioned $L_1$ terms, $0.1\,\mathcal{L}_1(\hat{\mathrm{y}}, \mathrm{y}) + 0.1\,\mathcal{L}_1(\hat{\mathrm{S}}, \mathrm{S})$ (waveform + PQMF subbands) — see *Code Verification* below.
 
 ## Experimental Setup
 
@@ -277,6 +280,48 @@ The gap between single- and dual-branch widens as SNR drops (3.9 dB at +5 dB →
 ![[raw/papers/wu-2026-dbmif-multimodal-fusion/figures/d2ebb53c06e07217056d79f593f6fbefb5046a51993c3825117a20f56b2b980d.jpg|DBI iteration CDF]]
 *Figure 10b: CDF of the DBI stopping iteration $k^\star$ (median 5, mean 6.89) against the $K_{\max}=50$ budget.*
 
+## Code Verification
+
+The authors release the model at [github.com/wyl516w/dbmif](https://github.com/wyl516w/dbmif) (MIT licence, single commit 2026-04-22) — the paper itself cites it but publishes **no parameter count, MACs, or RTF**. Instantiating the released `TriGenerator` with the shipped `config/model_config/DBMIF.yaml` on CPU (torch 2.15+cpu, float32) gives the numbers below. **This section fills the efficiency gap the paper leaves, and records where code and text diverge.**
+
+### Measured configuration
+
+| Quantity | Value |
+|:---------|:------|
+| Generator parameters | **10.41 M** (10,408,888) — 64 K prototype + non-trainable PQMF excluded |
+| Conv multiply-accumulates | **2.60 GMACs/s** (2,599 M conv MACs for 1 s at 16 kHz) |
+| CPU wall-clock | RTF **0.085** (255 ms per 3 s utterance, single-threaded CPU, excl. ASR) |
+| Discriminator parameters | 28.52 M (training only; not needed at inference) |
+| Bottleneck frame rate | **62.5 Hz** (16 kHz ÷ M=4 ÷ strides 2·4·8) |
+| Dead (instantiated, never called) | 6,342 params in `bridge_fusions[3]` |
+
+MACs by module: encoder blocks 38.1%, decoder blocks 28.6%, encoder fusions 19.1%, decoder fusions 6.4%, bridges 4.8%, latent 2.5%, first fusion 0.5%. The efficiency context is stark: **DBMIF is ~6.3× DenGCAN's parameters (1.03 M) and ~3000× its MACs (0.859 GMACs/s)**, and ~40000× the MACs of Kuang 2025's sub-band/full-band design (40.3 MMACs/s at 256 K params) — consistent with the authors' own admission that the model is non-causal and far from real-time, but far larger than the BC-fusion literature's embedded-device line would suggest.
+
+### Where code and paper diverge
+
+| # | Item | Paper says | Code says |
+|:--|:-----|:-----------|:----------|
+| 1 | **PQMF prototype length** | "prototype filter of length $L = 64$" (both §3.1 and Table prose) | `n: 32` in `DBMIF.yaml`; `PseudoQMFBanks(decimation=4, kernel_size=32)` ⇒ $L=32$ |
+| 2 | **Reconstruction loss** | Eq. 19 is $L_G = L_G^{\mathrm{adv}} + \lambda L_G^{\mathrm{fm}}$ only — "no spectral or waveform loss" | `gen_loss = adv + 1000*ftr + 0.1*L1(waveform) + 0.1*L1(PQMF bands)` — **two unmentioned $L_1$ terms** |
+| 3 | **DIAF gate nonlinearity** | "constrained to [0,1] via a **sigmoid** nonlinearity following global average pooling" | `ChannelAttentionModule.sigmoid = nn.Tanh()` — **tanh**, so $\alpha\in[-1,1]$ and the "confidence" reading of $w^{(k)}$ breaks (a negative $w$ means the blend *subtracts* AC) |
+| 4 | **DIAF attention inputs** | Eq. 10–11: mask from **global average pooling** on the previous fusion | `ChannelAttentionModule` = local conv branch **+** global (GAP) branch, with BatchNorm; also includes a local-conv path the paper does not describe |
+| 5 | **DBI stopping rule** | Eq. 15: select $k^\star = \arg\min_k \delta_k$ (best equilibrium within budget) | Broyden solver tracks `lowest_xest` internally — same *spirit* — but the paper's explicit $\delta_k$ / $K_{\max}$ framing is a description of solver bookkeeping, not separate code |
+| 6 | **DBI iteration budget** | $K_{\max} = 50$; median $k^\star=5$, mean 6.89 | `fthresh: 50`, `bthresh: 49` — but Broyden hits the **full 50 iterations on every frame** in our tests (threshold reached, `eps=1e-5` not met) — so the "median 5" figure is not reproduced by the released config |
+| 7 | **DIAF iteration count** | $K = 3$ | `initial_times: 3` → `DeepIterativeAttentionalFeatureFusion` with 3 CAMs ✔ |
+| 8 | **pa (AC bands fed to net)** | Not specified in text | `pa: 4`, `pb: 4` — both modalities contribute all 4 bands |
+| 9 | **Discriminator Leaky-ReLU slope** | $\alpha = 0.1$ | `nn.LeakyReLU(0.2)` in both `DiscriminatorDBMIF` and `DiscriminatorMelGAN` |
+| 10 | **Batch size** | "batch size of 32" | `bs_train: 2` in `default_data.yaml` (+ 4 GPUs implied by `ratio: 2`/DDP config) — effective batch is 8, not 32, unless gradient accumulation was enabled (it is commented out in the trainer config) |
+| 11 | **Epochs** | 100 | `max_epochs: 100` ✔, but the resume checkpoint is `epoch=99-step=249000` — 249 K steps at effective batch 8 implies ~2000 steps/epoch, consistent with the 47 K-utterance corpus |
+
+### What this means for the wiki's claims
+
+- The **efficiency axis** of the BC-fusion comparison (synthesis §4 "Key Performance Benchmarks") can now be filled for DBMIF: 10.41 M params / 2.60 GMACs / RTF 0.085. It is the **largest and most expensive** system in that table by a wide margin — a deliberate quality-over-cost trade, and directly at odds with the embedded-device framing that dominates the Kuang/Han/Heitkaemper entries.
+- The **no-reconstruction-loss claim** (which I previously recorded as a hallucination risk) is **wrong per the code**: the released model does use $L_1$ on both waveform and subbands, at weight 0.1 each. The hallucination concern is therefore much weaker than the paper's Eq. 19 implies — the generator is anchored to the reference waveform.
+- The **DIAF "confidence in [0,1]"** interpretation — including the frequency-dependent reading in §5.2.3 and my own concept page — is only valid if the code used sigmoid. It uses **tanh**, so the visualised $w^{(3)}$ can be negative and the $w$-vs-SNR narrative holds only up to sign; the qualitative conclusion (AC reliance grows with SNR) survives, the calibration claim does not.
+- The **$L = 64$ vs $L = 32$ prototype** discrepancy is small in effect (both satisfy `kernel_size % (4*decimation) == 0`) but is a factual error in the published method section.
+
+Caveat on this whole section: these are measurements of **one released configuration**, not of the exact paper run. The authors may have trained with a different YAML (the repo also ships `DenGCAN`, `DCCRN`, `FCN`, `MMINet`, `GaGNet`, `EBEN`, `Conformer` configs for the baselines, so the shipped DBMIF config may or may not be the camera-ready one), and no checkpoint is included to verify the reported metrics.
+
 ## Key Contributions
 
 1. **Three-branch multi-scale interactive encoder–decoder** for AC/BC fusion — separate AC and BC branches plus a dedicated fusion branch at widths {32, 64, 128, 256}, preserving cross-scale feature consistency while keeping modality-specific representations alive; measured to beat single-branch (early fusion) and dual-branch (cross-gated, no fusion stream) designs across SNR and noise type.
@@ -288,11 +333,12 @@ The gap between single- and dual-branch widens as SNR drops (3.9 dB at +5 dB →
 
 ## Limitations
 
-- **Non-causal and computationally heavy** — the authors state plainly that the architecture is not causal and its complexity blocks real-time deployment; no parameter count, MACs, or RTF is reported anywhere in the paper, so the cost side of the comparison is unquantified (a notable gap given that BC-aided enhancement increasingly competes on embedded-device efficiency).
+- **Non-causal and computationally heavy** — the authors state plainly that the architecture is not causal and its complexity blocks real-time deployment. The paper itself reports no parameter count, MACs, or RTF; the released code measures **10.41 M generator params, 2.60 GMACs/s, CPU RTF 0.085** — ~6× DenGCAN's parameters and ~3000× its MACs, and ~40000× the MACs of Kuang 2025's embedded-oriented design. Real-time on a mobile SoC is out of reach without a substantial redesign; see *Code Verification*.
+- **Paper/code discrepancies** — the released implementation differs from the published method in several verified ways: PQMF prototype length 32 (paper: 64), two unmentioned $L_1$ reconstruction terms in the generator loss, **tanh** (not sigmoid) DIAF gates (so $w\in[-1,1]$ and the "confidence" calibration reading does not hold), Leaky-ReLU slope 0.2 (paper: 0.1), and a training batch size of 2 per device with no gradient accumulation (paper: 32). None of these invalidate the architectural argument, but the method section cannot be relied on for re-implementation detail.
 - **Intelligibility gap remains** at ultra-low SNR; residual noise is deliberately retained in exchange for high-frequency naturalness (the EBEN-at-−15 dB-babble tie is the visible symptom).
 - **Single corpus, single language** — all training and evaluation use the 100-speaker Mandarin ABCS corpus with simulated noise; no real-device BC recordings, no cross-lingual or cross-device validation.
 - **No sensor-failure handling** — no modality dropout or validity gating, unlike Liu 2025's random channel dropout or Heitkaemper 2025's VAD bypass, so behaviour when the BC contact degrades is untested.
-- **GAN-trained without an explicit reconstruction loss** — the paper documents no spectral/waveform $L_1$/$L_2$ term, which makes hallucination risk at low SNR an open question (the spectrograms look faithful, but no falsification metric such as an ASR-consistency check is reported).
+- **GAN-trained with a hidden reconstruction anchor** — the paper documents no spectral/waveform $L_1$/$L_2$ term (Eq. 19 is adversarial + feature-matching only), which would make hallucination risk at low SNR an open question. The released code contradicts this: it adds $0.1\,\mathcal{L}_1$ on the waveform and $0.1\,\mathcal{L}_1$ on the PQMF subbands, which anchors the generator to the reference. The hallucination concern is therefore much weaker than the text implies — but the paper should be read as under-reporting its objective.
 - **DBI's batching compromise**: merging batch and time dimensions makes each frame independent during the equilibrium solve, which discards temporal context inside the solver (context is instead provided by the surrounding CNN encoder/decoder).
 
 ## Related Concepts
