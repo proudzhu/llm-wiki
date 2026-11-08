@@ -4,6 +4,7 @@ created: 2026-11-08
 updated: 2026-11-08
 sources:
   - raw/papers/kuang-2025-low-complexity-bc-speech-enhancement/full-text.md
+  - raw/papers/wang-2025-multi-modal-deep-filtering-bc/full-text.md
 tags:
   - speech-enhancement
   - bone-conduction
@@ -47,6 +48,17 @@ This is the architectural inversion of GTCRN-family band merging: rather than on
 - ERB gains alone suppress broadband noise but under-suppress harmonic noise (siren, ringing) due to band resolution; deep filtering removes the residual.
 - Deep filtering beats a full-band cRM (N=1) on all metrics at slightly higher complexity.
 
+## Frequency-Range Split vs. Granularity Split (Wang et al. 2025)
+
+A coarser cousin of this architecture appears in [[sources/wang-2025-multi-modal-deep-filtering-bc|Wang, Kuang, Li, Yang, Bai & Liu 2025]]'s **MDFNet**, from the same research group. Instead of splitting by *granularity* (32 ERB bands vs. full band, both covering the whole spectrum), MDFNet splits by *frequency range*:
+
+- **High band** — ERB-band gains applied to the **noisy AC spectrum only**, since BC has essentially no high-frequency content to contribute.
+- **Low band** — [[concepts/multi-modal-deep-filtering|multi-modal deep filtering]] at full resolution over both AC and BC complex spectra, where the BC structure is intact.
+
+So the coarse stage covers the range where BC is useless and the fine stage covers the range where BC is informative — the two design axes are orthogonal but motivated by the same physical asymmetry of bone conduction. MDFNet is a single shared encoder with two offline decoders (ERB-gain and deep-filtering) rather than the two encoder-decoder sets above, and uses frequency-only depthwise convolutions ($1\times3$ depthwise + $1\times1$ pointwise, 64 channels).
+
+Two caveats on comparability: MDFNet reports no parameter count, MACs, or RTF even though it is likewise motivated by embedded deployment; and its numeric band split and DF order are unstated. Its results are on ABCS (PESQ 3.21 / STOI 0.79 / CER 24.8%) rather than A4BS, so they cannot be placed directly against the table above.
+
 ## Relation to Other Dual-Granularity Designs
 
 | Design | Granularity split | Mechanism |
@@ -55,6 +67,8 @@ This is the architectural inversion of GTCRN-family band merging: rather than on
 | [[concepts/cofi-lite\|CoFi-Lite]] (Yang et al. 2026) | Full-band envelope (×16) vs. low-freq detail (<2 kHz, ×2) | Two parallel paths, both predict IRMs, coarse mask full-band then fine mask low-freq |
 | GTCRN band merging | Low (uncompressed) vs. high (ERB-compressed) | Single path over merged spectrum |
 | DeepFilterNet (Schröter et al. 2022) | ERB gains + full-band DF, one shared encoder | Sequential ERB gain then DF, single backbone |
+
+| **Frequency-range split (MDFNet, Wang 2025)** | Low band (full-resolution DF over AC+BC) vs. high band (ERB gains on AC only) | Single encoder + two offline decoders; split frequency unstated |
 
 CoFi-Lite and this architecture both split coarse/fine duties for lightweight monaural/bone-air SE, but CoFi-Lite splits by *frequency range* (envelope vs. low-freq detail), while Kuang et al. split by *spectral granularity* (32-band envelope vs. full-band deep filtering). DeepFilterNet is the closest prior — ERB gains followed by deep filtering from a single shared encoder — with Kuang et al. showing the two-set separation plus iAFF BC/AC fusion beats GTCRN-style merging at lower MACs in the bone-air setting.
 
@@ -67,9 +81,11 @@ CoFi-Lite and this architecture both split coarse/fine duties for lightweight mo
 - [[concepts/gtcrn|GTCRN]]
 - [[concepts/cofi-lite|CoFi-Lite]]
 - [[concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]]
+- [[concepts/multi-modal-deep-filtering|Multi-Modal Deep Filtering]]
 
 ## Related Sources
 
 - [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement Leveraging Sub-Band and Full-Band Architecture]] — introduces the architecture
 - [[sources/schroter-2022-deepfilternet|Schröter et al. 2022: DeepFilterNet]] — prior ERB-gain + deep-filtering cascade with a shared encoder
 - [[sources/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement|Yang et al. 2026: CoFi-Lite]] — parallel dual-granularity (frequency-range) design in monaural SE
+- [[sources/wang-2025-multi-modal-deep-filtering-bc|Wang, Kuang, Li, Yang, Bai & Liu 2025: Multi-Modal Deep-Filtering-Based Speech Enhancement via BC Speech]] — frequency-range variant from the same group; no complexity figures reported

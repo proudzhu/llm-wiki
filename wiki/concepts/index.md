@@ -655,4 +655,5 @@
 | [[concepts/deep-balanced-interaction\|Deep Balanced Interaction (DBI)]] | Weight-tied fixed-point bottleneck that iteratively rebalances modality states and selects the most stable iterate. | 2026-11-08 |
 | [[concepts/modality-dominance\|Modality Dominance]] | Multimodal fusion failure where the easier (noise-immune) modality monopolises shared parameters and collapses the representation. | 2026-11-08 |
 | [[concepts/multi-scale-discriminator\|Multi-Scale Discriminator]] | Adversarial critic ensemble at multiple temporal resolutions; DBMIF adds dilated critics on PQMF subbands. | 2026-11-08 |
+| [[concepts/multi-modal-deep-filtering\|Multi-Modal Deep Filtering]] | Deep filtering with a separate complex coefficient set per input modality, so fusion happens inside the filter rather than in a feature space | 2026-11-08 |
 

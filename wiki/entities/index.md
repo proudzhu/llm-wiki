@@ -717,4 +717,7 @@
 | [[entities/shuang-yang\|Shuang Yang]] | Co-author of DBMIF; multimodal air/bone-conduction fusion for speech enhancement. | 2026-11-08 |
 | [[entities/ye-yan\|Ye Yan]] | Co-author of DBMIF; multimodal speech and audio processing, deep learning architectures for SE. | 2026-11-08 |
 | [[entities/erwei-yin\|Erwei Yin]] | Corresponding author of DBMIF; multimodal human–machine interaction, speech enhancement/recognition, BCIs. | 2026-11-08 |
+| [[entities/zhuo-li\|Zhuo Li]] | OPPO / CAS researcher; co-author of MDFNet multi-modal deep-filtering speech enhancement (ICSPCC 2025) | 2026-11-08 |
+| [[entities/jisheng-bai\|Jisheng Bai]] | Xi'an University of Posts and Telecommunications researcher; co-author of MDFNet (ICSPCC 2025) | 2026-11-08 |
+| [[entities/xin-liu\|Xin Liu]] | OPPO researcher; co-author of MDFNet multi-modal deep-filtering speech enhancement (ICSPCC 2025) | 2026-11-08 |
 

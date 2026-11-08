@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-06-07
-updated: 2026-09-15
+updated: 2026-11-08
 sources:
   - raw/papers/zhang-2021-adl-mvdr/full-text.md
   - raw/papers/li-2026-realtime-music-separation-dsp/full-text.md
   - raw/papers/kuang-2025-low-complexity-bc-speech-enhancement/full-text.md
+  - raw/papers/wang-2025-multi-modal-deep-filtering-bc/full-text.md
 tags:
   - speech-enhancement
   - signal-processing
@@ -62,6 +63,14 @@ where $C$ are the complex coefficients of filter order $N$, $X$ is the input spe
 
 [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025]] use causal $N{=}3$ deep filtering as the fine stage of a [[concepts/sub-band-full-band-architecture|sub-band + full-band architecture]] for bone-conduction-aided enhancement, applied to the ERB-gain-enhanced AC spectrogram. Their ablation isolates DF vs. a full-band complex ratio mask (cRM, $N{=}1$ substitution) in the same system: DF wins on all metrics at slightly higher complexity (40.3 vs. 39.6 MMACs/s; wb-PESQ 2.396 vs. 2.322 in the mid-SNR range on the A4BS corpus). Removing DF entirely collapses quality to near-noisy levels (wb-PESQ 1.219 mid-range) — evidence that fine-grained full-band filtering, not just the coarse ERB envelope correction, carries most of the enhancement. Their spectrogram analysis shows ERB gains alone suppress broadband noise but leave harmonic noise (siren, ringing) residual, which DF removes.
 
+## Multi-Modal Extension (Wang et al. 2025)
+
+[[sources/wang-2025-multi-modal-deep-filtering-bc|Wang, Kuang, Li, Yang, Bai & Liu 2025]] extend DF to more than one input spectrum: their **MDFNet** predicts a separate coefficient set per modality, $\hat{\mathbf{S}} = \sum_j \mathbf{c}^a(j)\mathbf{X}^a(k-j) + \sum_j \mathbf{c}^b(j)\mathbf{X}^b(k-j)$, so the AC and BC contributions to the output are the filter taps themselves. This makes DF a fusion operator, not just a mask replacement — see [[concepts/multi-modal-deep-filtering|Multi-Modal Deep Filtering]].
+
+Two design details differ from the DeepFilterNet recipe above. First, DF is applied **only to the low-frequency band**; the high band is handled by ERB gains on the noisy AC spectrum alone, justified by BC carrying essentially no high-frequency energy. Second, the DF-nets are **two separate offline decoders** (one for the ERB gains, one for the filtering coefficients) rather than DF-net variants of a shared bottleneck, with skip connections from the raw complex-domain input features because BC's low-frequency structure is preserved. Their single-modal ablation isolates the DF + BC combination: AC-DFNet (DF on noisy AC only) scores PESQ 2.37 / CER 57.0%, versus 3.21 / 24.8% when the BC spectrum enters the same filter.
+
+The losses are inherited from DeepFilterNet, with two departures worth noting: the compression exponent is $\varepsilon = 0.3$ (not 0.6 in that paper's notation), and the DF-activation loss $\mathcal{L}_\alpha$ is dropped entirely, replaced by a multi-resolution spectral loss over STFT windows `[128, 256, 512, 1024]`.
+
 ## Related Concepts
 
 - [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]]
@@ -72,6 +81,7 @@ where $C$ are the complex coefficients of filter order $N$, $X$ is the input spe
 - [[concepts/complex-ratio-mask|Complex Ratio Mask]] — pointwise 1×1 special case
 - [[concepts/sub-band-full-band-architecture|Sub-Band and Full-Band Architecture]] — Kuang et al. 2025 pair ERB gains with causal N=3 DF in separate encoder-decoder sets
 - [[concepts/adl-mvdr|ADL-MVDR]] — 2-D cRF used for frame-level covariance estimation in an all-deep-learning MVDR
+- [[concepts/multi-modal-deep-filtering|Multi-Modal Deep Filtering]] — DF with one coefficient set per input modality
 
 ## Related Sources
 
@@ -79,3 +89,4 @@ where $C$ are the complex coefficients of filter order $N$, $X$ is the input spe
 - [[sources/chen-2023-ultra-dual-path-compression|Chen et al. 2023: Ultra Dual-Path Compression]] — matches DeepFilterNet quality at 1/4 the parameters by combining time and frequency compression on a DPT-FSNet backbone
 - [[sources/zhang-2021-adl-mvdr|Zhang et al. 2021: ADL-MVDR]] — 2-D (time-frequency) cRF for multi-channel frame-level covariance estimation
 - [[sources/li-2026-realtime-music-separation-dsp|Li, Liu, Malsky & Yi 2026: Real-Time Music Source Separation on a Low-Power Audio DSP]] — first *causal, gated* use of DF; past/future tap split as an explicit algorithmic-latency knob (+0.38 dB even strictly causal)
+- [[sources/wang-2025-multi-modal-deep-filtering-bc|Wang, Kuang, Li, Yang, Bai & Liu 2025: Multi-Modal Deep-Filtering-Based Speech Enhancement via Bone-Conducted Speech]] — per-modality coefficient sets fuse BC and AC inside the filter; low-band-only DF with ERB-gain high band

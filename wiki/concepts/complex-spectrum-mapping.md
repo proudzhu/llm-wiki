@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-04-25
+updated: 2026-11-08
 sources:
+  - raw/papers/wang-2025-multi-modal-deep-filtering-bc/full-text.md
 tags:
   - signal-processing
   - audio-processing
@@ -56,9 +57,15 @@ By jointly estimating real and imaginary parts, CSM implicitly models both ampli
 | Computational cost | Lower | Higher (2× output channels) |
 | Speech enhancement | Adequate | Superior |
 
-## Related Concepts
+## Complex-Domain Deep Filtering as CSM (Wang et al. 2025)
 
+[[sources/wang-2025-multi-modal-deep-filtering-bc|Wang, Kuang, Li, Yang, Bai & Liu 2025]] provide an argument for CSM on **recognition** grounds rather than the perceptual grounds usually cited. Their MDFNet operates directly in the complex domain (high-band ERB gains plus low-band [[concepts/multi-modal-deep-filtering|multi-modal deep filtering]]), and although it trails the time-domain MTINet on PESQ/STOI/ESTOI (3.21/0.79/0.69 vs. 3.29/0.91/0.84), it beats it on ASR character error rate (24.8% vs. 27.3%). The authors' explanation: the time-domain model encodes and decodes the multi-modal waveform through convolutions, whereas the complex-domain model needs no feature learning or reconstruction and therefore "better preserves spectral details" — the spectral detail that an ASR front-end consumes even when perceptual metrics do not reward it.
+
+This is a useful counterweight to the general rule that time-domain and complex-domain systems track each other on quality metrics: the two targets can disagree, and CSM's advantage can be invisible in PESQ. Note also that the phase argument in "Why CSM Is Needed" above reappears here in a multi-modal form — at low SNR the noisy-AC phase is corrupted and the BC phase above the BC passband simply does not exist, so learned complex coefficients are the mechanism that sidesteps explicit phase estimation.
+
+## Related Concepts
 - [[convolutional-recurrent-network|Convolutional Recurrent Network]]
+- [[concepts/multi-modal-deep-filtering|Multi-Modal Deep Filtering]]
 - [[active-noise-control|Active Noise Control]]
 - [[speech-preserving-anc|Speech-Preserving ANC]]
 - [[deep-learning-for-signal-processing|Deep Learning for Signal Processing]]
@@ -78,3 +85,4 @@ By jointly estimating real and imaginary parts, CSM implicitly models both ampli
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys complex-spectrum DNNs (GCRN, DPCRN, Uformer, DCCRN) and the magnitude-phase "compensation effect" in RI-MSE loss
 - [[sources/liu-2021-igcrn|Liu & Zhang 2021: IGCRN]] — uses a [[concepts/mask-mapping-amplitude-prediction|mask + mapping + phase]] target rather than pure CSM, decomposing the prediction into amplitude mask, amplitude mapping, and normalized phase. The ablation (Table 3) shows this explicit decomposition outperforms direct complex spectral mapping (GCRN(CS)) at low SNR, because amplitude and phase are coupled in the complex spectrum and predicting them separately is more effective. IGCRN's successor ICCRN reverts to a pure CSM target with a weighted L1 RI+amplitude loss.
 - [[sources/liu-2023-iccrn|Liu & Zhang 2023: ICCRN]] — uses CSM with a weighted L1 RI+amplitude loss ($\alpha=2$ on amplitude); the estimated spectrum is inverted to time domain and re-transformed before the loss to enforce [[concepts/stft-consistency|STFT consistency]]. ICCRN reports that DCCRN(CSM) and DPCRN(CSM) outperform their magnitude-mask counterparts, consistent with the literature.
+- [[sources/wang-2025-multi-modal-deep-filtering-bc|Wang, Kuang, Li, Yang, Bai & Liu 2025: Multi-Modal Deep-Filtering-Based Speech Enhancement via BC Speech]] — complex-domain model wins on ASR CER (24.8% vs. 27.3%) while losing on PESQ/STOI to the time-domain baseline; spectral-detail preservation as a recognition-specific argument for CSM

@@ -723,6 +723,9 @@
 | [[entities/shuang-yang\|Shuang Yang]] | Co-author of DBMIF; multimodal air/bone-conduction fusion for speech enhancement. | 2026-11-08 |
 | [[entities/ye-yan\|Ye Yan]] | Co-author of DBMIF; multimodal speech and audio processing, deep learning architectures for SE. | 2026-11-08 |
 | [[entities/erwei-yin\|Erwei Yin]] | Corresponding author of DBMIF; multimodal human–machine interaction, speech enhancement/recognition, BCIs. | 2026-11-08 |
+| [[entities/zhuo-li\|Zhuo Li]] | OPPO / CAS researcher; co-author of MDFNet multi-modal deep-filtering speech enhancement (ICSPCC 2025) | 2026-11-08 |
+| [[entities/jisheng-bai\|Jisheng Bai]] | Xi'an University of Posts and Telecommunications researcher; co-author of MDFNet (ICSPCC 2025) | 2026-11-08 |
+| [[entities/xin-liu\|Xin Liu]] | OPPO researcher; co-author of MDFNet multi-modal deep-filtering speech enhancement (ICSPCC 2025) | 2026-11-08 |
 
 ---
 
@@ -1383,6 +1386,7 @@
 | [[concepts/deep-balanced-interaction\|Deep Balanced Interaction (DBI)]] | Weight-tied fixed-point bottleneck that iteratively rebalances modality states and selects the most stable iterate. | 2026-11-08 |
 | [[concepts/modality-dominance\|Modality Dominance]] | Multimodal fusion failure where the easier (noise-immune) modality monopolises shared parameters and collapses the representation. | 2026-11-08 |
 | [[concepts/multi-scale-discriminator\|Multi-Scale Discriminator]] | Adversarial critic ensemble at multiple temporal resolutions; DBMIF adds dilated critics on PQMF subbands. | 2026-11-08 |
+| [[concepts/multi-modal-deep-filtering\|Multi-Modal Deep Filtering]] | Deep filtering with a separate complex coefficient set per input modality, so fusion happens inside the filter rather than in a feature space | 2026-11-08 |
 
 ---
 
@@ -1683,6 +1687,7 @@
 | [[sources/huang-2026-integrated-anc-hear-through\|Huang, Chang & Kuo 2026]] | This paper proposes an acoustic equalization system (AES) for in-ear headphones that integrates feedforward ANC and hear-through (HT) within a single control framework via frequency-band allocation, instead of treating them as mutually exclusive operating modes. | 2026-11-08 |
 | [[sources/kuang-2025-low-complexity-bc-speech-enhancement\|Kuang, Yang, Wang & Yang 2025]] | This paper presents a low-complexity bone-conduction-aided speech enhancement model that jointly utilizes sub-band and full-band features of BC and AC speech via a two-step (coarse-then-fine) enhancement procedure: first estimating ERB sub-band gains to enhance the spectral envelope of noisy AC speech, then estimating deep-filtering coefficients to suppress residual noise at fine spectral resolution. | 2026-11-08 |
 | [[sources/wu-2026-dbmif-multimodal-fusion\|Wu, Zheng, Zhang, Zhang, Zheng, Yang, Yan & Yin 2026]] | DBMIF is a three-branch, time-domain BC-aided speech enhancement framework that attacks one specific failure mode of AC/BC fusion: modality dominance. | 2026-11-08 |
+| [[sources/wang-2025-multi-modal-deep-filtering-bc\|Wang, Kuang, Li, Yang, Bai & Liu 2025]] | This paper proposes MDFNet, a lightweight multi-modal deep-filtering network that jointly enhances synchronized bone-conducted (BC) and noisy air-conducted (AC) speech in the complex STFT domain. | 2026-11-08 |
 
 ---
 
@@ -1741,10 +1746,10 @@
 
 ## Statistics
 
-- **Total pages**: 1690
-- **Entities**: 713
-- **Concepts**: 651
-- **Sources**: 291
+- **Total pages**: 1695
+- **Entities**: 716
+- **Concepts**: 652
+- **Sources**: 292
 - **Synthesis**: 25
 - **Queries**: 10
 - **Last updated**: 2026-11-08

@@ -22,9 +22,11 @@ tags:
 - Contributor to the DenGCAN architecture and A4BS dataset
 - Corresponding author of "A low-complexity permutation alignment method for frequency-domain blind source separation" (Speech Communication 2019) — [[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019]]
 - Co-author of "Low-Complexity BC-Aided Speech Enhancement Leveraging Sub-Band and Full-Band Architecture" (Applied Acoustics 2025) — low-complexity BC-aided speech enhancement with sub-band ERB gains + full-band deep filtering, 40.3 MMACs/s — [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025]]
+- Co-author of "Multi-Modal Deep-Filtering-Based Speech Enhancement via Bone-Conducted Speech" (ICSPCC 2025) — Multi-modal deep-filtering network (MDFNet) fusing BC and AC speech inside the deep-filtering coefficients, with ERB-gain high-frequency branch and ASR-best CER at low SNR — [[sources/wang-2025-multi-modal-deep-filtering-bc|Wang, Kuang, Li, Yang, Bai & Liu 2025]]
 
 ## Related Sources
 
 - [[sources/kuang-2024-lightweight-speech-enhancement-bone-air|Kuang, Yang & Yang 2024: A Lightweight Speech Enhancement Network Fusing Bone- and Air-Conducted Speech]] — co-author
 - [[sources/kang-2019-low-complexity-permutation-alignment|Kang, Yang & Yang 2019: A Low-Complexity Permutation Alignment Method for Frequency-Domain BSS]] — corresponding author
 - [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement Leveraging Sub-Band and Full-Band Architecture]]
+- [[sources/wang-2025-multi-modal-deep-filtering-bc|Wang, Kuang, Li, Yang, Bai & Liu 2025: Multi-Modal Deep-Filtering-Based Speech Enhancement via Bone-Conducted Speech]]

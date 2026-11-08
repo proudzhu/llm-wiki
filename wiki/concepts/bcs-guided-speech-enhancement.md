@@ -11,6 +11,7 @@ sources:
   - wiki/sources/zhang-2025-mbenet.md
   - wiki/sources/kuang-2025-low-complexity-bc-speech-enhancement.md
   - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
+  - wiki/sources/wang-2025-multi-modal-deep-filtering-bc.md
 tags:
   - speech-enhancement
   - bone-conduction
@@ -88,9 +89,18 @@ The ICASSP 2025 paper validates the architecture on >5 h of real earbud recordin
 | **MBENet** (Zhang 2025) | Bandwidth-extended BC (CRN module, multi-task) | Shared-weight band-split (31 bands) + dual-axis LSTM | Complex mask on AC (TSE) |
 | **VibOmni** (He 2025) | IMU vibration upscaled (BCF aug.) | Dual-encoder DPRNN | Spectrogram |
 | **Whisphone** (Fukumoto 2025) | In-ear MEMS captures occlusion BC | Separate channel | Direct voice input |
+| **MDFNet** (Wang 2025) | Multi-modal deep filtering: separate coefficient sets $\mathbf{c}^a$, $\mathbf{c}^b$ for AC and BC spectra (low band); ERB gains on AC only (high band) | UNet-like encoder + grouped GRU, two offline decoders | Concatenated low-band filtered + high-band gained spectrum; PESQ 3.21, CER 24.8% |
 | **OVAD** (Masilamani 2024) | Accelerometer for speech detection | VAD only | Binary speech flag |
 
 Wang 2022's attention-based fusion (AFF) — an attention score soft-selecting between AC and BC features before concatenation — is an early precursor to the learned-fusion strategies in later work: Kuang 2024's [[concepts/iterative-attentional-feature-fusion|iAFF]] and Liu 2025's [[concepts/adaptive-time-frequency-attention|ATFA]]. Its ablation showed that fusion by simple addition loses single-modal information (−5.3% STOI), motivating the preserve-both-concatenate design that later architectures retain.
+
+## Fusion Inside the Filter (Wang et al. 2025)
+
+Every system in the table above fuses modalities in a *feature space* and then predicts a mask or filter. [[sources/wang-2025-multi-modal-deep-filtering-bc|Wang, Kuang, Li, Yang, Bai & Liu 2025]] break that pattern: their MDFNet adopts the [[concepts/multi-modal-deep-filtering|multi-modal deep filtering]] formulation $\hat{\mathbf{S}} = \sum_j \mathbf{c}^a(j)\mathbf{X}^a_a(k-j) + \sum_j \mathbf{c}^b(j)\mathbf{X}^b(k-j)$, so the AC and BC weighting is expressed *by* the complex filter coefficients rather than by a fusion module. The same parameter set degenerates to a single-modal system when $\mathbf{c}^b = 0$, which the authors exploit as their ablation: AC-DFNet scores PESQ 2.37 / STOI 0.69 / CER 57.0% versus 3.21 / 0.79 / 24.8% for MDFNet. Unlike DenGCAN or the Kuang 2025 sub-band/full-band model, there is no attention or gating block anywhere in the fusion path.
+
+A second structural departure is the **frequency-asymmetric fusion**: the high band uses ERB gains applied only to AC (BC has nothing there to fuse), while the low band filters both modalities at full resolution. The models above instead fuse across the whole band, even where BC contributes little.
+
+The trade-off shows in the results: on the same ABCS corpus, MDFNet beats the older time-domain MFCN decisively but trails the 3.79M-parameter MTINet on PESQ/STOI/ESTOI (3.21/0.79/0.69 vs. 3.29/0.91/0.84), while *winning* on ASR (24.8% vs. 27.3% CER). The paper attributes the ASR win to operating in the complex domain without convolutional feature learning or reconstruction, which preserves spectral detail. No parameter count, MACs, or RTF is reported, so the "lightweight" claim cannot be checked against the rest of this table.
 
 ## Robustness to Sensor Failure
 
@@ -128,6 +138,7 @@ A third robustness dimension appears in Wu et al. 2026: even when both sensors a
 - [[concepts/deep-balanced-interaction|Deep Balanced Interaction (DBI)]]
 - [[concepts/pseudo-qmf-bank|Pseudo-QMF Bank]]
 - [[concepts/sub-band-full-band-architecture|Sub-Band and Full-Band Architecture]]
+- [[concepts/multi-modal-deep-filtering|Multi-Modal Deep Filtering]]
 
 ## Related Sources
 
@@ -141,3 +152,4 @@ A third robustness dimension appears in Wu et al. 2026: even when both sensors a
 - [[sources/zhang-2025-mbenet|Zhang, Feng, Liu, Zhang & Li 2025: MBENet]] — BCS-guided fusion applied to target speaker extraction with bandwidth extension as auxiliary task
 - [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement Leveraging Sub-Band and Full-Band Architecture]] — 40.3 MMACs/s two-step (ERB gains + deep filtering) design; GTCRN-AC ablation isolating the BC benefit
 - [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — three-branch iterative fusion against modality dominance; 12.42 dB SI-SDR / 2.70 PESQ, lowest ASR CER among nine systems
+- [[sources/wang-2025-multi-modal-deep-filtering-bc|Wang, Kuang, Li, Yang, Bai & Liu 2025: Multi-Modal Deep-Filtering-Based Speech Enhancement via BC Speech]] — fusion expressed as per-modality deep-filtering coefficients; frequency-asymmetric (AC-only high band); best CER at 24.8%

@@ -18,6 +18,7 @@ sources:
   - wiki/sources/zhang-2025-mbenet.md
   - wiki/sources/kuang-2025-low-complexity-bc-speech-enhancement.md
   - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
+  - wiki/sources/wang-2025-multi-modal-deep-filtering-bc.md
   - zotero://select/items/0_B92ER5KS (Khanagha 2026: Conditional Diffusion)
   - zotero://select/items/0_NIIDMA7J (Contrastive Learning for BC)
 tags:
@@ -33,6 +34,7 @@ tags:
   - target-speaker-extraction
   - modality-balance
   - gan
+  - deep-filtering
 ---
 
 # Multimodal Smart Hearables: Bone-Conduction Aided Speech Enhancement
@@ -170,6 +172,15 @@ Shifts from predicting clean speech to **generating** it using BC signals as gui
   - **Where it sits vs. the rest of this synthesis**: the same corpus (100-speaker ABCS) and the same baselines (DenGCAN, DC-CRN, MMINet, FCN, EBEN) as earlier entries, so its numbers are directly comparable — it beats DenGCAN by +1.67 dB SI-SDR and +0.72 PESQ. DBMIF reports no params/MACs in the paper, but the released code measures **10.41 M generator params / 2.60 GMACs/s / RTF 0.085 (CPU)** — roughly **6× DenGCAN's parameters and 3000× its MACs**, and ~40000× the MACs of the Kuang 2025 band-compression design. It is therefore the *most expensive* entry in §4 by a wide margin and the clearest counter-example to the embedded-device framing that dominates the rest of this lineage: the quality lead is bought with ~3 GMACs/s, not with a smarter use of the same budget. Unlike the quality-aware (§2.8) and sensor-failure (§3.4) strands, DBMIF assumes both sensors are healthy and instead fixes the *optimisation* imbalance; unlike the generative strand (§2.6), it is GAN-trained but not a generative *model* in the diffusion sense — it is a time-domain enhancer with an adversarial loss **plus** (per the released code, though not the paper) two $L_1$ reconstruction anchors.
   - **Limitations**: non-causal and computationally heavy (authors' own statement, now quantified at 2.60 GMACs/s / RTF 0.085 CPU), single Mandarin corpus, no sensor-failure handling, and several paper-vs-code discrepancies (PQMF $L$=32 not 64; tanh not sigmoid gates; hidden $L_1$ reconstruction terms) that make the method section unreliable for re-implementation.
 
+### 2.13 Fusion Inside the Filter: MDFNet (2025)
+
+- **[[sources/wang-2025-multi-modal-deep-filtering-bc|Wang, Kuang, Li, Yang, Bai & Liu (ICSPCC 2025) — MDFNet]]**: the only entry in this lineage that puts fusion **inside the enhancement filter**. Rather than concatenating or attention-weighting BC and AC features and then predicting a mask, MDFNet adopts the [[concepts/multi-modal-deep-filtering|multi-modal deep filtering]] formulation $\hat{\mathbf{S}} = \sum_j \mathbf{c}^a(j)\mathbf{X}^a(k-j) + \sum_j \mathbf{c}^b(j)\mathbf{X}^b(k-j)$ — one complex coefficient set per modality per time-frequency bin — so the modality weighting is per-bin, per-tap, and SNR-adaptive by construction. Setting $\mathbf{c}^b = 0$ recovers single-modal AC enhancement, which the authors use as their ablation (AC-DFNet):
+  - **Fusion is frequency-asymmetric**, mirroring the physics rather than the architecture: the high band uses ERB-band gains applied to the noisy AC spectrum **only** (BC has nothing there), while the low band filters both modalities at full resolution. Every other system in §2.2–2.12 fuses across the whole band.
+  - **Key result**: PESQ 3.21 / STOI 0.79 / ESTOI 0.69 / CER 24.8% on ABCS (100 speakers, SNR ∈ [−15, 5] dB) vs. 2.37 / 0.69 / 0.54 / 57.0% for AC-DFNet — the largest single gain in that paper's table comes from adding BC inside the filter.
+  - **A metrics disagreement worth recording**: MDFNet loses to the time-domain MTINet on all three enhancement metrics (3.29 / 0.91 / 0.84) but **wins on ASR** (24.8% vs. 27.3% CER). The paper's explanation — complex-domain operation without convolutional feature learning or reconstruction preserves spectral detail the ASR front-end needs — is the clearest counter-example in this synthesis to treating PESQ as a proxy for downstream recognition (§4).
+  - **BC-only is not a substitute for AC**: BC speech alone scores PESQ 2.37 (matching DCCRN) but 88.0% CER. Perceptual metrics tolerate the band-limited spectrum that recognition cannot — the sharpest quantitative statement in this synthesis of why the BC channel must be complementary.
+  - **Limitations**: no parameter count, MACs, or RTF anywhere, despite the embedded-deployment framing; the band-split frequency, DF order, ERB band count, STFT parameters, and loss weights are all unstated, so the model is not re-implementable from the paper. Its ABCS numbers are also not directly comparable with the A4BS results of §2.11.
+
 ---
 
 ## 3. Core Technical Challenges
@@ -213,6 +224,7 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 | **BCDM (Khanagha)** | 2026 | — | **High** | Extreme noise (-10 dB SNR) |
 | **QuaSE (Han)** | 2026 | — | +9.35% PESQ | Quality-varying in-ear modality |
 | **PAS-SE (Ohlenbusch)** | 2026 | 3.2M | 8.34 dB SI-SDR (V, cross-dataset) | Interferer suppression; cross-device generalization; enrollment as third clue |
+| **MDFNet (Wang)** | 2025 | — | 3.21 PESQ / 24.8% CER (ABCS, pooled over 5 SNRs) | Lowest ASR CER against the time-domain MTINet (27.3%); fusion inside the deep-filter coefficients; no params/MACs reported |
 | **DBMIF (Wu)** | 2026 | **10.41M** | 12.42 dB SI-SDR / 2.70 PESQ, CER 15.84% | Modality-dominance correction via iterative fusion (DIAF/CBGI/DBI); GAN-trained, non-causal; 2.60 GMACs/s, RTF 0.085 CPU |
 
 ---
@@ -238,6 +250,7 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 - [[concepts/deep-balanced-interaction|Deep Balanced Interaction (DBI)]]
 - [[concepts/pseudo-qmf-bank|Pseudo-QMF Bank]]
 - [[concepts/multi-scale-discriminator|Multi-Scale Discriminator]]
+- [[concepts/multi-modal-deep-filtering|Multi-Modal Deep Filtering]]
 
 ## Related Sources
 
@@ -256,6 +269,7 @@ When one modality degrades or fails entirely (e.g., BC sensor contact loss, AC m
 - [[sources/zhang-2025-mbenet|Zhang, Feng, Liu, Zhang & Li 2025: MBENet]] — first BC-AC fusion TSE; BC bandwidth extension as auxiliary task (§2.10, §3.1, §4)
 - [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement Leveraging Sub-Band and Full-Band Architecture]] — band-compression efficiency meets BC fusion (§2.11, §4)
 - [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — iterative rebalancing against modality dominance (§2.12, §4)
+- [[sources/wang-2025-multi-modal-deep-filtering-bc|Wang, Kuang, Li, Yang, Bai & Liu 2025: MDFNet]] — fusion expressed as per-modality deep-filtering coefficients (§2.13); frequency-asymmetric AC-only high band; lowest CER (24.8%)
 
 ## Related Synthesis
 

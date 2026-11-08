@@ -11,6 +11,7 @@ sources:
   - wiki/sources/kuang-2025-low-complexity-bc-speech-enhancement.md
   - raw/papers/ohlenbusch-2026-pas-se/full-text.md
   - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
+  - wiki/sources/wang-2025-multi-modal-deep-filtering-bc.md
 tags:
 - acoustics
 - audio-processing
@@ -65,6 +66,12 @@ Bone conduction filters out not only ambient noise but also other speakers' voic
 
 [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025]] bring band-compression efficiency (previously monaural-only: PercepNet, DeepFilterNet, GTCRN) to the bone-air fusion setting: a [[concepts/sub-band-full-band-architecture|sub-band + full-band architecture]] estimates 32 ERB sub-band gains (coarse envelope) and full-band deep-filtering coefficients (fine suppression) from BC+AC input at 40.3 MMACs/s — the lowest among compared BC-aided models with the best wb-PESQ. A matched-complexity GTCRN-AC ablation shows the BC modality is worth +0.61 wb-PESQ at [−15,−9] dB SNR, and the band-compression design itself is validated against GTCRN-style high-frequency band merging (−0.146 wb-PESQ when merged).
 
+## 11. Fusion Inside the Filter (MDFNet)
+
+[[sources/wang-2025-multi-modal-deep-filtering-bc|Wang, Kuang, Li, Yang, Bai & Liu 2025]] take the opposite structural choice to every system above: instead of fusing BC/AC features and *then* predicting a mask, their MDFNet folds the two modalities into the taps of a single complex deep filter, $\hat{\mathbf{S}} = \sum_j \mathbf{c}^a(j)\mathbf{X}^a(k-j) + \sum_j \mathbf{c}^b(j)\mathbf{X}^b(k-j)$ (see [[concepts/multi-modal-deep-filtering|multi-modal deep filtering]]). The BC spectrum is used **only where it has content**: the low band is filtered at full resolution over both modalities, while the high band uses ERB-band gains applied to the noisy AC spectrum alone — a direct architectural encoding of the bandwidth fact that BC loses its middle and high frequencies.
+
+Two results from their ABCS experiments are worth recording here for the BC modality's role. First, adding BC to the identical filter is worth PESQ 2.37 → 3.21, STOI 0.69 → 0.79 and CER 57.0% → 24.8% (AC-DFNet vs. MDFNet). Second, **BC alone is not a substitute for AC**: BC-only speech scores a respectable PESQ 2.37 (matching DCCRN) but 88.0% CER — perceptual metrics tolerate the band-limited spectrum that recognition cannot. This is the sharpest quantitative statement in the wiki of why BC fusion is inherently complementary rather than competitive with the air-conducted channel.
+
 ## Related Concepts
 
 - [[concepts/ear-canal-occlusion-effect|Ear Canal Occlusion Effect]]
@@ -95,3 +102,4 @@ Bone conduction filters out not only ambient noise but also other speakers' voic
 - [[sources/zhang-2025-mbenet|Zhang, Feng, Liu, Zhang & Li 2025: MBENet]] — BC-AC fusion extended from speech enhancement to target speaker extraction
 - [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement]] — band-compression efficiency brought to bone-air fusion (§10)
 - [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — modality dominance and three iterative-balancing countermeasures; GAN-trained on 4 PQMF subbands
+- [[sources/wang-2025-multi-modal-deep-filtering-bc|Wang, Kuang, Li, Yang, Bai & Liu 2025: MDFNet]] — BC fused as a coefficient set of the deep filter (§11); BC-only CER 88.0% quantifies the bandwidth limitation

@@ -6411,3 +6411,29 @@ Answered from [[sources/li-2026-geometry-conditioned-ssanc|Li 2026 GC-SSF]] and 
 - **Index updated**: `wiki/index.md` and `wiki/synthesis/index.md` deep-speech-enhancement row rewritten (7 axes + dataflow walkthrough mention).
 - **No new pages**: a temporary `synthesis/single-channel-neural-denoising-architecture.md` was created first and then removed per user's merge instruction (untracked, never committed).
 - **Statistics**: unchanged (no page count change).
+
+---
+
+## [2026-11-08] ingest | Multi-modal deep-filtering-based speech enhancement via bone-conducted speech (Wang 2025)
+
+- **Source**: `raw/papers/wang-2025-multi-modal-deep-filtering-bc/full-text.md` (Zotero: YAXJXJ6B)
+- **Authors**: Mou Wang, Kelan Kuang, Zhuo Li, Feiran Yang, Jisheng Bai, Xin Liu
+- **Published**: ICSPCC 2025, DOI 10.1109/ICSPCC66825.2025.11194354
+- **Summary**: MDFNet — a lightweight frequency-split network that fuses synchronized BC and noisy AC speech by predicting a separate complex deep-filtering coefficient set per modality (low band) while applying ERB-band gains to the AC spectrum only (high band); best ASR CER (24.8%) among compared systems despite trailing the time-domain MTINet on PESQ/STOI.
+- **Pages created**:
+  - `wiki/sources/wang-2025-multi-modal-deep-filtering-bc.md`
+  - `wiki/concepts/multi-modal-deep-filtering.md`
+  - `wiki/entities/zhuo-li.md`
+  - `wiki/entities/jisheng-bai.md`
+  - `wiki/entities/xin-liu.md`
+- **Pages updated**:
+  - [[concepts/deep-filtering|Deep Filtering]] — new "Multi-Modal Extension (Wang et al. 2025)" section (per-modality taps, low-band-only DF, ε = 0.3, ℒ_α dropped)
+  - [[concepts/erb-scale|ERB Scale]] — new "Usage in Wang et al. 2025" section (high-band-only, AC-only gain)
+  - [[concepts/bcs-guided-speech-enhancement|BCS-Guided Speech Enhancement]] — MDFNet row in the comparison table + "Fusion Inside the Filter" section
+  - [[concepts/sub-band-full-band-architecture|Sub-Band and Full-Band Architecture]] — frequency-range-vs-granularity-split section + comparison-table row
+  - [[concepts/bone-conduction|Bone Conduction]] — §11 on MDFNet; BC-only CER 88.0% versus PESQ 2.37
+  - [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]] — ASR-vs-PESQ argument for complex-domain operation
+  - [[concepts/depthwise-separable-convolution|Depthwise Separable Convolution]] — frequency-only 1×3 depthwise variant
+  - [[concepts/grouped-recurrent-neural-network|Grouped RNN]] — grouped GRU + grouped FC (GFC) on a fused BC/AC stream
+  - [[synthesis/multimodal-bc-speech-enhancement|Multimodal Smart Hearables]] — new §2.13, §4 benchmark row, Related Sources entry
+  - [[entities/mou-wang|Mou Wang]], [[entities/kelan-kuang|Kelan Kuang]], [[entities/feiran-yang|Feiran Yang]] — Key Contributions + Related Sources bullets

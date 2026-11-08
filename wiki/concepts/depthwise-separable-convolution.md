@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-20
-updated: 2026-11-07
+updated: 2026-11-08
 sources:
   - raw/papers/kim-2021-broadcasted-residual-learning/full-text.md
   - raw/papers/li-2025-echofree-neural-aec/full-text.md
   - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
   - raw/papers/laroche-2026-lisenet-embedded/full-text.md
+  - raw/papers/wang-2025-multi-modal-deep-filtering-bc/full-text.md
 tags:
   - deep-learning
   - neural-networks
@@ -77,6 +78,12 @@ For a standard $3 \times 3$ kernel ($D_k = 3$) and large $C_{out}$, this yields 
 
 ---
 
+## Frequency-Only Depthwise Convolution (Wang et al. 2025)
+
+[[sources/wang-2025-multi-modal-deep-filtering-bc|Wang et al. 2025]]'s MDFNet extracts depthwise separable convolutions down to the **frequency axis alone**: every conv module uses a depthwise kernel of $1\times3$ (width 1 in time, 3 in frequency) followed by a $1\times1$ pointwise convolution with 64 channels, so "feature transformation is performed solely along the frequency axis." Temporal modeling is delegated entirely to the [[concepts/grouped-recurrent-neural-network|grouped GRUs]], which is the memory/compute trade-off discussed in [[concepts/grouped-recurrent-neural-network|GRNN]] — cheap spectral mixing in the CNN, all sequence modeling in the recurrent block.
+
+This is a stricter separation than the usual $3\times2$ or $5\times5$ depthwise kernels of the PercepNet/DeepFilterNet family (e.g. DeepFilterNet uses depthwise $3\times2$), and it matches the frequency-only design of [[sources/laroche-2026-lisenet-embedded|LiSenNet]]'s frequency mixer. The paper reports no parameter count or MACs, so the savings cannot be quantified against those baselines.
+
 ## Usage in Jiang et al. 2026 (Lightweight SE + lightS4)
 
 [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang et al. 2026]] uses DSConv2D as the core building block for both encoder (six cascaded blocks with progressive channel expansion) and decoder (alternating DSConv2D with transposed convolutions), alongside an **Atrous Spatial Pyramid Pooling (ASPP)** module of atrous DSConv2D (ADSConv2D) with dilation rates $\{2, 4, 8\}$ matched to speech spectro-temporal structure (harmonics, formants, syllabic context). The metric discriminator also uses spectrally-normalized DSConv2D for stability. Ablation shows DSConv2D slashes parameters ~5.8× (9.63 M → 1.65 M) and MACs ~9× (4.53 G → 0.50 G) vs. standard convolutions with negligible PESQ change (3.26 → 3.32), confirming the efficiency advantage of the factorization at this scale.
@@ -102,3 +109,4 @@ For a standard $3 \times 3$ kernel ($D_k = 3$) and large $C_{out}$, this yields 
 - [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight SE with SSM and DSConv]] — DSConv2D encoder/decoder + ADSConv2D ASPP; 1.65 M params / 0.50 G MACs
 - [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — depthwise-separable frequency mixer (k=11) replaces a frequency Bi-GRU for NPU operator compatibility
 - [[sources/liu-2024-lightweight-dl-survey|Liu et al. 2024: Lightweight Deep Learning for Resource-Constrained Environments]] — surveys DSConv as the foundational operation of the [[concepts/lightweight-cnn-families|MobileNet series]] and Xception; notes that DSConv is computation-saving but time-consuming due to high Memory Access Cost (MAC), motivating ShuffleNetV2's four design guidelines
+- [[sources/wang-2025-multi-modal-deep-filtering-bc|Wang, Kuang, Li, Yang, Bai & Liu 2025: Multi-Modal Deep-Filtering Speech Enhancement via BC Speech]] — DSConv reduced to the frequency axis only (depthwise $1\times3$ + pointwise $1\times1$, 64 channels); temporal modeling delegated entirely to grouped GRUs

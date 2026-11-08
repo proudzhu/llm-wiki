@@ -9,6 +9,7 @@ sources:
   - raw/papers/buthe-2025-blind-wideband-to-fullband-extension/full-text.md
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
   - raw/papers/kuang-2025-low-complexity-bc-speech-enhancement/full-text.md
+  - raw/papers/wang-2025-multi-modal-deep-filtering-bc/full-text.md
 tags:
   - psychoacoustics
   - speech-enhancement
@@ -68,6 +69,12 @@ Both [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|RT-Tango]] a
 
 [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025]] band *both* AC and BC spectra into $B = 32$ full-range ERB sub-bands (energy features $e^{(k)} = \frac{1}{N_k}\sum_{f=f_{k,min}}^{f_{k,max}} |Y(f)|$), rather than compressing only the high frequencies GTCRN-style. These ERB energies drive the coarse stage of their [[concepts/sub-band-full-band-architecture|sub-band + full-band architecture]] — a small encoder-decoder set estimates the 32 sub-band gains (~2.5 MMACs) while a large full-band set estimates deep-filtering coefficients. Their band-strategy ablation is the direct comparison: replacing full-range ERB banding with GTCRN's high-frequency-only band merge (merging the two encoder-decoder sets into one, at comparable complexity) costs 0.146 average wb-PESQ and 1.64% eSTOI *at higher MACs* (44.3 vs. 40.3 M). The full-range ERB scale is thus not merely a compression device here — the granularity split between sub-band envelope and full-band fine filtering is itself the design contribution. The BC energies matter as much as the AC ones: both are fused by iAFF before encoding.
 
+## Usage in Wang et al. 2025 (High-Frequency Gains Only)
+
+[[sources/wang-2025-multi-modal-deep-filtering-bc|Wang, Kuang, Li, Yang, Bai & Liu 2025]] use the ERB scale for a **frequency-split** design rather than for full-band compression: MDFNet's high-frequency branch predicts ERB-band gains on the ERB-compressed spectrum, but those gains are applied **only to the noisy AC spectrum** — never to BC — because "the high-frequency parts of BC speech are almost completely lost." The low-frequency band is instead handled at full spectral resolution by [[concepts/multi-modal-deep-filtering|multi-modal deep filtering]], where the BC spectrum still has structure worth filtering.
+
+This is the unusual position in the ERB design space: band compression applied to *half the spectrum* and to *one modality*, with the ERB features still fused across both modalities (the encoder sees BC's ERB features even though BC never receives a high-band gain). Compare with [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang et al. 2025]] from the same research group, which uses full-range ERB bands for *both* modalities but pairs them with a full-band deep-filtering stage, and with GTCRN/AdaptCRN/AISC, which compress only the high frequencies but keep a single full-band output path. The paper does not state the split frequency or the ERB band count.
+
 ## Relationship to Other Scales
 
 | Scale | Formula | Bands | Application |
@@ -112,3 +119,4 @@ The ERB scale provides finer frequency resolution at low frequencies compared to
 - [[sources/buthe-2025-blind-wideband-to-fullband-extension|Büthe & Valin 2025: A Lightweight and Robust Method for Blind Wideband-to-Fullband Extension of Speech]] — 32-band ERB log-magnitude + phase-difference features drive the BWE feature encoder
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — reference-channel ERB branch in TinyGRU; magnitude-only ERB masking shown incompatible with MCWF
 - [[sources/kuang-2025-low-complexity-bc-speech-enhancement|Kuang, Yang, Wang & Yang 2025: Low-Complexity BC-Aided Speech Enhancement]] — full-range ERB sub-band gains (both AC and BC) as the coarse stage; beats GTCRN-style high-frequency-only band merging
+- [[sources/wang-2025-multi-modal-deep-filtering-bc|Wang, Kuang, Li, Yang, Bai & Liu 2025: Multi-Modal Deep-Filtering-Based Speech Enhancement via BC Speech]] — ERB gain restricted to the high band and applied to AC only, with full-resolution deep filtering below
