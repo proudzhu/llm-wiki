@@ -5,6 +5,7 @@ updated: 2026-11-01
 sources:
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
   - raw/papers/ahn-2026-fastenhancer/full-text.md
+  - raw/papers/zhao-2025-lightweight-transformer/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -20,7 +21,7 @@ tags:
 ## Architecture
 
 - **Encoder–decoder**: U-Net with a three-layer causal convolutional encoder–decoder configured identically to FTF-Net, bottleneck channel size $Ch=64$, one-time-step buffer caches in convolutional layers for streaming.
-- **Bottleneck**: three interleaved spectral-temporal blocks — MHA for spectral modelling (avoids the processing latency of recurrent spectral modelling), GRU for temporal modelling (avoids the linear-in-context cost of causal-attention key-value caching).
+- **Bottleneck**: three interleaved spectral-temporal blocks — MHA for spectral modelling (avoids the processing latency of recurrent spectral modelling), GRU for temporal modelling (avoids the linear-in-context cost of causal-attention key-value caching). This keeps the [[concepts/ftf-transformer|FTF transformer]]'s F–T–F interleave and its parameter-sharing spirit but replaces FTF's spectral Bi-GRU + MHA pairs with MHA alone, which is the wall-clock win: FTF-Net's spectral recurrence serialises frames (RTF 1.05), HyST-Net's parallel spectral attention does not (RTF 0.22).
 - **Input**: Re/Im parts of the power-law compressed ($c=0.3$) noisy complex spectrogram, concatenated channel-wise (STFT 512 samples, 50% overlap).
 - **Output**: complex-valued ideal ratio mask in the compressed domain, applied then magnitude-decompressed; 32 ms algorithmic latency, frame-by-frame streaming.
 
@@ -44,9 +45,11 @@ FastEnhancer (Ahn et al., ICASSP 2026) independently converged on the **same axi
 - [[concepts/complex-ratio-mask|Complex Ratio Mask (cRM)]] — the compressed-domain output target
 - [[concepts/power-law-compression|Power-Law Compression]]
 - [[concepts/dprnn|Dual-Path RNN]] — the interleaved spectral-temporal modelling paradigm HyST-Net's bottleneck belongs to
+- [[concepts/ftf-transformer|FTF Transformer]] — the predecessor whose F–T–F interleave HyST-Net inherits; FTF-Net's spectral GRU is the piece HyST-Net deletes
 - [[concepts/gtcrn|GTCRN]] · [[concepts/cofi-lite|CoFi-Lite]] — the lightweight-SE efficiency frontier
 
 ## Related Sources
 
 - [[sources/zhao-2026-spectrally-adaptive-loss|Zhao & Madhu 2026: Spectrally Adaptive Loss for Streaming Speech Enhancement]]
+- [[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025: Study of Lightweight Transformer Architectures for Single-Channel Speech Enhancement]] — FTF-Net/LCT-GAN, the architecture HyST-Net reuses and whose RTF HyST-Net improves 4.77×
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — RNNFormer's independent convergence on the same frequency-MHA + time-GRU assignment, with DPRNN/DPT ablations

@@ -656,4 +656,6 @@
 | [[concepts/modality-dominance\|Modality Dominance]] | Multimodal fusion failure where the easier (noise-immune) modality monopolises shared parameters and collapses the representation. | 2026-11-08 |
 | [[concepts/multi-scale-discriminator\|Multi-Scale Discriminator]] | Adversarial critic ensemble at multiple temporal resolutions; DBMIF adds dilated critics on PQMF subbands. | 2026-11-08 |
 | [[concepts/multi-modal-deep-filtering\|Multi-Modal Deep Filtering]] | Deep filtering with a separate complex coefficient set per input modality, so fusion happens inside the filter rather than in a feature space | 2026-11-08 |
+| [[concepts/ftf-transformer\|Frequency–Time–Frequency (FTF) Transformer]] | Three-stage frequency-time-frequency transformer bottleneck with parameters shared along the unmodelled axis; LCT-GAN's block and HyST-Net's predecessor | 2026-11-10 |
+| [[concepts/trapezoidal-causal-masking\|Trapezoidal Causal Masking]] | Causal attention mask capped at a fixed look-back (1 s), making per-frame attention cost and key/value cache independent of utterance length | 2026-11-10 |
 

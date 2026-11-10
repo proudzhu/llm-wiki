@@ -4,6 +4,7 @@ created: 2026-08-03
 updated: 2026-08-03
 sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
+  - raw/papers/zhao-2025-lightweight-transformer/full-text.md
 tags:
   - speech-enhancement
   - post-processing
@@ -34,6 +35,18 @@ The key property is that PCS:
 
 PCS adds **+0.14 PESQ** and +0.08 COVL at the cost of −0.32 CBAK. STOI is unchanged.
 
+## Effect on LCT-GAN
+
+[[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025]] apply PCS during training rather than as post-processing on a fixed model, and report the same qualitative trade on a much smaller network (0.14 M parameters):
+
+| Variant | PESQ | CSIG | CBAK | COVL | STOI | SI-SDR |
+|---------|------|------|------|------|------|--------|
+| LCT-GAN | 3.06 | 4.41 | 3.66 | 3.80 | 0.95 | 18.8 |
+| LCT-GAN + PCS | 3.20 | 4.39 | 3.46 | 3.84 | 0.94 | * |
+| LCT-GAN + PCS (causal) | 3.16 | 4.35 | 3.45 | 3.81 | 0.94 | * |
+
+PCS adds **+0.14 PESQ** here too, at −0.20 CBAK, −0.01 STOI, and the loss of SI-SDR as a comparable metric (PCS modifies the training target, so the reference for SI-SDR no longer applies). The consistency across SEMamba (≈6 M params) and LCT-GAN (0.14 M) suggests the PESQ/CBAK exchange rate is a property of the metric pair, not of model scale — worth remembering before reading a PCS-boosted PESQ as evidence of a better denoiser.
+
 ## Related Concepts
 
 - [[concepts/semamba|SEMamba]] — the SE system that PCS lifts to SOTA PESQ
@@ -44,3 +57,4 @@ PCS adds **+0.14 PESQ** and +0.08 COVL at the cost of −0.32 CBAK. STOI is unch
 ## Related Sources
 
 - [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]]
+- [[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025: Study of Lightweight Transformer Architectures for Single-Channel Speech Enhancement]] — PCS during training lifts LCT-GAN 3.06 → 3.20 PESQ at −0.20 CBAK, the same exchange rate as on SEMamba

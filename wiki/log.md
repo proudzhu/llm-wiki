@@ -6437,3 +6437,33 @@ Answered from [[sources/li-2026-geometry-conditioned-ssanc|Li 2026 GC-SSF]] and 
   - [[concepts/grouped-recurrent-neural-network|Grouped RNN]] — grouped GRU + grouped FC (GFC) on a fused BC/AC stream
   - [[synthesis/multimodal-bc-speech-enhancement|Multimodal Smart Hearables]] — new §2.13, §4 benchmark row, Related Sources entry
   - [[entities/mou-wang|Mou Wang]], [[entities/kelan-kuang|Kelan Kuang]], [[entities/feiran-yang|Feiran Yang]] — Key Contributions + Related Sources bullets
+
+---
+
+## [2026-11-10] ingest | Study of Lightweight Transformer Architectures for Single-Channel Speech Enhancement (Zhao & Madhu 2025)
+
+- **Source**: `raw/papers/zhao-2025-lightweight-transformer/full-text.md` (Zotero: LA85IGID, arXiv:2505.21057)
+- **Authors**: Haixin Zhao, Nilesh Madhu
+- **Published**: EUSIPCO 2025, 33rd European Signal Processing Conference
+- **DOI**: 10.23919/EUSIPCO63237.2025.11226622
+- **Summary**: A systematic sweep of transformer bottleneck orderings (TT/FF/TF/FT/TFT/FTF/TFTF/FTFT) at matched MACs and parameters identifies Frequency-Time-Frequency as the efficiency knee; combined with cross-axis parameter sharing, 1 s-capped trapezoidal causal attention and waveform discriminators, LCT-GAN reaches PESQ 3.06 (3.20 with PCS) on VoiceBank+DEMAND at 0.14 M params / 0.35 G MAC/s (~6% of DeepFilterNet2's footprint).
+- **Pages created**:
+  - `wiki/sources/zhao-2025-lightweight-transformer.md`
+  - `wiki/concepts/ftf-transformer.md`
+  - `wiki/concepts/trapezoidal-causal-masking.md`
+- **Pages updated**:
+  - `wiki/entities/haixin-zhao.md`, `wiki/entities/nilesh-madhu.md` — linked the EUSIPCO 2025 paper to its new source page and named the FTF/LCT-GAN contribution
+  - `wiki/concepts/hyst-net.md` — added FTF lineage (successor deletes FTF's spectral GRU), FTF related-concept and source links
+  - `wiki/concepts/dprnn.md` — new "FTF: Three Stages with Shared Parameters" section with the ordering ablation
+  - `wiki/concepts/rnnformer.md` — new "Relation to FTF" section with the four-design axis/resolution comparison table
+  - `wiki/concepts/gated-recurrent-unit.md` — cross-frequency shared GRU as the 98%-parameter-reduction mechanism
+  - `wiki/concepts/attention-mechanism.md` — trapezoidal mask as the middle path between full causal attention and no time attention
+  - `wiki/concepts/grouped-recurrent-neural-network.md` — $G=4$ grouped GRU inside FTF, contrasted with cross-axis sharing
+  - `wiki/concepts/ideal-ratio-mask.md` — compressed-domain real IRM vs complex-valued RI/MCS variants benchmarked in-situ
+  - `wiki/concepts/multi-scale-discriminator.md` — multi-period + multi-scale critics on a 0.14 M-parameter generator
+  - `wiki/concepts/perceptual-contrast-stretching.md` — LCT-GAN PCS trade-off table (+0.14 PESQ / −0.20 CBAK, the same exchange rate as SEMamba)
+  - `wiki/concepts/power-law-compression.md` — $c=0.3$ applied consistently on input and target
+  - `wiki/concepts/voicebank-demand.md`, `wiki/concepts/dns-challenge.md` — LCT-GAN operating points added as sources
+  - `wiki/synthesis/deep-speech-enhancement.md` — source row, Insight 4 "ordering is an axis" paragraph, representative-model matrix row, related concepts
+  - `wiki/synthesis/joint-multitask-ultra-low-latency-se.md` — source row and a "MAC-optimal vs latency-optimal" precedence paragraph for Insight 3
+- **Notes**: Text quotes CCFNet+(Lite) PESQ gap as 0.17 while Table II gives 3.16 − 2.94 = 0.22; source page reports the table arithmetic and flags the discrepancy.

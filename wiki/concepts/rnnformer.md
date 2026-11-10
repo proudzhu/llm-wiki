@@ -5,6 +5,7 @@ updated: 2026-11-07
 sources:
   - raw/papers/ahn-2026-fastenhancer/full-text.md
   - raw/papers/kim-2026-faster-enhancer/full-text.md
+  - raw/papers/zhao-2025-lightweight-transformer/full-text.md
 tags:
   - neural-network-architecture
   - speech-enhancement
@@ -43,12 +44,26 @@ The assignment inverts the standard [[concepts/dprnn|DPRNN]] pattern (RNN on *bo
 
 [[sources/kim-2026-faster-enhancer|Kim 2026]] ported FastEnhancer-Medium at 48 kHz to faster-enhancer.c, a dependency-free int8 C runtime, with architecture and weights untouched. The port validates the block's deployment profile from the systems side: the fused GRU kernel is the **largest per-frame compute bucket** (82.2 µs of a ~452 µs frame on an Apple M2, ahead of QKV projection at 36.3 µs), which is why the runtime fuses the GRU's two matrices, three gates, hidden update and fp16 state write into one kernel per SIMD tier so int32 accumulators never reach memory. Quantized to int8 with per-frame activation ranges, the block chain tracks fp32 to −0.006 PESQ over 824 VoiceBank-DEMAND utterances.
 
+## Relation to FTF
+
+The [[concepts/ftf-transformer|FTF transformer]] (Zhao & Madhu, EUSIPCO 2025) is the *third* resolution of the same frequency-axis question, and RNNFormer sits between it and [[concepts/hyst-net|HyST-Net]]:
+
+| Design | Frequency axis | Time axis | Provenance |
+|---|---|---|---|
+| DPRNN | GRU | GRU | Luo et al. 2020 |
+| FTF | Bi-GRU **+ MHA**, params shared across frames | GRU (shared across bins) **+ 1 s-capped causal MHA** | Zhao & Madhu 2025 |
+| RNNFormer | MHA only | GRU only | Ahn et al. 2026 |
+| HyST-Net | MHA only | GRU only | Zhao & Madhu 2026 |
+
+FTF retains recurrence on both axes and adds attention on both — affordable because of parameter sharing and the 1 s mask — and its ablation is the only one that measures *ordering* at fixed MACs and parameters: FT (2.57 PESQ) beats TF (2.55), adding stages then lifts TFT to 2.62 and FTF to 2.68, while a fourth stage is flat (TFTF 2.68, FTFT 2.69). Its weakness is exactly the one RNNFormer's argument predicts: the spectral Bi-GRU serialises frames, so FTF-Net's RTF is 1.05 versus HyST-Net's 0.22 on the same encoder–decoder.
+
 ## Related Concepts
 
 - [[concepts/dprnn|Dual-Path RNN (DPRNN)]] — the recurrence-on-both-axes predecessor
 - [[concepts/gated-recurrent-unit|Gated Recurrent Unit]] — the time-axis component
 - [[concepts/attention-mechanism|Attention Mechanism]] — the frequency-axis component
 - [[concepts/hyst-net|HyST-Net]] — independent convergence on the same axis assignment
+- [[concepts/ftf-transformer|FTF Transformer]] — the keep-recurrence-and-add-attention alternative, with cross-axis parameter sharing
 - [[concepts/gtcrn|GTCRN]] / [[concepts/lisennet|LiSenNet]] / [[concepts/cofi-lite|CoFi-Lite]] — the complexity-optimized lightweight-SE line FastEnhancer contrasts against
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]] — the encoder-decoder backbone family
 
@@ -57,3 +72,4 @@ The assignment inverts the standard [[concepts/dprnn|DPRNN]] pattern (RNN on *bo
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer — Speed-Optimized Streaming Neural Speech Enhancement]] — origin of the block; DPRNN/DPT ablations
 - [[sources/zhao-2026-spectrally-adaptive-loss|Zhao & Madhu 2026: Spectrally Adaptive Loss for Streaming Speech Enhancement]] — HyST-Net's independent frequency-MHA + time-GRU convergence
 - [[sources/kim-2026-faster-enhancer|Kim 2026: faster-enhancer.c]] — int8 runtime port of FastEnhancer-Medium; GRU kernel is the top compute bucket and gets the deepest fusion
+- [[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025: Study of Lightweight Transformer Architectures for Single-Channel Speech Enhancement]] — the FTF alternative that keeps a spectral RNN alongside spectral attention

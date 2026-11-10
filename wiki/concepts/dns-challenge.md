@@ -7,6 +7,7 @@ sources:
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
   - raw/papers/ohlenbusch-2026-pas-se/full-text.md
   - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
+  - raw/papers/zhao-2025-lightweight-transformer/full-text.md
 tags:
   - dataset
   - challenge
@@ -42,3 +43,4 @@ The fifth DNS Challenge noise set was used by [[sources/ohlenbusch-2026-pas-se|O
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — DNS 2020 corpus + simulated 8-mic array for TinyGRU training
 - [[sources/ohlenbusch-2026-pas-se|Ohlenbusch, Kegler & Stamenovic 2026: PAS-SE]] — DNS-5 noise spatialized for the Oldenburg cross-dataset evaluation
 - [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — DNS Challenge noise as training interference for AC/BC enhancement; DNSMOS as the non-intrusive evaluation metric
+- [[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025: LCT-GAN]] — DNS3 140 h synthesised training (SNR −5…20 dB), evaluated on the blind real-recorded English test set with DNSMOS P.835: BAK 4.04 ± 0.09 / SIG 3.06 / OVL 2.80 at 0.14 M params, beating DeepFilterNet1–3 on BAK with half the score variance

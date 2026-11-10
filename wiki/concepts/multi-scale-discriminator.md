@@ -4,6 +4,7 @@ created: 2026-11-08
 updated: 2026-11-08
 sources:
   - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
+  - raw/papers/zhao-2025-lightweight-transformer/full-text.md
 tags:
   - speech-enhancement
   - gan
@@ -51,8 +52,11 @@ $$
 
 DBMIF uses $\lambda = 1000$ and no explicit spectral reconstruction loss — structural fidelity rests entirely on the critics plus feature matching.
 
-## Costs and Cautions
+## Multi-Period + Multi-Scale on a Tiny Generator (LCT-GAN)
 
+LCT-GAN (Zhao & Madhu 2025) pairs a MelGAN-style **multi-period** discriminator — which reshapes the waveform into 2-D periodic views so it can score structure at several periods — with a HiFi-GAN-style multi-scale discriminator, both fed raw waveform. The point of interest is not the critics themselves but their **cost profile**: the generator is 0.14 M parameters / 0.35 G MAC/s, and the critics exist only during training, so the pair adds substantial training compute to a model whose inference budget is 6% of DeepFilterNet2's parameters. The ablation isolates the effect — going from generator-only to GAN on VoiceBank+DEMAND moves PESQ 3.01 → 3.06, COVL 3.75 → 3.80, CBAK 3.64 → 3.66, SIG/OVL on DNS3 3.00 → 3.06 / 2.74 → 2.80 with **no BAK degradation** — i.e. the critics buy speech preservation without licensing noise leakage, which is the failure mode a purely adversarial objective can produce.
+
+## Costs and Cautions
 - **Perceptual gain, not fidelity guarantee** — GAN-trained enhancers in the BC literature consistently top DNSMOS (DBMIF 3.35, EBEN 3.17 vs. 2.66–2.94 for discriminative T-F models) while hallucination risk at low SNR is not directly measured. An ASR-consistency check is the usual missing falsification test.
 - **Compute** — four discriminators triples the training-side cost relative to a single critic; at inference only the generator is kept, so this does not affect deployment.
 - **Weight normalisation** throughout both DBMIF critic families (Leaky-ReLU $\alpha = 0.1$, linear output layer).
@@ -67,3 +71,4 @@ DBMIF uses $\lambda = 1000$ and no explicit spectral reconstruction loss — str
 ## Related Sources
 
 - [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — waveform + 3 dilation-factor subband critics for AC/BC enhancement
+- [[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025: Study of Lightweight Transformer Architectures for Single-Channel Speech Enhancement]] — MelGAN-style multi-period + multi-scale critics on a 0.14 M-parameter generator; +0.05 PESQ/+0.05 COVL with no BAK loss

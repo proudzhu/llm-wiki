@@ -14,6 +14,7 @@ sources:
   - raw/papers/ahn-2026-fastenhancer/full-text.md
   - raw/papers/kim-2026-faster-enhancer/full-text.md
   - raw/papers/laroche-2026-lisenet-embedded/full-text.md
+  - raw/papers/zhao-2025-lightweight-transformer/full-text.md
 tags:
   - deep-learning
   - recurrent-neural-network
@@ -102,3 +103,4 @@ Within the llm-wiki, GRU is the recurrent backbone in:
 - [[sources/ahn-2026-fastenhancer\|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — GRU as the time axis of the RNNFormer dual-path block; beats time-axis MHSA on streaming RTF in ablation
 - [[sources/kim-2026-faster-enhancer\|Kim 2026: faster-enhancer.c]] — fused single-kernel int8 GRU with fp16 state; top compute bucket in the runtime's profile
 - [[sources/laroche-2026-lisenet-embedded\|Laroche & Olsson 2026: Beyond Model Size]] — the temporal GRU *can* run on an MCU NPU (hidden state as graph I/O, affine transforms as dense ops) but is replaced by a dilated TCN in the primary model: FIFO state flushes quantization errors out of the receptive field, whereas quantized recurrent state can accumulate them (and drift over long streams); the GRU variant is still the faster/lighter-state option (2.18 ms/frame, 17 KiB vs. 4.83 ms, 154 KiB)
+- [[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025]] — the GRU as a **shared** temporal modeller: in the [[concepts/ftf-transformer|FTF transformer]]'s time stage a single GRU is applied with frequency as the batch axis, so its input width is the channel count $C$ rather than the flattened $F\!\cdot\!C$ a conventional CRUSE-style bottleneck uses. Since GRU cost is quadratic in feature width, this is what makes the block 98% smaller in parameters than the CRUSE GRU bottleneck, with the surrounding frequency transformers supplying the spectral context the shared GRU never sees.

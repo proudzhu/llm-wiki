@@ -39,6 +39,7 @@ sources:
   - raw/papers/liu-2023-iccrn/full-text.md
   - raw/papers/zhao-2024-sicrn/full-text.md
   - raw/papers/wang-2025-adaptive-convolution-cnn-speech-enhancement/full-text.md
+  - raw/papers/zhao-2025-lightweight-transformer/full-text.md
 tags:
   - speech-enhancement
   - single-channel
@@ -110,6 +111,7 @@ The single-channel representative-model matrix consolidating all four layers app
 | [[sources/veluri-2023-semantic-hearing\|Veluri et al. 2023]] | 2023 | Multi-channel / conditioning / efficiency | First binaural target *sound* extraction network — joint two-channel latent masking, class-query conditioning, 0.52M params / 240 MFLOPS / 6.56 ms on smartphone |
 | [[sources/ahn-2026-fastenhancer\|Ahn, Han, Woo & Kim 2026 (FastEnhancer)]] | 2026 | Efficiency | RTF-first streaming SE: RNNFormer (time GRU + freq MHSA), time-kernel-1 convs, BN fusion — PESQ 3.13 at RTF 0.022; proves MACs ≠ real speed |
 | [[sources/laroche-2026-lisenet-embedded\|Laroche & Olsson 2026 (LiSenNet-NPU)]] | 2026 | Efficiency | NPU-redesigned LiSenNet for STM32N6: static int8 graph, int8 PESQ 3.01 at 4.83 ms/frame; operator set + streaming state as co-design axes |
+| [[sources/zhao-2025-lightweight-transformer\|Zhao & Madhu 2025 (LCT-GAN)]] | 2025 | Backbone ordering / efficiency | Sweeps 8 temporal-spectral bottleneck orderings at matched MACs → FTF (freq-time-freq) is the knee; cross-axis parameter sharing + 1 s-capped causal attention yield 0.14 M params / 0.35 G MAC/s at PESQ 3.06 |
 
 ## Insight 1: The Training Target Evolved from Pointwise Masks to Neighborhood Filters
 
@@ -175,6 +177,8 @@ DNN (2014) → LSTM (2017) → CRN/CED+LSTM (2018) → complex CRN/DCCRN (2020)
 - **SNN** ([[concepts/sse-net\|SSE-Net]]) is the energy-efficiency extreme: spike-native SE with a 62% lower power proxy than Spiking-FullSubNet.
 
 **Why Mamba/SSM wins in streaming**: parallel training via associative scan, long context that LSTMs handle poorly beyond ~100 steps, naturally causal, and small-state compute. This mirrors the linear-RNN replacement documented for joint multi-task SE in [[synthesis/joint-multitask-ultra-low-latency-se|Joint Multi-Task SE & Ultra-Low-Latency Paradigm]] (Insight 3).
+
+**Ordering is an axis, not a detail (Zhao & Madhu 2025).** The DPRNN lineage raised the question of *whether* to model both axes; [[sources/zhao-2025-lightweight-transformer|LCT-GAN]]'s ablation answers *in which order* and *how many stages*, at matched MACs and parameters: TT 2.18 → FF 2.34 → TF 2.55 → FT 2.57 → TFT 2.62 → **FTF 2.68** PESQ, with a fourth stage flat (TFTF 2.68, FTFT 2.69). Three findings that no other source in this corpus isolates: (i) frequency-first beats time-first at equal cost — the time stage should operate on spectrally coherent input; (ii) frequency modelling buys PESQ/STOI/SI-SDR/BAK while time modelling buys SIG, i.e. the two axes trade *different* perceptual errors, which is why neither alone suffices; (iii) three stages is the knee, so "more interleaving" is not a free quality knob. The block also shows the cheapest route to attention in a lightweight model is not operator substitution but **parameter sharing along the unmodelled axis** — the time transformer's GRU runs with frequency as the batch axis, cutting the CRUSE GRU bottleneck's parameters by 98% and MACs by 27%.
 
 ## Insight 4a: Encoder/Decoder Designs — Four Philosophies of Frequency-Resolution Handling
 
@@ -292,6 +296,7 @@ Consolidating the four dataflow layers (input / output target / encoder-decoder 
 | MP-SENet (2023) | log1p magnitude + phase | Magnitude + phase (**dual decoders**) | DenseNet encoder + dual decoders | Conformer TF blocks | ~2.6M |
 | GTCRN (2024) | ERB-compressed 64 bands | cRM | Band-Merge/GT-Conv + Band-Split | G-DPRNN (grouped dual-path GRU) | **23.7K / 39.6 MMAC/s** |
 | LiSenNet (2025) | Sub-band-strided spectrum | Mask | Sub-band conv codec | Causal dual-path GRU + noise detector | 37k / 56M; PESQ 3.07 |
+| LCT-GAN (2025) | Compressed magnitude ($c=0.3$) | Compressed real IRM | 3-layer causal conv codec | **FTF transformers** (freq Bi-GRU+MHA / time shared GRU+MHA / freq) | **0.14M / 0.35 GMAC/s**; PESQ 3.06 (3.20 +PCS); 32 ms |
 | CoFi-Lite (2026) | Coarse/fine dual-path spectrum | Mask | Coarse (×16) / fine (×2) + CPF | GTCRN-style | 83K / **12.87M MACs/s** |
 | AdaptCRN (2025) | ERB-compressed spectrum | Mask | ConvNeXt/StarNet-style codec | Grouped DPRNN + dynamic conv | 135K / 41 MMAC/s |
 | SEMamba (2024) | log1p magnitude + phase | Magnitude + phase (dual decoders) | DenseNet + dual decoders | **TF-Mamba** | SOTA PESQ **3.69** (+PCS) |
@@ -339,6 +344,7 @@ Consolidating the four dataflow layers (input / output target / encoder-decoder 
 - [[concepts/spectrally-adaptive-loss|Spectrally Adaptive Loss]] · [[concepts/magnitude-phase-compensation-effect|Magnitude-Phase Compensation Effect]] · [[concepts/hyst-net|HyST-Net]] — loss-side compensation-effect remedy and its streaming backbone
 - [[concepts/lisennet|LiSenNet]] · [[concepts/noise-detector|Noise Detector]] · [[concepts/gla-phase-refinement|GLA Phase Refinement]] · [[concepts/sub-band-convolution|Sub-band Convolution]] — the 2025 lightweight-SE design point and its components
 - [[concepts/rnnformer|RNNFormer]] — RTF-first dual-path block (time GRU + frequency MHSA); FastEnhancer's bottleneck
+- [[concepts/ftf-transformer|FTF Transformer]] · [[concepts/trapezoidal-causal-masking|Trapezoidal Causal Masking]] — the frequency–time–frequency bottleneck and its bounded-context attention, from LCT-GAN
 
 ## Related Sources
 

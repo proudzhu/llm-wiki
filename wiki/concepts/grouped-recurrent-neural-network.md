@@ -6,6 +6,7 @@ sources:
   - raw/papers/benslimane-2026-tango-quantized-distributed/full-text.md
   - raw/papers/luo-2022-band-split-rnn/full-text.md
   - raw/papers/wang-2025-multi-modal-deep-filtering-bc/full-text.md
+  - raw/papers/zhao-2025-lightweight-transformer/full-text.md
 tags:
   - neural-network
   - recurrent
@@ -62,6 +63,10 @@ Key findings:
 
 What is distinctive is the *combination*: grouped FC layers are less common than grouped recurrent layers in this literature (GRNN work typically groups the hidden state and leaves the projection dense). MDFNet also groups across a **two-modality fused** feature stream — the encoder adds the AC/BC feature maps before the GRUs — so grouping here additionally partitions cross-modal information, which the paper does not analyse.
 
+## Grouped GRU in the FTF Transformer
+
+[[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025]] apply grouping ($G=4$) to every GRU in the three-stage [[concepts/ftf-transformer|FTF transformer]] bottleneck of LCT-GAN, with the hidden size set equal to the input channel count ($Ch=64$). Grouping is not the main lever there — **parameter sharing across the unmodelled dimension** is: the time transformer's GRU is shared across all frequency bins (frequency becomes the batch axis), so the effective feature width is $C$, not $F\!\cdot\!C$. Reported jointly against the CRUSE GRU bottleneck: 27% MACs and 98% parameters removed. It is a useful data point that grouping and sharing are complementary rather than substitutes — grouping divides the hidden state's width, sharing removes a factor of $F$ from the input width.
+
 ## Relationship to Other Grouped Architectures
 
 - [[concepts/gtcrn|GTCRN]] applies grouped RNN within a Dual-Path RNN (G-DPRNN) bottleneck, splitting features and hidden states into 2 groups.
@@ -95,3 +100,4 @@ What is distinctive is the *combination*: grouped FC layers are less common than
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — AdaptCRN's grouped-DPRNN bottleneck (with rearrangement removed)
 - [[sources/luo-2022-band-split-rnn|Luo & Yu 2022: Music Source Separation with Band-Split RNN]] — order-sensitive band-level alternative to group communication
 - [[sources/wang-2025-multi-modal-deep-filtering-bc|Wang, Kuang, Li, Yang, Bai & Liu 2025: Multi-Modal Deep-Filtering-Based Speech Enhancement via BC Speech]] — grouped GRU + grouped FC on a fused BC/AC feature stream; grouping factor unreported
+- [[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025: Study of Lightweight Transformer Architectures for Single-Channel Speech Enhancement]] — $G=4$ grouped GRUs inside the FTF transformer, combined with cross-frequency parameter sharing (27% MACs / 98% parameters vs the CRUSE GRU bottleneck)

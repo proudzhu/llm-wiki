@@ -8,6 +8,7 @@ sources:
   - raw/papers/yan-2025-lisennet/full-text.md
   - raw/papers/ahn-2026-fastenhancer/full-text.md
   - raw/papers/laroche-2026-lisenet-embedded/full-text.md
+  - raw/papers/zhao-2025-lightweight-transformer/full-text.md
 tags:
   - neural-network
   - speech-separation
@@ -40,7 +41,6 @@ Input: (T, F) → Chunking: (S, L, F) → Intra-RNN: (S, L, D) → Inter-RNN: (S
 - **Streaming-friendly**: Can be configured with unidirectional RNNs for frame-by-frame inference.
 
 ## Applications in VibOmni
-
 In [[sources/he-2025-vibomni|VibOmni]], DPRNN is used as the core separator module in the multi-modal speech enhancement network:
 
 - Receives concatenated audio and vibration features from dual encoders.
@@ -75,6 +75,12 @@ Used in [[concepts/gtcrn|GTCRN (Rong et al. 2024)]], G-DPRNN combines grouped RN
 
 [[concepts/rnnformer|RNNFormer]] (Ahn et al., ICASSP 2026) keeps the dual-path *shape* but changes the operators per axis: a **unidirectional GRU models the time axis** (constant-size state, no key-value caching) while a **4-head MHSA models the frequency axis** (all bins of a frame are available simultaneously, so attention over frequency is causal in time by construction and needs no cache). The explicit critique of frequency-axis RNNs: they assume frequency bands have a *sequential* relationship, but spectral structure (e.g., harmonics) is **global**. FastEnhancer's dual ablation shows the axis assignment matters — replacing the frequency MHSA with a frequency GRU (making a DPRNN) clearly degrades SISDR, and replacing the time GRU with time-MHSA (31-frame lookbehind, making a DPT) explodes the RTF despite fewer parameters.
 
+### FTF: Three Stages with Shared Parameters
+
+The [[concepts/ftf-transformer|FTF transformer]] (Zhao & Madhu, EUSIPCO 2025) extends the dual-path idea to **three** stages — frequency, time, frequency — and answers the cost problem in the opposite direction from operator substitution: it keeps an RNN *and* an MHA in every stage but **shares parameters along the axis that stage does not model**. The time stage's GRU runs with frequency as the batch axis (shared across all $F$ bins), and the frequency stages' weights are shared across all $T$ frames. Because a GRU's cost is quadratic in feature width, sharing reduces the time stage's input from $F\!\cdot\!C$ to $C$ — the block is 98% smaller in parameters than the CRUSE GRU bottleneck at 27% fewer MACs.
+
+Its ordering ablation is the reference data set for "which dual-path order is best": at matched MACs and parameters, FT > TF (2.57 vs 2.55 PESQ), interleaving both axes beats either alone (TT 2.18, FF 2.34), and a fourth stage adds $\leq 0.01$ PESQ (FTF 2.68, TFTF 2.68, FTFT 2.69). The FTF design also uses [[concepts/trapezoidal-causal-masking|trapezoidal causal masking]] in the time stage — DPRNN's inter-block RNN has no such notion, since an RNN's context is bounded by its state, not by an explicit window.
+
 ## Related Concepts
 
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
@@ -85,6 +91,7 @@ Used in [[concepts/gtcrn|GTCRN (Rong et al. 2024)]], G-DPRNN combines grouped RN
 - [[concepts/full-band-recurrent-network|Full-Band Recurrent Network (FRN)]] — dual-path-style inter-/intra-frame hybrid in the PLC domain
 - [[concepts/lisennet|LiSenNet]] — causal dual-path instantiation: frequency Bi-GRU + temporal uni-GRU with ConvGLU channel mixer, N=2 repetitions at 37k params
 - [[concepts/rnnformer|RNNFormer]] — inverts the axis-operator assignment: time GRU + frequency MHSA; ablated against DPRNN and DPT in FastEnhancer
+- [[concepts/ftf-transformer|FTF Transformer]] — three-stage (F–T–F) extension with cross-axis parameter sharing and a 1 s-capped causal attention window
 
 ## Related Sources
 
@@ -96,3 +103,4 @@ Used in [[concepts/gtcrn|GTCRN (Rong et al. 2024)]], G-DPRNN combines grouped RN
 - [[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023: Full-Band Blind Packet-Loss Concealment With Predictive Network]] — FRN encoder as a ResMLP/dual-path-RNN hybrid for real-time 48 kHz PLC
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — RNNFormer block as the dual-path bottleneck; frequency-attention/time-recurrence assignment ablated against both DPRNN and DPT alternatives
 - [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — replaces the DPR bottleneck entirely with convolutional dual-path mixers (depthwise-sep frequency conv + dilated TCN) for MCU-NPU deployment; the dual-path *paradigm* survives, the RNN operators do not
+- [[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025: Study of Lightweight Transformer Architectures for Single-Channel Speech Enhancement]] — sweeps TT/FF/TF/FT/TFT/FTF/TFTF/FTFT at matched complexity, fixing FT > TF and showing three stages is the efficiency knee

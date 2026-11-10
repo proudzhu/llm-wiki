@@ -9,6 +9,7 @@ sources:
   - raw/papers/yan-2025-lisennet/full-text.md
   - raw/papers/ahn-2026-fastenhancer/full-text.md
   - raw/papers/kim-2026-faster-enhancer/full-text.md
+  - raw/papers/zhao-2025-lightweight-transformer/full-text.md
 tags:
   - signal-processing
   - speech-enhancement
@@ -79,3 +80,4 @@ FastEnhancer (Ahn et al. 2026) compresses its STFT input with $c = 0.3$ on magni
 - [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025: LiSenNet]] — $c=0.3$ on input magnitude and inside the compressed-magnitude / compressed-complex losses ($\lambda_1=0.9$, $\lambda_2=0.1$)
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — $c=0.3$ compressed-domain masking and losses; decompression $|\hat{\mathbf{Y}}_c|^{1/c}$ before iSTFT
 - [[sources/kim-2026-faster-enhancer|Kim 2026: faster-enhancer.c]] — same $p=0.3$ compression carried into the int8 runtime; compressed magnitudes ease per-frame activation quantization
+- [[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025: LCT-GAN]] — $c=0.3$ applied consistently on **both** ends: the network input is $\lvert X\rvert^{0.3}$, the target is $\widehat{\mathrm{IRM}}_c$ at the same exponent, and the *linear*-domain mask is recovered by exponentiating with $1/c$ before multiplication. The paper's stated reason for $c=0.3$ is not dynamic-range smoothing but mask refinement for low-energy speech components — the exponent is set by the training target, not the feature.

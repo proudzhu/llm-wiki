@@ -1387,6 +1387,8 @@
 | [[concepts/modality-dominance\|Modality Dominance]] | Multimodal fusion failure where the easier (noise-immune) modality monopolises shared parameters and collapses the representation. | 2026-11-08 |
 | [[concepts/multi-scale-discriminator\|Multi-Scale Discriminator]] | Adversarial critic ensemble at multiple temporal resolutions; DBMIF adds dilated critics on PQMF subbands. | 2026-11-08 |
 | [[concepts/multi-modal-deep-filtering\|Multi-Modal Deep Filtering]] | Deep filtering with a separate complex coefficient set per input modality, so fusion happens inside the filter rather than in a feature space | 2026-11-08 |
+| [[concepts/ftf-transformer\|Frequency–Time–Frequency (FTF) Transformer]] | Three-stage frequency-time-frequency transformer bottleneck with parameters shared along the unmodelled axis; LCT-GAN's block and HyST-Net's predecessor | 2026-11-10 |
+| [[concepts/trapezoidal-causal-masking\|Trapezoidal Causal Masking]] | Causal attention mask capped at a fixed look-back (1 s), making per-frame attention cost and key/value cache independent of utterance length | 2026-11-10 |
 
 ---
 
@@ -1688,6 +1690,7 @@
 | [[sources/kuang-2025-low-complexity-bc-speech-enhancement\|Kuang, Yang, Wang & Yang 2025]] | This paper presents a low-complexity bone-conduction-aided speech enhancement model that jointly utilizes sub-band and full-band features of BC and AC speech via a two-step (coarse-then-fine) enhancement procedure: first estimating ERB sub-band gains to enhance the spectral envelope of noisy AC speech, then estimating deep-filtering coefficients to suppress residual noise at fine spectral resolution. | 2026-11-08 |
 | [[sources/wu-2026-dbmif-multimodal-fusion\|Wu, Zheng, Zhang, Zhang, Zheng, Yang, Yan & Yin 2026]] | DBMIF is a three-branch, time-domain BC-aided speech enhancement framework that attacks one specific failure mode of AC/BC fusion: modality dominance. | 2026-11-08 |
 | [[sources/wang-2025-multi-modal-deep-filtering-bc\|Wang, Kuang, Li, Yang, Bai & Liu 2025]] | This paper proposes MDFNet, a lightweight multi-modal deep-filtering network that jointly enhances synchronized bone-conducted (BC) and noisy air-conducted (AC) speech in the complex STFT domain. | 2026-11-08 |
+| [[sources/zhao-2025-lightweight-transformer\|Zhao & Madhu 2025: Study of Lightweight Transformer Architectures for Single-Channel Speech Enhancement]] | Systematic ablation of temporal/spectral transformer bottleneck orderings yields the FTF (frequency-time-frequency) stack; with cross-axis parameter sharing, 1 s-capped causal attention and waveform discriminators, LCT-GAN hits 3.06 PESQ on VoiceBank+DEMAND at 0.14 M params / 0.35 G MAC/s. | 2025-09-08 |
 
 ---
 
@@ -1746,10 +1749,10 @@
 
 ## Statistics
 
-- **Total pages**: 1695
+- **Total pages**: 1698
 - **Entities**: 716
-- **Concepts**: 652
-- **Sources**: 292
+- **Concepts**: 654
+- **Sources**: 293
 - **Synthesis**: 25
 - **Queries**: 10
-- **Last updated**: 2026-11-08
+- **Last updated**: 2026-11-10
