@@ -1,0 +1,23 @@
+[
+  {"query": "ingest paper 2606.25621", "should_trigger": true},
+  {"query": "把这个 arXiv 论文加进 wiki：https://arxiv.org/abs/2609.15760", "should_trigger": true},
+  {"query": "我刚下载了一篇 pdf，在 Downloads 里，叫 SpeechEnhancement_Mamba_2026.pdf，帮我读进知识库并建页面", "should_trigger": true},
+  {"query": "re-ingest the Uphaus paper, the camera-ready version came out and the numbers changed", "should_trigger": true},
+  {"query": "read this paper into the wiki and make sure the author pages and index are updated", "should_trigger": true},
+  {"query": "process arXiv 2608.21155 for the knowledge base", "should_trigger": true},
+  {"query": "这篇论文我 Zotero 里有，帮我建 wiki 页面，图也要","should_trigger": true},
+  {"query": "add Chen's 2024 early-exit paper to the wiki — I don't have it in Zotero, here's the arXiv link", "should_trigger": true},
+  {"query": "update the wiki page for the Mamba speech enhancement paper, there's a newer version", "should_trigger": true},
+  {"query": "ingest this and hook it into the existing synthesis pages", "should_trigger": true},
+
+  {"query": "帮我把这篇论文的摘要翻译成中文", "should_trigger": false},
+  {"query": "what does the wiki already say about early exit in speech enhancement?", "should_trigger": false},
+  {"query": "summarize the abstract of this paper for me, I just want the gist, no wiki pages", "should_trigger": false},
+  {"query": "这个 PDF 是发票，帮我提取金额和日期填进表格", "should_trigger": false},
+  {"query": "run the wiki lint and tell me which pages have broken links", "should_trigger": false},
+  {"query": "search Zotero for papers by Fu and list them", "should_trigger": false},
+  {"query": "read this markdown file and fix the wikilink format in it", "should_trigger": false},
+  {"query": "把这个网页归档到 raw/articles 里，然后做个摘要页", "should_trigger": false},
+  {"query": "explain the difference between algorithmic and computational latency", "should_trigger": false},
+  {"query": "the mkdocs build is failing, can you debug the strict-mode warnings?", "should_trigger": false}
+]

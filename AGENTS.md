@@ -154,7 +154,7 @@ Reusable workflows are stored in `.agents/skills/`. Each skill has a `SKILL.md` 
 
 | Skill | Path | When to use |
 |-------|------|-------------|
-| **paper-reader** | [`.agents/skills/paper-reader/SKILL.md`](.agents/skills/paper-reader/SKILL.md) | Ingesting a paper from Zotero — handles search, PDF extraction (MinerU/arXiv HTML/pdftotext), and full wiki page creation |
+| **paper-reader** | [`.agents/skills/paper-reader/SKILL.md`](.agents/skills/paper-reader/SKILL.md) | Ingesting a paper into the wiki from Zotero, an arXiv ID/URL, or a local PDF — extraction (arXiv HTML with figure recovery / MinerU / pdftotext) plus full page creation, index, log and build check |
 | **wiki-lint** | [`.agents/skills/wiki-lint/SKILL.md`](.agents/skills/wiki-lint/SKILL.md) | Health-checking the wiki — index drift, broken links, orphan pages, statistics verification |
 | **wiki-conflict-resolver** | [`.agents/skills/wiki-conflict-resolver/SKILL.md`](.agents/skills/wiki-conflict-resolver/SKILL.md) | Resolving Git rebase/merge conflicts in `wiki/index.md`, subdirectory indexes, and `wiki/log.md` — dedupes by slug/date and recalculates statistics |
 | **wiki-link-fixer** | [`.agents/skills/wiki-link-fixer/SKILL.md`](.agents/skills/wiki-link-fixer/SKILL.md) | Auto-fixing wikilink convention violations — missing category prefixes, `wiki/` prefixes, `../` prefixes, and `log.md` informal refs. Supports `--dry-run`, `--category`, `--file`; leaves truly broken links for manual review |

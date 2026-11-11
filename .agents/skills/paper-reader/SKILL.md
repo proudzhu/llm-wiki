@@ -1,27 +1,36 @@
 ---
 name: "paper-reader"
-description: "Full paper ingestion workflow from Zotero to wiki: search, extract, analyze, and create wiki pages. Invoke when user asks to ingest, re-ingest, or read a paper from Zotero."
+description: "Ingest an academic paper into the wiki knowledge base end to end: locate it (Zotero, arXiv ID/URL, or a local PDF), extract the full text and every figure, then create the source page, author/concept pages, synthesis updates, index rows and log entry, and verify with mkdocs build --strict. Use whenever the user wants a paper ingested, added to, or processed into the wiki — including re-ingesting an updated version — whether it is in their Zotero library, is only an arXiv link, or is a PDF in Downloads; Zotero or arXiv is a hint, not a requirement. Trigger on \"ingest this paper\", \"add this arXiv paper to my wiki\", \"read this PDF into the wiki\", \"process this paper for the knowledge base\". Not for a quick summary, for questions answered by pages already in the wiki, for merely searching or listing Zotero items, for web articles and blog posts, or for non-academic PDFs such as invoices, manuals and slide decks."
 ---
 
 # Paper Reader
 
-End-to-end workflow for ingesting academic papers from Zotero into the LLM Wiki knowledge base.
+End-to-end workflow for ingesting an academic paper into the LLM Wiki knowledge base — from Zotero, an arXiv ID/URL, or a local PDF — producing linked source, entity, concept and synthesis pages plus index and log updates.
 
 ## When to Invoke
 
-- "ingest paper X from Zotero"
-- "re-ingest paper X from Zotero"
+Any phrasing that means "put this paper into the wiki":
+
+- "ingest paper X from Zotero" / "re-ingest paper X"
 - "read paper X from Zotero"
-- Add a paper from the user's Zotero library to the wiki
+- "add this arXiv paper to my wiki" — arXiv ID or URL, no Zotero needed (Step 1–2 are skipped; go to 3b)
+- "read this PDF into the wiki" — a local PDF works too (Step 3a + 3c)
+- "process this paper for the knowledge base" / "update the wiki page for X's paper"
+
+The common denominator is *creating or extending wiki pages*, not the source of the PDF. If the user only wants a summary, or only wants an answer from pages that already exist, that is not this skill — see below.
 
 ## When NOT to Invoke
 
 - **Paper already in wiki and up-to-date** — Grep `wiki/log.md` and `wiki/sources/*.md` for author/title first
-- **User wants a quick summary** — read the existing source page or abstract; full ingest is only for deep analysis
-- **Zotero not running** — verify: `curl -s http://localhost:23119/connector/ping`
-- **Paper not in Zotero** — skip Zotero steps, use extraction scripts directly with an arXiv ID or local PDF
+- **User wants a quick summary only** — read the existing source page or the abstract; full ingest is for deep analysis that creates pages
+- **User is asking a question answerable from pages that already exist** — that is the Query Wiki workflow, not an ingest
 - **Source is a web page/blog/informal HTML** — use the standard raw article workflow. **Exception**: substantive non-academic PDFs (transcripts, slides, presentations) DO qualify — adapt the source page template with themed sections (Vision & Strategy / Q&A / Key Quotes); slug follows thought-piece convention without a year (e.g., `liang-wenfeng-investor-exchange-meeting`)
 - **Re-ingesting an identical version** — only if PDF was updated (camera-ready replaces preprint) or the wiki page is significantly incomplete
+
+**Not blockers — these change *how* to run the ingest, not whether to run it:**
+
+- **Zotero not running** — verify with `curl -s http://localhost:23119/connector/ping`. If it is down, still ingest: an arXiv ID/URL goes straight to Step 3b, a local PDF to Step 3a + 3c. Zotero only supplies metadata and a better text source.
+- **Paper not in Zotero** — skip Steps 1–2 and extract directly from the arXiv ID or local PDF. Note the arXiv ID/DOI in the source page frontmatter so the Zotero link is not silently invented.
 
 ## Checking Existing Pages (Windows Glob Caveat)
 
