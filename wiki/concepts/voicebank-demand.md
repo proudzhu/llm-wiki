@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-11-07
+updated: 2026-11-11
 sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/yan-2025-lisennet/full-text.md
@@ -9,6 +9,7 @@ sources:
   - raw/papers/kim-2026-faster-enhancer/full-text.md
   - raw/papers/laroche-2026-lisenet-embedded/full-text.md
   - raw/papers/zhao-2025-lightweight-transformer/full-text.md
+  - raw/papers/fu-2026-one-model-many-latencies/full-text.md
 tags:
   - dataset
   - speech-enhancement
@@ -41,7 +42,8 @@ The noisy baseline scores PESQ = 1.97, CSIG = 3.35, CBAK = 2.44, COVL = 2.63, ST
 | CMGAN | 3.41 | 2022 | conformal metric GAN |
 | MP-SENet | 3.50 | 2023 | Conformer TF backbone |
 | [[concepts/semamba|SEMamba]] | 3.55 | 2024 | [[concepts/mamba|Mamba]] replaces Conformer |
-| **[[concepts/semamba|SEMamba]] (+PCS)** | **3.69** | 2024 | + [[concepts/perceptual-contrast-stretching|PCS]] post-processing — SOTA |
+| [[concepts/semamba|SEMamba]] (+PCS) | **3.69** | 2024 | + [[concepts/perceptual-contrast-stretching|PCS]] post-processing — SOTA |
+| Real-time RE-USE (Fu et al.) | 2.76 (LA 0) / 2.82 (LA 1) | 2026 | Cross-dataset (no VBD training); 2.9M params, 40/60 ms algorithmic latency, SI-SDR 18.6/18.8 dB |
 
 FastEnhancer (Ahn et al. 2026) — the FastEnhancer family (22k–1.1M params, RTF 0.012–0.313 on Xeon) establishes a new performance-vs-speed Pareto frontier on this benchmark: FastEnhancer-B reaches PESQ 3.13 / STOI 0.945 at RTF 0.022, and FastEnhancer-T matches GTCRN-quality at RTF 0.012. Notably, FastEnhancer-B has *higher* MACs (262M) than GTCRN (40M) yet ~3× lower RTF — evidence that on this benchmark MACs are a poor proxy for real speed.
 
@@ -64,3 +66,4 @@ A 48 kHz variant of the benchmark appears in [[sources/kim-2026-faster-enhancer|
 - [[sources/kim-2026-faster-enhancer|Kim 2026: faster-enhancer.c]] — 48 kHz evaluation of FastEnhancer-Medium on the 824-utterance test set (fp32 PESQ 3.060); quantization-delta reference point (−0.006 PESQ) and metric-band caveats for fullband scoring
 - [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — retrained LiSenNet baseline + 11 NPU variants evaluated on the full 824-utterance test set (16 kHz, CMGAN recipe), with PESQ reported both FP32 and int8
 - [[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025: LCT-GAN]] — smallest reported operating point that reaches DeepFilterNet2 quality: 0.14 M params / 0.35 G MAC/s → PESQ 3.06 (3.20 with PCS), CSIG 4.41, CBAK 3.66, COVL 3.80, STOI 0.95; the parameter-count floor among causal models on this benchmark
+- [[sources/fu-2026-one-model-many-latencies|Fu et al. 2026: One Model, Many Latencies]] — cross-dataset (URGENT-trained) point: PESQ 2.76 / 2.82 at 40 / 60 ms algorithmic latency and 2.9M params, ahead of DeepFilterNet3 and Stream.FM at comparable latency

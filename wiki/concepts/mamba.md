@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-08-03
-updated: 2026-09-20
+updated: 2026-11-11
 sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/jiang-2026-lightweight-speech-enhancement-ssm-dsc/full-text.md
   - raw/papers/uphaus-2026-directivity-low-latency/full-text.md
+  - raw/papers/fu-2026-one-model-many-latencies/full-text.md
 tags:
   - neural-network
   - state-space-model
@@ -80,6 +81,8 @@ Most parameters live in the linear projections, while the inner SSM is parameter
 
 In multi-channel processing, [[concepts/film-osn|FiLM-OSN]] (Uphaus et al. 2026) deploys Mamba in the narrow-band blocks of a low-latency (10 ms total) neural directional filter for binaural hearing aids. Replacing the FT-JNF's temporal LSTM with a Mamba SSM — together with replacing the spectral BiLSTM with frequency convolutions — is what makes the architecture degrade gracefully at short 8 ms STFT windows, where the FiLM-JNF baseline drops from PESQ 2.10 to 1.72.
 
+Mamba's **RNN-like inference** is the reason [[sources/fu-2026-one-model-many-latencies|Fu et al. 2026]] choose it for latency-universal streaming enhancement: a unidirectional TF-Mamba stack can be evaluated frame by frame with constant per-frame cost, and the number of executed blocks becomes a dial for computational latency ([[concepts/early-exit-speech-enhancement|early exit]] from 4 to 12 blocks spans 10.09–25.05 ms per frame at 16 kHz on an A100). Their 12-block variant exceeds the 20 ms hop (RTF 1.25) — the SSM's linear-time advantage does not by itself guarantee real-time operation.
+
 ## Related Concepts
 
 - [[concepts/state-space-model|State-Space Model]] — the broader SSM family
@@ -90,10 +93,12 @@ In multi-channel processing, [[concepts/film-osn|FiLM-OSN]] (Uphaus et al. 2026)
 - [[concepts/long-short-term-memory|LSTM]] — recurrent baseline with input-dependent gating
 - [[concepts/linear-recurrent-unit|Linear Recurrent Unit]] — linear-recurrence alternative
 - [[concepts/mingru|MinGRU]] — minimal GRU linear recurrence
+- [[concepts/early-exit-speech-enhancement|Early-Exit Speech Enhancement]] — depth-selectable inference over a Mamba stack
 
 ## Related Sources
 
 - [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]]
 - [[sources/jiang-2026-lightweight-speech-enhancement-ssm-dsc|Jiang, Gao, Wang, Zou & Liu 2026: Lightweight Speech Enhancement with State-Space Model and Depthwise Separable Convolution]]
 - [[sources/uphaus-2026-directivity-low-latency|Uphaus et al. 2026: Directivity-Conditioned Low-Latency Neural Filtering]] — Mamba narrow-band blocks enable 10 ms-latency neural directional filtering
+- [[sources/fu-2026-one-model-many-latencies|Fu et al. 2026: One Model, Many Latencies]] — unidirectional TF-Mamba stack as the depth-dial backbone for latency-universal streaming SE
 

@@ -726,6 +726,10 @@
 | [[entities/zhuo-li\|Zhuo Li]] | OPPO / CAS researcher; co-author of MDFNet multi-modal deep-filtering speech enhancement (ICSPCC 2025) | 2026-11-08 |
 | [[entities/jisheng-bai\|Jisheng Bai]] | Xi'an University of Posts and Telecommunications researcher; co-author of MDFNet (ICSPCC 2025) | 2026-11-08 |
 | [[entities/xin-liu\|Xin Liu]] | OPPO researcher; co-author of MDFNet multi-modal deep-filtering speech enhancement (ICSPCC 2025) | 2026-11-08 |
+| [[entities/xuesong-yang\|Xuesong Yang]] | NVIDIA researcher; co-author of the latency-flexible universal speech enhancement model (selectable algorithmic and computational latency) | 2026-11-11 |
+| [[entities/sung-feng-huang\|Sung-Feng Huang]] | NVIDIA researcher; co-author of the latency-flexible universal speech enhancement model | 2026-11-11 |
+| [[entities/ante-jukic\|Ante Jukić]] | NVIDIA researcher in speech enhancement and separation; co-author of the latency-flexible universal SE model | 2026-11-11 |
+| [[entities/yu-chiang-frank-wang\|Yu-Chiang Frank Wang]] | NVIDIA researcher in ML for speech and audio; co-author of the latency-flexible universal SE model | 2026-11-11 |
 
 ---
 
@@ -1389,6 +1393,9 @@
 | [[concepts/multi-modal-deep-filtering\|Multi-Modal Deep Filtering]] | Deep filtering with a separate complex coefficient set per input modality, so fusion happens inside the filter rather than in a feature space | 2026-11-08 |
 | [[concepts/ftf-transformer\|Frequency–Time–Frequency (FTF) Transformer]] | Three-stage frequency-time-frequency transformer bottleneck with parameters shared along the unmodelled axis; LCT-GAN's block and HyST-Net's predecessor | 2026-11-10 |
 | [[concepts/trapezoidal-causal-masking\|Trapezoidal Causal Masking]] | Causal attention mask capped at a fixed look-back (1 s), making per-frame attention cost and key/value cache independent of utterance length | 2026-11-10 |
+| [[concepts/universal-speech-enhancement\|Universal Speech Enhancement]] | Single-model SE across heterogeneous conditions; the latency budget as a second universality axis | 2026-11-11 |
+| [[concepts/parallel-look-ahead-convolutions\|Parallel Look-Ahead Convolutions]] | MoE-shaped branch bank, one conv per look-ahead setting, user-selected at inference — algorithmic-latency control without a learned router | 2026-11-11 |
+| [[concepts/early-exit-speech-enhancement\|Early-Exit Speech Enhancement]] | Depth-selectable inference for computational-latency control; two-stage shared→multiple decoder training | 2026-11-11 |
 
 ---
 
@@ -1691,6 +1698,7 @@
 | [[sources/wu-2026-dbmif-multimodal-fusion\|Wu, Zheng, Zhang, Zhang, Zheng, Yang, Yan & Yin 2026]] | DBMIF is a three-branch, time-domain BC-aided speech enhancement framework that attacks one specific failure mode of AC/BC fusion: modality dominance. | 2026-11-08 |
 | [[sources/wang-2025-multi-modal-deep-filtering-bc\|Wang, Kuang, Li, Yang, Bai & Liu 2025]] | This paper proposes MDFNet, a lightweight multi-modal deep-filtering network that jointly enhances synchronized bone-conducted (BC) and noisy air-conducted (AC) speech in the complex STFT domain. | 2026-11-08 |
 | [[sources/zhao-2025-lightweight-transformer\|Zhao & Madhu 2025: Study of Lightweight Transformer Architectures for Single-Channel Speech Enhancement]] | Systematic ablation of temporal/spectral transformer bottleneck orderings yields the FTF (frequency-time-frequency) stack; with cross-axis parameter sharing, 1 s-capped causal attention and waveform discriminators, LCT-GAN hits 3.06 PESQ on VoiceBank+DEMAND at 0.14 M params / 0.35 G MAC/s. | 2025-09-08 |
+| [[sources/fu-2026-one-model-many-latencies\|Fu et al. 2026]] | One universal speech enhancement (USE) model whose algorithmic and computational latency are both user-selectable at inference, so a single trained checkpoint covers 30 latency configurations instead of requiring one specialized model per latency budget. | 2026-11-11 |
 
 ---
 
@@ -1749,10 +1757,10 @@
 
 ## Statistics
 
-- **Total pages**: 1698
-- **Entities**: 716
-- **Concepts**: 654
-- **Sources**: 293
+- **Total pages**: 1706
+- **Entities**: 720
+- **Concepts**: 657
+- **Sources**: 294
 - **Synthesis**: 25
 - **Queries**: 10
-- **Last updated**: 2026-11-10
+- **Last updated**: 2026-11-11

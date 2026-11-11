@@ -658,4 +658,7 @@
 | [[concepts/multi-modal-deep-filtering\|Multi-Modal Deep Filtering]] | Deep filtering with a separate complex coefficient set per input modality, so fusion happens inside the filter rather than in a feature space | 2026-11-08 |
 | [[concepts/ftf-transformer\|Frequency–Time–Frequency (FTF) Transformer]] | Three-stage frequency-time-frequency transformer bottleneck with parameters shared along the unmodelled axis; LCT-GAN's block and HyST-Net's predecessor | 2026-11-10 |
 | [[concepts/trapezoidal-causal-masking\|Trapezoidal Causal Masking]] | Causal attention mask capped at a fixed look-back (1 s), making per-frame attention cost and key/value cache independent of utterance length | 2026-11-10 |
+| [[concepts/universal-speech-enhancement\|Universal Speech Enhancement]] | Single-model SE across heterogeneous conditions; the latency budget as a second universality axis | 2026-11-11 |
+| [[concepts/parallel-look-ahead-convolutions\|Parallel Look-Ahead Convolutions]] | MoE-shaped branch bank, one conv per look-ahead setting, user-selected at inference — algorithmic-latency control without a learned router | 2026-11-11 |
+| [[concepts/early-exit-speech-enhancement\|Early-Exit Speech Enhancement]] | Depth-selectable inference for computational-latency control; two-stage shared→multiple decoder training | 2026-11-11 |
 

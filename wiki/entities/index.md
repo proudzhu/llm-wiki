@@ -720,4 +720,8 @@
 | [[entities/zhuo-li\|Zhuo Li]] | OPPO / CAS researcher; co-author of MDFNet multi-modal deep-filtering speech enhancement (ICSPCC 2025) | 2026-11-08 |
 | [[entities/jisheng-bai\|Jisheng Bai]] | Xi'an University of Posts and Telecommunications researcher; co-author of MDFNet (ICSPCC 2025) | 2026-11-08 |
 | [[entities/xin-liu\|Xin Liu]] | OPPO researcher; co-author of MDFNet multi-modal deep-filtering speech enhancement (ICSPCC 2025) | 2026-11-08 |
+| [[entities/xuesong-yang\|Xuesong Yang]] | NVIDIA researcher; co-author of the latency-flexible universal speech enhancement model (selectable algorithmic and computational latency) | 2026-11-11 |
+| [[entities/sung-feng-huang\|Sung-Feng Huang]] | NVIDIA researcher; co-author of the latency-flexible universal speech enhancement model | 2026-11-11 |
+| [[entities/ante-jukic\|Ante Jukić]] | NVIDIA researcher in speech enhancement and separation; co-author of the latency-flexible universal SE model | 2026-11-11 |
+| [[entities/yu-chiang-frank-wang\|Yu-Chiang Frank Wang]] | NVIDIA researcher in ML for speech and audio; co-author of the latency-flexible universal SE model | 2026-11-11 |
 

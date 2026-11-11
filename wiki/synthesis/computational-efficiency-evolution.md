@@ -22,6 +22,7 @@ sources:
   - raw/papers/laroche-2026-lisenet-embedded/full-text.md
   - raw/papers/kuang-2025-low-complexity-bc-speech-enhancement/full-text.md
   - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
+  - raw/papers/fu-2026-one-model-many-latencies/full-text.md
 tags:
   - lightweight-speech-enhancement
   - computational-complexity
@@ -272,12 +273,15 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 
 **The Mamba axis for high-quality SE.** [[concepts/semamba|SEMamba]] (Chao et al., IEEE SLT 2024) demonstrates a complementary efficiency axis: not ultra-lightweight edge SE (GTCRN / CoFi-Lite / SSE-Net class), but **attention-free SE at quality parity with Conformer/Transformer backbones at lower FLOPs**. Replacing the Conformer in [[concepts/mp-senet|MP-SENet]] with a Time-Frequency [[concepts/mamba|Mamba]] block cuts FLOPs by ~12% (65.46 G vs. 74.29 G) while slightly *raising* PESQ (3.52 vs. 3.50); the basic SEMamba configuration cuts FLOPs by 53–66% and parameters by 28–60% vs. the Transformer at equal PESQ. Combined with [[concepts/perceptual-contrast-stretching|PCS]], SEMamba sets a SOTA PESQ of 3.69 on VoiceBank-DEMAND. This positions selective SSMs (Mamba) alongside [[concepts/adaptcrn|adaptive convolution]] and [[concepts/cofi-lite|asymmetric path decoupling]] as a third Pareto-axis for SE efficiency — one that targets the **quality frontier** rather than the extreme-lightweight frontier.
 
+**Latency-target amortization.** A distinct efficiency axis is *how many models a training investment buys*. The corpus's lightweight systems each fix one quality/compute point; Fu et al. 2026 ([[sources/fu-2026-one-model-many-latencies|Real-time RE-USE]]) instead train **one** 3.7M-parameter TF-[[concepts/mamba|Mamba]] checkpoint that serves 30 latency configurations — [[concepts/early-exit-speech-enhancement|exit depth]] 3–12 sets compute per frame (10.09–25.05 ms on an A100) and [[concepts/parallel-look-ahead-convolutions|parallel look-ahead conv branches]] set algorithmic latency (40/60/80 ms). Deployment prunes back to the selected sub-graph, so the shipped footprint equals a specialized model's. This is efficiency in the *engineering-process* sense rather than the per-inference sense: it does not lower MACs at any single point (the parallel conv bank even costs ~0.03–0.05 PESQ at matched depth), but it replaces a family of retrained models with one. The cautionary datum belongs with the efficiency lesson of §7: the deepest configuration runs at RTF 1.25 for a 20 ms hop on an A100, i.e. the same hardware-blindness that makes params/MACs a poor complexity proxy also invalidates real-time claims inherited from shallower settings.
+
 ---
 
 ## Related Concepts
 
 - [[concepts/filtered-x-lms-algorithm|Filtered-x LMS Algorithm]]
 - [[concepts/frequency-domain-anc|Frequency-Domain ANC]]
+- [[concepts/early-exit-speech-enhancement|Early-Exit Speech Enhancement]] — depth-selectable compute as a latency-target axis
 - [[concepts/subband-anc|Subband ANC]]
 - [[concepts/multi-channel-anc|Multi-Channel ANC]]
 - [[concepts/robust-adaptive-filtering|Robust Adaptive Filtering]]
@@ -335,4 +339,5 @@ As we move toward multi-modal platforms (e.g., ANC + awareness + gaze-guided inp
 - [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — the compute-heavy counter-example to §5.3: 10.41 M params / 2.60 GMACs/s / RTF 0.085 CPU, measured from the released code because the paper reports no complexity at all; ~64× Kuang 2025's MACs for the multi-modal quality frontier
 - [[sources/benslimane-2026-rt-tango-binaural-speech-enhancement|Benslimane, Chouteau, Poreba, Auzanneau, Szczepanski, Chersi & Serizel 2026: RT-Tango]]
 - [[sources/liu-2024-lightweight-dl-survey|Liu, Galindo, Xie, Wong, Shuai, Li & Cheng 2024: Lightweight Deep Learning for Resource-Constrained Environments]]
+- [[sources/fu-2026-one-model-many-latencies|Fu, Chao, Yang, Huang, Jukić, Tsao & Wang 2026: One Model, Many Latencies]] — twelfth axis: latency-target amortization, one checkpoint covering 30 (exit depth × look-ahead) configurations at 2.0–3.7M params; 12-block config exceeds RTF 1 at a 20 ms hop
 

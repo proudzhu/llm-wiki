@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-07-16
-updated: 2026-11-07
+updated: 2026-11-11
 sources:
   - raw/papers/indenbom-2023-deepvqe/full-text.md
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
@@ -23,6 +23,7 @@ sources:
   - raw/papers/ahn-2026-fastenhancer/full-text.md
   - raw/papers/kim-2026-faster-enhancer/full-text.md
   - raw/papers/zhao-2025-lightweight-transformer/full-text.md
+  - raw/papers/fu-2026-one-model-many-latencies/full-text.md
 tags:
   - speech-enhancement
   - multi-task
@@ -67,6 +68,7 @@ Neither trend is independently novel. The **new insight** from the 2025–2026 c
 | [[sources/ueda-2024-online-joint-optimization\|online-WPE×IVE (Ueda)]] | 2024 | SS + DR + NR (blind joint) | **8 ms** (10.01 ms total, < 12 ms ICC budget) | O(F(N+1)M²L²)/frame, real-time on desktop CPU | Forgetting-factor online joint optimization in a [[concepts/convolutional-beamformer\|convolutional beamformer]] (model-based, no neural network) |
 | [[sources/kim-2026-faster-enhancer\|faster-enhancer.c (Kim)]] | 2026 | NS (single-task, runtime study) | 6.67 ms (hop) + 14.67 ms fixed alignment | 511k params, int8 q8 blob 0.57 MB; RTF 0.069 racing / 0.286 paced (M2) | Model-specialized int8 runtime; [[concepts/racing-vs-pacing-benchmark\|racing-vs-pacing benchmark]] |
 | [[sources/zhao-2025-lightweight-transformer\|LCT-GAN (Zhao & Madhu)]] | 2025 | NS (single-task) | **32 ms** causal / 48 ms with 1-frame look-ahead | **0.14M params, 0.35 GMAC/s**; PESQ 3.06 (3.20 +PCS) | FTF transformers + cross-axis parameter sharing + 1 s-capped causal MHA |
+| [[sources/fu-2026-one-model-many-latencies\|Real-time RE-USE (Fu)]] | 2026 | Universal SE (7 degradations, 5 languages, 7 sample rates) | **40 / 60 / 80 ms** (look-ahead 0/1/2) | 2.0M–3.7M params, 19.15–31.67 G MAC/s; 10.09–25.05 ms/frame (A100) | Parallel look-ahead conv branches + early exit over a TF-Mamba stack; user selects both latencies |
 
 ## Insight 1: Multi-Task Fusion Strategies Form a Spectrum
 
@@ -147,6 +149,12 @@ The cost: smaller synthesis windows produce more spectral leakage, requiring car
 | 4 ms | L3C-DeepMFC | Modified OLA, 2 ms hop | Hearing aids |
 | 2 ms | OVC | Time-domain TasNet | Far-field streaming, earables |
 | 0 ms added | HALO, Ashur FT | Plug-in / fine-tuning | Any backbone (orthogonal) |
+
+### Tier 0 — Latency as a Selectable Parameter (budget-agnostic)
+
+The tiers above each *fix* a latency class at architecture-design time. [[sources/fu-2026-one-model-many-latencies|Real-time RE-USE (Fu et al. 2026)]] adds a different move: make the tier a **runtime choice** of one model. Algorithmic latency comes from [[concepts/parallel-look-ahead-convolutions|parallel look-ahead conv branches]] (0/1/2 frames → 40/60/80 ms at a 40 ms window, 20 ms hop) and computational latency from [[concepts/early-exit-speech-enhancement|early-exit depth]] over a 12-block TF-Mamba stack (2.0M–3.7M params, 10.09–25.05 ms/frame on an A100), giving 30 configurations across the Tier-1/Tier-2 boundary and beyond. Two cautions for reading this synthesis's tier table: (i) it applies to **causal universal SE over a broad degradation/sample-rate space**, not to the sub-10 ms hearing-aid problem that motivates Tiers 2–3 — its 40 ms floor is above that entire tier; (ii) the deepest configuration violates $l_{\text{Compute}} \le h$ at a 20 ms hop (RTF 1.25), so a latency *setting* is only real-time relative to specific hardware, exactly the racing-vs-pacing caveat measured by Kim 2026.
+
+The design-insight it contributes to this synthesis: latency allocation and total latency are different variables. In that model, extra **depth** raises perceptual quality (UTMOS) while one **look-ahead frame** captures nearly all the available ASR-accuracy gain — so two systems with identical total latency can differ materially on downstream metrics depending on how the budget is split.
 
 **Key takeaway**: The shift from Tier 1 to Tier 4 is **not** a single architectural substitution but a stack of orthogonal techniques. HALO and Ashur's fine-tuning are latency-neutral and can be combined with any of Tiers 1–3. RT-Tango's asymmetric STFT can in principle be combined with HALO. The frontier is the Cartesian product of these techniques, not a single "best" architecture.
 
@@ -285,6 +293,7 @@ This is relevant to the multi-task / low-latency synthesis in two ways:
 | Dual-path compression (T×F grid search) | Chen 2023 | 4×–32× (57M–1822M MACs/s) | <500K params throughout |
 | Stage-wise surgical compression | Castelli 2024 | 610K → 114K params | Each stage re-trained |
 | Backbone replacement (GRU→FastGRNN) | Larraza 2026 | Single point (0.338M params) | Single retrain |
+| Latency-target branching (look-ahead branches + early exit) | Fu 2026 | 30 configs = 10 depths × 3 look-aheads (40–80 ms, 2.0–3.7M params) | Single training; pruned to a specialized-size sub-graph at deploy |
 
 **Trade-off**: Chen's compression-ratio flexibility comes at the cost of compression/decompression module overhead — at ratios >32× these modules begin to dominate cost. Castelli's stage-wise approach achieves higher per-stage compression (610K→114K = 5.4× param reduction) but each stage requires retraining and the operating point is fixed after deployment. The two strategies are complementary: Chen's dual-path compression can be applied to a Castelli-style compressed backbone to get ratio-flexibility at the embedded tier.
 
@@ -314,6 +323,7 @@ For a practitioner choosing a multi-task SE architecture under a latency budget 
 ## Related Synthesis
 
 - [[synthesis/computational-efficiency-evolution\|Computational Efficiency Evolution]] — RNN BPTT vs. FEP memory bottlenecks in ANC (this synthesis extends to SE and covers SSM/linear-RNN alternatives)
+- [[synthesis/deep-speech-enhancement\|Deep Speech Enhancement]] — architecture/target/backbone axes; its efficiency frontier now carries the third coordinate (latency budget) added by Fu et al. 2026
 - [[synthesis/multi-modal-speech-enhancement\|Multi-Modal Speech Enhancement]] — BC/AC/IMU combination (complementary modality axis)
 - [[synthesis/modern-headphone-anc-systems\|Modern Headphone ANC Systems]] — Hybrid ANC + BC + VAD + transparency (overlapping hardware target)
 - [[synthesis/application-specific-anc\|Application-Specific ANC]] — Form-factor-driven ANC design (parallel SE-side story)
@@ -354,3 +364,5 @@ For a practitioner choosing a multi-task SE architecture under a latency budget 
 - [[concepts/rnnformer|RNNFormer]] — independent confirmation of the per-axis design rule (attention for frequency, recurrence for time), with DPRNN/DPT ablations
 - [[concepts/faster-enhancer-c|faster-enhancer.c]] — the per-axis rule's runtime corollary: fused time-axis GRU kernel is the top compute bucket; racing-vs-pacing protocol
 - [[concepts/racing-vs-pacing-benchmark|Racing vs. Pacing Benchmark]] — deployed RTF is a duty cycle: 4.2× per-frame cost, −49% energy, deadline-miss rates hidden by racing benchmarks
+- [[concepts/universal-speech-enhancement|Universal Speech Enhancement]] — the task framing behind the latency-universal model
+- [[concepts/early-exit-speech-enhancement|Early-Exit Speech Enhancement]] · [[concepts/parallel-look-ahead-convolutions|Parallel Look-Ahead Convolutions]] — the two knobs that make latency selectable

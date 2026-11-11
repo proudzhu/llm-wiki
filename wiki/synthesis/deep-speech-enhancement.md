@@ -18,6 +18,7 @@ sources:
   - raw/papers/yang-2026-cofi-lite-ultra-lightweight-speech-enhancement/full-text.md
   - raw/papers/liu-2026-array-invariant-speech-enhancement/full-text.md
   - raw/papers/apostolidis-2026-listen-first-output-based-multi-microphone/full-text.md
+  - raw/papers/fu-2026-one-model-many-latencies/full-text.md
   - raw/papers/ostergaard-2026-own-voice-cancellation/full-text.md
   - raw/papers/zmolikova-2023-neural-target-speech-extraction-overview/full-text.md
   - raw/papers/tesch-2023-insights-deep-nonlinear-filters/full-text.md
@@ -48,6 +49,7 @@ tags:
   - encoder-decoder
   - survey
   - evolution
+  - low-latency
 ---
 
 # Deep Speech Enhancement: Architectural & Methodological Evolution
@@ -112,6 +114,7 @@ The single-channel representative-model matrix consolidating all four layers app
 | [[sources/ahn-2026-fastenhancer\|Ahn, Han, Woo & Kim 2026 (FastEnhancer)]] | 2026 | Efficiency | RTF-first streaming SE: RNNFormer (time GRU + freq MHSA), time-kernel-1 convs, BN fusion — PESQ 3.13 at RTF 0.022; proves MACs ≠ real speed |
 | [[sources/laroche-2026-lisenet-embedded\|Laroche & Olsson 2026 (LiSenNet-NPU)]] | 2026 | Efficiency | NPU-redesigned LiSenNet for STM32N6: static int8 graph, int8 PESQ 3.01 at 4.83 ms/frame; operator set + streaming state as co-design axes |
 | [[sources/zhao-2025-lightweight-transformer\|Zhao & Madhu 2025 (LCT-GAN)]] | 2025 | Backbone ordering / efficiency | Sweeps 8 temporal-spectral bottleneck orderings at matched MACs → FTF (freq-time-freq) is the knee; cross-axis parameter sharing + 1 s-capped causal attention yield 0.14 M params / 0.35 G MAC/s at PESQ 3.06 |
+| [[sources/fu-2026-one-model-many-latencies\|Fu et al. 2026 (Real-time RE-USE)]] | 2026 | Latency | Makes latency a runtime variable: 30 configurations (look-ahead 0–2 × exit depth 3–12) from one 3.7M-param TF-Mamba checkpoint; 40–80 ms algorithmic, 10–25 ms compute |
 
 ## Insight 1: The Training Target Evolved from Pointwise Masks to Neighborhood Filters
 
@@ -238,6 +241,8 @@ The efficiency frontier also has a **deployment axis** that params/MACs tables h
 
 [[sources/ahn-2026-fastenhancer\|FastEnhancer (Ahn 2026)]] generalizes that deployment argument from the DSP tier to the **single-CPU-thread tier** and turns it into the primary optimization target: its entire architecture — time-axis kernel size 1 (no frame caching), BN fused at inference, fixed filterbank bridges, and the [[concepts/rnnformer\|RNNFormer]] bottleneck (time GRU + frequency MHSA) — is chosen to minimize RTF, accepting *more* MACs (FastEnhancer-B: 262M vs GTCRN's 40M) in exchange for 3× lower wall-clock latency and better quality (PESQ 3.13 vs 2.87 on Voicebank-Demand). The μNet finding (memory-access patterns beat MAC counts on DSP) and the FastEnhancer finding (memory operations beat MAC counts on CPU) are the same lesson measured on two hardware tiers — and [[sources/laroche-2026-lisenet-embedded\|Laroche & Olsson 2026]] add the third tier, the MCU **NPU**: there the binding constraint is the *operator set* (recurrence, runtime normalization, and rank-5 reshapes compile away or stall; unsupported ops fall back to the host CPU whose overheads dominate), plus a state-computation trade-off — convolutional FIFO state costs 200× fewer MACs than receptive-field recomputation but its 154 KiB exceeds the 45 KiB weights (see [[concepts/mcu-npu-deployment\|MCU NPU Deployment]] and [[concepts/stateful-streaming-inference\|stateful streaming inference]]). Params/MACs tables are deployment-blind on all three tiers, and the 2026 frontier is a *measured RTF curve* (FastEnhancer T–L spans RTF 0.012–0.313 on Xeon), not a complexity point.
 
+**Latency becomes a model dimension (Fu et al. 2026).** Every system above fixes one operating point, so a deployment with a different budget needs a retrained model — the frontier is drawn as a *set* of models. [[sources/fu-2026-one-model-many-latencies|Fu et al. 2026]] collapse that set into one checkpoint: [[concepts/parallel-look-ahead-convolutions|parallel look-ahead conv branches]] set algorithmic latency (40/60/80 ms) and [[concepts/early-exit-speech-enhancement|exit depth]] sets computational latency (2.0M–3.7M params, 10.09–25.05 ms/frame on an A100), giving 30 configurations that prune to a specialized-size sub-graph once the budget is chosen. Two results sharpen the rest of this synthesis: (i) the deepest 12-block configuration runs at RTF 1.25 for a 20 ms hop, so **a good params/MACs point does not imply real-time operation** — the FastEnhancer MACs-vs-RTF inversion restated as the hard constraint $l_{\text{Compute}} \le h$; and (ii) depth and look-ahead are not interchangeable — extra depth raises UTMOS, whereas one look-ahead frame delivers nearly all the available ASR-accuracy gain and a second frame almost none. The frontier has a third coordinate (latency budget) in which the *allocation* between look-ahead and depth, not the total, decides downstream performance.
+
 ## Insight 6: Multi-Channel SE Went "Estimate SCM → Beamform" → End-to-End → Array-Invariant
 
 The multi-channel arc has three phases, each relaxing an assumption of the previous:
@@ -345,6 +350,7 @@ Consolidating the four dataflow layers (input / output target / encoder-decoder 
 - [[concepts/lisennet|LiSenNet]] · [[concepts/noise-detector|Noise Detector]] · [[concepts/gla-phase-refinement|GLA Phase Refinement]] · [[concepts/sub-band-convolution|Sub-band Convolution]] — the 2025 lightweight-SE design point and its components
 - [[concepts/rnnformer|RNNFormer]] — RTF-first dual-path block (time GRU + frequency MHSA); FastEnhancer's bottleneck
 - [[concepts/ftf-transformer|FTF Transformer]] · [[concepts/trapezoidal-causal-masking|Trapezoidal Causal Masking]] — the frequency–time–frequency bottleneck and its bounded-context attention, from LCT-GAN
+- [[concepts/universal-speech-enhancement|Universal SE]] · [[concepts/early-exit-speech-enhancement|Early-Exit SE]] · [[concepts/parallel-look-ahead-convolutions|Parallel Look-Ahead Convolutions]] — the latency-budget axis (Fu 2026)
 
 ## Related Sources
 

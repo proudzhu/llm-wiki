@@ -6478,3 +6478,16 @@ Answered from [[sources/li-2026-geometry-conditioned-ssanc|Li 2026 GC-SSF]] and 
 - **DOI**: 10.48550/arXiv.2605.08189
 - **Summary**: Gap-fill update to the existing DiffVQE ingest: added the mandatory neural-network documentation (mermaid Cond/Score data-flow diagram, per-network structure/input/output/training-data/role spec tables, and the joint CCMSE + denoising-score-matching loss section with alpha = 0.005). All numeric claims re-verified against the arXiv HTML v2 — page content unchanged apart from the new sections.
 - **Pages updated**: `wiki/sources/lugo-2026-diffvqe.md` (added `### Model Structure, Inputs, and Outputs` and `### Training Losses`; frontmatter `updated:` bumped)
+
+---
+
+## [2026-11-11] ingest | One Model, Many Latencies: Universal Speech Enhancement for Diverse Real-Time Applications (Fu 2026)
+
+- **Source**: `raw/papers/fu-2026-one-model-many-latencies/full-text.md` (Zotero: YA7X7SUC, arXiv:2606.25621v3)
+- **Authors**: Szu-Wei Fu, Rong Chao, Xuesong Yang, Sung-Feng Huang, Ante Jukić, Yu Tsao, Yu-Chiang Frank Wang (NVIDIA; Academia Sinica)
+- **Published**: arXiv preprint 2606.25621 (v3), 2026
+- **DOI**: 10.48550/arXiv.2606.25621
+- **Summary**: One latency-universal streaming SE model: parallel look-ahead convolutional branches set algorithmic latency (40/60/80 ms) and early exit over a 12-block TF-Mamba stack sets computational latency (2.0M–3.7M params, 10.09–25.05 ms/frame), yielding 30 configurations from a single checkpoint; a two-stage shared→multiple decoder schedule closes most of the gap to specialized models.
+- **Pages created**: `wiki/sources/fu-2026-one-model-many-latencies.md`; `wiki/entities/xuesong-yang.md`; `wiki/entities/sung-feng-huang.md`; `wiki/entities/ante-jukic.md`; `wiki/entities/yu-chiang-frank-wang.md`; `wiki/concepts/universal-speech-enhancement.md`; `wiki/concepts/parallel-look-ahead-convolutions.md`; `wiki/concepts/early-exit-speech-enhancement.md`
+- **Pages updated**: `wiki/entities/szu-wei-fu.md`, `wiki/entities/rong-chao.md`, `wiki/entities/yu-tsao.md` (contributions + NVIDIA affiliation for the first author); `wiki/concepts/mamba.md` (unidirectional TF-Mamba as the depth dial); `wiki/concepts/audio-latency.md` (new algorithmic-vs-computational section, RTF < 1 violation); `wiki/concepts/urgent-challenge.md` (URGENT 2025 as training/eval basis, anechoic-reference caveat); `wiki/concepts/voicebank-demand.md` (cross-dataset PESQ 2.76/2.82 point); `wiki/concepts/speech-enhancement.md` (related source); `wiki/synthesis/deep-speech-enhancement.md` (latency axis paragraph + source row + concept links); `wiki/synthesis/computational-efficiency-evolution.md` (latency-target amortization axis); `wiki/synthesis/joint-multitask-ultra-low-latency-se.md` (Tier 0 latency-as-a-parameter, source row, flexibility table)
+- **Figures**: 2 raster (latency definition, architecture) + 3 SVGs downloaded from the arXiv HTML source (learning curves, UTMOS-vs-latency, CAcc-vs-latency) because defuddle only captured raster images

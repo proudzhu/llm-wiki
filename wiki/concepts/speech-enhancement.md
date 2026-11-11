@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-10-04
+updated: 2026-11-11
 sources:
   - raw/papers/li-2020-geometrically-constrained-iva/full-text.md
   - raw/papers/li-2020-online-gciva/full-text.md
@@ -11,6 +11,7 @@ sources:
   - raw/papers/shetu-2026-generative-discriminative-comparison/full-text.md
   - raw/papers/li-2020-residual-noise-control/full-text.md
   - raw/papers/pan-2025-data-driven-acoustics/full-text.md
+  - raw/papers/fu-2026-one-model-many-latencies/full-text.md
 tags:
   - speech-processing
   - audio-enhancement
@@ -82,3 +83,4 @@ Worked example: concatenating $2Q{+}1$ log-magnitude spectra (161 frequency poin
 - [[sources/shetu-2026-generative-discriminative-comparison|Shetu, Habets & Brendel 2026: Generative vs. Discriminative SE]] — 14-model controlled comparison of generative and discriminative training paradigms
 - [[sources/li-2020-residual-noise-control|Li, Peng, Zheng & Li 2020: Supervised Speech Enhancement with Residual Noise Control]] — generalized loss function embedding residual noise control in training
 - [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — noise reduction as analysis–filter–reconstruction with the three-level loss hierarchy (Section 7)
+- [[sources/fu-2026-one-model-many-latencies|Fu et al. 2026: One Model, Many Latencies]] — makes latency a selectable parameter of one checkpoint (30 configurations; 40–80 ms algorithmic, 10–25 ms compute)
