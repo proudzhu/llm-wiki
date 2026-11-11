@@ -46,7 +46,7 @@ for _s in (sys.stdout, sys.stderr):
 # Matches any `figures/<name>` token with an image extension, regardless of
 # wrapper syntax: ![](figures/x.jpg), ![[raw/papers/s/figures/x.png|alt]],
 # or bare references.
-IMG_RE = re.compile(r'figures/([A-Za-z0-9_\-\.]+\.(?:png|jpe?g|gif|webp))')
+IMG_RE = re.compile(r'figures/([A-Za-z0-9_\-\.]+\.(?:png|jpe?g|gif|webp|svg))')
 # IEEE captions start the line: "Fig. 1.", "Fig. 2:", "Figure 3:" ...
 # The punctuation after the number is REQUIRED: in-text prose like
 # "Figure 1 compares logmelspec..." has no period after the digit and

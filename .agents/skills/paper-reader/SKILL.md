@@ -76,7 +76,7 @@ Exact invocations for every script (all prefixed with `uv run python .agents/ski
 |------|---------|
 | 1-2 | `zotero_fetch.py search "3-5 WORDS"` → `zotero_fetch.py metadata KEY` |
 | 3a | `prepare_paper.py --slug SLUG --pdf-key PDF_KEY` |
-| 3b | `extract_arxiv_html.py --arxiv-id ID --slug SLUG` |
+| 3b | `extract_arxiv_html.py --arxiv-id ID --slug SLUG` (add `--harvest-only` to repair a paper extracted before SVG harvesting) |
 | 3c | `extract_mineru.py --slug SLUG [--language en --model vlm --timeout 600 --pending-timeout 120]` — streams output + watchdog aborts early on `failed`/stuck-`pending`/timeout; on stuck-`pending` abort, retry once, then use 3d |
 | 3d | `extract_pdftotext.py --slug SLUG` |
 | 3e | `map_figures.py --slug SLUG` |
@@ -189,6 +189,14 @@ uv run python .agents/skills/paper-reader/scripts/extract_arxiv_html.py --arxiv-
 
 Auto-creates `raw/papers/{slug}/`. Falls back to MinerU (exit code 2) if HTML 404 or `defuddle` missing — then run 3a + 3c.
 
+**Vector figures are recovered automatically — do not fetch them by hand.** arXiv renders most plots as `<object type="image/svg+xml">`, and the markdown converter only serializes `<img>`; every SVG figure therefore disappears from `full-text.md` with no warning. The script parses the HTML page itself, downloads each SVG, and inserts its embed wikilink directly under the figure's own `Fig. N` caption (panel labels `(a)`/`(b)` stay immediately above their panel image). Confirm the count in its output — `Recovered vector figure: ...` per figure, then `Figures: N in ...` — and check `map_figures.py` shows every caption with an image. If a caption still lists no image, the figure is genuinely text-only in the HTML or lives behind a `<table>`; inspect before assuming loss.
+
+To repair a paper extracted *before* this existed, re-run with `--harvest-only`: it keeps the existing `full-text.md` byte-for-byte (only inserting the missing embeds) and skips the defuddle pass, so the text the wiki already cites is not silently swapped for a different arXiv version:
+
+```bash
+uv run python .agents/skills/paper-reader/scripts/extract_arxiv_html.py --arxiv-id ARXIV_ID --slug SLUG --harvest-only
+```
+
 #### 3c. MinerU (non-arXiv papers or arXiv fallback)
 
 ```bash
@@ -217,7 +225,7 @@ Uses `pdftotext` (poppler) if on PATH; **automatically falls back to `pypdf`** w
 uv run python .agents/skills/paper-reader/scripts/map_figures.py --slug SLUG
 ```
 
-Pairs each hash-named crop with its "Fig. N." caption (line proximity), prints dimensions, flags axis/colorbar strips, exits 2 on referenced-but-missing hashes. One-call replacement for manual figure forensics (`pitfalls.md` #25). If no caption-style lines exist, it falls back automatically to the first in-text "Fig. N" reference of each figure (heuristic — verify multi-panel figures against the sub-labels it prints); only when it reports *neither* captions nor in-text references do you match manually (`pitfalls.md` #32).
+Pairs each hash-named crop (and each recovered `.svg`) with its "Fig. N." caption (line proximity), prints dimensions, flags axis/colorbar strips, exits 2 on referenced-but-missing hashes. A caption whose image list is empty after an arXiv-HTML extraction means a figure was lost in conversion — see `pitfalls.md` #68 — not that the paper lacks a figure there. One-call replacement for manual figure forensics (`pitfalls.md` #25). If no caption-style lines exist, it falls back automatically to the first in-text "Fig. N" reference of each figure (heuristic — verify multi-panel figures against the sub-labels it prints); only when it reports *neither* captions nor in-text references do you match manually (`pitfalls.md` #32).
 
 ### Step 4: Read and Analyze the Full Paper Content
 

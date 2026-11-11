@@ -53,6 +53,8 @@ To address this issue, inspired by the mixture-of-experts (MoE) paradigm, we emp
 
 Fig. 2: Our proposed one-for-all model enables adjustable algorithmic latency through configurable look-ahead frames and computational latency via early exit. For example, under a low-latency budget, inference can follow the orange arrows.
 
+![[raw/papers/fu-2026-one-model-many-latencies/figures/Learnining_curves.svg]]
+
 Fig. 3: Learning curves of UTMOS scores on the validation set under different model architectures.
 
 ### III-B Two-Stage Training for Early-Exit Optimization
@@ -99,8 +101,12 @@ Owing to the flexibility of our proposed one-for-all framework in controlling bo
 As shown in Table I and discussed in Section III-B, while early-exit enables flexible control of computational latency, its enhancement performance typically falls short of the specialized model. Our proposed method (Parallel conv. (MoE)), which introduces parallel convolutional layers to control the number of look-ahead frames, achieves performance comparable to early-exit while additionally providing flexibility in controlling algorithmic latency. The proposed two-stage training framework (Multiple dec. stage), incorporating the multiple-decoder stage, consistently improves most evaluation metrics—most notably CAcc (with the exception of NISQA)—and effectively narrows the performance gap with the specialized model. Note that the results for the conventional early-exit model with (Exit Layer = 8, Look-ahead = 1) are marked as N/A, since the conventional early-exit method does not support adjusting the algorithmic latency.
 
 (a) UTMOS vs. Total latency
+![[raw/papers/fu-2026-one-model-many-latencies/figures/utmos_latency.svg]]
+
 
 (b) CAcc vs. Total latency
+![[raw/papers/fu-2026-one-model-many-latencies/figures/CAcc_latency.svg]]
+
 
 Fig. 4: Relationship between performance metrics and total latency. Our one-for-all model supports 30 distinct latency configurations (results for exit layers 3, 5, 7, 9, and 11 are omitted for brevity).
 
