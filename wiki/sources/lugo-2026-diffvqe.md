@@ -1,7 +1,7 @@
 ---
 type: source
 created: 2026-08-15
-updated: 2026-08-15
+updated: 2026-11-11
 sources:
   - raw/papers/lugo-2026-diffvqe/full-text.md
   - https://doi.org/10.48550/arXiv.2605.08189
@@ -91,6 +91,74 @@ Cond DNN and Score DNN share a U-Net backbone built from strided **DSBlock**/**U
 
 ![[raw/papers/lugo-2026-diffvqe/figures/fig2.png|Building blocks]]
 *Figure 3: Building blocks of the Cond/Score DNNs: DSBlock/USBlock with sub-pixel upsampling.*
+
+### Model Structure, Inputs, and Outputs
+
+```mermaid
+flowchart TB
+    X["Far-end reference x(n)<br/>(16 kHz)"]
+    Y["Microphone signal y(n)<br/>(16 kHz)"]
+    X --> STFTX["STFT<br/>frame 512, hop 128, sqrt-Hann<br/>257 bins padded to 260"]
+    Y --> STFTY["STFT<br/>frame 512, hop 128, sqrt-Hann<br/>257 bins padded to 260"]
+    STFTX --> CAT["Early fusion<br/>concat X and Y on channel axis"]
+    STFTY --> CAT
+    CAT --> COND
+
+    subgraph COND["Cond DNN (discriminative)"]
+        CU["U-Net encoder<br/>DSBlocks (3x5), stride (1x2)<br/>channels 11-16-23-33-50"]
+        CD["U-Net decoder<br/>USBlocks with sub-pixel upsampling"]
+        CU --> CD
+    end
+
+    COND --> OUT1["First estimate S_cond_hat<br/>+ condition C"]
+    OUT1 --> NOISE["S_T = S_cond_hat + sigma_T * Z<br/>variance-exploding schedule"]
+    NOISE --> SCORE
+
+    subgraph SCORE["Score DNN (generative)"]
+        SU["Same U-Net backbone as Cond DNN<br/>(different input/output heads)<br/>Karras preconditioning:<br/>unit-variance in/out + skip"]
+    end
+
+    SCORE --> S0["Score S_theta(S_T | sigma_T, C)"]
+    S0 --> UPD["S_hat = S_T + sigma_T^2 * S_theta<br/>single Langevin step (NFE = 1)"]
+    UPD --> ISTFT["iSTFT to time domain<br/>enhanced near-end s_hat(n)"]
+```
+
+**Cond DNN spec**:
+
+| Property | Value |
+|----------|-------|
+| **Structure** | U-Net encoder/decoder of alternating `DSBlock(k_T×k_F, C_out)/s_T×s_F` and `USBlock` pairs; kernel $3\times5$ (time × frequency), stride $(1,2)$; channel widths $\{11,16,23,33,50\}$ (base) / $\{11,15,21,29,40\}$ (small); no strided conv in the first/last layer, one extra DSBlock/USBlock pair vs. EffDiffSE, transposed convs replaced by **sub-pixel convolutions**; activation functions not stated in the paper |
+| **Input** | Complex STFT frames of the far-end reference $\mathbf{X}\in\mathbb{C}^{260\times L}$ **concatenated with** the microphone signal $\mathbf{Y}$ (early fusion) — 260 bins (257 padded), frame 512, hop 128 at 16 kHz → 125 frames/s (8 ms hop) |
+| **Output** | First near-end estimate $\hat{\mathbf{S}}^{\mathrm{cond}}$ (one complex spectrum per frame, same 260-bin grid) **plus** the conditioning tensor $\mathbf{C}$ consumed by the Score DNN |
+| **Training data** | ~623 h of synthetic AEC mixtures (URGENT 2025 speech/noise ≈600 h + ICASSP 2023 AEC Challenge synthetic set ≈23 h, 8,500 samples) |
+| **Role** | Discriminative echo-and-noise suppression: consumes the far-end reference so echo removal happens here, leaving only refinement to the generative stage |
+
+**Score DNN spec**:
+
+| Property | Value |
+|----------|-------|
+| **Structure** | Same U-Net family as the Cond DNN (Score-specific input/output heads); **Karras preconditioning** — inputs and targets modulated to unit variance around $\sigma_{\tilde{t}}$, plus a skip connection that adds the scaled noisy input, keeping Score-DNN errors from being amplified |
+| **Input** | Noisy state $\mathbf{S}_{T} = \hat{\mathbf{S}}^{\mathrm{cond}} + \sigma_{T}\mathbf{Z}$, the noise level $\sigma_{T}$ (a scalar injected as conditioning), and the speech condition $\mathbf{C}$ from the Cond DNN |
+| **Output** | The score $\mathbf{S}_{\theta}(\mathbf{S}_{T}\mid\sigma_{T},\mathbf{C})$, i.e. an estimate of $-\mathbf{Z}/\sigma_{T}$; combined by one Langevin step into the final complex spectrum $\hat{\mathbf{S}}$, then iSTFT to a 16 kHz waveform |
+| **Training data** | Same $\sim$623 h mixture set, trained jointly with the Cond DNN under one total loss |
+| **Role** | Generative refinement: one reverse-diffusion step that restores fine spectral detail the discriminative estimate lacks (the source of the PESQ/ESTOI/LPS gains) |
+
+Both networks train **jointly** (not staged) under the single objective below: the Cond DNN's estimate enters the Score DNN through $\mathbf{S}_{T}$, so the CCMSE term on $\hat{\mathbf{S}}^{\mathrm{cond}}$ and the term on $\hat{\mathbf{S}}$ back-propagate through both networks.
+
+### Training Losses
+
+Total objective (Eq. 8), applied to both networks simultaneously:
+
+$$
+J = \underbrace{J^{CC}(\hat{\mathbf{S}}^{\mathrm{cond}}, \mathbf{S})}_{\text{Cond DNN output}} + \underbrace{J^{CC}(\hat{\mathbf{S}}, \mathbf{S})}_{\text{final estimate}} + \alpha \, \underbrace{J^{\mathrm{SM}}(\mathbf{S}, \sigma_{\tilde{t}})}_{\text{Score DNN}}
+$$
+
+with $\alpha = 0.005$, chosen "to balance loss magnitudes".
+
+- **$J^{CC}$** — compressed complex MSE (Braun & Tashev 2021), see [[concepts/complex-compressed-mse|CCMSE]]. A complex-domain target pulls phase toward the clean speech, and magnitude compression keeps high-energy harmonics from dominating; it is applied twice, once as a direct supervision of the discriminative stage and once on the post-diffusion output.
+- **$J^{\mathrm{SM}}$** — denoising score matching (Eq. 4): $\mathbb{E}[\lVert \mathbf{S}_{\theta}(\mathbf{S}+\sigma_{\tilde{t}}\mathbf{Z}\mid\sigma_{\tilde{t}},\mathbf{C}) + \mathbf{Z}/\sigma_{\tilde{t}}\rVert^{2}]$, the score-matching term that trains the generative stage. Because the target score of the VE perturbation is exactly $-\mathbf{Z}/\sigma_{\tilde{t}}$, the loss needs only the injected noise, not the true score.
+- **Matched-condition training** — $\tilde{t} = T = 0.3$ is used as a fixed noise level rather than sampling $\tilde{t}\sim\mathcal{U}[0,T]$, which is what allows inference with a single step.
+- **No adversarial, perceptual, or waveform loss** is used: quality gains come from the generative reverse step, not from a vocoder-style discriminator.
 
 ## Experimental Setup
 

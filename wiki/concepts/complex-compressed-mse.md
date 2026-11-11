@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-07-17
-updated: 2026-07-17
+updated: 2026-11-11
 sources:
   - raw/papers/seidel-2024-bark-scale-nn-residual-suppression/full-text.md
+  - raw/papers/lugo-2026-diffvqe/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -38,6 +39,7 @@ where:
 CCMSE is used as the training loss for several hybrid AEC neural postfilters, including:
 
 - [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Seidel et al. 2024]] — used with $c = 0.3$ and an STFT-consistency enforcement on the estimated signal $\tilde{S}$.
+- [[sources/lugo-2026-diffvqe\|Lugo et al. 2026 (DiffVQE)]] — the same $J^{CC}$ is applied twice in the hybrid diffusion AEC loss: once to the discriminative Cond DNN estimate $\hat{\mathbf{S}}^{\mathrm{cond}}$ and once to the post-diffusion output $\hat{\mathbf{S}}$, combined with a denoising score-matching term weighted by $\alpha = 0.005$.
 
 ## Why Compression?
 
@@ -61,3 +63,4 @@ The complex term $(\alpha)$ penalizes phase errors in addition to magnitude erro
 ## Related Sources
 
 - [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Seidel, Mowlaee & Fingscheidt 2024]] — uses CCMSE with $c = 0.3$ for training the Bark-scale postfilter
+- [[sources/lugo-2026-diffvqe\|Lugo et al. 2026: DiffVQE]] — double CCMSE term in a single-step hybrid diffusion AEC objective

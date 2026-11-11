@@ -6467,3 +6467,14 @@ Answered from [[sources/li-2026-geometry-conditioned-ssanc|Li 2026 GC-SSF]] and 
   - `wiki/synthesis/deep-speech-enhancement.md` — source row, Insight 4 "ordering is an axis" paragraph, representative-model matrix row, related concepts
   - `wiki/synthesis/joint-multitask-ultra-low-latency-se.md` — source row and a "MAC-optimal vs latency-optimal" precedence paragraph for Insight 3
 - **Notes**: Text quotes CCFNet+(Lite) PESQ gap as 0.17 while Table II gives 3.16 − 2.94 = 0.22; source page reports the table arithmetic and flags the discrepancy.
+
+---
+
+## [2026-11-11] ingest | DiffVQE: hybrid diffusion voice quality enhancement under acoustic echo and noise (Lugo et al. 2026)
+
+- **Source**: `raw/papers/lugo-2026-diffvqe/full-text.md` (Zotero: 9UTQLQW7)
+- **Authors**: Haljan Lugo, Ernst Seidel, Pejman Mowlaee, Ziyue Zhao, Tim Fingscheidt
+- **Published**: arXiv 2605.08189 (v2, 2026-06-17)
+- **DOI**: 10.48550/arXiv.2605.08189
+- **Summary**: Gap-fill update to the existing DiffVQE ingest: added the mandatory neural-network documentation (mermaid Cond/Score data-flow diagram, per-network structure/input/output/training-data/role spec tables, and the joint CCMSE + denoising-score-matching loss section with alpha = 0.005). All numeric claims re-verified against the arXiv HTML v2 — page content unchanged apart from the new sections.
+- **Pages updated**: `wiki/sources/lugo-2026-diffvqe.md` (added `### Model Structure, Inputs, and Outputs` and `### Training Losses`; frontmatter `updated:` bumped)
