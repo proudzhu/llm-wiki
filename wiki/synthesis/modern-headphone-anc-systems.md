@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-04-12
-updated: 2026-11-08
+updated: 2026-11-12
 tags:
   - active-noise-control
   - bone-conduction
@@ -21,6 +21,7 @@ sources:
   - raw/papers/rao-2026-keep-speech-anc/full-text.txt
   - raw/papers/yuan-2026-open-ear-anc-smart-glasses/full-text.md
   - raw/papers/chiba-2027-wideband-anc-coaxial-loudspeaker/full-text.txt
+  - raw/papers/chiba-2026-open-back-enclosure-leakage/full-text.md
   - wiki/sources/liebich-2022-occlusion-effect-cancellation.md
   - raw/papers/forster-2022-optimal-microphone-positioning/full-text.txt
   - raw/papers/kuo-2006-anc-headphones/full-text.txt
@@ -201,6 +202,7 @@ The rise of Open-Ear (OWS) devices creates a new ANC challenge: the primary nois
 - **Preserve instead of reconstruct**: [[sources/xiao-2023-spatially-selective-anc|Xiao, Xu & Zhao 2023]] show on open-fitting AR glasses that a Frost-type spatial constraint on the hybrid ANC cost function leaves the desired-direction physical wave unaltered at the error microphone — avoiding the latency, energy (~50× more secondary-source energy for reconstruct-based systems), and binaural-cue loss of synthetic reconstruction ([[concepts/spatially-selective-anc|Spatially Selective ANC]]).
 - **Signal adaptation before control**: [[sources/watanabe-2026-low-frequency-harmonic-control|Watanabe et al. 2026]] sidestep the leakage problem entirely — instead of anti-noise, their [[concepts/low-frequency-harmonic-control|LFHC]] post-filter reallocates speech harmonic energy away from the masked, output-limited low frequencies (suppress $f_0$, emphasize the 2nd/3rd harmonics via a single-tap comb filter), improving open-ear playback intelligibility at −5 dB(A) SNR — orders of magnitude cheaper than the dual-compensation or spatial-constraint approaches above.
 - **Loudspeaker design as the control enabler**: [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba et al. 2027]] widen the open-ear control band by reshaping the *secondary path itself*: a [[concepts/coaxial-two-way-secondary-source|coaxial 2-way secondary source]] (35 mm woofer + forward-mounted 12 mm tweeter) with [[concepts/delay-oriented-driver-allocation|delay-oriented driver allocation]] — woofer for low frequencies (resonance ≈150 Hz → low mechanical group delay), tweeter above (≈6 µs acoustic path) — under an electronic/acoustic/mechanical [[concepts/causality|delay budget]]. Measured-path offline evaluation on the nwm ONE: 8.01 dB over 100–2000 Hz (dual-filter, background band-splitting) / 7.58 dB (single-filter at ~half the convolution and coefficient storage) vs 5.94 dB best single driver; a real error microphone at the ear-canal entrance, 3 housing reference microphones per ear. This is the acoustic-domain complement to Yuan et al.'s sensing-domain solution: the same open-ear constraint set, solved in loudspeaker geometry rather than in neural networks.
+- **The outward half of the open-ear problem**: every route above fights sound *entering* the ear; [[sources/chiba-2026-open-back-enclosure-leakage|Chiba, Kako & Harada 2026]] attack the mirror-image problem — playback *leaving* the device. Their [[concepts/open-back-enclosure|open-back enclosure]] needs no DSP, microphones, or second driver: the single driver's own rear radiation is vented through four Helmholtz-tuned side-openings so the device radiates as a [[concepts/dipole-acoustic-radiation|dipole]], near-field level preserved by the proximity effect while far-field leakage drops 7.6 dB (normalized, 1–7 kHz) versus a sealed enclosure and 7.3 dB versus a back-opening one at equal resonance frequency. The trade is band-limited: above ~7 kHz the sealed enclosure leaks less. Read alongside the ANC routes, it completes the form-factor story — the open ear costs both noise intrusion (fought actively, at 100–1000 Hz) and leakage (fought passively, at 1–7 kHz), and the two bands barely overlap.
 - **SoC Convergence**: Hardware platforms (e.g., BES6100) are now integrating dedicated NPUs and ISP pipelines to manage multi-modal sensing in real-time, moving computation from the cloud to the device edge.
 
 ### 5.2 The Future: Multi-Modal Acoustic Computing
@@ -269,6 +271,9 @@ This requires a dedicated DSP (e.g., Qualcomm QCC5141, ~200 MIPS capability).
 - [[concepts/acoustic-equalization-system|Acoustic Equalization System (AES)]] — simultaneous ANC + hear-through via frequency-band allocation
 - [[concepts/hear-through-frequency-band-allocation|Hear-Through Frequency-Band Allocation]] — passive-isolation-anchored band design for integrated ANC+HT
 - [[concepts/balanced-truncation-model-reduction|Balanced Truncation Model Reduction]] — offline FIR → low-order IIR for the classical integrated route
+- [[concepts/sound-leakage|Sound Leakage]] — the outward-radiation constraint of open-ear form factors
+- [[concepts/open-back-enclosure|Open-Back Enclosure]] — passive enclosure-side leakage control
+- [[concepts/dipole-acoustic-radiation|Dipole Acoustic Radiation]] — near/far-field split exploited by the passive leakage design
 
 ## Related Sources
 
@@ -288,6 +293,7 @@ This requires a dedicated DSP (e.g., Qualcomm QCC5141, ~200 MIPS capability).
 - [[sources/forster-2022-optimal-microphone-positioning|Forster, Fabry & Jax 2022: Optimal Microphone Positioning for Multi-Channel Feedforward ANC Headphones]] — quantitative placement rule for the sensor stack's reference microphones: ipsilateral distribution ~9 dB, contralateral positions causality-blocked
 - [[sources/kuo-2006-anc-headphones|Kuo, Mitra & Gan 2006: Active Noise Control System for Headphone Applications]] — the error-microphone counterpart: placement by flattest secondary-path magnitude response (pinna spectral filtering), with music-based identification calibration
 - [[sources/huang-2026-integrated-anc-hear-through|Huang, Chang & Kuo 2026: Integrated ANC and Hear-Through for Speech Clarity]] — the fully classical speech-clarity route: fixed band-allocated ANC+HT filters with user-tunable gains, beating HT-mode commercial headphones under aircraft-cabin noise
+- [[sources/chiba-2026-open-back-enclosure-leakage|Chiba, Kako & Harada 2026: Designing an Open-Back Enclosure to Mitigate Sound Leakage for Open-Ear Headphones]] — the outward half of the open-ear problem: a single-driver, DSP-free Helmholtz-tuned dipole enclosure cuts normalized leakage 7.6 dB over 1–7 kHz versus sealed
 
 ## Related Synthesis
 

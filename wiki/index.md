@@ -730,6 +730,7 @@
 | [[entities/sung-feng-huang\|Sung-Feng Huang]] | NVIDIA researcher; co-author of the latency-flexible universal speech enhancement model | 2026-11-11 |
 | [[entities/ante-jukic\|Ante Jukić]] | NVIDIA researcher in speech enhancement and separation; co-author of the latency-flexible universal SE model | 2026-11-11 |
 | [[entities/yu-chiang-frank-wang\|Yu-Chiang Frank Wang]] | NVIDIA researcher in ML for speech and audio; co-author of the latency-flexible universal SE model | 2026-11-11 |
+| [[entities/noboru-harada\|Noboru Harada]] | NTT Senior Distinguished Researcher & Hokkaido University visiting professor — speech/audio coding, lossless compression, acoustic event detection; co-author of the open-back enclosure for open-ear sound-leakage mitigation | 2026-11-12 |
 
 ---
 
@@ -1396,6 +1397,9 @@
 | [[concepts/universal-speech-enhancement\|Universal Speech Enhancement]] | Single-model SE across heterogeneous conditions; the latency budget as a second universality axis | 2026-11-11 |
 | [[concepts/parallel-look-ahead-convolutions\|Parallel Look-Ahead Convolutions]] | MoE-shaped branch bank, one conv per look-ahead setting, user-selected at inference — algorithmic-latency control without a learned router | 2026-11-11 |
 | [[concepts/early-exit-speech-enhancement\|Early-Exit Speech Enhancement]] | Depth-selectable inference for computational-latency control; two-stage shared→multiple decoder training | 2026-11-11 |
+| [[concepts/open-back-enclosure\|Open-Back Enclosure]] | Vented-back loudspeaker housing that radiates the driver's opposite-phase rear wave as a dipole; Helmholtz-tuned side-openings set the delay and high-frequency roll-off for leakage cancellation | 2026-11-12 |
+| [[concepts/dipole-acoustic-radiation\|Dipole Acoustic Radiation]] | Opposite-phase source pair with a near-field/far-field split: proximity-effect low-frequency boost up close, high-pass cancellation at distance — the basis of passive open-ear leakage mitigation | 2026-11-12 |
+| [[concepts/sound-leakage\|Sound Leakage]] | Outward radiation of reproduced audio to bystanders — the structural cost of open-ear transparency; measured normalized to listening level over 1–7 kHz | 2026-11-12 |
 
 ---
 
@@ -1699,6 +1703,7 @@
 | [[sources/wang-2025-multi-modal-deep-filtering-bc\|Wang, Kuang, Li, Yang, Bai & Liu 2025]] | This paper proposes MDFNet, a lightweight multi-modal deep-filtering network that jointly enhances synchronized bone-conducted (BC) and noisy air-conducted (AC) speech in the complex STFT domain. | 2026-11-08 |
 | [[sources/zhao-2025-lightweight-transformer\|Zhao & Madhu 2025: Study of Lightweight Transformer Architectures for Single-Channel Speech Enhancement]] | Systematic ablation of temporal/spectral transformer bottleneck orderings yields the FTF (frequency-time-frequency) stack; with cross-axis parameter sharing, 1 s-capped causal attention and waveform discriminators, LCT-GAN hits 3.06 PESQ on VoiceBank+DEMAND at 0.14 M params / 0.35 G MAC/s. | 2025-09-08 |
 | [[sources/fu-2026-one-model-many-latencies\|Fu et al. 2026]] | One universal speech enhancement (USE) model whose algorithmic and computational latency are both user-selectable at inference, so a single trained checkpoint covers 30 latency configurations instead of requiring one specialized model per latency budget. | 2026-11-11 |
+| [[sources/chiba-2026-open-back-enclosure-leakage\|Chiba, Kako & Harada 2026]] | Single-driver open-back enclosure for open-ear headphones: four Helmholtz-tuned side-openings vent the driver's own opposite-phase radiation, giving a dipole pattern that cuts normalized sound leakage 7.6 dB over 1–7 kHz versus a sealed enclosure while keeping the near-field low-frequency level. | 2026-11-12 |
 
 ---
 
@@ -1757,10 +1762,10 @@
 
 ## Statistics
 
-- **Total pages**: 1706
-- **Entities**: 720
-- **Concepts**: 657
-- **Sources**: 294
+- **Total pages**: 1711
+- **Entities**: 721
+- **Concepts**: 660
+- **Sources**: 295
 - **Synthesis**: 25
 - **Queries**: 10
-- **Last updated**: 2026-11-11
+- **Last updated**: 2026-11-12

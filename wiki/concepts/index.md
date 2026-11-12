@@ -661,4 +661,7 @@
 | [[concepts/universal-speech-enhancement\|Universal Speech Enhancement]] | Single-model SE across heterogeneous conditions; the latency budget as a second universality axis | 2026-11-11 |
 | [[concepts/parallel-look-ahead-convolutions\|Parallel Look-Ahead Convolutions]] | MoE-shaped branch bank, one conv per look-ahead setting, user-selected at inference — algorithmic-latency control without a learned router | 2026-11-11 |
 | [[concepts/early-exit-speech-enhancement\|Early-Exit Speech Enhancement]] | Depth-selectable inference for computational-latency control; two-stage shared→multiple decoder training | 2026-11-11 |
+| [[concepts/open-back-enclosure\|Open-Back Enclosure]] | Vented-back loudspeaker housing that radiates the driver's opposite-phase rear wave as a dipole; Helmholtz-tuned side-openings set the delay and high-frequency roll-off for leakage cancellation | 2026-11-12 |
+| [[concepts/dipole-acoustic-radiation\|Dipole Acoustic Radiation]] | Opposite-phase source pair with a near-field/far-field split: proximity-effect low-frequency boost up close, high-pass cancellation at distance — the basis of passive open-ear leakage mitigation | 2026-11-12 |
+| [[concepts/sound-leakage\|Sound Leakage]] | Outward radiation of reproduced audio to bystanders — the structural cost of open-ear transparency; measured normalized to listening level over 1–7 kHz | 2026-11-12 |
 

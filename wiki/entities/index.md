@@ -724,4 +724,5 @@
 | [[entities/sung-feng-huang\|Sung-Feng Huang]] | NVIDIA researcher; co-author of the latency-flexible universal speech enhancement model | 2026-11-11 |
 | [[entities/ante-jukic\|Ante Jukić]] | NVIDIA researcher in speech enhancement and separation; co-author of the latency-flexible universal SE model | 2026-11-11 |
 | [[entities/yu-chiang-frank-wang\|Yu-Chiang Frank Wang]] | NVIDIA researcher in ML for speech and audio; co-author of the latency-flexible universal SE model | 2026-11-11 |
+| [[entities/noboru-harada\|Noboru Harada]] | NTT Senior Distinguished Researcher & Hokkaido University visiting professor — speech/audio coding, lossless compression, acoustic event detection; co-author of the open-back enclosure for open-ear sound-leakage mitigation | 2026-11-12 |
 

@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-10-24
-updated: 2026-10-24
+updated: 2026-11-12
 sources:
   - raw/papers/chiba-2027-wideband-anc-coaxial-loudspeaker/full-text.txt
+  - raw/papers/chiba-2026-open-back-enclosure-leakage/full-text.md
 tags:
   - active-noise-control
   - loudspeaker-design
@@ -46,7 +47,9 @@ In conventional 2-way speakers the crossover allocates bands for **flat spectral
 - [[concepts/open-ear-headphones|Open-Ear Headphones]]
 - [[concepts/feedforward-anc|Feedforward ANC]]
 - [[concepts/causality|Causality in ANC]]
+- [[concepts/open-back-enclosure|Open-Back Enclosure]] — the passive, single-driver counterpart to a multi-driver secondary source
 
 ## Related Sources
 
 - [[sources/chiba-2027-wideband-anc-coaxial-loudspeaker|Chiba, Kamado, Kako & Noguchi 2027: Wideband ANC for Open-Ear Headphones via Low-Delay Acoustic Design with a Coaxial Loudspeaker]]
+- [[sources/chiba-2026-open-back-enclosure-leakage|Chiba, Kako & Harada 2026: Designing an Open-Back Enclosure to Mitigate Sound Leakage for Open-Ear Headphones]] — the same group's enclosure-side work: instead of a second driver, a Helmholtz-tuned back cavity vents the single driver's opposite-phase radiation for passive leakage cancellation
