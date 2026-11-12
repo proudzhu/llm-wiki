@@ -12,7 +12,7 @@ type: source
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 sources:
-  - raw/papers/{slug}/full-text.md
+  - raw/papers/{slug}/full-text.md     # full-text.txt when extracted by Step 3d (no images)
   - https://doi.org/...
   - zotero://select/items/0_KEY
 tags:
@@ -65,7 +65,7 @@ Guidelines:
 
 - Place figures immediately after the section they illustrate.
 - **Use embed wikilinks, NOT markdown image syntax.** Write `![[raw/papers/{slug}/figures/ACTUAL_FILENAME.ext|caption]]` — never `![alt](path)` — because markdown image paths resolve incorrectly in Obsidian and break the vault-absolute convention. A stray `![...](...)` figure line is a convention violation and will surface in `mkdocs build --strict`.
-- **Run `scripts/map_figures.py --slug {slug}` FIRST** (Step 4a) to map hash-named crops to "Fig. N." captions in one call. MinerU splits multi-panel figures into several files and sometimes extracts axis/colorbar strips it never references; the script lists each caption's images with line numbers and dimensions, flags unreferenced strips, and errors (exit 2) on referenced-but-missing hashes. Copy filenames verbatim from its output.
+- **Run `scripts/map_figures.py --slug {slug}` FIRST** (Step 3e) to map hash-named crops to "Fig. N." captions in one call. MinerU splits multi-panel figures into several files and sometimes extracts axis/colorbar strips it never references; the script lists each caption's images with line numbers and dimensions, flags unreferenced strips, and errors (exit 2) on referenced-but-missing hashes. Copy filenames verbatim from its output.
 - **Verify each filename exists** before writing the embed wikilink — a single-character typo in a hash filename will cause a build failure. Use Glob with a partial hash prefix (e.g., `raw/papers/{slug}/figures/3c0491873b*`) or `map_figures.py` output to confirm the exact filename.
 - **Multi-panel figures**: MinerU extracts each panel as a separate file. When a figure has (a)/(b)/(c) sub-labels, embed each panel file separately with its own caption line (e.g., `(a) ...` / `(b) ...`) above the shared `*Figure N: ...*` caption — do not embed one cropped panel as a stand-in for the whole figure.
 - Add an italicized caption below each figure: `*Figure N: description.*`

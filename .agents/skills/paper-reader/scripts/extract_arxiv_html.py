@@ -487,7 +487,7 @@ def main():
     else:
         run_defuddle(html_url, md_path)
 
-    # Step 4a: Recover the vector figures defuddle drops (arXiv serves
+    # Step 3b-extra: Recover the vector figures defuddle drops (arXiv serves
     # plots as <object type="image/svg+xml">). Without this, every SVG
     # figure vanishes silently and the source page loses its result plots.
     print("\nRecovering vector (SVG) figures ...")

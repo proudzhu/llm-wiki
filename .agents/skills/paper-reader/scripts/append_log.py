@@ -18,7 +18,11 @@ Usage:
   uv run python .agents/skills/paper-reader/scripts/append_log.py \
       --op query --title "Question topic" --body "One-line answer..."
 
-Operations: ingest, query, lint, merge.
+  # Re-run of an operation (camera-ready replacing a preprint):
+  uv run python .agents/skills/paper-reader/scripts/append_log.py \
+      --op ingest --re --title "Paper Title (Author Year)" --file entry.md
+
+Operations: ingest, query, lint, merge. `--re` appends " (re)" to the op.
 """
 import argparse, datetime, re, sys
 
@@ -52,6 +56,9 @@ def main():
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument('--op', required=True, choices=VALID_OPS, help='Operation type')
+    p.add_argument('--re', action='store_true',
+                   help='Mark a re-run of an operation, e.g. "ingest (re)" '
+                        'for a camera-ready replacing a preprint')
     p.add_argument('--title', required=True, help='Entry title (after |)')
     p.add_argument('--file', help='Read body content from this file')
     p.add_argument('--stdin', action='store_true', help='Read body from stdin')
@@ -72,14 +79,15 @@ def main():
     validate_body(body)
 
     today = datetime.date.today().isoformat()
-    entry = f"\n---\n\n## [{today}] {args.op} | {args.title}\n\n"
+    op = f"{args.op} (re)" if args.re else args.op
+    entry = f"\n---\n\n## [{today}] {op} | {args.title}\n\n"
     if body:
         entry += f"{body}\n"
 
     with open(LOG_PATH, 'a', encoding='utf-8') as f:
         f.write(entry)
 
-    print(f"Appended log entry: [{today}] {args.op} | {args.title}")
+    print(f"Appended log entry: [{today}] {op} | {args.title}")
     print(f"Log file: {LOG_PATH}")
 
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 4a: Map MinerU figure files to figure numbers in full-text.md.
+"""Step 3e: Map MinerU figure files to figure numbers in full-text.md.
 
 MinerU extracts papers as hash-named JPEG crops in raw/papers/{slug}/figures/
 and inlines SOME of them into full-text.md as ![](figures/HASH.jpg). Multi-panel
