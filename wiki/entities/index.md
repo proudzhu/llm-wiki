@@ -725,4 +725,7 @@
 | [[entities/ante-jukic\|Ante Jukić]] | NVIDIA researcher in speech enhancement and separation; co-author of the latency-flexible universal SE model | 2026-11-11 |
 | [[entities/yu-chiang-frank-wang\|Yu-Chiang Frank Wang]] | NVIDIA researcher in ML for speech and audio; co-author of the latency-flexible universal SE model | 2026-11-11 |
 | [[entities/noboru-harada\|Noboru Harada]] | NTT Senior Distinguished Researcher & Hokkaido University visiting professor — speech/audio coding, lossless compression, acoustic event detection; co-author of the open-back enclosure for open-ear sound-leakage mitigation | 2026-11-12 |
+| [[entities/olaf-ronneberger\|Olaf Ronneberger]] | University of Freiburg — first author of U-Net, the encoder–decoder with skip connections that became the default biomedical segmentation backbone | 2026-11-15 |
+| [[entities/philipp-fischer\|Philipp Fischer]] | University of Freiburg — co-author of U-Net (MICCAI 2015) | 2026-11-15 |
+| [[entities/thomas-brox\|Thomas Brox]] | University of Freiburg — computer vision (optical flow, self-supervised features); co-author of U-Net | 2026-11-15 |
 

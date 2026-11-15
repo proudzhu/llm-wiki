@@ -664,4 +664,8 @@
 | [[concepts/open-back-enclosure\|Open-Back Enclosure]] | Vented-back loudspeaker housing that radiates the driver's opposite-phase rear wave as a dipole; Helmholtz-tuned side-openings set the delay and high-frequency roll-off for leakage cancellation | 2026-11-12 |
 | [[concepts/dipole-acoustic-radiation\|Dipole Acoustic Radiation]] | Opposite-phase source pair with a near-field/far-field split: proximity-effect low-frequency boost up close, high-pass cancellation at distance — the basis of passive open-ear leakage mitigation | 2026-11-12 |
 | [[concepts/sound-leakage\|Sound Leakage]] | Outward radiation of reproduced audio to bystanders — the structural cost of open-ear transparency; measured normalized to listening level over 1–7 kHz | 2026-11-12 |
+| [[concepts/u-net\|U-Net]] | Fully convolutional encoder–decoder with copy-and-concatenate skip connections; ancestor of the CRN, TRU-Net, GTCRN and other symmetric encoder/decoder speech-enhancement lineages | 2026-11-15 |
+| [[concepts/overlap-tile-strategy\|Overlap-Tile Strategy]] | Seamless segmentation of arbitrarily large images: predict interior tiles with mirrored border context and stitch only valid regions | 2026-11-15 |
+| [[concepts/boundary-weighted-loss\|Boundary-Weighted Loss]] | Pixel-wise cross-entropy weighted by a distance-to-cell-border Gaussian (w0=10, σ≈5 px) that forces learning of separation borders between touching instances | 2026-11-15 |
+| [[concepts/elastic-deformation-augmentation\|Elastic Deformation Augmentation]] | Smooth random warps from a coarse 3×3 Gaussian displacement grid (10-px std, bicubic); the trick that lets segmentation networks train on 20–30 annotated images | 2026-11-15 |
 

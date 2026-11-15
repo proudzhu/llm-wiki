@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-07-31
-updated: 2026-07-31
+updated: 2026-11-15
 sources:
   - raw/papers/choi-2021-trunet-real-time-speech-enhancement/full-text.md
+  - raw/papers/ronneberger-2015-u-net/full-text.md
 tags:
   - neural-network
   - speech-enhancement
@@ -15,7 +16,7 @@ tags:
 
 # Tiny Recurrent U-Net (TRU-Net)
 
-**TRU-Net** (Tiny Recurrent U-Net) is a lightweight online speech enhancement architecture proposed by Choi et al. (ICASSP 2021). It is a **frequency-axis U-Net** that decouples frequency-axis and time-axis computations, enabling causal online inference with only 0.38 M parameters (362 KB when INT8-quantized). Combined with the [[concepts/phase-aware-beta-sigmoid-mask|phase-aware β-sigmoid mask (PHM)]], TRU-Net performs single-stage simultaneous denoising and dereverberation at sub-2 ms single-frame latency.
+**TRU-Net** (Tiny Recurrent U-Net) is a lightweight online speech enhancement architecture proposed by Choi et al. (ICASSP 2021). It is a **frequency-axis [[concepts/u-net|U-Net]]** that decouples frequency-axis and time-axis computations, enabling causal online inference with only 0.38 M parameters (362 KB when INT8-quantized). Combined with the [[concepts/phase-aware-beta-sigmoid-mask|phase-aware β-sigmoid mask (PHM)]], TRU-Net performs single-stage simultaneous denoising and dereverberation at sub-2 ms single-frame latency.
 
 ## Motivation
 
@@ -109,3 +110,4 @@ TRU-Net is an early (2021) example of the joint multi-task speech enhancement pa
 ## Related Sources
 
 - [[sources/choi-2021-trunet-real-time-speech-enhancement|Choi et al. 2021: Real-Time Denoising and Dereverberation with Tiny Recurrent U-Net]]
+- [[sources/ronneberger-2015-u-net|Ronneberger, Fischer & Brox 2015: U-Net]] — the original symmetric encoder–decoder topology

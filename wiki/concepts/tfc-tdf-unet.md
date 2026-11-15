@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-15
-updated: 2026-09-15
+updated: 2026-11-15
 sources:
   - raw/papers/kim-2021-kuielab-mdx-net/full-text.md
+  - raw/papers/ronneberger-2015-u-net/full-text.md
 tags:
   - neural-networks
   - music-source-separation
@@ -12,7 +13,7 @@ tags:
 
 # TFC-TDF U-Net
 
-The TFC-TDF U-Net is a spectrogram-domain neural architecture for music source separation, introduced by Choi et al. (ISMIR 2020). Its name comes from its two complementary block types: TFC (Time-Frequency Convolution) blocks, which aggregate information along both time and frequency within a scale, and TDF (Time-Distributed Frequency) blocks, which operate fully along frequency within each frame — explicitly designed so that frequency-axis processing sees the long-range harmonic structure of music. DTTNet (ICASSP 2024) is a lightweight dual-path TFC-TDF variant, and RT-STT (ICME 2025) specialised the lineage for real-time low-latency operation.
+The TFC-TDF U-Net is a spectrogram-domain [[concepts/u-net|U-Net]] architecture for music source separation, introduced by Choi et al. (ISMIR 2020). Its name comes from its two complementary block types: TFC (Time-Frequency Convolution) blocks, which aggregate information along both time and frequency within a scale, and TDF (Time-Distributed Frequency) blocks, which operate fully along frequency within each frame — explicitly designed so that frequency-axis processing sees the long-range harmonic structure of music. DTTNet (ICASSP 2024) is a lightweight dual-path TFC-TDF variant, and RT-STT (ICME 2025) specialised the lineage for real-time low-latency operation.
 
 Trained weight visualizations of single-layered TDF blocks show *why* frequency-axis linear layers help: each matrix organizes into a linear harmonic pattern ($y=\frac{\alpha}{\beta}x$) matching the timbre of its target instrument, and this structure is robust across scales.
 
@@ -54,3 +55,4 @@ Deployed sizes: 131 k parameters (501 kB float32) for the full-band variant; a s
 
 - [[sources/li-2026-realtime-music-separation-dsp|Li, Liu, Malsky & Yi 2026: Real-Time Music Source Separation on a Low-Power Audio DSP]]
 - [[sources/kim-2021-kuielab-mdx-net|Kim, Choi, Chung, Lee & Jung 2021: KUIELab-MDX-Net — A Two-Stream Neural Network for Music Demixing]]
+- [[sources/ronneberger-2015-u-net|Ronneberger, Fischer & Brox 2015: U-Net]] — the original encoder–decoder topology with skip concatenation

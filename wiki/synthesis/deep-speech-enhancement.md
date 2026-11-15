@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-04
-updated: 2026-11-08
+updated: 2026-11-15
 sources:
   - raw/papers/boeddeker-2018-neural-mask-beamforming/full-text.md
   - raw/papers/erdogan-2016-improved-mvdr-mask-prediction/full-text.md
@@ -41,6 +41,7 @@ sources:
   - raw/papers/zhao-2024-sicrn/full-text.md
   - raw/papers/wang-2025-adaptive-convolution-cnn-speech-enhancement/full-text.md
   - raw/papers/zhao-2025-lightweight-transformer/full-text.md
+  - raw/papers/ronneberger-2015-u-net/full-text.md
 tags:
   - speech-enhancement
   - single-channel
@@ -81,6 +82,7 @@ The single-channel representative-model matrix consolidating all four layers app
 
 | Source | Year | Axis advanced | Key contribution |
 |--------|------|---------------|------------------|
+| [[sources/ronneberger-2015-u-net\|Ronneberger, Fischer & Brox 2015 (U-Net)]] | 2015 | Encoder/decoder (ancestor) | Pre-SE origin of the symmetric encoder–decoder with copy-and-concatenate skips: 23 valid convs, wide expansive path, overlap-tile inference, boundary-weighted loss, elastic augmentation on 20–30 images |
 | [[sources/wang-2018-supervised-speech-separation-deep-learning-overview\|Wang & Chen 2018]] | 2018 | Target | Survey codifying IBM/IRM/PSM/cIRM training targets for supervised separation |
 | [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement\|Tan & Wang 2018 (CRN)]] | 2018 | Backbone | CED + LSTM, causal convolutions; the foundational deep SE architecture (17.58M params) |
 | [[sources/erdogan-2016-improved-mvdr-mask-prediction\|Erdogan, Hershey, Watanabe, Mandel & Le Roux 2016]] | 2016 | Multi-channel | Concurrent founding paper of mask-based beamforming: single-channel LSTM masks (MSA loss, CHiME-3 CH5 training) drive the noise SCM of the statistics-only Souden-form MVDR — no steering vector or array geometry; single max-combined mask beats per-channel multi-masks; beats WDAS on mismatched-ASR WER |
@@ -190,6 +192,8 @@ The backbone succession above says nothing about *what* the sequence model reads
 ### Template: the CRN symmetric encoder–decoder (Tan & Wang 2018)
 
 Convolutional encoder (frequency halved per layer, channels doubled) → recurrent bottleneck → transposed-convolution decoder whose final layer is **linear** (no activation) → U-Net skip connections preserving fine spectral detail (especially phase). Causality via past-only asymmetric padding; ELU preferred over ReLU because spectra contain negative values. See [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]].
+
+The skip-connection half of that template is imported wholesale from [[concepts/u-net|U-Net]] ([[sources/ronneberger-2015-u-net|Ronneberger et al. 2015]]), and the vocabulary the SE literature borrows is the original's: symmetric contracting/expansive path, copy-and-concatenate (not add) at every resolution, and an expansive path kept *wide* so context propagates upward. Two U-Net details survived the transplant unmodified — (i) resolution loss per level is a design parameter to be compensated, not an accident, and (ii) the skip tensor carries the high-frequency detail the bottleneck provably cannot reconstruct (in spectrograms: the harmonic fine structure and phase). What changed is the axial interpretation: image U-Net pools a 2-D spatial grid, whereas SE U-Nets almost always pool **frequency only** (TRU-Net, GTCRN, LiSenNet) so that time remains causal and streaming-compatible. That single substitution — spatial → frequency axis — is what turns a dense-prediction architecture into a real-time masking network.
 
 ### Lineage A — Band-compressed encode, band-split decode ("compress then restore")
 
@@ -336,6 +340,7 @@ Consolidating the four dataflow layers (input / output target / encoder-decoder 
 
 - [[concepts/speech-enhancement|Speech Enhancement]] — foundational concept
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]] — the CRN template
+- [[concepts/u-net|U-Net]] · [[concepts/overlap-tile-strategy|Overlap-Tile Strategy]] · [[concepts/boundary-weighted-loss|Boundary-Weighted Loss]] · [[concepts/elastic-deformation-augmentation|Elastic Deformation Augmentation]] — the 2015 dense-prediction ancestor of every symmetric encoder–decoder here
 - [[concepts/complex-ratio-mask|Complex Ratio Mask]] · [[concepts/complex-convolving-mask|Complex Convolving Mask]] · [[concepts/deep-filtering|Deep Filtering]] — target lineage
 - [[concepts/time-domain-speech-enhancement|Time-Domain Speech Enhancement]] · [[concepts/complex-spectrum-mapping|Complex Spectrum Mapping]] — domain choice
 - [[concepts/dprnn|Dual-Path RNN]] · [[concepts/mp-senet|MP-SENet]] · [[concepts/semamba|SEMamba]] · [[concepts/mamba-mingru|Mamba-MinGRU]] · [[concepts/sse-net|SSE-Net]] — backbone lineage
@@ -354,5 +359,6 @@ Consolidating the four dataflow layers (input / output target / encoder-decoder 
 
 ## Related Sources
 
+- [[sources/ronneberger-2015-u-net|Ronneberger, Fischer & Brox 2015 (U-Net)]] — not a speech paper: the original symmetric encoder–decoder with skip concatenation, source of the topology the CRN, TRU-Net, GTCRN, LiSenNet and CoFi-Lite encoder/decoder lineages inherit
 - [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025 (LiSenNet)]] — sub-band conv + causal dual-path GRU + noise detector; the 37k/56M MACs/s operating point between GTCRN and CoFi-Lite
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026 (FastEnhancer)]] — RTF-first streaming SE: RNNFormer bottleneck, time-kernel-1 convolutions, BN fusion; new quality-vs-speed Pareto frontier on Voicebank-Demand

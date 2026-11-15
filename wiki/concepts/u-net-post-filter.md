@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-07-17
-updated: 2026-07-17
+updated: 2026-11-15
 sources:
   - raw/papers/li-2025-echofree-neural-aec/full-text.md
+  - raw/papers/ronneberger-2015-u-net/full-text.md
 tags:
   - deep-learning
   - speech-enhancement
@@ -15,7 +16,7 @@ tags:
 
 # U-Net Post Filter
 
-A **U-Net post filter** is an encoder-decoder neural network with skip connections (originally U-Net, Ronneberger et al. MICCAI 2015) used as the neural stage of a hybrid acoustic echo cancellation (AEC) or speech enhancement pipeline, processing residual echo / noise remaining after a linear front-end filter. The U-Net topology is attractive for low-complexity streaming AEC because it provides multi-scale feature aggregation with a relatively small parameter count.
+A **U-Net post filter** is an encoder-decoder neural network with skip connections (the [[concepts/u-net|U-Net]] topology of Ronneberger et al., MICCAI 2015) used as the neural stage of a hybrid acoustic echo cancellation (AEC) or speech enhancement pipeline, processing residual echo / noise remaining after a linear front-end filter. The U-Net topology is attractive for low-complexity streaming AEC because it provides multi-scale feature aggregation with a relatively small parameter count.
 
 ## Architecture
 
@@ -69,5 +70,6 @@ The U-Net post filter's win comes from combining three known efficiency tricks �
 ## Related Sources
 
 - [[sources/li-2025-echofree-neural-aec\|Li et al. 2025: EchoFree]] — introduces the U-Net post filter on Bark features
+- [[sources/ronneberger-2015-u-net\|Ronneberger, Fischer & Brox 2015: U-Net]] — the original encoder–decoder with skip connections that this post-filter family descends from
 - [[sources/indenbom-2023-deepvqe\|Indenbom et al. 2023: DeepVQE]] — comparison point (residual CNN + CCM topology)
 - [[sources/shetu-2024-hybrid-low-complexity-aenr\|Shetu et al. 2024: Hybrid Low-Complexity AENR]] — ULCNet-AER baseline

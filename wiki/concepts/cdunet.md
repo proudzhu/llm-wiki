@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-16
-updated: 2026-09-16
+updated: 2026-11-15
 sources:
   - raw/papers/wen-2025-neural-directed-speech-enhancement/full-text.md
+  - raw/papers/ronneberger-2015-u-net/full-text.md
 tags:
   - directional-speech-enhancement
   - multi-channel
@@ -15,7 +16,7 @@ tags:
 
 # CDUNet
 
-**CDUNet** (causal-directed U-Net) is a dual-microphone directional speech enhancement model introduced by Wen et al. (ICASSP 2025). It integrates classical beamforming with a causal U-Net through the [[concepts/triple-steering-spatial-selection|triple-steering spatial selection method]], creating a non-linear filter that can be flexibly steered toward a target direction with a tunable enhancement region — at only 74.4K parameters and in real time.
+**CDUNet** (causal-directed U-Net) is a dual-microphone directional speech enhancement model introduced by Wen et al. (ICASSP 2025). It integrates classical beamforming with a causal [[concepts/u-net|U-Net]] through the [[concepts/triple-steering-spatial-selection|triple-steering spatial selection method]], creating a non-linear filter that can be flexibly steered toward a target direction with a tunable enhancement region — at only 74.4K parameters and in real time.
 
 ## Architecture
 
@@ -58,3 +59,4 @@ CDUNet uses a convolutional U-Net encoder–decoder with skip connections:
 ## Related Sources
 
 - [[sources/wen-2025-neural-directed-speech-enhancement|Wen et al. 2025: Neural Directed Speech Enhancement with Dual Microphone Array in High Noise Scenario]] — the introducing paper
+- [[sources/ronneberger-2015-u-net|Ronneberger, Fischer & Brox 2015: U-Net]] — the original encoder–decoder topology CDUNet condenses to 74.4K parameters

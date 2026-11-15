@@ -6504,3 +6504,16 @@ Answered from [[sources/li-2026-geometry-conditioned-ssanc|Li 2026 GC-SSF]] and 
 - **Pages created**: `wiki/sources/chiba-2026-open-back-enclosure-leakage.md`; `wiki/entities/noboru-harada.md`; `wiki/concepts/open-back-enclosure.md`; `wiki/concepts/dipole-acoustic-radiation.md`; `wiki/concepts/sound-leakage.md`
 - **Pages updated**: `wiki/entities/hironobu-chiba.md`, `wiki/entities/tatsuya-kako.md` (contribution bullets, append-only); `wiki/concepts/open-ear-headphones.md` (new "Sound Leakage" section, frontmatter source, related links); `wiki/concepts/hearables.md` (passive leakage-mitigation application bullet, related links); `wiki/synthesis/modern-headphone-anc-systems.md` (open-ear §5.1 bullet on the outward half of the problem, source row, related links); `wiki/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md`, `wiki/sources/index.md` (rows + statistics)
 - **Notes**: Extraction via MinerU `pipeline` model — the default `vlm` model stalled at page 16/17 and hit the 550 s timeout; the pipeline re-run finished in 35 s. Figure 4's caption in `full-text.md` is truncated mid-sentence ("...have the same frequenc") — the page text uses the PDF caption wording. Above ~7 kHz the sealed enclosure leaks *less* than every open variant, so the design's advantage is explicitly band-limited.
+
+---
+
+## [2026-11-15] ingest | U-Net: Convolutional Networks for Biomedical Image Segmentation (Ronneberger, Fischer & Brox 2015)
+
+- **Source**: `raw/papers/ronneberger-2015-u-net/full-text.md` (arXiv HTML via defuddle; Zotero: D97HADY7)
+- **Authors**: Olaf Ronneberger, Philipp Fischer, Thomas Brox
+- **Published**: MICCAI 2015 (LNCS 9351), pp. 234–241
+- **DOI**: 10.1007/978-3-319-24574-4_28
+- **Summary**: Introduces the U-Net — symmetric contracting/expansive fully convolutional network with copy-and-concatenate skip connections, wide expansive path, overlap-tile inference, boundary-weighted loss and elastic deformation augmentation — trained on 20–30 annotated images to win the ISBI 2012 EM challenge (warping error 0.000353 vs IDSIA 0.000420) and both 2D ISBI 2015 cell-tracking datasets (IOU 0.9203 / 0.7756 vs 0.83 / 0.46).
+- **Pages created**: `wiki/sources/ronneberger-2015-u-net.md`; `wiki/entities/olaf-ronneberger.md`, `philipp-fischer.md`, `thomas-brox.md`; `wiki/concepts/u-net.md`, `overlap-tile-strategy.md`, `boundary-weighted-loss.md`, `elastic-deformation-augmentation.md`
+- **Pages updated**: [[concepts/u-net-post-filter|u-net-post-filter]], [[concepts/trunet|trunet]], [[concepts/tfc-tdf-unet|tfc-tdf-unet]], [[concepts/cdunet|cdunet]] (backlink to the original U-Net source, wikilink on the topology name); [[synthesis/deep-speech-enhancement|deep-speech-enhancement]] (Insight 4a now names U-Net as the ancestor of the CRN encoder/decoder template, adds the spatial→frequency axis substitution as the reason it transfers to streaming SE, plus source row); indexes and statistics (1719 pages: 724 entities, 664 concepts, 296 sources)
+- **Extraction notes**: arXiv HTML (1505.04597) via defuddle; the architecture figure is served as an `<object type="image/svg+xml">` and was recovered by the vector-figure harvest (1 SVG + 3 raster PNGs). Paper prints $E=\sum w\log p_\ell$ without a leading minus; the page states it is the weighted negative log-likelihood.

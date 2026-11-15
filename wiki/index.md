@@ -731,6 +731,9 @@
 | [[entities/ante-jukic\|Ante Jukić]] | NVIDIA researcher in speech enhancement and separation; co-author of the latency-flexible universal SE model | 2026-11-11 |
 | [[entities/yu-chiang-frank-wang\|Yu-Chiang Frank Wang]] | NVIDIA researcher in ML for speech and audio; co-author of the latency-flexible universal SE model | 2026-11-11 |
 | [[entities/noboru-harada\|Noboru Harada]] | NTT Senior Distinguished Researcher & Hokkaido University visiting professor — speech/audio coding, lossless compression, acoustic event detection; co-author of the open-back enclosure for open-ear sound-leakage mitigation | 2026-11-12 |
+| [[entities/olaf-ronneberger\|Olaf Ronneberger]] | University of Freiburg — first author of U-Net, the encoder–decoder with skip connections that became the default biomedical segmentation backbone | 2026-11-15 |
+| [[entities/philipp-fischer\|Philipp Fischer]] | University of Freiburg — co-author of U-Net (MICCAI 2015) | 2026-11-15 |
+| [[entities/thomas-brox\|Thomas Brox]] | University of Freiburg — computer vision (optical flow, self-supervised features); co-author of U-Net | 2026-11-15 |
 
 ---
 
@@ -1400,6 +1403,10 @@
 | [[concepts/open-back-enclosure\|Open-Back Enclosure]] | Vented-back loudspeaker housing that radiates the driver's opposite-phase rear wave as a dipole; Helmholtz-tuned side-openings set the delay and high-frequency roll-off for leakage cancellation | 2026-11-12 |
 | [[concepts/dipole-acoustic-radiation\|Dipole Acoustic Radiation]] | Opposite-phase source pair with a near-field/far-field split: proximity-effect low-frequency boost up close, high-pass cancellation at distance — the basis of passive open-ear leakage mitigation | 2026-11-12 |
 | [[concepts/sound-leakage\|Sound Leakage]] | Outward radiation of reproduced audio to bystanders — the structural cost of open-ear transparency; measured normalized to listening level over 1–7 kHz | 2026-11-12 |
+| [[concepts/u-net\|U-Net]] | Fully convolutional encoder–decoder with copy-and-concatenate skip connections; ancestor of the CRN, TRU-Net, GTCRN and other symmetric encoder/decoder speech-enhancement lineages | 2026-11-15 |
+| [[concepts/overlap-tile-strategy\|Overlap-Tile Strategy]] | Seamless segmentation of arbitrarily large images: predict interior tiles with mirrored border context and stitch only valid regions | 2026-11-15 |
+| [[concepts/boundary-weighted-loss\|Boundary-Weighted Loss]] | Pixel-wise cross-entropy weighted by a distance-to-cell-border Gaussian (w0=10, σ≈5 px) that forces learning of separation borders between touching instances | 2026-11-15 |
+| [[concepts/elastic-deformation-augmentation\|Elastic Deformation Augmentation]] | Smooth random warps from a coarse 3×3 Gaussian displacement grid (10-px std, bicubic); the trick that lets segmentation networks train on 20–30 annotated images | 2026-11-15 |
 
 ---
 
@@ -1704,6 +1711,7 @@
 | [[sources/zhao-2025-lightweight-transformer\|Zhao & Madhu 2025: Study of Lightweight Transformer Architectures for Single-Channel Speech Enhancement]] | Systematic ablation of temporal/spectral transformer bottleneck orderings yields the FTF (frequency-time-frequency) stack; with cross-axis parameter sharing, 1 s-capped causal attention and waveform discriminators, LCT-GAN hits 3.06 PESQ on VoiceBank+DEMAND at 0.14 M params / 0.35 G MAC/s. | 2025-09-08 |
 | [[sources/fu-2026-one-model-many-latencies\|Fu et al. 2026]] | One universal speech enhancement (USE) model whose algorithmic and computational latency are both user-selectable at inference, so a single trained checkpoint covers 30 latency configurations instead of requiring one specialized model per latency budget. | 2026-11-11 |
 | [[sources/chiba-2026-open-back-enclosure-leakage\|Chiba, Kako & Harada 2026]] | Single-driver open-back enclosure for open-ear headphones: four Helmholtz-tuned side-openings vent the driver's own opposite-phase radiation, giving a dipole pattern that cuts normalized sound leakage 7.6 dB over 1–7 kHz versus a sealed enclosure while keeping the near-field low-frequency level. | 2026-11-12 |
+| [[sources/ronneberger-2015-u-net\|Ronneberger, Fischer & Brox 2015: U-Net]] | Introduces the U-Net encoder–decoder with skip concatenation, overlap-tile inference, boundary-weighted loss and elastic augmentation; won ISBI 2012 EM and ISBI 2015 cell-tracking challenges from 20–30 annotated images | 2026-11-15 |
 
 ---
 
@@ -1762,10 +1770,10 @@
 
 ## Statistics
 
-- **Total pages**: 1711
-- **Entities**: 721
-- **Concepts**: 660
-- **Sources**: 295
+- **Total pages**: 1719
+- **Entities**: 724
+- **Concepts**: 664
+- **Sources**: 296
 - **Synthesis**: 25
 - **Queries**: 10
-- **Last updated**: 2026-11-12
+- **Last updated**: 2026-11-15
