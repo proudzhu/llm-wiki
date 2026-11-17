@@ -728,4 +728,8 @@
 | [[entities/olaf-ronneberger\|Olaf Ronneberger]] | University of Freiburg — first author of U-Net, the encoder–decoder with skip connections that became the default biomedical segmentation backbone | 2026-11-15 |
 | [[entities/philipp-fischer\|Philipp Fischer]] | University of Freiburg — co-author of U-Net (MICCAI 2015) | 2026-11-15 |
 | [[entities/thomas-brox\|Thomas Brox]] | University of Freiburg — computer vision (optical flow, self-supervised features); co-author of U-Net | 2026-11-15 |
+| [[entities/yihao-li\|Yihao Li]] | First author of DBCCRN / SA-SNR / ScaleError (CSL 2024); Army Engineering University, Nanjing | 2026-11-17 |
+| [[entities/meng-sun\|Meng Sun]] | Corresponding author of the DBCCRN paper (CSL 2024); speech enhancement, Army Engineering University | 2026-11-17 |
+| [[entities/xiongwei-zhang\|Xiongwei Zhang]] | Supervisor and co-author of the DBCCRN paper (CSL 2024); Army Engineering University, Nanjing | 2026-11-17 |
+| [[entities/hugo-van-hamme\|Hugo Van hamme]] | KU Leuven (ESAT/PSI) professor; validation co-author of the DBCCRN paper (CSL 2024) | 2026-11-17 |
 

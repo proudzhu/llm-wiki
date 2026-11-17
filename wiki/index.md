@@ -734,6 +734,10 @@
 | [[entities/olaf-ronneberger\|Olaf Ronneberger]] | University of Freiburg — first author of U-Net, the encoder–decoder with skip connections that became the default biomedical segmentation backbone | 2026-11-15 |
 | [[entities/philipp-fischer\|Philipp Fischer]] | University of Freiburg — co-author of U-Net (MICCAI 2015) | 2026-11-15 |
 | [[entities/thomas-brox\|Thomas Brox]] | University of Freiburg — computer vision (optical flow, self-supervised features); co-author of U-Net | 2026-11-15 |
+| [[entities/yihao-li\|Yihao Li]] | First author of DBCCRN / SA-SNR / ScaleError (CSL 2024); Army Engineering University, Nanjing | 2026-11-17 |
+| [[entities/meng-sun\|Meng Sun]] | Corresponding author of the DBCCRN paper (CSL 2024); speech enhancement, Army Engineering University | 2026-11-17 |
+| [[entities/xiongwei-zhang\|Xiongwei Zhang]] | Supervisor and co-author of the DBCCRN paper (CSL 2024); Army Engineering University, Nanjing | 2026-11-17 |
+| [[entities/hugo-van-hamme\|Hugo Van hamme]] | KU Leuven (ESAT/PSI) professor; validation co-author of the DBCCRN paper (CSL 2024) | 2026-11-17 |
 
 ---
 
@@ -1407,6 +1411,9 @@
 | [[concepts/overlap-tile-strategy\|Overlap-Tile Strategy]] | Seamless segmentation of arbitrarily large images: predict interior tiles with mirrored border context and stitch only valid regions | 2026-11-15 |
 | [[concepts/boundary-weighted-loss\|Boundary-Weighted Loss]] | Pixel-wise cross-entropy weighted by a distance-to-cell-border Gaussian (w0=10, σ≈5 px) that forces learning of separation borders between touching instances | 2026-11-15 |
 | [[concepts/elastic-deformation-augmentation\|Elastic Deformation Augmentation]] | Smooth random warps from a coarse 3×3 Gaussian displacement grid (10-px std, bicubic); the trick that lets segmentation networks train on 20–30 annotated images | 2026-11-15 |
+| [[concepts/dbccrn\|DBCCRN]] | Dual-branch complex CRN estimating speech and noise simultaneously via bridge blocks and conformer skips; 8.31M params, PESQ 3.16 on VoiceBank+DEMAND (Li et al. 2024) | 2026-11-17 |
+| [[concepts/scale-aware-snr\|Scale-Aware SNR (SA-SNR)]] | OSI-SNR ratio times a min/max norm-matching factor; restores scale awareness lost by SI-SNR/OSI-SNR without SNR's shrinkage bias (Li et al. 2024) | 2026-11-17 |
+| [[concepts/scale-error\|ScaleError]] | Peak-amplitude MSE metric plus peak-normalized scaled-test-set recipe exposing output-scale drift invisible to PESQ/STOI (Li et al. 2024) | 2026-11-17 |
 
 ---
 
@@ -1712,6 +1719,7 @@
 | [[sources/fu-2026-one-model-many-latencies\|Fu et al. 2026]] | One universal speech enhancement (USE) model whose algorithmic and computational latency are both user-selectable at inference, so a single trained checkpoint covers 30 latency configurations instead of requiring one specialized model per latency budget. | 2026-11-11 |
 | [[sources/chiba-2026-open-back-enclosure-leakage\|Chiba, Kako & Harada 2026]] | Single-driver open-back enclosure for open-ear headphones: four Helmholtz-tuned side-openings vent the driver's own opposite-phase radiation, giving a dipole pattern that cuts normalized sound leakage 7.6 dB over 1–7 kHz versus a sealed enclosure while keeping the near-field low-frequency level. | 2026-11-12 |
 | [[sources/ronneberger-2015-u-net\|Ronneberger, Fischer & Brox 2015: U-Net]] | Introduces the U-Net encoder–decoder with skip concatenation, overlap-tile inference, boundary-weighted loss and elastic augmentation; won ISBI 2012 EM and ISBI 2015 cell-tracking challenges from 20–30 annotated images | 2026-11-15 |
+| [[sources/li-2024-dbccrn\|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] | Dual-branch complex CRN estimating speech and noise simultaneously (bridge blocks + conformer skips); the SA-SNR loss repairs SI-SNR's scale blindness — PESQ 3.16 / STOI 0.940 on VoiceBank+DEMAND at 8.31 M params with ScaleError 0.014%. | 2026-11-17 |
 
 ---
 
@@ -1770,10 +1778,10 @@
 
 ## Statistics
 
-- **Total pages**: 1719
-- **Entities**: 724
-- **Concepts**: 664
-- **Sources**: 296
+- **Total pages**: 1727
+- **Entities**: 728
+- **Concepts**: 667
+- **Sources**: 297
 - **Synthesis**: 25
 - **Queries**: 10
-- **Last updated**: 2026-11-15
+- **Last updated**: 2026-11-17

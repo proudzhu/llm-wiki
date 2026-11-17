@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-04
-updated: 2026-11-15
+updated: 2026-11-17
 sources:
   - raw/papers/boeddeker-2018-neural-mask-beamforming/full-text.md
   - raw/papers/erdogan-2016-improved-mvdr-mask-prediction/full-text.md
@@ -42,6 +42,7 @@ sources:
   - raw/papers/wang-2025-adaptive-convolution-cnn-speech-enhancement/full-text.md
   - raw/papers/zhao-2025-lightweight-transformer/full-text.md
   - raw/papers/ronneberger-2015-u-net/full-text.md
+  - raw/papers/li-2024-dbccrn/full-text.md
 tags:
   - speech-enhancement
   - single-channel
@@ -99,6 +100,7 @@ The single-channel representative-model matrix consolidating all four layers app
 | [[sources/rong-2024-gtcrn-speech-enhancement-ultralow\|Rong et al. 2024 (GTCRN)]] | 2024 | Efficiency | 23.7K params via grouped conv + grouped RNN + ERB compression |
 | [[sources/zhao-2024-sicrn\|Zhao, He & Zhang 2024 (SICRN)]] | 2024 | Backbone | S4ND state-space model + inplace conv; near-FullSubNet at 0.14× MACs |
 | [[sources/chao-2024-mamba-speech-enhancement\|Chao et al. 2024 (SEMamba)]] | 2024 | Backbone | First Mamba-based SE; SOTA PESQ 3.69 on VoiceBank-DEMAND with PCS |
+| [[sources/li-2024-dbccrn\|Li, Sun, Zhang & Van hamme 2024 (DBCCRN)]] | 2024 | Training objective / encoder-decoder | [[concepts/scale-aware-snr\|SA-SNR]] loss repairs SI-SNR/OSI-SNR scale blindness (ScaleError 0.014% vs 16–21%); dual-branch speech+noise complex CRN with bridge blocks, PESQ 3.16 VBD at 8.31M params |
 | [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement\|Wang et al. 2025 (AdaptCRN)]] | 2025 | Efficiency | Adaptive (dynamic) convolution in the CRN family; 135K params, PESQ 2.98 |
 | [[sources/zhu-2026-g-map-se-guided-speech-enhancement\|Zhu et al. 2026 (G-MaP-SE)]] | 2026 | Conditioning | GMM prior matching refines noisy speaker embeddings for PSE |
 | [[sources/xu-2026-drifting-models-speech-enhancement\|Xu et al. 2026 (DriftSE)]] | 2026 | Backbone | Drifting models: one-step generative SE without any trajectory |
@@ -149,6 +151,8 @@ The 60-year survey ([[sources/zheng-2023-survey-frequency-domain-speech-enhancem
 A complementary early data point: [[sources/li-2020-residual-noise-control|Li et al. 2020]] trained one 0.59M causal U-Net under four objectives (MSE, TMSE, SI-SDR, and their [[concepts/generalized-loss-function|generalized loss]] with residual noise control). The objective metrics and the listeners disagreed: SI-SDR loss achieved the best SDR but a PESQ below even plain MSE, while the residual-noise-controlled loss — only *comparable* on objective scores — won ~70% of pairwise preferences, because MSE-style objectives drive residual noise to zero and leave unnatural artifacts that the metrics miss. Two refinements follow: (i) loss choice dominates not only architecture but also *metric optimization* — each loss optimizes its own metric and degrades the others; (ii) PESQ/SDR are blind to the residual-noise-naturalness failure mode, which is exactly the axis the noise-shaping loss family (and later inference-time NAL, see [[concepts/noise-attenuation-control|Noise Attenuation Control]]) targets.
 
 [[sources/ke-2021-low-complexity-artificial-noise-suppression|Ke et al. 2021]] — the same CAS group — supply the inference-time *classical* counterpart: a psychoacoustic model shows the [[concepts/artificial-residual-noise|artificial residual noise]] of four MSE-trained front-ends exceeds the speech masking threshold by 10–50 dB, and an MMSE noise-PSD postfilter with three re-designed SPP inputs (from the noisy spectrum, from the DNN gain, from a sigmoid of the PSD ratio) removes it at 0.0098–0.016 MFLOPs/frame — again with >60% AB preference far out of proportion to the modest PESQ/segSNR gains. The residual-noise-control design space is thereby mapped at three points: training-time loss (Li 2020), inference-time statistical postfilter (Ke 2021), and inference-time NAL mixing (Shetu 2026).
+
+[[sources/li-2024-dbccrn|Li et al. 2024 (DBCCRN)]] add a further refinement to this loss-level picture: **scale awareness as a deployment requirement**. They derive that SI-SNR and OSI-SNR losses depend only on the angle between estimate and target (gain $\alpha$ cancels), so enhanced speech emerges at an unpredictable amplitude — fine on level-controlled benchmarks, but clipping in $[-1,1]$ playback and unfixable by normalization in streaming (per-1s-segment normalization drops SSNR to −7.96 dB; their [[concepts/scale-aware-snr|SA-SNR]] — the OSI-SNR ratio times a min/max norm-matching factor — needs none and scores 6.77 dB). Their [[concepts/scale-error|ScaleError]] metric and peak-normalized scaled test set make the failure visible where PESQ/STOI/COVL stay silent (SI-SNR-trained DCCRN: PESQ 2.89 at ScaleError 18.7%). This is the single-channel counterpart of [[sources/veluri-2023-semantic-hearing|Veluri 2023]]'s channel-aware-loss finding in Insight 6: there a scale-sensitive SNR term prevents inter-channel gain collapse, here it prevents output-amplitude drift — the same degree of freedom SI-SDR deliberately discards, reclaimed at the loss level in both cases. Architecturally, DBCCRN's speech+noise dual branches with 1×1 complex-conv bridges extend the decoupling idea of Insight 4a Lineage D from magnitude/phase heads to *signal/noise* heads (+0.32 PESQ for 0.22M extra params).
 
 ## Insight 3: The Magnitude–Phase "Compensation Effect" Drove Architectural Decoupling
 
@@ -362,3 +366,4 @@ Consolidating the four dataflow layers (input / output target / encoder-decoder 
 - [[sources/ronneberger-2015-u-net|Ronneberger, Fischer & Brox 2015 (U-Net)]] — not a speech paper: the original symmetric encoder–decoder with skip concatenation, source of the topology the CRN, TRU-Net, GTCRN, LiSenNet and CoFi-Lite encoder/decoder lineages inherit
 - [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025 (LiSenNet)]] — sub-band conv + causal dual-path GRU + noise detector; the 37k/56M MACs/s operating point between GTCRN and CoFi-Lite
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026 (FastEnhancer)]] — RTF-first streaming SE: RNNFormer bottleneck, time-kernel-1 convolutions, BN fusion; new quality-vs-speed Pareto frontier on Voicebank-Demand
+- [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024 (DBCCRN)]] — SA-SNR loss + ScaleError metric/scaled-test-set recipe; dual-branch speech+noise complex CRN, PESQ 3.16 VBD at 8.31M params

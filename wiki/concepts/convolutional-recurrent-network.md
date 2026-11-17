@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-11-01
+updated: 2026-11-17
 sources:
   - raw/papers/rao-2026-keep-speech-anc/full-text.txt
   - raw/papers/zhang-2025-mbenet/full-text.md
   - raw/papers/yan-2025-lisennet/full-text.md
   - raw/papers/ahn-2026-fastenhancer/full-text.md
+  - raw/papers/li-2024-dbccrn/full-text.md
 tags:
   - deep-learning
   - neural-network-architecture
@@ -51,6 +52,7 @@ The CRN follows an **encoder-decoder** structure with a recurrent bottleneck:
 - **Deep ANC**: End-to-end anti-noise generation (Zhang & Wang 2021, Dai 2026) — note that the STFT frame structure of CRN controllers introduces frame-level algorithmic latency, which violates the strict causality margins of headphone ANC (Rao et al. 2026 observed DeepANC degrading to near-unprocessed STOI/DNSMOS on measured headphone IRs for exactly this reason, motivating their zero-delay [[concepts/reference-signal-enhancement|reference-enhancement]] alternative)
 - **Speech Enhancement**: Real-time noise suppression (Tan & Wang 2018)
 - **DCCRN**: Deep Complex CRN won 1st place in Interspeech 2020 Deep Noise Suppression Challenge
+- **[[concepts/dbccrn|DBCCRN]]** (Li et al. 2024, CSL): dual-branch DCCRN estimating speech and noise simultaneously — two mirrored complex encoder–decoders coupled by 1×1 complex-conv bridge blocks, conformer (time+freq) skips, complex LSTM bottleneck; 8.31 M params, PESQ 3.16 on VoiceBank+DEMAND with the [[concepts/scale-aware-snr|SA-SNR]] loss. The noise branch adds only 0.22 M params but +0.32 PESQ over the single-branch ablation
 - **Attention Recurrent Network (ARN)**: CRN variant with attention for lower latency (Zhang et al. 2023)
 - **GTCRN**: Grouped Temporal CRN with only 23.7 K parameters for edge-device speech enhancement (Rong et al. 2024, ICASSP)
 - **[[concepts/cofi-lite|CoFi-Lite]]**: Dual coarse/fine-path CRN with [[concepts/cross-path-fusion|Cross-Path Fusion]], reaching 12.87M MACs/s while outperforming GTCRN (Yang et al. 2026, IEEE SPL)
@@ -89,3 +91,4 @@ The CRN follows an **encoder-decoder** structure with a recurrent bottleneck:
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — compares the MC-CRN multichannel extension as low-compute baseline
 - [[sources/rao-2026-keep-speech-anc|Rao, Rong, Sun, He, Chen, Zou & Lu 2026: Causal Reference-Enhanced Keep-Speech Active Noise Control]] — shows the CRN (DeepANC) controller's frame-level latency violating headphone ANC causality, motivating a zero-delay time-domain alternative
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — RNNFormer-hybrid CRN optimized for real-world RTF (time-kernel-1 convolutions, BN fusion); Pareto-dominates GTCRN/LiSenNet/FSPEN/BSRNN on Voicebank-Demand
+- [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] — dual-branch complex CRN with bridge blocks and conformer skips; capacity-matched DCCRN baseline at 8.40 M params

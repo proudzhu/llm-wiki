@@ -668,4 +668,7 @@
 | [[concepts/overlap-tile-strategy\|Overlap-Tile Strategy]] | Seamless segmentation of arbitrarily large images: predict interior tiles with mirrored border context and stitch only valid regions | 2026-11-15 |
 | [[concepts/boundary-weighted-loss\|Boundary-Weighted Loss]] | Pixel-wise cross-entropy weighted by a distance-to-cell-border Gaussian (w0=10, σ≈5 px) that forces learning of separation borders between touching instances | 2026-11-15 |
 | [[concepts/elastic-deformation-augmentation\|Elastic Deformation Augmentation]] | Smooth random warps from a coarse 3×3 Gaussian displacement grid (10-px std, bicubic); the trick that lets segmentation networks train on 20–30 annotated images | 2026-11-15 |
+| [[concepts/dbccrn\|DBCCRN]] | Dual-branch complex CRN estimating speech and noise simultaneously via bridge blocks and conformer skips; 8.31M params, PESQ 3.16 on VoiceBank+DEMAND (Li et al. 2024) | 2026-11-17 |
+| [[concepts/scale-aware-snr\|Scale-Aware SNR (SA-SNR)]] | OSI-SNR ratio times a min/max norm-matching factor; restores scale awareness lost by SI-SNR/OSI-SNR without SNR's shrinkage bias (Li et al. 2024) | 2026-11-17 |
+| [[concepts/scale-error\|ScaleError]] | Peak-amplitude MSE metric plus peak-normalized scaled-test-set recipe exposing output-scale drift invisible to PESQ/STOI (Li et al. 2024) | 2026-11-17 |
 

@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-04-25
-updated: 2026-11-08
+updated: 2026-11-17
 sources:
   - raw/papers/wang-2025-multi-modal-deep-filtering-bc/full-text.md
+  - raw/papers/li-2024-dbccrn/full-text.md
 tags:
   - signal-processing
   - audio-processing
@@ -48,6 +49,10 @@ By jointly estimating real and imaginary parts, CSM implicitly models both ampli
 - **Hu et al. (2020)**: DCCRN (Deep Complex Convolution Recurrent Network) using CSM won 1st place in the Interspeech 2020 Deep Noise Suppression Challenge (real-time track)
 - **Zhang & Wang (2021)**: Applied CSM to Deep ANC, proving feasibility of supervised learning for anti-noise generation
 
+## Structured RI Parts as the Learnability Argument (Li et al. 2024)
+
+[[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024]] give the cleanest statement of *why* the complex domain is learnable: magnitude spectrograms have predictable structure, raw phase spectrograms look like noise, but the **absolute real and imaginary parts both show clear structure** (their Fig. 2) — so a network can regress them without ever computing gradients with respect to phase parameters. Their [[concepts/dbccrn|DBCCRN]] applies this in a masking variant: each branch outputs a complex mask multiplied with the noisy complex spectrogram (rather than mapping the clean spectrum directly), and a second branch estimates the noise the same way, trained with [[concepts/scale-aware-snr|SA-SNR]] on both outputs.
+
 ## CSM vs. Magnitude Masking
 
 | Aspect | Magnitude Masking | Complex Spectrum Mapping |
@@ -86,3 +91,4 @@ This is a useful counterweight to the general rule that time-domain and complex-
 - [[sources/liu-2021-igcrn|Liu & Zhang 2021: IGCRN]] — uses a [[concepts/mask-mapping-amplitude-prediction|mask + mapping + phase]] target rather than pure CSM, decomposing the prediction into amplitude mask, amplitude mapping, and normalized phase. The ablation (Table 3) shows this explicit decomposition outperforms direct complex spectral mapping (GCRN(CS)) at low SNR, because amplitude and phase are coupled in the complex spectrum and predicting them separately is more effective. IGCRN's successor ICCRN reverts to a pure CSM target with a weighted L1 RI+amplitude loss.
 - [[sources/liu-2023-iccrn|Liu & Zhang 2023: ICCRN]] — uses CSM with a weighted L1 RI+amplitude loss ($\alpha=2$ on amplitude); the estimated spectrum is inverted to time domain and re-transformed before the loss to enforce [[concepts/stft-consistency|STFT consistency]]. ICCRN reports that DCCRN(CSM) and DPCRN(CSM) outperform their magnitude-mask counterparts, consistent with the literature.
 - [[sources/wang-2025-multi-modal-deep-filtering-bc|Wang, Kuang, Li, Yang, Bai & Liu 2025: Multi-Modal Deep-Filtering-Based Speech Enhancement via BC Speech]] — complex-domain model wins on ASR CER (24.8% vs. 27.3%) while losing on PESQ/STOI to the time-domain baseline; spectral-detail preservation as a recognition-specific argument for CSM
+- [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] — structured-RI-parts argument for complex-domain learning; dual-branch complex masking with SA-SNR, PESQ 3.16 on VoiceBank+DEMAND

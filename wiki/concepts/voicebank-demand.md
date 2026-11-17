@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-11-11
+updated: 2026-11-17
 sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/yan-2025-lisennet/full-text.md
@@ -10,6 +10,7 @@ sources:
   - raw/papers/laroche-2026-lisenet-embedded/full-text.md
   - raw/papers/zhao-2025-lightweight-transformer/full-text.md
   - raw/papers/fu-2026-one-model-many-latencies/full-text.md
+  - raw/papers/li-2024-dbccrn/full-text.md
 tags:
   - dataset
   - speech-enhancement
@@ -41,6 +42,7 @@ The noisy baseline scores PESQ = 1.97, CSIG = 3.35, CBAK = 2.44, COVL = 2.63, ST
 | MetricGAN+ | 3.15 | 2021 | metric-oriented loss |
 | CMGAN | 3.41 | 2022 | conformal metric GAN |
 | MP-SENet | 3.50 | 2023 | Conformer TF backbone |
+| [[concepts/dbccrn|DBCCRN]] + SA-SNR | 3.16 | 2024 | dual-branch complex CRN, 8.31 M params; ScaleError 0.014% |
 | [[concepts/semamba|SEMamba]] | 3.55 | 2024 | [[concepts/mamba|Mamba]] replaces Conformer |
 | [[concepts/semamba|SEMamba]] (+PCS) | **3.69** | 2024 | + [[concepts/perceptual-contrast-stretching|PCS]] post-processing — SOTA |
 | Real-time RE-USE (Fu et al.) | 2.76 (LA 0) / 2.82 (LA 1) | 2026 | Cross-dataset (no VBD training); 2.9M params, 40/60 ms algorithmic latency, SI-SDR 18.6/18.8 dB |
@@ -67,3 +69,4 @@ A 48 kHz variant of the benchmark appears in [[sources/kim-2026-faster-enhancer|
 - [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — retrained LiSenNet baseline + 11 NPU variants evaluated on the full 824-utterance test set (16 kHz, CMGAN recipe), with PESQ reported both FP32 and int8
 - [[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025: LCT-GAN]] — smallest reported operating point that reaches DeepFilterNet2 quality: 0.14 M params / 0.35 G MAC/s → PESQ 3.06 (3.20 with PCS), CSIG 4.41, CBAK 3.66, COVL 3.80, STOI 0.95; the parameter-count floor among causal models on this benchmark
 - [[sources/fu-2026-one-model-many-latencies|Fu et al. 2026: One Model, Many Latencies]] — cross-dataset (URGENT-trained) point: PESQ 2.76 / 2.82 at 40 / 60 ms algorithmic latency and 2.9M params, ahead of DeepFilterNet3 and Stream.FM at comparable latency
+- [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] — PESQ 3.16 / STOI 0.940 / SSNR 10.98 at 8.31 M params; introduces the peak-normalized **scaled test set** variant of this benchmark to expose scale-sensitive losses ([[concepts/scale-error|ScaleError]])

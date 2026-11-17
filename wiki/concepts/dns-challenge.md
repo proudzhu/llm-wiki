@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-10-07
+updated: 2026-11-17
 sources:
   - raw/papers/shetu-2026-generative-discriminative-comparison/full-text.md
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
   - raw/papers/ohlenbusch-2026-pas-se/full-text.md
   - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
   - raw/papers/zhao-2025-lightweight-transformer/full-text.md
+  - raw/papers/li-2024-dbccrn/full-text.md
 tags:
   - dataset
   - challenge
@@ -25,6 +26,8 @@ The DNS Challenge corpus is also the basis for large controlled training regimes
 [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025]] use the Interspeech 2020 DNS Challenge corpus (85/5/10 split) to generate multichannel training pairs for an 8-microphone circular array simulated with Pyroomacoustics — SNR [−10, 10] dB, SIR [−5, 15] dB, 1–10 noise sources plus babble from 8–16 interfering talkers — for their ultra-low-compute TinyGRU multichannel enhancement model.
 
 The fifth DNS Challenge noise set was used by [[sources/ohlenbusch-2026-pas-se|Ohlenbusch et al. 2026]] to spatialize the Oldenburg cross-dataset evaluation of hearable own-voice enhancement: noise signals convolved with per-user impulse responses measured from 8 evenly spaced loudspeakers in a circle around the device user yield multi-channel spatialized noise.
+
+[[sources/li-2024-dbccrn|Li et al. 2024]] use the Interspeech 2020 DNS corpus (180 h noise, 500+ h speech from 2150 speakers at 44.1 kHz) to synthesize 100 h of training pairs with the official script (SNR uniform −5…20 dB), evaluating on the official non-reverberant test set: their VoiceBank-trained [[concepts/dbccrn|DBCCRN]] transfers zero-shot to PESQ 2.220 — matching a DNS-trained DCCRN (2.204) — and retraining with [[concepts/scale-aware-snr|SA-SNR]] reaches 2.638 (vs NSNet 1.811, RNNoise 1.973).
 
 ## Related Concepts
 
@@ -44,3 +47,4 @@ The fifth DNS Challenge noise set was used by [[sources/ohlenbusch-2026-pas-se|O
 - [[sources/ohlenbusch-2026-pas-se|Ohlenbusch, Kegler & Stamenovic 2026: PAS-SE]] — DNS-5 noise spatialized for the Oldenburg cross-dataset evaluation
 - [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — DNS Challenge noise as training interference for AC/BC enhancement; DNSMOS as the non-intrusive evaluation metric
 - [[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025: LCT-GAN]] — DNS3 140 h synthesised training (SNR −5…20 dB), evaluated on the blind real-recorded English test set with DNSMOS P.835: BAK 4.04 ± 0.09 / SIG 3.06 / OVL 2.80 at 0.14 M params, beating DeepFilterNet1–3 on BAK with half the score variance
+- [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] — 100 h DNS-2020 synthesized training (SNR −5…20 dB); zero-shot VBD→DNS transfer matches DNS-trained DCCRN, retrain PESQ 2.638

@@ -6517,3 +6517,15 @@ Answered from [[sources/li-2026-geometry-conditioned-ssanc|Li 2026 GC-SSF]] and 
 - **Pages created**: `wiki/sources/ronneberger-2015-u-net.md`; `wiki/entities/olaf-ronneberger.md`, `philipp-fischer.md`, `thomas-brox.md`; `wiki/concepts/u-net.md`, `overlap-tile-strategy.md`, `boundary-weighted-loss.md`, `elastic-deformation-augmentation.md`
 - **Pages updated**: [[concepts/u-net-post-filter|u-net-post-filter]], [[concepts/trunet|trunet]], [[concepts/tfc-tdf-unet|tfc-tdf-unet]], [[concepts/cdunet|cdunet]] (backlink to the original U-Net source, wikilink on the topology name); [[synthesis/deep-speech-enhancement|deep-speech-enhancement]] (Insight 4a now names U-Net as the ancestor of the CRN encoder/decoder template, adds the spatial→frequency axis substitution as the reason it transfers to streaming SE, plus source row); indexes and statistics (1719 pages: 724 entities, 664 concepts, 296 sources)
 - **Extraction notes**: arXiv HTML (1505.04597) via defuddle; the architecture figure is served as an `<object type="image/svg+xml">` and was recovered by the vector-figure harvest (1 SVG + 3 raster PNGs). Paper prints $E=\sum w\log p_\ell$ without a leading minus; the page states it is the weighted negative log-likelihood.
+
+---
+
+## [2026-11-17] ingest | Scale-aware dual-branch complex convolutional recurrent network for monaural speech enhancement (Li et al. 2024)
+
+- **Source**: `raw/papers/li-2024-dbccrn/full-text.md` (Zotero: 87F9MQ76, PDF XINUP3T9; MinerU vlm extraction, garbled §5.1/§5.3/§6.2.2 runs cross-checked against the PDF via pypdf)
+- **Authors**: Yihao Li, Meng Sun, Xiongwei Zhang, Hugo Van hamme
+- **Published**: Computer Speech & Language 86 (June 2024), art. 101618
+- **DOI**: 10.1016/j.csl.2024.101618
+- **Summary**: Dual-branch complex CRN (DBCCRN) estimates speech and noise simultaneously via 1×1 complex-conv bridge blocks and conformer skips; the SA-SNR loss (OSI-SNR ratio × min/max norm-matching factor) repairs SI-SNR/OSI-SNR scale blindness, with a new ScaleError metric and peak-normalized scaled-test-set recipe — PESQ 3.16 / STOI 0.940 on VoiceBank+DEMAND at 8.31 M params, ScaleError 0.014%, streaming-safe without normalization.
+- **Pages created**: `wiki/sources/li-2024-dbccrn.md`, `wiki/entities/yihao-li.md`, `wiki/entities/meng-sun.md`, `wiki/entities/xiongwei-zhang.md`, `wiki/entities/hugo-van-hamme.md`, `wiki/concepts/dbccrn.md`, `wiki/concepts/scale-aware-snr.md`, `wiki/concepts/scale-error.md`
+- **Pages updated**: [[concepts/complex-spectrum-mapping]] (structured-RI learnability argument), [[concepts/convolutional-recurrent-network]] (DBCCRN in the CRN family), [[concepts/si-sdr]] (angle-only scale-blindness derivation + SA-SNR repair), [[concepts/voicebank-demand]] (PESQ 3.16 row + scaled-test-set variant), [[concepts/dns-challenge]] (100 h DNS-2020 training, zero-shot transfer), [[concepts/pesq]] (scale-error blind spot), [[concepts/speech-enhancement]] (scale-aware-objectives sub-area), [[synthesis/deep-speech-enhancement]] (Insight 2 refinement: scale awareness as deployment requirement; Sources Synthesized row), `wiki/index.md` + subdirectory indexes (8 rows, stats recounted)

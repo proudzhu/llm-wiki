@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-11-07
+updated: 2026-11-17
 sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
@@ -10,6 +10,7 @@ sources:
   - raw/papers/ahn-2026-fastenhancer/full-text.md
   - raw/papers/laroche-2026-lisenet-embedded/full-text.md
   - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
+  - raw/papers/li-2024-dbccrn/full-text.md
 tags:
   - evaluation-metric
   - speech-quality
@@ -38,6 +39,10 @@ PESQ first time-aligns the predicted signal with the reference segment-wise (for
 
 FastEnhancer (Ahn et al. 2026) — uses a differentiable PESQ loss (torch-pesq) with a deliberately tiny weight ($\lambda_5 = 0.001$) inside its five-term composite loss, citing the PESQetarian / Goodhart's-law concern (de Oliveira et al. 2024); the tiny weight improved not only PESQ but also other objective metrics. The paper also observes a metric-disagreement caution: FastEnhancer-M slightly degrades DNSMOS despite improving every other metric vs S.
 
+## PESQ Misses Scale Errors (Li et al. 2024)
+
+[[sources/li-2024-dbccrn|Li et al. 2024]] document a blind spot complementary to the magnitude bias above: PESQ (and STOI/COVL) barely notice **output amplitude drift**. DCCRN trained with SI-SNR scores PESQ 2.89 on VoiceBank+DEMAND while its output peaks overshoot the target by ScaleError 18.653% — clipping in any $[-1,1]$ playback pipeline. On a peak-normalized test set the same model drops to PESQ 2.50, while [[concepts/scale-aware-snr|SA-SNR]] training holds 3.16 → 3.15. Their [[concepts/scale-error|ScaleError]] metric and scaled-test-set recipe make this failure mode measurable alongside PESQ.
+
 ## Related Concepts
 
 - [[concepts/speech-enhancement|Speech Enhancement]]
@@ -57,3 +62,4 @@ FastEnhancer (Ahn et al. 2026) — uses a differentiable PESQ loss (torch-pesq) 
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — differentiable torch-pesq loss with tiny weight λ₅ = 0.001 (Goodhart's-law guard); improved PESQ *and* other metrics; also documents a DNSMOS-vs-other-metrics disagreement case (FastEnhancer-M)
 - [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — on-device int8 PESQ 3.01 on VoiceBank-DEMAND (STM32N6 NPU): the deployment-domain PESQ comparison (quality after static quantization, measured against the FP32 graph)
 - [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — PESQ 2.70 for AC/BC fusion (best of nine), contrasted with DNSMOS 3.35 as the GAN-training effect
+- [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] — PESQ's blindness to output-scale drift; ScaleError + peak-normalized scaled test set as companion evaluation
