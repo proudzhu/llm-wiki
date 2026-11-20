@@ -1,8 +1,9 @@
 ---
 type: synthesis
 created: 2026-08-04
-updated: 2026-11-17
+updated: 2026-11-20
 sources:
+  - raw/papers/pascual-2017-segan/full-text.md
   - raw/papers/boeddeker-2018-neural-mask-beamforming/full-text.md
   - raw/papers/erdogan-2016-improved-mvdr-mask-prediction/full-text.md
   - raw/papers/heymann-2016-neural-spectral-mask-beamforming/full-text.md
@@ -84,6 +85,7 @@ The single-channel representative-model matrix consolidating all four layers app
 | Source | Year | Axis advanced | Key contribution |
 |--------|------|---------------|------------------|
 | [[sources/ronneberger-2015-u-net\|Ronneberger, Fischer & Brox 2015 (U-Net)]] | 2015 | Encoder/decoder (ancestor) | Pre-SE origin of the symmetric encoder–decoder with copy-and-concatenate skips: 23 valid convs, wide expansive path, overlap-tile inference, boundary-weighted loss, elastic augmentation on 20–30 images |
+| [[sources/pascual-2017-segan\|Pascual, Bonafonte & Serrà 2017 (SEGAN)]] | 2017 | Domain + training paradigm (origin) | The first GAN-based SE and the first waveform-level enhancer: 22-layer strided-conv encoder–decoder over 16384-sample 16 kHz chunks, latent $\mathbf{z}$ concatenated at the bottleneck, LSGAN objective + $L_1$ anchor ($\lambda=100$); one shared parametrization over 28 speakers × 40 noise conditions, MOS 3.18 vs. Wiener 2.70 |
 | [[sources/wang-2018-supervised-speech-separation-deep-learning-overview\|Wang & Chen 2018]] | 2018 | Target | Survey codifying IBM/IRM/PSM/cIRM training targets for supervised separation |
 | [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement\|Tan & Wang 2018 (CRN)]] | 2018 | Backbone | CED + LSTM, causal convolutions; the foundational deep SE architecture (17.58M params) |
 | [[sources/erdogan-2016-improved-mvdr-mask-prediction\|Erdogan, Hershey, Watanabe, Mandel & Le Roux 2016]] | 2016 | Multi-channel | Concurrent founding paper of mask-based beamforming: single-channel LSTM masks (MSA loss, CHiME-3 CH5 training) drive the noise SCM of the statistics-only Souden-form MVDR — no steering vector or array geometry; single max-combined mask beats per-channel multi-masks; beats WDAS on mismatched-ASR WER |
@@ -143,6 +145,8 @@ A long-running debate — operate on raw waveforms or on STFT — was resolved n
 
 - **TF-domain** methods (CRN, DCCRN, DPCRN) estimate a mask/spectrum and reconstruct with noisy phase. They suffer the [[concepts/invalid-stft-problem\|invalid STFT problem]] (enhanced magnitude + noisy phase may not correspond to any real signal) and phase degradation at low SNR.
 - **Time-domain** methods ([[concepts/time-domain-speech-enhancement\|SEGAN, AECNN, Conv-TasNet, DEMUCS]]) generate valid waveforms directly, sidestepping both issues.
+
+The line opens with [[sources/pascual-2017-segan|SEGAN (2017)]], the first model to abandon the STFT stage outright: a 22-layer strided-conv encoder–decoder over 16384-sample (~1 s) 16 kHz chunks, trained adversarially (see Insight 7). Its two design claims are the ones the rest of this axis inherits — waveform generation removes both the [[concepts/invalid-stft-problem|invalid STFT problem]] and the reliance on noisy phase without modelling phase explicitly, and a regression loss is the *wrong* objective for speech because MAE/MSE assume a unimodal output and bias the estimate to its conditional mean. What the axis then discarded was SEGAN's objective, not its shape: SEGAN's own generator is a 1-D [[concepts/u-net|U-Net]] cast as an adversarially trained auto-encoder with a latent vector concatenated at the bottleneck, and the next entry below reuses that topology at ~6.4 M parameters without any adversarial term.
 
 The decisive observation came from [[sources/pandey-2019-cnn-speech-enhancement-time-domain\|Pandey & Wang 2019]]: a time-domain AECNN trained with **STFT-magnitude MAE loss** outperforms the same network trained with waveform loss, and beats SEGAN/GRN on TIMIT/IEEE/WSJ0. Spectral losses provide a dramatically better perceptual training signal than waveform losses. The [[concepts/complex-spectrum-mapping\|complex STFT (RI) loss]] variant is best for SI-SDR. The **mechanistic explanation** came later from [[sources/wang-2021-magnitude-phase-compensation\|Wang, Wichern & Le Roux 2021]]: a purely waveform-domain loss lets the estimated magnitude compensate for phase errors — which SI-SDR rewards but PESQ/eSTOI/WER punish — so adding a magnitude term trades a little SI-SDR for large perceptual gains (on SMS-WSJ, Wav vs. Wav+Mag: PESQ 1.79 → 2.07, WER 47.5 → 39.2%, SI-SDR 4.22 → 3.42 dB).
 
@@ -269,6 +273,8 @@ A complementary datapoint on *how* to wire the channels together comes from [[so
 
 ## Insight 7: Generative SE Crossed the One-Step Barrier in 2026 — but Discriminative Still Competes
 
+The generative branch opens with [[sources/pascual-2017-segan|SEGAN (2017)]]: the first GAN for SE, trained with a [[concepts/least-squares-gan|least-squares adversarial loss]] plus an $L_1$ anchor ($\lambda=100$) on raw waveform chunks. Its profile prefigures the whole axis — a subjective win over the classical [[concepts/wiener-filter|Wiener]] baseline (MOS 3.18 vs. 2.70; preferred in 67% of pairwise comparisons against the noisy signal and 53% against Wiener) paired with an *objective* loss (PESQ 2.16 vs. 2.22), which the paper attributes to high-frequency adversarial artifacts. Three of its design elements did not survive into the modern generative line: the latent $\mathbf{z}$ sampled into the generator's bottleneck (a stochastic input to a deterministic enhancement mapping), the one-second non-causal chunk, and the plain waveform-domain critic. What survived is the *objective-level* claim — that the training paradigm, not the architecture, is the axis — which [[sources/shetu-2026-generative-discriminative-comparison|Shetu 2026]] later tests under controlled conditions.
+
 [[concepts/diffusion-models-for-speech\|Diffusion models]] established SOTA SE quality via score-based reverse dynamics, but their iterative inference (10–100 NFE) was a real-time blocker. The 2026 corpus shows the one-step barrier finally crossed:
 
 | Method | NFE | PESQ (VB-DEMAND) | Approach |
@@ -303,6 +309,7 @@ Consolidating the four dataflow layers (input / output target / encoder-decoder 
 
 | Model (year) | Input | Output target | Encoder/decoder | Backbone | Scale / latency |
 |---|---|---|---|---|---|
+| [[concepts/segan\|SEGAN]] (2017) — **origin** | Raw waveform, 16384-sample (~1 s) 16 kHz chunk + latent $\mathbf{z}$ | Raw waveform chunk (**no mask, no STFT**) | 1-D U-Net: strided conv1d (k=31, stride 2) down to $8{\times}1024$, latent concat, transposed conv up | 22 strided-conv layers, PReLU, no recurrence | ~58M (external est.); **non-causal 1 s chunk**, offline |
 | CRN (2018) | Complex STFT (RI) | cRM | CED + transposed conv + skips | LSTM bottleneck | 17.58M |
 | DPCRN (2021) | Complex spectrum | Mask | Symmetric conv codec | Dual-path RNN | **0.72M / 0.77 GMAC/s** |
 | DeepFilterNet (2022) | ERB bands + complex (≤ f_DF) | ERB gains + Deep Filtering (N-th-order complex FIR) | ERB codec + DF head | Grouped conv/GRU | Ultralight; multi-latency |
@@ -353,7 +360,7 @@ Consolidating the four dataflow layers (input / output target / encoder-decoder 
 - [[concepts/tf-mask-estimation|TF-Mask Estimation]] · [[concepts/power-law-compression|Power-Law Compression]] · [[concepts/per-channel-energy-normalization|Per-Channel Energy Normalization]] — input representation and masking
 - [[concepts/multi-channel-speech-enhancement|Multi-Channel Speech Enhancement]] · [[concepts/neural-beamforming|Neural Beamforming]] · [[concepts/array-invariant-speech-enhancement|Array-Invariant SE]] · [[concepts/geometry-aware-dynamic-convolution|Geo-DConv]] · [[concepts/output-based-speech-enhancement|Output-Based SE]] · [[concepts/hybrid-speech-enhancement|Hybrid Speech Enhancement]]
 - [[concepts/personalized-speech-enhancement|Personalized SE]] · [[concepts/target-speaker-extraction|Target Speaker Extraction]] · [[concepts/own-voice-cancellation|Own-Voice Cancellation]] · [[concepts/prior-matching|Prior Matching]]
-- [[concepts/diffusion-models-for-speech|Diffusion Models for Speech]] · [[concepts/drifting-models|Drifting Models]] · [[concepts/generative-vs-discriminative-speech-enhancement|Generative vs. Discriminative Speech Enhancement]] · [[concepts/speech-enhancement-hallucination|Speech Enhancement Hallucination]] · [[concepts/one-step-generative-models|One-Step Generative Models]]
+- [[concepts/diffusion-models-for-speech|Diffusion Models for Speech]] · [[concepts/drifting-models|Drifting Models]] · [[concepts/generative-vs-discriminative-speech-enhancement|Generative vs. Discriminative Speech Enhancement]] · [[concepts/segan|SEGAN]] · [[concepts/least-squares-gan|Least-Squares GAN (LSGAN)]] · [[concepts/speech-enhancement-hallucination|Speech Enhancement Hallucination]] · [[concepts/one-step-generative-models|One-Step Generative Models]]
 - [[concepts/generalized-loss-function|Generalized Loss Function]] · [[concepts/frequency-domain-loss|Frequency-Domain Loss]] · [[concepts/noise-attenuation-control|Noise Attenuation Control]] · [[concepts/artificial-residual-noise|Artificial Residual Noise]] — training-objective / noise-control lineage
 - [[concepts/spectrally-adaptive-loss|Spectrally Adaptive Loss]] · [[concepts/magnitude-phase-compensation-effect|Magnitude-Phase Compensation Effect]] · [[concepts/hyst-net|HyST-Net]] — loss-side compensation-effect remedy and its streaming backbone
 - [[concepts/lisennet|LiSenNet]] · [[concepts/noise-detector|Noise Detector]] · [[concepts/gla-phase-refinement|GLA Phase Refinement]] · [[concepts/sub-band-convolution|Sub-band Convolution]] — the 2025 lightweight-SE design point and its components
@@ -364,6 +371,7 @@ Consolidating the four dataflow layers (input / output target / encoder-decoder 
 ## Related Sources
 
 - [[sources/ronneberger-2015-u-net|Ronneberger, Fischer & Brox 2015 (U-Net)]] — not a speech paper: the original symmetric encoder–decoder with skip concatenation, source of the topology the CRN, TRU-Net, GTCRN, LiSenNet and CoFi-Lite encoder/decoder lineages inherit
+- [[sources/pascual-2017-segan|Pascual, Bonafonte & Serrà 2017 (SEGAN)]] — the double origin point of this page: the first waveform-level (time-domain) enhancer and the first GAN-trained one; its LSGAN + $L_1$ objective, latent-bottleneck design, and sub-Wiener PESQ / super-Wiener MOS profile frame Insights 2 and 7
 - [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025 (LiSenNet)]] — sub-band conv + causal dual-path GRU + noise detector; the 37k/56M MACs/s operating point between GTCRN and CoFi-Lite
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026 (FastEnhancer)]] — RTF-first streaming SE: RNNFormer bottleneck, time-kernel-1 convolutions, BN fusion; new quality-vs-speed Pareto frontier on Voicebank-Demand
 - [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024 (DBCCRN)]] — SA-SNR loss + ScaleError metric/scaled-test-set recipe; dual-branch speech+noise complex CRN, PESQ 3.16 VBD at 8.31M params

@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-09-03
-updated: 2026-09-03
+updated: 2026-11-20
 sources:
   - raw/papers/shetu-2026-generative-discriminative-comparison/full-text.md
+  - raw/papers/pascual-2017-segan/full-text.md
 tags:
   - speech-enhancement
   - generative-models
@@ -16,6 +17,8 @@ tags:
 # Generative vs. Discriminative Speech Enhancement
 
 The two training paradigms for deep-learning speech enhancement (SE), formulated over the conditional distribution $p(\mathbf{x}_{0}\mid\mathbf{y})$ of clean speech given the noisy signal: **discriminative** methods learn a deterministic regression $\mathbf{x}_{0}\approx\mathcal{F}_{\theta}(\mathbf{y})$ via a signal- or mask-level loss; **generative** methods learn a transformation whose samples follow the clean-speech distribution conditioned on $\mathbf{y}$ — via GAN min–max training, denoising score matching (diffusion), conditional flow matching, or consistency objectives.
+
+The generative branch of SE starts with [[sources/pascual-2017-segan|SEGAN (Pascual, Bonafonte & Serrà 2017)]] — the first GAN for enhancement: a waveform-level convolutional encoder–decoder trained with a [[concepts/least-squares-gan|least-squares adversarial loss]] plus an $L_1$ anchor ($\lambda = 100$) against a critic that scores (noisy, clean) against (noisy, enhanced) pairs. Two of its design choices recur throughout this page's later entries: the adversarial term is justified precisely by the failure of regression losses (MAE/MSE assume a unimodal output and bias the estimate to the conditional mean), and the $L_1$/adversarial balance is a hyperparameter with a wide inert region — at $\lambda = 1$ the anchor sat two orders of magnitude below the adversarial term and had no effect on learning. Its weaknesses are equally canonical: adversarial artifacts cost it PESQ against a plain Wiener filter (2.16 vs 2.22) even while it wins on subjective MOS (3.18 vs 2.70) and on CSIG/CBAK/COVL/SSNR.
 
 ## Key Formulations
 
@@ -51,6 +54,7 @@ Key insight: **the training objective, not the architecture, drives the gains** 
 
 ## Related Sources
 
+- [[sources/pascual-2017-segan|Pascual, Bonafonte & Serrà 2017: SEGAN]] — the first generative (GAN) SE system; establishes the canonical failure profile of adversarial training (sub-Wiener PESQ 2.16 vs 2.22, artifacts at high frequency) alongside its wins on CSIG/CBAK/COVL/SSNR and subjective MOS 3.18 vs 2.70
 - [[sources/shetu-2026-generative-discriminative-comparison|Shetu, Habets & Brendel 2026: Generative vs. Discriminative SE]]
 - [[sources/lugo-2026-diffvqe|Lugo et al. 2026: DiffVQE]] — single-step hybrid discriminative+generative design, a middle route
 - [[sources/xu-2026-drifting-models-speech-enhancement|Xu et al. 2026: Drifting Models]] — one-step generative SE without trajectories

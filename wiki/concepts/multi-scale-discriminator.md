@@ -70,5 +70,6 @@ LCT-GAN (Zhao & Madhu 2025) pairs a MelGAN-style **multi-period** discriminator 
 
 ## Related Sources
 
+- [[sources/pascual-2017-segan|Pascual, Bonafonte & Serrà 2017: SEGAN]] — the earliest waveform-domain adversarial critic in speech enhancement: a **single** convolutional discriminator over 2×16384-sample (noisy, clean)/(noisy, enhanced) pairs with virtual batch-norm — the design that multi-scale/multi-period critics later replaced precisely because one resolution cannot penalize both global structure and local texture
 - [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — waveform + 3 dilation-factor subband critics for AC/BC enhancement
 - [[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025: Study of Lightweight Transformer Architectures for Single-Channel Speech Enhancement]] — MelGAN-style multi-period + multi-scale critics on a 0.14 M-parameter generator; +0.05 PESQ/+0.05 COVL with no BAK loss

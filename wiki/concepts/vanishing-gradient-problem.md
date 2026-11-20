@@ -67,5 +67,6 @@ The modern efficient RNN literature (not covered by [[sources/mienye-2024-rnn-co
 
 ## Related Sources
 
-- [[sources/mienye-2024-rnn-comprehensive-review\|Mienye, Swart & Obaido 2024: RNN Comprehensive Review]] — covers the mathematical formulation and mitigation techniques
+- [[sources/pascual-2017-segan|Pascual, Bonafonte & Serrà 2017: SEGAN]] — 1-D conv encoder–decoder that avoids the problem by construction: strided convolutions carry gradients through every layer and skip connections shorten the path from encoder maps to their homologous decoder maps (no RNN recursion in the network at all)
+- [[sources/mienye-2024-rnn-comprehensive-review|Mienye, Swart & Obaido 2024: RNN Comprehensive Review]] — covers the mathematical formulation and mitigation techniques
 - [[sources/zucchet-2026-forward-propagation-errors-through-time\|Zucchet 2026: Forward Propagation of Errors Through Time]] — deeper analysis of gradient propagation in recurrent networks

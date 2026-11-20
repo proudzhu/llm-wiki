@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-17
-updated: 2026-09-26
+updated: 2026-11-20
 tags:
 - deep-learning
 - machine-learning
@@ -9,6 +9,7 @@ tags:
 sources:
   - raw/papers/pan-2025-data-driven-acoustics/full-text.md
   - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
+  - raw/papers/pascual-2017-segan/full-text.md
 ---
 # Deep Learning for Signal Processing
 
@@ -48,7 +49,7 @@ In traditional signal processing (TSP), algorithms like the **[[wiener-filter]]*
 - **Recurrent Neural Networks (RNNs/LSTMs)**: Essential for modeling temporal dependencies in sequential data.
 - **Convolutional Recurrent Networks (CRNs)**: Combines CNNs for feature extraction and RNNs for temporal modeling; widely used in **[[synthesis/ai-driven-anc]]** and [[convolutional-recurrent-network|CRN-based Deep ANC]].
 - **Complex Spectrum Mapping**: Joint estimation of real/imaginary STFT components for precise phase control; critical for [[complex-spectrum-mapping|ANC applications]] where phase accuracy determines cancellation effectiveness.
-- **Generative Models (VAEs/GANs)**: Used for speech enhancement and generating anti-noise signals.
+- **Generative Models (GANs)**: Used for speech enhancement — starting with [[sources/pascual-2017-segan|SEGAN (2017)]], an adversarially trained waveform-level encoder–decoder, the first GAN applied to enhancement (see [[concepts/segan|SEGAN]], [[concepts/least-squares-gan|LSGAN]]) — and for generating anti-noise signals.
 
 ## Applications in this Wiki
 - **[[synthesis/ai-driven-anc]]**: Neural noise selection and end-to-end anti-noise generation.
@@ -72,6 +73,7 @@ In traditional signal processing (TSP), algorithms like the **[[wiener-filter]]*
 
 ## Related Sources
 
+- [[sources/pascual-2017-segan|Pascual, Bonafonte & Serrà 2017: SEGAN]] — first GAN for speech enhancement: an end-to-end waveform model, the earliest point at which a data-driven model displaced the classical spectral-domain pipeline outright
 - [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 - [[sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]]
 - [[sources/zhan-2025-deeppem-afc|Zhan 2025: DeepPEM-AFC]] — GRU-based step-size prediction for adaptive feedback cancellation

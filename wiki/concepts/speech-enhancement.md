@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-11-17
+updated: 2026-11-20
 sources:
+  - raw/papers/pascual-2017-segan/full-text.md
   - raw/papers/li-2020-geometrically-constrained-iva/full-text.md
   - raw/papers/li-2020-online-gciva/full-text.md
   - raw/papers/low-2004-hybrid-bss-anc/full-text.txt
@@ -75,6 +76,7 @@ Worked example: concatenating $2Q{+}1$ log-magnitude spectra (161 frequency poin
 
 ## Related Sources
 
+- [[sources/pascual-2017-segan|Pascual, Bonafonte & Serrà 2017: SEGAN]] — first GAN for SE and first waveform-level enhancement model: one shared parametrization across 28 speakers and 40 noise conditions, MOS 3.18 vs. Wiener 2.70, PESQ 2.16 / COVL 2.80 on VoiceBank+DEMAND
 - [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020: Geometrically Constrained IVA for Directional Speech Enhancement]] — dual-microphone directional SE via geometrically constrained BSS
 - [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020: Online Directional Speech Enhancement Using Geometrically Constrained IVA]] — real-time online geometrically constrained BSS for directional SE
 - [[sources/low-2004-hybrid-bss-anc|Low & Nordholm 2004: A Hybrid Speech Enhancement System Employing BSS and Adaptive Noise Cancellation]] — subband BSS + kurtosis selection + ANC cascade; 8.7–20.6 dB SNR improvement with 2–5 microphones

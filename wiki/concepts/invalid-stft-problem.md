@@ -1,7 +1,9 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-05-23
+updated: 2026-11-20
+sources:
+  - raw/papers/pascual-2017-segan/full-text.md
 tags:
   - signal-processing
   - stft
@@ -57,5 +59,9 @@ The [[sources/pandey-2019-cnn-speech-enhancement-time-domain|Pandey & Wang 2019]
 - [[concepts/spectrogram-analysis|Spectrogram Analysis]]
 
 ## Related Sources
+
+- [[sources/pascual-2017-segan|Pascual, Bonafonte & Serrà 2017: SEGAN]] — the first waveform-level neural enhancer: avoids the invalid-STFT problem entirely by generating 16 kHz samples directly, with no STFT analysis/synthesis step and therefore no phase to reconstruct
+
+
 
 - [[sources/pandey-2019-cnn-speech-enhancement-time-domain|Pandey & Wang 2019: CNN-Based Speech Enhancement in the Time Domain]]

@@ -738,6 +738,9 @@
 | [[entities/meng-sun\|Meng Sun]] | Corresponding author of the DBCCRN paper (CSL 2024); speech enhancement, Army Engineering University | 2026-11-17 |
 | [[entities/xiongwei-zhang\|Xiongwei Zhang]] | Supervisor and co-author of the DBCCRN paper (CSL 2024); Army Engineering University, Nanjing | 2026-11-17 |
 | [[entities/hugo-van-hamme\|Hugo Van hamme]] | KU Leuven (ESAT/PSI) professor; validation co-author of the DBCCRN paper (CSL 2024) | 2026-11-17 |
+| [[entities/santiago-pascual\|Santiago Pascual]] | UPC Barcelona — lead author of SEGAN, the first GAN for speech enhancement and first waveform-level enhancement model | 2026-11-20 |
+| [[entities/antonio-bonafonte\|Antonio Bonafonte]] | UPC Barcelona (TALP) — speech synthesis/recognition; co-author of SEGAN | 2026-11-20 |
+| [[entities/joan-serra\|Joan Serrà]] | Telefónica Research — audio/music signal processing and generative models; co-author of SEGAN | 2026-11-20 |
 
 ---
 
@@ -1414,6 +1417,8 @@
 | [[concepts/dbccrn\|DBCCRN]] | Dual-branch complex CRN estimating speech and noise simultaneously via bridge blocks and conformer skips; 8.31M params, PESQ 3.16 on VoiceBank+DEMAND (Li et al. 2024) | 2026-11-17 |
 | [[concepts/scale-aware-snr\|Scale-Aware SNR (SA-SNR)]] | OSI-SNR ratio times a min/max norm-matching factor; restores scale awareness lost by SI-SNR/OSI-SNR without SNR's shrinkage bias (Li et al. 2024) | 2026-11-17 |
 | [[concepts/scale-error\|ScaleError]] | Peak-amplitude MSE metric plus peak-normalized scaled-test-set recipe exposing output-scale drift invisible to PESQ/STOI (Li et al. 2024) | 2026-11-17 |
+| [[concepts/segan\|SEGAN (Speech Enhancement GAN)]] | First GAN for speech enhancement and first waveform-level enhancer: 22-layer strided-conv encoder–decoder over 16 kHz chunks, LSGAN objective + L1 anchor (λ=100), MOS 3.18 vs. Wiener 2.70 | 2026-11-20 |
+| [[concepts/least-squares-gan\|Least-Squares GAN (LSGAN)]] | GAN variant replacing sigmoid cross-entropy with a least-squares loss on binary codes, removing saturation-induced vanishing gradients; adopted by SEGAN with an L1 anchor | 2026-11-20 |
 
 ---
 
@@ -1720,6 +1725,7 @@
 | [[sources/chiba-2026-open-back-enclosure-leakage\|Chiba, Kako & Harada 2026]] | Single-driver open-back enclosure for open-ear headphones: four Helmholtz-tuned side-openings vent the driver's own opposite-phase radiation, giving a dipole pattern that cuts normalized sound leakage 7.6 dB over 1–7 kHz versus a sealed enclosure while keeping the near-field low-frequency level. | 2026-11-12 |
 | [[sources/ronneberger-2015-u-net\|Ronneberger, Fischer & Brox 2015: U-Net]] | Introduces the U-Net encoder–decoder with skip concatenation, overlap-tile inference, boundary-weighted loss and elastic augmentation; won ISBI 2012 EM and ISBI 2015 cell-tracking challenges from 20–30 annotated images | 2026-11-15 |
 | [[sources/li-2024-dbccrn\|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] | Dual-branch complex CRN estimating speech and noise simultaneously (bridge blocks + conformer skips); the SA-SNR loss repairs SI-SNR's scale blindness — PESQ 3.16 / STOI 0.940 on VoiceBank+DEMAND at 8.31 M params with ScaleError 0.014%. | 2026-11-17 |
+| [[sources/pascual-2017-segan\|Pascual, Bonafonte & Serrà 2017]] | SEGAN is the first application of a generative adversarial network to speech enhancement, and the first waveform-level (raw 16 kHz sample) end-to-end enhancement system. | 2026-11-20 |
 
 ---
 
@@ -1778,10 +1784,10 @@
 
 ## Statistics
 
-- **Total pages**: 1727
-- **Entities**: 728
-- **Concepts**: 667
-- **Sources**: 297
+- **Total pages**: 1733
+- **Entities**: 731
+- **Concepts**: 669
+- **Sources**: 298
 - **Synthesis**: 25
 - **Queries**: 10
-- **Last updated**: 2026-11-17
+- **Last updated**: 2026-11-20

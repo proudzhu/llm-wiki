@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-11-17
+updated: 2026-11-20
 sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
+  - raw/papers/pascual-2017-segan/full-text.md
   - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
   - raw/papers/lee-2016-dnn-plc/full-text.md
   - raw/papers/yan-2025-lisennet/full-text.md
@@ -26,7 +27,7 @@ The VoiceBank-DEMAND benchmark has become a de facto standard for reporting PESQ
 
 | System | Year | PESQ | Method |
 |--------|------|------|--------|
-| SEGAN | 2017 | 2.16 | GAN |
+| [[concepts/segan\|SEGAN]] | 2017 | 2.16 | GAN |
 | MetricGAN+ | 2021 | 3.15 | metric-oriented loss |
 | CMGAN | 2022 | 3.41 | conformal metric GAN |
 | MP-SENet | 2023 | 3.50 | Conformer TF backbone |
@@ -54,6 +55,7 @@ FastEnhancer (Ahn et al. 2026) — uses a differentiable PESQ loss (torch-pesq) 
 
 ## Related Sources
 
+- [[sources/pascual-2017-segan|Pascual, Bonafonte & Serrà 2017: SEGAN]] — the benchmark's origin point and its illustrative case for PESQ's phase/magnitude bias: SEGAN scores **below** the Wiener baseline on PESQ (2.16 vs 2.22) yet above it on CSIG/CBAK/COVL/SSNR and on subjective MOS (3.18 vs 2.70), i.e. PESQ penalizes the adversarial objective's high-frequency artifacts more than listeners do
 - [[sources/zhu-2026-g-map-se-guided-speech-enhancement|G-MaP-SE: Guided Speech Enhancement via GMM-Based Prior Matching (Interspeech 2026)]]
 - [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] — SOTA PESQ 3.69 with SEMamba + PCS
 - [[sources/wang-2021-magnitude-phase-compensation|Wang, Wichern & Le Roux 2021: On the Compensation Between Magnitude and Phase in Speech Separation]] — analyzes PESQ's magnitude-dominant behavior

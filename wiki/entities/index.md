@@ -732,4 +732,7 @@
 | [[entities/meng-sun\|Meng Sun]] | Corresponding author of the DBCCRN paper (CSL 2024); speech enhancement, Army Engineering University | 2026-11-17 |
 | [[entities/xiongwei-zhang\|Xiongwei Zhang]] | Supervisor and co-author of the DBCCRN paper (CSL 2024); Army Engineering University, Nanjing | 2026-11-17 |
 | [[entities/hugo-van-hamme\|Hugo Van hamme]] | KU Leuven (ESAT/PSI) professor; validation co-author of the DBCCRN paper (CSL 2024) | 2026-11-17 |
+| [[entities/santiago-pascual\|Santiago Pascual]] | UPC Barcelona — lead author of SEGAN, the first GAN for speech enhancement and first waveform-level enhancement model | 2026-11-20 |
+| [[entities/antonio-bonafonte\|Antonio Bonafonte]] | UPC Barcelona (TALP) — speech synthesis/recognition; co-author of SEGAN | 2026-11-20 |
+| [[entities/joan-serra\|Joan Serrà]] | Telefónica Research — audio/music signal processing and generative models; co-author of SEGAN | 2026-11-20 |
 

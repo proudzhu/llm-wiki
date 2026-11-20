@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-11-08
+updated: 2026-11-20
 sources:
   - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
   - raw/papers/westhausen-2022-tplcnet/full-text.md
   - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
+  - raw/papers/pascual-2017-segan/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -30,13 +31,15 @@ Time-domain methods sidestep both issues by generating the output waveform direc
 
 | Architecture | Key features | Loss domain | Reference |
 |:-------------|:-------------|:------------|:----------|
-| SEGAN | U-Net + GAN discriminator | Time + adversarial | Pascual et al. 2017 |
+| [[concepts/segan\|SEGAN]] | U-Net encoder–decoder + convolutional GAN discriminator, latent vector in the bottleneck | Time (adversarial + $L_1$, $\lambda=100$) | [[sources/pascual-2017-segan\|Pascual et al. 2017]] |
 | **AECNN** | U-Net encoder-decoder, compact | **Frequency (STFT magnitude)** | [[sources/pandey-2019-cnn-speech-enhancement-time-domain\|Pandey & Wang 2019]] |
 | Conv-TasNet | Temporal convolutional network | Time (SI-SNR) | Luo & Mesgarani 2019 |
 | DEMUCS | U-Net + LSTM bottleneck | Time + frequency | Défossez et al. 2020 |
 | FullSubNet+ | Full-band + sub-band fusion | Frequency | Chen et al. 2022 |
 | [[concepts/mamba-mingru\|Mamba-MinGRU]] | Mamba blocks + [[concepts/mingru\|MinGRU]] temporal mixing | Time (thresholded SDR) | Østergaard et al. 2026 |
 | [[concepts/tplcnet\|tPLCnet]] | FC+Conv1D+BGRU seq2one over a short context buffer | **Frequency (combined mag + complex MAE)** | Westhausen & Meyer 2022 |
+
+[[concepts/segan|SEGAN]] (2017) is the first entry in this lineage and the reason it exists: a 22-layer strided-conv encoder–decoder over 16384-sample (1 s) 16 kHz chunks, with a latent vector concatenated at the bottleneck and a convolutional critic trained with a [[concepts/least-squares-gan|least-squares adversarial loss]] plus an $L_1$ anchor ($\lambda = 100$). It established two things the later time-domain line kept: (i) waveform-level generation removes both the invalid STFT problem and the reliance on noisy phase without any explicit phase model, and (ii) an adversarial objective can substitute for a waveform regression loss, which is misspecified for speech because MAE/MSE bias the estimate toward the conditional mean of a multimodal output distribution. What the line dropped was SEGAN's *objective* rather than its shape: [[sources/pandey-2019-cnn-speech-enhancement-time-domain|Pandey & Wang 2019]] reuse the same U-Net topology with an STFT-magnitude MAE loss at ~6.4 M parameters (vs. SEGAN's ~58 M) and beat SEGAN on STOI/PESQ, which is the [[concepts/frequency-domain-loss|frequency-loss-for-time-domain-nets]] pivot. SEGAN's other costs are structural: a one-second non-causal chunk and no streaming analysis.
 
 ## Loss Functions
 
@@ -72,6 +75,7 @@ The [[concepts/frequency-domain-loss|frequency domain loss for time-domain netwo
 
 ## Related Sources
 
+- [[sources/pascual-2017-segan|Pascual, Bonafonte & Serrà 2017: SEGAN]] — the origin of the lineage: first waveform-level enhancer, adversarially trained, no STFT stage at all; the objective later replaced by spectral losses on the same U-Net shape
 - [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — waveform-domain AC/BC fusion operating in 4 PQMF subbands, GAN-trained, 12.42 dB SI-SDR / 2.70 PESQ
 - [[sources/pandey-2019-cnn-speech-enhancement-time-domain|Pandey & Wang 2019: CNN-Based Speech Enhancement in the Time Domain]]
 - [[sources/wang-2021-magnitude-phase-compensation|Wang, Wichern & Le Roux 2021: On the Compensation Between Magnitude and Phase in Speech Separation]] — why time-domain models evaluated with PESQ/STOI/WER should include a magnitude loss

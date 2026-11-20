@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-11-15
-updated: 2026-11-15
+updated: 2026-11-20
 sources:
   - raw/papers/ronneberger-2015-u-net/full-text.md
+  - raw/papers/pascual-2017-segan/full-text.md
 tags:
   - u-net
   - semantic-segmentation
@@ -48,6 +49,7 @@ Named variants in this wiki, all U-Net-shaped with domain-specific substitutions
 | [[concepts/u-net-post-filter|U-Net post filter]] | AEC / speech enhancement | Bark-band encoder, depthwise-separable convs, GRU bottleneck, sub-pixel upsampling, sigmoid gain mask output |
 | [[concepts/trunet|TRU-Net]] | Real-time speech enhancement | 1D frequency-axis conv, FGRU + causal TGRU bottleneck, 1D transposed-conv decoder |
 | [[concepts/tfc-tdf-unet|TFC-TDF U-Net]] | Music source separation | TFC and TDF blocks replace 2D convs; frequency-axis linear layers |
+| [[concepts/segan|SEGAN]] | Waveform-level speech enhancement (1-D) | Strided conv1d encoder (k=31, stride 2), transposed-conv decoder, PReLU, latent vector concatenated at the bottleneck, adversarially trained |
 | [[concepts/cdunet|CDUNet]] | Directional speech enhancement | Causal U-Net conditioned on three steered beams |
 
 ## Related Concepts
@@ -61,3 +63,4 @@ Named variants in this wiki, all U-Net-shaped with domain-specific substitutions
 ## Related Sources
 
 - [[sources/ronneberger-2015-u-net|Ronneberger, Fischer & Brox 2015: U-Net]]
+- [[sources/pascual-2017-segan|Pascual, Bonafonte & Serrà 2017: SEGAN]] — the 1-D waveform instantiation: skip-connected encoder–decoder over raw 16 kHz samples, where "resolution" is time rather than the frequency axis

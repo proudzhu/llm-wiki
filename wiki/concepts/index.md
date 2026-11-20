@@ -671,4 +671,6 @@
 | [[concepts/dbccrn\|DBCCRN]] | Dual-branch complex CRN estimating speech and noise simultaneously via bridge blocks and conformer skips; 8.31M params, PESQ 3.16 on VoiceBank+DEMAND (Li et al. 2024) | 2026-11-17 |
 | [[concepts/scale-aware-snr\|Scale-Aware SNR (SA-SNR)]] | OSI-SNR ratio times a min/max norm-matching factor; restores scale awareness lost by SI-SNR/OSI-SNR without SNR's shrinkage bias (Li et al. 2024) | 2026-11-17 |
 | [[concepts/scale-error\|ScaleError]] | Peak-amplitude MSE metric plus peak-normalized scaled-test-set recipe exposing output-scale drift invisible to PESQ/STOI (Li et al. 2024) | 2026-11-17 |
+| [[concepts/segan\|SEGAN (Speech Enhancement GAN)]] | First GAN for speech enhancement and first waveform-level enhancer: 22-layer strided-conv encoder–decoder over 16 kHz chunks, LSGAN objective + L1 anchor (λ=100), MOS 3.18 vs. Wiener 2.70 | 2026-11-20 |
+| [[concepts/least-squares-gan\|Least-Squares GAN (LSGAN)]] | GAN variant replacing sigmoid cross-entropy with a least-squares loss on binary codes, removing saturation-induced vanishing gradients; adopted by SEGAN with an L1 anchor | 2026-11-20 |
 
