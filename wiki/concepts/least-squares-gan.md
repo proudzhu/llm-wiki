@@ -4,6 +4,7 @@ created: 2026-11-20
 updated: 2026-11-20
 sources:
   - raw/papers/pascual-2017-segan/full-text.md
+  - raw/papers/fu-2019-metricgan/full-text.md
 tags:
   - gan
   - generative-models
@@ -31,6 +32,12 @@ $$\min_{G} V_{\text{SEGAN}}(G) = \tfrac{1}{2}\mathbb{E}\left[(D(G(\mathbf{z},\ti
 
 The split of duties matters: the adversarial term supplies realism (fine-grained, distribution-matching detail that a conditional-mean regression cannot express) while the $L_1$ term supplies fidelity to the clean target. SEGAN's ablation on the weight is instructive — at $\lambda = 1$ the $L_1$ term sat two orders of magnitude below the adversarial term and had no practical effect, so the two terms must be balanced within a couple of orders of magnitude for the anchor to bite.
 
+**[[concepts/metricgan|MetricGAN]] (Fu, Liao, Tsao & Lin 2019)** pushes the same squared-error form one step further: the target is no longer a *constant* but the **evaluation metric itself**, $Q' \in [0,1]$. The discriminator becomes a regressor of the metric, and the generator is trained toward an assigned score $s$:
+
+$$L_{G} = \mathbb{E}_{\mathbf{x}}\big[(D(G(\mathbf{x}),\mathbf{y}) - s)^2\big]$$
+
+This is where the least-squares loss form stops being a training-stability trick and becomes a *semantic* requirement: squared error accepts a continuous target, so the metric value can occupy the position that "1 = real" holds in LSGAN, and the generator's output becomes steerable by $s$.
+
 ## Related Concepts
 
 - [[concepts/segan|SEGAN]] — the speech-enhancement architecture built on this objective
@@ -41,3 +48,4 @@ The split of duties matters: the adversarial term supplies realism (fine-grained
 ## Related Sources
 
 - [[sources/pascual-2017-segan|Pascual, Bonafonte & Serrà 2017: SEGAN]] — adopts LSGAN for waveform-level enhancement and calibrates the $L_1$ weight
+- [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN]] — exploits the least-squares form's tolerance of continuous targets: the discriminator regresses the evaluation metric itself, and the generator is steered to an assigned score $s$

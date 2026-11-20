@@ -3,6 +3,7 @@ type: concept
 created: 2026-06-19
 updated: 2026-11-20
 sources:
+  - raw/papers/fu-2019-metricgan/full-text.md
   - raw/papers/pascual-2017-segan/full-text.md
   - raw/papers/li-2020-geometrically-constrained-iva/full-text.md
   - raw/papers/li-2020-online-gciva/full-text.md
@@ -76,6 +77,7 @@ Worked example: concatenating $2Q{+}1$ log-magnitude spectra (161 frequency poin
 
 ## Related Sources
 
+- [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN]] — the metric-optimization turn in SE: a discriminator trained to regress PESQ/STOI replaces the real/fake objective, so the loss no longer presupposes a distance to a clean target (PESQ 2.86 / CSIG 3.99 / COVL 3.42 on VoiceBank+DEMAND)
 - [[sources/pascual-2017-segan|Pascual, Bonafonte & Serrà 2017: SEGAN]] — first GAN for SE and first waveform-level enhancement model: one shared parametrization across 28 speakers and 40 noise conditions, MOS 3.18 vs. Wiener 2.70, PESQ 2.16 / COVL 2.80 on VoiceBank+DEMAND
 - [[sources/li-2020-geometrically-constrained-iva|Li & Koishida 2020: Geometrically Constrained IVA for Directional Speech Enhancement]] — dual-microphone directional SE via geometrically constrained BSS
 - [[sources/li-2020-online-gciva|Li, Koishida & Makino 2020: Online Directional Speech Enhancement Using Geometrically Constrained IVA]] — real-time online geometrically constrained BSS for directional SE

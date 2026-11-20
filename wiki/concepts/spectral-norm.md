@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-07-12
-updated: 2026-07-12
+updated: 2026-11-20
 sources:
   - raw/papers/stewart-1993-early-history-svd/full-text.md
+  - raw/papers/fu-2019-metricgan/full-text.md
 tags:
   - linear-algebra
   - matrix-norm
@@ -39,6 +40,10 @@ The spectral norm also governs the **best rank-$k$ approximation error** ([[conc
 
 $$\min_{\mathrm{rank}(\mathbf{B}) \leq k} \|\mathbf{A} - \mathbf{B}\|_2 = \sigma_{k+1}(\mathbf{A}).$$
 
+## Spectral Normalization in GAN Training
+
+Beyond perturbation theory, the spectral norm is the basis of **spectral normalization** (Miyato et al. 2018), which divides each weight matrix of a discriminator by its spectral norm so that the network's Lipschitz constant is bounded. [[sources/fu-2019-metricgan|Fu et al. 2019]] apply it to a discriminator that regresses a metric score and give a rationale distinct from WGAN's: the surrogate must be a **smooth** function of the input, so that "a small change in the input spectrogram [does not] result in a significant difference to the estimated score" — i.e. spectral normalization is used for *metric-surface regularity*, not only for training stability (which they also report).
+
 ## Related Norms
 
 - **Frobenius norm**: $\|\mathbf{A}\|_F = \sqrt{\sum_i \sigma_i^2}$. Also unitarily invariant, but aggregates all singular values rather than only the largest.
@@ -48,3 +53,5 @@ $$\min_{\mathrm{rank}(\mathbf{B}) \leq k} \|\mathbf{A} - \mathbf{B}\|_2 = \sigma
 
 - Weyl, H. *Das asymptotische Verteilungsgesetz der Eigenwerte linearer partieller Differentialgleichungen*. Math. Ann., 71:441–479, 1912.
 - Stewart, G. W. *On the Early History of the Singular Value Decomposition*. SIAM Review, 35(4):551–566, 1993.
+- Miyato, T., Kataoka, T., Koyama, M., & Yoshida, Y. *Spectral Normalization for Generative Adversarial Networks*. ICLR, 2018.
+- [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN]] — applies spectral normalization to a metric-regressing discriminator, for smoothness of the estimated metric surface as well as training stability

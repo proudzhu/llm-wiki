@@ -10,6 +10,7 @@ sources:
   - raw/papers/pan-2025-data-driven-acoustics/full-text.md
   - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
   - raw/papers/pascual-2017-segan/full-text.md
+  - raw/papers/fu-2019-metricgan/full-text.md
 ---
 # Deep Learning for Signal Processing
 
@@ -49,7 +50,7 @@ In traditional signal processing (TSP), algorithms like the **[[wiener-filter]]*
 - **Recurrent Neural Networks (RNNs/LSTMs)**: Essential for modeling temporal dependencies in sequential data.
 - **Convolutional Recurrent Networks (CRNs)**: Combines CNNs for feature extraction and RNNs for temporal modeling; widely used in **[[synthesis/ai-driven-anc]]** and [[convolutional-recurrent-network|CRN-based Deep ANC]].
 - **Complex Spectrum Mapping**: Joint estimation of real/imaginary STFT components for precise phase control; critical for [[complex-spectrum-mapping|ANC applications]] where phase accuracy determines cancellation effectiveness.
-- **Generative Models (GANs)**: Used for speech enhancement — starting with [[sources/pascual-2017-segan|SEGAN (2017)]], an adversarially trained waveform-level encoder–decoder, the first GAN applied to enhancement (see [[concepts/segan|SEGAN]], [[concepts/least-squares-gan|LSGAN]]) — and for generating anti-noise signals.
+- **Generative Models (GANs)**: Used for speech enhancement — starting with [[sources/pascual-2017-segan|SEGAN (2017)]], an adversarially trained waveform-level encoder–decoder, the first GAN applied to enhancement (see [[concepts/segan|SEGAN]], [[concepts/least-squares-gan|LSGAN]]) — and for generating anti-noise signals. A distinct use of the same machinery is [[concepts/metricgan|MetricGAN (2019)]], where the discriminator is a *learned surrogate of the evaluation metric*; this switched the GAN from a realism objective to a metric-optimization objective and is now the mainstream form of adversarial training in SE (see [[concepts/black-box-metric-optimization|Black-Box Metric Score Optimization]]).
 
 ## Applications in this Wiki
 - **[[synthesis/ai-driven-anc]]**: Neural noise selection and end-to-end anti-noise generation.
@@ -73,6 +74,7 @@ In traditional signal processing (TSP), algorithms like the **[[wiener-filter]]*
 
 ## Related Sources
 
+- [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN]] — replaces the task loss with a learned surrogate of the evaluation metric, i.e. makes the *metric* the data-driven objective rather than a fixed distance function
 - [[sources/pascual-2017-segan|Pascual, Bonafonte & Serrà 2017: SEGAN]] — first GAN for speech enhancement: an end-to-end waveform model, the earliest point at which a data-driven model displaced the classical spectral-domain pipeline outright
 - [[sources/dai-2026-speech-preserving-deep-anc|Dai 2026: Speech-Preserving Deep ANC]]
 - [[sources/fareedha-2026-joint-deep-spe-anc|Fareedha 2026: Joint Deep SPE and Adaptive Control for ANC]]

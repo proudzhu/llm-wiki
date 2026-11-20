@@ -5,6 +5,7 @@ updated: 2026-11-20
 sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/pascual-2017-segan/full-text.md
+  - raw/papers/fu-2019-metricgan/full-text.md
   - raw/papers/yan-2025-lisennet/full-text.md
   - raw/papers/ahn-2026-fastenhancer/full-text.md
   - raw/papers/kim-2026-faster-enhancer/full-text.md
@@ -40,6 +41,7 @@ The noisy baseline scores PESQ = 1.97, CSIG = 3.35, CBAK = 2.44, COVL = 2.63, ST
 | System | PESQ | Year | Notes |
 |--------|------|------|-------|
 | [[concepts/segan\|SEGAN]] | 2.16 | 2017 | GAN-based; the benchmark's original configuration and first neural baseline |
+| [[concepts/metricgan\|MetricGAN]] | 2.86 | 2019 | **Discriminator as learned metric surrogate** — first system trained directly against PESQ on this benchmark (CSIG 3.99 / CBAK 3.18 / COVL 3.42); distinct from the MetricGAN+ row below |
 | MetricGAN+ | 3.15 | 2021 | metric-oriented loss |
 | CMGAN | 3.41 | 2022 | conformal metric GAN |
 | MP-SENet | 3.50 | 2023 | Conformer TF backbone |
@@ -71,4 +73,5 @@ A 48 kHz variant of the benchmark appears in [[sources/kim-2026-faster-enhancer|
 - [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — retrained LiSenNet baseline + 11 NPU variants evaluated on the full 824-utterance test set (16 kHz, CMGAN recipe), with PESQ reported both FP32 and int8
 - [[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025: LCT-GAN]] — smallest reported operating point that reaches DeepFilterNet2 quality: 0.14 M params / 0.35 G MAC/s → PESQ 3.06 (3.20 with PCS), CSIG 4.41, CBAK 3.66, COVL 3.80, STOI 0.95; the parameter-count floor among causal models on this benchmark
 - [[sources/fu-2026-one-model-many-latencies|Fu et al. 2026: One Model, Many Latencies]] — cross-dataset (URGENT-trained) point: PESQ 2.76 / 2.82 at 40 / 60 ms algorithmic latency and 2.9M params, ahead of DeepFilterNet3 and Stream.FM at comparable latency
+- [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN]] — PESQ 2.86 / CSIG 3.99 / CBAK 3.18 / COVL 3.42, best of six compared systems: the first entry on this benchmark trained against a metric rather than a target signal, and the origin of the MetricGAN+ line (whose 3.15 row must not be conflated with it)
 - [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] — PESQ 3.16 / STOI 0.940 / SSNR 10.98 at 8.31 M params; introduces the peak-normalized **scaled test set** variant of this benchmark to expose scale-sensitive losses ([[concepts/scale-error|ScaleError]])

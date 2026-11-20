@@ -5,6 +5,7 @@ updated: 2026-11-20
 sources:
   - raw/papers/shetu-2026-generative-discriminative-comparison/full-text.md
   - raw/papers/pascual-2017-segan/full-text.md
+  - raw/papers/fu-2019-metricgan/full-text.md
 tags:
   - speech-enhancement
   - generative-models
@@ -21,6 +22,8 @@ The two training paradigms for deep-learning speech enhancement (SE), formulated
 The generative branch of SE starts with [[sources/pascual-2017-segan|SEGAN (Pascual, Bonafonte & Serrà 2017)]] — the first GAN for enhancement: a waveform-level convolutional encoder–decoder trained with a [[concepts/least-squares-gan|least-squares adversarial loss]] plus an $L_1$ anchor ($\lambda = 100$) against a critic that scores (noisy, clean) against (noisy, enhanced) pairs. Two of its design choices recur throughout this page's later entries: the adversarial term is justified precisely by the failure of regression losses (MAE/MSE assume a unimodal output and bias the estimate to the conditional mean), and the $L_1$/adversarial balance is a hyperparameter with a wide inert region — at $\lambda = 1$ the anchor sat two orders of magnitude below the adversarial term and had no effect on learning. Its weaknesses are equally canonical: adversarial artifacts cost it PESQ against a plain Wiener filter (2.16 vs 2.22) even while it wins on subjective MOS (3.18 vs 2.70) and on CSIG/CBAK/COVL/SSNR.
 
 ## Key Formulations
+
+A third position emerged between the two paradigms: [[sources/fu-2019-metricgan|**MetricGAN** (Fu et al., ICML 2019)]] trains a generator against a **learned surrogate of the evaluation metric** rather than against the clean signal or a real/fake boundary. Its discriminator regresses $Q'(G(\mathbf{x}),\mathbf{y}) \in [0,1]$ instead of classifying, and the generator minimizes $(D(G(\mathbf{x}),\mathbf{y}) - s)^2$ for an assigned score $s$. This is not a third generative model — it is a *conditional GAN whose adversarial objective has been re-pointed at a metric*, and the paper's own measurement shows why: the conventional adversarial term is inert for SE (IRM(CGAN) 2.002 PESQ vs IRM(L1) 2.033 at matched generator, no listener preference), whereas the metric surrogate moves PESQ to 2.133 and STOI to 0.768 at the same capacity. Since 2019 this has become the dominant way GAN machinery is used in SE: MetricGAN+ and CMGAN are benchmark fixtures, and later systems (LiSenNet, FastEnhancer) attach a MetricGAN-style discriminator as an *auxiliary* loss ($\lambda \approx 0.05$ or $10^{-3}$) rather than as the sole objective.
 
 | Paradigm | Objective | Inference |
 |----------|-----------|-----------|
@@ -54,6 +57,7 @@ Key insight: **the training objective, not the architecture, drives the gains** 
 
 ## Related Sources
 
+- [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN]] — the metric-surrogate turn: the discriminator regresses PESQ/STOI instead of classifying, and the paper measures the conventional adversarial SE term as inert (IRM(CGAN) 2.002 vs IRM(L1) 2.033 PESQ at matched generator)
 - [[sources/pascual-2017-segan|Pascual, Bonafonte & Serrà 2017: SEGAN]] — the first generative (GAN) SE system; establishes the canonical failure profile of adversarial training (sub-Wiener PESQ 2.16 vs 2.22, artifacts at high frequency) alongside its wins on CSIG/CBAK/COVL/SSNR and subjective MOS 3.18 vs 2.70
 - [[sources/shetu-2026-generative-discriminative-comparison|Shetu, Habets & Brendel 2026: Generative vs. Discriminative SE]]
 - [[sources/lugo-2026-diffvqe|Lugo et al. 2026: DiffVQE]] — single-step hybrid discriminative+generative design, a middle route

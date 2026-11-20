@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-07-18
-updated: 2026-10-11
+updated: 2026-11-20
 sources:
   - raw/papers/heymann-2016-neural-spectral-mask-beamforming/full-text.md
   - raw/papers/mienye-2024-rnn-comprehensive-review/full-text.md
+  - raw/papers/fu-2019-metricgan/full-text.md
 tags:
   - deep-learning
   - recurrent-neural-network
@@ -54,6 +55,8 @@ Other uses in the surveyed literature:
 
 Beyond the survey's scope, BLSTMs were the workhorse of early neural speech-enhancement front-ends: [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016]] use one (256 BLSTM units → 2×513 FF → sigmoid output) to estimate speech/noise spectral masks for acoustic beamforming, where temporal context lets it distinguish speech from high-energy stationary noise that fools per-frequency parametric estimators. Notably, a tiny feed-forward network (single hidden layer, single-frame input) nearly matched the BLSTM when both were trained on clean speech only — bidirectional temporal context matters most under noise-aware training.
 
+[[sources/fu-2019-metricgan|Fu et al. 2019 (MetricGAN, ICML)]] mark the other end of that era: a 2-layer BLSTM (200 units/direction) → FC 300 LeakyReLU → FC 257 sigmoid emits the magnitude mask, floored at 0.05 to suppress musical noise, and the network's *capacity* was deliberately held fixed while the training objective varied. That control is what makes the result usable as evidence — the BLSTM is not the contribution, it is the fixture that lets a mask-based generator be compared fairly under $L_1$, conventional adversarial, RL, and metric-surrogate objectives (2.033 / 2.002 / 2.098 / 2.133 PESQ respectively on TIMIT).
+
 ## Distinction from Unidirectional LSTM
 
 BiLSTM should not be used when:
@@ -75,3 +78,4 @@ For streaming speech enhancement or AEC applications (e.g., [[concepts/percepnet
 
 - [[sources/mienye-2024-rnn-comprehensive-review\|Mienye, Swart & Obaido 2024: RNN Comprehensive Review]] — surveys BiLSTM applications across sentiment analysis, bioinformatics, and anomaly detection
 - [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016: Neural Network Based Spectral Mask Estimation for Acoustic Beamforming]] — BLSTM spectral-mask estimation for beamforming; temporal context most valuable under noise-aware training
+- [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN]] — a 2-layer BLSTM mask estimator held fixed as a fixture across four training objectives (L1 / CGAN / RL / metric surrogate), isolating the loss function from the architecture

@@ -302,4 +302,5 @@
 | [[sources/ronneberger-2015-u-net\|Ronneberger, Fischer & Brox 2015: U-Net]] | Introduces the U-Net encoder–decoder with skip concatenation, overlap-tile inference, boundary-weighted loss and elastic augmentation; won ISBI 2012 EM and ISBI 2015 cell-tracking challenges from 20–30 annotated images | 2026-11-15 |
 | [[sources/li-2024-dbccrn\|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] | Dual-branch complex CRN estimating speech and noise simultaneously (bridge blocks + conformer skips); the SA-SNR loss repairs SI-SNR's scale blindness — PESQ 3.16 / STOI 0.940 on VoiceBank+DEMAND at 8.31 M params with ScaleError 0.014%. | 2026-11-17 |
 | [[sources/pascual-2017-segan\|Pascual, Bonafonte & Serrà 2017]] | SEGAN is the first application of a generative adversarial network to speech enhancement, and the first waveform-level (raw 16 kHz sample) end-to-end enhancement system. | 2026-11-20 |
+| [[sources/fu-2019-metricgan\|Fu, Liao, Tsao & Lin 2019]] | MetricGAN repurposes the GAN discriminator as a learned surrogate of a black-box evaluation metric. | 2026-11-20 |
 

@@ -741,6 +741,8 @@
 | [[entities/santiago-pascual\|Santiago Pascual]] | UPC Barcelona — lead author of SEGAN, the first GAN for speech enhancement and first waveform-level enhancement model | 2026-11-20 |
 | [[entities/antonio-bonafonte\|Antonio Bonafonte]] | UPC Barcelona (TALP) — speech synthesis/recognition; co-author of SEGAN | 2026-11-20 |
 | [[entities/joan-serra\|Joan Serrà]] | Telefónica Research — audio/music signal processing and generative models; co-author of SEGAN | 2026-11-20 |
+| [[entities/chien-feng-liao\|Chien-Feng Liao]] | NTU / Academia Sinica — co-author of MetricGAN, the discriminator-as-metric-surrogate formulation for metric-driven speech enhancement | 2026-11-20 |
+| [[entities/shou-de-lin\|Shou-De Lin]] | National Taiwan University — machine learning and data mining; co-author of MetricGAN and its multi-metric score-assignment algorithm | 2026-11-20 |
 
 ---
 
@@ -1419,6 +1421,9 @@
 | [[concepts/scale-error\|ScaleError]] | Peak-amplitude MSE metric plus peak-normalized scaled-test-set recipe exposing output-scale drift invisible to PESQ/STOI (Li et al. 2024) | 2026-11-17 |
 | [[concepts/segan\|SEGAN (Speech Enhancement GAN)]] | First GAN for speech enhancement and first waveform-level enhancer: 22-layer strided-conv encoder–decoder over 16 kHz chunks, LSGAN objective + L1 anchor (λ=100), MOS 3.18 vs. Wiener 2.70 | 2026-11-20 |
 | [[concepts/least-squares-gan\|Least-Squares GAN (LSGAN)]] | GAN variant replacing sigmoid cross-entropy with a least-squares loss on binary codes, removing saturation-induced vanishing gradients; adopted by SEGAN with an L1 anchor | 2026-11-20 |
+| [[concepts/metricgan\|MetricGAN]] | GAN whose discriminator is a learned surrogate of a black-box evaluation metric; continuous metric-valued labels make the generator steerable toward any assigned score | 2026-11-20 |
+| [[concepts/black-box-metric-optimization\|Black-Box Metric Score Optimization]] | Training against a non-differentiable or proprietary evaluation metric via a learned surrogate; white-box proxy vs. RL reward vs. surrogate-regression families | 2026-11-20 |
+| [[concepts/stoi\|STOI (Short-Time Objective Intelligibility)]] | Objective speech-intelligibility metric (0-1, 15 third-octave bands, 0-5 kHz); the score-assignment experiment shows it tracks speech content where PESQ tracks noise | 2026-11-20 |
 
 ---
 
@@ -1726,6 +1731,7 @@
 | [[sources/ronneberger-2015-u-net\|Ronneberger, Fischer & Brox 2015: U-Net]] | Introduces the U-Net encoder–decoder with skip concatenation, overlap-tile inference, boundary-weighted loss and elastic augmentation; won ISBI 2012 EM and ISBI 2015 cell-tracking challenges from 20–30 annotated images | 2026-11-15 |
 | [[sources/li-2024-dbccrn\|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] | Dual-branch complex CRN estimating speech and noise simultaneously (bridge blocks + conformer skips); the SA-SNR loss repairs SI-SNR's scale blindness — PESQ 3.16 / STOI 0.940 on VoiceBank+DEMAND at 8.31 M params with ScaleError 0.014%. | 2026-11-17 |
 | [[sources/pascual-2017-segan\|Pascual, Bonafonte & Serrà 2017]] | SEGAN is the first application of a generative adversarial network to speech enhancement, and the first waveform-level (raw 16 kHz sample) end-to-end enhancement system. | 2026-11-20 |
+| [[sources/fu-2019-metricgan\|Fu, Liao, Tsao & Lin 2019]] | MetricGAN repurposes the GAN discriminator as a learned surrogate of a black-box evaluation metric. | 2026-11-20 |
 
 ---
 
@@ -1784,10 +1790,10 @@
 
 ## Statistics
 
-- **Total pages**: 1733
-- **Entities**: 731
-- **Concepts**: 669
-- **Sources**: 298
+- **Total pages**: 1739
+- **Entities**: 733
+- **Concepts**: 672
+- **Sources**: 299
 - **Synthesis**: 25
 - **Queries**: 10
 - **Last updated**: 2026-11-20

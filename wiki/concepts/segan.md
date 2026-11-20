@@ -4,6 +4,7 @@ created: 2026-11-20
 updated: 2026-11-20
 sources:
   - raw/papers/pascual-2017-segan/full-text.md
+  - raw/papers/fu-2019-metricgan/full-text.md
 tags:
   - speech-enhancement
   - gan
@@ -45,9 +46,11 @@ SEGAN trails Wiener on PESQ (attributed to adversarial high-frequency artifacts)
 
 ## Lineage
 
-SEGAN is the opening entry of the [[concepts/time-domain-speech-enhancement|time-domain]] lineage — AECNN, Conv-TasNet and DEMUCS follow it. Its own generator design was reused almost verbatim: [[sources/pandey-2019-cnn-speech-enhancement-time-domain|Pandey & Wang 2019]]'s AECNN is a SEGAN-shaped U-Net trained with STFT-magnitude MAE instead of an adversarial loss, at ~6.4 M parameters versus SEGAN's ~58 M (external estimate), and beats SEGAN on STOI/PESQ — the first evidence that the adversarial term was not the most sample-efficient route to better perceptual metrics. Later generative SE work largely abandoned a latent $\mathbf{z}$ looped through the generator's bottleneck, keeping only the adversarial *objective*.
+SEGAN is the opening entry of the [[concepts/time-domain-speech-enhancement|time-domain]] lineage — AECNN, Conv-TasNet and DEMUCS follow it. Its own generator design was reused almost verbatim: [[sources/pandey-2019-cnn-speech-enhancement-time-domain|Pandey & Wang 2019]]'s AECNN is a SEGAN-shaped U-Net trained with STFT-magnitude MAE instead of an adversarial loss, at ~6.4 M parameters versus SEGAN's ~58 M (external estimate), and beats SEGAN on STOI/PESQ — the first evidence that the adversarial term was not the most sample-efficient route to better perceptual metrics. Later generative SE work largely abandoned a latent $\mathbf{z}$ looped through the generator's bottleneck, keeping only the adversarial *objective*. The most consequential successor disagrees even about that: [[sources/fu-2019-metricgan|MetricGAN (2019)]] measures SEGAN's-style conventional adversarial term as *inert* for SE (IRM(CGAN) 2.002 PESQ vs IRM(L1) 2.033 at matched generator, and no listener preference) and replaces the real/fake objective with a **learned surrogate of the evaluation metric** — keeping the adversarial training loop but changing what the discriminator means.
 
 ## Related Concepts
+
+- [[concepts/metricgan|MetricGAN]] — the successor that repurposes the discriminator as a metric surrogate
 
 - [[concepts/least-squares-gan|Least-Squares GAN (LSGAN)]] — the objective SEGAN adopts and extends
 - [[concepts/generative-vs-discriminative-speech-enhancement|Generative vs. Discriminative Speech Enhancement]]

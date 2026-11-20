@@ -5,6 +5,7 @@ updated: 2026-11-20
 sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/pascual-2017-segan/full-text.md
+  - raw/papers/fu-2019-metricgan/full-text.md
   - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
   - raw/papers/lee-2016-dnn-plc/full-text.md
   - raw/papers/yan-2025-lisennet/full-text.md
@@ -21,6 +22,17 @@ tags:
 
 PESQ (Perceptual Evaluation of Speech Quality) is an ITU-T P.862 standard objective metric for evaluating speech quality. It compares a degraded speech signal against the original clean reference and returns a score between -0.5 and 4.5. Wide-band PESQ (WB-PESQ) is commonly used in speech enhancement evaluation.
 
+## PESQ as a Training Objective (the MetricGAN Line)
+
+PESQ is not differentiable, so making it a *training signal* required a workaround. [[sources/fu-2019-metricgan|Fu et al. 2019 (MetricGAN, ICML)]] supply the origin of the family: a discriminator regressed onto PESQ values, with the generator pushed toward an assigned score $s$ — a black-box route needing no knowledge of PESQ's internals. It set PESQ 2.86 / CSIG 3.99 / CBAK 3.18 / COVL 3.42 on VoiceBank+DEMAND and is the reference point of this table's MetricGAN+ row.
+
+The same experiments yield two cautionary findings about optimizing PESQ directly:
+
+- **Every optimization is a bias purchase.** Driving an assigned PESQ score *down* makes MetricGAN add noise to the signal — not delete speech (which is what driving STOI down does). PESQ therefore rewards noise suppression over speech preservation, and a model optimized for it will trade accordingly.
+- **The metric can be gamed.** PESQ-first training produced artifacts that PESQ itself ranks well but that are audible; the paper reports the adversarial term's optimum includes "unpleasant artifacts" at higher weight, and later work (FastEnhancer's $\lambda_5 = 10^{-3}$ PESQ term, the PESQetarian critique) treats this Goodhart risk explicitly.
+
+PESQ nonetheless remains the field's headline reporting metric — see the VoiceBank-DEMAND table below, where nearly every modern system optimizes it or a proxy for it.
+
 ## Notable PESQ Results on VoiceBank-DEMAND
 
 The VoiceBank-DEMAND benchmark has become a de facto standard for reporting PESQ in monaural speech enhancement. The progression of SOTA:
@@ -28,6 +40,7 @@ The VoiceBank-DEMAND benchmark has become a de facto standard for reporting PESQ
 | System | Year | PESQ | Method |
 |--------|------|------|--------|
 | [[concepts/segan\|SEGAN]] | 2017 | 2.16 | GAN |
+| [[concepts/metricgan\|MetricGAN]] | 2019 | 2.86 | PESQ-optimized via learned surrogate |
 | MetricGAN+ | 2021 | 3.15 | metric-oriented loss |
 | CMGAN | 2022 | 3.41 | conformal metric GAN |
 | MP-SENet | 2023 | 3.50 | Conformer TF backbone |
@@ -55,6 +68,7 @@ FastEnhancer (Ahn et al. 2026) — uses a differentiable PESQ loss (torch-pesq) 
 
 ## Related Sources
 
+- [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN]] — the origin of PESQ-as-training-objective: a discriminator regressed onto PESQ values steers the generator, and the score-assignment experiment shows the metric-optimal direction adds noise rather than preserving speech (PESQ measures quality, not intelligibility — contrast [[concepts/stoi|STOI]])
 - [[sources/pascual-2017-segan|Pascual, Bonafonte & Serrà 2017: SEGAN]] — the benchmark's origin point and its illustrative case for PESQ's phase/magnitude bias: SEGAN scores **below** the Wiener baseline on PESQ (2.16 vs 2.22) yet above it on CSIG/CBAK/COVL/SSNR and on subjective MOS (3.18 vs 2.70), i.e. PESQ penalizes the adversarial objective's high-frequency artifacts more than listeners do
 - [[sources/zhu-2026-g-map-se-guided-speech-enhancement|G-MaP-SE: Guided Speech Enhancement via GMM-Based Prior Matching (Interspeech 2026)]]
 - [[sources/chao-2024-mamba-speech-enhancement|Chao et al. 2024: An Investigation of Incorporating Mamba for Speech Enhancement]] — SOTA PESQ 3.69 with SEMamba + PCS

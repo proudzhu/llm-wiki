@@ -735,4 +735,6 @@
 | [[entities/santiago-pascual\|Santiago Pascual]] | UPC Barcelona — lead author of SEGAN, the first GAN for speech enhancement and first waveform-level enhancement model | 2026-11-20 |
 | [[entities/antonio-bonafonte\|Antonio Bonafonte]] | UPC Barcelona (TALP) — speech synthesis/recognition; co-author of SEGAN | 2026-11-20 |
 | [[entities/joan-serra\|Joan Serrà]] | Telefónica Research — audio/music signal processing and generative models; co-author of SEGAN | 2026-11-20 |
+| [[entities/chien-feng-liao\|Chien-Feng Liao]] | NTU / Academia Sinica — co-author of MetricGAN, the discriminator-as-metric-surrogate formulation for metric-driven speech enhancement | 2026-11-20 |
+| [[entities/shou-de-lin\|Shou-De Lin]] | National Taiwan University — machine learning and data mining; co-author of MetricGAN and its multi-metric score-assignment algorithm | 2026-11-20 |
 
