@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-11-20
+updated: 2026-11-21
 sources:
+  - raw/papers/braun-2021-loss-functions-speech-enhancement/full-text.md
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/pascual-2017-segan/full-text.md
   - raw/papers/fu-2019-metricgan/full-text.md
@@ -53,6 +54,12 @@ PESQ first time-aligns the predicted signal with the reference segment-wise (for
 
 FastEnhancer (Ahn et al. 2026) — uses a differentiable PESQ loss (torch-pesq) with a deliberately tiny weight ($\lambda_5 = 0.001$) inside its five-term composite loss, citing the PESQetarian / Goodhart's-law concern (de Oliveira et al. 2024); the tiny weight improved not only PESQ but also other objective metrics. The paper also observes a metric-disagreement caution: FastEnhancer-M slightly degrades DNSMOS despite improving every other metric vs S.
 
+## PESQ as a Model-Selection and Hyperparameter Objective
+
+PESQ does not have to be differentiable to steer training: it can select. [[sources/braun-2021-loss-functions-speech-enhancement|Braun & Tashev 2021]] chose the best checkpoint by validation PESQ (every 10 epochs) **and** grid-searched every loss weight ($\beta$, $\lambda$, compression and weighting constants) against validation PESQ, so all 19 compared losses were tuned to the same metric.
+
+The consequence is visible in their own table: the PESQ-optimal mixture weight gave PESQ 3.31 while its SI-SDR fell to 9.42 dB, below the MAE mixture's 9.75 dB — i.e. tuning to PESQ systematically selects the configuration that trades waveform accuracy for spectral magnitude accuracy. Any "loss X beats loss Y" claim measured under PESQ-guided selection is therefore a claim about PESQ's preference as much as about the loss.
+
 ## PESQ Misses Scale Errors (Li et al. 2024)
 
 [[sources/li-2024-dbccrn|Li et al. 2024]] document a blind spot complementary to the magnitude bias above: PESQ (and STOI/COVL) barely notice **output amplitude drift**. DCCRN trained with SI-SNR scores PESQ 2.89 on VoiceBank+DEMAND while its output peaks overshoot the target by ScaleError 18.653% — clipping in any $[-1,1]$ playback pipeline. On a peak-normalized test set the same model drops to PESQ 2.50, while [[concepts/scale-aware-snr|SA-SNR]] training holds 3.16 → 3.15. Their [[concepts/scale-error|ScaleError]] metric and scaled-test-set recipe make this failure mode measurable alongside PESQ.
@@ -68,6 +75,7 @@ FastEnhancer (Ahn et al. 2026) — uses a differentiable PESQ loss (torch-pesq) 
 
 ## Related Sources
 
+- [[sources/braun-2021-loss-functions-speech-enhancement|Braun & Tashev 2021: A Consolidated View of Loss Functions]] — PESQ used as *both* checkpoint-selection criterion and hyperparameter grid-search objective for 17 losses, which biases the comparison toward magnitude-accurate configurations (PESQ-best 3.31 at SI-SDR 9.42 vs. MAE mixture 9.75 dB)
 - [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN]] — the origin of PESQ-as-training-objective: a discriminator regressed onto PESQ values steers the generator, and the score-assignment experiment shows the metric-optimal direction adds noise rather than preserving speech (PESQ measures quality, not intelligibility — contrast [[concepts/stoi|STOI]])
 - [[sources/pascual-2017-segan|Pascual, Bonafonte & Serrà 2017: SEGAN]] — the benchmark's origin point and its illustrative case for PESQ's phase/magnitude bias: SEGAN scores **below** the Wiener baseline on PESQ (2.16 vs 2.22) yet above it on CSIG/CBAK/COVL/SSNR and on subjective MOS (3.18 vs 2.70), i.e. PESQ penalizes the adversarial objective's high-frequency artifacts more than listeners do
 - [[sources/zhu-2026-g-map-se-guided-speech-enhancement|G-MaP-SE: Guided Speech Enhancement via GMM-Based Prior Matching (Interspeech 2026)]]

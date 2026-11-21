@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-07-17
-updated: 2026-10-24
+updated: 2026-11-21
 sources:
+  - raw/papers/braun-2021-loss-functions-speech-enhancement/full-text.md
   - raw/papers/seidel-2024-bark-scale-nn-residual-suppression/full-text.md
   - raw/papers/timcheck-2023-intel-neuromorphic-dns-challenge/full-text.md
   - raw/papers/westhausen-2022-tplcnet/full-text.md
@@ -43,6 +44,10 @@ NSNet2 (the Microsoft DNS 2022 baseline) serves as the **conventional comparison
 
 The FC+GRU pattern also propagated into packet loss concealment: tPLCnet ([[sources/westhausen-2022-tplcnet|Westhausen & Meyer 2022]]) adapts the NSNet2-style topology (FC encoding → FC embedding → Conv1D → BGRU → FC mapping) to a seq2one task that predicts an entire lost 10 ms frame from a short context buffer, triggered only when a loss is detected — 3rd place (tied) in the Interspeech 2022 Audio Deep PLC Challenge (see [[concepts/tplcnet|tPLCnet]]).
 
+## Loss-Function Reference Architecture
+
+The FC+GRU family's loss behaviour was characterised by [[sources/braun-2021-loss-functions-speech-enhancement|Braun & Tashev 2021]] on a 2.8 M-parameter causal variant of this template — 255 log-power bins in, FF 400 → GRU 400 → GRU 400 → FF 600 → FF 600 → FF 255 sigmoid out, real-valued gain, 32 ms sqrt-Hann / 16 ms hop. That paper is the reason later NSNet2-style systems default to a compressed magnitude-plus-complex mixture: on reverberant CHiME-2 the compressed mixture gave PESQ 3.31 vs. 3.17 for a mixed MSE and 3.16 for magnitude MSE alone. See [[concepts/mixed-magnitude-complex-loss|Mixed Magnitude-Complex Loss]].
+
 ## Key Properties
 
 | Property | Value / Description |
@@ -79,6 +84,7 @@ NSNet2's advantage is its **fully-connected + recurrent** nature, which is signi
 
 ## Related Sources
 
+- [[sources/braun-2021-loss-functions-speech-enhancement|Braun & Tashev 2021: A Consolidated View of Loss Functions]] — the loss study on a 2.8 M FC+GRU gain predictor of this family; establishes the compressed magnitude+complex mixture that NSNet2-style suppressors inherit
 - [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Seidel, Mowlaee & Fingscheidt 2024]] — adopts NSNet2 as the postfilter backbone with an added Bark-scale input mapping
 - [[sources/timcheck-2023-intel-neuromorphic-dns-challenge\|Timcheck et al. 2023: The Intel Neuromorphic DNS Challenge]] — uses NsNet2 as the conventional baseline against which the SDNN neuromorphic baseline is compared
 - [[sources/westhausen-2022-tplcnet\|Westhausen & Meyer 2022: tPLCnet — Real-Time Deep Packet Loss Concealment in the Time Domain]] — adapts the NSNet2 FC+GRU topology to a seq2one PLC task

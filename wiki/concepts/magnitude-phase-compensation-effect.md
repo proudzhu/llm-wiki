@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-09-06
-updated: 2026-09-06
+updated: 2026-11-21
 sources:
+  - raw/papers/braun-2021-loss-functions-speech-enhancement/full-text.md
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
   - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
 tags:
@@ -37,6 +38,12 @@ The effect explains a widely observed asymmetry in evaluation metrics:
 - **Phase-accuracy correlation**: phase estimation accuracy correlates with spectral magnitude — high-magnitude regions yield accurate phase predictions, low-magnitude regions are error-prone. The attenuation therefore also follows signal-dependent patterns, not just frequency.
 - **Scalar-weight dilemma**: in the mixed loss $\mathcal{L}_{\mathrm{Mix}}=(1-\lambda)\mathcal{L}_{\mathrm{Mag}}+\lambda\mathcal{L}_{\mathrm{Pha}}$, an insufficient $\lambda$ under-suppresses noise while an excessive $\lambda$ over-attenuates; a single scalar cannot capture the spectral variation of the effect.
 
+## Independent Evidence from Real-Gain Predictors (Braun & Tashev 2021)
+
+One year before Wang et al. named the effect, [[sources/braun-2021-loss-functions-speech-enhancement|Braun & Tashev 2021]] measured its consequence without a phase estimator at all. Their network predicts a real-valued gain $G\in[0,1]$ applied to the noisy spectrum, so the output phase is always the noisy phase and no phase information can be learned. Yet adding a complex (phase-aware) term to a magnitude term improved PESQ for **five of five** metric pairs — and the complex term alone was sometimes far worse (compressed complex: 2.88 vs. 3.25 for the magnitude counterpart).
+
+The reading is the compensation effect seen from the other side: a complex loss pulls the gain toward the phase-dependent projection magnitude (the compensated magnitude), which is *not* what PESQ wants; the magnitude term restores the correct target. When only the complex term is present the gain settles at the compensated, over-attenuated value — which is why single complex losses underperform their mixtures in that study, and why the effect's remedies on this page are about re-weighting or decoupling rather than about estimating better phase.
+
 ## Remedies in the Literature
 
 | Strategy | Approach | Example |
@@ -49,6 +56,7 @@ The loss-side remedy is motivated directly by the effect's two properties: the f
 ## Related Concepts
 
 - [[concepts/spectrally-adaptive-loss|Spectrally Adaptive Loss]] — loss-side remedy
+- [[concepts/mixed-magnitude-complex-loss|Mixed Magnitude-Complex Loss]] — why the magnitude term must accompany the phase-aware one
 - [[concepts/frequency-domain-loss|Frequency Domain Loss for Time-Domain Networks]] — the loss family where the effect arises
 - [[concepts/complex-ratio-mask|Complex Ratio Mask (cRM)]] — phase-aware targets inherit the effect
 - [[concepts/phase-sensitive-mask|Phase-Sensitive Mask (PSM)]] — the mask that explicitly encodes the compensation
@@ -58,6 +66,7 @@ The loss-side remedy is motivated directly by the effect's two properties: the f
 
 ## Related Sources
 
+- [[sources/braun-2021-loss-functions-speech-enhancement|Braun & Tashev 2021: A Consolidated View of Loss Functions]] — independent, earlier evidence from a *real-gain* predictor (no phase estimation at all): five of five magnitude+complex mixtures beat both endpoints, while complex-only losses settle at the over-attenuated compensated magnitude (cComp 2.88 vs. magComp 3.25)
 - [[sources/wang-2021-magnitude-phase-compensation|Wang, Wichern & Le Roux 2021: On the Compensation Between Magnitude and Phase in Speech Separation]] — the primary source: names and formulates the effect, validates it with mSNR/pSNR decomposition
 - [[sources/zhao-2026-spectrally-adaptive-loss|Zhao & Madhu 2026: Spectrally Adaptive Loss for Streaming Speech Enhancement]] — characterises the effect's spectral non-uniformity and proposes the loss-side remedy
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys the effect in RI-MSE losses and the architectural-decoupling response

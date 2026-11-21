@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-07-16
-updated: 2026-11-07
+updated: 2026-11-21
 sources:
+  - raw/papers/braun-2021-loss-functions-speech-enhancement/full-text.md
   - raw/papers/li-2020-residual-noise-control/full-text.md
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
   - raw/papers/li-2022-embedding-beamforming/full-text.md
@@ -46,6 +47,18 @@ Zheng et al. (2023) report a surprising listener-dependent effect of input-featu
 
 The compression factor also appears inside the phase-aware compressed STFT loss ($c=0.3$), where compressed magnitudes are compared with and without the complex phase term. [[sources/zhao-2026-spectrally-adaptive-loss|Zhao & Madhu 2026]] note that the [[concepts/magnitude-phase-compensation-effect|compensation effect]] of this loss acts on the *compressed* magnitudes — the over-attenuation it induces in mid-to-high frequencies is a direct interaction between the compression and the phase-aware term, motivating their spectrally adaptive reweighting of the phase-aware contribution.
 
+## Loss-Side Compression: the Controlled Comparison (Braun & Tashev 2021)
+
+The loss-side evidence for $c=0.3$ in single-channel enhancement comes from [[sources/braun-2021-loss-functions-speech-enhancement|Braun & Tashev 2021]], who swept it as one row of a 17-loss taxonomy on a real-time FF+GRU gain predictor over reverberant CHiME-2:
+
+- **Magnitude-only compressed loss**: $\langle|\widehat{A}^{c}-A^{c}|^{2}\rangle$ → PESQ 3.25 (tied with magMAE, above magMSE's 3.16).
+- **Complex-only compressed loss**: → PESQ 2.88, the *worst* complex loss in the study.
+- **Mixed at $\beta=0.3$**: → **PESQ 3.31**, the best result overall.
+
+So compression helps only in the magnitude term; the compressed complex term is a trap on its own and needs the magnitude anchor. The paper also contrasts the two compressor choices: the logarithm is unbounded and yields Gaussian-like errors, while $|\cdot|^c$ is positive semi-definite and broadens the distribution near zero (Fig. 1 there), which is why the compressed distribution is bimodal.
+
+
+
 ## Phase-Preserving Multichannel Compression (Li et al. 2022)
 
 A multichannel-specific argument for compression appears in [[sources/li-2022-embedding-beamforming|Li et al. 2022]]'s [[concepts/eabnet|EaBNet]]: both the network input and training target use exponent-0.5 compression on **each channel** — $|\mathbf{X}^{p}|^{0.5} e^{j\theta_{\mathbf{X}^{p}}}$, $|\mathbf{S}^{p}|^{0.5} e^{j\theta_{\mathbf{S}^{p}}}$ — with the rationale that compressing only the magnitude while leaving the phase untouched **preserves the inter-channel phase differences that carry spatial information**. The ablation (on a 9-channel setup) shows the usual quality-vs-accuracy trade-off in a new form: compression improves PESQ (+0.34) and ESTOI considerably but mildly degrades SDR (16.72 vs. 17.00 dB) — the nonlinearity reduces dynamic range and prioritizes low-energy regions (better residual-noise suppression) but can destroy the linear separability of different sources, increasing target distortion.
@@ -68,9 +81,12 @@ FastEnhancer (Ahn et al. 2026) compresses its STFT input with $c = 0.3$ on magni
 - [[concepts/lisennet|LiSenNet]]
 - [[concepts/magnitude-phase-compensation-effect|Magnitude-Phase Compensation Effect]] — interaction between compression and the phase-aware loss term
 - [[concepts/eabnet|EaBNet]] — phase-preserving multichannel compression rationale
+- [[concepts/mixed-magnitude-complex-loss|Mixed Magnitude-Complex Loss]] — the $\beta$-mixture whose compressed instance ($c=0.3$) is the best-measured loss in the consolidated study
+- [[concepts/log-spectral-distance|Log-Spectral Distance (LSD)]] — the logarithmic alternative, with its low-energy-bin weakness
 
 ## Related Sources
 
+- [[sources/braun-2021-loss-functions-speech-enhancement|Braun & Tashev 2021: A Consolidated View of Loss Functions]] — the controlled evidence for $c=0.3$ as a loss-side exponent: magComp 3.25 PESQ, cComp 2.88 (worst complex loss), mixed at $\beta=0.3$ 3.31 (best overall) on reverberant CHiME-2
 - [[sources/shetu-2024-hybrid-low-complexity-aenr|Shetu et al. 2024: Hybrid Low-Complexity AENR]]
 - [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement|Wang et al. 2025: Adaptive Convolution for CNN-based Speech Enhancement Models]] — AdaptCRN uses exponent 0.3 for magnitude MSE loss and 0.7 for real/imag MSE loss (i.e., real/imag parts compressed by $|S|^{0.7}$ before MSE), with $\log_{10}$ applied to compress magnitude input features in the spectral compression module. Ablation: removing dynamic-range compression costs ~0.2 dB SI-SNR and ~0.05 PESQ on AdaptCRN.
 - [[sources/shetu-2026-munet|Shetu et al. 2026: μNet]] — documents the PF vs. NAL equivalence

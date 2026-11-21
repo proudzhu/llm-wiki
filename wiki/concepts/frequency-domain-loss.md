@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-10-24
+updated: 2026-11-21
 sources:
+  - raw/papers/braun-2021-loss-functions-speech-enhancement/full-text.md
   - raw/papers/valin-2024-fargan/full-text.md
   - raw/papers/mustafa-2023-framewise-wavegan/full-text.md
   - raw/papers/li-2020-residual-noise-control/full-text.md
@@ -81,6 +82,22 @@ A PLC ablation appears in [[concepts/tplcnet|tPLCnet]] ([[sources/westhausen-202
 
 A PLC instance appears in [[concepts/full-band-recurrent-network|FRN]] ([[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023]]): the entire encoder–predictor–joiner model is trained end-to-end with the multi-resolution STFT loss *alone* — compression $\alpha = 0.3$, auraloss default resolutions, spectral convergence + L1 magnitude terms, no adversarial or time-domain term — and the resulting blind 48 kHz PLC still beats an informed PLC-challenge top performer on PESQ/STOI/LSD.
 
+### Consolidated Taxonomy and the Mixture Law (Braun & Tashev 2021)
+
+[[sources/braun-2021-loss-functions-speech-enhancement|Braun & Tashev 2021]] provide the reference comparison this page's loss list lacked: 9 metric families × {magnitude-only, phase-aware complex} trained on one 2.8 M causal FF+GRU gain predictor over reverberant CHiME-2, with the mixture
+
+$$\mathcal{L}_{\mathrm{mix}} = (1-\beta)\,\mathcal{L}_{\mathrm{mag}} + \beta\,\mathcal{L}_{\mathrm{complex}}$$
+
+swept per metric pair. Findings that constrain every loss choice above:
+
+- **Mixtures always beat both endpoints** on PESQ (3.17 vs. 3.16/3.10 for MSE; 3.31 vs. 3.25/2.88 for the compressed pair) — even though the network predicts a real-valued gain and never estimates phase. See [[concepts/mixed-magnitude-complex-loss|Mixed Magnitude-Complex Loss]].
+- **MAE beats MSE** on both sides because STFT bins are Laplacian, not Gaussian; **power-law compression** ($c=0.3$) is the best single family, but only when mixed.
+- **LSD is worse than MSE** (3.04 vs. 3.16) and needs target-power weighting to recover — see [[concepts/log-spectral-distance|Log-Spectral Distance]].
+- **Perceptually motivated weightings do not transfer** to reverberant data: AMR-weighted MSE (3.01) and the speech-distortion-weighted loss (3.12) both trail plain magMSE (3.16) here.
+- **SI-SDR and PESQ disagree systematically**: SI-SDR is best for linear-domain losses (MAE 9.75 dB), PESQ for compressed ones (3.31).
+
+Earlier entries in this section (Wang 2021's RI+Mag analysis, Zhao & Madhu's spectrally adaptive weighting) are the theory and the refinement of the same mixture; this paper is its controlled measurement.
+
 ## Why Frequency Loss Outperforms Time-Domain Loss
 
 1. **Structural clarity**: STFT magnitude has clearer temporal-spectral structure than raw waveform oscillations
@@ -105,9 +122,13 @@ A PLC instance appears in [[concepts/full-band-recurrent-network|FRN]] ([[source
 - [[concepts/generalized-loss-function|Generalized Loss Function]] — exponent-parameterized magnitude-loss family with residual noise control
 - [[concepts/spectrally-adaptive-loss|Spectrally Adaptive Loss]] — frequency-wise / signal-dependent weighting of the phase-aware term
 - [[concepts/magnitude-phase-compensation-effect|Magnitude-Phase Compensation Effect]] — the failure mode spectrally weighted phase-aware losses target
+- [[concepts/mixed-magnitude-complex-loss|Mixed Magnitude-Complex Loss]] — the $(1-\beta)$/$\,\beta$ combination rule and its measured "always improves" result
+- [[concepts/log-spectral-distance|Log-Spectral Distance (LSD)]] — the log-domain member of this family and its weighting repair
+- [[concepts/speech-distortion-weighted-loss|Speech-Distortion-Weighted Loss (SDW)]] — the speech/noise-decomposed loss and its reverberant-data failure
 
 ## Related Sources
 
+- [[sources/braun-2021-loss-functions-speech-enhancement|Braun & Tashev 2021: A Consolidated View of Loss Functions]] — the controlled 17-loss comparison on one real-time FF+GRU predictor over reverberant CHiME-2: mixtures of magnitude and complex losses always beat both endpoints, compressed+MAE families win, LSD loses to MSE, and perceptual weightings fail to transfer
 - [[sources/pandey-2019-cnn-speech-enhancement-time-domain|Pandey & Wang 2019: CNN-Based Speech Enhancement in the Time Domain]]
 - [[sources/zheng-2023-survey-frequency-domain-speech-enhancement|Zheng et al. 2023: Sixty Years of Frequency-Domain Monaural Speech Enhancement]] — surveys frequency-domain loss functions (Mag-MSE, RI-MSE, RI+Mag combined, log-spectral, power-law-compressed) and the magnitude-phase "compensation effect" in RI-MSE
 - [[sources/valin-2024-fargan|Valin, Mustafa & Büthe 2024: FARGAN]] — GAN-vocoder instance: six-resolution power-law-compressed magnitude loss and frequency-domain discriminators

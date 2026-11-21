@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-07-18
-updated: 2026-11-07
+updated: 2026-11-21
 sources:
+  - raw/papers/braun-2021-loss-functions-speech-enhancement/full-text.md
   - raw/papers/mienye-2024-rnn-comprehensive-review/full-text.md
   - raw/papers/li-2026-realtime-music-separation-dsp/full-text.md
   - raw/papers/valin-2018-lpcnet/full-text.md
@@ -68,6 +69,7 @@ Within the llm-wiki, GRU is the recurrent backbone in:
 - [[concepts/lpcnet\|LPCNet]] (Valin & Skoglund 2018) — two-stage vocoder: block-sparse $\mathrm{GRU_{A}}$ (384 units, 16×1 blocks at 10% density) plus dense $\mathrm{GRU_{B}}$ (16 units) replacing the output fully-connected layer
 - [[concepts/percepnet\|PercepNet]] (Valin et al. 2021) — 5-layer GRU neural post filter
 - [[concepts/nsnet2\|NSNet2]] — FC+GRU speech enhancement baseline
+- [[sources/braun-2021-loss-functions-speech-enhancement|Braun & Tashev 2021]] — 2.8 M-parameter causal FF+GRU gain predictor (FF 400 → GRU 400 ×2 → FF 600 ×2 → FF 255 sigmoid) used as the fixed testbed for a 17-loss comparison; the architecture is deliberately small so the loss is the only variable
 - [[concepts/dtln\|DTLN]] — dual-path GRU for low-latency speech enhancement
 - [[concepts/tplcnet\|tPLCnet]] (Westhausen & Meyer 2022) — two **bidirectional** GRU layers over a short context buffer predict an entire lost 10 ms frame in one shot (seq2one); the final BGRU hidden state condenses the whole buffer into the frame prediction
 - [[concepts/convolutional-recurrent-network\|CRN]] — CNN+GRU for speech enhancement
@@ -90,6 +92,7 @@ Within the llm-wiki, GRU is the recurrent backbone in:
 
 ## Related Sources
 
+- [[sources/braun-2021-loss-functions-speech-enhancement|Braun & Tashev 2021: A Consolidated View of Loss Functions]] — 2.8 M causal FF+GRU gain predictor as a fixed testbed for a 17-loss comparison; the GRU is chosen for streaming with no look-ahead
 - [[sources/mienye-2024-rnn-comprehensive-review\|Mienye, Swart & Obaido 2024: RNN Comprehensive Review]]
 - [[sources/valin-2018-lpcnet\|Valin & Skoglund 2018: LPCNet]] — sparse $\mathrm{GRU_{A}}$ + dense $\mathrm{GRU_{B}}$ vocoder backbone
 - [[sources/valin-2021-percepnet-joint-echo-control\|Valin et al. 2021: PercepNet]] — GRU-based AEC system

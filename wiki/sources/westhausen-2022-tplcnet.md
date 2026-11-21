@@ -176,7 +176,7 @@ For tPLCnet Large: +0.58 PESQ, **+1.08 PLC-MOS**, +0.82 DNS-MOS nOVR over zero-f
 | $\mathrm{MAE_{comb}}$ (32 ms, 50 %) | 2.73 | **3.90** | 3.78 |
 | $\mathrm{MAE_{comb}}$ (20 ms, 50 %) | **2.76** | 3.71 | **3.85** |
 
-Time-domain MAE is clearly worst; the TF-domain losses dominate. Magnitude-only ≈ combined (consistent with observations in [[concepts/frequency-domain-loss|Braun & Tashev 2021]]); the combined form with a 32 ms STFT window gives the best PLC-MOS (3.90).
+Time-domain MAE is clearly worst; the TF-domain losses dominate. Magnitude-only ≈ combined, which matches the MAE row of [[sources/braun-2021-loss-functions-speech-enhancement|Braun & Tashev 2021]] (magnitude 3.25 = mixed 3.25 PESQ) — though their compressed row does show a clear mixture gain (3.25 → 3.31); the combined form with a 32 ms STFT window gives the best PLC-MOS (3.90).
 
 ### Context-buffer-length ablation (Figure 2)
 

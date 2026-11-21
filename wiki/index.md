@@ -1424,6 +1424,9 @@
 | [[concepts/metricgan\|MetricGAN]] | GAN whose discriminator is a learned surrogate of a black-box evaluation metric; continuous metric-valued labels make the generator steerable toward any assigned score | 2026-11-20 |
 | [[concepts/black-box-metric-optimization\|Black-Box Metric Score Optimization]] | Training against a non-differentiable or proprietary evaluation metric via a learned surrogate; white-box proxy vs. RL reward vs. surrogate-regression families | 2026-11-20 |
 | [[concepts/stoi\|STOI (Short-Time Objective Intelligibility)]] | Objective speech-intelligibility metric (0-1, 15 third-octave bands, 0-5 kHz); the score-assignment experiment shows it tracks speech content where PESQ tracks noise | 2026-11-20 |
+| [[concepts/mixed-magnitude-complex-loss\|Mixed Magnitude-Complex Loss]] | Linear combination of a magnitude-only and a phase-aware complex loss, L_mix = (1-β)L_mag + βL_complex; the consolidated study found the mixture improves PESQ for every metric pair, even when the network predicts a real-valued gain and never estimates phase. | 2026-11-21 |
+| [[concepts/log-spectral-distance\|Log-Spectral Distance (LSD)]] | Log-magnitude spectral distance used both as an evaluation metric and (with target-power weighting, wLSD, or a phase term, PLSD) as a training loss; unweighted LSD scored below plain MSE when trained on a filter-prediction network over reverberant data. | 2026-11-21 |
+| [[concepts/speech-distortion-weighted-loss\|Speech-Distortion-Weighted Loss (SDW)]] | Gain-domain loss that scores speech distortion and residual noise separately with a weight λ; optimum λ is data dependent (0.3 / 0.5 / 0.6 across studies) and the loss trailed plain MSE on reverberant CHiME-2 despite winning on anechoic data. | 2026-11-21 |
 
 ---
 
@@ -1732,6 +1735,7 @@
 | [[sources/li-2024-dbccrn\|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] | Dual-branch complex CRN estimating speech and noise simultaneously (bridge blocks + conformer skips); the SA-SNR loss repairs SI-SNR's scale blindness — PESQ 3.16 / STOI 0.940 on VoiceBank+DEMAND at 8.31 M params with ScaleError 0.014%. | 2026-11-17 |
 | [[sources/pascual-2017-segan\|Pascual, Bonafonte & Serrà 2017]] | SEGAN is the first application of a generative adversarial network to speech enhancement, and the first waveform-level (raw 16 kHz sample) end-to-end enhancement system. | 2026-11-20 |
 | [[sources/fu-2019-metricgan\|Fu, Liao, Tsao & Lin 2019]] | MetricGAN repurposes the GAN discriminator as a learned surrogate of a black-box evaluation metric. | 2026-11-20 |
+| [[sources/braun-2021-loss-functions-speech-enhancement\|Braun & Tashev 2021]] | A controlled, single-network comparison of 17 spectral training losses for real-time monaural speech enhancement: 9 metric families (L2, L1, log, weighted log, power-law compressed, SNR/SDR ratios, correlation, speech-distortion-weighted, AMR-weighted) each in magnitude-only and phase-aware complex form, plus their linear mixtures. On reverberant CHiME-2, magnitude+complex mixtures always help, power-law compression (c=0.3) wins (PESQ 3.31), and SI-SDR prefers linear losses (MAE 9.75 dB). | 2026-11-21 |
 
 ---
 
@@ -1790,10 +1794,10 @@
 
 ## Statistics
 
-- **Total pages**: 1739
+- **Total pages**: 1743
 - **Entities**: 733
-- **Concepts**: 672
-- **Sources**: 299
+- **Concepts**: 675
+- **Sources**: 300
 - **Synthesis**: 25
 - **Queries**: 10
-- **Last updated**: 2026-11-20
+- **Last updated**: 2026-11-21
