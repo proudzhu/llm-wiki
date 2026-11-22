@@ -684,4 +684,5 @@
 | [[concepts/speech-super-resolution\|Speech Super-Resolution]] | Bandwidth extension through CMGAN's additive complex-TF residual; complex refinement improves waveform SNR at a magnitude-only LSD cost | 2026-11-22 |
 | [[concepts/dual-path-transformer\|Dual-Path Transformer]] | Transformer-operator dual-path family (DPTNet lineage): MHSA + GRU-replacing-FC FFN; axis assignments across separation, SE, and TSE | 2026-11-22 |
 | [[concepts/full-band-sub-band-fusion\|Full-Band and Sub-Band Fusion]] | SE paradigm combining per-bin temporal (sub-band) and per-frame spectral (full-band) modeling; FullSubNet lineage, reverberation advantage | 2026-11-22 |
+| [[concepts/convolutional-positional-encoding\|Convolutional Positional Encoding]] | Causal 1-D conv stack replacing Transformer positional encoding for SE; fixed additive PE measurably hurts (PESQ 2.429 vs 2.966 on DNS 2020) | 2026-11-22 |
 

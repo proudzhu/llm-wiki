@@ -5,6 +5,7 @@ updated: 2026-11-20
 sources:
   - raw/papers/stewart-1993-early-history-svd/full-text.md
   - raw/papers/fu-2019-metricgan/full-text.md
+  - raw/papers/fu-2020-metricgan-post-processing/full-text.md
 tags:
   - linear-algebra
   - matrix-norm
@@ -42,7 +43,7 @@ $$\min_{\mathrm{rank}(\mathbf{B}) \leq k} \|\mathbf{A} - \mathbf{B}\|_2 = \sigma
 
 ## Spectral Normalization in GAN Training
 
-Beyond perturbation theory, the spectral norm is the basis of **spectral normalization** (Miyato et al. 2018), which divides each weight matrix of a discriminator by its spectral norm so that the network's Lipschitz constant is bounded. [[sources/fu-2019-metricgan|Fu et al. 2019]] apply it to a discriminator that regresses a metric score and give a rationale distinct from WGAN's: the surrogate must be a **smooth** function of the input, so that "a small change in the input spectrogram [does not] result in a significant difference to the estimated score" — i.e. spectral normalization is used for *metric-surface regularity*, not only for training stability (which they also report).
+Beyond perturbation theory, the spectral norm is the basis of **spectral normalization** (Miyato et al. 2018), which divides each weight matrix of a discriminator by its spectral norm so that the network's Lipschitz constant is bounded. [[sources/fu-2019-metricgan|Fu et al. 2019]] apply it to a discriminator that regresses a metric score and give a rationale distinct from WGAN's: the surrogate must be a **smooth** function of the input, so that "a small change in the input spectrogram [does not] result in a significant difference to the estimated score" — i.e. spectral normalization is used for *metric-surface regularity*, not only for training stability (which they also report). [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020]] carry the same constraint into the post-processing setting, explicitly constraining their CNN Quality-Net discriminator to be 1-Lipschitz "to make Quality-Net a smooth function".
 
 ## Related Norms
 
@@ -55,3 +56,4 @@ Beyond perturbation theory, the spectral norm is the basis of **spectral normali
 - Stewart, G. W. *On the Early History of the Singular Value Decomposition*. SIAM Review, 35(4):551–566, 1993.
 - Miyato, T., Kataoka, T., Koyama, M., & Yoshida, Y. *Spectral Normalization for Generative Adversarial Networks*. ICLR, 2018.
 - [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN]] — applies spectral normalization to a metric-regressing discriminator, for smoothness of the estimated metric surface as well as training stability
+- [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020: MetricGAN Post-Processing]] — 1-Lipschitz constraint on the CNN Quality-Net PESQ surrogate during post-hoc fine-tuning

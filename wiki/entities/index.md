@@ -742,4 +742,6 @@
 | [[entities/bin-yang\|Bin Yang]] | University of Stuttgart — Senior Member, IEEE; CMGAN co-author researching audio signal processing and speech enhancement | 2026-11-22 |
 | [[entities/feng-dang\|Feng Dang]] | Institute of Acoustics, CAS / UCAS — first author of DPT-FSNet (ICASSP 2022); dual-path transformer speech enhancement | 2026-11-22 |
 | [[entities/pengyuan-zhang\|Pengyuan Zhang]] | Institute of Acoustics, CAS / UCAS — senior author of DPT-FSNet; speech and audio signal processing | 2026-11-22 |
+| [[entities/tsun-an-hsieh\|Tsun-An Hsieh]] | Academia Sinica — co-first author of the DNS 2020 MetricGAN post-processing system (causal Transformer + PESQ-surrogate fine-tuning) | 2026-11-22 |
+| [[entities/kuo-hsuan-hung\|Kuo-Hsuan Hung]] | Academia Sinica — co-first author of the DNS 2020 MetricGAN post-processing system (causal Transformer + PESQ-surrogate fine-tuning) | 2026-11-22 |
 

@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-07-18
-updated: 2026-11-01
+updated: 2026-11-22
 sources:
   - raw/papers/mienye-2024-rnn-comprehensive-review/full-text.md
   - raw/papers/liu-2024-lightweight-dl-survey/full-text.md
   - raw/papers/ahn-2026-fastenhancer/full-text.md
   - raw/papers/zhao-2025-lightweight-transformer/full-text.md
+  - raw/papers/fu-2020-metricgan-post-processing/full-text.md
 tags:
   - deep-learning
   - attention
@@ -42,6 +43,8 @@ $$
 $$
 
 where $\mathbf{Q}$, $\mathbf{K}$, $\mathbf{V}$ are the query, key, and value matrices, and $d_k$ is the key dimension.
+
+For **causal speech enhancement**, [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020]] add a future mask $M$ (strictly upper-triangular $-\infty$) inside the softmax, $\text{softmax}(M + \mathbf{Q}\mathbf{K}^T/\sqrt{d_k})\mathbf{V}$, drop the decoder (input/output lengths match), and compute layer-norm moments across channels only so normalization never sees future frames. Their positional-information finding is the sharper result: additive fixed positional encoding *degrades* SE below the noisy input (PESQ 2.429 vs 2.454), while [[concepts/convolutional-positional-encoding|convolutional positional encoding]] recovers 2.966.
 
 ## Variants
 
@@ -98,3 +101,4 @@ Attention mechanisms appear throughout the llm-wiki:
 - [[sources/perez-2018-film-visual-reasoning\|Perez et al. 2018: FiLM: Visual Reasoning with a General Conditioning Layer]] — shows [[concepts/film-layer\|FiLM]] conditioning can replace explicit attention: feature modulation implicitly yields spatial attention (beating Stacked Attention by 21% on CLEVR) at a cost independent of image resolution, vs. attention's quadratic scaling
 - [[sources/ahn-2026-fastenhancer\|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — axis-specialized attention in the RNNFormer block: MHSA over *frequency* (global spectral structure, no caching needed) while the time axis stays recurrent; ablations show frequency-attention beats frequency-GRU on SISDR and time-attention loses to time-GRU on streaming RTF
 - [[sources/zhao-2025-lightweight-transformer\|Zhao & Madhu 2025: Study of Lightweight Transformer Architectures for Single-Channel Speech Enhancement]] — makes time-axis attention affordable instead of abandoning it: the [[concepts/trapezoidal-causal-masking|trapezoidal causal mask]] caps the attention window at 1 s, so per-frame cost and key/value cache are constant and attention complexity becomes independent of utterance length. This is a middle path between full causal attention (unbounded cost/memory) and RNNFormer's no-time-attention design.
+- [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020: MetricGAN Post-Processing]] — future-masked MHSA + channel-only layer norm for causal SE, and the measured penalty of additive fixed positional encoding (PESQ 2.429 vs conv-encoding 2.966)

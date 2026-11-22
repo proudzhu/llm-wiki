@@ -5,6 +5,7 @@ updated: 2026-11-22
 sources:
   - raw/papers/dang-2022-dpt-fsnet/full-text.md
   - raw/papers/fu-2019-metricgan/full-text.md
+  - raw/papers/fu-2020-metricgan-post-processing/full-text.md
 tags:
   - evaluation-metric
   - speech-intelligibility
@@ -31,7 +32,7 @@ This is the cleanest experimental separation of the two metrics in the corpus: S
 
 ## Caveats
 
-- **Band-limited observation.** STOI observes roughly 0–5 kHz; it says nothing about fullband content above that (the point raised in [[sources/kim-2026-faster-enhancer|Kim 2026]] when evaluating 48 kHz models).
+- **Band-limited observation.** STOI observes roughly 0–5 kHz; it says nothing about fullband content above that (the point raised in [[sources/kim-2026-faster-enhancer|Kim 2026]] when evaluating 48 kHz models). The blind spot is not merely evaluative: [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020]] observe that using STOI (or PESQ) as a MetricGAN training surrogate can *generate* high-frequency noise, since the metric cannot penalize it.
 - **Scale-blind.** Like PESQ, STOI is insensitive to output-level drift — [[sources/li-2024-dbccrn|Li et al. 2024]] introduced [[concepts/scale-error|ScaleError]] precisely because PESQ/STOI/COVL miss amplitude errors that clip in playback.
 - **Intelligibility ≠ pleasantness.** A signal can gain STOI while sounding unnatural; the AB tests in [[sources/pascual-2017-segan|Pascual 2017]]-style evaluations and the quality-vs-intelligibility gap in [[sources/li-2020-residual-noise-control|Li et al. 2020]] both show the two axes diverging.
 - **Score inflation in the literature.** VoiceBank+DEMAND systems routinely report STOI 0.93–0.95, a range in which differences are numerically tiny but perceptually meaningful; the benchmark's headroom above 0.95 is small.
@@ -50,3 +51,4 @@ This is the cleanest experimental separation of the two metrics in the corpus: S
 - [[sources/kim-2026-faster-enhancer|Kim 2026: faster-enhancer.c]] — STOI's 0–5 kHz observation band as a fullband-evaluation caveat
 - [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] — STOI's blindness to output-scale drift
 - [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — near-ceiling data point: STOI 0.96 on VoiceBank+DEMAND, 95.23% (with reverb) / 97.68% (no reverb) on DNS 2020
+- [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020: MetricGAN Post-Processing]] — STOI's band limit as a *training* hazard: surrogate fine-tuning can generate high-frequency noise the metric ignores; STOI still rises 0.932 → 0.946 as a side effect of PESQ optimization

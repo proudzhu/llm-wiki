@@ -18,6 +18,7 @@ sources:
   - raw/papers/fu-2026-one-model-many-latencies/full-text.md
   - raw/papers/li-2024-dbccrn/full-text.md
   - raw/papers/abdulatif-2024-cmgan/full-text.md
+  - raw/papers/fu-2020-metricgan-post-processing/full-text.md
 tags:
   - speech-processing
   - audio-enhancement
@@ -56,6 +57,7 @@ Worked example: concatenating $2Q{+}1$ log-magnitude spectra (161 frequency poin
 - Training-paradigm choice — generative (GAN / diffusion / flow / consistency) vs. discriminative training, with quantified robustness, complexity, and hallucination trade-offs (see [[concepts/generative-vs-discriminative-speech-enhancement|Generative vs. Discriminative Speech Enhancement]])
 - Loss-function design with residual noise control — training-time trade-off between speech distortion and natural residual noise, generalizing MSE/components loss into a parameterized family (e.g., [[concepts/generalized-loss-function|Generalized Loss Function]])
 - Scale-aware training objectives — repairing SI-SNR's scale blindness so enhanced speech keeps the input's amplitude, essential for streaming where per-segment normalization fails (e.g., [[concepts/scale-aware-snr|SA-SNR]], [[concepts/dbccrn|DBCCRN]])
+- Metric-driven post-processing — fine-tuning a converged SE model against a learned metric surrogate, independent of backbone (e.g., [[concepts/metricgan|MetricGAN]] post-processing on a causal Transformer)
 
 ## Related Concepts
 
@@ -100,3 +102,4 @@ Worked example: concatenating $2Q{+}1$ log-magnitude spectra (161 frequency poin
 - [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] — dual-branch complex CRN + SA-SNR loss; PESQ 3.16 on VoiceBank+DEMAND with near-zero scale error, streaming-safe without normalization
 - [[sources/abdulatif-2024-cmgan|Abdulatif, Cao & Yang 2024: CMGAN]] — [[concepts/cmgan|CMGAN]] unifies compressed magnitude/complex inputs, four sequential time–frequency Conformer blocks, decoupled mask and RI decoders, and PESQ-surrogate adversarial training in a 1.83 M-parameter offline model. The TASLP extension covers denoising, dereverberation, and additive-residual speech super-resolution, with PESQ 3.41 on VoiceBank+DEMAND and DNSMOS/listening tests on unseen distortions.
 - [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — dual-path transformer transplanted to the T-F domain; matched-complexity ablation shows frequency-domain input beats time-domain input by +0.36 PESQ; SOTA VoiceBank+DEMAND 3.33 / DNS 3.53 at 0.88 M params
+- [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020: MetricGAN Post-Processing]] — metric-driven fine-tuning as a backbone-agnostic post-processing stage; causal Transformer with convolutional positional encoding beats the DNS 2020 NSNet baseline objectively and subjectively

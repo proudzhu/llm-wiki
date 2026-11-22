@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-11-20
-updated: 2026-11-20
+updated: 2026-11-22
 sources:
   - raw/papers/pascual-2017-segan/full-text.md
   - raw/papers/fu-2019-metricgan/full-text.md
+  - raw/papers/fu-2020-metricgan-post-processing/full-text.md
 tags:
   - gan
   - generative-models
@@ -38,6 +39,8 @@ $$L_{G} = \mathbb{E}_{\mathbf{x}}\big[(D(G(\mathbf{x}),\mathbf{y}) - s)^2\big]$$
 
 This is where the least-squares loss form stops being a training-stability trick and becomes a *semantic* requirement: squared error accepts a continuous target, so the metric value can occupy the position that "1 = real" holds in LSGAN, and the generator's output becomes steerable by $s$.
 
+The continuous-target form also survives the move to **post-processing**: [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020]] keep both squared-error objectives verbatim while fine-tuning an already-converged $L_1$-pre-trained Transformer, showing the metric-valued regression target composes with conventional pre-training rather than requiring from-scratch adversarial training.
+
 ## Related Concepts
 
 - [[concepts/segan|SEGAN]] — the speech-enhancement architecture built on this objective
@@ -49,3 +52,4 @@ This is where the least-squares loss form stops being a training-stability trick
 
 - [[sources/pascual-2017-segan|Pascual, Bonafonte & Serrà 2017: SEGAN]] — adopts LSGAN for waveform-level enhancement and calibrates the $L_1$ weight
 - [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN]] — exploits the least-squares form's tolerance of continuous targets: the discriminator regresses the evaluation metric itself, and the generator is steered to an assigned score $s$
+- [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020: MetricGAN Post-Processing]] — the continuous-target squared-error objectives reused unchanged as a post-hoc fine-tuning stage

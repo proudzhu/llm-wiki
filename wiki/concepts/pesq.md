@@ -16,6 +16,7 @@ sources:
   - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
   - raw/papers/li-2024-dbccrn/full-text.md
   - raw/papers/abdulatif-2024-cmgan/full-text.md
+  - raw/papers/fu-2020-metricgan-post-processing/full-text.md
 tags:
   - evaluation-metric
   - speech-quality
@@ -33,6 +34,7 @@ The same experiments yield two cautionary findings about optimizing PESQ directl
 
 - **Every optimization is a bias purchase.** Driving an assigned PESQ score *down* makes MetricGAN add noise to the signal — not delete speech (which is what driving STOI down does). PESQ therefore rewards noise suppression over speech preservation, and a model optimized for it will trade accordingly.
 - **The metric can be gamed.** PESQ-first training produced artifacts that PESQ itself ranks well but that are audible; the paper reports the adversarial term's optimum includes "unpleasant artifacts" at higher weight, and later work (FastEnhancer's $\lambda_5 = 10^{-3}$ PESQ term, the PESQetarian critique) treats this Goodhart risk explicitly.
+- **The blind spot has a frequency address.** [[sources/fu-2020-metricgan-post-processing|Fu et al. (APSIPA ASC 2020)]] report that fine-tuning against a PESQ (or STOI) surrogate can generate *high-frequency noise*, because both metrics ignore signal differences in the high-frequency range — a concrete artifact mechanism behind the Goodhart concern, mitigated only by bounding the output (mask estimation rather than spectral mapping).
 
 PESQ nonetheless remains the field's headline reporting metric — see the VoiceBank-DEMAND table below, where nearly every modern system optimizes it or a proxy for it.
 
@@ -91,3 +93,4 @@ The consequence is visible in their own table: the PESQ-optimal mixture weight g
 - [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — PESQ 2.70 for AC/BC fusion (best of nine), contrasted with DNSMOS 3.35 as the GAN-training effect
 - [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] — PESQ's blindness to output-scale drift; ScaleError + peak-normalized scaled test set as companion evaluation
 - [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — discriminative counterpoint on VoiceBank+DEMAND: waveform MSE + RI-magnitude L1 (no PESQ surrogate) reaches PESQ 3.33 at 0.88 M params
+- [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020: MetricGAN Post-Processing]] — PESQ-surrogate fine-tuning of a converged Transformer (+0.138 PESQ on DNS 2020 at unchanged complexity); documents the high-frequency-noise artifact PESQ cannot penalize

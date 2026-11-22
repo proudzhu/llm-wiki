@@ -6,6 +6,7 @@ sources:
   - raw/papers/dang-2022-dpt-fsnet/full-text.md
   - raw/papers/fu-2019-metricgan/full-text.md
   - raw/papers/abdulatif-2024-cmgan/full-text.md
+  - raw/papers/fu-2020-metricgan-post-processing/full-text.md
 tags:
   - speech-enhancement
   - gan
@@ -55,6 +56,8 @@ Multiple metrics are handled with one discriminator each; per iteration only the
 
 The scheme became a standard recipe in speech enhancement: **MetricGAN+** (Fu et al., Interspeech 2021) is the direct successor and a benchmark fixture (PESQ 3.15 on VoiceBank+DEMAND), and the "MetricGAN-style discriminator that predicts PESQ scaled to (0,1)" recurs in later systems such as [[concepts/lisennet|LiSenNet]] and [[concepts/cmgan|CMGAN]] — where it appears as an *added* loss term alongside reconstruction losses rather than as the sole generator objective of the original. The weight is system-specific: LiSenNet uses 0.05, whereas [[sources/abdulatif-2024-cmgan|Abdulatif, Cao & Yang 2024]] give CMGAN's $\mathcal L_{GAN}$ weight as **0.01**. Removing CMGAN's discriminator reduces PESQ from 3.41 to 3.24; replacing PESQ with normalized LLR for dereverberation improves SRMR but trades away CD/FWSegSNR performance.
 
+**As a post-processing module** ([[sources/fu-2020-metricgan-post-processing|Fu et al., APSIPA ASC 2020]]): instead of training from scratch, an SE model is pre-trained with $L_1$/$L_2$ to convergence and *then* fine-tuned against the surrogate, using the stable-training techniques of Kawanaka et al. (ICASSP 2020). The paper demonstrates this on a causal Transformer generator (after the original's BLSTM and Kawanaka's convolutional BLSTM), arguing the framework is generator-agnostic: DNS-2020 PESQ rises 2.966 → 3.104 with **unchanged parameters and inference time**, since only weights are fine-tuned. Its discriminator here is a spectrally-normalized 4-layer CNN "Quality-Net" (not the original BLSTM), and it warns that PESQ/STOI surrogates can induce high-frequency noise — both metrics ignore high-frequency differences — recommending the post-processing for mask-estimation models over direct spectral mapping.
+
 ## Related Concepts
 
 - [[concepts/black-box-metric-optimization|Black-Box Metric Score Optimization]] — the general framing this method belongs to
@@ -69,3 +72,4 @@ The scheme became a standard recipe in speech enhancement: **MetricGAN+** (Fu et
 - [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN]] — the original paper
 - [[sources/pascual-2017-segan|Pascual, Bonafonte & Serrà 2017: SEGAN]] — the CGAN-for-SE formulation MetricGAN modifies
 - [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — discriminative counterpoint on VoiceBank+DEMAND: a dual-domain reconstruction loss (waveform MSE + RI-magnitude L1, no discriminator) reaches PESQ 3.33 vs MetricGAN's 2.86, at 0.88 M params
+- [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020: MetricGAN Post-Processing]] — converts the framework into a post-hoc fine-tuning stage for a converged causal Transformer (DNS 2020: +0.138 PESQ at zero inference-cost change), with a CNN Quality-Net discriminator

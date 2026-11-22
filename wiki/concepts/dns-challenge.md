@@ -10,6 +10,7 @@ sources:
   - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
   - raw/papers/zhao-2025-lightweight-transformer/full-text.md
   - raw/papers/li-2024-dbccrn/full-text.md
+  - raw/papers/fu-2020-metricgan-post-processing/full-text.md
 tags:
   - dataset
   - challenge
@@ -32,6 +33,8 @@ The fifth DNS Challenge noise set was used by [[sources/ohlenbusch-2026-pas-se|O
 
 [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022]] train [[concepts/dpt-fsnet|DPT-FSNet]] on the Interspeech 2020 DNS corpus with dynamic mixing (75% of clean speech convolved with ICASSP-2021 RIRs each epoch, SNR uniform −5…20 dB) and evaluate on both non-blind sets: WB-PESQ 3.53 (`with_reverb`) / 3.26 (`no_reverb`), STOI 95.23 / 97.68%, SI-SDR 18.14 / 20.36 dB — ahead of NSNet, FullSubNet, CTS-Net and GaGNet on every metric, with the margin over the full-band baseline larger on the reverberant set (attributed to sub-band temporal modeling).
 
+[[sources/fu-2020-metricgan-post-processing|Fu et al. 2020]] submitted an APSIPA ASC system to the Interspeech 2020 DNS Challenge: a causal Transformer with convolutional positional encoding, trained on a 10,000-utterance subset of the default synthetic configuration and fine-tuned with MetricGAN. On the no-reverb synthetic set it scores PESQ 3.104 / STOI 0.946 vs the NSNet baseline's 2.692 / 0.906 (noisy 2.454 / 0.915 — NSNet lowers STOI below noisy), and on the organizer-run P.808 blind test (10 judges/clip, 95% CI ≈ 0.02) MOS 3.21 overall vs NSNet 3.03, winning all three categories (noreverb 3.63, realrec 3.18, reverb 2.83 — NSNet degrades reverb below noisy, 2.64 vs 2.78).
+
 ## Related Concepts
 
 - [[concepts/voicebank-demand|VoiceBank+DEMAND (VBD)]]
@@ -52,3 +55,4 @@ The fifth DNS Challenge noise set was used by [[sources/ohlenbusch-2026-pas-se|O
 - [[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025: LCT-GAN]] — DNS3 140 h synthesised training (SNR −5…20 dB), evaluated on the blind real-recorded English test set with DNSMOS P.835: BAK 4.04 ± 0.09 / SIG 3.06 / OVL 2.80 at 0.14 M params, beating DeepFilterNet1–3 on BAK with half the score variance
 - [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] — 100 h DNS-2020 synthesized training (SNR −5…20 dB); zero-shot VBD→DNS transfer matches DNS-trained DCCRN, retrain PESQ 2.638
 - [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — DNS 2020 dynamic mixing (75% RIR, SNR −5…20 dB); WB-PESQ 3.53/3.26 on with/without reverb, best of eight compared systems
+- [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020: MetricGAN Post-Processing]] — DNS 2020 submission: causal Transformer + MetricGAN fine-tuning, PESQ 3.104 / STOI 0.946 and P.808 MOS 3.21 vs NSNet 3.03

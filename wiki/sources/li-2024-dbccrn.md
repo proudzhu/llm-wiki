@@ -283,3 +283,7 @@ Zero-shot transfer from VoiceBank+DEMAND already matches DCCRN trained on DNS da
 ## Related Synthesis
 
 - [[synthesis/deep-speech-enhancement|Deep Speech Enhancement]] — quality/efficiency landscape this paper adds a data point to
+
+## Related Sources
+
+- [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020: MetricGAN Post-Processing]] — also trains on DNS-2020 synthesized data; documents a complementary PESQ/STOI blind spot (high-frequency noise induced by metric-surrogate training, vs this paper's output-scale drift)
