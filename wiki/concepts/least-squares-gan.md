@@ -7,6 +7,7 @@ sources:
   - raw/papers/fu-2019-metricgan/full-text.md
   - raw/papers/fu-2020-metricgan-post-processing/full-text.md
   - raw/papers/fu-2021-metricgan-plus/full-text.md
+  - raw/papers/close-2022-metricgan-plus-minus/full-text.md
 tags:
   - gan
   - generative-models
@@ -55,3 +56,4 @@ The continuous-target form also survives the move to **post-processing**: [[sour
 - [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN]] — exploits the least-squares form's tolerance of continuous targets: the discriminator regresses the evaluation metric itself, and the generator is steered to an assigned score $s$
 - [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020: MetricGAN Post-Processing]] — the continuous-target squared-error objectives reused unchanged as a post-hoc fine-tuning stage
 - [[sources/fu-2021-metricgan-plus|Fu et al. 2021: MetricGAN+]] — keeps both squared-error objectives verbatim; the +0.29 PESQ improvement comes entirely from *what data $D$ is fitted on* (noisy-speech targets, replayed history) and the mask parameterization, not the loss algebra
+- [[sources/close-2022-metricgan-plus-minus|Close, Hain & Goetze 2022: MetricGAN+/-]] — the continuous-target form drives a *third* network: the de-generator minimizes $(D(Y_f, S_f) - w)^2$ toward a sub-perfect assigned score, the same squared-error mechanism as the generator's $(D - 1)^2$

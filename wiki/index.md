@@ -754,6 +754,9 @@
 | [[entities/peter-plantinga\|Peter Plantinga]] | Ohio State researcher and SpeechBrain developer; co-author of MetricGAN+ (Interspeech 2021), the SpeechBrain-released metric-surrogate SE recipe. | 2026-11-22 |
 | [[entities/mirco-ravanelli\|Mirco Ravanelli]] | Mila researcher, initiator of the SpeechBrain toolkit; co-author of MetricGAN+ (Interspeech 2021). | 2026-11-22 |
 | [[entities/xugang-lu\|Xugang Lu]] | NICT Kyoto researcher in speech enhancement and robust ASR; co-author of MetricGAN+ (Interspeech 2021) and the TASLP 2018 direct-metric-optimization SE paper. | 2026-11-22 |
+| [[entities/george-close\|George Close]] | University of Sheffield researcher; first author of MetricGAN+/- (EUSIPCO 2022), the de-generator extension widening MetricGAN's surrogate score coverage. | 2026-11-22 |
+| [[entities/thomas-hain\|Thomas Hain]] | University of Sheffield professor; speech recognition and speech technologies; co-author of MetricGAN+/- (EUSIPCO 2022). | 2026-11-22 |
+| [[entities/stefan-goetze\|Stefan Goetze]] | Acoustic signal processing researcher (Sheffield); speech enhancement, dereverberation, robust ASR front-ends; senior author of MetricGAN+/- (EUSIPCO 2022). | 2026-11-22 |
 
 ---
 
@@ -1444,6 +1447,7 @@
 | [[concepts/dual-path-transformer\|Dual-Path Transformer]] | Transformer-operator dual-path family (DPTNet lineage): MHSA + GRU-replacing-FC FFN; axis assignments across separation, SE, and TSE | 2026-11-22 |
 | [[concepts/full-band-sub-band-fusion\|Full-Band and Sub-Band Fusion]] | SE paradigm combining per-bin temporal (sub-band) and per-frame spectral (full-band) modeling; FullSubNet lineage, reverberation advantage | 2026-11-22 |
 | [[concepts/convolutional-positional-encoding\|Convolutional Positional Encoding]] | Causal 1-D conv stack replacing Transformer positional encoding for SE; fixed additive PE measurably hurts (PESQ 2.429 vs 2.966 on DNS 2020) | 2026-11-22 |
+| [[concepts/metric-surrogate-de-generator\|Metric-Surrogate De-Generator]] | Third MetricGAN network trained toward a sub-perfect metric score w, manufacturing degraded speech so the metric surrogate observes sparsely populated score regions (MetricGAN+/-, Close et al. 2022). | 2026-11-22 |
 
 ---
 
@@ -1757,6 +1761,7 @@
 | [[sources/dang-2022-dpt-fsnet\|Dang, Chen & Zhang 2022]] | DPT-FSNet transfers the dual-path transformer from time-domain sequences to the STFT time-frequency map: the intra-transformer models sub-band information (the time sequence within each frequency bin) and the inter-transformer models full-band information (all frequency bins within each frame), realizing full-band/sub-band fusion inside one sequence model. | 2026-11-22 |
 | [[sources/fu-2020-metricgan-post-processing\|Fu et al. 2020]] | MetricGAN becomes a general post-processing module: an L1-pre-trained causal Transformer with convolutional positional encoding is fine-tuned against a PESQ surrogate, gaining +0.13 PESQ at zero inference cost and beating the DNS 2020 NSNet baseline objectively and on P.808 MOS. | 2026-11-22 |
 | [[sources/fu-2021-metricgan-plus\|Fu et al. 2021]] | MetricGAN+ adds three training techniques to MetricGAN — noisy-speech discriminator targets, a load-bearing experience-replay buffer (0.2), and a per-frequency learnable sigmoid mask — lifting the unchanged BLSTM to PESQ 3.15 SOTA on VoiceBank+DEMAND; released in SpeechBrain. | 2026-11-22 |
+| [[sources/close-2022-metricgan-plus-minus\|Close, Hain & Goetze 2022]] | MetricGAN+/- adds a de-generator trained toward a sub-perfect metric score so the discriminator observes a wider score range: PESQ 3.05 to 3.22 on VoiceBank+DEMAND and better generalization to unseen CHiME-3 real/simulated data; refutes MetricGAN+'s replay-buffer saturation claim. | 2026-11-22 |
 
 ---
 
@@ -1815,10 +1820,10 @@
 
 ## Statistics
 
-- **Total pages**: 1764
-- **Entities**: 744
-- **Concepts**: 681
-- **Sources**: 304
+- **Total pages**: 1769
+- **Entities**: 747
+- **Concepts**: 682
+- **Sources**: 305
 - **Synthesis**: 25
 - **Queries**: 10
 - **Last updated**: 2026-11-22

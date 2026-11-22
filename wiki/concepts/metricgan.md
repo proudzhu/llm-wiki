@@ -8,6 +8,7 @@ sources:
   - raw/papers/abdulatif-2024-cmgan/full-text.md
   - raw/papers/fu-2020-metricgan-post-processing/full-text.md
   - raw/papers/fu-2021-metricgan-plus/full-text.md
+  - raw/papers/close-2022-metricgan-plus-minus/full-text.md
 tags:
   - speech-enhancement
   - gan
@@ -61,6 +62,8 @@ The scheme became a standard recipe in speech enhancement: **MetricGAN+** (Fu et
 
 **As a post-processing module** ([[sources/fu-2020-metricgan-post-processing|Fu et al., APSIPA ASC 2020]]): instead of training from scratch, an SE model is pre-trained with $L_1$/$L_2$ to convergence and *then* fine-tuned against the surrogate, using the stable-training techniques of Kawanaka et al. (ICASSP 2020). The paper demonstrates this on a causal Transformer generator (after the original's BLSTM and Kawanaka's convolutional BLSTM), arguing the framework is generator-agnostic: DNS-2020 PESQ rises 2.966 → 3.104 with **unchanged parameters and inference time**, since only weights are fine-tuned. Its discriminator here is a spectrally-normalized 4-layer CNN "Quality-Net" (not the original BLSTM), and it warns that PESQ/STOI surrogates can induce high-frequency noise — both metrics ignore high-frequency differences — recommending the post-processing for mask-estimation models over direct spectral mapping.
 
+**The MetricGAN+/- extension** ([[sources/close-2022-metricgan-plus-minus|Close, Hain & Goetze, EUSIPCO 2022]]) adds a third network — a [[concepts/metric-surrogate-de-generator|de-generator]] trained toward an assigned sub-perfect score $w$ — so $D$ observes mid-range metric scores the training data sparsely covers. This repurposes the 2019 score-assignment degrader from an analysis probe into surrogate training-data generation: PESQ 3.05 → 3.22 on VoiceBank+DEMAND ($w = 0.5$) and better CHiME-3 generalization (real 1.54 → 1.76, simulated 2.14 → 2.38). It also refutes MetricGAN+'s buffer-saturation claim: baseline `history_portion` 0.4 reaches 3.17, though the SpeechBrain re-run baseline (3.05) undershoots the originally reported 3.15.
+
 ## Related Concepts
 
 - [[concepts/black-box-metric-optimization|Black-Box Metric Score Optimization]] — the general framing this method belongs to
@@ -69,6 +72,7 @@ The scheme became a standard recipe in speech enhancement: **MetricGAN+** (Fu et
 - [[concepts/segan|SEGAN]] — the adversarial-SE predecessor whose inert adversarial term motivated MetricGAN
 - [[concepts/learnable-sigmoid-mask|Learnable Sigmoid Mask]] — a MetricGAN+ contribution
 - [[concepts/speech-enhancement|Speech Enhancement]]
+- [[concepts/metric-surrogate-de-generator|Metric-Surrogate De-Generator]] — the MetricGAN+/- contribution: score assignment as surrogate curriculum
 
 ## Related Sources
 
@@ -77,3 +81,4 @@ The scheme became a standard recipe in speech enhancement: **MetricGAN+** (Fu et
 - [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — discriminative counterpoint on VoiceBank+DEMAND: a dual-domain reconstruction loss (waveform MSE + RI-magnitude L1, no discriminator) reaches PESQ 3.33 vs MetricGAN's 2.86, at 0.88 M params
 - [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020: MetricGAN Post-Processing]] — converts the framework into a post-hoc fine-tuning stage for a converged causal Transformer (DNS 2020: +0.138 PESQ at zero inference-cost change), with a CNN Quality-Net discriminator
 - [[sources/fu-2021-metricgan-plus|Fu et al. 2021: MetricGAN+]] — the direct successor: noisy-speech $D$ targets, replay 0.2, learnable sigmoid mask; PESQ 2.86 → 3.15 on VoiceBank+DEMAND, released in SpeechBrain
+- [[sources/close-2022-metricgan-plus-minus|Close, Hain & Goetze 2022: MetricGAN+/-]] — third-network extension widening the surrogate's observed score range; PESQ 3.22 on VBD and the line's first out-of-domain (CHiME-3) generalization result

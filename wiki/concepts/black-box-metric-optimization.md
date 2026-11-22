@@ -7,6 +7,7 @@ sources:
   - raw/papers/abdulatif-2024-cmgan/full-text.md
   - raw/papers/fu-2020-metricgan-post-processing/full-text.md
   - raw/papers/fu-2021-metricgan-plus/full-text.md
+  - raw/papers/close-2022-metricgan-plus-minus/full-text.md
 tags:
   - loss-function
   - metric-optimization
@@ -46,10 +47,12 @@ Optimizing $Q$ directly sidesteps the proxy-selection problem, at the cost of ne
 - **Bias inheritance** — the trained model inherits whatever $Q$ over- or under-weights. Optimizing PESQ yields PESQ-optimal artifacts (Fu et al. show this explicitly means tolerating added noise), so the choice of $Q$ is now a design decision with perceptual consequences rather than a neutral evaluation step. This is the same Goodhart's-law concern later handled by down-weighting differentiable PESQ losses to $\lambda \sim 10^{-3}$ in [[sources/ahn-2026-fastenhancer|FastEnhancer]].
 - **Frozen surrogates get fooled** — using a *fixed* learned quality model as a loss (Quality-Net, Fu et al. SPL 2019) improves the true metric only for the first few iterations, after which estimated scores rise while true scores fall; this is the concrete failure that forces alternation, restated in [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020]]. The same paper adds a frequency-domain instance of bias inheritance: PESQ/STOI surrogates induce **high-frequency noise** because both metrics ignore high-frequency signal differences — the authors' mitigation is architectural (apply the fine-tuning to mask-estimation models whose output is bounded by the noisy input, not to spectral mapping).
 - **Alternating surrogates forget** — even with alternation, $D$ fitted only on current generated speech loses accuracy on *previously* generated speech (catastrophic forgetting), so its gradient stops approximating $Q$'s. [[sources/fu-2021-metricgan-plus|MetricGAN+ (Fu et al. 2021)]] makes the DQN-style experience-replay buffer the fix and shows it is load-bearing: replay portion 0 gives PESQ 2.82 vs 3.05 at 0.2 on VoiceBank+DEMAND. The same paper adds noisy-speech regression targets (from Kawanaka et al., ICASSP 2020) to anchor the surrogate at the low-quality end of the score range, worth +0.07 PESQ.
+- **Score-range coverage** — beyond forgetting, the surrogate never sees score regions the data lacks: as $G$ improves, its outputs cluster near $Q' = 1$ and mid-range scores go unobserved. [[sources/close-2022-metricgan-plus-minus|MetricGAN+/- (Close et al. 2022)]] manufactures the missing coverage with a [[concepts/metric-surrogate-de-generator|de-generator]] trained toward a sub-perfect score $w$ chosen to hit sparsely populated $Q'$ values: PESQ 3.05 → 3.22 in-domain and 1.54 → 1.76 on unseen real CHiME-3 data. Coverage widening can also backfire — the extension worsens a ~400 Hz residual-energy artefact (lower CBAK), hypothesized as $D$ learning to under-penalize that region.
 
 ## Related Concepts
 
 - [[concepts/metricgan|MetricGAN]] — the learned-surrogate implementation
+- [[concepts/metric-surrogate-de-generator|Metric-Surrogate De-Generator]] — training-time coverage widening for the surrogate
 - [[concepts/pesq|PESQ]] · [[concepts/stoi|STOI]] — the metrics most often optimized this way
 - [[concepts/generalized-loss-function|Generalized Loss Function]] — the white-box loss-family alternative
 - [[concepts/distortion-aware-training|Distortion-aware Training]]
@@ -63,3 +66,4 @@ Optimizing $Q$ directly sidesteps the proxy-selection problem, at the cost of ne
 - [[sources/abdulatif-2024-cmgan|Abdulatif, Cao & Yang 2024: CMGAN]] — applies the learned-surrogate route to [[concepts/cmgan|CMGAN]] with PESQ weight 0.01 alongside spectral and waveform reconstruction. Removing the discriminator drops PESQ 3.41 → 3.24; a frozen surrogate trained without enhanced tracks also underperforms, supporting adversarial co-adaptation. PESQ+STOI and MetricGAN+ variants improve selected metrics while reducing SSNR, and an LLR-targeted dereverberation variant shifts the trade-off toward SRMR.
 - [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020: MetricGAN Post-Processing]] — the frozen-surrogate failure restated, plus the high-frequency-artifact instance of bias inheritance and the mask-vs-mapping mitigation
 - [[sources/fu-2021-metricgan-plus|Fu et al. 2021: MetricGAN+]] — hardens the learned-surrogate route against catastrophic forgetting (replay buffer, load-bearing: 2.82 vs 3.05 PESQ without/with) and anchors $D$ on noisy speech; PESQ 3.15 SOTA at unchanged generator
+- [[sources/close-2022-metricgan-plus-minus|Close, Hain & Goetze 2022: MetricGAN+/-]] — score-range coverage as a surrogate requirement: a de-generator targets sparse $Q'$ regions; improves unseen-data (CHiME-3) PESQ and refutes MetricGAN+'s replay-buffer saturation claim

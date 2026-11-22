@@ -748,4 +748,7 @@
 | [[entities/peter-plantinga\|Peter Plantinga]] | Ohio State researcher and SpeechBrain developer; co-author of MetricGAN+ (Interspeech 2021), the SpeechBrain-released metric-surrogate SE recipe. | 2026-11-22 |
 | [[entities/mirco-ravanelli\|Mirco Ravanelli]] | Mila researcher, initiator of the SpeechBrain toolkit; co-author of MetricGAN+ (Interspeech 2021). | 2026-11-22 |
 | [[entities/xugang-lu\|Xugang Lu]] | NICT Kyoto researcher in speech enhancement and robust ASR; co-author of MetricGAN+ (Interspeech 2021) and the TASLP 2018 direct-metric-optimization SE paper. | 2026-11-22 |
+| [[entities/george-close\|George Close]] | University of Sheffield researcher; first author of MetricGAN+/- (EUSIPCO 2022), the de-generator extension widening MetricGAN's surrogate score coverage. | 2026-11-22 |
+| [[entities/thomas-hain\|Thomas Hain]] | University of Sheffield professor; speech recognition and speech technologies; co-author of MetricGAN+/- (EUSIPCO 2022). | 2026-11-22 |
+| [[entities/stefan-goetze\|Stefan Goetze]] | Acoustic signal processing researcher (Sheffield); speech enhancement, dereverberation, robust ASR front-ends; senior author of MetricGAN+/- (EUSIPCO 2022). | 2026-11-22 |
 

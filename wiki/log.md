@@ -6652,3 +6652,22 @@ Answered from [[sources/li-2026-geometry-conditioned-ssanc|Li 2026 GC-SSF]] and 
   - [[synthesis/deep-speech-enhancement|Deep Speech Enhancement]] — Sources Synthesized row + Insight 7 paragraph (metric-turn hardening between the 2020 post-processing and 2022 CMGAN entries)
   - `wiki/index.md`, `wiki/sources/index.md`, `wiki/entities/index.md` — 5 new rows, statistics recounted (1764 pages)
 - **Notes**: First extraction attempt used a wrong arXiv ID (2104.04026, a fusion-surrogate paper); caught at figure-mapping, deleted, and re-extracted via Zotero PDF + MinerU. FFT size/window/optimizer unstated in the paper — flagged on the source page; 257 bins imply a 512-point FFT.
+
+---
+
+## [2026-11-22] ingest | MetricGAN+/-: Increasing Robustness of Noise Reduction on Unseen Data (Close, Hain & Goetze 2022)
+
+- **Source**: `raw/papers/close-2022-metricgan-plus-minus/full-text.md` (Zotero: EFD7V27D; arXiv 2203.12369v5 HTML, 16 vector figures recovered + 1 PNG)
+- **Authors**: George Close, Thomas Hain, Stefan Goetze
+- **Published**: EUSIPCO 2022, pp. 165–169
+- **DOI**: 10.23919/EUSIPCO55093.2022.9909682
+- **Summary**: MetricGAN+/- adds a third network — a de-generator $\mathcal{N}$ trained toward an assigned sub-perfect metric score $w$ — so the MetricGAN+ discriminator observes score regions sparsely populated in the training data (the 2019 score-assignment degrader repurposed as surrogate training-data generation). PESQ 3.05 → 3.22 on VoiceBank+DEMAND ($w=0.5$; SpeechBrain re-run baseline, original reports 3.15), and the line's first out-of-domain result: CHiME-3 real PESQ 1.54 → 1.76, simulated 2.14 → 2.38. Buffer-size control ($H=0.4$ baseline → 3.17) refutes MetricGAN+'s saturation claim; STOI variants stay flat; a ~400 Hz residual-energy artefact worsens (low CBAK).
+- **Pages created**: `wiki/sources/close-2022-metricgan-plus-minus.md`, `wiki/entities/george-close.md`, `wiki/entities/thomas-hain.md`, `wiki/entities/stefan-goetze.md`, `wiki/concepts/metric-surrogate-de-generator.md`
+- **Pages updated**:
+  - [[concepts/metricgan|MetricGAN]] — new "MetricGAN+/- extension" paragraph (de-generator, coverage, buffer-saturation refutation)
+  - [[concepts/black-box-metric-optimization|Black-Box Metric Score Optimization]] — new requirement "score-range coverage" (+ artefact backfire caveat)
+  - [[concepts/learnable-sigmoid-mask|Learnable Sigmoid Mask]] — learnable-β de-generator variant trades PESQ for CSIG/COVL (second β data point)
+  - [[concepts/pesq|PESQ]] (coverage widening keeps bias purchases: STOI 0.913, 400 Hz artefact), [[concepts/stoi|STOI]] (negative transfer: flat STOI variants), [[concepts/voicebank-demand|VoiceBank+DEMAND]] (SpeechBrain re-run 3.05 vs reported 3.15; CHiME-3 cross-dataset protocol), [[concepts/segan|SEGAN]] (Table I lists 2.42 vs original 2.16 — provenance unstated), [[concepts/bidirectional-lstm|BLSTM]] (same net instantiated as enhancer + de-generator), [[concepts/ideal-ratio-mask|IRM]] (masks for controlled degradation), [[concepts/least-squares-gan|LSGAN]] (third network on continuous targets), [[concepts/speech-enhancement|Speech Enhancement]], [[concepts/generative-vs-discriminative-speech-enhancement|Generative vs. Discriminative SE]] (robustness axis) — sources + Related Sources rows
+  - [[synthesis/deep-speech-enhancement|Deep Speech Enhancement]] — Sources Synthesized row + Insight 7 paragraph (surrogate-coverage revision between MetricGAN+ 2021 and CMGAN 2022)
+  - `wiki/index.md`, `wiki/sources/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md` — 5 new rows, statistics recounted (1769 pages)
+- **Notes**: Fig. 1–3 SVGs are label-less layer fragments (arXiv splits diagram text into HTML); the source page documents the data flow via mermaid + spec tables instead of embedding them. Only Fig. 4 (spectrogram PNG) embedded. Discriminator pooling placement is internally inconsistent in the paper — flagged on the source page. Baseline (3.05 vs 3.15) and SEGAN-row (2.42 vs 2.16) discrepancies flagged rather than resolved.

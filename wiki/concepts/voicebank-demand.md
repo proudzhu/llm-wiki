@@ -16,6 +16,7 @@ sources:
   - raw/papers/li-2024-dbccrn/full-text.md
   - raw/papers/abdulatif-2024-cmgan/full-text.md
   - raw/papers/fu-2021-metricgan-plus/full-text.md
+  - raw/papers/close-2022-metricgan-plus-minus/full-text.md
 tags:
   - dataset
   - speech-enhancement
@@ -81,3 +82,4 @@ A 48 kHz variant of the benchmark appears in [[sources/kim-2026-faster-enhancer|
 - [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] — PESQ 3.16 / STOI 0.940 / SSNR 10.98 at 8.31 M params; introduces the peak-normalized **scaled test set** variant of this benchmark to expose scale-sensitive losses ([[concepts/scale-error|ScaleError]])
 - [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — PESQ 3.33 / STOI 0.96 at 0.88 M params (fewest among its compared systems); the paper states 872 test utterances where the canonical release has 824 — an apparent typo, scores unaffected
 - [[sources/fu-2021-metricgan-plus|Fu et al. 2021: MetricGAN+]] — PESQ 3.15 / CSIG 4.14 / CBAK 3.16 / COVL 3.64 at an unchanged BLSTM backbone; the cumulative ablation (2.86 → 2.95 → 3.02 → 3.05 → 3.15) and replay-portion study are the benchmark's cleanest loss-technique isolation
+- [[sources/close-2022-metricgan-plus-minus|Close, Hain & Goetze 2022: MetricGAN+/-]] — SpeechBrain MetricGAN+ re-run scores 3.05 (not the reported 3.15), de-generator extension reaches 3.22; also evaluates VBD-trained models on CHiME-3 real/simulated — a cross-dataset generalization protocol for this benchmark's models

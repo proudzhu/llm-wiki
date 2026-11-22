@@ -6,6 +6,7 @@ sources:
   - raw/papers/yan-2025-lisennet/full-text.md
   - raw/papers/fu-2019-metricgan/full-text.md
   - raw/papers/fu-2021-metricgan-plus/full-text.md
+  - raw/papers/close-2022-metricgan-plus-minus/full-text.md
 tags:
   - mask
   - speech-enhancement
@@ -54,3 +55,4 @@ Both relax the fixed $[0, 1]$ sigmoid of the classic [[concepts/ideal-ratio-mask
 - [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN]] — the predecessor's fixed sigmoid mask head, where musical noise was handled by clamping the mask at 0.05 rather than by a trainable slope
 - [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025: LiSenNet]]
 - [[sources/fu-2021-metricgan-plus|Fu et al. 2021: MetricGAN+]] — the originating paper: $\beta = 1.2$, per-bin $\alpha$, +0.10 PESQ in ablation; learned $\alpha \approx 0.5$ for most bins and $\alpha \gg 1$ at high frequencies
+- [[sources/close-2022-metricgan-plus-minus|Close, Hain & Goetze 2022: MetricGAN+/-]] — uses LSigmoid ($\beta = 1.2$) in both the generator and the de-generator; making $\beta$ learnable in the de-generator trades PESQ (3.21 → 3.17) for the best CSIG 4.16 / COVL 3.65 — a second data point that learnable $\beta$ shifts the quality trade rather than uniformly helping

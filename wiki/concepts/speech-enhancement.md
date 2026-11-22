@@ -20,6 +20,7 @@ sources:
   - raw/papers/abdulatif-2024-cmgan/full-text.md
   - raw/papers/fu-2020-metricgan-post-processing/full-text.md
   - raw/papers/fu-2021-metricgan-plus/full-text.md
+  - raw/papers/close-2022-metricgan-plus-minus/full-text.md
 tags:
   - speech-processing
   - audio-enhancement
@@ -105,3 +106,4 @@ Worked example: concatenating $2Q{+}1$ log-magnitude spectra (161 frequency poin
 - [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — dual-path transformer transplanted to the T-F domain; matched-complexity ablation shows frequency-domain input beats time-domain input by +0.36 PESQ; SOTA VoiceBank+DEMAND 3.33 / DNS 3.53 at 0.88 M params
 - [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020: MetricGAN Post-Processing]] — metric-driven fine-tuning as a backbone-agnostic post-processing stage; causal Transformer with convolutional positional encoding beats the DNS 2020 NSNet baseline objectively and subjectively
 - [[sources/fu-2021-metricgan-plus|Fu et al. 2021: MetricGAN+]] — three training techniques (noisy-speech discriminator targets, replay buffer 0.2, learnable sigmoid mask) take the metric-surrogate line to PESQ 3.15 SOTA with a plain BLSTM backbone; released in SpeechBrain
+- [[sources/close-2022-metricgan-plus-minus|Close, Hain & Goetze 2022: MetricGAN+/-]] — de-generator widens the metric surrogate's score coverage; PESQ 3.22 on VBD and improved generalization to unseen CHiME-3 environments (real 1.54 → 1.76)

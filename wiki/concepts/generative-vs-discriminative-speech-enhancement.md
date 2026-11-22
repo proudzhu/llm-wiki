@@ -7,6 +7,7 @@ sources:
   - raw/papers/pascual-2017-segan/full-text.md
   - raw/papers/fu-2019-metricgan/full-text.md
   - raw/papers/fu-2021-metricgan-plus/full-text.md
+  - raw/papers/close-2022-metricgan-plus-minus/full-text.md
 tags:
   - speech-enhancement
   - generative-models
@@ -64,3 +65,4 @@ Key insight: **the training objective, not the architecture, drives the gains** 
 - [[sources/lugo-2026-diffvqe|Lugo et al. 2026: DiffVQE]] — single-step hybrid discriminative+generative design, a middle route
 - [[sources/xu-2026-drifting-models-speech-enhancement|Xu et al. 2026: Drifting Models]] — one-step generative SE without trajectories
 - [[sources/fu-2021-metricgan-plus|Fu et al. 2021: MetricGAN+]] — loss-over-architecture evidence at benchmark scale: the unchanged BLSTM magnitude-mask generator reaches PESQ 3.15 (vs 2.71 with MSE), beating attention-based (T-GSA 3.06) and phase-aware (DEMUCS 3.07, PHASEN 2.99) systems
+- [[sources/close-2022-metricgan-plus-minus|Close, Hain & Goetze 2022: MetricGAN+/-]] — robustness axis for the metric-surrogate branch: widening $D$'s score coverage improves unseen-environment performance (CHiME-3 real PESQ 1.54 → 1.76), though MG+ variants still drop CSIG/COVL below the noisy input on real data

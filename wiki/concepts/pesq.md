@@ -18,6 +18,7 @@ sources:
   - raw/papers/abdulatif-2024-cmgan/full-text.md
   - raw/papers/fu-2020-metricgan-post-processing/full-text.md
   - raw/papers/fu-2021-metricgan-plus/full-text.md
+  - raw/papers/close-2022-metricgan-plus-minus/full-text.md
 tags:
   - evaluation-metric
   - speech-quality
@@ -96,3 +97,4 @@ The consequence is visible in their own table: the PESQ-optimal mixture weight g
 - [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — discriminative counterpoint on VoiceBank+DEMAND: waveform MSE + RI-magnitude L1 (no PESQ surrogate) reaches PESQ 3.33 at 0.88 M params
 - [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020: MetricGAN Post-Processing]] — PESQ-surrogate fine-tuning of a converged Transformer (+0.138 PESQ on DNS 2020 at unchanged complexity); documents the high-frequency-noise artifact PESQ cannot penalize
 - [[sources/fu-2021-metricgan-plus|Fu et al. 2021: MetricGAN+]] — the +0.29 PESQ successor (2.86 → 3.15 SOTA): noisy-speech discriminator targets, replay buffer 0.2 against surrogate forgetting, learnable sigmoid mask; also documents the trade — CBAK 3.16 trails rivals because the 0.05 mask floor leaves residual noise
+- [[sources/close-2022-metricgan-plus-minus|Close, Hain & Goetze 2022: MetricGAN+/-]] — widens the PESQ surrogate's training coverage with a de-generator (PESQ 3.05 → 3.22 on VBD; CHiME-3 real 1.54 → 1.76); the best-PESQ setting drops STOI to 0.913 and worsens a ~400 Hz residual-noise artefact — coverage widening does not remove PESQ's bias purchases

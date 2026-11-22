@@ -8,6 +8,7 @@ sources:
   - raw/papers/zhao-2025-lightweight-transformer/full-text.md
   - raw/papers/fu-2019-metricgan/full-text.md
   - raw/papers/fu-2021-metricgan-plus/full-text.md
+  - raw/papers/close-2022-metricgan-plus-minus/full-text.md
 tags:
   - speech-separation
   - time-frequency-masking
@@ -59,3 +60,4 @@ The IRM emerged as one of the preferred training targets. Masking-based targets 
 - [[sources/liu-2025-pcen-mask-vad-speech-enhancement|Liu et al. 2025: PCEN-Based Mask Thresholding and VAD]] — PCEN-thresholded IRM training target
 - [[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025: Study of Lightweight Transformer Architectures for Single-Channel Speech Enhancement]] — compressed-domain real IRM ($c=0.3$) benchmarked against complex-valued RI/MCS masking and mapping in one architecture
 - [[sources/fu-2021-metricgan-plus|Fu et al. 2021: MetricGAN+]] — relaxes the $[0,1]$ sigmoid bound of the magnitude-mask head: phase differences make $\lvert X\rvert \neq \lvert Y\rvert + \lvert N\rvert$, so the ideal magnitude mask can exceed 1; the learnable sigmoid uses $\beta = 1.2$ with per-bin learned $\alpha$ (most bins ≈ 0.5, near-linear; high-frequency bins ≫ 1, binary-like)
+- [[sources/close-2022-metricgan-plus-minus|Close, Hain & Goetze 2022: MetricGAN+/-]] — clamped magnitude masks ($0.05 \le m \le 1$, learnable sigmoid $\beta = 1.2$) drive both enhancement and controlled *degradation*: the de-generator's mask targets a sub-perfect metric score to widen the surrogate's training coverage

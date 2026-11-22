@@ -6,6 +6,7 @@ sources:
   - raw/papers/pascual-2017-segan/full-text.md
   - raw/papers/fu-2019-metricgan/full-text.md
   - raw/papers/fu-2021-metricgan-plus/full-text.md
+  - raw/papers/close-2022-metricgan-plus-minus/full-text.md
 tags:
   - speech-enhancement
   - gan
@@ -67,3 +68,4 @@ SEGAN is the opening entry of the [[concepts/time-domain-speech-enhancement|time
 - [[sources/pandey-2019-cnn-speech-enhancement-time-domain|Pandey & Wang 2019: AECNN]] — reuses the generator shape with a frequency-domain loss; benchmarks SEGAN at ~58 M params
 - [[sources/shetu-2026-generative-discriminative-comparison|Shetu, Habets & Brendel 2026]] — controlled study showing single-step GAN training is the robustness/efficiency sweet spot among training paradigms
 - [[sources/fu-2021-metricgan-plus|Fu et al. 2021: MetricGAN+]] — SEGAN is the 2.16-PESQ baseline in its Table 3; the metric-surrogate line reaches 3.15 with a small BLSTM mask estimator — the benchmark-scale gap between conventional adversarial and metric-oriented training
+- [[sources/close-2022-metricgan-plus-minus|Close, Hain & Goetze 2022: MetricGAN+/-]] — lists SEGAN at PESQ 2.42 / CSIG 3.61 / CBAK 2.61 / COVL 3.01, differing from the original paper's 2.16 / 3.48 / 2.94 / 2.80 on this benchmark; provenance of the row unstated — treat cited SEGAN scores as implementation-dependent
