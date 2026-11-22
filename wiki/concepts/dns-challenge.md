@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-11-17
+updated: 2026-11-22
 sources:
+  - raw/papers/dang-2022-dpt-fsnet/full-text.md
   - raw/papers/shetu-2026-generative-discriminative-comparison/full-text.md
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
   - raw/papers/ohlenbusch-2026-pas-se/full-text.md
@@ -29,6 +30,8 @@ The fifth DNS Challenge noise set was used by [[sources/ohlenbusch-2026-pas-se|O
 
 [[sources/li-2024-dbccrn|Li et al. 2024]] use the Interspeech 2020 DNS corpus (180 h noise, 500+ h speech from 2150 speakers at 44.1 kHz) to synthesize 100 h of training pairs with the official script (SNR uniform −5…20 dB), evaluating on the official non-reverberant test set: their VoiceBank-trained [[concepts/dbccrn|DBCCRN]] transfers zero-shot to PESQ 2.220 — matching a DNS-trained DCCRN (2.204) — and retraining with [[concepts/scale-aware-snr|SA-SNR]] reaches 2.638 (vs NSNet 1.811, RNNoise 1.973).
 
+[[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022]] train [[concepts/dpt-fsnet|DPT-FSNet]] on the Interspeech 2020 DNS corpus with dynamic mixing (75% of clean speech convolved with ICASSP-2021 RIRs each epoch, SNR uniform −5…20 dB) and evaluate on both non-blind sets: WB-PESQ 3.53 (`with_reverb`) / 3.26 (`no_reverb`), STOI 95.23 / 97.68%, SI-SDR 18.14 / 20.36 dB — ahead of NSNet, FullSubNet, CTS-Net and GaGNet on every metric, with the margin over the full-band baseline larger on the reverberant set (attributed to sub-band temporal modeling).
+
 ## Related Concepts
 
 - [[concepts/voicebank-demand|VoiceBank+DEMAND (VBD)]]
@@ -48,3 +51,4 @@ The fifth DNS Challenge noise set was used by [[sources/ohlenbusch-2026-pas-se|O
 - [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — DNS Challenge noise as training interference for AC/BC enhancement; DNSMOS as the non-intrusive evaluation metric
 - [[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025: LCT-GAN]] — DNS3 140 h synthesised training (SNR −5…20 dB), evaluated on the blind real-recorded English test set with DNSMOS P.835: BAK 4.04 ± 0.09 / SIG 3.06 / OVL 2.80 at 0.14 M params, beating DeepFilterNet1–3 on BAK with half the score variance
 - [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] — 100 h DNS-2020 synthesized training (SNR −5…20 dB); zero-shot VBD→DNS transfer matches DNS-trained DCCRN, retrain PESQ 2.638
+- [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — DNS 2020 dynamic mixing (75% RIR, SNR −5…20 dB); WB-PESQ 3.53/3.26 on with/without reverb, best of eight compared systems

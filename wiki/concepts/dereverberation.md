@@ -3,6 +3,7 @@ type: concept
 created: 2026-05-27
 updated: 2026-11-22
 sources:
+  - raw/papers/dang-2022-dpt-fsnet/full-text.md
   - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
   - raw/papers/xiang-2024-multichannel-cdr-estimation/full-text.md
   - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
@@ -49,6 +50,7 @@ Classical CDR estimators, however, ignore additive noise and are therefore biase
 | **Joint AEC+NS+DR (DeepVQE)** | Unified model with CCM for simultaneous echo/noise/reverb removal | Over 10 dB SRR improvement, real-time |
 | **Beamforming + postfilter** | Spatial filtering combined with postfiltering | Multi-channel required |
 | **Online joint WPE+separation (online-WPE×IVE)** | WPE and IVE separation optimized per frame under one ML criterion in a [[concepts/convolutional-beamformer\|convolutional beamformer]] | STFT frames (8 ms) can be far shorter than RT60; 10.01 ms total delay |
+| **Full-band/sub-band fusion (FullSubNet, DPT-FSNet)** | Sub-band path models the temporal evolution of the narrow-band spectrum, where reverberation manifests | Margin over full-band-only models is larger on reverberant data — DPT-FSNet on DNS: 3.53 vs NSNet 2.37 with reverb, 3.26 vs 2.15 without |
 
 ## Historical Context
 
@@ -72,6 +74,7 @@ Classical CDR estimators, however, ignore additive noise and are therefore biase
 - [[concepts/phase-aware-beta-sigmoid-mask|Phase-aware β-sigmoid Mask (PHM)]]
 - [[concepts/snr-cdr-wiener-gain|SNR–CDR Wiener Gain]] — noise-aware CDR-driven dereverberation gain
 - [[concepts/online-joint-optimization|Online Joint Optimization (online-WPE×IVE)]] — per-frame joint dereverberation and separation
+- [[concepts/full-band-sub-band-fusion|Full-Band and Sub-Band Fusion]] — sub-band temporal modeling as a reverberation mechanism
 
 ## Key Sources
 
@@ -84,3 +87,4 @@ Classical CDR estimators, however, ignore additive noise and are therefore biase
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — WPE in the hybrid taxonomy: neural PSD estimation for model-based dereverberation (see [[concepts/weighted-prediction-error|WPE]])
 - [[sources/ueda-2024-online-joint-optimization|Ueda, Nakatani, Ikeshita, Kinoshita, Araki & Makino 2024: Blind and Spatially-Regularized Online Joint Optimization]] — first blind online joint optimization of dereverberation and separation (online-WPE×IVE) under a single ML criterion; 8 ms algorithmic delay, 10.01 ms total
 - [[sources/abdulatif-2024-cmgan|Abdulatif, Cao & Yang 2024: CMGAN]] — single-channel complex-TF dereverberation with [[concepts/cmgan|CMGAN]] on REVERB. PESQ-guided training gives near/far average CD 1.96/2.54 and FWSegSNR 13.18/10.30 dB. CMGAN-LLR changes the surrogate target to normalized LLR and the target score from 1 to 0; it trades some CD/FWSegSNR for higher SRMR, reaching real-recording SRMR 7.71 near and 7.62 far.
+- [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — full/sub-band dual-path transformer; reverberant-condition margin on DNS attributed to sub-band temporal modeling (same trend as FullSubNet)

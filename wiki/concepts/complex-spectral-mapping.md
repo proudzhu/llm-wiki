@@ -3,6 +3,7 @@ type: concept
 created: 2026-05-16
 updated: 2026-11-22
 sources:
+  - raw/papers/dang-2022-dpt-fsnet/full-text.md
   - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
   - raw/papers/zhan-2026-joint-afc-rfs/full-text.md
@@ -48,6 +49,7 @@ $$L = \|S_r - \hat{S}_r\|_1 + \|S_i - \hat{S}_i\|_1 + \||S| - |\hat{S}|\|_1$$
 - **FullSubNet (Hao 2021)**: Full-band + sub-band CSM with attention
 - **TinyGRU (Pandey & Azcarreta 2025)**: the complex-domain (masking rather than direct RI mapping) counterpart at the ultra-low-compute multichannel frontier — 8-channel complex spectral masking with MCWF integration at ~50 MMACs/s; see [[concepts/complex-ratio-mask|Complex Ratio Mask]] for the masking-vs-mapping distinction
 - **RFSNet (Zhan et al. 2026)**: full-sub-band CSM for residual hearing-aid feedback suppression — maps compressed RI features of the cancellation-stage output plus the microphone signal to the clean spectrum, with global causal time-frequency attention; 0.396M params, 0.227 G MACs/s, 8 ms latency ([[concepts/jointdfc|JointDFC]])
+- **DPT-FSNet (Dang 2022)**: the masking-side counterpart — a [[concepts/dual-path-transformer|dual-path transformer]] on the RI-stacked STFT estimating a [[concepts/complex-ratio-mask|cRM]] rather than mapping RI directly, trained with 0.4 waveform MSE + 0.6 L1 on RI-part magnitudes; WB-PESQ 3.33 on VoiceBank+DEMAND at 0.88 M params ([[sources/dang-2022-dpt-fsnet|Dang et al. 2022]])
 
 ## Multichannel Extension: RI Stacking for Spatial Cues (Haeb-Umbach et al. 2024)
 
@@ -67,3 +69,4 @@ Real-valued DNNs are natively poor at both phase and spatial information: on a c
 - [[sources/zhan-2026-joint-afc-rfs|Zhan, Moore, Li & Zheng 2026: JointDFC]] — RFSNet: full-sub-band CSM for residual hearing-aid feedback suppression
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — the multichannel extension: RI stacking across channels for joint magnitude–phase–spatial-cue preservation
 - [[sources/abdulatif-2024-cmgan|Abdulatif, Cao & Yang 2024: CMGAN]] — [[concepts/cmgan|CMGAN]] combines magnitude masking with direct RI residual refinement rather than choosing masking or mapping alone. Single-Complex improves PESQ over Single-Mask (3.35 vs. 3.23) but loses SSNR (9.19 vs. 9.82 dB); the combined model reaches 3.41 and 11.10 dB. Computing magnitude after the mask and complex branches are summed lets the magnitude loss supervise both paths.
+- [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — complex-domain masking with sub-band/full-band dual-path transformers; dual-domain (waveform + RI-magnitude) loss

@@ -6580,3 +6580,41 @@ Answered from [[sources/li-2026-geometry-conditioned-ssanc|Li 2026 GC-SSF]] and 
 - **Summary**: CMGAN combines power-compressed magnitude/complex inputs, four sequential time–frequency Conformer blocks, decoupled mask and complex-residual decoders, and a PESQ-surrogate discriminator; the journal extension covers denoising, dereverberation, and additive-residual super-resolution with extensive ablations and subjective evaluation.
 - **Pages created**: `wiki/sources/abdulatif-2024-cmgan.md`; `wiki/entities/sherif-abdulatif.md`; `wiki/entities/ruizhe-cao.md`; `wiki/entities/bin-yang.md`; `wiki/concepts/cmgan.md`; `wiki/concepts/two-stage-conformer.md`; `wiki/concepts/speech-super-resolution.md`
 - **Pages updated**: `wiki/concepts/metricgan.md` (CMGAN adoption and exact 0.01 surrogate weight); `wiki/concepts/black-box-metric-optimization.md` (co-adaptation and discriminator ablations); `wiki/concepts/complex-spectral-mapping.md` (hybrid mask/RI refinement); `wiki/concepts/power-law-compression.md` (c=0.3 CMGAN instance); `wiki/concepts/mixed-magnitude-complex-loss.md` (0.7/0.3 compressed spectral objective); `wiki/concepts/speech-enhancement.md` (multi-task architecture reference); `wiki/concepts/dereverberation.md` (REVERB and CMGAN-LLR results); `wiki/concepts/voicebank-demand.md` (CMGAN row, full scores, and naming correction); `wiki/concepts/pesq.md` (CMGAN row and surrogate weighting); `wiki/sources/fu-2019-metricgan.md` (CMGAN backlink); `wiki/sources/braun-2021-loss-functions-speech-enhancement.md` (CMGAN downstream loss instance); `wiki/sources/pascual-2017-segan.md` (CMGAN comparison backlink); `wiki/synthesis/deep-speech-enhancement.md` (source row, representative-model row, metric-surrogate evidence, and refined mask/filter takeaway); `wiki/index.md` and subdirectory indexes (new rows and statistics)
+
+---
+
+## [2026-11-22] ingest | DPT-FSNet: Dual-Path Transformer Based Full-Band and Sub-Band Fusion Network for Speech Enhancement (Dang 2022)
+
+- **Source**: `raw/papers/dang-2022-dpt-fsnet/full-text.md` (arXiv 2104.13002v2 HTML; Zotero: AI3KJIDJ)
+- **Authors**: Feng Dang, Hangting Chen, Pengyuan Zhang
+- **Published**: ICASSP 2022, pp. 6857–6861
+- **DOI**: 10.1109/ICASSP43922.2022.9746171
+- **Summary**: DPT-FSNet transplants the dual-path transformer to the STFT domain — intra path models sub-band (per-bin temporal) information, inter path full-band (per-frame spectral) information — reaching SOTA on VoiceBank+DEMAND (PESQ 3.33) and DNS 2020 (3.53/3.26) at 0.88M params, with a matched-complexity ablation showing STFT input beats time-domain input by +0.36 PESQ.
+- **Pages created**:
+  - `wiki/sources/dang-2022-dpt-fsnet.md`
+  - `wiki/entities/feng-dang.md`
+  - `wiki/entities/pengyuan-zhang.md`
+  - `wiki/concepts/dual-path-transformer.md`
+  - `wiki/concepts/full-band-sub-band-fusion.md`
+- **Pages updated**:
+  - [[entities/hangting-chen|Hangting Chen]] — DPT-FSNet contribution + prior IoA-CAS affiliation
+  - [[concepts/dpt-fsnet|DPT-FSNet]] — original-paper spec section; corrected "~100K params" claim (0.88M original vs 109K online redesign)
+  - [[concepts/dprnn|DPRNN]] — DPT-FSNet variant subsection (transformer operators, T-F axes)
+  - [[concepts/complex-spectral-mapping|Complex Spectral Mapping]] — masking-side DPT-FSNet entry
+  - [[concepts/complex-ratio-mask|Complex Ratio Mask]] — cRM trained without mask target (0.4 wav-MSE + 0.6 RI-mag-L1)
+  - [[concepts/dns-challenge|DNS Challenge]] — DNS 2020 dynamic-mixing recipe and 3.53/3.26 results
+  - [[concepts/voicebank-demand|VoiceBank+DEMAND]] — SOTA table row 3.33; 872-vs-824 test-count discrepancy note
+  - [[concepts/frequency-domain-loss|Frequency Domain Loss]] — dual-domain mixture in a T-F network
+  - [[concepts/pesq|PESQ]] — SOTA table row; discriminative counterpoint (no metric surrogate)
+  - [[concepts/stoi|STOI]] — near-ceiling 0.96 / 97.68% data point
+  - [[concepts/si-sdr|SI-SDR]] — DNS evaluation values 18.14/20.36 dB
+  - [[concepts/dereverberation|Dereverberation]] — sub-band temporal modeling reverb-advantage row
+  - [[concepts/speech-enhancement|Speech Enhancement]] — source entry
+  - [[concepts/metricgan|MetricGAN]] — DPT-FSNet discriminative counterpoint (3.33 vs 2.86)
+  - [[concepts/dtln|DTLN]] — DNS 2020 comparison values
+  - [[sources/fu-2019-metricgan|MetricGAN source]] — cross-reference (baseline in Table 1)
+  - [[sources/chen-2023-ultra-dual-path-compression|Chen 2023 source]] — cross-reference to the original offline model
+  - [[sources/abdulatif-2024-cmgan|CMGAN source]] — cross-reference + 0.91M-vs-0.88M param discrepancy note
+  - [[sources/pandey-2019-cnn-speech-enhancement-time-domain|Pandey 2019 source]] — cross-reference (cited time-domain category)
+  - [[synthesis/deep-speech-enhancement|Deep Speech Enhancement]] — 2022 backbone point + Insight 2 input-representation evidence
+  - `wiki/index.md`, `wiki/sources/index.md`, `wiki/entities/index.md`, `wiki/concepts/index.md` — new rows, updated dpt-fsnet row, statistics recounted (1755 pages)

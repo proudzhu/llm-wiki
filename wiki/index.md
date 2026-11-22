@@ -746,6 +746,8 @@
 | [[entities/sherif-abdulatif\|Sherif Abdulatif]] | University of Stuttgart — first author of CMGAN; monaural speech enhancement, Conformer architectures, and metric-driven adversarial training | 2026-11-22 |
 | [[entities/ruizhe-cao\|Ruizhe Cao]] | University of Stuttgart — CMGAN co-author and original 2022 conference first author; complex-TF speech enhancement | 2026-11-22 |
 | [[entities/bin-yang\|Bin Yang]] | University of Stuttgart — Senior Member, IEEE; CMGAN co-author researching audio signal processing and speech enhancement | 2026-11-22 |
+| [[entities/feng-dang\|Feng Dang]] | Institute of Acoustics, CAS / UCAS — first author of DPT-FSNet (ICASSP 2022); dual-path transformer speech enhancement | 2026-11-22 |
+| [[entities/pengyuan-zhang\|Pengyuan Zhang]] | Institute of Acoustics, CAS / UCAS — senior author of DPT-FSNet; speech and audio signal processing | 2026-11-22 |
 
 ---
 
@@ -1075,7 +1077,7 @@
 | [[concepts/cross-path-fusion\|Cross-Path Fusion (CPF)]] | Lightweight bottleneck fusion module bridging CoFi-Lite's parallel coarse/fine paths via concat–FC–GRU–FC; +0.14 PESQ in ablation | 2026-07-21 |
 | [[concepts/output-based-speech-enhancement\|Output-based Speech Enhancement]] | Paradigm configuring an SE system by evaluating SI/SQ of candidate outputs rather than extracting input features. | 2026-07-21 |
 | [[concepts/glimpse-proportion\|Glimpse Proportion]] | SI-inspired measure: fraction of T-F tiles where estimated audibility exceeds a threshold (Cooke 2006). | 2026-07-21 |
-| [[concepts/dpt-fsnet\|DPT-FSNet]] | Dual-Path Transformer-based Full-Subband Network; 2D-conv encoder + dual-path transformer + 2D-conv decoder on T-F feature map | 2026-07-20 |
+| [[concepts/dpt-fsnet\|DPT-FSNet]] | Dual-path transformer full/sub-band fusion SE (Dang et al. ICASSP 2022): 0.88M params, PESQ 3.33 VBD / 3.53 DNS-reverb; base of Chen 2023's compressed streaming variant | 2026-11-22 |
 | [[concepts/dual-path-compression\|Dual-Path Compression]] | Grid-searched T x F compression combining frame-skip prediction + trainable Mel filters; outperforms single-path at 8x-16x | 2026-07-20 |
 | [[concepts/trainable-frequency-compression\|Trainable Frequency Compression]] | Learnable linear transform per band replacing fixed ERB/Mel triangle filters; >0.1 WB-PESQ gain at 8x-16x | 2026-07-20 |
 | [[concepts/frame-skip-prediction\|Frame-Skip Prediction]] | Run mask estimator once every r frames, copy mask to skipped frames; PostNet recovers +0.33 WB-PESQ at 8x | 2026-07-20 |
@@ -1433,6 +1435,8 @@
 | [[concepts/cmgan\|CMGAN]] | Conformer-based MetricGAN with shared magnitude/complex encoder, dual mask/RI decoders, and PESQ surrogate; 1.83M params and PESQ 3.41 on VoiceBank+DEMAND | 2026-11-22 |
 | [[concepts/two-stage-conformer\|Two-Stage Conformer]] | CMGAN's sequential time-then-frequency Conformer bottleneck; four blocks improve denoising quality before gains saturate | 2026-11-22 |
 | [[concepts/speech-super-resolution\|Speech Super-Resolution]] | Bandwidth extension through CMGAN's additive complex-TF residual; complex refinement improves waveform SNR at a magnitude-only LSD cost | 2026-11-22 |
+| [[concepts/dual-path-transformer\|Dual-Path Transformer]] | Transformer-operator dual-path family (DPTNet lineage): MHSA + GRU-replacing-FC FFN; axis assignments across separation, SE, and TSE | 2026-11-22 |
+| [[concepts/full-band-sub-band-fusion\|Full-Band and Sub-Band Fusion]] | SE paradigm combining per-bin temporal (sub-band) and per-frame spectral (full-band) modeling; FullSubNet lineage, reverberation advantage | 2026-11-22 |
 
 ---
 
@@ -1743,6 +1747,7 @@
 | [[sources/fu-2019-metricgan\|Fu, Liao, Tsao & Lin 2019]] | MetricGAN repurposes the GAN discriminator as a learned surrogate of a black-box evaluation metric. | 2026-11-20 |
 | [[sources/braun-2021-loss-functions-speech-enhancement\|Braun & Tashev 2021]] | A controlled, single-network comparison of 17 spectral training losses for real-time monaural speech enhancement: 9 metric families (L2, L1, log, weighted log, power-law compressed, SNR/SDR ratios, correlation, speech-distortion-weighted, AMR-weighted) each in magnitude-only and phase-aware complex form, plus their linear mixtures. On reverberant CHiME-2, magnitude+complex mixtures always help, power-law compression (c=0.3) wins (PESQ 3.31), and SI-SDR prefers linear losses (MAE 9.75 dB). | 2026-11-21 |
 | [[sources/abdulatif-2024-cmgan\|Abdulatif, Cao & Yang 2024]] | CMGAN combines a shared magnitude/complex spectrogram encoder, sequential time–frequency Conformer blocks, decoupled mask and complex decoders, and a PESQ-based MetricGAN discriminator for monaural speech enhancement. | 2026-11-22 |
+| [[sources/dang-2022-dpt-fsnet\|Dang, Chen & Zhang 2022]] | DPT-FSNet transfers the dual-path transformer from time-domain sequences to the STFT time-frequency map: the intra-transformer models sub-band information (the time sequence within each frequency bin) and the inter-transformer models full-band information (all frequency bins within each frame), realizing full-band/sub-band fusion inside one sequence model. | 2026-11-22 |
 
 ---
 
@@ -1801,10 +1806,10 @@
 
 ## Statistics
 
-- **Total pages**: 1750
-- **Entities**: 736
-- **Concepts**: 678
-- **Sources**: 301
+- **Total pages**: 1755
+- **Entities**: 738
+- **Concepts**: 680
+- **Sources**: 302
 - **Synthesis**: 25
 - **Queries**: 10
 - **Last updated**: 2026-11-22

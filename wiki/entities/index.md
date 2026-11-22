@@ -740,4 +740,6 @@
 | [[entities/sherif-abdulatif\|Sherif Abdulatif]] | University of Stuttgart — first author of CMGAN; monaural speech enhancement, Conformer architectures, and metric-driven adversarial training | 2026-11-22 |
 | [[entities/ruizhe-cao\|Ruizhe Cao]] | University of Stuttgart — CMGAN co-author and original 2022 conference first author; complex-TF speech enhancement | 2026-11-22 |
 | [[entities/bin-yang\|Bin Yang]] | University of Stuttgart — Senior Member, IEEE; CMGAN co-author researching audio signal processing and speech enhancement | 2026-11-22 |
+| [[entities/feng-dang\|Feng Dang]] | Institute of Acoustics, CAS / UCAS — first author of DPT-FSNet (ICASSP 2022); dual-path transformer speech enhancement | 2026-11-22 |
+| [[entities/pengyuan-zhang\|Pengyuan Zhang]] | Institute of Acoustics, CAS / UCAS — senior author of DPT-FSNet; speech and audio signal processing | 2026-11-22 |
 

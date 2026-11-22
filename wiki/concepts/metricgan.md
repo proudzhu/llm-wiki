@@ -3,6 +3,7 @@ type: concept
 created: 2026-11-20
 updated: 2026-11-22
 sources:
+  - raw/papers/dang-2022-dpt-fsnet/full-text.md
   - raw/papers/fu-2019-metricgan/full-text.md
   - raw/papers/abdulatif-2024-cmgan/full-text.md
 tags:
@@ -67,3 +68,4 @@ The scheme became a standard recipe in speech enhancement: **MetricGAN+** (Fu et
 
 - [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN]] — the original paper
 - [[sources/pascual-2017-segan|Pascual, Bonafonte & Serrà 2017: SEGAN]] — the CGAN-for-SE formulation MetricGAN modifies
+- [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — discriminative counterpoint on VoiceBank+DEMAND: a dual-domain reconstruction loss (waveform MSE + RI-magnitude L1, no discriminator) reaches PESQ 3.33 vs MetricGAN's 2.86, at 0.88 M params

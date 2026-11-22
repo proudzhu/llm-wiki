@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-09-19
-updated: 2026-11-21
+updated: 2026-11-22
 sources:
+  - raw/papers/dang-2022-dpt-fsnet/full-text.md
   - raw/papers/braun-2021-loss-functions-speech-enhancement/full-text.md
   - raw/papers/pan-2025-data-driven-acoustics/full-text.md
   - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
@@ -77,3 +78,4 @@ explicitly stating that "a scaled output signal as in the scale-invariant SDR is
 - [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — SI-SDR as the headline quality metric (12.42 dB for AC/BC fusion at −15…5 dB)
 - [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — derives the SI-SDR–correlation-coefficient equivalence in Section 7.2.3
 - [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] — angle-only derivation of SI-SNR/OSI-SNR scale blindness; proposes SA-SNR and ScaleError
+- [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — SI-SDR as DNS 2020 evaluation metric: 18.14 dB (with_reverb) / 20.36 dB (no_reverb), vs FullSubNet 15.75 / 17.29 dB

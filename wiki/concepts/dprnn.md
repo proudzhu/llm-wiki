@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-05-16
-updated: 2026-11-07
+updated: 2026-11-22
 sources:
+  - raw/papers/dang-2022-dpt-fsnet/full-text.md
   - raw/papers/luo-2022-band-split-rnn/full-text.md
   - raw/papers/nguyen-2023-predictive-plc/full-text.md
   - raw/papers/yan-2025-lisennet/full-text.md
@@ -81,6 +82,10 @@ The [[concepts/ftf-transformer|FTF transformer]] (Zhao & Madhu, EUSIPCO 2025) ex
 
 Its ordering ablation is the reference data set for "which dual-path order is best": at matched MACs and parameters, FT > TF (2.57 vs 2.55 PESQ), interleaving both axes beats either alone (TT 2.18, FF 2.34), and a fourth stage adds $\leq 0.01$ PESQ (FTF 2.68, TFTF 2.68, FTFT 2.69). The FTF design also uses [[concepts/trapezoidal-causal-masking|trapezoidal causal masking]] in the time stage — DPRNN's inter-block RNN has no such notion, since an RNN's context is bounded by its state, not by an explicit window.
 
+### Frequency-Domain Dual-Path Transformer: DPT-FSNet
+
+[[concepts/dpt-fsnet|DPT-FSNet]] (Dang, Chen & Zhang, ICASSP 2022) replaces both paths' RNNs with [[concepts/dual-path-transformer|improved transformer]] blocks (MHSA + GRU-FFN) and reassigns the axes to the STFT map: intra = per-frequency-bin temporal sequence (**sub-band**), inter = per-frame spectral sequence (**full-band**). Its matched-complexity ablation is the family's cleanest input-representation evidence: STFT input beats TSTNN-style time-domain segmentation by +0.36 WB-PESQ (2.97 → 3.33) on VoiceBank+DEMAND, and the full-band inter path beats a sub-band-only dual path by +0.13 (3.20 → 3.33).
+
 ## Related Concepts
 
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
@@ -92,6 +97,8 @@ Its ordering ablation is the reference data set for "which dual-path order is be
 - [[concepts/lisennet|LiSenNet]] — causal dual-path instantiation: frequency Bi-GRU + temporal uni-GRU with ConvGLU channel mixer, N=2 repetitions at 37k params
 - [[concepts/rnnformer|RNNFormer]] — inverts the axis-operator assignment: time GRU + frequency MHSA; ablated against DPRNN and DPT in FastEnhancer
 - [[concepts/ftf-transformer|FTF Transformer]] — three-stage (F–T–F) extension with cross-axis parameter sharing and a 1 s-capped causal attention window
+- [[concepts/dpt-fsnet|DPT-FSNet]] — transformer-operator dual path on the STFT map: intra sub-band + inter full-band
+- [[concepts/dual-path-transformer|Dual-Path Transformer]] — the transformer-operator branch of the family
 
 ## Related Sources
 
@@ -104,3 +111,4 @@ Its ordering ablation is the reference data set for "which dual-path order is be
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — RNNFormer block as the dual-path bottleneck; frequency-attention/time-recurrence assignment ablated against both DPRNN and DPT alternatives
 - [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — replaces the DPR bottleneck entirely with convolutional dual-path mixers (depthwise-sep frequency conv + dilated TCN) for MCU-NPU deployment; the dual-path *paradigm* survives, the RNN operators do not
 - [[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025: Study of Lightweight Transformer Architectures for Single-Channel Speech Enhancement]] — sweeps TT/FF/TF/FT/TFT/FTF/TFTF/FTFT at matched complexity, fixing FT > TF and showing three stages is the efficiency knee
+- [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — frequency-domain dual-path transformer; STFT-vs-time-domain input ablation at matched parameters and latency

@@ -143,3 +143,4 @@ This paper established the paradigm of **time-domain processing with frequency-d
 ## Related Sources
 
 - [[sources/tan-2018-convolutional-recurrent-network-speech-enhancement|Tan & Wang 2018: CRN for Real-Time Speech Enhancement]]
+- [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — cites this paper as the time-domain SE category it contrasts against; its matched ablation shows STFT input beats time-domain input for dual-path transformers (+0.36 PESQ)

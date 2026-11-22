@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-05-20
-updated: 2026-09-15
+updated: 2026-11-22
 sources:
+  - raw/papers/dang-2022-dpt-fsnet/full-text.md
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
   - raw/papers/li-2026-realtime-music-separation-dsp/full-text.md
   - raw/papers/zhang-2021-adl-mvdr/full-text.md
@@ -28,6 +29,8 @@ A **complex ratio filter (cRF)** — the multi-tap T-F generalization of the cRM
 
 [[sources/li-2026-realtime-music-separation-dsp|Li et al. 2026]] use a cRM as the backbone output of a streaming music separator on an embedded DSP, chosen for a *streaming* property rather than separation quality: a mask on the input spectrum maps silence to exactly silence, so the idle noise floor is zero by construction rather than by training — important for a device with no reset path. The cRM estimate is then blended with a [[concepts/deep-filtering|deep filter]] output through a learned per-source gate, the first causal, gated use of DF.
 
+[[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022]]'s DPT-FSNet supervises the cRM **without any mask target**: the decoder's mask is trained end-to-end through the ISTFT with $0.4$ waveform MSE $+ 0.6$ L1 on the *magnitudes of the real/imaginary parts* (neither signed RI nor $|Y|$) — a dual-domain objective reaching WB-PESQ 3.33 on VoiceBank+DEMAND and 3.53 on DNS with reverb at 0.88 M params.
+
 ## Related Concepts
 
 - [[concepts/convolutional-recurrent-network|Convolutional Recurrent Network]]
@@ -51,3 +54,4 @@ A **complex ratio filter (cRF)** — the multi-tap T-F generalization of the cRM
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — simplified Re/Im complex multiplication; cRM advantage emerges only with MCWF integration
 - [[sources/zhang-2024-enhanced-hybrid-ahs|Zhang, Zhang, Yu & Yu 2024: Enhanced Acoustic Howling Suppression]] — cRM2 (magnitude + complex input) resolves residual howling where magnitude masks fail, at a WER cost for small networks
 - [[sources/li-2026-realtime-music-separation-dsp|Li, Liu, Malsky & Yi 2026: Real-Time Music Source Separation on a Low-Power Audio DSP]] — cRM as streaming backbone output (idle noise floor zero by construction), gated-blended with a causal deep filter
+- [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — cRM trained end-to-end with waveform MSE + RI-magnitude L1 (0.4/0.6), no explicit mask target

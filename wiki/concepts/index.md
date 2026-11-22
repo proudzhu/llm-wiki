@@ -324,7 +324,7 @@
 | [[concepts/cross-path-fusion\|Cross-Path Fusion (CPF)]] | Lightweight bottleneck fusion module bridging CoFi-Lite's parallel coarse/fine paths via concat–FC–GRU–FC; +0.14 PESQ in ablation | 2026-07-21 |
 | [[concepts/output-based-speech-enhancement\|Output-based Speech Enhancement]] | Paradigm configuring an SE system by evaluating SI/SQ of candidate outputs rather than extracting input features. | 2026-07-21 |
 | [[concepts/glimpse-proportion\|Glimpse Proportion]] | SI-inspired measure: fraction of T-F tiles where estimated audibility exceeds a threshold (Cooke 2006). | 2026-07-21 |
-| [[concepts/dpt-fsnet\|DPT-FSNet]] | Dual-Path Transformer-based Full-Subband Network; 2D-conv encoder + dual-path transformer + 2D-conv decoder on T-F feature map | 2026-07-20 |
+| [[concepts/dpt-fsnet\|DPT-FSNet]] | Dual-path transformer full/sub-band fusion SE (Dang et al. ICASSP 2022): 0.88M params, PESQ 3.33 VBD / 3.53 DNS-reverb; base of Chen 2023's compressed streaming variant | 2026-11-22 |
 | [[concepts/dual-path-compression\|Dual-Path Compression]] | Grid-searched T x F compression combining frame-skip prediction + trainable Mel filters; outperforms single-path at 8x-16x | 2026-07-20 |
 | [[concepts/trainable-frequency-compression\|Trainable Frequency Compression]] | Learnable linear transform per band replacing fixed ERB/Mel triangle filters; >0.1 WB-PESQ gain at 8x-16x | 2026-07-20 |
 | [[concepts/frame-skip-prediction\|Frame-Skip Prediction]] | Run mask estimator once every r frames, copy mask to skipped frames; PostNet recovers +0.33 WB-PESQ at 8x | 2026-07-20 |
@@ -682,4 +682,6 @@
 | [[concepts/cmgan\|CMGAN]] | Conformer-based MetricGAN with shared magnitude/complex encoder, dual mask/RI decoders, and PESQ surrogate; 1.83M params and PESQ 3.41 on VoiceBank+DEMAND | 2026-11-22 |
 | [[concepts/two-stage-conformer\|Two-Stage Conformer]] | CMGAN's sequential time-then-frequency Conformer bottleneck; four blocks improve denoising quality before gains saturate | 2026-11-22 |
 | [[concepts/speech-super-resolution\|Speech Super-Resolution]] | Bandwidth extension through CMGAN's additive complex-TF residual; complex refinement improves waveform SNR at a magnitude-only LSD cost | 2026-11-22 |
+| [[concepts/dual-path-transformer\|Dual-Path Transformer]] | Transformer-operator dual-path family (DPTNet lineage): MHSA + GRU-replacing-FC FFN; axis assignments across separation, SE, and TSE | 2026-11-22 |
+| [[concepts/full-band-sub-band-fusion\|Full-Band and Sub-Band Fusion]] | SE paradigm combining per-bin temporal (sub-band) and per-frame spectral (full-band) modeling; FullSubNet lineage, reverberation advantage | 2026-11-22 |
 

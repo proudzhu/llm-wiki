@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-11-20
-updated: 2026-11-20
+updated: 2026-11-22
 sources:
+  - raw/papers/dang-2022-dpt-fsnet/full-text.md
   - raw/papers/fu-2019-metricgan/full-text.md
 tags:
   - evaluation-metric
@@ -48,3 +49,4 @@ This is the cleanest experimental separation of the two metrics in the corpus: S
 - [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN]] — the score-assignment experiment separating STOI's speech-content sensitivity from PESQ's noise sensitivity
 - [[sources/kim-2026-faster-enhancer|Kim 2026: faster-enhancer.c]] — STOI's 0–5 kHz observation band as a fullband-evaluation caveat
 - [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] — STOI's blindness to output-scale drift
+- [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — near-ceiling data point: STOI 0.96 on VoiceBank+DEMAND, 95.23% (with reverb) / 97.68% (no reverb) on DNS 2020

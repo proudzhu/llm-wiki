@@ -3,6 +3,7 @@ type: concept
 created: 2026-06-19
 updated: 2026-11-22
 sources:
+  - raw/papers/dang-2022-dpt-fsnet/full-text.md
   - raw/papers/braun-2021-loss-functions-speech-enhancement/full-text.md
   - raw/papers/fu-2019-metricgan/full-text.md
   - raw/papers/pascual-2017-segan/full-text.md
@@ -76,6 +77,7 @@ Worked example: concatenating $2Q{+}1$ log-magnitude spectra (161 frequency poin
 - [[concepts/hybrid-bss-anc-speech-enhancement|Hybrid BSS-ANC Speech Enhancement]]
 - [[concepts/scale-aware-snr|Scale-Aware SNR (SA-SNR)]]
 - [[concepts/dbccrn|DBCCRN]]
+- [[concepts/dpt-fsnet|DPT-FSNet]] — dual-path transformer on the STFT map: intra sub-band + inter full-band
 
 ## Related Sources
 
@@ -97,3 +99,4 @@ Worked example: concatenating $2Q{+}1$ log-magnitude spectra (161 frequency poin
 - [[sources/fu-2026-one-model-many-latencies|Fu et al. 2026: One Model, Many Latencies]] — makes latency a selectable parameter of one checkpoint (30 configurations; 40–80 ms algorithmic, 10–25 ms compute)
 - [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] — dual-branch complex CRN + SA-SNR loss; PESQ 3.16 on VoiceBank+DEMAND with near-zero scale error, streaming-safe without normalization
 - [[sources/abdulatif-2024-cmgan|Abdulatif, Cao & Yang 2024: CMGAN]] — [[concepts/cmgan|CMGAN]] unifies compressed magnitude/complex inputs, four sequential time–frequency Conformer blocks, decoupled mask and RI decoders, and PESQ-surrogate adversarial training in a 1.83 M-parameter offline model. The TASLP extension covers denoising, dereverberation, and additive-residual speech super-resolution, with PESQ 3.41 on VoiceBank+DEMAND and DNSMOS/listening tests on unseen distortions.
+- [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — dual-path transformer transplanted to the T-F domain; matched-complexity ablation shows frequency-domain input beats time-domain input by +0.36 PESQ; SOTA VoiceBank+DEMAND 3.33 / DNS 3.53 at 0.88 M params

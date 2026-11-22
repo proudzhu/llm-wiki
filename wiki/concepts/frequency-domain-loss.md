@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-05-23
-updated: 2026-11-21
+updated: 2026-11-22
 sources:
+  - raw/papers/dang-2022-dpt-fsnet/full-text.md
   - raw/papers/braun-2021-loss-functions-speech-enhancement/full-text.md
   - raw/papers/valin-2024-fargan/full-text.md
   - raw/papers/mustafa-2023-framewise-wavegan/full-text.md
@@ -110,6 +111,7 @@ Earlier entries in this section (Wang 2021's RI+Mag analysis, Zhao & Madhu's spe
 - **Window function**: The STFT window (e.g., Hamming) multiplied at the analysis stage must match the training configuration
 - **Frame size**: Larger analysis frames give better frequency resolution but reduce temporal detail
 - **Combination losses**: Many modern systems combine time-domain and frequency-domain losses (e.g., DEMUCS uses both)
+- **Dual-domain mixtures in T-F networks**: [[sources/dang-2022-dpt-fsnet|DPT-FSNet (Dang et al. 2022)]] applies the combination in the opposite direction — a frequency-domain network trained with $0.4$ waveform MSE $+ 0.6$ L1 on RI-part magnitudes — the same "mix both domains" recipe, reaching PESQ 3.33 on VoiceBank+DEMAND and 3.53 on DNS with reverb
 
 ## Related Concepts
 
@@ -138,3 +140,4 @@ Earlier entries in this section (Wang 2021's RI+Mag analysis, Zhao & Madhu's spe
 - [[sources/wang-2021-magnitude-phase-compensation|Wang, Wichern & Le Roux 2021: On the Compensation Between Magnitude and Phase in Speech Separation]] — the fundamental explanation of why magnitude terms improve perceptual metrics in RI/Wav losses
 - [[sources/nguyen-2023-predictive-plc|Nguyen, Nguyen & Khong 2023: Full-Band Blind Packet-Loss Concealment With Predictive Network]] — FRN trained end-to-end with the multi-resolution STFT loss alone ($\alpha = 0.3$ compression)
 - [[sources/westhausen-2022-tplcnet|Westhausen & Meyer 2022: tPLCnet — Real-Time Deep Packet Loss Concealment in the Time Domain]] — loss/window ablation on a PLC task: TF-domain magnitude and combined losses beat time-domain MAE by a wide margin (PLC-MOS 3.90 vs. 3.30)
+- [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — T-F-domain network with a 0.4 waveform-MSE + 0.6 RI-magnitude-L1 mixture; spectral term carries the larger weight

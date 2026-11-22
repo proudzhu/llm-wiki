@@ -3,6 +3,7 @@ type: concept
 created: 2026-06-19
 updated: 2026-11-22
 sources:
+  - raw/papers/dang-2022-dpt-fsnet/full-text.md
   - raw/papers/braun-2021-loss-functions-speech-enhancement/full-text.md
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/pascual-2017-segan/full-text.md
@@ -44,6 +45,7 @@ The VoiceBank-DEMAND benchmark has become a de facto standard for reporting PESQ
 | [[concepts/segan\|SEGAN]] | 2017 | 2.16 | GAN |
 | [[concepts/metricgan\|MetricGAN]] | 2019 | 2.86 | PESQ-optimized via learned surrogate |
 | MetricGAN+ | 2021 | 3.15 | metric-oriented loss |
+| [[concepts/dpt-fsnet\|DPT-FSNet]] | 2022 | 3.33 | Dual-path transformer full/sub-band fusion; 0.88 M params, discriminative dual-domain loss (no metric surrogate) |
 | [[concepts/cmgan|CMGAN]] | 2022; extended 2024 | 3.41 | Conformer-based MetricGAN; PESQ-surrogate loss weighted 0.01 alongside reconstruction losses — [[sources/abdulatif-2024-cmgan|TASLP extension]] |
 | MP-SENet | 2023 | 3.50 | Conformer TF backbone |
 | [[concepts/semamba|SEMamba]] | 2024 | 3.55 | [[concepts/mamba|Mamba]] replaces Conformer |
@@ -88,3 +90,4 @@ The consequence is visible in their own table: the PESQ-optimal mixture weight g
 - [[sources/laroche-2026-lisenet-embedded|Laroche & Olsson 2026: Beyond Model Size]] — on-device int8 PESQ 3.01 on VoiceBank-DEMAND (STM32N6 NPU): the deployment-domain PESQ comparison (quality after static quantization, measured against the FP32 graph)
 - [[sources/wu-2026-dbmif-multimodal-fusion|Wu et al. 2026: DBMIF]] — PESQ 2.70 for AC/BC fusion (best of nine), contrasted with DNSMOS 3.35 as the GAN-training effect
 - [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] — PESQ's blindness to output-scale drift; ScaleError + peak-normalized scaled test set as companion evaluation
+- [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — discriminative counterpoint on VoiceBank+DEMAND: waveform MSE + RI-magnitude L1 (no PESQ surrogate) reaches PESQ 3.33 at 0.88 M params

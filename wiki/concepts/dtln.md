@@ -1,8 +1,9 @@
 ---
 type: concept
 created: 2026-07-17
-updated: 2026-07-17
+updated: 2026-11-22
 sources:
+  - raw/papers/dang-2022-dpt-fsnet/full-text.md
   - raw/papers/seidel-2024-bark-scale-nn-residual-suppression/full-text.md
 tags:
   - speech-enhancement
@@ -59,3 +60,4 @@ Unlike hybrid AEC systems (e.g., [[sources/seidel-2024-bark-scale-nn-residual-su
 ## Related Sources
 
 - [[sources/seidel-2024-bark-scale-nn-residual-suppression\|Seidel, Mowlaee & Fingscheidt 2024]] — uses DTLN as a fully-data-driven reference baseline (4 LSTM 256 + FC sigmoid)
+- [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — DNS 2020 comparison: DTLN scores STOI 84.68% (with reverb) / 94.76% (no reverb), SI-SDR 10.53 / 16.34 dB, vs DPT-FSNet's 95.23 / 97.68% and 18.14 / 20.36 dB
