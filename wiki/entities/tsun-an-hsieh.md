@@ -17,6 +17,7 @@ tags:
 ## Key Contributions
 
 - Co-first author of "Boosting Objective Scores of a Speech Enhancement Model by MetricGAN Post-processing" (APSIPA ASC 2020) — causal Transformer with convolutional positional encoding, fine-tuned by MetricGAN to beat the DNS Challenge NSNet baseline on PESQ/STOI and P.808 MOS — [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020]]
+- Co-author of "MetricGAN+ — An Improved Version of MetricGAN for Speech Enhancement" (Interspeech 2021) — three domain-knowledge training techniques (noisy-speech discriminator targets, replay buffer 0.2, learnable sigmoid mask) lift MetricGAN to PESQ 3.15 on VoiceBank+DEMAND; released in SpeechBrain — [[sources/fu-2021-metricgan-plus|Fu et al. 2021]]
 
 ## Related Concepts
 
@@ -26,3 +27,4 @@ tags:
 ## Related Sources
 
 - [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020: Boosting Objective Scores by MetricGAN Post-Processing]]
+- [[sources/fu-2021-metricgan-plus|Fu et al. 2021: MetricGAN+ — An Improved Version of MetricGAN for Speech Enhancement]]

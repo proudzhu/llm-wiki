@@ -750,6 +750,10 @@
 | [[entities/pengyuan-zhang\|Pengyuan Zhang]] | Institute of Acoustics, CAS / UCAS — senior author of DPT-FSNet; speech and audio signal processing | 2026-11-22 |
 | [[entities/tsun-an-hsieh\|Tsun-An Hsieh]] | Academia Sinica — co-first author of the DNS 2020 MetricGAN post-processing system (causal Transformer + PESQ-surrogate fine-tuning) | 2026-11-22 |
 | [[entities/kuo-hsuan-hung\|Kuo-Hsuan Hung]] | Academia Sinica — co-first author of the DNS 2020 MetricGAN post-processing system (causal Transformer + PESQ-surrogate fine-tuning) | 2026-11-22 |
+| [[entities/cheng-yu\|Cheng Yu]] | Academia Sinica researcher; co-author of MetricGAN+ (Interspeech 2021) and MetricGAN post-processing (APSIPA ASC 2020). | 2026-11-22 |
+| [[entities/peter-plantinga\|Peter Plantinga]] | Ohio State researcher and SpeechBrain developer; co-author of MetricGAN+ (Interspeech 2021), the SpeechBrain-released metric-surrogate SE recipe. | 2026-11-22 |
+| [[entities/mirco-ravanelli\|Mirco Ravanelli]] | Mila researcher, initiator of the SpeechBrain toolkit; co-author of MetricGAN+ (Interspeech 2021). | 2026-11-22 |
+| [[entities/xugang-lu\|Xugang Lu]] | NICT Kyoto researcher in speech enhancement and robust ASR; co-author of MetricGAN+ (Interspeech 2021) and the TASLP 2018 direct-metric-optimization SE paper. | 2026-11-22 |
 
 ---
 
@@ -1752,6 +1756,7 @@
 | [[sources/abdulatif-2024-cmgan\|Abdulatif, Cao & Yang 2024]] | CMGAN combines a shared magnitude/complex spectrogram encoder, sequential time–frequency Conformer blocks, decoupled mask and complex decoders, and a PESQ-based MetricGAN discriminator for monaural speech enhancement. | 2026-11-22 |
 | [[sources/dang-2022-dpt-fsnet\|Dang, Chen & Zhang 2022]] | DPT-FSNet transfers the dual-path transformer from time-domain sequences to the STFT time-frequency map: the intra-transformer models sub-band information (the time sequence within each frequency bin) and the inter-transformer models full-band information (all frequency bins within each frame), realizing full-band/sub-band fusion inside one sequence model. | 2026-11-22 |
 | [[sources/fu-2020-metricgan-post-processing\|Fu et al. 2020]] | MetricGAN becomes a general post-processing module: an L1-pre-trained causal Transformer with convolutional positional encoding is fine-tuned against a PESQ surrogate, gaining +0.13 PESQ at zero inference cost and beating the DNS 2020 NSNet baseline objectively and on P.808 MOS. | 2026-11-22 |
+| [[sources/fu-2021-metricgan-plus\|Fu et al. 2021]] | MetricGAN+ adds three training techniques to MetricGAN — noisy-speech discriminator targets, a load-bearing experience-replay buffer (0.2), and a per-frequency learnable sigmoid mask — lifting the unchanged BLSTM to PESQ 3.15 SOTA on VoiceBank+DEMAND; released in SpeechBrain. | 2026-11-22 |
 
 ---
 
@@ -1810,10 +1815,10 @@
 
 ## Statistics
 
-- **Total pages**: 1759
-- **Entities**: 740
+- **Total pages**: 1764
+- **Entities**: 744
 - **Concepts**: 681
-- **Sources**: 303
+- **Sources**: 304
 - **Synthesis**: 25
 - **Queries**: 10
 - **Last updated**: 2026-11-22

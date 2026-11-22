@@ -19,6 +19,7 @@ sources:
   - raw/papers/li-2024-dbccrn/full-text.md
   - raw/papers/abdulatif-2024-cmgan/full-text.md
   - raw/papers/fu-2020-metricgan-post-processing/full-text.md
+  - raw/papers/fu-2021-metricgan-plus/full-text.md
 tags:
   - speech-processing
   - audio-enhancement
@@ -103,3 +104,4 @@ Worked example: concatenating $2Q{+}1$ log-magnitude spectra (161 frequency poin
 - [[sources/abdulatif-2024-cmgan|Abdulatif, Cao & Yang 2024: CMGAN]] — [[concepts/cmgan|CMGAN]] unifies compressed magnitude/complex inputs, four sequential time–frequency Conformer blocks, decoupled mask and RI decoders, and PESQ-surrogate adversarial training in a 1.83 M-parameter offline model. The TASLP extension covers denoising, dereverberation, and additive-residual speech super-resolution, with PESQ 3.41 on VoiceBank+DEMAND and DNSMOS/listening tests on unseen distortions.
 - [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — dual-path transformer transplanted to the T-F domain; matched-complexity ablation shows frequency-domain input beats time-domain input by +0.36 PESQ; SOTA VoiceBank+DEMAND 3.33 / DNS 3.53 at 0.88 M params
 - [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020: MetricGAN Post-Processing]] — metric-driven fine-tuning as a backbone-agnostic post-processing stage; causal Transformer with convolutional positional encoding beats the DNS 2020 NSNet baseline objectively and subjectively
+- [[sources/fu-2021-metricgan-plus|Fu et al. 2021: MetricGAN+]] — three training techniques (noisy-speech discriminator targets, replay buffer 0.2, learnable sigmoid mask) take the metric-surrogate line to PESQ 3.15 SOTA with a plain BLSTM backbone; released in SpeechBrain

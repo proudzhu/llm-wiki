@@ -6,6 +6,7 @@ sources:
   - raw/papers/dang-2022-dpt-fsnet/full-text.md
   - raw/papers/fu-2019-metricgan/full-text.md
   - raw/papers/fu-2020-metricgan-post-processing/full-text.md
+  - raw/papers/fu-2021-metricgan-plus/full-text.md
 tags:
   - evaluation-metric
   - speech-intelligibility
@@ -52,3 +53,4 @@ This is the cleanest experimental separation of the two metrics in the corpus: S
 - [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] — STOI's blindness to output-scale drift
 - [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — near-ceiling data point: STOI 0.96 on VoiceBank+DEMAND, 95.23% (with reverb) / 97.68% (no reverb) on DNS 2020
 - [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020: MetricGAN Post-Processing]] — STOI's band limit as a *training* hazard: surrogate fine-tuning can generate high-frequency noise the metric ignores; STOI still rises 0.932 → 0.946 as a side effect of PESQ optimization
+- [[sources/fu-2021-metricgan-plus|Fu et al. 2021: MetricGAN+]] — optimizes PESQ only; the STOI counterpart is separate work (iMetricGAN, Interspeech 2020), cited as evidence the metric-surrogate framework transfers across metrics

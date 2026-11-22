@@ -15,6 +15,7 @@ sources:
   - raw/papers/fu-2026-one-model-many-latencies/full-text.md
   - raw/papers/li-2024-dbccrn/full-text.md
   - raw/papers/abdulatif-2024-cmgan/full-text.md
+  - raw/papers/fu-2021-metricgan-plus/full-text.md
 tags:
   - dataset
   - speech-enhancement
@@ -44,7 +45,7 @@ The noisy baseline scores PESQ = 1.97, CSIG = 3.35, CBAK = 2.44, COVL = 2.63, ST
 |--------|------|------|-------|
 | [[concepts/segan\|SEGAN]] | 2.16 | 2017 | GAN-based; the benchmark's original configuration and first neural baseline |
 | [[concepts/metricgan\|MetricGAN]] | 2.86 | 2019 | **Discriminator as learned metric surrogate** — first system trained directly against PESQ on this benchmark (CSIG 3.99 / CBAK 3.18 / COVL 3.42); distinct from the MetricGAN+ row below |
-| MetricGAN+ | 3.15 | 2021 | metric-oriented loss |
+| [[sources/fu-2021-metricgan-plus\|MetricGAN+]] | 3.15 | 2021 | MetricGAN + three training techniques (noisy-speech $D$ targets, replay 0.2, learnable sigmoid $\beta = 1.2$); CSIG 4.14 / CBAK 3.16 / COVL 3.64 — CBAK trails rivals because the 0.05 mask floor leaves residual noise |
 | [[concepts/dpt-fsnet\|DPT-FSNet]] | 3.33 | 2022 | Dual-path transformer full/sub-band fusion, 0.88 M params; CSIG 4.58 / CBAK 3.72 / COVL 4.00 / STOI 0.96 — [[sources/dang-2022-dpt-fsnet\|Dang et al. 2022]] |
 | [[concepts/cmgan|CMGAN]] | 3.41 | 2022; extended 2024 | Conformer-based MetricGAN, 1.83 M params; CSIG 4.63 / CBAK 3.94 / COVL 4.12 / SSNR 11.10 / STOI 0.96 — [[sources/abdulatif-2024-cmgan|TASLP extension]] |
 | MP-SENet | 3.50 | 2023 | Conformer TF backbone |
@@ -79,3 +80,4 @@ A 48 kHz variant of the benchmark appears in [[sources/kim-2026-faster-enhancer|
 - [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN]] — PESQ 2.86 / CSIG 3.99 / CBAK 3.18 / COVL 3.42, best of six compared systems: the first entry on this benchmark trained against a metric rather than a target signal, and the origin of the MetricGAN+ line (whose 3.15 row must not be conflated with it)
 - [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] — PESQ 3.16 / STOI 0.940 / SSNR 10.98 at 8.31 M params; introduces the peak-normalized **scaled test set** variant of this benchmark to expose scale-sensitive losses ([[concepts/scale-error|ScaleError]])
 - [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — PESQ 3.33 / STOI 0.96 at 0.88 M params (fewest among its compared systems); the paper states 872 test utterances where the canonical release has 824 — an apparent typo, scores unaffected
+- [[sources/fu-2021-metricgan-plus|Fu et al. 2021: MetricGAN+]] — PESQ 3.15 / CSIG 4.14 / CBAK 3.16 / COVL 3.64 at an unchanged BLSTM backbone; the cumulative ablation (2.86 → 2.95 → 3.02 → 3.05 → 3.15) and replay-portion study are the benchmark's cleanest loss-technique isolation

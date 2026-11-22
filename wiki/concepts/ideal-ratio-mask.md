@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-06-01
-updated: 2026-11-20
+updated: 2026-11-22
 sources:
   - raw/papers/liu-2025-pcen-mask-vad-speech-enhancement/full-text.md
   - raw/papers/yan-2025-lisennet/full-text.md
   - raw/papers/zhao-2025-lightweight-transformer/full-text.md
   - raw/papers/fu-2019-metricgan/full-text.md
+  - raw/papers/fu-2021-metricgan-plus/full-text.md
 tags:
   - speech-separation
   - time-frequency-masking
@@ -57,3 +58,4 @@ The IRM emerged as one of the preferred training targets. Masking-based targets 
 - [[sources/yan-2025-lisennet|Yan, Zhang, Fan, Zhou & Liu 2025: LiSenNet]] — magnitude mask estimated via a [[concepts/learnable-sigmoid-mask|learnable Sigmoid]] with per-frequency slope, applied to the power-compressed magnitude before [[concepts/gla-phase-refinement|GLA phase refinement]]
 - [[sources/liu-2025-pcen-mask-vad-speech-enhancement|Liu et al. 2025: PCEN-Based Mask Thresholding and VAD]] — PCEN-thresholded IRM training target
 - [[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025: Study of Lightweight Transformer Architectures for Single-Channel Speech Enhancement]] — compressed-domain real IRM ($c=0.3$) benchmarked against complex-valued RI/MCS masking and mapping in one architecture
+- [[sources/fu-2021-metricgan-plus|Fu et al. 2021: MetricGAN+]] — relaxes the $[0,1]$ sigmoid bound of the magnitude-mask head: phase differences make $\lvert X\rvert \neq \lvert Y\rvert + \lvert N\rvert$, so the ideal magnitude mask can exceed 1; the learnable sigmoid uses $\beta = 1.2$ with per-bin learned $\alpha$ (most bins ≈ 0.5, near-linear; high-frequency bins ≫ 1, binary-like)

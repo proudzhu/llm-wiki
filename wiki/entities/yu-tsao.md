@@ -20,6 +20,7 @@ tags:
 - Co-author of "One Model, Many Latencies: Universal Speech Enhancement for Diverse Real-Time Applications" (arXiv preprint 2606.25621 (v3), 2026) — one-for-all real-time universal speech enhancement with selectable algorithmic and computational latency — [[sources/fu-2026-one-model-many-latencies|Fu et al. 2026]]
 - Co-author of "MetricGAN: Generative Adversarial Networks based Black-box Metric Scores Optimization for Speech Enhancement" (ICML 2019) — the discriminator-as-metric-surrogate formulation that trains a generator directly against PESQ/STOI without any knowledge of the metrics' internals — [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019]]
 - Co-author of "Boosting Objective Scores of a Speech Enhancement Model by MetricGAN Post-processing" (APSIPA ASC 2020) — senior author of the DNS 2020 system applying MetricGAN as a post-hoc fine-tuning stage for a causal Transformer enhancer — [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020]]
+- Co-author of "MetricGAN+ — An Improved Version of MetricGAN for Speech Enhancement" (Interspeech 2021) — three domain-knowledge training techniques (noisy-speech discriminator targets, replay buffer 0.2, learnable sigmoid mask) lift MetricGAN to PESQ 3.15 on VoiceBank+DEMAND; released in SpeechBrain — [[sources/fu-2021-metricgan-plus|Fu et al. 2021]]
 
 
 ## Related Sources
@@ -27,3 +28,4 @@ tags:
 - [[sources/fu-2026-one-model-many-latencies|Fu et al. 2026: One Model, Many Latencies: Universal Speech Enhancement for Diverse Real-Time Applications]]
 - [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN — Black-Box Metric Score Optimization for Speech Enhancement]]
 - [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020: Boosting Objective Scores by MetricGAN Post-Processing]]
+- [[sources/fu-2021-metricgan-plus|Fu et al. 2021: MetricGAN+ — An Improved Version of MetricGAN for Speech Enhancement]]

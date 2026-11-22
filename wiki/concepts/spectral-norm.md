@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-07-12
-updated: 2026-11-20
+updated: 2026-11-22
 sources:
   - raw/papers/stewart-1993-early-history-svd/full-text.md
   - raw/papers/fu-2019-metricgan/full-text.md
   - raw/papers/fu-2020-metricgan-post-processing/full-text.md
+  - raw/papers/fu-2021-metricgan-plus/full-text.md
 tags:
   - linear-algebra
   - matrix-norm
@@ -57,3 +58,4 @@ Beyond perturbation theory, the spectral norm is the basis of **spectral normali
 - Miyato, T., Kataoka, T., Koyama, M., & Yoshida, Y. *Spectral Normalization for Generative Adversarial Networks*. ICLR, 2018.
 - [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN]] — applies spectral normalization to a metric-regressing discriminator, for smoothness of the estimated metric surface as well as training stability
 - [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020: MetricGAN Post-Processing]] — 1-Lipschitz constraint on the CNN Quality-Net PESQ surrogate during post-hoc fine-tuning
+- [[sources/fu-2021-metricgan-plus|Fu et al. 2021: MetricGAN+]] — same smoothness rationale on a smaller uniform discriminator (4 × Conv2D, 15 filters, 5×5 kernels, global average pooling to 15 features), spectrally normalized to keep the PESQ surrogate 1-Lipschitz

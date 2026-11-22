@@ -744,4 +744,8 @@
 | [[entities/pengyuan-zhang\|Pengyuan Zhang]] | Institute of Acoustics, CAS / UCAS — senior author of DPT-FSNet; speech and audio signal processing | 2026-11-22 |
 | [[entities/tsun-an-hsieh\|Tsun-An Hsieh]] | Academia Sinica — co-first author of the DNS 2020 MetricGAN post-processing system (causal Transformer + PESQ-surrogate fine-tuning) | 2026-11-22 |
 | [[entities/kuo-hsuan-hung\|Kuo-Hsuan Hung]] | Academia Sinica — co-first author of the DNS 2020 MetricGAN post-processing system (causal Transformer + PESQ-surrogate fine-tuning) | 2026-11-22 |
+| [[entities/cheng-yu\|Cheng Yu]] | Academia Sinica researcher; co-author of MetricGAN+ (Interspeech 2021) and MetricGAN post-processing (APSIPA ASC 2020). | 2026-11-22 |
+| [[entities/peter-plantinga\|Peter Plantinga]] | Ohio State researcher and SpeechBrain developer; co-author of MetricGAN+ (Interspeech 2021), the SpeechBrain-released metric-surrogate SE recipe. | 2026-11-22 |
+| [[entities/mirco-ravanelli\|Mirco Ravanelli]] | Mila researcher, initiator of the SpeechBrain toolkit; co-author of MetricGAN+ (Interspeech 2021). | 2026-11-22 |
+| [[entities/xugang-lu\|Xugang Lu]] | NICT Kyoto researcher in speech enhancement and robust ASR; co-author of MetricGAN+ (Interspeech 2021) and the TASLP 2018 direct-metric-optimization SE paper. | 2026-11-22 |
 

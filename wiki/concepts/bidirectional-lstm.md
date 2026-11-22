@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-07-18
-updated: 2026-11-20
+updated: 2026-11-22
 sources:
   - raw/papers/heymann-2016-neural-spectral-mask-beamforming/full-text.md
   - raw/papers/mienye-2024-rnn-comprehensive-review/full-text.md
   - raw/papers/fu-2019-metricgan/full-text.md
+  - raw/papers/fu-2021-metricgan-plus/full-text.md
 tags:
   - deep-learning
   - recurrent-neural-network
@@ -79,3 +80,4 @@ For streaming speech enhancement or AEC applications (e.g., [[concepts/percepnet
 - [[sources/mienye-2024-rnn-comprehensive-review\|Mienye, Swart & Obaido 2024: RNN Comprehensive Review]] — surveys BiLSTM applications across sentiment analysis, bioinformatics, and anomaly detection
 - [[sources/heymann-2016-neural-spectral-mask-beamforming|Heymann, Drude & Haeb-Umbach 2016: Neural Network Based Spectral Mask Estimation for Acoustic Beamforming]] — BLSTM spectral-mask estimation for beamforming; temporal context most valuable under noise-aware training
 - [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN]] — a 2-layer BLSTM mask estimator held fixed as a fixture across four training objectives (L1 / CGAN / RL / metric surrogate), isolating the loss function from the architecture
+- [[sources/fu-2021-metricgan-plus|Fu et al. 2021: MetricGAN+]] — same 2-layer BLSTM (200 units) fixture as MetricGAN, mask head swapped to a learnable sigmoid: PESQ 2.71 (MSE) → 3.15 (metric surrogate + training techniques) on VoiceBank+DEMAND, beating attention and phase-aware systems without changing the backbone

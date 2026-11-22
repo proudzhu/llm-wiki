@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-09-03
-updated: 2026-11-20
+updated: 2026-11-22
 sources:
   - raw/papers/shetu-2026-generative-discriminative-comparison/full-text.md
   - raw/papers/pascual-2017-segan/full-text.md
   - raw/papers/fu-2019-metricgan/full-text.md
+  - raw/papers/fu-2021-metricgan-plus/full-text.md
 tags:
   - speech-enhancement
   - generative-models
@@ -62,3 +63,4 @@ Key insight: **the training objective, not the architecture, drives the gains** 
 - [[sources/shetu-2026-generative-discriminative-comparison|Shetu, Habets & Brendel 2026: Generative vs. Discriminative SE]]
 - [[sources/lugo-2026-diffvqe|Lugo et al. 2026: DiffVQE]] — single-step hybrid discriminative+generative design, a middle route
 - [[sources/xu-2026-drifting-models-speech-enhancement|Xu et al. 2026: Drifting Models]] — one-step generative SE without trajectories
+- [[sources/fu-2021-metricgan-plus|Fu et al. 2021: MetricGAN+]] — loss-over-architecture evidence at benchmark scale: the unchanged BLSTM magnitude-mask generator reaches PESQ 3.15 (vs 2.71 with MSE), beating attention-based (T-GSA 3.06) and phase-aware (DEMUCS 3.07, PHASEN 2.99) systems

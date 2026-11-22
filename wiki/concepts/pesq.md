@@ -17,6 +17,7 @@ sources:
   - raw/papers/li-2024-dbccrn/full-text.md
   - raw/papers/abdulatif-2024-cmgan/full-text.md
   - raw/papers/fu-2020-metricgan-post-processing/full-text.md
+  - raw/papers/fu-2021-metricgan-plus/full-text.md
 tags:
   - evaluation-metric
   - speech-quality
@@ -46,7 +47,7 @@ The VoiceBank-DEMAND benchmark has become a de facto standard for reporting PESQ
 |--------|------|------|--------|
 | [[concepts/segan\|SEGAN]] | 2017 | 2.16 | GAN |
 | [[concepts/metricgan\|MetricGAN]] | 2019 | 2.86 | PESQ-optimized via learned surrogate |
-| MetricGAN+ | 2021 | 3.15 | metric-oriented loss |
+| [[sources/fu-2021-metricgan-plus\|MetricGAN+]] | 2021 | 3.15 | MetricGAN + noisy-speech $D$ targets, replay buffer 0.2, learnable sigmoid ($\beta = 1.2$); BLSTM backbone unchanged |
 | [[concepts/dpt-fsnet\|DPT-FSNet]] | 2022 | 3.33 | Dual-path transformer full/sub-band fusion; 0.88 M params, discriminative dual-domain loss (no metric surrogate) |
 | [[concepts/cmgan|CMGAN]] | 2022; extended 2024 | 3.41 | Conformer-based MetricGAN; PESQ-surrogate loss weighted 0.01 alongside reconstruction losses — [[sources/abdulatif-2024-cmgan|TASLP extension]] |
 | MP-SENet | 2023 | 3.50 | Conformer TF backbone |
@@ -94,3 +95,4 @@ The consequence is visible in their own table: the PESQ-optimal mixture weight g
 - [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] — PESQ's blindness to output-scale drift; ScaleError + peak-normalized scaled test set as companion evaluation
 - [[sources/dang-2022-dpt-fsnet|Dang, Chen & Zhang 2022: DPT-FSNet]] — discriminative counterpoint on VoiceBank+DEMAND: waveform MSE + RI-magnitude L1 (no PESQ surrogate) reaches PESQ 3.33 at 0.88 M params
 - [[sources/fu-2020-metricgan-post-processing|Fu et al. 2020: MetricGAN Post-Processing]] — PESQ-surrogate fine-tuning of a converged Transformer (+0.138 PESQ on DNS 2020 at unchanged complexity); documents the high-frequency-noise artifact PESQ cannot penalize
+- [[sources/fu-2021-metricgan-plus|Fu et al. 2021: MetricGAN+]] — the +0.29 PESQ successor (2.86 → 3.15 SOTA): noisy-speech discriminator targets, replay buffer 0.2 against surrogate forgetting, learnable sigmoid mask; also documents the trade — CBAK 3.16 trails rivals because the 0.05 mask floor leaves residual noise
