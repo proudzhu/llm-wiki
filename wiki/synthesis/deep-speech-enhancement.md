@@ -1,7 +1,7 @@
 ---
 type: synthesis
 created: 2026-08-04
-updated: 2026-11-21
+updated: 2026-11-22
 sources:
   - raw/papers/braun-2021-loss-functions-speech-enhancement/full-text.md
   - raw/papers/fu-2019-metricgan/full-text.md
@@ -46,6 +46,7 @@ sources:
   - raw/papers/zhao-2025-lightweight-transformer/full-text.md
   - raw/papers/ronneberger-2015-u-net/full-text.md
   - raw/papers/li-2024-dbccrn/full-text.md
+  - raw/papers/abdulatif-2024-cmgan/full-text.md
 tags:
   - speech-enhancement
   - single-channel
@@ -106,6 +107,7 @@ The single-channel representative-model matrix consolidating all four layers app
 | [[sources/rong-2024-gtcrn-speech-enhancement-ultralow\|Rong et al. 2024 (GTCRN)]] | 2024 | Efficiency | 23.7K params via grouped conv + grouped RNN + ERB compression |
 | [[sources/zhao-2024-sicrn\|Zhao, He & Zhang 2024 (SICRN)]] | 2024 | Backbone | S4ND state-space model + inplace conv; near-FullSubNet at 0.14× MACs |
 | [[sources/chao-2024-mamba-speech-enhancement\|Chao et al. 2024 (SEMamba)]] | 2024 | Backbone | First Mamba-based SE; SOTA PESQ 3.69 on VoiceBank-DEMAND with PCS |
+| [[sources/abdulatif-2024-cmgan\|Abdulatif, Cao & Yang 2024 (CMGAN)]] | 2024 | Architecture + training objective | Shared $c=0.3$ magnitude/RI encoder, four sequential time→frequency Conformer blocks, decoupled magnitude-mask and complex-residual decoders, and a 0.01-weighted PESQ surrogate added to reconstruction losses; 1.83M params, PESQ 3.41 / SSNR 11.10 dB on VBD, plus dereverberation and additive-residual super-resolution |
 | [[sources/li-2024-dbccrn\|Li, Sun, Zhang & Van hamme 2024 (DBCCRN)]] | 2024 | Training objective / encoder-decoder | [[concepts/scale-aware-snr\|SA-SNR]] loss repairs SI-SNR/OSI-SNR scale blindness (ScaleError 0.014% vs 16–21%); dual-branch speech+noise complex CRN with bridge blocks, PESQ 3.16 VBD at 8.31M params |
 | [[sources/wang-2025-adaptive-convolution-cnn-speech-enhancement\|Wang et al. 2025 (AdaptCRN)]] | 2025 | Efficiency | Adaptive (dynamic) convolution in the CRN family; 135K params, PESQ 2.98 |
 | [[sources/zhu-2026-g-map-se-guided-speech-enhancement\|Zhu et al. 2026 (G-MaP-SE)]] | 2026 | Conditioning | GMM prior matching refines noisy speaker embeddings for PSE |
@@ -141,7 +143,7 @@ The single clearest lineage in deep SE is the **monotonic generalization of the 
 
 The key relation: **CRM = DF with filter order $N=1$ and look-ahead $l=0$**. DF is a strict generalization — it can recover degradations (notch-like zeros, frame zeroing) that pointwise masks structurally cannot, and it outperforms CRMs across all FFT sizes (5–30 ms latency), with the gap widest at low frequency resolution where CRMs degrade. CCM extends in the other direction — across the **frequency** neighborhood — using three weight components at 120° in the complex plane ($1,\ -\tfrac{1}{2}+j\tfrac{\sqrt{3}}{2},\ -\tfrac{1}{2}-j\tfrac{\sqrt{3}}{2}$) for stable complex reconstruction.
 
-**Takeaway**: the field moved from "estimate a gain per bin" to "estimate a filter per bin." Every modern competitive TF-domain system (DeepFilterNet, DeepVQE, DCCRN+) uses a filter-style target rather than a pointwise mask.
+**Takeaway**: the dominant trend is from "estimate a gain per bin" to "estimate a filter per bin", but it is not universal. [[sources/abdulatif-2024-cmgan|CMGAN (Abdulatif, Cao & Yang 2024)]] is a direct counterexample to an every-modern-system claim: a pointwise multiplicative magnitude mask **plus a decoupled RI residual decoder** reaches PESQ 3.41 and SSNR 11.10 dB on VBD, whereas replacing its residual with a cIRM scores 3.28 and 10.40 dB. The architectural lesson is therefore broader than larger filter support: separating magnitude masking from complex refinement can itself repair the compensation problem.
 
 ## Insight 2: Time-Domain vs TF-Domain Converged on a Hybrid (Time-Domain Arch + Frequency Loss)
 
@@ -283,6 +285,8 @@ The generative branch opens with [[sources/pascual-2017-segan|SEGAN (2017)]]: th
 
 The branch's first major revision was not a new architecture but a **redefinition of the discriminator**. [[sources/fu-2019-metricgan|MetricGAN (2019)]] measured the conventional real/fake adversarial term and found it worthless for SE — at identical BLSTM capacity, IRM(CGAN) scored 2.002 PESQ vs. IRM($L_1$)'s 2.033, with no listener preference either way — and concluded that the problem is *what $D$ is being asked to discriminate*. Regressing $D$ onto the evaluation metric instead (see [[concepts/metricgan|MetricGAN]], [[concepts/black-box-metric-optimization|Black-Box Metric Score Optimization]]) moved the same generator to 2.133 PESQ / 0.768 STOI. From here the GAN objective in SE splits permanently: the diffusion/flow/consistency family below pursues *distribution modelling*, while the metric-surrogate family pursues *metric maximization*, and by 2026 the latter is the more common use of adversarial machinery in SE (MetricGAN+, CMGAN, and the auxiliary PESQ proxies in LiSenNet and FastEnhancer).
 
+[[sources/abdulatif-2024-cmgan|CMGAN (2022; TASLP 2024)]] is the intermediate point between MetricGAN and the later one-step-GAN comparisons: it keeps reconstruction losses and adds the PESQ surrogate at weight **0.01**, rather than training the generator on the surrogate alone. Its ablations isolate the mechanism — no discriminator: PESQ 3.24; patch discriminator: 3.28; frozen PESQ surrogate: 3.23; full adversarial CMGAN: **3.41**. MetricGAN+ supervision reaches 3.44 PESQ but drops SSNR from 11.10 to 9.83 dB, so surrogate co-adaptation and metric choice are independent design variables, not a guarantee of uniform quality. CMGAN's DNSMOS tests on unseen noise and reverberation plus its listening-test win also provide early single-step-GAN evidence for the generalization claim later tested more systematically by Shetu et al. 2026.
+
 [[concepts/diffusion-models-for-speech\|Diffusion models]] established SOTA SE quality via score-based reverse dynamics, but their iterative inference (10–100 NFE) was a real-time blocker. The 2026 corpus shows the one-step barrier finally crossed:
 
 | Method | NFE | PESQ (VB-DEMAND) | Approach |
@@ -321,6 +325,7 @@ Consolidating the four dataflow layers (input / output target / encoder-decoder 
 | CRN (2018) | Complex STFT (RI) | cRM | CED + transposed conv + skips | LSTM bottleneck | 17.58M |
 | DPCRN (2021) | Complex spectrum | Mask | Symmetric conv codec | Dual-path RNN | **0.72M / 0.77 GMAC/s** |
 | DeepFilterNet (2022) | ERB bands + complex (≤ f_DF) | ERB gains + Deep Filtering (N-th-order complex FIR) | ERB codec + DF head | Grouped conv/GRU | Ultralight; multi-latency |
+| [[concepts/cmgan\|CMGAN]] (2022; TASLP 2024) | Power-compressed magnitude + RI ($c=0.3$) | Magnitude mask + RI residual (**dual decoders**) | Shared conv/dilated-DenseNet encoder + mask/complex decoders | **4 × time→frequency Conformer** | **1.83M**; non-causal; PESQ 3.41 / SSNR 11.10 dB |
 | MP-SENet (2023) | log1p magnitude + phase | Magnitude + phase (**dual decoders**) | DenseNet encoder + dual decoders | Conformer TF blocks | ~2.6M |
 | GTCRN (2024) | ERB-compressed 64 bands | cRM | Band-Merge/GT-Conv + Band-Split | G-DPRNN (grouped dual-path GRU) | **23.7K / 39.6 MMAC/s** |
 | LiSenNet (2025) | Sub-band-strided spectrum | Mask | Sub-band conv codec | Causal dual-path GRU + noise detector | 37k / 56M; PESQ 3.07 |

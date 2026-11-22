@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-11-20
+updated: 2026-11-22
 sources:
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
   - raw/papers/pascual-2017-segan/full-text.md
@@ -13,6 +13,7 @@ sources:
   - raw/papers/zhao-2025-lightweight-transformer/full-text.md
   - raw/papers/fu-2026-one-model-many-latencies/full-text.md
   - raw/papers/li-2024-dbccrn/full-text.md
+  - raw/papers/abdulatif-2024-cmgan/full-text.md
 tags:
   - dataset
   - speech-enhancement
@@ -43,7 +44,7 @@ The noisy baseline scores PESQ = 1.97, CSIG = 3.35, CBAK = 2.44, COVL = 2.63, ST
 | [[concepts/segan\|SEGAN]] | 2.16 | 2017 | GAN-based; the benchmark's original configuration and first neural baseline |
 | [[concepts/metricgan\|MetricGAN]] | 2.86 | 2019 | **Discriminator as learned metric surrogate** — first system trained directly against PESQ on this benchmark (CSIG 3.99 / CBAK 3.18 / COVL 3.42); distinct from the MetricGAN+ row below |
 | MetricGAN+ | 3.15 | 2021 | metric-oriented loss |
-| CMGAN | 3.41 | 2022 | conformal metric GAN |
+| [[concepts/cmgan|CMGAN]] | 3.41 | 2022; extended 2024 | Conformer-based MetricGAN, 1.83 M params; CSIG 4.63 / CBAK 3.94 / COVL 4.12 / SSNR 11.10 / STOI 0.96 — [[sources/abdulatif-2024-cmgan|TASLP extension]] |
 | MP-SENet | 3.50 | 2023 | Conformer TF backbone |
 | [[concepts/dbccrn|DBCCRN]] + SA-SNR | 3.16 | 2024 | dual-branch complex CRN, 8.31 M params; ScaleError 0.014% |
 | [[concepts/semamba|SEMamba]] | 3.55 | 2024 | [[concepts/mamba|Mamba]] replaces Conformer |

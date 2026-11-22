@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-11-21
-updated: 2026-11-21
+updated: 2026-11-22
 sources:
   - raw/papers/braun-2021-loss-functions-speech-enhancement/full-text.md
   - raw/papers/zhao-2026-spectrally-adaptive-loss/full-text.md
   - raw/papers/westhausen-2022-tplcnet/full-text.md
+  - raw/papers/abdulatif-2024-cmgan/full-text.md
 tags:
   - loss-function
   - speech-enhancement
@@ -65,3 +66,4 @@ Two structural observations follow from the table:
 - [[sources/braun-2021-loss-functions-speech-enhancement|Braun & Tashev 2021: A Consolidated View of Loss Functions for Supervised Deep Learning-Based Speech Enhancement]] — defines eq. (21), sweeps $\beta$ per metric pair, and establishes the always-improves result
 - [[sources/zhao-2026-spectrally-adaptive-loss|Zhao & Madhu 2026: Spectrally Adaptive Loss for Streaming Speech Enhancement]] — adopts $\lambda=0.3$ as the baseline scalar mixture and diagnoses its spectral non-uniformity
 - [[sources/westhausen-2022-tplcnet|Westhausen & Meyer 2022: tPLCnet]] — $\alpha=0.1$ mixed magnitude+complex MAE for PLC; magnitude-only matches it
+- [[sources/abdulatif-2024-cmgan|Abdulatif, Cao & Yang 2024: CMGAN]] — [[concepts/cmgan|CMGAN]] instantiates the mixture on $c=0.3$ power-compressed spectra as $\mathcal L_{TF}=0.7\mathcal L_{Mag}+0.3\mathcal L_{RI}$, selected by grid search. The total generator objective adds waveform $L_1$ and a 0.01-weighted PESQ-surrogate term. Removing waveform loss raises PESQ slightly (3.41 → 3.45) but costs 1.39 dB SSNR, demonstrating that the spectral mixture alone does not control waveform-domain quality.

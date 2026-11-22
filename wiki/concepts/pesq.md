@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-11-21
+updated: 2026-11-22
 sources:
   - raw/papers/braun-2021-loss-functions-speech-enhancement/full-text.md
   - raw/papers/chao-2024-mamba-speech-enhancement/full-text.md
@@ -14,6 +14,7 @@ sources:
   - raw/papers/laroche-2026-lisenet-embedded/full-text.md
   - wiki/sources/wu-2026-dbmif-multimodal-fusion.md
   - raw/papers/li-2024-dbccrn/full-text.md
+  - raw/papers/abdulatif-2024-cmgan/full-text.md
 tags:
   - evaluation-metric
   - speech-quality
@@ -43,7 +44,7 @@ The VoiceBank-DEMAND benchmark has become a de facto standard for reporting PESQ
 | [[concepts/segan\|SEGAN]] | 2017 | 2.16 | GAN |
 | [[concepts/metricgan\|MetricGAN]] | 2019 | 2.86 | PESQ-optimized via learned surrogate |
 | MetricGAN+ | 2021 | 3.15 | metric-oriented loss |
-| CMGAN | 2022 | 3.41 | conformal metric GAN |
+| [[concepts/cmgan|CMGAN]] | 2022; extended 2024 | 3.41 | Conformer-based MetricGAN; PESQ-surrogate loss weighted 0.01 alongside reconstruction losses — [[sources/abdulatif-2024-cmgan|TASLP extension]] |
 | MP-SENet | 2023 | 3.50 | Conformer TF backbone |
 | [[concepts/semamba|SEMamba]] | 2024 | 3.55 | [[concepts/mamba|Mamba]] replaces Conformer |
 | **[[concepts/semamba|SEMamba]] (+PCS)** | 2024 | **3.69** | + [[concepts/perceptual-contrast-stretching|PCS]] — current SOTA |

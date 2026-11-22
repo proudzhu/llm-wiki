@@ -1,7 +1,7 @@
 ---
 type: source
 created: 2026-11-20
-updated: 2026-11-20
+updated: 2026-11-22
 sources:
   - raw/papers/pascual-2017-segan/full-text.md
   - https://doi.org/10.21437/Interspeech.2017-1428
@@ -196,6 +196,10 @@ Absolute MOS differences are wide because the test SNR varies a lot, so the pape
 ## Related Synthesis
 
 - [[synthesis/deep-speech-enhancement|Deep Speech Enhancement: Architectural & Methodological Evolution]] — SEGAN supplies the origin point of the time-domain axis (Insight 2) and of the generative/adversarial axis (Insight 7)
+
+## Related Sources
+
+- [[sources/abdulatif-2024-cmgan|Abdulatif, Cao & Yang 2024: CMGAN]] — includes SEGAN as the waveform-domain GAN baseline on VoiceBank+DEMAND (PESQ 2.16); CMGAN instead combines compressed complex-TF reconstruction with a PESQ-surrogate discriminator and reaches PESQ 3.41.
 
 ## References
 

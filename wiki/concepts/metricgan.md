@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-11-20
-updated: 2026-11-20
+updated: 2026-11-22
 sources:
   - raw/papers/fu-2019-metricgan/full-text.md
+  - raw/papers/abdulatif-2024-cmgan/full-text.md
 tags:
   - speech-enhancement
   - gan
@@ -51,7 +52,7 @@ Multiple metrics are handled with one discriminator each; per iteration only the
 
 ## Downstream Adoption
 
-The scheme became a standard recipe in speech enhancement: **MetricGAN+** (Fu et al., Interspeech 2021) is the direct successor and a benchmark fixture (PESQ 3.15 on VoiceBank+DEMAND), and the "MetricGAN-style discriminator that predicts PESQ scaled to (0,1)" recurs in later systems such as [[concepts/lisennet|LiSenNet]] and the CMGAN line — where it appears as an *added* loss term alongside reconstruction losses, $\lambda \approx 0.05$, rather than as the sole generator objective of the original.
+The scheme became a standard recipe in speech enhancement: **MetricGAN+** (Fu et al., Interspeech 2021) is the direct successor and a benchmark fixture (PESQ 3.15 on VoiceBank+DEMAND), and the "MetricGAN-style discriminator that predicts PESQ scaled to (0,1)" recurs in later systems such as [[concepts/lisennet|LiSenNet]] and [[concepts/cmgan|CMGAN]] — where it appears as an *added* loss term alongside reconstruction losses rather than as the sole generator objective of the original. The weight is system-specific: LiSenNet uses 0.05, whereas [[sources/abdulatif-2024-cmgan|Abdulatif, Cao & Yang 2024]] give CMGAN's $\mathcal L_{GAN}$ weight as **0.01**. Removing CMGAN's discriminator reduces PESQ from 3.41 to 3.24; replacing PESQ with normalized LLR for dereverberation improves SRMR but trades away CD/FWSegSNR performance.
 
 ## Related Concepts
 

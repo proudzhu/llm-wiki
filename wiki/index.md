@@ -743,6 +743,9 @@
 | [[entities/joan-serra\|Joan Serrà]] | Telefónica Research — audio/music signal processing and generative models; co-author of SEGAN | 2026-11-20 |
 | [[entities/chien-feng-liao\|Chien-Feng Liao]] | NTU / Academia Sinica — co-author of MetricGAN, the discriminator-as-metric-surrogate formulation for metric-driven speech enhancement | 2026-11-20 |
 | [[entities/shou-de-lin\|Shou-De Lin]] | National Taiwan University — machine learning and data mining; co-author of MetricGAN and its multi-metric score-assignment algorithm | 2026-11-20 |
+| [[entities/sherif-abdulatif\|Sherif Abdulatif]] | University of Stuttgart — first author of CMGAN; monaural speech enhancement, Conformer architectures, and metric-driven adversarial training | 2026-11-22 |
+| [[entities/ruizhe-cao\|Ruizhe Cao]] | University of Stuttgart — CMGAN co-author and original 2022 conference first author; complex-TF speech enhancement | 2026-11-22 |
+| [[entities/bin-yang\|Bin Yang]] | University of Stuttgart — Senior Member, IEEE; CMGAN co-author researching audio signal processing and speech enhancement | 2026-11-22 |
 
 ---
 
@@ -1427,6 +1430,9 @@
 | [[concepts/mixed-magnitude-complex-loss\|Mixed Magnitude-Complex Loss]] | Linear combination of a magnitude-only and a phase-aware complex loss, L_mix = (1-β)L_mag + βL_complex; the consolidated study found the mixture improves PESQ for every metric pair, even when the network predicts a real-valued gain and never estimates phase. | 2026-11-21 |
 | [[concepts/log-spectral-distance\|Log-Spectral Distance (LSD)]] | Log-magnitude spectral distance used both as an evaluation metric and (with target-power weighting, wLSD, or a phase term, PLSD) as a training loss; unweighted LSD scored below plain MSE when trained on a filter-prediction network over reverberant data. | 2026-11-21 |
 | [[concepts/speech-distortion-weighted-loss\|Speech-Distortion-Weighted Loss (SDW)]] | Gain-domain loss that scores speech distortion and residual noise separately with a weight λ; optimum λ is data dependent (0.3 / 0.5 / 0.6 across studies) and the loss trailed plain MSE on reverberant CHiME-2 despite winning on anechoic data. | 2026-11-21 |
+| [[concepts/cmgan\|CMGAN]] | Conformer-based MetricGAN with shared magnitude/complex encoder, dual mask/RI decoders, and PESQ surrogate; 1.83M params and PESQ 3.41 on VoiceBank+DEMAND | 2026-11-22 |
+| [[concepts/two-stage-conformer\|Two-Stage Conformer]] | CMGAN's sequential time-then-frequency Conformer bottleneck; four blocks improve denoising quality before gains saturate | 2026-11-22 |
+| [[concepts/speech-super-resolution\|Speech Super-Resolution]] | Bandwidth extension through CMGAN's additive complex-TF residual; complex refinement improves waveform SNR at a magnitude-only LSD cost | 2026-11-22 |
 
 ---
 
@@ -1736,6 +1742,7 @@
 | [[sources/pascual-2017-segan\|Pascual, Bonafonte & Serrà 2017]] | SEGAN is the first application of a generative adversarial network to speech enhancement, and the first waveform-level (raw 16 kHz sample) end-to-end enhancement system. | 2026-11-20 |
 | [[sources/fu-2019-metricgan\|Fu, Liao, Tsao & Lin 2019]] | MetricGAN repurposes the GAN discriminator as a learned surrogate of a black-box evaluation metric. | 2026-11-20 |
 | [[sources/braun-2021-loss-functions-speech-enhancement\|Braun & Tashev 2021]] | A controlled, single-network comparison of 17 spectral training losses for real-time monaural speech enhancement: 9 metric families (L2, L1, log, weighted log, power-law compressed, SNR/SDR ratios, correlation, speech-distortion-weighted, AMR-weighted) each in magnitude-only and phase-aware complex form, plus their linear mixtures. On reverberant CHiME-2, magnitude+complex mixtures always help, power-law compression (c=0.3) wins (PESQ 3.31), and SI-SDR prefers linear losses (MAE 9.75 dB). | 2026-11-21 |
+| [[sources/abdulatif-2024-cmgan\|Abdulatif, Cao & Yang 2024]] | CMGAN combines a shared magnitude/complex spectrogram encoder, sequential time–frequency Conformer blocks, decoupled mask and complex decoders, and a PESQ-based MetricGAN discriminator for monaural speech enhancement. | 2026-11-22 |
 
 ---
 
@@ -1794,10 +1801,10 @@
 
 ## Statistics
 
-- **Total pages**: 1743
-- **Entities**: 733
-- **Concepts**: 675
-- **Sources**: 300
+- **Total pages**: 1750
+- **Entities**: 736
+- **Concepts**: 678
+- **Sources**: 301
 - **Synthesis**: 25
 - **Queries**: 10
-- **Last updated**: 2026-11-21
+- **Last updated**: 2026-11-22

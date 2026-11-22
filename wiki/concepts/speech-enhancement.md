@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-06-19
-updated: 2026-11-21
+updated: 2026-11-22
 sources:
   - raw/papers/braun-2021-loss-functions-speech-enhancement/full-text.md
   - raw/papers/fu-2019-metricgan/full-text.md
@@ -16,6 +16,7 @@ sources:
   - raw/papers/pan-2025-data-driven-acoustics/full-text.md
   - raw/papers/fu-2026-one-model-many-latencies/full-text.md
   - raw/papers/li-2024-dbccrn/full-text.md
+  - raw/papers/abdulatif-2024-cmgan/full-text.md
 tags:
   - speech-processing
   - audio-enhancement
@@ -95,3 +96,4 @@ Worked example: concatenating $2Q{+}1$ log-magnitude spectra (161 frequency poin
 - [[sources/pan-2025-data-driven-acoustics|Pan 2025: Fundamentals of Data-Driven Approaches to Acoustic Signal Detection, Filtering, and Transformation]] — noise reduction as analysis–filter–reconstruction with the three-level loss hierarchy (Section 7)
 - [[sources/fu-2026-one-model-many-latencies|Fu et al. 2026: One Model, Many Latencies]] — makes latency a selectable parameter of one checkpoint (30 configurations; 40–80 ms algorithmic, 10–25 ms compute)
 - [[sources/li-2024-dbccrn|Li, Sun, Zhang & Van hamme 2024: DBCCRN]] — dual-branch complex CRN + SA-SNR loss; PESQ 3.16 on VoiceBank+DEMAND with near-zero scale error, streaming-safe without normalization
+- [[sources/abdulatif-2024-cmgan|Abdulatif, Cao & Yang 2024: CMGAN]] — [[concepts/cmgan|CMGAN]] unifies compressed magnitude/complex inputs, four sequential time–frequency Conformer blocks, decoupled mask and RI decoders, and PESQ-surrogate adversarial training in a 1.83 M-parameter offline model. The TASLP extension covers denoising, dereverberation, and additive-residual speech super-resolution, with PESQ 3.41 on VoiceBank+DEMAND and DNSMOS/listening tests on unseen distortions.

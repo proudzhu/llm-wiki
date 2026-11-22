@@ -1,7 +1,7 @@
 ---
 type: source
 created: 2026-11-20
-updated: 2026-11-20
+updated: 2026-11-22
 sources:
   - raw/papers/fu-2019-metricgan/full-text.md
   - https://doi.org/10.48550/arXiv.1905.04874
@@ -248,3 +248,4 @@ MetricGAN(P) leads on every metric and is the only compared system trained again
 ## Related Sources
 
 - [[sources/pascual-2017-segan|Pascual, Bonafonte & Serrà 2017: SEGAN]] — benchmarked in Table 2 (PESQ 2.16); its LSGAN + $L_1$ objective is the CGAN form whose adversarial term this paper measures as inert
+- [[sources/abdulatif-2024-cmgan|Abdulatif, Cao & Yang 2024: CMGAN]] — adopts the normalized-PESQ surrogate as a 0.01-weighted term alongside compressed spectral and waveform reconstruction losses; its ablations support adversarial co-adaptation and expose PESQ-versus-SSNR trade-offs.

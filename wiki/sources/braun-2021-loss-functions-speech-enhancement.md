@@ -1,7 +1,7 @@
 ---
 type: source
 created: 2026-11-21
-updated: 2026-11-21
+updated: 2026-11-22
 sources:
   - raw/papers/braun-2021-loss-functions-speech-enhancement/full-text.md
   - https://doi.org/10.1109/TSP52935.2021.9522648
@@ -192,3 +192,7 @@ PESQ is the selection metric throughout, which the paper does not treat as neutr
 ## Related Synthesis
 
 - [[synthesis/deep-speech-enhancement|Deep Speech Enhancement: Architectural & Methodological Evolution]] — Insight 2 (training-objective axis)
+
+## Related Sources
+
+- [[sources/abdulatif-2024-cmgan|Abdulatif, Cao & Yang 2024: CMGAN]] — a direct downstream instance of $c=0.3$ compression and the mixed magnitude/complex objective: $\mathcal L_{TF}=0.7\mathcal L_{Mag}+0.3\mathcal L_{RI}$, augmented with waveform $L_1$ and a PESQ-surrogate adversarial term.

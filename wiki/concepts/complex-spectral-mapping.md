@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-16
-updated: 2026-09-26
+updated: 2026-11-22
 sources:
   - raw/papers/wang-2021-magnitude-phase-compensation/full-text.md
   - raw/papers/pandey-2025-ultra-low-compute/full-text.md
   - raw/papers/zhan-2026-joint-afc-rfs/full-text.md
   - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
+  - raw/papers/abdulatif-2024-cmgan/full-text.md
 tags:
   - speech-enhancement
   - deep-learning
@@ -65,3 +66,4 @@ Real-valued DNNs are natively poor at both phase and spatial information: on a c
 - [[sources/pandey-2025-ultra-low-compute|Pandey & Azcarreta 2025: Ultra Low-Compute Complex Spectral Masking for Multichannel Speech Enhancement]] — complex-domain masking brought to the ~50 MMACs/s multichannel regime via TinyGRU
 - [[sources/zhan-2026-joint-afc-rfs|Zhan, Moore, Li & Zheng 2026: JointDFC]] — RFSNet: full-sub-band CSM for residual hearing-aid feedback suppression
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — the multichannel extension: RI stacking across channels for joint magnitude–phase–spatial-cue preservation
+- [[sources/abdulatif-2024-cmgan|Abdulatif, Cao & Yang 2024: CMGAN]] — [[concepts/cmgan|CMGAN]] combines magnitude masking with direct RI residual refinement rather than choosing masking or mapping alone. Single-Complex improves PESQ over Single-Mask (3.35 vs. 3.23) but loses SSNR (9.19 vs. 9.82 dB); the combined model reaches 3.41 and 11.10 dB. Computing magnitude after the mask and complex branches are summed lets the magnitude loss supervise both paths.

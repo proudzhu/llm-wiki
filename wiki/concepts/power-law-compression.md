@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-07-16
-updated: 2026-11-21
+updated: 2026-11-22
 sources:
   - raw/papers/braun-2021-loss-functions-speech-enhancement/full-text.md
   - raw/papers/li-2020-residual-noise-control/full-text.md
@@ -11,6 +11,7 @@ sources:
   - raw/papers/ahn-2026-fastenhancer/full-text.md
   - raw/papers/kim-2026-faster-enhancer/full-text.md
   - raw/papers/zhao-2025-lightweight-transformer/full-text.md
+  - raw/papers/abdulatif-2024-cmgan/full-text.md
 tags:
   - signal-processing
   - speech-enhancement
@@ -97,3 +98,4 @@ FastEnhancer (Ahn et al. 2026) compresses its STFT input with $c = 0.3$ on magni
 - [[sources/ahn-2026-fastenhancer|Ahn, Han, Woo & Kim 2026: FastEnhancer]] — $c=0.3$ compressed-domain masking and losses; decompression $|\hat{\mathbf{Y}}_c|^{1/c}$ before iSTFT
 - [[sources/kim-2026-faster-enhancer|Kim 2026: faster-enhancer.c]] — same $p=0.3$ compression carried into the int8 runtime; compressed magnitudes ease per-frame activation quantization
 - [[sources/zhao-2025-lightweight-transformer|Zhao & Madhu 2025: LCT-GAN]] — $c=0.3$ applied consistently on **both** ends: the network input is $\lvert X\rvert^{0.3}$, the target is $\widehat{\mathrm{IRM}}_c$ at the same exponent, and the *linear*-domain mask is recovered by exponentiating with $1/c$ before multiplication. The paper's stated reason for $c=0.3$ is not dynamic-range smoothing but mask refinement for low-energy speech components — the exponent is set by the training target, not the feature.
+- [[sources/abdulatif-2024-cmgan|Abdulatif, Cao & Yang 2024: CMGAN]] — [[concepts/cmgan|CMGAN]] applies $c=0.3$ to the magnitude while preserving phase, then stacks compressed magnitude, real, and imaginary channels as generator input. Its compressed spectral loss weights magnitude and RI terms 0.7/0.3; final magnitude is computed after complex residual summation so that loss reaches both decoder branches.

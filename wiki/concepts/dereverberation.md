@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-27
-updated: 2026-10-05
+updated: 2026-11-22
 sources:
   - raw/papers/xiang-2025-wiener-gain-reverberant/full-text.md
   - raw/papers/xiang-2024-multichannel-cdr-estimation/full-text.md
   - raw/papers/haeb-umbach-2024-microphone-array-deep-learning/full-text.md
   - raw/papers/ueda-2024-online-joint-optimization/full-text.md
+  - raw/papers/abdulatif-2024-cmgan/full-text.md
 tags:
   - signal-processing
   - speech-enhancement
@@ -82,3 +83,4 @@ Classical CDR estimators, however, ignore additive noise and are therefore biase
 - [[sources/xiang-2025-wiener-gain-reverberant|Xiang, Chen, Benesty, Lei & Pan 2025: Design of the Wiener Gain in Noisy and Reverberant Environments]] — noise-aware CDR estimation + joint SNR–CDR Wiener gain; outperforms AWPE in noise + reverberation
 - [[sources/haeb-umbach-2024-microphone-array-deep-learning|Haeb-Umbach et al. 2024: Microphone Array Signal Processing and Deep Learning for Speech Enhancement]] — WPE in the hybrid taxonomy: neural PSD estimation for model-based dereverberation (see [[concepts/weighted-prediction-error|WPE]])
 - [[sources/ueda-2024-online-joint-optimization|Ueda, Nakatani, Ikeshita, Kinoshita, Araki & Makino 2024: Blind and Spatially-Regularized Online Joint Optimization]] — first blind online joint optimization of dereverberation and separation (online-WPE×IVE) under a single ML criterion; 8 ms algorithmic delay, 10.01 ms total
+- [[sources/abdulatif-2024-cmgan|Abdulatif, Cao & Yang 2024: CMGAN]] — single-channel complex-TF dereverberation with [[concepts/cmgan|CMGAN]] on REVERB. PESQ-guided training gives near/far average CD 1.96/2.54 and FWSegSNR 13.18/10.30 dB. CMGAN-LLR changes the surrogate target to normalized LLR and the target score from 1 to 0; it trades some CD/FWSegSNR for higher SRMR, reaching real-recording SRMR 7.71 near and 7.62 far.

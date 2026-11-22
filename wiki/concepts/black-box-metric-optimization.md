@@ -1,9 +1,10 @@
 ---
 type: concept
 created: 2026-11-20
-updated: 2026-11-20
+updated: 2026-11-22
 sources:
   - raw/papers/fu-2019-metricgan/full-text.md
+  - raw/papers/abdulatif-2024-cmgan/full-text.md
 tags:
   - loss-function
   - metric-optimization
@@ -55,3 +56,4 @@ Optimizing $Q$ directly sidesteps the proxy-selection problem, at the cost of ne
 - [[sources/fu-2019-metricgan|Fu, Liao, Tsao & Lin 2019: MetricGAN]] — defines the taxonomy and demonstrates the learned-surrogate route
 - [[sources/li-2020-residual-noise-control|Li et al. 2020: Residual Noise Control]] — evidence that $L_p$ losses disagree with listeners
 - [[sources/ahn-2026-fastenhancer|Ahn et al. 2026: FastEnhancer]] — the modern counterpoint: a differentiable PESQ term deliberately weighted at $10^{-3}$
+- [[sources/abdulatif-2024-cmgan|Abdulatif, Cao & Yang 2024: CMGAN]] — applies the learned-surrogate route to [[concepts/cmgan|CMGAN]] with PESQ weight 0.01 alongside spectral and waveform reconstruction. Removing the discriminator drops PESQ 3.41 → 3.24; a frozen surrogate trained without enhanced tracks also underperforms, supporting adversarial co-adaptation. PESQ+STOI and MetricGAN+ variants improve selected metrics while reducing SSNR, and an LLR-targeted dereverberation variant shifts the trade-off toward SRMR.
